@@ -34,14 +34,14 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-uZ-L11">
                             <rect key="frame" x="0.0" y="0.0" width="75.5" height="53.5"/>
-                            <state key="normal" image="theme-dark-active"/>
+                            <state key="normal" image="PIAX/Global/theme-dark-active"/>
                             <connections>
                                 <action selector="changeTheme:" destination="-1" eventType="touchUpInside" id="yMQ-vt-Pvt"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-hV-AgG">
                             <rect key="frame" x="95.5" y="0.0" width="75.5" height="53.5"/>
-                            <state key="normal" image="killswitch-dark-active"/>
+                            <state key="normal" image="PIAX/Global/killswitch-dark-active"/>
                             <connections>
                                 <action selector="updateKillSwitchSetting:" destination="-1" eventType="touchUpInside" id="ELb-to-qnb"/>
                             </connections>
@@ -76,7 +76,7 @@
         </view>
     </objects>
     <resources>
-        <image name="killswitch-dark-active" width="35" height="24"/>
-        <image name="theme-dark-active" width="26" height="30"/>
+        <image name="PIAX/Global/killswitch-dark-active" width="35" height="24"/>
+        <image name="PIAX/Global/theme-dark-active" width="26" height="30"/>
     </resources>
 </document>

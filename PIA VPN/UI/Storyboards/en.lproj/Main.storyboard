@@ -49,7 +49,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="region-selected" translatesAutoresizingMaskIntoConstraints="NO" id="5u6-4W-5WT">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/region-selected" translatesAutoresizingMaskIntoConstraints="NO" id="5u6-4W-5WT">
                                                                     <rect key="frame" x="54.666666666666671" y="16" width="18" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="18" id="Ghl-pF-Y8F"/>
@@ -69,7 +69,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-selected" translatesAutoresizingMaskIntoConstraints="NO" id="Tt7-8W-weg">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/favorite-selected" translatesAutoresizingMaskIntoConstraints="NO" id="Tt7-8W-weg">
                                                                     <rect key="frame" x="286.66666666666669" y="17.666666666666668" width="17" height="15.000000000000004"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="17" id="40a-ne-jOu"/>
@@ -203,14 +203,14 @@
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="region-selected" translatesAutoresizingMaskIntoConstraints="NO" id="Q48-DR-cTr">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/region-selected" translatesAutoresizingMaskIntoConstraints="NO" id="Q48-DR-cTr">
                                                                     <rect key="frame" x="250" y="58.666666666666657" width="18" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="0FM-3f-5Bx"/>
                                                                         <constraint firstAttribute="width" constant="18" id="8ew-M4-sbk"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite-selected" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-iG-6Lb">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/favorite-selected" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-iG-6Lb">
                                                                     <rect key="frame" x="286.66666666666669" y="60" width="17" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="H1g-vM-rwY"/>
@@ -336,7 +336,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="killswitch-dark-inactive" translatesAutoresizingMaskIntoConstraints="NO" id="gpB-yq-orh">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/killswitch-dark-inactive" translatesAutoresizingMaskIntoConstraints="NO" id="gpB-yq-orh">
                                                             <rect key="frame" x="20" y="9.3333333333333357" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="Svg-aL-qZ0"/>
@@ -3663,13 +3663,13 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="dip-badge-dark" width="44" height="44"/>
-        <image name="favorite-selected" width="18" height="15"/>
+        <image name="PIAX/Global/favorite-selected" width="18" height="15"/>
         <image name="icon-privacy-1" width="42" height="42"/>
         <image name="image-content-blocker" width="86" height="112"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>
         <image name="image-vpn-allow" width="77" height="111"/>
-        <image name="killswitch-dark-inactive" width="35" height="24"/>
-        <image name="region-selected" width="18" height="18"/>
+        <image name="PIAX/Global/killswitch-dark-inactive" width="35" height="24"/>
+        <image name="PIAX/Global/region-selected" width="18" height="18"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

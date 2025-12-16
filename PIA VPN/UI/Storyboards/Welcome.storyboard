@@ -194,7 +194,7 @@ You will not be charged during this process.</string>
                                     <constraint firstAttribute="height" constant="44" id="P4u-nl-9mQ"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="close-icon"/>
+                                <state key="normal" image="PIAX/Global/icon-close"/>
                                 <connections>
                                     <action selector="close:" destination="DNR-EE-WLm" eventType="touchUpInside" id="cv3-Nz-Uht"/>
                                 </connections>
@@ -510,14 +510,14 @@ You will not be charged during this process.</string>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5L-lS-kD2">
                                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
                                                                             <subviews>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plan-unselected" translatesAutoresizingMaskIntoConstraints="NO" id="enr-YM-dI3">
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/plan-unselected" translatesAutoresizingMaskIntoConstraints="NO" id="enr-YM-dI3">
                                                                                     <rect key="frame" x="27" y="30" width="45" height="45"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="45" id="LGu-XS-c8u"/>
                                                                                         <constraint firstAttribute="height" constant="45" id="Moa-V6-jif"/>
                                                                                     </constraints>
                                                                                 </imageView>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plan-selected" translatesAutoresizingMaskIntoConstraints="NO" id="HTl-yT-InX">
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/plan-selected" translatesAutoresizingMaskIntoConstraints="NO" id="HTl-yT-InX">
                                                                                     <rect key="frame" x="32" y="35" width="35" height="35"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="35" id="MHb-qD-gpS"/>
@@ -843,7 +843,7 @@ You will not be charged during this process.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrollableMap-dark" translatesAutoresizingMaskIntoConstraints="NO" id="iP4-wP-euf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/scrollableMap-dark" translatesAutoresizingMaskIntoConstraints="NO" id="iP4-wP-euf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -933,14 +933,14 @@ You will not be charged during this process.</string>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBe-v9-ya2">
                                                             <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plan-unselected" translatesAutoresizingMaskIntoConstraints="NO" id="fjm-a1-2rD">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/plan-unselected" translatesAutoresizingMaskIntoConstraints="NO" id="fjm-a1-2rD">
                                                                     <rect key="frame" x="27" y="30" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="3cF-Fn-TsF"/>
                                                                         <constraint firstAttribute="width" constant="45" id="kpL-sV-RHM"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plan-selected" translatesAutoresizingMaskIntoConstraints="NO" id="0jq-FP-phB">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/plan-selected" translatesAutoresizingMaskIntoConstraints="NO" id="0jq-FP-phB">
                                                                     <rect key="frame" x="32" y="35" width="35" height="35"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="35" id="YiM-lo-NZF"/>
@@ -1307,13 +1307,15 @@ You will not be charged during this process.</string>
         <segue reference="Vqa-Fa-HWk"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="close-icon" width="50" height="50"/>
+        <image name="PIAX/Global/plan-selected" width="34" height="34"/>
+        <image name="PIAX/Global/plan-unselected" width="46" height="46"/>
+        <image name="PIAX/Global/icon-close" width="50" height="50"/>
         <image name="icon-selected" width="16" height="16"/>
         <image name="icon-unselected" width="16" height="16"/>
         <image name="image-walkthrough-2" width="274" height="229"/>
-        <image name="plan-selected" width="34" height="34"/>
-        <image name="plan-unselected" width="46" height="46"/>
-        <image name="scrollableMap-dark" width="1740" height="870"/>
+        <image name="PIAX/Global/plan-selected" width="34" height="34"/>
+        <image name="PIAX/Global/plan-unselected" width="46" height="46"/>
+        <image name="PIAX/Global/scrollableMap-dark" width="1740" height="870"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
