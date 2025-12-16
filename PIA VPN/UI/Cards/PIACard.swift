@@ -11,7 +11,7 @@ import PIALibrary
 
 class PIACard: UIView {
 
-    var cardBackgroundImagePrefix = ""
+    var cardBackgroundImage: ImageAsset!
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var cardBgImageView: UIImageView!
@@ -34,7 +34,7 @@ class PIACard: UIView {
     @objc private func viewShouldRestyle() {
         
         self.closeButton.tintColor = Theme.current.palette.appearance == .dark ? .white : Macros.color(hex: "111621", alpha: 1)
-        self.cardBgImageView.image = Theme.current.palette.appearance == .dark ? UIImage(named: cardBackgroundImagePrefix+"dark") : UIImage(named: cardBackgroundImagePrefix+"light")
+        self.cardBgImageView.image = UIImage(asset: cardBackgroundImage)
         self.cardTitle.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyleCardTitleDark : TextStyle.textStyleCardTitleLight)
         self.cardDescription.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
         self.contentView.layer.cornerRadius = 10.0
