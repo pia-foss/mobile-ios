@@ -52,17 +52,13 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                if #available(iOS 12.0, *) {
-                    try session?.sendProviderMessage(WGPacketTunnelProvider.Message.requestLog.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            callback?(nil, nil)
-                            return
-                        }
-                        let log = String(data: data, encoding: .utf8)
-                        callback?(log, nil)
+                try session?.sendProviderMessage(WGPacketTunnelProvider.Message.requestLog.data) { (data) in
+                    guard let data = data, !data.isEmpty else {
+                        callback?(nil, nil)
+                        return
                     }
-                } else {
-                    // Fallback on earlier versions
+                    let log = String(data: data, encoding: .utf8)
+                    callback?(log, nil)
                 }
             } catch let e {
                 callback?(nil, e)
@@ -80,21 +76,17 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             
             do {
                 let session = vpn.connection as? NETunnelProviderSession
-                if #available(iOS 12.0, *) {
-                    try session?.sendProviderMessage(WGPacketTunnelProvider.Message.dataCount.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            callback?(nil, ClientError.vpnProfileUnavailable)
-                            return
-                        }
-                        
-                        let downloaded = data.getInt64(start: 0)
-                        let uploaded = data.getInt64(start: 8)
-                        let usage = Usage(uploaded: uploaded, downloaded: downloaded)
-                        callback?(usage,
-                                  nil)
+                try session?.sendProviderMessage(WGPacketTunnelProvider.Message.dataCount.data) { (data) in
+                    guard let data = data, !data.isEmpty else {
+                        callback?(nil, ClientError.vpnProfileUnavailable)
+                        return
                     }
-                } else {
-                    // Fallback on earlier versions
+                    
+                    let downloaded = data.getInt64(start: 0)
+                    let uploaded = data.getInt64(start: 8)
+                    let usage = Usage(uploaded: uploaded, downloaded: downloaded)
+                    callback?(usage,
+                              nil)
                 }
             } catch let e {
                 callback?(nil, e)

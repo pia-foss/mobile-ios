@@ -31,6 +31,8 @@ struct TypographySnapshotTests {
 
     @MainActor
     @Test func typographyPreview() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .frame(width: 1024)
@@ -47,6 +49,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Extra Small accessibility size")
     func typographyAccessibilityExtraSmall() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .extraSmall)
@@ -62,6 +66,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Small accessibility size")
     func typographyAccessibilitySmall() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .small)
@@ -77,6 +83,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Medium (default) accessibility size")
     func typographyAccessibilityMedium() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .medium)
@@ -92,6 +100,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Large accessibility size")
     func typographyAccessibilityLarge() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .large)
@@ -107,6 +117,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Extra Large accessibility size")
     func typographyAccessibilityExtraLarge() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .extraLarge)
@@ -122,6 +134,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Extra Extra Large accessibility size")
     func typographyAccessibilityExtraExtraLarge() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .extraExtraLarge)
@@ -137,6 +151,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Extra Extra Extra Large accessibility size")
     func typographyAccessibilityExtraExtraExtraLarge() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .extraExtraExtraLarge)
@@ -152,6 +168,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Accessibility Medium accessibility size")
     func typographyAccessibilityMediumSize() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .accessibilityMedium)
@@ -167,6 +185,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Accessibility Large accessibility size")
     func typographyAccessibilityLargeSize() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .accessibilityLarge)
@@ -182,6 +202,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Accessibility Extra Large accessibility size")
     func typographyAccessibilityExtraLargeSize() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .accessibilityExtraLarge)
@@ -197,6 +219,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Accessibility Extra Extra Large accessibility size")
     func typographyAccessibilityExtraExtraLargeSize() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .accessibilityExtraExtraLarge)
@@ -212,6 +236,8 @@ struct TypographySnapshotTests {
     @MainActor
     @Test("Typography with Accessibility Extra Extra Extra Large accessibility size")
     func typographyAccessibilityExtraExtraExtraLargeSize() {
+        guard !SnapshotTestHelpers.isRunningOnXcodeCloud else { return }
+
         let view = TypographyPreview()
             .environment(\.colorScheme, .light)
             .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)

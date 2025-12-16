@@ -12,7 +12,6 @@ import PIALibrary
 protocol AccountInformationAvailabilityVerifierType {
     typealias Completion = (() -> Void)?
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?, completion: Completion)
-    @available(iOS 13, *)
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?) async
     
 }
@@ -57,7 +56,6 @@ class AccountInformationAvailabilityVerifier:
 
     }
     
-    @available(iOS 13, *)
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?) async {
         return await withCheckedContinuation { continuation in
             self.verifyAccountInformationAvailabity(after: deadline) {

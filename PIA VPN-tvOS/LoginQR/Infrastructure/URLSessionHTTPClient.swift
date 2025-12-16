@@ -16,7 +16,6 @@ class URLSessionHTTPClient: HTTPClientType {
         self.session = session
     }
     
-    @available(iOS 13.0.0, *)
     func makeRequest(request: URLRequest) async throws -> Data {
         do {
             let (data, response) = try await session.data(for: request)

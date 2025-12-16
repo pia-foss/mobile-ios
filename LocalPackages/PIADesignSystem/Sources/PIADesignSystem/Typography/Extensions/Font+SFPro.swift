@@ -32,7 +32,6 @@ import SwiftUI
 /// Text("Semibold Text").font(.sfPro(size: 16, weight: .semibold))
 /// Text("Regular Text").font(.sfPro(size: 14, weight: .regular))
 /// ```
-@available(iOS 13.0, *)
 extension Font {
     /// SF Pro font
     ///

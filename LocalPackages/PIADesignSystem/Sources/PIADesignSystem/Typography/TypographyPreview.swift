@@ -28,7 +28,6 @@ import SwiftUI
 /// Figma reference: https://www.figma.com/design/9fECLgfxfFunLz7eBSOYmg/-PIA--iOS---Components?node-id=1-35&m=dev
 ///
 /// **Best previewed on iPad** for optimal viewing of the full layout.
-@available(iOS 13.0, *)
 struct TypographyPreview: View {
     var body: some View {
         ScrollView {
@@ -183,7 +182,6 @@ struct TypographyPreview: View {
 }
 
 /// Individual typography demonstration row
-@available(iOS 13.0, *)
 struct TypographyRow: View {
     let label: String
     let example: String
@@ -219,7 +217,6 @@ struct TypographyRow: View {
     }
 }
 
-@available(iOS 13.0, *)
 #Preview {
     TypographyPreview()
 }

@@ -97,10 +97,9 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         //MARK: - iOS13 Dark mode
-        if #available(iOS 13.0, *) {
-            Macros.postNotification(.PIAThemeShouldChange)
-        }
+        Macros.postNotification(.PIAThemeShouldChange)
     }
     
     private func refreshOrientationConstraints(size: CGSize) {

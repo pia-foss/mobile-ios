@@ -8,7 +8,7 @@ let package = Package(
     name: "PIALibrary",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v15),
         .tvOS(.v17)
     ],
     products: [

@@ -83,11 +83,8 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
 
         self.styleDismissButton()
         self.styleContainers()
-        
-        if #available(iOS 13.0, *) {
-            setupAppleSignInUI()
-        }
 
+        setupAppleSignInUI()
     }
 
     @IBAction private func signUp(_ sender: Any?) {
@@ -174,48 +171,42 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     }
     
     private func setupAppleSignInUI() {
-        if #available(iOS 13.0, *) {
-            
-            labelOr.text = L10n.Localizable.Global.or.uppercased()
-            labelOr.textAlignment = .center
-            
-            let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
-            signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
-                        
-            self.addEmailContainer.addSubview(signInWithAppleButton)
-            self.addEmailContainer.addSubview(labelOr)
-
-            labelOr.translatesAutoresizingMaskIntoConstraints = false
-            signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                labelOr.topAnchor.constraint(equalTo: self.buttonConfirm.bottomAnchor, constant: 15),
-                labelOr.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
-                labelOr.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
-                labelOr.heightAnchor.constraint(equalToConstant: 15),
-
-                signInWithAppleButton.topAnchor.constraint(equalTo: self.labelOr.bottomAnchor, constant: 15),
-                signInWithAppleButton.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
-                signInWithAppleButton.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
-                signInWithAppleButton.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        }
+        labelOr.text = L10n.Localizable.Global.or.uppercased()
+        labelOr.textAlignment = .center
         
+        let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
+        signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
+                    
+        self.addEmailContainer.addSubview(signInWithAppleButton)
+        self.addEmailContainer.addSubview(labelOr)
+
+        labelOr.translatesAutoresizingMaskIntoConstraints = false
+        signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            labelOr.topAnchor.constraint(equalTo: self.buttonConfirm.bottomAnchor, constant: 15),
+            labelOr.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
+            labelOr.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
+            labelOr.heightAnchor.constraint(equalToConstant: 15),
+
+            signInWithAppleButton.topAnchor.constraint(equalTo: self.labelOr.bottomAnchor, constant: 15),
+            signInWithAppleButton.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
+            signInWithAppleButton.rightAnchor.constraint(equalTo: self.addEmailContainer.rightAnchor),
+            signInWithAppleButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 
     // MARK: Actions
     @IBAction private func handleAuthorizationAppleID() {
-        if #available(iOS 13.0, *) {
-            let request = ASAuthorizationAppleIDProvider().createRequest()
-            request.requestedScopes = [.email]
-            
-            let controller = ASAuthorizationController(authorizationRequests: [request])
-            
-            controller.delegate = self
-            controller.presentationContextProvider = self
-            
-            controller.performRequests()
-        }
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        
+        controller.performRequests()
     }
     
     @IBAction private func logout() {
@@ -283,7 +274,6 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
 
 }
 
-@available(iOS 13.0, *)
 extension AddEmailToAccountViewController: ASAuthorizationControllerPresentationContextProviding {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredentials = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
@@ -299,7 +289,6 @@ extension AddEmailToAccountViewController: ASAuthorizationControllerPresentation
     }
 }
 
-@available(iOS 13.0, *)
 extension AddEmailToAccountViewController: ASAuthorizationControllerDelegate {
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!

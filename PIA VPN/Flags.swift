@@ -63,9 +63,7 @@ class Flags: NSObject {
     private override init() {
         super.init()
         
-        if #available(iOS 13.0, *) {
-            enablesThemeSwitch = false
-        }
+        enablesThemeSwitch = false
         
         #if PIA_DEV
             guard let path = AppConstants.Flags.developmentPath else {

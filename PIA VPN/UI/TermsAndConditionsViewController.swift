@@ -32,9 +32,7 @@ class TermsAndConditionsViewController: AutolayoutViewController, BrandableNavig
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-            self.modalPresentationStyle = .automatic
-        }
+        self.modalPresentationStyle = .automatic
         self.termsTitleLabel.text = self.termsAndConditionsTitle
         self.termsLabel.text = self.termsAndConditions
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(

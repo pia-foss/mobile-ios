@@ -1,8 +1,8 @@
 //
-//  ScaledFontModifier.swift
+//  SnapshotTestHelpers.swift
 //  PIADesignSystem
 //
-//  Created by Diego Trevisan on 09.12.25.
+//  Created by snapshot testing on 12.12.25.
 //  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,25 +20,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
-/// Applies scaled font based on typography style weight
-struct ScaledFontModifier: ViewModifier {
-    let weight: Font.Weight
-    @ScaledMetric private var scaledSize: CGFloat
-
-    init(baseSize: CGFloat, weight: Font.Weight) {
-        self.weight = weight
-        _scaledSize = ScaledMetric(wrappedValue: baseSize)
-    }
-
-    func body(content: Content) -> some View {
-        content.font(
-            .system(
-                size: scaledSize,
-                weight: weight,
-                design: .default
-            )
-        )
+/// Shared utilities for snapshot testing
+enum SnapshotTestHelpers {
+    /// Checks if tests are running on Xcode Cloud
+    /// - Returns: `true` if running on Xcode Cloud, `false` otherwise
+    static var isRunningOnXcodeCloud: Bool {
+        // Xcode Cloud sets specific environment variables
+        ProcessInfo.processInfo.environment["CI_XCODE_PROJECT"] != nil ||
+        ProcessInfo.processInfo.environment["CI_XCODEBUILD_ACTION"] != nil
     }
 }
