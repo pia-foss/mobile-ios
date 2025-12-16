@@ -71,11 +71,4 @@ class AccountSignupTests: XCTestCase {
         }
         waitForExpectations(timeout: 10.0, handler: nil)
     }
-
-    func testGiftCodeSyntax() {
-        XCTAssertTrue(Validator.validate(giftCode: "1234123412341234"))
-        XCTAssertFalse(Validator.validate(giftCode: "1234123412341234", withDashes: true))
-        XCTAssertFalse(Validator.validate(giftCode: "1234-1234-1234-1234"))
-        XCTAssertTrue(Validator.validate(giftCode: "1234-1234-1234-1234", withDashes: true))
-    }
 }

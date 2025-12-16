@@ -392,6 +392,10 @@
 "set.email.password.caption" = "รหัสผ่าน";
 "set.email.error.validation" = "คุณต้องใส่อีเมล";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "อีเมลไม่ถูกต้อง โปรดลองใหม่";
+"email.validation.empty" = "อีเมลต้องไม่ว่างเปล่า";
+
 // RATING
 "rating.enjoy.question" = "คุณชอบใช้ PIA VPN หรือไม่";
 "rating.enjoy.subtitle" = "เราหวังว่าผลิตภัณฑ์ VPN ของเราจะตอบโจทย์ความต้องการของคุณ";

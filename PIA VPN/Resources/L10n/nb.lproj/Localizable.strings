@@ -392,6 +392,10 @@
 "set.email.password.caption" = "Passord";
 "set.email.error.validation" = "Du må angi en e-postadresse.";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "Ugyldig e-postadresse. Prøv på nytt.";
+"email.validation.empty" = "E-post kan ikke være tom.";
+
 // RATING
 "rating.enjoy.question" = "Liker du PIA VPN?";
 "rating.enjoy.subtitle" = "Vi håper VPN-produktet svarer til forventningene dine";

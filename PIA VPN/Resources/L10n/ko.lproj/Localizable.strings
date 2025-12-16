@@ -392,6 +392,10 @@
 "set.email.password.caption" = "비밀번호";
 "set.email.error.validation" = "이메일 주소를 입력해야 합니다.";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "유효하지 않은 이메일입니다. 다시 시도하세요.";
+"email.validation.empty" = "이메일은 비워 둘 수 없습니다.";
+
 // RATING
 "rating.enjoy.question" = "PIA VPN이 마음에 드세요?";
 "rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";

@@ -392,6 +392,10 @@
 "set.email.password.caption" = "Şifre";
 "set.email.error.validation" = "Bir e-posta adresi girmeniz gerekiyor.";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "Geçersiz e-posta. Lütfen tekrar deneyin.";
+"email.validation.empty" = "E-posta boş bırakılamaz.";
+
 // RATING
 "rating.enjoy.question" = "PIA VPN'i beğeniyor musunuz?";
 "rating.enjoy.subtitle" = "Umarız VPN ürünümüz beklentilerinizi karşılıyordur";

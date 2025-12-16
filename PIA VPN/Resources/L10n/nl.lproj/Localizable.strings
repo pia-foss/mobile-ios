@@ -392,6 +392,10 @@
 "set.email.password.caption" = "Wachtwoord";
 "set.email.error.validation" = "U moet een e-mailadres invoeren.";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "Ongeldig e-mailadres. Probeer het opnieuw.";
+"email.validation.empty" = "E-mail mag niet leeg zijn.";
+
 // RATING
 "rating.enjoy.question" = "Geniet u van PIA VPN?";
 "rating.enjoy.subtitle" = "We hopen dat ons VPN-product aan uw verwachtingen voldoet";

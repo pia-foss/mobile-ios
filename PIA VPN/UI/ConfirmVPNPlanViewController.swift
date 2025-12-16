@@ -85,14 +85,15 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     }
 
     private func updateAccountEmail() {
-        guard
-            let email = textEmail.text?.trimmed(),
-            Validator.validate(email: email)
-        else {
+        let email = textEmail.text?.trimmed() ?? ""
+
+        do {
+            try Validator.validate(email: email)
+        } catch {
             signupEmail = nil
             Macros.displayImageNote(
                 withImage: Asset.Images.iconWarning.image,
-                message: L10n.Welcome.Purchase.Error.validation
+                message: error.errorMessage
             )
 
             self.status = .error(element: textEmail)

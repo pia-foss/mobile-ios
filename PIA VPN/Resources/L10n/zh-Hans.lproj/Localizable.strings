@@ -392,6 +392,10 @@
 "set.email.password.caption" = "密码";
 "set.email.error.validation" = "您必须输入一个电子邮箱地址。";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "无效的电子邮件。请再试一次。";
+"email.validation.empty" = "电子邮件不能为空。";
+
 // RATING
 "rating.enjoy.question" = "您觉得 PIA VPN 好用吗？";
 "rating.enjoy.subtitle" = "希望我们的 VPN 产品符合您的期望";

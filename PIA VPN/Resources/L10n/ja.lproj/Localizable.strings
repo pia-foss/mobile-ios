@@ -392,6 +392,10 @@
 "set.email.password.caption" = "パスワード";
 "set.email.error.validation" = "メールアドレスを入力する必要があります。";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "無効なメールアドレスです。もう一度お試しください。";
+"email.validation.empty" = "メールアドレスは空にできません。";
+
 // RATING
 "rating.enjoy.question" = "PIA VPNを楽しんでいますか？";
 "rating.enjoy.subtitle" = "VPN製品にご満足いただいていることを願っています";

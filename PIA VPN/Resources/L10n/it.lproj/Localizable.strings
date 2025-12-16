@@ -392,6 +392,10 @@
 "set.email.password.caption" = "Password";
 "set.email.error.validation" = "Devi inserire un indirizzo email.";
 
+// EMAIL VALIDATOR
+"email.validation.invalid" = "Indirizzo email non valido. Riprova.";
+"email.validation.empty" = "L'email non può essere vuota.";
+
 // RATING
 "rating.enjoy.question" = "Ti piace PIA VPN?";
 "rating.enjoy.subtitle" = "Speriamo che il nostro prodotto VPN soddisfi le tue aspettative";
