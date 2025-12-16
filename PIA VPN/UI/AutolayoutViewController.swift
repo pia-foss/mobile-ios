@@ -21,7 +21,6 @@
 //
 
 import UIKit
-import Lottie
 import PIALibrary
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {
@@ -73,28 +72,12 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         didSet { reloadFormElements() }
     }
 
-    /// Container for loading animation views
-    private var loadingContainer: LoadingAnimationContainer?
+    /// Loading view controller for showing animations
+    private var loadingViewController: LoadingViewController?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        loadingContainer?.cleanup()
-    }
-
-    /// Container class to hold loading animation view
-    private final class LoadingAnimationContainer {
-        let animationView: LottieAnimationView
-
-        init() {
-            animationView = LottieAnimationView(name: "pia-spinner")
-            animationView.translatesAutoresizingMaskIntoConstraints = false
-            animationView.loopMode = .loop
-        }
-
-        func cleanup() {
-            animationView.stop()
-            animationView.removeFromSuperview()
-        }
+        loadingViewController?.view.removeFromSuperview()
     }
     
     /// :nodoc:
@@ -244,47 +227,51 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
 
     @objc public func showLoadingAnimation() {
         // If already showing, keep it
-        guard loadingContainer == nil else { return }
+        guard loadingViewController == nil else { return }
 
-        // Create new loading container
-        let container = LoadingAnimationContainer()
-        loadingContainer = container
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first
+        else {
+            return
+        }
 
-        addLoadingAnimation(with: container)
-    }
+        // Lock UI
+        window.isUserInteractionEnabled = false
 
-    private func addLoadingAnimation(with container: LoadingAnimationContainer) {
-        guard let parentView = navigationController?.view else { return }
+        let loadingVC = LoadingViewController()
+        loadingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingViewController = loadingVC
 
-        // Add animation view to hierarchy
-        parentView.addSubview(container.animationView)
+        window.addSubview(loadingVC.view)
 
-        // Setup constraints using modern anchor API
         setupLoadingConstraints(
-            animationView: container.animationView,
-            in: parentView
+            loadingView: loadingVC.view,
+            in: window
         )
-
-        // Start animation
-        container.animationView.play()
     }
 
     @objc public func hideLoadingAnimation() {
-        loadingContainer?.cleanup()
-        loadingContainer = nil
+        // Unlock UI
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.isUserInteractionEnabled = true
+
+        loadingViewController?.view.removeFromSuperview()
+        loadingViewController = nil
     }
 
     private func setupLoadingConstraints(
-        animationView: LottieAnimationView,
+        loadingView: UIView,
         in parentView: UIView
     ) {
-        // Animation view centered in parent with fixed size
-        let animationSize = UIScreen.main.bounds.width / 4
+        // Loading view centered in parent with fixed size
+        let loadingSize = UIScreen.main.bounds.width / 4
         NSLayoutConstraint.activate([
-            animationView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
-            animationView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
-            animationView.widthAnchor.constraint(equalToConstant: animationSize),
-            animationView.heightAnchor.constraint(equalToConstant: animationSize)
+            loadingView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
+            loadingView.widthAnchor.constraint(equalToConstant: loadingSize),
+            loadingView.heightAnchor.constraint(equalToConstant: loadingSize)
         ])
     }
 

@@ -145,28 +145,20 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>lottie-ios</string>
-			<key>Copyright</key>
-			<string>Copyright 2018 Airbnb, Inc.</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/airbnb/lottie-ios/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>nanopb</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2011 Petteri Aimonen</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
 		</dict>
-        <dict>
-            <key>Name</key>
-            <string>Popover</string>
-            <key>Copyright</key>
-            <string>© 2020 corin8823</string>
-            <key>LicenseURL</key>
-            <string>https://raw.githubusercontent.com/corin8823/Popover/master/LICENSE</string>
-        </dict>
+		<dict>
+			<key>Name</key>
+			<string>Popover</string>
+			<key>Copyright</key>
+			<string>© 2020 corin8823</string>
+			<key>LicenseURL</key>
+			<string>https://raw.githubusercontent.com/corin8823/Popover/master/LICENSE</string>
+		</dict>
 	</array>
 </dict>
 </plist>
