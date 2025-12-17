@@ -12,11 +12,19 @@ platform :ios do
   anthropic_model = "claude-sonnet-4-5"
 
   lane :iOStests do
-    run_tests(scheme: "PIA VPN")
+    run_tests(
+      scheme: "PIA VPN",
+      output_directory: "fastlane/test_output",
+      result_bundle: true
+    )
   end
 
   lane :tvOStests do
-    run_tests(scheme: "PIA VPN-tvOS")
+    run_tests(
+      scheme: "PIA VPN-tvOS",
+      output_directory: "fastlane/test_output",
+      result_bundle: true
+    )
   end
 
   lane :ios_e2e_tests do
