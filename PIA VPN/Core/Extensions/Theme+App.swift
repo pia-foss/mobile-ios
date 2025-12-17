@@ -197,7 +197,7 @@ extension Theme {
     
     public func mapImage() -> UIImage? {
         
-        let image = UIImage(named: "Dark-Map")
+        let image = UIImage(asset: Asset.Images.Piax.DarkMap.darkMap)
         
         if palette.appearance == .light {
             return image?.image(alpha: 0.15)

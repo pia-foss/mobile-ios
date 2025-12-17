@@ -70,7 +70,7 @@ extension Server: CustomStringConvertible {
 
 extension UIImageView {
     func setImage(fromServer server: Server) {
-        let imageName = "flag-\(server.country.lowercased())"
+        let imageName = "flags/flag-\(server.country.lowercased())"
         guard let image = UIImage(named: imageName) else {
             return
         }
@@ -80,7 +80,7 @@ extension UIImageView {
 
 extension UIButton {
     func setImage(fromServer server: Server) {
-        let imageName = "flag-\(server.country.lowercased())"
+        let imageName = "flags/flag-\(server.country.lowercased())"
         guard let image = UIImage(named: imageName) else {
             return
         }

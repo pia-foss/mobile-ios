@@ -42,7 +42,7 @@ class PIACardsViewController: UIViewController {
         var collectingCards = [PIACard]()
         for card in cards {
             let slide:PIACard = Bundle.main.loadNibNamed("PIACard", owner: self, options: nil)?.first as! PIACard
-            slide.cardParallaxImageView.image = UIImage(named: card.cardFrontImage)
+            slide.cardParallaxImageView.image = UIImage(asset: card.cardFrontImage)
             slide.cardTitle.text = card.title
             slide.cardDescription.text = card.description
             slide.closeButton.setImage(closeImage, for: [])
@@ -74,7 +74,7 @@ class PIACardsViewController: UIViewController {
                 slide.cardSecondaryCTAButton.isHidden = true
             }
 
-            slide.cardBackgroundImagePrefix = card.cardImage
+            slide.cardBackgroundImage = card.cardImage
             collectingCards.append(slide)
         }
         

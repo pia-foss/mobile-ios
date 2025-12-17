@@ -39,7 +39,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Flm-bs-uzx">
                                     <rect key="frame" x="0.0" y="0.0" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-protocol" translatesAutoresizingMaskIntoConstraints="NO" id="t3j-qX-hiD">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-protocol" translatesAutoresizingMaskIntoConstraints="NO" id="t3j-qX-hiD">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="Lec-fK-JiH"/>
@@ -57,7 +57,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KhQ-9x-zcP">
                                     <rect key="frame" x="0.0" y="30" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-port" translatesAutoresizingMaskIntoConstraints="NO" id="ryn-Ja-m7r">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-port" translatesAutoresizingMaskIntoConstraints="NO" id="ryn-Ja-m7r">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="N7K-IS-unc"/>
@@ -75,7 +75,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dk3-fL-Vww">
                                     <rect key="frame" x="0.0" y="60" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-authentication" translatesAutoresizingMaskIntoConstraints="NO" id="MDH-AE-era">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-authentication" translatesAutoresizingMaskIntoConstraints="NO" id="MDH-AE-era">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="oI5-sR-XbL"/>
@@ -98,7 +98,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wZL-Ji-S5x">
                                     <rect key="frame" x="0.0" y="0.0" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-socket" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-yL-zfh">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-socket" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-yL-zfh">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="DtK-we-sha"/>
@@ -116,7 +116,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rQ5-6g-ZlR">
                                     <rect key="frame" x="0.0" y="30" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-encryption" translatesAutoresizingMaskIntoConstraints="NO" id="9SB-mB-Ffv">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-encryption" translatesAutoresizingMaskIntoConstraints="NO" id="9SB-mB-Ffv">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="bsL-hu-VSo"/>
@@ -134,7 +134,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ous-L1-bsy">
                                     <rect key="frame" x="0.0" y="60" width="157.5" height="20"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-handshake" translatesAutoresizingMaskIntoConstraints="NO" id="gOc-Sl-I5O">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/ConnectionTile/icon-handshake" translatesAutoresizingMaskIntoConstraints="NO" id="gOc-Sl-I5O">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="4Hm-iD-c5W"/>
@@ -170,11 +170,11 @@
         </view>
     </objects>
     <resources>
-        <image name="icon-authentication" width="36" height="36"/>
-        <image name="icon-encryption" width="36" height="36"/>
-        <image name="icon-handshake" width="36" height="36"/>
-        <image name="icon-port" width="36" height="36"/>
-        <image name="icon-protocol" width="36" height="36"/>
-        <image name="icon-socket" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-authentication" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-encryption" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-handshake" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-port" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-protocol" width="36" height="36"/>
+        <image name="PIAX/Tiles/ConnectionTile/icon-socket" width="36" height="36"/>
     </resources>
 </document>

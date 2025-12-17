@@ -43,8 +43,8 @@ struct CardFactory {
         Card("3.7.1",
              L10n.Localizable.Card.Wireguard.title,
              L10n.Localizable.Card.Wireguard.description,
-             "wg-background-",
-             "wg-main",
+             Theme.current.palette.appearance == .dark ? Asset.Images.Cards.WireGuard.wgBackgroundDark : Asset.Images.Cards.WireGuard.wgBackgroundLight,
+             Asset.Images.Cards.WireGuard.wgMain,
              L10n.Localizable.Card.Wireguard.Cta.activate,
              URL(string: "https://www.privateinternetaccess.com/blog/wireguide-all-about-the-wireguard-vpn-protocol/"), {
                 

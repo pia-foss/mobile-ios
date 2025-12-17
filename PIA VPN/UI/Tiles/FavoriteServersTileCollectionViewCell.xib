@@ -25,12 +25,12 @@
                             <constraint firstAttribute="width" constant="34" id="wmW-Q2-nHa"/>
                             <constraint firstAttribute="height" constant="34" id="zaN-sr-XX2"/>
                         </constraints>
-                        <state key="normal" image="eye-active-dark"/>
+                        <state key="normal" image="PIAX/Global/eye-active-dark"/>
                         <connections>
                             <action selector="changeTileVisibility" destination="N3s-qD-tnh" eventType="touchUpInside" id="tJP-Lv-ct4"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="Lcn-2V-lSs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Tiles/open-tile-details" translatesAutoresizingMaskIntoConstraints="NO" id="Lcn-2V-lSs">
                         <rect key="frame" x="641" y="58" width="12" height="12"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-ge-9X3" customClass="FavoriteServersTile" customModule="PIA_VPN" customModuleProvider="target">
@@ -63,7 +63,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="eye-active-dark" width="17" height="11"/>
-        <image name="open-tile-details" width="12" height="12"/>
+        <image name="PIAX/Global/eye-active-dark" width="17" height="11"/>
+        <image name="PIAX/Tiles/open-tile-details" width="12" height="12"/>
     </resources>
 </document>

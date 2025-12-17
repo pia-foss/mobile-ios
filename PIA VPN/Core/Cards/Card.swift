@@ -27,15 +27,15 @@ class Card: Collectable {
     
     var title: String
     var description: String
-    var cardImage: String
-    var cardFrontImage: String
+    var cardImage: ImageAsset
+    var cardFrontImage: ImageAsset
     var ctaLabel: String
     var cta: CTAFunc
     var learnMoreLink: URL?
     
     private(set) var showCTA = true
 
-    init(_ version: String, _ title: String, _ description: String, _ cardImage: String, _ cardFrontImage: String, _ ctaLabel: String, _ learnMoreLink: URL? = nil, _ cta: @escaping CTAFunc ) {
+    init(_ version: String, _ title: String, _ description: String, _ cardImage: ImageAsset, _ cardFrontImage: ImageAsset, _ ctaLabel: String, _ learnMoreLink: URL? = nil, _ cta: @escaping CTAFunc ) {
         self.version = version
         self.title = title
         self.description = description

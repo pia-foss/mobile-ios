@@ -67,7 +67,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
     }
 
     private func prepareCellIcons() {
-        leftIconImageView.image = UIImage(named: "region-selected")
+        leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
         leftIconImageView.isHidden = !iconSelected
     }
     

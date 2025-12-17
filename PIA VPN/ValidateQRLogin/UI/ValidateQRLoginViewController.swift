@@ -48,8 +48,7 @@ class ValidateQRLoginViewController: AutolayoutViewController {
     }
     
     private func setImageforMode(isLightMode: Bool) {
-        piaLogoImageView.image = isLightMode ? UIImage(named: "nav-logo") 
-        : UIImage(named: "nav-logo-white")
+        piaLogoImageView.image = UIImage(asset: isLightMode ? Asset.Images.navLogo : Asset.Images.navLogoWhite)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

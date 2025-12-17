@@ -425,7 +425,7 @@
                                     <constraint firstAttribute="height" constant="44" id="cNg-cp-7FJ"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="close-icon"/>
+                                <state key="normal" image="PIAX/Global/icon-close"/>
                                 <connections>
                                     <action selector="close" destination="EOm-5g-8UI" eventType="touchUpInside" id="zc3-I7-OGG"/>
                                     <action selector="reject:" destination="6bm-eY-LuK" eventType="touchUpInside" id="nfL-wH-Jd8"/>
@@ -1080,7 +1080,7 @@ You can come back to the app later to finish the process.</string>
                                     <constraint firstAttribute="width" constant="44" id="G64-JW-bc2"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="close-icon"/>
+                                <state key="normal" image="PIAX/Global/icon-close"/>
                                 <connections>
                                     <action selector="reject:" destination="6bm-eY-LuK" eventType="touchUpInside" id="dTI-g0-1t1"/>
                                 </connections>
@@ -1110,7 +1110,7 @@ You can come back to the app later to finish the process.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="close-icon" width="50.333332061767578" height="50.333332061767578"/>
+        <image name="PIAX/Global/icon-close" width="50.333332061767578" height="50.333332061767578"/>
         <image name="image-account-failed" width="572" height="372"/>
         <image name="image-no-internet" width="1250" height="661"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>

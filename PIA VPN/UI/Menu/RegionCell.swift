@@ -73,11 +73,11 @@ class RegionCell: UITableViewCell, Restylable {
         let suffix = iconSelected ? "-selected" : ""
         if server.geo {
             leftIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
-            rightIconImageView.image = UIImage(named: "region-selected")
+            rightIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
             leftIconImageView.isHidden = false
             rightIconImageView.isHidden = !iconSelected
         } else {
-            leftIconImageView.image = UIImage(named: "region-selected")
+            leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
             rightIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
             leftIconImageView.isHidden = !iconSelected
             rightIconImageView.isHidden = true

@@ -24,12 +24,12 @@ import UIKit
 
 public typealias CTAFunc = () -> Void
 
-public protocol Collectable {
+protocol Collectable {
     
     var title: String {get set}
     var description: String {get set}
-    var cardImage: String {get set}
-    var cardFrontImage: String {get set}
+    var cardImage: ImageAsset {get set}
+    var cardFrontImage: ImageAsset {get set}
     var ctaLabel: String {get set}
     var cta: CTAFunc {get set}
     var learnMoreLink: URL? {get set}
@@ -39,7 +39,7 @@ public protocol Collectable {
     
 }
 
-public extension Collectable {
+extension Collectable {
 
     ///Check if we need to show a second call to action button
     /// - Returns: Bool
