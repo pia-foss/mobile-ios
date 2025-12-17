@@ -32,20 +32,23 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     private(set) var hasEnabledUpdates: Bool
     private var fallbackTimer: Timer!
+    private var changingServerTimer: Timer?
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
-    
+    private var isChangingServer: Bool
     private var lastKnownVpnStatus: VPNStatus = .disconnected
     
     private init() {
         hasEnabledUpdates = false
         isReconnecting = false
+        isChangingServer = false
         numberOfAttempts = 0
     }
     
     func start() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(vpnIsChangingServer(notification:)), name: .PIAVPNIsChangingServer, object: nil)
 
         accessedProviders.vpnProvider.prepare()
         if Client.providers.vpnProvider.isVPNConnected {
@@ -92,6 +95,10 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             //Connection successful, the user interaction finished
             Client.configuration.connectedManually = false
             
+            // As connect has succeeded isChangingServer flag can now be turned off
+            self.isChangingServer = false
+            invalidateServerChangeTimer()
+            
         case .connecting, .reasserting:
             
             nextStatus = .connecting
@@ -132,6 +139,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         case .disconnecting:
             nextStatus = .disconnecting
+
         case .disconnected:
             nextStatus = .disconnected
             
@@ -175,7 +183,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         accessedDatabase.plain.lastKnownVpnStatus = nextStatus
         
         if !isReconnecting {
-            accessedDatabase.transient.vpnStatus = nextStatus
+            updateVpnStatus(with: nextStatus)
         }
         
         if let error = connection.value(forKey: "_lastDisconnectError") as? NSError {
@@ -192,12 +200,45 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     }
     
+    private func updateVpnStatus(with vpnStatus: VPNStatus) {
+        /// Artificially manipulates vpnStatus so that if user decides to change a region
+        /// while already being connected, UI won't show disconnected (not protected) label.
+        /// Instead it will show the connecting interface.
+        if vpnStatus == .disconnected, isChangingServer {
+            accessedDatabase.transient.vpnStatus = .connecting
+        } else {
+            accessedDatabase.transient.vpnStatus = vpnStatus
+        }
+    }
+    
     // MARK: Invalidate
     private func invalidateTimer() {
         fallbackTimer?.invalidate()
         fallbackTimer = nil
     }
     
+    private func startServerChangeTimer() {
+        // Clear any existing timer
+        invalidateServerChangeTimer()
+
+        let changeServerTimeout = TimeInterval(Client.configuration.vpnConnectivityMaxAttempts) * Client.configuration.vpnConnectivityRetryDelay
+        changingServerTimer = Timer.scheduledTimer(withTimeInterval: changeServerTimeout, repeats: false) { [weak self] timer in
+            guard let self, self.isChangingServer else { return }
+            log.debug("Server change did timeout")
+
+            // Clear any artificial vpnStatus previously reported
+            self.isChangingServer = false
+            updateVpnStatus(with: lastKnownVpnStatus)
+
+            invalidateServerChangeTimer()
+        }
+    }
+
+    private func invalidateServerChangeTimer() {
+        changingServerTimer?.invalidate()
+        changingServerTimer = nil
+    }
+
     // MARK: Reset
     
     private func reset() {
@@ -217,20 +258,21 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     @objc private func neStatusDidChange(notification: Notification) {
         guard let connection = notification.object as? NEVPNConnection else {
-            fatalError("Missing NEVPNConnection object?")
+            log.error("Missing NEVPNConnection object")
+            return
         }
+
         DispatchQueue.main.async {
             self.tryUpdateStatus(via: connection)
         }
     }
 
-//    @objc private func preferencesDidOutdateVPN(notification: Notification) {
-//        let vpn = accessedProviders.vpnProvider
-//        guard (accessedDatabase.transient.vpnStatus != .disconnected) else {
-//            vpn.install(callback: nil)
-//            return
-//        }
-//        accessedDatabase.transient.vpnStatus = .changingServer
-//        vpn.reconnect(after: nil)
-//    }
+    @objc private func vpnIsChangingServer(notification: Notification) {
+        /// Sets true to isChangingServer. This flag is supposed to become false again only:
+        /// - After vpnStatus becomes .connected, or
+        /// - changingServerTimer is fired, which means the server change did timeout.
+        self.isChangingServer = true
+        startServerChangeTimer()
+        log.debug("VPN isChangingServer flag: \(isChangingServer)")
+    }
 }
