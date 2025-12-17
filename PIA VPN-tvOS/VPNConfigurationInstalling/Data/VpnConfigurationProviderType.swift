@@ -10,8 +10,7 @@ import Foundation
 import PIALibrary
 
 protocol VpnConfigurationProviderType {
-    func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
-    
+    func install(force forceInstall: Bool) async throws
     func uninstall(_ callback: SuccessLibraryCallback?)
 }
 
@@ -21,11 +20,11 @@ class VpnConfigurationProvider: VpnConfigurationProviderType {
     init(vpnProvider: VPNProvider) {
         self.vpnProvider = vpnProvider
     }
-    
-    func install(force forceInstall: Bool, _ callback: PIALibrary.SuccessLibraryCallback?) {
-        vpnProvider.install(force: forceInstall, callback)
+
+    func install(force forceInstall: Bool) async throws {
+        try await vpnProvider.install(force: forceInstall)
     }
-    
+
     func uninstall(_ callback: SuccessLibraryCallback?) {
         self.vpnProvider.uninstall(callback)
     }

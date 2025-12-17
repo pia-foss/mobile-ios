@@ -27,7 +27,7 @@ import NetworkExtension
 fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
 
 @available(tvOS 17.0, *)
-open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
+open class DefaultVPNProvider: ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
     
     private static let forcedStatuses: [VPNStatus] = [
         .connected,
@@ -46,27 +46,6 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         } else {
             customWebServices = nil
         }
-    }
-    
-    // MARK: VPNProvider
-    
-    public var availableVPNTypes: [String] {
-        return accessedConfiguration.availableVPNTypes()
-    }
-    
-    public var currentVPNType: String {
-        return accessedPreferences.vpnType
-    }
-    
-    public var vpnStatus: VPNStatus {
-        return accessedDatabase.transient.vpnStatus
-    }
-    
-    public var profileServer: Server? {
-        guard let identifier = activeProfile?.serverIdentifier else {
-            return nil
-        }
-        return accessedProviders.serverProvider.find(withIdentifier: identifier)
     }
     
     var publicIP: String? {
@@ -90,6 +69,96 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         }
     }
     
+    private func isLegacyProfile() -> Bool {
+        return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
+    }
+    
+    @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
+        let activeVPNType = accessedPreferences.vpnType
+        let activeProfile: VPNProfile? = accessedConfiguration.profile(forVPNType: activeVPNType)
+        
+        for vpnType in availableVPNTypes {
+            let profile = accessedConfiguration.profile(forVPNType: vpnType)!
+            guard (vpnType == activeVPNType) else {
+                if let activeProfile = activeProfile {
+                    if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                        (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
+                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                        profile.disconnect(nil)
+                        profile.remove(nil)
+                    }
+                }
+                continue
+            }
+        }
+        return activeProfile
+    }
+
+    private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
+        guard let currentUser = accessedProviders.accountProvider.currentUser else {
+            log.error("vpnClientConfiguration: No current user available")
+            return nil
+        }
+
+        guard let currentPasswordReference = accessedProviders.accountProvider.currentPasswordReference else {
+            log.error("vpnClientConfiguration: No current password reference available")
+            return nil
+        }
+
+        guard let profile = profile ?? activeProfile else {
+            log.error("vpnClientConfiguration: No VPN profile available")
+            return nil
+        }
+
+        guard let targetServer = try? accessedProviders.serverProvider.targetServer else {
+            log.error("vpnClientConfiguration: No target server available")
+            return nil
+        }
+
+        let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
+
+        return VPNConfiguration(
+            name: accessedConfiguration.vpnProfileName,
+            username: currentUser.credentials.username,
+            passwordReference: currentPasswordReference,
+            server: targetServer,
+            isOnDemand: accessedPreferences.isPersistentConnection,
+            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
+            customConfiguration: customConfiguration,
+            leakProtection: accessedPreferences.leakProtection,
+            allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
+        )
+    }
+
+    // MARK: WebServicesConsumer
+    
+    var webServices: WebServices {
+        return customWebServices ?? accessedWebServices
+    }
+}
+
+// MARK: - VPNProvider extension
+
+extension DefaultVPNProvider: VPNProvider {
+    public var availableVPNTypes: [String] {
+        return accessedConfiguration.availableVPNTypes()
+    }
+    
+    public var currentVPNType: String {
+        return accessedPreferences.vpnType
+    }
+    
+    public var vpnStatus: VPNStatus {
+        return accessedDatabase.transient.vpnStatus
+    }
+    
+    public var profileServer: Server? {
+        guard let identifier = activeProfile?.serverIdentifier else {
+            return nil
+        }
+        return accessedProviders.serverProvider.find(withIdentifier: identifier)
+    }
+
     public func prepare() throws {
         
         var profile = activeProfileRemovingInactive()
@@ -139,42 +208,45 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
+            log.error("VPN install failed: User is not logged in (unauthorized)")
             callback?(ClientError.unauthorized)
             return
         }
 
         let newVPNType = accessedPreferences.vpnType
         guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
-            callback?(ClientError.vpnProfileUnavailable)
+            log.error("VPN install failed: No profile configuration found for VPN type: \(newVPNType)")
+            callback?(ClientError.unsupportedVPNType)
             return
         }
 
         var previousProfile: VPNProfile?
-        if (newVPNType != activeProfile?.vpnType) {
+        if newVPNType != activeProfile?.vpnType {
             previousProfile = activeProfile
         }
 
         let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
-        let installBlock: SuccessLibraryCallback = { (error) in
+        let installBlock: SuccessLibraryCallback = { error in
             guard let configuration = self.vpnClientConfiguration(for: profile) else {
                 callback?(ClientError.vpnProfileUnavailable)
                 return
             }
-            profile.save(withConfiguration: configuration, force: forcedStatuses) { (error) in
-                if let error = error {
+            profile.save(withConfiguration: configuration, force: forcedStatuses) { error in
+                if let error {
+                    log.error("VPN install failed: Profile save failed with error: \(error.localizedDescription)")
                     callback?(error)
                     return
                 }
                 self.activeProfile = profile
 
-                if let previousProfile = previousProfile,
+                if let previousProfile,
                     !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
                     (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType)) {
                     //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    previousProfile.remove({ _ in
+                    previousProfile.remove { _ in
                         Macros.postNotification(.PIAVPNDidInstall)
                         callback?(nil)
-                    })
+                    }
                 } else {
                     if previousProfile != nil { // dont connect after install
                         self.connect(nil)
@@ -196,7 +268,19 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             }
         }
     }
-    
+
+    public func install(force forceInstall: Bool) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            install(force: forceInstall) { error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
     public func disable(_ callback: SuccessLibraryCallback?) {
         guard let activeProfile = activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
@@ -359,75 +443,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(usage, nil)
         }
     }
-    
-    private func isLegacyProfile() -> Bool {
-        return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
-    }
-    
-    @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
-        let activeVPNType = accessedPreferences.vpnType
-        let activeProfile: VPNProfile? = accessedConfiguration.profile(forVPNType: activeVPNType)
-        
-        for vpnType in availableVPNTypes {
-            let profile = accessedConfiguration.profile(forVPNType: vpnType)!
-            guard (vpnType == activeVPNType) else {
-                if let activeProfile = activeProfile {
-                    if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
-                        (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
-                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                        profile.disconnect(nil)
-                        profile.remove(nil)
-                    }
-                }
-                continue
-            }
-        }
-        return activeProfile
-    }
 
-    private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
-        guard let currentUser = accessedProviders.accountProvider.currentUser else {
-            log.error("vpnClientConfiguration: No current user available")
-            return nil
-        }
-
-        guard let currentPasswordReference = accessedProviders.accountProvider.currentPasswordReference else {
-            log.error("vpnClientConfiguration: No current password reference available")
-            return nil
-        }
-
-        guard let profile = profile ?? activeProfile else {
-            log.error("vpnClientConfiguration: No VPN profile available")
-            return nil
-        }
-
-        guard let targetServer = try? accessedProviders.serverProvider.targetServer else {
-            log.error("vpnClientConfiguration: No target server available")
-            return nil
-        }
-
-        let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
-
-        return VPNConfiguration(
-            name: accessedConfiguration.vpnProfileName,
-            username: currentUser.credentials.username,
-            passwordReference: currentPasswordReference,
-            server: targetServer,
-            isOnDemand: accessedPreferences.isPersistentConnection,
-            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
-            customConfiguration: customConfiguration,
-            leakProtection: accessedPreferences.leakProtection,
-            allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
-        )
-    }
-
-    // MARK: WebServicesConsumer
-    
-    var webServices: WebServices {
-        return customWebServices ?? accessedWebServices
-    }
-    
-    // MARK: Migration
     public func needsMigrationToGEN4() -> Bool {
         if isVPNConnected {
             let manager = NEVPNManager.shared()

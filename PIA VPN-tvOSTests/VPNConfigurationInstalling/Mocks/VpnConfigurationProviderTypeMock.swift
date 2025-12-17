@@ -21,7 +21,13 @@ class VpnConfigurationProviderTypeMock: VpnConfigurationProviderType {
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         callback?(error)
     }
-    
+
+    func install(force forceInstall: Bool) async throws {
+        if let error = error {
+            throw error
+        }
+    }
+
     func uninstall(_ callback: PIALibrary.SuccessLibraryCallback?) {
         callback?(error)
     }
