@@ -154,6 +154,7 @@ class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
+        nc.addObserver(self, selector: #selector(dismissModalViewController), name: .PIADashboardShouldDismissModal, object: nil)
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
@@ -727,6 +728,12 @@ class DashboardViewController: AutolayoutViewController {
         }
     }
     
+    @objc private func dismissModalViewController() {
+        if presentedViewController != nil {
+            dismiss(animated: false)
+        }
+    }
+
     //MARK: Non compliant Wifi alert
     
     private struct WifiAlertAction {
