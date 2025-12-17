@@ -119,18 +119,12 @@ extension Client {
         public var enablesConnectivityUpdates: Bool
 
         public let connectivityVPNLag: Int
-        
-        /// Sets the timeout for connectivity checks.
-        public var connectivityTimeout: Int
 
         /// Sets the delay after which to retry connectivity checks.
         public var connectivityRetryDelay: Int
         
         /// Sets the maximum number of failed connectivity checks before giving up.
         public var connectivityMaxAttempts: Int
-        
-        /// Sets the timeout for VPN connectivity checks.
-        public var vpnConnectivityTimeout: TimeInterval
 
         /// Sets the delay after which to retry VPN connectivity checks.
         public var vpnConnectivityRetryDelay: TimeInterval
@@ -239,11 +233,9 @@ extension Client {
             
             enablesConnectivityUpdates = false
             connectivityVPNLag = 1000
-            connectivityTimeout = 3000
             connectivityRetryDelay = 10000
             connectivityMaxAttempts = 3
 
-            vpnConnectivityTimeout = 2.0
             vpnConnectivityRetryDelay = 5.0
             vpnConnectivityMaxAttempts = 3
             
