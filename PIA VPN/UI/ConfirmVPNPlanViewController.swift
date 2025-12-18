@@ -21,11 +21,10 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import AuthenticationServices
 import PIALibrary
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 
 public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
 

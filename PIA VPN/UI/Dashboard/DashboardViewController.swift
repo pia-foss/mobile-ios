@@ -23,12 +23,11 @@
 import UIKit
 import PIALibrary
 import SideMenu
-import SwiftyBeaver
 import WidgetKit
 import NetworkExtension
 import ActivityKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: DashboardViewController.self)
 
 enum DashboardVPNConnectingStatus: Int {
     case none = 0

@@ -21,7 +21,6 @@
 
 import UIKit
 import Popover
-import SwiftyBeaver
 import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN

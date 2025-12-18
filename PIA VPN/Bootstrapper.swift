@@ -27,8 +27,8 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIAWireguard
 #endif
-import SwiftyBeaver
 import UIKit
+import Logging
 
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
@@ -73,13 +73,20 @@ class Bootstrapper {
     }
 
     func bootstrap() {
-        let console = ConsoleDestination()
-        #if PIA_DEV
-        console.minLevel = .debug
-        #else
-        console.minLevel = .info
-        #endif
-        SwiftyBeaver.addDestination(console)
+        LoggingSystem.bootstrap { label in
+            var handler = StreamLogHandler.standardOutput(label: label)
+            
+            #if PIA_DEV
+            handler.logLevel = .debug
+            #else
+            handler.logLevel = .info
+            #endif
+            
+            return MultiplexLogHandler([
+                handler,
+                PIALogHandler(label: label)
+            ])
+        }
 
         // Load the database first
         Client.database = Client.Database(group: AppConstants.appGroup)

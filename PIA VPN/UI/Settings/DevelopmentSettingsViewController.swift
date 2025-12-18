@@ -20,11 +20,10 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import PIALibrary
 import SafariServices
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: DevelopmentSettingsViewController.self)
 
 class DevelopmentSettingsViewController: PIABaseSettingsViewController {
     

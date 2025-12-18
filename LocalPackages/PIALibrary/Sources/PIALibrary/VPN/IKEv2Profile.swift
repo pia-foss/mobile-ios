@@ -22,9 +22,8 @@
 
 import Foundation
 import NetworkExtension
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: IKEv2Profile.self)
 
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
 @available(tvOS 17.0, *)
@@ -212,7 +211,7 @@ public class IKEv2Profile: NetworkExtensionProfile {
         
         log.debug("IKEv2 Configuration")
         log.debug("-------------------")
-        log.debug(cfg)
+        log.debug("\(cfg)")
         log.debug("-------------------")
 
         return cfg

@@ -30,14 +30,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>SwifyBeaver</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2015 Sebastian Kreutzberger</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Gloss</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2017 Harlan Kellaway</string>

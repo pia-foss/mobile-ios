@@ -21,10 +21,9 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import PIALibrary
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: RestoreSignupViewController.self)
 
 public class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
     

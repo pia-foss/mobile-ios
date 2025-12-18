@@ -22,9 +22,8 @@
 
 import UIKit
 import PIALibrary
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: MenuViewController.self)
 
 protocol MenuViewControllerDelegate: class {
     func menu(_ menu: MenuViewController, didSelect item: MenuViewController.Item)

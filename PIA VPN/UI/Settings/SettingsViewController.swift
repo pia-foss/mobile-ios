@@ -25,11 +25,10 @@ import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
 import SafariServices
-import SwiftyBeaver
 import PIAWireguard
 import WidgetKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: SettingsViewController.self)
 
 class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 

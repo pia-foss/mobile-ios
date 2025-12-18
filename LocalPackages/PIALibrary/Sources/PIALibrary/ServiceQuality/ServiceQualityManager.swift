@@ -22,9 +22,8 @@
 import Foundation
 import UIKit
 import kpi
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: ServiceQualityManager.self)
 
 @available(tvOS 17.0, *)
 public class ServiceQualityManager: NSObject {

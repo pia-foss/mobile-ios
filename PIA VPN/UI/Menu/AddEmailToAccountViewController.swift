@@ -21,11 +21,10 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import PIALibrary
 import AuthenticationServices
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AddEmailToAccountViewController.self)
 
 class AddEmailToAccountViewController: AutolayoutViewController, BrandableNavigationBar {
 

@@ -22,10 +22,9 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AccountObserver.self)
 
 class AccountObserver {
     static let shared = AccountObserver()

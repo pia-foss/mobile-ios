@@ -21,10 +21,9 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 
 class DedicatedIpViewController: AutolayoutViewController {
     

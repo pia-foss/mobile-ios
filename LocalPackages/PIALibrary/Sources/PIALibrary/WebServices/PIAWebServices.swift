@@ -22,12 +22,11 @@
 
 import Foundation
 import Gloss
-import SwiftyBeaver
 import regions
 import account
 import csi
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: PIAWebServices.self)
 
 @available(tvOS 17.0, *)
 class PIAWebServices: WebServices, ConfigurationAccess {
@@ -436,7 +435,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 return string
             }
         } catch {
-            print(error)
+            log.error("JSON stringification error: \(error)")
         }
 
         return ""

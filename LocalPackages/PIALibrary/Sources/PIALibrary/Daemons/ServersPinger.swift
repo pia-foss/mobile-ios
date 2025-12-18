@@ -21,10 +21,9 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import __PIALibraryNative
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: ServersPinger.self)
 
 @available(tvOS 17.0, *)
 class ServersPinger: DatabaseAccess {
@@ -60,7 +59,7 @@ class ServersPinger: DatabaseAccess {
 
         for server in pingableServers {
 
-            log.verbose("Pinging \(server.identifier)")
+            log.debug("Pinging \(server.identifier)")
             
             for address in server.addresses() {
 

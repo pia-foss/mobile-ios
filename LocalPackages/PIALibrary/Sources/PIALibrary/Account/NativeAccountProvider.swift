@@ -21,10 +21,9 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: NativeAccountProvider.self)
 
 @available(tvOS 17.0, *)
 open class NativeAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {

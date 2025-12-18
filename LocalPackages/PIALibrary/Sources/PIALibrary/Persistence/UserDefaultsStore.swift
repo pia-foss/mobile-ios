@@ -22,9 +22,8 @@
 
 import Foundation
 import Gloss
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
 @available(tvOS 17.0, *)
 class UserDefaultsStore: PlainStore, ConfigurationAccess {

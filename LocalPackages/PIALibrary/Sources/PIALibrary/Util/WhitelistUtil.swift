@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: WhitelistUtil.self)
 
 public class WhitelistUtil {
     

@@ -302,7 +302,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 
 ## Acknowledgements
 
-- SwiftyBeaver - © 2015 Sebastian Kreutzberger
 - Gloss - © 2017 Harlan Kellaway
 - ReachabilitySwift - © 2016 Ashley Mills
 - TunnelKit - © 2018 - Present Davide de Rosa (https://github.com/passepartoutvpn/tunnelkit) - TunnelKit is not MIT software and remains under the terms of the GPL license (https://github.com/passepartoutvpn/tunnelkit/blob/master/LICENSE)

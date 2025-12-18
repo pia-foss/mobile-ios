@@ -22,10 +22,9 @@
 
 import UIKit
 import PIALibrary
-import SwiftyBeaver
 import NetworkExtension
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AppDelegate.self)
 
 @UIApplicationMain
 class AppDelegate: NSObject, UIApplicationDelegate {

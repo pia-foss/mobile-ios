@@ -8,7 +8,7 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
+import Logging
 
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
@@ -30,13 +30,20 @@ class BootstraperFactory {
     }
     
     private static func setupDebugginConsole() {
-        let console = ConsoleDestination()
-        #if PIA_DEV
-        console.minLevel = .debug
-        #else
-        console.minLevel = .info
-        #endif
-        SwiftyBeaver.addDestination(console)
+        LoggingSystem.bootstrap { label in
+            var handler = StreamLogHandler.standardOutput(label: label)
+            
+            #if PIA_DEV
+            handler.logLevel = .debug
+            #else
+            handler.logLevel = .info
+            #endif
+            
+            return MultiplexLogHandler([
+                handler,
+                PIALogHandler(label: label)
+            ])
+        }
     }
     
     private static func migrateNMT() {
