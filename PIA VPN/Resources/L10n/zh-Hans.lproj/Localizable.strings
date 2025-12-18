@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "为防止数据泄露，请轻点“立即切换”以更改为 IKEv2 VPN 协议并自动重新连接。";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切换";
 
-"dashboard.vpn.change_location.alert.title" = "更改位置";
+"dashboard.vpn.change_location.alert.title" = "更改位置？";
 "dashboard.vpn.change_location.alert.message" = "连接到新位置时，您的VPN将短暂断开连接。";
 "dashboard.vpn.change_location.alert.button.connect" = "连接";
 

@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Veri sızıntısını önlemek için, IKEv2 VPN protokolüne geçmek ve otomatik olarak yeniden bağlanmak için Şimdi Değiştir'e dokunun.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Şimdi Değiştir";
 
-"dashboard.vpn.change_location.alert.title" = "Konum değiştiriliyor";
+"dashboard.vpn.change_location.alert.title" = "Konum değiştiriliyor?";
 "dashboard.vpn.change_location.alert.message" = "VPN'iniz yeni konuma bağlanırken kısa bir süre bağlantısı kesilecek.";
 "dashboard.vpn.change_location.alert.button.connect" = "Bağlan";
 

@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "データ漏洩を防ぐには、[今すぐ切り替える]をタップしてIKEv2 VPNプロトコルに変更し、自動的に再接続してください。";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "今すぐ切り替える";
 
-"dashboard.vpn.change_location.alert.title" = "場所を変更中";
+"dashboard.vpn.change_location.alert.title" = "場所を変更中？";
 "dashboard.vpn.change_location.alert.message" = "新しい場所に接続する間、VPNが一時的に切断されます。";
 "dashboard.vpn.change_location.alert.button.connect" = "接続";
 

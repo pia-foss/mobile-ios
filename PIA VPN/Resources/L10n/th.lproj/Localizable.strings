@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ เปลี่ยนเลย เพื่อเปลี่ยนเป็นโปรโตคอล VPN IKEv2 และเชื่อมต่อใหม่โดยอัตโนมัติ";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "เปลี่ยนเลย";
 
-"dashboard.vpn.change_location.alert.title" = "กำลังเปลี่ยนตำแหน่ง";
+"dashboard.vpn.change_location.alert.title" = "กำลังเปลี่ยนตำแหน่ง?";
 "dashboard.vpn.change_location.alert.message" = "VPN ของคุณจะตัดการเชื่อมต่อชั่วคราวในขณะที่เชื่อมต่อกับตำแหน่งใหม่";
 "dashboard.vpn.change_location.alert.button.connect" = "เชื่อมต่อ";
 

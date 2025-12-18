@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu\" om te wijzigen naar het IKEv2 VPN-protocol en automatisch opnieuw verbinding te maken.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Schakel nu";
 
-"dashboard.vpn.change_location.alert.title" = "Locatie wijzigen";
+"dashboard.vpn.change_location.alert.title" = "Locatie wijzigen?";
 "dashboard.vpn.change_location.alert.message" = "Je VPN wordt kort losgekoppeld tijdens het verbinden met de nieuwe locatie.";
 "dashboard.vpn.change_location.alert.button.connect" = "Verbinden";
 

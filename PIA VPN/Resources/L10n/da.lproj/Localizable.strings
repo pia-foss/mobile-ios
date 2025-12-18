@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "For at forhindre datalækage skal du trykke på Skift nu for at skifte til IKEv2 VPN-protokollen og automatisk oprette forbindelse igen.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Skift nu";
 
-"dashboard.vpn.change_location.alert.title" = "Skifter placering";
+"dashboard.vpn.change_location.alert.title" = "Skifter placering?";
 "dashboard.vpn.change_location.alert.message" = "Din VPN afbrydes kort, mens der oprettes forbindelse til den nye placering.";
 "dashboard.vpn.change_location.alert.button.connect" = "Forbind";
 

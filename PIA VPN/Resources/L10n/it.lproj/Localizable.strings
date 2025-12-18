@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Per prevenire le perdite di dati, tocca Cambia ora per passare al protocollo VPN IKEv2 e riconnettersi automaticamente.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Cambia ora";
 
-"dashboard.vpn.change_location.alert.title" = "Modifica della posizione";
+"dashboard.vpn.change_location.alert.title" = "Modifica della posizione?";
 "dashboard.vpn.change_location.alert.message" = "La tua VPN si disconnetterà brevemente durante la connessione alla nuova posizione.";
 "dashboard.vpn.change_location.alert.button.connect" = "Connetti";
 

@@ -237,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Switch Now";
 
-"dashboard.vpn.change_location.alert.title" = "Changing location";
+"dashboard.vpn.change_location.alert.title" = "Changing Location?";
 "dashboard.vpn.change_location.alert.message" = "Your VPN will briefly disconnect while connecting to the new location.";
 "dashboard.vpn.change_location.alert.button.connect" = "Connect";
 
