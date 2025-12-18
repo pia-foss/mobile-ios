@@ -1098,6 +1098,12 @@ internal enum L10n {
           /// PIA MACE™
           internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title", fallback: "PIA MACE™")
         }
+        internal enum ReconnectNotifications {
+          /// Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.
+          internal static let footer = L10n.tr("Localizable", "settings.application_settings.reconnect_notifications.footer", fallback: "Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.")
+          /// Reconnect Notifications
+          internal static let title = L10n.tr("Localizable", "settings.application_settings.reconnect_notifications.title", fallback: "Reconnect Notifications")
+        }
       }
       internal enum Cards {
         internal enum History {

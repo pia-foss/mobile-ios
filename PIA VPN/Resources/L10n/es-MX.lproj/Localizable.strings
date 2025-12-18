@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Activar tema";
 "settings.application_settings.kill_switch.title" = "Interruptor de corte de VPN";
 "settings.application_settings.kill_switch.footer" = "El botón de pánico de VPN evita el acceso a Internet si la conexión VPN se está volviendo a conectar. Esto excluye la desconexión manual.";
+"settings.application_settings.reconnect_notifications.title" = "Notificaciones de reconexión";
+"settings.application_settings.reconnect_notifications.footer" = "Recibe alertas cuando la VPN se reconecta a una ubicación diferente. Desactiva esta opción para dejar de recibir estas notificaciones.";
 "settings.application_settings.leak_protection.title" = "Protección contra filtraciones";
 "settings.application_settings.leak_protection.footer" = "iOS incluye funciones diseñadas para operar fuera de la VPN por omisión, como AirDrop, CarPlay, AirPlay y los puntos de acceso personales. Habilitar la protección personalizada contra las filtraciones dirige este tráfico a través de la VPN, pero puede afectar a su funcionamiento. Más información";
 "settings.application_settings.leak_protection.more_info" = "Más información";

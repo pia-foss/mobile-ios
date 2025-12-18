@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Tema attivo";
 "settings.application_settings.kill_switch.title" = "Killswitch VPN";
 "settings.application_settings.kill_switch.footer" = "Il killswitch VPN impedisce l'accesso a Internet quando la connessione VPN si sta riconnettendo. Questo esclude la disconnessione manuale.";
+"settings.application_settings.reconnect_notifications.title" = "Notifiche di riconnessione";
+"settings.application_settings.reconnect_notifications.footer" = "Ricevi avvisi quando la VPN si riconnette a una posizione diversa. Disattiva per non ricevere più queste notifiche.";
 "settings.application_settings.leak_protection.title" = "Protezione perdita dati";
 "settings.application_settings.leak_protection.footer" = "iOS include funzioni per operare di default al di fuori della VPN, come AirDrop, CarPlay, AirPlay e hotspot personali. L’attivazione di una protezione personalizzata contro la perdita dei dati instrada questo traffico attraverso la VPN, ma può influire su queste funzioni. Ulteriori informazioni";
 "settings.application_settings.leak_protection.more_info" = "Ulteriori informazioni";

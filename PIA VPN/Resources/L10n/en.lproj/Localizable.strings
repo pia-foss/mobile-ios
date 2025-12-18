@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Active theme";
 "settings.application_settings.kill_switch.title" = "VPN Kill Switch";
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
+"settings.application_settings.reconnect_notifications.title" = "Reconnect Notifications";
+"settings.application_settings.reconnect_notifications.footer" = "Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.";
 "settings.application_settings.leak_protection.title" = "Leak Protection";
 "settings.application_settings.leak_protection.footer" = "iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info";
 "settings.application_settings.leak_protection.more_info" = "More info";

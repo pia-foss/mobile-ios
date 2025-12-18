@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.kill_switch.title" = "VPN-afbryderknap";
 "settings.application_settings.kill_switch.footer" = "VPN-kill switchen forebygger kontakt til internettet, hvis VPN-forbindelsen genoprettes. Dette udelukker manuel frakobling.";
+"settings.application_settings.reconnect_notifications.title" = "Genforbindelsesmeddelelser";
+"settings.application_settings.reconnect_notifications.footer" = "Få beskeder, når VPN genopretter forbindelsen til en anden placering. Deaktiver for at stoppe med at modtage disse meddelelser.";
 "settings.application_settings.leak_protection.title" = "Lækagebeskyttelse";
 "settings.application_settings.leak_protection.footer" = "iOS inkluderer funktioner designet til at fungere uden for VPN'et som standard, såsom AirDrop, CarPlay, AirPlay og personlige hotspots. Aktivering af tilpasset lækagebeskyttelse dirigerer denne trafik gennem VPN'et, men kan påvirke, hvordan disse funktioner fungerer. Mere info";
 "settings.application_settings.leak_protection.more_info" = "Mere info";

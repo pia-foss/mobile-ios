@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "使用中的主題";
 "settings.application_settings.kill_switch.title" = "VPN 切斷開關";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 重新連接，VPN 的終止開關將阻止互聯網連線。這不包括手動斷開連接。";
+"settings.application_settings.reconnect_notifications.title" = "重新連接通知";
+"settings.application_settings.reconnect_notifications.footer" = "當VPN重新連接到不同位置時接收提醒。停用以停止接收這些通知。";
 "settings.application_settings.leak_protection.title" = "防漏";
 "settings.application_settings.leak_protection.footer" = "iOS 內建功能依預設能在 VPN 以外運作，例如 AirDrop、CarPlay、AirPlay 和個人熱點。如果啟用自定防漏功能，就會把這個流量透過 VPN 轉出，但也可能影響這些功能。詳情";
 "settings.application_settings.leak_protection.more_info" = "詳情";

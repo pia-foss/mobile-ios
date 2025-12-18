@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Aktif tema";
 "settings.application_settings.kill_switch.title" = "VPN Acil Anahtarı";
 "settings.application_settings.kill_switch.footer" = "VPN kill switch, VPN bağlantınız yeniden bağlanırken internete erişimi önler. Bu, manuel bağlantı sonlandırmayı kapsamaz.";
+"settings.application_settings.reconnect_notifications.title" = "Yeniden Bağlanma Bildirimleri";
+"settings.application_settings.reconnect_notifications.footer" = "VPN farklı bir konuma yeniden bağlanırken uyarılar alın. Bu bildirimleri almayı durdurmak için devre dışı bırakın.";
 "settings.application_settings.leak_protection.title" = "Sızıntı Koruması";
 "settings.application_settings.leak_protection.footer" = "iOS, varsayılan olarak VPN dışında çalışacak şekilde tasarlanmış özellikleri içerir. Bunlar AirDrop, CarPlay, AirPlay ve Kişisel Erişim Noktaları gibi özellikleri içerir. Özel sızıntı koruması etkinleştirildiğinde, bu trafiğin VPN üzerinden yönlendirilmesi ancak bu özelliklerin işlevselliğini etkileyebilir. Daha fazla bilgi";
 "settings.application_settings.leak_protection.more_info" = "Daha fazla bilgi";
