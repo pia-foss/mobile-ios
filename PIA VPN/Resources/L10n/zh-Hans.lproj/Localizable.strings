@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "活跃主题";
 "settings.application_settings.kill_switch.title" = "VPN 切断开关";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 连接重新连线，VPN 终止开关会阻止访问互联网。这不包括手动断开连接。";
+"settings.application_settings.reconnect_notifications.title" = "重新连接通知";
+"settings.application_settings.reconnect_notifications.footer" = "当VPN重新连接到不同位置时接收提醒。禁用以停止接收这些通知。";
 "settings.application_settings.leak_protection.title" = "泄露保护";
 "settings.application_settings.leak_protection.footer" = "iOS 包含默认在 VPN 之外运行的功能，例如 AirDrop、CarPlay、AirPlay 和个人热点。启用自定义泄露保护会通过 VPN 路由这些流量，但可能会影响这些功能的运行。更多信息";
 "settings.application_settings.leak_protection.more_info" = "更多信息";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "为防止数据泄露，请轻点“立即切换”以更改为 IKEv2 VPN 协议并自动重新连接。";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切换";
 
-"dashboard.vpn.change_location.alert.title" = "更改位置";
+"dashboard.vpn.change_location.alert.title" = "更改位置？";
 "dashboard.vpn.change_location.alert.message" = "连接到新位置时，您的VPN将短暂断开连接。";
 "dashboard.vpn.change_location.alert.button.connect" = "连接";
 

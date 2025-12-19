@@ -63,6 +63,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         static let persistentConnection = "PersistentConnection" // legacy
 
+        static let showReconnectNotifications = "ShowReconnectNotifications"
+
         static let mace = "MACE" // legacy
         
         static let visibleTiles = "VisibleTiles"
@@ -514,6 +516,18 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
     
+    var showReconnectNotifications: Bool? {
+        get {
+            guard let value = backend.object(forKey: Entries.showReconnectNotifications) as? Bool else {
+                return nil
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: Entries.showReconnectNotifications)
+        }
+    }
+    
     var ikeV2IntegrityAlgorithm: String {
         get {
             guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String else {
@@ -716,6 +730,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     func reset() {
         backend.removeObject(forKey: Entries.persistentConnection)
+        backend.removeObject(forKey: Entries.showReconnectNotifications)
         backend.removeObject(forKey: Entries.mace)
         backend.removeObject(forKey: Entries.vpnType)
         backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)

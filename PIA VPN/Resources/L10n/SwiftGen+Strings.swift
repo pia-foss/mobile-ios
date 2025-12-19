@@ -244,8 +244,8 @@ internal enum L10n {
           internal enum Alert {
             /// Your VPN will briefly disconnect while connecting to the new location.
             internal static let message = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.message", fallback: "Your VPN will briefly disconnect while connecting to the new location.")
-            /// Changing location
-            internal static let title = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.title", fallback: "Changing location")
+            /// Changing Location?
+            internal static let title = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.title", fallback: "Changing Location?")
             internal enum Button {
               /// Connect
               internal static let connect = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.button.connect", fallback: "Connect")
@@ -1105,6 +1105,12 @@ internal enum L10n {
           internal static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer", fallback: "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.")
           /// PIA MACE™
           internal static let title = L10n.tr("Localizable", "settings.application_settings.mace.title", fallback: "PIA MACE™")
+        }
+        internal enum ReconnectNotifications {
+          /// Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.
+          internal static let footer = L10n.tr("Localizable", "settings.application_settings.reconnect_notifications.footer", fallback: "Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.")
+          /// Reconnect Notifications
+          internal static let title = L10n.tr("Localizable", "settings.application_settings.reconnect_notifications.title", fallback: "Reconnect Notifications")
         }
       }
       internal enum Cards {

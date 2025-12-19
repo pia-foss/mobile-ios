@@ -13,12 +13,21 @@ extension DashboardViewController: ServerSelectionDelegate {
     func didSelectServer(_ server: Server) {
         let isConnected = Client.providers.vpnProvider.isVPNConnected
         let currentServer = Client.preferences.displayedServer
+        let showReconnectNotifications = Client.preferences.showReconnectNotifications
 
-        if isConnected {
-            guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
-                return
-            }
+        // If disconnected, connect right away
+        if !isConnected {
+            connect(to: server)
+            return
+        }
 
+        // If same server was selected, do nothing
+        guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
+            return
+        }
+
+        // Present reconnection warning if enabled in preferences, otherwise reconnect right away
+        if showReconnectNotifications {
             let alert = Macros.alert(
                 L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.title,
                 L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.message

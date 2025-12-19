@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.kill_switch.title" = "Kill switch for VPN";
 "settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
+"settings.application_settings.reconnect_notifications.title" = "Tilkoblingsmeldinger";
+"settings.application_settings.reconnect_notifications.footer" = "Få varsler når VPN kobler til på nytt til en annen plassering. Deaktiver for å slutte å motta disse varslene.";
 "settings.application_settings.leak_protection.title" = "Lekkasjebeskyttelse";
 "settings.application_settings.leak_protection.footer" = "iOS har funksjoner som er utviklet for å fungere utenfor VPN-et, for eksempel AirDrop, CarPlay, AirPlay og delt Internett. Ved å aktivere tilpasset lekkasjebeskyttelse kan du rute denne trafikken gjennom VPN-et, men det kan påvirke hvordan disse funksjonene fungerer. Mer informasjon";
 "settings.application_settings.leak_protection.more_info" = "Mer informasjon";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "For å hindre datalekkasjer trykker du på Bytt nå for å bytte til VPN-protokollen IKEv2 og automatisk koble til på nytt.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Bytt nå";
 
-"dashboard.vpn.change_location.alert.title" = "Endrer plassering";
+"dashboard.vpn.change_location.alert.title" = "Endrer plassering?";
 "dashboard.vpn.change_location.alert.message" = "VPN-en din kobles fra kort mens den kobler til den nye plasseringen.";
 "dashboard.vpn.change_location.alert.button.connect" = "Koble til";
 

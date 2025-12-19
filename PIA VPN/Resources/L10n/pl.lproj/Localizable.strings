@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Aktywny motyw";
 "settings.application_settings.kill_switch.title" = "Wyłącznik awaryjny VPN";
 "settings.application_settings.kill_switch.footer" = "Wyłącznik awaryjny VPN zapobiega dostępowi do internetu, jeśli połączenie VPN jest nawiązywane ponownie. Nie obejmuje to ręcznego rozłączenia.";
+"settings.application_settings.reconnect_notifications.title" = "Powiadomienia o ponownym połączeniu";
+"settings.application_settings.reconnect_notifications.footer" = "Otrzymuj powiadomienia, gdy VPN ponownie łączy się z inną lokalizacją. Wyłącz, aby przestać otrzymywać te powiadomienia.";
 "settings.application_settings.leak_protection.title" = "Ochrona przed wyciekami";
 "settings.application_settings.leak_protection.footer" = "iOS zawiera funkcje zaprojektowane domyślnie do działania poza VPN, takie jak AirDrop, CarPlay, AirPlay i osobiste hotspoty. Włączenie niestandardowej ochrony przed wyciekiem kieruje ten ruch przez VPN, ale może wpłynąć na działanie tych funkcji. Więcej informacji";
 "settings.application_settings.leak_protection.more_info" = "Więcej informacji";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Aby zapobiec wyciekom danych, dotknij opcji Przełącz teraz, aby zmienić protokół na IKEv2 VPN i automatycznie połączyć się ponownie.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Przełącz teraz";
 
-"dashboard.vpn.change_location.alert.title" = "Zmiana lokalizacji";
+"dashboard.vpn.change_location.alert.title" = "Zmiana lokalizacji?";
 "dashboard.vpn.change_location.alert.message" = "Twoja sieć VPN zostanie na krótko rozłączona podczas łączenia z nową lokalizacją.";
 "dashboard.vpn.change_location.alert.button.connect" = "Połącz";
 

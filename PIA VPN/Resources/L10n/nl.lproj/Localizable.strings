@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Actief thema";
 "settings.application_settings.kill_switch.title" = "VPN-killswitch";
 "settings.application_settings.kill_switch.footer" = "De VPN kill switch voorkomt toegang tot internet als de VPN-verbinding opnieuw tot stand wordt gebracht. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
+"settings.application_settings.reconnect_notifications.title" = "Herverbindingsmeldingen";
+"settings.application_settings.reconnect_notifications.footer" = "Ontvang meldingen wanneer de VPN opnieuw verbinding maakt met een andere locatie. Schakel uit om deze meldingen niet meer te ontvangen.";
 "settings.application_settings.leak_protection.title" = "Lekbescherming";
 "settings.application_settings.leak_protection.footer" = "iOS bevat functies die ontworpen zijn om standaard te werken buiten het VPN, zoals AirDrop, CarPlay, AirPlay en persoonlijke hotspots. Het inschakelen van aangepaste lekbescherming leidt dit verkeer om via het VPN, maar kan de werking van deze functies beïnvloeden. Meer info";
 "settings.application_settings.leak_protection.more_info" = "Meer info";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu\" om te wijzigen naar het IKEv2 VPN-protocol en automatisch opnieuw verbinding te maken.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Schakel nu";
 
-"dashboard.vpn.change_location.alert.title" = "Locatie wijzigen";
+"dashboard.vpn.change_location.alert.title" = "Locatie wijzigen?";
 "dashboard.vpn.change_location.alert.message" = "Je VPN wordt kort losgekoppeld tijdens het verbinden met de nieuwe locatie.";
 "dashboard.vpn.change_location.alert.button.connect" = "Verbinden";
 

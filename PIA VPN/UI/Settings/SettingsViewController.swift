@@ -299,6 +299,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         guard let action = pendingVPNAction else {
             commitNMTPreferences()
             commitAppPreferences()
+            pendingPreferences.commit()
             super.dismissModal()
             return
         }

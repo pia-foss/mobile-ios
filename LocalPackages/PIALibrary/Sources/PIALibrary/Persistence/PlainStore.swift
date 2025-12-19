@@ -22,7 +22,7 @@
 
 import Foundation
 
-protocol PlainStore: class {
+protocol PlainStore: AnyObject {
 
     // MARK: Account
         
@@ -92,6 +92,8 @@ protocol PlainStore: class {
     // MARK: Preferences
     
     var isPersistentConnection: Bool? { get set }
+
+    var showReconnectNotifications: Bool? { get set }
 
     var nmtMigrationSuccess: Bool? { get set }
 

@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "النسق النشط";
 "settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
 "settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
+"settings.application_settings.reconnect_notifications.title" = "إشعارات إعادة الاتصال";
+"settings.application_settings.reconnect_notifications.footer" = "احصل على تنبيهات عندما يعيد VPN الاتصال بموقع مختلف. قم بالتعطيل لإيقاف تلقي هذه الإشعارات.";
 "settings.application_settings.leak_protection.title" = "حماية من تسريب المعلومات";
 "settings.application_settings.leak_protection.footer" = "يتضمن نظام iOS ميزات مصممة للعمل خارج شبكة VPN افتراضيًا مثل AirDrop و CarPlay و AirPlay ونقاط الاتصال الشخصية. يؤدي تمكين الحماية المخصصة من تسريب المعلومات إلى توجيه حركة البيانات عبر VPN ولكنه قد يؤثر على كيفية عمل هذه الميزات. المزيد من المعلومات";
 "settings.application_settings.leak_protection.more_info" = "المزيد من المعلومات";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "لمنع تسرب البيانات، اضغط على التبديل الآن للتغير إلى بروتوكول IKEv2 VPN وإعادة الاتصال تلقائيًا.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "التبديل الآن";
 
-"dashboard.vpn.change_location.alert.title" = "تغيير الموقع";
+"dashboard.vpn.change_location.alert.title" = "تغيير الموقع؟";
 "dashboard.vpn.change_location.alert.message" = "سينقطع اتصال VPN مؤقتًا أثناء الاتصال بالموقع الجديد.";
 "dashboard.vpn.change_location.alert.button.connect" = "اتصال";
 

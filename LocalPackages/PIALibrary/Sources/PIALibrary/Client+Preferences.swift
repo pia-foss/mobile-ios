@@ -26,12 +26,14 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 @available(tvOS 17.0, *)
-private protocol PreferencesStore: class {
+private protocol PreferencesStore: AnyObject {
     var preferredServer: Server? { get set }
     
     var lastConnectedRegion: Server? { get set }
     
     var isPersistentConnection: Bool { get set }
+
+    var showReconnectNotifications: Bool { get set }
         
     var mace: Bool { get set }
     
@@ -88,6 +90,7 @@ private extension PreferencesStore {
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
+        showReconnectNotifications = source.showReconnectNotifications
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
@@ -161,6 +164,16 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.isPersistentConnection = newValue
+            }
+        }
+        
+        /// Enables automatic VPN reconnection.
+        public fileprivate(set) var showReconnectNotifications: Bool {
+            get {
+                return accessedDatabase.plain.showReconnectNotifications ?? defaults.showReconnectNotifications
+            }
+            set {
+                accessedDatabase.plain.showReconnectNotifications = newValue
             }
         }
         
@@ -503,6 +516,7 @@ extension Client.Preferences {
             preferredServer = nil
             lastConnectedRegion = nil
             isPersistentConnection = true
+            showReconnectNotifications = true
             mace = false
             useWiFiProtection = true
             trustCellularData = false
@@ -566,6 +580,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var isPersistentConnection: Bool
+        
+        /// :nodoc:
+        public var showReconnectNotifications: Bool
         
         /// :nodoc:
         public var mace: Bool

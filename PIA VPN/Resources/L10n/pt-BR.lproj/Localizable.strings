@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Tema ativo";
 "settings.application_settings.kill_switch.title" = "Kill switch de VPN";
 "settings.application_settings.kill_switch.footer" = "O kill switch do VPN impede o acesso à internet se a conexão de VPN estiver se reconectando. Isto exclui a desconexão manual.";
+"settings.application_settings.reconnect_notifications.title" = "Notificações de reconexão";
+"settings.application_settings.reconnect_notifications.footer" = "Receba alertas quando a VPN estiver se reconectando a um local diferente. Desative para parar de receber essas notificações.";
 "settings.application_settings.leak_protection.title" = "Proteção contra vazamentos";
 "settings.application_settings.leak_protection.footer" = "O iOS inclui recursos projetados para operar fora da VPN por padrão, como AirDrop, CarPlay, AirPlay e Acesso Pessoal. A ativação da proteção personalizada contra vazamentos roteia esse tráfego por meio da VPN, mas pode afetar o funcionamento desses recursos. Mais informações";
 "settings.application_settings.leak_protection.more_info" = "Mais informações";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Para evitar vazamentos de dados, toque em “Alternar agora” para mudar para o protocolo VPN IKEv2 e reconectar automaticamente.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Alternar agora";
 
-"dashboard.vpn.change_location.alert.title" = "Alterando a localização";
+"dashboard.vpn.change_location.alert.title" = "Alterando a localização?";
 "dashboard.vpn.change_location.alert.message" = "Sua VPN se desconectará brevemente ao conectar à nova localização.";
 "dashboard.vpn.change_location.alert.button.connect" = "Conectar";
 

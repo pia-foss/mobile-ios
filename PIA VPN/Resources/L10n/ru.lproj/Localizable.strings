@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "Активная тема";
 "settings.application_settings.kill_switch.title" = "Авторазрыв соединения";
 "settings.application_settings.kill_switch.footer" = "Функция авторазрыва соединения рвет Интернет-соединение при отключении VPN. Она не срабатывает при ручном отключении VPN.";
+"settings.application_settings.reconnect_notifications.title" = "Уведомления о переподключении";
+"settings.application_settings.reconnect_notifications.footer" = "Получайте уведомления, когда VPN переподключается к другому местоположению. Отключите, чтобы больше не получать эти уведомления.";
 "settings.application_settings.leak_protection.title" = "Защита от утечек";
 "settings.application_settings.leak_protection.footer" = "iOS включает функции, по умолчанию предназначенные для работы вне VPN, такие как AirDrop, CarPlay, AirPlay и Персональная точка доступа. Включение защиты от утечек перенаправляет этот трафик через VPN, но может отразиться на работе этих функций. Подробнее";
 "settings.application_settings.leak_protection.more_info" = "Подробнее";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "Для предотвращения утечек данных, нажмите «Переключить сейчас», чтобы перейти на протокол IKEv2 VPN и автоматически переподключиться.";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Переключить сейчас";
 
-"dashboard.vpn.change_location.alert.title" = "Изменение местоположения";
+"dashboard.vpn.change_location.alert.title" = "Изменение местоположения?";
 "dashboard.vpn.change_location.alert.message" = "Ваш VPN на короткое время отключится при подключении к новому местоположению.";
 "dashboard.vpn.change_location.alert.button.connect" = "Подключиться";
 

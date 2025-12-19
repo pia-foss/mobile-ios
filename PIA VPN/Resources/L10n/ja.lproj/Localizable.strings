@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "アクティブなテーマ";
 "settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
 "settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
+"settings.application_settings.reconnect_notifications.title" = "再接続通知";
+"settings.application_settings.reconnect_notifications.footer" = "VPNが別の場所に再接続しているときにアラートを受け取ります。これらの通知を受け取らないようにするには無効にしてください。";
 "settings.application_settings.leak_protection.title" = "漏えい防止";
 "settings.application_settings.leak_protection.footer" = "iOSには、デフォルトでAirDrop、CarPlay、AirPlay、パーソナルホットスポットなど、VPNの外部で動作するように設計された機能が含まれています。カスタムリーク保護機能を有効にすると、このトラフィックはVPN経由でルーティングされますが、これらの機能の動作に影響する可能性があります。詳細";
 "settings.application_settings.leak_protection.more_info" = "詳細";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "データ漏洩を防ぐには、[今すぐ切り替える]をタップしてIKEv2 VPNプロトコルに変更し、自動的に再接続してください。";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "今すぐ切り替える";
 
-"dashboard.vpn.change_location.alert.title" = "場所を変更中";
+"dashboard.vpn.change_location.alert.title" = "場所を変更中？";
 "dashboard.vpn.change_location.alert.message" = "新しい場所に接続する間、VPNが一時的に切断されます。";
 "dashboard.vpn.change_location.alert.button.connect" = "接続";
 

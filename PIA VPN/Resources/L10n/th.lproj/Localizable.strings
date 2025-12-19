@@ -137,6 +137,8 @@
 "settings.application_settings.active_theme.title" = "ธีมที่ใช้งานอยู่";
 "settings.application_settings.kill_switch.title" = "ปุ่มตัดการทำงาน VPN";
 "settings.application_settings.kill_switch.footer" = "Kill switch ของ VPN จะป้องกันการเข้าถึงอินเทอร์เน็ตหากการเชื่อมต่อ VPN กำลังเชื่อมต่อใหม่ ไม่รวมการตัดการเชื่อมต่อด้วยตนเอง";
+"settings.application_settings.reconnect_notifications.title" = "การแจ้งเตือนการเชื่อมต่อใหม่";
+"settings.application_settings.reconnect_notifications.footer" = "รับการแจ้งเตือนเมื่อ VPN กำลังเชื่อมต่อใหม่ไปยังสถานที่อื่น ปิดการใช้งานเพื่อหยุดรับการแจ้งเตือนเหล่านี้";
 "settings.application_settings.leak_protection.title" = "การป้องกันการรั่วไหล";
 "settings.application_settings.leak_protection.footer" = "iOS มีคุณสมบัติที่ออกแบบมาเพื่อทำงานนอก VPN ตามค่าเริ่มต้น เช่น AirDrop, CarPlay, AirPlay และฮอตสปอตส่วนบุคคล การเปิดใช้งานการปกป้องการรั่วไหลแบบกำหนดเองจะนำทางการรับส่งข้อมูลเหล่านี้ผ่าน VPN แต่อาจส่งผลกระทบต่อวิธีการทำงานของคุณสมบัติดังกล่าว ข้อมูลเพิ่มเติม";
 "settings.application_settings.leak_protection.more_info" = "ข้อมูลเพิ่มเติม";
@@ -235,7 +237,7 @@
 "dashboard.vpn.leakprotection.ikev2.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ เปลี่ยนเลย เพื่อเปลี่ยนเป็นโปรโตคอล VPN IKEv2 และเชื่อมต่อใหม่โดยอัตโนมัติ";
 "dashboard.vpn.leakprotection.ikev2.alert.cta1" = "เปลี่ยนเลย";
 
-"dashboard.vpn.change_location.alert.title" = "กำลังเปลี่ยนตำแหน่ง";
+"dashboard.vpn.change_location.alert.title" = "กำลังเปลี่ยนตำแหน่ง?";
 "dashboard.vpn.change_location.alert.message" = "VPN ของคุณจะตัดการเชื่อมต่อชั่วคราวในขณะที่เชื่อมต่อกับตำแหน่งใหม่";
 "dashboard.vpn.change_location.alert.button.connect" = "เชื่อมต่อ";
 
