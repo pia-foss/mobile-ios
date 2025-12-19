@@ -112,7 +112,7 @@ class DashboardViewController: AutolayoutViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        removeObservers()
         stopConnectionTimer()
     }
     
@@ -130,31 +130,7 @@ class DashboardViewController: AutolayoutViewController {
 
         setupMenu()
         
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
-        nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
-        nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
-        nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(updateFixedTileWithAnimation), name: .PIAUpdateFixedTiles, object: nil)
-        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIAQuickSettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
-        nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
-        nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
-        nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
-        nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
-        nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
-        nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
-        nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
-        
-        nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
-        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
-        nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
-        nc.addObserver(self, selector: #selector(dismissModalViewController), name: .PIADashboardShouldDismissModal, object: nil)
+        addObservers()
         
         self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
@@ -214,6 +190,56 @@ class DashboardViewController: AutolayoutViewController {
         // check account email
         checkAccountEmail()
 
+        // allows CollectionView updates when visible
+        addCollectionViewObservers()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Avoids CollectionView updates when not visible
+        removeCollectionViewObservers()
+    }
+
+    private func addObservers() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidInstall(notification:)), name: .PIAVPNDidInstall, object: nil)
+        nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+        nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIAQuickSettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
+        nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
+        nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidFail), name: .PIAVPNDidFail, object: nil)
+        nc.addObserver(self, selector: #selector(unauthorized), name: .Unauthorized, object: nil)
+        nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
+        nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
+        nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
+        nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
+        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
+        nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
+        nc.addObserver(self, selector: #selector(dismissModalViewController), name: .PIADashboardShouldDismissModal, object: nil)
+    }
+
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func addCollectionViewObservers() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(updateTiles), name: .PIATilesDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateFixedTileWithAnimation), name: .PIAUpdateFixedTiles, object: nil)
+    }
+
+    private func removeCollectionViewObservers() {
+        let nc = NotificationCenter.default
+        nc.removeObserver(self, name: .PIATilesDidChange, object: nil)
+        nc.removeObserver(self, name: .PIAUpdateFixedTiles, object: nil)
     }
     
     private func checkTVOSTokenToBind() {
