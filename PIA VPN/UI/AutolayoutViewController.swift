@@ -21,7 +21,6 @@
 //
 
 import UIKit
-import Lottie
 import PIALibrary
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {
@@ -72,9 +71,13 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     open var status: ViewControllerStatus = .initial {
         didSet { reloadFormElements() }
     }
-    
+
+    /// Loading view controller for showing animations
+    private var loadingViewController: LoadingViewController?
+
     deinit {
         NotificationCenter.default.removeObserver(self)
+        loadingViewController?.view.removeFromSuperview()
     }
     
     /// :nodoc:
@@ -221,139 +224,55 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 }
 
 extension AutolayoutViewController: AnimatingLoadingDelegate {
-    
-    private struct LottieRepos {
-        static var graphLoad: AnimationView?
-        static var containerView: UIView?
-    }
-    
-    var graphLoad: AnimationView? {
-        get {
-            return objc_getAssociatedObject(self, &LottieRepos.graphLoad) as? AnimationView
-        }
-        set {
-            if let unwrappedValue = newValue {
-                objc_setAssociatedObject(self, &LottieRepos.graphLoad, unwrappedValue as AnimationView?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
-    }
-
-    var containerView: UIView? {
-        get {
-            return LottieRepos.containerView
-        }
-        set {
-            if let unwrappedValue = newValue {
-                LottieRepos.containerView = unwrappedValue
-            }
-        }
-    }
 
     @objc public func showLoadingAnimation() {
-        if graphLoad == nil {
-            containerView = UIView(frame: UIScreen.main.bounds)
-            containerView?.backgroundColor = Theme.current.palette.appearance == .dark ?
-                UIColor.black.withAlphaComponent(0.72) :
-                UIColor.piaGrey1.withAlphaComponent(0.75)
-            graphLoad = AnimationView(name: "pia-spinner")
+        // If already showing, keep it
+        guard loadingViewController == nil else { return }
+
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first
+        else {
+            return
         }
-        addLoadingAnimation()
+
+        // Lock UI
+        window.isUserInteractionEnabled = false
+
+        let loadingVC = LoadingViewController()
+        loadingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingViewController = loadingVC
+
+        window.addSubview(loadingVC.view)
+
+        setupLoadingConstraints(
+            loadingView: loadingVC.view,
+            in: window
+        )
     }
-    
-    private func addLoadingAnimation() {
-        graphLoad?.loopMode = .loop
-        if let graphLoad = graphLoad,
-            let containerView = containerView {
-            if let key = self.navigationController?.view {
-                key.addSubview(containerView)
-                key.addSubview(graphLoad)
-            }
-            setLoadingConstraints()
-            graphLoad.play()
-        }
-    }
-    
+
     @objc public func hideLoadingAnimation() {
-        graphLoad?.stop()
-        graphLoad?.removeFromSuperview()
-        containerView?.removeFromSuperview()
+        // Unlock UI
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.isUserInteractionEnabled = true
+
+        loadingViewController?.view.removeFromSuperview()
+        loadingViewController = nil
     }
-    
-    private func setLoadingConstraints() {
-        if let graphLoad = graphLoad,
-            let keyView = self.navigationController?.view,
-            let containerView = containerView {
-             
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            graphLoad.translatesAutoresizingMaskIntoConstraints = false
 
-            NSLayoutConstraint(item: containerView,
-                               attribute: .left,
-                               relatedBy: .equal,
-                               toItem: keyView,
-                               attribute: .left,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-
-            NSLayoutConstraint(item: containerView,
-                               attribute: .right,
-                               relatedBy: .equal,
-                               toItem: keyView,
-                               attribute: .right,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-
-            NSLayoutConstraint(item: containerView,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: keyView,
-                               attribute: .top,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-
-            NSLayoutConstraint(item: containerView,
-                               attribute: .bottom,
-                               relatedBy: .equal,
-                               toItem: keyView,
-                               attribute: .bottom,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-
-            NSLayoutConstraint(item: graphLoad,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: containerView,
-                               attribute: .centerX,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-            
-            NSLayoutConstraint(item: graphLoad,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: containerView,
-                               attribute: .centerY,
-                               multiplier: 1.0,
-                               constant: 0.0).isActive = true
-            
-            let lottieWidth = UIScreen.main.bounds.width/4
-
-            NSLayoutConstraint(item: graphLoad,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .width,
-                               multiplier: 1.0,
-                               constant: lottieWidth).isActive = true
-            
-            NSLayoutConstraint(item: graphLoad,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .height,
-                               multiplier: 1.0,
-                               constant: lottieWidth).isActive = true
-
-        }
+    private func setupLoadingConstraints(
+        loadingView: UIView,
+        in parentView: UIView
+    ) {
+        // Loading view centered in parent with fixed size
+        let loadingSize = UIScreen.main.bounds.width / 4
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
+            loadingView.widthAnchor.constraint(equalToConstant: loadingSize),
+            loadingView.heightAnchor.constraint(equalToConstant: loadingSize)
+        ])
     }
 
 }

@@ -110,14 +110,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>lottie-ios</string>
-			<key>Copyright</key>
-			<string>Copyright 2018 Airbnb, Inc.</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/airbnb/lottie-ios/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>nanopb</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2011 Petteri Aimonen</string>

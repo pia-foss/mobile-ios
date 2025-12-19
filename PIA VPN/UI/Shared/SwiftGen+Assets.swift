@@ -464,6 +464,7 @@ internal enum Asset {
     internal static let imageWalkthrough2 = ImageAsset(name: "image-walkthrough-2")
     internal static let imageWalkthrough3 = ImageAsset(name: "image-walkthrough-3")
     internal static let navLogo = ImageAsset(name: "nav-logo")
+    internal static let piaSpinner = ImageAsset(name: "pia-spinner")
     internal static let qrCode = ImageAsset(name: "qr-code")
   }
 }

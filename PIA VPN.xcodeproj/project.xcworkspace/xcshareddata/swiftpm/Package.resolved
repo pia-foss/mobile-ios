@@ -82,15 +82,6 @@
       }
     },
     {
-      "identity" : "lottie-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/lottie-ios.git",
-      "state" : {
-        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
-        "version" : "3.5.0"
-      }
-    },
-    {
       "identity" : "mobile-ios-networking",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-networking.git",
