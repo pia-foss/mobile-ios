@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "应用程序信息";
 "settings.application_information.debug.title" = "向支持人员发送调试日志";
+"settings.application_information.debug_logging.title" = "启用调试日志记录";
 "settings.application_information.debug.failure.title" = "提交时出错";
 "settings.application_information.debug.failure.message" = "调试信息无法提交。";
 "settings.application_information.debug.empty.title" = "调试信息为空";

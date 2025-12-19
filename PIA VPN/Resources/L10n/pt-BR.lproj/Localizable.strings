@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "INFORMAÇÕES DO APLICATIVO";
 "settings.application_information.debug.title" = "Enviar log de depuração para suporte";
+"settings.application_information.debug_logging.title" = "Ativar registro de depuração";
 "settings.application_information.debug.failure.title" = "Erro durante o envio";
 "settings.application_information.debug.failure.message" = "As informações de depuração não puderam ser enviadas.";
 "settings.application_information.debug.empty.title" = "Informações de depuração em branco";

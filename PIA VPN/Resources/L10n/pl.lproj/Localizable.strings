@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "INFORMACJE O APLIKACJI";
 "settings.application_information.debug.title" = "Wyślij dziennik debugowania do działu obsługi";
+"settings.application_information.debug_logging.title" = "Włącz rejestrowanie debugowania";
 "settings.application_information.debug.failure.title" = "Wystąpił błąd w czasie wysyłania";
 "settings.application_information.debug.failure.message" = "Nie udało się wysłać informacji z debugowania.";
 "settings.application_information.debug.empty.title" = "Pusty pakiet informacji z debugowania.";

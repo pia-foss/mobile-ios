@@ -1064,6 +1064,10 @@ internal enum L10n {
             internal static let title = L10n.tr("Localizable", "settings.application_information.debug.success.title", fallback: "Debug information submitted")
           }
         }
+        internal enum DebugLogging {
+          /// Enable Debug Logging
+          internal static let title = L10n.tr("Localizable", "settings.application_information.debug_logging.title", fallback: "Enable Debug Logging")
+        }
       }
       internal enum ApplicationSettings {
         /// APPLICATION SETTINGS

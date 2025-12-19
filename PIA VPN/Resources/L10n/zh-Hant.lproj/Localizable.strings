@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "應用程式資料";
 "settings.application_information.debug.title" = "將偵錯記錄傳送到支援中心";
+"settings.application_information.debug_logging.title" = "啟用偵錯記錄";
 "settings.application_information.debug.failure.title" = "提交時發生錯誤";
 "settings.application_information.debug.failure.message" = "無法提交偵錯資料。";
 "settings.application_information.debug.empty.title" = "偵錯資料為空白";

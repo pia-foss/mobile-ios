@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "INFORMATIN OM APPLIKATIONEN";
 "settings.application_information.debug.title" = "Send fejlfindingslog til support";
+"settings.application_information.debug_logging.title" = "Aktivér fejlfindingslogning";
 "settings.application_information.debug.failure.title" = "Kunne ikke indsende";
 "settings.application_information.debug.failure.message" = "Fejloplysninger kunne ikke indsendes.";
 "settings.application_information.debug.empty.title" = "Fejloplysninger tom";

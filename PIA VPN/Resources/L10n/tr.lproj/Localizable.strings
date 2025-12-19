@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "UYGULAMA BİLGİLERİ";
 "settings.application_information.debug.title" = "Hata Ayıklama Kaydını Destek Ekibine Gönderin";
+"settings.application_information.debug_logging.title" = "Hata Ayıklama Günlük Kaydını Etkinleştir";
 "settings.application_information.debug.failure.title" = "Gönderme sırasında hata";
 "settings.application_information.debug.failure.message" = "Hata bulma bilgileri gönderilemedi.";
 "settings.application_information.debug.empty.title" = "Hata bulma bilgileri boş";

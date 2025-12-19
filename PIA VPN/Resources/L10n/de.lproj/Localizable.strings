@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "ANWENDUNGSINFORMATIONEN";
 "settings.application_information.debug.title" = "Debug-Daten an Support senden";
+"settings.application_information.debug_logging.title" = "Debug-Protokollierung aktivieren";
 "settings.application_information.debug.failure.title" = "Fehler während Übermittlung";
 "settings.application_information.debug.failure.message" = "Debug-Daten konnten nicht übermittelt werden.";
 "settings.application_information.debug.empty.title" = "Debug-Daten leer";

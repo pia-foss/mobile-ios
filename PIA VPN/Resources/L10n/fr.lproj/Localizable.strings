@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "INFORMATIONS DE L'APPLICATION";
 "settings.application_information.debug.title" = "Envoyer le journal de débogage à l'assistance";
+"settings.application_information.debug_logging.title" = "Activer la journalisation de débogage";
 "settings.application_information.debug.failure.title" = "Erreur au cours de l'envoi";
 "settings.application_information.debug.failure.message" = "Les informations de débogage n'ont pas pu être envoyées.";
 "settings.application_information.debug.empty.title" = "Informations de débogage vides";
