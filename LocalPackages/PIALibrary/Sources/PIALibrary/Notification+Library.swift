@@ -49,7 +49,12 @@ extension Notification.Name {
     ///
     /// - Seealso: `Client.Daemons`
     public static let PIAServerHasBeenUpdated = Notification.Name("PIAServerHasBeenUpdated")
-    
+
+    /// The VPN is changing server
+    ///
+    /// - Seealso: `Client.Daemons`
+    public static let PIAVPNIsChangingServer = Notification.Name("PIAVPNIsChangingServer")
+
     public static let PIASettingsHaveChanged = Notification.Name("PIASettingsHaveChanged")
     public static let PIAQuickSettingsHaveChanged = Notification.Name("PIAQuickSettingsHaveChanged")
 
