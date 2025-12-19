@@ -1,6 +1,8 @@
 
 import Foundation
 
+private let log = PIALogger.logger(for: RefreshAuthTokensChecker.self)
+
 protocol RefreshAuthTokensCheckerType {
     typealias Completion = ((NetworkRequestError?) -> Void)
     func refreshIfNeeded(completion: @escaping Completion)
@@ -27,18 +29,23 @@ class RefreshAuthTokensChecker: RefreshAuthTokensCheckerType {
     func refreshIfNeeded(completion: @escaping Completion) {
         
         guard !isRefreshing else {
+            log.debug("Already refreshing, skipping.")
             completion(nil)
             return
         }
         
         switch (shouldRefreshApiToken(), shouldRefreshVpnToken()) {
         case (true, true):
+            log.debug("Refreshing both API and VPN tokens.")
             refreshBothTokens(with: completion)
         case (true, false):
+            log.debug("Refreshing API token only.")
             refreshApiToken(with: completion)
         case(false, true):
+            log.debug("Refreshing VPN token only.")
             refreshVpnToken(with: completion)
         case(false, false):
+            log.debug("No tokens need refresh.")
             completion(nil)
         }
     }
@@ -53,11 +60,18 @@ private extension RefreshAuthTokensChecker {
         isRefreshing = true
         refreshAPITokenUseCase() { refreshApiTokenError in
             if let refreshApiTokenError {
+                log.debug("API token refresh failed with error: \(refreshApiTokenError)")
                 self.isRefreshing = false
                 completion(refreshApiTokenError)
             } else {
+                log.debug("API token refresh completed successfully, starting VPN token refresh.")
                 self.refreshVpnTokenUseCase() { refreshVpnTokenError in
                     self.isRefreshing = false
+                    if let refreshVpnTokenError {
+                        log.debug("VPN token refresh failed with error: \(refreshVpnTokenError)")
+                    } else {
+                        log.debug("Both tokens refresh completed successfully.")
+                    }
                     completion(refreshApiTokenError)
                 }
             }
@@ -68,6 +82,11 @@ private extension RefreshAuthTokensChecker {
         isRefreshing = true
         refreshAPITokenUseCase() { error in
             self.isRefreshing = false
+            if let error {
+                log.debug("API token refresh failed with error: \(error)")
+            } else {
+                log.debug("API token refresh completed successfully.")
+            }
             completion(error)
         }
     }
@@ -76,6 +95,11 @@ private extension RefreshAuthTokensChecker {
         isRefreshing = true
         refreshVpnTokenUseCase() { error in
             self.isRefreshing = false
+            if let error {
+                log.debug("VPN token refresh failed with error: \(error)")
+            } else {
+                log.debug("VPN token refresh completed successfully.")
+            }
             completion(error)
         }
     }
@@ -88,18 +112,28 @@ private extension RefreshAuthTokensChecker {
     
     func shouldRefreshApiToken() -> Bool {
         guard let apiToken = apiTokenProvider.getAPIToken() else {
-             return true
+            log.debug("API token is missing, refresh needed.")
+            return true
         }
 
-        return shouldRefresh(with: apiToken.expiresAt)
+        let needsRefresh = shouldRefresh(with: apiToken.expiresAt)
+        if needsRefresh {
+            log.debug("API token expires at \(apiToken.expiresAt), refresh needed.")
+        }
+        return needsRefresh
     }
     
     func shouldRefreshVpnToken() -> Bool {
         guard let vpnToken = vpnTokenProvier.getVpnToken() else {
-             return true
+            log.debug("VPN token is missing, refresh needed.")
+            return true
         }
-        
-        return shouldRefresh(with: vpnToken.expiresAt)
+
+        let needsRefresh = shouldRefresh(with: vpnToken.expiresAt)
+        if needsRefresh {
+            log.debug("VPN token expires at \(vpnToken.expiresAt), refresh needed.")
+        }
+        return needsRefresh
     }
     
     

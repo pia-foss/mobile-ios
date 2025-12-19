@@ -1,6 +1,8 @@
 
 import Foundation
 
+fileprivate let log = PIALogger.logger(for: GetDedicatedIPsUseCase.self)
+
 public protocol GetDedicatedIPsUseCaseType {
     typealias Completion = ((Result<[DedicatedIPInformation], NetworkRequestError>) -> Void)
     func callAsFunction(dipTokens: [String], completion: @escaping Completion)
@@ -19,14 +21,17 @@ class GetDedicatedIPsUseCase: GetDedicatedIPsUseCaseType {
         refreshAuthTokensChecker.refreshIfNeeded { [weak self] error in
             guard let self else { return }
             if let error {
+                log.error("GetDedicatedIPs failed with tokens checker error: \(error.localizedDescription)")
                 completion(.failure(error))
             } else {
                 networkClient.executeRequest(with: makeConfiguration(dipTokens: dipTokens)) { error, dataResponse in
                     if let error {
+                        log.error("GetDedicatedIPs failed with request error: \(error.localizedDescription)")
                         self.handleErrorResponse(error, completion: completion)
                     } else if let dataResponse {
                         self.handleDataResponse(dataResponse, completion: completion)
                     } else {
+                        log.error("GetDedicatedIPs failed without error or dataResponse.")
                         completion(.failure(NetworkRequestError.allConnectionAttemptsFailed()))
                     }
                 }
