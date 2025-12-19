@@ -26,28 +26,44 @@ import Foundation
  Provides useful validation methods.
  */
 public class Validator {
- 
+    public enum EmailValidationError: Error {
+        case emailIsEmpty
+        case emailIsInvalid
+    }
+
     /**
      Validates an email address.
      
      - Parameter email: The email address to validate.
-     - Returns: `true` if the address syntax is valid.
+     - Throws: A `EmailValidationError` if validation fails.
      */
-    public static func validate(email: String) -> Bool {
-        return NSPredicate(format: "SELF MATCHES %@", "^[^\\s]+@((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$").evaluate(with: email)
-    }
+    public static func validate(email: String?) throws(EmailValidationError) {
+        guard let email, !email.isEmpty else {
+            throw EmailValidationError.emailIsEmpty
+        }
 
-    /**
-     Validates a gift code.
-     
-     - Parameter giftCode: The gift code to validate.
-     - Returns: `true` if the code syntax is valid.
-     */
-    public static func validate(giftCode: String, withDashes: Bool = false) -> Bool {
-        if withDashes {
-            return NSPredicate(format: "SELF MATCHES %@", "^(\\d{4}-){3}\\d{4}$").evaluate(with: giftCode)
-        } else {
-            return NSPredicate(format: "SELF MATCHES %@", "^\\d{16}$").evaluate(with: giftCode)
+        // Check for consecutive dots
+        guard !email.contains("..") else {
+            throw EmailValidationError.emailIsInvalid
+        }
+
+        // Check for multiple @ symbols
+        guard email.filter({ $0 == "@" }).count == 1 else {
+            throw EmailValidationError.emailIsInvalid
+        }
+
+        // Email regex explanation:
+        // Local part: ^[A-Za-z0-9]([A-Za-z0-9._+-]*[A-Za-z0-9])?
+        //   - Must start with alphanumeric
+        //   - Can contain letters, numbers, dots, underscores, plus, hyphen in the middle
+        //   - Must end with alphanumeric (or be single character)
+        //   - This prevents leading/trailing dots
+        // Domain part: @((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$
+        //   - Standard domain validation
+        let emailRegex = "^[A-Za-z0-9]([A-Za-z0-9._+-]*[A-Za-z0-9])?@((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$"
+
+        guard NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email) else {
+            throw EmailValidationError.emailIsInvalid
         }
     }
 }

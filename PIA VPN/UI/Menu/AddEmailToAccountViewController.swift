@@ -88,14 +88,19 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     }
 
     @IBAction private func signUp(_ sender: Any?) {
+        let email = textEmail.text?.trimmed() ?? ""
 
-        guard let email = textEmail.text?.trimmed(), Validator.validate(email: email) else {
-            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                    message: L10n.Localizable.Set.Email.Error.validation)
+        do {
+            try Validator.validate(email: email)
+        } catch {
+            Macros.displayImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: error.errorMessage
+            )
             self.status = .error(element: textEmail)
             return
         }
-        
+
         guard termsAndConditionsAgreed else {
             //present term and conditions
             let alert = Macros.alert(L10n.Localizable.Gdpr.Collect.Data.title, L10n.Localizable.Gdpr.Collect.Data.description)

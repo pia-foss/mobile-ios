@@ -113,7 +113,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
         XCTAssertEqual(capturedLoadingState, [])
     
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Welcome.Purchase.Error.validation)
+        XCTAssertEqual(sut.errorMessage, Validator.EmailValidationError.emailIsInvalid.errorMessage)
     }
     
     func test_signup_shows_a_generic_error_when_there_is_no_error_and_no_userAccount() throws {

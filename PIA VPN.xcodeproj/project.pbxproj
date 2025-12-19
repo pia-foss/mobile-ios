@@ -297,6 +297,7 @@
 		3F0EF5CC2EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Core/Extensions/EmailValidationError+ErrorMessage.swift",
 				"Core/Extensions/Server+Automatic.swift",
 				"Core/Extensions/ServerProvider+UI.swift",
 				Core/Models/AboutComponent.swift,

@@ -94,7 +94,7 @@ final class SignupEmailViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertNil(capturedUserAccount)
         XCTAssertEqual(capturedLoadingState, [])
-        XCTAssertEqual(sut.errorMessage, L10n.Welcome.Purchase.Error.validation)
+        XCTAssertEqual(sut.errorMessage, Validator.EmailValidationError.emailIsInvalid.errorMessage)
         XCTAssertTrue(sut.shouldShowErrorMessage)
     }
     

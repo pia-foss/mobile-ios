@@ -360,6 +360,14 @@ internal enum L10n {
         }
       }
     }
+    internal enum Email {
+      internal enum Validation {
+        /// Email can't be empty.
+        internal static let empty = L10n.tr("Localizable", "email.validation.empty", fallback: "Email can't be empty.")
+        /// Invalid email. Please try again.
+        internal static let invalid = L10n.tr("Localizable", "email.validation.invalid", fallback: "Invalid email. Please try again.")
+      }
+    }
     internal enum ErrorAlert {
       internal enum ConnectionError {
         internal enum NoNetwork {

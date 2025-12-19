@@ -110,12 +110,18 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
         guard !isRunningActivity else {
             return
         }
-    
-        guard let email = textEmail.text, Validator.validate(email: email.trimmed()) else {
+
+        let email = textEmail.text?.trimmed() ?? ""
+
+        do {
+            try Validator.validate(email: email)
+        } catch {
             signupEmail = nil
             textEmail.becomeFirstResponder()
-            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                    message: L10n.Welcome.Purchase.Error.validation)
+            Macros.displayImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: error.errorMessage
+            )
             self.status = .error(element: textEmail)
             return
         }
@@ -149,7 +155,7 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
     }
     
     private func reportRestoreFailure(_ optionalError: Error?) {
-        var message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
+        let message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
         if let error = optionalError {
             log.error("Failed to restore payment receipt (error: \(error))")
         } else {

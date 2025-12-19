@@ -135,40 +135,48 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
             let alert = Macros.alert(magicLinkLoginViewController)
             alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
             alert.addActionWithTitle(L10n.Welcome.Login.Magic.Link.send.uppercased(), handler: {
-                
-                let email = magicLinkLoginViewController.email()
-                guard Validator.validate(email: email) else {
-                    Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                            message: L10n.Welcome.Login.Magic.Link.Invalid.email)
-                    return
-                }
-                
-                guard !self.isLogging else {
-                    return
-                }
-                
-                self.showLoadingAnimation()
-                self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
-                    
-                    self.hideLoadingAnimation()
-                    guard error == nil else {
-                        self.handleLoginFailed(error, loginOption: .magicLink)
-                        return
-                    }
-                    
-                    Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image,
-                                                   message: L10n.Welcome.Login.Magic.Link.response)
-                })
-                
+                let email = magicLinkLoginViewController.email().trimmed()
+                self.loginUsingMagicLink(email: email)
             })
             present(alert, animated: true, completion: nil)
         }
         
     }
+
+    private func loginUsingMagicLink(email: String) {
+        do {
+            try Validator.validate(email: email)
+        } catch {
+            Macros.displayImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: error.errorMessage
+            )
+            return
+        }
+        
+        guard !self.isLogging else {
+            return
+        }
+        
+        self.showLoadingAnimation()
+        self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
+            
+            self.hideLoadingAnimation()
+            guard error == nil else {
+                self.handleLoginFailed(error, loginOption: .magicLink)
+                return
+            }
+
+            Macros.displaySuccessImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: L10n.Welcome.Login.Magic.Link.response
+            )
+        })
+    }
     
     @objc private func finishLoginWithMagicLink(notification: Notification) {
         
-        if let userInfo = notification.userInfo, let error = userInfo[NotificationKey.error] as? Error {
+        if let userInfo = notification.userInfo, let _ = userInfo[NotificationKey.error] as? Error {
             displayErrorMessage(errorMessage: L10n.Welcome.Purchase.Error.Connectivity.title)
             return
         }
