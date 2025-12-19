@@ -51,10 +51,8 @@
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
 		AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDA28A6860F00180A33 /* TweetNacl */; };
-		AA36CDDE28A6878000180A33 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDD28A6878000180A33 /* AlamofireImage */; };
 		AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826C28AD185E00CDAC64 /* TweetNacl */; };
 		AABF826F28AD187800CDAC64 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826E28AD187800CDAC64 /* Popover */; };
-		AABF827128AD188700CDAC64 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827028AD188700CDAC64 /* AlamofireImage */; };
 		AABF827328AE2FF500CDAC64 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827228AE2FF500CDAC64 /* GradientProgressBar */; };
 		AABF827528AE2FFE00CDAC64 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827428AE2FFE00CDAC64 /* SideMenu */; };
 		AABF827628AE302300CDAC64 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
@@ -481,7 +479,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7B4C8D2EE7333300EE1F4C /* PIADesignSystem in Frameworks */,
-				AABF827128AD188700CDAC64 /* AlamofireImage in Frameworks */,
 				AABF827628AE302300CDAC64 /* NetworkExtension.framework in Frameworks */,
 				0EE220571F4EF307002805AE /* Security.framework in Frameworks */,
 				0EE220581F4EF307002805AE /* SystemConfiguration.framework in Frameworks */,
@@ -524,7 +521,6 @@
 				AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */,
 				AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */,
 				AA36CDBB28A6622A00180A33 /* TweetNacl in Frameworks */,
-				AA36CDDE28A6878000180A33 /* AlamofireImage in Frameworks */,
 				2909869018566430002D9687 /* Security.framework in Frameworks */,
 				299E58511856BD31004CFD63 /* SystemConfiguration.framework in Frameworks */,
 				299E585F1856C6EE004CFD63 /* libz.dylib in Frameworks */,
@@ -741,7 +737,6 @@
 			packageProductDependencies = (
 				AABF826C28AD185E00CDAC64 /* TweetNacl */,
 				AABF826E28AD187800CDAC64 /* Popover */,
-				AABF827028AD188700CDAC64 /* AlamofireImage */,
 				AABF827228AE2FF500CDAC64 /* GradientProgressBar */,
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
@@ -820,7 +815,6 @@
 				AA36CDC828A6733500180A33 /* DZNEmptyDataSet */,
 				AA36CDCB28A673C900180A33 /* GradientProgressBar */,
 				AA36CDCE28A6746500180A33 /* SideMenu */,
-				AA36CDDD28A6878000180A33 /* AlamofireImage */,
 				3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */,
 				3F7BD9B72EE8A09800EE1F4C /* PIALibrary */,
 			);
@@ -1164,7 +1158,6 @@
 				AA36CDC728A6733500180A33 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				AA36CDCA28A673C900180A33 /* XCRemoteSwiftPackageReference "GradientProgressBar" */,
 				AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */,
-				AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
 				E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
@@ -2894,14 +2887,6 @@
 				version = 6.5.0;
 			};
 		};
-		AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
-			requirement = {
-				kind = exactVersion;
-				version = 4.0.0;
-			};
-		};
 		E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
@@ -2991,11 +2976,6 @@
 			package = AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */;
 			productName = TweetNacl;
 		};
-		AA36CDDD28A6878000180A33 /* AlamofireImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
-			productName = AlamofireImage;
-		};
 		AABF826C28AD185E00CDAC64 /* TweetNacl */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */;
@@ -3005,11 +2985,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA36CDC228A6711300180A33 /* XCRemoteSwiftPackageReference "Popover" */;
 			productName = Popover;
-		};
-		AABF827028AD188700CDAC64 /* AlamofireImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA36CDDC28A6878000180A33 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
-			productName = AlamofireImage;
 		};
 		AABF827228AE2FF500CDAC64 /* GradientProgressBar */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -22,7 +22,6 @@
 
 import Foundation
 import PIALibrary
-import Alamofire
 import UIKit
 
 extension Server: CustomStringConvertible {
@@ -103,5 +102,21 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    func aspectScaled(toFit size: CGSize) -> UIImage? {
+        let aspectWidth = size.width / self.size.width
+        let aspectHeight = size.height / self.size.height
+        let aspectRatio = min(aspectWidth, aspectHeight)
+        
+        let scaledSize = CGSize(
+            width: self.size.width * aspectRatio,
+            height: self.size.height * aspectRatio
+        )
+        
+        let renderer = UIGraphicsImageRenderer(size: scaledSize)
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: scaledSize))
+        }
     }
 }

@@ -28,7 +28,6 @@ import SafariServices
 import SwiftyBeaver
 import PIAWireguard
 import WidgetKit
-import AlamofireImage
 
 private let log = SwiftyBeaver.self
 
@@ -578,7 +577,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.textLabel?.text = section.localizedTitleMessage()
         cell.detailTextLabel?.text = ""
-        cell.imageView?.image = section.imageForSection().af_imageAspectScaled(toFit: CGSize(width: 25, height: 25))
+        cell.imageView?.image = section.imageForSection().aspectScaled(toFit: CGSize(width: 25, height: 25))
 
         switch section {
             case .automation:
