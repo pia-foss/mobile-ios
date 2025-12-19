@@ -28,6 +28,7 @@ private let log = PIALogger.logger(for: HelpSettingsViewController.self)
 class HelpSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    private lazy var switchDebugLogging = UISwitch()
     private lazy var switchShareServiceQualityData = UISwitch()
     
     struct ViewControllerIdentifiers {
@@ -44,6 +45,8 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
                 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        switchDebugLogging.addTarget(self, action: #selector(toggleDebugLogging(_:)), for: .valueChanged)
         
         switchShareServiceQualityData.addTarget(self, action: #selector(toggleShareServiceQualityData(_:)), for: .valueChanged)
 
@@ -73,6 +76,17 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     
     @objc private func reloadSettings() {
         tableView.reloadData()
+    }
+    
+    @objc private func toggleDebugLogging(_ sender: UISwitch) {
+        let preferences = Client.preferences.editable()
+        preferences.debugLogging = sender.isOn
+        preferences.commit()
+        reloadSettings()
+
+        if !sender.isOn {
+            PIALogHandler.logStorage.clear()
+        }
     }
 
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
@@ -128,7 +142,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         switch section {
-        case HelpSections.sendDebugLogs.rawValue:
+        case HelpSections.debugLogging.rawValue:
             cell.textLabel?.text = L10n.Localizable.Settings.Log.information
         case HelpSections.kpiShareStatistics.rawValue:
             configureShareDataFooterCell(cell)
@@ -157,6 +171,10 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
             cell.textLabel?.text = Macros.localizedVersionFullString()
             cell.detailTextLabel?.text = nil
             cell.accessoryType = .none
+        case .debugLogging:
+            cell.accessoryView = switchDebugLogging
+            cell.selectionStyle = .none
+            switchDebugLogging.isOn = Client.preferences.debugLogging
         case .kpiShareStatistics:
             cell.accessoryView = switchShareServiceQualityData
             cell.selectionStyle = .none

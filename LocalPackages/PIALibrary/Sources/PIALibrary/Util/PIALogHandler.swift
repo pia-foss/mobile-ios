@@ -49,6 +49,10 @@ public struct PIALogHandler: LogHandler {
         function: String,
         line: UInt
     ) {
+        if level <= .debug, !Client.preferences.debugLogging {
+            return
+        }
+
         let timestamp = Self.dateFormatter.string(from: Date())
         let levelString = "[\(level.rawValue.uppercased())]"
         let logMessage = "\(timestamp) \(levelString) \(label): \(message)"
@@ -74,13 +78,13 @@ public final class PIALogStorage {
         }
     }
 
-    func getAllLogs() -> String {
+    public func getAllLogs() -> String {
         queue.sync {
             return logs.joined(separator: "\n")
         }
     }
 
-    func clear() {
+    public func clear() {
         queue.async(flags: .barrier) { [weak self] in
             self?.logs.removeAll()
         }

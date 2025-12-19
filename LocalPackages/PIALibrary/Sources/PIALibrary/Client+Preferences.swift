@@ -68,6 +68,8 @@ private protocol PreferencesStore: AnyObject {
 
     var signInWithAppleFakeEmail: String? { get set }
 
+    var debugLogging: Bool { get set }
+
     var shareServiceQualityData: Bool { get set }
     
     var lastKnownException: String? { get set }
@@ -107,6 +109,7 @@ private extension PreferencesStore {
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
         ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
+        debugLogging = source.debugLogging
         shareServiceQualityData = source.shareServiceQualityData
         lastKnownException = source.lastKnownException
         versionWhenServiceQualityOpted = source.versionWhenServiceQualityOpted
@@ -471,6 +474,16 @@ extension Client {
         // MARK: Service Quality
         
         /// Shares anonymous data to the service quality library.
+        public fileprivate(set) var debugLogging: Bool {
+            get {
+                return accessedDatabase.plain.debugLogging ?? false
+            }
+            set {
+                accessedDatabase.plain.debugLogging = newValue
+            }
+        }
+        
+        /// Shares anonymous data to the service quality library.
         public fileprivate(set) var shareServiceQualityData: Bool {
             get {
                 return accessedDatabase.plain.shareServiceQualityData ?? false
@@ -543,6 +556,7 @@ extension Client.Preferences {
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
             ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
+            debugLogging = false
             shareServiceQualityData = false
             lastKnownException = nil
             versionWhenServiceQualityOpted = nil
@@ -633,6 +647,9 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var signInWithAppleFakeEmail: String?
+        
+        /// :nodoc:
+        public var debugLogging: Bool
         
         /// :nodoc:
         public var shareServiceQualityData: Bool
