@@ -22,9 +22,8 @@
 
 import Foundation
 import StoreKit
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AppStoreProvider.self)
 
 @available(tvOS 17.0, *)
 class AppStoreProvider: NSObject, InAppProvider {

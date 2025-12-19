@@ -22,9 +22,8 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AccountProvider.self)
 
 extension AccountProvider {
     

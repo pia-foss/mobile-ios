@@ -21,10 +21,9 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import __PIALibraryNative
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: PingTask.self)
 
 @available(tvOS 17.0, *)
 class PingTask {

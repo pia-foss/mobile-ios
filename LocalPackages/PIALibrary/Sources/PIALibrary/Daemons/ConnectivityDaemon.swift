@@ -22,9 +22,8 @@
 
 import Foundation
 import Reachability
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: ConnectivityDaemon.self)
 
 public extension Notification.Name {
     static let ConnectivityDaemonDidGetReachable = Notification.Name("ConnectivityDaemonDidGetReachable")
@@ -131,7 +130,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
 
             guard let connectivity = connectivity else {
                 self.failedConnectivityAttempts += 1
-                log.error("Failed to check network connectivity (error: \(error?.localizedDescription ?? "")")
+                log.error("Failed to check network connectivity (error: \(error?.localizedDescription ?? ""))")
             
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
                     log.debug("Giving up, network is unreachable")

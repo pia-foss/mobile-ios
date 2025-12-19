@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "APPINFORMASJON";
 "settings.application_information.debug.title" = "Send feilsøkingslogg til kundestøtte";
+"settings.application_information.debug_logging.title" = "Aktiver feilsøkingslogging";
 "settings.application_information.debug.failure.title" = "Feil ved innsending";
 "settings.application_information.debug.failure.message" = "Feilsøkinfo kunne ikke sendes inn.";
 "settings.application_information.debug.empty.title" = "Feilsøkinfo er tom";

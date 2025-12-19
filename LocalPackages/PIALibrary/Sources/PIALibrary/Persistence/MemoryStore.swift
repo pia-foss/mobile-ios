@@ -21,9 +21,8 @@
 //
 
 import Foundation
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: MemoryStore.self)
 
 @available(tvOS 17.0, *)
 class MemoryStore: TransientStore, ConfigurationAccess {

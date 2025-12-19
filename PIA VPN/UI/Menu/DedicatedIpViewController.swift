@@ -21,10 +21,9 @@
 
 import Foundation
 import PIALibrary
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 
 class DedicatedIpViewController: AutolayoutViewController {
     
@@ -146,6 +145,7 @@ class DedicatedIpViewController: AutolayoutViewController {
     private func handleDIPActivationError(_ error: ClientError) {
         switch error {
         case .unauthorized:
+            log.error("Activate DIP token failed with unauthorized error. Logging out...")
             Client.providers.accountProvider.logout(nil)
             Macros.postNotification(.PIAUnauthorized)
         case .throttled(let retryAfter):
@@ -264,10 +264,12 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             guard let dipServer = server else {
                 
                 guard let error = error as? ClientError else {
+                    log.error("Activate DIP token failed with non-clientError: \(error?.localizedDescription ?? "N/A")")
                     self?.showInvalidTokenMessage()
                     return
                 }
                 
+                log.error("Activate DIP token failed with error: \(error.localizedDescription)")
                 self?.handleDIPActivationError(error)
                 return
             }
@@ -275,8 +277,10 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             case .active:
                 Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Localizable.Dedicated.Ip.Message.Valid.token)
             case .expired:
-                print(L10n.Localizable.Dedicated.Ip.Message.Expired.token) // we dont show the message to the user
+                log.error("Activate DIP token failed with expired token error.")
+                Macros.displayStickyNote(withMessage: L10n.Localizable.Dedicated.Ip.Message.Expired.token, andImage: Asset.Images.iconWarning.image)
             default:
+                log.error("Activate DIP token failed with invalid token error.")
                 Macros.displayStickyNote(withMessage: self?.invalidTokenLocalisedString ?? "", andImage: Asset.Images.iconWarning.image)
             }
             NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)

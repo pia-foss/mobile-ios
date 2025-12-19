@@ -1,9 +1,9 @@
 //
-//  Macros+Notifications.swift
-//  PIA VPN
+//  PIALogger.swift
+//  PIALibrary
 //
-//  Created by Davide De Rosa on 12/15/17.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Diego Trevisan on 18.12.25.
+//  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -20,20 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PIALibrary
+import Logging
 
-private let log = PIALogger.logger(for: Macros.self)
-
-extension Macros {
-    static func postAppNotification(_ name: Notification.Name, _ userInfo: [NotificationKey: Any]? = nil, _ logging: Bool = true) {
-        if logging {
-            if let userInfo = userInfo {
-                log.debug("Notifications: Posting \(name) (userInfo: \(userInfo))")
-            } else {
-                log.debug("Notifications: Posting \(name)")
-            }
-        }
-        NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+public enum PIALogger {
+    public static func logger(for type: Any.Type) -> Logger {
+        let category = String(describing: type)
+        return Logger(label: category)
     }
 }

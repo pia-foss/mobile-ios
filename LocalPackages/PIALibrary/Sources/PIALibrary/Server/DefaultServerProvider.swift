@@ -23,6 +23,8 @@
 import Foundation
 import __PIALibraryNative
 
+fileprivate let log = PIALogger.logger(for: DefaultServerProvider.self)
+
 @available(tvOS 17.0, *)
 open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess, WebServicesConsumer {
     
@@ -201,6 +203,7 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
                         let clientError = ClientErrorMapper.map(networkRequestError: error)
                         if clientError == .unauthorized {
                             DispatchQueue.main.async {
+                                log.error("Get DIPs failed with unauthorized error. Logging out...")
                                 Client.providers.accountProvider.logout(nil)
                                 Macros.postNotification(.PIAUnauthorized)
                             }
@@ -245,7 +248,9 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     
     public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
         guard Client.providers.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            log.error("Client not logged in when activating DIP token.")
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         
         getDedicatedIPs(dipTokens: [token]) { [weak self] result in
@@ -288,7 +293,9 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
 
     public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         guard Client.providers.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            log.error("Client not logged in when activating DIP tokens.")
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         
         getDedicatedIPs(dipTokens: tokens) { [weak self] result in
@@ -326,7 +333,8 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     
     public func removeDIPToken(_ dipToken: String) {
         guard Client.providers.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            log.error("Client not logged in when removing DIP token.")
+            return
         }
         accessedDatabase.secure.remove(dipToken)
         //self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
@@ -334,7 +342,9 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         guard Client.providers.accountProvider.isLoggedIn else {
-            preconditionFailure()
+            log.error("Client not logged in when handling DIP token expiration.")
+            callback?(ClientError.unauthorized)
+            return
         }
         
         renewDedicatedIP(dipToken: dipToken, completion: { _ in })

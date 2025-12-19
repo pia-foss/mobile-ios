@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "معلومات التطبيق";
 "settings.application_information.debug.title" = "إرسال سجل تتبع الأخطاء إلى الدعم";
+"settings.application_information.debug_logging.title" = "تمكين تسجيل تصحيح الأخطاء";
 "settings.application_information.debug.failure.title" = "حدث خطأ أثناء الإرسال";
 "settings.application_information.debug.failure.message" = "تعذَّر إرسال معلومات تتبع الأخطاء وإصلاحها.";
 "settings.application_information.debug.empty.title" = "معلومات تتبع الأخطاء فارغة";

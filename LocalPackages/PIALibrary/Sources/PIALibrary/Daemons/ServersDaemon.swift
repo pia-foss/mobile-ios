@@ -21,10 +21,9 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: ServersDaemon.self)
 
 @available(tvOS 17.0, *)
 class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {

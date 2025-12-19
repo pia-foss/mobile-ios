@@ -22,9 +22,8 @@
 
 import Foundation
 import NetworkExtension
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: IPSecProfile.self)
 
 /// Implementation of `VPNProfile` providing IPsec connectivity.
 /// Deprecated

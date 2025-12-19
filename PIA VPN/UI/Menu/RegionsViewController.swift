@@ -25,9 +25,8 @@ import PIALibrary
 import DZNEmptyDataSet
 import PopupDialog
 import GradientProgressBar
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AutolayoutViewController.self)
 
 class RegionsViewController: AutolayoutViewController {
     

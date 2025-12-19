@@ -24,10 +24,9 @@ import Foundation
 import UIKit
 import PIALibrary
 import PopupDialog
-import SwiftyBeaver
 import StoreKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: RatingManager.self)
 
 protocol RatingManagerProtocol {
     func shouldShowFeedbackTile() -> Bool

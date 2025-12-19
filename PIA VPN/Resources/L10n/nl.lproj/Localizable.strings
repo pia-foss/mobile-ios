@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "APPLICATIE-INFORMATIE";
 "settings.application_information.debug.title" = "Debugbestand naar klantenservice sturen";
+"settings.application_information.debug_logging.title" = "Debuglogboekregistratie inschakelen";
 "settings.application_information.debug.failure.title" = "Fout tijdens inzending";
 "settings.application_information.debug.failure.message" = "Debuginformatie kan niet worden verzonden.";
 "settings.application_information.debug.empty.title" = "Lege debuginformatie";

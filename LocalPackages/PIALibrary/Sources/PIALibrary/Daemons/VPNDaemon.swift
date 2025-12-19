@@ -22,9 +22,8 @@
 
 import Foundation
 import NetworkExtension
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: VPNDaemon.self)
 
 @available(tvOS 17.0, *)
 class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {

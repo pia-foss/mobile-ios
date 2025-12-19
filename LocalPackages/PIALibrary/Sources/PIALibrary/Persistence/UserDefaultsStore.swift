@@ -22,9 +22,8 @@
 
 import Foundation
 import Gloss
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
 @available(tvOS 17.0, *)
 class UserDefaultsStore: PlainStore, ConfigurationAccess {
@@ -98,6 +97,8 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let nmtTemporaryOpenNetworks = "NMTTemporaryOpenNetworks"
 
         static let nmtGenericRules = "NMTGenericRules"
+
+        static let debugLogging = "DebugLogging"
 
         static let shareServiceQualityData = "ShareServiceQualityData"
         
@@ -599,6 +600,15 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     
     // MARK: Service Quality
     
+    var debugLogging: Bool? {
+        get {
+            return backend.bool(forKey: Entries.debugLogging)
+        }
+        set {
+            backend.set(newValue, forKey: Entries.debugLogging)
+        }
+    }
+    
     var shareServiceQualityData: Bool? {
         get {
             return backend.bool(forKey: Entries.shareServiceQualityData)
@@ -751,6 +761,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
         backend.removeObject(forKey: Entries.ikeV2PacketSize)
         backend.removeObject(forKey: Entries.serverNetwork)
         backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
+        backend.removeObject(forKey: Entries.debugLogging)
         backend.removeObject(forKey: Entries.shareServiceQualityData)
         backend.removeObject(forKey: Entries.versionWhenServiceQualityOpted)
         backend.synchronize()

@@ -1,9 +1,9 @@
 //
-//  Macros+Notifications.swift
-//  PIA VPN
+//  PIACSILogInformationProvider.swift
+//  PIALibrary
 //
-//  Created by Davide De Rosa on 12/15/17.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Diego Trevisan on 18.12.25.
+//  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -21,19 +21,22 @@
 //
 
 import Foundation
-import PIALibrary
+import csi
 
-private let log = PIALogger.logger(for: Macros.self)
+class PIACSILogInformationProvider: ICSIProvider {
 
-extension Macros {
-    static func postAppNotification(_ name: Notification.Name, _ userInfo: [NotificationKey: Any]? = nil, _ logging: Bool = true) {
-        if logging {
-            if let userInfo = userInfo {
-                log.debug("Notifications: Posting \(name) (userInfo: \(userInfo))")
-            } else {
-                log.debug("Notifications: Posting \(name)")
-            }
-        }
-        NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+    var filename: String? { return "application_logs" }
+
+    var isPersistedData: Bool { return false }
+
+    var providerType: ProviderType { return ProviderType.loggingInformation }
+
+    var reportType: ReportType { return ReportType.diagnostic }
+
+    var value: String? { return getApplicationLogs() }
+
+    func getApplicationLogs() -> String {
+        let logs = PIALogHandler.logStorage.getAllLogs()
+        return logs.isEmpty ? "No logs available" : logs.redactIPs()
     }
 }

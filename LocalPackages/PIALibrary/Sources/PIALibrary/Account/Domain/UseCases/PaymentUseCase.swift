@@ -1,8 +1,7 @@
 
 import Foundation
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: PaymentUseCase.self)
 
 protocol PaymentUseCaseType {
     typealias Completion = ((NetworkRequestError?) -> Void)
@@ -32,7 +31,7 @@ class PaymentUseCase: PaymentUseCaseType {
         networkClient.executeRequest(with: configuration) { [weak self] error, dataResponse in
             guard let self else { return }
             
-            log.debug("PaymentUseCase: request executed with status code: \(dataResponse?.statusCode)")
+            log.debug("PaymentUseCase: request executed with status code: \(dataResponse?.statusCode ?? 0)")
             
             if let error {
                 log.debug("PaymentUseCase: request executed with error: \(error)")

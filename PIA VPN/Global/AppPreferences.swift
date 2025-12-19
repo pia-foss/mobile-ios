@@ -26,11 +26,10 @@ import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
 #endif
-import SwiftyBeaver
 import Intents
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: AppPreferences.self)
 
 class AppPreferences {
     

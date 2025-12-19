@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "INFORMAZIONI SULL'APPLICAZIONE";
 "settings.application_information.debug.title" = "Invia debug all'assistenza";
+"settings.application_information.debug_logging.title" = "Abilita registrazione debug";
 "settings.application_information.debug.failure.title" = "Errore nell'invio";
 "settings.application_information.debug.failure.message" = "Non è stato possibile inviare le informazioni di debug.";
 "settings.application_information.debug.empty.title" = "Informazioni di debug vuote";

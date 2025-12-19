@@ -19,11 +19,10 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import PIALibrary
 import SafariServices
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: PrivacyFeaturesSettingsViewController.self)
 
 class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     

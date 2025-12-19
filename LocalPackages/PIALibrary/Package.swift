@@ -30,7 +30,7 @@ let package = Package(
       .package(url: "https://github.com/hkellaway/Gloss.git", from: "3.1.0"),
       .package(url: "https://github.com/huri000/SwiftEntryKit.git", from: "1.0.3"),
       .package(url: "https://github.com/Orderella/PopupDialog.git", branch: "master"),
-      .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.0"),
+      .package(url: "https://github.com/apple/swift-log", from: "1.8.0"),
       .package(url: "https://github.com/ashleymills/Reachability.swift.git", from: "4.3.0"),
       .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.1")
     ],
@@ -38,9 +38,9 @@ let package = Package(
         .target(
             name: "PIALibrary",
             dependencies: [
-                "SwiftyBeaver",
                 "Gloss",
                 "PIALibraryUtilObjC",
+                .product(name: "Logging", package: "swift-log"),
                 .product(name: "PopupDialog", package: "PopupDialog", condition: .when(platforms: [.iOS])),
                 .product(name: "SwiftEntryKit", package: "SwiftEntryKit", condition: .when(platforms: [.iOS])),
                 .product(name: "Reachability", package: "Reachability.swift"),

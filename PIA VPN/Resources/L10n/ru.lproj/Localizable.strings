@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
 "settings.application_information.debug.title" = "Отправить журнал отладки в службу поддержки";
+"settings.application_information.debug_logging.title" = "Включить отладочное логирование";
 "settings.application_information.debug.failure.title" = "Ошибка при отправке";
 "settings.application_information.debug.failure.message" = "Не удалось отправить отладочную информацию.";
 "settings.application_information.debug.empty.title" = "Пустая отладочная информация";

@@ -23,9 +23,8 @@ class PIACSIUserInformationProvider: ICSIProvider {
     var value: String? { return getUserInformation() }
     
     func getUserInformation() -> String {
-        var userSettings = ""
         guard let defaults = UserDefaults(suiteName: Client.Configuration.appGroup) else {
-            return userSettings
+            return ""
         }
         let filteredPreferences = WhitelistUtil.filter(preferences: defaults.dictionaryRepresentation())
         return filteredPreferences.map{ "\($0): \($1)" }.joined(separator: "\n").redactIPs()

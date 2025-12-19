@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "アプリ情報";
 "settings.application_information.debug.title" = "サポートにデバッグログを送信";
+"settings.application_information.debug_logging.title" = "デバッグログを有効にする";
 "settings.application_information.debug.failure.title" = "送信中のエラー";
 "settings.application_information.debug.failure.message" = "デバッグ情報を送信できませんでした。";
 "settings.application_information.debug.empty.title" = "空のデバッグ情報";

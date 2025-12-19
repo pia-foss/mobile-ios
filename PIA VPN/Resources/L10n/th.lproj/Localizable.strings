@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "ข้อมูลแอพพลิเคชั่น";
 "settings.application_information.debug.title" = "ส่งประวัติการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
+"settings.application_information.debug_logging.title" = "เปิดใช้งานการบันทึกการดีบัก";
 "settings.application_information.debug.failure.title" = "เกิดข้อผิดพลาดระหว่างการส่ง";
 "settings.application_information.debug.failure.message" = "ไม่สามารถส่งข้อมูลการแก้จุดบกพร่องได้";
 "settings.application_information.debug.empty.title" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า";

@@ -23,10 +23,9 @@
 import Foundation
 import NetworkExtension
 import PIALibrary
-import SwiftyBeaver
 import UIKit
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: PIAHotspotHelper.self)
 
 public protocol PIAHotspotHelperDelegate: class {
 

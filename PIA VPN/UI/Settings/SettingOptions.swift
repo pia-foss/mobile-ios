@@ -252,6 +252,7 @@ public enum AutomationSections: Int, SettingSection, EnumsBuilder {
 public enum HelpSections: Int, SettingSection, EnumsBuilder {
     
     case sendDebugLogs
+    case debugLogging
     case kpiShareStatistics
     case kpiViewEvents
     case latestNews
@@ -260,6 +261,7 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     public func localizedTitleMessage() -> String {
         switch self {
         case .sendDebugLogs: return L10n.Localizable.Settings.ApplicationInformation.Debug.title
+        case .debugLogging: return L10n.Localizable.Settings.ApplicationInformation.DebugLogging.title
         case .kpiShareStatistics: return L10n.Localizable.Settings.Service.Quality.Share.title
         case .kpiViewEvents: return L10n.Localizable.Settings.Service.Quality.Show.title
         case .latestNews: return L10n.Localizable.Settings.Cards.History.title
@@ -270,6 +272,7 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .sendDebugLogs: return ""
+        case .debugLogging: return ""
         case .kpiShareStatistics: return ""
         case .kpiViewEvents: return ""
         case .latestNews: return ""
@@ -278,11 +281,11 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
     }
     
     public static func all() -> [Self] {
-        return [.sendDebugLogs, .kpiShareStatistics, .latestNews, .version]
+        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .latestNews, .version]
     }
     
     public static func allWithEvents() -> [Self] {
-        return [.sendDebugLogs, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
+        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
     }
 
 }

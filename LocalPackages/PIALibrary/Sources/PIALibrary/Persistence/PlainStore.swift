@@ -133,6 +133,8 @@ protocol PlainStore: AnyObject {
 
     var trustedNetworks: [String] { get set }
     
+    var debugLogging: Bool? { get set }
+    
     var shareServiceQualityData: Bool? { get set }
 
 }

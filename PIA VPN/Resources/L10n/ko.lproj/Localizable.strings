@@ -155,6 +155,7 @@
 
 "settings.application_information.title" = "애플리케이션 정보";
 "settings.application_information.debug.title" = "지원팀에 디버그 로그 보내기";
+"settings.application_information.debug_logging.title" = "디버그 로깅 활성화";
 "settings.application_information.debug.failure.title" = "제출 중 오류 발생";
 "settings.application_information.debug.failure.message" = "디버그 정보를 제출하지 못했습니다.";
 "settings.application_information.debug.empty.title" = "디버그 정보가 비어 있습니다";

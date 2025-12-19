@@ -20,7 +20,6 @@
 //
 
 import UIKit
-import SwiftyBeaver
 import PIALibrary
 
 class GeneralSettingsViewController: PIABaseSettingsViewController {

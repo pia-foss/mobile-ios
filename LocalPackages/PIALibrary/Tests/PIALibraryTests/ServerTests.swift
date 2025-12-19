@@ -22,15 +22,14 @@
 
 import XCTest
 @testable import PIALibrary
-import SwiftyBeaver
 
 class ServerTests: XCTestCase {
     
+    private let log = PIALogger.logger(for: ServerTests.self)
+
     override func setUp() {
         super.setUp()
         
-        SwiftyBeaver.addDestination(ConsoleDestination())
-
         Client.providers.vpnProvider = MockVPNProvider()
         Client.configuration.enablesServerUpdates = false
         Client.configuration.verifiesServersSignature = true
@@ -46,14 +45,14 @@ class ServerTests: XCTestCase {
 //
 //        PIAWebServices().downloadServers { (bundle, error) in
 //            guard let _ = bundle else {
-//                print("Download error: \(error!)")
+//                log.error("Download error: \(error!)")
 //                XCTAssert(error as? ClientError != .badServersSignature, "Bad signature")
 //                XCTAssert(false)
 //                exp.fulfill()
 //                return
 //            }
 //            XCTAssertNotNil(bundle)
-//            print("Downloaded server bundle: \(bundle!)")
+//            log.debug("Downloaded server bundle: \(bundle!)")
 //            exp.fulfill()
 //        }
 //        waitForExpectations(timeout: 5.0, handler: nil)
@@ -73,14 +72,14 @@ class ServerTests: XCTestCase {
         
         factory.serverProvider.download { (servers, error) in
             guard let _ = servers else {
-                print("Download error: \(error!)")
+                self.log.error("Download error: \(error!)")
                 XCTAssert(error as? ClientError != .badServersSignature, "Bad signature")
                 XCTAssert(false)
                 exp.fulfill()
                 return
             }
             XCTAssertNotNil(servers)
-            print("Downloaded servers: \(servers!)")
+            self.log.debug("Downloaded servers: \(servers!)")
             XCTAssertEqual(servers?.count, factory.serverProvider.currentServers.count) // soft
             exp.fulfill()
         }

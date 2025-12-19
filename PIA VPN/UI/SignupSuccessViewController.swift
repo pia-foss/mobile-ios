@@ -21,11 +21,10 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import UIKit
 import PIALibrary
 
-private let log = SwiftyBeaver.self
+private let log = PIALogger.logger(for: SignupSuccessViewController.self)
 
 public class SignupSuccessViewController: AutolayoutViewController, BrandableNavigationBar {
 
