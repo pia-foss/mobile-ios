@@ -59,6 +59,8 @@ extension Notification.Name {
     public static let PIADIPRegionExpiring = Notification.Name("PIADIPRegionExpiring")
     public static let PIADIPCheckIP = Notification.Name("PIADIPCheckIP")
 
+    /// Request the dashboard to dismiss any modally presented view controller.
+    public static let PIADashboardShouldDismissModal = Notification.Name("PIADashboardShouldDismissModal")
 }
 
 extension NotificationKey {

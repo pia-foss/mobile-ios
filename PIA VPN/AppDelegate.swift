@@ -291,12 +291,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         switch type {
         case .connect:
             if !Client.providers.vpnProvider.isVPNConnected {
+                // Dismiss any modally presented view controller on dashboard
+                NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
+
                 // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
                 connectAfter(milliseconds: defaultMilliseconds)
             }
 
         case .disconnect:
             if Client.providers.vpnProvider.isVPNConnected {
+                // Dismiss any modally presented view controller on dashboard
+                NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
+
                 // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
                 dismissLeakProtectionAlert()
                 
