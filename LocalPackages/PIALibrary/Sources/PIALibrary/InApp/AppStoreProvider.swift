@@ -92,7 +92,9 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
         guard product is AppStoreProduct else {
-            fatalError("Product must be AppStoreProduct")
+            log.error("Product must be AppStoreProduct, but got \(type(of: product))")
+            callback?(nil, ClientError.productUnavailable)
+            return
         }
         guard (purchaseCallback == nil) else {
             log.warning("Purchase in progress")
@@ -112,7 +114,8 @@ class AppStoreProvider: NSObject, InAppProvider {
     
     func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction? {
         guard product is AppStoreProduct else {
-            fatalError("Product must be AppStoreProduct")
+            log.error("Product must be AppStoreProduct, but got \(type(of: product))")
+            return nil
         }
         for uncredited in uncreditedTransactions {
             let nativeTransaction = uncredited.native as! SKPaymentTransaction
@@ -126,7 +129,8 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
         guard transaction is AppStoreTransaction else {
-            fatalError("Transaction must be AppStoreTransaction")
+            log.error("Transaction must be AppStoreTransaction, but got \(type(of: transaction))")
+            return
         }
         finishAndRemoveTransaction(transaction.native as! SKPaymentTransaction, success: success)
     }

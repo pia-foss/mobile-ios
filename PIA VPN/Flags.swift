@@ -73,6 +73,7 @@ class Flags: NSObject {
         #endif
     }
     
+    #if PIA_DEV
     private func load(from path: String) {
         guard let toggles = NSDictionary(contentsOfFile: path) as? [String: Bool] else {
             fatalError("Couldn't load plist from \(path)")
@@ -81,4 +82,5 @@ class Flags: NSObject {
             setValue(value, forKeyPath: key)
         }
     }
+    #endif
 }

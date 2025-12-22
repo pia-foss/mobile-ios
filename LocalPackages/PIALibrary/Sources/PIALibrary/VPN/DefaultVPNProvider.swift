@@ -23,9 +23,8 @@
 import Foundation
 import __PIALibraryNative
 import NetworkExtension
-import SwiftyBeaver
 
-private let log = SwiftyBeaver.self
+fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
 
 @available(tvOS 17.0, *)
 open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
@@ -91,7 +90,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         }
     }
     
-    public func prepare() {
+    public func prepare() throws {
         
         var profile = activeProfileRemovingInactive()
         var force = false
@@ -122,8 +121,9 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         } else {
             
             // should never happen, IKEv2 is always available
-            guard let _ = profile else {
-                fatalError("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+            guard profile != nil else {
+                log.error("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+                throw ClientError.vpnProfileUnavailable
             }
             
             completionBlock()
@@ -390,12 +390,19 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             log.error("vpnClientConfiguration: No current user available")
             return nil
         }
+
         guard let currentPasswordReference = accessedProviders.accountProvider.currentPasswordReference else {
             log.error("vpnClientConfiguration: No current password reference available")
             return nil
         }
+
         guard let profile = profile ?? activeProfile else {
             log.error("vpnClientConfiguration: No VPN profile available")
+            return nil
+        }
+
+        guard let targetServer = try? accessedProviders.serverProvider.targetServer else {
+            log.error("vpnClientConfiguration: No target server available")
             return nil
         }
 
@@ -405,7 +412,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             name: accessedConfiguration.vpnProfileName,
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
-            server: accessedProviders.serverProvider.targetServer,
+            server: targetServer,
             isOnDemand: accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration,

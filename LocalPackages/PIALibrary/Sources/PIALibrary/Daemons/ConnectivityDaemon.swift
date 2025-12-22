@@ -37,7 +37,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     
     private(set) var hasEnabledUpdates: Bool
     
-    private let reachability: Reachability
+    private let reachability = Reachability(hostname: "8.8.8.8")!
     
     private var isCheckingConnectivity: Bool
     
@@ -47,12 +47,6 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
 
     private init() {
         hasEnabledUpdates = false
-
-        guard let reachability = Reachability(hostname: "8.8.8.8") else {
-            fatalError("Unable to create Reachability object")
-        }
-        self.reachability = reachability
-
         isCheckingConnectivity = false
         failedConnectivityAttempts = 0
         wasConnected = false

@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 
+private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
+
 /**
  The welcome view controller is a graphic gateway to the PIA services.
  */
@@ -182,7 +184,8 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             let vc = nav.topViewController as! SignupInProgressViewController
             
             guard let request = pendingSignupRequest else {
-                fatalError("Recovering signup and pendingSignupRequest is not set")
+                log.error("pendingSignupRequest is not set in PIAWelcomeViewController")
+                return
             }
             var metadata = SignupMetadata(email: request.email)
             metadata.title = L10n.Signup.InProgress.title

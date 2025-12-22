@@ -23,7 +23,7 @@
 import Foundation
 
 /// Abstract representation of a VPN profile, which is the typical VPN entity on Apple platforms. This entity is meant for advanced use, it's suggested to use a `VPNProvider` to control a VPN connection.
-public protocol VPNProfile: class {
+public protocol VPNProfile: AnyObject {
 
     /// An unique string associated with this kind of profiles.
     static var vpnType: String { get }

@@ -7,13 +7,16 @@
 
 import Foundation
 
+fileprivate let log = PIALogger.logger(for: EphemeralAccountProvider.self)
+
 @available(tvOS 17.0, *)
 class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
 
     // XXX: we want legit web services calls, yet allow the option to mock them
     private var webServices: WebServices? {
         guard let accountProvider = accessedProviders.accountProvider as? WebServicesConsumer else {
-            fatalError("Current accountProvider is not a WebServicesConsumer. Use MockAccountProvider for mocking ephemeral Welcome process")
+            log.error("Current accountProvider is not a WebServicesConsumer. Use MockAccountProvider for mocking ephemeral Welcome process")
+            return nil
         }
         return accountProvider.webServices
     }
@@ -49,55 +52,55 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
 
     func migrateOldTokenIfNeeded(_ callback: ((Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func logout(_ callback: SuccessLibraryCallback?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func deleteAccount(_ callback: SuccessLibraryCallback?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func activateDIPTokens(_ dipToken: String, _ callback: LibraryCallback<DedicatedIPStatus>?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func cleanDatabase() {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
@@ -131,11 +134,11 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
     }
 
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        fatalError("Not implemented")
+        log.error("Not implemented")
     }
 
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {

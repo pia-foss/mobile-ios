@@ -26,6 +26,8 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIAWireguard
 
+private let log = PIALogger.logger(for: NetworkSettingsViewController.self)
+
 protocol DNSSettingsDelegate: AnyObject {
     
     func updateSetting(_ setting: SettingSection, withValue value: Any?)
@@ -221,7 +223,8 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             
             if let controller = controller {
                 guard let cell = tableView.cellForRow(at: indexPath) else {
-                    fatalError("Cell not found at \(indexPath)")
+                    log.error("Cell not found at \(indexPath)")
+                    return
                 }
                 
                 controller.title = cell.textLabel?.text
@@ -319,7 +322,8 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
     func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
         
         guard let setting = NetworkSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
+            log.error("Unhandled setting \(controller.tag)")
+            return
         }
 
         configure(option, withCell: cell, andSetting: setting)
@@ -373,7 +377,8 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
     
     func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
         guard let setting = NetworkSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
+            log.error("Unhandled setting \(controller.tag)")
+            return
         }
 
         select(option, withSetting: setting)

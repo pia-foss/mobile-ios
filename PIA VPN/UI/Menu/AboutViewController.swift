@@ -150,7 +150,7 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
             return components.licenses.count
             
         default:
-            fatalError()
+            return 0
         }
     }
     
@@ -171,7 +171,7 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
 
         default:
-            fatalError()
+            return UITableViewCell()
         }
     }
     
@@ -189,7 +189,7 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
         default:
-            fatalError()
+            return 0
         }
     }
 }

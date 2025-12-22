@@ -22,6 +22,8 @@
 
 import Foundation
 
+fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
+
 @available(tvOS 17.0, *)
 extension Client {
     
@@ -64,7 +66,8 @@ extension Client {
 
         public var baseUrl: String {
             guard let url = baseUrls[Client.environment] else {
-                fatalError("Base URL not found for environment \(Client.environment). Use setBaseURL(_:for:) to fix the issue.")
+                log.error("Base URL not found for environment \(Client.environment). Falling back to production URL.")
+                return "https://www.privateinternetaccess.com"
             }
             return url
         }
@@ -337,37 +340,5 @@ extension Client {
         }
         
         #endif
-        
-//        public init(name: String) {
-//            guard let path = Bundle.main.path(forResource: name, ofType: "plist") else {
-//                fatalError("Unable to read configuration from \(name).plist")
-//            }
-//            guard let dict = NSDictionary(contentsOfFile: path) else {
-//                fatalError("Configuration file \(name).plist is malformed")
-//            }
-//
-//            isDevelopment = dict["Development"] as! Bool
-//
-//            let ws = dict["WebServices"] as! [String: Any]
-//            var baseUrls = [Client.Environment: String]()
-//            for (envString, url) in ws["BaseURLs"] as! [String: String] {
-//                guard let environment = Client.Environment(rawValue: envString) else {
-//                    continue
-//                }
-//                baseUrls[environment] = url
-//            }
-//            self.baseUrls = baseUrls
-//            clientRoot = ws["ClientRoot"] as! String
-//
-//            let iap = dict["InApp"] as! [String: String]
-//            var inApps = [String: Plan]()
-//            for (id, planString) in iap {
-//                guard let plan = Plan(rawValue: planString) else {
-//                    continue
-//                }
-//                inApps[id] = plan
-//            }
-//            self.inApps = inApps
-//        }
     }
 }

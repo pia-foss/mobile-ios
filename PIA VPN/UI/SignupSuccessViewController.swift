@@ -59,7 +59,8 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         super.viewDidLoad()
         
         guard let metadata = metadata else {
-            fatalError("Metadata not set")
+            log.error("Metadata not set")
+            return
         }
 
         title = metadata.title
@@ -89,7 +90,8 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
     
     @IBAction private func submit() {
         guard let user = metadata?.user else {
-            fatalError("User account not set in metadata")
+            log.error("User account not set in metadata")
+            return
         }
         completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }

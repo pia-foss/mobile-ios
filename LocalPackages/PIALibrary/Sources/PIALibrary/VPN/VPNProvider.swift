@@ -23,7 +23,7 @@
 import Foundation
 
 /// Business interface related to the VPN connection.
-public protocol VPNProvider: class {
+public protocol VPNProvider: AnyObject {
 
     /// The available VPN types.
     ///
@@ -44,7 +44,7 @@ public protocol VPNProvider: class {
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
-    func prepare()
+    func prepare() throws
 
     /**
      Installs the profile as per `currentVPNType`.

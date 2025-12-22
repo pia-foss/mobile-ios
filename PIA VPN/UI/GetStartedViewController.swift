@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 
+private let log = PIALogger.logger(for: GetStartedViewController.self)
+
 public class GetStartedViewController: PIAWelcomeViewController {
 
     private struct Cells {
@@ -279,7 +281,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
             let vc = nav.topViewController as! SignupInProgressViewController
             
             guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
+                log.error("signupEmail is not set in GetStartedViewController")
+                return
             }
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title

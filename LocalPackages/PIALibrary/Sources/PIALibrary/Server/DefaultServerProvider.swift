@@ -120,13 +120,16 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     }
     
     public var targetServer: Server {
-        guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
-            guard let fallbackServer = currentServers.first else {
-                fatalError("No servers available")
+        get throws {
+            guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
+                guard let fallbackServer = currentServers.first else {
+                    log.error("No servers available")
+                    throw ClientError.noServersAvailable
+                }
+                return fallbackServer
             }
-            return fallbackServer
+            return server
         }
-        return server
     }
     
     public var dipTokens: [String]? {

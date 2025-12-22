@@ -69,7 +69,7 @@ extension DedicatedIPStatus: DedicatedIPStatusType {
 
 protocol ServerProviderType {
     var historicalServersType: [ServerType] { get }
-    var targetServerType: ServerType { get }
+    var targetServerType: ServerType { get throws }
     var currentServersType: [ServerType] { get }
     
     // Add methods from ServerProvider to this protocol as needed
@@ -81,7 +81,9 @@ extension DefaultServerProvider: ServerProviderType {
     }
     
     var targetServerType: ServerType {
-        return self.targetServer
+        get throws {
+            try self.targetServer
+        }
     }
     
     var currentServersType: [ServerType] {
@@ -100,5 +102,3 @@ protocol VPNStatusProviderType {
 extension DefaultVPNProvider: VPNStatusProviderType {}
 
 extension MockVPNProvider: VPNStatusProviderType {}
-
-

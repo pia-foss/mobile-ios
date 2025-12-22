@@ -10,6 +10,8 @@ import Foundation
 import Combine
 import PIALibrary
 
+private let log = PIALogger.logger(for: OptimalLocationUseCase.self)
+
 protocol OptimalLocationUseCaseType {
     var optimalLocation: ServerType { get }
     func getTargetLocaionForOptimalLocation() -> AnyPublisher<ServerType?, Never>
@@ -56,8 +58,12 @@ extension OptimalLocationUseCase {
                 switch result.vpnStatus {
                 case .connecting, .connected:
                     if result.selectedServer.isAutomatic {
-                        self.targetServerForOptimalLocation.send(self.serverProvider.targetServerType)
-
+                        do {
+                            let targetServerType = try serverProvider.targetServerType
+                            targetServerForOptimalLocation.send(targetServerType)
+                        } catch {
+                            log.error("Failed to get targetServerType: \(error.localizedDescription)")
+                        }
                     } else {
                         self.targetServerForOptimalLocation.send(nil)
                     }

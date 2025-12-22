@@ -72,9 +72,7 @@ extension NetworkExtensionProfile {
             return
         }
 
-        guard let protocolConfiguration = vpn.protocolConfiguration else {
-            fatalError("Never provided a configuration?")
-        }
+        let protocolConfiguration = vpn.protocolConfiguration! // Safe to force unwrap
         
         vpn.localizedDescription = configuration.name
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ?

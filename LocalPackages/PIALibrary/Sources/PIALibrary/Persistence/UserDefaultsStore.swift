@@ -144,9 +144,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
 
     init(group: String) {
-        guard let backend = UserDefaults(suiteName: group) else {
-            fatalError("Unable to create UserDefaults in app group '\(group)')")
-        }
+        let backend = UserDefaults(suiteName: group) ?? UserDefaults.standard
         self.backend = backend
         self.group = group
         loadComplexMaps()

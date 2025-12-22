@@ -23,6 +23,8 @@
 import Foundation
 import PIALibrary
 
+private let log = PIALogger.logger(for: DNSList.self)
+
 class DNSList: NSObject {
     
     static let shared = DNSList()
@@ -43,7 +45,9 @@ class DNSList: NSObject {
     ///   - path:  The local path of the plist file.
     private func load(from path: String) {
         guard let dnsList = NSArray(contentsOfFile: path) as? [[String:[String]]] else {
-            fatalError("Couldn't load plist from \(path)")
+            log.error("Couldn't load plist from \(path). Initializing with empty DNS list.")
+            self.dnsList = []
+            return
         }
         self.dnsList = dnsList
     }
@@ -61,8 +65,8 @@ class DNSList: NSObject {
                     do {
                         try FileManager.default.copyItem(atPath: path,
                                                          toPath: plistPathInDocument)
-                    }catch{
-                        fatalError("Error occurred while copying file to document \(error)")
+                    } catch {
+                        log.error("Error occurred while copying DNS file to document: \(error)")
                     }
                 }
             }
@@ -77,8 +81,8 @@ class DNSList: NSObject {
             try FileManager.default.removeItem(atPath: plistPathInDocument)
             preparePlistForUse()
             self.load(from: self.plistPathInDocument)
-        }catch{
-            fatalError("Error occurred while removing file \(error)")
+        } catch {
+            log.error("Error occurred while removing DNS file: \(error)")
         }
     }
     
