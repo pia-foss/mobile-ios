@@ -24,6 +24,8 @@ import PIALibrary
 import PIAWireguard
 import UIKit
 
+private let log = PIALogger.logger(for: CardFactory.self)
+
 struct CardFactory {
     
     static func getCardsForVersion(_ appVersion: String?) -> [Card] {
@@ -82,7 +84,8 @@ struct CardFactory {
         let preferences = Client.preferences.editable()
         guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
+            return
         }
 
         preferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)

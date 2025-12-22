@@ -50,9 +50,9 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let preset = self.preset else {
-            fatalError("Preset not propagated")
+
+        if self.preset == nil {
+            log.error("Preset not propagated to ConfirmVPNPlanViewController")
         }
 
         navigationItem.hidesBackButton = true
@@ -61,7 +61,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         labelSubtitle.text = L10n.Welcome.Purchase.Email.why
        
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
-        textEmail.text = preset.purchaseEmail
+        textEmail.text = preset?.purchaseEmail
         self.styleConfirmButton()
         
         setupAppleSignInUI()

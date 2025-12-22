@@ -24,7 +24,7 @@ import Foundation
 
 /// Business interface related to VPN servers.
 @available(tvOS 17.0, *)
-public protocol ServerProvider: class {
+public protocol ServerProvider: AnyObject {
 
     /// The `ServersBundle.Configuration` associated with this provider.
     ///
@@ -43,7 +43,7 @@ public protocol ServerProvider: class {
     /// The target server for a VPN connection.
     ///
     /// - Seealso: `VPNProvider`
-    var targetServer: Server { get }
+    var targetServer: Server { get throws }
     
     /// The array of DIP tokens stored in the keychain, or `nil` if logged out.
     var dipTokens: [String]? { get }

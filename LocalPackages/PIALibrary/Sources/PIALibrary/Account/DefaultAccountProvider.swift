@@ -185,7 +185,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 }
                 
                 guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
-                    preconditionFailure()
+                    callback?(ClientError.unauthorized)
+                    return
                 }
         
                 self?.accessedDatabase.secure.setPassword(password, for: username)
@@ -201,7 +202,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
         
         webServices.token(receipt: receiptRequest.receipt) { (error) in
@@ -212,7 +214,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
 
     public func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
 
         self.webServices.migrateToken(token: linkToken) { (error) in
@@ -223,7 +226,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
 
     public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
 
         webServices.token(credentials: request.credentials) { (error) in
@@ -279,13 +283,10 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        guard isLoggedIn,
-            let _ = self.publicUsername else {
-            guard let user = currentUser else {
-                preconditionFailure()
+        guard isLoggedIn, self.publicUsername != nil else {
+            if currentUser == nil {
+                self.logout(nil)
             }
-
-            self.logout(nil)
             return
         }
         accountInfoWith(callback)
@@ -314,7 +315,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     
     public func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard let user = currentUser else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
                                       password: password)
@@ -340,7 +342,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     
     public func logout(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
-            preconditionFailure()
+            callback?(nil)
+            return
         }
         webServices.logout { [weak self] (result, error) in
             self?.cleanDatabase()
@@ -351,7 +354,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     
     public func deleteAccount(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         webServices.deleteAccount { (result, error) in
             guard let result = result, result != false else {
@@ -443,7 +447,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
 
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let signup = request.signup(withStore: accessedStore) else {
             callback?(nil, ClientError.noReceipt)
@@ -504,7 +509,8 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
 
     public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         guard let info = currentUser?.info else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
 
         listPlanProducts { (_, error) in
@@ -539,13 +545,16 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     
     public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard isLoggedIn else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let user = currentUser else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let accountInfo = user.info, accountInfo.isRenewable else {
-            preconditionFailure()
+            callback?(nil, ClientError.renewingNonRenewable)
+            return
         }
         guard let payment = request.payment(withStore: accessedStore) else {
             callback?(nil, ClientError.noReceipt)

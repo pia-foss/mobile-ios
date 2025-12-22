@@ -25,6 +25,7 @@ import UIKit
 import __PIALibraryNative
 import PIALibrary
 
+private let log = PIALogger.logger(for: Theme.self)
 
 /// Defines the look and feel of the client UI.
 public class Theme {
@@ -177,7 +178,8 @@ public class Theme {
 
         private func safeFont(name: String, size: CGFloat) -> UIFont {
             guard let font = UIFont(name: name, size: size) else {
-                fatalError("Cannot load font '\(name)'")
+                log.error("Cannot load font '\(name)'. Falling back to system font.")
+                return UIFont.systemFont(ofSize: size)
             }
             return font
         }

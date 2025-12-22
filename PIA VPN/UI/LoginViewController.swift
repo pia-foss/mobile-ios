@@ -71,10 +71,6 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let preset = self.preset else {
-            fatalError("Preset not propagated")
-        }
-
         NotificationCenter.default.addObserver(self, selector: #selector(finishLoginWithMagicLink(notification:)), name: .PIAFinishLoginWithMagicLink, object: nil)
 
         labelTitle.text = L10n.Welcome.Login.title
@@ -84,8 +80,12 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         textUsername.accessibilityIdentifier = Accessibility.Id.Login.username
         textPassword.accessibilityIdentifier = Accessibility.Id.Login.password
         
-        textUsername.text = preset.loginUsername
-        textPassword.text = preset.loginPassword
+        if self.preset == nil {
+            log.error("Preset not propagated to LoginViewController")
+        }
+
+        textUsername.text = preset?.loginUsername
+        textPassword.text = preset?.loginPassword
         
         styleButtons()
     }

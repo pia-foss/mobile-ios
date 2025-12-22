@@ -613,10 +613,7 @@ class AppPreferences {
     }
     
     private init() {
-        guard let defaults = UserDefaults(suiteName: AppConstants.appGroup) else {
-            fatalError("Unable to initialize app preferences")
-        }
-        self.defaults = defaults
+        self.defaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
 #if os(iOS)
         defaults.register(defaults: [
             
@@ -940,7 +937,8 @@ class AppPreferences {
         
         AppPreferences.shared.currentThemeCode = code
         guard let window = UIApplication.shared.windows.first else {
-            fatalError("No window?")
+            log.error("No window available for theme transition")
+            return
         }
         isTransitioningTheme = true
         UIView.animate(withDuration: duration, animations: {

@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 
+private let log = PIALogger.logger(for: AboutNoticeCell.self)
+
 class AboutNoticeCell: UITableViewCell, Restylable {
     @IBOutlet private weak var buttonName: UIButton!
     
@@ -176,10 +178,12 @@ class AboutLicenseCell: UITableViewCell, Restylable {
 
         gradientLicense?.removeFromSuperview()
         guard let gradientStartColor = backgroundColor?.withAlphaComponent(0.0) else {
-            fatalError("Cell has no backgroundColor?")
+            log.error("Cell has no backgroundColor?")
+            return
         }
         guard let gradientEndColor = backgroundColor else {
-            fatalError("Cell has no backgroundColor?")
+            log.error("Cell has no backgroundColor?")
+            return
         }
         
         let gradientView = GradientView(frame: viewLicenseFooter.bounds)
@@ -194,7 +198,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     }
 }
 
-protocol AboutLicenseCellDelegate: class {
+protocol AboutLicenseCellDelegate: AnyObject {
     func aboutCell(_ cell: AboutLicenseCell, shouldExpand license: String?)
 
     func aboutCell(_ cell: AboutLicenseCell, shouldShrink license: String?)

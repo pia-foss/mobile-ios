@@ -88,5 +88,8 @@ public enum ClientError: Error, Equatable {
     
     /// Cant retrieve regions
     case noRegions
+
+    /// No servers available
+    case noServersAvailable
     #endif
 }

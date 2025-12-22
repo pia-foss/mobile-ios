@@ -24,8 +24,23 @@
 import Foundation
 import TunnelKitCore
 import TunnelKitOpenVPN
+import PIALibrary
+
+private let log = PIALogger.logger(for: OpenVPN.Configuration.self)
 
 public extension OpenVPN.Configuration {
+
+    enum ConfigurationError: Error, LocalizedError {
+        /// Unable to find required resource file
+        case resourceNotFound(String)
+
+        public var errorDescription: String? {
+            switch self {
+            case .resourceNotFound(let name):
+                "Required resource not found: \(name)"
+            }
+        }
+    }
     
     /// The available certificates for handshake.
     enum Handshake: String, Codable, CustomStringConvertible {
@@ -58,7 +73,8 @@ public extension OpenVPN.Configuration {
             let bundle = Bundle.main
             let certName = "PIA-\(rawValue)"
             guard let certUrl = bundle.url(forResource: certName, withExtension: "pem") else {
-                fatalError("Could not find \(certName) TLS certificate")
+                log.error("Could not find \(certName) TLS certificate in bundle")
+                throw ConfigurationError.resourceNotFound(certName)
             }
             let content = try String(contentsOf: certUrl)
             try content.write(to: url, atomically: true, encoding: .ascii)
@@ -68,11 +84,13 @@ public extension OpenVPN.Configuration {
             let bundle = Bundle.main
             let certName = "PIA-\(rawValue)"
             guard let certUrl = bundle.url(forResource: certName, withExtension: "pem") else {
-                fatalError("Could not find \(certName) TLS certificate")
+                log.error("Could not find \(certName) TLS certificate in bundle")
+                return nil
             }
             do {
                 return try String(contentsOf: certUrl)
             } catch {
+                log.error("Could not read \(certName) TLS certificate: \(error)")
                 return nil
             }
         }

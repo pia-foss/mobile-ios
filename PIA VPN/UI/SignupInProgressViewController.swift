@@ -99,7 +99,8 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
         case .successSegueIdentifier:
                         
             guard let email = signupRequest?.email ?? redeemRequest?.email else {
-                fatalError("Email not provided with signup or redeem request")
+                log.error("Email not provided with signup or redeem request")
+                return
             }
             
             let vc = segue.destination as! ConfirmVPNPlanViewController

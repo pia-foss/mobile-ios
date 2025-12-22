@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 
+private let log = PIALogger.logger(for: WelcomePageViewController.self)
+
 class WelcomePageViewController: UIPageViewController {
     private var source = [UIViewController]()
     
@@ -38,8 +40,10 @@ class WelcomePageViewController: UIPageViewController {
         super.viewDidLoad()
         
         guard let preset = self.preset else {
-            fatalError("Preset not propagated")
+            log.error("Preset not propagated")
+            return
         }
+
         if preset.pages.contains(.login) {
             let vc = StoryboardScene.Welcome.loginViewController.instantiate()
             source.append(vc)
@@ -55,16 +59,19 @@ class WelcomePageViewController: UIPageViewController {
         dataSource = self
 
         guard !source.isEmpty else {
-            fatalError("Source controllers are empty")
+            log.error("Source controllers are empty")
+            return
         }
         let isSinglePage = (source.count == 1)
         guard isSinglePage || (preset.pages == .all) else {
-            fatalError("Currently supports all pages or a single page, not a subset")
+            log.error("Currently supports all pages or a single page, not a subset")
+            return
         }
 
         for vc in source {
             guard let child = vc as? WelcomeChild else {
-                fatalError("Source element must be a WelcomeChild")
+                log.error("Source element must be a WelcomeChild")
+                return
             }
             child.preset = preset
             child.omitsSiblingLink = !isSinglePage
@@ -100,10 +107,12 @@ class WelcomePageViewController: UIPageViewController {
         }
 
         guard (index < source.count) else {
-            fatalError("Page \(index) beyond source controllers (\(source.count))")
+            log.error("Page \(index) beyond source controllers (\(source.count))")
+            return
         }
         guard let currentIndex = source.index(of: viewControllers!.first!) else {
-            fatalError("No page displayed yet")
+            log.error("No page displayed yet")
+            return
         }
         let controller = source[index]
         let direction: UIPageViewController.NavigationDirection = (index > currentIndex) ? .forward : .reverse
@@ -139,7 +148,8 @@ class WelcomePageViewController: UIPageViewController {
 extension WelcomePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = source.index(of: viewController) else {
-            fatalError("Cannot find view controller")
+            log.error("Cannot find view controller")
+            return nil
         }
         if (index == 0) {
             return nil
@@ -149,7 +159,8 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = source.index(of: viewController) else {
-            fatalError("Cannot find view controller")
+            log.error("Cannot find view controller")
+            return nil
         }
         if (index == source.count - 1) {
             return nil

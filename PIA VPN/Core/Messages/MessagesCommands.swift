@@ -26,6 +26,8 @@ import PIAWireguard
 import TunnelKitCore
 import TunnelKitOpenVPN
 
+private let log = PIALogger.logger(for: ActionCommand.self)
+
 protocol Command {
     func execute()
 }
@@ -146,7 +148,8 @@ class ActionCommand: Command {
         let preferences = Client.preferences.editable()
         guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
+            return
         }
 
         preferences.setVPNCustomConfiguration(currentVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
@@ -160,7 +163,8 @@ class ActionCommand: Command {
         let preferences = Client.preferences.editable()
         guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
+            log.error("No default VPN custom configuration provided for PIA OpenVPN protocol")
+            return
         }
 
         preferences.setVPNCustomConfiguration(currentVPNConfiguration, for: PIATunnelProfile.vpnType)

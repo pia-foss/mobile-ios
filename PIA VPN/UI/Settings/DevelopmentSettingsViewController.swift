@@ -243,7 +243,8 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
                 controller?.selectedOption = AppPreferences.shared.stagingVersion
                 if let controller = controller {
                     guard let cell = tableView.cellForRow(at: indexPath) else {
-                        fatalError("Cell not found at \(indexPath)")
+                        log.error("Cell not found at \(indexPath)")
+                        return
                     }
 
                     controller.title = cell.textLabel?.text
@@ -318,7 +319,8 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
     
     func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
         guard let setting = DevelopmentSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
+            log.error("Unhandled setting \(controller.tag)")
+            return
         }
 
         switch setting {
@@ -341,7 +343,8 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
 
     func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
         guard let setting = DevelopmentSections(rawValue: controller.tag) else {
-            fatalError("Unhandled setting \(controller.tag)")
+            log.error("Unhandled setting \(controller.tag)")
+            return
         }
 
         switch setting {

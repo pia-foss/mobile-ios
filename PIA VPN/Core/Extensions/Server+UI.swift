@@ -25,17 +25,20 @@ import PIALibrary
 import UIKit
 
 extension Server: CustomStringConvertible {
-    func name(forStatus status: VPNStatus) -> String {
+    func name(forStatus status: VPNStatus) -> String? {
         
         let localizedName = name
         
         switch status {
-//        case .connecting, .changingServer, .connected:
         case .connected:
             guard !isAutomatic else {
-                let effectiveServer = Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
-                let localizedName = effectiveServer.name
-                return "\(name) (\(localizedName))"
+                do {
+                    let effectiveServer = try Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
+                    let localizedName = effectiveServer.name
+                    return "\(name) (\(localizedName))"
+                } catch {
+                    return nil
+                }
             }
             return localizedName
             
@@ -45,20 +48,6 @@ extension Server: CustomStringConvertible {
             return L10n.Localizable.Dashboard.Vpn.disconnecting
         case .disconnected, .unknown:
             return localizedName
-        }
-    }
-    
-    func flagServer(forStatus status: VPNStatus) -> Server {
-        switch status {
-//        case .connecting, .changingServer, .connected:
-        case .connecting, .connected:
-            guard !isAutomatic else {
-                return Client.providers.vpnProvider.profileServer ?? Client.providers.serverProvider.targetServer
-            }
-            return self
-            
-        default:
-            return self
         }
     }
 

@@ -91,7 +91,8 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
             let vc = nav.topViewController as! SignupInProgressViewController
             
             guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
+                log.error("signupEmail is not set in RestoreSignupViewController")
+                return
             }
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
@@ -147,7 +148,8 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
         log.debug("Restored payment receipt, redeeming...");
         
         guard let email = signupEmail else {
-            fatalError("Restore receipt and signupEmail is not set")
+            log.error("signupEmail is not set in RestoreSignupViewController")
+            return
         }
         self.restoreController(self,
                                didRefreshReceiptWith: email)

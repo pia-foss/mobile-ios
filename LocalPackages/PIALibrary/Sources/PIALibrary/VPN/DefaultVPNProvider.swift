@@ -24,6 +24,8 @@ import Foundation
 import __PIALibraryNative
 import NetworkExtension
 
+fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
+
 @available(tvOS 17.0, *)
 open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
     
@@ -88,7 +90,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         }
     }
     
-    public func prepare() {
+    public func prepare() throws {
         
         var profile = activeProfileRemovingInactive()
         var force = false
@@ -119,8 +121,9 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         } else {
             
             // should never happen, IKEv2 is always available
-            guard let _ = profile else {
-                fatalError("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+            guard profile != nil else {
+                log.error("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+                throw ClientError.vpnProfileUnavailable
             }
             
             completionBlock()
@@ -139,9 +142,11 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(ClientError.unauthorized)
             return
         }
+
         let newVPNType = accessedPreferences.vpnType
         guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
 
         var previousProfile: VPNProfile?
@@ -151,7 +156,11 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
 
         let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
         let installBlock: SuccessLibraryCallback = { (error) in
-            profile.save(withConfiguration: self.vpnClientConfiguration(for: profile), force: forcedStatuses) { (error) in
+            guard let configuration = self.vpnClientConfiguration(for: profile) else {
+                callback?(ClientError.vpnProfileUnavailable)
+                return
+            }
+            profile.save(withConfiguration: configuration, force: forcedStatuses) { (error) in
                 if let error = error {
                     callback?(error)
                     return
@@ -167,7 +176,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
                         callback?(nil)
                     })
                 } else {
-                    if let previousProfile = previousProfile { // dont connect after install
+                    if previousProfile != nil { // dont connect after install
                         self.connect(nil)
                     }
                     Macros.postNotification(.PIAVPNDidInstall)
@@ -190,7 +199,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     
     public func disable(_ callback: SuccessLibraryCallback?) {
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
         activeProfile.disconnect(nil)
         activeProfile.disable(callback)
@@ -198,7 +208,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     
     public func uninstall(_ callback: SuccessLibraryCallback?) {
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
         activeProfile.disconnect(nil)
         activeProfile.remove { (error) in
@@ -226,9 +237,14 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             return
         }
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
-        activeProfile.connect(withConfiguration: vpnClientConfiguration(), callback)
+        guard let configuration = vpnClientConfiguration() else {
+            callback?(ClientError.vpnProfileUnavailable)
+            return
+        }
+        activeProfile.connect(withConfiguration: configuration, callback)
     }
     
     public func disconnect(_ callback: SuccessLibraryCallback?) {
@@ -236,13 +252,18 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(ClientError.unauthorized)
             return
         }
+
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
-        
-        let configuration = vpnClientConfiguration()
+
+        guard let configuration = vpnClientConfiguration() else {
+            callback?(ClientError.vpnProfileUnavailable)
+            return
+        }
         activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-            var log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
+            let log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
             self.accessedDatabase.transient.vpnLog = log
             activeProfile.disconnect(callback)
         }
@@ -255,7 +276,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             return
         }
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
         activeProfile.updatePreferences(callback)
     }
@@ -265,20 +287,25 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(ClientError.unauthorized)
             return
         }
+
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(ClientError.vpnProfileUnavailable)
+            return
         }
-        let fallbackDelay = delay ?? accessedConfiguration.vpnReconnectionDelay
         
         let shouldDisconnectFirst = (activeProfile.vpnType != IKEv2Profile.vpnType || forceDisconnect)
-      
+
         if shouldDisconnectFirst {
             activeProfile.disconnect { (error) in
                 if let _ = error {
                     callback?(error)
                     return
                 }
-                activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
+                guard let configuration = self.vpnClientConfiguration() else {
+                    callback?(ClientError.vpnProfileUnavailable)
+                    return
+                }
+                activeProfile.connect(withConfiguration: configuration, callback)
             }
         } else {
             activeProfile.updatePreferences { (error) in
@@ -286,20 +313,28 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
                     callback?(error)
                     return
                 }
-                activeProfile.connect(withConfiguration: self.vpnClientConfiguration(), callback)
+                guard let configuration = self.vpnClientConfiguration() else {
+                    callback?(ClientError.vpnProfileUnavailable)
+                    return
+                }
+                activeProfile.connect(withConfiguration: configuration, callback)
             }
         }
     }
     
     public func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(nil, ClientError.vpnProfileUnavailable)
+            return
         }
         
         if vpnStatus == .disconnected {
-            self.webServices.submitDebugReport(shouldSendPersistedData, vpnLog ?? "Unknown", callback)
+            self.webServices.submitDebugReport(shouldSendPersistedData, vpnLog, callback)
         } else {
-            let configuration = vpnClientConfiguration()
+            guard let configuration = vpnClientConfiguration() else {
+                callback?(nil, ClientError.vpnProfileUnavailable)
+                return
+            }
             activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
                 let rawContent = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
                 self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
@@ -309,9 +344,13 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
         guard let activeProfile = activeProfile else {
-            preconditionFailure()
+            callback?(nil, ClientError.vpnProfileUnavailable)
+            return
         }
-        let configuration = vpnClientConfiguration()
+        guard let configuration = vpnClientConfiguration() else {
+            callback?(nil, ClientError.vpnProfileUnavailable)
+            return
+        }
         activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration) { (usage, error) in
             guard let usage = usage else {
                 callback?(nil, error)
@@ -346,15 +385,25 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         return activeProfile
     }
 
-    private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration {
+    private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
         guard let currentUser = accessedProviders.accountProvider.currentUser else {
-            preconditionFailure("Not logged in")
+            log.error("vpnClientConfiguration: No current user available")
+            return nil
         }
+
         guard let currentPasswordReference = accessedProviders.accountProvider.currentPasswordReference else {
-            preconditionFailure("Not logged in")
+            log.error("vpnClientConfiguration: No current password reference available")
+            return nil
         }
+
         guard let profile = profile ?? activeProfile else {
-            preconditionFailure("Profile not installed")
+            log.error("vpnClientConfiguration: No VPN profile available")
+            return nil
+        }
+
+        guard let targetServer = try? accessedProviders.serverProvider.targetServer else {
+            log.error("vpnClientConfiguration: No target server available")
+            return nil
         }
 
         let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
@@ -363,7 +412,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             name: accessedConfiguration.vpnProfileName,
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
-            server: accessedProviders.serverProvider.targetServer,
+            server: targetServer,
             isOnDemand: accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration,

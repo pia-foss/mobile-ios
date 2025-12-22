@@ -62,11 +62,11 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let preset = self.preset else {
-            fatalError("Preset not propagated")
+        if preset == nil {
+            log.error("Preset not propagated in PurchaseViewController")
         }
         
-        isExpired = preset.isExpired
+        isExpired = preset?.isExpired ?? false
         
         styleButtons()
 
@@ -124,7 +124,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             let vc = nav.topViewController as! SignupInProgressViewController
             
             guard let email = signupEmail else {
-                fatalError("Signing up and signupEmail is not set")
+                log.error("Signing up and signupEmail is not set")
+                return
             }
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title

@@ -89,7 +89,7 @@ extension VpnConnectionUseCase {
                 switch (currentConnectionIntent, newVpnStatus) {
                 case (.connect, .connected):
                     // Update the lastConnectedRegion when the connection has succeeded
-                    self.clientPreferences.lastConnectedServer = serverProvider.targetServerType
+                    self.clientPreferences.lastConnectedServer = try? serverProvider.targetServerType
                     
                     // The vpn connection has succeeded, then put back the connection intent to none
                     self.connectionIntent.send(.none)

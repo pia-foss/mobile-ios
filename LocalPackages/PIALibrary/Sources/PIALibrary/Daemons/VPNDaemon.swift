@@ -49,7 +49,12 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)
         nc.addObserver(self, selector: #selector(vpnIsChangingServer(notification:)), name: .PIAVPNIsChangingServer, object: nil)
 
-        accessedProviders.vpnProvider.prepare()
+        do {
+            try accessedProviders.vpnProvider.prepare()
+        } catch {
+            log.error("Faile to prepare VPN provider: \(error.localizedDescription)")
+        }
+
         if Client.providers.vpnProvider.isVPNConnected {
             self.lastKnownVpnStatus = .connected
         }
@@ -113,7 +118,7 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             if fallbackTimer == nil {
                 
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { timer in
-                    let address = Client.providers.serverProvider.targetServer.bestAddress()
+                    let address = try? Client.providers.serverProvider.targetServer.bestAddress()
                     address?.markServerAsUnavailable()
                     
                     log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
@@ -244,7 +249,9 @@ class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         self.isReconnecting = false
         self.numberOfAttempts = 0
         self.updateUIWithAttemptNumber(0)
-        Client.providers.serverProvider.targetServer.addresses().forEach({$0.reset()})
+
+        let targetServer = try? Client.providers.serverProvider.targetServer
+        targetServer?.addresses().forEach({$0.reset()})
     }
     
     // MARK: Update UI

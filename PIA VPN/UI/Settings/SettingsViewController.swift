@@ -139,7 +139,9 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         var newProtocols: [EndpointProtocol] = []
         if (port != ProtocolSettingsViewController.AUTOMATIC_PORT) {
             guard let socketType = pendingOpenVPNSocketType else {
-                fatalError("Port cannot be set manually when socket type is automatic")
+                log.error("Port cannot be set manually when socket type is automatic. Using automatic protocols.")
+                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
+                return
             }
             newProtocols.append(EndpointProtocol(socketType, port))
         } else {
@@ -220,7 +222,8 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     @objc private func refreshWireGuardSettings() {
         guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
+            return
         }
 
         pendingPreferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
@@ -267,7 +270,8 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         preferences.commit()
 
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA protocol")
+            log.error("No default VPN custom configuration provided for PIA protocol")
+            return
         }
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
@@ -415,12 +419,14 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         
         guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            fatalError("No default VPN custom configuration provided for PIA OpenVPN protocol")
+            log.error("No default VPN custom configuration provided for PIA OpenVPN protocol")
+            return
         }
-        
+
         guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
             Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            fatalError("No default VPN custom configuration provided for PIA Wireguard protocol")
+            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
+            return
         }
         
         pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
@@ -647,7 +653,8 @@ extension OpenVPN.ConfigurationBuilder {
             return nil
         }
         guard let port = endpointProtocols?.first?.port else {
-            fatalError("Zero current protocols")
+            log.error("Zero current protocols. Returning automatic port.")
+            return nil
         }
         return port
     }

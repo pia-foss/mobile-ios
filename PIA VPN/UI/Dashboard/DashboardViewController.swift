@@ -478,9 +478,13 @@ class DashboardViewController: AutolayoutViewController {
                 RatingManager.shared.handleConnectionError()
             }
             
-            let preferences = Client.preferences.editable()
-            preferences.lastConnectedRegion = Client.providers.serverProvider.targetServer
-            preferences.commit()
+            do {
+                let preferences = Client.preferences.editable()
+                preferences.lastConnectedRegion = try Client.providers.serverProvider.targetServer
+                preferences.commit()
+            } catch {
+                log.error("Failed to assign lastConnectedRegion: \(error.localizedDescription)")
+            }
             
             if Client.providers.vpnProvider.vpnStatus == .disconnected {
                 weakSelf.handleDisconnectedAndTrustedNetwork()
@@ -1181,7 +1185,7 @@ extension DashboardViewController: MenuViewControllerDelegate {
         case .version:
             break
         default:
-            fatalError("Unhandled item '\(item)'")
+            log.error("Unhandled item '\(item)'")
         }
     }
     

@@ -22,6 +22,8 @@
 
 import Foundation
 
+fileprivate let log = PIALogger.logger(for: Keychain.self)
+
 /// Handled keychain errors.
 public enum KeychainError: Error {
 
@@ -180,7 +182,7 @@ public class Keychain {
         } else if let accessGroup = accessGroup {
             query[kSecAttrAccessGroup as String] = accessGroup
         } else {
-            fatalError("No service nor accessGroup set")
+            log.error("Keychain: No service nor accessGroup set. Keychain operations may fail.")
         }
     }
 }

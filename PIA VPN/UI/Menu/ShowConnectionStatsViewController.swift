@@ -23,6 +23,8 @@ import Foundation
 import PIALibrary
 import UIKit
 
+private let log = PIALogger.logger(for: ShowConnectionStatsViewController.self)
+
 class ShowConnectionStatsViewController: AutolayoutViewController {
 
     private var licenseByComponentName: [String: String] = [:]
@@ -102,10 +104,12 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
         gradientData?.removeFromSuperview()
         
         guard let gradientStartColor = self.view.backgroundColor?.withAlphaComponent(0.0) else {
-            fatalError("Cell has no backgroundColor?")
+            log.error("Cell has no backgroundColor?")
+            return
         }
         guard let gradientEndColor = self.view.backgroundColor else {
-            fatalError("Cell has no backgroundColor?")
+            log.error("Cell has no backgroundColor?")
+            return
         }
         
         let gradientView = GradientView(frame: viewDataFooter.bounds)
