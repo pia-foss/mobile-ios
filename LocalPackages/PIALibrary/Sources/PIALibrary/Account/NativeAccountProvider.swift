@@ -203,7 +203,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                 }
                 
                 guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
-                    preconditionFailure()
+                    callback?(ClientError.unauthorized)
+                    return
                 }
         
                 self?.accessedDatabase.secure.setPassword(password, for: username)
@@ -218,9 +219,9 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
     
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
        
         loginUseCase.login(with: receiptRequest.receipt) { error in
@@ -234,7 +235,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
 
     public func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
 
         self.webServices.migrateToken(token: linkToken) { (error) in
@@ -245,7 +247,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
 
     public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(currentUser, nil)
+            return
         }
     
         loginWithCredentials(request.credentials, callback: callback)
@@ -290,6 +293,7 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             
             switch result {
             case .failure(let error):
+                log.error("updateUserAccount failed with error: \(error.localizedDescription)")
                 self.logout(nil)
                 self.cleanDatabase()
                 DispatchQueue.main.async {
@@ -308,12 +312,7 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
     
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        guard isLoggedIn,
-            let _ = self.publicUsername else {
-            guard let user = currentUser else {
-                preconditionFailure()
-            }
-
+        guard isLoggedIn, self.publicUsername != nil else {
             self.logout(nil)
             return
         }
@@ -388,9 +387,10 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
     
     private func handleUpdateAccountSuccessRequest(_ request: UpdateAccountRequest, callback: ((AccountInfo?, Error?) -> Void)?) {
-        
+
         guard let user = currentUser else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         
         guard let newAccountInfo = user.info?.with(email: request.email) else {
@@ -421,7 +421,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     
     public func deleteAccount(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
-            preconditionFailure()
+            callback?(ClientError.unauthorized)
+            return
         }
         
         deleteAccountUseCase() { error in
@@ -530,7 +531,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
 
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let signup = request.signup(withStore: accessedStore) else {
             callback?(nil, ClientError.noReceipt)
@@ -587,7 +589,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
 
     public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         guard let info = currentUser?.info else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
 
         listPlanProducts { (_, error) in
@@ -622,13 +625,16 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     
     public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard isLoggedIn else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let user = currentUser else {
-            preconditionFailure()
+            callback?(nil, ClientError.unauthorized)
+            return
         }
         guard let accountInfo = user.info, accountInfo.isRenewable else {
-            preconditionFailure()
+            callback?(nil, ClientError.renewingNonRenewable)
+            return
         }
         guard let payment = request.payment(withStore: accessedStore) else {
             callback?(nil, ClientError.noReceipt)
@@ -637,7 +643,7 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         
         paymentUseCase(with: user.credentials, request: payment) { (error) in
             
-            log.debug("Payment processed with error: \(error)")
+            log.debug("Payment processed with error: \(error?.localizedDescription ?? "N/A")")
             
             DispatchQueue.main.async {
                 if let error {
