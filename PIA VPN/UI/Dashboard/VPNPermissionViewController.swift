@@ -23,6 +23,9 @@
 import UIKit
 import PIALibrary
 import MessageUI
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var imvPicture: UIImageView!
@@ -61,16 +64,16 @@ class VPNPermissionViewController: AutolayoutViewController {
     }
     
     @IBAction private func submit() {
-        let vpn = Client.providers.vpnProvider
-        vpn.install(force: true, { (error) in
-            guard (error == nil) else {
+        Task { @MainActor in
+            do {
+                let vpn = Client.providers.vpnProvider
+                try await vpn.install(force: true)
+                self.dismissingViewController?.dismiss(animated: true)
+            } catch {
+                log.error("VPN install failed with error: \(error.localizedDescription)")
                 self.alertRequiredPermission()
-                return
             }
-            self.dismissingViewController?.dismiss(animated: true) {
-                //                vpn.connect(nil)
-            }
-        })
+        }
     }
     
     private func alertRequiredPermission() {
