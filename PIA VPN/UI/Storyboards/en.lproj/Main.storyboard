@@ -1851,8 +1851,8 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a0H-gs-ee5" customClass="BorderedTextField" customModule="PIALibrary">
-                                                                        <rect key="frame" x="0.0" y="19.666666666666664" width="319" height="49.999999999999993"/>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a0H-gs-ee5" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="19.666666666666671" width="319" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="FK5-7M-Xk9"/>
                                                                         </constraints>
@@ -1868,7 +1868,7 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-z8-Qr5" customClass="BorderedTextField" customModule="PIALibrary">
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-z8-Qr5" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="104" width="319" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="b6f-5O-GLy"/>
@@ -2243,7 +2243,7 @@
                                                                     <constraint firstItem="7ev-z1-KYN" firstAttribute="leading" secondItem="GBN-9r-4MZ" secondAttribute="leading" id="meU-A9-XzG"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-AA-bC0" customClass="ActivityButton" customModule="PIALibrary">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-AA-bC0" customClass="ActivityButton" customModule="PIA_VPN" customModuleProvider="target">
                                                                 <rect key="frame" x="47.666666666666657" y="451.33333333333326" width="280" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -2388,8 +2388,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueF-c5-jad" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="19" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueF-c5-jad" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="57" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3Ft-9W-7dU"/>
                                 </constraints>
@@ -2399,8 +2399,8 @@
                                     <outlet property="delegate" destination="W4F-zm-KqY" id="2K9-mK-MeG"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5k-AG-Xbn" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="79" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5k-AG-Xbn" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="117" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3za-pb-gpH"/>
                                 </constraints>
@@ -2410,8 +2410,8 @@
                                     <outlet property="delegate" destination="W4F-zm-KqY" id="vug-zc-OkV"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6py-2p-kR9" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="139" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6py-2p-kR9" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="177" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="hJ7-nG-xYU"/>
                                 </constraints>
@@ -2421,8 +2421,8 @@
                                     <outlet property="delegate" destination="W4F-zm-KqY" id="0Z7-lB-Zfb"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-XL-MJd" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="199" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-XL-MJd" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="237" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="D30-L5-rd6"/>
                                 </constraints>
@@ -2432,8 +2432,8 @@
                                     <outlet property="delegate" destination="W4F-zm-KqY" id="PIN-Gg-CeB"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-dY-TqG" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="259" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-dY-TqG" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="297" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bVM-Du-m5t"/>
                                 </constraints>
@@ -2443,8 +2443,8 @@
                                     <outlet property="delegate" destination="W4F-zm-KqY" id="ogb-cS-Ktu"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qD7-Vu-Hz2" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="319" width="337" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qD7-Vu-Hz2" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="357" width="337" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xWm-fl-jcm"/>
                                 </constraints>
@@ -2525,8 +2525,8 @@
                                             <action selector="signUp:" destination="Jcq-Qm-xQ1" eventType="touchUpInside" id="ehM-Qc-c6Q"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-oz-kiu" customClass="BorderedTextField" customModule="PIALibrary">
-                                        <rect key="frame" x="0.0" y="83.333333333333329" width="325" height="49.999999999999986"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-oz-kiu" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="83.333333333333343" width="325" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jbH-2w-5Aa"/>
