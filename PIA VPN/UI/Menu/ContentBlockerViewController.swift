@@ -38,7 +38,8 @@ class ContentBlockerViewController: AutolayoutViewController {
         super.viewDidLoad()
         
         title = L10n.Localizable.ContentBlocker.title
-
+        isModalInPresentation = true
+        
         imvPicture.image = Asset.Images.imageContentBlocker.image
         labelTitle.text = L10n.Localizable.ContentBlocker.title
         labelMessage.text = L10n.Localizable.ContentBlocker.Body.subtitle
