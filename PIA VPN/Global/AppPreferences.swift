@@ -101,7 +101,6 @@ class AppPreferences {
         static let showServiceMessages = "showServiceMessages"
 
         // Features
-        static let showsDedicatedIPView = "showsDedicatedIPView"
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
         static let showNewInitialScreen = "showNewInitialScreen"
@@ -513,15 +512,6 @@ class AppPreferences {
         }
     }
     
-    var showsDedicatedIPView: Bool {
-        get {
-            return defaults.bool(forKey: Entries.showsDedicatedIPView)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showsDedicatedIPView)
-        }
-    }
-    
     var disablesMultiDipTokens: Bool {
         get {
             return defaults.bool(forKey: Entries.disablesMultiDipTokens)
@@ -647,7 +637,6 @@ class AppPreferences {
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
             Entries.showServiceMessages: false,
-            Entries.showsDedicatedIPView: true,
             Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
             Entries.userInteractedWithSurvey: false,
