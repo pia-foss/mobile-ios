@@ -26,7 +26,34 @@ jobs:
         xcode-version: latest-stable
     
     - name: Download iOS Platform
-      run: xcodebuild -downloadPlatform iOS
+      run: |
+        # Check if iOS platform is already installed
+        if xcodebuild -showsdks | grep -q "iphoneos"; then
+          echo "iOS platform already installed, skipping download"
+          exit 0
+        fi
+
+        # Retry up to 3 times if download fails
+        max_attempts=3
+        attempt=1
+
+        while [ $attempt -le $max_attempts ]; do
+          echo "Attempt $attempt of $max_attempts: Downloading iOS platform..."
+          if xcodebuild -downloadPlatform iOS; then
+            echo "iOS platform downloaded successfully"
+            exit 0
+          else
+            echo "Download failed on attempt $attempt"
+            if [ $attempt -lt $max_attempts ]; then
+              echo "Retrying in 10 seconds..."
+              sleep 10
+            fi
+          fi
+          attempt=$((attempt + 1))
+        done
+
+        echo "Failed to download iOS platform after $max_attempts attempts"
+        exit 1
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1

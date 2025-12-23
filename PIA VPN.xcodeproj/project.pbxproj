@@ -33,6 +33,10 @@
 		35950B342ADD2EE5006F3CD9 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35950B332ADD2EE5006F3CD9 /* Nimble */; };
 		35E8E6762B8C39A400A3A3DB /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8E6752B8C39A400A3A3DB /* Quick */; };
 		35E8E6782B8C39AA00A3A3DB /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 35E8E6772B8C39AA00A3A3DB /* Nimble */; };
+		3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */; };
+		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
+		3F557CF52EF59C34002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF42EF59C34002FB559 /* SwiftEntryKit */; };
+		3F557CF72EF59C39002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF62EF59C39002FB559 /* PopupDialog */; };
 		3F7B4C8B2EE7332B00EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */; };
 		3F7B4C8D2EE7333300EE1F4C /* PIADesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
@@ -45,13 +49,10 @@
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
 		8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67E251CB4BA000B4DBF /* SwiftUI.framework */; };
 		8269A6E3251CB5E3000B4DBF /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AA36CDBB28A6622A00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDBA28A6622A00180A33 /* TweetNacl */; };
 		AA36CDC428A6711300180A33 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC328A6711300180A33 /* Popover */; };
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
-		AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDDA28A6860F00180A33 /* TweetNacl */; };
-		AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826C28AD185E00CDAC64 /* TweetNacl */; };
 		AABF826F28AD187800CDAC64 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AABF826E28AD187800CDAC64 /* Popover */; };
 		AABF827328AE2FF500CDAC64 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827228AE2FF500CDAC64 /* GradientProgressBar */; };
 		AABF827528AE2FFE00CDAC64 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AABF827428AE2FFE00CDAC64 /* SideMenu */; };
@@ -491,10 +492,11 @@
 				0EE2205C1F4EF307002805AE /* CoreGraphics.framework in Frameworks */,
 				AABF826F28AD187800CDAC64 /* Popover in Frameworks */,
 				0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */,
+				3F557CF52EF59C34002FB559 /* SwiftEntryKit in Frameworks */,
 				0EE2205D1F4EF307002805AE /* UIKit.framework in Frameworks */,
 				0EE2205E1F4EF307002805AE /* Foundation.framework in Frameworks */,
+				3F557CF72EF59C39002FB559 /* PopupDialog in Frameworks */,
 				3F7BD9BA2EE8A09C00EE1F4C /* PIALibrary in Frameworks */,
-				AABF826D28AD185E00CDAC64 /* TweetNacl in Frameworks */,
 				AABF827528AE2FFE00CDAC64 /* SideMenu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,7 +523,6 @@
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
 				AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */,
 				AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */,
-				AA36CDBB28A6622A00180A33 /* TweetNacl in Frameworks */,
 				2909869018566430002D9687 /* Security.framework in Frameworks */,
 				299E58511856BD31004CFD63 /* SystemConfiguration.framework in Frameworks */,
 				299E585F1856C6EE004CFD63 /* libz.dylib in Frameworks */,
@@ -530,8 +531,10 @@
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
+				3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
 				3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */,
+				3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */,
 				291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */,
 				0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */,
 			);
@@ -569,7 +572,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */,
-				AA36CDDB28A6860F00180A33 /* TweetNacl in Frameworks */,
 				DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,13 +738,14 @@
 			);
 			name = "PIA VPN dev";
 			packageProductDependencies = (
-				AABF826C28AD185E00CDAC64 /* TweetNacl */,
 				AABF826E28AD187800CDAC64 /* Popover */,
 				AABF827228AE2FF500CDAC64 /* GradientProgressBar */,
 				AABF827428AE2FFE00CDAC64 /* SideMenu */,
 				AABF827728AE333200CDAC64 /* DZNEmptyDataSet */,
 				3F7B4C8C2EE7333300EE1F4C /* PIADesignSystem */,
 				3F7BD9B92EE8A09C00EE1F4C /* PIALibrary */,
+				3F557CF42EF59C34002FB559 /* SwiftEntryKit */,
+				3F557CF62EF59C39002FB559 /* PopupDialog */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -811,13 +814,14 @@
 			);
 			name = "PIA VPN";
 			packageProductDependencies = (
-				AA36CDBA28A6622A00180A33 /* TweetNacl */,
 				AA36CDC328A6711300180A33 /* Popover */,
 				AA36CDC828A6733500180A33 /* DZNEmptyDataSet */,
 				AA36CDCB28A673C900180A33 /* GradientProgressBar */,
 				AA36CDCE28A6746500180A33 /* SideMenu */,
 				3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */,
 				3F7BD9B72EE8A09800EE1F4C /* PIALibrary */,
+				3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */,
+				3F557CF22EF59C1C002FB559 /* PopupDialog */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -907,7 +911,6 @@
 			);
 			name = "PIA VPN WG Tunnel";
 			packageProductDependencies = (
-				AA36CDDA28A6860F00180A33 /* TweetNacl */,
 				3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */,
 			);
 			productName = "PIA VPN WG Tunnel";
@@ -1154,7 +1157,6 @@
 			);
 			mainGroup = 291C6373183EBC210039EC03;
 			packageReferences = (
-				AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */,
 				AA36CDC228A6711300180A33 /* XCRemoteSwiftPackageReference "Popover" */,
 				AA36CDC728A6733500180A33 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				AA36CDCA28A673C900180A33 /* XCRemoteSwiftPackageReference "GradientProgressBar" */,
@@ -1162,6 +1164,8 @@
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
 				E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
+				3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */,
 			);
 			preferredProjectObjectVersion = 46;
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
@@ -2848,12 +2852,20 @@
 				version = 13.0.0;
 			};
 		};
-		AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */ = {
+		3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bitmark-inc/tweetnacl-swiftwrap.git";
+			repositoryURL = "https://github.com/huri000/SwiftEntryKit.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.0;
+				version = 2.0.0;
+			};
+		};
+		3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Orderella/PopupDialog.git";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		AA36CDC228A6711300180A33 /* XCRemoteSwiftPackageReference "Popover" */ = {
@@ -2919,6 +2931,26 @@
 			package = 35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
 		};
+		3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
+			productName = SwiftEntryKit;
+		};
+		3F557CF22EF59C1C002FB559 /* PopupDialog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */;
+			productName = PopupDialog;
+		};
+		3F557CF42EF59C34002FB559 /* SwiftEntryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
+			productName = SwiftEntryKit;
+		};
+		3F557CF62EF59C39002FB559 /* PopupDialog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */;
+			productName = PopupDialog;
+		};
 		3F7B4C8A2EE7332B00EE1F4C /* PIADesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADesignSystem;
@@ -2947,11 +2979,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
 		};
-		AA36CDBA28A6622A00180A33 /* TweetNacl */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */;
-			productName = TweetNacl;
-		};
 		AA36CDC328A6711300180A33 /* Popover */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA36CDC228A6711300180A33 /* XCRemoteSwiftPackageReference "Popover" */;
@@ -2971,16 +2998,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
-		};
-		AA36CDDA28A6860F00180A33 /* TweetNacl */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */;
-			productName = TweetNacl;
-		};
-		AABF826C28AD185E00CDAC64 /* TweetNacl */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA36CDB928A6622A00180A33 /* XCRemoteSwiftPackageReference "tweetnacl-swiftwrap" */;
-			productName = TweetNacl;
 		};
 		AABF826E28AD187800CDAC64 /* Popover */ = {
 			isa = XCSwiftPackageProductDependency;
