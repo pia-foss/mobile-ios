@@ -78,6 +78,7 @@ class MenuViewController: AutolayoutViewController {
         [
             .selectRegion,
             .account,
+            .dedicatedIp,
             .settings,
             .logout
         ], [
@@ -121,11 +122,6 @@ class MenuViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if AppPreferences.shared.showsDedicatedIPView,
-           !allItems[0].contains(.dedicatedIp) {
-            allItems[0].insert(.dedicatedIp, at: 2)
-        }
         
         Theme.current.applySideMenu()
 

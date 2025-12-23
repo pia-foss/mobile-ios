@@ -169,7 +169,6 @@ class Bootstrapper {
         }
 
         Client.providers.accountProvider.featureFlags({ _ in
-            AppPreferences.shared.showsDedicatedIPView = Client.configuration.featureFlags.contains(Client.FeatureFlags.dedicatedIp)
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
             AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
