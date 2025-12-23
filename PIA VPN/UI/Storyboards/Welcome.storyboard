@@ -732,8 +732,8 @@ You will not be charged during this process.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIALibrary">
-                                <rect key="frame" x="19" y="39" width="337" height="18.5"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                <rect key="frame" x="19" y="39" width="337" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pAP-q7-PIs"/>
                                 </constraints>
