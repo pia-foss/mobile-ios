@@ -27,7 +27,7 @@ public extension UILabel {
     /// Add a specific height to the space between the label's lines.
     ///
     /// - Parameter lineHeight: The space between lines to apply.
-    public func setLineHeight(_ lineHeight: CGFloat) {
+    func setLineHeight(_ lineHeight: CGFloat) {
         let text = self.text
         if let text = text {
             let attributeString = NSMutableAttributedString(string: text)

@@ -1,6 +1,6 @@
 //
 //  CircleProgressView.swift
-//  PIALibrary-iOS
+//  PIA VPN
 //
 //  Created by Davide De Rosa on 11/30/17.
 //  Copyright © 2020 Private Internet Access, Inc.

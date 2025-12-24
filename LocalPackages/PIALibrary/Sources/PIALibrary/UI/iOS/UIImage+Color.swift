@@ -28,7 +28,7 @@ public extension UIImage {
     /// Method to create an image from a colour
     /// - Parameter color: The colour to convert to image
     /// - Returns: The image that is a colour
-    public static func fromColor(_ color: UIColor, height: CGFloat = 1.0) -> UIImage {
+    static func fromColor(_ color: UIColor, height: CGFloat = 1.0) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()

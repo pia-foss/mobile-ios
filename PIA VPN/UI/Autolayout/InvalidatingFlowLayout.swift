@@ -1,6 +1,6 @@
 //
 //  InvalidatingFlowLayout.swift
-//  PIALibrary
+//  PIA VPN
 //
 //  Created by Davide De Rosa on 12/25/17.
 //  Copyright © 2020 Private Internet Access, Inc.

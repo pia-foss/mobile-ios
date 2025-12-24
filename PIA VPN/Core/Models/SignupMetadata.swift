@@ -1,6 +1,6 @@
 //
 //  SignupMetadata.swift
-//  PIALibrary-iOS
+//  PIA VPN
 //
 //  Created by Davide De Rosa on 5/9/18.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import PIALibrary
 
 public struct SignupMetadata {
     public var email: String
