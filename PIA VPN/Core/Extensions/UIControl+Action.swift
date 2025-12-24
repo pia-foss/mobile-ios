@@ -1,6 +1,6 @@
 //
 //  UIControl+Action.swift
-//  PIALibrary
+//  PIA VPN
 //  
 //  Created by Jose Blaya on 15/07/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -16,7 +16,6 @@
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
 //  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 //
 
 import UIKit
@@ -24,7 +23,7 @@ import UIKit
 public extension UIControl {
     
     /// Typealias for UIControl closure.
-    public typealias UIControlTargetClosure = (UIControl) -> ()
+    typealias UIControlTargetClosure = (UIControl) -> ()
     
     private class UIControlClosureWrapper: NSObject {
         let closure: UIControlTargetClosure
@@ -53,10 +52,9 @@ public extension UIControl {
         targetClosure(self)
     }
     
-    public func addAction(for event: UIControl.Event, closure: @escaping UIControlTargetClosure) {
+    func addAction(for event: UIControl.Event, closure: @escaping UIControlTargetClosure) {
         targetClosure = closure
         addTarget(self, action: #selector(UIControl.closureAction), for: event)
     }
     
 }
-

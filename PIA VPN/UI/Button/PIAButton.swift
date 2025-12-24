@@ -1,6 +1,6 @@
 //
 //  PIAButton.swift
-//  PIALibrary-iOS
+//  PIA VPN
 //
 //  Created by Jose Antonio Blaya Garcia on 29/10/2018.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import PIALibrary
 
 public enum PIAButtonStatus {
     case normal

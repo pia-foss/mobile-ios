@@ -31,7 +31,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jq-0d-rQf" customClass="PIAButton" customModule="PIALibrary">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jq-0d-rQf" customClass="PIAButton" customModule="PIA_VPN" customModuleProvider="target">
                                 <rect key="frame" x="268" y="8" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="kM7-bQ-VAk"/>

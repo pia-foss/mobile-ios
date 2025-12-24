@@ -54,8 +54,8 @@
                             <rect key="frame" x="56.666666666666686" y="297.33333333333326" width="240" height="267.66666666666674"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLl-yh-l1E" customClass="PIAButton" customModule="PIALibrary">
-                            <rect key="frame" x="0.0" y="589" width="353" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLl-yh-l1E" customClass="PIAButton" customModule="PIA_VPN" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="496" width="353" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Vt7-9x-RzF"/>
                             </constraints>

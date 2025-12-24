@@ -2042,7 +2042,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="Y0b-Ya-aHd" secondAttribute="bottom" id="wW6-Nu-jsX"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecn-Jl-Ca3" customClass="PIAButton" customModule="PIALibrary">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecn-Jl-Ca3" customClass="PIAButton" customModule="PIA_VPN" customModuleProvider="target">
                                                                 <rect key="frame" x="32" y="365.33333333333337" width="311" height="50"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -2515,7 +2515,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9l-3d-oC0" customClass="PIAButton" customModule="PIALibrary">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9l-3d-oC0" customClass="PIAButton" customModule="PIA_VPN" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="148.33333333333334" width="325" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="HLd-W2-jV2"/>
@@ -2673,7 +2673,7 @@
                                                             <constraint firstAttribute="height" constant="166" id="mV7-Wx-Fqe"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jJ-Zb-2eF" customClass="PIAButton" customModule="PIALibrary">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jJ-Zb-2eF" customClass="PIAButton" customModule="PIA_VPN" customModuleProvider="target">
                                                         <rect key="frame" x="25" y="385" width="325" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
