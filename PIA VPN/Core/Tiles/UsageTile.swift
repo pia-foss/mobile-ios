@@ -24,6 +24,7 @@
 import Foundation
 import PIALibrary
 import UIKit
+import PIADesignSystem
 
 class UsageTile: UIView, Tileable  {
     

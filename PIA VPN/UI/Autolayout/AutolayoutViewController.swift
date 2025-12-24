@@ -22,6 +22,8 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
+
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {
 

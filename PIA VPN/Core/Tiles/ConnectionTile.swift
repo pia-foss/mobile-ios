@@ -24,6 +24,7 @@ import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
 import WidgetKit
+import PIADesignSystem
 
 class ConnectionTile: UIView, Tileable  {
     

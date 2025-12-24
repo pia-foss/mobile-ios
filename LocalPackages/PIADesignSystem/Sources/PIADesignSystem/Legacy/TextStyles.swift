@@ -1,6 +1,6 @@
 //
 //  TextStyles.swift
-//  PIALibrary-iOS
+//  PIADesignSystem
 //
 //  Created by Jose Antonio Blaya Garcia on 3/9/18.
 //  Copyright © 2020 Private Internet Access, Inc.

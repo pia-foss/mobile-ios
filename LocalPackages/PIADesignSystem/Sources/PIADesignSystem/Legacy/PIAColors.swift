@@ -1,6 +1,6 @@
 //
 //  PIAColors.swift
-//  PIALibrary-iOS
+//  PIADesignSystem
 //
 //  Created by Jose Antonio Blaya Garcia on 3/9/18.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -26,123 +26,123 @@ import UIKit
 
 public extension UIColor {
     
-    public class var piaGrey10: UIColor {
+    class var piaGrey10: UIColor {
         return UIColor(red: 34.0 / 255.0, green: 37.0 / 255.0, blue: 46.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey7: UIColor {
+    class var piaGrey7: UIColor {
         return UIColor(red: 43.0 / 255.0, green: 46.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey6: UIColor {
+    class var piaGrey6: UIColor {
         return UIColor(red: 50.0 / 255.0, green: 54.0 / 255.0, blue: 66.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey5: UIColor {
+    class var piaGrey5: UIColor {
         return UIColor(red: 92.0 / 255.0, green: 99.0 / 255.0, blue: 112.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey4: UIColor {
+    class var piaGrey4: UIColor {
         return UIColor(red: 136.0 / 255.0, green: 144.0 / 255.0, blue: 153.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey2: UIColor {
+    class var piaGrey2: UIColor {
         return UIColor(red: 215.0 / 255.0, green: 216.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey2Light: UIColor {
+    class var piaGrey2Light: UIColor {
         return UIColor(red: 230.0 / 255.0, green: 230.0 / 255.0, blue: 230.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaWhite: UIColor {
+    class var piaWhite: UIColor {
         return UIColor(white: 1.0, alpha: 1.0)
     }
     
-    public class var piaGrey1: UIColor {
+    class var piaGrey1: UIColor {
         return UIColor(white: 238.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGreen: UIColor {
+    class var piaGreen: UIColor {
         return UIColor(red: 93.0 / 255.0, green: 223.0 / 255.0, blue: 90.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGreenDark20: UIColor {
+    class var piaGreenDark20: UIColor {
         return UIColor(red: 76.0 / 255.0, green: 182.0 / 255.0, blue: 73.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGreenDark50: UIColor {
+    class var piaGreenDark50: UIColor {
         return UIColor(red: 3.0 / 255.0, green: 121.0 / 255.0, blue: 0.0, alpha: 1.0)
     }
     
-    public class var piaYellow: UIColor {
+    class var piaYellow: UIColor {
         return UIColor(red: 249.0 / 255.0, green: 207.0 / 255.0, blue: 1.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaYellowDark: UIColor {
+    class var piaYellowDark: UIColor {
         return UIColor(red: 230.0 / 255.0, green: 180.0 / 255.0, blue: 0.0, alpha: 1.0)
     }
     
-    public class var piaRed: UIColor {
+    class var piaRed: UIColor {
         return UIColor(red: 242.0 / 255.0, green: 68.0 / 255.0, blue: 88.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaRedDark: UIColor {
+    class var piaRedDark: UIColor {
         return UIColor(red: 178.0 / 255.0, green: 53.0 / 255.0, blue: 45.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGreenlight: UIColor {
+    class var piaGreenlight: UIColor {
         return UIColor(red: 122.0 / 255.0, green: 250.0 / 255.0, blue: 120.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGreenDark30: UIColor {
+    class var piaGreenDark30: UIColor {
         return UIColor(red: 64.0 / 255.0, green: 153.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaYellowLight: UIColor {
+    class var piaYellowLight: UIColor {
         return UIColor(red: 249.0 / 255.0, green: 208.0 / 255.0, blue: 1.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaOrange: UIColor {
+    class var piaOrange: UIColor {
         return UIColor(red: 245.0 / 255.0, green: 166.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaBlack: UIColor {
+    class var piaBlack: UIColor {
         return UIColor(white: 0.0, alpha: 1.0)
     }
     
-    public class var piaGrey12: UIColor {
+    class var piaGrey12: UIColor {
         return UIColor(red: 25.0 / 255.0, green: 27.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey11: UIColor {
+    class var piaGrey11: UIColor {
         return UIColor(red: 31.0 / 255.0, green: 33.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey8: UIColor {
+    class var piaGrey8: UIColor {
         return UIColor(red: 41.0 / 255.0, green: 44.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaGrey3: UIColor {
+    class var piaGrey3: UIColor {
         return UIColor(red: 147.0 / 255.0, green: 155.0 / 255.0, blue: 163.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaTransparentGrey: UIColor {
+    class var piaTransparentGrey: UIColor {
         return UIColor(red: 147.0 / 255.0, green: 155.0 / 255.0, blue: 163.0 / 255.0, alpha: 0.13)
     }
     
-    public class var piaNMTGreen: UIColor {
+    class var piaNMTGreen: UIColor {
         return UIColor(red: 60.0 / 255.0, green: 182.0 / 255.0, blue: 74.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaNMTRed: UIColor {
+    class var piaNMTRed: UIColor {
         return UIColor(red: 214.0 / 255.0, green: 64.0 / 255.0, blue: 3.0 / 255.0, alpha: 1.0)
     }
     
-    public class var piaNMTBlue: UIColor {
+    class var piaNMTBlue: UIColor {
         return UIColor(red: 29.0 / 255.0, green: 174.0 / 255.0, blue: 174.0 / 255.0, alpha: 1.0)
     }
 
-    public class var piaNMTGrey: UIColor {
+    class var piaNMTGrey: UIColor {
         return UIColor(red: 246.0 / 255.0, green: 246.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
     }
 

@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
 
 private let log = PIALogger.logger(for: GetStartedViewController.self)
 

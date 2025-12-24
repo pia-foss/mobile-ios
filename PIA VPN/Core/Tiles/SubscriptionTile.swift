@@ -23,6 +23,7 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
 
 class SubscriptionTile: UIView, Tileable  {
     

@@ -1,6 +1,6 @@
 //
-//  PIAFonts.swift
-//  PIALibrary
+//  ViewStyles.swift
+//  PIADesignSystem
 //
 //  Created by Jose Antonio Blaya Garcia on 3/9/18.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -22,19 +22,18 @@
 
 import UIKit
 
-private enum Fonts {
-    static let robotoTextRegular = "Roboto-Regular"
-    static let robotoTextMedium = "Roboto-Medium"
+protocol ViewStyling {
+    func style(style: ViewStyle)
 }
 
-extension UIFont {
+public extension ViewStyle {
     
-    public class func regularFontWith(size: CGFloat) -> UIFont! {
-        return UIFont(name: Fonts.robotoTextRegular, size: size)
-    }
+    static let refreshControlLight = ViewStyle(backgroundColor: nil,
+                                          tintColor: TextStyle.textStyle7.color,
+                                          layerStyle: nil)
     
-    public class func mediumFontWith(size: CGFloat) -> UIFont! {
-        return UIFont(name: Fonts.robotoTextMedium, size: size)
-    }
-
+    static let refreshControlDark = ViewStyle(backgroundColor: nil,
+                                              tintColor: TextStyle.textStyle6.color,
+                                              layerStyle: nil)
+    
 }

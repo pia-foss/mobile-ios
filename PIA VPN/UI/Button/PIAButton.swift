@@ -22,7 +22,7 @@
 
 import Foundation
 import UIKit
-import PIALibrary
+import PIADesignSystem
 
 public enum PIAButtonStatus {
     case normal

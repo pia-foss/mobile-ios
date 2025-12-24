@@ -498,7 +498,7 @@ You will not be charged during this process.</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="223" id="9uI-0g-6cL"/>
                                                         </constraints>
-                                                        <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIA_VPN" customModuleProvider="target"/>
+                                                        <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
@@ -921,7 +921,7 @@ You will not be charged during this process.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="ueL-56-6xP"/>
                                         </constraints>
-                                        <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIA_VPN" customModuleProvider="target"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="0.0" width="321" height="105"/>

@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import SafariServices
+import PIADesignSystem
 
 private let log = PIALogger.logger(for: AutomationSettingsViewController.self)
 

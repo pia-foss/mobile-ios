@@ -1,6 +1,6 @@
 //
 //  Color+PIAColors.swift
-//  PIA VPN
+//  PIADesignSystem
 //
 //  Created by Diego Trevisan on 08.12.25.
 //  Copyright © 2025 Private Internet Access, Inc.

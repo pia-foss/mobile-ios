@@ -22,8 +22,8 @@
 
 import UIKit
 
-class InvalidatingFlowLayout: UICollectionViewFlowLayout {
-    override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+public class InvalidatingFlowLayout: UICollectionViewFlowLayout {
+    public override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let context = super.invalidationContext(forBoundsChange: newBounds)
         guard let flowContext = context as? UICollectionViewFlowLayoutInvalidationContext else {
             return context

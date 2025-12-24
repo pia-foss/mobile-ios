@@ -23,6 +23,7 @@
 import Foundation
 import UIKit
 import PIALibrary
+import PIADesignSystem
 
 private let log = PIALogger.logger(for: SignupSuccessViewController.self)
 

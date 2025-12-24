@@ -26,6 +26,7 @@ import SideMenu
 import WidgetKit
 import NetworkExtension
 import ActivityKit
+import PIADesignSystem
 
 private let log = PIALogger.logger(for: DashboardViewController.self)
 

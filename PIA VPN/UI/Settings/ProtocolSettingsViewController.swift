@@ -24,6 +24,7 @@ import Popover
 import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
+import PIADesignSystem
 
 class ProtocolSettingsViewController: PIABaseSettingsViewController {
     

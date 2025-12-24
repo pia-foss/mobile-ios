@@ -1,6 +1,6 @@
 //
-//  ViewStyles.swift
-//  PIALibrary-iOS
+//  UIImage+Color.swift
+//  PIADesignSystem
 //
 //  Created by Jose Antonio Blaya Garcia on 3/9/18.
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -22,18 +22,20 @@
 
 import UIKit
 
-protocol ViewStyling {
-    func style(style: ViewStyle)
-}
-
-public extension ViewStyle {
-    
-    static let refreshControlLight = ViewStyle(backgroundColor: nil,
-                                          tintColor: TextStyle.textStyle7.color,
-                                          layerStyle: nil)
-    
-    static let refreshControlDark = ViewStyle(backgroundColor: nil,
-                                              tintColor: TextStyle.textStyle6.color,
-                                              layerStyle: nil)
-    
+/// Extension of the uiimage class, for simple helper methods.
+public extension UIImage {
+        
+    /// Method to create an image from a colour
+    /// - Parameter color: The colour to convert to image
+    /// - Returns: The image that is a colour
+    static func fromColor(_ color: UIColor, height: CGFloat = 1.0) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img ?? UIImage.fromColor(UIColor.clear)
+    }
 }
