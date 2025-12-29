@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Favoritos";
 "region.accessibility.favorite" = "Adicionar uma região favorita";
 "region.accessibility.unfavorite" = "Remover uma região favorita";
+"region.refresh.connected.error" = "Não é possível atualizar a latência enquanto estiver conectado à VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Conexão rápida";
