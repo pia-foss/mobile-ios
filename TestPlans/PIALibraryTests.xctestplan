@@ -13,15 +13,8 @@
   },
   "testTargets" : [
     {
-      "skippedTests" : [
-        "AccountInfoTests",
-        "AccountTests",
-        "DIPTokenKeychainTests",
-        "EndpointManagerTests",
-        "ProductTests"
-      ],
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..\/PIALibrary",
         "identifier" : "PIALibraryTests",
         "name" : "PIALibraryTests"
       }
