@@ -24,6 +24,7 @@ import UIKit
 import AuthenticationServices
 import PIALibrary
 import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 

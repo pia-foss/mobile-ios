@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import AuthenticationServices
 import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: AddEmailToAccountViewController.self)
 

@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import MessageUI
 import PIADesignSystem
+import PIAUIKit
 
 class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var imvPicture: UIImageView!

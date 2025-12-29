@@ -23,6 +23,7 @@
 import Foundation
 import PIALibrary
 import UIKit
+import PIAUIKit
 
 extension ThemeCode {
     func apply(theme: Theme, reload: Bool) {

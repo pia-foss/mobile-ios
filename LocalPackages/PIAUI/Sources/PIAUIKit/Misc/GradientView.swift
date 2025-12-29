@@ -1,8 +1,8 @@
 //
-//  BrandableNavigationBar
-//  PIALibrary-iOS
+//  GradientView.swift
+//  PIA VPN
 //
-//  Created by Jose Antonio Blaya Garcia on 31/10/2018.
+//  Created by Davide De Rosa on 12/8/17.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,10 +20,14 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
-///Implemented by objects expected to have a navigation bar with the brand style
-public protocol BrandableNavigationBar {
+public class GradientView: UIView {
+    open override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
     
+    public var gradientLayer: CAGradientLayer {
+        return layer as! CAGradientLayer
+    }
 }
-

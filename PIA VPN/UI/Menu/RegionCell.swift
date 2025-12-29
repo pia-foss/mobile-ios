@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIAUIKit
 
 public enum RegionStatus {
     case available

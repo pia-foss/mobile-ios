@@ -9,6 +9,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIAUIKit
 
 class ForceUpdateViewController: UIViewController {
     @IBOutlet weak var updateButton: PIAButton!

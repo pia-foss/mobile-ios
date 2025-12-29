@@ -32,7 +32,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-L8-QwR">
                             <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-TM-zJ2" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-TM-zJ2" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="HDR-BV-flz"/>
@@ -67,7 +67,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2t-Gn-Soc">
                             <rect key="frame" x="54" y="0.0" width="45.5" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0w3-JI-vVJ" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0w3-JI-vVJ" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="45.5" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="ork-rB-59g"/>
@@ -102,7 +102,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1c-e9-ML5">
                             <rect key="frame" x="107.5" y="0.0" width="46" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="040-dw-O7H" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="040-dw-O7H" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="TdO-fO-seX"/>
@@ -137,7 +137,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHj-Fz-viV">
                             <rect key="frame" x="161.5" y="0.0" width="46" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-nN-Rqv" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-nN-Rqv" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="Cms-0N-muJ"/>
@@ -172,7 +172,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="689-NK-vgn">
                             <rect key="frame" x="215.5" y="0.0" width="45.5" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgD-3N-uj2" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgD-3N-uj2" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="45.5" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="ryZ-YR-Wip"/>
@@ -207,7 +207,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wh-qM-ppb">
                             <rect key="frame" x="269" y="0.0" width="46" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuN-VK-qvm" customClass="ServerButton" customModule="PIA_VPN" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuN-VK-qvm" customClass="ServerButton" customModule="PIAUIKit">
                                     <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                                     <connections>
                                         <action selector="connectToServer:" destination="-1" eventType="touchUpInside" id="NTE-X6-uvX"/>

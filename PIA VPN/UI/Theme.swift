@@ -25,6 +25,7 @@ import UIKit
 import __PIALibraryNative
 import PIALibrary
 import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: Theme.self)
 

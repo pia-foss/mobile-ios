@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIAUIKit
 
 protocol DedicatedIpEmptyHeaderViewCellDelegate: AnyObject {
     func handleDIPActivation(with token: String, cell: DedicatedIpEmptyHeaderViewCell)

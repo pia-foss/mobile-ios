@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIAUIKit
 
 public protocol GDPRDelegate: class {
     

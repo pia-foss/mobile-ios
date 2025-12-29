@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -10,6 +10,10 @@ let package = Package(
     ],
     products: [
         .library(
+            name: "PIADesignSystem",
+            targets: ["PIADesignSystem"]
+        ),
+        .library(
             name: "PIAUIKit",
             targets: ["PIAUIKit"]
         ),
@@ -19,20 +23,32 @@ let package = Package(
         )
     ],
     dependencies: [
-//        .package(path: "../PIALibrary"),
-        .package(path: "../PIADesignSystem"),
+        .package(path: "../PIALibrary"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.18.7")
     ],
     targets: [
         .target(
-            name: "PIAUIKit"
-//            dependencies: [
-//                .product(name: "PIALibrary", package: "PIALibrary")
-//            ]
+            name: "PIADesignSystem",
+            resources: [
+                .process("Colors/Colors.xcassets")
+            ]
+        ),
+        .target(
+            name: "PIAUIKit",
+            dependencies: [
+                "PIADesignSystem",
+                .product(name: "PIALibrary", package: "PIALibrary")
+            ]
         ),
         .target(
             name: "PIASwiftUI",
+            dependencies: ["PIADesignSystem"]
+        ),
+        .testTarget(
+            name: "PIADesignSystemTests",
             dependencies: [
-                .product(name: "PIADesignSystem", package: "PIADesignSystem")
+                "PIADesignSystem",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
             ]
         ),
         .testTarget(

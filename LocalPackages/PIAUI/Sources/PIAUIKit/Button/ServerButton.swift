@@ -1,8 +1,8 @@
 //
-//  PIAPageControl.swift
+//  ServerButton.swift
 //  PIA VPN
 //
-//  Created by Davide De Rosa on 12/9/17.
+//  Created by Jose Antonio Blaya Garcia on 10/01/2019.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,18 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import __PIALibraryNative
+import UIKit
+import PIALibrary
 
-class PIAPageControl: FXPageControl {
-    override func draw(_ rect: CGRect) {
-        UIGraphicsGetCurrentContext()?.clear(rect)
-        super.draw(rect)
-    }
+public final class ServerButton: UIButton {
+    public var server: Server?
 }
-
-//extension FXPageControl {
-//    open override func draw(_ rect: CGRect) {
-//        UIGraphicsGetCurrentContext()?.clear(rect)
-//        super.draw(rect)
-//    }
-//}
