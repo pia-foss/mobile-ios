@@ -25,7 +25,7 @@ let package = Package(
     dependencies: [
         .package(path: "../PIALibrary"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.18.7"),
-        .package(url: "https://github.com/nicklockwood/FXPageControl.git", branch: "master")
+        .package(url: "https://github.com/nicklockwood/FXPageControl.git", exact: "1.6.0")
     ],
     targets: [
         .target(

@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import __PIALibraryNative
 
 /// The IP protocol over which to issue the ping.
 public enum PingerProtocol {

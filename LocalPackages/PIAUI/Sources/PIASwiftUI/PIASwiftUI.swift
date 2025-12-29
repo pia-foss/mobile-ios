@@ -1,4 +1,3 @@
 import Foundation
 
-// PIASwiftUI module
-// SwiftUI-based UI components for tvOS app and iOS widgets
+// TODO: Remove this file once the library is populated

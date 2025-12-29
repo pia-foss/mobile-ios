@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import __PIALibraryNative
 
 fileprivate let log = PIALogger.logger(for: DefaultServerProvider.self)
 

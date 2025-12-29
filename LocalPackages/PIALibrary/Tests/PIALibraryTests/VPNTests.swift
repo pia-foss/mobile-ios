@@ -22,7 +22,6 @@
 
 import XCTest
 @testable import PIALibrary
-import __PIALibraryNative
 
 class VPNTests: XCTestCase {
     
@@ -43,15 +42,6 @@ class VPNTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testCompression() {
-        let orig = "This is a test"
-        let deflated = (orig.data(using: .utf8)! as NSData).deflated()! as NSData
-        print("Deflated: \(deflated)")
-        let reinflated = String(data: deflated.inflated()!, encoding: .utf8)
-        
-        XCTAssertEqual(orig, reinflated)
-    }
 
     func _testDebugLogSubmission() {
         let content = "2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)\n2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)"
@@ -62,7 +52,6 @@ class VPNTests: XCTestCase {
                 print("Debug log not submitted: \(error)")
                 return
             }
-            print("Debug id: \(reportIdentifier)")
             exp.fulfill()
         }
         waitForExpectations(timeout: 10.0, handler: nil)

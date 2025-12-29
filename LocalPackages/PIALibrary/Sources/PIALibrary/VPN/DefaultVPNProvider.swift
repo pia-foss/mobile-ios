@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import __PIALibraryNative
 import NetworkExtension
 
 fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
