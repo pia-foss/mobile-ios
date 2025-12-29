@@ -12,10 +12,7 @@ let package = Package(
     products: [
         .library(
             name: "PIALibrary",
-            targets: [
-                "PIALibrary",
-                "PIALibraryUtilObjC"
-            ]
+            targets: ["PIALibrary"]
         )
     ],
     dependencies: [

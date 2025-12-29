@@ -18,11 +18,11 @@
 //
 //  You should have received a copy of the GNU General Public License along with the Private
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
-
 //
 
 import UIKit
 import PIALibrary
+import PIAUIKit
 
 class UsageTileCollectionViewCell: UICollectionViewCell, TileableCell {
     

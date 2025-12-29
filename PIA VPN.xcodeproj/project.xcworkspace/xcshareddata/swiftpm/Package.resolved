@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "fxpagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/FXPageControl.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "44a87f6e35ca96340328ea0318942b892ade9e86"
+      }
+    },
+    {
       "identity" : "gloss",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hkellaway/Gloss.git",

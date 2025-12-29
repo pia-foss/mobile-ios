@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import PIALibrary
 
 public protocol EditableTileCell {
     

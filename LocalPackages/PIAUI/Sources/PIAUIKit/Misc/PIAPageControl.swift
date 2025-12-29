@@ -20,7 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import __PIALibraryNative
+import FXPageControl
 
 public class PIAPageControl: FXPageControl {
     public override func draw(_ rect: CGRect) {
@@ -28,10 +28,3 @@ public class PIAPageControl: FXPageControl {
         super.draw(rect)
     }
 }
-
-//extension FXPageControl {
-//    open override func draw(_ rect: CGRect) {
-//        UIGraphicsGetCurrentContext()?.clear(rect)
-//        super.draw(rect)
-//    }
-//}

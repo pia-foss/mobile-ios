@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit 
+import UIKit
 
 public extension UIView {
     
-    public func addConstaintsToSuperview(leadingOffset: CGFloat, trailingOffset: CGFloat, topOffset: CGFloat, bottomOffset: CGFloat) {
+    func addConstaintsToSuperview(leadingOffset: CGFloat, trailingOffset: CGFloat, topOffset: CGFloat, bottomOffset: CGFloat) {
         
         guard superview != nil else {
             return
