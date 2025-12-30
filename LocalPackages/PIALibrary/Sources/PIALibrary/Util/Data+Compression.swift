@@ -25,10 +25,18 @@ import zlib
 
 private let compressionBlockSize = 16384
 
+enum CompressionError: Error {
+    case initialization
+    case processing
+    case memory
+    case underlying(Error)
+}
+
 extension Data {
     /// Compresses the data using zlib deflate algorithm.
-    /// - Returns: The compressed data, or nil if compression fails.
-    func deflated() -> Data? {
+    /// - Returns: The compressed data.
+    /// - Throws: A `CompressionError` if compression fails.
+    func deflated() throws(CompressionError) -> Data {
         guard !isEmpty else {
             return self
         }
@@ -40,7 +48,7 @@ extension Data {
         stream.total_out = 0
 
         guard deflateInit2_(&stream, Z_BEST_COMPRESSION, Z_DEFLATED, MAX_WBITS, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY, ZLIB_VERSION, Int32(MemoryLayout<z_stream>.size)) == Z_OK else {
-            return nil
+            throw CompressionError.initialization
         }
 
         defer {
@@ -50,43 +58,46 @@ extension Data {
         var compressed = Data(count: compressionBlockSize)
         var compressedSize = compressed.count
 
-        let result: Data? = withUnsafeBytes { (inputBytes: UnsafeRawBufferPointer) -> Data? in
-            guard let inputBaseAddress = inputBytes.bindMemory(to: UInt8.self).baseAddress else {
-                return nil
-            }
-            stream.next_in = UnsafeMutablePointer<UInt8>(mutating: inputBaseAddress)
-            stream.avail_in = uInt(count)
-
-            repeat {
-                if Int(stream.total_out) >= compressedSize {
-                    compressedSize += compressionBlockSize
-                    compressed.count = compressedSize
+        do {
+            return try withUnsafeBytes { (inputBytes: UnsafeRawBufferPointer) -> Data in
+                guard let inputBaseAddress = inputBytes.bindMemory(to: UInt8.self).baseAddress else {
+                    throw CompressionError.memory
                 }
+                stream.next_in = UnsafeMutablePointer<UInt8>(mutating: inputBaseAddress)
+                stream.avail_in = uInt(count)
 
-                let status = compressed.withUnsafeMutableBytes { (outputBytes: UnsafeMutableRawBufferPointer) -> Int32 in
-                    guard let outputBaseAddress = outputBytes.bindMemory(to: UInt8.self).baseAddress else {
-                        return Z_STREAM_ERROR
+                repeat {
+                    if Int(stream.total_out) >= compressedSize {
+                        compressedSize += compressionBlockSize
+                        compressed.count = compressedSize
                     }
-                    stream.next_out = outputBaseAddress.advanced(by: Int(stream.total_out))
-                    stream.avail_out = uInt(compressedSize - Int(stream.total_out))
-                    return deflate(&stream, Z_FINISH)
-                }
 
-                if status < 0 {
-                    return nil
-                }
-            } while stream.avail_out == 0
+                    let status = compressed.withUnsafeMutableBytes { (outputBytes: UnsafeMutableRawBufferPointer) -> Int32 in
+                        guard let outputBaseAddress = outputBytes.bindMemory(to: UInt8.self).baseAddress else {
+                            return Z_STREAM_ERROR
+                        }
+                        stream.next_out = outputBaseAddress.advanced(by: Int(stream.total_out))
+                        stream.avail_out = uInt(compressedSize - Int(stream.total_out))
+                        return deflate(&stream, Z_FINISH)
+                    }
 
-            compressed.count = Int(stream.total_out)
-            return compressed
+                    if status < 0 {
+                        throw CompressionError.processing
+                    }
+                } while stream.avail_out == 0
+
+                compressed.count = Int(stream.total_out)
+                return compressed
+            }
+        } catch {
+            throw .underlying(error)
         }
-
-        return result
     }
 
     /// Decompresses the data using zlib inflate algorithm.
-    /// - Returns: The decompressed data, or nil if decompression fails.
-    func inflated() -> Data? {
+    /// - Returns: The decompressed data.
+    /// - Throws: A `CompressionError` if decompression fails.
+    func inflated() throws -> Data {
         guard !isEmpty else {
             return self
         }
@@ -100,7 +111,7 @@ extension Data {
         stream.total_out = 0
 
         guard inflateInit2_(&stream, MAX_WBITS, ZLIB_VERSION, Int32(MemoryLayout<z_stream>.size)) == Z_OK else {
-            return nil
+            throw CompressionError.initialization
         }
 
         defer {
@@ -111,9 +122,9 @@ extension Data {
         var decompressedSize = decompressed.count
         var done = false
 
-        let result: Data? = withUnsafeBytes { (inputBytes: UnsafeRawBufferPointer) -> Data? in
+        return try withUnsafeBytes { (inputBytes: UnsafeRawBufferPointer) -> Data in
             guard let inputBaseAddress = inputBytes.bindMemory(to: UInt8.self).baseAddress else {
-                return nil
+                throw CompressionError.memory
             }
             stream.next_in = UnsafeMutablePointer<UInt8>(mutating: inputBaseAddress)
             stream.avail_in = uInt(count)
@@ -136,22 +147,17 @@ extension Data {
                 if status == Z_STREAM_END {
                     done = true
                 } else if status != Z_OK {
-                    return nil
+                    throw CompressionError.processing
                 }
             }
 
-            guard inflateEnd(&stream) == Z_OK else {
-                return nil
-            }
-
             guard done else {
-                return nil
+                throw CompressionError.processing
             }
 
             decompressed.count = Int(stream.total_out)
             return decompressed
         }
-
-        return result
     }
 }
+

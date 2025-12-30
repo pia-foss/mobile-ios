@@ -20,6 +20,7 @@
 //
 
 import UIKit
+import PIAUIKit
 
 class MagicLinkLoginViewController: AutolayoutViewController {
 

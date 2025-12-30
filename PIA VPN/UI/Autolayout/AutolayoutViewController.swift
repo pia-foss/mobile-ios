@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIASwiftUI
 
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {
@@ -242,7 +243,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         // Lock UI
         window.isUserInteractionEnabled = false
 
-        let loadingVC = LoadingViewController()
+        let loadingVC = LoadingViewController(image: Asset.Ui.piaSpinner.swiftUIImage)
         loadingVC.view.translatesAutoresizingMaskIntoConstraints = false
         self.loadingViewController = loadingVC
 

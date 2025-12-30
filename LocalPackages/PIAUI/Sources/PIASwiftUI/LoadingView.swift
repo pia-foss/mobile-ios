@@ -23,11 +23,16 @@
 import SwiftUI
 import UIKit
 
-struct LoadingView: View {
+public struct LoadingView: View {
+    private let image: Image
     @State private var isRotating = false
 
-    var body: some View {
-        Image(asset: Asset.Ui.piaSpinner)
+    public init(image: Image) {
+        self.image = image
+    }
+
+    public var body: some View {
+        image
             .resizable()
             .aspectRatio(contentMode: .fit)
             .rotationEffect(.degrees(isRotating ? 360 : 0))
@@ -43,18 +48,14 @@ struct LoadingView: View {
 }
 
 /// UIKit wrapper for LoadingView
-final class LoadingViewController: UIHostingController<LoadingView> {
-    init() {
-        super.init(rootView: LoadingView())
+public final class LoadingViewController: UIHostingController<LoadingView> {
+    public init(image: Image) {
+        super.init(rootView: LoadingView(image: image))
         view.backgroundColor = .clear
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-#Preview {
-    LoadingView()
 }

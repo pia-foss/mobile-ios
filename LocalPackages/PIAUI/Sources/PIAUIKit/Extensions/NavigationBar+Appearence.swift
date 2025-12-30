@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UINavigationBar {
+public extension UINavigationBar {
     func setBackgroundAppearenceColor(_ color: UIColor?) {
         if color != nil {
             let appearance = UINavigationBarAppearance()

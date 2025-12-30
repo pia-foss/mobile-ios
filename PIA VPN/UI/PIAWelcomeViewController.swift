@@ -241,7 +241,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         if !preset.isExpired {
-            navigationItem.titleView = NavigationLogoView()
+            navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         }
         else {
             navigationItem.title = L10n.Welcome.Upgrade.header

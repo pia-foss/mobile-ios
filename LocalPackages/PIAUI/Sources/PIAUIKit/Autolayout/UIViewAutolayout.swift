@@ -23,24 +23,31 @@
 import UIKit
 
 public extension UIView {
-    
+
     func addConstaintsToSuperview(leadingOffset: CGFloat, trailingOffset: CGFloat, topOffset: CGFloat, bottomOffset: CGFloat) {
-        
-        guard superview != nil else {
-            return
-        }
-        
+        guard let superview = superview else { return }
+
         translatesAutoresizingMaskIntoConstraints = false
-        
-        leadingAnchor.constraint(equalTo: superview!.leadingAnchor,
-                                 constant: leadingOffset).isActive = true
-        trailingAnchor.constraint(equalTo: superview!.trailingAnchor,
-                                  constant: trailingOffset).isActive = true
-        
-        topAnchor.constraint(equalTo: superview!.topAnchor,
-                             constant: topOffset).isActive = true
-        bottomAnchor.constraint(equalTo: superview!.bottomAnchor,
-                                constant: bottomOffset).isActive = true
+
+        leadingAnchor.constraint(
+            equalTo: superview.leadingAnchor,
+            constant: leadingOffset
+        ).isActive = true
+
+        trailingAnchor.constraint(
+            equalTo: superview.trailingAnchor,
+            constant: trailingOffset
+        ).isActive = true
+
+        topAnchor.constraint(
+            equalTo: superview.topAnchor,
+            constant: topOffset
+        ).isActive = true
+
+        bottomAnchor.constraint(
+            equalTo: superview.bottomAnchor,
+            constant: bottomOffset
+        ).isActive = true
     }
     
 }

@@ -28,78 +28,59 @@ import Foundation
 struct DataCompressionTests {
 
     @Test("Compress and decompress simple text")
-    func compressAndDecompressSimpleText() {
+    func compressAndDecompressSimpleText() throws {
         let original = "This is a test"
         let originalData = original.data(using: .utf8)!
+        let compressed = try originalData.deflated()
 
-        let compressed = originalData.deflated()
-        #expect(compressed != nil, "Compression should succeed")
-        // Note: Small strings may not compress smaller due to compression overhead
-
-        let decompressed = compressed!.inflated()
-        #expect(decompressed != nil, "Decompression should succeed")
-
-        let decompressedString = String(data: decompressed!, encoding: .utf8)
+        let decompressed = try compressed.inflated()
+        let decompressedString = String(data: decompressed, encoding: .utf8)
         #expect(decompressedString == original, "Decompressed string should match original")
     }
 
     @Test("Compress and decompress longer text")
-    func compressAndDecompressLongerText() {
-        let original = String(repeating: "The quick brown fox jumps over the lazy dog. ", count: 100)
+    func compressAndDecompressLongerText() throws {
+        let original = String(repeating: "The quick brown fox jumps over the lazy dog.", count: 100)
         let originalData = original.data(using: .utf8)!
+        let compressed = try originalData.deflated()
+        #expect(compressed.count < originalData.count, "Compressed data should be smaller for repetitive text")
 
-        let compressed = originalData.deflated()
-        #expect(compressed != nil, "Compression should succeed")
-        #expect(compressed!.count < originalData.count, "Compressed data should be smaller for repetitive text")
-
-        let decompressed = compressed!.inflated()
-        #expect(decompressed != nil, "Decompression should succeed")
-
-        let decompressedString = String(data: decompressed!, encoding: .utf8)
+        let decompressed = try compressed.inflated()
+        let decompressedString = String(data: decompressed, encoding: .utf8)
         #expect(decompressedString == original, "Decompressed string should match original")
     }
 
     @Test("Handle empty data")
-    func handleEmptyData() {
+    func handleEmptyData() throws {
         let emptyData = Data()
+        let compressed = try emptyData.deflated()
+        #expect(compressed.isEmpty, "Compressed empty data should be empty")
 
-        let compressed = emptyData.deflated()
-        #expect(compressed != nil, "Compression of empty data should return empty data")
-        #expect(compressed!.isEmpty, "Compressed empty data should be empty")
-
-        let decompressed = emptyData.inflated()
-        #expect(decompressed != nil, "Decompression of empty data should return empty data")
-        #expect(decompressed!.isEmpty, "Decompressed empty data should be empty")
+        let decompressed = try emptyData.inflated()
+        #expect(decompressed.isEmpty, "Decompressed empty data should be empty")
     }
 
     @Test("Compress binary data")
-    func compressBinaryData() {
+    func compressBinaryData() throws {
         let binaryData = Data([0x00, 0x01, 0x02, 0x03, 0xFF, 0xFE, 0xFD, 0xFC])
+        let compressed = try binaryData.deflated()
 
-        let compressed = binaryData.deflated()
-        #expect(compressed != nil, "Compression of binary data should succeed")
-
-        let decompressed = compressed!.inflated()
-        #expect(decompressed != nil, "Decompression should succeed")
+        let decompressed = try compressed.inflated()
         #expect(decompressed == binaryData, "Decompressed binary data should match original")
     }
 
     @Test("Handle large data")
-    func handleLargeData() {
-        // Create a large data set (1MB)
-        let largeData = Data(repeating: 0x42, count: 1024 * 1024)
+    func handleLargeData() throws {
+        let largeData = Data(repeating: 0x42, count: 1024 * 1024) // (1MB)
+        let compressed = try largeData.deflated()
+        #expect(compressed.count < largeData.count, "Compressed large data should be much smaller")
 
-        let compressed = largeData.deflated()
-        #expect(compressed != nil, "Compression of large data should succeed")
-        #expect(compressed!.count < largeData.count, "Compressed large data should be much smaller")
-
-        let decompressed = compressed!.inflated()
-        #expect(decompressed != nil, "Decompression should succeed")
+        let decompressed = try compressed.inflated()
         #expect(decompressed == largeData, "Decompressed large data should match original")
     }
 
     @Test("Round-trip compression maintains data integrity")
-    func roundTripCompressionIntegrity() {
+    func roundTripCompressionIntegrity() throws {
         let testStrings = [
             "Hello, World!",
             "1234567890",
@@ -110,10 +91,10 @@ struct DataCompressionTests {
 
         for testString in testStrings {
             let originalData = testString.data(using: .utf8)!
-            let compressed = originalData.deflated()
-            let decompressed = compressed?.inflated()
-            let result = String(data: decompressed!, encoding: .utf8)
+            let compressed = try originalData.deflated()
 
+            let decompressed = try compressed.inflated()
+            let result = String(data: decompressed, encoding: .utf8)
             #expect(result == testString, "Round-trip should preserve: \(testString)")
         }
     }

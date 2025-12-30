@@ -22,7 +22,7 @@
 
 import FXPageControl
 
-public class PIAPageControl: FXPageControl {
+public final class PIAPageControl: FXPageControl {
     public override func draw(_ rect: CGRect) {
         UIGraphicsGetCurrentContext()?.clear(rect)
         super.draw(rect)

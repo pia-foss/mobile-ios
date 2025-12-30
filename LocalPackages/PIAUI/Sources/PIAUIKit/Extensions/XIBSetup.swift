@@ -18,12 +18,11 @@
 //
 //  You should have received a copy of the GNU General Public License along with the Private
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
-
 //
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     /// Helper method to init and setup the view from the Nib.
     func xibSetup() {
         let view = loadFromNib()

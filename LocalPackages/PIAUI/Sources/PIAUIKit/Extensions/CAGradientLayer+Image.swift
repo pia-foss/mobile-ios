@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-extension CAGradientLayer {
-    
+public extension CAGradientLayer {
+
     convenience init(frame: CGRect, colors: [UIColor]) {
         self.init()
         self.frame = frame
@@ -21,9 +21,8 @@ extension CAGradientLayer {
         startPoint = CGPoint(x: 0, y: 0)
         endPoint = CGPoint(x: 0, y: 1)
     }
-    
+
     func createGradientImage() -> UIImage? {
-        
         var image: UIImage? = nil
         UIGraphicsBeginImageContext(bounds.size)
         if let context = UIGraphicsGetCurrentContext() {
@@ -33,5 +32,5 @@ extension CAGradientLayer {
         UIGraphicsEndImageContext()
         return image
     }
-    
+
 }

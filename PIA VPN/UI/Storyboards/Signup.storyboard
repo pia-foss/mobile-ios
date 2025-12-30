@@ -966,7 +966,7 @@ You can come back to the app later to finish the process.</string>
                                             <action selector="signUp:" destination="vva-4H-w8I" eventType="touchUpInside" id="fc7-Z4-tgk"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crp-gi-gwj" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crp-gi-gwj" customClass="BorderedTextField" customModule="PIAUIKit">
                                         <rect key="frame" x="0.0" y="83.333333333333343" width="325" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>

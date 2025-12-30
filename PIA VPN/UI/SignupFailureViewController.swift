@@ -75,7 +75,7 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
     
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)

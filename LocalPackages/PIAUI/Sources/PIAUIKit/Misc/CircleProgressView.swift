@@ -23,7 +23,7 @@
 import UIKit
 
 /// Displays a group of concentric spinning circles indicating indeterminate progress.
-public class CircleProgressView: UIView {
+public final class CircleProgressView: UIView {
     private lazy var outerArc = CAShapeLayer()
 
     private lazy var innerArc = CAShapeLayer()
