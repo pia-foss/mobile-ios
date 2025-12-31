@@ -601,6 +601,9 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
         accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
         accessedDatabase.plain.historicalServers = []
         accessedDatabase.plain.reset()
+
+        apiTokenProvider.clearAPIToken()
+        vpnTokenProvider.clearVpnToken()
     }
     
     #endif

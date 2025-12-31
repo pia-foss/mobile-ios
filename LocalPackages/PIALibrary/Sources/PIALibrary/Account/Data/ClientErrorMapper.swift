@@ -1,13 +1,16 @@
-
-
 import Foundation
+
+private let log = PIALogger.logger(for: ClientErrorMapper.self)
 
 /// Maps an Network Error with a ClientError
 /// The idea is to use this mapper on `PIAWebServices` to map the errors returned from the Swift implementation of the Accounts Lib with the ones that the app expects
 struct ClientErrorMapper {
     static func map(networkRequestError: NetworkRequestError) -> ClientError {
+        log.info("Will map ClientError from NetworkRequestError: \(networkRequestError)")
+        
         switch networkRequestError {
         case .connectionError(let statusCode, let message):
+            log.info(".connectionError - statusCode: \(statusCode?.description ?? "nil"), message: \(message ?? "nil")")
             return getClientError(from: statusCode) ?? .unexpectedReply
                
         case .allConnectionAttemptsFailed(let statusCode):
@@ -29,6 +32,7 @@ struct ClientErrorMapper {
             return .malformedResponseData
             
         case .unknown(message: let message):
+            log.info(".unknown - message: \(message ?? "nil")")
             return .unexpectedReply
             
         case .unableToDecodeAPIToken, .unableToDecodeDataContent:
@@ -49,17 +53,25 @@ struct ClientErrorMapper {
     }
     
     static func getClientError(from statusCode: Int?) -> ClientError? {
-        
-        guard let statusCode,
-              let httpStatusCode = HttpResponseStatusCode(rawValue: statusCode) else {
+        guard
+            let statusCode,
+            let httpStatusCode = HttpResponseStatusCode(rawValue: statusCode)
+        else {
+            log.error("Unable to map ClientError due to lack of statusCode")
             return nil
         }
+
         switch httpStatusCode {
         case .unauthorized:
+            log.info("Did map \(ClientError.unauthorized) out of httpStatusCode: \(httpStatusCode)")
             return .unauthorized
+
         case .throttled:
+            log.info("Did map \(ClientError.throttled(retryAfter: 60)) out of httpStatusCode: \(httpStatusCode)")
             return .throttled(retryAfter: 60)
+
         default:
+            log.info("Mapped no ClientError out of httpStatusCode: \(httpStatusCode)")
             return nil
         }
     }
