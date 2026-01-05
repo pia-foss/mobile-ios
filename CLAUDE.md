@@ -169,7 +169,7 @@ Requires special Apple entitlement. If unavailable:
 
 ## Key Files
 
-- `PIA VPN.xcodeproj`, `Podfile` (legacy), `swiftgen.yml`
+- `PIA VPN.xcodeproj`, `swiftgen.yml`
 - `fastlane/Fastfile`, `.gitlab-ci.yml`, `ci_scripts/`
 - `README.md`, `CONTRIBUTING.md`
 - Test plans: `TestPlans/*.xctestplan`
