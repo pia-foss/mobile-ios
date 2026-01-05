@@ -513,6 +513,9 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 application.open(AppConstants.Web.privacyURL, options: [:], completionHandler: nil)
                 return
 
+            case .version:
+                return
+
             default:
                 break
             }
