@@ -324,6 +324,7 @@
 "region.filter.favorites" = "즐겨찾기";
 "region.accessibility.favorite" = "선호하는 지역 추가";
 "region.accessibility.unfavorite" = "선호하는 지역 제거";
+"region.refresh.connected.error" = "VPN에 연결되어 있는 동안 대기 시간을 업데이트할 수 없습니다";
 
 // TILES
 "tiles.quick.connect.title" = "빠른 연결";

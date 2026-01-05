@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Favorieten";
 "region.accessibility.favorite" = "Een favoriete regio toevoegen";
 "region.accessibility.unfavorite" = "Een favoriete regio verwijderen";
+"region.refresh.connected.error" = "Kan latentie niet bijwerken terwijl er verbinding is met de VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Snel verbinden";

@@ -114,6 +114,11 @@ class RegionsViewController: AutolayoutViewController {
         refreshControl.endRefreshing()
 
         guard (Client.providers.vpnProvider.vpnStatus == .disconnected) else {
+            Macros.displayImageNote(
+                withImage: Asset.Images.iconWarning.image,
+                message: L10n.Localizable.Region.Refresh.Connected.error
+            )
+
             log.debug("Not pinging servers while on VPN, will try on next update")
             return
         }

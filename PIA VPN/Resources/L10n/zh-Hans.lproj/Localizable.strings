@@ -324,6 +324,7 @@
 "region.filter.favorites" = "收藏夹";
 "region.accessibility.favorite" = "添加收藏地区";
 "region.accessibility.unfavorite" = "删除收藏地区";
+"region.refresh.connected.error" = "连接到VPN时无法更新延迟";
 
 // TILES
 "tiles.quick.connect.title" = "快速连接";

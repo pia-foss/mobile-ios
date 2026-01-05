@@ -324,6 +324,7 @@
 "region.filter.favorites" = "お気に入り";
 "region.accessibility.favorite" = "お気に入りの地域を追加";
 "region.accessibility.unfavorite" = "お気に入りの地域を削除";
+"region.refresh.connected.error" = "VPNに接続中はレイテンシを更新できません";
 
 // TILES
 "tiles.quick.connect.title" = "クイック接続";

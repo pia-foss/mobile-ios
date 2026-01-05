@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Favoritter";
 "region.accessibility.favorite" = "Tilføj en favoritregion";
 "region.accessibility.unfavorite" = "Fjern en favoritregion";
+"region.refresh.connected.error" = "Kan ikke opdatere ventetid, mens du er forbundet til VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Hurtig tilslutning";

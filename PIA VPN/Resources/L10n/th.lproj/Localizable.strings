@@ -324,6 +324,7 @@
 "region.filter.favorites" = "รายการโปรด";
 "region.accessibility.favorite" = "เพิ่มภูมิภาคที่ชื่นชอบ";
 "region.accessibility.unfavorite" = "ลบภูมิภาคที่ชื่นชอบ";
+"region.refresh.connected.error" = "ไม่สามารถอัปเดตเวลาแฝงขณะเชื่อมต่อกับ VPN";
 
 // TILES
 "tiles.quick.connect.title" = "เชื่อมต่อด่วน";

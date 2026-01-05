@@ -895,6 +895,12 @@ internal enum L10n {
         /// Sort regions by
         internal static let sortby = L10n.tr("Localizable", "region.filter.sortby", fallback: "Sort regions by")
       }
+      internal enum Refresh {
+        internal enum Connected {
+          /// Unable to update latency while being connected to the VPN
+          internal static let error = L10n.tr("Localizable", "region.refresh.connected.error", fallback: "Unable to update latency while being connected to the VPN")
+        }
+      }
       internal enum Search {
         /// Search for a region
         internal static let placeholder = L10n.tr("Localizable", "region.search.placeholder", fallback: "Search for a region")

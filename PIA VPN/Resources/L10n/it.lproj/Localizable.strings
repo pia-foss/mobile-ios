@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Preferiti";
 "region.accessibility.favorite" = "Aggiungi un'area preferita";
 "region.accessibility.unfavorite" = "Elimina un'area preferita";
+"region.refresh.connected.error" = "Impossibile aggiornare la latenza mentre si è connessi alla VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Connessione rapida";

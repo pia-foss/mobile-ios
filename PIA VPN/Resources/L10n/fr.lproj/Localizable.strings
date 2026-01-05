@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Favoris";
 "region.accessibility.favorite" = "Ajouter une région préférée";
 "region.accessibility.unfavorite" = "Supprimer une région préférée";
+"region.refresh.connected.error" = "Impossible de mettre à jour la latence pendant la connexion au VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Connexion rapide";

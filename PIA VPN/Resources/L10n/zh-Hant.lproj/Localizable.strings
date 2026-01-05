@@ -324,6 +324,7 @@
 "region.filter.favorites" = "我的最愛";
 "region.accessibility.favorite" = "新增一個最愛區域";
 "region.accessibility.unfavorite" = "移除一個最愛區域";
+"region.refresh.connected.error" = "連接到VPN時無法更新延遲";
 
 // TILES
 "tiles.quick.connect.title" = "快速連線";

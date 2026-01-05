@@ -324,6 +324,7 @@
 "region.filter.favorites" = "Избранное";
 "region.accessibility.favorite" = "Добавить избранный регион";
 "region.accessibility.unfavorite" = "Удалить избранный регион";
+"region.refresh.connected.error" = "Невозможно обновить задержку при подключении к VPN";
 
 // TILES
 "tiles.quick.connect.title" = "Быстрое подключение";
