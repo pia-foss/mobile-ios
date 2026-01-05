@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import __PIALibraryNative
 
 private let log = PIALogger.logger(for: PingTask.self)
 

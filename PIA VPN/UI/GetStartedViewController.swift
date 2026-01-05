@@ -22,6 +22,8 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: GetStartedViewController.self)
 
@@ -549,7 +551,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyNavigationBarStyle(to: self)
 
         Theme.current.applyTitle(subscribeNowDescription, appearance: .light)

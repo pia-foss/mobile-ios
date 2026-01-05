@@ -18,12 +18,13 @@
 //
 //  You should have received a copy of the GNU General Public License along with the Private
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
-
 //
 
 import Foundation
 import PIALibrary
 import UIKit
+import PIADesignSystem
+import PIAUIKit
 
 class UsageTile: UIView, Tileable  {
     

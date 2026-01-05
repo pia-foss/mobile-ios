@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import Popover
+import PIADesignSystem
 
 class CustomNetworkCollectionViewCell: UICollectionViewCell {
 

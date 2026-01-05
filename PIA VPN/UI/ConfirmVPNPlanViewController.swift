@@ -23,6 +23,8 @@
 import UIKit
 import AuthenticationServices
 import PIALibrary
+import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 
@@ -218,7 +220,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     // MARK: Restylable
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyInput(textEmail)

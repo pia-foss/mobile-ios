@@ -23,6 +23,7 @@
 import Foundation
 import UIKit
 import PIALibrary
+import PIAUIKit
 
 private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0

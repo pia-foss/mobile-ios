@@ -23,6 +23,8 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
+import PIAUIKit
 
 class QuickConnectTile: UIView, Tileable {
 

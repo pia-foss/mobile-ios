@@ -22,6 +22,8 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
+import PIAUIKit
 
 public class SignupUnreachableViewController: AutolayoutViewController, BrandableNavigationBar {
 
@@ -51,7 +53,7 @@ public class SignupUnreachableViewController: AutolayoutViewController, Brandabl
     
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)

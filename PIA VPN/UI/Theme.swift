@@ -22,8 +22,10 @@
 
 import Foundation
 import UIKit
-import __PIALibraryNative
 import PIALibrary
+import PIADesignSystem
+import PIAUIKit
+import FXPageControl
 
 private let log = PIALogger.logger(for: Theme.self)
 

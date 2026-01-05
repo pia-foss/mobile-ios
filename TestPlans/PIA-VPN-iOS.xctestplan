@@ -13,6 +13,27 @@
   },
   "testTargets" : [
     {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAUI",
+        "identifier" : "PIADesignSystemTests",
+        "name" : "PIADesignSystemTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PIA VPN.xcodeproj",
+        "identifier" : "0EEE1BE61E4F6EF400397DE2",
+        "name" : "PIA VPNTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAUI",
+        "identifier" : "PIASwiftUITests",
+        "name" : "PIASwiftUITests"
+      }
+    },
+    {
       "skippedTests" : [
         "AccountInfoTests",
         "AccountInfoTests\/testExpirationDateDefaultLocale()",
@@ -46,16 +67,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:LocalPackages\/PIADesignSystem",
-        "identifier" : "PIADesignSystemTests",
-        "name" : "PIADesignSystemTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:PIA VPN.xcodeproj",
-        "identifier" : "0EEE1BE61E4F6EF400397DE2",
-        "name" : "PIA VPNTests"
+        "containerPath" : "container:LocalPackages\/PIAUI",
+        "identifier" : "PIAUIKitTests",
+        "name" : "PIAUIKitTests"
       }
     }
   ],

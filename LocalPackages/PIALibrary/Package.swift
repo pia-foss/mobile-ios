@@ -1,6 +1,4 @@
-
-// swift-tools-version:5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -14,10 +12,7 @@ let package = Package(
     products: [
         .library(
             name: "PIALibrary",
-            targets: [
-                "PIALibrary",
-                "PIALibraryUtilObjC"
-            ]
+            targets: ["PIALibrary"]
         )
     ],
     dependencies: [
@@ -37,7 +32,6 @@ let package = Package(
             name: "PIALibrary",
             dependencies: [
                 "Gloss",
-                "PIALibraryUtilObjC",
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Reachability", package: "Reachability.swift"),
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
@@ -53,10 +47,6 @@ let package = Package(
             resources: [
                 .process("Resources")
             ]
-        ),
-        .target(
-            name: "PIALibraryUtilObjC",
-            dependencies: []
         ),
         .testTarget(
             name: "PIALibraryTests",

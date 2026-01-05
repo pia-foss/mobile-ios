@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 import AuthenticationServices
+import PIADesignSystem
+import PIAUIKit
 
 private let log = PIALogger.logger(for: AddEmailToAccountViewController.self)
 
@@ -228,7 +230,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     // MARK: Restylable
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        navigationItem.titleView = NavigationLogoView()
+        navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(scrollView)
         Theme.current.applyInput(textEmail)

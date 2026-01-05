@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIAUIKit
 
 class ExpirationCell: UITableViewCell, Restylable {
     @IBOutlet private weak var labelWarning: UILabel!

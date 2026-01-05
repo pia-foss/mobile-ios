@@ -30,8 +30,8 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
-        "identifier" : "E5C5078F2B0E145100200A6A",
-        "name" : "PIA VPN-tvOSUITests"
+        "identifier" : "35E8E6572B870AD200A3A3DB",
+        "name" : "PIA-VPN_tvOS_E2E_Tests"
       }
     },
     {
@@ -39,8 +39,15 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
-        "identifier" : "35E8E6572B870AD200A3A3DB",
-        "name" : "PIA-VPN_tvOS_E2E_Tests"
+        "identifier" : "E5C5078F2B0E145100200A6A",
+        "name" : "PIA VPN-tvOSUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAUI",
+        "identifier" : "PIASwiftUITests",
+        "name" : "PIASwiftUITests"
       }
     }
   ],

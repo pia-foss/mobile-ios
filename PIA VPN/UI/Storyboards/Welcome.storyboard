@@ -40,7 +40,7 @@ You will not be charged during this process.</string>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-GR-ciV" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-GR-ciV" customClass="BorderedTextField" customModule="PIAUIKit">
                                                         <rect key="frame" x="25" y="157" width="325" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="WNz-0h-Xp2"/>
@@ -51,7 +51,7 @@ You will not be charged during this process.</string>
                                                             <outlet property="delegate" destination="Y1W-Um-2lp" id="3zT-xF-wGK"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-3v-2Ob" customClass="PIAButton" customModule="PIALibrary">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-3v-2Ob" customClass="PIAButton" customModule="PIAUIKit">
                                                         <rect key="frame" x="25" y="222" width="325" height="50"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -273,7 +273,7 @@ You will not be charged during this process.</string>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username (p1234567)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gcb-kt-Yu7" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username (p1234567)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gcb-kt-Yu7" customClass="BorderedTextField" customModule="PIAUIKit">
                                                                         <rect key="frame" x="0.0" y="49.5" width="321" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="MlG-il-Cnw"/>
@@ -284,7 +284,7 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="gOX-c2-oGJ" id="yXX-Tc-HMI"/>
                                                                         </connections>
                                                                     </textField>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-HW-6FS" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wtm-HW-6FS" customClass="BorderedTextField" customModule="PIAUIKit">
                                                                         <rect key="frame" x="0.0" y="114.5" width="321" height="50"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
@@ -292,7 +292,7 @@ You will not be charged during this process.</string>
                                                                             <outlet property="delegate" destination="gOX-c2-oGJ" id="iMK-WX-uqP"/>
                                                                         </connections>
                                                                     </textField>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-9o-rVi" customClass="PIAButton" customModule="PIALibrary">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-9o-rVi" customClass="PIAButton" customModule="PIAUIKit">
                                                                         <rect key="frame" x="0.0" y="179.5" width="321" height="50"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
@@ -498,7 +498,7 @@ You will not be charged during this process.</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="223" id="9uI-0g-6cL"/>
                                                         </constraints>
-                                                        <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIALibrary"/>
+                                                        <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
@@ -634,7 +634,7 @@ You will not be charged during this process.</string>
                                                             <outlet property="delegate" destination="J5T-ys-Of8" id="6MG-FL-6UH"/>
                                                         </connections>
                                                     </textView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5a-CO-RKC" customClass="PIAButton" customModule="PIALibrary">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5a-CO-RKC" customClass="PIAButton" customModule="PIAUIKit">
                                                         <rect key="frame" x="0.0" y="328.5" width="321" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Hh2-HR-XJt"/>
@@ -732,7 +732,7 @@ You will not be charged during this process.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIA_VPN" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIAUIKit">
                                 <rect key="frame" x="19" y="39" width="337" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pAP-q7-PIs"/>
@@ -866,7 +866,7 @@ You will not be charged during this process.</string>
                                     <outlet property="delegate" destination="bfs-I2-X8H" id="BuS-kJ-zvG"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-jZ-9mC" customClass="PIAPageControl" customModule="PIA_VPN" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-jZ-9mC" customClass="PIAPageControl" customModule="PIAUIKit">
                                 <rect key="frame" x="79" y="371" width="217" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -921,7 +921,7 @@ You will not be charged during this process.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="ueL-56-6xP"/>
                                         </constraints>
-                                        <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIALibrary"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="0.0" width="321" height="105"/>
@@ -1048,7 +1048,7 @@ You will not be charged during this process.</string>
                                             <outlet property="delegate" destination="J5T-ys-Of8" id="YX4-lH-rTX"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIALibrary">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIAUIKit">
                                         <rect key="frame" x="19" y="477" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="prf-nD-f8g"/>
@@ -1057,7 +1057,7 @@ You will not be charged during this process.</string>
                                             <action selector="confirmPlan" destination="bfs-I2-X8H" eventType="touchUpInside" id="e75-q5-WgV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waI-5t-fqH" customClass="PIAButton" customModule="PIALibrary">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waI-5t-fqH" customClass="PIAButton" customModule="PIAUIKit">
                                         <rect key="frame" x="19" y="532" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="s5I-fj-v4i"/>
@@ -1129,7 +1129,7 @@ You will not be charged during this process.</string>
                                                 </activityIndicatorView>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9d-vi-8co" customClass="PIAButton" customModule="PIALibrary">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9d-vi-8co" customClass="PIAButton" customModule="PIAUIKit">
                                             <rect key="frame" x="19" y="84" width="337" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="5kr-fT-AVW"/>
@@ -1138,7 +1138,7 @@ You will not be charged during this process.</string>
                                                 <action selector="confirmPlan" destination="bfs-I2-X8H" eventType="touchUpInside" id="s1x-8w-BpS"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIALibrary">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-BO-hZn" customClass="PIAButton" customModule="PIAUIKit">
                                             <rect key="frame" x="19" y="139" width="337" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="lv6-ch-s4O"/>

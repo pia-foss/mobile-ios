@@ -21,6 +21,7 @@
 
 import UIKit
 import PIALibrary
+import PIADesignSystem
 
 class NetworkFooterCollectionViewCell: UICollectionViewCell {
 

@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIAUIKit
 
 class MenuItemCell: UITableViewCell, Restylable {
     @IBOutlet private weak var imvIcon: UIImageView!
