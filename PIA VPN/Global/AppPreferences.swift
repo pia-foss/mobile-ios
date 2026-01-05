@@ -627,8 +627,8 @@ class AppPreferences {
             Entries.quickSettingNetworkToolVisible: true,
             Entries.quickSettingPrivateBrowserVisible: true,
             Entries.useSmallPackets: false,
-            Entries.wireGuardUseSmallPackets: true,
-            Entries.ikeV2UseSmallPackets: true,
+            Entries.wireGuardUseSmallPackets: false,
+            Entries.ikeV2UseSmallPackets: false,
             Entries.usesCustomDNS: false,
             Entries.canAskAgainForReview: false,
             Entries.successDisconnections: 0,
@@ -882,10 +882,10 @@ class AppPreferences {
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true
-        useSmallPackets = false
-        ikeV2UseSmallPackets = true
         usesCustomDNS = false
-        wireGuardUseSmallPackets = true
+        useSmallPackets = false
+        ikeV2UseSmallPackets = false
+        wireGuardUseSmallPackets = false
         #if os(iOS)
         todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
         todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
