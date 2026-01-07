@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "Maandelijks";
 "plan.yearly.title" = "Jaarlijks";
-"plan.yearly.detail_format" = "%@%@ per jaar";
+"plan.weekly.title" = "Wekelijks";
+"plan.yearly.detail_format" = "%@%@/jaar";
+"plan.monthly.detail_format" = "%@%@/maand";
+"plan.weekly.detail_format" = "%@%@/week";
 "plan.price_format" = "%@/ma";
 "plan.best_value" = "Beste waarde";
 "plan.accessibility.per_month" = "per maand";

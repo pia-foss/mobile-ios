@@ -102,7 +102,16 @@
 "plan.price_format" = "%@/ay";
 
 /* (No Comment) */
-"plan.yearly.detail_format" = "Yılda %@%@";
+"plan.yearly.detail_format" = "%@%@/yıl";
+
+/* (No Comment) */
+"plan.monthly.detail_format" = "%@%@/ay";
+
+/* (No Comment) */
+"plan.weekly.title" = "Haftalık";
+
+/* (No Comment) */
+"plan.weekly.detail_format" = "%@%@/hafta";
 
 /* (No Comment) */
 "plan.yearly.title" = "Yıllık";

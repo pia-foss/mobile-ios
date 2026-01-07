@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "月間";
 "plan.yearly.title" = "年間";
-"plan.yearly.detail_format" = "年間%@%@";
+"plan.weekly.title" = "週間";
+"plan.yearly.detail_format" = "%@%@/年";
+"plan.monthly.detail_format" = "%@%@/月";
+"plan.weekly.detail_format" = "%@%@/週";
 "plan.price_format" = "%@/月";
 "plan.best_value" = "最もお得";
 "plan.accessibility.per_month" = "月々";

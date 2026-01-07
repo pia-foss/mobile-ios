@@ -455,6 +455,7 @@ internal enum Asset {
     internal static let imageAccountFailed = ImageAsset(name: "image-account-failed")
     internal static let imageDocumentConsent = ImageAsset(name: "image-document-consent")
     internal static let imageNoInternet = ImageAsset(name: "image-no-internet")
+    internal static let imagePaywallGlobe = ImageAsset(name: "image-paywall-globe")
     internal static let imagePurchaseSuccess = ImageAsset(name: "image-purchase-success")
     internal static let imageReceiptBackground = ImageAsset(name: "image-receipt-background")
     internal static let imageRedeemClaimed = ImageAsset(name: "image-redeem-claimed")

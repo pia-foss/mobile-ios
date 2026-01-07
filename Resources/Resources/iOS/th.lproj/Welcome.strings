@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "รายเดือน";
 "plan.yearly.title" = "รายปี";
-"plan.yearly.detail_format" = "%@%@ ต่อปี";
+"plan.weekly.title" = "รายสัปดาห์";
+"plan.yearly.detail_format" = "%@%@/ปี";
+"plan.monthly.detail_format" = "%@%@/เดือน";
+"plan.weekly.detail_format" = "%@%@/สัปดาห์";
 "plan.price_format" = "%@/เดือน";
 "plan.best_value" = "คุ้มค่าที่สุด";
 "plan.accessibility.per_month" = "ต่อเดือน";

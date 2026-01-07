@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "Månedligt";
 "plan.yearly.title" = "Årligt";
-"plan.yearly.detail_format" = "%@%@ per år";
+"plan.weekly.title" = "Ugentligt";
+"plan.yearly.detail_format" = "%@%@/år";
+"plan.monthly.detail_format" = "%@%@/måned";
+"plan.weekly.detail_format" = "%@%@/uge";
 "plan.price_format" = "%@/mdr";
 "plan.best_value" = "Bedste værdi";
 "plan.accessibility.per_month" = "per måned";

@@ -37,6 +37,8 @@ internal enum StoryboardScene {
 
     internal static let shareDataInformationViewController = SceneType<ShareDataInformationViewController>(storyboard: Self.self, identifier: "ShareDataInformationViewController")
 
+    internal static let signupInProgressViewController = SceneType<SignupInProgressViewController>(storyboard: Self.self, identifier: "SignupInProgressViewController")
+
     internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Self.self, identifier: "SignupSuccessViewController")
   }
   internal enum Welcome: StoryboardType {

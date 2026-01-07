@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "Mensuellement";
 "plan.yearly.title" = "Annuellement";
-"plan.yearly.detail_format" = "%@%@ par an";
+"plan.weekly.title" = "Hebdomadaire";
+"plan.yearly.detail_format" = "%@%@/an";
+"plan.monthly.detail_format" = "%@%@/mois";
+"plan.weekly.detail_format" = "%@%@/semaine";
 "plan.price_format" = "%@/mois";
 "plan.best_value" = "Économique";
 "plan.accessibility.per_month" = "par mois";

@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "月繳";
 "plan.yearly.title" = "年繳";
-"plan.yearly.detail_format" = "每年 %@%@";
+"plan.weekly.title" = "週繳";
+"plan.yearly.detail_format" = "%@%@/年";
+"plan.monthly.detail_format" = "%@%@/月";
+"plan.weekly.detail_format" = "%@%@/週";
 "plan.price_format" = "每月 %@";
 "plan.best_value" = "最佳值";
 "plan.accessibility.per_month" = "/ 月";

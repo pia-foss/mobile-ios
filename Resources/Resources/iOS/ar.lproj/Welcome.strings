@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "شهريًا";
 "plan.yearly.title" = "سنويًا";
-"plan.yearly.detail_format" = "%@%@ في السنة";
+"plan.weekly.title" = "أسبوعيًا";
+"plan.yearly.detail_format" = "%@%@/سنة";
+"plan.monthly.detail_format" = "%@%@/الشهر";
+"plan.weekly.detail_format" = "%@%@/الأسبوع";
 "plan.price_format" = "%@ / شهر";
 "plan.best_value" = "أفضل قيمة";
 "plan.accessibility.per_month" = "في الشهر";

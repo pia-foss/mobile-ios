@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "월간";
 "plan.yearly.title" = "연간";
-"plan.yearly.detail_format" = "매년 %@%@";
+"plan.weekly.title" = "주간";
+"plan.yearly.detail_format" = "%@%@/년";
+"plan.monthly.detail_format" = "%@%@/월";
+"plan.weekly.detail_format" = "%@%@/주";
 "plan.price_format" = "%@/월";
 "plan.best_value" = "최저가";
 "plan.accessibility.per_month" = "매월";

@@ -2183,13 +2183,25 @@ internal enum L10n {
         internal static let perMonth = L10n.tr("Welcome", "plan.accessibility.per_month", fallback: "per month")
       }
       internal enum Monthly {
+        /// %@%@/month
+        internal static func detailFormat(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("Welcome", "plan.monthly.detail_format", String(describing: p1), String(describing: p2), fallback: "%@%@/month")
+        }
         /// Monthly
         internal static let title = L10n.tr("Welcome", "plan.monthly.title", fallback: "Monthly")
       }
-      internal enum Yearly {
-        /// %@%@ per year
+      internal enum Weekly {
+        /// %@%@/week
         internal static func detailFormat(_ p1: Any, _ p2: Any) -> String {
-          return L10n.tr("Welcome", "plan.yearly.detail_format", String(describing: p1), String(describing: p2), fallback: "%@%@ per year")
+          return L10n.tr("Welcome", "plan.weekly.detail_format", String(describing: p1), String(describing: p2), fallback: "%@%@/week")
+        }
+        /// Weekly
+        internal static let title = L10n.tr("Welcome", "plan.weekly.title", fallback: "Weekly")
+      }
+      internal enum Yearly {
+        /// %@%@/year
+        internal static func detailFormat(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("Welcome", "plan.yearly.detail_format", String(describing: p1), String(describing: p2), fallback: "%@%@/year")
         }
         /// Yearly
         internal static let title = L10n.tr("Welcome", "plan.yearly.title", fallback: "Yearly")

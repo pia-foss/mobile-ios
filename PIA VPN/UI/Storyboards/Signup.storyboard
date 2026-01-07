@@ -473,7 +473,7 @@
         <!--<In progress>-->
         <scene sceneID="25u-z4-3Es">
             <objects>
-                <viewController id="QNJ-sc-3YJ" customClass="SignupInProgressViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupInProgressViewController" id="QNJ-sc-3YJ" customClass="SignupInProgressViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HH2-xO-dDB"/>
                         <viewControllerLayoutGuide type="bottom" id="lbE-kN-4Am"/>

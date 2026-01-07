@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "Ежемесячно";
 "plan.yearly.title" = "Ежегодно";
-"plan.yearly.detail_format" = "%@%@ в год";
+"plan.weekly.title" = "Еженедельно";
+"plan.yearly.detail_format" = "%@%@/год";
+"plan.monthly.detail_format" = "%@%@/месяц";
+"plan.weekly.detail_format" = "%@%@/неделю";
 "plan.price_format" = "%@/мес.";
 "plan.best_value" = "Максимальная выгода";
 "plan.accessibility.per_month" = "в месяц";

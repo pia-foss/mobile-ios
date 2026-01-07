@@ -55,7 +55,10 @@
 
 "plan.monthly.title" = "每月";
 "plan.yearly.title" = "每年";
-"plan.yearly.detail_format" = "%@%@/每年";
+"plan.weekly.title" = "每周";
+"plan.yearly.detail_format" = "%@%@/年";
+"plan.monthly.detail_format" = "%@%@/月";
+"plan.weekly.detail_format" = "%@%@/周";
 "plan.price_format" = "%@/每月";
 "plan.best_value" = "最超值";
 "plan.accessibility.per_month" = "每月";
