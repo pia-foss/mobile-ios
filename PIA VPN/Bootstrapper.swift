@@ -49,34 +49,26 @@ class Bootstrapper {
         #endif
     }
   
-    var isDevelopmentBuild: Bool {
-        #if PIA_DEV
-            return true
-        #else
-            return false
-        #endif
-    }
-    
     /// Update the values of the flags from the CSI server
     private func updateFeatureFlagsForReleaseIfNeeded() {
         // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
         // So we skip updating the flag from the server on dev builds
-        guard !isDevelopmentBuild else { return }
-       
+
+        #if !STAGING
        // Leak Protection feature flags
         AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
         AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
         
         // DynamicIsland LiveActivity
         AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(Client.FeatureFlags.showDynamicIslandLiveActivity)
-    
+        #endif
     }
 
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
             
-            #if PIA_DEV
+            #if STAGING
             handler.logLevel = .debug
             #else
             handler.logLevel = .info
@@ -115,29 +107,29 @@ class Bootstrapper {
 
         Client.configuration.rsa4096Certificate = rsa4096Certificate()
 
-        #if PIA_DEV
-        Client.environment =  AppPreferences.shared.appEnvironmentIsProduction ? .production : .staging
-        #else
-        Client.environment =  AppConfiguration.clientEnvironment
-        #endif
+        #if STAGING
+        Client.environment = .staging
+
         Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
         if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                        
             if AppPreferences.shared.stagingVersion < 1 {
                 Client.environment = .staging
                 let stagingVersion = Int(stagingUrl.absoluteString.split(separator: "-")[1]) ?? 1
                 AppPreferences.shared.stagingVersion = stagingVersion
             }
-            
+
             let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(AppPreferences.shared.stagingVersion)", options: .regularExpression)
             Client.configuration.setBaseURL(url, for: .staging)
-
         }
+
         if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
             for server in customServers {
                 Client.configuration.addCustomServer(server)
             }
         }
+        #else
+        Client.environment = .production
+        #endif
         
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true

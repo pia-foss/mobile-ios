@@ -183,7 +183,7 @@ Requires special Apple entitlement. If unavailable:
 
 ## Notes
 
-**Development Flow**: Use `PIA VPN dev` scheme, staging endpoints, `PIA_DEV` preprocessor flag enables dev features
+**Development Flow**: Use `PIA VPN Staging` scheme, staging endpoints, `STAGING` preprocessor flag enables dev features
 
 **Multi-platform**: iOS (UIKit) + tvOS (SwiftUI) share PIALibrary core
 

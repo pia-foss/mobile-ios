@@ -65,19 +65,15 @@ class Flags: NSObject {
         
         enablesThemeSwitch = false
         
-        #if PIA_DEV
-            guard let path = AppConstants.Flags.developmentPath else {
-                fatalError("Couldn't find flags path")
-            }
-            load(from: path)
+        #if STAGING
+        let path = AppConstants.Flags.developmentPath
+        load(from: path!)
         #endif
     }
     
-    #if PIA_DEV
+    #if STAGING
     private func load(from path: String) {
-        guard let toggles = NSDictionary(contentsOfFile: path) as? [String: Bool] else {
-            fatalError("Couldn't load plist from \(path)")
-        }
+        let toggles = NSDictionary(contentsOfFile: path) as! [String: Bool]
         for (key, value) in toggles {
             setValue(value, forKeyPath: key)
         }
