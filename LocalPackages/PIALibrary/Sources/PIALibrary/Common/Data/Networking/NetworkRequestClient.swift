@@ -2,6 +2,7 @@
 import Foundation
 import NWHttpConnection
 
+private let log = PIALogger.logger(for: NetworkRequestClient.self)
 
 protocol NetworkRequestClientType {
     typealias Completion = ((NetworkRequestError?, NetworkRequestResponseType?) -> Void)
@@ -42,8 +43,9 @@ private extension NetworkRequestClient {
     
     /// Serial execution of all the connections until one succeeds or completes with an error when all connection attempts fail
     func executeRecursivelyUntilSuccess(connections:  [NWHttpConnectionType], completion: @escaping NetworkRequestClientType.Completion) {
-        
+
         guard !connections.isEmpty else {
+            log.error("All connection attempts failed: No connections available")
             completion(.allConnectionAttemptsFailed(statusCode: nil), nil)
             return
         }
@@ -54,6 +56,7 @@ private extension NetworkRequestClient {
         func tryNextConnectionOrFail(currentStatusCode: Int?) {
             if remainingConnections.isEmpty {
                 // No more endpoints to try a connection
+                log.error("All connection attempts failed: No more endpoints to try (statusCode: \(currentStatusCode?.description ?? "nil"))")
                 let requestError = NetworkRequestError.allConnectionAttemptsFailed(statusCode: currentStatusCode)
                 completion(requestError, nil)
             } else {
@@ -64,20 +67,23 @@ private extension NetworkRequestClient {
         
         execute(connection: nextConnection) { error, responseData in
 
-            if error != nil {
+            if let error = error {
+                log.error("Connection error: \(error) (statusCode: \(responseData?.statusCode?.description ?? "nil"))")
                 tryNextConnectionOrFail(currentStatusCode: responseData?.statusCode)
             } else if let responseData {
                 let statusCode: Int = responseData.statusCode ?? -1
                 let isSuccessStatusCode = statusCode > 199 && statusCode < 300
-                
+
                 if isSuccessStatusCode {
                     completion(nil, responseData)
                 } else {
                     // Connection did not succeed, try the next one
+                    log.error("Non-success status code received: \(statusCode)")
                     tryNextConnectionOrFail(currentStatusCode: responseData.statusCode)
                 }
             } else {
                 // No error and no data
+                log.error("Connection completed with no error and no data")
                 tryNextConnectionOrFail(currentStatusCode: nil)
             }
         }
@@ -88,25 +94,29 @@ private extension NetworkRequestClient {
     func execute(connection: NWHttpConnectionType, completion: @escaping NetworkRequestClientType.Completion) {
         do {
             var connectionHandled: Bool = false
-            
+
             try connection.connect { error, dataResponse in
                 if let error {
                     connectionHandled = true
+                    log.error("Connection error in single connection: \(error.localizedDescription) (statusCode: \(dataResponse?.statusCode?.description ?? "nil"))")
                     completion(NetworkRequestError.connectionError(statusCode: dataResponse?.statusCode, message: error.localizedDescription), nil)
                 } else if let dataResponse = dataResponse as? NetworkRequestResponseType {
                     connectionHandled = true
                     completion(nil, dataResponse)
                 } else {
                     connectionHandled = true
+                    log.error("No error and no response in single connection")
                     completion(NetworkRequestError.noErrorAndNoResponse, nil)
                 }
             } completion: {
                 if connectionHandled == false {
+                    log.error("Connection completed with no response")
                     completion(NetworkRequestError.connectionCompletedWithNoResponse, nil)
                 }
             }
-            
+
         } catch {
+            log.error("Unknown error in connection execution: \(error.localizedDescription)")
             completion(NetworkRequestError.unknown(message: error.localizedDescription), nil)
         }
     }
