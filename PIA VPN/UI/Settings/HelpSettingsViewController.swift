@@ -80,9 +80,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
     
     @objc private func toggleDebugLogging(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.debugLogging = sender.isOn
-        preferences.commit()
+        pendingPreferences.debugLogging = sender.isOn
         reloadSettings()
 
         if !sender.isOn {
@@ -91,18 +89,16 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
 
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
-        let preferences = Client.preferences.editable()
-        preferences.shareServiceQualityData = sender.isOn
-        
+        pendingPreferences.shareServiceQualityData = sender.isOn
+
         if sender.isOn {
-            preferences.versionWhenServiceQualityOpted = Macros.versionString()
+            pendingPreferences.versionWhenServiceQualityOpted = Macros.versionString()
             ServiceQualityManager.shared.start()
         } else {
-            preferences.versionWhenServiceQualityOpted = nil
+            pendingPreferences.versionWhenServiceQualityOpted = nil
             ServiceQualityManager.shared.stop()
         }
-        
-        preferences.commit()
+
         reloadSettings()
     }
 
@@ -175,11 +171,11 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         case .debugLogging:
             cell.accessoryView = switchDebugLogging
             cell.selectionStyle = .none
-            switchDebugLogging.isOn = Client.preferences.debugLogging
+            switchDebugLogging.isOn = pendingPreferences.debugLogging
         case .kpiShareStatistics:
             cell.accessoryView = switchShareServiceQualityData
             cell.selectionStyle = .none
-            switchShareServiceQualityData.isOn = Client.preferences.shareServiceQualityData
+            switchShareServiceQualityData.isOn = pendingPreferences.shareServiceQualityData
         default:
             break
         }
