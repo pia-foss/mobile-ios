@@ -37,7 +37,6 @@ struct PIAWidgetView : View {
         }
     }
 
-    @ViewBuilder
     private func widgetBody() -> some View {
         ZStack(alignment: .bottomTrailing) {
             let targetIconSize = widgetFamily == .systemMedium ? 100.0 : 50.0

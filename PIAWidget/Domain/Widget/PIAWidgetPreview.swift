@@ -10,29 +10,28 @@ import Foundation
 import SwiftUI
 import WidgetKit
 
-struct PIAWidgetPreview: PreviewProvider {
+@available(iOS 17, *)
+#Preview(as: .systemSmall, widget: {
+    PIAWidget()
+}, timeline: {
+    WidgetInformation(
+        date: Date(),
+        connected: true,
+        vpnProtocol: "IKEv2",
+        vpnPort: "500",
+        vpnSocket: "UDP"
+    )
+})
 
-    static var previews: some View {
-        let widgetPersistenceDatasource = WidgetUserDefaultsDatasource()
-        PIAWidgetView(
-            entry: WidgetInformation(
-                date: Date(),
-                connected: true,
-                vpnProtocol: "IKEv2",
-                vpnPort: "500",
-                vpnSocket: "UDP"
-            ),
-            widgetPersistenceDatasource: widgetPersistenceDatasource
-        ).previewContext(WidgetPreviewContext(family: .systemSmall))
-        PIAWidgetView(
-            entry: WidgetInformation(
-                date: Date(),
-                connected: false,
-                vpnProtocol: "WireGuard",
-                vpnPort: "1443",
-                vpnSocket: "UDP"
-            ),
-            widgetPersistenceDatasource: widgetPersistenceDatasource
-        ).previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
+@available(iOS 17, *)
+#Preview(as: .systemMedium, widget: {
+    PIAWidget()
+}, timeline: {
+    WidgetInformation(
+        date: Date(),
+        connected: false,
+        vpnProtocol: "WireGuard",
+        vpnPort: "1443",
+        vpnSocket: "UDP"
+    )
+})
