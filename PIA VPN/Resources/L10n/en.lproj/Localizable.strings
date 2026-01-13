@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safari Content Blocker state";
 "settings.content_blocker.state.title" = "Current state";
 "settings.content_blocker.refresh.title" = "Refresh block list";
-"settings.content_blocker.footer" = "To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.";
+"settings.content_blocker.footer" = "To enable or disable Content Blocker go to Settings > Apps > Safari > Extensions and toggle PIA VPN.";
 
 "settings.application_information.title" = "APPLICATION INFORMATION";
 "settings.application_information.debug.title" = "Send Debug Log to support";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari Content Blocker";
-"content_blocker.body.subtitle" = "To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.";
+"content_blocker.body.subtitle" = "To enable our Content Blocker for use with Safari please go to Settings > Apps > Safari > Extensions and toggle on PIA VPN.";
 "content_blocker.body.footer" = "Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.";
 
 // ABOUT

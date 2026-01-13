@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "حالة حظر المحتوى في Safari";
 "settings.content_blocker.state.title" = "الحالة الحالية";
 "settings.content_blocker.refresh.title" = "تحديث قائمة الحظر";
-"settings.content_blocker.footer" = "لتفعيل أو تعطيل حظر المحتوى على متصفح Safari، اذهب الى الإعدادات > Safari > حظر المحتوى وتفعيل PIA VPN";
+"settings.content_blocker.footer" = "لتفعيل أو تعطيل حظر المحتوى على متصفح Safari، اذهب الى الإعدادات > التطبيقات > Safari > الإضافات وتفعيل PIA VPN";
 
 "settings.application_information.title" = "معلومات التطبيق";
 "settings.application_information.debug.title" = "إرسال سجل تتبع الأخطاء إلى الدعم";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "حظر المحتوى في Safari";
-"content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > Safari وتفعيل PIA VPN تحت General touch Content Blockers";
+"content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > التطبيقات > Safari > الإضافات وتفعيل PIA VPN";
 "content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
 
 // ABOUT

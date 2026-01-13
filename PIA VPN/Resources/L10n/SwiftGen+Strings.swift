@@ -158,8 +158,8 @@ internal enum L10n {
       internal enum Body {
         /// Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.
         internal static let footer = L10n.tr("Localizable", "content_blocker.body.footer", fallback: "Please note: You do not need to be connected to the VPN for this Content Blocker to work, but it will only work while browsing with Safari.")
-        /// To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.
-        internal static let subtitle = L10n.tr("Localizable", "content_blocker.body.subtitle", fallback: "To enable our Content Blocker for use with Safari please go to Settings > Safari, and under General touch Content Blockers toggle on PIA VPN.")
+        /// To enable our Content Blocker for use with Safari please go to Settings > Apps > Safari > Extensions and toggle on PIA VPN.
+        internal static let subtitle = L10n.tr("Localizable", "content_blocker.body.subtitle", fallback: "To enable our Content Blocker for use with Safari please go to Settings > Apps > Safari > Extensions and toggle on PIA VPN.")
       }
     }
     internal enum Dashboard {
@@ -1164,8 +1164,8 @@ internal enum L10n {
         }
       }
       internal enum ContentBlocker {
-        /// To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.
-        internal static let footer = L10n.tr("Localizable", "settings.content_blocker.footer", fallback: "To enable or disable Content Blocker go to Settings > Safari > Content Blockers and toggle PIA VPN.")
+        /// To enable or disable Content Blocker go to Settings > Apps > Safari > Extensions and toggle PIA VPN.
+        internal static let footer = L10n.tr("Localizable", "settings.content_blocker.footer", fallback: "To enable or disable Content Blocker go to Settings > Apps > Safari > Extensions and toggle PIA VPN.")
         /// Safari Content Blocker state
         internal static let title = L10n.tr("Localizable", "settings.content_blocker.title", fallback: "Safari Content Blocker state")
         internal enum Refresh {

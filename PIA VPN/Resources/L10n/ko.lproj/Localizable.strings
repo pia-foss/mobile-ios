@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safari 콘텐츠 차단기 상태";
 "settings.content_blocker.state.title" = "현재 상태";
 "settings.content_blocker.refresh.title" = "차단 목록 새로고침";
-"settings.content_blocker.footer" = "Content Blocker를 활성화 또는 비활성화하려면 설정 > Safari > Content Blockers로 가서 PIA VPN을 토글하세요.";
+"settings.content_blocker.footer" = "Content Blocker를 활성화 또는 비활성화하려면 설정 > 앱 > Safari > 확장으로 가서 PIA VPN을 토글하세요.";
 
 "settings.application_information.title" = "애플리케이션 정보";
 "settings.application_information.debug.title" = "지원팀에 디버그 로그 보내기";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari 콘텐츠 차단기";
-"content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > Safari로 가서 '일반'에서 Content Blockers를 눌러 PIA VPN을 켜세요.";
+"content_blocker.body.subtitle" = "Content Blocker를 활성화하여 Safari로 사용하려면 설정 > 앱 > Safari > 확장으로 가서 PIA VPN을 켜세요.";
 "content_blocker.body.footer" = "주의: Content Blocker를 작동시키기 위해 VPN에 연결할 필요가 없지만, Safari로 검색할 때만 작동합니다.";
 
 // ABOUT

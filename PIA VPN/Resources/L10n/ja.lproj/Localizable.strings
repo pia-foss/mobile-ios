@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safariコンテンツブロッカーの状態";
 "settings.content_blocker.state.title" = "現在の状況";
 "settings.content_blocker.refresh.title" = "ブロックリストをリフレッシュ";
-"settings.content_blocker.footer" = "コンテンツブロッカーのオン、オフは「設定」>「Safari」>「コンテンツブロッカー」から、PIA VPNをオンにしてください。";
+"settings.content_blocker.footer" = "コンテンツブロッカーのオン、オフは「設定」>「App」>「Safari」>「機能拡張」から、PIA VPNをオンにしてください。";
 
 "settings.application_information.title" = "アプリ情報";
 "settings.application_information.debug.title" = "サポートにデバッグログを送信";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari コンテンツブロッカー";
-"content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「Safari」にアクセスし、「一般」からPIA VPNで「コンテンツブロッカー」をオンにしてください。";
+"content_blocker.body.subtitle" = "コンテンツブロッカーをオンにしてSafariで使えるようにするには、「設定」>「App」>「Safari」>「機能拡張」から、PIA VPNをオンにしてください。";
 "content_blocker.body.footer" = "注意：コンテンツブロッカーは、VPNへの接続がなくても機能しますが、Safariを使ったブラウジングのみで利用できます。";
 
 // ABOUT

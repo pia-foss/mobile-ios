@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safari Indholdsblokeringstilstand";
 "settings.content_blocker.state.title" = "Aktuel status";
 "settings.content_blocker.refresh.title" = "Opdater blokeringsliste";
-"settings.content_blocker.footer" = "For at aktivere vores Indholdsblokering skal du gå til Indstillinger > Safari > Indholdsblokering og slå PIA VIN til.";
+"settings.content_blocker.footer" = "For at aktivere vores Indholdsblokering skal du gå til Indstillinger > Apps > Safari > Udvidelser og slå PIA VIN til.";
 
 "settings.application_information.title" = "INFORMATIN OM APPLIKATIONEN";
 "settings.application_information.debug.title" = "Send fejlfindingslog til support";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari-indholdsblokering";
-"content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Safari og under Generelt trykke på Indholdsblokering til for PIA VPN.";
+"content_blocker.body.subtitle" = "For at aktivere vores Indholdsblokering til brug med Safari skal du gå til Indstillinger > Apps > Safari > Udvidelser og slå PIA VPN til.";
 "content_blocker.body.footer" = "Bemærk: Du behøver ikke have forbindelse til VPN for, at denne Indholdsblokering kan fungere, men den virker kun, når du anvender Safari-browseren.";
 
 // ABOUT

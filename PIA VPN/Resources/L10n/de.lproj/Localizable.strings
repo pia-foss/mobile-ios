@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Status Inhalts-Blocker für Safari";
 "settings.content_blocker.state.title" = "Aktueller Status";
 "settings.content_blocker.refresh.title" = "Sperrliste aktualisieren";
-"settings.content_blocker.footer" = "Um Inhalts-Blocker zu aktivieren oder zu deaktivieren, gehen Sie bitte zu Einstellungen > Safari > Inhalts-Blocker und schalten Sie PIA VPN ein.";
+"settings.content_blocker.footer" = "Um Inhalts-Blocker zu aktivieren oder zu deaktivieren, gehen Sie bitte zu Einstellungen > Apps > Safari > Erweiterungen und schalten Sie PIA VPN ein.";
 
 "settings.application_information.title" = "ANWENDUNGSINFORMATIONEN";
 "settings.application_information.debug.title" = "Debug-Daten an Support senden";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari-Inhalts-Blocker";
-"content_blocker.body.subtitle" = "Um unseren Inhalts-Blocker für Safari zu aktivieren, gehen Sie bitte zu Einstellungen > Safari > Allgemein > Inhalts-Blocker und schalten Sie PIA VPN ein.";
+"content_blocker.body.subtitle" = "Um unseren Inhalts-Blocker für Safari zu aktivieren, gehen Sie bitte zu Einstellungen > Apps > Safari > Erweiterungen und schalten Sie PIA VPN ein.";
 "content_blocker.body.footer" = "Hinweis: Für diesen Inhalts-Blocker müssen Sie nicht mit VPN verbunden sein. Er funktioniert jedoch nur in Safari.";
 
 // ABOUT
