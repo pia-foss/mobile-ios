@@ -38,7 +38,7 @@ extension ThemeCode {
         }
         
         // share font type across all themes
-        theme.typeface = AppConstants.Fonts.typeface
+        theme.typeface = Theme.Fonts.typeface
         
         if reload {
             theme.reload()

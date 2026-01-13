@@ -20,7 +20,6 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import PIALibrary
 #if canImport(TunnelKitCore)
 import TunnelKitCore
@@ -287,7 +286,7 @@ class AppPreferences {
 
     var todayWidgetTrustedNetwork: Bool {
         get {
-            return defaults.bool(forKey: Entries.todayWidgetTrustedNetwork) ?? false
+            return defaults.bool(forKey: Entries.todayWidgetTrustedNetwork)
         }
         set {
             defaults.set(newValue, forKey: Entries.todayWidgetTrustedNetwork)

@@ -43,10 +43,11 @@
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
 		3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */; };
+		3F8075E52F163EDA002015ED /* PIAUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8075E42F163EDA002015ED /* PIAUIKit */; };
+		3F8075E72F163EE0002015ED /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8075E62F163EE0002015ED /* PIASwiftUI */; };
+		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
 		3FE266BC2F0BE003004B53AA /* PIAUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266BB2F0BE003004B53AA /* PIAUIKit */; };
-		3FE266BE2F0BE00F004B53AA /* PIAUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266BD2F0BE00F004B53AA /* PIAUIKit */; };
-		3FE266C02F0BE014004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266BF2F0BE014004B53AA /* PIASwiftUI */; };
 		698F4F2B2AB8A2080010B2B0 /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
 		8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67E251CB4BA000B4DBF /* SwiftUI.framework */; };
@@ -307,9 +308,7 @@
 				Core/Utils/RegionFilter.swift,
 				Flags.swift,
 				Global/AppConfiguration.swift,
-				Global/AppConstants.swift,
 				Global/AppPreferences.swift,
-				Global/UserInterface.swift,
 				"Resources/L10n/SwiftGen+Strings.swift",
 			);
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
@@ -484,7 +483,7 @@
 				AABF827628AE302300CDAC64 /* NetworkExtension.framework in Frameworks */,
 				0EE220571F4EF307002805AE /* Security.framework in Frameworks */,
 				0EE220581F4EF307002805AE /* SystemConfiguration.framework in Frameworks */,
-				3FE266BE2F0BE00F004B53AA /* PIAUIKit in Frameworks */,
+				3F8075E52F163EDA002015ED /* PIAUIKit in Frameworks */,
 				AABF827328AE2FF500CDAC64 /* GradientProgressBar in Frameworks */,
 				AABF827828AE333200CDAC64 /* DZNEmptyDataSet in Frameworks */,
 				0EE220591F4EF307002805AE /* libz.dylib in Frameworks */,
@@ -495,7 +494,7 @@
 				0EE2205F1F4EF307002805AE /* StoreKit.framework in Frameworks */,
 				3F557CF52EF59C34002FB559 /* SwiftEntryKit in Frameworks */,
 				0EE2205D1F4EF307002805AE /* UIKit.framework in Frameworks */,
-				3FE266C02F0BE014004B53AA /* PIASwiftUI in Frameworks */,
+				3F8075E72F163EE0002015ED /* PIASwiftUI in Frameworks */,
 				0EE2205E1F4EF307002805AE /* Foundation.framework in Frameworks */,
 				3F557CF72EF59C39002FB559 /* PopupDialog in Frameworks */,
 				3F7BD9BA2EE8A09C00EE1F4C /* PIALibrary in Frameworks */,
@@ -566,6 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */,
+				3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */,
 				8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,8 +749,8 @@
 				3F7BD9B92EE8A09C00EE1F4C /* PIALibrary */,
 				3F557CF42EF59C34002FB559 /* SwiftEntryKit */,
 				3F557CF62EF59C39002FB559 /* PopupDialog */,
-				3FE266BD2F0BE00F004B53AA /* PIAUIKit */,
-				3FE266BF2F0BE014004B53AA /* PIASwiftUI */,
+				3F8075E42F163EDA002015ED /* PIAUIKit */,
+				3F8075E62F163EE0002015ED /* PIASwiftUI */,
 			);
 			productName = "PIA VPN";
 			productReference = 0EE2207A1F4EF307002805AE /* PIA VPN dev.app */;
@@ -2978,6 +2978,18 @@
 			productName = PIALibrary;
 		};
 		3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
+		};
+		3F8075E42F163EDA002015ED /* PIAUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAUIKit;
+		};
+		3F8075E62F163EE0002015ED /* PIASwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIASwiftUI;
+		};
+		3F807D4B2F164B44002015ED /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
 		};

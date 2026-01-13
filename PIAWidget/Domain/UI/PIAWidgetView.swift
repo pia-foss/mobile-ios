@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALibrary
 
 struct PIAWidgetView : View {
 
@@ -60,6 +61,6 @@ struct PIAWidgetView : View {
             }
 
         }
-        .widgetURL(URL(string: widgetFamily == .systemMedium ? "piavpn:view" : "piavpn:connect"))
+        .widgetURL(URL(string: AppConstants.Widget.connect))
     }
 }

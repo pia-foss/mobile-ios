@@ -21,6 +21,7 @@
 //
 
 import UIKit
+import PIALibrary
 
 /// Displays an `UITableView` with a list of dynamically rendered options.
 public class OptionsViewController: AutolayoutViewController, UITableViewDataSource, UITableViewDelegate {

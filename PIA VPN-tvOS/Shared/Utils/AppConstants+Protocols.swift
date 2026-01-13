@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol AppConstantsType {
     static var appId: String { get }
