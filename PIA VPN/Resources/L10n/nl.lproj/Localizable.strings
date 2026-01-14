@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "Meer informatie";
 "settings.service.quality.show.title" = "Verbindingsgegevens";
 
-"network.management.tool.open.wifi" = "Wifi openen";
+"network.management.tool.open.wifi" = "Open wifi";
 "network.management.tool.secure.wifi" = "Veilige wifi";
 "network.management.tool.mobile.data" = "Mobiele gegevens";
 "network.management.tool.always.connect" = "Altijd verbinden met VPN";

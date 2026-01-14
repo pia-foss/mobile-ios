@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "Finn ut mer";
 "settings.service.quality.show.title" = "Tilkoblingsstatistikk";
 
-"network.management.tool.open.wifi" = "Pålitelig WiFi";
+"network.management.tool.open.wifi" = "Åpen WiFi";
 "network.management.tool.secure.wifi" = "Sikkert WiFi";
 "network.management.tool.mobile.data" = "Mobildata";
 "network.management.tool.always.connect" = "Alltid tilkoblet VPN";

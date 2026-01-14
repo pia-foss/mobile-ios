@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "자세히 보기";
 "settings.service.quality.show.title" = "연결 통계";
 
-"network.management.tool.open.wifi" = "WiFi 열기";
+"network.management.tool.open.wifi" = "공개 WiFi";
 "network.management.tool.secure.wifi" = "안전한 WiFi";
 "network.management.tool.mobile.data" = "모바일 데이터";
 "network.management.tool.always.connect" = "항상 VPN 연결";
