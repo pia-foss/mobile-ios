@@ -27,7 +27,7 @@ import UIKit
 
 private let log = PIALogger.logger(for: PIAHotspotHelper.self)
 
-public protocol PIAHotspotHelperDelegate: class {
+public protocol PIAHotspotHelperDelegate: AnyObject {
 
     /**
      Refreshes the available WiFi networks.
@@ -68,9 +68,16 @@ class PIAHotspotHelper {
         if Client.preferences.nmtRulesEnabled {
             options = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
         }
-        return NEHotspotHelper.register(options: options,
-                                        queue: DispatchQueue.main) { [weak self] (cmd: NEHotspotHelperCommand) in
-            
+
+        let queue: DispatchQueue = DispatchQueue(
+            label: AppConstants.HotspotHelper.queueLabel,
+            attributes: .concurrent
+        )
+
+        return NEHotspotHelper.register(
+            options: options,
+            queue: queue
+        ) { [weak self] cmd in
             guard !Client.configuration.featureFlags.contains("force_update") else {
                 let response = cmd.createResponse(.success)
                 response.deliver()
@@ -146,11 +153,17 @@ class PIAHotspotHelper {
         if networkMonitor.checkForRFC1918Vulnerability() {
             log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi detected")
             Client.preferences.currentRFC1918VulnerableWifi = cmd.network?.ssid.trimmingCharacters(in: CharacterSet.whitespaces)
-            NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
+            }
         } else {
             log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi NOT detected")
             Client.preferences.currentRFC1918VulnerableWifi = nil
-            NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918CompliantWifi, object: nil)
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918CompliantWifi, object: nil)
+            }
         }
     }
     
