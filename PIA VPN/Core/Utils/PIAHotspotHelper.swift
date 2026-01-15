@@ -63,33 +63,36 @@ class PIAHotspotHelper {
      - Returns: true if correctly configured.
      */
     public func configureHotspotHelper() -> Bool {
-        
         var options: [String: NSObject] = [:]
+
         if Client.preferences.nmtRulesEnabled {
             options = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
         }
 
-        let queue: DispatchQueue = DispatchQueue(
-            label: AppConstants.HotspotHelper.queueLabel,
-            attributes: .concurrent
-        )
+        let queue: DispatchQueue = DispatchQueue(label: AppConstants.HotspotHelper.queueLabel)
 
         return NEHotspotHelper.register(
             options: options,
             queue: queue
         ) { [weak self] cmd in
+            log.info("HotspotHelper: Received command type: \(cmd.commandType.rawValue)")
+
             guard !Client.configuration.featureFlags.contains("force_update") else {
-                let response = cmd.createResponse(.success)
-                response.deliver()
+                log.info("HotspotHelper: Ignoring command due to force_update feature flag, delivering response immediately")
+
+                cmd.createResponse(.success).deliver()
                 return
             }
             
             if let weakSelf = self {
                 if cmd.commandType == .filterScanList {
-                    log.info("filtering ssid list")
+                    log.info("HotspotHelper: Processing filterScanList command")
+
                     var availableList: [String] = []
                     var unsecuredList: [NEHotspotNetwork] = []
-                    for element in cmd.networkList! {
+                    let networkList = cmd.networkList ?? []
+
+                    for element in networkList {
                         if !element.ssid.isEmpty,
                            !availableList.contains(element.ssid) {
                             availableList.append(element.ssid)
@@ -99,56 +102,75 @@ class PIAHotspotHelper {
                             unsecuredList.append(element)
                         }
                     }
-                    
+
+                    log.info("HotspotHelper: Found \(availableList.count) networks, \(unsecuredList.count) unsecured")
+
                     weakSelf.saveCurrentNetworkList(availableNetworks: availableList)
-                    let response = cmd.createResponse(NEHotspotHelperResult.success)
+                    let response = cmd.createResponse(.success)
+
                     if !Client.providers.vpnProvider.isVPNConnected {
                         response.setNetworkList(unsecuredList)
-                        log.info("present PIA message for unprotected networks")
+                        log.info("HotspotHelper: VPN disconnected, present PIA message for \(unsecuredList.count) unsecured networks")
                     }
+
                     response.deliver()
                 } else if cmd.commandType == .evaluate {
-                    
+                    log.info("HotspotHelper: Processing evaluate command for network: \(cmd.network?.ssid ?? "unknown")")
+
                     if AppPreferences.shared.showLeakProtectionNotifications {
                         weakSelf.checkForRFC1918VulnerableWifi(cmd: cmd)
                     } else {
                         Client.preferences.currentRFC1918VulnerableWifi = nil
                     }
-                    
+
                     if let currentNetwork = cmd.network {
+                        log.info("HotspotHelper: Network '\(currentNetwork.ssid)' isSecure: \(currentNetwork.isSecure)")
+
                         if !currentNetwork.isSecure { // Open WiFi
-                            log.info("Evaluate")
-                            
+                            log.info("HotspotHelper: Detected open WiFi network '\(currentNetwork.ssid)'")
+
                             guard Client.providers.accountProvider.isLoggedIn else {
-                                let response = cmd.createResponse(.success)
-                                response.deliver()
+                                log.info("HotspotHelper: User not logged in, skipping automation and delivering response immediately")
+
+                                cmd.createResponse(.success).deliver()
                                 return
                             }
                             
                             let preferences = Client.preferences.editable()
                             preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
                             preferences.commit()
-                            
-                            if Client.preferences.nmtRulesEnabled &&
-                                (Client.preferences.nmtGenericRules[NMTType.openWiFi.rawValue] == NMTRules.alwaysConnect.rawValue ||
-                                    Client.preferences.nmtTrustedNetworkRules[currentNetwork.ssid] == NMTRules.alwaysConnect.rawValue){
+
+                            let nmtEnabled = Client.preferences.nmtRulesEnabled
+                            let genericRuleAlwaysConnect = Client.preferences.nmtGenericRules[NMTType.openWiFi.rawValue] == NMTRules.alwaysConnect.rawValue
+                            let ssidRuleAlwaysConnect = Client.preferences.nmtTrustedNetworkRules[currentNetwork.ssid] == NMTRules.alwaysConnect.rawValue
+
+                            if nmtEnabled && (genericRuleAlwaysConnect || ssidRuleAlwaysConnect) {
+                                log.info("HotspotHelper: Automation triggered - connecting VPN")
+
                                 if Client.providers.vpnProvider.isVPNConnected {
+                                    log.info("HotspotHelper: VPN already connected, reconnecting")
                                     Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
                                 } else {
+                                    log.info("HotspotHelper: VPN disconnected, connecting")
                                     Client.providers.vpnProvider.connect(nil)
                                 }
+                            } else {
+                                log.info("HotspotHelper: Automation not triggered (conditions not met)")
                             }
-                            
+
+                        } else {
+                            log.info("HotspotHelper: Network is secure, no automation needed")
                         }
+                    } else {
+                        log.info("HotspotHelper: No network in evaluate command")
                     }
-                    let response = cmd.createResponse(.success)
-                    response.deliver()
+
+                    cmd.createResponse(.success).deliver()
                 }
             }
-            
         }
     }
-    
+
     private func checkForRFC1918VulnerableWifi(cmd: NEHotspotHelperCommand) {
         if networkMonitor.checkForRFC1918Vulnerability() {
             log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi detected")
