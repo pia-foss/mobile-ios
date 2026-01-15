@@ -71,7 +71,11 @@ class PIAHotspotHelper {
         return NEHotspotHelper.register(options: options,
                                         queue: DispatchQueue.main) { [weak self] (cmd: NEHotspotHelperCommand) in
             
-            guard !Client.configuration.featureFlags.contains("force_update") else { return }
+            guard !Client.configuration.featureFlags.contains("force_update") else {
+                let response = cmd.createResponse(.success)
+                response.deliver()
+                return
+            }
             
             if let weakSelf = self {
                 if cmd.commandType == .filterScanList {
@@ -109,6 +113,8 @@ class PIAHotspotHelper {
                             log.info("Evaluate")
                             
                             guard Client.providers.accountProvider.isLoggedIn else {
+                                let response = cmd.createResponse(.success)
+                                response.deliver()
                                 return
                             }
                             
@@ -128,6 +134,8 @@ class PIAHotspotHelper {
                             
                         }
                     }
+                    let response = cmd.createResponse(.success)
+                    response.deliver()
                 }
             }
             
