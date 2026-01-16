@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Status Safari Content Blocker";
 "settings.content_blocker.state.title" = "Huidige status";
 "settings.content_blocker.refresh.title" = "Zwarte lijst verversen";
-"settings.content_blocker.footer" = "Om Content Blocker in- of uit te schakelen, ga je naar Instellingen > Safari > Content Blockers en tik je op PIA VPN.";
+"settings.content_blocker.footer" = "Om Content Blocker in- of uit te schakelen, ga je naar Instellingen > Apps > Safari > Extensies en tik je op PIA VPN.";
 
 "settings.application_information.title" = "APPLICATIE-INFORMATIE";
 "settings.application_information.debug.title" = "Debugbestand naar klantenservice sturen";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari Content Blocker";
-"content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Safari en onder Algemeen raak je Content Blockers aan om PIA VPN in te schakelen.";
+"content_blocker.body.subtitle" = "Om onze Content blocker voor Safari in te schakelen ga je naar Instellingen > Apps > Safari > Extensies en schakel je PIA VPN in.";
 "content_blocker.body.footer" = "Let op: Je hoeft niet verbonden te zijn met de VPN om deze Content blocker te laten werken, maar dan werkt het alleen als je Safari gebruikt.";
 
 // ABOUT

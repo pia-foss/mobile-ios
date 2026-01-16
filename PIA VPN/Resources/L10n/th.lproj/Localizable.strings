@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "สถานะตัวปิดกั้นเนื้อหา Safari";
 "settings.content_blocker.state.title" = "สถานะปัจจุบัน";
 "settings.content_blocker.refresh.title" = "รีเฟรชรายชื่อที่ปิดกั้น";
-"settings.content_blocker.footer" = "ในการเปิดหรือปิดตัวปิดกั้นเนื้อหา ให้ไปยังการตั้งค่า > Safari > ตัวปิดกั้นเนื้อหา และเปิดปิด PIA VPN";
+"settings.content_blocker.footer" = "ในการเปิดหรือปิดตัวปิดกั้นเนื้อหา ให้ไปยังการตั้งค่า > แอป > Safari > ส่วนขยาย และเปิดปิด PIA VPN";
 
 "settings.application_information.title" = "ข้อมูลแอพพลิเคชั่น";
 "settings.application_information.debug.title" = "ส่งประวัติการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "ตัวปิดกั้นเนื้อหา Safari";
-"content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > Safari และภายใต้หมวดทั่วไป ให้แตะ ตัวปิดกั้นเนื้อหา ใน PIA VPN";
+"content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > แอป > Safari > ส่วนขยาย และเปิดใช้งาน PIA VPN";
 "content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
 
 // ABOUT

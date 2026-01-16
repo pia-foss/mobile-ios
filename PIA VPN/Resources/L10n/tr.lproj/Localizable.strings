@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safari İçerik Engelleyici durumu";
 "settings.content_blocker.state.title" = "Geçerli durum";
 "settings.content_blocker.refresh.title" = "Engelleme listesini yenile";
-"settings.content_blocker.footer" = "İçerik Engelleyici'yi etkinleştirmek veya devre dışı bırakmak için Ayarlar > Safari > İçerik Engelleyiciler'e gidin ve PIA VPN için açın.";
+"settings.content_blocker.footer" = "İçerik Engelleyici'yi etkinleştirmek veya devre dışı bırakmak için Ayarlar > Uygulamalar > Safari > Uzantılar'a gidin ve PIA VPN için açın.";
 
 "settings.application_information.title" = "UYGULAMA BİLGİLERİ";
 "settings.application_information.debug.title" = "Hata Ayıklama Kaydını Destek Ekibine Gönderin";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari İçerik Engelleyici";
-"content_blocker.body.subtitle" = "İçerik Engelleyicimizi Safari ile kullanım için etkinleştirmek için lütfen Ayarlar > Safari'ye gidin ve Genel altında İçerik Engelleyiciler'e dokunun ve PIA VPN için açın.";
+"content_blocker.body.subtitle" = "İçerik Engelleyicimizi Safari ile kullanım için etkinleştirmek için lütfen Ayarlar > Uygulamalar > Safari > Uzantılar'a gidin ve PIA VPN için açın.";
 "content_blocker.body.footer" = "Lütfen unutmayın: Bu İçerik Engelleyicinin çalışması için VPN'e bağlı olmanız gerekmiyor ancak yalnızca Safari'de gezinirken çalışacaktır.";
 
 // ABOUT

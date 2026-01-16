@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Safari 內容阻擋器狀態";
 "settings.content_blocker.state.title" = "目前狀態";
 "settings.content_blocker.refresh.title" = "重新整理阻擋清單";
-"settings.content_blocker.footer" = "若要啟用或停用內容阻擋器，請前往設定 > Safari，然後點選「內容阻擋器」，開啟或關閉 PIA VPN。";
+"settings.content_blocker.footer" = "若要啟用或停用內容阻擋器，請前往設定 > App > Safari > 延伸功能，然後開啟或關閉 PIA VPN。";
 
 "settings.application_information.title" = "應用程式資料";
 "settings.application_information.debug.title" = "將偵錯記錄傳送到支援中心";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Safari 內容阻擋器";
-"content_blocker.body.subtitle" = "要在 Safari 上啟用我們的內容阻擋器，請前往設定 > Safari，然後在「一般」類項點選「內容阻擋器」，開啟 PIA VPN。";
+"content_blocker.body.subtitle" = "要在 Safari 上啟用我們的內容阻擋器，請前往設定 > App > Safari > 延伸功能，然後開啟 PIA VPN。";
 "content_blocker.body.footer" = "請注意：您不需要連接至 VPN，此內容阻擋器就能運作，但將只會在您使用 Safari 瀏覽時才會有效。";
 
 // ABOUT

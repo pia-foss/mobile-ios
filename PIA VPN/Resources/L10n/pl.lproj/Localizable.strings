@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Stan blokady zawartości Safari";
 "settings.content_blocker.state.title" = "Bieżący stan";
 "settings.content_blocker.refresh.title" = "Odśwież listę blokowanych";
-"settings.content_blocker.footer" = "Aby włączyć lub wyłączyć Blokadę zawartości, przejdź do: Ustawienia > Safari > Blokady zawartości i przełącz PIA VPN.";
+"settings.content_blocker.footer" = "Aby włączyć lub wyłączyć Blokadę zawartości, przejdź do: Ustawienia > Aplikacje > Safari > Rozszerzenia i przełącz PIA VPN.";
 
 "settings.application_information.title" = "INFORMACJE O APLIKACJI";
 "settings.application_information.debug.title" = "Wyślij dziennik debugowania do działu obsługi";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Blokada zawartości Safari";
-"content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do „Ustawienia > Safari”, pod „Ogólne” wybierz przełącznik „Blokady zawartości” na PIA VPN.";
+"content_blocker.body.subtitle" = "Aby włączyć naszą blokadę reklam do użycia z przeglądarką Safari, przejdź do Ustawienia > Aplikacje > Safari > Rozszerzenia i przełącz PIA VPN.";
 "content_blocker.body.footer" = "Uwaga: musisz być połączony z VPN, aby Blokada zawartości działała, ale będzie działać tylko podczas przeglądania stron za pomocą Safari.";
 
 // ABOUT

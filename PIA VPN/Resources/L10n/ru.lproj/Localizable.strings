@@ -151,7 +151,7 @@
 "settings.content_blocker.title" = "Состояние блокировщика контента для Safari";
 "settings.content_blocker.state.title" = "Текущее состояние";
 "settings.content_blocker.refresh.title" = "Обновление списка блокирования";
-"settings.content_blocker.footer" = "Чтобы включить или выключить правило блокирования контента, перейдите в \"Настройки\" > Safari > \"Правила блокирования контента\" и нажмите на PIA VPN.";
+"settings.content_blocker.footer" = "Чтобы включить или выключить правило блокирования контента, перейдите в \"Настройки\" > \"Приложения\" > Safari > \"Расширения\" и нажмите на PIA VPN.";
 
 "settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
 "settings.application_information.debug.title" = "Отправить журнал отладки в службу поддержки";
@@ -201,7 +201,7 @@
 // CONTENT BLOCKER
 
 "content_blocker.title" = "Блокировщик контента для Safari";
-"content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настроки\" > Safari, а затем во вкладке \"Основные\" коснитесь пункта \"Правила блокирования контента\" и включите PIA VPN.";
+"content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настройки\" > \"Приложения\" > Safari > \"Расширения\" и включите PIA VPN.";
 "content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
 
 // ABOUT
