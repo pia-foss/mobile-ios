@@ -197,6 +197,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         switch error.code {
         case 429:
             return .throttled(retryAfter: UInt(error.retryAfterSeconds))
+        case 600:
+            return .internetUnreachable
         default:
             return .unauthorized
         }

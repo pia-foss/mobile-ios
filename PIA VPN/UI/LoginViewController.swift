@@ -330,6 +330,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                 case .expired:
                     handleExpiredAccount()
                     return
+
+                case .internetUnreachable:
+                    errorMessage = L10n.Localizable.Global.unreachable
+
                 default:
                     break
                 }
