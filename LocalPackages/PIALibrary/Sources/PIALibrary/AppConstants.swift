@@ -134,4 +134,8 @@ public struct AppConstants {
     public struct Survey {
         public static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
     }
+
+    public struct HotspotHelper {
+        public static let queueLabel = "com.privateinternetaccess.hotspothelper"
+    }
 }
