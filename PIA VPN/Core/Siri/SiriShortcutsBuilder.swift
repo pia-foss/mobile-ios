@@ -22,6 +22,7 @@
 
 import Foundation
 import Intents
+import PIALibrary
 
 protocol SiriShortcutBuilder {
     

@@ -1,6 +1,7 @@
 
 import SwiftUI
 import WidgetKit
+import PIALibrary
 
 @available(iOSApplicationExtension 16.1, *)
 internal struct PIAConnectionView: View {
@@ -47,7 +48,7 @@ internal struct PIAConnectionView: View {
                     Spacer()
                 }
                 
-                Link(destination: URL(string: "piavpn:connect")!) {
+                Link(destination: URL(string: AppConstants.Widget.connect)!) {
                     PIACircleImageView(
                         size: 54,
                         image: context.state.connected ? "connected-button" : "disconnected-button"

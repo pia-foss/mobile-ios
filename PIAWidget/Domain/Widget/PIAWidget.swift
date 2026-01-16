@@ -43,6 +43,7 @@ struct PIAWidget: Widget {
                 widgetPersistenceDatasource: widgetPersistenceDatasource
             )
         }
+        .contentMarginsDisabled()
         .configurationDisplayName(displayName)
         .supportedFamilies([.systemSmall, .systemMedium])
     }

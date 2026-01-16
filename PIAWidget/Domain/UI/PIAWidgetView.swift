@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALibrary
 
 struct PIAWidgetView : View {
 
@@ -36,7 +37,6 @@ struct PIAWidgetView : View {
         }
     }
 
-    @ViewBuilder
     private func widgetBody() -> some View {
         ZStack(alignment: .bottomTrailing) {
             let targetIconSize = widgetFamily == .systemMedium ? 100.0 : 50.0
@@ -60,6 +60,6 @@ struct PIAWidgetView : View {
             }
 
         }
-        .widgetURL(URL(string: widgetFamily == .systemMedium ? "piavpn:view" : "piavpn:connect"))
+        .widgetURL(URL(string: AppConstants.Widget.connect))
     }
 }

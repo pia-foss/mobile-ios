@@ -16,20 +16,18 @@
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
 //  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 //
 
 import Foundation
+import PIALibrary
 
 internal class WidgetUserDefaultsDatasource: WidgetPersistenceDatasource {
-
-    private let appGroup = "group.com.privateinternetaccess"
 
     // MARK: WidgetPersistenceDatasource
 
     func getIsVPNConnected() -> Bool {
         var connected = false
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
+        if let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup),
             let status = sharedDefaults.string(forKey: "vpn.status") {
             if status == "connected" {
                 connected = true
@@ -39,14 +37,14 @@ internal class WidgetUserDefaultsDatasource: WidgetPersistenceDatasource {
     }
 
     func getIsTrustedNetwork() -> Bool {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup) {
+        if let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup) {
             return sharedDefaults.bool(forKey: "vpn.widget.trusted.network")
         }
         return false
     }
 
     func getVpnProtocol() -> String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
+        if let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.protocol") {
             return value
         }
@@ -54,7 +52,7 @@ internal class WidgetUserDefaultsDatasource: WidgetPersistenceDatasource {
     }
 
     func getVpnPort() -> String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
+        if let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.port") {
             return value
         }
@@ -62,7 +60,7 @@ internal class WidgetUserDefaultsDatasource: WidgetPersistenceDatasource {
     }
 
     func getVpnSocket() -> String {
-        if let sharedDefaults = UserDefaults(suiteName: appGroup),
+        if let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup),
             let value = sharedDefaults.string(forKey: "vpn.widget.socket") {
             return value
         }

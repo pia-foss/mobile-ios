@@ -1,6 +1,7 @@
 
 import WidgetKit
 import SwiftUI
+import PIALibrary
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {
@@ -36,7 +37,7 @@ struct PIAConnectionActivityWidget: Widget {
                 }
                 
                 DynamicIslandExpandedRegion(.trailing, priority: 200) {
-                    Link(destination: URL(string: "piavpn:connect")!) {
+                    Link(destination: URL(string: AppConstants.Widget.connect)!) {
                         PIACircleImageView(
                             size: 50,
                             image: context.state.connected ? "connected-button" : "disconnected-button"
