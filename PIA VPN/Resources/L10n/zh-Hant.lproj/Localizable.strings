@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "了解詳情";
 "settings.service.quality.show.title" = "連線統計資料";
 
-"network.management.tool.open.wifi" = "開啟 WiFi";
+"network.management.tool.open.wifi" = "公共 WiFi";
 "network.management.tool.secure.wifi" = "安全 WiFi";
 "network.management.tool.mobile.data" = "行動數據";
 "network.management.tool.always.connect" = "永遠連線至 VPN";

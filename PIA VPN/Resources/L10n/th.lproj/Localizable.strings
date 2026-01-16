@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "ค้นหาข้อมูลเพิ่มเติม";
 "settings.service.quality.show.title" = "สถิติการเชื่อมต่อ";
 
-"network.management.tool.open.wifi" = "เปิด WiFi";
+"network.management.tool.open.wifi" = "WiFi สาธารณะ";
 "network.management.tool.secure.wifi" = "WiFi ที่ปลอดภัย";
 "network.management.tool.mobile.data" = "ข้อมูลมือถือ";
 "network.management.tool.always.connect" = "เชื่อมต่อ VPN ทุกครั้ง";

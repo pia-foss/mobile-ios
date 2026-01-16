@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "Saiba mais";
 "settings.service.quality.show.title" = "Estatísticas de conexão";
 
-"network.management.tool.open.wifi" = "Abrir Wi-Fi";
+"network.management.tool.open.wifi" = "Wi-Fi pública";
 "network.management.tool.secure.wifi" = "Rede Wi-Fi segura";
 "network.management.tool.mobile.data" = "Dados móveis";
 "network.management.tool.always.connect" = "Sempre conectar a VPN";

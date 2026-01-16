@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "Daha çok bilgi";
 "settings.service.quality.show.title" = "Bağlantı istatistikleri";
 
-"network.management.tool.open.wifi" = "WiFi'ı Aç";
+"network.management.tool.open.wifi" = "Açık WiFi";
 "network.management.tool.secure.wifi" = "WiFi'ı Koru";
 "network.management.tool.mobile.data" = "Mobil veri";
 "network.management.tool.always.connect" = "Her zaman VPN bağlantısı yap";

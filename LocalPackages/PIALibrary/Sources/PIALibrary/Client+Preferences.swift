@@ -91,7 +91,6 @@ private extension PreferencesStore {
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
-        showReconnectNotifications = source.showReconnectNotifications
         mace = source.mace
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
@@ -109,11 +108,14 @@ private extension PreferencesStore {
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
         ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
-        debugLogging = source.debugLogging
-        shareServiceQualityData = source.shareServiceQualityData
         lastKnownException = source.lastKnownException
         versionWhenServiceQualityOpted = source.versionWhenServiceQualityOpted
         lastConnectedRegion = source.lastConnectedRegion
+
+        // Skipped because they are committed immediately when changed:
+        // - showReconnectNotifications
+        // - debugLogging
+        // - shareServiceQualityData
     }
 }
 
@@ -528,7 +530,6 @@ extension Client.Preferences {
             preferredServer = nil
             lastConnectedRegion = nil
             isPersistentConnection = true
-            showReconnectNotifications = true
             mace = false
             useWiFiProtection = true
             trustCellularData = false
@@ -556,10 +557,13 @@ extension Client.Preferences {
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
             ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
-            debugLogging = false
-            shareServiceQualityData = false
             lastKnownException = nil
             versionWhenServiceQualityOpted = nil
+
+            // Computed properties (immediate commit), not initialized here
+            // - showReconnectNotifications
+            // - debugLogging
+            // - shareServiceQualityData
         }
 
         /**
@@ -593,10 +597,17 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var isPersistentConnection: Bool
-        
-        /// :nodoc:
-        public var showReconnectNotifications: Bool
-        
+
+        /// :nodoc: Commits immediately when set
+        public var showReconnectNotifications: Bool {
+            get {
+                return target?.showReconnectNotifications ?? true
+            }
+            set {
+                target?.showReconnectNotifications = newValue
+            }
+        }
+
         /// :nodoc:
         public var mace: Bool
         
@@ -647,13 +658,27 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var signInWithAppleFakeEmail: String?
-        
-        /// :nodoc:
-        public var debugLogging: Bool
-        
-        /// :nodoc:
-        public var shareServiceQualityData: Bool
-        
+
+        /// :nodoc: Commits immediately when set
+        public var debugLogging: Bool {
+            get {
+                return target?.debugLogging ?? false
+            }
+            set {
+                target?.debugLogging = newValue
+            }
+        }
+
+        /// :nodoc: Commits immediately when set
+        public var shareServiceQualityData: Bool {
+            get {
+                return target?.shareServiceQualityData ?? false
+            }
+            set {
+                target?.shareServiceQualityData = newValue
+            }
+        }
+
         /// :nodoc:
         public var versionWhenServiceQualityOpted: String?
         

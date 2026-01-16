@@ -301,7 +301,7 @@
 "settings.service.quality.share.findoutmore" = "معرفة المزيد";
 "settings.service.quality.show.title" = "إحصائيات الاتصال";
 
-"network.management.tool.open.wifi" = "فتح WiFi";
+"network.management.tool.open.wifi" = "WiFi عامة";
 "network.management.tool.secure.wifi" = "تأمين WiFi";
 "network.management.tool.mobile.data" = "بيانات الموبايل";
 "network.management.tool.always.connect" = "اتصال بـ VPN دائمًا";
