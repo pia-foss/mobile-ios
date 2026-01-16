@@ -203,4 +203,8 @@ struct AppConstants {
         static let numberOfConnectionsUntilPrompt = 15
         static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
     }
+
+    struct HotspotHelper {
+        static let queueLabel = "com.privateinternetaccess.hotspothelper"
+    }
 }
