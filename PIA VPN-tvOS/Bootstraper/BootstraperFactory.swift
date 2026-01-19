@@ -33,7 +33,7 @@ class BootstraperFactory {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
             
-            #if PIA_DEV
+            #if STAGING
             handler.logLevel = .debug
             #else
             handler.logLevel = .info

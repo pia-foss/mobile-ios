@@ -31,8 +31,7 @@ private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
  */
 public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompletionDelegate, ConfigurationAccess, InAppAccess, BrandableNavigationBar {
  
-    @IBOutlet private weak var buttonCancel: UIButton!    
-    @IBOutlet private weak var buttonEnvironment: UIButton!
+    @IBOutlet private weak var buttonCancel: UIButton!
 
     var preset = Preset()
     
@@ -85,8 +84,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         }
         
         buttonCancel.isHidden = true
-        buttonEnvironment.isHidden = !accessedConfiguration.isDevelopment
-        buttonEnvironment.accessibilityIdentifier = Accessibility.Id.Welcome.environment
         
         #if os(iOS)
         let nc = NotificationCenter.default
@@ -119,8 +116,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
                 self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Ui.Global.cancel
             }
         }
-
-        refreshEnvironmentButton()
     }
     
     /// :nodoc:
@@ -133,25 +128,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     // MARK: Actions
     @objc private func cancelClicked(_ sender: Any?) {
         delegate?.welcomeControllerDidCancel(self)
-    }
-    
-    @IBAction private func toggleEnvironment(_ sender: Any?) {
-        if (Client.environment == .production) {
-            Client.environment = .staging
-        } else {
-            Client.environment = .production
-        }
-        Client.resetWebServices()
-        Client.providers.serverProvider.download(nil)
-        refreshEnvironmentButton()
-    }
-    
-    private func refreshEnvironmentButton() {
-        if (Client.environment == .production) {
-            buttonEnvironment.setTitle("Production", for: .normal)
-        } else {
-            buttonEnvironment.setTitle("Staging", for: .normal)
-        }
     }
 
     private func tryRecoverSignupProcess() {
@@ -215,6 +191,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     #endif
     
     @objc func presentForceUpdate(notification: Notification) {
+        #if !STAGING
         let forceUpdate = ForceUpdateViewController()
         forceUpdate.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async { [weak self] in
@@ -233,6 +210,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
                 self?.present(forceUpdate, animated: false)
             }
         }
+        #endif
     }
     
     // MARK: Restylable
@@ -249,7 +227,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyCancelButton(buttonCancel, appearance: .dark)
-        buttonEnvironment.setTitleColor(buttonCancel.titleColor(for: .normal), for: .normal)
     }
 }
 
