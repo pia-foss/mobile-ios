@@ -69,10 +69,6 @@ class RegionsViewController: AutolayoutViewController {
         title = L10n.Localizable.Menu.Item.region
         var servers = Client.providers.serverProvider.currentServers
         
-        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
-            servers.append(contentsOf: customServers)
-        }
-        
         let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
         
         for server in servers {

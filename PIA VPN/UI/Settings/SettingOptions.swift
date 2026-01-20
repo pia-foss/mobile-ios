@@ -292,8 +292,6 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
 
 public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     
-    case stagingVersion
-    case customServers
     case publicUsername
     case username
     case password
@@ -307,8 +305,6 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
 
     public func localizedTitleMessage() -> String {
         switch self {
-        case .stagingVersion: return "Staging version"
-        case .customServers: return "Custom servers"
         case .publicUsername: return "Public Username"
         case .username: return "Username"
         case .password: return "Password"
@@ -324,8 +320,6 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     
     public func localizedSubtitleMessage() -> String {
         switch self {
-        case .stagingVersion: return ""
-        case .customServers: return ""
         case .publicUsername: return ""
         case .username: return ""
         case .password: return ""
@@ -340,7 +334,7 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
     }
     
     public static func all() -> [Self] {
-      return [.stagingVersion, .customServers, .publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag, .dynamicIslandLiveActivityFlag]
+      return [.publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag, .dynamicIslandLiveActivityFlag]
     }
 
 }

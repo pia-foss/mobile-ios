@@ -574,15 +574,6 @@ class AppPreferences {
         }
     }
     
-    var stagingVersion: Int {
-        get {
-            return defaults.integer(forKey: Entries.stagingVersion)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.stagingVersion)
-        }
-    }
-    
     var userInteractedWithSurvey: Bool {
         get {
             return defaults.bool(forKey: Entries.userInteractedWithSurvey)

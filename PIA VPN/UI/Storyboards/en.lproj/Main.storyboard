@@ -2380,118 +2380,6 @@
             </objects>
             <point key="canvasLocation" x="2569" y="-214"/>
         </scene>
-        <!--Custom Server Settings View Controller-->
-        <scene sceneID="joN-I6-kuH">
-            <objects>
-                <viewController id="ytC-cJ-8NL" customClass="CustomServerSettingsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QFu-xx-xle">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueF-c5-jad" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="57" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3Ft-9W-7dU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="2K9-mK-MeG"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5k-AG-Xbn" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="117" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3za-pb-gpH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="vug-zc-OkV"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6py-2p-kR9" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="177" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hJ7-nG-xYU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="0Z7-lB-Zfb"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-XL-MJd" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="237" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="D30-L5-rd6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="PIN-Gg-CeB"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-dY-TqG" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="297" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bVM-Du-m5t"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="ogb-cS-Ktu"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qD7-Vu-Hz2" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="357" width="337" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xWm-fl-jcm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="W4F-zm-KqY" id="Cnb-gD-I3X"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="d8j-5H-PaN"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="qD7-Vu-Hz2" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="04I-cw-Lhl"/>
-                            <constraint firstItem="qD7-Vu-Hz2" firstAttribute="top" secondItem="Udr-dY-TqG" secondAttribute="bottom" constant="10" id="0pj-Y6-ni4"/>
-                            <constraint firstItem="y5k-AG-Xbn" firstAttribute="top" secondItem="ueF-c5-jad" secondAttribute="bottom" constant="10" id="KHg-Wc-luI"/>
-                            <constraint firstItem="LJp-XL-MJd" firstAttribute="top" secondItem="6py-2p-kR9" secondAttribute="bottom" constant="10" id="Q3c-G6-5Ml"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="qD7-Vu-Hz2" secondAttribute="trailing" constant="19" id="Qru-Jt-fXZ"/>
-                            <constraint firstItem="Udr-dY-TqG" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="Ugc-Zf-bUN"/>
-                            <constraint firstItem="ueF-c5-jad" firstAttribute="top" secondItem="d8j-5H-PaN" secondAttribute="top" constant="19" id="WrG-if-VH4"/>
-                            <constraint firstItem="6py-2p-kR9" firstAttribute="top" secondItem="y5k-AG-Xbn" secondAttribute="bottom" constant="10" id="Y9H-hl-kRE"/>
-                            <constraint firstItem="LJp-XL-MJd" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="cI7-8o-c8Z"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="ueF-c5-jad" secondAttribute="trailing" constant="19" id="cim-Vb-eHe"/>
-                            <constraint firstItem="6py-2p-kR9" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="jAc-g5-W2z"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="Udr-dY-TqG" secondAttribute="trailing" constant="19" id="mez-L4-yo8"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="LJp-XL-MJd" secondAttribute="trailing" constant="19" id="n43-bv-eV4"/>
-                            <constraint firstItem="Udr-dY-TqG" firstAttribute="top" secondItem="LJp-XL-MJd" secondAttribute="bottom" constant="10" id="tmH-Ee-X1U"/>
-                            <constraint firstItem="ueF-c5-jad" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="uDe-o9-22J"/>
-                            <constraint firstItem="y5k-AG-Xbn" firstAttribute="leading" secondItem="d8j-5H-PaN" secondAttribute="leading" constant="19" id="vWg-PF-p0j"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="6py-2p-kR9" secondAttribute="trailing" constant="19" id="wil-vj-VdX"/>
-                            <constraint firstItem="d8j-5H-PaN" firstAttribute="trailing" secondItem="y5k-AG-Xbn" secondAttribute="trailing" constant="19" id="yFU-rN-Vnv"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="YxA-Lv-3Ud"/>
-                    <connections>
-                        <outlet property="textServerCountry" destination="y5k-AG-Xbn" id="FB3-OE-ah6"/>
-                        <outlet property="textServerHostname" destination="6py-2p-kR9" id="40g-BI-MRj"/>
-                        <outlet property="textServerIp" destination="LJp-XL-MJd" id="yDt-74-Ua3"/>
-                        <outlet property="textServerName" destination="ueF-c5-jad" id="gcY-UF-lrB"/>
-                        <outlet property="textServerTCPPort" destination="qD7-Vu-Hz2" id="mbf-bs-ude"/>
-                        <outlet property="textServerUDPPort" destination="Udr-dY-TqG" id="d4W-Nx-gdX"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uwy-ft-IM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3569" y="-924"/>
-        </scene>
         <!--Add Email To Account View Controller-->
         <scene sceneID="tR5-YK-C4k">
             <objects>
@@ -3577,7 +3465,6 @@
                     <connections>
                         <outlet property="tableView" destination="i6W-eB-1uw" id="PPn-Vy-Qfj"/>
                         <outlet property="viewContainer" destination="j6Z-da-fdF" id="ejs-54-uh2"/>
-                        <segue destination="ytC-cJ-8NL" kind="show" identifier="CustomServerSegueIdentifier" id="wEr-De-Qdl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKF-x9-xRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3662,14 +3549,14 @@
         <segue reference="Ic8-R6-xho"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="dip-badge-dark" width="44" height="44"/>
         <image name="PIAX/Global/favorite-selected" width="18" height="15"/>
+        <image name="PIAX/Global/killswitch-dark-inactive" width="35" height="24"/>
+        <image name="PIAX/Global/region-selected" width="18" height="18"/>
+        <image name="dip-badge-dark" width="44" height="44"/>
         <image name="icon-privacy-1" width="42" height="42"/>
         <image name="image-content-blocker" width="86" height="112"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>
         <image name="image-vpn-allow" width="77" height="111"/>
-        <image name="PIAX/Global/killswitch-dark-inactive" width="35" height="24"/>
-        <image name="PIAX/Global/region-selected" width="18" height="18"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
