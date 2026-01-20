@@ -29,7 +29,7 @@ platform :ios do
 
   lane :ios_e2e_tests do
     run_tests(
-      scheme: "PIA VPN dev",
+      scheme: "PIA VPN Development",
       testplan: "PIA-VPN-e2e-simulator",
       devices: ["iPhone 16"],
       prelaunch_simulator: true,
@@ -236,7 +236,7 @@ platform :ios do
     archive_path = "PIA_VPN_dev_iOS.#{current_branch}_#{short_hash}"
     archive_zip_name = "#{archive_path}.zip"
 
-    build_app(scheme: "PIA VPN dev",
+    build_app(scheme: "PIA VPN Development",
       export_method: "development",
       clean: true,
       configuration: "Debug",
