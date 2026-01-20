@@ -26,3 +26,4 @@ BASE_URL = www.privateinternetaccess.com
 // App configuration
 PRODUCT_NAME = PIA VPN
 PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PIA-VPN
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-Production

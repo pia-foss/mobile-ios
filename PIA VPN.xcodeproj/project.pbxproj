@@ -1605,7 +1605,6 @@
 			baseConfigurationReferenceRelativePath = Configurations/Development.xcconfig;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Entitlements/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1643,7 +1642,6 @@
 			baseConfigurationReferenceRelativePath = Configurations/Production.xcconfig;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Entitlements/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1810,7 +1808,6 @@
 			baseConfigurationReferenceRelativePath = Configurations/Staging.xcconfig;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Entitlements/PIA VPN.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";

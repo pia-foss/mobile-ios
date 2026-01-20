@@ -26,6 +26,7 @@ BASE_URL = staging-3-77b8e3a311bcb6ec5e96.privateinternetaccess.com
 // App configuration
 PRODUCT_NAME = PIA Staging
 PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PIA-VPN
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-Staging
 
 // Custom compilation flags
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) STAGING
