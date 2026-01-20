@@ -111,7 +111,8 @@ class BootstraperFactory {
     
     private static func setupExceptionHandler() {
         NSSetUncaughtExceptionHandler { exception in
-            Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
+            let stackTrace = exception.callStackSymbols.joined(separator: "\n")
+            Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
     }
     

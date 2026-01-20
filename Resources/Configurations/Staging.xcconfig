@@ -24,7 +24,7 @@
 BASE_URL = staging-3-77b8e3a311bcb6ec5e96.privateinternetaccess.com
 
 // App configuration
-PRODUCT_NAME = PIA VPN Staging
+PRODUCT_NAME = PIA Staging
 PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PIA-VPN
 
 // Custom compilation flags
