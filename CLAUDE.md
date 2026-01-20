@@ -13,13 +13,12 @@ Private Internet Access (PIA) VPN iOS/tvOS application. Dual-platform codebase w
 
 ```
 pia-mobile-ios-fixes/
-├── PIA VPN/                    # Main iOS app (UIKit)
+├── PIA VPN/                    # Main iOS app target (UIKit)
 │   ├── Core/                   # Business logic, daemons, protocols
 │   │   └── Tiles/              # Dashboard tile system
 │   ├── UI/                     # View controllers, storyboards
 │   ├── Global/                 # AppConfiguration, AppConstants
 │   └── Bootstrapper.swift      # App initialization & DI
-├── PIA VPN dev/                # Development app (staging endpoints)
 ├── PIA VPN-tvOS/               # tvOS app (SwiftUI, feature-based)
 ├── PIA VPN Tunnel/             # OpenVPN Network Extension
 ├── PIA VPN WG Tunnel/          # WireGuard Network Extension
@@ -28,6 +27,11 @@ pia-mobile-ios-fixes/
 ├── LocalPackages/
 │   ├── PIALibrary/             # Core: providers, VPN, persistence
 │   └── PIADesignSystem/        # Shared UI components
+├── Resources/
+│   └── Configurations/         # Build configurations (xcconfig files)
+│       ├── Development.xcconfig
+│       ├── Staging.xcconfig
+│       └── Production.xcconfig
 ├── TestPlans/                  # Xcode test plans
 └── fastlane/                   # CI/CD automation
 ```
@@ -65,13 +69,21 @@ pia-mobile-ios-fixes/
 - Homebrew: `swiftgen`, `go`
 - `gem install bundler && bundle install`
 
-**Schemes**:
-- `PIA VPN` - Production iOS
-- **`PIA VPN dev` - Development iOS (use for local testing)**
+**Build Configurations** (defined in `Resources/Configurations/`):
+- **Development** - Local development with DEVELOPMENT flag, debug logging enabled
+- **Staging** - Staging environment with STAGING flag, debug logging enabled
+- **Release** - Production build, no development flags
+
+**Schemes** (PIA VPN target with different configurations):
+- **`PIA VPN Development`** - Development configuration (use for local testing)
+- **`PIA VPN Staging`** - Staging configuration (staging endpoints)
+- **`PIA VPN Release`** - Release configuration (production)
 - `PIA VPN-tvOS` - tvOS production
 - `PIALibrary`, `PIADesignSystem` - Package development
 
-**Configurations**: Debug, Release
+**Compilation Flags**:
+- `DEVELOPMENT` - Set for Development configuration via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
+- `STAGING` - Set for Staging configuration via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
 
 ## Common Commands
 
@@ -102,13 +114,19 @@ bundle exec fastlane certificates
 swiftgen config run --config swiftgen.yml        # Regenerate type-safe resources
 
 # Direct xcodebuild
-xcodebuild test -scheme "PIA VPN" -destination "platform=iOS Simulator,name=iPhone 17 Pro"
-xcodebuild -scheme "PIA VPN" -configuration Debug build
+xcodebuild build -scheme "PIA VPN Development" -configuration Development -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild build -scheme "PIA VPN Staging" -configuration Staging -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild build -scheme "PIA VPN Release" -configuration Release -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild test -scheme "PIA VPN Development" -configuration Development -destination "platform=iOS Simulator,name=iPhone 17 Pro"
 ```
 
 ## Code Guidelines
 
-**Schemes**: Use `PIA VPN dev` for development (staging endpoints, feature flags, custom servers)
+**Build Configurations**:
+- Use `PIA VPN Development` scheme for local development (DEVELOPMENT flag set)
+- Use `PIA VPN Staging` scheme for staging environment testing (STAGING flag set)
+- Use `PIA VPN Release` scheme for production builds
+- **Debug Logging**: Automatically enabled and locked ON for Development and Staging builds (set in `Bootstrapper.swift`), user-controllable for Release builds
 
 **Testing**: New features → PIA VPNTests for iOS, Mock providers available in PIALibrary
 
@@ -118,13 +136,25 @@ xcodebuild -scheme "PIA VPN" -configuration Debug build
 
 **Feature Flags**: Server-controlled via CSI (Customer Support Integration)
 
+**Compilation Flags**:
+- DEVELOPMENT and STAGING flags are set in xcconfig files (`Resources/Configurations/`) via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
+- Use `#if DEVELOPMENT || STAGING` in app-level code for dev/staging-specific behavior
+- Avoid relying on compilation flags in PIALibrary package code; handle at app level in `Bootstrapper.swift` instead
+
 ## Debugging
 
 **VPN Debugging**:
 - Physical device required for Network Extension debugging
 - Console.app for PacketTunnel logs (filter by bundle ID)
-- Enable debug logging in app settings
+- Debug logging is automatically enabled for Development and Staging builds
+- For Release builds, enable debug logging in Help settings (toggle available to user)
 - Check shared app group container for logs
+
+**Debug Logging Behavior**:
+- **Development/Staging**: Always ON, toggle disabled in UI (`HelpSettingsViewController.swift`)
+- **Release**: User-controllable via Help settings toggle
+- Logging implementation: `PIALogHandler.swift` filters based on `Client.preferences.debugLogging`
+- Initialization: `Bootstrapper.swift` sets `debugLogging = true` for Development/Staging
 
 **Network Extensions**: Run separate from main app, use `os_log` for debugging
 
@@ -170,8 +200,10 @@ Requires special Apple entitlement. If unavailable:
 ## Key Files
 
 - `PIA VPN.xcodeproj`, `swiftgen.yml`
+- **Build configurations**: `Resources/Configurations/*.xcconfig`
+- **Schemes**: `PIA VPN.xcodeproj/xcshareddata/xcschemes/*.xcscheme`
 - `fastlane/Fastfile`, `.gitlab-ci.yml`, `ci_scripts/`
-- `README.md`, `CONTRIBUTING.md`
+- `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`
 - Test plans: `TestPlans/*.xctestplan`
 
 ## Branching Strategy
@@ -183,7 +215,15 @@ Requires special Apple entitlement. If unavailable:
 
 ## Notes
 
-**Development Flow**: Use `PIA VPN Staging` scheme, staging endpoints, `STAGING` preprocessor flag enables dev features
+**Single iOS Target**: The project uses one iOS app target with three build configurations (Development, Staging, Release) and corresponding schemes, rather than separate app targets for each environment
+
+**Configuration Architecture**:
+- Build settings defined in xcconfig files (`Resources/Configurations/`)
+- Each configuration inherits from Production.xcconfig and adds environment-specific settings
+- Compilation flags set via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
+- Base URL and bundle identifier configured per environment in xcconfig
+
+**Development Flow**: Use `PIA VPN Development` scheme for local testing, `PIA VPN Staging` for staging environment testing
 
 **Multi-platform**: iOS (UIKit) + tvOS (SwiftUI) share PIALibrary core
 

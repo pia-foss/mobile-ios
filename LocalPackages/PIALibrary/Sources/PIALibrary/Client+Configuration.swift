@@ -49,9 +49,6 @@ extension Client {
 
         static let debugLogKey = "LastVPNLog"
         
-        /// If `true`, expose development features.
-        public var isDevelopment: Bool
-        
         /// If `true`, the connection to the VPN was initiated by the user
         public var connectedManually: Bool
         
@@ -60,9 +57,7 @@ extension Client {
 
         // MARK: WebServices
         
-        private var baseUrls: [Client.Environment: String]
-
-        private let debugLogBaseUrls: [Client.Environment: String]
+        private var baseUrls: [Client.Environment: String] = [:]
 
         public var baseUrl: String {
             guard let url = baseUrls[Client.environment] else {
@@ -179,19 +174,9 @@ extension Client {
         // MARK: Initialization
         
         init() {
-
-            isDevelopment = false
             connectedManually = false
             disconnectedManually = false
 
-            let production = "https://www.privateinternetaccess.com"
-            baseUrls = [
-                .production: production
-            ]
-            debugLogBaseUrls = [
-                .production: production,
-                .staging: production
-            ]
             tosPath = "pages/terms-of-service"
             privacyPath = "pages/privacy-policy"
 
@@ -264,7 +249,8 @@ extension Client {
          - Parameter url: The URL `String` to set.
          - Parameter environment: The target `Environment` to update.
          */
-        public func setBaseURL(_ url: String, for environment: Environment) {
+        public func setBaseURL(_ url: String?, for environment: Environment) {
+            guard let url else { return }
             baseUrls[environment] = url
         }
         

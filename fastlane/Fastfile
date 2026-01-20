@@ -13,7 +13,7 @@ platform :ios do
 
   lane :iOStests do
     run_tests(
-      scheme: "PIA VPN",
+      scheme: "PIA VPN Development",
       output_directory: "fastlane/test_output",
       result_bundle: true
     )

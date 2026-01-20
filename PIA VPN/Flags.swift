@@ -62,21 +62,6 @@ class Flags: NSObject {
     
     private override init() {
         super.init()
-        
         enablesThemeSwitch = false
-        
-        #if STAGING
-        let path = AppConstants.Flags.developmentPath
-        load(from: path!)
-        #endif
     }
-    
-    #if STAGING
-    private func load(from path: String) {
-        let toggles = NSDictionary(contentsOfFile: path) as! [String: Bool]
-        for (key, value) in toggles {
-            setValue(value, forKeyPath: key)
-        }
-    }
-    #endif
 }
