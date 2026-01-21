@@ -13,7 +13,8 @@ import Logging
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
         Bootstrapper(
-            setupDebugginConsole: setupDebugginConsole,
+            setupEnvironment: setupEnvironment,
+            setupDebuggingConsole: setupDebuggingConsole,
             loadDataBase: loadDataBase,
             cleanCurrentAccount: cleanCurrentAccount,
             migrateNMT: migrateNMT,
@@ -28,8 +29,18 @@ class BootstraperFactory {
             startCachingLicenses: startCachingLicenses
         )
     }
-    
-    private static func setupDebugginConsole() {
+
+    private static func setupEnvironment() {
+    #if STAGING
+        Client.environment = .staging
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
+    #else
+        Client.environment = .production
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
+    #endif
+    }
+
+    private static func setupDebuggingConsole() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
             

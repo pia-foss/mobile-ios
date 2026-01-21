@@ -21,7 +21,7 @@ platform :ios do
 
   lane :tvOStests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       output_directory: "fastlane/test_output",
       result_bundle: true
     )
@@ -39,7 +39,7 @@ platform :ios do
 
   lane :tvos_e2e_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -49,7 +49,7 @@ platform :ios do
 
   lane :tvos_snapshot_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       testplan: "PIA VPN-tvOS snapshot",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -422,7 +422,7 @@ desc "This line is for creating testflight build for tvOS"
       build_number: build_number + 1 
     )
     
-    build_app(scheme: "PIA VPN-tvOS",
+    build_app(scheme: "PIA VPN-tvOS Release",
       export_method: "app-store",
       xcargs: "-destination 'platform=tvOS'",
       clean: true,
