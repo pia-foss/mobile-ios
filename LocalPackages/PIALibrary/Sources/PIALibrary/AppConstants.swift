@@ -82,16 +82,6 @@ public struct AppConstants {
         public static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
         public static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
         public static let leakProtectionURL = URL(string: "\(Self.supportURL.absoluteString)/kb/articles/what-is-pia-s-leak-protection-feature-on-ios")!
-
-        public static var stagingEndpointURL: URL? = {
-            guard let path = Bundle.main.path(forResource: "staging", ofType: "endpoint") else {
-                return nil
-            }
-            guard let content = try? String(contentsOfFile: path) else {
-                return nil
-            }
-            return URL(string: content.trimmingCharacters(in: .whitespacesAndNewlines))
-        }()
     }
     
     public struct AppleUrls {

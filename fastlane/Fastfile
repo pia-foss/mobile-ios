@@ -13,7 +13,7 @@ platform :ios do
 
   lane :iOStests do
     run_tests(
-      scheme: "PIA VPN",
+      scheme: "PIA VPN Development",
       output_directory: "fastlane/test_output",
       result_bundle: true
     )
@@ -21,7 +21,7 @@ platform :ios do
 
   lane :tvOStests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       output_directory: "fastlane/test_output",
       result_bundle: true
     )
@@ -29,7 +29,7 @@ platform :ios do
 
   lane :ios_e2e_tests do
     run_tests(
-      scheme: "PIA VPN dev",
+      scheme: "PIA VPN Development",
       testplan: "PIA-VPN-e2e-simulator",
       devices: ["iPhone 16"],
       prelaunch_simulator: true,
@@ -39,7 +39,7 @@ platform :ios do
 
   lane :tvos_e2e_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -49,7 +49,7 @@ platform :ios do
 
   lane :tvos_snapshot_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
+      scheme: "PIA VPN-tvOS Development",
       testplan: "PIA VPN-tvOS snapshot",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -236,7 +236,7 @@ platform :ios do
     archive_path = "PIA_VPN_dev_iOS.#{current_branch}_#{short_hash}"
     archive_zip_name = "#{archive_path}.zip"
 
-    build_app(scheme: "PIA VPN dev",
+    build_app(scheme: "PIA VPN Development",
       export_method: "development",
       clean: true,
       configuration: "Debug",
@@ -422,7 +422,7 @@ desc "This line is for creating testflight build for tvOS"
       build_number: build_number + 1 
     )
     
-    build_app(scheme: "PIA VPN-tvOS",
+    build_app(scheme: "PIA VPN-tvOS Release",
       export_method: "app-store",
       xcargs: "-destination 'platform=tvOS'",
       clean: true,

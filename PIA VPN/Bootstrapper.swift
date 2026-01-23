@@ -49,34 +49,26 @@ class Bootstrapper {
         #endif
     }
   
-    var isDevelopmentBuild: Bool {
-        #if PIA_DEV
-            return true
-        #else
-            return false
-        #endif
-    }
-    
     /// Update the values of the flags from the CSI server
     private func updateFeatureFlagsForReleaseIfNeeded() {
         // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
         // So we skip updating the flag from the server on dev builds
-        guard !isDevelopmentBuild else { return }
-       
+
+        #if !STAGING
        // Leak Protection feature flags
         AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
         AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
         
         // DynamicIsland LiveActivity
         AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(Client.FeatureFlags.showDynamicIslandLiveActivity)
-    
+        #endif
     }
 
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
             
-            #if PIA_DEV
+            #if DEVELOPMENT || STAGING
             handler.logLevel = .debug
             #else
             handler.logLevel = .info
@@ -90,7 +82,12 @@ class Bootstrapper {
 
         // Load the database first
         Client.database = Client.Database(group: AppConstants.appGroup)
-        
+
+        // Force enable debug logging for DEVELOPMENT and STAGING builds
+        #if DEVELOPMENT || STAGING
+        Client.preferences.debugLogging = true
+        #endif
+
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
             //If first install, we need to ensure we don't have data from previous sessions in the Secure Keychain
@@ -101,7 +98,7 @@ class Bootstrapper {
         AppPreferences.shared.migrateNMT()
 
         // PIALibrary
-        #if os(iOS)
+    #if os(iOS)
         guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
             fatalError("Could not find bundled regions file")
         }
@@ -111,33 +108,17 @@ class Bootstrapper {
         } catch let e {
             fatalError("Could not parse bundled regions file: \(e)")
         }
-        #endif
+    #endif
 
         Client.configuration.rsa4096Certificate = rsa4096Certificate()
 
-        #if PIA_DEV
-        Client.environment =  AppPreferences.shared.appEnvironmentIsProduction ? .production : .staging
-        #else
-        Client.environment =  AppConfiguration.clientEnvironment
-        #endif
-        Client.configuration.isDevelopment = Flags.shared.usesDevelopmentClient
-        if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                        
-            if AppPreferences.shared.stagingVersion < 1 {
-                Client.environment = .staging
-                let stagingVersion = Int(stagingUrl.absoluteString.split(separator: "-")[1]) ?? 1
-                AppPreferences.shared.stagingVersion = stagingVersion
-            }
-            
-            let url = stagingUrl.absoluteString.replacingOccurrences(of: "staging-[0-9]", with: "staging-\(AppPreferences.shared.stagingVersion)", options: .regularExpression)
-            Client.configuration.setBaseURL(url, for: .staging)
-
-        }
-        if Client.configuration.isDevelopment, let customServers = AppConstants.Servers.customServers {
-            for server in customServers {
-                Client.configuration.addCustomServer(server)
-            }
-        }
+    #if STAGING
+        Client.environment = .staging
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
+    #else
+        Client.environment = .production
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
+    #endif
         
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
@@ -275,6 +256,7 @@ class Bootstrapper {
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
+
         setupExceptionHandler()
     }
     
@@ -289,7 +271,8 @@ class Bootstrapper {
     
     private func setupExceptionHandler() {
         NSSetUncaughtExceptionHandler { exception in
-            Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
+            let stackTrace = exception.callStackSymbols.joined(separator: "\n")
+            Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
     }
     

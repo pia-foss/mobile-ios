@@ -17,7 +17,7 @@
 //  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-//
+#if DEVELOPMENT || STAGING
 
 import UIKit
 import PIALibrary
@@ -137,12 +137,6 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
             cell.accessoryView = switchEnvironment
             cell.selectionStyle = .none
             switchEnvironment.isOn = Client.environment == .staging
-        case .customServers:
-            cell.textLabel?.text = "Custom Servers"
-            cell.detailTextLabel?.text = nil
-        case .stagingVersion:
-            cell.textLabel?.text = "Staging version"
-            cell.detailTextLabel?.text = "\(AppPreferences.shared.stagingVersion)"
         case .deleteKeychain:
             cell.textLabel?.text = "Delete Keychain"
             cell.detailTextLabel?.text = nil
@@ -231,30 +225,6 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
             case .resolveGoogleAdsDomain:
                 resolveGoogleAdsDomain()
 
-            case .customServers:
-                self.perform(segue: StoryboardSegue.Main.customServerSegueIdentifier)
-
-            case.stagingVersion:
-                let options: [Int] = [
-                    1,2,3,4,5
-                ]
-                controller = OptionsViewController()
-                controller?.options = options.map { $0 }
-                controller?.selectedOption = AppPreferences.shared.stagingVersion
-                if let controller = controller {
-                    guard let cell = tableView.cellForRow(at: indexPath) else {
-                        log.error("Cell not found at \(indexPath)")
-                        return
-                    }
-
-                    controller.title = cell.textLabel?.text
-                    controller.tag = section.rawValue
-                    controller.delegate = self
-
-                    parent?.navigationItem.setEmptyBackButton()
-                    navigationController?.pushViewController(controller, animated: true)
-                }
-
             case .crash:
                 crashStagingApp()
         case .deleteKeychain:
@@ -318,21 +288,11 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
     }
     
     func optionsController(_ controller: OptionsViewController, renderOption option: AnyHashable, in cell: UITableViewCell, at row: Int, isSelected: Bool) {
-        guard let setting = DevelopmentSections(rawValue: controller.tag) else {
+        guard let _ = DevelopmentSections(rawValue: controller.tag) else {
             log.error("Unhandled setting \(controller.tag)")
             return
         }
 
-        switch setting {
-        case .stagingVersion:
-            if let value = option as? Int {
-                cell.textLabel?.text = "\(value)"
-            }
-
-        default:
-            break
-        }
-                
         let backgroundView = UIView()
         backgroundView.backgroundColor = Theme.current.palette.principalBackground
         cell.selectedBackgroundView = backgroundView
@@ -342,34 +302,12 @@ extension DevelopmentSettingsViewController: OptionsViewControllerDelegate {
     }
 
     func optionsController(_ controller: OptionsViewController, didSelectOption option: AnyHashable, at row: Int) {
-        guard let setting = DevelopmentSections(rawValue: controller.tag) else {
+        guard let _ = DevelopmentSections(rawValue: controller.tag) else {
             log.error("Unhandled setting \(controller.tag)")
             return
         }
 
-        switch setting {
-            
-        case .stagingVersion:
-            if let value = option as? Int {
-                AppPreferences.shared.stagingVersion = value
-                
-                if let stagingUrl = AppConstants.Web.stagingEndpointURL {
-                    let regexExpression = "staging-[0-9]"
-                    let url = stagingUrl.absoluteString.replacingOccurrences(of: regexExpression, with: "staging-\(value)", options: .regularExpression)
-                    Client.configuration.setBaseURL(url, for: .staging)
-                    Client.resetWebServices()
-                }
-
-                settingsDelegate.refreshSettings()
-                Macros.postNotification(.PIASettingsHaveChanged)
-
-            }
-        default:
-            break
-        }
-        
         navigationController?.popViewController(animated: true)
-
     }
     
 }
@@ -398,3 +336,5 @@ extension DevelopmentSettingsViewController {
         // Additional Feature Flags toggles actions here
     }
 }
+
+#endif

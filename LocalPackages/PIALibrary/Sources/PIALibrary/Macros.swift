@@ -50,6 +50,15 @@ public class Macros {
     }
     
     /**
+     Returns the base URL configured for this build.
+
+     - Returns: The base URL string from Info.plist, or nil if not configured.
+     */
+    public static func baseUrl() -> String? {
+        return Bundle.main.infoDictionary?["BASE_URL"] as? String
+    }
+    
+    /**
      Dispatches an asynchronous block to the main queue.
  
      - Parameter delay: The `DispatchTimeInterval` after which to dispatch the block from now.

@@ -13,7 +13,8 @@ import Logging
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
         Bootstrapper(
-            setupDebugginConsole: setupDebugginConsole,
+            setupEnvironment: setupEnvironment,
+            setupDebuggingConsole: setupDebuggingConsole,
             loadDataBase: loadDataBase,
             cleanCurrentAccount: cleanCurrentAccount,
             migrateNMT: migrateNMT,
@@ -28,12 +29,22 @@ class BootstraperFactory {
             startCachingLicenses: startCachingLicenses
         )
     }
-    
-    private static func setupDebugginConsole() {
+
+    private static func setupEnvironment() {
+    #if STAGING
+        Client.environment = .staging
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
+    #else
+        Client.environment = .production
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
+    #endif
+    }
+
+    private static func setupDebuggingConsole() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
             
-            #if PIA_DEV
+            #if DEVELOPMENT || STAGING
             handler.logLevel = .debug
             #else
             handler.logLevel = .info
@@ -53,6 +64,11 @@ class BootstraperFactory {
     private static func loadDataBase() {
         Client.database = Client.Database(group: AppConstants.appGroup)
         Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
+
+        // Force enable debug logging for DEVELOPMENT and STAGING builds
+        #if DEVELOPMENT || STAGING
+        Client.preferences.debugLogging = true
+        #endif
     }
     
     private static func setupPreferences() {
@@ -111,7 +127,8 @@ class BootstraperFactory {
     
     private static func setupExceptionHandler() {
         NSSetUncaughtExceptionHandler { exception in
-            Client.preferences.lastKnownException = "$exception,\n\(exception.callStackSymbols.joined(separator: "\n"))"
+            let stackTrace = exception.callStackSymbols.joined(separator: "\n")
+            Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
     }
     

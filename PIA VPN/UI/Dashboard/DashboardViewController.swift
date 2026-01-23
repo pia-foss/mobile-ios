@@ -739,6 +739,7 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc func presentForceUpdate() {
+        #if !STAGING
         let forceUpdate = ForceUpdateViewController()
         forceUpdate.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async { [weak self] in
@@ -757,6 +758,7 @@ class DashboardViewController: AutolayoutViewController {
                 self?.present(forceUpdate, animated: false)
             }
         }
+        #endif
     }
     
     @objc private func dismissModalViewController() {

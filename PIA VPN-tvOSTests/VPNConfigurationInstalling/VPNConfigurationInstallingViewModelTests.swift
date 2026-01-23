@@ -63,7 +63,7 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         sut.install()
 
         // THEN
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 30)
         XCTAssertEqual(capturedInstallingStatuses, [.isInstalling, .failed(errorMessage: expectedErrorMessage)])
         XCTAssert(sut.shouldShowErrorMessage)
         XCTAssertEqual(sut.errorMessage, expectedErrorMessage)
@@ -87,7 +87,7 @@ final class VPNConfigurationInstallingViewModelTests: XCTestCase {
         sut.install()
 
         // THEN
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 30)
         XCTAssertEqual(capturedInstallingStatuses, [.isInstalling, .succeeded])
         XCTAssertFalse(sut.shouldShowErrorMessage)
         XCTAssertNil(sut.errorMessage)

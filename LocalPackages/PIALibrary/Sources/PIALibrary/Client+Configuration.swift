@@ -49,9 +49,6 @@ extension Client {
 
         static let debugLogKey = "LastVPNLog"
         
-        /// If `true`, expose development features.
-        public var isDevelopment: Bool
-        
         /// If `true`, the connection to the VPN was initiated by the user
         public var connectedManually: Bool
         
@@ -60,9 +57,7 @@ extension Client {
 
         // MARK: WebServices
         
-        private var baseUrls: [Client.Environment: String]
-
-        private let debugLogBaseUrls: [Client.Environment: String]
+        private var baseUrls: [Client.Environment: String] = [:]
 
         public var baseUrl: String {
             guard let url = baseUrls[Client.environment] else {
@@ -179,19 +174,9 @@ extension Client {
         // MARK: Initialization
         
         init() {
-
-            isDevelopment = false
             connectedManually = false
             disconnectedManually = false
 
-            let production = "https://www.privateinternetaccess.com"
-            baseUrls = [
-                .production: production
-            ]
-            debugLogBaseUrls = [
-                .production: production,
-                .staging: production
-            ]
             tosPath = "pages/terms-of-service"
             privacyPath = "pages/privacy-policy"
 
@@ -264,7 +249,8 @@ extension Client {
          - Parameter url: The URL `String` to set.
          - Parameter environment: The target `Environment` to update.
          */
-        public func setBaseURL(_ url: String, for environment: Environment) {
+        public func setBaseURL(_ url: String?, for environment: Environment) {
+            guard let url else { return }
             baseUrls[environment] = url
         }
         
@@ -309,12 +295,17 @@ extension Client {
          - Returns: A boolean indicating if purchases are available.
         */
         public func arePurchasesAvailable() -> Bool {
-            if let url = Bundle.main.appStoreReceiptURL,
-                url.lastPathComponent == "sandboxReceipt",
-                Client.environment == .production {
-                return false
+            // Allows purchases on TestFlight versions only if it's a Staging build.
+            // Otherwise purchases are allowed in production only when installed from App Store.
+            if Client.environment == .staging {
+                return true
+            } else {
+                guard !TestFlightDetector.shared.isTestFlight else {
+                    return false
+                }
+
+                return true
             }
-            return true
         }
         
         #if os(iOS) || os(tvOS)

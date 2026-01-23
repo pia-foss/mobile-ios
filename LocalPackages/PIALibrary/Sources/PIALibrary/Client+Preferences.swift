@@ -476,7 +476,7 @@ extension Client {
         // MARK: Service Quality
         
         /// Shares anonymous data to the service quality library.
-        public fileprivate(set) var debugLogging: Bool {
+        public var debugLogging: Bool {
             get {
                 return accessedDatabase.plain.debugLogging ?? false
             }
