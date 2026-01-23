@@ -297,15 +297,15 @@ extension Client {
         public func arePurchasesAvailable() -> Bool {
             // Allows purchases on TestFlight versions only if it's a Staging build.
             // Otherwise purchases are allowed in production only when installed from App Store.
-            #if STAGING
-            return true
-            #else
-            guard !TestFlightDetector.shared.isTestFlight else {
-                return false
-            }
+            if Client.environment == .staging {
+                return true
+            } else {
+                guard !TestFlightDetector.shared.isTestFlight else {
+                    return false
+                }
 
-            return true
-            #endif
+                return true
+            }
         }
         
         #if os(iOS) || os(tvOS)
