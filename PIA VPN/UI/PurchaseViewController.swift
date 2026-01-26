@@ -232,7 +232,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             allPlans[0] = purchase
             
             textAgreement.attributedText = Theme.current.agreementText(
-                withMessage: L10n.Welcome.Agreement.message(purchase.detail),
+                withMessage: L10n.Welcome.Agreement.message(purchase.price.stringValue),
                 tos: L10n.Welcome.Agreement.Message.tos,
                 tosUrl: Client.configuration.tosUrl,
                 privacy: L10n.Welcome.Agreement.Message.privacy,
