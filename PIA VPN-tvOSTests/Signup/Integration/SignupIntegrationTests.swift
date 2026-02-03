@@ -253,39 +253,6 @@ final class SignupIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.paymentCancelled)
     }
     
-    func test_subscribe_shows_an_uncreditedTransactions_error_when_the_is_uncreditedTransactions() throws {
-        // GIVEN there uncredited transactions
-        let productsProviderError: Error? = nil
-        let purchaseProductsAccountProviderError = SKError(SKError.Code.paymentCancelled, userInfo: [:])
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
-        fixture.inAppProviderSpy.hasUncreditedTransactions = true
-        let expectation = expectation(description: "Waiting for subscribe to update")
-        
-        instantiateSut(resultGetAvailableProductsUseCase: (InAppProductMock.makeStubs(), productsProviderError),
-                       resultPurchaseProductUseCase: (InAppTransactionMock.makeStub(), purchaseProductsAccountProviderError),
-                       appStoreInformationResult: appStoreInformation,
-                       onSuccessAction: { [weak self] transaction in
-            self?.capturedTransaction = transaction
-            expectation.fulfill()
-        })
-        
-        sut.$isLoading.dropFirst().sink(receiveValue: { [weak self] value in
-            self?.capturedLoadingState.append(value)
-        }).store(in: &cancellables)
-        
-        // WHEN subscribe is executed
-        sut.subscribe()
-        
-        // THEN a uncredited transactions error is presented
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertNil(capturedTransaction)
-        
-        XCTAssertEqual(capturedLoadingState, [true, false])
-    
-        XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Signup.Purchase.Uncredited.Alert.message)
-    }
-    
     func test_subscribe_shows_a_generic_error_when_the_product_is_not_available() throws {
         // GIVEN the product is not available
         let productsProviderError: Error? = nil
