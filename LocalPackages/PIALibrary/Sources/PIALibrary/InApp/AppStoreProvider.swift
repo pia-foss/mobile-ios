@@ -25,10 +25,7 @@ import StoreKit
 
 private let log = PIALogger.logger(for: AppStoreProvider.self)
 
-@available(tvOS 17.0, *)
 class AppStoreProvider: NSObject, InAppProvider {
-    private(set) var uncreditedTransactions: [InAppTransaction]
-    
     private var productsRequest: SKProductsRequest?
 
     private var receiptRefreshRequest: SKReceiptRefreshRequest?
@@ -38,11 +35,6 @@ class AppStoreProvider: NSObject, InAppProvider {
     private var purchaseCallback: LibraryCallback<InAppTransaction>?
 
     private var receiptCallback: SuccessLibraryCallback?
-
-    override init() {
-        uncreditedTransactions = []
-        super.init()
-    }
 
     deinit {
         SKPaymentQueue.default().remove(self)
@@ -57,10 +49,6 @@ class AppStoreProvider: NSObject, InAppProvider {
             return nil
         }
         return try? Data(contentsOf: url)
-    }
-    
-    var hasUncreditedTransactions: Bool {
-        return !uncreditedTransactions.isEmpty
     }
 
     func startObservingTransactions() {
@@ -111,28 +99,29 @@ class AppStoreProvider: NSObject, InAppProvider {
         purchaseCallback = callback
         SKPaymentQueue.default().add(payment)
     }
-    
-    func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction? {
-        guard product is AppStoreProduct else {
-            log.error("Product must be AppStoreProduct, but got \(type(of: product))")
-            return nil
-        }
-        for uncredited in uncreditedTransactions {
-            let nativeTransaction = uncredited.native as! SKPaymentTransaction
-            let nativeProduct = product.native as! SKProduct
-            if (nativeTransaction.payment.productIdentifier == nativeProduct.productIdentifier) {
-                return uncredited
-            }
-        }
-        return nil
-    }
 
     func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
-        guard transaction is AppStoreTransaction else {
-            log.error("Transaction must be AppStoreTransaction, but got \(type(of: transaction))")
+        guard let transaction = transaction.native as? SKPaymentTransaction else {
+            log.error("Native transaction must be SKPaymentTransaction, but got \(type(of: transaction.native))")
             return
         }
-        finishAndRemoveTransaction(transaction.native as! SKPaymentTransaction, success: success)
+
+        finishTransaction(transaction, success: success)
+    }
+
+    func finishTransaction(_ transaction: SKPaymentTransaction?, success: Bool) {
+        guard let transaction else {
+            log.error("finishTransaction called with nil transaction")
+            return
+        }
+
+        if success {
+            log.debug("Finishing successful transaction: \(transaction)")
+        } else {
+            log.debug("Finishing failed/cancelled transaction: \(transaction)")
+        }
+
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
 
     func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
@@ -143,48 +132,8 @@ class AppStoreProvider: NSObject, InAppProvider {
         receiptRefreshRequest?.delegate = self
         receiptRefreshRequest?.start()
     }
-    
-    // MARK: Helpers
-
-    private func addUncreditedTransaction(_ transaction: SKPaymentTransaction) {
-        log.debug("Adding uncredited transaction: \(transaction)")
-        
-        if let _ = Client.configuration.plan(forProductIdentifier: transaction.payment.productIdentifier) {
-            //Only add the uncredited transaction if the plan is available
-            uncreditedTransactions.append(AppStoreTransaction(native: transaction))
-        }
-        
-        log.debug("Uncredited transactions now: \(uncreditedTransactions)")
-
-        Macros.postNotification(.__InAppDidAddUncredited)
-    }
-    
-    private func removeUncreditedTransaction(_ transactionToRemove: SKPaymentTransaction) {
-        log.debug("Removing uncredited transaction: \(transactionToRemove)")
-        
-        for (i, transaction) in uncreditedTransactions.enumerated() {
-            if (transaction.native as? SKPaymentTransaction == transactionToRemove) {
-                uncreditedTransactions.remove(at: i)
-                break
-            }
-        }
-        
-        log.debug("Uncredited transactions now: \(uncreditedTransactions)")
-    }
-
-    private func finishAndRemoveTransaction(_ transaction: SKPaymentTransaction, success: Bool) {
-        if success {
-            log.debug("Finishing successful transaction: \(transaction)")
-        } else {
-            log.debug("Finishing failed/cancelled transaction: \(transaction)")
-        }
-        
-        SKPaymentQueue.default().finishTransaction(transaction)
-        removeUncreditedTransaction(transaction)
-    }
 }
 
-@available(tvOS 17.0, *)
 extension AppStoreProvider: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         guard (request == productsRequest) else {
@@ -205,25 +154,26 @@ extension AppStoreProvider: SKProductsRequestDelegate {
     }
 }
 
-@available(tvOS 17.0, *)
 extension AppStoreProvider: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        log.debug("Transactions updated: \(transactions)")
+        log.debug("Updated transactions: \(transactions.count)")
 
         for transaction in transactions {
+            let transactionDate = transaction.transactionDate?.formatted(date: .abbreviated, time: .shortened) ?? "nil"
+
             switch transaction.transactionState {
             case .purchasing:
-                break
+                log.debug("  -> Purchasing: \(transaction) [\(transactionDate)]")
 
             case .purchased:
-                log.debug("  -> Purchased: \(transaction)")
+                log.debug("  -> Purchased: \(transaction) [\(transactionDate)]")
 
-                addUncreditedTransaction(transaction)
+                finishTransaction(transaction, success: true)
                 purchaseCallback?(AppStoreTransaction(native: transaction), nil)
                 purchaseCallback = nil
 
             case .deferred:
-                log.debug("  -> Deferred: \(transaction)")
+                log.debug("  -> Deferred: \(transaction) [\(transactionDate)]")
 
 //                #warning TODO: Amir, implement and test Ask to Buy
 //                NSError *error = [[NSError alloc] initWithDomain:ErrorDomain
@@ -233,11 +183,15 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
 //                Macros.postNotification(.StoreDidFailToPurchase, error)
 
             case .restored:
+                log.debug("  -> Restored: \(transaction) [\(transactionDate)]")
                 // not applicable for non-renewable subscriptions
                 break
 
             case .failed:
-                
+                log.debug("  -> Failed: \(transaction) [\(transactionDate)]")
+
+                finishTransaction(transaction, success: false)
+
                 if let error = transaction.error as? SKError, error.code == .unknown {
                     log.error("Unknown error code. To support PSD2 and Strong Customer Authentication, Apple is returning a failed state instead deferred, so we need to keep the app waiting for the response without removing the callback.")
                     break
@@ -248,8 +202,6 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
                         log.warning("Transaction was cancelled")
                     }
 
-                    finishAndRemoveTransaction(transaction, success: false)
-
                     if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
                         purchaseCallback?(nil, nil)
                     } else {
@@ -258,6 +210,8 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
                     purchaseCallback = nil
                 }
 
+            @unknown default:
+                log.error("Unknown transactionState: \(transaction.transactionState)")
             }
         }
     }
@@ -268,7 +222,6 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
     }
 }
 
-@available(tvOS 17.0, *)
 extension AppStoreProvider: SKRequestDelegate {
     func requestDidFinish(_ request: SKRequest) {
         guard (request == receiptRefreshRequest) else {

@@ -427,7 +427,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(Credentials(username: response.username, password: response.password), nil)
         }
     }
-        
+
     private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
         var options: JSONSerialization.WritingOptions = []
         if prettyPrinted {
