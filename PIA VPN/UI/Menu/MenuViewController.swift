@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import StoreKit
 
 private let log = PIALogger.logger(for: MenuViewController.self)
 
@@ -179,12 +180,18 @@ class MenuViewController: AutolayoutViewController {
 
     // MARK: Actions
     @objc private func openManageSubscription() {
-        if let url = URL(string: AppConstants.AppleUrls.subscriptions) {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+        guard let windowScene = view.window?.windowScene else {
+            log.error("Unable to get window scene for manage subscriptions")
+            return
         }
 
+        Task {
+            do {
+                try await AppStore.showManageSubscriptions(in: windowScene)
+            } catch {
+                log.error("Failed to show manage subscriptions: \(error.localizedDescription)")
+            }
+        }
     }
 
     private func renewSubscription() {

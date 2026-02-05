@@ -83,11 +83,7 @@ public struct AppConstants {
         public static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
         public static let leakProtectionURL = URL(string: "\(Self.supportURL.absoluteString)/kb/articles/what-is-pia-s-leak-protection-feature-on-ios")!
     }
-    
-    public struct AppleUrls {
-        public static let subscriptions = "itms-apps://apps.apple.com/account/subscriptions"
-    }
-    
+
     public struct Browser {
         public static let scheme = "inbrowser://?www.privateinternetaccess.com"
         public static let appStoreUrl = "itms-apps://itunes.apple.com/app/id598907571"
