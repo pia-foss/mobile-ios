@@ -1,1 +1,0 @@
-Hemos mejorado la confiabilidad general de la app corrigiendo cierres inesperados y puliendo la interfaz en iPhone, iPad y widgets.

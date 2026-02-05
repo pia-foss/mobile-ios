@@ -1,1 +1,0 @@
-iPhone, iPad ve widget'larda çökmeleri düzelteip kullanıcı arayüzünü iyileştirerek uygulamanın genel güvenilirliğini artırdık.

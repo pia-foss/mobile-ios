@@ -37,10 +37,8 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.3.5
-
-    - name: Install Fastlane
-      run: gem install fastlane
+        ruby-version: '3.3.5'
+        bundler-cache: true
 
     - name: Decode Developer Certificates
       run: echo "${{ secrets.DEVELOPER_IOS_CERTIFICATE }}" | base64 --decode > ./fastlane/Certificate.p12

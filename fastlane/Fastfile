@@ -8,7 +8,7 @@ platform :ios do
   key_content = ENV['APP_STORE_CONNECT_KEY']
 
   # Claude API key for translations
-  anthropic_api_key = ENV['ANTHROPIC_API_KEY']
+  anthropic_api_key = ENV['ANTHROPIC_API_KEY_TRANSLATIONS']
   anthropic_model = "claude-sonnet-4-5"
 
   lane :iOStests do
@@ -290,9 +290,10 @@ platform :ios do
     require 'net/http'
     require 'json'
     require 'uri'
+    require 'fileutils'
 
     if anthropic_api_key.nil? || anthropic_api_key.empty?
-      UI.user_error!("ANTHROPIC_API_KEY environment variable not set. Please set it before running this lane.")
+      UI.user_error!("ANTHROPIC_API_KEY_TRANSLATIONS environment variable not set. Please set it before running this lane.")
     end
 
     # Read the English release notes
@@ -334,6 +335,7 @@ platform :ios do
       # For English variants, just copy the source text
       if locale.start_with?("en-")
         target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+        FileUtils.mkdir_p(File.dirname(target_path))
         File.write(target_path, english_text)
         UI.success("Copied to #{locale}")
         next
@@ -373,6 +375,7 @@ platform :ios do
 
           # Write to the locale's release_notes.txt
           target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+          FileUtils.mkdir_p(File.dirname(target_path))
           File.write(target_path, translated_text)
 
           UI.success("✓ #{locale}: #{translated_text[0..50]}...")

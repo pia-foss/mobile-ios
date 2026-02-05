@@ -1,1 +1,0 @@
-Vi har forbedret appens overordnede stabilitet ved at rette nedbrud og finpudse brugergrænsefladen på tværs af iPhone, iPad og widgets.
