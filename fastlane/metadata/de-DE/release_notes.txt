@@ -1,1 +1,0 @@
-Wir haben die allgemeine App-Zuverlässigkeit verbessert, indem wir Abstürze behoben und die Benutzeroberfläche auf iPhone, iPad und Widgets optimiert haben.

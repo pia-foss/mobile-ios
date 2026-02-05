@@ -1,1 +1,0 @@
-Kami telah meningkatkan keandalan aplikasi secara keseluruhan dengan memperbaiki crash dan menyempurnakan UI di iPhone, iPad, dan widget.

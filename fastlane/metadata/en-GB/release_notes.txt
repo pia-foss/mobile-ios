@@ -1,1 +1,0 @@
-We’ve improved overall app reliability by fixing crashes and polishing the UI across iPhone, iPad, and widgets.

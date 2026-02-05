@@ -1,1 +1,0 @@
-Abbiamo migliorato l'affidabilità complessiva dell'app correggendo i crash e perfezionando l'interfaccia utente su iPhone, iPad e widget.

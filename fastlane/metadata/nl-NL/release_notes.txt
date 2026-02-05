@@ -1,1 +1,0 @@
-We hebben de algehele betrouwbaarheid van de app verbeterd door crashes te verhelpen en de gebruikersinterface van iPhone, iPad en widgets aan te scherpen.

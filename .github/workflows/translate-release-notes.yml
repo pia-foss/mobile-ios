@@ -1,0 +1,43 @@
+name: Translate and Update Release Notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_notes:
+        description: "What's New text (in English)"
+        required: true
+        type: string
+
+jobs:
+  translate-and-update:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Write English release notes
+        run: |
+          mkdir -p fastlane/metadata/en-US
+          echo "${{ inputs.release_notes }}" > fastlane/metadata/en-US/release_notes.txt
+          cat fastlane/metadata/en-US/release_notes.txt
+
+      - name: Translate release notes
+        env:
+          ANTHROPIC_API_KEY_TRANSLATIONS: ${{ secrets.ANTHROPIC_API_KEY_TRANSLATIONS }}
+        run: |
+          bundle exec fastlane translate_release_notes
+
+      - name: Upload to App Store Connect
+        env:
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+        run: |
+          bundle exec fastlane update_release_notes

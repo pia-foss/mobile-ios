@@ -1,1 +1,0 @@
-Nous avons amélioré la fiabilité générale de l'application en corrigeant les plantages et en peaufinant l'interface utilisateur sur iPhone, iPad et widgets.
