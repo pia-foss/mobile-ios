@@ -201,6 +201,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				/Localized/Resources/L10n/Localizable.strings,
+				"Resources/Images/AppIcon-Production.icon",
+				"Resources/Images/AppIcon-Staging.icon",
 				"Resources/L10n/SwiftGen+Strings.swift",
 			);
 			target = 8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */;
