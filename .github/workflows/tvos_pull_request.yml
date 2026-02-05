@@ -58,10 +58,8 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.3.5
-
-    - name: Install Fastlane
-      run: gem install fastlane
+        ruby-version: '3.3.5'
+        bundler-cache: true
 
     - name: Run tvOS unit tests
       run: bundle exec fastlane tvOStests
