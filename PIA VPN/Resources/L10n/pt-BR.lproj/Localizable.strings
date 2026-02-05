@@ -103,7 +103,7 @@
 "account.update.email.require.password.message" = "Por razões de segurança, precisamos da sua senha do PIA para executar uma alteração na sua conta. Insira a sua senha do PIA para continuar.";
 "account.update.email.require.password.button" = "Enviar";
 "account.error.unauthorized" = "Seu nome de usuário ou senha está incorreto.";
-"account.subscriptions.message" = "Você pode gerenciar sua assinatura daqui.";
+"account.subscriptions.message" = "Você pode gerenciar sua assinatura aqui.";
 "account.subscriptions.linkMessage" = "aqui.";
 "account.set.email.error" = "Ocorreu um erro ao adicionar e-mail. Tente novamente mais tarde.";
 "account.subscriptions.short.message" = "Gerenciar assinatura";
