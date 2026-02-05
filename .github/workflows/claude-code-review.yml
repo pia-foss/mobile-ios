@@ -34,7 +34,7 @@ jobs:
         id: claude-review
         uses: anthropics/claude-code-action@beta
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY_CODE_REVIEW }}
 
           # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4.1)
           # model: "claude-opus-4-1-20250805"
@@ -49,6 +49,7 @@ jobs:
             - Performance considerations
             - Security concerns
             - Test coverage
+            - Which features are impacted and which flows should be tested
             
             Provide constructive feedback with specific suggestions for improvement.
             Include CLAUDE.md guidelines in your context for every review.
