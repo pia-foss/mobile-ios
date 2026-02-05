@@ -200,16 +200,18 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         }
 
         Client.store.refreshPaymentReceipt { error in
-            guard let receipt = Client.store.paymentReceipt else {
-                return
+            DispatchQueue.main.async {
+                guard let receipt = Client.store.paymentReceipt else {
+                    return
+                }
+
+                let request = LoginReceiptRequest(receipt: receipt)
+
+                self.prepareLogin()
+                self.preset?.accountProvider.login(with: request, { userAccount, error in
+                    self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
+                })
             }
-
-            let request = LoginReceiptRequest(receipt: receipt)
-
-            self.prepareLogin()
-            self.preset?.accountProvider.login(with: request, { userAccount, error in
-                self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
-            })
         }
     }
 
