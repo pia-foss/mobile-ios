@@ -23,7 +23,6 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
-import StoreKit
 
 private let log = PIALogger.logger(for: AccountViewController.self)
 
@@ -226,11 +225,7 @@ class AccountViewController: AutolayoutViewController {
         }
 
         Task {
-            do {
-                try await AppStore.showManageSubscriptions(in: windowScene)
-            } catch {
-                log.error("Failed to show manage subscriptions: \(error.localizedDescription)")
-            }
+            await SubscriptionManagementUtil.openManageSubscription(in: windowScene)
         }
     }
 
