@@ -217,24 +217,10 @@ public class GetStartedViewController: PIAWelcomeViewController {
         
     }
     
-    private func startPurchaseProcessWithEmail(_ email: String,
-                                               andPlan plan: PurchasePlan) {
-                
-        guard !Client.store.hasUncreditedTransactions else {
-            let alert = Macros.alert(
-                nil,
-                L10n.Signup.Purchase.Uncredited.Alert.message
-            )
-            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
-            alert.addActionWithTitle(L10n.Signup.Purchase.Uncredited.Alert.Button.recover) {
-                self.navigationController?.popToRootViewController(animated: true)
-                Macros.postNotification(.PIARecoverAccount)
-            }
-            present(alert, animated: true, completion: nil)
-            return
-
-        }
-
+    private func startPurchaseProcessWithEmail(
+        _ email: String,
+        andPlan plan: PurchasePlan
+    ) {
         isPurchasing = true
         disableInteractions(fully: true)
         self.showLoadingAnimation()

@@ -55,11 +55,7 @@ class MockInAppProvider: InAppProvider, ConfigurationAccess {
     var availableProducts: [InAppProduct]?
 
     var paymentReceipt: Data?
-    
-    var hasUncreditedTransactions: Bool {
-        return false
-    }
-    
+
     func startObservingTransactions() {
     }
     
@@ -81,11 +77,7 @@ class MockInAppProvider: InAppProvider, ConfigurationAccess {
     func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
         callback?(MockTransaction(), nil)
     }
-    
-    func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction? {
-        return nil
-    }
-    
+
     func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
     }
     

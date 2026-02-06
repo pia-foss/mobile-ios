@@ -37,37 +37,8 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         capturedResult = nil
     }
 
-    func test_purchase_completes_with_uncreditedTransaction_error_when_store_has_uncredited_transactions() throws {
-        // GIVEN store has uncredited transactions
-        fixture.storeSpy.hasUncreditedTransactions = true
-        
-        let transactionStub = InAppTransactionMock.makeStub()
-        let error: Error? = nil
-        
-        instantiateSut(purchaseProductsAccountProviderResult: (transactionStub, error))
-        let expectation = expectation(description: "Waiting for purchase to finish")
-        
-        // WHEN purchase is executed
-        sut.purchase(subscriptionOption: .monthly) { [weak self] result in
-            self?.capturedResult = result
-            expectation.fulfill()
-        }
-        
-        // THEN completes with an hasUncreditedTransactions error
-        wait(for: [expectation], timeout: 1.0)
-        guard case .failure(let capturedError) = capturedResult else {
-            XCTFail("Expected failure, got success")
-            return
-        }
-        
-        XCTAssertEqual(capturedError, .uncreditedTransaction)
-    }
-    
-    func test_purchase_completes_with_transaction_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_transaction_and_no_error() throws {
-        // GIVEN store has no uncredited transactions
-        fixture.storeSpy.hasUncreditedTransactions = false
-        
-        // AND purchaseProvider completes with transaction and no error
+    func test_purchase_succeeds_when_provider_returns_transaction_without_error() throws {
+        // GIVEN purchaseProvider completes with transaction and no error
         let transactionStub = InAppTransactionMock.makeStub()
         let error: Error? = nil
         
@@ -92,11 +63,8 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         XCTAssertNil(capturedTransaction.native)
     }
     
-    func test_purchase_completes_with_error_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_no_transaction_and_an_error() throws {
-        // GIVEN store has no uncredited transactions
-        fixture.storeSpy.hasUncreditedTransactions = false
-        
-        // AND purchaseProvider completes with no transaction an error
+    func test_purchase_fails_with_generic_error_when_provider_returns_error_without_transaction() throws {
+        // GIVEN purchaseProvider completes with no transaction an error
         let transactionStub: InAppTransactionMock? = nil
         let error = NSError(domain: "anError", code: 0)
         
@@ -119,11 +87,8 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         XCTAssertEqual(capturedError, .generic)
     }
     
-    func test_purchase_completes_with_error_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_no_transaction_and_no_error() throws {
-        // GIVEN store has no uncredited transactions
-        fixture.storeSpy.hasUncreditedTransactions = false
-        
-        // AND purchaseProvider completes with no transaction and no error
+    func test_purchase_fails_with_generic_error_when_provider_returns_neither_transaction_nor_error() throws {
+        // GIVEN purchaseProvider completes with no transaction and no error
         let transactionStub: InAppTransactionMock? = nil
         let error: Error? = nil
         
@@ -146,11 +111,8 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
         XCTAssertEqual(capturedError, .generic)
     }
     
-    func test_purchase_completes_with_error_when_store_has_no_uncredited_transactions_and_purchaseProvider_completes_with_a_transaction_and_an_error() throws {
-        // GIVEN store has no uncredited transactions
-        fixture.storeSpy.hasUncreditedTransactions = false
-        
-        // AND purchaseProvider completes with a transaction and an error
+    func test_purchase_fails_with_generic_error_when_provider_returns_both_transaction_and_error() throws {
+        // GIVEN purchaseProvider completes with a transaction and an error
         let transactionStub = InAppTransactionMock.makeStub()
         let error = NSError(domain: "anError", code: 0)
         

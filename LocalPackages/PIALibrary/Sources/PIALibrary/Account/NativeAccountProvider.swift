@@ -555,19 +555,13 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
     
     private func handleSignupErrorResult(error: ClientError?, callback: ((UserAccount?, Error?) -> Void)?) {
-        guard error == .badReceipt, let products = Client.store.availableProducts else {
+        guard error == .badReceipt else {
             DispatchQueue.main.async {
                 callback?(nil, error)
             }
             return
         }
-        
-        for product in products {
-            if let uncreditedTransaction = Client.store.uncreditedTransaction(for: product) {
-                self.accessedStore.finishTransaction(uncreditedTransaction, success: false)
-            }
-        }
-        
+
         DispatchQueue.main.async {
             callback?(nil, error)
         }

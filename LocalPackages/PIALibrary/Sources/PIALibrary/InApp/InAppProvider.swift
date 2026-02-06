@@ -27,8 +27,6 @@ public protocol InAppProvider: class {
     
     var paymentReceipt: Data? { get }
     
-    var hasUncreditedTransactions: Bool { get }
-    
     func startObservingTransactions()
     
     func stopObservingTransactions()
@@ -36,8 +34,6 @@ public protocol InAppProvider: class {
     func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?)
     
     func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?)
-    
-    func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction?
     
     func finishTransaction(_ transaction: InAppTransaction, success: Bool)
     

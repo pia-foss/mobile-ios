@@ -463,15 +463,6 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 return
             }
             guard let credentials = credentials else {
-                if let error = error as? ClientError, error == .badReceipt {
-                    if let products = Client.store.availableProducts {
-                        for product in products {
-                            if let uncreditedTransaction = Client.store.uncreditedTransaction(for: product) {
-                                self.accessedStore.finishTransaction(uncreditedTransaction, success: false)
-                            }
-                        }
-                    }
-                }
                 callback?(nil, error)
                 return
             }

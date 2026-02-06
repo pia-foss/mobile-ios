@@ -66,8 +66,6 @@ extension Notification.Name {
     
     public static let __InAppDidFetchProducts = Notification.Name("__InAppDidFetchProducts")
     
-    public static let __InAppDidAddUncredited = Notification.Name("__InAppDidAddUncredited")
-    
     // MARK: Feature Flags
     
     public static let __AppDidFetchFeatureFlags = Notification.Name("__AppDidFetchFeatureFlags")

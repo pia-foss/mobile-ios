@@ -87,7 +87,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         
         #if os(iOS)
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(inAppDidAddUncredited(notification:)), name: .__InAppDidAddUncredited, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate(notification:)), name: .__AppDidFetchForceUpdateFeatureFlag, object: nil)
         #endif
 
@@ -140,9 +139,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         guard (pendingSignupRequest == nil) else {
             return
         }
-        guard accessedStore.hasUncreditedTransactions else {
-            return
-        }
+
         pendingSignupRequest = request
         perform(segue: StoryboardSegue.Welcome.signupViaRecoverSegue)
     }
@@ -183,12 +180,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     }
 
     // MARK: Notifications
-    
-    #if os(iOS)
-    @objc private func inAppDidAddUncredited(notification: Notification) {
-        tryRecoverSignupProcess()
-    }
-    #endif
     
     @objc func presentForceUpdate(notification: Notification) {
         #if !STAGING
@@ -231,7 +222,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
 }
 
 /// Receives events from a `PIAWelcomeViewController`.
-public protocol PIAWelcomeViewControllerDelegate: class {
+public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
     /**
      Invoked after a successful login.
@@ -258,20 +249,16 @@ public protocol PIAWelcomeViewControllerDelegate: class {
 }
 
 public extension PIAWelcomeViewControllerDelegate {
-    func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {
-    }
+    func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {}
 }
 
-protocol WelcomeChild: class {
+protocol WelcomeChild: AnyObject {
     var preset: Preset? { get set }
-    
     var omitsSiblingLink: Bool { get set }
-    
     var completionDelegate: WelcomeCompletionDelegate? { get set }
 }
 
-protocol WelcomeCompletionDelegate: class {
+protocol WelcomeCompletionDelegate: AnyObject {
     func welcomeDidLogin(withUser user: UserAccount, topViewController: UIViewController)
-    
     func welcomeDidSignup(withUser user: UserAccount, topViewController: UIViewController)
 }

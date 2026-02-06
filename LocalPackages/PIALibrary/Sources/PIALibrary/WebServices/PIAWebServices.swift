@@ -195,6 +195,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
         switch error.code {
+        case 402:
+            return .expired
         case 429:
             return .throttled(retryAfter: UInt(error.retryAfterSeconds))
         case 600:
@@ -425,7 +427,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(Credentials(username: response.username, password: response.password), nil)
         }
     }
-        
+
     private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
         var options: JSONSerialization.WritingOptions = []
         if prettyPrinted {

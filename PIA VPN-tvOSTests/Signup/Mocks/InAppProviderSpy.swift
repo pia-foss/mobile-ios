@@ -14,7 +14,6 @@ class InAppProviderSpy: InAppProvider {
     var refreshPaymentReceiptCalledAttempt = 0
     var availableProducts: [InAppProduct]?
     var paymentReceipt: Data?
-    var hasUncreditedTransactions: Bool = false
     
     func startObservingTransactions() {
         startObservingTransactionsCalledAttempt += 1
@@ -23,7 +22,6 @@ class InAppProviderSpy: InAppProvider {
     func stopObservingTransactions() {}
     func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?) {}
     func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?) {}
-    func uncreditedTransaction(for product: InAppProduct) -> InAppTransaction? { nil }
     func finishTransaction(_ transaction: InAppTransaction, success: Bool) {}
     func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
         refreshPaymentReceiptCalledAttempt += 1

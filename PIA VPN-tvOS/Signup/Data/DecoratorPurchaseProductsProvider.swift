@@ -32,12 +32,6 @@ class DecoratorPurchaseProductsProvider: PurchaseProductsProviderType {
     }
     
     func purchase(subscriptionOption: SubscriptionOption, _ callback: @escaping (Result<InAppTransaction, PurchaseProductsError>) -> Void) {
-        
-        guard !store.hasUncreditedTransactions else {
-            callback(.failure(PurchaseProductsError.uncreditedTransaction))
-            return
-        }
-        
         purchaseProductsProvider.purchase(plan: subscriptionOption.toPlan()) { [weak self] transaction, error in
             guard let self = self else { return }
             
