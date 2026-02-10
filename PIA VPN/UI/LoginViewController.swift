@@ -335,6 +335,10 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
                     handleExpiredAccount()
                     return
 
+                case .badReceipt:
+                    handleBadReceipt()
+                    return
+
                 case .internetUnreachable:
                     errorMessage = L10n.Localizable.Global.unreachable
 
@@ -362,7 +366,16 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     private func handleExpiredAccount() {
         perform(segue: StoryboardSegue.Welcome.expiredAccountPurchaseSegue, sender: self)
     }
-    
+
+    private func handleBadReceipt() {
+        let alert = Macros.alert(
+            L10n.Localizable.Account.Restore.Failure.title,
+            L10n.Localizable.Account.Restore.Failure.message
+        )
+        alert.addDefaultAction(L10n.Localizable.Global.close)
+        present(alert, animated: true, completion: nil)
+    }
+
     private func enableInteractions(_ enable: Bool) {
         parent?.view.isUserInteractionEnabled = enable
         isLogging = !enable

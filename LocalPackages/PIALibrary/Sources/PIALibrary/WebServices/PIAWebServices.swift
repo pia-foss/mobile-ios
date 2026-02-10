@@ -209,7 +209,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
         switch error.code {
-        case 400:
+        // Errors that indicate the receipt is either invalid or expired
+        case 400, 401:
             return .badReceipt
         default:
             return mapLoginError(error)
