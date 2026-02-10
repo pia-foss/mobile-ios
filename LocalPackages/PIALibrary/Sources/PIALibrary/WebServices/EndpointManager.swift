@@ -48,6 +48,13 @@ public class EndpointManager {
     public static let shared = EndpointManager()
 
     private func availableMetaEndpoints(_ availableEndpoints: inout [PinningEndpoint]) {
+        // Disabled on iOS 17+ due to Apple's stricter restrictions on insecure connections
+        // and certificate validation. Meta endpoints use raw IP addresses which fail
+        // App Transport Security checks enforced on newer iOS versions.
+        if #available(iOS 17.0, tvOS 17.0, *) {
+            return
+        }
+
         var currentServers = Client.providers.serverProvider.currentServers
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
         
