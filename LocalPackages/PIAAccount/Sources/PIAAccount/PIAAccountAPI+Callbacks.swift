@@ -6,21 +6,6 @@ import Foundation
 public extension PIAAccountAPI {
     // MARK: - Authentication
 
-    func loginWithCredentials(
-        username: String,
-        password: String,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        Task {
-            do {
-                try await loginWithCredentials(username: username, password: password)
-                completion(.success(()))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-
     func loginWithReceipt(
         receiptBase64: String,
         completion: @escaping (Result<Void, Error>) -> Void
@@ -63,29 +48,7 @@ public extension PIAAccountAPI {
         }
     }
 
-    func logout(completion: @escaping (Result<Void, Error>) -> Void) {
-        Task {
-            do {
-                try await logout()
-                completion(.success(()))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-
     // MARK: - Account Management
-
-    func accountDetails(completion: @escaping (Result<AccountInformation, Error>) -> Void) {
-        Task {
-            do {
-                let result = try await accountDetails()
-                completion(.success(result))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
 
     func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
