@@ -69,7 +69,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
+        if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController, let pendingPreferences {
             trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
             trustedNetworksVC.vpnType = pendingPreferences.vpnType
         }
@@ -80,6 +80,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
     
     @objc private func toggleDebugLogging(_ sender: UISwitch) {
+        guard let pendingPreferences else { return }
         pendingPreferences.debugLogging = sender.isOn
         reloadSettings()
 
@@ -89,6 +90,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
 
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
+        guard let pendingPreferences else { return }
         pendingPreferences.shareServiceQualityData = sender.isOn
 
         if sender.isOn {
@@ -171,7 +173,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         case .debugLogging:
             cell.accessoryView = switchDebugLogging
             cell.selectionStyle = .none
-            switchDebugLogging.isOn = pendingPreferences.debugLogging
+            switchDebugLogging.isOn = pendingPreferences?.debugLogging ?? false
 
             // DebugLogging must be always on under DEVELOPMENT or STAGING
             #if DEVELOPMENT || STAGING
@@ -180,7 +182,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         case .kpiShareStatistics:
             cell.accessoryView = switchShareServiceQualityData
             cell.selectionStyle = .none
-            switchShareServiceQualityData.isOn = pendingPreferences.shareServiceQualityData
+            switchShareServiceQualityData.isOn = pendingPreferences?.shareServiceQualityData ?? false
         default:
             break
         }
