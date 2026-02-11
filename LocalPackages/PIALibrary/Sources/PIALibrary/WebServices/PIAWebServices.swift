@@ -24,6 +24,7 @@ import Foundation
 import Gloss
 import regions
 import account
+import PIAAccountSwift
 import csi
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
@@ -36,14 +37,15 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     let regionsAPI: RegionsAPI!
     let accountAPI: IOSAccountAPI!
+    let nativeAccountAPI: PIAAccountAPI
     let csiAPI: CSIAPI!
     let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
-    
+
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
         let endpointsProvider: IRegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
         : PIARegionClientStateProvider()
-        
+
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: endpointsProvider)
             .setCertificate(certificate: rsa4096Certificate)
@@ -52,7 +54,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             .setVpnRegionsRequestPath(vpnRegionsRequestPath: "/vpninfo/servers/v6")
             .setShadowsocksRegionsRequestPath(shadowsocksRegionsRequestPath: "/shadow_socks")
             .build()
-        
+
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
@@ -68,7 +70,20 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
-        
+
+        let nativeEndpointProvider: PIAAccountEndpointProvider = switch Client.environment {
+        case .staging:
+            PIANativeAccountStagingEndpointProvider()
+        case .production:
+            PIANativeAccountEndpointProvider()
+        }
+
+        self.nativeAccountAPI = try! PIAAccountBuilder()
+            .setEndpointProvider(nativeEndpointProvider)
+            .setCertificate(rsa4096Certificate)
+            .setUserAgent(PIAWebServices.userAgent)
+            .build()
+
         var appVersion = "Unknown"
         if let info = Bundle.main.infoDictionary {
             appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -155,10 +170,18 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      Generates a new auth token for the specific user
      */
     func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { [weak self] (errors) in
-            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginError)
-        }
+        nativeAccountAPI.loginWithCredentials(
+            username: credentials.username,
+            password: credentials.password) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        callback?(nil)
+                    case .failure(let error):
+                        callback?(self.mapNativeLoginError(error))
+                    }
+                }
+            }
     }
     
     /***
@@ -206,6 +229,22 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
 
+    // MARK: - Native (PIAAccountSwift) error mapping
+
+    private func mapNativeLoginError(_ error: Error) -> ClientError {
+        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+        switch code {
+        case 402:
+            return .expired
+        case 429:
+            let retryAfter = (error as? PIAAccountError)?.retryAfterSeconds ?? 0
+            return .throttled(retryAfter: UInt(retryAfter))
+        case 600:
+            return .internetUnreachable
+        default:
+            return .unauthorized
+        }
+    }
 
     private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
         switch error.code {
@@ -231,17 +270,16 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        self.accountAPI.accountDetails() { [weak self] (response, errors) in
-            if !errors.isEmpty {
-                callback?(nil, self?.mapAccountDetailsError(errors.last!))
-                return
-            }
+        self.nativeAccountAPI.accountDetails { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    let account = AccountInfo(accountInformation: response)
+                    callback?(account, nil)
 
-            if let response = response {
-                let account = AccountInfo(accountInformation: response)
-                callback?(account, nil)
-            } else {
-                callback?(nil, ClientError.malformedResponseData)
+                case .failure(let error):
+                    callback?(nil, self.mapNativeLoginError(error))
+                }
             }
         }
     }
