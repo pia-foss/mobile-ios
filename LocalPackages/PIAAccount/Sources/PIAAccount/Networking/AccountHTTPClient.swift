@@ -144,10 +144,10 @@ actor AccountHTTPClient {
 // MARK: - JSON Decoder Configuration
 
 extension JSONDecoder {
-    /// Preconfigured decoder for PIA API responses (snake_case conversion)
+    /// Preconfigured decoder for PIA API responses.
+    /// All models use explicit CodingKeys for readable snake_case mappings.
     static let piaCodable: JSONDecoder = {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
 }
@@ -155,10 +155,10 @@ extension JSONDecoder {
 // MARK: - JSON Encoder Configuration
 
 extension JSONEncoder {
-    /// Preconfigured encoder for PIA API requests (snake_case conversion)
+    /// Preconfigured encoder for PIA API requests.
+    /// All models use explicit CodingKeys for readable snake_case mappings.
     static let piaCodable: JSONEncoder = {
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }()
 }
