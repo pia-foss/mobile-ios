@@ -25,7 +25,8 @@ let package = Package(
       .package(url: "https://github.com/hkellaway/Gloss.git", from: "3.1.0"),
       .package(url: "https://github.com/apple/swift-log", from: "1.8.0"),
       .package(url: "https://github.com/ashleymills/Reachability.swift.git", from: "4.3.0"),
-      .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.1")
+      .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.1"),
+      .package(path: "../PIAAccount")
     ],
     targets: [
         .target(
@@ -38,6 +39,7 @@ let package = Package(
                 .product(name: "PIACSI", package: "mobile-ios-releases-csi"),
                 .product(name: "PIARegions", package: "mobile-ios-releases-regions"),
                 .product(name: "PIAAccount", package: "mobile-ios-releases-account"),
+                .product(name: "PIAAccountSwift", package: "PIAAccount"),
                 .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKitOpenVPN", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),
