@@ -142,14 +142,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      The token to use for protocol authentication.
      */
     var vpnToken: String? {
-        return self.accountAPI.vpnToken()
+        return self.nativeAccountAPI.vpnToken
     }
 
     /***
      The token to use for api authentication.
      */
     var apiToken: String? {
-        return self.accountAPI.apiToken()
+        return self.nativeAccountAPI.apiToken
     }
 
     /***
@@ -169,19 +169,15 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     /***
      Generates a new auth token for the specific user
      */
-    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        nativeAccountAPI.loginWithCredentials(
-            username: credentials.username,
-            password: credentials.password) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        callback?(nil)
-                    case .failure(let error):
-                        callback?(self.mapNativeLoginError(error))
-                    }
-                }
-            }
+    func token(credentials: Credentials) async throws {
+        do {
+            try await nativeAccountAPI.loginWithCredentials(
+                username: credentials.username,
+                password: credentials.password
+            )
+        } catch {
+            throw mapNativeLoginError(error)
+        }
     }
     
     /***
@@ -269,18 +265,12 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         return mapLoginLinkError(error)
     }
 
-    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        self.nativeAccountAPI.accountDetails { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let response):
-                    let account = AccountInfo(accountInformation: response)
-                    callback?(account, nil)
-
-                case .failure(let error):
-                    callback?(nil, self.mapNativeLoginError(error))
-                }
-            }
+    func info() async throws -> AccountInfo {
+        do {
+            let account = try await nativeAccountAPI.accountDetails()
+            return AccountInfo(accountInformation: account)
+        } catch {
+            throw mapNativeLoginError(error)
         }
     }
     
@@ -320,19 +310,9 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(nil)
         }
     }
-    
-    func logout(_ callback: LibraryCallback<Bool>?) {
-        self.accountAPI.logout() { (errors) in
-            if !errors.isEmpty {
-                if errors.last?.code == 401 {
-                    callback?(true, nil)
-                    return
-                }
-                callback?(false, ClientError.invalidParameter)
-                return
-            }
-            callback?(true, nil)
-        }
+
+    func logout() async throws {
+        try await nativeAccountAPI.logout()
     }
     
     func deleteAccount(_ callback: LibraryCallback<Bool>?) {
