@@ -933,7 +933,10 @@ class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func updateFixedTileWithAnimation() {
-        collectionView.reloadSections(IndexSet(integer: 0))
+        // Ensure UI updates happen on main queue
+        DispatchQueue.main.async {
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        }
     }
     
     @objc private func reloadTheme() {
