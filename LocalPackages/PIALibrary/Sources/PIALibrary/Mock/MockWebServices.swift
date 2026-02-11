@@ -47,18 +47,23 @@ class MockWebServices: WebServices {
         callback?(nil)
     }
 
-    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        callback?(nil)
-    }
+    func token(credentials: Credentials) async throws {}
 
     func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
         callback?(nil)
     }
 
-    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func info() async throws -> AccountInfo {
         let result = accountInfo?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+
+        if let result {
+            return result
+        } else if let error {
+            throw error
+        } else {
+            fatalError()
+        }
     }
     
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
@@ -69,9 +74,7 @@ class MockWebServices: WebServices {
         callback?(nil)
     }
     
-    func logout(_ callback: LibraryCallback<Bool>?) {
-        callback?(true, nil)
-    }
+    func logout() async throws {}
     
     func deleteAccount(_ callback: LibraryCallback<Bool>?) {
         callback?(true, nil)

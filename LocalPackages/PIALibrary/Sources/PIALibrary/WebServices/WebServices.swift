@@ -28,19 +28,19 @@ protocol WebServicesConsumer {
 }
 
 @available(tvOS 17.0, *)
-protocol WebServices: class {
+protocol WebServices: AnyObject {
     
     // MARK: Account
 
     func migrateToken(token: String, _ callback: SuccessLibraryCallback?)
 
-    func token(credentials: Credentials, _ callback: SuccessLibraryCallback?)
+    func token(credentials: Credentials) async throws
 
     func token(receipt: Data, _ callback: SuccessLibraryCallback?)
     
     func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?)
 
-    func info(_ callback: LibraryCallback<AccountInfo>?)
+    func info() async throws -> AccountInfo
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
 
@@ -59,10 +59,9 @@ protocol WebServices: class {
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?)
 
     /**
-         Invalidates the access token.
-         - Parameter callback: Returns an `Bool` if the token was expired.
+         Invalidates the access token
      */
-    func logout(_ callback: LibraryCallback<Bool>?)
+    func logout() async throws
 
     /**
          Deletes the user accout on PIA servers.
