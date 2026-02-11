@@ -51,6 +51,17 @@ public struct AccountInformation: Codable, Sendable {
 
     /// PIA account username
     public let username: String
+
+    enum CodingKeys: String, CodingKey {
+        case active, canceled, email, expired, plan, recurring, renewable, username
+        case canInvite = "can_invite"
+        case daysRemaining = "days_remaining"
+        case expirationTime = "expiration_time"
+        case expireAlert = "expire_alert"
+        case needsPayment = "needs_payment"
+        case productId = "product_id"
+        case renewUrl = "renew_url"
+    }
 }
 
 // MARK: - iOS Subscription Information
@@ -62,6 +73,12 @@ public struct IOSSubscriptionInformation: Codable, Sendable {
     public let receipt: Receipt
     public let status: String
 
+    enum CodingKeys: String, CodingKey {
+        case receipt, status
+        case availableProducts = "available_products"
+        case eligibleForTrial = "eligible_for_trial"
+    }
+
     public struct AvailableProduct: Codable, Sendable {
         public let id: String
         public let legacy: Bool
@@ -71,6 +88,10 @@ public struct IOSSubscriptionInformation: Codable, Sendable {
 
     public struct Receipt: Codable, Sendable {
         public let eligibleForTrial: Bool
+
+        enum CodingKeys: String, CodingKey {
+            case eligibleForTrial = "eligible_for_trial"
+        }
     }
 }
 
