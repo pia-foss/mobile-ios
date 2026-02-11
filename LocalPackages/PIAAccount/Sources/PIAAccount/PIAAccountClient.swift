@@ -54,16 +54,16 @@ public final class PIAAccountClient: PIAAccountAPI {
     // MARK: - Authentication
 
     public func loginWithCredentials(username: String, password: String) async throws {
-        let formParams = [
+        let bodyData = try JSONEncoder.piaCodable.encode([
             "username": username,
             "password": password
-        ]
+        ])
 
         // Request API token
         let apiTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
             path: .login,
             method: .post,
-            bodyType: .formEncoded(formParams)
+            bodyType: .json(bodyData)
         )
 
         // Store API token
@@ -446,11 +446,11 @@ public final class PIAAccountClient: PIAAccountAPI {
                 return
             }
 
-            let headers = ["Authorization": "Bearer \(apiToken)"]
+            let headers = ["Authorization": "Token \(apiToken)"]
 
             let vpnTokenResponse: VPNTokenResponse = try await self.endpointManager.executeWithFailover(
                 path: .vpnToken,
-                method: .get,
+                method: .post,
                 headers: headers
             )
 

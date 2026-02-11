@@ -4,28 +4,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "PIAAccount",
+    name: "PIAAccountSwift",
     platforms: [
         .iOS(.v15),
         .macOS(.v12)
     ],
     products: [
         .library(
-            name: "PIAAccount",
-            targets: ["PIAAccount"]
+            name: "PIAAccountSwift",
+            targets: ["PIAAccountSwift"]
         ),
     ],
     targets: [
         // Main library target (merged for simplicity)
         .target(
-            name: "PIAAccount",
+            name: "PIAAccountSwift",
             dependencies: [],
             path: "Sources"
         ),
         // Test target using Swift Testing
         .testTarget(
             name: "PIAAccountTests",
-            dependencies: ["PIAAccount"]
+            dependencies: ["PIAAccountSwift"]
         ),
     ]
 )

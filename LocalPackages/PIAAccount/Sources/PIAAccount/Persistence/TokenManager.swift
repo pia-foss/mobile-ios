@@ -13,7 +13,7 @@ actor TokenManager {
     ///   - keychainService: Service identifier for Keychain storage
     ///   - refreshThreshold: Number of days before expiration to trigger refresh (default: 21 days)
     init(
-        keychainService: String = "com.pia.account.tokens",
+        keychainService: String = "account_keychain",
         refreshThreshold: TimeInterval = 21 * 24 * 60 * 60
     ) {
         self.keychain = KeychainStorage(service: keychainService)
