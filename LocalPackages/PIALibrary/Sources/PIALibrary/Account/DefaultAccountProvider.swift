@@ -25,8 +25,9 @@ import UIKit
 
 private let log = PIALogger.logger(for: DefaultAccountProvider.self)
 
-public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
-
+@available(tvOS 17.0, *)
+open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
+    
     private let customWebServices: WebServices?
     private let apiTokenProvider: APITokenProviderType
     private let vpnTokenProvider: VpnTokenProviderType
@@ -172,10 +173,16 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(currentUser, nil)
             return
         }
-        
-        webServices.token(receipt: receiptRequest.receipt) { (error) in
+
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.token(receipt: receiptRequest.receipt)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -185,9 +192,15 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             return
         }
 
-        self.webServices.migrateToken(token: linkToken) { (error) in
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.migrateToken(token: linkToken)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -208,8 +221,13 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     }
     
     public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
-        webServices.validateLoginQR(qrToken: qrToken) { apiToken, error in
-            callback?(apiToken, error)
+        Task { @MainActor in
+            do {
+                let apiToken = try await webServices.validateLoginQR(qrToken: qrToken)
+                callback?(apiToken, nil)
+            } catch {
+                callback?(nil, error)
+            }
         }
     }
     
@@ -289,25 +307,35 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(nil, ClientError.unauthorized)
             return
         }
-        let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
-                                      password: password)
-        webServices.update(credentials: credentials, resetPassword: reset, email: request.email) { (error) in
-            guard error == nil else {
+
+        let credentials = Credentials(
+            username: Client.providers.accountProvider.publicUsername ?? "",
+            password: password
+        )
+
+        Task { @MainActor in
+            do {
+                try await webServices.update(
+                    credentials: credentials,
+                    resetPassword: reset,
+                    email: request.email
+                )
+
+                guard let newAccountInfo = user.info?.with(email: request.email) else {
+                    Macros.postNotification(.PIAAccountDidUpdate)
+                    callback?(nil, nil)
+                    return
+                }
+
+                self.accessedDatabase.plain.accountInfo = newAccountInfo
+                Macros.postNotification(.PIAAccountDidUpdate, [
+                    .accountInfo: newAccountInfo
+                ])
+
+                callback?(newAccountInfo, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-
-            guard let newAccountInfo = user.info?.with(email: request.email) else {
-                Macros.postNotification(.PIAAccountDidUpdate)
-                callback?(nil, nil)
-                return
-            }
-
-            self.accessedDatabase.plain.accountInfo = newAccountInfo
-            Macros.postNotification(.PIAAccountDidUpdate, [
-                .accountInfo: newAccountInfo
-            ])
-            callback?(newAccountInfo, nil)
         }
     }
     
@@ -330,25 +358,28 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(ClientError.unauthorized)
             return
         }
-        webServices.deleteAccount { (result, error) in
-            guard let result = result, result != false else {
+
+        Task { @MainActor in
+            do {
+                try await webServices.deleteAccount()
+                callback?(nil)
+            } catch {
                 callback?(error)
-                return
             }
-            callback?(nil)
         }
     }
     
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
-        webServices.featureFlags { features, error in
-            if let error {
-                log.error("Error loading feature flags: \(error)")
+        Task { @MainActor in
+            guard let features = try? await webServices.featureFlags() else {
+                callback?(nil)
+                return
             }
-            if let features {
-                Client.configuration.featureFlags.configure(with: features)
-            }
+
+            Client.configuration.featureFlags.removeAll()
+            Client.configuration.featureFlags.append(contentsOf: features)
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
-            callback?(error)
+            callback?(nil)
         }
     }
     
@@ -417,7 +448,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     }
     
     public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        self.webServices.loginLink(email: email, callback)
+        Task { @MainActor in
+            do {
+                try await webServices.loginLink(email: email)
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
@@ -438,15 +476,6 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
             guard let credentials = credentials else {
-                // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
-                // This handles returning users (e.g. "Duplicate purchase" from API).
-                if let clientError = error as? ClientError, clientError == .badReceipt {
-                    self.attemptLoginWithReceiptFallback(
-                        transaction: request.transaction,
-                        callback: callback
-                    )
-                    return
-                }
                 callback?(nil, error)
                 return
             }
@@ -554,46 +583,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-
-    private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) {
-        guard let receipt = accessedStore.paymentReceipt else {
-            callback?(nil, ClientError.badReceipt)
-            return
-        }
-
-        webServices.token(receipt: receipt) { error in
-            guard error == nil else {
-                callback?(nil, ClientError.badReceipt)
-                return
-            }
-
-            if let transaction = transaction {
-                self.accessedStore.finishTransaction(transaction, success: true)
-            }
-
-            self.accessedDatabase.plain.lastSignupEmail = nil
-            self.updateUsernamePassword()
-
-            self.webServices.info() { accountInfo, error in
-                guard let accountInfo = accountInfo else {
-                    callback?(nil, ClientError.badReceipt)
-                    return
-                }
-
-                self.accessedDatabase.plain.accountInfo = accountInfo
-                self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
-
-                let credentials = Credentials(
-                    username: self.vpnTokenUsername ?? "",
-                    password: self.vpnTokenPassword ?? ""
-                )
-                let user = UserAccount(credentials: credentials, info: accountInfo)
-                Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-                callback?(user, nil)
-            }
-        }
-    }
-
+    
     /**
      Remove all data from the plain and secure internal database
      */
