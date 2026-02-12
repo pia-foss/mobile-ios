@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import PIAAccount
+@testable import PIAAccountSwift
 
 @Suite struct ActorIsolationTests {
 
