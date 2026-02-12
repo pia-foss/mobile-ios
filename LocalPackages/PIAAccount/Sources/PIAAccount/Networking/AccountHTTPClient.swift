@@ -6,7 +6,7 @@ actor AccountHTTPClient {
     private let certificatePinner: CertificatePinner?
     private let userAgent: String
 
-    private static let requestTimeout: TimeInterval = 3.0  // 3 seconds (matches KMP)
+    private static let requestTimeout: TimeInterval = 30
 
     /// Creates an HTTP client
     /// - Parameters:

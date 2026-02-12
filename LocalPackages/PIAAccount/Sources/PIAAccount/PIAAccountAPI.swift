@@ -102,6 +102,18 @@ public protocol PIAAccountAPI {
     ///           always proceeds regardless of server response
     func logout() async throws
 
+    /// Validates a QR login token and returns an API token.
+    ///
+    /// This method validates a QR code token obtained from a desktop login flow.
+    /// Unlike other login methods, this does NOT persist tokens or fetch VPN tokens -
+    /// it only validates the QR token and returns the API token to the caller.
+    ///
+    /// - Parameter qrToken: The QR token to validate
+    /// - Returns: The API token string if validation succeeds
+    /// - Throws: `PIAAccountError` with code 401 if token is invalid,
+    ///           or network/server errors
+    func validateLoginQR(qrToken: String) async throws -> String
+
     // MARK: - Account Management
 
     /// Retrieves current account details
@@ -114,9 +126,10 @@ public protocol PIAAccountAPI {
     func deleteAccount() async throws
 
     /// Retrieves client connection status
+    /// - Parameter requestTimeoutMillis: Optional timeout in milliseconds (default: 30000ms)
     /// - Returns: Client status information
     /// - Throws: PIAAccountError if the request fails
-    func clientStatus() async throws -> ClientStatusInformation
+    func clientStatus(requestTimeoutMillis: Int) async throws -> ClientStatusInformation
 
     // MARK: - Email Management
 
@@ -124,8 +137,10 @@ public protocol PIAAccountAPI {
     /// - Parameters:
     ///   - email: New email address
     ///   - resetPassword: Whether to trigger password reset
+    /// - Returns: New password if resetPassword is true, nil otherwise
     /// - Throws: PIAAccountError if the request fails
-    func setEmail(email: String, resetPassword: Bool) async throws
+    @discardableResult
+    func setEmail(email: String, resetPassword: Bool) async throws -> String?
 
     /// Sets or updates the account email (iOS-specific with credentials)
     /// - Parameters:
@@ -133,16 +148,50 @@ public protocol PIAAccountAPI {
     ///   - password: Account password
     ///   - email: New email address
     ///   - resetPassword: Whether to trigger password reset
+    /// - Returns: New password if resetPassword is true, nil otherwise
     /// - Throws: PIAAccountError if the request fails
-    func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws
+    @discardableResult
+    func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws -> String?
 
     // MARK: - Dedicated IP
 
-    /// Retrieves dedicated IP information
-    /// - Parameter ipTokens: Array of IP tokens to query
+    /// Retrieves the list of countries and regions where Dedicated IPs are available.
+    ///
+    /// This is the first step in the DIP acquisition flow. Call this to discover
+    /// which countries and specific regions support Dedicated IP allocation.
+    ///
+    /// - Returns: Response containing available countries and their regions
+    /// - Throws: `PIAAccountError` with code 401 if not authenticated,
+    ///           or network/server errors
+    func supportedDedicatedIPCountries() async throws -> DipCountriesResponse
+
+    /// Acquires a Dedicated IP token for a specific country and region.
+    ///
+    /// This is the second step in the DIP acquisition flow. After discovering
+    /// available regions with `supportedDedicatedIPCountries()`, call this method
+    /// to acquire a DIP token for your chosen location.
+    ///
+    /// The returned token should be stored and later redeemed using `redeemDedicatedIPs(dipTokens:)`
+    /// to activate and retrieve the actual IP address.
+    ///
+    /// - Parameters:
+    ///   - countryCode: ISO country code (e.g., "US", "GB") from `supportedDedicatedIPCountries()`
+    ///   - regionName: Region name (e.g., "New York", "London") from `supportedDedicatedIPCountries()`
+    /// - Returns: Token details including the DIP token string
+    /// - Throws: `PIAAccountError` with code 401 if not authenticated,
+    ///           400 if the region is unavailable or invalid, or network/server errors
+    func getDedicatedIP(countryCode: String, regionName: String) async throws -> DedicatedIPTokenDetails
+
+    /// Redeems Dedicated IP tokens to activate them.
+    ///
+    /// This is the third step in the DIP acquisition flow. After acquiring tokens
+    /// with `getDedicatedIP(countryCode:regionName:)`, call this method to redeem
+    /// and activate the Dedicated IPs.
+    ///
+    /// - Parameter dipTokens: Array of DIP tokens to redeem
     /// - Returns: Array of dedicated IP information
     /// - Throws: PIAAccountError if the request fails
-    func dedicatedIPs(ipTokens: [String]) async throws -> [DedicatedIPInformation]
+    func redeemDedicatedIPs(dipTokens: [String]) async throws -> [DedicatedIPInformation]
 
     /// Renews a dedicated IP
     /// - Parameter ipToken: The IP token to renew
@@ -174,7 +223,7 @@ public protocol PIAAccountAPI {
     /// - Parameter information: Sign up information
     /// - Returns: New account credentials
     /// - Throws: PIAAccountError if sign up fails
-    func signUp(information: IOSSignupInformation) async throws -> SignUpInformation
+    func signUp(information: IOSSignupInformation) async throws -> VpnSignUpInformation
 
     // MARK: - Social
 

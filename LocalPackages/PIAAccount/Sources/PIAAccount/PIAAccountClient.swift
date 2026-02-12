@@ -110,12 +110,13 @@ public final class PIAAccountClient: PIAAccountAPI {
     }
 
     public func migrateApiToken(apiToken: String) async throws {
-        let formParams = ["token": apiToken]
+        // Use "Token" authorization header (matching Kotlin Account.kt line 1726)
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         let apiTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
-            path: .login,
+            path: .refreshAPIToken,
             method: .post,
-            bodyType: .formEncoded(formParams)
+            headers: headers
         )
 
         try await tokenManager.storeAPIToken(apiTokenResponse)
@@ -145,6 +146,24 @@ public final class PIAAccountClient: PIAAccountAPI {
 
         // Update cached tokens
         await updateCachedTokens()
+    }
+
+    public func validateLoginQR(qrToken: String) async throws -> String {
+        // Validate QR token by sending it as Bearer token (matching Kotlin IOSAccount.kt line 161)
+        let headers = [
+            "Authorization": "Bearer \(qrToken)",
+            "accept": "application/json"
+        ]
+
+        // Request validates the QR token and returns an API token
+        let apiTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
+            path: .validateQR,
+            method: .post,
+            headers: headers
+        )
+
+        // Return the API token (do NOT persist tokens - matching Kotlin behavior lines 172-173)
+        return apiTokenResponse.apiToken
     }
 
     // MARK: - Account Management
@@ -185,7 +204,7 @@ public final class PIAAccountClient: PIAAccountAPI {
         await updateCachedTokens()
     }
 
-    public func clientStatus() async throws -> ClientStatusInformation {
+    public func clientStatus(requestTimeoutMillis: Int = 30000) async throws -> ClientStatusInformation {
         return try await endpointManager.executeWithFailover(
             path: .clientStatus,
             method: .get
@@ -194,7 +213,7 @@ public final class PIAAccountClient: PIAAccountAPI {
 
     // MARK: - Email Management
 
-    public func setEmail(email: String, resetPassword: Bool) async throws {
+    public func setEmail(email: String, resetPassword: Bool) async throws -> String? {
         try await refreshTokensIfNeeded()
 
         guard let apiToken = try await tokenManager.getAPITokenString() else {
@@ -207,15 +226,27 @@ public final class PIAAccountClient: PIAAccountAPI {
             "reset_password": resetPassword ? "true" : "false"
         ]
 
-        try await endpointManager.executeVoidWithFailover(
+        let response: SetEmailInformation = try await endpointManager.executeWithFailover(
             path: .setEmail,
             method: .post,
             bodyType: .formEncoded(formParams),
             headers: headers
         )
+
+        return response.password
     }
 
-    public func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws {
+    public func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws -> String? {
+        // Create Basic Auth header with username:password (matching Kotlin IOSAccount.kt line 244-247)
+        let credentials = "\(username):\(password)"
+        guard let credentialsData = credentials.data(using: .utf8) else {
+            throw PIAAccountError.encodingFailed(
+                NSError(domain: "PIAAccount", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode credentials"])
+            )
+        }
+        let base64Credentials = credentialsData.base64EncodedString()
+        let headers = ["Authorization": "Basic \(base64Credentials)"]
+
         let formParams = [
             "username": username,
             "password": password,
@@ -223,24 +254,63 @@ public final class PIAAccountClient: PIAAccountAPI {
             "reset_password": resetPassword ? "true" : "false"
         ]
 
-        try await endpointManager.executeVoidWithFailover(
+        let response: SetEmailInformation = try await endpointManager.executeWithFailover(
             path: .setEmail,
             method: .post,
-            bodyType: .formEncoded(formParams)
+            bodyType: .formEncoded(formParams),
+            headers: headers
         )
+
+        return response.password
     }
 
     // MARK: - Dedicated IP
 
-    public func dedicatedIPs(ipTokens: [String]) async throws -> [DedicatedIPInformation] {
+    public func supportedDedicatedIPCountries() async throws -> DipCountriesResponse {
         try await refreshTokensIfNeeded()
 
         guard let apiToken = try await tokenManager.getAPITokenString() else {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
-        let bodyData = try JSONEncoder.piaCodable.encode(["tokens": ipTokens])
+        let headers = ["Authorization": "Token \(apiToken)"]
+
+        return try await endpointManager.executeWithFailover(
+            path: .supportedDedicatedIPCountries,
+            method: .get,
+            headers: headers
+        )
+    }
+
+    public func getDedicatedIP(countryCode: String, regionName: String) async throws -> DedicatedIPTokenDetails {
+        try await refreshTokensIfNeeded()
+
+        guard let apiToken = try await tokenManager.getAPITokenString() else {
+            throw PIAAccountError.unauthorized()
+        }
+
+        let headers = ["Authorization": "Token \(apiToken)"]
+        let requestBody = GetDedicatedIPTokenRequest(countryCode: countryCode, region: regionName)
+        let bodyData = try JSONEncoder.piaCodable.encode(requestBody)
+
+        return try await endpointManager.executeWithFailover(
+            path: .getDedicatedIP,
+            method: .post,
+            bodyType: .json(bodyData),
+            headers: headers
+        )
+    }
+
+    public func redeemDedicatedIPs(dipTokens: [String]) async throws -> [DedicatedIPInformation] {
+        try await refreshTokensIfNeeded()
+
+        guard let apiToken = try await tokenManager.getAPITokenString() else {
+            throw PIAAccountError.unauthorized()
+        }
+
+        // Use Token authorization header (matching Kotlin Account.kt line 836)
+        let headers = ["Authorization": "Token \(apiToken)"]
+        let bodyData = try JSONEncoder.piaCodable.encode(["tokens": dipTokens])
 
         let response: DedicatedIPInformationResponse = try await endpointManager.executeWithFailover(
             path: .dedicatedIP,
@@ -323,7 +393,7 @@ public final class PIAAccountClient: PIAAccountAPI {
 
     // MARK: - Sign Up
 
-    public func signUp(information: IOSSignupInformation) async throws -> SignUpInformation {
+    public func signUp(information: IOSSignupInformation) async throws -> VpnSignUpInformation {
         let bodyData = try JSONEncoder.piaCodable.encode(information)
 
         return try await endpointManager.executeWithFailover(
@@ -390,18 +460,32 @@ public final class PIAAccountClient: PIAAccountAPI {
     // MARK: - Feature Management
 
     public func message(appVersion: String) async throws -> MessageInformation {
-        // Build URL with query parameter
-        // Note: This requires a custom implementation since we need to add query params
-        let formParams = ["version": appVersion]
+        try await refreshTokensIfNeeded()
+
+        guard let apiToken = try await tokenManager.getAPITokenString() else {
+            throw PIAAccountError.unauthorized()
+        }
+
+        // Use Token authorization header (matching Kotlin Account.kt line 1506)
+        let headers = ["Authorization": "Token \(apiToken)"]
+
+        // Use query parameters (matching Kotlin Account.kt line 1507-1508)
+        let queryParams = [
+            "client": "ios",
+            "version": appVersion
+        ]
 
         return try await endpointManager.executeWithFailover(
             path: .messages,
-            method: .post,
-            bodyType: .formEncoded(formParams)
+            method: .get,
+            headers: headers,
+            queryParameters: queryParams
         )
     }
 
     public func featureFlags() async throws -> FeatureFlagsInformation {
+        try await refreshTokensIfNeeded()
+
         return try await endpointManager.executeWithFailover(
             path: .iosFeatureFlag,
             method: .get
