@@ -79,13 +79,6 @@ final class MockWebServices: WebServices {
         callback?(true, nil)
     }
     
-    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        callback?([], nil)
-    }
-    
-    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
     
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
