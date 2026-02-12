@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "تصفح مجهول الهوية وإخفاء عنوان IP.";
 "purchase.trials.devices" = "يدعم 10 أجهزة في المرة الواحدة";
 "purchase.trials.devices.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
-"purchase.trials.region" = "اتصل بأي منطقة بسهولة";
+"purchase.trials.region" = "خوادم آمنة في أكثر من 90 دولة";
 "purchase.trials.servers" = "أكثر من 3300 خادم في 32 دولة";
 "purchase.trials.start" = "ابدأ الاشتراك";
 "purchase.trials.all.plans" = "مشاهدة جميع الخطط المتاحة";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "يدعم 10 أجهزة في المرة الواحدة";
 "walkthrough.page.1.description" = "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
-"walkthrough.page.2.title" = "اتصل بأي منطقة بسهولة";
+"walkthrough.page.2.title" = "خوادم آمنة في أكثر من 90 دولة";
 "walkthrough.page.2.description" = "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
 "walkthrough.page.3.title" = "احمي نفسك من الإعلانات";
 "walkthrough.page.3.description" = "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";

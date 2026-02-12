@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "ウェブの匿名利用でIPを非表示にします。";
 "purchase.trials.devices" = "一度に10台の端末をサポート";
 "purchase.trials.devices.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-"purchase.trials.region" = "すべての地域に簡単に接続";
+"purchase.trials.region" = "90ヶ国以上に安全なサーバー";
 "purchase.trials.servers" = "32か国の3300以上のサーバー";
 "purchase.trials.start" = "サブスクリプションを開始";
 "purchase.trials.all.plans" = "利用可能なプランをすべて見る";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "一度に10台の端末をサポート";
 "walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
-"walkthrough.page.2.title" = "あらゆる地域に簡単に接続";
+"walkthrough.page.2.title" = "90ヶ国以上に安全なサーバー";
 "walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
 "walkthrough.page.3.title" = "広告から自分を守りましょう";
 "walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";

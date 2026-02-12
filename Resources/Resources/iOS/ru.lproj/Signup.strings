@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
 "purchase.trials.devices" = "Поддержка сразу 10 устройств";
 "purchase.trials.devices.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
-"purchase.trials.region" = "Простое подключение к любому региону";
+"purchase.trials.region" = "Защищенные серверы в более чем 90 странах";
 "purchase.trials.servers" = "Более 3300 серверов в 32 странах";
 "purchase.trials.start" = "Запустить подписку.";
 "purchase.trials.all.plans" = "Смотреть все доступные планы";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "Поддержка 10 устройств одновременно";
 "walkthrough.page.1.description" = "Защищайте себя на нескольких устройствах одновременно (до 10).";
-"walkthrough.page.2.title" = "Простое подключение к любому региону";
+"walkthrough.page.2.title" = "Защищенные серверы в более чем 90 странах";
 "walkthrough.page.2.description" = "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
 "walkthrough.page.3.title" = "Защита от рекламы";
 "walkthrough.page.3.description" = "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";

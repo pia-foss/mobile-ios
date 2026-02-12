@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "เรียกดูโดยไม่ระบุชื่อและซ่อน ip ของคุณ";
 "purchase.trials.devices" = "รับรองอุปกรณ์ 10 เครื่องในเวลาเดียวกัน";
 "purchase.trials.devices.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
-"purchase.trials.region" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"purchase.trials.region" = "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
 "purchase.trials.servers" = "กว่า 3300 เซิร์ฟเวอร์ใน 32 ประเทศ";
 "purchase.trials.start" = "เริ่มการเป็นสมาชิก";
 "purchase.trials.all.plans" = "ดูแผนที่มีทั้งหมด";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "รับรองอุปกรณ์ 10 เครื่องในคราวเดียว";
 "walkthrough.page.1.description" = "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
-"walkthrough.page.2.title" = "เชื่อมต่อไปยังภูมิภาคใดก็ตามได้อย่างง่ายดาย";
+"walkthrough.page.2.title" = "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
 "walkthrough.page.2.description" = "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
 "walkthrough.page.3.title" = "ปกป้องตัวคุณจากโฆษณา";
 "walkthrough.page.3.description" = "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";

@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "Browse anonymously and hide your ip.";
 "purchase.trials.devices" = "Support 10 devices at once";
 "purchase.trials.devices.description" = "Protect yourself on up to 10 devices at a time.";
-"purchase.trials.region" = "Connect to any region easily";
+"purchase.trials.region" = "Secure servers in 90+ countries";
 "purchase.trials.servers" = "More than 3300 servers in 32 countries";
 "purchase.trials.start" = "Start subscription";
 "purchase.trials.all.plans" = "See all available plans";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "Support 10 devices at once";
 "walkthrough.page.1.description" = "Protect yourself on up to 10 devices at a time.";
-"walkthrough.page.2.title" = "Connect to any region easily";
+"walkthrough.page.2.title" = "Secure servers in 90+ countries";
 "walkthrough.page.2.description" = "With servers around the globe, you are always under protection.";
 "walkthrough.page.3.title" = "Protect yourself from ads";
 "walkthrough.page.3.description" = "Enabling our Content Blocker prevents ads from showing in Safari.";
