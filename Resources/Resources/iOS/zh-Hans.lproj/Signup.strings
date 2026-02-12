@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "匿名浏览并隐藏您的 IP。";
 "purchase.trials.devices" = "一次支持 10 台设备";
 "purchase.trials.devices.description" = "一次在多达 10 台设备上保护自己。";
-"purchase.trials.region" = "轻松连接到任何地区";
+"purchase.trials.region" = "90多个国家的安全服务器";
 "purchase.trials.servers" = "在 32 个国家h地区拥有超过 3300 台服务器";
 "purchase.trials.start" = "开始订阅";
 "purchase.trials.all.plans" = "查看所有可用套餐";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "一次支持 10 台设备";
 "walkthrough.page.1.description" = "一次在多达 10 台设备上保护自己。";
-"walkthrough.page.2.title" = "轻松连接到任何地区";
+"walkthrough.page.2.title" = "90多个国家的安全服务器";
 "walkthrough.page.2.description" = "服务器遍布世界各地，您始终受到保护。";
 "walkthrough.page.3.title" = "让自己远离广告";
 "walkthrough.page.3.description" = "启用内容拦截器以防止 Safari 中出现广告。";

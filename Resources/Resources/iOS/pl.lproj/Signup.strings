@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "Przeglądaj sieć anonimowa i ukryj swoje IP";
 "purchase.trials.devices" = "Obsługa 10 urządzeń jednocześnie";
 "purchase.trials.devices.description" = "Ochrona na maksymalnie 10 urządzeniach jednocześnie.";
-"purchase.trials.region" = "Łatwo połączysz się z dowolnym regionem";
+"purchase.trials.region" = "Bezpieczne serwery w ponad 90 krajach";
 "purchase.trials.servers" = "Ponad 3300 serwerów w 32 krajach";
 "purchase.trials.start" = "Rozpocznij subskrypcję";
 "purchase.trials.all.plans" = "Sprawdź wszystkie dostępne plany";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "Obsługa 10 urządzeń jednocześnie";
 "walkthrough.page.1.description" = "Ochrona na maksymalnie 10 urządzeniach jednocześnie.";
-"walkthrough.page.2.title" = "Łatwo połączysz się z dowolnym regionem";
+"walkthrough.page.2.title" = "Bezpieczne serwery w ponad 90 krajach";
 "walkthrough.page.2.description" = "Dzięki serwerom na całym świecie zawsze jesteś pod ochroną.";
 "walkthrough.page.3.title" = "Unikaj reklam";
 "walkthrough.page.3.description" = "Włączenie naszej Blokady zawartości chroni Cię przed wyświetlaniem reklam w Safari.";

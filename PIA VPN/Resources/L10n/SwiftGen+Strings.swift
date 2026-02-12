@@ -1869,8 +1869,8 @@ internal enum L10n {
         internal static let devices = L10n.tr("Signup", "purchase.trials.devices", fallback: "Support 10 devices at once")
         /// Start your 7-day free trial
         internal static let intro = L10n.tr("Signup", "purchase.trials.intro", fallback: "Start your 7-day free trial")
-        /// Connect to any region easily
-        internal static let region = L10n.tr("Signup", "purchase.trials.region", fallback: "Connect to any region easily")
+        /// Secure servers in 90+ countries
+        internal static let region = L10n.tr("Signup", "purchase.trials.region", fallback: "Secure servers in 90+ countries")
         /// More than 3300 servers in 32 countries
         internal static let servers = L10n.tr("Signup", "purchase.trials.servers", fallback: "More than 3300 servers in 32 countries")
         /// Start subscription
@@ -2012,8 +2012,8 @@ internal enum L10n {
         internal enum _2 {
           /// With servers around the globe, you are always under protection.
           internal static let description = L10n.tr("Signup", "walkthrough.page.2.description", fallback: "With servers around the globe, you are always under protection.")
-          /// Connect to any region easily
-          internal static let title = L10n.tr("Signup", "walkthrough.page.2.title", fallback: "Connect to any region easily")
+          /// Secure servers in 90+ countries
+          internal static let title = L10n.tr("Signup", "walkthrough.page.2.title", fallback: "Secure servers in 90+ countries")
         }
         internal enum _3 {
           /// Enabling our Content Blocker prevents ads from showing in Safari.

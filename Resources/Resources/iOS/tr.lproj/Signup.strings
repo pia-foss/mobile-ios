@@ -66,7 +66,7 @@
 "purchase.trials.price.after" = "Ardından %@";
 
 /* (No Comment) */
-"purchase.trials.region" = "Tüm bölgelere kolayca bağlanın";
+"purchase.trials.region" = "90'dan fazla ülkede güvenli sunucular";
 
 /* (No Comment) */
 "purchase.trials.servers" = "32 ülkede en az 3.300 sunucu";
@@ -156,7 +156,7 @@
 "walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
 
 /* (No Comment) */
-"walkthrough.page.2.title" = "Herhangi bir bölgeye kolayca bağlanın";
+"walkthrough.page.2.title" = "90'dan fazla ülkede güvenli sunucular";
 
 /* (No Comment) */
 "walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";

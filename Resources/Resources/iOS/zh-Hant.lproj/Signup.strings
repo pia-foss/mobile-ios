@@ -44,7 +44,7 @@
 "purchase.trials.anonymous" = "匿名瀏覽並隱藏 IP。";
 "purchase.trials.devices" = "同時支援 10 台裝置";
 "purchase.trials.devices.description" = "同時為最多 10 台裝置提供保護。";
-"purchase.trials.region" = "可輕鬆連線到任何地區";
+"purchase.trials.region" = "90多個國家的安全伺服器";
 "purchase.trials.servers" = "32 個國家超過 3300 台伺服器";
 "purchase.trials.start" = "開始訂閱";
 "purchase.trials.all.plans" = "檢視所有可用方案";
@@ -59,7 +59,7 @@
 
 "walkthrough.page.1.title" = "同時支援 10 台裝置";
 "walkthrough.page.1.description" = "同時為多達 10 台裝置提供保護";
-"walkthrough.page.2.title" = "輕易就能連線到任何地區";
+"walkthrough.page.2.title" = "90多個國家的安全伺服器";
 "walkthrough.page.2.description" = "我們的伺服器遍佈全球，能為您提供全面保護。";
 "walkthrough.page.3.title" = "讓自己免受廣告滋擾";
 "walkthrough.page.3.description" = "只要啟用我們的內容阻擋器，使用 Safari 瀏覽器時就再也不會看到廣告。";
