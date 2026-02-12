@@ -19,9 +19,14 @@ struct URLBuilder {
     /// - Parameters:
     ///   - ipOrRootDomain: The IP address or root domain
     ///   - path: The API path to append
+    ///   - queryParameters: Optional query parameters to append
     /// - Returns: A valid URL
     /// - Throws: PIAAccountError if the domain/IP is invalid
-    static func buildURL(ipOrRootDomain: String, path: APIPath) throws -> URL {
+    static func buildURL(
+        ipOrRootDomain: String,
+        path: APIPath,
+        queryParameters: [String: String]? = nil
+    ) throws -> URL {
         // Validate that it's either a domain or IP
         guard isDomain(ipOrRootDomain) || isIPv4(ipOrRootDomain) else {
             throw PIAAccountError.configurationError(
@@ -45,9 +50,22 @@ struct URLBuilder {
             )
         }
 
-        guard let url = URL(string: urlString) else {
+        guard var urlComponents = URLComponents(string: urlString) else {
             throw PIAAccountError.configurationError(
                 "Failed to construct URL from: \(urlString)"
+            )
+        }
+
+        // Add query parameters if provided
+        if let queryParameters = queryParameters, !queryParameters.isEmpty {
+            urlComponents.queryItems = queryParameters.map { key, value in
+                URLQueryItem(name: key, value: value)
+            }
+        }
+
+        guard let url = urlComponents.url else {
+            throw PIAAccountError.configurationError(
+                "Failed to construct URL with query parameters from: \(urlString)"
             )
         }
 
