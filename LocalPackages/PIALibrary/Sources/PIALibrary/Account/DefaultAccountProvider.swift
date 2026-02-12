@@ -168,38 +168,6 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
         }
     }
 
-    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
-
-        // If it was already migrated
-        if (self.accessedDatabase.plain.tokenMigrated) {
-            callback?(nil)
-            return
-        }
-
-        // If there is something persisted. Try to migrate it.
-        if let token = oldToken {
-            webServices.migrateToken(token: token) { [weak self] (error) in
-                guard error == nil else {
-                    callback?(error)
-                    return
-                }
-                
-                guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
-                    callback?(ClientError.unauthorized)
-                    return
-                }
-        
-                self?.accessedDatabase.secure.setPassword(password, for: username)
-                self?.accessedDatabase.plain.tokenMigrated = true
-                callback?(nil)
-            }
-        } else {
-
-            // Nothing persisted. Continue.
-            callback?(nil)
-        }
-    }
-    
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             callback?(currentUser, nil)
