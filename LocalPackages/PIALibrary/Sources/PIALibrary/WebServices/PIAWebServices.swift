@@ -21,13 +21,15 @@
 //
 
 import Foundation
+import Gloss
 import regions
 import account
 import PIACSI
+import PIAAccountSwift
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
-final class PIAWebServices: WebServices, ConfigurationAccess {
+class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
@@ -35,6 +37,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     let regionsAPI: RegionsAPI!
     let accountAPI: IOSAccountAPI!
     let csiClient = CSIClient(userAgent: PIAWebServices.userAgent)
+    let nativeAccountAPI: PIAAccountAPI
 
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
@@ -65,6 +68,19 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
+
+        let nativeEndpointProvider: PIAAccountEndpointProvider = switch Client.environment {
+        case .staging:
+            PIANativeAccountStagingEndpointProvider()
+        case .production:
+            PIANativeAccountEndpointProvider()
+        }
+
+        self.nativeAccountAPI = try! PIAAccountBuilder()
+            .setEndpointProvider(nativeEndpointProvider)
+            .setCertificate(rsa4096Certificate)
+            .setUserAgent(PIAWebServices.userAgent)
+            .build()
     }
     
     public static let userAgent: String = {
@@ -104,185 +120,170 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
      The token to use for protocol authentication.
      */
     var vpnToken: String? {
-        return self.accountAPI.vpnToken()
+        return self.nativeAccountAPI.vpnToken
     }
 
     /***
      The token to use for api authentication.
      */
     var apiToken: String? {
-        return self.accountAPI.apiToken()
+        return self.nativeAccountAPI.apiToken
     }
 
     /***
      Generates a new auth expiring token based on a previous non-expiry one.
      */
-    func migrateToken(token: String, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.migrateApiToken(apiToken: token) { (errors) in
-            if !errors.isEmpty {
-                callback?(ClientError.unauthorized)
-                return
-            }
-
-            callback?(nil)
+    func migrateToken(token: String) async throws {
+        do {
+            try await nativeAccountAPI.migrateApiToken(apiToken: token)
+        } catch {
+            throw ClientError.unauthorized
         }
     }
 
     /***
      Generates a new auth token for the specific user
      */
-    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { errors in
-            Self.handleLoginResponse(errors: errors, mapper: \.loginError, callback: callback)
+    func token(credentials: Credentials) async throws {
+        do {
+            try await nativeAccountAPI.loginWithCredentials(
+                username: credentials.username,
+                password: credentials.password
+            )
+        } catch {
+            throw mapNativeLoginError(error)
         }
     }
     
     /***
      Validates the QR Token and generates a new auth token for the specific user
      */
-    func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?) {
-        self.accountAPI.validateLoginQR(qrToken: qrToken) { apiToken, errors in
-            if !errors.isEmpty {
-                callback?(nil, ClientError.unauthorized)
-                return
-            }
-
-            callback?(apiToken, nil)
+    func validateLoginQR(qrToken: String) async throws -> String {
+        do {
+            return try await nativeAccountAPI.validateLoginQR(qrToken: qrToken)
+        } catch {
+            throw ClientError.unauthorized
         }
     }
 
     /***
      Generates a new auth token for the specific user
      */
-    func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { errors in
-            Self.handleLoginResponse(errors: errors, mapper: \.loginFromReceiptError, callback: callback)
+    func token(receipt: Data) async throws {
+        do {
+            try await nativeAccountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString())
+            try handleLoginResponse(error: nil, mapError: mapNativeLoginFromReceiptError)
+        } catch {
+            try handleLoginResponse(error: error, mapError: mapNativeLoginFromReceiptError)
         }
     }
 
-    private static func handleLoginResponse(
-        errors: [AccountRequestError],
-        mapper path: KeyPath<AccountRequestError, ClientError>,
-        callback: ((ClientError?) -> Void)?,
-    ) {
-        if let error = errors.last {
-            callback?(error[keyPath: path])
-        } else {
-            callback?(nil)
+    private func handleLoginResponse(
+        error: Error?,
+        mapError: ((Error) -> (ClientError))
+    ) throws {
+        if let error {
+            throw mapError(error)
         }
     }
 
-    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        self.accountAPI.accountDetails() { response, errors in
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.accountDetailsError)
-                return
-            }
+    // MARK: - Native (PIAAccountSwift) error mapping
 
-            if let response = response {
-                let account = AccountInfo(accountInformation: response)
-                callback?(account, nil)
-            } else {
-                callback?(nil, ClientError.malformedResponseData)
-            }
+    private func mapNativeLoginError(_ error: Error) -> ClientError {
+        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+        switch code {
+        case 402:
+            return .expired
+        case 429:
+            let retryAfter = (error as? PIAAccountError)?.retryAfterSeconds ?? 0
+            return .throttled(retryAfter: UInt(retryAfter))
+        case 600:
+            return .internetUnreachable
+        default:
+            return .unauthorized
+        }
+    }
+
+    private func mapNativeLoginFromReceiptError(_ error: Error) -> ClientError {
+        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+        switch code {
+        // Errors that indicate the receipt is either invalid or expired
+        case 400, 401:
+            return .badReceipt
+        default:
+            return mapNativeLoginError(error)
+        }
+    }
+
+    private func mapNativeLoginLinkError(_ error: Error) -> ClientError {
+        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+        switch code {
+        case 401, 402, 429:
+            return mapNativeLoginError(error)
+        default:
+            return .invalidParameter
+        }
+    }
+
+    func info() async throws -> AccountInfo {
+        do {
+            let account = try await nativeAccountAPI.accountDetails()
+            return AccountInfo(accountInformation: account)
+        } catch {
+            throw mapNativeLoginError(error)
         }
     }
     
-    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
-        if reset {
-            //Reset password, we use the token within accounts
-            self.accountAPI.setEmail(email: email, resetPassword: reset) { (newPassword, errors) in
-                if !errors.isEmpty {
-                    callback?(errors.last?.loginError)
-                    return
-                }
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {
+        do {
+            if reset {
+                let newPassword = try await nativeAccountAPI.setEmail(email: email, resetPassword: reset)
                 if let newPassword = newPassword {
                     Client.configuration.tempAccountPassword = newPassword
                 }
-                callback?(nil)
-            }
-        } else {
-            //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
-            self.accountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset) { (newPassword, errors) in
-                if !errors.isEmpty {
-                    callback?(ClientError.unsupported)
-                    return
-                }
-                callback?(nil)
-            }
-        }
-    }
-    
-    func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
-        self.accountAPI.loginLink(email: email) { errors in
-            Self.handleLoginResponse(errors: errors, mapper: \.loginLinkError, callback: callback)
-        }
-    }
-    
-    func logout(_ callback: LibraryCallback<Bool>?) {
-        self.accountAPI.logout() { (errors) in
-            if !errors.isEmpty {
-                if errors.last?.code == 401 {
-                    callback?(true, nil)
-                    return
-                }
-                callback?(false, ClientError.invalidParameter)
-                return
-            }
-            callback?(true, nil)
-        }
-    }
-    
-    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
-        self.accountAPI.deleteAccount(callback: { errors in
-            if !errors.isEmpty {
-                callback?(false, ClientError.invalidParameter)
             } else {
-                callback?(true, nil)
+                try await nativeAccountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset)
             }
-        })
-    }
-    
-    
-    fileprivate func mapDIPError(_ error: AccountRequestError?) -> ClientError {
-        guard let error = error else {
-            return ClientError.invalidParameter
-        }
-        switch error.code {
-        case 401:
-            return ClientError.unauthorized
-        case 429:
-            return ClientError.throttled(retryAfter: UInt(error.retryAfterSeconds))
-        default:
-            return ClientError.invalidParameter
+        } catch {
+            throw mapNativeLoginError(error)
         }
     }
     
+    func loginLink(email: String) async throws {
+        do {
+            try await nativeAccountAPI.loginLink(email: email)
+        } catch {
+            throw mapNativeLoginLinkError(error)
+        }
+    }
 
+    func logout() async throws {
+        try await nativeAccountAPI.logout()
+    }
     
-    func featureFlags(_ callback: LibraryCallback<[String]>?) {
-        self.accountAPI.featureFlags { (info, errors) in
-            if let flags = info?.flags {
-                callback?(flags, nil)
-            } else {
-                callback?([], ClientError.malformedResponseData)
-            }
-        }
+    func deleteAccount() async throws {
+        try await nativeAccountAPI.deleteAccount()
+    }
+
+    func featureFlags() async throws -> [String] {
+        let flags = try? await nativeAccountAPI.featureFlags().flags
+        return flags ?? []
     }
     
     #if os(iOS) || os(tvOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         var marketingJSON = ""
-        if let marketing = request.marketing {
-            marketingJSON = stringify(json: marketing)
+        if let json = request.marketing as? JSON {
+            marketingJSON = stringify(json: json)
         }
-
+        
         var debugJSON = ""
-        if let debug = request.debug {
-            debugJSON = stringify(json: debug)
+        if let json = request.debug as? JSON {
+            debugJSON = stringify(json: json)
         }
-
+        
+        request.toJSON()
+        
         let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
         self.accountAPI.signUp(information: info) { (response, errors) in
             if !errors.isEmpty {
@@ -319,13 +320,13 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
         var marketingJSON = ""
-        if let marketing = request.marketing {
-            marketingJSON = stringify(json: marketing)
+        if let json = request.marketing as? JSON {
+            marketingJSON = stringify(json: json)
         }
-
+        
         var debugJSON = ""
-        if let debug = request.debug {
-            debugJSON = stringify(json: debug)
+        if let json = request.debug as? JSON {
+            debugJSON = stringify(json: json)
         }
         
         let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
@@ -348,7 +349,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 return
             }
             
-            guard let bundle = ServersBundle.parse(from: jsonData) else {
+            guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
@@ -367,7 +368,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
                 
-                guard let bundle = ServersBundle.parse(from: RegionsUtils().stringify(regionsResponse: response)) else {
+                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }
@@ -410,46 +411,4 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-}
-
-// MARK: - AccountRequestError -> ClientError
-
-extension AccountRequestError {
-    public static let internalErrorCode: Int32 = 600
-
-    fileprivate var loginError: ClientError {
-        switch code {
-        case 401:
-            return .unauthorized
-        case 402:
-            return .expired
-        case 429:
-            return .throttled(retryAfter: UInt(retryAfterSeconds))
-        case AccountRequestError.internalErrorCode:
-            return .libraryError(message: message)
-        default:
-            return .unknown(code: Int(code), message: message)
-        }
-    }
-
-    fileprivate var loginFromReceiptError: ClientError {
-        switch code {
-        // Errors that indicate the receipt is either invalid or expired
-        case 400, 401:
-            return .badReceipt
-        default:
-            return loginError
-        }
-    }
-
-    fileprivate var loginLinkError: ClientError {
-        switch loginError {
-        case .unknown:
-            return .invalidParameter
-        case let error:
-            return error
-        }
-    }
-
-    fileprivate var accountDetailsError: ClientError { loginLinkError }
 }
