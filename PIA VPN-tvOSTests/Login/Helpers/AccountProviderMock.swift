@@ -23,7 +23,6 @@ class AccountProviderMock: AccountProvider {
     var publicUsername: String?
     var currentPasswordReference: Data?
     var lastSignupRequest: PIALibrary.SignupRequest?
-    func migrateOldTokenIfNeeded(_ callback: PIALibrary.SuccessLibraryCallback?) {}
     
     private let userResult: PIALibrary.UserAccount?
     private let errorResult: Error?

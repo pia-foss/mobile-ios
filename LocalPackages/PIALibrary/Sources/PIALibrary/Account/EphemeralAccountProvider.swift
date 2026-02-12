@@ -51,10 +51,6 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         return nil
     }
 
-    func migrateOldTokenIfNeeded(_ callback: ((Error?) -> Void)?) {
-        log.error("Not implemented")
-    }
-
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         log.error("Not implemented")
     }
