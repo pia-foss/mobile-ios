@@ -42,3 +42,16 @@ public struct IOSPaymentInformation: Codable, Sendable {
         self.debug = debug
     }
 }
+
+// MARK: - Dedicated IP Token Request
+
+/// Request body for acquiring a Dedicated IP token
+struct GetDedicatedIPTokenRequest: Codable, Sendable {
+    let countryCode: String
+    let region: String
+
+    enum CodingKeys: String, CodingKey {
+        case countryCode = "country_code"
+        case region
+    }
+}

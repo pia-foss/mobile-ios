@@ -139,17 +139,7 @@ public struct ClientStatusInformation: Codable, Sendable {
 
 /// Feature flags for the application
 public struct FeatureFlagsInformation: Codable, Sendable {
-    public let flags: [String: Bool]
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.flags = try container.decode([String: Bool].self)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(flags)
-    }
+    public let flags: [String]
 }
 
 // MARK: - Message Information
@@ -191,6 +181,89 @@ public struct RedeemInformation: Codable, Sendable {
 
 /// New account credentials after sign up
 public struct SignUpInformation: Codable, Sendable {
+    public let username: String
+    public let password: String
+}
+
+// MARK: - Set Email Information
+
+/// Response from setEmail endpoint when password reset is requested
+public struct SetEmailInformation: Codable, Sendable {
+    public let password: String?
+
+    enum CodingKeys: String, CodingKey {
+        case password
+    }
+}
+
+// MARK: - Dedicated IP Discovery
+
+/// Response containing available Dedicated IP countries and regions
+public struct DipCountriesResponse: Codable, Sendable {
+    /// List of countries where Dedicated IPs are available
+    public let dedicatedIpCountriesAvailable: [DedicatedIpCountry]
+}
+
+/// Information about a country offering Dedicated IPs
+public struct DedicatedIpCountry: Codable, Sendable {
+    /// ISO country code (e.g., "US", "GB")
+    public let countryCode: String
+
+    /// Display name of the country
+    public let name: String
+
+    /// List of newly available region names
+    public let newRegions: [String]
+
+    /// List of all available region names
+    public let regions: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case countryCode = "country_code"
+        case name
+        case newRegions = "new_regions"
+        case regions
+    }
+}
+
+/// Response containing details of a newly acquired Dedicated IP token
+public struct DedicatedIPTokenDetails: Codable, Sendable {
+    /// Metadata about the DIP location and configuration
+    public let metaData: [MetaData]
+
+    /// Partner identifier for the DIP
+    public let partnersId: Int
+
+    /// ISO 8601 timestamp when the token was redeemed
+    public let redeemedAt: String
+
+    /// The DIP token string (used later in redemption)
+    public let token: String
+
+    enum CodingKeys: String, CodingKey {
+        case metaData = "meta_data"
+        case partnersId = "partners_id"
+        case redeemedAt = "redeemed_at"
+        case token
+    }
+
+    /// Metadata about the DIP configuration
+    public struct MetaData: Codable, Sendable {
+        /// Common name (server identifier)
+        public let commonName: String
+
+        /// Region identifier
+        public let regionId: String
+
+        enum CodingKeys: String, CodingKey {
+            case commonName = "common_name"
+            case regionId = "region_id"
+        }
+    }
+}
+
+/// New account credentials after VPN sign up
+public struct VpnSignUpInformation: Codable, Sendable {
     public let username: String
     public let password: String
 }

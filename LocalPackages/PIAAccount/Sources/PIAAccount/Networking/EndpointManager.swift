@@ -29,6 +29,7 @@ actor EndpointManager {
     ///   - method: HTTP method
     ///   - bodyType: Request body type (JSON or form-encoded)
     ///   - headers: Additional HTTP headers
+    ///   - queryParameters: Optional query parameters to append to URL
     ///   - decoder: JSON decoder for response
     /// - Returns: The decoded response
     /// - Throws: PIAMultipleErrors if all endpoints fail, or PIAAccountError if only one endpoint
@@ -37,6 +38,7 @@ actor EndpointManager {
         method: RequestBuilder.HTTPMethod,
         bodyType: RequestBuilder.BodyType? = nil,
         headers: [String: String] = [:],
+        queryParameters: [String: String]? = nil,
         decoder: JSONDecoder = .piaCodable
     ) async throws -> T {
         let endpoints = endpointProvider.accountEndpoints()
@@ -50,7 +52,8 @@ actor EndpointManager {
                 // Build URL for this endpoint
                 let url = try URLBuilder.buildURL(
                     ipOrRootDomain: endpoint.ipOrRootDomain,
-                    path: path
+                    path: path,
+                    queryParameters: queryParameters
                 )
 
                 // Build request
@@ -92,7 +95,8 @@ actor EndpointManager {
         path: APIPath,
         method: RequestBuilder.HTTPMethod,
         bodyType: RequestBuilder.BodyType? = nil,
-        headers: [String: String] = [:]
+        headers: [String: String] = [:],
+        queryParameters: [String: String]? = nil
     ) async throws {
         let endpoints = endpointProvider.accountEndpoints()
         var errors: [PIAAccountError] = []
@@ -105,7 +109,8 @@ actor EndpointManager {
                 // Build URL for this endpoint
                 let url = try URLBuilder.buildURL(
                     ipOrRootDomain: endpoint.ipOrRootDomain,
-                    path: path
+                    path: path,
+                    queryParameters: queryParameters
                 )
 
                 // Build request
