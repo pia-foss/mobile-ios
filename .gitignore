@@ -17,3 +17,4 @@ Preview.html
 Gemfile.lock
 .build
 .swiftpm
+LocalPackages/**/Package.resolved
