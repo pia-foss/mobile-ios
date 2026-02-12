@@ -325,15 +325,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         })
     }
     
-    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
-        self.accountAPI.renewDedicatedIP(dipToken: dipToken) { (errors) in
-            if !errors.isEmpty {
-                callback?(errors.last?.code == 401 ? ClientError.unauthorized : ClientError.dipTokenRenewalError)
-                return
-            }
-            callback?(nil)
-        }
-    }
     
     fileprivate func mapDIPError(_ error: AccountRequestError?) -> ClientError {
         guard let error = error else {
@@ -349,63 +340,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
     
-    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        self.accountAPI.redeemDedicatedIPs(dipTokens: tokens) { (dedicatedIps, errors) in
-            if !errors.isEmpty {
-                callback?([], self.mapDIPError(errors.last))
-                return
-            }
 
-            var dipRegions = [Server]()
-            for dipServer in dedicatedIps {
-
-                let status = DedicatedIPStatus(fromAPIStatus: dipServer.status)
-
-                switch status {
-                case .active:
-
-                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.regionIdentifier == dipServer.id}) else {
-                        callback?([], ClientError.malformedResponseData)
-                        return
-                    }
-
-                    guard let ip = dipServer.ip, let cn = dipServer.cn, let expirationTime = dipServer.dip_expire else {
-                        callback?([], ClientError.malformedResponseData)
-                        return
-                    }
-
-                    let dipToken = dipServer.dipToken
-
-                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
-                    let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
-
-                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
-                        //Expiring in 5 days or less
-                        Macros.postNotification(.PIADIPRegionExpiring, [.token : dipToken])
-                    }
-
-                    Macros.postNotification(.PIADIPCheckIP, [.token : dipToken, .ip : ip])
-
-                    let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
-
-                    let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
-
-                    dipRegions.append(dipRegion)
-
-                    Client.database.secure.setDIPToken(dipServer.dipToken)
-                    Client.database.secure.setPassword(ip, forDipToken: dipUsername)
-
-                default:
-
-                    let dipRegion = Server(serial: "", name: "", country: "", hostname: "", openVPNAddressesForTCP: [], openVPNAddressesForUDP: [], wireGuardAddressesForUDP: [], iKEv2AddressesForUDP: [], pingAddress: nil, geo: false, meta: nil, dipExpire: nil, dipToken: nil, dipStatus: status, dipUsername: nil, regionIdentifier: "")
-                    dipRegions.append(dipRegion)
-
-                }
-
-            }
-            callback?(dipRegions, nil)
-        }
-    }
     
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
         self.accountAPI.featureFlags { (info, errors) in
