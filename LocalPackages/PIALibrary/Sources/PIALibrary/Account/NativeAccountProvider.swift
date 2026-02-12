@@ -207,9 +207,15 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             return
         }
 
-        self.webServices.migrateToken(token: linkToken) { (error) in
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.migrateToken(token: linkToken)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 

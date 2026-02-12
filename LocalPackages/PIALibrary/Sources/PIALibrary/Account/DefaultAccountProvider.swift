@@ -173,10 +173,16 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(currentUser, nil)
             return
         }
-        
-        webServices.token(receipt: receiptRequest.receipt) { (error) in
+
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.token(receipt: receiptRequest.receipt)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -186,9 +192,15 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             return
         }
 
-        self.webServices.migrateToken(token: linkToken) { (error) in
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.migrateToken(token: linkToken)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -209,8 +221,13 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
-        webServices.validateLoginQR(qrToken: qrToken) { apiToken, error in
-            callback?(apiToken, error)
+        Task { @MainActor in
+            do {
+                let apiToken = try await webServices.validateLoginQR(qrToken: qrToken)
+                callback?(apiToken, nil)
+            } catch {
+                callback?(nil, error)
+            }
         }
     }
     
@@ -290,25 +307,35 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(nil, ClientError.unauthorized)
             return
         }
-        let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
-                                      password: password)
-        webServices.update(credentials: credentials, resetPassword: reset, email: request.email) { (error) in
-            guard error == nil else {
+
+        let credentials = Credentials(
+            username: Client.providers.accountProvider.publicUsername ?? "",
+            password: password
+        )
+
+        Task { @MainActor in
+            do {
+                try await webServices.update(
+                    credentials: credentials,
+                    resetPassword: reset,
+                    email: request.email
+                )
+
+                guard let newAccountInfo = user.info?.with(email: request.email) else {
+                    Macros.postNotification(.PIAAccountDidUpdate)
+                    callback?(nil, nil)
+                    return
+                }
+
+                self.accessedDatabase.plain.accountInfo = newAccountInfo
+                Macros.postNotification(.PIAAccountDidUpdate, [
+                    .accountInfo: newAccountInfo
+                ])
+
+                callback?(newAccountInfo, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-
-            guard let newAccountInfo = user.info?.with(email: request.email) else {
-                Macros.postNotification(.PIAAccountDidUpdate)
-                callback?(nil, nil)
-                return
-            }
-
-            self.accessedDatabase.plain.accountInfo = newAccountInfo
-            Macros.postNotification(.PIAAccountDidUpdate, [
-                .accountInfo: newAccountInfo
-            ])
-            callback?(newAccountInfo, nil)
         }
     }
     
@@ -331,21 +358,26 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(ClientError.unauthorized)
             return
         }
-        webServices.deleteAccount { (result, error) in
-            guard let result = result, result != false else {
+
+        Task { @MainActor in
+            do {
+                try await webServices.deleteAccount()
+                callback?(nil)
+            } catch {
                 callback?(error)
-                return
             }
-            callback?(nil)
         }
     }
     
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
-        webServices.featureFlags { (features, nil) in
-            Client.configuration.featureFlags.removeAll()
-            if let features = features, !features.isEmpty {
-                Client.configuration.featureFlags.append(contentsOf: features)
+        Task { @MainActor in
+            guard let features = try? await webServices.featureFlags() else {
+                callback?(nil)
+                return
             }
+
+            Client.configuration.featureFlags.removeAll()
+            Client.configuration.featureFlags.append(contentsOf: features)
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
             callback?(nil)
         }
@@ -416,7 +448,14 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        self.webServices.loginLink(email: email, callback)
+        Task { @MainActor in
+            do {
+                try await webServices.loginLink(email: email)
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
