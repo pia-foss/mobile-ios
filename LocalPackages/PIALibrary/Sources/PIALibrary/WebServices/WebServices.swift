@@ -32,19 +32,19 @@ protocol WebServices: AnyObject {
     
     // MARK: Account
 
-    func migrateToken(token: String, _ callback: SuccessLibraryCallback?)
+    func migrateToken(token: String) async throws
 
     func token(credentials: Credentials) async throws
 
-    func token(receipt: Data, _ callback: SuccessLibraryCallback?)
+    func token(receipt: Data) async throws
     
-    func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?)
+    func validateLoginQR(qrToken: String) async throws -> String
 
     func info() async throws -> AccountInfo
 
-    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws
 
-    func loginLink(email: String, _ callback: SuccessLibraryCallback?)
+    func loginLink(email: String) async throws
 
     /// The token to use for protocol authentication.
     var vpnToken: String? { get }
@@ -61,8 +61,8 @@ protocol WebServices: AnyObject {
          Deletes the user accout on PIA servers.
          - Parameter callback: Returns an `Bool` if the API returns a success.
      */
-    func deleteAccount(_ callback: LibraryCallback<Bool>?)
-    
+    func deleteAccount() async throws
+
     #if os(iOS) || os(tvOS)
     func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 
@@ -81,5 +81,5 @@ protocol WebServices: AnyObject {
 
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?)
 
-    func featureFlags(_ callback: LibraryCallback<[String]>?)
+    func featureFlags() async throws -> [String]
 }

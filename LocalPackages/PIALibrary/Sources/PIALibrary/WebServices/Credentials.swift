@@ -41,7 +41,7 @@ public struct Credentials {
 
 public extension Credentials {
     
-    public func toJSONDictionary() -> [String: Any] {
+    func toJSONDictionary() -> [String: Any] {
         return ["username":username, "password": password]
     }
 

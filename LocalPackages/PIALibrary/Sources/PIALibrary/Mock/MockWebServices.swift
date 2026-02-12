@@ -43,15 +43,11 @@ class MockWebServices: WebServices {
 
     var apiToken: String?
 
-    func migrateToken(token: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
+    func migrateToken(token: String) async throws {}
 
     func token(credentials: Credentials) async throws {}
 
-    func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
-        callback?(nil)
-    }
+    func token(receipt: Data) async throws {}
 
     func info() async throws -> AccountInfo {
         let result = accountInfo?()
@@ -66,21 +62,14 @@ class MockWebServices: WebServices {
         }
     }
     
-    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-    
-    func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-    
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {}
+
+    func loginLink(email: String) async throws {}
+
     func logout() async throws {}
-    
-    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
-        callback?(true, nil)
-    }
-    
-    
+
+    func deleteAccount() async throws {}
+
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
@@ -134,11 +123,11 @@ class MockWebServices: WebServices {
 
     }
     
-    func featureFlags(_ callback: LibraryCallback<[String]>?) {
-        callback?(["mock-test"], nil)
+    func featureFlags() async throws -> [String] {
+        ["mock-test"]
     }
     
-    func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?) {
-        callback?(nil, nil)
+    func validateLoginQR(qrToken: String) async throws -> String {
+        ""
     }
 }
