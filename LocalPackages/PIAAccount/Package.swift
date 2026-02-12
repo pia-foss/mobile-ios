@@ -7,6 +7,7 @@ let package = Package(
     name: "PIAAccountSwift",
     platforms: [
         .iOS(.v15),
+        .tvOS(.v17),
         .macOS(.v12)
     ],
     products: [
