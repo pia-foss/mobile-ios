@@ -1,0 +1,144 @@
+{
+  "fill" : {
+    "solid" : "display-p3:1.00000,1.00000,1.00000,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : {
+            "linear-gradient" : [
+              "display-p3:0.36089,0.57559,0.28770,1.00000",
+              "display-p3:0.42480,0.68219,0.35016,1.00000"
+            ],
+            "orientation" : {
+              "start" : {
+                "x" : 0.5,
+                "y" : 0
+              },
+              "stop" : {
+                "x" : 0.5,
+                "y" : 0.7
+              }
+            }
+          },
+          "glass" : false,
+          "image-name" : "PIA_4.png",
+          "name" : "PIA_4",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              0.26500000000010004,
+              99.90234375
+            ]
+          }
+        },
+        {
+          "fill" : {
+            "linear-gradient" : [
+              "display-p3:0.42965,0.68610,0.35390,1.00000",
+              "display-p3:0.37661,0.61211,0.30162,1.00000"
+            ],
+            "orientation" : {
+              "start" : {
+                "x" : 0.5,
+                "y" : 0
+              },
+              "stop" : {
+                "x" : 0.5,
+                "y" : 0.7
+              }
+            }
+          },
+          "glass" : false,
+          "image-name" : "PIA_2 2.png",
+          "name" : "PIA_2 2",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              0,
+              112.09375
+            ]
+          }
+        },
+        {
+          "fill" : {
+            "linear-gradient" : [
+              "display-p3:0.44215,0.70542,0.36482,1.00000",
+              "display-p3:0.34083,0.56182,0.26584,1.00000"
+            ],
+            "orientation" : {
+              "start" : {
+                "x" : 0.5,
+                "y" : 0
+              },
+              "stop" : {
+                "x" : 0.5,
+                "y" : 0.7
+              }
+            }
+          },
+          "glass" : false,
+          "image-name" : "PIA_1 2.png",
+          "name" : "PIA_1 2",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              0,
+              -219.40625
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "image-name" : "PIA_3 2.png",
+          "name" : "PIA_3 2",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -1.7349999999999,
+              -174.90625
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "image-name" : "shadow.png",
+          "name" : "shadow",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              -0.25,
+              336.84375
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
