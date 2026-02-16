@@ -21,7 +21,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
     var fixture: Fixture!
     var sut: DecoratorProductsProvider!
     
-    func instantiateSut(productsProviderResult: ([Plan : InAppProduct]?, Error?), subscriptionInformationProviderResult: (PIA_VPN_tvOS.AppStoreInformation?, Error?)) {
+    func instantiateSut(productsProviderResult: ([Plan : InAppProduct]?, Error?), subscriptionInformationProviderResult: (AppStoreInformation?, Error?)) {
         fixture.productsProviderMock = ProductsProviderMock(result: productsProviderResult)
         fixture.subscriptionInformationProviderMock = SubscriptionInformationProviderMock(result: subscriptionInformationProviderResult)
         sut = DecoratorProductsProvider(subscriptionInformationProvider: fixture.subscriptionInformationProviderMock,
@@ -66,7 +66,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
     
     func test_listPlanProducts_adds_default_products_to_productConfiguration_when_there_is_no_valid_appstoreInformation() {
         // GIVEN subscriptionInformationProvider completes with an error
-        let appStoreInformation: PIA_VPN_tvOS.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let error: Error? = NSError(domain: "any error", code: 0)
         
         instantiateSut(productsProviderResult: (InAppProductMock.makeStubs(), error),
@@ -92,7 +92,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
         // GIVEN subscriptionInformationProvider completes with an error
         // AND decoratee completes with valid products
         let productsStub = InAppProductMock.makeStubs()
-        let appStoreInformation: PIA_VPN_tvOS.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let error: Error? = nil
         let subscriptionInformationProviderResult = (appStoreInformation, NSError(domain: "any error", code: 0))
         
@@ -131,7 +131,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
         // GIVEN subscriptionInformationProvider completes with an error
         // AND decoratee completes with an error
         let productsStub = InAppProductMock.makeStubs()
-        let appStoreInformation: PIA_VPN_tvOS.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let error = NSError(domain: "any error", code: 0)
         let subscriptionInformationProviderResult = (appStoreInformation, error)
         

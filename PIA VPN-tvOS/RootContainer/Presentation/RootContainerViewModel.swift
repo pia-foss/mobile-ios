@@ -16,7 +16,7 @@ class RootContainerViewModel: ObservableObject {
     @Published var state: State = .splash
     @Published internal var isBootstrapped: Bool = false
     
-    private let accountProvider: AccountProviderType
+    private let accountProvider: AccountProvider
     private let notificationCenter: NotificationCenterType
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
     private let connectionStatsPermissonType: ConnectionStatsPermissonType
@@ -27,7 +27,7 @@ class RootContainerViewModel: ObservableObject {
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
     
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType) {
+    init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType) {
         
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter

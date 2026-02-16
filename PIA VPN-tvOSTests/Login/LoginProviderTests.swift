@@ -13,17 +13,15 @@ import PIALibrary
 final class LoginProviderTests: XCTestCase {
     class Fixture {
         var accountProviderMock: AccountProviderMock!
-        var userAccountMapper = UserAccountMapper()
     }
-    
+
     var fixture: Fixture!
     var sut: LoginProvider!
-    var capturedResult: Result<PIA_VPN_tvOS.UserAccount, Error>?
-    
-    func instantiateSut(accountProviderResult: (PIALibrary.UserAccount?, Error?)) {
+    var capturedResult: Result<UserAccount, Error>?
+
+    func instantiateSut(accountProviderResult: (UserAccount?, Error?)) {
         fixture.accountProviderMock = AccountProviderMock(userResult: accountProviderResult.0, errorResult: accountProviderResult.1)
-        sut = LoginProvider(accountProvider: fixture.accountProviderMock,
-                                userAccountMapper: fixture.userAccountMapper)
+        sut = LoginProvider(accountProvider: fixture.accountProviderMock)
     }
     
     override func setUp() {
@@ -38,12 +36,12 @@ final class LoginProviderTests: XCTestCase {
 
     func test_login_succeeds_when_accountprovider_completes_with_user_and_no_error() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -74,7 +72,7 @@ final class LoginProviderTests: XCTestCase {
         let userPlan = try XCTUnwrap(user.info?.plan)
         
         switch (capturedPlan, userPlan) {
-            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, PIALibrary.Plan.trial), (Plan.other, Plan.other):
+            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, Plan.trial), (Plan.other, Plan.other):
                 XCTAssertTrue(true)
             default:
                 XCTFail("Expected the same plan, got \(capturedPlan) and \(userPlan)")
@@ -84,11 +82,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_login_fails_when_accountprovider_completes_with_user_and_error() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -112,11 +110,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_login_fails_when_accountprovider_completes_with_expired_user() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeExpiredStub()
+        let user = UserAccount.makeExpiredStub()
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -140,11 +138,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_login_fails_when_accountprovider_completes_with_no_user_and_error() throws {
         // GIVEN
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -168,12 +166,12 @@ final class LoginProviderTests: XCTestCase {
     
     func test_login_fails_when_accountprovider_completes_with_no_user_and_no_error() throws {
         // GIVEN
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -197,12 +195,12 @@ final class LoginProviderTests: XCTestCase {
     
     func test_loginWithReceipt_succeeds_when_accountprovider_completes_with_user_and_no_error() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -233,7 +231,7 @@ final class LoginProviderTests: XCTestCase {
         let userPlan = try XCTUnwrap(user.info?.plan)
         
         switch (capturedPlan, userPlan) {
-            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, PIALibrary.Plan.trial), (Plan.other, Plan.other):
+            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, Plan.trial), (Plan.other, Plan.other):
                 XCTAssertTrue(true)
             default:
                 XCTFail("Expected the same plan, got \(capturedPlan) and \(userPlan)")
@@ -243,11 +241,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_loginWithReceipt_fails_when_accountprovider_completes_with_user_and_error() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -271,11 +269,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_loginWithReceipt_fails_when_accountprovider_completes_with_expired_user() throws {
         // GIVEN
-        let user = PIALibrary.UserAccount.makeExpiredStub()
+        let user = UserAccount.makeExpiredStub()
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -299,11 +297,11 @@ final class LoginProviderTests: XCTestCase {
     
     func test_loginWithReceipt_fails_when_accountprovider_completes_with_no_user_and_error() throws {
         // GIVEN
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         
         instantiateSut(accountProviderResult: (user, ClientError.expired))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -327,12 +325,12 @@ final class LoginProviderTests: XCTestCase {
     
     func test_loginWithReceipt_fails_when_accountprovider_completes_with_no_user_and_no_error() throws {
         // GIVEN
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
         
-        let credentials = PIA_VPN_tvOS.Credentials(username: "", password: "")
+        let credentials = Credentials(username: "", password: "")
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN

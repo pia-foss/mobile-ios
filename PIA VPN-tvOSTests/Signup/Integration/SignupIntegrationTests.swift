@@ -23,8 +23,8 @@ final class SignupIntegrationTests: XCTestCase {
     var capturedLoadingState: [Bool]!
     var capturedTransaction: InAppTransaction?
     
-    func instantiateSut(resultGetAvailableProductsUseCase: ([Plan : InAppProduct]?, Error?), resultPurchaseProductUseCase: (InAppTransaction?, Error?), appStoreInformationResult: PIALibrary.AppStoreInformation?, onSuccessAction: @escaping (InAppTransaction?) -> Void) {
-        let accountProviderMock = AccountProviderMock(userResult: PIALibrary.UserAccount.makeStub(),
+    func instantiateSut(resultGetAvailableProductsUseCase: ([Plan : InAppProduct]?, Error?), resultPurchaseProductUseCase: (InAppTransaction?, Error?), appStoreInformationResult: AppStoreInformation?, onSuccessAction: @escaping (InAppTransaction?) -> Void) {
+        let accountProviderMock = AccountProviderMock(userResult: UserAccount.makeStub(),
                                                       errorResult: nil,
                                                       appStoreInformationResult: appStoreInformationResult)
         
@@ -73,7 +73,7 @@ final class SignupIntegrationTests: XCTestCase {
         // GIVEN
         let productsProviderError: Error? = nil
         let purchaseProductsAccountProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for getproducts to finish")
         
         instantiateSut(resultGetAvailableProductsUseCase: (InAppProductMock.makeStubs(), productsProviderError),
@@ -120,7 +120,7 @@ final class SignupIntegrationTests: XCTestCase {
         // GIVEN
         let inAppProductStub: [Plan : any InAppProduct]? = nil
         let purchaseProductsAccountProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for getproducts to finish")
         
         instantiateSut(resultGetAvailableProductsUseCase: (inAppProductStub, ClientError.unexpectedReply),
@@ -154,7 +154,7 @@ final class SignupIntegrationTests: XCTestCase {
         let inAppProductStub: [Plan : any InAppProduct]? = nil
         let productsProviderError: Error? = nil
         let purchaseProductsAccountProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for getproducts to finish")
         
         instantiateSut(resultGetAvailableProductsUseCase: (inAppProductStub, productsProviderError),
@@ -188,7 +188,7 @@ final class SignupIntegrationTests: XCTestCase {
         let productsProviderError: Error? = nil
         let inAppTransactionStub = InAppTransactionMock.makeStub()
         let purchaseProductsAccountProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for subscribe to update")
         
         instantiateSut(resultGetAvailableProductsUseCase: (InAppProductMock.makeStubs(), productsProviderError),
@@ -221,7 +221,7 @@ final class SignupIntegrationTests: XCTestCase {
     func test_subscribe_shows_a_payment_cancelled_error_when_the_payment_was_cancelled() throws {
         // GIVEN payment is cancelled
         let productsProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for subscribe to update")
         
         instantiateSut(resultGetAvailableProductsUseCase: (InAppProductMock.makeStubs(), productsProviderError),
@@ -256,7 +256,7 @@ final class SignupIntegrationTests: XCTestCase {
     func test_subscribe_shows_a_generic_error_when_the_product_is_not_available() throws {
         // GIVEN the product is not available
         let productsProviderError: Error? = nil
-        let appStoreInformation: PIALibrary.AppStoreInformation? = nil
+        let appStoreInformation: AppStoreInformation? = nil
         let expectation = expectation(description: "Waiting for subscribe to update")
         
         instantiateSut(resultGetAvailableProductsUseCase: (InAppProductMock.makeStubs(), productsProviderError),
