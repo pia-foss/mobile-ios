@@ -23,7 +23,6 @@
 import Foundation
 import Gloss
 import regions
-import account
 import PIACSI
 import PIAAccountSwift
 
@@ -35,7 +34,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     private static let store = "apple_app_store"
 
     let regionsAPI: RegionsAPI!
-    let accountAPI: IOSAccountAPI!
     let csiClient = CSIClient(userAgent: PIAWebServices.userAgent)
     let nativeAccountAPI: PIAAccountAPI
 
@@ -52,22 +50,6 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             .setVpnRegionsRequestPath(vpnRegionsRequestPath: "/vpninfo/servers/v6")
             .setShadowsocksRegionsRequestPath(shadowsocksRegionsRequestPath: "/shadow_socks")
             .build()
-
-        if Client.environment == .staging {
-            self.accountAPI = AccountBuilder<IOSAccountAPI>()
-                .setPlatform(platform: .ios)
-                .setEndpointProvider(endpointsProvider: PIAAccountStagingClientStateProvider())
-                .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
-                .setCertificate(certificate: rsa4096Certificate)
-                .build() as? IOSAccountAPI
-        } else {
-            self.accountAPI = AccountBuilder<IOSAccountAPI>()
-                .setPlatform(platform: .ios)
-                .setEndpointProvider(endpointsProvider: PIAAccountClientStateProvider())
-                .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
-                .setCertificate(certificate: rsa4096Certificate)
-                .build() as? IOSAccountAPI
-        }
 
         let nativeEndpointProvider: PIAAccountEndpointProvider = switch Client.environment {
         case .staging:
@@ -187,7 +169,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
 
-    // MARK: - Native (PIAAccountSwift) error mapping
+    // MARK: - Error mapping
 
     private func mapNativeLoginError(_ error: Error) -> ClientError {
         let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
@@ -271,32 +253,32 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     #if os(iOS) || os(tvOS)
-    func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
+    func signup(with request: Signup) async throws -> Credentials {
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
             marketingJSON = stringify(json: json)
         }
-        
+
         var debugJSON = ""
         if let json = request.debug as? JSON {
             debugJSON = stringify(json: json)
         }
-        
+
         request.toJSON()
-        
-        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
-        self.accountAPI.signUp(information: info) { (response, errors) in
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
-                return
-            }
 
-            guard let response = response else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
-            }
+        let info = IOSSignupInformation(
+            receipt: request.receipt.base64EncodedString(),
+            email: request.email,
+            marketing: marketingJSON.isEmpty ? nil : marketingJSON,
+            debug: debugJSON.isEmpty ? nil : debugJSON
+        )
 
-            callback?(Credentials(username: response.username, password: response.password), nil)
+        do {
+            let response = try await nativeAccountAPI.signUp(information: info)
+            return Credentials(username: response.username, password: response.password)
+        } catch {
+            let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+            throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter
         }
     }
 
@@ -318,25 +300,31 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         return ""
     }
 
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
+    func processPayment(credentials: Credentials, request: Payment) async throws {
         var marketingJSON = ""
         if let json = request.marketing as? JSON {
             marketingJSON = stringify(json: json)
         }
-        
+
         var debugJSON = ""
         if let json = request.debug as? JSON {
             debugJSON = stringify(json: json)
         }
-        
-        let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
 
-        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (errors) in
-            if !errors.isEmpty {
-                callback?(ClientError.badReceipt)
-                return
-            }
-            callback?(nil)
+        let info = IOSPaymentInformation(
+            receipt: request.receipt.base64EncodedString(),
+            marketing: marketingJSON,
+            debug: debugJSON
+        )
+
+        do {
+            try await nativeAccountAPI.payment(
+                username: credentials.username,
+                password: credentials.password,
+                information: info
+            )
+        } catch {
+            throw ClientError.badReceipt
         }
     }
     #endif
@@ -379,35 +367,32 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     // MARK: Store
-    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
-        self.accountAPI.subscriptions(receipt: nil) { (response, errors) in
-            if !errors.isEmpty {
-                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
-                return
+    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
+        do {
+            let response = try await nativeAccountAPI.subscriptions(receipt: receipt)
+
+            let products = response.availableProducts.map { product in
+                Product(
+                    identifier: product.id,
+                    plan: Plan(rawValue: product.plan) ?? .other,
+                    price: product.price,
+                    legacy: product.legacy
+                )
             }
 
-            if let response = response {
-                
-                var products = [Product]()
-                for prod in response.availableProducts {
-                    let product = Product(identifier: prod.id,
-                                          plan: Plan(rawValue: prod.plan) ?? .other,
-                                          price: prod.price,
-                                          legacy: prod.legacy)
-                    products.append(product)
-                }
+            let info = AppStoreInformation(
+                products: products,
+                eligibleForTrial: response.eligibleForTrial
+            )
+            Client.configuration.eligibleForTrial = info.eligibleForTrial
 
-                let eligibleForTrial = response.eligibleForTrial
-                
-                let info = AppStoreInformation(products: products,
-                                    eligibleForTrial: eligibleForTrial)
-                Client.configuration.eligibleForTrial = info.eligibleForTrial
-                
-                callback?(info, nil)
-
+            return info
+        } catch {
+            let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+            if code == 400 {
+                throw ClientError.badReceipt
             } else {
-                callback?(nil, ClientError.malformedResponseData)
-                return
+                throw ClientError.invalidParameter
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  AccountInfo+PIAAccountSwift.swift
+//  AccountInfo+PIAAccount.swift
 //  PIALibrary
 //
 //  Copyright © 2020 Private Internet Access, Inc.
@@ -19,10 +19,10 @@
 //
 
 import Foundation
-import PIAAccountSwift
+import PIAAccount
 
 public extension AccountInfo {
-    init(accountInformation: PIAAccountSwift.AccountInformation) {
+    init(accountInformation: AccountInformation) {
         self.username = accountInformation.username
         self.email = accountInformation.email
         self.plan = Plan(rawValue: accountInformation.plan) ?? .other

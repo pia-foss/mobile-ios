@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import PIAAccountSwift
+@testable import PIAAccount
 
 @Suite struct RequestBuilderTests {
     let testURL = URL(string: "https://example.com/api/test")!
