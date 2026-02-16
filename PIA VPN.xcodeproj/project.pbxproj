@@ -27,6 +27,7 @@
 		3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */; };
 		3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */; };
 		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
+		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -389,6 +390,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
@@ -404,7 +406,6 @@
 				2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */,
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
-				ACD8FEEF2F72CF95007A0BB0 /* PIADashboard in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
 				3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
