@@ -300,9 +300,9 @@ extension Client {
             if Client.environment == .staging {
                 return true
             } else {
-                guard !TestFlightDetector.shared.isTestFlight else {
-                    return false
-                }
+//                guard !TestFlightDetector.shared.isTestFlight else {
+//                    return false
+//                }
 
                 return true
             }
