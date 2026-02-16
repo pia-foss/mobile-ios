@@ -342,7 +342,7 @@ public final class PIAAccountClient: PIAAccountAPI {
 
     // MARK: - Subscriptions (iOS)
 
-    public func subscriptions(receipt: String) async throws -> IOSSubscriptionInformation {
+    public func subscriptions(receipt: Data?) async throws -> IOSSubscriptionInformation {
         try await refreshTokensIfNeeded()
 
         guard let apiToken = try await tokenManager.getAPITokenString() else {
@@ -350,10 +350,12 @@ public final class PIAAccountClient: PIAAccountAPI {
         }
 
         let headers = ["Authorization": "Bearer \(apiToken)"]
-        let bodyData = try JSONEncoder.piaCodable.encode([
-            "store": "apple_app_store",
-            "receipt": receipt
-        ])
+
+        var bodyDict: [String: String] = ["store": "apple_app_store"]
+        if let receipt = receipt {
+            bodyDict["receipt"] = receipt.base64EncodedString()
+        }
+        let bodyData = try JSONEncoder.piaCodable.encode(bodyDict)
 
         return try await endpointManager.executeWithFailover(
             path: .iosSubscriptions,

@@ -18,7 +18,6 @@ let package = Package(
     dependencies: [
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-kpi.git", exact: "1.2.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-csi.git", exact: "1.3.3"),
-      .package(url: "git@github.com:pia-foss/mobile-ios-releases-account.git", exact: "1.4.5"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-regions.git", exact: "1.6.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", branch: "master"),
       .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", revision: "bf7b4258d9c9279c6051bba0b7a73ca7d5f9547e"),
@@ -38,8 +37,7 @@ let package = Package(
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
                 .product(name: "PIACSI", package: "mobile-ios-releases-csi"),
                 .product(name: "PIARegions", package: "mobile-ios-releases-regions"),
-                .product(name: "PIAAccount", package: "mobile-ios-releases-account"),
-                .product(name: "PIAAccountSwift", package: "PIAAccount"),
+                .product(name: "PIAAccount", package: "PIAAccount"),
                 .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKitOpenVPN", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),

@@ -52,6 +52,40 @@ public struct AccountInformation: Codable, Sendable {
     /// PIA account username
     public let username: String
 
+    public init(
+        active: Bool,
+        canInvite: Bool,
+        canceled: Bool,
+        daysRemaining: Int,
+        email: String,
+        expirationTime: Int,
+        expireAlert: Bool,
+        expired: Bool,
+        needsPayment: Bool,
+        plan: String,
+        productId: String?,
+        recurring: Bool,
+        renewUrl: String,
+        renewable: Bool,
+        username: String
+    ) {
+        self.active = active
+        self.canInvite = canInvite
+        self.canceled = canceled
+        self.daysRemaining = daysRemaining
+        self.email = email
+        self.expirationTime = expirationTime
+        self.expireAlert = expireAlert
+        self.expired = expired
+        self.needsPayment = needsPayment
+        self.plan = plan
+        self.productId = productId
+        self.recurring = recurring
+        self.renewUrl = renewUrl
+        self.renewable = renewable
+        self.username = username
+    }
+
     enum CodingKeys: String, CodingKey {
         case active, canceled, email, expired, plan, recurring, renewable, username
         case canInvite = "can_invite"
@@ -132,7 +166,7 @@ public struct DedicatedIPInformation: Codable, Sendable {
 /// Client connection status and IP information
 public struct ClientStatusInformation: Codable, Sendable {
     public let connected: Bool
-    public let ip: String?
+    public let ip: String
 }
 
 // MARK: - Feature Flags Information

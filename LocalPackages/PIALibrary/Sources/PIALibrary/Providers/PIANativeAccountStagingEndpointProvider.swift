@@ -19,7 +19,7 @@
 //
 
 import Foundation
-import PIAAccountSwift
+import PIAAccount
 
 class PIANativeAccountStagingEndpointProvider: PIAAccountEndpointProvider {
     func accountEndpoints() -> [PIAAccountEndpoint] {
