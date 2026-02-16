@@ -202,10 +202,10 @@ public protocol PIAAccountAPI {
     // MARK: - Subscriptions (iOS)
 
     /// Retrieves iOS subscription information
-    /// - Parameter receipt: Base64-encoded App Store receipt
+    /// - Parameter receipt: Optional App Store receipt data
     /// - Returns: Subscription information
     /// - Throws: PIAAccountError if the request fails
-    func subscriptions(receipt: String) async throws -> IOSSubscriptionInformation
+    func subscriptions(receipt: Data?) async throws -> IOSSubscriptionInformation
 
     // MARK: - Payment (iOS)
 

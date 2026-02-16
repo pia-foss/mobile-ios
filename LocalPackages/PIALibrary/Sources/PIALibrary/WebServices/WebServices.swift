@@ -64,14 +64,14 @@ protocol WebServices: AnyObject {
     func deleteAccount() async throws
 
     #if os(iOS) || os(tvOS)
-    func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
+    func signup(with request: Signup) async throws -> Credentials
 
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
+    func processPayment(credentials: Credentials, request: Payment) async throws
     #endif
 
     // MARK: Store
     
-    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?)
+    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation?
 
     // MARK: Ephemeral
 

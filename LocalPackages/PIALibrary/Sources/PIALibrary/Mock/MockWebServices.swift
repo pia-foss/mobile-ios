@@ -69,10 +69,11 @@ final class MockWebServices: WebServices {
 
     func deleteAccount() async throws {}
 
-    func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
-        let result = credentials?()
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+    func signup(with request: Signup) async throws -> Credentials {
+        guard let result = credentials?() else {
+            throw ClientError.unsupported
+        }
+        return result
     }
     
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
@@ -81,9 +82,7 @@ final class MockWebServices: WebServices {
         callback?(result, error)
     }
     
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
+    func processPayment(credentials: Credentials, request: Payment) async throws {}
     
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         let result = serversBundle?()
@@ -102,8 +101,8 @@ final class MockWebServices: WebServices {
     func submitDebugReport() async throws -> String {
         return ""
     }
-    
-    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
+
+    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
         let result = { () -> AppStoreInformation? in
             if let receipt = receipt {
                 if receipt.count == 0 {
@@ -118,8 +117,7 @@ final class MockWebServices: WebServices {
         
         Client.configuration.eligibleForTrial = result()!.eligibleForTrial
 
-        callback?(result(), nil)
-
+        return result()
     }
     
     func featureFlags() async throws -> [String] {

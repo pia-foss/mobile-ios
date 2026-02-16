@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "PIAAccountSwift",
+    name: "PIAAccount",
     platforms: [
         .iOS(.v15),
         .tvOS(.v17),
@@ -12,21 +12,21 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "PIAAccountSwift",
-            targets: ["PIAAccountSwift"]
+            name: "PIAAccount",
+            targets: ["PIAAccount"]
         ),
     ],
     targets: [
         // Main library target (merged for simplicity)
         .target(
-            name: "PIAAccountSwift",
+            name: "PIAAccount",
             dependencies: [],
             path: "Sources"
         ),
         // Test target using Swift Testing
         .testTarget(
             name: "PIAAccountTests",
-            dependencies: ["PIAAccountSwift"]
+            dependencies: ["PIAAccount"]
         ),
     ]
 )
