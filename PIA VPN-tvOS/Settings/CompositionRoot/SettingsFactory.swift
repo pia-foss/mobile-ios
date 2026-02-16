@@ -19,7 +19,7 @@ class SettingsFactory {
         return AvailableSettingsView(viewModel: makeAvailableSettingsViewModel())
     }
     
-    static func makeDefaultAccountProvider() -> AccountProviderType {
+    static func makeDefaultAccountProvider() -> AccountProvider {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Incorrect account provider type")
         }

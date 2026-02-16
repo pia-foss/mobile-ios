@@ -11,17 +11,14 @@ import PIALibrary
 
 class LoginProvider: LoginProviderType {
     private let accountProvider: AccountProvider
-    private let userAccountMapper: UserAccountMapper
-    
-    init(accountProvider: AccountProvider, userAccountMapper: UserAccountMapper) {
+
+    init(accountProvider: AccountProvider) {
         self.accountProvider = accountProvider
-        self.userAccountMapper = userAccountMapper
     }
     
     func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
-        let pialibraryCredentials = PIALibrary.Credentials(username: credentials.username, password: credentials.password)
-        let request = LoginRequest(credentials: pialibraryCredentials)
-        
+        let request = LoginRequest(credentials: credentials)
+
         accountProvider.login(with: request) { [weak self] userAccount, error in
             self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
         }
@@ -34,8 +31,9 @@ class LoginProvider: LoginProviderType {
             self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
         }
     }
-    
-    private func handleLoginResult(userAccount: PIALibrary.UserAccount?, error: Error?, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+
+
+    private func handleLoginResult(userAccount: UserAccount?, error: Error?, completion: @escaping (Result<UserAccount, Error>) -> Void) {
         if let error = error {
             completion(.failure(error))
             return
@@ -45,11 +43,9 @@ class LoginProvider: LoginProviderType {
             completion(.failure(ClientError.unexpectedReply))
             return
         }
-        
-        let user = userAccountMapper.map(userAccount: userAccount)
-        
+
         guard userAccount.info?.isExpired == true else {
-            completion(.success(user))
+            completion(.success(userAccount))
             return
         }
         

@@ -11,13 +11,13 @@ import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class SignupProviderMock: SignupProviderType {
-    private let result: Result<PIA_VPN_tvOS.UserAccount, SignupError>
+    private let result: Result<UserAccount, SignupError>
     
-    init(result: Result<PIA_VPN_tvOS.UserAccount, SignupError>) {
+    init(result: Result<UserAccount, SignupError>) {
         self.result = result
     }
     
-    func signup(email: String, transaction: PIALibrary.InAppTransaction?, _ callback: @escaping (Result<PIA_VPN_tvOS.UserAccount, SignupError>) -> Void) {
+    func signup(email: String, transaction: InAppTransaction?, _ callback: @escaping (Result<UserAccount, SignupError>) -> Void) {
         callback(result)
     }
 }

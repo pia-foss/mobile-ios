@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 final class SignupUseCaseTests: XCTestCase {

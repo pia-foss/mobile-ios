@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol LoginWithCredentialsUseCaseType {
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void)

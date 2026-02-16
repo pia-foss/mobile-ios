@@ -11,13 +11,11 @@ import PIALibrary
 
 class SignupProvider: SignupProviderType {
     private let accountProvider: AccountProvider
-    private let userAccountMapper: UserAccountMapper
     private let store: InAppProvider
     private let errorMapper: SignupDomainErrorMapper
-    
-    init(accountProvider: AccountProvider, userAccountMapper: UserAccountMapper, store: InAppProvider, errorMapper: SignupDomainErrorMapper) {
+
+    init(accountProvider: AccountProvider, store: InAppProvider, errorMapper: SignupDomainErrorMapper) {
         self.accountProvider = accountProvider
-        self.userAccountMapper = userAccountMapper
         self.store = store
         self.errorMapper = errorMapper
     }
@@ -48,9 +46,8 @@ class SignupProvider: SignupProviderType {
                 callback(.failure(errorMapper.map(error: ClientError.unexpectedReply)))
                 return
             }
-            
-            let user = userAccountMapper.map(userAccount: userAccount)
-            callback(.success(user))
+
+            callback(.success(userAccount))
         }
     }
 }

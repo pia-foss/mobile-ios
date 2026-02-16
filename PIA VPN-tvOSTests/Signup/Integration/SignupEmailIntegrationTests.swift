@@ -15,18 +15,17 @@ final class SignupEmailIntegrationTests: XCTestCase {
     var sut: SignupEmailViewModel!
     var cancellables: Set<AnyCancellable>!
     var capturedLoadingState: [Bool]!
-    var capturedUserAccount: PIA_VPN_tvOS.UserAccount?
-    
-    func instantiateSut(accountProviderResult: (PIALibrary.UserAccount?, Error?), onSuccessAction: @escaping (PIA_VPN_tvOS.UserAccount) -> Void) {
+    var capturedUserAccount: UserAccount?
+
+    func instantiateSut(accountProviderResult: (UserAccount?, Error?), onSuccessAction: @escaping (UserAccount) -> Void) {
         let accountProviderMock = AccountProviderMock(userResult: accountProviderResult.0,
                                                       errorResult: accountProviderResult.1,
                                                       appStoreInformationResult: nil)
-        
+
         let signupProvider = SignupProvider(accountProvider: accountProviderMock,
-                                            userAccountMapper: UserAccountMapper(),
                                             store: InAppProviderSpy(),
                                             errorMapper: SignupDomainErrorMapper())
-        
+
         let signupUseCase = SignupUseCase(signupProvider: signupProvider)
         sut = SignupEmailViewModel(signupUseCase: signupUseCase,
                                    transaction: InAppTransactionMock.makeStub(),
@@ -47,7 +46,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
 
     func test_signup_succeeds_when_a_valid_userAccount_is_retrieved() throws {
         // GIVEN there is no error on account creation and user account has been created
-        let userAccountStub = PIALibrary.UserAccount.makeStub()
+        let userAccountStub = UserAccount.makeStub()
         let error: Error? = nil
         let expectation = expectation(description: "Waiting for signup to update")
         
@@ -90,7 +89,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
         let error: Error? = nil
         let expectation = expectation(description: "Waiting for signup to update")
         
-        instantiateSut(accountProviderResult: (PIALibrary.UserAccount.makeStub(), error)) { [weak self] userAccount in
+        instantiateSut(accountProviderResult: (UserAccount.makeStub(), error)) { [weak self] userAccount in
             self?.capturedUserAccount = userAccount
             expectation.fulfill()
         }
@@ -118,7 +117,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
     
     func test_signup_shows_a_generic_error_when_there_is_no_error_and_no_userAccount() throws {
         // GIVEN there is no error on account creation and no user account has been created
-        let userAccountStub: PIALibrary.UserAccount? = nil
+        let userAccountStub: UserAccount? = nil
         let error: Error? = nil
         let expectation = expectation(description: "Waiting for signup to update")
         
@@ -150,7 +149,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
     
     func test_signup_shows_a_generic_error_when_there_is_an_error_when_creating_the_account() throws {
         // GIVEN there is an error on account creation
-        let userAccountStub: PIALibrary.UserAccount? = nil
+        let userAccountStub: UserAccount? = nil
         let expectation = expectation(description: "Waiting for signup to update")
         
         instantiateSut(accountProviderResult: (userAccountStub, ClientError.unexpectedReply)) { [weak self] userAccount in
