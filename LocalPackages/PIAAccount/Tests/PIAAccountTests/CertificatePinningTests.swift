@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import PIAAccountSwift
+@testable import PIAAccount
 
 @Suite("Certificate Pinning Tests")
 struct CertificatePinningTests {

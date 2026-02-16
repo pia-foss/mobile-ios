@@ -153,7 +153,7 @@ class AppPreferences {
         }
     }
 #endif
-    var lastVPNConnectionStatus: PIALibrary.VPNStatus {
+    var lastVPNConnectionStatus: VPNStatus {
         get {
             guard let rawValue = defaults.string(forKey: Entries.lastVPNConnectionStatus) else {
                 return .disconnected
@@ -197,14 +197,14 @@ class AppPreferences {
 #endif
     var favoriteServerIdentifiersGen4: [String] {
         get {
-            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
             if let favorites = try? keychain.getFavorites() {
                 return favorites
             }
             return []
         }
         set {
-            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
             try? keychain.set(favorites: newValue)
         }
     }
@@ -331,14 +331,14 @@ class AppPreferences {
     
     var dedicatedTokenIPReleation: [String: String] {
         get {
-            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
             if let relations = try? keychain.getDIPRelations() {
                 return relations
             }
             return [:]
         }
         set {
-            let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+            let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
             for (key, value) in newValue {
                 try? keychain.set(dipRelationKey: key, dipRelationValue: value)
             }
@@ -638,7 +638,7 @@ class AppPreferences {
     }
 
     private func migrateDIP() {
-        let keychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+        let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
 
         // Migrate relations
         if let relations = defaults.dictionary(forKey: Entries.tokenIPRelation_deprecated) as? [String: String] {
@@ -812,8 +812,8 @@ class AppPreferences {
         // otherwise, app version < 2.1 (local defaults/keychain)
         
         // it used to be here in app version <= 2.0
-        let oldKeychain = PIALibrary.Keychain()
-        let newKeychain = PIALibrary.Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
+        let oldKeychain = Keychain()
+        let newKeychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
         
         // migrate credentials from local to shared keychain
         if let legacyPassword = try? oldKeychain.password(for: loggedUsername) {
@@ -846,11 +846,11 @@ class AppPreferences {
         //For v1 we stored the username in the plain database. We move the value to the keychain database.
         //After refresh the account, the token will be generated
         if let oldUsername = defaults.string(forKey: "LoggedUsername"),
-            let _ = try? PIALibrary.Keychain(team: AppConstants.teamId,
+            let _ = try? Keychain(team: AppConstants.teamId,
                                              group: AppConstants.appGroup).password(for: oldUsername) {
             //User is loggedIn
-            try? PIALibrary.Keychain().set(username: oldUsername)
-            try? PIALibrary.Keychain().set(publicUsername: oldUsername)
+            try? Keychain().set(username: oldUsername)
+            try? Keychain().set(publicUsername: oldUsername)
             defaults.removeObject(forKey: "LoggedUsername")
             defaults.synchronize()
         }
