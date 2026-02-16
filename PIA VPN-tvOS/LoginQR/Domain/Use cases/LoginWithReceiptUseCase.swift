@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol LoginWithReceiptUseCaseType {
     func callAsFunction() async throws -> UserAccount

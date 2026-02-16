@@ -19,7 +19,7 @@ final class ValidateLoginQRCodeUseCaseTests: XCTestCase {
     var fixture: Fixture!
     var sut: ValidateLoginQRCodeUseCase!
     
-    func instantiateSut(userResult: PIALibrary.UserAccount?, errorResult: Error?, validateLoginQRCodeResult: Result<String, LoginQRCodeError>) {
+    func instantiateSut(userResult: UserAccount?, errorResult: Error?, validateLoginQRCodeResult: Result<String, LoginQRCodeError>) {
         fixture.accountProviderMock = AccountProviderMock(userResult: userResult, errorResult: errorResult)
         fixture.validateLoginQRCodeProviderMock = ValidateLoginQRCodeProviderMock(result: validateLoginQRCodeResult)
         
@@ -38,7 +38,7 @@ final class ValidateLoginQRCodeUseCaseTests: XCTestCase {
     
     func test_callAsFunction_succeeds_when_validateLoginQRCodeProvider_and_accountProvider_succeeds() async {
         // GIVEN
-        let userAccount = PIALibrary.UserAccount(credentials: PIALibrary.Credentials(username: "", password: ""), info: nil)
+        let userAccount = UserAccount(credentials: Credentials(username: "", password: ""), info: nil)
         let apiToken = "api_token"
         let qrCodeToken = LoginQRCode(token: "token", expiresAt: Date.makeISO8601Date(string: "2024-03-15T16:43:24Z")!)
         
@@ -56,7 +56,7 @@ final class ValidateLoginQRCodeUseCaseTests: XCTestCase {
     
     func test_callAsFunction_fails_when_validateLoginQRCodeProvider_returns_an_error() async throws {
         // GIVEN
-        let userAccount = PIALibrary.UserAccount(credentials: PIALibrary.Credentials(username: "", password: ""), info: nil)
+        let userAccount = UserAccount(credentials: Credentials(username: "", password: ""), info: nil)
         let qrCodeToken = LoginQRCode(token: "token", expiresAt: Date.makeISO8601Date(string: "2024-03-15T16:43:24Z")!)
         
         instantiateSut(userResult: userAccount,

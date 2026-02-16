@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class LoginWithReceiptUseCaseMock: LoginWithReceiptUseCaseType {

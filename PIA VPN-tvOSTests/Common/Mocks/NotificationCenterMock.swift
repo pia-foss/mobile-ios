@@ -5,10 +5,6 @@ import Combine
 @testable import PIA_VPN_tvOS
 #endif
 
-#if canImport(PIA_VPN)
-@testable import PIA_VPN
-#endif
-
 class NotificationCenterMock: NotificationCenterType {
     var notificationPublisher: NotificationCenter.Publisher!
     func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher {
