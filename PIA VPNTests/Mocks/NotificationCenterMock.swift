@@ -1,20 +1,19 @@
 
 import Foundation
 import Combine
-
-#if os(tvOS)
-@testable import PIA_VPN_tvOS
+#if os(iOS)
+@testable import PIA_VPN
 
 class NotificationCenterMock: NotificationCenterType {
     var notificationPublisher: NotificationCenter.Publisher!
     func publisher(for name: Notification.Name, object: AnyObject?) -> NotificationCenter.Publisher {
         notificationPublisher
     }
-    
+
     private(set) var addObserverCalled = false
     private(set) var addObserverCalledAttempt = 0
     private(set) var addObserverCalledWithNotificationName: NSNotification.Name? = nil
-    
+
     func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name?, object anObject: Any?) {
         addObserverCalled = true
         addObserverCalledAttempt += 1
@@ -27,13 +26,13 @@ class NotificationCenterMock: NotificationCenterType {
         removeObserverCalled = true
         remoververCalledAttempt += 1
     }
-    
+
     private(set) var postNotificationCalledAttempt = 0
     private(set) var postNotificationCalledWithName: NSNotification.Name?
     func post(name aName: NSNotification.Name, object anObject: Any?) {
         postNotificationCalledAttempt += 1
         postNotificationCalledWithName = aName
     }
-    
+
 }
 #endif
