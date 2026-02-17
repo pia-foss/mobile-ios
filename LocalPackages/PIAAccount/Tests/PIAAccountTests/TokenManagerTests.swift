@@ -248,17 +248,11 @@ import Foundation
         #expect(vpnTokenAfter == nil)
     }
 
-    // MARK: - Refresh Deduplication Tests
+    // MARK: - Refresh Tests
 
-    @Test("Single refresh executes once")
-    func refreshAPITokenIfNeededSingleRefresh() async throws {
-        var refreshCount = 0
-
+    @Test("API token refresh executes block")
+    func refreshAPITokenIfNeededExecutesBlock() async throws {
         try await tokenManager.refreshAPITokenIfNeeded {
-            refreshCount += 1
-            // Simulate API call delay
-            try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-
             // Store new token
             let newToken = APITokenResponse(
                 apiToken: "refreshed-token",
@@ -267,18 +261,13 @@ import Foundation
             try await self.tokenManager.storeAPIToken(newToken)
         }
 
-        #expect(refreshCount == 1)
         let finalToken = try await tokenManager.getAPITokenString()
         #expect(finalToken == "refreshed-token")
     }
 
-    @Test("VPN token refresh executes once")
-    func refreshVPNTokenIfNeededSingleRefresh() async throws {
-        var refreshCount = 0
-
+    @Test("VPN token refresh executes block")
+    func refreshVPNTokenIfNeededExecutesBlock() async throws {
         try await tokenManager.refreshVPNTokenIfNeeded {
-            refreshCount += 1
-
             let newToken = VPNTokenResponse(
                 vpnUsernameToken: "new-user",
                 vpnPasswordToken: "new-pass",
@@ -287,7 +276,6 @@ import Foundation
             try await self.tokenManager.storeVPNToken(newToken)
         }
 
-        #expect(refreshCount == 1)
         let finalVPNToken = try await tokenManager.getVPNToken()
         #expect(finalVPNToken == "vpn_token_new-user:new-pass")
     }

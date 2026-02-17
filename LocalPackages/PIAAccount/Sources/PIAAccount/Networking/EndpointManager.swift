@@ -33,7 +33,7 @@ actor EndpointManager {
     ///   - decoder: JSON decoder for response
     /// - Returns: The decoded response
     /// - Throws: PIAMultipleErrors if all endpoints fail, or PIAAccountError if only one endpoint
-    func executeWithFailover<T: Decodable>(
+    func executeWithFailover<T: Decodable & Sendable>(
         path: APIPath,
         method: RequestBuilder.HTTPMethod,
         bodyType: RequestBuilder.BodyType? = nil,

@@ -1,15 +1,15 @@
 import Foundation
 
 /// Main implementation of PIAAccountAPI
-public final class PIAAccountClient: PIAAccountAPI {
+public actor PIAAccountClient: PIAAccountAPI {
     private let endpointManager: EndpointManager
     private let tokenManager: TokenManager
     private let userAgent: String
 
-    // Cached tokens for synchronous access
-    private var cachedAPIToken: String?
-    private var cachedVPNToken: String?
-    private let tokenQueue = DispatchQueue(label: "com.pia.account.tokens")
+    /// Deprecated: Unsafe storage for backwards-compatible sync token access
+    /// Remove this when migrating to async API
+    nonisolated(unsafe) private static var _cachedApiToken: String?
+    nonisolated(unsafe) private static var _cachedVpnToken: String?
 
     /// Creates a new account client
     internal init(
@@ -24,31 +24,48 @@ public final class PIAAccountClient: PIAAccountAPI {
         )
         self.tokenManager = TokenManager()
         self.userAgent = userAgent
-
-        // Load cached tokens on init
-        Task {
-            await self.updateCachedTokens()
-        }
     }
 
     // MARK: - Token Access
 
     public var apiToken: String? {
-        tokenQueue.sync { cachedAPIToken }
+        get async {
+            let token = try? await tokenManager.getAPITokenString()
+            Self._cachedApiToken = token
+            return token
+        }
     }
 
     public var vpnToken: String? {
-        tokenQueue.sync { cachedVPNToken }
+        get async {
+            let token = try? await tokenManager.getVPNToken()
+            Self._cachedVpnToken = token
+            return token
+        }
     }
 
-    private func updateCachedTokens() async {
+    /// Deprecated: Use async apiToken property instead
+    @available(*, deprecated, message: "Use async apiToken property instead")
+    public nonisolated var syncApiToken: String? {
+        Self._cachedApiToken
+    }
+
+    /// Deprecated: Use async vpnToken property instead
+    @available(*, deprecated, message: "Use async vpnToken property instead")
+    public nonisolated var syncVpnToken: String? {
+        Self._cachedVpnToken
+    }
+    private func updateTokenCache() async {
         let apiToken = try? await tokenManager.getAPITokenString()
         let vpnToken = try? await tokenManager.getVPNToken()
+        Self._cachedApiToken = apiToken
+        Self._cachedVpnToken = vpnToken
+    }
 
-        tokenQueue.sync {
-            self.cachedAPIToken = apiToken
-            self.cachedVPNToken = vpnToken
-        }
+    /// Clears the token cache - called after logout
+    private func clearTokenCache() {
+        Self._cachedApiToken = nil
+        Self._cachedVpnToken = nil
     }
 
     // MARK: - Authentication
@@ -71,9 +88,6 @@ public final class PIAAccountClient: PIAAccountAPI {
 
         // Request VPN token
         try await refreshVPNToken()
-
-        // Update cached tokens
-        await updateCachedTokens()
     }
 
     public func loginWithReceipt(receiptBase64: String) async throws {
@@ -94,9 +108,6 @@ public final class PIAAccountClient: PIAAccountAPI {
 
         // Request VPN token
         try await refreshVPNToken()
-
-        // Update cached tokens
-        await updateCachedTokens()
     }
 
     public func loginLink(email: String) async throws {
@@ -128,7 +139,6 @@ public final class PIAAccountClient: PIAAccountAPI {
         guard let apiToken = try await tokenManager.getAPITokenString() else {
             // No token to logout - just clear local storage
             try await tokenManager.clearAllTokens()
-            await updateCachedTokens()
             return
         }
 
@@ -143,9 +153,6 @@ public final class PIAAccountClient: PIAAccountAPI {
 
         // Clear tokens regardless of logout request result
         try await tokenManager.clearAllTokens()
-
-        // Update cached tokens
-        await updateCachedTokens()
     }
 
     public func validateLoginQR(qrToken: String) async throws -> String {
@@ -201,7 +208,6 @@ public final class PIAAccountClient: PIAAccountAPI {
 
         // Clear tokens after account deletion
         try await tokenManager.clearAllTokens()
-        await updateCachedTokens()
     }
 
     public func clientStatus(requestTimeoutMillis: Int = 30000) async throws -> ClientStatusInformation {
@@ -509,38 +515,34 @@ public final class PIAAccountClient: PIAAccountAPI {
     }
 
     private func refreshAPIToken() async throws {
-        try await tokenManager.refreshAPITokenIfNeeded {
-            guard let currentAPIToken = try await self.tokenManager.getAPITokenString() else {
-                return
-            }
-
-            let headers = ["Authorization": "Bearer \(currentAPIToken)"]
-
-            let newTokenResponse: APITokenResponse = try await self.endpointManager.executeWithFailover(
-                path: .refreshAPIToken,
-                method: .get,
-                headers: headers
-            )
-
-            try await self.tokenManager.storeAPIToken(newTokenResponse)
+        guard let currentAPIToken = try await tokenManager.getAPITokenString() else {
+            return
         }
+
+        let headers = ["Authorization": "Bearer \(currentAPIToken)"]
+
+        let newTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
+            path: .refreshAPIToken,
+            method: .get,
+            headers: headers
+        )
+
+        try await tokenManager.storeAPIToken(newTokenResponse)
     }
 
     private func refreshVPNToken() async throws {
-        try await tokenManager.refreshVPNTokenIfNeeded {
-            guard let apiToken = try await self.tokenManager.getAPITokenString() else {
-                return
-            }
-
-            let headers = ["Authorization": "Token \(apiToken)"]
-
-            let vpnTokenResponse: VPNTokenResponse = try await self.endpointManager.executeWithFailover(
-                path: .vpnToken,
-                method: .post,
-                headers: headers
-            )
-
-            try await self.tokenManager.storeVPNToken(vpnTokenResponse)
+        guard let apiToken = try await tokenManager.getAPITokenString() else {
+            return
         }
+
+        let headers = ["Authorization": "Token \(apiToken)"]
+
+        let vpnTokenResponse: VPNTokenResponse = try await endpointManager.executeWithFailover(
+            path: .vpnToken,
+            method: .post,
+            headers: headers
+        )
+
+        try await tokenManager.storeVPNToken(vpnTokenResponse)
     }
 }

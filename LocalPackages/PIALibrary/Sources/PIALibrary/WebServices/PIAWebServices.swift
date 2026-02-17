@@ -59,11 +59,11 @@ class PIAWebServices: WebServices, ConfigurationAccess {
             PIANativeAccountEndpointProvider()
         }
 
-        self.nativeAccountAPI = try! PIAAccountBuilder()
-            .setEndpointProvider(nativeEndpointProvider)
-            .setCertificate(rsa4096Certificate)
-            .setUserAgent(PIAWebServices.userAgent)
-            .build()
+        var builder = PIAAccountBuilder()
+        builder.setEndpointProvider(nativeEndpointProvider)
+        builder.setCertificate(rsa4096Certificate)
+        builder.setUserAgent(PIAWebServices.userAgent)
+        self.nativeAccountAPI = try! builder.build()
 
         var appVersion = "Unknown"
         if let info = Bundle.main.infoDictionary {
@@ -123,14 +123,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
      The token to use for protocol authentication.
      */
     var vpnToken: String? {
-        return self.nativeAccountAPI.vpnToken
+        return self.nativeAccountAPI.syncVpnToken
     }
 
     /***
      The token to use for api authentication.
      */
     var apiToken: String? {
-        return self.nativeAccountAPI.apiToken
+        return self.nativeAccountAPI.syncApiToken
     }
 
     /***
