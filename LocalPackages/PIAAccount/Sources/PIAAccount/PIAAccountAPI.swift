@@ -33,26 +33,44 @@ public protocol PIAAccountAPI {
 
     /// Returns the cached API token, if available.
     ///
-    /// This property provides synchronous access to the API token that was obtained
-    /// during login. The token is cached from the Keychain for performance.
+    /// This property provides access to the API token that was obtained
+    /// during login. The token is retrieved from secure storage.
     ///
     /// - Returns: The API token string, or `nil` if not logged in
-    var apiToken: String? { get }
+    var apiToken: String? { get async }
 
     /// Returns the cached VPN token in "vpn_token_{username}:{password}" format, if available.
     ///
-    /// This property provides synchronous access to the VPN authentication token.
+    /// This property provides access to the VPN authentication token.
     /// The format is required for VPN server authentication.
     ///
     /// - Returns: The formatted VPN token string, or `nil` if not logged in
-    var vpnToken: String? { get }
+    var vpnToken: String? { get async }
+
+    /// Returns the cached API token synchronously.
+    ///
+    /// DEPRECATED: Use `apiToken` async property instead. This method exists
+    /// for backwards compatibility and will be removed in a future version.
+    ///
+    /// - Returns: The API token string, or `nil` if not logged in
+    @available(*, deprecated, message: "Use async apiToken property instead")
+    var syncApiToken: String? { get }
+
+    /// Returns the cached VPN token synchronously.
+    ///
+    /// DEPRECATED: Use `vpnToken` async property instead. This method exists
+    /// for backwards compatibility and will be removed in a future version.
+    ///
+    /// - Returns: The formatted VPN token string, or `nil` if not logged in
+    @available(*, deprecated, message: "Use async vpnToken property instead")
+    var syncVpnToken: String? { get }
 
     // MARK: - Authentication
 
     /// Authenticates with username and password credentials.
     ///
     /// On success, API and VPN tokens are obtained and stored securely in the Keychain.
-    /// The tokens are also cached for synchronous access via `apiToken` and `vpnToken`.
+    /// The tokens can be accessed via the `apiToken` and `vpnToken` properties.
     ///
     /// - Parameters:
     ///   - username: The PIA account username
