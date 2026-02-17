@@ -27,7 +27,25 @@ class AccountProviderMock: AccountProvider {
     private let userResult: UserAccount?
     private let errorResult: Error?
     private let appStoreInformationResult: AppStoreInformation?
-    var isExpired: Bool = false
+    
+    private(set) var logoutCalledAttempt = 0
+    private(set) var loginWithTokenCalledAttempt = 0
+    private(set) var accountInformationCalledAttempt = 0
+    var accountInformationResult: AccountInfo?
+    var accountInformationError: Error?
+    
+    var isExpired: Bool {
+        get {
+            currentUser?.info?.isExpired ?? false
+        }
+        set {
+            if newValue {
+                currentUser = UserAccount.makeExpiredStub()
+            } else {
+                currentUser = UserAccount.makeStub()
+            }
+        }
+    }
 
     init(userResult: UserAccount?, errorResult: Error?, appStoreInformationResult: AppStoreInformation? = nil) {
         self.userResult = userResult
@@ -40,6 +58,7 @@ class AccountProviderMock: AccountProvider {
     }
 
     func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        loginWithTokenCalledAttempt += 1
         callback?(userResult, errorResult)
     }
 
@@ -56,9 +75,14 @@ class AccountProviderMock: AccountProvider {
     }
 
     func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?) {}
-    func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {}
+    func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+        accountInformationCalledAttempt += 1
+        callback?(accountInformationResult, accountInformationError)
+    }
     func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {}
-    func logout(_ callback: SuccessLibraryCallback?) {}
+    func logout(_ callback: SuccessLibraryCallback?) {
+        logoutCalledAttempt += 1
+    }
     func deleteAccount(_ callback: SuccessLibraryCallback?) {}
     func cleanDatabase() {}
     func featureFlags(_ callback: SuccessLibraryCallback?) {}

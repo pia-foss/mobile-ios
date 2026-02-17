@@ -1,6 +1,6 @@
 //
-//  AccountProviderTypeMock.swift
-//  PIA VPN-tvOSTests
+//  AccountProviderMock.swift
+//  PIA VPNTests
 //
 //  Created by Laura S on 12/20/23.
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
@@ -10,26 +10,22 @@ import Foundation
 import PIALibrary
 import XCTest
 
-#if canImport(PIA_VPN_tvOS)
-@testable import PIA_VPN_tvOS
-#endif
+#if os(iOS)
+@testable import PIA_VPN
 
-class AccountProviderTypeMock: AccountProvider {
+class AccountProviderMock: AccountProvider {
     var publicUsername: String? = nil
     var currentUser: UserAccount? = nil
     var isLoggedIn: Bool = false
 
-    // Custom setter to update currentUser when isExpired changes
     var isExpired: Bool {
         get {
             currentUser?.info?.isExpired ?? false
         }
         set {
             if newValue {
-                // Create an expired user account
                 currentUser = UserAccount.makeExpiredStub()
             } else {
-                // Create a non-expired user account
                 currentUser = UserAccount.makeStub()
             }
         }
@@ -55,7 +51,6 @@ class AccountProviderTypeMock: AccountProvider {
         callback?(accountInformationResult, accountInformationError)
     }
 
-    // Additional required methods for AccountProvider conformance
     var planProducts: [Plan : InAppProduct]?
     var shouldCleanAccount: Bool = true
     var oldToken: String?
@@ -84,3 +79,4 @@ class AccountProviderTypeMock: AccountProvider {
     func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}
     func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {}
 }
+#endif
