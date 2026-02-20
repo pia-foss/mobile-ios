@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Combine
 import UIKit
 import PIALibrary
 import NetworkExtension
@@ -42,6 +43,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
     private (set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    var cancellables = Set<AnyCancellable>()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -57,6 +59,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ = hotspotHelper.configureHotspotHelper()
 
         instantiateLiveActivityManagerIfNeeded()
+
+        setupDebugMenuObserver()
 
         return true
     }

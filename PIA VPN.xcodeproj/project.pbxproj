@@ -30,6 +30,7 @@
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
 		3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */; };
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
+		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
 		3FE266BC2F0BE003004B53AA /* PIAUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266BB2F0BE003004B53AA /* PIAUIKit */; };
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
@@ -388,6 +389,7 @@
 				2909869018566430002D9687 /* Security.framework in Frameworks */,
 				3FE266BC2F0BE003004B53AA /* PIAUIKit in Frameworks */,
 				299E58511856BD31004CFD63 /* SystemConfiguration.framework in Frameworks */,
+				3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */,
 				299E585F1856C6EE004CFD63 /* libz.dylib in Frameworks */,
 				2934A1741856BCF80099683F /* CoreText.framework in Frameworks */,
 				3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */,
@@ -648,6 +650,7 @@
 				3F557CF22EF59C1C002FB559 /* PopupDialog */,
 				3FE266B92F0BE003004B53AA /* PIASwiftUI */,
 				3FE266BB2F0BE003004B53AA /* PIAUIKit */,
+				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -3207,6 +3210,10 @@
 		3F807D4B2F164B44002015ED /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
+		};
+		3F89AB662F48461B00AC9CCD /* PIADebugMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADebugMenu;
 		};
 		3FE266B92F0BE003004B53AA /* PIASwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
