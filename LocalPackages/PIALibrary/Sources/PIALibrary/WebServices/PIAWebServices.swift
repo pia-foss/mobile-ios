@@ -85,7 +85,8 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 PIACSIUserInformationProvider(),
                 PIACSIDeviceInformationProvider(),
                 PIACSILastKnownExceptionProvider(),
-                PIACSILogInformationProvider()
+                PIACSILogInformationProvider(),
+                PIACSISubscriptionInformationProvider()
             ])
             .build()
     }
