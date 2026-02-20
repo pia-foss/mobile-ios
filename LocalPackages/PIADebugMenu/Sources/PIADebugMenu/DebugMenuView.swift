@@ -34,9 +34,13 @@ public struct DebugMenuView: View {
         .onAppear {
             logSnapshot = logs
         }
-        .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect()) { _ in
-            withAnimation(.spring(duration: 0.35, bounce: 0.1)) {
-                logSnapshot = logs
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(5))
+                guard !Task.isCancelled else { break }
+                withAnimation(.spring(duration: 0.35, bounce: 0.1)) {
+                    logSnapshot = logs
+                }
             }
         }
         .navigationTitle("🪲 Debug Menu")
@@ -169,17 +173,19 @@ public struct DebugMenuView: View {
             Button {
                 isSendingReport = true
                 sendDebugReport { reportId, error in
-                    isSendingReport = false
-                    if let id = reportId, !id.isEmpty {
-                        reportResult = ReportResult(
-                            title: "Debug information submitted",
-                            message: "Report ID: \(id)\nPlease note this ID — support will need it to locate your submission."
-                        )
-                    } else {
-                        reportResult = ReportResult(
-                            title: "Submission failed",
-                            message: "Debug information could not be submitted."
-                        )
+                    DispatchQueue.main.async {
+                        isSendingReport = false
+                        if let id = reportId, !id.isEmpty {
+                            reportResult = ReportResult(
+                                title: "Debug information submitted",
+                                message: "Report ID: \(id)\nPlease note this ID — support will need it to locate your submission."
+                            )
+                        } else {
+                            reportResult = ReportResult(
+                                title: "Submission failed",
+                                message: "Debug information could not be submitted."
+                            )
+                        }
                     }
                 }
             } label: {

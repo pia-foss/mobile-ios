@@ -7,7 +7,7 @@ extension DebugMenuView {
         Macros.versionFullString() ?? "—"
     }
 
-    nonisolated var environment: String {
+    var environment: String {
         Client.environment.rawValue
     }
 
@@ -15,7 +15,7 @@ extension DebugMenuView {
         Macros.baseUrl() ?? "—"
     }
 
-    nonisolated var accountInfo: AccountInfo? {
+    var accountInfo: AccountInfo? {
         Client.providers.accountProvider.currentUser?.info
     }
 
@@ -51,7 +51,7 @@ extension DebugMenuView {
         return formatter.string(from: date)
     }
 
-    nonisolated var receiptBase64: String? {
+    var receiptBase64: String? {
         Client.store.paymentReceipt?.base64EncodedString()
     }
 

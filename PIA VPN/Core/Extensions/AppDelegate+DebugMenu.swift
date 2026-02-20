@@ -34,8 +34,8 @@ extension AppDelegate {
         }
 
         let navVC = UINavigationController()
-        let hostingVC = UIHostingController(rootView: DebugMenuView(onDismiss: {
-            navVC.dismiss(animated: true)
+        let hostingVC = UIHostingController(rootView: DebugMenuView(onDismiss: { [weak navVC] in
+            navVC?.dismiss(animated: true)
         }))
 
         let appearance = UINavigationBarAppearance()
