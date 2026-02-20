@@ -16,6 +16,7 @@ extension AppDelegate {
     private func addDebugMenuObserver() {
         NotificationCenter.default
             .publisher(for: .debugShakeDetected)
+            .receive(on: RunLoop.main)
             .sink(receiveValue: presentDebugMenu)
             .store(in: &cancellables)
     }

@@ -172,20 +172,25 @@ public struct DebugMenuView: View {
         Section("Support") {
             Button {
                 isSendingReport = true
-                sendDebugReport { reportId, error in
-                    DispatchQueue.main.async {
+                Task { @MainActor in
+                    defer {
                         isSendingReport = false
-                        if let id = reportId, !id.isEmpty {
-                            reportResult = ReportResult(
-                                title: "Debug information submitted",
-                                message: "Report ID: \(id)\nPlease note this ID — support will need it to locate your submission."
-                            )
-                        } else {
-                            reportResult = ReportResult(
-                                title: "Submission failed",
-                                message: "Debug information could not be submitted."
-                            )
-                        }
+                    }
+
+                    do {
+                        let reportId = try await Client.submitDebugReport(
+                            includePersistedData: true,
+                            logs: logSnapshot
+                        )
+                        reportResult = ReportResult(
+                            title: "Debug information submitted",
+                            message: "Report ID: \(reportId)\nPlease note this ID — support will need it to locate your submission."
+                        )
+                    } catch {
+                        reportResult = ReportResult(
+                            title: "Submission failed",
+                            message: "Debug information could not be submitted."
+                        )
                     }
                 }
             } label: {
@@ -209,13 +214,6 @@ public struct DebugMenuView: View {
         self.onDismiss = onDismiss
     }
 
-    func sendDebugReport(completion: @escaping (String?, Error?) -> Void) {
-        Client.submitDebugReport(
-            includePersistedData: true,
-            logs: logSnapshot,
-            completion
-        )
-    }
 }
 
 @available(iOS 16, *)

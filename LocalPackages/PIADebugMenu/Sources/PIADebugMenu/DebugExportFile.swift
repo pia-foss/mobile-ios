@@ -7,7 +7,7 @@ struct DebugExportFile: Transferable {
     let filename: String
 
     static var transferRepresentation: some TransferRepresentation {
-        FileRepresentation(exportedContentType: .plainText) { file in
+        FileRepresentation(exportedContentType: .data) { file in
             let url = FileManager.default.temporaryDirectory
                 .appendingPathComponent(file.filename)
             try Data(file.content.utf8).write(to: url)
