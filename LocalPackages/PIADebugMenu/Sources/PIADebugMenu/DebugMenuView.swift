@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 @preconcurrency import PIALibrary
 
 // MARK: - DebugMenuView
@@ -15,6 +16,11 @@ public struct DebugMenuView: View {
     @State private var logSnapshot: String = ""
     @State private var isSendingReport = false
     @State private var reportResult: ReportResult? = nil
+    @State private var isLoadingRefundTransaction = false
+    @State private var refundTransactionId: UInt64 = 0
+    @State private var isRefundSheetPresented = false
+    @State private var availableTransactions: [StoreKit.Transaction] = []
+    @State private var isTransactionPickerPresented = false
 
     public var body: some View {
         List {
@@ -22,6 +28,7 @@ public struct DebugMenuView: View {
             accountSection
             receiptSection
             logsSection
+            subscriptionSection
             supportSection
         }
         .alert(item: $reportResult) { result in
@@ -30,6 +37,35 @@ public struct DebugMenuView: View {
                 message: Text(result.message),
                 dismissButton: .default(Text("OK"))
             )
+        }
+        .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
+            switch result {
+            case .success(let status):
+                if status == .success {
+                    reportResult = ReportResult(
+                        title: "Refund Requested",
+                        message: "Your refund request was submitted to the App Store."
+                    )
+                }
+            case .failure(let error):
+                reportResult = ReportResult(
+                    title: "Refund Request Failed",
+                    message: error.localizedDescription
+                )
+            }
+        }
+        .sheet(isPresented: $isTransactionPickerPresented) {
+            List {
+                Section("Select a transaction to refund") {
+                    ForEach(availableTransactions, id: \.id) { transaction in
+                        Button(transaction.productID) {
+                            isTransactionPickerPresented = false
+                            refundTransactionId = transaction.id
+                            isRefundSheetPresented = true
+                        }
+                    }
+                }
+            }
         }
         .onAppear {
             logSnapshot = logs
@@ -165,6 +201,51 @@ public struct DebugMenuView: View {
                 }
                 .buttonStyle(.borderless)
             }
+        }
+    }
+
+    private var subscriptionSection: some View {
+        Section("Subscription") {
+            Button {
+                isLoadingRefundTransaction = true
+                Task { @MainActor in
+                    defer {
+                        isLoadingRefundTransaction = false
+                    }
+
+                    var transactions: [StoreKit.Transaction] = []
+                    for await result in Transaction.currentEntitlements {
+                        if case .verified(let transaction) = result {
+                            transactions.append(transaction)
+                        }
+                    }
+
+                    switch transactions.count {
+                    case 0:
+                        reportResult = ReportResult(
+                            title: "No Transaction Found",
+                            message: "No active transaction found to request a refund for."
+                        )
+                    case 1:
+                        refundTransactionId = transactions[0].id
+                        isRefundSheetPresented = true
+                    default:
+                        availableTransactions = transactions
+                        isTransactionPickerPresented = true
+                    }
+                }
+            } label: {
+                if isLoadingRefundTransaction {
+                    HStack {
+                        ProgressView()
+                        Text("Looking up transaction…")
+                    }
+                } else {
+                    Text("Test Refund Request")
+                }
+            }
+            .disabled(isLoadingRefundTransaction)
+            .buttonStyle(.borderless)
         }
     }
 
