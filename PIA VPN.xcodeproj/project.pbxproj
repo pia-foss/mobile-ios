@@ -3135,7 +3135,7 @@
 			repositoryURL = "https://github.com/fxm90/GradientProgressBar.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.0.3;
+				version = 3.0.0;
 			};
 		};
 		AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */ = {

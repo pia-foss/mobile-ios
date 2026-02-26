@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fxm90/GradientProgressBar.git",
       "state" : {
-        "revision" : "de13a9c05f1946051f6db40016bbccdbca26a9be",
-        "version" : "2.0.3"
+        "revision" : "0d07228b9d7be44dce231819962f8e23146330ca",
+        "version" : "3.0.0"
       }
     },
     {
@@ -79,15 +79,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "e7f9ffdd072fa8709ee25ba8cd2aa5d95f90a6a5"
-      }
-    },
-    {
-      "identity" : "lightweightobservable",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fxm90/LightweightObservable",
-      "state" : {
-        "revision" : "f7aeda3ab67922bd3ad252c5a311c58ee3e37bf5",
-        "version" : "2.2.2"
       }
     },
     {
