@@ -14,12 +14,12 @@ final class LoginWithCredentialsUseCaseTests: XCTestCase {
 
     func test_login_succeeds_when_loginprovider_completes_with_success() {
         // GIVEN
-        let user = PIA_VPN_tvOS.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let loginProviderMock = LoginProviderMock(result: .success(user))
         let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
                                               errorMapper: LoginDomainErrorMapper())
         
-        var capturedResult: Result<PIA_VPN_tvOS.UserAccount, LoginError>?
+        var capturedResult: Result<UserAccount, LoginError>?
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN
@@ -39,7 +39,7 @@ final class LoginWithCredentialsUseCaseTests: XCTestCase {
         let sut = LoginWithCredentialsUseCase(loginProvider: loginProviderMock,
                                               errorMapper: LoginDomainErrorMapper())
         
-        var capturedResult: Result<PIA_VPN_tvOS.UserAccount, LoginError>?
+        var capturedResult: Result<UserAccount, LoginError>?
         let expectation = expectation(description: "Waiting for login to finish")
         
         // WHEN

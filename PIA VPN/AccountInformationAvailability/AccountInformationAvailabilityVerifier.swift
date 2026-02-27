@@ -19,14 +19,14 @@ protocol AccountInformationAvailabilityVerifierType {
 class AccountInformationAvailabilityVerifier:
     AccountInformationAvailabilityVerifierType {
     
-    private let accountProvider: AccountProviderType
+    private let accountProvider: AccountProvider
     private let notificationCenter: NotificationCenterType
     private let userDefaults: UserDefaultsType
-    
+
     internal static let defaultDeadlineInSeconds: TimeInterval = 43200
     static let kAccountInfoAvailabilityDate = "kAccountInfoAvailabilityDate"
 
-    init(accountProvider: AccountProviderType, notificationCenter: NotificationCenterType, userDefaults: UserDefaultsType) {
+    init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType, userDefaults: UserDefaultsType) {
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.userDefaults = userDefaults

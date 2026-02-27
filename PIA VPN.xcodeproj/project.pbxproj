@@ -222,6 +222,7 @@
 				"Core/Extensions/EmailValidationError+ErrorMessage.swift",
 				"Core/Extensions/Server+Automatic.swift",
 				"Core/Extensions/ServerProvider+UI.swift",
+				"Core/Foundation+Protocols.swift",
 				Core/Models/AboutComponent.swift,
 				Core/Utils/RegionFilter.swift,
 				Flags.swift,
@@ -257,9 +258,13 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AccountInformationAvailability/AccountInformationAvailabilityVerifierTests.swift,
+				Core/Messages/PIACommandTests.swift,
 				Core/NMTTests.swift,
 				Core/PIACardTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
+				"Helpers/Stubs+PIALibrary.swift",
+				Mocks/AccountProviderMock.swift,
+				Mocks/NotificationCenterMock.swift,
 				Mocks/UserDefaultsMock.swift,
 			);
 			target = 0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */;
@@ -270,14 +275,6 @@
 				PacketTunnelProvider.swift,
 			);
 			target = DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */;
-		};
-		3F0EF7252EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Common/Mocks/AccountProviderTypeMock.swift,
-				Common/Mocks/NotificationCenterMock.swift,
-			);
-			target = 0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */;
 		};
 		3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -291,7 +288,6 @@
 			membershipExceptions = (
 				"Login/Utils/Foundation+PIA.swift",
 				LoginQR/Infrastructure/URLSessionHTTPClient.swift,
-				"Shared/Utils/Foundation+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/PIALibrary+Protocols.swift",
 			);
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
@@ -345,7 +341,7 @@
 		3F0EF5F62EDF26620013E4FB /* PIA VPN WG Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF5F82EDF26620013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN WG Tunnel"; sourceTree = "<group>"; };
 		3F0EF6152EDF26990013E4FB /* PIA-VPN_tvOS_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_tvOS_E2E_Tests"; sourceTree = "<group>"; };
 		3F0EF62E2EDF26990013E4FB /* PIA VPN-tvOSUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSUITests"; sourceTree = "<group>"; };
-		3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF7252EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSTests"; sourceTree = "<group>"; };
+		3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSTests"; sourceTree = "<group>"; };
 		3F0EF7232EDF26990013E4FB /* PIA tvOS Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA tvOS Tunnel"; sourceTree = "<group>"; };
 		3F0EF8692EDF26D90013E4FB /* PIA VPN-tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9402EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9422EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOS"; sourceTree = "<group>"; };
 		3F0EF9682EDF27910013E4FB /* PIA-VPN_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_E2E_Tests"; sourceTree = "<group>"; };

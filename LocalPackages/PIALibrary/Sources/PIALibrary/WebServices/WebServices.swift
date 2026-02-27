@@ -28,57 +28,50 @@ protocol WebServicesConsumer {
 }
 
 @available(tvOS 17.0, *)
-protocol WebServices: class {
+protocol WebServices: AnyObject {
     
     // MARK: Account
 
-    func migrateToken(token: String, _ callback: SuccessLibraryCallback?)
+    func migrateToken(token: String) async throws
 
-    func token(credentials: Credentials, _ callback: SuccessLibraryCallback?)
+    func token(credentials: Credentials) async throws
 
-    func token(receipt: Data, _ callback: SuccessLibraryCallback?)
+    func token(receipt: Data) async throws
     
-    func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?)
+    func validateLoginQR(qrToken: String) async throws -> String
 
-    func info(_ callback: LibraryCallback<AccountInfo>?)
+    func info() async throws -> AccountInfo
 
-    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?)
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws
 
-    func loginLink(email: String, _ callback: SuccessLibraryCallback?)
+    func loginLink(email: String) async throws
 
     /// The token to use for protocol authentication.
     var vpnToken: String? { get }
 
     /// The token to use for api authentication.
     var apiToken: String? { get }
-    
-    // MARK: DIP Token
-    
-    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
-    
-    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?)
 
     /**
-         Invalidates the access token.
-         - Parameter callback: Returns an `Bool` if the token was expired.
+         Invalidates the access token
      */
-    func logout(_ callback: LibraryCallback<Bool>?)
+    func logout() async throws
 
     /**
          Deletes the user accout on PIA servers.
          - Parameter callback: Returns an `Bool` if the API returns a success.
      */
-    func deleteAccount(_ callback: LibraryCallback<Bool>?)
-    
-    #if os(iOS) || os(tvOS)
-    func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
+    func deleteAccount() async throws
 
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
+    #if os(iOS) || os(tvOS)
+    func signup(with request: Signup) async throws -> Credentials
+
+    func processPayment(credentials: Credentials, request: Payment) async throws
     #endif
 
     // MARK: Store
     
-    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?)
+    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation?
 
     // MARK: Ephemeral
 
@@ -88,5 +81,5 @@ protocol WebServices: class {
 
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?)
 
-    func featureFlags(_ callback: LibraryCallback<[String]>?)
+    func featureFlags() async throws -> [String]
 }

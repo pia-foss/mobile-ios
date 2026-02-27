@@ -81,18 +81,6 @@ public final class Client {
         }
         VPNDaemon.shared.start()
         VPNDaemon.shared.enableUpdates()
-
-        // migrate from old token
-        providers.accountProvider.migrateOldTokenIfNeeded { (error) in
-            // If there was an error. It will force the user logout.
-            guard let error = error as? ClientError else {
-                return
-            }
-            log.debug("Client bootstrap migrateOldTokenIfNeeded error: \(error)")
-            if (error == .unauthorized) {
-                providers.accountProvider.logout(nil)
-            }
-        }
     }
     
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {

@@ -18,14 +18,7 @@ class SubscriptionInformationProvider: SubscriptionInformationProviderType {
     
     func subscriptionInformation(_ callback: @escaping (AppStoreInformation?, Error?) -> Void) {
         accountProvider.subscriptionInformation { appStoreInfo, error in
-            guard let appStoreInfo = appStoreInfo else {
-                callback(nil, error)
-                return
-            }
-            
-            let products = appStoreInfo.products.map { Product(identifier: $0.identifier, plan: $0.plan, price: $0.price, legacy: $0.legacy) }
-            
-            callback(AppStoreInformation(products: products, eligibleForTrial: appStoreInfo.eligibleForTrial), error)
+            callback(appStoreInfo, error)
         }
     }
 }

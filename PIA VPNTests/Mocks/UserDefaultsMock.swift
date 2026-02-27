@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if os(iOS)
 @testable import PIA_VPN
 
 class UserDefaultsMock: UserDefaultsType {
@@ -77,3 +79,4 @@ class UserDefaultsMock: UserDefaultsType {
     
     
 }
+#endif

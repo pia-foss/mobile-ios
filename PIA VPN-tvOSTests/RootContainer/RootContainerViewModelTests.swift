@@ -12,9 +12,9 @@ import Combine
 import SwiftUI
 
 final class RootContainerViewModelTests: XCTestCase {
-    
+
     final class Fixture {
-        let accountProvierMock = AccountProviderTypeMock()
+        let accountProvierMock = AccountProviderMock(userResult: nil, errorResult: nil)
         let notificationCenterMock = NotificationCenterMock()
         var vpnConfigurationAvailabilityMock = VPNConfigurationAvailabilityMock(value: false)
         var connectionStatsPermissonMock = ConnectionStatsPermissonMock(value: nil)
@@ -306,4 +306,3 @@ extension RootContainerViewModelTests {
     }
     
 }
-

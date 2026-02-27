@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 class SignupCredentialsFactory {
     static var userAccount: UserAccount?

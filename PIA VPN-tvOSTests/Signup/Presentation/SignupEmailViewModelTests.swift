@@ -21,7 +21,7 @@ final class SignupEmailViewModelTests: XCTestCase {
     var cancellables: Set<AnyCancellable>!
     var capturedLoadingState: [Bool]!
     
-    func instantiateSut(signupUseCaseResult: Result<PIA_VPN_tvOS.UserAccount, Error>, onSuccessAction: @escaping ((PIA_VPN_tvOS.UserAccount) -> Void)) {
+    func instantiateSut(signupUseCaseResult: Result<UserAccount, Error>, onSuccessAction: @escaping ((UserAccount) -> Void)) {
         fixture.signupUseCaseMock = SignupUseCaseMock(result: signupUseCaseResult)
         sut = SignupEmailViewModel(signupUseCase: fixture.signupUseCaseMock,
                                    transaction: nil, 
@@ -43,9 +43,9 @@ final class SignupEmailViewModelTests: XCTestCase {
 
     func test_signup_executes_onSuccessAction_when_signup_returns_an_userAccount_and_a_valid_email_is_provided() {
         // GIVEN signupUseCase completes with an UserAccount
-        let expectedUserAccount = PIA_VPN_tvOS.UserAccount.makeStub()
+        let expectedUserAccount = UserAccount.makeStub()
         let expectation = expectation(description: "Waiting for signup to update")
-        var capturedUserAccount: PIA_VPN_tvOS.UserAccount?
+        var capturedUserAccount: UserAccount?
         
         instantiateSut(signupUseCaseResult: .success(expectedUserAccount),
                        onSuccessAction: { userAccount in
@@ -70,9 +70,9 @@ final class SignupEmailViewModelTests: XCTestCase {
     
     func test_signup_presents_error_when_and_an_invalid_email_is_provided() {
         // GIVEN signupUseCase completes with an UserAccount
-        let expectedUserAccount = PIA_VPN_tvOS.UserAccount.makeStub()
+        let expectedUserAccount = UserAccount.makeStub()
         let expectation = expectation(description: "Waiting for signup to update")
-        var capturedUserAccount: PIA_VPN_tvOS.UserAccount?
+        var capturedUserAccount: UserAccount?
         
         instantiateSut(signupUseCaseResult: .success(expectedUserAccount),
                        onSuccessAction: { userAccount in
@@ -101,7 +101,7 @@ final class SignupEmailViewModelTests: XCTestCase {
     func test_signup_presents_an_error_when_signup_throws_an_error() {
         // GIVEN signupUseCase throws an error
         let expectation = expectation(description: "Waiting for signup to update")
-        var capturedUserAccount: PIA_VPN_tvOS.UserAccount?
+        var capturedUserAccount: UserAccount?
         
         instantiateSut(signupUseCaseResult: .failure(NSError(domain: "anError", code: 0)),
                        onSuccessAction: { userAccount in

@@ -2,18 +2,8 @@
 import Foundation
 import PIALibrary
 
-
-protocol AccountProviderType {
-    var isLoggedIn: Bool { get }
-    var isExpired: Bool { get }
-    var publicUsername: String? { get }
-    var currentUser: PIALibrary.UserAccount? { get set }
-    func logout(_ callback: ((Error?) -> Void)?)
-    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?)
-    func accountInformation(_ callback: ((PIALibrary.AccountInfo?, Error?) -> Void)?)
-}
-
-extension DefaultAccountProvider: AccountProviderType {
+// Extension to add isExpired convenience property
+extension AccountProvider {
     var isExpired: Bool {
         currentUser?.info?.isExpired ?? false
     }
