@@ -21,8 +21,8 @@
 //
 
 import Foundation
+import Combine
 
-@available(tvOS 17.0, *)
 extension Client {
 
     /// Provides access to passive library updates.
@@ -51,6 +51,17 @@ extension Client {
         /// The status of the VPN connection.
         public var vpnStatus: VPNStatus {
             return accessedDatabase.transient.vpnStatus
+        }
+
+        /// Publisher that emits tuples of (publicIP, vpnIP) when connectivity updates.
+        /// vpnIP is only populated when vpnStatus is .connected.
+        public var ipsPublisher: AnyPublisher<(publicIP: String?, vpnIP: String?), Never> {
+            NotificationCenter.default
+                .publisher(for: .PIADaemonsDidUpdateConnectivity)
+                .map { [accessedDatabase] _ in
+                    (publicIP: accessedDatabase.plain.publicIP, vpnIP: accessedDatabase.transient.vpnIP)
+                }
+                .eraseToAnyPublisher()
         }
     }
 }

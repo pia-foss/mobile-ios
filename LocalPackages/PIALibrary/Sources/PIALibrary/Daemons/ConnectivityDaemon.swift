@@ -115,8 +115,12 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
         }
 
         log.debug("Checking network connectivity...")
-        accessedDatabase.transient.vpnIP = nil
-        Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+
+        // Clear vpnIP if VPN is not connected
+        if accessedDatabase.transient.vpnStatus != .connected {
+            accessedDatabase.transient.vpnIP = nil
+            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+        }
 
         isCheckingConnectivity = true
         accessedWebServices.taskForConnectivityCheck { (connectivity, error) in
@@ -199,6 +203,9 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     // XXX: VPN status doesn't seem to be immediately ready for connectivity checks
     
     private func handleVPNDidConnect() {
+        accessedDatabase.transient.vpnIP = nil
+        Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+
         if hasEnabledUpdates {
             let delay = accessedConfiguration.connectivityVPNLag
             Macros.dispatch(after: .milliseconds(delay)) {
@@ -208,8 +215,10 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     }
     
     private func handleVPNDidDisconnect() {
+        accessedDatabase.transient.vpnIP = nil
+        Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+
         if hasEnabledUpdates {
-            accessedDatabase.transient.vpnIP = nil
             let delay = accessedConfiguration.connectivityVPNLag
             Macros.dispatch(after: .milliseconds(delay)) {
                 self.checkConnectivityOrRetry()

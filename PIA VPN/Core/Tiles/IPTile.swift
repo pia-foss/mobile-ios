@@ -24,17 +24,16 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import Combine
 
 class IPTile: UIView, Tileable  {
     
     private let emptyIPValue = "---"
     var view: UIView!
     var detailSegueIdentifier: String!
-    var status: TileStatus = .normal {
-        didSet {
-            statusUpdated()
-        }
-    }
+    var status: TileStatus = .normal
+
+    private var cancellables = Set<AnyCancellable>()
 
     @IBOutlet private weak var localIpTitle: UILabel!
     @IBOutlet private weak var localIpValue: UILabel!
@@ -53,15 +52,28 @@ class IPTile: UIView, Tileable  {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        cancellables.removeAll()
     }
     
     private func setupView() {
         
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(updateCurrentIP), name: .PIADaemonsDidUpdateConnectivity, object: nil)
-        nc.addObserver(self, selector: #selector(updateActivityViews), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
+        nc.publisher(for: .PIAThemeDidChange)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.viewShouldRestyle()
+            }
+            .store(in: &cancellables)
+
+        Client.daemons.ipsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] ips in
+                self?.updateIPLabels(
+                    publicIP: ips.publicIP,
+                    vpnIP: ips.vpnIP
+                )
+            }
+            .store(in: &cancellables)
 
         viewShouldRestyle()
         self.accessibilityIdentifier = "IPTile"
@@ -74,7 +86,7 @@ class IPTile: UIView, Tileable  {
 
     }
     
-    @objc private func viewShouldRestyle() {
+    private func viewShouldRestyle() {
         localIpTitle.style(style: TextStyle.textStyle21)
         vpnIpTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySettingsCellTitle(localIpValue, appearance: .dark)
@@ -82,29 +94,10 @@ class IPTile: UIView, Tileable  {
         Theme.current.applyPrincipalBackground(self)
     }
     
-    @objc private func updateCurrentIP() {
-        self.localIpValue.text = Client.daemons.publicIP
-        let vpn = Client.providers.vpnProvider
-        if (vpn.vpnStatus == .connected) {
-            self.vpnIpValue.text = Client.daemons.vpnIP ?? self.emptyIPValue
-            self.vpnIpValue.accessibilityLabel = Client.daemons.vpnIP ?? L10n.Localizable.Global.empty
-        } else if (!Client.daemons.isInternetReachable && (vpn.vpnStatus == .disconnected)) {
-            self.vpnIpValue.text = L10n.Localizable.Dashboard.Connection.Ip.unreachable
-        }
+    private func updateIPLabels(publicIP: String?, vpnIP: String?) {
+        self.localIpValue.text = publicIP ?? emptyIPValue
+        self.localIpValue.accessibilityLabel = publicIP ?? L10n.Localizable.Global.empty
+        self.vpnIpValue.text = vpnIP ?? self.emptyIPValue
+        self.vpnIpValue.accessibilityLabel = vpnIP ?? L10n.Localizable.Global.empty
     }
-    
-    @objc private func updateActivityViews() {
-        let vpn = Client.providers.vpnProvider
-        switch vpn.vpnStatus {
-        case .connecting, .disconnecting, .disconnected:
-            self.vpnIpValue.text = self.emptyIPValue
-            self.vpnIpValue.accessibilityLabel = L10n.Localizable.Global.empty
-        default:
-            break
-        }
-    }
-
-    private func statusUpdated() {
-    }
-    
 }
