@@ -40,10 +40,10 @@
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
+		ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = ACADC5F72F51AA1F00986EAF /* SnapshotTesting */; };
 		DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
-		E548E1FF2C1238BD001E9874 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E548E1FE2C1238BD001E9874 /* SnapshotTesting */; };
 		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -447,7 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E548E1FF2C1238BD001E9874 /* SnapshotTesting in Frameworks */,
+				ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +764,7 @@
 			);
 			name = "PIA VPN-tvOS snapshot";
 			packageProductDependencies = (
-				E548E1FE2C1238BD001E9874 /* SnapshotTesting */,
+				ACADC5F72F51AA1F00986EAF /* SnapshotTesting */,
 			);
 			productName = "PIA VPNTests snapshot";
 			productReference = E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */;
@@ -990,9 +990,9 @@
 				AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				35950B2F2ADD2877006F3CD9 /* XCRemoteSwiftPackageReference "Quick" */,
 				35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */,
-				E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 				3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */,
+				ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 46;
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
@@ -3087,7 +3087,7 @@
 			repositoryURL = "https://github.com/Quick/Quick";
 			requirement = {
 				kind = exactVersion;
-				version = 7.3.0;
+				version = 7.6.2;
 			};
 		};
 		35950B322ADD2EE5006F3CD9 /* XCRemoteSwiftPackageReference "Nimble" */ = {
@@ -3095,7 +3095,7 @@
 			repositoryURL = "https://github.com/Quick/Nimble";
 			requirement = {
 				kind = exactVersion;
-				version = 13.0.0;
+				version = 14.0.0;
 			};
 		};
 		3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
@@ -3135,7 +3135,7 @@
 			repositoryURL = "https://github.com/fxm90/GradientProgressBar.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.0.3;
+				version = 3.0.0;
 			};
 		};
 		AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
@@ -3146,12 +3146,12 @@
 				version = 6.5.0;
 			};
 		};
-		E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+		ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
 			requirement = {
 				kind = exactVersion;
-				version = 1.18.7;
+				version = 1.18.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -3243,9 +3243,9 @@
 			package = AA36CDCD28A6746500180A33 /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
 		};
-		E548E1FE2C1238BD001E9874 /* SnapshotTesting */ = {
+		ACADC5F72F51AA1F00986EAF /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E548E1EE2C12383E001E9874 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			package = ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
