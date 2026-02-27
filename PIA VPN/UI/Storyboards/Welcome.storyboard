@@ -12,7 +12,7 @@
         <!--Restore Signup View Controller-->
         <scene sceneID="fct-7p-tbm">
             <objects>
-                <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MO3-fL-T5Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@ You will not be charged during this process.</string>
         <!--Terms And Conditions View Controller-->
         <scene sceneID="d5T-5Y-jTO">
             <objects>
-                <viewController id="DNR-EE-WLm" customClass="TermsAndConditionsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DNR-EE-WLm" customClass="TermsAndConditionsViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ftb-sJ-jis">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -239,7 +239,7 @@ You will not be charged during this process.</string>
         <!--Welcome Page View Controller-->
         <scene sceneID="oI7-DV-agV">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lku-HF-3OI" customClass="WelcomePageViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lku-HF-3OI" customClass="WelcomePageViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeT-86-F2j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1247" y="-745"/>
@@ -247,7 +247,7 @@ You will not be charged during this process.</string>
         <!--Login View Controller-->
         <scene sceneID="hKn-p1-uWK">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="gOX-c2-oGJ" customClass="LoginViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="gOX-c2-oGJ" customClass="LoginViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m1d-km-gdB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -466,7 +466,7 @@ You will not be charged during this process.</string>
         <!--Purchase View Controller-->
         <scene sceneID="oVv-gT-bp3">
             <objects>
-                <viewController storyboardIdentifier="PurchaseViewController" id="J5T-ys-Of8" customClass="PurchaseViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PurchaseViewController" id="J5T-ys-Of8" customClass="PurchaseViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hSf-Fj-o3R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -500,7 +500,7 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                         <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_Staging" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -727,13 +727,13 @@ You will not be charged during this process.</string>
         <!--Magic Link Login View Controller-->
         <scene sceneID="hR4-se-5tr">
             <objects>
-                <viewController storyboardIdentifier="MagicLinkLoginViewController" id="VQu-uR-ebb" customClass="MagicLinkLoginViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MagicLinkLoginViewController" id="VQu-uR-ebb" customClass="MagicLinkLoginViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t3k-ob-dIM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-6i-iXN" customClass="BorderedTextField" customModule="PIAUIKit">
-                                <rect key="frame" x="19" y="39" width="337" height="609"/>
+                                <rect key="frame" x="19" y="39" width="337" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pAP-q7-PIs"/>
                                 </constraints>
@@ -761,7 +761,7 @@ You will not be charged during this process.</string>
         <!--Welcome View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -823,7 +823,7 @@ You will not be charged during this process.</string>
         <!--Get Started View Controller-->
         <scene sceneID="H76-OI-9Kq">
             <objects>
-                <viewController storyboardIdentifier="GetStartedViewController" id="bfs-I2-X8H" customClass="GetStartedViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetStartedViewController" id="bfs-I2-X8H" customClass="GetStartedViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tO9-0u-CbU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -883,32 +883,32 @@ You will not be charged during this process.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="image-walkthrough-2" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-1z-cTb">
-                                        <rect key="frame" x="50.5" y="24" width="274" height="144"/>
+                                        <rect key="frame" x="50.5" y="24" width="274" height="113"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="72V-XQ-0gQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCM-sf-tzW">
-                                        <rect key="frame" x="19" y="178" width="337" height="20.5"/>
+                                        <rect key="frame" x="19" y="147" width="337" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAE-GG-f9t">
-                                        <rect key="frame" x="19" y="203.5" width="337" height="20.5"/>
+                                        <rect key="frame" x="19" y="172.5" width="337" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f4w-dQ-rat">
-                                        <rect key="frame" x="19" y="254" width="337" height="223"/>
+                                        <rect key="frame" x="19" y="223" width="337" height="223"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="223" id="ueL-56-6xP"/>
                                         </constraints>
                                         <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_Staging" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="0.0" width="321" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1034,7 +1034,7 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIAUIKit">
-                                        <rect key="frame" x="19" y="477" width="337" height="50"/>
+                                        <rect key="frame" x="19" y="446" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="prf-nD-f8g"/>
                                         </constraints>
@@ -1043,12 +1043,21 @@ You will not be charged during this process.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waI-5t-fqH" customClass="PIAButton" customModule="PIAUIKit">
-                                        <rect key="frame" x="19" y="532" width="337" height="50"/>
+                                        <rect key="frame" x="19" y="501" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="s5I-fj-v4i"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="vXZ-lx-hvc" kind="show" identifier="LoginAccountSegue" id="eiq-e2-zsM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Yt-Tw-J79" userLabel="Restore Purchase Button">
+                                        <rect key="frame" x="19" y="563" width="337" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="T29-sS-noM"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="logInWithReceipt:" destination="bfs-I2-X8H" eventType="touchUpInside" id="Ntg-he-OQh"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="&lt;Agreement&gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TnO-Bm-adV">
@@ -1067,15 +1076,16 @@ You will not be charged during this process.</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="TnO-Bm-adV" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="7BM-ge-LM2"/>
+                                    <constraint firstItem="1Yt-Tw-J79" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="Dpl-to-QnR"/>
                                     <constraint firstItem="7oE-jf-tjX" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="LOd-ua-ivF"/>
                                     <constraint firstAttribute="trailing" secondItem="waI-5t-fqH" secondAttribute="trailing" constant="19" id="Nt6-ac-pBd"/>
                                     <constraint firstItem="jfg-1z-cTb" firstAttribute="top" secondItem="w9B-qn-C1x" secondAttribute="top" constant="24" id="PnX-Lo-Xvc"/>
-                                    <constraint firstItem="TnO-Bm-adV" firstAttribute="top" secondItem="waI-5t-fqH" secondAttribute="bottom" constant="5" id="Smb-W4-TC9"/>
                                     <constraint firstAttribute="bottom" secondItem="TnO-Bm-adV" secondAttribute="bottom" constant="10" id="TjO-46-DNm"/>
                                     <constraint firstItem="jAE-GG-f9t" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="UCv-gC-uJ3"/>
                                     <constraint firstItem="waI-5t-fqH" firstAttribute="top" secondItem="7oE-jf-tjX" secondAttribute="bottom" constant="5" id="Xze-Ka-34g"/>
                                     <constraint firstItem="waI-5t-fqH" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="ZoS-bj-rkO"/>
                                     <constraint firstAttribute="trailing" secondItem="JCM-sf-tzW" secondAttribute="trailing" constant="19" id="ajl-xq-Joz"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Yt-Tw-J79" secondAttribute="trailing" constant="19" id="cjg-dg-mvG"/>
                                     <constraint firstItem="f4w-dQ-rat" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="eYy-Eo-2Gx"/>
                                     <constraint firstAttribute="trailing" secondItem="7oE-jf-tjX" secondAttribute="trailing" constant="19" id="ft1-mT-kav"/>
                                     <constraint firstAttribute="trailing" secondItem="TnO-Bm-adV" secondAttribute="trailing" constant="19" id="fwW-v5-p9H"/>
@@ -1084,7 +1094,9 @@ You will not be charged during this process.</string>
                                     <constraint firstItem="7oE-jf-tjX" firstAttribute="top" secondItem="f4w-dQ-rat" secondAttribute="bottom" id="n6d-Ta-whw"/>
                                     <constraint firstAttribute="trailing" secondItem="jAE-GG-f9t" secondAttribute="trailing" constant="19" id="rG3-EN-gBH"/>
                                     <constraint firstAttribute="trailing" secondItem="f4w-dQ-rat" secondAttribute="trailing" constant="19" id="ug0-hF-UtP"/>
+                                    <constraint firstItem="TnO-Bm-adV" firstAttribute="top" secondItem="1Yt-Tw-J79" secondAttribute="bottom" constant="4" id="vQB-d0-m58"/>
                                     <constraint firstItem="JCM-sf-tzW" firstAttribute="top" secondItem="jfg-1z-cTb" secondAttribute="bottom" constant="10" id="xQg-ez-SqA"/>
+                                    <constraint firstItem="1Yt-Tw-J79" firstAttribute="top" secondItem="waI-5t-fqH" secondAttribute="bottom" constant="12" id="xdg-ih-q3h"/>
                                     <constraint firstItem="JCM-sf-tzW" firstAttribute="leading" secondItem="w9B-qn-C1x" secondAttribute="leading" constant="19" id="zvx-gl-zwg"/>
                                 </constraints>
                             </view>
@@ -1148,7 +1160,6 @@ You will not be charged during this process.</string>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" id="6hm-M9-FPK"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ei6-5m-nGj" secondAttribute="bottom" constant="14" id="7ze-iS-qHu"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ei6-5m-nGj" secondAttribute="trailing" id="DN5-Mc-bID"/>
                                                 <constraint firstItem="Ei6-5m-nGj" firstAttribute="leading" secondItem="QSh-TD-jyS" secondAttribute="leading" id="U25-pS-2mO"/>
                                                 <constraint firstItem="Ei6-5m-nGj" firstAttribute="top" secondItem="QSh-TD-jyS" secondAttribute="top" constant="14" id="eNE-tK-Vhn"/>
@@ -1249,6 +1260,7 @@ You will not be charged during this process.</string>
                         <outlet property="newSubscribeNowButton" destination="7oE-jf-tjX" id="OOz-zx-q1L"/>
                         <outlet property="newTextAgreement" destination="TnO-Bm-adV" id="3yU-zM-GCc"/>
                         <outlet property="pageControl" destination="1u1-jZ-9mC" id="tYi-94-HmO"/>
+                        <outlet property="restorePurchaseButton" destination="1Yt-Tw-J79" id="W58-ku-SJb"/>
                         <outlet property="scrollBackground" destination="iP4-wP-euf" id="rDH-Er-gcb"/>
                         <outlet property="scrollContent" destination="FtT-Je-5Y0" id="1r6-my-pdp"/>
                         <outlet property="spinner" destination="FbE-qZ-ggm" id="HCp-hq-bSd"/>
@@ -1272,7 +1284,7 @@ You will not be charged during this process.</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="tth-4B-3Z0"/>
-        <segue reference="eeI-Xa-Rq6"/>
+        <segue reference="kNL-g4-6nK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="PIAX/Global/icon-close" width="14" height="15"/>

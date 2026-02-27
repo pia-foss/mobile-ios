@@ -79,6 +79,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
     @IBOutlet private weak var collectionPlans: UICollectionView!
     @IBOutlet private weak var newSubscribeNowButton: PIAButton!
     @IBOutlet private weak var newLoginButton: PIAButton!
+    @IBOutlet private weak var restorePurchaseButton: UIButton!
     @IBOutlet private weak var newTextAgreement: UITextView!
 
     private var buttonViewIsExpanded = false {
@@ -216,7 +217,44 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
         
     }
-    
+
+    @IBAction private func logInWithReceipt(_ sender: Any?) {
+        showLoadingAnimation()
+
+        Client.store.refreshPaymentReceipt { error in
+            DispatchQueue.main.async {
+                guard let receipt = Client.store.paymentReceipt else {
+                    self.hideLoadingAnimation()
+                    return
+                }
+
+                let request = LoginReceiptRequest(receipt: receipt)
+                self.preset.accountProvider.login( with: request, { userAccount, error in
+                    self.hideLoadingAnimation()
+
+                    guard let userAccount else {
+                        self.handleBadReceipt()
+                        return
+                    }
+
+                    self.completionDelegate?.welcomeDidLogin(
+                        withUser: userAccount,
+                        topViewController: self
+                    )
+                })
+            }
+        }
+    }
+
+    private func handleBadReceipt() {
+        let alert = Macros.alert(
+            L10n.Localizable.Account.Restore.Failure.title,
+            L10n.Localizable.Account.Restore.Failure.message
+        )
+        alert.addDefaultAction(L10n.Localizable.Global.close)
+        present(alert, animated: true, completion: nil)
+    }
+
     private func startPurchaseProcessWithEmail(
         _ email: String,
         andPlan plan: PurchasePlan
@@ -402,6 +440,10 @@ public class GetStartedViewController: PIAWelcomeViewController {
         newSubscribeNowButton.style(style: TextStyle.Buttons.piaGreenButton)
         newLoginButton.style(style: TextStyle.Buttons.piaPlainTextButton)
 
+        restorePurchaseButton.setTitle(L10n.Localizable.Account.Restore.button.capitalized, for: [])
+        restorePurchaseButton.titleLabel?.numberOfLines = 0
+        restorePurchaseButton.titleLabel?.textAlignment = .center
+
         loginButton.setTitle(L10n.Welcome.Login.submit.uppercased(),
                              for: [])
         newLoginButton.setTitle(L10n.Welcome.Login.submit.uppercased(),
@@ -545,10 +587,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
         Theme.current.applyTitle(walkthroughTitle, appearance: .light)
         Theme.current.applySubtitle(walkthroughDescription)
 
-        Theme.current.applyTransparentButton(loginButton,
-                                             withSize: 1.0)
-        Theme.current.applyTransparentButton(newLoginButton,
-                                             withSize: 1.0)
+        Theme.current.applyTransparentButton(loginButton, withSize: 1.0)
+        Theme.current.applyTransparentButton(newLoginButton, withSize: 1.0)
+        Theme.current.applyButtonLabelMediumStyle(restorePurchaseButton)
         Theme.current.applyButtonLabelMediumStyle(buyButton)
         Theme.current.applyScrollableMap(scrollBackground)
         Theme.current.applyPageControl(pageControl)
