@@ -23,13 +23,9 @@
 import Foundation
 
 public struct Product: Codable {
-    
     public let identifier: String
-    
     public let plan: Plan
-    
     public let price: String
-    
     public let legacy: Bool
     
     enum CodingKeys: String, CodingKey {
@@ -38,5 +34,11 @@ public struct Product: Codable {
         case price = "price"
         case legacy = "legacy"
     }
-    
+
+    public init(identifier: String, plan: Plan, price: String, legacy: Bool) {
+        self.identifier = identifier
+        self.plan = plan
+        self.price = price
+        self.legacy = legacy
+    }
 }

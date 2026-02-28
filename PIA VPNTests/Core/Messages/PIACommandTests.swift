@@ -67,7 +67,7 @@ class PIACommandTests: XCTestCase {
     
     func testCommandAction() throws {
         
-        XCTAssertTrue(Client.preferences.vpnType == IKEv2Profile.vpnType)
+        XCTAssertTrue(Client.preferences.vpnType == PIAWGTunnelProfile.vpnType)
         
         testOVPNAction.executeAction()
         

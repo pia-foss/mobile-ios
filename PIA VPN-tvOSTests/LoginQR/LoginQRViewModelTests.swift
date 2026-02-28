@@ -23,7 +23,7 @@ final class LoginQRViewModelTests: XCTestCase {
     var cancellables: Set<AnyCancellable>!
     var capturedState: [LoginQRViewModel.State]!
     
-    func instantiateSut(generateLoginQRResult: Result<LoginQRCode, ClientError>, validateLoginQRError: ClientError?, loginWithReceiptResult: Result<PIA_VPN_tvOS.UserAccount, Error> = .failure(LoginError.unauthorized), onSuccessAction: @escaping () -> Void, onNavigateAction: @escaping () -> Void) {
+    func instantiateSut(generateLoginQRResult: Result<LoginQRCode, ClientError>, validateLoginQRError: ClientError?, loginWithReceiptResult: Result<UserAccount, Error> = .failure(LoginError.unauthorized), onSuccessAction: @escaping () -> Void, onNavigateAction: @escaping () -> Void) {
         
         fixture.generateLoginQRCodeMock = GenerateLoginQRCodeUseCaseMock(result: generateLoginQRResult)
         fixture.validateLoginQRCodeMock = ValidateLoginQRCodeMock(error: validateLoginQRError)

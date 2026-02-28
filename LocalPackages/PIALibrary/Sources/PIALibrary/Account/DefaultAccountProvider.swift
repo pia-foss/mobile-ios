@@ -168,47 +168,21 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
         }
     }
 
-    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
-
-        // If it was already migrated
-        if (self.accessedDatabase.plain.tokenMigrated) {
-            callback?(nil)
-            return
-        }
-
-        // If there is something persisted. Try to migrate it.
-        if let token = oldToken {
-            webServices.migrateToken(token: token) { [weak self] (error) in
-                guard error == nil else {
-                    callback?(error)
-                    return
-                }
-                
-                guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
-                    callback?(ClientError.unauthorized)
-                    return
-                }
-        
-                self?.accessedDatabase.secure.setPassword(password, for: username)
-                self?.accessedDatabase.plain.tokenMigrated = true
-                callback?(nil)
-            }
-        } else {
-
-            // Nothing persisted. Continue.
-            callback?(nil)
-        }
-    }
-    
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             callback?(currentUser, nil)
             return
         }
-        
-        webServices.token(receipt: receiptRequest.receipt) { (error) in
+
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.token(receipt: receiptRequest.receipt)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -218,9 +192,15 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             return
         }
 
-        self.webServices.migrateToken(token: linkToken) { (error) in
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.migrateToken(token: linkToken)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 
@@ -230,15 +210,24 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             return
         }
 
-        webServices.token(credentials: request.credentials) { (error) in
-            self.handleLoginResult(error: error, credentials: request.credentials, callback: callback)
+        Task { @MainActor in
+            do {
+                try await webServices.token(credentials: request.credentials)
+                handleLoginResult(error: nil, credentials: request.credentials, callback: callback)
+            } catch {
+                handleLoginResult(error: error, credentials: request.credentials, callback: callback)
+            }
         }
-
     }
     
     public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
-        webServices.validateLoginQR(qrToken: qrToken) { apiToken, error in
-            callback?(apiToken, error)
+        Task { @MainActor in
+            do {
+                let apiToken = try await webServices.validateLoginQR(qrToken: qrToken)
+                callback?(apiToken, nil)
+            } catch {
+                callback?(nil, error)
+            }
         }
     }
     
@@ -267,18 +256,18 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
         
     private func updateUserAccount(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
-        self.webServices.info() { (accountInfo, error) in
-            guard let accountInfo = accountInfo else {
-                self.webServices.logout(nil)
+        Task { @MainActor in
+            do {
+                let accountInfo = try await self.webServices.info()
+                self.accessedDatabase.plain.accountInfo = accountInfo
+                self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
+                let userAccount = UserAccount(credentials: credentials, info: accountInfo)
+                callback?(userAccount, nil)
+            } catch {
+                try? await self.webServices.logout()
                 self.cleanDatabase()
-                callback?(nil,ClientError.unauthorized)
-                return
+                callback?(nil, ClientError.unauthorized)
             }
-
-            self.accessedDatabase.plain.accountInfo = accountInfo
-            self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
-            let userAccount = UserAccount(credentials: credentials, info: accountInfo)
-            callback?(userAccount, nil)
         }
     }
     
@@ -301,15 +290,15 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     private func accountInfoWith(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        webServices.info() { (accountInfo, error) in
-            guard let accountInfo = accountInfo else {
+        Task { @MainActor in
+            do {
+                let accountInfo = try await webServices.info()
+                self.accessedDatabase.plain.accountInfo = accountInfo
+                Macros.postNotification(.PIAAccountDidRefresh, [.accountInfo: accountInfo])
+                callback?(accountInfo, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-
-            self.accessedDatabase.plain.accountInfo = accountInfo
-            Macros.postNotification(.PIAAccountDidRefresh, [.accountInfo: accountInfo])
-            callback?(accountInfo, nil)
         }
     }
     
@@ -318,25 +307,35 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(nil, ClientError.unauthorized)
             return
         }
-        let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
-                                      password: password)
-        webServices.update(credentials: credentials, resetPassword: reset, email: request.email) { (error) in
-            guard error == nil else {
+
+        let credentials = Credentials(
+            username: Client.providers.accountProvider.publicUsername ?? "",
+            password: password
+        )
+
+        Task { @MainActor in
+            do {
+                try await webServices.update(
+                    credentials: credentials,
+                    resetPassword: reset,
+                    email: request.email
+                )
+
+                guard let newAccountInfo = user.info?.with(email: request.email) else {
+                    Macros.postNotification(.PIAAccountDidUpdate)
+                    callback?(nil, nil)
+                    return
+                }
+
+                self.accessedDatabase.plain.accountInfo = newAccountInfo
+                Macros.postNotification(.PIAAccountDidUpdate, [
+                    .accountInfo: newAccountInfo
+                ])
+
+                callback?(newAccountInfo, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-
-            guard let newAccountInfo = user.info?.with(email: request.email) else {
-                Macros.postNotification(.PIAAccountDidUpdate)
-                callback?(nil, nil)
-                return
-            }
-
-            self.accessedDatabase.plain.accountInfo = newAccountInfo
-            Macros.postNotification(.PIAAccountDidUpdate, [
-                .accountInfo: newAccountInfo
-            ])
-            callback?(newAccountInfo, nil)
         }
     }
     
@@ -345,8 +344,10 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(nil)
             return
         }
-        webServices.logout { [weak self] (result, error) in
-            self?.cleanDatabase()
+
+        Task { @MainActor in
+            try? await webServices.logout()
+            cleanDatabase()
             Macros.postNotification(.PIAAccountDidLogout)
             callback?(nil)
         }
@@ -357,21 +358,26 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             callback?(ClientError.unauthorized)
             return
         }
-        webServices.deleteAccount { (result, error) in
-            guard let result = result, result != false else {
+
+        Task { @MainActor in
+            do {
+                try await webServices.deleteAccount()
+                callback?(nil)
+            } catch {
                 callback?(error)
-                return
             }
-            callback?(nil)
         }
     }
     
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
-        webServices.featureFlags { (features, nil) in
-            Client.configuration.featureFlags.removeAll()
-            if let features = features, !features.isEmpty {
-                Client.configuration.featureFlags.append(contentsOf: features)
+        Task { @MainActor in
+            guard let features = try? await webServices.featureFlags() else {
+                callback?(nil)
+                return
             }
+
+            Client.configuration.featureFlags.removeAll()
+            Client.configuration.featureFlags.append(contentsOf: features)
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
             callback?(nil)
         }
@@ -382,21 +388,15 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
         log.debug("Fetching available product keys...")
         
         let receipt = accessedStore.paymentReceipt
-        
-        webServices.subscriptionInformation(with: receipt, { appStoreInformation, error in
-        
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-            
-            if let appStoreInformation = appStoreInformation {
-                callback?(appStoreInformation, nil)
-            } else {
-                callback?(nil, ClientError.malformedResponseData)
-            }
 
-        })
+        Task { @MainActor in
+            do {
+                let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
+                callback?(appStoreInformation, nil)
+            } catch {
+                callback?(nil, error)
+            }
+        }
     }
     
     public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
@@ -442,7 +442,14 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        self.webServices.loginLink(email: email, callback)
+        Task { @MainActor in
+            do {
+                try await webServices.loginLink(email: email)
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
@@ -457,43 +464,35 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
 
         accessedDatabase.plain.lastSignupEmail = request.email
 
-        webServices.signup(with: signup) { (credentials, error) in
-            if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                callback?(nil, ClientError.internetUnreachable)
-                return
-            }
-            guard let credentials = credentials else {
-                callback?(nil, error)
-                return
-            }
-            if let transaction = request.transaction {
-                self.accessedStore.finishTransaction(transaction, success: true)
-            }
-            
-            self.accessedDatabase.plain.lastSignupEmail = nil
-            self.accessedDatabase.secure.setPublicUsername(credentials.username)
-            self.accessedDatabase.secure.setUsername(credentials.username)
-            self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+        Task { @MainActor in
+            do {
+                let credentials = try await webServices.signup(with: signup)
 
-            self.webServices.token(credentials: credentials) { (error) in
-                if error != nil {
-                    callback?(nil, error)
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
+                }
+
+                accessedDatabase.plain.lastSignupEmail = nil
+                accessedDatabase.secure.setPublicUsername(credentials.username)
+                accessedDatabase.secure.setUsername(credentials.username)
+                accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+
+                try await webServices.token(credentials: credentials)
+                let accountInfo = try await webServices.info()
+                accessedDatabase.plain.accountInfo = accountInfo
+                accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+                let user = UserAccount(credentials: credentials, info: nil)
+                Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+                callback?(user, nil)
+
+            } catch {
+                if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
+                    callback?(nil, ClientError.internetUnreachable)
                     return
                 }
 
-                self.webServices.info() { (accountInfo, error) in
-                    guard let accountInfo = accountInfo else {
-                        callback?(nil, error)
-                        return
-                    }
-
-                    self.accessedDatabase.plain.accountInfo = accountInfo
-                    self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
-                    
-                    let user = UserAccount(credentials: credentials, info: nil)
-                    Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-                    callback?(user, nil)
-                }
+                callback?(nil, error)
             }
         }
     }
@@ -552,26 +551,23 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             return
         }
 
-        webServices.processPayment(credentials: user.credentials, request: payment) { (error) in
-            if let _ = error {
-                callback?(nil, error)
-                return
-            }
-            if let transaction = request.transaction {
-                self.accessedStore.finishTransaction(transaction, success: true)
-            }
-            Macros.postNotification(.PIAAccountDidRenew)
+        Task { @MainActor in
+            do {
+                try await webServices.processPayment(credentials: user.credentials, request: payment)
 
-            self.webServices.info() { (accountInfo, error) in
-                guard let newAccountInfo = accountInfo else {
-                    callback?(nil, nil)
-                    return
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
                 }
-                self.accessedDatabase.plain.accountInfo = newAccountInfo
-                
-                let user = UserAccount(credentials: user.credentials, info: newAccountInfo)
+                Macros.postNotification(.PIAAccountDidRenew)
+
+                let accountInfo = try await webServices.info()
+                accessedDatabase.plain.accountInfo = accountInfo
+
+                let user = UserAccount(credentials: user.credentials, info: accountInfo)
                 Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
                 callback?(user, nil)
+            } catch {
+                callback?(nil, error)
             }
         }
     }

@@ -31,10 +31,11 @@ class SignupEmailFactory {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Incorrect account provider type")
         }
-        
-        return SignupProvider(accountProvider: defaultAccountProvider, 
-                              userAccountMapper: UserAccountMapper(), 
-                              store: Client.store, 
-                              errorMapper: SignupDomainErrorMapper())
+
+        return SignupProvider(
+            accountProvider: defaultAccountProvider,
+            store: Client.store,
+            errorMapper: SignupDomainErrorMapper()
+        )
     }
 }

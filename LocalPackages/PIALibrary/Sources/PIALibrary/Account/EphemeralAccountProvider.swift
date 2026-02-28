@@ -51,10 +51,6 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
         return nil
     }
 
-    func migrateOldTokenIfNeeded(_ callback: ((Error?) -> Void)?) {
-        log.error("Not implemented")
-    }
-
     func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         log.error("Not implemented")
     }
@@ -121,15 +117,20 @@ class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
             return
         }
 
-        webServices?.signup(with: signup) { (credentials, error) in
-            guard let credentials = credentials else {
+        Task { @MainActor in
+            do {
+                guard let credentials = try await webServices?.signup(with: signup) else {
+                    callback?(nil, nil)
+                    return
+                }
+
+                let user = UserAccount(credentials: credentials, info: nil)
+                self.currentUser = user
+                self.isLoggedIn = true
+                callback?(user, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-            let user = UserAccount(credentials: credentials, info: nil)
-            self.currentUser = user
-            self.isLoggedIn = true
-            callback?(user, nil)
         }
     }
 

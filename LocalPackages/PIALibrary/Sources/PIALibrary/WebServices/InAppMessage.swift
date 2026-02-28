@@ -16,11 +16,9 @@
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
 //  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 //
 
 import Foundation
-import account
 
 public enum InAppMessageType {
     case none
@@ -59,48 +57,4 @@ public struct InAppMessage {
         self.executionCompletionHandler = executionCompletionHandler
     }
     
-}
-
-extension InAppMessage {
-    
-    init(withMessage messageInformation: MessageInformation, andLevel level: InAppMessageLevel, executionCompletionHandler: (() -> ())? = nil) {
-        
-        self.id = "\(messageInformation.id)"
-        self.message = messageInformation.message
-        
-        if let link = messageInformation.link {
-            self.linkMessage = link.text
-            
-            if !link.action.settings.isEmpty {
-                self.type = .action
-                var actions = [String: Bool]()
-                for setting in link.action.settings {
-                    actions[setting.key] = setting.value.boolValue
-                }
-                self.settingAction = actions
-                self.settingLink = nil
-                self.settingView = nil
-            } else if let uri = link.action.uri, !uri.isEmpty {
-                self.type = .link
-                self.settingLink = link.action.uri
-                self.settingAction = nil
-                self.settingView = nil
-            } else {
-                self.type = .view
-                self.settingView = link.action.view
-                self.settingLink = nil
-                self.settingAction = nil
-            }
-        } else {
-            self.type = .none
-            self.linkMessage = nil
-            self.settingLink = nil
-            self.settingAction = nil
-            self.settingView = nil
-        }
-        
-        self.level = level
-        self.executionCompletionHandler = executionCompletionHandler
-    }
-
 }

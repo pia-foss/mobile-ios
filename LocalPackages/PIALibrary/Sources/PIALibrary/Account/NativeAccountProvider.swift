@@ -186,38 +186,6 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         }
     }
 
-    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
-
-        // If it was already migrated
-        if (self.accessedDatabase.plain.tokenMigrated) {
-            callback?(nil)
-            return
-        }
-
-        // If there is something persisted. Try to migrate it.
-        if let token = oldToken {
-            webServices.migrateToken(token: token) { [weak self] (error) in
-                guard error == nil else {
-                    callback?(error)
-                    return
-                }
-                
-                guard let username = self?.vpnTokenUsername, let password = self?.vpnTokenPassword else {
-                    callback?(ClientError.unauthorized)
-                    return
-                }
-        
-                self?.accessedDatabase.secure.setPassword(password, for: username)
-                self?.accessedDatabase.plain.tokenMigrated = true
-                callback?(nil)
-            }
-        } else {
-
-            // Nothing persisted. Continue.
-            callback?(nil)
-        }
-    }
-    
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !isLoggedIn else {
             callback?(currentUser, nil)
@@ -239,9 +207,15 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             return
         }
 
-        self.webServices.migrateToken(token: linkToken) { (error) in
+        Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+
+            do {
+                try await webServices.migrateToken(token: linkToken)
+                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+            } catch {
+                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+            }
         }
     }
 

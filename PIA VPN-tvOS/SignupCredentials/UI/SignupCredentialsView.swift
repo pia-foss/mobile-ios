@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALibrary
 
 struct SignupCredentialsView: View {
     let credentials: Credentials

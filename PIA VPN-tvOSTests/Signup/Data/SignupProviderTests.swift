@@ -18,13 +18,12 @@ final class SignupProviderTests: XCTestCase {
     
     var fixture: Fixture!
     var sut: SignupProvider!
-    var capturedResult: Result<PIA_VPN_tvOS.UserAccount, SignupError>?
-    
-    func instantiateSut(accountProviderResult: (PIALibrary.UserAccount?, Error?)) {
+    var capturedResult: Result<UserAccount, SignupError>?
+
+    func instantiateSut(accountProviderResult: (UserAccount?, Error?)) {
         fixture.accountProviderMock = AccountProviderMock(userResult: accountProviderResult.0, errorResult: accountProviderResult.1)
         sut = SignupProvider(accountProvider: fixture.accountProviderMock,
-                             userAccountMapper: UserAccountMapper(),
-                             store: fixture.storeSpy, 
+                             store: fixture.storeSpy,
                              errorMapper: SignupDomainErrorMapper())
     }
     
@@ -40,7 +39,7 @@ final class SignupProviderTests: XCTestCase {
 
     func test_signup_completes_with_success_when_accoutProvider_completes_with_an_userAccount_and_no_error() throws {
         // GIVEN accoutProvider completes with valid userAccount and no error
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
@@ -75,7 +74,7 @@ final class SignupProviderTests: XCTestCase {
         let userPlan = try XCTUnwrap(user.info?.plan)
         
         switch (capturedPlan, userPlan) {
-            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, PIALibrary.Plan.trial), (Plan.other, Plan.other):
+            case (Plan.monthly, Plan.monthly), (Plan.yearly, Plan.yearly), (Plan.trial, Plan.trial), (Plan.other, Plan.other):
                 XCTAssertTrue(true)
             default:
                 XCTFail("Expected the same plan, got \(capturedPlan) and \(userPlan)")
@@ -84,7 +83,7 @@ final class SignupProviderTests: XCTestCase {
     
     func test_signup_completes_with_failure_when_accoutProvider_completes_with_no_userAccount_and_an_error() {
         // GIVEN accoutProvider completes with no userAccount and an error
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         let expectedError = NSError(domain: "anError", code: 0)
         
         instantiateSut(accountProviderResult: (user, expectedError))
@@ -108,7 +107,7 @@ final class SignupProviderTests: XCTestCase {
     
     func test_signup_completes_with_failure_when_accoutProvider_completes_with_no_userAccount_and_no_error() throws {
         // GIVEN accoutProvider completes with no userAccount and no error
-        let user: PIALibrary.UserAccount? = nil
+        let user: UserAccount? = nil
         let expectedError: Error? = nil
         
         instantiateSut(accountProviderResult: (user, expectedError))
@@ -132,7 +131,7 @@ final class SignupProviderTests: XCTestCase {
     
     func test_signup_completes_with_failure_when_accoutProvider_completes_with_an_userAccount_and_an_error() {
         // GIVEN accoutProvider completes with valid userAccount and an error
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let expectedError = NSError(domain: "anError", code: 0)
         
         instantiateSut(accountProviderResult: (user, expectedError))
@@ -157,7 +156,7 @@ final class SignupProviderTests: XCTestCase {
     func test_signup_refreshes_payment_when_there_is_no_paymentReceipt() {
         // GIVEN there is no payment receipt
         fixture.storeSpy.paymentReceipt = nil
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))
@@ -176,7 +175,7 @@ final class SignupProviderTests: XCTestCase {
     func test_signup_does_not_refresh_payment_when_there_is_a_paymentReceipt() {
         // GIVEN there is no payment receipt
         fixture.storeSpy.paymentReceipt = Data()
-        let user = PIALibrary.UserAccount.makeStub()
+        let user = UserAccount.makeStub()
         let error: Error? = nil
         
         instantiateSut(accountProviderResult: (user, error))

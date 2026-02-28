@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol LoginProviderType {
     func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void)

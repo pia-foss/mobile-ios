@@ -23,7 +23,7 @@
 import Foundation
 
 /// The account credentials.
-public struct Credentials {
+public struct Credentials: Equatable {
 
     /// The username, typically a number prefixed with "p".
     public let username: String
@@ -36,12 +36,15 @@ public struct Credentials {
         self.username = username
         self.password = password
     }
-    
+
+    public static func == (lhs: Credentials, rhs: Credentials) -> Bool {
+        lhs.username == rhs.username && lhs.password == rhs.password
+    }
 }
 
 public extension Credentials {
     
-    public func toJSONDictionary() -> [String: Any] {
+    func toJSONDictionary() -> [String: Any] {
         return ["username":username, "password": password]
     }
 

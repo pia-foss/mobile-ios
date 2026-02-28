@@ -21,7 +21,6 @@
 
 import Foundation
 import PIALibrary
-import account
 import UIKit
 
 public class MessagesManager: NSObject {

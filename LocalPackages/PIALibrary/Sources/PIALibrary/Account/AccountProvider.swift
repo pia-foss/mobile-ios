@@ -66,13 +66,6 @@ public protocol AccountProvider: AnyObject {
     #endif
 
     /**
-     It migrates an old persisted non-expiry token into a new expiry one managed by the accounts module.
-
-     - Parameter callback: Returns `nil` on success.
-     */
-    func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?)
-
-    /**
      Logs into system. The `isLoggedIn` variable becomes `true` on success.
  
      - Precondition: `isLoggedIn` is `false`.

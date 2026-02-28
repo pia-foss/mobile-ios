@@ -1,13 +1,9 @@
 
 import Foundation
 import Combine
-#if canImport(PIA_VPN_tvOS)
-@testable import PIA_VPN_tvOS
-#endif
 
-#if canImport(PIA_VPN)
-@testable import PIA_VPN
-#endif
+#if os(tvOS)
+@testable import PIA_VPN_tvOS
 
 class NotificationCenterMock: NotificationCenterType {
     var notificationPublisher: NotificationCenter.Publisher!
@@ -40,3 +36,4 @@ class NotificationCenterMock: NotificationCenterType {
     }
     
 }
+#endif
