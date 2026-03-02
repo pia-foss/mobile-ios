@@ -30,14 +30,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Gloss</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2017 Harlan Kellaway</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/hkellaway/Gloss/main/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>GradientProgressBar</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2017 fxm90</string>

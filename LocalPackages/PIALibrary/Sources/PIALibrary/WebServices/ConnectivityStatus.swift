@@ -22,7 +22,7 @@
 
 import Foundation
 
-struct ConnectivityStatus: Decodable {
+struct ConnectivityStatus {
     let ipAddress: String
     let isVPN: Bool
 

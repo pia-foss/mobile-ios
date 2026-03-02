@@ -67,6 +67,14 @@ class ServerTests: XCTestCase {
         XCTAssertTrue(Client.providers.serverProvider.currentServers.filter({$0.offline == true}).count == 1)
     }
 
+    func testEncodeDecodeServer() throws {
+        __testProviderDownload(factory: MockProviders())
+        let server = Client.providers.serverProvider.currentServers.first!
+        let json = try JSONEncoder().encode(server)
+        let decoded = try JSONDecoder().decode(Server.self, from: json)
+        XCTAssertEqual(server, decoded)
+    }
+
     private func __testProviderDownload(factory: Client.Providers) {
         let exp = expectation(description: "download")
         
@@ -85,5 +93,4 @@ class ServerTests: XCTestCase {
         }
         waitForExpectations(timeout: 5.0, handler: nil)
     }
-    
 }

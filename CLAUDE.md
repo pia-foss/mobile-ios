@@ -164,7 +164,7 @@ xcodebuild test -scheme "PIA VPN Development" -configuration Development -destin
 
 **PIA Packages**: mobile-ios-releases-{kpi,csi,account,regions,networking}, mobile-ios-{openvpn,wireguard}
 
-**Third-party**: SwiftEntryKit, Gloss, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, TweetNacl
+**Third-party**: SwiftEntryKit, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, TweetNacl
 
 ## Security
 
