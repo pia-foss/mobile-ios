@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Gloss
 
 private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
@@ -177,14 +176,23 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var accountInfo: AccountInfo? {
         get {
-            guard let info = backend.dictionary(forKey: Entries.accountInfo) else {
-                return nil
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .secondsSince1970
+            if let data = backend.data(forKey: Entries.accountInfo) {
+                return try? decoder.decode(AccountInfo.self, from: data)
             }
-            return GlossAccountInfo(json: info)?.parsed
+            if let dict = backend.dictionary(forKey: Entries.accountInfo),
+               let data = try? JSONSerialization.data(withJSONObject: dict),
+               let info = try? decoder.decode(AccountInfo.self, from: data) {
+                return info
+            }
+            return nil
         }
         set {
-            if let info = newValue {
-                backend.set(info.toJSON(), forKey: Entries.accountInfo)
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .secondsSince1970
+            if let info = newValue, let data = try? encoder.encode(info) {
+                backend.set(data, forKey: Entries.accountInfo)
             } else {
                 backend.removeObject(forKey: Entries.accountInfo)
             }
@@ -288,13 +296,7 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     // MARK: Server
     var historicalServers: [Server] {
         get {
-            if let copy = historicalServersCopy {
-                return copy
-            }
-            guard let jsonArray = backend.array(forKey: Entries.historicalServers) as? [JSON] else {
-                return []
-            }
-            return Array<GlossServer>.from(jsonArray: jsonArray)?.map { $0.parsed } ?? []
+            return readServers(key: Entries.historicalServers, copy: historicalServersCopy)
         }
         set {
             var servers = newValue
@@ -302,24 +304,34 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 servers.removeFirst()
             }
             historicalServersCopy = servers
-            backend.set(servers.toJSONArray() ?? [], forKey: Entries.historicalServers)
+            backend.set(try? JSONEncoder().encode(servers), forKey: Entries.historicalServers)
         }
     }
 
     var cachedServers: [Server] {
         get {
-            if let copy = cachedServersCopy {
-                return copy
-            }
-            guard let jsonArray = backend.array(forKey: Entries.cachedServers) as? [JSON] else {
-                return []
-            }
-            return Array<GlossServer>.from(jsonArray: jsonArray)?.map { $0.parsed } ?? []
+            return readServers(key: Entries.cachedServers, copy: cachedServersCopy)
         }
         set {
             cachedServersCopy = newValue
-            backend.set(newValue.toJSONArray() ?? [], forKey: Entries.cachedServers)
+            backend.set(try? JSONEncoder().encode(newValue), forKey: Entries.cachedServers)
         }
+    }
+
+    private func readServers(key: String, copy: [Server]?) -> [Server] {
+        if let copy { return copy }
+        let decoder = JSONDecoder()
+        if let data = backend.data(forKey: key),
+           let servers = try? decoder.decode([Server].self, from: data) {
+            return servers
+        }
+        if let jsonArray = backend.array(forKey: key) as? [[String: Any]] {
+            return jsonArray.compactMap { dict in
+                guard let data = try? JSONSerialization.data(withJSONObject: dict) else { return nil }
+                return try? decoder.decode(Server.self, from: data)
+            }
+        }
+        return []
     }
     
     var preferredServer: Server? {

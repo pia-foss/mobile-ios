@@ -136,27 +136,27 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     }
     
     public func loadLocalJSON(fromJSON jsonData: Data) {
-        guard let bundle = GlossServersBundle(jsonData: jsonData) else {
+        guard let bundle = ServersBundle.parse(from: jsonData) else {
             return
         }
-        if let configuration = bundle.parsed.configuration {
+        if let configuration = bundle.configuration {
             accessedDatabase.transient.serversConfiguration = configuration
         }
         if currentServers.isEmpty {
-            currentServers = bundle.parsed.servers
+            currentServers = bundle.servers
             ServersPinger.shared.ping(withDestinations: currentServers)
         }
     }
 
     public func load(fromJSON jsonData: Data) {
-        guard let bundle = GlossServersBundle(jsonData: jsonData) else {
+        guard let bundle = ServersBundle.parse(from: jsonData) else {
             return
         }
-        if let configuration = bundle.parsed.configuration {
+        if let configuration = bundle.configuration {
             accessedDatabase.transient.serversConfiguration = configuration
         }
         if currentServers.isEmpty {
-            currentServers = bundle.parsed.servers
+            currentServers = bundle.servers
         }
     }
     

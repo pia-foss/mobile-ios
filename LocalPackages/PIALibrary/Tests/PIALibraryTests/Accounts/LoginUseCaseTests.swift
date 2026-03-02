@@ -23,9 +23,7 @@ class LoginUseCaseTests: XCTestCase {
         let credentials = Credentials(username: "username", password: "password")
         
         var credentialsBodyData: Data {
-            let credsDict = credentials.toJSONDictionary() as! [String: String]
-            
-            return try! JSONEncoder().encode(credsDict)
+            return try! JSONEncoder().encode(credentials)
         }
         
         let receiptData = Data()

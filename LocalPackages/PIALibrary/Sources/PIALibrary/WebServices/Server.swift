@@ -30,7 +30,7 @@ public enum ServerError: Error {
 }
 
 /// Represents a VPN server.
-public class Server: Hashable {
+public final class Server: Hashable {
 
     /// Serial host
     public let serial: String
@@ -76,7 +76,7 @@ public class Server: Hashable {
     }
     
     /// Represents a VPN server IP endpoint.
-    public class ServerAddressIP: Codable {
+    public final class ServerAddressIP: Encodable {
         
         /// The endpoint ip.
         public let ip: String
@@ -195,7 +195,9 @@ public class Server: Hashable {
         dipToken: String? = nil,
         dipStatus: DedicatedIPStatus? = nil,
         dipUsername: String? = nil,
-        regionIdentifier: String) {
+        regionIdentifier: String,
+        isAutomatic: Bool = false,
+    ) {
         
         self.serial = serial
         self.name = name
@@ -221,7 +223,7 @@ public class Server: Hashable {
         self.dipStatus = dipStatus
         self.dipUsername = dipUsername
         
-        isAutomatic = false
+        self.isAutomatic = isAutomatic
     }
     
     // MARK: Hashable

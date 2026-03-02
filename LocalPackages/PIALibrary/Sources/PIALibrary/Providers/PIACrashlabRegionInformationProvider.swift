@@ -26,7 +26,7 @@ class PIACSIRegionInformationProvider : ICSIProvider {
     func regionInformation() -> String {
         var redactedServers: [String] = []
         for server in Client.providers.serverProvider.currentServers {
-            if let redactedServer = Server(
+            let redactedServer = Server(
                 serial: server.serial,
                 name: server.name,
                 country: server.country,
@@ -47,8 +47,10 @@ class PIACSIRegionInformationProvider : ICSIProvider {
                 dipStatus: nil,
                 dipUsername: nil,
                 regionIdentifier: server.regionIdentifier
-            ).toJSON()?.description {
-                redactedServers.append(redactedServer)
+            )
+            if let data = try? JSONEncoder().encode(redactedServer),
+               let description = String(data: data, encoding: .utf8) {
+                redactedServers.append(description)
             }
         }
         return redactedServers.debugDescription.redactIPs()
