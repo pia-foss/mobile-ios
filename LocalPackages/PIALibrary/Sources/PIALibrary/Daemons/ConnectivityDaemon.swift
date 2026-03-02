@@ -37,7 +37,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
     
     private(set) var hasEnabledUpdates: Bool
     
-    private let reachability = Reachability(hostname: "8.8.8.8")!
+    private let reachability = try! Reachability(hostname: "8.8.8.8")
     
     private var isCheckingConnectivity: Bool
     
@@ -75,7 +75,7 @@ class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Preferenc
 
     private func startReachability() {
         log.debug("Configuring for reachability...")
-        accessedDatabase.transient.isNetworkReachable = (reachability.connection != .none)
+        accessedDatabase.transient.isNetworkReachable = (reachability.connection != .unavailable)
         log.debug("Initial network state is \(accessedDatabase.transient.isNetworkReachable ? "REACHABLE" : "NOT REACHABLE")")
 
         reachability.whenReachable = { (reach) in
