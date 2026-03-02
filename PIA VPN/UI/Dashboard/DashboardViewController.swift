@@ -202,6 +202,11 @@ class DashboardViewController: AutolayoutViewController {
         removeCollectionViewObservers()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateTileLayout()
+    }
+
     private func addObservers() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
