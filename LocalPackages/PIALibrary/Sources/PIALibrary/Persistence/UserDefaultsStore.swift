@@ -179,7 +179,12 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .secondsSince1970
             if let data = backend.data(forKey: Entries.accountInfo) {
-                return try? decoder.decode(AccountInfo.self, from: data)
+                do {
+                    return try decoder.decode(AccountInfo.self, from: data)
+                } catch {
+                    log.warning("Failed to decode AccountInfo from stored data")
+                    log.debug("AccountInfo decode error: \(error)")
+                }
             }
             if let dict = backend.dictionary(forKey: Entries.accountInfo),
                let data = try? JSONSerialization.data(withJSONObject: dict),
@@ -321,9 +326,13 @@ class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private func readServers(key: String, copy: [Server]?) -> [Server] {
         if let copy { return copy }
         let decoder = JSONDecoder()
-        if let data = backend.data(forKey: key),
-           let servers = try? decoder.decode([Server].self, from: data) {
-            return servers
+        if let data = backend.data(forKey: key) {
+            do {
+                return try decoder.decode([Server].self, from: data)
+            } catch {
+                log.warning("Failed to decode servers from stored data")
+                log.debug("[Server] decode error: \(error)")
+            }
         }
         if let jsonArray = backend.array(forKey: key) as? [[String: Any]] {
             return jsonArray.compactMap { dict in

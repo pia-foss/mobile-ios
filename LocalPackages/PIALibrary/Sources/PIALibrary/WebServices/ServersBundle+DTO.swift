@@ -63,13 +63,19 @@ private struct ServersBundleDTO: Decodable {
 
 // MARK: - ServersBundle parsing
 
+private let log = PIALogger.logger(for: ServersBundle.self)
+
 @available(tvOS 17.0, *)
 extension ServersBundle {
     static func parse(from data: Data) -> ServersBundle? {
-        guard let dto = try? JSONDecoder().decode(ServersBundleDTO.self, from: data) else {
+        do {
+            let dto = try JSONDecoder().decode(ServersBundleDTO.self, from: data)
+            return dto.toServersBundle()
+        } catch {
+            log.error("Failed to parse servers JSON")
+            log.debug("ServersBundleDTO decode error: \(error.localizedDescription)")
             return nil
         }
-        return dto.toServersBundle()
     }
 
     static func parse(from jsonString: String) -> ServersBundle? {
