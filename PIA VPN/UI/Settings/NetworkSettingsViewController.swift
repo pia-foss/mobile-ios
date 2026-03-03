@@ -110,7 +110,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
 extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return NetworkSections.all().count
+        return NetworkSections.allCases.count
     }
     
     fileprivate func configure( _ cell: UITableViewCell, forSection section: NetworkSections) {
@@ -145,7 +145,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = NetworkSections.all()[indexPath.row]
+        let section = NetworkSections.allCases[indexPath.row]
 
         configure(cell, forSection: section)
 
@@ -240,7 +240,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = NetworkSections.all()[indexPath.row]
+        let section = NetworkSections.allCases[indexPath.row]
 
         select(section, inTableView: tableView, forIndexPath: indexPath)
 

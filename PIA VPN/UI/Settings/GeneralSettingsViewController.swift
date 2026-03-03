@@ -98,7 +98,7 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
 extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GeneralSections.all().count
+        return GeneralSections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -121,8 +121,8 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = GeneralSections.all()[indexPath.row]
-        
+        let section = GeneralSections.allCases[indexPath.row]
+
         cell.textLabel?.text = section.localizedTitleMessage()
 
         switch section {
@@ -161,8 +161,8 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = GeneralSections.all()[indexPath.row]
-        
+        let section = GeneralSections.allCases[indexPath.row]
+
         switch section {
             
         case .resetSettings:

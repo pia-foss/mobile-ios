@@ -156,7 +156,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
             ])
 
         } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            options.append(contentsOf: IKEv2EncryptionAlgorithm.allValues().map {$0.rawValue})
+            options.append(contentsOf: IKEv2EncryptionAlgorithm.allCases.map {$0.rawValue})
         }
 
         let width = self.view.frame.width / 2
@@ -289,7 +289,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                 cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
                 cell.accessoryType = .none
             } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
+                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm(rawValue: pendingPreferences.ikeV2IntegrityAlgorithm)?.rawValue
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 cell.detailTextLabel?.text = "Noise_IK"
                 cell.accessoryType = .none

@@ -104,7 +104,7 @@ class AutomationSettingsViewController: PIABaseSettingsViewController {
 extension AutomationSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AutomationSections.all().count - (Client.preferences.nmtRulesEnabled ? 0 : 1)
+        return AutomationSections.allCases.count - (Client.preferences.nmtRulesEnabled ? 0 : 1)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -129,7 +129,7 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = AutomationSections.all()[indexPath.row]
+        let section = AutomationSections.allCases[indexPath.row]
 
         switch section {
             case .manageAutomation:
@@ -150,8 +150,8 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
         
-        let section = AutomationSections.all()[indexPath.row]
-        
+        let section = AutomationSections.allCases[indexPath.row]
+
         switch section {
         case .automation:
             cell.textLabel?.text = section.localizedTitleMessage()

@@ -28,7 +28,7 @@ enum DashboardSections: Int {
     case tiles
 }
 
-enum FixedCells: Int, EnumsBuilder {
+enum FixedCells: Int {
     
     case messages = 0
     case feedback
@@ -49,8 +49,8 @@ enum FixedCells: Int, EnumsBuilder {
 
 }
 
-enum Cells: Int, EnumsBuilder {
-    
+enum Cells: Int, CaseIterable {
+
     case region = 0
     case quickConnect
     case ipTile
