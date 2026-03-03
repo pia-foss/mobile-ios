@@ -37,6 +37,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     
     @IBOutlet private weak var scrollView: UIScrollView!
 
+    @IBOutlet private weak var formContainerView: UIView!
+
     @IBOutlet private weak var labelTitle: UILabel!
 
     @IBOutlet private weak var textUsername: BorderedTextField!
@@ -90,6 +92,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         textPassword.text = preset?.loginPassword
         
         styleButtons()
+        setupFormWidthConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +127,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         }
         
     }
+
+    private func setupFormWidthConstraints() {
+        guard let parentView = formContainerView.superview else { return }
+        let readableGuide = parentView.readableContentGuide
+        let leading = formContainerView.leadingAnchor.constraint(greaterThanOrEqualTo: readableGuide.leadingAnchor)
+        let trailing = formContainerView.trailingAnchor.constraint(lessThanOrEqualTo: readableGuide.trailingAnchor)
+        NSLayoutConstraint.activate([leading, trailing])
+    }
+
     // MARK: Actions
     @IBAction private func logInWithLink(_ sender: Any?) {
         if let timeUntilNextTry = timeToRetryMagicLink?.timeSinceNow() {

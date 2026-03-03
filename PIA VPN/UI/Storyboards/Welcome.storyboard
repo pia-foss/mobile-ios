@@ -358,9 +358,9 @@ You will not be charged during this process.</string>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="XgW-nz-hik" secondAttribute="bottom" id="5M0-rB-fsu"/>
-                                                            <constraint firstAttribute="trailing" secondItem="XgW-nz-hik" secondAttribute="trailing" constant="27" id="8T8-TS-LSF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="XgW-nz-hik" secondAttribute="trailing" priority="750" constant="27" id="8T8-TS-LSF"/>
                                                             <constraint firstItem="XgW-nz-hik" firstAttribute="centerX" secondItem="YbX-j5-KQB" secondAttribute="centerX" id="Bqy-JO-Jy4"/>
-                                                            <constraint firstItem="XgW-nz-hik" firstAttribute="leading" secondItem="YbX-j5-KQB" secondAttribute="leading" constant="27" id="EPu-Ld-cen"/>
+                                                            <constraint firstItem="XgW-nz-hik" firstAttribute="leading" secondItem="YbX-j5-KQB" secondAttribute="leading" priority="750" constant="27" id="EPu-Ld-cen"/>
                                                             <constraint firstItem="XgW-nz-hik" firstAttribute="top" secondItem="YbX-j5-KQB" secondAttribute="top" constant="29" id="RQP-UI-eiC"/>
                                                             <constraint firstItem="XgW-nz-hik" firstAttribute="top" secondItem="YbX-j5-KQB" secondAttribute="top" constant="30" id="Zp0-MX-ihC"/>
                                                         </constraints>
@@ -442,6 +442,7 @@ You will not be charged during this process.</string>
                     <connections>
                         <outlet property="buttonLogin" destination="jEh-9o-rVi" id="eaK-D0-FJE"/>
                         <outlet property="couldNotGetPlanButton" destination="Emv-5o-nzd" id="vhr-De-KQ4"/>
+                        <outlet property="formContainerView" destination="XgW-nz-hik" id="fCv-Rd-mW1"/>
                         <outlet property="labelTitle" destination="2Rk-V0-kLQ" id="qdr-SQ-OwV"/>
                         <outlet property="loginWithLink" destination="E7y-PY-4t7" id="Jc9-jn-K4J"/>
                         <outlet property="loginWithReceipt" destination="4OL-1u-sdN" id="gC0-4X-aYT"/>
@@ -1283,7 +1284,7 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tth-4B-3Z0"/>
+        <segue reference="ms1-ev-pif"/>
         <segue reference="kNL-g4-6nK"/>
     </inferredMetricsTieBreakers>
     <resources>
