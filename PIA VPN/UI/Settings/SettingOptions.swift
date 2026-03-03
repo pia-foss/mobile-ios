@@ -72,7 +72,7 @@ public enum SettingOptions: Int, EnumsBuilder {
     public func sectionsForSetting() -> [SettingSection] {
         switch self {
             case .general: return GeneralSections.all()
-            case .protocols: return ProtocolsSections.all()
+            case .protocols: return ProtocolsSections.allCases
             case .network: return NetworkSections.all()
             case .privacyFeatures: return PrivacyFeaturesSections.all()
             case .automation: return AutomationSections.all()
@@ -128,8 +128,8 @@ public enum GeneralSections: Int, SettingSection, EnumsBuilder {
 
 }
 
-public enum ProtocolsSections: Int, SettingSection, EnumsBuilder {
-    
+public enum ProtocolsSections: Int, CaseIterable, SettingSection, EnumsBuilder {
+
     case protocolSelection
     case transport
     case remotePort
@@ -158,11 +158,6 @@ public enum ProtocolsSections: Int, SettingSection, EnumsBuilder {
             case .useSmallPackets: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.protocolSelection, .transport, .remotePort, .dataEncryption, .handshake, .useSmallPackets]
-    }
-
 }
 
 public enum NetworkSections: Int, SettingSection, EnumsBuilder {
