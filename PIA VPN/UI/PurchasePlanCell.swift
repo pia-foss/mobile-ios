@@ -108,8 +108,8 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
 
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"
         }
-        offerTask = Task {
-            await handleBestValue(for: plan)
+        offerTask = Task { [weak self] in
+            await self?.handleBestValue(for: plan)
         }
     }
 
