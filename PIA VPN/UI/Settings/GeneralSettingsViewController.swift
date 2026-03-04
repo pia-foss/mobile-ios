@@ -23,6 +23,8 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 
+private let log = PIALogger.logger(for: GeneralSettingsViewController.self)
+
 class GeneralSettingsViewController: PIABaseSettingsViewController {
     
     private lazy var switchGeoServers = UISwitch()
@@ -121,7 +123,10 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = GeneralSections.allCases[indexPath.row]
+        guard let section = GeneralSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
 
         cell.textLabel?.text = section.localizedTitleMessage()
 
@@ -160,8 +165,10 @@ extension GeneralSettingsViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = GeneralSections.allCases[indexPath.row]
+        guard let section = GeneralSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         switch section {
             

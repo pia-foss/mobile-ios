@@ -128,8 +128,10 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = AutomationSections.allCases[indexPath.row]
+        guard let section = AutomationSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         switch section {
             case .manageAutomation:
@@ -149,8 +151,11 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
         cell.accessoryView = nil
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
-        
-        let section = AutomationSections.allCases[indexPath.row]
+
+        guard let section = AutomationSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         switch section {
         case .automation:

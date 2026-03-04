@@ -173,7 +173,10 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = DevelopmentSections.allCases[indexPath.row]
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
 
         configure(cell, forSection: section)
         
@@ -196,7 +199,10 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        let section = DevelopmentSections.allCases[indexPath.row]
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return false
+        }
         switch section {
         case .username, .publicUsername, .password:
             return true
@@ -218,8 +224,10 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = DevelopmentSections.allCases[indexPath.row]
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         switch section {
             case .resolveGoogleAdsDomain:

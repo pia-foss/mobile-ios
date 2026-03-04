@@ -26,6 +26,8 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIADesignSystem
 
+private let log = PIALogger.logger(for: ProtocolSettingsViewController.self)
+
 final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -320,7 +322,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section: ProtocolsSections = getSection(at: indexPath)
+        guard let section = getSection(at: indexPath) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
 
         cell.textLabel?.text = section.localizedTitleMessage()
 
@@ -375,7 +380,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section: ProtocolsSections = getSection(at: indexPath)
+        guard let section = getSection(at: indexPath) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
         select(at: indexPath, forSection: section)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -388,9 +396,9 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         return [.protocolSelection, .dataEncryption, .handshake, .useSmallPackets]
     }
 
-    private func getSection(at indexPath: IndexPath) -> ProtocolsSections {
+    private func getSection(at indexPath: IndexPath) -> ProtocolsSections? {
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            return ProtocolsSections.allCases[indexPath.row]
+            return ProtocolsSections(rawValue: indexPath.row)
         } else {
             return baseSections[indexPath.row]
         }

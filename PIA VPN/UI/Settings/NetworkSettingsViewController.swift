@@ -145,7 +145,10 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = NetworkSections.allCases[indexPath.row]
+        guard let section = NetworkSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
 
         configure(cell, forSection: section)
 
@@ -239,8 +242,10 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = NetworkSections.allCases[indexPath.row]
+        guard let section = NetworkSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         select(section, inTableView: tableView, forIndexPath: indexPath)
 
