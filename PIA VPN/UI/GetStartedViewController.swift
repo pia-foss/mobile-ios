@@ -365,7 +365,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
         DispatchQueue.main.async {
             self.handleVisibilityOfVIews()
-            self.refreshPlans(products)
+            Task { [weak self] in
+                await self?.refreshPlans(products)
+            }
             self.enableInteractions()
         }
     }
@@ -389,7 +391,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
                 
                 if self.isNewFlow {
                     if let products = self.preset.accountProvider.planProducts {
-                        self.refreshPlans(products)
+                        Task { [weak self] in
+                            await self?.refreshPlans(products)
+                        }
                     }
                 } else {
                     self.visualEffectView.isHidden = false
@@ -419,7 +423,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
         setupNavigationBarButtons()
 
         if let products = preset.accountProvider.planProducts {
-            refreshPlans(products)
+            Task { [weak self] in
+                await self?.refreshPlans(products)
+            }
         } else {
             showLoadingAnimation()
             disableInteractions(fully: false)
@@ -611,9 +617,9 @@ public class GetStartedViewController: PIAWelcomeViewController {
     }
     
     // MARK: InApp refresh plan
-    private func refreshPlans(_ plans: [Plan: InAppProduct]) {
+    private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
         if let yearly = plans[.yearly] {
-            let purchase = PurchasePlan(
+            let purchase = await PurchasePlan(
                 plan: .yearly,
                 product: yearly,
                 monthlyFactor: 12.0
@@ -633,9 +639,19 @@ public class GetStartedViewController: PIAWelcomeViewController {
                                                            withTextToStandOut: price)
                 }
                 if let label = self?.walkthroughDescription {
-                    label.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". " + L10n.Signup.Purchase.Trials.Price.after(price)
-                    Theme.current.makeSmallLabelToStandOut(label,
-                                                           withTextToStandOut: price)
+                    label.text = if purchase.hasIntroOffer {
+                        L10n.Signup.Walkthrough.Page._2.description
+                            + "\n"
+                            + L10n.Signup.Purchase.Trials.intro
+                            + ". "
+                            + L10n.Signup.Purchase.Trials.Price.after(price)
+                    } else {
+                        L10n.Signup.Walkthrough.Page._2.description
+                    }
+                    Theme.current.makeSmallLabelToStandOut(
+                        label,
+                        withTextToStandOut: price,
+                    )
                 }
                 let agreement = self?.composeAgreementText(message: L10n.Welcome.Agreement.message(price)) ?? L10n.Welcome.Agreement.message(price)
                 if let label = self?.textAgreement {
@@ -661,7 +677,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         }
         
         if let monthly = plans[.monthly] {
-            let purchase = PurchasePlan(
+            let purchase = await PurchasePlan(
                 plan: .monthly,
                 product: monthly,
                 monthlyFactor: 1.0

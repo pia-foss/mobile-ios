@@ -21,9 +21,10 @@
 //
 
 import Foundation
+import StoreKit
 
 /// Wraps any native implementation of an in-app product by providing a common interface.
-public protocol InAppProduct: class, CustomStringConvertible {
+public protocol InAppProduct: AnyObject, CustomStringConvertible {
 
     /// The product identifier.
     var identifier: String { get }
@@ -41,5 +42,20 @@ public protocol InAppProduct: class, CustomStringConvertible {
 extension InAppProduct {
     var description: String {
         return "{\(identifier) @ \(priceLocale.currencySymbol ?? "")\(price)}"
+    }
+}
+
+public extension InAppProduct {
+    func isEligibleForIntroOffer() async -> Bool {
+        // Read from the newer `StoreKit.Product` which has the most information, even fetching it via id.
+        // If that fails we get the older `SKProduct` which gives the least information (group wide intro offer).
+        if let subscription = (native as? StoreKit.Product)?.subscription {
+            return await subscription.isEligibleForIntroOffer
+        } else if let subscription = try? await StoreKit.Product.products(for: [identifier]).first?.subscription {
+            return await subscription.isEligibleForIntroOffer
+        } else if let groupId = (native as? SKProduct)?.subscriptionGroupIdentifier {
+            return await StoreKit.Product.SubscriptionInfo.isEligibleForIntroOffer(for: groupId)
+        }
+        return false
     }
 }

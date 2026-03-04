@@ -108,7 +108,9 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         super.viewWillAppear(animated)
 
         if let products = preset?.accountProvider.planProducts {
-            refreshPlans(products)
+            Task { [weak self] in
+                await self?.refreshPlans(products)
+            }
         } else {
             disableInteractions(fully: false)
         }
@@ -200,9 +202,9 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         
     }
 
-    private func refreshPlans(_ plans: [Plan: InAppProduct]) {
+    private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
         if let yearly = plans[.yearly] {
-            let purchase = PurchasePlan(
+            let purchase = await PurchasePlan(
                 plan: .yearly,
                 product: yearly,
                 monthlyFactor: 12.0
@@ -225,7 +227,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
         }
         if let monthly = plans[.monthly] {
-            let purchase = PurchasePlan(
+            let purchase = await PurchasePlan(
                 plan: .monthly,
                 product: monthly,
                 monthlyFactor: 1.0
@@ -268,7 +270,9 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     @objc private func productsDidFetch(notification: Notification) {
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
-        refreshPlans(products)
+        Task { [weak self] in
+            await self?.refreshPlans(products)
+        }
         enableInteractions()
     }
     
