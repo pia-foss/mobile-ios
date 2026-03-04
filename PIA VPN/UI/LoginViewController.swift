@@ -38,6 +38,8 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var formContainerView: UIView!
+    private weak var contentLeadingConstraint: NSLayoutConstraint?
+    private weak var contentTrailingConstraint: NSLayoutConstraint?
 
     @IBOutlet private weak var labelTitle: UILabel!
 
@@ -92,7 +94,7 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         textPassword.text = preset?.loginPassword
         
         styleButtons()
-        setupFormWidthConstraints()
+        setupReadableWidthConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,12 +130,15 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
         
     }
 
-    private func setupFormWidthConstraints() {
+    private func setupReadableWidthConstraints() {
+        guard contentLeadingConstraint == nil && contentTrailingConstraint == nil else { return }
         guard let parentView = formContainerView.superview else { return }
         let readableGuide = parentView.readableContentGuide
         let leading = formContainerView.leadingAnchor.constraint(greaterThanOrEqualTo: readableGuide.leadingAnchor)
         let trailing = formContainerView.trailingAnchor.constraint(lessThanOrEqualTo: readableGuide.trailingAnchor)
         NSLayoutConstraint.activate([leading, trailing])
+        contentLeadingConstraint = leading
+        contentTrailingConstraint = trailing
     }
 
     // MARK: Actions

@@ -28,6 +28,8 @@ import PIAUIKit
 
 final class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var contentCardView: UIView!
+    private weak var contentLeadingConstraint: NSLayoutConstraint?
+    private weak var contentTrailingConstraint: NSLayoutConstraint?
 
     @IBOutlet private weak var imvPicture: UIImageView!
 
@@ -103,12 +105,14 @@ final class VPNPermissionViewController: AutolayoutViewController {
     }
 
     private func setupReadableWidthConstraints() {
+        guard contentLeadingConstraint == nil && contentTrailingConstraint == nil else { return }
         guard let parentView = contentCardView.superview else { return }
         let readableGuide = parentView.readableContentGuide
-        NSLayoutConstraint.activate([
-            contentCardView.leadingAnchor.constraint(equalTo: readableGuide.leadingAnchor),
-            contentCardView.trailingAnchor.constraint(equalTo: readableGuide.trailingAnchor)
-        ])
+        let leading = contentCardView.leadingAnchor.constraint(equalTo: readableGuide.leadingAnchor)
+        let trailing = contentCardView.trailingAnchor.constraint(equalTo: readableGuide.trailingAnchor)
+        NSLayoutConstraint.activate([leading, trailing])
+        contentLeadingConstraint = leading
+        contentTrailingConstraint = trailing
     }
 
     // MARK: Restylable

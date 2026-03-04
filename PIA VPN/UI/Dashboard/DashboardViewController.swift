@@ -202,8 +202,9 @@ class DashboardViewController: AutolayoutViewController {
         removeCollectionViewObservers()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
     }
 
