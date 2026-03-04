@@ -23,9 +23,12 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import StoreKit
 
-class PurchasePlanCell: UICollectionViewCell, Restylable {
-    
+private let log = PIALogger.logger(for: PurchasePlanCell.self)
+
+final class PurchasePlanCell: UICollectionViewCell, Restylable {
+
     // XXX
     private static let textPlaceholder = "                    "
     private static let pricePlaceholder = "             "
@@ -44,23 +47,27 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
 
     @IBOutlet private weak var bestValueHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceBottomConstraint: NSLayoutConstraint!
-    
+
+    private var offerTask: Task<Void, Never>?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         isSelected = false
-        
-        labelBestValue.text = Client.configuration.eligibleForTrial ?
-            "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL" :
-            L10n.Welcome.Plan.bestValue.uppercased()
-
         selectedPlanImageView.alpha = 0
         self.accessibilityTraits = UIAccessibilityTraits.button
         self.isAccessibilityElement = true
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        offerTask?.cancel()
+        offerTask = nil
+    }
+
+    @MainActor
     func fill(plan: PurchasePlan) {
         viewShouldRestyle()
-        
+
         if plan.isDummy {
             let pendingBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
             labelPlan.backgroundColor = pendingBackgroundColor
@@ -101,9 +108,37 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
 
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"
         }
-        viewBestValue.isHidden = !plan.bestValue
+        offerTask = Task {
+            await handleBestValue(for: plan)
+        }
     }
-    
+
+    @MainActor
+    private func handleBestValue(for plan: PurchasePlan) async {
+        // Read from the newer `StoreKit.Product` which has the most information, even fetching it via id.
+        // If that fails we get the older `SKProduct` which gives the least information (group wide intro offer).
+        let isEligibleForIntroOffer: Bool
+        if let subscription = (plan.product.native as? StoreKit.Product)?.subscription {
+            isEligibleForIntroOffer = await subscription.isEligibleForIntroOffer
+        } else if let subscription = try? await StoreKit.Product.products(for: [plan.product.identifier]).first?.subscription {
+            isEligibleForIntroOffer = await subscription.isEligibleForIntroOffer
+        } else if let groupId = (plan.product.native as? SKProduct)?.subscriptionGroupIdentifier {
+            isEligibleForIntroOffer = await StoreKit.Product.SubscriptionInfo.isEligibleForIntroOffer(for: groupId)
+        } else {
+            isEligibleForIntroOffer = false
+        }
+        log.debug(#function, metadata: [
+            "isEligibleForIntroOffer": .stringConvertible(isEligibleForIntroOffer),
+            "eligibleForTrial": .stringConvertible(Client.configuration.eligibleForTrial),
+            "plan": .stringConvertible(plan),
+        ])
+        let showFreeTrialLabel = isEligibleForIntroOffer && Client.configuration.eligibleForTrial
+        labelBestValue.text = showFreeTrialLabel
+            ? "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL"
+            : L10n.Welcome.Plan.bestValue.uppercased()
+
+    }
+
     override var isSelected: Bool {
         didSet {
             Theme.current.applyBorder(viewContainer, selected: isSelected)
