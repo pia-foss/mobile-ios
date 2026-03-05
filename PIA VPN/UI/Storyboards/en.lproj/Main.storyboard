@@ -2064,13 +2064,13 @@
                                                             <constraint firstItem="Ecn-Jl-Ca3" firstAttribute="trailing" secondItem="4gs-ZE-NDE" secondAttribute="trailing" id="HbL-Zw-IUY"/>
                                                             <constraint firstItem="Ecn-Jl-Ca3" firstAttribute="top" secondItem="4gs-ZE-NDE" secondAttribute="bottom" constant="40" id="SyF-Nd-eAB"/>
                                                             <constraint firstItem="4gs-ZE-NDE" firstAttribute="top" secondItem="Wzu-gr-Ews" secondAttribute="top" id="TFj-T4-ncG"/>
-                                                            <constraint firstAttribute="trailing" secondItem="zpI-k0-zA9" secondAttribute="trailing" constant="32" id="TlP-fv-twM"/>
+                                                            <constraint firstItem="zpI-k0-zA9" firstAttribute="trailing" secondItem="4gs-ZE-NDE" secondAttribute="trailing" id="TlP-fv-twM"/>
                                                             <constraint firstItem="zpI-k0-zA9" firstAttribute="top" secondItem="Ecn-Jl-Ca3" secondAttribute="bottom" constant="9" id="cMf-Qe-EcF"/>
                                                             <constraint firstItem="4gs-ZE-NDE" firstAttribute="centerX" secondItem="Wzu-gr-Ews" secondAttribute="centerX" id="eak-Y7-H73"/>
                                                             <constraint firstItem="Ecn-Jl-Ca3" firstAttribute="leading" secondItem="4gs-ZE-NDE" secondAttribute="leading" id="gr6-h6-dxQ"/>
-                                                            <constraint firstItem="4gs-ZE-NDE" firstAttribute="leading" secondItem="Wzu-gr-Ews" secondAttribute="leading" constant="32" id="ktZ-dQ-YBW"/>
-                                                            <constraint firstAttribute="trailing" secondItem="4gs-ZE-NDE" secondAttribute="trailing" constant="32" id="sk4-TG-dpQ"/>
-                                                            <constraint firstItem="zpI-k0-zA9" firstAttribute="leading" secondItem="Wzu-gr-Ews" secondAttribute="leading" constant="32" id="xlH-nb-8iy"/>
+                                                            <constraint firstItem="4gs-ZE-NDE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wzu-gr-Ews" secondAttribute="leading" constant="32" id="ktZ-dQ-YBW"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4gs-ZE-NDE" secondAttribute="trailing" constant="32" id="sk4-TG-dpQ"/>
+                                                            <constraint firstItem="zpI-k0-zA9" firstAttribute="leading" secondItem="4gs-ZE-NDE" secondAttribute="leading" id="xlH-nb-8iy"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -2151,6 +2151,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="contentCardView" destination="4gs-ZE-NDE" id="cCv-Rd-mW3"/>
                         <outlet property="buttonSubmit" destination="Ecn-Jl-Ca3" id="VKg-IV-GrC"/>
                         <outlet property="imvPicture" destination="kVs-7f-Ba8" id="Qc6-Vv-1s3"/>
                         <outlet property="labelFooter" destination="zpI-k0-zA9" id="oKn-Ou-50v"/>

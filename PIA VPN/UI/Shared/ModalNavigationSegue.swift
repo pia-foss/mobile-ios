@@ -25,7 +25,7 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: ModalNavigationSegue.self)
 
-class ModalNavigationSegue: UIStoryboardSegue {
+final class ModalNavigationSegue: UIStoryboardSegue {
 
     // XXX: dismissModal accessed via protocol is not exposed to Obj-C
     override func perform() {
@@ -45,13 +45,19 @@ class ModalNavigationSegue: UIStoryboardSegue {
         Theme.current.applyCustomNavigationBar(nav.navigationBar,
                                                withTintColor: nil,
                                                andBarTintColors: nil)
-        
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            nav.modalPresentationStyle = .formSheet
+            nav.isModalInPresentation = true
+        } else {
+            nav.modalPresentationStyle = .overFullScreen
+        }
+
         if let coordinator = source.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context) in
                 self.source.present(nav, animated: true, completion: nil)
             }, completion: nil)
         } else {
-            nav.modalPresentationStyle = .overFullScreen
             source.present(nav, animated: true, completion: nil)
         }
     }

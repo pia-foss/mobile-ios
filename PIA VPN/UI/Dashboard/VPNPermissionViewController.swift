@@ -26,7 +26,11 @@ import MessageUI
 import PIADesignSystem
 import PIAUIKit
 
-class VPNPermissionViewController: AutolayoutViewController {
+final class VPNPermissionViewController: AutolayoutViewController {
+    @IBOutlet private weak var contentCardView: UIView!
+    private weak var contentLeadingConstraint: NSLayoutConstraint?
+    private weak var contentTrailingConstraint: NSLayoutConstraint?
+
     @IBOutlet private weak var imvPicture: UIImageView!
 
     @IBOutlet private weak var labelTitle: UILabel!
@@ -55,6 +59,7 @@ class VPNPermissionViewController: AutolayoutViewController {
         labelMessage.text = L10n.Localizable.VpnPermission.Body.subtitle(L10n.Localizable.Global.ok)
         labelFooter.text = L10n.Localizable.VpnPermission.Body.footer
         styleSubmitButton()
+        setupReadableWidthConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +103,18 @@ class VPNPermissionViewController: AutolayoutViewController {
         vc.mailComposeDelegate = self
         present(vc, animated: true, completion: nil)
     }
-    
+
+    private func setupReadableWidthConstraints() {
+        guard contentLeadingConstraint == nil && contentTrailingConstraint == nil else { return }
+        guard let parentView = contentCardView.superview else { return }
+        let readableGuide = parentView.readableContentGuide
+        let leading = contentCardView.leadingAnchor.constraint(equalTo: readableGuide.leadingAnchor)
+        let trailing = contentCardView.trailingAnchor.constraint(equalTo: readableGuide.trailingAnchor)
+        NSLayoutConstraint.activate([leading, trailing])
+        contentLeadingConstraint = leading
+        contentTrailingConstraint = trailing
+    }
+
     // MARK: Restylable
     
     override func viewShouldRestyle() {

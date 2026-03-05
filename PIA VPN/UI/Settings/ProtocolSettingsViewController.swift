@@ -26,7 +26,7 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIADesignSystem
 
-class ProtocolSettingsViewController: PIABaseSettingsViewController {
+final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var protocolPopover: Popover!
@@ -87,7 +87,7 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         return 44 * options.count
     }
 
-    private func showProtocolOptions(sender: UITableViewCell) {
+    private func showProtocolOptions(point: CGPoint) {
         
         let options = [
             IKEv2Profile.vpnType,
@@ -102,11 +102,10 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = protocolPopover
         optionsView.protocols = options
-        protocolPopover.show(optionsView, fromView: sender)
-
+        protocolPopover.show(optionsView, point: point, inView: tableView)
     }
     
-    private func showTransportOptions(sender: UITableViewCell) {
+    private func showTransportOptions(point: CGPoint) {
         
         let options: [String] = [
             ProtocolSettingsViewController.AUTOMATIC_SOCKET,
@@ -121,11 +120,10 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = protocolPopover
         optionsView.options = options
-        protocolPopover.show(optionsView, fromView: sender)
-
+        protocolPopover.show(optionsView, point: point, inView: view)
     }
 
-    private func showPortOptions(sender: UITableViewCell) {
+    private func showPortOptions(point: CGPoint) {
 
         var options = [UInt16]()
         
@@ -143,12 +141,11 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = portsPopover
         optionsView.options = options
-        portsPopover.show(optionsView, fromView: sender)
-
+        portsPopover.show(optionsView, point: point, inView: view)
     }
     
-    private func showDataEncryptionOptions(sender: UITableViewCell) {
-        
+    private func showDataEncryptionOptions(point: CGPoint) {
+
         var options = [String]()
         
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
@@ -169,12 +166,12 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = dataEncryptionPopover
         optionsView.options = options
-        dataEncryptionPopover.show(optionsView, fromView: sender)
-        
+        dataEncryptionPopover.show(optionsView, point: point, inView: view)
+
     }
     
-    private func showHandshakeOptions(sender: UITableViewCell) {
-        
+    private func showHandshakeOptions(point: CGPoint) {
+
         var options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms().map{$0.description()}
 
         if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
@@ -188,8 +185,8 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
         optionsView.settingsDelegate = self.settingsDelegate
         optionsView.currentPopover = handshakePopover
         optionsView.options = options
-        handshakePopover.show(optionsView, fromView: sender)
-        
+        handshakePopover.show(optionsView, point: point, inView: view)
+
     }
     
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
@@ -234,11 +231,10 @@ class ProtocolSettingsViewController: PIABaseSettingsViewController {
 extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            return ProtocolsSections.all().count
+            return ProtocolsSections.allCases.count
         } else {
-            return [ProtocolsSections.protocolSelection, ProtocolsSections.dataEncryption, ProtocolsSections.handshake, ProtocolsSections.useSmallPackets].count
+            return baseSections.count
         }
     }
     
@@ -324,12 +320,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        var section: ProtocolsSections!
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            section = ProtocolsSections.all()[indexPath.row]
-        } else {
-            section = [ProtocolsSections.protocolSelection, ProtocolsSections.dataEncryption, ProtocolsSections.handshake, ProtocolsSections.useSmallPackets][indexPath.row]
-        }
+        let section: ProtocolsSections = getSection(at: indexPath)
 
         cell.textLabel?.text = section.localizedTitleMessage()
 
@@ -353,27 +344,30 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         return cell
     }
 
-    fileprivate func select(_ cell: UITableViewCell, forSection section: ProtocolsSections?) {
+    fileprivate func select(at indexPath: IndexPath, forSection section: ProtocolsSections?) {
+        let rect = tableView.rectForRow(at: indexPath)
+        let point = CGPoint(x: rect.midX, y: rect.maxY + 8)
+
         switch section {
         case .protocolSelection:
-            showProtocolOptions(sender: cell)
+            showProtocolOptions(point: point)
         case .transport:
-            showTransportOptions(sender: cell)
+            showTransportOptions(point: point)
         case .remotePort:
-            showPortOptions(sender: cell)
+            showPortOptions(point: point)
         case .dataEncryption:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
             if pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                showDataEncryptionOptions(sender: cell)
+                showDataEncryptionOptions(point: point)
             }
         case .handshake:
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
             if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                showHandshakeOptions(sender: cell)
+                showHandshakeOptions(point: point)
             }
         default:
             break
@@ -381,18 +375,8 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var section: ProtocolsSections!
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            section = ProtocolsSections.all()[indexPath.row]
-        } else {
-            section = [ProtocolsSections.protocolSelection, ProtocolsSections.dataEncryption, ProtocolsSections.handshake, ProtocolsSections.useSmallPackets][indexPath.row]
-        }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting, for: indexPath)
-
-        select(cell, forSection: section)
-
+        let section: ProtocolsSections = getSection(at: indexPath)
+        select(at: indexPath, forSection: section)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -400,4 +384,15 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         Theme.current.applyTableSectionFooter(view)
     }
 
+    private var baseSections: [ProtocolsSections] {
+        return [.protocolSelection, .dataEncryption, .handshake, .useSmallPackets]
+    }
+
+    private func getSection(at indexPath: IndexPath) -> ProtocolsSections {
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            return ProtocolsSections.allCases[indexPath.row]
+        } else {
+            return baseSections[indexPath.row]
+        }
+    }
 }
