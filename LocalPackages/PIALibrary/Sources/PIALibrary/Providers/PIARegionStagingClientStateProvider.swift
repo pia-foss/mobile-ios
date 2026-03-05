@@ -8,8 +8,7 @@
 import Foundation
 import regions
 
-@available(tvOS 17.0, *)
-class PIARegionStagingClientStateProvider: IRegionEndpointProvider {
+final class PIARegionStagingClientStateProvider: IRegionEndpointProvider {
     func regionEndpoints() -> [RegionEndpoint] {
         [
             RegionEndpoint(endpoint: Client.configuration.baseUrl, isProxy: false, usePinnedCertificate: false, certificateCommonName: nil)

@@ -22,7 +22,6 @@
 
 import Foundation
 
-@available(tvOS 17.0, *)
 protocol TransientStore: class {
 
     // MARK: Server

@@ -23,8 +23,7 @@
 import Foundation
 
 /// Simulates account-related operations
-@available(tvOS 17.0, *)
-public class MockAccountProvider: AccountProvider, WebServicesConsumer {
+public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
     
     /// Mocks the outcome of a sign-up operation.
     ///

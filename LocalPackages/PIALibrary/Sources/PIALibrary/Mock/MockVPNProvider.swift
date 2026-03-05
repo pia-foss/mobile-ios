@@ -23,8 +23,7 @@
 import Foundation
 
 /// Simulates VPN-related operations
-@available(tvOS 17.0, *)
-public class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
+public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
     
     /// Fakes the public IP address.
     public var mockPublicIP: String? = "192.168.12.78"

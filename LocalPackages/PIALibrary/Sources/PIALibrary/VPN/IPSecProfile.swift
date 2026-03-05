@@ -27,8 +27,7 @@ private let log = PIALogger.logger(for: IPSecProfile.self)
 
 /// Implementation of `VPNProfile` providing IPsec connectivity.
 /// Deprecated
-@available(tvOS 17.0, *)
-public class IPSecProfile {
+public final class IPSecProfile {
 
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()

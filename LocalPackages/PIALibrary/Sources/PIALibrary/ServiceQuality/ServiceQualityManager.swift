@@ -25,8 +25,7 @@ import kpi
 
 private let log = PIALogger.logger(for: ServiceQualityManager.self)
 
-@available(tvOS 17.0, *)
-public class ServiceQualityManager: NSObject {
+public final class ServiceQualityManager: NSObject {
 
     public static let shared = ServiceQualityManager()
     private let kpiPreferenceName = "PIA_KPI_PREFERENCE_NAME"

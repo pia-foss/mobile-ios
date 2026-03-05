@@ -22,8 +22,7 @@
 
 import Foundation
 
-@available(tvOS 17.0, *)
-class MockWebServices: WebServices {
+final class MockWebServices: WebServices {
     
     var messageType: InAppMessageType = .view
     

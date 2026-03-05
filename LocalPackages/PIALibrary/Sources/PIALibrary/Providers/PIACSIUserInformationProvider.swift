@@ -9,8 +9,7 @@
 import Foundation
 import csi
 
-@available(tvOS 17.0, *)
-class PIACSIUserInformationProvider: ICSIProvider {
+final class PIACSIUserInformationProvider: ICSIProvider {
     
     var filename: String? { return "user_settings" }
     

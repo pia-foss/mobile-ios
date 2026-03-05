@@ -240,7 +240,6 @@ public final class Server: Hashable {
     
 }
 
-@available(tvOS 17.0, *)
 extension Server {
     
     public func addresses() -> [ServerAddressIP] {
@@ -297,7 +296,6 @@ extension Server {
     }
 }
 
-@available(tvOS 17.0, *)
 extension Server {
     
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
@@ -320,7 +318,6 @@ extension Server {
     
 }
 
-@available(tvOS 17.0, *)
 extension Server {
         
     func dipPassword() -> Data? {

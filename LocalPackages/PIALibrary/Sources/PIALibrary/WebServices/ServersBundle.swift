@@ -23,7 +23,6 @@
 import Foundation
 
 /// A `ServersBundle` wraps a list of `Server` with additional metadata.
-@available(tvOS 17.0, *)
 public struct ServersBundle {
 
     /// Holds the metadata of the `ServerProvider` configuration.

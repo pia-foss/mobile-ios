@@ -25,8 +25,7 @@ import NetworkExtension
 
 private let log = PIALogger.logger(for: VPNDaemon.self)
 
-@available(tvOS 17.0, *)
-class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
+final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     static let shared = VPNDaemon()
 
     private(set) var hasEnabledUpdates: Bool

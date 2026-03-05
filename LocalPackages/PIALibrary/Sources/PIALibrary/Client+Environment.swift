@@ -22,7 +22,6 @@
 
 import Foundation
 
-@available(tvOS 17.0, *)
 extension Client {
 
     /// The available client environments.

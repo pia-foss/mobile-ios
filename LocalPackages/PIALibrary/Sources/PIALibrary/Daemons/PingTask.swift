@@ -24,9 +24,8 @@ import Foundation
 
 private let log = PIALogger.logger(for: PingTask.self)
 
-@available(tvOS 17.0, *)
-class PingTask {
-    
+final class PingTask {
+
     let timeout = 3000
     
     let identifier: String
@@ -121,7 +120,6 @@ enum PingTaskState {
     }
 }
 
-@available(tvOS 17.0, *)
 extension Array where Element == PingTask {
     
     func indexOfTaskWith(identifier: String) -> Int? {

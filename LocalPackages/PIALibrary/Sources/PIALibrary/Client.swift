@@ -26,7 +26,6 @@ import UIKit
 private let log = PIALogger.logger(for: Client.self)
 
 /// The entry point for client initialization and usage.
-@available(tvOS 17.0, *)
 public final class Client {
 
     // MARK: Strategies

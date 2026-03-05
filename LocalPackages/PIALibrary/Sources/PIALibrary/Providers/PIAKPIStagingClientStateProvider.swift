@@ -22,8 +22,7 @@
 import Foundation
 import kpi
 
-@available(tvOS 17.0, *)
-class PIAKPIStagingClientStateProvider : KPIClientStateProvider {
+final class PIAKPIStagingClientStateProvider : KPIClientStateProvider {
 
     private let kpiPath = "/api/client/v2/service-quality"
 

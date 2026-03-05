@@ -24,8 +24,7 @@ import Foundation
 
 private let log = PIALogger.logger(for: DefaultTileProvider.self)
 
-@available(tvOS 17.0, *)
-class DefaultTileProvider: TileProvider, DatabaseAccess {
+final class DefaultTileProvider: TileProvider, DatabaseAccess {
     
     // MARK: TileProvider
     var visibleTiles: [AvailableTiles] {

@@ -24,8 +24,7 @@ import Foundation
 
 private let log = PIALogger.logger(for: ServersPinger.self)
 
-@available(tvOS 17.0, *)
-class ServersPinger: DatabaseAccess {
+final class ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
 
     private var pendingPings: [PingTask] = []

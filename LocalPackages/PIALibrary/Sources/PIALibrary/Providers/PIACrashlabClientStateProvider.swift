@@ -9,8 +9,7 @@
 import Foundation
 import csi
 
-@available(tvOS 17.0, *)
-class PIACSIClientStateProvider : IEndPointProvider {
+final class PIACSIClientStateProvider : IEndPointProvider {
     
     var endpoints: [CSIEndpoint] {
         let validEndpoints = EndpointManager.shared.availableCSIEndpoints()

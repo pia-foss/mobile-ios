@@ -24,7 +24,6 @@ import Foundation
 
 private let log = PIALogger.logger(for: Client.Preferences.self)
 
-@available(tvOS 17.0, *)
 private protocol PreferencesStore: AnyObject {
     var preferredServer: Server? { get set }
     
@@ -82,7 +81,6 @@ private protocol PreferencesStore: AnyObject {
     
 }
 
-@available(tvOS 17.0, *)
 private extension PreferencesStore {
     var activeVPNCustomConfiguration: VPNCustomConfiguration? {
         return vpnCustomConfiguration(for: vpnType)
@@ -119,7 +117,6 @@ private extension PreferencesStore {
     }
 }
 
-@available(tvOS 17.0, *)
 extension Client {
 
     /// The persistent preferences of the client.
@@ -518,7 +515,6 @@ extension Client {
 }
 
 // MARK: Editable
-@available(tvOS 17.0, *)
 extension Client.Preferences {
 
     /// Provides a means to edit `Client.Preferences` in a buffered way. Changes can be committed or reverted.

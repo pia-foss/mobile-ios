@@ -24,7 +24,6 @@ import Foundation
 
 fileprivate let log = PIALogger.logger(for: DefaultServerProvider.self)
 
-@available(tvOS 17.0, *)
 open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess, WebServicesConsumer {
     
     private let customWebServices: WebServices?
@@ -366,7 +365,6 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     }
 }
 
-@available(tvOS 17.0, *)
 extension Server: DatabaseAccess {
 
     /// Returns last ping response in milliseconds. Requires `Library` subspec.

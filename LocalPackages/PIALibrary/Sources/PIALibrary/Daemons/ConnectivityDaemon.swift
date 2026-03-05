@@ -31,8 +31,7 @@ public extension Notification.Name {
     static let ConnectivityDaemonDidGetUnreachable = Notification.Name("ConnectivityDaemonDidGetUnreachable")
 }
 
-@available(tvOS 17.0, *)
-class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
+final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
     static let shared = ConnectivityDaemon()
     
     private(set) var hasEnabledUpdates: Bool

@@ -23,7 +23,6 @@
 import Foundation
 
 /// Optional preset values for welcome forms.
-@available(tvOS 17.0, *)
 public struct Preset: ProvidersAccess {
     
     /// The `Pages` to display in the scroller.
