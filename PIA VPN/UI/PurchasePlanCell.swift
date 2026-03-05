@@ -23,9 +23,12 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import StoreKit
 
-class PurchasePlanCell: UICollectionViewCell, Restylable {
-    
+private let log = PIALogger.logger(for: PurchasePlanCell.self)
+
+final class PurchasePlanCell: UICollectionViewCell, Restylable {
+
     // XXX
     private static let textPlaceholder = "                    "
     private static let pricePlaceholder = "             "
@@ -44,23 +47,29 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
 
     @IBOutlet private weak var bestValueHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceBottomConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         isSelected = false
-        
-        labelBestValue.text = Client.configuration.eligibleForTrial ?
-            "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL" :
-            L10n.Welcome.Plan.bestValue.uppercased()
-
         selectedPlanImageView.alpha = 0
         self.accessibilityTraits = UIAccessibilityTraits.button
         self.isAccessibilityElement = true
     }
-    
+
     func fill(plan: PurchasePlan) {
         viewShouldRestyle()
-        
+
+        log.debug(#function, metadata: [
+            "isEligibleForIntroOffer": .stringConvertible(plan.hasIntroOffer),
+            "eligibleForTrial": .stringConvertible(Client.configuration.eligibleForTrial),
+            "plan": .stringConvertible(plan),
+        ])
+        let showFreeTrialLabel = plan.hasIntroOffer && Client.configuration.eligibleForTrial
+        labelBestValue.text = showFreeTrialLabel
+            ? "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL"
+            : L10n.Welcome.Plan.bestValue.uppercased()
+
+
         if plan.isDummy {
             let pendingBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
             labelPlan.backgroundColor = pendingBackgroundColor
@@ -101,9 +110,8 @@ class PurchasePlanCell: UICollectionViewCell, Restylable {
 
             accessibilityLabel = "\(plan.title), \(plan.accessibleMonthlyPriceString) \(L10n.Welcome.Plan.Accessibility.perMonth)"
         }
-        viewBestValue.isHidden = !plan.bestValue
     }
-    
+
     override var isSelected: Bool {
         didSet {
             Theme.current.applyBorder(viewContainer, selected: isSelected)

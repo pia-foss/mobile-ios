@@ -64,7 +64,9 @@ public class PurchasePlan: NSObject {
     public var detail = ""
 
     public var bestValue = false
-    
+
+    public var hasIntroOffer: Bool = false
+
     public var price: NSNumber {
         return product.price
     }
@@ -101,10 +103,11 @@ public class PurchasePlan: NSObject {
         monthlyFactor = 1.0
     }
 
-    public init(plan: Plan, product: InAppProduct, monthlyFactor: Double) {
+    public init(plan: Plan, product: InAppProduct, monthlyFactor: Double) async {
         precondition(monthlyFactor > 0.0)
         self.plan = plan
         self.product = product
+        self.hasIntroOffer = await product.isEligibleForIntroOffer()
         self.monthlyFactor = monthlyFactor
     }
     
