@@ -110,10 +110,6 @@ public final class Server: Hashable {
         func markServerAsUnavailable() {
             available = false
         }
-        
-        func reset() {
-            available = true
-        }
 
     }
     
@@ -271,28 +267,17 @@ extension Server {
 
     }
     
-    public func bestAddress() -> ServerAddressIP? {
-        guard !addresses().isEmpty else {
-            return nil
-        }
-        let availableServer = addresses().first(where: {$0.available})
-        if availableServer == nil {
-            addresses().map({$0.reset()})
-            return bestAddress()
-        }
-        return availableServer
+    /// True if at least one IP address is still available for the current VPN protocol.
+    public var isAvailable: Bool {
+        addresses().contains(where: { $0.available })
     }
-    
+
+    public func bestAddress() -> ServerAddressIP? {
+        addresses().first(where: { $0.available })
+    }
+
     public func bestAddressForOVPN(tcp: Bool) -> ServerAddressIP? {
-        guard !ovpnAddresses(tcp: tcp).isEmpty else {
-            return nil
-        }
-        let availableServer = ovpnAddresses(tcp: tcp).first(where: {$0.available})
-        if availableServer == nil {
-            ovpnAddresses(tcp: tcp).map({$0.reset()})
-            return bestAddress()
-        }
-        return availableServer
+        ovpnAddresses(tcp: tcp).first(where: { $0.available })
     }
 }
 
