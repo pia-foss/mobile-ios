@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "alamofire",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire.git",
-      "state" : {
-        "revision" : "cdb2f4a574c3f7ae9ac0b0913058d64ff6fa09ac",
-        "version" : "5.0.1"
-      }
-    },
-    {
       "identity" : "cwlcatchexception",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattgallagher/CwlCatchException.git",
@@ -87,7 +78,7 @@
       "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
       "state" : {
         "branch" : "master",
-        "revision" : "351b487a6691abfabe0aa0d35a3bb966e6e69feb"
+        "revision" : "b5225cd860de2f4d7c8189d46068b7a76c2f8c0a"
       }
     },
     {
@@ -131,7 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
       "state" : {
-        "revision" : "bf7b4258d9c9279c6051bba0b7a73ca7d5f9547e"
+        "revision" : "c5a7c17ae0a09e6ed00f62f7e2d04ce913df4773",
+        "version" : "1.0.2"
       }
     },
     {
