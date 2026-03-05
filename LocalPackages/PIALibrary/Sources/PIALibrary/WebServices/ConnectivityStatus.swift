@@ -24,6 +24,10 @@ import Foundation
 
 struct ConnectivityStatus {
     let ipAddress: String
-    
     let isVPN: Bool
+
+    private enum CodingKeys: String, CodingKey {
+        case ipAddress = "ip"
+        case isVPN = "connected"
+    }
 }

@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Gloss
 import regions
 import account
 import csi
@@ -403,17 +402,15 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #if os(iOS) || os(tvOS)
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         var marketingJSON = ""
-        if let json = request.marketing as? JSON {
-            marketingJSON = stringify(json: json)
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
         }
-        
+
         var debugJSON = ""
-        if let json = request.debug as? JSON {
-            debugJSON = stringify(json: json)
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
         }
-        
-        request.toJSON()
-        
+
         let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
         self.accountAPI.signUp(information: info) { (response, errors) in
             if !errors.isEmpty {
@@ -450,13 +447,13 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
         var marketingJSON = ""
-        if let json = request.marketing as? JSON {
-            marketingJSON = stringify(json: json)
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
         }
-        
+
         var debugJSON = ""
-        if let json = request.debug as? JSON {
-            debugJSON = stringify(json: json)
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
         }
         
         let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
@@ -479,7 +476,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 return
             }
             
-            guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
+            guard let bundle = ServersBundle.parse(from: jsonData) else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
@@ -498,7 +495,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
                 
-                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
+                guard let bundle = ServersBundle.parse(from: RegionsUtils().stringify(regionsResponse: response)) else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }

@@ -22,7 +22,6 @@ let package = Package(
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-regions.git", exact: "1.6.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", branch: "master"),
       .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", revision: "bf7b4258d9c9279c6051bba0b7a73ca7d5f9547e"),
-      .package(url: "https://github.com/hkellaway/Gloss.git", exact: "3.2.1"),
       .package(url: "https://github.com/apple/swift-log", exact: "1.10.1"),
       .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4"),
       .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.1")
@@ -31,7 +30,6 @@ let package = Package(
         .target(
             name: "PIALibrary",
             dependencies: [
-                "Gloss",
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Reachability", package: "Reachability.swift"),
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),

@@ -55,15 +55,6 @@
       }
     },
     {
-      "identity" : "gloss",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hkellaway/Gloss.git",
-      "state" : {
-        "revision" : "efd25964891ae8a9cfbe2345628ad02fcb9a105c",
-        "version" : "3.2.1"
-      }
-    },
-    {
       "identity" : "gradientprogressbar",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fxm90/GradientProgressBar.git",

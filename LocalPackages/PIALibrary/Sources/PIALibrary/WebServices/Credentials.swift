@@ -23,7 +23,7 @@
 import Foundation
 
 /// The account credentials.
-public struct Credentials {
+public struct Credentials: Codable {
 
     /// The username, typically a number prefixed with "p".
     public let username: String
@@ -36,13 +36,4 @@ public struct Credentials {
         self.username = username
         self.password = password
     }
-    
-}
-
-public extension Credentials {
-    
-    public func toJSONDictionary() -> [String: Any] {
-        return ["username":username, "password": password]
-    }
-
 }

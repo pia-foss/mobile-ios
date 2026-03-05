@@ -41,14 +41,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Gloss</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2017 Harlan Kellaway</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/hkellaway/Gloss/develop/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>ReachabilitySwift</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2016 Ashley Mills</string>
