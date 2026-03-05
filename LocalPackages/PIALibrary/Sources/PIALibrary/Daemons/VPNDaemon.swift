@@ -22,8 +22,11 @@
 
 import Foundation
 import NetworkExtension
+
+#if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
 import PIAWireguard
 import TunnelKitOpenVPN
+#endif
 
 private let log = PIALogger.logger(for: VPNDaemon.self)
 
@@ -193,9 +196,11 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
             let connectivityCheckFailed = switch (lastDisconnectError.domain, lastDisconnectError.code) {
+            #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
             case (PacketTunnelProviderError.errorDomain, PacketTunnelProviderError.connectivityCheckFailed.errorCode),
                  (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
                 true
+            #endif
             default:
                 false
             }
