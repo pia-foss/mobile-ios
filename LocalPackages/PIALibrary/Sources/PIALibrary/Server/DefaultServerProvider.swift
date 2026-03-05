@@ -119,15 +119,37 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     
     public var targetServer: Server {
         get throws {
-            guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
-                guard let fallbackServer = currentServers.first else {
+            guard let intended = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
+                guard let fallback = currentServers.first else {
                     log.error("No servers available")
                     throw ClientError.noServersAvailable
                 }
-                return fallbackServer
+                return fallback
             }
-            return server
+
+            if intended.isAvailable {
+                return intended
+            }
+
+            // All IPs on the intended server are exhausted — find the best alternate.
+            log.debug("Server \(intended.name) has no available IPs, looking for alternate")
+            return findAlternate(from: intended) ?? intended
         }
+    }
+
+    private func findAlternate(from server: Server) -> Server? {
+        // Prefer another server in the same region
+        if let sameRegion = currentServers.first(where: {
+            $0.regionIdentifier == server.regionIdentifier && $0 != server && !$0.offline && $0.isAvailable
+        }) {
+            return sameRegion
+        }
+
+        // Fall back to the server with the lowest known ping time
+        return currentServers
+            .filter { $0 != server && !$0.offline && $0.isAvailable }
+            .sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
+            .first
     }
     
     public var dipTokens: [String]? {
