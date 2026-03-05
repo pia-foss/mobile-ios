@@ -25,7 +25,6 @@ import NetworkExtension
 
 fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
 
-@available(tvOS 17.0, *)
 open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
     
     private static let forcedStatuses: [VPNStatus] = [

@@ -9,8 +9,7 @@
 import Foundation
 import csi
 
-@available(tvOS 17.0, *)
-class PIACSIRegionInformationProvider : ICSIProvider {
+final class PIACSIRegionInformationProvider : ICSIProvider {
     
     var filename: String? { return "regions_information" }
     

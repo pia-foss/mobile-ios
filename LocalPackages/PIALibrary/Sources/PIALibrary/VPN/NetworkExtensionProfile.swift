@@ -26,7 +26,6 @@ import NetworkExtension
 private let log = PIALogger.logger(for: NetworkExtensionProfile.self)
 
 /// Specific protocol bridging a `VPNProfile` to a native `NEVPNProtocol` from Apple's NetworkExtension framwork.
-@available(tvOS 17.0, *)
 public protocol NetworkExtensionProfile: VPNProfile {
 
     /**
@@ -38,7 +37,6 @@ public protocol NetworkExtensionProfile: VPNProfile {
     func generatedProtocol(withConfiguration configuration: VPNConfiguration) throws -> NEVPNProtocol
 }
 
-@available(tvOS 17.0, *)
 extension NetworkExtensionProfile {
     
     /// :nodoc:

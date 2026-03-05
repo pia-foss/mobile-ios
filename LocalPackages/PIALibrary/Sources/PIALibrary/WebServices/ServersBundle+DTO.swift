@@ -65,7 +65,6 @@ private struct ServersBundleDTO: Decodable {
 
 private let log = PIALogger.logger(for: ServersBundle.self)
 
-@available(tvOS 17.0, *)
 extension ServersBundle {
     static func parse(from data: Data) -> ServersBundle? {
         do {

@@ -24,7 +24,6 @@ import Foundation
 
 fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
 
-@available(tvOS 17.0, *)
 extension Client {
     
     public struct FeatureFlags {

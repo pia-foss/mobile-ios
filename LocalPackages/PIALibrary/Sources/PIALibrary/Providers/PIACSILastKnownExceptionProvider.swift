@@ -8,8 +8,7 @@
 import Foundation
 import csi
 
-@available(tvOS 17.0, *)
-class PIACSILastKnownExceptionProvider: ICSIProvider {
+final class PIACSILastKnownExceptionProvider: ICSIProvider {
     
     var filename: String? { return "last_known_exception" }
     

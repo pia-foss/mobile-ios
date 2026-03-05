@@ -24,8 +24,7 @@ import Foundation
 
 private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
-@available(tvOS 17.0, *)
-class UserDefaultsStore: PlainStore, ConfigurationAccess {
+final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private struct Entries {
         static let username = "LoggedUsername" // legacy
         

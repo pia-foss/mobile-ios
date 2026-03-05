@@ -24,8 +24,7 @@ import Foundation
 
 private let log = PIALogger.logger(for: MemoryStore.self)
 
-@available(tvOS 17.0, *)
-class MemoryStore: TransientStore, ConfigurationAccess {
+final class MemoryStore: TransientStore, ConfigurationAccess {
     
     // MARK: Server
     

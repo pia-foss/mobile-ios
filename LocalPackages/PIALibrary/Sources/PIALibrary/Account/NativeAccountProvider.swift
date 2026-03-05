@@ -25,7 +25,6 @@ import UIKit
 
 private let log = PIALogger.logger(for: NativeAccountProvider.self)
 
-@available(tvOS 17.0, *)
 open class NativeAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
     
     private let customWebServices: WebServices?

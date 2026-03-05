@@ -26,8 +26,7 @@ import NetworkExtension
 private let log = PIALogger.logger(for: IKEv2Profile.self)
 
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
-@available(tvOS 17.0, *)
-public class IKEv2Profile: NetworkExtensionProfile {
+public final class IKEv2Profile: NetworkExtensionProfile {
         
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()

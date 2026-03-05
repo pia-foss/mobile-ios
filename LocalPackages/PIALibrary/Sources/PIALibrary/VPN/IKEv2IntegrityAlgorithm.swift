@@ -23,7 +23,6 @@
 import Foundation
 import NetworkExtension
 
-@available(tvOS 17.0, *)
 public enum IKEv2IntegrityAlgorithm: String, EnumsBuilder {
     
     public static let defaultIntegrity: IKEv2IntegrityAlgorithm = .SHA256

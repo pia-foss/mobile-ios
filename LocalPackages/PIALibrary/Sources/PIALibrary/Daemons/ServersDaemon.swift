@@ -25,8 +25,7 @@ import UIKit
 
 private let log = PIALogger.logger(for: ServersDaemon.self)
 
-@available(tvOS 17.0, *)
-class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {
+final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {
     static let shared = ServersDaemon()
     
     private(set) var hasEnabledUpdates: Bool

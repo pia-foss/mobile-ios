@@ -22,74 +22,62 @@
 
 import Foundation
 
-@available(tvOS 17.0, *)
 protocol DatabaseAccess {
     var accessedDatabase: Client.Database { get }
 }
 
-@available(tvOS 17.0, *)
 protocol PreferencesAccess {
     var accessedPreferences: Client.Preferences { get }
 }
 
-@available(tvOS 17.0, *)
 public protocol ConfigurationAccess {
     var accessedConfiguration: Client.Configuration { get }
 }
 
-@available(tvOS 17.0, *)
 protocol ProvidersAccess {
     var accessedProviders: Client.Providers { get }
 }
 
-@available(tvOS 17.0, *)
 protocol WebServicesAccess {
     var accessedWebServices: WebServices { get }
 }
 
-@available(tvOS 17.0, *)
 public protocol InAppAccess {
     #if os(iOS) || os(tvOS)
     var accessedStore: InAppProvider { get }
     #endif
 }
 
-@available(tvOS 17.0, *)
 extension DatabaseAccess {
     var accessedDatabase: Client.Database {
         return Client.database
     }
 }
 
-@available(tvOS 17.0, *)
 extension PreferencesAccess {
     var accessedPreferences: Client.Preferences {
         return Client.preferences
     }
 }
 
-@available(tvOS 17.0, *)
 public extension ConfigurationAccess {
     var accessedConfiguration: Client.Configuration {
         return Client.configuration
     }
 }
 
-@available(tvOS 17.0, *)
 extension ProvidersAccess {
     var accessedProviders: Client.Providers {
         return Client.providers
     }
 }
 
-@available(tvOS 17.0, *)
 extension WebServicesAccess {
     var accessedWebServices: WebServices {
         return Client.webServices
     }
 }
 
-@available(tvOS 17.0, *)
 public extension InAppAccess {
     #if os(iOS) || os(tvOS)
     var accessedStore: InAppProvider {

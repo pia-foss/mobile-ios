@@ -9,8 +9,7 @@ import Foundation
 
 fileprivate let log = PIALogger.logger(for: EphemeralAccountProvider.self)
 
-@available(tvOS 17.0, *)
-class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
+final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAccess {
 
     // XXX: we want legit web services calls, yet allow the option to mock them
     private var webServices: WebServices? {
