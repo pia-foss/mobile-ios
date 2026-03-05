@@ -50,7 +50,7 @@ To check the connectivity inside the tunnel we compare the received bytes every 
 
 ### Core
 
-Here you will find the WireGuard® utility classes and the low-level entities that we need to use from the AppExtension module. Crypto, Logger and WireGuard® classes are in this module. The *Core* module depends on Alamofire and is mostly platform-agnostic.
+Here you will find the WireGuard® utility classes and the low-level entities that we need to use from the AppExtension module. Crypto, Logger and WireGuard® classes are in this module. The *Core* module is mostly platform-agnostic.
 
 ### AppExtension
 
@@ -79,7 +79,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 ## Acknowledgements
 
 - WireGuard® - © Jason A. Donenfeld (https://github.com/WireGuard/wireguard-apple)
-- Alamofire - © 2014-2020 Alamofire Software Foundation (http://alamofire.org/)
 
 [pia-image]: https://www.privateinternetaccess.com/assets/PIALogo2x-0d1e1094ac909ea4c93df06e2da3db4ee8a73d8b2770f0f7d768a8603c62a82f.png
 [pia-url]: https://www.privateinternetaccess.com/

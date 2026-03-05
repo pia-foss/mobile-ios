@@ -3,12 +3,13 @@
 
 import NetworkExtension
 
-enum PacketTunnelProviderError: String, Error {
+public enum PacketTunnelProviderError: Int, CustomNSError {
     case savedProtocolConfigurationIsInvalid
     case dnsResolutionFailure
     case couldNotStartBackend
     case couldNotDetermineFileDescriptor
     case couldNotSetNetworkSettings
+    case connectivityCheckFailed
 }
 
 public extension NETunnelProviderProtocol {
