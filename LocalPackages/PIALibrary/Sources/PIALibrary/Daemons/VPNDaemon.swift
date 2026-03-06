@@ -23,6 +23,11 @@
 import Foundation
 import NetworkExtension
 
+#if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
+import PIAWireguard
+import TunnelKitOpenVPN
+#endif
+
 private let log = PIALogger.logger(for: VPNDaemon.self)
 
 final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
@@ -188,14 +193,29 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         if !isReconnecting {
             updateVpnStatus(with: nextStatus)
         }
-        
-        if let error = connection.value(forKey: "_lastDisconnectError") as? NSError {
-            if error.description.contains("Domain=TunnelKit.OpenVPNTunnelProvider.ProviderConfigurationError Code=0") {
+
+        if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
+            let connectivityCheckFailed = switch (lastDisconnectError.domain, lastDisconnectError.code) {
+            #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
+            case (PacketTunnelProviderError.errorDomain, PacketTunnelProviderError.connectivityCheckFailed.errorCode),
+                 (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
+                true
+            #endif
+            default:
+                false
+            }
+
+            if connectivityCheckFailed {
+                // Since disconnection was caused by connectivityCheckFailed error, we mark that server as unavailable.
+                // It will not be considered again in the next reconnection loop.
+                let lastConnectedServer = try? Client.providers.serverProvider.targetServer.bestAddress()
+                lastConnectedServer?.markServerAsUnavailable()
+
                 Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
                 return
             } else {
                 if previousStatus == .connecting {
-                    log.error("The VPN did fail \(error)")
+                    log.error("The VPN did fail \(lastDisconnectError.localizedDescription)")
                     Macros.postNotification(.PIAVPNDidFail)
                 }
             }
@@ -248,9 +268,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         self.isReconnecting = false
         self.numberOfAttempts = 0
         self.updateUIWithAttemptNumber(0)
-
-        let targetServer = try? Client.providers.serverProvider.targetServer
-        targetServer?.addresses().forEach({$0.reset()})
     }
     
     // MARK: Update UI
