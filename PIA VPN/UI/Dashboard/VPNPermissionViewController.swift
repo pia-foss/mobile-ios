@@ -23,6 +23,8 @@
 import UIKit
 import PIALibrary
 import MessageUI
+import PIAUIKit
+import PIADesignSystem
 
 private let log = PIALogger.logger(for: VPNPermissionViewController.self)
 
