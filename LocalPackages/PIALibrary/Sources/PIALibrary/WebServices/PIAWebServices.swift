@@ -27,10 +27,6 @@ import csi
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
-public extension AccountRequestError {
-    static let internalErrorCode: Int32 = 600
-}
-
 final class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
@@ -159,8 +155,8 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
      */
     func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
         self.accountAPI.loginWithCredentials(username: credentials.username,
-                                             password: credentials.password) { [weak self] (errors) in
-            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginError)
+                                             password: credentials.password) { errors in
+            Self.handleLoginResponse(errors: errors, mapper: \.loginError, callback: callback)
         }
     }
     
@@ -182,62 +178,27 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
      Generates a new auth token for the specific user
      */
     func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { [weak self] (errors) in
-            self?.handleLoginResponse(errors: errors, callback: callback, mapError: self?.mapLoginFromReceiptError)
+        self.accountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString()) { errors in
+            Self.handleLoginResponse(errors: errors, mapper: \.loginFromReceiptError, callback: callback)
         }
     }
 
-    private func handleLoginResponse(errors: [AccountRequestError],  callback: ((Error?) -> Void)?, mapError: ((AccountRequestError) -> (ClientError))? = nil) {
-        if !errors.isEmpty {
-            callback?(mapError?(errors.last!))
-            return
+    private static func handleLoginResponse(
+        errors: [AccountRequestError],
+        mapper path: KeyPath<AccountRequestError, ClientError>,
+        callback: ((ClientError?) -> Void)?,
+    ) {
+        if let error = errors.last {
+            callback?(error[keyPath: path])
+        } else {
+            callback?(nil)
         }
-
-        callback?(nil)
-    }
-
-    private func mapLoginError(_ error: AccountRequestError) -> ClientError {
-        switch error.code {
-        case 401:
-            return .unauthorized
-        case 402:
-            return .expired
-        case 429:
-            return .throttled(retryAfter: UInt(error.retryAfterSeconds))
-        case AccountRequestError.internalErrorCode:
-            return .libraryError(message: error.message)
-        default:
-            return .unknown(code: Int(error.code), message: error.message)
-        }
-    }
-
-    private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
-        switch error.code {
-        // Errors that indicate the receipt is either invalid or expired
-        case 400, 401:
-            return .badReceipt
-        default:
-            return mapLoginError(error)
-        }
-    }
-
-    private func mapLoginLinkError(_ error: AccountRequestError) -> ClientError {
-        switch mapLoginError(error) {
-        case .unknown:
-            return .invalidParameter
-        case let error:
-            return error
-        }
-    }
-
-    private func mapAccountDetailsError(_ error:AccountRequestError) -> ClientError {
-        return mapLoginLinkError(error)
     }
 
     func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        self.accountAPI.accountDetails() { [weak self] (response, errors) in
+        self.accountAPI.accountDetails() { response, errors in
             if !errors.isEmpty {
-                callback?(nil, self?.mapAccountDetailsError(errors.last!))
+                callback?(nil, errors.last?.accountDetailsError)
                 return
             }
 
@@ -253,9 +214,9 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         if reset {
             //Reset password, we use the token within accounts
-            self.accountAPI.setEmail(email: email, resetPassword: reset) { [weak self] (newPassword, errors) in
+            self.accountAPI.setEmail(email: email, resetPassword: reset) { (newPassword, errors) in
                 if !errors.isEmpty {
-                    callback?(self?.mapLoginError(errors.last!))
+                    callback?(errors.last?.loginError)
                     return
                 }
                 if let newPassword = newPassword {
@@ -276,14 +237,8 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     }
     
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
-        
-        self.accountAPI.loginLink(email: email) { [weak self] (errors) in
-            if !errors.isEmpty {
-                callback?(self?.mapLoginLinkError(errors.last!))
-                return
-            }
-
-            callback?(nil)
+        self.accountAPI.loginLink(email: email) { errors in
+            Self.handleLoginResponse(errors: errors, mapper: \.loginLinkError, callback: callback)
         }
     }
     
@@ -542,4 +497,46 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
+}
+
+// MARK: - AccountRequestError -> ClientError
+
+extension AccountRequestError {
+    public static let internalErrorCode: Int32 = 600
+
+    fileprivate var loginError: ClientError {
+        switch code {
+        case 401:
+            return .unauthorized
+        case 402:
+            return .expired
+        case 429:
+            return .throttled(retryAfter: UInt(retryAfterSeconds))
+        case AccountRequestError.internalErrorCode:
+            return .libraryError(message: message)
+        default:
+            return .unknown(code: Int(code), message: message)
+        }
+    }
+
+    fileprivate var loginFromReceiptError: ClientError {
+        switch code {
+        // Errors that indicate the receipt is either invalid or expired
+        case 400, 401:
+            return .badReceipt
+        default:
+            return loginError
+        }
+    }
+
+    fileprivate var loginLinkError: ClientError {
+        switch loginError {
+        case .unknown:
+            return .invalidParameter
+        case let error:
+            return error
+        }
+    }
+
+    fileprivate var accountDetailsError: ClientError { loginLinkError }
 }
