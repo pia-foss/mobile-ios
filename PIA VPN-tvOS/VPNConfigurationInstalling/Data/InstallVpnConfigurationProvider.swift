@@ -18,18 +18,12 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
     }
     
-    
     func callAsFunction() async throws {
-        return try await withCheckedThrowingContinuation { continuation in
-            vpnProvider.install(force: true) { [self] error in
-                if error != nil {
-                    continuation.resume(throwing: InstallVPNConfigurationError.userCanceled)
-                    return
-                }
-                
-                vpnConfigurationAvailability.set(value: true)
-                continuation.resume()
-            }
+        do {
+            try await vpnProvider.install(force: true)
+            vpnConfigurationAvailability.set(value: true)
+        } catch {
+            throw InstallVPNConfigurationError.userCanceled
         }
     }
 }

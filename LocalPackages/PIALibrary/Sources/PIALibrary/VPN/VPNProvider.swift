@@ -55,6 +55,14 @@ public protocol VPNProvider: AnyObject {
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
     
     /**
+     Installs the profile as per `currentVPNType`.
+
+     - Parameter forceInstall: Force the install of the profile.
+     - Throws: Error if installation fails.
+     */
+    func install(force forceInstall: Bool) async throws
+    
+    /**
      Disables the current profile.
 
      - Parameter callback: Returns `nil` on success.
@@ -129,7 +137,7 @@ public protocol VPNProvider: AnyObject {
 }
 
 public extension VPNProvider {
-    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+    func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
 }
