@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "La tarjeta ya fue reclamada";
 "failure.redeem.claimed.message" = "Parece que esta tarjeta ha sido reclamada por otra cuenta. Puedes intentar ingresar un PIN diferente.";
 "failure.submit" = "ATRÁS";
+"failure.internal" = "Error interno de la aplicación (%d)";
+"failure.unknown" = "Error desconocido: %s (%d)";
 
 "unreachable.vc_title" = "Error";
 "unreachable.title" = "¡Ups!";

@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Kortet er allerede brukt";
 "failure.redeem.claimed.message" = "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
 "failure.submit" = "GÅ TILBAKE";
+"failure.internal" = "Intern app-feil (%d)";
+"failure.unknown" = "Ukjent feil: %s (%d)";
 
 "unreachable.vc_title" = "Feil";
 "unreachable.title" = "Ups!";

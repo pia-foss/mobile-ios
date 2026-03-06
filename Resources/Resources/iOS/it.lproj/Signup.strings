@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Carta già riscattata";
 "failure.redeem.claimed.message" = "Questa carta è già stata riscattata da un altro account. Prova a inserire un PIN diverso.";
 "failure.submit" = "INDIETRO";
+"failure.internal" = "Errore interno dell'app (%d)";
+"failure.unknown" = "Errore sconosciuto: %s (%d)";
 
 "unreachable.vc_title" = "Errore";
 "unreachable.title" = "Ops!";

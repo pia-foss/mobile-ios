@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Card claimed already";
 "failure.redeem.claimed.message" = "Looks like this card has already been claimed by another account. You can try entering a different PIN.";
 "failure.submit" = "GO BACK";
+"failure.internal" = "Internal app error (%d)";
+"failure.unknown" = "Unknown error: %s (%d)";
 
 "unreachable.vc_title" = "Error";
 "unreachable.title" = "Whoops!";

@@ -26,8 +26,8 @@ protocol WebServicesConsumer {
     var webServices: WebServices { get }
 }
 
-protocol WebServices: class {
-    
+protocol WebServices: AnyObject {
+
     // MARK: Account
 
     func migrateToken(token: String, _ callback: SuccessLibraryCallback?)

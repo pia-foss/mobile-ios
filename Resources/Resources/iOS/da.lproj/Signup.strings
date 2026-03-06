@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Kort allerede taget";
 "failure.redeem.claimed.message" = "Det ser ud til, at dette kort allerede er taget af en anden konto. Prøv at indtaste en anden pinkode.";
 "failure.submit" = "GÅ TILBAGE";
+"failure.internal" = "Intern app-fejl (%d)";
+"failure.unknown" = "Ukendt fejl: %s (%d)";
 
 "unreachable.vc_title" = "Fejl";
 "unreachable.title" = "Ups!";
