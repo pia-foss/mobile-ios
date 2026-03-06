@@ -27,6 +27,10 @@ import csi
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
+public extension AccountRequestError {
+    static let internalErrorCode: Int32 = 600
+}
+
 final class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
@@ -194,17 +198,18 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapLoginError(_ error: AccountRequestError) -> ClientError {
         switch error.code {
+        case 401:
+            return .unauthorized
         case 402:
             return .expired
         case 429:
             return .throttled(retryAfter: UInt(error.retryAfterSeconds))
-        case 600:
-            return .internetUnreachable
+        case AccountRequestError.internalErrorCode:
+            return .libraryError(message: error.message)
         default:
-            return .unauthorized
+            return .unknown(code: Int(error.code), message: error.message)
         }
     }
-
 
     private func mapLoginFromReceiptError(_ error:AccountRequestError) -> ClientError {
         switch error.code {
@@ -216,12 +221,12 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
 
-    private func mapLoginLinkError(_ error:AccountRequestError) -> ClientError {
-        switch error.code {
-        case 401,402,429:
-            return mapLoginError(error)
-        default:
+    private func mapLoginLinkError(_ error: AccountRequestError) -> ClientError {
+        switch mapLoginError(error) {
+        case .unknown:
             return .invalidParameter
+        case let error:
+            return error
         }
     }
 

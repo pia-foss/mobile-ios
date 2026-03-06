@@ -24,10 +24,11 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import class account.AccountRequestError
 
 private let log = PIALogger.logger(for: LoginViewController.self)
 
-class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
+final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
     
     private enum LoginOption {
         case credentials
@@ -312,46 +313,49 @@ class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeVie
             timeToRetryMagicLink = retryAfterTimeStamp
         }
     }
-    
+
     private func handleLoginFailed(_ error: Error?, loginOption: LoginOption) {
         var displayDuration: Double?
         var errorMessage: String?
-        if let error = error {
-            if let clientError = error as? ClientError {
-                switch clientError {
-                case .unauthorized:
-                    errorMessage = L10n.Welcome.Login.Error.unauthorized
+        if let error {
+            log.error("Failed to log in: \(error)")
+            switch error as? ClientError {
+            case .unauthorized:
+                errorMessage = L10n.Welcome.Login.Error.unauthorized
 
-                case .throttled(retryAfter: let retryAfter):
-                    let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
-                    errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
-                    
-                    let retryAfterSeconds = Double(retryAfter)
-                    displayDuration = retryAfterSeconds
-                    
-                    updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
-                    
-                case .expired:
-                    handleExpiredAccount()
-                    return
+            case .throttled(retryAfter: let retryAfter):
+                let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
+                errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
 
-                case .badReceipt:
-                    handleBadReceipt()
-                    return
+                let retryAfterSeconds = Double(retryAfter)
+                displayDuration = retryAfterSeconds
 
-                case .internetUnreachable:
-                    errorMessage = L10n.Localizable.Global.unreachable
+                updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
 
-                default:
-                    break
-                }
-            }
-            if (errorMessage == nil) {
+            case .expired:
+                handleExpiredAccount()
+                return
+
+            case .badReceipt:
+                handleBadReceipt()
+                return
+
+            case .internetUnreachable:
+                errorMessage = L10n.Localizable.Global.unreachable
+
+            case let .libraryError(message):
+                let message = message ?? error.localizedDescription
+                log.error("Account library error: \(message)")
+                // we shouldn't show this message to the user since this is an internal error
+                errorMessage = L10n.Signup.Failure.internal(Int(AccountRequestError.internalErrorCode))
+
+            case let .unknown(code, message):
+                let message = message ?? error.localizedDescription
+                errorMessage = L10n.Signup.Failure.unknown(message, code)
+
+            default:
                 errorMessage = error.localizedDescription
             }
-            log.error("Failed to log in (error: \(error))")
-        } else {
-            log.error("Failed to log in")
         }
         displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
     }

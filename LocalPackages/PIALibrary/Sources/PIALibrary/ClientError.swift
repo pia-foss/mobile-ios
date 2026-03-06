@@ -58,6 +58,12 @@ public enum ClientError: Error, Equatable {
     /// The Wireguard Token is missing.
     case missingWireguardToken
 
+    /// Internal error in the `mobile-shared-account` library (code 600)
+    case libraryError(message: String?)
+
+    /// Unknown error
+    case unknown(code: Int, message: String?)
+
     #if os(iOS) || os(tvOS)
     /// No in-app history receipt is available.
     case noReceipt
