@@ -69,13 +69,13 @@ extension Client {
         public let tosPath: String
         
         public var tosUrl: String {
-            return "\(baseUrl)/\(tosPath)"
+            "https://\(baseUrl)/\(tosPath)"
         }
         
         public let privacyPath: String
         
         public var privacyUrl: String {
-            return "\(baseUrl)/\(privacyPath)"
+            "https://\(baseUrl)/\(privacyPath)"
         }
         
         /// The timeout for web requests.
