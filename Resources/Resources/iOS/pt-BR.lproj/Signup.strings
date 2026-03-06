@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "O cartão já foi resgatado";
 "failure.redeem.claimed.message" = "Parece que este cartão já foi resgatado por outra conta. Você pode tentar usar um PIN diferente.";
 "failure.submit" = "VOLTAR";
+"failure.internal" = "Erro interno do aplicativo (%d)";
+"failure.unknown" = "Erro desconhecido: %s (%d)";
 
 "unreachable.vc_title" = "Erro";
 "unreachable.title" = "Ops!";

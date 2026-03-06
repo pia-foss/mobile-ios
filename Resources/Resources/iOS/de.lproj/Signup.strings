@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Karte bereits eingelöst";
 "failure.redeem.claimed.message" = "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
 "failure.submit" = "ZURÜCK";
+"failure.internal" = "Interner App-Fehler (%d)";
+"failure.unknown" = "Unbekannter Fehler: %s (%d)";
 
 "unreachable.vc_title" = "Fehler";
 "unreachable.title" = "Ups!";

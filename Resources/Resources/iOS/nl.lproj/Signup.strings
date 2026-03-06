@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Kaart al geclaimd";
 "failure.redeem.claimed.message" = "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
 "failure.submit" = "GA TERUG";
+"failure.internal" = "Interne app-fout (%d)";
+"failure.unknown" = "Onbekende fout: %s (%d)";
 
 "unreachable.vc_title" = "Fout";
 "unreachable.title" = "Oeps!";

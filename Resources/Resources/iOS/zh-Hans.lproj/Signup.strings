@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "卡片已使用";
 "failure.redeem.claimed.message" = "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
 "failure.submit" = "返回";
+"failure.internal" = "内部应用错误 (%d)";
+"failure.unknown" = "未知错误：%s (%d)";
 
 "unreachable.vc_title" = "错误";
 "unreachable.title" = "糟糕！";

@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "此卡已被使用";
 "failure.redeem.claimed.message" = "這張卡似乎已經被另一個帳戶使用。您可以嘗試輸入不同的 PIN 碼。";
 "failure.submit" = "返回";
+"failure.internal" = "內部應用程式錯誤 (%d)";
+"failure.unknown" = "未知錯誤：%s (%d)";
 
 "unreachable.vc_title" = "錯誤";
 "unreachable.title" = "噢！";
