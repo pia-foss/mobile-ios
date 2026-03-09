@@ -28,7 +28,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 
-public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
+final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNavigationBar {
 
     @IBOutlet private weak var buttonConfirm: PIAButton!
     @IBOutlet private weak var textEmail: BorderedTextField!
@@ -39,12 +39,10 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     private var labelOr = UILabel()
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
-    var metadata: SignupMetadata!
-    weak var completionDelegate: WelcomeCompletionDelegate?
-    var omitsSiblingLink = false
+    
     var termsAndConditionsAgreed = false
 
-    var preset: Preset?
+    var config: Config!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -53,9 +51,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.preset == nil {
-            log.error("Preset not propagated to ConfirmVPNPlanViewController")
-        }
+        assert(config != nil, "Config not propagated to ConfirmVPNPlanViewController")
 
         navigationItem.hidesBackButton = true
 
@@ -63,7 +59,7 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         labelSubtitle.text = L10n.Welcome.Purchase.Email.why
        
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
-        textEmail.text = preset?.purchaseEmail
+        textEmail.text = config.metadata.email
         self.styleConfirmButton()
         
         setupAppleSignInUI()
@@ -107,15 +103,15 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         
         log.debug("Account: Modifying account email...")
         
-        metadata.title = L10n.Signup.InProgress.title
-        metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
-        metadata.bodyTitle = L10n.Signup.Success.title
-        metadata.bodySubtitle = L10n.Signup.Success.messageFormat(email)
+        config.metadata.title = L10n.Signup.InProgress.title
+        config.metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
+        config.metadata.bodyTitle = L10n.Signup.Success.title
+        config.metadata.bodySubtitle = L10n.Signup.Success.messageFormat(email)
 
         let request = UpdateAccountRequest(email: email)
 
         var password = ""
-        if let currentPassword = metadata.user?.credentials.password {
+        if let currentPassword = config.metadata.user?.credentials.password {
             password = currentPassword
         }
 
@@ -165,8 +161,10 @@ public class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNa
         switch segueType {
         case .successShowCredentialsSegueIdentifier:
             let vc = segue.destination as! SignupSuccessViewController
-            vc.metadata = metadata
-            vc.completionDelegate = completionDelegate
+            vc.config = SignupSuccessViewController.Config(
+                metadata: config.metadata,
+                completionDelegate: config.completionDelegate,
+            )
             break
         case .presentGDPRTermsSegue:
             let gdprViewController = segue.destination as! GDPRViewController
@@ -270,5 +268,16 @@ extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationCon
 extension ConfirmVPNPlanViewController: ASAuthorizationControllerDelegate {
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+extension ConfirmVPNPlanViewController {
+    struct Config {
+        /// The purchase email address.
+        let purchaseEmail: String?
+
+        var metadata: SignupMetadata
+
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

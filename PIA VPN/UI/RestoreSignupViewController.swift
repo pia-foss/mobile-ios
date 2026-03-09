@@ -27,12 +27,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: RestoreSignupViewController.self)
 
-public class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
-    
-    var omitsSiblingLink = false
-
-    var completionDelegate: WelcomeCompletionDelegate?
-    
+final class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var viewModal: UIView!
@@ -45,7 +40,7 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
     
     @IBOutlet private weak var buttonRestorePurchase: PIAButton!
 
-    var preset: Preset?
+    var config: Config!
 
     private var signupEmail: String?
     private var isRunningActivity = false
@@ -70,7 +65,7 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
         labelDescription.text = L10n.Welcome.Restore.subtitle
         textEmail.placeholder = L10n.Welcome.Restore.Email.placeholder
 
-        textEmail.text = preset?.purchaseEmail
+        textEmail.text = config.purchaseEmail
 
         // XXX: signup scrolling hack, disable on iPad and iPhone Plus
         if Macros.isDeviceBig {
@@ -99,10 +94,12 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.preset = preset
-            vc.signupRequest = SignupRequest(email: email)
-            vc.completionDelegate = completionDelegate
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: config.accountProvider,
+                signupRequest: SignupRequest(email: email),
+                completionDelegate: config.completionDelegate,
+            )
         }
     }
     
@@ -134,7 +131,7 @@ public class RestoreSignupViewController: AutolayoutViewController, BrandableNav
         enableInteractions(false)
         isRunningActivity = true
         self.showLoadingAnimation()
-        preset?.accountProvider.restorePurchases { (error) in
+        config.accountProvider.restorePurchases { error in
             self.hideLoadingAnimation()
             self.isRunningActivity = false
             if let _ = error {
@@ -209,3 +206,14 @@ extension RestoreSignupViewController: UITextFieldDelegate {
     }
 }
 
+extension RestoreSignupViewController {
+    struct Config {
+        /// The purchase email address.
+        let purchaseEmail: String?
+
+        // TODO: use dependency injection
+        let accountProvider: AccountProvider
+
+        weak var completionDelegate: WelcomeCompletionDelegate?
+    }
+}

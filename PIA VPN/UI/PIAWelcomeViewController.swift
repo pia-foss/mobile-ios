@@ -147,10 +147,15 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? WelcomePageViewController {
-            vc.preset = preset
-            vc.completionDelegate = self
-            vc.allPlans = allPlans
-            vc.selectedPlanIndex = selectedPlanIndex
+            vc.config = WelcomePageViewController.Config(
+                loginUsername: preset.loginUsername,
+                loginPassword: preset.loginPassword,
+                purchaseEmail: preset.purchaseEmail,
+                isExpired: preset.isExpired,
+                accountProvider: preset.accountProvider,
+                pages: preset.pages,
+                completionDelegate: self,
+            )
         }
         // recover pending signup
         else if (segue.identifier == StoryboardSegue.Welcome.signupViaRecoverSegue.rawValue) {
@@ -164,8 +169,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             var metadata = SignupMetadata(email: request.email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = request
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: preset.accountProvider,
+                signupRequest: request,
+                completionDelegate: nil,
+            )
         }
     }
     
@@ -250,12 +259,6 @@ public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
 public extension PIAWelcomeViewControllerDelegate {
     func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {}
-}
-
-protocol WelcomeChild: AnyObject {
-    var preset: Preset? { get set }
-    var omitsSiblingLink: Bool { get set }
-    var completionDelegate: WelcomeCompletionDelegate? { get set }
 }
 
 protocol WelcomeCompletionDelegate: AnyObject {

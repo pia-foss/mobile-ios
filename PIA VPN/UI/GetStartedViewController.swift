@@ -315,10 +315,12 @@ public class GetStartedViewController: PIAWelcomeViewController {
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
-            vc.preset = preset
-            vc.completionDelegate = completionDelegate
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: preset.accountProvider,
+                signupRequest: SignupRequest(email: email, transaction: signupTransaction),
+                completionDelegate: completionDelegate,
+            )
         }
         
         guard let vc = segue.destination as? PIAWelcomeViewController else {

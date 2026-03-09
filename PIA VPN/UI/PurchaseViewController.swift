@@ -27,7 +27,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: PurchaseViewController.self)
 
-class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
+final class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar {
     
     private struct Cells {
         static let plan = "PlanCell"
@@ -44,9 +44,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     @IBOutlet private weak var buttonPurchase: PIAButton!
 
-    var preset: Preset?
-    weak var completionDelegate: WelcomeCompletionDelegate?
-    var omitsSiblingLink = false
+    var config: Config!
 
     var allPlans: [PurchasePlan] = [.dummy, .dummy]
 
@@ -63,12 +61,10 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        assert(config != nil, "Config not propagated in PurchaseViewController")
         
-        if preset == nil {
-            log.error("Preset not propagated in PurchaseViewController")
-        }
-        
-        isExpired = preset?.isExpired ?? false
+        isExpired = config.isExpired
         
         styleButtons()
 
@@ -107,7 +103,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let products = preset?.accountProvider.planProducts {
+        if let products = config.accountProvider.planProducts {
             Task { [weak self] in
                 await self?.refreshPlans(products)
             }
@@ -134,10 +130,12 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
-            vc.preset = preset
-            vc.completionDelegate = completionDelegate
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: config.accountProvider,
+                signupRequest: SignupRequest(email: email, transaction: signupTransaction),
+                completionDelegate: config.completionDelegate,
+            )
         }
     }
     
@@ -176,7 +174,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         disableInteractions(fully: true)
         self.showLoadingAnimation()
         
-        preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
+        config.accountProvider.purchase(plan: plan.plan) { transaction, error in
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
@@ -341,5 +339,16 @@ extension PurchaseViewController: UITextFieldDelegate {
         //    signUp(nil)
         //}
         return true
+    }
+}
+
+extension PurchaseViewController {
+    struct Config {
+        /// If `true`, shows variations based on the user expiration.
+        let isExpired: Bool
+        
+        let accountProvider: AccountProvider
+        
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }
