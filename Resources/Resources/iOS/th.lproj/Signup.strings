@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "บัตรมีการใช้สิทธิ์แล้ว";
 "failure.redeem.claimed.message" = "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
 "failure.submit" = "ย้อนกลับ";
+"failure.internal" = "ข้อผิดพลาดภายในแอป (%d)";
+"failure.unknown" = "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %s (%d)";
 
 "unreachable.vc_title" = "ข้อผิดพลาด";
 "unreachable.title" = "อุ๊ปส์!";

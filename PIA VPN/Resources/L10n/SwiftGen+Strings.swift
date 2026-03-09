@@ -1814,12 +1814,20 @@ internal enum L10n {
   }
   internal enum Signup {
     internal enum Failure {
+      /// Internal app error (%d)
+      internal static func `internal`(_ p1: Int) -> String {
+        return L10n.tr("Signup", "failure.internal", p1, fallback: "Internal app error (%d)")
+      }
       /// We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.
       internal static let message = L10n.tr("Signup", "failure.message", fallback: "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.")
       /// GO BACK
       internal static let submit = L10n.tr("Signup", "failure.submit", fallback: "GO BACK")
       /// Account creation failed
       internal static let title = L10n.tr("Signup", "failure.title", fallback: "Account creation failed")
+      /// Unknown error: %s (%d)
+      internal static func unknown(_ p1: UnsafePointer<CChar>, _ p2: Int) -> String {
+        return L10n.tr("Signup", "failure.unknown", p1, p2, fallback: "Unknown error: %s (%d)")
+      }
       /// Sign-up failed
       internal static let vcTitle = L10n.tr("Signup", "failure.vc_title", fallback: "Sign-up failed")
       internal enum Purchase {

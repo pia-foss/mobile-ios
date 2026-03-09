@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "すでに獲得されたカードです";
 "failure.redeem.claimed.message" = "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
 "failure.submit" = "戻る";
+"failure.internal" = "内部アプリエラー (%d)";
+"failure.unknown" = "不明なエラー: %s (%d)";
 
 "unreachable.vc_title" = "エラー";
 "unreachable.title" = "おっと！";

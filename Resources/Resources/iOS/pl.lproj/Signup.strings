@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Karta już użyta";
 "failure.redeem.claimed.message" = "Wygląda na to, że ta karta została użyta na innym koncie. Możesz spróbować wpisać inny PIN.";
 "failure.submit" = "WSTECZ";
+"failure.internal" = "Wewnętrzny błąd aplikacji (%d)";
+"failure.unknown" = "Nieznany błąd: %s (%d)";
 
 "unreachable.vc_title" = "Błąd";
 "unreachable.title" = "Ups!";

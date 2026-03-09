@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "Карта уже использована";
 "failure.redeem.claimed.message" = "Похоже, эту карту уже использовали с другой учетной записи. Попробуйте ввести другой PIN.";
 "failure.submit" = "ВОЗВРАТ";
+"failure.internal" = "Внутренняя ошибка приложения (%d)";
+"failure.unknown" = "Неизвестная ошибка: %s (%d)";
 
 "unreachable.vc_title" = "Ошибка";
 "unreachable.title" = "Ой!";

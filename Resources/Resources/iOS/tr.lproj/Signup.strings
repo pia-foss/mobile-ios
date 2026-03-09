@@ -20,6 +20,12 @@
 "failure.submit" = "GERİ DÖN";
 
 /* (No Comment) */
+"failure.internal" = "Dahili uygulama hatası (%d)";
+
+/* (No Comment) */
+"failure.unknown" = "Bilinmeyen hata: %s (%d)";
+
+/* (No Comment) */
 "failure.title" = "Hesap Oluşturma Hatası";
 
 /* (No Comment) */

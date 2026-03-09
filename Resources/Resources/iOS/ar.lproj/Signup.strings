@@ -27,6 +27,8 @@
 "failure.redeem.claimed.title" = "تم استخدام هذه البطاقة بالفعل";
 "failure.redeem.claimed.message" = "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
 "failure.submit" = "عودة";
+"failure.internal" = "خطأ داخلي في التطبيق (%d)";
+"failure.unknown" = "خطأ غير معروف: %s (%d)";
 
 "unreachable.vc_title" = "خطأ";
 "unreachable.title" = "أوبس!";
