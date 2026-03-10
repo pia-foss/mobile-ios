@@ -133,11 +133,11 @@ public final class PIAAccountClient: PIAAccountAPI {
         }
 
         // Send logout request
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         try? await endpointManager.executeVoidWithFailover(
             path: .logout,
-            method: .delete,
+            method: .post,
             headers: headers
         )
 
@@ -175,7 +175,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         return try await endpointManager.executeWithFailover(
             path: .accountDetails,
@@ -191,7 +191,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         try await endpointManager.executeVoidWithFailover(
             path: .deleteAccount,
@@ -220,7 +220,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
         let formParams = [
             "email": email,
             "reset_password": resetPassword ? "true" : "false"
@@ -329,7 +329,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
         let bodyData = try JSONEncoder.piaCodable.encode(["token": ipToken])
 
         return try await endpointManager.executeWithFailover(
@@ -349,7 +349,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         var bodyDict: [String: String] = ["store": "apple_app_store"]
         if let receipt = receipt {
@@ -414,7 +414,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
         let formParams = [
             "invitee_email": email,
             "invitee_name": name
@@ -435,7 +435,7 @@ public final class PIAAccountClient: PIAAccountAPI {
             throw PIAAccountError.unauthorized()
         }
 
-        let headers = ["Authorization": "Bearer \(apiToken)"]
+        let headers = ["Authorization": "Token \(apiToken)"]
 
         return try await endpointManager.executeWithFailover(
             path: .invites,
@@ -514,7 +514,7 @@ public final class PIAAccountClient: PIAAccountAPI {
                 return
             }
 
-            let headers = ["Authorization": "Bearer \(currentAPIToken)"]
+            let headers = ["Authorization": "Token \(currentAPIToken)"]
 
             let newTokenResponse: APITokenResponse = try await self.endpointManager.executeWithFailover(
                 path: .refreshAPIToken,
