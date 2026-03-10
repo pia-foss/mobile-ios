@@ -194,16 +194,21 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             updateVpnStatus(with: nextStatus)
         }
 
-        if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
+        guard #available(iOS 16.0, *) else {
+            Macros.postNotification(.PIAVPNDidFail)
+            return
+        }
+
+        connection.fetchLastDisconnectError { error in
+            guard let lastDisconnectError = error as NSError? else { return }
+
             let connectivityCheckFailed = switch (lastDisconnectError.domain, lastDisconnectError.code) {
             #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
             case (PacketTunnelProviderError.errorDomain, PacketTunnelProviderError.connectivityCheckFailed.errorCode),
                  (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
                 true
             #endif
-            /// Domains and error code are hardcoded because there are no public constants for matching
-            /// Error Domain=NEVPNConnectionErrorDomainPlugin Code=20 "The VPN server is not responding." UserInfo={NSLocalizedDescription=The VPN server is not responding.}
-            case ("NEVPNConnectionErrorDomainPlugin", 20):
+            case (NEVPNConnectionErrorDomain, _):
                 true
             default:
                 false
@@ -216,7 +221,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 lastConnectedServer?.markServerAsUnavailable()
 
                 Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
-                return
             } else {
                 if previousStatus == .connecting {
                     log.error("The VPN did fail \(lastDisconnectError.localizedDescription)")
@@ -224,7 +228,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 }
             }
         }
-
     }
     
     private func updateVpnStatus(with vpnStatus: VPNStatus) {
