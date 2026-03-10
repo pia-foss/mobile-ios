@@ -1,5 +1,76 @@
 #!/bin/sh -e
 
+get_version_from_app_store() {
+    if [ -z "$APP_STORE_CONNECT_KEY_ID" ] || [ -z "$APP_STORE_CONNECT_ISSUER_ID" ] || [ -z "$APP_STORE_CONNECT_KEY" ]; then
+        echo "App Store Connect credentials not set." >&2
+        return 1
+    fi
+
+    ruby << 'RUBY'
+require 'openssl'
+require 'base64'
+require 'json'
+require 'net/http'
+require 'uri'
+
+key_id    = ENV['APP_STORE_CONNECT_KEY_ID']
+issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
+key_content = ENV['APP_STORE_CONNECT_KEY']
+
+begin
+  # Normalize escaped newlines and strip leading/trailing whitespace per line
+  key_content = key_content.gsub('\n', "\n").lines.map(&:strip).join("\n")
+  key_pem = key_content.include?('-----') \
+    ? key_content \
+    : "-----BEGIN PRIVATE KEY-----\n#{key_content}\n-----END PRIVATE KEY-----"
+  key = OpenSSL::PKey.read(key_pem)
+
+  iat = Time.now.to_i
+  exp = iat + 1200
+
+  header  = Base64.urlsafe_encode64({ alg: 'ES256', kid: key_id, typ: 'JWT' }.to_json, padding: false)
+  payload = Base64.urlsafe_encode64({ iss: issuer_id, iat: iat, exp: exp, aud: 'appstoreconnect-v1' }.to_json, padding: false)
+
+  signing_input = "#{header}.#{payload}"
+  asn1_sig = key.sign('SHA256', signing_input)
+
+  asn1 = OpenSSL::ASN1.decode(asn1_sig)
+  r = asn1.value[0].value.to_s(2).rjust(32, "\x00").bytes.last(32).pack('C*')
+  s = asn1.value[1].value.to_s(2).rjust(32, "\x00").bytes.last(32).pack('C*')
+  jwt = "#{signing_input}.#{Base64.urlsafe_encode64(r + s, padding: false)}"
+
+  def asc_get(path, jwt)
+    uri = URI("https://api.appstoreconnect.apple.com#{path}")
+    req = Net::HTTP::Get.new(uri)
+    req['Authorization'] = "Bearer #{jwt}"
+    Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+  end
+
+  apps_res = asc_get('/v1/apps?filter[bundleId]=com.privateinternetaccess.ios.PIA-VPN&fields[apps]=bundleId', jwt)
+  app_id = JSON.parse(apps_res.body).dig('data', 0, 'id')
+  raise 'App not found' unless app_id
+
+  ver_res = asc_get("/v1/apps/#{app_id}/appStoreVersions?filter[platform]=IOS&fields[appStoreVersions]=versionString,appStoreState&limit=1", jwt)
+  attrs = JSON.parse(ver_res.body).dig('data', 0, 'attributes')
+  raise 'Version not found' unless attrs
+
+  version = attrs['versionString']
+  state   = attrs['appStoreState']
+
+  closed_states = %w[READY_FOR_SALE REPLACED_WITH_NEW_VERSION REMOVED_FROM_SALE DEVELOPER_REMOVED_FROM_SALE]
+  if closed_states.include?(state)
+    major, minor, patch = version.split('.').map(&:to_i)
+    version = "#{major}.#{minor}.#{patch + 1}"
+  end
+
+  puts version
+rescue => e
+  $stderr.puts "Error fetching version from App Store Connect: #{e.message}"
+  exit 1
+end
+RUBY
+}
+
 setVariableValue() {
     variable="$1"
     value="$2"
@@ -36,10 +107,17 @@ then
     version_number=$(echo $CI_TAG | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
     echo "Version '$version_number' from environment variable CI_TAG: '$CI_TAG'"
 else
-    # Retrieve the version from git tags parents for this commit.
+    # Retrieve the version from the latest App Store release.
     # This should only be used in manual XCC runs for testing.
-    version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
-    echo "Version '$version_number' from git tag parents"
+    echo "CI_TAG not set. Attempting to fetch version from App Store Connect..."
+    version_number=$(get_version_from_app_store 2>&1)
+    if [ $? -eq 0 ] && [ -n "$version_number" ]; then
+        echo "Version '$version_number' from App Store Connect"
+    else
+        echo "App Store Connect lookup failed ($version_number). Falling back to git tags."
+        version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
+        echo "Version '$version_number' from git tag parents"
+    fi
 fi
 
 if [ -z "$version_number" ]; then
