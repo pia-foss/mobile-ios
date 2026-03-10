@@ -88,7 +88,17 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
 
             self.user = user
             self.error = nil
-            self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
+
+            // This means the user was recovered using the recovery purchase flow,
+            // so we don't need to request their email again
+            if let email = user.info?.email, !email.isEmpty {
+                self.completionDelegate?.welcomeDidLogin(
+                    withUser: user,
+                    topViewController: self
+                )
+            } else {
+                self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
+            }
         }
     }
         

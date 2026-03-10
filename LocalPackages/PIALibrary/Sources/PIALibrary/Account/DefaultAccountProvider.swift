@@ -462,6 +462,15 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 return
             }
             guard let credentials = credentials else {
+                // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
+                // This handles returning users (e.g. "Duplicate purchase" from API).
+                if let clientError = error as? ClientError, clientError == .badReceipt {
+                    self.attemptLoginWithReceiptFallback(
+                        transaction: request.transaction,
+                        callback: callback
+                    )
+                    return
+                }
                 callback?(nil, error)
                 return
             }
@@ -574,7 +583,46 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
             }
         }
     }
-    
+
+    private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) {
+        guard let receipt = accessedStore.paymentReceipt else {
+            callback?(nil, ClientError.badReceipt)
+            return
+        }
+
+        webServices.token(receipt: receipt) { error in
+            guard error == nil else {
+                callback?(nil, ClientError.badReceipt)
+                return
+            }
+
+            if let transaction = transaction {
+                self.accessedStore.finishTransaction(transaction, success: true)
+            }
+
+            self.accessedDatabase.plain.lastSignupEmail = nil
+            self.updateUsernamePassword()
+
+            self.webServices.info() { accountInfo, error in
+                guard let accountInfo = accountInfo else {
+                    callback?(nil, ClientError.badReceipt)
+                    return
+                }
+
+                self.accessedDatabase.plain.accountInfo = accountInfo
+                self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+                let credentials = Credentials(
+                    username: self.vpnTokenUsername ?? "",
+                    password: self.vpnTokenPassword ?? ""
+                )
+                let user = UserAccount(credentials: credentials, info: accountInfo)
+                Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+                callback?(user, nil)
+            }
+        }
+    }
+
     /**
      Remove all data from the plain and secure internal database
      */
