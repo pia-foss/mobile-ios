@@ -121,7 +121,6 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
                 metadata.bodySubtitle = L10n.Signup.Success.Redeem.message
             }
             vc.config = ConfirmVPNPlanViewController.Config(
-                purchaseEmail: email,
                 metadata: metadata,
                 completionDelegate: config.completionDelegate,
             )
@@ -159,7 +158,7 @@ extension SignupInProgressViewController {
     struct Config {
         let metadata: SignupMetadata
         let accountProvider: AccountProvider
-        var signupRequest: SignupRequest
+        let signupRequest: SignupRequest
         weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

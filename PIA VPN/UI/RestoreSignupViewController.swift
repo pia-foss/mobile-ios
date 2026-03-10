@@ -138,10 +138,11 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         enableInteractions(false)
         isRunningActivity = true
         self.showLoadingAnimation()
-        config.accountProvider.restorePurchases { error in
+        config.accountProvider.restorePurchases { [weak self] error in
+            guard let self else { return }
             self.hideLoadingAnimation()
             self.isRunningActivity = false
-            if let _ = error {
+            if let error {
                 self.reportRestoreFailure(error)
                 self.enableInteractions(true)
                 return
@@ -215,12 +216,8 @@ extension RestoreSignupViewController: UITextFieldDelegate {
 
 extension RestoreSignupViewController {
     struct Config {
-        /// The purchase email address.
         let purchaseEmail: String?
-
-        // TODO: use dependency injection
         let accountProvider: AccountProvider
-
         weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

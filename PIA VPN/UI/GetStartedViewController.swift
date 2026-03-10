@@ -764,7 +764,6 @@ extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
 
 extension GetStartedViewController {
     struct Config {
-        // TODO: use dependency injection
         let accountProvider: AccountProvider
 
         init(preset: Preset) {

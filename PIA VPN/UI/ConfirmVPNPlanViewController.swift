@@ -272,11 +272,7 @@ extension ConfirmVPNPlanViewController: ASAuthorizationControllerDelegate {
 
 extension ConfirmVPNPlanViewController {
     struct Config {
-        /// The purchase email address.
-        let purchaseEmail: String?
-
         var metadata: SignupMetadata
-
         weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

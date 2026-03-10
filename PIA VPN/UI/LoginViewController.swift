@@ -217,7 +217,8 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             return
         }
 
-        Client.store.refreshPaymentReceipt { error in
+        Client.store.refreshPaymentReceipt { [weak self] error in
+            guard let self else { return }
             DispatchQueue.main.async {
                 guard let receipt = Client.store.paymentReceipt else {
                     return
@@ -226,9 +227,9 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
                 let request = LoginReceiptRequest(receipt: receipt)
 
                 self.prepareLogin()
-                self.config.accountProvider.login(with: request, { userAccount, error in
+                self.config.accountProvider.login(with: request) { userAccount, error in
                     self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
-                })
+                }
             }
         }
     }
@@ -460,15 +461,9 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController {
     struct Config {
-        /// The login username.
         let loginUsername: String?
-        
-        /// The login password.
         let loginPassword: String?
-        
-        // TODO: use dependency injection
         let accountProvider: AccountProvider
-        
         weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

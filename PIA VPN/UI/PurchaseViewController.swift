@@ -167,7 +167,8 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         disableInteractions(fully: true)
         self.showLoadingAnimation()
         
-        config.accountProvider.purchase(plan: plan.plan) { transaction, error in
+        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+            guard let self else { return }
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
@@ -334,11 +335,9 @@ extension PurchaseViewController: UITextFieldDelegate {
 
 extension PurchaseViewController {
     struct Config {
-        /// If `true`, shows variations based on the user expiration.
+        /// Show variations based on the user expiration.
         let isExpired: Bool
-        
         let accountProvider: AccountProvider
-        
         weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }
