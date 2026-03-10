@@ -202,6 +202,12 @@ class DashboardViewController: AutolayoutViewController {
         removeCollectionViewObservers()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // needed to relayout the cells when rotating the screen on an iPad
+        updateTileLayout()
+    }
+
     private func addObservers() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
