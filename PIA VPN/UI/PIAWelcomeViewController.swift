@@ -33,25 +33,22 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
  
     @IBOutlet private weak var buttonCancel: UIButton!
 
-    var preset = Preset()
-    
+    var preset = Preset() // TODO: should be made private when segue navigation is removed
+
     private var pendingSignupRequest: SignupRequest?
     weak var delegate: PIAWelcomeViewControllerDelegate?
     
     /**
      Creates a wrapped `PIAWelcomeViewController` ready for presentation.
      
-     - Parameter preset: The optional `Preset` to configure this controller with
+     - Parameter preset: `Preset` to configure this controller with
      - Parameter delegate: The `PIAWelcomeViewControllerDelegate` to handle raised events
      */
-    public static func with(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
-        let nav = StoryboardScene.Welcome.initialScene.instantiate()
-
-        let vc = nav.topViewController as! PIAWelcomeViewController
-        if let customPreset = preset {
-            vc.preset = customPreset
-        }
+    static func with(preset: Preset, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController {
+        let vc = StoryboardScene.Welcome.piaWelcomeViewController.instantiate()
+        vc.preset = preset
         vc.delegate = delegate
+        let nav = UINavigationController(rootViewController: vc)
         return nav
     }
     

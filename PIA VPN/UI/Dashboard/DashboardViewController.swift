@@ -377,7 +377,9 @@ final class DashboardViewController: AutolayoutViewController {
             TransientState.didRetryPendingSignup = true
         }
 
-        let config = GetStartedViewController.Config(preset: preset)
+        let config = GetStartedViewController.Config(
+            accountProvider: preset.accountProvider,
+        )
         let vc = GetStartedViewController.with(config: config, delegate: self)
         guard let vc else {
             log.error("Unable to create GetStartedViewController")
@@ -422,7 +424,7 @@ final class DashboardViewController: AutolayoutViewController {
         preset.isEphemeral = true
         preset.openFromDashboard = true
 
-        let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
+        let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
     }
     

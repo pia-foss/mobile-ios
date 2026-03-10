@@ -107,26 +107,25 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
         
         vc.delegate = delegate ?? self
+        var preset = Preset()
+        preset.loginUsername = config.loginUsername
+        preset.loginPassword = config.loginPassword
 
-        // TODO: Configure PIAWelcomeViewController
-        
         switch segue.identifier  {
         case StoryboardSegue.Welcome.restoreLoginPurchaseSegue.rawValue:
-            vc.preset.pages = .restore
+            preset.pages = .restore
         case StoryboardSegue.Welcome.expiredAccountPurchaseSegue.rawValue:
-            vc.preset.isExpired = true
-            vc.preset.pages = .purchase
+            preset.isExpired = true
+            preset.pages = .purchase
         default:
             break
         }
-        
+        vc.preset = preset
     }
 
     private func setupReadableWidthConstraints() {

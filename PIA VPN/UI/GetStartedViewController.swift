@@ -302,22 +302,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.completionDelegate = vc
         return nav
     }
-
-    static func withPurchase(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
-        if let vc = StoryboardScene.Welcome.storyboard.instantiateViewController(withIdentifier: "PIAWelcomeViewController") as? PIAWelcomeViewController {
-            if let customPreset = preset {
-                vc.preset = customPreset
-                if let vc = vc as? GetStartedViewController {
-                    vc.config = Config(preset: customPreset)
-                    vc.completionDelegate = vc
-                }
-            }
-            vc.delegate = delegate
-            let navigationController = UINavigationController(rootViewController: vc)
-            return navigationController
-        }
-        return UIViewController()
-    }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -339,17 +323,17 @@ final class GetStartedViewController: PIAWelcomeViewController {
                 completionDelegate: completionDelegate,
             )
         }
-        
+
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
-        
+
+        if vc is GetStartedViewController {
+            log.debug("GetStarted navigating to GetStarted with segue: \(segue.identifier!)")
+        }
+
         vc.delegate = self.delegate
         vc.preset = self.preset
-        if let vc = vc as? GetStartedViewController {
-            vc.config = Config(preset: vc.preset)
-            vc.completionDelegate = vc
-        }
 
         switch segue.identifier  {
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
@@ -765,9 +749,5 @@ extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
 extension GetStartedViewController {
     struct Config {
         let accountProvider: AccountProvider
-
-        init(preset: Preset) {
-            self.accountProvider = preset.accountProvider
-        }
     }
 }
