@@ -110,11 +110,10 @@ else
     # Retrieve the version from the latest App Store release.
     # This should only be used in manual XCC runs for testing.
     echo "CI_TAG not set. Attempting to fetch version from App Store Connect..."
-    version_number=$(get_version_from_app_store 2>&1)
-    if [ $? -eq 0 ] && [ -n "$version_number" ]; then
+    if version_number=$(get_version_from_app_store); then
         echo "Version '$version_number' from App Store Connect"
     else
-        echo "App Store Connect lookup failed ($version_number). Falling back to git tags."
+        echo "App Store Connect lookup failed. Falling back to git tags."
         version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
         echo "Version '$version_number' from git tag parents"
     fi
