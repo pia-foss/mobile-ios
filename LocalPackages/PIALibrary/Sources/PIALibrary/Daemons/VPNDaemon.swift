@@ -201,6 +201,10 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                  (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
                 true
             #endif
+            /// Domains and error code are hardcoded because there are no public constants for matching
+            /// Error Domain=NEVPNConnectionErrorDomainPlugin Code=20 "The VPN server is not responding." UserInfo={NSLocalizedDescription=The VPN server is not responding.}
+            case ("NEVPNConnectionErrorDomainPlugin", 20):
+                true
             default:
                 false
             }
