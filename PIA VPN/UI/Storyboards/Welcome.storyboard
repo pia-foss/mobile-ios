@@ -12,7 +12,7 @@
         <!--Restore Signup View Controller-->
         <scene sceneID="fct-7p-tbm">
             <objects>
-                <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestoreSignupViewController" id="Y1W-Um-2lp" customClass="RestoreSignupViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MO3-fL-T5Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,88 +139,6 @@ You will not be charged during this process.</string>
             </objects>
             <point key="canvasLocation" x="354" y="-2622"/>
         </scene>
-        <!--Terms And Conditions View Controller-->
-        <scene sceneID="d5T-5Y-jTO">
-            <objects>
-                <viewController id="DNR-EE-WLm" customClass="TermsAndConditionsViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ftb-sJ-jis">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeP-ly-nAd">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eee-hq-wm9">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiC-Mk-gRO">
-                                                <rect key="frame" x="19" y="50" width="337" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-q2-Scb">
-                                                <rect key="frame" x="19" y="89.5" width="337" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="QXI-q2-Scb" secondAttribute="trailing" constant="19" id="8pL-n6-CVb"/>
-                                            <constraint firstItem="qiC-Mk-gRO" firstAttribute="top" secondItem="Eee-hq-wm9" secondAttribute="top" constant="50" id="9Qw-fT-pwe"/>
-                                            <constraint firstAttribute="bottom" secondItem="QXI-q2-Scb" secondAttribute="bottom" constant="19" id="As8-hW-A3n"/>
-                                            <constraint firstItem="qiC-Mk-gRO" firstAttribute="leading" secondItem="Eee-hq-wm9" secondAttribute="leading" constant="19" id="SEF-qT-9GZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="qiC-Mk-gRO" secondAttribute="trailing" constant="19" id="lke-ur-OH1"/>
-                                            <constraint firstItem="QXI-q2-Scb" firstAttribute="top" secondItem="qiC-Mk-gRO" secondAttribute="bottom" constant="19" id="wPV-7a-GRG"/>
-                                            <constraint firstItem="QXI-q2-Scb" firstAttribute="leading" secondItem="Eee-hq-wm9" secondAttribute="leading" constant="19" id="x95-xo-WSO"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="top" secondItem="YeP-ly-nAd" secondAttribute="top" id="A4R-66-J5H"/>
-                                    <constraint firstAttribute="trailing" secondItem="Eee-hq-wm9" secondAttribute="trailing" id="YzV-3P-ZBg"/>
-                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="width" secondItem="YeP-ly-nAd" secondAttribute="width" id="bnT-d1-TT5"/>
-                                    <constraint firstAttribute="bottom" secondItem="Eee-hq-wm9" secondAttribute="bottom" id="sCN-x9-6Ln"/>
-                                    <constraint firstItem="Eee-hq-wm9" firstAttribute="leading" secondItem="YeP-ly-nAd" secondAttribute="leading" id="x9F-wz-V6i"/>
-                                </constraints>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84U-Pk-i28">
-                                <rect key="frame" x="5" y="25" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="7Wx-h3-G1o"/>
-                                    <constraint firstAttribute="height" constant="44" id="P4u-nl-9mQ"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="PIAX/Global/icon-close"/>
-                                <connections>
-                                    <action selector="close:" destination="DNR-EE-WLm" eventType="touchUpInside" id="cv3-Nz-Uht"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Sc5-Lj-D8n"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="YeP-ly-nAd" secondAttribute="trailing" id="9Zt-PV-dfh"/>
-                            <constraint firstItem="84U-Pk-i28" firstAttribute="leading" secondItem="Sc5-Lj-D8n" secondAttribute="leading" constant="5" id="CDS-2W-Kgl"/>
-                            <constraint firstItem="Sc5-Lj-D8n" firstAttribute="bottom" secondItem="YeP-ly-nAd" secondAttribute="bottom" id="GZM-pp-1Tp"/>
-                            <constraint firstItem="84U-Pk-i28" firstAttribute="top" secondItem="Sc5-Lj-D8n" secondAttribute="top" constant="5" id="IdM-w2-JAY"/>
-                            <constraint firstItem="YeP-ly-nAd" firstAttribute="top" secondItem="Sc5-Lj-D8n" secondAttribute="top" id="Tht-AN-Lfq"/>
-                            <constraint firstItem="YeP-ly-nAd" firstAttribute="leading" secondItem="ftb-sJ-jis" secondAttribute="leading" id="Vd2-VX-Fup"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="kcy-yZ-2yN"/>
-                    <connections>
-                        <outlet property="termsLabel" destination="QXI-q2-Scb" id="B3q-aQ-RBV"/>
-                        <outlet property="termsTitleLabel" destination="qiC-Mk-gRO" id="dzP-53-K5M"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rB3-3S-JRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2445" y="-2903"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDM-pU-cja">
             <objects>
@@ -239,7 +157,7 @@ You will not be charged during this process.</string>
         <!--Welcome Page View Controller-->
         <scene sceneID="oI7-DV-agV">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lku-HF-3OI" customClass="WelcomePageViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lku-HF-3OI" customClass="WelcomePageViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeT-86-F2j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1247" y="-745"/>
@@ -247,7 +165,7 @@ You will not be charged during this process.</string>
         <!--Login View Controller-->
         <scene sceneID="hKn-p1-uWK">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="gOX-c2-oGJ" customClass="LoginViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="gOX-c2-oGJ" customClass="LoginViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m1d-km-gdB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -467,7 +385,7 @@ You will not be charged during this process.</string>
         <!--Purchase View Controller-->
         <scene sceneID="oVv-gT-bp3">
             <objects>
-                <viewController storyboardIdentifier="PurchaseViewController" id="J5T-ys-Of8" customClass="PurchaseViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PurchaseViewController" id="J5T-ys-Of8" customClass="PurchaseViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hSf-Fj-o3R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -501,7 +419,7 @@ You will not be charged during this process.</string>
                                                         </constraints>
                                                         <collectionViewLayout key="collectionViewLayout" id="Tws-YD-75O" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="oW3-48-lQJ" customClass="PurchasePlanCell" customModule="PIA_Staging" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="105"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -728,7 +646,7 @@ You will not be charged during this process.</string>
         <!--Magic Link Login View Controller-->
         <scene sceneID="hR4-se-5tr">
             <objects>
-                <viewController storyboardIdentifier="MagicLinkLoginViewController" id="VQu-uR-ebb" customClass="MagicLinkLoginViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MagicLinkLoginViewController" id="VQu-uR-ebb" customClass="MagicLinkLoginViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t3k-ob-dIM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -762,7 +680,7 @@ You will not be charged during this process.</string>
         <!--Welcome View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PIAWelcomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="PIAWelcomeViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -824,7 +742,7 @@ You will not be charged during this process.</string>
         <!--Get Started View Controller-->
         <scene sceneID="H76-OI-9Kq">
             <objects>
-                <viewController storyboardIdentifier="GetStartedViewController" id="bfs-I2-X8H" customClass="GetStartedViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetStartedViewController" id="bfs-I2-X8H" customClass="GetStartedViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tO9-0u-CbU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -909,7 +827,7 @@ You will not be charged during this process.</string>
                                         </constraints>
                                         <collectionViewLayout key="collectionViewLayout" id="Wl6-07-TOK" customClass="InvalidatingFlowLayout" customModule="PIAUIKit"/>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_VPN" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanCell" id="cJi-SR-DwZ" customClass="PurchasePlanCell" customModule="PIA_Staging" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="0.0" width="321" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1284,11 +1202,10 @@ You will not be charged during this process.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ms1-ev-pif"/>
+        <segue reference="eiq-e2-zsM"/>
         <segue reference="kNL-g4-6nK"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="PIAX/Global/icon-close" width="14" height="15"/>
         <image name="PIAX/Global/plan-selected" width="34" height="34"/>
         <image name="PIAX/Global/plan-unselected" width="46" height="46"/>
         <image name="PIAX/Global/scrollableMap-dark" width="1740" height="870"/>
