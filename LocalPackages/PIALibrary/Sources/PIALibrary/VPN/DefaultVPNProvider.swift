@@ -131,70 +131,89 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         if self.accessedProviders.accountProvider.isLoggedIn {
             self.install(force: force, nil)
         }
-
-
     }
     
+    @available(*, deprecated, renamed: "install(force:)")
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
-        guard accessedProviders.accountProvider.isLoggedIn else {
-            callback?(ClientError.unauthorized)
-            return
+        Task {
+            do {
+                try await install(force: forceInstall)
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
         }
+    }
 
-        let newVPNType = accessedPreferences.vpnType
-        guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
-            callback?(ClientError.vpnProfileUnavailable)
-            return
-        }
-
-        var previousProfile: VPNProfile?
-        if (newVPNType != activeProfile?.vpnType) {
-            previousProfile = activeProfile
-        }
-
-        let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
-        let installBlock: SuccessLibraryCallback = { (error) in
-            guard let configuration = self.vpnClientConfiguration(for: profile) else {
-                callback?(ClientError.vpnProfileUnavailable)
+    public func install(force forceInstall: Bool) async throws {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            guard accessedProviders.accountProvider.isLoggedIn else {
+                log.error("VPN install failed: User is not logged in (unauthorized)")
+                continuation.resume(throwing: ClientError.unauthorized)
                 return
             }
-            profile.save(withConfiguration: configuration, force: forcedStatuses) { (error) in
-                if let error = error {
-                    callback?(error)
+
+            let newVPNType = accessedPreferences.vpnType
+            guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
+                log.error("VPN install failed: No profile configuration found for VPN type: \(newVPNType)")
+                continuation.resume(throwing: ClientError.unsupportedVPNType)
+                return
+            }
+
+            var previousProfile: VPNProfile?
+            if newVPNType != activeProfile?.vpnType {
+                previousProfile = activeProfile
+            }
+
+            let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
+            let installBlock: SuccessLibraryCallback = { _ in
+                guard let configuration = self.vpnClientConfiguration(for: profile) else {
+                    continuation.resume(throwing: ClientError.vpnProfileUnavailable)
                     return
                 }
-                self.activeProfile = profile
-
-                if let previousProfile = previousProfile,
-                    !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
-                    (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType)) {
-                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    previousProfile.remove({ _ in
-                        Macros.postNotification(.PIAVPNDidInstall)
-                        callback?(nil)
-                    })
-                } else {
-                    if previousProfile != nil { // dont connect after install
-                        self.connect(nil)
+                profile.save(withConfiguration: configuration, force: forcedStatuses) { error in
+                    if let error {
+                        log.error("VPN install failed: Profile save failed with error: \(error.localizedDescription)")
+                        continuation.resume(throwing: error)
+                        return
                     }
-                    Macros.postNotification(.PIAVPNDidInstall)
-                    callback?(nil)
+                    self.activeProfile = profile
+
+                    if let previousProfile,
+                        !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
+                        (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType)) {
+                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                        previousProfile.remove { _ in
+                            Macros.postNotification(.PIAVPNDidInstall)
+                            continuation.resume()
+                        }
+                    } else {
+                        if previousProfile != nil { // dont connect after install
+                            self.connect(nil)
+                        }
+                        Macros.postNotification(.PIAVPNDidInstall)
+                        continuation.resume()
+                    }
                 }
             }
-        }
 
-        if let previousProfile = previousProfile {
-            previousProfile.disconnect(installBlock)
-        } else {
-            if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
-                //only install if new and connected
-                if Client.providers.vpnProvider.vpnStatus == .connected || forceInstall {
-                    installBlock(nil)
+            if let previousProfile = previousProfile {
+                previousProfile.disconnect(installBlock)
+            } else {
+                if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
+                    //only install if new and connected
+                    if Client.providers.vpnProvider.vpnStatus == .connected || forceInstall {
+                        installBlock(nil)
+                    } else {
+                        continuation.resume()
+                    }
+                } else {
+                    continuation.resume()
                 }
             }
         }
     }
-    
+
     public func disable(_ callback: SuccessLibraryCallback?) {
         guard let activeProfile = activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
