@@ -39,10 +39,9 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
     private var labelOr = UILabel()
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
-    
-    var termsAndConditionsAgreed = false
 
-    var config: Config!
+    var config: Config! // TODO: should be made private when segue navigation is removed
+    private var termsAndConditionsAgreed = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)

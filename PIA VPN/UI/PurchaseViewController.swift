@@ -44,12 +44,10 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
     
     @IBOutlet private weak var buttonPurchase: PIAButton!
 
-    var config: Config!
+    private var config: Config!
+    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
+    private var selectedPlanIndex: Int = 0
 
-    var allPlans: [PurchasePlan] = [.dummy, .dummy]
-
-    var selectedPlanIndex: Int?
-    
     private var isExpired = false
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
@@ -57,6 +55,12 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    static func with(config: Config) -> PurchaseViewController {
+        let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+        vc.config = config
+        return vc
     }
 
     override func viewDidLoad() {
@@ -138,16 +142,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             )
         }
     }
-    
-    /// Populate the view with the values from GetStartedView
-    /// - Parameters:
-    ///   - plans:           The available plans.
-    ///   - selectedIndex:   The selected plan from the previous screen.
-    func populateViewWith(plans: [PurchasePlan], andSelectedPlanIndex selectedIndex: Int) {
-        self.allPlans = plans
-        self.selectedPlanIndex = selectedIndex
-    }
-    
+
     // MARK: Actions
     
     @IBAction func confirmPlan() {
@@ -157,12 +152,10 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
                           sender: nil)
             **/
         
-        if let index = selectedPlanIndex {
-            let plan = allPlans[index]
+        if selectedPlanIndex < allPlans.count {
+            let plan = allPlans[selectedPlanIndex]
             self.startPurchaseProcessWithEmail("", andPlan: plan)
         }
-        
-        
     }
     
     private func startPurchaseProcessWithEmail(_ email: String,
@@ -238,10 +231,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         
         collectionPlans.isUserInteractionEnabled = true
         collectionPlans.reloadData()
-        if (selectedPlanIndex == nil) {
-            selectedPlanIndex = 0
-        }
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex!, section: 0), animated: false, scrollPosition: [])
+        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
     }
     
     private func disableInteractions(fully: Bool) {

@@ -22,7 +22,7 @@
 import UIKit
 import PIAUIKit
 
-class MagicLinkLoginViewController: AutolayoutViewController {
+final class MagicLinkLoginViewController: AutolayoutViewController {
 
     @IBOutlet private weak var emailTextField: BorderedTextField!
 

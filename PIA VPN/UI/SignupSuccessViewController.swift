@@ -53,8 +53,8 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
 
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
     
-    var config: Config!
-    
+    var config: Config! // TODO: should be made private when segue navigation is removed
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 

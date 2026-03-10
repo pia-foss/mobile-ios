@@ -40,8 +40,7 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
     
     @IBOutlet private weak var buttonRestorePurchase: PIAButton!
 
-    var config: Config!
-
+    private var config: Config!
     private var signupEmail: String?
     private var isRunningActivity = false
 
@@ -49,8 +48,16 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         NotificationCenter.default.removeObserver(self)
     }
 
+    static func with(config: Config) -> RestoreSignupViewController {
+        let vc = StoryboardScene.Welcome.restoreSignupViewController.instantiate()
+        vc.config = config
+        return vc
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
+
+        assert(config != nil, "Config not propagated to RestoreSignupViewController")
 
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(

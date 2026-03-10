@@ -32,7 +32,7 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
     @IBOutlet private weak var titleMessage: UILabel!
     @IBOutlet private weak var labelMessage: UILabel!
 
-    var config: Config!
+    var config: Config! // TODO: should be made private when segue navigation is removed
 
     @available(*, deprecated, message: "it's not used")
     var redeemRequest: RedeemRequest?
@@ -57,7 +57,8 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
     private func performSignup(with request: SignupRequest) {
         log.debug("Signing up...")
 
-        config.accountProvider.signup(with: request) { user, error in
+        config.accountProvider.signup(with: request) { [weak self] user, error in
+            guard let self else { return }
             guard let user = user else {
                 self.user = nil
                 self.error = error
@@ -83,7 +84,7 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
             // This means the user was recovered using the recovery purchase flow,
             // so we don't need to request their email again
             if let email = user.info?.email, !email.isEmpty {
-                self.completionDelegate?.welcomeDidLogin(
+                self.config.completionDelegate?.welcomeDidLogin(
                     withUser: user,
                     topViewController: self
                 )

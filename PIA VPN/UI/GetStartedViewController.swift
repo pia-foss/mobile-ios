@@ -27,7 +27,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: GetStartedViewController.self)
 
-public class GetStartedViewController: PIAWelcomeViewController {
+final class GetStartedViewController: PIAWelcomeViewController {
 
     private struct Cells {
         static let plan = "PlanCell"
@@ -54,7 +54,14 @@ public class GetStartedViewController: PIAWelcomeViewController {
     
     @IBOutlet private weak var textAgreement: UITextView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
+
+    private var config: Config!
+    private weak var completionDelegate: WelcomeCompletionDelegate?
+
+    //New flow
+    private var selectedPlanIndex: Int = 0
+    private var allNewPlans: [PurchasePlan] = [.dummy, .dummy]
+
     private var isFetchingProducts = true
     private var isFetchingFF = true
     
@@ -63,13 +70,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
     private var isPurchasing = false
     private var isNewFlow = false
 
-    weak var completionDelegate: WelcomeCompletionDelegate?
-
     @IBOutlet private weak var buttonViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var hiddenButtonsConstraintHeight: NSLayoutConstraint!
-
-    //New flow
-    var allNewPlans: [PurchasePlan] = [.dummy, .dummy]
 
     @IBOutlet private weak var containerNewFlow: UIView!
     @IBOutlet private weak var walkthroughImage: UIImageView!
@@ -120,9 +122,10 @@ public class GetStartedViewController: PIAWelcomeViewController {
         navigationItem.rightBarButtonItem = nil
 
     }
-    
+
     override public func viewDidLoad() {
-        
+        assert(config != nil, "Config is not propagated")
+
         handleInitialStatus()
         setupNavigationBarButtons()
         self.containerNewFlow.isHidden = true
@@ -136,7 +139,6 @@ public class GetStartedViewController: PIAWelcomeViewController {
         self.walkthroughDescription.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". "
 
         allNewPlans = [.dummy, .dummy]
-        completionDelegate = self
 
         view.backgroundColor = UIColor.piaGrey1
 
@@ -209,13 +211,12 @@ public class GetStartedViewController: PIAWelcomeViewController {
     }
 
     // MARK: Actions
+
     @IBAction func confirmPlan() {
-        
-        if let index = selectedPlanIndex {
-            let plan = allNewPlans[index]
+        if selectedPlanIndex < allNewPlans.count {
+            let plan = allNewPlans[selectedPlanIndex]
             self.startPurchaseProcessWithEmail("", andPlan: plan)
         }
-        
     }
 
     @IBAction private func logInWithReceipt(_ sender: Any?) {
@@ -230,7 +231,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
                 }
 
                 let request = LoginReceiptRequest(receipt: receipt)
-                self?.preset.accountProvider.login( with: request, { userAccount, error in
+                self?.config.accountProvider.login(with: request) { userAccount, error in
                     self?.hideLoadingAnimation()
 
                     guard let userAccount else {
@@ -243,7 +244,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
                         withUser: userAccount,
                         topViewController: self
                     )
-                })
+                }
             }
         }
     }
@@ -265,7 +266,8 @@ public class GetStartedViewController: PIAWelcomeViewController {
         disableInteractions(fully: true)
         self.showLoadingAnimation()
         
-        preset.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
+        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+            guard let self else { return }
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
@@ -282,18 +284,33 @@ public class GetStartedViewController: PIAWelcomeViewController {
             self.signupTransaction = transaction
             self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
-        
     }
 
     
     @IBAction private func scrollPage(_ sender: UIPageControl) {
         scrollToPage(sender.currentPage, animated: true)
     }
-    
-    public static func withPurchase(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
+
+    static func with(config: Config, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController? {
+        let nav = StoryboardScene.Welcome.initialScene.instantiate()
+        guard let vc = nav.topViewController as? GetStartedViewController else {
+            log.error("Top view controller is not GetStartedViewController")
+            return nil
+        }
+        vc.config = config
+        vc.delegate = delegate
+        vc.completionDelegate = vc
+        return nav
+    }
+
+    static func withPurchase(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
         if let vc = StoryboardScene.Welcome.storyboard.instantiateViewController(withIdentifier: "PIAWelcomeViewController") as? PIAWelcomeViewController {
             if let customPreset = preset {
                 vc.preset = customPreset
+                if let vc = vc as? GetStartedViewController {
+                    vc.config = Config(preset: customPreset)
+                    vc.completionDelegate = vc
+                }
             }
             vc.delegate = delegate
             let navigationController = UINavigationController(rootViewController: vc)
@@ -317,7 +334,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
             metadata.bodySubtitle = L10n.Signup.InProgress.message
             vc.config = SignupInProgressViewController.Config(
                 metadata: metadata,
-                accountProvider: preset.accountProvider,
+                accountProvider: config.accountProvider,
                 signupRequest: SignupRequest(email: email, transaction: signupTransaction),
                 completionDelegate: completionDelegate,
             )
@@ -329,6 +346,10 @@ public class GetStartedViewController: PIAWelcomeViewController {
         
         vc.delegate = self.delegate
         vc.preset = self.preset
+        if let vc = vc as? GetStartedViewController {
+            vc.config = Config(preset: vc.preset)
+            vc.completionDelegate = vc
+        }
 
         switch segue.identifier  {
         case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
@@ -350,7 +371,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
             isNewFlow = true
         }
         
-        if let _ = preset.accountProvider.planProducts {
+        if config.accountProvider.planProducts != nil {
             isFetchingProducts = false
         }
         
@@ -392,7 +413,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
                 self.scrollContent.isHidden = self.isNewFlow
                 
                 if self.isNewFlow {
-                    if let products = self.preset.accountProvider.planProducts {
+                    if let products = self.config.accountProvider.planProducts {
                         Task { [weak self] in
                             await self?.refreshPlans(products)
                         }
@@ -424,7 +445,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         super.viewWillAppear(animated)
         setupNavigationBarButtons()
 
-        if let products = preset.accountProvider.planProducts {
+        if let products = config.accountProvider.planProducts {
             Task { [weak self] in
                 await self?.refreshPlans(products)
             }
@@ -692,10 +713,7 @@ public class GetStartedViewController: PIAWelcomeViewController {
         
         collectionPlans.isUserInteractionEnabled = true
         collectionPlans.reloadData()
-        if (selectedPlanIndex == nil) {
-            selectedPlanIndex = 0
-        }
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex!, section: 0), animated: false, scrollPosition: [])
+        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
 
     }
 
@@ -741,5 +759,16 @@ extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
             width: itemWidth,
             height: itemHeight
         )
+    }
+}
+
+extension GetStartedViewController {
+    struct Config {
+        // TODO: use dependency injection
+        let accountProvider: AccountProvider
+
+        init(preset: Preset) {
+            self.accountProvider = preset.accountProvider
+        }
     }
 }

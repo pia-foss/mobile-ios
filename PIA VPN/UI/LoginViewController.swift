@@ -56,7 +56,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
 
     @IBOutlet private weak var loginWithLink: UIButton!
 
-    var config: Config!
+    private var config: Config!
 
     private weak var delegate: PIAWelcomeViewControllerDelegate?
     
@@ -68,6 +68,12 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    static func with(config: Config) -> LoginViewController {
+        let vc = StoryboardScene.Welcome.loginViewController.instantiate()
+        vc.config = config
+        return vc
     }
 
     override func viewDidLoad() {

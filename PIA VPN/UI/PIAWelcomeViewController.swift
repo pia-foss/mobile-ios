@@ -35,19 +35,8 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
 
     var preset = Preset()
     
-    var selectedPlanIndex: Int?
-    
-    var allPlans: [PurchasePlan]?
-    
     private var pendingSignupRequest: SignupRequest?
     weak var delegate: PIAWelcomeViewControllerDelegate?
-    
-    /// It's `true` if the controller was created with `Preset.isEphemeral`.
-    ///
-    /// - Seealso: `Preset.isEphemeral`
-    public var isEphemeral: Bool {
-        return preset.isEphemeral
-    }
     
     /**
      Creates a wrapped `PIAWelcomeViewController` ready for presentation.

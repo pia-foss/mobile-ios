@@ -28,18 +28,8 @@ private let log = PIALogger.logger(for: WelcomePageViewController.self)
 final class WelcomePageViewController: UIPageViewController {
     private var source = [UIViewController]()
     
-    var config: Config!
-    
-    init(config: Config) {
-        self.config = config
-        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
-    }
-    
-    required init?(coder: NSCoder) {
-        self.config = nil
-        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
-    }
-    
+    var config: Config! // TODO: should be made private when segue navigation is removed
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,31 +39,28 @@ final class WelcomePageViewController: UIPageViewController {
         }
 
         if config.pages.contains(.login) {
-            let vc = StoryboardScene.Welcome.loginViewController.instantiate()
-            vc.config = LoginViewController.Config(
+            let vc = LoginViewController.with(config: .init(
                 loginUsername: config.loginUsername,
                 loginPassword: config.loginPassword,
                 accountProvider: config.accountProvider,
                 completionDelegate: config.completionDelegate,
-            )
+            ))
             source.append(vc)
         }
         if config.pages.contains(.purchase) {
-            let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
-            vc.config = PurchaseViewController.Config(
+            let vc = PurchaseViewController.with(config: .init(
                 isExpired: config.isExpired,
                 accountProvider: config.accountProvider,
                 completionDelegate: config.completionDelegate,
-            )
+            ))
             source.append(vc)
         }
         if config.pages.contains(.restore) {
-            let vc = StoryboardScene.Welcome.restoreSignupViewController.instantiate()
-            vc.config = RestoreSignupViewController.Config(
+            let vc = RestoreSignupViewController.with(config: .init(
                 purchaseEmail: config.purchaseEmail,
                 accountProvider: config.accountProvider,
                 completionDelegate: config.completionDelegate,
-            )
+            ))
             source.append(vc)
         }
         dataSource = self
