@@ -1,5 +1,14 @@
 #!/bin/sh -e
 
+get_version_from_app_store() {
+    if [ -z "$APP_STORE_CONNECT_KEY_ID" ] || [ -z "$APP_STORE_CONNECT_ISSUER_ID" ] || [ -z "$APP_STORE_CONNECT_KEY" ]; then
+        echo "App Store Connect credentials not set." >&2
+        return 1
+    fi
+
+    ruby "$SCRIPT_DIR/get_asc_version.rb"
+}
+
 setVariableValue() {
     variable="$1"
     value="$2"
@@ -16,6 +25,8 @@ setVariableValue() {
     fi
     return $error
 }
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd ..
 
@@ -36,10 +47,16 @@ then
     version_number=$(echo $CI_TAG | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
     echo "Version '$version_number' from environment variable CI_TAG: '$CI_TAG'"
 else
-    # Retrieve the version from git tags parents for this commit.
+    # Retrieve the version from the latest App Store release.
     # This should only be used in manual XCC runs for testing.
-    version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
-    echo "Version '$version_number' from git tag parents"
+    echo "CI_TAG not set. Attempting to fetch version from App Store Connect..."
+    if version_number=$(get_version_from_app_store); then
+        echo "Version '$version_number' from App Store Connect"
+    else
+        echo "App Store Connect lookup failed. Falling back to git tags."
+        version_number=$(git describe --tags --abbrev=0 | sed -E 's/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)-.*/\1/g')
+        echo "Version '$version_number' from git tag parents"
+    fi
 fi
 
 if [ -z "$version_number" ]; then
