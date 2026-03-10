@@ -18,12 +18,12 @@ issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
 key_content = ENV['APP_STORE_CONNECT_KEY']
 
 begin
-  # Normalize escaped newlines and strip leading/trailing whitespace per line
+  # Support both raw PEM and base64-encoded key (for environments that don't allow multiline values)
   key_content = key_content.gsub('\n', "\n").lines.map(&:strip).join("\n")
-  key_pem = key_content.include?('-----') \
-    ? key_content \
-    : "-----BEGIN PRIVATE KEY-----\n#{key_content}\n-----END PRIVATE KEY-----"
-  key = OpenSSL::PKey.read(key_pem)
+  unless key_content.include?('-----')
+    key_content = Base64.decode64(key_content)
+  end
+  key = OpenSSL::PKey.read(key_content)
 
   iat = Time.now.to_i
   exp = iat + 1200
