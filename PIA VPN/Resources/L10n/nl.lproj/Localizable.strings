@@ -113,9 +113,6 @@
 "account.subscriptions.trial" = "Proefabonnement";
 "account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
 "account.delete" = "Verwijder account";
-"account.delete.alert.title" = "Weet u het zeker?";
-"account.delete.alert.message" = "Het verwijderen van uw PIA-account is definitief en onomkeerbaar. U zult uw PIA-inloggegevens niet kunnen ophalen na het uitvoeren van deze actie. Houd ermee rekening dat deze actie alleen uw PIA-account verwijdert uit onze database, maar NIET uw abonnement. Hiervoor moet u naar uw Apple-account gaan en daar het Private Internet Access-abonnement annuleren. Anders worden u nog steeds kosten aangerekend, hoewel uw PIA-account niet langer actief is.";
-"account.delete.alert.failureMessage" = "Er ging iets fout bij het verwijderen van uw account. Probeer het later nog een keer.";
 "account.survey.message" = "Wil je helpen om PIA beter te maken? Laat ons weten hoe we kunnen verbeteren!\nVul de enquête in";
 "account.survey.messageLink" = "Vul de enquête in";
 

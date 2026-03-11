@@ -31,7 +31,7 @@ protocol MenuViewControllerDelegate: class {
     func menu(didDetectTrialUpgrade: MenuViewController)
 }
 
-class MenuViewController: AutolayoutViewController {
+final class MenuViewController: AutolayoutViewController {
     enum Item: Int {
         case selectRegion
 
@@ -364,22 +364,20 @@ class MenuViewController: AutolayoutViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func logOut() {
+    private func showLogoutAlert() {
         let sheet = Macros.alert(
             L10n.Localizable.Menu.Logout.title,
             L10n.Localizable.Menu.Logout.message
         )
         sheet.addCancelAction(L10n.Localizable.Global.cancel)
-        sheet.addDestructiveActionWithTitle(L10n.Localizable.Menu.Logout.confirm) {
+        sheet.addDestructiveActionWithTitle(L10n.Localizable.Menu.Logout.confirm) { [weak self] in
+            guard let self else { return }
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
                 DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
                 
-                AccountViewController.logout { success in
+                MenuViewController.performLogout { _ in
                     DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
-                    if success == false {
-                        log.debug("Account: Error logging out the user")
-                    }
                 }
             }
         }
@@ -494,7 +492,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             let item = sectionItems[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: true)
             guard (item != .logout) else {
-                logOut()
+                showLogoutAlert()
                 return
             }
             
@@ -525,6 +523,20 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             dismiss(animated: true) {
                 self.delegate?.menu(self, didSelect: item)
             }
+        }
+    }
+}
+
+extension MenuViewController {
+    static func performLogout(_ completion: @escaping (Bool) -> ()) {
+        Client.providers.accountProvider.logout { error in
+            guard let error else {
+                AppPreferences.shared.reset()
+                completion(true)
+                return
+            }
+            log.error("Unable to log out: \(error)")
+            completion(false)
         }
     }
 }

@@ -28,16 +28,6 @@ internal enum L10n {
       internal static let delete = L10n.tr("Localizable", "account.delete", fallback: "Delete Account")
       /// Something went wrong. Please try logging in again
       internal static let unauthorized = L10n.tr("Localizable", "account.unauthorized", fallback: "Something went wrong. Please try logging in again")
-      internal enum Delete {
-        internal enum Alert {
-          /// Something went wrong while deleting your account, please try again later.
-          internal static let failureMessage = L10n.tr("Localizable", "account.delete.alert.failureMessage", fallback: "Something went wrong while deleting your account, please try again later.")
-          /// Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.
-          internal static let message = L10n.tr("Localizable", "account.delete.alert.message", fallback: "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.")
-          /// Are you sure?
-          internal static let title = L10n.tr("Localizable", "account.delete.alert.title", fallback: "Are you sure?")
-        }
-      }
       internal enum Email {
         /// Email
         internal static let caption = L10n.tr("Localizable", "account.email.caption", fallback: "Email")
