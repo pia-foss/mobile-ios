@@ -268,17 +268,3 @@ final class AccountViewController: AutolayoutViewController {
         }
     }
 }
-
-extension AccountViewController {
-    // TODO: move to a better place
-    static func logout(_ completion: ((Bool?) -> ())? = nil) {
-        Client.providers.accountProvider.logout({ error in
-            guard let _ = error else {
-                AppPreferences.shared.reset()
-                completion?(false)
-                return
-            }
-            completion?(true)
-        })
-    }
-}
