@@ -48,7 +48,7 @@ begin
   version = attrs['versionString']
   state   = attrs['appStoreState']
 
-  closed_states = %w[READY_FOR_SALE REPLACED_WITH_NEW_VERSION REMOVED_FROM_SALE DEVELOPER_REMOVED_FROM_SALE]
+  closed_states = %w[READY_FOR_SALE REPLACED_WITH_NEW_VERSION REMOVED_FROM_SALE DEVELOPER_REMOVED_FROM_SALE PENDING_DEVELOPER_RELEASE]
   if closed_states.include?(state)
     major, minor, patch = version.split('.').map(&:to_i)
     version = "#{major}.#{minor}.#{patch + 1}"
