@@ -26,12 +26,7 @@ import PIADesignSystem
 
 private let log = PIALogger.logger(for: AccountViewController.self)
 
-class AccountViewController: AutolayoutViewController {
-    private enum Secion: Int {
-        case uncredited
-
-        case info
-    }
+final class AccountViewController: AutolayoutViewController {
 
     @IBOutlet private weak var scrollView: UIScrollView!
 
@@ -41,8 +36,8 @@ class AccountViewController: AutolayoutViewController {
     
     @IBOutlet private weak var textUsername: UITextField!
     
-    @IBOutlet weak var labelExpiryInformation: UILabel!
-        
+    @IBOutlet private weak var labelExpiryInformation: UILabel!
+
     @IBOutlet private weak var imageViewTrash: UIImageView!
     
     @IBOutlet private weak var labelDeleteAccount: UILabel!
@@ -133,39 +128,10 @@ class AccountViewController: AutolayoutViewController {
     }
     
     @IBAction private func deleteUserAccount(_ sender: Any?) {
-        let sheet = Macros.alert(
-            L10n.Localizable.Account.Delete.Alert.title,
-            L10n.Localizable.Account.Delete.Alert.message
-        )
-        sheet.addCancelAction(L10n.Localizable.Global.no)
-        sheet.addDestructiveActionWithTitle(L10n.Localizable.Global.yes) {
-            self.showLoadingAnimation()
-            log.debug("Account: Deleting...")
-            
-            Client.providers.accountProvider.deleteAccount({ error in
-                if error == nil {
-                    self.hideLoadingAnimation()
-                    DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
-                    self.dismiss(animated: true) {
-                        log.debug("Account: Deleted successfully, now Logging out...")
-                        AccountViewController.logout { success in
-                            DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
-                            if success == false {
-                                log.debug("Account: Error logging out the user")
-                            }
-                        }
-                    }
-                } else {
-                    self.hideLoadingAnimation()
-                    let sheet = Macros.alert(nil, L10n.Localizable.Account.Delete.Alert.failureMessage)
-                    sheet.addCancelAction(L10n.Localizable.Global.ok)
-                    self.present(sheet, animated: true, completion: nil)
-                    log.debug("Account: Deleting failed...")
-                }
-            })
-            
-        }
-        present(sheet, animated: true, completion: nil)
+        log.debug("deleting user account")
+        guard UIApplication.shared.canOpenURL(AppConstants.Web.deleteAccountUrl) else { return }
+        log.debug("opening helpdesk link")
+        UIApplication.shared.open(AppConstants.Web.deleteAccountUrl)
     }
     
     private func handleReceiptRefresh() {
@@ -304,8 +270,8 @@ class AccountViewController: AutolayoutViewController {
 }
 
 extension AccountViewController {
-    
-    class func logout(_ completion: ((Bool?) -> ())? = nil) {
+    // TODO: move to a better place
+    static func logout(_ completion: ((Bool?) -> ())? = nil) {
         Client.providers.accountProvider.logout({ error in
             guard let _ = error else {
                 AppPreferences.shared.reset()
