@@ -1228,7 +1228,8 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
                 Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
 
             var tileHeight = TileSize.standard.rawValue
-            if tileIndex < Cells.countCases() && Cells.objectIdentifyBy(index: tileIndex).identifier == Cells.connectionTile.identifier {
+            if let cell = Cells(rawValue: tileIndex),
+               cell.identifier == Cells.connectionTile.identifier {
                 tileHeight = TileSize.big.rawValue
             }
             
@@ -1261,7 +1262,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var tileIndex = 0
-        var identifier = FixedCells.objectIdentifyBy(index: tileIndex).identifier
+        var identifier = FixedCells(rawValue: tileIndex)!.identifier
 
         if indexPath.section == DashboardSections.fixedTiles.rawValue {
             if MessagesManager.shared.availableMessage() != nil {
@@ -1273,7 +1274,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             tileIndex = tileModeStatus == .normal ?
                 Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
                 Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
-            identifier = Cells.objectIdentifyBy(index: tileIndex).identifier
+            identifier = Cells(rawValue: tileIndex)!.identifier
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,

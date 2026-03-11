@@ -111,7 +111,7 @@ class DevelopmentSettingsViewController: PIABaseSettingsViewController {
 extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DevelopmentSections.all().count
+        return DevelopmentSections.allCases.count
     }
     
     fileprivate func configure(_ cell: UITableViewCell, forSection section: DevelopmentSections) {
@@ -173,8 +173,11 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section = DevelopmentSections.all()[indexPath.row]
-        
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
+
         configure(cell, forSection: section)
         
         Theme.current.applySecondaryBackground(cell)
@@ -196,7 +199,10 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        let section = DevelopmentSections.all()[indexPath.row]
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return false
+        }
         switch section {
         case .username, .publicUsername, .password:
             return true
@@ -218,8 +224,10 @@ extension DevelopmentSettingsViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = DevelopmentSections.all()[indexPath.row]
+        guard let section = DevelopmentSections(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
 
         switch section {
             case .resolveGoogleAdsDomain:

@@ -23,8 +23,7 @@ import Foundation
 import PIALibrary
 import UIKit
 
-public enum SettingOptions: Int, EnumsBuilder {
-
+public enum SettingOptions: Int, CaseIterable {
     case general
     case protocols
     case network
@@ -71,20 +70,15 @@ public enum SettingOptions: Int, EnumsBuilder {
 
     public func sectionsForSetting() -> [SettingSection] {
         switch self {
-            case .general: return GeneralSections.all()
+            case .general: return GeneralSections.allCases
             case .protocols: return ProtocolsSections.allCases
-            case .network: return NetworkSections.all()
-            case .privacyFeatures: return PrivacyFeaturesSections.all()
-            case .automation: return AutomationSections.all()
+            case .network: return NetworkSections.allCases
+            case .privacyFeatures: return PrivacyFeaturesSections.allCases
+            case .automation: return AutomationSections.allCases
             case .help: return HelpSections.all()
-            case .development: return DevelopmentSections.all()
+            case .development: return DevelopmentSections.allCases
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.general, .protocols, .network, .privacyFeatures, .automation, .help, .development]
-    }
-    
 }
 
 public protocol SettingSection {
@@ -94,8 +88,7 @@ public protocol SettingSection {
     
 }
 
-public enum GeneralSections: Int, SettingSection, EnumsBuilder {
-    
+public enum GeneralSections: Int, CaseIterable, SettingSection {
     case connectSiri
     case disconnectSiri
     case showServiceCommunicationMessages
@@ -121,14 +114,9 @@ public enum GeneralSections: Int, SettingSection, EnumsBuilder {
             case .resetSettings: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.connectSiri, .disconnectSiri, .showServiceCommunicationMessages, .showGeoRegions, .resetSettings]
-    }
-
 }
 
-public enum ProtocolsSections: Int, CaseIterable, SettingSection, EnumsBuilder {
+public enum ProtocolsSections: Int, CaseIterable, SettingSection {
 
     case protocolSelection
     case transport
@@ -160,8 +148,7 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection, EnumsBuilder {
     }
 }
 
-public enum NetworkSections: Int, SettingSection, EnumsBuilder {
-    
+public enum NetworkSections: Int, CaseIterable, SettingSection {
     case dns
     
     public func localizedTitleMessage() -> String {
@@ -175,15 +162,9 @@ public enum NetworkSections: Int, SettingSection, EnumsBuilder {
         case .dns: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.dns]
-    }
-
 }
 
-public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
-    
+public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
     case killswitch = 0
     case reconnectNotifications
     case leakProtection
@@ -212,15 +193,9 @@ public enum PrivacyFeaturesSections: Int, SettingSection, EnumsBuilder {
             case .refresh: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.killswitch, .reconnectNotifications, .leakProtection, .allowAccessOnLocalNetwork, .safariContentBlocker, .refresh]
-    }
-
 }
 
-public enum AutomationSections: Int, SettingSection, EnumsBuilder {
-    
+public enum AutomationSections: Int, CaseIterable, SettingSection {
     case automation
     case manageAutomation
 
@@ -237,14 +212,9 @@ public enum AutomationSections: Int, SettingSection, EnumsBuilder {
         case .manageAutomation: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-        return [.automation, .manageAutomation]
-    }
-
 }
 
-public enum HelpSections: Int, SettingSection, EnumsBuilder {
+public enum HelpSections: Int, SettingSection {
     
     case sendDebugLogs
     case debugLogging
@@ -285,8 +255,7 @@ public enum HelpSections: Int, SettingSection, EnumsBuilder {
 
 }
 
-public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
-    
+public enum DevelopmentSections: Int, CaseIterable, SettingSection {
     case publicUsername
     case username
     case password
@@ -327,10 +296,5 @@ public enum DevelopmentSections: Int, SettingSection, EnumsBuilder {
         case .dynamicIslandLiveActivityFlag: return ""
         }
     }
-    
-    public static func all() -> [Self] {
-      return [.publicUsername, .username, .password, .environment, .resolveGoogleAdsDomain, .deleteKeychain, .crash, .leakProtectionFlag, .leakProtectionNotificationsFlag, .dynamicIslandLiveActivityFlag]
-    }
-
 }
 

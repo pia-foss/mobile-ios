@@ -26,6 +26,8 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIADesignSystem
 
+private let log = PIALogger.logger(for: ProtocolSettingsViewController.self)
+
 final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -156,7 +158,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
             ])
 
         } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            options.append(contentsOf: IKEv2EncryptionAlgorithm.allValues().map {$0.rawValue})
+            options.append(contentsOf: IKEv2EncryptionAlgorithm.allCases.map {$0.rawValue})
         }
 
         let width = self.view.frame.width / 2
@@ -289,7 +291,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                 cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
                 cell.accessoryType = .none
             } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm.objectIdentifyBy(name: pendingPreferences.ikeV2IntegrityAlgorithm).rawValue
+                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm(rawValue: pendingPreferences.ikeV2IntegrityAlgorithm)?.rawValue
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 cell.detailTextLabel?.text = "Noise_IK"
                 cell.accessoryType = .none
@@ -320,7 +322,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         cell.selectionStyle = .default
         cell.detailTextLabel?.text = nil
 
-        let section: ProtocolsSections = getSection(at: indexPath)
+        guard let section = getSection(at: indexPath) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
 
         cell.textLabel?.text = section.localizedTitleMessage()
 
@@ -375,7 +380,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section: ProtocolsSections = getSection(at: indexPath)
+        guard let section = getSection(at: indexPath) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
         select(at: indexPath, forSection: section)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -388,9 +396,9 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         return [.protocolSelection, .dataEncryption, .handshake, .useSmallPackets]
     }
 
-    private func getSection(at indexPath: IndexPath) -> ProtocolsSections {
+    private func getSection(at indexPath: IndexPath) -> ProtocolsSections? {
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            return ProtocolsSections.allCases[indexPath.row]
+            return ProtocolsSections(rawValue: indexPath.row)
         } else {
             return baseSections[indexPath.row]
         }

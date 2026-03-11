@@ -22,7 +22,7 @@
 
 import Foundation
 
-public enum AvailableTiles: Int, EnumsBuilder {
+public enum AvailableTiles: Int {
     case region
     case quickConnect
     case ip

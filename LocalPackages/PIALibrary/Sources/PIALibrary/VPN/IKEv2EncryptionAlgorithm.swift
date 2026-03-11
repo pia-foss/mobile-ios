@@ -23,7 +23,7 @@
 import Foundation
 import NetworkExtension
 
-public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
+public enum IKEv2EncryptionAlgorithm: String, CaseIterable {
 
     public static let defaultAlgorithm: IKEv2EncryptionAlgorithm = .algorithmAES256GCM
     
@@ -63,14 +63,6 @@ public enum IKEv2EncryptionAlgorithm: String, EnumsBuilder {
             case .algorithmAES256GCM: return [.SHA256]
             #endif
         }
-    }
-    
-    public static func allValues() -> [IKEv2EncryptionAlgorithm] {
-        return [.algorithmAES128,
-            .algorithmAES256,
-            .algorithmAES128GCM,
-            .algorithmAES256GCM
-        ]
     }
 }
 

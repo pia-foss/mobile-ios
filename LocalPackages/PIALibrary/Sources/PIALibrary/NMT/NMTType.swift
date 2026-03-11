@@ -21,7 +21,7 @@
 
 import Foundation
 
-public enum NMTType: String, EnumsBuilder {
+public enum NMTType: String {
 
     case protectedWiFi
     case openWiFi

@@ -21,7 +21,7 @@
 
 import Foundation
 
-public enum NMTRules: Int, EnumsBuilder {
+public enum NMTRules: Int {
 
     case alwaysConnect
     case alwaysDisconnect

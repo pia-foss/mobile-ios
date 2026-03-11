@@ -55,9 +55,9 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
         // - Wireguard or OpenVPN is NOT selected
         var filteredSections: [PrivacyFeaturesSections]
         if let preferences = preferences, preferences.showLeakProtection, !isCurrentProtocolWireguardOrOpenVPN() {
-            filteredSections = PrivacyFeaturesSections.all()
+            filteredSections = PrivacyFeaturesSections.allCases
         } else {
-            filteredSections = PrivacyFeaturesSections.all().filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
+            filteredSections = PrivacyFeaturesSections.allCases.filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
         }
 
         // Hide reconnection warning section if kill switch is off

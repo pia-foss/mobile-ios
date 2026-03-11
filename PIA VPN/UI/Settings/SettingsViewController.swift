@@ -555,7 +555,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var sections = SettingOptions.all()
+        var sections = SettingOptions.allCases
         if !Flags.shared.enablesDevelopmentSettings {
             sections.removeAll(where: {$0 == SettingOptions.development})
         }
@@ -574,9 +574,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.accessoryView = nil
         cell.selectionStyle = .default
 
-        var section = SettingOptions.all()[indexPath.row]
+        guard var section = SettingOptions(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return cell
+        }
+
         if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
-            var sections = SettingOptions.all()
+            var sections = SettingOptions.allCases
             sections.removeAll(where: {$0 == SettingOptions.network})
             section = sections[indexPath.row]
         }
@@ -612,10 +616,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var section = SettingOptions.all()[indexPath.row]
+        guard var section = SettingOptions(rawValue: indexPath.row) else {
+            log.debug("unknown section raw value \(indexPath.row)")
+            return
+        }
+
         if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
-            var sections = SettingOptions.all()
+            var sections = SettingOptions.allCases
             sections.removeAll(where: {$0 == SettingOptions.network})
             section = sections[indexPath.row]
         }
