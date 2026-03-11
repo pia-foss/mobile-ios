@@ -38,8 +38,8 @@ enum DashboardVPNConnectingStatus: Int {
     case stillLoading
 }
 
-class DashboardViewController: AutolayoutViewController {
-    
+final class DashboardViewController: AutolayoutViewController {
+
     enum TileSize: CGFloat {
         case standard = 116.0
         case big = 150.0
@@ -377,7 +377,14 @@ class DashboardViewController: AutolayoutViewController {
             TransientState.didRetryPendingSignup = true
         }
 
-        let vc = GetStartedViewController.with(preset: preset, delegate: self)
+        let config = GetStartedViewController.Config(
+            accountProvider: preset.accountProvider,
+        )
+        let vc = GetStartedViewController.with(config: config, delegate: self)
+        guard let vc else {
+            log.error("Unable to create GetStartedViewController")
+            return
+        }
         vc.modalPresentationStyle = .fullScreen
         
         if let presented = self.navigationController?.presentedViewController,
@@ -417,7 +424,7 @@ class DashboardViewController: AutolayoutViewController {
         preset.isEphemeral = true
         preset.openFromDashboard = true
 
-        let vc = GetStartedViewController.withPurchase(preset: preset, delegate: self)
+        let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
     }
     
@@ -1162,7 +1169,7 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
 
         // trial account did purchase, replace current user
-        if welcomeController.isEphemeral {
+        if welcomeController.preset.isEphemeral {
             Client.providers.accountProvider.currentUser = user
         }
 

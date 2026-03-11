@@ -28,7 +28,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: SignupSuccessViewController.self)
 
-public class SignupSuccessViewController: AutolayoutViewController, BrandableNavigationBar {
+final class SignupSuccessViewController: AutolayoutViewController, BrandableNavigationBar {
 
     @IBOutlet private weak var imvPicture: UIImageView!
     @IBOutlet private weak var labelTitle: UILabel!
@@ -53,18 +53,14 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
 
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
     
-    var metadata: SignupMetadata?
-    
-    weak var completionDelegate: WelcomeCompletionDelegate?
-    
+    var config: Config! // TODO: should be made private when segue navigation is removed
+
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let metadata = metadata else {
-            log.error("Metadata not set")
-            return
-        }
 
+        assert(config != nil, "Config not propagated in SignupSuccessViewController")
+
+        let metadata = config.metadata
         title = metadata.title
         imvPicture.image = metadata.bodyImage
         if let offset = metadata.bodyImageOffset {
@@ -91,11 +87,11 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
     }
     
     @IBAction private func submit() {
-        guard let user = metadata?.user else {
+        guard let user = config.metadata.user else {
             log.error("User account not set in metadata")
             return
         }
-        completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
+        config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }
     
     @IBAction private func acceptShareData() {
@@ -182,4 +178,11 @@ public class SignupSuccessViewController: AutolayoutViewController, BrandableNav
         view.layer.borderColor = UIColor.piaGrey4.cgColor
     }
 
+}
+
+extension SignupSuccessViewController {
+    struct Config {
+        var metadata: SignupMetadata
+        weak var completionDelegate: WelcomeCompletionDelegate?
+    }
 }

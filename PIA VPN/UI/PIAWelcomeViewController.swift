@@ -33,36 +33,22 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
  
     @IBOutlet private weak var buttonCancel: UIButton!
 
-    var preset = Preset()
-    
-    var selectedPlanIndex: Int?
-    
-    var allPlans: [PurchasePlan]?
-    
+    var preset = Preset() // TODO: should be made private when segue navigation is removed
+
     private var pendingSignupRequest: SignupRequest?
     weak var delegate: PIAWelcomeViewControllerDelegate?
-    
-    /// It's `true` if the controller was created with `Preset.isEphemeral`.
-    ///
-    /// - Seealso: `Preset.isEphemeral`
-    public var isEphemeral: Bool {
-        return preset.isEphemeral
-    }
     
     /**
      Creates a wrapped `PIAWelcomeViewController` ready for presentation.
      
-     - Parameter preset: The optional `Preset` to configure this controller with
+     - Parameter preset: `Preset` to configure this controller with
      - Parameter delegate: The `PIAWelcomeViewControllerDelegate` to handle raised events
      */
-    public static func with(preset: Preset? = nil, delegate: PIAWelcomeViewControllerDelegate? = nil) -> UIViewController {
-        let nav = StoryboardScene.Welcome.initialScene.instantiate()
-
-        let vc = nav.topViewController as! PIAWelcomeViewController
-        if let customPreset = preset {
-            vc.preset = customPreset
-        }
+    static func with(preset: Preset, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController {
+        let vc = StoryboardScene.Welcome.piaWelcomeViewController.instantiate()
+        vc.preset = preset
         vc.delegate = delegate
+        let nav = UINavigationController(rootViewController: vc)
         return nav
     }
     
@@ -147,10 +133,15 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? WelcomePageViewController {
-            vc.preset = preset
-            vc.completionDelegate = self
-            vc.allPlans = allPlans
-            vc.selectedPlanIndex = selectedPlanIndex
+            vc.config = WelcomePageViewController.Config(
+                loginUsername: preset.loginUsername,
+                loginPassword: preset.loginPassword,
+                purchaseEmail: preset.purchaseEmail,
+                isExpired: preset.isExpired,
+                accountProvider: preset.accountProvider,
+                pages: preset.pages,
+                completionDelegate: self,
+            )
         }
         // recover pending signup
         else if (segue.identifier == StoryboardSegue.Welcome.signupViaRecoverSegue.rawValue) {
@@ -164,8 +155,12 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             var metadata = SignupMetadata(email: request.email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = request
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: preset.accountProvider,
+                signupRequest: request,
+                completionDelegate: nil,
+            )
         }
     }
     
@@ -250,12 +245,6 @@ public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
 public extension PIAWelcomeViewControllerDelegate {
     func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {}
-}
-
-protocol WelcomeChild: AnyObject {
-    var preset: Preset? { get set }
-    var omitsSiblingLink: Bool { get set }
-    var completionDelegate: WelcomeCompletionDelegate? { get set }
 }
 
 protocol WelcomeCompletionDelegate: AnyObject {

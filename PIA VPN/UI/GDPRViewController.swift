@@ -25,7 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 
-public protocol GDPRDelegate: class {
+public protocol GDPRDelegate: AnyObject {
     
     func gdprViewWasAccepted()
 
@@ -33,7 +33,7 @@ public protocol GDPRDelegate: class {
     
 }
 
-class GDPRViewController: AutolayoutViewController {
+final class GDPRViewController: AutolayoutViewController {
 
     @IBOutlet private weak var labelCollectTitle: UILabel!
     @IBOutlet private weak var labelCollectDescription: UILabel!

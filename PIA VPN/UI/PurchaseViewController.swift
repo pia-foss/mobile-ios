@@ -27,7 +27,7 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: PurchaseViewController.self)
 
-class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, WelcomeChild {
+final class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar {
     
     private struct Cells {
         static let plan = "PlanCell"
@@ -44,14 +44,10 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     
     @IBOutlet private weak var buttonPurchase: PIAButton!
 
-    var preset: Preset?
-    weak var completionDelegate: WelcomeCompletionDelegate?
-    var omitsSiblingLink = false
+    private var config: Config!
+    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
+    private var selectedPlanIndex: Int = 0
 
-    var allPlans: [PurchasePlan] = [.dummy, .dummy]
-
-    var selectedPlanIndex: Int?
-    
     private var isExpired = false
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
@@ -61,14 +57,18 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         NotificationCenter.default.removeObserver(self)
     }
 
+    static func with(config: Config) -> PurchaseViewController {
+        let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+        vc.config = config
+        return vc
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        assert(config != nil, "Config not propagated in PurchaseViewController")
         
-        if preset == nil {
-            log.error("Preset not propagated in PurchaseViewController")
-        }
-        
-        isExpired = preset?.isExpired ?? false
+        isExpired = config.isExpired
         
         styleButtons()
 
@@ -107,7 +107,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let products = preset?.accountProvider.planProducts {
+        if let products = config.accountProvider.planProducts {
             Task { [weak self] in
                 await self?.refreshPlans(products)
             }
@@ -134,22 +134,15 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message
-            vc.metadata = metadata
-            vc.signupRequest = SignupRequest(email: email, transaction: signupTransaction)
-            vc.preset = preset
-            vc.completionDelegate = completionDelegate
+            vc.config = SignupInProgressViewController.Config(
+                metadata: metadata,
+                accountProvider: config.accountProvider,
+                signupRequest: SignupRequest(email: email, transaction: signupTransaction),
+                completionDelegate: config.completionDelegate,
+            )
         }
     }
-    
-    /// Populate the view with the values from GetStartedView
-    /// - Parameters:
-    ///   - plans:           The available plans.
-    ///   - selectedIndex:   The selected plan from the previous screen.
-    func populateViewWith(plans: [PurchasePlan], andSelectedPlanIndex selectedIndex: Int) {
-        self.allPlans = plans
-        self.selectedPlanIndex = selectedIndex
-    }
-    
+
     // MARK: Actions
     
     @IBAction func confirmPlan() {
@@ -159,12 +152,10 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
                           sender: nil)
             **/
         
-        if let index = selectedPlanIndex {
-            let plan = allPlans[index]
+        if selectedPlanIndex < allPlans.count {
+            let plan = allPlans[selectedPlanIndex]
             self.startPurchaseProcessWithEmail("", andPlan: plan)
         }
-        
-        
     }
     
     private func startPurchaseProcessWithEmail(_ email: String,
@@ -176,7 +167,8 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         disableInteractions(fully: true)
         self.showLoadingAnimation()
         
-        preset?.accountProvider.purchase(plan: plan.plan) { (transaction, error) in
+        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+            guard let self else { return }
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
@@ -240,10 +232,7 @@ class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar, 
         
         collectionPlans.isUserInteractionEnabled = true
         collectionPlans.reloadData()
-        if (selectedPlanIndex == nil) {
-            selectedPlanIndex = 0
-        }
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex!, section: 0), animated: false, scrollPosition: [])
+        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
     }
     
     private func disableInteractions(fully: Bool) {
@@ -341,5 +330,14 @@ extension PurchaseViewController: UITextFieldDelegate {
         //    signUp(nil)
         //}
         return true
+    }
+}
+
+extension PurchaseViewController {
+    struct Config {
+        /// Show variations based on the user expiration.
+        let isExpired: Bool
+        let accountProvider: AccountProvider
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

@@ -28,7 +28,7 @@ import class account.AccountRequestError
 
 private let log = PIALogger.logger(for: LoginViewController.self)
 
-final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelcomeViewControllerDelegate {
+final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControllerDelegate {
     
     private enum LoginOption {
         case credentials
@@ -56,14 +56,9 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
 
     @IBOutlet private weak var loginWithLink: UIButton!
 
-    var preset: Preset?
+    private var config: Config!
+
     private weak var delegate: PIAWelcomeViewControllerDelegate?
-
-    var omitsSiblingLink = false
-    
-    weak var completionDelegate: WelcomeCompletionDelegate?
-
-    private var signupEmail: String?
     
     private var isLogging = false
     
@@ -75,9 +70,17 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
         NotificationCenter.default.removeObserver(self)
     }
 
+    static func with(config: Config) -> LoginViewController {
+        let vc = StoryboardScene.Welcome.loginViewController.instantiate()
+        vc.config = config
+        return vc
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        assert(config != nil, "Config not propagated to LoginViewController")
+
         NotificationCenter.default.addObserver(self, selector: #selector(finishLoginWithMagicLink(notification:)), name: .PIAFinishLoginWithMagicLink, object: nil)
 
         labelTitle.text = L10n.Welcome.Login.title
@@ -86,13 +89,9 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
         
         textUsername.accessibilityIdentifier = Accessibility.Id.Login.username
         textPassword.accessibilityIdentifier = Accessibility.Id.Login.password
-        
-        if self.preset == nil {
-            log.error("Preset not propagated to LoginViewController")
-        }
 
-        textUsername.text = preset?.loginUsername
-        textPassword.text = preset?.loginPassword
+        textUsername.text = config.loginUsername
+        textPassword.text = config.loginPassword
         
         styleButtons()
         setupReadableWidthConstraints()
@@ -108,27 +107,25 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
         
         vc.delegate = delegate ?? self
-        if let preset = preset {
-            vc.preset = preset
-        }
-        
+        var preset = Preset()
+        preset.loginUsername = config.loginUsername
+        preset.loginPassword = config.loginPassword
+
         switch segue.identifier  {
         case StoryboardSegue.Welcome.restoreLoginPurchaseSegue.rawValue:
-            vc.preset.pages = .restore
+            preset.pages = .restore
         case StoryboardSegue.Welcome.expiredAccountPurchaseSegue.rawValue:
-            vc.preset.isExpired = true
-            vc.preset.pages = .purchase
+            preset.isExpired = true
+            preset.pages = .purchase
         default:
             break
         }
-        
+        vc.preset = preset
     }
 
     private func setupReadableWidthConstraints() {
@@ -178,7 +175,7 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
         }
         
         self.showLoadingAnimation()
-        self.preset?.accountProvider.loginUsingMagicLink(withEmail: email, { (error) in
+        self.config.accountProvider.loginUsingMagicLink(withEmail: email, { error in
             
             self.hideLoadingAnimation()
             guard error == nil else {
@@ -200,11 +197,13 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
             return
         }
         
-        self.completionDelegate?.welcomeDidLogin(withUser:
-            UserAccount(credentials: Credentials(username: "",
-                                                 password: ""),
-                        info: nil),
-                                                 topViewController: self)
+        config.completionDelegate?.welcomeDidLogin(
+            withUser: UserAccount(
+                credentials: Credentials(username: "", password: ""),
+                info: nil
+            ),
+            topViewController: self
+        )
     }
     
     @IBAction private func logInWithReceipt(_ sender: Any?) {
@@ -217,7 +216,8 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
             return
         }
 
-        Client.store.refreshPaymentReceipt { error in
+        Client.store.refreshPaymentReceipt { [weak self] error in
+            guard let self else { return }
             DispatchQueue.main.async {
                 guard let receipt = Client.store.paymentReceipt else {
                     return
@@ -226,9 +226,9 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
                 let request = LoginReceiptRequest(receipt: receipt)
 
                 self.prepareLogin()
-                self.preset?.accountProvider.login(with: request, { userAccount, error in
+                self.config.accountProvider.login(with: request) { userAccount, error in
                     self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
-                })
+                }
             }
         }
     }
@@ -250,9 +250,9 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
         let request = LoginRequest(credentials: credentials)
         
         prepareLogin()
-        preset?.accountProvider.login(with: request, { userAccount, error in
-            self.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
-        })
+        config.accountProvider.login(with: request) { [weak self] userAccount, error in
+            self?.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
+        }
     }
     
     private func getValidCredentials() -> Credentials? {
@@ -316,7 +316,7 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
         
         log.debug("Login succeeded!")
         
-        self.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
+        config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
     }
     
     private func updateTimeToRetry(loginOption: LoginOption, retryAfterSeconds: Double) {
@@ -439,14 +439,12 @@ final class LoginViewController: AutolayoutViewController, WelcomeChild, PIAWelc
     }
     
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
-        completionDelegate?.welcomeDidSignup(withUser: user, topViewController: topViewController)
+        config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: topViewController)
     }
     
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
-        completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
-        
+        config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
     }
-
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -457,5 +455,14 @@ extension LoginViewController: UITextFieldDelegate {
             logIn(nil)
         }
         return true
+    }
+}
+
+extension LoginViewController {
+    struct Config {
+        let loginUsername: String?
+        let loginPassword: String?
+        let accountProvider: AccountProvider
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

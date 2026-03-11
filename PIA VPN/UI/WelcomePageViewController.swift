@@ -25,35 +25,42 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: WelcomePageViewController.self)
 
-class WelcomePageViewController: UIPageViewController {
+final class WelcomePageViewController: UIPageViewController {
     private var source = [UIViewController]()
     
-    var preset: Preset?
-    
-    var selectedPlanIndex: Int?
-    
-    var allPlans: [PurchasePlan]?
-    
-    weak var completionDelegate: WelcomeCompletionDelegate?
+    var config: Config! // TODO: should be made private when segue navigation is removed
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let preset = self.preset else {
-            log.error("Preset not propagated")
+
+        guard let config else {
+            log.error("Config not propagated")
             return
         }
 
-        if preset.pages.contains(.login) {
-            let vc = StoryboardScene.Welcome.loginViewController.instantiate()
+        if config.pages.contains(.login) {
+            let vc = LoginViewController.with(config: .init(
+                loginUsername: config.loginUsername,
+                loginPassword: config.loginPassword,
+                accountProvider: config.accountProvider,
+                completionDelegate: config.completionDelegate,
+            ))
             source.append(vc)
         }
-        if preset.pages.contains(.purchase) {
-            let vc = StoryboardScene.Welcome.purchaseViewController.instantiate()
+        if config.pages.contains(.purchase) {
+            let vc = PurchaseViewController.with(config: .init(
+                isExpired: config.isExpired,
+                accountProvider: config.accountProvider,
+                completionDelegate: config.completionDelegate,
+            ))
             source.append(vc)
         }
-        if preset.pages.contains(.restore) {
-            let vc = StoryboardScene.Welcome.restoreSignupViewController.instantiate()
+        if config.pages.contains(.restore) {
+            let vc = RestoreSignupViewController.with(config: .init(
+                purchaseEmail: config.purchaseEmail,
+                accountProvider: config.accountProvider,
+                completionDelegate: config.completionDelegate,
+            ))
             source.append(vc)
         }
         dataSource = self
@@ -63,21 +70,11 @@ class WelcomePageViewController: UIPageViewController {
             return
         }
         let isSinglePage = (source.count == 1)
-        guard isSinglePage || (preset.pages == .all) else {
+        guard isSinglePage || (config.pages == .all) else {
             log.error("Currently supports all pages or a single page, not a subset")
             return
         }
 
-        for vc in source {
-            guard let child = vc as? WelcomeChild else {
-                log.error("Source element must be a WelcomeChild")
-                return
-            }
-            child.preset = preset
-            child.omitsSiblingLink = !isSinglePage
-            child.completionDelegate = completionDelegate
-        }
-        
         setViewControllers([source.first!], direction: .forward, animated: false, completion: nil)
         
         if let scrollView = self.view.subviews.filter({
@@ -110,7 +107,7 @@ class WelcomePageViewController: UIPageViewController {
             log.error("Page \(index) beyond source controllers (\(source.count))")
             return
         }
-        guard let currentIndex = source.index(of: viewControllers!.first!) else {
+        guard let vc = viewControllers?.first, let currentIndex = source.firstIndex(of: vc) else {
             log.error("No page displayed yet")
             return
         }
@@ -132,7 +129,7 @@ class WelcomePageViewController: UIPageViewController {
         }
         let isLandscape = (window.bounds.size.width > window.bounds.size.height)
         let minHeight: CGFloat
-        if let _ = childViewController as? LoginViewController {
+        if childViewController is LoginViewController {
             minHeight = 568.0
         } else {
             minHeight = 667.0
@@ -147,7 +144,7 @@ class WelcomePageViewController: UIPageViewController {
 
 extension WelcomePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = source.index(of: viewController) else {
+        guard let index = source.firstIndex(of: viewController) else {
             log.error("Cannot find view controller")
             return nil
         }
@@ -158,7 +155,7 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = source.index(of: viewController) else {
+        guard let index = source.firstIndex(of: viewController) else {
             log.error("Cannot find view controller")
             return nil
         }
@@ -166,5 +163,29 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
             return nil
         }
         return source[index + 1]
+    }
+}
+
+extension WelcomePageViewController {
+    struct Config {
+        /// The login username.
+        let loginUsername: String?
+
+        /// The login password.
+        let loginPassword: String?
+
+        /// The purchase email address.
+        let purchaseEmail: String?
+
+        /// If `true`, shows variations based on the user expiration.
+        let isExpired: Bool
+
+        // TODO: use dependency injection
+        let accountProvider: AccountProvider
+
+        /// The `Pages` to display in the scroller.
+        let pages: Pages
+
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }

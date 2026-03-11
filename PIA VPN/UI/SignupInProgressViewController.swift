@@ -26,21 +26,16 @@ import PIAUIKit
 
 private let log = PIALogger.logger(for: SignupInProgressViewController.self)
 
-public class SignupInProgressViewController: AutolayoutViewController, BrandableNavigationBar {
+final class SignupInProgressViewController: AutolayoutViewController, BrandableNavigationBar {
     @IBOutlet private weak var progressView: CircleProgressView!
 
     @IBOutlet private weak var titleMessage: UILabel!
     @IBOutlet private weak var labelMessage: UILabel!
 
-    var signupRequest: SignupRequest?
+    var config: Config! // TODO: should be made private when segue navigation is removed
 
+    @available(*, deprecated, message: "it's not used")
     var redeemRequest: RedeemRequest?
-    
-    var preset: Preset?
-
-    var metadata: SignupMetadata?
-    
-    weak var completionDelegate: WelcomeCompletionDelegate?
     
     private var user: UserAccount?
     
@@ -49,24 +44,21 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        labelMessage.text = metadata?.bodySubtitle
-        titleMessage.text = metadata?.title
+        labelMessage.text = config.metadata.bodySubtitle
+        titleMessage.text = config.metadata.title
     }
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         progressView.startAnimating()
-
-        if let request = signupRequest {
-            performSignup(with: request)
-        }
+        performSignup(with: config.signupRequest)
     }
     
     private func performSignup(with request: SignupRequest) {
         log.debug("Signing up...")
 
-        preset?.accountProvider.signup(with: request) { (user, error) in
+        config.accountProvider.signup(with: request) { [weak self] user, error in
+            guard let self else { return }
             guard let user = user else {
                 self.user = nil
                 self.error = error
@@ -92,7 +84,7 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
             // This means the user was recovered using the recovery purchase flow,
             // so we don't need to request their email again
             if let email = user.info?.email, !email.isEmpty {
-                self.completionDelegate?.welcomeDidLogin(
+                self.config.completionDelegate?.welcomeDidLogin(
                     withUser: user,
                     topViewController: self
                 )
@@ -109,28 +101,29 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
         switch segueType {
         case .successSegueIdentifier:
                         
-            guard let email = signupRequest?.email ?? redeemRequest?.email else {
+            guard let email = config.signupRequest.email ?? redeemRequest?.email else {
                 log.error("Email not provided with signup or redeem request")
                 return
             }
             
             let vc = segue.destination as! ConfirmVPNPlanViewController
             var metadata = SignupMetadata(email: email, user: user)
-            if let _ = signupRequest {
+            if config.signupRequest != nil {
                 metadata.title = L10n.Signup.InProgress.title
                 metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
                 metadata.bodyTitle = L10n.Signup.Success.title
                 metadata.bodySubtitle = L10n.Signup.Success.messageFormat(metadata.email)
-            } else if let _ = redeemRequest {
+            } else if redeemRequest != nil {
                 metadata.title = L10n.Welcome.Redeem.title
                 metadata.bodyImage = Asset.Ui.imageRedeemSuccess.image
                 metadata.bodyImageOffset = CGPoint(x: -10.0, y: 0.0)
                 metadata.bodyTitle = L10n.Signup.Success.Redeem.title
                 metadata.bodySubtitle = L10n.Signup.Success.Redeem.message
             }
-            vc.preset = preset
-            vc.metadata = metadata
-            vc.completionDelegate = completionDelegate
+            vc.config = ConfirmVPNPlanViewController.Config(
+                metadata: metadata,
+                completionDelegate: config.completionDelegate,
+            )
             
         case .failureSegueIdentifier:
             let vc = segue.destination as! SignupFailureViewController
@@ -158,5 +151,14 @@ public class SignupInProgressViewController: AutolayoutViewController, Brandable
         Theme.current.applyTitle(titleMessage, appearance: .dark)
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applyCircleProgressView(progressView)
+    }
+}
+
+extension SignupInProgressViewController {
+    struct Config {
+        let metadata: SignupMetadata
+        let accountProvider: AccountProvider
+        let signupRequest: SignupRequest
+        weak var completionDelegate: WelcomeCompletionDelegate?
     }
 }
