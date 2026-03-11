@@ -113,9 +113,6 @@
 "account.subscriptions.trial" = "Deneme planı";
 "account.unauthorized" = "Bir sorun oluştu. Lütfen tekrar oturum açmayı deneyin";
 "account.delete" = "Hesabı Sil";
-"account.delete.alert.title" = "Emin misiniz?";
-"account.delete.alert.message" = "PIA hesabınızı silmek kalıcıdır ve geri alınamaz. Bu eylemi gerçekleştirdikten sonra PIA kimlik bilgilerinize erişemeyeceksiniz. Bu eylemin, PIA hesabınızı yalnızca veri tabanımızdan sildiğini ancak aboneliğinizi SİLMEDİĞİNİ unutmayın. Apple hesabınıza gitmeniz ve Private Internet Access aboneliğinizi buradan iptal etmeniz gerekecek. Aksi takdirde, PIA hesabınız artık aktif olmasa bile yine de ücretlendirileceksiniz.";
-"account.delete.alert.failureMessage" = "Hesabınız silinirken bir sorun oluştu, lütfen daha sonra tekrar deneyin.";
 "account.survey.message" = "PIA'yı daha iyi yapmak ister misiniz? Nasıl iyileştirebileceğimizi belirtin!\nAnkete Katılın";
 "account.survey.messageLink" = "Ankete Katıl";
 

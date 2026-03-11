@@ -113,9 +113,6 @@
 "account.subscriptions.trial" = "Piano di prova";
 "account.unauthorized" = "Qualcosa è andato storto. Prova ad accedere di nuovo";
 "account.delete" = "Elimina account";
-"account.delete.alert.title" = "Continuare?";
-"account.delete.alert.message" = "L’eliminazione del tuo account PIA è un’operazione definitiva e irreversibile, al termine della quale non potrai più recuperare le tue credenziali PIA. Tieni presente che questa azione elimina solo il tuo account PIA dal nostro database, NON l’abbonamento. Per cancellare l’abbonamento a Private Internet Access, dovrai accedere al tuo account Apple e cancellarlo da lì. Altrimenti continuerai a pagarlo anche se il tuo account PIA non sarà più attivo.";
-"account.delete.alert.failureMessage" = "Qualcosa non ha funzionato durante l’eliminazione dell’account. Riprova più tardi.";
 "account.survey.message" = "Vuoi aiutarci a migliorare PIA? Dicci la tua!\nPartecipa al sondaggio";
 "account.survey.messageLink" = "Partecipa al sondaggio";
 
