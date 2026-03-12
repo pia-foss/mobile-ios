@@ -22,7 +22,7 @@
 
 import Foundation
 
-public class PurchasePlan: NSObject {
+public class PurchasePlan: NSObject, Identifiable {
     private class DummyInAppProduct: InAppProduct {
         let identifier = ""
         
@@ -62,6 +62,8 @@ public class PurchasePlan: NSObject {
     public var title = ""
 
     public var detail = ""
+
+    public var secondaryDetail: String? = nil
 
     public var bestValue = false
 
@@ -103,11 +105,10 @@ public class PurchasePlan: NSObject {
         monthlyFactor = 1.0
     }
 
-    public init(plan: Plan, product: InAppProduct, monthlyFactor: Double) async {
+    public init(plan: Plan, product: InAppProduct, monthlyFactor: Double) {
         precondition(monthlyFactor > 0.0)
         self.plan = plan
         self.product = product
-        self.hasIntroOffer = await product.isEligibleForIntroOffer()
         self.monthlyFactor = monthlyFactor
     }
     
