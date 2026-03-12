@@ -63,12 +63,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var allNewPlans: [PurchasePlan] = [.dummy, .dummy]
 
     private var isFetchingProducts = true
-    private var isFetchingFF = true
-    
+
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
-    private var isNewFlow = false
 
     @IBOutlet private weak var buttonViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var hiddenButtonsConstraintHeight: NSLayoutConstraint!
@@ -83,34 +81,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
     @IBOutlet private weak var newLoginButton: PIAButton!
     @IBOutlet private weak var restorePurchaseButton: UIButton!
     @IBOutlet private weak var newTextAgreement: UITextView!
-
-    private var buttonViewIsExpanded = false {
-        didSet {
-            self.updateButtonView()
-        }
-    }
-    
-    private lazy var allData: [WalkthroughPageView.PageData] = [
-        WalkthroughPageView.PageData(
-            title: L10n.Signup.Walkthrough.Page._1.title,
-            detail: L10n.Signup.Walkthrough.Page._1.description,
-            image: Asset.Ui.imageWalkthrough1.image
-        ),
-        WalkthroughPageView.PageData(
-            title: L10n.Signup.Walkthrough.Page._2.title,
-            detail: L10n.Signup.Walkthrough.Page._2.description,
-            image: Asset.Ui.imageWalkthrough2.image
-        ),
-        WalkthroughPageView.PageData(
-            title: L10n.Signup.Walkthrough.Page._3.title,
-            detail: L10n.Signup.Walkthrough.Page._3.description,
-            image: Asset.Ui.imageWalkthrough3.image
-        )
-    ]
-    
-    private var tutorialViews: [WalkthroughPageView] = []
-
-    private var currentPageIndex = 0
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -128,7 +98,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
         handleInitialStatus()
         setupNavigationBarButtons()
-        self.containerNewFlow.isHidden = true
         self.visualEffectView.isHidden = true
         self.pageControl.isHidden = true
         collectionPlans.isUserInteractionEnabled = false
@@ -163,53 +132,27 @@ final class GetStartedViewController: PIAWelcomeViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(recoverAccount), name: .PIARecoverAccount, object: nil)
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
-        nc.addObserver(self, selector: #selector(featureFlagsDidFetch(notification:)), name: .__AppDidFetchFeatureFlags, object: nil)
 
         self.styleButtons()
         visualEffectView.clipsToBounds = true
         visualEffectView.layer.cornerRadius = 15
         visualEffectView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
-        fireTimeoutForFeatureFlags()
-        
         super.viewDidLoad()
 
     }
     
     private func composeAgreementText(message: String) -> String {
-        
+
         var agreement = message
-        
-        if isNewFlow,
-           let index = agreement.range(of: "\n\n", options: .backwards)?.upperBound {
+
+        if let index = agreement.range(of: "\n\n", options: .backwards)?.upperBound {
             agreement = String(agreement.suffix(from: index))
         }
-        
+
         return agreement
     }
     
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.down:
-                buttonViewIsExpanded = false
-            case UISwipeGestureRecognizer.Direction.up:
-                buttonViewIsExpanded = true
-            default:
-                break
-            }
-        }
-
-    }
-
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (context) in
-            self.scrollToPage(self.currentPageIndex, animated: false, force: true, width: size.width)
-        }, completion: nil)
-    }
-
     // MARK: Actions
 
     @IBAction func confirmPlan() {
@@ -288,7 +231,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     
     @IBAction private func scrollPage(_ sender: UIPageControl) {
-        scrollToPage(sender.currentPage, animated: true)
     }
 
     static func with(config: Config, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController? {
@@ -349,20 +291,13 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
     
     public func handleInitialStatus() {
-        
-        if Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen) {
-            isFetchingFF = false
-            isNewFlow = true
-        }
-        
         if config.accountProvider.planProducts != nil {
             isFetchingProducts = false
         }
-        
-        if !isFetchingProducts && !isFetchingProducts {
+
+        if !isFetchingProducts {
             self.handleVisibilityOfVIews()
         }
-
     }
     
     // MARK: Notifications
@@ -379,49 +314,21 @@ final class GetStartedViewController: PIAWelcomeViewController {
         }
     }
     
-    @objc private func featureFlagsDidFetch(notification: Notification) {
-        isFetchingFF = false
-        self.isNewFlow = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
-        self.handleVisibilityOfVIews()
-    }
-    
     private func handleVisibilityOfVIews() {
-        if !isFetchingFF && !isFetchingProducts {
+        if !isFetchingProducts {
             if !isPurchasing {
                 self.hideLoadingAnimation()
             }
-            
+
             DispatchQueue.main.async {
-                
-                self.containerNewFlow.isHidden = !self.isNewFlow
-                self.scrollContent.isHidden = self.isNewFlow
-                
-                if self.isNewFlow {
-                    if let products = self.config.accountProvider.planProducts {
-                        Task { [weak self] in
-                            await self?.refreshPlans(products)
-                        }
+                self.scrollContent.isHidden = true
+                if let products = self.config.accountProvider.planProducts {
+                    Task { [weak self] in
+                        await self?.refreshPlans(products)
                     }
-                } else {
-                    self.visualEffectView.isHidden = false
-                    self.pageControl.isHidden = false
-
-                    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-                    swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-                    self.view.addGestureRecognizer(swipeDown)
-
-                    let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-                    swipeUp.direction = UISwipeGestureRecognizer.Direction.up
-                    self.view.addGestureRecognizer(swipeUp)
-                    
-                    self.subscribeNowTitle.text = L10n.Signup.Purchase.Trials.intro
                 }
-                self.addPages()
-                self.pageControl.numberOfPages = self.allData.count
             }
-
         }
-        
     }
 
     /// :nodoc:
@@ -476,118 +383,22 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
     
     // MARK: Helpers
-    
-    private func updateButtonView() {
-        UIView.animate(withDuration: 0.3, animations: {
-            if self.buttonViewIsExpanded {
-
-                var maxViewHeight: CGFloat = GetStartedViewController.maxViewHeight
-                switch UIDevice().type {
-                    case .iPhoneSE, .iPhone5, .iPhone5S:
-                        maxViewHeight = GetStartedViewController.smallDeviceMaxViewHeight
-                    default: break
-                }
-
-                self.buttonViewConstraintHeight.constant = maxViewHeight
-                self.hiddenButtonsConstraintHeight.constant = GetStartedViewController.extraViewButtonsHeight
-                self.hiddenButtonsView.alpha = 1
-            } else {
-                self.buttonViewConstraintHeight.constant = GetStartedViewController.defaultViewHeight
-                self.hiddenButtonsConstraintHeight.constant = 0
-                self.hiddenButtonsView.alpha = 0
-            }
-            self.view.layoutIfNeeded()
-            self.visualEffectView.layoutIfNeeded()
-        })
-    }
 
     private func disableInteractions(fully: Bool) {
-        self.subscribeNowButton.isEnabled = false
-        self.buyButton.isEnabled = false
+        self.newSubscribeNowButton.isEnabled = false
         self.spinner.startAnimating()
     }
 
     private func enableInteractions() {
-        if !isPurchasing { //dont reenable the screen if we are still purchasing
-            self.subscribeNowButton.isEnabled = true
-            self.buyButton.isEnabled = true
+        if !isPurchasing {
+            self.newSubscribeNowButton.isEnabled = true
             self.spinner.stopAnimating()
-        }
-    }
-    
-    private func fireTimeoutForFeatureFlags() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            // Cancel the FF request
-            if self.isFetchingFF {
-                NotificationCenter.default.removeObserver(self, name: .__AppDidFetchFeatureFlags, object: nil)
-                self.isFetchingFF = false
-                self.isNewFlow = false
-                self.handleVisibilityOfVIews()
-            }
         }
     }
     public func navigateToLoginView() {
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
                           sender: nil)
     }
-    
-    // MARK: Onboarding walkthrough
-
-    private func addPages() {
-        let parent = viewContent!
-        var constraints: [NSLayoutConstraint] = []
-        var previousPage: UIView?
-        
-        for (i, data) in allData.enumerated() {
-            let page = WalkthroughPageView(data: data)
-            tutorialViews.append(page)
-            page.translatesAutoresizingMaskIntoConstraints = false
-            parent.addSubview(page)
-            
-            // size
-            constraints.append(page.widthAnchor.constraint(equalTo: scrollContent.widthAnchor))
-            constraints.append(page.centerYAnchor.constraint(equalTo: parent.centerYAnchor))
-            constraints.append(page.topAnchor.constraint(greaterThanOrEqualTo: parent.topAnchor, constant: 20.0))
-            constraints.append(page.bottomAnchor.constraint(lessThanOrEqualTo: parent.bottomAnchor, constant: -20.0))
-            
-            // left
-            if let previousPage = previousPage {
-                constraints.append(page.leftAnchor.constraint(equalTo: previousPage.rightAnchor))
-            } else {
-                constraints.append(page.leftAnchor.constraint(equalTo: parent.leftAnchor))
-            }
-            
-            // right
-            if (i == allData.count - 1) {
-                constraints.append(page.rightAnchor.constraint(equalTo: parent.rightAnchor))
-            }
-            
-            previousPage = page
-        }
-        
-        NSLayoutConstraint.activate(constraints)
-    }
-    
-    private func scrollToPage(_ pageIndex: Int, animated: Bool) {
-        scrollToPage(pageIndex, animated: animated, force: false, width: scrollContent.frame.size.width)
-    }
-    
-    private func scrollToPage(_ pageIndex: Int, animated: Bool, force: Bool, width: CGFloat) {
-        guard (force || (pageIndex != currentPageIndex)) else {
-            return
-        }
-        currentPageIndex = pageIndex
-        scrollContent.setContentOffset(CGPoint(x: CGFloat(pageIndex * Int(width)), y: 0), animated: animated)
-        pageControl.currentPage = pageIndex
-        updateButtonsToCurrentPage()
-    }
-    
-    private func updateButtonsToCurrentPage() {
-        guard (currentPageIndex < allData.count - 1) else {
-            return
-        }
-    }
-
     
     // MARK: Restylable
     
@@ -611,9 +422,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         Theme.current.applyLinkAttributes(textAgreement)
         Theme.current.applyLinkAttributes(newTextAgreement)
         Theme.current.applyActivityIndicator(spinner)
-        tutorialViews.forEach({
-            $0.applyStyles()
-        })
 
     }
 
@@ -704,11 +512,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
 }
 
 extension GetStartedViewController: UIScrollViewDelegate {
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        currentPageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.size.width)
-        pageControl.currentPage = currentPageIndex
-        updateButtonsToCurrentPage()
-    }
 }
 
 extension GetStartedViewController: UICollectionViewDataSource, UICollectionViewDelegate {
