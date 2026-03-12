@@ -1,5 +1,5 @@
-
 import SwiftUI
+import PIALibrary
 
 struct DashboardView: View {
     
@@ -22,6 +22,13 @@ struct DashboardView: View {
         .withTopNavigationBarAndTitleView {
             // View for the Title section of the Navigation bar
             ConnectionStateTitle(title: viewModel.connectionTitle, tintColor: viewModel.connectionTintColor.titleTint)
+        }
+        .overlay(alignment: .bottomTrailing) {
+            // Only display DebugIPOverlayView in Staging or TestFlight builds
+            if Client.environment == .staging || TestFlightDetector.shared.isTestFlight {
+                DebugIPOverlayView()
+                    .padding(.trailing, 30)
+            }
         }
     }
 }
