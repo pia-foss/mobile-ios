@@ -24,14 +24,9 @@ import Foundation
 import UIKit
 import PIADesignSystem
 
-public enum PIAButtonStatus {
-    case normal
-    case error
-}
-
 // UIButton with rounded corners and border to be used throughout PIA application
-public class PIAButton: UIButton {
-    
+public final class PIAButton: UIButton {
+
     private var isButtonImage = false
     private var edgesHaveBeenSet = false
     private var renderingModeHasBeenSet = false
@@ -41,7 +36,21 @@ public class PIAButton: UIButton {
     private var style: TextStyle!
     private var currentBackgroundColor: UIColor!
 
-    override open var isHighlighted: Bool {
+    // lazy to only load it when actually needed
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(indicator)
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+        return indicator
+    }()
+
+    override public var isHighlighted: Bool {
         didSet {
             if currentBackgroundColor == nil {
                 currentBackgroundColor = backgroundColor
@@ -51,8 +60,8 @@ public class PIAButton: UIButton {
         }
     }
     
-    public var status: PIAButtonStatus = .normal {
-        didSet { reloadButtonStatus() }
+    public var isLoading: Bool = false {
+        didSet { reloadButtonIsLoading(oldValue: oldValue) }
     }
 
     override init(frame: CGRect) {
@@ -112,26 +121,19 @@ public class PIAButton: UIButton {
         self.edgesHaveBeenSet = false
     }
     
-    private func reloadButtonStatus() {
+    private func reloadButtonIsLoading(oldValue: Bool) {
+        guard isLoading != oldValue else { return }
         checkRenderingMode()
-        if status == .error {
-            self.resetEdges()
-            if let errorColor = TextStyle.textStyle10.color {
-                self.layer.borderColor = errorColor.cgColor
-                self.tintColor = errorColor
-                style(style: TextStyle.textStyle10,
-                      for: [])
-            }
+        if isLoading {
+            activityIndicator.startAnimating()
+            titleLabel?.alpha = 0
+            imageView?.alpha = 0
+            isUserInteractionEnabled = false
         } else {
-            if let color = style.color {
-                self.layer.borderColor = color.cgColor
-                self.tintColor = color
-                style(style: style,
-                      for: [])
-            } else {
-                self.layer.borderColor = borderColor.cgColor
-                self.tintColor = borderColor
-            }
+            activityIndicator.stopAnimating()
+            titleLabel?.alpha = 1
+            imageView?.alpha = 1
+            isUserInteractionEnabled = true
         }
     }
     
@@ -143,7 +145,6 @@ public class PIAButton: UIButton {
             imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
     }
-    
 }
 
 extension PIAButton {
