@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
       "state" : {
-        "revision" : "c5a7c17ae0a09e6ed00f62f7e2d04ce913df4773",
-        "version" : "1.0.2"
+        "revision" : "acb52e4f252c2985352a5c0f07f88b5b152c335f",
+        "version" : "1.0.3"
       }
     },
     {
