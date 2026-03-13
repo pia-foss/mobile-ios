@@ -14,7 +14,6 @@ struct Accessibility {
         }
         struct Login {
             static let submit = "id.login.submit"
-            static let submitNew = "id.login.submit.new"
             static let username = "id.login.username"
             static let password = "id.login.submit"
             struct Error {

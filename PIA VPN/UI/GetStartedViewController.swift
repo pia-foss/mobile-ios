@@ -32,35 +32,14 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private struct Cells {
         static let plan = "PlanCell"
     }
-    
-    private static let smallDeviceMaxViewHeight: CGFloat = 520
-    private static let maxViewHeight: CGFloat = 500
-    private static let extraViewButtonsHeight: CGFloat = 48
-    private static let defaultViewHeight: CGFloat = 276
-        
-    @IBOutlet private weak var spinner: UIActivityIndicatorView!
 
-    @IBOutlet private weak var loginButton: PIAButton!
-    @IBOutlet private weak var buyButton: UIButton!
-    @IBOutlet private weak var subscribeNowButton: PIAButton!
-    @IBOutlet private weak var subscribeNowTitle: UILabel!
-    @IBOutlet private weak var subscribeNowDescription: UILabel!
-
-    @IBOutlet private weak var scrollContent: UIScrollView!
     @IBOutlet private weak var scrollBackground: UIImageView!
-    @IBOutlet private weak var viewContent: UIView!
-    @IBOutlet private weak var pageControl: PIAPageControl!
-    @IBOutlet weak var hiddenButtonsView: UIView!
-    
-    @IBOutlet private weak var textAgreement: UITextView!
-    @IBOutlet weak var visualEffectView: UIVisualEffectView!
 
     private var config: Config!
     private weak var completionDelegate: WelcomeCompletionDelegate?
 
-    //New flow
     private var selectedPlanIndex: Int = 0
-    private var allNewPlans: [PurchasePlan] = [.dummy, .dummy]
+    private var plans: [PurchasePlan] = [.dummy, .dummy]
 
     private var isFetchingProducts = true
 
@@ -68,26 +47,21 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
 
-    @IBOutlet private weak var buttonViewConstraintHeight: NSLayoutConstraint!
-    @IBOutlet private weak var hiddenButtonsConstraintHeight: NSLayoutConstraint!
-
-    @IBOutlet private weak var containerNewFlow: UIView!
-    @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
     @IBOutlet private weak var walkthroughDescription: UILabel!
-    
+
     @IBOutlet private weak var collectionPlans: UICollectionView!
-    @IBOutlet private weak var newSubscribeNowButton: PIAButton!
-    @IBOutlet private weak var newLoginButton: PIAButton!
+    @IBOutlet private weak var subscribeNowButton: PIAButton!
+    @IBOutlet private weak var loginButton: PIAButton!
     @IBOutlet private weak var restorePurchaseButton: UIButton!
-    @IBOutlet private weak var newTextAgreement: UITextView!
+    @IBOutlet private weak var textAgreement: UITextView!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     private func setupNavigationBarButtons() {
-        
+
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
@@ -98,8 +72,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
         handleInitialStatus()
         setupNavigationBarButtons()
-        self.visualEffectView.isHidden = true
-        self.pageControl.isHidden = true
         collectionPlans.isUserInteractionEnabled = false
         collectionPlans.delegate = self
         collectionPlans.dataSource = self
@@ -107,12 +79,12 @@ final class GetStartedViewController: PIAWelcomeViewController {
         self.walkthroughTitle.text = L10n.Signup.Walkthrough.Page._2.title
         self.walkthroughDescription.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". "
 
-        allNewPlans = [.dummy, .dummy]
+        plans = [.dummy, .dummy]
 
         view.backgroundColor = UIColor.piaGrey1
 
         let agreement = composeAgreementText(message: L10n.Welcome.Agreement.message(""))
-        
+
         textAgreement.attributedText = Theme.current.agreementText(
             withMessage: agreement,
             tos: L10n.Welcome.Agreement.Message.tos,
@@ -120,28 +92,17 @@ final class GetStartedViewController: PIAWelcomeViewController {
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-        newTextAgreement.attributedText = Theme.current.agreementText(
-            withMessage: agreement,
-            tos: L10n.Welcome.Agreement.Message.tos,
-            tosUrl: Client.configuration.tosUrl,
-            privacy: L10n.Welcome.Agreement.Message.privacy,
-            privacyUrl: Client.configuration.privacyUrl
-        )
-
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(recoverAccount), name: .PIARecoverAccount, object: nil)
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
 
         self.styleButtons()
-        visualEffectView.clipsToBounds = true
-        visualEffectView.layer.cornerRadius = 15
-        visualEffectView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
         super.viewDidLoad()
 
     }
-    
+
     private func composeAgreementText(message: String) -> String {
 
         var agreement = message
@@ -152,12 +113,12 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
         return agreement
     }
-    
+
     // MARK: Actions
 
     @IBAction func confirmPlan() {
-        if selectedPlanIndex < allNewPlans.count {
-            let plan = allNewPlans[selectedPlanIndex]
+        if selectedPlanIndex < plans.count {
+            let plan = plans[selectedPlanIndex]
             self.startPurchaseProcessWithEmail("", andPlan: plan)
         }
     }
@@ -206,15 +167,15 @@ final class GetStartedViewController: PIAWelcomeViewController {
         andPlan plan: PurchasePlan
     ) {
         isPurchasing = true
-        disableInteractions(fully: true)
+        disableInteractions()
         self.showLoadingAnimation()
-        
+
         config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
             guard let self else { return }
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
-            
+
             guard let transaction = transaction else {
                 if let error = error {
                     let message = error.localizedDescription
@@ -229,10 +190,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         }
     }
 
-    
-    @IBAction private func scrollPage(_ sender: UIPageControl) {
-    }
-
     static func with(config: Config, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController? {
         let nav = StoryboardScene.Welcome.initialScene.instantiate()
         guard let vc = nav.topViewController as? GetStartedViewController else {
@@ -244,13 +201,13 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.completionDelegate = vc
         return nav
     }
-    
+
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
-            
+
             guard let email = signupEmail else {
                 log.error("signupEmail is not set in GetStartedViewController")
                 return
@@ -278,8 +235,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.preset = self.preset
 
         switch segue.identifier  {
-        case StoryboardSegue.Welcome.purchaseVPNPlanSegue.rawValue:
-            vc.preset.pages = .purchase
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
             vc.preset.pages = .login
         case StoryboardSegue.Welcome.restorePurchaseSegue.rawValue:
@@ -287,9 +242,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
         default:
             break
         }
-                
+
     }
-    
+
     public func handleInitialStatus() {
         if config.accountProvider.planProducts != nil {
             isFetchingProducts = false
@@ -299,9 +254,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
             self.handleVisibilityOfVIews()
         }
     }
-    
+
     // MARK: Notifications
-    
+
     @objc private func productsDidFetch(notification: Notification) {
         isFetchingProducts = false
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
@@ -313,7 +268,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
             self.enableInteractions()
         }
     }
-    
+
     private func handleVisibilityOfVIews() {
         if !isFetchingProducts {
             if !isPurchasing {
@@ -321,7 +276,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
             }
 
             DispatchQueue.main.async {
-                self.scrollContent.isHidden = true
                 if let products = self.config.accountProvider.planProducts {
                     Task { [weak self] in
                         await self?.refreshPlans(products)
@@ -342,87 +296,64 @@ final class GetStartedViewController: PIAWelcomeViewController {
             }
         } else {
             showLoadingAnimation()
-            disableInteractions(fully: false)
+            disableInteractions()
         }
     }
-    
+
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupNavigationBarButtons()
     }
-    
+
     private func styleButtons() {
         loginButton.setRounded()
         subscribeNowButton.setRounded()
-        newLoginButton.setRounded()
-        newSubscribeNowButton.setRounded()
 
         subscribeNowButton.style(style: TextStyle.Buttons.piaGreenButton)
         loginButton.style(style: TextStyle.Buttons.piaPlainTextButton)
-        newSubscribeNowButton.style(style: TextStyle.Buttons.piaGreenButton)
-        newLoginButton.style(style: TextStyle.Buttons.piaPlainTextButton)
 
         restorePurchaseButton.setTitle(L10n.Localizable.Account.Restore.button.capitalized, for: [])
         restorePurchaseButton.titleLabel?.numberOfLines = 0
         restorePurchaseButton.titleLabel?.textAlignment = .center
 
-        loginButton.setTitle(L10n.Welcome.Login.submit.uppercased(),
-                             for: [])
-        newLoginButton.setTitle(L10n.Welcome.Login.submit.uppercased(),
-                             for: [])
-        
+        loginButton.setTitle(L10n.Welcome.Login.submit.uppercased(), for: [])
         loginButton.accessibilityIdentifier = Accessibility.Id.Login.submit
-        newLoginButton.accessibilityIdentifier = Accessibility.Id.Login.submitNew
-        
-        buyButton.setTitle(L10n.Signup.Purchase.Trials.All.plans,
-                           for: [])
-        subscribeNowButton.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(),
-                           for: [])
-        newSubscribeNowButton.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(),
-                           for: [])
+
+        subscribeNowButton.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(), for: [])
     }
-    
+
     // MARK: Helpers
 
-    private func disableInteractions(fully: Bool) {
-        self.newSubscribeNowButton.isEnabled = false
-        self.spinner.startAnimating()
+    private func disableInteractions() {
+        self.subscribeNowButton.isEnabled = false
     }
 
     private func enableInteractions() {
         if !isPurchasing {
-            self.newSubscribeNowButton.isEnabled = true
-            self.spinner.stopAnimating()
+            self.subscribeNowButton.isEnabled = true
         }
     }
+
     public func navigateToLoginView() {
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
                           sender: nil)
     }
-    
+
     // MARK: Restylable
-    
+
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
         Theme.current.applyNavigationBarStyle(to: self)
 
-        Theme.current.applyTitle(subscribeNowDescription, appearance: .light)
-        Theme.current.applySubtitle(subscribeNowTitle)
         Theme.current.applyTitle(walkthroughTitle, appearance: .light)
         Theme.current.applySubtitle(walkthroughDescription)
 
         Theme.current.applyTransparentButton(loginButton, withSize: 1.0)
-        Theme.current.applyTransparentButton(newLoginButton, withSize: 1.0)
         Theme.current.applyButtonLabelMediumStyle(restorePurchaseButton)
-        Theme.current.applyButtonLabelMediumStyle(buyButton)
         Theme.current.applyScrollableMap(scrollBackground)
-        Theme.current.applyPageControl(pageControl)
         Theme.current.applyLinkAttributes(textAgreement)
-        Theme.current.applyLinkAttributes(newTextAgreement)
-        Theme.current.applyActivityIndicator(spinner)
-
     }
 
     // MARK: Notification event
@@ -430,7 +361,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.restorePurchaseSegue.rawValue,
                           sender: nil)
     }
-    
+
     // MARK: InApp refresh plan
     private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
         if let yearly = plans[.yearly] {
@@ -439,20 +370,15 @@ final class GetStartedViewController: PIAWelcomeViewController {
                 product: yearly,
                 monthlyFactor: 12.0
             )
-            
+
             purchase.title = L10n.Welcome.Plan.Yearly.title
             let currencySymbol = purchase.product.priceLocale.currencySymbol ?? ""
             purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
             purchase.bestValue = true
             let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
-            allNewPlans[0] = purchase
+            self.plans[0] = purchase
 
             DispatchQueue.main.async { [weak self] in
-                if let label = self?.subscribeNowDescription {
-                    label.text = L10n.Signup.Purchase.Trials.Price.after(price)
-                    Theme.current.makeSmallLabelToStandOut(label,
-                                                           withTextToStandOut: price)
-                }
                 if let label = self?.walkthroughDescription {
                     label.text = if purchase.hasIntroOffer {
                         L10n.Signup.Walkthrough.Page._2.description
@@ -478,19 +404,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
                         privacyUrl: Client.configuration.privacyUrl
                     )
                 }
-                if let label = self?.newTextAgreement {
-                    label.attributedText = Theme.current.agreementText(
-                        withMessage: agreement,
-                        tos: L10n.Welcome.Agreement.Message.tos,
-                        tosUrl: Client.configuration.tosUrl,
-                        privacy: L10n.Welcome.Agreement.Message.privacy,
-                        privacyUrl: Client.configuration.privacyUrl
-                    )
-                }
             }
-            
+
         }
-        
+
         if let monthly = plans[.monthly] {
             let purchase = await PurchasePlan(
                 plan: .monthly,
@@ -500,9 +417,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
             purchase.title = L10n.Welcome.Plan.Monthly.title
             purchase.bestValue = false
 
-            allNewPlans[1] = purchase
+            self.plans[1] = purchase
         }
-        
+
         collectionPlans.isUserInteractionEnabled = true
         collectionPlans.reloadData()
         collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
@@ -511,16 +428,13 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
 }
 
-extension GetStartedViewController: UIScrollViewDelegate {
-}
-
 extension GetStartedViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allNewPlans.count
+        return plans.count
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let plan = allNewPlans[indexPath.row]
+        let plan = plans[indexPath.row]
         let cell = collectionPlans.dequeueReusableCell(withReuseIdentifier: Cells.plan, for: indexPath) as! PurchasePlanCell
         cell.fill(plan: plan)
         cell.isSelected = (indexPath.row == selectedPlanIndex)
