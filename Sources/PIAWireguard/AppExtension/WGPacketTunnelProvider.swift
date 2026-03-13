@@ -23,10 +23,11 @@ open class WGPacketTunnelProvider: NEPacketTunnelProvider {
     var pinger: SwiftyPing!
     var connectivityTimer: Timer?
     var latestWireGuardSettings: WGSettingsResponse!
-    let wireGuardMaxConnectionAttempts = 3
+    let wireGuardMaxConnectionAttempts = 6
     let connectivityInterval: TimeInterval = 10
     let pingInterval: TimeInterval = 2
     var wireGuardConnectionAttempts = 0
+    var lastSeenHandshakeDate: Date = .distantPast
     
     var providerConfiguration: [String: Any]!
 
@@ -195,21 +196,22 @@ open class WGPacketTunnelProvider: NEPacketTunnelProvider {
 
     }
     
-    func updateSettings(completionHandler: ((Data?) -> Void)? = nil) {
-        
+    @discardableResult
+    func updateSettings(completionHandler: ((Data?) -> Void)? = nil) -> Bool {
+
         guard let handle = handle else {
             completionHandler?(nil)
-            return
-            
+            return false
         }
 
         guard let settings = wgGetConfig(handle) else {
             completionHandler?(nil)
-            return
+            return false
         }
 
         latestWireGuardSettings = WGSettingsResponse(withSettings: String(cString: settings))
         free(settings)
+        return true
     }
     
 }

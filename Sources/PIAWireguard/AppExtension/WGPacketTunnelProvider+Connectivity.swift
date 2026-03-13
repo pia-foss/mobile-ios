@@ -64,17 +64,25 @@ extension WGPacketTunnelProvider {
     private func checkNetworkActivity() {
         let currentRxBytes = self.latestWireGuardSettings.rx_bytes
 
-        self.updateSettings()
+        guard self.updateSettings() else {
+            wg_log(.info, message: "Settings fetch failed, skipping connectivity check")
+            return
+        }
 
         let bytesUpdated = currentRxBytes != self.latestWireGuardSettings.rx_bytes
-        // Checked on every tick: a recent handshake confirms the peer is reachable at the
-        // protocol level even when no application traffic flows (idle connection). Many servers
-        // also block ICMP, so pings may never produce RX bytes — the handshake timestamp is a
-        // stronger liveness signal than byte counts alone.
-        let handshakeRecent = self.latestWireGuardSettings.isHandshakeCompleted()
 
-        if bytesUpdated || handshakeRecent {
-            wg_log(.info, message: "Tunnel alive (bytesUpdated=\(bytesUpdated), handshakeRecent=\(handshakeRecent)). Resetting counter")
+        let currentHandshakeDate = self.latestWireGuardSettings.last_handshake_time_sec
+        // A new successful handshake since the last tick is an immediate liveness confirmation.
+        let handshakeAdvanced = currentHandshakeDate > lastSeenHandshakeDate
+        lastSeenHandshakeDate = currentHandshakeDate
+        // WireGuard re-keys every ~120 s (REKEY_AFTER_TIME). Between re-keyings on an idle
+        // connection the server may not reply to keepalives, so neither bytes nor a new
+        // handshake appear — but the tunnel is alive. Allow the full re-keying cycle before
+        // starting the kill counter.
+        let handshakeRecent = currentHandshakeDate > Date().addingTimeInterval(-120)
+
+        if bytesUpdated || handshakeAdvanced || handshakeRecent {
+            wg_log(.info, message: "Tunnel alive (bytesUpdated=\(bytesUpdated), handshakeAdvanced=\(handshakeAdvanced), handshakeRecent=\(handshakeRecent)). Resetting counter")
             wireGuardConnectionAttempts = 0
             pinger?.stop()
         } else {

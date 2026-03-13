@@ -46,7 +46,7 @@ class WGSettingsResponse {
         if handshakeTime != "", handshakeTime != "0", let time = Double(handshakeTime), time != 0.0 {
             return Date(timeIntervalSince1970: time)
         } else {
-            return Date()
+            return Date.distantPast
         }
     }
     var last_handshake_time_nsec: String {
@@ -83,27 +83,6 @@ class WGSettingsResponse {
             }
         }
 
-    }
-    
-}
-
-extension WGSettingsResponse {
-    
-    func isHandshakeCompleted() -> Bool {
-    
-        let lastHandshake = self.last_handshake_time_sec
-        //2 minutes without handshake
-        let nextHandshake = lastHandshake.addingTimeInterval(150)
-        
-        wg_log(.info, message: "Last handshake \(lastHandshake)")
-        
-        //the last handshake was more than 2 minutes ago
-        if nextHandshake > Date() {
-            return true
-        }
-                
-        return false
-        
     }
     
 }
