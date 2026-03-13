@@ -36,7 +36,7 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
     static func automaticServer() -> ServerType {
         Server(
             serial: "",
-            name: L10n.Localizable.Global.automatic,
+            name: L10n.Global.automatic,
             country: "universal",
             hostname: "auto.bogus.domain",
             pingAddress: nil,

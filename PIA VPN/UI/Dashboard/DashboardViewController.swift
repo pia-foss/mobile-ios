@@ -110,7 +110,7 @@ final class DashboardViewController: AutolayoutViewController {
         }
 
         // TODO: This string needs localization
-        return L10n.Localizable.Dashboard.Vpn.protected + " | " + timeString
+        return L10n.Dashboard.Vpn.protected + " | " + timeString
     }
 
     deinit {
@@ -146,8 +146,8 @@ final class DashboardViewController: AutolayoutViewController {
         
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
-            AppPreferences.shared.todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
+            AppPreferences.shared.todayWidgetVpnStatus = L10n.Today.Widget.login
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
             return
         }
         
@@ -159,9 +159,9 @@ final class DashboardViewController: AutolayoutViewController {
 
         AppPreferences.shared.todayWidgetVpnStatus = Client.providers.vpnProvider.vpnStatus.rawValue
         if Client.providers.vpnProvider.vpnStatus == .disconnected {
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.connect
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
         } else {
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.disconnect
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
         }
         
         viewContent.isHidden = false
@@ -318,7 +318,7 @@ final class DashboardViewController: AutolayoutViewController {
         switch self.tileModeStatus { //change the status
         case .normal:
             if let leftBarButton = navigationItem.leftBarButtonItem,
-                leftBarButton.accessibilityLabel != L10n.Localizable.Global.cancel {
+                leftBarButton.accessibilityLabel != L10n.Global.cancel {
                 leftBarButton.image = Asset.Images.itemMenu.image
                 leftBarButton.action = #selector(openMenu(_:))
             } else {
@@ -329,7 +329,7 @@ final class DashboardViewController: AutolayoutViewController {
                     action: #selector(openMenu(_:))
                 )
             }
-            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Localizable.Menu.Accessibility.item
+            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
             
             if navigationItem.rightBarButtonItem == nil {
@@ -339,7 +339,7 @@ final class DashboardViewController: AutolayoutViewController {
                     target: self,
                     action: #selector(updateEditTileStatus(_:))
                 )
-                navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Localizable.Menu.Accessibility.Edit.tile
+                navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
             }
             
         case .edit:
@@ -349,7 +349,7 @@ final class DashboardViewController: AutolayoutViewController {
                 target: self,
                 action: #selector(closeTileEditingMode(_:))
             )
-            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Localizable.Global.cancel
+            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
             navigationItem.rightBarButtonItem = nil
             
@@ -398,7 +398,7 @@ final class DashboardViewController: AutolayoutViewController {
         }
         
         if isUnauthorized {
-            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Localizable.Account.unauthorized)
+            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Account.unauthorized)
             isUnauthorized = false
         }
         
@@ -519,9 +519,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
     
     func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
-        let alert = Macros.alert(nil, L10n.Localizable.Network.Management.Tool.alert)
-        alert.addCancelAction(L10n.Localizable.Global.close)
-        alert.addActionWithTitle(L10n.Localizable.Network.Management.Tool.disable) {
+        let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Network.Management.Tool.disable) {
             let preferences = Client.preferences.editable()
             preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
             preferences.commit()
@@ -617,7 +617,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     @objc private func accountDidLogout(notification: Notification) {
         AppPreferences.shared.todayWidgetVpnStatus = nil
-        AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
+        AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
         if #available(iOS 16.2, *) {
             stopConnectionLiveActivity()
         }
@@ -641,9 +641,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
     
     @objc private func presentKillSwitchAlert() {
-        let alert = Macros.alert(nil, L10n.Localizable.Settings.Nmt.Killswitch.disabled)
-        alert.addCancelAction(L10n.Localizable.Global.close)
-        alert.addActionWithTitle(L10n.Localizable.Global.enable) {
+        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Global.enable) {
             let preferences = Client.preferences.editable()
             preferences.isPersistentConnection = true
             preferences.commit()
@@ -658,17 +658,17 @@ final class DashboardViewController: AutolayoutViewController {
         if Client.providers.vpnProvider.vpnStatus != .disconnected {
             let alert = Macros.alert(
                 title,
-                L10n.Localizable.Settings.Commit.Messages.shouldReconnect
+                L10n.Settings.Commit.Messages.shouldReconnect
             )
             
             // reconnect -> reconnect VPN and close
-            alert.addActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
                 })
             }
             
             // later -> close
-            alert.addCancelActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.later) {
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
             }
             
             present(alert, animated: true, completion: nil)
@@ -810,24 +810,24 @@ final class DashboardViewController: AutolayoutViewController {
     }
     
     private func presentNonCompliantWifiAlert() {
-        let title = L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.title
-        let message = L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.message
+        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        let message = L10n.Dashboard.Vpn.Leakprotection.Alert.message
         
         var alertActions = [WifiAlertAction]()
         let reconnectAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.cta1,
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1,
             style: .default,
             action: handleDisconnectAndReconnectAction)
         alertActions.append(reconnectAction)
         
         let learnMoreAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.cta2,
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
             style: .default,
             action: handleLearnMoreAction)
         alertActions.append(learnMoreAction)
         
         let cancelAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.cta3,
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
             style: .cancel,
             action: nil)
         alertActions.append(cancelAction)
@@ -836,25 +836,25 @@ final class DashboardViewController: AutolayoutViewController {
     }
     
     private func presentNonCompliantWireguardWifiAlert() {
-        let title = L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.title
-        let message = L10n.Localizable.Dashboard.Vpn.Leakprotection.Ikev2.Alert.message
+        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        let message = L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.message
         
         var alertActions = [WifiAlertAction]()
         let reconnectAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Ikev2.Alert.cta1,
+            title: L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.cta1,
             
             style: .default,
             action: handleSwitchProtocolAction)
         alertActions.append(reconnectAction)
         
         let learnMoreAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.cta2,
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
             style: .default,
             action: handleLearnMoreAction)
         alertActions.append(learnMoreAction)
         
         let cancelAction = WifiAlertAction(
-            title: L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.cta3,
+            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
             style: .cancel,
             action: nil)
         alertActions.append(cancelAction)
@@ -897,7 +897,7 @@ final class DashboardViewController: AutolayoutViewController {
         removeNonCompliantWifiLocalNotification()
         
         // 2. Show the local notification for the current non-compliant wifi
-        Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.Localizable.LocalNotification.NonCompliantWifi.text, title: L10n.Localizable.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
+        Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
     }
     
     private func removeNonCompliantWifiLocalNotification() {
@@ -907,7 +907,7 @@ final class DashboardViewController: AutolayoutViewController {
   
     private func removeLeakProtectionAlert() {
         guard let presentedLeakProtectionAlert = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController as? UIAlertController,
-              presentedLeakProtectionAlert.title == L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.title else { return }
+              presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title else { return }
         
         presentedLeakProtectionAlert.dismiss(animated: true)
     }
@@ -986,7 +986,7 @@ final class DashboardViewController: AutolayoutViewController {
             setNavBarTheme(.green, with: titleLabelView)
 
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.disconnect
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
             Macros.removeStickyNote()
             connectingStatus = .none
 
@@ -1002,7 +1002,7 @@ final class DashboardViewController: AutolayoutViewController {
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textColor = .white
             // TODO: This string needs localization
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.notProtected
+            titleLabelView.text = L10n.Dashboard.Vpn.notProtected
             setNavBarTheme(.red, with: titleLabelView)
 
             handleDisconnectedAndTrustedNetwork()
@@ -1020,11 +1020,11 @@ final class DashboardViewController: AutolayoutViewController {
             titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
             switch connectingStatus {
             case .pleaseWait:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Please.wait
+                titleLabelView.text = L10n.Server.Reconnection.Please.wait
             case .takingTime, .stillLoading:
-                titleLabelView.text = L10n.Localizable.Server.Reconnection.Still.connection
+                titleLabelView.text = L10n.Server.Reconnection.Still.connection
             default:
-                titleLabelView.text = L10n.Localizable.Dashboard.Vpn.connecting
+                titleLabelView.text = L10n.Dashboard.Vpn.connecting
             }
             setNavBarTheme(.normal, with: titleLabelView)
 
@@ -1039,7 +1039,7 @@ final class DashboardViewController: AutolayoutViewController {
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textColor = Theme.current.palette.appearance == .dark ? .white : .piaGrey6
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnecting
+            titleLabelView.text = L10n.Dashboard.Vpn.disconnecting
             setNavBarTheme(.normal, with: titleLabelView)
 
         case .unknown:
@@ -1098,7 +1098,7 @@ final class DashboardViewController: AutolayoutViewController {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = true
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.text = L10n.Localizable.Dashboard.Vpn.disconnected+": "+L10n.Localizable.Tiles.Nmt.Accessibility.trusted
+            titleLabelView.text = L10n.Dashboard.Vpn.disconnected+": "+L10n.Tiles.Nmt.Accessibility.trusted
             titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyle6)
             toggleConnection.tintColor = UIColor.piaOrange
@@ -1108,7 +1108,7 @@ final class DashboardViewController: AutolayoutViewController {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = false
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.disconnected.rawValue
-            AppPreferences.shared.todayWidgetButtonTitle = L10n.Localizable.Shortcuts.connect
+            AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.connect
         }
     }
 

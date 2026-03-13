@@ -58,7 +58,7 @@ class RegionsSelectionFactory {
     static func makeSearchRegionsListView() -> some View {
         let viewModel = makeRegionsListViewModel(with: .searchResults(""))
         let searchableRegions = RegionsListView(viewModel: viewModel)
-        return searchableRegions.searchable(text: searchableRegions.$viewModel.search, prompt:  L10n.Localizable.Regions.Search.InputField.placeholder)
+        return searchableRegions.searchable(text: searchableRegions.$viewModel.search, prompt:  L10n.Regions.Search.InputField.placeholder)
             
     }
     

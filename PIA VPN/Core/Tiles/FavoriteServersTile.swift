@@ -66,7 +66,7 @@ class FavoriteServersTile: UIView, Tileable {
         
         self.accessibilityIdentifier = "FavoriteServersTile"
         viewShouldRestyle()
-        self.tileTitle.text = L10n.Localizable.Tiles.Favorite.Servers.title.uppercased()
+        self.tileTitle.text = L10n.Tiles.Favorite.Servers.title.uppercased()
         updateFavoriteList()
         
     }
@@ -85,14 +85,14 @@ class FavoriteServersTile: UIView, Tileable {
                                     Asset.Images.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
-                button.accessibilityLabel = L10n.Localizable.Global.empty
+                button.accessibilityLabel = L10n.Global.empty
             }
         }
         
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
-                label.accessibilityLabel = L10n.Localizable.Global.empty
+                label.accessibilityLabel = L10n.Global.empty
             }
         }
         

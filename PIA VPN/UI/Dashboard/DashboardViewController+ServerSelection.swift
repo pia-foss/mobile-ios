@@ -30,17 +30,17 @@ extension DashboardViewController: ServerSelectionDelegate {
         // Present reconnection warning if enabled in preferences, otherwise reconnect right away
         if showReconnectNotifications {
             let alert = Macros.alert(
-                L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.title,
-                L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.message
+                L10n.Dashboard.Vpn.ChangeLocation.Alert.title,
+                L10n.Dashboard.Vpn.ChangeLocation.Alert.message
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addActionWithTitle(L10n.Localizable.Dashboard.Vpn.ChangeLocation.Alert.Button.connect) {
+            alert.addActionWithTitle(L10n.Dashboard.Vpn.ChangeLocation.Alert.Button.connect) {
                 self.connect(to: server)
             }
 
             // cancel -> do nothing
-            alert.addCancelActionWithTitle(L10n.Localizable.Global.cancel) {}
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {}
 
             present(alert, animated: true)
         } else {

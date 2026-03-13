@@ -35,7 +35,7 @@ class ExpirationCell: UITableViewCell, Restylable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        labelUpgrade.text = L10n.Localizable.Menu.Expiration.upgrade
+        labelUpgrade.text = L10n.Menu.Expiration.upgrade
         imvAccessory.image = Asset.Images.accessoryExpire.image.withRenderingMode(.alwaysTemplate)
         imvAccessory.tintColor = .white
     }
@@ -45,14 +45,14 @@ class ExpirationCell: UITableViewCell, Restylable {
 
         let timeLeftString: String
         if let day = timeLeft.day, (day > 0) {
-            timeLeftString = L10n.Localizable.Menu.Expiration.days(day)
+            timeLeftString = L10n.Menu.Expiration.days(day)
         } else if let hour = timeLeft.hour, (hour > 0) {
-            timeLeftString = L10n.Localizable.Menu.Expiration.hours(hour)
+            timeLeftString = L10n.Menu.Expiration.hours(hour)
         } else {
-            timeLeftString = L10n.Localizable.Menu.Expiration.oneHour
+            timeLeftString = L10n.Menu.Expiration.oneHour
         }
         
-        let prefix = L10n.Localizable.Menu.Expiration.expiresIn
+        let prefix = L10n.Menu.Expiration.expiresIn
         labelWarning.text = "\(prefix) \(timeLeftString)".uppercased()
     }
 

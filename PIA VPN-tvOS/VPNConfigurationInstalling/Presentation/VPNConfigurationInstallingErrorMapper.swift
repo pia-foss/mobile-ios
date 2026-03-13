@@ -17,7 +17,7 @@ class VPNConfigurationInstallingErrorMapper {
         
         switch error {
             case .userCanceled:
-            return L10n.Localizable.VpnPermission.Disallow.Message.basic
+            return L10n.VpnPermission.Disallow.Message.basic
             default:
                 return nil
         }

@@ -130,7 +130,7 @@ extension Macros {
         }
         let versionNumber = info["CFBundleShortVersionString"] as! String
         let buildNumber = info[kCFBundleVersionKey as String] as! String
-        return L10n.Localizable.Global.Version.format(versionNumber, buildNumber)
+        return L10n.Global.Version.format(versionNumber, buildNumber)
     }
     
     /**

@@ -359,7 +359,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
                 return
 
             case .internetUnreachable:
-                errorMessage = L10n.Localizable.Global.unreachable
+                errorMessage = L10n.Global.unreachable
 
             case let .libraryError(message):
                 let message = message ?? error.localizedDescription
@@ -391,10 +391,10 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
 
     private func handleBadReceipt() {
         let alert = Macros.alert(
-            L10n.Localizable.Account.Restore.Failure.title,
-            L10n.Localizable.Account.Restore.Failure.message
+            L10n.Account.Restore.Failure.title,
+            L10n.Account.Restore.Failure.message
         )
-        alert.addDefaultAction(L10n.Localizable.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 

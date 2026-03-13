@@ -37,11 +37,11 @@ class ValidateQRLoginViewController: AutolayoutViewController {
     
     private func presentError() {
         let alert = Macros.alert(
-            L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.title,
-            L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.message
+            L10n.ErrorAlert.ConnectionError.NoNetwork.title,
+            L10n.ErrorAlert.ConnectionError.NoNetwork.message
         )
 
-        alert.addActionWithTitle(L10n.Localizable.Global.ok) {
+        alert.addActionWithTitle(L10n.Global.ok) {
             self.dismiss(animated: true)
         }
 

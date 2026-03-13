@@ -21,9 +21,9 @@ class AboutOptionsViewModel: ObservableObject {
         var title: String {
             switch self {
             case .acknowledgements:
-                return L10n.Localizable.HelpMenu.AboutOptions.Acknowledgements.title
+                return L10n.HelpMenu.AboutOptions.Acknowledgements.title
             case .privacyPolicy:
-                return L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title
+                return L10n.HelpMenu.AboutOptions.PrivacyPolicy.title
             }
         }
     }

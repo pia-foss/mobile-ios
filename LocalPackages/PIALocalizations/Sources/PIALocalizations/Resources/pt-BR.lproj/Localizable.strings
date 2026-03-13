@@ -621,3 +621,169 @@
 "forceupdate.label.vpn.connected" = "Tocar em \"Atualizar agora\" desconectará a VPN.";
 
 "global.version.format" = "Versão %@ (%@)";
+
+"signup.in_progress.title"= "Confirme o registro";
+"signup.in_progress.message"= "Confirmamos sua compra com o nosso sistema. Isso pode demorar um pouco. Por favor, aguarde.";
+"signup.in_progress.redeem.message"= "Estamos confirmando o PIN do seu cartão com o nosso sistema. Isso pode demorar um pouco. Por favor, aguarde.";
+
+"signup.success.title"= "Compra Concluída";
+"signup.success.message_format"= "Obrigado por se registrar conosco. Nós enviamos o nome de usuário e a senha da sua conta para o seu endereço de e-mail em %@";
+"signup.success.redeem.title"= "Cartão resgatado com sucesso";
+"signup.success.redeem.message"= "Você receberá um e-mail com seu nome de usuário e senha em breve.\n\nSeus dados de login";
+"signup.success.username.caption"= "Nome de usuário";
+"signup.success.password.caption"= "Senha";
+"signup.success.submit"= "Comece Agora";
+
+"signup.failure.vc_title"= "Falha ao registrar";
+"signup.failure.title"= "Falha ao Criar Conta";
+"signup.failure.message"= "Não podemos criar uma conta neste momento. Tente novamente mais tarde.\n\nApós a reabertua do aplicativo, uma nova tentativa de criação de conta será realizada.";
+"signup.failure.purchase.sandbox.message"= "A assinatura da área restrita selecionada não está disponível em produção.";
+"signup.failure.redeem.invalid.title"= "PIN de cartão inválido";
+"signup.failure.redeem.invalid.message"= "Parece que você inseriu um PIN de cartão inválido. Por favor, tente novamente.";
+"signup.failure.redeem.claimed.title"= "O cartão já foi resgatado";
+"signup.failure.redeem.claimed.message"= "Parece que este cartão já foi resgatado por outra conta. Você pode tentar usar um PIN diferente.";
+"signup.failure.submit"= "VOLTAR";
+"signup.failure.internal"= "Erro interno do aplicativo (%d)";
+"signup.failure.unknown"= "Erro desconhecido: %s (%d)";
+
+"signup.unreachable.vc_title"= "Erro";
+"signup.unreachable.title"= "Ops!";
+"signup.unreachable.message"= "Nenhuma conexão com a Internet encontrada. Confirme que você possui uma conexão com a Internet e pressione Tentar Novamente abaixo.\n\nVocê pode retornar ao aplicativo mais tarde para finalizar o processo.";
+"signup.unreachable.submit"= "TENTAR NOVAMENTE";
+
+"signup.purchase.uncredited.alert.message"= "Você tem transações não creditadas. Deseja recuperar os detalhes da sua conta?";
+"signup.purchase.uncredited.alert.button.cancel"= "Cancelar";
+"signup.purchase.uncredited.alert.button.recover"= "Recuperar conta";
+
+"signup.purchase.trials.intro"= "Comece sua avaliação gratuita de 7 dias";
+"signup.purchase.trials.price.after"= "Em seguida, %@";
+"signup.purchase.trials.money.back"= "Garantia do dinheiro de volta em até 30 dias";
+"signup.purchase.trials.1year.protection"= "1 ano de proteção de privacidade e identidade";
+"signup.purchase.trials.anonymous"= "Navegue anonimamente e oculte seu IP.";
+"signup.purchase.trials.devices"= "Suporte para 10 dispositivos ao mesmo tempo";
+"signup.purchase.trials.devices.description"= "Proteja-se em até 10 dispositivos ao mesmo tempo.";
+"signup.purchase.trials.region"= "Servidores seguros em mais de 90 países";
+"signup.purchase.trials.servers"= "Mais de 3.300 servidores em 32 países";
+"signup.purchase.trials.start"= "Iniciar assinatura";
+"signup.purchase.trials.all.plans"= "Veja todos os planos disponíveis";
+
+"signup.purchase.subscribe.now"= "Assine agora";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "AVANÇAR";
+"signup.walkthrough.action.done"= "CONCLUÍDO";
+"signup.walkthrough.action.skip"= "PULAR";
+
+"signup.walkthrough.page.1.title"= "Suporte para 10 dispositivos ao mesmo tempo";
+"signup.walkthrough.page.1.description"= "Proteja-se em até 10 dispositivos ao mesmo tempo.";
+"signup.walkthrough.page.2.title"= "Servidores seguros em mais de 90 países";
+"signup.walkthrough.page.2.description"= "Com servidores ao redor do mundo, você está sempre protegido.";
+"signup.walkthrough.page.3.title"= "Proteja-se contra propagandas";
+"signup.walkthrough.page.3.description"= "A ativação do nosso Bloqueador de Conteúdo impede que anúncios sejam exibidos no Safari.";
+
+"signup.share.data.buttons.accept"= "Aceitar";
+"signup.share.data.buttons.noThanks"= "Não, obrigado";
+"signup.share.data.buttons.readMore"= "Leia mais";
+"signup.share.data.text.title"= "Ajude-nos a melhorar nosso serviço";
+"signup.share.data.text.description"= "Para nos ajudar a garantir o desempenho da conexão de nosso serviço, você pode compartilhar anonimamente as estatísticas da sua conexão conosco. Esses relatórios não incluem nenhuma informação de identificação pessoal.";
+"signup.share.data.text.footer"= "Você sempre poderá controlar isso em suas configurações";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "Entre na sua conta";
+"welcome.login.username.placeholder"= "Nome de usuário (p1234567)";
+"welcome.login.password.placeholder"= "Senha";
+"welcome.login.submit"= "ENTRAR";
+"welcome.login.restore.button"= "Não recebeu detalhes da conta?";
+"welcome.login.error.title"= "Entrar";
+"welcome.login.error.validation"= "Você deve inserir um nome de usuário e senha.";
+"welcome.login.error.unauthorized"= "Seu nome de usuário ou senha está incorreto.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "Faça login usando o recibo de compra";
+"welcome.login.magic.link.title"= "Faça login usando o link mágico enviado por e-mail";
+"welcome.login.magic.link.response"= "Veja se você recebeu por e-mail um link para fazer login.";
+"welcome.login.magic.link.send"= "Enviar link";
+"welcome.login.magic.link.invalid.email"= "E-mail inválido. Tente novamente.";
+
+"welcome.purchase.title"= "Selecione um plano de VPN";
+"welcome.purchase.subtitle"= "Garantia do dinheiro de volta em até 30 dias";
+"welcome.purchase.email.placeholder"= "Endereço de e-mail";
+"welcome.purchase.continue"= "Continuar";
+"welcome.purchase.login.footer"= "Já tem uma conta?";
+"welcome.purchase.login.button"= "Faça login";
+"welcome.purchase.error.title"= "Comprar";
+"welcome.purchase.error.validation"= "Você precisa inserir um endereço de e-mail.";
+"welcome.purchase.error.connectivity.title"= "Falha na conexão";
+"welcome.purchase.error.connectivity.description"= "Não conseguimos acessar o Private Internet Access. Isso pode ser devido a uma conexão de internet fraca ou o nosso serviço está bloqueado em seu país.";
+"welcome.purchase.confirm.form.email"= "Insira seu endereço de e-mail";
+"welcome.purchase.confirm.plan"= "Você está adquirindo o plano %@";
+"welcome.purchase.email.why"= "Precisamos do seu e-mail para enviarmos seu nome de usuário e senha.";
+"welcome.purchase.submit"= "Enviar";
+"welcome.purchase.or"= "ou";
+
+"welcome.upgrade.header"= "Seja bem-vindo(a)!";
+"welcome.upgrade.title"= "Para usar a Private Internet Access, você precisará renovar sua assinatura.";
+"welcome.upgrade.renew.now"= "Renovar agora";
+
+"welcome.redeem.title"= "Resgatar cartão-presente";
+"welcome.redeem.subtitle"= "Digite o seu endereço de e-mail e o PIN de %lu dígitos do seu cartão-presente ou cartão de teste abaixo.";
+"welcome.redeem.email.placeholder"= "Endereço de e-mail";
+"welcome.redeem.submit"= "ENVIAR";
+"welcome.redeem.error.title"= "Resgatar";
+"welcome.redeem.error.code"= "O código precisa ter %lu dígitos numéricos.";
+"welcome.redeem.error.allfields"= "Digite o seu e-mail e PIN do cartão.";
+"welcome.redeem.accessibility.back"= "Voltar";
+"welcome.redeem.giftcard.placeholder"= "PIN do cartão-presente";
+
+"welcome.plan.monthly.title"= "Mensal";
+"welcome.plan.yearly.title"= "Anual";
+"welcome.plan.yearly.detail_format"= "%@%@ por ano";
+"welcome.plan.price_format"= "%@/mês";
+"welcome.plan.best_value"= "Melhor valor";
+"welcome.plan.accessibility.per_month"= "por mês";
+
+"welcome.restore.title"= "Restaurar compra não creditada";
+"welcome.restore.subtitle"= "Se você adquiriu um plano por este aplicativo e não recebeu as suas credenciais, você pode enviá-las novamente por aqui. Você não será cobrado durante esse processo.";
+"welcome.restore.email.placeholder"= "Endereço de e-mail";
+"welcome.restore.submit"= "CONFIRMAR";
+
+"welcome.iap.error.message.unavailable"= "Servidores da Apple indisponíveis no momento. Tente novamente mais tarde.";
+"welcome.iap.error.title"= "Erro";
+
+"welcome.agreement.trials.title"= "Termos e condições das avaliações gratuitas";
+"welcome.agreement.trials.message"= "O pagamento será cobrado na sua conta do ID Apple no ato da confirmação da compra. A assinatura será renovada automaticamente, a não ser que ela seja cancelada, pelo menos, 24 horas antes do fim do período atual. O valor da renovação será debitado na sua conta em até 24 horas antes do término do período da atual. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta na App Store após a compra.\n\nCertas assinaturas pagas podem oferecer uma avaliação gratuita antes da cobrança do pagamento. Se você decidir cancelar uma Assinatura Paga antes de começarmos a cobrar por ela, cancele-a, pelo menos, 24 horas antes do término da avaliação gratuita.\n\nAs avaliações gratuitas estão disponíveis apenas para novos usuários, e são a nosso critério. Se tentar se registrar para uma avaliação gratuita adicional, você será cobrado imediatamente com a Taxa de Assinatura padrão.\n\nReservamo-nos o direito de revogar sua avaliação gratuita a qualquer momento.\n\nQualquer parte não utilizada do período da sua avaliação gratuita será perdida após a compra de uma assinatura.\n\nO registro constitui da aceitação dos termos e condições.";
+"welcome.agreement.message"= "Após os 7 dias da avaliação gratuita, a assinatura será renovada automaticamente por %@, a não ser que ela seja cancelada, pelo menos, 24 horas antes do término do período de avaliação. O valor da renovação será debitado da conta do seu ID Apple em até 24 horas antes do término do período de avaliação. Você pode gerenciar e cancelar suas assinaturas nos ajustes da conta da App Store após a compra. A oferta de avaliação de 7 dias é limitada a uma oferta de avaliação de 7 dias por usuário. Qualquer parte não utilizada do período de avaliação gratuita, se oferecida, será perdida após a aquisição de uma assinatura. Todos os preços incluem impostos de vendas locais aplicáveis.\n\nO registro constitui da aceitação dos $1 e da $2.";
+"welcome.agreement.trials.yearly.plan"= "ano";
+"welcome.agreement.trials.monthly.plan"= "mês";
+
+"welcome.agreement.message.tos"= "Termos de Serviço";
+"welcome.agreement.message.privacy"= "Política de Privacidade";
+
+"welcome.getstarted.buttons.buyaccount"= "Comprar conta";
+
+"welcome.gdpr.collect.data.title"= "Informações pessoais que coletamos";
+"welcome.gdpr.collect.data.description"= "Endereço de e-mail para gerenciamento de conta e proteção contra abuso.";
+"welcome.gdpr.usage.data.title"= "Uso de informações pessoais coletadas por nós";
+"welcome.gdpr.usage.data.description"= "O endereço de e-mail é utilizado apenas para enviar informação de assinatura, confirmações de pagamento, correspondência com clientes e ofertas promocionais do Private Internet Access.";
+"welcome.gdpr.accept.button.title"= "Concordar e continuar";
+
+"welcome.update.account.email.error"= "Falha ao modificar o e-mail da conta";

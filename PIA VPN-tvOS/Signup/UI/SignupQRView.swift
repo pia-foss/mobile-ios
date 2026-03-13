@@ -16,9 +16,9 @@ struct SignupQRView: View {
     init(signUpURL: URL) {
         self.signUpURL = signUpURL
         self.items = [
-            L10n.Localizable.Tvos.Signup.item1,
-            L10n.Localizable.Tvos.Signup.item2,
-            L10n.Localizable.Tvos.Signup.item3
+            L10n.Tvos.Signup.item1,
+            L10n.Tvos.Signup.item2,
+            L10n.Tvos.Signup.item3
         ]
     }
 
@@ -28,7 +28,7 @@ struct SignupQRView: View {
                 Image.onboarding_pia_brand
                 
                 VStack(alignment: .leading, spacing: 35) {
-                    Text(L10n.Localizable.Tvos.Signup.title)
+                    Text(L10n.Tvos.Signup.title)
                         .font(.system(size: 57))
                         .foregroundColor(.piaOnBackground)
                         .bold()
@@ -42,7 +42,7 @@ struct SignupQRView: View {
                         }
                     }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                     
-                    Text(L10n.Localizable.Tvos.Signup.cta)
+                    Text(L10n.Tvos.Signup.cta)
                         .font(.system(size: 31))
                         .foregroundColor(.piaOnSurfaceContainerSecondary)
                 }

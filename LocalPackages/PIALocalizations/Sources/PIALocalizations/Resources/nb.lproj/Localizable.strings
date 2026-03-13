@@ -618,3 +618,169 @@
 "forceupdate.label.vpn.connected" = "Ved å trykke «Oppdater nå» frakobler du VPN.";
 
 "global.version.format" = "Versjon %@ (%@)";
+
+"signup.in_progress.title"= "Bekrefter registrering";
+"signup.in_progress.message"= "Vi bekrefter kjøpet i systemet vårt. Dette kan ta litt tid.";
+"signup.in_progress.redeem.message"= "Vi bekrefter kort-PIN-en din i systemet vårt. Det kan ta et øyeblikk, så vennligst vent.";
+
+"signup.success.title"= "Kjøp fullført";
+"signup.success.message_format"= "Takk for at du registrerte deg. Vi har sendt deg kontonavnet og passordet ditt til e-postadressen din %@";
+"signup.success.redeem.title"= "Kortet har blitt innløst";
+"signup.success.redeem.message"= "Du mottar en e-post med brukernavn og passord.\n\nPåloggingsinformasjonen din";
+"signup.success.username.caption"= "Brukernavn";
+"signup.success.password.caption"= "Passord";
+"signup.success.submit"= "Komme i gang";
+
+"signup.failure.vc_title"= "Registrering mislyktes";
+"signup.failure.title"= "Kunne ikke opprette kontoen";
+"signup.failure.message"= "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
+"signup.failure.purchase.sandbox.message"= "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
+"signup.failure.redeem.invalid.title"= "Ugyldig kort-PIN";
+"signup.failure.redeem.invalid.message"= "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
+"signup.failure.redeem.claimed.title"= "Kortet er allerede brukt";
+"signup.failure.redeem.claimed.message"= "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
+"signup.failure.submit"= "GÅ TILBAKE";
+"signup.failure.internal"= "Intern app-feil (%d)";
+"signup.failure.unknown"= "Ukjent feil: %s (%d)";
+
+"signup.unreachable.vc_title"= "Feil";
+"signup.unreachable.title"= "Ups!";
+"signup.unreachable.message"= "Ingen internettilkobling. Bekreft at du er koblet til Internett og trykk på Prøv igjen nedenfor.\n\nDu kan komme tilbake til appen senere for å fullføre prosessen.";
+"signup.unreachable.submit"= "PRØV PÅ NYTT";
+
+"signup.purchase.uncredited.alert.message"= "Du har ikke krediterte transaksjoner. Vil du gjenopprette kontoinformasjonen din?";
+"signup.purchase.uncredited.alert.button.cancel"= "Abryt";
+"signup.purchase.uncredited.alert.button.recover"= "Gjenopprett konto";
+
+"signup.purchase.trials.intro"= "Start din gratis 7-dagers prøveperiode";
+"signup.purchase.trials.price.after"= "Deretter %@";
+"signup.purchase.trials.money.back"= "30 dagers pengene-tilbake-garanti";
+"signup.purchase.trials.1year.protection"= "Et års personverns- og identitetsbeskyttelse";
+"signup.purchase.trials.anonymous"= "Surf anonymt og skjul IP-adressen din.";
+"signup.purchase.trials.devices"= "Støtter ti enheter om gangen";
+"signup.purchase.trials.devices.description"= "Beskytt deg på opptil ti enheter samtidig.";
+"signup.purchase.trials.region"= "Sikre servere i over 90 land";
+"signup.purchase.trials.servers"= "Over 3300 servere i 32 land";
+"signup.purchase.trials.start"= "Start abonnementet";
+"signup.purchase.trials.all.plans"= "Vis alle tilgjengelige abonnement";
+
+"signup.purchase.subscribe.now"= "Abonner nå";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "NESTE";
+"signup.walkthrough.action.done"= "FERDIG";
+"signup.walkthrough.action.skip"= "HOPP OVER";
+
+"signup.walkthrough.page.1.title"= "Støtter ti enheter samtidig";
+"signup.walkthrough.page.1.description"= "Beskytt deg på opptil ti enheter samtidig.";
+"signup.walkthrough.page.2.title"= "Sikre servere i over 90 land";
+"signup.walkthrough.page.2.description"= "Med serverer rundt om i hele verden, er du alltid beskyttet.";
+"signup.walkthrough.page.3.title"= "Beskytt deg selv mot reklame";
+"signup.walkthrough.page.3.description"= "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
+
+"signup.share.data.buttons.accept"= "Godta";
+"signup.share.data.buttons.noThanks"= "Nei takk";
+"signup.share.data.buttons.readMore"= "Les mer";
+"signup.share.data.text.title"= "Hjelp oss med å forbedre tjenesten vår";
+"signup.share.data.text.description"= "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
+"signup.share.data.text.footer"= "Du kan kontrollere dette fra innstillingene dine";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "Logg inn på kontoen din";
+"welcome.login.username.placeholder"= "Brukernavn (p1234567)";
+"welcome.login.password.placeholder"= "Passord";
+"welcome.login.submit"= "LOGG INN";
+"welcome.login.restore.button"= "Har du ikke fått kontodetaljene?";
+"welcome.login.error.title"= "Logg på";
+"welcome.login.error.validation"= "Du må oppgi et brukernavn og passord.";
+"welcome.login.error.unauthorized"= "Brukernavnet eller passordet ditt er feil.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "Logg på med kjøpsbevis";
+"welcome.login.magic.link.title"= "Pålogging med magisk e-postkobling";
+"welcome.login.magic.link.response"= "Sjekk e-posten din for å finne påloggingskoblingen.";
+"welcome.login.magic.link.send"= "Send kobling";
+"welcome.login.magic.link.invalid.email"= "Ugyldig e-post. Prøv igjen.";
+
+"welcome.purchase.title"= "Velg et VPN-abonnement";
+"welcome.purchase.subtitle"= "30 dagers pengene-tilbake-garanti";
+"welcome.purchase.email.placeholder"= "E-postadresse";
+"welcome.purchase.continue"= "Fortsett";
+"welcome.purchase.login.footer"= "Har du allerede en konto?";
+"welcome.purchase.login.button"= "Logg inn";
+"welcome.purchase.error.title"= "Kjøp";
+"welcome.purchase.error.validation"= "Du må angi en e-postadresse.";
+"welcome.purchase.error.connectivity.title"= "Tilkoblingsfeil";
+"welcome.purchase.error.connectivity.description"= "Vi kunne ikke nå Private Internet Access. Dette kan skyldes dårlig Internett eller at tjenesten vår er blokkert i landet ditt.";
+"welcome.purchase.confirm.form.email"= "Angi e-postadressen din";
+"welcome.purchase.confirm.plan"= "Du kjøper %@-abonnementet";
+"welcome.purchase.email.why"= "Vi trenger e-posten din for å sende deg brukernavnet og passordet ditt.";
+"welcome.purchase.submit"= "Send inn";
+"welcome.purchase.or"= "eller";
+
+"welcome.upgrade.header"= "Velkommen tilbake!";
+"welcome.upgrade.title"= "For å bruke en privat internettilgang, må du fornye abonnementet ditt.";
+"welcome.upgrade.renew.now"= "Forny nå";
+
+"welcome.redeem.title"= "Løs inn gavekort";
+"welcome.redeem.subtitle"= "Angi e-postadressen og den %lu-sifrede PIN-koden fra gavekortet eller prøvekortet nedenfor.";
+"welcome.redeem.email.placeholder"= "E-postadresse";
+"welcome.redeem.submit"= "SEND";
+"welcome.redeem.error.title"= "Løs inn";
+"welcome.redeem.error.code"= "Koden må bestå av %lu siffer.";
+"welcome.redeem.error.allfields"= "Angi e-postadressen din og kortet PIN-kode.";
+"welcome.redeem.accessibility.back"= "Tilbake";
+"welcome.redeem.giftcard.placeholder"= "PIN-kode for gavekort";
+
+"welcome.plan.monthly.title"= "Månedlig";
+"welcome.plan.yearly.title"= "Årlig";
+"welcome.plan.yearly.detail_format"= "%@%@ per år";
+"welcome.plan.price_format"= "%@/mnd";
+"welcome.plan.best_value"= "Mest for pengene";
+"welcome.plan.accessibility.per_month"= "per måned";
+
+"welcome.restore.title"= "Gjenopprett ukreditert kjøp";
+"welcome.restore.subtitle"= "Hvis du har kjøpt en plan via appen og ikke har mottatt opplysningene dine, kan du sende dem på nytt herfra.\nDu belastes ikke under denne prosessen.";
+"welcome.restore.email.placeholder"= "E-postadresse";
+"welcome.restore.submit"= "BEKREFT";
+
+"welcome.iap.error.message.unavailable"= "Apple-serverne er for øyeblikket ikke tilgjengelige. Prøv igjen senere.";
+"welcome.iap.error.title"= "Feil";
+
+"welcome.agreement.trials.title"= "Vilkår og betingelser for gratis prøveperiode";
+"welcome.agreement.trials.message"= "Betalingen belastes Apple ID-kontoen din når du bekrefter kjøpet. Abonnementet fornyes automatisk med mindre det kanselleres minst 24 timer før slutten av den inneværende perioden. Kontoen blir belastet for fornyelse innen 24 timer før slutten av den inneværende perioden. Du kan administrere og kansellere abonnementene dine ved  besøke kontoinnstillingene på App Store etter kjøpet.\n\nEnkelte betalte abonnementer kan tilby en gratis prøveperiode før det belaster betalingsmetoden din. Hvis du bestemmer deg for å avslutte et betalt abonnement før vi begynner å belaste betalingsmetoden din, må du kansellere abonnementet minst 24 timer før prøveperioden er slutt.\n\nGratis prøveperioder er kun tilgjengelig for nye brukere og utføres etter vårt eget skjønn. Hvis du forsøker å registrere deg med flere gratis prøveperioder, blir du øyeblikkelig belastet standard abonnementsavgift.\n\nVi forbeholder oss retten til å tilbakekalle din gratis prøveperiode når som helst.\n\nEventuell ubrukt del av en gratis prøveperiode går tapt ved kjøpe av et abonnement.\n\nVed å registrere deg samtykker du til disse vilkårene og betingelsene.";
+"welcome.agreement.message"= "Etter den gratis 7-dagers prøveperioden fornyes abonnementet automatisk for %@, med mindre det kanselleres minst 24 timer før slutten av prøveperioden. Din Apple ID-konto belastes for fornyingen innen 24 timer før slutten av prøveperioden. Du kan administrere og avbryte abonnementene dine ved å gå til App Store-kontoinnstillingene etter kjøp. Det 7-dagers prøvetilbudet er begrenset til én 7-dagers prøveperiode per bruker. Eventuell ubrukt tid av den gratis prøveperioden går tapt hvis brukeren kjøper et abonnement. Alle priser inkluderer gjeldende lokale avgifter.\n\nVed å signere godtar du $1 og $2.";
+"welcome.agreement.trials.yearly.plan"= "år";
+"welcome.agreement.trials.monthly.plan"= "måned";
+
+"welcome.agreement.message.tos"= "Tjenestevilkår";
+"welcome.agreement.message.privacy"= "REntingslinjer om personvern";
+
+"welcome.getstarted.buttons.buyaccount"= "Kjøpskonto";
+
+"welcome.gdpr.collect.data.title"= "Personlig informasjon vi tar vare på";
+"welcome.gdpr.collect.data.description"= "E-postadresse for kontoadministrasjon og beskyttelse mot misbruk.";
+"welcome.gdpr.usage.data.title"= "Bruk av personlig informasjon samlet inn av oss";
+"welcome.gdpr.usage.data.description"= "E-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om privat internettilgang.";
+"welcome.gdpr.accept.button.title"= "Godta og fortsett";
+
+"welcome.update.account.email.error"= "Kunne ikke endre kontoens e-post";

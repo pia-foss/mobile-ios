@@ -145,7 +145,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
         XCTAssertEqual(capturedLoadingState, [true, false])
     
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Email.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Email.Error.Message.generic)
     }
     
     func test_signup_shows_a_generic_error_when_there_is_an_error_when_creating_the_account() throws {
@@ -176,7 +176,7 @@ final class SignupEmailIntegrationTests: XCTestCase {
         XCTAssertEqual(capturedLoadingState, [true, false])
     
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Email.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Email.Error.Message.generic)
     }
 
 }

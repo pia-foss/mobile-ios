@@ -18,7 +18,7 @@ struct SignupCredentialsView: View {
                 
                 Image.onboarding_pia_brand
                 
-                Text(L10n.Localizable.Tvos.Signup.Credentials.title)
+                Text(L10n.Tvos.Signup.Credentials.title)
                     .font(.system(size: 76))
                     .foregroundStyle(.piaOnBackground)
                     
@@ -37,12 +37,12 @@ struct SignupCredentialsView: View {
             
             VStack(alignment: .center, spacing: 40) {
                 VStack(spacing: 30) {
-                    Text(L10n.Localizable.Tvos.Signup.Credentials.Details.title)
+                    Text(L10n.Tvos.Signup.Credentials.Details.title)
                         .font(.system(size: 57))
                         .bold()
                         .foregroundStyle(.piaOnBackground)
                     
-                    Text(L10n.Localizable.Tvos.Signup.Credentials.Details.subtitle)
+                    Text(L10n.Tvos.Signup.Credentials.Details.subtitle)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 31))
                         .foregroundStyle(.piaOnBackground)
@@ -58,7 +58,7 @@ struct SignupCredentialsView: View {
                 .frame(height: 250)
                 .padding(EdgeInsets(top: 20, leading: 30, bottom: 0, trailing: 30))
                 
-                ActionButton(title: L10n.Localizable.Tvos.Signup.Credentials.Details.button) {
+                ActionButton(title: L10n.Tvos.Signup.Credentials.Details.button) {
                     action()
                 }
                 .frame(height: 66)

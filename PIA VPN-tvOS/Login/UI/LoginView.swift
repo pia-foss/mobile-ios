@@ -28,7 +28,7 @@ struct LoginView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 60) {
                         Image.onboarding_pia_brand
-                        Text(L10n.Localizable.Tvos.Login.title)
+                        Text(L10n.Tvos.Login.title)
                             .font(.system(size: 57))
                             .bold()
                             .fixedSize(horizontal: false, vertical: true)
@@ -43,8 +43,8 @@ struct LoginView: View {
                     Image.onboarding_signin_world
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing)
-                }.alert(L10n.Localizable.Global.error, isPresented: $viewModel.shouldShowErrorMessage, actions: {
-                    Button(L10n.Localizable.Global.ok) {}
+                }.alert(L10n.Global.error, isPresented: $viewModel.shouldShowErrorMessage, actions: {
+                    Button(L10n.Global.ok) {}
                 }, message: {
                     if case .failed(let errorMessage, _) = viewModel.loginStatus, let errorMessage = errorMessage {
                         Text(errorMessage)

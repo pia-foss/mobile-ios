@@ -66,15 +66,15 @@ final class AccountViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Localizable.Menu.Item.account
-        labelUsername.text = L10n.Localizable.Account.Username.caption
-        labelRestoreTitle.text = L10n.Localizable.Account.Restore.title
-        labelRestoreInfo.text = L10n.Localizable.Account.Restore.description
+        title = L10n.Menu.Item.account
+        labelUsername.text = L10n.Account.Username.caption
+        labelRestoreTitle.text = L10n.Account.Restore.title
+        labelRestoreInfo.text = L10n.Account.Restore.description
         imageViewTrash.image = Theme.current.trashIconImage()
-        buttonRestore.setTitle(L10n.Localizable.Account.Restore.button.uppercased(), for: .normal)
+        buttonRestore.setTitle(L10n.Account.Restore.button.uppercased(), for: .normal)
         labelSubscriptions.attributedText = Theme.current.textWithColoredLink(
-            withMessage: L10n.Localizable.Account.Subscriptions.message,
-            link: L10n.Localizable.Account.Subscriptions.linkMessage)
+            withMessage: L10n.Account.Subscriptions.message,
+            link: L10n.Account.Subscriptions.linkMessage)
         labelSubscriptions.isUserInteractionEnabled = true
 
         viewSafe.layoutMargins = .zero
@@ -97,7 +97,7 @@ final class AccountViewController: AutolayoutViewController {
         super.viewWillAppear(animated)
     
         // update local state immediately
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.account)
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
         redisplayAccount()
     }
 
@@ -113,7 +113,7 @@ final class AccountViewController: AutolayoutViewController {
     }
 
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
     // MARK: Actions
@@ -150,15 +150,15 @@ final class AccountViewController: AutolayoutViewController {
     private func handleReceiptFailureWithError(_ error: Error?) {
         log.error("IAP: Failed to restore payment receipt (error: \(error?.localizedDescription ?? ""))")
 
-        let alert = Macros.alert(L10n.Localizable.Global.error, error?.localizedDescription)
-        alert.addDefaultAction(L10n.Localizable.Global.close)
+        let alert = Macros.alert(L10n.Global.error, error?.localizedDescription)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
     
     private func handleReceiptSubmissionWithError(_ error: Error?) {
         if let error = error {
-            let alert = Macros.alert(L10n.Localizable.Global.error, error.localizedDescription)
-            alert.addDefaultAction(L10n.Localizable.Global.close)
+            let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
+            alert.addDefaultAction(L10n.Global.close)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -166,10 +166,10 @@ final class AccountViewController: AutolayoutViewController {
         log.debug("Account: Renewal successfully completed")
         
         let alert = Macros.alert(
-            L10n.Localizable.Renewal.Success.title,
-            L10n.Localizable.Renewal.Success.message
+            L10n.Renewal.Success.title,
+            L10n.Renewal.Success.message
         )
-        alert.addDefaultAction(L10n.Localizable.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
 
         redisplayAccount()
@@ -177,10 +177,10 @@ final class AccountViewController: AutolayoutViewController {
     
     private func handleBadReceipt() {
         let alert = Macros.alert(
-            L10n.Localizable.Account.Restore.Failure.title,
-            L10n.Localizable.Account.Restore.Failure.message
+            L10n.Account.Restore.Failure.title,
+            L10n.Account.Restore.Failure.message
         )
-        alert.addDefaultAction(L10n.Localizable.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -203,9 +203,9 @@ final class AccountViewController: AutolayoutViewController {
         
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
-                labelExpiryInformation.text = L10n.Localizable.Account.ExpiryDate.expired
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.expired
             } else {
-                labelExpiryInformation.text = L10n.Localizable.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+                labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
             }
             styleExpirationDate()
             
@@ -236,7 +236,7 @@ final class AccountViewController: AutolayoutViewController {
         
         self.viewAccountInfo.layer.cornerRadius = 5.0
         
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.account)
+        styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -251,7 +251,7 @@ final class AccountViewController: AutolayoutViewController {
         for label in [labelExpiryInformation!] {
             Theme.current.applySubtitle(label)
         }
-        Theme.current.applyUnderline(labelDeleteAccount, with: L10n.Localizable.Account.delete)
+        Theme.current.applyUnderline(labelDeleteAccount, with: L10n.Account.delete)
         Theme.current.applyTitle(labelRestoreTitle, appearance: .dark)
         Theme.current.applySubtitle(labelRestoreInfo)
         buttonRestore.style(style: TextStyle.textStyle9)

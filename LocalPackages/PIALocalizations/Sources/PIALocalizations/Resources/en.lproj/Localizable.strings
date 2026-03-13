@@ -619,3 +619,169 @@
 "forceupdate.label.vpn.connected" = "Tapping “Update Now” will disconnect the VPN.";
 
 "global.version.format" = "Version %@ (%@)";
+
+"signup.in_progress.title"= "Confirm sign-up";
+"signup.in_progress.message"= "We're confirming your purchase with our system. It could take a moment so hang in there.";
+"signup.in_progress.redeem.message"= "We're confirming your card PIN with our system. It could take a moment so hang in there.";
+
+"signup.success.title"= "Purchase complete";
+"signup.success.message_format"= "Thank you for signing up with us. We have sent your account username and password at your email address at %@";
+"signup.success.redeem.title"= "Card redeemed successfully";
+"signup.success.redeem.message"= "You will receive an email shortly with your username and password.\n\nYour login details";
+"signup.success.username.caption"= "Username";
+"signup.success.password.caption"= "Password";
+"signup.success.submit"= "GET STARTED";
+
+"signup.failure.vc_title"= "Sign-up failed";
+"signup.failure.title"= "Account creation failed";
+"signup.failure.message"= "We're unable to create an account at this time. Please try again later. Reopening the app will re-attempt to create an account.";
+"signup.failure.purchase.sandbox.message"= "The selected sandbox subscription is not available in production.";
+"signup.failure.redeem.invalid.title"= "Invalid card PIN";
+"signup.failure.redeem.invalid.message"= "Looks like you entered an invalid card PIN. Please try again.";
+"signup.failure.redeem.claimed.title"= "Card claimed already";
+"signup.failure.redeem.claimed.message"= "Looks like this card has already been claimed by another account. You can try entering a different PIN.";
+"signup.failure.submit"= "GO BACK";
+"signup.failure.internal"= "Internal app error (%d)";
+"signup.failure.unknown"= "Unknown error: %s (%d)";
+
+"signup.unreachable.vc_title"= "Error";
+"signup.unreachable.title"= "Whoops!";
+"signup.unreachable.message"= "No internet connection found. Please confirm that you have an internet connection and hit retry below.\n\nYou can come back to the app later to finish the process.";
+"signup.unreachable.submit"= "TRY AGAIN";
+
+"signup.purchase.uncredited.alert.message"= "You have uncredited transactions. Do you want to recover your account details?";
+"signup.purchase.uncredited.alert.button.cancel"= "Cancel";
+"signup.purchase.uncredited.alert.button.recover"= "Recover account";
+
+"signup.purchase.trials.intro"= "Start your 7-day free trial";
+"signup.purchase.trials.price.after"= "Then %@";
+"signup.purchase.trials.money.back"= "30 day money back guarantee";
+"signup.purchase.trials.1year.protection"= "1 year of privacy and identity protection";
+"signup.purchase.trials.anonymous"= "Browse anonymously and hide your ip.";
+"signup.purchase.trials.devices"= "Support 10 devices at once";
+"signup.purchase.trials.devices.description"= "Protect yourself on up to 10 devices at a time.";
+"signup.purchase.trials.region"= "Secure servers in 90+ countries";
+"signup.purchase.trials.servers"= "More than 3300 servers in 32 countries";
+"signup.purchase.trials.start"= "Start subscription";
+"signup.purchase.trials.all.plans"= "See all available plans";
+
+"signup.purchase.subscribe.now"= "Subscribe now";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "NEXT";
+"signup.walkthrough.action.done"= "DONE";
+"signup.walkthrough.action.skip"= "SKIP";
+
+"signup.walkthrough.page.1.title"= "Support 10 devices at once";
+"signup.walkthrough.page.1.description"= "Protect yourself on up to 10 devices at a time.";
+"signup.walkthrough.page.2.title"= "Secure servers in 90+ countries";
+"signup.walkthrough.page.2.description"= "With servers around the globe, you are always under protection.";
+"signup.walkthrough.page.3.title"= "Protect yourself from ads";
+"signup.walkthrough.page.3.description"= "Enabling our Content Blocker prevents ads from showing in Safari.";
+
+"signup.share.data.buttons.accept"= "Accept";
+"signup.share.data.buttons.noThanks"= "No, thanks";
+"signup.share.data.buttons.readMore"= "Read more";
+"signup.share.data.text.title"= "Please help us improve our service";
+"signup.share.data.text.description"= "To help us ensure our service's connection performance, you can anonymously share your connection stats with us. These reports do not include any personally identifiable information.";
+"signup.share.data.text.footer"= "You can always control this from your settings";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "Sign in to your account";
+"welcome.login.username.placeholder"= "Username (p1234567)";
+"welcome.login.password.placeholder"= "Password";
+"welcome.login.submit"= "LOGIN";
+"welcome.login.restore.button"= "Didn't receive account details?";
+"welcome.login.error.title"= "Log in";
+"welcome.login.error.validation"= "You must enter a username and password.";
+"welcome.login.error.unauthorized"= "Your username or password is incorrect.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "Login using purchase receipt";
+"welcome.login.magic.link.title"= "Login using magic email link";
+"welcome.login.magic.link.response"= "Please check your e-mail for a login link.";
+"welcome.login.magic.link.send"= "Send Link";
+"welcome.login.magic.link.invalid.email"= "Invalid email. Please try again.";
+
+"welcome.purchase.title"= "Select a VPN plan";
+"welcome.purchase.subtitle"= "30-day money back guarantee";
+"welcome.purchase.email.placeholder"= "Email address";
+"welcome.purchase.continue"= "Continue";
+"welcome.purchase.login.footer"= "Already have an account?";
+"welcome.purchase.login.button"= "Sign in";
+"welcome.purchase.error.title"= "Purchase";
+"welcome.purchase.error.validation"= "You must enter an email address.";
+"welcome.purchase.error.connectivity.title"= "Connection Failure";
+"welcome.purchase.error.connectivity.description"= "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.";
+"welcome.purchase.confirm.form.email"= "Enter your email address";
+"welcome.purchase.confirm.plan"= "You are purchasing the %@ plan";
+"welcome.purchase.email.why"= "We need your email to send your username and password.";
+"welcome.purchase.submit"= "Submit";
+"welcome.purchase.or"= "or";
+
+"welcome.upgrade.header"= "Welcome Back!";
+"welcome.upgrade.title"= "In order to use Private Internet Access, you’ll need to renew your subscription.";
+"welcome.upgrade.renew.now"= "Renew now";
+
+"welcome.redeem.title"= "Redeem gift card";
+"welcome.redeem.subtitle"= "Type in your email address and the %lu digit PIN from your gift card or trial card below.";
+"welcome.redeem.email.placeholder"= "Email address";
+"welcome.redeem.submit"= "SUBMIT";
+"welcome.redeem.error.title"= "Redeem";
+"welcome.redeem.error.code"= "Code must be %lu numeric digits.";
+"welcome.redeem.error.allfields"="Please type in your email and card PIN.";
+"welcome.redeem.accessibility.back"= "Back";
+"welcome.redeem.giftcard.placeholder"= "Gift card PIN";
+
+"welcome.plan.monthly.title"= "Monthly";
+"welcome.plan.yearly.title"= "Yearly";
+"welcome.plan.yearly.detail_format"= "%@%@ per year";
+"welcome.plan.price_format"= "%@/mo";
+"welcome.plan.best_value"= "Best value";
+"welcome.plan.accessibility.per_month"= "per month";
+
+"welcome.restore.title"= "Restore uncredited purchase";
+"welcome.restore.subtitle"= "If you purchased a plan through this app and didn't receive your credentials, you can send them again from here. You will not be charged during this process.";
+"welcome.restore.email.placeholder"= "Email address";
+"welcome.restore.submit"= "CONFIRM";
+
+"welcome.iap.error.message.unavailable"= "Apple servers currently unavailable. Please try again later.";
+"welcome.iap.error.title"= "Error";
+
+"welcome.agreement.trials.title"= "Free trials terms and conditions";
+"welcome.agreement.trials.message"= "Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.\n\nCertain Paid Subscriptions may offer a free trial prior to charging your payment method. If you decide to unsubscribe from a Paid Subscription before we start charging your payment method, cancel the subscription at least 24 hours before the free trial ends.\n\nFree trials are only available to new users, and are at our sole discretion, and if you attempt to sign up for an additional free trial, you will be immediately charged with the standard Subscription Fee.\n\nWe reserve the right to revoke your free trial at any time.\n\nAny unused portion of your free trial period will be forfeited upon purchase of a subscription.\n\nSigning up constitutes acceptance of this terms and conditions.";
+"welcome.agreement.message"= "After the 7 days free trial this subscription automatically renews for %@ unless it is canceled at least 24 hours before the end of the trial period. Your Apple ID account will be charged for renewal within 24 hours before the end of the trial period. You can manage and cancel your subscriptions by going to your App Store account settings after purchase. 7-days trial offer is limited to one 7-days trial offer per user. Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription. All prices include applicable local sales taxes.\n\nSigning up constitutes acceptance of the $1 and the $2.";
+"welcome.agreement.trials.yearly.plan"= "year";
+"welcome.agreement.trials.monthly.plan"= "month";
+
+"welcome.agreement.message.tos"= "Terms of Service";
+"welcome.agreement.message.privacy"= "Privacy Policy";
+
+"welcome.getstarted.buttons.buyaccount"= "Buy account";
+
+"welcome.gdpr.collect.data.title"= "Personal information we collect";
+"welcome.gdpr.collect.data.description"= "E-mail Address for the purposes of account management and protection from abuse.";
+"welcome.gdpr.usage.data.title"= "Uses of personal information collected by us";
+"welcome.gdpr.usage.data.description"= "E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
+"welcome.gdpr.accept.button.title"= "Agree and continue";
+
+"welcome.update.account.email.error"= "Failed to modify account email";

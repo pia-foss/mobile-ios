@@ -67,16 +67,16 @@ class SignUpFactory {
     
     static func makePrivacySignupTermsView() -> SignupTermsView {
         SignupTermsView(url: URL(string: "https://www.privateinternetaccess.com/privacy-policy")!,
-                        title: L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title,
-                        description: L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.description,
-                        qrCodeMessage: L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message)
+                        title: L10n.HelpMenu.AboutOptions.PrivacyPolicy.title,
+                        description: L10n.HelpMenu.AboutSection.PrivacyPolicy.description,
+                        qrCodeMessage: L10n.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message)
     }
     
     static func makeTermsConditionsSignupTermsView() -> SignupTermsView {
         SignupTermsView(url: URL(string: "https://www.privateinternetaccess.com/terms-of-service")!,
-                        title: L10n.Localizable.Tvos.Signup.TermsConditions.title,
-                        description: L10n.Localizable.Tvos.Signup.TermsConditions.description,
-                        qrCodeMessage: L10n.Localizable.Tvos.Signup.TermsConditions.QrCode.message)
+                        title: L10n.Tvos.Signup.TermsConditions.title,
+                        description: L10n.Tvos.Signup.TermsConditions.description,
+                        qrCodeMessage: L10n.Tvos.Signup.TermsConditions.QrCode.message)
     }
 }
 

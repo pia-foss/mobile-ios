@@ -31,7 +31,7 @@ class RegionsListViewModel: ObservableObject {
     @Published var search = ""
     @Published private(set) var favorites: [String] = []
     @Published var regionsListTitle: String? = nil
-    @Published var displayNameForOptimalLocation = (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: L10n.Localizable.Global.automatic)
+    @Published var displayNameForOptimalLocation = (title: L10n.LocationSelection.OptimalLocation.title, subtitle: L10n.Global.automatic)
     var isEmptySearchResultsVisible: Bool {
         guard filter.isSearchResultsWithAnySearchTerm,
               !search.isEmpty else { return false }
@@ -113,7 +113,7 @@ class RegionsListViewModel: ObservableObject {
         
         switch filter {
         case .all:
-            regionsListTitle = L10n.Localizable.Regions.List.AllLocations.title
+            regionsListTitle = L10n.Regions.List.AllLocations.title
         case .previouslySearched:
             // Show recommended servers if there are no previous searches registered
             if servers.isEmpty {
@@ -131,14 +131,14 @@ class RegionsListViewModel: ObservableObject {
     private func getRegionsListTitle(for filter: RegionsListFilter) -> String? {
         switch filter {
         case .recommended:
-            return L10n.Localizable.Regions.Search.RecommendedLocations.title
+            return L10n.Regions.Search.RecommendedLocations.title
         case .searchResults(_):
             guard !servers.isEmpty else {
                 return nil
             }
-            return L10n.Localizable.Regions.Search.Results.title
+            return L10n.Regions.Search.Results.title
         case .previouslySearched:
-            return L10n.Localizable.Regions.Search.PreviousResults.title
+            return L10n.Regions.Search.PreviousResults.title
         default:
             return nil
         }
@@ -199,9 +199,9 @@ extension RegionsListViewModel {
     
     func favoriteContextMenuTitle(for server: ServerType) -> String {
         if isFavorite(server: server) {
-            return L10n.Localizable.Regions.ContextMenu.Favorites.Remove.text
+            return L10n.Regions.ContextMenu.Favorites.Remove.text
         } else {
-            return L10n.Localizable.Regions.ContextMenu.Favorites.Add.text
+            return L10n.Regions.ContextMenu.Favorites.Add.text
         }
     }
     
@@ -268,7 +268,7 @@ extension RegionsListViewModel {
         // We only show the Optimal Location and DIP server if the list is 'All' servers
         guard filter == .all else { return nil }
         
-        return L10n.Localizable.Regions.List.OptimalLocationWithDipLocation.title
+        return L10n.Regions.List.OptimalLocationWithDipLocation.title
         
     }
     

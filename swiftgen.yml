@@ -1,8 +1,6 @@
 strings:
     inputs:
         - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Localizable.strings
-        - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Signup.strings
-        - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Welcome.strings
     outputs:
         templateName: structured-swift5
         output: LocalPackages/PIALocalizations/Sources/PIALocalizations/Generated/L10n.swift

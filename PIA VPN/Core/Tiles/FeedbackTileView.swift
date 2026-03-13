@@ -50,7 +50,7 @@ struct FeedbackTileView: View {
             middleSpacerIfNeeded()
             
             VStack(alignment: .center, spacing: 12) {
-                Text(L10n.Localizable.Tiles.Feedback.title)
+                Text(L10n.Tiles.Feedback.title)
                     .font(Font(TextStyle.textStyle24.font! as CTFont))
                     .foregroundStyle(.primary)
                 

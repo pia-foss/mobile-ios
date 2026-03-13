@@ -40,7 +40,7 @@ final class ModalNavigationSegue: UIStoryboardSegue {
             target: modal,
             action: #selector(modal.dismissModal)
         )
-        modal.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Localizable.Global.close
+        modal.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.close
 
         let nav = UINavigationController(rootViewController: modal)
         Theme.current.applyCustomNavigationBar(nav.navigationBar,
