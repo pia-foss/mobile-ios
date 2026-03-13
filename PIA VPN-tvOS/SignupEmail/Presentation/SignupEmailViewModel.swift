@@ -58,7 +58,7 @@ class SignupEmailViewModel: ObservableObject {
     }
     
     private func handleError(error: Error) {
-        errorMessage = L10n.Localizable.Tvos.Signup.Email.Error.Message.generic
+        errorMessage = L10n.Tvos.Signup.Email.Error.Message.generic
         shouldShowErrorMessage = true
     }
 }

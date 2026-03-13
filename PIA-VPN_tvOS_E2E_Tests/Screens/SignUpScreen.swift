@@ -12,9 +12,9 @@ extension XCUIApplication {
     var signupImage: XCUIElement {image(with: "signup-screen")}
     var yearlyPlanButton: XCUIElement {findElementWithPartialText(partialText: L10n.Welcome.Plan.Yearly.title, elementType: .button)!}
     var monthlyPlanButton: XCUIElement {findElementWithPartialText(partialText: L10n.Welcome.Plan.Monthly.title, elementType: .button)!}
-    var subscribeNowButton: XCUIElement {button(with: L10n.Localizable.Tvos.Signup.Subscription.Paywall.Button.subscribe)}
+    var subscribeNowButton: XCUIElement {button(with: L10n.Tvos.Signup.Subscription.Paywall.Button.subscribe)}
     var termsOfServiceButton: XCUIElement {button(with: "Terms of Service")}
-    var termsAndConditionsTitle: XCUIElement {staticText(with: L10n.Localizable.Tvos.Signup.TermsConditions.title)}
+    var termsAndConditionsTitle: XCUIElement {staticText(with: L10n.Tvos.Signup.TermsConditions.title)}
     
     func selectSignUpPlan(plan: String) {
         switch plan {

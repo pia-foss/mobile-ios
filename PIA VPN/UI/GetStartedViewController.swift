@@ -252,10 +252,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     private func handleBadReceipt() {
         let alert = Macros.alert(
-            L10n.Localizable.Account.Restore.Failure.title,
-            L10n.Localizable.Account.Restore.Failure.message
+            L10n.Account.Restore.Failure.title,
+            L10n.Account.Restore.Failure.message
         )
-        alert.addDefaultAction(L10n.Localizable.Global.close)
+        alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
 
@@ -456,7 +456,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         newSubscribeNowButton.style(style: TextStyle.Buttons.piaGreenButton)
         newLoginButton.style(style: TextStyle.Buttons.piaPlainTextButton)
 
-        restorePurchaseButton.setTitle(L10n.Localizable.Account.Restore.button.capitalized, for: [])
+        restorePurchaseButton.setTitle(L10n.Account.Restore.button.capitalized, for: [])
         restorePurchaseButton.titleLabel?.numberOfLines = 0
         restorePurchaseButton.titleLabel?.textAlignment = .center
 

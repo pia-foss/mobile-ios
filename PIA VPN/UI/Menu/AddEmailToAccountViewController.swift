@@ -64,10 +64,10 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         
         navigationItem.hidesBackButton = true
 
-        labelTitle.text = L10n.Localizable.Set.Email.Form.email
-        labelSubtitle.text = L10n.Localizable.Set.Email.why
+        labelTitle.text = L10n.Set.Email.Form.email
+        labelSubtitle.text = L10n.Set.Email.why
        
-        textEmail.placeholder = L10n.Localizable.Account.Email.placeholder
+        textEmail.placeholder = L10n.Account.Email.placeholder
         
         if let currentUser = Client.providers.accountProvider.currentUser,
             let info = currentUser.info {
@@ -79,9 +79,9 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         
         scrollView.alpha = 0
 
-        labelUsernameCaption.text = L10n.Localizable.Account.Username.caption
+        labelUsernameCaption.text = L10n.Account.Username.caption
         labelUsername.text = Client.providers.accountProvider.publicUsername ?? ""
-        labelPasswordCaption.text = L10n.Localizable.Set.Email.Password.caption
+        labelPasswordCaption.text = L10n.Set.Email.Password.caption
 
         self.styleDismissButton()
         self.styleContainers()
@@ -105,9 +105,9 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
 
         guard termsAndConditionsAgreed else {
             //present term and conditions
-            let alert = Macros.alert(L10n.Localizable.Gdpr.Collect.Data.title, L10n.Localizable.Gdpr.Collect.Data.description)
-            alert.addCancelAction(L10n.Localizable.Global.cancel)
-            alert.addActionWithTitle(L10n.Localizable.Gdpr.Accept.Button.title) {
+            let alert = Macros.alert(L10n.Gdpr.Collect.Data.title, L10n.Gdpr.Collect.Data.description)
+            alert.addCancelAction(L10n.Global.cancel)
+            alert.addActionWithTitle(L10n.Gdpr.Accept.Button.title) {
                 self.termsAndConditionsAgreed = true
                 self.signUp(nil)
             }
@@ -141,8 +141,8 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
                                                         
                                                         self?.textEmail.text = ""
                                                         
-                                                        let alert = Macros.alert(L10n.Localizable.Global.error, L10n.Localizable.Account.Set.Email.error)
-                                                        alert.addDefaultAction(L10n.Localizable.Global.close)
+                                                        let alert = Macros.alert(L10n.Global.error, L10n.Account.Set.Email.error)
+                                                        alert.addDefaultAction(L10n.Global.close)
                                                         self?.present(alert, animated: true, completion: nil)
                                                         
                                                         return
@@ -152,7 +152,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
                                                     self?.textEmail.endEditing(true)
 
                                                     //TODO SHOW CREDENTIALS
-                                                    self?.labelMessage.text = L10n.Localizable.Set.Email.Success.messageFormat(email)
+                                                    self?.labelMessage.text = L10n.Set.Email.Success.messageFormat(email)
                                                     self?.labelPassword.text = Client.configuration.tempAccountPassword
 
                                                     UIView.animate(withDuration: 0.3, animations: {
@@ -178,7 +178,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     }
     
     private func setupAppleSignInUI() {
-        labelOr.text = L10n.Localizable.Global.or.uppercased()
+        labelOr.text = L10n.Global.or.uppercased()
         labelOr.textAlignment = .center
         
         let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
@@ -250,20 +250,20 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     private func styleConfirmButton() {
         buttonConfirm.setRounded()
         buttonConfirm.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonConfirm.setTitle(L10n.Localizable.Global.update.uppercased(),
+        buttonConfirm.setTitle(L10n.Global.update.uppercased(),
                                for: [])
     }
     
     private func styleLogoutButton() {
         Theme.current.applyButtonLabelMediumStyle(logoutButton)
-        logoutButton.setTitle(L10n.Localizable.Menu.Logout.title.uppercased(),
+        logoutButton.setTitle(L10n.Menu.Logout.title.uppercased(),
                                for: [])
     }
     
     private func styleDismissButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Localizable.Global.close.uppercased(),
+        buttonSubmit.setTitle(L10n.Global.close.uppercased(),
                               for: [])
     }
     

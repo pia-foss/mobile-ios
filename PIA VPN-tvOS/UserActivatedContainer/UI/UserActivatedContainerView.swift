@@ -21,7 +21,7 @@ struct UserActivatedContainerView: View {
                 case .serversList:
                     RegionsSelectionFactory.makeRegionsContainerView()
                         .padding(.top, Spacing.screenTopPadding)
-                        .withTopNavigationBar(title: L10n.Localizable.TopNavigationBar.LocationSelectionScreen.title)
+                        .withTopNavigationBar(title: L10n.TopNavigationBar.LocationSelectionScreen.title)
                 case .search:
                     RegionsSelectionFactory.makeSearchRegionsListView()
                         .navigationBarHidden(true)

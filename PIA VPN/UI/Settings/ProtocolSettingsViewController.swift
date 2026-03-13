@@ -78,7 +78,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.protocols)
+        styleNavigationBarWithTitle(L10n.Settings.Section.protocols)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -213,7 +213,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.general)
+        styleNavigationBarWithTitle(L10n.Settings.Section.general)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -247,7 +247,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.style(style: TextStyle.textStyle21)
             cell.backgroundColor = .clear
-            cell.textLabel?.text =  L10n.Localizable.Settings.Small.Packets.description
+            cell.textLabel?.text =  L10n.Settings.Small.Packets.description
             return cell
         }
         return nil
@@ -260,12 +260,12 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         case .protocolSelection:
             cell.detailTextLabel?.text = pendingPreferences.vpnType.vpnProtocol
         case .transport:
-            cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Localizable.Global.automatic
+            cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Global.automatic
         case .remotePort:
             if let port = settingsDelegate.pendingOpenVPNConfiguration.currentPort, port != ProtocolSettingsViewController.AUTOMATIC_PORT {
                 cell.detailTextLabel?.text = port.description
             } else {
-                cell.detailTextLabel?.text = L10n.Localizable.Global.automatic
+                cell.detailTextLabel?.text = L10n.Global.automatic
             }
         case .dataEncryption:
             
@@ -298,7 +298,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                 cell.accessoryType = .none
             }
         case .useSmallPackets:
-            cell.textLabel?.text = L10n.Localizable.Settings.Small.Packets.title
+            cell.textLabel?.text = L10n.Settings.Small.Packets.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchSmallPackets
             cell.selectionStyle = .none

@@ -16,22 +16,22 @@ class ExpiredAccountFactory {
     
     static private func makeExpiredAccountViewModel() -> ExpiredAccountViewModel {
         let qrTitle = [
-            L10n.Localizable.Tvos.Signin.Expired.Qr.title1,
-            L10n.Localizable.Tvos.Signin.Expired.Qr.title2
+            L10n.Tvos.Signin.Expired.Qr.title1,
+            L10n.Tvos.Signin.Expired.Qr.title2
         ]
         
         let buttonsTitle = [
-            L10n.Localizable.Tvos.Signin.Expired.Button.renewed,
-            L10n.Localizable.Tvos.Signin.Expired.Button.signout
+            L10n.Tvos.Signin.Expired.Button.renewed,
+            L10n.Tvos.Signin.Expired.Button.signout
         ]
 
         
-        let separation = L10n.Localizable.Settings.Dedicatedip.Status.expired.lowercased()
-        let titleSeparated = L10n.Localizable.Tvos.Signin.Expired.title.replacingOccurrences(of: separation, with: "")
+        let separation = L10n.Settings.Dedicatedip.Status.expired.lowercased()
+        let titleSeparated = L10n.Tvos.Signin.Expired.title.replacingOccurrences(of: separation, with: "")
         
         return ExpiredAccountViewModel(title1: titleSeparated,
                                        title2: separation,
-                                       subtitle: L10n.Localizable.Tvos.Signin.Expired.subtitle,
+                                       subtitle: L10n.Tvos.Signin.Expired.subtitle,
                                        qrTitle: qrTitle,
                                        qrCodeURL: URL(string: "https://apps.apple.com/us/app/vpn-by-private-internet-access/id955626407"),
                                        logOutUseCase: SettingsFactory.makeLogOutUseCase())

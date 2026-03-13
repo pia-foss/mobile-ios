@@ -53,7 +53,7 @@ public extension String {
                     return "\(port)"
                 }
             } else {
-                return L10n.Localizable.Global.automatic
+                return L10n.Global.automatic
             }
             return "---"
         case IKEv2Profile.vpnType:
@@ -68,7 +68,7 @@ public extension String {
         case PIAWGTunnelProfile.vpnType, IKEv2Profile.vpnType:
             return "UDP"
         case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Localizable.Global.automatic
+            return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
         default:
             return self
 

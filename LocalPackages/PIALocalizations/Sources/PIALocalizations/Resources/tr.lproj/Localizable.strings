@@ -622,3 +622,249 @@
 "forceupdate.label.vpn.connected" = "\"Hemen Güncelle\"ye dokunmak VPN bağlantısını keser.";
 
 "global.version.format" = "Sürüm %@ (%@)";
+
+"signup.failure.message"= "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
+
+"signup.failure.purchase.sandbox.message"= "Seçilen Sandbox aboneliği üretim ortamında mevcut değil.";
+
+"signup.failure.redeem.claimed.message"= "Bu kart önceden başka bir hesap tarafından talep edilmiş. Farklı bir PIN girmeyi deneyebilirsiniz.";
+
+"signup.failure.redeem.claimed.title"= "Kart önceden talep edilmiş";
+
+"signup.failure.redeem.invalid.message"= "Görünüşe bakılırsa geçersiz bir kart PIN'i girdiniz. Lütfen tekrar deneyin.";
+
+"signup.failure.redeem.invalid.title"= "Geçersiz kart PIN'i";
+
+"signup.failure.submit"= "GERİ DÖN";
+
+"signup.failure.internal"= "Dahili uygulama hatası (%d)";
+
+"signup.failure.unknown"= "Bilinmeyen hata: %s (%d)";
+
+"signup.failure.title"= "Hesap Oluşturma Hatası";
+
+"signup.failure.vc_title"= "Kaydolma başarısız oldu";
+
+"signup.in_progress.message"= "Sistemimizle satın alım işleminizi onaylıyoruz. Biraz zaman alabilir; lütfen bekleyin.";
+
+"signup.in_progress.redeem.message"= "Kart PIN'inizi sistemimizde onaylıyoruz. Bu biraz zaman alabilir, lütfen bekleyin.";
+
+"signup.in_progress.title"= "Kaydolmayı onayla";
+
+"signup.purchase.subscribe.now"= "Hemen abone ol";
+
+"signup.purchase.trials.1year.protection"= "1 yıllık gizlilik ve kimlik koruması";
+
+"signup.purchase.trials.all.plans"= "Tüm mevcut planlara bakın";
+
+"signup.purchase.trials.anonymous"= "IP'nizi gizleyerek İnternet'te isimsiz gezinin.";
+
+"signup.purchase.trials.devices"= "Aynı anda 10 cihaz desteği";
+
+"signup.purchase.trials.devices.description"= "Aynı anda 10 cihazda kendinizi koruyun.";
+
+"signup.purchase.trials.intro"= "7 günlük ücretsiz deneme sürenizi başlatın";
+
+"signup.purchase.trials.money.back"= "30 günlük para iade garantisi";
+
+"signup.purchase.trials.price.after"= "Ardından %@";
+
+"signup.purchase.trials.region"= "90'dan fazla ülkede güvenli sunucular";
+
+"signup.purchase.trials.servers"= "32 ülkede en az 3.300 sunucu";
+
+"signup.purchase.trials.start"= "Aboneliği başlat";
+
+"signup.purchase.uncredited.alert.button.cancel"= "İptal";
+
+"signup.purchase.uncredited.alert.button.recover"= "Hesabı kurtar";
+
+"signup.purchase.uncredited.alert.message"= "Hesaba yansıtılmamış olan işlemleriniz var. Hesap bilgilerinizi kurtarmak ister misiniz?";
+
+"signup.share.data.buttons.accept"= "Kabul Et";
+
+"signup.share.data.buttons.noThanks"= "Hayır, teşekkürler";
+
+"signup.share.data.buttons.readMore"= "Devamını oku";
+
+"signup.share.data.readMore.text.description"= "Bu asgari bilgi, potansiyel bağlantı sorunlarını tanımlayıp düzeltmemize yardımcı olur. Bu bilgiyi paylaşmak için onay verilmesi ve varsayılan olarak kapalı olduğu için elle etkinleştirilmesi gerektiğini dikkate alın.\n\nŞu olaylarla ilgili bilgi toplayacağız:\n\n    - Bağlantı Denemesi\n    - Bağlantı İptal Edildi\n    - Bağlantı Kuruldu\n\nTüm bu olaylar için şu bilgileri toplayacağız:\n    - Platform\n    - Uygulama sürümü\n    - Uygulama türü (ön sürüm olup olmadığı)\n    - Kullanılan protokol\n    - Bağlantı kaynağı (manuel ya da otomasyon ile)\n\nTüm olaylarda rastgele oluşturulan eşsiz bir kimlik yer alacak. Bu kimlik kullanıcı hesabınızla bağlantılı değildir. Bu eşsiz kimlik, gizliliğin korunması açısından günlük olarak üretilir.\n\nKontrol daima sizde olacak. Ayarlardan hangi verileri topladığımızı görebilir ve bunu istediğiniz zaman kapatabilirsiniz.";
+
+"signup.share.data.text.description"= "Hizmetimizin bağlantı performansını korumamıza yardımcı olmak için bağlantı istatistiklerinizi isimsiz olarak bizimle paylaşabilirsiniz. Bu raporlarda kişiyi tanımlayabilecek herhangi bir bilgi yer almaz.";
+
+"signup.share.data.text.footer"= "Bunu istediğiniz zaman ayarlarınızdan kontrol edebilirsiniz";
+
+"signup.share.data.text.title"= "Lütfen hizmetimizi geliştirmemize yardım edin";
+
+"signup.success.message_format"= "Bize kayıt olduğunuz için teşekkürler. Hesap kullanıcı adı ve parolanızı %@ e-posta adresinize gönderdik";
+
+"signup.success.password.caption"= "Şifre";
+
+"signup.success.redeem.message"= "Kısa süre içinde kullanıcı adınızı ve şifrenizi içeren bir e-posta alacaksınız.\n\nGiriş bilgileriniz";
+
+"signup.success.redeem.title"= "Kart başarıyla kullanıldı";
+
+"signup.success.submit"= "Başlarken";
+
+"signup.success.title"= "Satın Alma Tamamlandı";
+
+"signup.success.username.caption"= "Kullanıcı Adı";
+
+"signup.unreachable.message"= "İnternet bağlantısı yok. Lütfen İnternet bağlantınız olup olmadığını kontrol edin ve tekrar aşağıya tıklamayı deneyin.\n\nİşlemi bitirmek için uygulamaya daha sonra tekrar gelebilirsiniz.";
+
+"signup.unreachable.submit"= "TEKRAR DENE";
+
+"signup.unreachable.title"= "Heeey!";
+
+"signup.unreachable.vc_title"= "Hata";
+
+"signup.walkthrough.action.done"= "BİTTİ";
+
+"signup.walkthrough.action.next"= "İLERİ";
+
+"signup.walkthrough.action.skip"= "ATLA";
+
+"signup.walkthrough.page.1.description"= "Aynı anda 10 cihazda koruma sağlayın.";
+
+"signup.walkthrough.page.1.title"= "Aynı anda 10 cihazı destekler";
+
+"signup.walkthrough.page.2.description"= "Dünya çapındaki sunucularla daima koruma altındasınız.";
+
+"signup.walkthrough.page.2.title"= "90'dan fazla ülkede güvenli sunucular";
+
+"signup.walkthrough.page.3.description"= "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
+
+"signup.walkthrough.page.3.title"= "Kendinizi reklamlardan koruyun";
+
+"welcome.agreement.message"= "Bu abonelik, deneme süresinin sonuna en az 24 saat kalana dek iptal edilmezse, otomatik olarak %@ karşılığında yenilenir. Deneme süresinin sonuna 24 saat kaldıktan sonra, Apple Kimliğinizin hesabından yenileme ücreti alınır. Satın alım işleminden sonra App Store hesap ayarlarına giderek abonelik ayarlarınızı değiştirebilir ve aboneliklerinizi iptal edebilirsiniz. 7 günlük deneme süresi, her kullanıcı için bir tane 7 günlük deneme süresi hakkı ile sınırlıdır. Kullanıcı bir abonelik satın aldığında, teklif edilmişse, ücretsiz deneme süresinin kullanılmayan herhangi bir kısmı geçerliliğini yitirir. Tüm fiyatlara uygulanabilir yerel satış vergileri dahildir.\n\nKaydolduğunuzda, $1 ile $2 unsurlarını kabul etmiş olursunuz.";
+
+"welcome.agreement.message.privacy"= "Gizlilik Politikası";
+
+"welcome.agreement.message.tos"= "Hizmet Koşulları";
+
+"welcome.agreement.trials.message"= "Satın alım onaylandıktan sonra, ödeme ücreti, Apple Kimliği hesabınızdan alınır. Mevcut dönemin sonuna en az 24 saat kalana dek iptal edilmezse, abonelik otomatik olarak yenilenir. Mevcut dönemin sonuna 24 saat kaldıktan sonra hesabınızdan yenileme ücreti alınır. Satın alım işleminden sonra App Store'daki hesap ayarlarınıza giderek abonelik ayarlarınızı değiştirebilir ve aboneliğinizi iptal edebilirsiniz.\n\nBelirli Ücretli Abonelik planlarında, seçtiğiniz ödeme yöntemiyle ücret alınmadan önce, bir ücretsiz kullanım süresi sunulabilir. Seçtiğiniz ödeme yöntemiyle sizden ücret almaya başlamamızdan önce Ücretli Aboneliğinizi iptal etmek isterseniz, ücretsiz kullanım süresinin sonuna en az 24 saat kalana dek aboneliğinizi iptal etmelisiniz.\n\nÜcretsiz deneme süresinden sadece yeni kullanıcılar faydalanabilir ve bu tamamen bizim takdirimizdedir. Tekrar kaydolarak bir ücretsiz deneme süresi daha almaya çalışırsanız, standart Abonelik Ücreti anında hesabınızdan düşülür.\n\nÜcretsiz deneme sürenizi istediğimiz zaman iptal etme hakkına sahibiz.\n\nBir abonelik satın aldığınızda, ücretsiz kullanım sürenizin kullanılmayan kısmını yitirirsiniz.\n\nKaydolduğunuzda bu şart ve koşulları kabul etmiş olursunuz.";
+
+"welcome.agreement.trials.monthly.plan"= "ay";
+
+"welcome.agreement.trials.title"= "Ücretsiz deneme süresi şart ve koşulları";
+
+"welcome.agreement.trials.yearly.plan"= "yıl";
+
+"welcome.gdpr.accept.button.title"= "Kabul edip devam et";
+
+"welcome.gdpr.collect.data.description"= "Hesap yönetimi ve ihlalden koruma için E-posta Adresi.";
+
+"welcome.gdpr.collect.data.title"= "Topladığımız kişisel bilgiler";
+
+"welcome.gdpr.usage.data.description"= "E-posta adresi sadece abonelik bilgilerinin, ödeme onaylarının, müşteri iletişim unsurlarının ve Private Internet Access'in promosyonel tekliflerinin gönderilmesi için kullanılır.";
+
+"welcome.gdpr.usage.data.title"= "Tarafımızca toplanan kişisel bilgilerin kullanım şekilleri";
+
+"welcome.getstarted.buttons.buyaccount"= "Hesap satın al";
+
+"welcome.iap.error.message.unavailable"= "Apple sunucuları şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
+
+"welcome.iap.error.title"= "Hata";
+
+"welcome.login.error.throttled"= "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";
+
+"welcome.login.error.title"= "Giriş yap";
+
+"welcome.login.error.unauthorized"= "Kullanıcı adınız ya da şifreniz hatalı.";
+
+"welcome.login.error.validation"= "Bir kullanıcı adı ve şifre girmelisiniz.";
+
+"welcome.login.magic.link.invalid.email"= "E-posta adresi geçersiz. Lütfen tekrar deneyin.";
+
+"welcome.login.magic.link.response"= "Giriş linkini bulmak için lütfen e-postalarınıza bakın.";
+
+"welcome.login.magic.link.send"= "Link Gönder";
+
+"welcome.login.magic.link.title"= "Sihirli e-posta linki ile giriş yap";
+
+"welcome.login.password.placeholder"= "Şifre";
+
+"welcome.login.receipt.button"= "Satın alım faturasıyla giriş yapın";
+
+"welcome.login.restore.button"= "Hesap bilgilerinizi almadınız mı?";
+
+"welcome.login.submit"= "GİRİŞ YAP";
+
+"welcome.login.title"= "Hesabınıza giriş yapın";
+
+"welcome.login.username.placeholder"= "Kullanıcı Adı (p1234567)";
+
+"welcome.plan.accessibility.per_month"= "aylık";
+
+"welcome.plan.best_value"= "En iyi fiyat";
+
+"welcome.plan.monthly.title"= "Aylık";
+
+"welcome.plan.price_format"= "%@/ay";
+
+"welcome.plan.yearly.detail_format"= "Yılda %@%@";
+
+"welcome.plan.yearly.title"= "Yıllık";
+
+"welcome.purchase.confirm.form.email"= "E-posta adresinizi girin";
+
+"welcome.purchase.confirm.plan"= "%@ planını satın alıyorsunuz";
+
+"welcome.purchase.continue"= "Devam et";
+
+"welcome.purchase.email.placeholder"= "E-posta adresi";
+
+"welcome.purchase.email.why"= "Kullanıcı adınızla şifrenizi gönderebilmemiz için e-posta adresinize ihtiyacımız var.";
+
+"welcome.purchase.error.connectivity.description"= "Özel İnternet Erişimi'ne ulaşamıyoruz. Bu zayıf internet yüzünden olabilir veya hizmetimiz ülkenizde engelleniyor.";
+
+"welcome.purchase.error.connectivity.title"= "Bağlantı Hatası";
+
+"welcome.purchase.error.title"= "Satın Al";
+
+"welcome.purchase.error.validation"= "Bir e-posta adresi girmeniz gerekiyor.";
+
+"welcome.purchase.login.button"= "Giriş yapın";
+
+"welcome.purchase.login.footer"= "Hesabınız var mı?";
+
+"welcome.purchase.or"= "veya";
+
+"welcome.purchase.submit"= "Gönder";
+
+"welcome.purchase.subtitle"= "30 günlük para iade garantisi";
+
+"welcome.purchase.title"= "Bir VPN planı seçin";
+
+"welcome.redeem.accessibility.back"= "Geri";
+
+"welcome.redeem.email.placeholder"= "E-posta adresi";
+
+"welcome.redeem.error.allfields"= "Lütfen e-posta adresinizi ve kart PIN numaranızı girin.";
+
+"welcome.redeem.error.code"= "Kod, %lu sayısal haneden oluşmalıdır.";
+
+"welcome.redeem.error.title"= "Kullan";
+
+"welcome.redeem.giftcard.placeholder"= "Hediye kartı ve PIN";
+
+"welcome.redeem.submit"= "Gönder";
+
+"welcome.redeem.subtitle"= "E-posta adresinizi ve hediye kartınızdaki ya da deneme kartınızdaki %lu haneli PIN'i aşağıya girin.";
+
+"welcome.redeem.title"= "Hediye kartını kullan";
+
+"welcome.restore.email.placeholder"= "E-posta adresi";
+
+"welcome.restore.submit"= "ONAYLA";
+
+"welcome.restore.subtitle"= "Bu uygulamadan bir plan satın aldıktan sonra hesap bilgilerinizi alamadıysanız, onları buradan tekrar gönderebilirsiniz. Bu işlem esnasında sizden ücret alınmayacak.";
+
+"welcome.restore.title"= "Bilgileri gönderilmeyen satın alma işlemini tekrarlayın";
+
+"welcome.update.account.email.error"= "Hesap e-posta adresi değiştirilemedi";
+
+"welcome.upgrade.header"= "Tekrar Hoş Geldiniz!";
+
+"welcome.upgrade.renew.now"= "Hemen yenileyin";
+
+"welcome.upgrade.title"= "Private Internet Access kullanabilmek için aboneliğinizi yenilemeniz gerekiyor.";

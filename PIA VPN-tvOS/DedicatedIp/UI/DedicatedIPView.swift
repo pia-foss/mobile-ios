@@ -22,7 +22,7 @@ struct DedicatedIPView: View {
                 DedicatedIpDetailsView(dedicatedIPStats: viewModel.dedicatedIPStats) {
                     viewModel.removeDIP()
                 }
-                .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings, subtitle: L10n.Localizable.Settings.Dedicatedip.title2)
+                .withTopNavigationBar(title: L10n.Menu.Item.settings, subtitle: L10n.Settings.Dedicatedip.title2)
             } else {
                 DedicatedIpActivateView(shouldShowErrorMessage: $viewModel.shouldShowErrorMessage) { token in
                     Task {
@@ -32,10 +32,10 @@ struct DedicatedIPView: View {
             }
         }.onAppear {
             viewModel.onAppear()
-        }.alert(L10n.Localizable.Settings.Dedicatedip.Alert.Success.title, isPresented: $viewModel.showActivatedDialog, actions: {
-            Button(L10n.Localizable.Settings.Dedicatedip.Alert.Success.button) {}
+        }.alert(L10n.Settings.Dedicatedip.Alert.Success.title, isPresented: $viewModel.showActivatedDialog, actions: {
+            Button(L10n.Settings.Dedicatedip.Alert.Success.button) {}
         }, message: {
-            Text(L10n.Localizable.Settings.Dedicatedip.Alert.Success.message)
+            Text(L10n.Settings.Dedicatedip.Alert.Success.message)
     })
     }
 }

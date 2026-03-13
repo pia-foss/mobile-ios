@@ -26,10 +26,10 @@ extension View {
             switch destination {
             case .availableSettings:
                 SettingsFactory.makeAvailableSettingsView()
-                    .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings)
+                    .withTopNavigationBar(title: L10n.Menu.Item.settings)
             case .account:
                 SettingsFactory.makeAccountSettingsView()
-                    .withTopNavigationBar(title: L10n.Localizable.Menu.Item.settings, subtitle: L10n.Localizable.Menu.Item.account)
+                    .withTopNavigationBar(title: L10n.Menu.Item.settings, subtitle: L10n.Menu.Item.account)
             case .general:
                 // TODO: Implement me
                 EmptyView()

@@ -623,3 +623,169 @@
 "forceupdate.label.vpn.connected" = "「今すぐアップデート」をタップするとVPNが切断します。";
 
 "global.version.format" = "バージョン%@ (%@)";
+
+"signup.in_progress.title"= "サインアップを確定";
+"signup.in_progress.message"= "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+"signup.in_progress.redeem.message"= "システムがご購入を確定しています。しばらく時間がかかることがありますので、そのままお待ちください。";
+
+"signup.success.title"= "購入完了";
+"signup.success.message_format"= "サインアップありがとうございます。アカウントのユーザー名とパスワードをお客様のメールアドレス（%@）に送信いたしました。";
+"signup.success.redeem.title"= "カードの引き換えが完了しました";
+"signup.success.redeem.message"= "ユーザーネームとパスワードを記載したメールがまもなく届きます。\n\nお客様のログイン詳細";
+"signup.success.username.caption"= "ユーザー名";
+"signup.success.password.caption"= "パスワード";
+"signup.success.submit"= "始める";
+
+"signup.failure.vc_title"= "サインアップできませんでした";
+"signup.failure.title"= "アカウントの作成に失敗しました";
+"signup.failure.message"= "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
+"signup.failure.purchase.sandbox.message"= "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
+"signup.failure.redeem.invalid.title"= "無効なカードPIN";
+"signup.failure.redeem.invalid.message"= "無効なカードPINを入力したようです。もう一度お試しください。";
+"signup.failure.redeem.claimed.title"= "すでに獲得されたカードです";
+"signup.failure.redeem.claimed.message"= "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
+"signup.failure.submit"= "戻る";
+"signup.failure.internal"= "内部アプリエラー (%d)";
+"signup.failure.unknown"= "不明なエラー: %s (%d)";
+
+"signup.unreachable.vc_title"= "エラー";
+"signup.unreachable.title"= "おっと！";
+"signup.unreachable.message"= "インターネット接続が見つかりません。インターネットに接続していることを確認してから下の再試行をタップしてください。\n\n後ほどアプリでこのプロセスを完了することができます。";
+"signup.unreachable.submit"= "再試行";
+
+"signup.purchase.uncredited.alert.message"= "反映されていない取引があります。アカウントの詳細を回復しますか？";
+"signup.purchase.uncredited.alert.button.cancel"= "キャンセル";
+"signup.purchase.uncredited.alert.button.recover"= "アカウントを回復";
+
+"signup.purchase.trials.intro"= "7日間無料トライアルを開始";
+"signup.purchase.trials.price.after"= "以後%@";
+"signup.purchase.trials.money.back"= "30日間返金保証";
+"signup.purchase.trials.1year.protection"= "1年間のプライバシーおよび個人情報の保護";
+"signup.purchase.trials.anonymous"= "ウェブの匿名利用でIPを非表示にします。";
+"signup.purchase.trials.devices"= "一度に10台の端末をサポート";
+"signup.purchase.trials.devices.description"= "一度に最大10台の端末を保護して自分を守ることができます。";
+"signup.purchase.trials.region"= "90ヶ国以上に安全なサーバー";
+"signup.purchase.trials.servers"= "32か国の3300以上のサーバー";
+"signup.purchase.trials.start"= "サブスクリプションを開始";
+"signup.purchase.trials.all.plans"= "利用可能なプランをすべて見る";
+
+"signup.purchase.subscribe.now"= "今すぐ定期購読を購入";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "次へ";
+"signup.walkthrough.action.done"= "完了";
+"signup.walkthrough.action.skip"= "スキップ";
+
+"signup.walkthrough.page.1.title"= "一度に10台の端末をサポート";
+"signup.walkthrough.page.1.description"= "一度に最大10台の端末を保護して自分を守ることができます。";
+"signup.walkthrough.page.2.title"= "90ヶ国以上に安全なサーバー";
+"signup.walkthrough.page.2.description"= "世界中にサーバがあるので、常に保護された状態でいることができます。";
+"signup.walkthrough.page.3.title"= "広告から自分を守りましょう";
+"signup.walkthrough.page.3.description"= "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
+
+"signup.share.data.buttons.accept"= "同意する";
+"signup.share.data.buttons.noThanks"= "いいえ、結構です";
+"signup.share.data.buttons.readMore"= "もっと読む";
+"signup.share.data.text.title"= "弊社のサービス改善にご協力ください";
+"signup.share.data.text.description"= "弊社のサービスの接続パフォーマンス確保にご協力いただくには、接続データを匿名で弊社と共有してください。これらのレポートには、個人を特定できる情報は含まれません。";
+"signup.share.data.text.footer"= "これは、設定からいつでもコントロール可能です";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "アカウントにサインイン";
+"welcome.login.username.placeholder"= "ユーザー名 (p1234567)";
+"welcome.login.password.placeholder"= "パスワード";
+"welcome.login.submit"= "ログイン";
+"welcome.login.restore.button"= "アカウント詳細を受信しませんでしたか？";
+"welcome.login.error.title"= "ログイン";
+"welcome.login.error.validation"= "ユーザー名とパスワードを入力してください。";
+"welcome.login.error.unauthorized"= "ユーザー名またはパスワードが間違っています。";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "購入領収書を使用してログイン";
+"welcome.login.magic.link.title"= "魔法のメールリンクを使用してログイン";
+"welcome.login.magic.link.response"= "ログインリンクについては、メールを確認してください。";
+"welcome.login.magic.link.send"= "リンクを送信";
+"welcome.login.magic.link.invalid.email"= "無効なメールアドレス。もう一度お試しください。";
+
+"welcome.purchase.title"= "VPNプランを選択";
+"welcome.purchase.subtitle"= "30日間返金保証";
+"welcome.purchase.email.placeholder"= "メールアドレス";
+"welcome.purchase.continue"= "続行";
+"welcome.purchase.login.footer"= "既にアカウントをお持ちですか？";
+"welcome.purchase.login.button"= "サインイン";
+"welcome.purchase.error.title"= "購入";
+"welcome.purchase.error.validation"= "必ずメールアドレスを入力してください。";
+"welcome.purchase.error.connectivity.title"= "接続エラー";
+"welcome.purchase.error.connectivity.description"= "Private Internet Accessに接続できませんでした。インターネットの接続が不安定、もしくはお住まいの国で当社サービスがブロックされている可能性があります。";
+"welcome.purchase.confirm.form.email"= "メールアドレスを入力してください";
+"welcome.purchase.confirm.plan"= "お客様は%@プランを購入しようとしています";
+"welcome.purchase.email.why"= "ユーザー名とパスワードを送信するためのメールアドレスを入力してください。";
+"welcome.purchase.submit"= "送信";
+"welcome.purchase.or"= "または";
+
+"welcome.upgrade.header"= "お帰りなさい！";
+"welcome.upgrade.title"= "Private Internet Accessのご利用を継続するには、サブスクリプションを更新する必要があります。";
+"welcome.upgrade.renew.now"= "今すぐ更新";
+
+"welcome.redeem.title"= "ギフトカード引換え";
+"welcome.redeem.subtitle"= "メールアドレスと、以下のギフトカードまたはトライアルカードの%lu桁のPINを入力してください。";
+"welcome.redeem.email.placeholder"= "メールアドレス";
+"welcome.redeem.submit"= "送信";
+"welcome.redeem.error.title"= "引換え";
+"welcome.redeem.error.code"= "コードは%lu桁でなければなりません。";
+"welcome.redeem.error.allfields"= "メールアドレスとカードのPINを入力してください。";
+"welcome.redeem.accessibility.back"= "戻る";
+"welcome.redeem.giftcard.placeholder"= "ギフトカードのPIN";
+
+"welcome.plan.monthly.title"= "月間";
+"welcome.plan.yearly.title"= "年間";
+"welcome.plan.yearly.detail_format"= "年間%@%@";
+"welcome.plan.price_format"= "%@/月";
+"welcome.plan.best_value"= "最もお得";
+"welcome.plan.accessibility.per_month"= "月々";
+
+"welcome.restore.title"= "追加されていない更新を復元";
+"welcome.restore.subtitle"= "このアプリでプランを購入した後、認証情報を受け取っていない方は、こちらから認証情報を再度送信することができます。この処理の実行中、課金は発生しません。";
+"welcome.restore.email.placeholder"= "メールアドレス";
+"welcome.restore.submit"= "確定";
+
+"welcome.iap.error.message.unavailable"= "Appleサーバーが現在ご利用いただけません。後でもう一度お試しください。";
+"welcome.iap.error.title"= "エラー";
+
+"welcome.agreement.trials.title"= "無料トライアル利用規約";
+"welcome.agreement.trials.message"= "ご購入確定時にお使いのApple IDアカウント支払額が請求されます。サブスクリプションは現在の期間が終了する24時間前までにキャンセルされない限り自動的に更新されます。更新料は現在の期間終了前の24時間以内にお使いのアカウントに請求されます。サブスクリプションはご購入後にApp Storeのアカウント設定からいつでも管理およびキャンセルすることができます。\n\n一部の有料サブスクリプションでは、ご希望の支払方法による請求が実施される前に無料トライアルが提供されている場合があります。ご選択の支払方法による請求が実施される前に有料サブスクリプションの解約をする場合は、無料トライアルが終了する24時間前までにサブスクリプションをキャンセルしてください。\n\n無料トライアルをご利用いただけるのは新規ユーザーのみとなり、無料トライアルを使用する目的で新たに追加のアカウントをサインアップした場合、弊社の裁量によって、通常のサブスクリプション料金が即時に請求されます。\n\n弊社は無料トライアル期間をいつでも無効にする権利を保持します。\n\nサブスクリプションご購入後、未使用分の無料トライアル期間は無効となります。\n\nサインアップすることで、$1と$2に同意したことになります。";
+"welcome.agreement.message"= "トライアル期間終了の少なくとも24時間前にキャンセルされない限り、7日間の無料トライアル後、この定期購読は自動的に%@で更新されます。更新料は、トライアル期間終了前の24時間以内にご利用のApple IDアカウントに請求されます。定期購読は、定期購読購入後にApp Storeアカウント設定から管理およびキャンセルすることができます。7日間のトライアルオファーは、ユーザー1人あたり1回の7日間トライアルに限られています。無料トライアルを利用した場合、無料トライアル期間の未使用分は、ユーザーが定期購読を購入した時点で無効となります。すべての料金には、適用可能な場合現地の消費税が含まれます。\n\nサインアップすることにより、$1および$2に同意したことになります。";
+"welcome.agreement.trials.yearly.plan"= "年";
+"welcome.agreement.trials.monthly.plan"= "月";
+
+"welcome.agreement.message.tos"= "利用規約";
+"welcome.agreement.message.privacy"= "プライバシーポリシー";
+
+"welcome.getstarted.buttons.buyaccount"= "アカウントを購入する";
+
+"welcome.gdpr.collect.data.title"= "弊社が収集する個人情報";
+"welcome.gdpr.collect.data.description"= "メールアドレスは、アカウント管理、および乱用からの保護を目的とします。";
+"welcome.gdpr.usage.data.title"= "弊社により収集される個人情報の使用";
+"welcome.gdpr.usage.data.description"= "メールアドレスはサブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Accessのプロモーションオファーを送信するためにのみ使用されます。";
+"welcome.gdpr.accept.button.title"= "同意して続行する";
+
+"welcome.update.account.email.error"= "アカウントのメールを変更できませんでした";

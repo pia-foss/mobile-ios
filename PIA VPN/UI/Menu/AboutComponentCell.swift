@@ -132,7 +132,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
 
         buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
-        buttonName.accessibilityHint = L10n.Localizable.About.Accessibility.Component.expand
+        buttonName.accessibilityHint = L10n.About.Accessibility.Component.expand
     }
 
     // MARK: Actions

@@ -35,12 +35,12 @@ public enum SettingOptions: Int, CaseIterable {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .general: return L10n.Localizable.Settings.Section.general
-            case .protocols: return L10n.Localizable.Settings.Section.protocols
-            case .network: return L10n.Localizable.Settings.Section.network
-            case .privacyFeatures: return L10n.Localizable.Settings.Section.privacyFeatures
-            case .automation: return L10n.Localizable.Settings.Section.automation
-            case .help: return L10n.Localizable.Settings.Section.help
+            case .general: return L10n.Settings.Section.general
+            case .protocols: return L10n.Settings.Section.protocols
+            case .network: return L10n.Settings.Section.network
+            case .privacyFeatures: return L10n.Settings.Section.privacyFeatures
+            case .automation: return L10n.Settings.Section.automation
+            case .help: return L10n.Settings.Section.help
             case .development: return "Development"
         }
     }
@@ -98,11 +98,11 @@ public enum GeneralSections: Int, CaseIterable, SettingSection {
     
     public func localizedTitleMessage() -> String {
         switch self {
-            case .connectSiri: return L10n.Localizable.Siri.Shortcuts.Connect.Row.title
-            case .disconnectSiri: return L10n.Localizable.Siri.Shortcuts.Disconnect.Row.title
-            case .showGeoRegions: return L10n.Localizable.Settings.Geo.Servers.description
-            case .showServiceCommunicationMessages: return L10n.Localizable.Inapp.Messages.Toggle.title
-            case .resetSettings: return L10n.Localizable.Settings.Reset.Defaults.title
+            case .connectSiri: return L10n.Siri.Shortcuts.Connect.Row.title
+            case .disconnectSiri: return L10n.Siri.Shortcuts.Disconnect.Row.title
+            case .showGeoRegions: return L10n.Settings.Geo.Servers.description
+            case .showServiceCommunicationMessages: return L10n.Inapp.Messages.Toggle.title
+            case .resetSettings: return L10n.Settings.Reset.Defaults.title
         }
     }
     
@@ -128,12 +128,12 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection {
     
     public func localizedTitleMessage() -> String {
         switch self {
-            case .protocolSelection: return L10n.Localizable.Settings.Connection.VpnProtocol.title
-            case .transport: return L10n.Localizable.Settings.Connection.Transport.title
-            case .remotePort: return L10n.Localizable.Settings.Connection.RemotePort.title
-            case .dataEncryption: return L10n.Localizable.Settings.Encryption.Cipher.title
-            case .handshake: return L10n.Localizable.Settings.Encryption.Handshake.title
-            case .useSmallPackets: return L10n.Localizable.Settings.Small.Packets.title
+            case .protocolSelection: return L10n.Settings.Connection.VpnProtocol.title
+            case .transport: return L10n.Settings.Connection.Transport.title
+            case .remotePort: return L10n.Settings.Connection.RemotePort.title
+            case .dataEncryption: return L10n.Settings.Encryption.Cipher.title
+            case .handshake: return L10n.Settings.Encryption.Handshake.title
+            case .useSmallPackets: return L10n.Settings.Small.Packets.title
         }
     }
     
@@ -175,12 +175,12 @@ public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .killswitch: return L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
-            case .reconnectNotifications: return L10n.Localizable.Settings.ApplicationSettings.ReconnectNotifications.title
-            case .leakProtection: return L10n.Localizable.Settings.ApplicationSettings.LeakProtection.title
-            case .allowAccessOnLocalNetwork: return L10n.Localizable.Settings.ApplicationSettings.AllowLocalNetwork.title
-            case .safariContentBlocker: return L10n.Localizable.Settings.ContentBlocker.title
-            case .refresh: return L10n.Localizable.Settings.ContentBlocker.Refresh.title
+            case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
+            case .reconnectNotifications: return L10n.Settings.ApplicationSettings.ReconnectNotifications.title
+            case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
+            case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
+            case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
+            case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
     }
     
@@ -202,8 +202,8 @@ public enum AutomationSections: Int, CaseIterable, SettingSection {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .automation: return L10n.Localizable.Network.Management.Tool.Enable.automation
-            case .manageAutomation: return L10n.Localizable.Network.Management.Tool.title
+            case .automation: return L10n.Network.Management.Tool.Enable.automation
+            case .manageAutomation: return L10n.Network.Management.Tool.title
         }
     }
     
@@ -226,12 +226,12 @@ public enum HelpSections: Int, SettingSection {
 
     public func localizedTitleMessage() -> String {
         switch self {
-        case .sendDebugLogs: return L10n.Localizable.Settings.ApplicationInformation.Debug.title
-        case .debugLogging: return L10n.Localizable.Settings.ApplicationInformation.DebugLogging.title
-        case .kpiShareStatistics: return L10n.Localizable.Settings.Service.Quality.Share.title
-        case .kpiViewEvents: return L10n.Localizable.Settings.Service.Quality.Show.title
-        case .latestNews: return L10n.Localizable.Settings.Cards.History.title
-        case .version: return L10n.Localizable.Global.version
+        case .sendDebugLogs: return L10n.Settings.ApplicationInformation.Debug.title
+        case .debugLogging: return L10n.Settings.ApplicationInformation.DebugLogging.title
+        case .kpiShareStatistics: return L10n.Settings.Service.Quality.Share.title
+        case .kpiViewEvents: return L10n.Settings.Service.Quality.Show.title
+        case .latestNews: return L10n.Settings.Cards.History.title
+        case .version: return L10n.Global.version
         }
     }
     

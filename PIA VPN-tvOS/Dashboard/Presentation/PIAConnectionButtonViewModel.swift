@@ -30,19 +30,19 @@ class PIAConnectionButtonViewModel: ObservableObject {
     }
     
     var errorAlertTitle: String {
-        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.title
+        L10n.ErrorAlert.ConnectionError.NoNetwork.title
     }
     
     var errorAlertMessage: String {
-        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.message
+        L10n.ErrorAlert.ConnectionError.NoNetwork.message
     }
     
     var errorAlertRetryActionTitle: String {
-        L10n.Localizable.ErrorAlert.ConnectionError.NoNetwork.RetryAction.title
+        L10n.ErrorAlert.ConnectionError.NoNetwork.RetryAction.title
     }
     
     var errorAlertCloseActionTitle: String {
-        L10n.Localizable.Global.close
+        L10n.Global.close
     }
     
     

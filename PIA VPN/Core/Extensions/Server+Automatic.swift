@@ -27,7 +27,7 @@ import PIALocalizations
 extension Server {
     static let automatic = Server(
         serial: "",
-        name: L10n.Localizable.Global.automatic,
+        name: L10n.Global.automatic,
         country: "universal",
         hostname: "auto.bogus.domain",
         pingAddress: nil,

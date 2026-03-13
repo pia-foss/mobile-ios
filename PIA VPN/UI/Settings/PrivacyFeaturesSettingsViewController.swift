@@ -99,7 +99,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshContentBlockerState()
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.privacyFeatures)
+        styleNavigationBarWithTitle(L10n.Settings.Section.privacyFeatures)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -121,9 +121,9 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     @objc private func togglePersistentConnection(_ sender: UISwitch) {
         if !sender.isOn,
             Client.preferences.nmtRulesEnabled {
-                let alert = Macros.alert(nil, L10n.Localizable.Settings.Nmt.Killswitch.disabled)
-                alert.addCancelAction(L10n.Localizable.Global.close)
-                alert.addActionWithTitle(L10n.Localizable.Global.enable) { [weak self] in
+                let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
+                alert.addCancelAction(L10n.Global.close)
+                alert.addActionWithTitle(L10n.Global.enable) { [weak self] in
                     self?.pendingPreferences.isPersistentConnection = true
                     self?.pendingPreferences.showReconnectNotifications = true
                     self?.settingsDelegate.refreshSettings()
@@ -183,8 +183,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
             return
         }
         
-      let sheet = Macros.alertController(L10n.Localizable.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Localizable.Global.ok, style: .default, handler: nil))
+      let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
+        sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         present(sheet, animated: true)
     }
 
@@ -193,7 +193,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.privacyFeatures)
+        styleNavigationBarWithTitle(L10n.Settings.Section.privacyFeatures)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -230,24 +230,24 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         
         switch privacySettingsSection {
         case .killswitch:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.KillSwitch.footer
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.footer
             return cell
         case .reconnectNotifications:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.ReconnectNotifications.footer
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.ReconnectNotifications.footer
             return cell
         case .leakProtection:
-            let leakProtectionDescription = L10n.Localizable.Settings.ApplicationSettings.LeakProtection.footer
+            let leakProtectionDescription = L10n.Settings.ApplicationSettings.LeakProtection.footer
             let attributtedDescription = NSMutableAttributedString(string: leakProtectionDescription)
-            let moreInfoText = L10n.Localizable.Settings.ApplicationSettings.LeakProtection.moreInfo
+            let moreInfoText = L10n.Settings.ApplicationSettings.LeakProtection.moreInfo
             let moreInfoTextRange = (leakProtectionDescription as NSString).range(of: moreInfoText)
             attributtedDescription.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: moreInfoTextRange)
             cell.textLabel?.attributedText = attributtedDescription
             return cell
         case .allowAccessOnLocalNetwork:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.AllowLocalNetwork.footer
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.footer
             return cell
         case .safariContentBlocker:
-            cell.textLabel?.text = L10n.Localizable.Settings.ContentBlocker.footer
+            cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
             return cell
         case .refresh:
             return nil
@@ -266,38 +266,38 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         
         switch section {
         case .killswitch:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.KillSwitch.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchPersistent
             cell.selectionStyle = .none
             switchPersistent.isOn = pendingPreferences.isPersistentConnection
         case .reconnectNotifications:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.ReconnectNotifications.title
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.ReconnectNotifications.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchReconnectNotifications
             cell.selectionStyle = .none
             switchReconnectNotifications.isOn = pendingPreferences.showReconnectNotifications
         case .leakProtection:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.LeakProtection.title
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.LeakProtection.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchLeakProtection
             cell.selectionStyle = .none
           switchLeakProtection.isOn = Client.preferences.leakProtection
         case .allowAccessOnLocalNetwork:
-            cell.textLabel?.text = L10n.Localizable.Settings.ApplicationSettings.AllowLocalNetwork.title
+            cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchAllowDevicesOnLocalNetwork
             cell.selectionStyle = .none
             switchAllowDevicesOnLocalNetwork.isEnabled = Client.preferences.leakProtection
             switchAllowDevicesOnLocalNetwork.isOn = !Client.preferences.leakProtection ? false : Client.preferences.allowLocalDeviceAccess
         case .safariContentBlocker:
-            cell.textLabel?.text = L10n.Localizable.Settings.ContentBlocker.title
+            cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchContentBlocker
             cell.selectionStyle = .none
             switchContentBlocker.isOn = isContentBlockerEnabled
         case .refresh:
-            cell.textLabel?.text = L10n.Localizable.Settings.ContentBlocker.Refresh.title
+            cell.textLabel?.text = L10n.Settings.ContentBlocker.Refresh.title
             cell.detailTextLabel?.text = nil
 
         }

@@ -44,9 +44,9 @@ extension Server: CustomStringConvertible {
             return localizedName
             
         case .connecting:
-            return L10n.Localizable.Dashboard.Vpn.connecting
+            return L10n.Dashboard.Vpn.connecting
         case .disconnecting:
-            return L10n.Localizable.Dashboard.Vpn.disconnecting
+            return L10n.Dashboard.Vpn.disconnecting
         case .disconnected, .unknown:
             return localizedName
         }

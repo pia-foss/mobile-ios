@@ -622,3 +622,169 @@
 "forceupdate.label.vpn.connected" = "Hvis vælger “Opdater nu”, afbrydes din VPN.";
 
 "global.version.format" = "Version %@ (%@)";
+
+"signup.in_progress.title"= "Bekræft tilmelding";
+"signup.in_progress.message"= "Vi bekræfter dit køb i vores system. Det kan tage et øjeblik, så bliv her venligst.";
+"signup.in_progress.redeem.message"= "Vi bekræfter din kort-pinkode i vores system. Det kan tage et øjeblik, så bliv her venligst.";
+
+"signup.success.title"= "Køb fuldført";
+"signup.success.message_format"= "Tak fordi du tilmeldte dig hos os. Vi har sendt dit brugernavn og kodeord til din e-mailadresse %@";
+"signup.success.redeem.title"= "Kort indløst med succes";
+"signup.success.redeem.message"= "Du modtager snart en e-mail med dit brugernavn og adgangskode.\n\nDine loginoplysninger";
+"signup.success.username.caption"= "Brugernavn";
+"signup.success.password.caption"= "Kodeord";
+"signup.success.submit"= "Kom i gang";
+
+"signup.failure.vc_title"= "Tilmelding mislykkedes";
+"signup.failure.title"= "Kunne ikke oprette konto";
+"signup.failure.message"= "Vi kan ikke oprette en konto på nuværende tidspunkt. Prøv igen senere.\n\nGenåbning af appen vil genoptage forsøget på at oprette en konto.";
+"signup.failure.purchase.sandbox.message"= "Det valgte sandbox-abonnement er ikke tilgængeligt i produktionen.";
+"signup.failure.redeem.invalid.title"= "Ugyldig kort-pinkode";
+"signup.failure.redeem.invalid.message"= "Det ser ud til, at du har indtastet en ugyldig kort-pinkode. Prøv igen.";
+"signup.failure.redeem.claimed.title"= "Kort allerede taget";
+"signup.failure.redeem.claimed.message"= "Det ser ud til, at dette kort allerede er taget af en anden konto. Prøv at indtaste en anden pinkode.";
+"signup.failure.submit"= "GÅ TILBAGE";
+"signup.failure.internal"= "Intern app-fejl (%d)";
+"signup.failure.unknown"= "Ukendt fejl: %s (%d)";
+
+"signup.unreachable.vc_title"= "Fejl";
+"signup.unreachable.title"= "Ups!";
+"signup.unreachable.message"= "Ingen internetforbindelse fundet. Bekræft venligst, at du har en internetforbindelse, og tryk på \"prøv igen\" herunder.\n\nDu kan vende tilbage til appen senere for at afslutte processen.";
+"signup.unreachable.submit"= "PRØV IGEN";
+
+"signup.purchase.uncredited.alert.message"= "Du har ukrediterede transaktioner. Vil du gendanne dine kontooplysninger?";
+"signup.purchase.uncredited.alert.button.cancel"= "Annuller";
+"signup.purchase.uncredited.alert.button.recover"= "Gendan konto";
+
+"signup.purchase.trials.intro"= "Start din 7-dages gratis prøveperiode";
+"signup.purchase.trials.price.after"= "Derefter %@";
+"signup.purchase.trials.money.back"= "30-dages pengene tilbage garanti";
+"signup.purchase.trials.1year.protection"= "1 års beskyttelse af personlige oplysninger og identitet";
+"signup.purchase.trials.anonymous"= "Gennemse anonymt og skjul din ip.";
+"signup.purchase.trials.devices"= "Understøtter 10 enheder på én gang";
+"signup.purchase.trials.devices.description"= "Beskyt dig selv på op til 10 enheder ad gangen.";
+"signup.purchase.trials.region"= "Sikre servere i over 90 lande";
+"signup.purchase.trials.servers"= "Mere end 3300 servere i 32 lande";
+"signup.purchase.trials.start"= "Start abonnement";
+"signup.purchase.trials.all.plans"= "Se alle tilgængelige planer";
+
+"signup.purchase.subscribe.now"= "Tilmeld nu";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "NÆSTE";
+"signup.walkthrough.action.done"= "UDFØRT";
+"signup.walkthrough.action.skip"= "SPRING OVER";
+
+"signup.walkthrough.page.1.title"= "Understøtter 10 enheder på en gang";
+"signup.walkthrough.page.1.description"= "Beskyt dig selv på op til 10 enheder ad gangen.";
+"signup.walkthrough.page.2.title"= "Sikre servere i over 90 lande";
+"signup.walkthrough.page.2.description"= "Med servere rundt om i verden er du altid beskyttet.";
+"signup.walkthrough.page.3.title"= "Beskyt dig mod annoncer";
+"signup.walkthrough.page.3.description"= "Aktivering af vores Indholdsblokering forhindrer reklamer i at blive vist i Safari.";
+
+"signup.share.data.buttons.accept"= "Accepter";
+"signup.share.data.buttons.noThanks"= "Nej tak";
+"signup.share.data.buttons.readMore"= "Læs mere";
+"signup.share.data.text.title"= "Hjælp os med at forbedre vores service";
+"signup.share.data.text.description"= "For at hjælpe os med at sikre vores tjenestes forbindelsesydelse, kan du anonymt dele dine forbindelsesstatistikker med os. Disse rapporter inkluderer ikke personligt identificerbare oplysninger.";
+"signup.share.data.text.footer"= "Du kan altid kontrollere dette fra dine indstillinger";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "Log ind på din konto";
+"welcome.login.username.placeholder"= "Brugernavn (p1234567)";
+"welcome.login.password.placeholder"= "Kodeord";
+"welcome.login.submit"= "LOG IND";
+"welcome.login.restore.button"= "Modtog du ikke dine kontodetaljer?";
+"welcome.login.error.title"= "Log ind";
+"welcome.login.error.validation"= "Du skal indtaste et brugernavn og et kodeord.";
+"welcome.login.error.unauthorized"= "Dit brugernavn eller kodeord er forkert.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "Log på med købskvittering";
+"welcome.login.magic.link.title"= "Log ind ved hjælp af magisk e-maillink";
+"welcome.login.magic.link.response"= "Se i din e-mail for et login-link.";
+"welcome.login.magic.link.send"= "Send link";
+"welcome.login.magic.link.invalid.email"= "Ugyldig e-mail. Prøv igen.";
+
+"welcome.purchase.title"= "Vælg en VPN-plan";
+"welcome.purchase.subtitle"= "30-dages pengene tilbage garanti";
+"welcome.purchase.email.placeholder"= "E-mailadresse";
+"welcome.purchase.continue"= "Fortsæt";
+"welcome.purchase.login.footer"= "Har du allerede en konto?";
+"welcome.purchase.login.button"= "Log ind";
+"welcome.purchase.error.title"= "Køb";
+"welcome.purchase.error.validation"= "Du skal indtaste en e-mailadresse";
+"welcome.purchase.error.connectivity.title"= "Forbindelsesfejl";
+"welcome.purchase.error.connectivity.description"= "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
+"welcome.purchase.confirm.form.email"= "Indtast din e-mailadresse";
+"welcome.purchase.confirm.plan"= "Du køber %@-planen";
+"welcome.purchase.email.why"= "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
+"welcome.purchase.submit"= "Indsend";
+"welcome.purchase.or"= "eller";
+
+"welcome.upgrade.header"= "Velkommen tilbage!";
+"welcome.upgrade.title"= "For at bruge Private Internet Access skal du forny dit abonnement.";
+"welcome.upgrade.renew.now"= "Forny nu";
+
+"welcome.redeem.title"= "Indløs gavekort";
+"welcome.redeem.subtitle"= "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
+"welcome.redeem.email.placeholder"= "E-mailadresse";
+"welcome.redeem.submit"= "INDSEND";
+"welcome.redeem.error.title"= "Indløs";
+"welcome.redeem.error.code"= "Koden skal være %lu numeriske cifre.";
+"welcome.redeem.error.allfields"= "Indtast venligst din e-mail og dit korts PIN-kode.";
+"welcome.redeem.accessibility.back"= "Tilbage";
+"welcome.redeem.giftcard.placeholder"= "Gavekortets PIN-kode";
+
+"welcome.plan.monthly.title"= "Månedligt";
+"welcome.plan.yearly.title"= "Årligt";
+"welcome.plan.yearly.detail_format"= "%@%@ per år";
+"welcome.plan.price_format"= "%@/mdr";
+"welcome.plan.best_value"= "Bedste værdi";
+"welcome.plan.accessibility.per_month"= "per måned";
+
+"welcome.restore.title"= "Gendan ukrediteret køb";
+"welcome.restore.subtitle"= "Hvis du har købt en plan gennem denne app og ikke har modtaget dine legitimationsoplysninger, kan du anmode om at sende dem igen herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
+"welcome.restore.email.placeholder"= "E-mailadresse";
+"welcome.restore.submit"= "BEKRÆFT";
+
+"welcome.iap.error.message.unavailable"= "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
+"welcome.iap.error.title"= "Fejl";
+
+"welcome.agreement.trials.title"= "Vilkår og betingelser for gratis prøveperioder";
+"welcome.agreement.trials.message"= "Betaling debiteres din Apple ID-konto ved bekræftelsen af ​​købet. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af ​​den aktuelle periode. Din konto bliver debiteret for fornyelse inden for 24 timer inden udgangen af ​​den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i App Store efter køb.\n\nVisse betalte abonnementer kan muligvis tilbyde en gratis prøveperiode, inden de opkræver din betalingsmetode. Hvis du beslutter at afmelde dig et betalt abonnement, før vi begynder at opkræve din betalingsmetode, skal du annullere abonnementet mindst 24 timer før den gratis prøveperiode afsluttes.\n\nGratis prøveperioder er kun tilgængelige for nye brugere og er efter vores eget skøn, og hvis du forsøger at tilmelde dig en ekstra gratis prøveperiode, bliver du straks debiteret for det almindelige abonnementsgebyr.\n\nVi forbeholder os retten til at tilbagekalde din gratis prøveperiode til enhver tid.\n\nEnhver ubrugt del af din gratis prøveperiode fortabes ved køb af et abonnement.\n\nTilmelding udgør accept af disse vilkår og betingelser.";
+"welcome.agreement.message"= "Efter den gratis prøveperiode på 7 dage, fornyes dette abonnement automatisk for %@, medmindre det annulleres mindst 24 timer før prøveperioden er afsluttet. Din Apple ID-konto bliver debiteret for fornyelse inden for 24 timer inden udløbet af prøveperioden. Du kan administrere og annullere dine abonnementer ved at gå til din App Store-kontoindstillinger efter købet. Tilbudet med en 7-dages prøveperiode er begrænset til en 7-dages prøveperiode pr. bruger. Enhver ubrugt del af en gratis prøveperiode, hvis den tilbydes, fortabes, når brugeren køber et abonnement. Alle priser inkluderer gældende lokal moms.\n\nSigning up constitutes acceptance of the $1 and the $2.";
+"welcome.agreement.trials.yearly.plan"= "år";
+"welcome.agreement.trials.monthly.plan"= "måned";
+
+"welcome.agreement.message.tos"= "Vilkår for brug";
+"welcome.agreement.message.privacy"= "Fortrolighedspolitik";
+
+"welcome.getstarted.buttons.buyaccount"= "Køb konto";
+
+"welcome.gdpr.collect.data.title"= "Personlige oplysninger, vi indsamler";
+"welcome.gdpr.collect.data.description"= "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.";
+"welcome.gdpr.usage.data.title"= "Anvendelse af personlige oplysninger indsamlet af os";
+"welcome.gdpr.usage.data.description"= "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
+"welcome.gdpr.accept.button.title"= "Accepter og fortsæt";
+
+"welcome.update.account.email.error"= "Lykkedes ikke at ændre konto-e-mail";

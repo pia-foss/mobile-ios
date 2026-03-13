@@ -17,15 +17,15 @@ class WelcomeFactory {
     }
     
     private static func makeWelcomeViewModel() -> OnboardingComponentViewModelType {
-        let loginButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.login) {
+        let loginButton = OnboardingComponentButton(title: L10n.Tvos.Welcome.Button.login) {
             AppRouter.navigateToLoginQRCodeDestinationAction()
         }
         
-        let signupButton = OnboardingComponentButton(title: L10n.Localizable.Tvos.Welcome.Button.signup) {
+        let signupButton = OnboardingComponentButton(title: L10n.Tvos.Welcome.Button.signup) {
             AppRouter.navigateToSignUpDestinationAction()
         }
         
-        return OnboardingComponentViewModel(title: L10n.Localizable.Tvos.Welcome.title,
+        return OnboardingComponentViewModel(title: L10n.Tvos.Welcome.title,
                                             subtitle: nil,
                                             buttons: [loginButton, signupButton])
     }

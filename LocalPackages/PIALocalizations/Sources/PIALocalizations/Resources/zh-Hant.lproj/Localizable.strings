@@ -622,3 +622,169 @@
 "forceupdate.label.vpn.connected" = "輕點「立即更新」將斷開 VPN 連線。";
 
 "global.version.format" = "版本 %@ (%@)";
+
+"signup.in_progress.title"= "壓認註冊";
+"signup.in_progress.message"= "我們的系統正確認您的購買交易，可能需要停留在此畫面幾分鐘時間。";
+"signup.in_progress.redeem.message"= "我們的系統正在確認您的卡 PIN 碼。這可能需要一點時間，請稍候。";
+
+"signup.success.title"= "購買完成";
+"signup.success.message_format"= "感謝您註冊我們的服務！我們已將您的帳戶使用者名稱和密碼寄送到您的電子郵件地址：%@";
+"signup.success.redeem.title"= "已成功兌換禮品卡";
+"signup.success.redeem.message"= "您很快就會收到一封電子郵件，內有使用者名稱及密碼。\n\n您的登入資料";
+"signup.success.username.caption"= "使用者名稱";
+"signup.success.password.caption"= "密碼";
+"signup.success.submit"= "開始使用";
+
+"signup.failure.vc_title"= "註冊失敗";
+"signup.failure.title"= "帳戶建立失敗";
+"signup.failure.message"= "我們目前未能建立帳戶，請稍後再試。\n\n應用程式將在重新啟動時再次嘗試建立帳戶。";
+"signup.failure.purchase.sandbox.message"= "所選的沙盒訂閱已不再提供。";
+"signup.failure.redeem.invalid.title"= "無效的卡 PIN 碼";
+"signup.failure.redeem.invalid.message"= "您似乎輸入了一個無效的卡 PIN 碼，請再試一次。";
+"signup.failure.redeem.claimed.title"= "此卡已被使用";
+"signup.failure.redeem.claimed.message"= "這張卡似乎已經被另一個帳戶使用。您可以嘗試輸入不同的 PIN 碼。";
+"signup.failure.submit"= "返回";
+"signup.failure.internal"= "內部應用程式錯誤 (%d)";
+"signup.failure.unknown"= "未知錯誤：%s (%d)";
+
+"signup.unreachable.vc_title"= "錯誤";
+"signup.unreachable.title"= "噢！";
+"signup.unreachable.message"= "找不到網路連線。請確定您已連線上網，然後點選下方按鈕重試。\n\n您可以稍後再回來完成程序。";
+"signup.unreachable.submit"= "重試";
+
+"signup.purchase.uncredited.alert.message"= "您有未貸記的交易，要回復帳戶資料嗎？";
+"signup.purchase.uncredited.alert.button.cancel"= "取消";
+"signup.purchase.uncredited.alert.button.recover"= "回復帳戶";
+
+"signup.purchase.trials.intro"= "開始 7 天免費試用";
+"signup.purchase.trials.price.after"= "然後 %@";
+"signup.purchase.trials.money.back"= "30 天退款保證";
+"signup.purchase.trials.1year.protection"= "1 年隱私權和身分保護";
+"signup.purchase.trials.anonymous"= "匿名瀏覽並隱藏 IP。";
+"signup.purchase.trials.devices"= "同時支援 10 台裝置";
+"signup.purchase.trials.devices.description"= "同時為最多 10 台裝置提供保護。";
+"signup.purchase.trials.region"= "90多個國家的安全伺服器";
+"signup.purchase.trials.servers"= "32 個國家超過 3300 台伺服器";
+"signup.purchase.trials.start"= "開始訂閱";
+"signup.purchase.trials.all.plans"= "檢視所有可用方案";
+
+"signup.purchase.subscribe.now"= "馬上訂閱";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "下一步";
+"signup.walkthrough.action.done"= "完成";
+"signup.walkthrough.action.skip"= "跳過";
+
+"signup.walkthrough.page.1.title"= "同時支援 10 台裝置";
+"signup.walkthrough.page.1.description"= "同時為多達 10 台裝置提供保護";
+"signup.walkthrough.page.2.title"= "90多個國家的安全伺服器";
+"signup.walkthrough.page.2.description"= "我們的伺服器遍佈全球，能為您提供全面保護。";
+"signup.walkthrough.page.3.title"= "讓自己免受廣告滋擾";
+"signup.walkthrough.page.3.description"= "只要啟用我們的內容阻擋器，使用 Safari 瀏覽器時就再也不會看到廣告。";
+
+"signup.share.data.buttons.accept"= "接受";
+"signup.share.data.buttons.noThanks"= "不了，謝謝";
+"signup.share.data.buttons.readMore"= "閱讀更多內容";
+"signup.share.data.text.title"= "請協助我們改善服務";
+"signup.share.data.text.description"= "為了確保服務的連線品質，您可以匿名與我們分享您的連線統計資料。這些報告不會包含任何個人識別資訊。";
+"signup.share.data.text.footer"= "您隨時都可以在設定中控制。";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "登入帳戶";
+"welcome.login.username.placeholder"= "使用者名稱（p1234567）";
+"welcome.login.password.placeholder"= "密碼";
+"welcome.login.submit"= "登入";
+"welcome.login.restore.button"= "收不到帳戶資料？";
+"welcome.login.error.title"= "登入";
+"welcome.login.error.validation"= "您必須輸入使用者名稱及密碼。";
+"welcome.login.error.unauthorized"= "您的使用者名稱或密碼不正確。";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "使用購買收據登入";
+"welcome.login.magic.link.title"= "使用神奇的電子郵件連結登入";
+"welcome.login.magic.link.response"= "請確認電子信箱是否已收到登入連結。";
+"welcome.login.magic.link.send"= "傳送連結";
+"welcome.login.magic.link.invalid.email"= "無效的電子郵件。請重試。";
+
+"welcome.purchase.title"= "選擇 VPN 方案";
+"welcome.purchase.subtitle"= "30 天退款保證";
+"welcome.purchase.email.placeholder"= "電子郵件地址";
+"welcome.purchase.continue"= "繼續";
+"welcome.purchase.login.footer"= "已有帳號？";
+"welcome.purchase.login.button"= "登入";
+"welcome.purchase.error.title"= "購買";
+"welcome.purchase.error.validation"= "必須輸入電郵地址。";
+"welcome.purchase.error.connectivity.title"= "連線失敗";
+"welcome.purchase.error.connectivity.description"= "我們無法連線至 Private Internet Access。這可能是因為您的網路連線狀態不佳，或我們的服務在您的國家遭到封鎖。";
+"welcome.purchase.confirm.form.email"= "請輸入您的電子郵件地址";
+"welcome.purchase.confirm.plan"= "您正在購買 %@ 方案";
+"welcome.purchase.email.why"= "請提供電子郵件以便我們傳送使用者名稱及密碼。";
+"welcome.purchase.submit"= "提交";
+"welcome.purchase.or"= "或";
+
+"welcome.upgrade.header"= "歡迎回來！";
+"welcome.upgrade.title"= "如果要使用 Private Internet Access，您必須續訂。";
+"welcome.upgrade.renew.now"= "立即續訂";
+
+"welcome.redeem.title"= "兌換禮品卡";
+"welcome.redeem.subtitle"= "於下方輸入您的電子郵件地址及禮品卡或試用卡並的 %lu 位數 PIN 碼。";
+"welcome.redeem.email.placeholder"= "電子郵件地址";
+"welcome.redeem.submit"= "提交";
+"welcome.redeem.error.title"= "兌換";
+"welcome.redeem.error.code"= "代碼必須包含 %lu 個數字。";
+"welcome.redeem.error.allfields"= "請輸入您的電子郵件地址及禮品卡 PIN 碼。";
+"welcome.redeem.accessibility.back"= "返回";
+"welcome.redeem.giftcard.placeholder"= "禮品卡 PIN 碼";
+
+"welcome.plan.monthly.title"= "月繳";
+"welcome.plan.yearly.title"= "年繳";
+"welcome.plan.yearly.detail_format"= "每年 %@%@";
+"welcome.plan.price_format"= "每月 %@";
+"welcome.plan.best_value"= "最佳值";
+"welcome.plan.accessibility.per_month"= "/ 月";
+
+"welcome.restore.title"= "回復未貸記購買項目";
+"welcome.restore.subtitle"= "如果您透過此應用程式購買方案後收不到您的憑證，可以透過這裡要求再次傳送。此操作不會收取任何費用。";
+"welcome.restore.email.placeholder"= "電子郵件地址";
+"welcome.restore.submit"= "確定";
+
+"welcome.iap.error.message.unavailable"= "Apple 伺服器目前無法使用，請稍後再試。";
+"welcome.iap.error.title"= "錯誤";
+
+"welcome.agreement.trials.title"= "免費試用條款與條件";
+"welcome.agreement.trials.message"= "確認購買後，系統將從您的 Apple ID 帳號收取費用。除非您在目前訂閱期間結束前至少 24 小時取消訂閱，否則訂閱將自動續訂。在目前期間結束前 24 小時內，將從您的帳號收取續訂費用。您可在購買後，前往 App Store 的帳號設定管理和取消您的訂閱。\n\n「特定付費訂閱」可能在以您的付費方式收費前，提供免費試用。若您在我們開始以您的付費方式收費前，決定取消「付費訂閱」，請在免費試用結束前至少 24 小時取消訂閱。\n\n只有新使用者才享有免費試用的資格，且我們擁有唯一決定權。若您試圖再次註冊免費試用，我們會立即以「標準訂閱費用」向您收費。\n\n我們保留隨時解除您免費試用的權利。\n\n若您的免費試用有任何未使用的期間，將會在購買訂閱時收回。\n\n若註冊即代表您接受此條款與條件。";
+"welcome.agreement.message"= "免費試用 7 天後，除非您在試用期結束前至少 24 小時取消訂閱，否則系統將自動續訂 %@，並在試用期結束前的 24 小時內，從您的 Apple ID 帳號收取續訂費用。購買後，您可以前往 App Store 的帳號設定管理或取消您的訂閱方案。每位用戶只有一次 7 天試用的機會。若您的免費試用有任何未使用的期間，將會在購買訂閱時收回。所有價格已包括適用於當地的營業稅。\n\n若註冊，即代表您已接受 $1 與 $2。";
+"welcome.agreement.trials.yearly.plan"= "年";
+"welcome.agreement.trials.monthly.plan"= "月";
+
+"welcome.agreement.message.tos"= "服務條款";
+"welcome.agreement.message.privacy"= "隱私權政策";
+
+"welcome.getstarted.buttons.buyaccount"= "購買帳戶";
+
+"welcome.gdpr.collect.data.title"= "我們收集的個人資料";
+"welcome.gdpr.collect.data.description"= "電子郵件地址用於管理帳戶及防止濫用。";
+"welcome.gdpr.usage.data.title"= "我們收集個人資料的用途";
+"welcome.gdpr.usage.data.description"= "電子郵件地址僅用於傳送訂閱資訊、付款確認函、客戶通訊及 Private Internet Access 的促銷優惠。";
+"welcome.gdpr.accept.button.title"= "同意並繼續";
+
+"welcome.update.account.email.error"= "無法修改帳戶電子郵件";

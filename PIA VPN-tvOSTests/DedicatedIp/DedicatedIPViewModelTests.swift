@@ -43,9 +43,9 @@ final class DedicatedIPViewModelTests: XCTestCase {
         // GIVEN
         let server = ServerTypeStub.makeValidServerTypeStub()
         let expectedStats = [
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.location, description: "name (country)")
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: "name (country)")
         ]
         
         instantiateSut(getDedicatedIpResult: server)
@@ -87,9 +87,9 @@ final class DedicatedIPViewModelTests: XCTestCase {
         // GIVEN
         let server = ServerTypeStub.makeValidServerTypeStub()
         let expectedStats = [
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
-            DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.location, description: "name (country)")
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: "name (country)")
         ]
         
         instantiateSut(getDedicatedIpResult: server)

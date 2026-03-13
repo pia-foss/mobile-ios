@@ -22,11 +22,11 @@ class HelpOptionsViewModel: ObservableObject {
         var title: String {
             switch self {
             case .appInfo:
-                L10n.Localizable.HelpMenu.AppVersionSection.title
+                L10n.HelpMenu.AppVersionSection.title
             case .about:
-                L10n.Localizable.Menu.Item.about
+                L10n.Menu.Item.about
             case .helpImprove:
-                L10n.Localizable.Settings.Service.Quality.Share.title
+                L10n.Settings.Service.Quality.Share.title
             }
         }
     }
@@ -67,18 +67,18 @@ class HelpOptionsViewModel: ObservableObject {
     
     var helpImproveSectionContent: (title: String, subtitle: String, value: String) {
         let title = Sections.helpImprove.title
-        let subtitle = L10n.Localizable.Settings.Service.Quality.Share.description
-        let value = helpImproveValue ? L10n.Localizable.HelpMenu.HelpImprove.Enabled.title : L10n.Localizable.HelpMenu.HelpImprove.Disabled.title
+        let subtitle = L10n.Settings.Service.Quality.Share.description
+        let value = helpImproveValue ? L10n.HelpMenu.HelpImprove.Enabled.title : L10n.HelpMenu.HelpImprove.Disabled.title
         
         return (title: title, subtitle: subtitle, value: value)
     }
     
     var contactSupportTitle: String {
-        L10n.Localizable.HelpMenu.ContactSupport.QrCode.title
+        L10n.HelpMenu.ContactSupport.QrCode.title
     }
     
     var contactSupportDescription: String {
-        L10n.Localizable.HelpMenu.ContactSupport.QrCode.message
+        L10n.HelpMenu.ContactSupport.QrCode.message
     }
     
     var contactSupportURL: URL {

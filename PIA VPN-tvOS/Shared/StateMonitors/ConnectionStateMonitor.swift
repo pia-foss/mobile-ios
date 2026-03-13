@@ -42,15 +42,15 @@ enum ConnectionState: Equatable {
     var title: String? {
         switch self {
         case .connected:
-            return L10n.Localizable.Dashboard.ConnectionState.Connected.title
+            return L10n.Dashboard.ConnectionState.Connected.title
         case .disconnected:
-            return L10n.Localizable.Dashboard.ConnectionState.Disconnected.title
+            return L10n.Dashboard.ConnectionState.Disconnected.title
         case .disconnecting:
-            return L10n.Localizable.Dashboard.ConnectionState.Disconnecting.title
+            return L10n.Dashboard.ConnectionState.Disconnecting.title
         case .connecting:
-            return L10n.Localizable.Dashboard.ConnectionState.Connecting.title
+            return L10n.Dashboard.ConnectionState.Connecting.title
         case .error(_):
-            return L10n.Localizable.Dashboard.ConnectionState.Error.title
+            return L10n.Dashboard.ConnectionState.Error.title
         default:
             return nil
         }

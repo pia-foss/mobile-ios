@@ -622,3 +622,169 @@
 "forceupdate.label.vpn.connected" = "Tik op \"Nu updaten\" om de verbinding met de VPN te verbreken.";
 
 "global.version.format" = "Versie %@ (%@)";
+
+"signup.in_progress.title"= "Aanmelding bevestigen";
+"signup.in_progress.message"= "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+"signup.in_progress.redeem.message"= "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
+
+"signup.success.title"= "Aankoop voltooid";
+"signup.success.message_format"= "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
+"signup.success.redeem.title"= "Kaart ingewisseld";
+"signup.success.redeem.message"= "U ontvangt zo een e-mail met uw gebruikersnaam en wachtwoord.";
+"signup.success.username.caption"= "Gebruikersnaam";
+"signup.success.password.caption"= "Wachtwoord";
+"signup.success.submit"= "Aan de slag";
+
+"signup.failure.vc_title"= "Aanmelden mislukt";
+"signup.failure.title"= "Account aanmaken mislukt";
+"signup.failure.message"= "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
+"signup.failure.purchase.sandbox.message"= "Het geselecteerde sandbox-abonnement is niet beschikbaar in productie.";
+"signup.failure.redeem.invalid.title"= "Ongeldige pincode";
+"signup.failure.redeem.invalid.message"= "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
+"signup.failure.redeem.claimed.title"= "Kaart al geclaimd";
+"signup.failure.redeem.claimed.message"= "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
+"signup.failure.submit"= "GA TERUG";
+"signup.failure.internal"= "Interne app-fout (%d)";
+"signup.failure.unknown"= "Onbekende fout: %s (%d)";
+
+"signup.unreachable.vc_title"= "Fout";
+"signup.unreachable.title"= "Oeps!";
+"signup.unreachable.message"= "Geen internetverbinding gevonden. Controleer uw internetverbinding en probeer het hieronder opnieuw.\n\nU kunt later naar de app terugkeren om het proces te voltooien.";
+"signup.unreachable.submit"= "OPNIEUW PROBEREN";
+
+"signup.purchase.uncredited.alert.message"= "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
+"signup.purchase.uncredited.alert.button.cancel"= "Annuleren";
+"signup.purchase.uncredited.alert.button.recover"= "Account herstellen";
+
+"signup.purchase.trials.intro"= "Start je gratis proefabonnement van 7 dagen";
+"signup.purchase.trials.price.after"= "Daarna %@";
+"signup.purchase.trials.money.back"= "30 dagen lang niet-goed-geld-teruggarantie";
+"signup.purchase.trials.1year.protection"= "1 jaar aan privacy- en identiteitsbescherming";
+"signup.purchase.trials.anonymous"= "Browse anoniem en verberg uw ip.";
+"signup.purchase.trials.devices"= "Ondersteun tien apparaten tegelijk";
+"signup.purchase.trials.devices.description"= "Bescherm uzelf op tien apparaten tegelijk.";
+"signup.purchase.trials.region"= "Beveiligde servers in meer dan 90 landen";
+"signup.purchase.trials.servers"= "Meer dan 3300 servers in 32 landen";
+"signup.purchase.trials.start"= "Abonnement starten";
+"signup.purchase.trials.all.plans"= "Bekijk de beschikbare abonnementen";
+
+"signup.purchase.subscribe.now"= "Nu abonneren";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "VOLGENDE";
+"signup.walkthrough.action.done"= "KLAAR";
+"signup.walkthrough.action.skip"= "OVERSLAAN";
+
+"signup.walkthrough.page.1.title"= "Ondersteun tien apparaten tegelijk";
+"signup.walkthrough.page.1.description"= "Bescherm uzelf op tien apparaten tegelijk.";
+"signup.walkthrough.page.2.title"= "Beveiligde servers in meer dan 90 landen";
+"signup.walkthrough.page.2.description"= "Met servers over de hele wereld wordt u altijd beschermd.";
+"signup.walkthrough.page.3.title"= "Bescherm uzelf tegen advertenties";
+"signup.walkthrough.page.3.description"= "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
+
+"signup.share.data.buttons.accept"= "Accepteren";
+"signup.share.data.buttons.noThanks"= "Nee, bedankt";
+"signup.share.data.buttons.readMore"= "Meer informatie";
+"signup.share.data.text.title"= "Help ons onze service te verbeteren";
+"signup.share.data.text.description"= "Om ons te helpen de verbindingsprestaties van onze dienst te verbeteren, kunt u uw verbindingsstatistieken anoniem met ons delen. Deze rapporten bevatten geen persoonsgegevens.";
+"signup.share.data.text.footer"= "U kunt dit via de Instellingen beheren";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "Aanmelden bij uw account";
+"welcome.login.username.placeholder"= "Gebruikersnaam (p1234567)";
+"welcome.login.password.placeholder"= "Wachtwoord";
+"welcome.login.submit"= "INLOGGEN";
+"welcome.login.restore.button"= "Geen accountgegevens ontvangen?";
+"welcome.login.error.title"= "Inloggen";
+"welcome.login.error.validation"= "U moet een gebruikersnaam en wachtwoord invoeren.";
+"welcome.login.error.unauthorized"= "Uw gebruikersnaam of wachtwoord is onjuist.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "Inloggen met aankoopbewijs";
+"welcome.login.magic.link.title"= "Log in met de magische link in uw e-mail";
+"welcome.login.magic.link.response"= "Controleer uw e-mail voor een inloglink.";
+"welcome.login.magic.link.send"= "Link verzenden";
+"welcome.login.magic.link.invalid.email"= "Ongeldige e-mail. Probeer het opnieuw.";
+
+"welcome.purchase.title"= "Selecteer een VPN-abonnement";
+"welcome.purchase.subtitle"= "30 dagen lang niet-goed-geld-teruggarantie";
+"welcome.purchase.email.placeholder"= "E-mailadres";
+"welcome.purchase.continue"= "Doorgaan";
+"welcome.purchase.login.footer"= "Heeft u al een account?";
+"welcome.purchase.login.button"= "Aanmelden";
+"welcome.purchase.error.title"= "Kopen";
+"welcome.purchase.error.validation"= "U moet een e-mailadres invoeren";
+"welcome.purchase.error.connectivity.title"= "Verbindingsfout";
+"welcome.purchase.error.connectivity.description"= "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
+"welcome.purchase.confirm.form.email"= "Voer uw e-mailadres in";
+"welcome.purchase.confirm.plan"= "U koop het %@-abonnement";
+"welcome.purchase.email.why"= "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
+"welcome.purchase.submit"= "Versturen";
+"welcome.purchase.or"= "of";
+
+"welcome.upgrade.header"= "Welkom terug!";
+"welcome.upgrade.title"= "U moet uw abonnement vernieuwen om Private Internet Access te kunnen gebruiken.";
+"welcome.upgrade.renew.now"= "Nu vernieuwen";
+
+"welcome.redeem.title"= "Cadeaubon inwisselen";
+"welcome.redeem.subtitle"= "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
+"welcome.redeem.email.placeholder"= "E-mailadres";
+"welcome.redeem.submit"= "VERSTUREN";
+"welcome.redeem.error.title"= "Inwisselen";
+"welcome.redeem.error.code"= "Code moet uit %lu getallen bestaan.";
+"welcome.redeem.error.allfields"= "Voer uw e-mailadres en pincode in.";
+"welcome.redeem.accessibility.back"= "Terug";
+"welcome.redeem.giftcard.placeholder"= "Pincode cadeaubon";
+
+"welcome.plan.monthly.title"= "Maandelijks";
+"welcome.plan.yearly.title"= "Jaarlijks";
+"welcome.plan.yearly.detail_format"= "%@%@ per jaar";
+"welcome.plan.price_format"= "%@/ma";
+"welcome.plan.best_value"= "Beste waarde";
+"welcome.plan.accessibility.per_month"= "per maand";
+
+"welcome.restore.title"= "Aankoop herstellen";
+"welcome.restore.subtitle"= "Als u een abonnement via deze app heeft aangeschaft en u heeft uw gegevens niet ontvangen, dan kunt u ze hier opnieuw verzenden. Er worden geen kosten in rekening gebracht tijdens dit proces.";
+"welcome.restore.email.placeholder"= "E-mailadres";
+"welcome.restore.submit"= "BEVESTIGEN";
+
+"welcome.iap.error.message.unavailable"= "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
+"welcome.iap.error.title"= "Fout";
+
+"welcome.agreement.trials.title"= "Algemene voorwaarden gratis proefabonnementen";
+"welcome.agreement.trials.message"= "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nBepaalde betaalde abonnementen kunnen een gratis proefabonnement aanbieden voordat er kosten in rekening worden gebracht. Als u zich wilt afmelden voor een betaald abonnement voordat we kosten in rekening brengen, moet u het abonnement ten minste 24 uur voor het einde van de gratis proefperiode annuleren.\n\nGratis proefabonnementen zijn alleen beschikbaar voor nieuwe gebruikers. Als u zich aanmeldt voor een aanvullend gratis proefabonnement worden onmiddellijk de standaard abonnementskosten in rekening gebracht.\n\nWij behouden ons het recht voor om uw gratis proefabonnement te allen tijde in te trekken.\n\nEen eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement.\n\nAls u zich aanmeldt, gaat u akkoord met deze algemene voorwaarden.";
+"welcome.agreement.message"= "Na de gratis proefperiode van 7 dagen wordt het abonnement automatisch verlengd voor %@, tenzij u het ten minste 24 uur voor het einde van de proefperiode annuleert. De kosten voor de verlenging worden binnen 24 uur voor het einde van de proefperiode via uw Apple ID-account in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan. De proefperiode van 7 dagen is beperkt tot één proefperiode van 7 dagen per gebruiker. Een eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement. Alle prijzen zijn inclusief lokale omzetbelasting, indien van toepassing.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
+"welcome.agreement.trials.yearly.plan"= "jaar";
+"welcome.agreement.trials.monthly.plan"= "maand";
+
+"welcome.agreement.message.tos"= "Servicevoorwaarden";
+"welcome.agreement.message.privacy"= "Privacybeleid";
+
+"welcome.getstarted.buttons.buyaccount"= "Account kopen";
+
+"welcome.gdpr.collect.data.title"= "Persoonlijke informatie die we verzamelen";
+"welcome.gdpr.collect.data.description"= "E-mailadres voor accountbeheer en bescherming tegen misbruik.";
+"welcome.gdpr.usage.data.title"= "Gebruik van de persoonlijke informatie die we verzamelen";
+"welcome.gdpr.usage.data.description"= "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
+"welcome.gdpr.accept.button.title"= "Akkoord en doorgaan";
+
+"welcome.update.account.email.error"= "Kan accountmail niet aanpassen";

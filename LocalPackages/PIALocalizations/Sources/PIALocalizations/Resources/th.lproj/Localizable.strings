@@ -622,3 +622,169 @@
 "forceupdate.label.vpn.connected" = "การแตะ \"อัปเดตทันที\" จะยกเลิกการเชื่อมต่อ VPN";
 
 "global.version.format" = "เวอร์ชั่น %@ (%@)";
+
+"signup.in_progress.title"= "ยืนยันการสมัคร";
+"signup.in_progress.message"= "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
+"signup.in_progress.redeem.message"= "เรากำลังยืนยัน PIN การ์ดของคุณกับระบบของเรา กรุณารอสักครู่";
+
+"signup.success.title"= "ซื้อสำเร็จ";
+"signup.success.message_format"= "ขอบคุณที่สมัครสมาชิกกับเรา เราได้ส่งชื่อผู้ใช้และรหัสผ่านไปยังอีเมลของคุณแล้วที่ %@";
+"signup.success.redeem.title"= "คืนบัตรเสร็จสมบูรณ์!";
+"signup.success.redeem.message"= "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า\n\nข้อมูลการล็อกอิน";
+"signup.success.username.caption"= "ชื่อผู้ใช้";
+"signup.success.password.caption"= "รหัสผ่าน";
+"signup.success.submit"= "เริ่มใช้งาน";
+
+"signup.failure.vc_title"= "การสมัครล้มเหลว";
+"signup.failure.title"= "สร้างบัญชีผู้ใช้ไม่สำเร็จ";
+"signup.failure.message"= "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
+"signup.failure.purchase.sandbox.message"= "ไม่มีระบบสมาชิก Sandbox ที่คุณเลือกอยู่ในการผลิต";
+"signup.failure.redeem.invalid.title"= "PIN การ์ดไม่ถูกต้อง";
+"signup.failure.redeem.invalid.message"= "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
+"signup.failure.redeem.claimed.title"= "บัตรมีการใช้สิทธิ์แล้ว";
+"signup.failure.redeem.claimed.message"= "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
+"signup.failure.submit"= "ย้อนกลับ";
+"signup.failure.internal"= "ข้อผิดพลาดภายในแอป (%d)";
+"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %s (%d)";
+
+"signup.unreachable.vc_title"= "ข้อผิดพลาด";
+"signup.unreachable.title"= "อุ๊ปส์!";
+"signup.unreachable.message"= "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ตแล้วกดลองอีกครั้งด้านล่างนี้\n\nคุณสามารถกลับมาใหม่ในภายหลังเพื่อดำเนินการต่อให้เสร็จ";
+"signup.unreachable.submit"= "ลองใหม่";
+
+"signup.purchase.uncredited.alert.message"= "คุณได้ยกเลิกการทำธุรกรรมแล้ว คุณต้องการกู้คืนรายละเอียดบัญชีหรือไม่";
+"signup.purchase.uncredited.alert.button.cancel"= "ยกเลิก";
+"signup.purchase.uncredited.alert.button.recover"= "กู้คืนบัญชี";
+
+"signup.purchase.trials.intro"= "เริ่มทดลองใช้ฟรี 7 วัน";
+"signup.purchase.trials.price.after"= "จากนั้น %@";
+"signup.purchase.trials.money.back"= "รับประกันการคืนเงินภายใน 30 วัน";
+"signup.purchase.trials.1year.protection"= "การป้องกันข้อมูลประจำตัวและความเป็นส่วนตัว 1 ปี";
+"signup.purchase.trials.anonymous"= "เรียกดูโดยไม่ระบุชื่อและซ่อน ip ของคุณ";
+"signup.purchase.trials.devices"= "รับรองอุปกรณ์ 10 เครื่องในเวลาเดียวกัน";
+"signup.purchase.trials.devices.description"= "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"signup.purchase.trials.region"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
+"signup.purchase.trials.servers"= "กว่า 3300 เซิร์ฟเวอร์ใน 32 ประเทศ";
+"signup.purchase.trials.start"= "เริ่มการเป็นสมาชิก";
+"signup.purchase.trials.all.plans"= "ดูแผนที่มีทั้งหมด";
+
+"signup.purchase.subscribe.now"= "สมัครสมาชิกตอนนี้";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "ถัดไป";
+"signup.walkthrough.action.done"= "เสร็จสิ้น";
+"signup.walkthrough.action.skip"= "ข้าม";
+
+"signup.walkthrough.page.1.title"= "รับรองอุปกรณ์ 10 เครื่องในคราวเดียว";
+"signup.walkthrough.page.1.description"= "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
+"signup.walkthrough.page.2.title"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
+"signup.walkthrough.page.2.description"= "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
+"signup.walkthrough.page.3.title"= "ปกป้องตัวคุณจากโฆษณา";
+"signup.walkthrough.page.3.description"= "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
+
+"signup.share.data.buttons.accept"= "ยอมรับ";
+"signup.share.data.buttons.noThanks"= "ไม่ล่ะ ขอบคุณ";
+"signup.share.data.buttons.readMore"= "อ่านเพิ่มเติม";
+"signup.share.data.text.title"= "โปรดช่วยเราปรับปรุงบริการของเรา";
+"signup.share.data.text.description"= "เพื่อช่วยให้เรามั่นใจในประสิทธิภาพการเชื่อมต่อของบริการของเรา คุณสามารถแชร์สถิติการเชื่อมต่อของคุณกับเราโดยไม่ระบุชื่อ รายงานเหล่านี้ไม่รวมข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+"signup.share.data.text.footer"= "คุณสามารถควบคุมสิ่งนี้ได้จากการตั้งค่าของคุณ";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "ลงชื่อเข้าใช้บัญชีของคุณ";
+"welcome.login.username.placeholder"= "ชื่อผู้ใช้ (p1234567)";
+"welcome.login.password.placeholder"= "รหัสผ่าน";
+"welcome.login.submit"= "เข้าสู่ระบบ";
+"welcome.login.restore.button"= "ยังไม่ได้รับรายละเอียดบัญชีหรือ";
+"welcome.login.error.title"= "เข้าสู่ระบบ";
+"welcome.login.error.validation"= "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
+"welcome.login.error.unauthorized"= "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "เข้าสู่ระบบโดยใช้ใบเสร็จรับเงิน";
+"welcome.login.magic.link.title"= "เข้าสู่ระบบโดยใช้ลิงก์อีเมลวิเศษ";
+"welcome.login.magic.link.response"= "โปรดตรวจสอบอีเมลของคุณเพื่อดูลิงค์สำหรับเข้าสู่ระบบ";
+"welcome.login.magic.link.send"= "ส่งลิงก์";
+"welcome.login.magic.link.invalid.email"= "อีเมลไม่ถูกต้อง กรุณาลองอีกครั้ง";
+
+"welcome.purchase.title"= "เลือกแผน VPN";
+"welcome.purchase.subtitle"= "รับประกันการคืนเงินภายใน 30 วัน";
+"welcome.purchase.email.placeholder"= "อีเมลแอดเดรส";
+"welcome.purchase.continue"= "ดำเนินการต่อ";
+"welcome.purchase.login.footer"= "มีบัญชีแล้วหรือยัง";
+"welcome.purchase.login.button"= "ลงชื่อเข้าใช้";
+"welcome.purchase.error.title"= "ซื้อ";
+"welcome.purchase.error.validation"= "คุณต้องใส่ที่อยู่อีเมล";
+"welcome.purchase.error.connectivity.title"= "ความล้มเหลวในการเชื่อมต่อ";
+"welcome.purchase.error.connectivity.description"= "เราไม่สามารถเข้าถึง Private Internet Access ซึ่งอาจเป็นเพราะอินเทอร์เน็ตไม่เสถียรหรือบริการของเราถูกบล็อกในประเทศของคุณ";
+"welcome.purchase.confirm.form.email"= "กรุณากรอกอีเมลของคุณ";
+"welcome.purchase.confirm.plan"= "คุณกำลังซื้อแผน %@";
+"welcome.purchase.email.why"= "โปรดแจ้งอีเมลสำหรับส่งชื่อผู้ใช้และรหัสผ่านของคุณ";
+"welcome.purchase.submit"= "ส่ง";
+"welcome.purchase.or"= "หรือ";
+
+"welcome.upgrade.header"= "ยินดีต้อนรับกลับมา!";
+"welcome.upgrade.title"= "หากต้องการใช้ Private Internet Access คุณจะต้องต่ออายุสมาชิกของคุณ";
+"welcome.upgrade.renew.now"= "ต่ออายุตอนนี้";
+
+"welcome.redeem.title"= "ใช้สิทธิ์บัตรของขวัญ";
+"welcome.redeem.subtitle"= "พิมพ์ที่อยู่อีเมลของคุณและ PIN %lu หลักจากบัตรของขวัญหรือบัตรทดลองด้านล่าง";
+"welcome.redeem.email.placeholder"= "ที่อยู่อีเมล";
+"welcome.redeem.submit"= "ส่ง";
+"welcome.redeem.error.title"= "ใช้สิทธิ์";
+"welcome.redeem.error.code"= "รหัสต้องประกอบด้วยตัวเลข %lu หลัก";
+"welcome.redeem.error.allfields"= "กรุณากรอกอีเมลและ PIN";
+"welcome.redeem.accessibility.back"= "กลับ";
+"welcome.redeem.giftcard.placeholder"= "PIN บัตรของขวัญ";
+
+"welcome.plan.monthly.title"= "รายเดือน";
+"welcome.plan.yearly.title"= "รายปี";
+"welcome.plan.yearly.detail_format"= "%@%@ ต่อปี";
+"welcome.plan.price_format"= "%@/เดือน";
+"welcome.plan.best_value"= "คุ้มค่าที่สุด";
+"welcome.plan.accessibility.per_month"= "ต่อเดือน";
+
+"welcome.restore.title"= "คืนค่าการซื้อยังไม่ได้คิดเครดิต";
+"welcome.restore.subtitle"= "หากคุณทำการซื้อแผนผ่านแอพนี้และยังไม่ได้รับข้อมูลประจำตัว คุณสามารถส่งอีกครั้งได้จากที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำอีกครั้งในกระบวนการนี้";
+"welcome.restore.email.placeholder"= "อีเมลแอดเดรส";
+"welcome.restore.submit"= "ยืนยัน";
+
+"welcome.iap.error.message.unavailable"= "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
+"welcome.iap.error.title"= "ข้อผิดพลาด";
+
+"welcome.agreement.trials.title"= "ข้อกำหนดและเงื่อนไขการทดลองใช้ฟรี";
+"welcome.agreement.trials.message"= "ยอดชำระเงินจะถูกหักจากบัญชี Apple ID ของคุณเมื่อมีการยืนยันคำสั่งซื้อ ระบบจะต่ออายุสมาชิกโดยอัตโนมัติเว้นแต่จะมีการยกเลิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่จะสิ้นสุดรอบใช้งานปัจจุบัน บัญชีของคุณจะถูกเรียกเก็บเงินค่าต่ออายุสมาชิกภายใน 24 ชั่วโมงก่อนสิ้นสุดรอบใช้งานปัจจุบัน คุณสามารถจัดการและยกเลิกการเป็นสมาชิกได้โดยไปที่การตั้งค่าบัญชีใน App Store หลังจากซื้อแล้ว\n\nบางระบบสมาชิกแบบชำระเงินอาจเสนอให้คุณทดลองใช้ฟรีก่อนที่จะเรียกเก็บเงินผ่านช่องทางการชำระเงินที่คุณเลือกไว้ หากคุณตัดสินใจที่จะยกเลิกการสมัครสมาชิกแบบชำระเงินก่อนที่เราจะเริ่มเรียกเก็บเงินผ่านช่องทางการชำระเงินที่เลือกไว้ ให้ทำการยกเลิกสมาชิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่ช่วงทดลองใช้ฟรีจะสิ้นสุดลง\n\nสามารถทดลองใช้ฟรีเฉพาะผู้ใช้ใหม่เท่านั้นและขึ้นอยู่กับดุลยพินิจของเราแต่เพียงผู้เดียว และหากคุณพยายามที่จะสมัครเพื่อทดลองใช้ฟรีซ้ำอีก คุณจะถูกเรียกเก็บค่าธรรมเนียมการสมัครสมาชิกตามมาตรฐานทันที\n\nเราขอสงวนสิทธิ์ในการเพิกถอนสิทธิ์ทดลองใช้ฟรีของคุณได้ตลอดเวลา\n\nส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรีจะถูกหักทิ้งเมื่อมีการสมัครสมาชิก\n\nการสมัครสมาชิกถือว่าเป็นการยอมรับข้อกำหนดและเงื่อนไขนี้";
+"welcome.agreement.message"= "หลังจากทดลองใช้ฟรี 7 วัน ระบบจะต่ออายุสมาชิกนี้โดยอัตโนมัติในราคา %@ เว้นแต่จะมีการยกเลิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่จะสิ้นสุดรอบใช้งานปัจจุบัน บัญชี Apple ID ของคุณจะถูกเรียกเก็บเงินค่าต่ออายุสมาชิกภายใน 24 ชั่วโมงก่อนสิ้นสุดรอบใช้งานปัจจุบัน คุณสามารถจัดการและยกเลิกการเป็นสมาชิกได้โดยไปที่การตั้งค่าบัญชีใน App Store หลังจากซื้อแล้ว จำกัดสิทธิ์การทดลองใช้ฟรี 7 วัน เพียง 1 สิทธิ์ต่อผู้ใช้หนึ่งราย ส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรีหากมีให้จะถูกริบเมื่อผู้ใช้ซื้อการสมัครสมาชิก ราคาทั้งหมดรวมภาษีการขายในท้องที่\n\nการลงทะเบียนจะถือว่าคุณยินยอมตาม $1 และ $2";
+"welcome.agreement.trials.yearly.plan"= "ปี";
+"welcome.agreement.trials.monthly.plan"= "เดือน";
+
+"welcome.agreement.message.tos"= "ข้อตกลงการใช้บริการ";
+"welcome.agreement.message.privacy"= "นโยบายความเป็นส่วนตัว";
+
+"welcome.getstarted.buttons.buyaccount"= "ซื้อบัญชี";
+
+"welcome.gdpr.collect.data.title"= "ข้อมูลส่วนบุคคลที่เรารวบรวม";
+"welcome.gdpr.collect.data.description"= "อีเมลเพื่อจุดประสงค์ในการจัดการและการป้องกันบัญชีจากการใช้งานในทางที่ผิด";
+"welcome.gdpr.usage.data.title"= "การใช้ข้อมูลส่วนบุคคลที่เรารวบรวม";
+"welcome.gdpr.usage.data.description"= "ที่อยู่อีเมลใช้ในการส่งข้อมูลการสมัครสมาชิก การยืนยันการชำระเงิน การติดต่อกับลูกค้า และข้อเสนอส่งเสริมการขาย Private Internet Access เท่านั้น";
+"welcome.gdpr.accept.button.title"= "ยอมรับและดำเนินการต่อ";
+
+"welcome.update.account.email.error"= "ไม่สามารถแก้ไขอีเมลบัญชีได้";

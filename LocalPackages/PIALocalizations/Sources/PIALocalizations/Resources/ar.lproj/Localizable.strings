@@ -616,9 +616,175 @@
 
 
 //Force update (iOS)
-"forceupdate.label.title" = "Upgrade Your Experience";
-"forceupdate.label.subtitle" = "You’re using an older version of PIA. Update your app now to enjoy an enhanced experience with all the latest features.";
-"forceupdate.button.update" = "Update Now";
-"forceupdate.label.vpn.connected" = "Tapping “Update Now” will disconnect the VPN.";
+“forceupdate.label.title” = “طوّر تجربتك”;
+“forceupdate.label.subtitle” = “أنت تستخدم إصداراً قديماً من PIA. حدّث تطبيقك الآن للاستمتاع بتجربة محسّنة مع جميع أحدث الميزات.”;
+“forceupdate.button.update” = “حدّث الآن”;
+“forceupdate.label.vpn.connected” = “سيؤدي النقر على \”حدّث الآن\” إلى قطع اتصال VPN.”;
 
 "global.version.format" = "الإصدار %@ (%@)";
+
+"signup.in_progress.title"= "تأكيد التسجيل";
+"signup.in_progress.message"= "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
+"signup.in_progress.redeem.message"= "جارٍ تأكيد رمز بطاقتك مع نظامنا. قد يستغرق ذلك بضع لحظات، انتظر قليلًا.";
+
+"signup.success.title"= "تم الشراء";
+"signup.success.message_format"= "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
+"signup.success.redeem.title"= "تم استبدال البطاقة بنجاح";
+"signup.success.redeem.message"= "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
+"signup.success.username.caption"= "اسم المستخدم";
+"signup.success.password.caption"= "كلمة المرور";
+"signup.success.submit"= "كيف تبدأ";
+
+"signup.failure.vc_title"= "فشل تسجيل الآن";
+"signup.failure.title"= "فشل إنشاء الحساب";
+"signup.failure.message"= "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+"signup.failure.purchase.sandbox.message"= "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
+"signup.failure.redeem.invalid.title"= "رمز بطاقة غير صالح";
+"signup.failure.redeem.invalid.message"= "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
+"signup.failure.redeem.claimed.title"= "تم استخدام هذه البطاقة بالفعل";
+"signup.failure.redeem.claimed.message"= "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
+"signup.failure.submit"= "عودة";
+"signup.failure.internal"= "خطأ داخلي في التطبيق (%d)";
+"signup.failure.unknown"= "خطأ غير معروف: %s (%d)";
+
+"signup.unreachable.vc_title"= "خطأ";
+"signup.unreachable.title"= "أوبس!";
+"signup.unreachable.message"= "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
+"signup.unreachable.submit"= "أعد المحاولة";
+
+"signup.purchase.uncredited.alert.message"= "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
+"signup.purchase.uncredited.alert.button.cancel"= "إلغاء";
+"signup.purchase.uncredited.alert.button.recover"= "استعادة الحساب";
+
+"signup.purchase.trials.intro"= "ابدأ تجربتك المجانية لمدة 7 ايام";
+"signup.purchase.trials.price.after"= "ثم %@";
+"signup.purchase.trials.money.back"= "ضمان استرداد المال لمدة 30 أيام";
+"signup.purchase.trials.1year.protection"= "1 سنة من الخصوصية وحماية الهوية";
+"signup.purchase.trials.anonymous"= "تصفح مجهول الهوية وإخفاء عنوان IP.";
+"signup.purchase.trials.devices"= "يدعم 10 أجهزة في المرة الواحدة";
+"signup.purchase.trials.devices.description"= "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"signup.purchase.trials.region"= "خوادم آمنة في أكثر من 90 دولة";
+"signup.purchase.trials.servers"= "أكثر من 3300 خادم في 32 دولة";
+"signup.purchase.trials.start"= "ابدأ الاشتراك";
+"signup.purchase.trials.all.plans"= "مشاهدة جميع الخطط المتاحة";
+
+"signup.purchase.subscribe.now"= "اشتراك الآن";
+
+// WALKTHROUGH
+
+"signup.walkthrough.action.next"= "التالي";
+"signup.walkthrough.action.done"= "تم";
+"signup.walkthrough.action.skip"= "تخطي";
+
+"signup.walkthrough.page.1.title"= "يدعم 10 أجهزة في المرة الواحدة";
+"signup.walkthrough.page.1.description"= "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
+"signup.walkthrough.page.2.title"= "خوادم آمنة في أكثر من 90 دولة";
+"signup.walkthrough.page.2.description"= "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
+"signup.walkthrough.page.3.title"= "احمي نفسك من الإعلانات";
+"signup.walkthrough.page.3.description"= "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
+
+"signup.share.data.buttons.accept"= "قبول";
+"signup.share.data.buttons.noThanks"= "لا، شكرًا";
+"signup.share.data.buttons.readMore"= "قراءة المزيد";
+"signup.share.data.text.title"= "يرجى مساعدتنا في تحسين خدمتنا";
+"signup.share.data.text.description"= "لمساعدتنا في ضمان أداء اتصال خدمتنا، يمكنك مشاركة إحصائيات اتصالك معنا دون الكشف عن هويتك. لا تتضمن هذه التقارير أي معلومات محددة للشخصية.";
+"signup.share.data.text.footer"= "يمكنك دائمًا التحكم في ذلك من إعداداتك";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "سجل الدخول إلى حسابك";
+"welcome.login.username.placeholder"= "اسم المستخدم (p1234567)";
+"welcome.login.password.placeholder"= "كلمة المرور";
+"welcome.login.submit"= "تسجيل الدخول";
+"welcome.login.restore.button"= "لم تحصل على تفاصيل الحساب؟";
+"welcome.login.error.title"= "تسجيل الدخول";
+"welcome.login.error.validation"= "يجب إدخال اسم المستخدم وكلمة المرور";
+"welcome.login.error.unauthorized"= "اسم المستخدم أو كلمة المرور غير صحيحة.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "تسجيل الدخول باستخدام إيصال الشراء";
+"welcome.login.magic.link.title"= "تسجيل الدخول باستخدام رابط البريد الإلكتروني السحري";
+"welcome.login.magic.link.response"= "يرجى إلقاء نظرة على بريدك الإلكتروني للحصول على رابط تسجيل الدخول.";
+"welcome.login.magic.link.send"= "إرسال الرابط";
+"welcome.login.magic.link.invalid.email"= "البريد الإلكتروني غير صحيح. يرجى إعادة المحاولة.";
+
+"welcome.purchase.title"= "حدد خطة VPN";
+"welcome.purchase.subtitle"= "ضمان استرداد المال لمدة 7 أيام";
+"welcome.purchase.email.placeholder"= "البريد الإلكتروني";
+"welcome.purchase.continue"= "متابعة";
+"welcome.purchase.login.footer"= "لديك حساب بالفعل؟";
+"welcome.purchase.login.button"= "تسجيل الدخول";
+"welcome.purchase.error.title"= "شراء";
+"welcome.purchase.error.validation"= "يجب إدخال عنوان بريد إلكتروني.";
+"welcome.purchase.error.connectivity.title"= "فشل الاتصال";
+"welcome.purchase.error.connectivity.description"= "لم نتمكن من الوصول إلى منفذ الإنترنت الخاص. ربما بسبب اتصال ضعيف بالإنترنت أو خدماتنا موقوفة في بلدك.";
+"welcome.purchase.confirm.form.email"= "يرجى إدخال بريدك الإلكتروني";
+"welcome.purchase.confirm.plan"= "أنت تشتري الآن خطة %@";
+"welcome.purchase.email.why"= "نحتاج إلى بريدك الإلكتروني لإرسال اسم المستخدم وكلمة المرور.";
+"welcome.purchase.submit"= "إرسال";
+"welcome.purchase.or"= "أو";
+
+"welcome.upgrade.header"= "مرحبًا بعودتك!";
+"welcome.upgrade.title"= "لاستخدام Private Internet Access، تحتاج إلى تجديد اشتراكك.";
+"welcome.upgrade.renew.now"= "تجديد الآن";
+
+"welcome.redeem.title"= "استلم محتويات بطاقة هدية";
+"welcome.redeem.subtitle"= "أدخل بريدك الإلكتروني ورمز بطاقة الهدية أو بطاقة التجربة المكون من %lu خانات.";
+"welcome.redeem.email.placeholder"= "البريد الإلكتروني";
+"welcome.redeem.submit"= "إرسال";
+"welcome.redeem.error.title"= "استلام";
+"welcome.redeem.error.code"= "يجب أن يتكون الرمز من %lu خانات رقمية.";
+"welcome.redeem.error.allfields"= "يرجى كتابة بريدك الإلكتروني ورمز PIN الخاص بالبطاقة.";
+"welcome.redeem.accessibility.back"= "عودة";
+"welcome.redeem.giftcard.placeholder"= "رمز PIN الخاص بالبطاقة.";
+
+"welcome.plan.monthly.title"= "شهريًا";
+"welcome.plan.yearly.title"= "سنويًا";
+"welcome.plan.yearly.detail_format"= "%@%@ في السنة";
+"welcome.plan.price_format"= "%@ / شهر";
+"welcome.plan.best_value"= "أفضل قيمة";
+"welcome.plan.accessibility.per_month"= "في الشهر";
+
+"welcome.restore.title"= "استرداد الشراء غير المقيد في الحساب";
+"welcome.restore.subtitle"= "إذا اشتريت خطة من خلال هذا التطبيق ولم تصلك بيانات تسجيل دخولك، يمكنك إرسالها مرة أخرى من هنا. لن يتم تحصيل رسوم منك أثناء هذه العملية.";
+"welcome.restore.email.placeholder"= "البريد الإلكتروني";
+"welcome.restore.submit"= "تأكيد";
+
+"welcome.iap.error.message.unavailable"= "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
+"welcome.iap.error.title"= "خطأ";
+
+"welcome.agreement.trials.title"= "شروط وأحكام الفترات التجريبية المجانية";
+"welcome.agreement.trials.message"= "سيتم تحصيل مبلغ الدفع من حساب Apple ID الخاص بك عند تأكيد الشراء. يتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل نهاية الفترة الحالية بمدة 24 ساعة على الأقل. سيتم محاسبتك على التجديد خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة وإلغاء اشتراكاتك عن طريق الانتقال إلى إعدادات حسابك في متجر التطبيقات بعد الشراء.\n\nقد توفر بعض الاشتراكات المدفوعة فترة تجريبية مجانية قبل تحصيل المبلغ من طريقة الدفع. إذا قررت إلغاء الاشتراك من اشتراك مدفوع قبل البدء في تحصيل الرسوم من طريقة الدفع، قم بإلغاء الاشتراك قبل انتهاء الفترة التجريبية المجانية بمدة 24 ساعة على الأقل.\n\nلا يتم توفير التجارب المجانية إلا للمستخدمين الجدد فقط، وهي وفقًا لتقديرنا الخاص، وإذا حاولت التسجيل للحصول على فترة تجريبية مجانية إضافية، فستتم محاسبتك فورًا على رسوم الاشتراك القياسية.\n\nنحن نحتفظ بالحق في إلغاء الفترة التجريبية المجانية في أي وقت.\n\nسيتم مصادرة أي جزء غير مستخدم من الفترة التجريبية المجانية عند شراء اشتراك.\n\nيمثل التسجيل قبولًا لهذه الشروط والأحكام.";
+"welcome.agreement.message"= "بعد انتهاء الـ 7 أيام الخاصة بالفترة التجريبية المجانية، يتم تجديد هذا الاشتراك تلقائيًا مقابل %@ ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة التجريبية. ستتم محاسبة حساب Apple ID الخاص بك على رسوم التجديد في غضون 24 ساعة قبل نهاية الفترة التجريبية. يمكنك إدارة وإلغاء اشتراكاتك عن طريق الانتقال إلى إعدادات حسابك في App Store بعد الشراء. يقتصر عرض الفترة التجريبية لمدة 7 أيام على عرض فترة تجريبية واحد لمدة 7 أيام لكل مستخدم. أي جزء غير مستخدم من الفترة التجريبية المجانية، إذا تم عرضها، سيتم مصادرته عندما يشتري المستخدم اشتراكًا. تشمل جميع الأسعار ضرائب المبيعات المحلية المطبقة.\n\nيعتبر الاشتراك بمثابة قبول $1 و$2.";
+"welcome.agreement.trials.yearly.plan"= "سنة";
+"welcome.agreement.trials.monthly.plan"= "شهر";
+
+"welcome.agreement.message.tos"= "شروط الخدمة";
+"welcome.agreement.message.privacy"= "سياسة الخصوصية";
+
+"welcome.getstarted.buttons.buyaccount"= "شراء حساب";
+
+"welcome.gdpr.collect.data.title"= "المعلومات الشخصية التي نجمعها";
+"welcome.gdpr.collect.data.description"= "عنوان البريد الإلكتروني لأغراض إدارة الحساب والحماية من إساءة الاستخدام.";
+"welcome.gdpr.usage.data.title"= "استخدامات المعلومات الشخصية التي نجمعها";
+"welcome.gdpr.usage.data.description"= "يتم استخدام عنوان البريد الإلكتروني لإرسال معلومات الاشتراك وتأكيد الدفع ومراسلات العملاء والعروض الترويجية الخاصة بـ Private Internet Access فقط.";
+"welcome.gdpr.accept.button.title"= "موافق ومتابعة";
+
+"welcome.update.account.email.error"= "تعذَّر تعديل البريد الإلكتروني للحساب";

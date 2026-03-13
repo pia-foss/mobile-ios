@@ -70,7 +70,7 @@ class QuickSettingsTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(setupButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
 
-        self.tileTitle.text = L10n.Localizable.Tiles.Quicksettings.title.uppercased()
+        self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
 
         setupButtons()
         viewShouldRestyle()
@@ -93,12 +93,12 @@ class QuickSettingsTile: UIView, Tileable  {
     
     @objc private func updateButtons() {
         
-        killSwitchButton.accessibilityLabel = L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
-        nmtButton.accessibilityLabel = L10n.Localizable.Tiles.Quicksetting.Nmt.title
-        browserButton.accessibilityLabel = L10n.Localizable.Tiles.Quicksetting.Private.Browser.title
+        killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
+        nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+        browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
         if Flags.shared.enablesThemeSwitch {
-            themeButton.accessibilityLabel = L10n.Localizable.Settings.ApplicationSettings.ActiveTheme.title
+            themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
             if AppPreferences.shared.currentThemeCode == ThemeCode.light {
                 themeButton.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.themeLightActive.image :
                                         Asset.Images.Piax.Global.themeDarkActive.image, for: [])
@@ -109,20 +109,20 @@ class QuickSettingsTile: UIView, Tileable  {
         }
 
         if Client.preferences.isPersistentConnection {
-            killSwitchButton.accessibilityLabel = L10n.Localizable.Global.disable + " " + L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
+            killSwitchButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Settings.ApplicationSettings.KillSwitch.title
             killSwitchButton.setImage(Asset.Images.Piax.Global.killswitchDarkActive.image, for: [])
         } else {
-            killSwitchButton.accessibilityLabel = L10n.Localizable.Global.enable + " " + L10n.Localizable.Settings.ApplicationSettings.KillSwitch.title
+            killSwitchButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Settings.ApplicationSettings.KillSwitch.title
             killSwitchButton.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.killswitchLightInactive.image :
                                         Asset.Images.Piax.Global.killswitchDarkInactive.image, for: [])
         }
         
         if Client.preferences.nmtRulesEnabled {
-            nmtButton.accessibilityLabel = L10n.Localizable.Global.disable + " " + L10n.Localizable.Tiles.Quicksetting.Nmt.title
+            nmtButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Nmt.title
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.nmtLightActive.image :
                                 Asset.Images.Piax.Global.nmtDarkActive.image, for: [])
         } else {
-            nmtButton.accessibilityLabel = L10n.Localizable.Global.enable + " " + L10n.Localizable.Tiles.Quicksetting.Nmt.title
+            nmtButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Nmt.title
             nmtButton.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.nmtLightInactive.image :
                                 Asset.Images.Piax.Global.nmtDarkInactive.image, for: [])
         }
