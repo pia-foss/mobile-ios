@@ -23,6 +23,7 @@
 import Foundation
 import Intents
 import PIALibrary
+import PIALocalizations
 
 protocol SiriShortcutBuilder {
     
@@ -50,7 +51,7 @@ extension SiriShortcutBuilder {
 class SiriShortcutConnect: SiriShortcutBuilder {
     
     var activityType = AppConstants.SiriShortcuts.shortcutConnect
-    var title = L10n.Localizable.Siri.Shortcuts.Connect.title
+    var title = L10n.Siri.Shortcuts.Connect.title
     var persistentIdentifier = AppConstants.SiriShortcuts.shortcutConnect
 
 }
@@ -58,7 +59,7 @@ class SiriShortcutConnect: SiriShortcutBuilder {
 class SiriShortcutDisconnect: SiriShortcutBuilder {
     
     var activityType = AppConstants.SiriShortcuts.shortcutDisconnect
-    var title = L10n.Localizable.Siri.Shortcuts.Disconnect.title
+    var title = L10n.Siri.Shortcuts.Disconnect.title
     var persistentIdentifier = AppConstants.SiriShortcuts.shortcutDisconnect
 
 }

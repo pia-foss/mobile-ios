@@ -29,6 +29,7 @@ import PIAWireguard
 #endif
 import UIKit
 import Logging
+import PIALocalizations
 
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
@@ -317,7 +318,7 @@ class Bootstrapper {
     
     @objc private func internetUnreachable(notification: Notification) {
         #if os(iOS)
-        Macros.displayStickyNote(withMessage: L10n.Localizable.Global.unreachable,
+        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
                                  andImage: Asset.Images.iconWarning.image)
         #endif
     }

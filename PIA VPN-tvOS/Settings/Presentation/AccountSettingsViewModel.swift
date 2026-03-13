@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class AccountSettingsViewModel: ObservableObject {
     
@@ -70,7 +71,7 @@ class AccountSettingsViewModel: ObservableObject {
 
 extension AccountSettingsViewModel {
     var usernameTitle: String {
-        L10n.Localizable.Account.Username.caption
+        L10n.Account.Username.caption
     }
     
     var usernameValue: String {
@@ -86,9 +87,9 @@ extension AccountSettingsViewModel {
         case .unknown:
             return ""
         case .expired:
-            return L10n.Localizable.Account.ExpiryDate.expired
+            return L10n.Account.ExpiryDate.expired
         case .notExpired:
-            return L10n.Localizable.Settings.Account.SubscriptionExpiry.title
+            return L10n.Settings.Account.SubscriptionExpiry.title
         }
     }
     
@@ -102,23 +103,23 @@ extension AccountSettingsViewModel {
     }
     
     var logOutButtonTitle: String {
-        L10n.Localizable.Settings.Account.LogOutButton.title
+        L10n.Settings.Account.LogOutButton.title
     }
 
     var logOutAlertTitle: String {
-        L10n.Localizable.Settings.Account.LogOutAlert.title
+        L10n.Settings.Account.LogOutAlert.title
     }
     
     var logOutAlertMesage: String {
-        L10n.Localizable.Settings.Account.LogOutAlert.message
+        L10n.Settings.Account.LogOutAlert.message
     }
     
     var logOutAlertCancelActionText: String {
-        L10n.Localizable.Global.cancel
+        L10n.Global.cancel
     }
     
     var logOutAlertConfirmActionText: String {
-        L10n.Localizable.Settings.Account.LogOutButton.title
+        L10n.Settings.Account.LogOutButton.title
     }
     
 }

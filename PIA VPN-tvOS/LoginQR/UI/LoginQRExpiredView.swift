@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRExpiredView: View {
     private let qrImageURL: URL?
@@ -23,13 +24,13 @@ struct LoginQRExpiredView: View {
         HStack {
             VStack(alignment: .leading, spacing: 60) {
                 VStack(alignment: .leading, spacing: 25) {
-                    Text(L10n.Localizable.Tvos.Login.Qr.Expired.title)
+                    Text(L10n.Tvos.Login.Qr.Expired.title)
                         .font(.system(size: 57))
                         .foregroundColor(.piaOnBackground)
                         .bold()
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text(L10n.Localizable.Tvos.Login.Qr.Expired.description)
+                    Text(L10n.Tvos.Login.Qr.Expired.description)
                         .font(.system(size: 31))
                         .foregroundColor(.piaOnSurfaceContainerSecondary)
                 }
@@ -41,7 +42,7 @@ struct LoginQRExpiredView: View {
                     }
                     
                     ActionButton(
-                        title: L10n.Localizable.Tvos.Login.Qr.Expired.Button.generate,
+                        title: L10n.Tvos.Login.Qr.Expired.Button.generate,
                         action: { generateQRCodeAction() }
                     )
                     .frame(height: 66)
@@ -50,7 +51,7 @@ struct LoginQRExpiredView: View {
                 
                 VStack {
                     ActionButton(
-                        title: L10n.Localizable.Tvos.Login.Qr.Button.login,
+                        title: L10n.Tvos.Login.Qr.Button.login,
                         action: { loginAction() }
                     )
                     .frame(width: 480, height: 66)

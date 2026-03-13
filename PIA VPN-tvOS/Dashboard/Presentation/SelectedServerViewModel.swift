@@ -2,6 +2,7 @@
 import Foundation
 import PIALibrary
 import Combine
+import PIALocalizations
 
 
 class SelectedServerViewModel: ObservableObject {
@@ -16,12 +17,12 @@ class SelectedServerViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     var selectedSeverTitle: String  {
-        let genericTitle = L10n.Localizable.LocationSelection.AnyOtherLocation.title
+        let genericTitle = L10n.LocationSelection.AnyOtherLocation.title
         guard let selectedServer else {
             return genericTitle
         }
         if selectedServer.isAutomatic {
-            return L10n.Localizable.LocationSelection.OptimalLocation.title
+            return L10n.LocationSelection.OptimalLocation.title
         } else {
             return genericTitle
         }

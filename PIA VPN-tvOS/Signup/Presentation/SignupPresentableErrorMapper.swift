@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class SignupPresentableErrorMapper {
     func map(error: Error) -> String? {
@@ -14,7 +15,7 @@ class SignupPresentableErrorMapper {
             return mapPurchaseProductsError(error: purchaseProductsError)
         }
         
-        return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic
+        return L10n.Tvos.Signup.Subscription.Error.Message.generic
     }
     
     private func mapPurchaseProductsError(error: PurchaseProductsError) -> String? {
@@ -22,11 +23,11 @@ class SignupPresentableErrorMapper {
             case .uncreditedTransaction:
                 return L10n.Signup.Purchase.Uncredited.Alert.message
             case .paymentCancelled:
-                return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.paymentCancelled
+                return L10n.Tvos.Signup.Subscription.Error.Message.paymentCancelled
             case .other(message: let message):
                 return message
             default:
-                return L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic
+                return L10n.Tvos.Signup.Subscription.Error.Message.generic
         }
     }
 }

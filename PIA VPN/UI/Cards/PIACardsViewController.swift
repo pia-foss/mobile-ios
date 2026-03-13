@@ -9,6 +9,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 class PIACardsViewController: UIViewController {
 
@@ -61,8 +62,8 @@ class PIACardsViewController: UIViewController {
             }
             if card.hasSecondCTA() {
                 slide.cardSecondaryCTAButton.isHidden = false
-                slide.cardSecondaryCTAButton.setTitle(L10n.Localizable.Card.Wireguard.Cta.learn, for: [])
-                slide.cardSecondaryCTAButton.accessibilityIdentifier = L10n.Localizable.Card.Wireguard.Cta.learn
+                slide.cardSecondaryCTAButton.setTitle(L10n.Card.Wireguard.Cta.learn, for: [])
+                slide.cardSecondaryCTAButton.accessibilityIdentifier = L10n.Card.Wireguard.Cta.learn
                 slide.cardSecondaryCTAButton.addAction(for: .touchUpInside) { (button) in
                     if let url = card.learnMoreLink {
                         if UIApplication.shared.canOpenURL(url) {

@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 class AboutViewController: AutolayoutViewController {
     private struct Cells {
@@ -50,7 +51,7 @@ class AboutViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let textApp = L10n.Localizable.About.app
+        let textApp = L10n.About.app
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
         
@@ -69,7 +70,7 @@ class AboutViewController: AutolayoutViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.about)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,7 +95,7 @@ class AboutViewController: AutolayoutViewController {
     // MARK: Helpers
     
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
     private func loadLicensesInBackground() {
@@ -124,7 +125,7 @@ class AboutViewController: AutolayoutViewController {
     
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         Theme.current.applyDividerToSeparator(tableView)
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.about)
+        styleNavigationBarWithTitle(L10n.Menu.Item.about)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)

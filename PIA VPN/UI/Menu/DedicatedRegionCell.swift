@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class DedicatedRegionCell: UITableViewCell, Restylable {
     
@@ -52,7 +53,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
         imvFlag.setImage(fromServer: server)
         labelRegion.text = server.name
         labelIP.text = server.wireGuardAddressesForUDP?.first?.ip ?? ""
-        labelDedicatedIPTitle.text = L10n.Localizable.Dedicated.Ip.title.uppercased()
+        labelDedicatedIPTitle.text = L10n.Dedicated.Ip.title.uppercased()
 
         iconSelected = isSelected
         
@@ -121,7 +122,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
         self.favoriteImageView.image = Asset.Images.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
         favoriteButton.accessibilityLabel = self.isFavorite ?
-            L10n.Localizable.Region.Accessibility.favorite :
-            L10n.Localizable.Region.Accessibility.unfavorite
+            L10n.Region.Accessibility.favorite :
+            L10n.Region.Accessibility.unfavorite
     }
 }

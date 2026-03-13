@@ -23,6 +23,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: ShowConnectionStatsViewController.self)
 
@@ -67,7 +68,7 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Service.Quality.Show.title)
+        styleNavigationBarWithTitle(L10n.Settings.Service.Quality.Show.title)
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,7 +84,7 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
     // MARK: Helpers
     
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Service.Quality.Show.title)
+        styleNavigationBarWithTitle(L10n.Settings.Service.Quality.Show.title)
     }
     
     // MARK: Restylable
@@ -91,7 +92,7 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Service.Quality.Show.title)
+        styleNavigationBarWithTitle(L10n.Settings.Service.Quality.Show.title)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)

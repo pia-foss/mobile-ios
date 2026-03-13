@@ -27,6 +27,7 @@ import TunnelKitOpenVPN
 import SafariServices
 import PIAWireguard
 import WidgetKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: SettingsViewController.self)
 
@@ -93,7 +94,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -208,7 +209,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     // MARK: Actions
     
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
 
     @objc func refreshSettings() {
@@ -233,13 +234,13 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         
     func resetToDefaultSettings() {
         let alert = Macros.alert(
-            L10n.Localizable.Settings.Reset.Defaults.Confirm.title,
-            L10n.Localizable.Settings.Reset.Defaults.Confirm.message
+            L10n.Settings.Reset.Defaults.Confirm.title,
+            L10n.Settings.Reset.Defaults.Confirm.message
         )
-        alert.addDestructiveActionWithTitle(L10n.Localizable.Settings.Reset.Defaults.Confirm.button) {
+        alert.addDestructiveActionWithTitle(L10n.Settings.Reset.Defaults.Confirm.button) {
             self.doReset()
         }
-        alert.addCancelAction(L10n.Localizable.Global.cancel)
+        alert.addCancelAction(L10n.Global.cancel)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -337,17 +338,17 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         guard action.canRetainConnection else {
             let alert = Macros.alert(
                 title,
-                L10n.Localizable.Settings.Commit.Messages.mustDisconnect
+                L10n.Settings.Commit.Messages.mustDisconnect
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 self.commitPreferences()
                 completionHandlerAfterVPNAction(true)
             }
 
             // cancel -> revert changes and close
-            alert.addCancelActionWithTitle(L10n.Localizable.Global.cancel) {
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
                 completionHandler()
             }
             present(alert, animated: true, completion: nil)
@@ -360,16 +361,16 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
             let alert = Macros.alert(
                 title,
-                L10n.Localizable.Settings.Commit.Messages.shouldReconnect
+                L10n.Settings.Commit.Messages.shouldReconnect
             )
 
             // reconnect -> reconnect VPN and close
-            alert.addActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.reconnect) {
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
                 completionHandlerAfterVPNAction(true)
             }
 
             // later -> close
-            alert.addCancelActionWithTitle(L10n.Localizable.Settings.Commit.Buttons.later) {
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
                 completionHandler()
             }
 
@@ -499,7 +500,7 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.settings)
+        styleNavigationBarWithTitle(L10n.Menu.Item.settings)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -591,7 +592,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         switch section {
             case .automation:
-                cell.detailTextLabel?.text = Client.preferences.nmtRulesEnabled ? L10n.Localizable.Global.enabled : L10n.Localizable.Global.disabled
+                cell.detailTextLabel?.text = Client.preferences.nmtRulesEnabled ? L10n.Global.enabled : L10n.Global.disabled
             case .protocols:
                 cell.detailTextLabel?.text = pendingPreferences?.vpnType.vpnProtocol
             default: break

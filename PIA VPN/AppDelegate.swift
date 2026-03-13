@@ -24,6 +24,7 @@ import Combine
 import UIKit
 import PIALibrary
 import NetworkExtension
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AppDelegate.self)
 
@@ -119,15 +120,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         AppPreferences.shared.didAskToEnableNotifications = true
 
         let alert = Macros.alert(
-            L10n.Localizable.Notifications.Disabled.title,
-            L10n.Localizable.Notifications.Disabled.message
+            L10n.Notifications.Disabled.title,
+            L10n.Notifications.Disabled.message
         )
-        alert.addActionWithTitle(L10n.Localizable.Notifications.Disabled.settings) {
+        alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
             application.open(URL(string: UIApplication.openSettingsURLString)!,
                              options: [:],
                              completionHandler: nil)
         }
-        alert.addCancelAction(L10n.Localizable.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
@@ -257,7 +258,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         var itemAsset: ImageAsset!
         
         let connectionStatusType = (isNotDisconnected ? ShortcutItem.disconnect : ShortcutItem.connect)
-        let connectionStatusString = (isNotDisconnected ? L10n.Localizable.Shortcuts.disconnect : L10n.Localizable.Shortcuts.connect)
+        let connectionStatusString = (isNotDisconnected ? L10n.Shortcuts.disconnect : L10n.Shortcuts.connect)
         
         var items: [UIApplicationShortcutItem] = []
         
@@ -276,7 +277,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let selectRegionIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
         let selectRegion = UIApplicationShortcutItem(
             type: ShortcutItem.selectRegion.rawValue,
-            localizedTitle: L10n.Localizable.Shortcuts.selectRegion,
+            localizedTitle: L10n.Shortcuts.selectRegion,
             localizedSubtitle: nil,
             icon: selectRegionIcon,
             userInfo: nil
@@ -376,7 +377,7 @@ extension AppDelegate {
     
     private func dismissLeakProtectionAlert() {
         if let presentedAlert = window?.rootViewController?.presentedViewController as? UIAlertController {
-            let leakProtectionAlertTitle = L10n.Localizable.Dashboard.Vpn.Leakprotection.Alert.title
+            let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
             
             if presentedAlert.title == leakProtectionAlertTitle {
                 presentedAlert.dismiss(animated: true)

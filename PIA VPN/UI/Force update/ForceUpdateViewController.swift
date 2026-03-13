@@ -10,6 +10,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 class ForceUpdateViewController: UIViewController {
     @IBOutlet weak var updateButton: PIAButton!
@@ -21,13 +22,13 @@ class ForceUpdateViewController: UIViewController {
         super.viewDidLoad()
         
         styleUpdateButton()
-        titleLabel.text = L10n.Localizable.Forceupdate.Label.title
-        descriptionLabel.text = L10n.Localizable.Forceupdate.Label.subtitle
+        titleLabel.text = L10n.Forceupdate.Label.title
+        descriptionLabel.text = L10n.Forceupdate.Label.subtitle
         
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
-        updateButton.setTitle(L10n.Localizable.Forceupdate.Button.update, for: .normal)
+        updateButton.setTitle(L10n.Forceupdate.Button.update, for: .normal)
         
-        disconnectVPNLabel.text = L10n.Localizable.Forceupdate.Label.Vpn.connected
+        disconnectVPNLabel.text = L10n.Forceupdate.Label.Vpn.connected
         disconnectVPNLabel.isHidden = !Client.providers.vpnProvider.isVPNConnected
     }
     
