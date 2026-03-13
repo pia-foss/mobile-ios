@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class ContentBlockerViewController: AutolayoutViewController {
     @IBOutlet private weak var imvPicture: UIImageView!

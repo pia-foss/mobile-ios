@@ -29,6 +29,7 @@ import PIAWireguard
 #endif
 import UIKit
 import Logging
+import PIALocalizations
 
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRExpiredView: View {
     private let qrImageURL: URL?

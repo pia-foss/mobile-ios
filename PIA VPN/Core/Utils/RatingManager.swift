@@ -25,6 +25,7 @@ import UIKit
 import PIALibrary
 import PopupDialog
 import StoreKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: RatingManager.self)
 

@@ -7,6 +7,7 @@
 //
 
 import PIALibrary
+import PIALocalizations
 
 extension DashboardViewController: ServerSelectionDelegate {
     

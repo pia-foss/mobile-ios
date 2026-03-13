@@ -23,6 +23,7 @@
 import Foundation
 import PIALibrary
 import UIKit
+import PIALocalizations
 
 extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String? {

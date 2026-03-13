@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRContainerView: View {
     @StateObject var viewModel: LoginQRViewModel

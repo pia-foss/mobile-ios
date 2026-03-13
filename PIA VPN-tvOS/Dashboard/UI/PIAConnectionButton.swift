@@ -1,6 +1,7 @@
 
 
 import SwiftUI
+import PIALocalizations
 
 
 struct PIAConnectionButton: View {

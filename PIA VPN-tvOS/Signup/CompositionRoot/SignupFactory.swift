@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 class SignUpFactory {
     static func makeSignupQRView() -> SignupQRView {

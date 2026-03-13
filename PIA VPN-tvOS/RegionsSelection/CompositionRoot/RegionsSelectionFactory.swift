@@ -9,6 +9,7 @@
 import Foundation
 import PIALibrary
 import SwiftUI
+import PIALocalizations
 
 class RegionsSelectionFactory {
     

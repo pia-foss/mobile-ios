@@ -23,6 +23,7 @@
 import SwiftUI
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 struct FeedbackTileView: View {
     @Environment(\.colorScheme) var colorScheme

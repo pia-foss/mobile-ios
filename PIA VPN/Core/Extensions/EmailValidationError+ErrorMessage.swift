@@ -21,6 +21,7 @@
 //
 
 import PIALibrary
+import PIALocalizations
 
 extension Validator.EmailValidationError {
     var errorMessage: String {

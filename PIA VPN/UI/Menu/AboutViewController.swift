@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 class AboutViewController: AutolayoutViewController {
     private struct Cells {

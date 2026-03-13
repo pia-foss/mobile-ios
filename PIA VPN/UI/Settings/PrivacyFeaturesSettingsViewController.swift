@@ -22,6 +22,7 @@ import UIKit
 import PIALibrary
 import SafariServices
 import PIADesignSystem
+import PIALocalizations
 
 private let log = PIALogger.logger(for: PrivacyFeaturesSettingsViewController.self)
 

@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 private let log = PIALogger.logger(for: MenuViewController.self)
 

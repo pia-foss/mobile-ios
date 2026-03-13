@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct VPNConfigurationInstallingView: View {
     @ObservedObject private var viewModel: VPNConfigurationInstallingViewModel

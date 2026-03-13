@@ -24,6 +24,7 @@ import Foundation
 import IntentsUI
 import Intents
 import PIALibrary
+import PIALocalizations
 
 public class SiriShortcutsManager: NSObject {
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALocalizations
 
 enum SettingsDestinations: Destinations {
     case availableSettings

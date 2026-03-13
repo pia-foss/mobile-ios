@@ -1,0 +1,621 @@
+// GLOBAL
+
+"global.ok" = "OK";
+"global.cancel" = "Отмена";
+"global.close" = "Закрыть";
+"global.error" = "Ошибка";
+"global.automatic" = "Автоматически";
+"global.required" = "Обязательно";
+"global.optional" = "Необязательно";
+"global.clear" = "Очистить";
+"global.update" = "Обновить";
+"global.edit" = "Редактировать";
+"global.unreachable" = "Подключение к Интернету не обнаружено. Убедитесь, что вы подключены к Интернету.";
+"global.enabled" = "Включено";
+"global.disabled" = "Отключено";
+"global.enable" = "Активировать";
+"global.disable" = "Отключить";
+"global.add" = "Добавить";
+"global.remove" = "Удалить";
+"global.empty" = "Пусто";
+"global.copy" = "Копировать";
+"global.share" = "Поделиться";
+"global.copied" = "Скопировано в буфер";
+"global.yes" = "Да";
+"global.no" = "Нет";
+"global.or" = "или";
+"global.row.selection" = "Выбор строки";
+"global.vpn.settings" = "Настройки VPN";
+"global.general.settings" = "Общие настройки";
+"global.version" = "Версия";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "Уведомления отключены";
+"notifications.disabled.message" = "Включить уведомления с напоминаниями о необходимости возобновить подписку до истечения срока ее действия.";
+"notifications.disabled.settings" = "Настройки";
+
+"expiration.title" = "Продление";
+"expiration.message" = "Срок действия подписки истекает в ближайшее время. Продлите подписку, чтобы не потерять защиту.";
+
+"local_notification.non_compliant_wifi.title" = "Незащищенная сеть Wi-Fi: %@";
+"local_notification.non_compliant_wifi.text" = "Нажмите здесь, чтобы защитить ваше устройство";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "Подключиться";
+"shortcuts.disconnect" = "Отключиться";
+"shortcuts.select_region" = "Выберите регион";
+
+// RENEWAL
+
+"renewal.success.title" = "Благодарим вас";
+"renewal.success.message" = "Действие вашей учетной записи успешно продлено";
+"renewal.failure.message" = "Не удалось отправить квитанцию на покупку, повторите попытку позже.";
+
+// MENU
+"menu.accessibility.edit.tile" = "Редактировать";
+"menu.accessibility.item" = "Меню";
+"menu.accessibility.logged_as" = "Выполнен вход под именем %@";
+"menu.expiration.expires_in" = "Срок действия подписки истекает через";
+"menu.expiration.days" = "%d дней";
+"menu.expiration.hours" = "%d часов";
+"menu.expiration.one_hour" = "один час";
+"menu.expiration.upgrade" = "ПОВЫСИТЬ УРОВЕНЬ";
+"menu.item.region" = "Выбор региона";
+"menu.item.about" = "О программе";
+"menu.item.account" = "Учетная запись";
+"menu.item.settings" = "Настройки";
+"menu.item.logout" = "Выход";
+"menu.item.web.privacy" = "Политика конфиденциальности";
+"menu.item.web.home" = "Главная страница";
+"menu.item.web.support" = "Поддержка";
+
+"menu.logout.title" = "Выход";
+"menu.logout.message" = "После выхода VPN будет отключен и система не будет защищена.";
+"menu.logout.confirm" = "Выход";
+
+"menu.renewal.title" = "Продление";
+"menu.renewal.purchase" = "Купить";
+"menu.renewal.renew" = "Обновить";
+"menu.renewal.message.trial" = "Пробные учетные записи не дают права на продление подписки. Для продолжения пользования услугой после окончания пробного периода приобретите новую учетную запись.";
+"menu.renewal.message.website" = "Для продления подписки перейдите на наш веб-сайт.";
+"menu.renewal.message.unavailable" = "Серверы Apple временно недоступны. Повторите попытку позже.";
+
+// ACCOUNT
+
+"account.email.caption" = "Эл. адрес";
+"account.email.placeholder" = "Адрес эл. почты";
+"account.username.caption" = "Имя пользователя";
+"account.other.footer" = "Установите приложение Private Internet Access на других устройствах и используйте указанные выше имя пользователя и пароль для входа в учетную запись и защиты соединения.";
+"account.restore.title" = "Восстановить непроведенную покупку";
+"account.restore.description" = "Если вы продлили план, но по-прежнему видите в учетной записи сообщение о том, что срок действия истекает, вы можете перезапустить здесь процедуру продления. За эту процедуру не взимается плата.";
+"account.restore.button" = "Восстановить покупку";
+"account.restore.failure.title" = "Восстановить покупку";
+"account.restore.failure.message" = "Не удалось найти применимой покупки для продления.";
+"account.save.item" = "Изменить эл. адрес";
+"account.save.prompt" = "Чтобы сохранить изменения, выполните аутентификацию";
+"account.save.success" = "Адрес электронной почты сохранен.";
+"account.reveal.prompt" = "Выполните аутентификацию для показа";
+"account.expiry_date.information" = "Ваш план истечет %@.";
+"account.expiry_date.expired" = "Срок действия плана истек.";
+"account.update.email.require.password.title" = "Требуется пароль PIA";
+"account.update.email.require.password.message" = "В целях безопасности для внесения изменений в учетную запись требуется ввести пароль PIA. Введите свой пароль PIA, чтобы продолжить.";
+"account.update.email.require.password.button" = "Отправить";
+"account.error.unauthorized" = "Неправильное имя пользователя или пароль.";
+"account.subscriptions.message" = "Управлять подписками можно здесь.";
+"account.subscriptions.linkMessage" = "здесь.";
+"account.set.email.error" = "При добавлении адреса эл. почты произошла ошибка. Повторите попытку позже.";
+"account.subscriptions.short.message" = "Управление подпиской";
+"account.subscriptions.short.linkMessage" = "Управление подпиской";
+"account.subscriptions.yearly" = "Годовой план";
+"account.subscriptions.monthly" = "Месячный план";
+"account.subscriptions.trial" = "Пробный план";
+"account.unauthorized" = "Что-то пошло не так. Попробуйте выполнить вход еще раз";
+"account.delete" = "﻿Удалить аккаунт";
+"account.survey.message" = "Хотите помочь сделать PIA лучше? Подскажите нам, что можно изменить!\nПройти опрос";
+"account.survey.messageLink" = "Пройти опрос";
+
+// SETTINGS
+
+"settings.connection.title" = "СОЕДИНЕНИЕ";
+"settings.connection.vpn_protocol.title" = "Выбор протокола";
+"settings.connection.transport.title" = "Перенос";
+"settings.connection.socket_protocol.title" = "Сокет";
+"settings.connection.remote_port.title" = "Удаленный порт";
+
+"settings.encryption.title" = "ШИФРОВАНИЕ";
+"settings.encryption.cipher.title" = "Шифрование данных";
+"settings.encryption.digest.title" = "Аутентификация данных";
+"settings.encryption.handshake.title" = "Квитирование";
+
+"settings.application_settings.title" = "НАСТРОЙКИ ПРИЛОЖЕНИЯ";
+"settings.application_settings.dark_theme.title" = "Темная тема";
+"settings.application_settings.active_theme.title" = "Активная тема";
+"settings.application_settings.kill_switch.title" = "Авторазрыв соединения";
+"settings.application_settings.kill_switch.footer" = "Функция авторазрыва соединения рвет Интернет-соединение при отключении VPN. Она не срабатывает при ручном отключении VPN.";
+"settings.application_settings.reconnect_notifications.title" = "Уведомления о переподключении";
+"settings.application_settings.reconnect_notifications.footer" = "Получайте уведомления, когда VPN переподключается к другому местоположению. Отключите, чтобы больше не получать эти уведомления.";
+"settings.application_settings.leak_protection.title" = "Защита от утечек";
+"settings.application_settings.leak_protection.footer" = "iOS включает функции, по умолчанию предназначенные для работы вне VPN, такие как AirDrop, CarPlay, AirPlay и Персональная точка доступа. Включение защиты от утечек перенаправляет этот трафик через VPN, но может отразиться на работе этих функций. Подробнее";
+"settings.application_settings.leak_protection.more_info" = "Подробнее";
+"settings.application_settings.allow_local_network.title" = "Разрешить доступ к устройствам в локальной сети";
+"settings.application_settings.allow_local_network.footer" = "Оставайтесь подключенными к устройствам в локальной сети, таким как принтеры или файловые серверы, пользуясь при этом VPN-подключением (включайте эту опцию только если доверяете людям и устройствам в вашей сети.)";
+"settings.application_settings.mace.title" = "PIA MACE™";
+"settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
+"settings.application_settings.leak_protection.alert.title" = "Изменения в настройках VPN будут применены при следующем подключении";
+
+"settings.content_blocker.title" = "Состояние блокировщика контента для Safari";
+"settings.content_blocker.state.title" = "Текущее состояние";
+"settings.content_blocker.refresh.title" = "Обновление списка блокирования";
+"settings.content_blocker.footer" = "Чтобы включить или выключить правило блокирования контента, перейдите в \"Настройки\" > \"Приложения\" > Safari > \"Расширения\" и нажмите на PIA VPN.";
+
+"settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
+"settings.application_information.debug.title" = "Отправить журнал отладки в службу поддержки";
+"settings.application_information.debug_logging.title" = "Включить отладочное логирование";
+"settings.application_information.debug.failure.title" = "Ошибка при отправке";
+"settings.application_information.debug.failure.message" = "Не удалось отправить отладочную информацию.";
+"settings.application_information.debug.empty.title" = "Пустая отладочная информация";
+"settings.application_information.debug.empty.message" = "Отладочная информация пуста, перед тем как повторно отправлять информацию, повторите попытку подключения.";
+"settings.application_information.debug.success.title" = "Отладочная информация отправлена";
+"settings.application_information.debug.success.message" = "Отладочная информация успешно отправлена.\nКод: %@\nЗапишите этот код, т. к. наша служба поддержки запрашивает его для поиска переданных вами данных.";
+
+"settings.commit.messages.must_disconnect" = "Чтобы некоторые изменения вступили в силу, надо переподключиться к VPN.";
+"settings.commit.messages.should_reconnect" = "Чтобы изменения вступили в силу, переподключитесь к VPN.";
+"settings.commit.buttons.reconnect" = "Переподключиться";
+"settings.commit.buttons.later" = "Позже";
+
+"settings.reset.title" = "СБРОСИТЬ";
+"settings.reset.defaults.title" = "Сбросить до настроек по умолчанию";
+"settings.reset.defaults.confirm.title" = "Сбросить настройки";
+"settings.reset.defaults.confirm.message" = "Это сбросит приложение к исходному состоянию. Вы потеряете все сделанные изменения.";
+"settings.reset.defaults.confirm.button" = "Сбросить";
+"settings.reset.footer" = "Это сбросит все настройки к исходному состоянию.";
+
+"settings.small.packets.title" = "Использовать маленькие пакеты";
+"settings.small.packets.description" = "Размер IP-пакета будет слегка уменьшен, чтобы улучшить совместимость с некоторыми роутерами и мобильными сетями.";
+
+"settings.log.connected.error" = "Требуется подключение к VPN. Подключитесь к VPN и повторите попытку.";
+"settings.log.information" = "Сохранение файлов журнала отладки, которые можно отправить в службу технической поддержки для более быстрого устранения неполадок.";
+
+"settings.preview.title" = "Просмотр";
+"settings.server.network.description" = "Сеть следующего поколения";
+"settings.server.network.alert" = "Для смены сети сервера VPN необходимо отключить.";
+
+"settings.geo.servers.description" = "Показывать регионы, определенные по местоположению";
+"settings.cards.history.title" = "Последние новости";
+
+"settings.ovpn.migration.footer" = "Мы обновляем реализацию функции OpenVPN. Нажмите здесь для получения подробных сведений";
+"settings.ovpn.migration.footer.link" = "здесь";
+
+"settings.section.general" = "Общие";
+"settings.section.protocols" = "Протоколы";
+"settings.section.network" = "Сеть";
+"settings.section.privacyFeatures" = "Функции защиты";
+"settings.section.automation" = "Автоматизация";
+"settings.section.help" = "Справка";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Блокировщик контента для Safari";
+"content_blocker.body.subtitle" = "Чтобы включить наше правило блокирования контента в Safari, перейдите в \"Настройки\" > \"Приложения\" > Safari > \"Расширения\" и включите PIA VPN.";
+"content_blocker.body.footer" = "Примечание. Для работы этого правила блокирования контента подключаться к VPN необязательно, но оно будет работать только при просмотре сайтов в Safari.";
+
+// ABOUT
+
+"about.app" = "VPN от Private Internet Access";
+"about.intro" = "Эта программа использует следующие компоненты:";
+"about.accessibility.component.expand" = "Нажмите, чтобы прочитать полный текст лицензии";
+
+// DASHBOARD
+
+"dashboard.content_blocker.intro.message" = "Эта версия заменяет MACE нашим правилом блокирования контента для Safari.\n\nПосмотрите в разделе «Настройки».";
+
+"dashboard.connection.ip.unreachable" = "Интернет недоступен";
+
+"dashboard.vpn.disconnected" = "Отключено";
+"dashboard.vpn.connecting" = "Подключение...";
+"dashboard.vpn.connected" = "Подключено к VPN";
+"dashboard.vpn.protected" = "Защищено";
+"dashboard.vpn.not_protected" = "Не защищено";
+"dashboard.vpn.on" = "VPN: ВКЛ.";
+"dashboard.vpn.disconnecting" = "Отключение...";
+"dashboard.vpn.changing_region" = "Изменение региона...";
+"dashboard.vpn.disconnect.untrusted" = "Эта сеть не является надежной. Действительно отключить VPN?";
+"dashboard.accessibility.vpn.button" = "Кнопка VPN-подключения";
+"dashboard.accessibility.vpn.button.isOn" = "Кнопка VPN-подключения. VPN сейчас подключен";
+"dashboard.accessibility.vpn.button.isOff" = "Кнопка VPN-подключения. VPN сейчас отключен";
+
+"dashboard.vpn.leakprotection.alert.title" = "Обнаружена незащищенная сеть Wi-Fi";
+"dashboard.vpn.leakprotection.alert.message" = "Во избежание утечек данных, нажмите «Отключить сейчас», чтобы выключить опцию «Разрешить доступ к устройствам в локальной сети» и автоматически переподключиться.";
+"dashboard.vpn.leakprotection.alert.cta1" = "Отключить сейчас";
+"dashboard.vpn.leakprotection.alert.cta2" = "Узнать больше";
+"dashboard.vpn.leakprotection.alert.cta3" = "Игнорировать";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "Для предотвращения утечек данных, нажмите «Переключить сейчас», чтобы перейти на протокол IKEv2 VPN и автоматически переподключиться.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Переключить сейчас";
+
+"dashboard.vpn.change_location.alert.title" = "Изменение местоположения?";
+"dashboard.vpn.change_location.alert.message" = "Ваш VPN на короткое время отключится при подключении к новому местоположению.";
+"dashboard.vpn.change_location.alert.button.connect" = "Подключиться";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIA требуется доступ к вашей конфигурации VPN для защиты вашего трафика.";
+"vpn_permission.body.subtitle" = "Вы увидите подсказку PIA VPN, нужно будет разрешить доступ к настройкам VPN.\nЧтобы продолжить, нажмите «%@».";
+"vpn_permission.body.footer" = "Мы не отслеживаем, не фильтруем и не регистрируем действия в сети.";
+"vpn_permission.disallow.message.basic" = "Это разрешение требуется приложению для работы.";
+"vpn_permission.disallow.message.support" = "Если вам нужна помощь, вы также можете связаться со службой поддержки пользователей.";
+"vpn_permission.disallow.contact" = "Контакты";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "Пользовательский";
+"settings.dns.alert.create.message" = "Если использовать DNS-сервер, не рекомендуемый PIA, ваш DNS-трафик может просматриваться сторонними лицами, что является угрозой для конфиденциальности.";
+"settings.dns.alert.clear.title" = "Очистить DNS";
+"settings.dns.alert.clear.message" = "Пользовательский DNS-сервер будет удален, и будет установлен DNS-сервер PIA по умолчанию.";
+"settings.dns.custom.dns" = "Пользовательский DNS";
+"settings.dns.primaryDNS" = "Основной DNS";
+"settings.dns.secondaryDNS" = "Дополнительный DNS";
+"settings.dns.validation.primary.mandatory" = "Необходимо указать основной DNS.";
+"settings.dns.validation.primary.invalid" = "Недействительный основной DNS.";
+"settings.dns.validation.secondary.invalid" = "Недействительный дополнительный DNS.";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.title" = "Средство управления сетями";
+"settings.hotspothelper.description" = "Настройте поведение PIA при подключении к WiFi или мобильным сетям. Это исключает возможность отключения вручную.";
+"settings.hotspothelper.enable.description" = "Если этот параметр активирован, PIA автоматически включает VPN при подключении к ненадежным сетям WiFi.";
+"settings.hotspothelper.all.title" = "Защитить все сети";
+"settings.hotspothelper.all.description" = "Защита WiFi с помощью VPN будет действовать во всех сетях, в том числе доверенных.";
+"settings.hotspothelper.available.help" = "Чтобы выстроить этот список, откройте настройки iOS > WiFi.";
+"settings.hotspothelper.available.add.help" = "Нажмите на «+» для добавления в число доверенных сетей.";
+"settings.trusted.networks.sections.current" = "Текущая сеть";
+"settings.trusted.networks.sections.available" = "Доступные сети";
+"settings.trusted.networks.sections.trusted" = "Доверенные сети";
+"settings.trusted.networks.message" = "PIA не будет автоматически подключаться к этим сетям.";
+"settings.trusted.networks.connect.message" = "Защитить эту сеть, подключившись к VPN?";
+"hotspothelper.display.name" = "🔒 Активируйте защиту WiFi с помощью VPN в настройках PIA, чтобы защитить это подключение.";
+"hotspothelper.display.protected.name" = "🔒 Защита WiFi с помощью PIA VPN включена – мы на страже.";
+"settings.hotspothelper.cellular.title" = "Защита через мобильные сети";
+"settings.hotspothelper.wifi.trust.title" = "Защита WiFi с помощью VPN";
+"settings.hotspothelper.cellular.description" = "PIA автоматически включает VPN при подключении к мобильным сетям, если этот параметр включен.";
+"settings.hotspothelper.cellular.networks" = "Мобильные сети";
+"settings.hotspothelper.wifi.networks" = "Сети WiFi";
+"settings.trusted.networks.sections.untrusted" = "Ненадежные сети";
+"settings.hotspothelper.rules.title" = "Правила";
+"settings.trusted.networks.sections.trusted.rule.description" = "Активируйте эту функцию, предварительно включив функцию авторазрыва соединения, чтобы настроить поведение PIA в сетях WiFi и мобильных сетях. Помните, что при отключении вручную инструмент управления сетью не будет работать.";
+"settings.trusted.networks.sections.trusted.rule.action" = "Отключиться от PIA VPN";
+"tiles.quicksetting.nmt.title" = "Управление сетью";
+"tiles.quicksetting.private.browser.title" = "Приватный браузер";
+"settings.nmt.killswitch.disabled" = "Функция авторазрыва соединения в настоящее время отключена. Чтобы обеспечить работу инструмента управления сетью и получить возможность повторного подключения при смене сети, активируйте авторазрыв соединения в настройках.";
+"settings.nmt.optout.disconnect.alerts" = "Деактивировать оповещение с подтверждением отключения";
+"settings.nmt.optout.disconnect.alerts.description" = "Выключение оповещения при отключении от VPN.";
+"settings.nmt.wireguard.warning" = "При переключении между различными сетями необходимости в переподключении WireGuard® нет. Может понадобиться вручную отключить VPN в доверенных сетях.";
+"settings.service.quality.share.title" = "Помощь в улучшении PIA";
+"settings.service.quality.share.description" = "Помогите нам стать лучше, передавая статистику по VPN-соединению. Эти отчеты не содержат каких-либо персональных данных.";
+"settings.service.quality.share.findoutmore" = "Подробнее";
+"settings.service.quality.show.title" = "Статистика по соединению";
+
+"network.management.tool.open.wifi" = "Открытая сеть WiFi";
+"network.management.tool.secure.wifi" = "Защищенная сеть WiFi";
+"network.management.tool.mobile.data" = "Мобильная сеть";
+"network.management.tool.always.connect" = "Всегда подключать VPN";
+"network.management.tool.always.disconnect" = "Всегда отключать VPN";
+"network.management.tool.retain.state" = "Сохранять статус VPN";
+"network.management.tool.add.rule" = "Добавить новое правило";
+"network.management.tool.choose.wifi" = "Выберите Wi-Fi сеть, чтобы добавить новое правило. ";
+"network.management.tool.title" = "Настроить автоматизацию";
+"network.management.tool.alert" = "Ваши параметры автоматизации настроены на неподключение к VPN для данных условий сети.";
+"network.management.tool.disable" = "Отключить автоматизацию";
+"network.management.tool.enable.automation" = "Активировать автоматизацию";
+
+// REGION
+
+"region.search.placeholder" = "Поиск региона";
+"region.accessibility.filter" = "Фильтр";
+"region.filter.sortby" = "Упорядочить регионы по";
+"region.filter.name" = "Имя";
+"region.filter.latency" = "Задержка";
+"region.filter.favorites" = "Избранное";
+"region.accessibility.favorite" = "Добавить избранный регион";
+"region.accessibility.unfavorite" = "Удалить избранный регион";
+"region.refresh.connected.error" = "Невозможно обновить задержку при подключении к VPN";
+
+// TILES
+"tiles.quick.connect.title" = "Быстрое подключение";
+"tiles.favorite.servers.title" = "Избранные серверы";
+"tiles.region.title" = "VPN-сервер";
+"tiles.subscription.title" = "Подписка";
+"tiles.subscription.trial" = "Пробная версия";
+"tiles.subscription.monthly" = "Ежемесячно";
+"tiles.subscription.yearly" = "Ежегодно";
+"tiles.subscription.days.left" = "(осталось %d дн.)";
+"tiles.usage.title" = "Использование";
+"tiles.usage.ipsec.title" = "ИСПОЛЬЗОВАНИЕ (недоступно на IKEv2)";
+"tiles.usage.upload" = "Отправить";
+"tiles.usage.download" = "Загрузить";
+"tiles.nmt.cellular" = "Мобильная";
+"tiles.nmt.accessibility.trusted" = "Доверенная сеть";
+"tiles.nmt.accessibility.untrusted" = "Ненадежная сеть";
+"tiles.quicksettings.title" = "Быстрые настройки";
+"tiles.quicksettings.min.elements.message" = "Следует оставить как минимум один элемент на плитке «Быстрые настройки» видимым";
+"tiles.accessibility.visible.tile.action" = "Нажмите, чтобы удалить эту плитку с панели";
+"tiles.accessibility.invisible.tile.action" = "Нажмите, чтобы добавить эту плитку на панель";
+"tiles.feedback.title" = "Как мы справляемся?";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "Ярлык Siri «Подключить»";
+"siri.shortcuts.disconnect.row.title" = "Ярлык Siri «Отключить»";
+"siri.shortcuts.connect.title" = "Подключиться к PIA VPN";
+"siri.shortcuts.disconnect.title" = "Отключить PIA VPN";
+"siri.shortcuts.add.error" = "При добавлении ярлыка Siri произошла ошибка. Повторите попытку.";
+
+//TODAY WIDGET
+"today.widget.login" = "Вход";
+
+//FRIEND REFERRALS
+"friend.referrals.email.validation" = "Неверный адрес эл. почты. Попробуйте еще раз.";
+"friend.referrals.title" = "Направить друга";
+"friend.referrals.view.invites.sent" = "Смотреть отправленные приглашения";
+"friend.referrals.pending.invites" = "%d ожидающих приглашений(я)";
+"friend.referrals.signups.number" = "%d регистраций(и)";
+"friend.referrals.fullName" = "Имя и фамилия";
+"friend.referrals.invitation.terms" = "Отправляя это приглашение, я принимаю положения и условия «Реферальной программы для близких и друзей»";
+"friend.referrals.family.friends.program" = "Реферальная программа для близких и друзей";
+"friend.referrals.send.invite" = "Отправить приглашение";
+"friend.referrals.invite.error" = "Не удалось повторить приглашение. Попробуйте еще раз позже.";
+"friend.referrals.invite.success" = "Приглашение успешно отправлено";
+"friend.referrals.share.link" = "Поделитесь уникальной реферальной ссылкой";
+"friend.referrals.share.link.terms" = "Делясь этой ссылкой, вы принимаете все положения и условия «Реферальной программы для близких и друзей».";
+"friend.referrals.invites.sent.title" = "Приглашения отправлены";
+"friend.referrals.pending.invites.title" = "Ожидающие приглашения";
+"friend.referrals.invites.number" = "Вы отправили %d приглашений(я)";
+"friend.referrals.privacy.note" = "Обратите внимание, что из соображений конфиденциальности все приглашения старше 30 дней будут удаляться.";
+"friend.referrals.signedup" = "Регистрация";
+"friend.referrals.reward.given" = "Награда выдана";
+"friend.referrals.days.acquired" = "Получено бесплатных дней";
+"friend.referrals.days.number" = "%d дн.";
+
+"friend.referrals.friends.family.title" = "Направляйте своих друзей и близких. За каждую регистрацию мы дарим вам 30 дней бесплатного пользования. ";
+"friend.referrals.description.short" = "НАПРАВЬТЕ ДРУГА. ПОЛУЧИТЕ 30 ДНЕЙ БЕСПЛАТНО.";
+
+// GDPR
+"gdpr.collect.data.title" = "Личная информация, которую мы собираем";
+"gdpr.collect.data.description" = "Адрес эл. почты для управления учетной записи и защиты от злоупотреблений.\n\nАдрес эл. почты используется исключительно для отправки информации о подписке, подтверждений оплаты, переписки с пользователем и отправки акционных предложений Private Internet Access.";
+"gdpr.accept.button.title" = "Принять и продолжить";
+
+// SET EMAIL
+"set.email.form.email" = "Введите свой адрес эл. почты";
+"set.email.why" = "Нам нужен ваш электронный адрес, чтобы мы могли прислать вам имя пользователя и пароль.";
+"set.email.success.message_format" = "Мы отправили имя пользователя и пароль на адрес электронной почты %@";
+"set.email.password.caption" = "Пароль";
+"set.email.error.validation" = "Укажите адрес эл. почты.";
+
+// EMAIL VALIDATOR
+"email.validation.invalid" = "Неверный адрес эл. почты. Попробуйте еще раз.";
+"email.validation.empty" = "Адрес эл. почты не может быть пустым.";
+
+// RATING
+"rating.enjoy.question" = "Вам нравится PIA VPN?";
+"rating.enjoy.subtitle" = "Надеемся, что наш продукт VPN соответствует вашим ожиданиям";
+"rating.problems.question" = "Что пошло не так?";
+"rating.problems.subtitle" = "Хотите дать отзыв? Мы сделаем все возможное, чтобы ваши впечатления от PIA стали лучше";
+"rating.review.question" = "Как насчет отзыва в App Store?";
+"rating.rate.question" = "Как насчет оценки в App Store?";
+"rating.rate.subtitle" = "Благодарим за согласие поделиться своим опытом";
+"rating.error.question" = "Не удалось установить соединение";
+"rating.error.subtitle" = "Попробуйте выбрать другой регион или расскажите нам, что произошло, открыв заявку в службу поддержки.";
+"rating.error.button.send" = "Отправить отзыв";
+"rating.alert.button.notreally" = "Не особо";
+"rating.alert.button.nothanks" = "Спасибо, не надо.";
+"rating.alert.button.oksure" = "С удовольствием!";
+
+// CALLING CARDS
+"card.wireguard.title" = "Опробуйте WireGuard® сегодня!";
+"card.wireguard.description" = "Это новый, более эффективный протокол VPN, который обеспечивает более высокую производительность, меньшую нагрузку на процессор и более длительную автономную работу устройства.";
+"card.wireguard.cta.activate" = "Опробуйте WireGuard®";
+"card.wireguard.cta.settings" = "Открыть настройки";
+"card.wireguard.cta.learn" = "Подробнее";
+
+// DEDICATED IP
+"dedicated.ip.title" = "Выделенный IP-адрес";
+"dedicated.ip.plural.title" = "Ваши выделенные IP-адреса";
+"dedicated.ip.activation.description" = "Активируйте свой выделенный IP-адрес, вставив токен в форму ниже. Если вы недавно приобрели выделенный IP-адрес, вы можете сгенерировать токен на веб-сайте PIA.";
+"dedicated.ip.token.textfield.placeholder" = "Вставьте свой токен здесь";
+"dedicated.ip.token.textfield.accessibility" = "Текстовое поле для ввода токена выделенного IP-адреса";
+"dedicated.ip.activate.button.title" = "Активировать";
+"dedicated.ip.message.incorrect.token" = "Убедитесь, что вы правильно ввели токен";
+"dedicated.ip.message.invalid.token" = "Недействительный токен. Убедитесь, что вы правильно ввели токен.";
+"dedicated.ip.message.valid.token" = "Ваш выделенный IP-адрес успешно активирован. Теперь он будет доступен в списке выбора региона.";
+"dedicated.ip.message.expired.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
+"dedicated.ip.message.error.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
+"dedicated.ip.message.error.retryafter" = "Слишком много неудачных запросов активации токена. Повторите попытку через %@ сек.";
+"dedicated.ip.message.token.willexpire" = "Действие вашего выделенного IP-адреса скоро заканчивается. Получите новый адрес";
+"dedicated.ip.message.token.willexpire.link" = "Получите новый адрес";
+"dedicated.ip.message.ip.updated" = "Ваш выделенный IP-адрес обновлен";
+"dedicated.ip.country.flag.accessibility" = "Флаг страны: %@";
+"dedicated.ip.remove" = "Действительно удалить выбранный регион?";
+"dedicated.ip.limit.title" = "Защитите свои удаленные подключения к любым ресурсам с помощью выделенного IP-адреса из выбранной вами страны. Пока действует подписка, этот IP-адрес будет исключительно вашим, а передаваемые вами данные будут защищены с использованием самого надежного из существующих алгоритмов шифрования.";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "Ожидайте...";
+"server.reconnection.still.connection" = "Идут попытки подключения...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "Показать служебные сообщения обмена данными";
+"inapp.messages.settings.updated" = "Настройки обновлены";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "Регион";
+"widget.liveActivity.selected_protocol.title" = "Протокол";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "Все";
+"regions.filter.search.title" = "Поиск";
+"regions.filter.favorites.title" = "Избранное";
+"regions.list.all_locations.title" = "Все локации";
+"regions.list.optimal_location.title" = "Лучшая локация";
+"regions.list.optimal_location_with_dip_location.title" = "Лучшая локация / Выделенный IP";
+"regions.search.recommended_locations.title" = "Рекомендуемые локации";
+"regions.search.results.title" = "Результаты поиска";
+"regions.search.button.title" = "Поиск локации";
+"regions.search.input_field.placeholder" = "Поиск города или страны";
+"regions.search.previous_results.title" = "Последний раз искали";
+"regions.context_menu.favorites.add.text" = "Добавить в избранное";
+"regions.context_menu.favorites.remove.text" = "Удалить из избранного";
+"regions.list_item.default.title" = "Локация по умолчанию";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "Локация";
+"top_navigation_bar.location_selection_screen.title" = "Выбор локации";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "Помощь в улучшении PIA";
+"onboarding.connection_stats.subtitle" = "Помогите нам стать лучше, передавая статистику VPN-подключений. Эти отчеты не содержат персональных данных.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "Настройка PIA";
+"onboarding.vpn_configuration.subtitle" = "При первом подключении появится запрос на то, чтобы разрешить PIA получить доступ к настройкам VPN. Это необходимо для шифрования вашего трафика. \n\nНапомним: мы не отслеживаем, не фильтруем и не регистрируем ваши действия в Сети. \n\nЧтобы продолжить, нажмите кнопку ниже.";
+"onboarding.vpn_configuration.button" = "Настроить PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "Быстрая и надежная VPN для потоковых трансляций";
+"tvos.welcome.button.login" = "Войти";
+"tvos.welcome.button.signup" = "Зарегистрироваться";
+
+//Login (tvOS)
+"tvos.login.title" = "Введите учетные данные PIA VPN";
+"tvos.login.placeholder.username" = "Введите имя пользователя";
+"tvos.login.placeholder.password" = "Введите пароль";
+
+"tvos.login.qr.title" = "Вход с помощью приложения PIA";
+"tvos.login.qr.description" = "Отсканируйте QR-код и подтвердите вход из приложения PIA для iOS.";
+"tvos.login.qr.timer" = "Код станет недействительным через:";
+"tvos.login.qr.options" = "Другие варианты:";
+"tvos.login.qr.button.login" = "Войти с помощью имени пользователя";
+"tvos.login.qr.button.restore" = "Продолжить покупку";
+
+"tvos.login.qr.expired.title" = "Срок действия QR-кода истек";
+"tvos.login.qr.expired.description" = "Сгенерируйте новый ниже";
+"tvos.login.qr.expired.button.generate" = "Сгенерировать QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "Не удается подключиться";
+"error_alert.connection_error.no_network.message" = "Проверьте подключение к Интернету и повторите попытку";
+"error_alert.connection_error.no_network.retry_action.title" = "Повторить";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "Лучшая локация";
+"location_selection.any_other_location.title" = "Выбранная локация";
+"dashboard.connection_state.connected.title" = "Подключено";
+"dashboard.connection_state.disconnected.title" = "Не подключено";
+"dashboard.connection_state.connecting.title" = "Подключение...";
+"dashboard.connection_state.reconnecting.title" = "Повторное подключение...";
+"dashboard.connection_state.disconnecting.title" = "Отключение...";
+"dashboard.connection_state.error.title" = "Ошибка подключения";
+"dashboard.connection_state.network_error_alert.message" = "Проверьте подключение к Интернету и повторите попытку";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "Повторить";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "Выйти";
+"settings.account.log_out_alert.title" = "Вы уверены?";
+"settings.account.log_out_alert.message" = "Если вы выйдете из учетной записи, то все активные VPN-подключения прервутся, и вы останетесь без защиты.";
+"settings.account.subscription_expiry.title" = "Подписка истекает";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "Ввести выделенный IP";
+"settings.dedicatedip.title2" = "Выделенный IP-адрес";
+"settings.dedicatedip.subtitle" = "Активируйте выделенный IP, введя свой токен в поле ниже. Вы можете приобрести выделенный IP, войдя в свой аккаунт на сайте PIA.";
+"settings.dedicatedip.placeholder" = "Ввести токен для выделенного IP";
+"settings.dedicatedip.button" = "Активировать";
+"settings.dedicatedip.alert.failure.title" = "Что-то пошло не так";
+"settings.dedicatedip.alert.failure.message" = "Ваш токен недействителен или просрочен.";
+"settings.dedicatedip.alert.failure.message.empty" = "Поле с токеном не может быть пустым.";
+"settings.dedicatedip.alert.success.title" = "Все готово";
+"settings.dedicatedip.alert.success.message" = "Ваш выделенный IP теперь активен.";
+"settings.dedicatedip.alert.success.button" = "Продолжить";
+
+"settings.dedicatedip.stats.dedicatedip" = "Выделенный IP-адрес";
+"settings.dedicatedip.stats.ip" = "IP-адрес";
+"settings.dedicatedip.stats.location" = "Локация";
+"settings.dedicatedip.stats.quickAction" = "Быстрое действие";
+"settings.dedicatedip.stats.delete.button" = "Удалить выделенный IP";
+"settings.dedicatedip.stats.delete.alert.title" = "Вы уверены?";
+"settings.dedicatedip.stats.delete.alert.message" = "Вы собираетесь удалить выделенный IP из вашей учетной записи.";
+"settings.dedicatedip.stats.delete.alert.delete" = "Да, удалить";
+
+"settings.dedicatedip.status.active" = "Активный";
+"settings.dedicatedip.status.invalid" = "Недопустимый";
+"settings.dedicatedip.status.expired" = "Срок истек";
+"settings.dedicatedip.status.error" = "Ошибка";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "Версия приложения";
+"help_menu.contact_support.qr_code.title" = "Связаться с нами";
+"help_menu.contact_support.qr_code.message" = "Отсканируйте QR-код, чтобы связаться с нашей службой поддержки.";
+
+"help_menu.about_options.acknowledgements.title" = "Уведомления";
+"help_menu.about_options.privacy_policy.title" = "Политика конфиденциальности";
+
+"help_menu.about_section.privacy_policy.description" = "Данная политика конфиденциальности («Политика конфиденциальности» или «Политика») разъясняет принципы защиты конфиденциальности Private Internet Access, Inc. (далее «Мы», «Нас», «Управляющий данными», «Компания» или PIA) и применяется к пользователям (далее «Пользователь(и)» или «Вы») PIA, включая VPN-сервис PIA (далее «Сервис») и веб-сайт PIA по адресу www.privateinternetaccess.com (далее «Веб-сайт»).";
+"help_menu.about_section.privacy_policy.qr_code.message" = "Отсканируйте QR-код для доступа к политике конфиденциальности на вашем устройстве.";
+
+"help_menu.help_improve.enabled.title" = "ВКЛ";
+"help_menu.help_improve.disabled.title" = "ВЫКЛ";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "Установить Private Internet Access";
+"tvos.signup.item1" = "VPN-серверы в 91 стране";
+"tvos.signup.item2" = "Молниеносная скорость";
+"tvos.signup.item3" = "Служба поддержки 24/7";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "Срок действия вашей подписки истек";
+"tvos.signin.expired.subtitle" = "Продлите подписку и восстановите полную VPN-защиту для потоковых трансляций.";
+"tvos.signin.expired.qr.title1" = "Отсканируйте QR-код и выберите тарифный план. Покупка подписки займет всего пару минут.";
+"tvos.signin.expired.qr.title2" = "После этого вернитесь к Apple TV и наслаждайтесь улучшенной цифровой конфиденциальностью с PIA!";
+"tvos.signin.expired.button.renewed" = "Подписка продлена";
+"tvos.signin.expired.button.signout" = "Выйти";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "Бесплатный пробный период истек";
+"tvos.signin.expired.trial.subtitle" = "Если вам понравилась наша первоклассная VPN-защита, купите подписку на PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "Начните 7-дн. пробный период, далее %@ в год.";
+"tvos.signup.subscription.paywall.price.year" = "в год";
+"tvos.signup.subscription.paywall.price.trial" = "ПРОБНЫЙ ПЕРИОД — ВЫГОДНЕЕ ВСЕГО";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/мес.";
+"tvos.signup.subscription.paywall.button.subscribe" = "Оформить подписку";
+
+"tvos.signup.subscription.error.message.generic" = "Что-то пошло не так. Попробуйте еще раз.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "Платеж отменен. Попробуйте еще раз.";
+
+"tvos.signup.email.error.message.generic" = "Не удалось создать учетную запись. Попробуйте еще раз позднее";
+
+"tvos.signup.credentials.title" = "Получилось!";
+"tvos.signup.credentials.details.title" = "Карта успешно использована";
+"tvos.signup.credentials.details.subtitle" = "Вскоре вы получите эл. письмо с именем пользователя и паролем.";
+
+"tvos.signup.credentials.details.button" = "Начать работу";
+
+"tvos.signup.terms_conditions.title" = "Условия использования";
+
+"tvos.signup.terms_conditions.description" = "Настоящее соглашение об условиях использования (далее — «Соглашение») касается использования и доступа к веб-сайту (далее — «Сайт») PIA Private Internet Access, Inc. (PIA), расположенному по адресу www.privateinternetaccess.com, виртуальной частной сети (VPN) и услугам PIA, предоставляемым через сайт (далее — «Услуги»). Посещая Сайт, покупая подписку и/или пользуясь Услугами, Вы (далее — «Вы» или «Подписчик») (PIA и «Подписчик» также известны как «Стороны») подтверждаете, что прочитали Соглашение, полностью понимаете указанные в нем условия и согласны их соблюдать в полной мере.";
+"tvos.signup.terms_conditions.qr_code.message" = "Отсканируйте QR-код, чтобы полностью открыть Условия использования на своем устройстве.";
+
+
+//Force update (iOS)
+"forceupdate.label.title" = "Улучшите свой опыт";
+"forceupdate.label.subtitle" = "Вы используете старую версию PIA. Обновите приложение прямо сейчас, чтобы наслаждаться улучшенными возможностями со всеми последними функциями.";
+"forceupdate.button.update" = "Обновить";
+"forceupdate.label.vpn.connected" = "Нажав на кнопку «Обновить», вы отключитесь от VPN.";
+
+"global.version.format" = "Версия %@ (%@)";

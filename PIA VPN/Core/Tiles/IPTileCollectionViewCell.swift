@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
     

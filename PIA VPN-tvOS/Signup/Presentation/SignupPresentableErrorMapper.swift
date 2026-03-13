@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class SignupPresentableErrorMapper {
     func map(error: Error) -> String? {

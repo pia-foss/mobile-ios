@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginView: View {
     @State private var username: String = ""

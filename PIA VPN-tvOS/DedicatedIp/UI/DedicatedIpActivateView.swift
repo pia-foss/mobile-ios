@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct DedicatedIpActivateView: View {
     @State private var token = ""

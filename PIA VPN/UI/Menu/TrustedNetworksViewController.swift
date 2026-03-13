@@ -22,6 +22,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 struct Rule {
     var type: NMTType

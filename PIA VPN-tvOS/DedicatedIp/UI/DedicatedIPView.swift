@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct DedicatedIPView: View {
     @ObservedObject private var viewModel: DedicatedIPViewModel

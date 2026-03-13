@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 class SignupEmailViewModel: ObservableObject {
     @Published var isLoading: Bool = false

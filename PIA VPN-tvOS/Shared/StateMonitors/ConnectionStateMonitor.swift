@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import PIALibrary
+import PIALocalizations
 
 
 enum ConnectionState: Equatable {

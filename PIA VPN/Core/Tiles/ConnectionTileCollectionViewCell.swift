@@ -21,6 +21,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class ConnectionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     

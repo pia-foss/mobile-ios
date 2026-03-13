@@ -22,6 +22,7 @@
 import Foundation
 import PIALibrary
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct ExpiredAccountView: View {
     var viewModel: ExpiredAccountViewModel

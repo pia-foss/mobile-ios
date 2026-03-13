@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class SubscriptionOptionViewModelMapper {
     func map(product: SubscriptionProduct) -> SubscriptionOptionViewModel {
