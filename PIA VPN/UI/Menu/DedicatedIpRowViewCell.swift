@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class DedicatedIpRowViewCell: UITableViewCell, Restylable {
 

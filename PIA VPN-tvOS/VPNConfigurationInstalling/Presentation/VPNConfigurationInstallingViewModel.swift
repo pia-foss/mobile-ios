@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType

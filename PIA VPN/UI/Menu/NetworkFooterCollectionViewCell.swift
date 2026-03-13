@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 class NetworkFooterCollectionViewCell: UICollectionViewCell {
 

@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import Combine
+import PIALocalizations
 
 class IPTile: UIView, Tileable  {
     

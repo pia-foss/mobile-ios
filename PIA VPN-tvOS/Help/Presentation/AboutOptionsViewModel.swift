@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class AboutOptionsViewModel: ObservableObject {
     enum Sections: Equatable, Identifiable {

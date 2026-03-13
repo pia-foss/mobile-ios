@@ -1,6 +1,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 
 protocol AccountProviderType {

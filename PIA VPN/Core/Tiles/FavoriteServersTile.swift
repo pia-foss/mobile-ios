@@ -25,6 +25,7 @@ import PIALibrary
 import UIKit
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 class FavoriteServersTile: UIView, Tileable {
     

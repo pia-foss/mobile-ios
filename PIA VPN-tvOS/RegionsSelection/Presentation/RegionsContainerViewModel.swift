@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import PIALocalizations
 
 class RegionsContainerViewModel: ObservableObject {
     enum RegionsNavigationItems: CaseIterable, Identifiable {

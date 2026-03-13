@@ -27,6 +27,7 @@ import TunnelKitOpenVPN
 import SafariServices
 import PIAWireguard
 import WidgetKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: SettingsViewController.self)
 

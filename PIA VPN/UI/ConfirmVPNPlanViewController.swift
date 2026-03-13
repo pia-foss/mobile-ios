@@ -25,6 +25,7 @@ import AuthenticationServices
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 
@@ -132,7 +133,7 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
                 self?.textEmail.text = ""
 
                 let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
-                alert.addDefaultAction(L10n.Ui.Global.close)
+                alert.addDefaultAction(L10n.Localizable.Global.close)
                 self?.present(alert, animated: true, completion: nil)
 
                 return

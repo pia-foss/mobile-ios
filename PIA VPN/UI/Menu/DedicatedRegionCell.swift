@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 class DedicatedRegionCell: UITableViewCell, Restylable {
     

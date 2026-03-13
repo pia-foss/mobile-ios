@@ -22,6 +22,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 private let log = PIALogger.logger(for: DNSList.self)
 

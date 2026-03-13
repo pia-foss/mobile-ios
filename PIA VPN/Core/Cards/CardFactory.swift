@@ -23,6 +23,7 @@ import Foundation
 import PIALibrary
 import PIAWireguard
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: CardFactory.self)
 

@@ -9,6 +9,7 @@
 import Foundation
 import PIALibrary
 import Combine
+import PIALocalizations
 
 class RegionsListViewModel: ObservableObject {
     

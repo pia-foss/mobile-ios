@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 class SignupViewModel: ObservableObject {
     let title: String = L10n.Signup.Purchase.Trials.region

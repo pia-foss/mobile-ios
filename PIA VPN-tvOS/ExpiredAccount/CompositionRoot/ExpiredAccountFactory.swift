@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class ExpiredAccountFactory {
     static func makeExpiredAccountView() -> ExpiredAccountView {

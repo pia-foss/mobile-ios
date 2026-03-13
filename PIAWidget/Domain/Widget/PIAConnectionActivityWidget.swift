@@ -2,6 +2,7 @@
 import WidgetKit
 import SwiftUI
 import PIALibrary
+import PIALocalizations
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {

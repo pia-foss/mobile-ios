@@ -1,12 +1,13 @@
 strings:
     inputs:
-        - PIA VPN/Resources/L10n/en.lproj/Localizable.strings
-        - Resources/Resources/Shared/en.lproj/UI.strings
-        - Resources/Resources/iOS/en.lproj/Signup.strings
-        - Resources/Resources/iOS/en.lproj/Welcome.strings
+        - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Localizable.strings
+        - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Signup.strings
+        - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Welcome.strings
     outputs:
         templateName: structured-swift5
-        output: PIA VPN/Resources/L10n/SwiftGen+Strings.swift
+        output: LocalPackages/PIALocalizations/Sources/PIALocalizations/Generated/L10n.swift
+        params:
+            publicAccess: true
 
 ib:
     inputs:

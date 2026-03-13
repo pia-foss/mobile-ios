@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct SignupView: View {
     @StateObject var viewModel: SignupViewModel

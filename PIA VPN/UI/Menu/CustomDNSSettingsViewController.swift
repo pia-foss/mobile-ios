@@ -24,6 +24,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIAUIKit
+import PIALocalizations
 
 class CustomDNSSettingsViewController: AutolayoutViewController {
     

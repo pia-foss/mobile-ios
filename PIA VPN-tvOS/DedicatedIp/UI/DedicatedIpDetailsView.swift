@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct DedicatedIpDetailsView: View {
     private let dedicatedIPStats: [DedicatedIpData]

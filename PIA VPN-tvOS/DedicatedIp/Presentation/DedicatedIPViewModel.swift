@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 struct DedicatedIpData {
     let id = UUID()

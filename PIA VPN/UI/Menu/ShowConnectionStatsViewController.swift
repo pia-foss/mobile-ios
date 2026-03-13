@@ -23,6 +23,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: ShowConnectionStatsViewController.self)
 

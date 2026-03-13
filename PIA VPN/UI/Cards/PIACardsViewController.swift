@@ -9,6 +9,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 class PIACardsViewController: UIViewController {
 

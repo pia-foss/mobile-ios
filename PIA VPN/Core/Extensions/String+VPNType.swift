@@ -24,6 +24,7 @@ import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
 import PIAWireguard
+import PIALocalizations
 
 public extension String {
     

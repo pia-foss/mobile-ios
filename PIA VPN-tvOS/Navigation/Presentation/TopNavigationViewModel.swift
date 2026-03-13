@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import PIALocalizations
 
 
 class LeadingNavigationBarViewModel: ObservableObject {

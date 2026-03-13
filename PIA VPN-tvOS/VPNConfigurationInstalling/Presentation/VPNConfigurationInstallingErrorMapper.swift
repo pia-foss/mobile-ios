@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class VPNConfigurationInstallingErrorMapper {
     func map(error: Error) -> String? {

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRView: View {
     @Binding var expiresAt: String

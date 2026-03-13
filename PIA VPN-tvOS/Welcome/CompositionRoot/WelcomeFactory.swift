@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALocalizations
 
 class WelcomeFactory {
     static func makeWelcomeView() -> OnboardingComponentView {

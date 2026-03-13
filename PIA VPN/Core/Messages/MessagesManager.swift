@@ -23,6 +23,7 @@ import Foundation
 import PIALibrary
 import account
 import UIKit
+import PIALocalizations
 
 public class MessagesManager: NSObject {
 

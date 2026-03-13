@@ -28,6 +28,7 @@ import NetworkExtension
 import ActivityKit
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: DashboardViewController.self)
 

@@ -24,6 +24,7 @@ import Foundation
 import NetworkExtension
 import PIALibrary
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: PIAHotspotHelper.self)
 

@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
 
@@ -98,7 +99,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
                     target: self,
                     action: #selector(cancelClicked(_:))
                 )
-                self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Ui.Global.cancel
+                self.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Localizable.Global.cancel
             }
         }
     }

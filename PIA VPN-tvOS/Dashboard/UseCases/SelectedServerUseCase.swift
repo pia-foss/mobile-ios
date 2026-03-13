@@ -2,6 +2,7 @@
 import Foundation
 import PIALibrary
 import Combine
+import PIALocalizations
 
 protocol SelectedServerUseCaseType {
     var selectedSever: ServerType { get }

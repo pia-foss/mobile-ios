@@ -27,6 +27,7 @@ import TunnelKitOpenVPN
 #endif
 import Intents
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AppPreferences.self)
 

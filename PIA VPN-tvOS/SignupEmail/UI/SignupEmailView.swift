@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct SignupEmailView: View {
     @State private var email = ""

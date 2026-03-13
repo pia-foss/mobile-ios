@@ -8,6 +8,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 class ValidateQRLoginViewController: AutolayoutViewController {
     @IBOutlet weak var piaLogoImageView: UIImageView!

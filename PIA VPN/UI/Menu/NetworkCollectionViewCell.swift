@@ -23,6 +23,7 @@ import UIKit
 import PIALibrary
 import Popover
 import PIADesignSystem
+import PIALocalizations
 
 class NetworkCollectionViewCell: UICollectionViewCell {
 

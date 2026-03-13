@@ -22,6 +22,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 extension Server {
     static let automatic = Server(

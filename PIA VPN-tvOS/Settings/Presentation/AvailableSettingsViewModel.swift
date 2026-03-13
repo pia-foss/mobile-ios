@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class AvailableSettingsViewModel: ObservableObject {
     enum Sections: Equatable, Hashable, Identifiable {
