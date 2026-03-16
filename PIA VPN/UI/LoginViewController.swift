@@ -445,6 +445,16 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
         config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
     }
+
+    override func showLoadingAnimation() {
+        // Don't call parent class
+        buttonLogin.isLoading = true
+    }
+
+    override func hideLoadingAnimation() {
+        // Don't call parent class
+        buttonLogin.isLoading = false
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
