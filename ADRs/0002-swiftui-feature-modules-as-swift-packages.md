@@ -1,4 +1,4 @@
-# ADR-001: SwiftUI Feature Modules as Swift Packages
+# ADR-0002: SwiftUI Feature Modules as Swift Packages
 
 **Status:** Accepted
 **Date:** 2026-03-13
