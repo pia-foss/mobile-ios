@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/ios-openssl.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "e7f9ffdd072fa8709ee25ba8cd2aa5d95f90a6a5"
+        "revision" : "e7f9ffdd072fa8709ee25ba8cd2aa5d95f90a6a5",
+        "version" : "1.0.0"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "b5225cd860de2f4d7c8189d46068b7a76c2f8c0a"
+        "revision" : "dc67b1b60593c37916bf79c940f258f253af87e7",
+        "version" : "2.2.5"
       }
     },
     {
