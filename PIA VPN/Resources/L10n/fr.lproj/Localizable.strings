@@ -113,9 +113,6 @@
 "account.subscriptions.trial" = "Forfait d'essai";
 "account.unauthorized" = "Un problème est survenu. Veuillez réessayer de vous connecter";
 "account.delete" = "Supprimer le compte";
-"account.delete.alert.title" = "Êtes-vous sûr ?";
-"account.delete.alert.message" = "La suppression de votre compte PIA est permanente et irréversible. Vous ne pourrez plus récupérer vos identifiants PIA après avoir effectué cette opération. Veuillez noter que cette opération supprime uniquement votre compte PIA de notre base de données, mais qu’elle ne supprime PAS votre abonnement. Vous devrez ensuite accéder à votre compte Apple et annuler l’abonnement à Private Internet Access à cet endroit. Vous risquez sinon de continuer à payer, même si votre compte PIA n’est plus actif.";
-"account.delete.alert.failureMessage" = "Un problème est survenu lors de la suppression de votre compte. Veuillez réessayer plus tard.";
 "account.survey.message" = "Vous souhaitez aider à améliorer PIA ? Dites-nous comment nous pouvons nous améliorer !\nRépondez au sondage";
 "account.survey.messageLink" = "Répondre au sondage";
 
