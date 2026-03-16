@@ -68,6 +68,7 @@ jobs:
       with:
         timeout_minutes: 20
         max_attempts: 2
+        retry_on: timeout
         command: bundle exec fastlane tvOStests
 
     - name: Upload tvOS test results
