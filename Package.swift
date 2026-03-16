@@ -21,7 +21,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/bitmark-inc/tweetnacl-swiftwrap.git", exact: "1.1.0"),
-        .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.1"),
+        .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
     ],
     targets: [
         .target(
