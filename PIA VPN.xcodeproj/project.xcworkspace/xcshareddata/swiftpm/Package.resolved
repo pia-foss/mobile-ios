@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "alamofire",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire.git",
-      "state" : {
-        "revision" : "cdb2f4a574c3f7ae9ac0b0913058d64ff6fa09ac",
-        "version" : "5.0.1"
-      }
-    },
-    {
       "identity" : "cwlcatchexception",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattgallagher/CwlCatchException.git",
@@ -77,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-networking.git",
       "state" : {
-        "revision" : "98812cae37d32ae3ef19dfd67f50be86858670fa",
-        "version" : "1.3.1"
+        "revision" : "a513646305e68492a5613abe1debf8399d6e8546",
+        "version" : "1.3.2"
       }
     },
     {
@@ -87,7 +78,7 @@
       "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
       "state" : {
         "branch" : "master",
-        "revision" : "351b487a6691abfabe0aa0d35a3bb966e6e69feb"
+        "revision" : "b5225cd860de2f4d7c8189d46068b7a76c2f8c0a"
       }
     },
     {
@@ -131,7 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
       "state" : {
-        "revision" : "bf7b4258d9c9279c6051bba0b7a73ca7d5f9547e"
+        "revision" : "a6064cd31f10f35785049fa6dd4693adeb68bf26",
+        "version" : "1.0.4"
       }
     },
     {
@@ -211,8 +203,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "93a8aa4937030b606de42f44b17870249f49af0b",
-        "version" : "1.3.4"
+        "revision" : "06c57924455064182d6b217f06ebc05d00cb2990",
+        "version" : "1.5.0"
       }
     },
     {
@@ -274,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "34e463e98ab8541c604af706c99bed7160f5ec70",
-        "version" : "1.8.1"
+        "revision" : "dfd70507def84cb5fb821278448a262c6ff2bbad",
+        "version" : "1.9.0"
       }
     }
   ],
