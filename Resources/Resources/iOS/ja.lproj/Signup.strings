@@ -49,7 +49,6 @@
 "purchase.trials.region" = "90ヶ国以上に安全なサーバー";
 "purchase.trials.servers" = "32か国の3300以上のサーバー";
 "purchase.trials.start" = "サブスクリプションを開始";
-"purchase.trials.all.plans" = "利用可能なプランをすべて見る";
 
 "purchase.subscribe.now" = "今すぐ定期購読を購入";
 
@@ -59,12 +58,8 @@
 "walkthrough.action.done" = "完了";
 "walkthrough.action.skip" = "スキップ";
 
-"walkthrough.page.1.title" = "一度に10台の端末をサポート";
-"walkthrough.page.1.description" = "一度に最大10台の端末を保護して自分を守ることができます。";
 "walkthrough.page.2.title" = "90ヶ国以上に安全なサーバー";
 "walkthrough.page.2.description" = "世界中にサーバがあるので、常に保護された状態でいることができます。";
-"walkthrough.page.3.title" = "広告から自分を守りましょう";
-"walkthrough.page.3.description" = "コンテンツブロッカーを有効にすると、Safariで広告表示をブロックできます。";
 
 "share.data.buttons.accept" = "同意する";
 "share.data.buttons.noThanks" = "いいえ、結構です";

@@ -49,7 +49,6 @@
 "purchase.trials.region" = "Sikre servere i over 90 land";
 "purchase.trials.servers" = "Over 3300 servere i 32 land";
 "purchase.trials.start" = "Start abonnementet";
-"purchase.trials.all.plans" = "Vis alle tilgjengelige abonnement";
 
 "purchase.subscribe.now" = "Abonner nå";
 
@@ -59,12 +58,8 @@
 "walkthrough.action.done" = "FERDIG";
 "walkthrough.action.skip" = "HOPP OVER";
 
-"walkthrough.page.1.title" = "Støtter ti enheter samtidig";
-"walkthrough.page.1.description" = "Beskytt deg på opptil ti enheter samtidig.";
 "walkthrough.page.2.title" = "Sikre servere i over 90 land";
 "walkthrough.page.2.description" = "Med serverer rundt om i hele verden, er du alltid beskyttet.";
-"walkthrough.page.3.title" = "Beskytt deg selv mot reklame";
-"walkthrough.page.3.description" = "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
 
 "share.data.buttons.accept" = "Godta";
 "share.data.buttons.noThanks" = "Nei takk";
