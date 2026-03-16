@@ -18,14 +18,10 @@
 "global.add" = "추가";
 "global.remove" = "제거";
 "global.empty" = "비어 있음";
-"global.copy" = "복사";
-"global.share" = "공유";
-"global.copied" = "클립보드로 복사 완료";
 "global.yes" = "예";
 "global.no" = "아니요";
 "global.or" = "또는";
 "global.row.selection" = "행 선택";
-"global.vpn.settings" = "VPN 설정";
 "global.general.settings" = "일반 설정";
 "global.version" = "버전";
 
@@ -84,25 +80,15 @@
 
 // ACCOUNT
 
-"account.email.caption" = "이메일";
 "account.email.placeholder" = "이메일 주소";
 "account.username.caption" = "사용자 이름";
-"account.other.footer" = "다른 장치에서도 Private Internet Access 앱을 다운로드 받고 위의 사용자 이름과 비밀번호를 사용해 로그인해서 연결을 보호하세요.";
 "account.restore.title" = "인정되지 않은 구매 항목 복원";
 "account.restore.description" = "이용 플랜을 갱신하셨는데 계정이 여전히 만료 예정이라고 나올 경우 이곳에서 갱신을 다시 시작하실 수 있습니다. 이 과정 중 요금이 부과되지 않습니다.";
 "account.restore.button" = "구매 항목 복원";
 "account.restore.failure.title" = "구매 항목 복원";
 "account.restore.failure.message" = "갱신 시 교환할 수 있는 구매를 찾을 수 없습니다.";
-"account.save.item" = "이메일 업데이트";
-"account.save.prompt" = "인증해서 변경 사항을 저장합니다";
-"account.save.success" = "이메일 주소가 저장되었습니다.";
-"account.reveal.prompt" = "인증해서 표시합니다";
 "account.expiry_date.information" = "현재 플랜이 %@에 만료됩니다.";
 "account.expiry_date.expired" = "현재 플랜이 만료되었습니다.";
-"account.update.email.require.password.title" = "PIA 비밀번호가 필요합니다.";
-"account.update.email.require.password.message" = "보안상의 이유로 계정에서 변경 작업을 수행하려면 PIA 비밀번호가 필요합니다. 계속 진행하려면 PIA 비밀번호를 입력하세요.";
-"account.update.email.require.password.button" = "제출";
-"account.error.unauthorized" = "사용자명 또는 비밀번호가 틀립니다.";
 "account.subscriptions.message" = "이곳에서 구독을 관리할 수 있습니다.";
 "account.subscriptions.linkMessage" = "이곳";
 "account.set.email.error" = "이메일을 추가하는 중 오류가 발생했습니다. 나중에 다시 시도하세요.";
@@ -121,16 +107,11 @@
 "settings.connection.title" = "연결";
 "settings.connection.vpn_protocol.title" = "프로토콜 선택";
 "settings.connection.transport.title" = "전송";
-"settings.connection.socket_protocol.title" = "소켓";
 "settings.connection.remote_port.title" = "원격 포트";
 
-"settings.encryption.title" = "암호화";
 "settings.encryption.cipher.title" = "데이터 암호화";
-"settings.encryption.digest.title" = "데이터 인증";
 "settings.encryption.handshake.title" = "핸드셰이크";
 
-"settings.application_settings.title" = "애플리케이션 설정";
-"settings.application_settings.dark_theme.title" = "다크 테마";
 "settings.application_settings.active_theme.title" = "활성화된 테마";
 "settings.application_settings.kill_switch.title" = "VPN 킬 스위치";
 "settings.application_settings.kill_switch.footer" = "VPN 킬 스위치는 VPN 연결이 다시 연결 중이면 인터넷에 대한 액세스를 방지합니다. 수동으로 연결을 해제하는 경우는 제외입니다.";
@@ -141,16 +122,12 @@
 "settings.application_settings.leak_protection.more_info" = "자세히 알아보기";
 "settings.application_settings.allow_local_network.title" = "로컬 네트워크의 장치 액세스 허용";
 "settings.application_settings.allow_local_network.footer" = "VPN에 연결된 상태에서 프린터 또는 파일 서버와 같은 로컬 장치 연결을 유지하세요. (네트워크의 사용자 및 장치를 신뢰하는 경우에만 이 옵션 허용)";
-"settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™는 VPN에 연결되어 있을 때 광고, 트래커 및 악성코드를 차단합니다.";
 "settings.application_settings.leak_protection.alert.title" = "VPN 설정을 변경하면 다음에 연결할 때 적용됩니다.";
 
 "settings.content_blocker.title" = "Safari 콘텐츠 차단기 상태";
-"settings.content_blocker.state.title" = "현재 상태";
 "settings.content_blocker.refresh.title" = "차단 목록 새로고침";
 "settings.content_blocker.footer" = "Content Blocker를 활성화 또는 비활성화하려면 설정 > 앱 > Safari > 확장으로 가서 PIA VPN을 토글하세요.";
 
-"settings.application_information.title" = "애플리케이션 정보";
 "settings.application_information.debug.title" = "지원팀에 디버그 로그 보내기";
 "settings.application_information.debug_logging.title" = "디버그 로깅 활성화";
 "settings.application_information.debug.failure.title" = "제출 중 오류 발생";
@@ -165,7 +142,6 @@
 "settings.commit.buttons.reconnect" = "다시 연결";
 "settings.commit.buttons.later" = "나중에";
 
-"settings.reset.title" = "초기화";
 "settings.reset.defaults.title" = "기본값으로 설정 초기화";
 "settings.reset.defaults.confirm.title" = "초기화 설정";
 "settings.reset.defaults.confirm.message" = "앱이 기본 설정으로 돌아갑니다. 모든 변경 사항을 잃게 됩니다.";
@@ -175,18 +151,10 @@
 "settings.small.packets.title" = "작은 패킷 사용";
 "settings.small.packets.description" = "일부 라우터 및 모바일 네트워크와의 호환성을 향상시키기 위해 IP 패킷의 크기를 약간 줄입니다.";
 
-"settings.log.connected.error" = "VPN 연결이 필요합니다. VPN에 연결한 후 다시 시도하세요.";
 "settings.log.information" = "문제 해결을 돕기 위하여 기술 지원팀에 제출할 디버그 로그를 저장합니다.";
-
-"settings.preview.title" = "미리 보기";
-"settings.server.network.description" = "차세대 네트워크";
-"settings.server.network.alert" = "서버 네트워크를 변경하려면 VPN의 연결을 해제해야 합니다.";
 
 "settings.geo.servers.description" = "지리적 위치 기반 지역 표시";
 "settings.cards.history.title" = "최신 뉴스";
-
-"settings.ovpn.migration.footer" = "OpenVPN 구현 기능이 업데이트되었습니다. 자세한 정보를 보려면 이곳을 클릭하세요";
-"settings.ovpn.migration.footer.link" = "이곳";
 
 "settings.section.general" = "일반";
 "settings.section.protocols" = "프로토콜";
@@ -204,24 +172,18 @@
 // ABOUT
 
 "about.app" = "Private Internet Access의 VPN";
-"about.intro" = "이 프로그램이 사용하는 구성 요소는 다음과 같습니다.";
 "about.accessibility.component.expand" = "라이선스 전문을 보려면 누르세요";
 
 // DASHBOARD
-
-"dashboard.content_blocker.intro.message" = "이 버전은 MACE를 Safari Content Blocker로 교체합니다.\n\n'설정'에서 확인해 보세요.";
 
 "dashboard.connection.ip.unreachable" = "인터넷에 연결할 수 없음";
 
 "dashboard.vpn.disconnected" = "연결 해제됨";
 "dashboard.vpn.connecting" = "연결 중...";
-"dashboard.vpn.connected" = "VPN에 연결됨";
 "dashboard.vpn.protected" = "보호 중";
 "dashboard.vpn.not_protected" = "보호되지 않음";
-"dashboard.vpn.on" = "VPN: 켬";
 "dashboard.vpn.disconnecting" = "연결 해제 중...";
 "dashboard.vpn.changing_region" = "지역 변경 중...";
-"dashboard.vpn.disconnect.untrusted" = "이 네크워크는 신뢰할 수 없습니다. VPN을 연결 해제하시겠습니까?";
 "dashboard.accessibility.vpn.button" = "VPN 연결 버튼";
 "dashboard.accessibility.vpn.button.isOn" = "VPN 연결 버튼. VPN이 현재 연결되었습니다";
 "dashboard.accessibility.vpn.button.isOff" = "VPN 연결 버튼. VPN이 현재 연결 해제되었습니다";
@@ -264,35 +226,13 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "네트워크 관리 도구";
 "settings.hotspothelper.description" = "WiFi 또는 셀룰러 네트워크에 연결 시 PIA의 작동 방식을 구성합니다. 수동 연결 해제는 제외됩니다.";
-"settings.hotspothelper.enable.description" = "이 옵션을 활성화하면 신뢰하지 않는 WiFi 네트워크에 연결할 때 PIA가 자동으로 VPN을 활성화합니다.";
-"settings.hotspothelper.all.title" = "모든 네트워크 보호";
-"settings.hotspothelper.all.description" = "신뢰하는 네트워크를 포함한 모든 네트워크에서 VPN WiFi 보호가 활성화됩니다.";
 "settings.hotspothelper.available.help" = "이 목록을 채우려면 iOS 설정 > WiFi로 이동하세요.";
-"settings.hotspothelper.available.add.help" = "+를 탭해서 신뢰하는 네트워크에 추가합니다.";
-"settings.trusted.networks.sections.current" = "현재 네트워크";
-"settings.trusted.networks.sections.available" = "이용 가능한 네트워크";
-"settings.trusted.networks.sections.trusted" = "신뢰하는 네트워크";
-"settings.trusted.networks.message" = "이 네트워크에서 PIA는 자동으로 연결하지 않습니다.";
-"settings.trusted.networks.connect.message" = "VPN에 연결해서 이 네트워크를 보호하시겠습니까?";
 "hotspothelper.display.name" = "🔒 PIA 설정에서 VPN WiFi 보호를 활성화해서 이 연결을 보호하세요.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi 보호가 활성화되었습니다 - 현재 보호를 받고 계십니다.";
-"settings.hotspothelper.cellular.title" = "셀룰러 네트워크에서 보호";
-"settings.hotspothelper.wifi.trust.title" = "VPN WiFi 보호";
-"settings.hotspothelper.cellular.description" = "이 옵션이 활성화되면 셀룰러 네트워크에 연결할 때 PIA가 자동으로 VPN을 활성화합니다.";
-"settings.hotspothelper.cellular.networks" = "셀룰러 네트워크";
-"settings.hotspothelper.wifi.networks" = "WiFi 네트워크";
-"settings.trusted.networks.sections.untrusted" = "신뢰하지 않는 네트워크";
-"settings.hotspothelper.rules.title" = "규칙";
-"settings.trusted.networks.sections.trusted.rule.description" = "VPN 킬 스위치를 활성화하고 이 기능을 활성화해서 WiFi 및 셀룰러 네트워크에서 PIA가 어떻게 작동할지 조정할 수 있습니다. 수동으로 연결을 해제하면 네트워크 관리 도구의 기능이 비활성화됨에 유의하세요.";
-"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN 연결 해제";
 "tiles.quicksetting.nmt.title" = "네트워크 관리";
 "tiles.quicksetting.private.browser.title" = "전용 브라우저";
 "settings.nmt.killswitch.disabled" = "VPN 킬 스위치가 현재 비활성화되었습니다. 네트워크 관리 도구가 작동하게 하고, 네트워크 전환 시 다시 연결할 수 있으려면 설정에서 VPN 킬 스위치를 활성화하세요.";
-"settings.nmt.optout.disconnect.alerts" = "연결 해제 확인 알림 거부";
-"settings.nmt.optout.disconnect.alerts.description" = "VPN 연결이 해제될 때 발신되는 경고 알림을 비활성화합니다.";
-"settings.nmt.wireguard.warning" = "다른 네트워크 사이를 전환할 경우 WireGuard®를 다시 연결할 필요가 없습니다. 신뢰할 수 있는 네트워크에서는 VPN의 연결을 직접 해제할 필요가 있을 수 있습니다.";
 "settings.service.quality.share.title" = "PIA 개선에 도움을 주세요";
 "settings.service.quality.share.description" = "VPN 연결 통계를 공유하여 저희 서비스를 개선할 수 있도록 도와 주세요. 이 보고서에는 개인 식별 정보가 절대로 포함되지 않습니다.";
 "settings.service.quality.share.findoutmore" = "자세히 보기";
@@ -336,9 +276,7 @@
 "tiles.usage.ipsec.title" = "사용 현황 (IKEv2에서는 사용 불가)";
 "tiles.usage.upload" = "업로드";
 "tiles.usage.download" = "다운로드";
-"tiles.nmt.cellular" = "셀룰러";
 "tiles.nmt.accessibility.trusted" = "신뢰할 수 있는 네트워크";
-"tiles.nmt.accessibility.untrusted" = "신뢰할 수 없는 네트워크";
 "tiles.quicksettings.title" = "빠른 설정";
 "tiles.quicksettings.min.elements.message" = "빠른 설정 타일에서 적어도 하나 이상의 항목이 표시되게 해야 합니다";
 "tiles.accessibility.visible.tile.action" = "탭하여 이 타일을 대시보드에서 제거합니다";
@@ -356,30 +294,6 @@
 "today.widget.login" = "로그인";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "이메일이 유효하지 않음. 다시 시도하세요.";
-"friend.referrals.title" = "친구 추천";
-"friend.referrals.view.invites.sent" = "보낸 초대 보기";
-"friend.referrals.pending.invites" = "%d개의 대기 중인 초대";
-"friend.referrals.signups.number" = "%d개의 가입";
-"friend.referrals.fullName" = "성명";
-"friend.referrals.invitation.terms" = "이 초대를 보냄으로써 가족 및 친구 추천 프로그램의 모든 계약 조건에 동의합니다.";
-"friend.referrals.family.friends.program" = "가족 및 친구 추천 프로그램";
-"friend.referrals.send.invite" = "초대 보내기";
-"friend.referrals.invite.error" = "초대를 다시 보내지 못했습니다. 나중에 시도하세요.";
-"friend.referrals.invite.success" = "초대를 보냈습니다";
-"friend.referrals.share.link" = "고유 추천 링크를 공유하세요";
-"friend.referrals.share.link.terms" = "이 링크를 공유함으로써 가족 및 친구 추천 프로그램의 모든 계약 조건에 동의합니다.";
-"friend.referrals.invites.sent.title" = "초대 전송 완료";
-"friend.referrals.pending.invites.title" = "대기 중인 초대";
-"friend.referrals.invites.number" = "%d개의 초대를 보냈습니다";
-"friend.referrals.privacy.note" = "개인 정보 보호를 위해 30일보다 오래된 모든 초대는 삭제됩니다.";
-"friend.referrals.signedup" = "가입함";
-"friend.referrals.reward.given" = "제공된 보상";
-"friend.referrals.days.acquired" = "무료 일수 획득";
-"friend.referrals.days.number" = "%d일";
-
-"friend.referrals.friends.family.title" = "친구와 가족을 추천하세요. 친구나 가족이 가입할 때마다 두 분 모두에게 30일 무료 이용 기간을 제공해 드립니다. ";
-"friend.referrals.description.short" = "친구 추천. 30일 무료 이용.";
 
 // GDPR
 "gdpr.collect.data.title" = "당사가 수집하는 개인 정보";
@@ -391,32 +305,20 @@
 "set.email.why" = "사용자 이름 및 비밀번호를 보내 드리려면 귀하의 이메일 주소가 필요합니다.";
 "set.email.success.message_format" = "귀하의 이메일 주소(%@)로 계정 사용자 이름 및 비밀번호를 보내 드렸습니다";
 "set.email.password.caption" = "비밀번호";
-"set.email.error.validation" = "이메일 주소를 입력해야 합니다.";
 
 // EMAIL VALIDATOR
 "email.validation.invalid" = "유효하지 않은 이메일입니다. 다시 시도하세요.";
 "email.validation.empty" = "이메일은 비워 둘 수 없습니다.";
 
 // RATING
-"rating.enjoy.question" = "PIA VPN이 마음에 드세요?";
-"rating.enjoy.subtitle" = "저희 VPN 제품이 고객님의 기대에 부응하기를 바랍니다";
-"rating.problems.question" = "어떤 문제가 있었습니까?";
-"rating.problems.subtitle" = "피드백을 보내 주시겠습니까? 더 나은 PIA를 경험하실 수 있도록 도와 드리겠습니다";
-"rating.review.question" = "App Store에 리뷰를 남겨 주시겠습니까?";
-"rating.rate.question" = "App Store에서 점수를 매겨주시겠어요?";
-"rating.rate.subtitle" = "고객님의 경험을 공유해 주시면 감사하겠습니다";
 "rating.error.question" = "연결을 수립할 수 없습니다";
 "rating.error.subtitle" = "다른 지역을 선택해 보시거나 지원 티켓을 열어서 저희에게 알려 주세요.";
 "rating.error.button.send" = "피드백 보내기";
-"rating.alert.button.notreally" = "아니요";
-"rating.alert.button.nothanks" = "아니요.";
-"rating.alert.button.oksure" = "네, 좋아요!";
 
 // CALLING CARDS
 "card.wireguard.title" = "지금 WireGuard®를 사용해 보세요!";
 "card.wireguard.description" = "새롭고 더 효율적인 VPN 프로토콜을 통해 더 우수한 성능, 더 적은 CPU 사용량 및 더 긴 배터리 수명을 제공합니다.";
 "card.wireguard.cta.activate" = "지금 WireGuard® 사용해 보기";
-"card.wireguard.cta.settings" = "설정 열기";
 "card.wireguard.cta.learn" = "자세히 보기";
 
 // DEDICATED IP
@@ -430,7 +332,6 @@
 "dedicated.ip.message.invalid.token" = "토큰이 유효하지 않습니다. 올바른 토큰을 입력했는지 확인하세요.";
 "dedicated.ip.message.valid.token" = "회원님의 전용 IP가 성공적으로 활성화되었습니다. 지역 선택 목록에서 사용하실 수 있습니다.";
 "dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
-"dedicated.ip.message.error.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
 "dedicated.ip.message.error.retryafter" = "토큰 활성화 요청이 너무 많이 실패했습니다. %@초 후 다시 시도하십시오.";
 "dedicated.ip.message.token.willexpire" = "회원님의 전용 IP가 곧 만료됩니다. 새로 획득하세요";
 "dedicated.ip.message.token.willexpire.link" = "새로 획득하세요";
@@ -611,7 +512,6 @@
 "tvos.signup.terms_conditions.description" = "본 서비스 약관('계약')은 www.privateinternetaccess.com에 위치한 PIA Private Internet Access, Inc.('PIA') 웹사이트('사이트'), 가상 사설망('VPN') 및 사이트를 통해 제공되는 PIA의 서비스('서비스')에 대한 귀하의 사용 및 접근 범위를 다룹니다. 귀하('귀하' 또는 '구독자')('PIA' 및 '구독자'를 통칭하여 '당사자')는 사이트를 방문하고 정액제를 구매하고 서비스를 이용함으로써 계약을 읽었으며 약관을 완전히 이해하고 계약의 모든 약관을 준수할 것에 동의하게 됩니다.";
 "tvos.signup.terms_conditions.qr_code.message" = "QR 코드를 스캔하여 기기에서 전체 이용 약관 정책을 확인하세요.";
 
-
 //Force update (iOS)
 "forceupdate.label.title" = "사용자 경험 업그레이드";
 "forceupdate.label.subtitle" = "고객님은 이전 버전의 PIA를 사용 중입니다. 지금 앱을 업데이트하여 모든 최신 기능을 통해 향상된 경험을 즐기세요.";
@@ -622,7 +522,6 @@
 
 "signup.in_progress.title"= "회원 가입 확인";
 "signup.in_progress.message"= "저희 시스템에서 고객님의 구매를 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
-"signup.in_progress.redeem.message"= "저희 시스템에서 고객님의 카드 PIN을 확인하고 있습니다. 약간 시간이 소요될 수 있으므로 양해 부탁드립니다.";
 
 "signup.success.title"= "구매 완료";
 "signup.success.message_format"= "회원으로 가입해 주셔서 감사합니다. 계정 사용자명과 비밀번호를 귀하의 이메일 주소(%@)로 발송했습니다.";
@@ -651,27 +550,15 @@
 
 "signup.purchase.uncredited.alert.message"= "처리되지 않은 거래가 있습니다. 계정 정보를 복구하시겠습니까?";
 "signup.purchase.uncredited.alert.button.cancel"= "취소";
-"signup.purchase.uncredited.alert.button.recover"= "계정 복구";
 
 "signup.purchase.trials.intro"= "7일 무료 체험 시작";
 "signup.purchase.trials.price.after"= "그 후 %@";
-"signup.purchase.trials.money.back"= "30일 이내 환불 보장";
-"signup.purchase.trials.1year.protection"= "1년간 프라이버시 및 신원 보호";
-"signup.purchase.trials.anonymous"= "익명으로 검색하고 IP를 숨기세요.";
-"signup.purchase.trials.devices"= "동시에 10대의 장치 지원";
-"signup.purchase.trials.devices.description"= "한 번에 최대 10대의 장치에서 보호를 받으세요.";
 "signup.purchase.trials.region"= "90개 이상의 국가에 보안 서버";
-"signup.purchase.trials.servers"= "32개국 3300개 이상의 서버";
-"signup.purchase.trials.start"= "구독 시작";
 "signup.purchase.trials.all.plans"= "이용 가능한 모든 플랜 보기";
 
 "signup.purchase.subscribe.now"= "지금 구독";
 
 // WALKTHROUGH
-
-"signup.walkthrough.action.next"= "다음";
-"signup.walkthrough.action.done"= "완료";
-"signup.walkthrough.action.skip"= "건너뛰기";
 
 "signup.walkthrough.page.1.title"= "한 번의 10대의 장치 지원";
 "signup.walkthrough.page.1.description"= "한 번에 최대 10대의 장치에서 보호를 받으세요.";
@@ -720,20 +607,13 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.login.magic.link.title"= "이메일 링크를 사용해 간편하게 로그인";
 "welcome.login.magic.link.response"= "로그인 링크가 담긴 이메일을 확인하세요.";
 "welcome.login.magic.link.send"= "링크 보내기";
-"welcome.login.magic.link.invalid.email"= "이메일이 유효하지 않음. 다시 시도하세요.";
 
 "welcome.purchase.title"= "VPN 플랜 선택";
 "welcome.purchase.subtitle"= "30일 이내 환불 보장";
 "welcome.purchase.email.placeholder"= "이메일 주소";
 "welcome.purchase.continue"= "계속";
-"welcome.purchase.login.footer"= "이미 계정이 있으세요?";
-"welcome.purchase.login.button"= "로그인";
-"welcome.purchase.error.title"= "구매";
-"welcome.purchase.error.validation"= "이메일 주소를 입력하셔야 합니다.";
 "welcome.purchase.error.connectivity.title"= "연결 실패";
-"welcome.purchase.error.connectivity.description"= "Private Internet Access에 접속할 수 없습니다. 인터넷 연결 상태가 좋지 않거나 귀하의 국가에서 당사의 서비스가 차단된 것 같습니다.";
 "welcome.purchase.confirm.form.email"= "이메일 주소를 입력하세요";
-"welcome.purchase.confirm.plan"= "%@ 플랜을 구매합니다";
 "welcome.purchase.email.why"= "사용자 이름 및 비밀번호를 보내 드리면 고객님의 이메일 주소가 필요합니다.";
 "welcome.purchase.submit"= "제출";
 "welcome.purchase.or"= "또는";
@@ -743,14 +623,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.upgrade.renew.now"= "지금 갱신";
 
 "welcome.redeem.title"= "기프트 카드 청구";
-"welcome.redeem.subtitle"= "기프트 카드 또는 체험 카드의 %lu자리 PIN과 이메일 주소를 입력하세요.";
-"welcome.redeem.email.placeholder"= "이메일 주소";
-"welcome.redeem.submit"= "제출";
-"welcome.redeem.error.title"= "청구";
-"welcome.redeem.error.code"= "코드는 %lu자리 숫자여야 합니다.";
-"welcome.redeem.error.allfields"= "이메일 및 카드 PIN을 입력하세요.";
 "welcome.redeem.accessibility.back"= "뒤로";
-"welcome.redeem.giftcard.placeholder"= "기프트 카드 PIN";
 
 "welcome.plan.monthly.title"= "월간";
 "welcome.plan.yearly.title"= "연간";
@@ -764,23 +637,15 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.restore.email.placeholder"= "이메일 주소";
 "welcome.restore.submit"= "확인";
 
-"welcome.iap.error.message.unavailable"= "현재 Apple 서버를 이용할 수 없습니다. 나중에 다시 시도해주십시오.";
 "welcome.iap.error.title"= "오류";
 
-"welcome.agreement.trials.title"= "무료 체험 계약 조건";
-"welcome.agreement.trials.message"= "구매 확인 시 사용자의 Apple ID 계정으로 요금이 청구됩니다. 현재 기간이 종료하기 24시간 전에 취소하지 않으면 구독은 자동으로 갱신됩니다. 현재 기간이 종료하기 전 24시간 이내에 갱신 요금이 계정으로 청구됩니다. 구매 후 App Store의 계정 설정에서 구독을 관리하고 취소할 수 있습니다.\n\n일부 유료 구독은 사용자의 결제 수단으로 청구하기 전에 무료 체험을 제공할 수 있습니다. 결제 수단으로 청구가 시작되기 전에 유료 구독을 취소하려면, 무료 체험 기간이 종료하기 24시간 전에 구독을 취소하십시오.\n\n무료 체험은 신규 사용자만 이용할 수 있으며, 당사의 단독 재량으로 제공됩니다. 무료 체험을 추가로 이용하기 위해 가입한 경우 표준 구독 요금이 즉시 청구됩니다.\n\n당사는 언제든지 무료 체험을 철회할 권리를 보유합니다.\n\n구독 구매 시 무료 체험 기간의 미사용분은 소멸됩니다.\n\n가입 시 본 계약 조건에 동의하신 것으로 간주됩니다.";
 "welcome.agreement.message"= "체험 기간이 종료하기 24시간 전에 구독을 취소하지 않으면, 7일 무료 체험 후 이 구독은 %@에 자동으로 갱신됩니다. 체험 기간이 종료하기 전 24시간 이내에 사용자의 Apple ID로 갱신 요금이 청구됩니다. 구매 후 App Store 계정으로 이동하여 구독을 관리하고 취소할 수 있습니다. 7일 체험 혜택은 사용자당 한 번으로 제한됩니다. 사용자가 구독을 구매할 경우 무료 체험 기간의 미사용분은 소멸됩니다. 모든 가격에는 현지에서 적용되는 판매세가 포함됩니다.\n\n가입 시 $1 및 $2에 동의하신 것으로 간주됩니다.";
-"welcome.agreement.trials.yearly.plan"= "년";
-"welcome.agreement.trials.monthly.plan"= "개월";
 
 "welcome.agreement.message.tos"= "서비스 약관";
 "welcome.agreement.message.privacy"= "개인정보 취급방침";
 
-"welcome.getstarted.buttons.buyaccount"= "계정 구입";
-
 "welcome.gdpr.collect.data.title"= "당사가 수집하는 개인 정보";
 "welcome.gdpr.collect.data.description"= "계정 관리 및 악용 방지를 위한 이메일 주소.";
-"welcome.gdpr.usage.data.title"= "수집된 개인 정보의 사용";
 "welcome.gdpr.usage.data.description"= "이메일 주소는 구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 보내는 데에만 사용됩니다.";
 "welcome.gdpr.accept.button.title"= "동의 및 계속";
 

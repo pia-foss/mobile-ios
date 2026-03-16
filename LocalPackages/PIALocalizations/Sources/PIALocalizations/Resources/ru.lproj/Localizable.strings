@@ -18,14 +18,10 @@
 "global.add" = "Добавить";
 "global.remove" = "Удалить";
 "global.empty" = "Пусто";
-"global.copy" = "Копировать";
-"global.share" = "Поделиться";
-"global.copied" = "Скопировано в буфер";
 "global.yes" = "Да";
 "global.no" = "Нет";
 "global.or" = "или";
 "global.row.selection" = "Выбор строки";
-"global.vpn.settings" = "Настройки VPN";
 "global.general.settings" = "Общие настройки";
 "global.version" = "Версия";
 
@@ -84,25 +80,15 @@
 
 // ACCOUNT
 
-"account.email.caption" = "Эл. адрес";
 "account.email.placeholder" = "Адрес эл. почты";
 "account.username.caption" = "Имя пользователя";
-"account.other.footer" = "Установите приложение Private Internet Access на других устройствах и используйте указанные выше имя пользователя и пароль для входа в учетную запись и защиты соединения.";
 "account.restore.title" = "Восстановить непроведенную покупку";
 "account.restore.description" = "Если вы продлили план, но по-прежнему видите в учетной записи сообщение о том, что срок действия истекает, вы можете перезапустить здесь процедуру продления. За эту процедуру не взимается плата.";
 "account.restore.button" = "Восстановить покупку";
 "account.restore.failure.title" = "Восстановить покупку";
 "account.restore.failure.message" = "Не удалось найти применимой покупки для продления.";
-"account.save.item" = "Изменить эл. адрес";
-"account.save.prompt" = "Чтобы сохранить изменения, выполните аутентификацию";
-"account.save.success" = "Адрес электронной почты сохранен.";
-"account.reveal.prompt" = "Выполните аутентификацию для показа";
 "account.expiry_date.information" = "Ваш план истечет %@.";
 "account.expiry_date.expired" = "Срок действия плана истек.";
-"account.update.email.require.password.title" = "Требуется пароль PIA";
-"account.update.email.require.password.message" = "В целях безопасности для внесения изменений в учетную запись требуется ввести пароль PIA. Введите свой пароль PIA, чтобы продолжить.";
-"account.update.email.require.password.button" = "Отправить";
-"account.error.unauthorized" = "Неправильное имя пользователя или пароль.";
 "account.subscriptions.message" = "Управлять подписками можно здесь.";
 "account.subscriptions.linkMessage" = "здесь.";
 "account.set.email.error" = "При добавлении адреса эл. почты произошла ошибка. Повторите попытку позже.";
@@ -121,16 +107,11 @@
 "settings.connection.title" = "СОЕДИНЕНИЕ";
 "settings.connection.vpn_protocol.title" = "Выбор протокола";
 "settings.connection.transport.title" = "Перенос";
-"settings.connection.socket_protocol.title" = "Сокет";
 "settings.connection.remote_port.title" = "Удаленный порт";
 
-"settings.encryption.title" = "ШИФРОВАНИЕ";
 "settings.encryption.cipher.title" = "Шифрование данных";
-"settings.encryption.digest.title" = "Аутентификация данных";
 "settings.encryption.handshake.title" = "Квитирование";
 
-"settings.application_settings.title" = "НАСТРОЙКИ ПРИЛОЖЕНИЯ";
-"settings.application_settings.dark_theme.title" = "Темная тема";
 "settings.application_settings.active_theme.title" = "Активная тема";
 "settings.application_settings.kill_switch.title" = "Авторазрыв соединения";
 "settings.application_settings.kill_switch.footer" = "Функция авторазрыва соединения рвет Интернет-соединение при отключении VPN. Она не срабатывает при ручном отключении VPN.";
@@ -141,16 +122,12 @@
 "settings.application_settings.leak_protection.more_info" = "Подробнее";
 "settings.application_settings.allow_local_network.title" = "Разрешить доступ к устройствам в локальной сети";
 "settings.application_settings.allow_local_network.footer" = "Оставайтесь подключенными к устройствам в локальной сети, таким как принтеры или файловые серверы, пользуясь при этом VPN-подключением (включайте эту опцию только если доверяете людям и устройствам в вашей сети.)";
-"settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™ блокирует рекламу, следящие программы и вредоносное ПО, когда вы подключены к VPN.";
 "settings.application_settings.leak_protection.alert.title" = "Изменения в настройках VPN будут применены при следующем подключении";
 
 "settings.content_blocker.title" = "Состояние блокировщика контента для Safari";
-"settings.content_blocker.state.title" = "Текущее состояние";
 "settings.content_blocker.refresh.title" = "Обновление списка блокирования";
 "settings.content_blocker.footer" = "Чтобы включить или выключить правило блокирования контента, перейдите в \"Настройки\" > \"Приложения\" > Safari > \"Расширения\" и нажмите на PIA VPN.";
 
-"settings.application_information.title" = "СВЕДЕНИЯ О ПРИЛОЖЕНИИ";
 "settings.application_information.debug.title" = "Отправить журнал отладки в службу поддержки";
 "settings.application_information.debug_logging.title" = "Включить отладочное логирование";
 "settings.application_information.debug.failure.title" = "Ошибка при отправке";
@@ -165,7 +142,6 @@
 "settings.commit.buttons.reconnect" = "Переподключиться";
 "settings.commit.buttons.later" = "Позже";
 
-"settings.reset.title" = "СБРОСИТЬ";
 "settings.reset.defaults.title" = "Сбросить до настроек по умолчанию";
 "settings.reset.defaults.confirm.title" = "Сбросить настройки";
 "settings.reset.defaults.confirm.message" = "Это сбросит приложение к исходному состоянию. Вы потеряете все сделанные изменения.";
@@ -175,18 +151,10 @@
 "settings.small.packets.title" = "Использовать маленькие пакеты";
 "settings.small.packets.description" = "Размер IP-пакета будет слегка уменьшен, чтобы улучшить совместимость с некоторыми роутерами и мобильными сетями.";
 
-"settings.log.connected.error" = "Требуется подключение к VPN. Подключитесь к VPN и повторите попытку.";
 "settings.log.information" = "Сохранение файлов журнала отладки, которые можно отправить в службу технической поддержки для более быстрого устранения неполадок.";
-
-"settings.preview.title" = "Просмотр";
-"settings.server.network.description" = "Сеть следующего поколения";
-"settings.server.network.alert" = "Для смены сети сервера VPN необходимо отключить.";
 
 "settings.geo.servers.description" = "Показывать регионы, определенные по местоположению";
 "settings.cards.history.title" = "Последние новости";
-
-"settings.ovpn.migration.footer" = "Мы обновляем реализацию функции OpenVPN. Нажмите здесь для получения подробных сведений";
-"settings.ovpn.migration.footer.link" = "здесь";
 
 "settings.section.general" = "Общие";
 "settings.section.protocols" = "Протоколы";
@@ -204,24 +172,18 @@
 // ABOUT
 
 "about.app" = "VPN от Private Internet Access";
-"about.intro" = "Эта программа использует следующие компоненты:";
 "about.accessibility.component.expand" = "Нажмите, чтобы прочитать полный текст лицензии";
 
 // DASHBOARD
-
-"dashboard.content_blocker.intro.message" = "Эта версия заменяет MACE нашим правилом блокирования контента для Safari.\n\nПосмотрите в разделе «Настройки».";
 
 "dashboard.connection.ip.unreachable" = "Интернет недоступен";
 
 "dashboard.vpn.disconnected" = "Отключено";
 "dashboard.vpn.connecting" = "Подключение...";
-"dashboard.vpn.connected" = "Подключено к VPN";
 "dashboard.vpn.protected" = "Защищено";
 "dashboard.vpn.not_protected" = "Не защищено";
-"dashboard.vpn.on" = "VPN: ВКЛ.";
 "dashboard.vpn.disconnecting" = "Отключение...";
 "dashboard.vpn.changing_region" = "Изменение региона...";
-"dashboard.vpn.disconnect.untrusted" = "Эта сеть не является надежной. Действительно отключить VPN?";
 "dashboard.accessibility.vpn.button" = "Кнопка VPN-подключения";
 "dashboard.accessibility.vpn.button.isOn" = "Кнопка VPN-подключения. VPN сейчас подключен";
 "dashboard.accessibility.vpn.button.isOff" = "Кнопка VPN-подключения. VPN сейчас отключен";
@@ -264,35 +226,13 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "Средство управления сетями";
 "settings.hotspothelper.description" = "Настройте поведение PIA при подключении к WiFi или мобильным сетям. Это исключает возможность отключения вручную.";
-"settings.hotspothelper.enable.description" = "Если этот параметр активирован, PIA автоматически включает VPN при подключении к ненадежным сетям WiFi.";
-"settings.hotspothelper.all.title" = "Защитить все сети";
-"settings.hotspothelper.all.description" = "Защита WiFi с помощью VPN будет действовать во всех сетях, в том числе доверенных.";
 "settings.hotspothelper.available.help" = "Чтобы выстроить этот список, откройте настройки iOS > WiFi.";
-"settings.hotspothelper.available.add.help" = "Нажмите на «+» для добавления в число доверенных сетей.";
-"settings.trusted.networks.sections.current" = "Текущая сеть";
-"settings.trusted.networks.sections.available" = "Доступные сети";
-"settings.trusted.networks.sections.trusted" = "Доверенные сети";
-"settings.trusted.networks.message" = "PIA не будет автоматически подключаться к этим сетям.";
-"settings.trusted.networks.connect.message" = "Защитить эту сеть, подключившись к VPN?";
 "hotspothelper.display.name" = "🔒 Активируйте защиту WiFi с помощью VPN в настройках PIA, чтобы защитить это подключение.";
 "hotspothelper.display.protected.name" = "🔒 Защита WiFi с помощью PIA VPN включена – мы на страже.";
-"settings.hotspothelper.cellular.title" = "Защита через мобильные сети";
-"settings.hotspothelper.wifi.trust.title" = "Защита WiFi с помощью VPN";
-"settings.hotspothelper.cellular.description" = "PIA автоматически включает VPN при подключении к мобильным сетям, если этот параметр включен.";
-"settings.hotspothelper.cellular.networks" = "Мобильные сети";
-"settings.hotspothelper.wifi.networks" = "Сети WiFi";
-"settings.trusted.networks.sections.untrusted" = "Ненадежные сети";
-"settings.hotspothelper.rules.title" = "Правила";
-"settings.trusted.networks.sections.trusted.rule.description" = "Активируйте эту функцию, предварительно включив функцию авторазрыва соединения, чтобы настроить поведение PIA в сетях WiFi и мобильных сетях. Помните, что при отключении вручную инструмент управления сетью не будет работать.";
-"settings.trusted.networks.sections.trusted.rule.action" = "Отключиться от PIA VPN";
 "tiles.quicksetting.nmt.title" = "Управление сетью";
 "tiles.quicksetting.private.browser.title" = "Приватный браузер";
 "settings.nmt.killswitch.disabled" = "Функция авторазрыва соединения в настоящее время отключена. Чтобы обеспечить работу инструмента управления сетью и получить возможность повторного подключения при смене сети, активируйте авторазрыв соединения в настройках.";
-"settings.nmt.optout.disconnect.alerts" = "Деактивировать оповещение с подтверждением отключения";
-"settings.nmt.optout.disconnect.alerts.description" = "Выключение оповещения при отключении от VPN.";
-"settings.nmt.wireguard.warning" = "При переключении между различными сетями необходимости в переподключении WireGuard® нет. Может понадобиться вручную отключить VPN в доверенных сетях.";
 "settings.service.quality.share.title" = "Помощь в улучшении PIA";
 "settings.service.quality.share.description" = "Помогите нам стать лучше, передавая статистику по VPN-соединению. Эти отчеты не содержат каких-либо персональных данных.";
 "settings.service.quality.share.findoutmore" = "Подробнее";
@@ -336,9 +276,7 @@
 "tiles.usage.ipsec.title" = "ИСПОЛЬЗОВАНИЕ (недоступно на IKEv2)";
 "tiles.usage.upload" = "Отправить";
 "tiles.usage.download" = "Загрузить";
-"tiles.nmt.cellular" = "Мобильная";
 "tiles.nmt.accessibility.trusted" = "Доверенная сеть";
-"tiles.nmt.accessibility.untrusted" = "Ненадежная сеть";
 "tiles.quicksettings.title" = "Быстрые настройки";
 "tiles.quicksettings.min.elements.message" = "Следует оставить как минимум один элемент на плитке «Быстрые настройки» видимым";
 "tiles.accessibility.visible.tile.action" = "Нажмите, чтобы удалить эту плитку с панели";
@@ -356,30 +294,6 @@
 "today.widget.login" = "Вход";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "Неверный адрес эл. почты. Попробуйте еще раз.";
-"friend.referrals.title" = "Направить друга";
-"friend.referrals.view.invites.sent" = "Смотреть отправленные приглашения";
-"friend.referrals.pending.invites" = "%d ожидающих приглашений(я)";
-"friend.referrals.signups.number" = "%d регистраций(и)";
-"friend.referrals.fullName" = "Имя и фамилия";
-"friend.referrals.invitation.terms" = "Отправляя это приглашение, я принимаю положения и условия «Реферальной программы для близких и друзей»";
-"friend.referrals.family.friends.program" = "Реферальная программа для близких и друзей";
-"friend.referrals.send.invite" = "Отправить приглашение";
-"friend.referrals.invite.error" = "Не удалось повторить приглашение. Попробуйте еще раз позже.";
-"friend.referrals.invite.success" = "Приглашение успешно отправлено";
-"friend.referrals.share.link" = "Поделитесь уникальной реферальной ссылкой";
-"friend.referrals.share.link.terms" = "Делясь этой ссылкой, вы принимаете все положения и условия «Реферальной программы для близких и друзей».";
-"friend.referrals.invites.sent.title" = "Приглашения отправлены";
-"friend.referrals.pending.invites.title" = "Ожидающие приглашения";
-"friend.referrals.invites.number" = "Вы отправили %d приглашений(я)";
-"friend.referrals.privacy.note" = "Обратите внимание, что из соображений конфиденциальности все приглашения старше 30 дней будут удаляться.";
-"friend.referrals.signedup" = "Регистрация";
-"friend.referrals.reward.given" = "Награда выдана";
-"friend.referrals.days.acquired" = "Получено бесплатных дней";
-"friend.referrals.days.number" = "%d дн.";
-
-"friend.referrals.friends.family.title" = "Направляйте своих друзей и близких. За каждую регистрацию мы дарим вам 30 дней бесплатного пользования. ";
-"friend.referrals.description.short" = "НАПРАВЬТЕ ДРУГА. ПОЛУЧИТЕ 30 ДНЕЙ БЕСПЛАТНО.";
 
 // GDPR
 "gdpr.collect.data.title" = "Личная информация, которую мы собираем";
@@ -391,32 +305,20 @@
 "set.email.why" = "Нам нужен ваш электронный адрес, чтобы мы могли прислать вам имя пользователя и пароль.";
 "set.email.success.message_format" = "Мы отправили имя пользователя и пароль на адрес электронной почты %@";
 "set.email.password.caption" = "Пароль";
-"set.email.error.validation" = "Укажите адрес эл. почты.";
 
 // EMAIL VALIDATOR
 "email.validation.invalid" = "Неверный адрес эл. почты. Попробуйте еще раз.";
 "email.validation.empty" = "Адрес эл. почты не может быть пустым.";
 
 // RATING
-"rating.enjoy.question" = "Вам нравится PIA VPN?";
-"rating.enjoy.subtitle" = "Надеемся, что наш продукт VPN соответствует вашим ожиданиям";
-"rating.problems.question" = "Что пошло не так?";
-"rating.problems.subtitle" = "Хотите дать отзыв? Мы сделаем все возможное, чтобы ваши впечатления от PIA стали лучше";
-"rating.review.question" = "Как насчет отзыва в App Store?";
-"rating.rate.question" = "Как насчет оценки в App Store?";
-"rating.rate.subtitle" = "Благодарим за согласие поделиться своим опытом";
 "rating.error.question" = "Не удалось установить соединение";
 "rating.error.subtitle" = "Попробуйте выбрать другой регион или расскажите нам, что произошло, открыв заявку в службу поддержки.";
 "rating.error.button.send" = "Отправить отзыв";
-"rating.alert.button.notreally" = "Не особо";
-"rating.alert.button.nothanks" = "Спасибо, не надо.";
-"rating.alert.button.oksure" = "С удовольствием!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Опробуйте WireGuard® сегодня!";
 "card.wireguard.description" = "Это новый, более эффективный протокол VPN, который обеспечивает более высокую производительность, меньшую нагрузку на процессор и более длительную автономную работу устройства.";
 "card.wireguard.cta.activate" = "Опробуйте WireGuard®";
-"card.wireguard.cta.settings" = "Открыть настройки";
 "card.wireguard.cta.learn" = "Подробнее";
 
 // DEDICATED IP
@@ -430,7 +332,6 @@
 "dedicated.ip.message.invalid.token" = "Недействительный токен. Убедитесь, что вы правильно ввели токен.";
 "dedicated.ip.message.valid.token" = "Ваш выделенный IP-адрес успешно активирован. Теперь он будет доступен в списке выбора региона.";
 "dedicated.ip.message.expired.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
-"dedicated.ip.message.error.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
 "dedicated.ip.message.error.retryafter" = "Слишком много неудачных запросов активации токена. Повторите попытку через %@ сек.";
 "dedicated.ip.message.token.willexpire" = "Действие вашего выделенного IP-адреса скоро заканчивается. Получите новый адрес";
 "dedicated.ip.message.token.willexpire.link" = "Получите новый адрес";
@@ -611,7 +512,6 @@
 "tvos.signup.terms_conditions.description" = "Настоящее соглашение об условиях использования (далее — «Соглашение») касается использования и доступа к веб-сайту (далее — «Сайт») PIA Private Internet Access, Inc. (PIA), расположенному по адресу www.privateinternetaccess.com, виртуальной частной сети (VPN) и услугам PIA, предоставляемым через сайт (далее — «Услуги»). Посещая Сайт, покупая подписку и/или пользуясь Услугами, Вы (далее — «Вы» или «Подписчик») (PIA и «Подписчик» также известны как «Стороны») подтверждаете, что прочитали Соглашение, полностью понимаете указанные в нем условия и согласны их соблюдать в полной мере.";
 "tvos.signup.terms_conditions.qr_code.message" = "Отсканируйте QR-код, чтобы полностью открыть Условия использования на своем устройстве.";
 
-
 //Force update (iOS)
 "forceupdate.label.title" = "Улучшите свой опыт";
 "forceupdate.label.subtitle" = "Вы используете старую версию PIA. Обновите приложение прямо сейчас, чтобы наслаждаться улучшенными возможностями со всеми последними функциями.";
@@ -622,7 +522,6 @@
 
 "signup.in_progress.title"= "Подтверждение регистрации";
 "signup.in_progress.message"= "Мы проверяем вашу покупку в системе. На это может понадобиться время, так что оставайтесь с нами.";
-"signup.in_progress.redeem.message"= "Мы подтверждаем ваш PIN-код в системе. Это займет какое-то время, подождите немного.";
 
 "signup.success.title"= "Покупка завершена";
 "signup.success.message_format"= "Спасибо за регистрацию. Мы отправили имя пользователя и пароль на адрес электронной почты %@";
@@ -651,27 +550,15 @@
 
 "signup.purchase.uncredited.alert.message"= "У вас есть непроведенные транзакции. Хотите восстановить данные своей учетной записи?";
 "signup.purchase.uncredited.alert.button.cancel"= "Отмена";
-"signup.purchase.uncredited.alert.button.recover"= "Восстановить учетную запись";
 
 "signup.purchase.trials.intro"= "Начните 7-дневную бесплатную пробу";
 "signup.purchase.trials.price.after"= "После этого %@";
-"signup.purchase.trials.money.back"= "30-дневная гарантия возврата денег";
-"signup.purchase.trials.1year.protection"= "1 год защиты конфиденциальности и личных данных";
-"signup.purchase.trials.anonymous"= "Пользуйтесь Интернетом анонимно и скрывайте свой IP-адрес.";
-"signup.purchase.trials.devices"= "Поддержка сразу 10 устройств";
-"signup.purchase.trials.devices.description"= "Защищайте себя на нескольких устройствах одновременно (до 10).";
 "signup.purchase.trials.region"= "Защищенные серверы в более чем 90 странах";
-"signup.purchase.trials.servers"= "Более 3300 серверов в 32 странах";
-"signup.purchase.trials.start"= "Запустить подписку.";
 "signup.purchase.trials.all.plans"= "Смотреть все доступные планы";
 
 "signup.purchase.subscribe.now"= "Подписаться";
 
 // WALKTHROUGH
-
-"signup.walkthrough.action.next"= "ДАЛЕЕ";
-"signup.walkthrough.action.done"= "ГОТОВО";
-"signup.walkthrough.action.skip"= "ПРОПУСК";
 
 "signup.walkthrough.page.1.title"= "Поддержка 10 устройств одновременно";
 "signup.walkthrough.page.1.description"= "Защищайте себя на нескольких устройствах одновременно (до 10).";
@@ -720,20 +607,13 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.login.magic.link.title"= "Войти через волшебную ссылку из письма";
 "welcome.login.magic.link.response"= "Поищите ссылку для входа в письме.";
 "welcome.login.magic.link.send"= "Отправить ссылку";
-"welcome.login.magic.link.invalid.email"= "Недействительный эл. адрес. Повторите попытку.";
 
 "welcome.purchase.title"= "Выберите план VPN";
 "welcome.purchase.subtitle"= "30-дневная гарантия возврата денег";
 "welcome.purchase.email.placeholder"= "Адрес эл. почты";
 "welcome.purchase.continue"= "Продолжить";
-"welcome.purchase.login.footer"= "Уже есть учетная запись?";
-"welcome.purchase.login.button"= "Вход";
-"welcome.purchase.error.title"= "Купить";
-"welcome.purchase.error.validation"= "Укажите адрес эл. почты.";
 "welcome.purchase.error.connectivity.title"= "Ошибка подключения";
-"welcome.purchase.error.connectivity.description"= "Не удалось подключиться к Private Internet Access. Это может быть из-за плохого качества соединения с Интернетом, или наша служба заблокирована в вашей стране.";
 "welcome.purchase.confirm.form.email"= "Введите свой адрес эл. почты";
-"welcome.purchase.confirm.plan"= "Вы приобретаете план «%@»";
 "welcome.purchase.email.why"= "Нам нужен ваш электронный адрес, чтобы мы могли прислать вам имя пользователя и пароль.";
 "welcome.purchase.submit"= "Отправить";
 "welcome.purchase.or"= "или";
@@ -743,14 +623,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.upgrade.renew.now"= "Продлить";
 
 "welcome.redeem.title"= "Исп-ть подарочную карту";
-"welcome.redeem.subtitle"= "Введите свой адрес эл. почты и %lu-зн. PIN-код с подарочной или триальной карты.";
-"welcome.redeem.email.placeholder"= "Адрес эл. почты";
-"welcome.redeem.submit"= "ОТПРАВИТЬ";
-"welcome.redeem.error.title"= "Использовать";
-"welcome.redeem.error.code"= "В коде должно быть %lu цифр(ы).";
-"welcome.redeem.error.allfields"= "Введите свой эл. адрес и PIN-код карты";
 "welcome.redeem.accessibility.back"= "Назад";
-"welcome.redeem.giftcard.placeholder"= "PIN-код подарочной карты";
 
 "welcome.plan.monthly.title"= "Ежемесячно";
 "welcome.plan.yearly.title"= "Ежегодно";
@@ -764,23 +637,15 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.restore.email.placeholder"= "Адрес электронной почты";
 "welcome.restore.submit"= "ПОДТВЕРДИТЬ";
 
-"welcome.iap.error.message.unavailable"= "Серверы Apple временно недоступны. Повторите попытку позже.";
 "welcome.iap.error.title"= "Ошибка";
 
-"welcome.agreement.trials.title"= "Положения и условия бесплатного пробного пользования";
-"welcome.agreement.trials.message"= "Платеж списывается со счета вашего Apple ID при подтверждении покупки. Подписка продлевается автоматически, если не отменить ее по меньшей мере за 24 часа до окончания текущего периода. Плата за продление подписки будет списана  со счета вашей учетной записи в течение 24 часов до окончания текущего периода. Для управления подписками, в том числе их отмены, после покупки перейдите в настройки учетной записи в App Store.\n\nНекоторые платные подписки могут предлагать бесплатное пробное пользование перед тем, как списывать средства с использованием указанного вами способа оплаты. Если вы решите отменить платную подписку до того, как мы начнем списывать средства с использованием указанного вами способа оплаты, сделайте это по меньшей мере за 24 часа до окончания бесплатного пробного периода.\n\nБесплатное пробное пользование доступно только для новых пользователей и предлагается по нашему единоличному усмотрению, и если вы попытаетесь зарегистрироваться для участия в дополнительном бесплатном пробном пользовании, с вас будет незамедлительно списана стандартная стоимость подписки.\n\nМы оставляем за собой право в любое время прервать ваше бесплатное пробное пользование.\n\nНеиспользованная часть бесплатного пробного периода сгорает после приобретения подписки.\n\nЗарегистрировавшись, вы тем самым принимаете настоящие положения и условия.";
 "welcome.agreement.message"= "После завершения 7-дневного бесплатного пробного периода подписка автоматически продлевается на %@, если не отменить ее по меньшей мере за 24 часа до окончания текущего периода. Плата за продление подписки будет списана со счета вашей учетной записи в течение 24 часов до окончания текущего периода. Для управления подписками, в том числе их отмены, после покупки перейдите в настройки учетной записи в App Store. 7-дневное пробное пользование предлагается каждому пользователю только 1 раз. Неиспользованная часть бесплатного пробного периода сгорает после приобретения подписки. Цена указывается с учетом местных налогов на продажу.\n\nРегистрируясь, вы тем самым принимаете списание с вашего счета сумм в $1 и $2 доллара США.";
-"welcome.agreement.trials.yearly.plan"= "год";
-"welcome.agreement.trials.monthly.plan"= "месяц";
 
 "welcome.agreement.message.tos"= "Условия использования";
 "welcome.agreement.message.privacy"= "Политика конфиденциальности";
 
-"welcome.getstarted.buttons.buyaccount"= "Приобрести учетную запись";
-
 "welcome.gdpr.collect.data.title"= "Личная информация, которую мы собираем";
 "welcome.gdpr.collect.data.description"= "Адрес эл. почты используется в целях управления учетной записью и защиты от злоупотреблений.";
-"welcome.gdpr.usage.data.title"= "Использование собираемой нами личной информации";
 "welcome.gdpr.usage.data.description"= "Адрес эл. почты используется исключительно для отправки информации о подписке, подтверждений оплаты, переписки с пользователем и отправки акционных предложений Private Internet Access.";
 "welcome.gdpr.accept.button.title"= "Принять и продолжить";
 

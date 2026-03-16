@@ -18,14 +18,10 @@
 "global.add" = "Toevoegen";
 "global.remove" = "Verwijderen";
 "global.empty" = "Leeg";
-"global.copy" = "Kopiëren";
-"global.share" = "Delen";
-"global.copied" = "Naar klembord gekopieerd";
 "global.yes" = "Ja";
 "global.no" = "Nee";
 "global.or" = "of";
 "global.row.selection" = "Rijselectie";
-"global.vpn.settings" = "VPN-instellingen";
 "global.general.settings" = "Algemene instellingen";
 "global.version" = "Versie";
 
@@ -84,25 +80,15 @@
 
 // ACCOUNT
 
-"account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadres";
 "account.username.caption" = "Gebruikersnaam";
-"account.other.footer" = "Download de Private Internet Access-app voor uw andere apparaten en gebruik de gebruikersnaam en het wachtwoord hierboven om in te loggen en uw verbinding te beveiligen.";
 "account.restore.title" = "Niet-gecrediteerde aankoop herstellen";
 "account.restore.description" = "Als u uw abonnement heeft vernieuwd, maar uw account geeft nog steeds aan dat het bijna is verlopen, dan kunt u hier opnieuw beginnen. Er worden geen extra kosten in rekening gebracht tijdens dit proces.";
 "account.restore.button" = "Aankoop herstellen";
 "account.restore.failure.title" = "Aankoop herstellen";
 "account.restore.failure.message" = "Er is geen aankoop gevonden die kan worden hersteld.";
-"account.save.item" = "E-mail updaten";
-"account.save.prompt" = "Authenticeren om wijzigingen op te slaan";
-"account.save.success" = "Uw e-mailadres is opgeslagen.";
-"account.reveal.prompt" = "Authenticeren om te onthullen";
 "account.expiry_date.information" = "Uw plan verloopt op %@.";
 "account.expiry_date.expired" = "Uw abonnement is verlopen.";
-"account.update.email.require.password.title" = "PIA-wachtwoord vereist";
-"account.update.email.require.password.message" = "Om veiligheidsredenen hebben wij uw PIA-wachtwoord nodig om wijzigingen in uw account uit te voeren. Voer uw PIA-wachtwoord in om verder te gaan.";
-"account.update.email.require.password.button" = "Versturen";
-"account.error.unauthorized" = "Uw gebruikersnaam of wachtwoord is onjuist.";
 "account.subscriptions.message" = "U kunt uw abonnement hier beheren.";
 "account.subscriptions.linkMessage" = "hier.";
 "account.set.email.error" = "Er is een fout opgetreden bij het toevoegen van het e-mailadres. Probeer het later opnieuw.";
@@ -121,16 +107,11 @@
 "settings.connection.title" = "VERBINDING";
 "settings.connection.vpn_protocol.title" = "Protocolselectie";
 "settings.connection.transport.title" = "Transport";
-"settings.connection.socket_protocol.title" = "Socket";
 "settings.connection.remote_port.title" = "Externe poort";
 
-"settings.encryption.title" = "VERSLEUTELING";
 "settings.encryption.cipher.title" = "Gegevensversleuteling";
-"settings.encryption.digest.title" = "Gegevensauthenticatie";
 "settings.encryption.handshake.title" = "Handdruk";
 
-"settings.application_settings.title" = "TOEPASSINGSINSTELLINGEN";
-"settings.application_settings.dark_theme.title" = "Donker thema";
 "settings.application_settings.active_theme.title" = "Actief thema";
 "settings.application_settings.kill_switch.title" = "VPN-killswitch";
 "settings.application_settings.kill_switch.footer" = "De VPN kill switch voorkomt toegang tot internet als de VPN-verbinding opnieuw tot stand wordt gebracht. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
@@ -141,16 +122,12 @@
 "settings.application_settings.leak_protection.more_info" = "Meer info";
 "settings.application_settings.allow_local_network.title" = "Sta toegang toe tot apparaten op een lokaal netwerk";
 "settings.application_settings.allow_local_network.footer" = "Blijf verbonden met lokale apparaten, zoals printers of bestandsservers die verbonden zijn met het VPN. (Sta dit alleen toe als je de personen en apparaten op je netwerk vertrouwt.)";
-"settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™ blokkeert advertenties, trackers en malware als u met de VPN bent verbonden.";
 "settings.application_settings.leak_protection.alert.title" = "Wijzigingen aan de VPN-instellingen worden van kracht bij de volgende verbinding";
 
 "settings.content_blocker.title" = "Status Safari Content Blocker";
-"settings.content_blocker.state.title" = "Huidige status";
 "settings.content_blocker.refresh.title" = "Zwarte lijst verversen";
 "settings.content_blocker.footer" = "Om Content Blocker in- of uit te schakelen, ga je naar Instellingen > Apps > Safari > Extensies en tik je op PIA VPN.";
 
-"settings.application_information.title" = "APPLICATIE-INFORMATIE";
 "settings.application_information.debug.title" = "Debugbestand naar klantenservice sturen";
 "settings.application_information.debug_logging.title" = "Debuglogboekregistratie inschakelen";
 "settings.application_information.debug.failure.title" = "Fout tijdens inzending";
@@ -165,7 +142,6 @@
 "settings.commit.buttons.reconnect" = "Opnieuw verbinden";
 "settings.commit.buttons.later" = "Later";
 
-"settings.reset.title" = "RESETTEN";
 "settings.reset.defaults.title" = "Instellingen resetten naar standaard";
 "settings.reset.defaults.confirm.title" = "Instellingen resetten";
 "settings.reset.defaults.confirm.message" = "Hiermee zet u de standaardinstellingen van de app terug. Alle wijzigingen die u heeft gemaakt, gaan verloren.";
@@ -175,18 +151,10 @@
 "settings.small.packets.title" = "Kleine pakketten gebruiken";
 "settings.small.packets.description" = "Maakt het IP-pakket iets kleiner om de compatibiliteit met sommige routers en mobiele netwerken te verbeteren.";
 
-"settings.log.connected.error" = "Een VPN-verbinding is vereist. Maak verbinding met de VPN en probeer het opnieuw.";
 "settings.log.information" = "Sla debuglogboeken op die kunnen worden verzonden naar de technische ondersteuning voor het oplossen van problemen.";
-
-"settings.preview.title" = "Voorbeeld";
-"settings.server.network.description" = "Volgende-generatienetwerk";
-"settings.server.network.alert" = "De VPN-verbinding moet worden verbroken om het servernetwerk te wijzigen.";
 
 "settings.geo.servers.description" = "Geolocatie-regio's weergeven";
 "settings.cards.history.title" = "Laatste nieuws";
-
-"settings.ovpn.migration.footer" = "We werken onze OpenVPN-implementatie bij. Klik hier voor meer informatie.";
-"settings.ovpn.migration.footer.link" = "hier";
 
 "settings.section.general" = "Algemeen";
 "settings.section.protocols" = "Protocollen";
@@ -204,24 +172,18 @@
 // ABOUT
 
 "about.app" = "VPN door Private Internet Access";
-"about.intro" = "Dit programma gebruikt de volgende componenten:";
 "about.accessibility.component.expand" = "Tik om volledige licentie te lezen";
 
 // DASHBOARD
-
-"dashboard.content_blocker.intro.message" = "Deze versie vervangt MACE met onze Content blocker voor Safari.\n\nGa voor meer informatie naar de 'Instellingen'.";
 
 "dashboard.connection.ip.unreachable" = "Internet onbereikbaar";
 
 "dashboard.vpn.disconnected" = "Verbinding verbroken";
 "dashboard.vpn.connecting" = "Verbinden...";
-"dashboard.vpn.connected" = "Verbonden met VPN";
 "dashboard.vpn.protected" = "Beschermd";
 "dashboard.vpn.not_protected" = "Niet beschermd";
-"dashboard.vpn.on" = "VPN: AAN";
 "dashboard.vpn.disconnecting" = "Verbinding verbreken...";
 "dashboard.vpn.changing_region" = "Regio wijzigen...";
-"dashboard.vpn.disconnect.untrusted" = "Dit is een niet-vertrouwd netwerk. Wilt u de verbinding met de VPN echt verbreken?";
 "dashboard.accessibility.vpn.button" = "VPN-verbindingsknop";
 "dashboard.accessibility.vpn.button.isOn" = "VPN-verbindingsknop. De VPN is verbonden";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-verbindingsknop. De VPN is niet verbonden";
@@ -264,35 +226,13 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "Netwerkbeheertool";
 "settings.hotspothelper.description" = "Configureer hoe PIA zich gedraagt bij verbinding met wifi of cellulaire netwerken. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
-"settings.hotspothelper.enable.description" = "PIA schakelt de VPN automatisch in wanneer u verbinding maakt met niet-vertrouwde wifi-netwerken als deze optie is ingeschakeld.";
-"settings.hotspothelper.all.title" = "Bescherm alle netwerken";
-"settings.hotspothelper.all.description" = "VPN-wifibescherming wordt op alle netwerken geactiveerd, inclusief vertrouwde netwerken.";
 "settings.hotspothelper.available.help" = "Ga naar iOS-instellingen > wifi om deze lijst in te vullen.";
-"settings.hotspothelper.available.add.help" = "Tik op + om aan vertrouwde netwerken toe te voegen.";
-"settings.trusted.networks.sections.current" = "Huidig netwerk";
-"settings.trusted.networks.sections.available" = "Beschikbare netwerken";
-"settings.trusted.networks.sections.trusted" = "Vertrouwde netwerken";
-"settings.trusted.networks.message" = "PIA maakt niet automatisch verbinding op deze netwerken.";
-"settings.trusted.networks.connect.message" = "Dit netwerk beschermen door met VPN te verbinden?";
 "hotspothelper.display.name" = "🔒 Activeer VPN-wifibescherming via PIA-instellingen om deze verbinding te beveiligen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN-wifibescherming ingeschakeld - Wij zorgen voor uw veiligheid.";
-"settings.hotspothelper.cellular.title" = "Cellulaire netwerken beschermen";
-"settings.hotspothelper.wifi.trust.title" = "VPN-wifibescherming";
-"settings.hotspothelper.cellular.description" = "PIA schakelt de VPN automatisch in wanneer u verbinding maakt met cellulaire netwerken als deze optie is ingeschakeld.";
-"settings.hotspothelper.cellular.networks" = "Cellulaire netwerken";
-"settings.hotspothelper.wifi.networks" = "Wifi-netwerken";
-"settings.trusted.networks.sections.untrusted" = "Niet-vertrouwde netwerken";
-"settings.hotspothelper.rules.title" = "Regels";
-"settings.trusted.networks.sections.trusted.rule.description" = "Schakel deze functie in, terwijl de VPN kill switch is ingeschakeld, om te configureren hoe PIA zich gedraagt bij verbinding met wifi of cellulaire netwerken. Houd er wel rekening mee dat de functies van de netwerkbeheertool worden uitgeschakeld als u de verbinding handmatig verbreekt.";
-"settings.trusted.networks.sections.trusted.rule.action" = "PIA VPN-verbinding verbreken";
 "tiles.quicksetting.nmt.title" = "Netwerkbeheer";
 "tiles.quicksetting.private.browser.title" = "Privébrowser";
 "settings.nmt.killswitch.disabled" = "De VPN kill switch is op dit moment uitgeschakeld. Schakel de VPN kill switch in via uw instellingen om ervoor te zorgen dat de netwerkbeheertool werkt en dat u verbinding kunt maken als u van netwerk wisselt.";
-"settings.nmt.optout.disconnect.alerts" = "Bevestigingsmelding voor verbreken verbinding uitschakelen";
-"settings.nmt.optout.disconnect.alerts.description" = "Schakelt de melding bij het verbreken van de verbinding met de VPN uit.";
-"settings.nmt.wireguard.warning" = "WireGuard® hoeft niet opnieuw verbinding te maken als u tussen verschillende netwerken schakelt. Het kan noodzakelijk zijn om de verbinding met de VPN op vertrouwde netwerken te verbreken.";
 "settings.service.quality.share.title" = "Help PIA te verbeteren";
 "settings.service.quality.share.description" = "Help ons onze service te verbeteren door VPN-verbindingsgegevens met ons te delen. Deze rapporten bevatten geen persoonlijk identificeerbare informatie.";
 "settings.service.quality.share.findoutmore" = "Meer informatie";
@@ -336,9 +276,7 @@
 "tiles.usage.ipsec.title" = "GEBRUIK (niet beschikbaar op IKEv2)";
 "tiles.usage.upload" = "Uploaden";
 "tiles.usage.download" = "Downloaden";
-"tiles.nmt.cellular" = "Cellulair";
 "tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";
-"tiles.nmt.accessibility.untrusted" = "Niet-vertrouwd netwerk";
 "tiles.quicksettings.title" = "Snelle instellingen";
 "tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";
 "tiles.accessibility.visible.tile.action" = "Tik om deze tegel van het dashboard te verwijderen";
@@ -356,30 +294,6 @@
 "today.widget.login" = "Inloggen";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "Ongeldig e-mailadres. Probeer het opnieuw.";
-"friend.referrals.title" = "Een vriend doorverwijzen";
-"friend.referrals.view.invites.sent" = "Verstuurde uitnodigingen bekijken";
-"friend.referrals.pending.invites" = "%d uitnodigingen in behandeling";
-"friend.referrals.signups.number" = "%d aanmeldingen";
-"friend.referrals.fullName" = "Volledige naam";
-"friend.referrals.invitation.terms" = "Door deze uitnodiging te versturen, ga ik akkoord met de algemene voorwaarden van het verwijzingsprogramma voor familie en vrienden.";
-"friend.referrals.family.friends.program" = "Verwijzingsprogramma voor familie en vrienden";
-"friend.referrals.send.invite" = "Uitnodiging versturen";
-"friend.referrals.invite.error" = "Kan uitnodiging niet versturen. Probeer het later opnieuw.";
-"friend.referrals.invite.success" = "Uitnodiging verstuurd";
-"friend.referrals.share.link" = "Deel uw unieke verwijzingslink";
-"friend.referrals.share.link.terms" = "Door deze link te delen, gaat u akkoord met de algemene voorwaarden van het verwijzingsprogramma voor familie en vrienden.";
-"friend.referrals.invites.sent.title" = "Uitnodigingen verstuurd";
-"friend.referrals.pending.invites.title" = "Uitnodigingen in behandeling";
-"friend.referrals.invites.number" = "U heeft %d uitnodigingen verstuurd";
-"friend.referrals.privacy.note" = "Let op: om privacyredenen worden alle uitnodigingen die ouder zijn dan 30 dagen verwijderd.";
-"friend.referrals.signedup" = "Aangemeld";
-"friend.referrals.reward.given" = "Beloning gegeven";
-"friend.referrals.days.acquired" = "Ontvangen gratis dagen";
-"friend.referrals.days.number" = "%d dagen";
-
-"friend.referrals.friends.family.title" = "Verwijs uw vrienden en familie door. Voor elke aanmelding krijgt u allebei 30 dagen gratis. ";
-"friend.referrals.description.short" = "VERWIJS EEN VRIEND DOOR. ONTVANG 30 DAGEN GRATIS.";
 
 // GDPR
 "gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
@@ -391,32 +305,20 @@
 "set.email.why" = "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
 "set.email.success.message_format" = "We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
 "set.email.password.caption" = "Wachtwoord";
-"set.email.error.validation" = "U moet een e-mailadres invoeren.";
 
 // EMAIL VALIDATOR
 "email.validation.invalid" = "Ongeldig e-mailadres. Probeer het opnieuw.";
 "email.validation.empty" = "E-mail mag niet leeg zijn.";
 
 // RATING
-"rating.enjoy.question" = "Geniet u van PIA VPN?";
-"rating.enjoy.subtitle" = "We hopen dat ons VPN-product aan uw verwachtingen voldoet";
-"rating.problems.question" = "Wat is er fout gegaan?";
-"rating.problems.subtitle" = "Wilt u feedback geven? We kunnen u helpen met het verbeteren van uw ervaring met PIA.";
-"rating.review.question" = "Waarom laat u geen beoordeling achter in de AppStore?";
-"rating.rate.question" = "Wilt u een waardering geven in de App Store?";
-"rating.rate.subtitle" = "We stellen het op prijs dat u uw ervaring deelt";
 "rating.error.question" = "De verbinding kan niet tot stand worden gebracht";
 "rating.error.subtitle" = "U kunt een andere regio selecteren of ons hiervan op de hoogte stellen door een supportticket te openen.";
 "rating.error.button.send" = "Feedback sturen";
-"rating.alert.button.notreally" = "Niet echt";
-"rating.alert.button.nothanks" = "Nee, bedankt.";
-"rating.alert.button.oksure" = "Graag!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Probeer WireGuard® vandaag nog!";
 "card.wireguard.description" = "Het is een nieuw, efficiënter VPN-protocol met betere prestaties, een lager CPU-gebruik en een langere levensduur van de batterij.";
 "card.wireguard.cta.activate" = "Probeer WireGuard® nu";
-"card.wireguard.cta.settings" = "Instellingen openen";
 "card.wireguard.cta.learn" = "Meer informatie";
 
 // DEDICATED IP
@@ -430,7 +332,6 @@
 "dedicated.ip.message.invalid.token" = "Uw code is ongeldig. Zorg ervoor dat u de code juist heeft ingevoerd.";
 "dedicated.ip.message.valid.token" = "Uw dedicated IP is geactiveerd. Het is beschikbaar in uw regioselectielijst.";
 "dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
-"dedicated.ip.message.error.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
 "dedicated.ip.message.error.retryafter" = "Teveel mislukte aanvragen voor het activeren van tokens. Probeer het opnieuw na %@ seconde(n).";
 "dedicated.ip.message.token.willexpire" = "Uw dedicated IP verloopt binnenkort. Haal een nieuwe";
 "dedicated.ip.message.token.willexpire.link" = "Haal een nieuwe";
@@ -611,7 +512,6 @@
 "tvos.signup.terms_conditions.description" = "Deze Gebruiksvoorwaardenovereenkomst ('Overeenkomst') betreft de reikwijdte van je gebruik van en toegang tot de PIA Private Internet Access, Inc. ('PIA') website (\"Site\") op www.privateinternetaccess.com, virtueel privé netwerk ('VPN') en PIA's diensten geleverd via de Site ('Dienst(en)'). Door de Site te bezoeken, een abonnement te kopen en/of de Diensten te gebruiken, erkennen Jij ('Jij' of 'Abonnee') ('PIA' en 'Abonnee' samen 'Partijen' genoemd) dat je de overeenkomst hebt gelezen, de voorwaarden helemaal begrijpt en akkoord gaat met alle bepalingen van de Overeenkomst.";
 "tvos.signup.terms_conditions.qr_code.message" = "Scan de QR-code om de complete Gebruiksvoorwaarden te lezen op je apparaat.";
 
-
 //Force update (iOS)
 "forceupdate.label.title" = "Verbeter je ervaring";
 "forceupdate.label.subtitle" = "Je gebruikt een oudere versie van PIA. Werk je app nu bij om te profiteren van een verbeterde ervaring met alle nieuwste functies.";
@@ -622,7 +522,6 @@
 
 "signup.in_progress.title"= "Aanmelding bevestigen";
 "signup.in_progress.message"= "We zijn uw aankoop aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
-"signup.in_progress.redeem.message"= "We zijn uw pincode aan het verifiëren in ons systeem. Dit kan eventjes duren, daarom vragen we u vriendelijk om geduld.";
 
 "signup.success.title"= "Aankoop voltooid";
 "signup.success.message_format"= "Bedankt voor uw aanmelding. We hebben de gebruikersnaam en het wachtwoord voor uw account naar het volgende e-mailadres gestuurd: %@";
@@ -651,27 +550,15 @@
 
 "signup.purchase.uncredited.alert.message"= "U heeft niet-gecrediteerde transacties. Wilt u uw accountgegevens herstellen?";
 "signup.purchase.uncredited.alert.button.cancel"= "Annuleren";
-"signup.purchase.uncredited.alert.button.recover"= "Account herstellen";
 
 "signup.purchase.trials.intro"= "Start je gratis proefabonnement van 7 dagen";
 "signup.purchase.trials.price.after"= "Daarna %@";
-"signup.purchase.trials.money.back"= "30 dagen lang niet-goed-geld-teruggarantie";
-"signup.purchase.trials.1year.protection"= "1 jaar aan privacy- en identiteitsbescherming";
-"signup.purchase.trials.anonymous"= "Browse anoniem en verberg uw ip.";
-"signup.purchase.trials.devices"= "Ondersteun tien apparaten tegelijk";
-"signup.purchase.trials.devices.description"= "Bescherm uzelf op tien apparaten tegelijk.";
 "signup.purchase.trials.region"= "Beveiligde servers in meer dan 90 landen";
-"signup.purchase.trials.servers"= "Meer dan 3300 servers in 32 landen";
-"signup.purchase.trials.start"= "Abonnement starten";
 "signup.purchase.trials.all.plans"= "Bekijk de beschikbare abonnementen";
 
 "signup.purchase.subscribe.now"= "Nu abonneren";
 
 // WALKTHROUGH
-
-"signup.walkthrough.action.next"= "VOLGENDE";
-"signup.walkthrough.action.done"= "KLAAR";
-"signup.walkthrough.action.skip"= "OVERSLAAN";
 
 "signup.walkthrough.page.1.title"= "Ondersteun tien apparaten tegelijk";
 "signup.walkthrough.page.1.description"= "Bescherm uzelf op tien apparaten tegelijk.";
@@ -720,20 +607,13 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.login.magic.link.title"= "Log in met de magische link in uw e-mail";
 "welcome.login.magic.link.response"= "Controleer uw e-mail voor een inloglink.";
 "welcome.login.magic.link.send"= "Link verzenden";
-"welcome.login.magic.link.invalid.email"= "Ongeldige e-mail. Probeer het opnieuw.";
 
 "welcome.purchase.title"= "Selecteer een VPN-abonnement";
 "welcome.purchase.subtitle"= "30 dagen lang niet-goed-geld-teruggarantie";
 "welcome.purchase.email.placeholder"= "E-mailadres";
 "welcome.purchase.continue"= "Doorgaan";
-"welcome.purchase.login.footer"= "Heeft u al een account?";
-"welcome.purchase.login.button"= "Aanmelden";
-"welcome.purchase.error.title"= "Kopen";
-"welcome.purchase.error.validation"= "U moet een e-mailadres invoeren";
 "welcome.purchase.error.connectivity.title"= "Verbindingsfout";
-"welcome.purchase.error.connectivity.description"= "We kunnen Private Internet Access niet bereiken. Dit kan komen door een slechte internetverbinding of omdat onze dienst in uw land is geblokkeerd.";
 "welcome.purchase.confirm.form.email"= "Voer uw e-mailadres in";
-"welcome.purchase.confirm.plan"= "U koop het %@-abonnement";
 "welcome.purchase.email.why"= "We hebben uw e-mailadres nodig om uw gebruikersnaam en wachtwoord te versturen.";
 "welcome.purchase.submit"= "Versturen";
 "welcome.purchase.or"= "of";
@@ -743,14 +623,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.upgrade.renew.now"= "Nu vernieuwen";
 
 "welcome.redeem.title"= "Cadeaubon inwisselen";
-"welcome.redeem.subtitle"= "Voer uw e-mailadres en de %lu-cijferige pincode van uw cadeaubon of proefperiodekaart hieronder in.";
-"welcome.redeem.email.placeholder"= "E-mailadres";
-"welcome.redeem.submit"= "VERSTUREN";
-"welcome.redeem.error.title"= "Inwisselen";
-"welcome.redeem.error.code"= "Code moet uit %lu getallen bestaan.";
-"welcome.redeem.error.allfields"= "Voer uw e-mailadres en pincode in.";
 "welcome.redeem.accessibility.back"= "Terug";
-"welcome.redeem.giftcard.placeholder"= "Pincode cadeaubon";
 
 "welcome.plan.monthly.title"= "Maandelijks";
 "welcome.plan.yearly.title"= "Jaarlijks";
@@ -764,23 +637,15 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.restore.email.placeholder"= "E-mailadres";
 "welcome.restore.submit"= "BEVESTIGEN";
 
-"welcome.iap.error.message.unavailable"= "De Apple-servers zijn momenteel niet beschikbaar. Probeer het later opnieuw.";
 "welcome.iap.error.title"= "Fout";
 
-"welcome.agreement.trials.title"= "Algemene voorwaarden gratis proefabonnementen";
-"welcome.agreement.trials.message"= "De betaling wordt bij de bevestiging van uw aankoop via uw Apple ID-account in rekening gebracht. Het abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de huidige periode wordt geannuleerd. De verlenging van uw account wordt binnen 24 uur voor het einde van de huidige periode in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan.\n\nBepaalde betaalde abonnementen kunnen een gratis proefabonnement aanbieden voordat er kosten in rekening worden gebracht. Als u zich wilt afmelden voor een betaald abonnement voordat we kosten in rekening brengen, moet u het abonnement ten minste 24 uur voor het einde van de gratis proefperiode annuleren.\n\nGratis proefabonnementen zijn alleen beschikbaar voor nieuwe gebruikers. Als u zich aanmeldt voor een aanvullend gratis proefabonnement worden onmiddellijk de standaard abonnementskosten in rekening gebracht.\n\nWij behouden ons het recht voor om uw gratis proefabonnement te allen tijde in te trekken.\n\nEen eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement.\n\nAls u zich aanmeldt, gaat u akkoord met deze algemene voorwaarden.";
 "welcome.agreement.message"= "Na de gratis proefperiode van 7 dagen wordt het abonnement automatisch verlengd voor %@, tenzij u het ten minste 24 uur voor het einde van de proefperiode annuleert. De kosten voor de verlenging worden binnen 24 uur voor het einde van de proefperiode via uw Apple ID-account in rekening gebracht. U kunt uw abonnementen beheren en annuleren door na de aankoop naar uw accountinstellingen in de App Store te gaan. De proefperiode van 7 dagen is beperkt tot één proefperiode van 7 dagen per gebruiker. Een eventueel ongebruikt deel van uw gratis proefperiode vervalt bij aankoop van een abonnement. Alle prijzen zijn inclusief lokale omzetbelasting, indien van toepassing.\n\nAls u zich aanmeldt, gaat u akkoord met de $1 en het $2.";
-"welcome.agreement.trials.yearly.plan"= "jaar";
-"welcome.agreement.trials.monthly.plan"= "maand";
 
 "welcome.agreement.message.tos"= "Servicevoorwaarden";
 "welcome.agreement.message.privacy"= "Privacybeleid";
 
-"welcome.getstarted.buttons.buyaccount"= "Account kopen";
-
 "welcome.gdpr.collect.data.title"= "Persoonlijke informatie die we verzamelen";
 "welcome.gdpr.collect.data.description"= "E-mailadres voor accountbeheer en bescherming tegen misbruik.";
-"welcome.gdpr.usage.data.title"= "Gebruik van de persoonlijke informatie die we verzamelen";
 "welcome.gdpr.usage.data.description"= "E-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
 "welcome.gdpr.accept.button.title"= "Akkoord en doorgaan";
 

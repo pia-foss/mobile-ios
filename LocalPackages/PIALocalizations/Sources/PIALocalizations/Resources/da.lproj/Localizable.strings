@@ -18,14 +18,10 @@
 "global.add" = "Tilføj";
 "global.remove" = "Fjern";
 "global.empty" = "Tom";
-"global.copy" = "Kopier";
-"global.share" = "Del";
-"global.copied" = "Kopieret til udklipsholder";
 "global.yes" = "Ja";
 "global.no" = "Nej";
 "global.or" = "eller";
 "global.row.selection" = "Valg af række";
-"global.vpn.settings" = "VPN-indstillinger";
 "global.general.settings" = "Generelle indstillinger";
 "global.version" = "Version";
 
@@ -84,25 +80,15 @@
 
 // ACCOUNT
 
-"account.email.caption" = "E-mail";
 "account.email.placeholder" = "E-mailadresse";
 "account.username.caption" = "Brugernavn";
-"account.other.footer" = "Få Private Internet Access app'en til dine andre enheder og brug ovenstående brugernavn og adgangskode til at logge ind og sikre din forbindelse.";
 "account.restore.title" = "Gendan ukrediteret køb";
 "account.restore.description" = "Hvis du har fornyet din plan, men din konto stadig giver besked om at den vil udløbe, kan du genstarte fornyelse herfra. Du vil ikke blive opkrævet i løbet af denne proces.";
 "account.restore.button" = "Gendan køb";
 "account.restore.failure.title" = "Gendan køb";
 "account.restore.failure.message" = "Der blev ikke fundet noget indløsende køb for fornyelse.";
-"account.save.item" = "Opdater e-mail";
-"account.save.prompt" = "Autentificer for at gemme ændringer";
-"account.save.success" = "Din e-mailadresse er blevet gemt.";
-"account.reveal.prompt" = "Autentificer for at afsløre";
 "account.expiry_date.information" = "Din plan vil udløbe om %@.";
 "account.expiry_date.expired" = "Din plan er udløbet.";
-"account.update.email.require.password.title" = "PIA-adgangskode påkrævet";
-"account.update.email.require.password.message" = "Af sikkerhedsårsager skal vi bruge din PIA-adgangskode for at udføre en ændring i din konto. Angiv din PIA-adgangskode for at fortsætte.";
-"account.update.email.require.password.button" = "Indsend";
-"account.error.unauthorized" = "Dit brugernavn eller kodeord er forkert.";
 "account.subscriptions.message" = "Du kan administrere dit abonnement herfra.";
 "account.subscriptions.linkMessage" = "her.";
 "account.set.email.error" = "Der opstod en fejl under tilføjelse af e-mail. Prøv igen senere.";
@@ -121,16 +107,11 @@
 "settings.connection.title" = "FORBINDELSE";
 "settings.connection.vpn_protocol.title" = "Protokolvalg";
 "settings.connection.transport.title" = "Transport";
-"settings.connection.socket_protocol.title" = "Socket";
 "settings.connection.remote_port.title" = "Ekstern port";
 
-"settings.encryption.title" = "KRYPTERING";
 "settings.encryption.cipher.title" = "Datakryptering";
-"settings.encryption.digest.title" = "Autentificering af data";
 "settings.encryption.handshake.title" = "Håndtryk";
 
-"settings.application_settings.title" = "APPLIKATIONSINDSTILLINGER";
-"settings.application_settings.dark_theme.title" = "Mørkt tema";
 "settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.kill_switch.title" = "VPN-afbryderknap";
 "settings.application_settings.kill_switch.footer" = "VPN-kill switchen forebygger kontakt til internettet, hvis VPN-forbindelsen genoprettes. Dette udelukker manuel frakobling.";
@@ -141,16 +122,12 @@
 "settings.application_settings.leak_protection.more_info" = "Mere info";
 "settings.application_settings.allow_local_network.title" = "Tillad adgang til enheder på det lokale netværk";
 "settings.application_settings.allow_local_network.footer" = "Hold forbindelsen til lokale enheder såsom printere eller filservere, mens du er tilsluttet til VPN'et. (Tillad kun dette, hvis du har tillid til personerne og enhederne på dit netværk.)";
-"settings.application_settings.mace.title" = "PIA MACE™";
-"settings.application_settings.mace.footer" = "PIA MACE™ blokerer annoncer, trackers og malware, mens du har forbindelse til VPN.";
 "settings.application_settings.leak_protection.alert.title" = "Ændringer af VPN-indstillingerne træder i kraft ved næste forbindelse";
 
 "settings.content_blocker.title" = "Safari Indholdsblokeringstilstand";
-"settings.content_blocker.state.title" = "Aktuel status";
 "settings.content_blocker.refresh.title" = "Opdater blokeringsliste";
 "settings.content_blocker.footer" = "For at aktivere vores Indholdsblokering skal du gå til Indstillinger > Apps > Safari > Udvidelser og slå PIA VIN til.";
 
-"settings.application_information.title" = "INFORMATIN OM APPLIKATIONEN";
 "settings.application_information.debug.title" = "Send fejlfindingslog til support";
 "settings.application_information.debug_logging.title" = "Aktivér fejlfindingslogning";
 "settings.application_information.debug.failure.title" = "Kunne ikke indsende";
@@ -165,7 +142,6 @@
 "settings.commit.buttons.reconnect" = "Anbefal";
 "settings.commit.buttons.later" = "Senere";
 
-"settings.reset.title" = "NULSTIL";
 "settings.reset.defaults.title" = "Nulstil indstillinger til standard";
 "settings.reset.defaults.confirm.title" = "Nulstil indstillinger";
 "settings.reset.defaults.confirm.message" = "Det fører appen tilbage til standard. Du vil miste alle dine ændringer.";
@@ -175,18 +151,10 @@
 "settings.small.packets.title" = "Brug små pakker";
 "settings.small.packets.description" = "Vil sænke IP-pakkens størrelse en smule for at forbedre kompatibiliteten med nogle routere og mobilnetværk.";
 
-"settings.log.connected.error" = "Der kræves en VPN-forbindelse. Opret forbindelse til VPN igen, og prøv igen.";
 "settings.log.information" = "Gem fejlfindingslogfiler, som kan indsendes til teknisk support til fejlfinding af problemer.";
-
-"settings.preview.title" = "Forhåndsvisning";
-"settings.server.network.description" = "Næste generations netværk";
-"settings.server.network.alert" = "VPN'en skal afbrydes for at skifte servernetværk.";
 
 "settings.geo.servers.description" = "Vis geo-placerede områder";
 "settings.cards.history.title" = "Seneste nyt";
-
-"settings.ovpn.migration.footer" = "Vi opdaterer vores OpenVPN-implementering. Klik her for at få flere oplysninger";
-"settings.ovpn.migration.footer.link" = "her";
 
 "settings.section.general" = "Generelt";
 "settings.section.protocols" = "Protokoller";
@@ -204,24 +172,18 @@
 // ABOUT
 
 "about.app" = "VPN fra Private Internet Access";
-"about.intro" = "Dette program bruger følgende komponenter:";
 "about.accessibility.component.expand" = "Tryk for at læse fuld licens";
 
 // DASHBOARD
-
-"dashboard.content_blocker.intro.message" = "Denne version erstatter MACE med vores Safari Content Blocker.\n\nTjek den ud i afsnittet 'Indstillinger'.";
 
 "dashboard.connection.ip.unreachable" = "Internet kan ikke nås";
 
 "dashboard.vpn.disconnected" = "Forbindelse afbrudt";
 "dashboard.vpn.connecting" = "Forbinder...";
-"dashboard.vpn.connected" = "Forbundet til VPN";
 "dashboard.vpn.protected" = "Beskyttet";
 "dashboard.vpn.not_protected" = "Ikke-beskyttet";
-"dashboard.vpn.on" = "VPN: TIL";
 "dashboard.vpn.disconnecting" = "Afbryder forbindelse...";
 "dashboard.vpn.changing_region" = "Ændrer region...";
-"dashboard.vpn.disconnect.untrusted" = "Dette netværk er usikkert. Vil du virkelig fjerne VPN'en?";
 "dashboard.accessibility.vpn.button" = "VPN-forbindelse-knap";
 "dashboard.accessibility.vpn.button.isOn" = "VPN-forbindelse-knap. VPN er i øjeblikket forbundet";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-forbindelse-knap. VPN er i øjeblikket afbrudt";
@@ -264,35 +226,13 @@
 
 // HOTSPOT HELPER
 
-"settings.hotspothelper.title" = "Netværksstyringsværktøj";
 "settings.hotspothelper.description" = "Konfigurer, hvordan PIA vil opføre sig ved forbindelse til WiFi eller mobilnetværk. Dette ekskluderer manuel afbrydelse.";
-"settings.hotspothelper.enable.description" = "PIA aktiverer automatisk VPN'en, når den tilsluttes usikre Wifi-netværk, hvis denne indstilling er aktiveret.";
-"settings.hotspothelper.all.title" = "Beskyt alle netværk";
-"settings.hotspothelper.all.description" = "VPN WiFi-beskyttelse vil blive aktiveret på alle netværk, inklusive betroede netværk.";
 "settings.hotspothelper.available.help" = "For at udfylde denne liste, gå til iOS Indstillinger> WiFi.";
-"settings.hotspothelper.available.add.help" = "Tryk på + for at tilføje betroede netværk.";
-"settings.trusted.networks.sections.current" = "Aktuelle netværk";
-"settings.trusted.networks.sections.available" = "Tilgængelige netværk";
-"settings.trusted.networks.sections.trusted" = "Betroede netværk";
-"settings.trusted.networks.message" = "PIA forbinder ikke automatisk på disse netværk.";
-"settings.trusted.networks.connect.message" = "Beskyt dette netværk ved at oprette forbindelse til VPN?";
 "hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIA Indstillinger, for at sikre denne forbindelse.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse aktiveret - Vi passer på dig.";
-"settings.hotspothelper.cellular.title" = "Beskyt over mobilnetværk";
-"settings.hotspothelper.wifi.trust.title" = "VPN WiFi-beskyttelse";
-"settings.hotspothelper.cellular.description" = "PIA aktiverer automatisk VPN'en, når der tilsluttes til mobilnetværk, hvis denne indstilling er aktiveret.";
-"settings.hotspothelper.cellular.networks" = "Mobilnetværk";
-"settings.hotspothelper.wifi.networks" = "WiFi-netværk";
-"settings.trusted.networks.sections.untrusted" = "Ubetroede netværk";
-"settings.hotspothelper.rules.title" = "Regler";
-"settings.trusted.networks.sections.trusted.rule.description" = "Aktivér denne funktion, når VPN kill-switch er aktiveret, for at tilpasse, hvordan PIA vil opføre sig på WiFi og mobilnet. Vær opmærksom på, at funktionaliteten i Netværksstyringsværktøjet vil blive deaktiveret, hvis du manuelt afbryder forbindelsen.";
-"settings.trusted.networks.sections.trusted.rule.action" = "Afbryd forbindelse til PIA VPN";
 "tiles.quicksetting.nmt.title" = "Netværksstyring";
 "tiles.quicksetting.private.browser.title" = "Privat browser";
 "settings.nmt.killswitch.disabled" = "VPN kill-switch er for øjeblikket deaktiveret. For at sikre, at netværksstyringsværktøjet fungerer, og at du er i stand til at genoprette forbindelse, når du skifter netværk, skal du aktivere VPN kill-switch i dine indstillinger.";
-"settings.nmt.optout.disconnect.alerts" = "Frameld dig bekræftelsesalarm om afbrydelse";
-"settings.nmt.optout.disconnect.alerts.description" = "Deaktiverer advarselsalarmen, når du afbryder forbindelsen fra VPN'en.";
-"settings.nmt.wireguard.warning" = "WireGuard® har ikke brug for at genoprette forbindelsen, når du skifter mellem forskellige netværk. Det kan være nødvendigt at afbryde forbindelsen til VPN'en manuelt på netværk, der er tillid til.";
 "settings.service.quality.share.title" = "Hjælp med at forbedre PIA";
 "settings.service.quality.share.description" = "Hjælp os med at blive bedre, ved at dele VPN-forbindelsesstatistikker. Disse rapporter indeholder aldrig personligt identificerbare oplysninger.";
 "settings.service.quality.share.findoutmore" = "Find ud af mere";
@@ -336,9 +276,7 @@
 "tiles.usage.ipsec.title" = "BRUG (Ikke tilgængelig på IKEv2)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
-"tiles.nmt.cellular" = "Mobil";
 "tiles.nmt.accessibility.trusted" = "Betroet netværk";
-"tiles.nmt.accessibility.untrusted" = "Ubetroet netværk";
 "tiles.quicksettings.title" = "Hurtig-indstillinger";
 "tiles.quicksettings.min.elements.message" = "Du skal holde mindst et element synligt i flisen Hurtig-indstillinger";
 "tiles.accessibility.visible.tile.action" = "Tryk for at fjerne denne flise fra instrumentbrættet";
@@ -356,30 +294,6 @@
 "today.widget.login" = "Log ind";
 
 //FRIEND REFERRALS
-"friend.referrals.email.validation" = "Ugyldig e-mail. Prøv igen.";
-"friend.referrals.title" = "Henvis en ven";
-"friend.referrals.view.invites.sent" = "Se invitationer sendt";
-"friend.referrals.pending.invites" = "%d afventende invitationer";
-"friend.referrals.signups.number" = "%d tilmeldte";
-"friend.referrals.fullName" = "Fuldt navn";
-"friend.referrals.invitation.terms" = "Ved at sende denne invitation, accepterer jeg alle vilkår og betingelser for Henvisningsprogram for familie og venner.";
-"friend.referrals.family.friends.program" = "Henvisningsprogram for familie og venner";
-"friend.referrals.send.invite" = "Send invitation";
-"friend.referrals.invite.error" = "Kunne ikke sende invitationen igen. Prøv igen senere.";
-"friend.referrals.invite.success" = "Invitationen blev sendt";
-"friend.referrals.share.link" = "Del dit unikke henvisningslink";
-"friend.referrals.share.link.terms" = "Ved at dele dette link accepterer du alle vilkår og betingelser for Henvisningsprogram for familie og venner.";
-"friend.referrals.invites.sent.title" = "Invitationer sendt";
-"friend.referrals.pending.invites.title" = "Afventende invitationer";
-"friend.referrals.invites.number" = "Du har sendt %d invitationer";
-"friend.referrals.privacy.note" = "Bemærk venligst, at for fortrolighedsgrunde vil alle invitationer, der er ældre end 30 dage, blive slettet.";
-"friend.referrals.signedup" = "Tilmeldte";
-"friend.referrals.reward.given" = "Belønning givet";
-"friend.referrals.days.acquired" = "Gratis dage erhvervet";
-"friend.referrals.days.number" = "%d dage";
-
-"friend.referrals.friends.family.title" = "Henvis dine venner og familie. For hver tilmelding giver vi jer begge 30 dage gratis. ";
-"friend.referrals.description.short" = "HENVIS EN VEN, FÅ 30 DAGE GRATIS.";
 
 // GDPR
 "gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
@@ -391,32 +305,20 @@
 "set.email.why" = "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
 "set.email.success.message_format" = "Vi har sendt din kontos brugernavn og adgangskode til din e-mailadresse på %@";
 "set.email.password.caption" = "Adgangskode";
-"set.email.error.validation" = "Du skal angive en e-mailadresse.";
 
 // EMAIL VALIDATOR
 "email.validation.invalid" = "Ugyldig e-mail. Prøv igen.";
 "email.validation.empty" = "E-mail må ikke være tom.";
 
 // RATING
-"rating.enjoy.question" = "Har du glæde af PIA VPN?";
-"rating.enjoy.subtitle" = "Vi håber, at vores VPN lever op til dine forventninger.";
-"rating.problems.question" = "Hvad gik galt?";
-"rating.problems.subtitle" = "Vil du give noget feedback? Vi kan hjælpe dig med at forbedre din oplevelse med PIA";
-"rating.review.question" = "Hvad med en AppStore-anmeldelse?";
-"rating.rate.question" = "Hvad med en vurdering i AppStore?";
-"rating.rate.subtitle" = "Vi sætter pris på, at du deler din oplevelse";
 "rating.error.question" = "Forbindelsen kunne ikke oprettes";
 "rating.error.subtitle" = "Du kan prøve at vælge en anden region, eller fortælle os om det, ved at åbne en supportbillet.";
 "rating.error.button.send" = "Send feedback";
-"rating.alert.button.notreally" = "Nej, helst ikke";
-"rating.alert.button.nothanks" = "Nej tak.";
-"rating.alert.button.oksure" = "OK, selvfølgelig!";
 
 // CALLING CARDS
 "card.wireguard.title" = "Prøv WireGuard® i dag!";
 "card.wireguard.description" = "Det er en ny, mere effektiv VPN-protokol, der giver bedre ydelse, lavere CPU-forbrug og længere batterilevetid.";
 "card.wireguard.cta.activate" = "Prøv WireGuard® nu";
-"card.wireguard.cta.settings" = "Åbn indstillinger";
 "card.wireguard.cta.learn" = "Lær mere";
 
 // DEDICATED IP
@@ -430,7 +332,6 @@
 "dedicated.ip.message.invalid.token" = "Dit token er ugyldigt. Sørg for, at du har indtastet tokenet korrekt.";
 "dedicated.ip.message.valid.token" = "Din dedikerede IP er blevet aktiveret. Den vil være tilgængelig på din liste over Valg af regioner.";
 "dedicated.ip.message.expired.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
-"dedicated.ip.message.error.token" = "Dit token er udløbet. Generer et nyt fra din kontoside på websiden.";
 "dedicated.ip.message.error.retryafter" = "For mange mislykkede anmodninger om aktivering af token. Prøv igen efter %@ sekund(er).";
 "dedicated.ip.message.token.willexpire" = "Din dedikerede IP udløber snart. Få en ny";
 "dedicated.ip.message.token.willexpire.link" = "Få en ny";
@@ -611,7 +512,6 @@
 "tvos.signup.terms_conditions.description" = "Denne serviceaftale (\"aftale\") dækker omfanget af din brug og adgang til hjemmesiden (\"hjemmeside\"), der er placeret på www.privateinternetaccess.com, det virtuelle private netværk (\"VPN\") og tjenesterne, der leveres via hjemmesiden (\"tjenesterne\") fra PIA Private Internet Access, Inc. (\"PIA\"). Ved at besøge hjemmesiden, købe et abonnement og/eller bruge tjenesterne anerkender du (\"du\" eller \"abonnent\") (\"PIA\" og \"abonnent\" samlet kendt som \"parter\"), at du har læst aftalen, forstår vilkårene og accepterer at være bundet af alle vilkårene i aftalen.";
 "tvos.signup.terms_conditions.qr_code.message" = "Scan QR-koden for at få adgang til de fulde vilkår og betingelser på din enhed.";
 
-
 //Force update (iOS)
 "forceupdate.label.title" = "Opgrader din oplevelse";
 "forceupdate.label.subtitle" = "Du bruger en ældre version af PIA. Opdater din app nu for at få en forbedret oplevelse med alle de nyeste funktioner.";
@@ -622,7 +522,6 @@
 
 "signup.in_progress.title"= "Bekræft tilmelding";
 "signup.in_progress.message"= "Vi bekræfter dit køb i vores system. Det kan tage et øjeblik, så bliv her venligst.";
-"signup.in_progress.redeem.message"= "Vi bekræfter din kort-pinkode i vores system. Det kan tage et øjeblik, så bliv her venligst.";
 
 "signup.success.title"= "Køb fuldført";
 "signup.success.message_format"= "Tak fordi du tilmeldte dig hos os. Vi har sendt dit brugernavn og kodeord til din e-mailadresse %@";
@@ -651,27 +550,15 @@
 
 "signup.purchase.uncredited.alert.message"= "Du har ukrediterede transaktioner. Vil du gendanne dine kontooplysninger?";
 "signup.purchase.uncredited.alert.button.cancel"= "Annuller";
-"signup.purchase.uncredited.alert.button.recover"= "Gendan konto";
 
 "signup.purchase.trials.intro"= "Start din 7-dages gratis prøveperiode";
 "signup.purchase.trials.price.after"= "Derefter %@";
-"signup.purchase.trials.money.back"= "30-dages pengene tilbage garanti";
-"signup.purchase.trials.1year.protection"= "1 års beskyttelse af personlige oplysninger og identitet";
-"signup.purchase.trials.anonymous"= "Gennemse anonymt og skjul din ip.";
-"signup.purchase.trials.devices"= "Understøtter 10 enheder på én gang";
-"signup.purchase.trials.devices.description"= "Beskyt dig selv på op til 10 enheder ad gangen.";
 "signup.purchase.trials.region"= "Sikre servere i over 90 lande";
-"signup.purchase.trials.servers"= "Mere end 3300 servere i 32 lande";
-"signup.purchase.trials.start"= "Start abonnement";
 "signup.purchase.trials.all.plans"= "Se alle tilgængelige planer";
 
 "signup.purchase.subscribe.now"= "Tilmeld nu";
 
 // WALKTHROUGH
-
-"signup.walkthrough.action.next"= "NÆSTE";
-"signup.walkthrough.action.done"= "UDFØRT";
-"signup.walkthrough.action.skip"= "SPRING OVER";
 
 "signup.walkthrough.page.1.title"= "Understøtter 10 enheder på en gang";
 "signup.walkthrough.page.1.description"= "Beskyt dig selv på op til 10 enheder ad gangen.";
@@ -720,20 +607,13 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.login.magic.link.title"= "Log ind ved hjælp af magisk e-maillink";
 "welcome.login.magic.link.response"= "Se i din e-mail for et login-link.";
 "welcome.login.magic.link.send"= "Send link";
-"welcome.login.magic.link.invalid.email"= "Ugyldig e-mail. Prøv igen.";
 
 "welcome.purchase.title"= "Vælg en VPN-plan";
 "welcome.purchase.subtitle"= "30-dages pengene tilbage garanti";
 "welcome.purchase.email.placeholder"= "E-mailadresse";
 "welcome.purchase.continue"= "Fortsæt";
-"welcome.purchase.login.footer"= "Har du allerede en konto?";
-"welcome.purchase.login.button"= "Log ind";
-"welcome.purchase.error.title"= "Køb";
-"welcome.purchase.error.validation"= "Du skal indtaste en e-mailadresse";
 "welcome.purchase.error.connectivity.title"= "Forbindelsesfejl";
-"welcome.purchase.error.connectivity.description"= "Vi kan ikke nå Private Internet Access. Dette kan skyldes dårlig internet eller at vores service er blokeret i dit land.";
 "welcome.purchase.confirm.form.email"= "Indtast din e-mailadresse";
-"welcome.purchase.confirm.plan"= "Du køber %@-planen";
 "welcome.purchase.email.why"= "Vi har brug for din e-mail for at sende dit brugernavn og din adgangskode.";
 "welcome.purchase.submit"= "Indsend";
 "welcome.purchase.or"= "eller";
@@ -743,14 +623,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.upgrade.renew.now"= "Forny nu";
 
 "welcome.redeem.title"= "Indløs gavekort";
-"welcome.redeem.subtitle"= "Indtast din e-mailadresse, og %lu-cifrede pinkode frra dit gavekort eller prøvekort herunder.";
-"welcome.redeem.email.placeholder"= "E-mailadresse";
-"welcome.redeem.submit"= "INDSEND";
-"welcome.redeem.error.title"= "Indløs";
-"welcome.redeem.error.code"= "Koden skal være %lu numeriske cifre.";
-"welcome.redeem.error.allfields"= "Indtast venligst din e-mail og dit korts PIN-kode.";
 "welcome.redeem.accessibility.back"= "Tilbage";
-"welcome.redeem.giftcard.placeholder"= "Gavekortets PIN-kode";
 
 "welcome.plan.monthly.title"= "Månedligt";
 "welcome.plan.yearly.title"= "Årligt";
@@ -764,23 +637,15 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.restore.email.placeholder"= "E-mailadresse";
 "welcome.restore.submit"= "BEKRÆFT";
 
-"welcome.iap.error.message.unavailable"= "Apple-servere er ikke tilgængelige i øjeblikket. Prøv venligst igen senere.";
 "welcome.iap.error.title"= "Fejl";
 
-"welcome.agreement.trials.title"= "Vilkår og betingelser for gratis prøveperioder";
-"welcome.agreement.trials.message"= "Betaling debiteres din Apple ID-konto ved bekræftelsen af ​​købet. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af ​​den aktuelle periode. Din konto bliver debiteret for fornyelse inden for 24 timer inden udgangen af ​​den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i App Store efter køb.\n\nVisse betalte abonnementer kan muligvis tilbyde en gratis prøveperiode, inden de opkræver din betalingsmetode. Hvis du beslutter at afmelde dig et betalt abonnement, før vi begynder at opkræve din betalingsmetode, skal du annullere abonnementet mindst 24 timer før den gratis prøveperiode afsluttes.\n\nGratis prøveperioder er kun tilgængelige for nye brugere og er efter vores eget skøn, og hvis du forsøger at tilmelde dig en ekstra gratis prøveperiode, bliver du straks debiteret for det almindelige abonnementsgebyr.\n\nVi forbeholder os retten til at tilbagekalde din gratis prøveperiode til enhver tid.\n\nEnhver ubrugt del af din gratis prøveperiode fortabes ved køb af et abonnement.\n\nTilmelding udgør accept af disse vilkår og betingelser.";
 "welcome.agreement.message"= "Efter den gratis prøveperiode på 7 dage, fornyes dette abonnement automatisk for %@, medmindre det annulleres mindst 24 timer før prøveperioden er afsluttet. Din Apple ID-konto bliver debiteret for fornyelse inden for 24 timer inden udløbet af prøveperioden. Du kan administrere og annullere dine abonnementer ved at gå til din App Store-kontoindstillinger efter købet. Tilbudet med en 7-dages prøveperiode er begrænset til en 7-dages prøveperiode pr. bruger. Enhver ubrugt del af en gratis prøveperiode, hvis den tilbydes, fortabes, når brugeren køber et abonnement. Alle priser inkluderer gældende lokal moms.\n\nSigning up constitutes acceptance of the $1 and the $2.";
-"welcome.agreement.trials.yearly.plan"= "år";
-"welcome.agreement.trials.monthly.plan"= "måned";
 
 "welcome.agreement.message.tos"= "Vilkår for brug";
 "welcome.agreement.message.privacy"= "Fortrolighedspolitik";
 
-"welcome.getstarted.buttons.buyaccount"= "Køb konto";
-
 "welcome.gdpr.collect.data.title"= "Personlige oplysninger, vi indsamler";
 "welcome.gdpr.collect.data.description"= "E-mailadresse med henblik på kontohåndtering og beskyttelse mod misbrug.";
-"welcome.gdpr.usage.data.title"= "Anvendelse af personlige oplysninger indsamlet af os";
 "welcome.gdpr.usage.data.description"= "E-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
 "welcome.gdpr.accept.button.title"= "Accepter og fortsæt";
 

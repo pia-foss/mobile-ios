@@ -13,8 +13,6 @@ public enum L10n {
   public enum About {
     /// VPN by Private Internet Access
     public static let app = L10n.tr("Localizable", "about.app", fallback: "VPN by Private Internet Access")
-    /// This program uses the following components:
-    public static let intro = L10n.tr("Localizable", "about.intro", fallback: "This program uses the following components:")
     public enum Accessibility {
       public enum Component {
         /// Tap to read full license
@@ -38,14 +36,8 @@ public enum L10n {
       }
     }
     public enum Email {
-      /// Email
-      public static let caption = L10n.tr("Localizable", "account.email.caption", fallback: "Email")
       /// Email address
       public static let placeholder = L10n.tr("Localizable", "account.email.placeholder", fallback: "Email address")
-    }
-    public enum Error {
-      /// Your username or password is incorrect.
-      public static let unauthorized = L10n.tr("Localizable", "account.error.unauthorized", fallback: "Your username or password is incorrect.")
     }
     public enum ExpiryDate {
       /// Your plan has expired.
@@ -54,10 +46,6 @@ public enum L10n {
       public static func information(_ p1: Any) -> String {
         return L10n.tr("Localizable", "account.expiry_date.information", String(describing: p1), fallback: "Your plan will expire on %@.")
       }
-    }
-    public enum Other {
-      /// Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.
-      public static let footer = L10n.tr("Localizable", "account.other.footer", fallback: "Get the Private Internet Access app for your other devices and use the above username and password to login and secure your connection.")
     }
     public enum Restore {
       /// RESTORE PURCHASE
@@ -72,18 +60,6 @@ public enum L10n {
         /// Restore purchase
         public static let title = L10n.tr("Localizable", "account.restore.failure.title", fallback: "Restore purchase")
       }
-    }
-    public enum Reveal {
-      /// Authenticate to reveal
-      public static let prompt = L10n.tr("Localizable", "account.reveal.prompt", fallback: "Authenticate to reveal")
-    }
-    public enum Save {
-      /// Update email
-      public static let item = L10n.tr("Localizable", "account.save.item", fallback: "Update email")
-      /// Authenticate to save changes
-      public static let prompt = L10n.tr("Localizable", "account.save.prompt", fallback: "Authenticate to save changes")
-      /// Your email address has been saved.
-      public static let success = L10n.tr("Localizable", "account.save.success", fallback: "Your email address has been saved.")
     }
     public enum Set {
       public enum Email {
@@ -116,20 +92,6 @@ public enum L10n {
       /// Take The Survey
       public static let messageLink = L10n.tr("Localizable", "account.survey.messageLink", fallback: "Take The Survey")
     }
-    public enum Update {
-      public enum Email {
-        public enum Require {
-          public enum Password {
-            /// Submit
-            public static let button = L10n.tr("Localizable", "account.update.email.require.password.button", fallback: "Submit")
-            /// For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.
-            public static let message = L10n.tr("Localizable", "account.update.email.require.password.message", fallback: "For security reasons we require your PIA password to perform a change in your account. Please input your PIA password to proceed.")
-            /// PIA Password Required
-            public static let title = L10n.tr("Localizable", "account.update.email.require.password.title", fallback: "PIA Password Required")
-          }
-        }
-      }
-    }
     public enum Username {
       /// Username
       public static let caption = L10n.tr("Localizable", "account.username.caption", fallback: "Username")
@@ -146,8 +108,6 @@ public enum L10n {
         public static let activate = L10n.tr("Localizable", "card.wireguard.cta.activate", fallback: "Try WireGuard® now")
         /// Learn more
         public static let learn = L10n.tr("Localizable", "card.wireguard.cta.learn", fallback: "Learn more")
-        /// Open Settings
-        public static let settings = L10n.tr("Localizable", "card.wireguard.cta.settings", fallback: "Open Settings")
       }
     }
   }
@@ -214,19 +174,9 @@ public enum L10n {
         public static let title = L10n.tr("Localizable", "dashboard.connection_state.reconnecting.title", fallback: "Reconnecting...")
       }
     }
-    public enum ContentBlocker {
-      public enum Intro {
-        /// This version replaces MACE with our Safari Content Blocker.
-        /// 
-        /// Check it out in the 'Settings' section.
-        public static let message = L10n.tr("Localizable", "dashboard.content_blocker.intro.message", fallback: "This version replaces MACE with our Safari Content Blocker.\n\nCheck it out in the 'Settings' section.")
-      }
-    }
     public enum Vpn {
       /// Changing region...
       public static let changingRegion = L10n.tr("Localizable", "dashboard.vpn.changing_region", fallback: "Changing region...")
-      /// Connected to VPN
-      public static let connected = L10n.tr("Localizable", "dashboard.vpn.connected", fallback: "Connected to VPN")
       /// Connecting...
       public static let connecting = L10n.tr("Localizable", "dashboard.vpn.connecting", fallback: "Connecting...")
       /// Disconnected
@@ -235,8 +185,6 @@ public enum L10n {
       public static let disconnecting = L10n.tr("Localizable", "dashboard.vpn.disconnecting", fallback: "Disconnecting...")
       /// Not Protected
       public static let notProtected = L10n.tr("Localizable", "dashboard.vpn.not_protected", fallback: "Not Protected")
-      /// VPN: ON
-      public static let on = L10n.tr("Localizable", "dashboard.vpn.on", fallback: "VPN: ON")
       /// Protected
       public static let protected = L10n.tr("Localizable", "dashboard.vpn.protected", fallback: "Protected")
       public enum ChangeLocation {
@@ -250,10 +198,6 @@ public enum L10n {
             public static let connect = L10n.tr("Localizable", "dashboard.vpn.change_location.alert.button.connect", fallback: "Connect")
           }
         }
-      }
-      public enum Disconnect {
-        /// This network is untrusted. Do you really want to disconnect the VPN?
-        public static let untrusted = L10n.tr("Localizable", "dashboard.vpn.disconnect.untrusted", fallback: "This network is untrusted. Do you really want to disconnect the VPN?")
       }
       public enum Leakprotection {
         public enum Alert {
@@ -313,8 +257,6 @@ public enum L10n {
           public static func retryafter(_ p1: Any) -> String {
             return L10n.tr("Localizable", "dedicated.ip.message.error.retryafter", String(describing: p1), fallback: "Too many failed token activation requests. Please try again after %@ second(s).")
           }
-          /// Your token is expired. Please generate a new one from your Account page on the website.
-          public static let token = L10n.tr("Localizable", "dedicated.ip.message.error.token", fallback: "Your token is expired. Please generate a new one from your Account page on the website.")
         }
         public enum Expired {
           /// Your token is expired. Please generate a new one from your Account page on the website.
@@ -403,106 +345,6 @@ public enum L10n {
       }
     }
   }
-  public enum Friend {
-    public enum Referrals {
-      /// Full name
-      public static let fullName = L10n.tr("Localizable", "friend.referrals.fullName", fallback: "Full name")
-      /// Signed up
-      public static let signedup = L10n.tr("Localizable", "friend.referrals.signedup", fallback: "Signed up")
-      /// Refer a Friend
-      public static let title = L10n.tr("Localizable", "friend.referrals.title", fallback: "Refer a Friend")
-      public enum Days {
-        /// Free days acquired
-        public static let acquired = L10n.tr("Localizable", "friend.referrals.days.acquired", fallback: "Free days acquired")
-        /// %d days
-        public static func number(_ p1: Int) -> String {
-          return L10n.tr("Localizable", "friend.referrals.days.number", p1, fallback: "%d days")
-        }
-      }
-      public enum Description {
-        /// REFER A FRIEND. GET 30 DAYS FREE.
-        public static let short = L10n.tr("Localizable", "friend.referrals.description.short", fallback: "REFER A FRIEND. GET 30 DAYS FREE.")
-      }
-      public enum Email {
-        /// Invalid email. Please try again.
-        public static let validation = L10n.tr("Localizable", "friend.referrals.email.validation", fallback: "Invalid email. Please try again.")
-      }
-      public enum Family {
-        public enum Friends {
-          /// Family and Friends Referral Program
-          public static let program = L10n.tr("Localizable", "friend.referrals.family.friends.program", fallback: "Family and Friends Referral Program")
-        }
-      }
-      public enum Friends {
-        public enum Family {
-          /// Refer your friends and family. For every sign up we’ll give you both 30 days free. 
-          public static let title = L10n.tr("Localizable", "friend.referrals.friends.family.title", fallback: "Refer your friends and family. For every sign up we’ll give you both 30 days free. ")
-        }
-      }
-      public enum Invitation {
-        /// By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.
-        public static let terms = L10n.tr("Localizable", "friend.referrals.invitation.terms", fallback: "By sending this invitation, I agree to all of the terms and conditions of the Family and Friends Referral Program.")
-      }
-      public enum Invite {
-        /// Could not resend invite. Try again later.
-        public static let error = L10n.tr("Localizable", "friend.referrals.invite.error", fallback: "Could not resend invite. Try again later.")
-        /// Invite sent successfully
-        public static let success = L10n.tr("Localizable", "friend.referrals.invite.success", fallback: "Invite sent successfully")
-      }
-      public enum Invites {
-        /// You have sent %d invites
-        public static func number(_ p1: Int) -> String {
-          return L10n.tr("Localizable", "friend.referrals.invites.number", p1, fallback: "You have sent %d invites")
-        }
-        public enum Sent {
-          /// Invites sent
-          public static let title = L10n.tr("Localizable", "friend.referrals.invites.sent.title", fallback: "Invites sent")
-        }
-      }
-      public enum Pending {
-        /// %d pending invites
-        public static func invites(_ p1: Int) -> String {
-          return L10n.tr("Localizable", "friend.referrals.pending.invites", p1, fallback: "%d pending invites")
-        }
-        public enum Invites {
-          /// Pending invites
-          public static let title = L10n.tr("Localizable", "friend.referrals.pending.invites.title", fallback: "Pending invites")
-        }
-      }
-      public enum Privacy {
-        /// Please note, for privacy reasons, all invites older than 30 days will be deleted.
-        public static let note = L10n.tr("Localizable", "friend.referrals.privacy.note", fallback: "Please note, for privacy reasons, all invites older than 30 days will be deleted.")
-      }
-      public enum Reward {
-        /// Reward given
-        public static let given = L10n.tr("Localizable", "friend.referrals.reward.given", fallback: "Reward given")
-      }
-      public enum Send {
-        /// Send invite
-        public static let invite = L10n.tr("Localizable", "friend.referrals.send.invite", fallback: "Send invite")
-      }
-      public enum Share {
-        /// Share your unique referral link
-        public static let link = L10n.tr("Localizable", "friend.referrals.share.link", fallback: "Share your unique referral link")
-        public enum Link {
-          /// By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.
-          public static let terms = L10n.tr("Localizable", "friend.referrals.share.link.terms", fallback: "By sharing this link, you agree to all of the terms and conditions of the Family and Friends Referral Program.")
-        }
-      }
-      public enum Signups {
-        /// %d signups
-        public static func number(_ p1: Int) -> String {
-          return L10n.tr("Localizable", "friend.referrals.signups.number", p1, fallback: "%d signups")
-        }
-      }
-      public enum View {
-        public enum Invites {
-          /// View invites sent
-          public static let sent = L10n.tr("Localizable", "friend.referrals.view.invites.sent", fallback: "View invites sent")
-        }
-      }
-    }
-  }
   public enum Gdpr {
     public enum Accept {
       public enum Button {
@@ -532,10 +374,6 @@ public enum L10n {
     public static let clear = L10n.tr("Localizable", "global.clear", fallback: "Clear")
     /// Close
     public static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
-    /// Copied to clipboard
-    public static let copied = L10n.tr("Localizable", "global.copied", fallback: "Copied to clipboard")
-    /// Copy
-    public static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
     /// Disable
     public static let disable = L10n.tr("Localizable", "global.disable", fallback: "Disable")
     /// Disabled
@@ -562,8 +400,6 @@ public enum L10n {
     public static let remove = L10n.tr("Localizable", "global.remove", fallback: "Remove")
     /// Required
     public static let `required` = L10n.tr("Localizable", "global.required", fallback: "Required")
-    /// Share
-    public static let share = L10n.tr("Localizable", "global.share", fallback: "Share")
     /// No internet connection found. Please confirm that you have an internet connection.
     public static let unreachable = L10n.tr("Localizable", "global.unreachable", fallback: "No internet connection found. Please confirm that you have an internet connection.")
     /// Update
@@ -585,10 +421,6 @@ public enum L10n {
       public static func format(_ p1: Any, _ p2: Any) -> String {
         return L10n.tr("Localizable", "global.version.format", String(describing: p1), String(describing: p2), fallback: "Version %@ (%@)")
       }
-    }
-    public enum Vpn {
-      /// VPN Settings
-      public static let settings = L10n.tr("Localizable", "global.vpn.settings", fallback: "VPN Settings")
     }
   }
   public enum HelpMenu {
@@ -838,22 +670,6 @@ public enum L10n {
     }
   }
   public enum Rating {
-    public enum Alert {
-      public enum Button {
-        /// No, thanks.
-        public static let nothanks = L10n.tr("Localizable", "rating.alert.button.nothanks", fallback: "No, thanks.")
-        /// Not Really
-        public static let notreally = L10n.tr("Localizable", "rating.alert.button.notreally", fallback: "Not Really")
-        /// Ok, sure!
-        public static let oksure = L10n.tr("Localizable", "rating.alert.button.oksure", fallback: "Ok, sure!")
-      }
-    }
-    public enum Enjoy {
-      /// Are you enjoying PIA VPN?
-      public static let question = L10n.tr("Localizable", "rating.enjoy.question", fallback: "Are you enjoying PIA VPN?")
-      /// We hope our VPN product is meeting your expectations
-      public static let subtitle = L10n.tr("Localizable", "rating.enjoy.subtitle", fallback: "We hope our VPN product is meeting your expectations")
-    }
     public enum Error {
       /// The connection couldn't be established
       public static let question = L10n.tr("Localizable", "rating.error.question", fallback: "The connection couldn't be established")
@@ -863,22 +679,6 @@ public enum L10n {
         /// Send feedback
         public static let send = L10n.tr("Localizable", "rating.error.button.send", fallback: "Send feedback")
       }
-    }
-    public enum Problems {
-      /// What went wrong?
-      public static let question = L10n.tr("Localizable", "rating.problems.question", fallback: "What went wrong?")
-      /// Do you want to give feedback? We can help you to improve your experience using PIA
-      public static let subtitle = L10n.tr("Localizable", "rating.problems.subtitle", fallback: "Do you want to give feedback? We can help you to improve your experience using PIA")
-    }
-    public enum Rate {
-      /// How about a rating on the AppStore?
-      public static let question = L10n.tr("Localizable", "rating.rate.question", fallback: "How about a rating on the AppStore?")
-      /// We appreciate you sharing your experience
-      public static let subtitle = L10n.tr("Localizable", "rating.rate.subtitle", fallback: "We appreciate you sharing your experience")
-    }
-    public enum Review {
-      /// How about an AppStore review?
-      public static let question = L10n.tr("Localizable", "rating.review.question", fallback: "How about an AppStore review?")
     }
   }
   public enum Region {
@@ -1009,10 +809,6 @@ public enum L10n {
     public enum Email {
       /// We need your email to send your username and password.
       public static let why = L10n.tr("Localizable", "set.email.why", fallback: "We need your email to send your username and password.")
-      public enum Error {
-        /// You must enter an email address.
-        public static let validation = L10n.tr("Localizable", "set.email.error.validation", fallback: "You must enter an email address.")
-      }
       public enum Form {
         /// Enter your email address
         public static let email = L10n.tr("Localizable", "set.email.form.email", fallback: "Enter your email address")
@@ -1047,8 +843,6 @@ public enum L10n {
       }
     }
     public enum ApplicationInformation {
-      /// APPLICATION INFORMATION
-      public static let title = L10n.tr("Localizable", "settings.application_information.title", fallback: "APPLICATION INFORMATION")
       public enum Debug {
         /// Send Debug Log to support
         public static let title = L10n.tr("Localizable", "settings.application_information.debug.title", fallback: "Send Debug Log to support")
@@ -1081,8 +875,6 @@ public enum L10n {
       }
     }
     public enum ApplicationSettings {
-      /// APPLICATION SETTINGS
-      public static let title = L10n.tr("Localizable", "settings.application_settings.title", fallback: "APPLICATION SETTINGS")
       public enum ActiveTheme {
         /// Active theme
         public static let title = L10n.tr("Localizable", "settings.application_settings.active_theme.title", fallback: "Active theme")
@@ -1092,10 +884,6 @@ public enum L10n {
         public static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer", fallback: "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)")
         /// Allow access to devices on local network
         public static let title = L10n.tr("Localizable", "settings.application_settings.allow_local_network.title", fallback: "Allow access to devices on local network")
-      }
-      public enum DarkTheme {
-        /// Dark theme
-        public static let title = L10n.tr("Localizable", "settings.application_settings.dark_theme.title", fallback: "Dark theme")
       }
       public enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
@@ -1114,12 +902,6 @@ public enum L10n {
           /// Changes to the VPN Settings will take effect on the next connection
           public static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.alert.title", fallback: "Changes to the VPN Settings will take effect on the next connection")
         }
-      }
-      public enum Mace {
-        /// PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.
-        public static let footer = L10n.tr("Localizable", "settings.application_settings.mace.footer", fallback: "PIA MACE™ blocks ads, trackers, and malware while you're connected to the VPN.")
-        /// PIA MACE™
-        public static let title = L10n.tr("Localizable", "settings.application_settings.mace.title", fallback: "PIA MACE™")
       }
       public enum ReconnectNotifications {
         /// Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.
@@ -1155,10 +937,6 @@ public enum L10n {
         /// Remote Port
         public static let title = L10n.tr("Localizable", "settings.connection.remote_port.title", fallback: "Remote Port")
       }
-      public enum SocketProtocol {
-        /// Socket
-        public static let title = L10n.tr("Localizable", "settings.connection.socket_protocol.title", fallback: "Socket")
-      }
       public enum Transport {
         /// Transport
         public static let title = L10n.tr("Localizable", "settings.connection.transport.title", fallback: "Transport")
@@ -1176,10 +954,6 @@ public enum L10n {
       public enum Refresh {
         /// Refresh block list
         public static let title = L10n.tr("Localizable", "settings.content_blocker.refresh.title", fallback: "Refresh block list")
-      }
-      public enum State {
-        /// Current state
-        public static let title = L10n.tr("Localizable", "settings.content_blocker.state.title", fallback: "Current state")
       }
     }
     public enum Dedicatedip {
@@ -1285,15 +1059,9 @@ public enum L10n {
       }
     }
     public enum Encryption {
-      /// ENCRYPTION
-      public static let title = L10n.tr("Localizable", "settings.encryption.title", fallback: "ENCRYPTION")
       public enum Cipher {
         /// Data Encryption
         public static let title = L10n.tr("Localizable", "settings.encryption.cipher.title", fallback: "Data Encryption")
-      }
-      public enum Digest {
-        /// Data Authentication
-        public static let title = L10n.tr("Localizable", "settings.encryption.digest.title", fallback: "Data Authentication")
       }
       public enum Handshake {
         /// Handshake
@@ -1309,94 +1077,24 @@ public enum L10n {
     public enum Hotspothelper {
       /// Configure how PIA will behaves on connection to WiFi or cellular networks. This excludes disconnecting manually.
       public static let description = L10n.tr("Localizable", "settings.hotspothelper.description", fallback: "Configure how PIA will behaves on connection to WiFi or cellular networks. This excludes disconnecting manually.")
-      /// Network management tool
-      public static let title = L10n.tr("Localizable", "settings.hotspothelper.title", fallback: "Network management tool")
-      public enum All {
-        /// VPN WiFi Protection will activate on all networks, including trusted networks.
-        public static let description = L10n.tr("Localizable", "settings.hotspothelper.all.description", fallback: "VPN WiFi Protection will activate on all networks, including trusted networks.")
-        /// Protect all networks
-        public static let title = L10n.tr("Localizable", "settings.hotspothelper.all.title", fallback: "Protect all networks")
-      }
       public enum Available {
         /// To populate this list go to iOS Settings > WiFi.
         public static let help = L10n.tr("Localizable", "settings.hotspothelper.available.help", fallback: "To populate this list go to iOS Settings > WiFi.")
-        public enum Add {
-          /// Tap + to add to Trusted networks.
-          public static let help = L10n.tr("Localizable", "settings.hotspothelper.available.add.help", fallback: "Tap + to add to Trusted networks.")
-        }
-      }
-      public enum Cellular {
-        /// PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.
-        public static let description = L10n.tr("Localizable", "settings.hotspothelper.cellular.description", fallback: "PIA automatically enables the VPN when connecting to cellular networks if this option is enabled.")
-        /// Cellular networks
-        public static let networks = L10n.tr("Localizable", "settings.hotspothelper.cellular.networks", fallback: "Cellular networks")
-        /// Protect over cellular networks
-        public static let title = L10n.tr("Localizable", "settings.hotspothelper.cellular.title", fallback: "Protect over cellular networks")
-      }
-      public enum Enable {
-        /// PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.
-        public static let description = L10n.tr("Localizable", "settings.hotspothelper.enable.description", fallback: "PIA automatically enables the VPN when connecting to untrusted WiFi networks if this option is enabled.")
-      }
-      public enum Rules {
-        /// Rules
-        public static let title = L10n.tr("Localizable", "settings.hotspothelper.rules.title", fallback: "Rules")
-      }
-      public enum Wifi {
-        /// WiFi networks
-        public static let networks = L10n.tr("Localizable", "settings.hotspothelper.wifi.networks", fallback: "WiFi networks")
-        public enum Trust {
-          /// VPN WiFi Protection
-          public static let title = L10n.tr("Localizable", "settings.hotspothelper.wifi.trust.title", fallback: "VPN WiFi Protection")
-        }
       }
     }
     public enum Log {
       /// Save debug logs which can be submitted to technical support to help troubleshoot problems.
       public static let information = L10n.tr("Localizable", "settings.log.information", fallback: "Save debug logs which can be submitted to technical support to help troubleshoot problems.")
-      public enum Connected {
-        /// A VPN connection is required. Please connect to the VPN and retry.
-        public static let error = L10n.tr("Localizable", "settings.log.connected.error", fallback: "A VPN connection is required. Please connect to the VPN and retry.")
-      }
     }
     public enum Nmt {
       public enum Killswitch {
         /// The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.
         public static let disabled = L10n.tr("Localizable", "settings.nmt.killswitch.disabled", fallback: "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.")
       }
-      public enum Optout {
-        public enum Disconnect {
-          /// Opt-out disconnect confirmation alert
-          public static let alerts = L10n.tr("Localizable", "settings.nmt.optout.disconnect.alerts", fallback: "Opt-out disconnect confirmation alert")
-          public enum Alerts {
-            /// Disables the warning alert when disconnecting from the VPN.
-            public static let description = L10n.tr("Localizable", "settings.nmt.optout.disconnect.alerts.description", fallback: "Disables the warning alert when disconnecting from the VPN.")
-          }
-        }
-      }
-      public enum Wireguard {
-        /// WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.
-        public static let warning = L10n.tr("Localizable", "settings.nmt.wireguard.warning", fallback: "WireGuard® doesn't need to reconnect when you switch between different networks. It may be necessary to manually disconnect the VPN on trusted networks.")
-      }
-    }
-    public enum Ovpn {
-      public enum Migration {
-        /// We are updating our OpenVPN implementation, for more information, click here
-        public static let footer = L10n.tr("Localizable", "settings.ovpn.migration.footer", fallback: "We are updating our OpenVPN implementation, for more information, click here")
-        public enum Footer {
-          /// here
-          public static let link = L10n.tr("Localizable", "settings.ovpn.migration.footer.link", fallback: "here")
-        }
-      }
-    }
-    public enum Preview {
-      /// Preview
-      public static let title = L10n.tr("Localizable", "settings.preview.title", fallback: "Preview")
     }
     public enum Reset {
       /// This will reset all of the above settings to default.
       public static let footer = L10n.tr("Localizable", "settings.reset.footer", fallback: "This will reset all of the above settings to default.")
-      /// RESET
-      public static let title = L10n.tr("Localizable", "settings.reset.title", fallback: "RESET")
       public enum Defaults {
         /// Reset settings to default
         public static let title = L10n.tr("Localizable", "settings.reset.defaults.title", fallback: "Reset settings to default")
@@ -1424,14 +1122,6 @@ public enum L10n {
       /// Protocols
       public static let protocols = L10n.tr("Localizable", "settings.section.protocols", fallback: "Protocols")
     }
-    public enum Server {
-      public enum Network {
-        /// The VPN has to be disconnected to change the server network.
-        public static let alert = L10n.tr("Localizable", "settings.server.network.alert", fallback: "The VPN has to be disconnected to change the server network.")
-        /// Next generation network
-        public static let description = L10n.tr("Localizable", "settings.server.network.description", fallback: "Next generation network")
-      }
-    }
     public enum Service {
       public enum Quality {
         public enum Share {
@@ -1454,34 +1144,6 @@ public enum L10n {
         public static let description = L10n.tr("Localizable", "settings.small.packets.description", fallback: "Will slightly lower the IP packet size to improve compatibility with some routers and mobile networks.")
         /// Use Small Packets
         public static let title = L10n.tr("Localizable", "settings.small.packets.title", fallback: "Use Small Packets")
-      }
-    }
-    public enum Trusted {
-      public enum Networks {
-        /// PIA won't automatically connect on these networks.
-        public static let message = L10n.tr("Localizable", "settings.trusted.networks.message", fallback: "PIA won't automatically connect on these networks.")
-        public enum Connect {
-          /// Protect this network by connecting to VPN?
-          public static let message = L10n.tr("Localizable", "settings.trusted.networks.connect.message", fallback: "Protect this network by connecting to VPN?")
-        }
-        public enum Sections {
-          /// Available networks
-          public static let available = L10n.tr("Localizable", "settings.trusted.networks.sections.available", fallback: "Available networks")
-          /// Current network
-          public static let current = L10n.tr("Localizable", "settings.trusted.networks.sections.current", fallback: "Current network")
-          /// Trusted networks
-          public static let trusted = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted", fallback: "Trusted networks")
-          /// Untrusted networks
-          public static let untrusted = L10n.tr("Localizable", "settings.trusted.networks.sections.untrusted", fallback: "Untrusted networks")
-          public enum Trusted {
-            public enum Rule {
-              /// Disconnect from PIA VPN
-              public static let action = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.action", fallback: "Disconnect from PIA VPN")
-              /// Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.
-              public static let description = L10n.tr("Localizable", "settings.trusted.networks.sections.trusted.rule.description", fallback: "Enable this feature, with the VPN kill switch enabled, to customize how PIA will behave on WiFi and cellular networks. Please be aware, functionality of the Network Management Tool will be disabled if you manually disconnect.")
-            }
-          }
-        }
       }
     }
   }
@@ -1537,10 +1199,6 @@ public enum L10n {
       public static let message = L10n.tr("Localizable", "signup.in_progress.message", fallback: "We're confirming your purchase with our system. It could take a moment so hang in there.")
       /// Confirm sign-up
       public static let title = L10n.tr("Localizable", "signup.in_progress.title", fallback: "Confirm sign-up")
-      public enum Redeem {
-        /// We're confirming your card PIN with our system. It could take a moment so hang in there.
-        public static let message = L10n.tr("Localizable", "signup.in_progress.redeem.message", fallback: "We're confirming your card PIN with our system. It could take a moment so hang in there.")
-      }
     }
     public enum Purchase {
       public enum Subscribe {
@@ -1548,33 +1206,13 @@ public enum L10n {
         public static let now = L10n.tr("Localizable", "signup.purchase.subscribe.now", fallback: "Subscribe now")
       }
       public enum Trials {
-        /// Browse anonymously and hide your ip.
-        public static let anonymous = L10n.tr("Localizable", "signup.purchase.trials.anonymous", fallback: "Browse anonymously and hide your ip.")
-        /// Support 10 devices at once
-        public static let devices = L10n.tr("Localizable", "signup.purchase.trials.devices", fallback: "Support 10 devices at once")
         /// Start your 7-day free trial
         public static let intro = L10n.tr("Localizable", "signup.purchase.trials.intro", fallback: "Start your 7-day free trial")
         /// Secure servers in 90+ countries
         public static let region = L10n.tr("Localizable", "signup.purchase.trials.region", fallback: "Secure servers in 90+ countries")
-        /// More than 3300 servers in 32 countries
-        public static let servers = L10n.tr("Localizable", "signup.purchase.trials.servers", fallback: "More than 3300 servers in 32 countries")
-        /// Start subscription
-        public static let start = L10n.tr("Localizable", "signup.purchase.trials.start", fallback: "Start subscription")
-        public enum _1year {
-          /// 1 year of privacy and identity protection
-          public static let protection = L10n.tr("Localizable", "signup.purchase.trials.1year.protection", fallback: "1 year of privacy and identity protection")
-        }
         public enum All {
           /// See all available plans
           public static let plans = L10n.tr("Localizable", "signup.purchase.trials.all.plans", fallback: "See all available plans")
-        }
-        public enum Devices {
-          /// Protect yourself on up to 10 devices at a time.
-          public static let description = L10n.tr("Localizable", "signup.purchase.trials.devices.description", fallback: "Protect yourself on up to 10 devices at a time.")
-        }
-        public enum Money {
-          /// 30 day money back guarantee
-          public static let back = L10n.tr("Localizable", "signup.purchase.trials.money.back", fallback: "30 day money back guarantee")
         }
         public enum Price {
           /// Then %@
@@ -1590,8 +1228,6 @@ public enum L10n {
           public enum Button {
             /// Cancel
             public static let cancel = L10n.tr("Localizable", "signup.purchase.uncredited.alert.button.cancel", fallback: "Cancel")
-            /// Recover account
-            public static let recover = L10n.tr("Localizable", "signup.purchase.uncredited.alert.button.recover", fallback: "Recover account")
           }
         }
       }
@@ -1679,14 +1315,6 @@ public enum L10n {
       public static let vcTitle = L10n.tr("Localizable", "signup.unreachable.vc_title", fallback: "Error")
     }
     public enum Walkthrough {
-      public enum Action {
-        /// DONE
-        public static let done = L10n.tr("Localizable", "signup.walkthrough.action.done", fallback: "DONE")
-        /// NEXT
-        public static let next = L10n.tr("Localizable", "signup.walkthrough.action.next", fallback: "NEXT")
-        /// SKIP
-        public static let skip = L10n.tr("Localizable", "signup.walkthrough.action.skip", fallback: "SKIP")
-      }
       public enum Page {
         public enum _1 {
           /// Protect yourself on up to 10 devices at a time.
@@ -1759,13 +1387,9 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "tiles.feedback.title", fallback: "How are we doing?")
     }
     public enum Nmt {
-      /// Cellular
-      public static let cellular = L10n.tr("Localizable", "tiles.nmt.cellular", fallback: "Cellular")
       public enum Accessibility {
         /// Trusted network
         public static let trusted = L10n.tr("Localizable", "tiles.nmt.accessibility.trusted", fallback: "Trusted network")
-        /// Untrusted network
-        public static let untrusted = L10n.tr("Localizable", "tiles.nmt.accessibility.untrusted", fallback: "Untrusted network")
       }
     }
     public enum Quick {
@@ -2034,30 +1658,6 @@ public enum L10n {
         /// Terms of Service
         public static let tos = L10n.tr("Localizable", "welcome.agreement.message.tos", fallback: "Terms of Service")
       }
-      public enum Trials {
-        /// Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
-        /// 
-        /// Certain Paid Subscriptions may offer a free trial prior to charging your payment method. If you decide to unsubscribe from a Paid Subscription before we start charging your payment method, cancel the subscription at least 24 hours before the free trial ends.
-        /// 
-        /// Free trials are only available to new users, and are at our sole discretion, and if you attempt to sign up for an additional free trial, you will be immediately charged with the standard Subscription Fee.
-        /// 
-        /// We reserve the right to revoke your free trial at any time.
-        /// 
-        /// Any unused portion of your free trial period will be forfeited upon purchase of a subscription.
-        /// 
-        /// Signing up constitutes acceptance of this terms and conditions.
-        public static let message = L10n.tr("Localizable", "welcome.agreement.trials.message", fallback: "Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.\n\nCertain Paid Subscriptions may offer a free trial prior to charging your payment method. If you decide to unsubscribe from a Paid Subscription before we start charging your payment method, cancel the subscription at least 24 hours before the free trial ends.\n\nFree trials are only available to new users, and are at our sole discretion, and if you attempt to sign up for an additional free trial, you will be immediately charged with the standard Subscription Fee.\n\nWe reserve the right to revoke your free trial at any time.\n\nAny unused portion of your free trial period will be forfeited upon purchase of a subscription.\n\nSigning up constitutes acceptance of this terms and conditions.")
-        /// Free trials terms and conditions
-        public static let title = L10n.tr("Localizable", "welcome.agreement.trials.title", fallback: "Free trials terms and conditions")
-        public enum Monthly {
-          /// month
-          public static let plan = L10n.tr("Localizable", "welcome.agreement.trials.monthly.plan", fallback: "month")
-        }
-        public enum Yearly {
-          /// year
-          public static let plan = L10n.tr("Localizable", "welcome.agreement.trials.yearly.plan", fallback: "year")
-        }
-      }
     }
     public enum Gdpr {
       public enum Accept {
@@ -2078,25 +1678,13 @@ public enum L10n {
         public enum Data {
           /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
           public static let description = L10n.tr("Localizable", "welcome.gdpr.usage.data.description", fallback: "E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.")
-          /// Uses of personal information collected by us
-          public static let title = L10n.tr("Localizable", "welcome.gdpr.usage.data.title", fallback: "Uses of personal information collected by us")
         }
-      }
-    }
-    public enum Getstarted {
-      public enum Buttons {
-        /// Buy account
-        public static let buyaccount = L10n.tr("Localizable", "welcome.getstarted.buttons.buyaccount", fallback: "Buy account")
       }
     }
     public enum Iap {
       public enum Error {
         /// Error
         public static let title = L10n.tr("Localizable", "welcome.iap.error.title", fallback: "Error")
-        public enum Message {
-          /// Apple servers currently unavailable. Please try again later.
-          public static let unavailable = L10n.tr("Localizable", "welcome.iap.error.message.unavailable", fallback: "Apple servers currently unavailable. Please try again later.")
-        }
       }
     }
     public enum Login {
@@ -2124,10 +1712,6 @@ public enum L10n {
           public static let send = L10n.tr("Localizable", "welcome.login.magic.link.send", fallback: "Send Link")
           /// Login using magic email link
           public static let title = L10n.tr("Localizable", "welcome.login.magic.link.title", fallback: "Login using magic email link")
-          public enum Invalid {
-            /// Invalid email. Please try again.
-            public static let email = L10n.tr("Localizable", "welcome.login.magic.link.invalid.email", fallback: "Invalid email. Please try again.")
-          }
         }
       }
       public enum Password {
@@ -2183,10 +1767,6 @@ public enum L10n {
       /// Select a VPN plan
       public static let title = L10n.tr("Localizable", "welcome.purchase.title", fallback: "Select a VPN plan")
       public enum Confirm {
-        /// You are purchasing the %@ plan
-        public static func plan(_ p1: Any) -> String {
-          return L10n.tr("Localizable", "welcome.purchase.confirm.plan", String(describing: p1), fallback: "You are purchasing the %@ plan")
-        }
         public enum Form {
           /// Enter your email address
           public static let email = L10n.tr("Localizable", "welcome.purchase.confirm.form.email", fallback: "Enter your email address")
@@ -2199,54 +1779,18 @@ public enum L10n {
         public static let why = L10n.tr("Localizable", "welcome.purchase.email.why", fallback: "We need your email to send your username and password.")
       }
       public enum Error {
-        /// Purchase
-        public static let title = L10n.tr("Localizable", "welcome.purchase.error.title", fallback: "Purchase")
-        /// You must enter an email address.
-        public static let validation = L10n.tr("Localizable", "welcome.purchase.error.validation", fallback: "You must enter an email address.")
         public enum Connectivity {
-          /// We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.
-          public static let description = L10n.tr("Localizable", "welcome.purchase.error.connectivity.description", fallback: "We are unable to reach Private Internet Access. This may due to poor internet or our service is blocked in your country.")
           /// Connection Failure
           public static let title = L10n.tr("Localizable", "welcome.purchase.error.connectivity.title", fallback: "Connection Failure")
         }
       }
-      public enum Login {
-        /// Sign in
-        public static let button = L10n.tr("Localizable", "welcome.purchase.login.button", fallback: "Sign in")
-        /// Already have an account?
-        public static let footer = L10n.tr("Localizable", "welcome.purchase.login.footer", fallback: "Already have an account?")
-      }
     }
     public enum Redeem {
-      /// SUBMIT
-      public static let submit = L10n.tr("Localizable", "welcome.redeem.submit", fallback: "SUBMIT")
-      /// Type in your email address and the %lu digit PIN from your gift card or trial card below.
-      public static func subtitle(_ p1: Int) -> String {
-        return L10n.tr("Localizable", "welcome.redeem.subtitle", p1, fallback: "Type in your email address and the %lu digit PIN from your gift card or trial card below.")
-      }
       /// Redeem gift card
       public static let title = L10n.tr("Localizable", "welcome.redeem.title", fallback: "Redeem gift card")
       public enum Accessibility {
         /// Back
         public static let back = L10n.tr("Localizable", "welcome.redeem.accessibility.back", fallback: "Back")
-      }
-      public enum Email {
-        /// Email address
-        public static let placeholder = L10n.tr("Localizable", "welcome.redeem.email.placeholder", fallback: "Email address")
-      }
-      public enum Error {
-        /// Please type in your email and card PIN.
-        public static let allfields = L10n.tr("Localizable", "welcome.redeem.error.allfields", fallback: "Please type in your email and card PIN.")
-        /// Code must be %lu numeric digits.
-        public static func code(_ p1: Int) -> String {
-          return L10n.tr("Localizable", "welcome.redeem.error.code", p1, fallback: "Code must be %lu numeric digits.")
-        }
-        /// Redeem
-        public static let title = L10n.tr("Localizable", "welcome.redeem.error.title", fallback: "Redeem")
-      }
-      public enum Giftcard {
-        /// Gift card PIN
-        public static let placeholder = L10n.tr("Localizable", "welcome.redeem.giftcard.placeholder", fallback: "Gift card PIN")
       }
     }
     public enum Restore {
