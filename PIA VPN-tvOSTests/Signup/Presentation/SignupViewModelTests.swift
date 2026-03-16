@@ -10,6 +10,7 @@ import XCTest
 import Combine
 @testable import PIA_VPN_tvOS
 import PIALibrary
+import PIALocalizations
 
 final class SignupViewModelTests: XCTestCase {
     class Fixture {

@@ -11,6 +11,7 @@ import XCTest
 import PIALibrary
 import Combine
 import StoreKit
+import PIALocalizations
 
 final class SignupIntegrationTests: XCTestCase {
     class Fixture {

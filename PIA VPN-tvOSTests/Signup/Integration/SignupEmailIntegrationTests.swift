@@ -10,6 +10,7 @@ import XCTest
 @testable import PIA_VPN_tvOS
 import PIALibrary
 import Combine
+import PIALocalizations
 
 final class SignupEmailIntegrationTests: XCTestCase {
     var sut: SignupEmailViewModel!

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PIALocalizations
 
 extension XCUIApplication {
     var signupImage: XCUIElement {image(with: "signup-screen")}

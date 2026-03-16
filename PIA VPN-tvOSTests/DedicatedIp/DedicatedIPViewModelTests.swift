@@ -9,6 +9,7 @@
 import XCTest
 @testable import PIA_VPN_tvOS
 import Combine
+import PIALocalizations
 
 final class DedicatedIPViewModelTests: XCTestCase {
     class Fixture {
