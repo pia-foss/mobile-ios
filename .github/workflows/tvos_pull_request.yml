@@ -8,6 +8,7 @@ concurrency:
 jobs:
   build:
     runs-on: macos-26
+    timeout-minutes: 60
     env:
       TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME}}
       TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
@@ -26,6 +27,7 @@ jobs:
         xcode-version: latest-stable
     
     - name: Download tvOS Platform
+      timeout-minutes: 20
       run: |
         # Check if tvOS platform is already installed
         if xcodebuild -showsdks | grep -q "appletvos"; then
@@ -62,7 +64,12 @@ jobs:
         bundler-cache: true
 
     - name: Run tvOS unit tests
-      run: bundle exec fastlane tvOStests
+      uses: nick-fields/retry@v3
+      with:
+        timeout_minutes: 20
+        max_attempts: 2
+        retry_on: timeout
+        command: bundle exec fastlane tvOStests
 
     - name: Upload tvOS test results
       if: failure()
