@@ -151,25 +151,39 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     }
 
     private func findAlternate(from server: Server) -> Server? {
+        // 1. Same region
         let sameRegionCandidates = currentServers.filter {
             $0.regionIdentifier == server.regionIdentifier && $0 != server && !$0.offline && $0.isAvailable
         }
         log.debug("[DefaultServerProvider] findAlternate — sameRegion candidates for '\(server.name)' (regionIdentifier='\(server.regionIdentifier)'): \(sameRegionCandidates.map { "\($0.name)(avail=\($0.isAvailable))" })")
 
-        // Prefer another server in the same region
         if let sameRegion = sameRegionCandidates.first {
             log.debug("[DefaultServerProvider] findAlternate — found same-region alternate: '\(sameRegion.name)'")
             return sameRegion
         }
 
-        // Fall back to the server with the lowest known ping time
+        // 2. Same country, different region
+        let sameCountryCandidates = currentServers.filter {
+            $0.country == server.country && $0.regionIdentifier != server.regionIdentifier && !$0.offline && $0.isAvailable
+        }
+        let sameCountrySorted = sameCountryCandidates.sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
+        log.debug("[DefaultServerProvider] findAlternate — no same-region alternate, sameCountry candidates count=\(sameCountryCandidates.count) country='\(server.country)'")
+
+        if let sameCountry = sameCountrySorted.first {
+            log.debug("[DefaultServerProvider] findAlternate — found same-country alternate: '\(sameCountry.name)' pingTime=\(sameCountry.pingTime ?? -1)")
+            return sameCountry
+        }
+
+        // 3. Global fallback
         let globalCandidates = currentServers.filter { $0 != server && !$0.offline && $0.isAvailable }
-        let sorted = globalCandidates.sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
-        log.debug("[DefaultServerProvider] findAlternate — no same-region alternate, global candidates count=\(globalCandidates.count)")
-        if let best = sorted.first {
+        let globalSorted = globalCandidates.sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
+        log.debug("[DefaultServerProvider] findAlternate — no same-country alternate, global candidates count=\(globalCandidates.count)")
+
+        if let best = globalSorted.first {
             log.debug("[DefaultServerProvider] findAlternate — best global alternate: '\(best.name)' pingTime=\(best.pingTime ?? -1)")
             return best
         }
+
         log.debug("[DefaultServerProvider] findAlternate — no alternate found at all")
         return nil
     }
