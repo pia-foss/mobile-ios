@@ -22,6 +22,8 @@
 
 import Foundation
 
+private let log = PIALogger.logger(for: Server.self)
+
 /// Possible errors raised when parsing a `Server`.
 public enum ServerError: Error {
 
@@ -108,6 +110,7 @@ public final class Server: Hashable {
         }
         
         func markServerAsUnavailable() {
+            log.debug("[Server] Marking address as unavailable — ip=\(ip) cn=\(cn)")
             available = false
         }
 
@@ -273,7 +276,11 @@ extension Server {
     }
 
     public func bestAddress() -> ServerAddressIP? {
-        addresses().first(where: { $0.available })
+        let all = addresses()
+        let available = all.filter { $0.available }
+        let result = available.first
+        log.debug("[Server] bestAddress for '\(name)' — total=\(all.count) available=\(available.count) chosen=\(result?.ip ?? "nil")")
+        return result
     }
 
     public func bestAddressForOVPN(tcp: Bool) -> ServerAddressIP? {

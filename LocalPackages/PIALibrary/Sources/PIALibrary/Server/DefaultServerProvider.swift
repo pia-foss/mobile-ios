@@ -119,37 +119,59 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
     
     public var targetServer: Server {
         get throws {
-            guard let intended = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
+            let preferred = accessedPreferences.preferredServer
+            let best = bestServer
+            let lastConnected = accessedDatabase.plain.lastConnectedRegion
+            log.debug("[DefaultServerProvider] targetServer — preferred='\(preferred?.name ?? "nil")' bestServer='\(best?.name ?? "nil")' lastConnected='\(lastConnected?.name ?? "nil")'")
+
+            guard let intended = preferred ?? best ?? lastConnected else {
                 guard let fallback = currentServers.first else {
-                    log.error("No servers available")
+                    log.error("[DefaultServerProvider] targetServer — no servers available at all")
                     throw ClientError.noServersAvailable
                 }
+                log.debug("[DefaultServerProvider] targetServer — no intended server, using first available: '\(fallback.name)'")
                 return fallback
             }
 
+            log.debug("[DefaultServerProvider] targetServer — intended='\(intended.name)' regionIdentifier='\(intended.regionIdentifier)' isAvailable=\(intended.isAvailable) offline=\(intended.offline)")
+
             if intended.isAvailable {
+                log.debug("[DefaultServerProvider] targetServer — returning intended server '\(intended.name)'")
                 return intended
             }
 
             // All IPs on the intended server are exhausted — find the best alternate.
-            log.debug("Server \(intended.name) has no available IPs, looking for alternate")
-            return findAlternate(from: intended) ?? intended
+            log.debug("[DefaultServerProvider] targetServer — '\(intended.name)' has no available IPs, looking for alternate")
+            if let alternate = findAlternate(from: intended) {
+                return alternate
+            }
+            log.debug("[DefaultServerProvider] targetServer — no alternate found, falling back to original '\(intended.name)' (all IPs exhausted)")
+            return intended
         }
     }
 
     private func findAlternate(from server: Server) -> Server? {
-        // Prefer another server in the same region
-        if let sameRegion = currentServers.first(where: {
+        let sameRegionCandidates = currentServers.filter {
             $0.regionIdentifier == server.regionIdentifier && $0 != server && !$0.offline && $0.isAvailable
-        }) {
+        }
+        log.debug("[DefaultServerProvider] findAlternate — sameRegion candidates for '\(server.name)' (regionIdentifier='\(server.regionIdentifier)'): \(sameRegionCandidates.map { "\($0.name)(avail=\($0.isAvailable))" })")
+
+        // Prefer another server in the same region
+        if let sameRegion = sameRegionCandidates.first {
+            log.debug("[DefaultServerProvider] findAlternate — found same-region alternate: '\(sameRegion.name)'")
             return sameRegion
         }
 
         // Fall back to the server with the lowest known ping time
-        return currentServers
-            .filter { $0 != server && !$0.offline && $0.isAvailable }
-            .sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
-            .first
+        let globalCandidates = currentServers.filter { $0 != server && !$0.offline && $0.isAvailable }
+        let sorted = globalCandidates.sorted { ($0.pingTime ?? .max) < ($1.pingTime ?? .max) }
+        log.debug("[DefaultServerProvider] findAlternate — no same-region alternate, global candidates count=\(globalCandidates.count)")
+        if let best = sorted.first {
+            log.debug("[DefaultServerProvider] findAlternate — best global alternate: '\(best.name)' pingTime=\(best.pingTime ?? -1)")
+            return best
+        }
+        log.debug("[DefaultServerProvider] findAlternate — no alternate found at all")
+        return nil
     }
     
     public var dipTokens: [String]? {
