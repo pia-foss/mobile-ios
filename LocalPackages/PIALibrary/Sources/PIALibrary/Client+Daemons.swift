@@ -53,6 +53,11 @@ extension Client {
             return accessedDatabase.transient.vpnStatus
         }
 
+        /// The CN of the last server that was successfully connected to. Persists across app restarts.
+        public var lastServerCN: String? {
+            return accessedDatabase.plain.lastServerCN
+        }
+
         /// Publisher that emits tuples of (publicIP, vpnIP) when connectivity updates.
         /// vpnIP is only populated when vpnStatus is .connected.
         public var ipsPublisher: AnyPublisher<(publicIP: String?, vpnIP: String?), Never> {

@@ -270,14 +270,20 @@ public class PIATunnelProfile: NetworkExtensionProfile {
             }
 
             if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: {$0.socketType == .tcp }) {
-                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true)?.ip {
-                    serverAddress = bestAddress
-                    builder.resolvedAddresses = [bestAddress]
+                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true) {
+                    serverAddress = bestAddress.ip
+                    builder.resolvedAddresses = [bestAddress.ip]
+
+                    // Persisting CN so app knows which server it was connected to
+                    Client.database.plain.lastServerCN = bestAddress.cn
                 }
             } else {
-                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: false)?.ip {
-                    serverAddress = bestAddress
-                    builder.resolvedAddresses = [bestAddress]
+                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: false) {
+                    serverAddress = bestAddress.ip
+                    builder.resolvedAddresses = [bestAddress.ip]
+
+                    // Persisting CN so app knows which server it was connected to
+                    Client.database.plain.lastServerCN = bestAddress.cn
                 }
             }
             customCfg = builder.build()

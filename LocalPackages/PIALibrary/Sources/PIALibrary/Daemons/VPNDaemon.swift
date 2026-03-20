@@ -23,6 +23,11 @@
 import Foundation
 import NetworkExtension
 
+#if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
+import PIAWireguard
+import TunnelKitOpenVPN
+#endif
+
 private let log = PIALogger.logger(for: VPNDaemon.self)
 
 final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
@@ -30,28 +35,24 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     private(set) var hasEnabledUpdates: Bool
     private var fallbackTimer: Timer!
-    private var changingServerTimer: Timer?
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
-    private var isChangingServer: Bool
     private var lastKnownVpnStatus: VPNStatus = .disconnected
     
     private init() {
         hasEnabledUpdates = false
         isReconnecting = false
-        isChangingServer = false
         numberOfAttempts = 0
     }
     
     func start() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(vpnIsChangingServer(notification:)), name: .PIAVPNIsChangingServer, object: nil)
 
         do {
             try accessedProviders.vpnProvider.prepare()
         } catch {
-            log.error("Faile to prepare VPN provider: \(error.localizedDescription)")
+            log.error("Failed to prepare VPN provider: \(error.localizedDescription)")
         }
 
         if Client.providers.vpnProvider.isVPNConnected {
@@ -63,8 +64,23 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         guard let profile = accessedDatabase.transient.activeVPNProfile else {
             return
         }
-        if let _ = connection as? NETunnelProviderSession {
+        if let session = connection as? NETunnelProviderSession {
             guard profile.isTunnel else {
+                return
+            }
+            // Verify the connection belongs to the active profile's loaded manager.
+            // Without this, NEVPNStatusDidChange events from other tunnel providers
+            // (e.g. a previously installed OpenVPN profile being cleaned up on startup)
+            // pass the isTunnel check and incorrectly reset vpnStatus to .disconnected
+            // while WireGuard is still connected.
+            //
+            // When tryUpdateStatus runs (via DispatchQueue.main.async), the active
+            // profile's loadAllFromPreferences callback has always already completed
+            // and set profile.native, so this guard is safe to make strict.
+            guard
+                let activeManager = profile.native as? NETunnelProviderManager,
+                session.manager === activeManager
+            else {
                 return
             }
         } else {
@@ -97,10 +113,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             
             //Connection successful, the user interaction finished
             Client.configuration.connectedManually = false
-            
-            // As connect has succeeded isChangingServer flag can now be turned off
-            self.isChangingServer = false
-            invalidateServerChangeTimer()
             
         case .connecting, .reasserting:
             
@@ -186,60 +198,58 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         accessedDatabase.plain.lastKnownVpnStatus = nextStatus
         
         if !isReconnecting {
-            updateVpnStatus(with: nextStatus)
+            accessedDatabase.transient.vpnStatus = nextStatus
         }
-        
-        if let error = connection.value(forKey: "_lastDisconnectError") as? NSError {
-            if error.description.contains("Domain=TunnelKit.OpenVPNTunnelProvider.ProviderConfigurationError Code=0") {
+
+        guard #available(iOS 16.0, *) else {
+            log.debug("[VPNDaemon] iOS < 16 — posting PIAVPNDidFail directly (no fetchLastDisconnectError)")
+            Macros.postNotification(.PIAVPNDidFail)
+            return
+        }
+
+        log.debug("[VPNDaemon] Fetching last disconnect error...")
+        if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
+            log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
+
+            let connectivityCheckFailed = switch (lastDisconnectError.domain, lastDisconnectError.code) {
+            #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
+            case (PacketTunnelProviderError.errorDomain, PacketTunnelProviderError.connectivityCheckFailed.errorCode),
+                 (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
+                true
+            #endif
+            case (NEVPNConnectionErrorDomain, _):
+                true
+            default:
+                false
+            }
+
+            log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
+
+            if connectivityCheckFailed {
+                log.debug("[VPNDaemon] connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
+
+                if let lastConnectedCN = accessedDatabase.plain.lastServerCN {
+                    let targetRegion = try? Client.providers.serverProvider.targetServer
+                    let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
+                    lastConnectedServer?.markServerAsUnavailable()
+                }
+
                 Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
-                return
             } else {
                 if previousStatus == .connecting {
-                    log.error("The VPN did fail \(error)")
+                    log.error("The VPN did fail \(lastDisconnectError)")
                     Macros.postNotification(.PIAVPNDidFail)
                 }
             }
-        }
-
-    }
-    
-    private func updateVpnStatus(with vpnStatus: VPNStatus) {
-        /// Artificially manipulates vpnStatus so that if user decides to change a region
-        /// while already being connected, UI won't show disconnected (not protected) label.
-        /// Instead it will show the connecting interface.
-        if vpnStatus == .disconnected, isChangingServer {
-            accessedDatabase.transient.vpnStatus = .connecting
         } else {
-            accessedDatabase.transient.vpnStatus = vpnStatus
+            log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
         }
     }
-    
+
     // MARK: Invalidate
     private func invalidateTimer() {
         fallbackTimer?.invalidate()
         fallbackTimer = nil
-    }
-    
-    private func startServerChangeTimer() {
-        // Clear any existing timer
-        invalidateServerChangeTimer()
-
-        let changeServerTimeout = TimeInterval(Client.configuration.vpnConnectivityMaxAttempts) * Client.configuration.vpnConnectivityRetryDelay
-        changingServerTimer = Timer.scheduledTimer(withTimeInterval: changeServerTimeout, repeats: false) { [weak self] timer in
-            guard let self, self.isChangingServer else { return }
-            log.debug("Server change did timeout")
-
-            // Clear any artificial vpnStatus previously reported
-            self.isChangingServer = false
-            updateVpnStatus(with: lastKnownVpnStatus)
-
-            invalidateServerChangeTimer()
-        }
-    }
-
-    private func invalidateServerChangeTimer() {
-        changingServerTimer?.invalidate()
-        changingServerTimer = nil
     }
 
     // MARK: Reset
@@ -249,8 +259,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         self.numberOfAttempts = 0
         self.updateUIWithAttemptNumber(0)
 
-        let targetServer = try? Client.providers.serverProvider.targetServer
-        targetServer?.addresses().forEach({$0.reset()})
+//        let targetServer = try? Client.providers.serverProvider.targetServer
+//        targetServer?.addresses().forEach({$0.reset()})
     }
     
     // MARK: Update UI
@@ -263,21 +273,10 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     @objc private func neStatusDidChange(notification: Notification) {
         guard let connection = notification.object as? NEVPNConnection else {
-            log.error("Missing NEVPNConnection object")
-            return
+            fatalError("Missing NEVPNConnection object?")
         }
-
         DispatchQueue.main.async {
             self.tryUpdateStatus(via: connection)
         }
-    }
-
-    @objc private func vpnIsChangingServer(notification: Notification) {
-        /// Sets true to isChangingServer. This flag is supposed to become false again only:
-        /// - After vpnStatus becomes .connected, or
-        /// - changingServerTimer is fired, which means the server change did timeout.
-        self.isChangingServer = true
-        startServerChangeTimer()
-        log.debug("VPN isChangingServer flag: \(isChangingServer)")
     }
 }
