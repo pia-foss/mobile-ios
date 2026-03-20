@@ -37,6 +37,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var fallbackTimer: Timer!
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
+    private var isReconnectingAfterConnectivityFailure: Bool = false
     private var lastKnownVpnStatus: VPNStatus = .disconnected
     
     private init() {
@@ -102,6 +103,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 return
             }
 
+            isReconnectingAfterConnectivityFailure = false
             Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
             invalidateTimer()
             reset()
@@ -134,7 +136,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     
                     log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                     self.numberOfAttempts += 1
-                    if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts {
+                    if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
                         Client.providers.vpnProvider.reconnect(after: 0, { _ in
@@ -171,7 +173,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             
             //triggered only when the user is manually aborting connection (before being established).
             if Client.configuration.disconnectedManually {
-                
+                isReconnectingAfterConnectivityFailure = false
+
                 if self.lastKnownVpnStatus != .connected,
                    (previousStatus == .connecting || previousStatus == .disconnecting),
                    Client.preferences.shareServiceQualityData {
@@ -234,6 +237,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     lastConnectedServer?.markServerAsUnavailable()
                 }
 
+                isReconnectingAfterConnectivityFailure = true
                 Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
             } else {
                 if previousStatus == .connecting {
