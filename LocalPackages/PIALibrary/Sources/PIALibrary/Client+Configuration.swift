@@ -26,14 +26,25 @@ fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
 
 extension Client {
     
-    public struct FeatureFlags {
-        public static let dedicatedIp = "dedicated-ip"
-        public static let disableMultiDipTokens = "disable-multi-dip-tokens"
-        public static let checkDipExpirationRequest = "check-dip-expiration-request"
-        public static let disableSystemRatingDialog = "disable-system-rating-dialogue"
-        public static let showLeakProtection = "ios_custom_leak_protection_v2"
-        public static let showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
-        public static let showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
+    public enum FeatureFlag: String {
+        case forceUpdate = "force_update"
+        case dedicatedIp = "dedicated-ip"
+        case disableMultiDipTokens = "disable-multi-dip-tokens"
+        case checkDipExpirationRequest = "check-dip-expiration-request"
+        case disableSystemRatingDialog = "disable-system-rating-dialogue"
+        case showLeakProtection = "ios_custom_leak_protection_v2"
+        case showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
+        case showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
+
+        static func parse(strings: any Collection<String>) -> [FeatureFlag] {
+            return strings.compactMap { string in
+                if let flag = FeatureFlag(rawValue: string) {
+                    return flag
+                }
+                log.warning("Unknown feature flag name: \(string)")
+                return nil
+            }
+        }
     }
     
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
@@ -164,8 +175,8 @@ extension Client {
         public var tempAccountPassword: String
 
         /// Enabled features
-        public var featureFlags: [String]
-        
+        public var featureFlags: [FeatureFlag]
+
         /// tvOS token to bind with api token in order to Sign in on PIA Apple TV
         public var tvOSBindToken: String?
 

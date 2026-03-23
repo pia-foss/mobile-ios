@@ -240,7 +240,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         accountInformationVerifier.verifyAccountInformationAvailabity(after: AccountInformationAvailabilityVerifier.defaultDeadlineInSeconds, completion: nil)
         
         Client.providers.accountProvider.featureFlags({ _ in
-            if Client.configuration.featureFlags.contains("force_update") {
+            if Client.configuration.featureFlags.contains(.forceUpdate) {
                 NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
             }
         })

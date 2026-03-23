@@ -57,11 +57,11 @@ class Bootstrapper {
 
         #if !STAGING
        // Leak Protection feature flags
-        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
-        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
+        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(.showLeakProtection)
+        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(.showLeakProtectionNotifications)
         
         // DynamicIsland LiveActivity
-        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(Client.FeatureFlags.showDynamicIslandLiveActivity)
+        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(.showDynamicIslandLiveActivity)
         #endif
     }
 
@@ -151,8 +151,8 @@ class Bootstrapper {
         }
 
         Client.providers.accountProvider.featureFlags({ _ in
-            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
-            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
+            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(.checkDipExpirationRequest)
+            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(.disableMultiDipTokens)
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
@@ -324,7 +324,7 @@ class Bootstrapper {
 
 extension Bootstrapper {
     func checkForceUpdateIfNeeded() {
-        if Client.configuration.featureFlags.contains("force_update") {
+        if Client.configuration.featureFlags.contains(.forceUpdate) {
             NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         }
     }

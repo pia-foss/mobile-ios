@@ -25,8 +25,8 @@ import UIKit
 
 private let log = PIALogger.logger(for: DefaultAccountProvider.self)
 
-open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
-    
+public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
+
     private let customWebServices: WebServices?
     private let apiTokenProvider: APITokenProviderType
     private let vpnTokenProvider: VpnTokenProviderType
@@ -366,13 +366,17 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
     }
     
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
-        webServices.featureFlags { (features, nil) in
+        webServices.featureFlags { features, error in
+            if let error {
+                log.error("Error loading feature flags: \(error)")
+            }
             Client.configuration.featureFlags.removeAll()
-            if let features = features, !features.isEmpty {
-                Client.configuration.featureFlags.append(contentsOf: features)
+            if let features, !features.isEmpty {
+                let parsed = Client.FeatureFlag.parse(strings: features)
+                Client.configuration.featureFlags.append(contentsOf: parsed)
             }
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
-            callback?(nil)
+            callback?(error)
         }
     }
     
