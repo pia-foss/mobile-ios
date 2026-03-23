@@ -130,7 +130,9 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
             if fallbackTimer == nil {
                 
-                fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { timer in
+                fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
+                    guard let self else { return }
+
                     let address = try? Client.providers.serverProvider.targetServer.bestAddress()
                     address?.markServerAsUnavailable()
                     
@@ -269,9 +271,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         self.isReconnecting = false
         self.numberOfAttempts = 0
         self.updateUIWithAttemptNumber(0)
-
-//        let targetServer = try? Client.providers.serverProvider.targetServer
-//        targetServer?.addresses().forEach({$0.reset()})
     }
     
     // MARK: Update UI
