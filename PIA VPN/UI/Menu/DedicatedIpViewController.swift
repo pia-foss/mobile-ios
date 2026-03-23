@@ -26,8 +26,8 @@ import PIALocalizations
 
 private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 
-class DedicatedIpViewController: AutolayoutViewController {
-    
+final class DedicatedIpViewController: AutolayoutViewController {
+
     @IBOutlet private weak var tableView: UITableView!
     private var data = [Server]()
     private var timeToRetryDIP: TimeInterval? = nil
@@ -189,11 +189,13 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let alert = Macros.alert(nil, L10n.Dedicated.Ip.remove)
-            alert.addCancelActionWithTitle(L10n.Global.cancel, handler: {
+            alert.addCancelActionWithTitle(L10n.Global.cancel) { [weak self] in
+                guard let self else { return }
                 self.reloadTableView()
-            })
+            }
             
-            alert.addActionWithTitle(L10n.Global.ok) {
+            alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
+                guard let self else { return }
                 self.confirmDelete(row: indexPath.row)
             }
             

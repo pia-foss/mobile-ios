@@ -337,8 +337,18 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
             log.error("Client not logged in when removing DIP token.")
             return
         }
+
         accessedDatabase.secure.remove(dipToken)
-        //self.currentServers = self.currentServers.filter({$0.dipToken != dipToken})
+
+        // TODO: Only disconnect if connected to the same server
+        Client.providers.vpnProvider.disconnect { error in
+            if let error {
+                log.error("Error disconnecting VPN: \(error)")
+            }
+        }
+
+        currentServers = currentServers.filter { $0.dipToken != dipToken }
+        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated, object: self, userInfo: nil)
     }
     
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
