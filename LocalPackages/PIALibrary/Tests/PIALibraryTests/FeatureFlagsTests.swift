@@ -1,5 +1,5 @@
 //
-//  FeatureFlags.swift
+//  FeatureFlagsTests.swift
 //  PIALibrary
 //
 //  Created by Mario on 23/03/2026.
@@ -26,19 +26,31 @@
 //  SOFTWARE.
 //
 
+import Testing
 import Foundation
+@testable import PIALibrary
 
-/// Known values of remote configurable feature flags.
-///
-/// See ``FeatureFlagHolder``.
-public enum FeatureFlag: String, CaseIterable, Sendable {
-    case forceUpdate = "force_update"
-    case dedicatedIp = "dedicated-ip"
-    case disableMultiDipTokens = "disable-multi-dip-tokens"
-    case checkDipExpirationRequest = "check-dip-expiration-request"
-    case showNewInitialScreen = "show-new-initial-screen"
-    case disableSystemRatingDialog = "disable-system-rating-dialogue"
-    case showLeakProtection = "ios_custom_leak_protection_v2"
-    case showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
-    case showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
+@Suite("FeatureFlagHolder Tests")
+struct FeatureFlagHolderTests {
+    @Test("Default to false", arguments: FeatureFlag.allCases)
+    func defaultToFalse(flag: FeatureFlag) {
+        let holder = FeatureFlagHolder()
+        #expect(holder[flag] == false, "flags should default to false")
+    }
+
+    @Test("Set after configure", arguments: FeatureFlag.allCases)
+    func configureHolder(flag: FeatureFlag) {
+        let holder = FeatureFlagHolder()
+        holder.configure(with: CollectionOfOne(flag))
+        #expect(holder[flag] == true, "flags should be set after configure")
+    }
+
+    @Test("Raw values can be used", arguments: CollectionOfOne(FeatureFlag.allCases))
+    func configureRawValues(flags: [FeatureFlag]) {
+        let holder = FeatureFlagHolder()
+        holder.configure(with: flags.map(\.rawValue))
+        for flag in flags {
+            #expect(holder[flag] == true, "flags should be set after configuring raw strings")
+        }
+    }
 }
