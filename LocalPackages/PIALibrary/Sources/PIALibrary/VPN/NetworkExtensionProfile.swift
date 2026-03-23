@@ -105,7 +105,7 @@ extension NetworkExtensionProfile {
             vpn.protocolConfiguration?.excludeLocalNetworks = true
         } else {
             // Apply Leak Protection settings when the Feature Flag is enabled
-            if Client.configuration.featureFlags.contains(.showLeakProtection) {
+            if Client.configuration.featureFlags[.showLeakProtection] {
                 vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
                 vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
             } else {

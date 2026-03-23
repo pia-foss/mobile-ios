@@ -442,9 +442,7 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                 }
             case .success(let featuresInfo):
                 DispatchQueue.main.async {
-                    Client.configuration.featureFlags.removeAll()
-                    let parsed = Client.FeatureFlag.parse(strings: featuresInfo.flags)
-                    Client.configuration.featureFlags.append(contentsOf: parsed)
+                    Client.configuration.featureFlags.configure(with: featuresInfo.flags)
                     Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
                     callback?(nil)
                 }

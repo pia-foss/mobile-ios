@@ -24,7 +24,8 @@ let package = Package(
       .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", exact: "1.0.4"),
       .package(url: "https://github.com/apple/swift-log", exact: "1.10.1"),
       .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4"),
-      .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2")
+      .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
+      .package(url: "https://github.com/swhitty/swift-mutex.git", exact: "0.0.6"),
     ],
     targets: [
         .target(
@@ -40,7 +41,8 @@ let package = Package(
                 .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKitOpenVPN", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),
                 .product(name: "TunnelKitOpenVPNAppExtension", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),
-                .product(name: "NWHttpConnection", package: "mobile-ios-networking")
+                .product(name: "NWHttpConnection", package: "mobile-ios-networking"),
+                .product(name: "Mutex", package: "swift-mutex"),
             ],
             resources: [
                 .process("Resources")

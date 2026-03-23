@@ -370,10 +370,8 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             if let error {
                 log.error("Error loading feature flags: \(error)")
             }
-            Client.configuration.featureFlags.removeAll()
-            if let features, !features.isEmpty {
-                let parsed = Client.FeatureFlag.parse(strings: features)
-                Client.configuration.featureFlags.append(contentsOf: parsed)
+            if let features {
+                Client.configuration.featureFlags.configure(with: features)
             }
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
             callback?(error)
