@@ -204,26 +204,33 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             accessedDatabase.transient.vpnStatus = nextStatus
         }
 
-        guard #available(iOS 16.0, *) else {
-            log.debug("[VPNDaemon] iOS < 16 — posting PIAVPNDidFail directly (no fetchLastDisconnectError)")
-            Macros.postNotification(.PIAVPNDidFail)
-            return
-        }
-
         log.debug("[VPNDaemon] Fetching last disconnect error...")
         if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
             log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
 
-            let connectivityCheckFailed = switch (lastDisconnectError.domain, lastDisconnectError.code) {
-            #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
-            case (PacketTunnelProviderError.errorDomain, PacketTunnelProviderError.connectivityCheckFailed.errorCode),
-                 (OpenVPNError.errorDomain, OpenVPNError.connectivityCheckFailed.errorCode):
-                true
+            let errorDomain = lastDisconnectError.domain
+            let errorCode = lastDisconnectError.code
+            var connectivityCheckFailed = false
+
+            // WireGuard connectivity check failure
+            #if canImport(PIAWireguard)
+            if errorDomain == PacketTunnelProviderError.errorDomain, errorCode == PacketTunnelProviderError.connectivityCheckFailed.errorCode {
+                connectivityCheckFailed = true
+            }
             #endif
-            case (NEVPNConnectionErrorDomain, _):
-                true
-            default:
-                false
+
+            // OpenVPN connectivity check failure
+            #if canImport(TunnelKitOpenVPN)
+            if errorDomain == OpenVPNError.errorDomain, errorCode == OpenVPNError.connectivityCheckFailed.errorCode {
+                connectivityCheckFailed = true
+            }
+            #endif
+
+            // IKEv2 connectivity check failure
+            if #available(iOS 16, *) {
+                if errorDomain == NEVPNConnectionErrorDomain {
+                    connectivityCheckFailed = true
+                }
             }
 
             log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
