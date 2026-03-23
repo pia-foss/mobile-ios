@@ -27,7 +27,6 @@ fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
 extension Client {
     
     public struct FeatureFlags {
-        public static let dedicatedIp = "dedicated-ip"
         public static let disableMultiDipTokens = "disable-multi-dip-tokens"
         public static let checkDipExpirationRequest = "check-dip-expiration-request"
         public static let disableSystemRatingDialog = "disable-system-rating-dialogue"
