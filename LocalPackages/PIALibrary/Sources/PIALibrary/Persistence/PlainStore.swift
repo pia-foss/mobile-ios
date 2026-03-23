@@ -36,6 +36,8 @@ protocol PlainStore: AnyObject {
 
     var publicIP: String? { get set }
 
+    var lastServerCN: String? { get set }
+
     // MARK: Server
     
     var historicalServers: [Server] { get set }

@@ -22,6 +22,8 @@
 
 import Foundation
 
+private let log = PIALogger.logger(for: Server.self)
+
 /// Possible errors raised when parsing a `Server`.
 public enum ServerError: Error {
 
@@ -108,6 +110,7 @@ public final class Server: Hashable {
         }
         
         func markServerAsUnavailable() {
+            log.debug("[Server] Marking address as unavailable — ip=\(ip) cn=\(cn)")
             available = false
         }
         
