@@ -1877,10 +1877,6 @@ internal enum L10n {
           /// 1 year of privacy and identity protection
           internal static let protection = L10n.tr("Signup", "purchase.trials.1year.protection", fallback: "1 year of privacy and identity protection")
         }
-        internal enum All {
-          /// See all available plans
-          internal static let plans = L10n.tr("Signup", "purchase.trials.all.plans", fallback: "See all available plans")
-        }
         internal enum Devices {
           /// Protect yourself on up to 10 devices at a time.
           internal static let description = L10n.tr("Signup", "purchase.trials.devices.description", fallback: "Protect yourself on up to 10 devices at a time.")
@@ -2001,23 +1997,11 @@ internal enum L10n {
         internal static let skip = L10n.tr("Signup", "walkthrough.action.skip", fallback: "SKIP")
       }
       internal enum Page {
-        internal enum _1 {
-          /// Protect yourself on up to 10 devices at a time.
-          internal static let description = L10n.tr("Signup", "walkthrough.page.1.description", fallback: "Protect yourself on up to 10 devices at a time.")
-          /// Support 10 devices at once
-          internal static let title = L10n.tr("Signup", "walkthrough.page.1.title", fallback: "Support 10 devices at once")
-        }
         internal enum _2 {
           /// With servers around the globe, you are always under protection.
           internal static let description = L10n.tr("Signup", "walkthrough.page.2.description", fallback: "With servers around the globe, you are always under protection.")
           /// Secure servers in 90+ countries
           internal static let title = L10n.tr("Signup", "walkthrough.page.2.title", fallback: "Secure servers in 90+ countries")
-        }
-        internal enum _3 {
-          /// Enabling our Content Blocker prevents ads from showing in Safari.
-          internal static let description = L10n.tr("Signup", "walkthrough.page.3.description", fallback: "Enabling our Content Blocker prevents ads from showing in Safari.")
-          /// Protect yourself from ads
-          internal static let title = L10n.tr("Signup", "walkthrough.page.3.title", fallback: "Protect yourself from ads")
         }
       }
     }

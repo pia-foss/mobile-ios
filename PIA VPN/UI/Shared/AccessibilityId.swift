@@ -26,7 +26,6 @@ public struct PIALibraryAccessibility {
         }
         public struct Login {
             public static let submit = "id.login.submit"
-            public static let submitNew = "id.login.submit.new"
             public static let username = "id.login.username"
             public static let password = "id.login.submit"
             public struct Error {

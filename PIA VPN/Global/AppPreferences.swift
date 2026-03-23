@@ -102,7 +102,6 @@ class AppPreferences {
         // Features
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
-        static let showNewInitialScreen = "showNewInitialScreen"
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
@@ -517,15 +516,6 @@ class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.disablesMultiDipTokens)
-        }
-    }
-    
-    var showNewInitialScreen: Bool {
-        get {
-            return defaults.bool(forKey: Entries.showNewInitialScreen)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showNewInitialScreen)
         }
     }
     

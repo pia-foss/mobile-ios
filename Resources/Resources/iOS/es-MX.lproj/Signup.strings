@@ -49,7 +49,6 @@
 "purchase.trials.region" = "Servidores seguros en más de 90 países";
 "purchase.trials.servers" = "Más de 3300 servidores en 32 países.";
 "purchase.trials.start" = "Iniciar suscripción";
-"purchase.trials.all.plans" = "Ver todos los planes disponibles.";
 
 "purchase.subscribe.now" = "Suscríbete ahora";
 
@@ -59,12 +58,8 @@
 "walkthrough.action.done" = "TERMINADO";
 "walkthrough.action.skip" = "OMITIR";
 
-"walkthrough.page.1.title" = "Admite 10 dispositivos a la vez";
-"walkthrough.page.1.description" = "Protégete en hasta 10 dispositivos a la vez.";
 "walkthrough.page.2.title" = "Servidores seguros en más de 90 países";
 "walkthrough.page.2.description" = "Con servidores en todo el mundo, siempre estarás protegido.";
-"walkthrough.page.3.title" = "Protégete de la publicidad";
-"walkthrough.page.3.description" = "Habilita nuestro Bloqueador de contenido para impedir que aparezca publicidad en Safari.";
 
 "share.data.buttons.accept" = "Aceptar";
 "share.data.buttons.noThanks" = "No, gracias";

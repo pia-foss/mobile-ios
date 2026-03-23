@@ -51,7 +51,6 @@
 "purchase.trials.1year.protection" = "1 yıllık gizlilik ve kimlik koruması";
 
 /* (No Comment) */
-"purchase.trials.all.plans" = "Tüm mevcut planlara bakın";
 
 /* (No Comment) */
 "purchase.trials.anonymous" = "IP'nizi gizleyerek İnternet'te isimsiz gezinin.";
@@ -153,10 +152,8 @@
 "walkthrough.action.skip" = "ATLA";
 
 /* (No Comment) */
-"walkthrough.page.1.description" = "Aynı anda 10 cihazda koruma sağlayın.";
 
 /* (No Comment) */
-"walkthrough.page.1.title" = "Aynı anda 10 cihazı destekler";
 
 /* (No Comment) */
 "walkthrough.page.2.description" = "Dünya çapındaki sunucularla daima koruma altındasınız.";
@@ -165,8 +162,6 @@
 "walkthrough.page.2.title" = "90'dan fazla ülkede güvenli sunucular";
 
 /* (No Comment) */
-"walkthrough.page.3.description" = "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
 
 /* (No Comment) */
-"walkthrough.page.3.title" = "Kendinizi reklamlardan koruyun";
 
