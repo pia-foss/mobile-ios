@@ -177,8 +177,11 @@ public final class IKEv2Profile: NetworkExtensionProfile {
         }
 
         let cfg = NEVPNProtocolIKEv2()
-        if let ip = configuration.server.bestAddress()?.ip {
-            cfg.serverAddress = ip
+        if let bestAddress = configuration.server.bestAddress() {
+            cfg.serverAddress = bestAddress.ip
+
+            // Persisting CN so app knows which server it was connected to
+            Client.database.plain.lastServerCN = bestAddress.cn
         } else {
             cfg.serverAddress = configuration.server.hostname
         }

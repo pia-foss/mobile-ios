@@ -260,6 +260,9 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
             cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.packetSize] = piaCfg.packetSize
         }
 
+        // Persisting CN so app knows which server it was connected to
+        Client.database.plain.lastServerCN = serverCN
+
         return cfg
     }
     

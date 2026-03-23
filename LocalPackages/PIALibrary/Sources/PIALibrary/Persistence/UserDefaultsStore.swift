@@ -36,6 +36,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         
         static let publicIP = "PublicIP"
 
+        static let lastServerCN = "LastServerCN"
+
         static let historicalServers = "HistoricalServers"
 
         static let cachedServers = "CachedServers"
@@ -237,7 +239,20 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             }
         }
     }
-    
+
+    var lastServerCN: String? {
+        get {
+            return backend.string(forKey: Entries.lastServerCN)
+        }
+        set {
+            if let cn = newValue {
+                backend.set(cn, forKey: Entries.lastServerCN)
+            } else {
+                backend.removeObject(forKey: Entries.lastServerCN)
+            }
+        }
+    }
+
     var visibleTiles: [AvailableTiles] {
         get {
             if let copy = visibleTilesCopy {
