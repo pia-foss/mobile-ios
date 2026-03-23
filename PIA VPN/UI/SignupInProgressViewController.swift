@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: SignupInProgressViewController.self)
 

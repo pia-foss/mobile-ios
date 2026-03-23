@@ -1,0 +1,647 @@
+// GLOBAL
+
+"global.ok" = "确定";
+"global.cancel" = "取消";
+"global.close" = "关闭";
+"global.error" = "错误";
+"global.automatic" = "自动";
+"global.required" = "必填";
+"global.optional" = "可选";
+"global.clear" = "清除";
+"global.update" = "更新";
+"global.edit" = "编辑";
+"global.unreachable" = "未找到网络连接。请确认您已接入网络。";
+"global.enabled" = "已启用";
+"global.disabled" = "已禁用";
+"global.enable" = "启用";
+"global.disable" = "禁用";
+"global.add" = "添加";
+"global.remove" = "删除";
+"global.empty" = "清空";
+"global.yes" = "是";
+"global.no" = "否";
+"global.or" = "或";
+"global.row.selection" = "行选择";
+"global.general.settings" = "通用设置";
+"global.version" = "版本";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "通知已禁用";
+"notifications.disabled.message" = "启用通知，以便在订阅到期前得到续订提醒。";
+"notifications.disabled.settings" = "设置";
+
+"expiration.title" = "续订";
+"expiration.message" = "您的订阅即将到期。请续期以持续受到保护。";
+
+"local_notification.non_compliant_wifi.title" = "不安全的 Wi-Fi：%@";
+"local_notification.non_compliant_wifi.text" = "轻点此处以保护您的设备";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "连接";
+"shortcuts.disconnect" = "断开连接";
+"shortcuts.select_region" = "选择地区";
+
+// RENEWAL
+
+"renewal.success.title" = "谢谢";
+"renewal.success.message" = "您的账户已成功续期。";
+"renewal.failure.message" = "无法提交您的购买收据，请稍后再试。";
+
+// MENU
+"menu.accessibility.edit.tile" = "编辑";
+"menu.accessibility.item" = "菜单";
+"menu.accessibility.logged_as" = "登录的身份为%@";
+"menu.expiration.expires_in" = "订阅距离到期还有";
+"menu.expiration.days" = "%d天";
+"menu.expiration.hours" = "%d小时";
+"menu.expiration.one_hour" = "一小时";
+"menu.expiration.upgrade" = "升级帐户";
+"menu.item.region" = "地区选择";
+"menu.item.about" = "关于";
+"menu.item.account" = "帐户";
+"menu.item.settings" = "设置";
+"menu.item.logout" = "登出";
+"menu.item.web.privacy" = "隐私政策";
+"menu.item.web.home" = "主页";
+"menu.item.web.support" = "支持";
+
+"menu.logout.title" = "登出";
+"menu.logout.message" = "登出后，VPN 将被禁用，您会处于未受保护状态。";
+"menu.logout.confirm" = "登出";
+
+"menu.renewal.title" = "续订";
+"menu.renewal.purchase" = "购买";
+"menu.renewal.renew" = "续期";
+"menu.renewal.message.trial" = "试用帐户不符合续订条件。请在到期时购买新帐户以继续服务。";
+"menu.renewal.message.website" = "请使用我们的网站为您的订阅续期。";
+"menu.renewal.message.unavailable" = "Apple 服务器目前不可用。请稍后重试。";
+
+// ACCOUNT
+
+"account.email.placeholder" = "电子邮件地址";
+"account.username.caption" = "用户名";
+"account.restore.title" = "恢复未入账的购买";
+"account.restore.description" = "如果您已续订套餐，但账户仍显示即将到期，可以从这里重新开始续订。在此过程中您不会被收费。";
+"account.restore.button" = "恢复购买";
+"account.restore.failure.title" = "恢复购买";
+"account.restore.failure.message" = "没有找到可兑换的购买来用于续期。";
+"account.expiry_date.information" = "您的套餐将于%@到期。";
+"account.expiry_date.expired" = "您的套餐已到期。";
+"account.subscriptions.message" = "您可以在此管理订阅。";
+"account.subscriptions.linkMessage" = "此处。";
+"account.set.email.error" = "添加电子邮件时出错。请稍后重试。";
+"account.subscriptions.short.message" = "管理订阅";
+"account.subscriptions.short.linkMessage" = "管理订阅";
+"account.subscriptions.yearly" = "包年套餐";
+"account.subscriptions.monthly" = "包月套餐";
+"account.subscriptions.trial" = "试用套餐";
+"account.unauthorized" = "出现问题。请尝试重新登录";
+"account.delete" = "删除账户";
+"account.survey.message" = "想要帮助改进 PIA 吗? 欢迎您提供反馈！\n填写调查问卷";
+"account.survey.messageLink" = "填写调查问卷";
+
+// SETTINGS
+
+"settings.connection.title" = "连接";
+"settings.connection.vpn_protocol.title" = "协议选择";
+"settings.connection.transport.title" = "传输";
+"settings.connection.remote_port.title" = "远程端口";
+
+"settings.encryption.cipher.title" = "数据加密";
+"settings.encryption.handshake.title" = "握手";
+
+"settings.application_settings.active_theme.title" = "活跃主题";
+"settings.application_settings.kill_switch.title" = "VPN 切断开关";
+"settings.application_settings.kill_switch.footer" = "如果 VPN 连接重新连线，VPN 终止开关会阻止访问互联网。这不包括手动断开连接。";
+"settings.application_settings.reconnect_notifications.title" = "重新连接通知";
+"settings.application_settings.reconnect_notifications.footer" = "当VPN重新连接到不同位置时接收提醒。禁用以停止接收这些通知。";
+"settings.application_settings.leak_protection.title" = "泄露保护";
+"settings.application_settings.leak_protection.footer" = "iOS 包含默认在 VPN 之外运行的功能，例如 AirDrop、CarPlay、AirPlay 和个人热点。启用自定义泄露保护会通过 VPN 路由这些流量，但可能会影响这些功能的运行。更多信息";
+"settings.application_settings.leak_protection.more_info" = "更多信息";
+"settings.application_settings.allow_local_network.title" = "允许访问本地网络上的设备";
+"settings.application_settings.allow_local_network.footer" = "连接到 VPN 时，保持与打印机或文件服务器等本地设备的连接。（仅当您信任网络上的人员和设备时才允许此功能。）";
+"settings.application_settings.leak_protection.alert.title" = "对 VPN 设置的更改将在下次连接时生效";
+
+"settings.content_blocker.title" = "Safari 内容拦截器状态";
+"settings.content_blocker.refresh.title" = "刷新拦截列表";
+"settings.content_blocker.footer" = "要启用或禁用内容拦截器，请转至设置 > App > Safari > 扩展，然后切换 PIA VPN。";
+
+"settings.application_information.debug.title" = "向支持人员发送调试日志";
+"settings.application_information.debug_logging.title" = "启用调试日志记录";
+"settings.application_information.debug.failure.title" = "提交时出错";
+"settings.application_information.debug.failure.message" = "调试信息无法提交。";
+"settings.application_information.debug.empty.title" = "调试信息为空";
+"settings.application_information.debug.empty.message" = "调试信息为空，请尝试连接，然后重试提交。";
+"settings.application_information.debug.success.title" = "调试信息已提交";
+"settings.application_information.debug.success.message" = "调试信息成功提交。\nID：%@\n请记下此 ID，因为我们的支持团队需要该信息来找到您提交的内容。";
+
+"settings.commit.messages.must_disconnect" = "VPN 必须重新连接，某些更改才能生效。";
+"settings.commit.messages.should_reconnect" = "重新连接 VPN 以应用更改。";
+"settings.commit.buttons.reconnect" = "重新连接";
+"settings.commit.buttons.later" = "以后";
+
+"settings.reset.defaults.title" = "重置设置为默认状态";
+"settings.reset.defaults.confirm.title" = "重置设置";
+"settings.reset.defaults.confirm.message" = "此操作会将应用恢复为默认状态。您将丢失您做出的所有变更。";
+"settings.reset.defaults.confirm.button" = "重置";
+"settings.reset.footer" = "此操作会将以上所有设置重置为默认状态。";
+
+"settings.small.packets.title" = "使用小数据包";
+"settings.small.packets.description" = "稍微降低 IP 数据包的大小，以改进与一些路由器和移动网络的兼容性";
+
+"settings.log.information" = "保存调试日志，以便提交给技术支持团队帮助排查问题。";
+
+"settings.geo.servers.description" = "显示地理定位区域";
+"settings.cards.history.title" = "最新消息";
+
+"settings.section.general" = "一般";
+"settings.section.protocols" = "协议";
+"settings.section.network" = "网络";
+"settings.section.privacyFeatures" = "隐私功能";
+"settings.section.automation" = "自动化";
+"settings.section.help" = "帮助";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "Safari 内容拦截器";
+"content_blocker.body.subtitle" = "要启用内容拦截器以用于 Safari，请转至设置 > App > Safari > 扩展，然后开启 PIA VPN。";
+"content_blocker.body.footer" = "请注意：无需连接到 VPN，此内容拦截器也可正常工作，但该功能只有在使用 Safari 进行浏览时才能发挥作用。";
+
+// ABOUT
+
+"about.app" = "由 Private Internet Access 打造的 VPN";
+"about.accessibility.component.expand" = "点击阅读完整许可";
+
+// DASHBOARD
+
+"dashboard.connection.ip.unreachable" = "无法访问互联网";
+
+"dashboard.vpn.disconnected" = "已断开连接";
+"dashboard.vpn.connecting" = "正在连接...";
+"dashboard.vpn.protected" = "已受保护";
+"dashboard.vpn.not_protected" = "未受保护";
+"dashboard.vpn.disconnecting" = "正在断开连接";
+"dashboard.vpn.changing_region" = "正在更改地区...";
+"dashboard.accessibility.vpn.button" = "VPN 连接按钮";
+"dashboard.accessibility.vpn.button.isOn" = "VPN 连接按钮。VPN 当前已断开连接";
+"dashboard.accessibility.vpn.button.isOff" = "VPN 连接按钮。VPN 当前已断开连接";
+
+"dashboard.vpn.leakprotection.alert.title" = "检测到不安全的 Wi-Fi";
+"dashboard.vpn.leakprotection.alert.message" = "为防止数据泄露，请轻点“立即停用”以关闭“允许访问本地网络上的设备”并自动重新连接。";
+"dashboard.vpn.leakprotection.alert.cta1" = "立即停用";
+"dashboard.vpn.leakprotection.alert.cta2" = "了解详情";
+"dashboard.vpn.leakprotection.alert.cta3" = "忽略";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "为防止数据泄露，请轻点“立即切换”以更改为 IKEv2 VPN 协议并自动重新连接。";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "立即切换";
+
+"dashboard.vpn.change_location.alert.title" = "更改位置？";
+"dashboard.vpn.change_location.alert.message" = "连接到新位置时，您的VPN将短暂断开连接。";
+"dashboard.vpn.change_location.alert.button.connect" = "连接";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIA 需要访问您的 VPN 配置来保护您的流量。";
+"vpn_permission.body.subtitle" = "您将看到关于 PIA VPN 的提示，并需要允许访问 VPN 配置。\n要继续操作，请点击“%@”。";
+"vpn_permission.body.footer" = "我们不会监视、筛选或记录任何网络活动。";
+"vpn_permission.disallow.message.basic" = "我们需要此权限来使应用程序能正常工作。";
+"vpn_permission.disallow.message.support" = "如需帮助，也可联系客户支持。";
+"vpn_permission.disallow.contact" = "联系";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "自定义";
+"settings.dns.alert.create.message" = "使用非 PIA DNS 可能会将您的 DNS 流量暴露给第三方并危及您的隐私。";
+"settings.dns.alert.clear.title" = "清除 DNS";
+"settings.dns.alert.clear.message" = "这将清除您的自定义 DNS 并默认为 PIA DNS。";
+"settings.dns.custom.dns" = "自定义 DNS";
+"settings.dns.primaryDNS" = "主 DNS";
+"settings.dns.secondaryDNS" = "次 DNS";
+"settings.dns.validation.primary.mandatory" = "主 DNS 是强制性的。";
+"settings.dns.validation.primary.invalid" = "主 DNS 无效。";
+"settings.dns.validation.secondary.invalid" = "次 DNS 无效。";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.description" = "配置 PIA 在连接到 WiFi 或蜂窝网络时的行为方式，不包括手动断开连接的情况。";
+"settings.hotspothelper.available.help" = "要填充此列表，请转到 iOS 设置> WiFi。";
+"hotspothelper.display.name" = "🔒 在 PIA 设置中激活 VPN WiFi 保护以保护此连接。";
+"hotspothelper.display.protected.name" = "🔒 已启用 PIA VPN WiFi 保护 - 我们会保障您的安全。";
+"tiles.quicksetting.nmt.title" = "网络管理";
+"tiles.quicksetting.private.browser.title" = "专用浏览器";
+"settings.nmt.killswitch.disabled" = "VPN 终止开关目前已禁用。为了确保网络管理工具正常运行，并确保您在切换网络时能够重新连接，请在设置中启用 VPN 终止开关。";
+"settings.service.quality.share.title" = "帮助改进 PIA";
+"settings.service.quality.share.description" = "共享连接统计数据以帮助我们改进服务。这些报告绝不包括可识别个人身份的信息。";
+"settings.service.quality.share.findoutmore" = "了解详情";
+"settings.service.quality.show.title" = "连接统计";
+
+"network.management.tool.open.wifi" = "公共 WiFi";
+"network.management.tool.secure.wifi" = "安全 WiFi";
+"network.management.tool.mobile.data" = "移动数据";
+"network.management.tool.always.connect" = "始终连接 VPN";
+"network.management.tool.always.disconnect" = "始终断开 VPN";
+"network.management.tool.retain.state" = "保留 VPN 状态";
+"network.management.tool.add.rule" = "添加新规则";
+"network.management.tool.choose.wifi" = "选择 WiFi 网络以添加新规则。";
+"network.management.tool.title" = "管理自动化";
+"network.management.tool.alert" = "您的自动化设置已配置为：在当前网络条件下保持 VPN 断开。";
+"network.management.tool.disable" = "禁用自动化";
+"network.management.tool.enable.automation" = "启用自动化";
+
+// REGION
+
+"region.search.placeholder" = "搜索地区";
+"region.accessibility.filter" = "筛选器";
+"region.filter.sortby" = "地区排序方式";
+"region.filter.name" = "名称";
+"region.filter.latency" = "延迟";
+"region.filter.favorites" = "收藏夹";
+"region.accessibility.favorite" = "添加收藏地区";
+"region.accessibility.unfavorite" = "删除收藏地区";
+"region.refresh.connected.error" = "连接到VPN时无法更新延迟";
+
+// TILES
+"tiles.quick.connect.title" = "快速连接";
+"tiles.favorite.servers.title" = "收藏夹服务器";
+"tiles.region.title" = "VPN 服务器";
+"tiles.subscription.title" = "订阅";
+"tiles.subscription.trial" = "试用";
+"tiles.subscription.monthly" = "每月";
+"tiles.subscription.yearly" = "每年";
+"tiles.subscription.days.left" = "（还剩 %d 天）";
+"tiles.usage.title" = "使用情况";
+"tiles.usage.ipsec.title" = "使用情况（不适用于 IKEv2）";
+"tiles.usage.upload" = "上传";
+"tiles.usage.download" = "下载";
+"tiles.nmt.accessibility.trusted" = "受信任网络";
+"tiles.quicksettings.title" = "快速设置";
+"tiles.quicksettings.min.elements.message" = "应该在“快速设置”图块中保持至少一个元素可见";
+"tiles.accessibility.visible.tile.action" = "点击以从仪表板中删除此图块";
+"tiles.accessibility.invisible.tile.action" = "点击以将此图块添加到仪表板";
+"tiles.feedback.title" = "用得还满意吗？";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "“连接”Siri 快捷键";
+"siri.shortcuts.disconnect.row.title" = "“断开”Siri 快捷键";
+"siri.shortcuts.connect.title" = "连接 PIA VPN";
+"siri.shortcuts.disconnect.title" = "断开 PIA VPN";
+"siri.shortcuts.add.error" = "添加 Siri 快捷键时出错。请再试一次。";
+
+//TODAY WIDGET
+"today.widget.login" = "登录";
+
+//FRIEND REFERRALS
+
+// GDPR
+"gdpr.collect.data.title" = "我们收集的个人信息";
+"gdpr.collect.data.description" = "用于管理账户和防止滥用的电子邮件地址。\n\n电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。";
+"gdpr.accept.button.title" = "同意并继续";
+
+// SET EMAIL
+"set.email.form.email" = "请输入您的电子邮件地址";
+"set.email.why" = "我们需要您的电子邮件以发送您的用户名和密码。";
+"set.email.success.message_format" = "我们已向您的电子邮件地址 %@ 发送了您的账户用户名和密码。";
+"set.email.password.caption" = "密码";
+
+// EMAIL VALIDATOR
+"email.validation.invalid" = "无效的电子邮件。请再试一次。";
+"email.validation.empty" = "电子邮件不能为空。";
+
+// RATING
+"rating.error.question" = "无法建立连接";
+"rating.error.subtitle" = "您可以尝试选择其他地区，也可以提交支持请求来告知我们。";
+"rating.error.button.send" = "发送反馈";
+
+// CALLING CARDS
+"card.wireguard.title" = "立即试用 WireGuard®！";
+"card.wireguard.description" = "这是更有效的全新 VPN 协议，可提高性能、降低 CPU 使用率并延长电池寿命。";
+"card.wireguard.cta.activate" = "立即试用 WireGuard®";
+"card.wireguard.cta.learn" = "了解更多";
+
+// DEDICATED IP
+"dedicated.ip.title" = "专用 IP";
+"dedicated.ip.plural.title" = "您的专用 IP";
+"dedicated.ip.activation.description" = "将您的令牌粘贴到以下表格中，激活您的专用 IP。如果您最近购买了专用 IP，则可以访问 PIA 网站来生成令牌。";
+"dedicated.ip.token.textfield.placeholder" = "在这里粘贴你的令牌";
+"dedicated.ip.token.textfield.accessibility" = "用于输入专用 IP 令牌的文本域";
+"dedicated.ip.activate.button.title" = "激活";
+"dedicated.ip.message.incorrect.token" = "请确保您输入的令牌正确无误";
+"dedicated.ip.message.invalid.token" = "您的令牌无效。请确保您输入的令牌正确无误。";
+"dedicated.ip.message.valid.token" = "您的专用 IP 已成功激活。您可以在“地区”选择列表中使用该专用 IP。";
+"dedicated.ip.message.expired.token" = "您的令牌已过期。请从网站的“账户”页面中生成一个新的令牌。";
+"dedicated.ip.message.error.retryafter" = "令牌激活请求失败次数太多。请在 %@ 秒后重试。";
+"dedicated.ip.message.token.willexpire" = "您的专用 IP 即将过期。请获取一个新的专用 IP";
+"dedicated.ip.message.token.willexpire.link" = "请获取一个新的专用 IP";
+"dedicated.ip.message.ip.updated" = "您的专用 IP 已更新";
+"dedicated.ip.country.flag.accessibility" = "%@ 的国旗";
+"dedicated.ip.remove" = "确定要删除所选区域吗？";
+"dedicated.ip.limit.title" = "使用来自您所选国家/地区的专用 IP 保护您与任何资产的远程连接。在您订阅期间，此 IP 仅属于您本人，并通过最强大的加密技术保护您的数据传输。";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "请稍候...";
+"server.reconnection.still.connection" = "仍在尝试连接...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "显示服务通信消息";
+"inapp.messages.settings.updated" = "设置已更新";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "地区";
+"widget.liveActivity.selected_protocol.title" = "协议";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "全部";
+"regions.filter.search.title" = "搜索";
+"regions.filter.favorites.title" = "收藏";
+"regions.list.all_locations.title" = "全部位置";
+"regions.list.optimal_location.title" = "优选位置";
+"regions.list.optimal_location_with_dip_location.title" = "优选位置/专用 IP";
+"regions.search.recommended_locations.title" = "推荐位置";
+"regions.search.results.title" = "搜索结果";
+"regions.search.button.title" = "搜索位置";
+"regions.search.input_field.placeholder" = "搜索城市或国家";
+"regions.search.previous_results.title" = "上次搜索的位置";
+"regions.context_menu.favorites.add.text" = "添加至收藏";
+"regions.context_menu.favorites.remove.text" = "从收藏夹移除";
+"regions.list_item.default.title" = "默认位置";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "位置";
+"top_navigation_bar.location_selection_screen.title" = "位置选择";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "帮助改进 PIA";
+"onboarding.connection_stats.subtitle" = "共享连接数据帮助我们改进服务。这些报告绝不包含可识别个人身份的信息。";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "配置 PIA";
+"onboarding.vpn_configuration.subtitle" = "首次连接时，系统将要求您允许 PIA 访问 VPN 配置。 这是加密您的流量所必需的。 \n\n我们不会监视、筛选或记录您的在线活动。 \n\n点击下方按钮继续。";
+"onboarding.vpn_configuration.button" = "配置 PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "用于流媒体的快速且安全的 VPN";
+"tvos.welcome.button.login" = "登录";
+"tvos.welcome.button.signup" = "注册";
+
+//Login (tvOS)
+"tvos.login.title" = "输入您的 PIA VPN 账户信息";
+"tvos.login.placeholder.username" = "输入用户名";
+"tvos.login.placeholder.password" = "输入密码";
+
+"tvos.login.qr.title" = "使用 PIA 应用程序登录";
+"tvos.login.qr.description" = "扫描二维码，并在 PIA iOS 应用程序中验证登录。";
+"tvos.login.qr.timer" = "代码过期时间：";
+"tvos.login.qr.options" = "其他选项：";
+"tvos.login.qr.button.login" = "使用用户名登录";
+"tvos.login.qr.button.restore" = "恢复购买";
+
+"tvos.login.qr.expired.title" = "二维码已过期";
+"tvos.login.qr.expired.description" = "在下方生成新的二维码";
+"tvos.login.qr.expired.button.generate" = "生成 QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "无法连接";
+"error_alert.connection_error.no_network.message" = "请检查您的网络连接并重试";
+"error_alert.connection_error.no_network.retry_action.title" = "重试";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "优选位置";
+"location_selection.any_other_location.title" = "所选位置";
+"dashboard.connection_state.connected.title" = "已连接";
+"dashboard.connection_state.disconnected.title" = "未连接";
+"dashboard.connection_state.connecting.title" = "正在连接...";
+"dashboard.connection_state.reconnecting.title" = "正在重新连接...";
+"dashboard.connection_state.disconnecting.title" = "正在断开连接";
+"dashboard.connection_state.error.title" = "连接错误";
+"dashboard.connection_state.network_error_alert.message" = "请检查您的网络连接并重试";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "重试";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "退出";
+"settings.account.log_out_alert.title" = "确定？";
+"settings.account.log_out_alert.message" = "登出将会终止任何活动的 VPN 连接，使您的数据失去保护。";
+"settings.account.subscription_expiry.title" = "订阅过期时间";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "输入专用IP";
+"settings.dedicatedip.title2" = "专用 IP";
+"settings.dedicatedip.subtitle" = "在\n下方字段中输入您的代币以激活专用 IP。您可在 PIA 网站的客户\n控制面板购买专用 IP。";
+"settings.dedicatedip.placeholder" = "输入您的专用 IP 代币";
+"settings.dedicatedip.button" = "激活";
+"settings.dedicatedip.alert.failure.title" = "出现错误";
+"settings.dedicatedip.alert.failure.message" = "您的代币无效或已过期。";
+"settings.dedicatedip.alert.failure.message.empty" = "代币不能为空。";
+"settings.dedicatedip.alert.success.title" = "一切就绪";
+"settings.dedicatedip.alert.success.message" = "您的专用 IP 现已激活。";
+"settings.dedicatedip.alert.success.button" = "继续";
+
+"settings.dedicatedip.stats.dedicatedip" = "专用 IP";
+"settings.dedicatedip.stats.ip" = "IP 地址";
+"settings.dedicatedip.stats.location" = "位置";
+"settings.dedicatedip.stats.quickAction" = "快速操作";
+"settings.dedicatedip.stats.delete.button" = "删除专用 IP";
+"settings.dedicatedip.stats.delete.alert.title" = "确定？";
+"settings.dedicatedip.stats.delete.alert.message" = "您即将从您的账户中删除专用 IP。";
+"settings.dedicatedip.stats.delete.alert.delete" = "是的，删除";
+
+"settings.dedicatedip.status.active" = "已激活";
+"settings.dedicatedip.status.invalid" = "无效";
+"settings.dedicatedip.status.expired" = "已过期";
+"settings.dedicatedip.status.error" = "错误";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "应用程序版本";
+"help_menu.contact_support.qr_code.title" = "联系客服";
+"help_menu.contact_support.qr_code.message" = "扫描二维码联系客服。";
+
+"help_menu.about_options.acknowledgements.title" = "声明";
+"help_menu.about_options.privacy_policy.title" = "隐私政策";
+
+"help_menu.about_section.privacy_policy.description" = "此隐私政策（也称 “政策”）详细说明了 Private Internet Access, Inc.（也称“我们“”数据控制方“”公司“”PIA“）的隐私处理政策，适用于使用 PIA 服务的用户（也称为”您“）此类服务包括 PIA VPN 服务（也称”服务“），以及 PIA 网站 www.privateinternetaccess.com（也称“网站”）等在内的各项服务。";
+"help_menu.about_section.privacy_policy.qr_code.message" = "扫描二维码，在您的设备上查看完整的《隐私政策》。";
+
+"help_menu.help_improve.enabled.title" = "开启";
+"help_menu.help_improve.disabled.title" = "关闭";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "COPYRIGHT 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "获取 PIA";
+"tvos.signup.item1" = "遍布 91 个国家的 VPN 服务器";
+"tvos.signup.item2" = "快如闪电的速度";
+"tvos.signup.item3" = "24/7 全天候客户支持";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "您的订阅已过期";
+"tvos.signin.expired.subtitle" = "续订从而在观看流媒体节目时获得全方位的 VPN 保护。";
+"tvos.signin.expired.qr.title1" = "扫描二维码，选择订阅计划。仅需几分钟即可轻松订阅。";
+"tvos.signin.expired.qr.title2" = "订阅完成后，返回 Apple TV，享受 PIA 提供的更强大的数据隐私保护。";
+"tvos.signin.expired.button.renewed" = "我已续订";
+"tvos.signin.expired.button.signout" = "退出";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "您的免费试用已过期";
+"tvos.signin.expired.trial.subtitle" = "如果您喜欢我们提供的 VPN 保护，请记得订阅 PIA！";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "开始 7 天免费试用，之后每年 %@。";
+"tvos.signup.subscription.paywall.price.year" = "每年";
+"tvos.signup.subscription.paywall.price.trial" = "最佳优惠——免费试用";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/月";
+"tvos.signup.subscription.paywall.button.subscribe" = "立即订阅";
+
+"tvos.signup.subscription.error.message.generic" = "出错了。请再试一次。";
+"tvos.signup.subscription.error.message.paymentCancelled" = "付款已取消。请再试一次。";
+
+"tvos.signup.email.error.message.generic" = "我们现在无法创建帐户。请稍后再试";
+
+"tvos.signup.credentials.title" = "成功！";
+"tvos.signup.credentials.details.title" = "卡片兑换成功";
+"tvos.signup.credentials.details.subtitle" = "您还将很快收到包含您的用户名和密码的一封电子邮件。";
+
+"tvos.signup.credentials.details.button" = "开始";
+
+"tvos.signup.terms_conditions.title" = "条款和条件";
+
+"tvos.signup.terms_conditions.description" = "本《服务条款协议》（“协议”）涵盖您使用和访问网址为 www.privateinternetaccess.com 的 PIA Private Internet access, Inc.（“PIA”）网站（“网站”）、虚拟专用网络（“VPN”）以及通过网站提供的 PIA 服务（“服务”）的范围。访问网站、购买订阅和/或使用服务，即表示您（“您”或“订阅者”）（“PIA”和“订阅者”统称为“双方”）承认您已阅读本协议，完全理解本协议条款，并同意受本协议所有条款的约束。";
+"tvos.signup.terms_conditions.qr_code.message" = "扫描二维码在您的设备上查看完整的条款和条件政策。";
+
+//Force update (iOS)
+"forceupdate.label.title" = "升级您的体验";
+"forceupdate.label.subtitle" = "您正在使用旧版本的 PIA。立即更新您的应用程序，享受所有最新功能带来的增强体验。";
+"forceupdate.button.update" = "立即更新";
+"forceupdate.label.vpn.connected" = "点击“立即更新”将断开 VPN 连接。";
+
+"global.version.format" = "版本 %@ (%@)";
+
+"signup.in_progress.title"= "确认注册";
+"signup.in_progress.message"= "我们正在确认您在我们系统中的购买。这可能需要一点时间，请耐心等待。";
+
+"signup.success.title"= "购买完成";
+"signup.success.message_format"= "感谢注册。我们已将您的用户名和密码发送至您的电子邮箱：%@";
+"signup.success.redeem.title"= "卡片兑换成功";
+"signup.success.redeem.message"= "您将很快收到一封电子邮件，记有您的用户名和密码。\n\n您的登录详情";
+"signup.success.username.caption"= "用户名";
+"signup.success.password.caption"= "密码";
+"signup.success.submit"= "开始体验";
+
+"signup.failure.vc_title"= "注册失败";
+"signup.failure.title"= "账户创建失败";
+"signup.failure.message"= "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
+"signup.failure.purchase.sandbox.message"= "所选的沙盒订阅不适用于生产";
+"signup.failure.redeem.invalid.title"= "卡片PIN无效";
+"signup.failure.redeem.invalid.message"= "您输入的卡片PIN似乎无效。请重试。";
+"signup.failure.redeem.claimed.title"= "卡片已使用";
+"signup.failure.redeem.claimed.message"= "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
+"signup.failure.submit"= "返回";
+"signup.failure.internal"= "内部应用错误 (%d)";
+"signup.failure.unknown"= "未知错误：%s (%d)";
+
+"signup.unreachable.vc_title"= "错误";
+"signup.unreachable.title"= "糟糕！";
+"signup.unreachable.message"= "未找到网络连接。请确认您已接入网络，然后点击下面的重试。\n\n您可在稍后再回到本应用完成该操作。";
+"signup.unreachable.submit"= "重试";
+
+"signup.purchase.uncredited.alert.message"= "你有未入账的的交易。要恢复您的账户详情吗？";
+"signup.purchase.uncredited.alert.button.cancel"= "取消";
+
+"signup.purchase.trials.intro"= "开始 7 天免费试用";
+"signup.purchase.trials.price.after"= "然后 %@";
+"signup.purchase.trials.region"= "90多个国家的安全服务器";
+
+"signup.purchase.subscribe.now"= "立即订阅";
+
+// WALKTHROUGH
+
+"signup.walkthrough.page.2.title"= "90多个国家的安全服务器";
+"signup.walkthrough.page.2.description"= "服务器遍布世界各地，您始终受到保护。";
+
+"signup.share.data.buttons.accept"= "接受";
+"signup.share.data.buttons.noThanks"= "不用，谢谢";
+"signup.share.data.buttons.readMore"= "阅读更多";
+"signup.share.data.text.title"= "请帮助我们改进服务";
+"signup.share.data.text.description"= "为了帮助我们保持服务的连接性能，您可以匿名与我们共享您的连接统计数据。这些报告不包括任何可识别个人身份的信息。";
+"signup.share.data.text.footer"= "您始终可以从设置中进行控制";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "登录到您的帐户";
+"welcome.login.username.placeholder"= "用户名 (p1234567)";
+"welcome.login.password.placeholder"= "密码";
+"welcome.login.submit"= "登录";
+"welcome.login.restore.button"= "没有收到账户详情？";
+"welcome.login.error.title"= "登录";
+"welcome.login.error.validation"= "您必须输入用户名和密码。";
+"welcome.login.error.unauthorized"= "您的用户名或密码不正确。";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "使用购买收据登录";
+"welcome.login.magic.link.title"= "使用魔法电子邮件链接登录";
+"welcome.login.magic.link.response"= "请检查您的电子邮件，以查找登录链接。";
+"welcome.login.magic.link.send"= "发送链接";
+
+"welcome.purchase.title"= "选择 VPN 套餐";
+"welcome.purchase.subtitle"= "7 天退款保证";
+"welcome.purchase.email.placeholder"= "电子邮件地址";
+"welcome.purchase.continue"= "继续";
+"welcome.purchase.error.connectivity.title"= "连接失败";
+"welcome.purchase.confirm.form.email"= "请输入您的电子邮件地址";
+"welcome.purchase.email.why"= "我们需要您的电子邮件以发送您的用户名和密码。";
+"welcome.purchase.submit"= "提交";
+"welcome.purchase.or"= "或";
+
+"welcome.upgrade.header"= "欢迎回来！";
+"welcome.upgrade.title"= "您需要续订才能使用 Private Internet Access。";
+"welcome.upgrade.renew.now"= "立即续订";
+
+"welcome.redeem.title"= "兑换礼品卡";
+"welcome.redeem.accessibility.back"= "返回";
+
+"welcome.plan.monthly.title"= "每月";
+"welcome.plan.yearly.title"= "每年";
+"welcome.plan.yearly.detail_format"= "%@%@/每年";
+"welcome.plan.price_format"= "%@/每月";
+"welcome.plan.best_value"= "最超值";
+"welcome.plan.accessibility.per_month"= "每月";
+
+"welcome.restore.title"= "恢复未入账的购买";
+"welcome.restore.subtitle"= "如果您通过此 app 购买了套餐，但没有收到凭据，可以从这里重新发送。在此过程中您不会被收费。";
+"welcome.restore.email.placeholder"= "电子邮件地址";
+"welcome.restore.submit"= "确认";
+
+"welcome.iap.error.title"= "错误";
+
+"welcome.agreement.message"= "免费试用 7 天后，除非在试用期结束前至少提前 24 小时取消，否则此订阅将自动续订 ％@。您的 Apple ID 账户将在试用期结束前 24 小时内收取续订费用。您可以在购买后前往 App Store 上的账户设置来管理和取消订阅。每个用户仅可享受一次 7 天试用优惠。免费试用期的任何未使用部分（如果提供）将在用户购买订阅时失效。所有价格均包含适用的当地营业税。\n\n注册即表示接受$1和$2。";
+
+"welcome.agreement.message.tos"= "服务条款";
+"welcome.agreement.message.privacy"= "隐私政策";
+
+"welcome.gdpr.collect.data.title"= "我们收集的个人信息";
+"welcome.gdpr.collect.data.description"= "用于账户管理和防止滥用的电子邮件地址。";
+"welcome.gdpr.usage.data.description"= "电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。";
+"welcome.gdpr.accept.button.title"= "同意并继续";
+
+"welcome.update.account.email.error"= "无法修改账户电子邮件";

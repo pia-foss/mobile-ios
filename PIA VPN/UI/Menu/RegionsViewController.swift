@@ -25,6 +25,7 @@ import PIALibrary
 import DZNEmptyDataSet
 import PopupDialog
 import GradientProgressBar
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AutolayoutViewController.self)
 
@@ -66,7 +67,7 @@ class RegionsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = L10n.Localizable.Menu.Item.region
+        title = L10n.Menu.Item.region
         var servers = Client.providers.serverProvider.currentServers
         
         let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
@@ -112,7 +113,7 @@ class RegionsViewController: AutolayoutViewController {
         guard (Client.providers.vpnProvider.vpnStatus == .disconnected) else {
             Macros.displayImageNote(
                 withImage: Asset.Images.iconWarning.image,
-                message: L10n.Localizable.Region.Refresh.Connected.error
+                message: L10n.Region.Refresh.Connected.error
             )
 
             log.debug("Not pinging servers while on VPN, will try on next update")
@@ -135,7 +136,7 @@ class RegionsViewController: AutolayoutViewController {
             target: self,
             action: #selector(showFilter(_:))
         )
-        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Localizable.Region.Accessibility.filter
+        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
     }
     
     override func dismissModal(completion: (() -> Void)? = nil) {
@@ -151,7 +152,7 @@ class RegionsViewController: AutolayoutViewController {
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = L10n.Localizable.Region.Search.placeholder
+        searchController.searchBar.placeholder = L10n.Region.Search.placeholder
 
         navigationItem.searchController = searchController
         definesPresentationContext = true
@@ -160,7 +161,7 @@ class RegionsViewController: AutolayoutViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.region)
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
         setupRightBarButton()
         tableView.reloadData()
 
@@ -196,17 +197,17 @@ class RegionsViewController: AutolayoutViewController {
         }
         
         let popup = PopupDialog(title: nil,
-                                message: L10n.Localizable.Region.Filter.sortby.uppercased())
+                                message: L10n.Region.Filter.sortby.uppercased())
         
-        let buttonName = DefaultButton(title: L10n.Localizable.Region.Filter.name.uppercased(), dismissOnTap: true) {
+        let buttonName = DefaultButton(title: L10n.Region.Filter.name.uppercased(), dismissOnTap: true) {
             AppPreferences.shared.regionFilter = .name
             self.filterServers()
         }
-        let buttonLatency = DefaultButton(title: L10n.Localizable.Region.Filter.latency.uppercased(), dismissOnTap: true) {
+        let buttonLatency = DefaultButton(title: L10n.Region.Filter.latency.uppercased(), dismissOnTap: true) {
             AppPreferences.shared.regionFilter = .latency
             self.filterServers()
         }
-        let buttonFavorites = DefaultButton(title: L10n.Localizable.Region.Filter.favorites.uppercased(), dismissOnTap: true) {
+        let buttonFavorites = DefaultButton(title: L10n.Region.Filter.favorites.uppercased(), dismissOnTap: true) {
             AppPreferences.shared.regionFilter = .favorite
             self.filterServers()
         }
@@ -248,7 +249,7 @@ class RegionsViewController: AutolayoutViewController {
     }
 
     @objc private func viewHasRotated() {
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.region)
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
     }
     
     // MARK: Notifications
@@ -269,7 +270,7 @@ class RegionsViewController: AutolayoutViewController {
     
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        styleNavigationBarWithTitle(L10n.Localizable.Menu.Item.region)
+        styleNavigationBarWithTitle(L10n.Menu.Item.region)
 
         if let viewContainer = viewContainer {
             Theme.current.applyRegionSolidLightBackground(view)

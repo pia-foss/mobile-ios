@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRView: View {
     @Binding var expiresAt: String
@@ -18,7 +19,7 @@ struct LoginQRView: View {
         HStack {
             VStack(alignment: .leading, spacing: 50) {
                 VStack(alignment: .leading, spacing: 35) {
-                    Text(L10n.Localizable.Tvos.Login.Qr.title)
+                    Text(L10n.Tvos.Login.Qr.title)
                         .font(.system(size: 57))
                         .foregroundColor(.piaOnBackground)
                         .bold()
@@ -31,12 +32,12 @@ struct LoginQRView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 25) {
-                        Text(L10n.Localizable.Tvos.Login.Qr.description)
+                        Text(L10n.Tvos.Login.Qr.description)
                             .font(.system(size: 29))
                             .foregroundColor(.piaOnSurfaceContainerSecondary)
                         
                         VStack(alignment: .leading) {
-                            Text(L10n.Localizable.Tvos.Login.Qr.timer)
+                            Text(L10n.Tvos.Login.Qr.timer)
                                 .font(.system(size: 29))
                                 .foregroundColor(.piaOnSurfaceContainerSecondary)
                             Text(expiresAt)
@@ -48,12 +49,12 @@ struct LoginQRView: View {
                 
                 VStack {
                     ActionButton(
-                        title: L10n.Localizable.Tvos.Login.Qr.Button.login,
+                        title: L10n.Tvos.Login.Qr.Button.login,
                         action: { loginAction() }
                     )
                     .frame(width: 480, height: 66)
                     ActionButton(
-                        title: L10n.Localizable.Tvos.Login.Qr.Button.restore,
+                        title: L10n.Tvos.Login.Qr.Button.restore,
                         action: { restorePurchasesAction() }
                     )
                     .frame(width: 480, height: 66)

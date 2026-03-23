@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 public enum RegionStatus {
     case available
@@ -178,13 +179,13 @@ class RegionCell: UITableViewCell, Restylable {
         self.favoriteImageView.image = Asset.Images.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
         favoriteButton.accessibilityLabel = self.isFavorite ?
-            L10n.Localizable.Region.Accessibility.favorite :
-            L10n.Localizable.Region.Accessibility.unfavorite
+            L10n.Region.Accessibility.favorite :
+            L10n.Region.Accessibility.unfavorite
     }
     
     private func updateOfflineImage() {
         self.favoriteImageView.image = Asset.Images.offlineServerIcon.image
-        self.favoriteButton.accessibilityLabel = L10n.Localizable.Global.disabled
+        self.favoriteButton.accessibilityLabel = L10n.Global.disabled
     }
 
 }

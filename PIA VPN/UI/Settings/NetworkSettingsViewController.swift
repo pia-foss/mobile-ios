@@ -25,6 +25,7 @@ import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
 import PIAWireguard
+import PIALocalizations
 
 private let log = PIALogger.logger(for: NetworkSettingsViewController.self)
 
@@ -62,7 +63,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.network)
+        styleNavigationBarWithTitle(L10n.Settings.Section.network)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -94,7 +95,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.network)
+        styleNavigationBarWithTitle(L10n.Settings.Section.network)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -207,7 +208,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
                         if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                             if !value.isEmpty {
                                 controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                    title: L10n.Localizable.Global.edit,
+                                    title: L10n.Global.edit,
                                     style: .plain,
                                     target: self,
                                     action: #selector(edit(_:))
@@ -365,12 +366,12 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                 }
                 
                 if !isFound && option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
-                    let alertController = Macros.alert(L10n.Localizable.Settings.Dns.Custom.dns,
-                                                       L10n.Localizable.Settings.Dns.Alert.Create.message)
-                    alertController.addActionWithTitle(L10n.Localizable.Global.ok) {
+                    let alertController = Macros.alert(L10n.Settings.Dns.Custom.dns,
+                                                       L10n.Settings.Dns.Alert.Create.message)
+                    alertController.addActionWithTitle(L10n.Global.ok) {
                         self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
                     }
-                    alertController.addCancelAction(L10n.Localizable.Global.cancel)
+                    alertController.addCancelAction(L10n.Global.cancel)
                     self.present(alertController,
                                  animated: true,
                                  completion: nil)

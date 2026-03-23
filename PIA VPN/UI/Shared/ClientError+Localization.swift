@@ -7,6 +7,7 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 extension ClientError: LocalizedError {
     public var errorDescription: String? {

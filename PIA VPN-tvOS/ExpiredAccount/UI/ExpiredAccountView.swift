@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct ExpiredAccountView: View {
     var viewModel: ExpiredAccountViewModel
@@ -56,7 +57,7 @@ struct ExpiredAccountView: View {
                     
                     VStack {
                         ActionButton(
-                            title: L10n.Localizable.Tvos.Signin.Expired.Button.signout,
+                            title: L10n.Tvos.Signin.Expired.Button.signout,
                             action: { viewModel.logout() }
                         )
                         .frame(width: 510, height: 66)

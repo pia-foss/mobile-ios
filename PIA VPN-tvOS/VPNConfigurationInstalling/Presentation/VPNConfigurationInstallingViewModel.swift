@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType
@@ -50,9 +51,9 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
 }
 
 extension VPNConfigurationInstallingViewModel: OnboardingComponentViewModelType {
-    var title: String { L10n.Localizable.Onboarding.VpnConfiguration.title }
-    var subtitle: String? { L10n.Localizable.Onboarding.VpnConfiguration.subtitle }
+    var title: String { L10n.Onboarding.VpnConfiguration.title }
+    var subtitle: String? { L10n.Onboarding.VpnConfiguration.subtitle }
     var buttons: [OnboardingComponentButton] {
-        [OnboardingComponentButton(title: L10n.Localizable.Onboarding.VpnConfiguration.button, action: { [weak self] in self?.install() })]
+        [OnboardingComponentButton(title: L10n.Onboarding.VpnConfiguration.button, action: { [weak self] in self?.install() })]
     }
 }

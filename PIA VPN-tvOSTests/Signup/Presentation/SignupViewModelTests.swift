@@ -10,6 +10,7 @@ import XCTest
 import Combine
 @testable import PIA_VPN_tvOS
 import PIALibrary
+import PIALocalizations
 
 final class SignupViewModelTests: XCTestCase {
     class Fixture {
@@ -184,7 +185,7 @@ final class SignupViewModelTests: XCTestCase {
         
         XCTAssertEqual(capturedLoadingState, [true, false])
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_subscribe_presents_an_error_alert_when_purchaseProductUseCase_throws_a_productNotFound_PurchaseProductsError() {
@@ -205,7 +206,7 @@ final class SignupViewModelTests: XCTestCase {
         // THEN error alert is presented with a generic error
         wait(for: [expectation], timeout: 1.0)
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_subscribe_presents_an_error_alert_when_purchaseProductUseCase_throws_an_uncreditedTransaction_PurchaseProductsError() {

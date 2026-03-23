@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 public class SignupFailureViewController: AutolayoutViewController, BrandableNavigationBar {
 

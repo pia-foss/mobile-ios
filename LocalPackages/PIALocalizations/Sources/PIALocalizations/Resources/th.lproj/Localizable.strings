@@ -1,0 +1,647 @@
+// GLOBAL
+
+"global.ok" = "ตกลง";
+"global.cancel" = "ยกเลิก";
+"global.close" = "ปิด";
+"global.error" = "ข้อผิดพลาด";
+"global.automatic" = "อัตโนมัติ";
+"global.required" = "จำเป็น";
+"global.optional" = "ถ้ามี";
+"global.clear" = "ล้าง";
+"global.update" = "อัพเดท";
+"global.edit" = "แก้ไข";
+"global.unreachable" = "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ต";
+"global.enabled" = "เปิดใช้งาน";
+"global.disabled" = "ปิดใช้งาน";
+"global.enable" = "เปิดใช้งาน";
+"global.disable" = "ปิดการใช้งาน";
+"global.add" = "เพิ่ม";
+"global.remove" = "ลบออก";
+"global.empty" = "ว่างเปล่า";
+"global.yes" = "ตกลง";
+"global.no" = "ไม่";
+"global.or" = "หรือ";
+"global.row.selection" = "การเลือกแถว";
+"global.general.settings" = "การตั้งค่าทั่วไป";
+"global.version" = "เวอร์ชัน";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "การแจ้งเตือนถูกปิดอยู่";
+"notifications.disabled.message" = "เปิดการแจ้งเตือนเพื่อรับคำเตือนเพื่อต่ออายุสมาชิกก่อนหมดอายุ";
+"notifications.disabled.settings" = "ตั้งค่า";
+
+"expiration.title" = "การต่ออายุ";
+"expiration.message" = "สถานะสมาชิกของคุณจะหมดอายุเร็วๆนี้ ต่ออายุเพื่อรับการป้องกันต่อ";
+
+"local_notification.non_compliant_wifi.title" = "Wi-Fi ที่ไม่ปลอดภัย: %@";
+"local_notification.non_compliant_wifi.text" = "แตะที่นี่เพื่อรักษาความปลอดภัยให้อุปกรณ์ของคุณ";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "เชื่อมต่อ";
+"shortcuts.disconnect" = "ยกเลิกการเชื่อมต่อ";
+"shortcuts.select_region" = "เลือกภูมิภาค";
+
+// RENEWAL
+
+"renewal.success.title" = "ขอบคุณ";
+"renewal.success.message" = "บัญชีของคุณได้รับการต่ออายุเรียบร้อยแล้ว";
+"renewal.failure.message" = "ไม่สามารถส่งใบเสร็จการสั่งซื้อของคุณได้ โปรดลองอีกครั้งภายหลัง";
+
+// MENU
+"menu.accessibility.edit.tile" = "แก้ไข";
+"menu.accessibility.item" = "เมนู";
+"menu.accessibility.logged_as" = "เข้าสู่ระบบในฐานะ %@";
+"menu.expiration.expires_in" = "สถานะสมาชิกจะหมดอายุใน";
+"menu.expiration.days" = "%d วัน";
+"menu.expiration.hours" = "%d ชั่วโมง";
+"menu.expiration.one_hour" = "หนึ่งชั่วโมง";
+"menu.expiration.upgrade" = "อัพเกรดบัญชี";
+"menu.item.region" = "การเลือกภูมิภาค";
+"menu.item.about" = "เกี่ยวกับ";
+"menu.item.account" = "เกี่ยวกับ";
+"menu.item.settings" = "ตั้งค่า";
+"menu.item.logout" = "ออกจากระบบ";
+"menu.item.web.privacy" = "นโยบายความเป็นส่วนตัว";
+"menu.item.web.home" = "หน้าเพจ";
+"menu.item.web.support" = "สนับสนุน";
+
+"menu.logout.title" = "ออกจากระบบ";
+"menu.logout.message" = "การออกจากระบบจะยกเลิก VPN และทำให้คุณไม่ได้รับการปกป้องใด";
+"menu.logout.confirm" = "ออกจากระบบ";
+
+"menu.renewal.title" = "การต่ออายุ";
+"menu.renewal.purchase" = "ซื้อ";
+"menu.renewal.renew" = "ต่ออายุ";
+"menu.renewal.message.trial" = "บัญชีทดลองไม่สามารถต่ออายุได้ กรุณาซื้อบัญชีใหม่เมื่อหมดอายุเพื่อใช้บริการต่อ";
+"menu.renewal.message.website" = "โปรดใช้เว็บไซต์ของเราเพื่อต่ออายุสมาชิกของคุณ";
+"menu.renewal.message.unavailable" = "ไม่พบเซิร์ฟเวอร์แอปเปิ้ลในขณะนี้ โปรดลองใหม่ภายหลัง";
+
+// ACCOUNT
+
+"account.email.placeholder" = "อีเมลแอดเดรส";
+"account.username.caption" = "ชื่อผู้ใช้";
+"account.restore.title" = "คืนค่าการซื้อที่ยังไม่ได้คิดเครดิต";
+"account.restore.description" = "หากคุณต่ออายุแผนของคุณแต่บัญชีของคุณยังแสดงสถานะใกล้หมดอายุ คุณสามารถเริ่มการต่ออายุใหม่ได้ที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำในกระบวนการนี้";
+"account.restore.button" = "คืนค่าการซื้อ";
+"account.restore.failure.title" = "คืนค่าการซื้อ";
+"account.restore.failure.message" = "ไม่พบรายการซื้อที่สามารถแลกได้สำหรับต่ออายุ";
+"account.expiry_date.information" = "แพ็กเกจของคุณจะหมดอายุ %@";
+"account.expiry_date.expired" = "แพ็กเกจของคุณหมดอายุแล้ว";
+"account.subscriptions.message" = "คุณสามารถจัดการการสมัครสมาชิกของคุณได้ที่นี่";
+"account.subscriptions.linkMessage" = "ที่นี่";
+"account.set.email.error" = "เกิดข้อผิดพลาดในการเพิ่มอีเมล โปรดลองใหม่ในภายหลัง";
+"account.subscriptions.short.message" = "จัดการสมาชิก";
+"account.subscriptions.short.linkMessage" = "จัดการสมาชิก";
+"account.subscriptions.yearly" = "แผนรายปี";
+"account.subscriptions.monthly" = "แผนรายเดือน";
+"account.subscriptions.trial" = "แผนทดลองใช้";
+"account.unauthorized" = "บางอย่างผิดปกติ โปรดลองลงชื่อเข้าใช้อีกครั้ง";
+"account.delete" = "ลบบัญชี";
+"account.survey.message" = "ต้องการช่วยทำให้ PIA ดีขึ้นหรือไม่? แจ้งให้เราทราบว่าเราจะปรับปรุงได้อย่างไร!\nทำแบบสำรวจ";
+"account.survey.messageLink" = "ทำแบบสำรวจ";
+
+// SETTINGS
+
+"settings.connection.title" = "การเชื่อมต่อ";
+"settings.connection.vpn_protocol.title" = "การเลือกโปรโตคอล";
+"settings.connection.transport.title" = "การขนย้าย";
+"settings.connection.remote_port.title" = "พอร์ตทางไกล";
+
+"settings.encryption.cipher.title" = "การเข้ารหัสข้อมูล";
+"settings.encryption.handshake.title" = "ความร่วมมือ";
+
+"settings.application_settings.active_theme.title" = "ธีมที่ใช้งานอยู่";
+"settings.application_settings.kill_switch.title" = "ปุ่มตัดการทำงาน VPN";
+"settings.application_settings.kill_switch.footer" = "Kill switch ของ VPN จะป้องกันการเข้าถึงอินเทอร์เน็ตหากการเชื่อมต่อ VPN กำลังเชื่อมต่อใหม่ ไม่รวมการตัดการเชื่อมต่อด้วยตนเอง";
+"settings.application_settings.reconnect_notifications.title" = "การแจ้งเตือนการเชื่อมต่อใหม่";
+"settings.application_settings.reconnect_notifications.footer" = "รับการแจ้งเตือนเมื่อ VPN กำลังเชื่อมต่อใหม่ไปยังสถานที่อื่น ปิดการใช้งานเพื่อหยุดรับการแจ้งเตือนเหล่านี้";
+"settings.application_settings.leak_protection.title" = "การป้องกันการรั่วไหล";
+"settings.application_settings.leak_protection.footer" = "iOS มีคุณสมบัติที่ออกแบบมาเพื่อทำงานนอก VPN ตามค่าเริ่มต้น เช่น AirDrop, CarPlay, AirPlay และฮอตสปอตส่วนบุคคล การเปิดใช้งานการปกป้องการรั่วไหลแบบกำหนดเองจะนำทางการรับส่งข้อมูลเหล่านี้ผ่าน VPN แต่อาจส่งผลกระทบต่อวิธีการทำงานของคุณสมบัติดังกล่าว ข้อมูลเพิ่มเติม";
+"settings.application_settings.leak_protection.more_info" = "ข้อมูลเพิ่มเติม";
+"settings.application_settings.allow_local_network.title" = "อนุญาตการเข้าถึงอุปกรณ์บนเครือข่ายท้องถิ่น";
+"settings.application_settings.allow_local_network.footer" = "คงความเชื่อมต่อกับอุปกรณ์ท้องถิ่นอย่างเครื่องพิมพ์หรือเซิร์ฟเวอร์ไฟล์ระหว่างที่เชื่อมต่อกับ VPN (อนุญาตเฉพาะหากคุณไว้ใจผู้คนและอุปกรณ์ในเครือข่ายของคุณ)";
+"settings.application_settings.leak_protection.alert.title" = "การเปลี่ยนแปลงการตั้งค่า VPN จะมีผลในการเชื่อมต่อครั้งต่อไป";
+
+"settings.content_blocker.title" = "สถานะตัวปิดกั้นเนื้อหา Safari";
+"settings.content_blocker.refresh.title" = "รีเฟรชรายชื่อที่ปิดกั้น";
+"settings.content_blocker.footer" = "ในการเปิดหรือปิดตัวปิดกั้นเนื้อหา ให้ไปยังการตั้งค่า > แอป > Safari > ส่วนขยาย และเปิดปิด PIA VPN";
+
+"settings.application_information.debug.title" = "ส่งประวัติการแก้จุดบกพร่องไปยังฝ่ายสนับสนุน";
+"settings.application_information.debug_logging.title" = "เปิดใช้งานการบันทึกการดีบัก";
+"settings.application_information.debug.failure.title" = "เกิดข้อผิดพลาดระหว่างการส่ง";
+"settings.application_information.debug.failure.message" = "ไม่สามารถส่งข้อมูลการแก้จุดบกพร่องได้";
+"settings.application_information.debug.empty.title" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า";
+"settings.application_information.debug.empty.message" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า กรุณาพยายามเชื่อมต่อก่อนลองส่งใหม่อีกครั้ง";
+"settings.application_information.debug.success.title" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว";
+"settings.application_information.debug.success.message" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว \nID: %@\nกรุณาจด ID นี้ไว้ เนื่องจากทีมสนับสนุนของเราอาจสอบถามข้อมูลนี้เพื่อตรวจสอบการส่งข้อมูลของคุณ";
+
+"settings.commit.messages.must_disconnect" = "ต้องเชื่อมต่อ VPN อีกครั้งเพื่อให้เกิดความเปลี่ยนแปลง";
+"settings.commit.messages.should_reconnect" = "เชื่อมต่อ VPN อีกครั้งเพื่อใช้ความเปลี่ยนแปลง";
+"settings.commit.buttons.reconnect" = "เชื่อมต่ออีกครั้ง";
+"settings.commit.buttons.later" = "ภายหลัง";
+
+"settings.reset.defaults.title" = "รีเซ็ตการตั้งค่าเป็นค่าเริ่มต้น";
+"settings.reset.defaults.confirm.title" = "การตั้งค่าการรีเซ็ต";
+"settings.reset.defaults.confirm.message" = "การกระทำนี้จะทำให้แอปกลับไปสู่ค่าเริ่มต้น คุณจะสูญเสียการเปลี่ยนแปลงทั้งหมดที่เคยทำไว้";
+"settings.reset.defaults.confirm.button" = "รีเซ็ต";
+"settings.reset.footer" = "การกระทำนี้จะรีเซ็ตการตั้งค่าด้านบนทั้งหมดและกลับไปสู่ค่าเริ่มต้น";
+
+"settings.small.packets.title" = "ใช้แพ็กเกตขนาดเล็ก";
+"settings.small.packets.description" = "จะค่อยๆ ลดขนาดแพ็กเกต IP เพื่อปรับปรุงให้สามารถทำงานร่วมกับเราเตอร์และเครือข่ายโทรศัพท์บางประเภทได้";
+
+"settings.log.information" = "บันทึกการบันทึกดีบั๊กที่สามารถส่งไปยังฝ่ายสนับสนุนด้านเทคนิคเพื่อช่วยแก้ไขปัญหาได้";
+
+"settings.geo.servers.description" = "แสดงภูมิภาคตามที่ตั้งทางภูมิศาสตร์";
+"settings.cards.history.title" = "ข่าวล่าสุด";
+
+"settings.section.general" = "ทั่วไป";
+"settings.section.protocols" = "โปรโตคอล";
+"settings.section.network" = "เครือข่าย";
+"settings.section.privacyFeatures" = "คุณสมบัติความเป็นส่วนตัว";
+"settings.section.automation" = "ระบบอัตโนมัติ";
+"settings.section.help" = "ช่วยเหลือ";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "ตัวปิดกั้นเนื้อหา Safari";
+"content_blocker.body.subtitle" = "ในการเปิดใช้งานตัวปิดกั้นเนื้อหาเพื่อใช้ใน Safari กรุณาไปยัง การตั้งค่า > แอป > Safari > ส่วนขยาย และเปิดใช้งาน PIA VPN";
+"content_blocker.body.footer" = "โปรดทราบ: คุณไม่จำเป็นต้องเชื่อมต่อไปยัง VPN เพื่อใช้งานตัวปิดกั้นเนื้อหา แต่จะใช้ได้ก็ต่อเมื่อใช้ Safari เท่านั้น";
+
+// ABOUT
+
+"about.app" = "VPN โดย Private Internet Access";
+"about.accessibility.component.expand" = "แตะเพื่ออ่านการอนุญาตฉบับเต็ม";
+
+// DASHBOARD
+
+"dashboard.connection.ip.unreachable" = "อินเทอร์เน็ตไม่สามารถเข้าถึงได้";
+
+"dashboard.vpn.disconnected" = "ขาดการเชื่อมต่อ";
+"dashboard.vpn.connecting" = "กำลังเชื่อมต่อ...";
+"dashboard.vpn.protected" = "ป้องกันแล้ว";
+"dashboard.vpn.not_protected" = "ยังไม่ได้ป้องกัน";
+"dashboard.vpn.disconnecting" = "กำลังยกเลิกการเชื่อมต่อ...";
+"dashboard.vpn.changing_region" = "กำลังเปลี่ยนภูมิภาค...";
+"dashboard.accessibility.vpn.button" = "ปุ่มเชื่อมต่อ VPN";
+"dashboard.accessibility.vpn.button.isOn" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN เชื่อมต่ออยู่";
+"dashboard.accessibility.vpn.button.isOff" = "ปุ่มเชื่อมต่อ VPN ขณะนี้ VPN ขาดการเชื่อมต่อ";
+
+"dashboard.vpn.leakprotection.alert.title" = "ตรวจพบ Wi-Fi ที่ไม่ปลอดภัย";
+"dashboard.vpn.leakprotection.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ ปิดใช้งานเลย เพื่อปิด “อนุญาตการเข้าถึงอุปกรณ์บนเครือข่ายท้องถิ่น” และเชื่อมต่อใหม่โดยอัตโนมัติ";
+"dashboard.vpn.leakprotection.alert.cta1" = "ปิดใช้งานเลย";
+"dashboard.vpn.leakprotection.alert.cta2" = "เรียนรู้เพิ่มเติม";
+"dashboard.vpn.leakprotection.alert.cta3" = "เพิกเฉย";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "หากต้องการป้องกันการรั่วไหลของข้อมูล ให้แตะ เปลี่ยนเลย เพื่อเปลี่ยนเป็นโปรโตคอล VPN IKEv2 และเชื่อมต่อใหม่โดยอัตโนมัติ";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "เปลี่ยนเลย";
+
+"dashboard.vpn.change_location.alert.title" = "กำลังเปลี่ยนตำแหน่ง?";
+"dashboard.vpn.change_location.alert.message" = "VPN ของคุณจะตัดการเชื่อมต่อชั่วคราวในขณะที่เชื่อมต่อกับตำแหน่งใหม่";
+"dashboard.vpn.change_location.alert.button.connect" = "เชื่อมต่อ";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "PIA ต้องการเข้าถึงการกำหนดค่า VPN เพื่อรักษาความปลอดภัยให้กับการเข้าชมของคุณ";
+"vpn_permission.body.subtitle" = "คุณจะเห็นข้อความแจ้ง PIA VPN และต้องอนุญาตการเข้าถึงการกำหนดค่า VPN \nหากต้องการดำเนินการต่อ ให้แตะ“%@”";
+"vpn_permission.body.footer" = "เราไม่ได้ตรวจสอบ คัดกรอง หรือบันทึกกิจกรรมเครือข่ายใดๆ";
+"vpn_permission.disallow.message.basic" = "เราต้องการสิทธิ์นี้เพื่อให้แอปพลิเคชันสามารถทำงานได้";
+"vpn_permission.disallow.message.support" = "คุณยังสามารถติดต่อฝ่ายสนับสนุนได้หากต้องการความช่วยเหลือ";
+"vpn_permission.disallow.contact" = "ติดต่อ";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "กำหนดเอง";
+"settings.dns.alert.create.message" = "การใช้ DNS ที่ไม่ใช่ PIA อาจเปิดเผยการเข้าใช้ DNS ของคุณแก่บุคคลที่สามและทำลายความเป็นส่วนตัวของคุณ";
+"settings.dns.alert.clear.title" = "ล้าง DNS";
+"settings.dns.alert.clear.message" = "การดำเนินการนี้จะล้าง DNS ที่กำหนดเองและใช้ค่าเริ่มต้นของ PIA DNS";
+"settings.dns.custom.dns" = "DNS ที่กำหนดเอง";
+"settings.dns.primaryDNS" = "DNS หลัก";
+"settings.dns.secondaryDNS" = "DNS รอง";
+"settings.dns.validation.primary.mandatory" = "บังคับใช้ DNS หลัก";
+"settings.dns.validation.primary.invalid" = "DNS หลักไม่ถูกต้อง";
+"settings.dns.validation.secondary.invalid" = "DNS รองไม่ถูกต้อง";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.description" = "กำหนดค่าวิธีการทำงานของ PIA ในการเชื่อมต่อกับ WiFi หรือเครือข่ายเซลลูลาร์ ซึ่งไม่ได้รวมกับการยกเลิกการเชื่อมต่อด้วยตนเอง";
+"settings.hotspothelper.available.help" = "หากต้องการตั้งค่ารายการนี้ ให้ไปที่การตั้งค่า iOS > WiFi";
+"hotspothelper.display.name" = "เปิดใช้งานการป้องกัน VPN WiFi ในการตั้งค่า PIA เพื่อรักษาความปลอดภัยการเชื่อมต่อนี้";
+"hotspothelper.display.protected.name" = "🔒 เปิดใช้งานการป้องกัน PIA VPN WiFi - เราพร้อมดูแลคุณ";
+"tiles.quicksetting.nmt.title" = "การจัดการเครือข่าย";
+"tiles.quicksetting.private.browser.title" = "เบราว์เซอร์ส่วนตัว";
+"settings.nmt.killswitch.disabled" = "ปุ่ม VPN kill ปิดใช้งานอยู่ กรุณาเปิดใช้งานปุ่ม VPN kill ในการตั้งค่า เพื่อยืนยันว่าเครื่องมือจัดการเครือข่ายยังทำงาน และคุณสามารถเชื่อมต่อเครือข่ายได้อีกครั้งเมื่อมีการเปลี่ยนเครือข่าย";
+"settings.service.quality.share.title" = "ช่วยปรับปรุง PIA";
+"settings.service.quality.share.description" = "ช่วยเราปรับปรุงด้วยการแชร์สถิติการเชื่อมต่อ VPN โดยที่รายงานเหล่านี้จะไม่มีข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+"settings.service.quality.share.findoutmore" = "ค้นหาข้อมูลเพิ่มเติม";
+"settings.service.quality.show.title" = "สถิติการเชื่อมต่อ";
+
+"network.management.tool.open.wifi" = "WiFi สาธารณะ";
+"network.management.tool.secure.wifi" = "WiFi ที่ปลอดภัย";
+"network.management.tool.mobile.data" = "ข้อมูลมือถือ";
+"network.management.tool.always.connect" = "เชื่อมต่อ VPN ทุกครั้ง";
+"network.management.tool.always.disconnect" = "เลิกเชื่อมต่อ VPN ทุกครั้ง";
+"network.management.tool.retain.state" = "รักษาสถานะ VPN";
+"network.management.tool.add.rule" = "เพิ่มกฎใหม่";
+"network.management.tool.choose.wifi" = "เลือกเครือข่าย WiFi เพื่อเพิ่มกฎใหม่ ";
+"network.management.tool.title" = "จัดการระบบอัตโนมัติ";
+"network.management.tool.alert" = "การตั้งค่าอัตโนมัติของคุณถูกกำหนดค่าให้ยกเลิกการเชื่อมต่อ VPN เสมอภายใต้เงื่อนไขเครือข่ายปัจจุบัน";
+"network.management.tool.disable" = "ปิดใช้งานระบบอัตโนมัติ";
+"network.management.tool.enable.automation" = "เปิดใช้งานการจัดการระบบ";
+
+// REGION
+
+"region.search.placeholder" = "ค้นหาเขต";
+"region.accessibility.filter" = "ตัวกรอง";
+"region.filter.sortby" = "แบ่งเขตตาม";
+"region.filter.name" = "ชื่อ";
+"region.filter.latency" = "เวลาแฝง";
+"region.filter.favorites" = "รายการโปรด";
+"region.accessibility.favorite" = "เพิ่มภูมิภาคที่ชื่นชอบ";
+"region.accessibility.unfavorite" = "ลบภูมิภาคที่ชื่นชอบ";
+"region.refresh.connected.error" = "ไม่สามารถอัปเดตเวลาแฝงขณะเชื่อมต่อกับ VPN";
+
+// TILES
+"tiles.quick.connect.title" = "เชื่อมต่อด่วน";
+"tiles.favorite.servers.title" = "เซิร์ฟเวอร์ที่ชื่นชอบ";
+"tiles.region.title" = "เซิร์ฟเวอร์ VPN";
+"tiles.subscription.title" = "สมาชิก";
+"tiles.subscription.trial" = "ทดลอง";
+"tiles.subscription.monthly" = "รายเดือน";
+"tiles.subscription.yearly" = "รายปี";
+"tiles.subscription.days.left" = "(เหลือ %d วัน)";
+"tiles.usage.title" = "การใช้งาน";
+"tiles.usage.ipsec.title" = "การใช้งาน (ไม่สามารถใช้ได้บน IKEv2)";
+"tiles.usage.upload" = "อัพโหลด";
+"tiles.usage.download" = "ดาวน์โหลด";
+"tiles.nmt.accessibility.trusted" = "เครือข่ายที่เชื่อถือ";
+"tiles.quicksettings.title" = "การตั้งค่าด่วน";
+"tiles.quicksettings.min.elements.message" = "คุณควรเปิดไว้อย่างน้อยหนึ่งรายการในช่องการตั้งค่าด่วน";
+"tiles.accessibility.visible.tile.action" = "แตะเพื่อลบช่องนี้ลงในแดชบอร์ด";
+"tiles.accessibility.invisible.tile.action" = "แตะเพื่อเพิ่มช่องนี้ลงในแดชบอร์ด";
+"tiles.feedback.title" = "พวกเราทำได้ดีหรือไม่?";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "\"เชื่อมต่อ\"ทางลัด Siri";
+"siri.shortcuts.disconnect.row.title" = "\"ยกเลิกการเชื่อมต่อ\" ทางลัด Siri";
+"siri.shortcuts.connect.title" = "เชื่อมต่อ PIA VPN";
+"siri.shortcuts.disconnect.title" = "ยกเลิกการเชื่อมต่อ PIA VPN";
+"siri.shortcuts.add.error" = "เกิดข้อผิดพลาดในการเพิ่มทางลัด Siri กรุณาลองใหม่อีกครั้ง";
+
+//TODAY WIDGET
+"today.widget.login" = "เข้าสู่ระบบ";
+
+//FRIEND REFERRALS
+
+// GDPR
+"gdpr.collect.data.title" = "ข้อมูลส่วนบุคคลที่เรารวบรวม";
+"gdpr.collect.data.description" = "อีเมลสำหรับการจัดการบัญชีและป้องกันการละเมิดข้อมูล\n\nอีเมลใช้ในการส่งข้อมูลสมาชิก การยืนยันการชำระเงิน การติดต่อกับลูกค้า และข้อเสนอส่งเสริมการขาย Private Internet Access เท่านั้น";
+"gdpr.accept.button.title" = "ยอมรับและดำเนินการต่อ";
+
+// SET EMAIL
+"set.email.form.email" = "ใส่อีเมลของคุณ";
+"set.email.why" = "โปรดแจ้งอีเมลสำหรับส่งชื่อผู้ใช้และรหัสผ่านของคุณ";
+"set.email.success.message_format" = "เราได้ส่งชื่อผู้ใช้และรหัสผ่านบัญชีของคุณไปยังที่อยู่อีเมลของคุณที่ %@";
+"set.email.password.caption" = "รหัสผ่าน";
+
+// EMAIL VALIDATOR
+"email.validation.invalid" = "อีเมลไม่ถูกต้อง โปรดลองใหม่";
+"email.validation.empty" = "อีเมลต้องไม่ว่างเปล่า";
+
+// RATING
+"rating.error.question" = "ไม่สามารถสร้างการเชื่อมต่อได้";
+"rating.error.subtitle" = "คุณสามารถลองเลือกภูมิภาคอื่นหรือแจ้งให้เราทราบโดยเปิดทิกเก็ตความช่วยเหลือ";
+"rating.error.button.send" = "ส่งความคิดเห็น";
+
+// CALLING CARDS
+"card.wireguard.title" = "ลอง WireGuard® ได้แล้ววันนี้!";
+"card.wireguard.description" = "นี่คือโปรโตคอล VPN ใหม่ที่มีประสิทธิภาพมากขึ้น ลดการใช้ CPU และยืดอายุแบตเตอรี่";
+"card.wireguard.cta.activate" = "ลอง WireGuard® ได้แล้วตอนนี้";
+"card.wireguard.cta.learn" = "เรียนรู้เพิ่มเติม";
+
+// DEDICATED IP
+"dedicated.ip.title" = "IP เฉพาะ";
+"dedicated.ip.plural.title" = "IP เฉพาะของคุณ";
+"dedicated.ip.activation.description" = "เปิดใช้งาน IP เฉพาะของคุณโดยวางโทเค็นของคุณในแบบฟอร์มด้านล่าง หากคุณเพิ่งซื้อ IP เฉพาะ คุณสามารถสร้างโทเค็นได้โดยไปที่เว็บไซต์ PIA";
+"dedicated.ip.token.textfield.placeholder" = "วางโทเค็นของคุณที่นี่";
+"dedicated.ip.token.textfield.accessibility" = "ช่องข้อความสำหรับพิมพ์โทเค็น IP เฉพาะ";
+"dedicated.ip.activate.button.title" = "เปิดการใช้งาน";
+"dedicated.ip.message.incorrect.token" = "โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
+"dedicated.ip.message.invalid.token" = "โทเค็นของคุณไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
+"dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
+"dedicated.ip.message.expired.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
+"dedicated.ip.message.error.retryafter" = "มีคำขอเปิดใช้งานโทเค็นที่ล้มเหลวมากเกินไป โปรดลองอีกครั้งหลังเวลาผ่านไป %@ วินาที";
+"dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
+"dedicated.ip.message.token.willexpire.link" = "รับใหม่";
+"dedicated.ip.message.ip.updated" = "อัปเดต IP เฉพาะของคุณแล้ว";
+"dedicated.ip.country.flag.accessibility" = "ธงประเทศสำหรับ %@";
+"dedicated.ip.remove" = "แน่ใจหรือไม่ว่าต้องการลบภูมิภาคที่เลือก";
+"dedicated.ip.limit.title" = "รักษาความปลอดภัยการเชื่อมต่อระยะไกลกับสินทรัพย์ใดๆ ด้วย IP เฉพาะจากประเทศที่คุณเลือก ในระหว่างการเป็นสมาชิกของคุณ IP นี้จะเป็นของคุณและของคุณคนเดียวโดยมีการป้องกันการถ่ายโอนข้อมูลด้วยการเข้ารหัสที่แข็งแกร่งที่สุด";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "โปรดรอ...";
+"server.reconnection.still.connection" = "ยังคงพยายามเชื่อมต่อ...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "แสดงข้อความสื่อสารบริการ";
+"inapp.messages.settings.updated" = "อัปเดตการตั้งค่าแล้ว";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "ภูมิภาค";
+"widget.liveActivity.selected_protocol.title" = "โปรโตคอล";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "ทั้งหมด";
+"regions.filter.search.title" = "ค้นหา";
+"regions.filter.favorites.title" = "รายการโปรด";
+"regions.list.all_locations.title" = "ตำแหน่งทั้งหมด";
+"regions.list.optimal_location.title" = "ตำแหน่งที่เหมาะสมที่สุด";
+"regions.list.optimal_location_with_dip_location.title" = "ตำแหน่งที่เหมาะสมที่สุด/IP เฉพาะ";
+"regions.search.recommended_locations.title" = "ตำแหน่งที่แนะนำ";
+"regions.search.results.title" = "ผลการค้นหา";
+"regions.search.button.title" = "ค้นหาตำแหน่ง";
+"regions.search.input_field.placeholder" = "ค้นหาเมืองหรือประเทศ";
+"regions.search.previous_results.title" = "ตำแหน่งที่ค้นหาล่าสุด";
+"regions.context_menu.favorites.add.text" = "เพิ่มในรายการโปรด";
+"regions.context_menu.favorites.remove.text" = "ลบออกจากรายการโปรด";
+"regions.list_item.default.title" = "ตำแหน่งเริ่มต้น";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "VPN PIA";
+"top_navigation_bar.location_item.title" = "ตำแหน่ง";
+"top_navigation_bar.location_selection_screen.title" = "การเลือกตำแหน่ง";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "ช่วยปรับปรุง PIA";
+"onboarding.connection_stats.subtitle" = "ช่วยเราปรับปรุงด้วยการแชร์สถิติการเชื่อมต่อ VPN โดยที่รายงานเหล่านี้จะไม่มีข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "กำหนดค่า PIA";
+"onboarding.vpn_configuration.subtitle" = "เมื่อเชื่อมต่อเป็นครั้งแรก คุณจะถูกขอให้อนุญาตให้ PIA เข้าถึงการกำหนดค่า VPN นี่เป็นสิ่งจำเป็นเพื่อเข้ารหัสการรับส่งข้อมูลของคุณ \n\nโปรดจำไว้ว่าเราไม่ตรวจสอบ กรอง หรือบันทึกกิจกรรมออนไลน์ของคุณ \n\nหากต้องการดำเนินการต่อ ให้คลิกที่ปุ่มด้านล่าง";
+"onboarding.vpn_configuration.button" = "กำหนดค่า PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "VPN ที่รวดเร็วและปลอดภัยสำหรับการสตรีม";
+"tvos.welcome.button.login" = "เข้าสู่ระบบ";
+"tvos.welcome.button.signup" = "ลงชื่อเข้าใช้";
+
+//Login (tvOS)
+"tvos.login.title" = "ป้อนรายละเอียดบัญชี VPN PIA ของคุณ";
+"tvos.login.placeholder.username" = "กรอกชื่อผู้ใช้";
+"tvos.login.placeholder.password" = "กรอกรหัสผ่าน";
+
+"tvos.login.qr.title" = "ลงชื่อเข้าใช้ด้วยแอป PIA";
+"tvos.login.qr.description" = "สแกนรหัส QR และตรวจสอบข้อมูลการเข้าสู่ระบบจากแอป PIA iOS";
+"tvos.login.qr.timer" = "รหัสจะหมดอายุใน:";
+"tvos.login.qr.options" = "ตัวเลือกอื่น:";
+"tvos.login.qr.button.login" = "เข้าสู่ระบบผ่านชื่อผู้ใช้";
+"tvos.login.qr.button.restore" = "คืนค่าการซื้อ";
+
+"tvos.login.qr.expired.title" = "รหัส QR หมดอายุแล้ว";
+"tvos.login.qr.expired.description" = "สร้างรหัสใหม่ด้านล่าง";
+"tvos.login.qr.expired.button.generate" = "สร้าง QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "ไม่สามารถเชื่อมต่อได้";
+"error_alert.connection_error.no_network.message" = "โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง";
+"error_alert.connection_error.no_network.retry_action.title" = "ลองอีกครั้ง";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "ตำแหน่งที่เหมาะสมที่สุด";
+"location_selection.any_other_location.title" = "ตำแหน่งที่เลือก";
+"dashboard.connection_state.connected.title" = "เชื่อมต่อ";
+"dashboard.connection_state.disconnected.title" = "ไม่ได้เชื่อมต่อ";
+"dashboard.connection_state.connecting.title" = "กำลังเชื่อมต่อ...";
+"dashboard.connection_state.reconnecting.title" = "เชื่อมต่ออีกครั้ง...";
+"dashboard.connection_state.disconnecting.title" = "กำลังยกเลิกการเชื่อมต่อ...";
+"dashboard.connection_state.error.title" = "การเชื่อมต่อล้มเหลว";
+"dashboard.connection_state.network_error_alert.message" = "โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "ลองอีกครั้ง";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "ออกจากระบบ";
+"settings.account.log_out_alert.title" = "คุณแน่ใจหรือไม่";
+"settings.account.log_out_alert.message" = "การออกจากระบบจะยุติการเชื่อมต่อ VPN ที่ใช้งานอยู่ และทำให้คุณไม่ได้รับการป้องกัน";
+"settings.account.subscription_expiry.title" = "การสมัครสมาชิกจะหมดอายุในวันที่";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "กรอก IP เฉพาะ";
+"settings.dedicatedip.title2" = "IP เฉพาะ";
+"settings.dedicatedip.subtitle" = "เปิดใช้งาน IP เฉพาะของคุณโดยพิมพ์โทเค็นของคุณในช่อง \n ด้านล่าง คุณสามารถซื้อ IP เฉพาะได้จาก \nแผงควบคุมไคลเอนต์ของคุณบนเว็บไซต์ PIA";
+"settings.dedicatedip.placeholder" = "กรอกโทเค็น IP เฉพาะของคุณ";
+"settings.dedicatedip.button" = "เปิดการใช้งาน";
+"settings.dedicatedip.alert.failure.title" = "มีบางอย่างผิดพลาด";
+"settings.dedicatedip.alert.failure.message" = "โทเค็นของคุณไม่ถูกต้องหรือหมดอายุแล้ว";
+"settings.dedicatedip.alert.failure.message.empty" = "โทเค็นของคุณไม่สามารถเว้นว่างได้";
+"settings.dedicatedip.alert.success.title" = "คุณตั้งค่าเรียบร้อยแล้ว";
+"settings.dedicatedip.alert.success.message" = "IP เฉพาะของคุณเปิดใช้งานแล้ว";
+"settings.dedicatedip.alert.success.button" = "ดำเนินการต่อ";
+
+"settings.dedicatedip.stats.dedicatedip" = "IP เฉพาะ";
+"settings.dedicatedip.stats.ip" = "ที่อยู่ IP";
+"settings.dedicatedip.stats.location" = "ตำแหน่ง";
+"settings.dedicatedip.stats.quickAction" = "การดำเนินการด่วน";
+"settings.dedicatedip.stats.delete.button" = "ลบ IP เฉพาะ";
+"settings.dedicatedip.stats.delete.alert.title" = "คุณแน่ใจหรือไม่";
+"settings.dedicatedip.stats.delete.alert.message" = "คุณกำลังจะลบ IP เฉพาะของคุณออกจากบัญชีของคุณ";
+"settings.dedicatedip.stats.delete.alert.delete" = "ใช่ ลบ";
+
+"settings.dedicatedip.status.active" = "เปิดการใช้งาน";
+"settings.dedicatedip.status.invalid" = "ไม่ถูกต้อง";
+"settings.dedicatedip.status.expired" = "หมดอายุ";
+"settings.dedicatedip.status.error" = "ข้อผิดพลาด";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "เวอร์ชันของแอป";
+"help_menu.contact_support.qr_code.title" = "ติดต่อฝ่ายสนับสนุน";
+"help_menu.contact_support.qr_code.message" = "สแกนรหัส QR เพื่อติดต่อกับทีมสนับสนุนของเรา";
+
+"help_menu.about_options.acknowledgements.title" = "รับทราบ";
+"help_menu.about_options.privacy_policy.title" = "นโยบายความเป็นส่วนตัว";
+
+"help_menu.about_section.privacy_policy.description" = "นโยบายความเป็นส่วนตัวนี้ ('นโยบายความเป็นส่วนตัว' หรือ 'นโยบาย') อธิบายหลักปฏิบัติด้านความเป็นส่วนตัวของ Private Internet Access, Inc. (เรียกรวมกันว่า 'เรา', 'พวกเรา', 'ผู้ควบคุมข้อมูล', 'บริษัท' หรือ 'PIA') และนำไปใช้กับผู้ใช้ ('ผู้ใช้' หรือ 'คุณ') ของบริการของ PIA รวมถึงเหนือสิ่งอื่นใด บริการ VPN PIA ('บริการ') และเว็บไซต์ PIA ที่ www.privateinternetaccess.com ('เว็บไซต์')";
+"help_menu.about_section.privacy_policy.qr_code.message" = "สแกนรหัส QR เพื่อเข้าถึงนโยบายความเป็นส่วนตัวฉบับเต็มบนอุปกรณ์ของคุณ";
+
+"help_menu.help_improve.enabled.title" = "เปิด";
+"help_menu.help_improve.disabled.title" = "ปิด";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "ลิขสิทธิ์ของ 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "Our Software as a Service (SaaS) platform may occasionally include third-party content, services, or integrations to enhance user experience and functionality. This content may include but is not limited to, APIs, widgets, plugins, or links to external websites. While we strive to ensure the quality and reliability of third-party content, we want to emphasize that such content is provided 'as is' and we do not endorse or guarantee the accuracy, reliability, or suitability of any third-party content.\n\nUsers should be aware that accessing or utilizing third-party content may subject them to the terms of use, privacy policies, and other agreements of those third-party providers. We encourage users to review such terms and policies before engaging with third-party content.";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "รับ Private Internet Access";
+"tvos.signup.item1" = "เซิร์ฟเวอร์ VPN ใน 91 ประเทศ";
+"tvos.signup.item2" = "ความเร็วอันรวดเร็วทันใจ";
+"tvos.signup.item3" = "การสนับสนุนลูกค้าตลอด 24 ชั่วโมงทุกวัน";
+"tvos.signup.cta" = "Scan the QR Code and download the app to create a new account.";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "การสมัครสมาชิกของคุณหมดอายุแล้ว";
+"tvos.signin.expired.subtitle" = "ต่ออายุและรับการป้องกัน VPN เต็มรูปแบบขณะสตรีมมิ่ง";
+"tvos.signin.expired.qr.title1" = "สแกนรหัส QR และเลือกแผนของคุณ การสมัครใช้เวลาเพียงไม่กี่นาที";
+"tvos.signin.expired.qr.title2" = "เมื่อเสร็จแล้ว กลับมาที่ Apple TV ของคุณและเพลิดเพลินกับความเป็นส่วนตัวดิจิทัลที่ได้รับการปรับปรุงด้วย PIA!";
+"tvos.signin.expired.button.renewed" = "ฉันต่ออายุแล้ว";
+"tvos.signin.expired.button.signout" = "ออกจากระบบ";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "การทดลองใช้ฟรีของคุณหมดอายุแล้ว";
+"tvos.signin.expired.trial.subtitle" = "หากคุณเพลิดเพลินกับการป้องกัน VPN ระดับพรีเมียม สมัครสมาชิก PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "เริ่มการทดลองใช้ฟรี 7 วันของคุณ จากนั้น %@ ต่อปี";
+"tvos.signup.subscription.paywall.price.year" = " ต่อปี";
+"tvos.signup.subscription.paywall.price.trial" = "คุ้มค่าที่สุด - ทดลองใช้ฟรี";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/เดือน";
+"tvos.signup.subscription.paywall.button.subscribe" = "สมัครสมาชิกตอนนี้";
+
+"tvos.signup.subscription.error.message.generic" = "เกิดข้อผิดพลาด โปรดลองอีกครั้ง";
+"tvos.signup.subscription.error.message.paymentCancelled" = "การชำระเงินถูกยกเลิก กรุณาลองอีกครั้ง";
+
+"tvos.signup.email.error.message.generic" = "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งในภายหลัง";
+
+"tvos.signup.credentials.title" = "สำเร็จ!";
+"tvos.signup.credentials.details.title" = "การใช้บัตรเสร็จสมบูรณ์";
+"tvos.signup.credentials.details.subtitle" = "คุณจะได้รับอีเมลในไม่ช้า พร้อมชื่อผู้ใช้และรหัสผ่านของคุณด้วย";
+
+"tvos.signup.credentials.details.button" = "เริ่มต้น";
+
+"tvos.signup.terms_conditions.title" = "ข้อกำหนดและเงื่อนไข";
+
+"tvos.signup.terms_conditions.description" = "ข้อตกลงเงื่อนไขการบริการนี้ ('ข้อตกลง') ครอบคลุมขอบเขตการใช้งานและการเข้าถึงเว็บไซต์ (“ไซต์”) PIA Private Internet Access, Inc. ('PIA') ซึ่งอยู่ที่ www.privateinternetaccess.com เครือข่ายส่วนตัวเสมือน ('VPN') และบริการของ PIA ที่ให้บริการผ่านไซต์ ('บริการ') โดยการเยี่ยมชมเว็บไซต์ การซื้อการสมัครสมาชิก และ/หรือการใช้บริการ คุณ ('คุณ' หรือ 'สมาชิก') ('PIA' และ 'สมาชิก' เรียกรวมกันว่า 'คู่สัญญา') รับทราบว่าคุณได้อ่านข้อตกลงโดยครบถ้วน เข้าใจข้อกำหนด และตกลงที่จะผูกพันตามข้อกำหนดทั้งหมดของข้อตกลง";
+"tvos.signup.terms_conditions.qr_code.message" = "สแกนรหัส QR เพื่อเข้าถึงนโยบายความเป็นส่วนตัวฉบับเต็มบนอุปกรณ์ของคุณ";
+
+//Force update (iOS)
+"forceupdate.label.title" = "อัพเกรดประสบการณ์ของคุณ";
+"forceupdate.label.subtitle" = "คุณกำลังใช้ PIA เวอร์ชันเก่า อัปเดตแอปของคุณตอนนี้เพื่อเพลิดเพลินกับประสบการณ์ที่ดียิ่งขึ้นด้วยฟีเจอร์ล่าสุดทั้งหมด";
+"forceupdate.button.update" = "อัปเดตทันที";
+"forceupdate.label.vpn.connected" = "การแตะ \"อัปเดตทันที\" จะยกเลิกการเชื่อมต่อ VPN";
+
+"global.version.format" = "เวอร์ชั่น %@ (%@)";
+
+"signup.in_progress.title"= "ยืนยันการสมัคร";
+"signup.in_progress.message"= "เรากำลังยืนยันการซื้อของคุณกับระบบของเรา กรุณารอสักครู่";
+
+"signup.success.title"= "ซื้อสำเร็จ";
+"signup.success.message_format"= "ขอบคุณที่สมัครสมาชิกกับเรา เราได้ส่งชื่อผู้ใช้และรหัสผ่านไปยังอีเมลของคุณแล้วที่ %@";
+"signup.success.redeem.title"= "คืนบัตรเสร็จสมบูรณ์!";
+"signup.success.redeem.message"= "คุณจะได้รับอีเมลพร้อมชื่อผู้ใช้และรหัสผ่านในไม่ช้า\n\nข้อมูลการล็อกอิน";
+"signup.success.username.caption"= "ชื่อผู้ใช้";
+"signup.success.password.caption"= "รหัสผ่าน";
+"signup.success.submit"= "เริ่มใช้งาน";
+
+"signup.failure.vc_title"= "การสมัครล้มเหลว";
+"signup.failure.title"= "สร้างบัญชีผู้ใช้ไม่สำเร็จ";
+"signup.failure.message"= "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
+"signup.failure.purchase.sandbox.message"= "ไม่มีระบบสมาชิก Sandbox ที่คุณเลือกอยู่ในการผลิต";
+"signup.failure.redeem.invalid.title"= "PIN การ์ดไม่ถูกต้อง";
+"signup.failure.redeem.invalid.message"= "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
+"signup.failure.redeem.claimed.title"= "บัตรมีการใช้สิทธิ์แล้ว";
+"signup.failure.redeem.claimed.message"= "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
+"signup.failure.submit"= "ย้อนกลับ";
+"signup.failure.internal"= "ข้อผิดพลาดภายในแอป (%d)";
+"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %s (%d)";
+
+"signup.unreachable.vc_title"= "ข้อผิดพลาด";
+"signup.unreachable.title"= "อุ๊ปส์!";
+"signup.unreachable.message"= "ไม่พบการเชื่อมต่ออินเทอร์เน็ต กรุณายืนยันว่าคุณมีการเชื่อมต่ออินเทอร์เน็ตแล้วกดลองอีกครั้งด้านล่างนี้\n\nคุณสามารถกลับมาใหม่ในภายหลังเพื่อดำเนินการต่อให้เสร็จ";
+"signup.unreachable.submit"= "ลองใหม่";
+
+"signup.purchase.uncredited.alert.message"= "คุณได้ยกเลิกการทำธุรกรรมแล้ว คุณต้องการกู้คืนรายละเอียดบัญชีหรือไม่";
+"signup.purchase.uncredited.alert.button.cancel"= "ยกเลิก";
+
+"signup.purchase.trials.intro"= "เริ่มทดลองใช้ฟรี 7 วัน";
+"signup.purchase.trials.price.after"= "จากนั้น %@";
+"signup.purchase.trials.region"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
+
+"signup.purchase.subscribe.now"= "สมัครสมาชิกตอนนี้";
+
+// WALKTHROUGH
+
+"signup.walkthrough.page.2.title"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
+"signup.walkthrough.page.2.description"= "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
+
+"signup.share.data.buttons.accept"= "ยอมรับ";
+"signup.share.data.buttons.noThanks"= "ไม่ล่ะ ขอบคุณ";
+"signup.share.data.buttons.readMore"= "อ่านเพิ่มเติม";
+"signup.share.data.text.title"= "โปรดช่วยเราปรับปรุงบริการของเรา";
+"signup.share.data.text.description"= "เพื่อช่วยให้เรามั่นใจในประสิทธิภาพการเชื่อมต่อของบริการของเรา คุณสามารถแชร์สถิติการเชื่อมต่อของคุณกับเราโดยไม่ระบุชื่อ รายงานเหล่านี้ไม่รวมข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
+"signup.share.data.text.footer"= "คุณสามารถควบคุมสิ่งนี้ได้จากการตั้งค่าของคุณ";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "ลงชื่อเข้าใช้บัญชีของคุณ";
+"welcome.login.username.placeholder"= "ชื่อผู้ใช้ (p1234567)";
+"welcome.login.password.placeholder"= "รหัสผ่าน";
+"welcome.login.submit"= "เข้าสู่ระบบ";
+"welcome.login.restore.button"= "ยังไม่ได้รับรายละเอียดบัญชีหรือ";
+"welcome.login.error.title"= "เข้าสู่ระบบ";
+"welcome.login.error.validation"= "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
+"welcome.login.error.unauthorized"= "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "เข้าสู่ระบบโดยใช้ใบเสร็จรับเงิน";
+"welcome.login.magic.link.title"= "เข้าสู่ระบบโดยใช้ลิงก์อีเมลวิเศษ";
+"welcome.login.magic.link.response"= "โปรดตรวจสอบอีเมลของคุณเพื่อดูลิงค์สำหรับเข้าสู่ระบบ";
+"welcome.login.magic.link.send"= "ส่งลิงก์";
+
+"welcome.purchase.title"= "เลือกแผน VPN";
+"welcome.purchase.subtitle"= "รับประกันการคืนเงินภายใน 30 วัน";
+"welcome.purchase.email.placeholder"= "อีเมลแอดเดรส";
+"welcome.purchase.continue"= "ดำเนินการต่อ";
+"welcome.purchase.error.connectivity.title"= "ความล้มเหลวในการเชื่อมต่อ";
+"welcome.purchase.confirm.form.email"= "กรุณากรอกอีเมลของคุณ";
+"welcome.purchase.email.why"= "โปรดแจ้งอีเมลสำหรับส่งชื่อผู้ใช้และรหัสผ่านของคุณ";
+"welcome.purchase.submit"= "ส่ง";
+"welcome.purchase.or"= "หรือ";
+
+"welcome.upgrade.header"= "ยินดีต้อนรับกลับมา!";
+"welcome.upgrade.title"= "หากต้องการใช้ Private Internet Access คุณจะต้องต่ออายุสมาชิกของคุณ";
+"welcome.upgrade.renew.now"= "ต่ออายุตอนนี้";
+
+"welcome.redeem.title"= "ใช้สิทธิ์บัตรของขวัญ";
+"welcome.redeem.accessibility.back"= "กลับ";
+
+"welcome.plan.monthly.title"= "รายเดือน";
+"welcome.plan.yearly.title"= "รายปี";
+"welcome.plan.yearly.detail_format"= "%@%@ ต่อปี";
+"welcome.plan.price_format"= "%@/เดือน";
+"welcome.plan.best_value"= "คุ้มค่าที่สุด";
+"welcome.plan.accessibility.per_month"= "ต่อเดือน";
+
+"welcome.restore.title"= "คืนค่าการซื้อยังไม่ได้คิดเครดิต";
+"welcome.restore.subtitle"= "หากคุณทำการซื้อแผนผ่านแอพนี้และยังไม่ได้รับข้อมูลประจำตัว คุณสามารถส่งอีกครั้งได้จากที่นี่ คุณจะไม่ถูกเรียกเก็บเงินซ้ำอีกครั้งในกระบวนการนี้";
+"welcome.restore.email.placeholder"= "อีเมลแอดเดรส";
+"welcome.restore.submit"= "ยืนยัน";
+
+"welcome.iap.error.title"= "ข้อผิดพลาด";
+
+"welcome.agreement.message"= "หลังจากทดลองใช้ฟรี 7 วัน ระบบจะต่ออายุสมาชิกนี้โดยอัตโนมัติในราคา %@ เว้นแต่จะมีการยกเลิกล่วงหน้าอย่างน้อย 24 ชั่วโมงก่อนที่จะสิ้นสุดรอบใช้งานปัจจุบัน บัญชี Apple ID ของคุณจะถูกเรียกเก็บเงินค่าต่ออายุสมาชิกภายใน 24 ชั่วโมงก่อนสิ้นสุดรอบใช้งานปัจจุบัน คุณสามารถจัดการและยกเลิกการเป็นสมาชิกได้โดยไปที่การตั้งค่าบัญชีใน App Store หลังจากซื้อแล้ว จำกัดสิทธิ์การทดลองใช้ฟรี 7 วัน เพียง 1 สิทธิ์ต่อผู้ใช้หนึ่งราย ส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรีหากมีให้จะถูกริบเมื่อผู้ใช้ซื้อการสมัครสมาชิก ราคาทั้งหมดรวมภาษีการขายในท้องที่\n\nการลงทะเบียนจะถือว่าคุณยินยอมตาม $1 และ $2";
+
+"welcome.agreement.message.tos"= "ข้อตกลงการใช้บริการ";
+"welcome.agreement.message.privacy"= "นโยบายความเป็นส่วนตัว";
+
+"welcome.gdpr.collect.data.title"= "ข้อมูลส่วนบุคคลที่เรารวบรวม";
+"welcome.gdpr.collect.data.description"= "อีเมลเพื่อจุดประสงค์ในการจัดการและการป้องกันบัญชีจากการใช้งานในทางที่ผิด";
+"welcome.gdpr.usage.data.description"= "ที่อยู่อีเมลใช้ในการส่งข้อมูลการสมัครสมาชิก การยืนยันการชำระเงิน การติดต่อกับลูกค้า และข้อเสนอส่งเสริมการขาย Private Internet Access เท่านั้น";
+"welcome.gdpr.accept.button.title"= "ยอมรับและดำเนินการต่อ";
+
+"welcome.update.account.email.error"= "ไม่สามารถแก้ไขอีเมลบัญชีได้";

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct DedicatedIpDetailsView: View {
     private let dedicatedIPStats: [DedicatedIpData]
@@ -56,10 +57,10 @@ struct DedicatedIpDetailsView: View {
                     Spacer()
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(L10n.Localizable.Settings.Dedicatedip.Stats.quickAction)
+                        Text(L10n.Settings.Dedicatedip.Stats.quickAction)
                             .font(.system(size: 38))
                             .foregroundStyle(.piaSurfaceContainerSecondary)
-                        ActionButton(title: L10n.Localizable.Settings.Dedicatedip.Stats.Delete.button, style: actionButtonStyle) {
+                        ActionButton(title: L10n.Settings.Dedicatedip.Stats.Delete.button, style: actionButtonStyle) {
                             shouldShowConfirmDialog = true
                         }.frame(height: 55)
                     }
@@ -72,14 +73,14 @@ struct DedicatedIpDetailsView: View {
                     .padding(.trailing)
             }
         }.padding(EdgeInsets(top: 100, leading: 0, bottom: 0, trailing: 0))
-            .alert(L10n.Localizable.Settings.Dedicatedip.Stats.Delete.Alert.title, isPresented: $shouldShowConfirmDialog, actions: {
+            .alert(L10n.Settings.Dedicatedip.Stats.Delete.Alert.title, isPresented: $shouldShowConfirmDialog, actions: {
                     Button(role: .destructive) {
                         onDeleteDIPAction()
                     } label: {
-                        Text(L10n.Localizable.Settings.Dedicatedip.Stats.Delete.Alert.delete)
+                        Text(L10n.Settings.Dedicatedip.Stats.Delete.Alert.delete)
                     }
                 }, message: {
-                    Text(L10n.Localizable.Settings.Dedicatedip.Stats.Delete.Alert.message)
+                    Text(L10n.Settings.Dedicatedip.Stats.Delete.Alert.message)
             })
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 struct DedicatedIpData {
     let id = UUID()
@@ -40,9 +41,9 @@ class DedicatedIPViewModel: ObservableObject {
         }
         Task { @MainActor in
             dedicatedIPStats = [
-                DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, description: dipStatusString),
-                DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.ip, description: dipIKEv2IP),
-                DedicatedIpData(title: L10n.Localizable.Settings.Dedicatedip.Stats.location, description: server.name + " (\(server.country))")
+                DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: dipStatusString),
+                DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: dipIKEv2IP),
+                DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: server.name + " (\(server.country))")
             ]
         }
     }

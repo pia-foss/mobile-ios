@@ -22,6 +22,7 @@
 import UIKit
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 class DedicatedIPTitleHeaderViewCell: UITableViewCell {
 
@@ -31,7 +32,7 @@ class DedicatedIPTitleHeaderViewCell: UITableViewCell {
         super.awakeFromNib()
         titleLabel.style(style: TextStyle.textStyle9)
         titleLabel.font = UIFont.mediumFontWith(size: 14.0)
-        titleLabel.text =  L10n.Localizable.Dedicated.Ip.Plural.title.uppercased()
+        titleLabel.text =  L10n.Dedicated.Ip.Plural.title.uppercased()
         self.backgroundColor = .clear
     }
 

@@ -1,6 +1,7 @@
 
 
 import SwiftUI
+import PIALocalizations
 
 
 struct PIAConnectionButton: View {
@@ -46,11 +47,11 @@ struct PIAConnectionButton: View {
             Button(viewModel.errorAlertCloseActionTitle, role: .cancel) {
                 
             }
-            Button(L10n.Localizable.Dashboard.ConnectionState.NetworkErrorAlert.PrimaryAction.title, role: .none) {
+            Button(L10n.Dashboard.ConnectionState.NetworkErrorAlert.PrimaryAction.title, role: .none) {
                 viewModel.toggleConnection()
             }
         } message: {
-            Text(L10n.Localizable.Dashboard.ConnectionState.NetworkErrorAlert.message)
+            Text(L10n.Dashboard.ConnectionState.NetworkErrorAlert.message)
         }
     }
     

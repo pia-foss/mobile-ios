@@ -27,6 +27,7 @@ import TunnelKitOpenVPN
 #endif
 import Intents
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AppPreferences.self)
 
@@ -240,7 +241,7 @@ class AppPreferences {
     
     var todayWidgetVpnStatus: String? {
         get {
-            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Localizable.Today.Widget.login
+            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Today.Widget.login
         }
         set {
             defaults.set(newValue, forKey: Entries.todayWidgetVpnStatus)
@@ -595,7 +596,7 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
-            Entries.todayWidgetButtonTitle: L10n.Localizable.Today.Widget.login,
+            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
             
             Entries.todayWidgetVpnProtocol: PIAWGTunnelProfile.vpnType,
             
@@ -867,8 +868,8 @@ class AppPreferences {
         ikeV2UseSmallPackets = false
         wireGuardUseSmallPackets = false
         #if os(iOS)
-        todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
-        todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
+        todayWidgetVpnStatus = L10n.Today.Widget.login
+        todayWidgetButtonTitle = L10n.Today.Widget.login
         todayWidgetVpnProtocol = PIAWGTunnelProfile.vpnType
         #endif
         todayWidgetVpnPort = "1337"

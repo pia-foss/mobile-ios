@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct SignupView: View {
     @StateObject var viewModel: SignupViewModel
@@ -20,7 +21,7 @@ struct SignupView: View {
                     
                     Image.onboarding_pia_brand
                     
-                    Text(L10n.Localizable.Tvos.Welcome.Button.signup)
+                    Text(L10n.Tvos.Welcome.Button.signup)
                         .font(.system(size: 76))
                         .foregroundColor(.piaOnBackground)
                         
@@ -42,9 +43,9 @@ struct SignupView: View {
         }.onAppear {
             viewModel.getproducts()
         }.alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Localizable.Global.ok) {}
+            Button(L10n.Global.ok) {}
         }, message: {
-            Text(viewModel.errorMessage ?? L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+            Text(viewModel.errorMessage ?? L10n.Tvos.Signup.Subscription.Error.Message.generic)
     })
     }
 }

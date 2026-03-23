@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import StoreKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: PurchasePlanCell.self)
 

@@ -26,6 +26,7 @@ import SwiftEntryKit
 import PopupDialog
 import PIALibrary
 import PIADesignSystem
+import PIALocalizations
 
 extension Macros {
 
@@ -129,7 +130,7 @@ extension Macros {
         }
         let versionNumber = info["CFBundleShortVersionString"] as! String
         let buildNumber = info[kCFBundleVersionKey as String] as! String
-        return L10n.Ui.Global.Version.format(versionNumber, buildNumber)
+        return L10n.Global.Version.format(versionNumber, buildNumber)
     }
     
     /**

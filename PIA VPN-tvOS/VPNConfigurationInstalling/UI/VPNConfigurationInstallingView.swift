@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct VPNConfigurationInstallingView: View {
     @ObservedObject private var viewModel: VPNConfigurationInstallingViewModel
@@ -20,7 +21,7 @@ struct VPNConfigurationInstallingView: View {
     var body: some View {
         OnboardingComponentView(viewModel: viewModel, style: style)
             .alert("PIA", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Localizable.Global.ok) {
+            Button(L10n.Global.ok) {
                 Task {
                     viewModel.install()
                 }

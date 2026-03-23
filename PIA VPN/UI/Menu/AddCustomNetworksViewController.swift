@@ -21,6 +21,7 @@
 
 import UIKit
 import PIALibrary
+import PIALocalizations
 
 class AddCustomNetworksViewController: AutolayoutViewController {
 
@@ -127,7 +128,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.header, for: indexPath) as! PIAHeaderCollectionViewCell
-        headerView.setup(withTitle: L10n.Localizable.Network.Management.Tool.Add.rule, andSubtitle: L10n.Localizable.Network.Management.Tool.Choose.wifi + L10n.Localizable.Settings.Hotspothelper.Available.help)
+        headerView.setup(withTitle: L10n.Network.Management.Tool.Add.rule, andSubtitle: L10n.Network.Management.Tool.Choose.wifi + L10n.Settings.Hotspothelper.Available.help)
         return headerView
 
     }
@@ -136,7 +137,7 @@ extension AddCustomNetworksViewController: UICollectionViewDelegateFlowLayout, U
 
         let nib = UINib(nibName: Cells.header, bundle: nil)
         let headerView = nib.instantiate(withOwner: nil, options: nil).first as! PIAHeaderCollectionViewCell
-        headerView.setup(withTitle: L10n.Localizable.Network.Management.Tool.Add.rule, andSubtitle: L10n.Localizable.Network.Management.Tool.Choose.wifi + L10n.Localizable.Settings.Hotspothelper.Available.help)
+        headerView.setup(withTitle: L10n.Network.Management.Tool.Add.rule, andSubtitle: L10n.Network.Management.Tool.Choose.wifi + L10n.Settings.Hotspothelper.Available.help)
 
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .defaultHigh,

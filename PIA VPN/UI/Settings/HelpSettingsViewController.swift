@@ -23,6 +23,7 @@ import UIKit
 import PIALibrary
 import SafariServices
 import PIADesignSystem
+import PIALocalizations
 
 private let log = PIALogger.logger(for: HelpSettingsViewController.self)
 
@@ -60,7 +61,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.help)
+        styleNavigationBarWithTitle(L10n.Settings.Section.help)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -109,7 +110,7 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.help)
+        styleNavigationBarWithTitle(L10n.Settings.Section.help)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -142,7 +143,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         
         switch section {
         case HelpSections.debugLogging.rawValue:
-            cell.textLabel?.text = L10n.Localizable.Settings.Log.information
+            cell.textLabel?.text = L10n.Settings.Log.information
         case HelpSections.kpiShareStatistics.rawValue:
             configureShareDataFooterCell(cell)
         default:
@@ -242,9 +243,9 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     
     private func setupShareDataInformationLabel(_ label: UILabel?) {
         let attributedString = NSMutableAttributedString()
-        let description = L10n.Localizable.Settings.Service.Quality.Share.description
+        let description = L10n.Settings.Service.Quality.Share.description
         let carriageReturn = "\n"
-        let findOutMore = L10n.Localizable.Settings.Service.Quality.Share.findoutmore
+        let findOutMore = L10n.Settings.Service.Quality.Share.findoutmore
         attributedString.append(NSAttributedString(string: description+carriageReturn,
                                                    attributes: [.underlineStyle: 0]))
         attributedString.append(NSAttributedString(string: findOutMore,
@@ -288,23 +289,23 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
 
             defer {
                 let alert = Macros.alert(title, message)
-                alert.addDefaultAction(L10n.Localizable.Global.ok)
+                alert.addDefaultAction(L10n.Global.ok)
                 self.present(alert, animated: true, completion: nil)
             }
 
             guard let reportId = reportIdentifier else {
-                title = L10n.Localizable.Settings.ApplicationInformation.Debug.Failure.title
-                message = L10n.Localizable.Settings.ApplicationInformation.Debug.Failure.message
+                title = L10n.Settings.ApplicationInformation.Debug.Failure.title
+                message = L10n.Settings.ApplicationInformation.Debug.Failure.message
                 return
             }
             guard !reportId.isEmpty else {
-                title = L10n.Localizable.Settings.ApplicationInformation.Debug.Empty.title
-                message = L10n.Localizable.Settings.ApplicationInformation.Debug.Empty.message
+                title = L10n.Settings.ApplicationInformation.Debug.Empty.title
+                message = L10n.Settings.ApplicationInformation.Debug.Empty.message
                 return
             }
 
-            title = L10n.Localizable.Settings.ApplicationInformation.Debug.Success.title
-            message = L10n.Localizable.Settings.ApplicationInformation.Debug.Success.message(reportId)
+            title = L10n.Settings.ApplicationInformation.Debug.Success.title
+            message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
         }
     }
 
