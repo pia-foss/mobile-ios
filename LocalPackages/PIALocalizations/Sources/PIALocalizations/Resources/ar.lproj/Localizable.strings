@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "ابدأ تجربتك المجانية لمدة 7 ايام";
 "signup.purchase.trials.price.after"= "ثم %@";
 "signup.purchase.trials.region"= "خوادم آمنة في أكثر من 90 دولة";
-"signup.purchase.trials.all.plans"= "مشاهدة جميع الخطط المتاحة";
 
 "signup.purchase.subscribe.now"= "اشتراك الآن";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "يدعم 10 أجهزة في المرة الواحدة";
-"signup.walkthrough.page.1.description"= "احمي نفسك على ما يصل إلى 10 أجهزة في وقت واحد.";
 "signup.walkthrough.page.2.title"= "خوادم آمنة في أكثر من 90 دولة";
 "signup.walkthrough.page.2.description"= "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
-"signup.walkthrough.page.3.title"= "احمي نفسك من الإعلانات";
-"signup.walkthrough.page.3.description"= "تمكين ميزة حظر المحتوى يمنع الإعلانات من الظهور في Safari.";
 
 "signup.share.data.buttons.accept"= "قبول";
 "signup.share.data.buttons.noThanks"= "لا، شكرًا";

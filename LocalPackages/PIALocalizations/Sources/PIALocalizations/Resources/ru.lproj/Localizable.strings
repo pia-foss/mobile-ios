@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "Начните 7-дневную бесплатную пробу";
 "signup.purchase.trials.price.after"= "После этого %@";
 "signup.purchase.trials.region"= "Защищенные серверы в более чем 90 странах";
-"signup.purchase.trials.all.plans"= "Смотреть все доступные планы";
 
 "signup.purchase.subscribe.now"= "Подписаться";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "Поддержка 10 устройств одновременно";
-"signup.walkthrough.page.1.description"= "Защищайте себя на нескольких устройствах одновременно (до 10).";
 "signup.walkthrough.page.2.title"= "Защищенные серверы в более чем 90 странах";
 "signup.walkthrough.page.2.description"= "У нас есть серверы по всему миру, так что вы всегда будете под защитой.";
-"signup.walkthrough.page.3.title"= "Защита от рекламы";
-"signup.walkthrough.page.3.description"= "Активация нашего правила блокирования контента препятствует отображению рекламы в Safari.";
 
 "signup.share.data.buttons.accept"= "Принять";
 "signup.share.data.buttons.noThanks"= "Спасибо, не надо";

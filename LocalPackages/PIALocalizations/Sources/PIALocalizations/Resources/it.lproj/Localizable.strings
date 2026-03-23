@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "Inizia la tua prova gratuita da 7 giorni";
 "signup.purchase.trials.price.after"= "Poi a %@";
 "signup.purchase.trials.region"= "Server sicuri in oltre 90 paesi";
-"signup.purchase.trials.all.plans"= "Vedi tutti i piani disponibili";
 
 "signup.purchase.subscribe.now"= "Iscriviti ora";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "Supporta 10 dispositivi alla volta";
-"signup.walkthrough.page.1.description"= "Proteggi te stesso su un massimo di 10 dispositivi alla volta.";
 "signup.walkthrough.page.2.title"= "Server sicuri in oltre 90 paesi";
 "signup.walkthrough.page.2.description"= "Con server in tutto il mondo, sei sempre protetto.";
-"signup.walkthrough.page.3.title"= "Proteggiti dalle pubblicità";
-"signup.walkthrough.page.3.description"= "Abilitando il nostro Blocco dei contenuti non visualizzerai la pubblicità mentre navighi con Safari.";
 
 "signup.share.data.buttons.accept"= "Accetta";
 "signup.share.data.buttons.noThanks"= "No, grazie";

@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "Start your 7-day free trial";
 "signup.purchase.trials.price.after"= "Then %@";
 "signup.purchase.trials.region"= "Secure servers in 90+ countries";
-"signup.purchase.trials.all.plans"= "See all available plans";
 
 "signup.purchase.subscribe.now"= "Subscribe now";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "Support 10 devices at once";
-"signup.walkthrough.page.1.description"= "Protect yourself on up to 10 devices at a time.";
 "signup.walkthrough.page.2.title"= "Secure servers in 90+ countries";
 "signup.walkthrough.page.2.description"= "With servers around the globe, you are always under protection.";
-"signup.walkthrough.page.3.title"= "Protect yourself from ads";
-"signup.walkthrough.page.3.description"= "Enabling our Content Blocker prevents ads from showing in Safari.";
 
 "signup.share.data.buttons.accept"= "Accept";
 "signup.share.data.buttons.noThanks"= "No, thanks";

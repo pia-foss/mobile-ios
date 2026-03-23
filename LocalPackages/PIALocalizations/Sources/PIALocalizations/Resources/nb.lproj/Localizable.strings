@@ -553,18 +553,13 @@
 "signup.purchase.trials.intro"= "Start din gratis 7-dagers prøveperiode";
 "signup.purchase.trials.price.after"= "Deretter %@";
 "signup.purchase.trials.region"= "Sikre servere i over 90 land";
-"signup.purchase.trials.all.plans"= "Vis alle tilgjengelige abonnement";
 
 "signup.purchase.subscribe.now"= "Abonner nå";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "Støtter ti enheter samtidig";
-"signup.walkthrough.page.1.description"= "Beskytt deg på opptil ti enheter samtidig.";
 "signup.walkthrough.page.2.title"= "Sikre servere i over 90 land";
 "signup.walkthrough.page.2.description"= "Med serverer rundt om i hele verden, er du alltid beskyttet.";
-"signup.walkthrough.page.3.title"= "Beskytt deg selv mot reklame";
-"signup.walkthrough.page.3.description"= "Aktivering av innholdsblokkereren sikrer at reklame ikke blir vist når du bruker Safari.";
 
 "signup.share.data.buttons.accept"= "Godta";
 "signup.share.data.buttons.noThanks"= "Nei takk";

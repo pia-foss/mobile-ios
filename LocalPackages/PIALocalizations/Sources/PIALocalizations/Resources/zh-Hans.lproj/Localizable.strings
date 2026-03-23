@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "开始 7 天免费试用";
 "signup.purchase.trials.price.after"= "然后 %@";
 "signup.purchase.trials.region"= "90多个国家的安全服务器";
-"signup.purchase.trials.all.plans"= "查看所有可用套餐";
 
 "signup.purchase.subscribe.now"= "立即订阅";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "一次支持 10 台设备";
-"signup.walkthrough.page.1.description"= "一次在多达 10 台设备上保护自己。";
 "signup.walkthrough.page.2.title"= "90多个国家的安全服务器";
 "signup.walkthrough.page.2.description"= "服务器遍布世界各地，您始终受到保护。";
-"signup.walkthrough.page.3.title"= "让自己远离广告";
-"signup.walkthrough.page.3.description"= "启用内容拦截器以防止 Safari 中出现广告。";
 
 "signup.share.data.buttons.accept"= "接受";
 "signup.share.data.buttons.noThanks"= "不用，谢谢";

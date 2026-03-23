@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "เริ่มทดลองใช้ฟรี 7 วัน";
 "signup.purchase.trials.price.after"= "จากนั้น %@";
 "signup.purchase.trials.region"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
-"signup.purchase.trials.all.plans"= "ดูแผนที่มีทั้งหมด";
 
 "signup.purchase.subscribe.now"= "สมัครสมาชิกตอนนี้";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "รับรองอุปกรณ์ 10 เครื่องในคราวเดียว";
-"signup.walkthrough.page.1.description"= "ปกป้องตัวคุณบนอุปกรณ์ถึง 10 เครื่องในเวลาเดียวกัน";
 "signup.walkthrough.page.2.title"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";
 "signup.walkthrough.page.2.description"= "ด้วยเซิร์ฟเวอร์ที่มีอยู่ทั่วโลก คุณจะได้รับความคุ้มครองตลอดเวลา";
-"signup.walkthrough.page.3.title"= "ปกป้องตัวคุณจากโฆษณา";
-"signup.walkthrough.page.3.description"= "การเปิดใช้งานตัวปิดกั้นเนื้อหาของเราจะเป็นการป้องกันไม่ให้แสดงโฆษณาใน Safari";
 
 "signup.share.data.buttons.accept"= "ยอมรับ";
 "signup.share.data.buttons.noThanks"= "ไม่ล่ะ ขอบคุณ";

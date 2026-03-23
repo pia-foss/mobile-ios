@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "Start je gratis proefabonnement van 7 dagen";
 "signup.purchase.trials.price.after"= "Daarna %@";
 "signup.purchase.trials.region"= "Beveiligde servers in meer dan 90 landen";
-"signup.purchase.trials.all.plans"= "Bekijk de beschikbare abonnementen";
 
 "signup.purchase.subscribe.now"= "Nu abonneren";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "Ondersteun tien apparaten tegelijk";
-"signup.walkthrough.page.1.description"= "Bescherm uzelf op tien apparaten tegelijk.";
 "signup.walkthrough.page.2.title"= "Beveiligde servers in meer dan 90 landen";
 "signup.walkthrough.page.2.description"= "Met servers over de hele wereld wordt u altijd beschermd.";
-"signup.walkthrough.page.3.title"= "Bescherm uzelf tegen advertenties";
-"signup.walkthrough.page.3.description"= "Als u onze Content Blocker inschakelt, krijgt u geen advertenties meer te zien in Safari.";
 
 "signup.share.data.buttons.accept"= "Accepteren";
 "signup.share.data.buttons.noThanks"= "Nee, bedankt";

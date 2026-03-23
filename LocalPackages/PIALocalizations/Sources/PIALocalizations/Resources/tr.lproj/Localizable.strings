@@ -548,7 +548,6 @@
 
 "signup.purchase.subscribe.now"= "Hemen abone ol";
 
-"signup.purchase.trials.all.plans"= "Tüm mevcut planlara bakın";
 
 "signup.purchase.trials.intro"= "7 günlük ücretsiz deneme sürenizi başlatın";
 
@@ -596,17 +595,13 @@
 
 "signup.unreachable.vc_title"= "Hata";
 
-"signup.walkthrough.page.1.description"= "Aynı anda 10 cihazda koruma sağlayın.";
 
-"signup.walkthrough.page.1.title"= "Aynı anda 10 cihazı destekler";
 
 "signup.walkthrough.page.2.description"= "Dünya çapındaki sunucularla daima koruma altındasınız.";
 
 "signup.walkthrough.page.2.title"= "90'dan fazla ülkede güvenli sunucular";
 
-"signup.walkthrough.page.3.description"= "İçerik Engelleyicimizi etkinleştirdiğinizde Safari'de reklamların gösterilmesi engellenir.";
 
-"signup.walkthrough.page.3.title"= "Kendinizi reklamlardan koruyun";
 
 "welcome.agreement.message"= "Bu abonelik, deneme süresinin sonuna en az 24 saat kalana dek iptal edilmezse, otomatik olarak %@ karşılığında yenilenir. Deneme süresinin sonuna 24 saat kaldıktan sonra, Apple Kimliğinizin hesabından yenileme ücreti alınır. Satın alım işleminden sonra App Store hesap ayarlarına giderek abonelik ayarlarınızı değiştirebilir ve aboneliklerinizi iptal edebilirsiniz. 7 günlük deneme süresi, her kullanıcı için bir tane 7 günlük deneme süresi hakkı ile sınırlıdır. Kullanıcı bir abonelik satın aldığında, teklif edilmişse, ücretsiz deneme süresinin kullanılmayan herhangi bir kısmı geçerliliğini yitirir. Tüm fiyatlara uygulanabilir yerel satış vergileri dahildir.\n\nKaydolduğunuzda, $1 ile $2 unsurlarını kabul etmiş olursunuz.";
 

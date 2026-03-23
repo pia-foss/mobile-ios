@@ -554,18 +554,13 @@
 "signup.purchase.trials.intro"= "7일 무료 체험 시작";
 "signup.purchase.trials.price.after"= "그 후 %@";
 "signup.purchase.trials.region"= "90개 이상의 국가에 보안 서버";
-"signup.purchase.trials.all.plans"= "이용 가능한 모든 플랜 보기";
 
 "signup.purchase.subscribe.now"= "지금 구독";
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.1.title"= "한 번의 10대의 장치 지원";
-"signup.walkthrough.page.1.description"= "한 번에 최대 10대의 장치에서 보호를 받으세요.";
 "signup.walkthrough.page.2.title"= "90개 이상의 국가에 보안 서버";
 "signup.walkthrough.page.2.description"= "전 세계에 있는 서버를 통해 언제나 보호를 받습니다.";
-"signup.walkthrough.page.3.title"= "광고로부터 보호";
-"signup.walkthrough.page.3.description"= "Content Blocker를 활성화하면 Safari에서 광고가 표시되지 않습니다.";
 
 "signup.share.data.buttons.accept"= "수락";
 "signup.share.data.buttons.noThanks"= "아니요";
