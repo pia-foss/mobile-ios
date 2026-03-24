@@ -6,7 +6,13 @@ get_version_from_app_store() {
         return 1
     fi
 
-    ruby "$SCRIPT_DIR/get_asc_version.rb"
+    # Map Xcode Cloud's CI_PRODUCT_PLATFORM (iOS/tvOS) to the ASC API platform value (IOS/TV_OS)
+    case "$CI_PRODUCT_PLATFORM" in
+        tvOS) asc_platform="TV_OS" ;;
+        *)    asc_platform="IOS" ;;
+    esac
+
+    ASC_PLATFORM="$asc_platform" ruby "$SCRIPT_DIR/get_asc_version.rb"
 }
 
 setVariableValue() {
