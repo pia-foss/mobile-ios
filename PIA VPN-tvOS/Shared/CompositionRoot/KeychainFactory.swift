@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-class KeychainFactory {
+enum KeychainFactory {
     static func makeKeychain() -> KeychainType {
         return Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)
     }

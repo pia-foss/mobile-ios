@@ -7,12 +7,16 @@
 //
 
 import Foundation
+import PIADashboard
+import PIALibrary
 
 protocol RemoveDIPUseCaseType {
-    func callAsFunction()
+    func callAsFunction() async throws
 }
 
-class RemoveDIPUseCase: RemoveDIPUseCaseType {
+private let log = PIALogger.logger(for: RemoveDIPUseCase.self)
+
+final class RemoveDIPUseCase: RemoveDIPUseCaseType {
     private let dedicatedIpProvider: DedicatedIPProviderType
     private let favoriteRegionsUseCase: FavoriteRegionUseCaseType
     private let getDedicatedIP: GetDedicatedIpUseCaseType
@@ -27,20 +31,23 @@ class RemoveDIPUseCase: RemoveDIPUseCaseType {
         self.selectedServer = selectedServer
     }
     
-    func callAsFunction() {
+    func callAsFunction() async throws {
         guard let dedicatedIPServer = getDedicatedIP(),
         let dipToken = dedicatedIPServer.dipToken else {
             return
         }
-        
-        dedicatedIpProvider.removeDIPToken(dipToken)
-        _ = try? favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
-        
+
         let selectedServer = selectedServer.selectedServer
-        if selectedServer.identifier == dedicatedIPServer.identifier {
-            Task {
-                try? await vpnCpnnectionUseCase.disconnect()
-            }
+        if selectedServer.dipToken == dedicatedIPServer.dipToken {
+            log.debug("Disconnecting from dedicated IP server \(dedicatedIPServer)")
+            try await vpnCpnnectionUseCase.disconnect()
         }
+
+        try favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
+        dedicatedIpProvider.removeDIPToken(dipToken)
+
+        #if os(iOS)
+        DispatchQueue.main.async { Macros.postNotification(.PIAServerHasBeenUpdated) }
+        #endif
     }
 }

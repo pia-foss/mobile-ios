@@ -1,9 +1,10 @@
-
 import Foundation
+import PIADashboard
+import PIALibrary
 
-class QuickConnectViewModel: ObservableObject {
-    
-    @Published private (set) var servers: [ServerType] = []
+final class QuickConnectViewModel: ObservableObject {
+
+    @Published private(set) var servers: [ServerType] = []
     
     private let selectedServerUseCase: SelectedServerUseCaseType
     private let regionsUseCase: RegionsListUseCaseType

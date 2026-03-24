@@ -60,13 +60,9 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return accessedDatabase.transient.vpnStatus
     }
 
-    public var profileServerAddress: String? {
-        return activeProfile?.serverAddress
-    }
-
     public var profileServer: Server? {
-        if let profileServerAddress,
-           let server = accessedProviders.serverProvider.find(withAddress: profileServerAddress) {
+        if let address = activeProfile?.serverAddress,
+           let server = accessedProviders.serverProvider.find(withAddress: address) {
             return server
         }
         return nil

@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import PIADashboard
 import PIALibrary
+
 protocol LogOutUseCaseType {
     func logOut() async throws
 }

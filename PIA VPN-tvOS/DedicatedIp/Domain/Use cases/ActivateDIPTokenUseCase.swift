@@ -12,7 +12,7 @@ protocol ActivateDIPTokenUseCaseType {
     func callAsFunction(token: String) async throws
 }
 
-class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
+final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
     private let dipServerProvider: DedicatedIPProviderType
     
     init(dipServerProvider: DedicatedIPProviderType) {

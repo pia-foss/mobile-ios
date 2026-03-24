@@ -1,5 +1,5 @@
-
 import Foundation
+import PIALibrary
 
 protocol QuickConnectButtonViewModelDelegate: AnyObject {
     func quickConnectButtonViewModel(didSelect server: ServerType)

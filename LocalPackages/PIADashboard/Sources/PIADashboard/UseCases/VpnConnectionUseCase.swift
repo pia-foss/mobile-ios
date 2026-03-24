@@ -3,20 +3,20 @@ import Foundation
 import PIALibrary
 import Combine
 
-protocol VpnConnectionUseCaseType {
+public protocol VpnConnectionUseCaseType {
     func connect() async throws
     func disconnect() async throws
     func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error>
 }
 
-enum VpnConnectionIntent: Equatable {
+public enum VpnConnectionIntent: Equatable {
     case none
     case connect
     case disconnect
 }
 
-class VpnConnectionUseCase: VpnConnectionUseCaseType {
-    
+public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
+
     internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
     
     let serverProvider: ServerProviderType
@@ -25,7 +25,7 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
     private var clientPreferences: ClientPreferencesType
     private var cancellables = Set<AnyCancellable>()
     
-    init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType, clientPreferences: ClientPreferencesType) {
+    public init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
         self.vpnProvider = vpnProvider
         self.vpnStatusMonitor = vpnStatusMonitor
@@ -34,9 +34,9 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
         
         subscribeToVpnStatusState()
     }
-    
-    func connect() async throws {
-       
+
+    public func connect() async throws {
+
         connectionIntent.send(.connect)
         
         return try await withCheckedThrowingContinuation { continuation in
@@ -50,9 +50,8 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
             }
         }
     }
-    
-    
-    func disconnect() async throws {
+
+    public func disconnect() async throws {
 
         connectionIntent.send(.disconnect)
         
@@ -67,11 +66,10 @@ class VpnConnectionUseCase: VpnConnectionUseCaseType {
             }
         }
     }
-  
-    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
+
+    public func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
         return connectionIntent.eraseToAnyPublisher()
     }
-    
 }
 
 

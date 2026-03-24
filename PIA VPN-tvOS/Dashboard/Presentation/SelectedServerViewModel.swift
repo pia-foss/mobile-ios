@@ -1,11 +1,12 @@
 
 import Foundation
+import PIADashboard
 import PIALibrary
 import Combine
 import PIALocalizations
 
 
-class SelectedServerViewModel: ObservableObject {
+final class SelectedServerViewModel: ObservableObject {
 
     private let useCase: SelectedServerUseCaseType
     private let optimalLocationUseCase: OptimalLocationUseCaseType

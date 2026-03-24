@@ -31,7 +31,8 @@ final class DedicatedIpViewController: AutolayoutViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var data = [Server]()
     private var timeToRetryDIP: TimeInterval? = nil
-    
+    private let removeDipToken: RemoveDIPUseCaseType = DedicatedIPFactory.makeRemoveDIPUseCase()
+
     private struct Sections {
         static let header = 0
         static let dedicatedIps = 1
@@ -83,7 +84,8 @@ final class DedicatedIpViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
     }
-    
+
+    @MainActor
     @objc private func reloadTableView() {
         let dipTokens = Client.providers.serverProvider.dipTokens ?? []
         data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) })
@@ -206,14 +208,16 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     
     private func confirmDelete(row: Int) {
         let dipRegion = data[row]
-        if let token = dipRegion.dipToken {
-            dipRegion.unfavorite()
-            Client.providers.serverProvider.removeDIPToken(token)
-            NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                            object: self,
-                                            userInfo: nil)
+        guard dipRegion.dipToken != nil else { return }
+        Task {
+            do {
+                try await removeDipToken()
+            } catch {
+                log.error("Error removing DIP token \(error)")
+            }
+            NotificationCenter.default.post(name: .PIAThemeDidChange, object: self, userInfo: nil)
+            reloadTableView()
         }
-        reloadTableView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

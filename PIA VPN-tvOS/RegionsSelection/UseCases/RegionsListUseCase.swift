@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIADashboard
 import PIALibrary
 
 
@@ -15,7 +16,7 @@ protocol RegionsListUseCaseType {
     func select(server: ServerType)
 }
 
-class RegionsListUseCase: RegionsListUseCaseType {
+final class RegionsListUseCase: RegionsListUseCaseType {
 
     private let serverProvider: ServerProviderType
     private var clientPreferences: ClientPreferencesType

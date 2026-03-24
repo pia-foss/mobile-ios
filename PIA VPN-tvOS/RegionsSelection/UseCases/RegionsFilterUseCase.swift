@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import PIADashboard
+import PIALibrary
 
 enum RegionsListFilter: Equatable, Hashable {
     case all

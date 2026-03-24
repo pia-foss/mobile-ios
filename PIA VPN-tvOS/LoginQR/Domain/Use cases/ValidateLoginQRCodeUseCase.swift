@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol ValidateLoginQRCodeUseCaseType {
     func callAsFunction(qrCodeToken: LoginQRCode) async throws

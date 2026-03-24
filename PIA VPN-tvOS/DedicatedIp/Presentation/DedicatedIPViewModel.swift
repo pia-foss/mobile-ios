@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 import PIALocalizations
 
 struct DedicatedIpData {
@@ -15,7 +16,9 @@ struct DedicatedIpData {
     let description: String
 }
 
-class DedicatedIPViewModel: ObservableObject {
+private let log = PIALogger.logger(for: DedicatedIPViewModel.self)
+
+final class DedicatedIPViewModel: ObservableObject {
     @Published var dedicatedIPStats: [DedicatedIpData] = []
     @Published var shouldShowErrorMessage: Bool = false
     @Published var showActivatedDialog: Bool = false
@@ -70,7 +73,13 @@ class DedicatedIPViewModel: ObservableObject {
     }
     
     func removeDIP() {
-        removeDIPToken()
-        dedicatedIPStats = []
+        Task {
+            do {
+                try await removeDIPToken()
+            } catch {
+                log.error("Error removing dedicated IP \(error)")
+            }
+            dedicatedIPStats = []
+        }
     }
 }

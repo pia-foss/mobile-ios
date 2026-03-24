@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol GetDedicatedIpUseCaseType {
     func callAsFunction() -> ServerType?
     func isDedicatedIp(_ server: ServerType) -> Bool
 }
 
-class GetDedicatedIpUseCase: GetDedicatedIpUseCaseType {
+final class GetDedicatedIpUseCase: GetDedicatedIpUseCaseType {
     private let serverProvider: ServerProviderType
     private let dedicatedIpProvider: DedicatedIPProviderType
     

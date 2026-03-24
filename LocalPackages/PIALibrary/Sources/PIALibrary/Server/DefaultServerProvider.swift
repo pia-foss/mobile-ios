@@ -337,23 +337,8 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             log.error("Client not logged in when removing DIP token.")
             return
         }
-
         accessedDatabase.secure.remove(dipToken)
-
-        if let server = currentServers.first(where: { server in server.dipToken == dipToken }),
-           let profileAddress = Client.providers.vpnProvider.profileServerAddress,
-           server.addresses().contains(where: { address in address.ip == profileAddress })
-        {
-            log.debug("Disconnecting from Dedicated IP \(server)")
-            Client.providers.vpnProvider.disconnect { error in
-                if let error {
-                    log.error("Error disconnecting VPN: \(error)")
-                }
-            }
-        }
-
         currentServers = currentServers.filter { $0.dipToken != dipToken }
-        NotificationCenter.default.post(name: .PIAServerHasBeenUpdated, object: self, userInfo: nil)
     }
     
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
