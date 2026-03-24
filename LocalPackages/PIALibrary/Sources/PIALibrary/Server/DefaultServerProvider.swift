@@ -22,10 +22,10 @@
 
 import Foundation
 
-fileprivate let log = PIALogger.logger(for: DefaultServerProvider.self)
+private let log = PIALogger.logger(for: DefaultServerProvider.self)
 
-open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess, WebServicesConsumer {
-    
+public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess, WebServicesConsumer {
+
     private let customWebServices: WebServices?
     private let renewDedicatedIP: RenewDedicatedIPUseCaseType
     private let getDedicatedIPs: GetDedicatedIPsUseCaseType
@@ -340,10 +340,15 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
 
         accessedDatabase.secure.remove(dipToken)
 
-        // TODO: Only disconnect if connected to the same server
-        Client.providers.vpnProvider.disconnect { error in
-            if let error {
-                log.error("Error disconnecting VPN: \(error)")
+        if let server = currentServers.first(where: { server in server.dipToken == dipToken }),
+           let profileAddress = Client.providers.vpnProvider.profileServerAddress,
+           server.addresses().contains(where: { address in address.ip == profileAddress })
+        {
+            log.debug("Disconnecting from Dedicated IP \(server)")
+            Client.providers.vpnProvider.disconnect { error in
+                if let error {
+                    log.error("Error disconnecting VPN: \(error)")
+                }
             }
         }
 
@@ -361,10 +366,10 @@ open class DefaultServerProvider: ServerProvider, ConfigurationAccess, DatabaseA
         renewDedicatedIP(dipToken: dipToken, completion: { _ in })
     }
     
-    public func find(withIdentifier identifier: String) -> Server? {
-        return currentServers.first { $0.identifier == identifier }
+    public func find(where predicate: (Server) -> Bool) -> Server? {
+        return currentServers.first(where: predicate)
     }
-    
+
     public func resetCurrentServers() {
         currentServers = []
     }

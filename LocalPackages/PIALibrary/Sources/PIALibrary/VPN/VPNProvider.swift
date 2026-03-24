@@ -38,6 +38,9 @@ public protocol VPNProvider: AnyObject {
     /// The `VPNStatus` of the current profile.
     var vpnStatus: VPNStatus { get }
 
+    /// The IP address associated with the current profile.
+    var profileServerAddress: String? { get }
+
     /// The `Server` associated with the current profile.
     var profileServer: Server? { get }
     

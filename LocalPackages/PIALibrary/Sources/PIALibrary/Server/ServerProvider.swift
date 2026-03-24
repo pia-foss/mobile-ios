@@ -83,7 +83,13 @@ public protocol ServerProvider: AnyObject {
      - Returns: The found `Server` object or `nil`.
      */
     func find(withIdentifier identifier: String) -> Server?
-    
+
+    /// Looks for a server via any of its addresses
+    func find(withAddress address: String) -> Server?
+
+    /// Looks for a server via a predicate.
+    func find(where predicate: (Server) -> Bool) -> Server?
+
     /**
      Reset the currentServers object
      */
@@ -125,4 +131,14 @@ public protocol ServerProvider: AnyObject {
      */
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
     
+}
+
+public extension ServerProvider {
+    func find(withIdentifier identifier: String) -> Server? {
+        return find(where: { server in server.identifier == identifier })
+    }
+
+    func find(withAddress address: String) -> Server? {
+        return find(where: { server in server.addresses().contains(where: { $0.ip == address }) })
+    }
 }

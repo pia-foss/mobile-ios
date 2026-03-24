@@ -31,8 +31,8 @@ public protocol VPNProfile: AnyObject {
     /// Returns `true` if the profile is a custom tunnel implementation.
     static var isTunnel: Bool { get }
 
-    /// The identifier of the `Server` associated with this profile, if any.
-    var serverIdentifier: String? { get }
+    /// The IP address associated with this profile, if any.
+    var serverAddress: String? { get }
 
     /// The underlying native profile implementation.
     var native: Any? { get }

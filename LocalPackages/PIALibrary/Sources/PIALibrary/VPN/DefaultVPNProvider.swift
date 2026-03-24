@@ -25,8 +25,8 @@ import NetworkExtension
 
 fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
 
-open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
-    
+public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
+
     private static let forcedStatuses: [VPNStatus] = [
         .connected,
         .connecting
@@ -59,23 +59,20 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     public var vpnStatus: VPNStatus {
         return accessedDatabase.transient.vpnStatus
     }
-    
+
+    public var profileServerAddress: String? {
+        return activeProfile?.serverAddress
+    }
+
     public var profileServer: Server? {
-        guard let identifier = activeProfile?.serverIdentifier else {
-            return nil
+        if let profileServerAddress,
+           let server = accessedProviders.serverProvider.find(withAddress: profileServerAddress) {
+            return server
         }
-        return accessedProviders.serverProvider.find(withIdentifier: identifier)
+        return nil
     }
-    
-    var publicIP: String? {
-        return accessedDatabase.plain.publicIP
-    }
-    
-    var vpnIP: String? {
-        return accessedDatabase.transient.vpnIP
-    }
-    
-    var vpnLog: String {
+
+    private var vpnLog: String {
         return accessedDatabase.transient.vpnLog
     }
     
