@@ -1016,6 +1016,7 @@ You will not be charged during this process.</string>
                         <outlet property="walkthroughTitle" destination="JCM-sf-tzW" id="qKh-PW-sdq"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="RestorePurchaseSegue" id="tth-4B-3Z0"/>
                         <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaPurchaseSegue" modalPresentationStyle="fullScreen" id="kNL-g4-6nK"/>
+                        <segue destination="9jt-8I-K8i" kind="presentation" identifier="SignupViaRecoverSegue" modalPresentationStyle="fullScreen" id="Pq2-Rb-mT7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gh3-NB-ifC" userLabel="First Responder" sceneMemberID="firstResponder"/>
