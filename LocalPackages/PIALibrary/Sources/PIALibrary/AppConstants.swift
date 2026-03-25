@@ -32,10 +32,6 @@ public struct AppConstants {
         public static var appReviewUrl = "https://itunes.apple.com/app/id\(appId)?action=write-review"
         public static var feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
     }
-    
-    public struct Flags {
-        public static var developmentPath = Bundle.main.path(forResource: "Flags-dev", ofType: "plist")
-    }
 
     public struct About {
         public static var componentsPath = Bundle.main.path(forResource: "Components", ofType: "plist")

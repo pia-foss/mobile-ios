@@ -200,7 +200,6 @@
 		3F0EF5C82EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Flags-dev.plist",
 				"Supporting Files/Info.plist",
 			);
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
