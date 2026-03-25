@@ -27,7 +27,6 @@
 //
 
 import Foundation
-import Mutex
 
 private let log = PIALogger.logger(for: FeatureFlag.self)
 
