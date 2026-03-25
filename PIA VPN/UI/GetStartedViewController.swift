@@ -78,7 +78,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         collectionPlans.delegate = self
         collectionPlans.dataSource = self
 
-        self.walkthroughImage.image = Asset.Ui.imageWalkthrough2.image
         self.walkthroughTitle.text = L10n.Signup.Walkthrough.Page._2.title
         self.walkthroughDescription.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". "
 
