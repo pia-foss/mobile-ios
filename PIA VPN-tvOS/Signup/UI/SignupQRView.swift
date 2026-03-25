@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct SignupQRView: View {
     private let items: [String]
@@ -25,7 +26,7 @@ struct SignupQRView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 50) {
-                Image.onboarding_pia_brand
+                Asset.piaBrand.swiftUIImage
                 
                 VStack(alignment: .leading, spacing: 35) {
                     Text(L10n.Tvos.Signup.title)
@@ -52,7 +53,7 @@ struct SignupQRView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 80, leading: 30, bottom: 0, trailing: 0))
                 
-            Image.signup_setup_screen
+            Asset.setupScreen.swiftUIImage
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing)
         }

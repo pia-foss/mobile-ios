@@ -23,10 +23,12 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class DedicatedRegionCell: UITableViewCell, Restylable {
     
     @IBOutlet private weak var imvFlag: UIImageView!
+    @IBOutlet private weak var dipBadgeImageView: UIImageView!
 
     @IBOutlet private weak var labelRegion: UILabel!
     @IBOutlet private weak var labelIP: UILabel!
@@ -71,6 +73,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
     private func prepareCellIcons() {
         leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
         leftIconImageView.isHidden = !iconSelected
+        dipBadgeImageView.image = Asset.Images.dipBadgeDark.image
     }
     
     private func configureIPView() {

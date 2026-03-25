@@ -23,6 +23,7 @@
 import UIKit
 import PIALibrary
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: MenuViewController.self)
 

@@ -10,15 +10,16 @@ import SwiftUI
 
 typealias ButtonAction = () -> Void
 
-struct RegionsListItemButton: View {    
+struct RegionsListItemButton: View {
     let onRegionItemSelected: ButtonAction
     @FocusState var buttonFocused: Bool
-    
-    let iconName: String
-    var highlightedIconName: String?
+
+    let iconImage: Image
+    var highlightedIconImage: Image?
     let title: String
     var subtitle: String?
-    let favoriteIconName: String
+    let favoriteIconImage: Image
+    var isFavorite: Bool
     let contextMenuItem: ContextMenuItem
     
     
@@ -29,13 +30,13 @@ struct RegionsListItemButton: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     if buttonFocused {
-                        highlightedFlagIconImage
+                        highlightedFlagIconView
                     } else {
-                        flagIconImage
+                        flagIconView
                     }
-                    
+
                     Spacer()
-                    favoriteIconImage
+                    favoriteIconView
                 }
                 detailsView
             }
@@ -65,15 +66,14 @@ struct RegionsListItemButton: View {
 extension RegionsListItemButton {
     struct ContextMenuLabel: View {
         let title: String
-        let iconName: String
+        let iconImage: Image
         var body: some View {
             HStack {
                 Text(title)
-                Image(iconName)
+                iconImage
                     .resizable()
                     .frame(width: 52, height: 52)
                     .foregroundColor(Color.pia_outline_variant_primary)
-                
             }
         }
     }
@@ -103,15 +103,11 @@ extension RegionsListItemButton {
 
 extension RegionsListItemButton {
     var favoriteIconForegroundColor: Color {
-        switch favoriteIconName {
-        case "favorite-filled-icon": return Color.pia_error
-        default: return
-            buttonFocused ? Color.black : Color.pia_outline_variant_primary
-        }
+        isFavorite ? Color.pia_error : (buttonFocused ? Color.black : Color.pia_outline_variant_primary)
     }
-    
-    var flagIconImage: some View {
-        Image(iconName)
+
+    var flagIconView: some View {
+        iconImage
             .resizable()
             .scaledToFill()
             .frame(width: 75, height: 75)
@@ -120,9 +116,9 @@ extension RegionsListItemButton {
                 RoundedRectangle(cornerRadius: 40).stroke(Color.white, lineWidth: 2)
             )
     }
-    
-    var highlightedFlagIconImage: some View {
-        Image(highlightedIconName ?? iconName)
+
+    var highlightedFlagIconView: some View {
+        (highlightedIconImage ?? iconImage)
             .resizable()
             .scaledToFill()
             .frame(width: 75, height: 75)
@@ -131,9 +127,9 @@ extension RegionsListItemButton {
                 RoundedRectangle(cornerRadius: 40).stroke(Color.white, lineWidth: 2)
             )
     }
-    
-    var favoriteIconImage: some View {
-        Image(favoriteIconName)
+
+    var favoriteIconView: some View {
+        favoriteIconImage
             .resizable()
             .frame(width: 54, height: 54)
             .foregroundColor(favoriteIconForegroundColor)

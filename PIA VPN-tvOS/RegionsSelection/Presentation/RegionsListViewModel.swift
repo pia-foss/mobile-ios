@@ -10,6 +10,8 @@ import Foundation
 import PIALibrary
 import Combine
 import PIALocalizations
+import PIAAssetsTV
+import SwiftUI
 
 class RegionsListViewModel: ObservableObject {
     
@@ -71,18 +73,18 @@ class RegionsListViewModel: ObservableObject {
         subscribeToServersLatencyUpdates()
     }
     
-    func getIconImageName(for server: ServerType) -> (unfocused: String, focused: String) {
+    func getIconImage(for server: ServerType) -> (unfocused: Image, focused: Image) {
         let isDedicatedIpServer = getDedicatedIpUseCase.isDedicatedIp(server)
-        
+
         if isDedicatedIpServer {
-            return (unfocused: .icon_dip_location, focused: .icon_dip_location)
+            return (unfocused: Asset.iconDipLocation.swiftUIImage, focused: Asset.iconDipLocation.swiftUIImage)
         }
-        
+
         if server.isAutomatic {
-            return (unfocused: .smart_location_icon_name, focused: .smart_location_icon_highlighted_name)
+            return (unfocused: Asset.iconSmartLocation.swiftUIImage, focused: Asset.iconSmartLocationHighlighted.swiftUIImage)
         } else {
-            let flagIconName = "flag-\(server.country.lowercased())"
-            return (unfocused: flagIconName, focused: flagIconName)
+            let flag = Asset.flag(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
+            return (unfocused: flag, focused: flag)
         }
     }
     
@@ -189,12 +191,12 @@ extension RegionsListViewModel {
 // MARK: Favourites
 
 extension RegionsListViewModel {
-    func favoriteIconName(for server: ServerType) -> String {
-        if isFavorite(server: server) {
-            return "favorite-filled-icon"
-        } else {
-            return "favorite-stroke-icon"
-        }
+    func favoriteIconImage(for server: ServerType) -> Image {
+        isFavorite(server: server) ? Asset.favoriteFilledIcon.swiftUIImage : Asset.favoriteStrokeIcon.swiftUIImage
+    }
+
+    func isFavoriteServer(_ server: ServerType) -> Bool {
+        isFavorite(server: server)
     }
     
     func favoriteContextMenuTitle(for server: ServerType) -> String {

@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class RegionTile: UIView, Tileable {
     
@@ -129,6 +130,7 @@ class RegionTile: UIView, Tileable {
         if validCoordinates {
             greenDot = coordFinder.dot()
         }
+        self.geoImageView.image = Theme.current.geoImage()
         self.geoImageView.isHidden = !server.geo
         self.labelLeadingConstraint.constant = server.geo ? geoLeadingDistance : defaultLeadingDistance
     }

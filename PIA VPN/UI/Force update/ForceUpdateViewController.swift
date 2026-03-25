@@ -11,16 +11,19 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class ForceUpdateViewController: UIViewController {
     @IBOutlet weak var updateButton: PIAButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var disconnectVPNLabel: UILabel!
+    @IBOutlet weak var shieldImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        shieldImageView.image = Asset.Images.forceUpdateShield.image
         styleUpdateButton()
         titleLabel.text = L10n.Forceupdate.Label.title
         descriptionLabel.text = L10n.Forceupdate.Label.subtitle

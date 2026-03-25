@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class QuickSettingsTile: UIView, Tileable  {
     

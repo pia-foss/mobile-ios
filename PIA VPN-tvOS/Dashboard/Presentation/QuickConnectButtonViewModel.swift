@@ -1,5 +1,7 @@
 
 import Foundation
+import SwiftUI
+import PIAAssetsTV
 
 protocol QuickConnectButtonViewModelDelegate: AnyObject {
     func quickConnectButtonViewModel(didSelect server: ServerType)
@@ -11,14 +13,11 @@ class QuickConnectButtonViewModel: ObservableObject {
     private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
     
     
-    var flagName: String {
-        let isDipServer = getDedicatedIpUseCase.isDedicatedIp(server)
-        if isDipServer {
-            return .icon_dip_location
-        } else {
-           return "flag-\(server.country.lowercased())"
+    var flagImage: Image {
+        if getDedicatedIpUseCase.isDedicatedIp(server) {
+            return Asset.iconDipLocation.swiftUIImage
         }
-        
+        return Asset.flag(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
     }
     
     var titleText: String {

@@ -24,6 +24,7 @@ import PIALibrary
 import account
 import UIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 public class MessagesManager: NSObject {
 

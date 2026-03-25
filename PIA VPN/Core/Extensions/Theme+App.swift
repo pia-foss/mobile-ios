@@ -25,6 +25,7 @@ import PIALibrary
 import SideMenu
 import UIKit
 import PIADesignSystem
+import PIAAssetsMobile
 
 extension Theme {
     
@@ -174,11 +175,12 @@ extension Theme {
         }
     }
     
-    public func geoImageName() -> String {
-        if palette.appearance == .dark {
-            return "icon-geo-dark"
-        } else {
-            return "icon-geo"
+    public func geoImage(selected: Bool = false) -> UIImage {
+        switch (palette.appearance == .dark, selected) {
+        case (true, true):   return Asset.Images.iconGeoDarkSelected.image
+        case (true, false):  return Asset.Images.iconGeoDark.image
+        case (false, true):  return Asset.Images.iconGeoSelected.image
+        case (false, false): return Asset.Images.iconGeo.image
         }
     }
     

@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="localIpTitle" destination="jwP-tn-mQv" id="CXr-Wt-eRL"/>
                 <outlet property="localIpValue" destination="xR4-ef-XuZ" id="wgZ-if-UNN"/>
+                <outlet property="triangleImageView" destination="tN8-Zr-Ghy" id="Gwx-A7-c2c"/>
                 <outlet property="vpnIpTitle" destination="ltV-Wi-R5o" id="1DD-vd-o3W"/>
                 <outlet property="vpnIpValue" destination="Eay-Yz-Xzw" id="3TH-9b-cOv"/>
             </connections>

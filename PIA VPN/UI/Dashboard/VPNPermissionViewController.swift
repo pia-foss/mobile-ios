@@ -26,6 +26,7 @@ import MessageUI
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 final class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var contentCardView: UIView!

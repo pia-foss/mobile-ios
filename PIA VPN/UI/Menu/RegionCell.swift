@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 public enum RegionStatus {
     case available
@@ -72,15 +73,14 @@ class RegionCell: UITableViewCell, Restylable {
         guard let server = server else {
             return
         }
-        let suffix = iconSelected ? "-selected" : ""
         if server.geo {
-            leftIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
+            leftIconImageView.image = Theme.current.geoImage(selected: iconSelected)
             rightIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
             leftIconImageView.isHidden = false
             rightIconImageView.isHidden = !iconSelected
         } else {
             leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
-            rightIconImageView.image = UIImage(named: Theme.current.geoImageName()+suffix)
+            rightIconImageView.image = Theme.current.geoImage(selected: iconSelected)
             leftIconImageView.isHidden = !iconSelected
             rightIconImageView.isHidden = true
         }

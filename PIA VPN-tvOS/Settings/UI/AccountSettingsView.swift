@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 
 struct AccountSettingsView: View {
     @ObservedObject var viewModel: AccountSettingsViewModel
@@ -57,7 +58,7 @@ struct AccountSettingsView: View {
             }
             
             Spacer()
-            Image.pia_settings_bg_image
+            Asset.settingsBgImage.swiftUIImage
                 .frame(width: 840)
                 .aspectRatio(contentMode: .fit)
         }

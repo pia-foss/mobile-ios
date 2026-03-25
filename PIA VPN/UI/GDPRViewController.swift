@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 public protocol GDPRDelegate: AnyObject {
     
@@ -47,7 +48,8 @@ final class GDPRViewController: AutolayoutViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        closeButton.setImage(Asset.Images.iconClose.image, for: .normal)
         self.labelCollectTitle.text = L10n.Welcome.Gdpr.Collect.Data.title
         self.labelCollectDescription.text = L10n.Welcome.Gdpr.Collect.Data.description
         self.labelUseDataDescription.text = L10n.Welcome.Gdpr.Usage.Data.description

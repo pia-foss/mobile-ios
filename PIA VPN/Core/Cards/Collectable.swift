@@ -21,6 +21,7 @@
 
 import Foundation
 import UIKit
+import PIAAssetsMobile
 
 public typealias CTAFunc = () -> Void
 

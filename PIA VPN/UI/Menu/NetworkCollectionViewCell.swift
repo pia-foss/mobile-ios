@@ -24,6 +24,7 @@ import PIALibrary
 import Popover
 import PIADesignSystem
 import PIALocalizations
+import PIAAssetsMobile
 
 class NetworkCollectionViewCell: UICollectionViewCell {
 

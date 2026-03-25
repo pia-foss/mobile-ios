@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct SignupView: View {
     @StateObject var viewModel: SignupViewModel
@@ -19,7 +20,7 @@ struct SignupView: View {
             } else {
                 VStack(alignment: .center, spacing: 60) {
                     
-                    Image.onboarding_pia_brand
+                    Asset.piaBrand.swiftUIImage
                     
                     Text(L10n.Tvos.Welcome.Button.signup)
                         .font(.system(size: 76))
@@ -28,7 +29,7 @@ struct SignupView: View {
                     Spacer()
                     
                     VStack {
-                        Image.signup_screen.padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
+                        Asset.signupScreen.swiftUIImage.padding(EdgeInsets(top: 50, leading: 50, bottom: 50, trailing: 50))
                     }
                     .background(Color.piaSurfaceContainerPrimary)
                     .cornerRadius(20)

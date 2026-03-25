@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 class OnboardingFactory {
     static func makeOnboardingConnectionStatsView() -> OnboardingComponentView {
@@ -41,7 +42,7 @@ class OnboardingFactory {
     private static func makeOnboardingConnectionStatsViewStyle() -> OnboardingComponentStytle {
         OnboardingComponentStytle(headerImage: nil,
                                   headerSpacing: 30,
-                                  backgroundImage: .onboarding_stats_tv, 
+                                  backgroundImage: Asset.statsTv.swiftUIImage, 
                                   buttonsEdgeInsets: EdgeInsets(top: 40, leading: 30, bottom: 0, trailing: 0))
     }
     

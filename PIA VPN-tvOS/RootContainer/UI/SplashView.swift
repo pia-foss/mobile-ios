@@ -7,11 +7,12 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 
 struct SplashView: View {
     var body: some View {
         VStack(alignment: .center) {
-            Image.loading_pia_brand
+            Asset.loadingPiaBrand.swiftUIImage
         }
     }
 }

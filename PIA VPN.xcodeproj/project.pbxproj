@@ -39,6 +39,9 @@
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
 		8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67E251CB4BA000B4DBF /* SwiftUI.framework */; };
 		8269A6E3251CB5E3000B4DBF /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */; };
+		A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */; };
+		A1A1A1A1A1A1A1A1A1A1A104 /* PIAAssetsWidget in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */; };
 		AA36CDC428A6711300180A33 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC328A6711300180A33 /* Popover */; };
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
@@ -207,6 +210,7 @@
 			membershipExceptions = (
 				"Resources/Images/AppIcon-Production.icon",
 				"Resources/Images/AppIcon-Staging.icon",
+				Resources/Images/Assets.xcassets,
 			);
 			target = 8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */;
 		};
@@ -368,6 +372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
 				AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */,
@@ -415,6 +420,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A1A1A1A1A1A1A1A1A1A104 /* PIAAssetsWidget in Frameworks */,
 				8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */,
 				3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */,
 				6A66AB9BF1D1DEE0C4CB9FA5 /* PIALocalizations in Frameworks */,
@@ -451,6 +457,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */,
 				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
 				3B9F2063FD0AA1F499E8A6ED /* PIALocalizations in Frameworks */,
@@ -641,6 +648,7 @@
 				3FE266BB2F0BE003004B53AA /* PIAUIKit */,
 				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
+				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -715,6 +723,7 @@
 			name = PIAWidgetExtension;
 			packageProductDependencies = (
 				6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */,
+				A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */,
 			);
 			productName = PIAWidgetExtension;
 			productReference = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */;
@@ -804,6 +813,7 @@
 				3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */,
 				3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */,
 				3B9F2063FD0AA1F499E8A6EE /* PIALocalizations */,
+				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
 			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
@@ -3230,6 +3240,18 @@
 		824E8528B3924C15A0398820 /* PIALocalizations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALocalizations;
+		};
+		A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsMobile;
+		};
+		A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsTV;
+		};
+		A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsWidget;
 		};
 		AA36CDC328A6711300180A33 /* Popover */ = {
 			isa = XCSwiftPackageProductDependency;

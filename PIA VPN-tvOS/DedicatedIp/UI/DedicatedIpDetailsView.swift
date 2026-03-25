@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct DedicatedIpDetailsView: View {
     private let dedicatedIPStats: [DedicatedIpData]
@@ -68,7 +69,7 @@ struct DedicatedIpDetailsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 60, leading: 80, bottom: 0, trailing: 100))
                 
-                Image.onboarding_signin_world
+                Asset.signinWorld.swiftUIImage
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing)
             }
