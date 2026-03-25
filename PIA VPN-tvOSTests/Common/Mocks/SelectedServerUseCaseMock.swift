@@ -1,6 +1,8 @@
 
 import Foundation
 import Combine
+import PIADashboard
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class SelectedServerUseCaseMock: SelectedServerUseCaseType {

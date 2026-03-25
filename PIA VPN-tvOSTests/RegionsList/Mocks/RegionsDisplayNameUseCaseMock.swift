@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class RegionsDisplayNameUseCaseMock: RegionsDisplayNameUseCaseType {
@@ -15,7 +15,7 @@ class RegionsDisplayNameUseCaseMock: RegionsDisplayNameUseCaseType {
     var getDisplayNameForOptimalLocationCalled = false
     var getDisplayNameForOptimalLocationResult: (title: String, subtitle: String) = (title: "", subtitle: "")
     
-    func getDisplayNameForOptimalLocation(with targetLocation: PIA_VPN_tvOS.ServerType?) -> (title: String, subtitle: String) {
+    func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String) {
         getDisplayNameForOptimalLocationCalled = true
         return getDisplayNameForOptimalLocationResult
     }

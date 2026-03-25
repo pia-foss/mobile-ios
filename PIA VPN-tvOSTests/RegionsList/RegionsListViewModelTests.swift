@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 import XCTest
 @testable import PIA_VPN_tvOS
 
