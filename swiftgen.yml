@@ -19,9 +19,25 @@ ib:
         module: PIA_VPN
 
 xcassets:
-    inputs:
-        - PIA VPN/Resources/Images/Images.xcassets
-        - PIA VPN/Resources/Images/UI.xcassets
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Resources/Images.xcassets
+        - LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Resources/UI.xcassets
     outputs:
         templatePath: Resources/SwiftGen/xcassets/swift5.stencil
-        output: PIA VPN/UI/Shared/SwiftGen+Assets.swift
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Generated/Asset.swift
+        params:
+            publicAccess: true
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsTV/Resources/Assets.xcassets
+    outputs:
+        templatePath: Resources/SwiftGen/xcassets/swift5.stencil
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsTV/Generated/Asset.swift
+        params:
+            publicAccess: true
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsWidget/Resources/Assets.xcassets
+    outputs:
+        templatePath: Resources/SwiftGen/xcassets/swift5.stencil
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsWidget/Generated/Asset.swift
+        params:
+            publicAccess: true
