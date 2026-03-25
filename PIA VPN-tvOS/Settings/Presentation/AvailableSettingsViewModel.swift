@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 class AvailableSettingsViewModel: ObservableObject {
     enum Sections: Equatable, Hashable, Identifiable {
@@ -21,11 +22,11 @@ class AvailableSettingsViewModel: ObservableObject {
         var title: String {
             switch self {
             case .account:
-                return L10n.Localizable.Menu.Item.account
+                return L10n.Menu.Item.account
             case .general:
-                return L10n.Localizable.Global.General.settings
+                return L10n.Global.General.settings
             case .dedicatedIp:
-                return L10n.Localizable.Dedicated.Ip.title
+                return L10n.Dedicated.Ip.title
             }
         }
     }

@@ -24,6 +24,7 @@ import Foundation
 import IntentsUI
 import Intents
 import PIALibrary
+import PIALocalizations
 
 public class SiriShortcutsManager: NSObject {
 
@@ -68,17 +69,17 @@ public class SiriShortcutsManager: NSObject {
     
     func descriptionActionForConnectShortcut() -> String {
         if AppPreferences.shared.useConnectSiriShortcuts {
-            return L10n.Localizable.Global.edit
+            return L10n.Global.edit
         } else {
-            return L10n.Localizable.Global.add
+            return L10n.Global.add
         }
     }
     
     func descriptionActionForDisconnectShortcut() -> String {
         if AppPreferences.shared.useDisconnectSiriShortcuts {
-            return L10n.Localizable.Global.edit
+            return L10n.Global.edit
         } else {
-            return L10n.Localizable.Global.add
+            return L10n.Global.add
         }
     }
     
@@ -92,9 +93,9 @@ extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
         error: Error?
         ) {
         if let _ = error {
-            let message = L10n.Localizable.Siri.Shortcuts.Add.error
+            let message = L10n.Siri.Shortcuts.Add.error
             let alert = Macros.alert(nil, message)
-            alert.addCancelActionWithTitle(L10n.Localizable.Global.cancel) {
+            alert.addCancelActionWithTitle(L10n.Global.cancel) {
                 controller.dismiss(animated: true, completion: nil)
             }
             controller.present(alert, animated: true, completion: nil)

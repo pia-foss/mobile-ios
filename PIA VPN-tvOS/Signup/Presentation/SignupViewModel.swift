@@ -8,12 +8,13 @@
 
 import Foundation
 import PIALibrary
+import PIALocalizations
 
 class SignupViewModel: ObservableObject {
     let title: String = L10n.Signup.Purchase.Trials.region
     let optionButtons: [OnboardingComponentButton]
-    let subscribeButtonTitle = L10n.Localizable.Tvos.Signup.Subscription.Paywall.Button.subscribe
-    @Published var subtitle: String = L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle("")
+    let subscribeButtonTitle = L10n.Tvos.Signup.Subscription.Paywall.Button.subscribe
+    @Published var subtitle: String = L10n.Tvos.Signup.Subscription.Paywall.subtitle("")
     @Published var selectedSubscription: SubscriptionOption = .yearly
     @Published var isLoading: Bool = false
     @Published var shouldShowErrorMessage = false
@@ -44,7 +45,7 @@ class SignupViewModel: ObservableObject {
                 Task { @MainActor in
                     subscriptionOptions = subscriptionOptionViewModels
                     if let price = subscriptionOptions.first(where: { $0.option == .yearly })?.rawPrice {
-                        subtitle = L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle(price)
+                        subtitle = L10n.Tvos.Signup.Subscription.Paywall.subtitle(price)
                     }
                     
                     isLoading = false

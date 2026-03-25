@@ -51,7 +51,6 @@ internal enum StoryboardSegue {
   internal enum Welcome: String, SegueType {
     case expiredAccountPurchaseSegue = "ExpiredAccountPurchaseSegue"
     case loginAccountSegue = "LoginAccountSegue"
-    case purchaseVPNPlanSegue = "PurchaseVPNPlanSegue"
     case restoreLoginPurchaseSegue = "RestoreLoginPurchaseSegue"
     case restorePurchaseSegue = "RestorePurchaseSegue"
     case signupViaPurchaseSegue = "SignupViaPurchaseSegue"

@@ -29,6 +29,7 @@ import PIAWireguard
 #endif
 import UIKit
 import Logging
+import PIALocalizations
 
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
@@ -152,8 +153,6 @@ class Bootstrapper {
         Client.providers.accountProvider.featureFlags({ _ in
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
-            AppPreferences.shared.showNewInitialScreen = Client.configuration.featureFlags.contains(Client.FeatureFlags.showNewInitialScreen)
-
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
@@ -317,7 +316,7 @@ class Bootstrapper {
     
     @objc private func internetUnreachable(notification: Notification) {
         #if os(iOS)
-        Macros.displayStickyNote(withMessage: L10n.Localizable.Global.unreachable,
+        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
                                  andImage: Asset.Images.iconWarning.image)
         #endif
     }

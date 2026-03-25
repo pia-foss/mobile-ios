@@ -23,6 +23,7 @@
 import Foundation
 import PIALibrary
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AccountObserver.self)
 
@@ -89,8 +90,8 @@ class AccountObserver {
             
             let note = UNMutableNotificationContent()
 
-            note.title = L10n.Localizable.Expiration.title
-            note.body = L10n.Localizable.Expiration.message
+            note.title = L10n.Expiration.title
+            note.body = L10n.Expiration.message
             note.userInfo = ["date": date]
             note.sound = .default
             note.badge = 1

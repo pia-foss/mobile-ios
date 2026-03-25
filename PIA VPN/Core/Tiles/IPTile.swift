@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import Combine
+import PIALocalizations
 
 class IPTile: UIView, Tileable  {
     
@@ -80,9 +81,9 @@ class IPTile: UIView, Tileable  {
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue
-        self.localIpValue.accessibilityLabel = Client.daemons.publicIP ?? L10n.Localizable.Global.empty
+        self.localIpValue.accessibilityLabel = Client.daemons.publicIP ?? L10n.Global.empty
         self.vpnIpValue.text = emptyIPValue
-        self.vpnIpValue.accessibilityLabel = L10n.Localizable.Global.empty
+        self.vpnIpValue.accessibilityLabel = L10n.Global.empty
 
     }
     
@@ -96,8 +97,8 @@ class IPTile: UIView, Tileable  {
     
     private func updateIPLabels(publicIP: String?, vpnIP: String?) {
         self.localIpValue.text = publicIP ?? emptyIPValue
-        self.localIpValue.accessibilityLabel = publicIP ?? L10n.Localizable.Global.empty
+        self.localIpValue.accessibilityLabel = publicIP ?? L10n.Global.empty
         self.vpnIpValue.text = vpnIP ?? self.emptyIPValue
-        self.vpnIpValue.accessibilityLabel = vpnIP ?? L10n.Localizable.Global.empty
+        self.vpnIpValue.accessibilityLabel = vpnIP ?? L10n.Global.empty
     }
 }

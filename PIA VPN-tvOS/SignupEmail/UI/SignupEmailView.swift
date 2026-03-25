@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct SignupEmailView: View {
     @State private var email = ""
@@ -49,9 +50,9 @@ struct SignupEmailView: View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-                    Button(L10n.Localizable.Global.ok) {}
+                    Button(L10n.Global.ok) {}
                 }, message: {
-                    Text(viewModel.errorMessage ?? L10n.Localizable.Tvos.Signup.Email.Error.Message.generic)
+                    Text(viewModel.errorMessage ?? L10n.Tvos.Signup.Email.Error.Message.generic)
             })
         }
     }

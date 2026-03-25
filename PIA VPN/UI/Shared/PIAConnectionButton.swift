@@ -24,6 +24,7 @@ import Foundation
 import UIKit
 import PIALibrary
 import PIAUIKit
+import PIALocalizations
 
 private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0
@@ -46,9 +47,9 @@ class PIAConnectionButton: UIButton, Restylable {
     var isOn: Bool = false {
         didSet {
             if isOn == true {
-                self.accessibilityLabel = L10n.Localizable.Dashboard.Accessibility.Vpn.Button.isOn
+                self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.Button.isOn
             } else {
-                self.accessibilityLabel = L10n.Localizable.Dashboard.Accessibility.Vpn.Button.isOff
+                self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.Button.isOff
             }
         }
     }
@@ -79,7 +80,7 @@ class PIAConnectionButton: UIButton, Restylable {
 
     private func setupView() {
         
-        self.accessibilityLabel = L10n.Localizable.Dashboard.Accessibility.Vpn.button
+        self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.button
         
         //Notification when the theme has changed
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)

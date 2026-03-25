@@ -21,6 +21,7 @@
 
 import UIKit
 import PIAUIKit
+import PIALocalizations
 
 final class MagicLinkLoginViewController: AutolayoutViewController {
 

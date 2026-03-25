@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import PIALocalizations
 
 
 class LeadingNavigationBarViewModel: ObservableObject {
@@ -30,9 +31,9 @@ class LeadingNavigationBarViewModel: ObservableObject {
         var title: String {
             switch self {
             case .vpn:
-                return L10n.Localizable.TopNavigationBar.VpnItem.title
+                return L10n.TopNavigationBar.VpnItem.title
             case .locations:
-                return L10n.Localizable.TopNavigationBar.LocationItem.title
+                return L10n.TopNavigationBar.LocationItem.title
             }
         }
         

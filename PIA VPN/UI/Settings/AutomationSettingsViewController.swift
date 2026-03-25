@@ -23,6 +23,7 @@ import UIKit
 import PIALibrary
 import SafariServices
 import PIADesignSystem
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AutomationSettingsViewController.self)
 
@@ -47,7 +48,7 @@ class AutomationSettingsViewController: PIABaseSettingsViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.automation)
+        styleNavigationBarWithTitle(L10n.Settings.Section.automation)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -88,7 +89,7 @@ class AutomationSettingsViewController: PIABaseSettingsViewController {
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
     
-        styleNavigationBarWithTitle(L10n.Localizable.Settings.Section.automation)
+        styleNavigationBarWithTitle(L10n.Settings.Section.automation)
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
@@ -113,7 +114,7 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.style(style: TextStyle.textStyle21)
             cell.backgroundColor = .clear
-            cell.textLabel?.text =  L10n.Localizable.Settings.Hotspothelper.description
+            cell.textLabel?.text =  L10n.Settings.Hotspothelper.description
             return cell
         }
         return nil
@@ -166,7 +167,7 @@ extension AutomationSettingsViewController: UITableViewDelegate, UITableViewData
             cell.selectionStyle = .none
             switchEnableNMT.isOn = Client.preferences.nmtRulesEnabled
         case .manageAutomation:
-            cell.textLabel?.text = L10n.Localizable.Network.Management.Tool.title
+            cell.textLabel?.text = L10n.Network.Management.Tool.title
         }
         
         Theme.current.applySecondaryBackground(cell)

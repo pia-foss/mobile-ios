@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct PrivacyPolicyView: View {
     
     let privacyPolicyURL: URL
     
-    let privacyPolicyDescription = L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.description
-    let privacyPolicyQrCodeMessage = L10n.Localizable.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message
+    let privacyPolicyDescription = L10n.HelpMenu.AboutSection.PrivacyPolicy.description
+    let privacyPolicyQrCodeMessage = L10n.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message
     
     var body: some View {
         VStack(alignment: .leading, spacing: 60) {

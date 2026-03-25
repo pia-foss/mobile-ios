@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALocalizations
 
 struct FormTextFieldsView: View {
     enum FocusedField: Hashable {
@@ -23,18 +24,18 @@ struct FormTextFieldsView: View {
     var body: some View {
         VStack {
             TextField(
-                L10n.Localizable.Tvos.Login.Placeholder.username,
+                L10n.Tvos.Login.Placeholder.username,
                 text: $username,
-                prompt: Text(L10n.Localizable.Tvos.Login.Placeholder.username)
+                prompt: Text(L10n.Tvos.Login.Placeholder.username)
             )
             .textFieldStyle(TextFieldStyleModifier())
             .frame(width: 510, height: 66)
             .focused($focus, equals: .username)
             
             SecureField(
-                L10n.Localizable.Tvos.Login.Placeholder.password,
+                L10n.Tvos.Login.Placeholder.password,
                 text: $password,
-                prompt: Text(L10n.Localizable.Tvos.Login.Placeholder.password)
+                prompt: Text(L10n.Tvos.Login.Placeholder.password)
             )
             .textFieldStyle(TextFieldStyleModifier())
             .frame(width: 510, height: 66)

@@ -10,6 +10,7 @@ fastlane and xcode cloud are used for ci/cd
 
 ## Project Structure
 
+@ADRs/                          contains Architecture Decision Records
 @ci_scripts/                    Xcode Cloud CI scripts
 @fastlane/                      CI/CD automation
 @"PIA VPN/"                     main iOS folder

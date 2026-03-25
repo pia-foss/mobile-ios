@@ -1,0 +1,647 @@
+// GLOBAL
+
+"global.ok" = "موافق";
+"global.cancel" = "إلغاء";
+"global.close" = "إغلاق";
+"global.error" = "خطأ";
+"global.automatic" = "تلقائي";
+"global.required" = "مطلوب";
+"global.optional" = "اختياري";
+"global.clear" = "مسح";
+"global.update" = "تحديث";
+"global.edit" = "تحرير";
+"global.unreachable" = "لم يتم العثور على اتصال بالإنترنت. يرجى التأكيد أن لديك اتصال بالإنترنت.";
+"global.enabled" = "ممكّن";
+"global.disabled" = "معطل";
+"global.enable" = "تمكين";
+"global.disable" = "تعطيل";
+"global.add" = "إضافة";
+"global.remove" = "إزالة";
+"global.empty" = "فارغ";
+"global.yes" = "نعم";
+"global.no" = "لا";
+"global.or" = "أو";
+"global.row.selection" = "تحديد الصف";
+"global.general.settings" = "الإعدادات العامة";
+"global.version" = "الإصدار";
+
+// NOTIFICATIONS
+
+"notifications.disabled.title" = "تم تعطيل الإشعارات";
+"notifications.disabled.message" = "قم بتمكين الإعلامات لكي يتم تذكيرك بتجديد اشتراكك قبل انتهائه.";
+"notifications.disabled.settings" = "الإعدادات";
+
+"expiration.title" = "تجديد";
+"expiration.message" = "سينتهي اشتراكك قريبًا. قم بتجديده لتبقى محميًا.";
+
+"local_notification.non_compliant_wifi.title" = "واي فاي غير آمنة: %@";
+"local_notification.non_compliant_wifi.text" = "اضغط هنا لحماية جهازك";
+
+// SHORTCUTS
+
+"shortcuts.connect" = "اتصال";
+"shortcuts.disconnect" = "قطع الاتصال";
+"shortcuts.select_region" = "حدّد منطقة";
+
+// RENEWAL
+
+"renewal.success.title" = "شكرًا لك";
+"renewal.success.message" = "تم تجديد حسابك بنجاح.";
+"renewal.failure.message" = "تعذر إرسال إيصال الشراء، يرجى إعادة المحاولة في وقت لاحق.";
+
+// MENU
+"menu.accessibility.edit.tile" = "تحرير";
+"menu.accessibility.item" = "القائمة";
+"menu.accessibility.logged_as" = "تم تسجيل الدخول باسم %@";
+"menu.expiration.expires_in" = "ينتهي الاشتراك في";
+"menu.expiration.days" = "%d يوم/أيام";
+"menu.expiration.hours" = "%d ساعة/ساعات";
+"menu.expiration.one_hour" = "ساعة واحدة";
+"menu.expiration.upgrade" = "ترقية الحساب";
+"menu.item.region" = "تحديد المنطقة";
+"menu.item.about" = "حول التطبيق";
+"menu.item.account" = "الحساب";
+"menu.item.settings" = "الإعدادات";
+"menu.item.logout" = "تسجيل الخروج";
+"menu.item.web.privacy" = "سياسة الخصوصية";
+"menu.item.web.home" = "الصفحة الرئيسية";
+"menu.item.web.support" = "الدعم";
+
+"menu.logout.title" = "تسجيل الخروج";
+"menu.logout.message" = "سيؤدي تسجيل الخروج إلى تعطيل الـ VPN وتركك بدون حماية.";
+"menu.logout.confirm" = "تسجيل الخروج";
+
+"menu.renewal.title" = "تجديد";
+"menu.renewal.purchase" = "شراء";
+"menu.renewal.renew" = "تجديد";
+"menu.renewal.message.trial" = "الحسابات التجريبية غير مخولة للتجديد. يرجى إنشاء حساب جديد بعد انتهاء الفترة التجريبية للاستمرار في استخدام الخدمة.";
+"menu.renewal.message.website" = "يرجى استخدام موقعنا الإلكتروني لتجديد اشتراكك.";
+"menu.renewal.message.unavailable" = "خوادم أبل غير متاحة حاليًا. يرجى إعادة المحاولة لاحقًا.";
+
+// ACCOUNT
+
+"account.email.placeholder" = "البريد الإلكتروني";
+"account.username.caption" = "اسم المستخدم";
+"account.restore.title" = "استرداد الشراء غير المقيد في الحساب";
+"account.restore.description" = "إذا جدَّدت خطتك ولكن لا يزال حسابك يقول أنها أوشكت على الانتهاء، يمكنك إعادة بدء التجديد من هنا. لن يتم تحصيل رسوم منك أثناء هذه العملية.";
+"account.restore.button" = "استرداد الشراء";
+"account.restore.failure.title" = "استرداد الشراء";
+"account.restore.failure.message" = "لم يتم العثور على عملية شراء قابلة للاسترداد للتجديد.";
+"account.expiry_date.information" = "ستنتهي صلاحية خطتك في %@.";
+"account.expiry_date.expired" = "لقد انتهت صلاحية خطتك.";
+"account.subscriptions.message" = "يمكنك إدارة اشتراكك من هنا.";
+"account.subscriptions.linkMessage" = "هنا.";
+"account.set.email.error" = "حدث خطأ أثناء إضافة البريد الإلكتروني. يرجى إعادة المحاولة.";
+"account.subscriptions.short.message" = "إدارة الاشتراك";
+"account.subscriptions.short.linkMessage" = "إدارة الاشتراك";
+"account.subscriptions.yearly" = "خطة سنوية";
+"account.subscriptions.monthly" = "خطة شهرية";
+"account.subscriptions.trial" = "خطة تجريبية";
+"account.unauthorized" = "حدث خطأ. يرجى محاولة تسجيل الدخول مرة أخرى";
+"account.delete" = "حذف الحساب";
+"account.survey.message" = "هل ترغب في المساهمة لجعل تطبيق PIA أفضل؟ شاركنا بمقترحاتك في الاستطلاع!\n";
+"account.survey.messageLink" = "املأ الاستطلاع";
+
+// SETTINGS
+
+"settings.connection.title" = "الاتصال";
+"settings.connection.vpn_protocol.title" = "اختيار البروتوكول";
+"settings.connection.transport.title" = "نقل";
+"settings.connection.remote_port.title" = "منفذ بعيد";
+
+"settings.encryption.cipher.title" = "تشفير البيانات";
+"settings.encryption.handshake.title" = "مصافحة";
+
+"settings.application_settings.active_theme.title" = "النسق النشط";
+"settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
+"settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
+"settings.application_settings.reconnect_notifications.title" = "إشعارات إعادة الاتصال";
+"settings.application_settings.reconnect_notifications.footer" = "احصل على تنبيهات عندما يعيد VPN الاتصال بموقع مختلف. قم بالتعطيل لإيقاف تلقي هذه الإشعارات.";
+"settings.application_settings.leak_protection.title" = "حماية من تسريب المعلومات";
+"settings.application_settings.leak_protection.footer" = "يتضمن نظام iOS ميزات مصممة للعمل خارج شبكة VPN افتراضيًا مثل AirDrop و CarPlay و AirPlay ونقاط الاتصال الشخصية. يؤدي تمكين الحماية المخصصة من تسريب المعلومات إلى توجيه حركة البيانات عبر VPN ولكنه قد يؤثر على كيفية عمل هذه الميزات. المزيد من المعلومات";
+"settings.application_settings.leak_protection.more_info" = "المزيد من المعلومات";
+"settings.application_settings.allow_local_network.title" = "السماح بالوصول إلى الأجهزة الموجودة على الشبكة المحلية";
+"settings.application_settings.allow_local_network.footer" = "كن متصلًا بالأجهزة المحلية مثل الطابعات أو خوادم الملفات أثناء الاتصال بشبكة VPN. (اسمح بذلك فقط إذا كنت تثق في الأشخاص المتصلين بشبكتك والأجهزة التي عليها.)";
+"settings.application_settings.leak_protection.alert.title" = "سيتم تفعيل التعديلات على إعدادات الـ VPN عند معاودة الاتصال";
+
+"settings.content_blocker.title" = "حالة حظر المحتوى في Safari";
+"settings.content_blocker.refresh.title" = "تحديث قائمة الحظر";
+"settings.content_blocker.footer" = "لتفعيل أو تعطيل حظر المحتوى على متصفح Safari، اذهب الى الإعدادات > التطبيقات > Safari > الإضافات وتفعيل PIA VPN";
+
+"settings.application_information.debug.title" = "إرسال سجل تتبع الأخطاء إلى الدعم";
+"settings.application_information.debug_logging.title" = "تمكين تسجيل تصحيح الأخطاء";
+"settings.application_information.debug.failure.title" = "حدث خطأ أثناء الإرسال";
+"settings.application_information.debug.failure.message" = "تعذَّر إرسال معلومات تتبع الأخطاء وإصلاحها.";
+"settings.application_information.debug.empty.title" = "معلومات تتبع الأخطاء فارغة";
+"settings.application_information.debug.empty.message" = "معلومات تتبع الأخطاء فارغة. يرجى محاولة إجراء اتصال قبل محاولة إعادة الإرسال.";
+"settings.application_information.debug.success.title" = "تم إرسال معلومات تتبع الأخطاء";
+"settings.application_information.debug.success.message" = "تم إرسال معلومات تتبع الأخطاء بنجاح.\nالمعرف: %@\nيرجى تدوين هذا المعرف، حيث أن فريق الدعم سيحتاجه لتحديد ما أرسلته.";
+
+"settings.commit.messages.must_disconnect" = "يجب إعادة اتصال VPN حتى تسري بعض التغييرات.";
+"settings.commit.messages.should_reconnect" = "أعد اتصال VPN لتطبيق التغييرات.";
+"settings.commit.buttons.reconnect" = "إعادة اتصال";
+"settings.commit.buttons.later" = "لاحقًا";
+
+"settings.reset.defaults.title" = "إعادة تعيين الإعدادات إلى الافتراضية";
+"settings.reset.defaults.confirm.title" = "إعادة تعيين الإعدادات";
+"settings.reset.defaults.confirm.message" = "سيؤدي هذا الإجراء إلى عودة التطبيق إلى حالته الافتراضية وستفقد كل التغييرات التي أجريتها.";
+"settings.reset.defaults.confirm.button" = "إعادة تعيين";
+"settings.reset.footer" = "سيؤدي هذا الإجراء إلى إعادة تعيين جميع الإعدادات أعلاه.";
+
+"settings.small.packets.title" = "استخدام حزم صغيرة";
+"settings.small.packets.description" = "سيخفض حجم حزمة IP قليلًا لتحسين التوافق مع بعض أنواع الموجهات وشبكات الجوَّال.";
+
+"settings.log.information" = "حفظ سجلات تصحيح الأخطاء التي يمكن إرسالها إلى الدعم الفني للمساعدة في استكشاف المشكلات وإصلاحها.";
+
+"settings.geo.servers.description" = "إظهار المناطق المحدد موقعها جغرافيًا";
+"settings.cards.history.title" = "آخر الأخبار";
+
+"settings.section.general" = "عام";
+"settings.section.protocols" = "البروتوكولات";
+"settings.section.network" = "الشبكة";
+"settings.section.privacyFeatures" = "ميزات الخصوصية";
+"settings.section.automation" = "الأتمتة";
+"settings.section.help" = "مساعدة";
+
+// CONTENT BLOCKER
+
+"content_blocker.title" = "حظر المحتوى في Safari";
+"content_blocker.body.subtitle" = "لتفعيل استخدام حظر المحتوى على متصفح Safari، يرجى الذهاب الى الإعدادات > التطبيقات > Safari > الإضافات وتفعيل PIA VPN";
+"content_blocker.body.footer" = "يرجى الملاحظة: يعمل حظر المحتوى دون الحاجة للاتصال بشبكة VPN، ولكنه لن يعمل إلا على متصفح Safari.";
+
+// ABOUT
+
+"about.app" = "VPN من Private Internet Access";
+"about.accessibility.component.expand" = "اضغط لقراءة الترخيص الكامل";
+
+// DASHBOARD
+
+"dashboard.connection.ip.unreachable" = "لا يمكن الوصول إلى الإنترنت";
+
+"dashboard.vpn.disconnected" = "تم قطع الاتصال";
+"dashboard.vpn.connecting" = "جارٍ الاتصال...";
+"dashboard.vpn.protected" = "محمي";
+"dashboard.vpn.not_protected" = "غير محمي";
+"dashboard.vpn.disconnecting" = "جارٍ قطع الاتصال...";
+"dashboard.vpn.changing_region" = "جارٍ تغيير المنطقة...";
+"dashboard.accessibility.vpn.button" = "زر اتصال VPN";
+"dashboard.accessibility.vpn.button.isOn" = "زر اتصال VPN. خدمة VPN متصلة حاليًا";
+"dashboard.accessibility.vpn.button.isOff" = "زر اتصال VPN. خدمة VPN غير متصلة حاليًا";
+
+"dashboard.vpn.leakprotection.alert.title" = "تم العثور على شبكة واي فاي غير آمنة";
+"dashboard.vpn.leakprotection.alert.message" = "لمنع تسريب البيانات، اضغط على تعطيل الآن لإغلاق \"السماح بالوصول إلى الأجهزة الموجودة على الشبكة المحلية\" وإعادة الاتصال تلقائيًا.";
+"dashboard.vpn.leakprotection.alert.cta1" = "تعطيل الآن";
+"dashboard.vpn.leakprotection.alert.cta2" = "اعرف أكثر";
+"dashboard.vpn.leakprotection.alert.cta3" = "تجاهل";
+
+"dashboard.vpn.leakprotection.ikev2.alert.message" = "لمنع تسرب البيانات، اضغط على التبديل الآن للتغير إلى بروتوكول IKEv2 VPN وإعادة الاتصال تلقائيًا.";
+"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "التبديل الآن";
+
+"dashboard.vpn.change_location.alert.title" = "تغيير الموقع؟";
+"dashboard.vpn.change_location.alert.message" = "سينقطع اتصال VPN مؤقتًا أثناء الاتصال بالموقع الجديد.";
+"dashboard.vpn.change_location.alert.button.connect" = "اتصال";
+
+// VPN PERMISSION
+
+"vpn_permission.title" = "PIA";
+"vpn_permission.body.title" = "يحتاج PIA إلى الوصول إلى تكوينات VPN لتأمين حركة مرورك.";
+"vpn_permission.body.subtitle" = "سترى مطالبة من PIA VPN وتحتاج إلى السماح بالوصول إلى تكوينات VPN. للمتابعة اضغط على \"%@\".";
+"vpn_permission.body.footer" = "نحن لا نقوم بمراقبة أو تصفية أو تسجيل أي نشاط على الشبكة.";
+"vpn_permission.disallow.message.basic" = "نحن بحاجة إلى هذا الإذن ليعمل التطبيق.";
+"vpn_permission.disallow.message.support" = "يمكنك أيضًا الاتصال بدعم العملاء إذا كنت بحاجة إلى المساعدة.";
+"vpn_permission.disallow.contact" = "اتصال";
+
+// CUSTOM DNS
+
+"settings.dns.custom" = "مخصص";
+"settings.dns.alert.create.message" = "قد يؤدي استخدام عناوين DNS غير المزودة عن طريق PIA إلى كشف حركة مرور DNS بأجهزتك لأطراف ثالثة وتهديد خصوصيتك.";
+"settings.dns.alert.clear.title" = "مسح DNS";
+"settings.dns.alert.clear.message" = "سيؤدي هذا إلى مسح DNS المخصص والعودة تلقائيًا إلى PIA DNS الافتراضي.";
+"settings.dns.custom.dns" = "عنوان DNS مخصص";
+"settings.dns.primaryDNS" = "عنوان DNS أساسي";
+"settings.dns.secondaryDNS" = "عنوان DNS ثانوي";
+"settings.dns.validation.primary.mandatory" = "عنوان DNS الأساسي إلزامي.";
+"settings.dns.validation.primary.invalid" = "عنوان DNS الأساسي غير صحيح.";
+"settings.dns.validation.secondary.invalid" = "عنوان DNS الثانوي غير صحيح.";
+
+// HOTSPOT HELPER
+
+"settings.hotspothelper.description" = "قم بتكوين سلوك PIA عند الاتصال بشبكات WiFi أو الشبكات الخلوية. هذا مستثنى منه قطع الاتصال يدويًا.";
+"settings.hotspothelper.available.help" = "لتعبئة هذه القائمة، انتقل إلى إعدادات iOS > WiFi.";
+"hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
+"hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
+"tiles.quicksetting.nmt.title" = "إدارة الشبكات";
+"tiles.quicksetting.private.browser.title" = "المتصفح الخاص";
+"settings.nmt.killswitch.disabled" = "مفتاح قطع اتصال VPN معطّل حاليًا. للتأكد من أن أداة إدارة الشبكة تعمل، وأنك قادر على إعادة الاتصال عند التبديل بين الشبكات، يرجى تمكين مفتاح قطع اتصال VPN في الإعدادات.";
+"settings.service.quality.share.title" = "ساعدنا في تحسين PIA";
+"settings.service.quality.share.description" = "ساعدنا في التحسين من خلال مشاركة إحصائيات اتصال VPN. لا تحتوي هذه التقارير أبدًا على معلومات محددة للهوية.";
+"settings.service.quality.share.findoutmore" = "معرفة المزيد";
+"settings.service.quality.show.title" = "إحصائيات الاتصال";
+
+"network.management.tool.open.wifi" = "WiFi عامة";
+"network.management.tool.secure.wifi" = "تأمين WiFi";
+"network.management.tool.mobile.data" = "بيانات الموبايل";
+"network.management.tool.always.connect" = "اتصال بـ VPN دائمًا";
+"network.management.tool.always.disconnect" = "قطع اتصال VPN دائمًا";
+"network.management.tool.retain.state" = "احتفاظ بحالة VPN";
+"network.management.tool.add.rule" = "إضافة قاعدة جديدة";
+"network.management.tool.choose.wifi" = "اختر شبكة WiFi لإضافة قاعدة جديدة. ";
+"network.management.tool.title" = "أتمتة الإدارة";
+"network.management.tool.alert" = "تم تكوين إعدادات الأتمتة لإبقاء VPN غير متصلة في ظل ظروف الشبكة الحالية.";
+"network.management.tool.disable" = "تعطيل الأتمتة";
+"network.management.tool.enable.automation" = "تمكين الأتمتة";
+
+// REGION
+
+"region.search.placeholder" = "بحث عن المنطقة";
+"region.accessibility.filter" = "تصفية";
+"region.filter.sortby" = "فرز المناطق حسب";
+"region.filter.name" = "الاسم";
+"region.filter.latency" = "زمن الانتقال";
+"region.filter.favorites" = "المفضلة";
+"region.accessibility.favorite" = "إضافة منطقة مفضلة";
+"region.accessibility.unfavorite" = "إزالة منطقة مفضلة";
+"region.refresh.connected.error" = "غير قادر على تحديث زمن الانتقال أثناء الاتصال بشبكة VPN";
+
+// TILES
+"tiles.quick.connect.title" = "اتصال سريع";
+"tiles.favorite.servers.title" = "الخوادم المفضلة";
+"tiles.region.title" = "خادم VPN";
+"tiles.subscription.title" = "الاشتراك";
+"tiles.subscription.trial" = "تجريبي";
+"tiles.subscription.monthly" = "شهريًا";
+"tiles.subscription.yearly" = "سنويًا";
+"tiles.subscription.days.left" = "(متبقي %d أيام)";
+"tiles.usage.title" = "الاستخدام";
+"tiles.usage.ipsec.title" = "(غير متاح على IKEv2)";
+"tiles.usage.upload" = "تحميل";
+"tiles.usage.download" = "تنزيل";
+"tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
+"tiles.quicksettings.title" = "إعدادات سريعة";
+"tiles.quicksettings.min.elements.message" = "يجب أن تبقي عنصرًا واحدًا على الأقل مرئيًا في لوح الإعدادات السريعة";
+"tiles.accessibility.visible.tile.action" = "اضغط لإزالة هذا المربع من لوحة المعلومات";
+"tiles.accessibility.invisible.tile.action" = "اضغط لإضافة هذا المربع إلى لوحة المعلومات";
+"tiles.feedback.title" = "كيف أبلينا؟";
+
+//SIRI SHORTCUTS
+"siri.shortcuts.connect.row.title" = "اتصال اختصار Siri";
+"siri.shortcuts.disconnect.row.title" = "قطع اتصال اختصار Siri";
+"siri.shortcuts.connect.title" = "اتصال PIA VPN";
+"siri.shortcuts.disconnect.title" = "قطع اتصال PIA VPN";
+"siri.shortcuts.add.error" = "حدث خطأ أثناء إضافة اختصار Siri. يرجى إعادة المحاولة.";
+
+//TODAY WIDGET
+"today.widget.login" = "تسجيل الدخول";
+
+//FRIEND REFERRALS
+
+// GDPR
+"gdpr.collect.data.title" = "المعلومات الشخصية التي نجمعها";
+"gdpr.collect.data.description" = "عنوان البريد الإلكتروني لأغراض إدارة الحساب والحماية من الإساءة.\n\nيتم استخدام عنوان البريد الإلكتروني لإرسال معلومات الاشتراك وتأكيد الدفع ومراسلات العملاء والعروض الترويجية الخاصة بالوصول إلى الإنترنت الخاص فقط.";
+"gdpr.accept.button.title" = "موافقة ومتابعة";
+
+// SET EMAIL
+"set.email.form.email" = "أدخل عنوان بريدك الإلكتروني";
+"set.email.why" = "نحتاج إلى بريدك الإلكتروني لإرسال اسم المستخدم وكلمة المرور.";
+"set.email.success.message_format" = "قمنا بإرسال اسم المستخدم وكلمة المرور لحسابك على عنوان بريدك الإلكتروني في %@";
+"set.email.password.caption" = "كلمة المرور";
+
+// EMAIL VALIDATOR
+"email.validation.invalid" = "البريد الإلكتروني غير صحيح. يرجى إعادة المحاولة.";
+"email.validation.empty" = "لا يمكن أن يكون البريد الإلكتروني فارغًا.";
+
+// RATING
+"rating.error.question" = "تعذّر تأسيس اتصال";
+"rating.error.subtitle" = "يمكنك محاولة تحديد منطقة مختلفة أو إعلامنا بها عن طريق فتح تذكرة دعم.";
+"rating.error.button.send" = "إرسال ملاحظات";
+
+// CALLING CARDS
+"card.wireguard.title" = "جرّب ®WireGuard اليوم!";
+"card.wireguard.description" = "إنه بروتوكول VPN جديد وأكثر كفاءة يوفر أداءً أفضل واستخدامًا أقل للمعالج وعمرًا أطول للبطارية.";
+"card.wireguard.cta.activate" = "جرّب ®WireGuard الآن";
+"card.wireguard.cta.learn" = "معرفة المزيد";
+
+// DEDICATED IP
+"dedicated.ip.title" = "عنوان IP مخصّص";
+"dedicated.ip.plural.title" = "عناوين IP المخصّصة";
+"dedicated.ip.activation.description" = "قم بتنشيط عنوان IP المخصّص عن طريق لصق الرمز في النموذج أدناه. إذا كنت قد اشتريت عنوان IP مخصصًا مؤخرًا، يمكنك إنشاء الرمز من خلال الذهاب إلى موقع PIA الإلكتروني.";
+"dedicated.ip.token.textfield.placeholder" = "الصق الرمز هنا";
+"dedicated.ip.token.textfield.accessibility" = "حقل النص الخاص بكتابة رمز IP المخصّص";
+"dedicated.ip.activate.button.title" = "تنشيط";
+"dedicated.ip.message.incorrect.token" = "يرجى التأكد من إدخال الرمز بشكل صحيح.";
+"dedicated.ip.message.invalid.token" = "الرمز غير صالح. يرجى التأكد من إدخال الرمز بشكل صحيح.";
+"dedicated.ip.message.valid.token" = "تم تنشيط عنوان IP المخصّص بنجاح. سيكون متاحًا في قائمة اختيار المنطقة.";
+"dedicated.ip.message.expired.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
+"dedicated.ip.message.error.retryafter" = "عدد طلبات تفعيل التوكن كبير جداً. يرجى إعادة المحاولة بعد %@ ثانية.";
+"dedicated.ip.message.token.willexpire" = "ستنتهي صلاحية عنوان IP المخصّص قريبًا. احصل على واحد جديد";
+"dedicated.ip.message.token.willexpire.link" = "احصل على واحد جديد";
+"dedicated.ip.message.ip.updated" = "تم تحديث عنوان IP المخصّص";
+"dedicated.ip.country.flag.accessibility" = "علم الدولة لـ %@";
+"dedicated.ip.remove" = "هل تريد بالتأكيد إزالة المنطقة المحددة؟";
+"dedicated.ip.limit.title" = "أمّن اتصالاتك بأي جهة عن بُعد باستخدام عنوان IP مخصّص من بلد من اختيارك. أثناء اشتراكك، سيكون عنوان IP هذا ملكًا لك وحدك، مما يحمي عمليات نقل البيانات الخاصة بك بأقوى تشفير في الوقت الحالي.";
+
+// RECONNECTIONS
+"server.reconnection.please.wait" = "يرجى الانتظار...";
+"server.reconnection.still.connection" = "قيد محاولة الاتصال...";
+
+// INAPP MESSAGES
+"inapp.messages.toggle.title" = "إظهار رسائل اتصال الخدمة";
+"inapp.messages.settings.updated" = "تم تحديث الإعدادات";
+
+// PIA WIDGET
+"widget.liveActivity.region.title" = "المنطقة";
+"widget.liveActivity.selected_protocol.title" = "البروتوكول";
+
+// Regions Selection(tvOS)
+"regions.filter.all.title" = "كل المواقع";
+"regions.filter.search.title" = "بحث";
+"regions.filter.favorites.title" = "المواقع المفضلة";
+"regions.list.all_locations.title" = "جميع المواقع";
+"regions.list.optimal_location.title" = "الموقع الأمثل";
+"regions.list.optimal_location_with_dip_location.title" = "الموقع الأمثل/ عنوان IP مخصص";
+"regions.search.recommended_locations.title" = "المواقع المقترحة";
+"regions.search.results.title" = "نتائج البحث";
+"regions.search.button.title" = "البحث عن موقع";
+"regions.search.input_field.placeholder" = "البحث عن مدينة أو بلد";
+"regions.search.previous_results.title" = "آخر المواقع التي تم البحث عنها";
+"regions.context_menu.favorites.add.text" = "إضافة إلى المفضلة";
+"regions.context_menu.favorites.remove.text" = "حذف من المفضلة";
+"regions.list_item.default.title" = "الموقع الافتراضي";
+
+// Top Navigation bar
+"top_navigation_bar.vpn_item.title" = "PIA VPN";
+"top_navigation_bar.location_item.title" = "الموقع";
+"top_navigation_bar.location_selection_screen.title" = "اختيار الموقع";
+
+//Onboarding - Connection Stats Permisson (tvOS)
+"onboarding.connection_stats.title" = "ساعدنا في تحسين PIA";
+"onboarding.connection_stats.subtitle" = "ساعدنا في تحسين البرنامج من خلال مشاركة إحصائيات اتصالات VPN معنا. لا تحتوي هذه التقارير أبدا على معلومات محددة للهوية.";
+
+//Onboarding - VPN Installing Profile (tvOS)
+"onboarding.vpn_configuration.title" = "ضبط إعدادات PIA";
+"onboarding.vpn_configuration.subtitle" = "عند الاتصال أول مرة، سوف يطلب منك السماح لبرنامج PIA بالوصول إلى إعدادات VPN. ويعد هذا ضروريا لتشفير حركة الإنترنت. \n\nملاحظة: لا نقوم أبدا بمراقبة أو تقييد أو تسجيل نشاطك عبر الإنترنت. \n\nللمتابعة انقر على الزر أدناه.";
+"onboarding.vpn_configuration.button" = "ضبط إعدادات PIA";
+
+//Welcome (tvOS)
+"tvos.welcome.title" = "VPN سريع وآمن لبث الأفلام والمسلسلات";
+"tvos.welcome.button.login" = "تسجيل الدخول";
+"tvos.welcome.button.signup" = "إنشاء حساب";
+
+//Login (tvOS)
+"tvos.login.title" = "أدخل تفاصيل حساب PIA الخاص بك";
+"tvos.login.placeholder.username" = "أدخل اسم المستخدم";
+"tvos.login.placeholder.password" = "أدخل كلمة المرور";
+
+"tvos.login.qr.title" = "تسجيل الدخول عبر تطبيق PIA";
+"tvos.login.qr.description" = "مسح رمز QR والتحقق من تسجيل الدخول عبر تطبيق PIA لنظام iOS.";
+"tvos.login.qr.timer" = "ستنتهي صلاحية الرمز في:";
+"tvos.login.qr.options" = "الخيارات الأخرى:";
+"tvos.login.qr.button.login" = "تسجيل الدخول عبر اسم المستخدم";
+"tvos.login.qr.button.restore" = "استعادة المشتريات";
+
+"tvos.login.qr.expired.title" = "انتهت صلاحية رمز QR";
+"tvos.login.qr.expired.description" = "إنشاء رمز QR جديد أدناه";
+"tvos.login.qr.expired.button.generate" = "إنشاء رمز QR";
+
+//Connection error(tvOS)
+"error_alert.connection_error.no_network.title" = "تعذر الاتصال";
+"error_alert.connection_error.no_network.message" = "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى";
+"error_alert.connection_error.no_network.retry_action.title" = "إعادة المحاولة";
+
+//Dashboard screen (tvOS)
+"location_selection.optimal_location.title" = "الموقع الأمثل";
+"location_selection.any_other_location.title" = "الموقع المحدد";
+"dashboard.connection_state.connected.title" = "متصل";
+"dashboard.connection_state.disconnected.title" = "غير متصل";
+"dashboard.connection_state.connecting.title" = "جارٍ الاتصال...";
+"dashboard.connection_state.reconnecting.title" = "جار إعادة الاتصال…";
+"dashboard.connection_state.disconnecting.title" = "جارٍ قطع الاتصال...";
+"dashboard.connection_state.error.title" = "خطأ في الاتصال";
+"dashboard.connection_state.network_error_alert.message" = "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى";
+"dashboard.connection_state.network_error_alert.primary_action.title" = "إعادة المحاولة";
+
+// Settings (tvOS)
+"settings.account.log_out_button.title" = "تسجيل الخروج";
+"settings.account.log_out_alert.title" = "هل أنت متأكد؟";
+"settings.account.log_out_alert.message" = "سيؤدي تسجيل الخروج إلى إنهاء أي اتصال VPN. ستفقد بعد ذلك حمايتك الرقمية.";
+"settings.account.subscription_expiry.title" = "ينتهي الاشتراك في";
+
+// Dedicated IP
+"settings.dedicatedip.title1" = "أدخل عنوان IP مخصص";
+"settings.dedicatedip.title2" = "عنوان IP مخصّص";
+"settings.dedicatedip.subtitle" = "نشّط عنوان IP المخصص عن طريق كتابة الرمز المميز الخاص بك أدناه. \nيمكنك شراء عنوان IP مخصص في إعدادات حسابك على موقع PIA.";
+"settings.dedicatedip.placeholder" = "أدخل رمز IP السري الخاص بك";
+"settings.dedicatedip.button" = "تنشيط";
+"settings.dedicatedip.alert.failure.title" = "حدث خطأ ما";
+"settings.dedicatedip.alert.failure.message" = "الرمز المميز إما غير صالح أو انتهت صلاحيته.";
+"settings.dedicatedip.alert.failure.message.empty" = "لا يمكن أن يكون الرمز المميز فارغا.";
+"settings.dedicatedip.alert.success.title" = "تمت العملية بنجاح";
+"settings.dedicatedip.alert.success.message" = "تم تنشيط عنوان IP المخصص.";
+"settings.dedicatedip.alert.success.button" = "متابعة";
+
+"settings.dedicatedip.stats.dedicatedip" = "عنوان IP مخصّص";
+"settings.dedicatedip.stats.ip" = "عنوان IP";
+"settings.dedicatedip.stats.location" = "الموقع";
+"settings.dedicatedip.stats.quickAction" = "الإجراءات السريعة";
+"settings.dedicatedip.stats.delete.button" = "حذف عنوان IP مخصص";
+"settings.dedicatedip.stats.delete.alert.title" = "هل أنت متأكد؟";
+"settings.dedicatedip.stats.delete.alert.message" = "أنت على وشك حذف عنوان IP مخصص من حسابك.";
+"settings.dedicatedip.stats.delete.alert.delete" = "نعم، حذف";
+
+"settings.dedicatedip.status.active" = "نشط";
+"settings.dedicatedip.status.invalid" = "غير صحيح";
+"settings.dedicatedip.status.expired" = "منتهي الصلاحية";
+"settings.dedicatedip.status.error" = "خطأ";
+
+// Help menu (tvOS)
+"help_menu.app_version_section.title" = "إصدار التطبيق";
+"help_menu.contact_support.qr_code.title" = "الاتصال بالدعم";
+"help_menu.contact_support.qr_code.message" = "امسح رمز QR للتواصل مع فريق الدعم.";
+
+"help_menu.about_options.acknowledgements.title" = "إقرارات";
+"help_menu.about_options.privacy_policy.title" = "سياسة الخصوصية";
+
+"help_menu.about_section.privacy_policy.description" = "تشرح سياسة الخصوصية ('سياسة الخصوصية' أو 'السياسة') ممارسات الخصوصية الخاصة بشركة Private Internet Access. (تتم الإشارة للشركة كالآتي: 'نحن' أو 'مسؤول البيانات' أو 'الشركة' أو 'PIA') وتنطبق على المستخدمين ('العملاء' أو 'أنت') لخدمات PIA، بما في ذلك خدمة PIA VPN ('الخدمة') وموقع PIA على شبكة الإنترنت عبر العنوان التالي: www. privateinternetaccess.com ('الموقع').";
+"help_menu.about_section.privacy_policy.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الخصوصية الكاملة في جهازك.";
+
+"help_menu.help_improve.enabled.title" = "نعم";
+"help_menu.help_improve.disabled.title" = "لا";
+
+"help_menu.about_section.acknowledgments.copyright.title" = "جميع الحقوق محفوظة 2014-2024 PRIVATE INTERNET ACCESS INC VPN";
+"help_menu.about_section.acknowledgments.copyright.description" = "منصة البرمجيات بوصفها خدمة (SaaS) قد تتضمن محتوى أو خدمات أو عمليات تكامل تابعة لجهات خارجية بهدف تحسين تجربة المستخدم وسهولة استخدام التطبيق. قد يتضمن هذا المحتوى، على سبيل المثال لا الحصر، واجهات برمجة التطبيقات أو الأدوات أو الإضافات أو الروابط لمواقع خارجية. وبينما نسعى جاهدين لضمان جودة وموثوقية محتوى الجهات الخارجية، نود التأكيد على أن هذا المحتوى يتم تقديمه \"كما هو\" دون تغيير ونحن لا نؤيد أو نضمن دقة أو موثوقية أو ملاءمة أي محتوى تابع لجهة خارجية.\n\nيجب العلم أن الوصول إلى محتوى الجهات الخارجية أو استخدامه قد يُخضع المستخدم لشروط الاستخدام وسياسات الخصوصية والاتفاقيات الأخرى لهذه الجهات الخارجية. نشجع المستخدمين على مراجعة هذه الشروط والسياسات قبل التعامل مع محتوى الجهات الخارجية.";
+
+//SignUp (tvOS)
+"tvos.signup.title" = "احصل على Private Internet Access";
+"tvos.signup.item1" = "خوادم VPN في 91 دولة";
+"tvos.signup.item2" = "سرعات فائقة";
+"tvos.signup.item3" = "خدمة دعم العملاء 24/7";
+"tvos.signup.cta" = "قم بمسح رمز QR وتنزيل التطبيق لإنشاء حساب جديد.";
+
+//Sign in expired (tvOS)
+"tvos.signin.expired.title" = "انتهت صلاحية الاشتراك";
+"tvos.signin.expired.subtitle" = "جدد اشتراكك من أجل استعادة حماية VPN كاملة أثناء البث.";
+"tvos.signin.expired.qr.title1" = "امسح رمز QR واختر خطة الاشتراك. يتم الاشتراك خلال بضع دقائق فقط.";
+"tvos.signin.expired.qr.title2" = "يمكنك العودة إلى Apple TV والاستمتاع بالخصوصية الرقمية مع PIA بمجرد الانتهاء من الاشتراك!";
+"tvos.signin.expired.button.renewed" = "لقد جددت اشتراكي";
+"tvos.signin.expired.button.signout" = "تسجيل الخروج";
+
+//Sign in free trial expired (tvOS)
+"tvos.signin.expired.trial.title" = "انتهت صلاحية التجربة المجانية";
+"tvos.signin.expired.trial.subtitle" = "هل استمتعت بحماية VPN مميزة؟ اشترك الآن في PIA!";
+
+//SignUp with subscription (tvOS)
+"tvos.signup.subscription.paywall.subtitle" = "ابدأ فترة التجربة المجانية لمدة 7 أيام ثم %@ سنويا.";
+"tvos.signup.subscription.paywall.price.year" = "سنويا";
+"tvos.signup.subscription.paywall.price.trial" = "أفضل عرض - فترة تجربة مجانية";
+"tvos.signup.subscription.paywall.price.month.simplified" = "/شهر";
+"tvos.signup.subscription.paywall.button.subscribe" = "اشترك الآن";
+
+"tvos.signup.subscription.error.message.generic" = "حدث خطأ. يرجى المحاولة مرة أخرى.";
+"tvos.signup.subscription.error.message.paymentCancelled" = "تم إلغاء الدفع. يرجى المحاولة مرة أخرى.";
+
+"tvos.signup.email.error.message.generic" = "لم يتم إنشاء حساب. يرجى المحاولة مرة أخرى في وقت لاحق";
+
+"tvos.signup.credentials.title" = "عملية ناجحة!";
+"tvos.signup.credentials.details.title" = "تم تفعيل الكارت بنجاح";
+"tvos.signup.credentials.details.subtitle" = "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.";
+
+"tvos.signup.credentials.details.button" = "ابدأ الآن";
+
+"tvos.signup.terms_conditions.title" = "الشروط والأحكام";
+
+"tvos.signup.terms_conditions.description" = "تغطي اتفاقية شروط الخدمة ('الاتفاقية') نطاق استخدامك ووصولك إلى موقع الويب (\"الموقع\") الخاص بشركة PIA Private Internet Access, Inc. ('PIA') عبر www.privateinternetaccess.com والشبكة الخاصة الافتراضية ( \"VPN\") وخدمات PIA المقدمة في الموقع (\"الخدمة (الخدمات)\"). من خلال زيارة الموقع والاشتراك و/أو استخدام الخدمات، فإنك (\"أنت\" أو \"المشترك\") (\"PIA\" و\"المشترك\" معروفان باسم \"الطرفين\") تقر بأنك قد قرأت الاتفاقية بالكامل وفهمت بنودها وتوافق على الالتزام بجميع الشروط والأحكام.";
+"tvos.signup.terms_conditions.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الشروط والأحكام الكاملة على جهازك.";
+
+//Force update (iOS)
+“forceupdate.label.title” = “طوّر تجربتك”;
+“forceupdate.label.subtitle” = “أنت تستخدم إصداراً قديماً من PIA. حدّث تطبيقك الآن للاستمتاع بتجربة محسّنة مع جميع أحدث الميزات.”;
+“forceupdate.button.update” = “حدّث الآن”;
+“forceupdate.label.vpn.connected” = “سيؤدي النقر على \”حدّث الآن\” إلى قطع اتصال VPN.”;
+
+"global.version.format" = "الإصدار %@ (%@)";
+
+"signup.in_progress.title"= "تأكيد التسجيل";
+"signup.in_progress.message"= "جارٍ تأكيد عملية الشراء مع نظامنا. يمكن أن يستغرق ذلك لحظة لذلك انتظر قليلًا.";
+
+"signup.success.title"= "تم الشراء";
+"signup.success.message_format"= "شضكراً على اشتراكك معنا. لقد أرسلنا اسم المستخدم وكلمة المرور الخاصين بك إلى بريدك الإلكتروني %@";
+"signup.success.redeem.title"= "تم استبدال البطاقة بنجاح";
+"signup.success.redeem.message"= "ستصلك رسالة عبر البريد الإلكتروني تتضمن اسم المستخدم وكلمة المرور.\n\nتفاصيل تسجيل الدخول";
+"signup.success.username.caption"= "اسم المستخدم";
+"signup.success.password.caption"= "كلمة المرور";
+"signup.success.submit"= "كيف تبدأ";
+
+"signup.failure.vc_title"= "فشل تسجيل الآن";
+"signup.failure.title"= "فشل إنشاء الحساب";
+"signup.failure.message"= "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
+"signup.failure.purchase.sandbox.message"= "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
+"signup.failure.redeem.invalid.title"= "رمز بطاقة غير صالح";
+"signup.failure.redeem.invalid.message"= "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
+"signup.failure.redeem.claimed.title"= "تم استخدام هذه البطاقة بالفعل";
+"signup.failure.redeem.claimed.message"= "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
+"signup.failure.submit"= "عودة";
+"signup.failure.internal"= "خطأ داخلي في التطبيق (%d)";
+"signup.failure.unknown"= "خطأ غير معروف: %s (%d)";
+
+"signup.unreachable.vc_title"= "خطأ";
+"signup.unreachable.title"= "أوبس!";
+"signup.unreachable.message"= "لم يتم العثور على اتصال بالإنترنت. يرجى التأكد من اتصالك بالإنترنت وضغط زر إعادة المحاولة أدناه.\n\nيمكنك العودة إلى التطبيق في وقت لاحق لإنهاء العملية.";
+"signup.unreachable.submit"= "أعد المحاولة";
+
+"signup.purchase.uncredited.alert.message"= "لديك معاملات غير معتمدة. هل تريد استعادة تفاصيل حسابك؟";
+"signup.purchase.uncredited.alert.button.cancel"= "إلغاء";
+
+"signup.purchase.trials.intro"= "ابدأ تجربتك المجانية لمدة 7 ايام";
+"signup.purchase.trials.price.after"= "ثم %@";
+"signup.purchase.trials.region"= "خوادم آمنة في أكثر من 90 دولة";
+
+"signup.purchase.subscribe.now"= "اشتراك الآن";
+
+// WALKTHROUGH
+
+"signup.walkthrough.page.2.title"= "خوادم آمنة في أكثر من 90 دولة";
+"signup.walkthrough.page.2.description"= "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
+
+"signup.share.data.buttons.accept"= "قبول";
+"signup.share.data.buttons.noThanks"= "لا، شكرًا";
+"signup.share.data.buttons.readMore"= "قراءة المزيد";
+"signup.share.data.text.title"= "يرجى مساعدتنا في تحسين خدمتنا";
+"signup.share.data.text.description"= "لمساعدتنا في ضمان أداء اتصال خدمتنا، يمكنك مشاركة إحصائيات اتصالك معنا دون الكشف عن هويتك. لا تتضمن هذه التقارير أي معلومات محددة للشخصية.";
+"signup.share.data.text.footer"= "يمكنك دائمًا التحكم في ذلك من إعداداتك";
+
+"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+
+We will collect information about the following events:
+
+    - Connection Attempt
+    - Connection Canceled
+    - Connection Established
+
+For all of these events, we will collect the following information:
+    - Platform
+    - App version
+    - App type (pre-release or not)
+    - Protocol used
+    - Connection source (manual or using automation)
+    - Time To Connect (time between connecting and connected state)
+
+All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+
+You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+
+"welcome.login.title"= "سجل الدخول إلى حسابك";
+"welcome.login.username.placeholder"= "اسم المستخدم (p1234567)";
+"welcome.login.password.placeholder"= "كلمة المرور";
+"welcome.login.submit"= "تسجيل الدخول";
+"welcome.login.restore.button"= "لم تحصل على تفاصيل الحساب؟";
+"welcome.login.error.title"= "تسجيل الدخول";
+"welcome.login.error.validation"= "يجب إدخال اسم المستخدم وكلمة المرور";
+"welcome.login.error.unauthorized"= "اسم المستخدم أو كلمة المرور غير صحيحة.";
+"welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.receipt.button"= "تسجيل الدخول باستخدام إيصال الشراء";
+"welcome.login.magic.link.title"= "تسجيل الدخول باستخدام رابط البريد الإلكتروني السحري";
+"welcome.login.magic.link.response"= "يرجى إلقاء نظرة على بريدك الإلكتروني للحصول على رابط تسجيل الدخول.";
+"welcome.login.magic.link.send"= "إرسال الرابط";
+
+"welcome.purchase.title"= "حدد خطة VPN";
+"welcome.purchase.subtitle"= "ضمان استرداد المال لمدة 7 أيام";
+"welcome.purchase.email.placeholder"= "البريد الإلكتروني";
+"welcome.purchase.continue"= "متابعة";
+"welcome.purchase.error.connectivity.title"= "فشل الاتصال";
+"welcome.purchase.confirm.form.email"= "يرجى إدخال بريدك الإلكتروني";
+"welcome.purchase.email.why"= "نحتاج إلى بريدك الإلكتروني لإرسال اسم المستخدم وكلمة المرور.";
+"welcome.purchase.submit"= "إرسال";
+"welcome.purchase.or"= "أو";
+
+"welcome.upgrade.header"= "مرحبًا بعودتك!";
+"welcome.upgrade.title"= "لاستخدام Private Internet Access، تحتاج إلى تجديد اشتراكك.";
+"welcome.upgrade.renew.now"= "تجديد الآن";
+
+"welcome.redeem.title"= "استلم محتويات بطاقة هدية";
+"welcome.redeem.accessibility.back"= "عودة";
+
+"welcome.plan.monthly.title"= "شهريًا";
+"welcome.plan.yearly.title"= "سنويًا";
+"welcome.plan.yearly.detail_format"= "%@%@ في السنة";
+"welcome.plan.price_format"= "%@ / شهر";
+"welcome.plan.best_value"= "أفضل قيمة";
+"welcome.plan.accessibility.per_month"= "في الشهر";
+
+"welcome.restore.title"= "استرداد الشراء غير المقيد في الحساب";
+"welcome.restore.subtitle"= "إذا اشتريت خطة من خلال هذا التطبيق ولم تصلك بيانات تسجيل دخولك، يمكنك إرسالها مرة أخرى من هنا. لن يتم تحصيل رسوم منك أثناء هذه العملية.";
+"welcome.restore.email.placeholder"= "البريد الإلكتروني";
+"welcome.restore.submit"= "تأكيد";
+
+"welcome.iap.error.title"= "خطأ";
+
+"welcome.agreement.message"= "بعد انتهاء الـ 7 أيام الخاصة بالفترة التجريبية المجانية، يتم تجديد هذا الاشتراك تلقائيًا مقابل %@ ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة التجريبية. ستتم محاسبة حساب Apple ID الخاص بك على رسوم التجديد في غضون 24 ساعة قبل نهاية الفترة التجريبية. يمكنك إدارة وإلغاء اشتراكاتك عن طريق الانتقال إلى إعدادات حسابك في App Store بعد الشراء. يقتصر عرض الفترة التجريبية لمدة 7 أيام على عرض فترة تجريبية واحد لمدة 7 أيام لكل مستخدم. أي جزء غير مستخدم من الفترة التجريبية المجانية، إذا تم عرضها، سيتم مصادرته عندما يشتري المستخدم اشتراكًا. تشمل جميع الأسعار ضرائب المبيعات المحلية المطبقة.\n\nيعتبر الاشتراك بمثابة قبول $1 و$2.";
+
+"welcome.agreement.message.tos"= "شروط الخدمة";
+"welcome.agreement.message.privacy"= "سياسة الخصوصية";
+
+"welcome.gdpr.collect.data.title"= "المعلومات الشخصية التي نجمعها";
+"welcome.gdpr.collect.data.description"= "عنوان البريد الإلكتروني لأغراض إدارة الحساب والحماية من إساءة الاستخدام.";
+"welcome.gdpr.usage.data.description"= "يتم استخدام عنوان البريد الإلكتروني لإرسال معلومات الاشتراك وتأكيد الدفع ومراسلات العملاء والعروض الترويجية الخاصة بـ Private Internet Access فقط.";
+"welcome.gdpr.accept.button.title"= "موافق ومتابعة";
+
+"welcome.update.account.email.error"= "تعذَّر تعديل البريد الإلكتروني للحساب";

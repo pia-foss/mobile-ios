@@ -4,9 +4,10 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-key_id    = ENV['APP_STORE_CONNECT_KEY_ID']
-issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
+key_id      = ENV['APP_STORE_CONNECT_KEY_ID']
+issuer_id   = ENV['APP_STORE_CONNECT_ISSUER_ID']
 key_content = ENV['APP_STORE_CONNECT_KEY']
+asc_platform = ENV.fetch('ASC_PLATFORM', 'IOS')
 
 begin
   # Support both raw PEM and base64-encoded key (for environments that don't allow multiline values)
@@ -41,7 +42,7 @@ begin
   app_id = JSON.parse(apps_res.body).dig('data', 0, 'id')
   raise 'App not found' unless app_id
 
-  ver_res = asc_get("/v1/apps/#{app_id}/appStoreVersions?filter[platform]=IOS&fields[appStoreVersions]=versionString,appStoreState&limit=1", jwt)
+  ver_res = asc_get("/v1/apps/#{app_id}/appStoreVersions?filter[platform]=#{asc_platform}&fields[appStoreVersions]=versionString,appStoreState&limit=1", jwt)
   attrs = JSON.parse(ver_res.body).dig('data', 0, 'attributes')
   raise 'Version not found' unless attrs
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIALocalizations
 
 enum HelpDestinations: Destinations {
     case root
@@ -22,16 +23,16 @@ extension View {
             switch destination {
             case .root:
                 HelpFactory.makeHelpOptionsView()
-                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help)
+                    .withTopNavigationBar(title: L10n.Settings.Section.help)
             case .about:
                 HelpFactory.makeAboutOptionsView()
-                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.Menu.Item.about)
+                    .withTopNavigationBar(title: L10n.Settings.Section.help, subtitle: L10n.Menu.Item.about)
             case .acknowledments:
                 HelpFactory.makeAcknowledgementsView()
-                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.HelpMenu.AboutOptions.Acknowledgements.title)
+                    .withTopNavigationBar(title: L10n.Settings.Section.help, subtitle: L10n.HelpMenu.AboutOptions.Acknowledgements.title)
             case .privacyPolicy:
                 HelpFactory.makePrivacyPolicyView()
-                    .withTopNavigationBar(title: L10n.Localizable.Settings.Section.help, subtitle: L10n.Localizable.HelpMenu.AboutOptions.PrivacyPolicy.title)
+                    .withTopNavigationBar(title: L10n.Settings.Section.help, subtitle: L10n.HelpMenu.AboutOptions.PrivacyPolicy.title)
                     
             }
         }

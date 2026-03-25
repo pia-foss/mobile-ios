@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import PIALocalizations
 
 class RegionsContainerViewModel: ObservableObject {
     enum RegionsNavigationItems: CaseIterable, Identifiable {
@@ -23,11 +24,11 @@ class RegionsContainerViewModel: ObservableObject {
         var text: String {
             switch self {
             case .all:
-                return L10n.Localizable.Regions.Filter.All.title
+                return L10n.Regions.Filter.All.title
             case .search:
-                return L10n.Localizable.Regions.Filter.Search.title
+                return L10n.Regions.Filter.Search.title
             case .favorites:
-                return L10n.Localizable.Regions.Filter.Favorites.title
+                return L10n.Regions.Filter.Favorites.title
             }
         }
     }
@@ -37,7 +38,7 @@ class RegionsContainerViewModel: ObservableObject {
     @Published var selectedSection: RegionsNavigationItems = .all
     
     var searchButtonTitle: String {
-        L10n.Localizable.Regions.Search.Button.title
+        L10n.Regions.Search.Button.title
     }
     
     private let favoritesUseCase: FavoriteRegionUseCaseType

@@ -27,6 +27,7 @@ import TunnelKitOpenVPN
 #endif
 import Intents
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AppPreferences.self)
 
@@ -102,7 +103,6 @@ class AppPreferences {
         // Features
         static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
-        static let showNewInitialScreen = "showNewInitialScreen"
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
@@ -241,7 +241,7 @@ class AppPreferences {
     
     var todayWidgetVpnStatus: String? {
         get {
-            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Localizable.Today.Widget.login
+            return defaults.string(forKey: Entries.todayWidgetVpnStatus) ?? L10n.Today.Widget.login
         }
         set {
             defaults.set(newValue, forKey: Entries.todayWidgetVpnStatus)
@@ -520,15 +520,6 @@ class AppPreferences {
         }
     }
     
-    var showNewInitialScreen: Bool {
-        get {
-            return defaults.bool(forKey: Entries.showNewInitialScreen)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showNewInitialScreen)
-        }
-    }
-    
     var showLeakProtection: Bool {
         get {
             return defaults.bool(forKey: Entries.showLeakProtection)
@@ -605,7 +596,7 @@ class AppPreferences {
             Entries.themeCode: ThemeCode.light.rawValue,
             Entries.useConnectSiriShortcuts: false,
             Entries.useDisconnectSiriShortcuts: false,
-            Entries.todayWidgetButtonTitle: L10n.Localizable.Today.Widget.login,
+            Entries.todayWidgetButtonTitle: L10n.Today.Widget.login,
             
             Entries.todayWidgetVpnProtocol: PIAWGTunnelProfile.vpnType,
             
@@ -877,8 +868,8 @@ class AppPreferences {
         ikeV2UseSmallPackets = false
         wireGuardUseSmallPackets = false
         #if os(iOS)
-        todayWidgetVpnStatus = L10n.Localizable.Today.Widget.login
-        todayWidgetButtonTitle = L10n.Localizable.Today.Widget.login
+        todayWidgetVpnStatus = L10n.Today.Widget.login
+        todayWidgetButtonTitle = L10n.Today.Widget.login
         todayWidgetVpnProtocol = PIAWGTunnelProfile.vpnType
         #endif
         todayWidgetVpnPort = "1337"

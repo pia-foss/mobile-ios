@@ -11,6 +11,7 @@ import XCTest
 import PIALibrary
 import Combine
 import StoreKit
+import PIALocalizations
 
 final class SignupIntegrationTests: XCTestCase {
     class Fixture {
@@ -110,7 +111,7 @@ final class SignupIntegrationTests: XCTestCase {
         XCTAssertNil(sut.subscriptionOptions[1].freeTrial)
         
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.subtitle, L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle("100.99$"))
+        XCTAssertEqual(sut.subtitle, L10n.Tvos.Signup.Subscription.Paywall.subtitle("100.99$"))
         
         XCTAssertFalse(sut.shouldShowErrorMessage)
         XCTAssertNil(sut.errorMessage)
@@ -143,10 +144,10 @@ final class SignupIntegrationTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(sut.subscriptionOptions.count, 0)
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.subtitle, L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle(""))
+        XCTAssertEqual(sut.subtitle, L10n.Tvos.Signup.Subscription.Paywall.subtitle(""))
         
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_getproducts_shows_a_generic_error_when_there_is_no_retrieved_products() throws {
@@ -177,10 +178,10 @@ final class SignupIntegrationTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(sut.subscriptionOptions.count, 0)
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.subtitle, L10n.Localizable.Tvos.Signup.Subscription.Paywall.subtitle(""))
+        XCTAssertEqual(sut.subtitle, L10n.Tvos.Signup.Subscription.Paywall.subtitle(""))
         
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.generic)
     }
     
     func test_subscribe_succeeds_when_a_product_was_purchased() throws {
@@ -250,7 +251,7 @@ final class SignupIntegrationTests: XCTestCase {
         XCTAssertEqual(capturedLoadingState, [true, false])
     
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.paymentCancelled)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.paymentCancelled)
     }
     
     func test_subscribe_shows_a_generic_error_when_the_product_is_not_available() throws {
@@ -285,6 +286,6 @@ final class SignupIntegrationTests: XCTestCase {
         XCTAssertEqual(capturedLoadingState, [true, false])
     
         XCTAssertTrue(sut.shouldShowErrorMessage)
-        XCTAssertEqual(sut.errorMessage, L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+        XCTAssertEqual(sut.errorMessage, L10n.Tvos.Signup.Subscription.Error.Message.generic)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALocalizations
 
 protocol RegionsDisplayNameUseCaseType {
     
@@ -35,7 +36,7 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
         }
 
         if isTheDefaultServer(server, amongst: servers) {
-            return (title: server.name, subtitle: L10n.Localizable.Regions.ListItem.Default.title)
+            return (title: server.name, subtitle: L10n.Regions.ListItem.Default.title)
         } else {
             return (title: server.country, subtitle: getDisplaySubtitleForNonDefault(server: server))
         }
@@ -47,15 +48,15 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
     
     func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String) {
         if let targetLocation {
-            return (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: targetLocation.name)
+            return (title: L10n.LocationSelection.OptimalLocation.title, subtitle: targetLocation.name)
         } else {
-            return (title: L10n.Localizable.LocationSelection.OptimalLocation.title, subtitle: L10n.Localizable.Global.automatic)
+            return (title: L10n.LocationSelection.OptimalLocation.title, subtitle: L10n.Global.automatic)
         }
         
     }
     
     private func getDisplayNameForDedicatedIpServer(_ server: ServerType) -> (title: String, subtitle: String) {
-        return (title: L10n.Localizable.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
+        return (title: L10n.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
     }
     
 }

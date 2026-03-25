@@ -30,7 +30,6 @@ extension Client {
         public static let dedicatedIp = "dedicated-ip"
         public static let disableMultiDipTokens = "disable-multi-dip-tokens"
         public static let checkDipExpirationRequest = "check-dip-expiration-request"
-        public static let showNewInitialScreen = "show-new-initial-screen"
         public static let disableSystemRatingDialog = "disable-system-rating-dialogue"
         public static let showLeakProtection = "ios_custom_leak_protection_v2"
         public static let showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"

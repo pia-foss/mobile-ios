@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALocalizations
 
 struct LoginQRContainerView: View {
     @StateObject var viewModel: LoginQRViewModel
@@ -37,9 +38,9 @@ struct LoginQRContainerView: View {
         }.onAppear {
             viewModel.generateQRCode()
         }.alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Localizable.Global.ok) {}
+            Button(L10n.Global.ok) {}
         }, message: {
-            Text(L10n.Localizable.Tvos.Signup.Subscription.Error.Message.generic)
+            Text(L10n.Tvos.Signup.Subscription.Error.Message.generic)
         })
     }
 }

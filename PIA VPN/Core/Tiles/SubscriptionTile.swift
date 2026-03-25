@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIALocalizations
 
 class SubscriptionTile: UIView, Tileable  {
     
@@ -57,7 +58,7 @@ class SubscriptionTile: UIView, Tileable  {
 
         viewShouldRestyle()
         self.accessibilityIdentifier = "SubscriptionTile"
-        self.subscriptionTitle.text = L10n.Localizable.Tiles.Subscription.title.uppercased()
+        self.subscriptionTitle.text = L10n.Tiles.Subscription.title.uppercased()
         displayAccountInformation()
     }
     
@@ -73,11 +74,11 @@ class SubscriptionTile: UIView, Tileable  {
         
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
-                self.subscriptionValue.text = L10n.Localizable.Account.ExpiryDate.expired
+                self.subscriptionValue.text = L10n.Account.ExpiryDate.expired
             } else {
-                var value = L10n.Localizable.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
+                var value = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
                 if let days = daysLeftFromAccountInfo(userInfo) {
-                    let daysLeft = L10n.Localizable.Tiles.Subscription.Days.left(days)
+                    let daysLeft = L10n.Tiles.Subscription.Days.left(days)
                     let plan = planDescriptionFromPlan(userInfo.plan)
                     if plan != "" {
                         value = plan + " " + daysLeft
@@ -93,9 +94,9 @@ class SubscriptionTile: UIView, Tileable  {
 
     private func planDescriptionFromPlan(_ plan: Plan) -> String {
         switch plan {
-        case .trial: return L10n.Localizable.Tiles.Subscription.trial
-        case .monthly: return L10n.Localizable.Tiles.Subscription.monthly
-        case .yearly: return L10n.Localizable.Tiles.Subscription.yearly
+        case .trial: return L10n.Tiles.Subscription.trial
+        case .monthly: return L10n.Tiles.Subscription.monthly
+        case .yearly: return L10n.Tiles.Subscription.yearly
         default: return ""
         }
     }

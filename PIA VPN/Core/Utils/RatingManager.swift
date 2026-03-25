@@ -25,6 +25,7 @@ import UIKit
 import PIALibrary
 import PopupDialog
 import StoreKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: RatingManager.self)
 
@@ -220,12 +221,12 @@ final class RatingManager: RatingManagerProtocol {
         }
         
         let sheet = Macros.alert(
-            L10n.Localizable.Rating.Error.question,
-            L10n.Localizable.Rating.Error.subtitle
+            L10n.Rating.Error.question,
+            L10n.Rating.Error.subtitle
         )
-        sheet.addCancelAction(L10n.Localizable.Global.close)
+        sheet.addCancelAction(L10n.Global.close)
         
-        sheet.addActionWithTitle(L10n.Localizable.Rating.Error.Button.send) {
+        sheet.addActionWithTitle(L10n.Rating.Error.Button.send) {
             self.openFeedbackWebsite()
         }
         
