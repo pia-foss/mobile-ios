@@ -11,6 +11,8 @@ Private Internet Access (PIA) VPN iOS/tvOS application. Dual-platform codebase w
 
 ## Project Structure
 
+@ADRs/ contains Architecture Decision Records
+
 ```
 pia-mobile-ios-fixes/
 ├── PIA VPN/                    # Main iOS app target (UIKit)
