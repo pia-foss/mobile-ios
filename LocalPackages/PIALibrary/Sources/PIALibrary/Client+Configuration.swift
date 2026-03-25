@@ -26,16 +26,6 @@ fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
 
 extension Client {
     
-    public struct FeatureFlags {
-        public static let dedicatedIp = "dedicated-ip"
-        public static let disableMultiDipTokens = "disable-multi-dip-tokens"
-        public static let checkDipExpirationRequest = "check-dip-expiration-request"
-        public static let disableSystemRatingDialog = "disable-system-rating-dialogue"
-        public static let showLeakProtection = "ios_custom_leak_protection_v2"
-        public static let showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
-        public static let showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
-    }
-    
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 
@@ -163,9 +153,9 @@ extension Client {
         /// Store the account password in memory when the email is set and the user is LoggedIn.
         public var tempAccountPassword: String
 
-        /// Enabled features
-        public var featureFlags: [String]
-        
+        /// Enabled remote configurable features
+        public var featureFlags: FeatureFlagHolder
+
         /// tvOS token to bind with api token in order to Sign in on PIA Apple TV
         public var tvOSBindToken: String?
 
@@ -236,7 +226,7 @@ extension Client {
             maxQuickConnectServers = 6
             tempAccountPassword = ""
 
-            featureFlags = []
+            featureFlags = FeatureFlagHolder()
         }
         
         // MARK: WebServices

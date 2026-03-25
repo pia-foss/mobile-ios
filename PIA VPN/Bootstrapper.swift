@@ -35,8 +35,8 @@ extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
 }
 
-class Bootstrapper {
-    
+final class Bootstrapper {
+
     static let shared = Bootstrapper()
     
     private init() {
@@ -57,11 +57,11 @@ class Bootstrapper {
 
         #if !STAGING
        // Leak Protection feature flags
-        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtection)
-        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags.contains(Client.FeatureFlags.showLeakProtectionNotifications)
-        
+        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags[.showLeakProtection]
+        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags[.showLeakProtectionNotifications]
+
         // DynamicIsland LiveActivity
-        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags.contains(Client.FeatureFlags.showDynamicIslandLiveActivity)
+        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags[.showDynamicIslandLiveActivity]
         #endif
     }
 
@@ -150,16 +150,17 @@ class Bootstrapper {
             ServiceQualityManager.shared.stop()
         }
 
-        Client.providers.accountProvider.featureFlags({ _ in
-            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags.contains(Client.FeatureFlags.checkDipExpirationRequest)
-            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags.contains(Client.FeatureFlags.disableMultiDipTokens)
+        Client.providers.accountProvider.featureFlags { _ in
+            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
+            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags[.disableMultiDipTokens]
+
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
             self.updateFeatureFlagsForReleaseIfNeeded()
             
             self.checkForceUpdateIfNeeded()
-        })
+        }
 
         //FORCE THE MIGRATION TO GEN4
     #if os(iOS)
@@ -324,7 +325,7 @@ class Bootstrapper {
 
 extension Bootstrapper {
     func checkForceUpdateIfNeeded() {
-        if Client.configuration.featureFlags.contains("force_update") {
+        if Client.configuration.featureFlags[.forceUpdate] {
             NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         }
     }

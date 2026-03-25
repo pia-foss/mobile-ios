@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 093894D7D6B2BF4F8CE18D9C /* PIALocalizations */; };
-		D10665FE2836490FA4DCAE0B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 824E8528B3924C15A0398820 /* PIALocalizations */; };
 		0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9785851DA82FF000711A24 /* StoreKit.framework */; };
 		0EFB607D203D893E0095398C /* PIA VPN AdBlocker.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EFB6070203D7A2C0095398C /* PIA VPN AdBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -45,6 +44,7 @@
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
 		ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = ACADC5F72F51AA1F00986EAF /* SnapshotTesting */; };
+		D10665FE2836490FA4DCAE0B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 824E8528B3924C15A0398820 /* PIALocalizations */; };
 		DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
@@ -3177,10 +3177,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALocalizations;
 		};
-		824E8528B3924C15A0398820 /* PIALocalizations */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PIALocalizations;
-		};
 		3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIASwiftUI;
@@ -3228,6 +3224,10 @@
 			productName = PIAUIKit;
 		};
 		6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALocalizations;
+		};
+		824E8528B3924C15A0398820 /* PIALocalizations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALocalizations;
 		};
