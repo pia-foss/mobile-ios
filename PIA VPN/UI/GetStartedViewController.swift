@@ -204,6 +204,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
 
         if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController

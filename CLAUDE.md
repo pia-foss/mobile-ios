@@ -1,40 +1,30 @@
-# CLAUDE.md
+Private Internet Access (PIA) is a VPN application for iOS and tvOS
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Overview
-
-Private Internet Access (PIA) VPN iOS/tvOS application. Dual-platform codebase with:
-- **iOS app**: UIKit-based (iOS 15.0+, Swift 5+)
-- **tvOS app**: SwiftUI-based (tvOS 17+)
-- **Shared core**: PIALibrary (Swift Package Manager)
+language Swift 6
+dependencies with Swift Package Manager
+ui framework SwiftUI
+old screens use UIKit and Storyboards, deprecated
+platforms iOS 15, tvOS 17
+swiftgen for typesafe resource generation
+fastlane and xcode cloud are used for ci/cd
 
 ## Project Structure
 
-```
-pia-mobile-ios-fixes/
-├── PIA VPN/                    # Main iOS app target (UIKit)
-│   ├── Core/                   # Business logic, daemons, protocols
-│   │   └── Tiles/              # Dashboard tile system
-│   ├── UI/                     # View controllers, storyboards
-│   ├── Global/                 # AppConfiguration, AppConstants
-│   └── Bootstrapper.swift      # App initialization & DI
-├── PIA VPN-tvOS/               # tvOS app (SwiftUI, feature-based)
-├── PIA VPN Tunnel/             # OpenVPN Network Extension
-├── PIA VPN WG Tunnel/          # WireGuard Network Extension
-├── PIA VPN AdBlocker/          # Safari Content Blocker
-├── PIAWidgetExtension/         # iOS Widget
-├── LocalPackages/
-│   ├── PIALibrary/             # Core: providers, VPN, persistence
-│   └── PIADesignSystem/        # Shared UI components
-├── Resources/
-│   └── Configurations/         # Build configurations (xcconfig files)
-│       ├── Development.xcconfig
-│       ├── Staging.xcconfig
-│       └── Production.xcconfig
-├── TestPlans/                  # Xcode test plans
-└── fastlane/                   # CI/CD automation
-```
+@ADRs/                          contains Architecture Decision Records
+@ci_scripts/                    Xcode Cloud CI scripts
+@fastlane/                      CI/CD automation
+@"PIA VPN/"                     main iOS folder
+@"PIA VPN/Core/"                business logic, daemons, protocols
+@"PIA VPN/UI/"                  view controllers, storyboards
+@"PIA VPN/Bootstrapper.swift"   App initialization & DI
+@"PIA VPN AdBlocker/"           Safari Content Blocker
+@"PIA VPN-tvOS/"                main tvOS folder
+@"PIA VPN Tunnel/"              OpenVPN Network Extension
+@"PIA VPN WG Tunnel/"           WireGuard Network Extension
+@LocalPackages/PIALibrary/      Shared Core: providers, VPN, persistence
+@LocalPackages/PIAUI/           Shared UI components
+@Resources/Configurations       xcconfig files, Build configurations
+@TestPlans/                     Xcode test plans
 
 ## Architecture
 
@@ -160,8 +150,6 @@ xcodebuild test -scheme "PIA VPN Development" -configuration Development -destin
 
 ## Dependencies
 
-**Swift Package Manager only** (no CocoaPods)
-
 **PIA Packages**: mobile-ios-releases-{kpi,csi,account,regions,networking}, mobile-ios-{openvpn,wireguard}
 
 **Third-party**: SwiftEntryKit, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, TweetNacl
@@ -181,14 +169,6 @@ Requires special Apple entitlement. If unavailable:
 - Remove `configureHotspotHelper()` in `AppDelegate.swift`
 - Update entitlements accordingly
 
-## CI/CD
-
-**GitLab CI**: `.gitlab-ci.yml` - Testing, archiving, deployment to HockeyApp
-
-**Xcode Cloud**: `ci_scripts/` - Version extraction from git tags, App Store builds
-
-**Fastlane**: Certificates, profiles, builds, TestFlight uploads, release note translation (Claude API)
-
 ## Build Issues
 
 - **SwiftGen errors**: Run `brew install swiftgen` and regenerate: `swiftgen config run`
@@ -196,22 +176,6 @@ Requires special Apple entitlement. If unavailable:
 - **Missing entitlements**: Hotspot Helper requires special Apple approval (see Security section)
 - **Network Extension not debugging**: Must use physical device, check Console.app
 - **Keychain errors**: Ensure keychain sharing configured in entitlements
-
-## Key Files
-
-- `PIA VPN.xcodeproj`, `swiftgen.yml`
-- **Build configurations**: `Resources/Configurations/*.xcconfig`
-- **Schemes**: `PIA VPN.xcodeproj/xcshareddata/xcschemes/*.xcscheme`
-- `fastlane/Fastfile`, `.gitlab-ci.yml`, `ci_scripts/`
-- `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`
-- Test plans: `TestPlans/*.xctestplan`
-
-## Branching Strategy
-
-- Cut feature branches from **`develop`** with prefix `feature/`
-- Submit PRs to **`develop`** (not `master`)
-- Concise, meaningful commit messages
-- Lint before committing
 
 ## Notes
 
@@ -224,9 +188,3 @@ Requires special Apple entitlement. If unavailable:
 - Base URL and bundle identifier configured per environment in xcconfig
 
 **Development Flow**: Use `PIA VPN Development` scheme for local testing, `PIA VPN Staging` for staging environment testing
-
-**Multi-platform**: iOS (UIKit) + tvOS (SwiftUI) share PIALibrary core
-
-**Resource Management**: SwiftGen for type-safe access to Localizable.strings, Assets, Storyboards
-
-**License**: MIT (Expat), GPL v3 for TunnelKit/OpenVPN components

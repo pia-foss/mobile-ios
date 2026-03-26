@@ -78,7 +78,7 @@ class PIAHotspotHelper {
         ) { [weak self] cmd in
             log.info("HotspotHelper: Received command type: \(cmd.commandType.rawValue)")
 
-            guard !Client.configuration.featureFlags.contains("force_update") else {
+            guard !Client.configuration.featureFlags[.forceUpdate] else {
                 log.info("HotspotHelper: Ignoring command due to force_update feature flag, delivering response immediately")
 
                 cmd.createResponse(.success).deliver()

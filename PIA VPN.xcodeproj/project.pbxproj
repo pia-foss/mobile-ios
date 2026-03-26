@@ -45,7 +45,6 @@
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
 		ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = ACADC5F72F51AA1F00986EAF /* SnapshotTesting */; };
 		ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */; };
-		ACD8FEEF2F72CF95007A0BB0 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		D10665FE2836490FA4DCAE0B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 824E8528B3924C15A0398820 /* PIALocalizations */; };
 		DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -2146,7 +2145,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
@@ -2637,7 +2635,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
@@ -2686,7 +2683,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
