@@ -33,6 +33,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
     private var timeToRetryDIP: TimeInterval? = nil
 
     // MARK: Use cases
+    private let getDipServer: GetDedicatedIpUseCaseType = DedicatedIPFactory.makeGetDedicatedIpUseCase()
     private let removeDipToken: RemoveDIPUseCaseType = DedicatedIPFactory.makeRemoveDIPUseCase()
     private let activateDipToken: ActivateDIPTokenUseCaseType = DedicatedIPFactory.makeActivateDIPTokenUseCase()
 
@@ -90,8 +91,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
 
     @MainActor
     @objc private func reloadTableView() {
-        let dipTokens = Client.providers.serverProvider.dipTokens ?? []
-        data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) })
+        data = if let server = getDipServer() as? Server { [server] } else { [] }
         tableView.reloadData()
     }
     
