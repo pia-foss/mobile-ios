@@ -27,7 +27,7 @@ public enum DedicatedIPFactory {
                               dedicatedIpProvider: makeDedicatedIPProvider())
     }
     
-    private static func makeActivateDIPTokenUseCase() -> ActivateDIPTokenUseCaseType {
+    static func makeActivateDIPTokenUseCase() -> ActivateDIPTokenUseCaseType {
         ActivateDIPTokenUseCase(dipServerProvider: makeDedicatedIPProvider())
     }
     

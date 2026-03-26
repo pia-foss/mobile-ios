@@ -29,7 +29,7 @@ protocol DedicatedIpEmptyHeaderViewCellDelegate: AnyObject {
     func handleDIPActivation(with token: String, cell: DedicatedIpEmptyHeaderViewCell)
 }
 
-class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
+final class DedicatedIpEmptyHeaderViewCell: UITableViewCell {
 
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var subtitle: UILabel!
