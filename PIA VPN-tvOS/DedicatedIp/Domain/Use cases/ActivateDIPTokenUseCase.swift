@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ActivateDIPTokenUseCaseType {
-    func callAsFunction(token: String) async throws
+    func callAsFunction(token: String) async -> Result<Void, DedicatedIPError>
 }
 
 final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
@@ -19,15 +19,10 @@ final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
         self.dipServerProvider = dipServerProvider
     }
     
-    func callAsFunction(token: String) async throws {
-        return try await withCheckedThrowingContinuation { continuation in
+    func callAsFunction(token: String) async -> Result<Void, DedicatedIPError> {
+        return await withCheckedContinuation { continuation in
             dipServerProvider.activateDIPToken(token) { result in
-                switch result {
-                    case .success:
-                        continuation.resume()
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                }
+                continuation.resume(returning: result)
             }
         }
     }

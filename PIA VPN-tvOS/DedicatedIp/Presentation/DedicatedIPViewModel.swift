@@ -58,14 +58,14 @@ final class DedicatedIPViewModel: ObservableObject {
             }
             return
         }
-        
-        do {
-            try await activateDIPToken(token: token)
+
+        switch await activateDIPToken(token: token) {
+        case .success:
             Task { @MainActor in
                 onAppear()
                 showActivatedDialog = true
             }
-        } catch {
+        case .failure:
             Task { @MainActor in
                 shouldShowErrorMessage = true
             }
