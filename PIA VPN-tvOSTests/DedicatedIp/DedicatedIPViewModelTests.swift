@@ -134,14 +134,14 @@ final class DedicatedIPViewModelTests: XCTestCase {
         XCTAssertEqual(sut.dedicatedIPStats, [])
     }
     
-    func test_removeDIP_updates_dedicateIP_when_removeDIPUseCaseMock_succeeds() {
+    func test_removeDIP_updates_dedicateIP_when_removeDIPUseCaseMock_succeeds() async {
         // GIVEN
         let server = ServerTypeStub.makeNonValidServerTypeStub()
         instantiateSut(getDedicatedIpResult: server)
         
         // WHEN
-        sut.removeDIP()
-        
+        await sut.removeDIP()
+
         // THEN
         XCTAssertEqual(sut.dedicatedIPStats, [])
         XCTAssertEqual(fixture.removeDIPUseCaseMock.useCaseWasCalled, 1)

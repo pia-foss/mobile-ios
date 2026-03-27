@@ -72,14 +72,12 @@ final class DedicatedIPViewModel: ObservableObject {
         }
     }
     
-    func removeDIP() {
-        Task {
-            do {
-                try await removeDIPToken()
-            } catch {
-                log.error("Error removing dedicated IP \(error)")
-            }
-            dedicatedIPStats = []
+    func removeDIP() async {
+        do {
+            try await removeDIPToken()
+        } catch {
+            log.error("Error removing dedicated IP \(error)")
         }
+        dedicatedIPStats = []
     }
 }
