@@ -62,12 +62,9 @@ final class DedicatedIpViewController: AutolayoutViewController {
         if UserInterface.isIpad {
             nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
-        nc.addObserver(self, selector: #selector(reloadTableView), name: .DedicatedIpReload, object: nil)
-        nc.addObserver(self, selector: #selector(showLoadingAnimation), name: .DedicatedIpShowAnimation, object: nil)
-        nc.addObserver(self, selector: #selector(hideLoadingAnimation), name: .DedicatedIpHideAnimation, object: nil)
 
         configureTableView()
-
+        reloadDipServerAndTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,7 +82,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
     }
 
     @MainActor
-    @objc private func reloadTableView() {
+    private func reloadDipServerAndTableView() {
         let server: ServerType? = getDipServer()
         guard let server = server as? Optional<Server> else {
             log.error("server should be of type \(Server.self)")
@@ -111,12 +108,10 @@ final class DedicatedIpViewController: AutolayoutViewController {
                            forCellReuseIdentifier:Cells.titleHeader)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        reloadTableView()
     }
 
-    
     // MARK: Restylable
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         
@@ -128,8 +123,6 @@ final class DedicatedIpViewController: AutolayoutViewController {
         }
         
         Theme.current.applyPrincipalBackground(tableView)
-        self.tableView.reloadData()
-
     }
     
     // MARK: DIP Token handling
@@ -217,7 +210,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             let alert = Macros.alert(nil, L10n.Dedicated.Ip.remove)
             alert.addCancelActionWithTitle(L10n.Global.cancel) { [weak self] in
                 guard let self else { return }
-                self.reloadTableView()
+                self.reloadDipServerAndTableView()
             }
             
             alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
@@ -237,7 +230,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             log.error("Error removing DIP token \(error)")
         }
         Macros.postNotification(.PIAThemeDidChange)
-        reloadTableView()
+        reloadDipServerAndTableView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -285,7 +278,7 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             return
         }
 
-        Macros.postNotification(.DedicatedIpShowAnimation)
+        showLoadingAnimation()
         cell.emptyTokenTextField()
 
         Task { [weak self] in
@@ -316,8 +309,10 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                 self.handleDIPActivationError(error)
             }
 
-            Macros.postNotification(.DedicatedIpHideAnimation)
-            Macros.postNotification(.DedicatedIpReload)
+            hideLoadingAnimation()
+            reloadDipServerAndTableView()
+
+            // Reloads the sever list on the dashboard view controller...
             Macros.postNotification(.PIAThemeDidChange)
         }
     }
