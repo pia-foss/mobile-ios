@@ -9,10 +9,11 @@
 import Foundation
 @testable import PIA_VPN_tvOS
 
-class RemoveDIPUseCaseMock: RemoveDIPUseCaseType {
+final class RemoveDIPUseCaseMock: RemoveDIPUseCaseType {
     var useCaseWasCalled = 0
     
-    func callAsFunction() {
+    func callAsFunction() async -> Result<Void, DedicatedIPError> {
         useCaseWasCalled += 1
+        return .success(())
     }
 }

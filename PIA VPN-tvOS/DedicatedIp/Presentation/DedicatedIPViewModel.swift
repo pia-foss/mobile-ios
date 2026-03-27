@@ -73,9 +73,7 @@ final class DedicatedIPViewModel: ObservableObject {
     }
     
     func removeDIP() async {
-        do {
-            try await removeDIPToken()
-        } catch {
+        if case let .failure(error) = await removeDIPToken() {
             log.error("Error removing dedicated IP \(error)")
         }
         dedicatedIPStats = []

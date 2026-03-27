@@ -101,7 +101,6 @@ class AppPreferences {
         static let showServiceMessages = "showServiceMessages"
 
         // Features
-        static let disablesMultiDipTokens = "disablesMultiDipTokens"
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
@@ -511,15 +510,6 @@ class AppPreferences {
         }
     }
     
-    var disablesMultiDipTokens: Bool {
-        get {
-            return defaults.bool(forKey: Entries.disablesMultiDipTokens)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.disablesMultiDipTokens)
-        }
-    }
-    
     var showLeakProtection: Bool {
         get {
             return defaults.bool(forKey: Entries.showLeakProtection)
@@ -618,7 +608,6 @@ class AppPreferences {
             Entries.showGeoServers: true,
             Entries.dismissedMessages: [],
             Entries.showServiceMessages: false,
-            Entries.disablesMultiDipTokens: true,
             Entries.checksDipExpirationRequest: true,
             Entries.userInteractedWithSurvey: false,
             Entries.stagingVersion: 0,

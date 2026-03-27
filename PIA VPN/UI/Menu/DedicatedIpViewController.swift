@@ -29,7 +29,7 @@ private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 final class DedicatedIpViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private var data = [Server]()
+    private var dedicatedIpServer: Server?
     private var timeToRetryDIP: TimeInterval? = nil
 
     // MARK: Use cases
@@ -37,14 +37,9 @@ final class DedicatedIpViewController: AutolayoutViewController {
     private let removeDipToken: RemoveDIPUseCaseType = DedicatedIPFactory.makeRemoveDIPUseCase()
     private let activateDipToken: ActivateDIPTokenUseCaseType = DedicatedIPFactory.makeActivateDIPTokenUseCase()
 
-    private struct Sections {
-        static let header = 0
-        static let dedicatedIps = 1
-        
-        static func numberOfSections() -> Int {
-            return 2
-        }
-        
+    private enum Section: Int, CaseIterable {
+        case header = 0
+        case dedicatedIps = 1
     }
     
     private struct Cells {
@@ -91,12 +86,17 @@ final class DedicatedIpViewController: AutolayoutViewController {
 
     @MainActor
     @objc private func reloadTableView() {
-        data = if let server = getDipServer() as? Server { [server] } else { [] }
+        let server: ServerType? = getDipServer()
+        guard let server = server as? Optional<Server> else {
+            log.error("server should be of type \(Server.self)")
+            return
+        }
+        dedicatedIpServer = server
         tableView.reloadData()
     }
     
     private func configureTableView() {
-        
+        tableView.allowsSelection = false
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
         tableView.estimatedSectionHeaderHeight = 1.0
@@ -182,18 +182,27 @@ final class DedicatedIpViewController: AutolayoutViewController {
 extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.isEmpty ? 1 : Sections.numberOfSections()
+        return dedicatedIpServer == nil ? 1 : Section.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Sections.header == section ? 0 : data.count
-
+        switch Section(rawValue: section) {
+        case .header:
+            return 0
+        case .dedicatedIps:
+            return dedicatedIpServer == nil ? 0 : 1
+        case .none:
+            fatalError("Unknown section number \(section)")
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.dedicatedIpRow, for: indexPath) as! DedicatedIpRowViewCell
-        let server = data[indexPath.row]
-        cell.fill(withServer: server)
+        guard let dedicatedIpServer else {
+            log.error("Server expected to exist, was nil")
+            return cell
+        }
+        cell.fill(withServer: dedicatedIpServer)
         Theme.current.applySecondaryBackground(cell)
 
         let backgroundView = UIView()
@@ -213,7 +222,9 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             
             alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
                 guard let self else { return }
-                self.confirmDelete(row: indexPath.row)
+                Task {
+                    await self.confirmDelete(row: indexPath.row)
+                }
             }
             
             self.present(alert, animated: true, completion: nil)
@@ -221,25 +232,14 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    private func confirmDelete(row: Int) {
-        let dipRegion = data[row]
-        guard dipRegion.dipToken != nil else { return }
-        Task { [weak self] in
-            guard let self else { return }
-            do {
-                try await self.removeDipToken()
-            } catch {
-                log.error("Error removing DIP token \(error)")
-            }
-            Macros.postNotification(.PIAThemeDidChange)
-            self.reloadTableView()
+    private func confirmDelete(row: Int) async {
+        if case let .failure(error) = await removeDipToken() {
+            log.error("Error removing DIP token \(error)")
         }
+        Macros.postNotification(.PIAThemeDidChange)
+        reloadTableView()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -249,22 +249,25 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if Sections.header == section {
-            if !data.isEmpty && AppPreferences.shared.disablesMultiDipTokens{
-                let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
-                headerView.setup()
-                return headerView
-            } else {
-                let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
-                headerView.setup(withTableView: tableView, delegate: self)
-                return headerView
-            }
-        } else {
+        switch (Section(rawValue: section), dedicatedIpServer) {
+        case (.header, .none):
+            let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.header) as! DedicatedIpEmptyHeaderViewCell
+            headerView.setup(withTableView: tableView, delegate: self)
+            return headerView
+
+        case (.header, .some):
+            let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
+            headerView.setup()
+            return headerView
+
+        case (.dedicatedIps, .some):
             let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.titleHeader) as! DedicatedIPTitleHeaderViewCell
             return headerView
+
+        default:
+            return nil
         }
     }
-    
 }
 
 // MARK: DIP Activation

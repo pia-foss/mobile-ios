@@ -11,7 +11,7 @@ import PIADashboard
 import PIALibrary
 
 protocol RemoveDIPUseCaseType {
-    func callAsFunction() async throws
+    func callAsFunction() async -> Result<Void, DedicatedIPError>
 }
 
 private let log = PIALogger.logger(for: RemoveDIPUseCase.self)
@@ -31,23 +31,33 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
         self.selectedServer = selectedServer
     }
     
-    func callAsFunction() async throws {
+    func callAsFunction() async -> Result<Void, DedicatedIPError> {
         guard let dedicatedIPServer = getDedicatedIP(),
         let dipToken = dedicatedIPServer.dipToken else {
-            return
+            return .success(())
         }
 
         let selectedServer = selectedServer.selectedServer
         if selectedServer.dipToken == dedicatedIPServer.dipToken {
             log.debug("Disconnecting from dedicated IP server \(dedicatedIPServer)")
-            try await vpnCpnnectionUseCase.disconnect()
+            do {
+                try await vpnCpnnectionUseCase.disconnect()
+            } catch {
+                return .failure(.generic(error))
+            }
         }
 
-        try favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
+        do {
+            try favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
+        } catch {
+            return .failure(.generic(error))
+        }
         dedicatedIpProvider.removeDIPToken(dipToken)
 
         #if os(iOS)
         DispatchQueue.main.async { Macros.postNotification(.PIAServerHasBeenUpdated) }
         #endif
+
+        return .success(())
     }
 }

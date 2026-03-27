@@ -152,8 +152,6 @@ final class Bootstrapper {
 
         Client.providers.accountProvider.featureFlags { _ in
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
-            AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags[.disableMultiDipTokens]
-
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
