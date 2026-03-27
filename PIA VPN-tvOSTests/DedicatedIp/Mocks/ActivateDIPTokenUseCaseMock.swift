@@ -7,14 +7,20 @@
 //
 
 import Foundation
+
 @testable import PIA_VPN_tvOS
 
-class ActivateDIPTokenUseCaseMock: ActivateDIPTokenUseCaseType {
+final class ActivateDIPTokenUseCaseMock: ActivateDIPTokenUseCaseType {
     var error: Error?
-    
-    func callAsFunction(token: String) async throws {
-        if let error = error {
-            throw error
+
+    func callAsFunction(token: String) async -> Result<Void, DedicatedIPError> {
+        switch error {
+        case let error as DedicatedIPError:
+            return .failure(error)
+        case let .some(error):
+            return .failure(.generic(error))
+        case .none:
+            return .success(())
         }
     }
 }

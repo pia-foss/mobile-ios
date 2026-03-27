@@ -1,7 +1,7 @@
 //
 //  AddEmailToAccountViewController.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 26/03/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -20,12 +20,13 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
 import AuthenticationServices
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: AddEmailToAccountViewController.self)
 
@@ -38,7 +39,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     @IBOutlet private weak var labelSubtitle: UILabel!
     @IBOutlet private weak var logoutButton: UIButton!
     var termsAndConditionsAgreed = false
-    
+
     //Show credentials
     @IBOutlet private weak var imvPicture: UIImageView!
     @IBOutlet private weak var labelMessage: UILabel!
@@ -57,26 +58,27 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override public func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
+
         navigationItem.hidesBackButton = true
 
         labelTitle.text = L10n.Set.Email.Form.email
         labelSubtitle.text = L10n.Set.Email.why
-       
+
         textEmail.placeholder = L10n.Account.Email.placeholder
-        
+
         if let currentUser = Client.providers.accountProvider.currentUser,
-            let info = currentUser.info {
+            let info = currentUser.info
+        {
             textEmail.text = info.email
         }
 
         self.styleConfirmButton()
         self.styleLogoutButton()
-        
+
         scrollView.alpha = 0
 
         labelUsernameCaption.text = L10n.Account.Username.caption
@@ -96,7 +98,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
             try Validator.validate(email: email)
         } catch {
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
             self.status = .error(element: textEmail)
@@ -117,79 +119,83 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         }
 
         self.status = .restore(element: textEmail)
-        
+
         self.showLoadingAnimation()
         self.disableInteractions()
-        
+
         log.debug("Account: Modifying account email...")
 
         let request = UpdateAccountRequest(email: email)
 
         let password = ""
-        Client.providers.accountProvider.update(with: request,
-                                                resetPassword: true,
-                                                andPassword: password) { [weak self] (info, error) in
-                                                    self?.hideLoadingAnimation()
-                                                    self?.enableInteractions()
-                                                    
-                                                    guard let _ = info else {
-                                                        if let error = error {
-                                                            log.error("Account: Failed to modify account email (error: \(error))")
-                                                        } else {
-                                                            log.error("Account: Failed to modify account email")
-                                                        }
-                                                        
-                                                        self?.textEmail.text = ""
-                                                        
-                                                        let alert = Macros.alert(L10n.Global.error, L10n.Account.Set.Email.error)
-                                                        alert.addDefaultAction(L10n.Global.close)
-                                                        self?.present(alert, animated: true, completion: nil)
-                                                        
-                                                        return
-                                                    }
-                                                    
-                                                    log.debug("Account: Email successfully modified")
-                                                    self?.textEmail.endEditing(true)
+        Client.providers.accountProvider.update(
+            with: request,
+            resetPassword: true,
+            andPassword: password
+        ) { [weak self] (info, error) in
+            self?.hideLoadingAnimation()
+            self?.enableInteractions()
 
-                                                    //TODO SHOW CREDENTIALS
-                                                    self?.labelMessage.text = L10n.Set.Email.Success.messageFormat(email)
-                                                    self?.labelPassword.text = Client.configuration.tempAccountPassword
+            guard let _ = info else {
+                if let error = error {
+                    log.error("Account: Failed to modify account email (error: \(error))")
+                } else {
+                    log.error("Account: Failed to modify account email")
+                }
 
-                                                    UIView.animate(withDuration: 0.3, animations: {
-                                                        self?.scrollView.alpha = 1
-                                                        self?.view.layoutSubviews()
-                                                    })
+                self?.textEmail.text = ""
+
+                let alert = Macros.alert(L10n.Global.error, L10n.Account.Set.Email.error)
+                alert.addDefaultAction(L10n.Global.close)
+                self?.present(alert, animated: true, completion: nil)
+
+                return
+            }
+
+            log.debug("Account: Email successfully modified")
+            self?.textEmail.endEditing(true)
+
+            //TODO SHOW CREDENTIALS
+            self?.labelMessage.text = L10n.Set.Email.Success.messageFormat(email)
+            self?.labelPassword.text = Client.configuration.tempAccountPassword
+
+            UIView.animate(
+                withDuration: 0.3,
+                animations: {
+                    self?.scrollView.alpha = 1
+                    self?.view.layoutSubviews()
+                })
 
         }
 
     }
-    
+
     @IBAction private func close() {
-        Client.configuration.tempAccountPassword = "" //Clean pwd memory
+        Client.configuration.tempAccountPassword = ""  //Clean pwd memory
         self.dismissModal()
     }
 
     private func disableInteractions() {
         parent?.view.isUserInteractionEnabled = false
     }
-    
+
     private func enableInteractions() {
         parent?.view.isUserInteractionEnabled = true
     }
-    
+
     private func setupAppleSignInUI() {
         labelOr.text = L10n.Global.or.uppercased()
         labelOr.textAlignment = .center
-        
+
         let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
         signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
-                    
+
         self.addEmailContainer.addSubview(signInWithAppleButton)
         self.addEmailContainer.addSubview(labelOr)
 
         labelOr.translatesAutoresizingMaskIntoConstraints = false
         signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             labelOr.topAnchor.constraint(equalTo: self.buttonConfirm.bottomAnchor, constant: 15),
             labelOr.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
@@ -207,15 +213,15 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
     @IBAction private func handleAuthorizationAppleID() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.email]
-        
+
         let controller = ASAuthorizationController(authorizationRequests: [request])
-        
+
         controller.delegate = self
         controller.presentationContextProvider = self
-        
+
         controller.performRequests()
     }
-    
+
     @IBAction private func logout() {
         Client.providers.accountProvider.logout({ error in
             guard let _ = error else {
@@ -246,32 +252,35 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         Theme.current.applyTitle(labelPassword, appearance: .dark)
 
     }
-    
+
     private func styleConfirmButton() {
         buttonConfirm.setRounded()
         buttonConfirm.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonConfirm.setTitle(L10n.Global.update.uppercased(),
-                               for: [])
+        buttonConfirm.setTitle(
+            L10n.Global.update.uppercased(),
+            for: [])
     }
-    
+
     private func styleLogoutButton() {
         Theme.current.applyButtonLabelMediumStyle(logoutButton)
-        logoutButton.setTitle(L10n.Menu.Logout.title.uppercased(),
-                               for: [])
+        logoutButton.setTitle(
+            L10n.Menu.Logout.title.uppercased(),
+            for: [])
     }
-    
+
     private func styleDismissButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Global.close.uppercased(),
-                              for: [])
+        buttonSubmit.setTitle(
+            L10n.Global.close.uppercased(),
+            for: [])
     }
-    
+
     private func styleContainers() {
         self.styleContainerView(usernameContainer)
         self.styleContainerView(passwordContainer)
     }
-    
+
     func styleContainerView(_ view: UIView) {
         view.layer.cornerRadius = 6.0
         view.clipsToBounds = true

@@ -1,7 +1,7 @@
 //
 //  SiriShortcutsManager.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 17/04/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -21,8 +21,8 @@
 //
 
 import Foundation
-import IntentsUI
 import Intents
+import IntentsUI
 import PIALibrary
 import PIALocalizations
 
@@ -31,7 +31,7 @@ public class SiriShortcutsManager: NSObject {
     public static let shared = SiriShortcutsManager()
 
     func presentConnectShortcut(inViewController viewController: UIViewController) {
-    
+
         if AppPreferences.shared.useConnectSiriShortcuts {
             if let shortcut = AppPreferences.shared.connectShortcut {
                 let shortcutViewController = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
@@ -40,16 +40,16 @@ public class SiriShortcutsManager: NSObject {
             }
         } else {
             let connectShortcut = SiriShortcutConnect().build()
-            
+
             let shortcutViewController = INUIAddVoiceShortcutViewController(shortcut: connectShortcut)
             shortcutViewController.delegate = self
             viewController.present(shortcutViewController, animated: true, completion: nil)
         }
 
     }
-    
+
     func presentDisconnectShortcut(inViewController viewController: UIViewController) {
-    
+
         if AppPreferences.shared.useDisconnectSiriShortcuts {
             if let shortcut = AppPreferences.shared.disconnectShortcut {
                 let shortcutViewController = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
@@ -66,7 +66,7 @@ public class SiriShortcutsManager: NSObject {
         }
 
     }
-    
+
     func descriptionActionForConnectShortcut() -> String {
         if AppPreferences.shared.useConnectSiriShortcuts {
             return L10n.Global.edit
@@ -74,7 +74,7 @@ public class SiriShortcutsManager: NSObject {
             return L10n.Global.add
         }
     }
-    
+
     func descriptionActionForDisconnectShortcut() -> String {
         if AppPreferences.shared.useDisconnectSiriShortcuts {
             return L10n.Global.edit
@@ -82,16 +82,16 @@ public class SiriShortcutsManager: NSObject {
             return L10n.Global.add
         }
     }
-    
+
 }
 
 extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
-    
+
     public func addVoiceShortcutViewController(
         _ controller: INUIAddVoiceShortcutViewController,
         didFinishWith voiceShortcut: INVoiceShortcut?,
         error: Error?
-        ) {
+    ) {
         if let _ = error {
             let message = L10n.Siri.Shortcuts.Add.error
             let alert = Macros.alert(nil, message)
@@ -115,25 +115,27 @@ extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
     }
 
     public func addVoiceShortcutViewControllerDidCancel(
-        _ controller: INUIAddVoiceShortcutViewController) {
+        _ controller: INUIAddVoiceShortcutViewController
+    ) {
         controller.dismiss(animated: true, completion: nil)
     }
 
-    
 }
 
 extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
-    
+
     public func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
         if let error = error as? INIntentError {
             if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
                 let connectIdentifier = AppPreferences.shared.connectShortcut?.identifier.uuidString,
-                errorDescription.contains(connectIdentifier) {
+                errorDescription.contains(connectIdentifier)
+            {
                 AppPreferences.shared.useConnectSiriShortcuts = false
                 AppPreferences.shared.connectShortcut = nil
             } else if let errorDescription = error.userInfo["NSDebugDescription"] as? String,
                 let disconnectIdentifier = AppPreferences.shared.disconnectShortcut?.identifier.uuidString,
-                errorDescription.contains(disconnectIdentifier) {
+                errorDescription.contains(disconnectIdentifier)
+            {
                 AppPreferences.shared.useDisconnectSiriShortcuts = false
                 AppPreferences.shared.disconnectShortcut = nil
             }
@@ -141,7 +143,7 @@ extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
         NotificationCenter.default.post(name: .RefreshSettings, object: self, userInfo: nil)
         controller.dismiss(animated: true, completion: nil)
     }
-    
+
     public func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
         if deletedVoiceShortcutIdentifier == AppPreferences.shared.connectShortcut?.identifier {
             AppPreferences.shared.useConnectSiriShortcuts = false
@@ -153,10 +155,9 @@ extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
         NotificationCenter.default.post(name: .RefreshSettings, object: self, userInfo: nil)
         controller.dismiss(animated: true, completion: nil)
     }
-    
+
     public func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
 
-    
 }

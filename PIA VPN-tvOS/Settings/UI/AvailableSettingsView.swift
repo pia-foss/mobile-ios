@@ -6,19 +6,19 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAssetsTV
 import SwiftUI
 
 struct AvailableSettingsView: View {
     @ObservedObject var viewModel: AvailableSettingsViewModel
-    
+
     @FocusState var focusedSection: AvailableSettingsViewModel.Sections?
-    
-    
+
     var body: some View {
         HStack {
             availableSettingsList
             Spacer()
-            Image.pia_settings_bg_image
+            Asset.settingsBgImage.swiftUIImage
                 .frame(width: 840)
                 .aspectRatio(contentMode: .fit)
         }
@@ -27,7 +27,7 @@ struct AvailableSettingsView: View {
             setFocusToDefault()
         }
     }
-    
+
     var availableSettingsList: some View {
         List {
             ForEach(viewModel.sections, id: \.self) { section in
@@ -37,10 +37,9 @@ struct AvailableSettingsView: View {
                 .focused($focusedSection, equals: section)
             }
         }
-        
+
     }
 }
-
 
 // MARK: - Default focus
 

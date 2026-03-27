@@ -2,7 +2,7 @@ strings:
     inputs:
         - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Localizable.strings
     outputs:
-        templateName: structured-swift5
+        templatePath: Resources/SwiftGen/strings/structured-swift5.stencil
         output: LocalPackages/PIALocalizations/Sources/PIALocalizations/Generated/L10n.swift
         params:
             publicAccess: true
@@ -13,15 +13,30 @@ ib:
         - PIA VPN/UI/Storyboards/Welcome.storyboard
         - PIA VPN/UI/Storyboards/Signup.storyboard
     outputs:
-        templateName: scenes-swift5
+        templatePath: Resources/SwiftGen/ib/scenes-swift5.stencil
         output: PIA VPN/UI/Shared/SwiftGen+ScenesStoryboards.swift
     outputs.params:
         module: PIA_VPN
 
 xcassets:
-    inputs:
-        - PIA VPN/Resources/Images/Images.xcassets
-        - PIA VPN/Resources/Images/UI.xcassets
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Resources/Images.xcassets
     outputs:
         templatePath: Resources/SwiftGen/xcassets/swift5.stencil
-        output: PIA VPN/UI/Shared/SwiftGen+Assets.swift
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Generated/Asset.swift
+        params:
+            publicAccess: true
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsTV/Resources/Assets.xcassets
+    outputs:
+        templatePath: Resources/SwiftGen/xcassets/swift5.stencil
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsTV/Generated/Asset.swift
+        params:
+            publicAccess: true
+  - inputs:
+        - LocalPackages/PIAAssets/Sources/PIAAssetsWidget/Resources/Assets.xcassets
+    outputs:
+        templatePath: Resources/SwiftGen/xcassets/swift5.stencil
+        output: LocalPackages/PIAAssets/Sources/PIAAssetsWidget/Generated/Asset.swift
+        params:
+            publicAccess: true

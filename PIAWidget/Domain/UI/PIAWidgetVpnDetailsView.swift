@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIAAssetsWidget
 import SwiftUI
 
 internal struct PIAWidgetVpnDetailsView: View {
@@ -25,9 +26,9 @@ internal struct PIAWidgetVpnDetailsView: View {
 
     var body: some View {
         return VStack {
-            PIAWidgetVpnDetaislRow(iconName: "icon-protocol", text: vpnProtocol)
-            PIAWidgetVpnDetaislRow(iconName: "icon-port", text: port)
-            PIAWidgetVpnDetaislRow(iconName: "icon-socket", text: socket)
+            PIAWidgetVpnDetaislRow(icon: Asset.iconProtocol.swiftUIImage, text: vpnProtocol)
+            PIAWidgetVpnDetaislRow(icon: Asset.iconPort.swiftUIImage, text: port)
+            PIAWidgetVpnDetaislRow(icon: Asset.iconSocket.swiftUIImage, text: socket)
         }.padding(.trailing, viewTrailingPadding)
     }
 }

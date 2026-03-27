@@ -29,12 +29,12 @@ public enum KeychainError: Error {
 
     /// Couldn't add entry.
     case add
-    
+
     /// Couldn't find entry.
     case notFound
-    
-//    /// Returned entry has an unexpected type.
-//    case typeMismatch
+
+    //    /// Returned entry has an unexpected type.
+    //    case typeMismatch
 }
 
 /// Encapsulates Apple keychain operations.
@@ -42,7 +42,7 @@ public class Keychain {
     private let service: String?
 
     private let accessGroup: String?
-    
+
     private let usernameKey = "USERNAME_KEY"
     private let publicUsernameKey = "PUBLIC_USERNAME_KEY"
     private let dipTokensKey = "DIP_TOKENS_KEY"
@@ -66,7 +66,7 @@ public class Keychain {
         service = nil
         accessGroup = group
     }
-    
+
     /**
      Uses the keychain associated with an app group and a team prefix. Requires proper entitlements.
 
@@ -77,33 +77,33 @@ public class Keychain {
         service = nil
         accessGroup = "\(team).\(group)"
     }
-    
+
     // MARK: Password
-    
+
     /// :nodoc:
     public func set(password: String, for username: String) throws {
         removePassword(for: username)
-        
+
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = username
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecValueData as String] = password.data(using: .utf8)
-    
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add
         }
     }
-    
+
     /// :nodoc:
     @discardableResult public func removePassword(for username: String) -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = username
-        
+
         let status = SecItemDelete(query as CFDictionary)
         return (status == errSecSuccess)
     }
@@ -117,7 +117,7 @@ public class Keychain {
         //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -140,7 +140,7 @@ public class Keychain {
         query[kSecAttrAccount as String] = username
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnPersistentRef as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -151,7 +151,7 @@ public class Keychain {
         }
         return data
     }
-    
+
     /// :nodoc:
     public static func password(for username: String, reference: Data) throws -> String {
         var query = [String: Any]()
@@ -159,7 +159,7 @@ public class Keychain {
         query[kSecAttrAccount as String] = username
         query[kSecMatchItemList as String] = [reference]
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -173,9 +173,9 @@ public class Keychain {
         }
         return password
     }
-    
+
     // MARK: Helpers
-    
+
     private func setScope(query: inout [String: Any]) {
         if let service = service {
             query[kSecAttrService as String] = service
@@ -188,37 +188,37 @@ public class Keychain {
 }
 
 extension Keychain {
-    
+
     // MARK: Username
-    
+
     /// :nodoc:
     public func set(username: String) throws {
         removeUsername()
-        
+
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = usernameKey
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecValueData as String] = username.data(using: .utf8)
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add
         }
     }
-    
+
     /// :nodoc:
     @discardableResult public func removeUsername() -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = usernameKey
-        
+
         let status = SecItemDelete(query as CFDictionary)
         return (status == errSecSuccess)
     }
-    
+
     /// :nodoc:
     public func username() throws -> String {
         var query = [String: Any]()
@@ -228,7 +228,7 @@ extension Keychain {
         //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -246,37 +246,37 @@ extension Keychain {
 }
 
 extension Keychain {
-    
+
     // MARK: Public Username
-    
+
     /// :nodoc:
     public func set(publicUsername: String) throws {
         removePublicUsername()
-        
+
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = publicUsernameKey
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecValueData as String] = publicUsername.data(using: .utf8)
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add
         }
     }
-    
+
     /// :nodoc:
     @discardableResult public func removePublicUsername() -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = publicUsernameKey
-        
+
         let status = SecItemDelete(query as CFDictionary)
         return (status == errSecSuccess)
     }
-    
+
     /// :nodoc:
     public func publicUsername() throws -> String {
         var query = [String: Any]()
@@ -286,7 +286,7 @@ extension Keychain {
         //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -300,24 +300,24 @@ extension Keychain {
         }
         return token
     }
-    
+
 }
 
 extension Keychain {
-    
+
     // MARK: Token
-    
+
     /// :nodoc:
     @discardableResult public func removeToken(for username: String) -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = username
-        
+
         let status = SecItemDelete(query as CFDictionary)
         return (status == errSecSuccess)
     }
-    
+
     /// :nodoc:
     public func token(for username: String) throws -> String {
         var query = [String: Any]()
@@ -327,7 +327,7 @@ extension Keychain {
         //query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -341,7 +341,7 @@ extension Keychain {
         }
         return token
     }
-    
+
     /// :nodoc:
     public static func token(for username: String, reference: Data) throws -> String {
         var query = [String: Any]()
@@ -349,7 +349,7 @@ extension Keychain {
         query[kSecAttrAccount as String] = username
         query[kSecMatchItemList as String] = [reference]
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -367,20 +367,20 @@ extension Keychain {
 }
 
 extension Keychain {
-    
+
     // MARK: DIP Region
-    
+
     /// :nodoc:
     public func set(dipToken: String) throws {
-        
+
         var tokens = [String]()
         if let storedTokens = try? dipTokens() {
             removeDIPTokens()
-            if !storedTokens.contains(where: {$0 == dipToken }){
+            if !storedTokens.contains(where: { $0 == dipToken }) {
                 tokens.append(contentsOf: storedTokens)
             }
         }
-        
+
         tokens.append(dipToken)
 
         var query = [String: Any]()
@@ -390,23 +390,23 @@ extension Keychain {
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         let encoder = JSONEncoder()
         query[kSecValueData as String] = try? encoder.encode(tokens)
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add
         }
-        
+
     }
-    
+
     /// :nodoc:
-    @discardableResult public func remove(dipToken: String) throws {
-        
+    public func remove(dipToken: String) throws {
+
         var tokens = [String]()
         if let storedTokens = try? dipTokens() {
             removeDIPTokens()
             tokens = storedTokens.filter({ $0 != dipToken })
         }
-        
+
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
@@ -414,25 +414,25 @@ extension Keychain {
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         let encoder = JSONEncoder()
         query[kSecValueData as String] = try? encoder.encode(tokens)
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add
         }
-        
+
     }
-    
+
     /// :nodoc:
     @discardableResult public func removeDIPTokens() -> Bool {
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = dipTokensKey
-        
+
         let status = SecItemDelete(query as CFDictionary)
         return (status == errSecSuccess)
     }
-    
+
     /// :nodoc:
     public func dipTokens() throws -> [String] {
         var query = [String: Any]()
@@ -441,7 +441,7 @@ extension Keychain {
         query[kSecAttrAccount as String] = dipTokensKey
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = true
-        
+
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
@@ -563,7 +563,7 @@ extension Keychain {
         guard let favorites = try? decoder.decode([String].self, from: data) else {
             throw KeychainError.notFound
         }
-        
+
         return favorites
     }
 
@@ -579,23 +579,22 @@ extension Keychain {
     }
 }
 
-
 // MARK: - API and Vpn Tokens updates
 
 extension Keychain {
-    
+
     // TODO: This is not necessary, we can probably use setPassword(_ password: String?, for username: String)
     func setTokenData(_ tokenData: Data, for tokenKey: String) throws {
-        
+
         removeToken(for: tokenKey)
-        
+
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = tokenKey
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         query[kSecValueData as String] = tokenData
-        
+
         let status = SecItemAdd(query as CFDictionary, nil)
         guard (status == errSecSuccess) else {
             throw KeychainError.add

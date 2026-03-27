@@ -13,7 +13,7 @@ class LoginQRCodeDomainMapper {
         guard let date = Date.makeISO8601Date(string: dto.expiresAt) else { return nil }
         return LoginQRCode(token: dto.token, expiresAt: date)
     }
-    
+
     func map(dto: UserTokenDTO) -> UserToken? {
         guard let date = Date.makeISO8601Date(string: dto.expiresAt) else { return nil }
         return UserToken(token: dto.token, expiresAt: date, userId: dto.userId)

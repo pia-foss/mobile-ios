@@ -11,23 +11,23 @@ import PIALibrary
 
 class PaymentProvider: PaymentProviderType {
     private let store: InAppProvider
-    
+
     init(store: InAppProvider) {
         self.store = store
     }
-    
+
     func refreshPaymentReceipt(_ completion: @escaping (Result<Data, Error>) -> Void) {
         store.refreshPaymentReceipt { [weak self] error in
             if let error {
                 completion(.failure(error))
                 return
             }
-            
+
             guard let receipt = self?.store.paymentReceipt else {
                 completion(.failure(ClientError.unexpectedReply))
                 return
             }
-            
+
             completion(.success(receipt))
         }
     }

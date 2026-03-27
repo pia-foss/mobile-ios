@@ -21,16 +21,17 @@
 //
 
 import Foundation
-import PIALibrary
-import UIKit
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 class FavoriteServersTile: UIView, Tileable {
-    
+
     weak var delegate: ServerSelectionDelegate?
-    
+
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -38,7 +39,7 @@ class FavoriteServersTile: UIView, Tileable {
             statusUpdated()
         }
     }
-    
+
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var labelsStackView: UIStackView!
@@ -47,60 +48,59 @@ class FavoriteServersTile: UIView, Tileable {
         super.init(frame: frame)
         self.xibSetup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
         self.setupView()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     private func setupView() {
-        
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIAServerHasBeenUpdated, object: nil)
-        
+
         self.accessibilityIdentifier = "FavoriteServersTile"
         viewShouldRestyle()
         self.tileTitle.text = L10n.Tiles.Favorite.Servers.title.uppercased()
         updateFavoriteList()
-        
+
     }
-    
+
     @objc private func viewShouldRestyle() {
         tileTitle.style(style: TextStyle.textStyle21)
         Theme.current.applyPrincipalBackground(self)
     }
-    
+
     @objc private func updateFavoriteList() {
         var currentServers = Client.providers.serverProvider.currentServers
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
-                button.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Tiles.quickConnectPlaceholderLight.image :
-                                    Asset.Images.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
+                button.setImage(Asset.Piax.Tiles.quickConnectPlaceholder.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
                 button.accessibilityLabel = L10n.Global.empty
             }
         }
-        
+
         for label in labelsStackView.subviews {
             if let label = label as? UILabel {
                 label.text = ""
                 label.accessibilityLabel = L10n.Global.empty
             }
         }
-        
+
         var favServers: [Server] = []
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
+        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
 
         for identifier in favoriteServers.reversed() {
-            let servers = currentServers.filter({ $0.identifier+($0.dipToken ?? "") == identifier })
+            let servers = currentServers.filter({ $0.identifier + ($0.dipToken ?? "") == identifier })
             favServers.append(contentsOf: servers)
         }
 
@@ -112,7 +112,7 @@ class FavoriteServersTile: UIView, Tileable {
                 }
             }
         }
-        
+
         for (index, server) in favServers.enumerated() where index < stackView.subviews.count {
             let view = stackView.subviews[index]
             for element in view.subviews {
@@ -128,13 +128,14 @@ class FavoriteServersTile: UIView, Tileable {
                     button.server = server
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
+                    imageView.image = Asset.dipBadge.image
                     imageView.isHidden = server.dipToken == nil
-                    if status != .normal { //only when edit mode
+                    if status != .normal {  //only when edit mode
                         imageView.isHidden = imageView.tag == 0 ? true : server.dipToken == nil
                     }
                 }
             }
-            
+
             if let label = labelsStackView.subviews[index] as? UILabel {
                 label.text = server.country
                 label.accessibilityLabel = server.name
@@ -142,18 +143,18 @@ class FavoriteServersTile: UIView, Tileable {
             }
 
         }
-        
+
     }
-    
+
     @IBAction private func connectToServer(_ sender: ServerButton) {
         guard let server = sender.server else {
             return
         }
         delegate?.didSelectServer(server)
     }
-    
+
     private func statusUpdated() {
         updateFavoriteList()
     }
-    
+
 }

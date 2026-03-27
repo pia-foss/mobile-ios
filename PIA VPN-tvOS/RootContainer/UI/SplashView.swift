@@ -6,12 +6,13 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAssetsTV
 import SwiftUI
 
 struct SplashView: View {
     var body: some View {
         VStack(alignment: .center) {
-            Image.loading_pia_brand
+            Asset.loadingPiaBrand.swiftUIImage
         }
     }
 }

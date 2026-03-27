@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class RegionsListUseCaseMock: RegionsListUseCaseType {
@@ -19,7 +20,7 @@ class RegionsListUseCaseMock: RegionsListUseCaseType {
         getCurrentServersCalledAttempt += 1
         return getCurrentServersResult
     }
-    
+
     var selectServerCalled = false
     var selectServerCalledAttempt = 0
     var selectServerCalledWithArgument: ServerType?
@@ -28,6 +29,5 @@ class RegionsListUseCaseMock: RegionsListUseCaseType {
         selectServerCalledAttempt += 1
         selectServerCalledWithArgument = server
     }
-    
-    
+
 }

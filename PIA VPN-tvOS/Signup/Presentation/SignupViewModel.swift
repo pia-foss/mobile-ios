@@ -20,13 +20,13 @@ class SignupViewModel: ObservableObject {
     @Published var shouldShowErrorMessage = false
     @Published var subscriptionOptions: [SubscriptionOptionViewModel] = []
     var errorMessage: String?
-    
+
     private let getAvailableProducts: GetAvailableProductsUseCaseType
     private let purchaseProduct: PurchaseProductUseCaseType
     private let viewModelMapper: SubscriptionOptionViewModelMapper
     private let signupPresentableMapper: SignupPresentableErrorMapper
     private let onSuccessAction: (InAppTransaction?) -> Void
-    
+
     init(optionButtons: [OnboardingComponentButton], getAvailableProducts: GetAvailableProductsUseCaseType, purchaseProduct: PurchaseProductUseCaseType, viewModelMapper: SubscriptionOptionViewModelMapper, signupPresentableMapper: SignupPresentableErrorMapper, onSuccessAction: @escaping (InAppTransaction?) -> Void) {
         self.optionButtons = optionButtons
         self.getAvailableProducts = getAvailableProducts
@@ -35,7 +35,7 @@ class SignupViewModel: ObservableObject {
         self.signupPresentableMapper = signupPresentableMapper
         self.onSuccessAction = onSuccessAction
     }
-    
+
     func getproducts() {
         isLoading = true
         Task {
@@ -47,7 +47,7 @@ class SignupViewModel: ObservableObject {
                     if let price = subscriptionOptions.first(where: { $0.option == .yearly })?.rawPrice {
                         subtitle = L10n.Tvos.Signup.Subscription.Paywall.subtitle(price)
                     }
-                    
+
                     isLoading = false
                 }
             } catch {
@@ -58,7 +58,7 @@ class SignupViewModel: ObservableObject {
             }
         }
     }
-    
+
     func subscribe() {
         isLoading = true
         Task {
@@ -76,15 +76,15 @@ class SignupViewModel: ObservableObject {
             }
         }
     }
-    
+
     func selectSubscription(_ subscription: SubscriptionOption) {
         selectedSubscription = subscription
     }
-    
+
     private func handleError(error: Error) {
         errorMessage = signupPresentableMapper.map(error: error)
         shouldShowErrorMessage = true
-        
+
         if let purchaseProductsError = error as? PurchaseProductsError, purchaseProductsError == .uncreditedTransaction {
             onSuccessAction(nil)
         }

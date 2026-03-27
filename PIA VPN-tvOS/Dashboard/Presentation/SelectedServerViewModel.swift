@@ -1,10 +1,10 @@
-
+import Combine
 import Foundation
+import PIAAssetsTV
 import PIADashboard
 import PIALibrary
-import Combine
 import PIALocalizations
-
+import SwiftUI
 
 final class SelectedServerViewModel: ObservableObject {
 
@@ -12,12 +12,12 @@ final class SelectedServerViewModel: ObservableObject {
     private let optimalLocationUseCase: OptimalLocationUseCaseType
     private let regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType
     private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
-    
+
     let routerAction: AppRouter.Actions
     @Published var selectedServer: ServerType?
     private var cancellables = Set<AnyCancellable>()
-    
-    var selectedSeverTitle: String  {
+
+    var selectedServerTitle: String {
         let genericTitle = L10n.LocationSelection.AnyOtherLocation.title
         guard let selectedServer else {
             return genericTitle
@@ -28,11 +28,13 @@ final class SelectedServerViewModel: ObservableObject {
             return genericTitle
         }
     }
-    
+
     @Published var selectedServerSubtitle = ""
-    
-    init(useCase: SelectedServerUseCaseType, optimalLocationUseCase: OptimalLocationUseCaseType, regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType,
-         routerAction: AppRouter.Actions) {
+
+    init(
+        useCase: SelectedServerUseCaseType, optimalLocationUseCase: OptimalLocationUseCaseType, regionsDisplayNameUseCase: RegionsDisplayNameUseCaseType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType,
+        routerAction: AppRouter.Actions
+    ) {
         self.useCase = useCase
         self.optimalLocationUseCase = optimalLocationUseCase
         self.regionsDisplayNameUseCase = regionsDisplayNameUseCase
@@ -40,48 +42,39 @@ final class SelectedServerViewModel: ObservableObject {
         self.routerAction = routerAction
         updateState()
     }
-    
-    private var focusedAutomaticServerIconName: String {
-        .smart_location_icon_highlighted_name
-    }
-    
-    private var unfocusedAutomaticServerIconName: String {
-        .smart_location_icon_name
-    }
-    
-    func iconImageNameFor(focused: Bool) -> String {
-        guard let currentServer = selectedServer else { return "" }
-        
+
+    func iconImageFor(focused: Bool) -> Image {
+        guard let currentServer = selectedServer else { return Asset.iconSmartLocation.swiftUIImage }
+
         if getDedicatedIpUseCase.isDedicatedIp(currentServer) {
-            return .icon_dip_location
+            return Asset.iconDipLocation.swiftUIImage
         }
-        
+
         if currentServer.isAutomatic {
-          let autoIcon =  focused ? focusedAutomaticServerIconName : unfocusedAutomaticServerIconName
-            return autoIcon
+            return focused ? Asset.iconSmartLocationHighlighted.swiftUIImage : Asset.iconSmartLocation.swiftUIImage
         } else {
-            return "flag-\(currentServer.country.lowercased())"
+            return Asset.flag(forCountry: currentServer.country) ?? Asset.iconSmartLocation.swiftUIImage
         }
     }
-    
+
     func selectedServerSectionWasTapped() {
         routerAction.callAsFunction()
     }
-    
+
     private func updateState() {
         useCase.getSelectedServer()
             .combineLatest(optimalLocationUseCase.getTargetLocaionForOptimalLocation()) { (newSelectedServer, newTargetLocation) in
-            return (selectedServer: newSelectedServer, targetLocation: newTargetLocation)
-        }
-        .receive(on: RunLoop.main)
-        .sink { [weak self] result in
-            guard let self else { return }
-            self.selectedServer = result.selectedServer
-            self.updateSelectedServerSubtitle(for: result.selectedServer, targetLocation: result.targetLocation)
-        }.store(in: &cancellables)
-        
+                return (selectedServer: newSelectedServer, targetLocation: newTargetLocation)
+            }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                self.selectedServer = result.selectedServer
+                self.updateSelectedServerSubtitle(for: result.selectedServer, targetLocation: result.targetLocation)
+            }.store(in: &cancellables)
+
     }
-    
+
     private func updateSelectedServerSubtitle(for selectedServer: ServerType, targetLocation: ServerType?) {
         if selectedServer.isAutomatic {
             let displayName = regionsDisplayNameUseCase.getDisplayNameForOptimalLocation(with: targetLocation)
@@ -90,6 +83,5 @@ final class SelectedServerViewModel: ObservableObject {
             self.selectedServerSubtitle = regionsDisplayNameUseCase.getDisplayName(for: selectedServer).subtitle
         }
     }
-    
-    
+
 }

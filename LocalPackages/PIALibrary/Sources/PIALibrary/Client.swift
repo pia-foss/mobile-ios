@@ -32,26 +32,26 @@ public final class Client {
 
     /// The environment in which the client is currently running in.
     public static var environment: Environment = .production
-    
+
     /// The global client configuration.
     public static let configuration = Client.Configuration()
-    
+
     /// The persistence layer (customizable)
     public static var database = Client.Database()
-    
+
     /// The current state of the background operations.
     public static let daemons = Client.Daemons()
-    
+
     /// The library preferences.
     public static let preferences = Client.Preferences()
-    
+
     /// The business providers (customizable).
     public static var providers = Client.Providers()
-    
+
     static var webServices: WebServices = PIAWebServices()
 
     #if os(iOS) || os(tvOS)
-    public static var store: InAppProvider = AppStoreProvider()
+        public static var store: InAppProvider = AppStoreProvider()
     #endif
 
     // MARK: Initialization
@@ -80,59 +80,47 @@ public final class Client {
         }
         VPNDaemon.shared.start()
         VPNDaemon.shared.enableUpdates()
-
-        // migrate from old token
-        providers.accountProvider.migrateOldTokenIfNeeded { (error) in
-            // If there was an error. It will force the user logout.
-            guard let error = error as? ClientError else {
-                return
-            }
-            log.debug("Client bootstrap migrateOldTokenIfNeeded error: \(error)")
-            if (error == .unauthorized) {
-                providers.accountProvider.logout(nil)
-            }
-        }
     }
-    
+
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {
         ServersPinger.shared.reset()
         ServersDaemon.shared.reset()
         ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
-    
+
     public static func resetWebServices() {
         Client.webServices = PIAWebServices()
     }
-    
+
     /**
      Refresh the list of plan products
      */
     public static func refreshProducts() {
         #if os(iOS)
-        providers.accountProvider.listPlanProducts(nil)
+            providers.accountProvider.listPlanProducts(nil)
         #endif
     }
-    
+
     /**
     Observe Purchase transactions
     */
     public static func observeTransactions() {
         #if os(iOS)
-        store.startObservingTransactions()
+            store.startObservingTransactions()
         #endif
     }
 
     /**
      Disposes the client resources and observers.
-     
+
      Do this when the consumer application is about to terminate.
      */
     public static func dispose() {
         #if os(iOS)
-        store.stopObservingTransactions()
+            store.stopObservingTransactions()
         #endif
     }
-    
+
     /**
      Refresh the ping number to the given servers
      */

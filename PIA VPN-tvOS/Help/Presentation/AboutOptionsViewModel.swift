@@ -13,11 +13,11 @@ class AboutOptionsViewModel: ObservableObject {
     enum Sections: Equatable, Identifiable {
         case acknowledgements
         case privacyPolicy
-        
+
         var id: Self {
             return self
         }
-        
+
         var title: String {
             switch self {
             case .acknowledgements:
@@ -27,17 +27,17 @@ class AboutOptionsViewModel: ObservableObject {
             }
         }
     }
-    
+
     let onAcknowledgementsAction: AppRouter.Actions
     let onPrivacyPolicyAction: AppRouter.Actions
-    
+
     let sections: [Sections] = [.privacyPolicy, .acknowledgements]
-    
+
     init(onAcknowledgementsAction: AppRouter.Actions, onPrivacyPolicyAction: AppRouter.Actions) {
         self.onAcknowledgementsAction = onAcknowledgementsAction
         self.onPrivacyPolicyAction = onPrivacyPolicyAction
     }
-    
+
     func navigate(to section: Sections) {
         switch section {
         case .acknowledgements:

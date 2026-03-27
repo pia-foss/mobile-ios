@@ -20,16 +20,17 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import PIAAssetsMobile
 import PIALibrary
-import PIAUIKit
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 class ContentBlockerViewController: AutolayoutViewController {
     @IBOutlet private weak var imvPicture: UIImageView!
-    
+
     @IBOutlet private weak var labelTitle: UILabel!
-    
+
     @IBOutlet private weak var labelMessage: UILabel!
 
     @IBOutlet private weak var labelFooter: UILabel!
@@ -38,11 +39,11 @@ class ContentBlockerViewController: AutolayoutViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = L10n.ContentBlocker.title
         isModalInPresentation = true
-        
-        imvPicture.image = Asset.Images.imageContentBlocker.image
+
+        imvPicture.image = Asset.imageContentBlocker.image
         labelTitle.text = L10n.ContentBlocker.title
         labelMessage.text = L10n.ContentBlocker.Body.subtitle
         labelFooter.text = L10n.ContentBlocker.Body.footer
@@ -54,10 +55,10 @@ class ContentBlockerViewController: AutolayoutViewController {
     }
 
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applySmallInfo(labelFooter, appearance: .dark)

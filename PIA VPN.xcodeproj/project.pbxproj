@@ -27,10 +27,12 @@
 		3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */; };
 		3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */; };
 		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
+		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
 		3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */; };
+		3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */; };
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
@@ -39,6 +41,9 @@
 		8269A6D6251CB5E0000B4DBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67C251CB4BA000B4DBF /* WidgetKit.framework */; };
 		8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8269A67E251CB4BA000B4DBF /* SwiftUI.framework */; };
 		8269A6E3251CB5E3000B4DBF /* PIAWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */; };
+		A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */; };
+		A1A1A1A1A1A1A1A1A1A1A104 /* PIAAssetsWidget in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */; };
 		AA36CDC428A6711300180A33 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC328A6711300180A33 /* Popover */; };
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
@@ -199,7 +204,6 @@
 		3F0EF5C82EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Flags-dev.plist",
 				"Supporting Files/Info.plist",
 			);
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
@@ -209,6 +213,7 @@
 			membershipExceptions = (
 				"Resources/Images/AppIcon-Production.icon",
 				"Resources/Images/AppIcon-Staging.icon",
+				Resources/Images/Assets.xcassets,
 			);
 			target = 8269A6D4251CB5E0000B4DBF /* PIAWidgetExtension */;
 		};
@@ -225,6 +230,7 @@
 				"Core/Extensions/EmailValidationError+ErrorMessage.swift",
 				"Core/Extensions/Server+Automatic.swift",
 				"Core/Extensions/ServerProvider+UI.swift",
+				"Core/Foundation+Protocols.swift",
 				Core/Models/AboutComponent.swift,
 				Core/Utils/RegionFilter.swift,
 				Flags.swift,
@@ -251,9 +257,13 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AccountInformationAvailability/AccountInformationAvailabilityVerifierTests.swift,
+				Core/Messages/PIACommandTests.swift,
 				Core/NMTTests.swift,
 				Core/PIACardTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
+				"Helpers/Stubs+PIALibrary.swift",
+				Mocks/AccountProviderMock.swift,
+				Mocks/NotificationCenterMock.swift,
 				Mocks/UserDefaultsMock.swift,
 			);
 			target = 0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */;
@@ -264,14 +274,6 @@
 				PacketTunnelProvider.swift,
 			);
 			target = DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */;
-		};
-		3F0EF7252EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Common/Mocks/AccountProviderTypeMock.swift,
-				Common/Mocks/NotificationCenterMock.swift,
-			);
-			target = 0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */;
 		};
 		3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -299,7 +301,6 @@
 				Shared/CompositionRoot/VpnConnectionFactory.swift,
 				Shared/StateMonitors/StateMonitorsFactory.swift,
 				Shared/StateMonitors/VPNStatusMonitor.swift,
-				"Shared/Utils/Foundation+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/ClientPreferences+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/Keychain+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/PIALibrary+Protocols.swift",
@@ -346,7 +347,7 @@
 		3F0EF5F62EDF26620013E4FB /* PIA VPN WG Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF5F82EDF26620013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN WG Tunnel"; sourceTree = "<group>"; };
 		3F0EF6152EDF26990013E4FB /* PIA-VPN_tvOS_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_tvOS_E2E_Tests"; sourceTree = "<group>"; };
 		3F0EF62E2EDF26990013E4FB /* PIA VPN-tvOSUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSUITests"; sourceTree = "<group>"; };
-		3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF7252EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSTests"; sourceTree = "<group>"; };
+		3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSTests"; sourceTree = "<group>"; };
 		3F0EF7232EDF26990013E4FB /* PIA tvOS Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA tvOS Tunnel"; sourceTree = "<group>"; };
 		3F0EF8692EDF26D90013E4FB /* PIA VPN-tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9402EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9422EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOS"; sourceTree = "<group>"; };
 		3F0EF9682EDF27910013E4FB /* PIA-VPN_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_E2E_Tests"; sourceTree = "<group>"; };
@@ -386,6 +387,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
+				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
 				AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */,
@@ -434,6 +437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A1A1A1A1A1A1A1A1A1A104 /* PIAAssetsWidget in Frameworks */,
 				8269A6D7251CB5E0000B4DBF /* SwiftUI.framework in Frameworks */,
 				3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */,
 				6A66AB9BF1D1DEE0C4CB9FA5 /* PIALocalizations in Frameworks */,
@@ -470,9 +474,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */,
 				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
 				ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */,
+				3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */,
 				3B9F2063FD0AA1F499E8A6ED /* PIALocalizations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,6 +668,7 @@
 				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
+				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -736,6 +743,7 @@
 			name = PIAWidgetExtension;
 			packageProductDependencies = (
 				6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */,
+				A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */,
 			);
 			productName = PIAWidgetExtension;
 			productReference = 8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */;
@@ -809,6 +817,7 @@
 				E5C507732B0E144D00200A6A /* Sources */,
 				E5C507742B0E144D00200A6A /* Frameworks */,
 				E5C507752B0E144D00200A6A /* Resources */,
+				3F4D43172F8640C70028380A /* Download Latest Regions List */,
 				693CA5C32B3F268400D38378 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -826,6 +835,8 @@
 				3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */,
 				3B9F2063FD0AA1F499E8A6EE /* PIALocalizations */,
 				ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */,
+				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
+				3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */,
 			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
@@ -1141,6 +1152,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piaios.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piaios.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piaios.tmp\"\nfi\n";
+		};
+		3F4D43172F8640C70028380A /* Download Latest Regions List */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Download Latest Regions List";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piatvos.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piatvos.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piatvos.tmp\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2100,7 +2129,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -2734,7 +2763,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -2784,7 +2813,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -3232,6 +3261,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
 		};
+		3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADebugMenu;
+		};
 		3F807D4B2F164B44002015ED /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
@@ -3255,6 +3288,18 @@
 		824E8528B3924C15A0398820 /* PIALocalizations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALocalizations;
+		};
+		A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsMobile;
+		};
+		A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsTV;
+		};
+		A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsWidget;
 		};
 		AA36CDC328A6711300180A33 /* Popover */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -13,10 +13,9 @@ protocol KeychainType {
     func getFavorites() throws -> [String]
     func set(favorites: [String]) throws
     func eraseAllFavorites() throws
-    
+
     // Add methods from `Keychain` class as needed
 }
-
 
 extension Keychain: KeychainType {
     func eraseAllFavorites() throws {

@@ -20,25 +20,26 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: RestoreSignupViewController.self)
 
 final class RestoreSignupViewController: AutolayoutViewController, BrandableNavigationBar {
     @IBOutlet private weak var scrollView: UIScrollView!
-    
+
     @IBOutlet private weak var viewModal: UIView!
-    
+
     @IBOutlet private weak var labelTitle: UILabel!
-    
+
     @IBOutlet private weak var labelDescription: UILabel!
-    
+
     @IBOutlet private weak var textEmail: BorderedTextField!
-    
+
     @IBOutlet private weak var buttonRestorePurchase: PIAButton!
 
     private var config: Config!
@@ -79,22 +80,22 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         if Macros.isDeviceBig {
             scrollView.isScrollEnabled = false
         }
-        
+
         styleRestoreButton()
     }
-    
+
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         enableInteractions(true)
     }
-    
+
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // signup after receipt restore
         if (segue.identifier == StoryboardSegue.Welcome.signupViaRestoreSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
-            
+
             guard let email = signupEmail else {
                 log.error("signupEmail is not set in RestoreSignupViewController")
                 return
@@ -110,7 +111,7 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
             )
         }
     }
-    
+
     // MARK: Actions
 
     @IBAction private func restorePurchase(_ sender: Any?) {
@@ -126,16 +127,16 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
             signupEmail = nil
             textEmail.becomeFirstResponder()
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
             self.status = .error(element: textEmail)
             return
         }
-        
+
         self.status = .restore(element: textEmail)
         signupEmail = email.trimmed()
-    
+
         enableInteractions(false)
         isRunningActivity = true
         self.showLoadingAnimation()
@@ -151,18 +152,19 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
             self.reportRestoreSuccess()
         }
     }
-    
+
     private func reportRestoreSuccess() {
         log.debug("Restored payment receipt, redeeming...");
-        
+
         guard let email = signupEmail else {
             log.error("signupEmail is not set in RestoreSignupViewController")
             return
         }
-        self.restoreController(self,
-                               didRefreshReceiptWith: email)
+        self.restoreController(
+            self,
+            didRefreshReceiptWith: email)
     }
-    
+
     private func reportRestoreFailure(_ optionalError: Error?) {
         let message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
         if let error = optionalError {
@@ -170,15 +172,16 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         } else {
             log.error("Failed to restore payment receipt")
         }
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                message: message)
+        Macros.displayImageNote(
+            withImage: Asset.iconWarning.image,
+            message: message)
 
     }
 
     private func enableInteractions(_ enable: Bool) {
         textEmail.isEnabled = enable
     }
-    
+
     // MARK: Restylable
 
     override public func viewShouldRestyle() {
@@ -191,19 +194,20 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         Theme.current.applySubtitle(labelDescription)
         Theme.current.applyInput(textEmail)
     }
-    
+
     private func styleRestoreButton() {
         buttonRestorePurchase.setRounded()
         buttonRestorePurchase.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonRestorePurchase.setTitle(L10n.Welcome.Restore.submit.uppercased(),
-                              for: [])
+        buttonRestorePurchase.setTitle(
+            L10n.Welcome.Restore.submit.uppercased(),
+            for: [])
     }
 
     private func restoreController(_ restoreController: RestoreSignupViewController, didRefreshReceiptWith email: String) {
         self.signupEmail = email
         self.perform(segue: StoryboardSegue.Welcome.signupViaRestoreSegue)
     }
-    
+
 }
 
 extension RestoreSignupViewController: UITextFieldDelegate {

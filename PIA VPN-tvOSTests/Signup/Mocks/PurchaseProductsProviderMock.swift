@@ -8,15 +8,16 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class PurchaseProductsProviderMock: PurchaseProductsProviderType {
     private let result: Result<InAppTransaction, PurchaseProductsError>
-    
+
     init(result: Result<InAppTransaction, PurchaseProductsError>) {
         self.result = result
     }
-    
+
     func purchase(subscriptionOption: SubscriptionOption, _ callback: @escaping (Result<InAppTransaction, PurchaseProductsError>) -> Void) {
         callback(result)
     }

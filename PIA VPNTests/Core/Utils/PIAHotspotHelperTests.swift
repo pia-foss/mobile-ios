@@ -20,14 +20,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import XCTest
 import PIALibrary
+import XCTest
+
 @testable import PIA_VPN
 
 class PIAHotspotHelperTests: XCTestCase {
 
     private var hotspotHelper: PIAHotspotHelper!
-    
+
     override func setUp() {
         super.setUp()
         hotspotHelper = PIAHotspotHelper()
@@ -37,11 +38,11 @@ class PIAHotspotHelperTests: XCTestCase {
         hotspotHelper = nil
         super.tearDown()
     }
-    
+
     func testRetrieveCurrentNetworkListIsEmpty() {
         XCTAssertTrue(hotspotHelper.retrieveCurrentNetworkList().isEmpty)
     }
-    
+
     func testTrustedNetworkArray() {
         var trustedNetworks = hotspotHelper.trustedNetworks()
         XCTAssertTrue(trustedNetworks.isEmpty)
@@ -53,7 +54,7 @@ class PIAHotspotHelperTests: XCTestCase {
         trustedNetworks = hotspotHelper.trustedNetworks()
         XCTAssertTrue(trustedNetworks.isEmpty)
     }
-    
+
     func testRemoveTrustedNetworkArray() {
         hotspotHelper.clearTrustedNetworkList()
         var trustedNetworks = hotspotHelper.trustedNetworks()
@@ -67,7 +68,7 @@ class PIAHotspotHelperTests: XCTestCase {
         XCTAssertTrue(trustedNetworks.isEmpty)
 
     }
-    
+
     func testConfiguration() {
         /*
         #if arch(i386) || arch(x86_64)
@@ -76,14 +77,14 @@ class PIAHotspotHelperTests: XCTestCase {
         var pref = Client.preferences.editable()
         pref.nmtRulesEnabled = true
         pref.commit()
-        
+
         var response = hotspotHelper.configureHotspotHelper()
         XCTAssertTrue(response)
-        
+
         pref = Client.preferences.editable()
         pref.nmtRulesEnabled = false
         pref.commit()
-        
+
         response = hotspotHelper.configureHotspotHelper()
         XCTAssertFalse(response)
         #endif

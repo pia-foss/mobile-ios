@@ -9,10 +9,10 @@
 import Nimble
 
 class SignUpTests: BaseTest {
-    override class func spec(){
-        shouldLogIn = false 
+    override class func spec() {
+        shouldLogIn = false
         super.spec()
-        
+
         describe("sign up tests") {
             context("when navigating to sign up page") {
                 it("should display the plan selection") {
@@ -22,8 +22,8 @@ class SignUpTests: BaseTest {
                     expect(app.monthlyPlanButton.waitForElementToAppear()).to(beTrue())
                 }
             }
-            
-            context("when clicking the footer navigations"){
+
+            context("when clicking the footer navigations") {
                 it("should navigate to Privacy Policy page") {
                     app.logout()
                     app.navigateToSignUpScreen()

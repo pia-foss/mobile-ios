@@ -30,7 +30,7 @@ public enum Plan: String, Codable {
 
     /// Subscription expires/renews after one year.
     case yearly
-    
+
     /// It's a trial plan.
     case trial
 

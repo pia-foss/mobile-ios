@@ -21,15 +21,16 @@
 //
 
 import Foundation
+import PIAAssetsMobile
 import PIALibrary
-import UIKit
 import PIALocalizations
+import UIKit
 
 extension Server: @retroactive CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String? {
-        
+
         let localizedName = name
-        
+
         switch status {
         case .connected:
             guard !isAutomatic else {
@@ -42,7 +43,7 @@ extension Server: @retroactive CustomStringConvertible {
                 }
             }
             return localizedName
-            
+
         case .connecting:
             return L10n.Dashboard.Vpn.connecting
         case .disconnecting:
@@ -59,8 +60,7 @@ extension Server: @retroactive CustomStringConvertible {
 
 extension UIImageView {
     func setImage(fromServer server: Server) {
-        let imageName = "flags/flag-\(server.country.lowercased())"
-        guard let image = UIImage(named: imageName) else {
+        guard let image = Asset.Flags.flag(forCountry: server.country) else {
             return
         }
         self.image = image.withRenderingMode(.alwaysOriginal)
@@ -69,8 +69,7 @@ extension UIImageView {
 
 extension UIButton {
     func setImage(fromServer server: Server) {
-        let imageName = "flags/flag-\(server.country.lowercased())"
-        guard let image = UIImage(named: imageName) else {
+        guard let image = Asset.Flags.flag(forCountry: server.country) else {
             return
         }
         let original = image.withRenderingMode(.alwaysOriginal)
@@ -81,7 +80,7 @@ extension UIButton {
             self.setImage(original.image(alpha: 0.3), for: .normal)
         }
         self.setImage(image.withRenderingMode(.alwaysOriginal), for: .highlighted)
-        
+
     }
 }
 
@@ -93,17 +92,17 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-    
+
     func aspectScaled(toFit size: CGSize) -> UIImage? {
         let aspectWidth = size.width / self.size.width
         let aspectHeight = size.height / self.size.height
         let aspectRatio = min(aspectWidth, aspectHeight)
-        
+
         let scaledSize = CGSize(
             width: self.size.width * aspectRatio,
             height: self.size.height * aspectRatio
         )
-        
+
         let renderer = UIGraphicsImageRenderer(size: scaledSize)
         return renderer.image { _ in
             self.draw(in: CGRect(origin: .zero, size: scaledSize))

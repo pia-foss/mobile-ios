@@ -20,15 +20,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
+import UIKit
 
 private let log = PIALogger.logger(for: WelcomePageViewController.self)
 
 final class WelcomePageViewController: UIPageViewController {
     private var source = [UIViewController]()
-    
-    var config: Config! // TODO: should be made private when segue navigation is removed
+
+    var config: Config!  // TODO: should be made private when segue navigation is removed
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,28 +39,31 @@ final class WelcomePageViewController: UIPageViewController {
         }
 
         if config.pages.contains(.login) {
-            let vc = LoginViewController.with(config: .init(
-                loginUsername: config.loginUsername,
-                loginPassword: config.loginPassword,
-                accountProvider: config.accountProvider,
-                completionDelegate: config.completionDelegate,
-            ))
+            let vc = LoginViewController.with(
+                config: .init(
+                    loginUsername: config.loginUsername,
+                    loginPassword: config.loginPassword,
+                    accountProvider: config.accountProvider,
+                    completionDelegate: config.completionDelegate,
+                ))
             source.append(vc)
         }
         if config.pages.contains(.purchase) {
-            let vc = PurchaseViewController.with(config: .init(
-                isExpired: config.isExpired,
-                accountProvider: config.accountProvider,
-                completionDelegate: config.completionDelegate,
-            ))
+            let vc = PurchaseViewController.with(
+                config: .init(
+                    isExpired: config.isExpired,
+                    accountProvider: config.accountProvider,
+                    completionDelegate: config.completionDelegate,
+                ))
             source.append(vc)
         }
         if config.pages.contains(.restore) {
-            let vc = RestoreSignupViewController.with(config: .init(
-                purchaseEmail: config.purchaseEmail,
-                accountProvider: config.accountProvider,
-                completionDelegate: config.completionDelegate,
-            ))
+            let vc = RestoreSignupViewController.with(
+                config: .init(
+                    purchaseEmail: config.purchaseEmail,
+                    accountProvider: config.accountProvider,
+                    completionDelegate: config.completionDelegate,
+                ))
             source.append(vc)
         }
         dataSource = self
@@ -76,15 +79,15 @@ final class WelcomePageViewController: UIPageViewController {
         }
 
         setViewControllers([source.first!], direction: .forward, animated: false, completion: nil)
-        
+
         if let scrollView = self.view.subviews.filter({
             $0.isKind(of: UIScrollView.self)
         }).first as? UIScrollView {
             scrollView.isScrollEnabled = false
         }
-        
+
     }
-    
+
     func show(page: Pages) {
 
         // XXX: quick temp solution for log2
@@ -92,10 +95,10 @@ final class WelcomePageViewController: UIPageViewController {
         switch page {
         case .login:
             index = 0
-            
+
         case .purchase:
             index = 1
-            
+
         case .restore:
             index = 3
 
@@ -115,14 +118,14 @@ final class WelcomePageViewController: UIPageViewController {
         let direction: UIPageViewController.NavigationDirection = (index > currentIndex) ? .forward : .reverse
         setViewControllers([controller], direction: direction, animated: true, completion: nil)
     }
-    
+
     // MARK: Unwind
-    
+
     @IBAction private func unwoundSignupFailure(segue: UIStoryboardSegue) {
     }
 
     // MARK: Size classes
-    
+
     public override func overrideTraitCollection(forChild childViewController: UIViewController) -> UITraitCollection? {
         guard let window = view.window else {
             return super.traitCollection
@@ -153,7 +156,7 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
         }
         return source[index - 1]
     }
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = source.firstIndex(of: viewController) else {
             log.error("Cannot find view controller")

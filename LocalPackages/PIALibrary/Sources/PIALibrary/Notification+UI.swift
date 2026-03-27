@@ -26,15 +26,15 @@ import Foundation
 // e.g. use Macros always, which in turn may return UIColor/NSColor
 
 public extension Notification.Name {
-    
+
     // MARK: UI
-    
+
     /// Posted following a theme switch.
     static let PIAThemeDidChange = Notification.Name("PIAThemeDidChange")
-    
+
     /// Reload the tiles.
     static let PIATilesDidChange = Notification.Name("PIATilesDidChange")
-    
+
     /// Reload the tiles with animation.
     static let PIAUpdateFixedTiles = Notification.Name("PIAUpdateFixedTiles")
 
@@ -46,7 +46,7 @@ public extension Notification.Name {
 
     /// User clicked the magic link and got a valid token
     static let PIAFinishLoginWithMagicLink = Notification.Name("PIALoginWithMagicLink")
-    
+
     /// User is unathorized
     static let PIAUnauthorized = Notification.Name("Unauthorized")
 

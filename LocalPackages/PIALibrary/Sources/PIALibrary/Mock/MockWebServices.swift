@@ -23,13 +23,13 @@
 import Foundation
 
 final class MockWebServices: WebServices {
-    
+
     var messageType: InAppMessageType = .view
-    
+
     var credentials: (() -> Credentials)?
 
     var accountInfo: (() -> AccountInfo)?
-    
+
     var appstoreInformationEligible: (() -> AppStoreInformation)?
 
     var appstoreInformationNotEligible: (() -> AppStoreInformation)?
@@ -42,83 +42,67 @@ final class MockWebServices: WebServices {
 
     var apiToken: String?
 
-    func migrateToken(token: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
+    func migrateToken(token: String) async throws {}
 
-    func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        callback?(nil)
-    }
+    func token(credentials: Credentials) async throws {}
 
-    func token(receipt: Data, _ callback: ((Error?) -> Void)?) {
-        callback?(nil)
-    }
+    func token(receipt: Data) async throws {}
 
-    func info(_ callback: ((AccountInfo?, Error?) -> Void)?) {
+    func info() async throws -> AccountInfo {
         let result = accountInfo?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
+
+        if let result {
+            return result
+        } else if let error {
+            throw error
+        } else {
+            fatalError()
+        }
     }
-    
-    func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
+
+    func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {}
+
+    func loginLink(email: String) async throws {}
+
+    func logout() async throws {}
+
+    func deleteAccount() async throws {}
+
+    func signup(with request: Signup) async throws -> Credentials {
+        guard let result = credentials?() else {
+            throw ClientError.unsupported
+        }
+        return result
     }
-    
-    func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-    
-    func logout(_ callback: LibraryCallback<Bool>?) {
-        callback?(true, nil)
-    }
-    
-    func deleteAccount(_ callback: LibraryCallback<Bool>?) {
-        callback?(true, nil)
-    }
-    
-    func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        callback?([], nil)
-    }
-    
-    func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-    
-    func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
-        let result = credentials?()
-        let error: ClientError? = (result == nil) ? .unsupported : nil
-        callback?(result, error)
-    }
-    
+
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-    
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-    
+
+    func processPayment(credentials: Credentials, request: Payment) async throws {}
+
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         let result = serversBundle?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-    
+
     func flagURL(for country: String) -> URL {
         return URL(fileURLWithPath: "")
     }
-    
+
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
         callback?(nil, nil)
     }
-    
-    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
-        callback?(nil, nil)
+
+    func submitDebugReport() async throws -> String {
+        return ""
     }
-    
-    func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
+
+    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
         let result = { () -> AppStoreInformation? in
             if let receipt = receipt {
                 if receipt.count == 0 {
@@ -130,18 +114,17 @@ final class MockWebServices: WebServices {
                 return self.appstoreInformationEligible?()
             }
         }
-        
+
         Client.configuration.eligibleForTrial = result()!.eligibleForTrial
 
-        callback?(result(), nil)
+        return result()
+    }
 
+    func featureFlags() async throws -> [String] {
+        ["mock-test"]
     }
-    
-    func featureFlags(_ callback: LibraryCallback<[String]>?) {
-        callback?(["mock-test"], nil)
-    }
-    
-    func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?) {
-        callback?(nil, nil)
+
+    func validateLoginQR(qrToken: String) async throws -> String {
+        ""
     }
 }

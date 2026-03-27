@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
+import UIKit
 
 /// Displays an `UITableView` with a list of dynamically rendered options.
 public class OptionsViewController: AutolayoutViewController, UITableViewDataSource, UITableViewDelegate {
@@ -38,9 +38,9 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
 
     /// The `OptionsViewControllerDelegate` for rendering and events.
     public weak var delegate: OptionsViewControllerDelegate?
-    
+
     // FIXME: table view "expands" on appearance
-    
+
     /// :nodoc:
     public override func viewDidLoad() {
         let viewContainer = UIView(frame: view.bounds)
@@ -48,11 +48,11 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         viewContainer.backgroundColor = .clear
         view.addSubview(viewContainer)
         self.viewContainer = viewContainer
-        
+
         viewContainer.insetsLayoutMarginsFromSafeArea = false
 
         super.viewDidLoad()
-        
+
         guard let bgColor = delegate?.backgroundColorForOptionsController(self) else {
             return
         }
@@ -67,40 +67,40 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
 
         viewContainer.addSubview(tableView)
 
-        tableView.addConstaintsToSuperview(leadingOffset: 0,
-                                           trailingOffset: 0,
-                                           topOffset: 0,
-                                           bottomOffset: 0)
-        
+        tableView.addConstaintsToSuperview(
+            leadingOffset: 0,
+            trailingOffset: 0,
+            topOffset: 0,
+            bottomOffset: 0)
+
         delegate?.optionsController(self, didLoad: tableView)
-        
+
         if UserInterface.isIpad {
             NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
-        
-        
+
         viewShouldRestyle()
-        
+
     }
-    
+
     public func reload() {
         self.tableView.reloadData()
     }
-    
+
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
     }
-    
+
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
     }
 
     // MARK: Restylable
-    
+
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
         // XXX: for some reason, UITableView is not affected by appearance updates
         if let viewContainer = viewContainer {
@@ -112,16 +112,16 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
             Theme.current.applyDividerToSeparator(tableView)
             tableView.reloadData()
         }
-        
+
     }
 
     // MARK: UITableViewDataSource
-    
+
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-    
+
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = delegate?.optionsController(self, tableView: tableView, reusableCellAt: indexPath) else {
@@ -137,33 +137,34 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
 
         Theme.current.applySecondaryBackground(cell)
         if let textLabel = cell.textLabel {
-            Theme.current.applySettingsCellTitle(textLabel,
-                                                 appearance: .dark)
+            Theme.current.applySettingsCellTitle(
+                textLabel,
+                appearance: .dark)
         }
         if let detailLabel = cell.detailTextLabel {
             Theme.current.applySubtitle(detailLabel)
         }
-        
+
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
         cell.selectedBackgroundView = backgroundView
 
         return cell
     }
-    
+
     // MARK: UITableViewDelegate
-    
+
     /// :nodoc:
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = options[indexPath.row]
-    
+
         delegate?.optionsController(self, didSelectOption: option, at: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 /// Handles rendering and receives events of an `OptionsViewController`.
-public protocol OptionsViewControllerDelegate: class {
+public protocol OptionsViewControllerDelegate: AnyObject {
 
     /**
      Sets the background color of the view controller.

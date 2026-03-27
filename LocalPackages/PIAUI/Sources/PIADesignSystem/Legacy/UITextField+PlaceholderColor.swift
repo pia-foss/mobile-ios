@@ -23,7 +23,7 @@
 import UIKit
 
 extension UITextField {
-    
+
     @IBInspectable public var placeholderColor: UIColor? {
         get {
             let attributed = self.attributedPlaceholder ?? NSAttributedString(string: "")
@@ -48,5 +48,5 @@ extension UITextField {
             }
         }
     }
-    
+
 }

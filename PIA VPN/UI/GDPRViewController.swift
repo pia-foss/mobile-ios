@@ -20,18 +20,19 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 public protocol GDPRDelegate: AnyObject {
-    
+
     func gdprViewWasAccepted()
 
     func gdprViewWasRejected()
-    
+
 }
 
 final class GDPRViewController: AutolayoutViewController {
@@ -44,10 +45,11 @@ final class GDPRViewController: AutolayoutViewController {
     @IBOutlet private weak var closeButton: UIButton!
 
     weak var delegate: GDPRDelegate? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        closeButton.setImage(Asset.iconClose.image, for: .normal)
         self.labelCollectTitle.text = L10n.Welcome.Gdpr.Collect.Data.title
         self.labelCollectDescription.text = L10n.Welcome.Gdpr.Collect.Data.description
         self.labelUseDataDescription.text = L10n.Welcome.Gdpr.Usage.Data.description
@@ -55,29 +57,29 @@ final class GDPRViewController: AutolayoutViewController {
     }
 
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+
         Theme.current.applyTitle(labelCollectTitle, appearance: .dark)
         Theme.current.applySubtitle(labelCollectDescription)
         Theme.current.applySubtitle(labelUseDataDescription)
 
         acceptButton.setRounded()
         acceptButton.style(style: TextStyle.Buttons.piaGreenButton)
-        
+
     }
-    
+
     @IBAction func accept(_ sender: Any) {
         acceptButton.isEnabled = false
 
         delegate?.gdprViewWasAccepted()
         dismissModal()
     }
-    
+
     @IBAction func reject(_ sender: Any) {
         delegate?.gdprViewWasRejected()
         dismissModal()
     }
-    
+
 }

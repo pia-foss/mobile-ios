@@ -6,64 +6,64 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import XCTest
-import Quick
-import Nimble
 import Foundation
+import Nimble
+import Quick
+import XCTest
 
-class BaseTest:QuickSpec {
+class BaseTest: QuickSpec {
     static var app: XCUIApplication!
     static let bundle = Bundle(for: BaseTest.self)
     static var shouldLogIn = true
-    
-//    override class func spec() {
-//        beforeSuite {
-//            app = XCUIApplication()
-//            app.launch()
-//            
-//            if(app.helpImprovePIATitle.exists){
-//                app.acceptSharingVPNStats()
-//                app.acceptVPNConfiguration()
-//            }
-//            
-//            if(shouldLogIn){
-//                if (!app.connectButton.exists)
-//                {
-//                    app.signinImage.waitForElementToAppear()
-//                    app.navigateToSignInScreen()
-//                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
-//                    app.acceptSharingVPNStats()
-//                    app.acceptVPNConfiguration()
-//                }
-//            }
-//        }
-//        
-//        beforeEach {
-//            app.launch()
-//            
-//            if(app.helpImprovePIATitle.exists){
-//                app.acceptSharingVPNStats()
-//                app.acceptVPNConfiguration()
-//            }
-//        }
-//        
-//        afterEach {
-//            app.terminate()
-//        }
-//    }
-    
+
+    //    override class func spec() {
+    //        beforeSuite {
+    //            app = XCUIApplication()
+    //            app.launch()
+    //
+    //            if(app.helpImprovePIATitle.exists){
+    //                app.acceptSharingVPNStats()
+    //                app.acceptVPNConfiguration()
+    //            }
+    //
+    //            if(shouldLogIn){
+    //                if (!app.connectButton.exists)
+    //                {
+    //                    app.signinImage.waitForElementToAppear()
+    //                    app.navigateToSignInScreen()
+    //                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
+    //                    app.acceptSharingVPNStats()
+    //                    app.acceptVPNConfiguration()
+    //                }
+    //            }
+    //        }
+    //
+    //        beforeEach {
+    //            app.launch()
+    //
+    //            if(app.helpImprovePIATitle.exists){
+    //                app.acceptSharingVPNStats()
+    //                app.acceptVPNConfiguration()
+    //            }
+    //        }
+    //
+    //        afterEach {
+    //            app.terminate()
+    //        }
+    //    }
+
     override class func spec() {
         beforeEach {
             initializeApp()
             configureAppSettings()
             attemptLoginIfNeeded()
         }
-              
+
         afterEach {
-              terminateApp()
+            terminateApp()
         }
     }
-    
+
     static func initializeApp() {
         app = XCUIApplication()
         app.launch()

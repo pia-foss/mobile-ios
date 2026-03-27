@@ -20,16 +20,17 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: PurchaseViewController.self)
 
 final class PurchaseViewController: AutolayoutViewController, BrandableNavigationBar {
-    
+
     private struct Cells {
         static let plan = "PlanCell"
     }
@@ -38,11 +39,11 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
 
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelSubtitle: UILabel!
-    
+
     @IBOutlet private weak var collectionPlans: UICollectionView!
-    
+
     @IBOutlet private weak var textAgreement: UITextView!
-    
+
     @IBOutlet private weak var buttonPurchase: PIAButton!
 
     private var config: Config!
@@ -68,9 +69,9 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         super.viewDidLoad()
 
         assert(config != nil, "Config not propagated in PurchaseViewController")
-        
+
         isExpired = config.isExpired
-        
+
         styleButtons()
 
         collectionPlans.isUserInteractionEnabled = false
@@ -87,8 +88,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             labelTitle.text = L10n.Welcome.Upgrade.title
             labelTitle.textAlignment = .center
             labelSubtitle.text = ""
-        }
-        else {
+        } else {
             labelTitle.text = L10n.Welcome.Purchase.title
             labelSubtitle.text = L10n.Welcome.Purchase.subtitle
         }
@@ -99,12 +99,12 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             privacy: L10n.Welcome.Agreement.Message.privacy,
             privacyUrl: Client.configuration.privacyUrl
         )
-                
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(productsDidFetch(notification:)), name: .__InAppDidFetchProducts, object: nil)
-        
+
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -127,7 +127,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         if (segue.identifier == StoryboardSegue.Welcome.signupViaPurchaseSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
-            
+
             guard let email = signupEmail else {
                 log.error("Signing up and signupEmail is not set")
                 return
@@ -145,54 +145,57 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
     }
 
     // MARK: Actions
-    
+
     @IBAction func confirmPlan() {
-        
+
         /**
         self.performSegue(withIdentifier: StoryboardSegue.Welcome.confirmPurchaseVPNPlanSegue.rawValue,
                           sender: nil)
             **/
-        
+
         if selectedPlanIndex < allPlans.count {
             let plan = allPlans[selectedPlanIndex]
             self.startPurchaseProcessWithEmail("", andPlan: plan)
         }
     }
-    
-    private func startPurchaseProcessWithEmail(_ email: String,
-                                               andPlan plan: PurchasePlan) {
+
+    private func startPurchaseProcessWithEmail(
+        _ email: String,
+        andPlan plan: PurchasePlan
+    ) {
         //textEmail.text = email
         log.debug("Will purchase plan: \(plan.product)")
-        
+
         isPurchasing = true
         disableInteractions(fully: true)
         self.showLoadingAnimation()
-        
+
         config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
             guard let self else { return }
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
-            
+
             guard let transaction = transaction else {
                 if let error = error {
                     let message = error.localizedDescription
                     log.error("Purchase failed (error: \(error))")
-                    Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                            message: message)
+                    Macros.displayImageNote(
+                        withImage: Asset.iconWarning.image,
+                        message: message)
                 } else {
                     log.warning("Cancelled purchase")
                 }
                 return
             }
-            
+
             log.debug("Purchased with transaction: \(transaction)")
-            
+
             self.signupEmail = email
             self.signupTransaction = transaction
             self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
-        
+
     }
 
     private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
@@ -209,7 +212,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             purchase.bestValue = true
 
             allPlans[0] = purchase
-            
+
             textAgreement.attributedText = Theme.current.agreementText(
                 withMessage: L10n.Welcome.Agreement.message(purchase.price.stringValue),
                 tos: L10n.Welcome.Agreement.Message.tos,
@@ -230,12 +233,12 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
 
             allPlans[1] = purchase
         }
-        
+
         collectionPlans.isUserInteractionEnabled = true
         collectionPlans.reloadData()
         collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
     }
-    
+
     private func disableInteractions(fully: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.showLoadingAnimation()
@@ -245,9 +248,9 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             parent?.view.isUserInteractionEnabled = false
         }
     }
-    
+
     private func enableInteractions() {
-        if !isPurchasing { //dont reenable the screen if we are still purchasing
+        if !isPurchasing {  //dont reenable the screen if we are still purchasing
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.hideLoadingAnimation()
             }
@@ -257,7 +260,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
     }
 
     // MARK: Notifications
-    
+
     @objc private func productsDidFetch(notification: Notification) {
         let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
         Task { [weak self] in
@@ -265,9 +268,9 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         }
         enableInteractions()
     }
-    
+
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyNavigationBarStyle(to: self)
@@ -278,14 +281,13 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applyLinkAttributes(textAgreement)
     }
-    
+
     private func styleButtons() {
         buttonPurchase.setRounded()
         buttonPurchase.style(style: TextStyle.Buttons.piaGreenButton)
         if !isExpired {
             buttonPurchase.setTitle(L10n.Signup.Purchase.Subscribe.now.uppercased(), for: [])
-        }
-        else {
+        } else {
             buttonPurchase.setTitle(L10n.Welcome.Upgrade.Renew.now.uppercased(), for: [])
         }
     }
@@ -296,7 +298,7 @@ extension PurchaseViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return allPlans.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let plan = allPlans[indexPath.row]
         let cell = collectionPlans.dequeueReusableCell(withReuseIdentifier: Cells.plan, for: indexPath) as! PurchasePlanCell
@@ -314,8 +316,9 @@ extension PurchaseViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = collectionView.bounds.size.width
         let itemHeight = (collectionView.bounds.size.height - 13) / 2.0
-        return CGSize(width: itemWidth,
-                      height: itemHeight)
+        return CGSize(
+            width: itemWidth,
+            height: itemHeight)
     }
 }
 

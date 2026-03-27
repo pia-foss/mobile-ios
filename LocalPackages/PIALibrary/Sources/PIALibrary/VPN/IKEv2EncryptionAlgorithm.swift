@@ -26,43 +26,42 @@ import NetworkExtension
 public enum IKEv2EncryptionAlgorithm: String, CaseIterable {
 
     public static let defaultAlgorithm: IKEv2EncryptionAlgorithm = .algorithmAES256GCM
-    
+
     case algorithmAES128 = "AES-128-CBC"
     case algorithmAES256 = "AES-256-CBC"
     case algorithmAES128GCM = "AES-128-GCM"
     case algorithmAES256GCM = "AES-256-GCM"
-    
+
     public func description() -> String {
         return self.rawValue
     }
-    
+
     public func value() -> String {
         return self.rawValue
     }
-    
+
     public func networkExtensionValue() -> NEVPNIKEv2EncryptionAlgorithm {
         switch self {
-            case .algorithmAES128: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128
-            case .algorithmAES128GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128GCM
-            case .algorithmAES256: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256
-            case .algorithmAES256GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
+        case .algorithmAES128: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128
+        case .algorithmAES128GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES128GCM
+        case .algorithmAES256: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256
+        case .algorithmAES256GCM: return NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
         }
     }
-    
+
     public func integrityAlgorithms() -> [IKEv2IntegrityAlgorithm] {
-            switch self {
-            #if os(iOS)
+        switch self {
+        #if os(iOS)
             case .algorithmAES128: return [.SHA96, .SHA256, .SHA384, .SHA512]
             case .algorithmAES256: return [.SHA96, .SHA256, .SHA384, .SHA512]
             case .algorithmAES128GCM: return [.SHA96, .SHA160, .SHA256]
             case .algorithmAES256GCM: return [.SHA96, .SHA160, .SHA256]
-            #elseif os(tvOS)
+        #elseif os(tvOS)
             case .algorithmAES128: return [.SHA256, .SHA384, .SHA512]
             case .algorithmAES256: return [.SHA256, .SHA384, .SHA512]
             case .algorithmAES128GCM: return [.SHA256]
             case .algorithmAES256GCM: return [.SHA256]
-            #endif
+        #endif
         }
     }
 }
-

@@ -24,7 +24,7 @@ import Foundation
 
 /// Simulates account-related operations
 public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
-    
+
     /// Mocks the outcome of a sign-up operation.
     ///
     /// - Seealso: `AccountProvider.signup(...)`
@@ -32,10 +32,10 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
         /// Sign-up succeeded.
         case success
-        
+
         /// Sign-up failed.
         case failure
-        
+
         /// Sign-up failed due to missing Internet connectivity.
         case internetUnreachable
     }
@@ -44,17 +44,17 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
     ///
     /// - Seealso: `AccountProvider.redeem(...)`
     public enum RedeemOutcome {
-        
+
         /// Redeem succeeded.
         case success
-        
+
         /// Redeem code is invalid.
         case invalid
 
         /// Redeem code already claimed.
         case claimed
     }
-    
+
     /// Fakes authentication outcome.
     public var mockIsUnauthorized = false
 
@@ -66,7 +66,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     /// Fakes redeem outcome.
     public var mockRedeemOutcome: RedeemOutcome = .success
-    
+
     /// Fakes `AccountInfo.email`.
     public var mockEmail: String = "mock@email.com"
 
@@ -75,23 +75,23 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     /// Fakes `AccountInfo.plan`.
     public var mockPlan: Plan = .monthly
-    
+
     /// Fakes `AccountInfo.isRenewable`.
     public var mockIsRenewable: Bool = false
-    
+
     /// Fakes `AccountInfo.isRecurring`.
     public var mockIsRecurring: Bool = true
-    
+
     /// Fakes `AccountInfo.expirationDate`.
     public var mockExpirationDate: Date = Date().addingTimeInterval(7 * 24 * 60 * 60)
-    
+
     /// Fakes `AccountInfo.shouldPresentExpirationAlert`.
     public var mockIsExpiring: Bool = false
-    
+
     let webServices: WebServices
-    
+
     private let delegate: AccountProvider
-    
+
     /// :nodoc:
     public init() {
         let webServices = MockWebServices()
@@ -119,37 +119,49 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
             )
         }
         webServices.appstoreInformationEligible = {
-            return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
-                                                          plan: .monthly,
-                                                          price: "3.99",
-                                                          legacy: false)],
-                                       eligibleForTrial: true)
+            return AppStoreInformation(
+                products: [
+                    Product(
+                        identifier: "com.product.monthly",
+                        plan: .monthly,
+                        price: "3.99",
+                        legacy: false)
+                ],
+                eligibleForTrial: true)
         }
         webServices.appstoreInformationEligibleButDisabledFromBackend = {
-            return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
-                                                          plan: .monthly,
-                                                          price: "3.99",
-                                                          legacy: false)],
-                                       eligibleForTrial: false)
+            return AppStoreInformation(
+                products: [
+                    Product(
+                        identifier: "com.product.monthly",
+                        plan: .monthly,
+                        price: "3.99",
+                        legacy: false)
+                ],
+                eligibleForTrial: false)
         }
         webServices.appstoreInformationNotEligible = {
-            return AppStoreInformation(products: [Product(identifier: "com.product.monthly",
-                                                          plan: .monthly,
-                                                          price: "3.99",
-                                                          legacy: false)],
-                                       eligibleForTrial: false)
+            return AppStoreInformation(
+                products: [
+                    Product(
+                        identifier: "com.product.monthly",
+                        plan: .monthly,
+                        price: "3.99",
+                        legacy: false)
+                ],
+                eligibleForTrial: false)
         }
     }
-    
+
     // MARK: AccountProvider
 
     #if os(iOS) || os(tvOS)
-    /// :nodoc:
-    public var planProducts: [Plan : InAppProduct]? {
-        return delegate.planProducts
-    }
+        /// :nodoc:
+        public var planProducts: [Plan: InAppProduct]? {
+            return delegate.planProducts
+        }
     #endif
-    
+
     /// :nodoc:
     public var shouldCleanAccount: Bool {
         return false
@@ -159,11 +171,11 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var isLoggedIn: Bool {
         return delegate.isLoggedIn
     }
-    
+
     public var oldToken: String? {
         return "TOKEN"
     }
-    
+
     public var vpnToken: String? {
         return "TOKEN"
     }
@@ -171,15 +183,15 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
     public var apiToken: String? {
         return "TOKEN"
     }
-    
+
     public var vpnTokenUsername: String? {
         return "USERNAME"
     }
-    
+
     public var vpnTokenPassword: String? {
         return "PASSWORD"
     }
-    
+
     public var publicUsername: String? {
         return "p0000000"
     }
@@ -197,22 +209,13 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
             delegate.currentUser = newValue
         }
     }
-        
-    #if os(iOS) || os(tvOS)
-    /// :nodoc:
-    public var lastSignupRequest: SignupRequest? {
-        return delegate.lastSignupRequest
-    }
-    #endif
 
-    /// :nodoc:
-    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
-        guard !mockIsUnauthorized else {
-            callback?(ClientError.unauthorized)
-            return
+    #if os(iOS) || os(tvOS)
+        /// :nodoc:
+        public var lastSignupRequest: SignupRequest? {
+            return delegate.lastSignupRequest
         }
-        delegate.migrateOldTokenIfNeeded(callback)
-    }
+    #endif
 
     public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
@@ -221,7 +224,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
         delegate.login(with: request, callback)
     }
-    
+
     public func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {
         guard !mockIsUnauthorized else {
             callback?(nil, ClientError.unauthorized)
@@ -237,7 +240,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
         delegate.login(with: "12345", callback)
     }
-    
+
     /// :nodoc:
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
@@ -246,7 +249,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
         delegate.refreshAccountInfo(callback)
     }
-    
+
     /// :nodoc:
     public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
@@ -255,88 +258,88 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
         delegate.accountInformation(callback)
     }
-    
+
     /// :nodoc:
     public func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {
         delegate.update(with: request, resetPassword: reset, andPassword: password, callback)
     }
-    
+
     /// :nodoc:
     public func logout(_ callback: SuccessLibraryCallback?) {
         delegate.logout(callback)
     }
-    
+
     /// :nodoc:
     public func deleteAccount(_ callback: SuccessLibraryCallback?) {
         delegate.deleteAccount(callback)
     }
-    
+
     /// :nodoc:
     public func cleanDatabase() {
         delegate.cleanDatabase()
     }
-    
+
     #if os(iOS) || os(tvOS)
-    /// :nodoc:
-    public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
-        delegate.listPlanProducts(callback)
-    }
-    
-    /// :nodoc:
-    public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        delegate.purchase(plan: plan, callback)
-    }
-    
-    /// :nodoc:
-    public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        delegate.restorePurchases(callback)
-    }
-    
-    public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        delegate.loginUsingMagicLink(withEmail: email, callback)
-    }
-    
-    /// :nodoc:
-    public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
-        delegate.subscriptionInformation(callback)
-    }
-    
-    /// :nodoc:
-    public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        Macros.dispatch(after: .seconds(1)) {
-            switch self.mockSignupOutcome {
-            case .success:
-                self.delegate.signup(with: request, callback)
+        /// :nodoc:
+        public func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+            delegate.listPlanProducts(callback)
+        }
 
-            case .failure:
-                callback?(nil, nil)
+        /// :nodoc:
+        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+            delegate.purchase(plan: plan, callback)
+        }
 
-            case .internetUnreachable:
-                callback?(nil, ClientError.internetUnreachable)
+        /// :nodoc:
+        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
+            delegate.restorePurchases(callback)
+        }
+
+        public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+            delegate.loginUsingMagicLink(withEmail: email, callback)
+        }
+
+        /// :nodoc:
+        public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
+            delegate.subscriptionInformation(callback)
+        }
+
+        /// :nodoc:
+        public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            Macros.dispatch(after: .seconds(1)) {
+                switch self.mockSignupOutcome {
+                case .success:
+                    self.delegate.signup(with: request, callback)
+
+                case .failure:
+                    callback?(nil, nil)
+
+                case .internetUnreachable:
+                    callback?(nil, ClientError.internetUnreachable)
+                }
             }
         }
-    }
-        
-    /// :nodoc:
-    public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
-        delegate.listRenewablePlans(callback)
-    }
-    
-    /// :nodoc:
-    public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        mockExpirationDate += 30 * 24 * 60 * 60 // 1 month
-        delegate.renew(with: request, callback)
-    }
+
+        /// :nodoc:
+        public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
+            delegate.listRenewablePlans(callback)
+        }
+
+        /// :nodoc:
+        public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            mockExpirationDate += 30 * 24 * 60 * 60  // 1 month
+            delegate.renew(with: request, callback)
+        }
     #endif
-    
+
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
         callback?(true, nil)
     }
-    
+
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-    
+
     public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
         callback?(nil, nil)
     }

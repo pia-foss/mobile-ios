@@ -22,9 +22,9 @@
 //
 
 import Foundation
+import PIALibrary
 import TunnelKitCore
 import TunnelKitOpenVPN
-import PIALibrary
 
 private let log = PIALogger.logger(for: OpenVPN.Configuration.self)
 
@@ -41,29 +41,29 @@ public extension OpenVPN.Configuration {
             }
         }
     }
-    
+
     /// The available certificates for handshake.
     enum Handshake: String, Codable, CustomStringConvertible {
-        
+
         /// Certificate with RSA 4096-bit key.
         case rsa4096 = "RSA-4096"
-        
+
         /// Custom certificate.
         ///
         /// - Seealso:
         case custom = "Custom"
-        
+
         static let allDigests: [Handshake: String] = [
             .rsa4096: "ec085790314aa0ad4b01dda7b756a932"
         ]
-        
+
         var digest: String? {
             return Handshake.allDigests[self]
         }
-        
+
         func write(to url: URL, custom: String? = nil) throws {
             precondition((self != .custom) || (custom != nil))
-            
+
             // custom certificate?
             if self == .custom, let content = custom {
                 try content.write(to: url, atomically: true, encoding: .ascii)
@@ -79,7 +79,7 @@ public extension OpenVPN.Configuration {
             let content = try String(contentsOf: certUrl)
             try content.write(to: url, atomically: true, encoding: .ascii)
         }
-        
+
         func pemString() -> String? {
             let bundle = Bundle.main
             let certName = "PIA-\(rawValue)"
@@ -94,11 +94,11 @@ public extension OpenVPN.Configuration {
                 return nil
             }
         }
-        
+
         /// :nodoc:
         public var description: String {
             return "\(rawValue)"
         }
     }
-    
+
 }

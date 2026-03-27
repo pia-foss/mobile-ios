@@ -6,14 +6,14 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import Combine
 import Foundation
 import PIALibrary
-import Combine
 
 final class ClientPreferences: ClientPreferencesType {
 
     private let clientPrefs: Client.Preferences
-    
+
     var selectedServer: ServerType {
         get {
             return clientPrefs.displayedServer
@@ -21,15 +21,15 @@ final class ClientPreferences: ClientPreferencesType {
         set {
             guard let newServer = newValue as? Server else { return }
             clientPrefs.displayedServer = newServer
-            
+
             selectedServerPublisher.send(newServer)
-            
+
             // TODO: Verify whether this is necessary
             let pendingPreferences = clientPrefs.editable()
             pendingPreferences.commit()
         }
     }
-    
+
     var lastConnectedServer: ServerType? {
         get {
             clientPrefs.lastConnectedRegion
@@ -40,18 +40,16 @@ final class ClientPreferences: ClientPreferencesType {
             ed.commit()
         }
     }
-    
-    
+
     private var selectedServerPublisher: CurrentValueSubject<ServerType, Never>
-    
+
     func getSelectedServer() -> AnyPublisher<ServerType, Never> {
         return selectedServerPublisher.eraseToAnyPublisher()
     }
-    
+
     init(clientPrefs: Client.Preferences) {
         self.clientPrefs = clientPrefs
         self.selectedServerPublisher = CurrentValueSubject(clientPrefs.displayedServer)
     }
-    
-}
 
+}

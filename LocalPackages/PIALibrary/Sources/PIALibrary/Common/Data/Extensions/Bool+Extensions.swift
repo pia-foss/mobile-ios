@@ -1,4 +1,3 @@
-
 import Foundation
 
 extension Bool {
@@ -11,4 +10,3 @@ extension Bool {
         }
     }
 }
-

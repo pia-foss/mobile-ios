@@ -21,10 +21,11 @@
 //
 
 import XCTest
+
 @testable import PIALibrary
 
 class VPNTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
 
@@ -37,23 +38,14 @@ class VPNTests: XCTestCase {
 
         Client.bootstrap()
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
 
-    func _testDebugLogSubmission() {
-        let content = "2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)\n2017-08-05 14:31:45.409 DEBUG SessionProxy.handleControlData():733 - Parsed control message (0)"
-    
-        let exp = expectation(description: "Debug submission")
-        PIAWebServices().submitDebugReport(false, content) { (reportIdentifier, error) in
-            if let error = error {
-                print("Debug log not submitted: \(error)")
-                return
-            }
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 10.0, handler: nil)
+    func _testDebugLogSubmission() async throws {
+        let reportIdentifier = try await PIAWebServices().submitDebugReport()
+        XCTAssertFalse(reportIdentifier.isEmpty)
     }
 }

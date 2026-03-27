@@ -21,40 +21,55 @@
 //
 
 import Foundation
+import PIACSI
+
+private let log = PIALogger.logger(for: PIAWebServices.self)
 
 extension PIAWebServices {
 
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
-        self.accountAPI.clientStatus(requestTimeoutMillis: 10000) { (information, errors) in
-            DispatchQueue.main.async {
-                if !errors.isEmpty {
-                    callback?(nil, ClientError.internetUnreachable)
-                    return
-                }
-
-                if let information = information {
-                    callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
-                } else {
-                    callback?(nil, ClientError.malformedResponseData)
-                }
+        Task { @MainActor in
+            do {
+                let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 10000)
+                callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
+            } catch {
+                callback?(nil, error)
             }
         }
-        
     }
-    
-    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
-        csiProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
-        self.csiAPI.send(shouldSendPersistedData: shouldSendPersistedData) { (reportIdentifier, errors) in
-            if !errors.isEmpty {
-                callback?(nil, ClientError.internetUnreachable)
-                return
-            }
 
-            if let reportIdentifier = reportIdentifier {
-                callback?(reportIdentifier, nil)
-            } else {
-                callback?(nil, ClientError.malformedResponseData)
-            }
+    func submitDebugReport() async throws -> String {
+        try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
+    }
+
+    func submitDebugReport(includeDebug: Bool, redactIPs: Bool) async throws -> String {
+        let providers: [CSIDataProvider] = [
+            PIACSIProtocolInformationProvider(),
+            PIACSIDeviceInformationProvider(),
+            PIACSILogInformationProvider(includeDebug: includeDebug, redactIPs: redactIPs),
+            PIACSISubscriptionInformationProvider(),
+            PIACSIRegionInformationProvider(redactIPs: redactIPs),
+            PIACSIUserInformationProvider(redactIPs: redactIPs),
+            PIACSILastKnownExceptionProvider()
+        ]
+
+        let sections = providers.compactMap { provider -> CSIReportSection? in
+            guard let content = provider.content else { return nil }
+            return CSIReportSection(name: provider.sectionName, content: content)
+        }
+        let reportData = CSIReportBuilder.build(sections: sections)
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+
+        do {
+            return try await csiClient.submit(
+                data: reportData,
+                team: Client.Configuration.teamIdentifierCSI,
+                appVersion: "\(appVersion) (\(appBuild))"
+            )
+        } catch {
+            log.error("CSI submission failed: \(error)")
+            throw ClientError.internetUnreachable
         }
     }
 }

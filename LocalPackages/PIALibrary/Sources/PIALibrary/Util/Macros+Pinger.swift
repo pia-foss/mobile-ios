@@ -37,7 +37,7 @@ extension Macros {
 
     /**
      Pings a VPN server by sending a dummy packet via a socket. The call is I/O blocking.
-     
+
      - Parameter protocolType: The `PingerProtocol` to use.
      - Parameter hostname: The server hostname.
      - Parameter port: The server port.
@@ -56,7 +56,7 @@ extension Macros {
         if let timeout = timeout {
             pinger.setTimeout(timeout)
         }
-        return pinger.sendPing() as? Int
+        return pinger.sendPing()
     }
-    
+
 }

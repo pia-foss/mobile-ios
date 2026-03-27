@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIAAssetsWidget
 import SwiftUI
 
 internal struct PIAIconView: View {
@@ -21,7 +22,7 @@ internal struct PIAIconView: View {
     }
 
     var body: some View {
-        return Image("robot")
+        return Asset.robot.swiftUIImage
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: iconSize, height: iconSize, alignment: .center)

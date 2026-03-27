@@ -31,10 +31,10 @@ public class InvalidatingFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = self.collectionView else {
             return context
         }
-//        flowContext.invalidateFlowLayoutDelegateMetrics = (
-//            (newBounds.size.width != collectionView.bounds.size.width) ||
-//            (newBounds.size.height != collectionView.bounds.size.height)
-//        )
+        //        flowContext.invalidateFlowLayoutDelegateMetrics = (
+        //            (newBounds.size.width != collectionView.bounds.size.width) ||
+        //            (newBounds.size.height != collectionView.bounds.size.height)
+        //        )
         flowContext.invalidateFlowLayoutDelegateMetrics = (newBounds.size != collectionView.bounds.size)
         return flowContext
     }

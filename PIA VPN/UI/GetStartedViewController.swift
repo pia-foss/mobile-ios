@@ -20,11 +20,12 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
+import PIAAssetsMobile
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: GetStartedViewController.self)
 
@@ -48,6 +49,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
 
+    @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
     @IBOutlet private weak var walkthroughDescription: UILabel!
 
@@ -77,6 +79,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         collectionPlans.delegate = self
         collectionPlans.dataSource = self
 
+        self.walkthroughImage.image = Asset.imageWalkthrough2.image
         self.walkthroughTitle.text = L10n.Signup.Walkthrough.Page._2.title
         self.walkthroughDescription.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". "
 
@@ -180,8 +183,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
             guard let transaction = transaction else {
                 if let error = error {
                     let message = error.localizedDescription
-                    Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                            message: message)
+                    Macros.displayImageNote(
+                        withImage: Asset.iconWarning.image,
+                        message: message)
                 }
                 return
             }
@@ -235,7 +239,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.delegate = self.delegate
         vc.preset = self.preset
 
-        switch segue.identifier  {
+        switch segue.identifier {
         case StoryboardSegue.Welcome.loginAccountSegue.rawValue:
             vc.preset.pages = .login
         case StoryboardSegue.Welcome.restorePurchaseSegue.rawValue:
@@ -336,8 +340,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     public func navigateToLoginView() {
-        self.performSegue(withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
-                          sender: nil)
+        self.performSegue(
+            withIdentifier: StoryboardSegue.Welcome.loginAccountSegue.rawValue,
+            sender: nil)
     }
 
     // MARK: Restylable
@@ -359,8 +364,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     // MARK: Notification event
     @objc private func recoverAccount() {
-        self.performSegue(withIdentifier: StoryboardSegue.Welcome.restorePurchaseSegue.rawValue,
-                          sender: nil)
+        self.performSegue(
+            withIdentifier: StoryboardSegue.Welcome.restorePurchaseSegue.rawValue,
+            sender: nil)
     }
 
     // MARK: InApp refresh plan
@@ -381,15 +387,16 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
             DispatchQueue.main.async { [weak self] in
                 if let label = self?.walkthroughDescription {
-                    label.text = if purchase.hasIntroOffer {
-                        L10n.Signup.Walkthrough.Page._2.description
-                            + "\n"
-                            + L10n.Signup.Purchase.Trials.intro
-                            + ". "
-                            + L10n.Signup.Purchase.Trials.Price.after(price)
-                    } else {
-                        L10n.Signup.Walkthrough.Page._2.description
-                    }
+                    label.text =
+                        if purchase.hasIntroOffer {
+                            L10n.Signup.Walkthrough.Page._2.description
+                                + "\n"
+                                + L10n.Signup.Purchase.Trials.intro
+                                + ". "
+                                + L10n.Signup.Purchase.Trials.Price.after(price)
+                        } else {
+                            L10n.Signup.Walkthrough.Page._2.description
+                        }
                     Theme.current.makeSmallLabelToStandOut(
                         label,
                         withTextToStandOut: price,

@@ -22,7 +22,7 @@
 
 import Foundation
 
-protocol TransientStore: class {
+protocol TransientStore: AnyObject {
 
     // MARK: Server
 
@@ -31,15 +31,15 @@ protocol TransientStore: class {
     // MARK: VPN
 
     var activeVPNProfile: VPNProfile? { get set }
-    
+
     var vpnStatus: VPNStatus { get set }
-    
+
     // MARK: Connectivity
 
     var isNetworkReachable: Bool { get set }
-    
+
     var isInternetReachable: Bool { get set }
-        
+
     var vpnIP: String? { get set }
 
     var vpnLog: String { get set }

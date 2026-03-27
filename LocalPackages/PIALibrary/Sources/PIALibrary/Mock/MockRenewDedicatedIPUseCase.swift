@@ -1,4 +1,3 @@
-
 import Foundation
 
 class MockRenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {

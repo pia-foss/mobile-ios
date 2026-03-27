@@ -1,28 +1,29 @@
 //
 //  DedicatedIpViewController.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Blaya on 13/10/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
-//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
+//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
 //  permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
 
 import Foundation
+import PIAAssetsMobile
 import PIALibrary
-import UIKit
 import PIALocalizations
+import UIKit
 
 private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 
@@ -40,13 +41,13 @@ final class DedicatedIpViewController: AutolayoutViewController {
     private struct Sections {
         static let header = 0
         static let dedicatedIps = 1
-        
+
         static func numberOfSections() -> Int {
             return 2
         }
-        
+
     }
-    
+
     private struct Cells {
         static let dedicatedIpRow = "DedicatedIpRowViewCell"
         static let header = "DedicatedIpEmptyHeaderViewCell"
@@ -57,7 +58,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -94,60 +95,64 @@ final class DedicatedIpViewController: AutolayoutViewController {
         data = if let server = getDipServer() as? Server { [server] } else { [] }
         tableView.reloadData()
     }
-    
+
     private func configureTableView() {
-        
+
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
         tableView.estimatedSectionHeaderHeight = 1.0
-        tableView.register(UINib(nibName: Cells.dedicatedIpRow,
-                                      bundle: nil),
-                           forCellReuseIdentifier: Cells.dedicatedIpRow)
-        tableView.register(UINib(nibName: Cells.header, bundle: nil),
-                           forCellReuseIdentifier:Cells.header)
-        tableView.register(UINib(nibName: Cells.activeHeader, bundle: nil),
-                           forCellReuseIdentifier:Cells.activeHeader)
-        tableView.register(UINib(nibName: Cells.titleHeader, bundle: nil),
-                           forCellReuseIdentifier:Cells.titleHeader)
+        tableView.register(
+            UINib(
+                nibName: Cells.dedicatedIpRow,
+                bundle: nil),
+            forCellReuseIdentifier: Cells.dedicatedIpRow)
+        tableView.register(
+            UINib(nibName: Cells.header, bundle: nil),
+            forCellReuseIdentifier: Cells.header)
+        tableView.register(
+            UINib(nibName: Cells.activeHeader, bundle: nil),
+            forCellReuseIdentifier: Cells.activeHeader)
+        tableView.register(
+            UINib(nibName: Cells.titleHeader, bundle: nil),
+            forCellReuseIdentifier: Cells.titleHeader)
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         reloadTableView()
     }
 
-    
     // MARK: Restylable
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-        
+
         styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
             Theme.current.applyPrincipalBackground(viewContainer)
         }
-        
+
         Theme.current.applyPrincipalBackground(tableView)
         self.tableView.reloadData()
 
     }
-    
+
     // MARK: DIP Token handling
-    
+
     private static var invalidTokenLocalisedString: String {
         return L10n.Dedicated.Ip.Message.Invalid.token
     }
-    
+
     private func showInvalidTokenMessage() {
         Macros.displayStickyNote(
             withMessage: Self.invalidTokenLocalisedString,
-            andImage: Asset.Images.iconWarning.image,
+            andImage: Asset.iconWarning.image,
         )
     }
-    
+
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
         Macros.displayImageNote(
-            withImage: Asset.Images.iconWarning.image,
+            withImage: Asset.iconWarning.image,
             message: errorMessage ?? Self.invalidTokenLocalisedString,
             andDuration: displayDuration,
         )
@@ -167,9 +172,10 @@ final class DedicatedIpViewController: AutolayoutViewController {
         case ClientError.throttled(let retryAfter):
             let retryAfterSeconds = Double(retryAfter)
             let localisedThrottlingString = L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
-            
-            displayErrorMessage(errorMessage: NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString),
-                                     displayDuration: retryAfterSeconds)
+
+            displayErrorMessage(
+                errorMessage: NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString),
+                displayDuration: retryAfterSeconds)
             timeToRetryDIP = Date().timeIntervalSince1970 + retryAfterSeconds
         default:
             showInvalidTokenMessage()
@@ -184,12 +190,12 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.isEmpty ? 1 : Sections.numberOfSections()
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Sections.header == section ? 0 : data.count
 
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.dedicatedIpRow, for: indexPath) as! DedicatedIpRowViewCell
         let server = data[indexPath.row]
@@ -210,17 +216,17 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
                 guard let self else { return }
                 self.reloadTableView()
             }
-            
+
             alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
                 guard let self else { return }
                 self.confirmDelete(row: indexPath.row)
             }
-            
+
             self.present(alert, animated: true, completion: nil)
 
         }
     }
-    
+
     private func confirmDelete(row: Int) {
         let dipRegion = data[row]
         guard dipRegion.dipToken != nil else { return }
@@ -235,22 +241,22 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             self.reloadTableView()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Sections.header == section {
-            if !data.isEmpty && AppPreferences.shared.disablesMultiDipTokens{
+            if !data.isEmpty && AppPreferences.shared.disablesMultiDipTokens {
                 let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
                 headerView.setup()
                 return headerView
@@ -264,7 +270,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
             return headerView
         }
     }
-    
+
 }
 
 // MARK: DIP Activation
@@ -275,10 +281,11 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             displayErrorMessage(errorMessage: L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
-        
+
         if token.isEmpty {
-            Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
-                                     andImage: Asset.Images.iconWarning.image)
+            Macros.displayStickyNote(
+                withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
+                andImage: Asset.iconWarning.image)
             return
         }
 
@@ -291,7 +298,7 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             switch await self.activateDipToken(token: token) {
             case .success:
                 Macros.displaySuccessImageNote(
-                    withImage: Asset.Images.iconWarning.image,
+                    withImage: Asset.iconWarning.image,
                     message: L10n.Dedicated.Ip.Message.Valid.token,
                 )
 
@@ -299,14 +306,14 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                 log.error("Activate DIP token failed with expired token error.")
                 Macros.displayStickyNote(
                     withMessage: L10n.Dedicated.Ip.Message.Expired.token,
-                    andImage: Asset.Images.iconWarning.image,
+                    andImage: Asset.iconWarning.image,
                 )
 
             case .failure(.invalid):
                 log.error("Activate DIP token failed with invalid token error.")
                 Macros.displayStickyNote(
                     withMessage: Self.invalidTokenLocalisedString,
-                    andImage: Asset.Images.iconWarning.image,
+                    andImage: Asset.iconWarning.image,
                 )
 
             case let .failure(.generic(error)):

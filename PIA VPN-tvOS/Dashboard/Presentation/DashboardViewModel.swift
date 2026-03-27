@@ -1,22 +1,20 @@
-
-
-import Foundation
 import Combine
+import Foundation
 import SwiftUI
 
 class DashboardViewModel: ObservableObject {
-    
+
     @Published var connectionTitle: String = ""
     @Published var connectionTintColor = (titleTint: Color.clear, connectionBarTint: Color.clear)
-    
+
     private let connectionStateMonitor: ConnectionStateMonitorType
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(connectionStateMonitor: ConnectionStateMonitorType) {
         self.connectionStateMonitor = connectionStateMonitor
         subscribeToConnectionStateUpdates()
     }
-    
+
     private func subscribeToConnectionStateUpdates() {
         connectionStateMonitor.connectionStatePublisher
             .sink { [weak self] newConnectionState in
@@ -25,7 +23,7 @@ class DashboardViewModel: ObservableObject {
                 self.connectionTintColor = self.getTintColor(for: newConnectionState)
             }.store(in: &cancellables)
     }
-    
+
     internal func getTintColor(for connectionState: ConnectionState) -> (titleTint: Color, connectionBarTint: Color) {
         switch connectionState {
         case .connecting, .disconnecting:
@@ -34,7 +32,7 @@ class DashboardViewModel: ObservableObject {
             return (titleTint: .pia_primary, connectionBarTint: .pia_primary)
         case .disconnected:
             return (titleTint: .pia_on_surface, connectionBarTint: .clear)
-        case .error(let error):
+        case .error:
             return (titleTint: .pia_red, connectionBarTint: .pia_red)
         default:
             return (.clear, .clear)

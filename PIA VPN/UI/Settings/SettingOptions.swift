@@ -1,28 +1,29 @@
 //
 //  SettingOptions.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Blaya on 14/5/21.
 //  Copyright © 2021 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
-//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
+//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
 //  permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
 
 import Foundation
+import PIAAssetsMobile
 import PIALibrary
-import UIKit
 import PIALocalizations
+import UIKit
 
 public enum SettingOptions: Int, CaseIterable {
     case general
@@ -35,58 +36,58 @@ public enum SettingOptions: Int, CaseIterable {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .general: return L10n.Settings.Section.general
-            case .protocols: return L10n.Settings.Section.protocols
-            case .network: return L10n.Settings.Section.network
-            case .privacyFeatures: return L10n.Settings.Section.privacyFeatures
-            case .automation: return L10n.Settings.Section.automation
-            case .help: return L10n.Settings.Section.help
-            case .development: return "Development"
+        case .general: return L10n.Settings.Section.general
+        case .protocols: return L10n.Settings.Section.protocols
+        case .network: return L10n.Settings.Section.network
+        case .privacyFeatures: return L10n.Settings.Section.privacyFeatures
+        case .automation: return L10n.Settings.Section.automation
+        case .help: return L10n.Settings.Section.help
+        case .development: return "Development"
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
-            case .general: return ""
-            case .protocols: return ""
-            case .network: return ""
-            case .privacyFeatures: return ""
-            case .automation: return ""
-            case .help: return ""
-            case .development: return ""
+        case .general: return ""
+        case .protocols: return ""
+        case .network: return ""
+        case .privacyFeatures: return ""
+        case .automation: return ""
+        case .help: return ""
+        case .development: return ""
         }
     }
 
     public func imageForSection() -> UIImage {
         switch self {
-            case .general: return Asset.Images.Piax.Settings.iconGeneral.image
-            case .protocols: return Asset.Images.Piax.Settings.iconProtocols.image
-            case .network: return Asset.Images.Piax.Settings.iconNetwork.image
-            case .privacyFeatures: return Asset.Images.Piax.Settings.iconPrivacy.image
-            case .automation: return Asset.Images.Piax.Settings.iconAutomation.image
-            case .help: return Asset.Images.Piax.Settings.iconAbout.image
-            case .development: return Asset.Images.Piax.Settings.iconGeneral.image
+        case .general: return Asset.Piax.Settings.iconGeneral.image
+        case .protocols: return Asset.Piax.Settings.iconProtocols.image
+        case .network: return Asset.Piax.Settings.iconNetwork.image
+        case .privacyFeatures: return Asset.Piax.Settings.iconPrivacy.image
+        case .automation: return Asset.Piax.Settings.iconAutomation.image
+        case .help: return Asset.Piax.Settings.iconAbout.image
+        case .development: return Asset.Piax.Settings.iconGeneral.image
         }
     }
 
     public func sectionsForSetting() -> [SettingSection] {
         switch self {
-            case .general: return GeneralSections.allCases
-            case .protocols: return ProtocolsSections.allCases
-            case .network: return NetworkSections.allCases
-            case .privacyFeatures: return PrivacyFeaturesSections.allCases
-            case .automation: return AutomationSections.allCases
-            case .help: return HelpSections.all()
-            case .development: return DevelopmentSections.allCases
+        case .general: return GeneralSections.allCases
+        case .protocols: return ProtocolsSections.allCases
+        case .network: return NetworkSections.allCases
+        case .privacyFeatures: return PrivacyFeaturesSections.allCases
+        case .automation: return AutomationSections.allCases
+        case .help: return HelpSections.all()
+        case .development: return DevelopmentSections.allCases
         }
     }
 }
 
 public protocol SettingSection {
-    
+
     func localizedTitleMessage() -> String
     func localizedSubtitleMessage() -> String
-    
+
 }
 
 public enum GeneralSections: Int, CaseIterable, SettingSection {
@@ -95,24 +96,24 @@ public enum GeneralSections: Int, CaseIterable, SettingSection {
     case showServiceCommunicationMessages
     case showGeoRegions
     case resetSettings
-    
+
     public func localizedTitleMessage() -> String {
         switch self {
-            case .connectSiri: return L10n.Siri.Shortcuts.Connect.Row.title
-            case .disconnectSiri: return L10n.Siri.Shortcuts.Disconnect.Row.title
-            case .showGeoRegions: return L10n.Settings.Geo.Servers.description
-            case .showServiceCommunicationMessages: return L10n.Inapp.Messages.Toggle.title
-            case .resetSettings: return L10n.Settings.Reset.Defaults.title
+        case .connectSiri: return L10n.Siri.Shortcuts.Connect.Row.title
+        case .disconnectSiri: return L10n.Siri.Shortcuts.Disconnect.Row.title
+        case .showGeoRegions: return L10n.Settings.Geo.Servers.description
+        case .showServiceCommunicationMessages: return L10n.Inapp.Messages.Toggle.title
+        case .resetSettings: return L10n.Settings.Reset.Defaults.title
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
-            case .connectSiri: return ""
-            case .disconnectSiri: return ""
-            case .showGeoRegions: return ""
-            case .showServiceCommunicationMessages: return ""
-            case .resetSettings: return ""
+        case .connectSiri: return ""
+        case .disconnectSiri: return ""
+        case .showGeoRegions: return ""
+        case .showServiceCommunicationMessages: return ""
+        case .resetSettings: return ""
         }
     }
 }
@@ -125,39 +126,39 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection {
     case dataEncryption
     case handshake
     case useSmallPackets
-    
+
     public func localizedTitleMessage() -> String {
         switch self {
-            case .protocolSelection: return L10n.Settings.Connection.VpnProtocol.title
-            case .transport: return L10n.Settings.Connection.Transport.title
-            case .remotePort: return L10n.Settings.Connection.RemotePort.title
-            case .dataEncryption: return L10n.Settings.Encryption.Cipher.title
-            case .handshake: return L10n.Settings.Encryption.Handshake.title
-            case .useSmallPackets: return L10n.Settings.Small.Packets.title
+        case .protocolSelection: return L10n.Settings.Connection.VpnProtocol.title
+        case .transport: return L10n.Settings.Connection.Transport.title
+        case .remotePort: return L10n.Settings.Connection.RemotePort.title
+        case .dataEncryption: return L10n.Settings.Encryption.Cipher.title
+        case .handshake: return L10n.Settings.Encryption.Handshake.title
+        case .useSmallPackets: return L10n.Settings.Small.Packets.title
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
-            case .protocolSelection: return ""
-            case .transport: return ""
-            case .remotePort: return ""
-            case .dataEncryption: return ""
-            case .handshake: return ""
-            case .useSmallPackets: return ""
+        case .protocolSelection: return ""
+        case .transport: return ""
+        case .remotePort: return ""
+        case .dataEncryption: return ""
+        case .handshake: return ""
+        case .useSmallPackets: return ""
         }
     }
 }
 
 public enum NetworkSections: Int, CaseIterable, SettingSection {
     case dns
-    
+
     public func localizedTitleMessage() -> String {
         switch self {
-            case .dns: return "DNS"
+        case .dns: return "DNS"
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .dns: return ""
@@ -175,23 +176,23 @@ public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
-            case .reconnectNotifications: return L10n.Settings.ApplicationSettings.ReconnectNotifications.title
-            case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
-            case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
-            case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
-            case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
+        case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
+        case .reconnectNotifications: return L10n.Settings.ApplicationSettings.ReconnectNotifications.title
+        case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
+        case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
+        case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
+        case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
-            case .killswitch: return ""
-            case .reconnectNotifications: return ""
-            case .leakProtection: return ""
-            case .allowAccessOnLocalNetwork: return ""
-            case .safariContentBlocker: return ""
-            case .refresh: return ""
+        case .killswitch: return ""
+        case .reconnectNotifications: return ""
+        case .leakProtection: return ""
+        case .allowAccessOnLocalNetwork: return ""
+        case .safariContentBlocker: return ""
+        case .refresh: return ""
         }
     }
 }
@@ -202,11 +203,11 @@ public enum AutomationSections: Int, CaseIterable, SettingSection {
 
     public func localizedTitleMessage() -> String {
         switch self {
-            case .automation: return L10n.Network.Management.Tool.Enable.automation
-            case .manageAutomation: return L10n.Network.Management.Tool.title
+        case .automation: return L10n.Network.Management.Tool.Enable.automation
+        case .manageAutomation: return L10n.Network.Management.Tool.title
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .automation: return ""
@@ -216,7 +217,7 @@ public enum AutomationSections: Int, CaseIterable, SettingSection {
 }
 
 public enum HelpSections: Int, SettingSection {
-    
+
     case sendDebugLogs
     case debugLogging
     case kpiShareStatistics
@@ -234,7 +235,7 @@ public enum HelpSections: Int, SettingSection {
         case .version: return L10n.Global.version
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .sendDebugLogs: return ""
@@ -245,13 +246,13 @@ public enum HelpSections: Int, SettingSection {
         case .version: return ""
         }
     }
-    
+
     public static func all() -> [Self] {
         return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .latestNews, .version]
     }
-    
+
     public static func allWithEvents() -> [Self] {
-        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version,]
+        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version]
     }
 
 }
@@ -282,7 +283,7 @@ public enum DevelopmentSections: Int, CaseIterable, SettingSection {
         case .dynamicIslandLiveActivityFlag: return "FF - Dynamic Island Live Activity"
         }
     }
-    
+
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .publicUsername: return ""
@@ -298,4 +299,3 @@ public enum DevelopmentSections: Int, CaseIterable, SettingSection {
         }
     }
 }
-

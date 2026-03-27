@@ -7,6 +7,14 @@ on:
         description: "What's New text (in English)"
         required: true
         type: string
+      platform:
+        description: "Target platform"
+        required: true
+        type: choice
+        default: 'ios'
+        options:
+          - ios
+          - tvos
 
 jobs:
   translate-and-update:
@@ -14,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -24,15 +32,21 @@ jobs:
 
       - name: Write English release notes
         run: |
-          mkdir -p fastlane/metadata/en-US
-          echo "${{ inputs.release_notes }}" > fastlane/metadata/en-US/release_notes.txt
-          cat fastlane/metadata/en-US/release_notes.txt
+          if [ "${{ inputs.platform }}" = "tvos" ]; then
+            mkdir -p fastlane/metadata/tvos/en-US
+            echo "${{ inputs.release_notes }}" > fastlane/metadata/tvos/en-US/release_notes.txt
+            cat fastlane/metadata/tvos/en-US/release_notes.txt
+          else
+            mkdir -p fastlane/metadata/ios/en-US
+            echo "${{ inputs.release_notes }}" > fastlane/metadata/ios/en-US/release_notes.txt
+            cat fastlane/metadata/ios/en-US/release_notes.txt
+          fi
 
       - name: Translate release notes
         env:
-          ANTHROPIC_API_KEY_TRANSLATIONS: ${{ secrets.ANTHROPIC_API_KEY_TRANSLATIONS }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          bundle exec fastlane translate_release_notes
+          bundle exec fastlane translate_release_notes platform:${{ inputs.platform }}
 
       - name: Upload to App Store Connect
         env:
@@ -40,4 +54,4 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
         run: |
-          bundle exec fastlane update_release_notes
+          bundle exec fastlane update_release_notes platform:${{ inputs.platform }}

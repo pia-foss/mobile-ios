@@ -6,22 +6,23 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAssetsTV
 import SwiftUI
 
 struct AboutOptionsView: View {
     @ObservedObject var viewModel: AboutOptionsViewModel
-    
+
     var body: some View {
         HStack {
             helpSectionsView
             Spacer()
-            Image.pia_help_bg_image
+            Asset.helpBgImage.swiftUIImage
                 .frame(width: 840)
                 .aspectRatio(contentMode: .fit)
         }
         .padding(.top, Spacing.screenTopPadding)
     }
-    
+
     var helpSectionsView: some View {
         List {
             ForEach(viewModel.sections, id: \.self) { section in

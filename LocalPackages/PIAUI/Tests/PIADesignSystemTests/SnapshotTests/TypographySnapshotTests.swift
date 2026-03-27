@@ -20,9 +20,10 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Testing
-import SwiftUI
 import SnapshotTesting
+import SwiftUI
+import Testing
+
 @testable import PIADesignSystem
 
 @Suite("Typography Snapshots")
@@ -40,7 +41,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -59,7 +60,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -76,7 +77,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -93,7 +94,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -110,7 +111,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -127,7 +128,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -144,7 +145,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -161,7 +162,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -178,7 +179,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -195,7 +196,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -212,7 +213,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -229,7 +230,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 
@@ -246,7 +247,7 @@ struct TypographySnapshotTests {
 
         assertSnapshot(
             of: view,
-            as: .image(traits: .init(displayScale: 1.0))
+            as: .image(precision: SnapshotTestHelpers.snapshotPrecision, traits: .init(displayScale: 1.0))
         )
     }
 }

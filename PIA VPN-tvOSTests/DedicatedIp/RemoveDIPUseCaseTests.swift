@@ -6,8 +6,9 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import XCTest
 import PIALibrary
+import XCTest
+
 @testable import PIA_VPN_tvOS
 
 final class RemoveDIPUseCaseTests: XCTestCase {
@@ -18,20 +19,21 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         var vpnConnectionUseCaseMock = VpnConnectionUseCaseMock()
         var clientPreferencesMock: ClientPreferencesMock!
     }
-    
+
     var fixture: Fixture!
     var sut: RemoveDIPUseCase!
-    
+
     func instantiateSut(result: ServerType?, selectedServer: ServerType) {
         fixture.getDedicatedIPUseCaseMock = GetDedicatedIpUseCaseMock(result: result)
         fixture.clientPreferencesMock = ClientPreferencesMock()
         fixture.clientPreferencesMock.selectedServer = selectedServer
         //(selectedServer: selectedServer)
-        sut = RemoveDIPUseCase(dedicatedIpProvider: fixture.dipServerProviderMock,
-                               favoriteRegionsUseCase: fixture.favoriteRegionsUseCaseMock,
-                               getDedicatedIP: fixture.getDedicatedIPUseCaseMock,
-                               vpnCpnnectionUseCase: fixture.vpnConnectionUseCaseMock,
-                               selectedServer: fixture.clientPreferencesMock)
+        sut = RemoveDIPUseCase(
+            dedicatedIpProvider: fixture.dipServerProviderMock,
+            favoriteRegionsUseCase: fixture.favoriteRegionsUseCaseMock,
+            getDedicatedIP: fixture.getDedicatedIPUseCaseMock,
+            vpnConnectionUseCase: fixture.vpnConnectionUseCaseMock,
+            selectedServer: fixture.clientPreferencesMock)
     }
 
     override func setUp() {
@@ -47,7 +49,7 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         // GIVEN
         let server = ServerTypeStub.makesServer1()
         instantiateSut(result: server, selectedServer: server)
-        
+
         let expectation = expectation(description: "Waiting for vpnConnectionUseCaseMock to be called")
         fixture.vpnConnectionUseCaseMock.disconnectionAction = {
             expectation.fulfill()
@@ -61,13 +63,13 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledAttempt, 1)
         XCTAssertEqual(fixture.vpnConnectionUseCaseMock.disconnectCalledAttempt, 1)
     }
-    
+
     func test_removeDIPToken_complets_successfully_when_dedicatedIp_was_found_and_not_connected() async throws {
         // GIVEN
         let server = ServerTypeStub.makesServer1()
         let selectedServer = ServerTypeStub.makesServer2()
         instantiateSut(result: server, selectedServer: selectedServer)
-        
+
         fixture.vpnConnectionUseCaseMock.disconnectionAction = {
             XCTFail("Unexpected call to vpnConnectionUseCaseMock")
         }
@@ -79,14 +81,14 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledAttempt, 1)
         XCTAssertEqual(fixture.vpnConnectionUseCaseMock.disconnectCalledAttempt, 0)
     }
-    
+
     func test_activatesDIPToken_complets_with_failure_when_DedicatedIPProvider_complets_with_failure() async throws {
         // GIVEN
         instantiateSut(result: nil, selectedServer: ServerTypeStub.makeValidServerTypeStub())
         fixture.vpnConnectionUseCaseMock.disconnectionAction = {
             XCTFail("Unexpected call to vpnConnectionUseCaseMock")
         }
-        
+
         // WHEN
         try await sut()
 
@@ -99,28 +101,30 @@ final class RemoveDIPUseCaseTests: XCTestCase {
 
 extension ServerTypeStub {
     static func makesServer1() -> ServerType {
-        ServerTypeStub(name: "name",
-                       identifier: "identifier",
-                       regionIdentifier: "regionIdentifier",
-                       country: "country",
-                       geo: false,
-                       pingTime: 0,
-                       isAutomatic: true,
-                       dipToken: "dipToken",
-                       dipIKEv2IP: "dipIKEv2IP",
-                       dipStatusString: "dipStatusString")
+        ServerTypeStub(
+            name: "name",
+            identifier: "identifier",
+            regionIdentifier: "regionIdentifier",
+            country: "country",
+            geo: false,
+            pingTime: 0,
+            isAutomatic: true,
+            dipToken: "dipToken",
+            dipIKEv2IP: "dipIKEv2IP",
+            dipStatusString: "dipStatusString")
     }
 
     static func makesServer2() -> ServerType {
-        ServerTypeStub(name: "name2",
-                       identifier: "identifier2",
-                       regionIdentifier: "regionIdentifier2",
-                       country: "country2",
-                       geo: false,
-                       pingTime: 0,
-                       isAutomatic: true,
-                       dipToken: "dipToken2",
-                       dipIKEv2IP: "dipIKEv2IP2",
-                       dipStatusString: "dipStatusString")
+        ServerTypeStub(
+            name: "name2",
+            identifier: "identifier2",
+            regionIdentifier: "regionIdentifier2",
+            country: "country2",
+            geo: false,
+            pingTime: 0,
+            isAutomatic: true,
+            dipToken: "dipToken2",
+            dipIKEv2IP: "dipIKEv2IP2",
+            dipStatusString: "dipStatusString")
     }
 }

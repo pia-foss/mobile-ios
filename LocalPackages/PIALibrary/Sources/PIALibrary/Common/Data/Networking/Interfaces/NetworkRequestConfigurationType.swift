@@ -1,4 +1,3 @@
-
 import Foundation
 import NWHttpConnection
 
@@ -13,7 +12,7 @@ enum NetworkRequestContentType: String {
 }
 
 protocol NetworkRequestConfigurationType {
-    
+
     var networkRequestModule: NetworkRequestModule { get }
     var path: RequestAPI.Path { get }
     var httpMethod: NWConnectionHTTPMethod { get }

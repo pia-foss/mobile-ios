@@ -7,21 +7,23 @@
 //
 
 import Foundation
+import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class LoginWithReceiptUseCaseMock: LoginWithReceiptUseCaseType {
     private let result: Result<UserAccount, Error>
-    
+
     init(result: Result<UserAccount, Error>) {
         self.result = result
     }
-    
+
     func callAsFunction() async throws -> UserAccount {
         switch result {
-            case .success(let userAccount):
-                return userAccount
-            case .failure(let error):
-                throw error
+        case .success(let userAccount):
+            return userAccount
+        case .failure(let error):
+            throw error
         }
     }
 }

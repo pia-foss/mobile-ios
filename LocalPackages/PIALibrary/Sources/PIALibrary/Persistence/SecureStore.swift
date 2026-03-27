@@ -25,13 +25,13 @@ import Foundation
 protocol SecureStore: AnyObject {
 
     func username() -> String?
-    
+
     func setUsername(_ username: String?)
-    
+
     func publicUsername() -> String?
-    
+
     func setPublicUsername(_ username: String?)
-    
+
     func password(for username: String) -> String?
 
     func setPassword(_ password: String?, for username: String)
@@ -39,25 +39,25 @@ protocol SecureStore: AnyObject {
     func passwordReference(for username: String) -> Data?
 
     func token(for username: String) -> String?
-    
+
     // TODO: This is not necessary, we can probably use setPassword(_ password: String?, for username: String)
     func setTokenData(_ tokenData: Data, for tokenKey: String)
 
     func clearToken(for username: String)
-    
+
     func tokenKey(for username: String) -> String
 
     func dipTokens() -> [String]?
-    
+
     func setDIPToken(_ dipToken: String)
-    
+
     func remove(_ dipToken: String)
 
     func removeDIPTokens()
 
     func setPassword(_ password: String?, forDipToken dip: String)
-    
+
     func passwordReference(forDipToken dip: String) -> Data?
-    
+
     func clear(for username: String)
 }

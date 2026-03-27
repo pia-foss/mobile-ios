@@ -18,12 +18,12 @@ enum VPNConfigurationInstallingStatus {
 extension VPNConfigurationInstallingStatus: Equatable {
     public static func == (lhs: VPNConfigurationInstallingStatus, rhs: VPNConfigurationInstallingStatus) -> Bool {
         switch (lhs, rhs) {
-            case (.none, .none), (.isInstalling, .isInstalling), (.succeeded, .succeeded):
-                return true
-            case let (.failed(lhsErrorMessage), .failed(rhsErrorMessage)):
-                return lhsErrorMessage == rhsErrorMessage
-            default:
-                return false
+        case (.none, .none), (.isInstalling, .isInstalling), (.succeeded, .succeeded):
+            return true
+        case let (.failed(lhsErrorMessage), .failed(rhsErrorMessage)):
+            return lhsErrorMessage == rhsErrorMessage
+        default:
+            return false
         }
     }
 }

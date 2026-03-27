@@ -21,19 +21,20 @@
 //
 
 import Foundation
+import PIAAssetsMobile
 import PIALibrary
 import UIKit
 
 extension Theme.Palette {
     static var dark: Theme.Palette {
         let lightPalette: Theme.Palette = .light
-        
+
         let palette = Theme.Palette()
         palette.appearance = Theme.Appearance.dark
-        palette.logo = Asset.Images.navLogoWhite.image
+        palette.logo = Asset.navLogo.image
         palette.secondaryColor = UIColor.piaGrey10
         palette.textfieldButtonBackgroundColor = UIColor.black
-        palette.navigationBarBackIcon = Asset.Images.Piax.Global.iconBack.image
+        palette.navigationBarBackIcon = Asset.Piax.Global.iconBack.image
         palette.brandBackground = lightPalette.brandBackground
         palette.secondaryBackground = .piaGrey5
         palette.lineColor = .white

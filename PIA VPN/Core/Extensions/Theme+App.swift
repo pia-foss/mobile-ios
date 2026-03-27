@@ -21,33 +21,32 @@
 //
 
 import Foundation
+import PIAAssetsMobile
+import PIADesignSystem
 import PIALibrary
 import SideMenu
 import UIKit
-import PIADesignSystem
 
 extension Theme {
-    
+
     // MARK: Customizations
-    
+
     func applySideMenu() {
 
         let screenSize = UIScreen.main.bounds.size
         let minEdge = min(screenSize.width, screenSize.height)
-        
+
         if SideMenuManager.default.leftMenuNavigationController == nil {
             SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         }
-        
+
         SideMenuManager.default.leftMenuNavigationController?.menuWidth = min(320.0, minEdge - 44.0)
         SideMenuManager.default.leftMenuNavigationController?.statusBarEndAlpha = 0
         SideMenuManager.default.leftMenuNavigationController?.presentationStyle = .menuSlideIn
         SideMenuManager.default.leftMenuNavigationController?.presentationStyle.presentingEndAlpha = 0.5
-        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.backgroundColor = palette.appearance == .dark ?
-            UIColor.black.withAlphaComponent(0.72) :
-            UIColor.piaGrey1.withAlphaComponent(0.75)
+        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.backgroundColor = palette.appearance == .dark ? UIColor.black.withAlphaComponent(0.72) : UIColor.piaGrey1.withAlphaComponent(0.75)
     }
-        
+
     func applyPingTime(_ label: UILabel, time: Int) {
         switch AppConfiguration.ServerPing.from(value: time) {
         case .low:
@@ -55,7 +54,7 @@ extension Theme {
 
         case .medium:
             label.textColor = UIColor.piaOrange
-        
+
         case .high:
             label.textColor = UIColor.piaRed
         }
@@ -63,22 +62,21 @@ extension Theme {
 
     func applyVPNStatus(_ label: UILabel, forStatus status: VPNStatus) {
         label.font = typeface.mediumFont(size: 24.0)
-        
+
         switch status {
         case .connected:
             label.textColor = palette.emphasis
-        
+
         case .connecting, .disconnecting:
             label.textColor = palette.accent1
-        
+
         case .disconnected, .unknown:
             label.textColor = palette.accent2
         }
     }
-        
+
     public func applyMenuBackground(_ view: UIView) {
-        view.backgroundColor = palette.appearance == .dark ?
-            UIColor.piaGrey6 : UIColor.piaWhite
+        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey6 : UIColor.piaWhite
     }
 
     public func applyMenuSubtitle(_ label: UILabel) {
@@ -96,7 +94,7 @@ extension Theme {
         label.style(style: TextStyle.textStyle17)
         label.textAlignment = textAlignment
     }
-    
+
     public func applyMenuSmallCaption(_ label: UILabel) {
         let textAlignment = label.textAlignment
         label.style(style: TextStyle.textStyle11)
@@ -105,35 +103,31 @@ extension Theme {
     }
 
     public func applyMenuListStyle(_ label: UILabel) {
-        label.style(style: palette.appearance == .dark ?
-            TextStyle.textStyle6 : TextStyle.textStyle7)
+        label.style(style: palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
     }
-    
+
     public func applyMenuVersionListStyle(_ label: UILabel) {
-        label.style(style: palette.appearance == .dark ?
-            TextStyle.textStyle11 : TextStyle.textStyle12)
+        label.style(style: palette.appearance == .dark ? TextStyle.textStyle11 : TextStyle.textStyle12)
     }
 
     public func applyClearTextfield(_ textfield: UITextField) {
-        textfield.style(style: palette.appearance == .dark ?
-            TextStyle.textStyle6 : TextStyle.textStyle7)
+        textfield.style(style: palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
         textfield.backgroundColor = .clear
     }
-    
+
     public func applyCountryNameStyleFor(_ label: UILabel) {
-        label.style(style: Theme.current.palette.appearance == .dark ?
-            TextStyle.textStyle16 : TextStyle.textStyle17)
+        label.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle16 : TextStyle.textStyle17)
     }
-    
+
     public func applyInputOverlay(_ view: UIView) {
         view.layer.cornerRadius = 6.0
         view.backgroundColor = .black
     }
-    
+
     //MARK: SearchBar
-    
+
     public func applySearchBarStyle(_ searchBar: UISearchBar) {
-        
+
         searchBar.backgroundColor = .clear
 
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
@@ -156,32 +150,28 @@ extension Theme {
             textFieldInsideSearchBarLabel?.style(style: TextStyle.textStyle8)
             searchBar.barTintColor = UIColor.white
         }
-        
+
         //Cancel button
-        let attributes:[NSAttributedString.Key:Any] = [
-            NSAttributedString.Key.foregroundColor : TextStyle.textStyle8.color!,
-            NSAttributedString.Key.font : TextStyle.textStyle8.font!
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: TextStyle.textStyle8.color!,
+            NSAttributedString.Key.font: TextStyle.textStyle8.font!
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
 
     }
 
     public func applyFavoriteUnselectedImage(_ imageView: UIImageView) {
-        if palette.appearance == .dark {
-            imageView.image = Asset.Images.Piax.Global.favoriteUnselectedDark.image
+        imageView.image = Asset.Piax.Global.favoriteUnselected.image
+    }
+
+    public func geoImage(selected: Bool = false) -> UIImage {
+        if selected {
+            return Asset.iconGeoSelected.image
         } else {
-            imageView.image = Asset.Images.Piax.Global.favoriteUnselected.image
+            return Asset.iconGeo.image
         }
     }
-    
-    public func geoImageName() -> String {
-        if palette.appearance == .dark {
-            return "icon-geo-dark"
-        } else {
-            return "icon-geo"
-        }
-    }
-    
+
     public func applyBadgeStyle(_ label: UILabel) {
         label.font = UIFont.mediumFontWith(size: 10)
         label.textColor = palette.principalBackground
@@ -189,61 +179,54 @@ extension Theme {
         label.layer.masksToBounds = true
         label.backgroundColor = UIColor.piaGreen
     }
-    
+
     public func noResultsImage() -> UIImage {
-        return palette.appearance == .dark ?
-        Asset.Images.Piax.Regions.noResultsDark.image :
-        Asset.Images.Piax.Regions.noResultsLight.image
+        return Asset.Piax.Regions.noResults.image
     }
-    
+
     public func mapImage() -> UIImage? {
-        
-        let image = UIImage(asset: Asset.Images.Piax.DarkMap.darkMap)
-        
+
+        let image = UIImage(asset: Asset.Piax.DarkMap.darkMap)
+
         if palette.appearance == .light {
             return image?.image(alpha: 0.15)
         }
-        
+
         return image
-        
+
     }
-    
+
     public func dragDropImage() -> UIImage {
-        return palette.appearance == .dark ?
-        Asset.Images.Piax.Global.dragDropIndicatorDark.image :
-        Asset.Images.Piax.Global.dragDropIndicatorLight.image
+        Asset.Piax.Global.dragDropIndicator.image
     }
 
     public func activeEyeImage() -> UIImage {
-        return palette.appearance == .dark ?
-        Asset.Images.Piax.Global.eyeActiveDark.image :
-        Asset.Images.Piax.Global.eyeActiveLight.image
+        Asset.Piax.Global.eyeActive.image
     }
 
     public func inactiveEyeImage() -> UIImage {
-        return palette.appearance == .dark ?
-        Asset.Images.Piax.Global.eyeInactiveDark.image :
-        Asset.Images.Piax.Global.eyeInactiveLight.image
+        Asset.Piax.Global.eyeInactive.image
     }
-    
+
     public func trashIconImage() -> UIImage {
-        return palette.appearance == .dark ? Asset.Images.iconTrashDark.image : Asset.Images.iconTrash.image
+        return Asset.iconTrash.image
     }
-    
-    public func applyLicenseMonospaceFontAndColor(_ textView: UITextView,
-                                                  appearance: Appearance) {
+
+    public func applyLicenseMonospaceFontAndColor(
+        _ textView: UITextView,
+        appearance: Appearance
+    ) {
         textView.font = typeface.monospaceFont(size: 14.0)
-        textView.textColor = palette.appearance == .dark ?
-            .white :
-            palette.textColor(forRelevance: 2, appearance: appearance)
+        textView.textColor = palette.appearance == .dark ? .white : palette.textColor(forRelevance: 2, appearance: appearance)
     }
-    
+
     public func textWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {
-        let plain = message.replacingOccurrences(
-            of: "$1",
-            with: link
+        let plain =
+            message.replacingOccurrences(
+                of: "$1",
+                with: link
             ) as NSString
-        
+
         let attributed = NSMutableAttributedString(string: plain as String)
 
         let paragraph = NSMutableParagraphStyle()
@@ -259,11 +242,12 @@ extension Theme {
     }
 
     public func smallTextWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {
-        let plain = message.replacingOccurrences(
-            of: "$1",
-            with: link
+        let plain =
+            message.replacingOccurrences(
+                of: "$1",
+                with: link
             ) as NSString
-        
+
         let attributed = NSMutableAttributedString(string: plain as String)
 
         let paragraph = NSMutableParagraphStyle()
@@ -277,15 +261,16 @@ extension Theme {
         attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle9.color!, range: range1)
         return attributed
     }
-    
+
     // MARK: -Settings
     public func settingsFooterWithLinkText(withMessage message: String, link: String) -> NSAttributedString {
-        
-        let plain = message.replacingOccurrences(
-            of: "$1",
-            with: link
+
+        let plain =
+            message.replacingOccurrences(
+                of: "$1",
+                with: link
             ) as NSString
-        
+
         let attributed = NSMutableAttributedString(string: plain as String)
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
@@ -299,7 +284,7 @@ extension Theme {
         attributed.addAttribute(.foregroundColor, value: Theme.current.palette.lineColor, range: range1)
 
         return attributed
-    
+
     }
 
 }

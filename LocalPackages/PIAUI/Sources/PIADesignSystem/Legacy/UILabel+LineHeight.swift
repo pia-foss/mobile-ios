@@ -23,7 +23,7 @@
 import UIKit
 
 public extension UILabel {
-    
+
     /// Add a specific height to the space between the label's lines.
     ///
     /// - Parameter lineHeight: The space between lines to apply.
@@ -33,10 +33,12 @@ public extension UILabel {
             let attributeString = NSMutableAttributedString(string: text)
             let style = NSMutableParagraphStyle()
             style.minimumLineHeight = lineHeight
-            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
-                                         value: style,
-                                         range: NSRange(location: 0,
-                                                        length: text.count))
+            attributeString.addAttribute(
+                NSAttributedString.Key.paragraphStyle,
+                value: style,
+                range: NSRange(
+                    location: 0,
+                    length: text.count))
             self.attributedText = attributeString
         }
     }

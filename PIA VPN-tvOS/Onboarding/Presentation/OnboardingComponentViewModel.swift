@@ -23,7 +23,7 @@ class OnboardingComponentViewModel: OnboardingComponentViewModelType {
     let title: String
     let subtitle: String?
     let buttons: [OnboardingComponentButton]
-    
+
     init(title: String, subtitle: String?, buttons: [OnboardingComponentButton]) {
         self.title = title
         self.subtitle = subtitle

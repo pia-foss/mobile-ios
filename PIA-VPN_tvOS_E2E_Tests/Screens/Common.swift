@@ -8,24 +8,24 @@
 
 import XCTest
 
-extension XCUIApplication{
-    var continueButton:XCUIElement {button(with: "Continue")}
-    
+extension XCUIApplication {
+    var continueButton: XCUIElement { button(with: "Continue") }
+
     func moveFocus(to element: XCUIElement, startingDirection: XCUIRemote.Button = .right) {
         var direction: XCUIRemote.Button = startingDirection
         var navigationCycle = NavigationCycle(startingDirection: startingDirection)
         var cycle = 0
         var attempts = 0
         let maxAttempts = 20
-        
+
         while !element.hasFocus && attempts < maxAttempts {
             XCUIRemote.shared.press(direction)
             usleep(100000)
-            
+
             if element.hasFocus {
                 break;
             }
-            
+
             if endOfScreenReached(direction) {
                 direction = navigationCycle.nextDirection(currentDirection: direction, cycle: cycle)
                 // Check if cycle needs to reset based on the navigation cycle
@@ -35,26 +35,26 @@ extension XCUIApplication{
             }
             attempts += 1
         }
-        
+
         if attempts >= maxAttempts {
             print("Failed to focus on the element after \(maxAttempts) attempts.")
         }
     }
-    
+
     func endOfScreenReached(_ direction: XCUIRemote.Button) -> Bool {
         let initialElements = windows.firstMatch.descendants(matching: .any)
         let initialCoordinates = initialElements.allElementsBoundByIndex.map { $0.frame.origin }
-        
+
         XCUIRemote.shared.press(direction)
         usleep(100000)
-        
+
         let finalElements = windows.firstMatch.descendants(matching: .any)
         let finalCoordinates = finalElements.allElementsBoundByIndex.map { $0.frame.origin }
-        
+
         return initialCoordinates == finalCoordinates
     }
-    
-    func getString(key:String, comment:String) -> String{
+
+    func getString(key: String, comment: String) -> String {
         let localString = NSLocalizedString(key, bundle: BaseTest.bundle, comment: comment)
         return localString
     }
@@ -63,7 +63,7 @@ extension XCUIApplication{
 struct NavigationCycle {
     var currentCycle: [XCUIRemote.Button]
     var alternateCycle: [XCUIRemote.Button]
-    
+
     init(startingDirection: XCUIRemote.Button) {
         switch startingDirection {
         case .right:
@@ -83,7 +83,7 @@ struct NavigationCycle {
             alternateCycle = [.right, .up, .left, .down]
         }
     }
-    
+
     mutating func nextDirection(currentDirection: XCUIRemote.Button, cycle: Int) -> XCUIRemote.Button {
         let cycleArray = cycle % 2 == 0 ? currentCycle : alternateCycle
         if let currentIndex = cycleArray.firstIndex(of: currentDirection), cycleArray.indices.contains(currentIndex + 1) {

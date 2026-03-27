@@ -20,12 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 import UIKit
 
 // MARK: Structs
 public struct TextStyle {
-    
+
     public let font: UIFont?
     public let color: UIColor?
     public let foregroundColor: UIColor?
@@ -33,12 +32,14 @@ public struct TextStyle {
     public let tintColor: UIColor?
     public let lineHeight: CGFloat?
 
-    public init(font: UIFont?,
-                color: UIColor?,
-                foregroundColor: UIColor?,
-                backgroundColor: UIColor?,
-                tintColor: UIColor?,
-                lineHeight: CGFloat? = 0) {
+    public init(
+        font: UIFont?,
+        color: UIColor?,
+        foregroundColor: UIColor?,
+        backgroundColor: UIColor?,
+        tintColor: UIColor?,
+        lineHeight: CGFloat? = 0
+    ) {
         self.font = font
         self.color = color
         self.foregroundColor = foregroundColor
@@ -46,76 +47,78 @@ public struct TextStyle {
         self.tintColor = tintColor
         self.lineHeight = lineHeight
     }
-    
+
 }
 
 public struct ViewStyle {
-    
+
     let backgroundColor: UIColor?
     let tintColor: UIColor?
     let layerStyle: LayerStyle?
-    
+
     public init(backgroundColor: UIColor?, tintColor: UIColor?, layerStyle: LayerStyle?) {
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
         self.layerStyle = layerStyle
     }
-    
+
     public struct LayerStyle {
-        
+
         let masksToBounds: Bool?
         let cornerRadius: CGFloat?
         let borderStyle: BorderStyle?
         let shadowStyle: ShadowStyle?
-        
+
         public init(masksToBounds: Bool?, cornerRadius: CGFloat?, borderStyle: BorderStyle?, shadowStyle: ShadowStyle?) {
             self.masksToBounds = masksToBounds
             self.cornerRadius = cornerRadius
             self.borderStyle = borderStyle
             self.shadowStyle = shadowStyle
         }
-        
+
         public struct BorderStyle {
             let color: UIColor
             let width: CGFloat
-            
+
             public init(color: UIColor, width: CGFloat) {
                 self.width = width
                 self.color = color
             }
-            
+
         }
-        
+
         public struct ShadowStyle {
             let color: UIColor
             let radius: CGFloat
             let offset: CGSize
             let opacity: Float
-            
+
             public init(color: UIColor, radius: CGFloat, offset: CGSize, opacity: Float) {
                 self.radius = radius
                 self.color = color
                 self.offset = offset
                 self.opacity = opacity
             }
-            
+
         }
-        
+
     }
-    
+
 }
 
 public struct TextAttributeStyle {
-    
+
     let kern: CGFloat?
     let paragraphStyle: NSMutableParagraphStyle?
     let foregroundColor: UIColor?
     let font: UIFont?
     let link: String?
     let baselineOffset: CGFloat?
-    
-    public init(kern: CGFloat?, paragraphStyle: NSMutableParagraphStyle?, foregroundColor: UIColor?,
-                font: UIFont?, link: String?, baselineOffset: CGFloat?) {
+
+    public init(
+        kern: CGFloat?, paragraphStyle: NSMutableParagraphStyle?, foregroundColor: UIColor?,
+        font: UIFont?, link: String?, baselineOffset: CGFloat?
+    ) {
         self.kern = kern
         self.paragraphStyle = paragraphStyle
         self.foregroundColor = foregroundColor
@@ -123,27 +126,27 @@ public struct TextAttributeStyle {
         self.link = link
         self.baselineOffset = baselineOffset
     }
-    
+
     func toAttributeArray() -> [NSAttributedString.Key: Any] {
-        
+
         var array = [NSAttributedString.Key: Any]()
-        
+
         array[NSAttributedString.Key.kern] = kern
         array[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         array[NSAttributedString.Key.foregroundColor] = foregroundColor
         array[NSAttributedString.Key.font] = font
         array[NSAttributedString.Key.link] = link
         array[NSAttributedString.Key.baselineOffset] = baselineOffset
-        
+
         return array
-        
+
     }
-    
+
 }
 
 // MARK: Helper extensions
 extension UIView: ViewStyling {
-    
+
     public func style(style: ViewStyle) {
         if let backgroundColor = style.backgroundColor {
             self.backgroundColor = backgroundColor
@@ -163,14 +166,15 @@ extension UIView: ViewStyling {
                 self.layer.borderWidth = borderStyle.width
             }
             if let shadowStyle = layerStyle.shadowStyle {
-                self.layer.applySketchShadow(color: shadowStyle.color,
-                                             alpha: shadowStyle.opacity,
-                                             offSet: shadowStyle.offset,
-                                             radius: shadowStyle.radius)
+                self.layer.applySketchShadow(
+                    color: shadowStyle.color,
+                    alpha: shadowStyle.opacity,
+                    offSet: shadowStyle.offset,
+                    radius: shadowStyle.radius)
             }
         }
     }
-    
+
 }
 
 extension CALayer {
@@ -180,8 +184,8 @@ extension CALayer {
         offSet: CGSize = CGSize.zero,
         blur: CGFloat = 6,
         radius: CGFloat = 2.0,
-        spread: CGFloat = 0)
-    {
+        spread: CGFloat = 0
+    ) {
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = offSet
@@ -197,7 +201,7 @@ extension CALayer {
 }
 
 extension UILabel: TextStyling {
-    
+
     public func style(style: TextStyle) {
         let textAlignment = self.textAlignment
         font = style.font
@@ -207,17 +211,17 @@ extension UILabel: TextStyling {
         }
         self.textAlignment = textAlignment
     }
-    
+
 }
 
 extension UIButton: TextStyling {
-    
+
     public func style(style: TextStyle) {
         titleLabel?.font = style.font
         setTitleColor(style.color, for: .normal)
         backgroundColor = style.backgroundColor
     }
-    
+
     public func style(style: TextStyle, for controlState: UIControl.State) {
         titleLabel?.font = style.font
         setTitleColor(style.color, for: controlState)
@@ -228,25 +232,25 @@ extension UIButton: TextStyling {
             backgroundColor = style.backgroundColor
         }
     }
-    
+
 }
 
 extension UITextField: TextStyling {
-    
+
     public func style(style: TextStyle) {
         font = style.font
         textColor = style.color
         placeholderColor = style.foregroundColor
         tintColor = style.tintColor
     }
-    
+
 }
 
 extension UITextView: TextStyling {
-    
+
     public func style(style: TextStyle) {
         font = style.font
         textColor = style.color
     }
-    
+
 }

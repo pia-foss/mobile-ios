@@ -7,20 +7,21 @@
 //
 
 import Foundation
+
 @testable import PIA_VPN_tvOS
 
 class VPNConfigurationAvailabilityMock: VPNConfigurationAvailabilityType {
     var settedValues = [Bool]()
     private let value: Bool
-    
+
     init(value: Bool) {
         self.value = value
     }
-    
+
     func get() -> Bool {
         return value
     }
-    
+
     func set(value: Bool) {
         settedValues.append(value)
     }

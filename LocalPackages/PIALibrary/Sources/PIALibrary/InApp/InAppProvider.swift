@@ -22,20 +22,20 @@
 
 import Foundation
 
-public protocol InAppProvider: class {
+public protocol InAppProvider: AnyObject {
     var availableProducts: [InAppProduct]? { get }
-    
+
     var paymentReceipt: Data? { get }
-    
+
     func startObservingTransactions()
-    
+
     func stopObservingTransactions()
-    
+
     func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?)
-    
+
     func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?)
-    
+
     func finishTransaction(_ transaction: InAppTransaction, success: Bool)
-    
+
     func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?)
 }

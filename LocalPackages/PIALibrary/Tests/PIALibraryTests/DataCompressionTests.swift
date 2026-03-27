@@ -20,8 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Testing
 import Foundation
+import Testing
+
 @testable import PIALibrary
 
 @Suite("Data Compression Tests")
@@ -71,7 +72,7 @@ struct DataCompressionTests {
 
     @Test("Handle large data")
     func handleLargeData() throws {
-        let largeData = Data(repeating: 0x42, count: 1024 * 1024) // (1MB)
+        let largeData = Data(repeating: 0x42, count: 1024 * 1024)  // (1MB)
         let compressed = try largeData.deflated()
         #expect(compressed.count < largeData.count, "Compressed large data should be much smaller")
 

@@ -17,7 +17,7 @@ enum PurchaseProductsError: Error {
 }
 
 extension PurchaseProductsError: Equatable {
-    static func ==(lhs: PurchaseProductsError, rhs: PurchaseProductsError) -> Bool {
+    static func == (lhs: PurchaseProductsError, rhs: PurchaseProductsError) -> Bool {
         switch (lhs, rhs) {
         case (.generic, .generic), (.productNotFound, .productNotFound), (.uncreditedTransaction, .uncreditedTransaction), (.paymentCancelled, .paymentCancelled):
             return true
