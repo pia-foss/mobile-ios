@@ -22,12 +22,10 @@
 
 import Foundation
 
-@available(tvOS 17.0, *)
 protocol WebServicesConsumer {
     var webServices: WebServices { get }
 }
 
-@available(tvOS 17.0, *)
 protocol WebServices: AnyObject {
     
     // MARK: Account
