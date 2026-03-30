@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Gloss
 import regions
 import PIACSI
 import PIAAccountSwift
@@ -179,7 +178,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
         case 429:
             let retryAfter = (error as? PIAAccountError)?.retryAfterSeconds ?? 0
             return .throttled(retryAfter: UInt(retryAfter))
-        case 600:
+        case PIAAccountError.networkFailureCode:
             return .internetUnreachable
         default:
             return .unauthorized
@@ -255,16 +254,14 @@ class PIAWebServices: WebServices, ConfigurationAccess {
     #if os(iOS) || os(tvOS)
     func signup(with request: Signup) async throws -> Credentials {
         var marketingJSON = ""
-        if let json = request.marketing as? JSON {
-            marketingJSON = stringify(json: json)
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
         }
 
         var debugJSON = ""
-        if let json = request.debug as? JSON {
-            debugJSON = stringify(json: json)
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
         }
-
-        request.toJSON()
 
         let info = IOSSignupInformation(
             receipt: request.receipt.base64EncodedString(),
@@ -302,13 +299,13 @@ class PIAWebServices: WebServices, ConfigurationAccess {
 
     func processPayment(credentials: Credentials, request: Payment) async throws {
         var marketingJSON = ""
-        if let json = request.marketing as? JSON {
-            marketingJSON = stringify(json: json)
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
         }
 
         var debugJSON = ""
-        if let json = request.debug as? JSON {
-            debugJSON = stringify(json: json)
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
         }
 
         let info = IOSPaymentInformation(
@@ -337,7 +334,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                 return
             }
             
-            guard let bundle = GlossServersBundle(data: jsonData)?.parsed else {
+            guard let bundle = ServersBundle.parse(from: jsonData) else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
@@ -356,7 +353,7 @@ class PIAWebServices: WebServices, ConfigurationAccess {
                     return
                 }
                 
-                guard let bundle = GlossServersBundle(jsonString: RegionsUtils().stringify(regionsResponse: response))?.parsed else {
+                guard let bundle = ServersBundle.parse(from: RegionsUtils().stringify(regionsResponse: response)) else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }

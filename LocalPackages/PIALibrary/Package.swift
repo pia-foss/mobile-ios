@@ -35,7 +35,7 @@ let package = Package(
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
                 .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "mobile-ios-releases-regions"),
-                .product(name: "PIAAccount", package: "mobile-ios-releases-account"),
+                .product(name: "PIAAccount", package: "PIAAccount"),
                 .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKitOpenVPN", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),

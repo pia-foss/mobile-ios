@@ -376,8 +376,7 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 return
             }
 
-            Client.configuration.featureFlags.removeAll()
-            Client.configuration.featureFlags.append(contentsOf: features)
+            Client.configuration.featureFlags.configure(with: features)
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
             callback?(nil)
         }
@@ -486,6 +485,10 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 Macros.postNotification(.PIAAccountDidSignup, [.user: user])
                 callback?(user, nil)
 
+            } catch let error as ClientError where error == .badReceipt {
+                // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
+                // This handles returning users (e.g. "Duplicate purchase" from API).
+                await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
             } catch {
                 if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
                     callback?(nil, ClientError.internetUnreachable)
@@ -495,6 +498,43 @@ open class DefaultAccountProvider: AccountProvider, ConfigurationAccess, Databas
                 callback?(nil, error)
             }
         }
+    }
+
+    private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) async {
+        guard let receipt = accessedStore.paymentReceipt else {
+            callback?(nil, ClientError.badReceipt)
+            return
+        }
+
+        do {
+            try await webServices.token(receipt: receipt)
+        } catch {
+            callback?(nil, ClientError.badReceipt)
+            return
+        }
+
+        if let transaction = transaction {
+            accessedStore.finishTransaction(transaction, success: true)
+        }
+
+        accessedDatabase.plain.lastSignupEmail = nil
+        updateUsernamePassword()
+
+        guard let accountInfo = try? await webServices.info() else {
+            callback?(nil, ClientError.badReceipt)
+            return
+        }
+
+        accessedDatabase.plain.accountInfo = accountInfo
+        accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+        let credentials = Credentials(
+            username: vpnTokenUsername ?? "",
+            password: vpnTokenPassword ?? ""
+        )
+        let user = UserAccount(credentials: credentials, info: accountInfo)
+        Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+        callback?(user, nil)
     }
 
     public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
