@@ -27,7 +27,7 @@ import PIAAccountSwift
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
-class PIAWebServices: WebServices, ConfigurationAccess {
+final class PIAWebServices: WebServices, ConfigurationAccess {
     
     private static let serversVersion = 1002
     private static let store = "apple_app_store"

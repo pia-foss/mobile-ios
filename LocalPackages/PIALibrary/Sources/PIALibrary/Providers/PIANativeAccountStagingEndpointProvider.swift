@@ -21,7 +21,7 @@
 import Foundation
 import PIAAccount
 
-class PIANativeAccountStagingEndpointProvider: PIAAccountEndpointProvider {
+final class PIANativeAccountStagingEndpointProvider: PIAAccountEndpointProvider {
     func accountEndpoints() -> [PIAAccountEndpoint] {
         return [
             PIAAccountEndpoint(

@@ -21,7 +21,7 @@
 import Foundation
 import PIAAccount
 
-class PIANativeAccountEndpointProvider: PIAAccountEndpointProvider {
+final class PIANativeAccountEndpointProvider: PIAAccountEndpointProvider {
     func accountEndpoints() -> [PIAAccountEndpoint] {
         let validEndpoints = EndpointManager.shared.availableEndpoints()
 
