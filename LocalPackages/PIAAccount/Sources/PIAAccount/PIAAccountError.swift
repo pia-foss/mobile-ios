@@ -51,6 +51,11 @@ public struct PIAAccountError: PIAError, Sendable {
         return nil
     }
 
+    // MARK: - Error Codes
+
+    /// Error code for network-level failures (not an HTTP status code)
+    public static let networkFailureCode = 600
+
     // MARK: - Factory Methods
 
     /// Creates an error from an HTTP status code and optional response data
@@ -81,7 +86,7 @@ public struct PIAAccountError: PIAError, Sendable {
     /// Creates a network failure error (600)
     public static func networkFailure(_ error: Error) -> PIAAccountError {
         return PIAAccountError(
-            code: 600,
+            code: networkFailureCode,
             message: "Network request failed: \(error.localizedDescription)",
             retryAfterSeconds: 0,
             underlyingError: error
@@ -173,7 +178,7 @@ public struct PIAMultipleErrors: PIAError, Sendable {
     // MARK: - PIAError
 
     public var code: Int {
-        errors.first?.code ?? 600
+        errors.first?.code ?? PIAAccountError.networkFailureCode
     }
 
     public var underlyingError: Error? {
@@ -221,7 +226,7 @@ extension PIAAccountError {
 
     /// Checks if the error is a network/local error (600+)
     public var isLocalError: Bool {
-        code >= 600
+        code >= PIAAccountError.networkFailureCode
     }
 
     /// Checks if the error suggests the request can be retried

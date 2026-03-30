@@ -22,9 +22,9 @@
 
 import UIKit
 import PIALibrary
+import PIAAccount
 import PIADesignSystem
 import PIAUIKit
-import class account.AccountRequestError
 import PIALocalizations
 import PIAAssetsMobile
 
@@ -366,7 +366,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
                 let message = message ?? error.localizedDescription
                 log.error("Account library error: \(message)")
                 // we shouldn't show this message to the user since this is an internal error
-                errorMessage = L10n.Signup.Failure.internal(Int(AccountRequestError.internalErrorCode))
+                errorMessage = L10n.Signup.Failure.internal(PIAAccountError.networkFailureCode)
 
             case let .unknown(code, message):
                 let message = message ?? error.localizedDescription
