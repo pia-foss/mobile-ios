@@ -30,7 +30,7 @@ jobs:
       timeout-minutes: 20
       run: |
         # Check if iOS platform is already installed
-        if xcodebuild -showsdks | grep -q "iphoneos"; then
+        if xcrun simctl list devices available | grep -qi "iphone"; then
           echo "iOS platform already installed, skipping download"
           exit 0
         fi
