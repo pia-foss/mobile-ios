@@ -79,7 +79,7 @@ fastlane and xcode cloud are used for ci/cd
 
 ```bash
 # Setup
-brew install swiftgen go
+brew install swiftgen go  # Go 1.25.x required (for Amnezia WireGuard bridge)
 gem install bundler && bundle install
 
 # Testing
@@ -172,7 +172,7 @@ Requires special Apple entitlement. If unavailable:
 ## Build Issues
 
 - **SwiftGen errors**: Run `brew install swiftgen` and regenerate: `swiftgen config run`
-- **Go not found**: Install via `brew install go` (required for WireGuard)
+- **Go not found**: Install via `brew install go` (Go 1.25.x required for Amnezia WireGuard bridge)
 - **Missing entitlements**: Hotspot Helper requires special Apple approval (see Security section)
 - **Network Extension not debugging**: Must use physical device, check Console.app
 - **Keychain errors**: Ensure keychain sharing configured in entitlements
