@@ -21,7 +21,7 @@ let package = Package(
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-account.git", exact: "1.4.5"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-regions.git", exact: "1.6.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", exact: "2.2.5"),
-      .package(path: "../mobile-ios-amneziawg"),
+      .package(path: "../PIAWireguard"),
       .package(url: "https://github.com/apple/swift-log", exact: "1.10.1"),
       .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4"),
       .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
