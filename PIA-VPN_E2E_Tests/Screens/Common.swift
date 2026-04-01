@@ -9,7 +9,7 @@
 import XCTest
 
 extension XCUIApplication {
-    func getString(key:String, comment:String) -> String{
+    func getString(key: String, comment: String) -> String {
         let localString = NSLocalizedString(key, bundle: BaseTest.bundle, comment: comment)
         return localString
     }
@@ -21,18 +21,18 @@ extension XCUIElement {
         let frameB = elementB.frame
         return frameA.origin.y < frameB.origin.y
     }
-    
+
     func isElementLower(than elementB: XCUIElement) -> Bool {
         let frameA = self.frame
         let frameB = elementB.frame
         return frameA.origin.y > frameB.origin.y
     }
-    
+
     func customSortedList(_ regionList: [String]) -> [String] {
         return regionList.sorted { (first, second) -> Bool in
-        let firstRegion = first.components(separatedBy: ",")[0]
-        let secondRegion = second.components(separatedBy: ",")[0]
-        return firstRegion < secondRegion
+            let firstRegion = first.components(separatedBy: ",")[0]
+            let secondRegion = second.components(separatedBy: ",")[0]
+            return firstRegion < secondRegion
         }
     }
 }

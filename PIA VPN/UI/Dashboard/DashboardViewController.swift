@@ -20,15 +20,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import SideMenu
-import WidgetKit
-import NetworkExtension
 import ActivityKit
+import NetworkExtension
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import SideMenu
+import UIKit
+import WidgetKit
 
 private let log = PIALogger.logger(for: DashboardViewController.self)
 
@@ -45,31 +45,31 @@ final class DashboardViewController: AutolayoutViewController {
         case standard = 116.0
         case big = 150.0
     }
-    
+
     enum NavBarTheme {
         case green
         case orange
         case red
         case normal
     }
-    
+
     struct UsageTileReloadSeconds {
         static let afterConnect: TimeInterval = 5
         static let afterDisconnect: TimeInterval = 1
     }
-    
+
     private let ratingManager: RatingManagerProtocol = RatingManager.shared
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet private weak var viewContent: UIView!
     @IBOutlet private weak var toggleConnection: PIAConnectionButton!
-    
+
     @IBOutlet private weak var viewRows: UIView!
-    
+
     @IBOutlet private weak var collectionView: UICollectionView!
-    
+
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
@@ -88,7 +88,7 @@ final class DashboardViewController: AutolayoutViewController {
             self.updateTileLayout()
         }
     }
-    
+
     private var shouldReconnect = false
 
     private var connectionTimer: Timer?
@@ -117,40 +117,40 @@ final class DashboardViewController: AutolayoutViewController {
         removeObservers()
         stopConnectionTimer()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         reloadTheme()
         setupCollectionView()
         setupNavigationBarButtons()
-        
+
         viewContent.isHidden = true
         viewRows.isHidden = true
-        
+
         currentPageIndex = 0
 
         setupMenu()
-        
+
         addObservers()
-        
+
         self.viewContentHeight = self.viewContentHeightConstraint.constant
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         setupNavigationBarButtons()
-        
+
         AppPreferences.shared.wasLaunched = true
-        
+
         guard Client.providers.accountProvider.isLoggedIn else {
             presentLogin()
             AppPreferences.shared.todayWidgetVpnStatus = L10n.Today.Widget.login
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
             return
         }
-        
+
         #if !TARGET_IPHONE_SIMULATOR
             let types: UIUserNotificationType = [.alert, .badge, .sound]
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
@@ -163,20 +163,20 @@ final class DashboardViewController: AutolayoutViewController {
         } else {
             AppPreferences.shared.todayWidgetButtonTitle = L10n.Shortcuts.disconnect
         }
-        
+
         viewContent.isHidden = false
         viewRows.isHidden = false
 
         collectionView.reloadData()
         updateCurrentStatus()
         setupCallingCards()
-        
+
         checkTVOSTokenToBind()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
+
         guard Client.providers.accountProvider.isLoggedIn else {
             return
         }
@@ -188,7 +188,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         // give up pending signup if logged in
         TransientState.didRetryPendingSignup = true
-        
+
         // check account email
         checkAccountEmail()
 
@@ -249,16 +249,17 @@ final class DashboardViewController: AutolayoutViewController {
         nc.removeObserver(self, name: .PIATilesDidChange, object: nil)
         nc.removeObserver(self, name: .PIAUpdateFixedTiles, object: nil)
     }
-    
+
     private func checkTVOSTokenToBind() {
         guard let apiToken = Client.providers.accountProvider.apiToken,
-        let token = Client.configuration.tvOSBindToken else { return }
-        
+            let token = Client.configuration.tvOSBindToken
+        else { return }
+
         guard let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token) else { return }
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
-    
+
     // MARK: Menu
     private func setupMenu() {
         if SideMenuManager.default.leftMenuNavigationController == nil {
@@ -266,24 +267,24 @@ final class DashboardViewController: AutolayoutViewController {
         }
         SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
-        
+
         if let menuNavigationController = SideMenuManager.default.leftMenuNavigationController {
             setMenuDelegate(menuNavigationController: menuNavigationController)
         }
     }
-    
+
     private func setMenuDelegate(menuNavigationController: UINavigationController) {
         guard let menu = menuNavigationController.topViewController as? MenuViewController else {
             return
         }
         menu.delegate = self
     }
-    
+
     // MARK: Calling Cards
     private func setupCallingCards() {
-        
+
         if AppPreferences.shared.appVersion == nil || (AppPreferences.shared.appVersion != nil && AppPreferences.shared.appVersion != Macros.versionString()) {
-            
+
             let callingCards = CardFactory.getCardsForVersion(Macros.versionString())
             if !callingCards.isEmpty {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -293,32 +294,34 @@ final class DashboardViewController: AutolayoutViewController {
                     self.present(cardsController, animated: true)
                 }
             }
-            
+
             AppPreferences.shared.appVersion = Macros.versionString()
 
         }
 
     }
-    
+
     // MARK: Actions
     private func setupCollectionView() {
         let collectionViewUtil = DashboardCollectionViewUtil()
         collectionViewUtil.registerCellsFor(collectionView)
     }
-    
+
     private func setupNavigationBarButtons() {
-        
+
         guard AppPreferences.shared.wasLaunched,
-            Client.providers.accountProvider.isLoggedIn else {
+            Client.providers.accountProvider.isLoggedIn
+        else {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
             return
         }
 
-        switch self.tileModeStatus { //change the status
+        switch self.tileModeStatus {  //change the status
         case .normal:
             if let leftBarButton = navigationItem.leftBarButtonItem,
-                leftBarButton.accessibilityLabel != L10n.Global.cancel {
+                leftBarButton.accessibilityLabel != L10n.Global.cancel
+            {
                 leftBarButton.image = Asset.Images.itemMenu.image
                 leftBarButton.action = #selector(openMenu(_:))
             } else {
@@ -331,7 +334,7 @@ final class DashboardViewController: AutolayoutViewController {
             }
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
-            
+
             if navigationItem.rightBarButtonItem == nil {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
                     image: Asset.Images.Piax.Global.iconEditTile.image,
@@ -341,9 +344,9 @@ final class DashboardViewController: AutolayoutViewController {
                 )
                 navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
             }
-            
+
         case .edit:
-            
+
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 barButtonSystemItem: .stop,
                 target: self,
@@ -352,28 +355,30 @@ final class DashboardViewController: AutolayoutViewController {
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
             navigationItem.rightBarButtonItem = nil
-            
+
         }
-        
+
     }
 
     private func updateTileLayout() {
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
-            self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
-            self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
-            self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
-            self.view.layoutIfNeeded()
-        })
+        UIView.animate(
+            withDuration: AppConfiguration.Animations.duration,
+            animations: {
+                self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
+                self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+                self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+                self.view.layoutIfNeeded()
+            })
         collectionView.reloadData()
         setupNavigationBarButtons()
     }
-    
+
     private func presentLogin() {
-        
+
         dismissExistingViewController()
-        
+
         var preset = AppConfiguration.Welcome.defaultPreset()
-        preset.shouldRecoverPendingSignup = false//!TransientState.didRetryPendingSignup
+        preset.shouldRecoverPendingSignup = false  //!TransientState.didRetryPendingSignup
         if !TransientState.didRetryPendingSignup {
             TransientState.didRetryPendingSignup = true
         }
@@ -387,36 +392,40 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
         vc.modalPresentationStyle = .fullScreen
-        
+
         if let presented = self.navigationController?.presentedViewController,
-            presented != self {
-            self.present(vc, animated: true, completion: {
-                presented.dismiss(animated: true, completion: nil)
-            })
+            presented != self
+        {
+            self.present(
+                vc, animated: true,
+                completion: {
+                    presented.dismiss(animated: true, completion: nil)
+                })
         } else {
             present(vc, animated: false, completion: nil)
         }
-        
+
         if isUnauthorized {
             Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Account.unauthorized)
             isUnauthorized = false
         }
-        
+
     }
-    
+
     public static func instanceInNavigationStack() -> DashboardViewController? {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
             let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-            let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
+            let dashboard = rootNavVC.viewControllers.first as? DashboardViewController
+        {
             return dashboard
         }
         return nil
     }
-    
+
     func dismissExistingViewController() {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
-    
+
     private func presentPurchaseForTrial() {
         var preset = AppConfiguration.Welcome.defaultPreset()
         preset.pages = .purchase
@@ -428,29 +437,29 @@ final class DashboardViewController: AutolayoutViewController {
         let vc = PIAWelcomeViewController.with(preset: preset, delegate: self)
         present(vc, animated: true, completion: nil)
     }
-    
+
     @objc private func unauthorized() {
         self.isUnauthorized = true
     }
-    
+
     @objc private func checkVPNConnectingStatus(notification: Notification) {
         if let attempt = notification.object as? Int {
             connectingStatus = DashboardVPNConnectingStatus(rawValue: attempt) ?? .stillLoading
             updateCurrentStatus()
         }
     }
-    
+
     @objc private func openMenu(_ sender: Any?) {
         Theme.current.applySideMenu()
         present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
-    
+
     @objc private func closeTileEditingMode(_ sender: Any?) {
         self.tileModeStatus = .normal
     }
-    
+
     @objc private func updateEditTileStatus(_ sender: Any?) {
-        switch self.tileModeStatus { //change the status
+        switch self.tileModeStatus {  //change the status
         case .normal:
             self.tileModeStatus = .edit
         case .edit:
@@ -462,7 +471,7 @@ final class DashboardViewController: AutolayoutViewController {
         if canConnectVPN() {
             manuallyConnect()
         } else {
-            
+
             //User clicked the button, the disconnection of the VPN was manual
             Client.configuration.disconnectedManually = true
 
@@ -471,29 +480,27 @@ final class DashboardViewController: AutolayoutViewController {
         }
         Macros.postNotification(.PIAVPNUsageUpdate)
     }
-    
+
     private func canConnectVPN() -> Bool {
-        return !toggleConnection.isOn &&
-        Client.providers.vpnProvider.vpnStatus != .disconnecting &&
-        Client.providers.vpnProvider.vpnStatus != .connecting
+        return !toggleConnection.isOn && Client.providers.vpnProvider.vpnStatus != .disconnecting && Client.providers.vpnProvider.vpnStatus != .connecting
     }
-    
+
     private func manuallyConnect() {
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
         let threeHoursInSeconds: TimeInterval = 10800
-        
+
         accountInformationVerifier.verifyAccountInformationAvailabity(after: threeHoursInSeconds, completion: nil)
-        
+
         Client.providers.vpnProvider.connect({ [weak self] error in
-            
+
             //User clicked the button, the connection of the VPN was manual
             Client.configuration.connectedManually = true
-            
+
             guard let weakSelf = self else { return }
             if let _ = error {
                 RatingManager.shared.handleConnectionError()
             }
-            
+
             do {
                 let preferences = Client.preferences.editable()
                 preferences.lastConnectedRegion = try Client.providers.serverProvider.targetServer
@@ -501,7 +508,7 @@ final class DashboardViewController: AutolayoutViewController {
             } catch {
                 log.error("Failed to assign lastConnectedRegion: \(error.localizedDescription)")
             }
-            
+
             if Client.providers.vpnProvider.vpnStatus == .disconnected {
                 weakSelf.handleDisconnectedAndTrustedNetwork()
                 if TrustedNetworkUtils.isTrustedNetwork {
@@ -511,13 +518,13 @@ final class DashboardViewController: AutolayoutViewController {
                     }
                 }
             }
-            weakSelf.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterConnect) //Show usage statistics after connecting
+            weakSelf.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterConnect)  //Show usage statistics after connecting
 
         })
-        
+
         Macros.postNotification(.PIAServerHasBeenUpdated)
     }
-    
+
     func showAutomationAlert(onNMTDisableAction: (() -> ())? = nil) {
         let alert = Macros.alert(nil, L10n.Network.Management.Tool.alert)
         alert.addCancelAction(L10n.Global.close)
@@ -525,31 +532,32 @@ final class DashboardViewController: AutolayoutViewController {
             let preferences = Client.preferences.editable()
             preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
             preferences.commit()
-            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
-                                            object: self,
-                                            userInfo: nil)
+            NotificationCenter.default.post(
+                name: .PIAQuickSettingsHaveChanged,
+                object: self,
+                userInfo: nil)
             onNMTDisableAction?()
         }
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     private func disconnectWithOneSecondDelay() {
         Client.providers.vpnProvider.disconnect({ [weak self] _ in
             self?.updateCurrentStatus()
-            self?.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterDisconnect) //Reset the usage statistics after stop the VPN
+            self?.reloadUsageTileAfter(seconds: UsageTileReloadSeconds.afterDisconnect)  //Reset the usage statistics after stop the VPN
         })
     }
-    
+
     private func reloadUsageTileAfter(seconds: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             Macros.postNotification(.PIAVPNUsageUpdate)
         }
     }
-    
+
     @IBAction private func selectRegion(_ sender: Any?) {
         selectRegion(animated: true)
     }
-    
+
     func selectRegion(animated: Bool) {
         let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
         perform(segue: segue)
@@ -558,11 +566,11 @@ final class DashboardViewController: AutolayoutViewController {
     @objc func openSettings() {
         perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
     }
-    
+
     @objc func openSettingsAndWireGuard() {
         perform(segue: StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier)
     }
-    
+
     func openAccount() {
         perform(segue: StoryboardSegue.Main.accountSegueIdentifier)
     }
@@ -589,25 +597,26 @@ final class DashboardViewController: AutolayoutViewController {
             vc.serverSelectionDelegate = self
         } else if let identifier = segue.identifier,
             identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
-            let vc = segue.destination as? SettingsViewController {
+            let vc = segue.destination as? SettingsViewController
+        {
             vc.shouldSetWireGuardSettings = true
         }
     }
-    
+
     // MARK: Unwind segues
-    
+
     @IBAction private func unwoundWalkthroughViewController(_ segue: UIStoryboardSegue) {
     }
-    
+
     @IBAction private func unwoundRegionsViewController(_ segue: UIStoryboardSegue) {
     }
-    
+
     // MARK: Notifications
 
     @objc private func vpnDidInstall(notification: Notification) {
         log.debug("Installed VPN profile!")
     }
-    
+
     @objc private func applicationDidBecomeActive(notification: Notification) {
         perform(#selector(updateCurrentStatus))
         if Client.providers.accountProvider.isLoggedIn {
@@ -623,23 +632,24 @@ final class DashboardViewController: AutolayoutViewController {
         }
         presentLogin()
     }
-    
+
     @objc private func closeSession() {
         log.debug("Account: Logging out...")
         AppPreferences.shared.reset()
         if let window = self.view.window,
-            let rootViewController = window.rootViewController {
+            let rootViewController = window.rootViewController
+        {
             rootViewController.dismiss(animated: false, completion: nil)
         }
         Client.providers.accountProvider.logout(nil)
     }
-    
+
     // MARK: Notifications (Connection)
-    
+
     @objc private func vpnStatusDidChange(notification: Notification) {
         performSelector(onMainThread: #selector(updateCurrentStatusWithUserInfo(_:)), with: notification.userInfo, waitUntilDone: false)
     }
-    
+
     @objc private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
         alert.addCancelAction(L10n.Global.close)
@@ -647,55 +657,60 @@ final class DashboardViewController: AutolayoutViewController {
             let preferences = Client.preferences.editable()
             preferences.isPersistentConnection = true
             preferences.commit()
-            NotificationCenter.default.post(name: .PIAQuickSettingsHaveChanged,
-                                            object: self,
-                                            userInfo: nil)
+            NotificationCenter.default.post(
+                name: .PIAQuickSettingsHaveChanged,
+                object: self,
+                userInfo: nil)
         }
         present(alert, animated: true, completion: nil)
     }
-    
+
     @objc private func vpnShouldReconnect() {
         if Client.providers.vpnProvider.vpnStatus != .disconnected {
             let alert = Macros.alert(
                 title,
                 L10n.Settings.Commit.Messages.shouldReconnect
             )
-            
+
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, { error in
-                })
+                Client.providers.vpnProvider.reconnect(
+                    after: nil, forceDisconnect: true,
+                    { error in
+                    })
             }
-            
+
             // later -> close
             alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
             }
-            
+
             present(alert, animated: true, completion: nil)
         } else {
-            Client.providers.vpnProvider.install(force: false, { _ in
-                self.updateCurrentStatus()
-            })
+            Client.providers.vpnProvider.install(
+                force: false,
+                { _ in
+                    self.updateCurrentStatus()
+                })
         }
     }
-    
+
     @objc func connectionVPNStatusDidChange(_ notification: Notification? = nil) {
         guard let connection = notification?.object as? NEVPNConnection else { return }
-        
+
         switch connection.status {
         case .connected:
             if !Client.providers.vpnProvider.isVPNConnected {
                 handleNonCompliantWifiConnection()
             }
         case .disconnected:
-           
+
             let state = UIApplication.shared.applicationState
-            
+
             // Only remove the notification if the app is on the foreground
             if state == .active {
                 removeNonCompliantWifiLocalNotification()
             }
-            
+
             if shouldReconnect {
                 Client.providers.vpnProvider.connect { _ in }
                 shouldReconnect = false
@@ -704,77 +719,84 @@ final class DashboardViewController: AutolayoutViewController {
             break
         }
     }
-    
+
     @objc func checkConnectToRFC1918VulnerableWifi(_ notification: Notification? = nil) {
         guard Client.providers.vpnProvider.isVPNConnected else { return }
-        
+
         handleNonCompliantWifiConnection()
     }
-    
+
     @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
         // Remove non compliant wifi notification if it was present in notification center
         removeNonCompliantWifiLocalNotification()
-        
+
         // Remove leak protection alert when connecting to a compliant Wi-Fi
         removeLeakProtectionAlert()
     }
-    
+
     private func handleNonCompliantWifiConnection() {
         guard WifiNetworkMonitor().isConnected() else { return }
-        
-        guard Client.preferences.currentRFC1918VulnerableWifi != nil
-                || WifiNetworkMonitor().checkForRFC1918Vulnerability() else { return }
-        
+
+        guard
+            Client.preferences.currentRFC1918VulnerableWifi != nil
+                || WifiNetworkMonitor().checkForRFC1918Vulnerability()
+        else { return }
+
         guard AppPreferences.shared.showLeakProtectionNotifications else { return }
-        
+
         let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
-      
+
         let selectedProtocol = Client.preferences.vpnType.vpnProtocol
         let isWireguardSelected = selectedProtocol == PIAWGTunnelProfile.vpnType.vpnProtocol
         let isOpenVPNSelected = selectedProtocol == PIATunnelProfile.vpnType.vpnProtocol
-      
+
         guard !isWireguardSelected,
-              !isOpenVPNSelected else {
+            !isOpenVPNSelected
+        else {
             DispatchQueue.main.async {
                 self.presentNonCompliantWireguardWifiAlert()
                 self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
             }
-            
+
             return
         }
-        
-        guard Client.preferences.allowLocalDeviceAccess
-                && Client.preferences.leakProtection else { return }
-      
+
+        guard
+            Client.preferences.allowLocalDeviceAccess
+                && Client.preferences.leakProtection
+        else { return }
+
         DispatchQueue.main.async {
             self.presentNonCompliantWifiAlert()
             self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
         }
     }
-    
+
     @objc func presentForceUpdate() {
         #if !STAGING
-        let forceUpdate = ForceUpdateViewController()
-        forceUpdate.modalPresentationStyle = .fullScreen
-        DispatchQueue.main.async { [weak self] in
-            var isOtherViewPresented = false
-            if let presented = self?.presentedViewController {
-                if !(presented is ForceUpdateViewController) {
-                    isOtherViewPresented = true
+            let forceUpdate = ForceUpdateViewController()
+            forceUpdate.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async { [weak self] in
+                var isOtherViewPresented = false
+                if let presented = self?.presentedViewController {
+                    if !(presented is ForceUpdateViewController) {
+                        isOtherViewPresented = true
+                    }
+                }
+
+                if isOtherViewPresented {
+                    self?.dismiss(
+                        animated: false,
+                        completion: {
+                            self?.present(forceUpdate, animated: false)
+                        })
+                } else {
+                    self?.present(forceUpdate, animated: false)
                 }
             }
-            
-            if isOtherViewPresented {
-                self?.dismiss(animated: false, completion: {
-                    self?.present(forceUpdate, animated: false)
-                })
-            } else {
-                self?.present(forceUpdate, animated: false)
-            }
-        }
         #endif
     }
-    
+
     @objc private func dismissModalViewController() {
         if presentedViewController != nil {
             dismiss(animated: false)
@@ -782,137 +804,138 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     //MARK: Non compliant Wifi alert
-    
+
     private struct WifiAlertAction {
         let title: String
         let style: UIAlertAction.Style
         let action: ((UIAlertAction) -> Void)?
     }
-    
+
     private func showNonCompliantWifiAlert(title: String, message: String, actions: [WifiAlertAction]) {
         guard
             let window = UIApplication.shared.delegate?.window,
             let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
         else { return }
-        
+
         if let alertController = presentedViewController as? UIAlertController, alertController.title == title { return }
-        
+
         let sheet = Macros.alertController(title, message)
-        
+
         for action in actions {
-            let alertAction = UIAlertAction(title: action.title,
-                                       style: action.style,
-                                       handler: action.action)
+            let alertAction = UIAlertAction(
+                title: action.title,
+                style: action.style,
+                handler: action.action)
             sheet.addAction(alertAction)
         }
-        
+
         presentedViewController.present(sheet, animated: true, completion: nil)
     }
-    
+
     private func presentNonCompliantWifiAlert() {
         let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
         let message = L10n.Dashboard.Vpn.Leakprotection.Alert.message
-        
+
         var alertActions = [WifiAlertAction]()
         let reconnectAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1,
             style: .default,
             action: handleDisconnectAndReconnectAction)
         alertActions.append(reconnectAction)
-        
+
         let learnMoreAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
             style: .default,
             action: handleLearnMoreAction)
         alertActions.append(learnMoreAction)
-        
+
         let cancelAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
             style: .cancel,
             action: nil)
         alertActions.append(cancelAction)
-        
+
         showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
     }
-    
+
     private func presentNonCompliantWireguardWifiAlert() {
         let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
         let message = L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.message
-        
+
         var alertActions = [WifiAlertAction]()
         let reconnectAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.cta1,
-            
+
             style: .default,
             action: handleSwitchProtocolAction)
         alertActions.append(reconnectAction)
-        
+
         let learnMoreAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
             style: .default,
             action: handleLearnMoreAction)
         alertActions.append(learnMoreAction)
-        
+
         let cancelAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
             style: .cancel,
             action: nil)
         alertActions.append(cancelAction)
-        
+
         showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
     }
-    
+
     private func handleDisconnectAndReconnectAction(_ action: UIAlertAction) {
         Client.preferences.allowLocalDeviceAccess = false
         Client.providers.vpnProvider.disconnect { _ in
             self.shouldReconnect = true
         }
     }
-    
+
     private func handleLearnMoreAction(_ action: UIAlertAction) {
         let application = UIApplication.shared
         let learnMoreURL = AppConstants.Web.leakProtectionURL
-        
+
         if application.canOpenURL(learnMoreURL) {
             application.open(learnMoreURL)
         }
     }
-    
+
     private func handleSwitchProtocolAction(_ action: UIAlertAction) {
         let editable = Client.preferences.editable()
         editable.vpnType = IKEv2Profile.vpnType
         let action = editable.requiredVPNAction()
         editable.commit()
-        
+
         Client.preferences.leakProtection = true
         Client.preferences.allowLocalDeviceAccess = false
-        
+
         action?.execute { _ in
             self.shouldReconnect = true
         }
     }
-    
+
     func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
         // 1. Remove previous non-compliant wifi notification
         removeNonCompliantWifiLocalNotification()
-        
+
         // 2. Show the local notification for the current non-compliant wifi
         Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
     }
-    
+
     private func removeNonCompliantWifiLocalNotification() {
         // Remove non compliant wifi notification if it was present in notification center
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
     }
-  
+
     private func removeLeakProtectionAlert() {
         guard let presentedLeakProtectionAlert = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController as? UIAlertController,
-              presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title else { return }
-        
+            presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title
+        else { return }
+
         presentedLeakProtectionAlert.dismiss(animated: true)
     }
-  
-    
+
     // MARK: Helpers
     @objc private func vpnDidFail() {
         if !isDisconnecting {
@@ -924,11 +947,12 @@ final class DashboardViewController: AutolayoutViewController {
             }
         }
     }
-    
+
     @objc private func checkAccountEmail() {
 
         if let currentUser = Client.providers.accountProvider.currentUser,
-            let info = currentUser.info {
+            let info = currentUser.info
+        {
             if info.email == nil || info.email == "" {
                 //No email, we need to show the account email view
                 if Client.providers.accountProvider.isLoggedIn {
@@ -941,28 +965,28 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func updateCurrentStatus() {
         updateCurrentStatusWithUserInfo(nil)
     }
-    
+
     @objc private func updateTiles() {
         collectionView.reloadData()
     }
-    
+
     @objc private func updateFixedTileWithAnimation() {
         // Ensure UI updates happen on main queue
         DispatchQueue.main.async {
             self.collectionView.reloadSections(IndexSet(integer: 0))
         }
     }
-    
+
     @objc private func reloadTheme() {
         AppPreferences.shared.reloadTheme()
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
-        
+
         guard Client.providers.accountProvider.isLoggedIn else {
             return
         }
-        
+
         if #available(iOS 16.2, *) {
             startConnectionLiveActivityIfNeeded()
         }
@@ -991,10 +1015,10 @@ final class DashboardViewController: AutolayoutViewController {
             connectingStatus = .none
 
             startConnectionTimer()
-            
+
         case .disconnected:
             stopConnectionTimer()
-            
+
             toggleConnection.isOn = false
             AppPreferences.shared.lastVPNConnectionStatus = .disconnected
 
@@ -1007,7 +1031,7 @@ final class DashboardViewController: AutolayoutViewController {
 
             handleDisconnectedAndTrustedNetwork()
             toggleConnection.stopButtonAnimation()
-            
+
         case .connecting:
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
@@ -1044,18 +1068,18 @@ final class DashboardViewController: AutolayoutViewController {
 
         case .unknown:
             break
-//        case .changingServer:
-//            powerConnection.powerState = .pending
-//            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
+        //        case .changingServer:
+        //            powerConnection.powerState = .pending
+        //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
         AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
         reloadWidget()
-        
+
     }
-    
+
     private func setNavBarTheme(_ theme: NavBarTheme, with titleView: UIView) {
         DispatchQueue.main.async {
             var tintColor: UIColor?
@@ -1083,7 +1107,7 @@ final class DashboardViewController: AutolayoutViewController {
             self.setNavBarTitleView(titleView: titleView)
         }
     }
-    
+
     private func setNavBarTitleView(titleView: UIView) {
         self.navigationItem.titleView = titleView
         self.setNeedsStatusBarAppearanceUpdate()
@@ -1092,13 +1116,13 @@ final class DashboardViewController: AutolayoutViewController {
     private func reloadWidget() {
         WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
     }
-    
+
     private func handleDisconnectedAndTrustedNetwork() {
         if TrustedNetworkUtils.isTrustedNetwork {
             toggleConnection.isIndeterminate = false
             toggleConnection.isWarning = true
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.text = L10n.Dashboard.Vpn.disconnected+": "+L10n.Tiles.Nmt.Accessibility.trusted
+            titleLabelView.text = L10n.Dashboard.Vpn.disconnected + ": " + L10n.Tiles.Nmt.Accessibility.trusted
             titleLabelView.adjustsFontSizeToFitWidth = true
             titleLabelView.style(style: TextStyle.textStyle6)
             toggleConnection.tintColor = UIColor.piaOrange
@@ -1154,7 +1178,7 @@ final class DashboardViewController: AutolayoutViewController {
         Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-        
+
         Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()
@@ -1166,7 +1190,7 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
         showVPNModal(target: topViewController)
     }
-    
+
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
 
         // trial account did purchase, replace current user
@@ -1176,7 +1200,7 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
 
         showVPNModal(target: topViewController)
     }
-    
+
     func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {
         dismiss(animated: true)
     }
@@ -1209,7 +1233,7 @@ extension DashboardViewController: MenuViewControllerDelegate {
             log.error("Unhandled item '\(item)'")
         }
     }
-    
+
     func menu(didDetectTrialUpgrade: MenuViewController) {
         presentPurchaseForTrial()
     }
@@ -1218,50 +1242,56 @@ extension DashboardViewController: MenuViewControllerDelegate {
 // MARK: CollectionView
 
 extension DashboardViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+
         if indexPath.section == DashboardSections.tiles.rawValue {
-            let tileIndex = tileModeStatus == .normal ?
-                Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
-                Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+            let tileIndex = tileModeStatus == .normal ? Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue : Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
 
             var tileHeight = TileSize.standard.rawValue
             if let cell = Cells(rawValue: tileIndex),
-               cell.identifier == Cells.connectionTile.identifier {
+                cell.identifier == Cells.connectionTile.identifier
+            {
                 tileHeight = TileSize.big.rawValue
             }
-            
-            return CGSize(width: collectionView.frame.width,
-                          height: tileHeight)
+
+            return CGSize(
+                width: collectionView.frame.width,
+                height: tileHeight)
         } else {
-            return CGSize(width: collectionView.frame.width,
-                          height: TileSize.standard.rawValue)
+            return CGSize(
+                width: collectionView.frame.width,
+                height: TileSize.standard.rawValue)
         }
-        
+
     }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
         return UIEdgeInsets.zero
     }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return 0
     }
-    
+
 }
 
-
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
         var tileIndex = 0
         var identifier = FixedCells(rawValue: tileIndex)!.identifier
 
@@ -1272,14 +1302,13 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                 identifier = FixedCells.feedback.identifier
             }
         } else if indexPath.section == DashboardSections.tiles.rawValue {
-            tileIndex = tileModeStatus == .normal ?
-                Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue :
-                Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
+            tileIndex = tileModeStatus == .normal ? Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue : Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
             identifier = Cells(rawValue: tileIndex)!.identifier
         }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
-                                                      for: indexPath)
+
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: identifier,
+            for: indexPath)
         if let cell = cell as? EditableTileCell {
             cell.setupCellForStatus(self.tileModeStatus)
         }
@@ -1288,11 +1317,11 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         return cell
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !Client.providers.accountProvider.isLoggedIn {
             return 0
@@ -1303,43 +1332,48 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             let hasFixedTile = hasAvailableMessage || shouldShowFeedbackCard
             return tileModeStatus == .normal && hasFixedTile ? 1 : 0
         } else {
-            return tileModeStatus == .normal ?
-                Client.providers.tileProvider.visibleTiles.count :
-                Client.providers.tileProvider.orderedTiles.count
+            return tileModeStatus == .normal ? Client.providers.tileProvider.visibleTiles.count : Client.providers.tileProvider.orderedTiles.count
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if tileModeStatus == .normal {
             let cell = collectionView.cellForItem(at: indexPath)
             if let detailedCell = cell as? DetailedTileCell,
                 detailedCell.hasDetailView(),
-                let segueIdentifier = detailedCell.segueIdentifier() {
+                let segueIdentifier = detailedCell.segueIdentifier()
+            {
                 performSegue(withIdentifier: segueIdentifier, sender: nil)
             }
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if tileModeStatus == .normal,
             let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
-            cell.hasDetailView() {
-            UIView.animate(withDuration: 0.1, animations: {
-                cell.highlightCell()
-            })
+            cell.hasDetailView()
+        {
+            UIView.animate(
+                withDuration: 0.1,
+                animations: {
+                    cell.highlightCell()
+                })
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if tileModeStatus == .normal,
             let cell = collectionView.cellForItem(at: indexPath) as? DetailedTileCell,
-            cell.hasDetailView() {
-            UIView.animate(withDuration: 0.1, animations: {
-                cell.unhighlightCell()
-            })
+            cell.hasDetailView()
+        {
+            UIView.animate(
+                withDuration: 0.1,
+                animations: {
+                    cell.unhighlightCell()
+                })
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         if indexPath.section == DashboardSections.tiles.rawValue {
             return self.tileModeStatus == .edit
@@ -1347,7 +1381,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             return false
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if sourceIndexPath.section == DashboardSections.tiles.rawValue, destinationIndexPath.section == DashboardSections.tiles.rawValue {
             var orderedTiles = Client.providers.tileProvider.orderedTiles
@@ -1359,7 +1393,6 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 }
 
-
 // MARK: Live Activities
 
 extension DashboardViewController {
@@ -1369,24 +1402,25 @@ extension DashboardViewController {
         let currentServer = Client.preferences.displayedServer
 
         let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
-        
+
         let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
         return state
     }
 
-    
     @available(iOS 16.2, *)
     private func startConnectionLiveActivityIfNeeded() {
-       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-        let liveActivityManager = appDelegate.liveActivityManager else { return }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let liveActivityManager = appDelegate.liveActivityManager
+        else { return }
         let connState = makeLiveActivityStateForCurrentConnection()
         liveActivityManager.startLiveActivity(with: connState)
     }
 
     @available(iOS 16.2, *)
     private func stopConnectionLiveActivity() {
-       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-        let liveActivityManager = appDelegate.liveActivityManager else { return }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let liveActivityManager = appDelegate.liveActivityManager
+        else { return }
         liveActivityManager.endLiveActivities()
     }
 }

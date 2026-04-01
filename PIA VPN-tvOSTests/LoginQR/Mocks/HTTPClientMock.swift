@@ -8,23 +8,24 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class HTTPClientMock: HTTPClientType {
     private let result: Result<Data, ClientError>
-    
+
     init(result: Result<Data, ClientError>) {
         self.result = result
     }
-    
+
     func makeRequest(request: URLRequest) async throws -> Data {
         switch result {
-            case .success(let data):
-                return data
-            case .failure(let error):
-                throw error
+        case .success(let data):
+            return data
+        case .failure(let error):
+            throw error
         }
     }
-    
+
     func makeRequest(request: URLRequest, completion: @escaping (Result<(Data, URLResponse), ClientError>) -> Void) {}
 }

@@ -29,9 +29,9 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
     public var mockServers: [Server]
 
     let webServices: WebServices
-    
+
     private let delegate: ServerProvider
-    
+
     /// :nodoc:
     public init() {
         mockServers = [
@@ -43,7 +43,8 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
-            ), Server(
+            ),
+            Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Germany",
                 country: "de",
@@ -51,7 +52,8 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
-            ), Server(
+            ),
+            Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "Italy",
                 country: "it",
@@ -59,7 +61,8 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
-            ), Server(
+            ),
+            Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "US East",
                 country: "us",
@@ -67,7 +70,8 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 pingAddress: nil,
                 responseTime: 0,
                 regionIdentifier: ""
-            ), Server(
+            ),
+            Server(
                 serial: "8a55f03812851897f6e43b2ae22b1234",
                 name: "US East Offline",
                 country: "us",
@@ -81,24 +85,25 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
         ]
 
         let webServices = MockWebServices()
-        delegate = DefaultServerProvider(webServices: webServices,
-                                         renewDedicatedIP: MockRenewDedicatedIPUseCase(),
-                                         getDedicatedIPs: MockGetDedicatedIPsUseCase(),
-                                         dedicatedIPServerMapper: MockDedicatedIPServerMapper())
+        delegate = DefaultServerProvider(
+            webServices: webServices,
+            renewDedicatedIP: MockRenewDedicatedIPUseCase(),
+            getDedicatedIPs: MockGetDedicatedIPsUseCase(),
+            dedicatedIPServerMapper: MockDedicatedIPServerMapper())
         self.webServices = webServices
-        
+
         webServices.serversBundle = {
             return ServersBundle(servers: self.mockServers, configuration: nil)
         }
     }
-    
+
     // MARK: ServerProvider
-    
+
     /// :nodoc:
     public var currentServersConfiguration: ServersBundle.Configuration {
         return accessedDatabase.transient.serversConfiguration
     }
-    
+
     /// :nodoc:
     public var historicalServers: [Server] {
         //        return delegate.currentServers
@@ -107,61 +112,61 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
 
     /// :nodoc:
     public var currentServers: [Server] {
-//        return delegate.currentServers
+        //        return delegate.currentServers
         return mockServers
     }
-    
+
     /// :nodoc:
     public var bestServer: Server? {
-//        return delegate.bestServer
+        //        return delegate.bestServer
         return mockServers.first
     }
-    
+
     /// :nodoc:
     public var targetServer: Server {
-//        return delegate.targetServer
+        //        return delegate.targetServer
         return mockServers.last!
     }
-    
+
     public var dipTokens: [String]? {
         return []
     }
-    
+
     /// :nodoc:
     public func load(fromJSON jsonData: Data) {
         return delegate.load(fromJSON: jsonData)
     }
-    
+
     /// :nodoc:
     public func loadLocalJSON(fromJSON jsonData: Data) {
         return delegate.loadLocalJSON(fromJSON: jsonData)
     }
-    
+
     /// :nodoc:
     public func download(_ callback: (([Server]?, Error?) -> Void)?) {
         delegate.download(callback)
     }
-    
+
     /// :nodoc:
     public func find(withIdentifier identifier: String) -> Server? {
         return delegate.find(withIdentifier: identifier)
     }
-        
+
     public func resetCurrentServers() {
     }
-    
+
     public func removeDIPToken(_ dipToken: String) {
         delegate.removeDIPToken(dipToken)
     }
-    
+
     public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
         delegate.activateDIPToken(token, callback)
     }
-    
+
     public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         delegate.activateDIPTokens(tokens, callback)
     }
-    
+
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         delegate.handleDIPTokenExpiration(dipToken: dipToken, callback)
     }

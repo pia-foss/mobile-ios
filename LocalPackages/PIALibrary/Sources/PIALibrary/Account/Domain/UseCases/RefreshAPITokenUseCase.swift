@@ -1,4 +1,3 @@
-
 import Foundation
 import NWHttpConnection
 
@@ -10,18 +9,18 @@ protocol RefreshAPITokenUseCaseType {
 }
 
 class RefreshAPITokenUseCase: RefreshAPITokenUseCaseType {
-    
+
     private let apiTokenProvider: APITokenProviderType
     private let networkClient: NetworkRequestClientType
-    
+
     init(apiTokenProvider: APITokenProviderType, networkClient: NetworkRequestClientType) {
         self.apiTokenProvider = apiTokenProvider
         self.networkClient = networkClient
     }
-    
+
     func callAsFunction(completion: @escaping RefreshAPITokenUseCaseType.Completion) {
         let configuration = RefreshApiTokenRequestConfiguration()
-        
+
         networkClient.executeRequest(with: configuration) { [weak self] error, dataResponse in
             if let error {
                 // Clear old token on refresh failure to prevent repeated auth failures
@@ -38,9 +37,8 @@ class RefreshAPITokenUseCase: RefreshAPITokenUseCaseType {
             }
         }
     }
-    
-}
 
+}
 
 private extension RefreshAPITokenUseCase {
 
@@ -52,7 +50,7 @@ private extension RefreshAPITokenUseCase {
             completion(NetworkRequestError.noDataContent)
             return
         }
-        
+
         do {
             try apiTokenProvider.saveAPIToken(from: dataResponseContent)
             completion(nil)
@@ -63,5 +61,5 @@ private extension RefreshAPITokenUseCase {
             completion(NetworkRequestError.unableToSaveAPIToken)
         }
     }
-    
+
 }

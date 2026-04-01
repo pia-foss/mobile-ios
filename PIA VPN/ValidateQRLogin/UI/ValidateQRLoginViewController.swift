@@ -6,35 +6,35 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import UIKit
 import PIALibrary
 import PIALocalizations
+import UIKit
 
 class ValidateQRLoginViewController: AutolayoutViewController {
     @IBOutlet weak var piaLogoImageView: UIImageView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
-    
+
     var validateQRLogin: ValidateQRLoginUseCaseType?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
         setImageforMode(isLightMode: traitCollection.userInterfaceStyle == .light)
         loadingSpinner.style = .large
         loadingSpinner.startAnimating()
-        
+
         validateQRLogin? { result in
             DispatchQueue.main.async { [self] in
                 switch result {
-                    case .success:
-                        dismiss(animated: true)
-                    case .failure:
-                        presentError()
+                case .success:
+                    dismiss(animated: true)
+                case .failure:
+                    presentError()
                 }
             }
         }
     }
-    
+
     private func presentError() {
         let alert = Macros.alert(
             L10n.ErrorAlert.ConnectionError.NoNetwork.title,
@@ -47,14 +47,14 @@ class ValidateQRLoginViewController: AutolayoutViewController {
 
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func setImageforMode(isLightMode: Bool) {
         piaLogoImageView.image = UIImage(asset: isLightMode ? Asset.Images.navLogo : Asset.Images.navLogoWhite)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         setImageforMode(isLightMode: traitCollection.userInterfaceStyle == .light)
     }
 }

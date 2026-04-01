@@ -28,16 +28,18 @@ internal struct PIACircleVpnButton: View {
     var body: some View {
         return Circle()
             .strokeBorder(Color("BorderColor"), lineWidth: strokeWidth * 0.75)
-            .background(Circle()
-                .strokeBorder(color, lineWidth: strokeWidth)
-                .background(Image("vpn-button")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(color)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: buttonSize, height: buttonSize)
-                    .padding(0.0)
-                )
+            .background(
+                Circle()
+                    .strokeBorder(color, lineWidth: strokeWidth)
+                    .background(
+                        Image("vpn-button")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(color)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: buttonSize, height: buttonSize)
+                            .padding(0.0)
+                    )
             )
             .padding(buttonSize / 2.0)
     }

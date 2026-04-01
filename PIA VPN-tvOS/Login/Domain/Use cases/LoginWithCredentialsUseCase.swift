@@ -15,29 +15,26 @@ protocol LoginWithCredentialsUseCaseType {
 class LoginWithCredentialsUseCase: LoginWithCredentialsUseCaseType {
     private let loginProvider: LoginProviderType
     private let errorMapper: LoginDomainErrorMapperType
-    
+
     init(loginProvider: LoginProviderType, errorMapper: LoginDomainErrorMapperType) {
         self.loginProvider = loginProvider
         self.errorMapper = errorMapper
     }
-    
+
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void) {
-        let credentials = Credentials(username: username, 
-                                      password: password)
-        
+        let credentials = Credentials(
+            username: username,
+            password: password)
+
         loginProvider.login(with: credentials) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
-                case .success(let userAccount):
-                    completion(.success(userAccount))
-                case .failure(let error):
-                    completion(.failure(errorMapper.map(error: error)))
+            case .success(let userAccount):
+                completion(.success(userAccount))
+            case .failure(let error):
+                completion(.failure(errorMapper.map(error: error)))
             }
         }
     }
 }
-
-
-
-

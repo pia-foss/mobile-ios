@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
+import PIALocalizations
 import PIAUIKit
 import StoreKit
-import PIALocalizations
+import UIKit
 
 private let log = PIALogger.logger(for: PurchasePlanCell.self)
 
@@ -60,16 +60,18 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
     func fill(plan: PurchasePlan) {
         viewShouldRestyle()
 
-        log.debug(#function, metadata: [
-            "isEligibleForIntroOffer": .stringConvertible(plan.hasIntroOffer),
-            "eligibleForTrial": .stringConvertible(Client.configuration.eligibleForTrial),
-            "plan": .stringConvertible(plan),
-        ])
+        log.debug(
+            #function,
+            metadata: [
+                "isEligibleForIntroOffer": .stringConvertible(plan.hasIntroOffer),
+                "eligibleForTrial": .stringConvertible(Client.configuration.eligibleForTrial),
+                "plan": .stringConvertible(plan)
+            ])
         let showFreeTrialLabel = plan.hasIntroOffer && Client.configuration.eligibleForTrial
-        labelBestValue.text = showFreeTrialLabel
+        labelBestValue.text =
+            showFreeTrialLabel
             ? "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL"
             : L10n.Welcome.Plan.bestValue.uppercased()
-
 
         if plan.isDummy {
             let pendingBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
@@ -98,7 +100,7 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
                 bestValueHeightConstraint.constant = PurchasePlanCell.bestValueContainerHeight
                 priceBottomConstraint.constant = PurchasePlanCell.priceBottomConstant
             }
-            
+
             if plan.plan == Plan.yearly {
                 Theme.current.applyTitle(labelDetail, appearance: .dark)
                 Theme.current.applySmallInfo(labelPrice, appearance: .dark)
@@ -116,20 +118,24 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
     override var isSelected: Bool {
         didSet {
             Theme.current.applyBorder(viewContainer, selected: isSelected)
-//            Theme.current.applyTitle(labelPrice, appearance:(isSelected ? .emphasis : .dark))
+            //            Theme.current.applyTitle(labelPrice, appearance:(isSelected ? .emphasis : .dark))
 
             if isSelected {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.selectedPlanImageView.alpha = 1
-                })
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        self.selectedPlanImageView.alpha = 1
+                    })
             } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.selectedPlanImageView.alpha = 0
-                })
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        self.selectedPlanImageView.alpha = 0
+                    })
             }
         }
     }
-    
+
     // MARK: Restylable
 
     func viewShouldRestyle() {

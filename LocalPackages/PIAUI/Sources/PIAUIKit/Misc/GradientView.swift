@@ -26,7 +26,7 @@ public class GradientView: UIView {
     open override class var layerClass: AnyClass {
         return CAGradientLayer.self
     }
-    
+
     public var gradientLayer: CAGradientLayer {
         return layer as! CAGradientLayer
     }

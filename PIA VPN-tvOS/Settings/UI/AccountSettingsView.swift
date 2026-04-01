@@ -10,9 +10,9 @@ import SwiftUI
 
 struct AccountSettingsView: View {
     @ObservedObject var viewModel: AccountSettingsViewModel
-    
+
     let sectionsVerticalSpacing: CGFloat = 20
-    
+
     var body: some View {
         if viewModel.isLoading {
             LoginLoadingView()
@@ -22,28 +22,28 @@ struct AccountSettingsView: View {
             accountSettingsSection
         }
     }
-    
+
     func accountInfoTextView(with text: String) -> some View {
         Text(text)
             .font(.system(size: 38, weight: .medium))
             .foregroundColor(.pia_on_surface_container_primary)
     }
-    
+
     var accountInfoSection: some View {
         VStack(spacing: sectionsVerticalSpacing) {
             HStack {
                 accountInfoTextView(with: viewModel.usernameTitle)
                 Spacer()
-                accountInfoTextView(with:viewModel.usernameValue)
+                accountInfoTextView(with: viewModel.usernameValue)
             }
             HStack {
-                accountInfoTextView(with:viewModel.subscriptionTitle)
+                accountInfoTextView(with: viewModel.subscriptionTitle)
                 Spacer()
-                accountInfoTextView(with:viewModel.subscriptionValue)
+                accountInfoTextView(with: viewModel.subscriptionValue)
             }
         }
     }
-    
+
     var accountSettingsSection: some View {
         HStack {
             VStack(spacing: sectionsVerticalSpacing) {
@@ -55,7 +55,7 @@ struct AccountSettingsView: View {
                 .padding(.top, sectionsVerticalSpacing)
                 Spacer()
             }
-            
+
             Spacer()
             Image.pia_settings_bg_image
                 .frame(width: 840)
@@ -63,7 +63,7 @@ struct AccountSettingsView: View {
         }
         .padding(.top, Spacing.screenTopPadding)
         .alert(viewModel.logOutAlertTitle, isPresented: $viewModel.isLogOutAlertVisible) {
-            Button(viewModel.logOutAlertCancelActionText, role: .cancel) { }
+            Button(viewModel.logOutAlertCancelActionText, role: .cancel) {}
             Button(viewModel.logOutButtonTitle, role: .none) {
                 viewModel.logOutConfirmationButtonWasTapped()
             }
@@ -71,5 +71,5 @@ struct AccountSettingsView: View {
             Text(viewModel.logOutAlertMesage)
         }
     }
-    
+
 }

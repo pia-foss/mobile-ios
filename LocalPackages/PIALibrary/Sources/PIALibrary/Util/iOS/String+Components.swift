@@ -26,19 +26,20 @@ extension String {
     func split(by length: Int) -> [String] {
         var startIndex = self.startIndex
         var results = [Substring]()
-        
+
         while startIndex < self.endIndex {
             let endIndex = self.index(startIndex, offsetBy: length, limitedBy: self.endIndex) ?? self.endIndex
             results.append(self[startIndex..<endIndex])
             startIndex = endIndex
         }
-        
+
         return results.map { String($0) }
     }
 
     func redactIPs() -> String {
-        return self.replacingOccurrences(of: "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b",
-                                         with: "REDACTED",
-                                         options: [.regularExpression])
+        return self.replacingOccurrences(
+            of: "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b",
+            with: "REDACTED",
+            options: [.regularExpression])
     }
 }

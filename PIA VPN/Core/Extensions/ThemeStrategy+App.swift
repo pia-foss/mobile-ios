@@ -22,8 +22,8 @@
 
 import Foundation
 import PIALibrary
-import UIKit
 import PIAUIKit
+import UIKit
 
 extension ThemeCode {
     func apply(theme: Theme, reload: Bool) {
@@ -31,15 +31,15 @@ extension ThemeCode {
         case .light:
             theme.palette = .light
             theme.strategy = LightThemeStrategy()
-            
+
         case .dark:
             theme.palette = .dark
             theme.strategy = DarkThemeStrategy()
         }
-        
+
         // share font type across all themes
         theme.typeface = Theme.Fonts.typeface
-        
+
         if reload {
             theme.reload()
         }
@@ -55,7 +55,7 @@ private struct LightThemeStrategy: ThemeStrategy {
             theme.applyLightNavigationBar(navigationBar)
             return
         }
-        
+
         if viewController is BrandableNavigationBar {
             theme.applyLightBrandLogoNavigationBar(navigationBar)
         } else {
@@ -63,18 +63,18 @@ private struct LightThemeStrategy: ThemeStrategy {
         }
 
     }
-    
+
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
         switch viewController {
         case is PIAWelcomeViewController,
-             is GetStartedViewController,
-             is SignupInProgressViewController,
-             is SignupFailureViewController,
-             is SignupSuccessViewController,
-             is SignupUnreachableViewController,
-             is RestoreSignupViewController,
-             is VPNPermissionViewController,
-             is ConfirmVPNPlanViewController:
+            is GetStartedViewController,
+            is SignupInProgressViewController,
+            is SignupFailureViewController,
+            is SignupSuccessViewController,
+            is SignupUnreachableViewController,
+            is RestoreSignupViewController,
+            is VPNPermissionViewController,
+            is ConfirmVPNPlanViewController:
             return .default
         default:
             if AppPreferences.shared.lastVPNConnectionStatus == VPNStatus.connected {
@@ -83,7 +83,7 @@ private struct LightThemeStrategy: ThemeStrategy {
             return Theme.current.palette.appearance == .dark ? .lightContent : .default
         }
     }
-    
+
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
             return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)
@@ -97,7 +97,7 @@ private struct DarkThemeStrategy: ThemeStrategy {
         guard let navigationBar = viewController.navigationController?.navigationBar else {
             return
         }
-        
+
         if viewController is BrandableNavigationBar {
             theme.applyLightBrandLogoNavigationBar(navigationBar)
         } else {
@@ -105,11 +105,11 @@ private struct DarkThemeStrategy: ThemeStrategy {
         }
 
     }
-    
+
     func statusBarAppearance(for viewController: AutolayoutViewController) -> UIStatusBarStyle {
         return .lightContent
     }
-    
+
     func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
         if ((mask == .landscape) && Macros.isDevicePad) {
             return UIEdgeInsets(top: 0, left: AppConfiguration.UI.iPadLandscapeMargin, bottom: 0, right: AppConfiguration.UI.iPadLandscapeMargin)

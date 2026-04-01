@@ -1,7 +1,7 @@
 //
 //  SiriShortcutsBuilder.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 17/04/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -26,17 +26,17 @@ import PIALibrary
 import PIALocalizations
 
 protocol SiriShortcutBuilder {
-    
+
     var activityType: String { get set }
     var title: String { get set }
     var persistentIdentifier: String { get set }
 
     func build() -> INShortcut
-    
+
 }
 
 extension SiriShortcutBuilder {
-    
+
     func build() -> INShortcut {
         let connectActivity = NSUserActivity(activityType: activityType)
         connectActivity.title = title
@@ -45,11 +45,11 @@ extension SiriShortcutBuilder {
         connectActivity.persistentIdentifier = NSUserActivityPersistentIdentifier(persistentIdentifier)
         return INShortcut(userActivity: connectActivity)
     }
-    
+
 }
 
 class SiriShortcutConnect: SiriShortcutBuilder {
-    
+
     var activityType = AppConstants.SiriShortcuts.shortcutConnect
     var title = L10n.Siri.Shortcuts.Connect.title
     var persistentIdentifier = AppConstants.SiriShortcuts.shortcutConnect
@@ -57,7 +57,7 @@ class SiriShortcutConnect: SiriShortcutBuilder {
 }
 
 class SiriShortcutDisconnect: SiriShortcutBuilder {
-    
+
     var activityType = AppConstants.SiriShortcuts.shortcutDisconnect
     var title = L10n.Siri.Shortcuts.Disconnect.title
     var persistentIdentifier = AppConstants.SiriShortcuts.shortcutDisconnect

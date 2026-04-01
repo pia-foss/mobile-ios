@@ -1,4 +1,3 @@
-
 import Foundation
 
 public struct ClientStatusInformation: Codable, Equatable {

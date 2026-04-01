@@ -21,8 +21,8 @@
 //
 
 import Foundation
-import UIKit
 import PIALibrary
+import UIKit
 
 extension Theme.Palette {
 

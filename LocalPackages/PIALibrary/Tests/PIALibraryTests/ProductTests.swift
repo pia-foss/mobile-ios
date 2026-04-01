@@ -21,13 +21,16 @@
 //
 
 import XCTest
+
 @testable import PIALibrary
 
 class ProductTests: XCTestCase {
 
     private let mock = MockProviders()
-    private let subscriptionProductIds = ["com.privateinternetaccess.subscription.1month",
-                                          "com.privateinternetaccess.subscription.1year"]
+    private let subscriptionProductIds = [
+        "com.privateinternetaccess.subscription.1month",
+        "com.privateinternetaccess.subscription.1year"
+    ]
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -55,9 +58,9 @@ class ProductTests: XCTestCase {
             expUpdate.fulfill()
         }
         waitForExpectations(timeout: 5.0, handler: nil)
-        
+
     }
-    
+
     func testMockTrialsUserNotEligible() {
         let expUpdate = expectation(description: "trials")
         mock.accountProvider.subscriptionInformation { subscriptionInfo, error in
@@ -76,9 +79,9 @@ class ProductTests: XCTestCase {
             XCTAssertFalse(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5.0, handler: nil)
-        
+
     }
 
     func testMockTrialsUserEligible() {
@@ -100,11 +103,11 @@ class ProductTests: XCTestCase {
             XCTAssertTrue(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5.0, handler: nil)
-        
+
     }
-    
+
     func testMockTrialsUserEligibleButTrialsDisabledOnBackend() {
         Client.useMockInAppProviderWithReceipt()
         let expUpdate = expectation(description: "trials_disabled_from_backend")
@@ -124,10 +127,9 @@ class ProductTests: XCTestCase {
             XCTAssertFalse(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5.0, handler: nil)
-        
+
     }
-    
-    
+
 }

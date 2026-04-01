@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AboutOptionsView: View {
     @ObservedObject var viewModel: AboutOptionsViewModel
-    
+
     var body: some View {
         HStack {
             helpSectionsView
@@ -21,7 +21,7 @@ struct AboutOptionsView: View {
         }
         .padding(.top, Spacing.screenTopPadding)
     }
-    
+
     var helpSectionsView: some View {
         List {
             ForEach(viewModel.sections, id: \.self) { section in

@@ -21,6 +21,7 @@
 //
 
 import XCTest
+
 @testable import PIALibrary
 
 class AccountSignupTests: XCTestCase {
@@ -38,11 +39,11 @@ class AccountSignupTests: XCTestCase {
         Client.bootstrap()
         Client.refreshProducts()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func testProducts() {
         if let products = live.accountProvider.planProducts {
             XCTAssertEqual(products.count, 2)
@@ -61,7 +62,7 @@ class AccountSignupTests: XCTestCase {
             waitForExpectations(timeout: 10.0, handler: nil)
         }
     }
-    
+
     func testPurchase() {
         let exp = expectation(description: "purchase")
         live.accountProvider.purchase(plan: .yearly) { (transaction, error) in

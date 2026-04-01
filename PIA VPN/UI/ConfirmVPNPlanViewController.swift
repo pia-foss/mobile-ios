@@ -20,12 +20,12 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import AuthenticationServices
-import PIALibrary
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
 
@@ -41,13 +41,13 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
     private var signupEmail: String?
     private var signupTransaction: InAppTransaction?
 
-    var config: Config! // TODO: should be made private when segue navigation is removed
+    var config: Config!  // TODO: should be made private when segue navigation is removed
     private var termsAndConditionsAgreed = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,11 +57,11 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
 
         labelTitle.text = L10n.Welcome.Purchase.Confirm.Form.email
         labelSubtitle.text = L10n.Welcome.Purchase.Email.why
-       
+
         textEmail.placeholder = L10n.Welcome.Purchase.Email.placeholder
         textEmail.text = config.metadata.email
         self.styleConfirmButton()
-        
+
         setupAppleSignInUI()
     }
 
@@ -100,9 +100,9 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         self.status = .restore(element: textEmail)
         self.showLoadingAnimation()
         self.disableInteractions()
-        
+
         log.debug("Account: Modifying account email...")
-        
+
         config.metadata.title = L10n.Signup.InProgress.title
         config.metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
         config.metadata.bodyTitle = L10n.Signup.Success.title
@@ -148,13 +148,13 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
     private func disableInteractions() {
         parent?.view.isUserInteractionEnabled = false
     }
-    
+
     private func enableInteractions() {
         parent?.view.isUserInteractionEnabled = true
     }
 
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         guard let identifier = segue.identifier, let segueType = StoryboardSegue.Signup(rawValue: identifier) else {
             return
         }
@@ -175,20 +175,20 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         }
 
     }
-    
+
     private func setupAppleSignInUI() {
         labelOr.text = L10n.Welcome.Purchase.or.uppercased()
         labelOr.textAlignment = .center
-        
+
         let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
         signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
-                    
+
         self.addEmailContainer.addSubview(signInWithAppleButton)
         self.addEmailContainer.addSubview(labelOr)
 
         labelOr.translatesAutoresizingMaskIntoConstraints = false
         signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             labelOr.topAnchor.constraint(equalTo: self.buttonConfirm.bottomAnchor, constant: 15),
             labelOr.leftAnchor.constraint(equalTo: self.addEmailContainer.leftAnchor),
@@ -206,15 +206,15 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
     @IBAction private func handleAuthorizationAppleID() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.email]
-        
+
         let controller = ASAuthorizationController(authorizationRequests: [request])
-        
+
         controller.delegate = self
         controller.presentationContextProvider = self
-        
+
         controller.performRequests()
     }
-    
+
     // MARK: Restylable
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
@@ -226,27 +226,28 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         Theme.current.applySubtitle(labelSubtitle)
         Theme.current.applySubtitle(labelOr)
     }
-    
+
     private func styleConfirmButton() {
         buttonConfirm.setRounded()
         buttonConfirm.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonConfirm.setTitle(L10n.Welcome.Purchase.submit.uppercased(),
-                               for: [])
+        buttonConfirm.setTitle(
+            L10n.Welcome.Purchase.submit.uppercased(),
+            for: [])
     }
 
 }
 
 extension ConfirmVPNPlanViewController: GDPRDelegate {
-    
+
     public func gdprViewWasAccepted() {
         termsAndConditionsAgreed = true
         presentTermsAndConditionsAndUpdateEmail()
     }
-    
+
     public func gdprViewWasRejected() {
         self.termsAndConditionsAgreed = false
     }
-    
+
 }
 
 extension ConfirmVPNPlanViewController: ASAuthorizationControllerPresentationContextProviding {

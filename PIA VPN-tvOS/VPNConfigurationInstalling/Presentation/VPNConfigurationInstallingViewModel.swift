@@ -13,24 +13,24 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType
     private let errorMapper: VPNConfigurationInstallingErrorMapper
     private let onSuccessAction: () -> Void
-    
+
     @Published var shouldShowErrorMessage = false
     @Published var installingStatus: VPNConfigurationInstallingStatus = .none
     var errorMessage: String?
-    
+
     init(installVPNConfiguration: InstallVPNConfigurationUseCaseType, errorMapper: VPNConfigurationInstallingErrorMapper, onSuccessAction: @escaping () -> Void) {
         self.installVPNConfiguration = installVPNConfiguration
         self.errorMapper = errorMapper
         self.onSuccessAction = onSuccessAction
     }
-    
+
     func install() {
         guard installingStatus != .isInstalling else {
             return
         }
-        
+
         installingStatus = .isInstalling
-        
+
         Task {
             do {
                 try await installVPNConfiguration()
@@ -40,7 +40,7 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
                 }
             } catch {
                 errorMessage = errorMapper.map(error: error)
-                
+
                 Task { @MainActor in
                     shouldShowErrorMessage = true
                     installingStatus = .failed(errorMessage: errorMessage)

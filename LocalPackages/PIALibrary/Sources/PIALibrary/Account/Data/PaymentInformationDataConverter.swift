@@ -1,4 +1,3 @@
-
 import Foundation
 
 protocol PaymentInformationDataConverterType {
@@ -9,14 +8,12 @@ class PaymentInformationDataConverter: PaymentInformationDataConverterType, JSON
 
     func callAsFunction(payment: Payment) -> Data? {
         let paymentInformation = PaymentInformation(
-            store: "apple_app_store", 
+            store: "apple_app_store",
             receipt: payment.receipt.base64EncodedString(),
             marketing: stringify(json: payment.marketing, prettyPrinted: false),
             debug: stringify(json: payment.debug, prettyPrinted: false)
         )
-        
+
         return paymentInformation.toData()
     }
 }
-
-

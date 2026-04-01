@@ -24,9 +24,9 @@ import Foundation
 
 protocol Daemon: class {
     var hasEnabledUpdates: Bool { get }
-    
+
     func start()
-    
+
     func enableUpdates()
 }
 

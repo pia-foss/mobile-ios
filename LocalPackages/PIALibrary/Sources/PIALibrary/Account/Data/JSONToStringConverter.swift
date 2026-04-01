@@ -1,6 +1,4 @@
-
 import Foundation
-
 
 protocol JSONToStringCoverterType {
     func stringify(json: [String: Any]?, prettyPrinted: Bool) -> String?
@@ -11,7 +9,7 @@ extension JSONToStringCoverterType {
         guard let json else {
             return nil
         }
-        
+
         var options: JSONSerialization.WritingOptions = []
         if prettyPrinted {
             options = JSONSerialization.WritingOptions.prettyPrinted
@@ -29,4 +27,3 @@ extension JSONToStringCoverterType {
         return nil
     }
 }
-

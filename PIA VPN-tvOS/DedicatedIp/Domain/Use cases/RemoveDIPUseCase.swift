@@ -18,7 +18,7 @@ class RemoveDIPUseCase: RemoveDIPUseCaseType {
     private let getDedicatedIP: GetDedicatedIpUseCaseType
     private let vpnCpnnectionUseCase: VpnConnectionUseCaseType
     private let selectedServer: ClientPreferencesType
-    
+
     init(dedicatedIpProvider: DedicatedIPProviderType, favoriteRegionsUseCase: FavoriteRegionUseCaseType, getDedicatedIP: GetDedicatedIpUseCaseType, vpnCpnnectionUseCase: VpnConnectionUseCaseType, selectedServer: ClientPreferencesType) {
         self.dedicatedIpProvider = dedicatedIpProvider
         self.favoriteRegionsUseCase = favoriteRegionsUseCase
@@ -26,16 +26,17 @@ class RemoveDIPUseCase: RemoveDIPUseCaseType {
         self.vpnCpnnectionUseCase = vpnCpnnectionUseCase
         self.selectedServer = selectedServer
     }
-    
+
     func callAsFunction() {
         guard let dedicatedIPServer = getDedicatedIP(),
-        let dipToken = dedicatedIPServer.dipToken else {
+            let dipToken = dedicatedIPServer.dipToken
+        else {
             return
         }
-        
+
         dedicatedIpProvider.removeDIPToken(dipToken)
         _ = try? favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
-        
+
         let selectedServer = selectedServer.selectedServer
         if selectedServer.identifier == dedicatedIPServer.identifier {
             Task {

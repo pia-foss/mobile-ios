@@ -9,17 +9,16 @@
 import XCTest
 
 extension XCUIApplication {
-    var welcomeLoginButton: XCUIElement {button(with: PIALibraryAccessibility.Id.Login.submitNew)}
-    var welcomeLoginButtonOldVersion: XCUIElement {button(with: PIALibraryAccessibility.Id.Login.submit)}
-    
+    var welcomeLoginButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submitNew) }
+    var welcomeLoginButtonOldVersion: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
+
     func navigateToLoginScreen() {
         if (welcomeLoginButton.waitForElementToAppear()) {
             welcomeLoginButton.tap()
-        }
-        else if (welcomeLoginButtonOldVersion.waitForElementToAppear()){
+        } else if (welcomeLoginButtonOldVersion.waitForElementToAppear()) {
             welcomeLoginButtonOldVersion.tap()
         }
-        
+
         XCTAssertTrue(loginButton.waitForElementToAppear())
     }
 }

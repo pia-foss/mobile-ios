@@ -13,7 +13,7 @@ protocol AppConstantsType {
     static var appId: String { get }
     static var teamId: String { get }
     static var appGroup: String { get }
-    
+
 }
 
 extension AppConstants: AppConstantsType {}

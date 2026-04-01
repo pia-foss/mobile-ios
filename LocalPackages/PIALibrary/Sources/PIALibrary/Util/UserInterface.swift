@@ -13,7 +13,7 @@ public struct UserInterface {
     public static var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
-    
+
     public static var isPhone: Bool {
         UIDevice.current.userInterfaceIdiom == .phone
     }

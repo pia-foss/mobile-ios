@@ -23,63 +23,65 @@
 import Foundation
 
 #if os(iOS) || os(tvOS)
-private final class MockProduct: InAppProduct {
-    let identifier: String
-    
-    let price: NSNumber
+    private final class MockProduct: InAppProduct {
+        let identifier: String
 
-    let priceLocale = Locale.current
+        let price: NSNumber
 
-    let native: Any? = nil
-    
-    init(_ identifier: String, _ price: NSNumber) {
-        self.identifier = identifier
-        self.price = price
-    }
-}
+        let priceLocale = Locale.current
 
-private final class MockTransaction: InAppTransaction {
-    let identifier: String? = "1234567890"
-    
-    let native: Any? = nil
-}
+        let native: Any? = nil
 
-final class MockInAppProvider: InAppProvider, ConfigurationAccess {
-    
-    init(with receipt: Data? = Data()) {
-        self.paymentReceipt = receipt
-    }
-    var availableProducts: [InAppProduct]?
-
-    var paymentReceipt: Data?
-
-    func startObservingTransactions() {
-    }
-    
-    func stopObservingTransactions() {
-    }
-    
-    func fetchProducts(identifiers: [String], _ callback: (([InAppProduct]?, Error?) -> Void)?) {
-        availableProducts = []
-        for (i, identifier) in accessedConfiguration.allProductIdentifiers().enumerated() {
-            let price = (Double(i + 1) * 50.0) as NSNumber
-            availableProducts?.append(MockProduct(identifier, price))
+        init(_ identifier: String, _ price: NSNumber) {
+            self.identifier = identifier
+            self.price = price
         }
-        callback?(availableProducts, nil)
-        Macros.postNotification(.__InAppDidFetchProducts, [
-            .products: availableProducts!
-        ])
-    }
-    
-    func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        callback?(MockTransaction(), nil)
     }
 
-    func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
+    private final class MockTransaction: InAppTransaction {
+        let identifier: String? = "1234567890"
+
+        let native: Any? = nil
     }
-    
-    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
-        callback?(nil)
+
+    final class MockInAppProvider: InAppProvider, ConfigurationAccess {
+
+        init(with receipt: Data? = Data()) {
+            self.paymentReceipt = receipt
+        }
+        var availableProducts: [InAppProduct]?
+
+        var paymentReceipt: Data?
+
+        func startObservingTransactions() {
+        }
+
+        func stopObservingTransactions() {
+        }
+
+        func fetchProducts(identifiers: [String], _ callback: (([InAppProduct]?, Error?) -> Void)?) {
+            availableProducts = []
+            for (i, identifier) in accessedConfiguration.allProductIdentifiers().enumerated() {
+                let price = (Double(i + 1) * 50.0) as NSNumber
+                availableProducts?.append(MockProduct(identifier, price))
+            }
+            callback?(availableProducts, nil)
+            Macros.postNotification(
+                .__InAppDidFetchProducts,
+                [
+                    .products: availableProducts!
+                ])
+        }
+
+        func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+            callback?(MockTransaction(), nil)
+        }
+
+        func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
+        }
+
+        func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
+            callback?(nil)
+        }
     }
-}
 #endif

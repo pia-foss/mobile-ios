@@ -11,9 +11,9 @@ import SwiftUI
 struct SearchControllerButton: View {
     let buttonAction: ButtonAction
     let buttonTitle: String
-    
+
     @FocusState var focusedSearchButton: Bool
-    
+
     var body: some View {
         Button {
             buttonAction()
@@ -32,15 +32,15 @@ struct SearchControllerButton: View {
                     Spacer()
                 }
                 .frame(height: 66)
-                
+
                 Spacer()
-                
+
             }
             .frame(height: 150)
             .overlay(
                 RoundedRectangle(cornerRadius: 20).stroke(Color.pia_outline, lineWidth: 2)
             )
-            
+
         }
         .focused($focusedSearchButton)
         .buttonStyle(.borderless)

@@ -12,9 +12,10 @@ class RefreshLatencyFactory {
     static var makeClientAdapter: ClientType = {
         ClientAdapter()
     }()
-    
+
     static var makeRefreshServersLatencyUseCase: RefreshServersLatencyUseCaseType = {
-        RefreshServersLatencyUseCase(client: makeClientAdapter, serverProvider: VpnConnectionFactory.makeServerProvider(), notificationCenter: NotificationCenter.default, connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor
+        RefreshServersLatencyUseCase(
+            client: makeClientAdapter, serverProvider: VpnConnectionFactory.makeServerProvider(), notificationCenter: NotificationCenter.default, connectionStateMonitor: StateMonitorsFactory.makeConnectionStateMonitor
         )
     }()
 }

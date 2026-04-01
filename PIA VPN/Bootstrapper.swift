@@ -21,15 +21,16 @@
 //
 
 import Foundation
-import PIALibrary
-#if canImport(TunnelKitCore)
-import TunnelKitCore
-import TunnelKitOpenVPN
-import PIAWireguard
-#endif
-import UIKit
 import Logging
+import PIALibrary
 import PIALocalizations
+import UIKit
+
+#if canImport(TunnelKitCore)
+    import TunnelKitCore
+    import TunnelKitOpenVPN
+    import PIAWireguard
+#endif
 
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
@@ -38,10 +39,10 @@ extension NSNotification.Name {
 final class Bootstrapper {
 
     static let shared = Bootstrapper()
-    
+
     private init() {
     }
-    
+
     private var isSimulator: Bool {
         #if targetEnvironment(simulator)
             return true
@@ -49,32 +50,32 @@ final class Bootstrapper {
             return false
         #endif
     }
-  
+
     /// Update the values of the flags from the CSI server
     private func updateFeatureFlagsForReleaseIfNeeded() {
         // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
         // So we skip updating the flag from the server on dev builds
 
         #if !STAGING
-       // Leak Protection feature flags
-        AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags[.showLeakProtection]
-        AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags[.showLeakProtectionNotifications]
+            // Leak Protection feature flags
+            AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags[.showLeakProtection]
+            AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags[.showLeakProtectionNotifications]
 
-        // DynamicIsland LiveActivity
-        AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags[.showDynamicIslandLiveActivity]
+            // DynamicIsland LiveActivity
+            AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags[.showDynamicIslandLiveActivity]
         #endif
     }
 
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
-            
+
             #if DEVELOPMENT || STAGING
-            handler.logLevel = .debug
+                handler.logLevel = .debug
             #else
-            handler.logLevel = .info
+                handler.logLevel = .info
             #endif
-            
+
             return MultiplexLogHandler([
                 handler,
                 PIALogHandler(label: label)
@@ -86,7 +87,7 @@ final class Bootstrapper {
 
         // Force enable debug logging for DEVELOPMENT and STAGING builds
         #if DEVELOPMENT || STAGING
-        Client.preferences.debugLogging = true
+            Client.preferences.debugLogging = true
         #endif
 
         // Check if should clean the account after delete the app and install again
@@ -99,51 +100,51 @@ final class Bootstrapper {
         AppPreferences.shared.migrateNMT()
 
         // PIALibrary
-    #if os(iOS)
-        guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
-            fatalError("Could not find bundled regions file")
-        }
-        let bundledServersJSON: Data
-        do {
-            try bundledServersJSON = Data(contentsOf: bundledRegionsURL)
-        } catch let e {
-            fatalError("Could not parse bundled regions file: \(e)")
-        }
-    #endif
+        #if os(iOS)
+            guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
+                fatalError("Could not find bundled regions file")
+            }
+            let bundledServersJSON: Data
+            do {
+                try bundledServersJSON = Data(contentsOf: bundledRegionsURL)
+            } catch let e {
+                fatalError("Could not parse bundled regions file: \(e)")
+            }
+        #endif
 
         Client.configuration.rsa4096Certificate = rsa4096Certificate()
 
-    #if STAGING
-        Client.environment = .staging
-        Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
-    #else
-        Client.environment = .production
-        Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
-    #endif
-        
+        #if STAGING
+            Client.environment = .staging
+            Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
+        #else
+            Client.environment = .production
+            Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
+        #endif
+
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
         Client.configuration.enablesServerPings = true
-    #if os(iOS)
-        Client.configuration.bundledServersJSON = bundledServersJSON
-    #endif
+        #if os(iOS)
+            Client.configuration.bundledServersJSON = bundledServersJSON
+        #endif
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
-    #if os(iOS)
-        Client.configuration.addVPNProfile(IKEv2Profile())
-        Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-        Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
-    #endif
+        #if os(iOS)
+            Client.configuration.addVPNProfile(IKEv2Profile())
+            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+            Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+        #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
-    #if os(iOS)
-        defaults.vpnCustomConfigurations = [
-            PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
-            PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
-        ]
-    #endif
-        
+        #if os(iOS)
+            defaults.vpnCustomConfigurations = [
+                PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
+                PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
+            ]
+        #endif
+
         if Client.preferences.shareServiceQualityData {
             ServiceQualityManager.shared.start()
         } else {
@@ -154,34 +155,36 @@ final class Bootstrapper {
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
             AppPreferences.shared.disablesMultiDipTokens = Client.configuration.featureFlags[.disableMultiDipTokens]
 
-
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
             self.updateFeatureFlagsForReleaseIfNeeded()
-            
+
             self.checkForceUpdateIfNeeded()
         }
 
         //FORCE THE MIGRATION TO GEN4
-    #if os(iOS)
-        if Client.providers.vpnProvider.needsMigrationToGEN4() {
+        #if os(iOS)
+            if Client.providers.vpnProvider.needsMigrationToGEN4() {
 
-            Client.preferences.displayedServer = Server.automatic
-            NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                            object: self,
-                                            userInfo: nil)
-            Client.providers.vpnProvider.reconnect(after: 200, forceDisconnect: true, { _ in
-            })
-        }
-    #endif
+                Client.preferences.displayedServer = Server.automatic
+                NotificationCenter.default.post(
+                    name: .PIAThemeDidChange,
+                    object: self,
+                    userInfo: nil)
+                Client.providers.vpnProvider.reconnect(
+                    after: 200, forceDisconnect: true,
+                    { _ in
+                    })
+            }
+        #endif
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
-            
+
             if let _ = error {
                 self?.setDefaultPlanProducts()
             }
-            
+
             if let info = info {
-            
+
                 if info.products.count > 0 {
                     for product in info.products {
                         if !product.legacy {
@@ -212,46 +215,46 @@ final class Bootstrapper {
         // Configurations
 
         RatingManager.shared.loadInAppRatingConfig()
-        
+
         // Preferences
-        
+
         let pref = Client.preferences.editable()
-        
+
         // as per App Store guidelines
         if !Flags.shared.enablesMACESetting {
             pref.mace = false
         }
-        
+
         pref.commit()
         #if os(iOS)
-        AppPreferences.shared.migrateOVPN()
-        AppPreferences.shared.migrateWireguard()
-        
-        // Business objects
-        
-        AccountObserver.shared.start()
+            AppPreferences.shared.migrateOVPN()
+            AppPreferences.shared.migrateWireguard()
+
+            // Business objects
+
+            AccountObserver.shared.start()
         //        DataCounter.shared.startCounting()
         #endif
         // Notifications
-        
+
         let nc = NotificationCenter.default
         #if os(iOS)
-        nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeDidChange, object: nil)
+            nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeDidChange, object: nil)
         #endif
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(internetUnreachable(notification:)), name: .ConnectivityDaemonDidGetUnreachable, object: nil)
         nc.addObserver(self, selector: #selector(internetReachable(notification:)), name: .ConnectivityDaemonDidGetReachable, object: nil)
-        
+
         // PIALibrary (Theme)
         #if os(iOS)
-        AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
+            AppPreferences.shared.currentThemeCode.apply(theme: Theme.current, reload: true)
         #endif
-        
+
         // show walkthrough on upgrade except for logged in users
         if Client.providers.accountProvider.isLoggedIn {
             AppPreferences.shared.wasLaunched = true
         }
-        
+
         // Check the DIP token for renewal
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
@@ -259,7 +262,7 @@ final class Bootstrapper {
 
         setupExceptionHandler()
     }
-    
+
     private func setDefaultPlanProducts() {
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
@@ -268,32 +271,32 @@ final class Bootstrapper {
     func dispose() {
         Client.dispose()
     }
-    
+
     private func setupExceptionHandler() {
         NSSetUncaughtExceptionHandler { exception in
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
     }
-    
+
     // MARK: Certificate
 
     func rsa4096Certificate() -> String? {
         #if os(iOS)
-        return AppPreferences.shared.piaHandshake.pemString()
+            return AppPreferences.shared.piaHandshake.pemString()
         #else
-        // FIXME: Implement for tvOS
-        return nil
+            // FIXME: Implement for tvOS
+            return nil
         #endif
     }
-    
+
     // MARK: Notifications
-#if os(iOS)
-    @objc private func reloadTheme() {
-        Theme.current.applySideMenu()
-        Theme.current.applyAppearance()
-    }
-#endif
+    #if os(iOS)
+        @objc private func reloadTheme() {
+            Theme.current.applySideMenu()
+            Theme.current.applyAppearance()
+        }
+    #endif
     @objc private func vpnStatusDidChange(notification: Notification) {
         let vpnStatus = Client.providers.vpnProvider.vpnStatus
         switch vpnStatus {
@@ -305,20 +308,21 @@ final class Bootstrapper {
             break
         }
         #if os(iOS)
-        RatingManager.shared.handleConnectionStatusChanged()
+            RatingManager.shared.handleConnectionStatusChanged()
         #endif
     }
-    
+
     @objc private func internetReachable(notification: Notification) {
         #if os(iOS)
-        Macros.removeStickyNote()
+            Macros.removeStickyNote()
         #endif
     }
-    
+
     @objc private func internetUnreachable(notification: Notification) {
         #if os(iOS)
-        Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
-                                 andImage: Asset.Images.iconWarning.image)
+            Macros.displayStickyNote(
+                withMessage: L10n.Global.unreachable,
+                andImage: Asset.Images.iconWarning.image)
         #endif
     }
 }

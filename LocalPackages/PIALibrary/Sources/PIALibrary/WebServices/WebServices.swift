@@ -35,7 +35,7 @@ protocol WebServices: AnyObject {
     func token(credentials: Credentials, _ callback: SuccessLibraryCallback?)
 
     func token(receipt: Data, _ callback: SuccessLibraryCallback?)
-    
+
     func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?)
 
     func info(_ callback: LibraryCallback<AccountInfo>?)
@@ -49,11 +49,11 @@ protocol WebServices: AnyObject {
 
     /// The token to use for api authentication.
     var apiToken: String? { get }
-    
+
     // MARK: DIP Token
-    
+
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
-    
+
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?)
 
     /**
@@ -67,15 +67,15 @@ protocol WebServices: AnyObject {
          - Parameter callback: Returns an `Bool` if the API returns a success.
      */
     func deleteAccount(_ callback: LibraryCallback<Bool>?)
-    
-    #if os(iOS) || os(tvOS)
-    func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
 
-    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
+    #if os(iOS) || os(tvOS)
+        func signup(with request: Signup, _ callback: LibraryCallback<Credentials>?)
+
+        func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?)
     #endif
 
     // MARK: Store
-    
+
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?)
 
     // MARK: Ephemeral

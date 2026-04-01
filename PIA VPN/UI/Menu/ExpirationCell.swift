@@ -20,21 +20,21 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
-import PIAUIKit
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 class ExpirationCell: UITableViewCell, Restylable {
     @IBOutlet private weak var labelWarning: UILabel!
-    
+
     @IBOutlet private weak var labelUpgrade: UILabel!
-    
+
     @IBOutlet private weak var imvAccessory: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         labelUpgrade.text = L10n.Menu.Expiration.upgrade
         imvAccessory.image = Asset.Images.accessoryExpire.image.withRenderingMode(.alwaysTemplate)
         imvAccessory.tintColor = .white
@@ -51,21 +51,21 @@ class ExpirationCell: UITableViewCell, Restylable {
         } else {
             timeLeftString = L10n.Menu.Expiration.oneHour
         }
-        
+
         let prefix = L10n.Menu.Expiration.expiresIn
         labelWarning.text = "\(prefix) \(timeLeftString)".uppercased()
     }
 
     // MARK: Restylable
-    
+
     func viewShouldRestyle() {
         let backgroundView = UIView()
         self.backgroundView = backgroundView
-        
+
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyWarningMenuBackground(backgroundView)
         Theme.current.applyMenuCaption(labelWarning)
         Theme.current.applyMenuSmallCaption(labelUpgrade)
-        labelUpgrade.textColor = .white // XXX
+        labelUpgrade.textColor = .white  // XXX
     }
 }

@@ -9,14 +9,14 @@ import Foundation
 import csi
 
 final class PIACSILastKnownExceptionProvider: ICSIProvider {
-    
+
     var filename: String? { return "last_known_exception" }
-    
+
     var isPersistedData: Bool { return true }
-    
+
     var providerType: ProviderType { return ProviderType.lastKnownException }
-    
+
     var reportType: ReportType { return ReportType.crash }
-    
+
     var value: String? { return Client.preferences.lastKnownException }
 }
