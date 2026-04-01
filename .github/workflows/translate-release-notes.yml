@@ -44,7 +44,7 @@ jobs:
 
       - name: Translate release notes
         env:
-          ANTHROPIC_API_KEY_TRANSLATIONS: ${{ secrets.ANTHROPIC_API_KEY_TRANSLATIONS }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           bundle exec fastlane translate_release_notes platform:${{ inputs.platform }}
 
