@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PIAAssetsWidget
 
 internal struct PIACircleVpnButton: View {
 
@@ -30,7 +31,7 @@ internal struct PIACircleVpnButton: View {
             .strokeBorder(Color("BorderColor"), lineWidth: strokeWidth * 0.75)
             .background(Circle()
                 .strokeBorder(color, lineWidth: strokeWidth)
-                .background(Image("vpn-button")
+                .background(Asset.vpnButton.swiftUIImage
                     .resizable()
                     .renderingMode(.template)
                     .foregroundColor(color)

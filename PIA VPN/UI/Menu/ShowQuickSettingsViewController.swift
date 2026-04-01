@@ -24,6 +24,7 @@
 import UIKit
 import PIALibrary
 import PIALocalizations
+import PIAAssetsMobile
 
 private enum QuickSettingOptions: Int {
     case theme = 0

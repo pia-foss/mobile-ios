@@ -23,6 +23,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIALocalizations
+import PIAAssetsMobile
 
 class NetworkFooterCollectionViewCell: UICollectionViewCell {
 

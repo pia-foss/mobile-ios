@@ -8,14 +8,15 @@ platform :ios do
   key_content = ENV['APP_STORE_CONNECT_KEY']
 
   # Claude API key for translations
-  anthropic_api_key = ENV['ANTHROPIC_API_KEY_TRANSLATIONS']
+  anthropic_api_key = ENV['ANTHROPIC_API_KEY']
   anthropic_model = "claude-sonnet-4-5"
 
   lane :iOStests do
     run_tests(
       scheme: "PIA VPN Development",
       output_directory: "fastlane/test_output",
-      result_bundle: true
+      result_bundle: true,
+      destination: "platform=iOS Simulator,name=iPhone 17 Pro"
     )
   end
 
@@ -23,7 +24,8 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN-tvOS Development",
       output_directory: "fastlane/test_output",
-      result_bundle: true
+      result_bundle: true,
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 
@@ -31,7 +33,7 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN Development",
       testplan: "PIA-VPN-e2e-simulator",
-      devices: ["iPhone 16"],
+      destination: "platform=iOS Simulator,name=iPhone 17 Pro",
       prelaunch_simulator: true,
       test_without_building: true
     )
@@ -43,7 +45,7 @@ platform :ios do
       testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
-      device: "Apple TV"
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 
@@ -53,7 +55,7 @@ platform :ios do
       testplan: "PIA VPN-tvOS snapshot",
       test_without_building: true,
       prelaunch_simulator: true,
-      device: "Apple TV"
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 
@@ -259,18 +261,21 @@ platform :ios do
   end
 
   desc "Update What's New text for all languages from metadata folder"
-  desc "Usage: fastlane update_release_notes"
+  desc "Usage: fastlane update_release_notes platform:ios|tvos"
   desc "Edit fastlane/metadata/{locale}/release_notes.txt files before running this lane"
-  lane :update_release_notes do
+  lane :update_release_notes do |options|
+    platform = options[:platform] || "ios"
+    is_tvos = platform == "tvos"
+
     api_key = app_store_connect_api_key(
       key_id: key_id,
       issuer_id: issuer_id,
       key_content: key_content
     )
 
-    UI.message("Uploading release notes from fastlane/metadata/ folder...")
+    UI.message("Uploading release notes from fastlane/metadata/ folder (platform: #{platform})...")
 
-    deliver(
+    deliver_options = {
       api_key: api_key,
       app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
       skip_binary_upload: true,
@@ -278,26 +283,38 @@ platform :ios do
       skip_metadata: false,
       force: true,
       precheck_include_in_app_purchases: false
-    )
+    }
+
+    if is_tvos
+      deliver_options[:platform] = "appletvos"
+      deliver_options[:metadata_path] = "./fastlane/metadata/tvos"
+    else
+      deliver_options[:metadata_path] = "./fastlane/metadata/ios"
+    end
+
+    deliver(deliver_options)
 
     UI.success("Successfully updated What's New text for all languages!")
   end
 
   desc "Translate release notes from English to all supported languages using Claude"
-  desc "Usage: fastlane translate_release_notes"
-  desc "Reads fastlane/metadata/en-US/release_notes.txt and translates to all locales"
-  lane :translate_release_notes do
+  desc "Usage: fastlane translate_release_notes platform:ios|tvos"
+  desc "Reads fastlane/metadata/en-US/release_notes.txt (or apple_tv/en-US for tvOS) and translates to all locales"
+  lane :translate_release_notes do |options|
     require 'net/http'
     require 'json'
     require 'uri'
     require 'fileutils'
 
+    platform = options[:platform] || "ios"
+    metadata_base = platform == "tvos" ? "../fastlane/metadata/tvos" : "../fastlane/metadata/ios"
+
     if anthropic_api_key.nil? || anthropic_api_key.empty?
-      UI.user_error!("ANTHROPIC_API_KEY_TRANSLATIONS environment variable not set. Please set it before running this lane.")
+      UI.user_error!("ANTHROPIC_API_KEY environment variable not set. Please set it before running this lane.")
     end
 
     # Read the English release notes
-    english_notes_path = "../fastlane/metadata/en-US/release_notes.txt"
+    english_notes_path = "#{metadata_base}/en-US/release_notes.txt"
     unless File.exist?(english_notes_path)
       UI.user_error!("English release notes not found at #{english_notes_path}")
     end
@@ -334,7 +351,7 @@ platform :ios do
 
       # For English variants, just copy the source text
       if locale.start_with?("en-")
-        target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+        target_path = "#{metadata_base}/#{locale}/release_notes.txt"
         FileUtils.mkdir_p(File.dirname(target_path))
         File.write(target_path, english_text)
         UI.success("Copied to #{locale}")
@@ -374,7 +391,7 @@ platform :ios do
           translated_text = result['content'][0]['text'].strip
 
           # Write to the locale's release_notes.txt
-          target_path = "../fastlane/metadata/#{locale}/release_notes.txt"
+          target_path = "#{metadata_base}/#{locale}/release_notes.txt"
           FileUtils.mkdir_p(File.dirname(target_path))
           File.write(target_path, translated_text)
 

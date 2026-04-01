@@ -4,6 +4,8 @@ import PIADashboard
 import PIALibrary
 import Combine
 import PIALocalizations
+import PIAAssetsTV
+import SwiftUI
 
 
 final class SelectedServerViewModel: ObservableObject {
@@ -41,26 +43,17 @@ final class SelectedServerViewModel: ObservableObject {
         updateState()
     }
     
-    private var focusedAutomaticServerIconName: String {
-        .smart_location_icon_highlighted_name
-    }
-    
-    private var unfocusedAutomaticServerIconName: String {
-        .smart_location_icon_name
-    }
-    
-    func iconImageNameFor(focused: Bool) -> String {
-        guard let currentServer = selectedServer else { return "" }
-        
+    func iconImageFor(focused: Bool) -> Image {
+        guard let currentServer = selectedServer else { return Asset.iconSmartLocation.swiftUIImage }
+
         if getDedicatedIpUseCase.isDedicatedIp(currentServer) {
-            return .icon_dip_location
+            return Asset.iconDipLocation.swiftUIImage
         }
-        
+
         if currentServer.isAutomatic {
-          let autoIcon =  focused ? focusedAutomaticServerIconName : unfocusedAutomaticServerIconName
-            return autoIcon
+            return focused ? Asset.iconSmartLocationHighlighted.swiftUIImage : Asset.iconSmartLocation.swiftUIImage
         } else {
-            return "flag-\(currentServer.country.lowercased())"
+            return Asset.flag(forCountry: currentServer.country) ?? Asset.iconSmartLocation.swiftUIImage
         }
     }
     

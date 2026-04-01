@@ -26,6 +26,7 @@ import WidgetKit
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class ConnectionTile: UIView, Tileable  {
     
@@ -45,6 +46,13 @@ class ConnectionTile: UIView, Tileable  {
     @IBOutlet private weak var encryptionLabel: UILabel!
     @IBOutlet private weak var socketLabel: UILabel!
     @IBOutlet private weak var handshakeLabel: UILabel!
+
+    @IBOutlet private weak var protocolIcon: UIImageView!
+    @IBOutlet private weak var portIcon: UIImageView!
+    @IBOutlet private weak var authenticationIcon: UIImageView!
+    @IBOutlet private weak var encryptionIcon: UIImageView!
+    @IBOutlet private weak var socketIcon: UIImageView!
+    @IBOutlet private weak var handshakeIcon: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,6 +76,13 @@ class ConnectionTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+
+        protocolIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconProtocol.image
+        portIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconPort.image
+        authenticationIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconAuthentication.image
+        encryptionIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconEncryption.image
+        socketIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconSocket.image
+        handshakeIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconHandshake.image
 
         setConnectionValues()
         viewShouldRestyle()

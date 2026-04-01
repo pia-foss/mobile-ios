@@ -3,6 +3,7 @@ import WidgetKit
 import SwiftUI
 import PIALibrary
 import PIALocalizations
+import PIAAssetsWidget
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {
@@ -15,10 +16,10 @@ struct PIAConnectionActivityWidget: Widget {
             // Dynamic Island.
             VStack {
                 HStack(alignment: .bottom, spacing: 4) {
-                    Image("ios-widget")
+                    Asset.iosWidget.swiftUIImage
                         .resizable()
                         .frame(width: 16, height: 22)
-                    Image("PIA-logo")
+                    Asset.piaLogo.swiftUIImage
                         .resizable()
                         .frame(width: 30, height: 14)
                         .padding(.bottom, 1)
@@ -34,14 +35,14 @@ struct PIAConnectionActivityWidget: Widget {
             DynamicIsland {
                 // This content will be shown when user expands the island
                 DynamicIslandExpandedRegion(.leading, priority: 300) {
-                    PIACircleImageView(size: 46, image: context.state.regionFlag, contentMode: .fill)
+                    PIACircleImageView(size: 46, image: Image(context.state.regionFlag), contentMode: .fill)
                 }
                 
                 DynamicIslandExpandedRegion(.trailing, priority: 200) {
                     Link(destination: URL(string: AppConstants.Widget.connect)!) {
                         PIACircleImageView(
                             size: 50,
-                            image: context.state.connected ? "connected-button" : "disconnected-button"
+                            image: context.state.connected ? Asset.connectedButton.swiftUIImage : Asset.disconnectedButton.swiftUIImage
                         )
 
                     }
@@ -72,7 +73,7 @@ struct PIAConnectionActivityWidget: Widget {
                 // When the island is wider than the display cutout
                 PIACircleImageView(
                     size: 24,
-                    image: context.state.connected ? "green-checkmark" : "disconnected-cross"
+                    image: context.state.connected ? Asset.greenCheckmark.swiftUIImage : Asset.disconnectedCross.swiftUIImage
                 )
             } minimal: {
                 // This is used when there are multiple activities

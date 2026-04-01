@@ -26,6 +26,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import FXPageControl
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: Theme.self)
 

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct ExpiredAccountView: View {
     var viewModel: ExpiredAccountViewModel
@@ -66,7 +67,7 @@ struct ExpiredAccountView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 0))
                 
-                Image.signup_setup_screen
+                Asset.setupScreen.swiftUIImage
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing)
             }

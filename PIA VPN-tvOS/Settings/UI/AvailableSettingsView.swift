@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 
 struct AvailableSettingsView: View {
     @ObservedObject var viewModel: AvailableSettingsViewModel
@@ -18,7 +19,7 @@ struct AvailableSettingsView: View {
         HStack {
             availableSettingsList
             Spacer()
-            Image.pia_settings_bg_image
+            Asset.settingsBgImage.swiftUIImage
                 .frame(width: 840)
                 .aspectRatio(contentMode: .fit)
         }

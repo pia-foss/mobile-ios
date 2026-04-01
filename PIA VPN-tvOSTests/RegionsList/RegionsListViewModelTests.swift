@@ -330,45 +330,4 @@ class RegionsListViewModelTests: XCTestCase {
         XCTAssertFalse(fixture.favoriteRegionsUseCaseMock.addToFavoritesCalled)
     }
     
-    func test_iconImageNameForNonDedicatedIpServer() {
-        instantiateSut()
-        
-        // GIVEN that 'Madrid' is not a DIP server
-        // WHEN getting the icon image name
-        let nonDipIconImageName = sut.getIconImageName(for: Fixture.madrid)
-        
-        // THEN the icon image name for both focused and unfocused states is
-        XCTAssertEqual(nonDipIconImageName.focused, "flag-es")
-        XCTAssertEqual(nonDipIconImageName.unfocused, "flag-es")
-    }
-    
-    
-    func test_iconImageNameForDedicatedIpServer() {
-        // GIVEN that 'Toronto' is a DIP server
-        fixture.stubGetDedicatedIpServer(dipServer: Fixture.toronto)
-        
-        instantiateSut()
-        
-        // WHEN getting the icon image name
-        let dipIconName = sut.getIconImageName(for: Fixture.toronto)
-        
-        // THEN the icon image name for both focused and unfocused states is
-        XCTAssertEqual(dipIconName.focused, .icon_dip_location)
-        XCTAssertEqual(dipIconName.unfocused, .icon_dip_location)
-    }
-    
-    
-    func test_iconImageNameForOptimalLocation() {
-        
-        instantiateSut()
-        
-        // WHEN getting the icon image name for the Optimal Location (Automatic)
-        let dipIconName = sut.getIconImageName(for: Fixture.optimaLocation)
-        
-        // THEN the icon image names for focused and unfocused states are
-        XCTAssertEqual(dipIconName.focused, .smart_location_icon_highlighted_name)
-        XCTAssertEqual(dipIconName.unfocused, .smart_location_icon_name)
-    }
-    
-    
 }

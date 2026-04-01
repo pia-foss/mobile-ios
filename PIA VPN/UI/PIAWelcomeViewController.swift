@@ -24,6 +24,7 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
 

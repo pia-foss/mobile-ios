@@ -15,17 +15,17 @@ internal struct PIAWidgetVpnDetaislRow: View {
     private let iconsSize: CGFloat = 25.0
     private let rowSpacing: CGFloat = 0.0
 
-    internal let iconName: String
+    internal let icon: Image
     internal let text: String
 
-    init(iconName: String, text: String) {
-        self.iconName = iconName
+    init(icon: Image, text: String) {
+        self.icon = icon
         self.text = text
     }
 
     var body: some View {
             HStack(alignment: .center, spacing: rowSpacing) {
-                Image(iconName)
+                icon
                     .resizable()
                     .frame(width: iconsSize, height: iconsSize, alignment: .leading)
                 Spacer()

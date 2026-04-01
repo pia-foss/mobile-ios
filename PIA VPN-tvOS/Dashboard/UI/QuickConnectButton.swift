@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 
 struct QuickConnectButton: View {
     @ObservedObject var viewModel: QuickConnectButtonViewModel
@@ -19,7 +20,7 @@ struct QuickConnectButton: View {
             viewModel.connectButtonDidTap()
         } label: {
             VStack(spacing: 8) {
-                Image(viewModel.flagName)
+                viewModel.flagImage
                     .resizable()
                     .frame(width: size, height: size)
                 Text(viewModel.titleText)

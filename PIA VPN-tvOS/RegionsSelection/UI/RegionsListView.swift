@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 import PIALibrary
 
 struct RegionsListView: View {
@@ -19,7 +20,7 @@ struct RegionsListView: View {
     
     private func contextMenuItem(for server: ServerType) -> RegionsListItemButton.ContextMenuItem {
         RegionsListItemButton.ContextMenuItem.item(
-            label: RegionsListItemButton.ContextMenuLabel(title: viewModel.favoriteContextMenuTitle(for: server), iconName: viewModel.favoriteIconName(for: server)),
+            label: RegionsListItemButton.ContextMenuLabel(title: viewModel.favoriteContextMenuTitle(for: server), iconImage: viewModel.favoriteIconImage(for: server)),
             action: {
                 viewModel.toggleFavorite(server: server)
             })
@@ -39,7 +40,7 @@ struct RegionsListView: View {
                         .foregroundColor(Color.pia_on_surface_container_secondary)
                 }
                 if viewModel.isEmptySearchResultsVisible {
-                    Image.empty_search_bg_image
+                    Asset.emptySearchBgImage.swiftUIImage
                         .scaledToFit()
                         .frame(width: 1369, height: 738)
                         .padding()
@@ -62,14 +63,15 @@ struct RegionsListView: View {
                     onRegionItemSelected: {
                         viewModel.didSelectRegionServer(server)
                     },
-                    iconName: viewModel.getIconImageName(for: server).unfocused,
-                    highlightedIconName: viewModel.getIconImageName(for: server).focused,
+                    iconImage: viewModel.getIconImage(for: server).unfocused,
+                    highlightedIconImage: viewModel.getIconImage(for: server).focused,
                     title: viewModel.getDisplayName(for: server).title,
                     subtitle: viewModel.getDisplayName(for: server).subtitle,
-                    favoriteIconName: viewModel.favoriteIconName(for: server),
+                    favoriteIconImage: viewModel.favoriteIconImage(for: server),
+                    isFavorite: viewModel.isFavoriteServer(server),
                     contextMenuItem: contextMenuItem(for: server)
                 )
-                
+
             }
         }
     }
@@ -95,14 +97,15 @@ extension RegionsListView {
                         onRegionItemSelected: {
                             viewModel.didSelectRegionServer(server)
                         },
-                        iconName: server.dipToken == nil ? .smart_location_icon_name : .icon_dip_location,
-                        highlightedIconName: server.dipToken == nil ? .smart_location_icon_highlighted_name : .icon_dip_location,
+                        iconImage: server.dipToken == nil ? Asset.iconSmartLocation.swiftUIImage : Asset.iconDipLocation.swiftUIImage,
+                        highlightedIconImage: server.dipToken == nil ? Asset.iconSmartLocationHighlighted.swiftUIImage : Asset.iconDipLocation.swiftUIImage,
                         title: viewModel.getDisplayName(for: server).title,
                         subtitle: viewModel.getDisplayName(for: server).subtitle,
-                        favoriteIconName: viewModel.favoriteIconName(for: server),
+                        favoriteIconImage: viewModel.favoriteIconImage(for: server),
+                        isFavorite: viewModel.isFavoriteServer(server),
                         contextMenuItem: contextMenuItem(for: server)
                     )
-                    
+
                 }
             }
         }

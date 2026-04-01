@@ -2,6 +2,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 
 struct PIAConnectionButton: View {
@@ -56,7 +57,7 @@ struct PIAConnectionButton: View {
     }
     
     func connectionStatusInnerImage() -> some View {
-        Image.connect_inner_button
+        Asset.connectInnerButton.swiftUIImage
             .foregroundColor(viewModel.animating ? viewModel.tintColor : isFocused ? Color.pia_background : viewModel.tintColor)
             .frame(width: 128, height: 128)
     }

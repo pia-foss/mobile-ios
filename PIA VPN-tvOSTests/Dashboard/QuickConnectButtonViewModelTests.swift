@@ -29,18 +29,6 @@ final class QuickConnectButtonViewModelTests: XCTestCase {
         sut = QuickConnectButtonViewModel(server: fixture.serverMock, getDedicatedIpUseCase: fixture.getDedicatedIpUseCaseMock, delegate: fixture.spyDelegate)
     }
     
-    func test_displayedFlag_whenButtonCreated() {
-        // GIVEN that the server country is 'ES'
-        fixture.serverMock.country = "ES"
-        
-        // WHEN the Quick Connect button is created
-        initializeSut()
-        
-        // THEN the flag displayed is 'flag-es'
-        XCTAssertEqual(sut.flagName, "flag-es")
-        
-    }
-    
     func test_quickConnectButtonAction() {
         // GIVEN that the server is "Canada-Toronto"
         fixture.serverMock.country = "CA"

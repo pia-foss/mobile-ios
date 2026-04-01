@@ -10,6 +10,7 @@ import UIKit
 import PIALibrary
 import PIADesignSystem
 import PIAUIKit
+import PIAAssetsMobile
 
 class PIACard: UIView {
 

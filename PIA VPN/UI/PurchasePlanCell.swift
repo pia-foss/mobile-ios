@@ -25,6 +25,7 @@ import PIALibrary
 import PIAUIKit
 import StoreKit
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: PurchasePlanCell.self)
 
@@ -51,6 +52,8 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        unselectedPlanImageView.image = Asset.Ui.Piax.Global.planUnselected.image
+        selectedPlanImageView.image = Asset.Ui.Piax.Global.planSelected.image
         isSelected = false
         selectedPlanImageView.alpha = 0
         self.accessibilityTraits = UIAccessibilityTraits.button

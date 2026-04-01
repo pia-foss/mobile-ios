@@ -8,12 +8,13 @@
 
 import Foundation
 import SwiftUI
+import PIAAssetsTV
 
 struct LoginLoadingView: View {
     var body: some View {
         VStack {
             VStack(alignment: .center, spacing: 70) {
-                Image.loading_pia_brand
+                Asset.loadingPiaBrand.swiftUIImage
                 ProgressView()
                     .progressViewStyle(.circular)
                     .scaleEffect(1.74)

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIAAssetsTV
 
 struct AboutOptionsView: View {
     @ObservedObject var viewModel: AboutOptionsViewModel
@@ -15,7 +16,7 @@ struct AboutOptionsView: View {
         HStack {
             helpSectionsView
             Spacer()
-            Image.pia_help_bg_image
+            Asset.helpBgImage.swiftUIImage
                 .frame(width: 840)
                 .aspectRatio(contentMode: .fit)
         }

@@ -1,5 +1,6 @@
 
 import SwiftUI
+import PIAAssetsTV
 
 struct SelectedServerView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -9,7 +10,7 @@ struct SelectedServerView: View {
     
     private func buttonView() -> some View {
         HStack(alignment: .center, spacing: 10) {
-            Image(viewModel.iconImageNameFor(focused: isButtonFocused))
+            viewModel.iconImageFor(focused: isButtonFocused)
                 .resizable()
                 .frame(width: 80, height: 80)
             VStack(alignment: .leading) {

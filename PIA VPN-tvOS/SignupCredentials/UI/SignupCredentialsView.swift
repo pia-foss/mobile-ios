@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct SignupCredentialsView: View {
     let credentials: Credentials
@@ -16,7 +17,7 @@ struct SignupCredentialsView: View {
         HStack {
             VStack(alignment: .center, spacing: 60) {
                 
-                Image.onboarding_pia_brand
+                Asset.piaBrand.swiftUIImage
                 
                 Text(L10n.Tvos.Signup.Credentials.title)
                     .font(.system(size: 76))
@@ -25,7 +26,7 @@ struct SignupCredentialsView: View {
                 Spacer()
                 
                 VStack {
-                    Image.signup_credentials
+                    Asset.signupCredentials.swiftUIImage
                         .frame(maxWidth: .infinity)
                         .padding(EdgeInsets(top: 50, leading: 60, bottom: 60, trailing: 60))
                 }

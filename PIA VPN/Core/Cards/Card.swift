@@ -20,6 +20,7 @@
 //
 
 import UIKit
+import PIAAssetsMobile
 
 class Card: Collectable {
     
