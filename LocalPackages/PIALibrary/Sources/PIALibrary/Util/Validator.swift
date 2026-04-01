@@ -33,7 +33,7 @@ public class Validator {
 
     /**
      Validates an email address.
-    
+     
      - Parameter email: The email address to validate.
      - Throws: A `EmailValidationError` if validation fails.
      */

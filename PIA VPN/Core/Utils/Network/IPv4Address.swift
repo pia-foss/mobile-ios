@@ -10,13 +10,13 @@ import Foundation
 import Network
 
 extension IPv4Address {
-
+    
     /// https://datatracker.ietf.org/doc/html/rfc1918
     public var isRFC1918Compliant: Bool {
         inRange("10.0.0.0"..."10.255.255.255") || inRange("172.16.0.0"..."172.31.255.255")
-            || inRange("192.168.0.0"..."192.168.255.255")
+        || inRange("192.168.0.0"..."192.168.255.255")
     }
-
+    
     /// Checks if IPAddress is in range of other address
     /// - Parameter range: A range of IPAddress
     /// - Returns: True if this address is within range
@@ -32,7 +32,7 @@ extension IPv4Address: Comparable {
         let rhsIntValue = representAsInteger(ipAddress: rhs)
         return lhsIntValue < rhsIntValue
     }
-
+    
     /// Converts IPAddress as integer values. Loops over each address section, shifts them and accumulate the result.
     /// - Parameter ipAddress: IPAddress for conversion
     /// - Returns: Integer representation
@@ -44,7 +44,7 @@ extension IPv4Address: Comparable {
         }
         return result
     }
-
+    
     // IPAddress as an Integer array
     var octets: [Int] {
         return self.rawValue.map { Int($0) }

@@ -28,7 +28,7 @@ protocol TextStyling {
 }
 
 public extension TextStyle {
-
+    
     static let textStyle1 = TextStyle(
         font: UIFont.regularFontWith(size: 18),
         color: UIColor.piaWhite,
@@ -82,7 +82,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 18
     )
-
+    
     static let textStyle6Medium = TextStyle(
         font: UIFont.mediumFontWith(size: 14),
         color: UIColor.white,
@@ -118,7 +118,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 18
     )
-
+    
     static let textStyle9Medium = TextStyle(
         font: UIFont.mediumFontWith(size: 14),
         color: UIColor.piaGreenDark20,
@@ -181,7 +181,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 16
     )
-
+    
     static let textStyle16 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaWhite,
@@ -190,7 +190,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 15
     )
-
+    
     static let textStyle17 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGrey6,
@@ -199,7 +199,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 15
     )
-
+    
     static let textStyle18 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGrey4,
@@ -208,7 +208,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 15
     )
-
+    
     static let textStyle19 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaGreenDark20,
@@ -217,7 +217,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 15
     )
-
+    
     static let textStyle20 = TextStyle(
         font: UIFont.regularFontWith(size: 10),
         color: UIColor.piaRed,
@@ -226,7 +226,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 15
     )
-
+    
     static let textStyle21 = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaGrey4,
@@ -235,7 +235,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 16
     )
-
+    
     static let versionNumberStyle = TextStyle(
         font: UIFont.regularFontWith(size: 14),
         color: UIColor.piaGrey4,
@@ -244,7 +244,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 18
     )
-
+    
     static let ipTextStyle = TextStyle(
         font: UIFont.regularFontWith(size: 12),
         color: UIColor.piaGrey4,
@@ -271,7 +271,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 20
     )
-
+    
     static let textStyle23 = TextStyle(
         font: UIFont.mediumFontWith(size: 26),
         color: UIColor.piaGrey6,
@@ -289,7 +289,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 18
     )
-
+    
     static let textStyleSubscriptionInformation = TextStyle(
         font: UIFont.regularFontWith(size: 16),
         color: UIColor.piaGrey4,
@@ -298,7 +298,7 @@ public extension TextStyle {
         tintColor: nil,
         lineHeight: 20
     )
-
+    
     static let textStyleCardTitleDark = TextStyle(
         font: UIFont.mediumFontWith(size: 20),
         color: UIColor.piaWhite,
@@ -327,7 +327,7 @@ public extension TextStyle {
     )
 
     struct Buttons {
-
+        
         public static let piaGreenButton = TextStyle(
             font: UIFont.regularFontWith(size: 14),
             color: UIColor.white,
@@ -335,7 +335,7 @@ public extension TextStyle {
             backgroundColor: UIColor.piaGreenDark20,
             tintColor: nil
         )
-
+        
         public static let piaPlainTextButton = TextStyle(
             font: UIFont.regularFontWith(size: 14),
             color: nil,
@@ -343,7 +343,7 @@ public extension TextStyle {
             backgroundColor: nil,
             tintColor: nil
         )
-
+        
         public static let piaSmallPlainTextButton = TextStyle(
             font: UIFont.regularFontWith(size: 12),
             color: nil,
@@ -351,7 +351,7 @@ public extension TextStyle {
             backgroundColor: nil,
             tintColor: nil
         )
-
+        
     }
 
 }

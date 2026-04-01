@@ -28,11 +28,11 @@ protocol AboutComponent: Equatable {
 
 struct NoticeComponent: AboutComponent {
     let name: String
-
+    
     let copyright: String
-
+    
     let notice: String
-
+    
     fileprivate init(_ name: String, _ copyright: String, _ notice: String) {
         self.name = name
         self.copyright = copyright
@@ -41,18 +41,18 @@ struct NoticeComponent: AboutComponent {
 
     // MARK: Equatable
 
-    static func == (lhs: NoticeComponent, rhs: NoticeComponent) -> Bool {
+    static func ==(lhs: NoticeComponent, rhs: NoticeComponent) -> Bool {
         return (lhs.name == rhs.name)
     }
 }
 
 struct LicenseComponent: AboutComponent {
     let name: String
-
+    
     let copyright: String
-
+    
     let licenseURL: URL
-
+    
     internal init(_ name: String, _ copyright: String, _ licenseURL: URL) {
         self.name = name
         self.copyright = copyright
@@ -60,15 +60,15 @@ struct LicenseComponent: AboutComponent {
     }
 
     // MARK: Equatable
-
-    static func == (lhs: LicenseComponent, rhs: LicenseComponent) -> Bool {
+    
+    static func ==(lhs: LicenseComponent, rhs: LicenseComponent) -> Bool {
         return (lhs.name == rhs.name)
     }
 }
 
 struct Components {
     let notices: [NoticeComponent]
-
+    
     let licenses: [LicenseComponent]
 
     init(_ plist: String) {

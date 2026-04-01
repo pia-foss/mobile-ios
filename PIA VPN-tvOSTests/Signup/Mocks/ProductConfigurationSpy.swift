@@ -8,13 +8,12 @@
 
 import Foundation
 import PIALibrary
-
 @testable import PIA_VPN_tvOS
 
 class ProductConfigurationSpy: ProductConfigurationType {
     var setPlanCalledAttempt = 0
-    var capturedProducts = [Plan: String]()
-
+    var capturedProducts = [Plan : String]()
+    
     func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String) {
         capturedProducts[plan] = productIdentifier
         setPlanCalledAttempt += 1

@@ -12,12 +12,12 @@ import PIALibrary
 class LoginQRErrorMapper {
     func map(error: ClientError?) -> LoginQRCodeError {
         guard let error = error else { return .generic }
-
+        
         switch error {
-        case .expired:
-            return .expired
-        default:
-            return .generic
+            case .expired:
+                return .expired
+            default:
+                return .generic
         }
     }
 }

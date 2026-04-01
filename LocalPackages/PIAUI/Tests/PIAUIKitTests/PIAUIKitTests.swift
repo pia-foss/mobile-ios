@@ -1,5 +1,4 @@
 import XCTest
-
 @testable import PIAUIKit
 
 final class PIAUIKitTests: XCTestCase {

@@ -23,8 +23,8 @@
 import Foundation
 import NetworkExtension
 import PIALibrary
-import PIALocalizations
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: PIAHotspotHelper.self)
 
@@ -32,7 +32,7 @@ public protocol PIAHotspotHelperDelegate: AnyObject {
 
     /**
      Refreshes the available WiFi networks.
-    
+     
      - Parameter callback: Returns a refreshed list of available SSIDs as `String`.
      */
     func refreshAvailableNetworks(_ networks: [String]?)
@@ -40,34 +40,34 @@ public protocol PIAHotspotHelperDelegate: AnyObject {
 }
 
 class PIAHotspotHelper {
-
+    
     private var delegate: PIAHotspotHelperDelegate?
     private let networkMonitor: NetworkMonitor
-
+    
     init(withDelegate delegate: PIAHotspotHelperDelegate? = nil, networkMonitor: NetworkMonitor = WifiNetworkMonitor()) {
         self.delegate = delegate
         self.networkMonitor = networkMonitor
     }
-
+    
     /**
      Returns the current WiFi SSID.
-    
+     
      - Returns: SSID as `String`.
      */
     public func currentWiFiNetwork() -> String? {
         return UIDevice.current.WiFiSSID
     }
-
+    
     /**
      Configures the HotspotHelper API to perform actions depending of the command.
-    
+     
      - Returns: true if correctly configured.
      */
     public func configureHotspotHelper() -> Bool {
         var options: [String: NSObject] = [:]
 
         if Client.preferences.nmtRulesEnabled {
-            options = [kNEHotspotHelperOptionDisplayName: self.hotspotHelperMessage() as NSObject]
+            options = [kNEHotspotHelperOptionDisplayName : self.hotspotHelperMessage() as NSObject]
         }
 
         let queue: DispatchQueue = DispatchQueue(label: AppConstants.HotspotHelper.queueLabel)
@@ -84,7 +84,7 @@ class PIAHotspotHelper {
                 cmd.createResponse(.success).deliver()
                 return
             }
-
+            
             if let weakSelf = self {
                 if cmd.commandType == .filterScanList {
                     log.info("HotspotHelper: Processing filterScanList command")
@@ -95,8 +95,7 @@ class PIAHotspotHelper {
 
                     for element in networkList {
                         if !element.ssid.isEmpty,
-                            !availableList.contains(element.ssid)
-                        {
+                           !availableList.contains(element.ssid) {
                             availableList.append(element.ssid)
                         }
                         if !element.isSecure {
@@ -128,7 +127,7 @@ class PIAHotspotHelper {
                     if let currentNetwork = cmd.network {
                         log.info("HotspotHelper: Network '\(currentNetwork.ssid)' isSecure: \(currentNetwork.isSecure)")
 
-                        if !currentNetwork.isSecure {  // Open WiFi
+                        if !currentNetwork.isSecure { // Open WiFi
                             log.info("HotspotHelper: Detected open WiFi network '\(currentNetwork.ssid)'")
 
                             guard Client.providers.accountProvider.isLoggedIn else {
@@ -137,7 +136,7 @@ class PIAHotspotHelper {
                                 cmd.createResponse(.success).deliver()
                                 return
                             }
-
+                            
                             let preferences = Client.preferences.editable()
                             preferences.nmtTemporaryOpenNetworks = [currentNetwork.ssid]
                             preferences.commit()
@@ -190,50 +189,48 @@ class PIAHotspotHelper {
             }
         }
     }
-
+    
     private func hotspotHelperMessage() -> String {
         if Client.preferences.nmtRulesEnabled,
-            Client.preferences.useWiFiProtection
-        {
+            Client.preferences.useWiFiProtection {
             return L10n.Hotspothelper.Display.Protected.name
         } else {
             return L10n.Hotspothelper.Display.name
         }
     }
-
+    
     private func saveCurrentNetworkList(availableNetworks: [String]) {
         let preferences = Client.preferences.editable()
         preferences.availableNetworks = availableNetworks
         preferences.commit()
     }
-
+    
     /**
      List of available networks.
-    
+     
      - Returns: Array of available SSID.
      */
     public func retrieveCurrentNetworkList() -> [String] {
         var availableNetworks = Client.preferences.availableNetworks
         if let ssid = currentWiFiNetwork(),
-            !availableNetworks.contains(ssid)
-        {
+            !availableNetworks.contains(ssid) {
             availableNetworks.append(ssid)
         }
         return availableNetworks
     }
-
+    
     /**
      List of trusted networks.
-    
+     
      - Returns: Array of trusted SSID.
      */
     public func trustedNetworks() -> [String] {
         return Client.preferences.trustedNetworks
     }
-
+    
     /**
      Saves the WiFi network.
-    
+     
      - Parameter ssid: SSID as `String`.
      */
     public func saveTrustedNetwork(_ ssid: String) {
@@ -245,10 +242,10 @@ class PIAHotspotHelper {
         preferences.trustedNetworks = trustedNetworks
         preferences.commit()
     }
-
+    
     /**
      Removes the WiFi networks.
-    
+     
      - Parameter ssid: SSID as `String`.
      */
     public func removeTrustedNetwork(_ ssid: String) {
@@ -258,7 +255,7 @@ class PIAHotspotHelper {
         preferences.trustedNetworks = newTrustedNetworks
         preferences.commit()
     }
-
+    
     /**
      Remove all elements from the trusted network list.
      */
@@ -269,14 +266,14 @@ class PIAHotspotHelper {
         preferences.trustedNetworks = trustedNetworks
         preferences.commit()
     }
-
+    
 }
 
 public extension Notification.Name {
-
+    
     /// Posted when device detects RFC1918 vulnerable Wifi
     static let DeviceDidConnectToRFC1918VulnerableWifi: Notification.Name = Notification.Name("DeviceDidConnectToRFC1918VulnerableWifi")
-
+    
     /// Posted when device detects RFC1918 compliant Wifi
     static let DeviceDidConnectToRFC1918CompliantWifi: Notification.Name = Notification.Name("DeviceDidConnectToRFC1918CompliantWifi")
 }

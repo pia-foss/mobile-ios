@@ -24,14 +24,14 @@ enum LoginStatus {
 extension LoginStatus: Equatable {
     public static func == (lhs: LoginStatus, rhs: LoginStatus) -> Bool {
         switch (lhs, rhs) {
-        case (.none, .none), (.isLogging, .isLogging):
-            return true
-        case let (.failed(lhsErrorMessage, lhsField), .failed(rhsErrorMessage, rhsField)):
-            return lhsErrorMessage == rhsErrorMessage && lhsField == rhsField
-        case let (.succeeded(lhsAccount), .succeeded(rhsAccount)):
-            return lhsAccount == rhsAccount
-        default:
-            return false
+            case (.none, .none), (.isLogging, .isLogging):
+                return true
+            case let (.failed(lhsErrorMessage, lhsField), .failed(rhsErrorMessage, rhsField)):
+                return lhsErrorMessage == rhsErrorMessage && lhsField == rhsField
+            case let (.succeeded(lhsAccount), .succeeded(rhsAccount)):
+                return lhsAccount == rhsAccount
+            default:
+                return false
         }
     }
 }

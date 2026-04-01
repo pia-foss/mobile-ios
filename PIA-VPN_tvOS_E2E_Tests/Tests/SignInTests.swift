@@ -8,20 +8,20 @@
 
 import Nimble
 
-class SignInTests: BaseTest {
+class SignInTests:BaseTest {
     override class func spec() {
-        shouldLogIn = false
+        shouldLogIn = false 
         super.spec()
-        describe("sign in tests") {
-            context("account validations") {
-                it("should successfully sign in with valid credentials") {
+        describe("sign in tests"){
+            context("account validations"){
+                it("should successfully sign in with valid credentials"){
                     app.logout()
                     app.navigateToSignInScreen()
                     app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
                     expect(app.helpImprovePIATitle.waitForElementToAppear()).to(beTrue())
                 }
-
-                it("should display error mesages with invalid credentials") {
+                
+                it("should display error mesages with invalid credentials"){
                     app.logout()
                     app.navigateToSignInScreen()
                     app.loginViaUsername(with: CredentialsUtil.credentials(type: .invalid))

@@ -9,17 +9,18 @@
 import Foundation
 import csi
 
-final class PIACSIRegionInformationProvider: ICSIProvider {
-
+final class PIACSIRegionInformationProvider : ICSIProvider {
+    
     var filename: String? { return "regions_information" }
-
+    
     var isPersistedData: Bool { return true }
-
+    
     var providerType: ProviderType { return ProviderType.regionInformation }
-
+    
     var reportType: ReportType { return ReportType.diagnostic }
-
+    
     var value: String? { return regionInformation() }
+    
 
     func regionInformation() -> String {
         var redactedServers: [String] = []
@@ -47,8 +48,7 @@ final class PIACSIRegionInformationProvider: ICSIProvider {
                 regionIdentifier: server.regionIdentifier
             )
             if let data = try? JSONEncoder().encode(redactedServer),
-                let description = String(data: data, encoding: .utf8)
-            {
+               let description = String(data: data, encoding: .utf8) {
                 redactedServers.append(description)
             }
         }

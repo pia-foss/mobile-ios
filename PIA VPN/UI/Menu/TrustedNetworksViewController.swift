@@ -20,9 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import PIALibrary
 import PIALocalizations
-import UIKit
 
 struct Rule {
     var type: NMTType
@@ -35,13 +35,13 @@ class TrustedNetworksViewController: AutolayoutViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
 
     private var data = [Rule]()
-
+    
     private var hotspotHelper: PIAHotspotHelper!
     var shouldReconnectAutomatically = false
     var hasUpdatedPreferences = false
     var persistentConnectionValue = false
     var vpnType = ""
-
+    
     private struct Cells {
         static let network = "NetworkCollectionViewCell"
         static let header = "PIAHeaderCollectionViewCell"
@@ -50,56 +50,51 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         reloadRulesData()
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
 
         NotificationCenter.default.addObserver(self, selector: #selector(filterAvailableNetworks), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(refreshContent),
-            name: .RefreshNMTRules,
-            object: nil)
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(showCustomNetworks),
-            name: .ShowCustomNMTNetworks,
-            object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshContent),
+                                               name: .RefreshNMTRules,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showCustomNetworks),
+                                               name: .ShowCustomNMTNetworks,
+                                               object: nil)
 
         configureCollectionView()
-
+        
         if !persistentConnectionValue,
-            Client.preferences.nmtRulesEnabled
-        {
+            Client.preferences.nmtRulesEnabled {
             presentKillSwitchAlert()
         }
-
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filterAvailableNetworks()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if shouldReconnectAutomatically,
-            hasUpdatedPreferences
-        {
-            NotificationCenter.default.post(
-                name: .PIASettingsHaveChanged,
-                object: self,
-                userInfo: nil)
+            hasUpdatedPreferences{
+            NotificationCenter.default.post(name: .PIASettingsHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
         }
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Restylable
-
+    
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-
+        
         styleNavigationBarWithTitle("")
 
         if let viewContainer = viewContainer {
@@ -109,7 +104,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
         self.collectionView.reloadData()
 
     }
-
+    
     // MARK: Private Methods
     private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
@@ -118,39 +113,34 @@ class TrustedNetworksViewController: AutolayoutViewController {
             let preferences = Client.preferences.editable()
             preferences.isPersistentConnection = true
             preferences.commit()
-            NotificationCenter.default.post(
-                name: .PIAPersistentConnectionSettingHaveChanged,
-                object: self,
-                userInfo: nil)
+            NotificationCenter.default.post(name: .PIAPersistentConnectionSettingHaveChanged,
+                                            object: self,
+                                            userInfo: nil)
         }
         present(alert, animated: true, completion: nil)
     }
-
+    
     private func configureCollectionView() {
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(
-            UINib(
-                nibName: Cells.network,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.network)
-        collectionView.register(
-            UINib(nibName: Cells.header, bundle: nil),
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: Cells.header)
-        collectionView.register(
-            UINib(nibName: Cells.footer, bundle: nil),
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: Cells.footer)
+        collectionView.register(UINib(nibName: Cells.network,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.network)
+        collectionView.register(UINib(nibName: Cells.header, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier:Cells.header)
+        collectionView.register(UINib(nibName: Cells.footer, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier:Cells.footer)
         collectionView.delegate = self
         collectionView.dataSource = self
         filterAvailableNetworks()
     }
-
+    
     @objc private func filterAvailableNetworks() {
         self.collectionView.reloadData()
     }
-
+    
     private func reloadRulesData() {
         data = []
         let genericRules = Client.preferences.nmtGenericRules
@@ -163,7 +153,7 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
         let networks = Client.preferences.nmtTrustedNetworkRules
         let sortedKeys = networks.keys.sorted()
-
+        
         for key in sortedKeys {
             if let raw = networks[key], let rule = NMTRules(rawValue: raw) {
                 data.append(Rule(type: NMTType.trustedNetwork, rule: rule, ssid: key))
@@ -171,39 +161,40 @@ class TrustedNetworksViewController: AutolayoutViewController {
         }
 
     }
-
+    
     // MARK: Actions
     @objc private func refreshContent() {
         reloadRulesData()
         self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
     }
-
+    
     @objc private func showCustomNetworks() {
         self.perform(segue: StoryboardSegue.Main.showCustomNetworks)
     }
-
+        
 }
 
 extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Macros.isDevicePad {
-            let size = collectionView.frame.width / 6
+            let size =  collectionView.frame.width/6
             return CGSize(width: size, height: size)
         } else {
             if !isLandscape {
-                let size = ((collectionView.frame.width / 2) - 28)
+                let size =  ((collectionView.frame.width/2) - 28)
                 return CGSize(width: size, height: size)
             } else {
-                let size = collectionView.frame.width / 4
+                let size =  collectionView.frame.width/4
                 return CGSize(width: size, height: size)
             }
         }
     }
 
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.network, for: indexPath) as! NetworkCollectionViewCell
         cell.data = self.data[indexPath.item]
@@ -217,11 +208,11 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
 
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
 
@@ -245,30 +236,29 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
         let headerView = nib.instantiate(withOwner: nil, options: nil).first as! PIAHeaderCollectionViewCell
         headerView.setup(withTitle: L10n.Network.Management.Tool.title, andSubtitle: L10n.Settings.Hotspothelper.description)
 
-        return headerView.systemLayoutSizeFitting(
-            CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
-            withHorizontalFittingPriority: .defaultHigh,
-            verticalFittingPriority: .fittingSizeLevel)
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                  withHorizontalFittingPriority: .defaultHigh,
+                                                  verticalFittingPriority: .fittingSizeLevel)
 
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 
         let nib = UINib(nibName: Cells.footer, bundle: nil)
         let footerView = nib.instantiate(withOwner: nil, options: nil).first as! NetworkFooterCollectionViewCell
         footerView.setup()
 
-        return footerView.systemLayoutSizeFitting(
-            CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
-            withHorizontalFittingPriority: .defaultHigh,
-            verticalFittingPriority: .fittingSizeLevel)
+        return footerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                                                  withHorizontalFittingPriority: .defaultHigh,
+                                                  verticalFittingPriority: .fittingSizeLevel)
 
     }
 
+
 }
 
-extension TrustedNetworksViewController: PIAHotspotHelperDelegate {
-
+extension TrustedNetworksViewController: PIAHotspotHelperDelegate{
+    
     func refreshAvailableNetworks(_ networks: [String]?) {
         if let networks = networks {
             let preferences = Client.preferences.editable()
@@ -277,5 +267,5 @@ extension TrustedNetworksViewController: PIAHotspotHelperDelegate {
             self.collectionView.reloadData()
         }
     }
-
+    
 }

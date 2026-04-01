@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct RegionsContainerView: View {
-
+    
     @ObservedObject var viewModel: RegionsContainerViewModel
     @FocusState var focusedFilter: RegionsContainerViewModel.RegionsNavigationItems?
-
+    
     var regionsFilterButtons: some View {
         List {
             ForEach(viewModel.sideMenuItems, id: \.self) { menuItem in
@@ -27,18 +27,20 @@ struct RegionsContainerView: View {
                             .padding(.vertical, 16)
                         Spacer()
                     }
-                    .background(focusedFilter == menuItem ? Color.pia_primary : viewModel.selectedSection == menuItem ? Color.pia_surface_container_primary : Color.clear)
+                    .background(focusedFilter == menuItem ? Color.pia_primary :
+                                    viewModel.selectedSection == menuItem ? Color.pia_surface_container_primary :    Color.clear)
                     .cornerRadius(12)
-
+                    
                 }
                 .cornerRadius(4)
                 .buttonStyle(BasicButtonStyle())
                 .focused($focusedFilter, equals: menuItem)
                 .disabled(viewModel.isRegionNavigationItemDisabled(menuItem, when: focusedFilter))
-
+                
             }
         }
     }
+    
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -56,14 +58,14 @@ struct RegionsContainerView: View {
                         VStack {
                             SearchControllerButton(
                                 buttonAction: {
-                                    viewModel.navigate(to: .search)
-                                },
+                                viewModel.navigate(to: .search)
+                            }, 
                                 buttonTitle: viewModel.searchButtonTitle
                             )
                             RegionsSelectionFactory.makePreviouslySearchedRegionsListView()
                                 .padding(.top, 40)
                         }
-
+                        
                     }
                 }
                 .frame(minWidth: 1208)
@@ -79,6 +81,7 @@ struct RegionsContainerView: View {
 
     }
 }
+
 
 // MARK: - Default focus
 

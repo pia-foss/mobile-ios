@@ -25,7 +25,7 @@ import Foundation
 private let log = PIALogger.logger(for: DefaultTileProvider.self)
 
 final class DefaultTileProvider: TileProvider, DatabaseAccess {
-
+    
     // MARK: TileProvider
     var visibleTiles: [AvailableTiles] {
         get {
@@ -41,14 +41,14 @@ final class DefaultTileProvider: TileProvider, DatabaseAccess {
             accessedDatabase.plain.visibleTiles = newValue
         }
     }
-
+    
     // MARK: TileProvider
     var fixedTiles: [AvailableTiles] {
         get {
             return AvailableTiles.fixedTiles()
         }
     }
-
+    
     // MARK: TileProvider
     var orderedTiles: [AvailableTiles] {
         get {

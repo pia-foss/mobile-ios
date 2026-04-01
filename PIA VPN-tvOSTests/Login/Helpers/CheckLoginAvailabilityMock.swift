@@ -7,18 +7,17 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class CheckLoginAvailabilityMock: CheckLoginAvailabilityType {
     private let result: Result<Void, LoginError>
-
+    
     init(result: Result<Void, LoginError>) {
         self.result = result
     }
-
+    
     func disableLoginFor(_ delay: Double) {}
-
+    
     func callAsFunction() -> Result<Void, LoginError> {
         return result
     }

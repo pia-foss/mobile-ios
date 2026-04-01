@@ -6,15 +6,15 @@
 //  Copyright © 2020 Private Internet Access Inc. All rights reserved.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIALocalizations
 
 class PIACardsViewController: UIViewController {
 
     private var cards: [Card]!
-    private var slides: [PIACard] = []
+    private var slides:[PIACard] = []
 
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -25,25 +25,25 @@ class PIACardsViewController: UIViewController {
         view.isOpaque = false
         setupSlides()
     }
-
+    
     private func setupSlides() {
         self.slides = createSlides()
         self.setupSlideScrollView(slides: slides)
         pageControl.numberOfPages = slides.count
         pageControl.currentPage = 0
     }
-
+    
     func setupWith(cards: [Card]) {
         self.cards = cards
     }
-
+    
     func createSlides() -> [PIACard] {
-
+        
         let closeImage = Asset.Images.iconClose.image.withRenderingMode(.alwaysTemplate)
-
+        
         var collectingCards = [PIACard]()
         for card in cards {
-            let slide: PIACard = Bundle.main.loadNibNamed("PIACard", owner: self, options: nil)?.first as! PIACard
+            let slide:PIACard = Bundle.main.loadNibNamed("PIACard", owner: self, options: nil)?.first as! PIACard
             slide.cardParallaxImageView.image = UIImage(asset: card.cardFrontImage)
             slide.cardTitle.text = card.title
             slide.cardDescription.text = card.description
@@ -56,11 +56,9 @@ class PIACardsViewController: UIViewController {
             slide.cardCTAButton.setTitle(card.ctaLabel, for: [])
             slide.cardCTAButton.accessibilityIdentifier = card.ctaLabel
             slide.cardCTAButton.addAction(for: .touchUpInside) { (button) in
-                self.dismiss(
-                    animated: true,
-                    completion: {
-                        card.cta()
-                    })
+                self.dismiss(animated: true, completion: {
+                    card.cta()
+                })
             }
             if card.hasSecondCTA() {
                 slide.cardSecondaryCTAButton.isHidden = false
@@ -81,33 +79,33 @@ class PIACardsViewController: UIViewController {
             slide.cardBackgroundImage = card.cardImage
             collectingCards.append(slide)
         }
-
+        
         return collectingCards
     }
-
-    func setupSlideScrollView(slides: [PIACard]) {
-
+    
+    func setupSlideScrollView(slides : [PIACard]) {
+        
         guard let view = view else {
             return
         }
-
+        
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
         scrollView.isPagingEnabled = true
-
-        for i in 0..<slides.count {
+        
+        for i in 0 ..< slides.count {
             slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
             scrollView.addSubview(slides[i])
         }
-
+        
         scrollView.subviews.forEach({
             if let view = $0 as? PIACard {
                 view.setupView()
             }
         })
-
+        
     }
-
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupSlideScrollView(slides: slides)
     }

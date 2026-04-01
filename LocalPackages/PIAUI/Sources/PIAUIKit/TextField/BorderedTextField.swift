@@ -37,18 +37,18 @@ public class BorderedTextField: UITextField {
         #selector(cut(_:)),
         #selector(paste(_:))
     ])
-
+    
     private static let allowedSecureActions: Set<Selector> = Set([
         #selector(paste(_:))
     ])
-
+    
     /// :nodoc:
     public override var placeholder: String? {
         didSet {
             reloadPlaceholder()
         }
     }
-
+    
     /// The default color of the border.
     public var borderColor: UIColor? {
         didSet {
@@ -58,7 +58,7 @@ public class BorderedTextField: UITextField {
             reloadPlaceholder()
         }
     }
-
+    
     /// The color of the border while highlighted.
     public var highlightedBorderColor: UIColor? = .blue {
         didSet {
@@ -67,13 +67,13 @@ public class BorderedTextField: UITextField {
             }
         }
     }
-
+    
     /// When `true`, the text field border highlights while editing.
     public var highlightsWhileEditing = true
-
+    
     /// When `true`, the text field can be edited.
     public var isEditableTextField = true
-
+    
     /// :nodoc:
     public override var delegate: UITextFieldDelegate? {
         get {
@@ -98,9 +98,9 @@ public class BorderedTextField: UITextField {
     }
 
     private weak var viewBorder: UIView?
-
+    
     private weak var realDelegate: UITextFieldDelegate?
-
+    
     /// :nodoc:
     public override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
@@ -130,7 +130,7 @@ public class BorderedTextField: UITextField {
         }
         return allowed.contains(action)
     }
-
+    
     private func reloadPlaceholder() {
         if let placeholder = placeholder, let placeholderColor = borderColor {
             let attributes: [NSAttributedString.Key: Any] = [
@@ -139,7 +139,7 @@ public class BorderedTextField: UITextField {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         }
     }
-
+    
     override public func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
@@ -149,7 +149,7 @@ public class BorderedTextField: UITextField {
     override public func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
-
+    
     public override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         var rightViewRect = super.rightViewRect(forBounds: bounds)
         rightViewRect.origin.x -= 16
@@ -169,7 +169,7 @@ extension BorderedTextField: UITextFieldDelegate {
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let borderedTextField = textField as? BorderedTextField, borderedTextField.isEditableTextField else {
+      guard let borderedTextField = textField as? BorderedTextField, borderedTextField.isEditableTextField else {
             return false
         }
         if let method = realDelegate?.textField(_:shouldChangeCharactersIn:replacementString:) {
@@ -177,14 +177,14 @@ extension BorderedTextField: UITextFieldDelegate {
         }
         return true
     }
-
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let method = realDelegate?.textFieldShouldReturn(_:) {
             return method(textField)
         }
         return true
     }
-
+    
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         if highlightsWhileEditing {
             self.layer.borderColor = highlightedBorderColor?.cgColor
@@ -194,7 +194,7 @@ extension BorderedTextField: UITextFieldDelegate {
             return method(textField)
         }
     }
-
+    
     public func textFieldDidEndEditing(_ textField: UITextField) {
         self.layer.borderColor = borderColor?.cgColor
 
@@ -202,14 +202,14 @@ extension BorderedTextField: UITextFieldDelegate {
             return method(textField)
         }
     }
-
+    
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let method = realDelegate?.textFieldShouldEndEditing {
             return method(textField)
         }
         return true
     }
-
+    
     public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if let method = realDelegate?.textFieldShouldEndEditing(_:) {
             return method(textField)

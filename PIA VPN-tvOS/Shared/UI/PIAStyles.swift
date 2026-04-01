@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct Spacing {
-    static let screenWidth = UIScreen.main.bounds.width
+    static let screenWidth =  UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
     static let screenTopPadding: CGFloat = 100
     static let dashboardViewWidth: CGFloat = 780
@@ -24,3 +24,4 @@ struct Spacing {
     static let contentViewMaxWidth: CGFloat = 861
     static let selectedServerViewMinHeight: CGFloat = 170
 }
+

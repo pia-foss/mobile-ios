@@ -14,11 +14,11 @@ class LoginViewModel: ObservableObject {
     private let validateLoginCredentials: ValidateCredentialsFormatType
     private let errorHandler: LoginViewModelErrorHandlerType
     private let onSuccessAction: AppRouter.Actions
-
+    
     @Published var isAccountExpired = false
     @Published var shouldShowErrorMessage = false
     @Published var loginStatus: LoginStatus = .none
-
+    
     init(loginWithCredentialsUseCase: LoginWithCredentialsUseCaseType, checkLoginAvailability: CheckLoginAvailabilityType, validateLoginCredentials: ValidateCredentialsFormatType, errorHandler: LoginViewModelErrorHandlerType, onSuccessAction: AppRouter.Actions) {
         self.loginWithCredentialsUseCase = loginWithCredentialsUseCase
         self.checkLoginAvailability = checkLoginAvailability
@@ -26,40 +26,40 @@ class LoginViewModel: ObservableObject {
         self.errorHandler = errorHandler
         self.onSuccessAction = onSuccessAction
     }
-
+    
     func login(username: String, password: String) {
         if case .isLogging = loginStatus {
             return
         }
-
+        
         if case .failure(let error) = checkLoginAvailability() {
             handleError(error)
             return
         }
-
+        
         if case .failure(let error) = validateLoginCredentials(username: username, password: password) {
             handleError(error)
             return
         }
-
+        
         loginStatus = .isLogging
-
+        
         loginWithCredentialsUseCase.execute(username: username, password: password) { [weak self] result in
             guard let self = self else { return }
-
+            
             switch result {
-            case .success(let userAccount):
-                Task { @MainActor in
-                    self.loginStatus = .succeeded(userAccount: userAccount)
-                    self.onSuccessAction()
-                }
-
-            case .failure(let error):
-                handleError(error)
+                case .success(let userAccount):
+                    Task { @MainActor in
+                        self.loginStatus = .succeeded(userAccount: userAccount)
+                        self.onSuccessAction()
+                    }
+                    
+                case .failure(let error):
+                    handleError(error)
             }
         }
     }
-
+    
     private func handleError(_ error: LoginError) {
         guard error != .expired else {
             Task { @MainActor in
@@ -68,11 +68,11 @@ class LoginViewModel: ObservableObject {
             }
             return
         }
-
+        
         if case .throttled(let delay) = error {
             checkLoginAvailability.disableLoginFor(delay)
         }
-
+        
         Task { @MainActor in
             loginStatus = errorHandler(error: error)
             shouldShowErrorMessage = true

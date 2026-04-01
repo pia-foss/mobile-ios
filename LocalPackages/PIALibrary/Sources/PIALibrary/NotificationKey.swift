@@ -25,40 +25,40 @@ import Foundation
 /// Strongly typed, extensible `struct` for storing entries into the `Notification.userInfo` map.
 public struct NotificationKey: Hashable {
     public static let products = NotificationKey("ProductsKey")
-
+    
     public static let token = NotificationKey("TokenKey")
     public static let ip = NotificationKey("IPKey")
 
     /// An `UserAccount` object.
     public static let user = NotificationKey("UserKey")
-
+    
     /// An `AccountInfo` object (optional).
     public static let accountInfo = NotificationKey("AccountInfoKey")
 
     /// A `[Server]` object.
     public static let servers = NotificationKey("ServersKey")
-
+    
     /// An `Error` object (optional).
     public static let error = NotificationKey("ErrorKey")
-
+    
     private let string: String
 
     /**
      Default initializer.
-    
+     
      - Parameter string: The hashable `String` value of the key
      */
     public init(_ string: String) {
         self.string = string
     }
-
+    
     // MARK: Hashable
-
+    
     /// :nodoc:
-    public static func == (lhs: NotificationKey, rhs: NotificationKey) -> Bool {
+    public static func ==(lhs: NotificationKey, rhs: NotificationKey) -> Bool {
         return (lhs.string == rhs.string)
     }
-
+    
     /// :nodoc:
     public var hashValue: Int {
         return string.hashValue
@@ -69,17 +69,17 @@ extension Macros {
 
     /**
      Posts a notification with an optional `NotificationKey`-based `userInfo`.
-    
+ 
      - Parameter name: The name of the notification.
      - Parameter userInfo: The `userInfo` to forward for `Notification` creation.
      */
     public static func postNotification(_ name: Notification.Name, _ userInfo: [NotificationKey: Any]? = nil) {
         NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
     }
-
+    
     /**
      Posts a notification with an optional `Error`, later referenced through `NotificationKey.error`.
-    
+     
      - Parameter name: The name of the notification.
      - Parameter error: The `Error` to attach.
      */
@@ -96,7 +96,7 @@ extension Notification {
 
     /**
      Returns a strongly typed entry from `userInfo`.
-    
+     
      - Parameter key: The `NotificationKey` key.
      - Returns: An object of inferred type `T`.
      */
@@ -115,7 +115,7 @@ extension Notification {
 
     /**
      Optional version of `userInfo(for:)`.
-    
+     
      - Parameter key: The `NotificationKey` key.
      - Returns: An object of inferred type `T` or `nil`.
      */

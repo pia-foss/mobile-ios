@@ -10,14 +10,14 @@ import Foundation
 import SwiftUI
 
 struct SettingsButtonView: View {
-
+    
     @FocusState var isButtonFocused: Bool
-
+    
     let title: String
     var subtitle: String?
     var style: RightItemStyle = .none
     let buttonAction: ButtonAction
-
+    
     var body: some View {
         if let subtitle {
             settingsButton
@@ -25,9 +25,9 @@ struct SettingsButtonView: View {
             settingsButton
                 .frame(height: Spacing.settingsButtonHeight)
         }
-
+        
     }
-
+    
     var settingsButton: some View {
         Button {
             buttonAction()
@@ -42,17 +42,19 @@ struct SettingsButtonView: View {
         .buttonStyle(BasicButtonStyle())
         .buttonBorderShape(.roundedRectangle)
         .background(
-            isButtonFocused ? Color.pia_primary : Color.pia_surface_container_secondary
+            isButtonFocused ?
+            Color.pia_primary :
+            Color.pia_surface_container_secondary
         )
         .clipShape(RoundedRectangle(cornerSize: Spacing.listItemCornerSize))
     }
-
+    
     var leadingContent: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.system(size: 38, weight: .medium))
                 .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface)
-
+            
             if let subtitle {
                 Text(subtitle)
                     .font(.system(size: 25, weight: .medium))
@@ -62,7 +64,7 @@ struct SettingsButtonView: View {
         }
         .padding(.horizontal, Spacing.settingsButtonHorizontalPadding)
     }
-
+    
     var trailingContent: some View {
         VStack {
             switch style {
@@ -78,7 +80,7 @@ struct SettingsButtonView: View {
             }
         }
     }
-
+    
 }
 
 // MARK: - SettingsButtonView Style
@@ -88,7 +90,7 @@ extension SettingsButtonView {
         case none
         case rightChevron
         case rightText(content: String)
-
+        
         static func == (lhs: SettingsButtonView.RightItemStyle, rhs: SettingsButtonView.RightItemStyle) -> Bool {
             switch (lhs, rhs) {
             case (.none, .none):
@@ -102,5 +104,6 @@ extension SettingsButtonView {
             }
         }
     }
-
+    
+    
 }

@@ -10,22 +10,22 @@ import Foundation
 import csi
 
 final class PIACSIUserInformationProvider: ICSIProvider {
-
+    
     var filename: String? { return "user_settings" }
-
+    
     var isPersistedData: Bool { return true }
-
+    
     var providerType: ProviderType { return ProviderType.userSettings }
-
+    
     var reportType: ReportType { return ReportType.diagnostic }
-
+    
     var value: String? { return getUserInformation() }
-
+    
     func getUserInformation() -> String {
         guard let defaults = UserDefaults(suiteName: Client.Configuration.appGroup) else {
             return ""
         }
         let filteredPreferences = WhitelistUtil.filter(preferences: defaults.dictionaryRepresentation())
-        return filteredPreferences.map { "\($0): \($1)" }.joined(separator: "\n").redactIPs()
+        return filteredPreferences.map{ "\($0): \($1)" }.joined(separator: "\n").redactIPs()
     }
 }

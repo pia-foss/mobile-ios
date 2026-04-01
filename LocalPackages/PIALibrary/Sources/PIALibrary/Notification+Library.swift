@@ -25,26 +25,26 @@ import Foundation
 extension Notification.Name {
 
     // MARK: Daemons (passive updates)
-
+    
     /// The daemons finished pinging the servers.
     ///
     /// - Seealso: `Client.Daemons`
     public static let PIADaemonsDidPingServers = Notification.Name("PIADaemonsDidPingServers")
-
+    
     /// The daemons did update connectivity status.
     ///
     /// - Seealso: `Client.Daemons`
     public static let PIADaemonsDidUpdateConnectivity = Notification.Name("PIADaemonsDidUpdateConnectivity")
-
+    
     /// The daemons did report a VPN status update.
     ///
     /// - Seealso: `Client.Daemons`
     public static let PIADaemonsDidUpdateVPNStatus = Notification.Name("PIADaemonsDidUpdateVPNStatus")
-
+    
     public static let PIADaemonsConnectingVPNStatus = Notification.Name("PIADaemonsStillConnectingVPNStatus")
 
     // MARK: Servers
-
+    
     /// The target server has been updated.
     ///
     /// - Seealso: `Client.Daemons`
@@ -69,7 +69,7 @@ extension Notification.Name {
 }
 
 extension NotificationKey {
-
+    
     /// A `VPNStatus` object.
     public static let vpnStatus = NotificationKey("VPNStatusKey")
 

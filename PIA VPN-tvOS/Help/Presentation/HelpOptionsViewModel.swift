@@ -14,11 +14,11 @@ class HelpOptionsViewModel: ObservableObject {
         case appInfo
         case about
         case helpImprove
-
+        
         var id: Self {
             return self
         }
-
+        
         var title: String {
             switch self {
             case .appInfo:
@@ -30,73 +30,70 @@ class HelpOptionsViewModel: ObservableObject {
             }
         }
     }
-
+    
     private var infoDictionary: [String: Any]?
     private let connectionStatsPermission: ConnectionStatsPermissonType
     private let aboutOptionNavigationAction: AppRouter.Actions
     @Published private(set) var helpImproveValue: Bool = false
-
-    init(
-        connectionStatsPermission: ConnectionStatsPermissonType,
-        aboutOptionNavigationAction: AppRouter.Actions,
-        infoDictionary: [String: Any]?
-    ) {
+    
+    init(connectionStatsPermission: ConnectionStatsPermissonType,
+         aboutOptionNavigationAction: AppRouter.Actions,
+         infoDictionary: [String : Any]?) {
         self.connectionStatsPermission = connectionStatsPermission
         self.aboutOptionNavigationAction = aboutOptionNavigationAction
         self.infoDictionary = infoDictionary
         self.helpImproveValue = connectionStatsPermission.get() ?? false
     }
-
+    
     var appInfoContent: (title: String, value: String) {
         let title = Sections.appInfo.title
         let value = appInfoValue
         return (title: title, value: value)
-
+        
     }
-
+    
     private var appInfoValue: String {
         guard let infoDictionary,
-            let versionNumber = infoDictionary[.cfBundleShortVersionString] as? String,
-            let buildNumber = infoDictionary[kCFBundleVersionKey as String] as? String
-        else {
+              let versionNumber = infoDictionary[.cfBundleShortVersionString] as? String,
+              let buildNumber = infoDictionary[kCFBundleVersionKey as String] as? String else {
             return ""
         }
         return "\(versionNumber) (\(buildNumber))"
     }
-
+    
     var aboutSectionTitle: String {
         Sections.about.title
     }
-
+    
     var helpImproveSectionContent: (title: String, subtitle: String, value: String) {
         let title = Sections.helpImprove.title
         let subtitle = L10n.Settings.Service.Quality.Share.description
         let value = helpImproveValue ? L10n.HelpMenu.HelpImprove.Enabled.title : L10n.HelpMenu.HelpImprove.Disabled.title
-
+        
         return (title: title, subtitle: subtitle, value: value)
     }
-
+    
     var contactSupportTitle: String {
         L10n.HelpMenu.ContactSupport.QrCode.title
     }
-
+    
     var contactSupportDescription: String {
         L10n.HelpMenu.ContactSupport.QrCode.message
     }
-
+    
     var contactSupportURL: URL {
         URL(string: "https://helpdesk.privateinternetaccess.com")!
     }
-
+    
     func toggleHelpImprove() {
         helpImproveValue.toggle()
         connectionStatsPermission.set(value: helpImproveValue)
     }
-
+    
     func aboutOptionsButtonWasTapped() {
         aboutOptionNavigationAction()
     }
-
+    
 }
 
 fileprivate extension String {

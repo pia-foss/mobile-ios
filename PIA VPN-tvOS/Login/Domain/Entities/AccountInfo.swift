@@ -18,18 +18,18 @@ struct AccountInfo {
     let isRecurring: Bool
     let expirationDate: Date
     let canInvite: Bool
-
+    
     public var isExpired: Bool {
         return (expirationDate.timeIntervalSinceNow < 0)
     }
-
+    
     public var dateComponentsBeforeExpiration: DateComponents {
         return Calendar.current.dateComponents([.day, .hour], from: Date(), to: expirationDate)
     }
-
+    
     public let shouldPresentExpirationAlert: Bool
     public let renewUrl: URL?
-
+    
     public func humanReadableExpirationDate(usingLocale locale: Locale = Locale.current) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
@@ -42,15 +42,15 @@ struct AccountInfo {
 extension AccountInfo: Equatable {
     public static func == (lhs: AccountInfo, rhs: AccountInfo) -> Bool {
         lhs.email == rhs.email
-            && lhs.username == rhs.username
-            && lhs.plan == rhs.plan
-            && lhs.productId == rhs.productId
-            && lhs.isRenewable == rhs.isRenewable
-            && lhs.isRecurring == rhs.isRecurring
-            && lhs.expirationDate == rhs.expirationDate
-            && lhs.canInvite == rhs.canInvite
-            && lhs.isExpired == rhs.isExpired
-            && lhs.shouldPresentExpirationAlert == rhs.shouldPresentExpirationAlert
-            && lhs.renewUrl == rhs.renewUrl
+        && lhs.username == rhs.username
+        && lhs.plan == rhs.plan
+        && lhs.productId == rhs.productId
+        && lhs.isRenewable == rhs.isRenewable
+        && lhs.isRecurring == rhs.isRecurring
+        && lhs.expirationDate == rhs.expirationDate
+        && lhs.canInvite == rhs.canInvite
+        && lhs.isExpired == rhs.isExpired
+        && lhs.shouldPresentExpirationAlert == rhs.shouldPresentExpirationAlert
+        && lhs.renewUrl == rhs.renewUrl
     }
 }

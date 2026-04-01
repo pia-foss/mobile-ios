@@ -14,15 +14,15 @@ private extension String {
 
 class VPNConfigurationAvailability: VPNConfigurationAvailabilityType {
     private let userDefautls: UserDefaults
-
+    
     init(userDefautls: UserDefaults = .standard) {
         self.userDefautls = userDefautls
     }
-
+    
     func get() -> Bool {
         return userDefautls.bool(forKey: .kOnboardingVpnProfileInstalled)
     }
-
+    
     func set(value: Bool) {
         userDefautls.set(value, forKey: .kOnboardingVpnProfileInstalled)
     }

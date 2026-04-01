@@ -21,21 +21,21 @@
 //
 
 import Foundation
-import PIALibrary
 import UIKit
+import PIALibrary
 
 typealias Func = () -> Void
 
 public protocol Tileable {
-
-    var view: UIView! { get set }
-    var detailSegueIdentifier: String! { get set }
-    var status: TileStatus { get set }
-
+    
+    var view: UIView! {get set}
+    var detailSegueIdentifier: String! {get set}
+    var status: TileStatus {get set}
+    
     func isEditable() -> Bool
     func isExpandable() -> Bool
     func hasDetailView() -> Bool
-
+    
 }
 
 public extension Tileable {
@@ -45,17 +45,17 @@ public extension Tileable {
     func isEditable() -> Bool {
         return false
     }
-
+    
     ///Check if the tile can change the size inside the list
     /// - Returns: Bool
     func isExpandable() -> Bool {
         return false
     }
-
+    
     ///Check if the tile has a detail view controller
     /// - Returns: Bool
     func hasDetailView() -> Bool {
         return false
     }
-
+    
 }

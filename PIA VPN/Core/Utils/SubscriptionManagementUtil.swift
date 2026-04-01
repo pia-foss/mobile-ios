@@ -19,9 +19,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIALibrary
-import StoreKit
 import UIKit
+import StoreKit
+import PIALibrary
 
 private let log = PIALogger.logger(for: SubscriptionManagementUtil.self)
 

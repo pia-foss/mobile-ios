@@ -9,10 +9,10 @@
 import XCTest
 
 extension XCUIApplication {
-    var automationHeader: XCUIElement { staticText(with: automationTitleString) }
-    var enableAutomationString: String { getString(key: "network.management.tool.enable.automation", comment: "Enable Automation") }
-    var enableAutomationSwitch: XCUIElement { switches(with: enableAutomationString) }
-
+    var automationHeader: XCUIElement {staticText(with: automationTitleString)}
+    var enableAutomationString: String {getString(key: "network.management.tool.enable.automation", comment: "Enable Automation")}
+    var enableAutomationSwitch: XCUIElement {switches(with: enableAutomationString)}
+    
     func navigateToAutomationSettings() {
         navigateToSettings()
         automationSettingsButton.waitForElementToAppear()

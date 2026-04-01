@@ -13,28 +13,25 @@ class LoginFactory {
     static func makeLoginView() -> LoginView {
         LoginView(viewModel: makeLoginViewModel())
     }
-
+    
     private static func makeLoginViewModel() -> LoginViewModel {
-        LoginViewModel(
-            loginWithCredentialsUseCase: makeLoginWithCredentialsUseCase(),
-            checkLoginAvailability: CheckLoginAvailability(),
-            validateLoginCredentials: ValidateCredentialsFormat(),
-            errorHandler: makeLoginViewModelErrorHandler(),
-            onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.connectionstats))
+        LoginViewModel(loginWithCredentialsUseCase: makeLoginWithCredentialsUseCase(),
+                       checkLoginAvailability: CheckLoginAvailability(),
+                       validateLoginCredentials: ValidateCredentialsFormat(),
+                       errorHandler: makeLoginViewModelErrorHandler(),
+                       onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.connectionstats))
     }
-
+    
     private static func makeLoginWithCredentialsUseCase() -> LoginWithCredentialsUseCaseType {
-        LoginWithCredentialsUseCase(
-            loginProvider: makeLoginProvider(),
-            errorMapper: LoginDomainErrorMapper())
+        LoginWithCredentialsUseCase(loginProvider: makeLoginProvider(),
+                                    errorMapper: LoginDomainErrorMapper())
     }
-
+    
     static func makeLoginProvider() -> LoginProviderType {
-        LoginProvider(
-            accountProvider: Client.providers.accountProvider,
-            userAccountMapper: UserAccountMapper())
+        LoginProvider(accountProvider: Client.providers.accountProvider, 
+                      userAccountMapper: UserAccountMapper())
     }
-
+    
     private static func makeLoginViewModelErrorHandler() -> LoginViewModelErrorHandlerType {
         LoginViewModelErrorHandler(errorMapper: LoginPresentableErrorMapper())
     }

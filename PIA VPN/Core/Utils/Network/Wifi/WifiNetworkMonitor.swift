@@ -11,7 +11,7 @@ import Network
 import NetworkExtension
 
 class WifiNetworkMonitor: NetworkMonitor {
-
+    
     private func getWifiAndEthernetIpAddress() -> [IPv4Address] {
         var addresses = [IPv4Address]()
         // Get list of all interfaces
@@ -42,7 +42,7 @@ class WifiNetworkMonitor: NetworkMonitor {
                         NI_NUMERICHOST
                     )
                     if nameInfo == 0,
-                        let ipAddress = IPv4Address(.init(cString: ipAddressStr))
+                       let ipAddress = IPv4Address(.init(cString: ipAddressStr))
                     {
                         let interfaceName = String(cString: ptr.pointee.ifa_name)
                         if ipAddress.isLinkLocal == false && interfaceName.starts(with: "en") {
@@ -54,12 +54,12 @@ class WifiNetworkMonitor: NetworkMonitor {
         }
         return addresses
     }
-
+    
     func checkForRFC1918Vulnerability() -> Bool {
         let wifiIPAddresses = getWifiAndEthernetIpAddress()
         return wifiIPAddresses.contains(where: { $0.isRFC1918Compliant == false })
     }
-
+    
     func isConnected() -> Bool {
         if let currentNetworks = NEHotspotHelper.supportedNetworkInterfaces() {
             return currentNetworks.contains(where: { $0 is NEHotspotNetwork })

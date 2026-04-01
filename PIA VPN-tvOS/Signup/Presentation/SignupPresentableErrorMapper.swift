@@ -14,20 +14,20 @@ class SignupPresentableErrorMapper {
         if let purchaseProductsError = error as? PurchaseProductsError {
             return mapPurchaseProductsError(error: purchaseProductsError)
         }
-
+        
         return L10n.Tvos.Signup.Subscription.Error.Message.generic
     }
-
+    
     private func mapPurchaseProductsError(error: PurchaseProductsError) -> String? {
         switch error {
-        case .uncreditedTransaction:
-            return L10n.Signup.Purchase.Uncredited.Alert.message
-        case .paymentCancelled:
-            return L10n.Tvos.Signup.Subscription.Error.Message.paymentCancelled
-        case .other(message: let message):
-            return message
-        default:
-            return L10n.Tvos.Signup.Subscription.Error.Message.generic
+            case .uncreditedTransaction:
+                return L10n.Signup.Purchase.Uncredited.Alert.message
+            case .paymentCancelled:
+                return L10n.Tvos.Signup.Subscription.Error.Message.paymentCancelled
+            case .other(message: let message):
+                return message
+            default:
+                return L10n.Tvos.Signup.Subscription.Error.Message.generic
         }
     }
 }

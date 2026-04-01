@@ -7,21 +7,20 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class ConnectionStatsPermissonMock: ConnectionStatsPermissonType {
     var settedValues = [Bool]()
     private let value: Bool?
-
+    
     init(value: Bool?) {
         self.value = value
     }
-
+    
     func get() -> Bool? {
         return value
     }
-
+    
     func set(value: Bool?) {
         if let value = value {
             settedValues.append(value)

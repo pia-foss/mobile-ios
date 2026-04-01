@@ -33,8 +33,9 @@ extension Server {
         pingAddress: nil,
         regionIdentifier: "auto"
     )
-
+    
     var isAutomatic: Bool {
         return (identifier == Server.automatic.identifier)
     }
 }
+

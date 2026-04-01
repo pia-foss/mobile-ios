@@ -1,5 +1,4 @@
 import XCTest
-
 @testable import PIASwiftUI
 
 final class PIASwiftUITests: XCTestCase {

@@ -22,23 +22,23 @@
 
 import Foundation
 import PIALibrary
-import PIALocalizations
 import UIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AccountObserver.self)
 
 class AccountObserver {
     static let shared = AccountObserver()
-
+    
     private let secondsPerDay: TimeInterval = 24 * 60 * 60
 
     private init() {
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func start() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(registerExpirationNotifications), name: .PIAAccountDidLogin, object: nil)
@@ -47,11 +47,12 @@ class AccountObserver {
         nc.addObserver(self, selector: #selector(accountDidLogout), name: .PIAAccountDidLogout, object: nil)
         nc.addObserver(self, selector: #selector(registerAccountDidBecomeUnauthorized), name: .PIAUnauthorized, object: nil)
     }
-
+    
+    
     @objc private func registerAccountDidBecomeUnauthorized() {
         Client.providers.accountProvider.refreshAndLogoutUnauthorized()
     }
-
+    
     @objc private func registerExpirationNotifications() -> [Date]? {
 
         cancelExpirationNotifications()
@@ -62,14 +63,14 @@ class AccountObserver {
         guard (!accountInfo.isExpired && !accountInfo.isRecurring) else {
             return nil
         }
-
+        
         let oneDayPrior = accountInfo.expirationDate.addingTimeInterval(-secondsPerDay)
         let threeDaysPrior = accountInfo.expirationDate.addingTimeInterval(-3 * secondsPerDay)
         let oneWeekPrior = accountInfo.expirationDate.addingTimeInterval(-7 * secondsPerDay)
         let oneMonthPrior = accountInfo.expirationDate.addingTimeInterval(-30 * secondsPerDay)
-
+        
         var dates: [Date] = []
-
+        
         if ((accountInfo.plan == .yearly) && (oneMonthPrior.timeIntervalSinceNow > 0)) {
             dates.append(oneMonthPrior)
         }
@@ -82,11 +83,11 @@ class AccountObserver {
         if (oneDayPrior.timeIntervalSinceNow > 0) {
             dates.append(oneDayPrior)
         }
-
+        
         let userNotificationCenter = UNUserNotificationCenter.current()
 
         for date in dates {
-
+            
             let note = UNMutableNotificationContent()
 
             note.title = L10n.Expiration.title
@@ -94,19 +95,17 @@ class AccountObserver {
             note.userInfo = ["date": date]
             note.sound = .default
             note.badge = 1
-
+            
             let calendar = Calendar(identifier: .gregorian)
-            var triggerDate = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            var triggerDate = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
             triggerDate.timeZone = NSTimeZone.local
-
-            let trigger = UNCalendarNotificationTrigger(
-                dateMatching: triggerDate,
-                repeats: false)
-            let request = UNNotificationRequest(
-                identifier: "registerExpirationNotifications\(date.timeIntervalSinceNow)",
-                content: note,
-                trigger: trigger)
-
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate,
+                                                            repeats: false)
+            let request = UNNotificationRequest(identifier: "registerExpirationNotifications\(date.timeIntervalSinceNow)",
+                                                content: note,
+                                                trigger: trigger)
+            
             userNotificationCenter.add(request) { (error) in
                 if let error = error {
                     print("Notification Error: ", error)
@@ -114,19 +113,19 @@ class AccountObserver {
             }
 
         }
-
+        
         if !dates.isEmpty {
             log.debug("Account: Registered renewal notifications on: \(dates)")
         }
-
+    
         return dates
     }
-
+    
     private func cancelExpirationNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         log.debug("Account: Cancelled any pending renewal notification")
     }
-
+    
     @objc private func accountDidLogout() {
         log.debug("Account: Logging out, uninstalling local profiles...")
 

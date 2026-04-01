@@ -1,6 +1,6 @@
 //
 //  EphemeralAccountProvider.swift
-//
+//  
 //
 //  Created by Juan Docal on 2022-08-10.
 //
@@ -20,7 +20,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         return accountProvider.webServices
     }
 
-    var planProducts: [Plan: InAppProduct]? {
+    var planProducts: [Plan : InAppProduct]? {
         return accessedProviders.accountProvider.planProducts
     }
 
@@ -102,7 +102,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+    func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
         accessedProviders.accountProvider.listPlanProducts(callback)
     }
 
@@ -153,7 +153,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
     func featureFlags(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-
+    
     func validateLoginQR(with qrToken: String, _ callback: ((String?, Error?) -> Void)?) {
         callback?(nil, nil)
     }

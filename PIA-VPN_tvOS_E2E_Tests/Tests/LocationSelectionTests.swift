@@ -9,22 +9,22 @@
 import Nimble
 import XCTest
 
-class LocationSelectionTests: BaseTest {
+class LocationSelectionTests:BaseTest {
     override class func spec() {
         shouldLogIn = true
         super.spec()
-
+        
         describe("location selection tests") {
             context("when the user goes to 'All' tab") {
                 it("then the user sees all available locations") {
                     app.navigateToLocationSelectionScreen()
                     app.navigateToAllLocationsScreen()
-
+                    
                     expect(app.allLocationsTitle.exists).to(beTrue())
                     expect(app.optimalLocationsTitle.exists).to(beTrue())
                 }
             }
-
+            
             context("when the user goes to 'Search' tab") {
                 it("should display recommended locations and search location button") {
                     app.navigateToLocationSelectionScreen()
@@ -32,15 +32,15 @@ class LocationSelectionTests: BaseTest {
                     expect(app.searchForALocationButton.exists).to(beTrue())
                     expect(app.recommendedLocationsTitle.exists || app.lastSearchedLocationsTitle.exists).to(beTrue())
                 }
-
+                
                 it("should return related results when the user searches a keyword") {
                     app.navigateToLocationSelectionScreen()
                     app.navigateToSearchLocationScreen()
                     app.searchLocation(keyword: "Chi")
-                    expect(app.getSearchResultButtonLabels().allSatisfy { $0.contains("Chi") }).to(beTrue())
+                    expect(app.getSearchResultButtonLabels().allSatisfy{$0.contains("Chi")}).to(beTrue())
                 }
             }
-
+            
             context("display of the favourites tab") {
                 it("should display the favourites tab when a region is added to favourites") {
                     app.navigateToLocationSelectionScreen()
@@ -49,9 +49,9 @@ class LocationSelectionTests: BaseTest {
                     app.addToFavorites(region: "India")
                     expect(app.favouritesTabButton.exists).to(beTrue())
                     app.navigateToFavouriteLocationScreen()
-                    expect(app.getSearchResultButtonLabels().contains { $0.contains("India") }).to(beTrue())
+                    expect(app.getSearchResultButtonLabels().contains{$0.contains("India")}).to(beTrue())
                 }
-
+                
                 it("should hide the favourites tab when all regions are removed from favourites") {
                     app.navigateToLocationSelectionScreen()
                     app.navigateToSearchLocationScreen()

@@ -1,4 +1,6 @@
+
 import Foundation
+
 
 struct FeatureFlagsInformation: Codable {
     let flags: [String]
@@ -9,3 +11,5 @@ extension FeatureFlagsInformation {
         try? JSONDecoder().decode(FeatureFlagsInformation.self, from: data)
     }
 }
+
+

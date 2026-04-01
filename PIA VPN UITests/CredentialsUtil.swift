@@ -17,7 +17,7 @@ public enum CredentialsType: String {
 public struct Credentials: Codable {
     let username: String
     let password: String
-
+    
     init(from dictionary: Any) throws {
         let data = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
         let decoder = JSONDecoder()
@@ -31,16 +31,17 @@ public class CredentialsUtil {
         guard let filePath = bundle.path(forResource: "Credentials", ofType: "plist") else {
             fatalError("Couldn't find file 'Credentials.plist'")
         }
-
+        
         let plist = NSDictionary(contentsOfFile: filePath)
         guard let dictionary = plist?.object(forKey: type.rawValue) as? [String: String] else {
             fatalError("Couldn't find key '\(type.rawValue)' in 'Credentials.plist'")
         }
-
+        
         do {
             return try Credentials(from: dictionary)
-        } catch {
-            fatalError("Credential file does not contain required information")
+        }
+        catch {
+             fatalError("Credential file does not contain required information")
         }
     }
 }

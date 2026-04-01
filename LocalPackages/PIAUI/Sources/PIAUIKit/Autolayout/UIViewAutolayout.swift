@@ -49,5 +49,5 @@ public extension UIView {
             constant: bottomOffset
         ).isActive = true
     }
-
+    
 }

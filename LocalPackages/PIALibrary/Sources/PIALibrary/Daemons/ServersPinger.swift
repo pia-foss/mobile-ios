@@ -32,7 +32,7 @@ final class ServersPinger: DatabaseAccess {
     private var isPinging = false
 
     func ping(withDestinations destinations: [Server]) {
-
+        
         guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
             log.debug("Not pinging servers while on VPN, will try on next update")
             return
@@ -42,65 +42,63 @@ final class ServersPinger: DatabaseAccess {
             log.warning("Skip pinging, latest attempt still pending completion")
             return
         }
-
+        
         isPinging = true
 
         let persistence = accessedDatabase.plain
         persistence.clearPings()
-
+        
         var pingableServers: [Server] = []
         for server in destinations {
             pingableServers.append(server)
         }
-
+        
         let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
 
         for server in pingableServers {
 
             log.debug("Pinging \(server.identifier)")
-
+            
             for address in server.addresses() {
 
-                let pingTask = PingTask(
-                    identifier: server.identifier, server: server, address: address,
-                    stateUpdateHandler: { (task) in
-
-                        guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
-                            return
+                let pingTask = PingTask(identifier: server.identifier, server: server, address: address, stateUpdateHandler: { (task) in
+                    
+                    guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
+                        return
+                    }
+                    
+                    switch task.state {
+                    case .completed:
+                        self.pendingPings.remove(at: index)
+                        if self.pendingPings.isEmpty {
+                            self.finish()
                         }
+                    default:
+                        break
+                    }
 
-                        switch task.state {
-                        case .completed:
-                            self.pendingPings.remove(at: index)
-                            if self.pendingPings.isEmpty {
-                                self.finish()
-                            }
-                        default:
-                            break
-                        }
-
-                    })
+                })
                 pendingPings.append(pingTask)
 
             }
 
         }
-
+        
         if pendingPings.count == 0 {
             self.finish()
         }
-
+        
         pendingPings.forEach {
             $0.startTask(queue: dispatchQueue)
         }
 
     }
-
+        
     func reset() {
         pendingPings.removeAll()
         isPinging = false
     }
-
+    
     func finish() {
         DispatchQueue.main.async { [unowned self] in
             self.accessedDatabase.plain.serializePings()
@@ -111,16 +109,17 @@ final class ServersPinger: DatabaseAccess {
 }
 
 extension Server {
-
-    func ping(toAddress address: Address, withProtocol protocolType: PingerProtocol) -> Int? {
+    
+    func ping(toAddress address:Address, withProtocol protocolType: PingerProtocol) -> Int? {
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
-
+    
     func ping(withProtocol protocolType: PingerProtocol) -> Int? {
         guard let address = pingAddress else {
             return nil
         }
         return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
     }
-
+    
 }
+

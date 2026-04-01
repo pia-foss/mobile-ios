@@ -1,6 +1,7 @@
 import Foundation
 import NWHttpConnection
 
+
 protocol NetworkRequestResponseType {
     var statusCode: Int? { get }
     var data: Data? { get }
@@ -8,3 +9,4 @@ protocol NetworkRequestResponseType {
 
 extension NWHttpConnectionDataResponse: NetworkRequestResponseType {
 }
+

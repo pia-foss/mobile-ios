@@ -24,28 +24,28 @@ import Foundation
 
 struct Payment {
     let receipt: Data
-
+    
     var marketing: [String: Any]?
 
     var debug: [String: Any]?
-
+    
     init(receipt: Data) {
         self.receipt = receipt
     }
 }
 
 #if os(iOS) || os(tvOS)
-    extension RenewRequest {
-        func payment(withStore store: InAppProvider) -> Payment? {
-            guard let receipt = store.paymentReceipt else {
-                return nil
-            }
-            var object = Payment(receipt: receipt)
-            object.marketing = marketing
-            if let txid = transaction?.identifier {
-                object.debug = ["txid": txid]
-            }
-            return object
+extension RenewRequest {
+    func payment(withStore store: InAppProvider) -> Payment? {
+        guard let receipt = store.paymentReceipt else {
+            return nil
         }
+        var object = Payment(receipt: receipt)
+        object.marketing = marketing
+        if let txid = transaction?.identifier {
+            object.debug = ["txid": txid]
+        }
+        return object
     }
+}
 #endif

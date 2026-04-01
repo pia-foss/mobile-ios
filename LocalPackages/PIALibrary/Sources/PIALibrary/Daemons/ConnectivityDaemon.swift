@@ -33,15 +33,15 @@ public extension Notification.Name {
 
 final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
     static let shared = ConnectivityDaemon()
-
+    
     private(set) var hasEnabledUpdates: Bool
-
+    
     private let reachability = try! Reachability(hostname: "8.8.8.8")
-
+    
     private var isCheckingConnectivity: Bool
-
+    
     private var failedConnectivityAttempts: Int
-
+    
     private var wasConnected: Bool
 
     private init() {
@@ -50,11 +50,11 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         failedConnectivityAttempts = 0
         wasConnected = false
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func start() {
         wasConnected = (accessedDatabase.transient.vpnStatus == .connected)
 
@@ -62,7 +62,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         startReachability()
     }
-
+    
     func enableUpdates() {
         guard !hasEnabledUpdates else {
             return
@@ -128,7 +128,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             guard let connectivity = connectivity else {
                 self.failedConnectivityAttempts += 1
                 log.error("Failed to check network connectivity (error: \(error?.localizedDescription ?? ""))")
-
+            
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
                     log.debug("Giving up, network is unreachable")
                     self.failedConnectivityAttempts = 0
@@ -145,7 +145,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
                 return
             }
-
+            
             self.failedConnectivityAttempts = 0
             self.accessedDatabase.transient.isInternetReachable = true
             log.debug("Saving new info about network connectivity: \(connectivity)")
@@ -158,13 +158,13 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 self.accessedDatabase.plain.publicIP = ipAddress
                 log.debug("Public IP -> \(ipAddress)")
             }
-
+            
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
     }
 
     // MARK: Notifications
-
+   
     @objc private func vpnStatusDidChange(notification: Notification) {
         switch accessedDatabase.transient.vpnStatus {
         case .connected:
@@ -185,7 +185,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             break
         }
     }
-
+    
     private func handleReachable() {
         accessedDatabase.transient.isNetworkReachable = true
         if hasEnabledUpdates {
@@ -194,13 +194,13 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             }
         }
     }
-
+    
     private func handleUnreachable() {
         accessedDatabase.transient.isNetworkReachable = false
     }
-
+    
     // XXX: VPN status doesn't seem to be immediately ready for connectivity checks
-
+    
     private func handleVPNDidConnect() {
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
@@ -212,7 +212,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             }
         }
     }
-
+    
     private func handleVPNDidDisconnect() {
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
@@ -224,18 +224,18 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             }
         }
     }
-
+    
     // MARK: MACE
-
+    
     private func invokeMACERequest() {
         log.debug("MACE: Enabling PIA ad-blocking...")
-
+        
         enableMACE()
         Macros.dispatch(after: .milliseconds(accessedConfiguration.maceDelay)) {
             self.enableMACE()
         }
     }
-
+    
     private func enableMACE() {
         rawEnableMACE { (time) in
             guard let time = time else {
@@ -245,18 +245,16 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             log.debug("MACE: Successfully enabled in \(time)ms")
         }
     }
-
+    
     private func rawEnableMACE(completionHandler: ((Int?) -> Void)?) {
         let background = DispatchQueue.global(qos: .background)
-
+        
         background.async {
-            guard
-                let pingTime = Macros.ping(
-                    withProtocol: .TCP,
-                    hostname: self.accessedConfiguration.maceHostname,
-                    port: self.accessedConfiguration.macePort)
-            else {
-
+            guard let pingTime = Macros.ping(
+                withProtocol: .TCP,
+                hostname: self.accessedConfiguration.maceHostname,
+                port: self.accessedConfiguration.macePort) else {
+                
                 completionHandler?(nil)
                 return
             }

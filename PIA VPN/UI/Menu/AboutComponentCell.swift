@@ -20,39 +20,39 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AboutNoticeCell.self)
 
 class AboutNoticeCell: UITableViewCell, Restylable {
     @IBOutlet private weak var buttonName: UIButton!
-
+    
     @IBOutlet private weak var labelCopyright: UILabel!
-
+    
     @IBOutlet private weak var labelNotice: UILabel!
-
+    
     private var component: NoticeComponent?
-
+    
     func fill(withComponent component: NoticeComponent) {
         viewShouldRestyle()
-
+        
         self.component = component
-
+        
         buttonName.setTitle(component.name, for: .normal)
         buttonName.isUserInteractionEnabled = false
         labelCopyright.text = component.copyright
         labelNotice.text = component.notice
-
+        
         buttonName.accessibilityTraits = UIAccessibilityTraits.none
         buttonName.accessibilityLabel = component.name
     }
-
+    
     // MARK: Restylable
-
+    
     func viewShouldRestyle() {
         Theme.current.applySecondaryBackground(self)
         buttonName.style(style: TextStyle.textStyle9)
@@ -66,32 +66,32 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     @IBOutlet private weak var buttonName: UIButton!
 
     @IBOutlet private weak var labelCopyright: UILabel!
-
+    
     @IBOutlet private weak var textLicense: UITextView!
-
+    
     @IBOutlet private weak var activityLicense: UIActivityIndicatorView!
-
+    
     @IBOutlet private weak var buttonMore: UIButton!
-
+    
     @IBOutlet private weak var viewLicenseFooter: UIView!
-
+    
     private weak var gradientLicense: GradientView?
-
+    
     @IBOutlet private weak var constraintMoreTopToLicense: NSLayoutConstraint!  // shrinked
 
-    @IBOutlet private weak var constraintMoreTopToFooter: NSLayoutConstraint!  // expanded
-
+    @IBOutlet private weak var constraintMoreTopToFooter: NSLayoutConstraint!   // expanded
+    
     private var component: LicenseComponent?
-
+    
     private var isExpanded = false
-
+    
     private(set) var heightThatFits: CGFloat = 0.0
-
+    
     weak var delegate: AboutLicenseCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+    
         textLicense.showsVerticalScrollIndicator = true
         textLicense.scrollsToTop = false
         var textInset = textLicense.textContainerInset
@@ -104,12 +104,12 @@ class AboutLicenseCell: UITableViewCell, Restylable {
 
         self.component = component
         self.isExpanded = isExpanded
-
+        
         let extName = "\(component.name) ⇾"
         buttonName.setTitle(extName, for: .normal)
         labelCopyright.text = component.copyright
         textLicense.text = license
-
+        
         if let _ = license {
             activityLicense.stopAnimating()
             viewLicenseFooter.isHidden = false
@@ -136,14 +136,14 @@ class AboutLicenseCell: UITableViewCell, Restylable {
     }
 
     // MARK: Actions
-
+    
     @IBAction private func seeLicense(_ sender: Any?) {
         guard let url = component?.licenseURL else {
             return
         }
         UIApplication.shared.openURL(url)
     }
-
+    
     @IBAction private func toggleLicense(_ sender: Any?) {
         if isExpanded {
             delegate?.aboutCell(self, shouldShrink: textLicense.text)
@@ -153,10 +153,10 @@ class AboutLicenseCell: UITableViewCell, Restylable {
         isExpanded = !isExpanded
         setNeedsLayout()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
+    
         if isExpanded {
             constraintMoreTopToLicense.isActive = false
             constraintMoreTopToFooter.isActive = true
@@ -164,13 +164,13 @@ class AboutLicenseCell: UITableViewCell, Restylable {
             constraintMoreTopToFooter.isActive = false
             constraintMoreTopToLicense.isActive = true
         }
-
+        
         let maxSize = CGSize(width: bounds.size.width, height: .greatestFiniteMagnitude)
         heightThatFits = 120.0 + textLicense.sizeThatFits(maxSize).height
     }
 
     // MARK: Restylable
-
+    
     func viewShouldRestyle() {
         Theme.current.applySecondaryBackground(self)
         Theme.current.applyPrincipalBackground(textLicense)
@@ -188,14 +188,14 @@ class AboutLicenseCell: UITableViewCell, Restylable {
             log.error("Cell has no backgroundColor?")
             return
         }
-
+        
         let gradientView = GradientView(frame: viewLicenseFooter.bounds)
         let gradient = gradientView.gradientLayer
         gradient.startPoint = .zero
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.colors = [gradientStartColor.cgColor, gradientEndColor.cgColor]
         gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
+        
         viewLicenseFooter.addSubview(gradientView)
         gradientLicense = gradientView
     }

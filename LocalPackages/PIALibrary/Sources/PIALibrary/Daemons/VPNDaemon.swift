@@ -24,8 +24,8 @@ import Foundation
 import NetworkExtension
 
 #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
-    import PIAWireguard
-    import TunnelKitOpenVPN
+import PIAWireguard
+import TunnelKitOpenVPN
 #endif
 
 private let log = PIALogger.logger(for: VPNDaemon.self)
@@ -39,13 +39,13 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var isReconnecting: Bool
     private var isReconnectingAfterConnectivityFailure: Bool = false
     private var lastKnownVpnStatus: VPNStatus = .disconnected
-
+    
     private init() {
         hasEnabledUpdates = false
         isReconnecting = false
         numberOfAttempts = 0
     }
-
+    
     func start() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)
@@ -60,7 +60,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             self.lastKnownVpnStatus = .connected
         }
     }
-
+    
     private func tryUpdateStatus(via connection: NEVPNConnection) {
         guard let profile = accessedDatabase.transient.activeVPNProfile else {
             return
@@ -89,16 +89,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 return
             }
         }
-
+        
         var nextStatus: VPNStatus = .disconnected
-
+        
         switch connection.status {
         case .connected:
             nextStatus = .connected
             Client.preferences.timeToConnectVPN = Date().timeIntervalSince1970 - Client.preferences.lastVPNConnectionAttempt
-
+            
             let previousStatus = accessedDatabase.transient.vpnStatus
-
+            
             guard (nextStatus != previousStatus) else {
                 return
             }
@@ -107,46 +107,43 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
             invalidateTimer()
             reset()
-
+            
             if self.lastKnownVpnStatus == .disconnected, Client.preferences.shareServiceQualityData {
                 ServiceQualityManager.shared.connectionEstablishedEvent()
                 self.lastKnownVpnStatus = .connected
             }
-
+            
             //Connection successful, the user interaction finished
             Client.configuration.connectedManually = false
-
+            
         case .connecting, .reasserting:
-
+            
             nextStatus = .connecting
             Client.preferences.lastVPNConnectionAttempt = Date().timeIntervalSince1970
-
+            
             if accessedDatabase.transient.vpnStatus == .disconnected,
-                self.lastKnownVpnStatus == .disconnected,
-                Client.preferences.shareServiceQualityData,
-                self.numberOfAttempts == 0
-            {
+               self.lastKnownVpnStatus == .disconnected,
+               Client.preferences.shareServiceQualityData,
+               self.numberOfAttempts == 0 {
                 ServiceQualityManager.shared.connectionAttemptEvent()
             }
 
             if fallbackTimer == nil {
-
+                
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
                     guard let self else { return }
 
                     let address = try? Client.providers.serverProvider.targetServer.bestAddress()
                     address?.markServerAsUnavailable()
-
+                    
                     log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                     self.numberOfAttempts += 1
                     if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
-                        Client.providers.vpnProvider.reconnect(
-                            after: 0,
-                            { _ in
-                                self.isReconnecting = false
-                            })
+                        Client.providers.vpnProvider.reconnect(after: 0, { _ in
+                            self.isReconnecting = false
+                        })
                     } else {
                         log.debug("MAX number of VPN reconnections. Disconnecting...")
                         Client.providers.vpnProvider.disconnect({ error in
@@ -156,7 +153,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                         })
                     }
                 }
-
+                
             }
 
         case .disconnecting:
@@ -164,9 +161,9 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         case .disconnected:
             nextStatus = .disconnected
-
+            
             let previousStatus = accessedDatabase.transient.vpnStatus
-
+            
             guard (nextStatus != previousStatus) else {
                 return
             }
@@ -175,15 +172,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 invalidateTimer()
                 reset()
             }
-
+            
             //triggered only when the user is manually aborting connection (before being established).
             if Client.configuration.disconnectedManually {
                 isReconnectingAfterConnectivityFailure = false
 
                 if self.lastKnownVpnStatus != .connected,
-                    (previousStatus == .connecting || previousStatus == .disconnecting),
-                    Client.preferences.shareServiceQualityData
-                {
+                   (previousStatus == .connecting || previousStatus == .disconnecting),
+                   Client.preferences.shareServiceQualityData {
                     ServiceQualityManager.shared.connectionCancelledEvent()
                 }
 
@@ -198,14 +194,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         default:
             nextStatus = .disconnected
         }
-
+        
         let previousStatus = accessedDatabase.transient.vpnStatus
         guard (nextStatus != previousStatus) else {
             return
         }
-
+        
         accessedDatabase.plain.lastKnownVpnStatus = nextStatus
-
+        
         if !isReconnecting {
             accessedDatabase.transient.vpnStatus = nextStatus
         }
@@ -220,16 +216,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
             // WireGuard connectivity check failure
             #if canImport(PIAWireguard)
-                if errorDomain == PacketTunnelProviderError.errorDomain, errorCode == PacketTunnelProviderError.connectivityCheckFailed.errorCode {
-                    connectivityCheckFailed = true
-                }
+            if errorDomain == PacketTunnelProviderError.errorDomain, errorCode == PacketTunnelProviderError.connectivityCheckFailed.errorCode {
+                connectivityCheckFailed = true
+            }
             #endif
 
             // OpenVPN connectivity check failure
             #if canImport(TunnelKitOpenVPN)
-                if errorDomain == OpenVPNError.errorDomain, errorCode == OpenVPNError.connectivityCheckFailed.errorCode {
-                    connectivityCheckFailed = true
-                }
+            if errorDomain == OpenVPNError.errorDomain, errorCode == OpenVPNError.connectivityCheckFailed.errorCode {
+                connectivityCheckFailed = true
+            }
             #endif
 
             // IKEv2 connectivity check failure
@@ -270,19 +266,19 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     }
 
     // MARK: Reset
-
+    
     private func reset() {
         self.isReconnecting = false
         self.numberOfAttempts = 0
         self.updateUIWithAttemptNumber(0)
     }
-
+    
     // MARK: Update UI
-
+    
     private func updateUIWithAttemptNumber(_ number: Int) {
         NotificationCenter.default.post(name: .PIADaemonsConnectingVPNStatus, object: number)
     }
-
+    
     // MARK: Notifications
 
     @objc private func neStatusDidChange(notification: Notification) {

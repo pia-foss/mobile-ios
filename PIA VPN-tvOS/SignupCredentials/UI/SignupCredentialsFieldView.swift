@@ -26,7 +26,7 @@ struct SignupCredentialsFieldView: View {
         }
         .overlay(content: {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.pia_outline_variant_primary, lineWidth: 1)
+                .stroke(Color.pia_outline_variant_primary , lineWidth: 1)
         })
     }
 }

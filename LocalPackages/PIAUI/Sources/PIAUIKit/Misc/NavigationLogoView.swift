@@ -25,11 +25,11 @@ import UIKit
 
 public final class NavigationLogoView: UIView {
     private let imgLogo: UIImageView = .init()
-
+    
     private struct Defaults {
         static let maxWidth: CGFloat = 100
     }
-
+    
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
     }
@@ -39,7 +39,7 @@ public final class NavigationLogoView: UIView {
             super.init(frame: CGRect(origin: .zero, size: .zero))
             return
         }
-
+        
         imgLogo.image = logo
 
         // Calculate the frame based on the logo image

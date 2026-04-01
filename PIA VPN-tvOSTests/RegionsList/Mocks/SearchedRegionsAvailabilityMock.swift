@@ -7,27 +7,27 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class SearchedRegionsAvailabilityMock: SearchedRegionsAvailabilityType {
-
+    
     var eraseAllCalled = false
     var eraseAllCalledAttempt = 0
     func eraseAll() {
         eraseAllCalled = true
         eraseAllCalledAttempt += 1
     }
-
+    
     var getCalled = false
     var getCalledAttempt = 0
-    var getResult: [String] = []
+    var getResult:[String] = []
     func get() -> [String] {
         getCalled = true
         getCalledAttempt += 1
         return getResult
     }
-
+    
+    
     var setCalled = false
     var setCalledAttepmt = 0
     var setCalledWithArgument: [String]!
@@ -36,5 +36,6 @@ class SearchedRegionsAvailabilityMock: SearchedRegionsAvailabilityType {
         setCalledAttepmt += 1
         setCalledWithArgument = value
     }
-
+    
+    
 }

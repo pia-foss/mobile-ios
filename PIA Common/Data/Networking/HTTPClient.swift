@@ -17,9 +17,9 @@ enum HTTPMethod: String {
 struct Endpoint {
     let path: String
     let method: HTTPMethod
-    let allHTTPHeaderFields: [String: String]?
-    let bodyParametrs: [String: Any]?
-
+    let allHTTPHeaderFields: [String : String]?
+    let bodyParametrs: [String : Any]?
+    
     struct Path {
         enum Authentication: String {
             case validateLogin = "client/v5/login_token/auth"
@@ -27,7 +27,7 @@ struct Endpoint {
             case bindLoginToken = "client/v5/login_token/bind"
         }
     }
-
+    
     enum Header: String {
         case application_json = "application/json"
         case authorization = "Authorization"

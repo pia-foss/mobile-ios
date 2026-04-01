@@ -27,7 +27,7 @@ public struct UserAccount: CustomStringConvertible {
 
     /// The account credentials.
     public let credentials: Credentials
-
+    
     /// The associated account informations.
     public let info: AccountInfo?
 
@@ -45,7 +45,7 @@ public struct UserAccount: CustomStringConvertible {
     }
 
     // MARK: CustomStringConvertible
-
+    
     /// :nodoc:
     public var description: String {
         if let info = self.info {

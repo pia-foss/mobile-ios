@@ -14,12 +14,12 @@ class VPNConfigurationInstallingErrorMapper {
         guard let error = error as? InstallVPNConfigurationError else {
             return nil
         }
-
+        
         switch error {
-        case .userCanceled:
+            case .userCanceled:
             return L10n.VpnPermission.Disallow.Message.basic
-        default:
-            return nil
+            default:
+                return nil
         }
     }
 }

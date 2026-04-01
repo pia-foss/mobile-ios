@@ -1,9 +1,12 @@
+
+
 import Foundation
+
 
 enum RequestAPI {
     enum Path: String {
         case login = "/api/client/v5/api_token"
-        case vpnToken = "/api/client/v5/vpn_token"  //refreshes the vpn token
+        case vpnToken = "/api/client/v5/vpn_token" //refreshes the vpn token
         case refreshApiToken = "/api/client/v5/refresh"
         case signup = "/api/client/signup"
         case setEmail = "/api/client/account"
@@ -15,7 +18,7 @@ enum RequestAPI {
         case clientStatus = "/api/client/status"
         case invites = "/api/client/invites"
         case redeem = "/api/client/giftcard_redeem"
-        case refreshToken = "/api/client/v4/refresh"  //TODO: check if this refreshToken is actually in use
+        case refreshToken = "/api/client/v4/refresh" //TODO: check if this refreshToken is actually in use
         case messages = "/api/client/v2/messages"
         case dedicatedIp = "/api/client/v2/dedicated_ip"
         case renewDedicatedIp = "/api/client/v2/check_renew_dip"
@@ -24,7 +27,7 @@ enum RequestAPI {
         case iosFeatureFlag = "/clients/desktop/ios-flags"
         case generateQR = "/api/client/v5/login_token"
     }
-
+    
     static func subdomain(for path: RequestAPI.Path) -> String {
         switch path {
         case .login:

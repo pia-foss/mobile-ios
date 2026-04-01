@@ -7,7 +7,6 @@
 //
 
 import XCTest
-
 @testable import PIA_VPN_tvOS
 
 final class PIA_VPN_tvOSTests: XCTestCase {

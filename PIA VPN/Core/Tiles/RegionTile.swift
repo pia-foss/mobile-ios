@@ -20,17 +20,17 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIAUIKit
+import PIALocalizations
 
 class RegionTile: UIView, Tileable {
-
+    
     private let defaultLeadingDistance: CGFloat = 25
     private let geoLeadingDistance: CGFloat = 49
-
+    
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
@@ -38,9 +38,9 @@ class RegionTile: UIView, Tileable {
             statusUpdated()
         }
     }
-
+    
     @IBOutlet private weak var labelLeadingConstraint: NSLayoutConstraint!
-
+    
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var serverName: UILabel!
     @IBOutlet private weak var mapImageView: UIImageView!
@@ -55,25 +55,25 @@ class RegionTile: UIView, Tileable {
         super.init(frame: frame)
         self.xibSetup()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
         self.setupView()
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func hasDetailView() -> Bool {
         return true
     }
-
+    
     private func setupView() {
         self.accessibilityIdentifier = "RegionTile"
         self.detailSegueIdentifier = StoryboardSegue.Main.selectRegionSegueIdentifier.rawValue
-
+        
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateServer), name: .PIAServerHasBeenUpdated, object: nil)
@@ -82,11 +82,11 @@ class RegionTile: UIView, Tileable {
         self.tileTitle.text = L10n.Tiles.Region.title.uppercased()
         self.updateServer()
     }
-
+    
     @objc private func updateServer() {
-
+        
         greenDot?.removeFromSuperview()
-
+        
         let effectiveServer = Client.preferences.displayedServer
         let vpn = Client.providers.vpnProvider
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
@@ -100,7 +100,7 @@ class RegionTile: UIView, Tileable {
             self.mapImageView.addSubview(greenDot)
         }
     }
-
+    
     private func setupDIP(withServer server: Server) {
         if server.dipToken != nil {
             labelIP.isHidden = false
@@ -132,7 +132,7 @@ class RegionTile: UIView, Tileable {
         self.geoImageView.isHidden = !server.geo
         self.labelLeadingConstraint.constant = server.geo ? geoLeadingDistance : defaultLeadingDistance
     }
-
+    
     @objc private func viewShouldRestyle() {
         updateServer()
         tileTitle.style(style: TextStyle.textStyle21)
@@ -142,8 +142,8 @@ class RegionTile: UIView, Tileable {
         Theme.current.applyRegionIPCell(labelIP, appearance: .dark)
         Theme.current.applyRegionIPTitleCell(labelDedicatedIPTitle, appearance: .dark)
     }
-
+    
     private func statusUpdated() {
     }
-
+    
 }

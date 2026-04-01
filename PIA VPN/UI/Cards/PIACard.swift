@@ -6,15 +6,15 @@
 //  Copyright © 2020 Private Internet Access Inc. All rights reserved.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIAUIKit
 
 class PIACard: UIView {
 
     var cardBackgroundImage: ImageAsset!
-
+    
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var cardBgImageView: UIImageView!
     @IBOutlet weak var cardParallaxImageView: UIImageView!
@@ -25,16 +25,16 @@ class PIACard: UIView {
     @IBOutlet weak var cardSecondaryCTAButton: UIButton!
 
     public func setupView() {
-
+        
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
-
+        
         viewShouldRestyle()
         addParallaxToView(vw: cardParallaxImageView)
     }
 
     @objc private func viewShouldRestyle() {
-
+        
         self.closeButton.tintColor = Theme.current.palette.appearance == .dark ? .white : Macros.color(hex: "111621", alpha: 1)
         self.cardBgImageView.image = UIImage(asset: cardBackgroundImage)
         self.cardTitle.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyleCardTitleDark : TextStyle.textStyleCardTitleLight)

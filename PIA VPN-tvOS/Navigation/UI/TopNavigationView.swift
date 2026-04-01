@@ -11,10 +11,10 @@ import SwiftUI
 
 /// View displayed in the Leading part of the Navigation top bar
 struct LeadingSegmentedNavigationView: View {
-
+    
     @ObservedObject var viewModel: LeadingNavigationBarViewModel
     @FocusState var focusedSection: LeadingNavigationBarViewModel.Sections?
-
+    
     func button(for section: LeadingNavigationBarViewModel.Sections) -> some View {
         Button {
             viewModel.sectionDidUpdateSelection(to: section)
@@ -26,24 +26,26 @@ struct LeadingSegmentedNavigationView: View {
                 .padding(.horizontal, 28)
                 .cornerRadius(32)
                 .foregroundColor(section == viewModel.highlightedSection ? Color.black : Color.white)
-                .background(
-                    Capsule().fill(
-                        section == viewModel.highlightedSection ? Color.pia_primary : section == viewModel.selectedSection ? Color.pia_on_primary : Color.clear
-                    ).shadow(radius: 3))
+                .background(Capsule().fill(
+                    section == viewModel.highlightedSection ? Color.pia_primary :
+                        section == viewModel.selectedSection ?
+                    Color.pia_on_primary : Color.clear
+                ).shadow(radius: 3))
         }
         .buttonBorderShape(.capsule)
         .buttonStyle(.borderless)
         .focused($focusedSection, equals: section)
-
+        
     }
-
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 2) {
                 ForEach(viewModel.sections, id: \.self) { section in
                     button(for: section)
                         .padding(6)
-
+                        
                 }
             }
             .background(Capsule().fill(Color.pia_surface_container_secondary).shadow(radius: 3))
@@ -54,16 +56,16 @@ struct LeadingSegmentedNavigationView: View {
         .onAppear {
             viewModel.viewDidAppear()
         }
-
+       
     }
-
+        
 }
 
 /// View displayed in the Trailing part of the Navigation top bar
 struct TrailingNavigationView: View {
     @ObservedObject var viewModel: TrailingNavigationBarViewModel
     @FocusState var focusedSection: TrailingNavigationBarViewModel.Sections?
-
+    
     var body: some View {
         VStack(alignment: .trailing) {
             HStack(spacing: 16) {
@@ -75,9 +77,8 @@ struct TrailingNavigationView: View {
                             .padding(12)
                             .foregroundColor(section == viewModel.highlightedSection ? Color.black : Color.white)
                             .background(
-                                section == viewModel.highlightedSection
-                                    ? Color.pia_primary : Color.pia_surface_container_secondary
-                            )
+                                section == viewModel.highlightedSection 
+                                ? Color.pia_primary : Color.pia_surface_container_secondary)
                             .clipShape(Circle())
                     }
                     .focused($focusedSection, equals: section)
@@ -85,7 +86,7 @@ struct TrailingNavigationView: View {
                     .buttonStyle(.card)
                 }
             }
-
+            
         }
         .onChange(of: focusedSection) { _, newValue in
             viewModel.sectionDidUpdateFocus(to: newValue)

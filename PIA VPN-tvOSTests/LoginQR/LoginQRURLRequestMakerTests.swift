@@ -7,7 +7,6 @@
 //
 
 import XCTest
-
 @testable import PIA_VPN_tvOS
 
 final class LoginQRURLRequestMakerTests: XCTestCase {
@@ -15,10 +14,10 @@ final class LoginQRURLRequestMakerTests: XCTestCase {
     func test_makeGenerateLoginQRURLRequest() {
         // GIVEN
         let sut = LoginQRURLRequestMaker()
-
+        
         // WHEN
         let urlRequest = sut.makeGenerateLoginQRURLRequest()
-
+        
         // THEN
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["application/json"], "accept")
@@ -26,14 +25,14 @@ final class LoginQRURLRequestMakerTests: XCTestCase {
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?.keys.count, 2)
         XCTAssertEqual(urlRequest.url, URL(string: "https://privateinternetaccess.com/api/client/v5/login_token"))
     }
-
+    
     func test_makeValidateLoginQRURLRequest() {
         // GIVEN
         let sut = LoginQRURLRequestMaker()
-
+        
         // WHEN
         let urlRequest = sut.makeValidateLoginQRURLRequest(loginQRToken: "token")
-
+        
         // THEN
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["application/json"], "accept")

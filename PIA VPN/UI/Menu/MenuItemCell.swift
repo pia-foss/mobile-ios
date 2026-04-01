@@ -20,22 +20,22 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import PIALibrary
 import PIAUIKit
-import UIKit
 
 class MenuItemCell: UITableViewCell, Restylable {
     @IBOutlet private weak var imvIcon: UIImageView!
 
     @IBOutlet private weak var labelTitle: UILabel!
-
+    
     func fill(withTitle title: String, icon: UIImage?) {
         viewShouldRestyle()
-
+        
         labelTitle.text = title
         imvIcon.image = icon
     }
-
+    
     func fillVersion(withTitle title: String) {
         viewShouldRestyle()
         Theme.current.applyMenuVersionListStyle(labelTitle)
@@ -44,8 +44,9 @@ class MenuItemCell: UITableViewCell, Restylable {
         imvIcon.image = nil
     }
 
-    // MARK: Restylable
 
+    // MARK: Restylable
+    
     func viewShouldRestyle() {
         Theme.current.applyMenuBackground(self)
         Theme.current.applyMenuListStyle(labelTitle)

@@ -7,51 +7,51 @@ private let log = PIALogger.logger(for: ClientErrorMapper.self)
 struct ClientErrorMapper {
     static func map(networkRequestError: NetworkRequestError) -> ClientError {
         log.info("Will map ClientError from NetworkRequestError: \(networkRequestError)")
-
+        
         switch networkRequestError {
         case .connectionError(let statusCode, let message):
             log.info(".connectionError - statusCode: \(statusCode?.description ?? "nil"), message: \(message ?? "nil")")
             return getClientError(from: statusCode) ?? .unexpectedReply
-
+               
         case .allConnectionAttemptsFailed(let statusCode):
             return getClientError(from: statusCode) ?? .unexpectedReply
-
+            
         case .noDataContent:
             return .malformedResponseData
-
+            
         case .noErrorAndNoResponse:
             return .unexpectedReply
-
+            
         case .unableToSaveVpnToken:
             return .unexpectedReply
-
+            
         case .unableToSaveAPIToken:
             return .unexpectedReply
 
         case .connectionCompletedWithNoResponse:
             return .malformedResponseData
-
+            
         case .unknown(message: let message):
             log.info(".unknown - message: \(message ?? "nil")")
             return .unexpectedReply
-
+            
         case .unableToDecodeAPIToken, .unableToDecodeDataContent:
             return .malformedResponseData
-
+            
         case .unableToDecodeVpnToken:
             return .malformedResponseData
-
+            
         case .badReceipt:
             return .badReceipt
-
+            
         case .unableToDecodeData:
             return .malformedResponseData
-
+            
         case .unauthorized:
             return .unauthorized
         }
     }
-
+    
     static func getClientError(from statusCode: Int?) -> ClientError? {
         guard
             let statusCode,
@@ -75,5 +75,6 @@ struct ClientErrorMapper {
             return nil
         }
     }
-
+    
+    
 }

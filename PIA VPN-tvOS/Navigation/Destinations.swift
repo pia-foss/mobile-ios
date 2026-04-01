@@ -17,19 +17,19 @@ enum DashboardDestinations: Destinations, Codable {
 enum RegionsDestinations: Destinations, Codable {
     case serversList
     case search
-
+    
     static func == (lhs: RegionsDestinations, rhs: RegionsDestinations) -> Bool {
         switch (lhs, rhs) {
-        case (.serversList, .serversList):
+        case(.serversList, .serversList):
             return true
-        case (.search, .search):
+        case(.search, .search):
             return true
         default:
             return false
-
+            
         }
     }
-
+    
     func hash(into hasher: inout Hasher) {
         switch self {
         case .serversList:

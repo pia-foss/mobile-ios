@@ -6,42 +6,41 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIAUIKit
+import PIALocalizations
 
 class ForceUpdateViewController: UIViewController {
     @IBOutlet weak var updateButton: PIAButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var disconnectVPNLabel: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         styleUpdateButton()
         titleLabel.text = L10n.Forceupdate.Label.title
         descriptionLabel.text = L10n.Forceupdate.Label.subtitle
-
+        
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         updateButton.setTitle(L10n.Forceupdate.Button.update, for: .normal)
-
+        
         disconnectVPNLabel.text = L10n.Forceupdate.Label.Vpn.connected
         disconnectVPNLabel.isHidden = !Client.providers.vpnProvider.isVPNConnected
     }
-
+    
     @objc func updateButtonTapped() {
         Client.providers.vpnProvider.uninstallAll()
         UIApplication.shared.open(URL(string: "https://itunes.apple.com/app/private-internet-access-anonymous/id955626407")!)
     }
-
+    
     private func styleUpdateButton() {
         updateButton.setRounded()
         updateButton.style(style: TextStyle.Buttons.piaGreenButton)
-        updateButton.setTitle(
-            L10n.Welcome.Purchase.submit.uppercased(),
-            for: [])
+        updateButton.setTitle(L10n.Welcome.Purchase.submit.uppercased(),
+                               for: [])
     }
 }

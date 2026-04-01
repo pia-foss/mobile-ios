@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import PIALibrary
 import SwiftUI
+import PIALibrary
 
-struct PIAWidgetView: View {
+struct PIAWidgetView : View {
 
     @Environment(\.widgetFamily) var widgetFamily
 

@@ -1,10 +1,11 @@
+
 import Foundation
 import NWHttpConnection
 
 @testable import PIALibrary
 
 class NetworkRequestClientMock: NetworkRequestClientType {
-
+    
     var executeRequestCalledAttempt = 0
     var executeRequestError: NetworkRequestError?
     var executeRequestResponse: NetworkRequestResponseType?

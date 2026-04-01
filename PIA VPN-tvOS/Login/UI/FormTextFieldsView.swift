@@ -7,20 +7,20 @@
 //
 
 import Foundation
-import PIALocalizations
 import SwiftUI
+import PIALocalizations
 
 struct FormTextFieldsView: View {
     enum FocusedField: Hashable {
         case username, password
     }
-
+    
     @Binding var username: String
     @Binding var password: String
     @FocusState var focus: FocusedField?
-
+    
     let onSubmittedForm: () -> Void
-
+    
     var body: some View {
         VStack {
             TextField(
@@ -31,7 +31,7 @@ struct FormTextFieldsView: View {
             .textFieldStyle(TextFieldStyleModifier())
             .frame(width: 510, height: 66)
             .focused($focus, equals: .username)
-
+            
             SecureField(
                 L10n.Tvos.Login.Placeholder.password,
                 text: $password,

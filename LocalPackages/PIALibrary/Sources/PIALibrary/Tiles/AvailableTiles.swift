@@ -41,7 +41,7 @@ public enum AvailableTiles: Int {
     public static func allTiles() -> [AvailableTiles] {
         return [.region, .quickConnect, .ip, .subscription, .usage, .quickSettings, .favoriteServers, .connectionTile]
     }
-
+    
     public static func defaultTiles() -> [AvailableTiles] {
         return [.region, .quickConnect, .ip, .quickSettings]
     }

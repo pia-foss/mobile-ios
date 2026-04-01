@@ -23,13 +23,13 @@
 import Foundation
 
 final class MockWebServices: WebServices {
-
+    
     var messageType: InAppMessageType = .view
-
+    
     var credentials: (() -> Credentials)?
 
     var accountInfo: (() -> AccountInfo)?
-
+    
     var appstoreInformationEligible: (() -> AppStoreInformation)?
 
     var appstoreInformationNotEligible: (() -> AppStoreInformation)?
@@ -59,65 +59,65 @@ final class MockWebServices: WebServices {
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-
+    
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-
+    
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-
+    
     func logout(_ callback: LibraryCallback<Bool>?) {
         callback?(true, nil)
     }
-
+    
     func deleteAccount(_ callback: LibraryCallback<Bool>?) {
         callback?(true, nil)
     }
-
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         callback?([], nil)
     }
-
+    
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-
+    
     func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-
+    
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-
+    
     func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-
+    
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         let result = serversBundle?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-
+    
     func flagURL(for country: String) -> URL {
         return URL(fileURLWithPath: "")
     }
-
+    
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
         callback?(nil, nil)
     }
-
+    
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
         callback?(nil, nil)
     }
-
+    
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
         let result = { () -> AppStoreInformation? in
             if let receipt = receipt {
@@ -130,17 +130,17 @@ final class MockWebServices: WebServices {
                 return self.appstoreInformationEligible?()
             }
         }
-
+        
         Client.configuration.eligibleForTrial = result()!.eligibleForTrial
 
         callback?(result(), nil)
 
     }
-
+    
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
         callback?(["mock-test"], nil)
     }
-
+    
     func validateLoginQR(qrToken: String, _ callback: ((String?, Error?) -> Void)?) {
         callback?(nil, nil)
     }

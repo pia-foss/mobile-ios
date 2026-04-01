@@ -19,3 +19,6 @@ final class ClientAdapter: ClientType {
         Client.ping(servers: serversToPing)
     }
 }
+
+
+

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class KeychainTypeMock: KeychainType {
-
+    
     var eraseAllFavoritesCalled = false
     var eraseAllFavoritesCalledAttempt = 0
     var eraseAllFavoritesResultError: Error?
@@ -22,7 +21,7 @@ class KeychainTypeMock: KeychainType {
             throw error
         }
     }
-
+    
     var getFavoritesCalled = false
     var getFavoritesCalledAttempt = 0
     var getFavoritesResultError: Error?
@@ -30,14 +29,15 @@ class KeychainTypeMock: KeychainType {
     func getFavorites() throws -> [String] {
         getFavoritesCalled = true
         getFavoritesCalledAttempt += 1
-
+        
         if let error = getFavoritesResultError {
             throw error
         } else {
             return getFavoritesResultSuccess!
         }
     }
-
+    
+    
     var setFavoritesCalled = false
     var setFavoritesCalledAttempt = 0
     var setFavoritesCalledWithArgument: [String]?
@@ -46,10 +46,11 @@ class KeychainTypeMock: KeychainType {
         setFavoritesCalled = true
         setFavoritesCalledAttempt += 1
         setFavoritesCalledWithArgument = favorites
-
+        
         if let error = setFavoritesResultError {
             throw error
         }
     }
-
+    
+    
 }

@@ -7,12 +7,11 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class BootstraperMock: BootstraperType {
     var callAsFunctionTimesCalled = 0
-
+    
     func callAsFunction() {
         callAsFunctionTimesCalled += 1
     }

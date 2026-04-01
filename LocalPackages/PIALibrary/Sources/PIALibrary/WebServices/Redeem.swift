@@ -24,9 +24,9 @@ import Foundation
 
 struct Redeem {
     let email: String
-
+    
     let code: String
-
+    
     init(email: String, code: String) {
         self.email = email
         self.code = code

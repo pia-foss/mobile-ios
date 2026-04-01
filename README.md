@@ -31,19 +31,10 @@ The PIA VPN app features:
 - Xcode 9+ (Swift 4)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [swift-format][dep-swift-format] (Included in the Swift Toolchain since Swift 6 / Xcode 16)
 - [SwiftGen][dep-swiftgen]
 - [Go][dep-golang]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
-
-### swift-format
-
-To maintain consistency across developers, we use [`swift-format`][dep-swift-format]. The default formatting rules are defined in the `.swift-format` file. A pre-commit hook is available that automatically formats staged Swift files and blocks the commit if any changes are needed. To install it, run from the repo root:
-
-```sh
-ln -s ../../Tools/hooks/pre-commit .git/hooks/pre-commit
-```
 
 ### Hotspot Helper API
 
@@ -87,7 +78,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [pia-url]: https://www.privateinternetaccess.com/
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
-[dep-swift-format]: https://github.com/swiftlang/swift-format
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/

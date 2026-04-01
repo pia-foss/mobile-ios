@@ -21,14 +21,14 @@
 //
 
 import Foundation
+import regions
 import account
 import csi
-import regions
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
 final class PIAWebServices: WebServices, ConfigurationAccess {
-
+    
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
 
@@ -36,14 +36,12 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     let accountAPI: IOSAccountAPI!
     let csiAPI: CSIAPI!
     let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
-
+    
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
-        let endpointsProvider: IRegionEndpointProvider =
-            Client.environment == .staging
-            ? PIARegionStagingClientStateProvider()
-            : PIARegionClientStateProvider()
-
+        let endpointsProvider: IRegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
+        : PIARegionClientStateProvider()
+        
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: endpointsProvider)
             .setCertificate(certificate: rsa4096Certificate)
@@ -52,25 +50,23 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             .setVpnRegionsRequestPath(vpnRegionsRequestPath: "/vpninfo/servers/v6")
             .setShadowsocksRegionsRequestPath(shadowsocksRegionsRequestPath: "/shadow_socks")
             .build()
-
+        
         if Client.environment == .staging {
-            self.accountAPI =
-                AccountBuilder<IOSAccountAPI>()
+            self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
                 .setEndpointProvider(endpointsProvider: PIAAccountStagingClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
                 .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         } else {
-            self.accountAPI =
-                AccountBuilder<IOSAccountAPI>()
+            self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
                 .setEndpointProvider(endpointsProvider: PIAAccountClientStateProvider())
                 .setUserAgentValue(userAgentValue: PIAWebServices.userAgent)
                 .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
-
+        
         var appVersion = "Unknown"
         if let info = Bundle.main.infoDictionary {
             appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -92,7 +88,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             ])
             .build()
     }
-
+    
     public static let userAgent: String = {
         if let info = Bundle.main.infoDictionary {
             let executable = Client.environment == .staging ? "PIA VPN" : "PIA VPN Staging"
@@ -158,14 +154,12 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
      Generates a new auth token for the specific user
      */
     func token(credentials: Credentials, _ callback: ((Error?) -> Void)?) {
-        self.accountAPI.loginWithCredentials(
-            username: credentials.username,
-            password: credentials.password
-        ) { errors in
+        self.accountAPI.loginWithCredentials(username: credentials.username,
+                                             password: credentials.password) { errors in
             Self.handleLoginResponse(errors: errors, mapper: \.loginError, callback: callback)
         }
     }
-
+    
     /***
      Validates the QR Token and generates a new auth token for the specific user
      */
@@ -216,7 +210,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-
+    
     func update(credentials: Credentials, resetPassword reset: Bool, email: String, _ callback: SuccessLibraryCallback?) {
         if reset {
             //Reset password, we use the token within accounts
@@ -241,13 +235,13 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-
+    
     func loginLink(email: String, _ callback: SuccessLibraryCallback?) {
         self.accountAPI.loginLink(email: email) { errors in
             Self.handleLoginResponse(errors: errors, mapper: \.loginLinkError, callback: callback)
         }
     }
-
+    
     func logout(_ callback: LibraryCallback<Bool>?) {
         self.accountAPI.logout() { (errors) in
             if !errors.isEmpty {
@@ -261,7 +255,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(true, nil)
         }
     }
-
+    
     func deleteAccount(_ callback: LibraryCallback<Bool>?) {
         self.accountAPI.deleteAccount(callback: { errors in
             if !errors.isEmpty {
@@ -271,7 +265,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         })
     }
-
+    
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
         self.accountAPI.renewDedicatedIP(dipToken: dipToken) { (errors) in
             if !errors.isEmpty {
@@ -281,7 +275,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(nil)
         }
     }
-
+    
     fileprivate func mapDIPError(_ error: AccountRequestError?) -> ClientError {
         guard let error = error else {
             return ClientError.invalidParameter
@@ -295,7 +289,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             return ClientError.invalidParameter
         }
     }
-
+    
     func activateDIPToken(tokens: [String], _ callback: LibraryCallback<[Server]>?) {
         self.accountAPI.redeemDedicatedIPs(dipTokens: tokens) { (dedicatedIps, errors) in
             if !errors.isEmpty {
@@ -311,7 +305,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 switch status {
                 case .active:
 
-                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: { $0.regionIdentifier == dipServer.id }) else {
+                    guard let firstServer = Client.providers.serverProvider.currentServers.first(where: {$0.regionIdentifier == dipServer.id}) else {
                         callback?([], ClientError.malformedResponseData)
                         return
                     }
@@ -326,14 +320,14 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                     let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
                     let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
 
-                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate {
+                    if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {
                         //Expiring in 5 days or less
-                        Macros.postNotification(.PIADIPRegionExpiring, [.token: dipToken])
+                        Macros.postNotification(.PIADIPRegionExpiring, [.token : dipToken])
                     }
 
-                    Macros.postNotification(.PIADIPCheckIP, [.token: dipToken, .ip: ip])
+                    Macros.postNotification(.PIADIPCheckIP, [.token : dipToken, .ip : ip])
 
-                    let dipUsername = "dedicated_ip_" + dipServer.dipToken + "_" + String.random(length: 8)
+                    let dipUsername = "dedicated_ip_"+dipServer.dipToken+"_"+String.random(length: 8)
 
                     let dipRegion = Server(serial: firstServer.serial, name: firstServer.name, country: firstServer.country, hostname: firstServer.hostname, openVPNAddressesForTCP: [server], openVPNAddressesForUDP: [server], wireGuardAddressesForUDP: [server], iKEv2AddressesForUDP: [server], pingAddress: firstServer.pingAddress, geo: false, meta: nil, dipExpire: expiringDate, dipToken: dipServer.dipToken, dipStatus: status, dipUsername: dipUsername, regionIdentifier: firstServer.regionIdentifier)
 
@@ -353,7 +347,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(dipRegions, nil)
         }
     }
-
+    
     func featureFlags(_ callback: LibraryCallback<[String]>?) {
         self.accountAPI.featureFlags { (info, errors) in
             if let flags = info?.flags {
@@ -363,92 +357,91 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-
+    
     #if os(iOS) || os(tvOS)
-        func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
-            var marketingJSON = ""
-            if let marketing = request.marketing {
-                marketingJSON = stringify(json: marketing)
-            }
-
-            var debugJSON = ""
-            if let debug = request.debug {
-                debugJSON = stringify(json: debug)
-            }
-
-            let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
-            self.accountAPI.signUp(information: info) { (response, errors) in
-                if !errors.isEmpty {
-                    callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
-                    return
-                }
-
-                guard let response = response else {
-                    callback?(nil, ClientError.malformedResponseData)
-                    return
-                }
-
-                callback?(Credentials(username: response.username, password: response.password), nil)
-            }
+    func signup(with request: Signup, _ callback: ((Credentials?, Error?) -> Void)?) {
+        var marketingJSON = ""
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
         }
 
-        private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
-            var options: JSONSerialization.WritingOptions = []
-            if prettyPrinted {
-                options = JSONSerialization.WritingOptions.prettyPrinted
-            }
-
-            do {
-                let data = try JSONSerialization.data(withJSONObject: json, options: options)
-                if let string = String(data: data, encoding: String.Encoding.utf8) {
-                    return string
-                }
-            } catch {
-                log.error("JSON stringification error: \(error)")
-            }
-
-            return ""
+        var debugJSON = ""
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
         }
 
-        func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
-            var marketingJSON = ""
-            if let marketing = request.marketing {
-                marketingJSON = stringify(json: marketing)
-            }
-
-            var debugJSON = ""
-            if let debug = request.debug {
-                debugJSON = stringify(json: debug)
-            }
-
-            let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
-
-            self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (errors) in
-                if !errors.isEmpty {
-                    callback?(ClientError.badReceipt)
-                    return
-                }
-                callback?(nil)
-            }
-        }
-    #endif
-
-    func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
-        if Client.environment == .staging {
-            guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
-                let jsonData = try? Data(contentsOf: url)
-            else {
-                callback?(nil, ClientError.noRegions)
+        let info = IOSSignupInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), email: request.email, marketing: marketingJSON.isEmpty ? nil : marketingJSON, debug: debugJSON.isEmpty ? nil : debugJSON)
+        self.accountAPI.signUp(information: info) { (response, errors) in
+            if !errors.isEmpty {
+                callback?(nil, errors.last?.code == 400 ? ClientError.badReceipt : ClientError.invalidParameter)
                 return
             }
 
+            guard let response = response else {
+                callback?(nil, ClientError.malformedResponseData)
+                return
+            }
+
+            callback?(Credentials(username: response.username, password: response.password), nil)
+        }
+    }
+
+    private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
+        var options: JSONSerialization.WritingOptions = []
+        if prettyPrinted {
+            options = JSONSerialization.WritingOptions.prettyPrinted
+        }
+
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json, options: options)
+            if let string = String(data: data, encoding: String.Encoding.utf8) {
+                return string
+            }
+        } catch {
+            log.error("JSON stringification error: \(error)")
+        }
+
+        return ""
+    }
+
+    func processPayment(credentials: Credentials, request: Payment, _ callback: SuccessLibraryCallback?) {
+        var marketingJSON = ""
+        if let marketing = request.marketing {
+            marketingJSON = stringify(json: marketing)
+        }
+
+        var debugJSON = ""
+        if let debug = request.debug {
+            debugJSON = stringify(json: debug)
+        }
+        
+        let info = IOSPaymentInformation(store: Self.store, receipt: request.receipt.base64EncodedString(), marketing: marketingJSON, debug: debugJSON)
+
+        self.accountAPI.payment(username: credentials.username, password: credentials.password, information: info) { (errors) in
+            if !errors.isEmpty {
+                callback?(ClientError.badReceipt)
+                return
+            }
+            callback?(nil)
+        }
+    }
+    #endif
+    
+    func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
+        if Client.environment == .staging {
+            guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
+                callback?(nil, ClientError.noRegions)
+                return
+            }
+            
             guard let bundle = ServersBundle.parse(from: jsonData) else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
 
             callback?(bundle, nil)
-
+            
         } else {
             self.regionsAPI.fetchVpnRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
                 if let _ = error {
@@ -460,7 +453,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                     callback?(nil, ClientError.noRegions)
                     return
                 }
-
+                
                 guard let bundle = ServersBundle.parse(from: RegionsUtils().stringify(regionsResponse: response)) else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
@@ -470,7 +463,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-
+    
     // MARK: Store
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {
         self.accountAPI.subscriptions(receipt: nil) { (response, errors) in
@@ -480,24 +473,22 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
 
             if let response = response {
-
+                
                 var products = [Product]()
                 for prod in response.availableProducts {
-                    let product = Product(
-                        identifier: prod.id,
-                        plan: Plan(rawValue: prod.plan) ?? .other,
-                        price: prod.price,
-                        legacy: prod.legacy)
+                    let product = Product(identifier: prod.id,
+                                          plan: Plan(rawValue: prod.plan) ?? .other,
+                                          price: prod.price,
+                                          legacy: prod.legacy)
                     products.append(product)
                 }
 
                 let eligibleForTrial = response.eligibleForTrial
-
-                let info = AppStoreInformation(
-                    products: products,
-                    eligibleForTrial: eligibleForTrial)
+                
+                let info = AppStoreInformation(products: products,
+                                    eligibleForTrial: eligibleForTrial)
                 Client.configuration.eligibleForTrial = info.eligibleForTrial
-
+                
                 callback?(info, nil)
 
             } else {

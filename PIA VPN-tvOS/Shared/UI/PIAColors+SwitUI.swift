@@ -1,21 +1,22 @@
+
 import SwiftUI
 
 extension Color {
     static var pia_background = Color("pia_background")
     static var pia_on_background = Color("pia_on_background")
-
+    
     /// PIA green color
     static var pia_primary = Color("pia_primary")
-
+    
     static var pia_yellow = Color("pia_yellow")
     static var pia_yellow_dark = Color("pia_yellow_dark")
-
+    
     static var pia_red = Color("pia_red")
     static var pia_red_dark = Color("pia_red_dark")
-
+    
     /// Dark Grey
     static var pia_on_primary = Color("pia_on_primary")
-
+    
     /// Other Greys
     static var pia_surface = Color("pia_surface")
     static var pia_surface_container_primary = Color("pia_surface_container_primary")
@@ -26,7 +27,7 @@ extension Color {
     static var pia_surface_overlay = Color("pia_surface_overlay")
     static var pia_outline = Color("pia_outline")
     static var pia_outline_variant_primary = Color("pia_outline_variant_primary")
-
+    
     static var pia_error = Color("pia_error")
     static var pia_on_error = Color("pia_on_error")
     static var pia_error_container = Color("pia_error_container")

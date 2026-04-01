@@ -1,5 +1,5 @@
-import SwiftUI
 import WidgetKit
+import SwiftUI
 
 @main
 struct PIAWidgetBundle: WidgetBundle {
@@ -7,7 +7,8 @@ struct PIAWidgetBundle: WidgetBundle {
         PIAWidget()
 
         if #available(iOS 16.1, *) {
-            PIAConnectionActivityWidget()
+          PIAConnectionActivityWidget()
         }
     }
 }
+

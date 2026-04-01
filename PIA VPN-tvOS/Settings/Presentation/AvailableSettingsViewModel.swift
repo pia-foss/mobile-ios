@@ -14,11 +14,11 @@ class AvailableSettingsViewModel: ObservableObject {
         case account
         case general
         case dedicatedIp
-
+        
         var id: Self {
             return self
         }
-
+        
         var title: String {
             switch self {
             case .account:
@@ -30,17 +30,17 @@ class AvailableSettingsViewModel: ObservableObject {
             }
         }
     }
-
+    
     var sections: [Sections] = [.account, .dedicatedIp]
-
+    
     private let onAccountSectionSelectedAction: AppRouter.Actions
     private let onDedicatedIpSectionSelectedAction: AppRouter.Actions
-
+    
     init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions) {
         self.onAccountSectionSelectedAction = onAccountSelectedAction
         self.onDedicatedIpSectionSelectedAction = onDedicatedIpSectionSelectedAction
     }
-
+    
     func navigate(to section: Sections) {
         switch section {
         case .account:
@@ -53,5 +53,5 @@ class AvailableSettingsViewModel: ObservableObject {
             break
         }
     }
-
+    
 }

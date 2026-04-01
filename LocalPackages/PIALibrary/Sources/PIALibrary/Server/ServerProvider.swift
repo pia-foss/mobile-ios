@@ -32,7 +32,7 @@ public protocol ServerProvider: AnyObject {
 
     /// The list of provided `Server`s.
     var currentServers: [Server] { get }
-
+    
     /// The list of last connected `Server`s.
     var historicalServers: [Server] { get }
 
@@ -43,13 +43,13 @@ public protocol ServerProvider: AnyObject {
     ///
     /// - Seealso: `VPNProvider`
     var targetServer: Server { get throws }
-
+    
     /// The array of DIP tokens stored in the keychain, or `nil` if logged out.
     var dipTokens: [String]? { get }
 
     /**
      Loads this provider with a local JSON, as seen on the /servers web client API.
-    
+
      - Postcondition:
         - Sets `currentServers` and `currentServersConfiguration`.
         - Posts `Notification.Name.PIAServerDidUpdateCurrentServers`.
@@ -59,7 +59,7 @@ public protocol ServerProvider: AnyObject {
 
     /**
      Loads this provider with a JSON, as seen on the /servers web client API.
-    
+
      - Postcondition:
         - Sets `currentServers` and `currentServersConfiguration`.
         - Posts `Notification.Name.PIAServerDidUpdateCurrentServers`.
@@ -69,7 +69,7 @@ public protocol ServerProvider: AnyObject {
 
     /**
      Downloads or refreshes the current servers and configuration.
-    
+ 
      - Postcondition:
         - Updates `currentServers` and `currentServersConfiguration`.
      - Parameter callback: Returns the new list of `Server` objects.
@@ -78,20 +78,20 @@ public protocol ServerProvider: AnyObject {
 
     /**
      Looks for a server via its `Server.identifier`.
-    
+
      - Parameter identifier: The identifier to look for (e.g. "germany" for Germany).
      - Returns: The found `Server` object or `nil`.
      */
     func find(withIdentifier identifier: String) -> Server?
-
+    
     /**
      Reset the currentServers object
      */
     func resetCurrentServers()
-
+    
     /**
      Activates the dedicated IP tokens.
-    
+
      - Precondition: `isLoggedIn` is `true`.
      - Parameter tokens: The `String` array of DIP token to activate.
      - Parameter callback: Returns the status of the DIP region `Server` array.
@@ -100,28 +100,29 @@ public protocol ServerProvider: AnyObject {
 
     /**
      Activates the dedicated IP token.
-    
+
      - Precondition: `isLoggedIn` is `true`.
      - Parameter tokens: The `String`  DIP token to activate.
      - Parameter callback: Returns the status of the DIP region `Server`.
      */
-    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?)
+    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) 
 
     /**
      Removes the dedicated IP region.
-    
+
      - Precondition: `isLoggedIn` is `true`.
      - Parameter dipToken: The `String` DIP token to remove.
      */
     func removeDIPToken(_ dipToken: String)
-
+    
+    
     /**
      Checks the expiration dip token for the active user
-    
+
      - Precondition: `isLoggedIn` is `true`.
      - Parameter dipToken: The `String` DIP token to check.
      - Parameter callback: Returns the response from the server
      */
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
-
+    
 }

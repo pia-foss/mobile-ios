@@ -6,20 +6,20 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import PIALocalizations
 import SwiftUI
+import PIALocalizations
 
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @FocusState private var focused: Bool
-
+    
     @ObservedObject private var viewModel: LoginViewModel
-
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
     }
-
+    
     var body: some View {
         VStack {
             if viewModel.loginStatus == .isLogging {
@@ -32,29 +32,26 @@ struct LoginView: View {
                             .font(.system(size: 57))
                             .bold()
                             .fixedSize(horizontal: false, vertical: true)
-
+                            
                         FormTextFieldsView(username: $username, password: $password) {
                             viewModel.login(username: username, password: password)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(EdgeInsets(top: 80, leading: 30, bottom: 0, trailing: 0))
-
+                        
                     Image.onboarding_signin_world
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing)
-                }.alert(
-                    L10n.Global.error, isPresented: $viewModel.shouldShowErrorMessage,
-                    actions: {
-                        Button(L10n.Global.ok) {}
-                    },
-                    message: {
-                        if case .failed(let errorMessage, _) = viewModel.loginStatus, let errorMessage = errorMessage {
-                            Text(errorMessage)
-                        }
-                    })
+                }.alert(L10n.Global.error, isPresented: $viewModel.shouldShowErrorMessage, actions: {
+                    Button(L10n.Global.ok) {}
+                }, message: {
+                    if case .failed(let errorMessage, _) = viewModel.loginStatus, let errorMessage = errorMessage {
+                        Text(errorMessage)
+                    }
+                })
             }
-
+            
         }
     }
 }

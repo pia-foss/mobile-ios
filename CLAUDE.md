@@ -81,7 +81,6 @@ fastlane and xcode cloud are used for ci/cd
 # Setup
 brew install swiftgen go
 gem install bundler && bundle install
-ln -s ../../Tools/hooks/pre-commit .git/hooks/pre-commit
 
 # Testing
 bundle exec fastlane iOStests                    # iOS unit tests (preferred)
@@ -131,12 +130,6 @@ xcodebuild test -scheme "PIA VPN Development" -configuration Development -destin
 - DEVELOPMENT and STAGING flags are set in xcconfig files (`Resources/Configurations/`) via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
 - Use `#if DEVELOPMENT || STAGING` in app-level code for dev/staging-specific behavior
 - Avoid relying on compilation flags in PIALibrary package code; handle at app level in `Bootstrapper.swift` instead
-
-### Code Formatting
-
-required to format the code before any commits
-pre-commit hook available at @Tools/hooks/pre-commit
-command to format a single $FILE `swift format -i $FILE`
 
 ## Debugging
 

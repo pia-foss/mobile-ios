@@ -1,17 +1,18 @@
+
 import Foundation
 import SwiftUI
 
 struct RootContainerView: View {
     @ObservedObject var viewModel: RootContainerViewModel
     @Environment(\.scenePhase) var scenePhase
-
+    
     @ObservedObject private var appRouter: AppRouter
-
+    
     init(viewModel: RootContainerViewModel, appRouter: AppRouter) {
         self.viewModel = viewModel
         self.appRouter = appRouter
     }
-
+    
     var body: some View {
         NavigationStack(path: $appRouter.path) {
             // Add a root view here.
@@ -34,7 +35,7 @@ struct RootContainerView: View {
                 Task {
                     await viewModel.sceneDidBecomeActive()
                 }
-            case .inactive:
+            case.inactive:
                 viewModel.sceneDidBecomeInActive()
             default:
                 break
@@ -42,3 +43,4 @@ struct RootContainerView: View {
         }
     }
 }
+

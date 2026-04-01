@@ -32,15 +32,15 @@ public final class IPSecProfile {
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
-
+    
     init() {
     }
-
+    
     // MARK: VPNProfile
 
     /// :nodoc:
     public static var vpnType: String {
         return "IPsec"
     }
-
+    
 }

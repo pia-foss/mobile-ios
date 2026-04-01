@@ -1,6 +1,8 @@
+
 import Foundation
 import PIALibrary
 import PIALocalizations
+
 
 protocol AccountProviderType {
     var isLoggedIn: Bool { get }
@@ -33,15 +35,15 @@ protocol ServerType {
 }
 
 extension Server: ServerType {
-
+    
     public var id: ObjectIdentifier {
         return ObjectIdentifier(self)
     }
-
+    
     var dipStatusString: String? {
         dipStatus?.getStatus()
     }
-
+    
     var dipIKEv2IP: String? {
         iKEv2AddressesForUDP?.first?.ip
     }
@@ -53,23 +55,24 @@ protocol DedicatedIPStatusType {
 extension DedicatedIPStatus: DedicatedIPStatusType {
     func getStatus() -> String {
         switch self {
-        case .invalid:
-            return L10n.Settings.Dedicatedip.Status.invalid
-        case .expired:
-            return L10n.Settings.Dedicatedip.Status.expired
-        case .error:
-            return L10n.Settings.Dedicatedip.Status.error
-        default:
-            return L10n.Settings.Dedicatedip.Status.active
+            case .invalid:
+                return L10n.Settings.Dedicatedip.Status.invalid
+            case .expired:
+                return L10n.Settings.Dedicatedip.Status.expired
+            case .error:
+                return L10n.Settings.Dedicatedip.Status.error
+            default:
+                return L10n.Settings.Dedicatedip.Status.active
         }
     }
 }
+
 
 protocol ServerProviderType {
     var historicalServersType: [ServerType] { get }
     var targetServerType: ServerType { get throws }
     var currentServersType: [ServerType] { get }
-
+    
     // Add methods from ServerProvider to this protocol as needed
 }
 
@@ -77,24 +80,24 @@ extension DefaultServerProvider: ServerProviderType {
     var historicalServersType: [ServerType] {
         return self.historicalServers
     }
-
+    
     var targetServerType: ServerType {
         get throws {
             try self.targetServer
         }
     }
-
+    
     var currentServersType: [ServerType] {
         return self.currentServers
     }
-
+    
 }
 
 protocol VPNStatusProviderType {
     var vpnStatus: VPNStatus { get }
     func connect(_ callback: SuccessLibraryCallback?)
     func disconnect(_ callback: SuccessLibraryCallback?)
-
+    
 }
 
 extension DefaultVPNProvider: VPNStatusProviderType {}

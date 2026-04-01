@@ -23,9 +23,9 @@
 import Foundation
 
 protocol PropertyStoring {
-
+    
     associatedtype T
-
+    
     func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T
 }
 

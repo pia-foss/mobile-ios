@@ -1,3 +1,4 @@
+
 import Foundation
 
 protocol ClientStatusInformationDecoderType {
@@ -5,9 +6,9 @@ protocol ClientStatusInformationDecoderType {
 }
 
 class ClientStatusInformationDecoder: ClientStatusInformationDecoderType {
-
+    
     private let jsonDecoder = JSONDecoder()
-
+    
     func decodeClientStatus(from data: Data) -> ClientStatusInformation? {
         try? jsonDecoder.decode(ClientStatusInformation.self, from: data)
     }

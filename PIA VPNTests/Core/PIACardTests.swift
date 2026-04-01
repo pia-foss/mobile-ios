@@ -18,9 +18,9 @@
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import PIALibrary
-import XCTest
 
+import XCTest
+import PIALibrary
 @testable import PIA_VPN
 
 class PIACardTests: XCTestCase {
@@ -42,5 +42,6 @@ class PIACardTests: XCTestCase {
         XCTAssertTrue(cards.count == 0, "no cards for 1.7.1")
 
     }
-
+    
+    
 }

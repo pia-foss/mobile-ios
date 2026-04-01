@@ -7,24 +7,24 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class ServerProviderMock: ServerProviderType {
-
-    var historicalServersTypeResult: [ServerType] = []
+    
+    var historicalServersTypeResult:[ServerType] = []
     var historicalServersType: [ServerType] {
         historicalServersTypeResult
     }
-
+    
     var targetServerTypeResult: ServerType = ServerMock()
     var targetServerType: ServerType {
         targetServerTypeResult
     }
-
+    
     var currentServersTypeResult: [ServerType] = []
     var currentServersType: [ServerType] {
         currentServersTypeResult
     }
-
+    
+    
 }

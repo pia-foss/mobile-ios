@@ -29,7 +29,7 @@ public struct LoginRequest {
 
     /// The `Credentials` to log in with.
     public let credentials: Credentials
-
+    
     /// :nodoc:
     public init(credentials: Credentials) {
         self.credentials = credentials
