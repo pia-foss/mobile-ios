@@ -6,16 +6,17 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import XCTest
-@testable import PIA_VPN_tvOS
-import SwiftUI
 import SnapshotTesting
+import SwiftUI
+import XCTest
+
+@testable import PIA_VPN_tvOS
 
 final class WelcomeViewSnapshotTest: XCTestCase {
     func test_Welcome() {
         let view = WelcomeFactory.makeWelcomeView()
         let vc = UIHostingController(rootView: view)
-        
+
         assertSnapshot(matching: vc, as: .image, record: false)
     }
 }

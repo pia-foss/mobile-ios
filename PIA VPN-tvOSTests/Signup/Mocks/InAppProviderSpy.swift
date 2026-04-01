@@ -14,11 +14,11 @@ class InAppProviderSpy: InAppProvider {
     var refreshPaymentReceiptCalledAttempt = 0
     var availableProducts: [InAppProduct]?
     var paymentReceipt: Data?
-    
+
     func startObservingTransactions() {
         startObservingTransactionsCalledAttempt += 1
     }
-    
+
     func stopObservingTransactions() {}
     func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?) {}
     func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?) {}

@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 public class SignupFailureViewController: AutolayoutViewController, BrandableNavigationBar {
 
@@ -32,19 +32,19 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
     @IBOutlet private weak var labelTitle: UILabel!
     @IBOutlet private weak var labelMessage: UILabel!
     @IBOutlet private weak var buttonSubmit: PIAButton!
-    
+
     var error: Error?
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.hidesBackButton = true
 
         title = L10n.Signup.Failure.vcTitle
         imvPicture.image = Asset.Ui.imageAccountFailed.image
         labelTitle.text = L10n.Signup.Failure.title
         labelMessage.text = L10n.Signup.Failure.message
-            
+
         if let clientError = error as? ClientError {
             switch clientError {
             case .redeemInvalid:
@@ -59,12 +59,12 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
                 labelTitle.text = L10n.Signup.Failure.Redeem.Claimed.title
                 labelMessage.text = L10n.Signup.Failure.Redeem.Claimed.message
                 break
-                
+
             default:
                 break
             }
         }
-        
+
         self.styleSubmitButton()
     }
 
@@ -73,7 +73,7 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
     }
 
     // MARK: Restylable
-    
+
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
@@ -83,12 +83,13 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
     }
-    
+
     private func styleSubmitButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Signup.Failure.submit.uppercased(),
-                              for: [])
+        buttonSubmit.setTitle(
+            L10n.Signup.Failure.submit.uppercased(),
+            for: [])
     }
 
 }

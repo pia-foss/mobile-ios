@@ -27,13 +27,13 @@ class AppStoreTransaction: InAppTransaction {
     var identifier: String? {
         return nativeTransaction.transactionIdentifier
     }
-    
+
     let native: Any?
-    
+
     private var nativeTransaction: SKPaymentTransaction {
         return native as! SKPaymentTransaction
     }
-    
+
     init(native: SKPaymentTransaction) {
         self.native = native
     }

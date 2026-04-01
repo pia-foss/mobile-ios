@@ -20,38 +20,38 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
-class SubscriptionTile: UIView, Tileable  {
-    
+class SubscriptionTile: UIView, Tileable {
+
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal
-    
+
     @IBOutlet private weak var subscriptionTitle: UILabel!
     @IBOutlet private weak var subscriptionValue: UILabel!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
         self.setupView()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     private func setupView() {
-        
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(displayAccountInformation), name: .PIAAccountDidRefresh, object: nil)
@@ -61,17 +61,17 @@ class SubscriptionTile: UIView, Tileable  {
         self.subscriptionTitle.text = L10n.Tiles.Subscription.title.uppercased()
         displayAccountInformation()
     }
-    
+
     @objc private func viewShouldRestyle() {
         subscriptionTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySubtitle(subscriptionValue)
         Theme.current.applyPrincipalBackground(self)
         displayAccountInformation()
     }
-    
+
     @objc private func displayAccountInformation() {
         let currentUser = Client.providers.accountProvider.currentUser
-        
+
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
                 self.subscriptionValue.text = L10n.Account.ExpiryDate.expired
@@ -86,10 +86,11 @@ class SubscriptionTile: UIView, Tileable  {
                 }
                 self.subscriptionValue.text = value
             }
-            Theme.current.makeSmallLabelToStandOut(self.subscriptionValue,
-                                                   withTextToStandOut: planDescriptionFromPlan(userInfo.plan))
+            Theme.current.makeSmallLabelToStandOut(
+                self.subscriptionValue,
+                withTextToStandOut: planDescriptionFromPlan(userInfo.plan))
         }
-        
+
     }
 
     private func planDescriptionFromPlan(_ plan: Plan) -> String {
@@ -100,12 +101,11 @@ class SubscriptionTile: UIView, Tileable  {
         default: return ""
         }
     }
-    
+
     private func daysLeftFromAccountInfo(_ userInfo: AccountInfo) -> Int? {
         if let days = userInfo.dateComponentsBeforeExpiration.day {
-            return days +
-            1 + //today
-            1 //last day
+            return days + 1  //today
+                + 1  //last day
         }
         return nil
     }

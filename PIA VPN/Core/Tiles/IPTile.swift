@@ -20,15 +20,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIADesignSystem
-import PIAUIKit
 import Combine
+import PIADesignSystem
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
-class IPTile: UIView, Tileable  {
-    
+class IPTile: UIView, Tileable {
+
     private let emptyIPValue = "---"
     var view: UIView!
     var detailSegueIdentifier: String!
@@ -45,7 +45,7 @@ class IPTile: UIView, Tileable  {
         super.init(frame: frame)
         self.xibSetup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
@@ -55,9 +55,9 @@ class IPTile: UIView, Tileable  {
     deinit {
         cancellables.removeAll()
     }
-    
+
     private func setupView() {
-        
+
         let nc = NotificationCenter.default
         nc.publisher(for: .PIAThemeDidChange)
             .receive(on: DispatchQueue.main)
@@ -86,7 +86,7 @@ class IPTile: UIView, Tileable  {
         self.vpnIpValue.accessibilityLabel = L10n.Global.empty
 
     }
-    
+
     private func viewShouldRestyle() {
         localIpTitle.style(style: TextStyle.textStyle21)
         vpnIpTitle.style(style: TextStyle.textStyle21)
@@ -94,7 +94,7 @@ class IPTile: UIView, Tileable  {
         Theme.current.applySettingsCellTitle(vpnIpValue, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
     }
-    
+
     private func updateIPLabels(publicIP: String?, vpnIP: String?) {
         self.localIpValue.text = publicIP ?? emptyIPValue
         self.localIpValue.accessibilityLabel = publicIP ?? L10n.Global.empty

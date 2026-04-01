@@ -7,15 +7,16 @@
 //
 
 import Foundation
+
 @testable import PIA_VPN_tvOS
 
 class PaymentProviderMock: PaymentProviderType {
     private let result: Result<Data, any Error>
-    
+
     init(result: Result<Data, any Error>) {
         self.result = result
     }
-    
+
     func refreshPaymentReceipt(_ completion: @escaping (Result<Data, Error>) -> Void) {
         completion(result)
     }

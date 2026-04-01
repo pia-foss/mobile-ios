@@ -21,6 +21,7 @@
 //
 
 import Testing
+
 @testable import PIALibrary
 
 @Suite("Email Validation Tests")
@@ -70,26 +71,28 @@ struct ValidatorTests {
 
     // MARK: - Invalid Email Tests
 
-    @Test("Invalid email formats should throw emailIsInvalid error", arguments: [
-        "plaintext",
-        "@example.com",
-        "user@",
-        "user @example.com",
-        "user@example .com",
-        "user@.com",
-        "user@example.",
-        "user..name@example.com",
-        "user@example..com",
-        "user@-example.com",
-        "user@example-.com",
-        "user@example",
-        "user name@example.com",
-        "user@exam ple.com",
-        ".user@example.com",
-        "user.@example.com",
-        "user@@example.com",
-        "user@example@com",
-    ])
+    @Test(
+        "Invalid email formats should throw emailIsInvalid error",
+        arguments: [
+            "plaintext",
+            "@example.com",
+            "user@",
+            "user @example.com",
+            "user@example .com",
+            "user@.com",
+            "user@example.",
+            "user..name@example.com",
+            "user@example..com",
+            "user@-example.com",
+            "user@example-.com",
+            "user@example",
+            "user name@example.com",
+            "user@exam ple.com",
+            ".user@example.com",
+            "user.@example.com",
+            "user@@example.com",
+            "user@example@com"
+        ])
     func invalidEmails(email: String) {
         #expect(throws: Validator.EmailValidationError.emailIsInvalid) {
             try Validator.validate(email: email)

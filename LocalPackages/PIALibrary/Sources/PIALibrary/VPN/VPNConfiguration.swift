@@ -27,7 +27,7 @@ public struct VPNConfiguration {
 
     /// The name of this configuration.
     public let name: String
-    
+
     /// The username for authentication.
     public let username: String
 
@@ -47,10 +47,10 @@ public struct VPNConfiguration {
     ///
     /// - Seealso: `VPNCustomConfiguration`
     public let customConfiguration: VPNCustomConfiguration?
-    
-    /// When `true`, the VPN will enable leak protection. 
+
+    /// When `true`, the VPN will enable leak protection.
     public let leakProtection: Bool
-    
+
     /// When `true`, the VPN will enable access to local.
     public let allowLocalDeviceAccess: Bool
 }
@@ -62,11 +62,11 @@ public protocol VPNCustomConfiguration {
 
     /**
      Returns a dictionary representation of this configuration.
-
+    
      - Returns: A hash map with the raw parameters of this configuration.
      */
     func serialized() -> [String: Any]
-    
+
     /// :nodoc:
     func isEqual(to: VPNCustomConfiguration) -> Bool
 }

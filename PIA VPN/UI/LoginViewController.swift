@@ -20,23 +20,24 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
 import PIADesignSystem
-import PIAUIKit
-import class account.AccountRequestError
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
+
+import class account.AccountRequestError
 
 private let log = PIALogger.logger(for: LoginViewController.self)
 
 final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControllerDelegate {
-    
+
     private enum LoginOption {
         case credentials
         case receipt
         case magicLink
     }
-    
+
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var formContainerView: UIView!
@@ -48,9 +49,9 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     @IBOutlet private weak var textUsername: BorderedTextField!
 
     @IBOutlet private weak var textPassword: BorderedTextField!
-    
+
     @IBOutlet private weak var buttonLogin: PIAButton!
-    
+
     @IBOutlet private weak var couldNotGetPlanButton: UIButton!
 
     @IBOutlet private weak var loginWithReceipt: UIButton!
@@ -60,13 +61,13 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     private var config: Config!
 
     private weak var delegate: PIAWelcomeViewControllerDelegate?
-    
+
     private var isLogging = false
-    
+
     private var timeToRetryCredentials: TimeInterval? = nil
     private var timeToRetryReceipt: TimeInterval? = nil
     private var timeToRetryMagicLink: TimeInterval? = nil
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -87,13 +88,13 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         labelTitle.text = L10n.Welcome.Login.title
         textUsername.placeholder = L10n.Welcome.Login.Username.placeholder
         textPassword.placeholder = L10n.Welcome.Login.Password.placeholder
-        
+
         textUsername.accessibilityIdentifier = Accessibility.Id.Login.username
         textPassword.accessibilityIdentifier = Accessibility.Id.Login.password
 
         textUsername.text = config.loginUsername
         textPassword.text = config.loginPassword
-        
+
         styleButtons()
         setupReadableWidthConstraints()
     }
@@ -102,22 +103,22 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         super.viewWillAppear(animated)
         enableInteractions(true)
     }
-    
+
     override func didRefreshOrientationConstraints() {
         scrollView.isScrollEnabled = (traitCollection.verticalSizeClass == .compact)
     }
-    
+
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? PIAWelcomeViewController else {
             return
         }
-        
+
         vc.delegate = delegate ?? self
         var preset = Preset()
         preset.loginUsername = config.loginUsername
         preset.loginPassword = config.loginPassword
 
-        switch segue.identifier  {
+        switch segue.identifier {
         case StoryboardSegue.Welcome.restoreLoginPurchaseSegue.rawValue:
             preset.pages = .restore
         case StoryboardSegue.Welcome.expiredAccountPurchaseSegue.rawValue:
@@ -146,18 +147,20 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
-        
+
         let storyboard = UIStoryboard(name: "Welcome", bundle: Bundle.main)
         if let magicLinkLoginViewController = storyboard.instantiateViewController(withIdentifier: "MagicLinkLoginViewController") as? MagicLinkLoginViewController {
             let alert = Macros.alert(magicLinkLoginViewController)
             alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
-            alert.addActionWithTitle(L10n.Welcome.Login.Magic.Link.send.uppercased(), handler: {
-                let email = magicLinkLoginViewController.email().trimmed()
-                self.loginUsingMagicLink(email: email)
-            })
+            alert.addActionWithTitle(
+                L10n.Welcome.Login.Magic.Link.send.uppercased(),
+                handler: {
+                    let email = magicLinkLoginViewController.email().trimmed()
+                    self.loginUsingMagicLink(email: email)
+                })
             present(alert, animated: true, completion: nil)
         }
-        
+
     }
 
     private func loginUsingMagicLink(email: String) {
@@ -170,34 +173,36 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             )
             return
         }
-        
+
         guard !self.isLogging else {
             return
         }
-        
-        self.showLoadingAnimation()
-        self.config.accountProvider.loginUsingMagicLink(withEmail: email, { error in
-            
-            self.hideLoadingAnimation()
-            guard error == nil else {
-                self.handleLoginFailed(error, loginOption: .magicLink)
-                return
-            }
 
-            Macros.displaySuccessImageNote(
-                withImage: Asset.Images.iconWarning.image,
-                message: L10n.Welcome.Login.Magic.Link.response
-            )
-        })
+        self.showLoadingAnimation()
+        self.config.accountProvider.loginUsingMagicLink(
+            withEmail: email,
+            { error in
+
+                self.hideLoadingAnimation()
+                guard error == nil else {
+                    self.handleLoginFailed(error, loginOption: .magicLink)
+                    return
+                }
+
+                Macros.displaySuccessImageNote(
+                    withImage: Asset.Images.iconWarning.image,
+                    message: L10n.Welcome.Login.Magic.Link.response
+                )
+            })
     }
-    
+
     @objc private func finishLoginWithMagicLink(notification: Notification) {
-        
+
         if let userInfo = notification.userInfo, let _ = userInfo[NotificationKey.error] as? Error {
             displayErrorMessage(errorMessage: L10n.Welcome.Purchase.Error.Connectivity.title)
             return
         }
-        
+
         config.completionDelegate?.welcomeDidLogin(
             withUser: UserAccount(
                 credentials: Credentials(username: "", password: ""),
@@ -206,13 +211,13 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             topViewController: self
         )
     }
-    
+
     @IBAction private func logInWithReceipt(_ sender: Any?) {
         if let timeUntilNextTry = timeToRetryReceipt?.timeSinceNow() {
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
-        
+
         guard !isLogging else {
             return
         }
@@ -239,7 +244,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             displayErrorMessage(errorMessage: L10n.Welcome.Login.Error.throttled("\(Int(timeUntilNextTry))"), displayDuration: timeUntilNextTry)
             return
         }
-        
+
         guard !isLogging else {
             return
         }
@@ -247,23 +252,23 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         guard let credentials = getValidCredentials() else {
             return
         }
-        
+
         let request = LoginRequest(credentials: credentials)
-        
+
         prepareLogin()
         config.accountProvider.login(with: request) { [weak self] userAccount, error in
             self?.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
         }
     }
-    
+
     private func getValidCredentials() -> Credentials? {
         guard let username = getValidTextFrom(textField: textUsername) else {
             handleUsernameFieldInvalid()
             return nil
         }
-        
+
         self.status = .restore(element: textUsername)
-        
+
         guard let password = getValidTextFrom(textField: textPassword) else {
             handleLoginFieldInvalid(textField: textPassword)
             return nil
@@ -276,35 +281,35 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
 
         return Credentials(username: username, password: password)
     }
-    
+
     private func getValidTextFrom(textField: UITextField) -> String? {
         guard let text = textField.text?.trimmed(), !text.isEmpty else {
             return nil
         }
         return text
     }
-    
+
     private func handleUsernameFieldInvalid() {
         handleLoginFieldInvalid(textField: textUsername)
         if textPassword.text == nil || textPassword.text!.isEmpty {
             self.status = .error(element: textPassword)
         }
     }
-    
+
     private func handleLoginFieldInvalid(textField: UITextField) {
         let errorMessage = L10n.Welcome.Login.Error.validation
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                message: errorMessage)
+        Macros.displayImageNote(
+            withImage: Asset.Images.iconWarning.image,
+            message: errorMessage)
         self.status = .error(element: textField)
     }
-    
-    
+
     private func prepareLogin() {
         log.debug("Logging in...")
         enableInteractions(false)
         showLoadingAnimation()
     }
-    
+
     private func handleLoginResult(user: UserAccount?, error: Error?, loginOption: LoginOption) {
         enableInteractions(true)
 
@@ -314,12 +319,12 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             handleLoginFailed(error, loginOption: loginOption)
             return
         }
-        
+
         log.debug("Login succeeded!")
-        
+
         config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
     }
-    
+
     private func updateTimeToRetry(loginOption: LoginOption, retryAfterSeconds: Double) {
         let retryAfterTimeStamp = Date().timeIntervalSince1970 + retryAfterSeconds
         switch loginOption {
@@ -377,14 +382,15 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         }
         displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
     }
-    
+
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
-        
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
-                                message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration,
-                                accessbilityIdentifier: Accessibility.Id.Login.Error.banner)
+
+        Macros.displayImageNote(
+            withImage: Asset.Images.iconWarning.image,
+            message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration,
+            accessbilityIdentifier: Accessibility.Id.Login.Error.banner)
     }
-    
+
     private func handleExpiredAccount() {
         perform(segue: StoryboardSegue.Welcome.expiredAccountPurchaseSegue, sender: self)
     }
@@ -402,9 +408,9 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         parent?.view.isUserInteractionEnabled = enable
         isLogging = !enable
     }
-    
+
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyPrincipalBackground(view)
@@ -415,34 +421,38 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         Theme.current.applyButtonLabelMediumStyle(loginWithLink)
         Theme.current.applyButtonLabelMediumStyle(couldNotGetPlanButton)
     }
-    
+
     private func styleButtons() {
         buttonLogin.setRounded()
         buttonLogin.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonLogin.setTitle(L10n.Welcome.Login.submit.uppercased(),
-                               for: [])
+        buttonLogin.setTitle(
+            L10n.Welcome.Login.submit.uppercased(),
+            for: [])
         buttonLogin.accessibilityIdentifier = Accessibility.Id.Login.submit
-        
-        couldNotGetPlanButton.setTitle(L10n.Welcome.Login.Restore.button,
-                                       for: [])
+
+        couldNotGetPlanButton.setTitle(
+            L10n.Welcome.Login.Restore.button,
+            for: [])
         couldNotGetPlanButton.titleLabel?.numberOfLines = 0
         couldNotGetPlanButton.titleLabel?.textAlignment = .center
 
-        loginWithReceipt.setTitle(L10n.Welcome.Login.Receipt.button,
-                                  for: [])
+        loginWithReceipt.setTitle(
+            L10n.Welcome.Login.Receipt.button,
+            for: [])
         loginWithReceipt.titleLabel?.numberOfLines = 0
         loginWithReceipt.titleLabel?.textAlignment = .center
-        
-        loginWithLink.setTitle(L10n.Welcome.Login.Magic.Link.title,
-                               for: [])
+
+        loginWithLink.setTitle(
+            L10n.Welcome.Login.Magic.Link.title,
+            for: [])
         loginWithLink.titleLabel?.numberOfLines = 0
         loginWithLink.titleLabel?.textAlignment = .center
     }
-    
+
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
         config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: topViewController)
     }
-    
+
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
         config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
     }

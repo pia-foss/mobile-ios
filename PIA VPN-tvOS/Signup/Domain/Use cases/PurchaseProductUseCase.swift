@@ -15,11 +15,11 @@ protocol PurchaseProductUseCaseType {
 
 class PurchaseProductUseCase: PurchaseProductUseCaseType {
     private let purchaseProductsProvider: PurchaseProductsProviderType
-    
+
     init(purchaseProductsProvider: PurchaseProductsProviderType) {
         self.purchaseProductsProvider = purchaseProductsProvider
     }
-    
+
     func callAsFunction(subscriptionOption: SubscriptionOption) async throws -> InAppTransaction {
         return try await withCheckedThrowingContinuation { continuation in
             purchaseProductsProvider.purchase(subscriptionOption: subscriptionOption) { result in

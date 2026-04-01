@@ -8,15 +8,16 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class ValidateLoginQRCodeMock: ValidateLoginQRCodeUseCaseType {
     private let error: ClientError?
-    
+
     init(error: ClientError?) {
         self.error = error
     }
-    
+
     func callAsFunction(qrCodeToken: LoginQRCode) async throws {
         guard let error = error else { return }
         throw error

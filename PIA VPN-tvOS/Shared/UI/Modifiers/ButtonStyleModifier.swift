@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 
-
 struct BasicButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

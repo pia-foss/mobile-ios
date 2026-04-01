@@ -21,50 +21,51 @@
 //
 
 import XCTest
+
 @testable import PIALibrary
 
 class ServerTests: XCTestCase {
-    
+
     private let log = PIALogger.logger(for: ServerTests.self)
 
     override func setUp() {
         super.setUp()
-        
+
         Client.providers.vpnProvider = MockVPNProvider()
         Client.configuration.enablesServerUpdates = false
         Client.configuration.verifiesServersSignature = true
         Client.bootstrap()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
-//    func testRawDownload() {
-//        let exp = expectation(description: "download")
-//
-//        PIAWebServices().downloadServers { (bundle, error) in
-//            guard let _ = bundle else {
-//                log.error("Download error: \(error!)")
-//                XCTAssert(error as? ClientError != .badServersSignature, "Bad signature")
-//                XCTAssert(false)
-//                exp.fulfill()
-//                return
-//            }
-//            XCTAssertNotNil(bundle)
-//            log.debug("Downloaded server bundle: \(bundle!)")
-//            exp.fulfill()
-//        }
-//        waitForExpectations(timeout: 5.0, handler: nil)
-//    }
+
+    //    func testRawDownload() {
+    //        let exp = expectation(description: "download")
+    //
+    //        PIAWebServices().downloadServers { (bundle, error) in
+    //            guard let _ = bundle else {
+    //                log.error("Download error: \(error!)")
+    //                XCTAssert(error as? ClientError != .badServersSignature, "Bad signature")
+    //                XCTAssert(false)
+    //                exp.fulfill()
+    //                return
+    //            }
+    //            XCTAssertNotNil(bundle)
+    //            log.debug("Downloaded server bundle: \(bundle!)")
+    //            exp.fulfill()
+    //        }
+    //        waitForExpectations(timeout: 5.0, handler: nil)
+    //    }
 
     func testMockDownload() {
         __testProviderDownload(factory: MockProviders())
     }
-    
+
     func testOfflineServers() {
         __testProviderDownload(factory: MockProviders())
-        XCTAssertTrue(Client.providers.serverProvider.currentServers.filter({$0.offline == true}).count == 1)
+        XCTAssertTrue(Client.providers.serverProvider.currentServers.filter({ $0.offline == true }).count == 1)
     }
 
     func testEncodeDecodeServer() throws {
@@ -77,7 +78,7 @@ class ServerTests: XCTestCase {
 
     private func __testProviderDownload(factory: Client.Providers) {
         let exp = expectation(description: "download")
-        
+
         factory.serverProvider.download { (servers, error) in
             guard let _ = servers else {
                 self.log.error("Download error: \(error!)")
@@ -88,7 +89,7 @@ class ServerTests: XCTestCase {
             }
             XCTAssertNotNil(servers)
             self.log.debug("Downloaded servers: \(servers!)")
-            XCTAssertEqual(servers?.count, factory.serverProvider.currentServers.count) // soft
+            XCTAssertEqual(servers?.count, factory.serverProvider.currentServers.count)  // soft
             exp.fulfill()
         }
         waitForExpectations(timeout: 5.0, handler: nil)

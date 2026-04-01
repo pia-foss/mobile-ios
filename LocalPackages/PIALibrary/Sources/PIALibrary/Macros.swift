@@ -24,19 +24,19 @@ import Foundation
 
 /// A set of useful methods for internal and consumer development.
 public class Macros {
-    
+
     /**
      Returns a short version string.
-     
+    
      - Returns: The short app version string.
      */
     public static func versionString() -> String? {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
-    
+
     /**
      Returns a full version string.
-     
+    
      - Returns: The full version string, including both x.y.z version and build number.
      */
     public static func versionFullString() -> String? {
@@ -45,22 +45,22 @@ public class Macros {
         }
         let versionNumber = info["CFBundleShortVersionString"] as! String
         let buildNumber = info[kCFBundleVersionKey as String] as! String
-        
+
         return "\(versionNumber) (\(buildNumber))"
     }
-    
+
     /**
      Returns the base URL configured for this build.
-
+    
      - Returns: The base URL string from Info.plist, or nil if not configured.
      */
     public static func baseUrl() -> String? {
         return Bundle.main.infoDictionary?["BASE_URL"] as? String
     }
-    
+
     /**
      Dispatches an asynchronous block to the main queue.
- 
+    
      - Parameter delay: The `DispatchTimeInterval` after which to dispatch the block from now.
      - Parameter block: The block to execute after `delay`.
      */

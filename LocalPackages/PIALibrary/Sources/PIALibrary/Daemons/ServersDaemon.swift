@@ -27,26 +27,26 @@ private let log = PIALogger.logger(for: ServersDaemon.self)
 
 final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {
     static let shared = ServersDaemon()
-    
+
     private(set) var hasEnabledUpdates: Bool
 
     private(set) var updating: Bool
 
     private var lastUpdateDate: Date?
-    
+
     private var lastPingDate: Date?
-    
+
     private var pendingUpdateTimer: DispatchSourceTimer?
 
     private init() {
         hasEnabledUpdates = false
         updating = false
     }
-    
+
     func start() {
         let nc = NotificationCenter.default
         #if os(iOS)
-        nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+            nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         #endif
         nc.addObserver(self, selector: #selector(handleReachable), name: .ConnectivityDaemonDidGetReachable, object: nil)
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
@@ -60,7 +60,7 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
 
         checkOutdatedServers()
     }
-    
+
     func forceUpdates(completionBlock: @escaping (Error?) -> Void) {
         guard !hasEnabledUpdates else {
             return
@@ -71,7 +71,7 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
             self.lastUpdateDate = Date()
             log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
             self.scheduleServersUpdate(withDelay: pollInterval)
-            
+
             guard let servers = servers else {
                 if let error = error as? ClientError, error == ClientError.noRegions {
                     self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
@@ -84,7 +84,7 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
         }
 
     }
-    
+
     func reset() {
         lastUpdateDate = nil
         lastPingDate = nil
@@ -92,20 +92,20 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
     }
 
     @objc private func checkOutdatedServers() {
-        
+
         if updating {
             return
         }
-                
+
         let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
         log.debug("Poll interval is \(pollInterval)")
-            
+
         if let lastUpdateDate = lastUpdateDate {
             let elapsed = Int(-lastUpdateDate.timeIntervalSinceNow * 1000.0)
             guard (elapsed >= pollInterval) else {
                 let leftDelay = pollInterval - elapsed
                 log.debug("Elapsed \(elapsed) milliseconds (< \(pollInterval)) since last update (\(lastUpdateDate)), retrying in \(leftDelay) milliseconds...")
-                
+
                 scheduleServersUpdate(withDelay: leftDelay)
                 return
             }
@@ -119,14 +119,14 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
             scheduleServersUpdate(withDelay: delay)
             return
         }
-        
+
         updating = true
         accessedProviders.serverProvider.download { (servers, error) in
             self.updating = false
             self.lastUpdateDate = Date()
             log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
             self.scheduleServersUpdate(withDelay: pollInterval)
-            
+
             guard let servers = servers else {
                 if let error = error as? ClientError, error == ClientError.noRegions {
                     self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
@@ -136,7 +136,7 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
             self.pingIfOffline(servers: servers)
         }
     }
-    
+
     private func scheduleServersUpdate(withDelay delay: Int) {
         pendingUpdateTimer?.cancel()
         pendingUpdateTimer = DispatchSource.makeTimerSource(flags: .strict, queue: .main)
@@ -149,12 +149,12 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
         }
         pendingUpdateTimer?.resume()
     }
-    
+
     private func pingIfOffline(servers: [Server]) {
         guard accessedConfiguration.enablesServerPings else {
             return
         }
-        
+
         // not before minimum interval
         if let last = lastPingDate {
             let elapsed = Int(-last.timeIntervalSinceNow * 1000.0)
@@ -176,21 +176,21 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
     }
 
     // MARK: Notifications
-    
+
     @objc private func applicationDidBecomeActive(notification: Notification) {
         if hasEnabledUpdates {
             let currentServers = accessedProviders.serverProvider.currentServers
             pingIfOffline(servers: currentServers)
         }
     }
-    
+
     @objc private func vpnStatusDidChange(notification: Notification) {
         if hasEnabledUpdates {
             checkOutdatedServers()
             pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
         }
     }
-    
+
     @objc private func handleReachable() {
         if hasEnabledUpdates {
             checkOutdatedServers()

@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import MobileCoreServices
+import UIKit
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     private let webRulesURL = "https://www.privateinternetaccess.com/api/client/ios-adblocker"
@@ -39,11 +39,11 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         } else {
             attachment = NSItemProvider(contentsOf: Bundle.main.url(forResource: fallbackName, withExtension: "json"))!
         }
-        
+
         let item = NSExtensionItem()
         item.attachments = [attachment]
-        
+
         context.completeRequest(returningItems: [item], completionHandler: nil)
     }
-    
+
 }

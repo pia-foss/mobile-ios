@@ -20,9 +20,10 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Testing
-import SwiftUI
 import SnapshotTesting
+import SwiftUI
+import Testing
+
 @testable import PIADesignSystem
 
 @Suite("Color Snapshots")

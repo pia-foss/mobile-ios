@@ -20,9 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
 import PIALocalizations
+import UIKit
 
 class AboutViewController: AutolayoutViewController {
     private struct Cells {
@@ -34,7 +34,7 @@ class AboutViewController: AutolayoutViewController {
     @IBOutlet private weak var labelIntro: UILabel!
 
     @IBOutlet private weak var tableView: UITableView!
-    
+
     private lazy var components: Components = {
         guard let plist = AppConstants.About.componentsPath else {
             fatalError("No components plist found for About")
@@ -43,39 +43,39 @@ class AboutViewController: AutolayoutViewController {
     }()
 
     private var licenseByComponentName: [String: String] = [:]
-    
+
     private var expandedComponentIndex: Int?
 
     private var expandedComponentHeight: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         let textApp = L10n.About.app
         labelIntro.text = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(textApp) \(Macros.versionFullString()!)"
         tableView.scrollsToTop = true
-        
+
         if UserInterface.isIpad {
             let nc = NotificationCenter.default
             nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
 
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
+
         loadLicensesInBackground()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationBarWithTitle(L10n.Menu.Item.about)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-    
+
         guard let headerView = tableView.tableHeaderView else {
             return
         }
@@ -87,42 +87,42 @@ class AboutViewController: AutolayoutViewController {
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Helpers
-    
+
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
-    
+
     private func loadLicensesInBackground() {
         for component in components.licenses {
             performSelector(inBackground: #selector(fetchLicenseWithComponent(_:)), with: component)
         }
     }
-    
+
     @objc private func fetchLicenseWithComponent(_ componentBridge: Any) {
         let component = componentBridge as! LicenseComponent
         let license = (try? String(contentsOf: component.licenseURL, encoding: .ascii)) ?? ""
-        
+
         DispatchQueue.main.async {
             self.licenseByComponentName[component.name] = license
-            
+
             guard let index = self.components.licenses.firstIndex(of: component) else {
                 return
             }
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .none)
         }
     }
-    
+
     // MARK: Restylable
 
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-    
+
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         Theme.current.applyDividerToSeparator(tableView)
         styleNavigationBarWithTitle(L10n.Menu.Item.about)
@@ -141,20 +141,20 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return components.notices.count
-            
+
         case 1:
             return components.licenses.count
-            
+
         default:
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -175,12 +175,12 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return 110.0
-            
+
         case 1:
             if (indexPath.row == expandedComponentIndex) {
                 assert(expandedComponentHeight > 0.0)
@@ -188,7 +188,7 @@ extension AboutViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 return tableView.rowHeight
             }
-            
+
         default:
             return 0
         }
@@ -203,7 +203,7 @@ extension AboutViewController: AboutLicenseCellDelegate {
         let oldExpandedComponentIndex = expandedComponentIndex
         expandedComponentIndex = indexPath.row
         expandedComponentHeight = cell.heightThatFits
-        
+
         var outdatedIndexPaths: [IndexPath] = []
         if let old = oldExpandedComponentIndex {
             outdatedIndexPaths.append(IndexPath(row: old, section: 1))
@@ -211,7 +211,7 @@ extension AboutViewController: AboutLicenseCellDelegate {
         outdatedIndexPaths.append(IndexPath(row: expandedComponentIndex!, section: 1))
         tableView.reloadRows(at: outdatedIndexPaths, with: .automatic)
     }
-    
+
     func aboutCell(_ cell: AboutLicenseCell, shouldShrink license: String?) {
         guard let old = expandedComponentIndex else {
             return

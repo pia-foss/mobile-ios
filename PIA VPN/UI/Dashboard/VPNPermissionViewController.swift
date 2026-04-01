@@ -20,12 +20,12 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
 import MessageUI
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
 final class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var contentCardView: UIView!
@@ -47,10 +47,10 @@ final class VPNPermissionViewController: AutolayoutViewController {
     override var navigationController: UINavigationController? {
         return super.navigationController ?? parent?.navigationController
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = L10n.VpnPermission.title
         navigationItem.hidesBackButton = true
         self.view.accessibilityIdentifier = AccessibilityId.VPNPermission.screen
@@ -62,25 +62,27 @@ final class VPNPermissionViewController: AutolayoutViewController {
         styleSubmitButton()
         setupReadableWidthConstraints()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
+
     @IBAction private func submit() {
         let vpn = Client.providers.vpnProvider
-        vpn.install(force: true, { (error) in
-            guard (error == nil) else {
-                self.alertRequiredPermission()
-                return
-            }
-            self.dismissingViewController?.dismiss(animated: true) {
-                //                vpn.connect(nil)
-            }
-        })
+        vpn.install(
+            force: true,
+            { (error) in
+                guard (error == nil) else {
+                    self.alertRequiredPermission()
+                    return
+                }
+                self.dismissingViewController?.dismiss(animated: true) {
+                    //                vpn.connect(nil)
+                }
+            })
     }
-    
+
     private func alertRequiredPermission() {
         var message = L10n.VpnPermission.Disallow.Message.basic
         if MFMailComposeViewController.canSendMail() {
@@ -97,7 +99,7 @@ final class VPNPermissionViewController: AutolayoutViewController {
         }
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func contactCustomerSupport() {
         let vc = MFMailComposeViewController()
         vc.setToRecipients([AppConstants.Web.csEmail])
@@ -117,7 +119,7 @@ final class VPNPermissionViewController: AutolayoutViewController {
     }
 
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyPrincipalBackground(view)
@@ -126,13 +128,14 @@ final class VPNPermissionViewController: AutolayoutViewController {
         Theme.current.applySubtitle(labelFooter)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
     }
-    
+
     private func styleSubmitButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Global.ok.uppercased(),
-                              for: [])
-      buttonSubmit.accessibilityIdentifier = AccessibilityId.VPNPermission.submit
+        buttonSubmit.setTitle(
+            L10n.Global.ok.uppercased(),
+            for: [])
+        buttonSubmit.accessibilityIdentifier = AccessibilityId.VPNPermission.submit
     }
 
 }

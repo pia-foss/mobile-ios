@@ -13,7 +13,7 @@ class InAppTransactionMock: InAppTransaction {
     var identifier: String?
     var native: Any?
     var description: String
-    
+
     init(identifier: String? = nil, native: Any? = nil, description: String) {
         self.identifier = identifier
         self.native = native

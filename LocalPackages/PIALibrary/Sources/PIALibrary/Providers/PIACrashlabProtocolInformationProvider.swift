@@ -9,18 +9,17 @@
 import Foundation
 import csi
 
-class PIACSIProtocolInformationProvider : ICSIProvider {
-    
+class PIACSIProtocolInformationProvider: ICSIProvider {
+
     var filename: String? { return "protocol_information" }
-    
+
     var isPersistedData: Bool { return false }
-    
+
     var providerType: ProviderType { return ProviderType.protocolInformation }
-    
+
     var reportType: ReportType { return ReportType.diagnostic }
-    
+
     var value: String? { return protocolInformation() }
-    
 
     private var protocolLogs: String?
 

@@ -10,11 +10,11 @@ import SwiftUI
 
 struct QRImageView: View {
     private let qrImageURL: URL
-    
+
     init(qrImageURL: URL) {
         self.qrImageURL = qrImageURL
     }
-    
+
     var body: some View {
         Rectangle()
             .foregroundColor(.clear)

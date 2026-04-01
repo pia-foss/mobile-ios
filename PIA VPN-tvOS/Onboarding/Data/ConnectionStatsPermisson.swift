@@ -14,15 +14,15 @@ private extension String {
 
 class ConnectionStatsPermisson: ConnectionStatsPermissonType {
     private let userDefautls: UserDefaults
-    
+
     init(userDefautls: UserDefaults = .standard) {
         self.userDefautls = userDefautls
     }
-    
+
     func get() -> Bool? {
         return userDefautls.object(forKey: .kConnectionStatsPermisson) as? Bool
     }
-    
+
     func set(value: Bool?) {
         userDefautls.set(value, forKey: .kConnectionStatsPermisson)
     }

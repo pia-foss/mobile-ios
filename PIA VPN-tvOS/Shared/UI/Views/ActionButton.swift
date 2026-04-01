@@ -22,7 +22,7 @@ struct ActionButtonStyle {
 enum ActionButtonStyleType {
     case centerAligned
     case leadingAligned
-    
+
     var style: ActionButtonStyle {
         switch self {
         case .centerAligned:

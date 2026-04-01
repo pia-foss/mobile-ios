@@ -23,13 +23,13 @@
 import Foundation
 
 public struct Usage {
-    
+
     public let uploaded: UInt64
     public let downloaded: UInt64
-    
+
     init(uploaded: UInt64, downloaded: UInt64) {
         self.uploaded = uploaded
         self.downloaded = downloaded
     }
-    
+
 }

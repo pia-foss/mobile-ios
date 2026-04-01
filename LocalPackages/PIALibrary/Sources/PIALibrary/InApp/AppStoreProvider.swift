@@ -53,16 +53,16 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     func startObservingTransactions() {
         log.debug("Start observing transactions")
-        
+
         SKPaymentQueue.default().add(self)
     }
-    
+
     func stopObservingTransactions() {
         log.debug("Stop observing transactions")
-        
+
         SKPaymentQueue.default().remove(self)
     }
-    
+
     func fetchProducts(identifiers: [String], _ callback: (([InAppProduct]?, Error?) -> Void)?) {
         guard !identifiers.isEmpty else {
             callback?([], nil)
@@ -175,12 +175,12 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
             case .deferred:
                 log.debug("  -> Deferred: \(transaction) [\(transactionDate)]")
 
-//                #warning TODO: Amir, implement and test Ask to Buy
-//                NSError *error = [[NSError alloc] initWithDomain:ErrorDomain
-//                code:ErrorCodeAskToBuy
-//                userInfo:@{NSLocalizedDescriptionKey: NSLocalizedXXXXString(@"Your payment requires approval.", @"payment transaction deferred message (Ask to Buy enabled)")}];
-//
-//                Macros.postNotification(.StoreDidFailToPurchase, error)
+            //                #warning TODO: Amir, implement and test Ask to Buy
+            //                NSError *error = [[NSError alloc] initWithDomain:ErrorDomain
+            //                code:ErrorCodeAskToBuy
+            //                userInfo:@{NSLocalizedDescriptionKey: NSLocalizedXXXXString(@"Your payment requires approval.", @"payment transaction deferred message (Ask to Buy enabled)")}];
+            //
+            //                Macros.postNotification(.StoreDidFailToPurchase, error)
 
             case .restored:
                 log.debug("  -> Restored: \(transaction) [\(transactionDate)]")
@@ -215,7 +215,7 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
             }
         }
     }
-    
+
     /// This delegate is called when the user clicks the subscription in the AppStore. We are currently not handling the purchase from there, so we will return false until we implement a way to handle it.
     func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
         return false
@@ -254,6 +254,6 @@ extension SKProduct {
 /// :nodoc:
 extension SKPaymentTransaction {
     open override var description: String {
-        return "{'\(transactionIdentifier ?? "")' -> \(payment.productIdentifier)}" 
+        return "{'\(transactionIdentifier ?? "")' -> \(payment.productIdentifier)}"
     }
 }

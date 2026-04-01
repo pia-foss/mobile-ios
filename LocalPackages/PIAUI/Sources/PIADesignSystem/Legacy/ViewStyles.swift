@@ -27,13 +27,15 @@ protocol ViewStyling {
 }
 
 public extension ViewStyle {
-    
-    static let refreshControlLight = ViewStyle(backgroundColor: nil,
-                                          tintColor: TextStyle.textStyle7.color,
-                                          layerStyle: nil)
-    
-    static let refreshControlDark = ViewStyle(backgroundColor: nil,
-                                              tintColor: TextStyle.textStyle6.color,
-                                              layerStyle: nil)
-    
+
+    static let refreshControlLight = ViewStyle(
+        backgroundColor: nil,
+        tintColor: TextStyle.textStyle7.color,
+        layerStyle: nil)
+
+    static let refreshControlDark = ViewStyle(
+        backgroundColor: nil,
+        tintColor: TextStyle.textStyle6.color,
+        layerStyle: nil)
+
 }

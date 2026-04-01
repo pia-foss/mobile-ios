@@ -28,7 +28,6 @@ enum SnapshotTestHelpers {
     /// - Returns: `true` if running on Xcode Cloud, `false` otherwise
     static var isRunningOnXcodeCloud: Bool {
         // Xcode Cloud sets specific environment variables
-        ProcessInfo.processInfo.environment["CI_XCODE_PROJECT"] != nil ||
-        ProcessInfo.processInfo.environment["CI_XCODEBUILD_ACTION"] != nil
+        ProcessInfo.processInfo.environment["CI_XCODE_PROJECT"] != nil || ProcessInfo.processInfo.environment["CI_XCODEBUILD_ACTION"] != nil
     }
 }

@@ -27,40 +27,40 @@ private let log = PIALogger.logger(for: IKEv2Profile.self)
 
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
 public final class IKEv2Profile: NetworkExtensionProfile {
-        
+
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
-    
+
     public init() {
     }
-    
+
     // MARK: VPNProfile
-    
+
     /// :nodoc:
     public static var vpnType: String {
         return "IKEv2"
     }
-    
+
     /// :nodoc:
     public static var isTunnel: Bool {
         return false
     }
-    
+
     /// :nodoc:
     public var native: Any? {
         return currentVPN
     }
-    
+
     /// :nodoc:
     public func prepare() {
         currentVPN.loadFromPreferences { (_) in
         }
     }
-    
+
     /// :nodoc:
     public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
-        
+
         currentVPN.loadFromPreferences { (error) in
             if let error = error {
                 callback?(error)
@@ -69,7 +69,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             self.doSave(self.currentVPN, withConfiguration: configuration, force: force, callback)
         }
     }
-    
+
     /// :nodoc:
     public func connect(withConfiguration configuration: VPNConfiguration, _ callback: SuccessLibraryCallback?) {
         save(withConfiguration: configuration, force: true) { (error) in
@@ -85,7 +85,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             }
         }
     }
-    
+
     /// :nodoc:
     public func disconnect(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
@@ -93,7 +93,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
                 callback?(error)
                 return
             }
-            
+
             // prevent reconnection
             self.currentVPN.isOnDemandEnabled = false
 
@@ -108,7 +108,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             }
         }
     }
-    
+
     /// :nodoc:
     public func updatePreferences(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
@@ -116,7 +116,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
                 callback?(error)
                 return
             }
-            
+
             self.currentVPN.saveToPreferences { (error) in
                 if let error = error {
                     callback?(error)
@@ -126,14 +126,14 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             }
         }
     }
-    
+
     /// :nodoc:
     public func remove(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
             self.currentVPN.removeFromPreferences(completionHandler: callback)
         }
     }
-    
+
     /// :nodoc:
     public func disable(_ callback: SuccessLibraryCallback?) {
         currentVPN.loadFromPreferences { (error) in
@@ -142,12 +142,12 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             self.currentVPN.saveToPreferences(completionHandler: callback)
         }
     }
-    
+
     /// :nodoc:
     public func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration? {
         return nil
     }
-    
+
     /// :nodoc:
     public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
         callback?(self.currentVPN.description, nil)
@@ -159,19 +159,20 @@ public final class IKEv2Profile: NetworkExtensionProfile {
     }
 
     // MARK: NetworkExtensionProfile
-    
+
     /// :nodoc:
     public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
-                
+
         var username = configuration.username
         var passwordReference = configuration.passwordReference
-        
+
         if let accountVpnUsername = Client.providers.accountProvider.vpnTokenUsername,
-           let accountVpnPassword = Client.providers.accountProvider.vpnTokenPassword {
+            let accountVpnPassword = Client.providers.accountProvider.vpnTokenPassword
+        {
             username = accountVpnUsername
             Client.database.secure.setPassword(accountVpnPassword, for: username)
         }
-        
+
         if let accountVpnPasswordreference = Client.database.secure.passwordReference(for: username) {
             passwordReference = accountVpnPasswordreference
         }
@@ -189,11 +190,11 @@ public final class IKEv2Profile: NetworkExtensionProfile {
         cfg.localIdentifier = configuration.server.dipUsername ?? username
         cfg.username = configuration.server.dipUsername ?? username
         cfg.passwordReference = configuration.server.dipToken != nil ? configuration.server.dipPassword() : passwordReference
-        
+
         cfg.authenticationMethod = .none
         cfg.disconnectOnSleep = false
         cfg.useExtendedAuthentication = true
-        
+
         if let encryption = IKEv2EncryptionAlgorithm(rawValue: Client.preferences.ikeV2EncryptionAlgorithm) {
             cfg.ikeSecurityAssociationParameters.encryptionAlgorithm = encryption.networkExtensionValue()
             cfg.childSecurityAssociationParameters.encryptionAlgorithm = encryption.networkExtensionValue()
@@ -201,16 +202,16 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             cfg.ikeSecurityAssociationParameters.encryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.networkExtensionValue()
             cfg.childSecurityAssociationParameters.encryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.networkExtensionValue()
         }
-        
+
         if let integrity = IKEv2IntegrityAlgorithm(rawValue: Client.preferences.ikeV2IntegrityAlgorithm) {
             cfg.ikeSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
             cfg.childSecurityAssociationParameters.integrityAlgorithm = integrity.networkExtensionValue()
         }
-        
+
         if Client.preferences.ikeV2PacketSize != 0 {
             cfg.mtu = Client.preferences.ikeV2PacketSize
         }
-        
+
         log.debug("IKEv2 Configuration")
         log.debug("-------------------")
         log.debug("\(cfg)")

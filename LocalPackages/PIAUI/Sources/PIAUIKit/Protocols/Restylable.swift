@@ -27,7 +27,7 @@ import Foundation
  request (typically after a `Notification.Name.ThemeDidChange` notification).
  */
 public protocol Restylable {
-    
+
     /**
      Updates dynamically styled views.
      */

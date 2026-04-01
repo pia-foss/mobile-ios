@@ -26,16 +26,16 @@ extension Client {
 
     /// Provides concrete implementations of the business providers.
     public class Providers {
-        
+
         /// Provides user related methods.
         public var accountProvider: AccountProvider = AccountFactory.makeDefaultAccountProvider()
-        
+
         /// Provides methods for handling the available VPN servers.
         public var serverProvider: ServerProvider = ServerProviderFactory.makeDefaultServerProvider()
-        
+
         /// Provides methods for controlling the VPN connection.
         public var vpnProvider: VPNProvider = DefaultVPNProvider()
-        
+
         /// Provides tiles related methods.
         public var tileProvider: TileProvider = DefaultTileProvider()
 

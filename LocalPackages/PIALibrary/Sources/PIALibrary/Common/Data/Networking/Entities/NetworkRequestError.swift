@@ -1,4 +1,3 @@
-
 import Foundation
 
 public enum NetworkRequestError: Error, Equatable {
@@ -16,12 +15,11 @@ public enum NetworkRequestError: Error, Equatable {
     case unauthorized
     case unknown(message: String? = nil)
     case unableToDecodeData
-    
+
     func asClientError() -> ClientError {
         ClientErrorMapper.map(networkRequestError: self)
     }
 }
-
 
 enum HttpResponseStatusCode: Int {
     case success = 200

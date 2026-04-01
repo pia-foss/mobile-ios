@@ -25,6 +25,6 @@ struct UserAccount {
 extension UserAccount: Equatable {
     public static func == (lhs: UserAccount, rhs: UserAccount) -> Bool {
         lhs.credentials == rhs.credentials
-        && lhs.info == rhs.info
+            && lhs.info == rhs.info
     }
 }

@@ -7,22 +7,23 @@
 //
 
 import Foundation
-@testable import PIA_VPN_tvOS
 import PIALibrary
+
+@testable import PIA_VPN_tvOS
 
 class DipServerProviderMock: DipServerProviderType {
     private let server: Server?
     private let error: Error?
-    
+
     init(server: Server?, error: Error?) {
         self.server = server
         self.error = error
     }
-    
+
     func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
         callback?(server, error)
     }
-    
+
     func removeDIPToken(_ dipToken: String) {}
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {}
     func getDIPTokens() -> [String] { [] }

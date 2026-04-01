@@ -34,7 +34,7 @@ public class ActivityButton: UIControl {
             button.backgroundColor = newValue
         }
     }
-    
+
     /// :nodoc:
     public override var isEnabled: Bool {
         get {
@@ -54,7 +54,7 @@ public class ActivityButton: UIControl {
             button.accessibilityIdentifier = newValue
         }
     }
-    
+
     /// The button text color.
     public var textColor: UIColor? {
         get {
@@ -103,24 +103,24 @@ public class ActivityButton: UIControl {
     private lazy var button = UIButton(type: .custom)
 
     private lazy var activity = UIActivityIndicatorView(frame: .zero)
-    
+
     private var previousTitle: String?
-    
+
     /// :nodoc:
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         backgroundColor = .clear
-        
-        button.showsTouchWhenHighlighted = true // XXX: should replicate IB highlight behaviour
+
+        button.showsTouchWhenHighlighted = true  // XXX: should replicate IB highlight behaviour
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleButtonTouch), for: .touchUpInside)
         addSubview(button)
-        
+
         activity.hidesWhenStopped = true
         activity.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activity)
-        
+
         let top = button.topAnchor.constraint(equalTo: topAnchor)
         let bottom = button.bottomAnchor.constraint(equalTo: bottomAnchor)
         let left = button.leftAnchor.constraint(equalTo: leftAnchor)

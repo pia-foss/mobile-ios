@@ -14,19 +14,19 @@ protocol ActivateDIPTokenUseCaseType {
 
 class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
     private let dipServerProvider: DedicatedIPProviderType
-    
+
     init(dipServerProvider: DedicatedIPProviderType) {
         self.dipServerProvider = dipServerProvider
     }
-    
+
     func callAsFunction(token: String) async throws {
         return try await withCheckedThrowingContinuation { continuation in
             dipServerProvider.activateDIPToken(token) { result in
                 switch result {
-                    case .success:
-                        continuation.resume()
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }

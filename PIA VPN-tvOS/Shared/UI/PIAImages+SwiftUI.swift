@@ -1,4 +1,3 @@
-
 import Foundation
 import SwiftUI
 
@@ -31,5 +30,5 @@ extension String {
     static let empty_search_bg_image = "empty-search-bg-image"
     static let signup_screen = "signup-screen"
     static let signup_credentials = "signup-credentials"
-    
+
 }

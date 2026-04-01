@@ -6,28 +6,27 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
-import SwiftUI
+import Foundation
 import PIALocalizations
-
+import SwiftUI
 
 class LeadingNavigationBarViewModel: ObservableObject {
-    
+
     let appRouter: AppRouter
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     let sections: [Sections] = [.vpn, .locations]
-    
+
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
             return self
         }
-        
+
         case vpn
         case locations
-        
+
         var title: String {
             switch self {
             case .vpn:
@@ -36,22 +35,22 @@ class LeadingNavigationBarViewModel: ObservableObject {
                 return L10n.TopNavigationBar.LocationItem.title
             }
         }
-        
+
     }
-    
+
     init(appRouter: AppRouter) {
         self.appRouter = appRouter
         self.selectedSection = calculateSelectedSection(for: appRouter.pathDestinations)
         subscribeToAppRouterDestinationsUpdates()
     }
-    
+
     @Published var selectedSection: Sections? = nil
     @Published var highlightedSection: Sections? = nil
-    
+
     func sectionDidUpdateSelection(to section: Sections) {
         guard section != selectedSection else { return }
         selectedSection = section
-        
+
         switch section {
         case .vpn:
             appRouter.goBackToRoot()
@@ -61,19 +60,18 @@ class LeadingNavigationBarViewModel: ObservableObject {
             appRouter.navigate(to: RegionsDestinations.serversList)
         }
     }
-    
-    
+
     func sectionDidUpdateFocus(to section: Sections?) {
         highlightedSection = section
     }
-    
+
     func viewDidAppear() {
         // Remove the focus when the view appears
         sectionDidUpdateFocus(to: nil)
     }
-    
+
     private func calculateSelectedSection(for pathDestinations: [any Destinations]) -> Sections? {
-        
+
         if let currentPath = pathDestinations.last {
             switch currentPath {
             case .serversList as RegionsDestinations:
@@ -81,17 +79,17 @@ class LeadingNavigationBarViewModel: ObservableObject {
             case .search as RegionsDestinations:
                 return .locations
             case .home as DashboardDestinations:
-                 return .vpn
+                return .vpn
             default:
                 return nil
             }
         } else {
             // The path is empty, so we are in the root of the NavigationStack (.vpn)
-             return .vpn
+            return .vpn
         }
-        
+
     }
-    
+
     private func subscribeToAppRouterDestinationsUpdates() {
         appRouter.$pathDestinations
             .receive(on: RunLoop.main)
@@ -100,26 +98,25 @@ class LeadingNavigationBarViewModel: ObservableObject {
                 self.selectedSection = self.calculateSelectedSection(for: newPathDestinations)
             }.store(in: &cancellables)
     }
-    
+
 }
 
-
 class TrailingNavigationBarViewModel: ObservableObject {
-    
+
     let appRouter: AppRouter
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     let sections: [Sections] = [.settings(.root), .help(.root)]
-    
+
     enum Sections: Equatable, Hashable, Identifiable {
         var id: Self {
             return self
         }
-        
+
         case settings(SettingsPath = .root)
         case help(HelpPath = .root)
-        
+
         var systemIconName: String {
             switch self {
             case .help:
@@ -129,29 +126,29 @@ class TrailingNavigationBarViewModel: ObservableObject {
             }
 
         }
-        
+
         enum SettingsPath: Equatable {
             case root, account, general, dedicatedIp
         }
-        
+
         enum HelpPath: Equatable {
             case root, about, acknowledgements, privacyPolicy
         }
     }
-    
+
     init(appRouter: AppRouter) {
         self.appRouter = appRouter
         self.selectedSection = calculateSelectedSection(for: appRouter.pathDestinations)
         subscribeToAppRouterDestinationsUpdates()
     }
-    
+
     @Published var selectedSection: Sections? = nil
     @Published var highlightedSection: Sections? = nil
-    
+
     func sectionDidUpdateSelection(to section: Sections) {
         guard section != selectedSection else { return }
         selectedSection = section
-        
+
         switch section {
         case .settings:
             // Empty the current navigation path before pushing the settings root flow
@@ -163,19 +160,18 @@ class TrailingNavigationBarViewModel: ObservableObject {
             appRouter.navigate(to: HelpDestinations.root)
         }
     }
-    
-    
+
     func sectionDidUpdateFocus(to section: Sections?) {
         highlightedSection = section
     }
-    
+
     func viewDidAppear() {
         // Remove the focus when the view appears
         sectionDidUpdateFocus(to: nil)
     }
-    
+
     private func calculateSelectedSection(for pathDestinations: [any Destinations]) -> Sections? {
-        
+
         if let currentPath = pathDestinations.last {
             switch currentPath {
             case .availableSettings as SettingsDestinations:
@@ -198,11 +194,11 @@ class TrailingNavigationBarViewModel: ObservableObject {
                 return nil
             }
         } else {
-             return nil
+            return nil
         }
-        
+
     }
-    
+
     private func subscribeToAppRouterDestinationsUpdates() {
         appRouter.$pathDestinations
             .receive(on: RunLoop.main)
@@ -211,5 +207,5 @@ class TrailingNavigationBarViewModel: ObservableObject {
                 self.selectedSection = self.calculateSelectedSection(for: newPathDestinations)
             }.store(in: &cancellables)
     }
-    
+
 }

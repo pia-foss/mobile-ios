@@ -1,7 +1,7 @@
 //
 //  LoginReceiptRequest.swift
 //  Pods
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 17/03/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -29,7 +29,7 @@ public struct LoginReceiptRequest {
 
     /// The `Data` purchase receipt for the device.
     public let receipt: Data
-    
+
     /// :nodoc:
     public init(receipt: Data) {
         self.receipt = receipt

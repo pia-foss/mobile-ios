@@ -30,7 +30,7 @@ public protocol NetworkExtensionProfile: VPNProfile {
 
     /**
      Returns a native `NEVPNProtocol` from this profile given a configuration.
-     
+    
      - Parameter configuration: The `VPNConfiguration` to build the protocol upon.
      - Returns: A native `NEVPNProtocol` object for use with NetworkExtension.
      */
@@ -38,12 +38,12 @@ public protocol NetworkExtensionProfile: VPNProfile {
 }
 
 extension NetworkExtensionProfile {
-    
+
     /// :nodoc:
     private var neProfile: NEVPNManager? {
         return native as? NEVPNManager
     }
-    
+
     /// :nodoc:
     public var serverIdentifier: String? {
         guard let serverAddress = neProfile?.protocolConfiguration?.serverAddress else {
@@ -55,7 +55,7 @@ extension NetworkExtensionProfile {
 
     /**
      Takes care of saving the profile as `NEVPNProtocol` to a given `NEVPNManager`.
-     
+    
      - Parameter vpn: The target `NEVPNManager` to which the generated protocol will be committed.
      - Parameter configuration: The `VPNConfiguration` to use for generating the `NEVPNProtocol` object.
      - Parameter force: If `true`, apply changes forcibly.
@@ -70,19 +70,17 @@ extension NetworkExtensionProfile {
             return
         }
 
-        let protocolConfiguration = vpn.protocolConfiguration! // Safe to force unwrap
-        
+        let protocolConfiguration = vpn.protocolConfiguration!  // Safe to force unwrap
+
         vpn.localizedDescription = configuration.name
-        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ?
-            configuration.isOnDemand :
-            false //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
-        
+        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
+
         let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
-        
+
         vpn.onDemandRules = []
-        
+
         if vpn.isOnDemandEnabled {
-            
+
             if Client.preferences.nmtRulesEnabled {
                 log.debug("Network Management Rule Enabled: \(Client.preferences.nmtRulesEnabled)")
                 log.debug("Network Management Rules for Trusted Networks: \(Client.preferences.nmtTrustedNetworkRules)")
@@ -95,26 +93,26 @@ extension NetworkExtensionProfile {
             }
         }
         #if os(iOS)
-        let selectedProtocol = Client.preferences.vpnType
-        let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
-        let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
-        
-        // Do not apply Leak Protection settings on WireGuard and OpenVPN
-        if isWireGuard || isOpenVPN {
-            vpn.protocolConfiguration?.includeAllNetworks = false
-            vpn.protocolConfiguration?.excludeLocalNetworks = true
-        } else {
-            // Apply Leak Protection settings when the Feature Flag is enabled
-            if Client.configuration.featureFlags[.showLeakProtection] {
-                vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
-                vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
-            } else {
+            let selectedProtocol = Client.preferences.vpnType
+            let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
+            let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
+
+            // Do not apply Leak Protection settings on WireGuard and OpenVPN
+            if isWireGuard || isOpenVPN {
                 vpn.protocolConfiguration?.includeAllNetworks = false
                 vpn.protocolConfiguration?.excludeLocalNetworks = true
+            } else {
+                // Apply Leak Protection settings when the Feature Flag is enabled
+                if Client.configuration.featureFlags[.showLeakProtection] {
+                    vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
+                    vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
+                } else {
+                    vpn.protocolConfiguration?.includeAllNetworks = false
+                    vpn.protocolConfiguration?.excludeLocalNetworks = true
+                }
             }
-        }
         #endif
-        
+
         log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
         log.debug("Username: \(protocolConfiguration.username!)")
         log.debug("On-demand is now \(vpn.isOnDemandEnabled ? "ENABLED" : "DISABLED")")
@@ -131,20 +129,21 @@ extension NetworkExtensionProfile {
             }
         }
     }
-    
-    
-    private func configureOnDemandOnWiFiNetworksFor(_ trustedNetworks: [String: Int],
-                                                    _ vpn: NEVPNManager) {
-                
+
+    private func configureOnDemandOnWiFiNetworksFor(
+        _ trustedNetworks: [String: Int],
+        _ vpn: NEVPNManager
+    ) {
+
         let genericRules = Client.preferences.nmtGenericRules
         let rule = genericRules[NMTType.protectedWiFi.rawValue]
-        
+
         vpn.onDemandRules = []
-        
+
         //First, Open networks
         let openNetworks = Client.preferences.nmtTemporaryOpenNetworks
         openNetworks.forEach { network in
-            
+
             switch genericRules[NMTType.openWiFi.rawValue] {
             case NMTRules.alwaysConnect.rawValue:
                 let ruleConnect = NEOnDemandRuleConnect()
@@ -164,10 +163,10 @@ extension NetworkExtensionProfile {
             }
 
         }
-        
+
         //Next, apply rules for each network
         trustedNetworks.forEach { (key, value) in
-            
+
             switch value {
             case NMTRules.alwaysConnect.rawValue:
                 let ruleConnect = NEOnDemandRuleConnect()
@@ -187,7 +186,7 @@ extension NetworkExtensionProfile {
             }
 
         }
-        
+
         //Last, apply generic rules to WiFi
         switch rule {
         case NMTRules.alwaysConnect.rawValue:
@@ -203,38 +202,40 @@ extension NetworkExtensionProfile {
             ruleIgnore.interfaceTypeMatch = .wiFi
             vpn.onDemandRules?.append(ruleIgnore)
         }
-        
+
         let preferences = Client.preferences.editable()
         preferences.nmtTemporaryOpenNetworks = []
         preferences.commit()
-        
+
     }
-    
+
     private func configureOnDemandOnCellularNetworks(_ vpn: NEVPNManager) {
         #if os(iOS)
-        let rules = Client.preferences.nmtGenericRules
-        let cellularRule = rules[NMTType.cellular.rawValue]
-        
-        switch cellularRule {
-        case NMTRules.alwaysConnect.rawValue:
-            let ruleConnect = NEOnDemandRuleConnect()
-            ruleConnect.interfaceTypeMatch = .cellular
-            vpn.onDemandRules?.append(ruleConnect)
-        case NMTRules.alwaysDisconnect.rawValue:
-            let ruleDisconnect = NEOnDemandRuleDisconnect()
-            ruleDisconnect.interfaceTypeMatch = .cellular
-            vpn.onDemandRules?.append(ruleDisconnect)
-        default:
-            let ruleIgnore = NEOnDemandRuleIgnore()
-            ruleIgnore.interfaceTypeMatch = .cellular
-            vpn.onDemandRules?.append(ruleIgnore)
-        }
+            let rules = Client.preferences.nmtGenericRules
+            let cellularRule = rules[NMTType.cellular.rawValue]
+
+            switch cellularRule {
+            case NMTRules.alwaysConnect.rawValue:
+                let ruleConnect = NEOnDemandRuleConnect()
+                ruleConnect.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(ruleConnect)
+            case NMTRules.alwaysDisconnect.rawValue:
+                let ruleDisconnect = NEOnDemandRuleDisconnect()
+                ruleDisconnect.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(ruleDisconnect)
+            default:
+                let ruleIgnore = NEOnDemandRuleIgnore()
+                ruleIgnore.interfaceTypeMatch = .cellular
+                vpn.onDemandRules?.append(ruleIgnore)
+            }
         #endif
     }
-    
-    private func configureDefaultOnDemandRules(_ force: Bool,
-                                               _ vpn: NEVPNManager,
-                                               _ configuration: VPNConfiguration) {
+
+    private func configureDefaultOnDemandRules(
+        _ force: Bool,
+        _ vpn: NEVPNManager,
+        _ configuration: VPNConfiguration
+    ) {
         if force {
             vpn.isOnDemandEnabled = configuration.isOnDemand
         } else {
@@ -244,5 +245,5 @@ extension NetworkExtensionProfile {
             vpn.onDemandRules = [NEOnDemandRuleConnect()]
         }
     }
-    
+
 }

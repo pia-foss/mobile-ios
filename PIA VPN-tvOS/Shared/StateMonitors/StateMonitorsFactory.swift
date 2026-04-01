@@ -11,18 +11,19 @@ import PIALibrary
 
 class StateMonitorsFactory {
     static var makeUserAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType = {
-        UserAuthenticationStatusMonitor(currentStatus: Client.providers.accountProvider.isLoggedIn ? .loggedIn : .loggedOut,
-                                        notificationCenter: NotificationCenter.default)
+        UserAuthenticationStatusMonitor(
+            currentStatus: Client.providers.accountProvider.isLoggedIn ? .loggedIn : .loggedOut,
+            notificationCenter: NotificationCenter.default)
     }()
-    
+
     static var makeVPNStatusMonitor: VPNStatusMonitorType = {
-        return VPNStatusMonitor(vpnStatusProvider: VpnConnectionFactory.makeVpnProvider,
-                                notificationCenter: NotificationCenter.default)
+        return VPNStatusMonitor(
+            vpnStatusProvider: VpnConnectionFactory.makeVpnProvider,
+            notificationCenter: NotificationCenter.default)
     }()
-    
+
     static var makeConnectionStateMonitor: ConnectionStateMonitorType = {
         return ConnectionStateMonitor(vpnStatusMonitor: makeVPNStatusMonitor, vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }()
-    
-}
 
+}
