@@ -7,31 +7,30 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class GetAvailableProductsUseCaseMock: GetAvailableProductsUseCaseType {
     private let result: Result<[SubscriptionProduct], Error>
-
+    
     init(result: Result<[SubscriptionProduct], Error>) {
         self.result = result
     }
-
+    
     func getAllProducts() async throws -> [SubscriptionProduct] {
         switch result {
-        case .success(let products):
-            return products
-        case .failure(let error):
-            throw error
+            case .success(let products):
+                return products
+            case .failure(let error):
+                throw error
         }
     }
-
+    
     func getProduct(productId: String) async throws -> SubscriptionProduct? {
         switch result {
-        case .success(let products):
-            return products.first
-        case .failure(let error):
-            throw error
+            case .success(let products):
+                return products.first
+            case .failure(let error):
+                throw error
         }
     }
 }

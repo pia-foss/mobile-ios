@@ -6,19 +6,19 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import PIALocalizations
 import SwiftUI
+import PIALocalizations
 
 struct PrivacyPolicyView: View {
-
+    
     let privacyPolicyURL: URL
-
+    
     let privacyPolicyDescription = L10n.HelpMenu.AboutSection.PrivacyPolicy.description
     let privacyPolicyQrCodeMessage = L10n.HelpMenu.AboutSection.PrivacyPolicy.QrCode.message
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 60) {
-            Text(privacyPolicyDescription)
+           Text(privacyPolicyDescription)
                 .font(.system(size: 29, weight: .medium))
                 .foregroundColor(.pia_on_surface)
                 .lineLimit(nil)
@@ -26,7 +26,7 @@ struct PrivacyPolicyView: View {
         }
         .frame(maxWidth: Spacing.contentViewMaxWidth)
     }
-
+    
     var privacyPolicyQRCodeSection: some View {
         HStack(alignment: .center, spacing: 40) {
             QRImageView(qrImageURL: privacyPolicyURL)

@@ -29,7 +29,7 @@ public struct UpdateAccountRequest {
 
     /// The new email address.
     public let email: String
-
+    
     /// :nodoc:
     public init(email: String) {
         self.email = email

@@ -24,27 +24,28 @@ import Foundation
 
 /// The sub-pages offered in the `PIAWelcomeViewController` user interface.
 public struct Pages: OptionSet {
-
+    
     /// The login page.
     public static let login = Pages(rawValue: 1 << 0)
-
+    
     /// The purchase plan page.
     public static let purchase = Pages(rawValue: 1 << 1)
-
+    
     /// The direct purchase plan page.
     public static let directPurchase = Pages(rawValue: 1 << 2)
-
+    
     /// The restore page.
     public static let restore = Pages(rawValue: 1 << 3)
 
     /// All pages.
     public static let all: Pages = [.login, .purchase, .directPurchase, .restore]
-
+    
     /// :nodoc:
     public let rawValue: Int
-
+    
     /// :nodoc:
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
 }
+    

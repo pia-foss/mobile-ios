@@ -14,10 +14,10 @@ class AccountInformationAvailabilityFactory {
         guard let defaultAccountProvider = Client.providers.accountProvider as? DefaultAccountProvider else {
             fatalError("Account provider is not the expected type")
         }
-
+        
         return AccountInformationAvailabilityVerifier(accountProvider: defaultAccountProvider, notificationCenter: NotificationCenter.default, userDefaults: UserDefaults.standard)
     }()
-
+    
     static func makeAccountInformationAvailabilityVerifier() -> AccountInformationAvailabilityVerifierType {
         return accountInformationAvailabilityVerifierShared
     }

@@ -1,38 +1,38 @@
 //
 //  SettingPopoverSelectionView.swift
 //  PIA VPN
-//
+//  
 //  Created by Jose Blaya on 19/5/21.
 //  Copyright © 2021 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
-//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
+//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
 //  permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
 
-import PIADesignSystem
+import UIKit
 import PIALibrary
-import PIALocalizations
 import Popover
 import TunnelKitCore
 import TunnelKitOpenVPN
-import UIKit
+import PIADesignSystem
+import PIALocalizations
 
 class SettingPopoverSelectionView: UIView {
 
     weak var currentPopover: Popover!
     weak var pendingPreferences: Client.Preferences.Editable!
     weak var settingsDelegate: SettingsDelegate!
-
+    
     let cellReuseIdentifier = "cell"
 
     let tableView: UITableView = {
@@ -40,14 +40,14 @@ class SettingPopoverSelectionView: UIView {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
-
+    
     let cellTextStyle = {
         Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
@@ -60,12 +60,13 @@ class SettingPopoverSelectionView: UIView {
         Theme.current.applyDividerToSeparator(tableView)
 
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 }
+
 
 class ProtocolPopoverSelectionView: SettingPopoverSelectionView {
 
@@ -76,7 +77,7 @@ class ProtocolPopoverSelectionView: SettingPopoverSelectionView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -84,14 +85,14 @@ class ProtocolPopoverSelectionView: SettingPopoverSelectionView {
 }
 
 extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return protocols.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.accessibilityIdentifier = "ProtocolPopoverSelectionView"
-
+        
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no protocol available")
         }
@@ -99,7 +100,7 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
 
         cell.textLabel?.text = protocols[indexPath.row].vpnProtocol
         cell.textLabel?.accessibilityLabel = protocols[indexPath.row].vpnProtocol
-
+                
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
@@ -108,13 +109,13 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
         return cell
 
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let vpnType = protocols[indexPath.row]
         pendingPreferences.vpnType = vpnType
         settingsDelegate.updateSetting(ProtocolsSections.protocolSelection, withValue: nil)
-
+        
         Macros.postNotification(.PIASettingsHaveChanged)
         Macros.postNotification(.RefreshSettings)
 
@@ -132,7 +133,7 @@ class TransportPopoverSelectionView: SettingPopoverSelectionView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -140,11 +141,11 @@ class TransportPopoverSelectionView: SettingPopoverSelectionView {
 }
 
 extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.accessibilityIdentifier = "TransportPopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
@@ -158,7 +159,7 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.text = options[indexPath.row]
         }
         cell.textLabel?.accessibilityLabel = options[indexPath.row]
-
+                
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
@@ -167,15 +168,15 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
         return cell
 
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let socketType = options[indexPath.row]
-
+        
         let type = SocketType(rawValue: socketType)
         settingsDelegate.updateSocketType(socketType: type)
         Macros.postNotification(.PIASettingsHaveChanged)
-
+        
         currentPopover.dismiss()
     }
 
@@ -190,7 +191,7 @@ class PortPopoverSelectionView: SettingPopoverSelectionView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -198,14 +199,14 @@ class PortPopoverSelectionView: SettingPopoverSelectionView {
 }
 
 extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.accessibilityIdentifier = "PortPopoverSelectionView"
-
+        
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             fatalError("no transport available")
         }
@@ -217,7 +218,7 @@ extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = options[indexPath.row].description
         }
         cell.textLabel?.accessibilityLabel = options[indexPath.row].description
-
+                
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
@@ -226,14 +227,14 @@ extension PortPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
         return cell
 
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let port = options[indexPath.row]
-
+        
         settingsDelegate.updateRemotePort(port: port)
         Macros.postNotification(.PIASettingsHaveChanged)
-
+        
         currentPopover.dismiss()
     }
 
@@ -248,7 +249,7 @@ class DataEncryptionPopoverSelectionView: SettingPopoverSelectionView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -256,11 +257,11 @@ class DataEncryptionPopoverSelectionView: SettingPopoverSelectionView {
 }
 
 extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.accessibilityIdentifier = "DataEncryptionPopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
@@ -270,7 +271,7 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
 
         cell.textLabel?.text = options[indexPath.row].description
         cell.textLabel?.accessibilityLabel = options[indexPath.row].description
-
+                
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
@@ -279,14 +280,14 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
         return cell
 
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let value = options[indexPath.row]
-
+        
         settingsDelegate.updateDataEncryption(encryption: value)
         Macros.postNotification(.PIASettingsHaveChanged)
-
+        
         currentPopover.dismiss()
     }
 
@@ -301,7 +302,7 @@ class HandshakePopoverSelectionView: SettingPopoverSelectionView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -309,11 +310,11 @@ class HandshakePopoverSelectionView: SettingPopoverSelectionView {
 }
 
 extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.accessibilityIdentifier = "HandshakePopoverSelectionView"
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
@@ -323,7 +324,7 @@ extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSou
 
         cell.textLabel?.text = options[indexPath.row].description
         cell.textLabel?.accessibilityLabel = options[indexPath.row].description
-
+                
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
         Theme.current.applyPrincipalBackground(backgroundView)
@@ -332,15 +333,17 @@ extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSou
         return cell
 
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let value = options[indexPath.row]
-
+        
         settingsDelegate.updateHandshake(handshake: value)
         Macros.postNotification(.PIASettingsHaveChanged)
-
+        
         currentPopover.dismiss()
     }
 
 }
+
+

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Logging
 import PIALibrary
+import Logging
 
 class BootstraperFactory {
     static func makeBootstrapper() -> BootstraperType {
@@ -31,53 +31,53 @@ class BootstraperFactory {
     }
 
     private static func setupEnvironment() {
-        #if STAGING
-            Client.environment = .staging
-            Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
-        #else
-            Client.environment = .production
-            Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
-        #endif
+    #if STAGING
+        Client.environment = .staging
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .staging)
+    #else
+        Client.environment = .production
+        Client.configuration.setBaseURL(Macros.baseUrl(), for: .production)
+    #endif
     }
 
     private static func setupDebuggingConsole() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
-
+            
             #if DEVELOPMENT || STAGING
-                handler.logLevel = .debug
+            handler.logLevel = .debug
             #else
-                handler.logLevel = .info
+            handler.logLevel = .info
             #endif
-
+            
             return MultiplexLogHandler([
                 handler,
                 PIALogHandler(label: label)
             ])
         }
     }
-
+    
     private static func migrateNMT() {
         AppPreferences.shared.migrateNMT()
     }
-
+    
     private static func loadDataBase() {
         Client.database = Client.Database(group: AppConstants.appGroup)
         Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
 
         // Force enable debug logging for DEVELOPMENT and STAGING builds
         #if DEVELOPMENT || STAGING
-            Client.preferences.debugLogging = true
+        Client.preferences.debugLogging = true
         #endif
     }
-
+    
     private static func setupPreferences() {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
         defaults.vpnType = IKEv2Profile.vpnType
     }
-
+    
     private static func cleanCurrentAccount() {
         // Check if should clean the account after delete the app and install again
         if Client.providers.accountProvider.shouldCleanAccount {
@@ -85,12 +85,12 @@ class BootstraperFactory {
             Client.providers.accountProvider.cleanDatabase()
         }
     }
-
+    
     private static func setupLatestRegionList() {
         guard let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL else {
             fatalError("Could not find bundled regions file")
         }
-
+        
         do {
             let bundledServersJSON = try Data(contentsOf: bundledRegionsURL)
             Client.configuration.bundledServersJSON = bundledServersJSON
@@ -98,14 +98,14 @@ class BootstraperFactory {
             fatalError("Could not parse bundled regions file: \(e)")
         }
     }
-
+    
     private static func renewalDIPToken() {
         // Check the DIP token for renewal
         if AppPreferences.shared.checksDipExpirationRequest, let dipToken = Client.providers.serverProvider.dipTokens?.first {
             Client.providers.serverProvider.handleDIPTokenExpiration(dipToken: dipToken, nil)
         }
     }
-
+    
     private static func setupConfiguration() {
         Client.configuration.enablesConnectivityUpdates = true
         Client.configuration.enablesServerUpdates = true
@@ -113,32 +113,32 @@ class BootstraperFactory {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
     }
-
+    
     private static func acceptDataSharing() {
         let connectionStatsPermisson = ConnectionStatsPermisson()
         guard let permissionGranted = connectionStatsPermisson.get(),
-            permissionGranted
-        else {
+        permissionGranted else {
             ServiceQualityManager.shared.stop()
             return
         }
-
+        
         ServiceQualityManager.shared.start()
     }
-
+    
     private static func setupExceptionHandler() {
         NSSetUncaughtExceptionHandler { exception in
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
     }
-
+    
+    
     private static func startCachingLicenses() {
         HelpFactory.makeLicensesUseCase()
     }
-
+    
     private static func startConnectionStateMonitor() {
         StateMonitorsFactory.makeConnectionStateMonitor()
     }
-
+    
 }

@@ -1,3 +1,4 @@
+
 import Foundation
 import NWHttpConnection
 
@@ -8,49 +9,50 @@ protocol NetworkRequestClientType {
     func executeRequest(with configuration: NetworkRequestConfigurationType, completion: @escaping Completion)
 }
 
+
 class NetworkRequestClient: NetworkRequestClientType {
     private let networkConnectionRequestProvider: NetworkConnectionRequestProviderType
     private let endpointManager: EndpointManagerType
-
+    
     init(networkConnectionRequestProvider: NetworkConnectionRequestProviderType, endpointManager: EndpointManagerType) {
         self.networkConnectionRequestProvider = networkConnectionRequestProvider
         self.endpointManager = endpointManager
     }
-
+    
     func executeRequest(with configuration: NetworkRequestConfigurationType, completion: @escaping Completion) {
 
         startRequest(with: configuration, completion: completion)
     }
-
+    
 }
 
 // MARK: - Private
 
 private extension NetworkRequestClient {
-
+    
     func startRequest(with configuration: NetworkRequestConfigurationType, completion: @escaping Completion) {
         let endpoints = getEndpoints(for: configuration.networkRequestModule)
 
         let connections = endpoints.compactMap { endpoint in
             self.networkConnectionRequestProvider.makeNetworkRequestConnection(for: endpoint, with: configuration)
         }
-
+        
         // Runs recursevly all the connections until one succeeds or all fail
         executeRecursivelyUntilSuccess(connections: connections, completion: completion)
     }
-
+    
     /// Serial execution of all the connections until one succeeds or completes with an error when all connection attempts fail
-    func executeRecursivelyUntilSuccess(connections: [NWHttpConnectionType], completion: @escaping NetworkRequestClientType.Completion) {
+    func executeRecursivelyUntilSuccess(connections:  [NWHttpConnectionType], completion: @escaping NetworkRequestClientType.Completion) {
 
         guard !connections.isEmpty else {
             log.error("All connection attempts failed: No connections available")
             completion(.allConnectionAttemptsFailed(statusCode: nil), nil)
             return
         }
-
+        
         var remainingConnections = connections
         let nextConnection = remainingConnections.removeFirst()
-
+        
         func tryNextConnectionOrFail(currentStatusCode: Int?) {
             if remainingConnections.isEmpty {
                 // No more endpoints to try a connection
@@ -62,7 +64,7 @@ private extension NetworkRequestClient {
                 executeRecursivelyUntilSuccess(connections: remainingConnections, completion: completion)
             }
         }
-
+        
         execute(connection: nextConnection) { error, responseData in
 
             if let error = error {
@@ -85,9 +87,9 @@ private extension NetworkRequestClient {
                 tryNextConnectionOrFail(currentStatusCode: nil)
             }
         }
-
+        
     }
-
+    
     /// Execution of a single connection
     func execute(connection: NWHttpConnectionType, completion: @escaping NetworkRequestClientType.Completion) {
         do {
@@ -118,7 +120,7 @@ private extension NetworkRequestClient {
             completion(NetworkRequestError.unknown(message: error.localizedDescription), nil)
         }
     }
-
+    
     func getEndpoints(for module: NetworkRequestModule, environment: Client.Environment = Client.environment) -> [PinningEndpoint] {
         switch (module, environment) {
         case (.account, .production):

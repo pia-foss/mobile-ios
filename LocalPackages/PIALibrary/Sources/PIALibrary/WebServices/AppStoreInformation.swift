@@ -23,9 +23,9 @@
 import Foundation
 
 public struct AppStoreInformation: Codable {
-
+    
     public let products: [Product]
-
+    
     public let eligibleForTrial: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -33,3 +33,4 @@ public struct AppStoreInformation: Codable {
         case eligibleForTrial = "eligible_for_trial"
     }
 }
+

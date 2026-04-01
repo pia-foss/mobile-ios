@@ -26,14 +26,14 @@ private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
 final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private struct Entries {
-        static let username = "LoggedUsername"  // legacy
-
-        static let accountInfo = "LoggedAccountInfo"  // legacy
+        static let username = "LoggedUsername" // legacy
+        
+        static let accountInfo = "LoggedAccountInfo" // legacy
 
         static let lastSignupEmail = "LastSignupEmail"
 
         static let tokenMigrated = "TokenMigrated"
-
+        
         static let publicIP = "PublicIP"
 
         static let lastServerCN = "LastServerCN"
@@ -43,29 +43,29 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let cachedServers = "CachedServers"
 
         static let serversConfiguration = "ServersConfiguration"
+        
+        static let preferredServer = "CurrentRegion" // legacy
 
-        static let preferredServer = "CurrentRegion"  // legacy
-
-        static let lastConnectedRegion = "LastConnectedRegion"
+        static let lastConnectedRegion = "LastConnectedRegion" 
 
         static let preferredServerDIPToken = "CurrentRegionDIPToken"
-
+        
         static let pingByServerIdentifier = "PingByServerIdentifier"
-
+        
         static let vpnType = "VPNType"
-
+        
         static let vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
-
+        
         static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
 
         static let lastKnownVpnStatus = "LastKnownVPNStatus"
 
-        static let persistentConnection = "PersistentConnection"  // legacy
+        static let persistentConnection = "PersistentConnection" // legacy
 
         static let showReconnectNotifications = "ShowReconnectNotifications"
 
-        static let mace = "MACE"  // legacy
-
+        static let mace = "MACE" // legacy
+        
         static let visibleTiles = "VisibleTiles"
 
         static let orderedTiles = "OrderedTiles"
@@ -77,11 +77,11 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let nmtMigrationSuccess = "NMTMigrationSuccess"
 
         static let trustedNetworks = "TrustedNetworks"
-
+        
         static let serverNetwork = "ServerNetwork"
 
         static let ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
-
+        
         static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
 
         static let ikeV2PacketSize = "IKEV2PacketSize"
@@ -101,42 +101,42 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         static let debugLogging = "DebugLogging"
 
         static let shareServiceQualityData = "ShareServiceQualityData"
-
+        
         static let lastKnownException = "LastKnownException"
 
         static let versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
-
+        
         static let lastVPNConnectionAttempt = "lastVPNConnectionAttempt"
 
         static let lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
-
+        
         static let timeToConnectVPN = "timeToConnectVPN"
 
         static let wireguardMigrationPerformed = "WireguardMigrationPerformed"
-
+        
         static let leakProtection = "LeakProtection"
-
+        
         static let allowLocalDeviceAccess = "AllowLocalDeviceAccess"
-
+        
         static let currentRFC1918VulnerableWifi = "CurrentRFC1918VulnerableWifi"
     }
-
+    
     private let backend: UserDefaults
-
+    
     private let group: String?
-
+    
     private var historicalServersCopy: [Server]?
 
     private var cachedServersCopy: [Server]?
-
+    
     private var visibleTilesCopy: [AvailableTiles]?
 
     private var orderedTilesCopy: [AvailableTiles]?
 
     private var serversConfigurationCopy: ServersBundle.Configuration?
-
+    
     private var pingByServerIdentifier: [String: Int] = [:]
-
+    
     init() {
         backend = UserDefaults.standard
         group = Bundle.main.bundleIdentifier
@@ -149,17 +149,17 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         self.group = group
         loadComplexMaps()
     }
-
+    
     private func loadComplexMaps() {
         pingByServerIdentifier = backend.dictionary(forKey: Entries.pingByServerIdentifier) as? [String: Int] ?? [:]
     }
-
+    
     deinit {
         backend.synchronize()
     }
-
+    
     // MARK: PlainStore
-
+    
     // MARK: Account
 
     var publicUsername: String? {
@@ -188,9 +188,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 }
             }
             if let dict = backend.dictionary(forKey: Entries.accountInfo),
-                let data = try? JSONSerialization.data(withJSONObject: dict),
-                let info = try? decoder.decode(AccountInfo.self, from: data)
-            {
+               let data = try? JSONSerialization.data(withJSONObject: dict),
+               let info = try? decoder.decode(AccountInfo.self, from: data) {
                 return info
             }
             return nil
@@ -205,7 +204,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             }
         }
     }
-
+    
     var lastSignupEmail: String? {
         get {
             return backend.string(forKey: Entries.lastSignupEmail)
@@ -227,7 +226,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.tokenMigrated)
         }
     }
-
+    
     var publicIP: String? {
         get {
             return backend.string(forKey: Entries.publicIP)
@@ -278,7 +277,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(intArray, forKey: Entries.visibleTiles)
         }
     }
-
+    
     var orderedTiles: [AvailableTiles] {
         get {
             if let copy = orderedTilesCopy {
@@ -293,7 +292,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
                     tiles.append(tile)
                 }
             }
-            //Add new tiles when needed
+            //Add new tiles when needed 
             if tiles.count < AvailableTiles.defaultOrderedTiles().count {
                 for defaultTile in AvailableTiles.defaultOrderedTiles() {
                     if !tiles.contains(defaultTile) {
@@ -312,6 +311,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
+    
     // MARK: Server
     var historicalServers: [Server] {
         get {
@@ -356,7 +356,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         return []
     }
-
+    
     var preferredServer: Server? {
         get {
             let identifier = backend.string(forKey: Entries.preferredServer)
@@ -368,11 +368,10 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue?.dipToken, forKey: Entries.preferredServerDIPToken)
             var lastServers = historicalServers
             if let server = newValue {
-
-                let filtered = lastServers.filter({ $0.name == server.name })
+                
+                let filtered = lastServers.filter({$0.name == server.name})
                 if filtered.count != 0,
-                    let indexOfServer = lastServers.firstIndex(of: server)
-                {
+                    let indexOfServer = lastServers.firstIndex(of: server) {
                     lastServers.remove(at: indexOfServer)
                     lastServers.insert(server, at: lastServers.count)
                 } else {
@@ -382,7 +381,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             }
         }
     }
-
+    
     var lastConnectedRegion: Server? {
         get {
             let identifier = backend.string(forKey: Entries.lastConnectedRegion)
@@ -392,7 +391,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue?.identifier, forKey: Entries.lastConnectedRegion)
         }
     }
-
+    
     var preferredServerDIPToken: String? {
         get {
             return backend.string(forKey: Entries.preferredServerDIPToken)
@@ -405,10 +404,10 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     func ping(forServerIdentifier serverIdentifier: String) -> Int? {
         return pingByServerIdentifier[serverIdentifier]
     }
-
+    
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String) {
-
-        if let currentResponseTime = pingByServerIdentifier[serverIdentifier] {
+        
+        if let currentResponseTime = pingByServerIdentifier[serverIdentifier]{
             if currentResponseTime > ping {
                 pingByServerIdentifier[serverIdentifier] = ping
             }
@@ -417,17 +416,17 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
 
     }
-
+    
     func serializePings() {
         backend.set(pingByServerIdentifier, forKey: Entries.pingByServerIdentifier)
     }
-
+    
     func clearPings() {
         pingByServerIdentifier.removeAll()
     }
-
+    
     // MARK: VPN
-
+    
     var vpnType: String? {
         get {
             return backend.string(forKey: Entries.vpnType)
@@ -436,7 +435,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.vpnType)
         }
     }
-
+    
     var vpnDisconnectsOnSleep: Bool {
         get {
             return backend.bool(forKey: Entries.vpnDisconnectsOnSleep)
@@ -445,8 +444,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.vpnDisconnectsOnSleep)
         }
     }
-
-    var vpnCustomConfigurationMaps: [String: [String: Any]]? {
+    
+    var vpnCustomConfigurationMaps: [String: [String : Any]]? {
         get {
             return backend.dictionary(forKey: Entries.vpnCustomConfigurationMaps) as? [String: [String: Any]]
         }
@@ -454,7 +453,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.vpnCustomConfigurationMaps)
         }
     }
-
+    
     var lastKnownVpnStatus: VPNStatus {
         get {
             return VPNStatus(rawValue: backend.string(forKey: Entries.lastKnownVpnStatus) ?? "") ?? .unknown
@@ -464,7 +463,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
 
     }
-
+    
     var lastVPNConnectionAttempt: Double {
         get {
             return backend.double(forKey: Entries.lastVPNConnectionAttempt)
@@ -503,7 +502,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.wireguardMigrationPerformed)
         }
     }
-
+    
     var leakProtection: Bool {
         get {
             if backend.object(forKey: Entries.leakProtection) == nil {
@@ -515,7 +514,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.leakProtection)
         }
     }
-
+    
     var allowLocalDeviceAccess: Bool {
         get {
             if backend.object(forKey: Entries.allowLocalDeviceAccess) == nil {
@@ -527,7 +526,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.allowLocalDeviceAccess)
         }
     }
-
+    
     var currentRFC1918VulnerableWifi: String? {
         get {
             return backend.string(forKey: Entries.currentRFC1918VulnerableWifi)
@@ -536,7 +535,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.currentRFC1918VulnerableWifi)
         }
     }
-
+    
     // MARK: Preferences
 
     var isPersistentConnection: Bool? {
@@ -550,7 +549,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.persistentConnection)
         }
     }
-
+    
     var showReconnectNotifications: Bool? {
         get {
             guard let value = backend.object(forKey: Entries.showReconnectNotifications) as? Bool else {
@@ -562,7 +561,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.showReconnectNotifications)
         }
     }
-
+    
     var ikeV2IntegrityAlgorithm: String {
         get {
             guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String else {
@@ -574,7 +573,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.ikeV2IntegrityAlgorithm)
         }
     }
-
+    
     var ikeV2EncryptionAlgorithm: String {
         get {
             guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? String else {
@@ -586,7 +585,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.ikeV2EncryptionAlgorithm)
         }
     }
-
+    
     var ikeV2PacketSize: Int {
         get {
             guard let value = backend.object(forKey: Entries.ikeV2PacketSize) as? Int else {
@@ -622,7 +621,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.mace)
         }
     }
-
+    
     var signInWithAppleFakeEmail: String? {
         get {
             return backend.string(forKey: Entries.signInWithAppleFakeEmail)
@@ -631,9 +630,9 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
         }
     }
-
+    
     // MARK: Service Quality
-
+    
     var debugLogging: Bool? {
         get {
             return backend.bool(forKey: Entries.debugLogging)
@@ -642,7 +641,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.debugLogging)
         }
     }
-
+    
     var shareServiceQualityData: Bool? {
         get {
             return backend.bool(forKey: Entries.shareServiceQualityData)
@@ -651,7 +650,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.shareServiceQualityData)
         }
     }
-
+    
     var versionWhenServiceQualityOpted: String? {
         get {
             return backend.string(forKey: Entries.versionWhenServiceQualityOpted)
@@ -660,7 +659,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.versionWhenServiceQualityOpted)
         }
     }
-
+    
     var lastKnownException: String? {
         get {
             return backend.string(forKey: Entries.lastKnownException) ?? ""
@@ -669,7 +668,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.lastKnownException)
         }
     }
-
+    
     //MARK: Networks
     var cachedNetworks: [String] {
         get {
@@ -694,7 +693,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.nmtTrustedNetworkRules)
         }
     }
-
+    
     var nmtTemporaryOpenNetworks: [String] {
         get {
             guard let value = backend.object(forKey: Entries.nmtTemporaryOpenNetworks) as? [String] else {
@@ -706,7 +705,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.nmtTemporaryOpenNetworks)
         }
     }
-
+    
     var nmtGenericRules: [String: Int] {
         get {
             guard let value = backend.dictionary(forKey: Entries.nmtGenericRules) as? [String: Int] else {
@@ -756,7 +755,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.set(newValue, forKey: Entries.useWiFiProtection)
         }
     }
-
+    
     ///Deprecated
     var trustedNetworks: [String] {
         get {
@@ -771,7 +770,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
 
     // MARK: Lifecycle
-
+    
     func reset() {
         backend.removeObject(forKey: Entries.persistentConnection)
         backend.removeObject(forKey: Entries.showReconnectNotifications)
@@ -808,5 +807,5 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             // FIXME: clear standard defaults
         }
     }
-
+        
 }

@@ -28,13 +28,13 @@ public protocol InAppProduct: AnyObject, CustomStringConvertible {
 
     /// The product identifier.
     var identifier: String { get }
-
+    
     /// The price of the product (localized).
     var price: NSNumber { get }
 
     /// The `Locale` in which `price` is expressed.
     var priceLocale: Locale { get }
-
+    
     /// The underlying native product implementation.
     var native: Any? { get }
 }

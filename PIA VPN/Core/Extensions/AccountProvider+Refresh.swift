@@ -26,9 +26,9 @@ import PIALibrary
 private let log = PIALogger.logger(for: AccountProvider.self)
 
 extension AccountProvider {
-
+    
     func retrieveAccount() {
-
+        
         guard self.isLoggedIn else {
             return
         }
@@ -40,7 +40,7 @@ extension AccountProvider {
             guard self.isLoggedIn else {
                 return
             }
-
+            
             if (error == .unauthorized) {
                 log.error("Account: Failed to retrieve the account info, user is unauthorized. Logging out...")
                 self.logout(nil)
@@ -48,27 +48,27 @@ extension AccountProvider {
             }
         })
     }
-
+    
     func refreshAndLogoutUnauthorized() {
-
+        
         guard self.isLoggedIn else {
             return
         }
-
+        
         refreshAccount()
-
+        
     }
-
+    
     private func refreshAccount() {
 
-        refreshAccountInfo({ (info, error) in
+        refreshAccountInfo( { (info, error) in
             guard let error = error as? ClientError else {
                 return
             }
             guard self.isLoggedIn else {
                 return
             }
-
+            
             if (error == .unauthorized) {
                 log.error("Account: Failed to refresh account info, user is unauthorized. Logging out...")
                 self.logout(nil)

@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
-
 #if canImport(UIKit)
-    import UIKit
+import UIKit
 #endif
+
+import SwiftUI
 
 /// Preview view demonstrating PIA colors
 ///
@@ -52,7 +52,7 @@ struct ColorPreview: View {
                 ColorSection(title: "Outline", colors: outlineColors)
                 ColorSection(title: "Error", colors: errorColors)
                 ColorSection(title: "Fixed", colors: fixedColors)
-
+                
                 GradientSection(title: "Fixed Gradients", gradients: gradientColors)
             }
             .padding()
@@ -158,7 +158,7 @@ struct ColorSection: View {
     private let columns = [
         GridItem(.adaptive(minimum: 220))
     ]
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(title)

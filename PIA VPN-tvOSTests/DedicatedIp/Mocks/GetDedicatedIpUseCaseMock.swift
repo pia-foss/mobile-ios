@@ -7,17 +7,16 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class GetDedicatedIpUseCaseMock: GetDedicatedIpUseCaseType {
-
+    
     private let result: ServerType?
-
+    
     init(result: ServerType?) {
         self.result = result
     }
-
+    
     var callAsFunctionCalled = false
     var callAsFunctionCalledAttempt = 0
     func callAsFunction() -> ServerType? {
@@ -25,7 +24,7 @@ class GetDedicatedIpUseCaseMock: GetDedicatedIpUseCaseType {
         callAsFunctionCalledAttempt += 1
         return result
     }
-
+    
     var isDedicatedIpCalled = false
     var isDedicatedIpCalledAttempt = 0
     func isDedicatedIp(_ server: ServerType) -> Bool {

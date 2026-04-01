@@ -34,13 +34,13 @@ public protocol VPNProvider: AnyObject {
     ///
     /// - Seealso: `VPNProfile.vpnType`
     var currentVPNType: String { get }
-
+    
     /// The `VPNStatus` of the current profile.
     var vpnStatus: VPNStatus { get }
 
     /// The `Server` associated with the current profile.
     var profileServer: Server? { get }
-
+    
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
@@ -48,22 +48,22 @@ public protocol VPNProvider: AnyObject {
 
     /**
      Installs the profile as per `currentVPNType`.
-    
+     
      - Parameter callback: Returns `nil` on success.
      - Parameter forceInstall: Force the install of the profile.
      */
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
-
+    
     /**
      Disables the current profile.
-    
+
      - Parameter callback: Returns `nil` on success.
      */
     func disable(_ callback: SuccessLibraryCallback?)
 
     /**
      Uninstalls the current profile.
-    
+     
      - Parameter callback: Returns `nil` on success.
      */
     func uninstall(_ callback: SuccessLibraryCallback?)
@@ -75,56 +75,57 @@ public protocol VPNProvider: AnyObject {
 
     /**
      Connects to the VPN.
-    
+
      - Parameter callback: Returns `nil` on success.
      */
     func connect(_ callback: SuccessLibraryCallback?)
 
     /**
      Disconnects from the VPN.
-    
+
      - Parameter callback: Returns `nil` on success.
      */
     func disconnect(_ callback: SuccessLibraryCallback?)
-
+    
     /**
      Update preferences from the VPN.
-    
+     
      - Parameter callback: Returns `nil` on success.
      */
     func updatePreferences(_ callback: SuccessLibraryCallback?)
 
+    
     /**
      Reconnects to the VPN.
-    
+
      - Parameter delay: The delay in milliseconds after which the reconnection is issue.
      - Parameter forceDisconnect: Boolean to indicate if we want to disconnect the VPN before reconnect..
      - Parameter callback: Returns `nil` on success.
      */
     func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
-
+    
     /**
      Submits the debug report containing all relevant information foor the current session.
-    
+     
      - Parameter shouldSendPersistedData: Specifies whether to send the user persisted data along with the report.
      - Parameter callback: Returns the report identifier  on success.
      */
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?)
-
+    
     /**
      Submits the usage information associated with the current VPN connection.
-    
+     
      - Parameter callback: Returns the `Usage` information on success.
      */
     func dataUsage(_ callback: LibraryCallback<Usage>?)
-
+    
     /**
      Check if the VPN profile needs to be migrated to GEN4.
      - Precondition: isVPNConnected == true
      - Returns: `Bool`
      */
     func needsMigrationToGEN4() -> Bool
-
+    
 }
 
 public extension VPNProvider {

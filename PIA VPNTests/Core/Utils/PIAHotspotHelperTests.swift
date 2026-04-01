@@ -20,15 +20,14 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIALibrary
 import XCTest
-
+import PIALibrary
 @testable import PIA_VPN
 
 class PIAHotspotHelperTests: XCTestCase {
 
     private var hotspotHelper: PIAHotspotHelper!
-
+    
     override func setUp() {
         super.setUp()
         hotspotHelper = PIAHotspotHelper()
@@ -38,11 +37,11 @@ class PIAHotspotHelperTests: XCTestCase {
         hotspotHelper = nil
         super.tearDown()
     }
-
+    
     func testRetrieveCurrentNetworkListIsEmpty() {
         XCTAssertTrue(hotspotHelper.retrieveCurrentNetworkList().isEmpty)
     }
-
+    
     func testTrustedNetworkArray() {
         var trustedNetworks = hotspotHelper.trustedNetworks()
         XCTAssertTrue(trustedNetworks.isEmpty)
@@ -54,7 +53,7 @@ class PIAHotspotHelperTests: XCTestCase {
         trustedNetworks = hotspotHelper.trustedNetworks()
         XCTAssertTrue(trustedNetworks.isEmpty)
     }
-
+    
     func testRemoveTrustedNetworkArray() {
         hotspotHelper.clearTrustedNetworkList()
         var trustedNetworks = hotspotHelper.trustedNetworks()
@@ -68,7 +67,7 @@ class PIAHotspotHelperTests: XCTestCase {
         XCTAssertTrue(trustedNetworks.isEmpty)
 
     }
-
+    
     func testConfiguration() {
         /*
         #if arch(i386) || arch(x86_64)

@@ -24,7 +24,7 @@ import Foundation
 
 /// Business interface related to the tiles.
 public protocol TileProvider: class {
-
+    
     /// the visible tiles in the dashboard.
     var visibleTiles: [AvailableTiles] { get set }
 

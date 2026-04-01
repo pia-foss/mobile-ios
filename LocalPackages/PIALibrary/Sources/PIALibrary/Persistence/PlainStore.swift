@@ -25,13 +25,13 @@ import Foundation
 protocol PlainStore: AnyObject {
 
     // MARK: Account
-
+        
     var accountInfo: AccountInfo? { get set }
-
+    
     var lastSignupEmail: String? { get set }
 
     var tokenMigrated: Bool { get set }
-
+    
     // MARK: IP
 
     var publicIP: String? { get set }
@@ -39,60 +39,60 @@ protocol PlainStore: AnyObject {
     var lastServerCN: String? { get set }
 
     // MARK: Server
-
+    
     var historicalServers: [Server] { get set }
 
     var cachedServers: [Server] { get set }
-
+    
     var preferredServer: Server? { get set }
 
     var lastConnectedRegion: Server? { get set }
 
     func ping(forServerIdentifier serverIdentifier: String) -> Int?
-
+    
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String)
-
+    
     func serializePings()
-
+    
     func clearPings()
-
+    
     // MARK: Tiles
-    var visibleTiles: [AvailableTiles] { get set }
-
-    var orderedTiles: [AvailableTiles] { get set }
+    var visibleTiles: [AvailableTiles] {get set}
+    
+    var orderedTiles: [AvailableTiles] {get set}
 
     // MARK: VPN
-
+    
     var vpnType: String? { get set }
-
+    
     var vpnDisconnectsOnSleep: Bool { get set }
-
+    
     var vpnCustomConfigurationMaps: [String: [String: Any]]? { get set }
 
     var lastKnownVpnStatus: VPNStatus { get set }
-
+    
     var lastVPNConnectionAttempt: Double { get set }
 
     var lastVPNConnectionSuccess: Double? { get set }
-
+    
     var timeToConnectVPN: Double { get set }
 
     var wireguardMigrationPerformed: Bool { get set }
-
+    
     var leakProtection: Bool { get set }
-
+    
     var allowLocalDeviceAccess: Bool { get set }
-
+    
     var currentRFC1918VulnerableWifi: String? { get set }
 
     // MARK: Service Quality
-
+    
     var versionWhenServiceQualityOpted: String? { get set }
-
+    
     var lastKnownException: String? { get set }
-
+    
     // MARK: Preferences
-
+    
     var isPersistentConnection: Bool? { get set }
 
     var showReconnectNotifications: Bool? { get set }
@@ -100,27 +100,27 @@ protocol PlainStore: AnyObject {
     var nmtMigrationSuccess: Bool? { get set }
 
     var mace: Bool? { get set }
-
+    
     // MARK: Lifecycle
-
+    
     func reset()
-
+    
     func clear()
-
+    
     // MARK: Networks
     var cachedNetworks: [String] { get set }
-
+    
     var nmtRulesEnabled: Bool? { get set }
+    
+    var nmtGenericRules: [String: Int] {get set}
 
-    var nmtGenericRules: [String: Int] { get set }
+    var nmtTrustedNetworkRules: [String: Int] {get set}
 
-    var nmtTrustedNetworkRules: [String: Int] { get set }
-
-    var nmtTemporaryOpenNetworks: [String] { get set }
+    var nmtTemporaryOpenNetworks: [String] {get set}
 
     //MARK: IKEv2
     var ikeV2IntegrityAlgorithm: String { get set }
-
+    
     var ikeV2EncryptionAlgorithm: String { get set }
 
     var ikeV2PacketSize: Int { get set }
@@ -134,9 +134,9 @@ protocol PlainStore: AnyObject {
     var trustCellularData: Bool? { get set }
 
     var trustedNetworks: [String] { get set }
-
+    
     var debugLogging: Bool? { get set }
-
+    
     var shareServiceQualityData: Bool? { get set }
 
 }

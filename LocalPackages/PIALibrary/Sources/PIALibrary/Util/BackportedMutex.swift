@@ -8,15 +8,14 @@
 
 import Foundation
 import Synchronization
-
 import struct os.OSAllocatedUnfairLock
 
 #if os(iOS) || os(tvOS)
-    @available(iOS, deprecated: 18, message: "Use Synchronization.Mutex")
-    @available(tvOS, deprecated: 18, message: "Use Synchronization.Mutex")
-    public typealias Mutex = BackportedMutex
+@available(iOS, deprecated: 18, message: "Use Synchronization.Mutex")
+@available(tvOS, deprecated: 18, message: "Use Synchronization.Mutex")
+public typealias Mutex = BackportedMutex
 #else
-    public typealias Mutex = Synchronization.Mutex
+public typealias Mutex = Synchronization.Mutex
 #endif
 
 /// Backport of ``Synchronization.Mutex``.
@@ -24,10 +23,10 @@ import struct os.OSAllocatedUnfairLock
 @available(tvOS, deprecated: 18, message: "Use Synchronization.Mutex")
 public struct BackportedMutex<Value: ~Copyable>: @unchecked Sendable, ~Copyable {
     #if os(tvOS)
-        private let lock = OSAllocatedUnfairLock()
+    private let lock = OSAllocatedUnfairLock()
     #else
-        @available(iOS, deprecated: 16, message: "Use OSAllocatedUnfairLock")
-        private let lock = NSLock()
+    @available(iOS, deprecated: 16, message: "Use OSAllocatedUnfairLock")
+    private let lock = NSLock()
     #endif
     private let storage: Storage
 

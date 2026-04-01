@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import PIALocalizations
 import SwiftUI
+import PIALocalizations
 
 enum SettingsDestinations: Destinations {
     case availableSettings
@@ -16,6 +16,9 @@ enum SettingsDestinations: Destinations {
     case general
     case dip
 }
+
+
+
 
 extension View {
     func withSettingsRoutes() -> some View {

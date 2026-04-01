@@ -1,6 +1,7 @@
-import Combine
+
 import Foundation
 import PIALibrary
+import Combine
 import PIALocalizations
 
 protocol SelectedServerUseCaseType {
@@ -10,28 +11,28 @@ protocol SelectedServerUseCaseType {
 }
 
 class SelectedServerUseCase: SelectedServerUseCaseType {
-
+    
     private let serverProvider: ServerProviderType
     private let clientPreferences: ClientPreferencesType
-
+    
     init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
         self.clientPreferences = clientPreferences
     }
-
+    
     var selectedSever: ServerType {
         return clientPreferences.selectedServer
     }
-
+    
     func getSelectedServer() -> AnyPublisher<ServerType, Never> {
         return clientPreferences.getSelectedServer()
 
     }
-
+    
     func getHistoricalServers() -> [ServerType] {
         return serverProvider.historicalServersType
     }
-
+    
     static func automaticServer() -> ServerType {
         Server(
             serial: "",
@@ -43,3 +44,4 @@ class SelectedServerUseCase: SelectedServerUseCaseType {
         )
     }
 }
+

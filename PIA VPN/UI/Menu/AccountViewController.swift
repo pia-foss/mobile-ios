@@ -20,10 +20,10 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AccountViewController.self)
 
@@ -32,37 +32,37 @@ final class AccountViewController: AutolayoutViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
 
     @IBOutlet private weak var viewSafe: UIView!
-
+    
     @IBOutlet private weak var labelUsername: UILabel!
-
+    
     @IBOutlet private weak var textUsername: UITextField!
-
+    
     @IBOutlet private weak var labelExpiryInformation: UILabel!
 
     @IBOutlet private weak var imageViewTrash: UIImageView!
-
+    
     @IBOutlet private weak var labelDeleteAccount: UILabel!
-
+    
     @IBOutlet private weak var viewAccountInfo: UIView!
-
+    
     @IBOutlet private weak var viewUncredited: UIView!
-
+    
     @IBOutlet private weak var labelRestoreTitle: UILabel!
-
+    
     @IBOutlet private weak var labelRestoreInfo: UILabel!
-
+    
     @IBOutlet private weak var buttonRestore: UIButton!
-
+    
     @IBOutlet private weak var labelSubscriptions: UILabel!
 
     @IBOutlet weak var labelSubscriptionTopConstraint: NSLayoutConstraint!
-
+    
     private var currentUser: UserAccount?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,11 +82,11 @@ final class AccountViewController: AutolayoutViewController {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
-
+        
         if UserInterface.isIpad {
             nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
-
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
         labelSubscriptions.addGestureRecognizer(tap)
 
@@ -95,7 +95,7 @@ final class AccountViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+    
         // update local state immediately
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
         redisplayAccount()
@@ -115,7 +115,7 @@ final class AccountViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.settings)
     }
-
+    
     // MARK: Actions
 
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {
@@ -127,14 +127,14 @@ final class AccountViewController: AutolayoutViewController {
             self.handleReceiptRefresh()
         }
     }
-
+    
     @IBAction private func deleteUserAccount(_ sender: Any?) {
         log.debug("deleting user account")
         guard UIApplication.shared.canOpenURL(AppConstants.Web.deleteAccountUrl) else { return }
         log.debug("opening helpdesk link")
         UIApplication.shared.open(AppConstants.Web.deleteAccountUrl)
     }
-
+    
     private func handleReceiptRefresh() {
         log.debug("IAP: Restored payment receipt, redeeming...")
 
@@ -146,7 +146,7 @@ final class AccountViewController: AutolayoutViewController {
             self.handleReceiptSubmissionWithError(error)
         }
     }
-
+        
     private func handleReceiptFailureWithError(_ error: Error?) {
         log.error("IAP: Failed to restore payment receipt (error: \(error?.localizedDescription ?? ""))")
 
@@ -154,7 +154,7 @@ final class AccountViewController: AutolayoutViewController {
         alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
-
+    
     private func handleReceiptSubmissionWithError(_ error: Error?) {
         if let error = error {
             let alert = Macros.alert(L10n.Global.error, error.localizedDescription)
@@ -164,7 +164,7 @@ final class AccountViewController: AutolayoutViewController {
         }
 
         log.debug("Account: Renewal successfully completed")
-
+        
         let alert = Macros.alert(
             L10n.Renewal.Success.title,
             L10n.Renewal.Success.message
@@ -174,7 +174,7 @@ final class AccountViewController: AutolayoutViewController {
 
         redisplayAccount()
     }
-
+    
     private func handleBadReceipt() {
         let alert = Macros.alert(
             L10n.Account.Restore.Failure.title,
@@ -199,8 +199,8 @@ final class AccountViewController: AutolayoutViewController {
     @objc private func redisplayAccount() {
         currentUser = Client.providers.accountProvider.currentUser
 
-        textUsername.text = Client.providers.accountProvider.publicUsername ?? ""
-
+        textUsername.text =  Client.providers.accountProvider.publicUsername ?? ""
+        
         if let userInfo = currentUser?.info {
             if userInfo.isExpired {
                 labelExpiryInformation.text = L10n.Account.ExpiryDate.expired
@@ -208,7 +208,7 @@ final class AccountViewController: AutolayoutViewController {
                 labelExpiryInformation.text = L10n.Account.ExpiryDate.information(userInfo.humanReadableExpirationDate())
             }
             styleExpirationDate()
-
+            
             if userInfo.plan == .monthly || userInfo.plan == .yearly || userInfo.plan == .trial {
                 labelSubscriptions.isHidden = false
                 labelSubscriptionTopConstraint.constant = 20
@@ -217,10 +217,10 @@ final class AccountViewController: AutolayoutViewController {
                 labelSubscriptionTopConstraint.constant = 0
             }
         }
-
+        
         establishUncreditedVisibility()
     }
-
+    
     private func establishUncreditedVisibility() {
         if let info = currentUser?.info, info.isRenewable {
             viewUncredited.isHidden = false
@@ -230,22 +230,22 @@ final class AccountViewController: AutolayoutViewController {
     }
 
     // MARK: Restylable
-
+    
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-
+        
         self.viewAccountInfo.layer.cornerRadius = 5.0
-
+        
         styleNavigationBarWithTitle(L10n.Menu.Item.account)
 
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(view)
             Theme.current.applyPrincipalBackground(viewContainer)
         }
-
+        
         Theme.current.applySecondaryBackground(viewAccountInfo)
         Theme.current.applySubtitle(labelUsername)
-
+        
         Theme.current.applyClearTextfield(textUsername)
 
         for label in [labelExpiryInformation!] {
@@ -259,14 +259,13 @@ final class AccountViewController: AutolayoutViewController {
         buttonRestore.style(style: TextStyle.textStyle9)
 
         styleExpirationDate()
-
+        
     }
-
+    
     private func styleExpirationDate() {
         if let userInfo = currentUser?.info {
-            Theme.current.makeSmallLabelToStandOut(
-                labelExpiryInformation,
-                withTextToStandOut: userInfo.humanReadableExpirationDate())
+            Theme.current.makeSmallLabelToStandOut(labelExpiryInformation,
+                                                   withTextToStandOut: userInfo.humanReadableExpirationDate())
         }
     }
 }

@@ -12,7 +12,7 @@ struct UserTokenDTO: Decodable {
     let token: String
     let expiresAt: String
     let userId: String
-
+    
     enum CodingKeys: String, CodingKey {
         case token = "api_token"
         case expiresAt = "expires_at"

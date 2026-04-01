@@ -7,23 +7,22 @@
 //
 
 import Foundation
-import PIALibrary
-
 @testable import PIA_VPN_tvOS
+import PIALibrary
 
 class PurchaseProductUseCaseMock: PurchaseProductUseCaseType {
     private let result: Result<InAppTransaction, Error>
-
+    
     init(result: Result<InAppTransaction, Error>) {
         self.result = result
     }
-
+    
     func callAsFunction(subscriptionOption: SubscriptionOption) async throws -> InAppTransaction {
         switch result {
-        case .success(let transaction):
-            return transaction
-        case .failure(let error):
-            throw error
+            case .success(let transaction):
+                return transaction
+            case .failure(let error):
+                throw error
         }
     }
 }

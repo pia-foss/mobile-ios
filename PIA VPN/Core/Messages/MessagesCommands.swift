@@ -1,30 +1,30 @@
 //
 //  MessagesCommands.swift
 //  PIA VPN
-//
+//  
 //  Created by Jose Blaya on 10/11/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
-//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
+//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
 //  permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
 
 import Foundation
+import UIKit
 import PIALibrary
 import PIAWireguard
 import TunnelKitCore
 import TunnelKitOpenVPN
-import UIKit
 
 private let log = PIALogger.logger(for: ActionCommand.self)
 
@@ -42,15 +42,14 @@ class LinkCommand: Command {
 
     func execute() {
         if let url = URL(string: payload),
-            UIApplication.shared.canOpenURL(url)
-        {
+            UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
 }
 
 class ViewCommand: Command {
-
+    
     private enum AvailableViews: String {
         case settings = "settings"
         case regions = "regions"
@@ -63,13 +62,12 @@ class ViewCommand: Command {
 
     init(_ payload: String) {
         self.payload = payload
-
+        
         if let view = AvailableViews(rawValue: payload) {
-
+            
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                 let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-                let dashboard = rootNavVC.viewControllers.first as? DashboardViewController
-            {
+                let dashboard = rootNavVC.viewControllers.first as? DashboardViewController {
 
                 switch view {
                 case .about:
@@ -83,11 +81,11 @@ class ViewCommand: Command {
                 case .settings:
                     dashboard.openSettings()
                 }
-
+                
             }
 
         }
-
+        
     }
 
     func execute() {
@@ -108,11 +106,11 @@ class ActionCommand: Command {
     private var payload: [String: Bool]
 
     init(_ payload: [String: Bool]) {
-
+        
         self.payload = payload
-
+        
         self.payload.forEach({ key, value in
-
+            
             if let action = AvailableActions(rawValue: key) {
                 switch action {
                 case .killswitch:
@@ -137,18 +135,19 @@ class ActionCommand: Command {
             }
 
         })
-
+        
         Macros.postNotification(.PIASettingsHaveChanged)
 
     }
 
     func execute() {
     }
-
+    
     private func activateWireGuard() {
-
+        
         let preferences = Client.preferences.editable()
-        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
+        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
             log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
             return
         }
@@ -158,11 +157,12 @@ class ActionCommand: Command {
         preferences.commit()
 
     }
-
+    
     private func activateOpenVPN() {
-
+        
         let preferences = Client.preferences.editable()
-        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
+        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ??
+            Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
             log.error("No default VPN custom configuration provided for PIA OpenVPN protocol")
             return
         }
@@ -178,13 +178,13 @@ class ActionCommand: Command {
         preferences.vpnType = IKEv2Profile.vpnType
         preferences.commit()
     }
-
+    
     private func enableKillSwitch(enable: Bool) {
         let preferences = Client.preferences.editable()
         preferences.isPersistentConnection = enable
         preferences.commit()
     }
-
+    
     private func enableNMT(enable: Bool) {
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = enable
@@ -193,13 +193,12 @@ class ActionCommand: Command {
         }
         preferences.commit()
     }
-
+    
     private func enableGEOServers(enable: Bool) {
         AppPreferences.shared.showGeoServers = enable
-        NotificationCenter.default.post(
-            name: .PIADaemonsDidPingServers,
-            object: self,
-            userInfo: nil)
+        NotificationCenter.default.post(name: .PIADaemonsDidPingServers,
+                                        object: self,
+                                        userInfo: nil)
     }
 
 }

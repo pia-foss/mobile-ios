@@ -1,6 +1,6 @@
-@preconcurrency import PIALibrary
-import StoreKit
 import SwiftUI
+import StoreKit
+@preconcurrency import PIALibrary
 
 // MARK: - DebugMenuView
 
@@ -171,11 +171,10 @@ public struct DebugMenuView: View {
                     .font(.system(.caption2, design: .monospaced))
                     .foregroundStyle(.primary)
                     .id(preview)
-                    .transition(
-                        .asymmetric(
-                            insertion: .move(edge: .bottom),
-                            removal: .move(edge: .top)
-                        ))
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom),
+                        removal: .move(edge: .top)
+                    ))
             }
             .clipped()
             .padding(.vertical, 2)

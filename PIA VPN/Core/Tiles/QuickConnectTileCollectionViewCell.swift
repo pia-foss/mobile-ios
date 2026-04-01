@@ -20,13 +20,13 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIALibrary
-import PIALocalizations
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIAUIKit
+import PIALocalizations
 
 class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell, ServerSelectingCell {
-
+    
     var tileType: AvailableTiles = .quickConnect
 
     typealias Entity = QuickConnectTile
@@ -35,7 +35,7 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell, Se
     @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
-
+    
     weak var delegate: ServerSelectionDelegate? {
         get {
             tile.delegate
@@ -44,36 +44,34 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell, Se
             tile.delegate = newValue
         }
     }
-
+    
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
-        self.accessibilityIdentifier = "QuickConnectTileCollectionViewCell"
-
+        self.accessibilityIdentifier="QuickConnectTileCollectionViewCell"
+        
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()
         tile.status = status
         let animationDuration = currentTileStatus != nil ? AppConfiguration.Animations.duration : 0
-        UIView.animate(
-            withDuration: animationDuration,
-            animations: {
-                switch status {
-                case .normal:
-                    self.tileLeftConstraint.constant = 0
-                    self.tileRightConstraint.constant = 0
-                    self.accessoryButtonLeft.isHidden = true
-                case .edit:
-                    self.accessoryButtonLeft.isHidden = false
-                    self.tileLeftConstraint.constant = self.leftConstraintValue
-                    self.tileRightConstraint.constant = self.rightConstraintValue
-                    self.setupVisibilityButton()
-                }
-                self.layoutIfNeeded()
-                self.currentTileStatus = status
-            })
+        UIView.animate(withDuration: animationDuration, animations: {
+            switch status {
+            case .normal:
+                self.tileLeftConstraint.constant = 0
+                self.tileRightConstraint.constant = 0
+                self.accessoryButtonLeft.isHidden = true
+            case .edit:
+                self.accessoryButtonLeft.isHidden = false
+                self.tileLeftConstraint.constant = self.leftConstraintValue
+                self.tileRightConstraint.constant = self.rightConstraintValue
+                self.setupVisibilityButton()
+            }
+            self.layoutIfNeeded()
+            self.currentTileStatus = status
+        })
     }
-
+    
     private func setupVisibilityButton() {
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {
             accessoryButtonLeft.setImage(Theme.current.activeEyeImage(), for: .normal)
@@ -85,7 +83,7 @@ class QuickConnectTileCollectionViewCell: UICollectionViewCell, TileableCell, Se
             accessoryButtonLeft.accessibilityLabel = L10n.Tiles.Accessibility.Invisible.Tile.action
         }
     }
-
+    
     @IBAction private func changeTileVisibility() {
         var visibleTiles = Client.providers.tileProvider.visibleTiles
         if Client.providers.tileProvider.visibleTiles.contains(tileType) {

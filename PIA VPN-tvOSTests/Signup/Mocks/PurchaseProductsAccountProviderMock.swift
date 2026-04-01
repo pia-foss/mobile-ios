@@ -7,17 +7,16 @@
 //
 
 import Foundation
-import PIALibrary
-
 @testable import PIA_VPN_tvOS
+import PIALibrary
 
 class PurchaseProductsAccountProviderMock: PurchaseProductsAccountProviderType {
     private let result: (InAppTransaction?, Error?)
-
+    
     init(result: (InAppTransaction?, Error?)) {
         self.result = result
     }
-
+    
     func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?) {
         callback?(result.0, result.1)
     }

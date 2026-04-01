@@ -44,7 +44,7 @@ protocol WebServicesAccess {
 
 public protocol InAppAccess {
     #if os(iOS) || os(tvOS)
-        var accessedStore: InAppProvider { get }
+    var accessedStore: InAppProvider { get }
     #endif
 }
 
@@ -80,8 +80,8 @@ extension WebServicesAccess {
 
 public extension InAppAccess {
     #if os(iOS) || os(tvOS)
-        var accessedStore: InAppProvider {
-            return Client.store
-        }
+    var accessedStore: InAppProvider {
+        return Client.store
+    }
     #endif
 }

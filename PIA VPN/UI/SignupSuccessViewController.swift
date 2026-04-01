@@ -21,11 +21,11 @@
 //
 
 import Foundation
-import PIADesignSystem
-import PIALibrary
-import PIALocalizations
-import PIAUIKit
 import UIKit
+import PIALibrary
+import PIADesignSystem
+import PIAUIKit
+import PIALocalizations
 
 private let log = PIALogger.logger(for: SignupSuccessViewController.self)
 
@@ -41,7 +41,7 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
     @IBOutlet private weak var buttonSubmit: PIAButton!
     @IBOutlet private weak var usernameContainer: UIView!
     @IBOutlet private weak var passwordContainer: UIView!
-
+    
     //Share data
     @IBOutlet private weak var shareDataContainer: UIView!
     @IBOutlet private weak var shareDataImageView: UIImageView!
@@ -53,8 +53,8 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
     @IBOutlet private weak var shareDataFooterLabel: UILabel!
 
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
-
-    var config: Config!  // TODO: should be made private when segue navigation is removed
+    
+    var config: Config! // TODO: should be made private when segue navigation is removed
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -79,14 +79,14 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
 
         self.styleSubmitButton()
         self.styleContainers()
-
+                
         shareDataImageView.image = Asset.Ui.imageDocumentConsent.image
         shareDataTitleLabel.text = L10n.Signup.Share.Data.Text.title
         shareDataDescriptionLabel.text = L10n.Signup.Share.Data.Text.description
         shareDataFooterLabel.text = L10n.Signup.Share.Data.Text.footer
         self.styleShareDataButtons()
     }
-
+    
     @IBAction private func submit() {
         guard let user = config.metadata.user else {
             log.error("User account not set in metadata")
@@ -94,7 +94,7 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         }
         config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }
-
+    
     @IBAction private func acceptShareData() {
         let preferences = Client.preferences.editable()
         preferences.shareServiceQualityData = true
@@ -106,7 +106,7 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
             }
         }
     }
-
+    
     @IBAction private func rejectShareData() {
         let preferences = Client.preferences.editable()
         preferences.shareServiceQualityData = false
@@ -135,9 +135,8 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         Theme.current.applyTitle(shareDataTitleLabel, appearance: .dark)
         Theme.current.applySubtitle(shareDataDescriptionLabel)
         Theme.current.applySmallSubtitle(shareDataFooterLabel)
-        Theme.current.applyTransparentButton(
-            cancelButton,
-            withSize: 1.0)
+        Theme.current.applyTransparentButton(cancelButton,
+                                             withSize: 1.0)
         Theme.current.applyButtonLabelMediumStyle(acceptButton)
 
         Theme.current.applySubtitle(labelUsernameCaption)
@@ -145,38 +144,34 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         Theme.current.applySubtitle(labelPasswordCaption)
         Theme.current.applyTitle(labelPassword, appearance: .dark)
     }
-
+    
     private func styleSubmitButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(
-            L10n.Signup.Success.submit.uppercased(),
-            for: [])
+        buttonSubmit.setTitle(L10n.Signup.Success.submit.uppercased(),
+                              for: [])
     }
-
+    
     private func styleShareDataButtons() {
         acceptButton.setRounded()
         acceptButton.style(style: TextStyle.Buttons.piaGreenButton)
-        acceptButton.setTitle(
-            L10n.Signup.Share.Data.Buttons.accept.uppercased(),
-            for: [])
+        acceptButton.setTitle(L10n.Signup.Share.Data.Buttons.accept.uppercased(),
+                              for: [])
         cancelButton.setRounded()
         cancelButton.style(style: TextStyle.Buttons.piaPlainTextButton)
-        cancelButton.setTitle(
-            L10n.Signup.Share.Data.Buttons.noThanks.uppercased(),
-            for: [])
-        Theme.current.applyTransparentButton(
-            cancelButton,
-            withSize: 1.0)
+        cancelButton.setTitle(L10n.Signup.Share.Data.Buttons.noThanks.uppercased(),
+                              for: [])
+        Theme.current.applyTransparentButton(cancelButton,
+                                             withSize: 1.0)
         readMoreButton.setTitle(L10n.Signup.Share.Data.Buttons.readMore, for: .normal)
         Theme.current.applyUnderlinedSubtitleButton(readMoreButton)
     }
-
+    
     private func styleContainers() {
         self.styleContainerView(usernameContainer)
         self.styleContainerView(passwordContainer)
     }
-
+    
     func styleContainerView(_ view: UIView) {
         view.layer.cornerRadius = 6.0
         view.clipsToBounds = true

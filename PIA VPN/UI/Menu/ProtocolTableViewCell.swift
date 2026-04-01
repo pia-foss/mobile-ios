@@ -1,7 +1,7 @@
 //
 //  ProtocolTableViewCell.swift
 //  PIA VPN
-//
+//  
 //  Created by Jose Antonio Blaya Garcia on 11/03/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIALibrary
 import UIKit
+import PIALibrary
 
 class ProtocolTableViewCell: UITableViewCell {
 
@@ -41,16 +41,17 @@ class ProtocolTableViewCell: UITableViewCell {
             labelPromotion.text = " PREVIEW "
             labelDescriptionRightConstraint.constant = 8
         }
-
+        
         Theme.current.applyBadgeStyle(labelPromotion)
-        Theme.current.applySettingsCellTitle(
-            labelTitle,
-            appearance: .dark)
+        Theme.current.applySettingsCellTitle(labelTitle,
+                                             appearance: .dark)
         labelTitle.backgroundColor = .clear
 
         Theme.current.applySubtitle(labelDescription)
         labelDescription.backgroundColor = .clear
 
+
     }
+
 
 }

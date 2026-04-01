@@ -8,32 +8,35 @@
 
 import Foundation
 
-class TopNavigationFactory {
 
+class TopNavigationFactory {
+    
     static func makeLeadingSegmentedNavigationView() -> LeadingSegmentedNavigationView {
         return leadingNavigationViewShared
     }
-
+    
     static func makeTrailingNavigationView() -> TrailingNavigationView {
         return trailingNavigationViewShared
     }
-
+    
+    
     // MARK: - Private
-
+    
     private static var leadingNavigationViewModelShared: LeadingNavigationBarViewModel = {
         LeadingNavigationBarViewModel(appRouter: AppRouterFactory.makeAppRouter())
     }()
-
+    
     private static var trailingNavigationViewModelShared: TrailingNavigationBarViewModel = {
         TrailingNavigationBarViewModel(appRouter: AppRouterFactory.makeAppRouter())
     }()
 
+    
     private static var leadingNavigationViewShared: LeadingSegmentedNavigationView = {
         LeadingSegmentedNavigationView(viewModel: leadingNavigationViewModelShared)
     }()
-
+    
     private static var trailingNavigationViewShared: TrailingNavigationView = {
         TrailingNavigationView(viewModel: trailingNavigationViewModelShared)
     }()
-
+    
 }

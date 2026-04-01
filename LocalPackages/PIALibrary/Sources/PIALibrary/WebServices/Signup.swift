@@ -26,7 +26,7 @@ public struct Signup {
     let email: String
 
     let receipt: Data
-
+    
     var marketing: [String: Any]?
 
     var debug: [String: Any]?
@@ -38,17 +38,17 @@ public struct Signup {
 }
 
 #if os(iOS) || os(tvOS)
-    extension SignupRequest {
-        func signup(withStore store: InAppProvider) -> Signup? {
-            guard let receipt = store.paymentReceipt else {
-                return nil
-            }
-            var object = Signup(email: email, receipt: receipt)
-            object.marketing = marketing
-            if let txid = transaction?.identifier {
-                object.debug = ["txid": txid]
-            }
-            return object
+extension SignupRequest {
+    func signup(withStore store: InAppProvider) -> Signup? {
+        guard let receipt = store.paymentReceipt else {
+            return nil
         }
+        var object = Signup(email: email, receipt: receipt)
+        object.marketing = marketing
+        if let txid = transaction?.identifier {
+            object.debug = ["txid": txid]
+        }
+        return object
     }
+}
 #endif

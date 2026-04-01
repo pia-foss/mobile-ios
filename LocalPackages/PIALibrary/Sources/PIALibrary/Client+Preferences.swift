@@ -26,15 +26,15 @@ private let log = PIALogger.logger(for: Client.Preferences.self)
 
 private protocol PreferencesStore: AnyObject {
     var preferredServer: Server? { get set }
-
+    
     var lastConnectedRegion: Server? { get set }
-
+    
     var isPersistentConnection: Bool { get set }
 
     var showReconnectNotifications: Bool { get set }
-
+        
     var mace: Bool { get set }
-
+    
     var useWiFiProtection: Bool { get set }
 
     var trustCellularData: Bool { get set }
@@ -44,13 +44,13 @@ private protocol PreferencesStore: AnyObject {
     var vpnType: String { get set }
 
     var vpnDisconnectsOnSleep: Bool { get set }
-
+    
     var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
 
     var availableNetworks: [String] { get set }
 
     var trustedNetworks: [String] { get set }
-
+    
     var nmtTrustedNetworkRules: [String: Int] { get set }
 
     var nmtTemporaryOpenNetworks: [String] { get set }
@@ -58,9 +58,9 @@ private protocol PreferencesStore: AnyObject {
     var nmtGenericRules: [String: Int] { get set }
 
     var nmtRulesEnabled: Bool { get set }
-
+    
     var ikeV2IntegrityAlgorithm: String { get set }
-
+    
     var ikeV2EncryptionAlgorithm: String { get set }
 
     var ikeV2PacketSize: Int { get set }
@@ -70,15 +70,15 @@ private protocol PreferencesStore: AnyObject {
     var debugLogging: Bool { get set }
 
     var shareServiceQualityData: Bool { get set }
-
+    
     var lastKnownException: String? { get set }
-
+    
     var versionWhenServiceQualityOpted: String? { get set }
 
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
-
+    
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
-
+    
 }
 
 private extension PreferencesStore {
@@ -124,10 +124,10 @@ extension Client {
 
         /// The default preferences (editable).
         public var defaults = Editable()
-
+       
         /**
          Returns an editable object for preferences modification.
-        
+         
          - Returns: An `Editable` object for preferences modification.
          */
         public func editable() -> Editable {
@@ -136,7 +136,7 @@ extension Client {
             copy.target = self
             return copy
         }
-
+        
         // MARK: PreferencesStore
 
         /// The preferred `Server`.
@@ -148,7 +148,7 @@ extension Client {
                 accessedDatabase.plain.preferredServer = newValue
             }
         }
-
+        
         public fileprivate(set) var lastConnectedRegion: Server? {
             get {
                 return accessedDatabase.plain.lastConnectedRegion
@@ -157,7 +157,7 @@ extension Client {
                 accessedDatabase.plain.lastConnectedRegion = newValue
             }
         }
-
+        
         /// Enables automatic VPN reconnection.
         public fileprivate(set) var isPersistentConnection: Bool {
             get {
@@ -167,7 +167,7 @@ extension Client {
                 accessedDatabase.plain.isPersistentConnection = newValue
             }
         }
-
+        
         /// Enables automatic VPN reconnection.
         public fileprivate(set) var showReconnectNotifications: Bool {
             get {
@@ -177,7 +177,7 @@ extension Client {
                 accessedDatabase.plain.showReconnectNotifications = newValue
             }
         }
-
+        
         /// The MACE option for ad-blocking.
         public fileprivate(set) var mace: Bool {
             get {
@@ -187,7 +187,7 @@ extension Client {
                 accessedDatabase.plain.mace = newValue
             }
         }
-
+        
         /// Use VPN WiFi Protection
         public fileprivate(set) var useWiFiProtection: Bool {
             get {
@@ -197,7 +197,7 @@ extension Client {
                 accessedDatabase.plain.useWiFiProtection = newValue
             }
         }
-
+        
         /// Trust cellular data
         public fileprivate(set) var trustCellularData: Bool {
             get {
@@ -207,7 +207,7 @@ extension Client {
                 accessedDatabase.plain.trustCellularData = newValue
             }
         }
-
+        
         /// Flag to indicate if we have migrated the nmt rules
         public fileprivate(set) var nmtMigrationSuccess: Bool {
             get {
@@ -230,7 +230,7 @@ extension Client {
                 accessedDatabase.plain.vpnType = newValue
             }
         }
-
+        
         /// When device sleeps, disconnects from the VPN if `true`.
         public fileprivate(set) var vpnDisconnectsOnSleep: Bool {
             get {
@@ -240,7 +240,7 @@ extension Client {
                 accessedDatabase.plain.vpnDisconnectsOnSleep = newValue
             }
         }
-
+        
         /// Integrity algorithm for IKEv2 VPN configuration
         public fileprivate(set) var ikeV2IntegrityAlgorithm: String {
             get {
@@ -250,7 +250,7 @@ extension Client {
                 accessedDatabase.plain.ikeV2IntegrityAlgorithm = newValue
             }
         }
-
+        
         /// Encryption algorithm for IKEv2 VPN configuration
         public fileprivate(set) var ikeV2EncryptionAlgorithm: String {
             get {
@@ -260,7 +260,7 @@ extension Client {
                 accessedDatabase.plain.ikeV2EncryptionAlgorithm = newValue
             }
         }
-
+        
         /// Packet size value for IKEv2 VPN configuration
         public fileprivate(set) var ikeV2PacketSize: Int {
             get {
@@ -270,14 +270,14 @@ extension Client {
                 accessedDatabase.plain.ikeV2PacketSize = newValue
             }
         }
-
+        
         /// A dictionary of custom VPN configurations, mapped by `VPNProfile.vpnType`.
         public fileprivate(set) var vpnCustomConfigurations: [String: VPNCustomConfiguration] {
             get {
-                //                return accessedDatabase.plain.vpnCustomConfigurationMaps?.map {
-                //                    let profile = configuration.profile(forVPNType: $0.key)
-                //                    return profile?.parseCustomConfiguration($0.value)
-                //                }
+//                return accessedDatabase.plain.vpnCustomConfigurationMaps?.map {
+//                    let profile = configuration.profile(forVPNType: $0.key)
+//                    return profile?.parseCustomConfiguration($0.value)
+//                }
                 guard let allMaps = accessedDatabase.plain.vpnCustomConfigurationMaps, !allMaps.isEmpty else {
                     return defaults.vpnCustomConfigurations
                 }
@@ -298,7 +298,7 @@ extension Client {
 
         /**
          Returns the custom VPN configuration for a given `VPNProfile.vpnType`.
-        
+
          - Parameter vpnType: The VPN profile type.
          - Returns: The associated `VPNCustomConfiguration` or `nil` if none.
          */
@@ -309,10 +309,10 @@ extension Client {
             let profile = configuration.profile(forVPNType: vpnType)
             return profile?.parsedCustomConfiguration(from: map)
         }
-
+        
         /**
          Sets the custom VPN configuration for a given `VPNProfile.vpnType`.
-        
+         
          - Parameter customConfiguration: The `VPNCustomConfiguration` to associate or `nil` if none.
          - Parameter vpnType: The VPN profile type.
          */
@@ -323,11 +323,11 @@ extension Client {
         }
 
         #if os(iOS)
-            public func setVpnTypeToWireguard() {
-                self.vpnType = PIAWGTunnelProfile.vpnType
-            }
+        public func setVpnTypeToWireguard() {
+            self.vpnType = PIAWGTunnelProfile.vpnType
+        }
         #endif
-
+        
         /// The `String` array of available WiFi networks
         public fileprivate(set) var availableNetworks: [String] {
             get {
@@ -357,7 +357,7 @@ extension Client {
                 accessedDatabase.plain.nmtTrustedNetworkRules = newValue
             }
         }
-
+        
         /// The `String` array of temporary open networks whee the user is trying to connect
         public fileprivate(set) var nmtTemporaryOpenNetworks: [String] {
             get {
@@ -367,6 +367,7 @@ extension Client {
                 accessedDatabase.plain.nmtTemporaryOpenNetworks = newValue
             }
         }
+        
 
         /// The `Int:Int` dictionary of generic rules for each type of network
         public fileprivate(set) var nmtGenericRules: [String: Int] {
@@ -387,7 +388,7 @@ extension Client {
                 accessedDatabase.plain.nmtRulesEnabled = newValue
             }
         }
-
+        
         /// Sign in with Apple generates only once the fake email. We store it just in case the user tries to use it multiple time
         public fileprivate(set) var signInWithAppleFakeEmail: String? {
             get {
@@ -397,7 +398,7 @@ extension Client {
                 accessedDatabase.plain.signInWithAppleFakeEmail = newValue
             }
         }
-
+        
         /// Store a date as a number when last VPN Connection was attempted.
         public var lastVPNConnectionAttempt: Double {
             get {
@@ -417,7 +418,7 @@ extension Client {
                 accessedDatabase.plain.lastVPNConnectionSuccess = newValue
             }
         }
-
+        
         /// Store a decimal number which represents time (in seconds) between
         /// connecting and connect state of VPNDaemon
         public var timeToConnectVPN: Double {
@@ -438,7 +439,7 @@ extension Client {
                 accessedDatabase.plain.wireguardMigrationPerformed = newValue
             }
         }
-
+        
         /// Store a bool that represents the status of leak protection property
         public var leakProtection: Bool {
             get {
@@ -448,7 +449,7 @@ extension Client {
                 accessedDatabase.plain.leakProtection = newValue
             }
         }
-
+        
         /// Store a bool that represents the status of allowLocalDeviceAccess property
         public var allowLocalDeviceAccess: Bool {
             get {
@@ -458,7 +459,7 @@ extension Client {
                 accessedDatabase.plain.allowLocalDeviceAccess = newValue
             }
         }
-
+        
         /// If the current connected WIFI is a RFC1918 vulnerable WIFI it stores the name, otherwise it returns nil
         public var currentRFC1918VulnerableWifi: String? {
             get {
@@ -468,9 +469,9 @@ extension Client {
                 accessedDatabase.plain.currentRFC1918VulnerableWifi = newValue
             }
         }
-
+        
         // MARK: Service Quality
-
+        
         /// Shares anonymous data to the service quality library.
         public var debugLogging: Bool {
             get {
@@ -480,7 +481,7 @@ extension Client {
                 accessedDatabase.plain.debugLogging = newValue
             }
         }
-
+        
         /// Shares anonymous data to the service quality library.
         public fileprivate(set) var shareServiceQualityData: Bool {
             get {
@@ -490,7 +491,7 @@ extension Client {
                 accessedDatabase.plain.shareServiceQualityData = newValue
             }
         }
-
+        
         /// Store app version when user opted-in for service quality stats
         public var versionWhenServiceQualityOpted: String? {
             get {
@@ -500,7 +501,7 @@ extension Client {
                 accessedDatabase.plain.versionWhenServiceQualityOpted = newValue
             }
         }
-
+        
         /// Stores last known exception raised by the app at any point
         public var lastKnownException: String? {
             get {
@@ -518,9 +519,9 @@ extension Client.Preferences {
 
     /// Provides a means to edit `Client.Preferences` in a buffered way. Changes can be committed or reverted.
     public class Editable: PreferencesStore {
-
+        
         fileprivate var target: Client.Preferences?
-
+        
         fileprivate init() {
             preferredServer = nil
             lastConnectedRegion = nil
@@ -531,11 +532,11 @@ extension Client.Preferences {
             nmtMigrationSuccess = false
 
             #if os(iOS)
-                vpnType = PIAWGTunnelProfile.vpnType
+            vpnType = PIAWGTunnelProfile.vpnType
             #endif
 
             #if os(tvOS)
-                vpnType = IKEv2Profile.vpnType
+            vpnType = IKEv2Profile.vpnType
             #endif
 
             vpnDisconnectsOnSleep = false
@@ -544,11 +545,9 @@ extension Client.Preferences {
             trustedNetworks = []
             nmtTrustedNetworkRules = [:]
             nmtTemporaryOpenNetworks = []
-            nmtGenericRules = [
-                NMTType.protectedWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
-                NMTType.openWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
-                NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue
-            ]
+            nmtGenericRules = [NMTType.protectedWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
+                                NMTType.openWiFi.rawValue: NMTRules.alwaysConnect.rawValue,
+                                NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue]
             nmtRulesEnabled = false
             ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
             ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
@@ -572,7 +571,7 @@ extension Client.Preferences {
 
         /**
          Resets the preferences to factory defaults.
-        
+         
          - Returns: `self`
          - Seealso: `Client.Preferences.defaults`
          */
@@ -583,12 +582,12 @@ extension Client.Preferences {
             load(from: target.defaults)
             return self
         }
-
+        
         // MARK: PreferencesStore
 
         /// :nodoc:
         public var preferredServer: Server?
-
+        
         /// :nodoc:
         public var lastConnectedRegion: Server?
 
@@ -607,7 +606,7 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var mace: Bool
-
+        
         /// :nodoc:
         public var useWiFiProtection: Bool
 
@@ -619,13 +618,13 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var vpnType: String
-
+        
         /// :nodoc:
         public var vpnDisconnectsOnSleep: Bool
-
+        
         /// :nodoc:
         public var vpnCustomConfigurations: [String: VPNCustomConfiguration]
-
+        
         /// :nodoc:
         public var availableNetworks: [String]
 
@@ -646,10 +645,10 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var ikeV2IntegrityAlgorithm: String
-
+        
         /// :nodoc:
         public var ikeV2EncryptionAlgorithm: String
-
+        
         /// :nodoc:
         public var ikeV2PacketSize: Int
 
@@ -678,15 +677,15 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var versionWhenServiceQualityOpted: String?
-
+        
         /// :nodoc:
         public var lastKnownException: String?
-
+        
         /// :nodoc:
         public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
             return vpnCustomConfigurations[vpnType]
         }
-
+        
         /// :nodoc:
         public func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String) {
             vpnCustomConfigurations[vpnType] = customConfiguration
@@ -696,7 +695,7 @@ extension Client.Preferences {
 
         /**
          Returns the action required to make the pending changes effective for the current VPN profile.
-        
+
          - Returns: A `VPNAction` or `nil` if no action is required.
          */
         public func requiredVPNAction() -> VPNAction? {
@@ -743,18 +742,17 @@ extension Client.Preferences {
             }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,
-                !configuration.isEqual(to: targetConfiguration)
-            {
-
+                !configuration.isEqual(to: targetConfiguration) {
+                
                 queue.append(VPNActionReinstall())
             }
             return queue.max { $0.priority < $1.priority }
         }
-
+        
         public func defaultVPNAction() -> VPNAction? {
             return VPNActionDisconnectAndReinstall()
         }
-
+        
         private func isPreferredServer(equalTo server: Server?) -> Bool {
             guard let preferredServer = preferredServer else {
                 return (server == nil)
@@ -764,10 +762,10 @@ extension Client.Preferences {
             }
             return (preferredServer == server)
         }
-
+        
         /**
          Returns `true` if the VPN needs to reconnect to make the pending changes effective.
-        
+         
          - Returns: `true` if the VPN needs reconnection.
          */
         public func suggestsVPNReconnection() -> Bool {
@@ -782,8 +780,7 @@ extension Client.Preferences {
             }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,
-                !configuration.isEqual(to: targetConfiguration)
-            {
+                !configuration.isEqual(to: targetConfiguration) {
 
                 return true
             }

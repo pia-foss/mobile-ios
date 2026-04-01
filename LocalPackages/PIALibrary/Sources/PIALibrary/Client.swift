@@ -32,26 +32,26 @@ public final class Client {
 
     /// The environment in which the client is currently running in.
     public static var environment: Environment = .production
-
+    
     /// The global client configuration.
     public static let configuration = Client.Configuration()
-
+    
     /// The persistence layer (customizable)
     public static var database = Client.Database()
-
+    
     /// The current state of the background operations.
     public static let daemons = Client.Daemons()
-
+    
     /// The library preferences.
     public static let preferences = Client.Preferences()
-
+    
     /// The business providers (customizable).
     public static var providers = Client.Providers()
-
+    
     static var webServices: WebServices = PIAWebServices()
 
     #if os(iOS) || os(tvOS)
-        public static var store: InAppProvider = AppStoreProvider()
+    public static var store: InAppProvider = AppStoreProvider()
     #endif
 
     // MARK: Initialization
@@ -59,7 +59,7 @@ public final class Client {
     /**
      Initializes the client. Strategies may only be customized before invoking
      this method. The step is mandatory for proper behavior.
-    
+
      You probably want to do this as soon as the consumer application starts.
      */
     public static func bootstrap() {
@@ -93,46 +93,46 @@ public final class Client {
             }
         }
     }
-
+    
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {
         ServersPinger.shared.reset()
         ServersDaemon.shared.reset()
         ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
-
+    
     public static func resetWebServices() {
         Client.webServices = PIAWebServices()
     }
-
+    
     /**
      Refresh the list of plan products
      */
     public static func refreshProducts() {
         #if os(iOS)
-            providers.accountProvider.listPlanProducts(nil)
+        providers.accountProvider.listPlanProducts(nil)
         #endif
     }
-
+    
     /**
     Observe Purchase transactions
     */
     public static func observeTransactions() {
         #if os(iOS)
-            store.startObservingTransactions()
+        store.startObservingTransactions()
         #endif
     }
 
     /**
      Disposes the client resources and observers.
-    
+     
      Do this when the consumer application is about to terminate.
      */
     public static func dispose() {
         #if os(iOS)
-            store.stopObservingTransactions()
+        store.stopObservingTransactions()
         #endif
     }
-
+    
     /**
      Refresh the ping number to the given servers
      */

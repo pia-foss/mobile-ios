@@ -16,14 +16,14 @@ protocol URLRequestMaker {
 extension URLRequestMaker {
     func makeURLRequest(endpoint: Endpoint) -> URLRequest {
         let url = URL(string: hostName + endpoint.path)!
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.allHTTPHeaderFields
         if let bodyParametrs = endpoint.bodyParametrs {
             request.httpBody = try? JSONSerialization.data(withJSONObject: bodyParametrs)
         }
-
+        
         return request
     }
 }

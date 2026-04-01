@@ -12,7 +12,7 @@ class HelpTests: BaseTest {
     override class func spec() {
         shouldLogIn = true
         super.spec()
-
+        
         describe("help tests") {
             context("when the user navigates to the help screen") {
                 it("should display the following: app version, about, help improve PIA, and contact support qr") {
@@ -23,7 +23,7 @@ class HelpTests: BaseTest {
                     expect(app.scanQRCodeContactUsMessage.waitForElementToAppear()).to(beTrue())
                 }
             }
-
+            
             context("when the user navigates to about screen") {
                 it("should display the privacy policy screen, and the privacy policy qr upon navigating to it") {
                     app.navigateToHelpScreen()
@@ -32,7 +32,7 @@ class HelpTests: BaseTest {
                     expect(app.privacyPolicyMessage.waitForElementToAppear()).to(beTrue())
                     expect(app.scanQRCodePrivacyPolicyMessage.waitForElementToAppear()).to(beTrue())
                 }
-
+                
                 it("should display the acknowledgments screen, and the third party contents and services upon navigating to it") {
                     app.navigateToHelpScreen()
                     app.navigateToAboutScreen()

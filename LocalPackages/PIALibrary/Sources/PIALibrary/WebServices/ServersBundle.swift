@@ -38,7 +38,7 @@ public struct ServersBundle {
 
             /// The available ports over TCP.
             public let tcp: [UInt16]
-
+            
         }
 
         /// The available ports for OpenVPN.
@@ -46,22 +46,22 @@ public struct ServersBundle {
 
         /// The available ports for WireGuard.
         public let wgPorts: Ports
-
+        
         /// The available ports for IKEv2.
         public let ikev2Ports: Ports
 
         /// Deprecated
         let latestVersion: Int
-
+        
         /// Deprecated
         let pollInterval: Int
-
+        
         /// Deprecated
         let automaticIdentifiers: Set<String>?
     }
-
+    
     /// The list of available `Server`s.
     public let servers: [Server]
-
+    
     let configuration: Configuration?
 }

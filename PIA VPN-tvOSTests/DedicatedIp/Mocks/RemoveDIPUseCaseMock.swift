@@ -7,12 +7,11 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class RemoveDIPUseCaseMock: RemoveDIPUseCaseType {
     var useCaseWasCalled = 0
-
+    
     func callAsFunction() {
         useCaseWasCalled += 1
     }

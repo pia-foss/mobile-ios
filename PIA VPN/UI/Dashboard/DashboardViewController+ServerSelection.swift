@@ -10,7 +10,7 @@ import PIALibrary
 import PIALocalizations
 
 extension DashboardViewController: ServerSelectionDelegate {
-
+    
     func didSelectServer(_ server: Server) {
         let isConnected = Client.providers.vpnProvider.isVPNConnected
         let currentServer = Client.preferences.displayedServer
@@ -54,7 +54,8 @@ extension DashboardViewController: ServerSelectionDelegate {
                 Client.configuration.connectedManually = true
                 Client.preferences.displayedServer = server
             }
-        } else {
+        }
+        else {
             Client.configuration.connectedManually = true
 
             //Setting this triggers a connection attempt

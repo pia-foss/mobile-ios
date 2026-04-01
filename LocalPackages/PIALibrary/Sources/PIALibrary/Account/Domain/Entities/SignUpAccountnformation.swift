@@ -1,3 +1,4 @@
+
 import Foundation
 
 struct SignUpAccountnformation: Codable {
@@ -10,7 +11,7 @@ extension SignUpAccountnformation {
     func toDomainModel() -> Credentials {
         Credentials(username: username, password: password)
     }
-
+    
     static func makeWith(data: Data) -> SignUpAccountnformation? {
         try? JSONDecoder().decode(SignUpAccountnformation.self, from: data)
     }

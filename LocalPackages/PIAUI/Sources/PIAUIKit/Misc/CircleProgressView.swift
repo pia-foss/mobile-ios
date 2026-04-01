@@ -45,7 +45,7 @@ public final class CircleProgressView: UIView {
             setNeedsDisplay()
         }
     }
-
+    
     /// The color of the fixed circle.
     public var fixedColor: UIColor? = .green {
         didSet {
@@ -53,7 +53,7 @@ public final class CircleProgressView: UIView {
             setNeedsDisplay()
         }
     }
-
+    
     /// The thickness of the spinning circles in points.
     public var thickness: CGFloat = 5.0 {
         didSet {
@@ -62,11 +62,11 @@ public final class CircleProgressView: UIView {
             setNeedsDisplay()
         }
     }
-
+    
     /// :nodoc:
     public override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-
+        
         let rect = bounds
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let maxRadius = rect.width / 2.0 - thickness
@@ -76,36 +76,33 @@ public final class CircleProgressView: UIView {
         let fixedInsetX = (rect.width - 2.0 * fixedRadius) / 2.0
         let fixedInsetY = (rect.height - 2.0 * fixedRadius) / 2.0
 
-        outerArc.path =
-            UIBezierPath(
-                arcCenter: .zero,
-                radius: outerRadius,
-                startAngle: 0.0,
-                endAngle: .pi / 2.0,
-                clockwise: false
-            ).cgPath
+        outerArc.path = UIBezierPath(
+            arcCenter: .zero,
+            radius: outerRadius,
+            startAngle: 0.0,
+            endAngle: .pi / 2.0,
+            clockwise: false
+        ).cgPath
         outerArc.strokeColor = outerColor?.cgColor
         outerArc.fillColor = nil
         outerArc.lineWidth = thickness
         outerArc.position = center
 
-        innerArc.path =
-            UIBezierPath(
-                arcCenter: .zero,
-                radius: innerRadius,
-                startAngle: .pi * 3.0 / 2.0,
-                endAngle: 0.0,
-                clockwise: false
-            ).cgPath
+        innerArc.path = UIBezierPath(
+            arcCenter: .zero,
+            radius: innerRadius,
+            startAngle: .pi * 3.0 / 2.0,
+            endAngle: 0.0,
+            clockwise: false
+        ).cgPath
         innerArc.strokeColor = innerColor?.cgColor
         innerArc.fillColor = nil
         innerArc.lineWidth = thickness
         innerArc.position = center
 
-        fixedCircle.path =
-            UIBezierPath(
-                ovalIn: bounds.insetBy(dx: fixedInsetX, dy: fixedInsetY)
-            ).cgPath
+        fixedCircle.path = UIBezierPath(
+            ovalIn: bounds.insetBy(dx: fixedInsetX, dy: fixedInsetY)
+        ).cgPath
         fixedCircle.fillColor = fixedColor?.cgColor
 
         layer.addSublayer(outerArc)
@@ -127,7 +124,7 @@ public final class CircleProgressView: UIView {
             anim.duration = 3.0
             anim.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
             anim.repeatCount = .infinity
-            //            anim.autoreverses = true
+//            anim.autoreverses = true
         }
 
         outerRotation.fromValue = 0.0

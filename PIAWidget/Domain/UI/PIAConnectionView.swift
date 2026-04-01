@@ -1,21 +1,22 @@
-import PIALibrary
-import PIALocalizations
+
 import SwiftUI
 import WidgetKit
+import PIALibrary
+import PIALocalizations
 
 @available(iOSApplicationExtension 16.1, *)
 internal struct PIAConnectionView: View {
-
+    
     internal let context: ActivityViewContext<PIAConnectionAttributes>
     internal let showProtocol: Bool
     let localizedRegionText = L10n.Widget.LiveActivity.Region.title
     let localizedProtocolText = L10n.Widget.LiveActivity.SelectedProtocol.title
-
+    
     init(context: ActivityViewContext<PIAConnectionAttributes>, showProtocol: Bool = false) {
         self.context = context
         self.showProtocol = showProtocol
     }
-
+    
     var body: some View {
         HStack {
             HStack {
@@ -47,7 +48,7 @@ internal struct PIAConnectionView: View {
                 } else {
                     Spacer()
                 }
-
+                
                 Link(destination: URL(string: AppConstants.Widget.connect)!) {
                     PIACircleImageView(
                         size: 54,
@@ -56,6 +57,7 @@ internal struct PIAConnectionView: View {
                 }
             }
         }
-
+        
     }
 }
+

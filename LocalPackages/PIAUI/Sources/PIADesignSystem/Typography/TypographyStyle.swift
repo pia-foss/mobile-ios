@@ -79,38 +79,38 @@ extension TypographyStyle {
     /// Font size in points
     var fontSize: CGFloat {
         switch self {
-        case .title1: 22
-        case .title2: 20
-        case .title3: 20
-        case .subtitle1: 17
-        case .subtitle2: 15
-        case .subtitle3: 13
-        case .body1: 17
-        case .body2: 15
-        case .button1: 17
-        case .button2: 15
-        case .caption1: 12
-        case .caption2: 11
-        case .caption3: 12
+        case .title1:       22
+        case .title2:       20
+        case .title3:       20
+        case .subtitle1:    17
+        case .subtitle2:    15
+        case .subtitle3:    13
+        case .body1:        17
+        case .body2:        15
+        case .button1:      17
+        case .button2:      15
+        case .caption1:     12
+        case .caption2:     11
+        case .caption3:     12
         }
     }
 
     /// Line height in points
     var lineHeight: CGFloat {
         switch self {
-        case .title1: 28
-        case .title2: 25
-        case .title3: 25
-        case .subtitle1: 22
-        case .subtitle2: 20
-        case .subtitle3: 18
-        case .body1: 22
-        case .body2: 20
-        case .button1: 22
-        case .button2: 20
-        case .caption1: 16
-        case .caption2: 13
-        case .caption3: 16
+        case .title1:       28
+        case .title2:       25
+        case .title3:       25
+        case .subtitle1:    22
+        case .subtitle2:    20
+        case .subtitle3:    18
+        case .body1:        22
+        case .body2:        20
+        case .button1:      22
+        case .button2:      20
+        case .caption1:     16
+        case .caption2:     13
+        case .caption3:     16
         }
     }
 

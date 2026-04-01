@@ -26,10 +26,10 @@ extension Client {
 
     /// The available client environments.
     public enum Environment: String {
-
+        
         /// Use staging endpoints.
         case staging
-
+        
         /// Use production endpoints.
         case production
     }

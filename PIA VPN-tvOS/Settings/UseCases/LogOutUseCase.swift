@@ -8,7 +8,6 @@
 
 import Foundation
 import PIALibrary
-
 protocol LogOutUseCaseType {
     func logOut() async throws
 }
@@ -22,11 +21,9 @@ class LogOutUseCase: LogOutUseCaseType {
     var clientPreferences: ClientPreferencesType
     let favoriteRegionsUseCase: FavoriteRegionUseCaseType
     let searchedRegionsAvailability: SearchedRegionsAvailabilityType
-
-    init(
-        accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
-        connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType
-    ) {
+    
+    init(accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
+         connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType) {
         self.accountProvider = accountProvider
         self.appPreferences = appPreferences
         self.vpnConfigurationProvider = vpnConfigurationProvicer
@@ -36,7 +33,7 @@ class LogOutUseCase: LogOutUseCaseType {
         self.favoriteRegionsUseCase = favoriteRegionsUserCase
         self.searchedRegionsAvailability = searchedRegionsAvailability
     }
-
+    
     private func uninstallVpnConfiguration() async {
         return await withCheckedContinuation { continuation in
             guard self.vpnConfigurationAvailability.get() else {
@@ -44,7 +41,7 @@ class LogOutUseCase: LogOutUseCaseType {
                 continuation.resume()
                 return
             }
-
+            
             vpnConfigurationProvider.uninstall { _ in
                 self.vpnConfigurationAvailability.set(value: false)
                 self.connectionStatsPermisson.set(value: nil)
@@ -52,7 +49,7 @@ class LogOutUseCase: LogOutUseCaseType {
             }
         }
     }
-
+    
     private func logoutUser() async {
         return await withCheckedContinuation { continuation in
             accountProvider.logout { error in
@@ -60,7 +57,7 @@ class LogOutUseCase: LogOutUseCaseType {
             }
         }
     }
-
+    
     func logOut() async {
         await uninstallVpnConfiguration()
         await logoutUser()
@@ -68,6 +65,6 @@ class LogOutUseCase: LogOutUseCaseType {
         searchedRegionsAvailability.eraseAll()
         appPreferences.reset()
         clientPreferences.selectedServer = SelectedServerUseCase.automaticServer()
-
+        
     }
 }

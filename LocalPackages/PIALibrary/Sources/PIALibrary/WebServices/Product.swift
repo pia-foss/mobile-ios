@@ -23,20 +23,20 @@
 import Foundation
 
 public struct Product: Codable {
-
+    
     public let identifier: String
-
+    
     public let plan: Plan
-
+    
     public let price: String
-
+    
     public let legacy: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case plan = "plan"
         case price = "price"
         case legacy = "legacy"
     }
-
+    
 }

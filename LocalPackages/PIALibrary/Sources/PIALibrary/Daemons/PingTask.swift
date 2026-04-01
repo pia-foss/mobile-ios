@@ -1,7 +1,7 @@
 //
 //  PingTask.swift
 //  PIALibrary
-//
+//  
 //  Created by Jose Antonio Blaya Garcia on 05/05/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -27,7 +27,7 @@ private let log = PIALogger.logger(for: PingTask.self)
 final class PingTask {
 
     let timeout = 3000
-
+    
     let identifier: String
     let server: Server
     let address: Server.ServerAddressIP
@@ -44,21 +44,21 @@ final class PingTask {
         self.address = address
         self.stateUpdateHandler = stateUpdateHandler
     }
-
+    
     func startTask(queue: DispatchQueue) {
-
+                        
         var response: Int?
         let persistence = Client.database.plain
         self.state = .pending
-
+        
         log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
-
+        
         queue.async() { [weak self] in
 
             guard let address = self?.address, let server = self?.server else {
                 return
             }
-
+            
             let tcpAddress = Server.Address(hostname: address.ip, port: 443)
             response = server.ping(toAddress: tcpAddress, withProtocol: .TCP)
             DispatchQueue.main.async {
@@ -71,7 +71,7 @@ final class PingTask {
             }
 
         }
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if self.state != .completed {
                 self.parsePingResponse(response: self.timeout, withServer: self.server)
@@ -82,9 +82,9 @@ final class PingTask {
         }
 
     }
-
+    
     private func parsePingResponse(response: Int?, withServer server: Server) {
-
+        
         guard let responseTime = response else {
             log.warning("Error/timeout from \(server.identifier)")
             return
@@ -103,25 +103,25 @@ final class PingTask {
 }
 
 enum PingTaskState {
-
+    
     case pending
     case completed
-
+    
     var description: String {
         switch self {
         case .pending:
             return "Pending"
-
+            
         case .completed:
             return "Completed"
-
+            
         }
-
+    
     }
 }
 
 extension Array where Element == PingTask {
-
+    
     func indexOfTaskWith(identifier: String) -> Int? {
         return self.firstIndex { $0.identifier == identifier }
     }

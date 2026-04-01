@@ -15,16 +15,16 @@ protocol CheckLoginAvailabilityType {
 
 class CheckLoginAvailability: CheckLoginAvailabilityType {
     private var timeToRetryCredentials: TimeInterval? = nil
-
+    
     func disableLoginFor(_ delay: Double) {
         timeToRetryCredentials = delay
     }
-
+    
     func callAsFunction() -> Result<Void, LoginError> {
         if let timeUntilNextTry = timeToRetryCredentials?.timeSinceNow() {
             return .failure(.throttled(retryAfter: timeUntilNextTry))
         }
-
+        
         return .success(())
     }
 }

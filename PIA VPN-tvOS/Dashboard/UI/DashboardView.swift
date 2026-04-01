@@ -1,19 +1,20 @@
+
 import SwiftUI
 
 struct DashboardView: View {
-
+    
     @ObservedObject var viewModel: DashboardViewModel
-
+    
     var body: some View {
         VStack(alignment: .center) {
             ConnectionStateBar(tintColor: viewModel.connectionTintColor.connectionBarTint)
             Spacer()
             DashboardConnectionButtonSection()
                 .padding(.bottom, 60)
-
+            
             SelectedServerSection()
                 .frame(minHeight: Spacing.selectedServerViewMinHeight)
-
+            
             QuickConnectSection()
                 .frame(width: Spacing.dashboardViewWidth)
             Spacer()
@@ -48,7 +49,7 @@ fileprivate struct QuickConnectSection: View {
 fileprivate struct ConnectionStateTitle: View {
     let title: String
     let tintColor: Color
-
+    
     var body: some View {
         Text(title)
             .font(.system(size: 57, weight: .bold))
@@ -56,9 +57,10 @@ fileprivate struct ConnectionStateTitle: View {
     }
 }
 
+
 fileprivate struct ConnectionStateBar: View {
     let tintColor: Color
-
+    
     var body: some View {
         Rectangle().fill(tintColor)
             .frame(width: Spacing.screenWidth, height: 10)

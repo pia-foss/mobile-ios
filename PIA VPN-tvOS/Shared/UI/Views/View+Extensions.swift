@@ -13,14 +13,14 @@ extension View {
         self
             .shadow(color: color.opacity(opacity), radius: radius / 3)
             .shadow(color: color.opacity(opacity), radius: radius)
-
+            
     }
 }
 
 extension Image {
     static func asQRCode(url: URL) -> Image {
         guard let ciImage = url.asQRCode(),
-            let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent)
+              let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent)
         else {
             return Image(uiImage: UIImage())
         }

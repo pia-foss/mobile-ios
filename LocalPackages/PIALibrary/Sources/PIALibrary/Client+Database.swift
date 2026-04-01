@@ -30,11 +30,11 @@ extension Client {
      */
     public final class Database {
         let plain: PlainStore
-
+        
         let secure: SecureStore
 
         private(set) var transient: TransientStore = MemoryStore()
-
+        
         /**
          Default initializer, uses `UserDefaults.standard` and the main keychain.
          */
@@ -42,10 +42,10 @@ extension Client {
             plain = UserDefaultsStore()
             secure = KeychainStore()
         }
-
+        
         /**
          Raw group initializer, uses an app group for both `UserDefaults` and the keychain.
-        
+         
          - Parameter group: An app group
          */
         public init(group: String) {
@@ -56,7 +56,7 @@ extension Client {
         /**
          Team group initializer, uses an app group for `UserDefaults`. The keychain uses
          the same app group prefixed with the team ID.
-        
+         
          - Parameter team: The development team ID
          - Parameter group: An app group
          */
@@ -67,7 +67,7 @@ extension Client {
 
         /**
          Resets the persistency layer completely.
-        
+         
          - Returns: `self`
          */
         @discardableResult public func truncate() -> Self {

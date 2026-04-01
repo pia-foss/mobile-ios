@@ -29,17 +29,17 @@ enum DashboardSections: Int {
 }
 
 enum FixedCells: Int {
-
+    
     case messages = 0
     case feedback
-
+    
     var identifier: String {
         switch self {
         case .messages: "MessagesTileCell"
         case .feedback: "FeedbackTileCell"
         }
     }
-
+    
     var className: String {
         switch self {
         case .messages: "MessagesTileCollectionViewCell"
@@ -59,7 +59,7 @@ enum Cells: Int, CaseIterable {
     case quickSettings
     case favoriteServers
     case connectionTile
-
+    
     var identifier: String {
         switch self {
         case .ipTile: return "IPTileCell"
@@ -72,7 +72,7 @@ enum Cells: Int, CaseIterable {
         case .connectionTile: return "ConnectionTileCell"
         }
     }
-
+    
     var className: String {
         switch self {
         case .ipTile: return "IPTileCollectionViewCell"
@@ -90,57 +90,38 @@ enum Cells: Int, CaseIterable {
 class DashboardCollectionViewUtil: NSObject {
 
     func registerCellsFor(_ collectionView: UICollectionView) {
-        collectionView.register(
-            UINib(
-                nibName: FixedCells.messages.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: FixedCells.messages.identifier)
-        collectionView.register(
-            UINib(
-                nibName: FixedCells.feedback.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: FixedCells.feedback.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.ipTile.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.ipTile.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.quickConnect.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.quickConnect.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.region.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.region.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.subscription.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.subscription.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.usage.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.usage.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.quickSettings.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.quickSettings.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.favoriteServers.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.favoriteServers.identifier)
-        collectionView.register(
-            UINib(
-                nibName: Cells.connectionTile.className,
-                bundle: nil),
-            forCellWithReuseIdentifier: Cells.connectionTile.identifier)
+        collectionView.register(UINib(nibName: FixedCells.messages.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: FixedCells.messages.identifier)
+        collectionView.register(UINib(nibName: FixedCells.feedback.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: FixedCells.feedback.identifier)
+        collectionView.register(UINib(nibName: Cells.ipTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.ipTile.identifier)
+        collectionView.register(UINib(nibName: Cells.quickConnect.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickConnect.identifier)
+        collectionView.register(UINib(nibName: Cells.region.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.region.identifier)
+        collectionView.register(UINib(nibName: Cells.subscription.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.subscription.identifier)
+        collectionView.register(UINib(nibName: Cells.usage.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.usage.identifier)
+        collectionView.register(UINib(nibName: Cells.quickSettings.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.quickSettings.identifier)
+        collectionView.register(UINib(nibName: Cells.favoriteServers.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.favoriteServers.identifier)
+        collectionView.register(UINib(nibName: Cells.connectionTile.className,
+                                      bundle: nil),
+                                forCellWithReuseIdentifier: Cells.connectionTile.identifier)
         collectionView.backgroundColor = .clear
     }
+    
 
 }

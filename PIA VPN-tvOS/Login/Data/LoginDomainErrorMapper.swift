@@ -14,14 +14,14 @@ class LoginDomainErrorMapper: LoginDomainErrorMapperType {
         guard let clientError = error as? ClientError else {
             return .generic(message: error?.localizedDescription)
         }
-
+        
         switch clientError {
         case .unauthorized:
             return .unauthorized
 
         case .throttled(retryAfter: let retryAfter):
             return .throttled(retryAfter: Double(retryAfter))
-
+            
         case .expired:
             return .expired
         default:

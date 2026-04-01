@@ -39,9 +39,9 @@ extension PIAWebServices {
                 }
             }
         }
-
+        
     }
-
+    
     func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
         csiProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
         self.csiAPI.send(shouldSendPersistedData: shouldSendPersistedData) { (reportIdentifier, errors) in

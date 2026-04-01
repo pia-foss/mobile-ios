@@ -12,3 +12,4 @@ enum InstallVPNConfigurationError: Error {
     case userCanceled
     case generic
 }
+

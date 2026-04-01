@@ -1,7 +1,7 @@
 //
 //  PIAWGTunnelProvider+Profile.swift
 //  PIALibrary
-//
+//  
 //  Created by Jose Antonio Blaya Garcia on 25/02/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -21,27 +21,27 @@
 //
 
 import Foundation
-
 #if os(iOS)
-    import PIAWireguard
+import PIAWireguard
 
-    extension PIAWireguardConfiguration: VPNCustomConfiguration {
-        public func serialized() -> [String: Any] {
-            return ["customDNSServers": customDNSServers, "packetSize": packetSize]
-        }
 
-        public func isEqual(to: VPNCustomConfiguration) -> Bool {
-            guard let other = to as? PIAWireguardConfiguration else {
-                return false
-            }
-            guard (customDNSServers == other.customDNSServers) else {
-                return false
-            }
-            guard (packetSize == other.packetSize) else {
-                return false
-            }
-            return true
-        }
+extension PIAWireguardConfiguration: VPNCustomConfiguration {
+    public func serialized() -> [String: Any] {
+        return ["customDNSServers": customDNSServers, "packetSize": packetSize]
     }
+    
+    public func isEqual(to: VPNCustomConfiguration) -> Bool {
+        guard let other = to as? PIAWireguardConfiguration else {
+            return false
+        }
+        guard (customDNSServers == other.customDNSServers) else {
+            return false
+        }
+        guard (packetSize == other.packetSize) else {
+            return false
+        }
+        return true
+    }
+}
 
 #endif

@@ -21,24 +21,24 @@
 //
 
 import Foundation
-import PIALibrary
 import UIKit
+import PIALibrary
 
 public struct SignupMetadata {
     public var email: String
-
+    
     public var user: UserAccount?
 
     public var title: String?
-
+    
     public var bodyImage: UIImage?
-
+    
     public var bodyImageOffset: CGPoint?
 
     public var bodyTitle: String?
-
+    
     public var bodySubtitle: String?
-
+    
     public init(email: String, user: UserAccount? = nil) {
         self.email = email
         self.user = user

@@ -11,33 +11,27 @@ import SwiftUI
 import WidgetKit
 
 @available(iOS 17, *)
-#Preview(
-    as: .systemSmall,
-    widget: {
-        PIAWidget()
-    },
-    timeline: {
-        WidgetInformation(
-            date: Date(),
-            connected: true,
-            vpnProtocol: "IKEv2",
-            vpnPort: "500",
-            vpnSocket: "UDP"
-        )
-    })
+#Preview(as: .systemSmall, widget: {
+    PIAWidget()
+}, timeline: {
+    WidgetInformation(
+        date: Date(),
+        connected: true,
+        vpnProtocol: "IKEv2",
+        vpnPort: "500",
+        vpnSocket: "UDP"
+    )
+})
 
 @available(iOS 17, *)
-#Preview(
-    as: .systemMedium,
-    widget: {
-        PIAWidget()
-    },
-    timeline: {
-        WidgetInformation(
-            date: Date(),
-            connected: false,
-            vpnProtocol: "WireGuard",
-            vpnPort: "1443",
-            vpnSocket: "UDP"
-        )
-    })
+#Preview(as: .systemMedium, widget: {
+    PIAWidget()
+}, timeline: {
+    WidgetInformation(
+        date: Date(),
+        connected: false,
+        vpnProtocol: "WireGuard",
+        vpnPort: "1443",
+        vpnSocket: "UDP"
+    )
+})

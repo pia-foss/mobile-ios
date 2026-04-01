@@ -24,6 +24,6 @@ import Foundation
 
 enum ThemeCode: Int {
     case light = 1
-
+    
     case dark = 2
 }

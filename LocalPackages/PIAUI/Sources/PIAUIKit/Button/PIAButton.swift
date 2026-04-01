@@ -21,8 +21,8 @@
 //
 
 import Foundation
-import PIADesignSystem
 import UIKit
+import PIADesignSystem
 
 // UIButton with rounded corners and border to be used throughout PIA application
 public final class PIAButton: UIButton {
@@ -31,7 +31,7 @@ public final class PIAButton: UIButton {
     private var edgesHaveBeenSet = false
     private var renderingModeHasBeenSet = false
     private var buttonWidth: CGFloat!
-
+    
     private var borderColor: UIColor!
     private var style: TextStyle!
     private var currentBackgroundColor: UIColor!
@@ -55,10 +55,11 @@ public final class PIAButton: UIButton {
             if currentBackgroundColor == nil {
                 currentBackgroundColor = backgroundColor
             }
-            backgroundColor = isHighlighted && currentBackgroundColor != nil ? currentBackgroundColor.withAlphaComponent(0.8) : currentBackgroundColor
+            backgroundColor = isHighlighted && currentBackgroundColor != nil ?
+                currentBackgroundColor.withAlphaComponent(0.8) : currentBackgroundColor
         }
     }
-
+    
     public var isLoading: Bool = false {
         didSet { reloadButtonIsLoading(oldValue: oldValue) }
     }
@@ -67,36 +68,32 @@ public final class PIAButton: UIButton {
         super.init(frame: frame)
         self.setupView()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupView()
     }
-
+    
     private func setupView() {
         self.layer.cornerRadius = 6.0
         clipsToBounds = true
     }
-
+    
     public func setRounded() {
         self.layer.cornerRadius = 6.0
         clipsToBounds = true
     }
 
-    public func setBorder(
-        withSize size: CGFloat,
-        andColor color: UIColor
-    ) {
+    public func setBorder(withSize size: CGFloat,
+                   andColor color: UIColor) {
         self.layer.borderWidth = size
         self.borderColor = color
         self.layer.borderColor = borderColor.cgColor
         clipsToBounds = true
     }
 
-    public func setBorder(
-        withSize size: CGFloat,
-        andStyle style: TextStyle
-    ) {
+    public func setBorder(withSize size: CGFloat,
+                   andStyle style: TextStyle) {
         self.layer.borderWidth = size
         self.style = style
         if let color = style.color {
@@ -115,15 +112,15 @@ public final class PIAButton: UIButton {
         self.layer.borderColor = UIColor.clear.cgColor
         clipsToBounds = true
     }
-
+    
     public func setButtonImage() {
         self.isButtonImage = true
     }
-
+    
     private func resetEdges() {
         self.edgesHaveBeenSet = false
     }
-
+    
     private func reloadButtonIsLoading(oldValue: Bool) {
         guard isLoading != oldValue else { return }
         checkRenderingMode()
@@ -139,12 +136,11 @@ public final class PIAButton: UIButton {
             isUserInteractionEnabled = true
         }
     }
-
+    
     private func checkRenderingMode() {
         if !self.renderingModeHasBeenSet,
             let imageView = imageView,
-            let image = imageView.image
-        {
+            let image = imageView.image {
             self.renderingModeHasBeenSet = true
             imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
@@ -152,12 +148,11 @@ public final class PIAButton: UIButton {
 }
 
 extension PIAButton {
-
+    
     override public func layoutSubviews() {
         super.layoutSubviews()
         if self.isButtonImage,
-            let imageView = imageView
-        {
+            let imageView = imageView {
             imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: imageView.frame.width + 10)
             titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 5)
             for const in self.constraints {
@@ -171,11 +166,11 @@ extension PIAButton {
                         const.constant = buttonWidth
                         break
                     }
-
+                
                 }
             }
         }
-
+        
     }
 
 }

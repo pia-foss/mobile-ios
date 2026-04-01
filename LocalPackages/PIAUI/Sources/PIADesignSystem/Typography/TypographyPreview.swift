@@ -37,27 +37,27 @@ struct TypographyPreview: View {
                     Text("PIA Typography")
                         .font(.system(size: 32, weight: .bold))
                         .foregroundColor(.black)
-
+                    
                     Spacer()
-
+                    
                     Text("PIA DESIGN SYSTEM")
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundColor(.black.opacity(0.7))
                 }
                 .padding()
                 .background(Color(red: 0.5, green: 0.85, blue: 0.5))
-
+                
                 // Column Headers
                 HStack(spacing: 20) {
                     Spacer()
                         .frame(width: 100)
-
+                    
                     Spacer()
-
+                    
                     Text("Currently used in")
                         .font(.system(size: 14, weight: .semibold))
                         .frame(width: 150, alignment: .leading)
-
+                    
                     Text("Adapted from")
                         .font(.system(size: 14, weight: .semibold))
                         .frame(width: 200, alignment: .leading)
@@ -65,7 +65,7 @@ struct TypographyPreview: View {
                 .padding(.horizontal)
                 .padding(.top, 40)
                 .padding(.bottom, 20)
-
+                
                 // Typography rows
                 VStack(spacing: 40) {
                     TypographyRow(
@@ -75,7 +75,7 @@ struct TypographyPreview: View {
                         currentUse: "Big header",
                         adaptedFrom: "Title2/Emphasized"
                     )
-
+                    
                     TypographyRow(
                         label: "Title 2",
                         example: "Never once considering how in the world she was to get out again.",
@@ -83,7 +83,7 @@ struct TypographyPreview: View {
                         currentUse: "Header",
                         adaptedFrom: "Title3/Emphasized"
                     )
-
+                    
                     TypographyRow(
                         label: "Title 3",
                         example: "Never once considering how in the world she was to get out again.",
@@ -91,7 +91,7 @@ struct TypographyPreview: View {
                         currentUse: "Header",
                         adaptedFrom: "Title3/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Subtitle 1",
                         example: "The rabbit-hole went straight on like a tunnel for some way,",
@@ -99,7 +99,7 @@ struct TypographyPreview: View {
                         currentUse: "Connection Status",
                         adaptedFrom: "Headline/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Subtitle 2",
                         example: "The rabbit-hole went straight on like a tunnel for some way, and then dipped suddenly down, so suddenly that Alice had not a moment to think",
@@ -107,7 +107,7 @@ struct TypographyPreview: View {
                         currentUse: "Title",
                         adaptedFrom: "Subheadline/Emphasized"
                     )
-
+                    
                     TypographyRow(
                         label: "Subtitle 3",
                         example: "About stopping herself before she found herself falling down what seemed to be a very deep well.",
@@ -115,7 +115,7 @@ struct TypographyPreview: View {
                         currentUse: "Subtitles, countries",
                         adaptedFrom: "Footnote/Emphasized"
                     )
-
+                    
                     TypographyRow(
                         label: "Body 1",
                         example: "Either the well was very deep, or she fell very slowly, for she had plenty of time as she went down to look about her, and to wonder what was going to happen next.",
@@ -123,7 +123,7 @@ struct TypographyPreview: View {
                         currentUse: "Body copy",
                         adaptedFrom: "Body/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Body 2",
                         example: "But it was too dark to see anything; then she looked at the sides of the well, and noticed that they were filled with cupboards and book-shelves: here and there she saw maps and pictures hung upon pegs.",
@@ -131,7 +131,7 @@ struct TypographyPreview: View {
                         currentUse: "Dialogs, snackbars, hint bars",
                         adaptedFrom: "Subheadline/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Button 1",
                         example: "She took down a jar from one of the shelves as she passed; it was labelled \"ORANGE MARMALADE,\" but to her great disappointment it was empty: she did not like to drop the jar for fear of killing somebody underneath, so managed to put it into one of the cupboards as she fell past it.",
@@ -139,7 +139,7 @@ struct TypographyPreview: View {
                         currentUse: "CTA",
                         adaptedFrom: "Body/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Button 2",
                         example: "\"Well!\" thought Alice to herself. \"After such a fall as this, I shall think nothing of tumbling down stairs! How brave they'll all think me at home! Why, I wouldn't say anything about it, even if I fell off the top of the house!\" (Which was very likely true.)",
@@ -147,7 +147,7 @@ struct TypographyPreview: View {
                         currentUse: "Promo banner, CTA",
                         adaptedFrom: "Subheadline/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Caption 1",
                         example: "Down, down, down. Would the fall never come to an end?",
@@ -155,7 +155,7 @@ struct TypographyPreview: View {
                         currentUse: "IAM, small text",
                         adaptedFrom: "Caption1/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Caption 2",
                         example: "\"I wonder how many miles I've fallen by this time?\" she said aloud.",
@@ -163,7 +163,7 @@ struct TypographyPreview: View {
                         currentUse: "Smart/Current/Recent Location",
                         adaptedFrom: "Caption2/Regular"
                     )
-
+                    
                     TypographyRow(
                         label: "Caption 3",
                         example: "\"I wonder how many miles I've fallen by this time?\" she said aloud.",
@@ -173,7 +173,7 @@ struct TypographyPreview: View {
                     )
                 }
                 .padding(.horizontal)
-
+                
                 Spacer()
             }
         }

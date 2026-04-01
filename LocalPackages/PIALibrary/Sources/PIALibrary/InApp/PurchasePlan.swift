@@ -25,14 +25,14 @@ import Foundation
 public class PurchasePlan: NSObject {
     private class DummyInAppProduct: InAppProduct {
         let identifier = ""
-
+        
         let price: NSNumber = 0
-
+        
         let priceLocale = Locale.current
-
+        
         let native: Any? = nil
     }
-
+    
     private static let formatter: NumberFormatter = {
         let f = NumberFormatter()
         f.formatterBehavior = .behavior10_4
@@ -46,19 +46,19 @@ public class PurchasePlan: NSObject {
         f.numberStyle = .currencyPlural
         return f
     }()
-
+    
     public static let dummy = PurchasePlan()
-
+    
     public var isDummy: Bool {
         return (self == .dummy)
     }
-
+    
     public let plan: Plan
-
+    
     public let product: InAppProduct
-
+    
     public let monthlyFactor: Double
-
+    
     public var title = ""
 
     public var detail = ""
@@ -70,11 +70,11 @@ public class PurchasePlan: NSObject {
     public var price: NSNumber {
         return product.price
     }
-
+    
     public var monthlyPrice: NSNumber {
         return NSDecimalNumber(value: price.doubleValue / monthlyFactor)
     }
-
+    
     public var priceString: String {
         return PurchasePlan.string(forPrice: price, locale: product.priceLocale)
     }
@@ -96,7 +96,7 @@ public class PurchasePlan: NSObject {
         formatter.locale = locale
         return formatter.string(from: price)!
     }
-
+    
     private override init() {
         plan = .trial
         product = DummyInAppProduct()
@@ -110,9 +110,9 @@ public class PurchasePlan: NSObject {
         self.hasIntroOffer = await product.isEligibleForIntroOffer()
         self.monthlyFactor = monthlyFactor
     }
-
+    
     // MARK: CustomStringConvertible
-
+    
     public override var description: String {
         return product.identifier
     }

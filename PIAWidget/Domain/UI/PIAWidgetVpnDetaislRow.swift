@@ -24,15 +24,15 @@ internal struct PIAWidgetVpnDetaislRow: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: rowSpacing) {
-            Image(iconName)
-                .resizable()
-                .frame(width: iconsSize, height: iconsSize, alignment: .leading)
-            Spacer()
-            Text(text)
-                .font(.system(size: fontSize))
-                .foregroundColor(Color("FontColor"))
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
+            HStack(alignment: .center, spacing: rowSpacing) {
+                Image(iconName)
+                    .resizable()
+                    .frame(width: iconsSize, height: iconsSize, alignment: .leading)
+                Spacer()
+                Text(text)
+                    .font(.system(size: fontSize))
+                    .foregroundColor(Color("FontColor"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
     }
 }

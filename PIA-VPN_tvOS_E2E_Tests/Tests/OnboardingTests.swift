@@ -7,11 +7,11 @@
 //
 import Nimble
 
-class OnboardingTests: BaseTest {
+class OnboardingTests:BaseTest {
     override class func spec() {
-        shouldLogIn = false
+        shouldLogIn = false 
         super.spec()
-
+        
         describe("onboarding tests") {
             context("vpn profile installation permission") {
                 it("should display the home screen after allowing vpn profile installation") {

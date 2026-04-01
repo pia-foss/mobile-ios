@@ -5,11 +5,11 @@ extension Notification.Name {
 }
 
 extension UIWindow {
-    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             NotificationCenter
                 .default
                 .post(name: .debugShakeDetected, object: nil)
         }
-    }
+     }
 }

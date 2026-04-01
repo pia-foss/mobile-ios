@@ -13,19 +13,17 @@ class VpnConnectionFactory {
     static var makeVpnConnectionUseCase: VpnConnectionUseCaseType = {
         return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider, vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }()
-
+    
     static func makeServerProvider() -> ServerProviderType {
-        guard
-            let defaultServerProvider: DefaultServerProvider =
-                Client.providers.serverProvider as? DefaultServerProvider
-        else {
+        guard let defaultServerProvider: DefaultServerProvider =
+                Client.providers.serverProvider as? DefaultServerProvider else {
             fatalError("Incorrect server provider type")
         }
-
+        
         return defaultServerProvider
-
+        
     }
-
+    
     private static var isSimulator: Bool {
         #if targetEnvironment(simulator)
             return true
@@ -33,17 +31,17 @@ class VpnConnectionFactory {
             return false
         #endif
     }
-
+    
     static var makeVpnProvider: VPNStatusProviderType = {
         if isSimulator {
             return MockVPNProvider()
         } else {
-            guard let vpnProvider = Client.providers.vpnProvider as? VPNStatusProviderType else {
+            guard let vpnProvider =  Client.providers.vpnProvider as? VPNStatusProviderType else {
                 fatalError("Incorrect VPNProvider type")
             }
-
+            
             return vpnProvider
         }
-
+        
     }()
 }

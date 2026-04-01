@@ -20,9 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import UIKit
 import PIALibrary
 import PIALocalizations
-import UIKit
 
 private let log = PIALogger.logger(for: ModalNavigationSegue.self)
 
@@ -43,10 +43,9 @@ final class ModalNavigationSegue: UIStoryboardSegue {
         modal.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.close
 
         let nav = UINavigationController(rootViewController: modal)
-        Theme.current.applyCustomNavigationBar(
-            nav.navigationBar,
-            withTintColor: nil,
-            andBarTintColors: nil)
+        Theme.current.applyCustomNavigationBar(nav.navigationBar,
+                                               withTintColor: nil,
+                                               andBarTintColors: nil)
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             nav.modalPresentationStyle = .formSheet
@@ -56,10 +55,9 @@ final class ModalNavigationSegue: UIStoryboardSegue {
         }
 
         if let coordinator = source.transitionCoordinator {
-            coordinator.animate(
-                alongsideTransition: { (context) in
-                    self.source.present(nav, animated: true, completion: nil)
-                }, completion: nil)
+            coordinator.animate(alongsideTransition: { (context) in
+                self.source.present(nav, animated: true, completion: nil)
+            }, completion: nil)
         } else {
             source.present(nav, animated: true, completion: nil)
         }

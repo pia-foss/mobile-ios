@@ -6,19 +6,20 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Combine
 import Foundation
-
+import Combine
 @testable import PIA_VPN_tvOS
 
+
 class OptimalLocationUseCaseMock: OptimalLocationUseCaseType {
-
+    
     var optimalLocation: ServerType = ServerMock()
-
+    
     var targetLocationForOptimalLocation: CurrentValueSubject<ServerType?, Never> = CurrentValueSubject(nil)
-
+    
     func getTargetLocaionForOptimalLocation() -> AnyPublisher<ServerType?, Never> {
         return targetLocationForOptimalLocation.eraseToAnyPublisher()
     }
-
+    
+    
 }

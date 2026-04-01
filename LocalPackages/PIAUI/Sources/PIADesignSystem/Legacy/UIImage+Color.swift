@@ -24,7 +24,7 @@ import UIKit
 
 /// Extension of the uiimage class, for simple helper methods.
 public extension UIImage {
-
+        
     /// Method to create an image from a colour
     /// - Parameter color: The colour to convert to image
     /// - Returns: The image that is a colour

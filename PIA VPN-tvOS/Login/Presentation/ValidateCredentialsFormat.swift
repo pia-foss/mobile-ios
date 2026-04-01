@@ -16,10 +16,10 @@ class ValidateCredentialsFormat: ValidateCredentialsFormatType {
     func callAsFunction(username: String, password: String) -> Result<Void, LoginError> {
         let usernameText = username.trimmingCharacters(in: .whitespacesAndNewlines)
         let passwordText = password.trimmingCharacters(in: .whitespacesAndNewlines)
-
+        
         guard !usernameText.isEmpty else { return .failure(.usernameWrongFormat) }
         guard !passwordText.isEmpty else { return .failure(.passwordWrongFormat) }
-
+        
         return .success(())
     }
 }

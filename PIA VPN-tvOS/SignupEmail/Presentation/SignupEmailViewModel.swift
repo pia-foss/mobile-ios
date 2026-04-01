@@ -14,17 +14,17 @@ class SignupEmailViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var shouldShowErrorMessage = false
     var errorMessage: String?
-
+    
     private let signupUseCase: SignupUseCaseType
     private let transaction: InAppTransaction?
     private let onSuccessAction: (UserAccount) -> Void
-
+    
     init(signupUseCase: SignupUseCaseType, transaction: InAppTransaction?, onSuccessAction: @escaping (UserAccount) -> Void) {
         self.signupUseCase = signupUseCase
         self.transaction = transaction
         self.onSuccessAction = onSuccessAction
     }
-
+    
     func signup(email: String) {
         let cleanedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -34,7 +34,7 @@ class SignupEmailViewModel: ObservableObject {
             handleError(error: error)
             return
         }
-
+        
         isLoading = true
         Task {
             do {
@@ -56,7 +56,7 @@ class SignupEmailViewModel: ObservableObject {
         errorMessage = error.errorMessage
         shouldShowErrorMessage = true
     }
-
+    
     private func handleError(error: Error) {
         errorMessage = L10n.Tvos.Signup.Email.Error.Message.generic
         shouldShowErrorMessage = true

@@ -29,10 +29,10 @@ public struct RenewRequest {
 
     /// The purchased transaction.
     public let transaction: InAppTransaction?
-
+    
     /// A map of objects attached to the signup request for marketing purposes.
     public let marketing: [String: Any]?
-
+    
     /// :nodoc:
     public init(transaction: InAppTransaction?, marketing: [String: Any]? = nil) {
         self.transaction = transaction

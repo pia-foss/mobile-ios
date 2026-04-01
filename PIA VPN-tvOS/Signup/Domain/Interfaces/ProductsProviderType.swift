@@ -10,5 +10,5 @@ import Foundation
 import PIALibrary
 
 protocol ProductsProviderType {
-    func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?)
+    func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?)
 }

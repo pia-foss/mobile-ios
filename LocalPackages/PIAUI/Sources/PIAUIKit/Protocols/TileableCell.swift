@@ -21,17 +21,17 @@
 //
 
 import Foundation
-import PIALibrary
 import UIKit
+import PIALibrary
 
 public protocol EditableTileCell {
-
+    
     func setupCellForStatus(_ status: TileStatus)
-
+    
 }
 
 public protocol DetailedTileCell: EditableTileCell {
-
+    
     func hasDetailView() -> Bool
     func segueIdentifier() -> String?
     func highlightCell()
@@ -40,19 +40,19 @@ public protocol DetailedTileCell: EditableTileCell {
 }
 
 public protocol TileableCell: DetailedTileCell {
-
+    
     associatedtype Entity
     var tileType: AvailableTiles { get }
-
+    
     var accessoryImageRight: UIImageView! { get set }
-    var accessoryButtonLeft: UIButton! { get set }
-    var tileLeftConstraint: NSLayoutConstraint! { get set }
+    var accessoryButtonLeft: UIButton!  { get set }
+    var tileLeftConstraint: NSLayoutConstraint!  { get set }
     var tileRightConstraint: NSLayoutConstraint! { get set }
 
 }
 
 public extension TileableCell where Entity: Tileable {
-
+    
     var leftConstraintValue: CGFloat {
         return 34
     }
@@ -60,19 +60,19 @@ public extension TileableCell where Entity: Tileable {
     var rightConstraintValue: CGFloat {
         return 40
     }
-
+    
     func hasDetailView() -> Bool {
         return false
     }
-
+    
     func segueIdentifier() -> String? {
         return nil
     }
 
     func highlightCell() {
     }
-
+    
     func unhighlightCell() {
     }
-
+    
 }

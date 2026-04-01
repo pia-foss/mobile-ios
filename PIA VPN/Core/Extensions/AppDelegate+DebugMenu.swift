@@ -1,15 +1,15 @@
 import Combine
-import PIADebugMenu
 import SwiftUI
+import PIADebugMenu
 
 extension AppDelegate {
     func setupDebugMenuObserver() {
         #if DEVELOPMENT || STAGING
-            addDebugMenuObserver()
+        addDebugMenuObserver()
         #else
-            if TestFlightDetector.shared.isTestFlight {
-                addDebugMenuObserver()
-            }
+        if TestFlightDetector.shared.isTestFlight {
+            addDebugMenuObserver()
+        }
         #endif
     }
 
@@ -35,10 +35,9 @@ extension AppDelegate {
         }
 
         let navVC = UINavigationController()
-        let hostingVC = UIHostingController(
-            rootView: DebugMenuView(onDismiss: { [weak navVC] in
-                navVC?.dismiss(animated: true)
-            }))
+        let hostingVC = UIHostingController(rootView: DebugMenuView(onDismiss: { [weak navVC] in
+            navVC?.dismiss(animated: true)
+        }))
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()

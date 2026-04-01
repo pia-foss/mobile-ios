@@ -9,34 +9,34 @@
 import XCTest
 
 extension XCUIApplication {
-    var privacyHeader: XCUIElement { staticText(with: privacyFeaturesString) }
-    var vpnKillSwitch: XCUIElement { switches(with: vpnKillSwitchString) }
-    var safariContentBlockerTitleString: String { getString(key: "settings.content_blocker.title", comment: "Safari Content Blocker state") }
-    var safariContentBlockerSwitch: XCUIElement { switches(with: safariContentBlockerTitleString) }
-    var blockerRefreshTitleString: String { getString(key: "settings.content_blocker.refresh.title", comment: "Refresh block list") }
-    var refreshBlockListButton: XCUIElement { staticText(with: blockerRefreshTitleString) }
-
+    var privacyHeader: XCUIElement{staticText(with: privacyFeaturesString)}
+    var vpnKillSwitch: XCUIElement {switches(with: vpnKillSwitchString)}
+    var safariContentBlockerTitleString: String {getString(key: "settings.content_blocker.title", comment: "Safari Content Blocker state")}
+    var safariContentBlockerSwitch: XCUIElement {switches(with: safariContentBlockerTitleString)}
+    var blockerRefreshTitleString: String {getString(key: "settings.content_blocker.refresh.title", comment: "Refresh block list")}
+    var refreshBlockListButton: XCUIElement {staticText(with: blockerRefreshTitleString)}
+    
     func navigateToPrivacySettings() {
         navigateToSettings()
         privacySettingsButton.waitForElementToAppear()
         privacySettingsButton.tap()
         XCTAssertTrue(privacyHeader.waitForElementToAppear())
     }
-
-    func enableVPNKillSwitch() {
+    
+    func enableVPNKillSwitch(){
         if ((vpnKillSwitch.value as! String) == "1") {
             return
         }
         vpnKillSwitch.tap()
     }
-
-    func disableVPNKillSwitch() {
+    
+    func disableVPNKillSwitch(){
         if ((vpnKillSwitch.value as! String) == "0") {
             return
         }
         vpnKillSwitch.tap()
-
-        if (button(with: "CLOSE").exists) {
+        
+        if(button(with: "CLOSE").exists) {
             button(with: "CLOSE").tap()
         }
     }

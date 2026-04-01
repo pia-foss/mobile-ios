@@ -25,14 +25,14 @@ import LocalAuthentication
 
 class SensitiveOperation {
     private let context: LAContext
-
+    
     var canPerformInSensitiveContext: Bool
-
+    
     init() {
         context = LAContext()
         canPerformInSensitiveContext = context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
     }
-
+    
     func perform(withReason reason: String, completionHandler: @escaping () -> Void) {
         guard canPerformInSensitiveContext else {
             completionHandler()
@@ -47,7 +47,7 @@ class SensitiveOperation {
             }
         }
     }
-
+        
     static func perform(withReason reason: String, completionHandler: @escaping () -> Void) {
         SensitiveOperation().perform(withReason: reason, completionHandler: completionHandler)
     }

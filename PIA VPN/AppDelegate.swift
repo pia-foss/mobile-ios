@@ -21,37 +21,37 @@
 //
 
 import Combine
-import NetworkExtension
-import PIALibrary
-import PIALocalizations
 import UIKit
+import PIALibrary
+import NetworkExtension
+import PIALocalizations
 
 private let log = PIALogger.logger(for: AppDelegate.self)
 
 @UIApplicationMain
 class AppDelegate: NSObject, UIApplicationDelegate {
-
+    
     private enum ShortcutItem: String {
         case connect
 
         case disconnect
-
+        
         case selectRegion
     }
-
+    
     private let defaultMilliseconds = 200
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
-    private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    private (set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
     var cancellables = Set<AnyCancellable>()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
         AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
 
         Bootstrapper.shared.bootstrap()
@@ -65,7 +65,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         return true
     }
-
+    
     private func instantiateLiveActivityManagerIfNeeded() {
         if #available(iOS 16.2, *) {
             // Only instantiates the LiveActivities if the Feature Flag for it is enabled
@@ -73,7 +73,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 liveActivityManager = nil
                 return
             }
-
+            
             liveActivityManager = PIAConnectionLiveActivityManager.shared
         }
     }
@@ -83,9 +83,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         liveActivityManager?.endLiveActivities()
     }
-
+    
     // MARK: Orientations
-
+    
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard UserInterface.isPhone else {
             return .all
@@ -99,7 +99,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             return .all
         }
     }
-
+    
     func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
         if (rootViewController == nil) { return nil }
         if (rootViewController.isKind(of: UINavigationController.self)) {
@@ -107,7 +107,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         return rootViewController
     }
-
+    
     // MARK: Notifications registration
 
     func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
@@ -124,10 +124,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             L10n.Notifications.Disabled.message
         )
         alert.addActionWithTitle(L10n.Notifications.Disabled.settings) {
-            application.open(
-                URL(string: UIApplication.openSettingsURLString)!,
-                options: [:],
-                completionHandler: nil)
+            application.open(URL(string: UIApplication.openSettingsURLString)!,
+                             options: [:],
+                             completionHandler: nil)
         }
         alert.addCancelAction(L10n.Global.ok)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -139,9 +138,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         log.debug("Opened app from URL: \(url)")
-
+        
         if url.absoluteString.starts(with: AppConstants.MagicLink.url) {
 
             log.debug("Trying to login using magic link")
@@ -156,7 +155,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 if let getStartedViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? GetStartedViewController {
                     getStartedViewController.navigateToLoginView()
                     getStartedViewController.showLoadingAnimation()
-                    Macros.dispatch(after: .milliseconds(1000)) {  //TODO: Improve this, we are giving some time to push the view
+                    Macros.dispatch(after: .milliseconds(1000)) { //TODO: Improve this, we are giving some time to push the view
                         let token = url.absoluteString[AppConstants.MagicLink.url.count...]
                         Client.providers.accountProvider.login(with: token) { (user, error) in
                             var userInfo: [NotificationKey: Any]? = nil
@@ -179,17 +178,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         } else if url.absoluteString.starts(with: AppConstants.QRSignin.url) {
             let token = url.absoluteString[AppConstants.QRSignin.url.count...]
             Client.configuration.tvOSBindToken = token
-
+            
             if let dashboardViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? DashboardViewController {
                 if let apiToken = Client.providers.accountProvider.apiToken,
-                    let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token)
-                {
+                    let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token) {
                     viewController.modalPresentationStyle = .fullScreen
                     dashboardViewController.present(viewController, animated: true)
                 }
             }
         }
-
+        
         guard let host = url.host else {
             return false
         }
@@ -199,7 +197,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
             // in case it's too early for notification delivery (vc not loaded)
             TransientState.shouldDisplayRegionPicker = true
-
+      
         case VPNStatus.disconnected.rawValue:
             if !Client.providers.vpnProvider.isVPNConnected {
                 connectAfter(milliseconds: defaultMilliseconds)
@@ -211,7 +209,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         return true
     }
-
+    
     // MARK: Shortcut items
 
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -234,13 +232,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
         // Remove the Non compliant Wifi local notification as the app is in foreground now
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
-
+        
         instantiateLiveActivityManagerIfNeeded()
-
+        
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
-
+        
         accountInformationVerifier.verifyAccountInformationAvailabity(after: AccountInformationAvailabilityVerifier.defaultDeadlineInSeconds, completion: nil)
-
+        
         Client.providers.accountProvider.featureFlags { _ in
             if Client.configuration.featureFlags[.forceUpdate] {
                 NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
@@ -258,12 +256,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let disconnecting = (Client.providers.vpnProvider.vpnStatus == .disconnecting)
         let isNotDisconnected = (connected || connecting) && !disconnecting
         var itemAsset: ImageAsset!
-
+        
         let connectionStatusType = (isNotDisconnected ? ShortcutItem.disconnect : ShortcutItem.connect)
         let connectionStatusString = (isNotDisconnected ? L10n.Shortcuts.disconnect : L10n.Shortcuts.connect)
-
+        
         var items: [UIApplicationShortcutItem] = []
-
+        
         itemAsset = (isNotDisconnected ? Asset.Images.icon3dtDisconnect : Asset.Images.icon3dtConnect)
         let connectionStatusIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
         let connect = UIApplicationShortcutItem(
@@ -274,7 +272,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             userInfo: nil
         )
         items.append(connect)
-
+        
         itemAsset = Asset.Images.icon3dtSelectRegion
         let selectRegionIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
         let selectRegion = UIApplicationShortcutItem(
@@ -285,10 +283,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             userInfo: nil
         )
         items.append(selectRegion)
-
+        
         application.shortcutItems = items
     }
-
+    
     private func handleShortcutItem(_ item: UIApplicationShortcutItem) {
         guard let type = ShortcutItem(rawValue: item.type) else {
             return
@@ -311,7 +309,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
                 // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
                 dismissLeakProtectionAlert()
-
+                
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
                 disconnectAfter(milliseconds: defaultMilliseconds)
@@ -327,7 +325,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             mainVC.selectRegion(animated: true)
         }
     }
-
+    
     //MARK: Siri Shortcuts
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == AppConstants.SiriShortcuts.shortcutConnect {
@@ -340,19 +338,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             guard AppPreferences.shared.useDisconnectSiriShortcuts, !TrustedNetworkUtils.isTrustedNetwork else {
                 return false
             }
-
+            
             Client.configuration.disconnectedManually = true
             disconnectAfter(milliseconds: defaultMilliseconds)
         }
         return true
     }
-
+    
     private func connectAfter(milliseconds: Int) {
         Macros.dispatch(after: .milliseconds(milliseconds)) {
             Client.providers.vpnProvider.connect(nil)
         }
     }
-
+    
     private func disconnectAfter(milliseconds: Int) {
         Macros.dispatch(after: .milliseconds(milliseconds)) {
             Client.providers.vpnProvider.disconnect(nil)
@@ -367,19 +365,20 @@ extension AppDelegate {
     class func delegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-
+    
     class func getRootViewController() -> UIViewController? {
         return AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController)
     }
-
+    
 }
 
-extension AppDelegate {
 
+extension AppDelegate {
+    
     private func dismissLeakProtectionAlert() {
         if let presentedAlert = window?.rootViewController?.presentedViewController as? UIAlertController {
             let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-
+            
             if presentedAlert.title == leakProtectionAlertTitle {
                 presentedAlert.dismiss(animated: true)
             }

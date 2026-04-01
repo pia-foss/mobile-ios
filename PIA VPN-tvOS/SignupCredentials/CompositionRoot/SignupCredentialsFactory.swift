@@ -10,16 +10,14 @@ import Foundation
 
 class SignupCredentialsFactory {
     static var userAccount: UserAccount?
-
+    
     static func makeSignupCredentialsView() -> SignupCredentialsView {
         guard let credentials = userAccount?.credentials else {
             fatalError("Can't be created without user credentials")
         }
-
-        return SignupCredentialsView(
-            credentials: credentials,
-            action: {
-                NotificationCenter.default.post(name: .PIAAccountDidLogin, object: nil)
-            })
+        
+        return SignupCredentialsView(credentials: credentials, action: {
+            NotificationCenter.default.post(name: .PIAAccountDidLogin, object: nil)
+        })
     }
 }

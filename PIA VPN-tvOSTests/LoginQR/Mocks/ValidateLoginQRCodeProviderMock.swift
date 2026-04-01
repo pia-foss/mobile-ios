@@ -7,22 +7,21 @@
 //
 
 import Foundation
-
 @testable import PIA_VPN_tvOS
 
 class ValidateLoginQRCodeProviderMock: ValidateLoginQRCodeProviderType {
     private let result: Result<String, LoginQRCodeError>
-
+    
     init(result: Result<String, LoginQRCodeError>) {
         self.result = result
     }
-
+    
     func validateLoginQRCodeToken(_ qrCodeToken: LoginQRCode) async throws -> String {
         switch result {
-        case .success(let user):
-            return user
-        case .failure(let error):
-            throw error
+            case .success(let user):
+                return user
+            case .failure(let error):
+                throw error
         }
     }
 }

@@ -20,10 +20,10 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIALibrary
-import PIAUIKit
-import SwiftUI
 import UIKit
+import PIALibrary
+import SwiftUI
+import PIAUIKit
 
 class FeedbackTile: UIView, Tileable {
     var view: UIView!
@@ -87,5 +87,5 @@ class FeedbackTile: UIView, Tileable {
 
     private func statusUpdated() {
     }
-
+    
 }
