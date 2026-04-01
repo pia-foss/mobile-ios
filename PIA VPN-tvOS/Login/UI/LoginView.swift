@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 struct LoginView: View {
     @State private var username: String = ""
@@ -27,7 +28,7 @@ struct LoginView: View {
             } else {
                 HStack {
                     VStack(alignment: .leading, spacing: 60) {
-                        Image.onboarding_pia_brand
+                        Asset.piaBrand.swiftUIImage
                         Text(L10n.Tvos.Login.title)
                             .font(.system(size: 57))
                             .bold()
@@ -40,7 +41,7 @@ struct LoginView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(EdgeInsets(top: 80, leading: 30, bottom: 0, trailing: 0))
                         
-                    Image.onboarding_signin_world
+                    Asset.signinWorld.swiftUIImage
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing)
                 }.alert(L10n.Global.error, isPresented: $viewModel.shouldShowErrorMessage, actions: {

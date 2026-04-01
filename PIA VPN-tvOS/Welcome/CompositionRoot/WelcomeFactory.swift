@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import PIALocalizations
+import PIAAssetsTV
 
 class WelcomeFactory {
     static func makeWelcomeView() -> OnboardingComponentView {
@@ -31,9 +32,9 @@ class WelcomeFactory {
     }
     
     private static func makeWelcomeViewStyle() -> OnboardingComponentStytle {
-        OnboardingComponentStytle(headerImage: Image.onboarding_pia_brand,
+        OnboardingComponentStytle(headerImage: Asset.piaBrand.swiftUIImage,
                                   headerSpacing: 60,
-                                  backgroundImage: Image.onboarding_signin_world, 
+                                  backgroundImage: Asset.signinWorld.swiftUIImage, 
                                   buttonsEdgeInsets: EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
     }
 }

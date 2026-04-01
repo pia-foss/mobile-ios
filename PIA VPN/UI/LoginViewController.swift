@@ -26,6 +26,7 @@ import PIADesignSystem
 import PIAUIKit
 import class account.AccountRequestError
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: LoginViewController.self)
 

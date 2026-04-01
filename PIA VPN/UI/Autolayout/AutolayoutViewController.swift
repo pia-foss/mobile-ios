@@ -25,6 +25,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIASwiftUI
+import PIAAssetsMobile
 
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {

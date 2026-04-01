@@ -25,6 +25,7 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0

@@ -26,6 +26,7 @@ import PIALibrary
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class QuickConnectTile: UIView, Tileable {
 
@@ -153,12 +154,14 @@ class QuickConnectTile: UIView, Tileable {
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
                     if imageView.tag == 0 {
+                        imageView.image = Asset.Images.Piax.Global.favoriteGreen.image
                         if let dipToken = server.dipToken {
                             imageView.isHidden = !favoriteServers.contains(server.identifier+dipToken)
                         } else {
                             imageView.isHidden = !favoriteServers.contains(server.identifier)
                         }
                     } else {
+                        imageView.image = Asset.Images.dipBadgeDark.image
                         imageView.isHidden = server.dipToken == nil
                     }
                     if status != .normal { //only when edit mode

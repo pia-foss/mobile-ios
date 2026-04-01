@@ -24,6 +24,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 extension Server: CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String? {
@@ -59,8 +60,7 @@ extension Server: CustomStringConvertible {
 
 extension UIImageView {
     func setImage(fromServer server: Server) {
-        let imageName = "flags/flag-\(server.country.lowercased())"
-        guard let image = UIImage(named: imageName) else {
+        guard let image = Asset.Images.Flags.flag(forCountry: server.country) else {
             return
         }
         self.image = image.withRenderingMode(.alwaysOriginal)
@@ -69,8 +69,7 @@ extension UIImageView {
 
 extension UIButton {
     func setImage(fromServer server: Server) {
-        let imageName = "flags/flag-\(server.country.lowercased())"
-        guard let image = UIImage(named: imageName) else {
+        guard let image = Asset.Images.Flags.flag(forCountry: server.country) else {
             return
         }
         let original = image.withRenderingMode(.alwaysOriginal)

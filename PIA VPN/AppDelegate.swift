@@ -25,6 +25,7 @@ import UIKit
 import PIALibrary
 import NetworkExtension
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: AppDelegate.self)
 

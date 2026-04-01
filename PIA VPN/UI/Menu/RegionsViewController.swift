@@ -26,6 +26,7 @@ import DZNEmptyDataSet
 import PopupDialog
 import GradientProgressBar
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: AutolayoutViewController.self)
 

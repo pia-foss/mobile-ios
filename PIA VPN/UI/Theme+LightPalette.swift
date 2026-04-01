@@ -23,6 +23,7 @@
 import Foundation
 import UIKit
 import PIALibrary
+import PIAAssetsMobile
 
 extension Theme.Palette {
 

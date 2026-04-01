@@ -1,5 +1,6 @@
 
 import SwiftUI
+import PIAAssetsWidget
 
 internal struct PIACircleIcon: View {
     
@@ -16,7 +17,7 @@ internal struct PIACircleIcon: View {
             Circle()
                 .fill(Color("BorderColor"))
                 .frame(width: size)
-            Image("ios-widget")
+            Asset.iosWidget.swiftUIImage
                 .resizable()
                 .frame(width: iconWidth, height: (iconWidth + 3))
                 .padding()

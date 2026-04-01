@@ -22,6 +22,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIAUIKit
+import PIAAssetsMobile
 
 class MessagesTile: UIView, Tileable  {
     
@@ -59,6 +60,7 @@ class MessagesTile: UIView, Tileable  {
 
         viewShouldRestyle()
         self.alertIcon.image = Asset.Images.iconAlert.image.withRenderingMode(.alwaysTemplate)
+        self.dismissButton.setImage(Asset.Images.iconClose.image, for: .normal)
     
         if let message = MessagesManager.shared.availableMessage(), let _ = message.linkMessage {
             let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))

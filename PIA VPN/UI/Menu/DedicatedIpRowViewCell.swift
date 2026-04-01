@@ -23,10 +23,12 @@ import UIKit
 import PIALibrary
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class DedicatedIpRowViewCell: UITableViewCell, Restylable {
 
     @IBOutlet private weak var imvFlag: UIImageView!
+    @IBOutlet private weak var dipBadgeImageView: UIImageView!
 
     @IBOutlet private weak var labelRegion: UILabel!
 
@@ -41,6 +43,7 @@ class DedicatedIpRowViewCell: UITableViewCell, Restylable {
 
         imvFlag.setImage(fromServer: server)
         imvFlag.accessibilityLabel = L10n.Dedicated.Ip.Country.Flag.accessibility(server.name)
+        dipBadgeImageView.image = Asset.Images.dipBadgeDark.image
         labelRegion.text = server.name
         
         if let pingAddress = server.bestAddress() {

@@ -26,6 +26,7 @@ import UIKit
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 class FavoriteServersTile: UIView, Tileable {
     
@@ -128,6 +129,7 @@ class FavoriteServersTile: UIView, Tileable {
                     button.server = server
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
+                    imageView.image = Asset.Images.dipBadgeDark.image
                     imageView.isHidden = server.dipToken == nil
                     if status != .normal { //only when edit mode
                         imageView.isHidden = imageView.tag == 0 ? true : server.dipToken == nil

@@ -26,6 +26,7 @@ import TunnelKitCore
 import TunnelKitOpenVPN
 import PIAWireguard
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: NetworkSettingsViewController.self)
 

@@ -26,6 +26,7 @@ import PIADesignSystem
 import PIAUIKit
 import Combine
 import PIALocalizations
+import PIAAssetsMobile
 
 class IPTile: UIView, Tileable  {
     
@@ -40,6 +41,7 @@ class IPTile: UIView, Tileable  {
     @IBOutlet private weak var localIpValue: UILabel!
     @IBOutlet private weak var vpnIpTitle: UILabel!
     @IBOutlet private weak var vpnIpValue: UILabel!
+    @IBOutlet private weak var triangleImageView: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,6 +78,7 @@ class IPTile: UIView, Tileable  {
             }
             .store(in: &cancellables)
 
+        triangleImageView.image = Asset.Images.Piax.Tiles.ipTriangle.image
         viewShouldRestyle()
         self.accessibilityIdentifier = "IPTile"
         self.localIpTitle.text = "IP"

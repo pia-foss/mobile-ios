@@ -15,7 +15,8 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN Development",
       output_directory: "fastlane/test_output",
-      result_bundle: true
+      result_bundle: true,
+      destination: "platform=iOS Simulator,name=iPhone 17 Pro"
     )
   end
 
@@ -23,7 +24,8 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN-tvOS Development",
       output_directory: "fastlane/test_output",
-      result_bundle: true
+      result_bundle: true,
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 
@@ -31,7 +33,7 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN Development",
       testplan: "PIA-VPN-e2e-simulator",
-      devices: ["iPhone 16"],
+      destination: "platform=iOS Simulator,name=iPhone 17 Pro",
       prelaunch_simulator: true,
       test_without_building: true
     )
@@ -43,7 +45,7 @@ platform :ios do
       testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
-      device: "Apple TV"
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 
@@ -53,7 +55,7 @@ platform :ios do
       testplan: "PIA VPN-tvOS snapshot",
       test_without_building: true,
       prelaunch_simulator: true,
-      device: "Apple TV"
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end
 

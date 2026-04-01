@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 public class ShareDataInformationViewController: AutolayoutViewController {
 
@@ -19,7 +20,8 @@ public class ShareDataInformationViewController: AutolayoutViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        closeButton.setImage(Asset.Images.iconClose.image, for: .normal)
         self.labelInformation.text = L10n.Signup.Share.Data.ReadMore.Text.description
     }
 

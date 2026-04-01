@@ -29,6 +29,7 @@ import ActivityKit
 import PIADesignSystem
 import PIAUIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: DashboardViewController.self)
 

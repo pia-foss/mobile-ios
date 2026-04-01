@@ -23,6 +23,7 @@ import Foundation
 import PIALibrary
 import UIKit
 import PIALocalizations
+import PIAAssetsMobile
 
 public enum SettingOptions: Int, CaseIterable {
     case general
