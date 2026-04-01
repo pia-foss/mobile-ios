@@ -8,7 +8,7 @@ platform :ios do
   key_content = ENV['APP_STORE_CONNECT_KEY']
 
   # Claude API key for translations
-  anthropic_api_key = ENV['ANTHROPIC_API_KEY_TRANSLATIONS']
+  anthropic_api_key = ENV['ANTHROPIC_API_KEY']
   anthropic_model = "claude-sonnet-4-5"
 
   lane :iOStests do
@@ -308,7 +308,7 @@ platform :ios do
     metadata_base = platform == "tvos" ? "../fastlane/metadata/tvos" : "../fastlane/metadata/ios"
 
     if anthropic_api_key.nil? || anthropic_api_key.empty?
-      UI.user_error!("ANTHROPIC_API_KEY_TRANSLATIONS environment variable not set. Please set it before running this lane.")
+      UI.user_error!("ANTHROPIC_API_KEY environment variable not set. Please set it before running this lane.")
     end
 
     # Read the English release notes
