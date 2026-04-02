@@ -34,23 +34,19 @@ public extension Notification.Name {
 final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
     static let shared = ConnectivityDaemon()
     
-    private(set) var hasEnabledUpdates: Bool
-    
+    private(set) var hasEnabledUpdates: Bool = false
+
     private let reachability = try! Reachability(hostname: "8.8.8.8")
     
-    private var isCheckingConnectivity: Bool
-    
-    private var failedConnectivityAttempts: Int
-    
-    private var wasConnected: Bool
+    private var isCheckingConnectivity: Mutex<Bool> = .init(false)
+    private var checkingConnectivityTask: Task<Void, Never>?
 
-    private init() {
-        hasEnabledUpdates = false
-        isCheckingConnectivity = false
-        failedConnectivityAttempts = 0
-        wasConnected = false
-    }
-    
+    private var failedConnectivityAttempts: Int = 0
+
+    private var wasConnected: Bool = false
+
+    private init() {}
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -105,11 +101,12 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         log.debug("Reachability notifier started")
     }
 
-    @objc private func checkConnectivityOrRetry() {
+    private func checkConnectivityOrRetry() {
         guard hasEnabledUpdates else {
             return
         }
-        guard !isCheckingConnectivity else {
+        guard !isCheckingConnectivity.withLock(\.self) else {
+            log.debug("Skipped \(#function), is already checking...")
             return
         }
 
@@ -121,9 +118,10 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
 
-        isCheckingConnectivity = true
-        accessedWebServices.taskForConnectivityCheck { (connectivity, error) in
-            self.isCheckingConnectivity = false
+        isCheckingConnectivity.withLock { $0 = true }
+        accessedWebServices.taskForConnectivityCheck { [weak self] (connectivity, error) in
+            guard let self else { return }
+            self.isCheckingConnectivity.withLock { $0 = false }
 
             guard let connectivity = connectivity else {
                 self.failedConnectivityAttempts += 1
@@ -205,11 +203,9 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
-        if hasEnabledUpdates {
-            let delay = accessedConfiguration.connectivityVPNLag
-            Macros.dispatch(after: .milliseconds(delay)) {
-                self.checkConnectivityOrRetry()
-            }
+        let delay = accessedConfiguration.connectivityVPNLag
+        Macros.dispatch(after: .milliseconds(delay)) {
+            self.checkConnectivityOrRetry()
         }
     }
     
@@ -217,11 +213,9 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         accessedDatabase.transient.vpnIP = nil
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
-        if hasEnabledUpdates {
-            let delay = accessedConfiguration.connectivityVPNLag
-            Macros.dispatch(after: .milliseconds(delay)) {
-                self.checkConnectivityOrRetry()
-            }
+        let delay = accessedConfiguration.connectivityVPNLag
+        Macros.dispatch(after: .milliseconds(delay)) {
+            self.checkConnectivityOrRetry()
         }
     }
     
