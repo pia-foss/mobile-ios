@@ -133,8 +133,8 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     }
     
     /// :nodoc:
-    public func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
-        callback?(nil, ClientError.unsupported)
+    public func submitDebugReport() async throws -> String {
+        throw ClientError.unsupported
     }
     
     /// :nodoc:
