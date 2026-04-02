@@ -272,10 +272,7 @@ public struct DebugMenuView: View {
                     }
 
                     do {
-                        let reportId = try await Client.submitDebugReport(
-                            includePersistedData: true,
-                            logs: logSnapshot
-                        )
+                        let reportId = try await Client.submitDebugReport()
                         reportResult = ReportResult(
                             title: "Debug information submitted",
                             message: "Report ID: \(reportId)\nPlease note this ID — support will need it to locate your submission."
