@@ -21,21 +21,13 @@
 //
 
 import Foundation
-import csi
+import PIACSI
 
-class PIACSILogInformationProvider: ICSIProvider {
+struct PIACSILogInformationProvider: CSIDataProvider {
+    var sectionName: String { "application_logs" }
+    var content: String? { getApplicationLogs() }
 
-    var filename: String? { return "application_logs" }
-
-    var isPersistedData: Bool { return false }
-
-    var providerType: ProviderType { return ProviderType.loggingInformation }
-
-    var reportType: ReportType { return ReportType.diagnostic }
-
-    var value: String? { return getApplicationLogs() }
-
-    func getApplicationLogs() -> String {
+    private func getApplicationLogs() -> String {
         let logs = PIALogHandler.logStorage.getAllLogs()
         return logs.isEmpty ? "No logs available" : logs.redactIPs()
     }

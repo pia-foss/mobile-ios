@@ -21,19 +21,11 @@
 //
 
 import Foundation
-import csi
+import PIACSI
 
-class PIACSISubscriptionInformationProvider: ICSIProvider {
-
-    var filename: String? { return "subscription_information" }
-
-    var isPersistedData: Bool { return false }
-
-    var providerType: ProviderType { return ProviderType.applicationInformation }
-
-    var reportType: ReportType { return ReportType.diagnostic }
-
-    var value: String? { return getSubscriptionInformation() }
+struct PIACSISubscriptionInformationProvider: CSIDataProvider {
+    var sectionName: String { "subscription_information" }
+    var content: String? { getSubscriptionInformation() }
 
     private func getSubscriptionInformation() -> String {
         guard let info = Client.providers.accountProvider.currentUser?.info else {
@@ -61,6 +53,7 @@ class PIACSISubscriptionInformationProvider: ICSIProvider {
         } else {
             lines.append("none")
         }
+
         return lines.joined(separator: "\n")
     }
 }
