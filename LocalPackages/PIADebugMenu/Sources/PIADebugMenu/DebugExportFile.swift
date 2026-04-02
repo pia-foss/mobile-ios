@@ -1,7 +1,7 @@
 import CoreTransferable
 import UniformTypeIdentifiers
 
-@available(iOS 16, *)
+@available(iOS 16, tvOS 17, *)
 struct DebugExportFile: Transferable {
     let content: String
     let filename: String

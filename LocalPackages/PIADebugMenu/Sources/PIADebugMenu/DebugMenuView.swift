@@ -10,7 +10,7 @@ struct ReportResult: Identifiable {
     let message: String
 }
 
-@available(iOS 16, *)
+@available(iOS 16, tvOS 17, *)
 public struct DebugMenuView: View {
     private let onDismiss: () -> Void
     @State private var logSnapshot: String = ""
@@ -23,6 +23,91 @@ public struct DebugMenuView: View {
     @State private var isTransactionPickerPresented = false
 
     public var body: some View {
+        mainContent
+            .alert(item: $reportResult) { result in
+                Alert(
+                    title: Text(result.title),
+                    message: Text(result.message),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+            #if os(iOS)
+            .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
+                switch result {
+                case .success(let status):
+                    if status == .success {
+                        reportResult = ReportResult(
+                            title: "Refund Requested",
+                            message: "Your refund request was submitted to the App Store."
+                        )
+                    }
+                case .failure(let error):
+                    reportResult = ReportResult(
+                        title: "Refund Request Failed",
+                        message: error.localizedDescription
+                    )
+                }
+            }
+            .sheet(isPresented: $isTransactionPickerPresented) {
+                List {
+                    Section("Select a transaction to refund") {
+                        ForEach(availableTransactions, id: \.id) { transaction in
+                            Button(transaction.productID) {
+                                isTransactionPickerPresented = false
+                                refundTransactionId = transaction.id
+                                isRefundSheetPresented = true
+                            }
+                        }
+                    }
+                }
+            }
+            #endif
+            .navigationTitle("Debug Menu")
+            .onAppear {
+                logSnapshot = logs
+            }
+            .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
+                logSnapshot = logs
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close", action: onDismiss)
+                }
+
+                #if os(iOS)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(
+                        item: DebugExportFile(
+                            content: buildExportContent(),
+                            filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
+                        ),
+                        preview: SharePreview("Debug Export")
+                    ) {
+                        Text("Export All")
+                    }
+                }
+                #endif
+            }
+            #if os(tvOS)
+            .background(Color.black.ignoresSafeArea())
+            #endif
+    }
+
+    @ViewBuilder
+    private var mainContent: some View {
+        #if os(tvOS)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 40) {
+                appInfoSection
+                accountSection
+                receiptSection
+                logsSection
+                supportSection
+            }
+            .padding(.horizontal, 60)
+            .padding(.vertical, 40)
+        }
+        #else
         List {
             appInfoSection
             accountSection
@@ -31,78 +116,13 @@ public struct DebugMenuView: View {
             subscriptionSection
             supportSection
         }
-        .alert(item: $reportResult) { result in
-            Alert(
-                title: Text(result.title),
-                message: Text(result.message),
-                dismissButton: .default(Text("OK"))
-            )
-        }
-        .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
-            switch result {
-            case .success(let status):
-                if status == .success {
-                    reportResult = ReportResult(
-                        title: "Refund Requested",
-                        message: "Your refund request was submitted to the App Store."
-                    )
-                }
-            case .failure(let error):
-                reportResult = ReportResult(
-                    title: "Refund Request Failed",
-                    message: error.localizedDescription
-                )
-            }
-        }
-        .sheet(isPresented: $isTransactionPickerPresented) {
-            List {
-                Section("Select a transaction to refund") {
-                    ForEach(availableTransactions, id: \.id) { transaction in
-                        Button(transaction.productID) {
-                            isTransactionPickerPresented = false
-                            refundTransactionId = transaction.id
-                            isRefundSheetPresented = true
-                        }
-                    }
-                }
-            }
-        }
-        .onAppear {
-            logSnapshot = logs
-        }
-        .task {
-            while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(5))
-                guard !Task.isCancelled else { break }
-                withAnimation(.spring(duration: 0.35, bounce: 0.1)) {
-                    logSnapshot = logs
-                }
-            }
-        }
-        .navigationTitle("🪲 Debug Menu")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close", action: onDismiss)
-            }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ShareLink(
-                    item: DebugExportFile(
-                        content: buildExportContent(),
-                        filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
-                    ),
-                    preview: SharePreview("Debug Export")
-                ) {
-                    Text("Export All")
-                }
-            }
-        }
+        #endif
     }
 
     // MARK: - Sections
 
     private var appInfoSection: some View {
-        Section("App Info") {
+        DebugSection("App Info") {
             DebugInfoRow(label: "Version", value: appVersion)
             DebugInfoRow(label: "Environment", value: environment)
             DebugInfoRow(label: "Base URL", value: baseUrl)
@@ -110,7 +130,7 @@ public struct DebugMenuView: View {
     }
 
     private var accountSection: some View {
-        Section("Account and Subscription") {
+        DebugSection("Account and Subscription") {
             DebugInfoRow(label: "Username", value: username)
             DebugInfoRow(label: "Plan", value: plan)
             DebugInfoRow(label: "Product ID", value: productId)
@@ -122,9 +142,9 @@ public struct DebugMenuView: View {
     }
 
     private var receiptSection: some View {
-        Section("Payment Receipt") {
+        DebugSection("Payment Receipt") {
             if let base64 = receiptBase64 {
-                let preview = String(base64.prefix(300)) + "…"
+                let preview = String(base64.prefix(300)) + "..."
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Receipt (preview)")
                         .font(.caption)
@@ -133,26 +153,26 @@ public struct DebugMenuView: View {
                         .font(.system(.caption2, design: .monospaced))
                         .foregroundStyle(.primary)
                 }
+                #if os(tvOS)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .focusable()
+                #else
                 .padding(.vertical, 2)
-                HStack {
-                    Button("Copy") {
-                        UIPasteboard.general.string = base64
-                    }
-                    .buttonStyle(.borderless)
+                #endif
 
-                    Spacer()
-
-                    ShareLink(
-                        item: DebugExportFile(
-                            content: base64,
-                            filename: "receipt_\(Int(Date().timeIntervalSince1970)).txt"
-                        ),
-                        preview: SharePreview("Receipt")
-                    ) {
-                        Label("Export", systemImage: "square.and.arrow.up")
-                    }
-                    .buttonStyle(.borderless)
+                #if os(iOS)
+                ShareLink(
+                    item: DebugExportFile(
+                        content: base64,
+                        filename: "receipt_\(Int(Date().timeIntervalSince1970)).txt"
+                    ),
+                    preview: SharePreview("Receipt")
+                ) {
+                    Label("Export", systemImage: "square.and.arrow.up")
                 }
+                #endif
             } else {
                 DebugInfoRow(label: "Receipt", value: "Not available")
             }
@@ -160,52 +180,46 @@ public struct DebugMenuView: View {
     }
 
     private var logsSection: some View {
-        Section("Logs") {
-            let preview = logSnapshot.isEmpty ? "No logs" : String(logSnapshot.suffix(300))
+        DebugSection("Logs") {
+            let preview = logSnapshot.isEmpty ? "No logs" : logSnapshot.components(separatedBy: "\n").reversed().joined(separator: "\n")
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Recent logs")
+                Text("Recent logs (newest on top)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                Text(preview)
-                    .font(.system(.caption2, design: .monospaced))
-                    .foregroundStyle(.primary)
-                    .id(preview)
-                    .transition(.asymmetric(
-                        insertion: .move(edge: .bottom),
-                        removal: .move(edge: .top)
-                    ))
+                ScrollView {
+                    Text(preview)
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(height: 300)
             }
-            .clipped()
+            #if os(tvOS)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .focusable()
+            #else
             .padding(.vertical, 2)
+            #endif
 
-            HStack {
-                Button("Clear", role: .destructive) {
-                    PIALogHandler.logStorage.clear()
-                    withAnimation(.spring(duration: 0.35, bounce: 0.1)) {
-                        logSnapshot = ""
-                    }
-                }
-                .buttonStyle(.borderless)
-
-                Spacer()
-
-                ShareLink(
-                    item: DebugExportFile(
-                        content: logSnapshot,
-                        filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
-                    ),
-                    preview: SharePreview("Logs")
-                ) {
-                    Label("Export", systemImage: "square.and.arrow.up")
-                }
-                .buttonStyle(.borderless)
+            #if os(iOS)
+            ShareLink(
+                item: DebugExportFile(
+                    content: logs,
+                    filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
+                ),
+                preview: SharePreview("Logs")
+            ) {
+                Label("Export", systemImage: "square.and.arrow.up")
             }
+            #endif
         }
     }
 
     private var subscriptionSection: some View {
-        Section("Subscription") {
+        DebugSection("Subscription") {
             Button {
                 isLoadingRefundTransaction = true
                 Task { @MainActor in
@@ -238,19 +252,18 @@ public struct DebugMenuView: View {
                 if isLoadingRefundTransaction {
                     HStack {
                         ProgressView()
-                        Text("Looking up transaction…")
+                        Text("Looking up transaction...")
                     }
                 } else {
                     Text("Test Refund Request")
                 }
             }
             .disabled(isLoadingRefundTransaction)
-            .buttonStyle(.borderless)
         }
     }
 
     private var supportSection: some View {
-        Section("Support") {
+        DebugSection("Support") {
             Button {
                 isSendingReport = true
                 Task { @MainActor in
@@ -278,14 +291,13 @@ public struct DebugMenuView: View {
                 if isSendingReport {
                     HStack {
                         ProgressView()
-                        Text("Sending…")
+                        Text("Sending...")
                     }
                 } else {
-                    Text("Send to Support")
+                    Text("Send to Support (CSI)")
                 }
             }
             .disabled(isSendingReport)
-            .buttonStyle(.borderless)
         }
     }
 
@@ -297,7 +309,7 @@ public struct DebugMenuView: View {
 
 }
 
-@available(iOS 16, *)
+@available(iOS 16, tvOS 17, *)
 #Preview {
     // If preview doesn't work, enable
     // Editor > Canvas > Use Legacy Previews Execution

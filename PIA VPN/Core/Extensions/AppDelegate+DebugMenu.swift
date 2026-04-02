@@ -1,6 +1,7 @@
 import Combine
 import SwiftUI
 import PIADebugMenu
+import PIALibrary
 
 extension AppDelegate {
     func setupDebugMenuObserver() {
