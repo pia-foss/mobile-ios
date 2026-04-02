@@ -973,6 +973,7 @@ final class DashboardViewController: AutolayoutViewController {
         Macros.postNotification(.PIAServerHasBeenUpdated)
         Macros.postNotification(.PIAVPNUsageUpdate)
 
+        Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         switch currentStatus {
         case .connected:
             toggleConnection.isOn = true
@@ -1010,7 +1011,6 @@ final class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
             
         case .connecting:
-            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             toggleConnection.isOn = false
             toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true

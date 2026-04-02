@@ -25,8 +25,8 @@ import PIALibrary
 import PIAUIKit
 import PIALocalizations
 
-class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
-    
+final class IPTileCollectionViewCell: UICollectionViewCell, TileableCell {
+
     var tileType: AvailableTiles = .ip
 
     typealias Entity = IPTile

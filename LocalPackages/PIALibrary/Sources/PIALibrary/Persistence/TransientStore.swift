@@ -22,7 +22,7 @@
 
 import Foundation
 
-protocol TransientStore: class {
+protocol TransientStore: AnyObject {
 
     // MARK: Server
 
@@ -39,7 +39,9 @@ protocol TransientStore: class {
     var isNetworkReachable: Bool { get set }
     
     var isInternetReachable: Bool { get set }
-        
+
+    /// Currently connected VPN IP, if any.
+    /// Implementors should post ``Notification.Name.PIADaemonsDidUpdateConnectivity``
     var vpnIP: String? { get set }
 
     var vpnLog: String { get set }

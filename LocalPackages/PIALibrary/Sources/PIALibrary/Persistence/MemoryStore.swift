@@ -60,10 +60,13 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
     var isNetworkReachable = false
     
     var isInternetReachable = true
-    
-    var publicIP: String?
-    
-    var vpnIP: String?
+
+    var vpnIP: String? {
+        didSet {
+            log.debug("Did set \(#function): \(String(describing: vpnIP))")
+            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
+        }
+    }
 
     var vpnLog: String = ""
 }

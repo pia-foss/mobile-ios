@@ -28,8 +28,10 @@ import Combine
 import PIALocalizations
 import PIAAssetsMobile
 
-class IPTile: UIView, Tileable  {
-    
+private let log = PIALogger.logger(for: IPTile.self)
+
+final class IPTile: UIView, Tileable {
+
     private let emptyIPValue = "---"
     var view: UIView!
     var detailSegueIdentifier: String!
@@ -70,11 +72,8 @@ class IPTile: UIView, Tileable  {
 
         Client.daemons.ipsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] ips in
-                self?.updateIPLabels(
-                    publicIP: ips.publicIP,
-                    vpnIP: ips.vpnIP
-                )
+            .sink { [weak self] (publicIP, vpnIP) in
+                self?.updateIPLabels(publicIP: publicIP, vpnIP: vpnIP)
             }
             .store(in: &cancellables)
 
@@ -97,8 +96,10 @@ class IPTile: UIView, Tileable  {
         Theme.current.applySettingsCellTitle(vpnIpValue, appearance: .dark)
         Theme.current.applyPrincipalBackground(self)
     }
-    
+
+    @MainActor
     private func updateIPLabels(publicIP: String?, vpnIP: String?) {
+        log.debug("Updating IP labels. Public \(String(describing: publicIP)) VPN \(String(describing: vpnIP))")
         self.localIpValue.text = publicIP ?? emptyIPValue
         self.localIpValue.accessibilityLabel = publicIP ?? L10n.Global.empty
         self.vpnIpValue.text = vpnIP ?? self.emptyIPValue

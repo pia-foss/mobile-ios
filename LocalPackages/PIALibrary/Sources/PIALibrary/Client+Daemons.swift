@@ -63,9 +63,11 @@ extension Client {
         public var ipsPublisher: AnyPublisher<(publicIP: String?, vpnIP: String?), Never> {
             NotificationCenter.default
                 .publisher(for: .PIADaemonsDidUpdateConnectivity)
+                .debounce(for: .milliseconds(50), scheduler: DispatchQueue.global(qos: .background))
                 .map { [accessedDatabase] _ in
                     (publicIP: accessedDatabase.plain.publicIP, vpnIP: accessedDatabase.transient.vpnIP)
                 }
+                .removeDuplicates { old, new in old == new }
                 .eraseToAnyPublisher()
         }
     }
