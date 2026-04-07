@@ -320,24 +320,11 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         }
     }
     
-    public func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
-        guard let activeProfile = activeProfile else {
-            callback?(nil, ClientError.vpnProfileUnavailable)
-            return
+    public func submitDebugReport() async throws -> String {
+        guard activeProfile != nil else {
+            throw ClientError.vpnProfileUnavailable
         }
-        
-        if vpnStatus == .disconnected {
-            self.webServices.submitDebugReport(shouldSendPersistedData, vpnLog, callback)
-        } else {
-            guard let configuration = vpnClientConfiguration() else {
-                callback?(nil, ClientError.vpnProfileUnavailable)
-                return
-            }
-            activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-                let rawContent = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
-                self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
-            }
-        }
+        return try await webServices.submitDebugReport()
     }
     
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {

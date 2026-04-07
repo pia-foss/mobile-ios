@@ -1,9 +1,9 @@
 //
-//  TestFlightDetector.swift
-//  PIA VPN
+//  CSIResponse.swift
+//  PIACSI
 //
-//  Created by Diego Trevisan on 01/12/25.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Diego Trevisan on 02.04.26.
+//  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -22,17 +22,15 @@
 
 import Foundation
 
-protocol TestFlightDetectorProtocol {
-    var isTestFlight: Bool { get }
+struct CreateResponse: Codable {
+    let result: String
+    let code: String?
+    let message: String?
+    var isSuccess: Bool { result == "success" }
 }
 
-struct TestFlightDetector: TestFlightDetectorProtocol {
-
-    static let shared = TestFlightDetector()
-
-    /// Checks if app is running in TestFlight
-    var isTestFlight: Bool {
-        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-    }
-
+struct BaseResponse: Codable {
+    let result: String
+    let message: String?
+    var isSuccess: Bool { result == "success" }
 }

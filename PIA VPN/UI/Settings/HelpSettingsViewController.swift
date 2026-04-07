@@ -281,32 +281,35 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     
     private func submitDebugReport() {
         self.showLoadingAnimation()
-        Client.providers.vpnProvider.submitDebugReport(true) { (reportIdentifier, error) in
-            self.hideLoadingAnimation()
-            
+        Task { @MainActor in
+            defer { self.hideLoadingAnimation() }
+
             let title: String
             let message: String
 
-            defer {
-                let alert = Macros.alert(title, message)
-                alert.addDefaultAction(L10n.Global.ok)
-                self.present(alert, animated: true, completion: nil)
-            }
-
-            guard let reportId = reportIdentifier else {
+            do {
+                let reportId = try await Client.submitDebugReport()
+                guard !reportId.isEmpty else {
+                    title = L10n.Settings.ApplicationInformation.Debug.Empty.title
+                    message = L10n.Settings.ApplicationInformation.Debug.Empty.message
+                    self.showAlert(title: title, message: message)
+                    return
+                }
+                title = L10n.Settings.ApplicationInformation.Debug.Success.title
+                message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
+            } catch {
                 title = L10n.Settings.ApplicationInformation.Debug.Failure.title
                 message = L10n.Settings.ApplicationInformation.Debug.Failure.message
-                return
-            }
-            guard !reportId.isEmpty else {
-                title = L10n.Settings.ApplicationInformation.Debug.Empty.title
-                message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                return
             }
 
-            title = L10n.Settings.ApplicationInformation.Debug.Success.title
-            message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
+            self.showAlert(title: title, message: message)
         }
+    }
+
+    private func showAlert(title: String, message: String) {
+        let alert = Macros.alert(title, message)
+        alert.addDefaultAction(L10n.Global.ok)
+        self.present(alert, animated: true, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

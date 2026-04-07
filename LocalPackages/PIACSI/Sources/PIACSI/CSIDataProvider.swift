@@ -1,9 +1,9 @@
 //
-//  PIACSILogInformationProvider.swift
-//  PIALibrary
+//  CSIDataProvider.swift
+//  PIACSI
 //
-//  Created by Diego Trevisan on 18.12.25.
-//  Copyright © 2025 Private Internet Access, Inc.
+//  Created by Diego Trevisan on 02.04.26.
+//  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -21,22 +21,8 @@
 //
 
 import Foundation
-import csi
 
-class PIACSILogInformationProvider: ICSIProvider {
-
-    var filename: String? { return "application_logs" }
-
-    var isPersistedData: Bool { return false }
-
-    var providerType: ProviderType { return ProviderType.loggingInformation }
-
-    var reportType: ReportType { return ReportType.diagnostic }
-
-    var value: String? { return getApplicationLogs() }
-
-    func getApplicationLogs() -> String {
-        let logs = PIALogHandler.logStorage.getAllLogs()
-        return logs.isEmpty ? "No logs available" : logs.redactIPs()
-    }
+public protocol CSIDataProvider {
+    var sectionName: String { get }
+    var content: String? { get }
 }

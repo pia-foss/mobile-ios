@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-kpi.git", exact: "1.2.3"),
-      .package(url: "git@github.com:pia-foss/mobile-ios-releases-csi.git", exact: "1.3.3"),
+      .package(path: "../PIACSI"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-account.git", exact: "1.4.5"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-regions.git", exact: "1.6.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", exact: "2.2.5"),
@@ -33,7 +33,7 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Reachability", package: "Reachability.swift"),
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
-                .product(name: "PIACSI", package: "mobile-ios-releases-csi"),
+                .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "mobile-ios-releases-regions"),
                 .product(name: "PIAAccount", package: "mobile-ios-releases-account"),
                 .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),

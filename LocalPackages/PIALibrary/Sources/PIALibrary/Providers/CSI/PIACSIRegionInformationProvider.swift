@@ -7,23 +7,15 @@
 //
 
 import Foundation
-import csi
+import PIACSI
 
-final class PIACSIRegionInformationProvider : ICSIProvider {
-    
-    var filename: String? { return "regions_information" }
-    
-    var isPersistedData: Bool { return true }
-    
-    var providerType: ProviderType { return ProviderType.regionInformation }
-    
-    var reportType: ReportType { return ReportType.diagnostic }
-    
-    var value: String? { return regionInformation() }
-    
+struct PIACSIRegionInformationProvider: CSIDataProvider {
+    var sectionName: String { "regions_information" }
+    var content: String? { regionInformation() }
 
-    func regionInformation() -> String {
+    private func regionInformation() -> String {
         var redactedServers: [String] = []
+
         for server in Client.providers.serverProvider.currentServers {
             let redactedServer = Server(
                 serial: server.serial,
@@ -52,6 +44,7 @@ final class PIACSIRegionInformationProvider : ICSIProvider {
                 redactedServers.append(description)
             }
         }
+
         return redactedServers.debugDescription.redactIPs()
     }
 }
