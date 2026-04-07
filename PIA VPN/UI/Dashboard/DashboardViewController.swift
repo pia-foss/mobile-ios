@@ -550,7 +550,17 @@ final class DashboardViewController: AutolayoutViewController {
     @IBAction private func selectRegion(_ sender: Any?) {
         selectRegion(animated: true)
     }
-    
+
+    /// Dismisses any already presented view controllers and then performs the segue.
+    private func perform(segue: StoryboardSegue.Main) {
+        dismissModalViewController { [weak self] in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.performSegue(withIdentifier: segue.rawValue, sender: self)
+            }
+        }
+    }
+
     func selectRegion(animated: Bool) {
         let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
         perform(segue: segue)
@@ -776,9 +786,11 @@ final class DashboardViewController: AutolayoutViewController {
         #endif
     }
     
-    @objc private func dismissModalViewController() {
+    @objc private func dismissModalViewController(completion: (() -> Void)? = nil) {
         if presentedViewController != nil {
-            dismiss(animated: false)
+            dismiss(animated: false, completion: completion)
+        } else {
+            completion?()
         }
     }
 
