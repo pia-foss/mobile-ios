@@ -40,7 +40,7 @@ jobs:
           # model: "claude-opus-4-1-20250805"
 
           # Direct prompt for automated review (no @claude mention needed)
-          prompt: |
+          direct_prompt: |
             Please review this pull request for an iOS and tvOS Swift application and provide feedback on:
             - Code quality and best practices
             - Potential bugs or issues
@@ -59,7 +59,7 @@ jobs:
           use_sticky_comment: true
 
           # Optional: Customize review based on file types
-          # prompt: |
+          # direct_prompt: |
           #   Review this PR focusing on:
           #   - For TypeScript files: Type safety and proper interface usage
           #   - For API endpoints: Security, input validation, and error handling
@@ -67,7 +67,7 @@ jobs:
           #   - For tests: Coverage, edge cases, and test quality
 
           # Optional: Different prompts for different authors
-          # prompt: |
+          # direct_prompt: |
           #   ${{ github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR' &&
           #   'Welcome! Please review this PR from a first-time contributor. Be encouraging and provide detailed explanations for any suggestions.' ||
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
