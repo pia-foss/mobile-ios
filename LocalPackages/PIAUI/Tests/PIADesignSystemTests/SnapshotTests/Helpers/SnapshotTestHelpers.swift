@@ -31,4 +31,7 @@ enum SnapshotTestHelpers {
         ProcessInfo.processInfo.environment["CI_XCODE_PROJECT"] != nil ||
         ProcessInfo.processInfo.environment["CI_XCODEBUILD_ACTION"] != nil
     }
+
+    /// The percentage of pixels that must match for a snapshot comparison to pass.
+    static let snapshotPrecision: Float = 0.99
 }
