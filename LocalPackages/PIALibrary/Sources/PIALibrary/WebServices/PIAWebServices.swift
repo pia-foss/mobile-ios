@@ -21,7 +21,7 @@
 //
 
 import Foundation
-import regions
+import PIARegions
 import account
 import PIACSI
 
@@ -32,22 +32,22 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
 
-    let regionsAPI: RegionsAPI!
+    let regionsAPI: any RegionsAPI
     let accountAPI: IOSAccountAPI!
     let csiClient = CSIClient(userAgent: PIAWebServices.userAgent)
 
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
-        let endpointsProvider: IRegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
+        let endpointsProvider: any RegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
         : PIARegionClientStateProvider()
 
-        self.regionsAPI = RegionsBuilder()
-            .setEndpointProvider(endpointsProvider: endpointsProvider)
-            .setCertificate(certificate: rsa4096Certificate)
-            .setUserAgent(userAgent: PIAWebServices.userAgent)
-            .setMetadataRequestPath(metadataRequestPath: "/vpninfo/regions/v2")
-            .setVpnRegionsRequestPath(vpnRegionsRequestPath: "/vpninfo/servers/v6")
-            .setShadowsocksRegionsRequestPath(shadowsocksRegionsRequestPath: "/shadow_socks")
+        self.regionsAPI = try! RegionsBuilder()
+            .setEndpointProvider(endpointsProvider)
+            .setCertificate(rsa4096Certificate)
+            .setUserAgent(PIAWebServices.userAgent)
+            .setMetadataRequestPath("/vpninfo/regions/v2")
+            .setVPNRegionsRequestPath("/vpninfo/servers/v6")
+            .setShadowsocksRegionsRequestPath("/shadow_socks")
             .build()
 
         if Client.environment == .staging {
@@ -421,18 +421,20 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             callback?(bundle, nil)
             
         } else {
-            self.regionsAPI.fetchVpnRegions(locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")) { (response, error) in
-                if let _ = error {
+            Task {
+                let (response, _) = await self.regionsAPI.fetchVPNRegions(
+                    locale: Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
+                )
+
+                guard let response else {
                     callback?(nil, ClientError.noRegions)
                     return
                 }
 
-                guard let response = response else {
-                    callback?(nil, ClientError.noRegions)
-                    return
-                }
-                
-                guard let bundle = ServersBundle.parse(from: RegionsUtils().stringify(regionsResponse: response)) else {
+                guard
+                    let bundleString = try? RegionsUtils.stringify(response),
+                    let bundle = ServersBundle.parse(from: bundleString)
+                else {
                     callback?(nil, ClientError.malformedResponseData)
                     return
                 }
