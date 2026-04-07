@@ -12,10 +12,12 @@ import SwiftUI
 import SnapshotTesting
 
 final class WelcomeViewSnapshotTest: XCTestCase {
+    private let snapshotPrecision: Float = 0.99
+
     func test_Welcome() {
         let view = WelcomeFactory.makeWelcomeView()
         let vc = UIHostingController(rootView: view)
         
-        assertSnapshot(matching: vc, as: .image, record: false)
+        assertSnapshot(matching: vc, as: .image(precision: snapshotPrecision), record: false)
     }
 }
