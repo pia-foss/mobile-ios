@@ -43,7 +43,7 @@ struct FeedbackTileView: View {
         HStack(spacing: 16) {
             leadingSpacerIfNeeded()
             
-            SwiftUI.Image(uiImage: Asset.Images.imageAccessCard.image)
+            Image(asset: Asset.Images.imageAccessCard)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 90, height: 100)
@@ -73,7 +73,7 @@ struct FeedbackTileView: View {
             // Close button
             VStack {
                 Button(action: ratingManager.handleFeedbackDismiss) {
-                    SwiftUI.Image("icon-close")
+                    Image(asset: Asset.Images.iconClose)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 10, height: 10)
@@ -104,7 +104,7 @@ struct FeedbackTileView: View {
 
     @ViewBuilder
     private func rateButton(
-        image: SwiftUI.Image,
+        image: Image,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
