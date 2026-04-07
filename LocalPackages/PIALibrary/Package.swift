@@ -34,7 +34,7 @@ let package = Package(
                 .product(name: "Reachability", package: "Reachability.swift"),
                 .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
                 .product(name: "PIACSI", package: "PIACSI"),
-                "PIARegions",
+                .product(name: "PIARegions", package: "PIARegions"),
                 .product(name: "PIAAccount", package: "mobile-ios-releases-account"),
                 .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),
                 .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
