@@ -235,11 +235,13 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             return
         }
         guard let activeProfile = activeProfile else {
+            log.error("connect: No active profile — vpnType=\(accessedPreferences.vpnType), availableTypes=\(availableVPNTypes)")
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
         guard let configuration = vpnClientConfiguration() else {
-            callback?(ClientError.vpnProfileUnavailable)
+            log.error("connect: vpnClientConfiguration returned nil — activeProfile=\(activeProfile.vpnType)")
+            callback?(ClientError.vpnClientConfigurationUnavailable)
             return
         }
         activeProfile.connect(withConfiguration: configuration, callback)
@@ -371,6 +373,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     }
 
     private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
+        log.info("vpnClientConfiguration: currentUser=\(accessedProviders.accountProvider.currentUser != nil), currentPasswordReference=\(accessedProviders.accountProvider.currentPasswordReference != nil), activeProfile=\(String(describing: (profile ?? activeProfile)?.vpnType))")
+
         guard let currentUser = accessedProviders.accountProvider.currentUser else {
             log.error("vpnClientConfiguration: No current user available")
             return nil
