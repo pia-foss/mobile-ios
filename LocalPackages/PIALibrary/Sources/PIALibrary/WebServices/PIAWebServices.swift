@@ -23,7 +23,7 @@
 import Foundation
 import regions
 import PIACSI
-import PIAAccountSwift
+import PIAAccount
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
