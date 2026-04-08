@@ -95,6 +95,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         
         log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
 
+        // Adding a [weak self] capture to `completionBlock` breaks the code on Xcode 26.4 / Swift 6.3 (self is captured nil)
+        // It does not need the weak reference as the it is only called inside the current function
         let completionBlock = {
             profile?.prepare()
 
