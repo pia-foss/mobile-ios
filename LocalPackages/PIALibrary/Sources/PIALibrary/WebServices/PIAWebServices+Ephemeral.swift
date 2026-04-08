@@ -62,12 +62,13 @@ extension PIAWebServices {
         }
         let reportData = CSIReportBuilder.build(sections: sections)
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
 
         do {
             return try await csiClient.submit(
                 data: reportData,
                 team: Client.Configuration.teamIdentifierCSI,
-                appVersion: appVersion
+                appVersion: "\(appVersion) (\(appBuild))"
             )
         } catch {
             log.error("CSI submission failed: \(error)")
