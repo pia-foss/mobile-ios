@@ -65,9 +65,10 @@ class BootstraperFactory {
         Client.database = Client.Database(group: AppConstants.appGroup)
         Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
 
-        // On tvOS we force enable debug logging.
-        // The CSI reporting it only accessible for internals so there is no impact for the customers.
+        // Force enable debug logging for DEVELOPMENT and STAGING builds
+        #if DEVELOPMENT || STAGING
         Client.preferences.debugLogging = true
+        #endif
     }
     
     private static func setupPreferences() {
