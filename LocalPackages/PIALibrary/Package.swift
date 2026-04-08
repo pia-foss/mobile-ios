@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-kpi.git", exact: "1.2.3"),
       .package(path: "../PIACSI"),
-      .package(url: "git@github.com:pia-foss/mobile-ios-releases-account.git", exact: "1.4.5"),
+      .package(path: "../PIAAccount"),
       .package(url: "git@github.com:pia-foss/mobile-ios-releases-regions.git", exact: "1.6.3"),
       .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", exact: "2.2.5"),
       .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", exact: "1.0.4"),
