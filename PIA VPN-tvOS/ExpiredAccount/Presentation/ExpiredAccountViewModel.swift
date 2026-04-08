@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import PIALibrary
+
+private let log = PIALogger.logger(for: ExpiredAccountViewModel.self)
 
 class ExpiredAccountViewModel {
     let title1: String
@@ -28,12 +31,15 @@ class ExpiredAccountViewModel {
     }
     
     func logout() {
+        log.info("Logout requested from expired account screen")
         Task {
             do {
                 setLoading(to: true)
                 try await logOutUseCase.logOut()
+                log.info("Logout from expired account succeeded")
                 setLoading(to: false)
             } catch {
+                log.error("Logout from expired account failed: \(error.localizedDescription)")
                 setLoading(to: false)
             }
         }

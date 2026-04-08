@@ -71,6 +71,31 @@ final class PIAConnectionButtonViewModelTests: XCTestCase {
         XCTAssertEqual(capturedState, [.disconnected, .connecting, .connected])
     }
     
+    func test_toggleConnection_when_disconnected_connect_fails() {
+        // GIVEN that the connection state is disconnected
+        fixture.connectionStateMonitorMock.connectionState = .disconnected
+        fixture.vpnConnectionUseCaseMock.connectError = NSError(domain: "test", code: -1)
+
+        instantiateSut()
+
+        let errorAlertExpectation = XCTestExpectation(description: "error alert is shown")
+        sut.$isShowingErrorAlert
+            .dropFirst()
+            .sink { isShowing in
+                if isShowing { errorAlertExpectation.fulfill() }
+            }.store(in: &cancellables)
+
+        // WHEN calling the toggle connection method
+        sut.toggleConnection()
+
+        wait(for: [errorAlertExpectation], timeout: 3)
+        // THEN connect was attempted once
+        XCTAssertTrue(fixture.vpnConnectionUseCaseMock.connectCalled)
+        XCTAssertTrue(fixture.vpnConnectionUseCaseMock.connectCalledAttempt == 1)
+        // AND an error alert is shown
+        XCTAssertTrue(sut.isShowingErrorAlert)
+    }
+
     func test_toggleConnection_when_connected() {
         
         // GIVEN that the vpn state is connected

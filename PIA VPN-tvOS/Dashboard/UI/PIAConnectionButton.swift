@@ -52,7 +52,7 @@ struct PIAConnectionButton: View {
                 viewModel.toggleConnection()
             }
         } message: {
-            Text(L10n.Dashboard.ConnectionState.NetworkErrorAlert.message)
+            Text(viewModel.errorAlertMessage)
         }
     }
     

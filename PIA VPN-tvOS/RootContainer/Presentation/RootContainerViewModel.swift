@@ -4,6 +4,8 @@ import SwiftUI
 import PIALibrary
 import Combine
 
+private let log = PIALogger.logger(for: RootContainerViewModel.self)
+
 class RootContainerViewModel: ObservableObject {
     enum State {
         case splash
@@ -50,6 +52,7 @@ class RootContainerViewModel: ObservableObject {
     
     private func handleExpiredState(isLoggedIn: Bool) {
         if isLoggedIn {
+            log.info("Account expired, navigating to expired state")
             appRouter.goBackToRoot()
             state = .expired
         } else {
@@ -72,9 +75,11 @@ class RootContainerViewModel: ObservableObject {
         switch (isLoggedIn, onBoardingVpnProfileInstalled) {
             // logged in, vpn profile installed
         case (true, true):
+            log.info("App state: activated")
             state = .activated
             // logged in, vpn profile not installed
         case (true, false):
+            log.info("App state: activatedNotOnboarded")
             state = .activatedNotOnboarded
             if shouldShowconnectionStatsPermisson {
                 appRouter.goBackToRoot()
@@ -84,6 +89,7 @@ class RootContainerViewModel: ObservableObject {
             }
             // not logged in, any
         case (false, _):
+            log.info("App state: notActivated")
             state = .notActivated
             appRouter.goBackToRoot()
         }

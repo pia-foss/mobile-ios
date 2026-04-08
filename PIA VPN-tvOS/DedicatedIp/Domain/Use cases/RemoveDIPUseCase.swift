@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import PIALibrary
+
+private let log = PIALogger.logger(for: RemoveDIPUseCase.self)
 
 protocol RemoveDIPUseCaseType {
     func callAsFunction()
@@ -32,12 +35,14 @@ class RemoveDIPUseCase: RemoveDIPUseCaseType {
         let dipToken = dedicatedIPServer.dipToken else {
             return
         }
-        
+
+        log.info("Removing DIP token")
         dedicatedIpProvider.removeDIPToken(dipToken)
         _ = try? favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)
-        
+
         let selectedServer = selectedServer.selectedServer
         if selectedServer.identifier == dedicatedIPServer.identifier {
+            log.info("DIP server was selected, disconnecting VPN")
             Task {
                 try? await vpnCpnnectionUseCase.disconnect()
             }
