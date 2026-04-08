@@ -24,7 +24,7 @@ import Foundation
 import PIACSI
 
 struct PIACSILogInformationProvider: CSIDataProvider {
-    var sectionName: String { "application_logs" }
+    var sectionName: String { "application.log" }
     var content: String? { getApplicationLogs() }
 
     private func getApplicationLogs() -> String {

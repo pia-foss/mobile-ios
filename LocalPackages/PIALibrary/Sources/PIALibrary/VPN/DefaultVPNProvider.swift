@@ -93,6 +93,8 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         var profile = activeProfileRemovingInactive()
         var force = false
         
+        log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
+
         let completionBlock = { [weak self] in
             profile?.prepare()
 
@@ -102,7 +104,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             }
             #endif
             self?.activeProfile = profile
-            
+            log.info("prepare completionBlock: activeProfile set to \(String(describing: profile?.vpnType))")
         }
         
         if isLegacyProfile() {
@@ -218,6 +220,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     }
     
     public func uninstallAll() {
+        log.info("uninstallAll: clearing activeProfile")
         activeProfile = nil
         accessedDatabase.transient.vpnStatus = .disconnected
         for vpnType in availableVPNTypes {
@@ -234,7 +237,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(ClientError.unauthorized)
             return
         }
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             log.error("connect: No active profile — vpnType=\(accessedPreferences.vpnType), availableTypes=\(availableVPNTypes)")
             callback?(ClientError.vpnProfileUnavailable)
             return
