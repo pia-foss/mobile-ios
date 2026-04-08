@@ -16,6 +16,8 @@ protocol AccountInformationAvailabilityVerifierType {
     
 }
 
+private let log = PIALogger.logger(for: AccountInformationAvailabilityVerifier.self)
+
 class AccountInformationAvailabilityVerifier:
     AccountInformationAvailabilityVerifierType {
     
@@ -69,6 +71,9 @@ class AccountInformationAvailabilityVerifier:
 extension AccountInformationAvailabilityVerifier {
     private func verify(with completion: Completion) {
         accountProvider.accountInformation { [weak self] info, error in
+            if let error {
+                log.error("Error \(#function) \(error)")
+            }
             if let clientError = error as? ClientError,
                clientError == ClientError.unauthorized {
                 self?.notificationCenter.post(name: .PIAUnauthorized, object: nil)

@@ -9,12 +9,18 @@
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: DashboardViewController.self)
+
 extension DashboardViewController: ServerSelectionDelegate {
     
     func didSelectServer(_ server: Server) {
         let isConnected = Client.providers.vpnProvider.isVPNConnected
         let currentServer = Client.preferences.displayedServer
         let showReconnectNotifications = Client.preferences.showReconnectNotifications
+
+        log.debug("isConnected: \(isConnected)")
+        log.debug("currentServer: \(currentServer)")
+        log.debug("showReconnectNotifications: \(showReconnectNotifications)")
 
         // If disconnected, connect right away
         if !isConnected {
@@ -24,6 +30,7 @@ extension DashboardViewController: ServerSelectionDelegate {
 
         // If same server was selected, do nothing
         guard (server.identifier != currentServer.identifier || server.dipToken != currentServer.dipToken) else {
+            log.debug("Skip server selection. Same server was selected.")
             return
         }
 
@@ -49,6 +56,8 @@ extension DashboardViewController: ServerSelectionDelegate {
     }
 
     private func connect(to server: Server) {
+        log.debug("Connecting to \(server)")
+
         if TrustedNetworkUtils.isTrustedNetwork {
             showAutomationAlert() {
                 Client.configuration.connectedManually = true

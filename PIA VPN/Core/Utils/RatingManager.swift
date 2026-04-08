@@ -144,6 +144,7 @@ final class RatingManager: RatingManagerProtocol {
     }
     
     func handleConnectionError() {
+        log.debug(#function)
         if Client.daemons.isNetworkReachable {
             if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
                 askForConnectionIssuesFeedback()

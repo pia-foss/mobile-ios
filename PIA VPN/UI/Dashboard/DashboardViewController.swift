@@ -480,6 +480,8 @@ final class DashboardViewController: AutolayoutViewController {
     }
     
     private func manuallyConnect() {
+        log.debug(#function)
+
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
         let threeHoursInSeconds: TimeInterval = 10800
         
@@ -491,7 +493,8 @@ final class DashboardViewController: AutolayoutViewController {
             Client.configuration.connectedManually = true
             
             guard let weakSelf = self else { return }
-            if let _ = error {
+            if let error {
+                log.debug("\(#function) error: \(error)")
                 RatingManager.shared.handleConnectionError()
             }
             
