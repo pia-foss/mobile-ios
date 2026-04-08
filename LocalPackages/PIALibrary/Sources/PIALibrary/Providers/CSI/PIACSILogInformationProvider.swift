@@ -28,7 +28,7 @@ struct PIACSILogInformationProvider: CSIDataProvider {
     var content: String? { getApplicationLogs() }
 
     private func getApplicationLogs() -> String {
-        let logs = PIALogHandler.logStorage.getAllLogs()
+        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: Client.preferences.debugLogging)
         return logs.isEmpty ? "No logs available" : logs.redactIPs()
     }
 }
