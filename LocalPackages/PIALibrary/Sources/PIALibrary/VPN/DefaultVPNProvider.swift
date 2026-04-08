@@ -95,16 +95,15 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         
         log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
 
-        let completionBlock = { [weak self] in
+        let completionBlock = {
             profile?.prepare()
 
             #if os(iOS)
             if let _ = VPNIPAddressFromInterfaces() {
-                self?.accessedDatabase.transient.vpnStatus = .connected
+                self.accessedDatabase.transient.vpnStatus = .connected
             }
             #endif
-            self?.activeProfile = profile
-            log.info("prepare completionBlock: activeProfile set to \(String(describing: profile?.vpnType))")
+            self.activeProfile = profile
         }
         
         if isLegacyProfile() {
@@ -198,7 +197,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     }
     
     public func disable(_ callback: SuccessLibraryCallback?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -207,7 +206,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     }
     
     public func uninstall(_ callback: SuccessLibraryCallback?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -256,7 +255,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             return
         }
 
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -278,7 +277,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             callback?(ClientError.unauthorized)
             return
         }
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -291,7 +290,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
             return
         }
 
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -333,7 +332,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
     }
     
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
@@ -361,7 +360,7 @@ open class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess,
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
             guard (vpnType == activeVPNType) else {
-                if let activeProfile = activeProfile {
+                if let activeProfile {
                     if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
                         (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
                         //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
