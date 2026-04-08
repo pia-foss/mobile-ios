@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import PIALibrary
 import PIALocalizations
+
+private let log = PIALogger.logger(for: VPNConfigurationInstallingViewModel.self)
 
 class VPNConfigurationInstallingViewModel: ObservableObject {
     private let installVPNConfiguration: InstallVPNConfigurationUseCaseType
@@ -28,19 +31,22 @@ class VPNConfigurationInstallingViewModel: ObservableObject {
         guard installingStatus != .isInstalling else {
             return
         }
-        
+
+        log.info("VPN configuration install requested")
         installingStatus = .isInstalling
-        
+
         Task {
             do {
                 try await installVPNConfiguration()
+                log.info("VPN configuration installed successfully")
                 Task { @MainActor in
                     installingStatus = .succeeded
                     onSuccessAction()
                 }
             } catch {
+                log.error("VPN configuration install failed: \(error.localizedDescription)")
                 errorMessage = errorMapper.map(error: error)
-                
+
                 Task { @MainActor in
                     shouldShowErrorMessage = true
                     installingStatus = .failed(errorMessage: errorMessage)

@@ -56,7 +56,7 @@ extension DebugMenuView {
     }
 
     var logs: String {
-        PIALogHandler.logStorage.getAllLogs()
+        PIALogHandler.logStorage.getAllLogs(includeDebug: true)
     }
 
     func buildExportContent() -> String {

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import PIALibrary
+
+private let log = PIALogger.logger(for: ActivateDIPTokenUseCase.self)
 
 protocol ActivateDIPTokenUseCaseType {
     func callAsFunction(token: String) async throws
@@ -20,12 +23,15 @@ class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
     }
     
     func callAsFunction(token: String) async throws {
+        log.info("Activating DIP token")
         return try await withCheckedThrowingContinuation { continuation in
             dipServerProvider.activateDIPToken(token) { result in
                 switch result {
                     case .success:
+                        log.info("DIP token activated successfully")
                         continuation.resume()
                     case .failure(let error):
+                        log.error("DIP token activation failed: \(error.localizedDescription)")
                         continuation.resume(throwing: error)
                 }
             }

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import PIALibrary
+
+private let log = PIALogger.logger(for: LoginWithCredentialsUseCase.self)
 
 protocol LoginWithCredentialsUseCaseType {
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void)
@@ -22,16 +25,21 @@ class LoginWithCredentialsUseCase: LoginWithCredentialsUseCaseType {
     }
     
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void) {
-        let credentials = Credentials(username: username, 
-                                      password: password)
-        
+        let credentials = Credentials(
+            username: username,
+            password: password
+        )
+
+        log.info("Executing login with credentials")
         loginProvider.login(with: credentials) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
                 case .success(let userAccount):
+                    log.info("Login provider succeeded")
                     completion(.success(userAccount))
                 case .failure(let error):
+                    log.error("Login provider failed: \(error)")
                     completion(.failure(errorMapper.map(error: error)))
             }
         }

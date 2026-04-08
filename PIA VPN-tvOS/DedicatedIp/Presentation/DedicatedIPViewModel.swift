@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import PIALibrary
 import PIALocalizations
+
+private let log = PIALogger.logger(for: DedicatedIPViewModel.self)
 
 struct DedicatedIpData {
     let id = UUID()
@@ -50,26 +53,31 @@ class DedicatedIPViewModel: ObservableObject {
     
     func activateDIP(token: String) async {
         guard !token.isEmpty else {
+            log.error("DIP activation failed: empty token")
             Task { @MainActor in
                 shouldShowErrorMessage = true
             }
             return
         }
-        
+
+        log.info("DIP activation requested")
         do {
             try await activateDIPToken(token: token)
+            log.info("DIP activated successfully")
             Task { @MainActor in
                 onAppear()
                 showActivatedDialog = true
             }
         } catch {
+            log.error("DIP activation failed: \(error.localizedDescription)")
             Task { @MainActor in
                 shouldShowErrorMessage = true
             }
         }
     }
-    
+
     func removeDIP() {
+        log.info("DIP removal requested")
         removeDIPToken()
         dedicatedIPStats = []
     }

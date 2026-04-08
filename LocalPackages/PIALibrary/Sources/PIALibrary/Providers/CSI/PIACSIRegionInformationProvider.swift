@@ -10,7 +10,7 @@ import Foundation
 import PIACSI
 
 struct PIACSIRegionInformationProvider: CSIDataProvider {
-    var sectionName: String { "regions_information" }
+    var sectionName: String { "regions.json" }
     var content: String? { regionInformation() }
 
     private func regionInformation() -> String {

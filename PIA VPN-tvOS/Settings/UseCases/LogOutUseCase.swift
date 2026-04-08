@@ -8,6 +8,9 @@
 
 import Foundation
 import PIALibrary
+
+private let log = PIALogger.logger(for: LogOutUseCase.self)
+
 protocol LogOutUseCaseType {
     func logOut() async throws
 }
@@ -41,8 +44,10 @@ class LogOutUseCase: LogOutUseCaseType {
                 continuation.resume()
                 return
             }
-            
+
+            log.info("Uninstalling VPN configuration")
             vpnConfigurationProvider.uninstall { _ in
+                log.info("VPN configuration uninstalled")
                 self.vpnConfigurationAvailability.set(value: false)
                 self.connectionStatsPermisson.set(value: nil)
                 continuation.resume()
@@ -52,19 +57,26 @@ class LogOutUseCase: LogOutUseCaseType {
     
     private func logoutUser() async {
         return await withCheckedContinuation { continuation in
+            log.info("Logging out user")
             accountProvider.logout { error in
+                if let error {
+                    log.error("Logout error: \(error.localizedDescription)")
+                } else {
+                    log.info("User logged out successfully")
+                }
                 continuation.resume()
             }
         }
     }
     
     func logOut() async {
+        log.info("Log out requested")
         await uninstallVpnConfiguration()
         await logoutUser()
         favoriteRegionsUseCase.eraseAllFavorites()
         searchedRegionsAvailability.eraseAll()
         appPreferences.reset()
         clientPreferences.selectedServer = SelectedServerUseCase.automaticServer()
-        
+        log.info("Log out completed")
     }
 }

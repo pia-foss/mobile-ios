@@ -9,6 +9,7 @@
 import Foundation
 import PIALibrary
 
+private let log = PIALogger.logger(for: RegionsListUseCase.self)
 
 protocol RegionsListUseCaseType {
     func getCurrentServers() -> [ServerType]
@@ -32,18 +33,15 @@ class RegionsListUseCase: RegionsListUseCaseType {
     }
     
     func select(server: ServerType) {
+        log.info("Server selected: \(server.identifier)")
         clientPreferences.selectedServer = server
         Task {
             do {
                 try await vpnConnectionUseCase.connect()
             } catch {
                 // TODO: Handle error
-                NSLog("Connection error after selecting server: \(error)")
+                log.error("Connection error after selecting server: \(error)")
             }
-            
-            
         }
-        
     }
-    
 }

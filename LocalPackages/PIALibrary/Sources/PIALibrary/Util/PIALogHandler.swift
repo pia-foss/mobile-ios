@@ -49,27 +49,23 @@ public struct PIALogHandler: LogHandler {
         function: String,
         line: UInt
     ) {
-        if level <= .debug, !Client.preferences.debugLogging {
-            return
-        }
-
         let timestamp = Self.dateFormatter.string(from: Date())
         let levelString = "[\(level.rawValue.uppercased())]"
         let logMessage = "\(timestamp) \(levelString) \(label): \(message)"
 
-        PIALogHandler.logStorage.append(logMessage)
+        PIALogHandler.logStorage.append(logMessage, level: level)
     }
 }
 
 public final class PIALogStorage {
-    private var logs: [String] = []
+    private var logs: [(level: Logger.Level, message: String)] = []
     private let queue = DispatchQueue(label: "PIALogStorage", attributes: .concurrent)
     private let maxLogEntries = 1000
 
-    func append(_ message: String) {
+    func append(_ message: String, level: Logger.Level) {
         queue.async(flags: .barrier) { [weak self] in
             guard let self = self else { return }
-            logs.append(message)
+            logs.append((level: level, message: message))
 
             if logs.count > maxLogEntries {
                 let logsToRemove = logs.count - maxLogEntries
@@ -78,9 +74,12 @@ public final class PIALogStorage {
         }
     }
 
-    public func getAllLogs() -> String {
+    public func getAllLogs(includeDebug: Bool) -> String {
         queue.sync {
-            return logs.joined(separator: "\n")
+            logs
+                .filter { includeDebug || $0.level > .debug }
+                .map(\.message)
+                .joined(separator: "\n")
         }
     }
 
