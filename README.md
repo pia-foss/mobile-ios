@@ -4,43 +4,69 @@
 
 Private Internet Access is the world's leading consumer VPN service. At Private Internet Access we believe in unfettered access for all, and as a firm supporter of the open source ecosystem we have made the decision to open source our VPN clients. For more information about the PIA service, please visit our website [privateinternetaccess.com][pia-url] or check out the [Wiki][pia-wiki].
 
-# PIA VPN for iOS
+# PIA VPN for iOS & tvOS
 
-With the Private Internet Access VPN app for iOS, you can access our network of VPN servers across the world from your iPhone, iPad or iPod touch (64-bit only). Choose among many available countries and connect to them easily. Features include kill switch, multiple VPN protocols, DNS/IPv6 leak protection and Safari Content Blocker for ad-blocking while browsing with Safari.
+With the Private Internet Access VPN app for iOS and tvOS, you can access our network of VPN servers across the world from your iPhone, iPad, iPod touch, or Apple TV. Choose among many available countries and connect easily. Features include kill switch, multiple VPN protocols, DNS/IPv6 leak protection and ad-blocking.
 
-## Getting started
+## Features
 
-The PIA VPN app features:
-
-- [x] Plenty of countries to connect to (28 as of today)
-- [x] IKEv2, OpenVPN and WireGuard VPN Protocols
+- [x] Plenty of countries to connect to
+- [x] IKEv2, OpenVPN and WireGuard VPN protocols (iOS) / IKEv2 (tvOS)
 - [x] Kill switch
-- [x] Multiple VPN protocols
 - [x] Fine-grained VPN settings
 - [x] DNS leak protection
 - [x] IPv6 leak protection
-- [x] Safari Content Blocker
+- [x] Safari Content Blocker (iOS only)
 - [x] Dark theme
-- [x] Hotspot Helper 
+- [x] Hotspot Helper (iOS only)
+- [x] tvOS support
+
+## Requirements
+
+- iOS 15.0+ / tvOS 17.0+
+- Xcode 26+
+- [Homebrew][dep-brew]
+- [SwiftGen][dep-swiftgen] (`brew install swiftgen`)
+- [Go][dep-golang] (`brew install go`, required for WireGuard)
+- Ruby with rbenv (recommended)
+- Bundler (`gem install bundler && bundle install`)
 
 ## Installation
 
-### Requirements
+```bash
+# Install system dependencies
+brew install swiftgen go
 
-- iOS 11.0+ / macOS 10.11+
-- Xcode 9+ (Swift 4)
-- Git (preinstalled with Xcode Command Line Tools)
-- Ruby (preinstalled with macOS)
-- [SwiftGen][dep-swiftgen]
-- [Go][dep-golang]
+# Install Ruby dependencies
+gem install bundler && bundle install
+```
 
-It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
+## Build Configurations & Schemes
 
-### Hotspot Helper API
+The project uses three build configurations, each with iOS and tvOS variants:
 
-We use a special entitlement to participate in the process of joining Wi-Fi/hotspot networks (https://developer.apple.com/documentation/networkextension/nehotspothelper)
+| Scheme | Endpoints | Use for |
+|--------|-----------|---------|
+| `PIA VPN Development` | Production | Local development |
+| `PIA VPN Staging` | Staging | Staging environment testing |
+| `PIA VPN Release` | Production | Release builds |
+| `PIA VPN-tvOS Development` | Production | tvOS local development |
+| `PIA VPN-tvOS Staging` | Staging | tvOS staging environment testing |
+| `PIA VPN-tvOS Release` | Production | tvOS release builds |
 
-You need to request this entitlement to Apple or remove the call to `configureHotspotHelper()` in `AppDelegate.swift` and adapt the entitlements file to your needs.
+## Testing
+
+```bash
+# Unit tests
+bundle exec fastlane iOStests
+bundle exec fastlane tvOStests
+```
+
+## Hotspot Helper API
+
+We use a special entitlement to participate in the process of joining Wi-Fi/hotspot networks (https://developer.apple.com/documentation/networkextension/nehotspothelper).
+
+You need to request this entitlement from Apple, or remove the call to `configureHotspotHelper()` in `AppDelegate.swift` and adapt the entitlements file to your needs.
 
 ## Contributing
 
@@ -50,35 +76,14 @@ For more details please see [CONTRIBUTING](/CONTRIBUTING.md).
 
 Issues and Pull Requests should use these templates: [ISSUE](/.github/ISSUE_TEMPLATE.md) and [PULL REQUEST](/.github/PULL_REQUEST_TEMPLATE.md).
 
-## Authors
-
-- Jose Blaya - [ueshiba](https://github.com/ueshiba)
-- Davide De Rosa 
-- Amir Malik (before 2016)
-
 ## License
 
 This project is licensed under the [MIT (Expat) license](https://choosealicense.com/licenses/mit/), which can be found [here](/LICENSE).
-
-## Acknowledgements
-
-- SwiftyBeaver - © 2015 Sebastian Kreutzberger
-- iRate - © 2011 Charcoal Design
-- TPKeyboardAvoiding - © 2013 Michael Tyson
-- SideMenu - © 2015 Jonathan Kent <contact@jonkent.me>
-- FXPageControl - © 2010 Charcoal Design
-- MBProgressHUD - © 2009-2016 Matej Bukovinski
-- GradientProgressBar - Felix Mau (me(@)felix.hamburg)
-- Popover - © 2020 corin8823 <yusuke_takahashi@cyberagent.co.jp>
-- TunnelKit - © 2018 - Present Davide de Rosa (https://github.com/passepartoutvpn/tunnelkit) - TunnelKit is not MIT software and remains under the terms of the GPL license (https://github.com/passepartoutvpn/tunnelkit/blob/master/LICENSE)
-
-© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
 [pia-image]: https://assets-cms.privateinternetaccess.com/img/frontend/pia_menu_logo_light.svg
 [pia-url]: https://www.privateinternetaccess.com/
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
-[dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
 [dep-golang]: https://golang.org/
