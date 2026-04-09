@@ -882,6 +882,7 @@ class AppPreferences {
         lastRatingRejection = nil
         lastPositiveRatingSubmitted = nil
         lastNegativeRatingSubmitted = nil
+        regionFilter = .latency
         showGeoServers = true
         showServiceMessages = false
         dismissedMessages = []
