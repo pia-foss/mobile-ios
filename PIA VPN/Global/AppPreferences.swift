@@ -31,10 +31,10 @@ import PIALocalizations
 
 private let log = PIALogger.logger(for: AppPreferences.self)
 
-class AppPreferences {
-    
-    private struct Entries {
-        
+final class AppPreferences {
+
+    private enum Entries {
+
         static let appVersion = "AppVersion"
         
         static let version = "Version"
@@ -118,7 +118,7 @@ class AppPreferences {
     }
 
     static let shared = AppPreferences()
-    
+
     private static let currentVersion = "5.3"
     
     private let defaults: UserDefaults
@@ -347,34 +347,51 @@ class AppPreferences {
 #if os(iOS)
     var connectShortcut: INVoiceShortcut? {
         get {
-            if let data = defaults.object(forKey: Entries.connectShortcut) as? Data {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? INVoiceShortcut
-            } else {
-                return nil
+            guard let data = defaults.object(forKey: Entries.connectShortcut) as? Data else { return nil }
+            do {
+                return try NSKeyedUnarchiver.unarchivedObject(ofClass: INVoiceShortcut.self, from: data)
+            } catch {
+                log.error("Unable to unarchive shortcut: \(error)")
             }
+            return nil
         }
         set {
-            if let newValue = newValue {
-                let encodedObject = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            guard let newValue else { return }
+            do {
+                let encodedObject = try NSKeyedArchiver.archivedData(
+                    withRootObject: newValue,
+                    requiringSecureCoding: true
+                )
                 defaults.set(encodedObject, forKey: Entries.connectShortcut)
+            } catch {
+                log.error("Unable to archive shortcut: \(error)")
             }
         }
     }
-    
+
     var disconnectShortcut: INVoiceShortcut? {
         get {
-            if let data = defaults.object(forKey: Entries.disconnectShortcut) as? Data {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? INVoiceShortcut
-            } else {
-                return nil
+            guard let data = defaults.object(forKey: Entries.disconnectShortcut) as? Data else { return nil }
+            do {
+                return try NSKeyedUnarchiver.unarchivedObject(ofClass: INVoiceShortcut.self, from: data)
+            } catch {
+                log.error("Unable to unarchive shortcut: \(error)")
             }
+            return nil
         }
         set {
-            if let newValue = newValue {
-                let encodedObject = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            guard let newValue = newValue else { return }
+            do {
+                let encodedObject = try NSKeyedArchiver.archivedData(
+                    withRootObject: newValue,
+                    requiringSecureCoding: true
+                )
                 defaults.set(encodedObject, forKey: Entries.disconnectShortcut)
+            } catch {
+                log.error("Unable to archive shortcut: \(error)")
             }
-        }    }
+        }
+    }
 #endif
     var quickSettingThemeVisible: Bool{
         get {
