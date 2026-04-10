@@ -12,6 +12,7 @@ import PIACSI
 struct PIACSIRegionInformationProvider: CSIDataProvider {
     var sectionName: String { "regions.json" }
     var content: String? { regionInformation() }
+    let redactIPs: Bool
 
     private func regionInformation() -> String {
         var redactedServers: [String] = []
@@ -45,6 +46,6 @@ struct PIACSIRegionInformationProvider: CSIDataProvider {
             }
         }
 
-        return redactedServers.debugDescription.redactIPs()
+        return redactIPs ? redactedServers.debugDescription.redactIPs() : redactedServers.debugDescription
     }
 }

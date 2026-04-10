@@ -26,14 +26,15 @@ import PIACSI
 struct PIACSILogInformationProvider: CSIDataProvider {
     var sectionName: String { "application.log" }
     var content: String? { getApplicationLogs() }
+    let includeDebug: Bool
+    let redactIPs: Bool
 
     private func getApplicationLogs() -> String {
-        #if os(tvOS)
-        // Force includeDebug on tvOS since logs submission is only accessible for internal use
-        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: true)
-        #else
-        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: Client.preferences.debugLogging)
-        #endif
-        return logs.isEmpty ? "No logs available" : logs.redactIPs()
+        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: includeDebug)
+        guard !logs.isEmpty else {
+            return "No logs available"
+        }
+
+        return redactIPs ? logs.redactIPs() : logs
     }
 }
