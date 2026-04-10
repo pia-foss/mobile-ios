@@ -109,15 +109,6 @@
       }
     },
     {
-      "identity" : "mobile-ios-wireguard",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
-      "state" : {
-        "revision" : "a6064cd31f10f35785049fa6dd4693adeb68bf26",
-        "version" : "1.0.4"
-      }
-    },
-    {
       "identity" : "nimble",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Quick/Nimble",

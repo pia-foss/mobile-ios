@@ -85,6 +85,55 @@
 			remoteGlobalIDString = E5C507762B0E144D00200A6A;
 			remoteInfo = "PIA VPN-tvOS";
 		};
+		3FF789DD2F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D6D97C1BEFF229002C0205;
+			remoteInfo = "TweetNacl-iOS";
+		};
+		3FF789DF2F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D6DA0F1BF000BD002C0205;
+			remoteInfo = "TweetNacl-macOS";
+		};
+		3FF789E12F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D6D9E21BEFFF6E002C0205;
+			remoteInfo = "TweetNacl-watchOS";
+		};
+		3FF789E32F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D6D9F01BEFFFBE002C0205;
+			remoteInfo = "TweetNacl-tvOS";
+		};
+		3FF789E52F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 52D6D9861BEFF229002C0205;
+			remoteInfo = "TweetNacl-iOS Tests";
+		};
+		3FF789E72F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DD75027A1C68FCFC006590AF;
+			remoteInfo = "TweetNacl-macOS Tests";
+		};
+		3FF789E92F7BD02300406109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DD75028D1C690C7A006590AF;
+			remoteInfo = "TweetNacl-tvOS Tests";
+		};
 		69CB24A22B051CED00D83A52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -182,6 +231,7 @@
 		299E58501856BD31004CFD63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		299E585E1856C6EE004CFD63 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_tvOS_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TweetNacl.xcodeproj; sourceTree = "<group>"; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269A67C251CB4BA000B4DBF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8269A67E251CB4BA000B4DBF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -550,6 +600,20 @@
 				8269A67E251CB4BA000B4DBF /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3FF789B42F7BD02300406109 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FF789DE2F7BD02300406109 /* TweetNacl.framework */,
+				3FF789E02F7BD02300406109 /* TweetNacl.framework */,
+				3FF789E22F7BD02300406109 /* TweetNacl.framework */,
+				3FF789E42F7BD02300406109 /* TweetNacl.framework */,
+				3FF789E62F7BD02300406109 /* TweetNacl-iOS Tests.xctest */,
+				3FF789E82F7BD02300406109 /* TweetNacl-macOS Tests.xctest */,
+				3FF789EA2F7BD02300406109 /* TweetNacl-tvOS Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1005,6 +1069,12 @@
 			preferredProjectObjectVersion = 46;
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3FF789B42F7BD02300406109 /* Products */;
+					ProjectRef = 3FF789B22F7BD02300406109 /* TweetNacl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				291C637B183EBC210039EC03 /* PIA VPN */,
@@ -1023,6 +1093,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3FF789DE2F7BD02300406109 /* TweetNacl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TweetNacl.framework;
+			remoteRef = 3FF789DD2F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789E02F7BD02300406109 /* TweetNacl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TweetNacl.framework;
+			remoteRef = 3FF789DF2F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789E22F7BD02300406109 /* TweetNacl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TweetNacl.framework;
+			remoteRef = 3FF789E12F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789E42F7BD02300406109 /* TweetNacl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TweetNacl.framework;
+			remoteRef = 3FF789E32F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789E62F7BD02300406109 /* TweetNacl-iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TweetNacl-iOS Tests.xctest";
+			remoteRef = 3FF789E52F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789E82F7BD02300406109 /* TweetNacl-macOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TweetNacl-macOS Tests.xctest";
+			remoteRef = 3FF789E72F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FF789EA2F7BD02300406109 /* TweetNacl-tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TweetNacl-tvOS Tests.xctest";
+			remoteRef = 3FF789E92F7BD02300406109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0E67FC201E3F802D00EF9929 /* Resources */ = {
