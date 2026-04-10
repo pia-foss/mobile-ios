@@ -56,7 +56,7 @@ extension Macros {
         if let timeout = timeout {
             pinger.setTimeout(timeout)
         }
-        return pinger.sendPing() as? Int
+        return pinger.sendPing()
     }
     
 }

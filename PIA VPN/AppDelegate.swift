@@ -44,7 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
-    private (set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
     var cancellables = Set<AnyCancellable>()
 
     deinit {

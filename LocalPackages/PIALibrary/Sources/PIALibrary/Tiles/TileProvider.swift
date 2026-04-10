@@ -23,8 +23,8 @@
 import Foundation
 
 /// Business interface related to the tiles.
-public protocol TileProvider: class {
-    
+public protocol TileProvider: AnyObject {
+
     /// the visible tiles in the dashboard.
     var visibleTiles: [AvailableTiles] { get set }
 

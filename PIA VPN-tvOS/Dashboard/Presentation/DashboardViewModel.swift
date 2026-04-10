@@ -34,7 +34,7 @@ class DashboardViewModel: ObservableObject {
             return (titleTint: .pia_primary, connectionBarTint: .pia_primary)
         case .disconnected:
             return (titleTint: .pia_on_surface, connectionBarTint: .clear)
-        case .error(let error):
+        case .error:
             return (titleTint: .pia_red, connectionBarTint: .pia_red)
         default:
             return (.clear, .clear)

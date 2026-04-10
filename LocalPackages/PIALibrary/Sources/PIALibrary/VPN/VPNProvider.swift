@@ -128,7 +128,7 @@ public protocol VPNProvider: AnyObject {
 }
 
 public extension VPNProvider {
-    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+    func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
 }

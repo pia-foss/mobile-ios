@@ -22,23 +22,22 @@
 import Foundation
 
 public extension Date {
-    
-    public func removing(minutes: Int) -> Date? {
-        let result =  Calendar.current.date(byAdding: .minute, value: -(minutes), to: self)
-        return result
-    }
-    
-    public func removing(hours: Int) -> Date? {
-        let result =  Calendar.current.date(byAdding: .hour, value: -(hours), to: self)
+    func removing(minutes: Int) -> Date? {
+        let result = Calendar.current.date(byAdding: .minute, value: -(minutes), to: self)
         return result
     }
 
-    public func removing(days: Int) -> Date? {
-        let result =  Calendar.current.date(byAdding: .day, value: -(days), to: self)
+    func removing(hours: Int) -> Date? {
+        let result = Calendar.current.date(byAdding: .hour, value: -(hours), to: self)
         return result
     }
 
-    public var epochMilliseconds: Int64 {
+    func removing(days: Int) -> Date? {
+        let result = Calendar.current.date(byAdding: .day, value: -(days), to: self)
+        return result
+    }
+
+    var epochMilliseconds: Int64 {
         Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
 }

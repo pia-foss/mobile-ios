@@ -142,7 +142,7 @@ class AboutLicenseCell: UITableViewCell, Restylable {
         guard let url = component?.licenseURL else {
             return
         }
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url)
     }
     
     @IBAction private func toggleLicense(_ sender: Any?) {

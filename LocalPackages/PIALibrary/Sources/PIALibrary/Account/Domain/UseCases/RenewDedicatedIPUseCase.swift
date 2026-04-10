@@ -50,7 +50,7 @@ class RenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {
             case .allConnectionAttemptsFailed(let statusCode):
                 completion(.failure(statusCode == 401 ? NetworkRequestError.unauthorized : error))
                 return
-            case .connectionError(statusCode: let statusCode, message: let message):
+            case .connectionError(let statusCode, _):
                 completion(.failure(statusCode == 401 ? NetworkRequestError.unauthorized : error))
                 return
             default:

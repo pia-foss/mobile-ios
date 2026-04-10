@@ -397,7 +397,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             return backend.string(forKey: Entries.preferredServerDIPToken)
         }
         set {
-            backend.set(preferredServerDIPToken, forKey: Entries.preferredServerDIPToken)
+            backend.set(newValue, forKey: Entries.preferredServerDIPToken)
         }
     }
 
