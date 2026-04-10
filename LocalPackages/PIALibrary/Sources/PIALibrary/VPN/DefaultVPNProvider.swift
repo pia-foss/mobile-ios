@@ -86,16 +86,19 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         var profile = activeProfileRemovingInactive()
         var force = false
         
-        let completionBlock = { [weak self] in
+        log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
+
+        // Adding a [weak self] capture to `completionBlock` breaks the code on Xcode 26.4 / Swift 6.3 (self is captured nil)
+        // It does not need the weak reference as the it is only called inside the current function
+        let completionBlock = {
             profile?.prepare()
 
             #if os(iOS)
             if let _ = VPNIPAddressFromInterfaces() {
-                self?.accessedDatabase.transient.vpnStatus = .connected
+                self.accessedDatabase.transient.vpnStatus = .connected
             }
             #endif
-            self?.activeProfile = profile
-            
+            self.activeProfile = profile
         }
         
         if isLegacyProfile() {
@@ -189,7 +192,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
     
     public func disable(_ callback: SuccessLibraryCallback?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -198,7 +201,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
     
     public func uninstall(_ callback: SuccessLibraryCallback?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -211,6 +214,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
     
     public func uninstallAll() {
+        log.info("uninstallAll: clearing activeProfile")
         activeProfile = nil
         accessedDatabase.transient.vpnStatus = .disconnected
         for vpnType in availableVPNTypes {
@@ -227,12 +231,14 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.unauthorized)
             return
         }
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
+            log.error("connect: No active profile — vpnType=\(accessedPreferences.vpnType), availableTypes=\(availableVPNTypes)")
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
         guard let configuration = vpnClientConfiguration() else {
-            callback?(ClientError.vpnProfileUnavailable)
+            log.error("connect: vpnClientConfiguration returned nil — activeProfile=\(activeProfile.vpnType)")
+            callback?(ClientError.vpnClientConfigurationUnavailable)
             return
         }
         activeProfile.connect(withConfiguration: configuration, callback)
@@ -244,7 +250,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return
         }
 
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -266,7 +272,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.unauthorized)
             return
         }
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -279,7 +285,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return
         }
 
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
@@ -313,28 +319,15 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
     }
     
-    public func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?) {
-        guard let activeProfile = activeProfile else {
-            callback?(nil, ClientError.vpnProfileUnavailable)
-            return
+    public func submitDebugReport() async throws -> String {
+        guard activeProfile != nil else {
+            throw ClientError.vpnProfileUnavailable
         }
-        
-        if vpnStatus == .disconnected {
-            self.webServices.submitDebugReport(shouldSendPersistedData, vpnLog, callback)
-        } else {
-            guard let configuration = vpnClientConfiguration() else {
-                callback?(nil, ClientError.vpnProfileUnavailable)
-                return
-            }
-            activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-                let rawContent = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
-                self.webServices.submitDebugReport(shouldSendPersistedData, rawContent, callback)
-            }
-        }
+        return try await webServices.submitDebugReport()
     }
     
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
-        guard let activeProfile = activeProfile else {
+        guard let activeProfile else {
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
@@ -362,7 +355,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
             guard (vpnType == activeVPNType) else {
-                if let activeProfile = activeProfile {
+                if let activeProfile {
                     if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) &&
                         (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
                         //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
@@ -377,6 +370,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
 
     private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
+        log.info("vpnClientConfiguration: currentUser=\(accessedProviders.accountProvider.currentUser != nil), currentPasswordReference=\(accessedProviders.accountProvider.currentPasswordReference != nil), activeProfile=\(String(describing: (profile ?? activeProfile)?.vpnType))")
+
         guard let currentUser = accessedProviders.accountProvider.currentUser else {
             log.error("vpnClientConfiguration: No current user available")
             return nil

@@ -29,7 +29,9 @@ struct RootContainerView: View {
             case .expired:
                 ExpiredAccountFactory.makeExpiredAccountView()
             }
-        }.onChange(of: scenePhase) { _, newPhase in
+        }
+        .withDebugMenu()
+        .onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
             case .active:
                 Task {

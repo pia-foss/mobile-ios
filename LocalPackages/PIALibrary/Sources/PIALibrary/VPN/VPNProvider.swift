@@ -105,12 +105,11 @@ public protocol VPNProvider: AnyObject {
     func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
     
     /**
-     Submits the debug report containing all relevant information foor the current session.
-     
-     - Parameter shouldSendPersistedData: Specifies whether to send the user persisted data along with the report.
-     - Parameter callback: Returns the report identifier  on success.
+     Submits the debug report containing all relevant information for the current session.
+
+     - Parameter callback: Returns the report identifier on success.
      */
-    func submitDebugReport(_ shouldSendPersistedData: Bool, _ callback: LibraryCallback<String>?)
+    func submitDebugReport() async throws -> String
     
     /**
      Submits the usage information associated with the current VPN connection.

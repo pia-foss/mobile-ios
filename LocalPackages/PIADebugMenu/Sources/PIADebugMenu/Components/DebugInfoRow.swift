@@ -13,6 +13,11 @@ struct DebugInfoRow: View {
                 .font(.body)
                 .foregroundStyle(.primary)
         }
+        #if os(tvOS)
+        .padding(.vertical, 8)
+        .focusable()
+        #else
         .padding(.vertical, 2)
+        #endif
     }
 }

@@ -53,26 +53,31 @@ final class DedicatedIPViewModel: ObservableObject {
     
     func activateDIP(token: String) async {
         guard !token.isEmpty else {
+            log.error("DIP activation failed: empty token")
             Task { @MainActor in
                 shouldShowErrorMessage = true
             }
             return
         }
 
+        log.info("DIP activation requested")
         switch await activateDIPToken(token: token) {
         case .success:
+            log.info("DIP activated successfully")
             Task { @MainActor in
                 onAppear()
                 showActivatedDialog = true
             }
-        case .failure:
+        case .failure(let error):
+            log.error("DIP activation failed: \(error)")
             Task { @MainActor in
                 shouldShowErrorMessage = true
             }
         }
     }
-    
+
     func removeDIP() async {
+        log.info("DIP removal requested")
         do {
             try await removeDIPToken()
         } catch {

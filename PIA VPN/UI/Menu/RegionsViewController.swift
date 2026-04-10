@@ -104,7 +104,7 @@ class RegionsViewController: AutolayoutViewController {
     
     private func setupPullToRefresh() {
         refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        tableView.refreshControl = refreshControl
     }
         
     @objc func refreshLatency(_ sender: Any) {

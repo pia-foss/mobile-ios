@@ -23,20 +23,24 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     var connectionAction: (() -> Void)?
     var connectCalled: Bool = false
     var connectCalledAttempt: Int = 0
-    
-    func connect() {
+    var connectError: Error?
+
+    func connect() throws {
         connectCalled = true
         connectCalledAttempt += 1
+        if let error = connectError { throw error }
         connectionAction?()
     }
-    
+
     var disconnectCalled: Bool = false
     var disconnectCalledAttempt: Int = 0
     var disconnectionAction: (() -> Void)?
-    
-    func disconnect() {
+    var disconnectError: Error?
+
+    func disconnect() throws {
         disconnectCalled = true
         disconnectCalledAttempt += 1
+        if let error = disconnectError { throw error }
         disconnectionAction?()
     }
     

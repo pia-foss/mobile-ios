@@ -10,6 +10,8 @@ import Foundation
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: AccountSettingsViewModel.self)
+
 final class AccountSettingsViewModel: ObservableObject {
 
     @Published var isLogOutAlertVisible: Bool = false
@@ -55,12 +57,15 @@ final class AccountSettingsViewModel: ObservableObject {
     }
     
     func logOutConfirmationButtonWasTapped() {
+        log.info("Logout confirmed")
         Task {
             do {
                 setLoading(to: true)
                 try await logOutUseCase.logOut()
+                log.info("Logout succeeded")
                 setLoading(to: false)
             } catch {
+                log.error("Logout failed: \(error.localizedDescription)")
                 setLoading(to: false)
             }
         }

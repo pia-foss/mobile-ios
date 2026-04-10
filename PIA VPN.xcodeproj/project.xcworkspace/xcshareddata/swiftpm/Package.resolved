@@ -91,15 +91,6 @@
       }
     },
     {
-      "identity" : "mobile-ios-releases-csi",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pia-foss/mobile-ios-releases-csi.git",
-      "state" : {
-        "revision" : "c5e38d15881b40a7aa851d1af64ffc506af6ac40",
-        "version" : "1.3.3"
-      }
-    },
-    {
       "identity" : "mobile-ios-releases-kpi",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-releases-kpi.git",

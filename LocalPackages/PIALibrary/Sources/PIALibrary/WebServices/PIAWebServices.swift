@@ -23,7 +23,7 @@
 import Foundation
 import regions
 import account
-import csi
+import PIACSI
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
@@ -34,14 +34,13 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     let regionsAPI: RegionsAPI!
     let accountAPI: IOSAccountAPI!
-    let csiAPI: CSIAPI!
-    let csiProtocolInformationProvider = PIACSIProtocolInformationProvider()
-    
+    let csiClient = CSIClient(userAgent: PIAWebServices.userAgent)
+
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
         let endpointsProvider: IRegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
         : PIARegionClientStateProvider()
-        
+
         self.regionsAPI = RegionsBuilder()
             .setEndpointProvider(endpointsProvider: endpointsProvider)
             .setCertificate(certificate: rsa4096Certificate)
@@ -50,7 +49,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             .setVpnRegionsRequestPath(vpnRegionsRequestPath: "/vpninfo/servers/v6")
             .setShadowsocksRegionsRequestPath(shadowsocksRegionsRequestPath: "/shadow_socks")
             .build()
-        
+
         if Client.environment == .staging {
             self.accountAPI = AccountBuilder<IOSAccountAPI>()
                 .setPlatform(platform: .ios)
@@ -66,27 +65,6 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 .setCertificate(certificate: rsa4096Certificate)
                 .build() as? IOSAccountAPI
         }
-        
-        var appVersion = "Unknown"
-        if let info = Bundle.main.infoDictionary {
-            appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
-        }
-        self.csiAPI = CSIBuilder()
-            .setTeamIdentifier(teamIdentifier: Client.Configuration.teamIdentifierCSI)
-            .setAppVersion(appVersion: appVersion)
-            .setCertificate(certificate: rsa4096Certificate)
-            .setUserAgent(userAgent: PIAWebServices.userAgent)
-            .setEndPointProvider(endpointsProvider: PIACSIClientStateProvider())
-            .addLogProviders(providers_: [
-                PIACSIProtocolInformationProvider(),
-                PIACSIRegionInformationProvider(),
-                PIACSIUserInformationProvider(),
-                PIACSIDeviceInformationProvider(),
-                PIACSILastKnownExceptionProvider(),
-                PIACSILogInformationProvider(),
-                PIACSISubscriptionInformationProvider()
-            ])
-            .build()
     }
     
     public static let userAgent: String = {

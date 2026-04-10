@@ -8,6 +8,9 @@
 
 import Foundation
 import Combine
+import PIALibrary
+
+private let log = PIALogger.logger(for: LoginQRViewModel.self)
 
 class LoginQRViewModel: ObservableObject {
     enum State {
@@ -43,10 +46,12 @@ class LoginQRViewModel: ObservableObject {
     }
     
     func generateQRCode() {
+        log.info("Generating QR code for login")
         state = .loading
         Task {
             do {
                 let qrCode = try await generateLoginQRCode()
+                log.info("QR code generated successfully")
                 Task { @MainActor in
                     qrCodeURL = qrCode.url
                     expirationDate = qrCode.expiresAt
@@ -55,6 +60,7 @@ class LoginQRViewModel: ObservableObject {
                 }
                 await validateQRCode(loginQRCode: qrCode)
             } catch {
+                log.error("QR code generation failed: \(error.localizedDescription)")
                 Task { @MainActor in
                     state = .validating
                     shouldShowErrorMessage = true
@@ -62,16 +68,19 @@ class LoginQRViewModel: ObservableObject {
             }
         }
     }
-    
+
     func recoverPurchases() {
+        log.info("Recovering purchases")
         state = .loading
         Task {
             do {
                 let userAccount = try await loginWithReceipt()
+                log.info("Purchase recovery succeeded")
                 Task { @MainActor in
                     onSuccessAction()
                 }
             } catch {
+                log.error("Purchase recovery failed: \(error.localizedDescription)")
                 Task { @MainActor in
                     state = .validating
                     shouldShowErrorMessage = true
@@ -96,13 +105,16 @@ class LoginQRViewModel: ObservableObject {
     }
     
     private func validateQRCode(loginQRCode: LoginQRCode) async {
+        log.info("Validating QR code login")
         do {
             try await validateLoginQRCode(qrCodeToken: loginQRCode)
+            log.info("QR code login succeeded")
             Task { @MainActor in
                 onSuccessAction()
             }
-            
+
         } catch {
+            log.error("QR code login validation failed: \(error.localizedDescription)")
             Task { @MainActor in
                 state = .expired
                 shouldShowErrorMessage = true

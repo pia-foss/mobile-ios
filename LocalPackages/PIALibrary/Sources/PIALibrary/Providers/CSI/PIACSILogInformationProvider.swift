@@ -1,9 +1,9 @@
 //
-//  TestFlightDetector.swift
-//  PIA VPN
+//  PIACSILogInformationProvider.swift
+//  PIALibrary
 //
-//  Created by Diego Trevisan on 01/12/25.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Diego Trevisan on 18.12.25.
+//  Copyright © 2025 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -21,18 +21,19 @@
 //
 
 import Foundation
+import PIACSI
 
-protocol TestFlightDetectorProtocol {
-    var isTestFlight: Bool { get }
-}
+struct PIACSILogInformationProvider: CSIDataProvider {
+    var sectionName: String { "application.log" }
+    var content: String? { getApplicationLogs() }
 
-struct TestFlightDetector: TestFlightDetectorProtocol {
-
-    static let shared = TestFlightDetector()
-
-    /// Checks if app is running in TestFlight
-    var isTestFlight: Bool {
-        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    private func getApplicationLogs() -> String {
+        #if os(tvOS)
+        // Force includeDebug on tvOS since logs submission is only accessible for internal use
+        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: true)
+        #else
+        let logs = PIALogHandler.logStorage.getAllLogs(includeDebug: Client.preferences.debugLogging)
+        #endif
+        return logs.isEmpty ? "No logs available" : logs.redactIPs()
     }
-
 }

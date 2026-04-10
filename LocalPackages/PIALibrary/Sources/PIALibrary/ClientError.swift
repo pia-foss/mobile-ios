@@ -52,6 +52,9 @@ public enum ClientError: Error, Equatable {
     /// The specified VPN profile protocol is unavailable.
     case vpnProfileUnavailable
 
+    /// VPN client configuration could not be built (e.g. missing password reference).
+    case vpnClientConfigurationUnavailable
+
     /// Error while checking the dip token renewal.
     case dipTokenRenewalError
 

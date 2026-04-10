@@ -37,9 +37,10 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
             return
         }
 
+        log.info("Removing DIP token")
         let selectedServer = selectedServer.selectedServer
         if selectedServer.dipToken == dedicatedIPServer.dipToken {
-            log.debug("Disconnecting from dedicated IP server \(dedicatedIPServer)")
+            log.info("DIP server was selected, disconnecting VPN from \(dedicatedIPServer)")
             try await vpnCpnnectionUseCase.disconnect()
         }
 

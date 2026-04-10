@@ -31,6 +31,7 @@
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
 		3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */; };
+		3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */; };
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
@@ -478,6 +479,7 @@
 				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
 				ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */,
+				3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */,
 				3B9F2063FD0AA1F499E8A6ED /* PIALocalizations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -816,6 +818,7 @@
 				E5C507732B0E144D00200A6A /* Sources */,
 				E5C507742B0E144D00200A6A /* Frameworks */,
 				E5C507752B0E144D00200A6A /* Resources */,
+				3F4D43172F8640C70028380A /* Download Latest Regions List */,
 				693CA5C32B3F268400D38378 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -834,6 +837,7 @@
 				3B9F2063FD0AA1F499E8A6EE /* PIALocalizations */,
 				ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
+				3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */,
 			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
@@ -1149,6 +1153,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piaios.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piaios.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piaios.tmp\"\nfi\n";
+		};
+		3F4D43172F8640C70028380A /* Download Latest Regions List */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Download Latest Regions List";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piatvos.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piatvos.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piatvos.tmp\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2108,7 +2130,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -2739,7 +2761,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -2789,7 +2811,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PIA VPN-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 5357M5NW9W;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "PIA VPN-tvOS/Info.plist";
@@ -3236,6 +3258,10 @@
 		3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
+		};
+		3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADebugMenu;
 		};
 		3F807D4B2F164B44002015ED /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;

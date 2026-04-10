@@ -1,7 +1,8 @@
-
+import Combine
 import Foundation
 import PIALibrary
-import Combine
+
+private let log = PIALogger.logger(for: VpnConnectionUseCase.self)
 
 public protocol VpnConnectionUseCaseType {
     func connect() async throws
@@ -37,14 +38,17 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
     public func connect() async throws {
 
+        log.info("VPN connect requested")
         connectionIntent.send(.connect)
         
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.connect { error in
                 if let error = error {
+                    log.error("VPN connect failed: \(error.localizedDescription)")
                     self.connectionIntent.send(completion: .failure(error))
                     continuation.resume(throwing: error)
                 } else {
+                    log.info("VPN connect call succeeded")
                     continuation.resume(returning: ())
                 }
             }
@@ -53,14 +57,17 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
     public func disconnect() async throws {
 
+        log.info("VPN disconnect requested")
         connectionIntent.send(.disconnect)
         
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.disconnect { error in
                 if let error = error {
+                    log.error("VPN disconnect failed: \(error.localizedDescription)")
                     self.connectionIntent.send(completion: .failure(error))
                     continuation.resume(throwing: error)
                 } else {
+                    log.info("VPN disconnect call succeeded")
                     continuation.resume(returning: ())
                 }
             }
@@ -90,9 +97,11 @@ extension VpnConnectionUseCase {
                     self.clientPreferences.lastConnectedServer = try? serverProvider.targetServerType
                     
                     // The vpn connection has succeeded, then put back the connection intent to none
+                    log.info("VPN connected successfully")
                     self.connectionIntent.send(.none)
                 case (.disconnect, .disconnected):
                     // The vpn disconnect has succeeded, then put back the connection intent to none
+                    log.info("VPN disconnected successfully")
                     self.connectionIntent.send(.none)
                 default:
                     break

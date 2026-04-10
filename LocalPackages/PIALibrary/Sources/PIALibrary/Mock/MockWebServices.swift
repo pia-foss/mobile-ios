@@ -114,8 +114,8 @@ final class MockWebServices: WebServices {
         callback?(nil, nil)
     }
     
-    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
-        callback?(nil, nil)
+    func submitDebugReport() async throws -> String {
+        return ""
     }
     
     func subscriptionInformation(with receipt: Data?, _ callback: LibraryCallback<AppStoreInformation>?) {

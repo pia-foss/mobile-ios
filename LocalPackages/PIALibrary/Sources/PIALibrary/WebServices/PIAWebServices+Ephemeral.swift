@@ -21,6 +21,9 @@
 //
 
 import Foundation
+import PIACSI
+
+private let log = PIALogger.logger(for: PIAWebServices.self)
 
 extension PIAWebServices {
 
@@ -42,19 +45,34 @@ extension PIAWebServices {
         
     }
     
-    func submitDebugReport(_ shouldSendPersistedData: Bool, _ protocolLogs: String, _ callback: LibraryCallback<String>?) {
-        csiProtocolInformationProvider.setProtocolLogs(protocolLogs: protocolLogs)
-        self.csiAPI.send(shouldSendPersistedData: shouldSendPersistedData) { (reportIdentifier, errors) in
-            if !errors.isEmpty {
-                callback?(nil, ClientError.internetUnreachable)
-                return
-            }
+    func submitDebugReport() async throws -> String {
+        let providers: [CSIDataProvider] = [
+            PIACSIProtocolInformationProvider(),
+            PIACSIDeviceInformationProvider(),
+            PIACSILogInformationProvider(),
+            PIACSISubscriptionInformationProvider(),
+            PIACSIRegionInformationProvider(),
+            PIACSIUserInformationProvider(),
+            PIACSILastKnownExceptionProvider(),
+        ]
 
-            if let reportIdentifier = reportIdentifier {
-                callback?(reportIdentifier, nil)
-            } else {
-                callback?(nil, ClientError.malformedResponseData)
-            }
+        let sections = providers.compactMap { provider -> CSIReportSection? in
+            guard let content = provider.content else { return nil }
+            return CSIReportSection(name: provider.sectionName, content: content)
+        }
+        let reportData = CSIReportBuilder.build(sections: sections)
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+
+        do {
+            return try await csiClient.submit(
+                data: reportData,
+                team: Client.Configuration.teamIdentifierCSI,
+                appVersion: "\(appVersion) (\(appBuild))"
+            )
+        } catch {
+            log.error("CSI submission failed: \(error)")
+            throw ClientError.internetUnreachable
         }
     }
 }
