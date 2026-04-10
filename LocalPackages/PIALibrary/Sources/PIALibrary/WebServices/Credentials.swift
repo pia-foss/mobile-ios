@@ -23,7 +23,7 @@
 import Foundation
 
 /// The account credentials.
-public struct Credentials: Codable {
+public struct Credentials: Codable, Equatable {
 
     /// The username, typically a number prefixed with "p".
     public let username: String

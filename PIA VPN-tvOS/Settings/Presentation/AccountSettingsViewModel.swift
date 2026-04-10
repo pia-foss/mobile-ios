@@ -17,7 +17,7 @@ class AccountSettingsViewModel: ObservableObject {
     @Published var isLogOutAlertVisible: Bool = false
     @Published var isLoading: Bool = false
 
-    let accountProvider: AccountProviderType
+    let accountProvider: AccountProvider
     let logOutUseCase: LogOutUseCaseType
     
     internal var expiryState: ExipryState = .unknown
@@ -28,7 +28,7 @@ class AccountSettingsViewModel: ObservableObject {
         case notExpired
     }
     
-    init(accountProvider: AccountProviderType, logOutUseCase: LogOutUseCaseType) {
+    init(accountProvider: AccountProvider, logOutUseCase: LogOutUseCaseType) {
         self.accountProvider = accountProvider
         self.logOutUseCase = logOutUseCase
         self.expiryState = getCurrentExpirtyState()

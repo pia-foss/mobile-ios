@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol SubscriptionInformationProviderType {
     func subscriptionInformation(_ callback: @escaping (AppStoreInformation?, Error?) -> Void)

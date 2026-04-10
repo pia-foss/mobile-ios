@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import PIALibrary
 
 protocol ValidateLoginQRCodeUseCaseType {
     func callAsFunction(qrCodeToken: LoginQRCode) async throws
 }
 
 class ValidateLoginQRCodeUseCase: ValidateLoginQRCodeUseCaseType {
-    private let accountProviderType: AccountProviderType
+    private let accountProviderType: AccountProvider
     private let validateLoginQRCodeProvider: ValidateLoginQRCodeProviderType
     
-    init(accountProviderType: AccountProviderType, validateLoginQRCodeProvider: ValidateLoginQRCodeProviderType) {
+    init(accountProviderType: AccountProvider, validateLoginQRCodeProvider: ValidateLoginQRCodeProviderType) {
         self.accountProviderType = accountProviderType
         self.validateLoginQRCodeProvider = validateLoginQRCodeProvider
     }

@@ -16,12 +16,11 @@ final class LoginIntegrationTests: XCTestCase {
 
     func test_login_succeeds() throws {
         // GIVEN
-        let userAccount = PIALibrary.UserAccount.makeStub()
+        let userAccount = UserAccount.makeStub()
         let accountProviderMock = AccountProviderMock(userResult: userAccount,
                                                       errorResult: nil)
         
-        let loginProvider = LoginProvider(accountProvider: accountProviderMock,
-                                          userAccountMapper: UserAccountMapper())
+        let loginProvider = LoginProvider(accountProvider: accountProviderMock)
         
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                                                       errorMapper: LoginDomainErrorMapper())
@@ -92,8 +91,7 @@ final class LoginIntegrationTests: XCTestCase {
         let accountProviderMock = AccountProviderMock(userResult: nil,
                                                       errorResult: ClientError.expired)
         
-        let loginProvider = LoginProvider(accountProvider: accountProviderMock,
-                                          userAccountMapper: UserAccountMapper())
+        let loginProvider = LoginProvider(accountProvider: accountProviderMock)
         
         let loginWithCredentialsUseCase = LoginWithCredentialsUseCase(loginProvider: loginProvider,
                                     errorMapper: LoginDomainErrorMapper())
