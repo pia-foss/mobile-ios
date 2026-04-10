@@ -19,7 +19,7 @@ final class SelectedServerViewModel: ObservableObject {
     @Published var selectedServer: ServerType?
     private var cancellables = Set<AnyCancellable>()
     
-    var selectedSeverTitle: String  {
+    var selectedServerTitle: String  {
         let genericTitle = L10n.LocationSelection.AnyOtherLocation.title
         guard let selectedServer else {
             return genericTitle

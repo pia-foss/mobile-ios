@@ -5,7 +5,7 @@ import Combine
 import PIALocalizations
 
 public protocol SelectedServerUseCaseType {
-    var selectedSever: ServerType { get }
+    var selectedServer: ServerType { get }
     func getSelectedServer() -> AnyPublisher<ServerType, Never>
     func getHistoricalServers() -> [ServerType]
 }
@@ -20,7 +20,7 @@ public final class SelectedServerUseCase: SelectedServerUseCaseType {
         self.clientPreferences = clientPreferences
     }
     
-    public var selectedSever: ServerType {
+    public var selectedServer: ServerType {
         return clientPreferences.selectedServer
     }
     

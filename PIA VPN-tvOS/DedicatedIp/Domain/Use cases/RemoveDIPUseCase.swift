@@ -20,14 +20,14 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
     private let dedicatedIpProvider: DedicatedIPProviderType
     private let favoriteRegionsUseCase: FavoriteRegionUseCaseType
     private let getDedicatedIP: GetDedicatedIpUseCaseType
-    private let vpnCpnnectionUseCase: VpnConnectionUseCaseType
+    private let vpnConnectionUseCase: VpnConnectionUseCaseType
     private let selectedServer: ClientPreferencesType
     
-    init(dedicatedIpProvider: DedicatedIPProviderType, favoriteRegionsUseCase: FavoriteRegionUseCaseType, getDedicatedIP: GetDedicatedIpUseCaseType, vpnCpnnectionUseCase: VpnConnectionUseCaseType, selectedServer: ClientPreferencesType) {
+    init(dedicatedIpProvider: DedicatedIPProviderType, favoriteRegionsUseCase: FavoriteRegionUseCaseType, getDedicatedIP: GetDedicatedIpUseCaseType, vpnConnectionUseCase: VpnConnectionUseCaseType, selectedServer: ClientPreferencesType) {
         self.dedicatedIpProvider = dedicatedIpProvider
         self.favoriteRegionsUseCase = favoriteRegionsUseCase
         self.getDedicatedIP = getDedicatedIP
-        self.vpnCpnnectionUseCase = vpnCpnnectionUseCase
+        self.vpnConnectionUseCase = vpnConnectionUseCase
         self.selectedServer = selectedServer
     }
     
@@ -41,7 +41,7 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
         let selectedServer = selectedServer.selectedServer
         if selectedServer.dipToken == dedicatedIPServer.dipToken {
             log.info("DIP server was selected, disconnecting VPN from \(dedicatedIPServer)")
-            try await vpnCpnnectionUseCase.disconnect()
+            try await vpnConnectionUseCase.disconnect()
         }
 
         try favoriteRegionsUseCase.removeFromFavorites(dedicatedIPServer.identifier, isDipServer: true)

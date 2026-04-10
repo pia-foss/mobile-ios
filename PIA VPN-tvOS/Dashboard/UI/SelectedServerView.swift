@@ -14,7 +14,7 @@ struct SelectedServerView: View {
                 .resizable()
                 .frame(width: 80, height: 80)
             VStack(alignment: .leading) {
-                Text(viewModel.selectedSeverTitle)
+                Text(viewModel.selectedServerTitle)
                     .font(.system(size: 29, weight: .medium))
                     .foregroundColor(isButtonFocused ? .pia_on_primary : .pia_on_surface_container_secondary)
                 Text(viewModel.selectedServerSubtitle)

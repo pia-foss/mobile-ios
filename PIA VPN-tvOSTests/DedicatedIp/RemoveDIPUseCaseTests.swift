@@ -30,7 +30,7 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         sut = RemoveDIPUseCase(dedicatedIpProvider: fixture.dipServerProviderMock,
                                favoriteRegionsUseCase: fixture.favoriteRegionsUseCaseMock,
                                getDedicatedIP: fixture.getDedicatedIPUseCaseMock,
-                               vpnCpnnectionUseCase: fixture.vpnConnectionUseCaseMock,
+                               vpnConnectionUseCase: fixture.vpnConnectionUseCaseMock,
                                selectedServer: fixture.clientPreferencesMock)
     }
 

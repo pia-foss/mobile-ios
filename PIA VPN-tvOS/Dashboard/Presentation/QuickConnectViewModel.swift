@@ -21,7 +21,7 @@ final class QuickConnectViewModel: ObservableObject {
         var allHistoricalServers: [ServerType] = Array(selectedServerUseCase.getHistoricalServers().reversed())
         
         // When the selected server is not Automatic, then the first element of the historical servers is the selected one
-        if !selectedServerUseCase.selectedSever.isAutomatic && !allHistoricalServers.isEmpty {
+        if !selectedServerUseCase.selectedServer.isAutomatic && !allHistoricalServers.isEmpty {
             allHistoricalServers.removeFirst()
             
         }

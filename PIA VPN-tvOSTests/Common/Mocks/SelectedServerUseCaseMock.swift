@@ -7,7 +7,7 @@ import PIALibrary
 
 class SelectedServerUseCaseMock: SelectedServerUseCaseType {
     
-    var selectedSever: ServerType = ServerMock()
+    var selectedServer: ServerType = ServerMock()
     
     var getSelectedServerCalled = false
     var getSelectedServerAttempt = 0

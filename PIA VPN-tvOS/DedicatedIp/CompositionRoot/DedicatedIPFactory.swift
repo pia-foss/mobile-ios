@@ -35,7 +35,7 @@ public enum DedicatedIPFactory {
         RemoveDIPUseCase(dedicatedIpProvider: makeDedicatedIPProvider(),
                          favoriteRegionsUseCase: RegionsSelectionFactory.makeFavoriteRegionUseCase,
                          getDedicatedIP: makeGetDedicatedIpUseCase(), 
-                         vpnCpnnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
+                         vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
                          selectedServer: RegionsSelectionFactory.makeClientPreferences)
     }
     
