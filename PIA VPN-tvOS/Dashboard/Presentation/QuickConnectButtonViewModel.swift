@@ -1,7 +1,7 @@
-
 import Foundation
-import SwiftUI
 import PIAAssetsTV
+import PIALibrary
+import struct SwiftUI.Image
 
 protocol QuickConnectButtonViewModelDelegate: AnyObject {
     func quickConnectButtonViewModel(didSelect server: ServerType)

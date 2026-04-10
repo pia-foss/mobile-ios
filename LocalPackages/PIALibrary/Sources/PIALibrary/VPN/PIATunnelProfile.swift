@@ -25,7 +25,7 @@ import TunnelKitOpenVPN
 import NetworkExtension
 
 /// Implementation of `VPNProfile` providing OpenVPN connectivity.
-public class PIATunnelProfile: NetworkExtensionProfile {
+public final class PIATunnelProfile: NetworkExtensionProfile {
     private let bundleIdentifier: String
 
     /**

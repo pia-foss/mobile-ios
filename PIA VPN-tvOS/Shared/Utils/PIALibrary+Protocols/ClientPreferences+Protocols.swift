@@ -10,14 +10,8 @@ import Foundation
 import PIALibrary
 import Combine
 
-protocol ClientPreferencesType {
-    var selectedServer: ServerType { get set }
-    var lastConnectedServer: ServerType? { get set }
-    func getSelectedServer() -> AnyPublisher<ServerType, Never>
-}
+final class ClientPreferences: ClientPreferencesType {
 
-class ClientPreferences: ClientPreferencesType {
-    
     private let clientPrefs: Client.Preferences
     
     var selectedServer: ServerType {

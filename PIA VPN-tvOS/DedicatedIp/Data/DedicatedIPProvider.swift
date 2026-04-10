@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-class DedicatedIPProvider: DedicatedIPProviderType {
+final class DedicatedIPProvider: DedicatedIPProviderType {
     private let serverProvider: DipServerProviderType
     
     init(serverProvider: DipServerProviderType) {

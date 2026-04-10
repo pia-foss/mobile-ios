@@ -11,8 +11,8 @@ import PIALibrary
 import SwiftUI
 import PIALocalizations
 
-class RegionsSelectionFactory {
-    
+public enum RegionsSelectionFactory {
+    #if os(tvOS)
     static func makeRegionsContainerView() -> RegionsContainerView {
         return RegionsContainerView(viewModel: makeRegionsContainerViewModel())
     }
@@ -73,7 +73,8 @@ class RegionsSelectionFactory {
     static func makeRegionsListUseCase() -> RegionsListUseCaseType {
         return RegionsListUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), clientPreferences: makeClientPreferences, vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase)
     }
-    
+    #endif
+
     static var makeClientPreferences: ClientPreferencesType = {
         return ClientPreferences(clientPrefs: Client.preferences)
     }()
@@ -83,6 +84,7 @@ class RegionsSelectionFactory {
     static var makeFavoriteRegionUseCase: FavoriteRegionUseCaseType = {
         return FavoriteRegionUseCase(keychain: KeychainFactory.makeKeychain())
     }()
+    #if os(tvOS)
     
     static var makeOptimalLocationUseCase: OptimalLocationUseCaseType = {
         return OptimalLocationUseCase(serverProvider: VpnConnectionFactory.makeServerProvider(), vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, selectedServerUseCase: DashboardFactory.makeSelectedServerUserCase)
@@ -91,4 +93,5 @@ class RegionsSelectionFactory {
     static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
         DedicatedIPFactory.makeGetDedicatedIpUseCase()
     }
+    #endif
 }

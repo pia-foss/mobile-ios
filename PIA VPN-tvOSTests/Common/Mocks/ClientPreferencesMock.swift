@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class ClientPreferencesMock: ClientPreferencesType {

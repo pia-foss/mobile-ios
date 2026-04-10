@@ -1,11 +1,13 @@
 
 import Foundation
 import Combine
+import PIADashboard
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 class SelectedServerUseCaseMock: SelectedServerUseCaseType {
     
-    var selectedSever: ServerType = ServerMock()
+    var selectedServer: ServerType = ServerMock()
     
     var getSelectedServerCalled = false
     var getSelectedServerAttempt = 0

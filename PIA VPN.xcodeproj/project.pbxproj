@@ -48,6 +48,7 @@
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
 		ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = ACADC5F72F51AA1F00986EAF /* SnapshotTesting */; };
+		ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */; };
 		D10665FE2836490FA4DCAE0B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 824E8528B3924C15A0398820 /* PIALocalizations */; };
 		DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -285,9 +286,25 @@
 		3F0EF9402EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				DedicatedIp/CompositionRoot/DedicatedIPFactory.swift,
+				DedicatedIp/Data/DedicatedIPProvider.swift,
+				DedicatedIp/Data/DipServerProvider.swift,
+				DedicatedIp/Domain/Entities/DedicatedIPError.swift,
+				DedicatedIp/Domain/Interfaces/DipServerProviderType.swift,
+				"DedicatedIp/Domain/Use cases/ActivateDIPTokenUseCase.swift",
+				"DedicatedIp/Domain/Use cases/GetDedicatedIpUseCase.swift",
+				"DedicatedIp/Domain/Use cases/RemoveDIPUseCase.swift",
 				"Login/Utils/Foundation+PIA.swift",
 				LoginQR/Infrastructure/URLSessionHTTPClient.swift,
+				RegionsSelection/CompositionRoot/RegionsSelectionFactory.swift,
+				RegionsSelection/UseCases/FavoriteRegionUseCase.swift,
+				Shared/CompositionRoot/KeychainFactory.swift,
+				Shared/CompositionRoot/VpnConnectionFactory.swift,
+				Shared/StateMonitors/StateMonitorsFactory.swift,
+				Shared/StateMonitors/VPNStatusMonitor.swift,
 				"Shared/Utils/Foundation+Protocols.swift",
+				"Shared/Utils/PIALibrary+Protocols/ClientPreferences+Protocols.swift",
+				"Shared/Utils/PIALibrary+Protocols/Keychain+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/PIALibrary+Protocols.swift",
 			);
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
@@ -387,6 +404,7 @@
 				2985E5671856BD1200D70E28 /* QuartzCore.framework in Frameworks */,
 				291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */,
 				291C6384183EBC210039EC03 /* UIKit.framework in Frameworks */,
+				ACD8FEEF2F72CF95007A0BB0 /* PIADashboard in Frameworks */,
 				DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */,
 				3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */,
 				AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */,
@@ -460,6 +478,7 @@
 				A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */,
 				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
+				ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */,
 				3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */,
 				3B9F2063FD0AA1F499E8A6ED /* PIALocalizations in Frameworks */,
 			);
@@ -649,6 +668,7 @@
 				3FE266BB2F0BE003004B53AA /* PIAUIKit */,
 				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
+				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
 			);
 			productName = "PIA VPN";
@@ -815,6 +835,7 @@
 				3F7BD9BF2EE8A0AF00EE1F4C /* PIALibrary */,
 				3F3203CD2F0BE52C0070EC47 /* PIASwiftUI */,
 				3B9F2063FD0AA1F499E8A6EE /* PIALocalizations */,
+				ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
 				3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */,
 			);
@@ -3302,6 +3323,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADashboard;
+		};
+		ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADashboard;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

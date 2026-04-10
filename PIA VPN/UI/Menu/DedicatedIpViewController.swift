@@ -27,12 +27,17 @@ import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: DedicatedIpViewController.self)
 
-class DedicatedIpViewController: AutolayoutViewController {
-    
+final class DedicatedIpViewController: AutolayoutViewController {
+
     @IBOutlet private weak var tableView: UITableView!
     private var data = [Server]()
     private var timeToRetryDIP: TimeInterval? = nil
-    
+
+    // MARK: Use cases
+    private let getDipServer: GetDedicatedIpUseCaseType = DedicatedIPFactory.makeGetDedicatedIpUseCase()
+    private let removeDipToken: RemoveDIPUseCaseType = DedicatedIPFactory.makeRemoveDIPUseCase()
+    private let activateDipToken: ActivateDIPTokenUseCaseType = DedicatedIPFactory.makeActivateDIPTokenUseCase()
+
     private struct Sections {
         static let header = 0
         static let dedicatedIps = 1
@@ -84,10 +89,10 @@ class DedicatedIpViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
     }
-    
+
+    @MainActor
     @objc private func reloadTableView() {
-        let dipTokens = Client.providers.serverProvider.dipTokens ?? []
-        data = Client.providers.serverProvider.currentServers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) })
+        data = if let server = getDipServer() as? Server { [server] } else { [] }
         tableView.reloadData()
     }
     
@@ -130,27 +135,37 @@ class DedicatedIpViewController: AutolayoutViewController {
     
     // MARK: DIP Token handling
     
-    private var invalidTokenLocalisedString: String {
-        get {
-            return L10n.Dedicated.Ip.Message.Invalid.token
-        }
+    private static var invalidTokenLocalisedString: String {
+        return L10n.Dedicated.Ip.Message.Invalid.token
     }
     
     private func showInvalidTokenMessage() {
-        Macros.displayStickyNote(withMessage: invalidTokenLocalisedString, andImage: Asset.Images.iconWarning.image)
+        Macros.displayStickyNote(
+            withMessage: Self.invalidTokenLocalisedString,
+            andImage: Asset.Images.iconWarning.image,
+        )
     }
     
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: errorMessage ?? invalidTokenLocalisedString, andDuration: displayDuration)
+        Macros.displayImageNote(
+            withImage: Asset.Images.iconWarning.image,
+            message: errorMessage ?? Self.invalidTokenLocalisedString,
+            andDuration: displayDuration,
+        )
     }
-    
-    private func handleDIPActivationError(_ error: ClientError) {
+
+    private func handleDIPActivationError(_ error: Error?) {
+        guard let error else {
+            showInvalidTokenMessage()
+            return
+        }
+
         switch error {
-        case .unauthorized:
+        case ClientError.unauthorized:
             log.error("Activate DIP token failed with unauthorized error. Logging out...")
             Client.providers.accountProvider.logout(nil)
             Macros.postNotification(.PIAUnauthorized)
-        case .throttled(let retryAfter):
+        case ClientError.throttled(let retryAfter):
             let retryAfterSeconds = Double(retryAfter)
             let localisedThrottlingString = L10n.Dedicated.Ip.Message.Error.retryafter("\(Int(retryAfter))")
             
@@ -162,6 +177,8 @@ class DedicatedIpViewController: AutolayoutViewController {
         }
     }
 }
+
+// MARK: Table View
 
 extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -190,11 +207,13 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let alert = Macros.alert(nil, L10n.Dedicated.Ip.remove)
-            alert.addCancelActionWithTitle(L10n.Global.cancel, handler: {
+            alert.addCancelActionWithTitle(L10n.Global.cancel) { [weak self] in
+                guard let self else { return }
                 self.reloadTableView()
-            })
+            }
             
-            alert.addActionWithTitle(L10n.Global.ok) {
+            alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
+                guard let self else { return }
                 self.confirmDelete(row: indexPath.row)
             }
             
@@ -205,14 +224,17 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     
     private func confirmDelete(row: Int) {
         let dipRegion = data[row]
-        if let token = dipRegion.dipToken {
-            dipRegion.unfavorite()
-            Client.providers.serverProvider.removeDIPToken(token)
-            NotificationCenter.default.post(name: .PIAThemeDidChange,
-                                            object: self,
-                                            userInfo: nil)
+        guard dipRegion.dipToken != nil else { return }
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                try await self.removeDipToken()
+            } catch {
+                log.error("Error removing DIP token \(error)")
+            }
+            Macros.postNotification(.PIAThemeDidChange)
+            self.reloadTableView()
         }
-        reloadTableView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -246,6 +268,8 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
     
 }
 
+// MARK: DIP Activation
+
 extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
     func handleDIPActivation(with token: String, cell: DedicatedIpEmptyHeaderViewCell) {
         if let timeUntilNextTry = timeToRetryDIP?.timeSinceNow() {
@@ -258,35 +282,41 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                                      andImage: Asset.Images.iconWarning.image)
             return
         }
-        
-        NotificationCenter.default.post(name: .DedicatedIpShowAnimation, object: nil)
-        Client.providers.serverProvider.activateDIPToken(token) { [weak self] (server, error) in
-            NotificationCenter.default.post(name: .DedicatedIpHideAnimation, object: nil)
-            cell.emptyTokenTextField()
-            guard let dipServer = server else {
-                
-                guard let error = error as? ClientError else {
-                    log.error("Activate DIP token failed with non-clientError: \(error?.localizedDescription ?? "N/A")")
-                    self?.showInvalidTokenMessage()
-                    return
-                }
-                
-                log.error("Activate DIP token failed with error: \(error.localizedDescription)")
-                self?.handleDIPActivationError(error)
-                return
-            }
-            switch dipServer?.dipStatus {
-            case .active:
-                Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Dedicated.Ip.Message.Valid.token)
-            case .expired:
+
+        Macros.postNotification(.DedicatedIpShowAnimation)
+        cell.emptyTokenTextField()
+
+        Task { [weak self] in
+            guard let self else { return }
+
+            switch await self.activateDipToken(token: token) {
+            case .success:
+                Macros.displaySuccessImageNote(
+                    withImage: Asset.Images.iconWarning.image,
+                    message: L10n.Dedicated.Ip.Message.Valid.token,
+                )
+
+            case .failure(.expired):
                 log.error("Activate DIP token failed with expired token error.")
-                Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Expired.token, andImage: Asset.Images.iconWarning.image)
-            default:
+                Macros.displayStickyNote(
+                    withMessage: L10n.Dedicated.Ip.Message.Expired.token,
+                    andImage: Asset.Images.iconWarning.image,
+                )
+
+            case .failure(.invalid):
                 log.error("Activate DIP token failed with invalid token error.")
-                Macros.displayStickyNote(withMessage: self?.invalidTokenLocalisedString ?? "", andImage: Asset.Images.iconWarning.image)
+                Macros.displayStickyNote(
+                    withMessage: Self.invalidTokenLocalisedString,
+                    andImage: Asset.Images.iconWarning.image,
+                )
+
+            case let .failure(.generic(error)):
+                self.handleDIPActivationError(error)
             }
-            NotificationCenter.default.post(name: .DedicatedIpReload, object: nil)
-            NotificationCenter.default.post(name: .PIAThemeDidChange, object: nil)
+
+            Macros.postNotification(.DedicatedIpHideAnimation)
+            Macros.postNotification(.DedicatedIpReload)
+            Macros.postNotification(.PIAThemeDidChange)
         }
     }
 }

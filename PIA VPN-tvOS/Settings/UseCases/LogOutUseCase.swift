@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIADashboard
 import PIALibrary
 
 private let log = PIALogger.logger(for: LogOutUseCase.self)

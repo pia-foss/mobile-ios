@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PIALibrary
 
 protocol RefreshServersLatencyUseCaseType {
     var statePublisher: Published<RefreshServersLatencyUseCase.State>.Publisher { get }
@@ -15,8 +16,8 @@ protocol RefreshServersLatencyUseCaseType {
     func stop()
 }
 
-class RefreshServersLatencyUseCase: RefreshServersLatencyUseCaseType {
-    
+final class RefreshServersLatencyUseCase: RefreshServersLatencyUseCaseType {
+
     private let client: ClientType
     private let serverProvider: ServerProviderType
     private let notificationCenter: NotificationCenterType

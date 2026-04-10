@@ -12,8 +12,8 @@ import PIALocalizations
 
 private let log = PIALogger.logger(for: AccountSettingsViewModel.self)
 
-class AccountSettingsViewModel: ObservableObject {
-    
+final class AccountSettingsViewModel: ObservableObject {
+
     @Published var isLogOutAlertVisible: Bool = false
     @Published var isLoading: Bool = false
 

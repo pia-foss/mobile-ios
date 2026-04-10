@@ -2,13 +2,12 @@
 
 import Foundation
 import SwiftUI
+import PIADashboard
 import PIALibrary
 import Combine
 import PIALocalizations
 
-
-
-class PIAConnectionButtonViewModel: ObservableObject {
+final class PIAConnectionButtonViewModel: ObservableObject {
 
     
     @Published var state: ConnectionState = .disconnected

@@ -20,7 +20,9 @@ struct DedicatedIPView: View {
         VStack {
             if !$viewModel.dedicatedIPStats.isEmpty {
                 DedicatedIpDetailsView(dedicatedIPStats: viewModel.dedicatedIPStats) {
-                    viewModel.removeDIP()
+                    Task {
+                        await viewModel.removeDIP()
+                    }
                 }
                 .withTopNavigationBar(title: L10n.Menu.Item.settings, subtitle: L10n.Settings.Dedicatedip.title2)
             } else {

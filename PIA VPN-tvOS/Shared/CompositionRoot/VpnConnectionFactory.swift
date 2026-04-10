@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import PIADashboard
 import PIALibrary
 
-class VpnConnectionFactory {
+enum VpnConnectionFactory {
     static var makeVpnConnectionUseCase: VpnConnectionUseCaseType = {
         return VpnConnectionUseCase(serverProvider: makeServerProvider(), vpnProvider: makeVpnProvider, vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor, clientPreferences: RegionsSelectionFactory.makeClientPreferences)
     }()

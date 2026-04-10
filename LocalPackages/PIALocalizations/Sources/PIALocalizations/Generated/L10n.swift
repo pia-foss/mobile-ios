@@ -1200,10 +1200,6 @@ public enum L10n {
         public static let intro = L10n.tr("Localizable", "signup.purchase.trials.intro", fallback: "Start your 7-day free trial")
         /// Secure servers in 90+ countries
         public static let region = L10n.tr("Localizable", "signup.purchase.trials.region", fallback: "Secure servers in 90+ countries")
-        public enum All {
-          /// See all available plans
-          public static let plans = L10n.tr("Localizable", "signup.purchase.trials.all.plans", fallback: "See all available plans")
-        }
         public enum Price {
           /// Then %@
           public static func after(_ p1: Any) -> String {
@@ -1306,23 +1302,11 @@ public enum L10n {
     }
     public enum Walkthrough {
       public enum Page {
-        public enum _1 {
-          /// Protect yourself on up to 10 devices at a time.
-          public static let description = L10n.tr("Localizable", "signup.walkthrough.page.1.description", fallback: "Protect yourself on up to 10 devices at a time.")
-          /// Support 10 devices at once
-          public static let title = L10n.tr("Localizable", "signup.walkthrough.page.1.title", fallback: "Support 10 devices at once")
-        }
         public enum _2 {
           /// With servers around the globe, you are always under protection.
           public static let description = L10n.tr("Localizable", "signup.walkthrough.page.2.description", fallback: "With servers around the globe, you are always under protection.")
           /// Secure servers in 90+ countries
           public static let title = L10n.tr("Localizable", "signup.walkthrough.page.2.title", fallback: "Secure servers in 90+ countries")
-        }
-        public enum _3 {
-          /// Enabling our Content Blocker prevents ads from showing in Safari.
-          public static let description = L10n.tr("Localizable", "signup.walkthrough.page.3.description", fallback: "Enabling our Content Blocker prevents ads from showing in Safari.")
-          /// Protect yourself from ads
-          public static let title = L10n.tr("Localizable", "signup.walkthrough.page.3.title", fallback: "Protect yourself from ads")
         }
       }
     }

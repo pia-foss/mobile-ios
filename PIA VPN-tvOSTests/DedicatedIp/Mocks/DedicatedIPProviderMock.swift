@@ -9,7 +9,7 @@
 import Foundation
 @testable import PIA_VPN_tvOS
 
-class DedicatedIPProviderMock: DedicatedIPProviderType {
+final class DedicatedIPProviderMock: DedicatedIPProviderType {
     enum Request {
         case activateDIPToken
         case removeDIPToken

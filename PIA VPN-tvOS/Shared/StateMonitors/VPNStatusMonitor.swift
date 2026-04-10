@@ -10,11 +10,7 @@ import Foundation
 import Combine
 import PIALibrary
 
-protocol VPNStatusMonitorType {
-    func getStatus() -> AnyPublisher<VPNStatus, Never>
-}
-
-class VPNStatusMonitor: VPNStatusMonitorType {
+final class VPNStatusMonitor: VPNStatusMonitorType {
     private var status: CurrentValueSubject<VPNStatus, Never>
     private let vpnStatusProvider: VPNStatusProviderType
     private let notificationCenter: NotificationCenterType

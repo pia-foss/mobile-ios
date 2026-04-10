@@ -143,10 +143,10 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
     }
     
     /// :nodoc:
-    public func find(withIdentifier identifier: String) -> Server? {
-        return delegate.find(withIdentifier: identifier)
+    public func find(where predicate: (Server) -> Bool) -> Server? {
+        return delegate.find(where: predicate)
     }
-        
+
     public func resetCurrentServers() {
     }
     

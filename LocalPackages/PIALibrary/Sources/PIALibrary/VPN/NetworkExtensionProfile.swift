@@ -45,12 +45,8 @@ extension NetworkExtensionProfile {
     }
     
     /// :nodoc:
-    public var serverIdentifier: String? {
-        guard let serverAddress = neProfile?.protocolConfiguration?.serverAddress else {
-            return nil
-        }
-        let components = serverAddress.components(separatedBy: ".")
-        return components.first
+    public var serverAddress: String? {
+        return neProfile?.protocolConfiguration?.serverAddress
     }
 
     /**

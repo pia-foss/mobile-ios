@@ -36,9 +36,7 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
         instantiateSut(result: .success(()))
         
         // WHEN
-        do {
-            try await sut(token: "token")
-        } catch {
+        if case let .failure(error) = await sut(token: "token") {
             XCTFail("Expected success, got error: \(error)")
         }
     }
@@ -48,22 +46,20 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
         let expectedError = DedicatedIPError.expired
         instantiateSut(result: .failure(expectedError))
         
-        var capturedError: Error?
-        
+        var capturedError: Error? = nil
+
         // WHEN
-        do {
-            try await sut(token: "token")
-        } catch {
+        if case let .failure(error) = await sut(token: "token") {
             capturedError = error
         }
-        
+
         // THEN
         let error = try XCTUnwrap(capturedError as? DedicatedIPError)
         XCTAssertEqual(error, expectedError)
     }
 }
 
-extension DedicatedIPError: Equatable {
+extension DedicatedIPError: @retroactive Equatable {
     public static func == (lhs: PIA_VPN_tvOS.DedicatedIPError, rhs: PIA_VPN_tvOS.DedicatedIPError) -> Bool {
         switch (lhs, rhs) {
             case (.expired, .expired), (.invalid, .invalid), (.generic, .generic):
