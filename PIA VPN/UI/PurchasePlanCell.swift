@@ -92,7 +92,7 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
             labelPlan.text = plan.title
             labelDetail.text = plan.detail
             labelPrice.text = L10n.Welcome.Plan.priceFormat(plan.monthlyPriceString)
-            self.accessibilityLabel = "\(plan.title) \(plan.detail) \(labelPrice.text)"
+            self.accessibilityLabel = "\(plan.title) \(plan.detail) \(labelPrice.text ?? "")"
             viewBestValue.isHidden = !plan.bestValue
             if viewBestValue.isHidden {
                 bestValueHeightConstraint.constant = 0

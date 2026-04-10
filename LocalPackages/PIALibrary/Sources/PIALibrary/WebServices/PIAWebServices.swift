@@ -295,7 +295,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
                     let dipToken = dipServer.dipToken
 
-                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(expirationTime))
+                    let expiringDate = Date(timeIntervalSince1970: TimeInterval(truncating: expirationTime))
                     let server = Server.ServerAddressIP(ip: ip, cn: cn, van: false)
 
                     if let nextDays = Calendar.current.date(byAdding: .day, value: 5, to: Date()), nextDays >= expiringDate  {

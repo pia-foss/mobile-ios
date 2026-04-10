@@ -69,8 +69,8 @@ class RegionsViewController: AutolayoutViewController {
         super.viewDidLoad()
     
         title = L10n.Menu.Item.region
-        var servers = Client.providers.serverProvider.currentServers
-        
+        let servers = Client.providers.serverProvider.currentServers
+
         let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate{ ($0) }
         
         for server in servers {
@@ -445,19 +445,19 @@ extension RegionsViewController: UISearchResultsUpdating {
 
 extension RegionsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
         return Theme.current.noResultsImage()
     }
     
-    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
+    func emptyDataSetWillAppear(_ scrollView: UIScrollView) {
         tableView.separatorStyle = .none
     }
     
-    func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
+    func emptyDataSetWillDisappear(_ scrollView: UIScrollView) {
         tableView.separatorStyle = .singleLine
     }
     
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+    func emptyDataSet(_ scrollView: UIScrollView, didTap view: UIView) {
         searchController.searchBar.resignFirstResponder()
     }
 }

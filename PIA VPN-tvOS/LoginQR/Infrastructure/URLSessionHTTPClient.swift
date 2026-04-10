@@ -30,7 +30,7 @@ class URLSessionHTTPClient: HTTPClientType {
     
     func makeRequest(request: URLRequest, completion: @escaping (Result<(Data, URLResponse), ClientError>) -> Void ) {
         session.dataTask(with: request) { data, response, error in
-            if let error = error {
+            if error != nil {
                 completion(.failure(ClientError.unsupported))
                 return
             }

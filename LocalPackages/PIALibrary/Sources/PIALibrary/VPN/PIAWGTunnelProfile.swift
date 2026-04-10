@@ -249,12 +249,13 @@ public class PIAWGTunnelProfile: NetworkExtensionProfile {
         }
 
         cfg.providerConfiguration = [PIAWireguardConfiguration.Keys.token: token,
-                                     PIAWireguardConfiguration.Keys.ping: configuration.server.bestAddress()?.description,
+                                     PIAWireguardConfiguration.Keys.ping: configuration.server
+            .bestAddress()?.description as Any,
                                      PIAWireguardConfiguration.Keys.serial: configuration.server.serial,
                                      PIAWireguardConfiguration.Keys.cn: serverCN,
                                      PIAWireguardConfiguration.Keys.useIP: true]
 
-        var customCfg = configuration.customConfiguration
+        let customCfg = configuration.customConfiguration
         if let piaCfg = customCfg as? PIAWireguardConfiguration {
             cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.dnsServers] = piaCfg.customDNSServers
             cfg.providerConfiguration?[PIAWireguardConfiguration.Keys.packetSize] = piaCfg.packetSize

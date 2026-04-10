@@ -22,8 +22,8 @@
 
 import Foundation
 
-protocol SecureStore: class {
-    
+protocol SecureStore: AnyObject {
+
     func username() -> String?
     
     func setUsername(_ username: String?)

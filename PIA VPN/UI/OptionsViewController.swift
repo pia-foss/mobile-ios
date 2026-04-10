@@ -163,7 +163,7 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
 }
 
 /// Handles rendering and receives events of an `OptionsViewController`.
-public protocol OptionsViewControllerDelegate: class {
+public protocol OptionsViewControllerDelegate: AnyObject {
 
     /**
      Sets the background color of the view controller.

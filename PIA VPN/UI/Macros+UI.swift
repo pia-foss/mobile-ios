@@ -89,16 +89,14 @@ extension Macros {
             alpha: CGFloat(alpha)
         )
     }
-    
-    /**
-     Checks iPad device.
 
-     - Returns: `true` if the device is an iPad
-     */
+    /// Checks iPad device.
+    ///
+    /// - Returns: `true` if the device is an iPad
     public static var isDevicePad: Bool {
-        return (UI_USER_INTERFACE_IDIOM() == .pad)
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
-    
+
     /**
      Checks iPhone Plus device.
 
@@ -482,7 +480,7 @@ public extension UIAlertController {
      - Parameter title: The action title
      - Parameter handler: The action handler
      */
-    public func addDefaultAction(_ title: String, handler: @escaping () -> Void) {
+    func addDefaultAction(_ title: String, handler: @escaping () -> Void) {
         let action = UIAlertAction(title: title, style: .default) { (action) in
             handler()
         }
@@ -495,7 +493,7 @@ public extension UIAlertController {
      
      - Parameter title: The action title
      */
-    public func addCancelAction(_ title: String) {
+    func addCancelAction(_ title: String) {
         let action = UIAlertAction(title: title, style: .cancel)
         addAction(action)
         if (actions.count == 1) {
@@ -509,7 +507,7 @@ public extension UIAlertController {
      - Parameter title: The action title
      - Parameter handler: The action handler
      */
-    public func addDestructiveAction(_ title: String, handler: @escaping () -> Void) {
+    func addDestructiveAction(_ title: String, handler: @escaping () -> Void) {
         let action = UIAlertAction(title: title, style: .destructive) { (action) in
             handler()
         }

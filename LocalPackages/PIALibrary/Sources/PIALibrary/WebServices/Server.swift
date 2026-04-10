@@ -32,7 +32,7 @@ public enum ServerError: Error {
 }
 
 /// Represents a VPN server.
-public final class Server: Hashable {
+public final class Server {
 
     /// Serial host
     public let serial: String
@@ -228,19 +228,22 @@ public final class Server: Hashable {
         
         self.isAutomatic = isAutomatic
     }
-    
-    // MARK: Hashable
-    
-    /// :nodoc:
+}
+
+// MARK: Equatable
+
+extension Server: Equatable {
     public static func ==(lhs: Server, rhs: Server) -> Bool {
         return (lhs.identifier == rhs.identifier && lhs.dipToken == rhs.dipToken)
     }
-    
-    /// :nodoc:
-    public var hashValue: Int {
-        return identifier.hashValue
+}
+
+// MARK: Hashable
+
+extension Server: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
     }
-    
 }
 
 extension Server {
@@ -280,7 +283,7 @@ extension Server {
         }
         let availableServer = addresses().first(where: {$0.available})
         if availableServer == nil {
-            addresses().map({$0.reset()})
+            addresses().forEach({ $0.reset() })
             return bestAddress()
         }
         return availableServer
@@ -292,7 +295,7 @@ extension Server {
         }
         let availableServer = ovpnAddresses(tcp: tcp).first(where: {$0.available})
         if availableServer == nil {
-            ovpnAddresses(tcp: tcp).map({$0.reset()})
+            ovpnAddresses(tcp: tcp).forEach({ $0.reset() })
             return bestAddress()
         }
         return availableServer

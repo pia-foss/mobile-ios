@@ -14,16 +14,14 @@ public class GenerateQRLoginUseCase: GenerateQRLoginUseCaseType {
     }
     
     public func callAsFunction(completion: @escaping Completion) {
-        var configuration = GenerateQRRequestConfiguration()
+        let configuration = GenerateQRRequestConfiguration()
         executeNetworkRequest(with: configuration, completion: completion)
     }
 }
 
 private extension GenerateQRLoginUseCase {
     func executeNetworkRequest(with configuration: NetworkRequestConfigurationType, completion: @escaping Completion) {
-        networkClient.executeRequest(with: configuration) { [weak self] error, dataResponse in
-            guard let self else { return }
-            
+        networkClient.executeRequest(with: configuration) { error, dataResponse in
             if let data = dataResponse?.data {
                 completion(.success(data))
             } else {

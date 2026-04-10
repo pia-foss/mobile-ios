@@ -27,7 +27,7 @@ import PIAAssetsMobile
 
 private let log = PIALogger.logger(for: MenuViewController.self)
 
-protocol MenuViewControllerDelegate: class {
+protocol MenuViewControllerDelegate: AnyObject {
     func menu(_ menu: MenuViewController, didSelect item: MenuViewController.Item)
 
     func menu(didDetectTrialUpgrade: MenuViewController)
