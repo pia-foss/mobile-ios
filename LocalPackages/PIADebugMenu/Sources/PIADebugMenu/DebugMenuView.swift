@@ -99,9 +99,15 @@ public struct DebugMenuView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 40) {
                 appInfoSection
+                    .focusable()
+                vpnSection
+                    .focusable()
                 accountSection
+                    .focusable()
                 receiptSection
+                    .focusable()
                 logsSection
+                    .focusable()
                 supportSection
             }
             .padding(.horizontal, 60)
@@ -126,6 +132,15 @@ public struct DebugMenuView: View {
             DebugInfoRow(label: "Version", value: appVersion)
             DebugInfoRow(label: "Environment", value: environment)
             DebugInfoRow(label: "Base URL", value: baseUrl)
+        }
+    }
+
+    private var vpnSection: some View {
+        DebugSection("VPN") {
+            DebugInfoRow(label: "Status", value: Client.daemons.vpnStatus.rawValue)
+            DebugInfoRow(label: "Protocol", value: Client.preferences.vpnType)
+            DebugInfoRow(label: "Local IP", value: Client.daemons.publicIP ?? "---")
+            DebugInfoRow(label: "VPN IP", value: Client.daemons.vpnIP ?? "---")
         }
     }
 
@@ -157,7 +172,6 @@ public struct DebugMenuView: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .focusable()
                 #else
                 .padding(.vertical, 2)
                 #endif
@@ -199,7 +213,6 @@ public struct DebugMenuView: View {
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .focusable()
             #else
             .padding(.vertical, 2)
             #endif
@@ -272,7 +285,7 @@ public struct DebugMenuView: View {
                     }
 
                     do {
-                        let reportId = try await Client.submitDebugReport()
+                        let reportId = try await Client.submitDebugReport(includeDebug: true, redactIPs: false)
                         reportResult = ReportResult(
                             title: "Debug information submitted",
                             message: "Report ID: \(reportId)\nPlease note this ID — support will need it to locate your submission."

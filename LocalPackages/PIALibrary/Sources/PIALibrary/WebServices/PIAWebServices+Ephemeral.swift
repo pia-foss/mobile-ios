@@ -46,13 +46,17 @@ extension PIAWebServices {
     }
     
     func submitDebugReport() async throws -> String {
+        try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
+    }
+
+    func submitDebugReport(includeDebug: Bool, redactIPs: Bool) async throws -> String {
         let providers: [CSIDataProvider] = [
             PIACSIProtocolInformationProvider(),
             PIACSIDeviceInformationProvider(),
-            PIACSILogInformationProvider(),
+            PIACSILogInformationProvider(includeDebug: includeDebug, redactIPs: redactIPs),
             PIACSISubscriptionInformationProvider(),
-            PIACSIRegionInformationProvider(),
-            PIACSIUserInformationProvider(),
+            PIACSIRegionInformationProvider(redactIPs: redactIPs),
+            PIACSIUserInformationProvider(redactIPs: redactIPs),
             PIACSILastKnownExceptionProvider(),
         ]
 

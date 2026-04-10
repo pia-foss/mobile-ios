@@ -12,6 +12,7 @@ import PIACSI
 struct PIACSIUserInformationProvider: CSIDataProvider {
     var sectionName: String { "user_settings" }
     var content: String? { getUserInformation() }
+    let redactIPs: Bool
 
     private func getUserInformation() -> String {
         guard let defaults = UserDefaults(suiteName: Client.Configuration.appGroup) else {
@@ -19,6 +20,7 @@ struct PIACSIUserInformationProvider: CSIDataProvider {
         }
 
         let filteredPreferences = WhitelistUtil.filter(preferences: defaults.dictionaryRepresentation())
-        return filteredPreferences.map { "\($0): \($1)" }.joined(separator: "\n").redactIPs()
+        let result = filteredPreferences.map { "\($0): \($1)" }.joined(separator: "\n")
+        return redactIPs ? result.redactIPs() : result
     }
 }
