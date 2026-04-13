@@ -49,6 +49,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var signupTransaction: InAppTransaction?
     private var isPurchasing = false
 
+    @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
     @IBOutlet private weak var walkthroughDescription: UILabel!
 
@@ -78,6 +79,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         collectionPlans.delegate = self
         collectionPlans.dataSource = self
 
+        self.walkthroughImage.image = Asset.imageWalkthrough2.image
         self.walkthroughTitle.text = L10n.Signup.Walkthrough.Page._2.title
         self.walkthroughDescription.text = L10n.Signup.Walkthrough.Page._2.description + "\n" + L10n.Signup.Purchase.Trials.intro + ". "
 
