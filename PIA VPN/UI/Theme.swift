@@ -303,8 +303,7 @@ public class Theme {
 
     /// :nodoc:
     public func applyCenteredMap(_ imageView: UIImageView) {
-        imageView.image = palette.appearance == .dark ?
-        Asset.Piax.Global.centeredDarkMap.image : Asset.Piax.Global.centeredLightMap.image
+        imageView.image = Asset.Piax.Global.centeredMap.image
     }
     
     // MARK: Navigation bar
@@ -648,8 +647,7 @@ public class Theme {
     
     /// :nodoc:
     public func applyScrollableMap(_ imageView: UIImageView) {
-        imageView.image = palette.appearance == .dark ?
-        Asset.Piax.Global.scrollableMapDark.image : Asset.Piax.Global.scrollableMapLight.image
+        imageView.image = Asset.Piax.Global.scrollableMap.image
     }
 
     /// :nodoc:

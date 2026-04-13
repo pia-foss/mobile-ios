@@ -82,8 +82,7 @@ class FavoriteServersTile: UIView, Tileable {
         currentServers.append(Server.automatic)
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
-                button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
-                                    Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
+                button.setImage(Asset.Piax.Tiles.quickConnectPlaceholder.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
                 button.accessibilityLabel = L10n.Global.empty
@@ -129,7 +128,7 @@ class FavoriteServersTile: UIView, Tileable {
                     button.server = server
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
-                    imageView.image = Asset.dipBadgeDark.image
+                    imageView.image = Asset.dipBadge.image
                     imageView.isHidden = server.dipToken == nil
                     if status != .normal { //only when edit mode
                         imageView.isHidden = imageView.tag == 0 ? true : server.dipToken == nil

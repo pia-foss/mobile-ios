@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icon-trash.pdf",
+      "filename" : "map-light-walkthrough.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "icon-trash-dark.pdf",
+      "filename" : "map-dark-walkthrough.pdf",
       "idiom" : "universal"
     }
   ],

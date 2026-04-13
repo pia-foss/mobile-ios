@@ -73,7 +73,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
     private func prepareCellIcons() {
         leftIconImageView.image = UIImage(asset: Asset.Piax.Global.regionSelected)
         leftIconImageView.isHidden = !iconSelected
-        dipBadgeImageView.image = Asset.dipBadgeDark.image
+        dipBadgeImageView.image = Asset.dipBadge.image
     }
     
     private func configureIPView() {

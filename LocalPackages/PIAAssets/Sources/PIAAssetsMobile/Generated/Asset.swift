@@ -24,8 +24,7 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 public enum Asset {
   public enum Cards {
     public enum WireGuard {
-      public static let wgBackgroundDark = ImageAsset(name: "Cards/WireGuard/wg-background-dark")
-      public static let wgBackgroundLight = ImageAsset(name: "Cards/WireGuard/wg-background-light")
+      public static let wgBackground = ImageAsset(name: "Cards/WireGuard/wg-background")
       public static let wgMain = ImageAsset(name: "Cards/WireGuard/wg-main")
     }
   }
@@ -37,20 +36,14 @@ public enum Asset {
       public static let vpnButton = ImageAsset(name: "PIAX/Dashboard/vpn-button")
     }
     public enum Global {
-      public static let browserDarkInactive = ImageAsset(name: "PIAX/Global/browser-dark-inactive")
-      public static let browserLightInactive = ImageAsset(name: "PIAX/Global/browser-light-inactive")
-      public static let centeredDarkMap = ImageAsset(name: "PIAX/Global/centered-dark-map")
-      public static let centeredLightMap = ImageAsset(name: "PIAX/Global/centered-light-map")
+      public static let browserInactive = ImageAsset(name: "PIAX/Global/browser-inactive")
+      public static let centeredMap = ImageAsset(name: "PIAX/Global/centered-map")
       public static let computerIcon = ImageAsset(name: "PIAX/Global/computer-icon")
-      public static let dragDropIndicatorDark = ImageAsset(name: "PIAX/Global/drag-drop-indicator-dark")
-      public static let dragDropIndicatorLight = ImageAsset(name: "PIAX/Global/drag-drop-indicator-light")
-      public static let eyeActiveDark = ImageAsset(name: "PIAX/Global/eye-active-dark")
-      public static let eyeActiveLight = ImageAsset(name: "PIAX/Global/eye-active-light")
-      public static let eyeInactiveDark = ImageAsset(name: "PIAX/Global/eye-inactive-dark")
-      public static let eyeInactiveLight = ImageAsset(name: "PIAX/Global/eye-inactive-light")
+      public static let dragDropIndicator = ImageAsset(name: "PIAX/Global/drag-drop-indicator")
+      public static let eyeActive = ImageAsset(name: "PIAX/Global/eye-active")
+      public static let eyeInactive = ImageAsset(name: "PIAX/Global/eye-inactive")
       public static let favoriteGreen = ImageAsset(name: "PIAX/Global/favorite-green")
       public static let favoriteSelected = ImageAsset(name: "PIAX/Global/favorite-selected")
-      public static let favoriteUnselectedDark = ImageAsset(name: "PIAX/Global/favorite-unselected-dark")
       public static let favoriteUnselected = ImageAsset(name: "PIAX/Global/favorite-unselected")
       public static let globeIcon = ImageAsset(name: "PIAX/Global/globe-icon")
       public static let iconBack1 = ImageAsset(name: "PIAX/Global/icon-back 1")
@@ -60,29 +53,21 @@ public enum Asset {
       public static let iconEditTile = ImageAsset(name: "PIAX/Global/icon-edit-tile")
       public static let iconFilter = ImageAsset(name: "PIAX/Global/icon-filter")
       public static let iconWarning = ImageAsset(name: "PIAX/Global/icon-warning")
-      public static let killswitchDarkActive = ImageAsset(name: "PIAX/Global/killswitch-dark-active")
-      public static let killswitchDarkInactive = ImageAsset(name: "PIAX/Global/killswitch-dark-inactive")
-      public static let killswitchLightInactive = ImageAsset(name: "PIAX/Global/killswitch-light-inactive")
-      public static let nmtDarkActive = ImageAsset(name: "PIAX/Global/nmt-dark-active")
-      public static let nmtDarkInactive = ImageAsset(name: "PIAX/Global/nmt-dark-inactive")
-      public static let nmtLightActive = ImageAsset(name: "PIAX/Global/nmt-light-active")
-      public static let nmtLightInactive = ImageAsset(name: "PIAX/Global/nmt-light-inactive")
+      public static let killswitchActive = ImageAsset(name: "PIAX/Global/killswitch-active")
+      public static let killswitchInactive = ImageAsset(name: "PIAX/Global/killswitch-inactive")
+      public static let nmtActive = ImageAsset(name: "PIAX/Global/nmt-active")
+      public static let nmtInactive = ImageAsset(name: "PIAX/Global/nmt-inactive")
       public static let pagecontrolSelectedDot = ImageAsset(name: "PIAX/Global/pagecontrol-selected-dot")
       public static let pagecontrolUnselectedDot = ImageAsset(name: "PIAX/Global/pagecontrol-unselected-dot")
       public static let planSelected = ImageAsset(name: "PIAX/Global/plan-selected")
       public static let planUnselected = ImageAsset(name: "PIAX/Global/plan-unselected")
       public static let regionSelected = ImageAsset(name: "PIAX/Global/region-selected")
-      public static let scrollableMapDark = ImageAsset(name: "PIAX/Global/scrollableMap-dark")
-      public static let scrollableMapLight = ImageAsset(name: "PIAX/Global/scrollableMap-light")
+      public static let scrollableMap = ImageAsset(name: "PIAX/Global/scrollableMap")
       public static let shieldIcon = ImageAsset(name: "PIAX/Global/shield-icon")
-      public static let themeDarkActive = ImageAsset(name: "PIAX/Global/theme-dark-active")
-      public static let themeDarkInactive = ImageAsset(name: "PIAX/Global/theme-dark-inactive")
-      public static let themeLightActive = ImageAsset(name: "PIAX/Global/theme-light-active")
-      public static let themeLightInactive = ImageAsset(name: "PIAX/Global/theme-light-inactive")
-      public static let trustedDarkIcon = ImageAsset(name: "PIAX/Global/trusted-dark-icon")
-      public static let trustedLightIcon = ImageAsset(name: "PIAX/Global/trusted-light-icon")
-      public static let untrustedDarkIcon = ImageAsset(name: "PIAX/Global/untrusted-dark-icon")
-      public static let untrustedLightIcon = ImageAsset(name: "PIAX/Global/untrusted-light-icon")
+      public static let themeActive = ImageAsset(name: "PIAX/Global/theme-active")
+      public static let themeInactive = ImageAsset(name: "PIAX/Global/theme-inactive")
+      public static let trustedIcon = ImageAsset(name: "PIAX/Global/trusted-icon")
+      public static let untrustedIcon = ImageAsset(name: "PIAX/Global/untrusted-icon")
     }
     public enum Nmt {
       public static let iconAddRule = ImageAsset(name: "PIAX/NMT/icon-add-rule")
@@ -106,8 +91,7 @@ public enum Asset {
       public static let iconSelect = ImageAsset(name: "PIAX/NMT/icon-select")
     }
     public enum Regions {
-      public static let noResultsDark = ImageAsset(name: "PIAX/Regions/no-results-dark")
-      public static let noResultsLight = ImageAsset(name: "PIAX/Regions/no-results-light")
+      public static let noResults = ImageAsset(name: "PIAX/Regions/no-results")
     }
     public enum Settings {
       public static let iconAbout = ImageAsset(name: "PIAX/Settings/icon-about")
@@ -128,8 +112,7 @@ public enum Asset {
       }
       public static let ipTriangle = ImageAsset(name: "PIAX/Tiles/ip-triangle")
       public static let openTileDetails = ImageAsset(name: "PIAX/Tiles/open-tile-details")
-      public static let quickConnectPlaceholderDark = ImageAsset(name: "PIAX/Tiles/quick-connect-placeholder-dark")
-      public static let quickConnectPlaceholderLight = ImageAsset(name: "PIAX/Tiles/quick-connect-placeholder-light")
+      public static let quickConnectPlaceholder = ImageAsset(name: "PIAX/Tiles/quick-connect-placeholder")
     }
   }
   public static let accessoryExpire = ImageAsset(name: "accessory-expire")
@@ -138,8 +121,7 @@ public enum Asset {
   public static let buttonUp = ImageAsset(name: "button-up")
   public static let closeIcon = ImageAsset(name: "close-icon")
   public static let copyIcon = ImageAsset(name: "copy-icon")
-  public static let dipBadgeDark = ImageAsset(name: "dip-badge-dark")
-  public static let dipBadgeLight = ImageAsset(name: "dip-badge-light")
+  public static let dipBadge = ImageAsset(name: "dip-badge")
   public enum Flags {
     public static let flagAd = ImageAsset(name: "flags/flag-ad")
     public static let flagAe = ImageAsset(name: "flags/flag-ae")
@@ -412,8 +394,6 @@ public enum Asset {
   public static let iconContact = ImageAsset(name: "icon-contact")
   public static let iconDip = ImageAsset(name: "icon-dip")
   public static let iconGeneral = ImageAsset(name: "icon-general")
-  public static let iconGeoDarkSelected = ImageAsset(name: "icon-geo-dark-selected")
-  public static let iconGeoDark = ImageAsset(name: "icon-geo-dark")
   public static let iconGeoSelected = ImageAsset(name: "icon-geo-selected")
   public static let iconGeo = ImageAsset(name: "icon-geo")
   public static let iconHomepage = ImageAsset(name: "icon-homepage")
@@ -426,7 +406,6 @@ public enum Asset {
   public static let iconSettings = ImageAsset(name: "icon-settings")
   public static let iconThumbsDown = ImageAsset(name: "icon-thumbs-down")
   public static let iconThumbsUp = ImageAsset(name: "icon-thumbs-up")
-  public static let iconTrashDark = ImageAsset(name: "icon-trash-dark")
   public static let iconTrash = ImageAsset(name: "icon-trash")
   public static let iconWarning = ImageAsset(name: "icon-warning")
   public static let iconWifi = ImageAsset(name: "icon-wifi")

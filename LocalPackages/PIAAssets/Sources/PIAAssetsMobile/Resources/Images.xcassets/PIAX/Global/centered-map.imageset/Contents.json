@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icon-trash.pdf",
+      "filename" : "group.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "icon-trash-dark.pdf",
+      "filename" : "darkDotsCopy2.pdf",
       "idiom" : "universal"
     }
   ],
