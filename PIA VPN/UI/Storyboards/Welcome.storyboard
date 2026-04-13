@@ -1012,6 +1012,7 @@ You will not be charged during this process.</string>
                         <outlet property="textAgreement" destination="TnO-Bm-adV" id="3yU-zM-GCc"/>
                         <outlet property="restorePurchaseButton" destination="1Yt-Tw-J79" id="W58-ku-SJb"/>
                         <outlet property="scrollBackground" destination="iP4-wP-euf" id="rDH-Er-gcb"/>
+                        <outlet property="walkthroughImage" destination="jfg-1z-cTb" id="wIm-2k-cTb"/>
                         <outlet property="walkthroughDescription" destination="jAE-GG-f9t" id="gEf-dX-WNz"/>
                         <outlet property="walkthroughTitle" destination="JCM-sf-tzW" id="qKh-PW-sdq"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="RestorePurchaseSegue" id="tth-4B-3Z0"/>
