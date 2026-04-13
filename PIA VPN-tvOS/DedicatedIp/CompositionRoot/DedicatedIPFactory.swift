@@ -9,7 +9,8 @@
 import Foundation
 import PIALibrary
 
-class DedicatedIPFactory {
+public enum DedicatedIPFactory {
+    #if os(tvOS)
     static func makeDedicatedIPView() -> DedicatedIPView {
         DedicatedIPView(viewModel: makeDedicatedIPViewModel())
     }
@@ -19,21 +20,22 @@ class DedicatedIPFactory {
                              activateDIPToken: makeActivateDIPTokenUseCase(),
                              removeDIPToken: makeRemoveDIPUseCase())
     }
+    #endif
     
     static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
         GetDedicatedIpUseCase(serverProvider: makeDefaultServerProvider(),
                               dedicatedIpProvider: makeDedicatedIPProvider())
     }
     
-    private static func makeActivateDIPTokenUseCase() -> ActivateDIPTokenUseCaseType {
+    static func makeActivateDIPTokenUseCase() -> ActivateDIPTokenUseCaseType {
         ActivateDIPTokenUseCase(dipServerProvider: makeDedicatedIPProvider())
     }
     
-    private static func makeRemoveDIPUseCase() -> RemoveDIPUseCaseType {
+    static func makeRemoveDIPUseCase() -> RemoveDIPUseCaseType {
         RemoveDIPUseCase(dedicatedIpProvider: makeDedicatedIPProvider(),
                          favoriteRegionsUseCase: RegionsSelectionFactory.makeFavoriteRegionUseCase,
                          getDedicatedIP: makeGetDedicatedIpUseCase(), 
-                         vpnCpnnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
+                         vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
                          selectedServer: RegionsSelectionFactory.makeClientPreferences)
     }
     

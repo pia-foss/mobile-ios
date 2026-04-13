@@ -1,59 +1,44 @@
-
 import Foundation
+import PIADashboard
 import PIALibrary
 import PIALocalizations
 
-
-protocol AccountProviderType {
-    var isLoggedIn: Bool { get }
-    var isExpired: Bool { get }
-    var publicUsername: String? { get }
-    var currentUser: PIALibrary.UserAccount? { get set }
-    func logout(_ callback: ((Error?) -> Void)?)
-    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?)
-    func accountInformation(_ callback: ((PIALibrary.AccountInfo?, Error?) -> Void)?)
-}
-
-extension DefaultAccountProvider: AccountProviderType {
+// Extension to add isExpired convenience property
+extension AccountProvider {
     var isExpired: Bool {
         currentUser?.info?.isExpired ?? false
     }
 }
 
-protocol ServerType {
-    var id: ObjectIdentifier { get }
-    var name: String { get }
-    var identifier: String { get }
-    var regionIdentifier: String { get }
-    var country: String { get }
-    var geo: Bool { get }
-    var pingTime: Int? { get }
-    var isAutomatic: Bool { get }
-    var dipToken: String? { get }
-    var dipIKEv2IP: String? { get }
-    var dipStatusString: String? { get }
-}
-
-extension Server: ServerType {
-    
+extension Server: @retroactive ServerType {
     public var id: ObjectIdentifier {
         return ObjectIdentifier(self)
     }
-    
-    var dipStatusString: String? {
+
+    public var dipStatusString: String? {
         dipStatus?.getStatus()
     }
-    
-    var dipIKEv2IP: String? {
+
+    public var dipIKEv2IP: String? {
         iKEv2AddressesForUDP?.first?.ip
     }
 }
-protocol DedicatedIPStatusType {
-    func getStatus() -> String
+
+extension SelectedServerUseCase {
+    public static func automaticServer() -> ServerType {
+        Server(
+            serial: "",
+            name: L10n.Global.automatic,
+            country: "universal",
+            hostname: "auto.bogus.domain",
+            pingAddress: nil,
+            regionIdentifier: "auto"
+        )
+    }
 }
 
-extension DedicatedIPStatus: DedicatedIPStatusType {
-    func getStatus() -> String {
+extension DedicatedIPStatus: @retroactive DedicatedIPStatusType {
+    public func getStatus() -> String {
         switch self {
             case .invalid:
                 return L10n.Settings.Dedicatedip.Status.invalid
@@ -67,39 +52,18 @@ extension DedicatedIPStatus: DedicatedIPStatusType {
     }
 }
 
-
-protocol ServerProviderType {
-    var historicalServersType: [ServerType] { get }
-    var targetServerType: ServerType { get throws }
-    var currentServersType: [ServerType] { get }
-    
-    // Add methods from ServerProvider to this protocol as needed
-}
-
-extension DefaultServerProvider: ServerProviderType {
-    var historicalServersType: [ServerType] {
+extension DefaultServerProvider: @retroactive ServerProviderType {
+    public var historicalServersType: [ServerType] {
         return self.historicalServers
     }
-    
-    var targetServerType: ServerType {
+
+    public var targetServerType: ServerType {
         get throws {
             try self.targetServer
         }
     }
-    
-    var currentServersType: [ServerType] {
+
+    public var currentServersType: [ServerType] {
         return self.currentServers
     }
-    
 }
-
-protocol VPNStatusProviderType {
-    var vpnStatus: VPNStatus { get }
-    func connect(_ callback: SuccessLibraryCallback?)
-    func disconnect(_ callback: SuccessLibraryCallback?)
-    
-}
-
-extension DefaultVPNProvider: VPNStatusProviderType {}
-
-extension MockVPNProvider: VPNStatusProviderType {}

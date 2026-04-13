@@ -1,9 +1,10 @@
 
 import Foundation
+import PIADashboard
 import PIALibrary
 
-class DashboardFactory {
-    
+enum DashboardFactory {
+
     static func makeDashboardView() -> DashboardView {
         return DashboardView(viewModel: makeDashboardViewModel())
     }

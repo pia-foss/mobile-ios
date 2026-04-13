@@ -7,16 +7,18 @@
 //
 
 import Foundation
+import PIADashboard
 import PIALibrary
 
 private let log = PIALogger.logger(for: LogOutUseCase.self)
+
 
 protocol LogOutUseCaseType {
     func logOut() async throws
 }
 
 class LogOutUseCase: LogOutUseCaseType {
-    let accountProvider: AccountProviderType
+    let accountProvider: AccountProvider
     let appPreferences: AppPreferencesType
     let vpnConfigurationProvider: VpnConfigurationProviderType
     let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
@@ -25,7 +27,7 @@ class LogOutUseCase: LogOutUseCaseType {
     let favoriteRegionsUseCase: FavoriteRegionUseCaseType
     let searchedRegionsAvailability: SearchedRegionsAvailabilityType
     
-    init(accountProvider: AccountProviderType, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
+    init(accountProvider: AccountProvider, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
          connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType) {
         self.accountProvider = accountProvider
         self.appPreferences = appPreferences

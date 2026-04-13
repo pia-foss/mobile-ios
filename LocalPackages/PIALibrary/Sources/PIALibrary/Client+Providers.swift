@@ -25,8 +25,8 @@ import Foundation
 extension Client {
 
     /// Provides concrete implementations of the business providers.
-    public class Providers {
-        
+    public final class Providers {
+
         /// Provides user related methods.
         public var accountProvider: AccountProvider = AccountFactory.makeDefaultAccountProvider()
         

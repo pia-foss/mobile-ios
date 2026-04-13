@@ -15,7 +15,6 @@ struct DebugInfoRow: View {
         }
         #if os(tvOS)
         .padding(.vertical, 8)
-        .focusable()
         #else
         .padding(.vertical, 2)
         #endif

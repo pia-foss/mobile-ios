@@ -26,7 +26,7 @@ import UIKit
 import PIALocalizations
 import PIAAssetsMobile
 
-extension Server: CustomStringConvertible {
+extension Server: @retroactive CustomStringConvertible {
     func name(forStatus status: VPNStatus) -> String? {
         
         let localizedName = name

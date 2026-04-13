@@ -28,31 +28,28 @@ private let log = PIALogger.logger(for: PIAWebServices.self)
 extension PIAWebServices {
 
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
-        self.accountAPI.clientStatus(requestTimeoutMillis: 10000) { (information, errors) in
-            DispatchQueue.main.async {
-                if !errors.isEmpty {
-                    callback?(nil, ClientError.internetUnreachable)
-                    return
-                }
-
-                if let information = information {
-                    callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
-                } else {
-                    callback?(nil, ClientError.malformedResponseData)
-                }
+        Task { @MainActor in
+            do {
+                let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 10000)
+                callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
+            } catch {
+                callback?(nil, error)
             }
         }
-        
     }
     
     func submitDebugReport() async throws -> String {
+        try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
+    }
+
+    func submitDebugReport(includeDebug: Bool, redactIPs: Bool) async throws -> String {
         let providers: [CSIDataProvider] = [
             PIACSIProtocolInformationProvider(),
             PIACSIDeviceInformationProvider(),
-            PIACSILogInformationProvider(),
+            PIACSILogInformationProvider(includeDebug: includeDebug, redactIPs: redactIPs),
             PIACSISubscriptionInformationProvider(),
-            PIACSIRegionInformationProvider(),
-            PIACSIUserInformationProvider(),
+            PIACSIRegionInformationProvider(redactIPs: redactIPs),
+            PIACSIUserInformationProvider(redactIPs: redactIPs),
             PIACSILastKnownExceptionProvider(),
         ]
 

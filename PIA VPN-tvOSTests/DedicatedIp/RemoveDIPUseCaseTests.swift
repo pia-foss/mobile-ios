@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 final class RemoveDIPUseCaseTests: XCTestCase {
@@ -29,7 +30,7 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         sut = RemoveDIPUseCase(dedicatedIpProvider: fixture.dipServerProviderMock,
                                favoriteRegionsUseCase: fixture.favoriteRegionsUseCaseMock,
                                getDedicatedIP: fixture.getDedicatedIPUseCaseMock,
-                               vpnCpnnectionUseCase: fixture.vpnConnectionUseCaseMock,
+                               vpnConnectionUseCase: fixture.vpnConnectionUseCaseMock,
                                selectedServer: fixture.clientPreferencesMock)
     }
 
@@ -42,7 +43,7 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         sut = nil
     }
 
-    func test_removeDIPToken_complets_successfully_when_dedicatedIp_was_found_and_connected() {
+    func test_removeDIPToken_complets_successfully_when_dedicatedIp_was_found_and_connected() async throws {
         // GIVEN
         let server = ServerTypeStub.makesServer1()
         instantiateSut(result: server, selectedServer: server)
@@ -52,8 +53,8 @@ final class RemoveDIPUseCaseTests: XCTestCase {
             expectation.fulfill()
         }
         // WHEN
-        sut()
-        
+        try await sut()
+
         // THEN
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(fixture.dipServerProviderMock.requests, [.removeDIPToken])
@@ -61,7 +62,7 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         XCTAssertEqual(fixture.vpnConnectionUseCaseMock.disconnectCalledAttempt, 1)
     }
     
-    func test_removeDIPToken_complets_successfully_when_dedicatedIp_was_found_and_not_connected() {
+    func test_removeDIPToken_complets_successfully_when_dedicatedIp_was_found_and_not_connected() async throws {
         // GIVEN
         let server = ServerTypeStub.makesServer1()
         let selectedServer = ServerTypeStub.makesServer2()
@@ -71,15 +72,15 @@ final class RemoveDIPUseCaseTests: XCTestCase {
             XCTFail("Unexpected call to vpnConnectionUseCaseMock")
         }
         // WHEN
-        sut()
-        
+        try await sut()
+
         // THEN
         XCTAssertEqual(fixture.dipServerProviderMock.requests, [.removeDIPToken])
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledAttempt, 1)
         XCTAssertEqual(fixture.vpnConnectionUseCaseMock.disconnectCalledAttempt, 0)
     }
     
-    func test_activatesDIPToken_complets_with_failure_when_DedicatedIPProvider_complets_with_failure() {
+    func test_activatesDIPToken_complets_with_failure_when_DedicatedIPProvider_complets_with_failure() async throws {
         // GIVEN
         instantiateSut(result: nil, selectedServer: ServerTypeStub.makeValidServerTypeStub())
         fixture.vpnConnectionUseCaseMock.disconnectionAction = {
@@ -87,8 +88,8 @@ final class RemoveDIPUseCaseTests: XCTestCase {
         }
         
         // WHEN
-        sut()
-        
+        try await sut()
+
         // THEN
         XCTAssertEqual(fixture.dipServerProviderMock.requests, [])
         XCTAssertEqual(fixture.favoriteRegionsUseCaseMock.removeFromFavoritesCalledAttempt, 0)
@@ -118,7 +119,7 @@ extension ServerTypeStub {
                        geo: false,
                        pingTime: 0,
                        isAutomatic: true,
-                       dipToken: "dipToken",
+                       dipToken: "dipToken2",
                        dipIKEv2IP: "dipIKEv2IP2",
                        dipStatusString: "dipStatusString")
     }

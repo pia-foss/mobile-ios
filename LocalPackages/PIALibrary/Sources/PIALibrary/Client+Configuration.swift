@@ -25,7 +25,6 @@ import Foundation
 fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
 
 extension Client {
-    
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
     public final class Configuration {
 

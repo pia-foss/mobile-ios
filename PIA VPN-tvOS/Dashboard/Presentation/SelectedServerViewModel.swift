@@ -1,5 +1,6 @@
 
 import Foundation
+import PIADashboard
 import PIALibrary
 import Combine
 import PIALocalizations
@@ -7,7 +8,7 @@ import PIAAssetsTV
 import SwiftUI
 
 
-class SelectedServerViewModel: ObservableObject {
+final class SelectedServerViewModel: ObservableObject {
 
     private let useCase: SelectedServerUseCaseType
     private let optimalLocationUseCase: OptimalLocationUseCaseType
@@ -18,7 +19,7 @@ class SelectedServerViewModel: ObservableObject {
     @Published var selectedServer: ServerType?
     private var cancellables = Set<AnyCancellable>()
     
-    var selectedSeverTitle: String  {
+    var selectedServerTitle: String  {
         let genericTitle = L10n.LocationSelection.AnyOtherLocation.title
         guard let selectedServer else {
             return genericTitle

@@ -168,7 +168,8 @@ public final class Server {
     public let meta: ServerAddressIP?
 
     public let dipExpire: Date?
-    
+
+    /// Dedicated IP token, if any.
     public let dipToken: String?
     
     public let dipStatus: DedicatedIPStatus?

@@ -22,7 +22,7 @@ class VpnConfigurationProvider: VpnConfigurationProviderType {
         self.vpnProvider = vpnProvider
     }
     
-    func install(force forceInstall: Bool, _ callback: PIALibrary.SuccessLibraryCallback?) {
+    func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         vpnProvider.install(force: forceInstall, callback)
     }
     

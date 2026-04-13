@@ -205,15 +205,6 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
     }
     #endif
 
-    /// :nodoc:
-    public func migrateOldTokenIfNeeded(_ callback: SuccessLibraryCallback?) {
-        guard !mockIsUnauthorized else {
-            callback?(ClientError.unauthorized)
-            return
-        }
-        delegate.migrateOldTokenIfNeeded(callback)
-    }
-
     public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
         guard !mockIsUnauthorized else {
             callback?(nil, ClientError.unauthorized)

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import PIAAssetsTV
+import PIALibrary
 
 struct RegionsListView: View {
     

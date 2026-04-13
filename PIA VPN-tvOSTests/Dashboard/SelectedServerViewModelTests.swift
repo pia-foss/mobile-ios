@@ -9,6 +9,7 @@
 import Foundation
 import XCTest
 import Combine
+import PIALibrary
 
 @testable import PIA_VPN_tvOS
 
@@ -64,7 +65,7 @@ class SelectedServerViewModelTests: XCTestCase {
         sut.selectedServer = Fixture.optimaLocation
         
         // THEN the selected server titl is "Optimal Location"
-        XCTAssertEqual(sut.selectedSeverTitle, "Optimal Location")
+        XCTAssertEqual(sut.selectedServerTitle, "Optimal Location")
     }
     
     func test_selectedServerTitle_forNonOptimalLocation() {
@@ -73,7 +74,7 @@ class SelectedServerViewModelTests: XCTestCase {
         sut.selectedServer = Fixture.barcelona
         
         // THEN the selected server titl is "Selected Location"
-        XCTAssertEqual(sut.selectedSeverTitle, "Selected Location")
+        XCTAssertEqual(sut.selectedServerTitle, "Selected Location")
     }
     
     

@@ -19,7 +19,8 @@ class LoginFactory {
                        checkLoginAvailability: CheckLoginAvailability(),
                        validateLoginCredentials: ValidateCredentialsFormat(),
                        errorHandler: makeLoginViewModelErrorHandler(),
-                       onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.connectionstats))
+                       onSuccessAction: .navigate(router: AppRouter.shared, destination: OnboardingDestinations.connectionstats),
+                       onExpiredAction: .navigate(router: AppRouter.shared, destination: AuthenticationDestinations.expired))
     }
     
     private static func makeLoginWithCredentialsUseCase() -> LoginWithCredentialsUseCaseType {
@@ -28,8 +29,7 @@ class LoginFactory {
     }
     
     static func makeLoginProvider() -> LoginProviderType {
-        LoginProvider(accountProvider: Client.providers.accountProvider, 
-                      userAccountMapper: UserAccountMapper())
+        LoginProvider(accountProvider: Client.providers.accountProvider)
     }
     
     private static func makeLoginViewModelErrorHandler() -> LoginViewModelErrorHandlerType {

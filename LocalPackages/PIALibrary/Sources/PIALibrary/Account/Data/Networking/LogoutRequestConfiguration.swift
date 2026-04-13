@@ -7,7 +7,7 @@ struct LogoutRequestConfiguration: NetworkRequestConfigurationType {
     
     let networkRequestModule: NetworkRequestModule = .account
     let path: RequestAPI.Path = .logout
-    let httpMethod: NWHttpConnection.NWConnectionHTTPMethod = .post
+    let httpMethod: NWHttpConnection.NWConnectionHTTPMethod = .delete
     let contentType: NetworkRequestContentType = .json
     let inlcudeAuthHeaders: Bool = true
     let urlQueryParameters: [String : String]? = nil

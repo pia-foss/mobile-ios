@@ -21,7 +21,7 @@ protocol FavoriteRegionUseCaseType {
     func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool
 }
 
-class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
+final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     static let favDipIdPreffix = "favDIP:"
     
     private let keychain: KeychainType

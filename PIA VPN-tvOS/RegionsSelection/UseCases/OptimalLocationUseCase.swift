@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PIADashboard
 import PIALibrary
 
 private let log = PIALogger.logger(for: OptimalLocationUseCase.self)

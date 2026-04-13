@@ -34,7 +34,7 @@ extension Server {
         regionIdentifier: "auto"
     )
     
-    var isAutomatic: Bool {
+    public var isAutomatic: Bool {
         return (identifier == Server.automatic.identifier)
     }
 }

@@ -11,13 +11,13 @@ import Foundation
 import PIALibrary
 
 class SignupUseCaseMock: PIA_VPN_tvOS.SignupUseCaseType {
-    private let result: Result<PIA_VPN_tvOS.UserAccount, Error>
+    private let result: Result<UserAccount, Error>
     
-    init(result: Result<PIA_VPN_tvOS.UserAccount, Error>) {
+    init(result: Result<UserAccount, Error>) {
         self.result = result
     }
     
-    func callAsFunction(email: String, transaction: PIALibrary.InAppTransaction?) async throws -> PIA_VPN_tvOS.UserAccount {
+    func callAsFunction(email: String, transaction: InAppTransaction?) async throws -> UserAccount {
         switch result {
             case .success(let userAccount):
                 return userAccount

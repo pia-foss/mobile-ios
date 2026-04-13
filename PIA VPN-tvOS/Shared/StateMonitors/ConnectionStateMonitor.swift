@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PIADashboard
 import PIALibrary
 import PIALocalizations
 
@@ -63,7 +64,7 @@ protocol ConnectionStateMonitorType {
     func callAsFunction()
 }
 
-class ConnectionStateMonitor: ConnectionStateMonitorType {
+final class ConnectionStateMonitor: ConnectionStateMonitorType {
     private var cancellable: AnyCancellable?
     
     private let vpnStatusMonitor: VPNStatusMonitorType

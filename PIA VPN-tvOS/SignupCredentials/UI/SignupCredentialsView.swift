@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PIALibrary
 import PIALocalizations
 import PIAAssetsTV
 

@@ -7,15 +7,16 @@
 //
 
 import Foundation
-@testable import PIA_VPN_tvOS
 import Combine
+import PIADashboard
+@testable import PIA_VPN_tvOS
 
 class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
     
     var getConnectionIntentCalled = false
     var getConnectionIntentCalledAttempt = 0
     var getConnectionIntentResult = CurrentValueSubject<VpnConnectionIntent, Error>(VpnConnectionIntent.none)
-    func getConnectionIntent() -> AnyPublisher<PIA_VPN_tvOS.VpnConnectionIntent, Error> {
+    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
         return getConnectionIntentResult.eraseToAnyPublisher()
     }
     

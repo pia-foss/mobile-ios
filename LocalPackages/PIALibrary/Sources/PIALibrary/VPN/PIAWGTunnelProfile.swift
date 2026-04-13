@@ -25,10 +25,9 @@ import Foundation
 import PIAWireguard
 import NetworkExtension
 
-/// Implementation of `VPNProfile` providing OpenVPN connectivity.
+/// Implementation of `VPNProfile` providing WireGuard connectivity.
+public final class PIAWGTunnelProfile: NetworkExtensionProfile {
 
-public class PIAWGTunnelProfile: NetworkExtensionProfile {
-    
     public func parsedCustomConfiguration(from map: [String : Any]) -> VPNCustomConfiguration? {
         
         let S = PIAWireguardConfiguration.Keys.self

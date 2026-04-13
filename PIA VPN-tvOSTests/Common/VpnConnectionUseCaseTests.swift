@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 import Combine
-
+@testable import PIADashboard
 @testable import PIA_VPN_tvOS
 
 class VpnConnectionUseCaseTests: XCTestCase {
