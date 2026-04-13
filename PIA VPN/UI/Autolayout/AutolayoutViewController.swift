@@ -20,12 +20,12 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIADesignSystem
-import PIAUIKit
-import PIASwiftUI
 import PIAAssetsMobile
+import PIADesignSystem
+import PIALibrary
+import PIASwiftUI
+import PIAUIKit
+import UIKit
 
 /// Declares a generic, dismissable modal controller.
 public protocol ModalController: AnyObject {
@@ -70,7 +70,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return Theme.current.statusBarAppearance(for: self)
     }
-    
+
     /// The initial status of the view controller. Every time the var changes the value, we reload the UI of the form element given as parameter.
     /// Example of use: self.status = .error(element: textEmail)
     open var status: ViewControllerStatus = .initial {
@@ -84,7 +84,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         NotificationCenter.default.removeObserver(self)
         loadingViewController?.view.removeFromSuperview()
     }
-    
+
     /// :nodoc:
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,24 +92,24 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         if let viewContainer = viewContainer {
             Theme.current.applyPrincipalBackground(viewContainer)
         }
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         viewShouldRestyle()
     }
-    
+
     /// :nodoc:
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         refreshOrientationConstraints(size: view.bounds.size)
     }
-    
+
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
         //MARK: - iOS13 Dark mode
         Macros.postNotification(.PIAThemeShouldChange)
     }
-    
+
     private func refreshOrientationConstraints(size: CGSize) {
         if let viewContainer = viewContainer {
             let orientation: UIInterfaceOrientationMask = (isLandscape ? .landscape : .portrait)
@@ -130,9 +130,9 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
      */
     open func didRefreshOrientationConstraints() {
     }
-    
+
     // MARK: ModalController
-    
+
     /// :nodoc:
     @objc open func dismissModal() {
         dismiss(animated: true, completion: nil)
@@ -142,9 +142,9 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     @objc open func dismissModal(completion: (() -> Void)? = nil) {
         dismiss(animated: true, completion: completion)
     }
-    
+
     // MARK: Restylable
-    
+
     /// :nodoc:
     @objc open func viewShouldRestyle() {
         Theme.current.applyNavigationBarStyle(to: self)
@@ -154,7 +154,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
         }
         setNeedsStatusBarAppearanceUpdate()
     }
-    
+
     private func reloadFormElements() {
         switch status {
         case .initial:
@@ -165,60 +165,62 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
             updateFormElementBorder(element)
         }
     }
-    
+
     private func restoreFormElementBorder(_ element: UIView) {
         if let element = element as? UITextField {
             Theme.current.applyInput(element)
             element.rightView = nil
         }
     }
-    
+
     private func updateFormElementBorder(_ element: UIView) {
         if let element = element as? UITextField {
             Theme.current.applyInputError(element)
-            let iconWarning = UIImageView(image:Asset.iconWarning.image.withRenderingMode(.alwaysTemplate))
+            let iconWarning = UIImageView(image: Asset.iconWarning.image.withRenderingMode(.alwaysTemplate))
             iconWarning.tintColor = .piaRed
             element.rightView = iconWarning
         }
     }
-    
+
     public func styleNavigationBarWithTitle(_ title: String) {
-        
+
         let currentStatus = Client.providers.vpnProvider.vpnStatus
-        
+
         switch currentStatus {
         case .connected:
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.text = title
             if let navController = navigationController {
-                Theme.current.applyCustomNavigationBar(navController.navigationBar,
-                                                       withTintColor: .piaGrey6,
-                                                       andBarTintColors: [UIColor.piaGreen,
-                                                                          UIColor.piaGreenDark20])
+                Theme.current.applyCustomNavigationBar(
+                    navController.navigationBar,
+                    withTintColor: .piaGrey6,
+                    andBarTintColors: [
+                        UIColor.piaGreen,
+                        UIColor.piaGreenDark20
+                    ])
             }
             let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
-            
+
         default:
             let titleLabelView = UILabel(frame: CGRect.zero)
-            titleLabelView.style(style: Theme.current.palette.appearance == .dark ?
-                TextStyle.textStyle6 :
-                TextStyle.textStyle7)
+            titleLabelView.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
             titleLabelView.text = title
             if let navigationController = navigationController {
-                Theme.current.applyCustomNavigationBar(navigationController.navigationBar,
-                                                       withTintColor: nil,
-                                                       andBarTintColors: nil)
+                Theme.current.applyCustomNavigationBar(
+                    navigationController.navigationBar,
+                    withTintColor: nil,
+                    andBarTintColors: nil)
             }
-            
+
             let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             navigationItem.titleView = titleLabelView
             setNeedsStatusBarAppearanceUpdate()
-            
+
         }
     }
 

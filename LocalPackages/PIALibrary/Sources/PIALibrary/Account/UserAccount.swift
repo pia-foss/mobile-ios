@@ -27,7 +27,7 @@ public struct UserAccount: CustomStringConvertible, Equatable {
 
     /// The account credentials.
     public let credentials: Credentials
-    
+
     /// The associated account informations.
     public let info: AccountInfo?
 
@@ -45,7 +45,7 @@ public struct UserAccount: CustomStringConvertible, Equatable {
     }
 
     // MARK: CustomStringConvertible
-    
+
     /// :nodoc:
     public var description: String {
         if let info = self.info {
@@ -57,6 +57,6 @@ public struct UserAccount: CustomStringConvertible, Equatable {
 
     public static func == (lhs: UserAccount, rhs: UserAccount) -> Bool {
         lhs.credentials == rhs.credentials
-        && lhs.info == rhs.info
+            && lhs.info == rhs.info
     }
 }

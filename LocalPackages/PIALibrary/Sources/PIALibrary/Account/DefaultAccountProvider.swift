@@ -26,7 +26,7 @@ import UIKit
 private let log = PIALogger.logger(for: DefaultAccountProvider.self)
 
 public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
-    
+
     private let customWebServices: WebServices?
     private let apiTokenProvider: APITokenProviderType
     private let vpnTokenProvider: VpnTokenProviderType
@@ -37,44 +37,45 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         } else {
             customWebServices = nil
         }
-        
+
         self.apiTokenProvider = apiTokenProvider
         self.vpnTokenProvider = vpnTokenProvider
     }
 
     // MARK: AccountProvider
-    
+
     #if os(iOS) || os(tvOS)
-    public var planProducts: [Plan: InAppProduct]? {
-        guard let products = accessedStore.availableProducts else {
-            return nil
-        }
-        var map = [Plan: InAppProduct]()
-        for product in products {
-            guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
-                continue
+        public var planProducts: [Plan: InAppProduct]? {
+            guard let products = accessedStore.availableProducts else {
+                return nil
             }
-            map[plan] = product
+            var map = [Plan: InAppProduct]()
+            for product in products {
+                guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
+                    continue
+                }
+                map[plan] = product
+            }
+            return map
         }
-        return map
-    }
     #endif
-    
+
     public var isLoggedIn: Bool {
         guard let username = accessedDatabase.secure.username() else {
             return false
         }
         return (accessedDatabase.secure.password(for: username) != nil)
     }
-    
+
     public var shouldCleanAccount: Bool {
         if self.accessedDatabase.plain.accountInfo == nil,
-            self.isLoggedIn {
+            self.isLoggedIn
+        {
             return true
         }
         return false
     }
-    
+
     public var oldToken: String? {
         guard let username = accessedDatabase.secure.username() else {
             return nil
@@ -90,27 +91,27 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         guard let vpnToken = vpnTokenProvider.getVpnToken() else {
             return webServices.vpnToken
         }
-        
+
         let vpnTokenString = "vpn_token_\(vpnToken.vpnUsernameToken):\(vpnToken.vpnPasswordToken)"
-        
+
         return webServices.vpnToken ?? vpnTokenString
     }
-    
+
     public var vpnTokenUsername: String? {
         return getVpnTokenUsernameAndPassword()?.username
     }
-    
+
     public var vpnTokenPassword: String? {
         return getVpnTokenUsernameAndPassword()?.password
     }
-    
+
     public var publicUsername: String? {
         guard let username = accessedDatabase.secure.publicUsername() else {
             return nil
         }
         return username
     }
-    
+
     public var currentUser: UserAccount? {
         get {
             guard let username = accessedDatabase.secure.username() else {
@@ -139,28 +140,29 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public var currentPasswordReference: Data? {
         guard let username = accessedDatabase.secure.username() else {
             return nil
         }
         return accessedDatabase.secure.passwordReference(for: username)
     }
-    
+
     #if os(iOS) || os(tvOS)
-    public var lastSignupRequest: SignupRequest? {
-        guard let email = accessedDatabase.plain.lastSignupEmail else {
-            return nil
+        public var lastSignupRequest: SignupRequest? {
+            guard let email = accessedDatabase.plain.lastSignupEmail else {
+                return nil
+            }
+            return SignupRequest(email: email)
         }
-        return SignupRequest(email: email)
-    }
     #endif
 
     private func updateUsernamePassword() {
         if let token = self.vpnToken {
             let tokenComponents = token.components(separatedBy: ":")
             if let username = tokenComponents.first,
-                let password = tokenComponents.last {
+                let password = tokenComponents.last
+            {
                 self.accessedDatabase.secure.setUsername(username)
                 self.accessedDatabase.secure.setPassword(password, for: username)
             }
@@ -218,7 +220,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
         Task { @MainActor in
             do {
@@ -229,18 +231,18 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     private func handleLoginResult(error: Error?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         guard error == nil else {
             callback?(nil, error)
             return
         }
-        
+
         guard vpnToken != nil else {
             callback?(nil, ClientError.unauthorized)
             return
         }
-        
+
         self.updateUser(credentials: credentials) { userAccount, error in
             if let userAccount = userAccount {
                 Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
@@ -248,12 +250,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(userAccount, error)
         }
     }
-        
-    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)? ) {
+
+    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         self.updateUsernamePassword()
         self.updateUserAccount(credentials: credentials, callback: callback)
     }
-        
+
     private func updateUserAccount(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         Task { @MainActor in
             do {
@@ -269,7 +271,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard isLoggedIn, self.publicUsername != nil else {
             if currentUser == nil {
@@ -279,7 +281,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
         accountInfoWith(callback)
     }
-    
+
     public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard isLoggedIn else {
             callback?(nil, ClientError.unauthorized)
@@ -287,7 +289,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
         accountInfoWith(callback)
     }
-    
+
     private func accountInfoWith(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         Task { @MainActor in
             do {
@@ -300,7 +302,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard let user = currentUser else {
             callback?(nil, ClientError.unauthorized)
@@ -327,9 +329,11 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 }
 
                 self.accessedDatabase.plain.accountInfo = newAccountInfo
-                Macros.postNotification(.PIAAccountDidUpdate, [
-                    .accountInfo: newAccountInfo
-                ])
+                Macros.postNotification(
+                    .PIAAccountDidUpdate,
+                    [
+                        .accountInfo: newAccountInfo
+                    ])
 
                 callback?(newAccountInfo, nil)
             } catch {
@@ -337,7 +341,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public func logout(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
             callback?(nil)
@@ -351,7 +355,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(nil)
         }
     }
-    
+
     public func deleteAccount(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
             callback?(ClientError.unauthorized)
@@ -367,7 +371,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
     }
-    
+
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         Task { @MainActor in
             guard let features = try? await webServices.featureFlags() else {
@@ -380,272 +384,272 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             callback?(nil)
         }
     }
-    
-    #if os(iOS) || os(tvOS)
-    public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
-        log.debug("Fetching available product keys...")
-        
-        let receipt = accessedStore.paymentReceipt
 
-        Task { @MainActor in
-            do {
-                let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
-                callback?(appStoreInformation, nil)
-            } catch {
-                callback?(nil, error)
+    #if os(iOS) || os(tvOS)
+        public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
+            log.debug("Fetching available product keys...")
+
+            let receipt = accessedStore.paymentReceipt
+
+            Task { @MainActor in
+                do {
+                    let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
+                    callback?(appStoreInformation, nil)
+                } catch {
+                    callback?(nil, error)
+                }
             }
         }
-    }
-    
-    public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
-        log.debug("Fetching available products...")
-        
-        if let products = planProducts {
-            log.debug("Available products in cache: \(products)")
-            Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-            callback?(products, nil)
-            return
-        }
-        
-        log.debug("No available products in cache, requesting from store...")
-        
-        let identifiers = accessedConfiguration.allProductIdentifiers()
-        accessedStore.fetchProducts(identifiers: identifiers) { (products, error) in
-            let products = self.planProducts ?? [:]
-            log.debug("Available products from store: \(products)")
-            Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-            callback?(products, nil)
-        }
-    }
 
-    public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        listPlanProducts { (map, error) in
-            guard let product = map?[plan] else {
-                callback?(nil, ClientError.productUnavailable)
+        public func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+            log.debug("Fetching available products...")
+
+            if let products = planProducts {
+                log.debug("Available products in cache: \(products)")
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
+                callback?(products, nil)
                 return
             }
 
-            self.accessedStore.purchaseProduct(product) { (transaction, error) in
-                guard let transaction = transaction else {
+            log.debug("No available products in cache, requesting from store...")
+
+            let identifiers = accessedConfiguration.allProductIdentifiers()
+            accessedStore.fetchProducts(identifiers: identifiers) { (products, error) in
+                let products = self.planProducts ?? [:]
+                log.debug("Available products from store: \(products)")
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
+                callback?(products, nil)
+            }
+        }
+
+        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+            listPlanProducts { (map, error) in
+                guard let product = map?[plan] else {
+                    callback?(nil, ClientError.productUnavailable)
+                    return
+                }
+
+                self.accessedStore.purchaseProduct(product) { (transaction, error) in
+                    guard let transaction = transaction else {
+                        callback?(nil, error)
+                        return
+                    }
+                    callback?(transaction, nil)
+                }
+            }
+        }
+
+        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
+            accessedStore.refreshPaymentReceipt(callback)
+        }
+
+        public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+            Task { @MainActor in
+                do {
+                    try await webServices.loginLink(email: email)
+                    callback?(nil)
+                } catch {
+                    callback?(error)
+                }
+            }
+        }
+
+        public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            guard !isLoggedIn else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+            guard let signup = request.signup(withStore: accessedStore) else {
+                callback?(nil, ClientError.noReceipt)
+                return
+            }
+
+            accessedDatabase.plain.lastSignupEmail = request.email
+
+            Task { @MainActor in
+                do {
+                    let credentials = try await webServices.signup(with: signup)
+
+                    if let transaction = request.transaction {
+                        accessedStore.finishTransaction(transaction, success: true)
+                    }
+
+                    accessedDatabase.plain.lastSignupEmail = nil
+                    accessedDatabase.secure.setPublicUsername(credentials.username)
+                    accessedDatabase.secure.setUsername(credentials.username)
+                    accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+
+                    try await webServices.token(credentials: credentials)
+                    let accountInfo = try await webServices.info()
+                    accessedDatabase.plain.accountInfo = accountInfo
+                    accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+                    let user = UserAccount(credentials: credentials, info: nil)
+                    Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+                    callback?(user, nil)
+
+                } catch let error as ClientError where error == .badReceipt {
+                    // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
+                    // This handles returning users (e.g. "Duplicate purchase" from API).
+                    await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
+                } catch {
+                    if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
+                        callback?(nil, ClientError.internetUnreachable)
+                        return
+                    }
+
+                    callback?(nil, error)
+                }
+            }
+        }
+
+        private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) async {
+            guard let receipt = accessedStore.paymentReceipt else {
+                callback?(nil, ClientError.badReceipt)
+                return
+            }
+
+            do {
+                try await webServices.token(receipt: receipt)
+            } catch {
+                callback?(nil, ClientError.badReceipt)
+                return
+            }
+
+            if let transaction = transaction {
+                accessedStore.finishTransaction(transaction, success: true)
+            }
+
+            accessedDatabase.plain.lastSignupEmail = nil
+            updateUsernamePassword()
+
+            guard let accountInfo = try? await webServices.info() else {
+                callback?(nil, ClientError.badReceipt)
+                return
+            }
+
+            accessedDatabase.plain.accountInfo = accountInfo
+            accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+            let credentials = Credentials(
+                username: vpnTokenUsername ?? "",
+                password: vpnTokenPassword ?? ""
+            )
+            let user = UserAccount(credentials: credentials, info: accountInfo)
+            Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+            callback?(user, nil)
+        }
+
+        public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
+            guard let info = currentUser?.info else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+
+            listPlanProducts { (_, error) in
+                guard error == nil else {
                     callback?(nil, error)
                     return
                 }
-                callback?(transaction, nil)
-            }
-        }
-    }
-    
-    public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        accessedStore.refreshPaymentReceipt(callback)
-    }
-    
-    public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        Task { @MainActor in
-            do {
-                try await webServices.loginLink(email: email)
-                callback?(nil)
-            } catch {
-                callback?(error)
-            }
-        }
-    }
-
-    public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        guard let signup = request.signup(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
-        }
-
-        accessedDatabase.plain.lastSignupEmail = request.email
-
-        Task { @MainActor in
-            do {
-                let credentials = try await webServices.signup(with: signup)
-
-                if let transaction = request.transaction {
-                    accessedStore.finishTransaction(transaction, success: true)
-                }
-
-                accessedDatabase.plain.lastSignupEmail = nil
-                accessedDatabase.secure.setPublicUsername(credentials.username)
-                accessedDatabase.secure.setUsername(credentials.username)
-                accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
-
-                try await webServices.token(credentials: credentials)
-                let accountInfo = try await webServices.info()
-                accessedDatabase.plain.accountInfo = accountInfo
-                accessedDatabase.secure.setPublicUsername(accountInfo.username)
-
-                let user = UserAccount(credentials: credentials, info: nil)
-                Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-                callback?(user, nil)
-
-            } catch let error as ClientError where error == .badReceipt {
-                // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
-                // This handles returning users (e.g. "Duplicate purchase" from API).
-                await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
-            } catch {
-                if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                    callback?(nil, ClientError.internetUnreachable)
+                guard info.isRenewable else {
+                    //We need to check if the plan is a trial even when the plan is not renewable, as the
+                    //error message should be different for each scenario
+                    if info.plan == .trial {
+                        callback?(nil, ClientError.renewingTrial)
+                    } else {
+                        callback?(nil, ClientError.renewingNonRenewable)
+                    }
                     return
                 }
 
-                callback?(nil, error)
-            }
-        }
-    }
-
-    private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) async {
-        guard let receipt = accessedStore.paymentReceipt else {
-            callback?(nil, ClientError.badReceipt)
-            return
-        }
-
-        do {
-            try await webServices.token(receipt: receipt)
-        } catch {
-            callback?(nil, ClientError.badReceipt)
-            return
-        }
-
-        if let transaction = transaction {
-            accessedStore.finishTransaction(transaction, success: true)
-        }
-
-        accessedDatabase.plain.lastSignupEmail = nil
-        updateUsernamePassword()
-
-        guard let accountInfo = try? await webServices.info() else {
-            callback?(nil, ClientError.badReceipt)
-            return
-        }
-
-        accessedDatabase.plain.accountInfo = accountInfo
-        accessedDatabase.secure.setPublicUsername(accountInfo.username)
-
-        let credentials = Credentials(
-            username: vpnTokenUsername ?? "",
-            password: vpnTokenPassword ?? ""
-        )
-        let user = UserAccount(credentials: credentials, info: accountInfo)
-        Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-        callback?(user, nil)
-    }
-
-    public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
-        guard let info = currentUser?.info else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-
-        listPlanProducts { (_, error) in
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-            guard info.isRenewable else {
-                //We need to check if the plan is a trial even when the plan is not renewable, as the
-                //error message should be different for each scenario
-                if info.plan == .trial {
+                switch info.plan {
+                case .trial:
                     callback?(nil, ClientError.renewingTrial)
-                } else {
+                    return
+                case .monthly:
+                    callback?([.monthly], nil)
+                case .yearly:
+                    callback?([.yearly], nil)
+                case .other:
                     callback?(nil, ClientError.renewingNonRenewable)
                 }
+            }
+        }
+
+        public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            guard isLoggedIn else {
+                callback?(nil, ClientError.unauthorized)
                 return
             }
-
-            switch info.plan {
-            case .trial:
-                callback?(nil, ClientError.renewingTrial)
+            guard let user = currentUser else {
+                callback?(nil, ClientError.unauthorized)
                 return
-            case .monthly:
-                callback?([.monthly], nil)
-            case .yearly:
-                callback?([.yearly], nil)
-            case .other:
+            }
+            guard let accountInfo = user.info, accountInfo.isRenewable else {
                 callback?(nil, ClientError.renewingNonRenewable)
+                return
             }
-        }
-    }
-    
-    public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard isLoggedIn else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        guard let user = currentUser else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        guard let accountInfo = user.info, accountInfo.isRenewable else {
-            callback?(nil, ClientError.renewingNonRenewable)
-            return
-        }
-        guard let payment = request.payment(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
-        }
+            guard let payment = request.payment(withStore: accessedStore) else {
+                callback?(nil, ClientError.noReceipt)
+                return
+            }
 
-        Task { @MainActor in
-            do {
-                try await webServices.processPayment(credentials: user.credentials, request: payment)
+            Task { @MainActor in
+                do {
+                    try await webServices.processPayment(credentials: user.credentials, request: payment)
 
-                if let transaction = request.transaction {
-                    accessedStore.finishTransaction(transaction, success: true)
+                    if let transaction = request.transaction {
+                        accessedStore.finishTransaction(transaction, success: true)
+                    }
+                    Macros.postNotification(.PIAAccountDidRenew)
+
+                    let accountInfo = try await webServices.info()
+                    accessedDatabase.plain.accountInfo = accountInfo
+
+                    let user = UserAccount(credentials: user.credentials, info: accountInfo)
+                    Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
+                    callback?(user, nil)
+                } catch {
+                    callback?(nil, error)
                 }
-                Macros.postNotification(.PIAAccountDidRenew)
-
-                let accountInfo = try await webServices.info()
-                accessedDatabase.plain.accountInfo = accountInfo
-
-                let user = UserAccount(credentials: user.credentials, info: accountInfo)
-                Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
-                callback?(user, nil)
-            } catch {
-                callback?(nil, error)
             }
         }
-    }
-    
-    /**
-     Remove all data from the plain and secure internal database
-     */
-    public func cleanDatabase() {
-        if let username = accessedDatabase.secure.username() {
-            accessedDatabase.secure.setPassword(nil, for: username)
-            accessedDatabase.secure.setUsername(nil)
-            accessedDatabase.secure.clear(for: username)
-        }
-        accessedDatabase.secure.removeDIPTokens()
-        accessedDatabase.secure.setPublicUsername(nil)
-        accessedDatabase.plain.accountInfo = nil
-        accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
-        accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
-        accessedDatabase.plain.historicalServers = []
-        accessedDatabase.plain.reset()
 
-        apiTokenProvider.clearAPIToken()
-        vpnTokenProvider.clearVpnToken()
-    }
-    
+        /**
+         Remove all data from the plain and secure internal database
+         */
+        public func cleanDatabase() {
+            if let username = accessedDatabase.secure.username() {
+                accessedDatabase.secure.setPassword(nil, for: username)
+                accessedDatabase.secure.setUsername(nil)
+                accessedDatabase.secure.clear(for: username)
+            }
+            accessedDatabase.secure.removeDIPTokens()
+            accessedDatabase.secure.setPublicUsername(nil)
+            accessedDatabase.plain.accountInfo = nil
+            accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
+            accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
+            accessedDatabase.plain.historicalServers = []
+            accessedDatabase.plain.reset()
+
+            apiTokenProvider.clearAPIToken()
+            vpnTokenProvider.clearVpnToken()
+        }
+
     #endif
 
     // MARK: WebServicesConsumer
-    
+
     var webServices: WebServices {
         return customWebServices ?? accessedWebServices
     }
-    
+
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
         webServices.taskForConnectivityCheck { (_, error) in
             callback?(error == nil, error)
         }
     }
-    
+
     // MARK: Private
 
     /// :nodoc:
@@ -661,7 +665,8 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
 
         guard let username = tokenComponents.first,
-              let password = tokenComponents.last else {
+            let password = tokenComponents.last
+        else {
             return nil
         }
 

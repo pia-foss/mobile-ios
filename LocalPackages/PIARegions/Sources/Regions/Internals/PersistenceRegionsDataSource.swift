@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 // @unchecked Sendable is safe here: all access to `userDefaults` is serialised through `lock`.
 internal final class PersistenceRegionsDataSource: RegionsCacheDataSource, @unchecked Sendable {
 

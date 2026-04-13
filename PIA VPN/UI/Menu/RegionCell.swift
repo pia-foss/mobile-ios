@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIAUIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIALibrary
+import PIALocalizations
+import PIAUIKit
+import UIKit
 
 public enum RegionStatus {
     case available
@@ -32,13 +32,13 @@ public enum RegionStatus {
 }
 
 class RegionCell: UITableViewCell, Restylable {
-    
+
     @IBOutlet private weak var imvFlag: UIImageView!
 
     @IBOutlet private weak var labelRegion: UILabel!
 
     @IBOutlet private weak var labelPingTime: UILabel!
-    
+
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var favoriteImageView: UIImageView!
     @IBOutlet private weak var leftIconImageView: UIImageView!
@@ -50,22 +50,22 @@ class RegionCell: UITableViewCell, Restylable {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     }
-    
+
     func fill(withServer server: Server, isSelected: Bool) {
         viewShouldRestyle()
-        
+
         self.server = server
         setupServerAvailability()
-        
+
         imvFlag.setImage(fromServer: server)
 
         labelRegion.text = server.name
-        
+
         iconSelected = isSelected
         prepareCellIcons()
 
         accessibilityIdentifier = "uitests.regions.region_name"
-        
+
         self.setSelected(false, animated: false)
     }
 
@@ -85,7 +85,7 @@ class RegionCell: UITableViewCell, Restylable {
             rightIconImageView.isHidden = true
         }
     }
-    
+
     private func setupServerAvailability() {
         if server.offline == false {
 
@@ -93,7 +93,7 @@ class RegionCell: UITableViewCell, Restylable {
             labelRegion.alpha = 1.0
             leftIconImageView.alpha = 1.0
             rightIconImageView.alpha = 1.0
-            
+
             var pingTimeString: String?
             if let pingTime = server.pingTime {
                 pingTimeString = "\(pingTime)ms"
@@ -107,7 +107,7 @@ class RegionCell: UITableViewCell, Restylable {
             } else {
                 accessibilityLabel = server.name
             }
-            
+
             if !self.server.isAutomatic {
                 self.favoriteImageView.image = self.favoriteImageView.image?.withRenderingMode(.alwaysTemplate)
                 self.isFavorite = server.isFavorite
@@ -118,7 +118,7 @@ class RegionCell: UITableViewCell, Restylable {
                 self.isFavorite = true
                 favoriteButton.isUserInteractionEnabled = false
             }
-            
+
             self.isUserInteractionEnabled = true
 
         } else {
@@ -134,55 +134,56 @@ class RegionCell: UITableViewCell, Restylable {
             self.isUserInteractionEnabled = false
 
         }
-        
+
     }
 
     // MARK: Restylable
 
     func viewShouldRestyle() {
-        
+
         Theme.current.applyRegionSolidLightBackground(self)
         Theme.current.applyRegionSolidLightBackground(self.contentView)
 
         Theme.current.applySettingsCellTitle(labelRegion, appearance: .dark)
         Theme.current.applyTag(labelPingTime, appearance: .dark)
         Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
-        
+
         if Theme.current.palette.appearance! == .dark {
             self.favoriteImageView.tintColor = UIColor.piaGrey10
         }
-        
+
         prepareCellIcons()
-        
+
     }
-    
+
     @IBAction func favoriteServer(_ sender: UIButton) {
         self.isFavorite = !self.isFavorite
         self.isFavorite ? self.server.favorite() : self.server.unfavorite()
         self.animateFavoriteImage()
         Macros.postNotification(.PIAServerHasBeenUpdated)
     }
-    
+
     private func animateFavoriteImage() {
-        UIView.animate(withDuration: AppConfiguration.Animations.duration, animations: {
-            self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }, completion: { (finished) in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.updateFavoriteImage()
-                self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        UIView.animate(
+            withDuration: AppConfiguration.Animations.duration,
+            animations: {
+                self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            },
+            completion: { (finished) in
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        self.updateFavoriteImage()
+                        self.favoriteImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    })
             })
-        })
     }
-    
+
     private func updateFavoriteImage() {
-        self.isFavorite ?
-        self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
-            Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
-        favoriteButton.accessibilityLabel = self.isFavorite ?
-            L10n.Region.Accessibility.favorite :
-            L10n.Region.Accessibility.unfavorite
+        self.isFavorite ? self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image : Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
+        favoriteButton.accessibilityLabel = self.isFavorite ? L10n.Region.Accessibility.favorite : L10n.Region.Accessibility.unfavorite
     }
-    
+
     private func updateOfflineImage() {
         self.favoriteImageView.image = Asset.offlineServerIcon.image
         self.favoriteButton.accessibilityLabel = L10n.Global.disabled

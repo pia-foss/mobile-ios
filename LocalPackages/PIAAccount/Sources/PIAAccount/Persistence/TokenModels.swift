@@ -44,9 +44,11 @@ extension APITokenResponse {
     func expirationDate() throws -> Date {
         guard let date = ISO8601DateFormatter().date(from: expiresAt) else {
             throw PIAAccountError.decodingFailed(
-                NSError(domain: "PIAAccount", code: 0, userInfo: [
-                    NSLocalizedDescriptionKey: "Invalid date format: \(expiresAt)"
-                ])
+                NSError(
+                    domain: "PIAAccount", code: 0,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Invalid date format: \(expiresAt)"
+                    ])
             )
         }
         return date
@@ -64,9 +66,11 @@ extension VPNTokenResponse {
     func expirationDate() throws -> Date {
         guard let date = ISO8601DateFormatter().date(from: expiresAt) else {
             throw PIAAccountError.decodingFailed(
-                NSError(domain: "PIAAccount", code: 0, userInfo: [
-                    NSLocalizedDescriptionKey: "Invalid date format: \(expiresAt)"
-                ])
+                NSError(
+                    domain: "PIAAccount", code: 0,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Invalid date format: \(expiresAt)"
+                    ])
             )
         }
         return date

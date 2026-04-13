@@ -17,8 +17,8 @@
  */
 
 import Testing
-@testable import PIARegions
 
+@testable import PIARegions
 
 private struct MockEndpointProvider: RegionEndpointProvider {
     func regionEndpoints() -> [RegionEndpoint] { [] }

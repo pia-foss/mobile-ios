@@ -22,9 +22,6 @@ class IsIkev2SelectedWithDefaultSettings {
     }
 
     func callAsFunction() -> Bool {
-        return preferences.vpnType == IKEv2Profile.vpnType &&
-        preferences.ikeV2EncryptionAlgorithm.lowercased() == DEFAULT_IKEV2_ENCRYPTION &&
-        preferences.ikeV2IntegrityAlgorithm.lowercased() == DEFAULT_IKEV2_HANDSHAKE &&
-        preferences.ikeV2PacketSize == DEFAULT_IKEV2_MTU
+        return preferences.vpnType == IKEv2Profile.vpnType && preferences.ikeV2EncryptionAlgorithm.lowercased() == DEFAULT_IKEV2_ENCRYPTION && preferences.ikeV2IntegrityAlgorithm.lowercased() == DEFAULT_IKEV2_HANDSHAKE && preferences.ikeV2PacketSize == DEFAULT_IKEV2_MTU
     }
 }

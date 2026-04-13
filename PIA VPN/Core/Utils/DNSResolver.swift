@@ -24,7 +24,7 @@ import Foundation
 
 class DNSResolver {
     private let hostname: String
-    
+
     init(hostname: String) {
         self.hostname = hostname
     }

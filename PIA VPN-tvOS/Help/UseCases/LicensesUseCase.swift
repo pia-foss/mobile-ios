@@ -16,15 +16,15 @@ protocol LicensesUseCaseType {
 
 class LicensesUseCase: LicensesUseCaseType {
     @MainActor internal var cachedLicenseContent: [String: String] = [:]
-    
+
     private let licencesPath = Bundle.main.path(forResource: "Licences", ofType: "plist")
-    
+
     let urlSession: URLSessionType
-    
+
     init(urlSession: URLSessionType) {
         self.urlSession = urlSession
     }
-    
+
     func getLicences() -> [LicenseComponent] {
         guard let licenceFile = licencesPath else {
             return []
@@ -32,12 +32,12 @@ class LicensesUseCase: LicensesUseCaseType {
         let components = Components(licenceFile)
         return components.licenses
     }
-    
+
     func getLicenseContent(for license: LicenseComponent) async -> String {
         if let cachedContent = await cachedLicenseContent[license.name] {
             return cachedContent
         }
-        
+
         do {
             let (data, _) = try await urlSession.data(from: license.licenseURL)
             if let licenseContent = String(data: data, encoding: .ascii) {
@@ -48,20 +48,19 @@ class LicensesUseCase: LicensesUseCaseType {
             } else {
                 return ""
             }
-            
+
         } catch {
             return ""
         }
-       
+
     }
-    
-    
+
     func callAsFunction() {
         for license in getLicences() {
             Task {
                 let content = await getLicenseContent(for: license)
             }
-            
+
         }
     }
 }

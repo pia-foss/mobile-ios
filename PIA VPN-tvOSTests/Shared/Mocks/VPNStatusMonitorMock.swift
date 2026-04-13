@@ -6,14 +6,15 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class VPNStatusMonitorMock: VPNStatusMonitorType {
     var status = PassthroughSubject<VPNStatus, Never>()
-    
+
     func getStatus() -> AnyPublisher<VPNStatus, Never> {
         return status.eraseToAnyPublisher()
     }

@@ -6,30 +6,33 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import SwiftUI
 import PIALocalizations
+import SwiftUI
 
 struct VPNConfigurationInstallingView: View {
     @ObservedObject private var viewModel: VPNConfigurationInstallingViewModel
     private let style: OnboardingComponentStytle
-    
+
     init(viewModel: VPNConfigurationInstallingViewModel, style: OnboardingComponentStytle) {
         self.viewModel = viewModel
         self.style = style
     }
-    
+
     var body: some View {
         OnboardingComponentView(viewModel: viewModel, style: style)
-            .alert("PIA", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Global.ok) {
-                Task {
-                    viewModel.install()
-                }
-            }
-        }, message: {
-            if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
-            }
-        })
+            .alert(
+                "PIA", isPresented: $viewModel.shouldShowErrorMessage,
+                actions: {
+                    Button(L10n.Global.ok) {
+                        Task {
+                            viewModel.install()
+                        }
+                    }
+                },
+                message: {
+                    if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                    }
+                })
     }
 }

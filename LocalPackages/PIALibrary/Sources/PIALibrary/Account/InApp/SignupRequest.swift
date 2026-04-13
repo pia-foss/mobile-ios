@@ -29,10 +29,10 @@ public struct SignupRequest {
 
     /// The email address to sign up with.
     public let email: String
-    
+
     /// The purchased transaction.
     public let transaction: InAppTransaction?
-    
+
     /// A map of objects attached to the signup request for marketing purposes.
     public let marketing: [String: Any]?
 

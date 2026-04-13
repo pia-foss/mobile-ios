@@ -1,5 +1,6 @@
-import Testing
 import Foundation
+import Testing
+
 @testable import PIAAccount
 
 @Suite("Certificate Pinning Tests")
@@ -9,17 +10,17 @@ struct CertificatePinningTests {
 
     // Simple valid base64-encoded test data (not real certificates, just for parser testing)
     let validTestCertificatePEM = """
-    -----BEGIN CERTIFICATE-----
-    VGVzdENlcnRpZmljYXRlRGF0YUZvclBhcnNpbmdUZXN0cw==
-    -----END CERTIFICATE-----
-    """
+        -----BEGIN CERTIFICATE-----
+        VGVzdENlcnRpZmljYXRlRGF0YUZvclBhcnNpbmdUZXN0cw==
+        -----END CERTIFICATE-----
+        """
 
     // Different test data
     let differentTestCertificatePEM = """
-    -----BEGIN CERTIFICATE-----
-    RGlmZmVyZW50VGVzdENlcnRpZmljYXRlRGF0YQ==
-    -----END CERTIFICATE-----
-    """
+        -----BEGIN CERTIFICATE-----
+        RGlmZmVyZW50VGVzdENlcnRpZmljYXRlRGF0YQ==
+        -----END CERTIFICATE-----
+        """
 
     // MARK: - Certificate Pinner Initialization Tests
 
@@ -69,7 +70,8 @@ struct CertificatePinningTests {
     @Test("PEM parsing handles certificate without headers")
     func pemParsingWithoutHeaders() {
         // Test parsing certificate without BEGIN/END headers
-        let certificateWithoutHeaders = validTestCertificatePEM
+        let certificateWithoutHeaders =
+            validTestCertificatePEM
             .replacingOccurrences(of: "-----BEGIN CERTIFICATE-----", with: "")
             .replacingOccurrences(of: "-----END CERTIFICATE-----", with: "")
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -82,12 +84,12 @@ struct CertificatePinningTests {
     func pemParsingWithExtraWhitespace() {
         // Add whitespace within the PEM block (not before BEGIN)
         let certificateWithWhitespace = """
-        -----BEGIN CERTIFICATE-----
+            -----BEGIN CERTIFICATE-----
 
-        VGVzdENlcnRpZmljYXRlRGF0YUZvclBhcnNpbmdUZXN0cw==
+            VGVzdENlcnRpZmljYXRlRGF0YUZvclBhcnNpbmdUZXN0cw==
 
-        -----END CERTIFICATE-----
-        """
+            -----END CERTIFICATE-----
+            """
 
         let pinner = CertificatePinner(certificate: certificateWithWhitespace)
         #expect(pinner != nil)

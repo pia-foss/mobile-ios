@@ -7,16 +7,17 @@
 //
 
 import XCTest
+
 @testable import PIA_VPN_tvOS
 
 final class ActivateDIPTokenUseCaseTests: XCTestCase {
     class Fixture {
         var dipServerProviderMock: DedicatedIPProviderMock!
     }
-    
+
     var fixture: Fixture!
     var sut: ActivateDIPTokenUseCase!
-    
+
     func instantiateSut(result: Result<Void, DedicatedIPError>) {
         fixture.dipServerProviderMock = DedicatedIPProviderMock(result: result)
         sut = ActivateDIPTokenUseCase(dipServerProvider: fixture.dipServerProviderMock)
@@ -34,18 +35,18 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
     func test_activatesDIPToken_complets_successfully_when_DedicatedIPProvider_complets_with_success() async {
         // GIVEN
         instantiateSut(result: .success(()))
-        
+
         // WHEN
         if case let .failure(error) = await sut(token: "token") {
             XCTFail("Expected success, got error: \(error)")
         }
     }
-    
+
     func test_activatesDIPToken_complets_with_failure_when_DedicatedIPProvider_complets_with_failure() async throws {
         // GIVEN
         let expectedError = DedicatedIPError.expired
         instantiateSut(result: .failure(expectedError))
-        
+
         var capturedError: Error? = nil
 
         // WHEN
@@ -62,10 +63,10 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
 extension DedicatedIPError: @retroactive Equatable {
     public static func == (lhs: PIA_VPN_tvOS.DedicatedIPError, rhs: PIA_VPN_tvOS.DedicatedIPError) -> Bool {
         switch (lhs, rhs) {
-            case (.expired, .expired), (.invalid, .invalid), (.generic, .generic):
-                return true
-            default: 
-                return false
+        case (.expired, .expired), (.invalid, .invalid), (.generic, .generic):
+            return true
+        default:
+            return false
         }
     }
 }

@@ -13,15 +13,15 @@ struct SignupTermsView: View {
     let title: String
     let description: String
     let qrCodeMessage: String
-    
+
     var body: some View {
         VStack(spacing: 100) {
             Text(title)
                 .font(.system(size: 58, weight: .bold))
                 .foregroundColor(.pia_on_surface)
-            
+
             VStack(alignment: .leading, spacing: 60) {
-               Text(description)
+                Text(description)
                     .font(.system(size: 29, weight: .medium))
                     .foregroundColor(.pia_on_surface)
                     .lineLimit(nil)
@@ -30,7 +30,7 @@ struct SignupTermsView: View {
             .frame(maxWidth: Spacing.contentViewMaxWidth)
         }
     }
-    
+
     var privacyPolicyQRCodeSection: some View {
         HStack(alignment: .center, spacing: 40) {
             QRImageView(qrImageURL: url)

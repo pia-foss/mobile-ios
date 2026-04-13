@@ -27,55 +27,58 @@ import PIALocalizations
 private let log = PIALogger.logger(for: DNSList.self)
 
 class DNSList: NSObject {
-    
+
     static let shared = DNSList()
     static let CUSTOM_OPENVPN_DNS_KEY: String = "Custom"
     static let CUSTOM_WIREGUARD_DNS_KEY: String = "Custom_Wireguard"
 
-    private(set) var dnsList: [[String:[String]]]!
+    private(set) var dnsList: [[String: [String]]]!
     private var plistPathInDocument: String!
-    
+
     private override init() {
         super.init()
         self.preparePlistForUse()
         self.load(from: self.plistPathInDocument)
     }
-    
+
     /// Load the values of the plist into the dnsList object
     /// - Parameters:
     ///   - path:  The local path of the plist file.
     private func load(from path: String) {
-        guard let dnsList = NSArray(contentsOfFile: path) as? [[String:[String]]] else {
+        guard let dnsList = NSArray(contentsOfFile: path) as? [[String: [String]]] else {
             log.error("Couldn't load plist from \(path). Initializing with empty DNS list.")
             self.dnsList = []
             return
         }
         self.dnsList = dnsList
     }
-    
-    /// Creates a new dns.plist file in the document directory if it doesn't exist
-    private func preparePlistForUse(){
 
-        if let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                              .userDomainMask,
-                                                              true).first {
+    /// Creates a new dns.plist file in the document directory if it doesn't exist
+    private func preparePlistForUse() {
+
+        if let rootPath = NSSearchPathForDirectoriesInDomains(
+            .documentDirectory,
+            .userDomainMask,
+            true
+        ).first {
 
             plistPathInDocument = rootPath.appendingFormat("/DNS.plist")
-            if !FileManager.default.fileExists(atPath: plistPathInDocument){
+            if !FileManager.default.fileExists(atPath: plistPathInDocument) {
                 if let path = Bundle.main.path(forResource: "DNS", ofType: "plist") {
                     do {
-                        try FileManager.default.copyItem(atPath: path,
-                                                         toPath: plistPathInDocument)
+                        try FileManager.default.copyItem(
+                            atPath: path,
+                            toPath: plistPathInDocument)
                     } catch {
                         log.error("Error occurred while copying DNS file to document: \(error)")
                     }
                 }
             }
-            
+
         }
-        
+
     }
-    
+
     /// Reset the DNS plist file
     func resetPlist() {
         do {
@@ -86,18 +89,20 @@ class DNSList: NSObject {
             log.error("Error occurred while removing DNS file: \(error)")
         }
     }
-    
+
     /// Adds a new server to the dnsList object
     /// - Parameters:
     ///   - name:  The name for the DNS.
     ///   - ips:  The IP addresses of the DNS.
-    func addNewServerWithName(_ name: String,
-                              andIPs ips: [String]) {
+    func addNewServerWithName(
+        _ name: String,
+        andIPs ips: [String]
+    ) {
         self.removeServer(name: name)
         self.dnsList.append([name: ips])
         self.updatePlist()
     }
-    
+
     /// Removes a server from the dnsList object
     /// - Parameters:
     ///   - name:  The name for the DNS.
@@ -110,21 +115,22 @@ class DNSList: NSObject {
         })
         self.updatePlist()
     }
-    
+
     /// Returns the value of the first key of the array of DNS
     /// - Returns:
     ///   - key: The firt key
     func firstKey() -> String? {
-        
+
         if let firstDictionary = self.dnsList.first,
-            let firstEntry = firstDictionary.first {
+            let firstEntry = firstDictionary.first
+        {
             return firstEntry.key
         }
-        
+
         return nil
-        
+
     }
-    
+
     /// Returns the array of servers for the given key
     /// - Returns:
     ///   - ips: The array of IPs
@@ -138,7 +144,7 @@ class DNSList: NSObject {
         }
         return []
     }
-    
+
     /// Returns the description of the key
     /// - Returns:
     ///   - description: The description of the key or how the key should be displayed
@@ -146,7 +152,7 @@ class DNSList: NSObject {
         for dns in self.dnsList {
             for (theKey, value) in dns {
                 if theKey == key {
-                    if key == customKey { //L10n.Global.custom
+                    if key == customKey {  //L10n.Global.custom
                         switch value.count {
                         case 0:
                             return L10n.Settings.Dns.custom
@@ -162,13 +168,13 @@ class DNSList: NSObject {
         }
         return L10n.Settings.Dns.custom
     }
-    
+
     /// Return if a custom DNS is set for given protocol and its configured DNS servers
     func hasCustomDNS(for vpnType: String, in dnsServers: [String]) -> Bool {
         guard vpnType != IKEv2Profile.vpnType && !dnsServers.isEmpty else {
             return false
         }
-        
+
         for dns in self.dnsList {
             for (_, ipsList) in dns {
                 if dnsServers == ipsList {
@@ -178,11 +184,12 @@ class DNSList: NSObject {
         }
         return false
     }
-    
+
     /// Updates the content of the dnsList object into the plist
     private func updatePlist() {
-        (self.dnsList as NSArray).write(toFile: self.plistPathInDocument,
-                                        atomically: true)
+        (self.dnsList as NSArray).write(
+            toFile: self.plistPathInDocument,
+            atomically: true)
     }
-    
+
 }

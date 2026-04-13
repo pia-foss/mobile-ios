@@ -23,14 +23,14 @@
 import Foundation
 
 public extension Data {
-    
+
     func getInt64(start: Int) -> UInt64 {
-        let intBits = self.withUnsafeBytes({(bytePointer: UnsafePointer<UInt8>) -> UInt64 in
+        let intBits = self.withUnsafeBytes({ (bytePointer: UnsafePointer<UInt8>) -> UInt64 in
             bytePointer.advanced(by: start).withMemoryRebound(to: UInt64.self, capacity: 8) { pointer in
                 return pointer.pointee
             }
         })
         return UInt64(littleEndian: intBits)
     }
-    
+
 }

@@ -1,9 +1,8 @@
-
-import SwiftUI
-import WidgetKit
+import PIAAssetsWidget
 import PIALibrary
 import PIALocalizations
-import PIAAssetsWidget
+import SwiftUI
+import WidgetKit
 
 @available(iOSApplicationExtension 16.1, *)
 internal struct PIAConnectionView: View {
@@ -61,5 +60,3 @@ internal struct PIAConnectionView: View {
 
     }
 }
-
-

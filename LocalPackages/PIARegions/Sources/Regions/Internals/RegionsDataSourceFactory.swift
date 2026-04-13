@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 internal final class RegionsDataSourceFactoryImpl: RegionsDataSourceFactory {
     private let logErrors: Bool
 

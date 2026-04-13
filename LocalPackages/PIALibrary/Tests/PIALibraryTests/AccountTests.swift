@@ -21,15 +21,16 @@
 //
 
 import XCTest
+
 @testable import PIALibrary
 
 class AccountTests: XCTestCase {
     private var observers = [NSObjectProtocol]()
 
     private let mock = MockProviders()
-    
+
     private let live = Client.providers
-    
+
     override func setUp() {
         super.setUp()
 
@@ -40,46 +41,46 @@ class AccountTests: XCTestCase {
         Client.providers.accountProvider.cleanDatabase()
 
     }
-    
+
     override func tearDown() {
         super.tearDown()
-        
+
         unregisterNotifications()
     }
-    
+
     func testMockLogin() {
         __testLogin(factory: mock)
     }
-    
+
     func testMockUpdate() {
         __testLogin(factory: mock)
         __testUpdate(factory: mock)
     }
-    
+
     func testMockLogout() {
         __testLogin(factory: mock)
         __testLogout(factory: mock)
     }
-    
+
     func testMock() {
         __testLogin(factory: mock)
         __testUpdate(factory: mock)
         __testLogout(factory: mock)
     }
-        
+
     func testAPIEndpointIsReachable() {
-        
+
         let expectationAPIEndpoint = expectation(description: "apiEndpoint")
 
         mock.accountProvider.isAPIEndpointAvailable { (result, error) in
             XCTAssertTrue(result!, "The default API endpoint should be reachable from the tests")
             expectationAPIEndpoint.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5.0, handler: nil)
 
     }
-    
+
     /*func testWeb() {
         __testLogin(factory: live)
         sleep(1)
@@ -87,7 +88,7 @@ class AccountTests: XCTestCase {
         sleep(1)
         __testLogout(factory: live)
     }*/
-    
+
     private func __testLogin(factory: Client.Providers) {
         let expLogin = expectation(description: "login")
         let credentials = Credentials(username: "p0000000", password: "foobarbogus")
@@ -106,7 +107,7 @@ class AccountTests: XCTestCase {
         }
         waitForExpectations(timeout: 5.0, handler: nil)
     }
-    
+
     private func __testUpdate(factory: Client.Providers) {
         let expUpdate = expectation(description: "update")
         let newEmail = "foobar+\(arc4random())@example.com"
@@ -125,7 +126,7 @@ class AccountTests: XCTestCase {
         }
         waitForExpectations(timeout: 5.0, handler: nil)
     }
-    
+
     private func __testLogout(factory: Client.Providers) {
         let expLogout = expectation(description: "logout")
         factory.accountProvider.logout { (error) in
@@ -146,22 +147,26 @@ class AccountTests: XCTestCase {
 
     private func registerNotifications() {
         let nc = NotificationCenter.default
-        observers.append(nc.addObserver(forName: .PIAAccountDidLogin, object: nil, queue: nil) { (notification) in
-            print("Login succeeded")
-            print("\tUser: \(notification.userInfo(for: .user) as UserAccount)")
-        })
-        observers.append(nc.addObserver(forName: .PIAAccountDidUpdate, object: nil, queue: nil) { (notification) in
-            print("Account updated")
-            print("\tInfo: \(notification.userInfo(for: .accountInfo) as AccountInfo)")
-        })
-        observers.append(nc.addObserver(forName: .PIAAccountDidRefresh, object: nil, queue: nil) { (notification) in
-            print("Account refreshed")
-        })
-        observers.append(nc.addObserver(forName: .PIAAccountDidLogout, object: nil, queue: nil) { (notification) in
-            print("Logged out")
-        })
+        observers.append(
+            nc.addObserver(forName: .PIAAccountDidLogin, object: nil, queue: nil) { (notification) in
+                print("Login succeeded")
+                print("\tUser: \(notification.userInfo(for: .user) as UserAccount)")
+            })
+        observers.append(
+            nc.addObserver(forName: .PIAAccountDidUpdate, object: nil, queue: nil) { (notification) in
+                print("Account updated")
+                print("\tInfo: \(notification.userInfo(for: .accountInfo) as AccountInfo)")
+            })
+        observers.append(
+            nc.addObserver(forName: .PIAAccountDidRefresh, object: nil, queue: nil) { (notification) in
+                print("Account refreshed")
+            })
+        observers.append(
+            nc.addObserver(forName: .PIAAccountDidLogout, object: nil, queue: nil) { (notification) in
+                print("Logged out")
+            })
     }
-    
+
     private func unregisterNotifications() {
         observers.forEach {
             NotificationCenter.default.removeObserver($0)

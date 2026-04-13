@@ -6,8 +6,8 @@ let package = Package(
     platforms: [.iOS(.v15), .tvOS(.v17)],
     products: [
         .library(name: "PIAAssetsMobile", targets: ["PIAAssetsMobile"]),
-        .library(name: "PIAAssetsTV",     targets: ["PIAAssetsTV"]),
-        .library(name: "PIAAssetsWidget", targets: ["PIAAssetsWidget"]),
+        .library(name: "PIAAssetsTV", targets: ["PIAAssetsTV"]),
+        .library(name: "PIAAssetsWidget", targets: ["PIAAssetsWidget"])
     ],
     targets: [
         .target(
@@ -24,6 +24,6 @@ let package = Package(
             name: "PIAAssetsWidget",
             resources: [.process("Resources")],
             swiftSettings: [.swiftLanguageMode(.v5)]
-        ),
+        )
     ]
 )

@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 // NSLock guards all mutable state, making @unchecked Sendable legitimate here.
 internal final class InMemoryRegionsCacheDataSource: RegionsCacheDataSource, @unchecked Sendable {
     private let lock = NSLock()

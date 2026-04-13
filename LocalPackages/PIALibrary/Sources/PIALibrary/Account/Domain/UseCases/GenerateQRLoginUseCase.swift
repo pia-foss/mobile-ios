@@ -1,4 +1,3 @@
-
 import Foundation
 
 public protocol GenerateQRLoginUseCaseType {
@@ -8,11 +7,11 @@ public protocol GenerateQRLoginUseCaseType {
 
 public class GenerateQRLoginUseCase: GenerateQRLoginUseCaseType {
     private let networkClient: NetworkRequestClientType
-    
+
     init(networkClient: NetworkRequestClientType) {
         self.networkClient = networkClient
     }
-    
+
     public func callAsFunction(completion: @escaping Completion) {
         let configuration = GenerateQRRequestConfiguration()
         executeNetworkRequest(with: configuration, completion: completion)

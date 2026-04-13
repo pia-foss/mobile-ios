@@ -1,5 +1,6 @@
-import Testing
 import Foundation
+import Testing
+
 @testable import PIAAccount
 
 @Suite struct DedicatedIPAPITests {
@@ -9,11 +10,11 @@ import Foundation
     @Test("DipCountriesResponse decodes from JSON")
     func dipCountriesDecoding() throws {
         let json = """
-        {"dedicatedIpCountriesAvailable": [
-            {"country_code": "US", "name": "United States",
-             "new_regions": ["NY"], "regions": ["NY", "LA"]}
-        ]}
-        """
+            {"dedicatedIpCountriesAvailable": [
+                {"country_code": "US", "name": "United States",
+                 "new_regions": ["NY"], "regions": ["NY", "LA"]}
+            ]}
+            """
         let data = json.data(using: .utf8)!
         let response = try JSONDecoder.piaCodable.decode(DipCountriesResponse.self, from: data)
         #expect(response.dedicatedIpCountriesAvailable.count == 1)
@@ -26,9 +27,9 @@ import Foundation
     @Test("DedicatedIPTokenDetails decodes from JSON")
     func tokenDetailsDecoding() throws {
         let json = """
-        {"meta_data": [{"common_name": "us-ny-001", "region_id": "us_ny"}],
-         "partners_id": 123, "redeemed_at": "2026-02-12T10:30:00Z", "token": "abc123"}
-        """
+            {"meta_data": [{"common_name": "us-ny-001", "region_id": "us_ny"}],
+             "partners_id": 123, "redeemed_at": "2026-02-12T10:30:00Z", "token": "abc123"}
+            """
         let data = json.data(using: .utf8)!
         let details = try JSONDecoder.piaCodable.decode(DedicatedIPTokenDetails.self, from: data)
         #expect(details.token == "abc123")
@@ -42,8 +43,8 @@ import Foundation
     @Test("VpnSignUpInformation decodes from JSON")
     func vpnSignupDecoding() throws {
         let json = """
-        {"username": "p1234567", "password": "abc123"}
-        """
+            {"username": "p1234567", "password": "abc123"}
+            """
         let data = json.data(using: .utf8)!
         let info = try JSONDecoder.piaCodable.decode(VpnSignUpInformation.self, from: data)
         #expect(info.username == "p1234567")

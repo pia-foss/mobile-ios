@@ -26,7 +26,7 @@ public struct PinningEndpoint {
     let isProxy: Bool
     let useCertificatePinning: Bool
     let commonName: String?
-    
+
     init(host: String, isProxy: Bool = false, useCertificatePinning: Bool = false, commonName: String? = nil) {
         self.host = host
         self.isProxy = isProxy
@@ -36,7 +36,7 @@ public struct PinningEndpoint {
 }
 
 public final class EndpointManager {
-    
+
     private let internalUrl = "10.0.0.1"
     private let proxy = "piaproxy.net"
     private let pia = "privateinternetaccess.com"
@@ -55,19 +55,22 @@ public final class EndpointManager {
 
         var currentServers = Client.providers.serverProvider.currentServers
         currentServers = currentServers.sorted(by: { $0.pingTime ?? 1000 < $1.pingTime ?? 1000 })
-        
+
         if let historicalServer = Client.providers.serverProvider.historicalServers.first,
-           let meta = historicalServer.meta {
-            availableEndpoints.append(PinningEndpoint(host: meta.ip,
-                                                      isProxy: true,
-                                                      useCertificatePinning: true,
-                                                      commonName: meta.cn))
+            let meta = historicalServer.meta
+        {
+            availableEndpoints.append(
+                PinningEndpoint(
+                    host: meta.ip,
+                    isProxy: true,
+                    useCertificatePinning: true,
+                    commonName: meta.cn))
         }
 
         if currentServers.count > 2 {
-            let filtered = currentServers.filter({$0.pingTime != nil}).sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })
-            
-            guard !currentServers.filter({$0.meta != nil}).isEmpty else {
+            let filtered = currentServers.filter({ $0.pingTime != nil }).sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })
+
+            guard !currentServers.filter({ $0.meta != nil }).isEmpty else {
                 return
             }
             if filtered.count < 2 {
@@ -78,7 +81,7 @@ public final class EndpointManager {
                 }
             } else {
                 if let meta = filtered.first?.meta {
-                    availableEndpoints.append(PinningEndpoint(host: meta.ip ,isProxy: true, useCertificatePinning: true, commonName: meta.cn))
+                    availableEndpoints.append(PinningEndpoint(host: meta.ip, isProxy: true, useCertificatePinning: true, commonName: meta.cn))
                 }
                 if availableEndpoints.count < 2 {
                     if let meta = filtered[1].meta {
@@ -87,40 +90,44 @@ public final class EndpointManager {
                 }
             }
         }
-        
+
     }
-    
+
     public func availableCSIEndpoints() -> [PinningEndpoint] {
         return [PinningEndpoint(host: csi)]
     }
-    
+
     public func availableRegionEndpoints() -> [PinningEndpoint] {
         if Client.providers.vpnProvider.isVPNConnected {
-            return [PinningEndpoint(host: internalUrl),
-                    PinningEndpoint(host: region)]
+            return [
+                PinningEndpoint(host: internalUrl),
+                PinningEndpoint(host: region)
+            ]
         }
-        
+
         var availableEndpoints = [PinningEndpoint]()
         availableMetaEndpoints(&availableEndpoints)
-        
+
         availableEndpoints.append(PinningEndpoint(host: region))
-        
+
         return availableEndpoints
     }
-    
+
     public func availableEndpoints() -> [PinningEndpoint] {
         if Client.providers.vpnProvider.isVPNConnected {
-            return [PinningEndpoint(host: internalUrl),
-                    PinningEndpoint(host: pia),
-                    PinningEndpoint(host: proxy, isProxy: true)]
+            return [
+                PinningEndpoint(host: internalUrl),
+                PinningEndpoint(host: pia),
+                PinningEndpoint(host: proxy, isProxy: true)
+            ]
         }
-        
+
         var availableEndpoints = [PinningEndpoint]()
         availableEndpoints.append(PinningEndpoint(host: pia))
         availableEndpoints.append(PinningEndpoint(host: proxy, isProxy: true))
         availableMetaEndpoints(&availableEndpoints)
-        
+
         return availableEndpoints
     }
-    
+
 }

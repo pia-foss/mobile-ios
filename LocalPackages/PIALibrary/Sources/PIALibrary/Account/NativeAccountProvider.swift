@@ -26,9 +26,9 @@ import UIKit
 private let log = PIALogger.logger(for: NativeAccountProvider.self)
 
 open class NativeAccountProvider: AccountProvider, ConfigurationAccess, DatabaseAccess, WebServicesAccess, InAppAccess, WebServicesConsumer {
-    
+
     private let customWebServices: WebServices?
-    
+
     private let logoutUseCase: LogoutUseCaseType
     private let loginUseCase: LoginUseCaseType
     private let signupUseCase: SignupUseCaseType
@@ -40,7 +40,6 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     private let subscriptionsUseCase: SubscriptionsUseCaseType
     private let deleteAccountUseCase: DeleteAccountUseCaseType
     private let featureFlagsUseCase: FeatureFlagsUseCaseType
-    
 
     init(webServices: WebServices? = nil, logoutUseCase: LogoutUseCaseType, loginUseCase: LoginUseCaseType, signupUseCase: SignupUseCaseType, apiTokenProvider: APITokenProviderType, vpnTokenProvider: VpnTokenProviderType, accountDetailsUseCase: AccountDetailsUseCaseType, updateAccountUseCase: UpdateAccountUseCaseType, paymentUseCase: PaymentUseCaseType, subscriptionsUseCase: SubscriptionsUseCaseType, deleteAccountUseCase: DeleteAccountUseCaseType, featureFlagsUseCase: FeatureFlagsUseCaseType) {
         self.logoutUseCase = logoutUseCase
@@ -62,38 +61,39 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
 
     // MARK: AccountProvider
-    
+
     #if os(iOS) || os(tvOS)
-    public var planProducts: [Plan: InAppProduct]? {
-        guard let products = accessedStore.availableProducts else {
-            return nil
-        }
-        var map = [Plan: InAppProduct]()
-        for product in products {
-            guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
-                continue
+        public var planProducts: [Plan: InAppProduct]? {
+            guard let products = accessedStore.availableProducts else {
+                return nil
             }
-            map[plan] = product
+            var map = [Plan: InAppProduct]()
+            for product in products {
+                guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
+                    continue
+                }
+                map[plan] = product
+            }
+            return map
         }
-        return map
-    }
     #endif
-    
+
     public var isLoggedIn: Bool {
         guard let username = accessedDatabase.secure.username() else {
             return false
         }
         return (accessedDatabase.secure.password(for: username) != nil)
     }
-    
+
     public var shouldCleanAccount: Bool {
         if self.accessedDatabase.plain.accountInfo == nil,
-            self.isLoggedIn {
+            self.isLoggedIn
+        {
             return true
         }
         return false
     }
-    
+
     public var oldToken: String? {
         guard let username = accessedDatabase.secure.username() else {
             return nil
@@ -113,22 +113,22 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         let vpnTokenString = "vpn_token_\(vpnToken.vpnUsernameToken):\(vpnToken.vpnPasswordToken)"
         return vpnTokenString
     }
-    
+
     public var vpnTokenUsername: String? {
         return getVpnTokenUsernameAndPassword()?.username
     }
-    
+
     public var vpnTokenPassword: String? {
         return getVpnTokenUsernameAndPassword()?.password
     }
-    
+
     public var publicUsername: String? {
         guard let username = accessedDatabase.secure.publicUsername() else {
             return nil
         }
         return username
     }
-    
+
     public var currentUser: UserAccount? {
         get {
             guard let username = accessedDatabase.secure.username() else {
@@ -157,28 +157,29 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             }
         }
     }
-    
+
     public var currentPasswordReference: Data? {
         guard let username = accessedDatabase.secure.username() else {
             return nil
         }
         return accessedDatabase.secure.passwordReference(for: username)
     }
-    
+
     #if os(iOS) || os(tvOS)
-    public var lastSignupRequest: SignupRequest? {
-        guard let email = accessedDatabase.plain.lastSignupEmail else {
-            return nil
+        public var lastSignupRequest: SignupRequest? {
+            guard let email = accessedDatabase.plain.lastSignupEmail else {
+                return nil
+            }
+            return SignupRequest(email: email)
         }
-        return SignupRequest(email: email)
-    }
     #endif
 
     private func updateUsernamePassword() {
         if let token = self.vpnToken {
             let tokenComponents = token.components(separatedBy: ":")
             if let username = tokenComponents.first,
-                let password = tokenComponents.last {
+                let password = tokenComponents.last
+            {
                 self.accessedDatabase.secure.setUsername(username)
                 self.accessedDatabase.secure.setPassword(password, for: username)
             }
@@ -190,14 +191,14 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             callback?(currentUser, nil)
             return
         }
-       
+
         loginUseCase.login(with: receiptRequest.receipt) { error in
             DispatchQueue.main.async {
                 let credentials = Credentials(username: "", password: "")
                 self.handleLoginResult(error: error?.asClientError(), credentials: credentials, callback: callback)
             }
         }
-        
+
     }
 
     public func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
@@ -223,31 +224,31 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             callback?(currentUser, nil)
             return
         }
-    
+
         loginWithCredentials(request.credentials, callback: callback)
-        
+
     }
-    
+
     private func loginWithCredentials(_ credentials: Credentials, notificationToSend: Notification.Name = .PIAAccountDidLogin, callback: ((UserAccount?, Error?) -> Void)?) {
-        
+
         loginUseCase.login(with: credentials) { error in
             DispatchQueue.main.async {
                 self.handleLoginResult(error: error?.asClientError(), credentials: credentials, notificationToSend: notificationToSend, callback: callback)
             }
         }
     }
-    
+
     private func handleLoginResult(error: Error?, credentials: Credentials, notificationToSend: Notification.Name = .PIAAccountDidLogin, callback: ((UserAccount?, Error?) -> Void)?) {
         guard error == nil else {
             callback?(nil, error)
             return
         }
-        
+
         guard vpnToken != nil else {
             callback?(nil, ClientError.unauthorized)
             return
         }
-        
+
         self.updateUser(credentials: credentials) { userAccount, error in
             if let userAccount = userAccount {
                 Macros.postNotification(notificationToSend, [.user: userAccount])
@@ -255,15 +256,15 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             callback?(userAccount, error)
         }
     }
-        
-    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)? ) {
+
+    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         self.updateUsernamePassword()
         self.updateUserAccount(credentials: credentials, callback: callback)
     }
-        
+
     private func updateUserAccount(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         accountDetailsUseCase() { result in
-            
+
             switch result {
             case .failure(let error):
                 log.error("updateUserAccount failed with error: \(error.localizedDescription)")
@@ -281,9 +282,9 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                 }
             }
         }
-    
+
     }
-    
+
     public func refreshAccountInfo(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard isLoggedIn, self.publicUsername != nil else {
             self.logout(nil)
@@ -291,7 +292,7 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         }
         accountInfoWith(callback)
     }
-    
+
     public func accountInformation(_ callback: ((AccountInfo?, Error?) -> Void)?) {
         guard isLoggedIn else {
             callback?(nil, ClientError.unauthorized)
@@ -299,9 +300,9 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         }
         accountInfoWith(callback)
     }
-    
+
     private func accountInfoWith(_ callback: ((AccountInfo?, Error?) -> Void)?) {
-        
+
         accountDetailsUseCase() { result in
             switch result {
             case .failure(let error):
@@ -311,21 +312,22 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             case .success(let accountInfo):
                 DispatchQueue.main.async {
                     self.accessedDatabase.plain.accountInfo = accountInfo
-                    
+
                     Macros.postNotification(.PIAAccountDidRefresh, [.accountInfo: accountInfo])
                     callback?(accountInfo, nil)
                 }
-                
+
             }
         }
-        
+
     }
-    
+
     public func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: ((AccountInfo?, Error?) -> Void)?) {
-        
-        let credentials = Credentials(username: Client.providers.accountProvider.publicUsername ?? "",
-                                      password: password)
-        
+
+        let credentials = Credentials(
+            username: Client.providers.accountProvider.publicUsername ?? "",
+            password: password)
+
         if reset {
             updateAccountUseCase.setEmail(email: request.email, resetPassword: reset) { result in
                 DispatchQueue.main.async {
@@ -338,13 +340,13 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                     //We use the email and the password returned by the signup endpoint in the previous step, we don't update the password
                     self.handleUpdateAccountResult(result, request: request, shouldUpdatePassword: false, callback: callback)
                 }
-                
+
             }
         }
-        
+
     }
-    
-    private func handleUpdateAccountResult(_ result: Result<String?,  NetworkRequestError>, request: UpdateAccountRequest, shouldUpdatePassword: Bool,  callback: ((AccountInfo?, Error?) -> Void)?) {
+
+    private func handleUpdateAccountResult(_ result: Result<String?, NetworkRequestError>, request: UpdateAccountRequest, shouldUpdatePassword: Bool, callback: ((AccountInfo?, Error?) -> Void)?) {
         switch result {
         case .failure(let error):
             callback?(nil, error.asClientError())
@@ -354,33 +356,35 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                     Client.configuration.tempAccountPassword = newPassword
                 }
             }
-            
+
             self.handleUpdateAccountSuccessRequest(request, callback: callback)
         }
     }
-    
+
     private func handleUpdateAccountSuccessRequest(_ request: UpdateAccountRequest, callback: ((AccountInfo?, Error?) -> Void)?) {
 
         guard let user = currentUser else {
             callback?(nil, ClientError.unauthorized)
             return
         }
-        
+
         guard let newAccountInfo = user.info?.with(email: request.email) else {
             Macros.postNotification(.PIAAccountDidUpdate)
             callback?(nil, nil)
             return
         }
-        
+
         self.accessedDatabase.plain.accountInfo = newAccountInfo
-        Macros.postNotification(.PIAAccountDidUpdate, [
-            .accountInfo: newAccountInfo
-        ])
-        
+        Macros.postNotification(
+            .PIAAccountDidUpdate,
+            [
+                .accountInfo: newAccountInfo
+            ])
+
         callback?(newAccountInfo, nil)
-        
+
     }
-    
+
     public func logout(_ callback: SuccessLibraryCallback?) {
         logoutUseCase() { [weak self] error in
             DispatchQueue.main.async {
@@ -388,25 +392,25 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
                 Macros.postNotification(.PIAAccountDidLogout)
                 callback?(nil)
             }
-            
+
         }
     }
-    
+
     public func deleteAccount(_ callback: SuccessLibraryCallback?) {
         guard isLoggedIn else {
             callback?(ClientError.unauthorized)
             return
         }
-        
+
         deleteAccountUseCase() { error in
             DispatchQueue.main.async {
                 callback?(error?.asClientError())
             }
-            
+
         }
-        
+
     }
-    
+
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         featureFlagsUseCase() { result in
             switch result {
@@ -423,264 +427,264 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
             }
         }
     }
-    
+
     #if os(iOS) || os(tvOS)
-    public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
-        log.debug("Fetching available product keys...")
-        
-        subscriptionsUseCase(receiptBase64: nil) { result in
-            switch result {
-            case .failure(let error):
-                log.debug("SubscriptionsUseCase executed with error: \(error)")
-                DispatchQueue.main.async {
-                    callback?(nil, error.asClientError())
-                }
-            case .success(let appStoreInformation):
-                DispatchQueue.main.async {
-                    if let info = appStoreInformation {
-                        callback?(info, nil)
-                    } else {
-                        log.debug("SubscriptionUseCase executed without error but unable to decode app store information")
-                        callback?(nil, ClientError.malformedResponseData)
+        public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
+            log.debug("Fetching available product keys...")
+
+            subscriptionsUseCase(receiptBase64: nil) { result in
+                switch result {
+                case .failure(let error):
+                    log.debug("SubscriptionsUseCase executed with error: \(error)")
+                    DispatchQueue.main.async {
+                        callback?(nil, error.asClientError())
+                    }
+                case .success(let appStoreInformation):
+                    DispatchQueue.main.async {
+                        if let info = appStoreInformation {
+                            callback?(info, nil)
+                        } else {
+                            log.debug("SubscriptionUseCase executed without error but unable to decode app store information")
+                            callback?(nil, ClientError.malformedResponseData)
+                        }
                     }
                 }
-            }
-            
-        }
-        
-    }
-    
-    public func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
-        log.debug("Fetching available products...")
-        
-        if let products = planProducts {
-            log.debug("Available products in cache: \(products)")
-            Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-            callback?(products, nil)
-            return
-        }
-        
-        log.debug("No available products in cache, requesting from store...")
-        
-        let identifiers = accessedConfiguration.allProductIdentifiers()
-        accessedStore.fetchProducts(identifiers: identifiers) { (products, error) in
-            let products = self.planProducts ?? [:]
-            log.debug("Available products from store: \(products)")
-            Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-            callback?(products, nil)
-        }
-    }
 
-    public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        listPlanProducts { (map, error) in
-            guard let product = map?[plan] else {
-                callback?(nil, ClientError.productUnavailable)
+            }
+
+        }
+
+        public func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+            log.debug("Fetching available products...")
+
+            if let products = planProducts {
+                log.debug("Available products in cache: \(products)")
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
+                callback?(products, nil)
                 return
             }
 
-            self.accessedStore.purchaseProduct(product) { (transaction, error) in
-                guard let transaction = transaction else {
-                    callback?(nil, error)
+            log.debug("No available products in cache, requesting from store...")
+
+            let identifiers = accessedConfiguration.allProductIdentifiers()
+            accessedStore.fetchProducts(identifiers: identifiers) { (products, error) in
+                let products = self.planProducts ?? [:]
+                log.debug("Available products from store: \(products)")
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
+                callback?(products, nil)
+            }
+        }
+
+        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+            listPlanProducts { (map, error) in
+                guard let product = map?[plan] else {
+                    callback?(nil, ClientError.productUnavailable)
                     return
                 }
-                callback?(transaction, nil)
+
+                self.accessedStore.purchaseProduct(product) { (transaction, error) in
+                    guard let transaction = transaction else {
+                        callback?(nil, error)
+                        return
+                    }
+                    callback?(transaction, nil)
+                }
             }
         }
-    }
-    
-    public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        accessedStore.refreshPaymentReceipt(callback)
-    }
-    
-    public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
-        loginUseCase.loginLink(with: email) { error in
-            DispatchQueue.main.async {
-                callback?(error?.asClientError())
+
+        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
+            accessedStore.refreshPaymentReceipt(callback)
+        }
+
+        public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+            loginUseCase.loginLink(with: email) { error in
+                DispatchQueue.main.async {
+                    callback?(error?.asClientError())
+                }
+
             }
-            
-        }
-    }
-
-    public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        guard let signup = request.signup(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
         }
 
-        accessedDatabase.plain.lastSignupEmail = request.email
-        
-        signupUseCase(signup: signup) { [weak self] result in
-            guard let self else { return }
-            switch result {
+        public func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            guard !isLoggedIn else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+            guard let signup = request.signup(withStore: accessedStore) else {
+                callback?(nil, ClientError.noReceipt)
+                return
+            }
+
+            accessedDatabase.plain.lastSignupEmail = request.email
+
+            signupUseCase(signup: signup) { [weak self] result in
+                guard let self else { return }
+                switch result {
                 case .success(let credentials):
-                    handleSignupSuccessResult(transaction: request.transaction,
-                                              credentials: credentials,
-                                              callback: callback)
+                    handleSignupSuccessResult(
+                        transaction: request.transaction,
+                        credentials: credentials,
+                        callback: callback)
                 case .failure(let error):
                     handleSignupErrorResult(error: error.asClientError(), callback: callback)
+                }
             }
         }
-    }
-    
-    private func handleSignupErrorResult(error: ClientError?, callback: ((UserAccount?, Error?) -> Void)?) {
-        guard error == .badReceipt else {
-            DispatchQueue.main.async {
-                callback?(nil, error)
-            }
-            return
-        }
 
-        DispatchQueue.main.async {
-            callback?(nil, error)
-        }
-    }
-    
-    private func handleSignupSuccessResult(transaction: InAppTransaction?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
-        
-        if let transaction = transaction {
-            self.accessedStore.finishTransaction(transaction, success: true)
-        }
-        
-        self.accessedDatabase.plain.lastSignupEmail = nil
-        self.accessedDatabase.secure.setPublicUsername(credentials.username)
-        self.accessedDatabase.secure.setUsername(credentials.username)
-        self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
-        
-        self.loginWithCredentials(credentials, notificationToSend: .PIAAccountDidSignup, callback: callback)
-    }
-
-    public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
-        guard let info = currentUser?.info else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-
-        listPlanProducts { (_, error) in
-            guard error == nil else {
-                callback?(nil, error)
-                return
-            }
-            guard info.isRenewable else {
-                //We need to check if the plan is a trial even when the plan is not renewable, as the
-                //error message should be different for each scenario
-                if info.plan == .trial {
-                    callback?(nil, ClientError.renewingTrial)
-                } else {
-                    callback?(nil, ClientError.renewingNonRenewable)
+        private func handleSignupErrorResult(error: ClientError?, callback: ((UserAccount?, Error?) -> Void)?) {
+            guard error == .badReceipt else {
+                DispatchQueue.main.async {
+                    callback?(nil, error)
                 }
                 return
             }
 
-            switch info.plan {
-            case .trial:
-                callback?(nil, ClientError.renewingTrial)
-                return
-            case .monthly:
-                callback?([.monthly], nil)
-            case .yearly:
-                callback?([.yearly], nil)
-            case .other:
-                callback?(nil, ClientError.renewingNonRenewable)
+            DispatchQueue.main.async {
+                callback?(nil, error)
             }
         }
-    }
-    
-    public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard isLoggedIn else {
-            callback?(nil, ClientError.unauthorized)
-            return
+
+        private func handleSignupSuccessResult(transaction: InAppTransaction?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
+
+            if let transaction = transaction {
+                self.accessedStore.finishTransaction(transaction, success: true)
+            }
+
+            self.accessedDatabase.plain.lastSignupEmail = nil
+            self.accessedDatabase.secure.setPublicUsername(credentials.username)
+            self.accessedDatabase.secure.setUsername(credentials.username)
+            self.accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+
+            self.loginWithCredentials(credentials, notificationToSend: .PIAAccountDidSignup, callback: callback)
         }
-        guard let user = currentUser else {
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-        guard let accountInfo = user.info, accountInfo.isRenewable else {
-            callback?(nil, ClientError.renewingNonRenewable)
-            return
-        }
-        guard let payment = request.payment(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
-        }
-        
-        paymentUseCase(with: user.credentials, request: payment) { (error) in
-            
-            log.debug("Payment processed with error: \(error?.localizedDescription ?? "N/A")")
-            
-            DispatchQueue.main.async {
-                if let error {
+
+        public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
+            guard let info = currentUser?.info else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+
+            listPlanProducts { (_, error) in
+                guard error == nil else {
                     callback?(nil, error)
                     return
                 }
-                
-                if let transaction = request.transaction {
-                    self.accessedStore.finishTransaction(transaction, success: true)
+                guard info.isRenewable else {
+                    //We need to check if the plan is a trial even when the plan is not renewable, as the
+                    //error message should be different for each scenario
+                    if info.plan == .trial {
+                        callback?(nil, ClientError.renewingTrial)
+                    } else {
+                        callback?(nil, ClientError.renewingNonRenewable)
+                    }
+                    return
                 }
-                
-                Macros.postNotification(.PIAAccountDidRenew)
-            }
-            
-            
-            self.accountDetailsUseCase() { result in
-                switch result {
-                case .success(let newAccountInfo):
-                    DispatchQueue.main.async {
-                        self.accessedDatabase.plain.accountInfo = newAccountInfo
-                        let user = UserAccount(credentials: user.credentials, info: newAccountInfo)
-                        Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
-                        callback?(user, nil)
-                    }
-                    
-                case .failure(_):
-                    DispatchQueue.main.async {
-                        callback?(nil, nil)
-                    }
+
+                switch info.plan {
+                case .trial:
+                    callback?(nil, ClientError.renewingTrial)
+                    return
+                case .monthly:
+                    callback?([.monthly], nil)
+                case .yearly:
+                    callback?([.yearly], nil)
+                case .other:
+                    callback?(nil, ClientError.renewingNonRenewable)
                 }
             }
-            
         }
-    }
-    
-    public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
-        callback?(nil, nil)
-    }
-    
-    /**
-     Remove all data from the plain and secure internal database
-     */
-    public func cleanDatabase() {
-        if let username = accessedDatabase.secure.username() {
-            accessedDatabase.secure.setPassword(nil, for: username)
-            accessedDatabase.secure.setUsername(nil)
-            accessedDatabase.secure.clear(for: username)
+
+        public func renew(with request: RenewRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+            guard isLoggedIn else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+            guard let user = currentUser else {
+                callback?(nil, ClientError.unauthorized)
+                return
+            }
+            guard let accountInfo = user.info, accountInfo.isRenewable else {
+                callback?(nil, ClientError.renewingNonRenewable)
+                return
+            }
+            guard let payment = request.payment(withStore: accessedStore) else {
+                callback?(nil, ClientError.noReceipt)
+                return
+            }
+
+            paymentUseCase(with: user.credentials, request: payment) { (error) in
+
+                log.debug("Payment processed with error: \(error?.localizedDescription ?? "N/A")")
+
+                DispatchQueue.main.async {
+                    if let error {
+                        callback?(nil, error)
+                        return
+                    }
+
+                    if let transaction = request.transaction {
+                        self.accessedStore.finishTransaction(transaction, success: true)
+                    }
+
+                    Macros.postNotification(.PIAAccountDidRenew)
+                }
+
+                self.accountDetailsUseCase() { result in
+                    switch result {
+                    case .success(let newAccountInfo):
+                        DispatchQueue.main.async {
+                            self.accessedDatabase.plain.accountInfo = newAccountInfo
+                            let user = UserAccount(credentials: user.credentials, info: newAccountInfo)
+                            Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
+                            callback?(user, nil)
+                        }
+
+                    case .failure(_):
+                        DispatchQueue.main.async {
+                            callback?(nil, nil)
+                        }
+                    }
+                }
+
+            }
         }
-        accessedDatabase.secure.removeDIPTokens()
-        accessedDatabase.secure.setPublicUsername(nil)
-        accessedDatabase.plain.accountInfo = nil
-        accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
-        accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
-        accessedDatabase.plain.historicalServers = []
-        accessedDatabase.plain.reset()
-    }
-    
+
+        public func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {
+            callback?(nil, nil)
+        }
+
+        /**
+         Remove all data from the plain and secure internal database
+         */
+        public func cleanDatabase() {
+            if let username = accessedDatabase.secure.username() {
+                accessedDatabase.secure.setPassword(nil, for: username)
+                accessedDatabase.secure.setUsername(nil)
+                accessedDatabase.secure.clear(for: username)
+            }
+            accessedDatabase.secure.removeDIPTokens()
+            accessedDatabase.secure.setPublicUsername(nil)
+            accessedDatabase.plain.accountInfo = nil
+            accessedDatabase.plain.visibleTiles = AvailableTiles.defaultTiles()
+            accessedDatabase.plain.orderedTiles = AvailableTiles.defaultTiles()
+            accessedDatabase.plain.historicalServers = []
+            accessedDatabase.plain.reset()
+        }
+
     #endif
 
     // MARK: WebServicesConsumer
-    
+
     var webServices: WebServices {
         return customWebServices ?? accessedWebServices
     }
-    
+
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
         webServices.taskForConnectivityCheck { (_, error) in
             callback?(error == nil, error)
         }
     }
-    
+
     // MARK: Private
 
     /// :nodoc:
@@ -696,7 +700,8 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
         }
 
         guard let username = tokenComponents.first,
-              let password = tokenComponents.last else {
+            let password = tokenComponents.last
+        else {
             return nil
         }
 

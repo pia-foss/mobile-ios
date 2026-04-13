@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 public enum RegionsUtils {
 
     /// Encodes a `VPNRegionsResponse` to a JSON string.

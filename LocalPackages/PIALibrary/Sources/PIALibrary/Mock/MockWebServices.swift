@@ -23,13 +23,13 @@
 import Foundation
 
 final class MockWebServices: WebServices {
-    
+
     var messageType: InAppMessageType = .view
-    
+
     var credentials: (() -> Credentials)?
 
     var accountInfo: (() -> AccountInfo)?
-    
+
     var appstoreInformationEligible: (() -> AppStoreInformation)?
 
     var appstoreInformationNotEligible: (() -> AppStoreInformation)?
@@ -60,7 +60,7 @@ final class MockWebServices: WebServices {
             fatalError()
         }
     }
-    
+
     func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {}
 
     func loginLink(email: String) async throws {}
@@ -75,29 +75,29 @@ final class MockWebServices: WebServices {
         }
         return result
     }
-    
+
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-    
+
     func processPayment(credentials: Credentials, request: Payment) async throws {}
-    
+
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         let result = serversBundle?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
         callback?(result, error)
     }
-    
+
     func flagURL(for country: String) -> URL {
         return URL(fileURLWithPath: "")
     }
-    
+
     func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
         callback?(nil, nil)
     }
-    
+
     func submitDebugReport() async throws -> String {
         return ""
     }
@@ -114,16 +114,16 @@ final class MockWebServices: WebServices {
                 return self.appstoreInformationEligible?()
             }
         }
-        
+
         Client.configuration.eligibleForTrial = result()!.eligibleForTrial
 
         return result()
     }
-    
+
     func featureFlags() async throws -> [String] {
         ["mock-test"]
     }
-    
+
     func validateLoginQR(qrToken: String) async throws -> String {
         ""
     }

@@ -45,7 +45,7 @@ public struct AppConstants {
         public static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.october.2020"
         public static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.october.2020"
     }
-    
+
     public struct LegacyInApp {
         public static let yearly2020ProductIdentifier = "com.privateinternetaccess.subscription.1year.2020"
         public static let monthly2020ProductIdentifier = "com.privateinternetaccess.subscription.1month.2020"
@@ -56,22 +56,22 @@ public struct AppConstants {
         public static let oldYearlyProductIdentifier = "com.privateinternetaccess.ios.iap.1year"
         public static let oldMonthlyProductIdentifier = "com.privateinternetaccess.ios.iap.1month"
     }
-    
+
     public struct AppURL {
         public static let hostRegion = "region"
     }
-    
+
     public struct Extensions {
         public static let tunnelBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
         public static let tunnelWireguardBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
         public static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
-    
+
     public struct SiriShortcuts {
         public static let shortcutConnect = "com.privateinternetaccess.ios.PIA-VPN.connect"
         public static let shortcutDisconnect = "com.privateinternetaccess.ios.PIA-VPN.disconnect"
     }
-    
+
     public struct Web {
         public static let homeURL = URL(string: "https://www.privateinternetaccess.com/")!
         public static let supportURL = URL(string: "https://www.privateinternetaccess.com/helpdesk")!
@@ -86,12 +86,12 @@ public struct AppConstants {
         public static let appStoreUrl = "itms-apps://itunes.apple.com/app/id598907571"
         public static let safariUrl = "https://apps.apple.com/us/app/inbrowser-private-browsing/id598907571?ls=1"
     }
-    
+
     public struct OpenVPNPacketSize {
         public static let defaultPacketSize = 1400
         public static let smallPacketSize = 1350
     }
-    
+
     public struct IKEv2PacketSize {
         public static let defaultPacketSize = 0
         public static let highPacketSize = 1420
@@ -101,19 +101,19 @@ public struct AppConstants {
         public static let defaultPacketSize = 1280
         public static let highPacketSize = 1420
     }
-    
+
     public struct MagicLink {
         public static let url = "piavpn:login?token="
     }
-    
+
     public struct Widget {
         public static let connect = "piavpn:connect"
     }
-    
+
     public struct QRSignin {
         public static let url = "piavpn:loginqr?token="
     }
-    
+
     public struct Survey {
         public static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
     }

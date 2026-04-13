@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIAUIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIALibrary
+import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: SignupInProgressViewController.self)
 
@@ -34,28 +34,28 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
     @IBOutlet private weak var titleMessage: UILabel!
     @IBOutlet private weak var labelMessage: UILabel!
 
-    var config: Config! // TODO: should be made private when segue navigation is removed
+    var config: Config!  // TODO: should be made private when segue navigation is removed
 
     @available(*, deprecated, message: "it's not used")
     var redeemRequest: RedeemRequest?
-    
+
     private var user: UserAccount?
-    
+
     private var error: Error?
-    
+
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         labelMessage.text = config.metadata.bodySubtitle
         titleMessage.text = config.metadata.title
     }
-    
+
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         progressView.startAnimating()
         performSignup(with: config.signupRequest)
     }
-    
+
     private func performSignup(with request: SignupRequest) {
         log.debug("Signing up...")
 
@@ -95,19 +95,19 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
             }
         }
     }
-        
+
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier, let segueType = StoryboardSegue.Signup(rawValue: identifier) else {
             return
         }
         switch segueType {
         case .successSegueIdentifier:
-                        
+
             guard let email = config.signupRequest.email ?? redeemRequest?.email else {
                 log.error("Email not provided with signup or redeem request")
                 return
             }
-            
+
             let vc = segue.destination as! ConfirmVPNPlanViewController
             var metadata = SignupMetadata(email: email, user: user)
             if config.signupRequest != nil {
@@ -126,7 +126,7 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
                 metadata: metadata,
                 completionDelegate: config.completionDelegate,
             )
-            
+
         case .failureSegueIdentifier:
             let vc = segue.destination as! SignupFailureViewController
             vc.error = error
@@ -136,14 +136,14 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
             break
         }
     }
-    
+
     // MARK: Unwind
-    
+
     @IBAction private func unwoundSignupInternetUnreachable(segue: UIStoryboardSegue) {
     }
 
     // MARK: Restylable
-    
+
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)

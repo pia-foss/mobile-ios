@@ -7,16 +7,17 @@
 //
 
 import Foundation
-import SystemConfiguration
 import NetworkExtension
+import SystemConfiguration
 import UIKit
 
 extension UIDevice {
     var WiFiSSID: String? {
         guard let interfaces = NEHotspotHelper.supportedNetworkInterfaces(),
-              interfaces.count > 0,
-              let interface = interfaces[0] as? NEHotspotNetwork,
-            !interface.ssid.isEmpty else {
+            interfaces.count > 0,
+            let interface = interfaces[0] as? NEHotspotNetwork,
+            !interface.ssid.isEmpty
+        else {
             return nil
         }
         return interface.ssid

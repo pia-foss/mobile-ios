@@ -14,27 +14,25 @@ protocol SearchedRegionsAvailabilityType {
     func eraseAll()
 }
 
-
 class SearchedRegionsAvailability: SearchedRegionsAvailabilityType {
     private let userDefaults: UserDefaults
-    
+
     init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
-    
+
     func get() -> [String] {
         return userDefaults.array(forKey: .kSearchedRegionsIdentifiers) as? [String] ?? []
     }
-    
+
     func set(value: [String]) {
         userDefaults.set(value, forKey: .kSearchedRegionsIdentifiers)
     }
-    
+
     func eraseAll() {
         userDefaults.removeObject(forKey: .kSearchedRegionsIdentifiers)
     }
 }
-
 
 extension String {
     static let kSearchedRegionsIdentifiers = "kSearchedRegionsIdentifiers"

@@ -22,21 +22,22 @@ final class DedicatedIPViewModel: ObservableObject {
     @Published var dedicatedIPStats: [DedicatedIpData] = []
     @Published var shouldShowErrorMessage: Bool = false
     @Published var showActivatedDialog: Bool = false
-    
+
     private let getDedicatedIp: GetDedicatedIpUseCaseType
     private let activateDIPToken: ActivateDIPTokenUseCaseType
     private let removeDIPToken: RemoveDIPUseCaseType
-    
+
     init(getDedicatedIp: GetDedicatedIpUseCaseType, activateDIPToken: ActivateDIPTokenUseCaseType, removeDIPToken: RemoveDIPUseCaseType) {
         self.getDedicatedIp = getDedicatedIp
         self.activateDIPToken = activateDIPToken
         self.removeDIPToken = removeDIPToken
     }
-    
+
     func onAppear() {
         guard let server = getDedicatedIp(),
-              let dipIKEv2IP = server.dipIKEv2IP,
-              let dipStatusString = server.dipStatusString else {
+            let dipIKEv2IP = server.dipIKEv2IP,
+            let dipStatusString = server.dipStatusString
+        else {
             Task { @MainActor in
                 dedicatedIPStats = []
             }
@@ -50,7 +51,7 @@ final class DedicatedIPViewModel: ObservableObject {
             ]
         }
     }
-    
+
     func activateDIP(token: String) async {
         guard !token.isEmpty else {
             log.error("DIP activation failed: empty token")

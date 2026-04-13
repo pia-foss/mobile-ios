@@ -8,10 +8,11 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class AccountProviderMock: AccountProvider {
-    var planProducts: [Plan : InAppProduct]?
+    var planProducts: [Plan: InAppProduct]?
     var shouldCleanAccount: Bool = true
     var isLoggedIn: Bool = true
     var currentUser: UserAccount?
@@ -27,13 +28,13 @@ class AccountProviderMock: AccountProvider {
     private let userResult: UserAccount?
     private let errorResult: Error?
     private let appStoreInformationResult: AppStoreInformation?
-    
+
     private(set) var logoutCalledAttempt = 0
     private(set) var loginWithTokenCalledAttempt = 0
     private(set) var accountInformationCalledAttempt = 0
     var accountInformationResult: AccountInfo?
     var accountInformationError: Error?
-    
+
     var isExpired: Bool {
         get {
             currentUser?.info?.isExpired ?? false
@@ -86,7 +87,7 @@ class AccountProviderMock: AccountProvider {
     func deleteAccount(_ callback: SuccessLibraryCallback?) {}
     func cleanDatabase() {}
     func featureFlags(_ callback: SuccessLibraryCallback?) {}
-    func listPlanProducts(_ callback: LibraryCallback<[Plan : InAppProduct]>?) {}
+    func listPlanProducts(_ callback: LibraryCallback<[Plan: InAppProduct]>?) {}
     func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?) {}
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
     func restorePurchases(_ callback: SuccessLibraryCallback?) {}

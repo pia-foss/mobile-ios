@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ServerSelectingCell: AnyObject {
-    var delegate: ServerSelectionDelegate? {get set}
+    var delegate: ServerSelectionDelegate? { get set }
 }

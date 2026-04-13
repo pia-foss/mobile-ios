@@ -1,7 +1,7 @@
 //
 //  RatingManager.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 13/05/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -21,11 +21,11 @@
 //
 
 import Foundation
-import UIKit
 import PIALibrary
+import PIALocalizations
 import PopupDialog
 import StoreKit
-import PIALocalizations
+import UIKit
 
 private let log = PIALogger.logger(for: RatingManager.self)
 
@@ -40,19 +40,19 @@ protocol RatingManagerProtocol {
 final class RatingManager: RatingManagerProtocol {
 
     private enum Constants {
-      static let baseURL = "xv-client-json-configuration.s3.us-east-1.amazonaws.com"
-      static let stagingEnvironment = "staging"
-      static let productionEnvironment = "production"
-      static let version = "1.0.0"
-      static let globalRegion = "global"
+        static let baseURL = "xv-client-json-configuration.s3.us-east-1.amazonaws.com"
+        static let stagingEnvironment = "staging"
+        static let productionEnvironment = "production"
+        static let version = "1.0.0"
+        static let globalRegion = "global"
     }
-    
+
     static let shared = RatingManager()
 
     private var inAppRatingConfig: InAppRatingConfig?
     private var successfulActivityAccomplished: Bool = false
     private var errorInConnectionsUntilPrompt: Int
-    
+
     private var targetConnectionsReachedForPrompt: Bool {
         guard let inAppRatingConfig else {
             return false
@@ -60,7 +60,7 @@ final class RatingManager: RatingManagerProtocol {
 
         return AppPreferences.shared.successConnections >= inAppRatingConfig.showAfterSuccessfulConnections
     }
-    
+
     init() {
         self.errorInConnectionsUntilPrompt = AppConfiguration.Rating.errorInConnectionsUntilPrompt
     }
@@ -142,7 +142,7 @@ final class RatingManager: RatingManagerProtocol {
             Macros.postNotification(.PIAUpdateFixedTiles)
         }
     }
-    
+
     func handleConnectionError() {
         if Client.daemons.isNetworkReachable {
             if AppPreferences.shared.failureConnections == self.errorInConnectionsUntilPrompt {
@@ -152,16 +152,16 @@ final class RatingManager: RatingManagerProtocol {
             AppPreferences.shared.failureConnections += 1
         }
     }
-    
+
     private func openRatingViewInAppstore() {
-        
+
         let urlStr = AppConstants.Reviews.appReviewUrl
         guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
-        
+
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
     }
-    
+
     private func openFeedbackWebsite() {
         let urlStr = AppConstants.Reviews.feedbackUrl
         guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
@@ -187,7 +187,7 @@ final class RatingManager: RatingManagerProtocol {
                 Macros.postNotification(.PIAUpdateFixedTiles)
             }
         }
-        
+
     }
 
     private func generateURL(file: String, isStaging: Bool, localized: String) -> URL {
@@ -215,21 +215,21 @@ final class RatingManager: RatingManagerProtocol {
     // MARK: Custom Alerts
 
     private func askForConnectionIssuesFeedback() {
-        
+
         guard let rootView = AppDelegate.getRootViewController() else {
             return
         }
-        
+
         let sheet = Macros.alert(
             L10n.Rating.Error.question,
             L10n.Rating.Error.subtitle
         )
         sheet.addCancelAction(L10n.Global.close)
-        
+
         sheet.addActionWithTitle(L10n.Rating.Error.Button.send) {
             self.openFeedbackWebsite()
         }
-        
+
         rootView.present(sheet, animated: true, completion: nil)
 
     }

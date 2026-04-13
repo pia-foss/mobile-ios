@@ -20,10 +20,10 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
-import PIAAssetsMobile
+import UIKit
 
 private let log = PIALogger.logger(for: MenuViewController.self)
 
@@ -42,17 +42,17 @@ final class MenuViewController: AutolayoutViewController {
         case dedicatedIp
 
         case settings
-        
+
         case logout
-        
+
         case homepage
-        
+
         case support
-        
+
         case about
-        
+
         case privacy
-        
+
         case version
     }
 
@@ -61,21 +61,21 @@ final class MenuViewController: AutolayoutViewController {
 
         static let item = "ItemCell"
     }
-    
+
     @IBOutlet private weak var tableView: UITableView!
 
     @IBOutlet private weak var viewHeader: UIView!
-    
+
     @IBOutlet private weak var labelUsername: UILabel!
 
     @IBOutlet private weak var imvAvatar: UIImageView!
-    
+
     @IBOutlet private weak var labelVersion: UILabel!
-    
+
     weak var delegate: MenuViewControllerDelegate?
 
     private var currentUser: UserAccount?
-    
+
     private lazy var allItems: [[Item]] = [
         [
             .selectRegion,
@@ -83,7 +83,8 @@ final class MenuViewController: AutolayoutViewController {
             .dedicatedIp,
             .settings,
             .logout
-        ], [
+        ],
+        [
             .about,
             .privacy,
             .homepage,
@@ -117,14 +118,14 @@ final class MenuViewController: AutolayoutViewController {
         .support: Asset.iconContact,
         .version: Asset.iconAccount
     ]
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         Theme.current.applySideMenu()
 
         modalPresentationCapturesStatusBarAppearance = true
@@ -133,19 +134,20 @@ final class MenuViewController: AutolayoutViewController {
 
         var planDescription = ""
         if let currentUser = Client.providers.accountProvider.currentUser,
-            let info = currentUser.info {
-            
+            let info = currentUser.info
+        {
+
             if info.plan == .monthly || info.plan == .yearly || info.plan == .trial {
-                
+
                 switch info.plan {
-                    case .yearly:
-                        planDescription = L10n.Account.Subscriptions.yearly
-                    case .monthly:
-                        planDescription = L10n.Account.Subscriptions.monthly
-                    default:
-                        planDescription = L10n.Account.Subscriptions.trial
+                case .yearly:
+                    planDescription = L10n.Account.Subscriptions.yearly
+                case .monthly:
+                    planDescription = L10n.Account.Subscriptions.monthly
+                default:
+                    planDescription = L10n.Account.Subscriptions.trial
                 }
-                
+
                 labelVersion.numberOfLines = 0
                 labelVersion.attributedText = Theme.current.smallTextWithColoredLink(
                     withMessage: planDescription + "\n" + L10n.Account.Subscriptions.Short.message,
@@ -159,7 +161,6 @@ final class MenuViewController: AutolayoutViewController {
                 allItems[1].removeLast()
             }
         }
-        
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -174,7 +175,7 @@ final class MenuViewController: AutolayoutViewController {
         labelUsername.text = Client.providers.accountProvider.publicUsername ?? ""
         labelUsername.accessibilityLabel = L10n.Menu.Accessibility.loggedAs(Client.providers.accountProvider.publicUsername ?? "")
     }
-    
+
     override func didRefreshOrientationConstraints() {
         tableView.reloadData()
     }
@@ -193,19 +194,19 @@ final class MenuViewController: AutolayoutViewController {
 
     private func renewSubscription() {
         log.debug("Account: Fetching renewable products...")
-        
+
         self.showLoadingAnimation()
-        
+
         Client.providers.accountProvider.listRenewablePlans { (plans, error) in
             self.hideLoadingAnimation()
-            
+
             guard let plans = plans else {
                 if let clientError = error as? ClientError {
                     switch clientError {
                     case .renewingTrial:
                         self.handleRenewingTrial()
                         return
-                        
+
                     case .renewingNonRenewable:
                         self.handleRenewingNonRenewable()
                         return
@@ -220,7 +221,7 @@ final class MenuViewController: AutolayoutViewController {
             self.handleRenewablePlans(plans)
         }
     }
-    
+
     private func handleRenewablePlans(_ plans: [Plan]) {
         log.debug("Account: Renewable plans are: \(plans)")
 
@@ -231,27 +232,28 @@ final class MenuViewController: AutolayoutViewController {
         //Now we need to filter if legacy plan or not
         if let currentUser = currentUser,
             let info = currentUser.info,
-            let productId = info.productId {
-            
+            let productId = info.productId
+        {
+
             switch productId {
             case AppConstants.InApp.monthlyProductIdentifier,
-                 AppConstants.LegacyInApp.monthly2020ProductIdentifier,
-                 AppConstants.LegacyInApp.monthlySubscriptionProductIdentifier,
-                 AppConstants.LegacyInApp.monthlyProductIdentifier,
-                 AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
+                AppConstants.LegacyInApp.monthly2020ProductIdentifier,
+                AppConstants.LegacyInApp.monthlySubscriptionProductIdentifier,
+                AppConstants.LegacyInApp.monthlyProductIdentifier,
+                AppConstants.LegacyInApp.oldMonthlyProductIdentifier:
                 uniquePlan = .monthly
             case AppConstants.InApp.yearlyProductIdentifier,
-                 AppConstants.LegacyInApp.yearly2020ProductIdentifier,
-                 AppConstants.LegacyInApp.yearlySubscriptionProductIdentifier,
-                 AppConstants.LegacyInApp.yearlyProductIdentifier,
-                 AppConstants.LegacyInApp.oldYearlyProductIdentifier:
+                AppConstants.LegacyInApp.yearly2020ProductIdentifier,
+                AppConstants.LegacyInApp.yearlySubscriptionProductIdentifier,
+                AppConstants.LegacyInApp.yearlyProductIdentifier,
+                AppConstants.LegacyInApp.oldYearlyProductIdentifier:
                 uniquePlan = .yearly
             default:
                 break
             }
-            
+
         }
-        
+
         // TODO: allow users to upgrade from monthly to yearly (plans.count == 2)
         purchaseProductWithPlan(uniquePlan)
     }
@@ -281,7 +283,7 @@ final class MenuViewController: AutolayoutViewController {
         }
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func handleRenewingNonRenewable() {
         log.error("Account: Account is not renewable")
 
@@ -297,26 +299,26 @@ final class MenuViewController: AutolayoutViewController {
         }
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func purchaseProductWithPlan(_ plan: Plan) {
 
         self.showLoadingAnimation()
         Client.providers.accountProvider.purchase(plan: plan) { (transaction, error) in
             self.hideLoadingAnimation()
-            
+
             guard let transaction = transaction else {
                 self.handlePurchaseFailureWithError(error)
                 return
             }
-            
+
             log.debug("Account: Submitting new payment receipt...")
-            
+
             let request = RenewRequest(transaction: transaction)
             self.showLoadingAnimation()
-            
+
             Client.providers.accountProvider.renew(with: request) { (user, error) in
                 self.hideLoadingAnimation()
-                
+
                 guard let _ = user else {
                     self.handleRenewalFailureWithError(error)
                     return
@@ -325,7 +327,7 @@ final class MenuViewController: AutolayoutViewController {
             }
         }
     }
-    
+
     private func handlePurchaseFailureWithError(_ error: Error?) {
         guard let error = error else {
             log.warning("IAP: Purchase cancelled")
@@ -361,11 +363,11 @@ final class MenuViewController: AutolayoutViewController {
             L10n.Global.error,
             L10n.Renewal.Failure.message
         )
-        
+
         alert.addDefaultAction(L10n.Global.close)
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func showLogoutAlert() {
         let sheet = Macros.alert(
             L10n.Menu.Logout.title,
@@ -377,7 +379,7 @@ final class MenuViewController: AutolayoutViewController {
             self.dismiss(animated: true) {
                 log.debug("Account: Logging out...")
                 DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
-                
+
                 MenuViewController.performLogout { _ in
                     DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
                 }
@@ -392,9 +394,9 @@ final class MenuViewController: AutolayoutViewController {
         currentUser = Client.providers.accountProvider.currentUser
         tableView.reloadData()
     }
-    
+
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
 
@@ -415,7 +417,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             if let currentUser = currentUser,
-                let info = currentUser.info {
+                let info = currentUser.info
+            {
                 return info.shouldPresentExpirationAlert ? 1 : 0
             }
             return 0
@@ -424,22 +427,22 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             return sectionItems.count
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             if let currentUser = currentUser,
-                let info = currentUser.info {
+                let info = currentUser.info
+            {
                 let timeLeft = info.dateComponentsBeforeExpiration
                 let cell = tableView.dequeueReusableCell(withIdentifier: Cells.expiration, for: indexPath) as! ExpirationCell
                 cell.fill(withTimeLeft: timeLeft)
                 return cell
             }
             return UITableViewCell()
-        }
-        else {
+        } else {
             let sectionItems = allItems[indexPath.section - 1]
             let item = sectionItems[indexPath.row]
-    
+
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.item, for: indexPath) as! MenuItemCell
             guard let title = stringForItem[item] else {
                 fatalError("Item '\(item)' has no mapped string in stringForItem")
@@ -462,7 +465,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             default:
                 break
             }
-            
+
             let backgroundView = UIView()
             Theme.current.applySecondaryBackground(backgroundView)
             cell.selectedBackgroundView = backgroundView
@@ -478,14 +481,14 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             return 0.5
         }
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let backgroundView = (view as? UITableViewHeaderFooterView)?.backgroundView else {
             return
         }
         Theme.current.applyDivider(backgroundView)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             renewSubscription()
@@ -497,7 +500,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 showLogoutAlert()
                 return
             }
-            
+
             let application = UIApplication.shared
             switch item {
             case .homepage:

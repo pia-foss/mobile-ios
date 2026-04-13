@@ -21,14 +21,14 @@
 //
 
 import Foundation
+import PIAAssetsMobile
 import PIALibrary
 import UIKit
-import PIAAssetsMobile
 
 extension Theme.Palette {
     static var dark: Theme.Palette {
         let lightPalette: Theme.Palette = .light
-        
+
         let palette = Theme.Palette()
         palette.appearance = Theme.Appearance.dark
         palette.logo = Asset.navLogo.image

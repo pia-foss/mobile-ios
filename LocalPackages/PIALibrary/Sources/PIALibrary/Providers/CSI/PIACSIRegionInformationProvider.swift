@@ -41,7 +41,8 @@ struct PIACSIRegionInformationProvider: CSIDataProvider {
                 regionIdentifier: server.regionIdentifier
             )
             if let data = try? JSONEncoder().encode(redactedServer),
-               let description = String(data: data, encoding: .utf8) {
+                let description = String(data: data, encoding: .utf8)
+            {
                 redactedServers.append(description)
             }
         }

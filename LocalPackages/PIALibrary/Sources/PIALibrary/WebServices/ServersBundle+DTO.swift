@@ -38,12 +38,12 @@ private struct ConfigurationDTO: Decodable {
     func toConfiguration() -> ServersBundle.Configuration {
         let ovpnTCPPorts = ovpntcp?.first(where: { $0.name == "openvpn_tcp" })?.ports ?? []
         let ovpnUDPPorts = ovpnudp?.first(where: { $0.name == "openvpn_udp" })?.ports ?? []
-        let wgPorts      = wg?.first(where: { $0.name == "wg" || $0.name == "wireguard" })?.ports ?? []
-        let ikev2Ports   = ikev2?.first(where: { $0.name == "ikev2" })?.ports ?? []
+        let wgPorts = wg?.first(where: { $0.name == "wg" || $0.name == "wireguard" })?.ports ?? []
+        let ikev2Ports = ikev2?.first(where: { $0.name == "ikev2" })?.ports ?? []
         return ServersBundle.Configuration(
-            ovpnPorts:  .init(udp: ovpnUDPPorts, tcp: ovpnTCPPorts),
-            wgPorts:    .init(udp: wgPorts,      tcp: []),
-            ikev2Ports: .init(udp: ikev2Ports,   tcp: []),
+            ovpnPorts: .init(udp: ovpnUDPPorts, tcp: ovpnTCPPorts),
+            wgPorts: .init(udp: wgPorts, tcp: []),
+            ikev2Ports: .init(udp: ikev2Ports, tcp: []),
             latestVersion: 102,
             pollInterval: 60_0000,
             automaticIdentifiers: nil

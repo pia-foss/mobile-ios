@@ -34,13 +34,13 @@ public protocol VPNProvider: AnyObject {
     ///
     /// - Seealso: `VPNProfile.vpnType`
     var currentVPNType: String { get }
-    
+
     /// The `VPNStatus` of the current profile.
     var vpnStatus: VPNStatus { get }
 
     /// The `Server` associated with the current profile.
     var profileServer: Server? { get }
-    
+
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
@@ -48,12 +48,12 @@ public protocol VPNProvider: AnyObject {
 
     /**
      Installs the profile as per `currentVPNType`.
-     
+
      - Parameter callback: Returns `nil` on success.
      - Parameter forceInstall: Force the install of the profile.
      */
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
-    
+
     /**
      Disables the current profile.
 
@@ -63,7 +63,7 @@ public protocol VPNProvider: AnyObject {
 
     /**
      Uninstalls the current profile.
-     
+
      - Parameter callback: Returns `nil` on success.
      */
     func uninstall(_ callback: SuccessLibraryCallback?)
@@ -86,15 +86,14 @@ public protocol VPNProvider: AnyObject {
      - Parameter callback: Returns `nil` on success.
      */
     func disconnect(_ callback: SuccessLibraryCallback?)
-    
+
     /**
      Update preferences from the VPN.
-     
+
      - Parameter callback: Returns `nil` on success.
      */
     func updatePreferences(_ callback: SuccessLibraryCallback?)
 
-    
     /**
      Reconnects to the VPN.
 
@@ -103,28 +102,28 @@ public protocol VPNProvider: AnyObject {
      - Parameter callback: Returns `nil` on success.
      */
     func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
-    
+
     /**
      Submits the debug report containing all relevant information for the current session.
 
      - Parameter callback: Returns the report identifier on success.
      */
     func submitDebugReport() async throws -> String
-    
+
     /**
      Submits the usage information associated with the current VPN connection.
-     
+
      - Parameter callback: Returns the `Usage` information on success.
      */
     func dataUsage(_ callback: LibraryCallback<Usage>?)
-    
+
     /**
      Check if the VPN profile needs to be migrated to GEN4.
      - Precondition: isVPNConnected == true
      - Returns: `Bool`
      */
     func needsMigrationToGEN4() -> Bool
-    
+
 }
 
 public extension VPNProvider {

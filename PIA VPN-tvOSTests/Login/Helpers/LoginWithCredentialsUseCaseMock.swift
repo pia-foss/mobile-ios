@@ -8,15 +8,16 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class LoginWithCredentialsUseCaseMock: LoginWithCredentialsUseCaseType {
     private let result: Result<UserAccount, LoginError>
-    
+
     init(result: Result<UserAccount, LoginError>) {
         self.result = result
     }
-    
+
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void) {
         completion(result)
     }

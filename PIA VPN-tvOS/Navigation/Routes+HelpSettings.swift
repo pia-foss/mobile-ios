@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftUI
 import PIALocalizations
+import SwiftUI
 
 enum HelpDestinations: Destinations {
     case root
@@ -33,7 +33,7 @@ extension View {
             case .privacyPolicy:
                 HelpFactory.makePrivacyPolicyView()
                     .withTopNavigationBar(title: L10n.Settings.Section.help, subtitle: L10n.HelpMenu.AboutOptions.PrivacyPolicy.title)
-                    
+
             }
         }
     }

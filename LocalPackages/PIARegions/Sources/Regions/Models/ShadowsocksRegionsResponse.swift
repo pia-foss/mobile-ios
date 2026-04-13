@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 public struct ShadowsocksRegionsResponse: Codable, Sendable {
     public var iso: String
     public var region: String

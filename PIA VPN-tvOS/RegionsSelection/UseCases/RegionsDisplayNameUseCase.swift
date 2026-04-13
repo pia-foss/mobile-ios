@@ -11,27 +11,27 @@ import PIALibrary
 import PIALocalizations
 
 protocol RegionsDisplayNameUseCaseType {
-    
+
     func getDisplayName(for server: ServerType) -> (title: String, subtitle: String)
-    
+
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String)
-    
+
     func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String)
 }
 
 class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
     let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
-    
+
     init(getDedicatedIpUseCase: GetDedicatedIpUseCaseType) {
         self.getDedicatedIpUseCase = getDedicatedIpUseCase
     }
-    
+
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String) {
-        
+
         if getDedicatedIpUseCase.isDedicatedIp(server) {
             return getDisplayNameForDedicatedIpServer(server)
         }
-        
+
         if servers.isEmpty {
             return (title: server.country, subtitle: server.name)
         }
@@ -42,49 +42,50 @@ class RegionsDisplayNameUseCase: RegionsDisplayNameUseCaseType {
             return (title: server.country, subtitle: getDisplaySubtitleForNonDefault(server: server))
         }
     }
-    
+
     func getDisplayName(for server: ServerType) -> (title: String, subtitle: String) {
         return getDisplayName(for: server, amongst: [])
     }
-    
+
     func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String) {
         if let targetLocation {
             return (title: L10n.LocationSelection.OptimalLocation.title, subtitle: targetLocation.name)
         } else {
             return (title: L10n.LocationSelection.OptimalLocation.title, subtitle: L10n.Global.automatic)
         }
-        
+
     }
-    
+
     private func getDisplayNameForDedicatedIpServer(_ server: ServerType) -> (title: String, subtitle: String) {
         return (title: L10n.Settings.Dedicatedip.Stats.dedicatedip, subtitle: server.name)
     }
-    
+
 }
 
 // MARK: - Private
 
 extension RegionsDisplayNameUseCase {
-    
+
     private func isTheDefaultServer(_ server: ServerType, amongst servers: [ServerType]) -> Bool {
-        
+
         let serversInSameCountry = servers.filter {
             $0.country == server.country
         }
-        
+
         return serversInSameCountry.count == 1
     }
-    
+
     private func getDisplaySubtitleForNonDefault(server: ServerType) -> String {
         var nameWords = server.name.split(separator: " ")
         if let firstWord = nameWords.first,
-           firstWord == server.country {
+            firstWord == server.country
+        {
             nameWords.removeFirst()
             return nameWords.joined(separator: " ").capitalizedSentence
         } else {
             return server.name
         }
-        
+
     }
-    
+
 }

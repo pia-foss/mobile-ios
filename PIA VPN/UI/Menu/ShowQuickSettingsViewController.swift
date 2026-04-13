@@ -21,30 +21,28 @@
 
 //
 
-import UIKit
+import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
-import PIAAssetsMobile
+import UIKit
 
 private enum QuickSettingOptions: Int {
     case theme = 0
     case killswitch
     case networkTools
     case privateBrowsing
-    
+
     static func totalCount() -> Int {
         return !Flags.shared.enablesThemeSwitch ? 3 : 4
     }
-    
+
     static func options() -> [QuickSettingOptions] {
-        return !Flags.shared.enablesThemeSwitch ?
-            [killswitch, networkTools, privateBrowsing] :
-            [theme, killswitch, networkTools, privateBrowsing]
+        return !Flags.shared.enablesThemeSwitch ? [killswitch, networkTools, privateBrowsing] : [theme, killswitch, networkTools, privateBrowsing]
     }
 }
 
 class ShowQuickSettingsCell: UITableViewCell {
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var settingImage: UIImageView!
 
@@ -57,7 +55,7 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     private lazy var switchKillSwitchSetting = UISwitch()
     private lazy var switchNetworkToolsSetting = UISwitch()
     private lazy var switchPrivateBrowserSetting = UISwitch()
-    
+
     private let settingCellIdentifier = "SettingCell"
 
     override func viewDidLoad() {
@@ -65,13 +63,13 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
-        
+
         switchThemeSettings.addTarget(self, action: #selector(toggleThemeSetting), for: .valueChanged)
         switchKillSwitchSetting.addTarget(self, action: #selector(toggleKillSwitchSetting), for: .valueChanged)
         switchNetworkToolsSetting.addTarget(self, action: #selector(toggleNetworkToolsSetting), for: .valueChanged)
         switchPrivateBrowserSetting.addTarget(self, action: #selector(togglePrivateBrowserSetting), for: .valueChanged)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
@@ -80,7 +78,7 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
     }
-    
+
     // MARK: Switch actions
     @objc private func toggleThemeSetting(_ sender: UISwitch) {
         if enabledSettingsCount() == 1 && !sender.isOn {
@@ -121,7 +119,7 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
         tableView.reloadData()
         Macros.postNotification(.PIATilesDidChange)
     }
-    
+
     private func cancelDisablingAction() {
         tableView.reloadData()
         let alert = Macros.alert(
@@ -134,17 +132,14 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
     }
 
     private func enabledSettingsCount() -> Int {
-        return (Flags.shared.enablesThemeSwitch && AppPreferences.shared.quickSettingThemeVisible).intValue +
-        AppPreferences.shared.quickSettingKillswitchVisible.intValue +
-        AppPreferences.shared.quickSettingNetworkToolVisible.intValue +
-        AppPreferences.shared.quickSettingPrivateBrowserVisible.intValue
+        return (Flags.shared.enablesThemeSwitch && AppPreferences.shared.quickSettingThemeVisible).intValue + AppPreferences.shared.quickSettingKillswitchVisible.intValue + AppPreferences.shared.quickSettingNetworkToolVisible.intValue + AppPreferences.shared.quickSettingPrivateBrowserVisible.intValue
     }
 
     // MARK: Restylable
-    
+
     override func viewShouldRestyle() {
         super.viewShouldRestyle()
-    
+
         styleNavigationBarWithTitle(L10n.Tiles.Quicksettings.title)
 
         // XXX: for some reason, UITableView is not affected by appearance updates
@@ -155,13 +150,13 @@ class ShowQuickSettingsViewController: AutolayoutViewController {
         Theme.current.applyPrincipalBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
         tableView.reloadData()
-        
+
     }
 
 }
 
 extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -169,11 +164,11 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-        
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return QuickSettingOptions.totalCount()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
         cell.accessoryType = .none
@@ -209,8 +204,9 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
                 cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
                 switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
             }
-            Theme.current.applySettingsCellTitle(cell.titleLabel,
-                                                 appearance: .dark)
+            Theme.current.applySettingsCellTitle(
+                cell.titleLabel,
+                appearance: .dark)
             cell.titleLabel.backgroundColor = .clear
         }
 
@@ -225,10 +221,9 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionHeader(view)
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         Theme.current.applyTableSectionFooter(view)
     }
 
 }
-

@@ -6,20 +6,21 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 import PIADashboard
+
 @testable import PIA_VPN_tvOS
 
 class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
-    
+
     var getConnectionIntentCalled = false
     var getConnectionIntentCalledAttempt = 0
     var getConnectionIntentResult = CurrentValueSubject<VpnConnectionIntent, Error>(VpnConnectionIntent.none)
     func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
         return getConnectionIntentResult.eraseToAnyPublisher()
     }
-    
+
     var connectionAction: (() -> Void)?
     var connectCalled: Bool = false
     var connectCalledAttempt: Int = 0
@@ -43,6 +44,5 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
         if let error = disconnectError { throw error }
         disconnectionAction?()
     }
-    
-    
+
 }

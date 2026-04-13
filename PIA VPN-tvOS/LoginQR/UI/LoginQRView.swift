@@ -6,16 +6,16 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import SwiftUI
-import PIALocalizations
 import PIAAssetsTV
+import PIALocalizations
+import SwiftUI
 
 struct LoginQRView: View {
     @Binding var expiresAt: String
     var qrCodeURL: URL?
     let loginAction: () -> Void
     let restorePurchasesAction: () -> Void
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 50) {
@@ -26,17 +26,17 @@ struct LoginQRView: View {
                         .bold()
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                
+
                 HStack(spacing: 30) {
                     if let qrCodeURL = qrCodeURL {
                         QRImageView(qrImageURL: qrCodeURL)
                     }
-                    
+
                     VStack(alignment: .leading, spacing: 25) {
                         Text(L10n.Tvos.Login.Qr.description)
                             .font(.system(size: 29))
                             .foregroundColor(.piaOnSurfaceContainerSecondary)
-                        
+
                         VStack(alignment: .leading) {
                             Text(L10n.Tvos.Login.Qr.timer)
                                 .font(.system(size: 29))
@@ -47,7 +47,7 @@ struct LoginQRView: View {
                         }
                     }
                 }
-                
+
                 VStack {
                     ActionButton(
                         title: L10n.Tvos.Login.Qr.Button.login,
@@ -60,11 +60,11 @@ struct LoginQRView: View {
                     )
                     .frame(width: 480, height: 66)
                 }
-                
+
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 80, leading: 30, bottom: 0, trailing: 0))
-            
+
             Asset.setupScreen.swiftUIImage
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing)

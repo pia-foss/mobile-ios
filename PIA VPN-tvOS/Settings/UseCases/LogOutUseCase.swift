@@ -12,7 +12,6 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: LogOutUseCase.self)
 
-
 protocol LogOutUseCaseType {
     func logOut() async throws
 }
@@ -26,9 +25,11 @@ class LogOutUseCase: LogOutUseCaseType {
     var clientPreferences: ClientPreferencesType
     let favoriteRegionsUseCase: FavoriteRegionUseCaseType
     let searchedRegionsAvailability: SearchedRegionsAvailabilityType
-    
-    init(accountProvider: AccountProvider, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
-         connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType) {
+
+    init(
+        accountProvider: AccountProvider, appPreferences: AppPreferencesType, vpnConfigurationProvicer: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType,
+        connectionStatsPermisson: ConnectionStatsPermissonType, clientPreferences: ClientPreferencesType, favoriteRegionsUserCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType
+    ) {
         self.accountProvider = accountProvider
         self.appPreferences = appPreferences
         self.vpnConfigurationProvider = vpnConfigurationProvicer
@@ -38,7 +39,7 @@ class LogOutUseCase: LogOutUseCaseType {
         self.favoriteRegionsUseCase = favoriteRegionsUserCase
         self.searchedRegionsAvailability = searchedRegionsAvailability
     }
-    
+
     private func uninstallVpnConfiguration() async {
         return await withCheckedContinuation { continuation in
             guard self.vpnConfigurationAvailability.get() else {
@@ -56,7 +57,7 @@ class LogOutUseCase: LogOutUseCaseType {
             }
         }
     }
-    
+
     private func logoutUser() async {
         return await withCheckedContinuation { continuation in
             log.info("Logging out user")
@@ -70,7 +71,7 @@ class LogOutUseCase: LogOutUseCaseType {
             }
         }
     }
-    
+
     func logOut() async {
         log.info("Log out requested")
         await uninstallVpnConfiguration()

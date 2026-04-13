@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 extension Client {
 
@@ -32,7 +32,7 @@ extension Client {
         public var isNetworkReachable: Bool {
             return accessedDatabase.transient.isNetworkReachable
         }
-        
+
         /// It's `true` when the Internet is reachable.
         public var isInternetReachable: Bool {
             return accessedDatabase.transient.isInternetReachable

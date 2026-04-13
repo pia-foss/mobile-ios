@@ -15,7 +15,7 @@ class InAppProductMock: InAppProduct {
     let priceLocale: Locale
     let native: Any?
     var description: String
-    
+
     init(identifier: String, price: NSNumber, priceLocale: Locale, native: Any?, description: String) {
         self.identifier = identifier
         self.price = price

@@ -21,11 +21,11 @@
 //
 
 import Foundation
-import UIKit
-import PIALibrary
-import PIAUIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIALibrary
+import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private struct PIAConnectionButtonSettings {
     static let outsideBorderWidth: CGFloat = 10.0
@@ -80,9 +80,9 @@ class PIAConnectionButton: UIButton, Restylable {
     }
 
     private func setupView() {
-        
+
         self.accessibilityLabel = L10n.Dashboard.Accessibility.Vpn.button
-        
+
         //Notification when the theme has changed
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
@@ -93,7 +93,7 @@ class PIAConnectionButton: UIButton, Restylable {
         displayLink = CADisplayLink(target: self, selector: #selector(redrawUpdate))
 
         //Configure the button static color
-        self.layer.cornerRadius = self.frame.width/2
+        self.layer.cornerRadius = self.frame.width / 2
         self.layer.borderWidth = PIAConnectionButtonSettings.outsideBorderWidth
         self.viewShouldRestyle()
 
@@ -105,28 +105,30 @@ class PIAConnectionButton: UIButton, Restylable {
         self.updateColors()
         self.layer.addSublayer(circlePathLayer)
         self.clipsToBounds = true
-        
+
         self.observedBounds = observe(\.bounds, options: [.new]) { object, change in
             if let newValue = change.newValue {
-                self.layer.cornerRadius = self.frame.width/2
+                self.layer.cornerRadius = self.frame.width / 2
                 self.circlePathLayer.frame = newValue
                 self.layoutSubviews()
             }
         }
 
     }
-    
+
     private func circleAnimationPath() -> UIBezierPath {
-        self.circleRadius = (self.frame.width - (self.layer.borderWidth*2))/2
-        let center = CGPoint(x: self.bounds.width/2,
-                             y: self.bounds.height/2)
-        return UIBezierPath(arcCenter: center,
-                            radius: self.circleRadius,
-                            startAngle: PIAConnectionButtonSettings.startAngle,
-                            endAngle: PIAConnectionButtonSettings.endAngle,
-                            clockwise: true)
+        self.circleRadius = (self.frame.width - (self.layer.borderWidth * 2)) / 2
+        let center = CGPoint(
+            x: self.bounds.width / 2,
+            y: self.bounds.height / 2)
+        return UIBezierPath(
+            arcCenter: center,
+            radius: self.circleRadius,
+            startAngle: PIAConnectionButtonSettings.startAngle,
+            endAngle: PIAConnectionButtonSettings.endAngle,
+            clockwise: true)
     }
-    
+
     private func updateColors() {
         UIView.animate(withDuration: PIAConnectionButtonSettings.udpateColorAnimationDuration) { [weak self] in
             if let weakSelf = self {
@@ -155,15 +157,15 @@ class PIAConnectionButton: UIButton, Restylable {
         circlePathLayer.frame = bounds
         circlePathLayer.path = circleAnimationPath().cgPath
     }
-    
+
     func startButtonAnimation() {
-        
+
         displayLink.add(to: .current, forMode: RunLoop.Mode.common)
 
         self.updateColors()
 
         let duration: CFTimeInterval = CFTimeInterval(PIAConnectionButtonSettings.shapeAnimationDuration)
-        
+
         let end = CABasicAnimation(keyPath: "strokeEnd")
         end.fromValue = 0
         end.toValue = 1
@@ -171,7 +173,7 @@ class PIAConnectionButton: UIButton, Restylable {
         end.duration = duration * 0.75
         end.timingFunction = PIAConnectionButtonSettings.timingFunction
         end.fillMode = CAMediaTimingFillMode.forwards
-        
+
         let begin = CABasicAnimation(keyPath: "strokeStart")
         begin.fromValue = 0
         begin.toValue = 1
@@ -193,19 +195,19 @@ class PIAConnectionButton: UIButton, Restylable {
         group.duration = duration
         group.repeatCount = .infinity
         group.isRemovedOnCompletion = false
-        
+
         self.circlePathLayer.add(group, forKey: "move")
         isAnimating = true
 
     }
-    
+
     func stopButtonAnimation() {
-        
+
         self.updateColors()
         self.circlePathLayer.removeAllAnimations()
         self.circlePathLayer.strokeEnd = 1
         self.circlePathLayer.strokeStart = 0
-        
+
         if isAnimating {
             let ending = CABasicAnimation(keyPath: "strokeEnd")
             ending.fromValue = self.currenStrokeEnd
@@ -215,11 +217,11 @@ class PIAConnectionButton: UIButton, Restylable {
             self.circlePathLayer.add(ending, forKey: "move")
             displayLink.remove(from: .current, forMode: RunLoop.Mode.common)
         }
-        
+
         isAnimating = false
 
     }
-    
+
     @objc func redrawUpdate() {
         if let layer = self.circlePathLayer.presentation() {
             if let value = layer.value(forKey: "strokeEnd") as? CGFloat {
@@ -229,29 +231,23 @@ class PIAConnectionButton: UIButton, Restylable {
     }
 
     // MARK: Restylable
-    
+
     @objc func viewShouldRestyle() {
         self.layer.borderColor = buttonBorderColor()
     }
-    
+
     override open var isHighlighted: Bool {
         didSet {
-            self.layer.borderColor = isHighlighted ?
-                highlightedButtonBorderColor() :
-                buttonBorderColor()
+            self.layer.borderColor = isHighlighted ? highlightedButtonBorderColor() : buttonBorderColor()
         }
     }
-    
+
     private func buttonBorderColor() -> CGColor {
-        return Theme.current.palette.appearance == .dark ?
-            PIAConnectionButtonSettings.outsideBorderDarkColor :
-            PIAConnectionButtonSettings.outsideBorderLightColor
+        return Theme.current.palette.appearance == .dark ? PIAConnectionButtonSettings.outsideBorderDarkColor : PIAConnectionButtonSettings.outsideBorderLightColor
     }
-    
+
     private func highlightedButtonBorderColor() -> CGColor {
-        return Theme.current.palette.appearance == .dark ?
-            PIAConnectionButtonSettings.highlightedOutsideBorderDarkColor :
-            PIAConnectionButtonSettings.highlightedOutsideBorderLightColor
+        return Theme.current.palette.appearance == .dark ? PIAConnectionButtonSettings.highlightedOutsideBorderDarkColor : PIAConnectionButtonSettings.highlightedOutsideBorderLightColor
     }
-    
+
 }

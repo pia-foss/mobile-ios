@@ -1,18 +1,16 @@
-
 import Foundation
 
 public struct AccessibilityId {
-  public struct VPNPermission {
-    public static let screen = "id.vpnPermission.screen"
-    public static let submit = "id.vpnPermission.ok.button"
-  }
-  
-  public struct Dashboard {
-    public static let connectionButton = "id.dashboard.connection.button"
-  }
-  
-}
+    public struct VPNPermission {
+        public static let screen = "id.vpnPermission.screen"
+        public static let submit = "id.vpnPermission.ok.button"
+    }
 
+    public struct Dashboard {
+        public static let connectionButton = "id.dashboard.connection.button"
+    }
+
+}
 
 /// This is the same struct `Accessibility` from `PIALibrary`
 /// It has been copied over to the VPN ios client app to
@@ -32,7 +30,7 @@ public struct PIALibraryAccessibility {
                 public static let banner = "id.login.error.banner"
             }
         }
-      
+
         public struct Dashboard {
             public static let menu = "id.dashboard.menu"
         }
@@ -44,4 +42,3 @@ public struct PIALibraryAccessibility {
         }
     }
 }
-

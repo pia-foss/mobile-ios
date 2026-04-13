@@ -14,11 +14,11 @@ protocol GenerateLoginQRCodeUseCaseType {
 
 class GenerateLoginQRCodeUseCase: GenerateLoginQRCodeUseCaseType {
     private let generateLoginQRCodeProvider: GenerateLoginQRCodeProviderType
-    
+
     init(generateLoginQRCodeProvider: GenerateLoginQRCodeProviderType) {
         self.generateLoginQRCodeProvider = generateLoginQRCodeProvider
     }
-    
+
     func callAsFunction() async throws -> LoginQRCode {
         try await generateLoginQRCodeProvider.generateLoginQRCodeToken()
     }

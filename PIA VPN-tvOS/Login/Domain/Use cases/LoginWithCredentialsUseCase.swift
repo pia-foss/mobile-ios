@@ -18,12 +18,12 @@ protocol LoginWithCredentialsUseCaseType {
 class LoginWithCredentialsUseCase: LoginWithCredentialsUseCaseType {
     private let loginProvider: LoginProviderType
     private let errorMapper: LoginDomainErrorMapperType
-    
+
     init(loginProvider: LoginProviderType, errorMapper: LoginDomainErrorMapperType) {
         self.loginProvider = loginProvider
         self.errorMapper = errorMapper
     }
-    
+
     func execute(username: String, password: String, completion: @escaping (Result<UserAccount, LoginError>) -> Void) {
         let credentials = Credentials(
             username: username,
@@ -35,17 +35,13 @@ class LoginWithCredentialsUseCase: LoginWithCredentialsUseCaseType {
             guard let self = self else { return }
 
             switch result {
-                case .success(let userAccount):
-                    log.info("Login provider succeeded")
-                    completion(.success(userAccount))
-                case .failure(let error):
-                    log.error("Login provider failed: \(error)")
-                    completion(.failure(errorMapper.map(error: error)))
+            case .success(let userAccount):
+                log.info("Login provider succeeded")
+                completion(.success(userAccount))
+            case .failure(let error):
+                log.error("Login provider failed: \(error)")
+                completion(.failure(errorMapper.map(error: error)))
             }
         }
     }
 }
-
-
-
-

@@ -1,7 +1,7 @@
 //
 //  CoordinatesFinder.swift
 //  PIA VPN
-//  
+//
 //  Created by Jose Antonio Blaya Garcia on 27/05/2020.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
@@ -21,11 +21,11 @@
 //
 
 import Foundation
-import UIKit
 import PIALibrary
+import UIKit
 
 class CoordinatesFinder {
-    
+
     private var worldMap: UIImageView!
     private var latitude: Double
     private var longitude: Double
@@ -35,13 +35,13 @@ class CoordinatesFinder {
         self.latitude = Double(latitude ?? "0") ?? 0.0
         self.longitude = Double(longitude ?? "0") ?? 0.0
     }
-    
+
     private var markerRadius = 2.0
 
     // Top and bottom latitudes of map graphic
     private var topLat = 83.65
     private var bottomLat = -56.00
-    
+
     // Left and right longitudes of map graphic
     private var leftLong = -168.12
     private var rightLong = -169.65
@@ -57,7 +57,7 @@ class CoordinatesFinder {
     private func degToRad(degrees: Float) -> Float {
         return degrees * Float.pi / 180.0
     }
-    
+
     // Project latitude.  The map uses this projection:
     // https://en.wikipedia.org/wiki/Miller_cylindrical_projection
     private func millerProjectLat(latitudeDeg: Double) -> Float {
@@ -69,7 +69,7 @@ class CoordinatesFinder {
         // Longitude is locationMeta.long -> range [-180, 180]
         var x = longitude
         // Adjust for actual left edge of graphic -> range [-168, 192]
-        if(x < leftLong) {
+        if (x < leftLong) {
             x += 360.0
         }
         // Map to [0, width]
@@ -79,65 +79,66 @@ class CoordinatesFinder {
         return (a / (b + 360.0)) * mapWidth
 
     }
-    
+
     private var locationY: Double {
 
         // Project the latitude -> range [-2.3034..., 2.3034...]
         let millerLat = millerProjectLat(latitudeDeg: latitude)
-        
+
         // Map to the actual range shown by the map.  (If this point is outside
         // the map bound, it returns a negative value or a value greater than
         // height.)
         // Map to unit range -> [0, 1], where 0 is the bottom and 1 is the top
         let unitY = (millerLat - bottomMiller()) / (topMiller() - bottomMiller())
-        
+
         // Flip and scale to height
-        return (1.0-Double(unitY)) * Double(worldMap.frame.size.height)
-        
+        return (1.0 - Double(unitY)) * Double(worldMap.frame.size.height)
+
     }
-    
+
     private var mapPointX: Double {
         return round(locationX)
     }
-  
+
     private var mapPointY: Double {
         return round(locationY)
     }
-    
+
     private var showLocation: Bool {
-        return mapPointX >= 0 && mapPointX < Double(worldMap.frame.size.width) &&
-            mapPointY >= 0 && mapPointY < Double(worldMap.frame.size.height)
+        return mapPointX >= 0 && mapPointX < Double(worldMap.frame.size.width) && mapPointY >= 0 && mapPointY < Double(worldMap.frame.size.height)
     }
 
-      // We're aligning this dot to a non-directional image, so reflect X when RTL
-      // mirror is on.
+    // We're aligning this dot to a non-directional image, so reflect X when RTL
+    // mirror is on.
     private var x: Double {
         return mapPointX - markerRadius
     }
-    
+
     private var y: Double {
         return mapPointY - markerRadius
     }
-    
+
     private func innetDotRectInMap() -> CGRect {
-        return CGRect(x: markerRadius,
-                      y: markerRadius,
-                      width: markerRadius*2,
-                      height: markerRadius*2)
+        return CGRect(
+            x: markerRadius,
+            y: markerRadius,
+            width: markerRadius * 2,
+            height: markerRadius * 2)
     }
-    
+
     private func outerDotRectInMap() -> CGRect {
-        return CGRect(x: locationX - markerRadius*2,
-                      y: locationY - markerRadius*2,
-                      width: markerRadius*4,
-                      height: markerRadius*4)
+        return CGRect(
+            x: locationX - markerRadius * 2,
+            y: locationY - markerRadius * 2,
+            width: markerRadius * 4,
+            height: markerRadius * 4)
     }
-    
+
     /// Returns the dot pointing to the coordinates
     func dot() -> UIView {
         let outerDot = UIView(frame: self.outerDotRectInMap())
         outerDot.backgroundColor = UIColor.piaGreen.withAlphaComponent(0.2)
-        outerDot.layer.cornerRadius = CGFloat(markerRadius*2)
+        outerDot.layer.cornerRadius = CGFloat(markerRadius * 2)
 
         let innerDot = UIView(frame: self.innetDotRectInMap())
         innerDot.backgroundColor = UIColor.piaGreen

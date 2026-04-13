@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 internal enum RegionsError: Error, CustomStringConvertible {
     case invalidResponse
     case invalidSignature
@@ -41,24 +40,24 @@ internal enum RegionsError: Error, CustomStringConvertible {
 
     var description: String {
         switch self {
-        case .invalidResponse:              return "Invalid response"
-        case .invalidSignature:             return "Invalid signature on response"
-        case .noFallback:                   return "No fallback configured"
-        case .emptyVPNRegionsFallback:      return "VPN regions JSON fallback is empty"
-        case .emptyShadowsocksFallback:     return "Shadowsocks regions JSON fallback is empty"
-        case .invalidVPNRegionsJSON:        return "Invalid VPN regions JSON"
-        case .invalidMetadataJSON:          return "Invalid metadata JSON"
-        case .invalidJSONEncoding:          return "Invalid JSON encoding"
-        case .invalidShadowsocksJSON:       return "Invalid Shadowsocks regions JSON"
-        case .invalidRegionsResponse:       return "Invalid regions response"
-        case .noAvailableEndpoints:         return "No available endpoints to perform the request"
-        case .noCertificateForPinning:      return "No certificate available for pinning"
-        case .invalidHTTPClient:            return "Invalid HTTP client"
-        case .invalidURL(let endpoint):     return "Invalid URL for endpoint: \(endpoint)"
-        case .httpError(let code):          return "HTTP \(code) \(HTTPURLResponse.localizedString(forStatusCode: code))"
-        case .invalidUTF8Response:          return "Unable to decode response as UTF-8"
-        case .unknownShadowsocksEntry:      return "Unknown Shadowsocks cache entry"
-        case .emptyShadowsocksEntry:        return "Shadowsocks cache entry is empty"
+        case .invalidResponse: return "Invalid response"
+        case .invalidSignature: return "Invalid signature on response"
+        case .noFallback: return "No fallback configured"
+        case .emptyVPNRegionsFallback: return "VPN regions JSON fallback is empty"
+        case .emptyShadowsocksFallback: return "Shadowsocks regions JSON fallback is empty"
+        case .invalidVPNRegionsJSON: return "Invalid VPN regions JSON"
+        case .invalidMetadataJSON: return "Invalid metadata JSON"
+        case .invalidJSONEncoding: return "Invalid JSON encoding"
+        case .invalidShadowsocksJSON: return "Invalid Shadowsocks regions JSON"
+        case .invalidRegionsResponse: return "Invalid regions response"
+        case .noAvailableEndpoints: return "No available endpoints to perform the request"
+        case .noCertificateForPinning: return "No certificate available for pinning"
+        case .invalidHTTPClient: return "Invalid HTTP client"
+        case .invalidURL(let endpoint): return "Invalid URL for endpoint: \(endpoint)"
+        case .httpError(let code): return "HTTP \(code) \(HTTPURLResponse.localizedString(forStatusCode: code))"
+        case .invalidUTF8Response: return "Unable to decode response as UTF-8"
+        case .unknownShadowsocksEntry: return "Unknown Shadowsocks cache entry"
+        case .emptyShadowsocksEntry: return "Shadowsocks cache entry is empty"
         }
     }
 }

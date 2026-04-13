@@ -21,12 +21,12 @@
 //
 
 import Foundation
-import UIKit
-import SwiftEntryKit
-import PopupDialog
-import PIALibrary
 import PIADesignSystem
+import PIALibrary
 import PIALocalizations
+import PopupDialog
+import SwiftEntryKit
+import UIKit
 
 extension Macros {
 
@@ -35,7 +35,7 @@ extension Macros {
 
     /**
      Creates an `UIColor` from its RGBA components.
- 
+
      - Parameter r: The red component
      - Parameter g: The green component
      - Parameter b: The blue component
@@ -45,10 +45,10 @@ extension Macros {
     public static func color(r: UInt8, g: UInt8, b: UInt8, alpha: UInt8) -> UIColor {
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(alpha) / 255.0)
     }
-    
+
     /**
      Creates an `UIColor` from its RGBA components expressed as a 24-bit hex plus an alpha channel.
-     
+
      - Parameter hex: The red, green and blue components expressed as a 24-bit number
      - Parameter alpha: The alpha channel component
      - Returns: An `UIColor` with the provided parameters
@@ -57,19 +57,19 @@ extension Macros {
         let r = UInt8((hex >> 16) & 0xff)
         let g = UInt8((hex >> 8) & 0xff)
         let b = UInt8(hex & 0xff)
-        
+
         return color(r: r, g: g, b: b, alpha: alpha)
     }
-    
+
     /**
      Creates an `UIColor` from its RGBA components expressed as a String hex plus an alpha channel.
-     
+
      - Parameter hex: The red, green and blue components expressed as a String
      - Parameter alpha: The alpha channel component
      - Returns: An `UIColor` with the provided parameters
      */
-    public static func color(hex:String, alpha: UInt8) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+    public static func color(hex: String, alpha: UInt8) -> UIColor {
+        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)
@@ -79,7 +79,7 @@ extension Macros {
             return UIColor.gray
         }
 
-        var rgbValue:UInt64 = 0
+        var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(
@@ -107,7 +107,7 @@ extension Macros {
         let maxEdge = max(screen.bounds.size.width, screen.bounds.size.height)
         return ((screen.scale >= 3.0) && (maxEdge < 812.0))
     }
-    
+
     /**
      Checks big devices, typically an iPad or iPhone Plus.
 
@@ -130,7 +130,7 @@ extension Macros {
         let buildNumber = info[kCFBundleVersionKey as String] as! String
         return L10n.Global.Version.format(versionNumber, buildNumber)
     }
-    
+
     /**
      Returns a localized version number string. Example "3.9.0"
      */
@@ -144,30 +144,32 @@ extension Macros {
 
     /**
      Shortcut to create a `PopupDialog`.
-     
+
      - Parameter title: The alert title
      - Parameter message: The alert message
      - Returns: A `PopupDialog` object
      */
     public static func alert(_ title: String?, _ message: String?) -> PopupDialog {
         Macros.styleAlertPopupDialog()
-        let popup = PopupDialog(title: title,
-                                message: message,
-                                buttonAlignment: .horizontal)
+        let popup = PopupDialog(
+            title: title,
+            message: message,
+            buttonAlignment: .horizontal)
         return popup
     }
-    
+
     public static func alert(_ viewController: UIViewController, completionHandler completion: (() -> Void)? = nil) -> PopupDialog {
         Macros.styleAlertPopupDialog()
-        let popup = PopupDialog(viewController: viewController,
-                                buttonAlignment: .horizontal,
-                                completion: completion)
+        let popup = PopupDialog(
+            viewController: viewController,
+            buttonAlignment: .horizontal,
+            completion: completion)
         return popup
     }
-    
+
     /**
      Shortcut to create an `UIAlertController`.
-     
+
      - Parameter title: The alert title
      - Parameter message: The alert message
      - Returns: An `UIAlertController` object
@@ -175,7 +177,7 @@ extension Macros {
     public static func alertController(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .alert)
     }
-    
+
     /**
      Style a `PopupDialog` object.
      */
@@ -184,24 +186,24 @@ extension Macros {
         dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
         dialogAppearance.messageFont = TextStyle.textStyle12.font!
         dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
-        
+
         let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius    = 0
-        containerAppearance.shadowEnabled   = false
-        
+        containerAppearance.cornerRadius = 0
+        containerAppearance.shadowEnabled = false
+
         let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color           = .black
-        overlayAppearance.blurEnabled     = false
+        overlayAppearance.color = .black
+        overlayAppearance.blurEnabled = false
         overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity         = 0.5
-        
+        overlayAppearance.opacity = 0.5
+
         let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont      = TextStyle.textStyle21.font!
-        buttonAppearance.titleColor     = TextStyle.textStyle21.color
-        buttonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        buttonAppearance.titleFont = TextStyle.textStyle21.font!
+        buttonAppearance.titleColor = TextStyle.textStyle21.color
+        buttonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
         buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
     }
-    
+
     /**
     Style a PopupDialog alert view object.
      */
@@ -213,171 +215,195 @@ extension Macros {
         dialogAppearance.messageFont = TextStyle.textStyle12.font!
         dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
         let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius    = 0
-        containerAppearance.shadowEnabled   = false
-        
-        let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color           = .black
-        overlayAppearance.blurEnabled     = false
-        overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity         = 0.5
-        
-        let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont      = TextStyle.textStyle14.font!
-        buttonAppearance.titleColor     = TextStyle.textStyle14.color
-        buttonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-        
-        let cancelButtonAppearance = CancelButton.appearance()
-        cancelButtonAppearance.titleFont      = TextStyle.textStyle21.font!
-        cancelButtonAppearance.titleColor     = TextStyle.textStyle21.color
-        cancelButtonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        cancelButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-        
-        let destructiveButtonAppearance = DestructiveButton.appearance()
-        destructiveButtonAppearance.titleFont      = TextStyle.textStyle15.font!
-        destructiveButtonAppearance.titleColor     = TextStyle.textStyle15.color
-        destructiveButtonAppearance.buttonColor    = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        destructiveButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-        
-    }
+        containerAppearance.cornerRadius = 0
+        containerAppearance.shadowEnabled = false
 
+        let overlayAppearance = PopupDialogOverlayView.appearance()
+        overlayAppearance.color = .black
+        overlayAppearance.blurEnabled = false
+        overlayAppearance.liveBlurEnabled = false
+        overlayAppearance.opacity = 0.5
+
+        let buttonAppearance = DefaultButton.appearance()
+        buttonAppearance.titleFont = TextStyle.textStyle14.font!
+        buttonAppearance.titleColor = TextStyle.textStyle14.color
+        buttonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
+
+        let cancelButtonAppearance = CancelButton.appearance()
+        cancelButtonAppearance.titleFont = TextStyle.textStyle21.font!
+        cancelButtonAppearance.titleColor = TextStyle.textStyle21.color
+        cancelButtonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        cancelButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
+
+        let destructiveButtonAppearance = DestructiveButton.appearance()
+        destructiveButtonAppearance.titleFont = TextStyle.textStyle15.font!
+        destructiveButtonAppearance.titleColor = TextStyle.textStyle15.color
+        destructiveButtonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
+        destructiveButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
+
+    }
 
     /**
      Shortcut to display an `EKImageNoteMessageView`.
-     
+
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
-    public static func displayImageNote(withImage image: UIImage,
-                                        message: String,
-                                        andDuration duration: Double? = nil,
-                                        accessbilityIdentifier: String = "") {
-        
-        
+    public static func displayImageNote(
+        withImage image: UIImage,
+        message: String,
+        andDuration duration: Double? = nil,
+        accessbilityIdentifier: String = ""
+    ) {
+
         var attributes = EKAttributes()
         attributes = .topToast
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: EKColor(UIColor.piaRed))
-        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
-                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+        attributes.positionConstraints.size = .init(
+            width: EKAttributes.PositionConstraints.Edge.fill,
+            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
 
         if let duration = duration {
             attributes.displayDuration = duration
         }
-        
-        let labelContent = EKProperty.LabelContent(text: message,
-                                                   style: .init(font: TextStyle.textStyle7.font!,
-                                                                color: .white))
+
+        let labelContent = EKProperty.LabelContent(
+            text: message,
+            style: .init(
+                font: TextStyle.textStyle7.font!,
+                color: .white))
         let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(with: labelContent,
-                                      imageContent: imageContent)
+        let contentView = EKImageNoteMessageView(
+            with: labelContent,
+            imageContent: imageContent)
         contentView.accessibilityIdentifier = accessbilityIdentifier
-        
-        SwiftEntryKit.display(entry: contentView,
-                              using: attributes)
+
+        SwiftEntryKit.display(
+            entry: contentView,
+            using: attributes)
 
     }
-    
+
     /**
      Shortcut to display a success `EKImageNoteMessageView`.
-     
+
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
-    public static func displaySuccessImageNote(withImage image: UIImage,
-                                        message: String,
-                                        andDuration duration: Double? = nil) {
-        
-        
+    public static func displaySuccessImageNote(
+        withImage image: UIImage,
+        message: String,
+        andDuration duration: Double? = nil
+    ) {
+
         var attributes = EKAttributes()
         attributes = .topToast
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: EKColor(UIColor.piaGreenDark20))
-        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
-                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-        
+        attributes.positionConstraints.size = .init(
+            width: EKAttributes.PositionConstraints.Edge.fill,
+            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+
         if let duration = duration {
             attributes.displayDuration = duration
         }
-        
-        let labelContent = EKProperty.LabelContent(text: message,
-                                                   style: .init(font: TextStyle.textStyle7.font!,
-                                                                color: .white))
+
+        let labelContent = EKProperty.LabelContent(
+            text: message,
+            style: .init(
+                font: TextStyle.textStyle7.font!,
+                color: .white))
         let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(with: labelContent,
-                                                 imageContent: imageContent)
-        
-        SwiftEntryKit.display(entry: contentView,
-                              using: attributes)
-        
+        let contentView = EKImageNoteMessageView(
+            with: labelContent,
+            imageContent: imageContent)
+
+        SwiftEntryKit.display(
+            entry: contentView,
+            using: attributes)
+
     }
 
     /**
      Shortcut to display a warning `EKImageNoteMessageView`.
-     
+
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
-    public static func displayWarningImageNote(withImage image: UIImage,
-                                        message: String,
-                                        andDuration duration: Double? = nil) {
-        
-        
+    public static func displayWarningImageNote(
+        withImage image: UIImage,
+        message: String,
+        andDuration duration: Double? = nil
+    ) {
+
         var attributes = EKAttributes()
         attributes = .topToast
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: EKColor(UIColor.piaOrange))
-        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
-                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-        
+        attributes.positionConstraints.size = .init(
+            width: EKAttributes.PositionConstraints.Edge.fill,
+            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+
         if let duration = duration {
             attributes.displayDuration = duration
         }
-        
-        let labelContent = EKProperty.LabelContent(text: message,
-                                                   style: .init(font: TextStyle.textStyle7.font!,
-                                                                color: .white))
+
+        let labelContent = EKProperty.LabelContent(
+            text: message,
+            style: .init(
+                font: TextStyle.textStyle7.font!,
+                color: .white))
         let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(with: labelContent,
-                                                 imageContent: imageContent)
-        
-        SwiftEntryKit.display(entry: contentView,
-                              using: attributes)
-        
+        let contentView = EKImageNoteMessageView(
+            with: labelContent,
+            imageContent: imageContent)
+
+        SwiftEntryKit.display(
+            entry: contentView,
+            using: attributes)
+
     }
     /**
      Shortcut to display an infinite `EKImageNoteMessageView`.
-     
+
      - Parameter message: The note message
      - Parameter image: The note image
      */
-    public static func displayStickyNote(withMessage message: String,
-                                         andImage image: UIImage) {
-        
+    public static func displayStickyNote(
+        withMessage message: String,
+        andImage image: UIImage
+    ) {
+
         var attributes = EKAttributes()
         attributes = .topToast
         attributes.name = stickyNoteName
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: EKColor(UIColor.piaRed))
-        attributes.positionConstraints.size = .init(width: EKAttributes.PositionConstraints.Edge.fill,
-                                                    height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
+        attributes.positionConstraints.size = .init(
+            width: EKAttributes.PositionConstraints.Edge.fill,
+            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
         attributes.displayDuration = .infinity
 
-        let labelContent = EKProperty.LabelContent(text: message,
-                                                   style: .init(font: TextStyle.textStyle7.font!,
-                                                                color: .white))
+        let labelContent = EKProperty.LabelContent(
+            text: message,
+            style: .init(
+                font: TextStyle.textStyle7.font!,
+                color: .white))
         let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(with: labelContent,
-                                                 imageContent: imageContent)
-        SwiftEntryKit.display(entry: contentView,
-                              using: attributes)
-        
+        let contentView = EKImageNoteMessageView(
+            with: labelContent,
+            imageContent: imageContent)
+        SwiftEntryKit.display(
+            entry: contentView,
+            using: attributes)
+
     }
-    
+
     /**
      Removes the current presented sticky note `EKImageNoteMessageView`.
     */
@@ -387,10 +413,9 @@ extension Macros {
         }
     }
 
-
     /**
      Shortcut to create an `UIAlertController` with `.actionSheet` preferred style.
-     
+
      - Parameter request: The sheet title
      - Parameter message: The sheet message
      - Returns: An `UIAlertController` with `.actionSheet` preferred style
@@ -398,12 +423,12 @@ extension Macros {
     public static func actionSheet(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
     }
-    
+
 }
 
 /// Convenience methods for `PopupDialog`.
 public extension PopupDialog {
-    
+
     /// Add a PopupDialog DefaultButton with the handler action
     /// - Parameter title: The button title
     /// - Parameter handler: The button action
@@ -424,7 +449,7 @@ public extension PopupDialog {
         button.accessibilityIdentifier = Accessibility.Id.Dialog.destructive
         self.addButton(button)
     }
-    
+
     /// Add a PopupDialog CancelButton with the handler action
     /// - Parameter title: The button title
     /// - Parameter handler: The button action
@@ -434,7 +459,7 @@ public extension PopupDialog {
         }
         self.addButton(button)
     }
-    
+
     /// Add a PopupDialog Button with the handler action depending of the UIAlertAction given
     /// - Parameter action: The UIAlertAction to convert into PopupDialog button
     /// - Parameter handler: The button action
@@ -454,21 +479,21 @@ public extension PopupDialog {
             }
         }
     }
-    
+
     /// Add a PopupDialog simple CancelButton without handler and dismissing on tap
     /// - Parameter title: The button title
     func addCancelAction(_ title: String) {
         let button = CancelButton(title: title.uppercased(), dismissOnTap: true, action: nil)
         self.addButton(button)
     }
-    
+
     /// Add a PopupDialog simple DefaultButton without handler and dismissing on tap
     /// - Parameter title: The button title
     func addDefaultAction(_ title: String) {
         let button = DefaultButton(title: title.uppercased(), dismissOnTap: true, action: nil)
         self.addButton(button)
     }
-    
+
 }
 
 /// Convenience methods for `UIAlertController`.
@@ -476,7 +501,7 @@ public extension UIAlertController {
 
     /**
      Adds a default action to an `UIAlertController`.
-     
+
      - Parameter title: The action title
      - Parameter handler: The action handler
      */
@@ -490,7 +515,7 @@ public extension UIAlertController {
 
     /**
      Adds a cancel action to an `UIAlertController`.
-     
+
      - Parameter title: The action title
      */
     func addCancelAction(_ title: String) {
@@ -503,7 +528,7 @@ public extension UIAlertController {
 
     /**
      Adds a destructive action to an `UIAlertController`.
-     
+
      - Parameter title: The action title
      - Parameter handler: The action handler
      */

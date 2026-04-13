@@ -22,32 +22,32 @@
 
 import Foundation
 
-  extension Date {
-      /// Returns the number of days between this date and another date.
-      /// - Parameter date: The date to compare with
-      /// - Returns: The number of days between the dates. Positive if this date is after the other date, negative if before.
-      func daysDifference(from date: Date) -> Int {
-          let calendar = Calendar.current
-          let components = calendar.dateComponents([.day], from: date, to: self)
-          return components.day ?? 0
-      }
+extension Date {
+    /// Returns the number of days between this date and another date.
+    /// - Parameter date: The date to compare with
+    /// - Returns: The number of days between the dates. Positive if this date is after the other date, negative if before.
+    func daysDifference(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: date, to: self)
+        return components.day ?? 0
+    }
 
-      /// Returns the absolute number of days between this date and another date.
-      /// - Parameter date: The date to compare with
-      /// - Returns: The absolute number of days between the dates.
-      func absoluteDaysDifference(from date: Date) -> Int {
-          return abs(daysDifference(from: date))
-      }
+    /// Returns the absolute number of days between this date and another date.
+    /// - Parameter date: The date to compare with
+    /// - Returns: The absolute number of days between the dates.
+    func absoluteDaysDifference(from date: Date) -> Int {
+        return abs(daysDifference(from: date))
+    }
 
-      /// Returns the number of days between this date and now.
-      /// - Returns: The number of days. Positive if this date is in the future, negative if in the past.
-      func daysFromNow() -> Int {
-          return daysDifference(from: Date())
-      }
+    /// Returns the number of days between this date and now.
+    /// - Returns: The number of days. Positive if this date is in the future, negative if in the past.
+    func daysFromNow() -> Int {
+        return daysDifference(from: Date())
+    }
 
-      /// Returns the number of days between now and this date.
-      /// - Returns: The number of days. Positive if this date is in the past, negative if in the future.
-      func daysUntilNow() -> Int {
-          return Date().daysDifference(from: self)
-      }
-  }
+    /// Returns the number of days between now and this date.
+    /// - Returns: The number of days. Positive if this date is in the past, negative if in the future.
+    func daysUntilNow() -> Int {
+        return Date().daysDifference(from: self)
+    }
+}

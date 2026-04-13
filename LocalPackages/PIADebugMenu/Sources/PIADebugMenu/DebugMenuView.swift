@@ -1,6 +1,6 @@
-import SwiftUI
-import StoreKit
 @preconcurrency import PIALibrary
+import StoreKit
+import SwiftUI
 
 // MARK: - DebugMenuView
 
@@ -32,35 +32,35 @@ public struct DebugMenuView: View {
                 )
             }
             #if os(iOS)
-            .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
-                switch result {
-                case .success(let status):
-                    if status == .success {
+                .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
+                    switch result {
+                    case .success(let status):
+                        if status == .success {
+                            reportResult = ReportResult(
+                                title: "Refund Requested",
+                                message: "Your refund request was submitted to the App Store."
+                            )
+                        }
+                    case .failure(let error):
                         reportResult = ReportResult(
-                            title: "Refund Requested",
-                            message: "Your refund request was submitted to the App Store."
+                            title: "Refund Request Failed",
+                            message: error.localizedDescription
                         )
                     }
-                case .failure(let error):
-                    reportResult = ReportResult(
-                        title: "Refund Request Failed",
-                        message: error.localizedDescription
-                    )
                 }
-            }
-            .sheet(isPresented: $isTransactionPickerPresented) {
-                List {
-                    Section("Select a transaction to refund") {
-                        ForEach(availableTransactions, id: \.id) { transaction in
-                            Button(transaction.productID) {
-                                isTransactionPickerPresented = false
-                                refundTransactionId = transaction.id
-                                isRefundSheetPresented = true
+                .sheet(isPresented: $isTransactionPickerPresented) {
+                    List {
+                        Section("Select a transaction to refund") {
+                            ForEach(availableTransactions, id: \.id) { transaction in
+                                Button(transaction.productID) {
+                                    isTransactionPickerPresented = false
+                                    refundTransactionId = transaction.id
+                                    isRefundSheetPresented = true
+                                }
                             }
                         }
                     }
                 }
-            }
             #endif
             .navigationTitle("Debug Menu")
             .onAppear {
@@ -75,53 +75,53 @@ public struct DebugMenuView: View {
                 }
 
                 #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ShareLink(
-                        item: DebugExportFile(
-                            content: buildExportContent(),
-                            filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
-                        ),
-                        preview: SharePreview("Debug Export")
-                    ) {
-                        Text("Export All")
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        ShareLink(
+                            item: DebugExportFile(
+                                content: buildExportContent(),
+                                filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
+                            ),
+                            preview: SharePreview("Debug Export")
+                        ) {
+                            Text("Export All")
+                        }
                     }
-                }
                 #endif
             }
             #if os(tvOS)
-            .background(Color.black.ignoresSafeArea())
+                .background(Color.black.ignoresSafeArea())
             #endif
     }
 
     @ViewBuilder
     private var mainContent: some View {
         #if os(tvOS)
-        ScrollView {
-            VStack(alignment: .leading, spacing: 40) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 40) {
+                    appInfoSection
+                        .focusable()
+                    vpnSection
+                        .focusable()
+                    accountSection
+                        .focusable()
+                    receiptSection
+                        .focusable()
+                    logsSection
+                        .focusable()
+                    supportSection
+                }
+                .padding(.horizontal, 60)
+                .padding(.vertical, 40)
+            }
+        #else
+            List {
                 appInfoSection
-                    .focusable()
-                vpnSection
-                    .focusable()
                 accountSection
-                    .focusable()
                 receiptSection
-                    .focusable()
                 logsSection
-                    .focusable()
+                subscriptionSection
                 supportSection
             }
-            .padding(.horizontal, 60)
-            .padding(.vertical, 40)
-        }
-        #else
-        List {
-            appInfoSection
-            accountSection
-            receiptSection
-            logsSection
-            subscriptionSection
-            supportSection
-        }
         #endif
     }
 
@@ -169,23 +169,23 @@ public struct DebugMenuView: View {
                         .foregroundStyle(.primary)
                 }
                 #if os(tvOS)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 12)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 #else
-                .padding(.vertical, 2)
+                    .padding(.vertical, 2)
                 #endif
 
                 #if os(iOS)
-                ShareLink(
-                    item: DebugExportFile(
-                        content: base64,
-                        filename: "receipt_\(Int(Date().timeIntervalSince1970)).txt"
-                    ),
-                    preview: SharePreview("Receipt")
-                ) {
-                    Label("Export", systemImage: "square.and.arrow.up")
-                }
+                    ShareLink(
+                        item: DebugExportFile(
+                            content: base64,
+                            filename: "receipt_\(Int(Date().timeIntervalSince1970)).txt"
+                        ),
+                        preview: SharePreview("Receipt")
+                    ) {
+                        Label("Export", systemImage: "square.and.arrow.up")
+                    }
                 #endif
             } else {
                 DebugInfoRow(label: "Receipt", value: "Not available")
@@ -210,23 +210,23 @@ public struct DebugMenuView: View {
                 .frame(height: 300)
             }
             #if os(tvOS)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 12)
-            .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
             #else
-            .padding(.vertical, 2)
+                .padding(.vertical, 2)
             #endif
 
             #if os(iOS)
-            ShareLink(
-                item: DebugExportFile(
-                    content: logs,
-                    filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
-                ),
-                preview: SharePreview("Logs")
-            ) {
-                Label("Export", systemImage: "square.and.arrow.up")
-            }
+                ShareLink(
+                    item: DebugExportFile(
+                        content: logs,
+                        filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
+                    ),
+                    preview: SharePreview("Logs")
+                ) {
+                    Label("Export", systemImage: "square.and.arrow.up")
+                }
             #endif
         }
     }

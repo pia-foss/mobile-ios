@@ -25,9 +25,9 @@ import Foundation
 private let log = PIALogger.logger(for: MemoryStore.self)
 
 final class MemoryStore: TransientStore, ConfigurationAccess {
-    
+
     // MARK: Server
-    
+
     private var internalServersConfiguration: ServersBundle.Configuration?
 
     var serversConfiguration: ServersBundle.Configuration {
@@ -38,7 +38,7 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
             internalServersConfiguration = newValue
         }
     }
-    
+
     // MARK: VPN
 
     var activeVPNProfile: VPNProfile?
@@ -49,20 +49,22 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
                 return
             }
             log.debug("VPN status: \(oldValue) -> \(vpnStatus)")
-            Macros.postNotification(.PIADaemonsDidUpdateVPNStatus, [
-                .vpnStatus: vpnStatus
-            ])
+            Macros.postNotification(
+                .PIADaemonsDidUpdateVPNStatus,
+                [
+                    .vpnStatus: vpnStatus
+                ])
         }
     }
-    
+
     // MARK: Connectivity
-    
+
     var isNetworkReachable = false
-    
+
     var isInternetReachable = true
-    
+
     var publicIP: String?
-    
+
     var vpnIP: String?
 
     var vpnLog: String = ""

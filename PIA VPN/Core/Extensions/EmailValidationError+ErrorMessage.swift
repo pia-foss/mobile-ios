@@ -26,8 +26,8 @@ import PIALocalizations
 extension Validator.EmailValidationError {
     var errorMessage: String {
         switch self {
-        case .emailIsEmpty:     L10n.Email.Validation.empty
-        case .emailIsInvalid:   L10n.Email.Validation.invalid
+        case .emailIsEmpty: L10n.Email.Validation.empty
+        case .emailIsInvalid: L10n.Email.Validation.invalid
         }
     }
 }

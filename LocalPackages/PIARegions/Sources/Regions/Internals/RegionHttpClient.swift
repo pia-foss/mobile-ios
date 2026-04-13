@@ -19,7 +19,6 @@
 import Foundation
 import Security
 
-
 internal enum RegionHttpClient {
 
     static let requestTimeoutSeconds: TimeInterval = 6.0
@@ -55,7 +54,8 @@ private final class RegionCertificatePinner: NSObject, URLSessionDelegate, Senda
         self.hostname = hostname
         self.commonName = commonName
 
-        let stripped = certificate
+        let stripped =
+            certificate
             .replacingOccurrences(of: "-----BEGIN CERTIFICATE-----", with: "")
             .replacingOccurrences(of: "-----END CERTIFICATE-----", with: "")
             .replacingOccurrences(of: "\n", with: "")
@@ -74,7 +74,8 @@ private final class RegionCertificatePinner: NSObject, URLSessionDelegate, Senda
         }
 
         guard let serverTrust = challenge.protectionSpace.serverTrust,
-              let certificateData else {
+            let certificateData
+        else {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
@@ -84,7 +85,8 @@ private final class RegionCertificatePinner: NSObject, URLSessionDelegate, Senda
 
         // Get server certificate and validate CN
         guard let certChain = SecTrustCopyCertificateChain(serverTrust) as? [SecCertificate],
-              let serverCertificate = certChain.first else {
+            let serverCertificate = certChain.first
+        else {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }

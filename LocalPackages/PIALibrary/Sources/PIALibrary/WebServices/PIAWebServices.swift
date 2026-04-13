@@ -21,14 +21,14 @@
 //
 
 import Foundation
-import PIARegions
-import PIACSI
 import PIAAccount
+import PIACSI
+import PIARegions
 
 private let log = PIALogger.logger(for: PIAWebServices.self)
 
 final class PIAWebServices: WebServices, ConfigurationAccess {
-    
+
     private static let serversVersion = 1002
     private static let store = "apple_app_store"
 
@@ -38,8 +38,10 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     init() {
         let rsa4096Certificate = Client.configuration.rsa4096Certificate
-        let endpointsProvider: any RegionEndpointProvider = Client.environment == .staging ? PIARegionStagingClientStateProvider()
-        : PIARegionClientStateProvider()
+        let endpointsProvider: any RegionEndpointProvider =
+            Client.environment == .staging
+            ? PIARegionStagingClientStateProvider()
+            : PIARegionClientStateProvider()
 
         self.regionsAPI = try! RegionsBuilder()
             .setEndpointProvider(endpointsProvider)
@@ -50,12 +52,13 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             .setShadowsocksRegionsRequestPath("/shadow_socks")
             .build()
 
-        let nativeEndpointProvider: PIAAccountEndpointProvider = switch Client.environment {
-        case .staging:
-            PIANativeAccountStagingEndpointProvider()
-        case .production:
-            PIANativeAccountEndpointProvider()
-        }
+        let nativeEndpointProvider: PIAAccountEndpointProvider =
+            switch Client.environment {
+            case .staging:
+                PIANativeAccountStagingEndpointProvider()
+            case .production:
+                PIANativeAccountEndpointProvider()
+            }
 
         self.nativeAccountAPI = try! PIAAccountBuilder()
             .setEndpointProvider(nativeEndpointProvider)
@@ -63,7 +66,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             .setUserAgent(PIAWebServices.userAgent)
             .build()
     }
-    
+
     public static let userAgent: String = {
         if let info = Bundle.main.infoDictionary {
             let executable = Client.environment == .staging ? "PIA VPN" : "PIA VPN Staging"
@@ -135,7 +138,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             throw mapNativeLoginError(error)
         }
     }
-    
+
     /***
      Validates the QR Token and generates a new auth token for the specific user
      */
@@ -214,7 +217,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             throw mapNativeLoginError(error)
         }
     }
-    
+
     func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {
         do {
             if reset {
@@ -229,7 +232,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             throw mapNativeLoginError(error)
         }
     }
-    
+
     func loginLink(email: String) async throws {
         do {
             try await nativeAccountAPI.loginLink(email: email)
@@ -241,7 +244,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     func logout() async throws {
         try await nativeAccountAPI.logout()
     }
-    
+
     func deleteAccount() async throws {
         try await nativeAccountAPI.deleteAccount()
     }
@@ -250,97 +253,98 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         let flags = try? await nativeAccountAPI.featureFlags().flags
         return flags ?? []
     }
-    
+
     #if os(iOS) || os(tvOS)
-    func signup(with request: Signup) async throws -> Credentials {
-        var marketingJSON = ""
-        if let marketing = request.marketing {
-            marketingJSON = stringify(json: marketing)
-        }
-
-        var debugJSON = ""
-        if let debug = request.debug {
-            debugJSON = stringify(json: debug)
-        }
-
-        let info = IOSSignupInformation(
-            receipt: request.receipt.base64EncodedString(),
-            email: request.email,
-            marketing: marketingJSON.isEmpty ? nil : marketingJSON,
-            debug: debugJSON.isEmpty ? nil : debugJSON
-        )
-
-        do {
-            let response = try await nativeAccountAPI.signUp(information: info)
-            return Credentials(username: response.username, password: response.password)
-        } catch {
-            let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-            throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter
-        }
-    }
-
-    private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
-        var options: JSONSerialization.WritingOptions = []
-        if prettyPrinted {
-            options = JSONSerialization.WritingOptions.prettyPrinted
-        }
-
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json, options: options)
-            if let string = String(data: data, encoding: String.Encoding.utf8) {
-                return string
+        func signup(with request: Signup) async throws -> Credentials {
+            var marketingJSON = ""
+            if let marketing = request.marketing {
+                marketingJSON = stringify(json: marketing)
             }
-        } catch {
-            log.error("JSON stringification error: \(error)")
-        }
 
-        return ""
-    }
+            var debugJSON = ""
+            if let debug = request.debug {
+                debugJSON = stringify(json: debug)
+            }
 
-    func processPayment(credentials: Credentials, request: Payment) async throws {
-        var marketingJSON = ""
-        if let marketing = request.marketing {
-            marketingJSON = stringify(json: marketing)
-        }
-
-        var debugJSON = ""
-        if let debug = request.debug {
-            debugJSON = stringify(json: debug)
-        }
-
-        let info = IOSPaymentInformation(
-            receipt: request.receipt.base64EncodedString(),
-            marketing: marketingJSON,
-            debug: debugJSON
-        )
-
-        do {
-            try await nativeAccountAPI.payment(
-                username: credentials.username,
-                password: credentials.password,
-                information: info
+            let info = IOSSignupInformation(
+                receipt: request.receipt.base64EncodedString(),
+                email: request.email,
+                marketing: marketingJSON.isEmpty ? nil : marketingJSON,
+                debug: debugJSON.isEmpty ? nil : debugJSON
             )
-        } catch {
-            throw ClientError.badReceipt
+
+            do {
+                let response = try await nativeAccountAPI.signUp(information: info)
+                return Credentials(username: response.username, password: response.password)
+            } catch {
+                let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+                throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter
+            }
         }
-    }
+
+        private func stringify(json: Any, prettyPrinted: Bool = false) -> String {
+            var options: JSONSerialization.WritingOptions = []
+            if prettyPrinted {
+                options = JSONSerialization.WritingOptions.prettyPrinted
+            }
+
+            do {
+                let data = try JSONSerialization.data(withJSONObject: json, options: options)
+                if let string = String(data: data, encoding: String.Encoding.utf8) {
+                    return string
+                }
+            } catch {
+                log.error("JSON stringification error: \(error)")
+            }
+
+            return ""
+        }
+
+        func processPayment(credentials: Credentials, request: Payment) async throws {
+            var marketingJSON = ""
+            if let marketing = request.marketing {
+                marketingJSON = stringify(json: marketing)
+            }
+
+            var debugJSON = ""
+            if let debug = request.debug {
+                debugJSON = stringify(json: debug)
+            }
+
+            let info = IOSPaymentInformation(
+                receipt: request.receipt.base64EncodedString(),
+                marketing: marketingJSON,
+                debug: debugJSON
+            )
+
+            do {
+                try await nativeAccountAPI.payment(
+                    username: credentials.username,
+                    password: credentials.password,
+                    information: info
+                )
+            } catch {
+                throw ClientError.badReceipt
+            }
+        }
     #endif
-    
+
     func downloadServers(_ callback: ((ServersBundle?, Error?) -> Void)?) {
         if Client.environment == .staging {
             guard let url = Bundle(for: Self.self).url(forResource: "staging", withExtension: "json"),
-                  let jsonData = try? Data(contentsOf: url) else {
+                let jsonData = try? Data(contentsOf: url)
+            else {
                 callback?(nil, ClientError.noRegions)
                 return
             }
-            
+
             guard let bundle = ServersBundle.parse(from: jsonData) else {
                 callback?(nil, ClientError.malformedResponseData)
                 return
             }
 
             callback?(bundle, nil)
-            
+
         } else {
             Task {
                 let (response, _) = await self.regionsAPI.fetchVPNRegions(
@@ -364,7 +368,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
         }
     }
-    
+
     // MARK: Store
     func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
         do {

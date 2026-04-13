@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import PIAAssetsTV
 import PIALibrary
 import SwiftUI
-import PIAAssetsTV
 
 class VPNConfigurationInstallingFactory {
     private static var isSimulator: Bool {
@@ -19,44 +19,49 @@ class VPNConfigurationInstallingFactory {
             return false
         #endif
     }
-    
+
     static func makeVPNConfigurationInstallingView() -> VPNConfigurationInstallingView {
-        VPNConfigurationInstallingView(viewModel: makeVPNConfigurationInstallingViewModel(), 
-                                       style: makeVPNConfigurationInstallingViewStyle())
+        VPNConfigurationInstallingView(
+            viewModel: makeVPNConfigurationInstallingViewModel(),
+            style: makeVPNConfigurationInstallingViewStyle())
     }
-    
+
     private static func makeVPNConfigurationInstallingViewStyle() -> OnboardingComponentStytle {
-        OnboardingComponentStytle(headerImage: nil,
-                                  headerSpacing: 30,
-                                  backgroundImage: Asset.configureRobots.swiftUIImage, 
-                                  buttonsEdgeInsets: EdgeInsets(top: 40, leading: 30, bottom: 0, trailing: 0))
+        OnboardingComponentStytle(
+            headerImage: nil,
+            headerSpacing: 30,
+            backgroundImage: Asset.configureRobots.swiftUIImage,
+            buttonsEdgeInsets: EdgeInsets(top: 40, leading: 30, bottom: 0, trailing: 0))
     }
-    
+
     private static func makeVPNConfigurationInstallingViewModel() -> VPNConfigurationInstallingViewModel {
-        VPNConfigurationInstallingViewModel(installVPNConfiguration: 
-                                                makeInstallVPNConfigurationUseCase(), 
-                                            errorMapper: VPNConfigurationInstallingErrorMapper()) {
+        VPNConfigurationInstallingViewModel(
+            installVPNConfiguration:
+                makeInstallVPNConfigurationUseCase(),
+            errorMapper: VPNConfigurationInstallingErrorMapper()
+        ) {
             AppRouter.Actions.goBackToRoot(router: AppRouter.shared)()
             NotificationCenter.default.post(name: .DidInstallVPNProfile, object: nil)
         }
     }
-    
+
     private static func makeInstallVPNConfigurationUseCase() -> InstallVPNConfigurationUseCaseType {
-        
+
         guard !isSimulator else {
-            
+
             let onSuccessAction = {
                 let vpnConfigurationAvailability = VPNConfigurationAvailability()
                 vpnConfigurationAvailability.set(value: true)
             }
-            
+
             return InstallVPNConfigurationUseCaseMock(error: nil, onSuccessAction: onSuccessAction)
         }
-        
-        return InstallVpnConfigurationProvider(vpnProvider:  makeVpnConfigurationProvider(),
-                                        vpnConfigurationAvailability: VPNConfigurationAvailability())
+
+        return InstallVpnConfigurationProvider(
+            vpnProvider: makeVpnConfigurationProvider(),
+            vpnConfigurationAvailability: VPNConfigurationAvailability())
     }
-    
+
     static func makeVpnConfigurationProvider() -> VpnConfigurationProviderType {
         return VpnConfigurationProvider(vpnProvider: Client.providers.vpnProvider)
     }
