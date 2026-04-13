@@ -260,6 +260,7 @@
 				Core/NMTTests.swift,
 				Core/PIACardTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
+				"Helpers/Stubs+PIALibrary.swift",
 				Mocks/AccountProviderMock.swift,
 				Mocks/NotificationCenterMock.swift,
 				Mocks/UserDefaultsMock.swift,
