@@ -397,10 +397,10 @@ extension Keychain {
         }
         
     }
-    
+
     /// :nodoc:
-    @discardableResult public func remove(dipToken: String) throws {
-        
+    public func remove(dipToken: String) throws {
+
         var tokens = [String]()
         if let storedTokens = try? dipTokens() {
             removeDIPTokens()

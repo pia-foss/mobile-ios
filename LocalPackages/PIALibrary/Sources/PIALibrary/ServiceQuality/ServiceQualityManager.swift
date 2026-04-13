@@ -117,7 +117,7 @@ public final class ServiceQualityManager: NSObject {
 
     public func stop() {
         kpiManager?.stop(callback: { error in
-            guard error == nil else {
+            if let error {
                 log.error("\(error)")
                 return
             }
@@ -137,7 +137,7 @@ public final class ServiceQualityManager: NSObject {
     
     @objc private func flushEvents() {
         kpiManager?.flush(callback: { error in
-            guard error == nil else {
+            if let error {
                 log.error("\(error)")
                 return
             }

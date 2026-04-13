@@ -33,9 +33,9 @@ final class PIAKPIClientStateProvider : KPIClientStateProvider {
             return LibraryConstants.Elastic.liveToken
         }
     }
-    
-    func kpiAuthToken() -> String {
-        return Client.providers.accountProvider.apiToken ?? ""
+
+    func kpiAuthToken() -> String? {
+        return Client.providers.accountProvider.apiToken
     }
 
     func kpiEndpoints() -> [KPIEndpoint] {

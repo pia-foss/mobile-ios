@@ -22,7 +22,7 @@
 
 import Foundation
 
-protocol TransientStore: class {
+protocol TransientStore: AnyObject {
 
     // MARK: Server
 

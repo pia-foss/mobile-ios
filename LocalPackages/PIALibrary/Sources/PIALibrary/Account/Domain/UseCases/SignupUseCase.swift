@@ -48,7 +48,7 @@ private extension SignupUseCase {
     }
     
     private func handleErrorResponse(_ error: NetworkRequestError, completion: @escaping SignupUseCaseType.Completion) {
-        if case .connectionError(statusCode: let statusCode, message: let message) = error, statusCode == 400 {
+        if case .connectionError(let statusCode, _) = error, statusCode == 400 {
             completion(.failure(NetworkRequestError.badReceipt))
             return
         }

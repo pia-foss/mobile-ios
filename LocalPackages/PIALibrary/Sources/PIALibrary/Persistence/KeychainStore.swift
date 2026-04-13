@@ -123,7 +123,7 @@ extension KeychainStore {
     }
     
     func removeDIPTokens() {
-        try? backend.removeDIPTokens()
+        backend.removeDIPTokens()
     }
     
     func setPassword(_ password: String?, forDipToken dip: String) {

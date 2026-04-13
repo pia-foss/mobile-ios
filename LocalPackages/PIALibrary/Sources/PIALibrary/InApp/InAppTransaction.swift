@@ -23,7 +23,7 @@
 import Foundation
 
 /// Wraps any native implementation of an in-app transaction by providing a common interface.
-public protocol InAppTransaction: class, CustomStringConvertible {
+public protocol InAppTransaction: AnyObject, CustomStringConvertible {
 
     /// The transaction identifier.
     var identifier: String? { get }

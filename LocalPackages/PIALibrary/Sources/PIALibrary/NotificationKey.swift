@@ -51,18 +51,6 @@ public struct NotificationKey: Hashable {
     public init(_ string: String) {
         self.string = string
     }
-    
-    // MARK: Hashable
-    
-    /// :nodoc:
-    public static func ==(lhs: NotificationKey, rhs: NotificationKey) -> Bool {
-        return (lhs.string == rhs.string)
-    }
-    
-    /// :nodoc:
-    public var hashValue: Int {
-        return string.hashValue
-    }
 }
 
 extension Macros {

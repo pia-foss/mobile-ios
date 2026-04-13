@@ -39,7 +39,7 @@ class LicensesUseCase: LicensesUseCaseType {
         }
         
         do {
-            let (data, response) = try await urlSession.data(from: license.licenseURL)
+            let (data, _) = try await urlSession.data(from: license.licenseURL)
             if let licenseContent = String(data: data, encoding: .ascii) {
                 DispatchQueue.main.async {
                     self.cachedLicenseContent[license.name] = licenseContent

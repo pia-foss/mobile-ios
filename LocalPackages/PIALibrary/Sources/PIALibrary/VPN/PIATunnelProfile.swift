@@ -161,7 +161,7 @@ public final class PIATunnelProfile: NetworkExtensionProfile {
         //Migrate OVPN library
         if map.count > 5 {
             //old client. needs migration
-            var newMap = migrateOVPNConfigurationMap(from: map)
+            let newMap = migrateOVPNConfigurationMap(from: map)
             return try? OpenVPNProvider.Configuration.parsed(from: newMap)
         }
         return try? OpenVPNProvider.Configuration.parsed(from: map)

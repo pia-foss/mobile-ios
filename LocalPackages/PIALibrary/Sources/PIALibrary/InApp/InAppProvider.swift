@@ -22,7 +22,7 @@
 
 import Foundation
 
-public protocol InAppProvider: class {
+public protocol InAppProvider: AnyObject {
     var availableProducts: [InAppProduct]? { get }
     
     var paymentReceipt: Data? { get }
