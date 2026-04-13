@@ -176,7 +176,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     private func updateFormElementBorder(_ element: UIView) {
         if let element = element as? UITextField {
             Theme.current.applyInputError(element)
-            let iconWarning = UIImageView(image:Asset.Images.iconWarning.image.withRenderingMode(.alwaysTemplate))
+            let iconWarning = UIImageView(image:Asset.iconWarning.image.withRenderingMode(.alwaysTemplate))
             iconWarning.tintColor = .piaRed
             element.rightView = iconWarning
         }
@@ -244,7 +244,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         // Lock UI
         window.isUserInteractionEnabled = false
 
-        let loadingVC = LoadingViewController(image: Asset.Ui.piaSpinner.swiftUIImage)
+        let loadingVC = LoadingViewController(image: Asset.piaSpinner.swiftUIImage)
         loadingVC.view.translatesAutoresizingMaskIntoConstraints = false
         self.loadingViewController = loadingVC
 

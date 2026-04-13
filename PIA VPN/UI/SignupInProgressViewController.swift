@@ -112,12 +112,12 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
             var metadata = SignupMetadata(email: email, user: user)
             if config.signupRequest != nil {
                 metadata.title = L10n.Signup.InProgress.title
-                metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
+                metadata.bodyImage = Asset.imagePurchaseSuccess.image
                 metadata.bodyTitle = L10n.Signup.Success.title
                 metadata.bodySubtitle = L10n.Signup.Success.messageFormat(metadata.email)
             } else if redeemRequest != nil {
                 metadata.title = L10n.Welcome.Redeem.title
-                metadata.bodyImage = Asset.Ui.imageRedeemSuccess.image
+                metadata.bodyImage = Asset.imageRedeemSuccess.image
                 metadata.bodyImageOffset = CGPoint(x: -10.0, y: 0.0)
                 metadata.bodyTitle = L10n.Signup.Success.Redeem.title
                 metadata.bodySubtitle = L10n.Signup.Success.Redeem.message

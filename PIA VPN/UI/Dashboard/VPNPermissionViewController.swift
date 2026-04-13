@@ -56,7 +56,7 @@ final class VPNPermissionViewController: AutolayoutViewController {
         navigationItem.hidesBackButton = true
         self.view.accessibilityIdentifier = AccessibilityId.VPNPermission.screen
 
-        imvPicture.image = Asset.Images.imageVpnAllow.image
+        imvPicture.image = Asset.imageVpnAllow.image
         labelTitle.text = L10n.VpnPermission.Body.title
         labelMessage.text = L10n.VpnPermission.Body.subtitle(L10n.Global.ok)
         labelFooter.text = L10n.VpnPermission.Body.footer

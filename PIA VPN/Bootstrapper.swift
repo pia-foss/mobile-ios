@@ -319,7 +319,7 @@ final class Bootstrapper {
     @objc private func internetUnreachable(notification: Notification) {
         #if os(iOS)
         Macros.displayStickyNote(withMessage: L10n.Global.unreachable,
-                                 andImage: Asset.Images.iconWarning.image)
+                                 andImage: Asset.iconWarning.image)
         #endif
     }
 }

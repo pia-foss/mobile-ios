@@ -59,7 +59,7 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
             case .normal:
                 self.accessibilityTraits = UIAccessibilityTraits.button
                 self.isAccessibilityElement = true
-                self.accessoryImageRight.image = Asset.Images.Piax.Tiles.openTileDetails.image
+                self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
                 self.tileLeftConstraint.constant = 0
                 self.accessoryButtonLeft.isHidden = true
             case .edit:

@@ -60,7 +60,7 @@ extension Server: @retroactive CustomStringConvertible {
 
 extension UIImageView {
     func setImage(fromServer server: Server) {
-        guard let image = Asset.Images.Flags.flag(forCountry: server.country) else {
+        guard let image = Asset.Flags.flag(forCountry: server.country) else {
             return
         }
         self.image = image.withRenderingMode(.alwaysOriginal)
@@ -69,7 +69,7 @@ extension UIImageView {
 
 extension UIButton {
     func setImage(fromServer server: Server) {
-        guard let image = Asset.Images.Flags.flag(forCountry: server.country) else {
+        guard let image = Asset.Flags.flag(forCountry: server.country) else {
             return
         }
         let original = image.withRenderingMode(.alwaysOriginal)

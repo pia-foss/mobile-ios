@@ -49,7 +49,7 @@ final class GDPRViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        closeButton.setImage(Asset.Images.iconClose.image, for: .normal)
+        closeButton.setImage(Asset.iconClose.image, for: .normal)
         self.labelCollectTitle.text = L10n.Welcome.Gdpr.Collect.Data.title
         self.labelCollectDescription.text = L10n.Welcome.Gdpr.Collect.Data.description
         self.labelUseDataDescription.text = L10n.Welcome.Gdpr.Usage.Data.description

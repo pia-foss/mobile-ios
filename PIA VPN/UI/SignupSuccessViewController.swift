@@ -81,7 +81,7 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         self.styleSubmitButton()
         self.styleContainers()
                 
-        shareDataImageView.image = Asset.Ui.imageDocumentConsent.image
+        shareDataImageView.image = Asset.imageDocumentConsent.image
         shareDataTitleLabel.text = L10n.Signup.Share.Data.Text.title
         shareDataDescriptionLabel.text = L10n.Signup.Share.Data.Text.description
         shareDataFooterLabel.text = L10n.Signup.Share.Data.Text.footer

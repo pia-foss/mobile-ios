@@ -40,7 +40,7 @@ public class SignupUnreachableViewController: AutolayoutViewController, Brandabl
         navigationItem.hidesBackButton = true
 
         title = L10n.Signup.Unreachable.vcTitle
-        imvPicture.image = Asset.Ui.imageNoInternet.image
+        imvPicture.image = Asset.imageNoInternet.image
         labelTitle.text = L10n.Signup.Unreachable.title
         labelMessage.text = L10n.Signup.Unreachable.message
         self.styleSubmitButton()

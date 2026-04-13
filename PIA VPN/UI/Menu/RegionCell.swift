@@ -75,11 +75,11 @@ class RegionCell: UITableViewCell, Restylable {
         }
         if server.geo {
             leftIconImageView.image = Theme.current.geoImage(selected: iconSelected)
-            rightIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
+            rightIconImageView.image = UIImage(asset: Asset.Piax.Global.regionSelected)
             leftIconImageView.isHidden = false
             rightIconImageView.isHidden = !iconSelected
         } else {
-            leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
+            leftIconImageView.image = UIImage(asset: Asset.Piax.Global.regionSelected)
             rightIconImageView.image = Theme.current.geoImage(selected: iconSelected)
             leftIconImageView.isHidden = !iconSelected
             rightIconImageView.isHidden = true
@@ -176,7 +176,7 @@ class RegionCell: UITableViewCell, Restylable {
     
     private func updateFavoriteImage() {
         self.isFavorite ?
-        self.favoriteImageView.image = Asset.Images.Piax.Global.favoriteSelected.image :
+        self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
         favoriteButton.accessibilityLabel = self.isFavorite ?
             L10n.Region.Accessibility.favorite :
@@ -184,7 +184,7 @@ class RegionCell: UITableViewCell, Restylable {
     }
     
     private func updateOfflineImage() {
-        self.favoriteImageView.image = Asset.Images.offlineServerIcon.image
+        self.favoriteImageView.image = Asset.offlineServerIcon.image
         self.favoriteButton.accessibilityLabel = L10n.Global.disabled
     }
 

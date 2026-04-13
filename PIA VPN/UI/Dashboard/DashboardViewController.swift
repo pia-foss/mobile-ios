@@ -320,11 +320,11 @@ final class DashboardViewController: AutolayoutViewController {
         case .normal:
             if let leftBarButton = navigationItem.leftBarButtonItem,
                 leftBarButton.accessibilityLabel != L10n.Global.cancel {
-                leftBarButton.image = Asset.Images.itemMenu.image
+                leftBarButton.image = Asset.itemMenu.image
                 leftBarButton.action = #selector(openMenu(_:))
             } else {
                 navigationItem.leftBarButtonItem = UIBarButtonItem(
-                    image: Asset.Images.itemMenu.image,
+                    image: Asset.itemMenu.image,
                     style: .plain,
                     target: self,
                     action: #selector(openMenu(_:))
@@ -335,7 +335,7 @@ final class DashboardViewController: AutolayoutViewController {
             
             if navigationItem.rightBarButtonItem == nil {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
-                    image: Asset.Images.Piax.Global.iconEditTile.image,
+                    image: Asset.Piax.Global.iconEditTile.image,
                     style: .plain,
                     target: self,
                     action: #selector(updateEditTileStatus(_:))
@@ -399,7 +399,7 @@ final class DashboardViewController: AutolayoutViewController {
         }
         
         if isUnauthorized {
-            Macros.displayImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Account.unauthorized)
+            Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
             isUnauthorized = false
         }
         

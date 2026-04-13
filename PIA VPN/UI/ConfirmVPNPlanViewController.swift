@@ -90,7 +90,7 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         } catch {
             signupEmail = nil
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
 
@@ -105,7 +105,7 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         log.debug("Account: Modifying account email...")
         
         config.metadata.title = L10n.Signup.InProgress.title
-        config.metadata.bodyImage = Asset.Images.imagePurchaseSuccess.image
+        config.metadata.bodyImage = Asset.imagePurchaseSuccess.image
         config.metadata.bodyTitle = L10n.Signup.Success.title
         config.metadata.bodySubtitle = L10n.Signup.Success.messageFormat(email)
 

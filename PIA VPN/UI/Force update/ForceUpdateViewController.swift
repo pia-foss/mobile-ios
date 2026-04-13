@@ -23,7 +23,7 @@ class ForceUpdateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shieldImageView.image = Asset.Images.forceUpdateShield.image
+        shieldImageView.image = Asset.forceUpdateShield.image
         styleUpdateButton()
         titleLabel.text = L10n.Forceupdate.Label.title
         descriptionLabel.text = L10n.Forceupdate.Label.subtitle

@@ -97,7 +97,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
             try Validator.validate(email: email)
         } catch {
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
             self.status = .error(element: textEmail)

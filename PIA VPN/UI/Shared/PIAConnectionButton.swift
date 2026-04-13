@@ -87,7 +87,7 @@ class PIAConnectionButton: UIButton, Restylable {
         NotificationCenter.default.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
 
         //Image
-        let vpnImage = Asset.Images.Piax.Dashboard.vpnButton.image.withRenderingMode(.alwaysTemplate)
+        let vpnImage = Asset.Piax.Dashboard.vpnButton.image.withRenderingMode(.alwaysTemplate)
         self.setImage(vpnImage, for: [])
 
         displayLink = CADisplayLink(target: self, selector: #selector(redrawUpdate))

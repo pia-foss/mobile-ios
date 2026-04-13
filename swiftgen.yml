@@ -21,7 +21,6 @@ ib:
 xcassets:
   - inputs:
         - LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Resources/Images.xcassets
-        - LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Resources/UI.xcassets
     outputs:
         templatePath: Resources/SwiftGen/xcassets/swift5.stencil
         output: LocalPackages/PIAAssets/Sources/PIAAssetsMobile/Generated/Asset.swift
