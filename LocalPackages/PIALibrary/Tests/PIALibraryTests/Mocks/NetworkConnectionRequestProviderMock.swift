@@ -1,5 +1,6 @@
 import Foundation
 import NWHttpConnection
+
 @testable import PIALibrary
 
 class NetworkConnectionRequestProviderMock: NetworkConnectionRequestProviderType {
@@ -7,15 +8,16 @@ class NetworkConnectionRequestProviderMock: NetworkConnectionRequestProviderType
     var makeNetworkRequestConnectionWithPinningEndpoint: PinningEndpoint?
     var makeNetworkRequestConnectionWithConfiguration: NetworkRequestConfigurationType?
     var makeNetworkRequestConnectionResults = [NWHttpConnection.NWHttpConnectionType]()
-    
+
     func makeNetworkRequestConnection(for endpoint: PinningEndpoint, with configuration: NetworkRequestConfigurationType) -> NWHttpConnection.NWHttpConnectionType? {
         makeNetworkRequestConnectionCalledAttempt += 1
         makeNetworkRequestConnectionWithPinningEndpoint = endpoint
         makeNetworkRequestConnectionWithConfiguration = configuration
-        
-        guard makeNetworkRequestConnectionResults.count >= makeNetworkRequestConnectionCalledAttempt else { return nil
+
+        guard makeNetworkRequestConnectionResults.count >= makeNetworkRequestConnectionCalledAttempt else {
+            return nil
         }
-        
+
         return makeNetworkRequestConnectionResults[makeNetworkRequestConnectionCalledAttempt - 1]
     }
 }

@@ -17,12 +17,11 @@ public extension UINavigationBar {
             appearance.backgroundColor = color
             standardAppearance = appearance
             scrollEdgeAppearance = standardAppearance
-        }
-        else {
+        } else {
             barTintColor = color
         }
     }
-    
+
     func setBackgroundAppearenceImage(_ image: UIImage?) {
         if image != nil {
             let appearance = UINavigationBarAppearance()
@@ -30,8 +29,7 @@ public extension UINavigationBar {
             appearance.backgroundImage = image
             standardAppearance = appearance
             scrollEdgeAppearance = standardAppearance
-        }
-        else {
+        } else {
             setBackgroundImage(image, for: UIBarMetrics.default)
         }
     }

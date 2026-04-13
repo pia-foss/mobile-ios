@@ -68,6 +68,14 @@ We use a special entitlement to participate in the process of joining Wi-Fi/hots
 
 You need to request this entitlement from Apple, or remove the call to `configureHotspotHelper()` in `AppDelegate.swift` and adapt the entitlements file to your needs.
 
+## swift-format
+
+To maintain consistency across developers, we use [`swift-format`][dep-swift-format]. The default formatting rules are defined in the `.swift-format` file. A pre-commit hook is available that automatically formats staged Swift files and blocks the commit if any changes are needed. To install it, run from the repo root:
+
+```sh
+ln -s ../../Tools/hooks/pre-commit .git/hooks/pre-commit
+```
+
 ## Contributing
 
 By contributing to this project you are agreeing to the terms stated in the Contributor License Agreement (CLA) [here](/CLA.rst).
@@ -84,6 +92,7 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 [pia-url]: https://www.privateinternetaccess.com/
 [pia-wiki]: https://en.wikipedia.org/wiki/Private_Internet_Access
 
+[dep-swift-format]: https://github.com/swiftlang/swift-format
 [dep-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [dep-brew]: https://brew.sh/
 [dep-golang]: https://golang.org/

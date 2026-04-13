@@ -6,12 +6,11 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 import PIADashboard
 import PIALibrary
 import PIALocalizations
-
 
 enum ConnectionState: Equatable {
     case unkown
@@ -20,7 +19,7 @@ enum ConnectionState: Equatable {
     case connected
     case disconnecting
     case error(Error)
-    
+
     static func == (lhs: ConnectionState, rhs: ConnectionState) -> Bool {
         switch (lhs, rhs) {
         case (.unkown, .unkown):
@@ -39,7 +38,7 @@ enum ConnectionState: Equatable {
             return false
         }
     }
-    
+
     var title: String? {
         switch self {
         case .connected:
@@ -66,21 +65,21 @@ protocol ConnectionStateMonitorType {
 
 final class ConnectionStateMonitor: ConnectionStateMonitorType {
     private var cancellable: AnyCancellable?
-    
+
     private let vpnStatusMonitor: VPNStatusMonitorType
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
-    
+
     @Published private var connectionState: ConnectionState = .unkown
     var connectionStatePublisher: Published<ConnectionState>.Publisher {
         $connectionState
     }
     var currentConnectionState: ConnectionState { connectionState }
-    
+
     init(vpnStatusMonitor: VPNStatusMonitorType, vpnConnectionUseCase: VpnConnectionUseCaseType) {
         self.vpnStatusMonitor = vpnStatusMonitor
         self.vpnConnectionUseCase = vpnConnectionUseCase
     }
-    
+
     func callAsFunction() {
         cancellable = vpnStatusMonitor.getStatus()
             .setFailureType(to: Error.self)
@@ -88,19 +87,21 @@ final class ConnectionStateMonitor: ConnectionStateMonitorType {
                 return (status: vpnStatus, intent: connectionIntent)
             }
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let failure):
-                    self.connectionState = .error(failure)
-                }
-            }, receiveValue: { result in
-                self.calculateState(for: result.intent, vpnStatus: result.status)
-                
-            })
+            .sink(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let failure):
+                        self.connectionState = .error(failure)
+                    }
+                },
+                receiveValue: { result in
+                    self.calculateState(for: result.intent, vpnStatus: result.status)
+
+                })
     }
-    
+
     private func calculateState(for connectionIntent: VpnConnectionIntent, vpnStatus: VPNStatus) {
         switch (connectionIntent, vpnStatus) {
         case (_, .connected):
@@ -115,9 +116,8 @@ final class ConnectionStateMonitor: ConnectionStateMonitorType {
             self.connectionState = vpnStatus.toConnectionState()
         }
     }
-    
-}
 
+}
 
 extension VPNStatus {
     func toConnectionState() -> ConnectionState {

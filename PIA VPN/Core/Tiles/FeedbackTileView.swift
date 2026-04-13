@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
-import PIALibrary
-import PIADesignSystem
-import PIALocalizations
 import PIAAssetsMobile
+import PIADesignSystem
+import PIALibrary
+import PIALocalizations
+import SwiftUI
 
 struct FeedbackTileView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -42,19 +42,19 @@ struct FeedbackTileView: View {
     var body: some View {
         HStack(spacing: 16) {
             leadingSpacerIfNeeded()
-            
+
             Image(asset: Asset.imageAccessCard)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 90, height: 100)
-            
+
             middleSpacerIfNeeded()
-            
+
             VStack(alignment: .center, spacing: 12) {
                 Text(L10n.Tiles.Feedback.title)
                     .font(Font(TextStyle.textStyle24.font! as CTFont))
                     .foregroundStyle(.primary)
-                
+
                 HStack(alignment: .center, spacing: 12) {
                     rateButton(
                         image: .init(uiImage: Asset.iconThumbsDown.image),
@@ -67,7 +67,7 @@ struct FeedbackTileView: View {
                     )
                 }
             }
-            
+
             Spacer()
 
             // Close button
@@ -79,7 +79,7 @@ struct FeedbackTileView: View {
                         .frame(width: 10, height: 10)
                         .padding(6)
                 }
-                
+
                 Spacer()
             }
         }

@@ -24,22 +24,22 @@ import Foundation
 
 /// Simulates VPN-related operations
 public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess {
-    
+
     /// Fakes the public IP address.
     public var mockPublicIP: String? = "192.168.12.78"
-    
+
     /// Fakes the VPN IP address.
     public var mockVpnIP: String? = "4.4.4.4"
-    
+
     /// :nodoc:
     public init() {
     }
-    
+
     // MARK: VPNProvider
 
     /// :nodoc:
     public var availableVPNTypes: [String] = []
-    
+
     /// :nodoc:
     public var currentVPNType: String {
         return "Mock"
@@ -54,12 +54,12 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
             accessedDatabase.transient.vpnStatus = newValue
         }
     }
-    
+
     /// :nodoc:
     public var profileServer: Server? {
         return nil
     }
-    
+
     /// :nodoc:
     public func prepare() {
         accessedDatabase.transient.isNetworkReachable = true
@@ -69,56 +69,56 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
 
         Macros.postNotification(.PIADaemonsDidUpdateVPNStatus)
     }
-    
+
     /// :nodoc:
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         Macros.postNotification(.PIAVPNDidInstall)
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func uninstall(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func uninstallAll() {
     }
-    
+
     /// :nodoc:
     public func connect(_ callback: SuccessLibraryCallback?) {
         vpnStatus = .connected
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func disable(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func disconnect(_ callback: SuccessLibraryCallback?) {
         vpnStatus = .disconnected
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func updatePreferences(_ callback: SuccessLibraryCallback?) {
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         callback?(nil)
     }
-    
+
     /// :nodoc:
     public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         let disconnectionDelay: Int
-//        if (vpnStatus == .changingServer) {
-//            disconnectionDelay = 1000
-//        } else {
-            vpnStatus = .disconnecting
-            disconnectionDelay = 200
-//        }
+        //        if (vpnStatus == .changingServer) {
+        //            disconnectionDelay = 1000
+        //        } else {
+        vpnStatus = .disconnecting
+        disconnectionDelay = 200
+        //        }
 
         Macros.dispatch(after: .milliseconds(disconnectionDelay)) {
             self.vpnStatus = .disconnected
@@ -131,17 +131,17 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
             }
         }
     }
-    
+
     /// :nodoc:
     public func submitDebugReport() async throws -> String {
         throw ClientError.unsupported
     }
-    
+
     /// :nodoc:
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
-    
+
     public func needsMigrationToGEN4() -> Bool {
         return false
     }

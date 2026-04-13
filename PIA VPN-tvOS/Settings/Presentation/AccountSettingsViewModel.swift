@@ -19,43 +19,43 @@ final class AccountSettingsViewModel: ObservableObject {
 
     let accountProvider: AccountProvider
     let logOutUseCase: LogOutUseCaseType
-    
+
     internal var expiryState: ExipryState = .unknown
-    
+
     internal enum ExipryState: Equatable {
         case unknown
         case expired
         case notExpired
     }
-    
+
     init(accountProvider: AccountProvider, logOutUseCase: LogOutUseCaseType) {
         self.accountProvider = accountProvider
         self.logOutUseCase = logOutUseCase
         self.expiryState = getCurrentExpirtyState()
     }
-    
+
     func logOutButtonWasTapped() {
         isLogOutAlertVisible = true
     }
-    
+
     private func getCurrentExpirtyState() -> ExipryState {
         guard let userInfo = accountProvider.currentUser?.info else {
             return .unknown
         }
-        
+
         if userInfo.isExpired {
             return .expired
         } else {
             return .notExpired
         }
     }
-    
+
     private func setLoading(to loading: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.isLoading = loading
         }
     }
-    
+
     func logOutConfirmationButtonWasTapped() {
         log.info("Logout confirmed")
         Task {
@@ -70,7 +70,7 @@ final class AccountSettingsViewModel: ObservableObject {
             }
         }
     }
-    
+
 }
 
 // MARK: - Localization
@@ -79,15 +79,15 @@ extension AccountSettingsViewModel {
     var usernameTitle: String {
         L10n.Account.Username.caption
     }
-    
+
     var usernameValue: String {
         guard let username = accountProvider.publicUsername else {
             return ""
         }
-        
+
         return username
     }
-    
+
     var subscriptionTitle: String {
         switch expiryState {
         case .unknown:
@@ -98,16 +98,17 @@ extension AccountSettingsViewModel {
             return L10n.Settings.Account.SubscriptionExpiry.title
         }
     }
-    
+
     var subscriptionValue: String {
         guard expiryState == .notExpired,
-            let userInfo = accountProvider.currentUser?.info else {
+            let userInfo = accountProvider.currentUser?.info
+        else {
             return ""
         }
-        
+
         return userInfo.humanReadableExpirationDate()
     }
-    
+
     var logOutButtonTitle: String {
         L10n.Settings.Account.LogOutButton.title
     }
@@ -115,17 +116,17 @@ extension AccountSettingsViewModel {
     var logOutAlertTitle: String {
         L10n.Settings.Account.LogOutAlert.title
     }
-    
+
     var logOutAlertMesage: String {
         L10n.Settings.Account.LogOutAlert.message
     }
-    
+
     var logOutAlertCancelActionText: String {
         L10n.Global.cancel
     }
-    
+
     var logOutAlertConfirmActionText: String {
         L10n.Settings.Account.LogOutButton.title
     }
-    
+
 }

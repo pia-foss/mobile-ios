@@ -6,13 +6,13 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import SwiftUI
-import PIALocalizations
 import PIAAssetsTV
+import PIALocalizations
+import SwiftUI
 
 struct ExpiredAccountView: View {
     var viewModel: ExpiredAccountViewModel
-    
+
     var body: some View {
         if viewModel.isLoading {
             LoginLoadingView()
@@ -25,7 +25,7 @@ struct ExpiredAccountView: View {
                                 .font(.system(size: 57))
                                 .foregroundColor(.piaOnBackground)
                                 .bold()
-                            
+
                             if let title2 = viewModel.title2 {
                                 Text(title2)
                                     .font(.system(size: 57))
@@ -34,18 +34,18 @@ struct ExpiredAccountView: View {
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                         }
-                        
+
                         Text(viewModel.subtitle)
                             .font(.system(size: 31))
                             .foregroundColor(.piaOnSurfaceContainerSecondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    
+
                     HStack(spacing: 30) {
                         if let qrCodeURL = viewModel.qrCodeURL {
                             QRImageView(qrImageURL: qrCodeURL)
                         }
-                        
+
                         VStack(alignment: .leading, spacing: 35) {
                             ForEach(viewModel.qrTitle, id: \.self) { title in
                                 Text(title)
@@ -55,7 +55,7 @@ struct ExpiredAccountView: View {
                             }
                         }
                     }.padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
-                    
+
                     VStack {
                         ActionButton(
                             title: L10n.Tvos.Signin.Expired.Button.signout,
@@ -66,7 +66,7 @@ struct ExpiredAccountView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 0))
-                
+
                 Asset.setupScreen.swiftUIImage
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing)
@@ -74,4 +74,3 @@ struct ExpiredAccountView: View {
         }
     }
 }
-

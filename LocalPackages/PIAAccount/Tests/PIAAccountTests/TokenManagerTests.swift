@@ -1,5 +1,6 @@
-import Testing
 import Foundation
+import Testing
+
 @testable import PIAAccount
 
 @Suite struct TokenManagerTests {
@@ -18,7 +19,7 @@ import Foundation
     func storeAndRetrieveAPIToken() async throws {
         let tokenResponse = APITokenResponse(
             apiToken: "test-api-token-123",
-            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60)) // 30 days
+            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60))  // 30 days
         )
 
         try await tokenManager.storeAPIToken(tokenResponse)
@@ -172,12 +173,12 @@ import Foundation
     func needsTokenRefreshAPIExpiring() async throws {
         let apiToken = APITokenResponse(
             apiToken: "api",
-            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(10 * 24 * 60 * 60)) // 10 days
+            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(10 * 24 * 60 * 60))  // 10 days
         )
         let vpnToken = VPNTokenResponse(
             vpnUsernameToken: "vpn1",
             vpnPasswordToken: "vpn2",
-            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60)) // 30 days
+            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60))  // 30 days
         )
 
         try await tokenManager.storeAPIToken(apiToken)
@@ -193,12 +194,12 @@ import Foundation
     func needsTokenRefreshVPNExpiring() async throws {
         let apiToken = APITokenResponse(
             apiToken: "api",
-            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60)) // 30 days
+            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(30 * 24 * 60 * 60))  // 30 days
         )
         let vpnToken = VPNTokenResponse(
             vpnUsernameToken: "vpn1",
             vpnPasswordToken: "vpn2",
-            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(10 * 24 * 60 * 60)) // 10 days
+            expiresAt: ISO8601DateFormatter().string(from: Date().addingTimeInterval(10 * 24 * 60 * 60))  // 10 days
         )
 
         try await tokenManager.storeAPIToken(apiToken)
@@ -257,7 +258,7 @@ import Foundation
         try await tokenManager.refreshAPITokenIfNeeded {
             refreshCount += 1
             // Simulate API call delay
-            try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            try await Task.sleep(nanoseconds: 100_000_000)  // 0.1 seconds
 
             // Store new token
             let newToken = APITokenResponse(

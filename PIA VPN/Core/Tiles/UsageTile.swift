@@ -21,18 +21,18 @@
 //
 
 import Foundation
-import PIALibrary
-import UIKit
 import PIADesignSystem
-import PIAUIKit
+import PIALibrary
 import PIALocalizations
+import PIAUIKit
+import UIKit
 
-class UsageTile: UIView, Tileable  {
-    
+class UsageTile: UIView, Tileable {
+
     var view: UIView!
     var detailSegueIdentifier: String!
     var status: TileStatus = .normal
-    
+
     @IBOutlet private weak var usageTitle: UILabel!
     @IBOutlet private weak var uploadTitle: UILabel!
     @IBOutlet private weak var uploadValue: UILabel!
@@ -43,23 +43,23 @@ class UsageTile: UIView, Tileable  {
         super.init(frame: frame)
         self.xibSetup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
         self.setupView()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     private func setupView() {
-        
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(displayUsageInformation), name: .PIAVPNUsageUpdate, object: nil)
-        
+
         viewShouldRestyle()
         self.usageTitle.text = L10n.Tiles.Usage.title.uppercased()
         self.uploadTitle.text = L10n.Tiles.Usage.upload
@@ -67,7 +67,7 @@ class UsageTile: UIView, Tileable  {
         self.accessibilityIdentifier = "UsageTile"
         displayUsageInformation()
     }
-    
+
     @objc private func viewShouldRestyle() {
         usageTitle.style(style: TextStyle.textStyle21)
         Theme.current.applySettingsCellTitle(uploadValue, appearance: .dark)
@@ -77,7 +77,7 @@ class UsageTile: UIView, Tileable  {
         Theme.current.applyPrincipalBackground(self)
         displayUsageInformation()
     }
-    
+
     @objc private func displayUsageInformation() {
         updateStyleForVPNType(Client.providers.vpnProvider.currentVPNType)
         if Client.providers.vpnProvider.currentVPNType != IKEv2Profile.vpnType {
@@ -85,24 +85,29 @@ class UsageTile: UIView, Tileable  {
                 var uploaded = Int64(0)
                 var downloaded = Int64(0)
                 if error == nil,
-                    let usage = usage {
+                    let usage = usage
+                {
                     uploaded = Int64(usage.uploaded)
                     downloaded = Int64(usage.downloaded)
                 }
-                self.uploadValue.text = ByteCountFormatter.string(fromByteCount: uploaded,
-                                                                  countStyle: .file)
-                self.downloadValue.text = ByteCountFormatter.string(fromByteCount: downloaded,
-                                                                    countStyle: .file)
+                self.uploadValue.text = ByteCountFormatter.string(
+                    fromByteCount: uploaded,
+                    countStyle: .file)
+                self.downloadValue.text = ByteCountFormatter.string(
+                    fromByteCount: downloaded,
+                    countStyle: .file)
             }
         }
     }
-    
+
     private func updateStyleForVPNType(_ vpnType: String) {
         if vpnType == IKEv2Profile.vpnType {
-            self.uploadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
-                                                              countStyle: .file)
-            self.downloadValue.text = ByteCountFormatter.string(fromByteCount: Int64(0),
-                                                                countStyle: .file)
+            self.uploadValue.text = ByteCountFormatter.string(
+                fromByteCount: Int64(0),
+                countStyle: .file)
+            self.downloadValue.text = ByteCountFormatter.string(
+                fromByteCount: Int64(0),
+                countStyle: .file)
             self.uploadValue.alpha = 0.2
             self.downloadValue.alpha = 0.2
             self.usageTitle.text = L10n.Tiles.Usage.Ipsec.title

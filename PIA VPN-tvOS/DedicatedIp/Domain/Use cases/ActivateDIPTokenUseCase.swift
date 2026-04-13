@@ -17,11 +17,11 @@ protocol ActivateDIPTokenUseCaseType {
 
 final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
     private let dipServerProvider: DedicatedIPProviderType
-    
+
     init(dipServerProvider: DedicatedIPProviderType) {
         self.dipServerProvider = dipServerProvider
     }
-    
+
     func callAsFunction(token: String) async -> Result<Void, DedicatedIPError> {
         log.info("Activating DIP token")
         return await withCheckedContinuation { continuation in

@@ -8,15 +8,16 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class GenerateLoginQRCodeUseCaseMock: GenerateLoginQRCodeUseCaseType {
     private let result: Result<LoginQRCode, ClientError>
-    
+
     init(result: Result<LoginQRCode, ClientError>) {
         self.result = result
     }
-    
+
     func callAsFunction() async throws -> LoginQRCode {
         switch result {
         case .success(let loginQRCode):

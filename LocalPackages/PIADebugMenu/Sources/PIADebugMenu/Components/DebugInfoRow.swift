@@ -14,9 +14,9 @@ struct DebugInfoRow: View {
                 .foregroundStyle(.primary)
         }
         #if os(tvOS)
-        .padding(.vertical, 8)
+            .padding(.vertical, 8)
         #else
-        .padding(.vertical, 2)
+            .padding(.vertical, 2)
         #endif
     }
 }

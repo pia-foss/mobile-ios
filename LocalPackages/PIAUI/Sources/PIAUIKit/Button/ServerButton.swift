@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import PIALibrary
+import UIKit
 
 public final class ServerButton: UIButton {
     public var server: Server?

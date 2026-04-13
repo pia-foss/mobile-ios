@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 public enum RegionsProtocol: String, Sendable {
     case openVPNTCP = "ovpntcp"
     case openVPNUDP = "ovpnudp"

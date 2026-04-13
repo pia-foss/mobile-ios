@@ -1,5 +1,6 @@
-import Testing
 import Foundation
+import Testing
+
 @testable import PIAAccount
 
 @Suite struct RequestBuilderTests {
@@ -69,7 +70,7 @@ import Foundation
         // Verify all parameters are present
         #expect(bodyString.contains("username=testuser"))
         #expect(bodyString.contains("password=testpass"))
-        #expect(bodyString.contains("email=test%40example.com")) // @ should be percent-encoded
+        #expect(bodyString.contains("email=test%40example.com"))  // @ should be percent-encoded
     }
 
     @Test("Form-encoded body with special characters")
@@ -328,7 +329,8 @@ import Foundation
         for (name, input, expectedEncoded) in testCases {
             let params = ["key": input]
             guard let data = params.urlEncodedData(),
-                  let encoded = String(data: data, encoding: .utf8) else {
+                let encoded = String(data: data, encoding: .utf8)
+            else {
                 Issue.record("Failed to encode \(name)")
                 continue
             }
@@ -350,7 +352,8 @@ import Foundation
         #expect(data2 != nil)
 
         if let string1 = String(data: data1!, encoding: .utf8),
-           let string2 = String(data: data2!, encoding: .utf8) {
+            let string2 = String(data: data2!, encoding: .utf8)
+        {
             // Both strings should contain all parameters
             for param in ["a=1", "b=2", "c=3"] {
                 #expect(string1.contains(param))

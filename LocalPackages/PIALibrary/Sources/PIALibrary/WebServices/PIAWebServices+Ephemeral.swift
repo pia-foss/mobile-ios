@@ -37,7 +37,7 @@ extension PIAWebServices {
             }
         }
     }
-    
+
     func submitDebugReport() async throws -> String {
         try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
     }
@@ -50,7 +50,7 @@ extension PIAWebServices {
             PIACSISubscriptionInformationProvider(),
             PIACSIRegionInformationProvider(redactIPs: redactIPs),
             PIACSIUserInformationProvider(redactIPs: redactIPs),
-            PIACSILastKnownExceptionProvider(),
+            PIACSILastKnownExceptionProvider()
         ]
 
         let sections = providers.compactMap { provider -> CSIReportSection? in

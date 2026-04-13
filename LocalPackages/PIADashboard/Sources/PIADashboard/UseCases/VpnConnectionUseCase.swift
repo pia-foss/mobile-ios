@@ -19,20 +19,20 @@ public enum VpnConnectionIntent: Equatable {
 public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
     internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
-    
+
     let serverProvider: ServerProviderType
     let vpnProvider: VPNStatusProviderType
     let vpnStatusMonitor: VPNStatusMonitorType
     private var clientPreferences: ClientPreferencesType
     private var cancellables = Set<AnyCancellable>()
-    
+
     public init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
         self.vpnProvider = vpnProvider
         self.vpnStatusMonitor = vpnStatusMonitor
         self.clientPreferences = clientPreferences
         self.connectionIntent = CurrentValueSubject(.none)
-        
+
         subscribeToVpnStatusState()
     }
 
@@ -40,7 +40,7 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
         log.info("VPN connect requested")
         connectionIntent.send(.connect)
-        
+
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.connect { error in
                 if let error = error {
@@ -59,7 +59,7 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
         log.info("VPN disconnect requested")
         connectionIntent.send(.disconnect)
-        
+
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.disconnect { error in
                 if let error = error {
@@ -79,7 +79,6 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
     }
 }
 
-
 // MARK: - VPN Status subscription
 
 extension VpnConnectionUseCase {
@@ -88,14 +87,14 @@ extension VpnConnectionUseCase {
             .receive(on: RunLoop.main)
             .sink { [weak self] newVpnStatus in
                 guard let self else { return }
-    
+
                 let currentConnectionIntent = self.connectionIntent.value
-    
+
                 switch (currentConnectionIntent, newVpnStatus) {
                 case (.connect, .connected):
                     // Update the lastConnectedRegion when the connection has succeeded
                     self.clientPreferences.lastConnectedServer = try? serverProvider.targetServerType
-                    
+
                     // The vpn connection has succeeded, then put back the connection intent to none
                     log.info("VPN connected successfully")
                     self.connectionIntent.send(.none)
@@ -108,6 +107,6 @@ extension VpnConnectionUseCase {
 
                 }
             }.store(in: &cancellables)
-            
+
     }
 }

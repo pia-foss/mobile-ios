@@ -8,15 +8,16 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class SignupProviderMock: SignupProviderType {
     private let result: Result<UserAccount, SignupError>
-    
+
     init(result: Result<UserAccount, SignupError>) {
         self.result = result
     }
-    
+
     func signup(email: String, transaction: InAppTransaction?, _ callback: @escaping (Result<UserAccount, SignupError>) -> Void) {
         callback(result)
     }

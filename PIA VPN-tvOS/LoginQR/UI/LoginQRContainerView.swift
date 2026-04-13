@@ -6,12 +6,12 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import SwiftUI
 import PIALocalizations
+import SwiftUI
 
 struct LoginQRContainerView: View {
     @StateObject var viewModel: LoginQRViewModel
-    
+
     var body: some View {
         VStack {
             if viewModel.state == .expired {
@@ -29,18 +29,24 @@ struct LoginQRContainerView: View {
                     }
                 }
             } else {
-                LoginQRView(expiresAt: $viewModel.expiresAt, qrCodeURL: viewModel.qrCodeURL, loginAction: {
-                    viewModel.navigateToRoute()
-                }, restorePurchasesAction: {
-                    viewModel.recoverPurchases()
-                })
+                LoginQRView(
+                    expiresAt: $viewModel.expiresAt, qrCodeURL: viewModel.qrCodeURL,
+                    loginAction: {
+                        viewModel.navigateToRoute()
+                    },
+                    restorePurchasesAction: {
+                        viewModel.recoverPurchases()
+                    })
             }
         }.onAppear {
             viewModel.generateQRCode()
-        }.alert("", isPresented: $viewModel.shouldShowErrorMessage, actions: {
-            Button(L10n.Global.ok) {}
-        }, message: {
-            Text(L10n.Tvos.Signup.Subscription.Error.Message.generic)
-        })
+        }.alert(
+            "", isPresented: $viewModel.shouldShowErrorMessage,
+            actions: {
+                Button(L10n.Global.ok) {}
+            },
+            message: {
+                Text(L10n.Tvos.Signup.Subscription.Error.Message.generic)
+            })
     }
 }

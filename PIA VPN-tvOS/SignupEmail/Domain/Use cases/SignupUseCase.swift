@@ -15,11 +15,11 @@ protocol SignupUseCaseType {
 
 class SignupUseCase: SignupUseCaseType {
     private let signupProvider: SignupProviderType
-    
+
     init(signupProvider: SignupProviderType) {
         self.signupProvider = signupProvider
     }
-    
+
     func callAsFunction(email: String, transaction: InAppTransaction?) async throws -> UserAccount {
         return try await withCheckedThrowingContinuation { continuation in
             signupProvider.signup(email: email, transaction: transaction) { result in

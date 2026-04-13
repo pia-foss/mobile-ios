@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftUI
 import PIAAssetsWidget
+import SwiftUI
 
 internal struct PIAIconView: View {
 

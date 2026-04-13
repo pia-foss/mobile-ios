@@ -7,80 +7,81 @@
 //
 
 import Foundation
-import PIALibrary
 import PIAAccount
+import PIALibrary
+
 #if os(iOS)
-@testable import PIA_VPN
+    @testable import PIA_VPN
 
-extension UserAccount {
-    static func makeStub() -> UserAccount {
-        let credentials = Credentials(
-            username: "username",
-            password: "password"
-        )
+    extension UserAccount {
+        static func makeStub() -> UserAccount {
+            let credentials = Credentials(
+                username: "username",
+                password: "password"
+            )
 
-        return UserAccount(
-            credentials: credentials,
-            info: AccountInfo.makeStub()
-        )
+            return UserAccount(
+                credentials: credentials,
+                info: AccountInfo.makeStub()
+            )
+        }
+
+        static func makeExpiredStub() -> UserAccount {
+            let credentials = Credentials(
+                username: "username",
+                password: "password"
+            )
+
+            return UserAccount(
+                credentials: credentials,
+                info: AccountInfo.makeExpiredStub()
+            )
+        }
     }
 
-    static func makeExpiredStub() -> UserAccount {
-        let credentials = Credentials(
-            username: "username",
-            password: "password"
-        )
+    extension AccountInfo {
+        static func makeStub() -> AccountInfo {
+            let account = AccountInformation(
+                active: true,
+                canInvite: true,
+                canceled: true,
+                daysRemaining: 0,
+                email: "email",
+                expirationTime: Int(Date(timeIntervalSinceNow: 800).timeIntervalSince1970),
+                expireAlert: false,
+                expired: false,
+                needsPayment: true,
+                plan: "monthly",
+                productId: "productId",
+                recurring: true,
+                renewUrl: "renewUrl",
+                renewable: true,
+                username: "username"
+            )
 
-        return UserAccount(
-            credentials: credentials,
-            info: AccountInfo.makeExpiredStub()
-        )
+            return AccountInfo(accountInformation: account)
+        }
+
+        static func makeExpiredStub() -> AccountInfo {
+            let account = AccountInformation(
+                active: true,
+                canInvite: true,
+                canceled: true,
+                daysRemaining: 0,
+                email: "email",
+                expirationTime: 0,
+                expireAlert: true,
+                expired: true,
+                needsPayment: true,
+                plan: "monthly",
+                productId: "productId",
+                recurring: true,
+                renewUrl: "renewUrl",
+                renewable: true,
+                username: "username"
+            )
+
+            return AccountInfo(accountInformation: account)
+        }
     }
-}
-
-extension AccountInfo {
-    static func makeStub() -> AccountInfo {
-        let account = AccountInformation(
-            active: true,
-            canInvite: true,
-            canceled: true,
-            daysRemaining: 0,
-            email: "email",
-            expirationTime: Int(Date(timeIntervalSinceNow: 800).timeIntervalSince1970),
-            expireAlert: false,
-            expired: false,
-            needsPayment: true,
-            plan: "monthly",
-            productId: "productId",
-            recurring: true,
-            renewUrl: "renewUrl",
-            renewable: true,
-            username: "username"
-        )
-
-        return AccountInfo(accountInformation: account)
-    }
-
-    static func makeExpiredStub() -> AccountInfo {
-        let account = AccountInformation(
-            active: true,
-            canInvite: true,
-            canceled: true,
-            daysRemaining: 0,
-            email: "email",
-            expirationTime: 0,
-            expireAlert: true,
-            expired: true,
-            needsPayment: true,
-            plan: "monthly",
-            productId: "productId",
-            recurring: true,
-            renewUrl: "renewUrl",
-            renewable: true,
-            username: "username"
-        )
-
-        return AccountInfo(accountInformation: account)
-    }
-}
 #endif

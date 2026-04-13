@@ -8,31 +8,32 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class RegionsDisplayNameUseCaseMock: RegionsDisplayNameUseCaseType {
 
     var getDisplayNameForOptimalLocationCalled = false
     var getDisplayNameForOptimalLocationResult: (title: String, subtitle: String) = (title: "", subtitle: "")
-    
+
     func getDisplayNameForOptimalLocation(with targetLocation: ServerType?) -> (title: String, subtitle: String) {
         getDisplayNameForOptimalLocationCalled = true
         return getDisplayNameForOptimalLocationResult
     }
-    
+
     var getDisplayNameResult: (title: String, subtitle: String) = (title: "", subtitle: "")
     var getDisplayNameCalled = false
     var getDisplayNameCalledWithParamerters: (server: ServerType, servers: [ServerType])!
-    
+
     func getDisplayName(for server: ServerType, amongst servers: [ServerType]) -> (title: String, subtitle: String) {
         getDisplayNameCalled = true
         getDisplayNameCalledWithParamerters = (server: server, servers: servers)
         return getDisplayNameResult
-        
+
     }
-    
+
     var getDisplayNameCalledWithParameter: ServerType!
-    
+
     func getDisplayName(for server: ServerType) -> (title: String, subtitle: String) {
         getDisplayNameCalled = true
         getDisplayNameCalledWithParameter = server

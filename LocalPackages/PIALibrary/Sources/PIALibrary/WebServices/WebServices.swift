@@ -27,7 +27,7 @@ protocol WebServicesConsumer {
 }
 
 protocol WebServices: AnyObject {
-    
+
     // MARK: Account
 
     func migrateToken(token: String) async throws
@@ -35,7 +35,7 @@ protocol WebServices: AnyObject {
     func token(credentials: Credentials) async throws
 
     func token(receipt: Data) async throws
-    
+
     func validateLoginQR(qrToken: String) async throws -> String
 
     func info() async throws -> AccountInfo
@@ -62,13 +62,13 @@ protocol WebServices: AnyObject {
     func deleteAccount() async throws
 
     #if os(iOS) || os(tvOS)
-    func signup(with request: Signup) async throws -> Credentials
+        func signup(with request: Signup) async throws -> Credentials
 
-    func processPayment(credentials: Credentials, request: Payment) async throws
+        func processPayment(credentials: Credentials, request: Payment) async throws
     #endif
 
     // MARK: Store
-    
+
     func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation?
 
     // MARK: Ephemeral

@@ -40,14 +40,14 @@ extension SelectedServerUseCase {
 extension DedicatedIPStatus: @retroactive DedicatedIPStatusType {
     public func getStatus() -> String {
         switch self {
-            case .invalid:
-                return L10n.Settings.Dedicatedip.Status.invalid
-            case .expired:
-                return L10n.Settings.Dedicatedip.Status.expired
-            case .error:
-                return L10n.Settings.Dedicatedip.Status.error
-            default:
-                return L10n.Settings.Dedicatedip.Status.active
+        case .invalid:
+            return L10n.Settings.Dedicatedip.Status.invalid
+        case .expired:
+            return L10n.Settings.Dedicatedip.Status.expired
+        case .error:
+            return L10n.Settings.Dedicatedip.Status.error
+        default:
+            return L10n.Settings.Dedicatedip.Status.active
         }
     }
 }

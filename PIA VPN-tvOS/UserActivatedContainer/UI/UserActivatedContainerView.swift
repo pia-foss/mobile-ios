@@ -6,12 +6,10 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
-import SwiftUI
 import Combine
+import Foundation
 import PIALocalizations
-
-
+import SwiftUI
 
 struct UserActivatedContainerView: View {
     var body: some View {
@@ -29,8 +27,7 @@ struct UserActivatedContainerView: View {
             }
             .withSettingsRoutes()
             .withHelpRoutes()
-        
-    }
-    
-}
 
+    }
+
+}

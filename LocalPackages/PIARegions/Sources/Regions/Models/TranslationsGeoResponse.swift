@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 internal struct TranslationsGeoResponse: Codable, Sendable {
     var countryGroups: [String: String]
     var gps: [String: [String]]

@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 internal struct CacheError: Error {
     let locale: String?
 

@@ -63,9 +63,11 @@ actor AccountHTTPClient {
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw PIAAccountError.networkFailure(
-                    NSError(domain: "PIAAccount", code: 0, userInfo: [
-                        NSLocalizedDescriptionKey: "Invalid response type"
-                    ])
+                    NSError(
+                        domain: "PIAAccount", code: 0,
+                        userInfo: [
+                            NSLocalizedDescriptionKey: "Invalid response type"
+                        ])
                 )
             }
 
@@ -96,9 +98,11 @@ actor AccountHTTPClient {
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw PIAAccountError.networkFailure(
-                    NSError(domain: "PIAAccount", code: 0, userInfo: [
-                        NSLocalizedDescriptionKey: "Invalid response type"
-                    ])
+                    NSError(
+                        domain: "PIAAccount", code: 0,
+                        userInfo: [
+                            NSLocalizedDescriptionKey: "Invalid response type"
+                        ])
                 )
             }
 
@@ -127,13 +131,15 @@ actor AccountHTTPClient {
     private func parseRetryAfter(from response: HTTPURLResponse, data: Data) -> TimeInterval {
         // Check Retry-After header
         if let retryAfterHeader = response.value(forHTTPHeaderField: "Retry-After"),
-           let seconds = TimeInterval(retryAfterHeader) {
+            let seconds = TimeInterval(retryAfterHeader)
+        {
             return seconds
         }
 
         // Check for retry_after in JSON response
         if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-           let retryAfter = json["retry_after"] as? TimeInterval {
+            let retryAfter = json["retry_after"] as? TimeInterval
+        {
             return retryAfter
         }
 

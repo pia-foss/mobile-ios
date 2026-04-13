@@ -30,7 +30,7 @@ public protocol VPNAction {
 
     /// If `true`, this action doesn't require the VPN to be restarted.
     var canRetainConnection: Bool { get }
-    
+
     /**
      Executes the action and potentially kills the active VPN connection.
 
@@ -42,9 +42,9 @@ public protocol VPNAction {
 
 final class VPNActionReconnect: VPNAction, ProvidersAccess {
     let priority = 10
-    
+
     let canRetainConnection = true
-    
+
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
         guard (vpn.vpnStatus != .disconnected) else {
@@ -64,13 +64,15 @@ final class VPNActionReinstall: VPNAction, ProvidersAccess {
         let vpn = accessedProviders.vpnProvider
         let connected = accessedProviders.vpnProvider.isVPNConnected
         if connected {
-            vpn.install(force: true, { (error) in
-                if let _ = error {
-                    callback?(error)
-                    return
-                }
-                callback?(nil)
-            })
+            vpn.install(
+                force: true,
+                { (error) in
+                    if let _ = error {
+                        callback?(error)
+                        return
+                    }
+                    callback?(nil)
+                })
         } else {
             vpn.updatePreferences { (error) in
                 if let _ = error {
@@ -85,21 +87,23 @@ final class VPNActionReinstall: VPNAction, ProvidersAccess {
 
 final class VPNActionDisconnectAndReinstall: VPNAction, ProvidersAccess {
     let priority = 30
-    
+
     let canRetainConnection = false
 
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
-        vpn.install(force: true, { (error) in
-            if let _ = error {
-                callback?(error)
-                return
-            }
-            guard (vpn.vpnStatus != .disconnected) else {
-                callback?(nil)
-                return
-            }
-            vpn.connect(callback)
-        })
+        vpn.install(
+            force: true,
+            { (error) in
+                if let _ = error {
+                    callback?(error)
+                    return
+                }
+                guard (vpn.vpnStatus != .disconnected) else {
+                    callback?(nil)
+                    return
+                }
+                vpn.connect(callback)
+            })
     }
 }

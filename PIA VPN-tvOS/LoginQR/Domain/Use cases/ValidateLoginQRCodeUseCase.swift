@@ -16,15 +16,15 @@ protocol ValidateLoginQRCodeUseCaseType {
 class ValidateLoginQRCodeUseCase: ValidateLoginQRCodeUseCaseType {
     private let accountProviderType: AccountProvider
     private let validateLoginQRCodeProvider: ValidateLoginQRCodeProviderType
-    
+
     init(accountProviderType: AccountProvider, validateLoginQRCodeProvider: ValidateLoginQRCodeProviderType) {
         self.accountProviderType = accountProviderType
         self.validateLoginQRCodeProvider = validateLoginQRCodeProvider
     }
-    
+
     func callAsFunction(qrCodeToken: LoginQRCode) async throws {
         let apiToken = try await validateLoginQRCodeProvider.validateLoginQRCodeToken(qrCodeToken)
-        
+
         return try await withCheckedThrowingContinuation { continuation in
             accountProviderType.login(with: apiToken) { _, error in
                 if let error = error {

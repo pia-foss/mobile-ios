@@ -11,11 +11,11 @@ import PIALibrary
 
 class SubscriptionInformationProvider: SubscriptionInformationProviderType {
     private let accountProvider: AccountProvider
-    
+
     init(accountProvider: AccountProvider) {
         self.accountProvider = accountProvider
     }
-    
+
     func subscriptionInformation(_ callback: @escaping (AppStoreInformation?, Error?) -> Void) {
         accountProvider.subscriptionInformation { appStoreInfo, error in
             callback(appStoreInfo, error)

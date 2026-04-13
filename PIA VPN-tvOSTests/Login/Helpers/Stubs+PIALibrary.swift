@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import PIALibrary
 import PIAAccount
+import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 extension UserAccount {
@@ -86,14 +87,14 @@ extension AccountInfo {
 extension InAppProductMock {
     static func makeStubs() -> [Plan: InAppProductMock] {
         [
-            Plan.monthly : InAppProductMock(
+            Plan.monthly: InAppProductMock(
                 identifier: "001",
                 price: 10.99,
                 priceLocale: .current,
                 native: nil,
                 description: "monthly"
             ),
-            Plan.yearly : InAppProductMock(
+            Plan.yearly: InAppProductMock(
                 identifier: "002",
                 price: 100.99,
                 priceLocale: .current,

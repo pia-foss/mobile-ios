@@ -22,7 +22,7 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
     private let getDedicatedIP: GetDedicatedIpUseCaseType
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
     private let selectedServer: ClientPreferencesType
-    
+
     init(dedicatedIpProvider: DedicatedIPProviderType, favoriteRegionsUseCase: FavoriteRegionUseCaseType, getDedicatedIP: GetDedicatedIpUseCaseType, vpnConnectionUseCase: VpnConnectionUseCaseType, selectedServer: ClientPreferencesType) {
         self.dedicatedIpProvider = dedicatedIpProvider
         self.favoriteRegionsUseCase = favoriteRegionsUseCase
@@ -30,10 +30,11 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
         self.vpnConnectionUseCase = vpnConnectionUseCase
         self.selectedServer = selectedServer
     }
-    
+
     func callAsFunction() async throws {
         guard let dedicatedIPServer = getDedicatedIP(),
-        let dipToken = dedicatedIPServer.dipToken else {
+            let dipToken = dedicatedIPServer.dipToken
+        else {
             return
         }
 
@@ -48,7 +49,7 @@ final class RemoveDIPUseCase: RemoveDIPUseCaseType {
         dedicatedIpProvider.removeDIPToken(dipToken)
 
         #if os(iOS)
-        DispatchQueue.main.async { Macros.postNotification(.PIAServerHasBeenUpdated) }
+            DispatchQueue.main.async { Macros.postNotification(.PIAServerHasBeenUpdated) }
         #endif
     }
 }

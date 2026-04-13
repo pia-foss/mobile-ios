@@ -59,7 +59,7 @@ final class Bootstrapper: BootstraperType {
         self.startConnectionStateMonitor = startConnectionStateMonitor
         self.startCachingLicenses = startCachingLicenses
     }
-    
+
     func callAsFunction() {
         setupEnvironment()
         setupDebuggingConsole()

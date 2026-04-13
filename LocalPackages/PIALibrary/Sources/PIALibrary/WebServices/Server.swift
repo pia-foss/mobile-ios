@@ -39,10 +39,10 @@ public final class Server {
 
     /// Represents a VPN server address endpoint.
     public struct Address: CustomStringConvertible {
-        
+
         /// The endpoint hostname.
         public let hostname: String
-        
+
         /// The endpoint port.
         public let port: UInt16
 
@@ -76,65 +76,65 @@ public final class Server {
             return "\(hostname):\(port)"
         }
     }
-    
+
     /// Represents a VPN server IP endpoint.
     public final class ServerAddressIP: Encodable {
-        
+
         /// The endpoint ip.
         public let ip: String
-        
+
         /// The endpoint common name.
         public let cn: String
-        
+
         /// The server is using the latest OVPN version.
         public let van: Bool
 
         /// The response time for this address.
         private(set) var responseTime: Int?
-        
+
         private(set) var available: Bool = true
-        
+
         public var description: String {
             return "\(ip):0"
         }
-        
+
         /// :nodoc:
         public init(ip: String, cn: String, van: Bool) {
             self.ip = ip
             self.cn = cn
             self.van = van
         }
-        
+
         func updateResponseTime(_ time: Int) {
             self.responseTime = time
         }
-        
+
         func markServerAsUnavailable() {
             log.debug("[Server] Marking address as unavailable — ip=\(ip) cn=\(cn)")
             available = false
         }
-        
+
         func reset() {
             available = true
         }
 
     }
-    
+
     /// The server name.
     public let name: String
-    
+
     /// The server country code.
     public let country: String
-    
+
     /// The server hostname.
     public let hostname: String
-    
+
     /// The server identifier.
     public let identifier: String
-    
+
     /// The server region identifier
     public let regionIdentifier: String
-    
+
     /// The server is virtually located.
     public let geo: Bool
 
@@ -146,7 +146,7 @@ public final class Server {
 
     /// The server's longitude.
     public let longitude: String?
-    
+
     /// The best address for establishing an OpenVPN connection over TCP.
     public let openVPNAddressesForTCP: [ServerAddressIP]?
 
@@ -155,10 +155,10 @@ public final class Server {
 
     /// The best server IPs for establishing a WireGuard connection over UDP.
     public let wireGuardAddressesForUDP: [ServerAddressIP]?
-    
+
     /// The best server IPs for establishing an IKEv2 connection over UDP.
     public let iKEv2AddressesForUDP: [ServerAddressIP]?
-        
+
     /// The address on which to "ping" the server.
     ///
     /// - Seealso: `Macros.ping(...)`
@@ -171,9 +171,9 @@ public final class Server {
 
     /// Dedicated IP token, if any.
     public let dipToken: String?
-    
+
     public let dipStatus: DedicatedIPStatus?
-    
+
     public let dipUsername: String?
 
     var isAutomatic: Bool
@@ -202,7 +202,7 @@ public final class Server {
         regionIdentifier: String,
         isAutomatic: Bool = false,
     ) {
-        
+
         self.serial = serial
         self.name = name
         self.country = country
@@ -213,7 +213,7 @@ public final class Server {
         self.longitude = longitude
         self.regionIdentifier = regionIdentifier
         identifier = hostname.components(separatedBy: ".").first ?? ""
-        
+
         self.openVPNAddressesForTCP = openVPNAddressesForTCP
         self.openVPNAddressesForUDP = openVPNAddressesForUDP
         self.wireGuardAddressesForUDP = wireGuardAddressesForUDP
@@ -226,7 +226,7 @@ public final class Server {
         self.dipToken = dipToken
         self.dipStatus = dipStatus
         self.dipUsername = dipUsername
-        
+
         self.isAutomatic = isAutomatic
     }
 }
@@ -234,7 +234,7 @@ public final class Server {
 // MARK: Equatable
 
 extension Server: Equatable {
-    public static func ==(lhs: Server, rhs: Server) -> Bool {
+    public static func == (lhs: Server, rhs: Server) -> Bool {
         return (lhs.identifier == rhs.identifier && lhs.dipToken == rhs.dipToken)
     }
 }
@@ -248,17 +248,17 @@ extension Server: Hashable {
 }
 
 extension Server {
-    
+
     public func addresses() -> [ServerAddressIP] {
-        
+
         switch Client.providers.vpnProvider.currentVPNType {
         case IKEv2Profile.vpnType:
             return iKEv2AddressesForUDP ?? []
         #if os(iOS)
-        case PIATunnelProfile.vpnType:
-            return openVPNAddressesForTCP ?? []
-        case PIAWGTunnelProfile.vpnType:
-            return wireGuardAddressesForUDP ?? []
+            case PIATunnelProfile.vpnType:
+                return openVPNAddressesForTCP ?? []
+            case PIAWGTunnelProfile.vpnType:
+                return wireGuardAddressesForUDP ?? []
         #endif
         case "Mock":
             return iKEv2AddressesForUDP ?? []
@@ -267,9 +267,9 @@ extension Server {
         }
 
     }
-    
+
     public func ovpnAddresses(tcp: Bool) -> [ServerAddressIP] {
-        
+
         if tcp {
             return openVPNAddressesForTCP ?? []
         } else {
@@ -277,24 +277,24 @@ extension Server {
         }
 
     }
-    
+
     public func bestAddress() -> ServerAddressIP? {
         guard !addresses().isEmpty else {
             return nil
         }
-        let availableServer = addresses().first(where: {$0.available})
+        let availableServer = addresses().first(where: { $0.available })
         if availableServer == nil {
             addresses().forEach({ $0.reset() })
             return bestAddress()
         }
         return availableServer
     }
-    
+
     public func bestAddressForOVPN(tcp: Bool) -> ServerAddressIP? {
         guard !ovpnAddresses(tcp: tcp).isEmpty else {
             return nil
         }
-        let availableServer = ovpnAddresses(tcp: tcp).first(where: {$0.available})
+        let availableServer = ovpnAddresses(tcp: tcp).first(where: { $0.available })
         if availableServer == nil {
             ovpnAddresses(tcp: tcp).forEach({ $0.reset() })
             return bestAddress()
@@ -304,34 +304,34 @@ extension Server {
 }
 
 extension Server {
-    
+
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
         switch Client.providers.vpnProvider.currentVPNType {
         case IKEv2Profile.vpnType:
-            let serverAddressIP = iKEv2AddressesForUDP?.first(where: {$0.ip == address.ip })
+            let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
         #if os(iOS)
-        case PIATunnelProfile.vpnType:
-            let serverAddressIP = openVPNAddressesForUDP?.first(where: {$0.ip == address.ip })
-            serverAddressIP?.updateResponseTime(time)
-        case PIAWGTunnelProfile.vpnType:
-            let serverAddressIP = wireGuardAddressesForUDP?.first(where: {$0.ip == address.ip })
-            serverAddressIP?.updateResponseTime(time)
+            case PIATunnelProfile.vpnType:
+                let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
+                serverAddressIP?.updateResponseTime(time)
+            case PIAWGTunnelProfile.vpnType:
+                let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
+                serverAddressIP?.updateResponseTime(time)
         #endif
         default:
             break
         }
     }
-    
+
 }
 
 extension Server {
-        
+
     func dipPassword() -> Data? {
         if let dipUsername = dipUsername {
             return Client.database.secure.passwordReference(forDipToken: dipUsername)
         }
         return nil
     }
-    
+
 }

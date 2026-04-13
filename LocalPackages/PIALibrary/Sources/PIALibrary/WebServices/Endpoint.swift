@@ -28,12 +28,11 @@ protocol Endpoint: ConfigurationAccess {
 
 enum VPNEndpoint: String, Endpoint {
     case servers
-    
+
     case debugLog = "debug_log"
-    
+
     var url: URL {
         return URL(string: "\(accessedConfiguration.baseUrl)/vpninfo/\(rawValue)")!
     }
-    
-}
 
+}

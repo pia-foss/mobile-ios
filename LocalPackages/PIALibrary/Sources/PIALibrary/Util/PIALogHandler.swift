@@ -20,8 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Logging
 import Foundation
+import Logging
 
 public struct PIALogHandler: LogHandler {
 

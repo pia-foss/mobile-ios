@@ -109,9 +109,9 @@ public struct CSIClient {
     private func metaJSON(appVersion: String) throws -> String {
         let platform: String
         #if os(tvOS)
-        platform = "tvos"
+            platform = "tvos"
         #else
-        platform = "ios"
+            platform = "ios"
         #endif
         let meta = ["version": appVersion, "platform": platform]
         let data = try JSONSerialization.data(withJSONObject: meta)

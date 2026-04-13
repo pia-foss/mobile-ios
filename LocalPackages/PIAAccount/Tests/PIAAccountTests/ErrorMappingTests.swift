@@ -1,5 +1,6 @@
-import Testing
 import Foundation
+import Testing
+
 @testable import PIAAccount
 
 @Suite struct ErrorMappingTests {
@@ -338,7 +339,7 @@ import Foundation
 
     @Test("Large retry after value")
     func largeRetryAfter() {
-        let largeRetryAfter: TimeInterval = 86400 // 24 hours
+        let largeRetryAfter: TimeInterval = 86400  // 24 hours
         let error = PIAAccountError.fromHTTPStatus(429, retryAfter: largeRetryAfter)
 
         #expect(error.retryAfterSeconds == largeRetryAfter)

@@ -19,12 +19,12 @@ struct OnboardingComponentStytle {
 struct OnboardingComponentView: View {
     private let viewModel: OnboardingComponentViewModelType
     private let style: OnboardingComponentStytle
-    
+
     init(viewModel: OnboardingComponentViewModelType, style: OnboardingComponentStytle) {
         self.viewModel = viewModel
         self.style = style
     }
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: style.headerSpacing) {
@@ -39,12 +39,13 @@ struct OnboardingComponentView: View {
                     Text(subtitle)
                         .font(.system(size: 31))
                 }
-                
+
                 VStack {
                     ForEach(viewModel.buttons, id: \.title) { button in
                         ActionButton(
                             title: button.title,
-                            action: { button.action()
+                            action: {
+                                button.action()
                             }
                         )
                         .frame(width: 510, height: 66)
@@ -54,7 +55,7 @@ struct OnboardingComponentView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 0))
-            
+
             style.backgroundImage
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing)

@@ -29,21 +29,21 @@ extension Client {
     public final class Configuration {
 
         static let teamId = "5357M5NW9W"
-        
+
         static let teamIdentifierCSI = "pia_ios"
-        
+
         static let appGroup = "group.com.privateinternetaccess"
 
         static let debugLogKey = "LastVPNLog"
-        
+
         /// If `true`, the connection to the VPN was initiated by the user
         public var connectedManually: Bool
-        
+
         /// If `true`, the connection to the VPN was stopped by the user
         public var disconnectedManually: Bool
 
         // MARK: WebServices
-        
+
         private var baseUrls: [Client.Environment: String] = [:]
 
         public var baseUrl: String {
@@ -55,20 +55,20 @@ extension Client {
         }
 
         public let tosPath: String
-        
+
         public var tosUrl: String {
             "https://\(baseUrl)/\(tosPath)"
         }
-        
+
         public let privacyPath: String
-        
+
         public var privacyUrl: String {
             "https://\(baseUrl)/\(privacyPath)"
         }
-        
+
         /// The timeout for web requests.
         public var webTimeout: Int
-        
+
         // MARK: Server
 
         /// The JSON to load the initial `ServersBundle` from.
@@ -78,23 +78,23 @@ extension Client {
 
         /// Downloads server updates regularly.
         public var enablesServerUpdates: Bool
-        
+
         public let defaultServersConfiguration: ServersBundle.Configuration
 
         /// Sets the delay after which to re-schedule servers update when network is down.
         public var serversUpdateWhenNetworkDownDelay: Int
-        
+
         /// Verifies the servers signature after download.
         public var verifiesServersSignature: Bool
 
         /// Enables background server pinging.
         public var enablesServerPings: Bool
-        
+
         /// Sets the interval before which pings are not repeated.
         public var minPingInterval: Int
 
         private(set) var customServers: [Server]
-        
+
         // MARK: Connectivity
 
         /// Notifies connectivity updates e.g. current IP addresses.
@@ -106,46 +106,46 @@ extension Client {
 
         /// Sets the delay after which to retry connectivity checks.
         public var connectivityRetryDelay: Int
-        
+
         /// Sets the maximum number of failed connectivity checks before giving up.
         public var connectivityMaxAttempts: Int
 
         /// Sets the delay after which to retry VPN connectivity checks.
         public var vpnConnectivityRetryDelay: TimeInterval
-        
+
         /// Sets the maximum number of failed VPN connectivity attempts before giving up.
         public var vpnConnectivityMaxAttempts: Int
-        
+
         /// Sets the rsa certificate to use for pinning puposes.
         public var rsa4096Certificate: String?
 
         public let maceHostname: String
-        
+
         public let macePort: UInt16
 
         public let maceDelay: Int
 
         // MARK: VPN
-        
+
         private var availableVPNProfiles: [VPNProfile]
-        
+
         /// The name of the current VPN profile as seen in the iOS VPN settings.
         public var vpnProfileName: String
 
         /// The default delay of VPN reconnection attempts.
         public var vpnReconnectionDelay: Int
-        
+
         #if os(iOS) || os(tvOS)
-        
-        // MARK: InApp
-        
-        private var inAppPlans: [String: Plan]
-        
-        /// Enables background server pinging.
-        public var eligibleForTrial: Bool
-        
+
+            // MARK: InApp
+
+            private var inAppPlans: [String: Plan]
+
+            /// Enables background server pinging.
+            public var eligibleForTrial: Bool
+
         #endif
-        
+
         /// The value of the max of servers appearing in the quick connect tile.
         public var maxQuickConnectServers: Int
 
@@ -159,7 +159,7 @@ extension Client {
         public var tvOSBindToken: String?
 
         // MARK: Initialization
-        
+
         init() {
             connectedManually = false
             disconnectedManually = false
@@ -168,7 +168,7 @@ extension Client {
             privacyPath = "pages/privacy-policy"
 
             webTimeout = 10000
-            
+
             enablesServerUpdates = false
             defaultServersConfiguration = ServersBundle.Configuration(
                 ovpnPorts: ServersBundle.Configuration.Ports(
@@ -197,12 +197,12 @@ extension Client {
             availableVPNProfiles = []
 
             #if os(tvOS)
-            availableVPNProfiles = [IKEv2Profile()]
+                availableVPNProfiles = [IKEv2Profile()]
             #endif
 
             vpnProfileName = "Private Internet Access"
             vpnReconnectionDelay = 2000
-            
+
             enablesConnectivityUpdates = false
             connectivityVPNLag = 1000
             connectivityRetryDelay = 10000
@@ -210,7 +210,7 @@ extension Client {
 
             vpnConnectivityRetryDelay = 5.0
             vpnConnectivityMaxAttempts = 3
-            
+
             rsa4096Certificate = nil
 
             maceHostname = "209.222.18.222"
@@ -218,21 +218,21 @@ extension Client {
             maceDelay = 5000
 
             #if os(iOS) || os(tvOS)
-            inAppPlans = [:]
-            eligibleForTrial = true
+                inAppPlans = [:]
+                eligibleForTrial = true
             #endif
-            
+
             maxQuickConnectServers = 6
             tempAccountPassword = ""
 
             featureFlags = FeatureFlagHolder()
         }
-        
+
         // MARK: WebServices
-        
+
         /**
          Sets base URL for web services in a determined environment.
-         
+
          - Parameter url: The URL `String` to set.
          - Parameter environment: The target `Environment` to update.
          */
@@ -240,9 +240,9 @@ extension Client {
             guard let url else { return }
             baseUrls[environment] = url
         }
-        
+
         // MARK: Server
-        
+
         /**
          Inserts a custom server on top on the server list.
 
@@ -251,7 +251,7 @@ extension Client {
         public func addCustomServer(_ server: Server) {
             customServers.append(server)
         }
-        
+
         // MARK: VPN
 
         /**
@@ -265,18 +265,18 @@ extension Client {
 
         /**
          Returns the list of the available VPN profile types.
-         
+
          - Returns: A list of unique strings associated with the available `VPNProfile` objects.
          - Seealso: `VPNProfile.vpnType`
          */
         public func availableVPNTypes() -> [String] {
             return availableVPNProfiles.map { $0.vpnType }
         }
-        
+
         func profile(forVPNType type: String) -> VPNProfile? {
             return availableVPNProfiles.first { $0.vpnType == type }
         }
-        
+
         /**
         Returns true if the purchase feature is available
          - Returns: A boolean indicating if purchases are available.
@@ -294,29 +294,29 @@ extension Client {
                 return true
             }
         }
-        
+
         #if os(iOS) || os(tvOS)
-        
-        // MARK: InApp
-        
-        /**
-         Defines the `Plan` that a product identifier is able to purchase.
-         
-         - Parameter plan: The `Plan` to associate with a product.
-         - Parameter productIdentifier: The identifier of the in-app product.
-         */
-        public func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String) {
-            inAppPlans[productIdentifier] = plan
-        }
-        
-        func plan(forProductIdentifier productIdentifier: String) -> Plan? {
-            return inAppPlans[productIdentifier]
-        }
-        
-        func allProductIdentifiers() -> [String] {
-            return [String](inAppPlans.keys)
-        }
-        
+
+            // MARK: InApp
+
+            /**
+             Defines the `Plan` that a product identifier is able to purchase.
+
+             - Parameter plan: The `Plan` to associate with a product.
+             - Parameter productIdentifier: The identifier of the in-app product.
+             */
+            public func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String) {
+                inAppPlans[productIdentifier] = plan
+            }
+
+            func plan(forProductIdentifier productIdentifier: String) -> Plan? {
+                return inAppPlans[productIdentifier]
+            }
+
+            func allProductIdentifiers() -> [String] {
+                return [String](inAppPlans.keys)
+            }
+
         #endif
     }
 }

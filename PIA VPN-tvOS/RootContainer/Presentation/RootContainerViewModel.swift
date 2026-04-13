@@ -1,8 +1,7 @@
-
-import Foundation
-import SwiftUI
-import PIALibrary
 import Combine
+import Foundation
+import PIALibrary
+import SwiftUI
 
 private let log = PIALogger.logger(for: RootContainerViewModel.self)
 
@@ -14,10 +13,10 @@ class RootContainerViewModel: ObservableObject {
         case activated
         case expired
     }
-    
+
     @Published var state: State = .splash
     @Published internal var isBootstrapped: Bool = false
-    
+
     private let accountProvider: AccountProvider
     private let notificationCenter: NotificationCenterType
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
@@ -25,12 +24,12 @@ class RootContainerViewModel: ObservableObject {
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
     private let refreshLatencyUseCase: RefreshServersLatencyUseCaseType
-    
+
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType) {
-        
+
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
@@ -39,17 +38,17 @@ class RootContainerViewModel: ObservableObject {
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         self.appRouter = appRouter
         self.refreshLatencyUseCase = refreshLatencyUseCase
-        
+
         subscribeToAccountUpdates()
         setup()
     }
-    
+
     private func setup() {
         bootstrap()
         isBootstrapped = true
         updateState(isLoggedIn: accountProvider.isLoggedIn, isExpired: accountProvider.isExpired)
     }
-    
+
     private func handleExpiredState(isLoggedIn: Bool) {
         if isLoggedIn {
             log.info("Account expired, navigating to expired state")
@@ -59,25 +58,25 @@ class RootContainerViewModel: ObservableObject {
             state = .notActivated
         }
     }
-    
+
     private func updateState(isLoggedIn: Bool, isExpired: Bool) {
         guard isBootstrapped else {
             return
         }
-        
+
         guard !isExpired else {
             handleExpiredState(isLoggedIn: isLoggedIn)
             return
         }
-        
+
         let onBoardingVpnProfileInstalled = vpnConfigurationAvailability.get()
         let shouldShowconnectionStatsPermisson = connectionStatsPermissonType.get() == nil
         switch (isLoggedIn, onBoardingVpnProfileInstalled) {
-            // logged in, vpn profile installed
+        // logged in, vpn profile installed
         case (true, true):
             log.info("App state: activated")
             state = .activated
-            // logged in, vpn profile not installed
+        // logged in, vpn profile not installed
         case (true, false):
             log.info("App state: activatedNotOnboarded")
             state = .activatedNotOnboarded
@@ -87,14 +86,14 @@ class RootContainerViewModel: ObservableObject {
             } else {
                 appRouter.navigate(to: OnboardingDestinations.installVPNProfile)
             }
-            // not logged in, any
+        // not logged in, any
         case (false, _):
             log.info("App state: notActivated")
             state = .notActivated
             appRouter.goBackToRoot()
         }
     }
-    
+
     deinit {
         notificationCenter.removeObserver(self)
     }
@@ -111,7 +110,7 @@ extension RootContainerViewModel {
         try? await Task.sleep(for: .seconds(2))
         self.refreshLatencyUseCase()
     }
-    
+
     func sceneDidBecomeInActive() {
         refreshLatencyUseCase.stop()
     }
@@ -124,13 +123,14 @@ extension RootContainerViewModel {
         userAuthenticationStatusMonitor.getStatus().sink { [self] status in
             self.updateState(isLoggedIn: status == .loggedIn, isExpired: accountProvider.isExpired)
         }.store(in: &cancellables)
-        
-        notificationCenter.addObserver(self,
-                         selector: #selector(didInstallVPNProfile),
-                         name: .DidInstallVPNProfile,
-                         object: nil)
+
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(didInstallVPNProfile),
+            name: .DidInstallVPNProfile,
+            object: nil)
     }
-    
+
     @objc private func didInstallVPNProfile() {
         updateState(isLoggedIn: accountProvider.isLoggedIn, isExpired: accountProvider.isExpired)
     }

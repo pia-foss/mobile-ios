@@ -8,16 +8,17 @@
 
 import Foundation
 import PIALibrary
+
 @testable import PIA_VPN_tvOS
 
 class ProductsProviderMock: ProductsProviderType {
-    private let result: ([Plan : InAppProduct]?, Error?)
-    
-    init(result: ([Plan : InAppProduct]?, Error?)) {
+    private let result: ([Plan: InAppProduct]?, Error?)
+
+    init(result: ([Plan: InAppProduct]?, Error?)) {
         self.result = result
     }
-    
-    func listPlanProducts(_ callback: (([Plan : InAppProduct]?, Error?) -> Void)?) {
+
+    func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
         callback?(result.0, result.1)
     }
 }

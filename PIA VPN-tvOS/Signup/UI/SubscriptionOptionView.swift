@@ -13,9 +13,9 @@ struct SubscriptionOptionView: View {
     @FocusState private var isFocus: Bool
     var isSelected: Bool
     let action: () -> Void
-    
+
     var body: some View {
-        
+
         ZStack(alignment: .leading) {
             Color.piaSurfaceContainerPrimary
             Button(action: {
@@ -30,7 +30,7 @@ struct SubscriptionOptionView: View {
                             Text(viewModel.optionString)
                                 .font(.system(size: 48))
                                 .foregroundColor(Color.pia_on_surface_container_primary)
-                            
+
                             VStack(spacing: 5) {
                                 Text(viewModel.price)
                                     .font(.system(size: 38))
@@ -50,10 +50,10 @@ struct SubscriptionOptionView: View {
                     .frame(maxHeight: .infinity)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 }
-                
+
             }.overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(isFocus ? Color.piaPrimary : Color.pia_outline_variant_primary , lineWidth: 1)
+                    .stroke(isFocus ? Color.piaPrimary : Color.pia_outline_variant_primary, lineWidth: 1)
             )
             .buttonStyle(.borderless)
             .focused($isFocus)

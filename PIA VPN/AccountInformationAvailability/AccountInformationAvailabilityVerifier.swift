@@ -13,12 +13,13 @@ protocol AccountInformationAvailabilityVerifierType {
     typealias Completion = (() -> Void)?
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?, completion: Completion)
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?) async
-    
+
 }
 
 class AccountInformationAvailabilityVerifier:
-    AccountInformationAvailabilityVerifierType {
-    
+    AccountInformationAvailabilityVerifierType
+{
+
     private let accountProvider: AccountProvider
     private let notificationCenter: NotificationCenterType
     private let userDefaults: UserDefaultsType
@@ -31,23 +32,24 @@ class AccountInformationAvailabilityVerifier:
         self.notificationCenter = notificationCenter
         self.userDefaults = userDefaults
     }
-    
+
     private func shouldVerify(after deadline: TimeInterval) -> Bool {
-        
+
         guard let previouslyVerified = userDefaults.date(forKey: Self.kAccountInfoAvailabilityDate),
-              let verifiedSecondsAgo = previouslyVerified.timeIntervalSince1970.timeUntilNow() else { return true }
-        
+            let verifiedSecondsAgo = previouslyVerified.timeIntervalSince1970.timeUntilNow()
+        else { return true }
+
         return verifiedSecondsAgo >= deadline
 
     }
-    
+
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?, completion: Completion) {
-        
+
         guard let deadline else {
             verify(with: completion)
             return
         }
-        
+
         if shouldVerify(after: deadline) {
             verify(with: completion)
         } else {
@@ -55,7 +57,7 @@ class AccountInformationAvailabilityVerifier:
         }
 
     }
-    
+
     func verifyAccountInformationAvailabity(after deadline: TimeInterval?) async {
         return await withCheckedContinuation { continuation in
             self.verifyAccountInformationAvailabity(after: deadline) {
@@ -63,22 +65,23 @@ class AccountInformationAvailabilityVerifier:
             }
         }
     }
-    
+
 }
 
 extension AccountInformationAvailabilityVerifier {
     private func verify(with completion: Completion) {
         accountProvider.accountInformation { [weak self] info, error in
             if let clientError = error as? ClientError,
-               clientError == ClientError.unauthorized {
+                clientError == ClientError.unauthorized
+            {
                 self?.notificationCenter.post(name: .PIAUnauthorized, object: nil)
                 completion?()
             } else {
                 self?.userDefaults.set(date: Date(), forKey: Self.kAccountInfoAvailabilityDate)
                 completion?()
             }
-            
+
         }
-        
+
     }
 }

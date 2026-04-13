@@ -22,17 +22,17 @@ final class RegionsListUseCase: RegionsListUseCaseType {
     private let serverProvider: ServerProviderType
     private var clientPreferences: ClientPreferencesType
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
-    
+
     init(serverProvider: ServerProviderType, clientPreferences: ClientPreferencesType, vpnConnectionUseCase: VpnConnectionUseCaseType) {
         self.serverProvider = serverProvider
         self.clientPreferences = clientPreferences
         self.vpnConnectionUseCase = vpnConnectionUseCase
     }
-    
+
     func getCurrentServers() -> [ServerType] {
         return serverProvider.currentServersType
     }
-    
+
     func select(server: ServerType) {
         log.info("Server selected: \(server.identifier)")
         clientPreferences.selectedServer = server

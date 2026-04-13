@@ -13,25 +13,25 @@ struct DebugSection<Content: View>: View {
 
     var body: some View {
         #if os(tvOS)
-        VStack(alignment: .leading, spacing: 16) {
-            Text(title)
-                .font(.callout)
-                .fontWeight(.bold)
-                .foregroundStyle(.secondary)
-                .textCase(.uppercase)
-                .padding(.leading, 4)
+            VStack(alignment: .leading, spacing: 16) {
+                Text(title)
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.secondary)
+                    .textCase(.uppercase)
+                    .padding(.leading, 4)
 
-            VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
+                    content()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(24)
+                .background(Color(white: 0.15), in: RoundedRectangle(cornerRadius: 12))
+            }
+        #else
+            Section(title) {
                 content()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(24)
-            .background(Color(white: 0.15), in: RoundedRectangle(cornerRadius: 12))
-        }
-        #else
-        Section(title) {
-            content()
-        }
         #endif
     }
 }

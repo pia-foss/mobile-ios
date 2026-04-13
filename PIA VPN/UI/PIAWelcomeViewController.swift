@@ -20,11 +20,11 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIAUIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIALibrary
+import PIALocalizations
+import PIAUIKit
+import UIKit
 
 private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
 
@@ -32,17 +32,17 @@ private let log = PIALogger.logger(for: PIAWelcomeViewController.self)
  The welcome view controller is a graphic gateway to the PIA services.
  */
 public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompletionDelegate, ConfigurationAccess, InAppAccess, BrandableNavigationBar {
- 
+
     @IBOutlet private weak var buttonCancel: UIButton!
 
-    var preset = Preset() // TODO: should be made private when segue navigation is removed
+    var preset = Preset()  // TODO: should be made private when segue navigation is removed
 
     private var pendingSignupRequest: SignupRequest?
     weak var delegate: PIAWelcomeViewControllerDelegate?
-    
+
     /**
      Creates a wrapped `PIAWelcomeViewController` ready for presentation.
-     
+
      - Parameter preset: `Preset` to configure this controller with
      - Parameter delegate: The `PIAWelcomeViewControllerDelegate` to handle raised events
      */
@@ -53,7 +53,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         let nav = UINavigationController(rootViewController: vc)
         return nav
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -61,7 +61,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     /// :nodoc:
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if preset.accountProvider.isLoggedIn {
             /// If the user is already logged in, this view controller should not have been presented.
             /// This can happen due to a race condition.
@@ -70,16 +70,16 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             self.navigationController?.dismiss(animated: false)
             return
         }
-        
+
         buttonCancel.isHidden = true
-        
+
         #if os(iOS)
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(presentForceUpdate(notification:)), name: .__AppDidFetchForceUpdateFeatureFlag, object: nil)
+            let nc = NotificationCenter.default
+            nc.addObserver(self, selector: #selector(presentForceUpdate(notification:)), name: .__AppDidFetchForceUpdateFeatureFlag, object: nil)
         #endif
 
     }
-    
+
     /// :nodoc:
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -104,14 +104,14 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             }
         }
     }
-    
+
     /// :nodoc:
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         tryRecoverSignupProcess()
     }
-    
+
     // MARK: Actions
     @objc private func cancelClicked(_ sender: Any?) {
         delegate?.welcomeControllerDidCancel(self)
@@ -131,7 +131,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         pendingSignupRequest = request
         perform(segue: StoryboardSegue.Welcome.signupViaRecoverSegue)
     }
-    
+
     /// :nodoc:
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? WelcomePageViewController {
@@ -149,7 +149,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         else if (segue.identifier == StoryboardSegue.Welcome.signupViaRecoverSegue.rawValue) {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
-            
+
             guard let request = pendingSignupRequest else {
                 log.error("pendingSignupRequest is not set in PIAWelcomeViewController")
                 return
@@ -165,51 +165,52 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
             )
         }
     }
-    
+
     // MARK: WelcomeCompletionDelegate
-    
+
     func welcomeDidLogin(withUser user: UserAccount, topViewController: UIViewController) {
         delegate?.welcomeController(self, didLoginWith: user, topViewController: topViewController)
     }
-    
+
     func welcomeDidSignup(withUser user: UserAccount, topViewController: UIViewController) {
         delegate?.welcomeController(self, didSignupWith: user, topViewController: topViewController)
     }
 
     // MARK: Notifications
-    
+
     @objc func presentForceUpdate(notification: Notification) {
         #if !STAGING
-        let forceUpdate = ForceUpdateViewController()
-        forceUpdate.modalPresentationStyle = .fullScreen
-        DispatchQueue.main.async { [weak self] in
-            var isOtherViewPresented = false
-            if let presented = self?.presentedViewController {
-                if !(presented is ForceUpdateViewController) {
-                    isOtherViewPresented = true
+            let forceUpdate = ForceUpdateViewController()
+            forceUpdate.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async { [weak self] in
+                var isOtherViewPresented = false
+                if let presented = self?.presentedViewController {
+                    if !(presented is ForceUpdateViewController) {
+                        isOtherViewPresented = true
+                    }
+                }
+
+                if isOtherViewPresented {
+                    self?.dismiss(
+                        animated: false,
+                        completion: {
+                            self?.present(forceUpdate, animated: false)
+                        })
+                } else {
+                    self?.present(forceUpdate, animated: false)
                 }
             }
-            
-            if isOtherViewPresented {
-                self?.dismiss(animated: false, completion: {
-                    self?.present(forceUpdate, animated: false)
-                })
-            } else {
-                self?.present(forceUpdate, animated: false)
-            }
-        }
         #endif
     }
-    
+
     // MARK: Restylable
-    
+
     /// :nodoc:
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         if !preset.isExpired {
             navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
-        }
-        else {
+        } else {
             navigationItem.title = L10n.Welcome.Upgrade.header
         }
         Theme.current.applyPrincipalBackground(view)
@@ -223,7 +224,7 @@ public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
     /**
      Invoked after a successful login.
-     
+
      - Parameter welcomeController: The delegating controller
      - Parameter user: The logged in `UserAccount`
      */
@@ -231,7 +232,7 @@ public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
     /**
      Invoked after a successful signup.
-     
+
      - Parameter welcomeController: The delegating controller
      - Parameter user: The signed up `UserAccount`
      */
@@ -239,7 +240,7 @@ public protocol PIAWelcomeViewControllerDelegate: AnyObject {
 
     /**
      Invoked after a cancel.
-     
+
      - Parameter welcomeController: The delegating controller
      */
     func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController)

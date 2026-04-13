@@ -1,6 +1,6 @@
-import SwiftUI
 import PIADebugMenu
 import PIALibrary
+import SwiftUI
 
 @available(tvOS 17, *)
 private struct DebugMenuModifier: ViewModifier {
@@ -23,9 +23,9 @@ private struct DebugMenuModifier: ViewModifier {
 
     private var isEnabled: Bool {
         #if DEVELOPMENT || STAGING
-        return true
+            return true
         #else
-        return TestFlightDetector.shared.isTestFlight
+            return TestFlightDetector.shared.isTestFlight
         #endif
     }
 }

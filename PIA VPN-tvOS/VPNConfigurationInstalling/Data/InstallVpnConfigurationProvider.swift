@@ -12,13 +12,12 @@ import PIALibrary
 class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
     private let vpnProvider: VpnConfigurationProviderType
     private let vpnConfigurationAvailability: VPNConfigurationAvailabilityType
-    
+
     init(vpnProvider: VpnConfigurationProviderType, vpnConfigurationAvailability: VPNConfigurationAvailabilityType) {
         self.vpnProvider = vpnProvider
         self.vpnConfigurationAvailability = vpnConfigurationAvailability
     }
-    
-    
+
     func callAsFunction() async throws {
         return try await withCheckedThrowingContinuation { continuation in
             vpnProvider.install(force: true) { [self] error in
@@ -26,7 +25,7 @@ class InstallVpnConfigurationProvider: InstallVPNConfigurationUseCaseType {
                     continuation.resume(throwing: InstallVPNConfigurationError.userCanceled)
                     return
                 }
-                
+
                 vpnConfigurationAvailability.set(value: true)
                 continuation.resume()
             }

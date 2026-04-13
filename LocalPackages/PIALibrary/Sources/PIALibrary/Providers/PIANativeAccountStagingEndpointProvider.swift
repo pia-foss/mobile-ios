@@ -29,7 +29,7 @@ final class PIANativeAccountStagingEndpointProvider: PIAAccountEndpointProvider 
                 isProxy: false,
                 usePinnedCertificate: false,
                 certificateCommonName: nil
-            ),
+            )
         ]
     }
 }

@@ -14,7 +14,8 @@ final class CertificatePinner: NSObject, URLSessionDelegate {
     ///   - commonName: Optional common name to validate
     init(certificate: String, hostname: String? = nil, commonName: String? = nil) {
         // Strip PEM headers and newlines, then base64 decode
-        let cleanedCertificate = certificate
+        let cleanedCertificate =
+            certificate
             .replacingOccurrences(of: "-----BEGIN CERTIFICATE-----", with: "")
             .replacingOccurrences(of: "-----END CERTIFICATE-----", with: "")
             .replacingOccurrences(of: "\n", with: "")
@@ -69,8 +70,9 @@ final class CertificatePinner: NSObject, URLSessionDelegate {
             let status = SecCertificateCopyCommonName(serverCertificate, &commonNameRef)
 
             guard status == errSecSuccess,
-                  let actualCommonName = commonNameRef as String?,
-                  actualCommonName == expectedCommonName else {
+                let actualCommonName = commonNameRef as String?,
+                actualCommonName == expectedCommonName
+            else {
                 completionHandler(.cancelAuthenticationChallenge, nil)
                 return
             }

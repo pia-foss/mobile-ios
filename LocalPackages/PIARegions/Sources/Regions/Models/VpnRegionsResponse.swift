@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 public struct VPNRegionsResponse: Codable, Sendable {
     public var groups: [String: [ProtocolDetails]]
     public var regions: [Region]

@@ -26,8 +26,9 @@
 //  SOFTWARE.
 //
 
-import Testing
 import Foundation
+import Testing
+
 @testable import PIALibrary
 
 @Suite("FeatureFlagHolder Tests")

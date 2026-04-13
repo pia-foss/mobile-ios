@@ -17,38 +17,38 @@ class LoginWithReceiptUseCase: LoginWithReceiptUseCaseType {
     private let paymentProvider: PaymentProviderType
     private let loginProvider: LoginProviderType
     private let errorMapper: LoginDomainErrorMapperType
-    
+
     init(paymentProvider: PaymentProviderType, loginProvider: LoginProviderType, errorMapper: LoginDomainErrorMapperType) {
         self.paymentProvider = paymentProvider
         self.loginProvider = loginProvider
         self.errorMapper = errorMapper
     }
-    
+
     func callAsFunction() async throws -> UserAccount {
         return try await withCheckedThrowingContinuation { continuation in
             paymentProvider.refreshPaymentReceipt { [weak self] result in
                 guard let self else { return }
-                
+
                 switch result {
-                    case .success(let receipt):
-                        login(with: receipt, continuation: continuation)
-                        
-                    case .failure(let error):
-                        continuation.resume(throwing: errorMapper.map(error: error))
+                case .success(let receipt):
+                    login(with: receipt, continuation: continuation)
+
+                case .failure(let error):
+                    continuation.resume(throwing: errorMapper.map(error: error))
                 }
             }
         }
     }
-    
+
     private func login(with receipt: Data, continuation: CheckedContinuation<UserAccount, any Error>) {
         loginProvider.login(with: receipt) { [weak self] result in
             guard let self else { return }
-            
+
             switch result {
-                case .success(let userAccount):
-                    continuation.resume(returning: userAccount)
-                case .failure(let error):
-                    continuation.resume(throwing: errorMapper.map(error: error))
+            case .success(let userAccount):
+                continuation.resume(returning: userAccount)
+            case .failure(let error):
+                continuation.resume(throwing: errorMapper.map(error: error))
             }
         }
     }

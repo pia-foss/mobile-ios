@@ -21,8 +21,7 @@ struct RegionsListItemButton: View {
     let favoriteIconImage: Image
     var isFavorite: Bool
     let contextMenuItem: ContextMenuItem
-    
-    
+
     var body: some View {
         Button {
             onRegionItemSelected()
@@ -42,14 +41,14 @@ struct RegionsListItemButton: View {
             }
             .padding(20)
             .frame(height: 196)
-            
+
         }
         .background(buttonFocused ? Color.pia_primary : Color.pia_surface_container_secondary)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .focused($buttonFocused)
         .buttonStyle(BasicButtonStyle())
         .buttonBorderShape(.roundedRectangle(radius: 20))
-        
+
         .contextMenu(menuItems: {
             Button {
                 contextMenuItem.action()
@@ -77,27 +76,26 @@ extension RegionsListItemButton {
             }
         }
     }
-    
+
     enum ContextMenuItem {
         case item(label: ContextMenuLabel, action: ButtonAction)
-        
+
         var label: ContextMenuLabel {
             switch self {
             case .item(let label, _):
                 return label
             }
         }
-        
+
         var action: ButtonAction {
             switch self {
             case .item(_, let action):
                 return action
             }
         }
-        
+
     }
 }
-
 
 // MARK: - UI Elements
 
@@ -134,8 +132,7 @@ extension RegionsListItemButton {
             .frame(width: 54, height: 54)
             .foregroundColor(favoriteIconForegroundColor)
     }
-    
-    
+
     var detailsView: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
@@ -145,7 +142,7 @@ extension RegionsListItemButton {
                 .minimumScaleFactor(0.6)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(1)
-            
+
             if let subtitle = subtitle {
                 Text(subtitle)
                     .font(.system(size: 23, weight: .medium))
@@ -158,4 +155,3 @@ extension RegionsListItemButton {
         }
     }
 }
-

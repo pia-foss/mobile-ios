@@ -1,4 +1,3 @@
-
 import Foundation
 
 private let log = PIALogger.logger(for: RefreshAuthTokensChecker.self)
@@ -9,31 +8,31 @@ protocol RefreshAuthTokensCheckerType {
 }
 
 class RefreshAuthTokensChecker: RefreshAuthTokensCheckerType {
-    
+
     let apiTokenProvider: APITokenProviderType
     let vpnTokenProvier: VpnTokenProviderType
     let refreshAPITokenUseCase: RefreshAPITokenUseCaseType
     let refreshVpnTokenUseCase: RefreshVpnTokenUseCaseType
     internal var isRefreshing: Bool = false
-    
+
     // Number of days remaining before refreshing a token
     private let daysUntilRefresh: Double = 30
-    
+
     init(apiTokenProvider: APITokenProviderType, vpnTokenProvier: VpnTokenProviderType, refreshAPITokenUseCase: RefreshAPITokenUseCaseType, refreshVpnTokenUseCase: RefreshVpnTokenUseCaseType) {
         self.apiTokenProvider = apiTokenProvider
         self.vpnTokenProvier = vpnTokenProvier
         self.refreshAPITokenUseCase = refreshAPITokenUseCase
         self.refreshVpnTokenUseCase = refreshVpnTokenUseCase
     }
-    
+
     func refreshIfNeeded(completion: @escaping Completion) {
-        
+
         guard !isRefreshing else {
             log.debug("Already refreshing, skipping.")
             completion(nil)
             return
         }
-        
+
         switch (shouldRefreshApiToken(), shouldRefreshVpnToken()) {
         case (true, true):
             log.debug("Refreshing both API and VPN tokens.")
@@ -41,21 +40,21 @@ class RefreshAuthTokensChecker: RefreshAuthTokensCheckerType {
         case (true, false):
             log.debug("Refreshing API token only.")
             refreshApiToken(with: completion)
-        case(false, true):
+        case (false, true):
             log.debug("Refreshing VPN token only.")
             refreshVpnToken(with: completion)
-        case(false, false):
+        case (false, false):
             log.debug("No tokens need refresh.")
             completion(nil)
         }
     }
-    
+
 }
 
 // MARK: - Refresh tokens helpers
 
 private extension RefreshAuthTokensChecker {
-    
+
     func refreshBothTokens(with completion: @escaping Completion) {
         isRefreshing = true
         refreshAPITokenUseCase() { refreshApiTokenError in
@@ -77,7 +76,7 @@ private extension RefreshAuthTokensChecker {
             }
         }
     }
-    
+
     func refreshApiToken(with completion: @escaping Completion) {
         isRefreshing = true
         refreshAPITokenUseCase() { error in
@@ -90,7 +89,7 @@ private extension RefreshAuthTokensChecker {
             completion(error)
         }
     }
-    
+
     func refreshVpnToken(with completion: @escaping Completion) {
         isRefreshing = true
         refreshVpnTokenUseCase() { error in
@@ -103,13 +102,13 @@ private extension RefreshAuthTokensChecker {
             completion(error)
         }
     }
-    
+
 }
 
 // MARK: - Refresh time intervals utils
 
 private extension RefreshAuthTokensChecker {
-    
+
     func shouldRefreshApiToken() -> Bool {
         guard let apiToken = apiTokenProvider.getAPIToken() else {
             log.debug("API token is missing, refresh needed.")
@@ -122,7 +121,7 @@ private extension RefreshAuthTokensChecker {
         }
         return needsRefresh
     }
-    
+
     func shouldRefreshVpnToken() -> Bool {
         guard let vpnToken = vpnTokenProvier.getVpnToken() else {
             log.debug("VPN token is missing, refresh needed.")
@@ -135,12 +134,11 @@ private extension RefreshAuthTokensChecker {
         }
         return needsRefresh
     }
-    
-    
+
     func shouldRefresh(with expiration: Date) -> Bool {
         let daysUntilExpires = expiration.timeIntervalSinceNow.inDays()
-        
+
         return daysUntilExpires < daysUntilRefresh
     }
-    
+
 }

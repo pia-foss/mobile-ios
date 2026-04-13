@@ -6,8 +6,8 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import SwiftUI
 import PIAAssetsTV
+import SwiftUI
 
 struct SplashView: View {
     var body: some View {

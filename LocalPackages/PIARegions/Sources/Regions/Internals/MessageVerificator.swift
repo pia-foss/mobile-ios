@@ -19,7 +19,6 @@
 import Foundation
 import Security
 
-
 internal enum MessageVerificator {
 
     static func verifyMessage(_ message: String, key: String) -> Bool {

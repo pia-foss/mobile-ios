@@ -1,20 +1,20 @@
 //
 //  ServiceQualityManager.swift
 //  PIALibrary
-//  
+//
 //  Created by Jose Blaya on 24/3/21.
 //  Copyright © 2021 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
-//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
+//  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
 //  permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 //
@@ -31,7 +31,7 @@ public final class ServiceQualityManager: NSObject {
     private let kpiPreferenceName = "PIA_KPI_PREFERENCE_NAME"
     private var kpiManager: KPIAPI?
     private var isAppActive = true
-    
+
     /**
      * Enum defining the different connection sources.
      * e.g. Manual for user-related actions, Automatic for reconnections, etc.
@@ -69,10 +69,9 @@ public final class ServiceQualityManager: NSObject {
         case timeToConnect = "time_to_connect"
     }
 
-    
     public override init() {
         super.init()
-        
+
         if Client.environment == .staging {
             kpiManager = KPIBuilder()
                 .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
@@ -94,18 +93,20 @@ public final class ServiceQualityManager: NSObject {
                 .setUserAgent(userAgent: PIAWebServices.userAgent)
                 .build()
         }
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appChangedState(with:)),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appChangedState(with:)),
-                                               name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appChangedState(with:)),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appChangedState(with:)),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
 
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -124,7 +125,7 @@ public final class ServiceQualityManager: NSObject {
             log.debug("KPI manager stopped")
         })
     }
-    
+
     @objc private func appChangedState(with notification: Notification) {
         switch notification.name {
         case UIApplication.didEnterBackgroundNotification:
@@ -134,7 +135,7 @@ public final class ServiceQualityManager: NSObject {
             isAppActive = true
         }
     }
-    
+
     @objc private func flushEvents() {
         kpiManager?.flush(callback: { error in
             if let error {
@@ -144,7 +145,7 @@ public final class ServiceQualityManager: NSObject {
             log.debug("KPI events flushed")
         })
     }
-    
+
     public func connectionAttemptEvent() {
         let connectionSource = connectionSource()
         if connectionSource == .manual && isAppActive {
@@ -179,7 +180,6 @@ public final class ServiceQualityManager: NSObject {
         }
     }
 
-    
     public func connectionCancelledEvent() {
         let disconnectionSource = disconnectionSource()
         if disconnectionSource == .manual && isAppActive {
@@ -204,39 +204,35 @@ public final class ServiceQualityManager: NSObject {
             completion(events)
         }
     }
-    
+
     private func isPreRelease() -> Bool {
         return Client.environment == .staging ? true : false
     }
-    
+
     private func connectionSource() -> KPIConnectionSource {
-        return Client.configuration.connectedManually ?
-        KPIConnectionSource.manual :
-        KPIConnectionSource.automatic
+        return Client.configuration.connectedManually ? KPIConnectionSource.manual : KPIConnectionSource.automatic
     }
 
     private func disconnectionSource() -> KPIConnectionSource {
-        return Client.configuration.disconnectedManually ?
-        KPIConnectionSource.manual :
-        KPIConnectionSource.automatic
+        return Client.configuration.disconnectedManually ? KPIConnectionSource.manual : KPIConnectionSource.automatic
     }
 
     private func currentProtocol() -> KPIVpnProtocol {
-        
+
         switch Client.providers.vpnProvider.currentVPNType {
         case IKEv2Profile.vpnType:
             return KPIVpnProtocol.ipsec
-        #if(iOS)
-        case PIATunnelProfile.vpnType:
-            return KPIVpnProtocol.ovpn
-        case PIAWGTunnelProfile.vpnType:
-            return KPIVpnProtocol.wireguard
+        #if (iOS)
+            case PIATunnelProfile.vpnType:
+                return KPIVpnProtocol.ovpn
+            case PIAWGTunnelProfile.vpnType:
+                return KPIVpnProtocol.wireguard
         #endif
         default:
             return KPIVpnProtocol.ipsec
         }
     }
-    
+
     private func createEstablishedEventProperties() -> [String: String] {
         var eventProperties: [String: String] = [
             KPIEventPropertyKey.connectionSource.rawValue: connectionSource().rawValue,
@@ -244,20 +240,21 @@ public final class ServiceQualityManager: NSObject {
             KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
         ]
         if let appVersion = Macros.versionString(),
-           let optedVersion = Client.preferences.versionWhenServiceQualityOpted,
-           appVersion.isVersionGreaterThanEqual(to: optedVersion) {
+            let optedVersion = Client.preferences.versionWhenServiceQualityOpted,
+            appVersion.isVersionGreaterThanEqual(to: optedVersion)
+        {
             eventProperties[KPIEventPropertyKey.timeToConnect.rawValue] = getTimeToConnect()
         }
         return eventProperties
     }
-    
+
     private func getTimeToConnect() -> String {
         return "\(Client.preferences.timeToConnectVPN)"
     }
 }
 
 private extension String {
-    
+
     func isVersionGreaterThanEqual(to version: String) -> Bool {
         switch self.versionCompare(version) {
         case .orderedSame, .orderedDescending:
@@ -266,15 +263,15 @@ private extension String {
             return false
         }
     }
-    
+
     func versionCompare(_ otherVersion: String, versionDelimiter: String = ".") -> ComparisonResult {
         // split the versions by period a default delimiter (.)
         var versionComponents = self.components(separatedBy: versionDelimiter)
         var otherVersionComponents = otherVersion.components(separatedBy: versionDelimiter)
-        
+
         // then, find the difference of digit that we will zero pad
         let zeroDiff = versionComponents.count - otherVersionComponents.count
-        
+
         // if there are no differences, we don't need to do anything and use simple .compare
         if zeroDiff == 0 {
             // Same format, compare normally

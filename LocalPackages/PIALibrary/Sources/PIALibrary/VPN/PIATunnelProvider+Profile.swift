@@ -20,29 +20,29 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 #if os(iOS)
-import Foundation
-import TunnelKitOpenVPN
+    import Foundation
+    import TunnelKitOpenVPN
 
-/// :nodoc:
-extension OpenVPNProvider.Configuration: VPNCustomConfiguration {
-    public func serialized() -> [String: Any] {
-        return generatedProviderConfiguration(appGroup: Client.Configuration.appGroup)
+    /// :nodoc:
+    extension OpenVPNProvider.Configuration: VPNCustomConfiguration {
+        public func serialized() -> [String: Any] {
+            return generatedProviderConfiguration(appGroup: Client.Configuration.appGroup)
+        }
+
+        public func isEqual(to: VPNCustomConfiguration) -> Bool {
+            guard let other = to as? OpenVPNProvider.Configuration else {
+                return false
+            }
+            guard (sessionConfiguration.mtu == other.sessionConfiguration.mtu) else {
+                return false
+            }
+            guard (shouldDebug == other.shouldDebug) else {
+                return false
+            }
+            guard self.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description == other.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description else {
+                return false
+            }
+            return true
+        }
     }
-    
-    public func isEqual(to: VPNCustomConfiguration) -> Bool {
-        guard let other = to as? OpenVPNProvider.Configuration else {
-            return false
-        }
-        guard (sessionConfiguration.mtu == other.sessionConfiguration.mtu) else {
-            return false
-        }
-        guard (shouldDebug == other.shouldDebug) else {
-            return false
-        }
-        guard self.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description == other.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description else {
-            return false
-        }
-        return true
-    }
-}
 #endif

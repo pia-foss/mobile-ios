@@ -1,14 +1,13 @@
-
-import WidgetKit
-import SwiftUI
+import PIAAssetsWidget
 import PIALibrary
 import PIALocalizations
-import PIAAssetsWidget
+import SwiftUI
+import WidgetKit
 
 @available(iOSApplicationExtension 16.1, *)
 struct PIAConnectionActivityWidget: Widget {
     let localizedRegionText = L10n.Widget.LiveActivity.Region.title
-    
+
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: PIAConnectionAttributes.self) { context in
             // Create the view that appears on the Lock Screen and as a
@@ -29,7 +28,7 @@ struct PIAConnectionActivityWidget: Widget {
                     .activityBackgroundTint(Color.black.opacity(0.85))
             }
             .padding()
-            
+
         } dynamicIsland: { context in
             // Create the views that appear in the Dynamic Island.
             DynamicIsland {
@@ -37,7 +36,7 @@ struct PIAConnectionActivityWidget: Widget {
                 DynamicIslandExpandedRegion(.leading, priority: 300) {
                     PIACircleImageView(size: 46, image: Image(context.state.regionFlag), contentMode: .fill)
                 }
-                
+
                 DynamicIslandExpandedRegion(.trailing, priority: 200) {
                     Link(destination: URL(string: AppConstants.Widget.connect)!) {
                         PIACircleImageView(
@@ -47,7 +46,7 @@ struct PIAConnectionActivityWidget: Widget {
 
                     }
                 }
-                
+
                 DynamicIslandExpandedRegion(.center, priority: 100) {
                     VStack(alignment: .leading) {
                         Text(localizedRegionText)
@@ -80,8 +79,7 @@ struct PIAConnectionActivityWidget: Widget {
                 PIACircleIcon(size: 28.0)
             }
             .contentMargins(.leading, 0, for: .compactLeading)
-            
+
         }
     }
 }
-

@@ -1,17 +1,16 @@
-
-import SwiftUI
 import PIAAssetsWidget
+import SwiftUI
 
 internal struct PIACircleIcon: View {
-    
+
     internal let size: CGFloat
     internal let iconWidth: CGFloat
-    
+
     init(size: CGFloat) {
         self.size = size
         self.iconWidth = (size / 2)
     }
-    
+
     var body: some View {
         return ZStack {
             Circle()
@@ -24,4 +23,3 @@ internal struct PIACircleIcon: View {
         }
     }
 }
-

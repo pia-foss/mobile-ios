@@ -10,11 +10,11 @@ import XCTest
 
 extension XCUIElement {
     @discardableResult
-      func waitForElementToAppear(timeout: TimeInterval = 10) -> Bool {
-          let predicate = NSPredicate(format: "exists == true")
-          let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+    func waitForElementToAppear(timeout: TimeInterval = 10) -> Bool {
+        let predicate = NSPredicate(format: "exists == true")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
 
-          let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
-          return result == .completed
-      }
+        let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
+        return result == .completed
+    }
 }

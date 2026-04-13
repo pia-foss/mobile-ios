@@ -5,11 +5,10 @@
 //  Created by Miguel Berrocal on 17/6/21.
 //
 
-
 import Foundation
-import UIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIALocalizations
+import UIKit
 
 public class ShareDataInformationViewController: AutolayoutViewController {
 
@@ -17,7 +16,7 @@ public class ShareDataInformationViewController: AutolayoutViewController {
 
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,15 +25,15 @@ public class ShareDataInformationViewController: AutolayoutViewController {
     }
 
     // MARK: Restylable
-    
+
     public override func viewShouldRestyle() {
         super.viewShouldRestyle()
         Theme.current.applyPrincipalBackground(contentView)
         Theme.current.applySubtitle(labelInformation)
     }
-    
+
     @IBAction private func close() {
         dismissModal()
     }
-    
+
 }

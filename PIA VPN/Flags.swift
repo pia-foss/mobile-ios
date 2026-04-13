@@ -25,41 +25,41 @@ import PIALibrary
 
 class Flags: NSObject {
     static let shared = Flags()
-    
+
     // initialize to production values here
 
     @objc private(set) var usesDevelopmentClient = false
 
     @objc private(set) var customizesClientEnvironment = false
-    
+
     @objc private(set) var customizesWelcomePreset = false
 
     @objc private(set) var usesMockAccount = false
 
     @objc private(set) var usesMockInApp = false
-    
+
     @objc private(set) var usesMockVPN = false
 
     @objc private(set) var alwaysShowsWalkthrough = false
 
     @objc private(set) var enablesResetSettings = true
-    
+
     @objc private(set) var enablesProtocolSelection = true
 
     @objc private(set) var enablesMACESetting = false
-    
+
     @objc private(set) var enablesContentBlockerSetting = true
-    
+
     @objc private(set) var enablesEncryptionSettings = true
 
     @objc private(set) var enablesDevelopmentSettings = false
 
     @objc private(set) var customizesVPNRenegotiation = false
-    
+
     @objc private(set) var enablesDNSSettings = true
 
     private(set) var enablesThemeSwitch = true
-    
+
     private override init() {
         super.init()
         enablesThemeSwitch = false

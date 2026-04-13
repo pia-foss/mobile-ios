@@ -18,20 +18,11 @@
 
 import Foundation
 
-
 internal actor Regions: RegionsAPI {
 
     static let requestTimeoutMs = 6000
     static let publicKey =
-        "-----BEGIN PUBLIC KEY-----\n" +
-        "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzLYHwX5Ug/oUObZ5eH5P\n" +
-        "rEwmfj4E/YEfSKLgFSsyRGGsVmmjiXBmSbX2s3xbj/ofuvYtkMkP/VPFHy9E/8ox\n" +
-        "Y+cRjPzydxz46LPY7jpEw1NHZjOyTeUero5e1nkLhiQqO/cMVYmUnuVcuFfZyZvc\n" +
-        "8Apx5fBrIp2oWpF/G9tpUZfUUJaaHiXDtuYP8o8VhYtyjuUu3h7rkQFoMxvuoOFH\n" +
-        "6nkc0VQmBsHvCfq4T9v8gyiBtQRy543leapTBMT34mxVIQ4ReGLPVit/6sNLoGLb\n" +
-        "gSnGe9Bk/a5V/5vlqeemWF0hgoRtUxMtU1hFbe7e8tSq1j+mu0SHMyKHiHd+OsmU\n" +
-        "IQIDAQAB\n" +
-        "-----END PUBLIC KEY-----"
+        "-----BEGIN PUBLIC KEY-----\n" + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzLYHwX5Ug/oUObZ5eH5P\n" + "rEwmfj4E/YEfSKLgFSsyRGGsVmmjiXBmSbX2s3xbj/ofuvYtkMkP/VPFHy9E/8ox\n" + "Y+cRjPzydxz46LPY7jpEw1NHZjOyTeUero5e1nkLhiQqO/cMVYmUnuVcuFfZyZvc\n" + "8Apx5fBrIp2oWpF/G9tpUZfUUJaaHiXDtuYP8o8VhYtyjuUu3h7rkQFoMxvuoOFH\n" + "6nkc0VQmBsHvCfq4T9v8gyiBtQRy543leapTBMT34mxVIQ4ReGLPVit/6sNLoGLb\n" + "gSnGe9Bk/a5V/5vlqeemWF0hgoRtUxMtU1hFbe7e8tSq1j+mu0SHMyKHiHd+OsmU\n" + "IQIDAQAB\n" + "-----END PUBLIC KEY-----"
 
     private let userAgent: String
     private let vpnRegionsRequestPath: String
@@ -262,7 +253,8 @@ internal actor Regions: RegionsAPI {
 
         do {
             guard let vpnData = vpnRegionsJSON.data(using: .utf8),
-                  let metaData = metadataJSON.data(using: .utf8) else {
+                let metaData = metadataJSON.data(using: .utf8)
+            else {
                 return .failure(RegionsError.invalidJSONEncoding)
             }
             vpnRegionsResponse = try decoder.decode(VPNRegionsResponse.self, from: vpnData)
@@ -324,7 +316,8 @@ internal actor Regions: RegionsAPI {
         var localizedRegions: [ShadowsocksRegionsResponse] = []
         for region in shadowsocksRegionsResponse {
             if let translation = shadowsocksRegionTranslation(region.region, vpnRegionsResponse: vpnRegionsResponse),
-               let iso = shadowsocksRegionIso(region.region, vpnRegionsResponse: vpnRegionsResponse) {
+                let iso = shadowsocksRegionIso(region.region, vpnRegionsResponse: vpnRegionsResponse)
+            {
                 var updated = region
                 updated.iso = iso
                 updated.region = translation
@@ -354,7 +347,8 @@ internal actor Regions: RegionsAPI {
             if locale.lowercased() == targetLocale.lowercased() {
                 return translation
             }
-            let localeLanguage = targetLocale.contains("-")
+            let localeLanguage =
+                targetLocale.contains("-")
                 ? String(targetLocale.split(separator: "-").first ?? Substring(targetLocale))
                 : targetLocale
             if locale.lowercased().hasPrefix(localeLanguage.lowercased()) {
@@ -452,7 +446,8 @@ internal actor Regions: RegionsAPI {
                 let (data, response) = try await session.data(for: request)
                 session.finishTasksAndInvalidate()
                 if let httpResponse = response as? HTTPURLResponse,
-                   RegionsUtils.isErrorStatusCode(httpResponse.statusCode) {
+                    RegionsUtils.isErrorStatusCode(httpResponse.statusCode)
+                {
                     lastError = RegionsError.httpError(httpResponse.statusCode)
                     continue
                 }

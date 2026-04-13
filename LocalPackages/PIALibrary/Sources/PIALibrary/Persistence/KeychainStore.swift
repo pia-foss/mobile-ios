@@ -23,7 +23,7 @@
 import Foundation
 
 class KeychainStore: SecureStore {
-    
+
     private let backend: Keychain
 
     init() {
@@ -33,13 +33,13 @@ class KeychainStore: SecureStore {
     init(group: String) {
         backend = Keychain(group: group)
     }
-    
+
     init(team: String, group: String) {
         backend = Keychain(team: team, group: group)
     }
 
     // MARK: SecureStore
-    
+
     func password(for username: String) -> String? {
         return try? backend.password(for: username)
     }
@@ -51,11 +51,11 @@ class KeychainStore: SecureStore {
             backend.removePassword(for: username)
         }
     }
-    
+
     func passwordReference(for username: String) -> Data? {
         return try? backend.passwordReference(for: username)
     }
-    
+
     func clear(for username: String) {
         backend.removePassword(for: username)
         backend.removeToken(for: tokenKey(for: username))
@@ -63,11 +63,11 @@ class KeychainStore: SecureStore {
 }
 
 extension KeychainStore {
-    
+
     func username() -> String? {
         return try? backend.username()
     }
-    
+
     func setUsername(_ username: String?) {
         if let username = username {
             try? backend.set(username: username)
@@ -78,11 +78,11 @@ extension KeychainStore {
 }
 
 extension KeychainStore {
-    
+
     func publicUsername() -> String? {
         return try? backend.publicUsername()
     }
-    
+
     func setPublicUsername(_ username: String?) {
         if let username = username {
             try? backend.set(publicUsername: username)
@@ -93,7 +93,7 @@ extension KeychainStore {
 }
 
 extension KeychainStore {
-    
+
     func token(for username: String) -> String? {
         return try? backend.token(for: username)
     }
@@ -101,7 +101,7 @@ extension KeychainStore {
     func clearToken(for username: String) {
         backend.removeToken(for: username)
     }
-    
+
     func tokenKey(for username: String) -> String {
         return "auth-token: \(username)"
     }
@@ -109,23 +109,23 @@ extension KeychainStore {
 }
 
 extension KeychainStore {
-    
+
     func dipTokens() -> [String]? {
         return try? backend.dipTokens()
     }
-    
+
     func setDIPToken(_ dipToken: String) {
         try? backend.set(dipToken: dipToken)
     }
-    
+
     func remove(_ dipToken: String) {
         try? backend.remove(dipToken: dipToken)
     }
-    
+
     func removeDIPTokens() {
         backend.removeDIPTokens()
     }
-    
+
     func setPassword(_ password: String?, forDipToken dip: String) {
         if let password = password {
             try? backend.set(password: password, for: dip)
@@ -133,7 +133,7 @@ extension KeychainStore {
             backend.removePassword(for: dip)
         }
     }
-    
+
     func passwordReference(forDipToken dip: String) -> Data? {
         return try? backend.passwordReference(for: dip)
     }

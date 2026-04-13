@@ -28,11 +28,11 @@ private enum Fonts {
 }
 
 extension UIFont {
-    
+
     public class func regularFontWith(size: CGFloat) -> UIFont! {
         return UIFont(name: Fonts.robotoTextRegular, size: size)
     }
-    
+
     public class func mediumFontWith(size: CGFloat) -> UIFont! {
         return UIFont(name: Fonts.robotoTextMedium, size: size)
     }

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftUI
 import PIAAssetsTV
+import SwiftUI
 
 struct LoginLoadingView: View {
     var body: some View {

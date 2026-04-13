@@ -14,7 +14,7 @@ let package = Package(
         .library(
             name: "PIAAccount",
             targets: ["PIAAccount"]
-        ),
+        )
     ],
     targets: [
         // Main library target (merged for simplicity)
@@ -27,6 +27,6 @@ let package = Package(
         .testTarget(
             name: "PIAAccountTests",
             dependencies: ["PIAAccount"]
-        ),
+        )
     ]
 )

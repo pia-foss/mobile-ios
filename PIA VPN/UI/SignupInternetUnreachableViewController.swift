@@ -20,12 +20,12 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import PIALibrary
-import PIADesignSystem
-import PIAUIKit
-import PIALocalizations
 import PIAAssetsMobile
+import PIADesignSystem
+import PIALibrary
+import PIALocalizations
+import PIAUIKit
+import UIKit
 
 public class SignupUnreachableViewController: AutolayoutViewController, BrandableNavigationBar {
 
@@ -46,13 +46,13 @@ public class SignupUnreachableViewController: AutolayoutViewController, Brandabl
         self.styleSubmitButton()
 
     }
-    
+
     @IBAction private func submit() {
         perform(segue: StoryboardSegue.Signup.unwindInternetUnreachableSegueIdentifier)
     }
 
     // MARK: Restylable
-    
+
     override public func viewShouldRestyle() {
         super.viewShouldRestyle()
         navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
@@ -62,12 +62,13 @@ public class SignupUnreachableViewController: AutolayoutViewController, Brandabl
         Theme.current.applySubtitle(labelMessage)
         Theme.current.applyTitle(labelTitle, appearance: .dark)
     }
-    
+
     private func styleSubmitButton() {
         buttonSubmit.setRounded()
         buttonSubmit.style(style: TextStyle.Buttons.piaGreenButton)
-        buttonSubmit.setTitle(L10n.Signup.Unreachable.submit.uppercased(),
-                              for: [])
+        buttonSubmit.setTitle(
+            L10n.Signup.Unreachable.submit.uppercased(),
+            for: [])
     }
 
 }

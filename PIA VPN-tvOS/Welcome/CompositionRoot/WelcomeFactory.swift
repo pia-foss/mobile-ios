@@ -7,34 +7,37 @@
 //
 
 import Foundation
-import SwiftUI
-import PIALocalizations
 import PIAAssetsTV
+import PIALocalizations
+import SwiftUI
 
 class WelcomeFactory {
     static func makeWelcomeView() -> OnboardingComponentView {
-        OnboardingComponentView(viewModel: makeWelcomeViewModel(),
-                                style: makeWelcomeViewStyle())
+        OnboardingComponentView(
+            viewModel: makeWelcomeViewModel(),
+            style: makeWelcomeViewStyle())
     }
-    
+
     private static func makeWelcomeViewModel() -> OnboardingComponentViewModelType {
         let loginButton = OnboardingComponentButton(title: L10n.Tvos.Welcome.Button.login) {
             AppRouter.navigateToLoginQRCodeDestinationAction()
         }
-        
+
         let signupButton = OnboardingComponentButton(title: L10n.Tvos.Welcome.Button.signup) {
             AppRouter.navigateToSignUpDestinationAction()
         }
-        
-        return OnboardingComponentViewModel(title: L10n.Tvos.Welcome.title,
-                                            subtitle: nil,
-                                            buttons: [loginButton, signupButton])
+
+        return OnboardingComponentViewModel(
+            title: L10n.Tvos.Welcome.title,
+            subtitle: nil,
+            buttons: [loginButton, signupButton])
     }
-    
+
     private static func makeWelcomeViewStyle() -> OnboardingComponentStytle {
-        OnboardingComponentStytle(headerImage: Asset.piaBrand.swiftUIImage,
-                                  headerSpacing: 60,
-                                  backgroundImage: Asset.signinWorld.swiftUIImage, 
-                                  buttonsEdgeInsets: EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
+        OnboardingComponentStytle(
+            headerImage: Asset.piaBrand.swiftUIImage,
+            headerSpacing: 60,
+            backgroundImage: Asset.signinWorld.swiftUIImage,
+            buttonsEdgeInsets: EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
     }
 }
