@@ -300,7 +300,6 @@
 				Shared/CompositionRoot/VpnConnectionFactory.swift,
 				Shared/StateMonitors/StateMonitorsFactory.swift,
 				Shared/StateMonitors/VPNStatusMonitor.swift,
-				"Shared/Utils/Foundation+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/ClientPreferences+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/Keychain+Protocols.swift",
 				"Shared/Utils/PIALibrary+Protocols/PIALibrary+Protocols.swift",
