@@ -23,7 +23,7 @@
 import Foundation
 
 /// The compound user account.
-public struct UserAccount: CustomStringConvertible {
+public struct UserAccount: CustomStringConvertible, Equatable {
 
     /// The account credentials.
     public let credentials: Credentials
@@ -53,5 +53,10 @@ public struct UserAccount: CustomStringConvertible {
         } else {
             return "{username: \(credentials.username)}"
         }
+    }
+
+    public static func == (lhs: UserAccount, rhs: UserAccount) -> Bool {
+        lhs.credentials == rhs.credentials
+        && lhs.info == rhs.info
     }
 }

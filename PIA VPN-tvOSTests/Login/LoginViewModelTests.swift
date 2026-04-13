@@ -8,6 +8,7 @@
 
 import XCTest
 import Combine
+import PIALibrary
 @testable import PIA_VPN_tvOS
 
 final class LoginViewModelTests: XCTestCase {

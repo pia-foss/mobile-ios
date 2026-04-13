@@ -4,7 +4,7 @@ import PIALibrary
 
 class AccountInformationAvailabilityVerifierTests: XCTestCase {
     class Fixture {
-        let accountProviderMock = AccountProviderTypeMock()
+        let accountProviderMock = AccountProviderMock()
         let notificationCenterMock = NotificationCenterMock()
         let userDefaultsMock = UserDefaultsMock(suiteName: "accountInfoAvailabilityTests")!
         let twelveHoursInSeconds: TimeInterval = 43200

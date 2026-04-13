@@ -34,6 +34,8 @@ class PIACommandTests: XCTestCase {
         Client.useMockAccountProvider()
         AppPreferences.shared.dismissedMessages = []
 
+        Client.preferences.defaults.vpnType = IKEv2Profile.vpnType
+
         let pref = Client.preferences.editable()
         pref.reset()
         pref.commit()
@@ -66,7 +68,6 @@ class PIACommandTests: XCTestCase {
     }
     
     func testCommandAction() throws {
-        
         XCTAssertTrue(Client.preferences.vpnType == IKEv2Profile.vpnType)
         
         testOVPNAction.executeAction()

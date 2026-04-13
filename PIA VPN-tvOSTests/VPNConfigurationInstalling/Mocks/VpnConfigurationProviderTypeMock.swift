@@ -22,7 +22,7 @@ class VpnConfigurationProviderTypeMock: VpnConfigurationProviderType {
         callback?(error)
     }
     
-    func uninstall(_ callback: PIALibrary.SuccessLibraryCallback?) {
+    func uninstall(_ callback: SuccessLibraryCallback?) {
         callback?(error)
     }
     

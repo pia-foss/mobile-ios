@@ -3,8 +3,9 @@ import PIADashboard
 import PIALibrary
 import PIALocalizations
 
-extension DefaultAccountProvider: @retroactive AccountProviderType {
-    public var isExpired: Bool {
+// Extension to add isExpired convenience property
+extension AccountProvider {
+    var isExpired: Bool {
         currentUser?.info?.isExpired ?? false
     }
 }
