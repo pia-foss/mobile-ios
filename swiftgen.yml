@@ -2,7 +2,7 @@ strings:
     inputs:
         - LocalPackages/PIALocalizations/Sources/PIALocalizations/Resources/en.lproj/Localizable.strings
     outputs:
-        templateName: structured-swift5
+        templatePath: Resources/SwiftGen/strings/structured-swift5.stencil
         output: LocalPackages/PIALocalizations/Sources/PIALocalizations/Generated/L10n.swift
         params:
             publicAccess: true
@@ -13,7 +13,7 @@ ib:
         - PIA VPN/UI/Storyboards/Welcome.storyboard
         - PIA VPN/UI/Storyboards/Signup.storyboard
     outputs:
-        templateName: scenes-swift5
+        templatePath: Resources/SwiftGen/ib/scenes-swift5.stencil
         output: PIA VPN/UI/Shared/SwiftGen+ScenesStoryboards.swift
     outputs.params:
         module: PIA_VPN
