@@ -117,8 +117,8 @@ class QuickConnectTile: UIView, Tileable {
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton,
                 let favoriteImage = containerView.subviews.last as? UIImageView {
-                button.setImage(Theme.current.palette.appearance == .light ? Asset.Images.Piax.Tiles.quickConnectPlaceholderLight.image :
-                                    Asset.Images.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
+                button.setImage(Theme.current.palette.appearance == .light ? Asset.Piax.Tiles.quickConnectPlaceholderLight.image :
+                                    Asset.Piax.Tiles.quickConnectPlaceholderDark.image, for: .normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 button.isUserInteractionEnabled = false
                 button.accessibilityLabel = L10n.Global.empty
@@ -154,14 +154,14 @@ class QuickConnectTile: UIView, Tileable {
                     button.accessibilityLabel = server.name
                 } else if let imageView = element as? UIImageView {
                     if imageView.tag == 0 {
-                        imageView.image = Asset.Images.Piax.Global.favoriteGreen.image
+                        imageView.image = Asset.Piax.Global.favoriteGreen.image
                         if let dipToken = server.dipToken {
                             imageView.isHidden = !favoriteServers.contains(server.identifier+dipToken)
                         } else {
                             imageView.isHidden = !favoriteServers.contains(server.identifier)
                         }
                     } else {
-                        imageView.image = Asset.Images.dipBadgeDark.image
+                        imageView.image = Asset.dipBadgeDark.image
                         imageView.isHidden = server.dipToken == nil
                     }
                     if status != .normal { //only when edit mode

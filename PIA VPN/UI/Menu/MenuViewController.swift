@@ -106,16 +106,16 @@ final class MenuViewController: AutolayoutViewController {
     ]
 
     private lazy var iconForItem: [Item: ImageAsset] = [
-        .selectRegion: Asset.Images.iconRegion,
-        .account: Asset.Images.iconAccount,
-        .dedicatedIp: Asset.Images.iconDip,
-        .settings: Asset.Images.iconSettings,
-        .logout: Asset.Images.iconLogout,
-        .about: Asset.Images.iconmenuAbout,
-        .privacy: Asset.Images.iconmenuPrivacy,
-        .homepage: Asset.Images.iconHomepage,
-        .support: Asset.Images.iconContact,
-        .version: Asset.Images.iconAccount
+        .selectRegion: Asset.iconRegion,
+        .account: Asset.iconAccount,
+        .dedicatedIp: Asset.iconDip,
+        .settings: Asset.iconSettings,
+        .logout: Asset.iconLogout,
+        .about: Asset.iconmenuAbout,
+        .privacy: Asset.iconmenuPrivacy,
+        .homepage: Asset.iconHomepage,
+        .support: Asset.iconContact,
+        .version: Asset.iconAccount
     ]
     
     deinit {
@@ -129,7 +129,7 @@ final class MenuViewController: AutolayoutViewController {
 
         modalPresentationCapturesStatusBarAppearance = true
 
-        imvAvatar.image = Asset.Images.imageRobot.image
+        imvAvatar.image = Asset.imageRobot.image
 
         var planDescription = ""
         if let currentUser = Client.providers.accountProvider.currentUser,

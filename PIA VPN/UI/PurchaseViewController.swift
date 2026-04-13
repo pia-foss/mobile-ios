@@ -179,7 +179,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
                 if let error = error {
                     let message = error.localizedDescription
                     log.error("Purchase failed (error: \(error))")
-                    Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
+                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                             message: message)
                 } else {
                     log.warning("Cancelled purchase")

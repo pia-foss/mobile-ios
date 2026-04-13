@@ -60,13 +60,13 @@ public enum SettingOptions: Int, CaseIterable {
 
     public func imageForSection() -> UIImage {
         switch self {
-            case .general: return Asset.Images.Piax.Settings.iconGeneral.image
-            case .protocols: return Asset.Images.Piax.Settings.iconProtocols.image
-            case .network: return Asset.Images.Piax.Settings.iconNetwork.image
-            case .privacyFeatures: return Asset.Images.Piax.Settings.iconPrivacy.image
-            case .automation: return Asset.Images.Piax.Settings.iconAutomation.image
-            case .help: return Asset.Images.Piax.Settings.iconAbout.image
-            case .development: return Asset.Images.Piax.Settings.iconGeneral.image
+            case .general: return Asset.Piax.Settings.iconGeneral.image
+            case .protocols: return Asset.Piax.Settings.iconProtocols.image
+            case .network: return Asset.Piax.Settings.iconNetwork.image
+            case .privacyFeatures: return Asset.Piax.Settings.iconPrivacy.image
+            case .automation: return Asset.Piax.Settings.iconAutomation.image
+            case .help: return Asset.Piax.Settings.iconAbout.image
+            case .development: return Asset.Piax.Settings.iconGeneral.image
         }
     }
 

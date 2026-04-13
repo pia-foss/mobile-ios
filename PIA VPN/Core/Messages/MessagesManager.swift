@@ -114,7 +114,7 @@ extension InAppMessage {
         case .action:
             if let actions = self.settingAction {
                 command = ActionCommand(actions)
-                Macros.displaySuccessImageNote(withImage: Asset.Images.iconWarning.image, message: L10n.Inapp.Messages.Settings.updated)
+                Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: L10n.Inapp.Messages.Settings.updated)
             }
         default:
             break

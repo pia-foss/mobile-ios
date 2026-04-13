@@ -113,7 +113,7 @@ class RegionsViewController: AutolayoutViewController {
 
         guard (Client.providers.vpnProvider.vpnStatus == .disconnected) else {
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: L10n.Region.Refresh.Connected.error
             )
 
@@ -132,7 +132,7 @@ class RegionsViewController: AutolayoutViewController {
 
     private func setupRightBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: Asset.Images.Piax.Global.iconFilter.image,
+            image: Asset.Piax.Global.iconFilter.image,
             style: .plain,
             target: self,
             action: #selector(showFilter(_:))

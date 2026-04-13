@@ -31,10 +31,10 @@ extension Theme.Palette {
     public static var light: Theme.Palette {
         let palette = Theme.Palette()
         palette.appearance = Theme.Appearance.light
-        palette.logo = Asset.Images.navLogo.image
+        palette.logo = Asset.navLogo.image
         palette.secondaryColor = .white
         palette.textfieldButtonBackgroundColor = .white
-        palette.navigationBarBackIcon = Asset.Ui.Piax.Global.iconBack.image
+        palette.navigationBarBackIcon = Asset.Piax.Global.iconBack.image
         palette.brandBackground = Macros.color(hex: 0x009a18, alpha: 0xff)
         palette.secondaryBackground = .white
         palette.principalBackground = .piaGrey1

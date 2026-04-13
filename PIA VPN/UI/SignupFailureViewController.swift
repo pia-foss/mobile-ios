@@ -42,7 +42,7 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
         navigationItem.hidesBackButton = true
 
         title = L10n.Signup.Failure.vcTitle
-        imvPicture.image = Asset.Ui.imageAccountFailed.image
+        imvPicture.image = Asset.imageAccountFailed.image
         labelTitle.text = L10n.Signup.Failure.title
         labelMessage.text = L10n.Signup.Failure.message
             
@@ -50,13 +50,13 @@ public class SignupFailureViewController: AutolayoutViewController, BrandableNav
             switch clientError {
             case .redeemInvalid:
                 title = L10n.Welcome.Redeem.title
-                imvPicture.image = Asset.Ui.imageRedeemInvalid.image
+                imvPicture.image = Asset.imageRedeemInvalid.image
                 labelTitle.text = L10n.Signup.Failure.Redeem.Invalid.title
                 labelMessage.text = L10n.Signup.Failure.Redeem.Invalid.message
                 break
             case .redeemClaimed:
                 title = L10n.Welcome.Redeem.title
-                imvPicture.image = Asset.Ui.imageRedeemClaimed.image
+                imvPicture.image = Asset.imageRedeemClaimed.image
                 labelTitle.text = L10n.Signup.Failure.Redeem.Claimed.title
                 labelMessage.text = L10n.Signup.Failure.Redeem.Claimed.message
                 break

@@ -263,7 +263,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         var items: [UIApplicationShortcutItem] = []
         
-        itemAsset = (isNotDisconnected ? Asset.Images.icon3dtDisconnect : Asset.Images.icon3dtConnect)
+        itemAsset = (isNotDisconnected ? Asset.icon3dtDisconnect : Asset.icon3dtConnect)
         let connectionStatusIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
         let connect = UIApplicationShortcutItem(
             type: connectionStatusType.rawValue,
@@ -274,7 +274,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         )
         items.append(connect)
         
-        itemAsset = Asset.Images.icon3dtSelectRegion
+        itemAsset = Asset.icon3dtSelectRegion
         let selectRegionIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
         let selectRegion = UIApplicationShortcutItem(
             type: ShortcutItem.selectRegion.rawValue,

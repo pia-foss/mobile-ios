@@ -77,12 +77,12 @@ class ConnectionTile: UIView, Tileable  {
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
 
-        protocolIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconProtocol.image
-        portIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconPort.image
-        authenticationIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconAuthentication.image
-        encryptionIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconEncryption.image
-        socketIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconSocket.image
-        handshakeIcon.image = Asset.Images.Piax.Tiles.ConnectionTile.iconHandshake.image
+        protocolIcon.image = Asset.Piax.Tiles.ConnectionTile.iconProtocol.image
+        portIcon.image = Asset.Piax.Tiles.ConnectionTile.iconPort.image
+        authenticationIcon.image = Asset.Piax.Tiles.ConnectionTile.iconAuthentication.image
+        encryptionIcon.image = Asset.Piax.Tiles.ConnectionTile.iconEncryption.image
+        socketIcon.image = Asset.Piax.Tiles.ConnectionTile.iconSocket.image
+        handshakeIcon.image = Asset.Piax.Tiles.ConnectionTile.iconHandshake.image
 
         setConnectionValues()
         viewShouldRestyle()

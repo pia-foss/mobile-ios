@@ -40,7 +40,7 @@ class PIACardsViewController: UIViewController {
     
     func createSlides() -> [PIACard] {
         
-        let closeImage = Asset.Images.iconClose.image.withRenderingMode(.alwaysTemplate)
+        let closeImage = Asset.iconClose.image.withRenderingMode(.alwaysTemplate)
         
         var collectingCards = [PIACard]()
         for card in cards {

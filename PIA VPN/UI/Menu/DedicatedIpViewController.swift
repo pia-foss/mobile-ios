@@ -142,13 +142,13 @@ final class DedicatedIpViewController: AutolayoutViewController {
     private func showInvalidTokenMessage() {
         Macros.displayStickyNote(
             withMessage: Self.invalidTokenLocalisedString,
-            andImage: Asset.Images.iconWarning.image,
+            andImage: Asset.iconWarning.image,
         )
     }
     
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
         Macros.displayImageNote(
-            withImage: Asset.Images.iconWarning.image,
+            withImage: Asset.iconWarning.image,
             message: errorMessage ?? Self.invalidTokenLocalisedString,
             andDuration: displayDuration,
         )
@@ -279,7 +279,7 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
         
         if token.isEmpty {
             Macros.displayStickyNote(withMessage: L10n.Dedicated.Ip.Message.Incorrect.token,
-                                     andImage: Asset.Images.iconWarning.image)
+                                     andImage: Asset.iconWarning.image)
             return
         }
 
@@ -292,7 +292,7 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             switch await self.activateDipToken(token: token) {
             case .success:
                 Macros.displaySuccessImageNote(
-                    withImage: Asset.Images.iconWarning.image,
+                    withImage: Asset.iconWarning.image,
                     message: L10n.Dedicated.Ip.Message.Valid.token,
                 )
 
@@ -300,14 +300,14 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                 log.error("Activate DIP token failed with expired token error.")
                 Macros.displayStickyNote(
                     withMessage: L10n.Dedicated.Ip.Message.Expired.token,
-                    andImage: Asset.Images.iconWarning.image,
+                    andImage: Asset.iconWarning.image,
                 )
 
             case .failure(.invalid):
                 log.error("Activate DIP token failed with invalid token error.")
                 Macros.displayStickyNote(
                     withMessage: Self.invalidTokenLocalisedString,
-                    andImage: Asset.Images.iconWarning.image,
+                    andImage: Asset.iconWarning.image,
                 )
 
             case let .failure(.generic(error)):

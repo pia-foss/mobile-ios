@@ -181,7 +181,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
             guard let transaction = transaction else {
                 if let error = error {
                     let message = error.localizedDescription
-                    Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
+                    Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                             message: message)
                 }
                 return

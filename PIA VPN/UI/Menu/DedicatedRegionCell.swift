@@ -71,9 +71,9 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
     }
 
     private func prepareCellIcons() {
-        leftIconImageView.image = UIImage(asset: Asset.Images.Piax.Global.regionSelected)
+        leftIconImageView.image = UIImage(asset: Asset.Piax.Global.regionSelected)
         leftIconImageView.isHidden = !iconSelected
-        dipBadgeImageView.image = Asset.Images.dipBadgeDark.image
+        dipBadgeImageView.image = Asset.dipBadgeDark.image
     }
     
     private func configureIPView() {
@@ -122,7 +122,7 @@ class DedicatedRegionCell: UITableViewCell, Restylable {
     
     private func updateFavoriteImage() {
         self.isFavorite ?
-        self.favoriteImageView.image = Asset.Images.Piax.Global.favoriteSelected.image :
+        self.favoriteImageView.image = Asset.Piax.Global.favoriteSelected.image :
             Theme.current.applyFavoriteUnselectedImage(self.favoriteImageView)
         favoriteButton.accessibilityLabel = self.isFavorite ?
             L10n.Region.Accessibility.favorite :

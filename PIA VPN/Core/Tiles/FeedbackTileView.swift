@@ -43,7 +43,7 @@ struct FeedbackTileView: View {
         HStack(spacing: 16) {
             leadingSpacerIfNeeded()
             
-            Image(asset: Asset.Images.imageAccessCard)
+            Image(asset: Asset.imageAccessCard)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 90, height: 100)
@@ -57,12 +57,12 @@ struct FeedbackTileView: View {
                 
                 HStack(alignment: .center, spacing: 12) {
                     rateButton(
-                        image: .init(uiImage: Asset.Images.iconThumbsDown.image),
+                        image: .init(uiImage: Asset.iconThumbsDown.image),
                         action: ratingManager.handleNegativeRating
                     )
 
                     rateButton(
-                        image: .init(uiImage: Asset.Images.iconThumbsUp.image),
+                        image: .init(uiImage: Asset.iconThumbsUp.image),
                         action: ratingManager.handlePositiveRating
                     )
                 }
@@ -73,7 +73,7 @@ struct FeedbackTileView: View {
             // Close button
             VStack {
                 Button(action: ratingManager.handleFeedbackDismiss) {
-                    Image(asset: Asset.Images.iconClose)
+                    Image(asset: Asset.iconClose)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 10, height: 10)

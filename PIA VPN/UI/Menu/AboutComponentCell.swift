@@ -123,10 +123,10 @@ class AboutLicenseCell: UITableViewCell, Restylable {
 
         var moreImage: UIImage?
         if isExpanded {
-            moreImage = Asset.Images.buttonUp.image
+            moreImage = Asset.buttonUp.image
             textLicense.isScrollEnabled = true
         } else {
-            moreImage = Asset.Images.buttonDown.image
+            moreImage = Asset.buttonDown.image
             textLicense.isScrollEnabled = false
         }
         buttonMore.setImage(moreImage, for: .normal)

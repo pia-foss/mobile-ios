@@ -52,8 +52,8 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        unselectedPlanImageView.image = Asset.Ui.Piax.Global.planUnselected.image
-        selectedPlanImageView.image = Asset.Ui.Piax.Global.planSelected.image
+        unselectedPlanImageView.image = Asset.Piax.Global.planUnselected.image
+        selectedPlanImageView.image = Asset.Piax.Global.planSelected.image
         isSelected = false
         selectedPlanImageView.alpha = 0
         self.accessibilityTraits = UIAccessibilityTraits.button

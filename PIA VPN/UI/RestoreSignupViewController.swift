@@ -127,7 +127,7 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
             signupEmail = nil
             textEmail.becomeFirstResponder()
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
             self.status = .error(element: textEmail)
@@ -171,7 +171,7 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         } else {
             log.error("Failed to restore payment receipt")
         }
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                 message: message)
 
     }

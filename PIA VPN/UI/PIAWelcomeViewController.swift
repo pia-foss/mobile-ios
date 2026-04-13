@@ -95,7 +95,7 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         } else {
             if preset.allowsCancel {
                 self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                    image: Asset.Images.iconClose.image.withRenderingMode(.alwaysOriginal),
+                    image: Asset.iconClose.image.withRenderingMode(.alwaysOriginal),
                     style: .plain,
                     target: self,
                     action: #selector(cancelClicked(_:))

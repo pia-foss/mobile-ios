@@ -42,7 +42,7 @@ class NetworkSettingsViewController: PIABaseSettingsViewController {
     private var controller: OptionsViewController?
 
     private static let DNS: String = "DNS"
-    private lazy var imvSelectedOption = UIImageView(image: Asset.Images.accessorySelected.image)
+    private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
     override func viewDidLoad() {
         

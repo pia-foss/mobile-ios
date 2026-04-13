@@ -37,7 +37,7 @@ class ExpirationCell: UITableViewCell, Restylable {
         super.awakeFromNib()
         
         labelUpgrade.text = L10n.Menu.Expiration.upgrade
-        imvAccessory.image = Asset.Images.accessoryExpire.image.withRenderingMode(.alwaysTemplate)
+        imvAccessory.image = Asset.accessoryExpire.image.withRenderingMode(.alwaysTemplate)
         imvAccessory.tintColor = .white
     }
 

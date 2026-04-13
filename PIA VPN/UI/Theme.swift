@@ -304,7 +304,7 @@ public class Theme {
     /// :nodoc:
     public func applyCenteredMap(_ imageView: UIImageView) {
         imageView.image = palette.appearance == .dark ?
-        Asset.Ui.Piax.Global.centeredDarkMap.image : Asset.Ui.Piax.Global.centeredLightMap.image
+        Asset.Piax.Global.centeredDarkMap.image : Asset.Piax.Global.centeredLightMap.image
     }
     
     // MARK: Navigation bar
@@ -649,14 +649,14 @@ public class Theme {
     /// :nodoc:
     public func applyScrollableMap(_ imageView: UIImageView) {
         imageView.image = palette.appearance == .dark ?
-        Asset.Ui.Piax.Global.scrollableMapDark.image : Asset.Ui.Piax.Global.scrollableMapLight.image
+        Asset.Piax.Global.scrollableMapDark.image : Asset.Piax.Global.scrollableMapLight.image
     }
 
     /// :nodoc:
     func applyPageControl(_ pageControl: FXPageControl) {
         pageControl.dotSpacing = 6.0
-        pageControl.selectedDotImage = Asset.Ui.Piax.Global.pagecontrolSelectedDot.image
-        pageControl.dotImage = Asset.Ui.Piax.Global.pagecontrolUnselectedDot.image
+        pageControl.selectedDotImage = Asset.Piax.Global.pagecontrolSelectedDot.image
+        pageControl.dotImage = Asset.Piax.Global.pagecontrolUnselectedDot.image
     }
 
     

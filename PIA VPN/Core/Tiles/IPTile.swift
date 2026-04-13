@@ -78,7 +78,7 @@ class IPTile: UIView, Tileable  {
             }
             .store(in: &cancellables)
 
-        triangleImageView.image = Asset.Images.Piax.Tiles.ipTriangle.image
+        triangleImageView.image = Asset.Piax.Tiles.ipTriangle.image
         viewShouldRestyle()
         self.accessibilityIdentifier = "IPTile"
         self.localIpTitle.text = "IP"

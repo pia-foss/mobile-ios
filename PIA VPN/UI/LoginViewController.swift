@@ -166,7 +166,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             try Validator.validate(email: email)
         } catch {
             Macros.displayImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: error.errorMessage
             )
             return
@@ -186,7 +186,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             }
 
             Macros.displaySuccessImageNote(
-                withImage: Asset.Images.iconWarning.image,
+                withImage: Asset.iconWarning.image,
                 message: L10n.Welcome.Login.Magic.Link.response
             )
         })
@@ -294,7 +294,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     
     private func handleLoginFieldInvalid(textField: UITextField) {
         let errorMessage = L10n.Welcome.Login.Error.validation
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                 message: errorMessage)
         self.status = .error(element: textField)
     }
@@ -381,7 +381,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     
     private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
         
-        Macros.displayImageNote(withImage: Asset.Images.iconWarning.image,
+        Macros.displayImageNote(withImage: Asset.iconWarning.image,
                                 message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration,
                                 accessbilityIdentifier: Accessibility.Id.Login.Error.banner)
     }

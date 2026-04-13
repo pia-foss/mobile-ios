@@ -187,29 +187,29 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
             case .theme:
                 cell.titleLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
                 cell.accessoryView = switchThemeSettings
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.themeLightInactive.image :
-                Asset.Images.Piax.Global.themeDarkInactive.image
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.themeLightInactive.image :
+                Asset.Piax.Global.themeDarkInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
                 switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
             case .killswitch:
                 cell.titleLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
                 cell.accessoryView = switchKillSwitchSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.killswitchLightInactive.image :
-                Asset.Images.Piax.Global.killswitchDarkInactive.image
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.killswitchLightInactive.image :
+                Asset.Piax.Global.killswitchDarkInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
                 switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
             case .networkTools:
                 cell.titleLabel.text = L10n.Tiles.Quicksetting.Nmt.title
                 cell.accessoryView = switchNetworkToolsSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.nmtLightInactive.image :
-                Asset.Images.Piax.Global.nmtDarkInactive.image
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.nmtLightInactive.image :
+                Asset.Piax.Global.nmtDarkInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
                 switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
             case .privateBrowsing:
                 cell.titleLabel.text = L10n.Tiles.Quicksetting.Private.Browser.title
                 cell.accessoryView = switchPrivateBrowserSetting
-                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Images.Piax.Global.browserLightInactive.image :
-                Asset.Images.Piax.Global.browserDarkInactive.image
+                cell.settingImage.image = Theme.current.palette.appearance == .light ? Asset.Piax.Global.browserLightInactive.image :
+                Asset.Piax.Global.browserDarkInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
                 switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
             }
