@@ -31,7 +31,7 @@ extension Theme.Palette {
         
         let palette = Theme.Palette()
         palette.appearance = Theme.Appearance.dark
-        palette.logo = Asset.navLogoWhite.image
+        palette.logo = Asset.navLogo.image
         palette.secondaryColor = UIColor.piaGrey10
         palette.textfieldButtonBackgroundColor = UIColor.black
         palette.navigationBarBackIcon = Asset.Piax.Global.iconBack.image
