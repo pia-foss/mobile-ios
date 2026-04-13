@@ -35,7 +35,7 @@ final class PIAKPIStagingClientStateProvider : KPIClientStateProvider {
     }
 
     func kpiAuthToken() -> String? {
-        return Client.providers.accountProvider.apiToken ?? ""
+        return Client.providers.accountProvider.apiToken
     }
     
     func kpiEndpoints() -> [KPIEndpoint] {
