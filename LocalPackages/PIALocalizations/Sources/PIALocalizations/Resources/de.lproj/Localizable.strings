@@ -99,6 +99,9 @@
 "account.subscriptions.trial" = "Testversion";
 "account.unauthorized" = "Etwas ging schief. Bitte versuchen, erneut anzumelden";
 "account.delete" = "Konto löschen";
+"account.delete.alert.title" = "Sind Sie sicher?";
+"account.delete.alert.message" = "Die Löschung Ihres PIA-Kontos ist dauerhaft und unwiderruflich. Sie können Ihre PIA-Anmeldedaten nach dieser Aktion nicht wiederherstellen. Bitte beachten Sie, dass diese Aktion nur Ihr PIA-Konto aus unserer Datenbank löscht, aber NICHT Ihr Abonnement. Sie müssen zu Ihrem Apple-Konto gehen und das Private Internet Access-Abonnement von dort aus kündigen. Anderenfalls werden Sie weiterhin belastet, auch wenn Ihr PIA-Konto nicht mehr aktiv ist.";
+"account.delete.alert.failureMessage" = "Etwas schlug beim Löschen Ihres Kontos fehl. Versuchen Sie es bitte später noch einmal.";
 "account.survey.message" = "Willst du helfen, PIA besser zu machen? Lass uns wissen, wie wir uns verbessern können!\nNimm an der Umfrage teil";
 "account.survey.messageLink" = "An der Umfrage teilnehmen";
 
