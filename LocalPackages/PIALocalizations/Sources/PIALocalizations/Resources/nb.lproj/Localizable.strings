@@ -99,6 +99,10 @@
 "account.subscriptions.trial" = "Prøveplan";
 "account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
 "account.delete" = "Slett konto";
+"account.delete.alert.title" = "Er du sikker?";
+"account.delete.alert.message" = "Sletting av PIA-kontoen er permanent og kan ikke reverseres. Du vil ikke kunne hente PIA-legitimasjonen etter at denne handlingen er utført. Vær oppmerksom på at denne handlingen bare sletter PIA-kontoen fra databasen, og sletter IKKE abonnementet. Du må gå til Apple-kontoen og kansellere abonnementet på Private Internet Access derfra. Ellers blir du fortsatt belastet, selv om PIA-kontoen ikke lenger er aktiv.";
+"account.delete.alert.failureMessage" = "Noe gikk galt ved sletting av kontoen. Prøv på nytt senere.";
+"account.survey.message" = "Vil du bidra til å gjøre PIA bedre? Fortell oss hvordan vi kan forbedre oss!\nBesvar undersøkelsen";
 "account.survey.messageLink" = "Besvar undersøkelsen";
 
 // SETTINGS

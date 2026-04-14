@@ -26,6 +26,16 @@ public enum L10n {
     public static let delete = L10n.tr("Localizable", "account.delete", fallback: "Delete Account")
     /// Something went wrong. Please try logging in again
     public static let unauthorized = L10n.tr("Localizable", "account.unauthorized", fallback: "Something went wrong. Please try logging in again")
+    public enum Delete {
+      public enum Alert {
+        /// Something went wrong while deleting your account, please try again later.
+        public static let failureMessage = L10n.tr("Localizable", "account.delete.alert.failureMessage", fallback: "Something went wrong while deleting your account, please try again later.")
+        /// Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.
+        public static let message = L10n.tr("Localizable", "account.delete.alert.message", fallback: "Deleting your PIA account is permanent and irreversible. You will not be able to retrieve your PIA credentials after performing this action. Please note that this action only deletes your PIA account from our database, but it does NOT delete your subscription. You will need to go to your Apple account and cancel the Private Internet Access subscription from there. Otherwise, you will still be charged, even though your PIA account will no longer be active.")
+        /// Are you sure?
+        public static let title = L10n.tr("Localizable", "account.delete.alert.title", fallback: "Are you sure?")
+      }
+    }
     public enum Email {
       /// Email address
       public static let placeholder = L10n.tr("Localizable", "account.email.placeholder", fallback: "Email address")
