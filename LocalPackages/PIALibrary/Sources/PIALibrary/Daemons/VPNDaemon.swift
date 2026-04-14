@@ -142,11 +142,9 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
-                        Client.providers.vpnProvider.reconnect(
-                            after: 0,
-                            { _ in
-                                self.isReconnecting = false
-                            })
+                        Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true) { _ in
+                            self.isReconnecting = false
+                        }
                     } else {
                         log.debug("MAX number of VPN reconnections. Disconnecting...")
                         Client.providers.vpnProvider.disconnect({ error in
@@ -232,9 +230,11 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 }
             #endif
 
-            // IKEv2 connectivity check failure
+            // IKEv2 connectivity check failure.
+            // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
+            // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
             if #available(iOS 16, *) {
-                if errorDomain == NEVPNConnectionErrorDomain {
+                if errorDomain == NEVPNConnectionErrorDomain || errorDomain == "NEVPNConnectionErrorDomainPlugin" {
                     connectivityCheckFailed = true
                 }
             }
