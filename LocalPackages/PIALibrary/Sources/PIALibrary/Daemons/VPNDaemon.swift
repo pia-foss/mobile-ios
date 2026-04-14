@@ -130,28 +130,30 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
 
             if fallbackTimer == nil {
+                log.debug("Setting up fallbackTimer...")
 
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
                     guard let self else { return }
+                    log.debug("Executing fallbackTimer...")
 
                     let address = try? Client.providers.serverProvider.targetServer.bestAddress()
                     address?.markServerAsUnavailable()
 
-                    log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                     self.numberOfAttempts += 1
                     if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
+                        log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
                         Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true) { _ in
                             self.isReconnecting = false
                         }
                     } else {
-                        log.debug("MAX number of VPN reconnections. Disconnecting...")
-                        Client.providers.vpnProvider.disconnect({ error in
+                        log.debug("Max number of VPN reconnections. Disconnecting...")
+                        Client.providers.vpnProvider.disconnect { error in
                             Macros.postNotification(.PIAVPNDidFail)
                             self.reset()
                             self.invalidateTimer()
-                        })
+                        }
                     }
                 }
 
