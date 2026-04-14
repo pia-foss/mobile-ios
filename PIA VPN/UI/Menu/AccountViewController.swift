@@ -129,10 +129,39 @@ final class AccountViewController: AutolayoutViewController {
     }
     
     @IBAction private func deleteUserAccount(_ sender: Any?) {
-        log.debug("deleting user account")
-        guard UIApplication.shared.canOpenURL(AppConstants.Web.deleteAccountUrl) else { return }
-        log.debug("opening helpdesk link")
-        UIApplication.shared.open(AppConstants.Web.deleteAccountUrl)
+        let sheet = Macros.alert(
+            L10n.Account.Delete.Alert.title,
+            L10n.Account.Delete.Alert.message
+        )
+        sheet.addCancelAction(L10n.Global.no)
+        sheet.addDestructiveActionWithTitle(L10n.Global.yes) {
+            self.showLoadingAnimation()
+            log.debug("Account: Deleting...")
+
+            Client.providers.accountProvider.deleteAccount { [weak self] error in
+                guard let self else { return }
+                if error == nil {
+                    self.hideLoadingAnimation()
+                    DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
+                    self.dismiss(animated: true) {
+                        log.debug("Account: Deleted successfully, now Logging out...")
+                        MenuViewController.performLogout { success in
+                            DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                            if success == false {
+                                log.debug("Account: Error logging out the user")
+                            }
+                        }
+                    }
+                } else {
+                    self.hideLoadingAnimation()
+                    let sheet = Macros.alert(nil, L10n.Account.Delete.Alert.failureMessage)
+                    sheet.addCancelAction(L10n.Global.ok)
+                    self.present(sheet, animated: true, completion: nil)
+                    log.debug("Account: Deleting failed...")
+                }
+            }
+        }
+        present(sheet, animated: true, completion: nil)
     }
     
     private func handleReceiptRefresh() {
