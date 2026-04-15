@@ -137,24 +137,5 @@ class ConnectionStateMonitorTests: XCTestCase {
 
     }
 
-    func test_connectionStateWhen_errorInConnectionIntent() {
-        fixture.vpnStatusMonitorMock.status.send(.connecting)
-        instantiateSut()
-        let connectionError: Error = NSError(domain: "test.connection_error", code: 1) as Error
-        let connectionStateExp = expectation(description: "Wait for expected conn state")
-        fulfillOnConnectionState(.error(connectionError), expectation: connectionStateExp)
-
-        // AND GIVEN that the vpn status is connected
-        fixture.vpnStatusMonitorMock.status.send(.connected)
-
-        // AND GIVEN that the conection intent stops with an error
-        fixture.vpnConnectionUseCaseMock.getConnectionIntentResult.send(completion: .failure(connectionError))
-
-        wait(for: [connectionStateExp], timeout: 3)
-
-        // THEN the connection state becomes 'error'
-        XCTAssertEqual(capturedConnectionStates.last!, .error(connectionError))
-
-    }
 
 }

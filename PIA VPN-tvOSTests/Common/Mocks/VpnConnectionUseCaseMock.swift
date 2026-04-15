@@ -16,8 +16,8 @@ class VpnConnectionUseCaseMock: VpnConnectionUseCaseType {
 
     var getConnectionIntentCalled = false
     var getConnectionIntentCalledAttempt = 0
-    var getConnectionIntentResult = CurrentValueSubject<VpnConnectionIntent, Error>(VpnConnectionIntent.none)
-    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
+    var getConnectionIntentResult = CurrentValueSubject<VpnConnectionIntent, Never>(VpnConnectionIntent.none)
+    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Never> {
         return getConnectionIntentResult.eraseToAnyPublisher()
     }
 
