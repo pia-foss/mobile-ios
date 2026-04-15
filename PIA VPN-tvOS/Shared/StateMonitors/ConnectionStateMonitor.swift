@@ -12,6 +12,8 @@ import PIADashboard
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: ConnectionStateMonitor.self)
+
 enum ConnectionState: Equatable {
     case unkown
     case disconnected
@@ -81,39 +83,34 @@ final class ConnectionStateMonitor: ConnectionStateMonitorType {
     }
 
     func callAsFunction() {
-        cancellable = vpnStatusMonitor.getStatus()
-            .setFailureType(to: Error.self)
-            .combineLatest(vpnConnectionUseCase.getConnectionIntent()) { vpnStatus, connectionIntent in
-                return (status: vpnStatus, intent: connectionIntent)
-            }
-            .receive(on: RunLoop.main)
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let failure):
-                        self.connectionState = .error(failure)
-                    }
-                },
-                receiveValue: { result in
-                    self.calculateState(for: result.intent, vpnStatus: result.status)
-
-                })
+        cancellable = Publishers.CombineLatest(
+            vpnStatusMonitor.getStatus(),
+            vpnConnectionUseCase.getConnectionIntent()
+        )
+        .receive(on: RunLoop.main)
+        .sink { [weak self] vpnStatus, connectionIntent in
+            self?.calculateState(for: connectionIntent, vpnStatus: vpnStatus)
+        }
     }
 
     private func calculateState(for connectionIntent: VpnConnectionIntent, vpnStatus: VPNStatus) {
+        let previousState = connectionState
+
         switch (connectionIntent, vpnStatus) {
+        case (.disconnect, _):
+            self.connectionState = .disconnecting
         case (_, .connected):
             self.connectionState = .connected
         case (.connect, _):
             self.connectionState = .connecting
         case (_, .disconnected):
             self.connectionState = .disconnected
-        case (.disconnect, _):
-            self.connectionState = .disconnecting
         default:
             self.connectionState = vpnStatus.toConnectionState()
+        }
+
+        if previousState != connectionState {
+            log.debug("ConnectionState: \(previousState) → \(connectionState) [intent: \(connectionIntent), vpnStatus: \(vpnStatus)]")
         }
     }
 

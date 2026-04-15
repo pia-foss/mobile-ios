@@ -91,6 +91,7 @@ extension PIAConnectionButtonViewModel {
                 try await vpnConnectionUseCase.connect()
             } catch {
                 DispatchQueue.main.async {
+                    self.state = .error(error)
                     self.isShowingErrorAlert = true
                 }
             }
