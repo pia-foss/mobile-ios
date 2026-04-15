@@ -77,6 +77,16 @@ public final class IKEv2Profile: NetworkExtensionProfile {
                 callback?(error)
                 return
             }
+
+            // If the tunnel is already active, stop it before starting the new one.
+            // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
+            // the existing connection rather than switching to the new server, resulting
+            // in the app believing it is connected when it is not.
+            let currentStatus = self.currentVPN.connection.status
+            if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+                self.currentVPN.connection.stopVPNTunnel()
+            }
+
             do {
                 try self.currentVPN.connection.startVPNTunnel()
                 callback?(nil)
@@ -111,20 +121,13 @@ public final class IKEv2Profile: NetworkExtensionProfile {
 
     /// :nodoc:
     public func updatePreferences(_ callback: SuccessLibraryCallback?) {
-        currentVPN.loadFromPreferences { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
-
-            self.currentVPN.saveToPreferences { (error) in
-                if let error = error {
-                    callback?(error)
-                    return
-                }
-                callback?(nil)
-            }
-        }
+        // For IKEv2 there is nothing to update here: all preference changes
+        // (server address, on-demand rules, etc.) are applied by connect() via
+        // save(force:true) → doSave(). A standalone loadFromPreferences →
+        // saveToPreferences round-trip with no mutations races with any
+        // concurrent connect() call and causes "configuration is stale" errors.
+        log.debug("[IKEv2] updatePreferences() — skipped (no-op for IKEv2, changes applied by connect)")
+        callback?(nil)
     }
 
     /// :nodoc:
