@@ -76,7 +76,20 @@ public final class IKEv2Profile: NetworkExtensionProfile {
         if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
             currentVPN.connection.stopVPNTunnel()
         }
+
+        if currentStatus == .disconnecting {
+            await waitForDisconnected()
+        }
         try currentVPN.connection.startVPNTunnel()
+    }
+
+    private func waitForDisconnected() async {
+        let connection = currentVPN.connection
+        for await _ in NotificationCenter.default.notifications(named: .NEVPNStatusDidChange, object: connection) {
+            if connection.status == .disconnected {
+                return
+            }
+        }
     }
 
     /// :nodoc:
