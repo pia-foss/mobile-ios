@@ -144,43 +144,50 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
 
         var previousProfile: VPNProfile?
-        if (newVPNType != activeProfile?.vpnType) {
+        if newVPNType != activeProfile?.vpnType {
             previousProfile = activeProfile
         }
 
         let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
         let installBlock: SuccessLibraryCallback = { (error) in
             guard let configuration = self.vpnClientConfiguration(for: profile) else {
-                callback?(ClientError.vpnProfileUnavailable)
+                DispatchQueue.main.async { callback?(ClientError.vpnProfileUnavailable) }
                 return
             }
-            profile.save(withConfiguration: configuration, force: forcedStatuses) { (error) in
-                if let error = error {
-                    callback?(error)
-                    return
-                }
-                self.activeProfile = profile
+            Task { @MainActor in
+                do {
+                    try await profile.save(withConfiguration: configuration, force: forcedStatuses)
+                    self.activeProfile = profile
 
-                if let previousProfile = previousProfile,
-                    !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType))
-                {
-                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                    previousProfile.remove({ _ in
+                    if let previousProfile = previousProfile,
+                        !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType))
+                    {
+                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                        try? await previousProfile.remove()
                         Macros.postNotification(.PIAVPNDidInstall)
                         callback?(nil)
-                    })
-                } else {
-                    if previousProfile != nil {  // dont connect after install
-                        self.connect(nil)
+                    } else {
+                        if previousProfile != nil {  // dont connect after install
+                            self.connect(nil)
+                        }
+                        Macros.postNotification(.PIAVPNDidInstall)
+                        callback?(nil)
                     }
-                    Macros.postNotification(.PIAVPNDidInstall)
-                    callback?(nil)
+                } catch {
+                    callback?(error)
                 }
             }
         }
 
         if let previousProfile = previousProfile {
-            previousProfile.disconnect(installBlock)
+            Task {
+                do {
+                    try await previousProfile.disconnect()
+                    installBlock(nil)
+                } catch {
+                    installBlock(error)
+                }
+            }
         } else {
             if newVPNType != activeProfile?.vpnType || !forcedStatuses || forceInstall {
                 //only install if new and connected
@@ -196,8 +203,15 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.disconnect(nil)
-        activeProfile.disable(callback)
+        Task { @MainActor in
+            try? await activeProfile.disconnect()
+            do {
+                try await activeProfile.disable()
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func uninstall(_ callback: SuccessLibraryCallback?) {
@@ -205,11 +219,18 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.disconnect(nil)
-        activeProfile.remove { (error) in
-            self.activeProfile = nil
-            self.accessedDatabase.transient.vpnStatus = .disconnected
-            callback?(error)
+        Task { @MainActor in
+            try? await activeProfile.disconnect()
+            do {
+                try await activeProfile.remove()
+                self.activeProfile = nil
+                self.accessedDatabase.transient.vpnStatus = .disconnected
+                callback?(nil)
+            } catch {
+                self.activeProfile = nil
+                self.accessedDatabase.transient.vpnStatus = .disconnected
+                callback?(error)
+            }
         }
     }
 
@@ -221,8 +242,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             guard let profile = accessedConfiguration.profile(forVPNType: vpnType) else {
                 continue
             }
-            profile.disconnect(nil)
-            profile.remove(nil)
+            Task {
+                try? await profile.disconnect()
+                try? await profile.remove()
+            }
         }
     }
 
@@ -241,7 +264,14 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnClientConfigurationUnavailable)
             return
         }
-        activeProfile.connect(withConfiguration: configuration, callback)
+        Task { @MainActor in
+            do {
+                try await activeProfile.connect(withConfiguration: configuration)
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func disconnect(_ callback: SuccessLibraryCallback?) {
@@ -259,12 +289,18 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-            let log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
+        Task { @MainActor in
+            let content = try? await activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration)
+            let log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs")
             self.accessedDatabase.transient.vpnLog = log
-            activeProfile.disconnect(callback)
-        }
 
+            do {
+                try await activeProfile.disconnect()
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func updatePreferences(_ callback: SuccessLibraryCallback?) {
@@ -276,7 +312,14 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.updatePreferences(callback)
+        Task { @MainActor in
+            do {
+                try await activeProfile.updatePreferences()
+                callback?(nil)
+            } catch {
+                callback?(error)
+            }
+        }
     }
 
     public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
@@ -292,29 +335,21 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
         let shouldDisconnectFirst = (activeProfile.vpnType != IKEv2Profile.vpnType || forceDisconnect)
 
-        if shouldDisconnectFirst {
-            activeProfile.disconnect { (error) in
-                if let _ = error {
-                    callback?(error)
-                    return
+        Task { @MainActor in
+            do {
+                if shouldDisconnectFirst {
+                    try await activeProfile.disconnect()
+                } else {
+                    try await activeProfile.updatePreferences()
                 }
                 guard let configuration = self.vpnClientConfiguration() else {
                     callback?(ClientError.vpnProfileUnavailable)
                     return
                 }
-                activeProfile.connect(withConfiguration: configuration, callback)
-            }
-        } else {
-            activeProfile.updatePreferences { (error) in
-                if let _ = error {
-                    callback?(error)
-                    return
-                }
-                guard let configuration = self.vpnClientConfiguration() else {
-                    callback?(ClientError.vpnProfileUnavailable)
-                    return
-                }
-                activeProfile.connect(withConfiguration: configuration, callback)
+                try await activeProfile.connect(withConfiguration: configuration)
+                callback?(nil)
+            } catch {
+                callback?(error)
             }
         }
     }
@@ -335,12 +370,13 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration) { (usage, error) in
-            guard let usage = usage else {
+        Task { @MainActor in
+            do {
+                let usage = try await activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration)
+                callback?(usage, nil)
+            } catch {
                 callback?(nil, error)
-                return
             }
-            callback?(usage, nil)
         }
     }
 
@@ -358,8 +394,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
                 if let activeProfile {
                     if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
                         //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                        profile.disconnect(nil)
-                        profile.remove(nil)
+                        Task {
+                            try? await profile.disconnect()
+                            try? await profile.remove()
+                        }
                     }
                 }
                 continue
