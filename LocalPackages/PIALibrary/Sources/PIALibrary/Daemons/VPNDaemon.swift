@@ -119,12 +119,26 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         case .connecting, .reasserting:
 
             nextStatus = .connecting
+            // If a reconnect cycle was in progress, it has now successfully reached
+            // .connecting — clear the flag here instead of in the reconnect callback so
+            // that the intermediate .disconnecting → .disconnected status changes are
+            // suppressed (isReconnecting=true) and vpnStatus never briefly touches
+            // .disconnected between the two connecting states.
+            isReconnecting = false
+            // Reset the attempt counter each time we enter .connecting so that each
+            // new connection attempt starts fresh. This preserves the retry-indefinitely
+            // behaviour for unreachable servers: the fallback timer fires every 5s,
+            // marking one IP unavailable per tick, so the counter resets when the next
+            // .connecting status arrives and the cycle can continue without hitting max.
+            if numberOfAttempts > 0 {
+                numberOfAttempts = 0
+                updateUIWithAttemptNumber(0)
+            }
             Client.preferences.lastVPNConnectionAttempt = Date().timeIntervalSince1970
 
             if accessedDatabase.transient.vpnStatus == .disconnected,
                 self.lastKnownVpnStatus == .disconnected,
-                Client.preferences.shareServiceQualityData,
-                self.numberOfAttempts == 0
+                Client.preferences.shareServiceQualityData
             {
                 ServiceQualityManager.shared.connectionAttemptEvent()
             }
@@ -144,8 +158,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                         log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
-                        Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true) { _ in
-                            self.isReconnecting = false
+                        Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true) { error in
+                            if error != nil {
+                                // Reconnect initiation failed — clear flag immediately so the
+                                // subsequent .disconnected status change can clean up normally.
+                                self.isReconnecting = false
+                            }
+                            // On success: leave isReconnecting=true. It will be cleared in
+                            // tryUpdateStatus when .connecting status arrives, ensuring that
+                            // the intermediate .disconnecting → .disconnected transitions do
+                            // not briefly expose vpnStatus = .disconnected to the rest of the app.
                         }
                     } else {
                         log.debug("Max number of VPN reconnections. Disconnecting...")

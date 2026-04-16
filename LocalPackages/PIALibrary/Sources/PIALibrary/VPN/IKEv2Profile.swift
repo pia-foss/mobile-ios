@@ -78,17 +78,42 @@ public final class IKEv2Profile: NetworkExtensionProfile {
                 return
             }
 
+            let currentStatus = self.currentVPN.connection.status
+
             // If the tunnel is already active, stop it before starting the new one.
             // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
             // the existing connection rather than switching to the new server, resulting
             // in the app believing it is connected when it is not.
-            let currentStatus = self.currentVPN.connection.status
             if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
                 self.currentVPN.connection.stopVPNTunnel()
             }
 
+            if currentStatus == .disconnecting {
+                self.waitForDisconnectedThenStart(callback: callback)
+            } else {
+                do {
+                    try self.currentVPN.connection.startVPNTunnel()
+                    callback?(nil)
+                } catch let e {
+                    callback?(e)
+                }
+            }
+        }
+    }
+
+    private func waitForDisconnectedThenStart(callback: SuccessLibraryCallback?) {
+        var observer: NSObjectProtocol?
+        observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: currentVPN.connection, queue: .main) { [currentVPN] _ in
+            guard currentVPN.connection.status == .disconnected else {
+                return
+            }
+
+            if let observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
+
             do {
-                try self.currentVPN.connection.startVPNTunnel()
+                try currentVPN.connection.startVPNTunnel()
                 callback?(nil)
             } catch let e {
                 callback?(e)
