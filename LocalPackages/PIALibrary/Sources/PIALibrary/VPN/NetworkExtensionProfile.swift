@@ -55,21 +55,22 @@ extension NetworkExtensionProfile {
      - Parameter vpn: The target `NEVPNManager` to which the generated protocol will be committed.
      - Parameter configuration: The `VPNConfiguration` to use for generating the `NEVPNProtocol` object.
      - Parameter force: If `true`, apply changes forcibly.
-     - Parameter callback: Returns `nil` on success.
      - Seealso: `NetworkExtensionProfile.generatedProtocol(...)`
      */
-    public func doSave(_ vpn: NEVPNManager, withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
+    public func doSave(_ vpn: NEVPNManager, withConfiguration configuration: VPNConfiguration, force: Bool) async throws {
         do {
             vpn.protocolConfiguration = try generatedProtocol(withConfiguration: configuration)
         } catch {
-            callback?(error)
-            return
+            throw error
         }
 
         let protocolConfiguration = vpn.protocolConfiguration!  // Safe to force unwrap
 
         vpn.localizedDescription = configuration.name
-        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
+        vpn.isOnDemandEnabled =
+            Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled
+            ? configuration.isOnDemand
+            : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
         let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
 
@@ -115,15 +116,8 @@ extension NetworkExtensionProfile {
         log.debug("Raw manager: \(vpn)")
 
         vpn.isEnabled = true
-        vpn.saveToPreferences { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
-            vpn.loadFromPreferences { (error) in
-                callback?(nil)
-            }
-        }
+        try await vpn.saveToPreferences()
+        try await vpn.loadFromPreferences()
     }
 
     private func configureOnDemandOnWiFiNetworksFor(
