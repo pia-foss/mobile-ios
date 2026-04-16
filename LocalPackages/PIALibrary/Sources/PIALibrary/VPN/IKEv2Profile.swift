@@ -59,116 +59,72 @@ public final class IKEv2Profile: NetworkExtensionProfile {
     }
 
     /// :nodoc:
-    public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
-
-        currentVPN.loadFromPreferences { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
-            self.doSave(self.currentVPN, withConfiguration: configuration, force: force, callback)
-        }
+    public func save(withConfiguration configuration: VPNConfiguration, force: Bool) async throws {
+        try await currentVPN.loadFromPreferences()
+        try await doSave(currentVPN, withConfiguration: configuration, force: force)
     }
 
     /// :nodoc:
-    public func connect(withConfiguration configuration: VPNConfiguration, _ callback: SuccessLibraryCallback?) {
-        save(withConfiguration: configuration, force: true) { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
+    public func connect(withConfiguration configuration: VPNConfiguration) async throws {
+        try await save(withConfiguration: configuration, force: true)
 
-            let currentStatus = self.currentVPN.connection.status
-
-            // If the tunnel is already active, stop it before starting the new one.
-            // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
-            // the existing connection rather than switching to the new server, resulting
-            // in the app believing it is connected when it is not.
-            if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
-                self.currentVPN.connection.stopVPNTunnel()
-            }
-
-            if currentStatus == .disconnecting {
-                self.waitForDisconnectedThenStart(callback: callback)
-            } else {
-                do {
-                    try self.currentVPN.connection.startVPNTunnel()
-                    callback?(nil)
-                } catch let e {
-                    callback?(e)
-                }
-            }
+        // If the tunnel is already active, stop it before starting the new one.
+        // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
+        // the existing connection rather than switching to the new server, resulting
+        // in the app believing it is connected when it is not.
+        let currentStatus = currentVPN.connection.status
+        if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+            currentVPN.connection.stopVPNTunnel()
         }
+
+        if currentStatus == .disconnecting {
+            await waitForDisconnected()
+        }
+        try currentVPN.connection.startVPNTunnel()
     }
 
-    private func waitForDisconnectedThenStart(callback: SuccessLibraryCallback?) {
-        var observer: NSObjectProtocol?
-        observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: currentVPN.connection, queue: .main) { [currentVPN] _ in
-            guard currentVPN.connection.status == .disconnected else {
+    private func waitForDisconnected() async {
+        let connection = currentVPN.connection
+        for await _ in NotificationCenter.default.notifications(named: .NEVPNStatusDidChange, object: connection) {
+            if connection.status == .disconnected {
                 return
-            }
-
-            if let observer {
-                NotificationCenter.default.removeObserver(observer)
-            }
-
-            do {
-                try currentVPN.connection.startVPNTunnel()
-                callback?(nil)
-            } catch let e {
-                callback?(e)
             }
         }
     }
 
     /// :nodoc:
-    public func disconnect(_ callback: SuccessLibraryCallback?) {
-        currentVPN.loadFromPreferences { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
+    public func disconnect() async throws {
+        try await currentVPN.loadFromPreferences()
 
-            // prevent reconnection
-            self.currentVPN.isOnDemandEnabled = false
+        // prevent reconnection
+        currentVPN.isOnDemandEnabled = false
 
-            self.currentVPN.saveToPreferences { (error) in
-                if let error = error {
-                    self.currentVPN.connection.stopVPNTunnel()
-                    callback?(error)
-                    return
-                }
-                self.currentVPN.connection.stopVPNTunnel()
-                callback?(nil)
-            }
-        }
+        defer { currentVPN.connection.stopVPNTunnel() }
+        try await currentVPN.saveToPreferences()
     }
 
     /// :nodoc:
-    public func updatePreferences(_ callback: SuccessLibraryCallback?) {
+    public func updatePreferences() async throws {
         // For IKEv2 there is nothing to update here: all preference changes
         // (server address, on-demand rules, etc.) are applied by connect() via
         // save(force:true) → doSave(). A standalone loadFromPreferences →
         // saveToPreferences round-trip with no mutations races with any
         // concurrent connect() call and causes "configuration is stale" errors.
         log.debug("[IKEv2] updatePreferences() — skipped (no-op for IKEv2, changes applied by connect)")
-        callback?(nil)
     }
 
     /// :nodoc:
-    public func remove(_ callback: SuccessLibraryCallback?) {
-        currentVPN.loadFromPreferences { (error) in
-            self.currentVPN.removeFromPreferences(completionHandler: callback)
-        }
+    public func remove() async throws {
+        try await currentVPN.loadFromPreferences()
+        try await currentVPN.removeFromPreferences()
     }
 
     /// :nodoc:
-    public func disable(_ callback: SuccessLibraryCallback?) {
-        currentVPN.loadFromPreferences { (error) in
-            self.currentVPN.isEnabled = false
-            self.currentVPN.isOnDemandEnabled = false
-            self.currentVPN.saveToPreferences(completionHandler: callback)
-        }
+    public func disable() async throws {
+        try await currentVPN.loadFromPreferences()
+        currentVPN.isEnabled = false
+        currentVPN.isOnDemandEnabled = false
+        try await currentVPN.saveToPreferences()
     }
 
     /// :nodoc:
@@ -177,13 +133,13 @@ public final class IKEv2Profile: NetworkExtensionProfile {
     }
 
     /// :nodoc:
-    public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
-        callback?(self.currentVPN.description, nil)
+    public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?) async throws -> String {
+        currentVPN.description
     }
 
     /// :nodoc:
-    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?) {
-        callback?(nil, ClientError.unsupported)
+    public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?) async throws -> Usage {
+        throw ClientError.unsupported
     }
 
     // MARK: NetworkExtensionProfile

@@ -54,106 +54,52 @@
 
         /// :nodoc:
         public func prepare() {
-            find(completionHandler: nil)
+            Task { try? await find() }
         }
 
         /// :nodoc:
-        public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(error)
-                    return
-                }
-                self.doSave(vpn, withConfiguration: configuration, force: force, callback)
-            }
+        public func save(withConfiguration configuration: VPNConfiguration, force: Bool) async throws {
+            let vpn = try await find()
+            try await doSave(vpn, withConfiguration: configuration, force: force)
         }
 
         /// :nodoc:
-        public func connect(withConfiguration configuration: VPNConfiguration, _ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(error)
-                    return
-                }
-
-                self.doSave(vpn, withConfiguration: configuration, force: true) { (error) in
-                    if let _ = error {
-                        callback?(error)
-                        return
-                    }
-                    do {
-                        let session = vpn.connection as? NETunnelProviderSession
-                        try session?.startTunnel(options: nil)
-                        callback?(nil)
-                    } catch let e {
-                        callback?(e)
-                    }
-                }
-            }
+        public func connect(withConfiguration configuration: VPNConfiguration) async throws {
+            let vpn = try await find()
+            try await doSave(vpn, withConfiguration: configuration, force: true)
+            let session = vpn.connection as? NETunnelProviderSession
+            try session?.startTunnel(options: nil)
         }
 
         /// :nodoc:
-        public func disconnect(_ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(error)
-                    return
-                }
+        public func disconnect() async throws {
+            let vpn = try await find()
 
-                // prevent reconnection
-                vpn.isOnDemandEnabled = false
+            // prevent reconnection
+            vpn.isOnDemandEnabled = false
 
-                vpn.saveToPreferences { (error) in
-                    if let error = error {
-                        vpn.connection.stopVPNTunnel()
-                        callback?(error)
-                        return
-                    }
-                    vpn.connection.stopVPNTunnel()
-                    callback?(nil)
-                }
-            }
+            defer { vpn.connection.stopVPNTunnel() }
+            try await vpn.saveToPreferences()
         }
 
         /// :nodoc:
-        public func updatePreferences(_ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(error)
-                    return
-                }
-
-                vpn.saveToPreferences { (error) in
-                    if let error = error {
-                        callback?(error)
-                        return
-                    }
-                    callback?(nil)
-                }
-            }
+        public func updatePreferences() async throws {
+            let vpn = try await find()
+            try await vpn.saveToPreferences()
         }
 
         /// :nodoc:
-        public func disable(_ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    return
-                }
-                vpn.isEnabled = false
-                vpn.isOnDemandEnabled = false
-                vpn.saveToPreferences(completionHandler: callback)
-            }
+        public func disable() async throws {
+            let vpn = try await find()
+            vpn.isEnabled = false
+            vpn.isOnDemandEnabled = false
+            try await vpn.saveToPreferences()
         }
 
         /// :nodoc:
-        public func remove(_ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(nil)
-                    return
-                }
-                vpn.removeFromPreferences(completionHandler: callback)
-            }
+        public func remove() async throws {
+            let vpn = try await find()
+            try await vpn.removeFromPreferences()
         }
 
         /// :nodoc:
@@ -190,68 +136,33 @@
         }
 
         /// :nodoc:
-        public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(nil, error)
-                    return
-                }
+        public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?) async throws -> String {
+            let vpn = try await find()
 
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            guard let providerConfiguration = customConfiguration as? OpenVPNProvider.Configuration else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            guard let recentLog = self.lastLogSnapshot(withProviderConfiguration: providerConfiguration) else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            callback?(recentLog, nil)
-                            return
-                        }
-                        let log = String(data: data, encoding: .utf8)
-                        callback?(log, nil)
-                    }
-                } catch let e {
-                    callback?(nil, e)
-                }
+            guard
+                let session = vpn.connection as? NETunnelProviderSession,
+                let data = try await session.sendProviderMessage(OpenVPNProvider.Message.requestLog.data),
+                !data.isEmpty
+            else {
+                return (customConfiguration as? OpenVPNProvider.Configuration).flatMap { lastLogSnapshot(withProviderConfiguration: $0) } ?? ""
             }
+
+            return String(data: data, encoding: .utf8) ?? ""
         }
 
         /// :nodoc:
-        public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((Usage?, Error?) -> Void)?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(nil, error)
-                    return
-                }
+        public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?) async throws -> Usage {
+            let vpn = try await find()
 
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.sendProviderMessage(OpenVPNProvider.Message.dataCount.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            guard let _ = customConfiguration as? OpenVPNProvider.Configuration else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            callback?(nil, ClientError.vpnProfileUnavailable)
-                            return
-                        }
-
-                        let downloaded = data.getInt64(start: 0)
-                        let uploaded = data.getInt64(start: 8)
-                        let usage = Usage(uploaded: uploaded, downloaded: downloaded)
-                        callback?(
-                            usage,
-                            nil)
-                    }
-                } catch let e {
-                    callback?(nil, e)
-                }
+            guard
+                let session = vpn.connection as? NETunnelProviderSession,
+                let data = try await session.sendProviderMessage(OpenVPNProvider.Message.dataCount.data),
+                !data.isEmpty
+            else {
+                throw ClientError.vpnProfileUnavailable
             }
+
+            return Usage(uploaded: data.getInt64(start: 8), downloaded: data.getInt64(start: 0))
         }
 
         // MARK: NetworkExtensionProfile
@@ -316,33 +227,27 @@
 
         // MARK: Helpers
 
-        private func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {
-            PIATunnelProfile.find(withBundleIdentifier: bundleIdentifier) { (vpn, error) in
-                self.native = vpn
-                completionHandler?(vpn, error)
-            }
+        @discardableResult
+        private func find() async throws -> NETunnelProviderManager {
+            let vpn = try await PIATunnelProfile.findWithBundleIdentifier(bundleIdentifier)
+            self.native = vpn
+            return vpn
         }
 
-        private static func find(withBundleIdentifier identifier: String?, completionHandler: LibraryCallback<NETunnelProviderManager>?) {
-            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
-                guard let managers = managers else {
-                    completionHandler?(nil, error)
-                    return
+        private static func findWithBundleIdentifier(_ identifier: String?) async throws -> NETunnelProviderManager {
+            let managers = try await NETunnelProviderManager.loadAllFromPreferences()
+            var foundVPN: NETunnelProviderManager?
+            for m in managers {
+                guard let tunnelProtocol = m.protocolConfiguration as? NETunnelProviderProtocol else {
+                    continue
                 }
-                var foundVPN: NETunnelProviderManager?
-                for m in managers {
-                    guard let tunnelProtocol = m.protocolConfiguration as? NETunnelProviderProtocol else {
-                        continue
-                    }
-                    guard ((identifier == nil) || (tunnelProtocol.providerBundleIdentifier == identifier)) else {
-                        continue
-                    }
-                    foundVPN = m
-                    break
+                guard (identifier == nil) || (tunnelProtocol.providerBundleIdentifier == identifier) else {
+                    continue
                 }
-                let vpn = foundVPN ?? NETunnelProviderManager()
-                completionHandler?(vpn, nil)
+                foundVPN = m
+                break
             }
+            return foundVPN ?? NETunnelProviderManager()
         }
 
         private func lastLogSnapshot(withProviderConfiguration providerConfiguration: OpenVPNProvider.Configuration) -> String? {
