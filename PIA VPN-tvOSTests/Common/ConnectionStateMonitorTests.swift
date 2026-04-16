@@ -123,7 +123,7 @@ class ConnectionStateMonitorTests: XCTestCase {
         fixture.vpnStatusMonitorMock.status.send(.connecting)
         instantiateSut()
         let connectionStateExp = expectation(description: "Wait for expected conn state")
-        fulfillOnConnectionState(.connected, expectation: connectionStateExp)
+        fulfillOnConnectionState(.disconnecting, expectation: connectionStateExp)
 
         // GIVEN that the conection intent is 'disconnect'
         fixture.vpnConnectionUseCaseMock.getConnectionIntentResult.send(.disconnect)
@@ -132,10 +132,9 @@ class ConnectionStateMonitorTests: XCTestCase {
         fixture.vpnStatusMonitorMock.status.send(.connected)
 
         wait(for: [connectionStateExp], timeout: 3)
-        // THEN the connection state is 'connected'
-        XCTAssertEqual(capturedConnectionStates.last!, .connected)
+        // THEN the connection state is 'disconnecting' (disconnect intent takes priority over connected status)
+        XCTAssertEqual(capturedConnectionStates.last!, .disconnecting)
 
     }
-
 
 }
