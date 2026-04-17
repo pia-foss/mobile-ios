@@ -102,22 +102,11 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // The initial state of the connection intent is 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
 
-        var connectionIntentFinishedError: Error?
-        sut.getConnectionIntent()
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    connectionIntentFinishedError = error
-                default:
-                    break
-                }
-            } receiveValue: { newValue in
-            }.store(in: &subscriptions)
-
         // WHEN trying to connect
         try? await sut.connect()
-        // THEN an error is thown
-        XCTAssertNotNil(connectionIntentFinishedError)
+
+        // THEN the connection intent is reset back to 'none' (publisher never fails, error is thrown instead)
+        XCTAssertEqual(sut.connectionIntent.value, .none)
     }
 
     func test_disconnect() async throws {
@@ -159,22 +148,11 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // The initial state of the connection intent is 'none'
         XCTAssertEqual(sut.connectionIntent.value, .none)
 
-        var disconnectionIntentFinishedError: Error?
-        sut.getConnectionIntent()
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    disconnectionIntentFinishedError = error
-                default:
-                    break
-                }
-            } receiveValue: { newValue in
-            }.store(in: &subscriptions)
-
         // WHEN trying to disconnect
         try? await sut.disconnect()
-        // THEN an error is thown
-        XCTAssertNotNil(disconnectionIntentFinishedError)
+
+        // THEN the connection intent is reset back to 'none' (publisher never fails, error is thrown instead)
+        XCTAssertEqual(sut.connectionIntent.value, .none)
     }
 
 }

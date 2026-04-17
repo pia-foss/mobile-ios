@@ -7,7 +7,7 @@ private let log = PIALogger.logger(for: VpnConnectionUseCase.self)
 public protocol VpnConnectionUseCaseType {
     func connect() async throws
     func disconnect() async throws
-    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error>
+    func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Never>
 }
 
 public enum VpnConnectionIntent: Equatable {
@@ -18,7 +18,7 @@ public enum VpnConnectionIntent: Equatable {
 
 public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
 
-    internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Error>
+    internal var connectionIntent: CurrentValueSubject<VpnConnectionIntent, Never>
 
     let serverProvider: ServerProviderType
     let vpnProvider: VPNStatusProviderType
@@ -45,7 +45,7 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
             vpnProvider.connect { error in
                 if let error = error {
                     log.error("VPN connect failed: \(error.localizedDescription)")
-                    self.connectionIntent.send(completion: .failure(error))
+                    self.connectionIntent.send(.none)
                     continuation.resume(throwing: error)
                 } else {
                     log.info("VPN connect call succeeded")
@@ -64,7 +64,7 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
             vpnProvider.disconnect { error in
                 if let error = error {
                     log.error("VPN disconnect failed: \(error.localizedDescription)")
-                    self.connectionIntent.send(completion: .failure(error))
+                    self.connectionIntent.send(.none)
                     continuation.resume(throwing: error)
                 } else {
                     log.info("VPN disconnect call succeeded")
@@ -74,7 +74,7 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
         }
     }
 
-    public func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Error> {
+    public func getConnectionIntent() -> AnyPublisher<VpnConnectionIntent, Never> {
         return connectionIntent.eraseToAnyPublisher()
     }
 }
