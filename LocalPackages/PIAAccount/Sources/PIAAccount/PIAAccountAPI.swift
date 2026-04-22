@@ -126,10 +126,10 @@ public protocol PIAAccountAPI {
     func deleteAccount() async throws
 
     /// Retrieves client connection status
-    /// - Parameter requestTimeoutMillis: Optional timeout in milliseconds (default: 30000ms)
+    /// - Parameter requestTimeoutMillis: Timeout in milliseconds
     /// - Returns: Client status information
     /// - Throws: PIAAccountError if the request fails
-    func clientStatus(requestTimeoutMillis: Int) async throws -> ClientStatusInformation
+    func clientStatus(requestTimeoutMillis: UInt) async throws -> ClientStatusInformation
 
     // MARK: - Email Management
 

@@ -204,7 +204,7 @@ public final class PIAAccountClient: PIAAccountAPI {
         await updateCachedTokens()
     }
 
-    public func clientStatus(requestTimeoutMillis: Int = 30000) async throws -> ClientStatusInformation {
+    public func clientStatus(requestTimeoutMillis: UInt) async throws -> ClientStatusInformation {
         return try await endpointManager.executeWithFailover(
             path: .clientStatus,
             method: .get

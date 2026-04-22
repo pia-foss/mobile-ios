@@ -118,13 +118,15 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         }
 
         isCheckingConnectivity.withLock { $0 = true }
-        accessedWebServices.taskForConnectivityCheck { [weak self] (connectivity, error) in
+        Task { [weak self] in
             guard let self else { return }
+            let result = await self.accessedWebServices.connectivityCheck()
             self.isCheckingConnectivity.withLock { $0 = false }
 
-            guard let connectivity = connectivity else {
+            switch result {
+            case .failure(let error):
                 self.failedConnectivityAttempts += 1
-                log.error("Failed to check network connectivity (error: \(error?.localizedDescription ?? ""))")
+                log.error("Failed to check network connectivity (error: \(error))")
 
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
                     log.debug("Giving up, network is unreachable")
@@ -140,23 +142,22 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                     self.checkConnectivityOrRetry()
                 }
 
-                return
+            case .success(let connectivity):
+                self.failedConnectivityAttempts = 0
+                self.accessedDatabase.transient.isInternetReachable = true
+                log.debug("Saving new info about network connectivity: \(connectivity)")
+
+                let ipAddress = connectivity.ipAddress
+                if connectivity.isVPN {
+                    self.accessedDatabase.transient.vpnIP = ipAddress
+                    log.debug("VPN IP -> \(ipAddress)")
+                } else {
+                    self.accessedDatabase.plain.publicIP = ipAddress
+                    log.debug("Public IP -> \(ipAddress)")
+                }
+
+                Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             }
-
-            self.failedConnectivityAttempts = 0
-            self.accessedDatabase.transient.isInternetReachable = true
-            log.debug("Saving new info about network connectivity: \(connectivity)")
-
-            let ipAddress = connectivity.ipAddress
-            if connectivity.isVPN {
-                self.accessedDatabase.transient.vpnIP = ipAddress
-                log.debug("VPN IP -> \(ipAddress)")
-            } else {
-                self.accessedDatabase.plain.publicIP = ipAddress
-                log.debug("Public IP -> \(ipAddress)")
-            }
-
-            Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
     }
 
