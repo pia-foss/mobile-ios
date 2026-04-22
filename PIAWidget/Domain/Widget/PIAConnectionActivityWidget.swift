@@ -60,26 +60,33 @@ struct PIAConnectionActivityWidget: Widget {
                     }
                     .frame(minWidth: (UIScreen.main.bounds.size.width * 0.56), alignment: .leading)
                     .dynamicIsland(verticalPlacement: .belowIfTooWide)
+                }
 
-                }
-                DynamicIslandExpandedRegion(.bottom) {
-                    // Empty
-                }
             } compactLeading: {
                 // When the island is wider than the display cutout
                 PIACircleIcon(size: 28.0)
             } compactTrailing: {
                 // When the island is wider than the display cutout
-                PIACircleImageView(
-                    size: 24,
-                    image: context.state.connected ? Asset.greenCheckmark.swiftUIImage : Asset.disconnectedCross.swiftUIImage
-                )
+                ConnectionStatusIcon(context: context)
             } minimal: {
                 // This is used when there are multiple activities
-                PIACircleIcon(size: 28.0)
+                ConnectionStatusIcon(context: context)
             }
             .contentMargins(.leading, 0, for: .compactLeading)
-
         }
+    }
+}
+
+@available(iOS 16.1, *)
+private struct ConnectionStatusIcon: View {
+    let context: ActivityViewContext<PIAConnectionAttributes>
+
+    var body: some View {
+        PIACircleImageView(
+            size: 24,
+            image: context.state.connected
+                ? Asset.greenCheckmark.swiftUIImage
+                : Asset.disconnectedCross.swiftUIImage
+        )
     }
 }
