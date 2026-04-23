@@ -38,7 +38,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
     private let reachability = try! Reachability(hostname: "8.8.8.8")
 
-    private var isCheckingConnectivity: Mutex<Bool> = .init(false)
+    private lazy var checker = ConnectivityChecker(webServices: accessedWebServices)
 
     private var failedConnectivityAttempts: Int = 0
 
@@ -104,12 +104,6 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         guard hasEnabledUpdates else {
             return
         }
-        guard !isCheckingConnectivity.withLock(\.self) else {
-            log.debug("Skipped \(#function), is already checking...")
-            return
-        }
-
-        log.debug("Checking network connectivity...")
 
         // Clear vpnIP if VPN is not connected
         if accessedDatabase.transient.vpnStatus != .connected {
@@ -117,14 +111,15 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
 
-        isCheckingConnectivity.withLock { $0 = true }
         Task { [weak self] in
             guard let self else { return }
-            let result = await self.accessedWebServices.connectivityCheck()
-            self.isCheckingConnectivity.withLock { $0 = false }
 
-            switch result {
-            case .failure(let error):
+            log.debug("Checking connectivity.")
+            switch await self.checker.checkConnectivity() {
+            case .failure(.alreadyChecking):
+                log.debug("Skipping: already checking.")
+
+            case .failure(.other(let error)):
                 self.failedConnectivityAttempts += 1
                 log.error("Failed to check network connectivity (error: \(error))")
 
@@ -256,5 +251,29 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             }
             completionHandler?(pingTime)
         }
+    }
+}
+
+// MARK: - ConnectivityChecker
+
+private actor ConnectivityChecker {
+    enum Error: Swift.Error {
+        case alreadyChecking
+        case other(Swift.Error)
+    }
+
+    private var isChecking = false
+    private let webServices: WebServices
+
+    init(webServices: WebServices) {
+        self.webServices = webServices
+    }
+
+    func checkConnectivity() async -> Result<ConnectivityStatus, Error> {
+        guard !isChecking else { return .failure(.alreadyChecking) }
+        isChecking = true
+        let result = await webServices.connectivityCheck()
+        isChecking = false
+        return result.mapError(Error.other(_:))
     }
 }
