@@ -2,7 +2,7 @@ import Foundation
 import Security
 
 /// URLSession delegate that performs SSL certificate pinning
-final class CertificatePinner: NSObject, URLSessionDelegate, @unchecked Sendable {
+final class CertificatePinner: NSObject, URLSessionDelegate {
     private let certificateData: Data
     private let hostname: String?
     private let commonName: String?
