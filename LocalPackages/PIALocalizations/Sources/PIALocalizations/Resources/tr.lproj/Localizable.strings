@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Deneme planı";
 "account.unauthorized" = "Bir sorun oluştu. Lütfen tekrar oturum açmayı deneyin";
 "account.delete" = "Hesabı Sil";
-"account.survey.message" = "PIA'yı daha iyi yapmak ister misiniz? Nasıl iyileştirebileceğimizi belirtin!\nAnkete Katılın";
-"account.survey.messageLink" = "Ankete Katıl";
 
 // SETTINGS
 

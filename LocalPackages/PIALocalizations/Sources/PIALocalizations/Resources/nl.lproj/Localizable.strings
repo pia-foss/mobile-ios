@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Proefabonnement";
 "account.unauthorized" = "Er is iets fout gegaan. Probeer opnieuw in te loggen.";
 "account.delete" = "Verwijder account";
-"account.survey.message" = "Wil je helpen om PIA beter te maken? Laat ons weten hoe we kunnen verbeteren!\nVul de enquête in";
-"account.survey.messageLink" = "Vul de enquête in";
 
 // SETTINGS
 

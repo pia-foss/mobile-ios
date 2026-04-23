@@ -108,10 +108,6 @@ final class AppPreferences {
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
 
-        // Survey
-        static let userInteractedWithSurvey = "userInteractedWithSurvey"
-        static let successConnectionsUntilSurvey = "successConnectionsUntilSurvey"
-
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
         static let stagingVersion = "StagingVersion"
@@ -582,24 +578,6 @@ final class AppPreferences {
         }
     }
 
-    var userInteractedWithSurvey: Bool {
-        get {
-            return defaults.bool(forKey: Entries.userInteractedWithSurvey)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.userInteractedWithSurvey)
-        }
-    }
-
-    var successConnectionsUntilSurvey: Int? {
-        get {
-            return defaults.value(forKey: Entries.successConnectionsUntilSurvey) as? Int
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.successConnectionsUntilSurvey)
-        }
-    }
-
     private init() {
         self.defaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
         #if os(iOS)
@@ -637,7 +615,6 @@ final class AppPreferences {
                 Entries.showServiceMessages: false,
                 Entries.disablesMultiDipTokens: true,
                 Entries.checksDipExpirationRequest: true,
-                Entries.userInteractedWithSurvey: false,
                 Entries.stagingVersion: 0,
                 Entries.appEnvironmentIsProduction: Client.environment == .production ? true : false
             ])
@@ -910,8 +887,6 @@ final class AppPreferences {
         #if os(iOS)
             MessagesManager.shared.reset()
         #endif
-        userInteractedWithSurvey = false
-        successConnectionsUntilSurvey = nil
         Client.preferences.lastKnownException = nil
     }
 

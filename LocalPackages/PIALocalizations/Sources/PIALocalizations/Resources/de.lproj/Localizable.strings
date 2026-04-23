@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Testversion";
 "account.unauthorized" = "Etwas ging schief. Bitte versuchen, erneut anzumelden";
 "account.delete" = "Konto löschen";
-"account.survey.message" = "Willst du helfen, PIA besser zu machen? Lass uns wissen, wie wir uns verbessern können!\nNimm an der Umfrage teil";
-"account.survey.messageLink" = "An der Umfrage teilnehmen";
 
 // SETTINGS
 

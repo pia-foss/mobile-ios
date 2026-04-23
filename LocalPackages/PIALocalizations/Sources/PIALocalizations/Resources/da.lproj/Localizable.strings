@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Prøveabonnement";
 "account.unauthorized" = "Noget gik galt. Prøv at logge på igen.";
 "account.delete" = "Slet konto";
-"account.survey.message" = "Vil du hjælpe med at gøre PIA bedre? Fortæl os, hvordan vi kan forbedre platformen!\nTag undersøgelsen";
-"account.survey.messageLink" = "Tag undersøgelsen";
 
 // SETTINGS
 

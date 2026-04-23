@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "แผนทดลองใช้";
 "account.unauthorized" = "บางอย่างผิดปกติ โปรดลองลงชื่อเข้าใช้อีกครั้ง";
 "account.delete" = "ลบบัญชี";
-"account.survey.message" = "ต้องการช่วยทำให้ PIA ดีขึ้นหรือไม่? แจ้งให้เราทราบว่าเราจะปรับปรุงได้อย่างไร!\nทำแบบสำรวจ";
-"account.survey.messageLink" = "ทำแบบสำรวจ";
 
 // SETTINGS
 

@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Plan próbny";
 "account.unauthorized" = "Coś poszło nie tak. zalogować się ponownie.";
 "account.delete" = "Usuń konto";
-"account.survey.message" = "Chcesz pomóc ulepszyć PIA? Daj nam znać, jak możemy to zrobić!\nWeź udział w ankiecie";
-"account.survey.messageLink" = "Weź udział w ankiecie";
 
 // SETTINGS
 

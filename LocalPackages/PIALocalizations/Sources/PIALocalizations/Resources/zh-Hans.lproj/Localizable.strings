@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "试用套餐";
 "account.unauthorized" = "出现问题。请尝试重新登录";
 "account.delete" = "删除账户";
-"account.survey.message" = "想要帮助改进 PIA 吗? 欢迎您提供反馈！\n填写调查问卷";
-"account.survey.messageLink" = "填写调查问卷";
 
 // SETTINGS
 
