@@ -136,6 +136,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private var serversConfigurationCopy: ServersBundle.Configuration?
 
     private var pingByServerIdentifier: [String: Int] = [:]
+    private let pingQueue = DispatchQueue(label: "com.pia.userdefaultsstore.ping")
 
     init() {
         backend = UserDefaults.standard
@@ -151,7 +152,9 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
 
     private func loadComplexMaps() {
-        pingByServerIdentifier = backend.dictionary(forKey: Entries.pingByServerIdentifier) as? [String: Int] ?? [:]
+        pingQueue.sync {
+            pingByServerIdentifier = backend.dictionary(forKey: Entries.pingByServerIdentifier) as? [String: Int] ?? [:]
+        }
     }
 
     deinit {
@@ -403,27 +406,31 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     }
 
     func ping(forServerIdentifier serverIdentifier: String) -> Int? {
-        return pingByServerIdentifier[serverIdentifier]
+        return pingQueue.sync { pingByServerIdentifier[serverIdentifier] }
     }
 
     func setPing(_ ping: Int, forServerIdentifier serverIdentifier: String) {
-
-        if let currentResponseTime = pingByServerIdentifier[serverIdentifier] {
-            if currentResponseTime > ping {
+        pingQueue.sync {
+            if let currentResponseTime = pingByServerIdentifier[serverIdentifier] {
+                if currentResponseTime > ping {
+                    pingByServerIdentifier[serverIdentifier] = ping
+                }
+            } else {
                 pingByServerIdentifier[serverIdentifier] = ping
             }
-        } else {
-            pingByServerIdentifier[serverIdentifier] = ping
         }
-
     }
 
     func serializePings() {
-        backend.set(pingByServerIdentifier, forKey: Entries.pingByServerIdentifier)
+        pingQueue.sync {
+            backend.set(pingByServerIdentifier, forKey: Entries.pingByServerIdentifier)
+        }
     }
 
     func clearPings() {
-        pingByServerIdentifier.removeAll()
+        pingQueue.sync {
+            pingByServerIdentifier.removeAll()
+        }
     }
 
     // MARK: VPN
