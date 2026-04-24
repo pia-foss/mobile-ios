@@ -65,7 +65,7 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
 
     var vpnIP: String? {
         didSet {
-            log.debug("Did set \(#function): \(String(describing: vpnIP))")
+            log.debug("Did set \(#function): \(vpnIP ?? "nil")")
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
     }

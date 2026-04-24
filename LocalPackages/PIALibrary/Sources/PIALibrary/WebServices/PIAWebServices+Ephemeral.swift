@@ -27,14 +27,12 @@ private let log = PIALogger.logger(for: PIAWebServices.self)
 
 extension PIAWebServices {
 
-    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
-        Task { @MainActor in
-            do {
-                let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 10000)
-                callback?(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected), nil)
-            } catch {
-                callback?(nil, error)
-            }
+    func connectivityCheck() async -> Result<ConnectivityStatus, Error> {
+        do {
+            let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 1_000)
+            return .success(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected))
+        } catch {
+            return .failure(error)
         }
     }
 
