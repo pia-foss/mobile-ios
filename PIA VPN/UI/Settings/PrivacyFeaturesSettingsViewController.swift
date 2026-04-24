@@ -51,6 +51,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     }
 
     private func updateSections() {
+        guard let pendingPreferences else { return }
+
         // Show Leak protection settings when:
         // - The feature flag is ON (`showLeakProtection`)
         // - Wireguard or OpenVPN is NOT selected
@@ -115,6 +117,7 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     }
 
     @objc private func refreshPersistentConnectionValue() {
+        guard let pendingPreferences else { return }
         pendingPreferences.isPersistentConnection = Client.preferences.isPersistentConnection
         updateSections()
         tableView.reloadData()
@@ -371,17 +374,7 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
 
 extension PrivacyFeaturesSettingsViewController {
     func isCurrentProtocolWireguardOrOpenVPN() -> Bool {
-
-        // Selected protocol is OpenVPN
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            return true
-        }
-
-        // Selected protocol is Wireguard
-        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-            return true
-        }
-
-        return false
+        let vpnType = pendingPreferences?.vpnType
+        return vpnType == PIATunnelProfile.vpnType || vpnType == PIAWGTunnelProfile.vpnType
     }
 }
