@@ -232,7 +232,7 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
-        nc.addObserver(self, selector: #selector(dismissModalViewController), name: .PIADashboardShouldDismissModal, object: nil)
+        nc.addObserver(self, selector: #selector(handleDismissModal), name: .PIADashboardShouldDismissModal, object: nil)
     }
 
     private func removeObservers() {
@@ -808,7 +808,11 @@ final class DashboardViewController: AutolayoutViewController {
         #endif
     }
 
-    @objc private func dismissModalViewController(completion: (() -> Void)? = nil) {
+    @objc private func handleDismissModal() {
+        dismissModalViewController()
+    }
+
+    private func dismissModalViewController(completion: (() -> Void)? = nil) {
         if presentedViewController != nil {
             dismiss(animated: false, completion: completion)
         } else {
