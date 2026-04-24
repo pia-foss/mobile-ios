@@ -76,13 +76,6 @@ public enum L10n {
         public static let message = L10n.tr("Localizable", "account.subscriptions.short.message", fallback: "Manage subscription")
       }
     }
-    public enum Survey {
-      /// Want to help make PIA better? Let us know how we can improve!
-      /// Take The Survey
-      public static let message = L10n.tr("Localizable", "account.survey.message", fallback: "Want to help make PIA better? Let us know how we can improve!\nTake The Survey")
-      /// Take The Survey
-      public static let messageLink = L10n.tr("Localizable", "account.survey.messageLink", fallback: "Take The Survey")
-    }
     public enum Username {
       /// Username
       public static let caption = L10n.tr("Localizable", "account.username.caption", fallback: "Username")

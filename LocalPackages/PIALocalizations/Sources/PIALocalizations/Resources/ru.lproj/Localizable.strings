@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Пробный план";
 "account.unauthorized" = "Что-то пошло не так. Попробуйте выполнить вход еще раз";
 "account.delete" = "﻿Удалить аккаунт";
-"account.survey.message" = "Хотите помочь сделать PIA лучше? Подскажите нам, что можно изменить!\nПройти опрос";
-"account.survey.messageLink" = "Пройти опрос";
 
 // SETTINGS
 

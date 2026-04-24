@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "Plan de prueba";
 "account.unauthorized" = "Se ha producido un error. Intenta volver a iniciar sesión.";
 "account.delete" = "Eliminar cuenta";
-"account.survey.message" = "¿Nos ayudas a mejorar PIA? ¡Dinos cómo podemos ser mejores!\nResponde la encuesta";
-"account.survey.messageLink" = "Responde la encuesta";
 
 // SETTINGS
 

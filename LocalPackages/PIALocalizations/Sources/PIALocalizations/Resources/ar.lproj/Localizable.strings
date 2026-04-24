@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "خطة تجريبية";
 "account.unauthorized" = "حدث خطأ. يرجى محاولة تسجيل الدخول مرة أخرى";
 "account.delete" = "حذف الحساب";
-"account.survey.message" = "هل ترغب في المساهمة لجعل تطبيق PIA أفضل؟ شاركنا بمقترحاتك في الاستطلاع!\n";
-"account.survey.messageLink" = "املأ الاستطلاع";
 
 // SETTINGS
 

@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "トライアルプラン";
 "account.unauthorized" = "問題が発生しました。もう一度ログインしてみてください";
 "account.delete" = "アカウントを削除";
-"account.survey.message" = "PIAの改善にご協力いただけますか？\nアンケート調査を受ける";
-"account.survey.messageLink" = "アンケートを受ける";
 
 // SETTINGS
 

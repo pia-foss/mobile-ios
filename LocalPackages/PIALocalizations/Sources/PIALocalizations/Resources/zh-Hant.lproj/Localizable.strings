@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "試用方案";
 "account.unauthorized" = "發生錯誤，請稍後再嘗試登入。";
 "account.delete" = "刪除帳戶";
-"account.survey.message" = "想要幫忙讓 PIA 變得更好嗎？讓我們知道該如何改進！\n參加調查";
-"account.survey.messageLink" = "參加調查";
 
 // SETTINGS
 

@@ -99,8 +99,6 @@
 "account.subscriptions.trial" = "체험 플랜";
 "account.unauthorized" = "문제가 발생했습니다. 다시 로그인해 보세요";
 "account.delete" = "계정 삭제";
-"account.survey.message" = "PIA 서비스를 개선하도록 도와주시겠나요? 저희가 개선할 수 있는 부분을 알려주세요!\n설문조사 참여";
-"account.survey.messageLink" = "설문조사 참여";
 
 // SETTINGS
 

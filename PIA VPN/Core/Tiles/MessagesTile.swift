@@ -36,7 +36,6 @@ class MessagesTile: UIView, Tileable {
 
     @IBOutlet private weak var messageTextView: UITextView!
     @IBOutlet private weak var alertIcon: UIImageView!
-    @IBOutlet private weak var dismissButton: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +59,6 @@ class MessagesTile: UIView, Tileable {
 
         viewShouldRestyle()
         self.alertIcon.image = Asset.iconAlert.image.withRenderingMode(.alwaysTemplate)
-        self.dismissButton.setImage(Asset.iconClose.image, for: .normal)
 
         if let message = MessagesManager.shared.availableMessage(), let _ = message.linkMessage {
             let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))

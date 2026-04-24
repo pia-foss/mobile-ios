@@ -114,10 +114,6 @@ public struct AppConstants {
         public static let url = "piavpn:loginqr?token="
     }
 
-    public struct Survey {
-        public static let formURL = URL(string: "https://privateinternetaccess.typeform.com/to/WTFcN77r")!
-    }
-
     public struct HotspotHelper {
         public static let queueLabel = "com.privateinternetaccess.hotspothelper"
     }

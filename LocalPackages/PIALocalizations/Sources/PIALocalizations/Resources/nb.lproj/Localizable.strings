@@ -99,7 +99,6 @@
 "account.subscriptions.trial" = "Prøveplan";
 "account.unauthorized" = "Noe gikk galt. Prøv å logge inn igjen.";
 "account.delete" = "Slett konto";
-"account.survey.messageLink" = "Besvar undersøkelsen";
 
 // SETTINGS
 
