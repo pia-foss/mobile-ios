@@ -82,15 +82,6 @@
       }
     },
     {
-      "identity" : "mobile-ios-releases-kpi",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pia-foss/mobile-ios-releases-kpi.git",
-      "state" : {
-        "revision" : "09a9188a73ab5b703e1fbd10ee0070bb6d777e5c",
-        "version" : "1.2.3"
-      }
-    },
-    {
       "identity" : "mobile-ios-wireguard",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
