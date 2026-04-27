@@ -71,26 +71,19 @@ public final class ServiceQualityManager: NSObject {
     public override init() {
         super.init()
 
-        if Client.environment == .staging {
-            kpiManager = KPIBuilder()
+        do {
+            let provider: KPIClientStateProvider = Client.environment == .staging ? PIAKPIStagingClientStateProvider() : PIAKPIClientStateProvider()
+            kpiManager = try KPIBuilder()
                 .setFlushEventMode(.perBatch)
-                .setKPIClientStateProvider(PIAKPIStagingClientStateProvider())
+                .setKPIClientStateProvider(provider)
                 .setEventTimeRoundGranularity(.hours)
                 .setEventTimeSendGranularity(.milliseconds)
                 .setRequestFormat(.kape)
                 .setPreferenceName(kpiPreferenceName)
                 .setUserAgent(PIAWebServices.userAgent)
                 .build()
-        } else {
-            kpiManager = KPIBuilder()
-                .setFlushEventMode(.perBatch)
-                .setKPIClientStateProvider(PIAKPIClientStateProvider())
-                .setEventTimeRoundGranularity(.hours)
-                .setEventTimeSendGranularity(.milliseconds)
-                .setRequestFormat(.kape)
-                .setPreferenceName(kpiPreferenceName)
-                .setUserAgent(PIAWebServices.userAgent)
-                .build()
+        } catch {
+            log.error("KPI manager build failed: \(error)")
         }
 
         NotificationCenter.default.addObserver(

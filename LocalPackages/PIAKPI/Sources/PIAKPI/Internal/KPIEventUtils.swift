@@ -1,14 +1,14 @@
 import Foundation
 
-struct KPIEventUtils: Sendable {
+struct KPIEventUtils {
     private let kpiPersistency: any IKPIPersistency
     private let projectToken: String
-    private let clock: @Sendable () -> Date
+    private let clock: () -> Date
 
     init(
         kpiPersistency: any IKPIPersistency,
         projectToken: String,
-        clock: @Sendable @escaping () -> Date = { Date() }
+        clock: @escaping () -> Date = { Date() }
     ) {
         self.kpiPersistency = kpiPersistency
         self.projectToken = projectToken

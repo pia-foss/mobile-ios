@@ -1,6 +1,6 @@
 import Foundation
 
-public final class KPIBuilder: @unchecked Sendable {
+public final class KPIBuilder {
     public static let defaultEventsBatchSize: Int = 20
     public static let defaultEventsHistorySize: Int = 50
     public static let defaultRequestTimeoutMs: Int64 = 3_000
@@ -99,19 +99,30 @@ public final class KPIBuilder: @unchecked Sendable {
         return self
     }
 
-    public func build() -> any KPIAPI {
+    public func build() throws -> any KPIAPI {
         guard let kpiClientStateProvider else {
-            fatalError("KPI client state provider missing.")
+            throw KPIError(description: "KPI client state provider missing.")
         }
+
         guard let kpiSendEventMode else {
-            fatalError("KPI events send mode missing.")
+            throw KPIError(description: "KPI events send mode missing.")
         }
+
         guard let preferenceName else {
-            fatalError("KPI preferences scope name missing.")
+            throw KPIError(description: "KPI preferences scope name missing.")
         }
-        precondition(eventsBatchSize >= 1, "KPI events batch size invalid. Minimum supported is 1.")
-        precondition(eventsHistorySize >= 1, "KPI events history size invalid. Minimum supported is 1.")
-        precondition(requestTimeoutMs >= 1, "KPI request timeout invalid. Minimum supported is 1.")
+
+        guard eventsBatchSize >= 1 else {
+            throw KPIError(description: "KPI events batch size invalid. Minimum supported is 1.")
+        }
+
+        guard eventsHistorySize >= 1 else {
+            throw KPIError(description: "KPI events history size invalid. Minimum supported is 1.")
+        }
+
+        guard requestTimeoutMs >= 1 else {
+            throw KPIError(description: "KPI request timeout invalid. Minimum supported is 1.")
+        }
 
         return KPI(
             kpiClientStateProvider: kpiClientStateProvider,

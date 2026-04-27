@@ -1,6 +1,6 @@
 import Foundation
 
-protocol IKPIPersistency: Sendable {
+protocol IKPIPersistency {
     func persistIdentifier(_ identifier: KPIEventIdentifier)
     func identifier() -> KPIEventIdentifier?
     func persistEvent(_ event: KPIEvent, eventHistorySize: Int)
@@ -10,7 +10,7 @@ protocol IKPIPersistency: Sendable {
     func clearAll()
 }
 
-final class KPIPersistence: IKPIPersistency, @unchecked Sendable {
+final class KPIPersistence: IKPIPersistency {
     static let batchedEventsKey = "pia.kpi.batched_events.v1"
     static let sampleEventsKey = "pia.kpi.sample_events.v1"
     static let aggregatedIdKey = "pia.kpi.aggregated_id.v1"

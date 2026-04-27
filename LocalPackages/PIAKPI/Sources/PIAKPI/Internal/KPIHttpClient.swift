@@ -83,6 +83,10 @@ struct KPIHttpClient: Sendable {
     }
 }
 
+// `@unchecked Sendable`: required because URLSessionDelegate forces NSObject
+// inheritance and NSObject is not Sendable. All stored properties are immutable
+// `let`s of Sendable types, the class is `final`, and the delegate is never
+// shared across URLSessions — so the unchecked promise is honest.
 final class KPIURLSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, @unchecked Sendable {
     private let certificateData: Data?
     private let hostname: String
