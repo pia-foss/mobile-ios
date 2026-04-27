@@ -680,8 +680,13 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
     }
 
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
-        webServices.taskForConnectivityCheck { (_, error) in
-            callback?(error == nil, error)
+        Task {
+            switch await webServices.connectivityCheck() {
+            case .failure(let error):
+                callback?(false, error)
+            case .success:
+                callback?(true, nil)
+            }
         }
     }
 

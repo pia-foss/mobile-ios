@@ -75,7 +75,7 @@ protocol WebServices: AnyObject {
 
     func downloadServers(_ callback: LibraryCallback<ServersBundle>?)
 
-    func taskForConnectivityCheck(_ callback: LibraryCallback<ConnectivityStatus>?)
+    func connectivityCheck() async -> Result<ConnectivityStatus, Error>
 
     func submitDebugReport() async throws -> String
 

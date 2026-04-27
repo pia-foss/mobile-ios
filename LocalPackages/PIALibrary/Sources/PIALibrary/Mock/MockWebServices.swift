@@ -94,8 +94,8 @@ final class MockWebServices: WebServices {
         return URL(fileURLWithPath: "")
     }
 
-    func taskForConnectivityCheck(_ callback: ((ConnectivityStatus?, Error?) -> Void)?) {
-        callback?(nil, nil)
+    func connectivityCheck() async -> Result<ConnectivityStatus, Error> {
+        return .success(ConnectivityStatus(ipAddress: "8.8.8.8", isVPN: true))
     }
 
     func submitDebugReport() async throws -> String {

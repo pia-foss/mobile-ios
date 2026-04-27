@@ -146,8 +146,13 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
             callback?(false, nil)
             return
         }
-        webServices.taskForConnectivityCheck { (_, error) in
-            callback?(error == nil, error)
+        Task {
+            switch await webServices.connectivityCheck() {
+            case .failure(let error):
+                callback?(false, error)
+            case .success:
+                callback?(true, nil)
+            }
         }
     }
 
