@@ -31,6 +31,8 @@ import SideMenu
 import UIKit
 import WidgetKit
 
+import class SwiftUI.UIHostingController
+
 private let log = PIALogger.logger(for: DashboardViewController.self)
 
 enum DashboardVPNConnectingStatus: Int {
@@ -587,7 +589,13 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openDedicatedIp() {
-        perform(segue: StoryboardSegue.Main.dedicatedIpSegueIdentifier)
+        if Client.configuration.featureFlags[.swiftuiDedicatedIp] {
+            let screen = DedicatedIPFactory.makeDedicatedIPView()
+            let vc = AutolayoutHostingController(rootView: screen)
+            ModalNavigationSegue.configureAndPresent(modal: vc, from: self)
+        } else {
+            perform(segue: StoryboardSegue.Main.dedicatedIpSegueIdentifier)
+        }
     }
 
     func openAbout() {

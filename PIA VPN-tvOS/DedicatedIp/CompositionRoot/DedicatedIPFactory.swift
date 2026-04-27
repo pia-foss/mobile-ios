@@ -10,18 +10,16 @@ import Foundation
 import PIALibrary
 
 public enum DedicatedIPFactory {
-    #if os(tvOS)
-        static func makeDedicatedIPView() -> DedicatedIPView {
-            DedicatedIPView(viewModel: makeDedicatedIPViewModel())
-        }
+    static func makeDedicatedIPView() -> DedicatedIPView {
+        DedicatedIPView(viewModel: makeDedicatedIPViewModel())
+    }
 
-        private static func makeDedicatedIPViewModel() -> DedicatedIPViewModel {
-            DedicatedIPViewModel(
-                getDedicatedIp: makeGetDedicatedIpUseCase(),
-                activateDIPToken: makeActivateDIPTokenUseCase(),
-                removeDIPToken: makeRemoveDIPUseCase())
-        }
-    #endif
+    private static func makeDedicatedIPViewModel() -> DedicatedIPViewModel {
+        DedicatedIPViewModel(
+            getDedicatedIp: makeGetDedicatedIpUseCase(),
+            activateDIPToken: makeActivateDIPTokenUseCase(),
+            removeDIPToken: makeRemoveDIPUseCase())
+    }
 
     static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
         GetDedicatedIpUseCase(

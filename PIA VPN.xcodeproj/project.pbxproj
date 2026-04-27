@@ -48,6 +48,7 @@
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
 		AA36CDCF28A6746500180A33 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCE28A6746500180A33 /* SideMenu */; };
+		AC1C63152F7A6C8E0085A65F /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		ACADC5F82F51AA1F00986EAF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = ACADC5F72F51AA1F00986EAF /* SnapshotTesting */; };
 		ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */; };
 		D10665FE2836490FA4DCAE0B /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 824E8528B3924C15A0398820 /* PIALocalizations */; };

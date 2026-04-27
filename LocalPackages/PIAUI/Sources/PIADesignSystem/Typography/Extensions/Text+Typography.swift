@@ -36,7 +36,7 @@ import SwiftUI
 /// Text("Section Header").typography(.title2, color: .primary)
 /// Text("Card Title").typography(.title3, color: .white)
 /// ```
-public extension Text {
+public extension View {
     /// Applies a typography style to the text, including font, line height, decorations, and optional color.
     /// Supports Dynamic Type for accessibility - text scales automatically with user's text size preferences.
     ///

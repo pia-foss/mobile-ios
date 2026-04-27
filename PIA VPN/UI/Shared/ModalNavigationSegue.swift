@@ -34,11 +34,18 @@ final class ModalNavigationSegue: UIStoryboardSegue {
             log.error("Segue destination is not a ModalController")
             return
         }
+        return ModalNavigationSegue.configureAndPresent(modal: modal, from: source)
+    }
 
+    static func configureAndPresent<Modal>(
+        modal: Modal,
+        from source: UIViewController,
+    ) where Modal: UIViewController & ModalController {
         modal.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
-            target: modal,
-            action: #selector(modal.dismissModal)
+            systemItem: .stop,
+            primaryAction: UIAction { [weak modal] _ in
+                modal?.dismissModal()
+            },
         )
         modal.navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.close
 
@@ -58,7 +65,7 @@ final class ModalNavigationSegue: UIStoryboardSegue {
         if let coordinator = source.transitionCoordinator {
             coordinator.animate(
                 alongsideTransition: { (context) in
-                    self.source.present(nav, animated: true, completion: nil)
+                    source.present(nav, animated: true, completion: nil)
                 }, completion: nil)
         } else {
             source.present(nav, animated: true, completion: nil)
