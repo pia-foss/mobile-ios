@@ -42,4 +42,7 @@ public enum FeatureFlag: String, CaseIterable, Sendable {
     /// (PlatformSDK tunnel) instead of the legacy per-protocol profiles
     /// (IKEv2 / OpenVPN / WireGuard). Defaults to `false` (legacy profiles).
     case usePlatformSDKVPN = "ios_platform_sdk_vpn"
+    /// Use SwiftUI for the Dedicated IP screen.
+    /// expires: swiftui migration project
+    case swiftuiDedicatedIp
 }

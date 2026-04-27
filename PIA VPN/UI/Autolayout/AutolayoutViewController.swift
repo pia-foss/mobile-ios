@@ -195,6 +195,10 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     }
 
     public func styleNavigationBarWithTitle(_ title: String) {
+        Self.styleNavigationBarWithTitle(title, vc: self)
+    }
+
+    public static func styleNavigationBarWithTitle(_ title: String, vc: UIViewController) {
 
         let currentStatus = Client.providers.vpnProvider.vpnStatus
 
@@ -203,7 +207,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.text = title
-            if let navController = navigationController {
+            if let navController = vc.navigationController {
                 Theme.current.applyCustomNavigationBar(
                     navController.navigationBar,
                     withTintColor: .piaGrey6,
@@ -214,14 +218,14 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
             }
             let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
+            vc.navigationItem.titleView = titleLabelView
+            vc.setNeedsStatusBarAppearanceUpdate()
 
         default:
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
             titleLabelView.text = title
-            if let navigationController = navigationController {
+            if let navigationController = vc.navigationController {
                 Theme.current.applyCustomNavigationBar(
                     navigationController.navigationBar,
                     withTintColor: nil,
@@ -230,8 +234,8 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 
             let size = titleLabelView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             titleLabelView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            navigationItem.titleView = titleLabelView
-            setNeedsStatusBarAppearanceUpdate()
+            vc.navigationItem.titleView = titleLabelView
+            vc.setNeedsStatusBarAppearanceUpdate()
 
         }
     }
