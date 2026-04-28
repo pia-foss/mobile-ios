@@ -645,12 +645,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     }
 
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
-        Task {
+        Task { @MainActor in
             switch await webServices.connectivityCheck() {
             case .failure(let error):
-                callback?(false, error)
+                DispatchQueue.main.async { callback?(false, error) }
             case .success:
-                callback?(true, nil)
+                DispatchQueue.main.async { callback?(true, nil) }
             }
         }
     }

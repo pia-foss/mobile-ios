@@ -146,12 +146,12 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
             callback?(false, nil)
             return
         }
-        Task {
+        Task { @MainActor in
             switch await webServices.connectivityCheck() {
             case .failure(let error):
-                callback?(false, error)
+                DispatchQueue.main.async { callback?(false, error) }
             case .success:
-                callback?(true, nil)
+                DispatchQueue.main.async { callback?(true, nil) }
             }
         }
     }
