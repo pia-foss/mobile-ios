@@ -129,50 +129,20 @@ actor TokenManager {
     }
 }
 
-// MARK: - Token Refresh Coordinator
+// MARK: - Token Refresh
 
 extension TokenManager {
-    /// Coordinates token refresh to prevent duplicate requests
-    private static var apiTokenRefreshTask: Task<Void, Error>?
-    private static var vpnTokenRefreshTask: Task<Void, Error>?
-
-    /// Executes API token refresh with deduplication
+    /// Executes API token refresh
     /// - Parameter block: The async block that performs the refresh
     /// - Throws: PIAAccountError if refresh fails
-    nonisolated func refreshAPITokenIfNeeded(_ block: @escaping () async throws -> Void) async throws {
-        // Check if there's already a refresh in progress
-        if let existingTask = Self.apiTokenRefreshTask {
-            // Wait for the existing refresh to complete
-            return try await existingTask.value
-        }
-
-        // Create a new refresh task
-        let task = Task {
-            defer { Self.apiTokenRefreshTask = nil }
-            try await block()
-        }
-
-        Self.apiTokenRefreshTask = task
-        try await task.value
+    func refreshAPITokenIfNeeded(_ block: @Sendable () async throws -> Void) async throws {
+        try await block()
     }
 
-    /// Executes VPN token refresh with deduplication
+    /// Executes VPN token refresh
     /// - Parameter block: The async block that performs the refresh
     /// - Throws: PIAAccountError if refresh fails
-    nonisolated func refreshVPNTokenIfNeeded(_ block: @escaping () async throws -> Void) async throws {
-        // Check if there's already a refresh in progress
-        if let existingTask = Self.vpnTokenRefreshTask {
-            // Wait for the existing refresh to complete
-            return try await existingTask.value
-        }
-
-        // Create a new refresh task
-        let task = Task {
-            defer { Self.vpnTokenRefreshTask = nil }
-            try await block()
-        }
-
-        Self.vpnTokenRefreshTask = task
-        try await task.value
+    func refreshVPNTokenIfNeeded(_ block: @Sendable () async throws -> Void) async throws {
+        try await block()
     }
 }

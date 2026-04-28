@@ -1,7 +1,7 @@
 import Foundation
 
 /// Protocol for providing account API endpoints
-public protocol PIAAccountEndpointProvider {
+public protocol PIAAccountEndpointProvider: Sendable {
     /// Returns the list of account endpoints to try (in order)
     func accountEndpoints() -> [PIAAccountEndpoint]
 }

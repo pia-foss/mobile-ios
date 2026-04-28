@@ -23,28 +23,18 @@ import Foundation
 /// }
 ///
 /// // Build the client
-/// let account = try PIAAccountBuilder()
-///     .setEndpointProvider(MyEndpointProvider())
-///     .setCertificate(pemCertificate)
-///     .setUserAgent("MyApp/1.0")
-///     .build()
+/// var builder = PIAAccountBuilder()
+/// builder.setEndpointProvider(MyEndpointProvider())
+/// builder.setCertificate(pemCertificate)
+/// builder.setUserAgent("MyApp/1.0")
+/// let account = try builder.build()
 ///
 /// // Use async/await API
 /// try await account.loginWithCredentials(username: "user", password: "pass")
 /// let details = try await account.accountDetails()
 /// print("Plan: \(details.plan)")
-///
-/// // Or use callback API
-/// account.accountDetails { result in
-///     switch result {
-///     case .success(let details):
-///         print("Plan: \(details.plan)")
-///     case .failure(let error):
-///         print("Error: \(error)")
-///     }
-/// }
 /// ```
-public final class PIAAccountBuilder {
+public struct PIAAccountBuilder: Sendable {
     private var endpointProvider: PIAAccountEndpointProvider?
     private var certificate: String?
     private var userAgent: String?
@@ -55,7 +45,7 @@ public final class PIAAccountBuilder {
     /// - Parameter provider: The endpoint provider
     /// - Returns: Self for chaining
     @discardableResult
-    public func setEndpointProvider(_ provider: PIAAccountEndpointProvider) -> Self {
+    public mutating func setEndpointProvider(_ provider: PIAAccountEndpointProvider) -> Self {
         self.endpointProvider = provider
         return self
     }
@@ -64,7 +54,7 @@ public final class PIAAccountBuilder {
     /// - Parameter certificate: PEM-encoded certificate string
     /// - Returns: Self for chaining
     @discardableResult
-    public func setCertificate(_ certificate: String?) -> Self {
+    public mutating func setCertificate(_ certificate: String?) -> Self {
         self.certificate = certificate
         return self
     }
@@ -73,7 +63,7 @@ public final class PIAAccountBuilder {
     /// - Parameter userAgent: User-Agent string
     /// - Returns: Self for chaining
     @discardableResult
-    public func setUserAgent(_ userAgent: String) -> Self {
+    public mutating func setUserAgent(_ userAgent: String) -> Self {
         self.userAgent = userAgent
         return self
     }

@@ -122,23 +122,24 @@ import Testing
     func piaAccountClientConcurrentTokenAccess() async throws {
         // Test that the cached token properties are thread-safe
         let endpoint = TestEndpointProvider()
-        let builder = PIAAccountBuilder()
-            .setEndpointProvider(endpoint)
-            .setUserAgent("Test/1.0")
+        let client = PIAAccountClient(
+            endpointProvider: endpoint,
+            certificate: nil,
+            userAgent: "Test/1.0"
+        )
 
-        let client = try builder.build()
-
-        // Access apiToken property from multiple threads concurrently
+        // Access apiToken property from multiple tasks concurrently
         await withTaskGroup(of: String?.self) { group in
             for _ in 0..<100 {
-                group.addTask {
-                    return client.apiToken
+                group.addTask { [client] in
+                    return await client.apiToken
                 }
             }
 
             var count = 0
-            for await _ in group {
+            for await result in group {
                 count += 1
+                _ = result
             }
 
             #expect(count == 100)
@@ -148,23 +149,24 @@ import Testing
     @Test("PIAAccountClient concurrent VPN token access")
     func piaAccountClientConcurrentVPNTokenAccess() async throws {
         let endpoint = TestEndpointProvider()
-        let builder = PIAAccountBuilder()
-            .setEndpointProvider(endpoint)
-            .setUserAgent("Test/1.0")
+        let client = PIAAccountClient(
+            endpointProvider: endpoint,
+            certificate: nil,
+            userAgent: "Test/1.0"
+        )
 
-        let client = try builder.build()
-
-        // Access vpnToken property from multiple threads concurrently
+        // Access vpnToken property from multiple tasks concurrently
         await withTaskGroup(of: String?.self) { group in
             for _ in 0..<100 {
-                group.addTask {
-                    return client.vpnToken
+                group.addTask { [client] in
+                    return await client.vpnToken
                 }
             }
 
             var count = 0
-            for await _ in group {
+            for await result in group {
                 count += 1
+                _ = result
             }
 
             #expect(count == 100)
@@ -217,7 +219,7 @@ import Testing
         // Launch 10 concurrent requests
         await withTaskGroup(of: Bool.self) { group in
             for _ in 0..<10 {
-                group.addTask {
+                group.addTask { [client, request] in
                     do {
                         // Use executeVoid since we don't care about response parsing
                         try await client.executeVoid(request: request)
@@ -341,7 +343,7 @@ import Testing
 
     // MARK: - Helper Test Endpoint Provider
 
-    private class TestEndpointProvider: PIAAccountEndpointProvider {
+    private struct TestEndpointProvider: PIAAccountEndpointProvider {
         func accountEndpoints() -> [PIAAccountEndpoint] {
             return [
                 PIAAccountEndpoint(
