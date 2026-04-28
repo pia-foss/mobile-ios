@@ -24,6 +24,8 @@
     import TunnelKitOpenVPN
     import NetworkExtension
 
+    private let log = PIALogger.logger(for: PIATunnelProfile.self)
+
     /// Implementation of `VPNProfile` providing OpenVPN connectivity.
     public final class PIATunnelProfile: NetworkExtensionProfile {
         private let bundleIdentifier: String
@@ -81,13 +83,49 @@
                         callback?(error)
                         return
                     }
-                    do {
-                        let session = vpn.connection as? NETunnelProviderSession
-                        try session?.startTunnel(options: nil)
-                        callback?(nil)
-                    } catch let e {
-                        callback?(e)
+
+                    let currentStatus = vpn.connection.status
+
+                    // If the tunnel is already active, stop it before starting the new one.
+                    // Calling startTunnel() on a live session may silently retain the existing
+                    // connection rather than switching to the new server, leaving the app in a
+                    // state where it believes it is connected when it is not.
+                    if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+                        vpn.connection.stopVPNTunnel()
                     }
+
+                    if currentStatus == .disconnecting {
+                        self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
+                    } else {
+                        do {
+                            let session = vpn.connection as? NETunnelProviderSession
+                            try session?.startTunnel(options: nil)
+                            callback?(nil)
+                        } catch let e {
+                            callback?(e)
+                        }
+                    }
+                }
+            }
+        }
+
+        private func waitForDisconnectedThenStart(vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
+            var observer: NSObjectProtocol?
+            observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [vpn] _ in
+                guard vpn.connection.status == .disconnected else {
+                    return
+                }
+
+                if let observer {
+                    NotificationCenter.default.removeObserver(observer)
+                }
+
+                do {
+                    let session = vpn.connection as? NETunnelProviderSession
+                    try session?.startTunnel(options: nil)
+                    callback?(nil)
+                } catch let e {
+                    callback?(e)
                 }
             }
         }
@@ -117,20 +155,13 @@
 
         /// :nodoc:
         public func updatePreferences(_ callback: SuccessLibraryCallback?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(error)
-                    return
-                }
-
-                vpn.saveToPreferences { (error) in
-                    if let error = error {
-                        callback?(error)
-                        return
-                    }
-                    callback?(nil)
-                }
-            }
+            // All preference mutations (server address, on-demand rules, etc.) are
+            // applied by connect() via save(force: true) → doSave(). A standalone
+            // loadFromPreferences → saveToPreferences round-trip with no mutations
+            // races with any concurrent connect() call and causes
+            // "configuration is stale" errors.
+            log.debug("[OpenVPN] updatePreferences() — skipped (no-op, changes applied by connect)")
+            callback?(nil)
         }
 
         /// :nodoc:
