@@ -101,7 +101,7 @@ class RegionsFilterUseCase: RegionsFilterUseCaseType {
 
 extension RegionsFilterUseCase {
     private func getServers(with filter: RegionsListFilter, sorting: SortingOrder) -> [ServerType] {
-        let allServers = serversUseCase.getCurrentServers()
+        let allServers = filteredByProtocol(serversUseCase.getCurrentServers())
 
         switch filter {
         case .all:
@@ -123,6 +123,14 @@ extension RegionsFilterUseCase {
             return getPreviouslySearchedRegions(from: allServers)
         }
 
+    }
+
+    private func filteredByProtocol(_ servers: [ServerType]) -> [ServerType] {
+        let currentVPNType = Client.providers.vpnProvider.currentVPNType
+        return servers.filter { server in
+            guard let concrete = server as? Server else { return true }
+            return server.dipToken != nil || concrete.hasEndpoints(for: currentVPNType)
+        }
     }
 
     private func getServersWithoutDip(from servers: [ServerType]) -> [ServerType] {

@@ -301,6 +301,21 @@ extension Server {
         }
         return availableServer
     }
+
+    public func hasEndpoints(for vpnType: String) -> Bool {
+        switch vpnType {
+        case IKEv2Profile.vpnType:
+            return iKEv2AddressesForUDP?.isEmpty == false
+        case PIATunnelProfile.vpnType:
+            return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
+        case PIAWGTunnelProfile.vpnType:
+            return wireGuardAddressesForUDP?.isEmpty == false
+        case "Mock":  // Simulator
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension Server {
