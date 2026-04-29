@@ -225,21 +225,21 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         Task { @MainActor in
             do {
                 let apiToken = try await webServices.validateLoginQR(qrToken: qrToken)
-                callback?(apiToken, nil)
+                DispatchQueue.main.async { callback?(apiToken, nil) }
             } catch {
-                callback?(nil, error)
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
     }
 
     private func handleLoginResult(error: Error?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
         guard error == nil else {
-            callback?(nil, error)
+            DispatchQueue.main.async { callback?(nil, error) }
             return
         }
 
         guard vpnToken != nil else {
-            callback?(nil, ClientError.unauthorized)
+            DispatchQueue.main.async { callback?(nil, ClientError.unauthorized) }
             return
         }
 
@@ -263,11 +263,11 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 self.accessedDatabase.plain.accountInfo = accountInfo
                 self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
                 let userAccount = UserAccount(credentials: credentials, info: accountInfo)
-                callback?(userAccount, nil)
+                DispatchQueue.main.async { callback?(userAccount, nil) }
             } catch {
                 try? await self.webServices.logout()
                 self.cleanDatabase()
-                callback?(nil, ClientError.unauthorized)
+                DispatchQueue.main.async { callback?(nil, ClientError.unauthorized) }
             }
         }
     }
@@ -296,9 +296,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 let accountInfo = try await webServices.info()
                 self.accessedDatabase.plain.accountInfo = accountInfo
                 Macros.postNotification(.PIAAccountDidRefresh, [.accountInfo: accountInfo])
-                callback?(accountInfo, nil)
+                DispatchQueue.main.async { callback?(accountInfo, nil) }
             } catch {
-                callback?(nil, error)
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
     }
@@ -324,7 +324,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
                 guard let newAccountInfo = user.info?.with(email: request.email) else {
                     Macros.postNotification(.PIAAccountDidUpdate)
-                    callback?(nil, nil)
+                    DispatchQueue.main.async { callback?(nil, nil) }
                     return
                 }
 
@@ -335,9 +335,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                         .accountInfo: newAccountInfo
                     ])
 
-                callback?(newAccountInfo, nil)
+                DispatchQueue.main.async { callback?(newAccountInfo, nil) }
             } catch {
-                callback?(nil, error)
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
     }
@@ -352,7 +352,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             try? await webServices.logout()
             cleanDatabase()
             Macros.postNotification(.PIAAccountDidLogout)
-            callback?(nil)
+            DispatchQueue.main.async { callback?(nil) }
         }
     }
 
@@ -365,9 +365,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         Task { @MainActor in
             do {
                 try await webServices.deleteAccount()
-                callback?(nil)
+                DispatchQueue.main.async { callback?(nil) }
             } catch {
-                callback?(error)
+                DispatchQueue.main.async { callback?(error) }
             }
         }
     }
@@ -375,13 +375,13 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         Task { @MainActor in
             guard let features = try? await webServices.featureFlags() else {
-                callback?(nil)
+                DispatchQueue.main.async { callback?(nil) }
                 return
             }
 
             Client.configuration.featureFlags.configure(with: features)
             Macros.postNotification(Notification.Name.__AppDidFetchFeatureFlags)
-            callback?(nil)
+            DispatchQueue.main.async { callback?(nil) }
         }
     }
 
@@ -394,9 +394,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             Task { @MainActor in
                 do {
                     let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
-                    callback?(appStoreInformation, nil)
+                    DispatchQueue.main.async { callback?(appStoreInformation, nil) }
                 } catch {
-                    callback?(nil, error)
+                    DispatchQueue.main.async { callback?(nil, error) }
                 }
             }
         }
@@ -447,9 +447,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             Task { @MainActor in
                 do {
                     try await webServices.loginLink(email: email)
-                    callback?(nil)
+                    DispatchQueue.main.async { callback?(nil) }
                 } catch {
-                    callback?(error)
+                    DispatchQueue.main.async { callback?(error) }
                 }
             }
         }
@@ -486,7 +486,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
                     let user = UserAccount(credentials: credentials, info: nil)
                     Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-                    callback?(user, nil)
+                    DispatchQueue.main.async { callback?(user, nil) }
 
                 } catch let error as ClientError where error == .badReceipt {
                     // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
@@ -494,25 +494,25 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                     await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
                 } catch {
                     if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                        callback?(nil, ClientError.internetUnreachable)
+                        DispatchQueue.main.async { callback?(nil, ClientError.internetUnreachable) }
                         return
                     }
 
-                    callback?(nil, error)
+                    DispatchQueue.main.async { callback?(nil, error) }
                 }
             }
         }
 
         private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) async {
             guard let receipt = accessedStore.paymentReceipt else {
-                callback?(nil, ClientError.badReceipt)
+                DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
 
             do {
                 try await webServices.token(receipt: receipt)
             } catch {
-                callback?(nil, ClientError.badReceipt)
+                DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
 
@@ -524,7 +524,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             updateUsernamePassword()
 
             guard let accountInfo = try? await webServices.info() else {
-                callback?(nil, ClientError.badReceipt)
+                DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
 
@@ -537,7 +537,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             )
             let user = UserAccount(credentials: credentials, info: accountInfo)
             Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-            callback?(user, nil)
+            DispatchQueue.main.async { callback?(user, nil) }
         }
 
         public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
@@ -608,9 +608,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
                     let user = UserAccount(credentials: user.credentials, info: accountInfo)
                     Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
-                    callback?(user, nil)
+                    DispatchQueue.main.async { callback?(user, nil) }
                 } catch {
-                    callback?(nil, error)
+                    DispatchQueue.main.async { callback?(nil, error) }
                 }
             }
         }
@@ -645,12 +645,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     }
 
     public func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {
-        Task {
+        Task { @MainActor in
             switch await webServices.connectivityCheck() {
             case .failure(let error):
-                callback?(false, error)
+                DispatchQueue.main.async { callback?(false, error) }
             case .success:
-                callback?(true, nil)
+                DispatchQueue.main.async { callback?(true, nil) }
             }
         }
     }

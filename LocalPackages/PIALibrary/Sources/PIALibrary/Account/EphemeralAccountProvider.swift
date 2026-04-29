@@ -119,16 +119,16 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         Task { @MainActor in
             do {
                 guard let credentials = try await webServices?.signup(with: signup) else {
-                    callback?(nil, nil)
+                    DispatchQueue.main.async { callback?(nil, nil) }
                     return
                 }
 
                 let user = UserAccount(credentials: credentials, info: nil)
                 self.currentUser = user
                 self.isLoggedIn = true
-                callback?(user, nil)
+                DispatchQueue.main.async { callback?(user, nil) }
             } catch {
-                callback?(nil, error)
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
     }
@@ -146,12 +146,12 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
             callback?(false, nil)
             return
         }
-        Task {
+        Task { @MainActor in
             switch await webServices.connectivityCheck() {
             case .failure(let error):
-                callback?(false, error)
+                DispatchQueue.main.async { callback?(false, error) }
             case .success:
-                callback?(true, nil)
+                DispatchQueue.main.async { callback?(true, nil) }
             }
         }
     }

@@ -212,9 +212,13 @@ open class NativeAccountProvider: AccountProvider, ConfigurationAccess, Database
 
             do {
                 try await webServices.migrateToken(token: linkToken)
-                self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+                DispatchQueue.main.async {
+                    self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
+                }
             } catch {
-                self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+                DispatchQueue.main.async {
+                    self.handleLoginResult(error: error, credentials: credentials, callback: callback)
+                }
             }
         }
     }
