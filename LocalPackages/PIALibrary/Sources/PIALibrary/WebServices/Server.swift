@@ -306,10 +306,12 @@ extension Server {
         switch vpnType {
         case IKEv2Profile.vpnType:
             return iKEv2AddressesForUDP?.isEmpty == false
-        case PIATunnelProfile.vpnType:
-            return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
-        case PIAWGTunnelProfile.vpnType:
-            return wireGuardAddressesForUDP?.isEmpty == false
+        #if os(iOS)
+            case PIATunnelProfile.vpnType:
+                return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
+            case PIAWGTunnelProfile.vpnType:
+                return wireGuardAddressesForUDP?.isEmpty == false
+        #endif
         case "Mock":  // Simulator
             return true
         default:
