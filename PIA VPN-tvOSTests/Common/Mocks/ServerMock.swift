@@ -41,4 +41,8 @@ class ServerMock: ServerType {
         self.init(name: "mock-server-name", identifier: "mock-server-id", regionIdentifier: "mock-server-region-id", country: "mock-country", geo: false)
     }
 
+    func hasEndpoints(for vpnType: String) -> Bool {
+        true
+    }
+
 }

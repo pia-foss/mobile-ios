@@ -30,6 +30,7 @@ public protocol ServerType {
     var dipToken: String? { get }
     var dipIKEv2IP: String? { get }
     var dipStatusString: String? { get }
+    func hasEndpoints(for vpnType: String) -> Bool
 }
 
 public protocol DedicatedIPStatusType {

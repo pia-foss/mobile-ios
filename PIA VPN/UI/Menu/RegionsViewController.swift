@@ -243,6 +243,11 @@ class RegionsViewController: AutolayoutViewController {
             self.servers = self.servers.filter({ $0.geo == AppPreferences.shared.showGeoServers })
         }
 
+        let currentVPNType = Client.providers.vpnProvider.currentVPNType
+        self.servers = self.servers.filter { server in
+            server.dipToken != nil || server.hasEndpoints(for: currentVPNType)
+        }
+
         tableView.reloadData()
         if tableView.numberOfRows(inSection: 0) > 0 {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)

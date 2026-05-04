@@ -165,6 +165,10 @@ struct ServerTypeStub: ServerType {
     var dipIKEv2IP: String?
     var dipStatusString: String?
 
+    func hasEndpoints(for vpnType: String) -> Bool {
+        true
+    }
+
     static func makeValidServerTypeStub() -> ServerType {
         ServerTypeStub(
             name: "name",

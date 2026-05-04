@@ -27,7 +27,7 @@ internal enum RegionHttpClient {
         certificate: String? = nil,
         pinnedEndpoint: (hostname: String, commonName: String)? = nil
     ) -> (URLSession?, Error?) {
-        let config = URLSessionConfiguration.default
+        let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = requestTimeoutSeconds
 
         if let cert = certificate, let pinned = pinnedEndpoint {
