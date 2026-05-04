@@ -128,7 +128,7 @@ extension RegionsFilterUseCase {
     private func filteredByProtocol(_ servers: [ServerType]) -> [ServerType] {
         let currentVPNType = Client.providers.vpnProvider.currentVPNType
         return servers.filter { server in
-            guard let concrete = server as? Server else { return true }
+            guard let concrete = server as? Server else { return false }
             return server.dipToken != nil || concrete.hasEndpoints(for: currentVPNType)
         }
     }
