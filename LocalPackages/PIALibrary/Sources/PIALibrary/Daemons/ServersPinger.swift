@@ -24,16 +24,13 @@ import Foundation
 
 private let log = PIALogger.logger(for: ServersPinger.self)
 
-final class ServersPinger: DatabaseAccess {
+actor ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
-
-    private var pendingPings: [PingTask] = []
 
     private var isPinging = false
 
-    func ping(withDestinations destinations: [Server]) {
-
-        guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
+    func ping(withDestinations destinations: [Server]) async {
+        guard accessedDatabase.transient.vpnStatus == .disconnected else {
             log.debug("Not pinging servers while on VPN, will try on next update")
             return
         }
@@ -44,67 +41,71 @@ final class ServersPinger: DatabaseAccess {
         }
 
         isPinging = true
+        accessedDatabase.plain.clearPings()
 
-        let persistence = accessedDatabase.plain
-        persistence.clearPings()
-
-        var pingableServers: [Server] = []
-        for server in destinations {
-            pingableServers.append(server)
+        await withTaskGroup(of: Void.self) { group in
+            for server in destinations {
+                log.debug("Pinging \(server.identifier)")
+                for address in server.addresses() {
+                    group.addTask {
+                        await self.pingServer(server, address: address)
+                    }
+                }
+            }
         }
 
-        let dispatchQueue = DispatchQueue(label: "com.privateinternetaccess.ping-server", attributes: .concurrent)
+        finish()
+    }
 
-        for server in pingableServers {
+    private func pingServer(_ server: Server, address: Server.ServerAddressIP) async {
+        log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
 
-            log.debug("Pinging \(server.identifier)")
+        let tcpAddress = Server.Address(hostname: address.ip, port: 443)
+        let responseTime = await pingWithTimeout(server: server, address: tcpAddress)
 
-            for address in server.addresses() {
+        // Discards results where VPN connected during the ping.
+        guard accessedDatabase.transient.vpnStatus == .disconnected else {
+            log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
+            return
+        }
 
-                let pingTask = PingTask(
-                    identifier: server.identifier, server: server, address: address,
-                    stateUpdateHandler: { (task) in
+        log.debug("Response time from \(server.identifier): \(responseTime)")
+        server.updateResponseTime(responseTime, forAddress: address)
+        accessedDatabase.plain.setPing(responseTime, forServerIdentifier: server.identifier)
+    }
 
-                        guard let index = self.pendingPings.indexOfTaskWith(identifier: server.identifier) else {
-                            return
-                        }
-
-                        switch task.state {
-                        case .completed:
-                            self.pendingPings.remove(at: index)
-                            if self.pendingPings.isEmpty {
-                                self.finish()
-                            }
-                        default:
-                            break
-                        }
-
-                    })
-                pendingPings.append(pingTask)
-
+    // Races the TCP ping against a 3-second deadline, returning whichever resolves first.
+    private func pingWithTimeout(server: Server, address: Server.Address) async -> Int {
+        let timeoutMs = 3000
+        return await withTaskGroup(of: Int.self) { group in
+            group.addTask {
+                let result = server.ping(toAddress: address, withProtocol: .TCP)
+                if result == nil {
+                    log.warning("Error/timeout from \(server.identifier)")
+                }
+                return result ?? timeoutMs
             }
 
-        }
+            group.addTask {
+                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                return timeoutMs
+            }
 
-        if pendingPings.count == 0 {
-            self.finish()
+            let first = await group.next() ?? timeoutMs
+            group.cancelAll()
+            return first
         }
-
-        pendingPings.forEach {
-            $0.startTask(queue: dispatchQueue)
-        }
-
     }
 
     func reset() {
-        pendingPings.removeAll()
         isPinging = false
     }
 
-    func finish() {
-        DispatchQueue.main.async { [unowned self] in
-            self.accessedDatabase.plain.serializePings()
-            self.reset()
+    private func finish() {
+        isPinging = false
+        accessedDatabase.plain.serializePings()
+
+        Task { @MainActor in
             Macros.postNotification(.PIADaemonsDidPingServers)
         }
     }
