@@ -27,6 +27,8 @@ private let log = PIALogger.logger(for: ServersPinger.self)
 actor ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
 
+    private static let pingTimeoutSeconds: TimeInterval = 3
+
     private var isPinging = false
 
     func ping(withDestinations destinations: [Server]) async {
@@ -61,7 +63,11 @@ actor ServersPinger: DatabaseAccess {
         log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
 
         let tcpAddress = Server.Address(hostname: address.ip, port: 443)
-        let responseTime = await pingWithTimeout(server: server, address: tcpAddress)
+
+        guard let responseTime = await pingWithTimeout(server: server, address: tcpAddress) else {
+            log.warning("Timeout/error for \(server.identifier)")
+            return
+        }
 
         // Discards results where VPN connected during the ping.
         guard accessedDatabase.transient.vpnStatus == .disconnected else {
@@ -74,24 +80,19 @@ actor ServersPinger: DatabaseAccess {
         accessedDatabase.plain.setPing(responseTime, forServerIdentifier: server.identifier)
     }
 
-    // Races the TCP ping against a 3-second deadline, returning whichever resolves first.
-    private func pingWithTimeout(server: Server, address: Server.Address) async -> Int {
-        let timeoutMs = 3000
-        return await withTaskGroup(of: Int.self) { group in
+    // Races the TCP ping against a 3-second deadline. Returns nil on timeout or failure.
+    private func pingWithTimeout(server: Server, address: Server.Address) async -> Int? {
+        return await withTaskGroup(of: Int?.self) { group in
             group.addTask {
-                let result = server.ping(toAddress: address, withProtocol: .TCP)
-                if result == nil {
-                    log.warning("Error/timeout from \(server.identifier)")
-                }
-                return result ?? timeoutMs
+                return server.ping(toAddress: address, withProtocol: .TCP)
             }
 
             group.addTask {
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
-                return timeoutMs
+                try? await Task.sleep(nanoseconds: UInt64(Self.pingTimeoutSeconds * 1_000_000_000))
+                return nil
             }
 
-            let first = await group.next() ?? timeoutMs
+            let first = await group.next() ?? nil
             group.cancelAll()
             return first
         }
