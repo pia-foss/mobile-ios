@@ -36,23 +36,6 @@ public class AccountFactory {
         SubscriptionsUseCase(networkClient: NetworkRequestFactory.maketNetworkRequestClient(), refreshAuthTokensChecker: makeRefreshAuthTokensChecker())
     }
 
-    static func makeNativeAccountProvider(with webServices: WebServices? = nil) -> NativeAccountProvider {
-        NativeAccountProvider(
-            webServices: webServices,
-            logoutUseCase: makeLogoutUseCase(),
-            loginUseCase: makeLoginUseCase(),
-            signupUseCase: makeSignupUseCase(),
-            apiTokenProvider: makeAPITokenProvider(),
-            vpnTokenProvider: makeVpnTokenProvider(),
-            accountDetailsUseCase: makeAccountDetailsUseCase(),
-            updateAccountUseCase: makeUpdateAccountUseCase(),
-            paymentUseCase: makePaymentUseCase(),
-            subscriptionsUseCase: makeSubscriptionsUseCase(),
-            deleteAccountUseCase: makeDeleteAccountUseCase(),
-            featureFlagsUseCase: makeFeatureFlagsUseCase()
-        )
-    }
-
     static func makeDefaultAccountProvider(with webServices: WebServices? = nil) -> DefaultAccountProvider {
         DefaultAccountProvider(
             apiTokenProvider: makeAPITokenProvider(),
