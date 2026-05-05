@@ -83,7 +83,10 @@ public final class Client {
     }
 
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {
-        ServersPinger.shared.reset()
+        Task {
+            await ServersPinger.shared.reset()
+        }
+
         ServersDaemon.shared.reset()
         ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
@@ -125,6 +128,8 @@ public final class Client {
      Refresh the ping number to the given servers
      */
     public static func ping(servers: [Server]) {
-        ServersPinger.shared.ping(withDestinations: servers)
+        Task {
+            await ServersPinger.shared.ping(withDestinations: servers)
+        }
     }
 }

@@ -46,7 +46,9 @@ class EndpointManagerTests: XCTestCase {
 
     func testGEN4Endpoints() throws {
 
-        ServersPinger.shared.ping(withDestinations: Client.providers.serverProvider.currentServers)
+        Task {
+            await ServersPinger.shared.ping(withDestinations: Client.providers.serverProvider.currentServers)
+        }
 
         eventually(timeout: 10.0) {
             let endpoints = EndpointManager.shared.availableEndpoints()

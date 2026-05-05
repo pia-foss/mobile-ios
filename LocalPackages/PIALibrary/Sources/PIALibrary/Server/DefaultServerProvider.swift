@@ -145,7 +145,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         }
         if currentServers.isEmpty {
             currentServers = bundle.servers
-            ServersPinger.shared.ping(withDestinations: currentServers)
+
+            Task {
+                await ServersPinger.shared.ping(withDestinations: currentServers)
+            }
         }
     }
 
