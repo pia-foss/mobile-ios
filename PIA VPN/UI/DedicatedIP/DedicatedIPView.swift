@@ -47,6 +47,7 @@ struct DedicatedIPView: View, ViewWithTitle {
             }
         }
         .listStyle(.plain)
+        .scrollDismissesKeyboard(.immediately)
         .background(Color.pia.background)
         .overlay {
             if viewModel.isLoading {
@@ -106,18 +107,10 @@ struct DedicatedIPView: View, ViewWithTitle {
             Button(L10n.Dedicated.Ip.Activate.Button.title) {
                 Task { await viewModel.activate() }
             }
-            .buttonStyle(PIAGreenButtonStyle())
+            .primaryButton(radius: 6)
         }
         .padding(6)
-        .background(Color.pia.surfaceContainerPrimary)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(
-                    isTokenFieldFocused ? Color.pia.primary : Color.pia.outline,
-                    lineWidth: 1
-                )
-        )
+        .modifier(TextFieldModifier(isFocused: isTokenFieldFocused, focusedOutline: .pia.primary))
     }
 
     // MARK: - DIP list section
@@ -188,18 +181,5 @@ struct DedicatedIPView: View, ViewWithTitle {
                 .tint(.white)
                 .scaleEffect(2)
         }
-    }
-}
-
-// MARK: - Button Style
-
-private struct PIAGreenButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .typography(.button1, color: .white)
-            .padding(13)
-            .background(Color.pia.primary)
-            .clipShape(RoundedRectangle(cornerRadius: 6))
-            .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
 }
