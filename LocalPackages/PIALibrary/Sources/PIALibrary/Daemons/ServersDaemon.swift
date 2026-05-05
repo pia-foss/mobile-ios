@@ -172,7 +172,9 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
         }
         log.debug("Start pinging servers")
 
-        ServersPinger.shared.ping(withDestinations: servers)
+        Task {
+            await ServersPinger.shared.ping(withDestinations: servers)
+        }
     }
 
     // MARK: Notifications
