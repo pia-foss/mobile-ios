@@ -78,6 +78,13 @@ final class DedicatedIPViewModel: ObservableObject {
             token = ""
             await load()
 
+        case .failure(.alreadyHasOne):
+            log.error("Activate DIP token failed: existing DIP already")
+            Macros.displayStickyNote(
+                withMessage: L10n.Dedicated.Ip.Message.Error.alreadyHasOne,
+                andImage: Asset.iconWarning.image
+            )
+
         case .failure(.expired):
             log.error("Activate DIP token failed with expired token error.")
             Macros.displayStickyNote(

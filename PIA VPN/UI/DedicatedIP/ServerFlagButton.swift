@@ -6,6 +6,7 @@
 //  Copyright © 2026 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAssetsFlags
 import PIAAssetsMobile
 import PIALocalizations
 import SwiftUI
@@ -17,7 +18,7 @@ struct ServerFlagButton: View {
 
     init(name: String, country: String, isDip: Bool) {
         self.name = name
-        let image = Image.flag(forCountry: country) ?? Image(uiImage: .remove)
+        let image = Flag.swiftUIImage(forCountry: country) ?? Image(uiImage: .remove)
         self.image = image
         self.isDip = isDip
     }
