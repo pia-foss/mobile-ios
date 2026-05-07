@@ -72,14 +72,13 @@ private extension LoginUseCase {
 
             guard let self else { return }
 
-            if error != nil {
-
-                completion(.unauthorized)
+            if let error {
+                completion(error)
             } else if let dataResponse {
                 let shouldSaveToken = configuration.path == .login
                 self.handleDataResponse(dataResponse, shouldSaveTokenFromResponse: shouldSaveToken, completion: completion)
             } else {
-                completion(.unauthorized)
+                completion(.noErrorAndNoResponse)
             }
         }
     }

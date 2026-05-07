@@ -175,9 +175,9 @@ class LoginUseCaseTests: XCTestCase {
         // AND the Vpn token is NOT refreshed
         XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
 
-        // AND an 'unauthorized' error is returned
+        // AND the actual connection error is returned (not 'unauthorized')
         XCTAssertNotNil(capturedError)
-        XCTAssertEqual(capturedError!, .unauthorized)
+        XCTAssertEqual(capturedError!, .connectionError(statusCode: 500))
 
     }
 
@@ -275,9 +275,9 @@ class LoginUseCaseTests: XCTestCase {
         // AND the Vpn token is NOT refreshed
         XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
 
-        // AND an 'unauthorized' error is returned
+        // AND the actual connection error is returned (not 'unauthorized')
         XCTAssertNotNil(capturedError)
-        XCTAssertEqual(capturedError!, .unauthorized)
+        XCTAssertEqual(capturedError!, .connectionError(statusCode: 500))
 
     }
 
@@ -334,9 +334,9 @@ class LoginUseCaseTests: XCTestCase {
         XCTAssertEqual(fixture.networkClientMock.executeRequestCalledAttempt, 1)
         XCTAssertEqual(fixture.networkClientMock.executeRequestWithConfiguation?.path, RequestAPI.Path.loginLink)
 
-        // AND an 'unauthorized' error is returned
+        // AND the actual connection error is returned (not 'unauthorized')
         XCTAssertNotNil(capturedError)
-        XCTAssertEqual(capturedError!, .unauthorized)
+        XCTAssertEqual(capturedError!, .connectionError(statusCode: 500))
 
     }
 
