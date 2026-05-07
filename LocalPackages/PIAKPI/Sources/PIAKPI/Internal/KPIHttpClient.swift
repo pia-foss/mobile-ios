@@ -179,15 +179,13 @@ final class KPIURLSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskD
     }
 
     private func serverCertificateAtIndex(_ trust: SecTrust, index: Int) -> SecCertificate? {
-        if #available(iOS 15.0, tvOS 15.0, macOS 12.0, *) {
-            guard let chain = SecTrustCopyCertificateChain(trust) as? [SecCertificate],
-                chain.indices.contains(index)
-            else {
-                return nil
-            }
-            return chain[index]
-        } else {
-            return SecTrustGetCertificateAtIndex(trust, index)
+        guard
+            let chain = SecTrustCopyCertificateChain(trust) as? [SecCertificate],
+            chain.indices.contains(index)
+        else {
+            return nil
         }
+
+        return chain[index]
     }
 }

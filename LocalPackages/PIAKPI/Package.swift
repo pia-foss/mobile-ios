@@ -18,5 +18,6 @@ let package = Package(
         .target(
             name: "PIAKPI"
         )
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )
