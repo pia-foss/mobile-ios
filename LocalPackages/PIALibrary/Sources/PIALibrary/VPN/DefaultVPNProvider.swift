@@ -103,11 +103,19 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
 
         if isLegacyProfile() {
-
+            // Set IKEv2 as default if user was using IKEv1.
             profile = IKEv2Profile()
-            //Set IKEv2 as default if user was using IKEv1
             let preferences = Client.preferences.editable()
             preferences.vpnType = IKEv2Profile.vpnType
+            #if os(iOS) || os(macOS)
+                // On macOS we avoid IKEv2.
+                if Platform.isRunningOnMac {
+                    profile = PIAWGTunnelProfile(
+                        bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier
+                    )
+                    preferences.vpnType = PIAWGTunnelProfile.vpnType
+                }
+            #endif
             preferences.commit()
 
             completionBlock()

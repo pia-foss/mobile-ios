@@ -882,7 +882,6 @@ final class DashboardViewController: AutolayoutViewController {
         var alertActions = [WifiAlertAction]()
         let reconnectAction = WifiAlertAction(
             title: L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.cta1,
-
             style: .default,
             action: handleSwitchProtocolAction)
         alertActions.append(reconnectAction)
@@ -920,7 +919,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func handleSwitchProtocolAction(_ action: UIAlertAction) {
         let editable = Client.preferences.editable()
-        editable.vpnType = IKEv2Profile.vpnType
+        editable.vpnType = Platform.isRunningOnMac ? PIAWGTunnelProfile.vpnType : IKEv2Profile.vpnType
         let action = editable.requiredVPNAction()
         editable.commit()
 
