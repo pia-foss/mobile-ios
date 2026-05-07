@@ -100,7 +100,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
 
         let expectation = expectation(description: "Wait for dedicatedIPStats to be updated")
 
-        sut.$showActivatedDialog.dropFirst().sink(receiveValue: { stats in
+        sut.$dedicatedIPStats.dropFirst().sink(receiveValue: { stats in
             expectation.fulfill()
         }).store(in: &cancellables)
 

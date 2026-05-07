@@ -16,7 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "git@github.com:pia-foss/mobile-ios-releases-kpi.git", exact: "1.2.3"),
+        .package(path: "../PIAKPI"),
         .package(path: "../PIACSI"),
         .package(path: "../PIAAccount"),
         .package(path: "../PIARegions"),
@@ -32,7 +32,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Reachability", package: "Reachability.swift"),
-                .product(name: "PIAKPI", package: "mobile-ios-releases-kpi"),
+                .product(name: "PIAKPI", package: "PIAKPI"),
                 .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "PIARegions"),
                 .product(name: "PIAAccount", package: "PIAAccount"),

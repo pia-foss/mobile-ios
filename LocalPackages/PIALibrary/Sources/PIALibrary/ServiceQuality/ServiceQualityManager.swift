@@ -16,12 +16,11 @@
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 //  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 //
 
 import Foundation
+import PIAKPI
 import UIKit
-import kpi
 
 private let log = PIALogger.logger(for: ServiceQualityManager.self)
 
@@ -72,26 +71,19 @@ public final class ServiceQualityManager: NSObject {
     public override init() {
         super.init()
 
-        if Client.environment == .staging {
-            kpiManager = KPIBuilder()
-                .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
-                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIStagingClientStateProvider())
-                .setEventTimeRoundGranularity(eventTimeRoundGranularity: KTimeUnit.hours)
-                .setEventTimeSendGranularity(eventSendTimeGranularity: KTimeUnit.milliseconds)
-                .setRequestFormat(requestFormat: KPIRequestFormat.kape)
-                .setPreferenceName(preferenceName: kpiPreferenceName)
-                .setUserAgent(userAgent: PIAWebServices.userAgent)
+        do {
+            let provider: KPIClientStateProvider = Client.environment == .staging ? PIAKPIStagingClientStateProvider() : PIAKPIClientStateProvider()
+            kpiManager = try KPIBuilder()
+                .setFlushEventMode(.perBatch)
+                .setKPIClientStateProvider(provider)
+                .setEventTimeRoundGranularity(.hours)
+                .setEventTimeSendGranularity(.milliseconds)
+                .setRequestFormat(.kape)
+                .setPreferenceName(kpiPreferenceName)
+                .setUserAgent(PIAWebServices.userAgent)
                 .build()
-        } else {
-            kpiManager = KPIBuilder()
-                .setKPIFlushEventMode(kpiSendEventMode: .perBatch)
-                .setKPIClientStateProvider(kpiClientStateProvider: PIAKPIClientStateProvider())
-                .setEventTimeRoundGranularity(eventTimeRoundGranularity: KTimeUnit.hours)
-                .setEventTimeSendGranularity(eventSendTimeGranularity: KTimeUnit.milliseconds)
-                .setRequestFormat(requestFormat: KPIRequestFormat.kape)
-                .setPreferenceName(preferenceName: kpiPreferenceName)
-                .setUserAgent(userAgent: PIAWebServices.userAgent)
-                .build()
+        } catch {
+            log.error("KPI manager build failed: \(error)")
         }
 
         NotificationCenter.default.addObserver(
@@ -112,18 +104,25 @@ public final class ServiceQualityManager: NSObject {
     }
 
     public func start() {
-        kpiManager?.start()
-        log.debug("KPI manager starts collecting statistics")
+        guard let kpiManager else { return }
+
+        Task {
+            await kpiManager.start()
+            log.debug("KPI manager starts collecting statistics")
+        }
     }
 
     public func stop() {
-        kpiManager?.stop(callback: { error in
-            if let error {
+        guard let kpiManager else { return }
+
+        Task {
+            do {
+                try await kpiManager.stop()
+                log.debug("KPI manager stopped")
+            } catch {
                 log.error("\(error)")
-                return
             }
-            log.debug("KPI manager stopped")
-        })
+        }
     }
 
     @objc private func appChangedState(with notification: Notification) {
@@ -137,70 +136,97 @@ public final class ServiceQualityManager: NSObject {
     }
 
     @objc private func flushEvents() {
-        kpiManager?.flush(callback: { error in
-            if let error {
+        guard let kpiManager else { return }
+
+        Task {
+            do {
+                try await kpiManager.flush()
+                log.debug("KPI events flushed")
+            } catch {
                 log.error("\(error)")
-                return
             }
-            log.debug("KPI events flushed")
-        })
+        }
     }
 
     public func connectionAttemptEvent() {
         let connectionSource = connectionSource()
-        if connectionSource == .manual && isAppActive {
-            let event = KPIClientEvent(
-                eventCountry: nil,
-                eventName: KPIConnectionEvent.vpnConnectionAttempt.rawValue,
-                eventProperties: [
-                    KPIEventPropertyKey.connectionSource.rawValue: connectionSource.rawValue,
-                    KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
-                    KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-                ],
-                eventInstant: Kotlinx_datetimeInstant.companion.fromEpochMilliseconds(epochMilliseconds: Date().epochMilliseconds)
-            )
-            kpiManager?.submit(event: event) { (error) in
+        guard connectionSource == .manual, isAppActive, let kpiManager else { return }
+
+        let event = KPIClientEvent(
+            eventCountry: nil,
+            eventName: KPIConnectionEvent.vpnConnectionAttempt.rawValue,
+            eventProperties: [
+                KPIEventPropertyKey.connectionSource.rawValue: connectionSource.rawValue,
+                KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
+                KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
+            ],
+            eventInstant: Date()
+        )
+
+        Task {
+            do {
+                try await kpiManager.submit(event: event)
                 log.debug("KPI event submitted \(event)")
+            } catch {
+                log.error("\(error)")
             }
         }
     }
 
     public func connectionEstablishedEvent() {
         let connectionSource = connectionSource()
-        if connectionSource == .manual && isAppActive {
-            let event = KPIClientEvent(
-                eventCountry: nil,
-                eventName: KPIConnectionEvent.vpnConnectionEstablished.rawValue,
-                eventProperties: createEstablishedEventProperties(),
-                eventInstant: Kotlinx_datetimeInstant.companion.fromEpochMilliseconds(epochMilliseconds: Date().epochMilliseconds)
-            )
-            kpiManager?.submit(event: event) { (error) in
+        guard connectionSource == .manual, isAppActive, let kpiManager else { return }
+
+        let event = KPIClientEvent(
+            eventCountry: nil,
+            eventName: KPIConnectionEvent.vpnConnectionEstablished.rawValue,
+            eventProperties: createEstablishedEventProperties(),
+            eventInstant: Date()
+        )
+
+        Task {
+            do {
+                try await kpiManager.submit(event: event)
                 log.debug("KPI event submitted \(event)")
+            } catch {
+                log.error("\(error)")
             }
         }
     }
 
     public func connectionCancelledEvent() {
         let disconnectionSource = disconnectionSource()
-        if disconnectionSource == .manual && isAppActive {
-            let event = KPIClientEvent(
-                eventCountry: nil,
-                eventName: KPIConnectionEvent.vpnConnectionCancelled.rawValue,
-                eventProperties: [
-                    KPIEventPropertyKey.connectionSource.rawValue: disconnectionSource.rawValue,
-                    KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
-                    KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-                ],
-                eventInstant: Kotlinx_datetimeInstant.companion.fromEpochMilliseconds(epochMilliseconds: Date().epochMilliseconds)
-            )
-            kpiManager?.submit(event: event) { (error) in
+        guard disconnectionSource == .manual, isAppActive, let kpiManager else { return }
+
+        let event = KPIClientEvent(
+            eventCountry: nil,
+            eventName: KPIConnectionEvent.vpnConnectionCancelled.rawValue,
+            eventProperties: [
+                KPIEventPropertyKey.connectionSource.rawValue: disconnectionSource.rawValue,
+                KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
+                KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
+            ],
+            eventInstant: Date()
+        )
+
+        Task {
+            do {
+                try await kpiManager.submit(event: event)
                 log.debug("KPI event submitted \(event)")
+            } catch {
+                log.error("\(error)")
             }
         }
     }
 
     public func availableData(completion: @escaping (([String]) -> Void)) {
-        kpiManager?.recentEvents { events in
+        guard let kpiManager else {
+            completion([])
+            return
+        }
+
+        Task {
+            let events = await kpiManager.recentEvents()
             completion(events)
         }
     }
