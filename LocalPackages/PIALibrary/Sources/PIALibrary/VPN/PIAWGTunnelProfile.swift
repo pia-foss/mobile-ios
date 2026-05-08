@@ -154,23 +154,28 @@ import Foundation
                     }
 
                     let currentStatus = vpn.connection.status
+                    log.debug("[WG] connect — current status: \(currentStatus.descriptionForLog)")
 
                     // If the tunnel is already active, stop it before starting the new one.
                     // Calling startTunnel() on a live session may silently retain the existing
                     // connection rather than switching to the new server, leaving the app in a
                     // state where it believes it is connected when it is not.
                     if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+                        log.debug("[WG] connect — stopping active tunnel before restart")
                         vpn.connection.stopVPNTunnel()
                     }
 
                     if currentStatus == .disconnecting {
+                        log.debug("[WG] connect — waiting for .disconnected before start")
                         self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
                     } else {
                         do {
                             let session = vpn.connection as? NETunnelProviderSession
                             try session?.startTunnel(options: nil)
+                            log.debug("[WG] connect — startTunnel issued")
                             callback?(nil)
                         } catch let e {
+                            log.error("[WG] connect — startTunnel threw: \(e)")
                             callback?(e)
                         }
                     }
@@ -185,15 +190,20 @@ import Foundation
                     return
                 }
 
-                if let observer {
-                    NotificationCenter.default.removeObserver(observer)
+                defer {
+                    if let observer {
+                        NotificationCenter.default.removeObserver(observer)
+                    }
                 }
 
+                log.debug("[WG] waitForDisconnectedThenStart — disconnected, starting")
                 do {
                     let session = vpn.connection as? NETunnelProviderSession
                     try session?.startTunnel(options: nil)
+                    log.debug("[WG] waitForDisconnectedThenStart — startTunnel issued")
                     callback?(nil)
                 } catch let e {
+                    log.error("[WG] waitForDisconnectedThenStart — startTunnel threw: \(e)")
                     callback?(e)
                 }
             }
