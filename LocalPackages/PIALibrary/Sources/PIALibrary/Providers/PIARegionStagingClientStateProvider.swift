@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import PIARegions
+import regions
 
-final class PIARegionStagingClientStateProvider: RegionEndpointProvider {
+final class PIARegionStagingClientStateProvider: IRegionEndpointProvider {
     func regionEndpoints() -> [RegionEndpoint] {
         [
             RegionEndpoint(endpoint: Client.configuration.baseUrl, isProxy: false, usePinnedCertificate: false, certificateCommonName: nil)
