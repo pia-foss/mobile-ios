@@ -48,6 +48,7 @@ public struct VPNRegionsResponse: Codable, Sendable {
         public var longitude: String?
         public var autoRegion: Bool
         public var portForward: Bool
+        public var proxy: [String]?
         public var servers: [String: [ServerDetails]]
 
         enum CodingKeys: String, CodingKey {
@@ -61,6 +62,7 @@ public struct VPNRegionsResponse: Codable, Sendable {
             case longitude
             case autoRegion = "auto_region"
             case portForward = "port_forward"
+            case proxy
             case servers
         }
 
@@ -75,6 +77,7 @@ public struct VPNRegionsResponse: Codable, Sendable {
             longitude: String? = nil,
             autoRegion: Bool = false,
             portForward: Bool = false,
+            proxy: [String]? = nil,
             servers: [String: [ServerDetails]] = [:]
         ) {
             self.id = id
@@ -87,16 +90,26 @@ public struct VPNRegionsResponse: Codable, Sendable {
             self.longitude = longitude
             self.autoRegion = autoRegion
             self.portForward = portForward
+            self.proxy = proxy
             self.servers = servers
         }
 
         public struct ServerDetails: Codable, Sendable {
             public var ip: String
             public var cn: String
+            public var van: Bool
 
-            public init(ip: String = "", cn: String = "") {
+            public init(ip: String = "", cn: String = "", van: Bool = true) {
                 self.ip = ip
                 self.cn = cn
+                self.van = van
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                ip = try container.decode(String.self, forKey: .ip)
+                cn = try container.decode(String.self, forKey: .cn)
+                van = (try? container.decode(Bool.self, forKey: .van)) ?? true
             }
         }
     }
