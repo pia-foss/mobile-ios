@@ -44,7 +44,8 @@ public protocol ModalController: AnyObject {
     func dismissModal(completion: (() -> Void)?)
 }
 
-public protocol AnimatingLoadingDelegate: AnyObject {
+protocol AnimatingLoadingDelegate: AnyObject {
+    var mainLoadingButton: PIAButton? { get }
     func showLoadingAnimation()
     func hideLoadingAnimation()
 }
@@ -79,6 +80,8 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 
     /// Loading view controller for showing animations
     private var loadingViewController: LoadingViewController?
+
+    var mainLoadingButton: PIAButton? { nil }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -233,6 +236,11 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 extension AutolayoutViewController: AnimatingLoadingDelegate {
 
     @objc public func showLoadingAnimation() {
+        if let mainLoadingButton {
+            mainLoadingButton.isLoading = true
+            return
+        }
+
         // If already showing, keep it
         guard loadingViewController == nil else { return }
 
@@ -259,6 +267,13 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
     }
 
     @objc public func hideLoadingAnimation() {
+        if let mainLoadingButton {
+            mainLoadingButton.isLoading = false
+            // we fall through on purpose
+        }
+
+        guard loadingViewController != nil else { return }
+
         // Unlock UI
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let window = windowScene?.windows.first
