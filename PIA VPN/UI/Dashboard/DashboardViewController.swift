@@ -210,6 +210,30 @@ final class DashboardViewController: AutolayoutViewController {
         updateTileLayout()
     }
 
+    override func didRefreshOrientationConstraints() {
+        super.didRefreshOrientationConstraints()
+        applyReadableContentMarginsIfNeeded()
+    }
+
+    /// Cap horizontal content width to the system's `readableContentGuide`.
+    /// The storyboard pins `viewContent` and `viewRows` to `viewContainer.layoutMargins`,
+    /// so widening those margins centers the content without changing any constraints.
+    private func applyReadableContentMarginsIfNeeded() {
+        guard let viewContainer else { return }
+
+        let readableWidth = view.readableContentGuide.layoutFrame.width
+        let containerWidth = viewContainer.bounds.width
+        guard readableWidth > 0, containerWidth > readableWidth else { return }
+
+        let horizontalMargin = (containerWidth - readableWidth) / 2
+        var margins = viewContainer.layoutMargins
+        guard margins.left != horizontalMargin || margins.right != horizontalMargin else { return }
+
+        margins.left = horizontalMargin
+        margins.right = horizontalMargin
+        viewContainer.layoutMargins = margins
+    }
+
     private func addObservers() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
