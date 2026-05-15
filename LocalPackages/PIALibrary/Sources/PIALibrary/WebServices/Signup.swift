@@ -37,12 +37,21 @@ public struct Signup {
     }
 }
 
+private let log = PIALogger.logger(for: SignupRequest.self)
+
 #if os(iOS) || os(tvOS)
     extension SignupRequest {
         func signup(withStore store: InAppProvider) -> Signup? {
-            guard let receipt = store.paymentReceipt else {
-                return nil
+            var receipt: Data? = store.paymentReceipt
+
+            retryReadReceipt: for attempt in 0..<5 {
+                if let receipt, receipt.count > 100 { break retryReadReceipt }
+                Thread.sleep(forTimeInterval: 0.250)
+                log.debug("Re reading payment receipt \(attempt)...")
+                receipt = store.paymentReceipt
             }
+
+            guard let receipt else { return nil }
             var object = Signup(email: email, receipt: receipt)
             object.marketing = marketing
             if let txid = transaction?.identifier {

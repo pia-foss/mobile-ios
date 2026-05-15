@@ -459,6 +459,18 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 callback?(nil, ClientError.unauthorized)
                 return
             }
+
+            // Refresh the on-disk receipt before reading it. On "Designed for iPad"
+            // apps running on Apple Silicon Macs, the post-purchase receipt write is
+            // not always flushed by the time signup runs, causing the backend to
+            // reject signup with badReceipt.
+            accessedStore.refreshPaymentReceipt { [weak self] _ in
+                guard let self else { return }
+                self.performSignup(with: request, callback: callback)
+            }
+        }
+
+        private func performSignup(with request: SignupRequest, callback: ((UserAccount?, Error?) -> Void)?) {
             guard let signup = request.signup(withStore: accessedStore) else {
                 callback?(nil, ClientError.noReceipt)
                 return
@@ -589,6 +601,15 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 callback?(nil, ClientError.renewingNonRenewable)
                 return
             }
+
+            // Same Mac-receipt-race mitigation as signup: refresh before reading.
+            accessedStore.refreshPaymentReceipt { [weak self] _ in
+                guard let self else { return }
+                self.performRenew(with: request, user: user, callback: callback)
+            }
+        }
+
+        private func performRenew(with request: RenewRequest, user: UserAccount, callback: ((UserAccount?, Error?) -> Void)?) {
             guard let payment = request.payment(withStore: accessedStore) else {
                 callback?(nil, ClientError.noReceipt)
                 return
