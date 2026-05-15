@@ -54,7 +54,7 @@ struct CardFactory {
             URL(string: "https://www.privateinternetaccess.com/blog/wireguide-all-about-the-wireguard-vpn-protocol/"),
             {
 
-                guard let rootView = AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController) else {
+                guard let rootView = RootCoordinator.shared.topPresentedViewController() else {
                     return
                 }
 

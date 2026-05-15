@@ -25,14 +25,9 @@ extension AppDelegate {
     private func presentDebugMenu(_ notification: Notification) {
         guard
             #available(iOS 16, *),
-            let rootVC = window?.rootViewController
+            let top = RootCoordinator.shared.topPresentedViewController()
         else {
             return
-        }
-
-        var top = rootVC
-        while let presented = top.presentedViewController {
-            top = presented
         }
 
         let navVC = UINavigationController()

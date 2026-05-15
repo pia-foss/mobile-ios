@@ -1960,7 +1960,7 @@
         <!--Navigation Controller-->
         <scene sceneID="MYm-cz-jdS">
             <objects>
-                <navigationController definesPresentationContext="YES" id="boO-X9-UIe" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DashboardNavigationController" definesPresentationContext="YES" id="boO-X9-UIe" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="KQZ-nf-ENZ">
                         <rect key="frame" x="0.0" y="100" width="375" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -376,13 +376,23 @@ final class MenuViewController: AutolayoutViewController {
         sheet.addCancelAction(L10n.Global.cancel)
         sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) { [weak self] in
             guard let self else { return }
-            self.dismiss(animated: true) {
+            let proceed: () -> Void = {
                 log.debug("Account: Logging out...")
                 DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
 
                 MenuViewController.performLogout { _ in
                     DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
+                    if UserInterface.isIpad {
+                        RootCoordinator.shared.setRoot(.login)
+                    }
                 }
+            }
+
+            if self.splitViewController != nil {
+                // Sidebar in split view — nothing to dismiss.
+                proceed()
+            } else {
+                self.dismiss(animated: true, completion: proceed)
             }
         }
         present(sheet, animated: true, completion: nil)
@@ -525,8 +535,13 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
 
-            dismiss(animated: true) {
-                self.delegate?.menu(self, didSelect: item)
+            if splitViewController != nil {
+                // Sidebar in split view — nothing to dismiss, delegate handles the navigation.
+                delegate?.menu(self, didSelect: item)
+            } else {
+                dismiss(animated: true) {
+                    self.delegate?.menu(self, didSelect: item)
+                }
             }
         }
     }

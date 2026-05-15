@@ -66,10 +66,7 @@ class ViewCommand: Command {
 
         if let view = AvailableViews(rawValue: payload) {
 
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-                let dashboard = rootNavVC.viewControllers.first as? DashboardViewController
-            {
+            if let dashboard = RootCoordinator.shared.dashboard {
 
                 switch view {
                 case .about:
