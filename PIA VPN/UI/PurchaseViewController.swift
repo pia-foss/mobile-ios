@@ -109,9 +109,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         super.viewWillAppear(animated)
 
         if let products = config.accountProvider.planProducts {
-            Task { [weak self] in
-                await self?.refreshPlans(products)
-            }
+            refreshPlans(products)
         } else {
             disableInteractions(fully: false)
         }
@@ -198,9 +196,9 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
 
     }
 
-    private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
+    private func refreshPlans(_ plans: [Plan: any InAppProduct]) {
         if let yearly = plans[.yearly] {
-            let purchase = await PurchasePlan(
+            let purchase = PurchasePlan(
                 plan: .yearly,
                 product: yearly,
                 monthlyFactor: 12.0
@@ -220,10 +218,9 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
                 privacy: L10n.Welcome.Agreement.Message.privacy,
                 privacyUrl: Client.configuration.privacyUrl
             )
-
         }
         if let monthly = plans[.monthly] {
-            let purchase = await PurchasePlan(
+            let purchase = PurchasePlan(
                 plan: .monthly,
                 product: monthly,
                 monthlyFactor: 1.0
@@ -234,9 +231,12 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             allPlans[1] = purchase
         }
 
-        collectionPlans.isUserInteractionEnabled = true
-        collectionPlans.reloadData()
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
+        DispatchQueue.main.async { [weak collectionPlans, selectedPlanIndex] in
+            guard let collectionPlans else { return }
+            collectionPlans.isUserInteractionEnabled = true
+            collectionPlans.reloadData()
+            collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
+        }
     }
 
     private func disableInteractions(fully: Bool) {
@@ -262,10 +262,8 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
     // MARK: Notifications
 
     @objc private func productsDidFetch(notification: Notification) {
-        let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
-        Task { [weak self] in
-            await self?.refreshPlans(products)
-        }
+        let products: [Plan: any InAppProduct] = notification.userInfo(for: .products)
+        refreshPlans(products)
         enableInteractions()
     }
 

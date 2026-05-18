@@ -25,12 +25,12 @@ import StoreKit
 
 private let log = PIALogger.logger(for: AppStoreProvider.self)
 
-class AppStoreProvider: NSObject, InAppProvider {
+final class AppStoreProvider: NSObject, InAppProvider {
     private var productsRequest: SKProductsRequest?
 
     private var receiptRefreshRequest: SKReceiptRefreshRequest?
 
-    private var productsCallback: LibraryCallback<[InAppProduct]>?
+    private var productsCallback: LibraryCallback<[any InAppProduct]>?
 
     private var purchaseCallback: LibraryCallback<InAppTransaction>?
 
@@ -42,7 +42,7 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     // MARK: InAppProvider
 
-    private(set) var availableProducts: [InAppProduct]?
+    private(set) var availableProducts: [any InAppProduct]?
 
     var paymentReceipt: Data? {
         guard let url = Bundle.main.appStoreReceiptURL else {
@@ -70,7 +70,7 @@ class AppStoreProvider: NSObject, InAppProvider {
         SKPaymentQueue.default().remove(self)
     }
 
-    func fetchProducts(identifiers: [String], _ callback: (([InAppProduct]?, Error?) -> Void)?) {
+    func fetchProducts(identifiers: [String], _ callback: (([any InAppProduct]?, Error?) -> Void)?) {
         guard !identifiers.isEmpty else {
             callback?([], nil)
             return
@@ -85,7 +85,7 @@ class AppStoreProvider: NSObject, InAppProvider {
         productsRequest?.start()
     }
 
-    func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+    func purchaseProduct(_ product: any InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
         guard product is AppStoreProduct else {
             log.error("Product must be AppStoreProduct, but got \(type(of: product))")
             callback?(nil, ClientError.productUnavailable)
@@ -156,15 +156,21 @@ extension AppStoreProvider: SKProductsRequestDelegate {
         productsRequest = nil
         log.debug("Retrieved products: \(response.products)")
 
-        var availableProducts = [InAppProduct]()
-        for product in response.products {
-            log.debug("  -> \(product.localizedTitle) @ \(product.price)")
-            availableProducts.append(AppStoreProduct(native: product))
-        }
-        self.availableProducts = availableProducts
+        Task {
+            var hasIntroOffer: Bool?
+            var availableProducts = [any InAppProduct]()
+            for product in response.products {
+                if hasIntroOffer == nil, let groupId = product.subscriptionGroupIdentifier {
+                    hasIntroOffer = await StoreKit.Product.SubscriptionInfo.isEligibleForIntroOffer(for: groupId)
+                }
+                log.debug("  -> \(product.localizedTitle) @ \(product.price)")
+                availableProducts.append(AppStoreProduct(native: product, hasIntroOffer: hasIntroOffer ?? false))
+            }
+            self.availableProducts = availableProducts
 
-        productsCallback?(availableProducts, nil)
-        productsCallback = nil
+            productsCallback?(availableProducts, nil)
+            productsCallback = nil
+        }
     }
 }
 

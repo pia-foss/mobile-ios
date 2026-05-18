@@ -60,7 +60,11 @@ public final class PIAButton: UIButton {
     }
 
     public var isLoading: Bool = false {
-        didSet { reloadButtonIsLoading(oldValue: oldValue) }
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadButtonIsLoading(oldValue: oldValue)
+            }
+        }
     }
 
     override init(frame: CGRect) {
