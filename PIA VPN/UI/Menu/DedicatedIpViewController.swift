@@ -71,6 +71,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(reloadTableView), name: .DedicatedIpReload, object: nil)
         nc.addObserver(self, selector: #selector(showLoadingAnimation), name: .DedicatedIpShowAnimation, object: nil)
         nc.addObserver(self, selector: #selector(hideLoadingAnimation), name: .DedicatedIpHideAnimation, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
         configureTableView()
 
@@ -88,6 +89,39 @@ final class DedicatedIpViewController: AutolayoutViewController {
 
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Dedicated.Ip.title)
+    }
+
+    @objc private func keyboardWillChangeFrame(_ notification: Notification) {
+        guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        else { return }
+
+        let targetOverlap: CGFloat
+        if let textField = firstResponder(in: tableView) as? UITextField {
+            let textFieldInWindow = textField.convert(textField.bounds, to: nil)
+            let padding: CGFloat = 16
+            targetOverlap = max(0, textFieldInWindow.maxY + padding - endFrame.minY)
+        } else {
+            targetOverlap = 0
+        }
+
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: UIView.AnimationOptions.curveEaseInOut,
+            animations: { [weak self] in
+                self?.view.transform = CGAffineTransform(translationX: 0, y: -targetOverlap)
+            },
+        )
+    }
+
+    private func firstResponder(in view: UIView) -> UIView? {
+        if view.isFirstResponder { return view }
+        for subview in view.subviews {
+            if let found = firstResponder(in: subview) {
+                return found
+            }
+        }
+        return nil
     }
 
     @MainActor
