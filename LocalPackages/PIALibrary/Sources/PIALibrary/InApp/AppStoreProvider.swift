@@ -34,7 +34,7 @@ class AppStoreProvider: NSObject, InAppProvider {
 
     private var purchaseCallback: LibraryCallback<InAppTransaction>?
 
-    private var receiptCallback: SuccessLibraryCallback?
+    private var receiptCallbacks: [SuccessLibraryCallback] = []
 
     deinit {
         SKPaymentQueue.default().remove(self)
@@ -48,7 +48,14 @@ class AppStoreProvider: NSObject, InAppProvider {
         guard let url = Bundle.main.appStoreReceiptURL else {
             return nil
         }
-        return try? Data(contentsOf: url)
+        do {
+            let contents = try Data(contentsOf: url)
+            log.debug("Returning receipt with \(contents.count) bytes.")
+            return contents
+        } catch {
+            log.debug("Failed to read contents of appStoreReceiptURL")
+            return nil
+        }
     }
 
     func startObservingTransactions() {
@@ -127,7 +134,14 @@ class AppStoreProvider: NSObject, InAppProvider {
     func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
         log.debug("Refreshing local copy of payment receipt...")
 
-        receiptCallback = callback
+        if let callback {
+            receiptCallbacks.append(callback)
+        }
+
+        // Coalesce: if a refresh is already in flight, the in-flight request will
+        // fire every queued callback when it finishes.
+        guard receiptRefreshRequest == nil else { return }
+
         receiptRefreshRequest = SKReceiptRefreshRequest(receiptProperties: nil)
         receiptRefreshRequest?.delegate = self
         receiptRefreshRequest?.start()
@@ -190,25 +204,28 @@ extension AppStoreProvider: SKPaymentTransactionObserver {
             case .failed:
                 log.debug("  -> Failed: \(transaction) [\(transactionDate)]")
 
+                if let error = transaction.error as? SKError, error.code == .unknown {
+                    // PSD2/SCA: Apple sends `failed` with SKError.unknown while waiting
+                    // for the user to authenticate. Do NOT finish — the real outcome
+                    // will be redelivered as a fresh purchased/failed transaction.
+                    log.error("Unknown error code. Keeping transaction alive to wait for PSD2/SCA outcome.")
+                    break
+                }
+
                 finishTransaction(transaction, success: false)
 
-                if let error = transaction.error as? SKError, error.code == .unknown {
-                    log.error("Unknown error code. To support PSD2 and Strong Customer Authentication, Apple is returning a failed state instead deferred, so we need to keep the app waiting for the response without removing the callback.")
-                    break
+                if let error = transaction.error {
+                    log.error("Failed transaction: \(transaction) (error: \(error))")
                 } else {
-                    if let error = transaction.error {
-                        log.error("Failed transaction: \(transaction) (error: \(error))")
-                    } else {
-                        log.warning("Transaction was cancelled")
-                    }
-
-                    if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
-                        purchaseCallback?(nil, nil)
-                    } else {
-                        purchaseCallback?(nil, transaction.error)
-                    }
-                    purchaseCallback = nil
+                    log.warning("Transaction was cancelled")
                 }
+
+                if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
+                    purchaseCallback?(nil, nil)
+                } else {
+                    purchaseCallback?(nil, transaction.error)
+                }
+                purchaseCallback = nil
 
             @unknown default:
                 log.error("Unknown transactionState: \(transaction.transactionState)")
@@ -229,8 +246,9 @@ extension AppStoreProvider: SKRequestDelegate {
         }
         receiptRefreshRequest = nil
         log.debug("Finished refreshing payment receipt")
-        receiptCallback?(nil)
-        receiptCallback = nil
+        let callbacks = receiptCallbacks
+        receiptCallbacks.removeAll()
+        callbacks.forEach { $0(nil) }
     }
 
     func request(_ request: SKRequest, didFailWithError error: Error) {
@@ -239,8 +257,9 @@ extension AppStoreProvider: SKRequestDelegate {
         }
         receiptRefreshRequest = nil
         log.error("Failed to refresh payment receipt (error: \(error))")
-        receiptCallback?(error)
-        receiptCallback = nil
+        let callbacks = receiptCallbacks
+        receiptCallbacks.removeAll()
+        callbacks.forEach { $0(error) }
     }
 }
 
