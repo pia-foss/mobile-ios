@@ -93,11 +93,14 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
     private func showProtocolOptions(point: CGPoint) {
 
-        let options = [
+        var options = [
             IKEv2Profile.vpnType,
             PIAWGTunnelProfile.vpnType,
             PIATunnelProfile.vpnType
         ]
+        if Platform.isRunningOnMac {
+            options.removeAll { $0 == IKEv2Profile.vpnType }
+        }
 
         let width = self.view.frame.width / 2
         let height = heightForOptions(options)  //Default height * 3 for 3 protocols

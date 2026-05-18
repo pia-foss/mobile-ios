@@ -94,7 +94,7 @@ class ViewCommand: Command {
     }
 }
 
-class ActionCommand: Command {
+final class ActionCommand: Command {
 
     private enum AvailableActions: String {
         case killswitch = "killswitch"
@@ -128,7 +128,7 @@ class ActionCommand: Command {
                         activateWireGuard()
                     }
                 case .ikev2:
-                    if value {
+                    if value && !Platform.isRunningOnMac {
                         activateIKEv2()
                     }
                 case .geo:
@@ -174,6 +174,7 @@ class ActionCommand: Command {
     }
 
     private func activateIKEv2() {
+        guard !Platform.isRunningOnMac else { return }
         let preferences = Client.preferences.editable()
         preferences.vpnType = IKEv2Profile.vpnType
         preferences.commit()

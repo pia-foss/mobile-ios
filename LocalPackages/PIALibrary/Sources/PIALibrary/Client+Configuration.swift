@@ -260,6 +260,7 @@ extension Client {
          - Parameter profile: The `VPNProfile` to add.
          */
         public func addVPNProfile(_ profile: VPNProfile) {
+            if profile is IKEv2Profile && Platform.isRunningOnMac { return }
             availableVPNProfiles.append(profile)
         }
 
