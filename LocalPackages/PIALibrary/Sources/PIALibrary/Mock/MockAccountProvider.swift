@@ -157,7 +157,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     #if os(iOS) || os(tvOS)
         /// :nodoc:
-        public var planProducts: [Plan: InAppProduct]? {
+        public var planProducts: [Plan: any InAppProduct]? {
             return delegate.planProducts
         }
     #endif
@@ -281,7 +281,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     #if os(iOS) || os(tvOS)
         /// :nodoc:
-        public func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
             delegate.listPlanProducts(callback)
         }
 

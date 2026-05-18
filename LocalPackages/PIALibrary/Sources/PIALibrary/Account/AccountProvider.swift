@@ -27,7 +27,7 @@ public protocol AccountProvider: AnyObject {
 
     #if os(iOS) || os(tvOS)
         /// The in-app products required to purchase a `Plan`.
-        var planProducts: [Plan: InAppProduct]? { get }
+        var planProducts: [Plan: any InAppProduct]? { get }
     #endif
 
     /// Returns `true` if accountInfo is nil and loggedIn true.
@@ -181,7 +181,7 @@ public protocol AccountProvider: AnyObject {
 
          - Parameter callback: Returns a map of `Plan`s with the associated `InAppProduct` to purchase.
          */
-        func listPlanProducts(_ callback: LibraryCallback<[Plan: InAppProduct]>?)
+        func listPlanProducts(_ callback: LibraryCallback<[Plan: any InAppProduct]>?)
 
         /**
          Purchases a subscription plan and save purchase to history.

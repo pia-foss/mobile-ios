@@ -24,13 +24,17 @@ import Foundation
 
 #if os(iOS) || os(tvOS)
     private final class MockProduct: InAppProduct {
+        enum Native { case none }
+
         let identifier: String
 
         let price: NSNumber
 
         let priceLocale = Locale.current
 
-        let native: Any? = nil
+        let native: Native = .none
+
+        var hasIntroOffer: Bool { false }
 
         init(_ identifier: String, _ price: NSNumber) {
             self.identifier = identifier
@@ -49,7 +53,7 @@ import Foundation
         init(with receipt: Data? = Data()) {
             self.paymentReceipt = receipt
         }
-        var availableProducts: [InAppProduct]?
+        var availableProducts: [any InAppProduct]?
 
         var paymentReceipt: Data?
 
@@ -59,7 +63,7 @@ import Foundation
         func stopObservingTransactions() {
         }
 
-        func fetchProducts(identifiers: [String], _ callback: (([InAppProduct]?, Error?) -> Void)?) {
+        func fetchProducts(identifiers: [String], _ callback: (([any InAppProduct]?, Error?) -> Void)?) {
             availableProducts = []
             for (i, identifier) in accessedConfiguration.allProductIdentifiers().enumerated() {
                 let price = (Double(i + 1) * 50.0) as NSNumber
@@ -73,7 +77,7 @@ import Foundation
                 ])
         }
 
-        func purchaseProduct(_ product: InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+        func purchaseProduct(_ product: any InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
             callback?(MockTransaction(), nil)
         }
 

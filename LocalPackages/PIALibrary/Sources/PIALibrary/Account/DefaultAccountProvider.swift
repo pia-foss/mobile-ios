@@ -45,11 +45,11 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
     // MARK: AccountProvider
 
     #if os(iOS) || os(tvOS)
-        public var planProducts: [Plan: InAppProduct]? {
+        public var planProducts: [Plan: any InAppProduct]? {
             guard let products = accessedStore.availableProducts else {
                 return nil
             }
-            var map = [Plan: InAppProduct]()
+            var map = [Plan: any InAppProduct]()
             for product in products {
                 guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
                     continue
@@ -401,7 +401,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
 
-        public func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
             log.debug("Fetching available products...")
 
             if let products = planProducts {
@@ -414,7 +414,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             log.debug("No available products in cache, requesting from store...")
 
             let identifiers = accessedConfiguration.allProductIdentifiers()
-            accessedStore.fetchProducts(identifiers: identifiers) { (products, error) in
+            accessedStore.fetchProducts(identifiers: identifiers) { (_, error) in
                 let products = self.planProducts ?? [:]
                 log.debug("Available products from store: \(products)")
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
