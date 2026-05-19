@@ -31,6 +31,8 @@ import Foundation
     /// Implementation of `VPNProfile` providing WireGuard connectivity.
     public final class PIAWGTunnelProfile: NetworkExtensionProfile {
 
+        private var waitObserver: NSObjectProtocol?
+
         public func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration? {
 
             let S = PIAWireguardConfiguration.Keys.self
@@ -184,16 +186,20 @@ import Foundation
         }
 
         private func waitForDisconnectedThenStart(vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
-            var observer: NSObjectProtocol?
-            observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [vpn] _ in
+            if let existing = waitObserver {
+                NotificationCenter.default.removeObserver(existing)
+                waitObserver = nil
+            }
+
+            var token: NSObjectProtocol?
+            token = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [weak self, vpn] _ in
                 guard vpn.connection.status == .disconnected else {
                     return
                 }
 
                 defer {
-                    if let observer {
-                        NotificationCenter.default.removeObserver(observer)
-                    }
+                    token.map { NotificationCenter.default.removeObserver($0) }
+                    self?.waitObserver = nil
                 }
 
                 log.debug("[WG] waitForDisconnectedThenStart — disconnected, starting")
@@ -207,6 +213,7 @@ import Foundation
                     callback?(e)
                 }
             }
+            waitObserver = token
         }
 
         /// :nodoc:
