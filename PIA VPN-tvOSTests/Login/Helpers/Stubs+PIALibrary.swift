@@ -91,14 +91,14 @@ extension InAppProductMock {
                 identifier: "001",
                 price: 10.99,
                 priceLocale: .current,
-                native: nil,
+                native: .none,
                 description: "monthly"
             ),
             Plan.yearly: InAppProductMock(
                 identifier: "002",
                 price: 100.99,
                 priceLocale: .current,
-                native: nil,
+                native: .none,
                 description: "yearly"
             )
         ]
@@ -113,7 +113,7 @@ extension SubscriptionProduct {
                     identifier: "001",
                     price: 10.99,
                     priceLocale: .current,
-                    native: nil,
+                    native: .none,
                     description: "monthly"
                 ),
                 type: .monthly
@@ -123,7 +123,7 @@ extension SubscriptionProduct {
                     identifier: "002",
                     price: 100.99,
                     priceLocale: .current,
-                    native: nil,
+                    native: .none,
                     description: "yearly"
                 ),
                 type: .yearly

@@ -9,14 +9,17 @@
 import Foundation
 import PIALibrary
 
-class InAppProductMock: InAppProduct {
+final class InAppProductMock: InAppProduct {
+    enum Native: Sendable { case none }
+
     let identifier: String
     let price: NSNumber
     let priceLocale: Locale
-    let native: Any?
-    var description: String
+    let native: Native
+    let hasIntroOffer: Bool = false
+    let description: String
 
-    init(identifier: String, price: NSNumber, priceLocale: Locale, native: Any?, description: String) {
+    init(identifier: String, price: NSNumber, priceLocale: Locale, native: Native, description: String) {
         self.identifier = identifier
         self.price = price
         self.priceLocale = priceLocale
