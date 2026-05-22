@@ -23,35 +23,22 @@
 import Foundation
 import NetworkExtension
 
-public enum IKEv2IntegrityAlgorithm: String {
+public enum IKEv2IntegrityAlgorithm: String, CaseIterable {
 
-    public static let defaultIntegrity: IKEv2IntegrityAlgorithm = .SHA256
-    #if os(iOS)
-        case SHA96 = "SHA96"
-        case SHA160 = "SHA160"
-    #endif
+    public static let `default`: IKEv2IntegrityAlgorithm = .SHA256
+
     case SHA256 = "SHA256"
     case SHA384 = "SHA384"
     case SHA512 = "SHA512"
 
-    public func value() -> String {
-        return self.rawValue
-    }
-
-    public func description() -> String {
-        return self.rawValue
-    }
+    @inlinable
+    public var description: String { rawValue }
 
     public func networkExtensionValue() -> NEVPNIKEv2IntegrityAlgorithm {
         switch self {
-        #if os(iOS)
-            case .SHA96: return NEVPNIKEv2IntegrityAlgorithm.SHA96
-            case .SHA160: return NEVPNIKEv2IntegrityAlgorithm.SHA160
-        #endif
         case .SHA256: return NEVPNIKEv2IntegrityAlgorithm.SHA256
         case .SHA384: return NEVPNIKEv2IntegrityAlgorithm.SHA384
         case .SHA512: return NEVPNIKEv2IntegrityAlgorithm.SHA512
         }
     }
-
 }

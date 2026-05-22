@@ -31,7 +31,7 @@ import WidgetKit
 
 private let log = PIALogger.logger(for: SettingsViewController.self)
 
-class SettingsViewController: AutolayoutViewController, SettingsDelegate {
+final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     private struct Cells {
         static let setting = "SettingCell"
@@ -172,20 +172,17 @@ class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: value)!
         } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            pendingPreferences.ikeV2EncryptionAlgorithm = value
+            let algorithm = IKEv2EncryptionAlgorithm(rawValue: value) ?? .default
+            pendingPreferences.ikeV2EncryptionAlgorithm = algorithm
             //reset integrity algorithm if the encryption changes
-            var algorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm
-            if let currentAlgorithm = IKEv2EncryptionAlgorithm(rawValue: value) {
-                algorithm = currentAlgorithm
-            }
             if let integrity = algorithm.integrityAlgorithms().first {
-                pendingPreferences.ikeV2IntegrityAlgorithm = integrity.rawValue
+                pendingPreferences.ikeV2IntegrityAlgorithm = integrity
             }
         }
         savePreferences()
     }
 
-    func updateHandshake(handshake value: String) {
+    func updateHandshake(handshake value: IKEv2IntegrityAlgorithm) {
         pendingPreferences.ikeV2IntegrityAlgorithm = value
         savePreferences()
     }
