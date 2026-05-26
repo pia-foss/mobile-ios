@@ -570,27 +570,27 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
-    var ikeV2IntegrityAlgorithm: String {
+    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String else {
-                return IKEv2IntegrityAlgorithm.defaultIntegrity.value()
-            }
-            return value
+            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String,
+                let algorithm = IKEv2IntegrityAlgorithm(rawValue: value)
+            else { return .default }
+            return algorithm
         }
         set {
-            backend.set(newValue, forKey: Entries.ikeV2IntegrityAlgorithm)
+            backend.set(newValue.rawValue, forKey: Entries.ikeV2IntegrityAlgorithm)
         }
     }
 
-    var ikeV2EncryptionAlgorithm: String {
+    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? String else {
-                return IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
-            }
-            return value
+            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? String,
+                let algorithm = IKEv2EncryptionAlgorithm(rawValue: value)
+            else { return .default }
+            return algorithm
         }
         set {
-            backend.set(newValue, forKey: Entries.ikeV2EncryptionAlgorithm)
+            backend.set(newValue.rawValue, forKey: Entries.ikeV2EncryptionAlgorithm)
         }
     }
 

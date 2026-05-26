@@ -59,9 +59,9 @@ private protocol PreferencesStore: AnyObject {
 
     var nmtRulesEnabled: Bool { get set }
 
-    var ikeV2IntegrityAlgorithm: String { get set }
+    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm { get set }
 
-    var ikeV2EncryptionAlgorithm: String { get set }
+    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm { get set }
 
     var ikeV2PacketSize: Int { get set }
 
@@ -242,7 +242,7 @@ extension Client {
         }
 
         /// Integrity algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2IntegrityAlgorithm: String {
+        public fileprivate(set) var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm {
             get {
                 return accessedDatabase.plain.ikeV2IntegrityAlgorithm
             }
@@ -252,7 +252,7 @@ extension Client {
         }
 
         /// Encryption algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2EncryptionAlgorithm: String {
+        public fileprivate(set) var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm {
             get {
                 return accessedDatabase.plain.ikeV2EncryptionAlgorithm
             }
@@ -550,8 +550,8 @@ extension Client.Preferences {
                 NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue
             ]
             nmtRulesEnabled = false
-            ikeV2IntegrityAlgorithm = IKEv2IntegrityAlgorithm.defaultIntegrity.value()
-            ikeV2EncryptionAlgorithm = IKEv2EncryptionAlgorithm.defaultAlgorithm.value()
+            ikeV2IntegrityAlgorithm = .default
+            ikeV2EncryptionAlgorithm = .default
             ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
             lastKnownException = nil
@@ -645,10 +645,10 @@ extension Client.Preferences {
         public var nmtRulesEnabled: Bool
 
         /// :nodoc:
-        public var ikeV2IntegrityAlgorithm: String
+        public var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm
 
         /// :nodoc:
-        public var ikeV2EncryptionAlgorithm: String
+        public var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm
 
         /// :nodoc:
         public var ikeV2PacketSize: Int

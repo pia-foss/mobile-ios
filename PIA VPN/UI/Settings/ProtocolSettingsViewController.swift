@@ -163,7 +163,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
             ])
 
         } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            options.append(contentsOf: IKEv2EncryptionAlgorithm.allCases.map { $0.rawValue })
+            options.append(contentsOf: IKEv2EncryptionAlgorithm.allCases.map(\.rawValue))
         }
 
         let width = self.view.frame.width / 2
@@ -178,12 +178,10 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     }
 
     private func showHandshakeOptions(point: CGPoint) {
+        let encryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
+        let options = encryptionAlgorithm.integrityAlgorithms()
 
-        var options = IKEv2EncryptionAlgorithm.defaultAlgorithm.integrityAlgorithms().map { $0.description() }
-
-        if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-            options = encryptionAlgorithm.integrityAlgorithms().map { $0.description() }
-        }
+        guard options.count > 1 else { return }
 
         let width = self.view.frame.width / 2
         let height = 44 * options.count
@@ -280,11 +278,8 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                     break
                 }
 
-                if let encryptionAlgorithm = IKEv2EncryptionAlgorithm(rawValue: pendingPreferences.ikeV2EncryptionAlgorithm) {
-                    cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
-                } else {
-                    cell.detailTextLabel?.text = IKEv2EncryptionAlgorithm.defaultAlgorithm.rawValue
-                }
+                let encryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
+                cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
 
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 cell.detailTextLabel?.text = "ChaCha20"
@@ -295,7 +290,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                 cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
                 cell.accessoryType = .none
             } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                cell.detailTextLabel?.text = IKEv2IntegrityAlgorithm(rawValue: pendingPreferences.ikeV2IntegrityAlgorithm)?.rawValue
+                cell.detailTextLabel?.text = pendingPreferences.ikeV2IntegrityAlgorithm.description
+                let options = pendingPreferences.ikeV2EncryptionAlgorithm.integrityAlgorithms()
+                let canChoose = options.count > 1
+                cell.accessoryType = canChoose ? .disclosureIndicator : .none
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 cell.detailTextLabel?.text = "Noise_IK"
                 cell.accessoryType = .none

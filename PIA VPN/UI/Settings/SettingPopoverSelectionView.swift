@@ -292,9 +292,9 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
 
 }
 
-class HandshakePopoverSelectionView: SettingPopoverSelectionView {
+final class HandshakePopoverSelectionView: SettingPopoverSelectionView {
 
-    var options: [String]!
+    var options: [IKEv2IntegrityAlgorithm]!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

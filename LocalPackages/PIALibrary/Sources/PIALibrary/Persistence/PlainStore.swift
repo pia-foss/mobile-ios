@@ -119,9 +119,9 @@ protocol PlainStore: AnyObject {
     var nmtTemporaryOpenNetworks: [String] { get set }
 
     //MARK: IKEv2
-    var ikeV2IntegrityAlgorithm: String { get set }
+    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm { get set }
 
-    var ikeV2EncryptionAlgorithm: String { get set }
+    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm { get set }
 
     var ikeV2PacketSize: Int { get set }
 

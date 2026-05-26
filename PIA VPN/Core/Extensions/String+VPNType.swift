@@ -83,7 +83,7 @@ public extension String {
             return AppPreferences.shared.piaHandshake.description
         case IKEv2Profile.vpnType:
             let preferences = Client.preferences.editable()
-            return preferences.ikeV2IntegrityAlgorithm
+            return preferences.ikeV2IntegrityAlgorithm.description
         default:
             return self
         }
@@ -101,7 +101,7 @@ public extension String {
             return "---"
         case IKEv2Profile.vpnType:
             let preferences = Client.preferences.editable()
-            return preferences.ikeV2EncryptionAlgorithm
+            return preferences.ikeV2EncryptionAlgorithm.description
         default:
             return self
         }

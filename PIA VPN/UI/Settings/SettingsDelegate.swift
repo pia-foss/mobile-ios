@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import PIALibrary
 import PIAWireguard
 import TunnelKitCore
 import TunnelKitOpenVPN
@@ -82,6 +83,6 @@ protocol SettingsDelegate: AnyObject {
         Updates the handshake value
         - Parameter String: The handshake value.
      */
-    func updateHandshake(handshake value: String)
+    func updateHandshake(handshake value: IKEv2IntegrityAlgorithm)
 
 }
