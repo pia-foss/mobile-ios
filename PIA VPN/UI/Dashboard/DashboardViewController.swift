@@ -354,10 +354,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         switch self.tileModeStatus {  //change the status
         case .normal:
-            if splitViewController != nil {
-                // Sidebar is persistent on iPad — no hamburger button.
-                navigationItem.leftBarButtonItem = nil
-            } else if let leftBarButton = navigationItem.leftBarButtonItem,
+            if let leftBarButton = navigationItem.leftBarButtonItem,
                 leftBarButton.accessibilityLabel != L10n.Global.cancel
             {
                 leftBarButton.image = Asset.itemMenu.image
@@ -494,7 +491,11 @@ final class DashboardViewController: AutolayoutViewController {
 
     @objc private func openMenu(_ sender: Any?) {
         if let splitViewController {
-            splitViewController.show(.primary)
+            let isHidden = splitViewController.displayMode == .secondaryOnly
+            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
+                splitViewController.preferredDisplayMode = isHidden ? .oneBesideSecondary : .secondaryOnly
+                splitViewController.view.layoutIfNeeded()
+            }
             return
         }
         Theme.current.applySideMenu()
