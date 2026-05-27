@@ -210,6 +210,30 @@ final class DashboardViewController: AutolayoutViewController {
         updateTileLayout()
     }
 
+    override func didRefreshOrientationConstraints() {
+        super.didRefreshOrientationConstraints()
+        applyReadableContentMarginsIfNeeded()
+    }
+
+    /// Cap horizontal content width to the system's `readableContentGuide`.
+    /// The storyboard pins `viewContent` and `viewRows` to `viewContainer.layoutMargins`,
+    /// so widening those margins centers the content without changing any constraints.
+    private func applyReadableContentMarginsIfNeeded() {
+        guard let viewContainer else { return }
+
+        let readableWidth = view.readableContentGuide.layoutFrame.width
+        let containerWidth = viewContainer.bounds.width
+        guard readableWidth > 0, containerWidth > readableWidth else { return }
+
+        let horizontalMargin = (containerWidth - readableWidth) / 2
+        var margins = viewContainer.layoutMargins
+        guard margins.left != horizontalMargin || margins.right != horizontalMargin else { return }
+
+        margins.left = horizontalMargin
+        margins.right = horizontalMargin
+        viewContainer.layoutMargins = margins
+    }
+
     private func addObservers() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(accountDidLogout(notification:)), name: .PIAAccountDidLogout, object: nil)
@@ -263,6 +287,16 @@ final class DashboardViewController: AutolayoutViewController {
 
     // MARK: Menu
     private func setupMenu() {
+        // On iPad we live inside a UISplitViewController and MenuViewController is the
+        // persistent sidebar — no SideMenu drawer is needed. The split view wires up the
+        // menu delegate via prepare(for:) when the sidebar nav is set as the primary column.
+        if splitViewController != nil {
+            if let menuNav = splitViewController?.viewController(for: .primary) as? UINavigationController {
+                setMenuDelegate(menuNavigationController: menuNav)
+            }
+            return
+        }
+
         if SideMenuManager.default.leftMenuNavigationController == nil {
             SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         }
@@ -320,7 +354,10 @@ final class DashboardViewController: AutolayoutViewController {
 
         switch self.tileModeStatus {  //change the status
         case .normal:
-            if let leftBarButton = navigationItem.leftBarButtonItem,
+            if splitViewController != nil {
+                // Sidebar is persistent on iPad — no hamburger button.
+                navigationItem.leftBarButtonItem = nil
+            } else if let leftBarButton = navigationItem.leftBarButtonItem,
                 leftBarButton.accessibilityLabel != L10n.Global.cancel
             {
                 leftBarButton.image = Asset.itemMenu.image
@@ -376,6 +413,17 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func presentLogin() {
 
+        // On iPad we swap the window root entirely instead of presenting login modally —
+        // the persistent sidebar/dashboard split view is replaced with the login flow.
+        if UserInterface.isIpad {
+            RootCoordinator.shared.setRoot(.login)
+            if isUnauthorized {
+                Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
+                isUnauthorized = false
+            }
+            return
+        }
+
         dismissExistingViewController()
 
         var preset = AppConfiguration.Welcome.defaultPreset()
@@ -414,13 +462,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     public static func instanceInNavigationStack() -> DashboardViewController? {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let rootNavVC = appDelegate.window?.rootViewController as? UINavigationController,
-            let dashboard = rootNavVC.viewControllers.first as? DashboardViewController
-        {
-            return dashboard
-        }
-        return nil
+        return RootCoordinator.shared.dashboard
     }
 
     func dismissExistingViewController() {
@@ -451,6 +493,10 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func openMenu(_ sender: Any?) {
+        if let splitViewController {
+            splitViewController.show(.primary)
+            return
+        }
         Theme.current.applySideMenu()
         present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
@@ -647,7 +693,9 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func closeSession() {
         log.debug("Account: Logging out...")
         AppPreferences.shared.reset()
-        if let window = self.view.window,
+        if UserInterface.isIpad {
+            RootCoordinator.shared.setRoot(.login)
+        } else if let window = self.view.window,
             let rootViewController = window.rootViewController
         {
             rootViewController.dismiss(animated: false, completion: nil)
@@ -787,22 +835,18 @@ final class DashboardViewController: AutolayoutViewController {
         #if !STAGING
             let forceUpdate = ForceUpdateViewController()
             forceUpdate.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async { [weak self] in
-                var isOtherViewPresented = false
-                if let presented = self?.presentedViewController {
-                    if !(presented is ForceUpdateViewController) {
-                        isOtherViewPresented = true
-                    }
-                }
-
-                if isOtherViewPresented {
-                    self?.dismiss(
+            DispatchQueue.main.async {
+                guard let presenter = RootCoordinator.shared.topPresentedViewController() else { return }
+                if presenter is ForceUpdateViewController { return }
+                if presenter.presentingViewController != nil {
+                    presenter.dismiss(
                         animated: false,
                         completion: {
-                            self?.present(forceUpdate, animated: false)
+                            RootCoordinator.shared.topPresentedViewController()?
+                                .present(forceUpdate, animated: false)
                         })
                 } else {
-                    self?.present(forceUpdate, animated: false)
+                    presenter.present(forceUpdate, animated: false)
                 }
             }
         #endif
@@ -829,12 +873,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func showNonCompliantWifiAlert(title: String, message: String, actions: [WifiAlertAction]) {
-        guard
-            let window = UIApplication.shared.delegate?.window,
-            let presentedViewController = window?.rootViewController?.presentedViewController ?? window?.rootViewController
-        else { return }
+        guard let presenter = RootCoordinator.shared.topPresentedViewController() else { return }
 
-        if let alertController = presentedViewController as? UIAlertController, alertController.title == title { return }
+        if let alertController = presenter as? UIAlertController, alertController.title == title { return }
 
         let sheet = Macros.alertController(title, message)
 
@@ -846,7 +887,7 @@ final class DashboardViewController: AutolayoutViewController {
             sheet.addAction(alertAction)
         }
 
-        presentedViewController.present(sheet, animated: true, completion: nil)
+        presenter.present(sheet, animated: true, completion: nil)
     }
 
     private func presentNonCompliantWifiAlert() {
@@ -945,7 +986,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func removeLeakProtectionAlert() {
-        guard let presentedLeakProtectionAlert = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController as? UIAlertController,
+        guard let presentedLeakProtectionAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController,
             presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title
         else { return }
 

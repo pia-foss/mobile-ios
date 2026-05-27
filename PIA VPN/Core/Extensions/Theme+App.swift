@@ -33,6 +33,10 @@ extension Theme {
 
     func applySideMenu() {
 
+        // SideMenu is only used as the iPhone drawer. On iPad the menu lives inside the
+        // root UISplitViewController, so skip the no-op configuration here.
+        guard !UserInterface.isIpad else { return }
+
         let screenSize = UIScreen.main.bounds.size
         let minEdge = min(screenSize.width, screenSize.height)
 

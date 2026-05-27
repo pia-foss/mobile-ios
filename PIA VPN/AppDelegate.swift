@@ -64,6 +64,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         setupDebugMenuObserver()
 
+        if let window {
+            RootCoordinator.shared.install(in: window)
+        }
+
         return true
     }
 
@@ -103,8 +107,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
         if (rootViewController == nil) { return nil }
-        if (rootViewController.isKind(of: UINavigationController.self)) {
-            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UINavigationController).visibleViewController)
+        if let nav = rootViewController as? UINavigationController {
+            return topViewControllerWithRootViewController(rootViewController: nav.visibleViewController)
+        }
+        if let split = rootViewController as? UISplitViewController {
+            if let secondary = split.viewController(for: .secondary) {
+                return topViewControllerWithRootViewController(rootViewController: secondary)
+            }
+            if let last = split.viewControllers.last {
+                return topViewControllerWithRootViewController(rootViewController: last)
+            }
         }
         return rootViewController
     }
@@ -181,7 +193,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             let token = url.absoluteString[AppConstants.QRSignin.url.count...]
             Client.configuration.tvOSBindToken = token
 
-            if let dashboardViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? DashboardViewController {
+            if let dashboardViewController = RootCoordinator.shared.dashboard {
                 if let apiToken = Client.providers.accountProvider.apiToken,
                     let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token)
                 {
@@ -319,13 +331,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
 
         case .selectRegion:
-            guard let rootNavVC = window?.rootViewController as? UINavigationController else {
+            guard let dashboard = RootCoordinator.shared.dashboard else {
                 return
             }
-            guard let mainVC = rootNavVC.viewControllers.first as? DashboardViewController else {
-                return
-            }
-            mainVC.selectRegion(animated: true)
+            dashboard.selectRegion(animated: true)
         }
     }
 
@@ -365,12 +374,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate {
 
     // MARK: - App Delegate Ref
-    class func delegate() -> AppDelegate {
+    static func delegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
-    class func getRootViewController() -> UIViewController? {
-        return AppDelegate.delegate().topViewControllerWithRootViewController(rootViewController: UIApplication.shared.keyWindow?.rootViewController)
+    static func getRootTopViewController() -> UIViewController? {
+        return RootCoordinator.shared.topPresentedViewController()
     }
 
 }
@@ -378,7 +387,7 @@ extension AppDelegate {
 extension AppDelegate {
 
     private func dismissLeakProtectionAlert() {
-        if let presentedAlert = window?.rootViewController?.presentedViewController as? UIAlertController {
+        if let presentedAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController {
             let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
 
             if presentedAlert.title == leakProtectionAlertTitle {

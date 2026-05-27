@@ -216,7 +216,7 @@ final class RatingManager: RatingManagerProtocol {
 
     private func askForConnectionIssuesFeedback() {
 
-        guard let rootView = AppDelegate.getRootViewController() else {
+        guard let rootView = AppDelegate.getRootTopViewController() else {
             return
         }
 
