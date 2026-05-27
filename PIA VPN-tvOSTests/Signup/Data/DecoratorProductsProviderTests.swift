@@ -104,7 +104,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
             productsProviderResult: (productsStub, error),
             subscriptionInformationProviderResult: subscriptionInformationProviderResult)
 
-        var capturedProducts: [Plan: InAppProduct]?
+        var capturedProducts: [Plan: any InAppProduct]?
         var capturedError: Error?
         let expectation = expectation(description: "Waiting for listPlanProducts to finish")
 
@@ -123,13 +123,13 @@ final class DecoratorProductsProviderTests: XCTestCase {
         XCTAssertEqual(capturedProducts?[.monthly]?.price, productsStub[.monthly]?.price)
         XCTAssertEqual(capturedProducts?[.monthly]?.priceLocale, productsStub[.monthly]?.priceLocale)
         XCTAssertEqual(capturedProducts?[.monthly]?.description, productsStub[.monthly]?.description)
-        XCTAssertNil(capturedProducts?[.monthly]?.native)
+        XCTAssertEqual(capturedProducts?[.monthly]?.native as! InAppProductMock.Native, productsStub[.monthly]?.native)
 
         XCTAssertEqual(capturedProducts?[.yearly]?.identifier, productsStub[.yearly]?.identifier)
         XCTAssertEqual(capturedProducts?[.yearly]?.price, productsStub[.yearly]?.price)
         XCTAssertEqual(capturedProducts?[.yearly]?.priceLocale, productsStub[.yearly]?.priceLocale)
         XCTAssertEqual(capturedProducts?[.yearly]?.description, productsStub[.yearly]?.description)
-        XCTAssertNil(capturedProducts?[.yearly]?.native)
+        XCTAssertEqual(capturedProducts?[.yearly]?.native as! InAppProductMock.Native, productsStub[.yearly]?.native)
     }
 
     func test_listPlanProducts_complets_with_error_when_decoratee_complets_with_error() throws {

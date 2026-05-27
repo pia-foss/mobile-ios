@@ -55,6 +55,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     @IBOutlet private weak var collectionPlans: UICollectionView!
     @IBOutlet private weak var subscribeNowButton: PIAButton!
+    override var mainLoadingButton: PIAButton? { subscribeNowButton }
     @IBOutlet private weak var loginButton: PIAButton!
     @IBOutlet private weak var restorePurchaseButton: UIButton!
     @IBOutlet private weak var textAgreement: UITextView!
@@ -121,9 +122,8 @@ final class GetStartedViewController: PIAWelcomeViewController {
     // MARK: Actions
 
     @IBAction func confirmPlan() {
-        if selectedPlanIndex < plans.count {
-            let plan = plans[selectedPlanIndex]
-            self.startPurchaseProcessWithEmail("", andPlan: plan)
+        if let plan = plans[safeAt: selectedPlanIndex] {
+            startPurchaseProcessWithEmail("", andPlan: plan)
         }
     }
 
@@ -171,14 +171,12 @@ final class GetStartedViewController: PIAWelcomeViewController {
         andPlan plan: PurchasePlan
     ) {
         isPurchasing = true
-        disableInteractions()
-        self.showLoadingAnimation()
+        self.handleLoadingState()
 
         config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
             guard let self else { return }
             self.isPurchasing = false
-            self.enableInteractions()
-            self.hideLoadingAnimation()
+            self.handleLoadingState()
 
             guard let transaction = transaction else {
                 if let error = error {
@@ -252,42 +250,24 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     public func handleInitialStatus() {
-        if config.accountProvider.planProducts != nil {
-            isFetchingProducts = false
-        }
-
-        if !isFetchingProducts {
-            self.handleVisibilityOfVIews()
-        }
+        isFetchingProducts = config.accountProvider.planProducts == nil
     }
 
     // MARK: Notifications
 
     @objc private func productsDidFetch(notification: Notification) {
+        let products: [Plan: any InAppProduct] = notification.userInfo(for: .products)
+        refreshPlans(products)
+
         isFetchingProducts = false
-        let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
-        DispatchQueue.main.async {
-            self.handleVisibilityOfVIews()
-            Task { [weak self] in
-                await self?.refreshPlans(products)
-            }
-            self.enableInteractions()
-        }
+        handleLoadingState()
     }
 
-    private func handleVisibilityOfVIews() {
-        if !isFetchingProducts {
-            if !isPurchasing {
-                self.hideLoadingAnimation()
-            }
-
-            DispatchQueue.main.async {
-                if let products = self.config.accountProvider.planProducts {
-                    Task { [weak self] in
-                        await self?.refreshPlans(products)
-                    }
-                }
-            }
+    private func handleLoadingState() {
+        if isFetchingProducts || isPurchasing {
+            showLoadingAnimation()
+        } else {
+            hideLoadingAnimation()
         }
     }
 
@@ -297,12 +277,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
         setupNavigationBarButtons()
 
         if let products = config.accountProvider.planProducts {
-            Task { [weak self] in
-                await self?.refreshPlans(products)
-            }
+            refreshPlans(products)
         } else {
             showLoadingAnimation()
-            disableInteractions()
         }
     }
 
@@ -329,16 +306,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     // MARK: Helpers
-
-    private func disableInteractions() {
-        self.subscribeNowButton.isEnabled = false
-    }
-
-    private func enableInteractions() {
-        if !isPurchasing {
-            self.subscribeNowButton.isEnabled = true
-        }
-    }
 
     public func navigateToLoginView() {
         self.performSegue(
@@ -371,9 +338,11 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     // MARK: InApp refresh plan
-    private func refreshPlans(_ plans: [Plan: InAppProduct]) async {
+
+    @MainActor
+    private func refreshPlans(_ plans: [Plan: any InAppProduct]) {
         if let yearly = plans[.yearly] {
-            let purchase = await PurchasePlan(
+            let purchase = PurchasePlan(
                 plan: .yearly,
                 product: yearly,
                 monthlyFactor: 12.0
@@ -389,7 +358,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
             DispatchQueue.main.async { [weak self] in
                 if let label = self?.walkthroughDescription {
                     label.text =
-                        if purchase.hasIntroOffer {
+                        if purchase.product.hasIntroOffer {
                             L10n.Signup.Walkthrough.Page._2.description
                                 + "\n"
                                 + L10n.Signup.Purchase.Trials.intro
@@ -418,7 +387,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         }
 
         if let monthly = plans[.monthly] {
-            let purchase = await PurchasePlan(
+            let purchase = PurchasePlan(
                 plan: .monthly,
                 product: monthly,
                 monthlyFactor: 1.0
@@ -429,12 +398,13 @@ final class GetStartedViewController: PIAWelcomeViewController {
             self.plans[1] = purchase
         }
 
-        collectionPlans.isUserInteractionEnabled = true
-        collectionPlans.reloadData()
-        collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
-
+        DispatchQueue.main.async { [weak collectionPlans, selectedPlanIndex] in
+            guard let collectionPlans else { return }
+            collectionPlans.isUserInteractionEnabled = true
+            collectionPlans.reloadData()
+            collectionPlans.selectItem(at: IndexPath(row: selectedPlanIndex, section: 0), animated: false, scrollPosition: [])
+        }
     }
-
 }
 
 extension GetStartedViewController: UICollectionViewDataSource, UICollectionViewDelegate {

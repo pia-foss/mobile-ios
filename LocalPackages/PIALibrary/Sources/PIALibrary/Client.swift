@@ -50,9 +50,7 @@ public final class Client {
 
     static var webServices: WebServices = PIAWebServices()
 
-    #if os(iOS) || os(tvOS)
-        public static var store: InAppProvider = AppStoreProvider()
-    #endif
+    public static var store: InAppProvider = AppStoreProvider()
 
     // MARK: Initialization
 

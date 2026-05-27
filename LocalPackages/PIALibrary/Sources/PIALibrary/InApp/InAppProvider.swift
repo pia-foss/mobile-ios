@@ -23,7 +23,7 @@
 import Foundation
 
 public protocol InAppProvider: AnyObject {
-    var availableProducts: [InAppProduct]? { get }
+    var availableProducts: [any InAppProduct]? { get }
 
     var paymentReceipt: Data? { get }
 
@@ -31,9 +31,9 @@ public protocol InAppProvider: AnyObject {
 
     func stopObservingTransactions()
 
-    func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?)
+    func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[any InAppProduct]>?)
 
-    func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?)
+    func purchaseProduct(_ product: any InAppProduct, _ callback: LibraryCallback<InAppTransaction>?)
 
     func finishTransaction(_ transaction: InAppTransaction, success: Bool)
 

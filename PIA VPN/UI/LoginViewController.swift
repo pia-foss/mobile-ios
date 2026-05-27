@@ -51,6 +51,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     @IBOutlet private weak var textPassword: BorderedTextField!
 
     @IBOutlet private weak var buttonLogin: PIAButton!
+    override var mainLoadingButton: PIAButton? { buttonLogin }
 
     @IBOutlet private weak var couldNotGetPlanButton: UIButton!
 
@@ -455,16 +456,6 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
 
     func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
         config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: topViewController)
-    }
-
-    override func showLoadingAnimation() {
-        // Don't call parent class
-        buttonLogin.isLoading = true
-    }
-
-    override func hideLoadingAnimation() {
-        // Don't call parent class
-        buttonLogin.isLoading = false
     }
 }
 

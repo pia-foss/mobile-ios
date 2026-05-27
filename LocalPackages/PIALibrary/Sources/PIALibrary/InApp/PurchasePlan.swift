@@ -22,15 +22,21 @@
 
 import Foundation
 
-public class PurchasePlan: NSObject {
-    private class DummyInAppProduct: InAppProduct {
+public final class PurchasePlan: NSObject {
+    private final class DummyInAppProduct: InAppProduct {
+        enum Native {
+            case none
+        }
+
         let identifier = ""
 
         let price: NSNumber = 0
 
         let priceLocale = Locale.current
 
-        let native: Any? = nil
+        let native: Native = .none
+
+        let hasIntroOffer: Bool = false
     }
 
     private static let formatter: NumberFormatter = {
@@ -55,7 +61,7 @@ public class PurchasePlan: NSObject {
 
     public let plan: Plan
 
-    public let product: InAppProduct
+    public let product: any InAppProduct
 
     public let monthlyFactor: Double
 
@@ -64,8 +70,6 @@ public class PurchasePlan: NSObject {
     public var detail = ""
 
     public var bestValue = false
-
-    public var hasIntroOffer: Bool = false
 
     public var price: NSNumber {
         return product.price
@@ -103,11 +107,10 @@ public class PurchasePlan: NSObject {
         monthlyFactor = 1.0
     }
 
-    public init(plan: Plan, product: InAppProduct, monthlyFactor: Double) async {
+    public init(plan: Plan, product: any InAppProduct, monthlyFactor: Double) {
         precondition(monthlyFactor > 0.0)
         self.plan = plan
         self.product = product
-        self.hasIntroOffer = await product.isEligibleForIntroOffer()
         self.monthlyFactor = monthlyFactor
     }
 

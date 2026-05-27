@@ -24,7 +24,8 @@ import Foundation
 import StoreKit
 
 /// Wraps any native implementation of an in-app product by providing a common interface.
-public protocol InAppProduct: AnyObject, CustomStringConvertible {
+public protocol InAppProduct: AnyObject, CustomStringConvertible, Sendable {
+    associatedtype Native: Sendable
 
     /// The product identifier.
     var identifier: String { get }
@@ -36,7 +37,10 @@ public protocol InAppProduct: AnyObject, CustomStringConvertible {
     var priceLocale: Locale { get }
 
     /// The underlying native product implementation.
-    var native: Any? { get }
+    var native: Native { get }
+
+    /// `true` if the user is eligible for an intro offer.
+    var hasIntroOffer: Bool { get }
 }
 
 extension InAppProduct {

@@ -20,7 +20,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         return accountProvider.webServices
     }
 
-    var planProducts: [Plan: InAppProduct]? {
+    var planProducts: [Plan: any InAppProduct]? {
         return accessedProviders.accountProvider.planProducts
     }
 
@@ -98,7 +98,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+    func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
         accessedProviders.accountProvider.listPlanProducts(callback)
     }
 
