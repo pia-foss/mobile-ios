@@ -694,13 +694,6 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func closeSession() {
         log.debug("Account: Logging out...")
         AppPreferences.shared.reset()
-        if UserInterface.isIpad {
-            RootCoordinator.shared.setRoot(.login)
-        } else if let window = self.view.window,
-            let rootViewController = window.rootViewController
-        {
-            rootViewController.dismiss(animated: false, completion: nil)
-        }
         Client.providers.accountProvider.logout(nil)
     }
 

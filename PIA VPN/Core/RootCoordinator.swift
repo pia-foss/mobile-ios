@@ -72,6 +72,7 @@ final class RootCoordinator: NSObject {
 
         window.rootViewController = newRoot
         window.makeKeyAndVisible()
+        window.isUserInteractionEnabled = true
     }
 
     private func makeMainRoot() -> UIViewController {
