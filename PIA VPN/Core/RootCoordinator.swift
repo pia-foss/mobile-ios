@@ -84,6 +84,7 @@ final class RootCoordinator: NSObject {
             split.preferredDisplayMode = .oneBesideSecondary
             split.preferredSplitBehavior = .tile
             split.presentsWithGesture = true
+            split.displayModeButtonVisibility = .never
             split.setViewController(menuNav, for: .primary)
             split.setViewController(dashboardNav, for: .secondary)
             splitViewController = split
