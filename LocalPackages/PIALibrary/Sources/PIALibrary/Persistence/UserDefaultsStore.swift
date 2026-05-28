@@ -25,103 +25,103 @@ import Foundation
 private let log = PIALogger.logger(for: UserDefaultsStore.self)
 
 final class UserDefaultsStore: PlainStore, ConfigurationAccess {
-    private struct Entries {
-        static let username = "LoggedUsername"  // legacy
+    fileprivate enum Entry: String, CaseIterable {
+        case username = "LoggedUsername"  // legacy
 
-        static let accountInfo = "LoggedAccountInfo"  // legacy
+        case accountInfo = "LoggedAccountInfo"  // legacy
 
-        static let lastSignupEmail = "LastSignupEmail"
+        case lastSignupEmail = "LastSignupEmail"
 
-        static let tokenMigrated = "TokenMigrated"
+        case tokenMigrated = "TokenMigrated"
 
-        static let publicIP = "PublicIP"
+        case publicIP = "PublicIP"
 
-        static let lastServerCN = "LastServerCN"
+        case lastServerCN = "LastServerCN"
 
-        static let historicalServers = "HistoricalServers"
+        case historicalServers = "HistoricalServers"
 
-        static let cachedServers = "CachedServers"
+        case cachedServers = "CachedServers"
 
-        static let serversConfiguration = "ServersConfiguration"
+        case serversConfiguration = "ServersConfiguration"
 
-        static let preferredServer = "CurrentRegion"  // legacy
+        case preferredServer = "CurrentRegion"  // legacy
 
-        static let lastConnectedRegion = "LastConnectedRegion"
+        case lastConnectedRegion = "LastConnectedRegion"
 
-        static let preferredServerDIPToken = "CurrentRegionDIPToken"
+        case preferredServerDIPToken = "CurrentRegionDIPToken"
 
-        static let pingByServerIdentifier = "PingByServerIdentifier"
+        case pingByServerIdentifier = "PingByServerIdentifier"
 
-        static let vpnType = "VPNType"
+        case vpnType = "VPNType"
 
-        static let vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
+        case vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
 
-        static let vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
+        case vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
 
-        static let lastKnownVpnStatus = "LastKnownVPNStatus"
+        case lastKnownVpnStatus = "LastKnownVPNStatus"
 
-        static let persistentConnection = "PersistentConnection"  // legacy
+        case persistentConnection = "PersistentConnection"  // legacy
 
-        static let showReconnectNotifications = "ShowReconnectNotifications"
+        case showReconnectNotifications = "ShowReconnectNotifications"
 
-        static let mace = "MACE"  // legacy
+        case mace = "MACE"  // legacy
 
-        static let visibleTiles = "VisibleTiles"
+        case visibleTiles = "VisibleTiles"
 
-        static let orderedTiles = "OrderedTiles"
+        case orderedTiles = "OrderedTiles"
 
-        static let useWiFiProtection = "UseWiFiProtection"
+        case useWiFiProtection = "UseWiFiProtection"
 
-        static let trustCellularData = "TrustCellularData"
+        case trustCellularData = "TrustCellularData"
 
-        static let nmtMigrationSuccess = "NMTMigrationSuccess"
+        case nmtMigrationSuccess = "NMTMigrationSuccess"
 
-        static let trustedNetworks = "TrustedNetworks"
+        case trustedNetworks = "TrustedNetworks"
 
-        static let serverNetwork = "ServerNetwork"
+        case serverNetwork = "ServerNetwork"
 
-        static let ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
+        case ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
 
-        static let ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
+        case ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
 
-        static let ikeV2PacketSize = "IKEV2PacketSize"
+        case ikeV2PacketSize = "IKEV2PacketSize"
 
-        static let signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
+        case signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
 
-        static let nmtRulesEnabled = "NMTRulesEnabled"
+        case nmtRulesEnabled = "NMTRulesEnabled"
 
-        static let cachedNetworks = "CachedNetworks"
+        case cachedNetworks = "CachedNetworks"
 
-        static let nmtTrustedNetworkRules = "NMTTrustedNetworkRules"
+        case nmtTrustedNetworkRules = "NMTTrustedNetworkRules"
 
-        static let nmtTemporaryOpenNetworks = "NMTTemporaryOpenNetworks"
+        case nmtTemporaryOpenNetworks = "NMTTemporaryOpenNetworks"
 
-        static let nmtGenericRules = "NMTGenericRules"
+        case nmtGenericRules = "NMTGenericRules"
 
-        static let debugLogging = "DebugLogging"
+        case debugLogging = "DebugLogging"
 
-        static let shareServiceQualityData = "ShareServiceQualityData"
+        case shareServiceQualityData = "ShareServiceQualityData"
 
-        static let lastKnownException = "LastKnownException"
+        case lastKnownException = "LastKnownException"
 
-        static let versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
+        case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
 
-        static let lastVPNConnectionAttempt = "lastVPNConnectionAttempt"
+        case lastVPNConnectionAttempt = "lastVPNConnectionAttempt"
 
-        static let lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
+        case lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
 
-        static let timeToConnectVPN = "timeToConnectVPN"
+        case timeToConnectVPN = "timeToConnectVPN"
 
-        static let wireguardMigrationPerformed = "WireguardMigrationPerformed"
+        case wireguardMigrationPerformed = "WireguardMigrationPerformed"
 
-        static let leakProtection = "LeakProtection"
+        case leakProtection = "LeakProtection"
 
-        static let allowLocalDeviceAccess = "AllowLocalDeviceAccess"
+        case allowLocalDeviceAccess = "AllowLocalDeviceAccess"
 
-        static let currentRFC1918VulnerableWifi = "CurrentRFC1918VulnerableWifi"
+        case currentRFC1918VulnerableWifi = "CurrentRFC1918VulnerableWifi"
     }
 
-    private let backend: UserDefaults
+    private let backend: UserDefaultsKeyed<Entry>
 
     private let group: String?
 
@@ -138,22 +138,16 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     private var pingByServerIdentifier: [String: Int] = [:]
     private let pingQueue = DispatchQueue(label: "com.pia.userdefaultsstore.ping")
 
-    init() {
-        backend = UserDefaults.standard
-        group = Bundle.main.bundleIdentifier
-        loadComplexMaps()
-    }
-
-    init(group: String) {
-        let backend = UserDefaults(suiteName: group) ?? UserDefaults.standard
-        self.backend = backend
+    init(group: String? = nil) {
+        let backend = group.flatMap(UserDefaults.init(suiteName:)) ?? UserDefaults.standard
+        self.backend = UserDefaultsKeyed(defaults: backend)
         self.group = group
         loadComplexMaps()
     }
 
     private func loadComplexMaps() {
         pingQueue.sync {
-            pingByServerIdentifier = backend.dictionary(forKey: Entries.pingByServerIdentifier) as? [String: Int] ?? [:]
+            pingByServerIdentifier = backend.dictionary(forKey: .pingByServerIdentifier) as? [String: Int] ?? [:]
         }
     }
 
@@ -167,13 +161,13 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var publicUsername: String? {
         get {
-            return backend.string(forKey: Entries.username)
+            return backend.string(forKey: .username)
         }
         set {
             if let username = newValue {
-                backend.set(username, forKey: Entries.username)
+                backend.set(username, forKey: .username)
             } else {
-                backend.removeObject(forKey: Entries.username)
+                backend.removeObject(forKey: .username)
             }
         }
     }
@@ -182,7 +176,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         get {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .secondsSince1970
-            if let data = backend.data(forKey: Entries.accountInfo) {
+            if let data = backend.data(forKey: .accountInfo) {
                 do {
                     return try decoder.decode(AccountInfo.self, from: data)
                 } catch {
@@ -190,7 +184,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
                     log.debug("AccountInfo decode error: \(error)")
                 }
             }
-            if let dict = backend.dictionary(forKey: Entries.accountInfo),
+            if let dict = backend.dictionary(forKey: .accountInfo),
                 let data = try? JSONSerialization.data(withJSONObject: dict),
                 let info = try? decoder.decode(AccountInfo.self, from: data)
             {
@@ -202,57 +196,57 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             let encoder = JSONEncoder()
             encoder.dateEncodingStrategy = .secondsSince1970
             if let info = newValue, let data = try? encoder.encode(info) {
-                backend.set(data, forKey: Entries.accountInfo)
+                backend.set(data, forKey: .accountInfo)
             } else {
-                backend.removeObject(forKey: Entries.accountInfo)
+                backend.removeObject(forKey: .accountInfo)
             }
         }
     }
 
     var lastSignupEmail: String? {
         get {
-            return backend.string(forKey: Entries.lastSignupEmail)
+            return backend.string(forKey: .lastSignupEmail)
         }
         set {
             if let email = newValue {
-                backend.set(email, forKey: Entries.lastSignupEmail)
+                backend.set(email, forKey: .lastSignupEmail)
             } else {
-                backend.removeObject(forKey: Entries.lastSignupEmail)
+                backend.removeObject(forKey: .lastSignupEmail)
             }
         }
     }
 
     var tokenMigrated: Bool {
         get {
-            return backend.bool(forKey: Entries.tokenMigrated)
+            return backend.bool(forKey: .tokenMigrated)
         }
         set {
-            backend.set(newValue, forKey: Entries.tokenMigrated)
+            backend.set(newValue, forKey: .tokenMigrated)
         }
     }
 
     var publicIP: String? {
         get {
-            return backend.string(forKey: Entries.publicIP)
+            return backend.string(forKey: .publicIP)
         }
         set {
             if let publicIP = newValue {
-                backend.set(publicIP, forKey: Entries.publicIP)
+                backend.set(publicIP, forKey: .publicIP)
             } else {
-                backend.removeObject(forKey: Entries.publicIP)
+                backend.removeObject(forKey: .publicIP)
             }
         }
     }
 
     var lastServerCN: String? {
         get {
-            return backend.string(forKey: Entries.lastServerCN)
+            return backend.string(forKey: .lastServerCN)
         }
         set {
             if let cn = newValue {
-                backend.set(cn, forKey: Entries.lastServerCN)
+                backend.set(cn, forKey: .lastServerCN)
             } else {
-                backend.removeObject(forKey: Entries.lastServerCN)
+                backend.removeObject(forKey: .lastServerCN)
             }
         }
     }
@@ -262,7 +256,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             if let copy = visibleTilesCopy {
                 return copy
             }
-            guard let intArray = backend.array(forKey: Entries.visibleTiles) as? [Int] else {
+            guard let intArray = backend.array(forKey: .visibleTiles) as? [Int] else {
                 return AvailableTiles.defaultTiles()
             }
             var tiles: [AvailableTiles] = []
@@ -278,7 +272,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             for value in newValue {
                 intArray.append(value.rawValue)
             }
-            backend.set(intArray, forKey: Entries.visibleTiles)
+            backend.set(intArray, forKey: .visibleTiles)
         }
     }
 
@@ -287,7 +281,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             if let copy = orderedTilesCopy {
                 return copy
             }
-            guard let intArray = backend.array(forKey: Entries.orderedTiles) as? [Int] else {
+            guard let intArray = backend.array(forKey: .orderedTiles) as? [Int] else {
                 return AvailableTiles.allTiles()
             }
             var tiles: [AvailableTiles] = []
@@ -311,14 +305,14 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             for value in newValue {
                 intArray.append(value.rawValue)
             }
-            backend.set(intArray, forKey: Entries.orderedTiles)
+            backend.set(intArray, forKey: .orderedTiles)
         }
     }
 
     // MARK: Server
     var historicalServers: [Server] {
         get {
-            return readServers(key: Entries.historicalServers, copy: historicalServersCopy)
+            return readServers(key: .historicalServers, copy: historicalServersCopy)
         }
         set {
             var servers = newValue
@@ -326,21 +320,21 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 servers.removeFirst()
             }
             historicalServersCopy = servers
-            backend.set(try? JSONEncoder().encode(servers), forKey: Entries.historicalServers)
+            backend.set(try? JSONEncoder().encode(servers), forKey: .historicalServers)
         }
     }
 
     var cachedServers: [Server] {
         get {
-            return readServers(key: Entries.cachedServers, copy: cachedServersCopy)
+            return readServers(key: .cachedServers, copy: cachedServersCopy)
         }
         set {
             cachedServersCopy = newValue
-            backend.set(try? JSONEncoder().encode(newValue), forKey: Entries.cachedServers)
+            backend.set(try? JSONEncoder().encode(newValue), forKey: .cachedServers)
         }
     }
 
-    private func readServers(key: String, copy: [Server]?) -> [Server] {
+    private func readServers(key: Entry, copy: [Server]?) -> [Server] {
         if let copy { return copy }
         let decoder = JSONDecoder()
         if let data = backend.data(forKey: key) {
@@ -362,13 +356,13 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var preferredServer: Server? {
         get {
-            let identifier = backend.string(forKey: Entries.preferredServer)
+            let identifier = backend.string(forKey: .preferredServer)
             let dipToken = preferredServerDIPToken
             return cachedServers.first { $0.identifier == identifier && $0.dipToken == dipToken }
         }
         set {
-            backend.set(newValue?.identifier, forKey: Entries.preferredServer)
-            backend.set(newValue?.dipToken, forKey: Entries.preferredServerDIPToken)
+            backend.set(newValue?.identifier, forKey: .preferredServer)
+            backend.set(newValue?.dipToken, forKey: .preferredServerDIPToken)
             var lastServers = historicalServers
             if let server = newValue {
 
@@ -388,20 +382,20 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var lastConnectedRegion: Server? {
         get {
-            let identifier = backend.string(forKey: Entries.lastConnectedRegion)
+            let identifier = backend.string(forKey: .lastConnectedRegion)
             return cachedServers.first { $0.identifier == identifier }
         }
         set {
-            backend.set(newValue?.identifier, forKey: Entries.lastConnectedRegion)
+            backend.set(newValue?.identifier, forKey: .lastConnectedRegion)
         }
     }
 
     var preferredServerDIPToken: String? {
         get {
-            return backend.string(forKey: Entries.preferredServerDIPToken)
+            return backend.string(forKey: .preferredServerDIPToken)
         }
         set {
-            backend.set(newValue, forKey: Entries.preferredServerDIPToken)
+            backend.set(newValue, forKey: .preferredServerDIPToken)
         }
     }
 
@@ -423,7 +417,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     func serializePings() {
         pingQueue.sync {
-            backend.set(pingByServerIdentifier, forKey: Entries.pingByServerIdentifier)
+            backend.set(pingByServerIdentifier, forKey: .pingByServerIdentifier)
         }
     }
 
@@ -437,110 +431,110 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var vpnType: String? {
         get {
-            return backend.string(forKey: Entries.vpnType)
+            return backend.string(forKey: .vpnType)
         }
         set {
-            backend.set(newValue, forKey: Entries.vpnType)
+            backend.set(newValue, forKey: .vpnType)
         }
     }
 
     var vpnDisconnectsOnSleep: Bool {
         get {
-            return backend.bool(forKey: Entries.vpnDisconnectsOnSleep)
+            return backend.bool(forKey: .vpnDisconnectsOnSleep)
         }
         set {
-            backend.set(newValue, forKey: Entries.vpnDisconnectsOnSleep)
+            backend.set(newValue, forKey: .vpnDisconnectsOnSleep)
         }
     }
 
     var vpnCustomConfigurationMaps: [String: [String: Any]]? {
         get {
-            return backend.dictionary(forKey: Entries.vpnCustomConfigurationMaps) as? [String: [String: Any]]
+            return backend.dictionary(forKey: .vpnCustomConfigurationMaps) as? [String: [String: Any]]
         }
         set {
-            backend.set(newValue, forKey: Entries.vpnCustomConfigurationMaps)
+            backend.set(newValue, forKey: .vpnCustomConfigurationMaps)
         }
     }
 
     var lastKnownVpnStatus: VPNStatus {
         get {
-            return VPNStatus(rawValue: backend.string(forKey: Entries.lastKnownVpnStatus) ?? "") ?? .unknown
+            return VPNStatus(rawValue: backend.string(forKey: .lastKnownVpnStatus) ?? "") ?? .unknown
         }
         set {
-            backend.set(newValue.rawValue, forKey: Entries.lastKnownVpnStatus)
+            backend.set(newValue.rawValue, forKey: .lastKnownVpnStatus)
         }
 
     }
 
     var lastVPNConnectionAttempt: Double {
         get {
-            return backend.double(forKey: Entries.lastVPNConnectionAttempt)
+            return backend.double(forKey: .lastVPNConnectionAttempt)
         }
         set {
-            backend.set(newValue, forKey: Entries.lastVPNConnectionAttempt)
+            backend.set(newValue, forKey: .lastVPNConnectionAttempt)
         }
     }
 
     var lastVPNConnectionSuccess: Double? {
         get {
-            return backend.object(forKey: Entries.lastVPNConnectionSuccess) as? Double
+            return backend.object(forKey: .lastVPNConnectionSuccess) as? Double
         }
         set {
-            backend.set(newValue, forKey: Entries.lastVPNConnectionSuccess)
+            backend.set(newValue, forKey: .lastVPNConnectionSuccess)
         }
     }
 
     var timeToConnectVPN: Double {
         get {
-            return backend.double(forKey: Entries.timeToConnectVPN)
+            return backend.double(forKey: .timeToConnectVPN)
         }
         set {
-            backend.set(newValue, forKey: Entries.timeToConnectVPN)
+            backend.set(newValue, forKey: .timeToConnectVPN)
         }
     }
 
     var wireguardMigrationPerformed: Bool {
         get {
-            if backend.object(forKey: Entries.wireguardMigrationPerformed) == nil {
-                backend.set(false, forKey: Entries.wireguardMigrationPerformed)
+            if backend.object(forKey: .wireguardMigrationPerformed) == nil {
+                backend.set(false, forKey: .wireguardMigrationPerformed)
             }
-            return backend.bool(forKey: Entries.wireguardMigrationPerformed)
+            return backend.bool(forKey: .wireguardMigrationPerformed)
         }
         set {
-            backend.set(newValue, forKey: Entries.wireguardMigrationPerformed)
+            backend.set(newValue, forKey: .wireguardMigrationPerformed)
         }
     }
 
     var leakProtection: Bool {
         get {
-            if backend.object(forKey: Entries.leakProtection) == nil {
-                backend.set(true, forKey: Entries.leakProtection)
+            if backend.object(forKey: .leakProtection) == nil {
+                backend.set(true, forKey: .leakProtection)
             }
-            return backend.bool(forKey: Entries.leakProtection)
+            return backend.bool(forKey: .leakProtection)
         }
         set {
-            backend.set(newValue, forKey: Entries.leakProtection)
+            backend.set(newValue, forKey: .leakProtection)
         }
     }
 
     var allowLocalDeviceAccess: Bool {
         get {
-            if backend.object(forKey: Entries.allowLocalDeviceAccess) == nil {
-                backend.set(true, forKey: Entries.allowLocalDeviceAccess)
+            if backend.object(forKey: .allowLocalDeviceAccess) == nil {
+                backend.set(true, forKey: .allowLocalDeviceAccess)
             }
-            return backend.bool(forKey: Entries.allowLocalDeviceAccess)
+            return backend.bool(forKey: .allowLocalDeviceAccess)
         }
         set {
-            backend.set(newValue, forKey: Entries.allowLocalDeviceAccess)
+            backend.set(newValue, forKey: .allowLocalDeviceAccess)
         }
     }
 
     var currentRFC1918VulnerableWifi: String? {
         get {
-            return backend.string(forKey: Entries.currentRFC1918VulnerableWifi)
+            return backend.string(forKey: .currentRFC1918VulnerableWifi)
         }
         set {
-            backend.set(newValue, forKey: Entries.currentRFC1918VulnerableWifi)
+            backend.set(newValue, forKey: .currentRFC1918VulnerableWifi)
         }
     }
 
@@ -548,94 +542,94 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var isPersistentConnection: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.persistentConnection) as? Bool else {
+            guard let value = backend.object(forKey: .persistentConnection) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.persistentConnection)
+            backend.set(newValue, forKey: .persistentConnection)
         }
     }
 
     var showReconnectNotifications: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.showReconnectNotifications) as? Bool else {
+            guard let value = backend.object(forKey: .showReconnectNotifications) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.showReconnectNotifications)
+            backend.set(newValue, forKey: .showReconnectNotifications)
         }
     }
 
     var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2IntegrityAlgorithm) as? String,
+            guard let value = backend.object(forKey: .ikeV2IntegrityAlgorithm) as? String,
                 let algorithm = IKEv2IntegrityAlgorithm(rawValue: value)
             else { return .default }
             return algorithm
         }
         set {
-            backend.set(newValue.rawValue, forKey: Entries.ikeV2IntegrityAlgorithm)
+            backend.set(newValue.rawValue, forKey: .ikeV2IntegrityAlgorithm)
         }
     }
 
     var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2EncryptionAlgorithm) as? String,
+            guard let value = backend.object(forKey: .ikeV2EncryptionAlgorithm) as? String,
                 let algorithm = IKEv2EncryptionAlgorithm(rawValue: value)
             else { return .default }
             return algorithm
         }
         set {
-            backend.set(newValue.rawValue, forKey: Entries.ikeV2EncryptionAlgorithm)
+            backend.set(newValue.rawValue, forKey: .ikeV2EncryptionAlgorithm)
         }
     }
 
     var ikeV2PacketSize: Int {
         get {
-            guard let value = backend.object(forKey: Entries.ikeV2PacketSize) as? Int else {
+            guard let value = backend.object(forKey: .ikeV2PacketSize) as? Int else {
                 return 0
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.ikeV2PacketSize)
+            backend.set(newValue, forKey: .ikeV2PacketSize)
         }
     }
 
     var nmtMigrationSuccess: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.nmtMigrationSuccess) as? Bool else {
+            guard let value = backend.object(forKey: .nmtMigrationSuccess) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.nmtMigrationSuccess)
+            backend.set(newValue, forKey: .nmtMigrationSuccess)
         }
     }
 
     var mace: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.mace) as? Bool else {
+            guard let value = backend.object(forKey: .mace) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.mace)
+            backend.set(newValue, forKey: .mace)
         }
     }
 
     var signInWithAppleFakeEmail: String? {
         get {
-            return backend.string(forKey: Entries.signInWithAppleFakeEmail)
+            return backend.string(forKey: .signInWithAppleFakeEmail)
         }
         set {
-            backend.set(newValue, forKey: Entries.signInWithAppleFakeEmail)
+            backend.set(newValue, forKey: .signInWithAppleFakeEmail)
         }
     }
 
@@ -643,168 +637,146 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var debugLogging: Bool? {
         get {
-            return backend.bool(forKey: Entries.debugLogging)
+            return backend.bool(forKey: .debugLogging)
         }
         set {
-            backend.set(newValue, forKey: Entries.debugLogging)
+            backend.set(newValue, forKey: .debugLogging)
         }
     }
 
     var shareServiceQualityData: Bool? {
         get {
-            return backend.bool(forKey: Entries.shareServiceQualityData)
+            return backend.bool(forKey: .shareServiceQualityData)
         }
         set {
-            backend.set(newValue, forKey: Entries.shareServiceQualityData)
+            backend.set(newValue, forKey: .shareServiceQualityData)
         }
     }
 
     var versionWhenServiceQualityOpted: String? {
         get {
-            return backend.string(forKey: Entries.versionWhenServiceQualityOpted)
+            return backend.string(forKey: .versionWhenServiceQualityOpted)
         }
         set {
-            backend.set(newValue, forKey: Entries.versionWhenServiceQualityOpted)
+            backend.set(newValue, forKey: .versionWhenServiceQualityOpted)
         }
     }
 
     var lastKnownException: String? {
         get {
-            return backend.string(forKey: Entries.lastKnownException) ?? ""
+            return backend.string(forKey: .lastKnownException) ?? ""
         }
         set {
-            backend.set(newValue, forKey: Entries.lastKnownException)
+            backend.set(newValue, forKey: .lastKnownException)
         }
     }
 
     //MARK: Networks
     var cachedNetworks: [String] {
         get {
-            guard let value = backend.object(forKey: Entries.cachedNetworks) as? [String] else {
+            guard let value = backend.object(forKey: .cachedNetworks) as? [String] else {
                 return []
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.cachedNetworks)
+            backend.set(newValue, forKey: .cachedNetworks)
         }
     }
 
     var nmtTrustedNetworkRules: [String: Int] {
         get {
-            guard let value = backend.dictionary(forKey: Entries.nmtTrustedNetworkRules) as? [String: Int] else {
+            guard let value = backend.dictionary(forKey: .nmtTrustedNetworkRules) as? [String: Int] else {
                 return [:]
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.nmtTrustedNetworkRules)
+            backend.set(newValue, forKey: .nmtTrustedNetworkRules)
         }
     }
 
     var nmtTemporaryOpenNetworks: [String] {
         get {
-            guard let value = backend.object(forKey: Entries.nmtTemporaryOpenNetworks) as? [String] else {
+            guard let value = backend.object(forKey: .nmtTemporaryOpenNetworks) as? [String] else {
                 return []
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.nmtTemporaryOpenNetworks)
+            backend.set(newValue, forKey: .nmtTemporaryOpenNetworks)
         }
     }
 
     var nmtGenericRules: [String: Int] {
         get {
-            guard let value = backend.dictionary(forKey: Entries.nmtGenericRules) as? [String: Int] else {
+            guard let value = backend.dictionary(forKey: .nmtGenericRules) as? [String: Int] else {
                 return [:]
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.nmtGenericRules)
+            backend.set(newValue, forKey: .nmtGenericRules)
         }
     }
 
     var nmtRulesEnabled: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.nmtRulesEnabled) as? Bool else {
+            guard let value = backend.object(forKey: .nmtRulesEnabled) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.nmtRulesEnabled)
+            backend.set(newValue, forKey: .nmtRulesEnabled)
         }
     }
 
     ///Deprecated
     var trustCellularData: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.trustCellularData) as? Bool else {
+            guard let value = backend.object(forKey: .trustCellularData) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.trustCellularData)
+            backend.set(newValue, forKey: .trustCellularData)
         }
     }
 
     ///Deprecated
     var useWiFiProtection: Bool? {
         get {
-            guard let value = backend.object(forKey: Entries.useWiFiProtection) as? Bool else {
+            guard let value = backend.object(forKey: .useWiFiProtection) as? Bool else {
                 return nil
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.useWiFiProtection)
+            backend.set(newValue, forKey: .useWiFiProtection)
         }
     }
 
     ///Deprecated
     var trustedNetworks: [String] {
         get {
-            guard let value = backend.object(forKey: Entries.trustedNetworks) as? [String] else {
+            guard let value = backend.object(forKey: .trustedNetworks) as? [String] else {
                 return []
             }
             return value
         }
         set {
-            backend.set(newValue, forKey: Entries.trustedNetworks)
+            backend.set(newValue, forKey: .trustedNetworks)
         }
     }
 
     // MARK: Lifecycle
 
     func reset() {
-        backend.removeObject(forKey: Entries.persistentConnection)
-        backend.removeObject(forKey: Entries.showReconnectNotifications)
-        backend.removeObject(forKey: Entries.mace)
-        backend.removeObject(forKey: Entries.vpnType)
-        backend.removeObject(forKey: Entries.vpnCustomConfigurationMaps)
-        backend.removeObject(forKey: Entries.visibleTiles)
-        backend.removeObject(forKey: Entries.orderedTiles)
-        backend.removeObject(forKey: Entries.historicalServers)
-        backend.removeObject(forKey: Entries.cachedNetworks)
-        backend.removeObject(forKey: Entries.nmtTrustedNetworkRules)
-        backend.removeObject(forKey: Entries.nmtTemporaryOpenNetworks)
-        backend.removeObject(forKey: Entries.nmtRulesEnabled)
-        backend.removeObject(forKey: Entries.nmtGenericRules)
-        backend.removeObject(forKey: Entries.nmtMigrationSuccess)
-        backend.removeObject(forKey: Entries.trustCellularData)
-        backend.removeObject(forKey: Entries.useWiFiProtection)
-        backend.removeObject(forKey: Entries.trustedNetworks)
-        backend.removeObject(forKey: Entries.ikeV2IntegrityAlgorithm)
-        backend.removeObject(forKey: Entries.ikeV2EncryptionAlgorithm)
-        backend.removeObject(forKey: Entries.ikeV2PacketSize)
-        backend.removeObject(forKey: Entries.serverNetwork)
-        backend.removeObject(forKey: Entries.signInWithAppleFakeEmail)
-        backend.removeObject(forKey: Entries.debugLogging)
-        backend.removeObject(forKey: Entries.shareServiceQualityData)
-        backend.removeObject(forKey: Entries.versionWhenServiceQualityOpted)
+        for entry in Entry.allCases {
+            backend.removeObject(forKey: entry)
+        }
         backend.synchronize()
     }
 
@@ -815,5 +787,4 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             // FIXME: clear standard defaults
         }
     }
-
 }
