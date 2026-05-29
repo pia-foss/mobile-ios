@@ -378,13 +378,10 @@ final class MenuViewController: AutolayoutViewController {
             guard let self else { return }
             let proceed: () -> Void = {
                 log.debug("Account: Logging out...")
-                DashboardViewController.instanceInNavigationStack()?.showLoadingAnimation()
-
+                let dashboard = DashboardViewController.instanceInNavigationStack()
+                dashboard?.showLoadingAnimation()
                 MenuViewController.performLogout { _ in
-                    DashboardViewController.instanceInNavigationStack()?.hideLoadingAnimation()
-                    if UserInterface.isIpad {
-                        RootCoordinator.shared.setRoot(.login)
-                    }
+                    dashboard?.hideLoadingAnimation()
                 }
             }
 

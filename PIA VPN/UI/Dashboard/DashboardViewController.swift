@@ -694,13 +694,6 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func closeSession() {
         log.debug("Account: Logging out...")
         AppPreferences.shared.reset()
-        if UserInterface.isIpad {
-            RootCoordinator.shared.setRoot(.login)
-        } else if let window = self.view.window,
-            let rootViewController = window.rootViewController
-        {
-            rootViewController.dismiss(animated: false, completion: nil)
-        }
         Client.providers.accountProvider.logout(nil)
     }
 
@@ -1139,7 +1132,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func setNavBarTheme(_ theme: NavBarTheme, with titleView: UIView) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+
             var tintColor: UIColor?
             var barTintColors: [UIColor]?
             switch theme {
@@ -1156,11 +1151,13 @@ final class DashboardViewController: AutolayoutViewController {
                 barTintColors = [UIColor.piaOrange, UIColor.piaOrange]
             }
 
-            Theme.current.applyCustomNavigationBar(
-                self.navigationController!.navigationBar,
-                withTintColor: tintColor,
-                andBarTintColors: barTintColors
-            )
+            if let navigationBar = self.navigationController?.navigationBar {
+                Theme.current.applyCustomNavigationBar(
+                    navigationBar,
+                    withTintColor: tintColor,
+                    andBarTintColors: barTintColors
+                )
+            }
 
             self.setNavBarTitleView(titleView: titleView)
         }
