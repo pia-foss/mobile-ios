@@ -90,6 +90,12 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
         }
 
+        // Captured before the switch: the .disconnected case below resets
+        // Client.configuration.disconnectedManually, but the iOS 15 IKEv2 retry logic
+        // further down must still know whether this disconnect was user-initiated (so it
+        // does not auto-retry a connection the user deliberately cancelled).
+        let disconnectedManually = Client.configuration.disconnectedManually
+
         var nextStatus: VPNStatus = .disconnected
 
         switch connection.status {
@@ -233,12 +239,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         }
 
         log.debug("[VPNDaemon] Fetching last disconnect error...")
-        if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
+        let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError
+        var connectivityCheckFailed = false
+
+        if let lastDisconnectError {
             log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
 
             let errorDomain = lastDisconnectError.domain
             let errorCode = lastDisconnectError.code
-            var connectivityCheckFailed = false
 
             // WireGuard connectivity check failure
             #if canImport(PIAWireguard)
@@ -262,28 +270,51 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     connectivityCheckFailed = true
                 }
             }
-
-            log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
-
-            if connectivityCheckFailed {
-                log.debug("[VPNDaemon] connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
-
-                if let lastConnectedCN = accessedDatabase.plain.lastServerCN {
-                    let targetRegion = try? Client.providers.serverProvider.targetServer
-                    let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
-                    lastConnectedServer?.markServerAsUnavailable()
-                }
-
-                isReconnectingAfterConnectivityFailure = true
-                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
-            } else {
-                if previousStatus == .connecting {
-                    log.error("The VPN did fail \(lastDisconnectError)")
-                    Macros.postNotification(.PIAVPNDidFail)
-                }
-            }
         } else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
+        }
+
+        // iOS 15 IKEv2 fallback.
+        // The error-domain classification above can't fire for IKEv2 on iOS 15
+        // (NEVPNConnectionErrorDomain is iOS 16+), so detect a failed attempt from
+        // the status transition instead: a non-tunnel profile going connecting →
+        // disconnected, not user-cancelled and not already reconnecting. Treat it as
+        // a connectivity failure so the recovery below marks the server IP unavailable
+        // and reconnects to a different one — matching iOS 16+ behaviour.
+        if #unavailable(iOS 16) {
+            if !profile.isTunnel,
+                !isReconnecting,
+                !disconnectedManually,
+                nextStatus == .disconnected,
+                previousStatus == .connecting
+            {
+                log.debug("[VPNDaemon] iOS 15 IKEv2 failed connection attempt detected from status transition — treating as connectivity failure")
+                connectivityCheckFailed = true
+            }
+        }
+
+        if #available(iOS 16, *), lastDisconnectError == nil {
+            return
+        }
+
+        log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
+
+        if connectivityCheckFailed {
+            log.debug("[VPNDaemon] connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
+
+            if let lastConnectedCN = accessedDatabase.plain.lastServerCN {
+                let targetRegion = try? Client.providers.serverProvider.targetServer
+                let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
+                lastConnectedServer?.markServerAsUnavailable()
+            }
+
+            isReconnectingAfterConnectivityFailure = true
+            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
+        } else {
+            if previousStatus == .connecting {
+                log.error("The VPN did fail \(lastDisconnectError, default: "nil")")
+                Macros.postNotification(.PIAVPNDidFail)
+            }
         }
     }
 
