@@ -1132,7 +1132,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func setNavBarTheme(_ theme: NavBarTheme, with titleView: UIView) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+
             var tintColor: UIColor?
             var barTintColors: [UIColor]?
             switch theme {
@@ -1149,11 +1151,13 @@ final class DashboardViewController: AutolayoutViewController {
                 barTintColors = [UIColor.piaOrange, UIColor.piaOrange]
             }
 
-            Theme.current.applyCustomNavigationBar(
-                self.navigationController!.navigationBar,
-                withTintColor: tintColor,
-                andBarTintColors: barTintColors
-            )
+            if let navigationBar = self.navigationController?.navigationBar {
+                Theme.current.applyCustomNavigationBar(
+                    navigationBar,
+                    withTintColor: tintColor,
+                    andBarTintColors: barTintColors
+                )
+            }
 
             self.setNavBarTitleView(titleView: titleView)
         }
