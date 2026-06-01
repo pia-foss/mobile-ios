@@ -44,7 +44,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
+    #if !targetEnvironment(macCatalyst)
     private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    #endif
     var cancellables = Set<AnyCancellable>()
 
     deinit {
@@ -60,7 +62,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         hotspotHelper = PIAHotspotHelper()
         _ = hotspotHelper.configureHotspotHelper()
 
+        #if !targetEnvironment(macCatalyst)
         instantiateLiveActivityManagerIfNeeded()
+        #endif
 
         setupDebugMenuObserver()
 
@@ -71,6 +75,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
+    #if !targetEnvironment(macCatalyst)
     private func instantiateLiveActivityManagerIfNeeded() {
         if #available(iOS 16.2, *) {
             // Only instantiates the LiveActivities if the Feature Flag for it is enabled
@@ -82,11 +87,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             liveActivityManager = PIAConnectionLiveActivityManager.shared
         }
     }
+    #endif
 
     func applicationWillTerminate(_ application: UIApplication) {
         Bootstrapper.shared.dispose()
 
+        #if !targetEnvironment(macCatalyst)
         liveActivityManager?.endLiveActivities()
+        #endif
     }
 
     // MARK: Orientations
@@ -248,7 +256,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Remove the Non compliant Wifi local notification as the app is in foreground now
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
 
+        #if !targetEnvironment(macCatalyst)
         instantiateLiveActivityManagerIfNeeded()
+        #endif
 
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
 

@@ -77,9 +77,11 @@ final class DashboardViewController: AutolayoutViewController {
 
     private var currentStatus: VPNStatus = .disconnected {
         didSet {
+            #if !targetEnvironment(macCatalyst)
             if #available(iOS 16.2, *) {
                 startConnectionLiveActivityIfNeeded()
             }
+            #endif
         }
     }
     private var connectingStatus: DashboardVPNConnectingStatus = .none
@@ -685,9 +687,11 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func accountDidLogout(notification: Notification) {
         AppPreferences.shared.todayWidgetVpnStatus = nil
         AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
+        #if !targetEnvironment(macCatalyst)
         if #available(iOS 16.2, *) {
             stopConnectionLiveActivity()
         }
+        #endif
         presentLogin()
     }
 
@@ -1038,9 +1042,11 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
+        #if !targetEnvironment(macCatalyst)
         if #available(iOS 16.2, *) {
             startConnectionLiveActivityIfNeeded()
         }
+        #endif
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
@@ -1450,6 +1456,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
 // MARK: Live Activities
 
+#if !targetEnvironment(macCatalyst)
 extension DashboardViewController {
     @available(iOS 16.2, *)
     private func makeLiveActivityStateForCurrentConnection() -> PIAConnectionAttributes.ContentState {
@@ -1479,3 +1486,4 @@ extension DashboardViewController {
         liveActivityManager.endLiveActivities()
     }
 }
+#endif
