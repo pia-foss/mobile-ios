@@ -27,7 +27,7 @@ import PIALocalizations
 import PIAUIKit
 import UIKit
 
-class QuickSettingsTile: UIView, Tileable {
+final class QuickSettingsTile: UIView, Tileable {
 
     var view: UIView!
     var detailSegueIdentifier: String!
@@ -36,9 +36,9 @@ class QuickSettingsTile: UIView, Tileable {
     @IBOutlet private weak var tileTitle: UILabel!
     @IBOutlet private weak var themeButton: UIButton!
     @IBOutlet private weak var killSwitchButton: UIButton!
-    @IBOutlet private weak var nmtButton: UIButton!
+    @IBOutlet private weak var automationButton: UIButton!
     @IBOutlet private weak var browserButton: UIButton!
-    @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet private weak var buttonsStackView: UIStackView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,11 +65,10 @@ class QuickSettingsTile: UIView, Tileable {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(setupButtons), name: .PIASettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(updateButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(setupButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(setupButtons), name: .PIAAccountDidLogin, object: nil)
         nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(updateButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
 
         self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
 
@@ -81,9 +80,10 @@ class QuickSettingsTile: UIView, Tileable {
 
         self.themeButton.isHidden = !Flags.shared.enablesThemeSwitch || !AppPreferences.shared.quickSettingThemeVisible
         self.killSwitchButton.isHidden = !AppPreferences.shared.quickSettingKillswitchVisible
-        self.nmtButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
+        self.automationButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
         self.browserButton.isHidden = !AppPreferences.shared.quickSettingPrivateBrowserVisible
 
+        updateButtons()
     }
 
     @objc private func viewShouldRestyle() {
@@ -95,7 +95,7 @@ class QuickSettingsTile: UIView, Tileable {
     @objc private func updateButtons() {
 
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
-        nmtButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+        automationButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
         browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
         if Flags.shared.enablesThemeSwitch {
@@ -116,11 +116,11 @@ class QuickSettingsTile: UIView, Tileable {
         }
 
         if Client.preferences.nmtRulesEnabled {
-            nmtButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Nmt.title
-            nmtButton.setImage(Asset.Piax.Global.nmtActive.image, for: [])
+            automationButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Nmt.title
+            automationButton.setImage(Asset.Piax.Global.nmtActive.image, for: [])
         } else {
-            nmtButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Nmt.title
-            nmtButton.setImage(Asset.Piax.Global.nmtInactive.image, for: [])
+            automationButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Nmt.title
+            automationButton.setImage(Asset.Piax.Global.nmtInactive.image, for: [])
         }
 
         browserButton.setImage(Asset.Piax.Global.browserInactive.image, for: [])
