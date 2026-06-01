@@ -104,7 +104,10 @@ final class RegionsViewController: AutolayoutViewController {
 
     private func setupPullToRefresh() {
         refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
+        #if !targetEnvironment(macCatalyst)
+        // TODO: enable refresh on mac catalyst
         tableView.refreshControl = refreshControl
+        #endif
     }
 
     @objc func refreshLatency(_ sender: Any) {

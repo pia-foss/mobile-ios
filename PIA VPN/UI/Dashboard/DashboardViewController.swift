@@ -414,7 +414,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         // On iPad we swap the window root entirely instead of presenting login modally —
         // the persistent sidebar/dashboard split view is replaced with the login flow.
-        if UserInterface.isIpad {
+        if UserInterface.isIpadOrMac {
             RootCoordinator.shared.setRoot(.login)
             if isUnauthorized {
                 Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)

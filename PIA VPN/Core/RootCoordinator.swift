@@ -79,7 +79,7 @@ final class RootCoordinator: NSObject {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        if UserInterface.isIpad {
+        if UserInterface.isIpadOrMac {
             let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
             let split = UISplitViewController(style: .doubleColumn)
             split.preferredDisplayMode = .oneBesideSecondary
