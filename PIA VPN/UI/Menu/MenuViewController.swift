@@ -131,7 +131,16 @@ final class MenuViewController: AutolayoutViewController {
         modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
+        setupPlanHeader()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
 
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(setupPlanHeader), name: .PIAAccountDidLogin, object: nil)
+        nc.addObserver(self, selector: #selector(accountDidRefresh(notification:)), name: .PIAAccountDidRefresh, object: nil)
+    }
+
+    @objc private func setupPlanHeader() {
         var planDescription = ""
         if let currentUser = Client.providers.accountProvider.currentUser,
             let info = currentUser.info
@@ -161,12 +170,6 @@ final class MenuViewController: AutolayoutViewController {
                 allItems[1].removeLast()
             }
         }
-
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
-
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(accountDidRefresh(notification:)), name: .PIAAccountDidRefresh, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -399,6 +402,7 @@ final class MenuViewController: AutolayoutViewController {
 
     @objc private func accountDidRefresh(notification: Notification) {
         currentUser = Client.providers.accountProvider.currentUser
+        setupPlanHeader()
         tableView.reloadData()
     }
 
