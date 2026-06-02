@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Um Einträge in dieser Liste zu sehen, gehen Sie zu iOS-Einstellungen > WLAN.";
 "hotspothelper.display.name" = "🔒 Aktivieren Sie den VPN-WLAN-Schutz in den PIA-Einstellungen, um diese Verbindung zu schützen.";
 "hotspothelper.display.protected.name" = "🔒 Der VPN-WLAN-Schutz in PIA wurde aktiviert. Sie können sich zurücklehnen.";
-"tiles.quicksetting.nmt.title" = "Netzwerkverwaltung";
+"tiles.quicksetting.automation.title" = "Automatisierung";
 "tiles.quicksetting.private.browser.title" = "Privater Browser";
 "settings.nmt.killswitch.disabled" = "Der VPN-Notausschalter ist derzeit deaktiviert. Um sicherzustellen, dass das Network Management Tool funktioniert und Sie beim Netzwerkwechsel die Verbindung wiederherstellen können, aktivieren Sie bitte den VPN-Notausschalter in Ihren Einstellungen.";
 "settings.service.quality.share.title" = "Helfen Sie uns, PIA zu verbessern";

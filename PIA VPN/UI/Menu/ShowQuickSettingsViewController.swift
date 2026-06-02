@@ -41,14 +41,14 @@ private enum QuickSettingOptions: Int {
     }
 }
 
-class ShowQuickSettingsCell: UITableViewCell {
+final class ShowQuickSettingsCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var settingImage: UIImageView!
 
 }
 
-class ShowQuickSettingsViewController: AutolayoutViewController {
+final class ShowQuickSettingsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     private lazy var switchThemeSettings = UISwitch()
@@ -192,10 +192,10 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
                 cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
                 switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
             case .networkTools:
-                cell.titleLabel.text = L10n.Tiles.Quicksetting.Nmt.title
+                cell.titleLabel.text = L10n.Tiles.Quicksetting.Automation.title
                 cell.accessoryView = switchNetworkToolsSetting
                 cell.settingImage.image = Asset.Piax.Global.nmtInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+                cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Automation.title
                 switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
             case .privateBrowsing:
                 cell.titleLabel.text = L10n.Tiles.Quicksetting.Private.Browser.title

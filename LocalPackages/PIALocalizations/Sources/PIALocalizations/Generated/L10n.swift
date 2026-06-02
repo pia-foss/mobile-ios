@@ -1367,9 +1367,9 @@ public enum L10n {
       }
     }
     public enum Quicksetting {
-      public enum Nmt {
-        /// Network Management
-        public static let title = L10n.tr("Localizable", "tiles.quicksetting.nmt.title", fallback: "Network Management")
+      public enum Automation {
+        /// Automation
+        public static let title = L10n.tr("Localizable", "tiles.quicksetting.automation.title", fallback: "Automation")
       }
       public enum Private {
         public enum Browser {

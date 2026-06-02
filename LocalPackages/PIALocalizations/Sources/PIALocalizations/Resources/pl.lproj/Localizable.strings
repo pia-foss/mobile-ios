@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Aby dodać tę listę do Ustawień iOS > WiFi";
 "hotspothelper.display.name" = "Aktywuj ochronę VPN WiFi w ustawieniach PIA, aby zabezpieczyć to połączenie.";
 "hotspothelper.display.protected.name" = "Ochrona VPN WiFi PIA jest Włączona — Osłaniamy Cię";
-"tiles.quicksetting.nmt.title" = "Zarządzanie sieciami";
+"tiles.quicksetting.automation.title" = "Automatyzacja";
 "tiles.quicksetting.private.browser.title" = "Prywatna przeglądarka";
 "settings.nmt.killswitch.disabled" = "Wyłącznik awaryjny  VPN jest obecnie wyłączony. co zapewnia prawidłowe działanie narzędzia do zarządzania siecią oraz możliwość ponownego podłączenia się przy zmianie sieci, wktywuj wyłącznik awaryjny  VPN w ustawieniach.";
 "settings.service.quality.share.title" = "Pomóż udoskonalić PIA";

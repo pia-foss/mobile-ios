@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Bu listeyi oluşturmak için iOS Ayarları > WiFi'a gidin.";
 "hotspothelper.display.name" = "🔒 Bu bağlantıyı korumak için PIA Ayarlarında VPN WiFi Korumasını etkinleştirin.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Koruması Etkinleştirildi - Sizi koruyoruz.";
-"tiles.quicksetting.nmt.title" = "Ağ Yönetimi";
+"tiles.quicksetting.automation.title" = "Otomasyon";
 "tiles.quicksetting.private.browser.title" = "Özel Tarayıcı";
 "settings.nmt.killswitch.disabled" = "VPN kill switch şu anda devre dışı. Ağ Yönetim Aracı'nın çalıştığından ve ağ değiştirirken tekrar bağlanbildiğinizden emin olmak için lütfen ayarlarınızdan VPN kill switch'i etkinleştirin.";
 "settings.service.quality.share.title" = "PIA'yı İyileştirilmeye Yardım Edin";

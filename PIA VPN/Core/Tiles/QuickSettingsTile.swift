@@ -95,7 +95,7 @@ final class QuickSettingsTile: UIView, Tileable {
     @objc private func updateButtons() {
 
         killSwitchButton.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
-        automationButton.accessibilityLabel = L10n.Tiles.Quicksetting.Nmt.title
+        automationButton.accessibilityLabel = L10n.Tiles.Quicksetting.Automation.title
         browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
         if Flags.shared.enablesThemeSwitch {
@@ -116,10 +116,10 @@ final class QuickSettingsTile: UIView, Tileable {
         }
 
         if Client.preferences.nmtRulesEnabled {
-            automationButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Nmt.title
+            automationButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Tiles.Quicksetting.Automation.title
             automationButton.setImage(Asset.Piax.Global.nmtActive.image, for: [])
         } else {
-            automationButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Nmt.title
+            automationButton.accessibilityLabel = L10n.Global.enable + " " + L10n.Tiles.Quicksetting.Automation.title
             automationButton.setImage(Asset.Piax.Global.nmtInactive.image, for: [])
         }
 

@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Para rellenar esta lista, ve a los ajustes de iOS > Wifi.";
 "hotspothelper.display.name" = "🔒 Activa la protección wifi VPN en los ajustes de PIA para proteger esta conexión.";
 "hotspothelper.display.protected.name" = "🔒 Protección wifi VPN de PIA activada: Te protegemos.";
-"tiles.quicksetting.nmt.title" = "Gestión de redes";
+"tiles.quicksetting.automation.title" = "Automatización";
 "tiles.quicksetting.private.browser.title" = "Navegador privado";
 "settings.nmt.killswitch.disabled" = "El interruptor de desconexión de emergencia está deshabilitado. Para garantizar que el interruptor de desconexión de emergencia funciona y que puedes reconectar al cambiar de red, habilita el interruptor de desconexión de emergencia de VPN en los ajustes.";
 "settings.service.quality.share.title" = "Ayúdanos a mejorar PIA";

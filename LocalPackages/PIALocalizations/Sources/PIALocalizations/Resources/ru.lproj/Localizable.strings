@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Чтобы выстроить этот список, откройте настройки iOS > WiFi.";
 "hotspothelper.display.name" = "🔒 Активируйте защиту WiFi с помощью VPN в настройках PIA, чтобы защитить это подключение.";
 "hotspothelper.display.protected.name" = "🔒 Защита WiFi с помощью PIA VPN включена – мы на страже.";
-"tiles.quicksetting.nmt.title" = "Управление сетью";
+"tiles.quicksetting.automation.title" = "Автоматизация";
 "tiles.quicksetting.private.browser.title" = "Приватный браузер";
 "settings.nmt.killswitch.disabled" = "Функция авторазрыва соединения в настоящее время отключена. Чтобы обеспечить работу инструмента управления сетью и получить возможность повторного подключения при смене сети, активируйте авторазрыв соединения в настройках.";
 "settings.service.quality.share.title" = "Помощь в улучшении PIA";

@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "For at udfylde denne liste, gå til iOS Indstillinger> WiFi.";
 "hotspothelper.display.name" = "🔒 Aktiver VPN WiFi-beskyttelse i PIA Indstillinger, for at sikre denne forbindelse.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi-beskyttelse aktiveret - Vi passer på dig.";
-"tiles.quicksetting.nmt.title" = "Netværksstyring";
+"tiles.quicksetting.automation.title" = "Automatisering";
 "tiles.quicksetting.private.browser.title" = "Privat browser";
 "settings.nmt.killswitch.disabled" = "VPN kill-switch er for øjeblikket deaktiveret. For at sikre, at netværksstyringsværktøjet fungerer, og at du er i stand til at genoprette forbindelse, når du skifter netværk, skal du aktivere VPN kill-switch i dine indstillinger.";
 "settings.service.quality.share.title" = "Hjælp med at forbedre PIA";

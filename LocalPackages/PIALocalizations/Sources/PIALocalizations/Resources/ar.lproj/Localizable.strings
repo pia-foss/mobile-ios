@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "لتعبئة هذه القائمة، انتقل إلى إعدادات iOS > WiFi.";
 "hotspothelper.display.name" = "🔒 قم بتنشيط حماية VPN WiFi في إعدادات PIA لتأمين هذا الاتصال.";
 "hotspothelper.display.protected.name" = "🔒 حماية VPN WiFi من PIA نشطة - نحن نحمي ظهرك.";
-"tiles.quicksetting.nmt.title" = "إدارة الشبكات";
+"tiles.quicksetting.automation.title" = "أتمتة";
 "tiles.quicksetting.private.browser.title" = "المتصفح الخاص";
 "settings.nmt.killswitch.disabled" = "مفتاح قطع اتصال VPN معطّل حاليًا. للتأكد من أن أداة إدارة الشبكة تعمل، وأنك قادر على إعادة الاتصال عند التبديل بين الشبكات، يرجى تمكين مفتاح قطع اتصال VPN في الإعدادات.";
 "settings.service.quality.share.title" = "ساعدنا في تحسين PIA";
