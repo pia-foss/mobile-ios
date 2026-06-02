@@ -25,25 +25,55 @@ import NetworkExtension
 
 public enum IKEv2EncryptionAlgorithm: String, CaseIterable {
 
-    public static let `default`: IKEv2EncryptionAlgorithm = .AES256GCM
+    public static let `default`: IKEv2EncryptionAlgorithm = {
+        #if os(iOS)
+            if #unavailable(iOS 17.0) {
+                return .AES128
+            }
+        #endif
+        return .AES256GCM
+    }()
 
+    @available(iOS, deprecated: 17.0) case AES128 = "AES-128-CBC"
+    @available(iOS, deprecated: 17.0) case AES128GCM = "AES-128-GCM"
     case AES256 = "AES-256-CBC"
     case AES256GCM = "AES-256-GCM"
+
+    public static var allCases: [IKEv2EncryptionAlgorithm] {
+        #if os(iOS)
+            if #unavailable(iOS 17.0) {
+                return [.AES128, .AES128GCM, .AES256]
+            }
+        #endif
+        return [.AES256, .AES256GCM]
+    }
 
     @inlinable
     public var description: String { rawValue }
 
     public func networkExtensionValue() -> NEVPNIKEv2EncryptionAlgorithm {
         return switch self {
+        case .AES128: NEVPNIKEv2EncryptionAlgorithm.algorithmAES128
+        case .AES128GCM: NEVPNIKEv2EncryptionAlgorithm.algorithmAES128GCM
         case .AES256: NEVPNIKEv2EncryptionAlgorithm.algorithmAES256
         case .AES256GCM: NEVPNIKEv2EncryptionAlgorithm.algorithmAES256GCM
         }
     }
 
     public func integrityAlgorithms() -> [IKEv2IntegrityAlgorithm] {
+        #if os(iOS)
+            if #unavailable(iOS 17.0) {
+                return switch self {
+                case .AES128: [.SHA384, .SHA512]
+                case .AES128GCM: [.SHA160, .SHA256]
+                case .AES256: [.SHA96]
+                case .AES256GCM: []
+                }
+            }
+        #endif
         return switch self {
-        case .AES256: [.SHA256, .SHA384, .SHA512]
-        case .AES256GCM: [.SHA256]
+        case .AES128, .AES256: [.SHA256, .SHA384, .SHA512]
+        case .AES128GCM, .AES256GCM: [.SHA256]
         }
     }
 }
