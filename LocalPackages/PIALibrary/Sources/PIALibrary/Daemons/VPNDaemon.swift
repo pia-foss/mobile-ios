@@ -37,7 +37,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var fallbackTimer: Timer!
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
-    private var isReconnectingAfterConnectivityFailure: Bool = false
+    private var connectivityFailureReconnectAttempts: Int = 0
     private var lastKnownVpnStatus: VPNStatus = .disconnected
 
     private init() {
@@ -103,7 +103,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 return
             }
 
-            isReconnectingAfterConnectivityFailure = false
+            connectivityFailureReconnectAttempts = 0
             Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
             invalidateTimer()
             reset()
@@ -154,7 +154,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     address?.markServerAsUnavailable()
 
                     self.numberOfAttempts += 1
-                    if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
+                    if (self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts) || (self.connectivityFailureReconnectAttempts > 0) {
                         log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
@@ -200,7 +200,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
             //triggered only when the user is manually aborting connection (before being established).
             if Client.configuration.disconnectedManually {
-                isReconnectingAfterConnectivityFailure = false
+                connectivityFailureReconnectAttempts = 0
 
                 if self.lastKnownVpnStatus != .connected,
                     (previousStatus == .connecting || previousStatus == .disconnecting),
@@ -232,6 +232,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             accessedDatabase.transient.vpnStatus = nextStatus
         }
 
+        // _lastDisconnectError is only meaningful on the transition into .disconnected:
+        // during .connecting/.disconnecting it still holds the previous failure, and
+        // re-reading it on every status change used to trigger several reconnects for
+        // a single tunnel failure.
+        guard nextStatus == .disconnected else {
+            return
+        }
+
         log.debug("[VPNDaemon] Fetching last disconnect error...")
         if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
             log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
@@ -257,7 +265,11 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // IKEv2 connectivity check failure.
             // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
             // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
-            if #available(iOS 16, *) {
+            // Only when IKEv2 is actually the active profile: tunnel extensions that
+            // crash (e.g. WireGuard on Catalyst) also report through
+            // NEVPNConnectionErrorDomainPlugin (code 7), and treating those as
+            // connectivity failures caused an unbounded reconnect loop.
+            if #available(iOS 16, *), profile.vpnType == IKEv2Profile.vpnType {
                 if errorDomain == NEVPNConnectionErrorDomain || errorDomain == "NEVPNConnectionErrorDomainPlugin" {
                     connectivityCheckFailed = true
                 }
@@ -274,16 +286,40 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     lastConnectedServer?.markServerAsUnavailable()
                 }
 
-                isReconnectingAfterConnectivityFailure = true
-                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
+                connectivityFailureReconnectAttempts += 1
+                scheduleConnectivityFailureReconnect()
             } else {
-                if previousStatus == .connecting {
+                // The error block now only runs on the transition into .disconnected,
+                // where a failed connection attempt usually arrives from .disconnecting
+                // (connecting → disconnecting → disconnected), so accept both.
+                if previousStatus == .connecting || previousStatus == .disconnecting {
                     log.error("The VPN did fail \(lastDisconnectError)")
                     Macros.postNotification(.PIAVPNDidFail)
                 }
             }
         } else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
+        }
+    }
+
+    // MARK: Reconnect backoff
+
+    private func scheduleConnectivityFailureReconnect() {
+        connectivityFailureReconnectAttempts += 1
+        // 1s, 2s, 4s, 8s, 16s, then capped at 30s. The counter resets on a successful
+        // connection or a manual disconnect.
+        let delay = min(pow(2.0, Double(connectivityFailureReconnectAttempts - 1)), 30.0)
+        log.debug("[VPNDaemon] Scheduling reconnect attempt #\(connectivityFailureReconnectAttempts) in \(delay)s")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self else { return }
+            // Dropped if the user disconnected manually or the VPN connected in the
+            // meantime (both clear the flag).
+            guard self.connectivityFailureReconnectAttempts > 0 else {
+                log.debug("[VPNDaemon] Skipping scheduled reconnect — no longer reconnecting after failure")
+                return
+            }
+            Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
         }
     }
 
