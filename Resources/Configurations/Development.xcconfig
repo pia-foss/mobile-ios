@@ -22,5 +22,9 @@
 
 #include "Production.xcconfig"
 
+// App configuration
+APP_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.dev.PIA-VPN
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER)
+
 // Custom compilation flags
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEVELOPMENT
