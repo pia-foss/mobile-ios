@@ -68,7 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
       "state" : {
-        "revision" : "8b1a7764345a6cb6dd2db6e8c9cec1b94745f0d3"
+        "revision" : "f2c8825f61a57ba664971e72c37efd92ebc366c9",
+        "version" : "2.2.6"
       }
     },
     {
@@ -76,7 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
       "state" : {
-        "revision" : "b7578f9a22b492331785b243d2dc4f148fb5969e"
+        "revision" : "ad06393c8ae856085efcf2f6a159c7f641f7247a",
+        "version" : "1.0.5"
       }
     },
     {
