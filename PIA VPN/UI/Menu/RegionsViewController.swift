@@ -30,7 +30,7 @@ import UIKit
 
 private let log = PIALogger.logger(for: AutolayoutViewController.self)
 
-class RegionsViewController: AutolayoutViewController {
+final class RegionsViewController: AutolayoutViewController {
 
     private enum Section: Int {
 
