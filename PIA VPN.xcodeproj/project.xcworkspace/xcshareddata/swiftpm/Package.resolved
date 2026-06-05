@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "fxpagecontrol",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nicklockwood/FXPageControl.git",
-      "state" : {
-        "revision" : "a94633402ba98c52f86c2a70e61ff086dec9de78",
-        "version" : "1.6.0"
-      }
-    },
-    {
       "identity" : "gradientprogressbar",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fxm90/GradientProgressBar.git",
