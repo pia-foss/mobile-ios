@@ -57,6 +57,7 @@ final class RegionsViewController: AutolayoutViewController {
     private var servers: [Server] = []
     private var filteredServers = [Server]()
     private var selectedServer: Server!
+    private var refreshBarButton: UIBarButtonItem?
     private var refreshControl = UIRefreshControl()
 
     let searchController = UISearchController(searchResultsController: nil)
@@ -103,10 +104,9 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func setupPullToRefresh() {
-        refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
         #if !targetEnvironment(macCatalyst)
-        // TODO: enable refresh on mac catalyst
-        tableView.refreshControl = refreshControl
+            refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
+            tableView.refreshControl = refreshControl
         #endif
     }
 
@@ -124,6 +124,7 @@ final class RegionsViewController: AutolayoutViewController {
             return
         }
 
+        refreshBarButton?.isEnabled = false
         gradientProgressBar.setProgress(0.5, animated: true)
 
         Client.ping(servers: self.servers)
@@ -133,13 +134,27 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func setupRightBarButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        let filterButton = UIBarButtonItem(
             image: Asset.Piax.Global.iconFilter.image,
             style: .plain,
             target: self,
             action: #selector(showFilter(_:))
         )
-        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
+        filterButton.accessibilityLabel = L10n.Region.Accessibility.filter
+
+        // Mac has no pull-to-refresh, so expose the latency refresh as a navigation bar button.
+        if Platform.isRunningOnMac {
+            let refreshButton = UIBarButtonItem(
+                image: UIImage(systemName: "arrow.clockwise"),
+                style: .plain,
+                target: self,
+                action: #selector(refreshLatency(_:))
+            )
+            refreshBarButton = refreshButton
+            navigationItem.rightBarButtonItems = [filterButton, refreshButton]
+        } else {
+            navigationItem.rightBarButtonItem = filterButton
+        }
     }
 
     override func dismissModal(completion: (() -> Void)? = nil) {
@@ -264,6 +279,7 @@ final class RegionsViewController: AutolayoutViewController {
     // MARK: Notifications
 
     @objc private func pingsDidComplete(notification: Notification) {
+        refreshBarButton?.isEnabled = true
         gradientProgressBar.setProgress(100, animated: true)
         DispatchQueue.main.asyncAfter(
             deadline: .now() + AppConfiguration.Animations.duration,
