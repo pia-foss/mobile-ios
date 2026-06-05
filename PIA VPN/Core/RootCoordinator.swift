@@ -93,7 +93,7 @@ final class RootCoordinator: NSObject {
 
         if UserInterface.isIpadOrMac {
             let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-            let split = UISplitViewController(style: .doubleColumn)
+            let split = AdaptiveSplitViewController(style: .doubleColumn)
             split.preferredDisplayMode = .oneBesideSecondary
             split.preferredSplitBehavior = .tile
             split.presentsWithGesture = true

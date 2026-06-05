@@ -496,11 +496,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func openMenu(_ sender: Any?) {
-        if let splitViewController {
-            let isHidden = splitViewController.displayMode == .secondaryOnly
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
-                splitViewController.preferredDisplayMode = isHidden ? .oneBesideSecondary : .secondaryOnly
-                splitViewController.view.layoutIfNeeded()
+        if let splitViewController = splitViewController as? AdaptiveSplitViewController {
+            splitViewController.toggleSidebar(duration: AppConfiguration.Animations.duration) { [weak view] in
+                view?.layoutIfNeeded()
             }
             return
         }
