@@ -25,6 +25,7 @@ import TunnelKitOpenVPN
 import UIKit
 
 class PIABaseSettingsViewController: AutolayoutViewController {
+    @IBOutlet weak var tableView: UITableView!
 
     weak var settingsDelegate: SettingsDelegate!
     weak var pendingPreferences: Client.Preferences.Editable!
@@ -38,6 +39,6 @@ class PIABaseSettingsViewController: AutolayoutViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = SettingsViewController.rowHeight
     }
-
 }

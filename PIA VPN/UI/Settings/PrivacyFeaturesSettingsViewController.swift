@@ -26,9 +26,8 @@ import UIKit
 
 private let log = PIALogger.logger(for: PrivacyFeaturesSettingsViewController.self)
 
-class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
+final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
 
-    @IBOutlet weak var tableView: UITableView!
     private lazy var switchPersistent = UISwitch()
     private lazy var switchReconnectNotifications = UISwitch()
     private lazy var switchContentBlocker = UISwitch()
@@ -41,8 +40,8 @@ class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController {
     private var vpnProvider: VPNProvider?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
+
         preferences = AppPreferences.shared
         vpnProvider = Client.providers.vpnProvider
 

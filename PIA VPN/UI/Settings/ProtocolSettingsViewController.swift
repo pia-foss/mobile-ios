@@ -31,7 +31,6 @@ private let log = PIALogger.logger(for: ProtocolSettingsViewController.self)
 
 final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
-    @IBOutlet weak var tableView: UITableView!
     private var protocolPopover: Popover!
     private var transportPopover: Popover!
     private var portsPopover: Popover!
@@ -44,7 +43,6 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     private lazy var switchSmallPackets = UISwitch()
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         tableView.sectionFooterHeight = UITableView.automaticDimension

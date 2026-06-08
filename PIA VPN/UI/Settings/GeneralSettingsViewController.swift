@@ -26,12 +26,10 @@ import UIKit
 
 private let log = PIALogger.logger(for: GeneralSettingsViewController.self)
 
-class GeneralSettingsViewController: PIABaseSettingsViewController {
+final class GeneralSettingsViewController: PIABaseSettingsViewController {
 
     private lazy var switchGeoServers = UISwitch()
     private lazy var switchInAppMessages = UISwitch()
-
-    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
