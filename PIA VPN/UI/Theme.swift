@@ -20,7 +20,6 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import FXPageControl
 import Foundation
 import PIAAssetsMobile
 import PIADesignSystem
@@ -654,13 +653,6 @@ public class Theme {
     /// :nodoc:
     public func applyScrollableMap(_ imageView: UIImageView) {
         imageView.image = Asset.Piax.Global.scrollableMap.image
-    }
-
-    /// :nodoc:
-    func applyPageControl(_ pageControl: FXPageControl) {
-        pageControl.dotSpacing = 6.0
-        pageControl.selectedDotImage = Asset.Piax.Global.pagecontrolSelectedDot.image
-        pageControl.dotImage = Asset.Piax.Global.pagecontrolUnselectedDot.image
     }
 
     // MARK: Strategy

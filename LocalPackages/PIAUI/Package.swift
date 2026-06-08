@@ -24,8 +24,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PIALibrary"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.18.9"),
-        .package(url: "https://github.com/nicklockwood/FXPageControl.git", exact: "1.6.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.19.2")
     ],
     targets: [
         .target(
@@ -38,8 +37,7 @@ let package = Package(
             name: "PIAUIKit",
             dependencies: [
                 "PIADesignSystem",
-                .product(name: "PIALibrary", package: "PIALibrary"),
-                .product(name: "FXPageControl", package: "FXPageControl")
+                .product(name: "PIALibrary", package: "PIALibrary")
             ]
         ),
         .target(

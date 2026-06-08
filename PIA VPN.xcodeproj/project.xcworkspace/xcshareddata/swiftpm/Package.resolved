@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "fxpagecontrol",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nicklockwood/FXPageControl.git",
-      "state" : {
-        "revision" : "a94633402ba98c52f86c2a70e61ff086dec9de78",
-        "version" : "1.6.0"
-      }
-    },
-    {
       "identity" : "gradientprogressbar",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fxm90/GradientProgressBar.git",
@@ -176,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log",
       "state" : {
-        "revision" : "bbd81b6725ae874c69e9b8c8804d462356b55523",
-        "version" : "1.10.1"
+        "revision" : "2aed77ae5ec9a86d8fe42c12275e4c2653a286ee",
+        "version" : "1.13.1"
       }
     },
     {
@@ -194,8 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "bf8d8c27f0f0c6d5e77bff0db76ab68f2050d15d",
-        "version" : "1.18.9"
+        "revision" : "ad5e3190cc63dc288f28546f9c6827efc1e9d495",
+        "version" : "1.19.2"
       }
     },
     {

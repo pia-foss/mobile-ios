@@ -73,14 +73,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>FXPageControl</string>
-			<key>Copyright</key>
-			<string>Copyright (C) 2010 Charcoal Design</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/nicklockwood/FXPageControl/master/LICENSE.md</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>DZNEmptyDataSet</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2016 Ignacio Romero Zurbuchen</string>

@@ -23,7 +23,6 @@
 import Foundation
 import PIALibrary
 import PIALocalizations
-import PopupDialog
 import StoreKit
 import UIKit
 
