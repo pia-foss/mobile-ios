@@ -64,7 +64,7 @@ final class RootCoordinator: NSObject {
                 ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
             guard let titlebar = windowScene?.titlebar else { return }
             titlebar.titleVisibility = .hidden
-            titlebar.toolbarStyle = .unifiedCompact
+            titlebar.toolbarStyle = .unified
         #endif
     }
 

@@ -134,6 +134,15 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     open func didRefreshOrientationConstraints() {
     }
 
+    open override var keyCommands: [UIKeyCommand]? {
+        let escapeToClose = UIKeyCommand(
+            input: UIKeyCommand.inputEscape,
+            modifierFlags: [],
+            action: #selector(dismissModal)
+        )
+        return [escapeToClose]
+    }
+
     // MARK: ModalController
 
     /// :nodoc:

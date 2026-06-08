@@ -128,10 +128,6 @@ final class DashboardViewController: AutolayoutViewController {
         setupCollectionView()
         setupNavigationBarButtons()
 
-        #if targetEnvironment(macCatalyst)
-            setupMacNavBarBackgroundView()
-        #endif
-
         viewContent.isHidden = true
         viewRows.isHidden = true
 
@@ -1167,93 +1163,24 @@ final class DashboardViewController: AutolayoutViewController {
                 )
             }
 
-            #if targetEnvironment(macCatalyst)
-                self.updateMacNavBarBackground(barTintColors: barTintColors)
-            #endif
-
             self.setNavBarTitleView(titleView: titleView)
         }
     }
 
-    // MARK: - Mac Catalyst connection status bar
-
-    #if targetEnvironment(macCatalyst)
-        /// On Mac Catalyst the system titlebar/toolbar replaces the navigation bar background, so the
-        /// custom status-color gradient applied via `applyCustomNavigationBar` is never visible. To keep
-        /// the connection status color on screen we mirror that gradient in a band pinned to the top of
-        /// the safe area, just below the navigation bar.
-        /// Matches `UINavigationBar`'s standard height, so the band reads as the nav bar background.
-        private static let macNavBarBackgroundHeight: CGFloat = 44
-
-        private lazy var macNavBarBackgroundView: GradientView = {
-            let bandView = GradientView()
-            bandView.translatesAutoresizingMaskIntoConstraints = false
-            bandView.gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-            bandView.gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-            return bandView
-        }()
-
-        /// The status title view currently shown inside the band, owned by the band itself.
-        private weak var macNavBarBandTitleView: UIView?
-
-        /// The status gradient currently shown in the band; `nil` when no status color applies
-        /// (the `.normal` theme), kept so the band can re-resolve its theme-dependent fallback
-        /// color on restyle.
-        private var macNavBarTintColors: [UIColor]?
-
-        private func setupMacNavBarBackgroundView() {
-            // Reserve the band's height at the top of the safe area. The storyboard pins
-            // `viewContainer` to the safe area top, so all content is pushed down automatically and
-            // the band no longer overlaps it.
-            additionalSafeAreaInsets.top = Self.macNavBarBackgroundHeight
-
-            view.addSubview(macNavBarBackgroundView)
-            NSLayoutConstraint.activate([
-                // The band fills the reserved strip directly above the (now inset) content safe area.
-                macNavBarBackgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                macNavBarBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                macNavBarBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                macNavBarBackgroundView.heightAnchor.constraint(equalToConstant: Self.macNavBarBackgroundHeight)
-            ])
-        }
-
-        private func updateMacNavBarBackground(barTintColors: [UIColor]?) {
-            macNavBarTintColors = barTintColors
-            refreshMacNavBarBackground()
-        }
-
-        /// Re-applies the band colors, resolving the fallback against the current theme palette.
-        /// Called on every status update and on restyle, so a theme switch never leaves the band
-        /// with stale colors.
-        private func refreshMacNavBarBackground() {
-            // No status gradient (the `.normal` theme) → match the content background so the band blends in.
-            let colors = macNavBarTintColors ?? [Theme.current.palette.principalBackground]
-            // A single color fills the band solid.
-            let resolved = colors.count == 1 ? colors + colors : colors
-            macNavBarBackgroundView.gradientLayer.colors = resolved.map(\.cgColor)
-        }
-
-        /// Centers the given status title view inside the color band, replacing any previous one.
-        private func setMacNavBarBandTitleView(_ titleView: UIView) {
-            macNavBarBandTitleView?.removeFromSuperview()
-            macNavBarBandTitleView = titleView
-
-            titleView.translatesAutoresizingMaskIntoConstraints = false
-            macNavBarBackgroundView.addSubview(titleView)
-            NSLayoutConstraint.activate([
-                titleView.centerXAnchor.constraint(equalTo: macNavBarBackgroundView.centerXAnchor),
-                titleView.centerYAnchor.constraint(equalTo: macNavBarBackgroundView.centerYAnchor),
-                titleView.leadingAnchor.constraint(greaterThanOrEqualTo: macNavBarBackgroundView.leadingAnchor, constant: 16),
-                titleView.trailingAnchor.constraint(lessThanOrEqualTo: macNavBarBackgroundView.trailingAnchor, constant: -16)
-            ])
-        }
-    #endif
-
     private func setNavBarTitleView(titleView: UIView) {
         #if targetEnvironment(macCatalyst)
-            setMacNavBarBandTitleView(titleView)
+        if #available(iOS 16.0, *) {
+            let title = UIBarButtonItem(customView: titleView)
+            if #available(macCatalyst 26.0, *) {
+                title.hidesSharedBackground = true
+            }
+            let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
+            navigationItem.centerItemGroups = [titleGroup]
+        } else {
+            navigationItem.title = (titleView as? UILabel)?.text
+        }
         #else
-            navigationItem.titleView = titleView
+        navigationItem.titleView = titleView
         #endif
         setNeedsStatusBarAppearanceUpdate()
     }
@@ -1304,18 +1231,8 @@ final class DashboardViewController: AutolayoutViewController {
         connectionTimer = nil
     }
 
-    /// The status title label currently on screen, if any — inside the Mac Catalyst status band,
-    /// or as the navigation bar title view elsewhere.
-    private var connectionTimeLabel: UILabel? {
-        #if targetEnvironment(macCatalyst)
-            return macNavBarBandTitleView as? UILabel
-        #else
-            return navigationItem.titleView as? UILabel
-        #endif
-    }
-
     @objc private func updateConnectionTime() {
-        connectionTimeLabel?.text = formattedConnectionTime
+        (navigationItem.titleView as? UILabel)?.text = formattedConnectionTime
     }
 
     // MARK: Restylable
@@ -1329,11 +1246,6 @@ final class DashboardViewController: AutolayoutViewController {
         Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-
-        #if targetEnvironment(macCatalyst)
-            refreshMacNavBarBackground()
-        #endif
-
         Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()

@@ -123,47 +123,6 @@ extension Theme {
         label.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle16 : TextStyle.textStyle17)
     }
 
-    public func applyInputOverlay(_ view: UIView) {
-        view.layer.cornerRadius = 6.0
-        view.backgroundColor = .black
-    }
-
-    //MARK: SearchBar
-
-    public func applySearchBarStyle(_ searchBar: UISearchBar) {
-
-        searchBar.backgroundColor = .clear
-
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = .clear
-        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
-        textFieldInsideSearchBarLabel?.backgroundColor = .clear
-        let glassIconView = textFieldInsideSearchBar?.leftView as? UIImageView
-        glassIconView?.tintColor = UIColor.piaGrey4
-
-        if palette.appearance == .dark {
-            //text
-            textFieldInsideSearchBar?.style(style: TextStyle.textStyle6)
-            //placeholder
-            textFieldInsideSearchBarLabel?.style(style: TextStyle.textStyle8)
-            searchBar.barTintColor = UIColor.piaGrey10
-        } else {
-            //text
-            textFieldInsideSearchBar?.style(style: TextStyle.textStyle7)
-            //placeholder
-            textFieldInsideSearchBarLabel?.style(style: TextStyle.textStyle8)
-            searchBar.barTintColor = UIColor.white
-        }
-
-        //Cancel button
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.foregroundColor: TextStyle.textStyle8.color!,
-            NSAttributedString.Key.font: TextStyle.textStyle8.font!
-        ]
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-
-    }
-
     public func applyFavoriteUnselectedImage(_ imageView: UIImageView) {
         imageView.image = Asset.Piax.Global.favoriteUnselected.image
     }
