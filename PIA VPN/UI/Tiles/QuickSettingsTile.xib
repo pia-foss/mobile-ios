@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuickSettingsTile" customModule="PIA_VPN" customModuleProvider="target">
             <connections>
+                <outlet property="automationButton" destination="gaA-K4-g4k" id="MZh-Wr-daf"/>
                 <outlet property="browserButton" destination="MIc-dc-WeZ" id="pJw-Mn-UJ7"/>
                 <outlet property="buttonsStackView" destination="0Qp-uW-eAj" id="M2v-H4-mup"/>
                 <outlet property="killSwitchButton" destination="aBB-hV-AgG" id="HeK-0V-a7q"/>
-                <outlet property="nmtButton" destination="gaA-K4-g4k" id="MZh-Wr-daf"/>
                 <outlet property="themeButton" destination="5Bu-uZ-L11" id="3JV-eF-LvL"/>
                 <outlet property="tileTitle" destination="Gno-Iw-R4F" id="USa-nN-CEW"/>
             </connections>
@@ -24,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="QUICK SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gno-Iw-R4F">
-                    <rect key="frame" x="25" y="15" width="136.5" height="20.5"/>
+                    <rect key="frame" x="25" y="15" width="136" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -61,6 +60,7 @@
                     </subviews>
                 </stackView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Gno-Iw-R4F" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="28A-s7-COj"/>
@@ -71,7 +71,6 @@
                 <constraint firstItem="Gno-Iw-R4F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="tPY-7o-dlf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="142" y="126"/>
         </view>
     </objects>

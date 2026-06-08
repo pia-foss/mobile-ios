@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "Ga naar iOS-instellingen > wifi om deze lijst in te vullen.";
 "hotspothelper.display.name" = "🔒 Activeer VPN-wifibescherming via PIA-instellingen om deze verbinding te beveiligen.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN-wifibescherming ingeschakeld - Wij zorgen voor uw veiligheid.";
-"tiles.quicksetting.nmt.title" = "Netwerkbeheer";
+"tiles.quicksetting.automation.title" = "Automatisering";
 "tiles.quicksetting.private.browser.title" = "Privébrowser";
 "settings.nmt.killswitch.disabled" = "De VPN kill switch is op dit moment uitgeschakeld. Schakel de VPN kill switch in via uw instellingen om ervoor te zorgen dat de netwerkbeheertool werkt en dat u verbinding kunt maken als u van netwerk wisselt.";
 "settings.service.quality.share.title" = "Help PIA te verbeteren";

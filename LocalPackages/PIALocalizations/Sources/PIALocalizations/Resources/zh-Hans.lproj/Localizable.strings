@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "要填充此列表，请转到 iOS 设置> WiFi。";
 "hotspothelper.display.name" = "🔒 在 PIA 设置中激活 VPN WiFi 保护以保护此连接。";
 "hotspothelper.display.protected.name" = "🔒 已启用 PIA VPN WiFi 保护 - 我们会保障您的安全。";
-"tiles.quicksetting.nmt.title" = "网络管理";
+"tiles.quicksetting.automation.title" = "自动化";
 "tiles.quicksetting.private.browser.title" = "专用浏览器";
 "settings.nmt.killswitch.disabled" = "VPN 终止开关目前已禁用。为了确保网络管理工具正常运行，并确保您在切换网络时能够重新连接，请在设置中启用 VPN 终止开关。";
 "settings.service.quality.share.title" = "帮助改进 PIA";

@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "このリストに自動入力するには、「iOS設定」>「WiFi」へと進みます。";
 "hotspothelper.display.name" = "🔒 この接続を保護するには、PIA設定でVPN WiFi保護を有効にします。";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi保護が有効にされました - 保護はお任せください。";
-"tiles.quicksetting.nmt.title" = "ネットワーク管理";
+"tiles.quicksetting.automation.title" = "自動化";
 "tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
 "settings.nmt.killswitch.disabled" = "現在VPNキルスイッチが無効になっています。「ネットワーク管理ツール」が確かに機能している状態にし、ネットワークを切り替えたときに再度接続できるようにするには、設定でVPNキルスイッチを有効にしてください。";
 "settings.service.quality.share.title" = "PIAの改善に協力する";

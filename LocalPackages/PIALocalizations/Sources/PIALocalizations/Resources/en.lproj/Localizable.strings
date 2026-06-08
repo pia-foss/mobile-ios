@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "To populate this list go to iOS Settings > WiFi.";
 "hotspothelper.display.name" = "🔒 Activate VPN WiFi Protection in PIA Settings to secure this connection.";
 "hotspothelper.display.protected.name" = "🔒 PIA VPN WiFi Protection Enabled - We got your back.";
-"tiles.quicksetting.nmt.title" = "Network Management";
+"tiles.quicksetting.automation.title" = "Automation";
 "tiles.quicksetting.private.browser.title" = "Private Browser";
 "settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
 "settings.service.quality.share.title" = "Help Improve PIA";

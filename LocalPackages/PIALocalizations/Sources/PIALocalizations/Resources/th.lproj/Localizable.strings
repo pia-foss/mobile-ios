@@ -228,7 +228,7 @@
 "settings.hotspothelper.available.help" = "หากต้องการตั้งค่ารายการนี้ ให้ไปที่การตั้งค่า iOS > WiFi";
 "hotspothelper.display.name" = "เปิดใช้งานการป้องกัน VPN WiFi ในการตั้งค่า PIA เพื่อรักษาความปลอดภัยการเชื่อมต่อนี้";
 "hotspothelper.display.protected.name" = "🔒 เปิดใช้งานการป้องกัน PIA VPN WiFi - เราพร้อมดูแลคุณ";
-"tiles.quicksetting.nmt.title" = "การจัดการเครือข่าย";
+"tiles.quicksetting.automation.title" = "ระบบอัตโนมัติ";
 "tiles.quicksetting.private.browser.title" = "เบราว์เซอร์ส่วนตัว";
 "settings.nmt.killswitch.disabled" = "ปุ่ม VPN kill ปิดใช้งานอยู่ กรุณาเปิดใช้งานปุ่ม VPN kill ในการตั้งค่า เพื่อยืนยันว่าเครื่องมือจัดการเครือข่ายยังทำงาน และคุณสามารถเชื่อมต่อเครือข่ายได้อีกครั้งเมื่อมีการเปลี่ยนเครือข่าย";
 "settings.service.quality.share.title" = "ช่วยปรับปรุง PIA";
