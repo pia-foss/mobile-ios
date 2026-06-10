@@ -122,12 +122,10 @@ public final class Client {
         #endif
     }
 
-    /**
-     Refresh the ping number to the given servers
-     */
-    public static func ping(servers: [Server]) {
-        Task {
-            await ServersPinger.shared.ping(withDestinations: servers)
-        }
+    /// Refresh the ping number to the given servers and await the outcome,
+    /// joining any refresh already in flight.
+    @discardableResult
+    public static func ping(servers: [Server]) async -> PingServersResult {
+        return await ServersPinger.shared.ping(withDestinations: servers)
     }
 }

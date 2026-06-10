@@ -21,128 +21,74 @@
 //
 
 import Foundation
+import Network
 
 protocol Pinger {
-    func sendPing() -> Int?
-    func setTimeout(_ timeout: Int)
+    func ping(ip: String, port: UInt16, timeout: TimeInterval) async -> Int?
 }
 
-class TCPPinger: Pinger {
-    private let hostname: String
-    private let port: UInt16
-    private var timeout: Int = 0
+final class TCPPinger: Pinger {
+    private let queue = DispatchQueue(label: "com.privateinternetaccess.AsyncTCPPinger", qos: .utility)
 
-    init(hostname: String, port: UInt16) {
-        self.hostname = hostname
-        self.port = port
-    }
+    private init() {}
+    static let shared = TCPPinger()
 
-    func setTimeout(_ timeout: Int) {
-        self.timeout = timeout
-    }
-
-    func sendPing() -> Int? {
-        let descriptor = socket(PF_INET, SOCK_STREAM, 0)
-        guard descriptor != -1 else {
+    /// Measures the TCP connect time to `ip:port` in milliseconds.
+    /// Returns nil on failure, timeout or task cancellation. Never blocks a cooperative thread.
+    func ping(ip: String, port: UInt16, timeout: TimeInterval) async -> Int? {
+        guard let nwPort = NWEndpoint.Port(rawValue: port) else {
             return nil
         }
+        let connection = NWConnection(host: NWEndpoint.Host(ip), port: nwPort, using: .tcp)
+        let start = Date.timeIntervalSinceReferenceDate
 
-        defer {
-            close(descriptor)
-        }
+        return await withTaskCancellationHandler {
+            await withCheckedContinuation { (continuation: CheckedContinuation<Int?, Never>) in
+                let resumeOnce = ResumeOnce(continuation)
 
-        var address = sockaddr_in()
-        address.sin_port = port.bigEndian
-        address.sin_addr.s_addr = inet_addr(hostname)
-        address.sin_family = sa_family_t(AF_INET)
-        address.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+                connection.stateUpdateHandler = { state in
+                    switch state {
+                    case .setup, .preparing, .waiting:
+                        break
+                    case .ready:
+                        resumeOnce.resume(with: Int((Date.timeIntervalSinceReferenceDate - start) * 1000.0))
+                        connection.cancel()
+                    case .failed, .cancelled:
+                        resumeOnce.resume(with: nil)
 
-        let now = Date.timeIntervalSinceReferenceDate
+                    @unknown default:
+                        break
+                    }
+                }
+                connection.start(queue: queue)
 
-        let result = withUnsafePointer(to: &address) { pointer in
-            pointer.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockaddrPointer in
-                connect(descriptor, sockaddrPointer, socklen_t(MemoryLayout<sockaddr_in>.size))
+                queue.asyncAfter(deadline: .now() + timeout) {
+                    resumeOnce.resume(with: nil)
+                    if connection.state != .cancelled {
+                        connection.cancel()
+                    }
+                }
+            }
+        } onCancel: {
+            if connection.state != .cancelled {
+                connection.cancel()
             }
         }
-
-        let responseTime = Int((Date.timeIntervalSinceReferenceDate - now) * 1000.0)
-
-        guard result == 0 else {
-            return nil
-        }
-
-        return responseTime
     }
 }
 
-class UDPPinger: Pinger {
-    private let hostname: String
-    private let port: UInt16
-    private var timeout: Int = 0
+// The state handler, the deadline and cancellation can all fire; only the first resumes.
+private final class ResumeOnce: @unchecked Sendable {
+    private var continuation: Mutex<CheckedContinuation<Int?, Never>?>
 
-    init(hostname: String, port: UInt16) {
-        self.hostname = hostname
-        self.port = port
+    init(_ continuation: CheckedContinuation<Int?, Never>) {
+        self.continuation = .init(continuation)
     }
 
-    func setTimeout(_ timeout: Int) {
-        self.timeout = timeout
-    }
-
-    func sendPing() -> Int? {
-        let descriptor = socket(PF_INET, SOCK_DGRAM, 0)
-        guard descriptor != -1 else {
-            return nil
+    func resume(with value: Int?) {
+        continuation.withLock { continuation in
+            continuation?.resume(returning: value)
+            continuation = nil
         }
-
-        defer {
-            close(descriptor)
-        }
-
-        var address = sockaddr_in()
-        address.sin_port = port.bigEndian
-        address.sin_addr.s_addr = inet_addr(hostname)
-        address.sin_family = sa_family_t(AF_INET)
-        address.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
-
-        // Set timeout if specified
-        if timeout > 0 {
-            var tv = timeval()
-            let usecs = Int(timeout) * 1000
-            tv.tv_sec = usecs / 1_000_000
-            tv.tv_usec = Int32(usecs % 1_000_000)
-
-            setsockopt(descriptor, SOL_SOCKET, SO_SNDTIMEO, &tv, socklen_t(MemoryLayout<timeval>.size))
-            setsockopt(descriptor, SOL_SOCKET, SO_RCVTIMEO, &tv, socklen_t(MemoryLayout<timeval>.size))
-        }
-
-        let now = Date.timeIntervalSinceReferenceDate
-
-        // Send dummy byte
-        let dummyByte: [UInt8] = [UInt8(ascii: "a")]
-        let sendResult = withUnsafePointer(to: &address) { pointer in
-            pointer.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockaddrPointer in
-                sendto(descriptor, dummyByte, dummyByte.count, 0, sockaddrPointer, socklen_t(MemoryLayout<sockaddr_in>.size))
-            }
-        }
-
-        guard sendResult > 0 else {
-            return nil
-        }
-
-        // Receive response
-        var fromAddress = sockaddr()
-        var fromAddressSize = socklen_t(MemoryLayout<sockaddr>.size)
-        var received = [UInt8](repeating: 0, count: 1)
-
-        let recvResult = recvfrom(descriptor, &received, 1, 0, &fromAddress, &fromAddressSize)
-
-        let responseTime = Int((Date.timeIntervalSinceReferenceDate - now) * 1000)
-
-        guard recvResult != -1 else {
-            return nil
-        }
-
-        return responseTime
     }
 }

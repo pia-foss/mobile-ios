@@ -20,51 +20,89 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Algorithms
 import Foundation
 
 private let log = PIALogger.logger(for: ServersPinger.self)
 
-actor ServersPinger: DatabaseAccess {
+/// Outcome of a `ServersPinger.ping(withDestinations:)` pass.
+public enum PingServersResult: Sendable, Equatable {
+    /// Pings finished, results were serialized and `.PIADaemonsDidPingServers` was posted.
+    case completed
+    /// Nothing was pinged because the VPN is not disconnected.
+    case skippedVPNActive
+    /// The pass was interrupted by `reset()`.
+    case cancelled
+}
+
+internal actor ServersPinger: DatabaseAccess {
     static let shared = ServersPinger()
 
-    private static let pingTimeoutSeconds: TimeInterval = 3
+    private static let pingTimeout: TimeInterval = 3
+    private static let maxConcurrentPings = 16
 
-    private var isPinging = false
+    private let pinger: Pinger
+    private var inflightTask: Task<PingServersResult, Never>?
 
-    func ping(withDestinations destinations: [Server]) async {
+    init(pinger: Pinger = TCPPinger.shared) {
+        self.pinger = pinger
+    }
+
+    func ping(withDestinations destinations: [Server]) async -> PingServersResult {
+        // Join an in-flight pass instead of skipping, so every caller gets a result.
+        if let inflightTask {
+            log.debug("Ping already in flight, joining it")
+            return await inflightTask.value
+        }
+
         guard accessedDatabase.transient.vpnStatus == .disconnected else {
             log.debug("Not pinging servers while on VPN, will try on next update")
-            return
+            return .skippedVPNActive
         }
 
-        guard !isPinging else {
-            log.warning("Skip pinging, latest attempt still pending completion")
-            return
-        }
-
-        isPinging = true
         accessedDatabase.plain.clearPings()
 
-        await withTaskGroup(of: Void.self) { group in
-            for server in destinations {
-                log.debug("Pinging \(server.identifier)")
-                for address in server.addresses() {
-                    group.addTask {
-                        await self.pingServer(server, address: address)
+        let task = Task { () -> PingServersResult in
+            await self.runPingPass(destinations)
+            log.debug("Finished pinging servers")
+
+            // A cancelled pass must not clear the slot (reset() already did, and a new
+            // pass may own it), nor serialize half-baked pings or post the notification.
+            if Task.isCancelled { return .cancelled }
+
+            self.inflightTask = nil
+            self.finish()
+            return .completed
+        }
+        inflightTask = task
+        return await task.value
+    }
+
+    func reset() {
+        inflightTask?.cancel()
+        inflightTask = nil
+    }
+
+    private func runPingPass(_ destinations: [Server]) async {
+        for destinations in destinations.chunks(ofCount: Self.maxConcurrentPings) {
+            if Task.isCancelled { break }
+            await withTaskGroup(of: Void.self) { group in
+                for server in destinations {
+                    log.debug("Pinging \(server.identifier)")
+                    for address in server.addresses() {
+                        group.addTask {
+                            await self.pingServer(server, address: address)
+                        }
                     }
                 }
             }
         }
-
-        finish()
     }
 
     private func pingServer(_ server: Server, address: Server.ServerAddressIP) async {
         log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
 
-        let tcpAddress = Server.Address(hostname: address.ip, port: 443)
-
-        guard let responseTime = await pingWithTimeout(server: server, address: tcpAddress) else {
+        guard let responseTime = await pinger.ping(ip: address.ip, port: 443, timeout: Self.pingTimeout) else {
             log.warning("Timeout/error for \(server.identifier)")
             return
         }
@@ -80,49 +118,11 @@ actor ServersPinger: DatabaseAccess {
         accessedDatabase.plain.setPing(responseTime, forServerIdentifier: server.identifier)
     }
 
-    // Races the TCP ping against a 3-second deadline. Returns nil on timeout or failure.
-    private func pingWithTimeout(server: Server, address: Server.Address) async -> Int? {
-        return await withTaskGroup(of: Int?.self) { group in
-            group.addTask {
-                return server.ping(toAddress: address, withProtocol: .TCP)
-            }
-
-            group.addTask {
-                try? await Task.sleep(nanoseconds: UInt64(Self.pingTimeoutSeconds * 1_000_000_000))
-                return nil
-            }
-
-            let first = await group.next() ?? nil
-            group.cancelAll()
-            return first
-        }
-    }
-
-    func reset() {
-        isPinging = false
-    }
-
     private func finish() {
-        isPinging = false
         accessedDatabase.plain.serializePings()
 
         Task { @MainActor in
             Macros.postNotification(.PIADaemonsDidPingServers)
         }
     }
-}
-
-extension Server {
-
-    func ping(toAddress address: Address, withProtocol protocolType: PingerProtocol) -> Int? {
-        return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
-    }
-
-    func ping(withProtocol protocolType: PingerProtocol) -> Int? {
-        guard let address = pingAddress else {
-            return nil
-        }
-        return Macros.ping(withProtocol: protocolType, hostname: address.hostname, port: address.port)
-    }
-
 }
