@@ -70,6 +70,7 @@ final class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var viewRows: UIView!
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    private var navigationTitleLabel: UILabel? = nil
 
     private var currentPageIndex = 0
     private var isDisconnecting = false
@@ -112,7 +113,6 @@ final class DashboardViewController: AutolayoutViewController {
             return nil
         }
 
-        // TODO: This string needs localization
         return L10n.Dashboard.Vpn.protected + " | " + timeString
     }
 
@@ -1081,7 +1081,6 @@ final class DashboardViewController: AutolayoutViewController {
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textColor = .white
-            // TODO: This string needs localization
             titleLabelView.text = L10n.Dashboard.Vpn.notProtected
             setNavBarTheme(.red, with: titleLabelView)
 
@@ -1135,7 +1134,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     }
 
-    private func setNavBarTheme(_ theme: NavBarTheme, with titleView: UIView) {
+    private func setNavBarTheme(_ theme: NavBarTheme, with titleLabel: UILabel) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
 
@@ -1163,24 +1162,25 @@ final class DashboardViewController: AutolayoutViewController {
                 )
             }
 
-            self.setNavBarTitleView(titleView: titleView)
+            self.setNavBar(titleLabel: titleLabel)
         }
     }
 
-    private func setNavBarTitleView(titleView: UIView) {
+    private func setNavBar(titleLabel: UILabel) {
+        navigationTitleLabel = titleLabel
         #if targetEnvironment(macCatalyst)
         if #available(iOS 16.0, *) {
-            let title = UIBarButtonItem(customView: titleView)
+            let title = UIBarButtonItem(customView: titleLabel)
             if #available(macCatalyst 26.0, *) {
                 title.hidesSharedBackground = true
             }
             let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
             navigationItem.centerItemGroups = [titleGroup]
         } else {
-            navigationItem.title = (titleView as? UILabel)?.text
+            navigationItem.title = titleLabel.text
         }
         #else
-        navigationItem.titleView = titleView
+        navigationItem.titleView = titleLabel
         #endif
         setNeedsStatusBarAppearanceUpdate()
     }
@@ -1232,7 +1232,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func updateConnectionTime() {
-        (navigationItem.titleView as? UILabel)?.text = formattedConnectionTime
+        navigationTitleLabel?.text = formattedConnectionTime
     }
 
     // MARK: Restylable
