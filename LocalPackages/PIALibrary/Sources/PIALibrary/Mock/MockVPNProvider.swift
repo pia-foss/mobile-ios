@@ -60,6 +60,8 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
         return nil
     }
 
+    public var connectedDate: Date? { nil }
+
     /// :nodoc:
     public func prepare() {
         accessedDatabase.transient.isNetworkReachable = true

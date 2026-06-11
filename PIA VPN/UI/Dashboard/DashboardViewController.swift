@@ -94,12 +94,25 @@ final class DashboardViewController: AutolayoutViewController {
 
     private var connectionTimer: Timer?
 
-    private var formattedConnectionTime: String? {
-        guard let startTime = Client.preferences.lastVPNConnectionSuccess else {
+    private func formattedConnectionTime(isConnected: Bool) -> String? {
+        let now: TimeInterval = Date.now.timeIntervalSince1970
+        let connectionTime: TimeInterval
+
+        // by default use the time we know we established the connection
+        if let lastVPNConnectionSuccess = Client.preferences.lastVPNConnectionSuccess {
+            connectionTime = now - lastVPNConnectionSuccess
+        // as fallback use system connected time and use that as connection success
+        } else if let connectedDate = Client.providers.vpnProvider.connectedDate {
+            let timeInterval = connectedDate.timeIntervalSince1970
+            Client.preferences.lastVPNConnectionSuccess = timeInterval
+            connectionTime = now - timeInterval
+        // last resort store current time because we know status is connected
+        } else if isConnected {
+            Client.preferences.lastVPNConnectionSuccess = now
+            connectionTime = 0
+        } else {
             return nil
         }
-
-        let connectionTime = Date().timeIntervalSince1970 - startTime
 
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -110,7 +123,6 @@ final class DashboardViewController: AutolayoutViewController {
             return nil
         }
 
-        // TODO: This string needs localization
         return L10n.Dashboard.Vpn.protected + " | " + timeString
     }
 
@@ -1058,7 +1070,7 @@ final class DashboardViewController: AutolayoutViewController {
 
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
-            titleLabelView.text = formattedConnectionTime
+            titleLabelView.text = formattedConnectionTime(isConnected: true)
             setNavBarTheme(.green, with: titleLabelView)
 
             AppPreferences.shared.todayWidgetVpnStatus = VPNStatus.connected.rawValue
@@ -1219,7 +1231,7 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
-        titleLabel.text = formattedConnectionTime
+        titleLabel.text = formattedConnectionTime(isConnected: currentStatus == .connected)
     }
 
     // MARK: Restylable
