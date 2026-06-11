@@ -263,9 +263,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 }
             }
 
+            let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
+            if !wholeInternetIsReachable {
+                log.debug("There's no internet!")
+            }
+
             log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
 
-            if connectivityCheckFailed {
+            if connectivityCheckFailed && wholeInternetIsReachable {
                 log.debug("[VPNDaemon] connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
 
                 if let lastConnectedCN = accessedDatabase.plain.lastServerCN {
