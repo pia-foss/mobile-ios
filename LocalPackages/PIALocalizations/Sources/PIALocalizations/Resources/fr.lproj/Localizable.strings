@@ -3,6 +3,7 @@
 "global.ok" = "OK";
 "global.cancel" = "Annuler";
 "global.close" = "Fermer";
+"global.done" = "Terminé";
 "global.error" = "Erreur";
 "global.automatic" = "Automatique";
 "global.required" = "Requis";

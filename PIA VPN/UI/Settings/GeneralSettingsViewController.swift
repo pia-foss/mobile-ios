@@ -38,7 +38,9 @@ final class GeneralSettingsViewController: PIABaseSettingsViewController {
         tableView.estimatedSectionFooterHeight = 1.0
 
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
+        switchGeoServers.preferredStyle = .sliding
         switchInAppMessages.addTarget(self, action: #selector(toggleShowServiceMessages(_:)), for: .valueChanged)
+        switchInAppMessages.preferredStyle = .sliding
 
         tableView.delegate = self
         tableView.dataSource = self

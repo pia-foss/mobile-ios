@@ -66,6 +66,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
         self.handshakePopover = Popover(options: options, showHandler: nil, dismissHandler: nil)
 
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
+        switchSmallPackets.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
 

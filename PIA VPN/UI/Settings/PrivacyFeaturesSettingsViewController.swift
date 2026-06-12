@@ -78,10 +78,15 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
         tableView.dataSource = self
 
         switchPersistent.addTarget(self, action: #selector(togglePersistentConnection(_:)), for: .valueChanged)
+        switchPersistent.preferredStyle = .sliding
         switchReconnectNotifications.addTarget(self, action: #selector(toggleReconnectNotifications(_:)), for: .valueChanged)
+        switchReconnectNotifications.preferredStyle = .sliding
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
+        switchContentBlocker.preferredStyle = .sliding
         switchLeakProtection.addTarget(self, action: #selector(toggleLeakProtection(_:)), for: .valueChanged)
+        switchLeakProtection.preferredStyle = .sliding
         switchAllowDevicesOnLocalNetwork.addTarget(self, action: #selector(toggleAllowDevicesOnLocalNetwork(_:)), for: .valueChanged)
+        switchAllowDevicesOnLocalNetwork.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
         NotificationCenter.default.addObserver(

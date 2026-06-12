@@ -356,45 +356,33 @@ final class DashboardViewController: AutolayoutViewController {
 
         switch self.tileModeStatus {  //change the status
         case .normal:
-            if let leftBarButton = navigationItem.leftBarButtonItem,
-                leftBarButton.accessibilityLabel != L10n.Global.cancel
-            {
-                leftBarButton.image = Asset.itemMenu.image
-                leftBarButton.action = #selector(openMenu(_:))
-            } else {
-                navigationItem.leftBarButtonItem = UIBarButtonItem(
-                    image: Asset.itemMenu.image,
-                    style: .plain,
-                    target: self,
-                    action: #selector(openMenu(_:))
-                )
-            }
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: Asset.itemMenu.image,
+                style: .plain,
+                target: self,
+                action: #selector(openMenu(_:))
+            )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
 
-            if navigationItem.rightBarButtonItem == nil {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(
-                    image: Asset.Piax.Global.iconEditTile.image,
-                    style: .plain,
-                    target: self,
-                    action: #selector(updateEditTileStatus(_:))
-                )
-                navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
-            }
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: Asset.Piax.Global.iconEditTile.image,
+                style: .plain,
+                target: self,
+                action: #selector(updateEditTileStatus(_:))
+            )
+            navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
 
         case .edit:
+            navigationItem.leftBarButtonItem = nil
 
-            navigationItem.leftBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .stop,
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: L10n.Global.done,
+                style: .plain,
                 target: self,
                 action: #selector(closeTileEditingMode(_:))
             )
-            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
-            navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
-            navigationItem.rightBarButtonItem = nil
-
         }
-
     }
 
     private func updateTileLayout() {

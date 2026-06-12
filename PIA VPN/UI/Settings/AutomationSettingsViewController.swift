@@ -36,6 +36,7 @@ final class AutomationSettingsViewController: PIABaseSettingsViewController {
 
         self.setupTableView()
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
+        switchEnableNMT.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }

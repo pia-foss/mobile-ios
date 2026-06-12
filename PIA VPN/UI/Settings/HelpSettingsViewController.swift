@@ -48,8 +48,10 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
         tableView.dataSource = self
 
         switchDebugLogging.addTarget(self, action: #selector(toggleDebugLogging(_:)), for: .valueChanged)
+        switchDebugLogging.preferredStyle = .sliding
 
         switchShareServiceQualityData.addTarget(self, action: #selector(toggleShareServiceQualityData(_:)), for: .valueChanged)
+        switchShareServiceQualityData.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }

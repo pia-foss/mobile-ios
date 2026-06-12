@@ -362,6 +362,8 @@ public enum L10n {
     public static let disable = L10n.tr("Localizable", "global.disable", fallback: "Disable")
     /// Disabled
     public static let disabled = L10n.tr("Localizable", "global.disabled", fallback: "Disabled")
+    /// Done
+    public static let done = L10n.tr("Localizable", "global.done", fallback: "Done")
     /// Edit
     public static let edit = L10n.tr("Localizable", "global.edit", fallback: "Edit")
     /// Empty
