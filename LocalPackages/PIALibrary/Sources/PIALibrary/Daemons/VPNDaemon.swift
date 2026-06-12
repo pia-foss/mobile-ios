@@ -257,10 +257,21 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 }
             #endif
 
-            // OpenVPN connectivity check failure
+            // OpenVPN connectivity check failure.
+            // The Kape TunnelKit fork dropped PIA's bespoke `connectivityCheckFailed`
+            // error, so there is no exact equivalent. Approximate the old behaviour by
+            // treating the fork's connectivity-related disconnect reasons as a failed
+            // check when the original Swift error survives bridging.
+            // TODO: verify on device whether `_lastDisconnectError` preserves the
+            // `TunnelKitOpenVPNError` type across the Network Extension boundary.
             #if canImport(TunnelKitOpenVPN)
-                if errorDomain == OpenVPNError.errorDomain, errorCode == OpenVPNError.connectivityCheckFailed.errorCode {
-                    connectivityCheckFailed = true
+                if let openVPNError = lastDisconnectError as? TunnelKitOpenVPNError {
+                    switch openVPNError {
+                    case .timeout, .networkChanged, .exhaustedEndpoints, .socketActivity:
+                        connectivityCheckFailed = true
+                    default:
+                        break
+                    }
                 }
             #endif
 

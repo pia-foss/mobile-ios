@@ -184,100 +184,63 @@
 
         /// :nodoc:
         public func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration? {
-            //Migrate OVPN library
-            if map.count > 5 {
-                //old client. needs migration
-                let newMap = migrateOVPNConfigurationMap(from: map)
-                return try? OpenVPNProvider.Configuration.parsed(from: newMap)
+            // Configurations written by the current client serialize an
+            // `OpenVPN.ProviderConfiguration` directly (see `serialized()`), so a
+            // straight decode handles the common case. `fragmentsAllowed` mirrors
+            // TunnelKit's own `fromDictionary(_:_:)` helper.
+            if let data = try? JSONSerialization.data(withJSONObject: map, options: .fragmentsAllowed),
+                let configuration = try? JSONDecoder().decode(OpenVPN.ProviderConfiguration.self, from: data)
+            {
+                return configuration
             }
-            return try? OpenVPNProvider.Configuration.parsed(from: map)
-        }
 
-        private func migrateOVPNConfigurationMap(from map: [String: Any]) -> [String: Any] {
-            var updatedMap = [String: Any]()
-            updatedMap["appGroup"] = map["AppGroup"]
-            updatedMap["prefersResolvedAddresses"] = map["PrefersResolvedAddresses"]
-            updatedMap["masksPrivateData"] = map["MasksPrivateData"]
-            updatedMap["shouldDebug"] = map["Debug"]
-
-            var sessionConfigurationMap = [String: Any]()
-            sessionConfigurationMap["cipher"] = map["CipherAlgorithm"]
-            sessionConfigurationMap["digest"] = map["DigestAlgorithm"]
-            sessionConfigurationMap["ca"] = map["CA"]
-            sessionConfigurationMap["mtu"] = map["MTU"]
-            sessionConfigurationMap["usesPIAPatches"] = map["UsesPIAPatches"]
-            sessionConfigurationMap["dnsServers"] = map["DNSServers"]
-            sessionConfigurationMap["endpointProtocols"] = map["EndpointProtocols"]
-            sessionConfigurationMap["renegotiatesAfter"] = map["RenegotiatesAfter"]
-
-            updatedMap["sessionConfiguration"] = sessionConfigurationMap
-
-            return updatedMap
+            // Legacy fall-through: the persisted map predates the TunnelKit fork change
+            // (old `OpenVPNProvider.Configuration` layout) and can no longer be decoded
+            // into the current type. Returning nil makes the caller fall back to the
+            // default OpenVPN configuration, guaranteeing a working connection — at the
+            // cost of resetting any custom OpenVPN tweaks to defaults.
+            // TODO: verify the upgrade path from pre-fork builds on device.
+            log.error("[OpenVPN] Unable to decode persisted custom configuration; falling back to defaults")
+            return nil
         }
 
         /// :nodoc:
         public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(nil, error)
-                    return
-                }
-
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.sendProviderMessage(OpenVPNProvider.Message.requestLog.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            guard let providerConfiguration = customConfiguration as? OpenVPNProvider.Configuration else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            guard let recentLog = self.lastLogSnapshot(withProviderConfiguration: providerConfiguration) else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            callback?(recentLog, nil)
-                            return
-                        }
-                        let log = String(data: data, encoding: .utf8)
-                        callback?(log, nil)
-                    }
-                } catch let e {
-                    callback?(nil, e)
-                }
+            guard let providerConfiguration = customConfiguration as? OpenVPN.ProviderConfiguration else {
+                callback?(nil, nil)
+                return
             }
+
+            // The Kape TunnelKit fork no longer exposes the `requestLog` IPC message.
+            // The tunnel writes its debug log to a file in the shared app group; fall
+            // back to the snapshot persisted by `PIALogHandler` when it is unavailable.
+            if let logURL = providerConfiguration.urlForDebugLog,
+                let contents = try? String(contentsOf: logURL, encoding: .utf8),
+                !contents.isEmpty
+            {
+                callback?(contents, nil)
+                return
+            }
+
+            callback?(lastLogSnapshot(withProviderConfiguration: providerConfiguration), nil)
         }
 
         /// :nodoc:
         public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((Usage?, Error?) -> Void)?) {
-            find { (vpn, error) in
-                guard let vpn = vpn else {
-                    callback?(nil, error)
-                    return
-                }
-
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.sendProviderMessage(OpenVPNProvider.Message.dataCount.data) { (data) in
-                        guard let data = data, !data.isEmpty else {
-                            guard let _ = customConfiguration as? OpenVPNProvider.Configuration else {
-                                callback?(nil, nil)
-                                return
-                            }
-                            callback?(nil, ClientError.vpnProfileUnavailable)
-                            return
-                        }
-
-                        let downloaded = data.getInt64(start: 0)
-                        let uploaded = data.getInt64(start: 8)
-                        let usage = Usage(uploaded: uploaded, downloaded: downloaded)
-                        callback?(
-                            usage,
-                            nil)
-                    }
-                } catch let e {
-                    callback?(nil, e)
-                }
+            guard let providerConfiguration = customConfiguration as? OpenVPN.ProviderConfiguration else {
+                callback?(nil, nil)
+                return
             }
+
+            // The fork publishes data counters to the shared app group instead of
+            // answering a `dataCount` IPC message.
+            guard let dataCount = providerConfiguration.dataCount else {
+                callback?(nil, ClientError.vpnProfileUnavailable)
+                return
+            }
+
+            let usage = Usage(uploaded: UInt64(dataCount.sent), downloaded: UInt64(dataCount.received))
+            callback?(usage, nil)
         }
 
         // MARK: NetworkExtensionProfile
@@ -287,33 +250,42 @@
 
             var serverAddress = ""
             var customCfg = configuration.customConfiguration
-            if let piaCfg = customCfg as? OpenVPNProvider.Configuration {
-                var builder = piaCfg.builder()
+            if let piaCfg = customCfg as? OpenVPN.ProviderConfiguration {
+                var sessionBuilder = piaCfg.configuration.builder()
 
                 if let usesVanillaOpenVPN = configuration.server.bestAddressForOVPN(tcp: true)?.van, usesVanillaOpenVPN == true {
-                    builder.sessionConfiguration.usesPIAPatches = false
+                    sessionBuilder.usesPIAPatches = false
                 } else {
-                    builder.sessionConfiguration.usesPIAPatches = true  //SET TO FALSE TO USE NATIVE OVPN
+                    sessionBuilder.usesPIAPatches = true  //SET TO FALSE TO USE NATIVE OVPN
                 }
 
-                if let protocols = builder.sessionConfiguration.endpointProtocols, protocols.contains(where: { $0.socketType == .tcp }) {
-                    if let bestAddress = configuration.server.bestAddressForOVPN(tcp: true) {
-                        serverAddress = bestAddress.ip
-                        builder.resolvedAddresses = [bestAddress.ip]
+                // The fork models endpoints as `remotes` (address + protocol) rather
+                // than separate `endpointProtocols` / `resolvedAddresses`. The stored
+                // protocols carry a sentinel address (see `OpenVPNProvider+Compat`);
+                // bind each one to the freshly resolved server IP here.
+                let protocols = sessionBuilder.endpointProtocols ?? []
+                let prefersTCP = protocols.contains { $0.socketType == .tcp }
+                if let bestAddress = configuration.server.bestAddressForOVPN(tcp: prefersTCP) {
+                    serverAddress = bestAddress.ip
+                    sessionBuilder.remotes = protocols.map { TunnelKitCore.Endpoint(bestAddress.ip, $0) }
 
-                        // Persisting CN so app knows which server it was connected to
-                        Client.database.plain.lastServerCN = bestAddress.cn
-                    }
-                } else {
-                    if let bestAddress = configuration.server.bestAddressForOVPN(tcp: false) {
-                        serverAddress = bestAddress.ip
-                        builder.resolvedAddresses = [bestAddress.ip]
-
-                        // Persisting CN so app knows which server it was connected to
-                        Client.database.plain.lastServerCN = bestAddress.cn
-                    }
+                    // Persisting CN so app knows which server it was connected to
+                    Client.database.plain.lastServerCN = bestAddress.cn
                 }
-                customCfg = builder.build()
+
+                var rebuilt = OpenVPN.ProviderConfiguration(
+                    OpenVPNProvider.title,
+                    appGroup: Client.Configuration.appGroup,
+                    configuration: sessionBuilder.build()
+                )
+                // Carry over provider-level fields not held by `OpenVPN.Configuration`.
+                rebuilt.shouldDebug = piaCfg.shouldDebug
+                rebuilt.username = piaCfg.username
+                rebuilt.masksPrivateData = piaCfg.masksPrivateData
+                rebuilt.versionIdentifier = piaCfg.versionIdentifier
+                rebuilt.debugLogPath = piaCfg.debugLogPath
+                rebuilt.debugLogFormat = piaCfg.debugLogFormat
+                customCfg = rebuilt
             }
 
             var username = configuration.username
@@ -371,7 +343,7 @@
             }
         }
 
-        private func lastLogSnapshot(withProviderConfiguration providerConfiguration: OpenVPNProvider.Configuration) -> String? {
+        private func lastLogSnapshot(withProviderConfiguration providerConfiguration: OpenVPN.ProviderConfiguration) -> String? {
             guard let defaults = UserDefaults(suiteName: Client.Configuration.appGroup) else {
                 return nil
             }
