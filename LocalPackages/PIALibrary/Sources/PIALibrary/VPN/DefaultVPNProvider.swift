@@ -293,7 +293,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         activeProfile.updatePreferences(callback)
     }
 
-    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+    public func reconnect(forceDisconnect: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedDatabase.transient.isNetworkReachable else {
             log.warning("Skip reconnect, internet is unreachable")
             callback?(ClientError.internetUnreachable)

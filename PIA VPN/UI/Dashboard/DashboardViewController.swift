@@ -484,8 +484,11 @@ final class DashboardViewController: AutolayoutViewController {
 
     @objc private func checkVPNConnectingStatus(notification: Notification) {
         if let attempt = notification.object as? Int {
+            let oldStatus = connectingStatus
             connectingStatus = DashboardVPNConnectingStatus(rawValue: attempt) ?? .stillLoading
-            updateCurrentStatus()
+            if connectingStatus != oldStatus {
+                updateCurrentStatus()
+            }
         }
     }
 
@@ -727,10 +730,7 @@ final class DashboardViewController: AutolayoutViewController {
 
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(
-                    after: nil, forceDisconnect: true,
-                    { error in
-                    })
+                Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
             }
 
             // later -> close

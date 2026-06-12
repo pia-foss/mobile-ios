@@ -154,12 +154,22 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     address?.markServerAsUnavailable()
 
                     self.numberOfAttempts += 1
-                    if self.numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts || self.isReconnectingAfterConnectivityFailure {
+
+                    let shouldKeepTrying =
+                        numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts
+                        || !accessedDatabase.transient.isNetworkReachable
+                        || isReconnectingAfterConnectivityFailure
+
+                    if shouldKeepTrying {
                         log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                         self.updateUIWithAttemptNumber(self.numberOfAttempts)
                         self.isReconnecting = true
-                        Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true) { error in
-                            if error != nil {
+                        Client.providers.vpnProvider.reconnect(forceDisconnect: true) { error in
+                            if let clientError = error as? ClientError, clientError == .internetUnreachable {
+                                self.isReconnecting = true
+                                self.isReconnectingAfterConnectivityFailure = true
+
+                            } else if error != nil {
                                 // Reconnect initiation failed — clear flag immediately so the
                                 // subsequent .disconnected status change can clean up normally.
                                 self.isReconnecting = false
@@ -178,7 +188,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                         }
                     }
                 }
-
             }
 
         case .disconnecting:
@@ -263,24 +272,21 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 }
             }
 
-            let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
-            if !wholeInternetIsReachable {
-                log.debug("There's no internet!")
-            }
+            log.debug("connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
 
-            log.debug("[VPNDaemon] connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
-
-            if connectivityCheckFailed && wholeInternetIsReachable {
-                log.debug("[VPNDaemon] connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
-
-                if let lastConnectedCN = accessedDatabase.plain.lastServerCN {
+            if connectivityCheckFailed {
+                let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
+                if wholeInternetIsReachable, let lastConnectedCN = accessedDatabase.plain.lastServerCN {
+                    log.debug("connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
                     let targetRegion = try? Client.providers.serverProvider.targetServer
                     let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
                     lastConnectedServer?.markServerAsUnavailable()
+                } else if !wholeInternetIsReachable {
+                    log.debug("There's no internet!")
                 }
 
                 isReconnectingAfterConnectivityFailure = true
-                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true, nil)
+                Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
             } else {
                 if previousStatus == .connecting {
                     log.error("The VPN did fail \(lastDisconnectError)")
