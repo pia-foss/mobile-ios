@@ -1468,7 +1468,10 @@ extension DashboardViewController {
             let liveActivityManager = appDelegate.liveActivityManager
         else { return }
         let connState = makeLiveActivityStateForCurrentConnection()
-        liveActivityManager.startLiveActivity(with: connState)
+
+        Task {
+            await liveActivityManager.startLiveActivity(with: connState)
+        }
     }
 
     @available(iOS 16.2, *)
@@ -1476,6 +1479,8 @@ extension DashboardViewController {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
             let liveActivityManager = appDelegate.liveActivityManager
         else { return }
-        liveActivityManager.endLiveActivities()
+        Task {
+            await liveActivityManager.endLiveActivities()
+        }
     }
 }
