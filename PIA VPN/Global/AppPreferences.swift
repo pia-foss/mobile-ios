@@ -107,6 +107,7 @@ final class AppPreferences {
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
+        static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
 
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -566,6 +567,18 @@ final class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.checksDipExpirationRequest)
+        }
+    }
+
+    /// Tracks whether the legacy per-protocol VPN configurations (IKEv2 / OpenVPN /
+    /// WireGuard) have been removed after migrating to the PlatformSDK tunnel. Runs
+    /// once so stale Network Extension configs cannot auto-start via on-demand.
+    var didCleanupLegacyVPNProfiles: Bool {
+        get {
+            return defaults.bool(forKey: Entries.didCleanupLegacyVPNProfiles)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.didCleanupLegacyVPNProfiles)
         }
     }
 

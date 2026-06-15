@@ -67,6 +67,33 @@ final class Bootstrapper {
         #endif
     }
 
+    #if os(iOS)
+        /// One-time removal of the legacy per-protocol VPN configurations (IKEv2 /
+        /// OpenVPN / WireGuard) after migrating to the PlatformSDK tunnel. Without
+        /// this, a Network Extension config left over from before the flag was enabled
+        /// — possibly with on-demand active — could auto-start the old tunnel and run
+        /// alongside the PlatformSDK profile.
+        private func cleanupLegacyVPNProfilesIfNeeded() {
+            guard Client.configuration.featureFlags[.usePlatformSDKVPN],
+                !AppPreferences.shared.didCleanupLegacyVPNProfiles
+            else {
+                return
+            }
+
+            let legacyProfiles: [VPNProfile] = [
+                IKEv2Profile(),
+                PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier),
+                PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier)
+            ]
+            for profile in legacyProfiles {
+                profile.disconnect(nil)
+                profile.remove(nil)
+            }
+
+            AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+        }
+    #endif
+
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
@@ -132,9 +159,14 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            Client.configuration.addVPNProfile(IKEv2Profile())
-            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-            Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+                Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
+                cleanupLegacyVPNProfilesIfNeeded()
+            } else {
+                Client.configuration.addVPNProfile(IKEv2Profile())
+                Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+                Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            }
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
