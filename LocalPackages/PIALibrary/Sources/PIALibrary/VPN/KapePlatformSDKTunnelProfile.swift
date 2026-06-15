@@ -75,46 +75,18 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
-        let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
+        // Reuse the shared NMT-based on-demand rule construction (same logic the IKEv2 /
+        // OpenVPN / WireGuard profiles use via NetworkExtensionProfile.doSave).
+        applyOnDemandRules(to: vpn, force: force, configuration: configuration)
 
-        vpn.onDemandRules = []
-
-        if vpn.isOnDemandEnabled {
-
-            if Client.preferences.nmtRulesEnabled {
-                log.debug("Network Management Rule Enabled: \(Client.preferences.nmtRulesEnabled)")
-                log.debug("Network Management Rules for Trusted Networks: \(Client.preferences.nmtTrustedNetworkRules)")
-                log.debug("Network Management Generic rules: \(Client.preferences.nmtGenericRules)")
-                //                self.configureOnDemandOnWiFiNetworksFor(trustedNetworks, vpn)
-                //                self.configureOnDemandOnCellularNetworks(vpn)
-            } else {
-                log.debug("Network Management Tool is not enabled")
-                //                self.configureDefaultOnDemandRules(force, vpn, configuration)
-            }
-        }
         #if os(iOS)
-            let selectedProtocol = Client.preferences.vpnType
-            let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
-            #if canImport(TunnelKitOpenVPN)
-                let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
-            #else
-                let isOpenVPN = false
-            #endif
-
-            // Do not apply Leak Protection settings on WireGuard and OpenVPN
-            if isWireGuard || isOpenVPN {
-                vpn.protocolConfiguration?.includeAllNetworks = false
-                vpn.protocolConfiguration?.excludeLocalNetworks = true
-            } else {
-                // Apply Leak Protection settings when the Feature Flag is enabled
-                if Client.configuration.featureFlags[.showLeakProtection] {
-                    vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
-                    vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
-                } else {
-                    vpn.protocolConfiguration?.includeAllNetworks = false
-                    vpn.protocolConfiguration?.excludeLocalNetworks = true
-                }
-            }
+            // The PlatformSDK tunnel relies on the OS-level `includeAllNetworks` flag to enforce
+            // the kill switch — the SDK does not block traffic itself. Drive it from the user's
+            // Kill Switch setting (isPersistentConnection, surfaced here as configuration.isOnDemand).
+            // Local-network access is kept available so system/local services keep working while
+            // the tunnel is up.
+            vpn.protocolConfiguration?.includeAllNetworks = configuration.isOnDemand
+            vpn.protocolConfiguration?.excludeLocalNetworks = true
         #endif
 
         //        log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
