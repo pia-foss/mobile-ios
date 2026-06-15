@@ -63,7 +63,6 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     /// :nodoc:
     public func prepare() {
         accessedDatabase.transient.isNetworkReachable = true
-        accessedDatabase.transient.isInternetReachable = true
         accessedDatabase.plain.publicIP = mockPublicIP
         accessedDatabase.transient.vpnIP = mockVpnIP
 

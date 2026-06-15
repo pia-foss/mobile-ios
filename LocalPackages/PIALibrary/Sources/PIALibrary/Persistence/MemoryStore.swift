@@ -61,8 +61,6 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
 
     var isNetworkReachable = false
 
-    var isInternetReachable = true
-
     var vpnIP: String? {
         didSet {
             log.debug("Did set \(#function): \(vpnIP ?? "nil")")

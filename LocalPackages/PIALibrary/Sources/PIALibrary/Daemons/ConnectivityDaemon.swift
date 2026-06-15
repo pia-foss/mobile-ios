@@ -128,7 +128,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
                     log.debug("Giving up, network is unreachable")
                     self.failedConnectivityAttempts = 0
-                    self.accessedDatabase.transient.isInternetReachable = false
+                    self.accessedDatabase.transient.isNetworkReachable = false
                     Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
                     return
                 }
@@ -141,7 +141,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
             case .success(let connectivity):
                 self.failedConnectivityAttempts = 0
-                self.accessedDatabase.transient.isInternetReachable = true
+                self.accessedDatabase.transient.isNetworkReachable = true
                 log.debug("Saving new info about network connectivity: \(connectivity)")
 
                 let ipAddress = connectivity.ipAddress
