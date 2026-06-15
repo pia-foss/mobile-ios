@@ -29,7 +29,7 @@ import os
 /// attach to. `os.Logger` routes to the unified log, which you can read live
 /// while hooked into the tunnel process via Console.app or:
 ///
-///     log stream --predicate 'subsystem == "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK"' --level debug
+///     log stream --predicate 'subsystem == "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK.Tunnel"' --level debug
 ///
 /// Each logger instance uses its `label` as the os_log category, so you can
 /// further filter by category in Console.app.
@@ -38,7 +38,7 @@ import os
 /// The message is already a fully-formed `String` here, so it is logged with
 /// `privacy: .public` to keep it readable.
 final class PIATunnelLogger: PacketTunnelLogger, Sendable {
-    private static let subsystem = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK"
+    private static let subsystem = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK.Tunnel"
 
     private let log: Logger
 

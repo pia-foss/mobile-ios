@@ -66,6 +66,7 @@ public struct AppConstants {
     public struct Extensions {
         public static let tunnelBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
         public static let tunnelWireguardBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
+        public static let tunnelPlatformSDKBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK.Tunnel"
         public static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
 
