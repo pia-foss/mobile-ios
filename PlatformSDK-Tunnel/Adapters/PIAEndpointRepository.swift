@@ -10,18 +10,18 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
     func generateConfigurations() async -> [any VpnConfiguration] {
         logger.info("Generating WireGuard configurations")
 
-        guard let locationId = preferredLocationId() else {
-            logger.error("No preferred location id found in shared app group — returning no configurations")
+        // The app writes the resolved target location + a snapshot of its server list to the
+        // shared state at connect time (see KapePlatformSDKTunnelProfile.doSave). The id and the
+        // list come from the same snapshot, so the lookup always matches.
+        let state = SharedServerStore.read(appGroup: AppConstants.appGroup)
+
+        guard let server = state.selectedServer else {
+            logger.error("No server found in shared state for selected location — returning no configurations")
             return []
         }
-        logger.debug("Preferred location id: \(locationId)")
 
-        guard
-            let server = getServers(for: locationId).first,
-            let addresses = server.wireGuardAddressesForUDP,
-            !addresses.isEmpty
-        else {
-            logger.error("No WireGuard UDP addresses found for location \(locationId) — returning no configurations")
+        guard let addresses = server.wireGuardAddressesForUDP, !addresses.isEmpty else {
+            logger.error("No WireGuard UDP addresses found for \(server.identifier) — returning no configurations")
             return []
         }
         logger.info("Found server \(server.name) with \(addresses.count) WireGuard UDP address(es)")
@@ -47,33 +47,5 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
 
         logger.info("Generated \(configurations.count) WireGuard configuration(s)")
         return configurations
-    }
-
-    // MARK: - Helpers
-
-    // The main app stores the user's selected server identifier under "CurrentRegion"
-    // in the shared app group UserDefaults (written by Client.preferences.preferredServer).
-    // server.identifier is the first hostname component, e.g. "frankfurt401".
-    private func preferredLocationId() -> String? {
-        UserDefaults(suiteName: AppConstants.appGroup)?.string(forKey: "CurrentRegion")
-    }
-
-    private func getServers(for locationId: String) -> [Server] {
-        struct RegionsFile: Decodable {
-            let regions: [Server]
-        }
-
-        guard
-            let bundledRegionsURL = AppConstants.RegionsGEN4.bundleURL,
-            let data = try? Data(contentsOf: bundledRegionsURL),
-            let regions = try? JSONDecoder().decode(RegionsFile.self, from: data).regions
-        else {
-            logger.error("Failed to load or decode bundled regions file")
-            return []
-        }
-
-        let matches = regions.filter { $0.identifier == locationId }
-        logger.debug("Matched \(matches.count) region(s) for location id \(locationId) out of \(regions.count) total")
-        return matches
     }
 }

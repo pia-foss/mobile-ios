@@ -22,12 +22,24 @@
 
 import KapeVPN_PacketTunnel
 import NetworkExtension
+import PIALibrary
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
     var sessionController: KapeSessionController?
 
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        let selectedProtocol = SharedServerStore.read(appGroup: AppConstants.appGroup).selectedProtocol
+        switch selectedProtocol {
+        case .wireGuard:
+            startWireGuardTunnel(completionHandler: completionHandler)
+        case .openVPN:
+            // TODO: [PlatformSDK] implement OpenVPN over the platform SDK tunnel.
+            fatalError("PlatformSDK tunnel: \(selectedProtocol) is not implemented yet")
+        }
+    }
+
+    private func startWireGuardTunnel(completionHandler: @escaping (Error?) -> Void) {
         let wireguardAuthenticator = PIAWireguardAuthenticator()
         let endpointRepository = PIAEndpointRepository()
         let tunnel = KapeSystemTunnel(
@@ -45,13 +57,21 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             sessionController = await SessionControllerFactory.make(
                 configurationGenerator: endpointRepository,
                 connectionControllers: [controller],
-                appGroupIdentifier: "group.com.privateinternetaccess"
+                appGroupIdentifier: AppConstants.appGroup
             ) { label in
                 PIATunnelLogger(label: label)
             }
 
-            try await sessionController?.start()
-            completionHandler(nil)
+            // Always resolve the system's start handler exactly once — both on success and on
+            // failure. Without the catch, a thrown error would be swallowed by the Task and the
+            // handler would never be called, leaving startTunnel to hang until iOS times out.
+            do {
+                try await sessionController?.start()
+                completionHandler(nil)
+            } catch {
+                PIATunnelLogger(label: "PacketTunnelProvider").error("Failed to start session controller: \(error)")
+                completionHandler(error)
+            }
         }
     }
 

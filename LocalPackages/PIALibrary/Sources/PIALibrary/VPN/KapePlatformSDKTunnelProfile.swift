@@ -75,6 +75,19 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
+        // The PlatformSDK extension resolves its endpoints from this shared state (PIAEndpointRepository).
+        // Snapshot the resolved target server (configuration.server == serverProvider.targetServer) and
+        // the current server list together, so the extension connects to exactly what the app chose —
+        // including Automatic, where preferredServer is nil but targetServer resolves to a concrete server.
+        SharedServerStore.write(
+            .init(
+                selectedLocationId: configuration.server.identifier,
+                servers: Client.database.plain.cachedServers,
+                selectedProtocol: desiredTunnelProtocol()
+            ),
+            appGroup: AppConstants.appGroup
+        )
+
         // Reuse the shared NMT-based on-demand rule construction (same logic the IKEv2 /
         // OpenVPN / WireGuard profiles use via NetworkExtensionProfile.doSave).
         applyOnDemandRules(to: vpn, force: force, configuration: configuration)
@@ -242,6 +255,20 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     // MARK: Helpers
+
+    /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
+    /// Anything other than OpenVPN resolves to WireGuard (the only protocol the tunnel currently
+    /// implements); OpenVPN is passed through so the extension can surface it as unimplemented.
+    private func desiredTunnelProtocol() -> SharedServerStore.TunnelProtocol {
+        #if os(iOS)
+            #if canImport(TunnelKitOpenVPN)
+                if Client.preferences.vpnType == PIATunnelProfile.vpnType {
+                    return .openVPN
+                }
+            #endif
+        #endif
+        return .wireGuard
+    }
 
     private func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {
         KapePlatformSDKTunnelProfile.find(withBundleIdentifier: bundleIdentifier) { (vpn, error) in

@@ -213,13 +213,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3F6300C12FD8103C00DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"SupportingFiles/Info.plist",
-			);
-			target = 3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel */;
-		};
 		3F0EF5C82EDF25880013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -355,6 +348,13 @@
 				__Snapshots__/WelcomeViewSnapshotTest/test_Welcome.1.png,
 			);
 			target = E548E1F42C1238B5001E9874 /* PIA VPN-tvOS snapshot */;
+		};
+		3F6300C12FD8103C00DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SupportingFiles/Info.plist,
+			);
+			target = 3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
