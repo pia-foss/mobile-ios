@@ -30,7 +30,7 @@
 		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3F6300B82FD8182D00DA8769 /* KapeVPN-PacketTunnel in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* KapeVPN-PacketTunnel */; };
+		3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* PIAVPN */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -448,7 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FD44D712FD8376D008A43AD /* PIALibrary in Frameworks */,
-				3F6300B82FD8182D00DA8769 /* KapeVPN-PacketTunnel in Frameworks */,
+				3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */,
 				3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,7 +749,7 @@
 			);
 			name = "PlatformSDK-Tunnel";
 			packageProductDependencies = (
-				3F6300B72FD8182D00DA8769 /* KapeVPN-PacketTunnel */,
+				3F6300B72FD8182D00DA8769 /* PIAVPN */,
 				3FD44D702FD8376D008A43AD /* PIALibrary */,
 			);
 			productName = "PlatformSDK-Tunnel";
@@ -3571,9 +3571,9 @@
 			package = 3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */;
 			productName = PopupDialog;
 		};
-		3F6300B72FD8182D00DA8769 /* KapeVPN-PacketTunnel */ = {
+		3F6300B72FD8182D00DA8769 /* PIAVPN */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "KapeVPN-PacketTunnel";
+			productName = "PIAVPN";
 		};
 		3F7BD9B72EE8A09800EE1F4C /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;

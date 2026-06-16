@@ -82,6 +82,8 @@ private struct WGKeyResponse: Decodable {
     let peer_ip: String
 }
 
+// TODO: [PlatformSDK] Temporary — replace with proper certificate/SPKI pinning against the VPN
+// server's cert. Trusting all certs is a placeholder and must not ship.
 // VPN server endpoint uses a self-signed cert; standard practice for tunnel auth.
 private final class TrustAllCertsDelegate: NSObject, URLSessionDelegate, Sendable {
     func urlSession(

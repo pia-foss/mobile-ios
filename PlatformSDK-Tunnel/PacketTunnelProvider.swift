@@ -20,82 +20,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import KapeVPN_PacketTunnel
-import NetworkExtension
-import PIALibrary
+import PIAVPN
 
-class PacketTunnelProvider: NEPacketTunnelProvider {
-
-    var sessionController: KapeSessionController?
-
-    override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        let selectedProtocol = SharedServerStore.read(appGroup: AppConstants.appGroup).selectedProtocol
-        switch selectedProtocol {
-        case .wireGuard:
-            startWireGuardTunnel(completionHandler: completionHandler)
-        case .openVPN:
-            // TODO: [PlatformSDK] implement OpenVPN over the platform SDK tunnel.
-            fatalError("PlatformSDK tunnel: \(selectedProtocol) is not implemented yet")
-        }
-    }
-
-    private func startWireGuardTunnel(completionHandler: @escaping (Error?) -> Void) {
-        let wireguardAuthenticator = PIAWireguardAuthenticator()
-        let endpointRepository = PIAEndpointRepository()
-        let tunnel = KapeSystemTunnel(
-            packetTunnelProvider: self,
-            packetIOMode: .utunFd
-        )
-
-        let controller = KapeWireGuardController(
-            systemTunnel: tunnel,
-            authenticator: wireguardAuthenticator,
-            logger: PIATunnelLogger(label: "KapeWireGuardController")
-        )
-
-        Task {
-            sessionController = await SessionControllerFactory.make(
-                configurationGenerator: endpointRepository,
-                connectionControllers: [controller],
-                appGroupIdentifier: AppConstants.appGroup
-            ) { label in
-                PIATunnelLogger(label: label)
-            }
-
-            // Always resolve the system's start handler exactly once — both on success and on
-            // failure. Without the catch, a thrown error would be swallowed by the Task and the
-            // handler would never be called, leaving startTunnel to hang until iOS times out.
-            do {
-                try await sessionController?.start()
-                completionHandler(nil)
-            } catch {
-                PIATunnelLogger(label: "PacketTunnelProvider").error("Failed to start session controller: \(error)")
-                completionHandler(error)
-            }
-        }
-    }
-
-    override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        Task {
-            await sessionController?.stop()
-            sessionController = nil
-            completionHandler()
-        }
-    }
-
-    override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
-        // Add code here to handle the message.
-        if let handler = completionHandler {
-            handler(messageData)
-        }
-    }
-
-    override func sleep(completionHandler: @escaping () -> Void) {
-        // Add code here to get ready to sleep.
-        completionHandler()
-    }
-
-    override func wake() {
-        // Add code here to wake up.
-    }
-}
+/// The Network Extension's principal class. All wiring lives in `PIAPacketTunnelProvider`
+/// (in the PIAVPN package); this stays a thin shell, like the SDK's `VPNDemo/PacketTunnel`.
+class PacketTunnelProvider: PIAPacketTunnelProvider, @unchecked Sendable {}
