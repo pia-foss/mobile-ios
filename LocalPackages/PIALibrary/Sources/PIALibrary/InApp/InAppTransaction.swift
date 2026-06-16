@@ -23,17 +23,16 @@
 import Foundation
 
 /// Wraps any native implementation of an in-app transaction by providing a common interface.
-public protocol InAppTransaction: AnyObject, CustomStringConvertible {
+public protocol InAppTransaction<Native>: CustomStringConvertible {
+    associatedtype Native
 
     /// The transaction identifier.
-    var identifier: String? { get }
+    var identifier: String { get }
 
     /// The underlying native transaction implementation.
-    var native: Any? { get }
+    var native: Native { get }
 }
 
 extension InAppTransaction {
-    var description: String {
-        return identifier ?? "InAppTransaction"
-    }
+    var description: String { identifier }
 }

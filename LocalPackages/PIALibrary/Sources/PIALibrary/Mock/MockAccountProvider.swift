@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import StoreKit
 
 /// Simulates account-related operations
 public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
@@ -281,13 +282,13 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     #if os(iOS) || os(tvOS)
         /// :nodoc:
-        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
-            delegate.listPlanProducts(callback)
+        public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
+            return await delegate.listPlanProducts()
         }
 
         /// :nodoc:
-        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-            delegate.purchase(plan: plan, callback)
+        public func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+            return await delegate.purchase(plan: plan)
         }
 
         /// :nodoc:

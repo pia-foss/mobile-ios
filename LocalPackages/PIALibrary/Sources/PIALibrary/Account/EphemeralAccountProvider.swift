@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StoreKit
 
 fileprivate let log = PIALogger.logger(for: EphemeralAccountProvider.self)
 
@@ -98,12 +99,12 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
-        accessedProviders.accountProvider.listPlanProducts(callback)
+    func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
+        return await accessedProviders.accountProvider.listPlanProducts()
     }
 
-    func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        accessedProviders.accountProvider.purchase(plan: plan, callback)
+    func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+        return await accessedProviders.accountProvider.purchase(plan: plan)
     }
 
     func restorePurchases(_ callback: SuccessLibraryCallback?) {

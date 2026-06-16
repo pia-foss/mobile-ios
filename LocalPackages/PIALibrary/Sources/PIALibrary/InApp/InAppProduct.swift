@@ -24,14 +24,14 @@ import Foundation
 import StoreKit
 
 /// Wraps any native implementation of an in-app product by providing a common interface.
-public protocol InAppProduct: AnyObject, CustomStringConvertible, Sendable {
-    associatedtype Native: Sendable
+public protocol InAppProduct<Native>: CustomStringConvertible, Equatable, Sendable {
+    associatedtype Native: Equatable, Sendable
 
     /// The product identifier.
     var identifier: String { get }
 
     /// The price of the product (localized).
-    var price: NSNumber { get }
+    var price: Decimal { get }
 
     /// The `Locale` in which `price` is expressed.
     var priceLocale: Locale { get }

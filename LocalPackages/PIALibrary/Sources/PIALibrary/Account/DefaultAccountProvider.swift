@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import StoreKit
 import UIKit
 
 private let log = PIALogger.logger(for: DefaultAccountProvider.self)
@@ -391,7 +392,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
             let receipt = accessedStore.paymentReceipt
 
-            Task { @MainActor in
+            Task {
                 do {
                     let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
                     DispatchQueue.main.async { callback?(appStoreInformation, nil) }
@@ -401,42 +402,46 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
 
-        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
+        public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
             log.debug("Fetching available products...")
 
             if let products = planProducts {
                 log.debug("Available products in cache: \(products)")
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-                callback?(products, nil)
-                return
+                return .success(products)
             }
 
             log.debug("No available products in cache, requesting from store...")
 
             let identifiers = accessedConfiguration.allProductIdentifiers()
-            accessedStore.fetchProducts(identifiers: identifiers) { (_, error) in
-                let products = self.planProducts ?? [:]
+            let result = await accessedStore.fetchProducts(identifiers: identifiers)
+            switch result {
+            case .failure(let error):
+                return .failure(error)
+            case .success(let products):
                 log.debug("Available products from store: \(products)")
-                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-                callback?(products, nil)
+
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: planProducts!])
+                return .success(planProducts!)
             }
         }
 
-        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-            listPlanProducts { (map, error) in
-                guard let product = map?[plan] else {
-                    callback?(nil, ClientError.productUnavailable)
-                    return
-                }
-
-                self.accessedStore.purchaseProduct(product) { (transaction, error) in
-                    guard let transaction = transaction else {
-                        callback?(nil, error)
-                        return
-                    }
-                    callback?(transaction, nil)
-                }
+        public func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+            let products: [Plan: any InAppProduct]
+            switch await listPlanProducts() {
+            case .failure(.userCancelled):
+                return .failure(.userCancelled)
+            case .failure(let error):
+                return .failure(.unknown(code: 606, message: error.localizedDescription))
+            case .success(let products_):
+                products = products_
             }
+
+            guard let product = products[plan] else {
+                return .failure(ClientError.productUnavailable)
+            }
+
+            return await accessedStore.purchase(product: product)
         }
 
         public func restorePurchases(_ callback: SuccessLibraryCallback?) {
@@ -558,8 +563,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
-            listPlanProducts { (_, error) in
-                guard error == nil else {
+            Task {
+                do {
+                    _ = try await self.listPlanProducts()
+                } catch {
                     callback?(nil, error)
                     return
                 }

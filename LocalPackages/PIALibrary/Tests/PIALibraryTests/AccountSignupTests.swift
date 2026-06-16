@@ -54,7 +54,7 @@ class AccountSignupTests: XCTestCase {
             var observer: NSObjectProtocol!
             observer = nc.addObserver(forName: .__InAppDidFetchProducts, object: nil, queue: nil) { (notification) in
                 nc.removeObserver(observer)
-                let products: [Plan: InAppProduct] = notification.userInfo(for: .products)
+                let products: [Plan: any InAppProduct] = notification.userInfo(for: .products)
                 XCTAssertEqual(products.count, 2)
                 print("Products fetched: \(products)")
                 exp.fulfill()
@@ -63,13 +63,10 @@ class AccountSignupTests: XCTestCase {
         }
     }
 
-    func testPurchase() {
-        let exp = expectation(description: "purchase")
-        live.accountProvider.purchase(plan: .yearly) { (transaction, error) in
-            XCTAssertNotNil(transaction)
-            print("Purchased: \(transaction!)")
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 10.0, handler: nil)
+    func testPurchase() async throws {
+        let result = await live.accountProvider.purchase(plan: .yearly)
+        let transaction = try result.get()
+        XCTAssertNotNil(transaction)
+        print("Purchased: \(transaction)")
     }
 }

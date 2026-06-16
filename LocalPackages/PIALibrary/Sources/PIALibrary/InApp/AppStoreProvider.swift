@@ -26,18 +26,15 @@ import StoreKit
 private let log = PIALogger.logger(for: AppStoreProvider.self)
 
 final class AppStoreProvider: NSObject, InAppProvider {
-    private var productsRequest: SKProductsRequest?
-
     private var receiptRefreshRequest: SKReceiptRefreshRequest?
-
-    private var productsCallback: LibraryCallback<[any InAppProduct]>?
-
-    private var purchaseCallback: LibraryCallback<InAppTransaction>?
 
     private var receiptCallbacks: [SuccessLibraryCallback] = []
 
+    private var transactionObserverTask: Task<Void, Never>?
+
     deinit {
-        SKPaymentQueue.default().remove(self)
+        transactionObserverTask?.cancel()
+        transactionObserverTask = nil
     }
 
     // MARK: InAppProvider
@@ -61,53 +58,87 @@ final class AppStoreProvider: NSObject, InAppProvider {
     func startObservingTransactions() {
         log.debug("Start observing transactions")
 
-        SKPaymentQueue.default().add(self)
+        transactionObserverTask = Task {
+            for await result in Transaction.updates {
+                log.debug("transaction result: \(result)º")
+            }
+        }
     }
 
     func stopObservingTransactions() {
         log.debug("Stop observing transactions")
-
-        SKPaymentQueue.default().remove(self)
+        transactionObserverTask?.cancel()
+        transactionObserverTask = nil
     }
 
-    func fetchProducts(identifiers: [String], _ callback: (([any InAppProduct]?, Error?) -> Void)?) {
+    func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
         guard !identifiers.isEmpty else {
-            callback?([], nil)
-            return
+            log.debug("Skip fetching products for empty identifiers")
+            return .success([])
         }
 
         log.debug("Requesting products: \(identifiers)")
+        let products: [StoreKit.Product]
+        do {
+            products = try await StoreKit.Product.products(for: identifiers)
+        } catch let error as StoreKitError {
+            return .failure(error)
+        } catch {
+            log.warning("returning unknown error from Product.products(for:): \(error)")
+            return .failure(.unknown)
+        }
 
-        productsCallback = callback
-        productsRequest?.cancel()
-        productsRequest = SKProductsRequest(productIdentifiers: Set(identifiers))
-        productsRequest?.delegate = self
-        productsRequest?.start()
+        // TODO: resolve hasIntroOffer
+        let result = products.map { AppStoreProduct(native: $0, hasIntroOffer: false) }
+        availableProducts = result
+        return .success(result)
     }
 
-    func purchaseProduct(_ product: any InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
+    func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
         guard product is AppStoreProduct else {
             log.error("Product must be AppStoreProduct, but got \(type(of: product))")
-            callback?(nil, ClientError.productUnavailable)
-            return
+            return .failure(ClientError.productUnavailable)
         }
-        guard (purchaseCallback == nil) else {
-            log.warning("Purchase in progress")
-            return
-        }
+
         if !Client.configuration.arePurchasesAvailable() {
             log.warning("Purchases not available in sandbox")
-            callback?(nil, ClientError.sandboxPurchase)
-            return
+            return .failure(ClientError.sandboxPurchase)
         }
-        let payment = SKPayment(product: product.native as! SKProduct)
-        log.debug("Purchasing product with identifier: \(payment.productIdentifier)")
 
-        purchaseCallback = callback
-        SKPaymentQueue.default().add(payment)
+        guard let product = product.native as? StoreKit.Product else {
+            log.error("Product is not a StoreKit.Product: \(product)")
+            return .failure(.invalidParameter)
+        }
+
+        log.debug("Purchasing product with identifier: \(product.id)")
+        let result: StoreKit.Product.PurchaseResult
+        do {
+            result = try await product.purchase()
+        } catch {
+            return .failure(.unknown(code: 606, message: error.localizedDescription))
+        }
+
+        switch result {
+        case .success(.verified(let transaction)):
+            log.debug("\(#function) success verified")
+            return .success(AppStoreTransaction(native: transaction))
+        case .success(.unverified(let transaction, let error)):
+            log.debug("\(#function) success unverified")
+            log.warning("Unverified transaction: \(error)")
+            return .success(AppStoreTransaction(native: transaction))
+        case .userCancelled:
+            log.debug("\(#function) userCancelled")
+            return .failure(.userCancelled)
+        case .pending:
+            log.debug("\(#function) pending")
+            return .failure(.userCancelled)
+        @unknown default:
+            log.warning("Unknown purchase result: \(result)")
+            return .failure(.unknown(code: 606, message: "Unknown purchase result: \(result)"))
+        }
     }
 
-    func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
+    func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
         guard let transaction = transaction.native as? SKPaymentTransaction else {
             log.error("Native transaction must be SKPaymentTransaction, but got \(type(of: transaction.native))")
             return
@@ -145,103 +176,6 @@ final class AppStoreProvider: NSObject, InAppProvider {
         receiptRefreshRequest = SKReceiptRefreshRequest(receiptProperties: nil)
         receiptRefreshRequest?.delegate = self
         receiptRefreshRequest?.start()
-    }
-}
-
-extension AppStoreProvider: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        guard (request == productsRequest) else {
-            return
-        }
-        productsRequest = nil
-        log.debug("Retrieved products: \(response.products)")
-
-        Task {
-            var hasIntroOffer: Bool?
-            var availableProducts = [any InAppProduct]()
-            for product in response.products {
-                if hasIntroOffer == nil, let groupId = product.subscriptionGroupIdentifier {
-                    hasIntroOffer = await StoreKit.Product.SubscriptionInfo.isEligibleForIntroOffer(for: groupId)
-                }
-                log.debug("  -> \(product.localizedTitle) @ \(product.price)")
-                availableProducts.append(AppStoreProduct(native: product, hasIntroOffer: hasIntroOffer ?? false))
-            }
-            self.availableProducts = availableProducts
-
-            productsCallback?(availableProducts, nil)
-            productsCallback = nil
-        }
-    }
-}
-
-extension AppStoreProvider: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        log.debug("Updated transactions: \(transactions.count)")
-
-        for transaction in transactions {
-            let transactionDate = transaction.transactionDate?.formatted(date: .abbreviated, time: .shortened) ?? "nil"
-
-            switch transaction.transactionState {
-            case .purchasing:
-                log.debug("  -> Purchasing: \(transaction) [\(transactionDate)]")
-
-            case .purchased:
-                log.debug("  -> Purchased: \(transaction) [\(transactionDate)]")
-
-                finishTransaction(transaction, success: true)
-                purchaseCallback?(AppStoreTransaction(native: transaction), nil)
-                purchaseCallback = nil
-
-            case .deferred:
-                log.debug("  -> Deferred: \(transaction) [\(transactionDate)]")
-
-            //                #warning TODO: Amir, implement and test Ask to Buy
-            //                NSError *error = [[NSError alloc] initWithDomain:ErrorDomain
-            //                code:ErrorCodeAskToBuy
-            //                userInfo:@{NSLocalizedDescriptionKey: NSLocalizedXXXXString(@"Your payment requires approval.", @"payment transaction deferred message (Ask to Buy enabled)")}];
-            //
-            //                Macros.postNotification(.StoreDidFailToPurchase, error)
-
-            case .restored:
-                log.debug("  -> Restored: \(transaction) [\(transactionDate)]")
-                // not applicable for non-renewable subscriptions
-                break
-
-            case .failed:
-                log.debug("  -> Failed: \(transaction) [\(transactionDate)]")
-
-                if let error = transaction.error as? SKError, error.code == .unknown {
-                    // PSD2/SCA: Apple sends `failed` with SKError.unknown while waiting
-                    // for the user to authenticate. Do NOT finish — the real outcome
-                    // will be redelivered as a fresh purchased/failed transaction.
-                    log.error("Unknown error code. Keeping transaction alive to wait for PSD2/SCA outcome.")
-                    break
-                }
-
-                finishTransaction(transaction, success: false)
-
-                if let error = transaction.error {
-                    log.error("Failed transaction: \(transaction) (error: \(error))")
-                } else {
-                    log.warning("Transaction was cancelled")
-                }
-
-                if let error = transaction.error as? SKError, (error.code == .paymentCancelled) {
-                    purchaseCallback?(nil, nil)
-                } else {
-                    purchaseCallback?(nil, transaction.error)
-                }
-                purchaseCallback = nil
-
-            @unknown default:
-                log.error("Unknown transactionState: \(transaction.transactionState)")
-            }
-        }
-    }
-
-    /// This delegate is called when the user clicks the subscription in the AppStore. We are currently not handling the purchase from there, so we will return false until we implement a way to handle it.
-    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
-        return false
     }
 }
 

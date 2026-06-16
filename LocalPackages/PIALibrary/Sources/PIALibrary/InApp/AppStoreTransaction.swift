@@ -23,18 +23,14 @@
 import Foundation
 import StoreKit
 
-class AppStoreTransaction: InAppTransaction {
-    var identifier: String? {
-        return nativeTransaction.transactionIdentifier
+struct AppStoreTransaction: InAppTransaction<Transaction> {
+    var identifier: String {
+        return native.appTransactionID
     }
 
-    let native: Any?
+    let native: Transaction
 
-    private var nativeTransaction: SKPaymentTransaction {
-        return native as! SKPaymentTransaction
-    }
-
-    init(native: SKPaymentTransaction) {
+    init(native: Transaction) {
         self.native = native
     }
 }

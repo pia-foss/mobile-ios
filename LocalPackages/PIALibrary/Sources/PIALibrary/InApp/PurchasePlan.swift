@@ -23,14 +23,14 @@
 import Foundation
 
 public final class PurchasePlan: NSObject {
-    private final class DummyInAppProduct: InAppProduct {
-        enum Native {
+    private struct DummyInAppProduct: InAppProduct {
+        enum Native: Equatable {
             case none
         }
 
         let identifier = ""
 
-        let price: NSNumber = 0
+        let price: Decimal = 0
 
         let priceLocale = Locale.current
 
@@ -63,7 +63,7 @@ public final class PurchasePlan: NSObject {
 
     public let product: any InAppProduct
 
-    public let monthlyFactor: Double
+    public let monthlyFactor: Decimal
 
     public var title = ""
 
@@ -71,12 +71,12 @@ public final class PurchasePlan: NSObject {
 
     public var bestValue = false
 
-    public var price: NSNumber {
+    public var price: Decimal {
         return product.price
     }
 
-    public var monthlyPrice: NSNumber {
-        return NSDecimalNumber(value: price.doubleValue / monthlyFactor)
+    public var monthlyPrice: Decimal {
+        return price / monthlyFactor
     }
 
     public var priceString: String {
@@ -91,12 +91,12 @@ public final class PurchasePlan: NSObject {
         return PurchasePlan.accessibleString(forPrice: monthlyPrice, locale: product.priceLocale)
     }
 
-    public static func string(forPrice price: NSNumber, locale: Locale) -> String {
+    public static func string(forPrice price: Decimal, locale: Locale) -> String {
         formatter.locale = locale
-        return formatter.string(from: price)!
+        return formatter.string(for: price)!
     }
 
-    public static func accessibleString(forPrice price: NSNumber, locale: Locale) -> String {
+    public static func accessibleString(forPrice price: Decimal, locale: Locale) -> String {
         accessibleFormatter.locale = locale
         return accessibleFormatter.string(from: price)!
     }
@@ -107,7 +107,7 @@ public final class PurchasePlan: NSObject {
         monthlyFactor = 1.0
     }
 
-    public init(plan: Plan, product: any InAppProduct, monthlyFactor: Double) {
+    public init(plan: Plan, product: any InAppProduct, monthlyFactor: Decimal) {
         precondition(monthlyFactor > 0.0)
         self.plan = plan
         self.product = product

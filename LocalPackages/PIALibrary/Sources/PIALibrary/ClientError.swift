@@ -61,6 +61,9 @@ public enum ClientError: Error, Equatable {
     /// The Wireguard Token is missing.
     case missingWireguardToken
 
+    /// Operation was interrupted by the user. Can be ignored most of the time.
+    case userCancelled
+
     /// Internal error in the `mobile-shared-account` library (code 600)
     case libraryError(message: String?)
 

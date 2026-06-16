@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import StoreKit
 
 public protocol InAppProvider: AnyObject {
     var availableProducts: [any InAppProduct]? { get }
@@ -31,11 +32,11 @@ public protocol InAppProvider: AnyObject {
 
     func stopObservingTransactions()
 
-    func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[any InAppProduct]>?)
+    func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError>
 
-    func purchaseProduct(_ product: any InAppProduct, _ callback: LibraryCallback<InAppTransaction>?)
+    func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
 
-    func finishTransaction(_ transaction: InAppTransaction, success: Bool)
+    func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
     func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?)
 }

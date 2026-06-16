@@ -173,23 +173,30 @@ final class GetStartedViewController: PIAWelcomeViewController {
         isPurchasing = true
         self.handleLoadingState()
 
-        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+        Task { [weak self] in
             guard let self else { return }
+
+            let result = await config.accountProvider.purchase(plan: plan.plan)
             self.isPurchasing = false
             self.handleLoadingState()
 
-            guard let transaction = transaction else {
-                if let error = error {
-                    let message = error.localizedDescription
-                    Macros.displayImageNote(
-                        withImage: Asset.iconWarning.image,
-                        message: message)
-                }
-                return
+            switch result {
+            case .failure(.userCancelled):
+                log.debug("User cancelled purchase")
+                break
+            case .failure(let error):
+                log.warning("Purchase failed with error: \(error)")
+                let message = error.localizedDescription
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: message
+                )
+            case .success(let transaction):
+                log.debug("Purchase successful with transaction id \(transaction.identifier)")
+                self.signupEmail = email
+                self.signupTransaction = transaction
+                self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
             }
-            self.signupEmail = email
-            self.signupTransaction = transaction
-            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
     }
 

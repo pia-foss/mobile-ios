@@ -22,7 +22,7 @@
 
 import Foundation
 
-public struct Product: Codable {
+public struct Product: Codable, Sendable {
     public let identifier: String
     public let plan: Plan
     public let price: String

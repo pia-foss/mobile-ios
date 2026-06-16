@@ -23,26 +23,24 @@
 import Foundation
 import StoreKit
 
-final class AppStoreProduct: InAppProduct {
-
+struct AppStoreProduct: InAppProduct<StoreKit.Product> {
     var identifier: String {
-        return native.productIdentifier
+        return native.id
     }
 
-    var price: NSNumber {
+    var price: Decimal {
         return native.price
     }
 
     var priceLocale: Locale {
-        return native.priceLocale
+        return native.priceFormatStyle.locale
     }
 
-    // TODO: Replace with StoreKit.Product
-    let native: SKProduct
+    let native: Native
 
     let hasIntroOffer: Bool
 
-    init(native: SKProduct, hasIntroOffer: Bool) {
+    init(native: Native, hasIntroOffer: Bool) {
         self.native = native
         self.hasIntroOffer = hasIntroOffer
     }

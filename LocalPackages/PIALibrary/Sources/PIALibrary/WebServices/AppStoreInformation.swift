@@ -22,7 +22,7 @@
 
 import Foundation
 
-public struct AppStoreInformation: Codable {
+public struct AppStoreInformation: Codable, Sendable {
     public let products: [Product]
     public let eligibleForTrial: Bool
 
