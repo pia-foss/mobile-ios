@@ -88,8 +88,22 @@ final class AppStoreProvider: NSObject, InAppProvider {
             return .failure(.unknown)
         }
 
-        // TODO: resolve hasIntroOffer
-        let result = products.map { AppStoreProduct(native: $0, hasIntroOffer: false) }
+        var introOffers: [String: Bool] = [:]
+        var result: [AppStoreProduct] = []
+        for product in products {
+            var hasIntroOffer: Bool = false
+            if let subscription = product.subscription {
+                if let has = introOffers[subscription.subscriptionGroupID] {
+                    hasIntroOffer = has
+                } else {
+                    hasIntroOffer = await subscription.isEligibleForIntroOffer
+                    introOffers[subscription.subscriptionGroupID] = hasIntroOffer
+                }
+            }
+            let appStoreProduct = AppStoreProduct(native: product, hasIntroOffer: hasIntroOffer)
+            result.append(appStoreProduct)
+        }
+
         availableProducts = result
         return .success(result)
     }
