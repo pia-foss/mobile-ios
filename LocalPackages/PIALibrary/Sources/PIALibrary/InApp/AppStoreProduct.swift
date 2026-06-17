@@ -23,7 +23,7 @@
 import Foundation
 import StoreKit
 
-struct AppStoreProduct: InAppProduct<StoreKit.Product> {
+struct AppStoreProduct: InAppProduct<Product> {
     var identifier: String {
         return native.id
     }

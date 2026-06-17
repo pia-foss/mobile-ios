@@ -375,7 +375,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             let response = try await nativeAccountAPI.subscriptions(receipt: receipt)
 
             let products = response.availableProducts.map { product in
-                Product(
+                PIAProduct(
                     identifier: product.id,
                     plan: Plan(rawValue: product.plan) ?? .other,
                     price: product.price,

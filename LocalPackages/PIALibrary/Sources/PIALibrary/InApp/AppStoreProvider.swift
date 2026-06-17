@@ -78,9 +78,9 @@ final class AppStoreProvider: NSObject, InAppProvider {
         }
 
         log.debug("Requesting products: \(identifiers)")
-        let products: [StoreKit.Product]
+        let products: [Product]
         do {
-            products = try await StoreKit.Product.products(for: identifiers)
+            products = try await Product.products(for: identifiers)
         } catch let error as StoreKitError {
             return .failure(error)
         } catch {
@@ -119,13 +119,13 @@ final class AppStoreProvider: NSObject, InAppProvider {
             return .failure(ClientError.sandboxPurchase)
         }
 
-        guard let product = product.native as? StoreKit.Product else {
+        guard let product = product.native as? Product else {
             log.error("Product is not a StoreKit.Product: \(product)")
             return .failure(.invalidParameter)
         }
 
         log.debug("Purchasing product with identifier: \(product.id)")
-        let result: StoreKit.Product.PurchaseResult
+        let result: Product.PurchaseResult
         do {
             result = try await product.purchase()
         } catch {

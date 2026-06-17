@@ -122,7 +122,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationEligible = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
@@ -133,7 +133,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationEligibleButDisabledFromBackend = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
@@ -144,7 +144,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationNotEligible = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
