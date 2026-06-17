@@ -32,6 +32,7 @@
 # Usage:
 #   CLOUDSMITH_TOKEN=<token> ./scripts/pull-kape-platform-sdk.sh
 #   ./scripts/pull-kape-platform-sdk.sh            # with a .cloudsmith file present
+#   ./scripts/pull-kape-platform-sdk.sh --update   # fetch latest from registry, update version file, then pull
 
 set -euo pipefail
 
@@ -46,13 +47,14 @@ STAMP="$DEST/.kape-pulled-version"
 
 die() { echo "ERROR: $*" >&2; exit 1; }
 
-# ── version ───────────────────────────────────────────────────────────────
-VERSION="${KAPE_PLATFORM_SDK_VERSION:-}"
-if [ -z "$VERSION" ]; then
-  [ -f "$VERSION_FILE" ] || die "no version: set KAPE_PLATFORM_SDK_VERSION or create $VERSION_FILE"
-  VERSION="$(tr -d ' \t\r\n' < "$VERSION_FILE")"
-fi
-[ -n "$VERSION" ] || die "empty version"
+# ── flags ─────────────────────────────────────────────────────────────────
+UPDATE_LATEST=0
+for arg in "$@"; do
+  case "$arg" in
+    --update|-u) UPDATE_LATEST=1 ;;
+    *) die "unknown argument: $arg" ;;
+  esac
+done
 
 # ── token ─────────────────────────────────────────────────────────────────
 TOKEN="${CLOUDSMITH_TOKEN:-${CLOUDSMITH_API_KEY:-}}"
@@ -61,8 +63,46 @@ if [ -z "$TOKEN" ] && [ -f "$REPO_ROOT/.cloudsmith" ]; then
 fi
 [ -n "$TOKEN" ] || die "no Cloudsmith token: set CLOUDSMITH_TOKEN / CLOUDSMITH_API_KEY, or create $REPO_ROOT/.cloudsmith"
 
-BASE="$REGISTRY/$SCOPE/$NAME/$VERSION"
 AUTH="Authorization: Bearer $TOKEN"
+
+# ── version ───────────────────────────────────────────────────────────────
+VERSION="${KAPE_PLATFORM_SDK_VERSION:-}"
+
+if [ "$UPDATE_LATEST" = "1" ]; then
+  echo "==> Fetching latest available version from registry"
+  # Use the Cloudsmith native REST API (sort=-date = newest upload first).
+  # The Swift registry listing endpoint has no defined ordering for hash-suffixed versions,
+  # and the /latest pseudo-version endpoint can point to stale releases.
+  CLOUDSMITH_ORG="$(printf '%s' "$REGISTRY" | awk -F/ '{print $(NF-1)}')"
+  CLOUDSMITH_REPO="$(printf '%s' "$REGISTRY" | awk -F/ '{print $NF}')"
+  LATEST_VERSION="$(curl -fsSL \
+    -H "Authorization: Token $TOKEN" \
+    "https://api.cloudsmith.io/v1/packages/$CLOUDSMITH_ORG/$CLOUDSMITH_REPO/?q=name%3A$NAME&sort=-date&page_size=1" \
+    | /usr/bin/python3 -c \
+'import sys,json
+pkgs=json.load(sys.stdin)
+if not pkgs: sys.exit(1)
+print(pkgs[0]["version"])' 2>/dev/null)" \
+    || die "could not fetch latest version from Cloudsmith API (check token / network)"
+  [ -n "$LATEST_VERSION" ] || die "no versions found in registry"
+  PINNED_VERSION="$(tr -d ' \t\r\n' < "$VERSION_FILE" 2>/dev/null || true)"
+  if [ "$PINNED_VERSION" = "$LATEST_VERSION" ]; then
+    echo "==> Already pinned to latest ($LATEST_VERSION)"
+  else
+    echo "==> Latest version: $LATEST_VERSION (was: ${PINNED_VERSION:-none})"
+    echo "$LATEST_VERSION" > "$VERSION_FILE"
+    echo "==> Updated $VERSION_FILE"
+  fi
+  VERSION="$LATEST_VERSION"
+fi
+
+if [ -z "$VERSION" ]; then
+  [ -f "$VERSION_FILE" ] || die "no version: set KAPE_PLATFORM_SDK_VERSION or create $VERSION_FILE"
+  VERSION="$(tr -d ' \t\r\n' < "$VERSION_FILE")"
+fi
+[ -n "$VERSION" ] || die "empty version"
+
+BASE="$REGISTRY/$SCOPE/$NAME/$VERSION"
 
 # ── idempotency ────────────────────────────────────────────────────────────
 if [ -f "$STAMP" ] && [ "$(cat "$STAMP" 2>/dev/null)" = "$VERSION" ] && [ -f "$DEST/Package.swift" ]; then
