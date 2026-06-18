@@ -22,22 +22,15 @@
 
 import NetworkExtension
 
+#if canImport(TunnelKitOpenVPN)
+    import TunnelKitOpenVPN
+#endif
+
 private let log = PIALogger.logger(for: KapePlatformSDKTunnelProfile.self)
 
 public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     private let bundleIdentifier: String
     private var waitObserver: NSObjectProtocol?
-
-    public init(bundleIdentifier: String) {
-        self.bundleIdentifier = bundleIdentifier
-    }
-
-    public func generatedProtocol(withConfiguration configuration: VPNConfiguration) throws -> NEVPNProtocol {
-        let proto = NETunnelProviderProtocol()
-        proto.serverAddress = ""  //self.serverAddress
-        proto.providerBundleIdentifier = self.bundleIdentifier
-        return proto
-    }
 
     public static let vpnType: String = "PlatformSDK"
 
@@ -46,6 +39,20 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     public var native: Any?
+
+    public init(bundleIdentifier: String) {
+        self.bundleIdentifier = bundleIdentifier
+    }
+
+    public func generatedProtocol(withConfiguration configuration: VPNConfiguration) -> NEVPNProtocol {
+        let proto = NETunnelProviderProtocol()
+        proto.providerBundleIdentifier = self.bundleIdentifier
+        // The PlatformSDK extension reads all connection parameters from PIATunnelSharedState,
+        // not from providerConfiguration. serverAddress is set to empty; endpoints are
+        // resolved in PIAEndpointRepository from the shared state written in doSave.
+        proto.serverAddress = ""
+        return proto
+    }
 
     public func prepare() {
         find(completionHandler: nil)
@@ -62,31 +69,39 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     public func doSave(_ vpn: NEVPNManager, withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
-        do {
-            vpn.protocolConfiguration = try generatedProtocol(withConfiguration: configuration)
-        } catch {
-            callback?(error)
-            return
-        }
-
-        let protocolConfiguration = vpn.protocolConfiguration!  // Safe to force unwrap
+        let protocolConfiguration = generatedProtocol(withConfiguration: configuration)
+        vpn.protocolConfiguration = protocolConfiguration
 
         // TODO: [PlatformSDK] Temporary — use configuration.name
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
-        // The PlatformSDK extension resolves its endpoints from this shared state (PIAEndpointRepository).
-        // Snapshot the resolved target server (configuration.server == serverProvider.targetServer) and
-        // the current server list together, so the extension connects to exactly what the app chose —
-        // including Automatic, where preferredServer is nil but targetServer resolves to a concrete server.
-        SharedServerStore.write(
-            .init(
-                selectedLocationId: configuration.server.identifier,
-                servers: Client.database.plain.cachedServers,
-                selectedProtocol: desiredTunnelProtocol()
-            ),
-            appGroup: AppConstants.appGroup
-        )
+        // The PlatformSDK extension resolves its endpoints from this shared state.
+        // Snapshot the resolved target server and the current server list together so the extension
+        // connects to exactly what the app chose — including Automatic, where preferredServer is nil
+        // but targetServer resolves to a concrete server.
+        do {
+            let tunnelProtocol = desiredTunnelProtocol()
+            let openVPNFields = try openVPNSharedStateFields(for: configuration, tunnelProtocol: tunnelProtocol)
+
+            PIATunnelSharedState.write(
+                .init(
+                    selectedLocationId: configuration.server.identifier,
+                    servers: Client.database.plain.cachedServers,
+                    selectedProtocol: tunnelProtocol,
+                    openVPNCaCertificate: openVPNFields.caCert,
+                    openVPNUsername: openVPNFields.username,
+                    openVPNPassword: openVPNFields.password,
+                    openVPNOvpnConfig: openVPNFields.ovpnConfig,
+                    openVPNPort: openVPNFields.port,
+                    openVPNMtu: openVPNFields.mtu
+                ),
+                appGroup: AppConstants.appGroup
+            )
+        } catch {
+            callback?(error)
+            return
+        }
 
         // Reuse the shared NMT-based on-demand rule construction (same logic the IKEv2 /
         // OpenVPN / WireGuard profiles use via NetworkExtensionProfile.doSave).
@@ -101,11 +116,6 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             vpn.protocolConfiguration?.includeAllNetworks = configuration.isOnDemand
             vpn.protocolConfiguration?.excludeLocalNetworks = true
         #endif
-
-        //        log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
-        //        log.debug("Username: \(protocolConfiguration.username!)")
-        //        log.debug("On-demand is now \(vpn.isOnDemandEnabled ? "ENABLED" : "DISABLED")")
-        //        log.debug("Raw manager: \(vpn)")
 
         vpn.isEnabled = true
         vpn.saveToPreferences { (error) in
@@ -254,20 +264,23 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         callback?(nil, nil)
     }
 
-    // MARK: Helpers
+    // MARK: - Helpers
 
     /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
-    /// Anything other than OpenVPN resolves to WireGuard (the only protocol the tunnel currently
-    /// implements); OpenVPN is passed through so the extension can surface it as unimplemented.
-    private func desiredTunnelProtocol() -> SharedServerStore.TunnelProtocol {
-        #if os(iOS)
-            #if canImport(TunnelKitOpenVPN)
-                if Client.preferences.vpnType == PIATunnelProfile.vpnType {
-                    return .openVPN
-                }
+    /// "PIA" (OpenVPN) maps to `.openVPN` on iOS; all other types (including "PIAWG") map to `.wireGuard`.
+    private func desiredTunnelProtocol() -> PIATunnelSharedState.TunnelProtocol {
+        switch Client.preferences.vpnType {
+        case "PIA":
+            #if os(iOS) && canImport(TunnelKitOpenVPN)
+                return .openVPN
+            #else
+                return .wireGuard
             #endif
-        #endif
-        return .wireGuard
+        case "PIAWG":
+            return .wireGuard
+        default:
+            return .wireGuard
+        }
     }
 
     private func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {
@@ -298,4 +311,57 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             completionHandler?(vpn, nil)
         }
     }
+
+    // MARK: OpenVPN
+
+    /// Gathers the OpenVPN fields written into `PIATunnelSharedState.State` at connect time.
+    /// Returns empty/zero values for non-OpenVPN protocols so the state file stays self-consistent.
+    /// Throws if VPN credentials are unavailable — callers must not proceed without them.
+    private func openVPNSharedStateFields(
+        for configuration: VPNConfiguration,
+        tunnelProtocol: PIATunnelSharedState.TunnelProtocol
+    ) throws -> (caCert: String, username: String, password: String, ovpnConfig: String, port: UInt16, mtu: UInt16) {
+        guard tunnelProtocol == .openVPN else {
+            return ("", "", "", "", 0, 0)
+        }
+
+        let caCert = Client.configuration.rsa4096Certificate ?? ""
+
+        guard
+            let username = Client.providers.accountProvider.vpnTokenUsername,
+            let password = Client.providers.accountProvider.vpnTokenPassword,
+            !username.isEmpty, !password.isEmpty
+        else {
+            throw NSError(
+                domain: "PIAVPNError", code: 2,
+                userInfo: [NSLocalizedDescriptionKey: "VPN credentials not available — token not yet refreshed"])
+        }
+
+        #if canImport(TunnelKitOpenVPN)
+            let providerCfg = configuration.customConfiguration as? OpenVPN.ProviderConfiguration
+            let sessionCfg = providerCfg?.sessionConfiguration
+
+            let cipher = sessionCfg?.cipher ?? .aes128gcm
+            let digest = sessionCfg?.digest ?? .sha256
+            let ovpnConfig = "cipher \(cipher.rawValue)\nauth \(digest.rawValue)"
+
+            let remotes = sessionCfg?.remotes ?? []
+            let port = ovpnPort(from: remotes)
+            let mtu = UInt16(sessionCfg?.mtu ?? AppConstants.OpenVPNPacketSize.defaultPacketSize)
+        #else
+            let ovpnConfig = "cipher AES-128-GCM\nauth SHA256"
+            let port: UInt16 = 0
+            let mtu = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
+        #endif
+
+        return (caCert, username, password, ovpnConfig, port, mtu)
+    }
+
+    #if canImport(TunnelKitOpenVPN)
+        /// Returns the selected port, or 0 if more than one distinct port is present (automatic).
+        private func ovpnPort(from remotes: [TunnelKitCore.Endpoint]) -> UInt16 {
+            let ports = Set(remotes.map(\.proto.port))
+            return ports.first ?? 0
+        }
+    #endif
 }

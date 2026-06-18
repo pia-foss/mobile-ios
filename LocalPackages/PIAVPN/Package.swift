@@ -22,6 +22,7 @@ let package = Package(
         .target(
             name: "PIAVPN",
             dependencies: [
+                .product(name: "KapeVPN-OpenVPN", package: "KapePlatformSDK"),
                 .product(name: "KapeVPN-PacketTunnel", package: "KapePlatformSDK"),
                 .product(name: "PIALibrary", package: "PIALibrary")
             ]

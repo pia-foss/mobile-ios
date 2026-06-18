@@ -1,5 +1,5 @@
 //
-//  SharedServerStore.swift
+//  PIATunnelSharedState.swift
 //  PIALibrary
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -30,7 +30,7 @@ import Foundation
 /// The app writes the state at connect time (`KapePlatformSDKTunnelProfile.doSave`); the extension
 /// reads it on every tunnel start (`PIAEndpointRepository`). Because the resolved location and the
 /// server list are written together, the file is always a self-consistent snapshot.
-public enum SharedServerStore {
+public enum PIATunnelSharedState {
 
     private static let fileName = "pia_platformsdk_state.json"
 
@@ -52,18 +52,53 @@ public enum SharedServerStore {
         /// The protocol the tunnel should establish (mirrors the user's selected VPN protocol).
         public var selectedProtocol: TunnelProtocol
 
+        // MARK: OpenVPN fields (written by the app at connect time, read by PIAOpenVPNEndpointRepository)
+
+        /// CA certificate PEM (`PIA-RSA-4096.pem`). Required by `OpenVPNConnectionController`.
+        public var openVPNCaCertificate: String
+
+        /// VPN username (`vpnTokenUsername` from `AccountProvider`).
+        public var openVPNUsername: String
+
+        /// VPN password (`vpnTokenPassword` from `AccountProvider`).
+        public var openVPNPassword: String
+
+        /// Minimal OVPN config text supplying `cipher` and `auth` directives, e.g.
+        /// `"cipher AES-128-GCM\nauth SHA256"`. Parsed by `OpenVPNConfigParser` in the SDK.
+        public var openVPNOvpnConfig: String
+
+        /// Preferred port for the chosen transport, or 0 for automatic (use protocol defaults).
+        public var openVPNPort: UInt16
+
+        /// MTU for the OpenVPN tunnel. 1400 by default; 1350 when small packets is enabled.
+        public var openVPNMtu: UInt16
+
         public init(
             selectedLocationId: String? = nil,
             servers: [Server] = [],
-            selectedProtocol: TunnelProtocol = .wireGuard
+            selectedProtocol: TunnelProtocol = .wireGuard,
+            openVPNCaCertificate: String = "",
+            openVPNUsername: String = "",
+            openVPNPassword: String = "",
+            openVPNOvpnConfig: String = "",
+            openVPNPort: UInt16 = 0,
+            openVPNMtu: UInt16 = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
         ) {
             self.selectedLocationId = selectedLocationId
             self.servers = servers
             self.selectedProtocol = selectedProtocol
+            self.openVPNCaCertificate = openVPNCaCertificate
+            self.openVPNUsername = openVPNUsername
+            self.openVPNPassword = openVPNPassword
+            self.openVPNOvpnConfig = openVPNOvpnConfig
+            self.openVPNPort = openVPNPort
+            self.openVPNMtu = openVPNMtu
         }
 
         private enum CodingKeys: String, CodingKey {
             case selectedLocationId, servers, selectedProtocol
+            case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
+            case openVPNPort, openVPNMtu
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
@@ -72,6 +107,12 @@ public enum SharedServerStore {
             selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
             servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
             selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .wireGuard
+            openVPNCaCertificate = try container.decodeIfPresent(String.self, forKey: .openVPNCaCertificate) ?? ""
+            openVPNUsername = try container.decodeIfPresent(String.self, forKey: .openVPNUsername) ?? ""
+            openVPNPassword = try container.decodeIfPresent(String.self, forKey: .openVPNPassword) ?? ""
+            openVPNOvpnConfig = try container.decodeIfPresent(String.self, forKey: .openVPNOvpnConfig) ?? ""
+            openVPNPort = try container.decodeIfPresent(UInt16.self, forKey: .openVPNPort) ?? 0
+            openVPNMtu = try container.decodeIfPresent(UInt16.self, forKey: .openVPNMtu) ?? UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
         }
 
         /// The server matching `selectedLocationId` within `servers`, if present.

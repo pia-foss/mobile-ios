@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import KapeVPN_OpenVPN
 import KapeVPN_PacketTunnel
 import NetworkExtension
 import PIALibrary
@@ -33,52 +34,47 @@ import PIALibrary
 open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     var sessionController: KapeSessionController?
+    private let logger = PIATunnelLogger(label: "PIAPacketTunnelProvider")
 
     open override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        let selectedProtocol = SharedServerStore.read(appGroup: AppConstants.appGroup).selectedProtocol
-        switch selectedProtocol {
-        case .wireGuard:
-            startWireGuardTunnel(completionHandler: completionHandler)
-        case .openVPN:
-            // TODO: [PlatformSDK] implement OpenVPN over the platform SDK tunnel.
-            fatalError("PlatformSDK tunnel: \(selectedProtocol) is not implemented yet")
-        }
-    }
-
-    private func startWireGuardTunnel(completionHandler: @escaping (Error?) -> Void) {
-        let wireguardAuthenticator = PIAWireguardAuthenticator()
-        let endpointRepository = PIAEndpointRepository()
-        let tunnel = KapeSystemTunnel(
-            packetTunnelProvider: self,
-            packetIOMode: .utunFd
-        )
-
-        let controller = KapeWireGuardController(
-            systemTunnel: tunnel,
-            authenticator: wireguardAuthenticator,
-            logger: PIATunnelLogger(label: "KapeWireGuardController")
-        )
-
         Task {
-            sessionController = await SessionControllerFactory.make(
-                configurationGenerator: endpointRepository,
-                connectionControllers: [controller],
-                appGroupIdentifier: AppConstants.appGroup
-            ) { label in
-                PIATunnelLogger(label: label)
-            }
-
-            // Always resolve the system's start handler exactly once — both on success and on
-            // failure. Without the catch, a thrown error would be swallowed by the Task and the
-            // handler would never be called, leaving startTunnel to hang until iOS times out.
             do {
-                try await sessionController?.start()
+                try await start()
                 completionHandler(nil)
             } catch {
-                PIATunnelLogger(label: "PacketTunnelProvider").error("Failed to start session controller: \(error)")
+                logger.error("Failed to start tunnel: \(error)")
                 completionHandler(error)
             }
         }
+    }
+
+    private func start() async throws {
+        let endpointRepository = PIAEndpointRepository()
+        let systemTunnel = KapeSystemTunnel(packetTunnelProvider: self, packetIOMode: .utunFd)
+
+        let wgController = KapeWireGuardController(
+            systemTunnel: systemTunnel,
+            authenticator: PIAWireguardAuthenticator(),
+            logger: PIATunnelLogger(label: "KapeWireGuardController")
+        )
+
+        let openVPNController = OpenVPNConnectionController(
+            systemTunnel: systemTunnel,
+            logger: PIATunnelLogger(label: "OpenVPNConnectionController"),
+            driverFactory: {
+                TunnelKitOpenVPNDriver(logger: PIATunnelLogger(label: "TunnelKitOpenVPNDriver"))
+            }
+        )
+
+        sessionController = await SessionControllerFactory.make(
+            configurationGenerator: endpointRepository,
+            connectionControllers: [wgController, openVPNController],
+            appGroupIdentifier: AppConstants.appGroup
+        ) { label in
+            PIATunnelLogger(label: label)
+        }
+
+        try await sessionController?.start()
     }
 
     open override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
@@ -90,18 +86,14 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     open override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
-        // Add code here to handle the message.
         if let handler = completionHandler {
             handler(messageData)
         }
     }
 
     open override func sleep(completionHandler: @escaping () -> Void) {
-        // Add code here to get ready to sleep.
         completionHandler()
     }
 
-    open override func wake() {
-        // Add code here to wake up.
-    }
+    open override func wake() {}
 }
