@@ -57,6 +57,24 @@ jobs:
         echo "Failed to download tvOS platform after $max_attempts attempts"
         exit 1
     
+    - name: Cache KapePlatformSDK
+      uses: actions/cache@v4
+      with:
+        path: LocalPackages/KapePlatformSDK
+        key: kape-platform-sdk-${{ hashFiles('scripts/kape-platform-sdk.version') }}
+
+    - name: Pull KapePlatformSDK
+      env:
+        CLOUDSMITH_TOKEN: ${{ secrets.CLOUDSMITH_TOKEN }}
+      run: ./scripts/pull-kape-platform-sdk.sh
+
+    - name: Cache SPM packages
+      uses: actions/cache@v4
+      with:
+        path: .build/SourcePackages
+        key: spm-${{ runner.os }}-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: spm-${{ runner.os }}-
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
