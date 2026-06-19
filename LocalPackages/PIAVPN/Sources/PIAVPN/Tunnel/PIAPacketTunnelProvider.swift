@@ -66,13 +66,19 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
             }
         )
 
+        // Pass `systemTunnel` as the reasserting controller so the session controller can drive
+        // the NE `reasserting` flag during mid-session reconnects (e.g. wifi↔cellular path
+        // changes). `VPNDaemon` maps `.reasserting` to its connecting state, so without this the
+        // app UI would keep showing "Connected" through the reconnect gap. `systemTunnel` also
+        // doubles as the bypass sink the factory expects.
         sessionController = await SessionControllerFactory.make(
             configurationGenerator: endpointRepository,
             connectionControllers: [wgController, openVPNController],
-            appGroupIdentifier: AppConstants.appGroup
-        ) { label in
-            PIATunnelLogger(label: label)
-        }
+            appGroupIdentifier: AppConstants.appGroup,
+            loggerFactory: { label in PIATunnelLogger(label: label) },
+            reassertingController: systemTunnel,
+            systemTunnel: systemTunnel
+        )
 
         try await sessionController?.start()
     }
