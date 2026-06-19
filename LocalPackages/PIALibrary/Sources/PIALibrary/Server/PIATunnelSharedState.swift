@@ -40,6 +40,13 @@ public enum PIATunnelSharedState {
         case openVPN
     }
 
+    /// The OpenVPN transport the user selected. `automatic` lets the tunnel try both UDP and TCP.
+    public enum OpenVPNTransport: String, Codable {
+        case automatic
+        case udp
+        case tcp
+    }
+
     /// Everything the PlatformSDK tunnel needs to resolve its endpoints.
     public struct State: Codable {
         /// Identifier of the resolved target server (`serverProvider.targetServer`) the tunnel
@@ -70,8 +77,14 @@ public enum PIATunnelSharedState {
         /// Preferred port for the chosen transport, or 0 for automatic (use protocol defaults).
         public var openVPNPort: UInt16
 
+        /// The user-selected OpenVPN transport. `automatic` allows both UDP and TCP endpoints.
+        public var openVPNTransport: OpenVPNTransport
+
         /// MTU for the OpenVPN tunnel. 1400 by default; 1350 when small packets is enabled.
         public var openVPNMtu: UInt16
+
+        /// MTU for the WireGuard tunnel. 1420 by default; 1280 when small packets is enabled.
+        public var wireGuardMtu: UInt16
 
         public init(
             selectedLocationId: String? = nil,
@@ -82,7 +95,9 @@ public enum PIATunnelSharedState {
             openVPNPassword: String = "",
             openVPNOvpnConfig: String = "",
             openVPNPort: UInt16 = 0,
-            openVPNMtu: UInt16 = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
+            openVPNTransport: OpenVPNTransport = .automatic,
+            openVPNMtu: UInt16 = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize),
+            wireGuardMtu: UInt16 = UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
         ) {
             self.selectedLocationId = selectedLocationId
             self.servers = servers
@@ -92,13 +107,16 @@ public enum PIATunnelSharedState {
             self.openVPNPassword = openVPNPassword
             self.openVPNOvpnConfig = openVPNOvpnConfig
             self.openVPNPort = openVPNPort
+            self.openVPNTransport = openVPNTransport
             self.openVPNMtu = openVPNMtu
+            self.wireGuardMtu = wireGuardMtu
         }
 
         private enum CodingKeys: String, CodingKey {
             case selectedLocationId, servers, selectedProtocol
             case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
-            case openVPNPort, openVPNMtu
+            case openVPNPort, openVPNTransport, openVPNMtu
+            case wireGuardMtu
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
@@ -112,7 +130,9 @@ public enum PIATunnelSharedState {
             openVPNPassword = try container.decodeIfPresent(String.self, forKey: .openVPNPassword) ?? ""
             openVPNOvpnConfig = try container.decodeIfPresent(String.self, forKey: .openVPNOvpnConfig) ?? ""
             openVPNPort = try container.decodeIfPresent(UInt16.self, forKey: .openVPNPort) ?? 0
+            openVPNTransport = try container.decodeIfPresent(OpenVPNTransport.self, forKey: .openVPNTransport) ?? .automatic
             openVPNMtu = try container.decodeIfPresent(UInt16.self, forKey: .openVPNMtu) ?? UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
+            wireGuardMtu = try container.decodeIfPresent(UInt16.self, forKey: .wireGuardMtu) ?? UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
         }
 
         /// The server matching `selectedLocationId` within `servers`, if present.

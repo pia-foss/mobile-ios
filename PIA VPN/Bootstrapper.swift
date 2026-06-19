@@ -261,6 +261,7 @@ final class Bootstrapper {
         pref.commit()
         #if os(iOS)
             AppPreferences.shared.migrateOVPN()
+            AppPreferences.shared.syncOpenVPNSettingsToAppGroup()
             AppPreferences.shared.migrateWireguard()
 
             // Business objects

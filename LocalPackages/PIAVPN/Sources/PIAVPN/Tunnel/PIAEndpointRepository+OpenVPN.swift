@@ -33,18 +33,29 @@ extension PIAEndpointRepository {
         let udpPort = state.openVPNPort != 0 ? state.openVPNPort : Self.openVPNPortUDP
         let tcpPort = state.openVPNPort != 0 ? state.openVPNPort : Self.openVPNPortTCP
 
+        // Honor the user's transport choice; `.automatic` offers both UDP and TCP (UDP first,
+        // then TCP via the SDK's demand-driven failover).
+        let transport = state.openVPNTransport
+        let includeUDP = transport != .tcp
+        let includeTCP = transport != .udp
+        logger.info("OpenVPN transport: \(transport.rawValue) (UDP: \(includeUDP), TCP: \(includeTCP))")
+
         var configurations: [any VpnConfiguration] = []
 
-        for address in udpAddresses {
-            let usesPIAPatches = !address.van
-            configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .udp, port: udpPort, state: state, usesPIAPatches: usesPIAPatches))
-            logger.debug("Built OpenVPN UDP endpoint \(address.ip):\(udpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
+        if includeUDP {
+            for address in udpAddresses {
+                let usesPIAPatches = !address.van
+                configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .udp, port: udpPort, state: state, usesPIAPatches: usesPIAPatches))
+                logger.debug("Built OpenVPN UDP endpoint \(address.ip):\(udpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
+            }
         }
 
-        for address in tcpAddresses {
-            let usesPIAPatches = !address.van
-            configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .tcp, port: tcpPort, state: state, usesPIAPatches: usesPIAPatches))
-            logger.debug("Built OpenVPN TCP endpoint \(address.ip):\(tcpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
+        if includeTCP {
+            for address in tcpAddresses {
+                let usesPIAPatches = !address.van
+                configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .tcp, port: tcpPort, state: state, usesPIAPatches: usesPIAPatches))
+                logger.debug("Built OpenVPN TCP endpoint \(address.ip):\(tcpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
+            }
         }
 
         logger.info("Generated \(configurations.count) OpenVPN configuration(s)")

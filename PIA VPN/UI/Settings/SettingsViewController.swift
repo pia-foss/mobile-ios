@@ -456,6 +456,12 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             }
             builder.shouldDebug = true
             pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
+
+            // Mirror the user-set OpenVPN options as plain app-group values so the PlatformSDK
+            // tunnel can read them without the TunnelKitOpenVPN package (slated for removal).
+            AppPreferences.shared.openVPNCipher = builder.sessionConfiguration.cipher?.rawValue
+            AppPreferences.shared.openVPNAuth = builder.sessionConfiguration.digest?.rawValue
+            AppPreferences.shared.openVPNPort = pendingOpenVPNConfiguration.currentPort ?? 0
         } else {
             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 if AppPreferences.shared.wireGuardUseSmallPackets {

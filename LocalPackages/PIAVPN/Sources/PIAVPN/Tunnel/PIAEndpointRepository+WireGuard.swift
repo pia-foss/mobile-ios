@@ -34,7 +34,8 @@ extension PIAEndpointRepository {
                 endpointConfiguration: endpoint,
                 host: address.ip,
                 port: Self.wireGuardPort,
-                obfuscation: .none
+                obfuscation: .none,
+                mtu: state.wireGuardMtu
             )
         }
 

@@ -22,15 +22,15 @@
 
 import NetworkExtension
 
-#if canImport(TunnelKitOpenVPN)
-    import TunnelKitOpenVPN
-#endif
-
 private let log = PIALogger.logger(for: KapePlatformSDKTunnelProfile.self)
 
 public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     private let bundleIdentifier: String
     private var waitObserver: NSObjectProtocol?
+
+    /// App-group UserDefaults, the source of all user-set connection config read by this profile.
+    /// Internal (not private) so the per-protocol extensions in `+WireGuard`/`+OpenVPN` can read it.
+    lazy var sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
 
     public static let vpnType: String = "PlatformSDK"
 
@@ -82,19 +82,22 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         // but targetServer resolves to a concrete server.
         do {
             let tunnelProtocol = desiredTunnelProtocol()
-            let openVPNFields = try openVPNSharedStateFields(for: configuration, tunnelProtocol: tunnelProtocol)
+            let openVPN = try openVPNSettings()
+            let wireGuard = wireGuardSettings()
 
             PIATunnelSharedState.write(
                 .init(
                     selectedLocationId: configuration.server.identifier,
                     servers: Client.database.plain.cachedServers,
                     selectedProtocol: tunnelProtocol,
-                    openVPNCaCertificate: openVPNFields.caCert,
-                    openVPNUsername: openVPNFields.username,
-                    openVPNPassword: openVPNFields.password,
-                    openVPNOvpnConfig: openVPNFields.ovpnConfig,
-                    openVPNPort: openVPNFields.port,
-                    openVPNMtu: openVPNFields.mtu
+                    openVPNCaCertificate: openVPN.caCertificate,
+                    openVPNUsername: openVPN.username,
+                    openVPNPassword: openVPN.password,
+                    openVPNOvpnConfig: openVPN.ovpnConfig,
+                    openVPNPort: openVPN.port,
+                    openVPNTransport: openVPN.transport,
+                    openVPNMtu: openVPN.mtu,
+                    wireGuardMtu: wireGuard.mtu
                 ),
                 appGroup: AppConstants.appGroup
             )
@@ -103,17 +106,26 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             return
         }
 
-        // Reuse the shared NMT-based on-demand rule construction (same logic the IKEv2 /
-        // OpenVPN / WireGuard profiles use via NetworkExtensionProfile.doSave).
+        // VPN Kill Switch (Settings → Privacy Features) integration.
+        // The toggle is `Client.preferences.isPersistentConnection`, surfaced here as
+        // `configuration.isOnDemand`. PIA implements the kill switch via on-demand — exactly like
+        // the IKEv2 / OpenVPN / WireGuard profiles do (NetworkExtensionProfile.doSave): when it is
+        // on, `applyOnDemandRules` installs a catch-all `NEOnDemandRuleConnect`, so iOS keeps the
+        // VPN required, re-establishes it if it drops, and holds back un-tunneled traffic until the
+        // tunnel is up. `isOnDemandEnabled` (set above) gates this.
         applyOnDemandRules(to: vpn, force: force, configuration: configuration)
 
         #if os(iOS)
-            // The PlatformSDK tunnel relies on the OS-level `includeAllNetworks` flag to enforce
-            // the kill switch — the SDK does not block traffic itself. Drive it from the user's
-            // Kill Switch setting (isPersistentConnection, surfaced here as configuration.isOnDemand).
-            // Local-network access is kept available so system/local services keep working while
-            // the tunnel is up.
-            vpn.protocolConfiguration?.includeAllNetworks = configuration.isOnDemand
+            // Keep `includeAllNetworks` OFF — it is NOT how PIA implements the kill switch (see the
+            // on-demand wiring above). Setting it ON (the OS-level "no exceptions" kill switch)
+            // prevents iOS from doing a seamless interface handover: on a wifi↔cellular switch the
+            // tunnel is forced to tear down and re-establish on the new interface, and because every
+            // non-tunnel packet is blocked during that window connectivity is lost and often never
+            // recovers. The SDK's `.standard` kill switch maps to `includeAllNetworks = false` for
+            // the same reason, and PIA's existing OpenVPN/WireGuard profiles force it off for these
+            // protocols too. Roaming recovery is handled inside the extension by KapePathReconnector.
+            // Local-network access stays available.
+            vpn.protocolConfiguration?.includeAllNetworks = false
             vpn.protocolConfiguration?.excludeLocalNetworks = true
         #endif
 
@@ -311,57 +323,4 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             completionHandler?(vpn, nil)
         }
     }
-
-    // MARK: OpenVPN
-
-    /// Gathers the OpenVPN fields written into `PIATunnelSharedState.State` at connect time.
-    /// Returns empty/zero values for non-OpenVPN protocols so the state file stays self-consistent.
-    /// Throws if VPN credentials are unavailable — callers must not proceed without them.
-    private func openVPNSharedStateFields(
-        for configuration: VPNConfiguration,
-        tunnelProtocol: PIATunnelSharedState.TunnelProtocol
-    ) throws -> (caCert: String, username: String, password: String, ovpnConfig: String, port: UInt16, mtu: UInt16) {
-        guard tunnelProtocol == .openVPN else {
-            return ("", "", "", "", 0, 0)
-        }
-
-        let caCert = Client.configuration.rsa4096Certificate ?? ""
-
-        guard
-            let username = Client.providers.accountProvider.vpnTokenUsername,
-            let password = Client.providers.accountProvider.vpnTokenPassword,
-            !username.isEmpty, !password.isEmpty
-        else {
-            throw NSError(
-                domain: "PIAVPNError", code: 2,
-                userInfo: [NSLocalizedDescriptionKey: "VPN credentials not available — token not yet refreshed"])
-        }
-
-        #if canImport(TunnelKitOpenVPN)
-            let providerCfg = configuration.customConfiguration as? OpenVPN.ProviderConfiguration
-            let sessionCfg = providerCfg?.sessionConfiguration
-
-            let cipher = sessionCfg?.cipher ?? .aes128gcm
-            let digest = sessionCfg?.digest ?? .sha256
-            let ovpnConfig = "cipher \(cipher.rawValue)\nauth \(digest.rawValue)"
-
-            let remotes = sessionCfg?.remotes ?? []
-            let port = ovpnPort(from: remotes)
-            let mtu = UInt16(sessionCfg?.mtu ?? AppConstants.OpenVPNPacketSize.defaultPacketSize)
-        #else
-            let ovpnConfig = "cipher AES-128-GCM\nauth SHA256"
-            let port: UInt16 = 0
-            let mtu = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
-        #endif
-
-        return (caCert, username, password, ovpnConfig, port, mtu)
-    }
-
-    #if canImport(TunnelKitOpenVPN)
-        /// Returns the selected port, or 0 if more than one distinct port is present (automatic).
-        private func ovpnPort(from remotes: [TunnelKitCore.Endpoint]) -> UInt16 {
-            let ports = Set(remotes.map(\.proto.port))
-            return ports.first ?? 0
-        }
-    #endif
 }

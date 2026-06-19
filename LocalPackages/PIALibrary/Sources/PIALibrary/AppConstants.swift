@@ -105,6 +105,30 @@ public struct AppConstants {
         public static let highPacketSize = 1420
     }
 
+    /// App-group UserDefaults keys read by the PlatformSDK tunnel, keeping its config path
+    /// independent of the `TunnelKitOpenVPN`/`PIAWireguard` packages. The writer is
+    /// `AppPreferences` (app target); its `Entries` use the same literal strings, so these
+    /// values MUST stay in sync with that file.
+    public struct UserDefaultsKeys {
+        public struct OpenVPN {
+            /// Cipher, stored as its OpenVPN raw value (e.g. "AES-128-GCM").
+            public static let cipher = "OpenVPNCipher"
+            /// Auth digest, stored as its OpenVPN raw value (e.g. "SHA256").
+            public static let auth = "OpenVPNAuth"
+            /// Preferred port, stored as an `Int`; 0 means automatic.
+            public static let port = "OpenVPNPort"
+            /// Selected transport, stored as a `SocketType` raw value ("UDP"/"TCP"); absent = automatic.
+            public static let transport = "PIASocketType"
+            /// Small-packets toggle (`Bool`).
+            public static let useSmallPackets = "UseSmallPackets"
+        }
+
+        public struct WireGuard {
+            /// Small-packets toggle (`Bool`).
+            public static let useSmallPackets = "WireGuardUseSmallPackets"
+        }
+    }
+
     public struct MagicLink {
         public static let url = "piavpn:login?token="
     }
