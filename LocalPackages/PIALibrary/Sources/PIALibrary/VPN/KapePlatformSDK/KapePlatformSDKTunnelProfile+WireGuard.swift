@@ -26,12 +26,20 @@ extension KapePlatformSDKTunnelProfile {
     /// Resolved WireGuard parameters written into `PIATunnelSharedState.State`.
     struct WireGuardSettings {
         let mtu: UInt16
+        /// Key-exchange token used by `PIAWireguardAuthenticator`: the account `vpnToken` for a
+        /// regular server, or the server's `dipUsername` for a Dedicated IP server.
+        let token: String?
     }
 
-    /// Builds the WireGuard settings from the small-packets toggle in app-group UserDefaults.
-    func wireGuardSettings() -> WireGuardSettings {
+    /// Builds the WireGuard settings from the small-packets toggle in app-group UserDefaults,
+    /// resolving the key-exchange token from the target server (DIP vs account token).
+    func wireGuardSettings(for server: Server) -> WireGuardSettings {
         let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.WireGuard.useSmallPackets)
         let mtu = UInt16(useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
-        return WireGuardSettings(mtu: mtu)
+
+        // DIP uses `dipUsername` as the WireGuard token (mirrors PIAWGTunnelProfile).
+        let token = server.dipToken != nil ? server.dipUsername : Client.providers.accountProvider.vpnToken
+
+        return WireGuardSettings(mtu: mtu, token: token)
     }
 }

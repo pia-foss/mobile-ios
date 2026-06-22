@@ -9,7 +9,11 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardAuthConfiguration {
         logger.info("Authenticating WireGuard key with server")
 
-        guard let token = Client.providers.accountProvider.vpnToken else {
+        // Prefer the token the app resolved at connect time (carried in shared state): the account
+        // `vpnToken` for a regular server, or the server's `dipUsername` for a Dedicated IP server.
+        // Fall back to the account token in case shared state predates this field.
+        let sharedToken = PIATunnelSharedState.read(appGroup: AppConstants.appGroup).wireGuardToken
+        guard let token = sharedToken ?? Client.providers.accountProvider.vpnToken else {
             logger.error("No VPN token available — cannot authenticate")
             throw PIAWireguardAuthError.noToken
         }
@@ -61,11 +65,16 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         }
 
         logger.info("WireGuard authentication succeeded (peer ip: \(response.peer_ip))")
+
+        // Pass the server-provided resolvers through so the tunnel uses PIA's real DNS rather than
+        // the SDK's `transformToDns(internalIP)` heuristic, which is wrong for pools whose resolver
+        // isn't at `<a>.<b>.0.1` (e.g. Dedicated IP). Empty list → SDK falls back to the heuristic.
         return WireguardAuthConfiguration(
             psk: "",
             serverPublicKey: response.server_key,
             clientPrivateKey: privateKeyBase64,
-            internalIp: response.peer_ip
+            internalIp: response.peer_ip,
+            dnsServers: response.dns_servers ?? []
         )
     }
 }
@@ -80,6 +89,7 @@ private struct WGKeyResponse: Decodable {
     let status: String
     let server_key: String
     let peer_ip: String
+    let dns_servers: [String]?
 }
 
 // TODO: [PlatformSDK] Temporary — replace with proper certificate/SPKI pinning against the VPN

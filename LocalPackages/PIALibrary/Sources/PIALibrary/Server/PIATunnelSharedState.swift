@@ -53,6 +53,11 @@ public enum PIATunnelSharedState {
         /// should connect to. Concrete even for "Automatic", where `preferredServer` is nil.
         public var selectedLocationId: String?
 
+        /// `dipToken` of the resolved target server, or nil for a regular server. A Dedicated IP
+        /// server shares its `identifier` (derived from hostname) with its base region, so the
+        /// extension must disambiguate on `(identifier, dipToken)` — see `selectedServer`.
+        public var selectedDipToken: String?
+
         /// Snapshot of the server list (the app's `cachedServers`) the extension looks up in.
         public var servers: [Server]
 
@@ -86,8 +91,14 @@ public enum PIATunnelSharedState {
         /// MTU for the WireGuard tunnel. 1420 by default; 1280 when small packets is enabled.
         public var wireGuardMtu: UInt16
 
+        /// WireGuard key-exchange token used by `PIAWireguardAuthenticator`. The account `vpnToken`
+        /// for a regular server, or the server's `dipUsername` for a Dedicated IP server. Passed via
+        /// shared state because the extension can't reliably read account credentials at run time.
+        public var wireGuardToken: String?
+
         public init(
             selectedLocationId: String? = nil,
+            selectedDipToken: String? = nil,
             servers: [Server] = [],
             selectedProtocol: TunnelProtocol = .wireGuard,
             openVPNCaCertificate: String = "",
@@ -97,9 +108,11 @@ public enum PIATunnelSharedState {
             openVPNPort: UInt16 = 0,
             openVPNTransport: OpenVPNTransport = .automatic,
             openVPNMtu: UInt16 = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize),
-            wireGuardMtu: UInt16 = UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
+            wireGuardMtu: UInt16 = UInt16(AppConstants.WireGuardPacketSize.highPacketSize),
+            wireGuardToken: String? = nil
         ) {
             self.selectedLocationId = selectedLocationId
+            self.selectedDipToken = selectedDipToken
             self.servers = servers
             self.selectedProtocol = selectedProtocol
             self.openVPNCaCertificate = openVPNCaCertificate
@@ -110,19 +123,21 @@ public enum PIATunnelSharedState {
             self.openVPNTransport = openVPNTransport
             self.openVPNMtu = openVPNMtu
             self.wireGuardMtu = wireGuardMtu
+            self.wireGuardToken = wireGuardToken
         }
 
         private enum CodingKeys: String, CodingKey {
-            case selectedLocationId, servers, selectedProtocol
+            case selectedLocationId, selectedDipToken, servers, selectedProtocol
             case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
             case openVPNPort, openVPNTransport, openVPNMtu
-            case wireGuardMtu
+            case wireGuardMtu, wireGuardToken
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
+            selectedDipToken = try container.decodeIfPresent(String.self, forKey: .selectedDipToken)
             servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
             selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .wireGuard
             openVPNCaCertificate = try container.decodeIfPresent(String.self, forKey: .openVPNCaCertificate) ?? ""
@@ -133,12 +148,24 @@ public enum PIATunnelSharedState {
             openVPNTransport = try container.decodeIfPresent(OpenVPNTransport.self, forKey: .openVPNTransport) ?? .automatic
             openVPNMtu = try container.decodeIfPresent(UInt16.self, forKey: .openVPNMtu) ?? UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
             wireGuardMtu = try container.decodeIfPresent(UInt16.self, forKey: .wireGuardMtu) ?? UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
+            wireGuardToken = try container.decodeIfPresent(String.self, forKey: .wireGuardToken)
         }
 
-        /// The server matching `selectedLocationId` within `servers`, if present.
+        /// The server matching the resolved target within `servers`, if present.
+        ///
+        /// A Dedicated IP server shares its `identifier` with its base region, so `identifier`
+        /// alone is ambiguous. Resolve by the unique `dipToken` when this is a DIP target; for a
+        /// regular target match by `identifier` and exclude any DIP entry that shares it.
         public var selectedServer: Server? {
-            guard let selectedLocationId else { return nil }
-            return servers.first { $0.identifier == selectedLocationId }
+            if let selectedDipToken {
+                return servers.first { $0.dipToken == selectedDipToken }
+            }
+
+            guard let selectedLocationId else {
+                return nil
+            }
+
+            return servers.first { $0.identifier == selectedLocationId && $0.dipToken == nil }
         }
     }
 

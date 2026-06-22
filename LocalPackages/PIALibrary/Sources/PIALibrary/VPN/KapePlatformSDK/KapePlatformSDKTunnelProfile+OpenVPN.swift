@@ -35,18 +35,36 @@ extension KapePlatformSDKTunnelProfile {
     }
 
     /// Builds the OpenVPN settings from app-group UserDefaults.
-    /// Throws if VPN credentials are unavailable.
-    func openVPNSettings() throws -> OpenVPNSettings {
+    /// For a Dedicated IP server, authenticates with the per-server DIP credentials
+    /// (`dipUsername` + the dedicated IP as password) instead of the account VPN token.
+    /// Throws if (non-DIP) VPN credentials are unavailable.
+    func openVPNSettings(for server: Server) throws -> OpenVPNSettings {
         let caCertificate = Client.configuration.rsa4096Certificate ?? ""
 
-        guard
-            let username = Client.providers.accountProvider.vpnTokenUsername,
-            let password = Client.providers.accountProvider.vpnTokenPassword,
-            !username.isEmpty, !password.isEmpty
-        else {
-            throw NSError(
-                domain: "PIAVPNError", code: 2,
-                userInfo: [NSLocalizedDescriptionKey: "VPN credentials not available — token not yet refreshed"])
+        let username: String
+        let password: String
+        if let dipUsername = server.dipUsername, server.dipToken != nil {
+            // DIP: username is the dedicated_ip_* identity; password is the dedicated IP itself
+            // (what `DedicatedIPTokenHandler` stored, identical to the server's single address IP).
+            guard let dipIp = server.openVPNAddressesForUDP?.first?.ip ?? server.openVPNAddressesForTCP?.first?.ip else {
+                throw NSError(
+                    domain: "PIAVPNError", code: 3,
+                    userInfo: [NSLocalizedDescriptionKey: "Dedicated IP address not available for \(server.identifier)"])
+            }
+            username = dipUsername
+            password = dipIp
+        } else {
+            guard
+                let accountUsername = Client.providers.accountProvider.vpnTokenUsername,
+                let accountPassword = Client.providers.accountProvider.vpnTokenPassword,
+                !accountUsername.isEmpty, !accountPassword.isEmpty
+            else {
+                throw NSError(
+                    domain: "PIAVPNError", code: 2,
+                    userInfo: [NSLocalizedDescriptionKey: "VPN credentials not available — token not yet refreshed"])
+            }
+            username = accountUsername
+            password = accountPassword
         }
 
         let cipher = sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.cipher) ?? "AES-128-GCM"

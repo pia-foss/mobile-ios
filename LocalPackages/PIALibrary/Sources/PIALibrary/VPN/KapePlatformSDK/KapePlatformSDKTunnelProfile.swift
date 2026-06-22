@@ -76,19 +76,24 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
-        // The PlatformSDK extension resolves its endpoints from this shared state.
-        // Snapshot the resolved target server and the current server list together so the extension
-        // connects to exactly what the app chose — including Automatic, where preferredServer is nil
-        // but targetServer resolves to a concrete server.
+        // The PlatformSDK extension resolves its endpoints from this shared state. For a regular
+        // server, snapshot the full server list (the app's `cachedServers`) alongside the resolved
+        // target — including Automatic, where `preferredServer` is nil but `targetServer` resolves to
+        // a concrete server. For a Dedicated IP server, snapshot only that one server: a DIP server
+        // shares its `identifier` with its base region, so shipping the catalog would put two
+        // same-identifier entries in the list — passing just the DIP server avoids that ambiguity.
         do {
             let tunnelProtocol = desiredTunnelProtocol()
-            let openVPN = try openVPNSettings()
-            let wireGuard = wireGuardSettings()
+            let openVPN = try openVPNSettings(for: configuration.server)
+            let wireGuard = wireGuardSettings(for: configuration.server)
+
+            let servers = configuration.server.dipToken != nil ? [configuration.server] : Client.database.plain.cachedServers
 
             PIATunnelSharedState.write(
                 .init(
                     selectedLocationId: configuration.server.identifier,
-                    servers: Client.database.plain.cachedServers,
+                    selectedDipToken: configuration.server.dipToken,
+                    servers: servers,
                     selectedProtocol: tunnelProtocol,
                     openVPNCaCertificate: openVPN.caCertificate,
                     openVPNUsername: openVPN.username,
@@ -97,7 +102,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                     openVPNPort: openVPN.port,
                     openVPNTransport: openVPN.transport,
                     openVPNMtu: openVPN.mtu,
-                    wireGuardMtu: wireGuard.mtu
+                    wireGuardMtu: wireGuard.mtu,
+                    wireGuardToken: wireGuard.token
                 ),
                 appGroup: AppConstants.appGroup
             )
