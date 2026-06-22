@@ -46,7 +46,16 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         var request = URLRequest(url: url)
         request.timeoutInterval = 10
 
-        let delegate = TrustAllCertsDelegate()
+        // Pin the key-exchange TLS connection against the bundled PIA root CA, validating that the
+        // server's leaf certificate is anchored to it and its Common Name matches the per-server
+        // `certDn` the app resolved. The endpoint is reached by IP with a self-signed cert, so this
+        // mirrors the legacy WireGuard pinning (anchor + CN, no hostname check). Fail closed.
+        guard let anchorCertificate = AnchorCertificateProvider.getAnchorCertificate() else {
+            logger.error("Failed to load PIA anchor certificate — cannot pin key-exchange connection")
+            throw PIAWireguardAuthError.missingAnchorCertificate
+        }
+        let delegate = PinnedCertificateDelegate(
+            anchorCertificate: anchorCertificate, expectedCommonName: config.certDn, logger: logger)
         let session = URLSession(configuration: .ephemeral, delegate: delegate, delegateQueue: nil)
 
         logger.debug("Sending addKey request to \(host):\(config.authPort)")
@@ -83,6 +92,7 @@ private enum PIAWireguardAuthError: Error {
     case noToken
     case invalidURL
     case serverError(String)
+    case missingAnchorCertificate
 }
 
 private struct WGKeyResponse: Decodable {
@@ -92,19 +102,77 @@ private struct WGKeyResponse: Decodable {
     let dns_servers: [String]?
 }
 
-// TODO: [PlatformSDK] Temporary — replace with proper certificate/SPKI pinning against the VPN
-// server's cert. Trusting all certs is a placeholder and must not ship.
-// VPN server endpoint uses a self-signed cert; standard practice for tunnel auth.
-private final class TrustAllCertsDelegate: NSObject, URLSessionDelegate, Sendable {
+/// `URLSessionDelegate` that pins the key-exchange TLS connection to the bundled PIA root CA.
+///
+/// The VPN server is reached by IP and presents a self-signed leaf signed by the PIA CA, so the
+/// system trust chain can't validate it. We instead require the leaf's Common Name to match the
+/// per-server `certDn` and the leaf to chain to the pinned anchor. Mirrors the legacy WireGuard
+/// pinning (`CertificateValidation.anchor`) and PIAAccount's `CertificatePinner`. Fails closed:
+/// any mismatch or evaluation failure cancels the challenge.
+///
+/// The anchor is stored as immutable DER `Data` (not a `SecCertificate`) so the type is cleanly
+/// `Sendable`; the `SecCertificate` is rebuilt inside the callback.
+private final class PinnedCertificateDelegate: NSObject, URLSessionDelegate, Sendable {
+    private let anchorCertificateData: Data
+    private let expectedCommonName: String
+    private let logger: PIATunnelLogger
+
+    init(anchorCertificate: SecCertificate, expectedCommonName: String, logger: PIATunnelLogger) {
+        self.anchorCertificateData = SecCertificateCopyData(anchorCertificate) as Data
+        self.expectedCommonName = expectedCommonName
+        self.logger = logger
+        super.init()
+    }
+
     func urlSession(
         _ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge,
         completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
     ) {
-        guard let trust = challenge.protectionSpace.serverTrust else {
-            completionHandler(.performDefaultHandling, nil)
+        guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
+            let serverTrust = challenge.protectionSpace.serverTrust,
+            let leafCertificate = (SecTrustCopyCertificateChain(serverTrust) as? [SecCertificate])?.first
+        else {
+            logger.error("Pinning failed: no server trust on key-exchange challenge")
+            completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
-        completionHandler(.useCredential, URLCredential(trust: trust))
+
+        // The leaf's CN must match the per-server `certDn`.
+        var leafCommonName: CFString?
+        SecCertificateCopyCommonName(leafCertificate, &leafCommonName)
+        guard let leafCommonName = leafCommonName as String?, leafCommonName == expectedCommonName else {
+            logger.error(
+                "Pinning failed: leaf CN \"\(leafCommonName as String? ?? "nil")\" != expected \"\(expectedCommonName)\"")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+
+        // Rebuild trust on the leaf with the pinned PIA CA as the sole anchor, then evaluate.
+        // No hostname check: the endpoint is an IP, so the SSL policy is created with a nil host.
+        guard let anchorCertificate = SecCertificateCreateWithData(nil, anchorCertificateData as CFData) else {
+            logger.error("Pinning failed: could not decode anchor certificate")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+
+        var trust: SecTrust?
+        guard SecTrustCreateWithCertificates(leafCertificate, SecPolicyCreateSSL(true, nil), &trust) == errSecSuccess,
+            let trust,
+            SecTrustSetAnchorCertificates(trust, [anchorCertificate] as CFArray) == errSecSuccess
+        else {
+            logger.error("Pinning failed: could not build trust for evaluation")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+
+        var error: CFError?
+        guard SecTrustEvaluateWithError(trust, &error) else {
+            logger.error("Pinning failed: trust evaluation rejected the server certificate")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+
+        completionHandler(.useCredential, URLCredential(trust: serverTrust))
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
-class AnchorCertificateProvider {
-    static func getAnchorCertificate() -> SecCertificate? {
+public final class AnchorCertificateProvider {
+    public static func getAnchorCertificate() -> SecCertificate? {
 
         #if SWIFT_PACKAGE
             let bundle = Bundle.module
