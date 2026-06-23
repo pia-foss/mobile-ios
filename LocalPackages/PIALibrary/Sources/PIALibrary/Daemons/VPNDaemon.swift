@@ -264,7 +264,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // check when the original Swift error survives bridging.
             // TODO: verify on device whether `_lastDisconnectError` preserves the
             // `TunnelKitOpenVPNError` type across the Network Extension boundary.
-            #if canImport(TunnelKitOpenVPN)
+            #if canImport(PIAWireguard) && canImport(TunnelKitOpenVPN)
                 if let openVPNError = lastDisconnectError as? TunnelKitOpenVPNError {
                     switch openVPNError {
                     case .timeout, .networkChanged, .exhaustedEndpoints, .socketActivity:
@@ -278,7 +278,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // IKEv2 connectivity check failure.
             // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
             // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
-            if #available(iOS 16, *) {
+            if #available(iOS 16, *), !Client.configuration.featureFlags[.usePlatformSDKVPN] {
                 if errorDomain == NEVPNConnectionErrorDomain || errorDomain == "NEVPNConnectionErrorDomainPlugin" {
                     connectivityCheckFailed = true
                 }

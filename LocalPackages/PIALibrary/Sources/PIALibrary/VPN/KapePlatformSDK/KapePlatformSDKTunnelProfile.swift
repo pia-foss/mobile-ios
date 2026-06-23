@@ -166,16 +166,21 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                 // If the tunnel is already active, stop it before starting the new one.
                 // Calling startTunnel() on a live session may silently retain the existing
                 // connection rather than switching to the new server, leaving the app in a
-                // state where it believes it is connected when it is not.
-                if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+                // state where it believes it is connected when it is not. stopVPNTunnel() is
+                // asynchronous, so once a stop has been (or is already being) issued we must
+                // wait for .disconnected before starting — issuing startTunnel() while the
+                // session is still tearing down hits the same fragile state.
+                switch currentStatus {
+                case .connected, .connecting, .reasserting:
                     log.debug("[PlatformSDK] connect — stopping active tunnel before restart")
                     vpn.connection.stopVPNTunnel()
-                }
+                    self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
 
-                if currentStatus == .disconnecting {
+                case .disconnecting:
                     log.debug("[PlatformSDK] connect — waiting for .disconnected before start")
                     self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
-                } else {
+
+                default:
                     do {
                         let session = vpn.connection as? NETunnelProviderSession
                         try session?.startTunnel(options: nil)
@@ -261,6 +266,7 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     public func disable(_ callback: SuccessLibraryCallback?) {
         find { (vpn, error) in
             guard let vpn = vpn else {
+                callback?(error)
                 return
             }
             vpn.isEnabled = false
@@ -285,15 +291,13 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     // MARK: - Helpers
 
     /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
-    /// "PIA" (OpenVPN) maps to `.openVPN` on iOS; all other types (including "PIAWG") map to `.wireGuard`.
+    /// "PIA" (OpenVPN) maps to `.openVPN`; all other types (including "PIAWG") map to `.wireGuard`.
+    /// The OpenVPN/WireGuard work runs in the PlatformSDK extension (Kape SDK), which supports both
+    /// on iOS and tvOS — so this mapping is platform-agnostic and does not gate on `os(iOS)`.
     private func desiredTunnelProtocol() -> PIATunnelSharedState.TunnelProtocol {
         switch Client.preferences.vpnType {
         case "PIA":
-            #if os(iOS) && canImport(TunnelKitOpenVPN)
-                return .openVPN
-            #else
-                return .wireGuard
-            #endif
+            return .openVPN
         case "PIAWG":
             return .wireGuard
         default:

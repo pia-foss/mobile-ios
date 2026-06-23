@@ -24,7 +24,7 @@ import Foundation
 import PIALibrary
 import UIKit
 
-#if canImport(TunnelKitCore)
+#if os(iOS)
     import TunnelKitCore
     import TunnelKitOpenVPN
 #endif
