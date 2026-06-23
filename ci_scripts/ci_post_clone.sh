@@ -90,7 +90,7 @@ echo "Updating version in the project and Info.plist files..."
 xcrun agvtool new-marketing-version "$version_number"
 
 # As some dependencies are not reachable from the project definition, we manually update Info.plist files
-find "PIA VPN" "PIA VPN-tvOS" "PIA tvOS Tunnel" "PIA VPN AdBlocker" "PIA VPN Tunnel" "PIA VPN WG Tunnel" "PlatformSDK-Tunnel" "PIAWidget" "PIA VPNTests" "PIA VPN-tvOSTests" "PIA VPNUITests" -name '*Info.plist' | \
+find "PIA VPN" "PIA VPN-tvOS" "PIA VPN AdBlocker" "PIA VPN Tunnel" "PIA VPN WG Tunnel" "PlatformSDK-Tunnel" "PIAWidget" "PIA VPNTests" "PIA VPN-tvOSTests" "PIA VPNUITests" -name '*Info.plist' | \
 while read -r plist_file
 do
     setVariableValue "CFBundleShortVersionString" "$version_number" "$plist_file"
