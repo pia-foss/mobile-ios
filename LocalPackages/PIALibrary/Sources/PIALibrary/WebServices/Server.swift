@@ -252,12 +252,10 @@ extension Server {
         switch Client.providers.vpnProvider.currentVPNType {
         case IKEv2Profile.vpnType:
             return iKEv2AddressesForUDP ?? []
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                return openVPNAddressesForTCP ?? []
-            case PIAWGTunnelProfile.vpnType:
-                return wireGuardAddressesForUDP ?? []
-        #endif
+        case "PIA":
+            return openVPNAddressesForTCP ?? []
+        case "PIAWG":
+            return wireGuardAddressesForUDP ?? []
         case "Mock":
             return iKEv2AddressesForUDP ?? []
         default:
@@ -304,12 +302,10 @@ extension Server {
         switch vpnType {
         case IKEv2Profile.vpnType:
             return iKEv2AddressesForUDP?.isEmpty == false
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
-            case PIAWGTunnelProfile.vpnType:
-                return wireGuardAddressesForUDP?.isEmpty == false
-        #endif
+        case "PIA":
+            return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
+        case "PIAWG":
+            return wireGuardAddressesForUDP?.isEmpty == false
         case "Mock":  // Simulator
             return true
         default:
@@ -325,14 +321,12 @@ extension Server {
         case IKEv2Profile.vpnType:
             let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
-                serverAddressIP?.updateResponseTime(time)
-            case PIAWGTunnelProfile.vpnType:
-                let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
-                serverAddressIP?.updateResponseTime(time)
-        #endif
+        case "PIA":
+            let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
+            serverAddressIP?.updateResponseTime(time)
+        case "PIAWG":
+            let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
+            serverAddressIP?.updateResponseTime(time)
         default:
             break
         }

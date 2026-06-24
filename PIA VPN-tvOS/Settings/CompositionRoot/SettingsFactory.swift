@@ -13,11 +13,26 @@ class SettingsFactory {
     private static func makeAvailableSettingsViewModel() -> AvailableSettingsViewModel {
         return AvailableSettingsViewModel(
             onAccountSelectedAction: AppRouter.navigateToAccountSettingsDestinationAction,
-            onDedicatedIpSectionSelectedAction: AppRouter.navigateToDIPSettingsDestinationAction)
+            onDedicatedIpSectionSelectedAction: AppRouter.navigateToDIPSettingsDestinationAction,
+            onProtocolSectionSelectedAction: AppRouter.navigateToProtocolSettingsDestinationAction)
     }
 
     static func makeAvailableSettingsView() -> AvailableSettingsView {
         return AvailableSettingsView(viewModel: makeAvailableSettingsViewModel())
+    }
+
+    private static func makeProtocolSelectionUseCase() -> ProtocolSelectionUseCaseType {
+        return ProtocolSelectionUseCase(
+            vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
+            vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor)
+    }
+
+    private static func makeProtocolSelectionViewModel() -> ProtocolSelectionViewModel {
+        return ProtocolSelectionViewModel(useCase: makeProtocolSelectionUseCase())
+    }
+
+    static func makeProtocolSelectionView() -> ProtocolSelectionView {
+        return ProtocolSelectionView(viewModel: makeProtocolSelectionViewModel())
     }
 
     static func makeDefaultAccountProvider() -> AccountProvider {

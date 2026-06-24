@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3F6300A72FD8103C00DA8769"
-               BuildableName = "PlatformSDK-Tunnel.appex"
-               BlueprintName = "PlatformSDK-Tunnel"
+               BuildableName = "PlatformSDK-Tunnel-iOS.appex"
+               BlueprintName = "PlatformSDK-Tunnel-iOS"
                ReferencedContainer = "container:PIA VPN.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

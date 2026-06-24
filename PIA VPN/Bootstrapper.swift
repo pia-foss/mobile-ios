@@ -140,7 +140,7 @@ final class Bootstrapper {
             }
         #endif
 
-        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+        Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
 
         #if STAGING
             Client.environment = .staging
@@ -311,17 +311,6 @@ final class Bootstrapper {
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
-    }
-
-    // MARK: Certificate
-
-    func rsa4096Certificate() -> String? {
-        #if os(iOS)
-            return AppPreferences.shared.piaHandshake.pemString()
-        #else
-            // FIXME: Implement for tvOS
-            return nil
-        #endif
     }
 
     // MARK: Notifications

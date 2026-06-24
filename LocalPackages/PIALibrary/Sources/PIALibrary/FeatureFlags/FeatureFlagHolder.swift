@@ -47,11 +47,9 @@ public final class FeatureFlagHolder: Sendable {
     public subscript(_ flag: FeatureFlag) -> Bool {
         // TODO: [PlatformSDK] Temporary — force the PlatformSDK tunnel on regardless
         // of the server-provided flags. Remove to restore CSI-driven behaviour.
-        #if os(iOS)
-            if flag == .usePlatformSDKVPN {
-                return true
-            }
-        #endif
+        if flag == .usePlatformSDKVPN {
+            return true
+        }
         return flags.withLock { flags in
             flags.contains(flag)
         }

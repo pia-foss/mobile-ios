@@ -15,6 +15,7 @@ enum SettingsDestinations: Destinations {
     case account
     case general
     case dip
+    case protocols
 }
 
 extension View {
@@ -32,6 +33,9 @@ extension View {
                 EmptyView()
             case .dip:
                 DedicatedIPFactory.makeDedicatedIPView()
+            case .protocols:
+                SettingsFactory.makeProtocolSelectionView()
+                    .withTopNavigationBar(title: L10n.Menu.Item.settings, subtitle: L10n.Settings.Section.protocols)
             }
         }
     }

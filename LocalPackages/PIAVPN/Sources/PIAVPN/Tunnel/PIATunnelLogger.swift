@@ -29,7 +29,7 @@ import os
 /// attach to. `os.Logger` routes to the unified log, which you can read live
 /// while hooked into the tunnel process via Console.app or:
 ///
-///     log stream --predicate 'subsystem == "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel"' --level debug
+///     log stream --predicate 'subsystem == "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS"' --level debug
 ///
 /// Each logger instance uses its `label` as the os_log category, so you can
 /// further filter by category in Console.app.

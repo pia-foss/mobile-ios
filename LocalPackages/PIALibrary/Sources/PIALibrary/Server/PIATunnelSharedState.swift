@@ -182,7 +182,8 @@ public enum PIATunnelSharedState {
 
     /// Writes the shared state to the App Group container (atomically).
     public static func write(_ state: State, appGroup: String) {
-        guard let url = containerURL(appGroup: appGroup),
+        guard
+            let url = containerURL(appGroup: appGroup),
             let data = try? JSONEncoder().encode(state)
         else {
             return
@@ -191,8 +192,23 @@ public enum PIATunnelSharedState {
     }
 
     private static func containerURL(appGroup: String) -> URL? {
-        FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: appGroup)?
-            .appendingPathComponent(fileName)
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            return nil
+        }
+
+        let baseURL: URL
+
+        #if os(tvOS)
+            // On tvOS only the Library/Caches subdirectory is shareable/writable
+            // between the app and the network extension.
+            baseURL =
+                container
+                .appendingPathComponent("Library", isDirectory: true)
+                .appendingPathComponent("Caches", isDirectory: true)
+        #else
+            baseURL = container
+        #endif
+
+        return baseURL.appendingPathComponent(fileName)
     }
 }
