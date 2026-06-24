@@ -32,19 +32,13 @@ private let log = PIALogger.logger(for: AutolayoutViewController.self)
 
 final class RegionsViewController: AutolayoutViewController {
 
-    private enum Section: Int {
-
+    private enum Section: Int, CaseIterable {
         case automatic = 0
         case dip
         case regions
-
-        static func numberOfSections() -> Int {
-            return 3
-        }
-
     }
 
-    private struct Cells {
+    private enum Cells {
         static let region = "RegionCell"
         static let dedicatedRegion = "DedicatedRegionCell"
     }
@@ -57,9 +51,10 @@ final class RegionsViewController: AutolayoutViewController {
     private var servers: [Server] = []
     private var filteredServers = [Server]()
     private var selectedServer: Server!
+    private var refreshBarButton: UIBarButtonItem?
     private var refreshControl = UIRefreshControl()
 
-    let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -100,11 +95,13 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func setupPullToRefresh() {
-        refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        #if !targetEnvironment(macCatalyst)
+            refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        #endif
     }
 
-    @objc func refreshLatency(_ sender: Any) {
+    @objc private func refreshLatency(_ sender: Any) {
 
         refreshControl.endRefreshing()
 
@@ -118,6 +115,7 @@ final class RegionsViewController: AutolayoutViewController {
             return
         }
 
+        refreshBarButton?.isEnabled = false
         gradientProgressBar.setProgress(0.5, animated: true)
 
         Task { @MainActor [weak self] in
@@ -133,13 +131,27 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func setupRightBarButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        let filterButton = UIBarButtonItem(
             image: Asset.Piax.Global.iconFilter.image,
             style: .plain,
             target: self,
             action: #selector(showFilter(_:))
         )
-        navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Region.Accessibility.filter
+        filterButton.accessibilityLabel = L10n.Region.Accessibility.filter
+
+        // Mac has no pull-to-refresh, so expose the latency refresh as a navigation bar button.
+        if Platform.isRunningOnMac {
+            let refreshButton = UIBarButtonItem(
+                image: UIImage(systemName: "arrow.clockwise"),
+                style: .plain,
+                target: self,
+                action: #selector(refreshLatency(_:))
+            )
+            refreshBarButton = refreshButton
+            navigationItem.rightBarButtonItems = [filterButton, refreshButton]
+        } else {
+            navigationItem.rightBarButtonItem = filterButton
+        }
     }
 
     override func dismissModal(completion: (() -> Void)? = nil) {
@@ -154,10 +166,14 @@ final class RegionsViewController: AutolayoutViewController {
 
     private func setupSearchBarController() {
         searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = L10n.Region.Search.placeholder
 
         navigationItem.searchController = searchController
+        if #available(iOS 26.0, *) {
+            navigationItem.preferredSearchBarPlacement = .integratedButton
+        }
         definesPresentationContext = true
     }
 
@@ -190,6 +206,8 @@ final class RegionsViewController: AutolayoutViewController {
         }
 
     }
+
+    override var disablesAutomaticKeyboardDismissal: Bool { true }
 
     // MARK: Actions
     @objc private func showFilter(_ sender: Any?) {
@@ -264,6 +282,7 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func completePingProgress() {
+        refreshBarButton?.isEnabled = true
         gradientProgressBar.setProgress(1.0, animated: true)
         DispatchQueue.main.asyncAfter(
             deadline: .now() + AppConfiguration.Animations.duration,
@@ -287,11 +306,9 @@ final class RegionsViewController: AutolayoutViewController {
             Theme.current.applyRegionSolidLightBackground(view)
             Theme.current.applyRegionSolidLightBackground(viewContainer)
         }
-        searchController.view.backgroundColor = .clear
 
         Theme.current.applyRegionSolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
-        Theme.current.applySearchBarStyle(searchController.searchBar)
         Theme.current.applyRefreshControlStyle(refreshControl)
 
         let bgView = UIView()
@@ -305,43 +322,46 @@ final class RegionsViewController: AutolayoutViewController {
 extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.numberOfSections()
+        return Section.allCases.count
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 1 && !isFiltering() ? 20 : 0
+        let count = self.tableView(tableView, numberOfRowsInSection: section)
+        guard section < numberOfSections(in: tableView) - 1, count > 0 else { return 0 }
+        return 2
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 20))
-        footerView.backgroundColor = Theme.current.palette.secondaryColor
-        return footerView
+        let height = self.tableView(tableView, heightForFooterInSection: section)
+        guard height > 0 else { return nil }
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: height))
+        view.backgroundColor = Theme.current.palette.divider
+        return view
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            //automatic
+        switch Section(rawValue: section) {
+        case .automatic:
             return isFiltering() ? 0 : 1
-        } else if section == 1 {
-            //dip
+        case .dip:
             let dipTokens = Client.providers.serverProvider.dipTokens ?? []
             if isFiltering() {
                 return filteredServers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) }).count
             }
             return servers.filter({ $0.dipToken != nil && dipTokens.contains($0.dipToken!) }).count
-        } else {
+        case .regions:
             if isFiltering() {
                 return filteredServers.filter({ $0.dipToken == nil }).count
             }
             return servers.filter({ $0.dipToken == nil }).count
-
+        case .none:
+            return 0
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch indexPath.section {
-        case Section.automatic.rawValue:
+        switch Section(rawValue: indexPath.section) {
+        case .automatic:
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
             cell.selectionStyle = .none
             cell.separatorInset = .zero
@@ -349,7 +369,8 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             let isSelected = (server.identifier == selectedServer.identifier)
             cell.fill(withServer: server, isSelected: isSelected)
             return cell
-        case Section.dip.rawValue:
+
+        case .dip:
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.dedicatedRegion, for: indexPath) as! DedicatedRegionCell
             cell.selectionStyle = .none
             cell.separatorInset = .zero
@@ -369,6 +390,7 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.fill(withServer: dipServer, isSelected: isSelected)
             }
             return cell
+
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
             cell.selectionStyle = .none
@@ -386,7 +408,6 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
 
             return cell
         }
-
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

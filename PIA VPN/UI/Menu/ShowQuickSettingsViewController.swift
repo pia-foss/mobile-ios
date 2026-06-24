@@ -63,6 +63,7 @@ final class ShowQuickSettingsViewController: AutolayoutViewController {
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.0
+        tableView.rowHeight = 51
 
         switchThemeSettings.addTarget(self, action: #selector(toggleThemeSetting), for: .valueChanged)
         switchKillSwitchSetting.addTarget(self, action: #selector(toggleKillSwitchSetting), for: .valueChanged)
@@ -185,24 +186,28 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
                 cell.settingImage.image = Asset.Piax.Global.themeInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
                 switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
+                switchThemeSettings.preferredStyle = .sliding
             case .killswitch:
                 cell.titleLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
                 cell.accessoryView = switchKillSwitchSetting
                 cell.settingImage.image = Asset.Piax.Global.killswitchInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.KillSwitch.title
                 switchKillSwitchSetting.isOn = AppPreferences.shared.quickSettingKillswitchVisible
+                switchKillSwitchSetting.preferredStyle = .sliding
             case .networkTools:
                 cell.titleLabel.text = L10n.Tiles.Quicksetting.Automation.title
                 cell.accessoryView = switchNetworkToolsSetting
                 cell.settingImage.image = Asset.Piax.Global.nmtInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Automation.title
                 switchNetworkToolsSetting.isOn = AppPreferences.shared.quickSettingNetworkToolVisible
+                switchNetworkToolsSetting.preferredStyle = .sliding
             case .privateBrowsing:
                 cell.titleLabel.text = L10n.Tiles.Quicksetting.Private.Browser.title
                 cell.accessoryView = switchPrivateBrowserSetting
                 cell.settingImage.image = Asset.Piax.Global.browserInactive.image
                 cell.settingImage.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
                 switchPrivateBrowserSetting.isOn = AppPreferences.shared.quickSettingPrivateBrowserVisible
+                switchPrivateBrowserSetting.preferredStyle = .sliding
             }
             Theme.current.applySettingsCellTitle(
                 cell.titleLabel,

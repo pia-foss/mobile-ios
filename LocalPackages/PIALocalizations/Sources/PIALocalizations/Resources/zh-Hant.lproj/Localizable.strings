@@ -3,6 +3,7 @@
 "global.ok" = "確認";
 "global.cancel" = "取消";
 "global.close" = "關閉";
+"global.done" = "完成";
 "global.error" = "錯誤";
 "global.automatic" = "自動";
 "global.required" = "必須";

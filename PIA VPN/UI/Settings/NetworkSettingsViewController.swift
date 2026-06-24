@@ -36,16 +36,14 @@ protocol DNSSettingsDelegate: AnyObject {
 
 }
 
-class NetworkSettingsViewController: PIABaseSettingsViewController {
+final class NetworkSettingsViewController: PIABaseSettingsViewController {
 
-    @IBOutlet weak var tableView: UITableView!
     private var controller: OptionsViewController?
 
     private static let DNS: String = "DNS"
     private lazy var imvSelectedOption = UIImageView(image: Asset.accessorySelected.image)
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         tableView.sectionFooterHeight = UITableView.automaticDimension

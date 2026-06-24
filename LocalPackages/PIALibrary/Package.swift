@@ -7,7 +7,8 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
-        .tvOS(.v17)
+        .tvOS(.v17),
+        .macCatalyst(.v15)
     ],
     products: [
         .library(
@@ -38,10 +39,26 @@ let package = Package(
                 .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "PIARegions"),
                 .product(name: "PIAAccount", package: "PIAAccount"),
-                .product(name: "PIAWireguard", package: "mobile-ios-wireguard", condition: .when(platforms: [.iOS])),
-                .product(name: "TunnelKit", package: "mobile-ios-openvpn", condition: .when(platforms: [.iOS])),
-                .product(name: "TunnelKitOpenVPN", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),
-                .product(name: "TunnelKitOpenVPNAppExtension", package: "mobile-ios-openvpn", condition: TargetDependencyCondition.when(platforms: [.iOS])),
+                .product(
+                    name: "PIAWireguard",
+                    package: "mobile-ios-wireguard",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
+                .product(
+                    name: "TunnelKit",
+                    package: "mobile-ios-openvpn",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
+                .product(
+                    name: "TunnelKitOpenVPN",
+                    package: "mobile-ios-openvpn",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
+                .product(
+                    name: "TunnelKitOpenVPNAppExtension",
+                    package: "mobile-ios-openvpn",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
                 .product(name: "NWHttpConnection", package: "mobile-ios-networking")
             ],
             resources: [

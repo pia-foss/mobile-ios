@@ -3,6 +3,7 @@
 "global.ok" = "확인";
 "global.cancel" = "취소";
 "global.close" = "닫기";
+"global.done" = "완료";
 "global.error" = "오류";
 "global.automatic" = "자동";
 "global.required" = "필수";

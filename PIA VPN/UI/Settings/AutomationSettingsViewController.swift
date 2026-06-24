@@ -27,17 +27,16 @@ import UIKit
 
 private let log = PIALogger.logger(for: AutomationSettingsViewController.self)
 
-class AutomationSettingsViewController: PIABaseSettingsViewController {
+final class AutomationSettingsViewController: PIABaseSettingsViewController {
 
-    @IBOutlet weak var tableView: UITableView!
     private lazy var switchEnableNMT = UISwitch()
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         self.setupTableView()
         switchEnableNMT.addTarget(self, action: #selector(toggleNMT(_:)), for: .valueChanged)
+        switchEnableNMT.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }

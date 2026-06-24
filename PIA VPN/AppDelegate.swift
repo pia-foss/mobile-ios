@@ -44,7 +44,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
-    private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    #if !targetEnvironment(macCatalyst)
+        private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
+    #endif
     var cancellables = Set<AnyCancellable>()
 
     deinit {
@@ -60,7 +62,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         hotspotHelper = PIAHotspotHelper()
         _ = hotspotHelper.configureHotspotHelper()
 
-        instantiateLiveActivityManagerIfNeeded()
+        #if !targetEnvironment(macCatalyst)
+            instantiateLiveActivityManagerIfNeeded()
+        #endif
 
         setupDebugMenuObserver()
 
@@ -71,22 +75,28 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
-    private func instantiateLiveActivityManagerIfNeeded() {
-        if #available(iOS 16.2, *) {
-            // Only instantiates the LiveActivities if the Feature Flag for it is enabled
-            guard AppPreferences.shared.showDynamicIslandLiveActivity else {
-                liveActivityManager = nil
-                return
-            }
+    #if !targetEnvironment(macCatalyst)
+        private func instantiateLiveActivityManagerIfNeeded() {
+            if #available(iOS 16.2, *) {
+                // Only instantiates the LiveActivities if the Feature Flag for it is enabled
+                guard AppPreferences.shared.showDynamicIslandLiveActivity else {
+                    liveActivityManager = nil
+                    return
+                }
 
-            liveActivityManager = PIAConnectionLiveActivityManager.shared
+                liveActivityManager = PIAConnectionLiveActivityManager.shared
+            }
         }
-    }
+    #endif
 
     func applicationWillTerminate(_ application: UIApplication) {
         Bootstrapper.shared.dispose()
 
-        liveActivityManager?.endLiveActivities()
+        #if !targetEnvironment(macCatalyst)
+            Task { [weak self] in
+                await self?.liveActivityManager?.endLiveActivities()
+            }
+        #endif
     }
 
     // MARK: Orientations
@@ -248,7 +258,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Remove the Non compliant Wifi local notification as the app is in foreground now
         Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
 
-        instantiateLiveActivityManagerIfNeeded()
+        #if !targetEnvironment(macCatalyst)
+            instantiateLiveActivityManagerIfNeeded()
+        #endif
 
         let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
 
