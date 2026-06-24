@@ -191,6 +191,12 @@ public enum PIATunnelSharedState {
         try? data.write(to: url, options: .atomic)
     }
 
+    /// Deletes the shared state file from the App Group container (e.g. on logout).
+    public static func delete(appGroup: String) {
+        guard let url = containerURL(appGroup: appGroup) else { return }
+        try? FileManager.default.removeItem(at: url)
+    }
+
     private static func containerURL(appGroup: String) -> URL? {
         guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
             return nil

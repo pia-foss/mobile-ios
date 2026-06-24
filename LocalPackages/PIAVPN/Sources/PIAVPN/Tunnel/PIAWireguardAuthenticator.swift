@@ -159,7 +159,8 @@ private final class PinnedCertificateDelegate: NSObject, URLSessionDelegate, Sen
         var trust: SecTrust?
         guard SecTrustCreateWithCertificates(leafCertificate, SecPolicyCreateSSL(true, nil), &trust) == errSecSuccess,
             let trust,
-            SecTrustSetAnchorCertificates(trust, [anchorCertificate] as CFArray) == errSecSuccess
+            SecTrustSetAnchorCertificates(trust, [anchorCertificate] as CFArray) == errSecSuccess,
+            SecTrustSetAnchorCertificatesOnly(trust, true) == errSecSuccess
         else {
             logger.error("Pinning failed: could not build trust for evaluation")
             completionHandler(.cancelAuthenticationChallenge, nil)
