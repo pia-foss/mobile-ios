@@ -24,7 +24,7 @@ import PIALibrary
 import UIKit
 
 /// Displays an `UITableView` with a list of dynamically rendered options.
-public class OptionsViewController: AutolayoutViewController, UITableViewDataSource, UITableViewDelegate {
+public final class OptionsViewController: AutolayoutViewController, UITableViewDataSource, UITableViewDelegate {
     private var tableView: UITableView!
 
     /// The list of options.
@@ -64,6 +64,7 @@ public class OptionsViewController: AutolayoutViewController, UITableViewDataSou
         tableView.backgroundColor = bgColor
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = SettingsViewController.rowHeight
 
         viewContainer.addSubview(tableView)
 

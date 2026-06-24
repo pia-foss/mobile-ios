@@ -26,12 +26,10 @@ import UIKit
 
 private let log = PIALogger.logger(for: GeneralSettingsViewController.self)
 
-class GeneralSettingsViewController: PIABaseSettingsViewController {
+final class GeneralSettingsViewController: PIABaseSettingsViewController {
 
     private lazy var switchGeoServers = UISwitch()
     private lazy var switchInAppMessages = UISwitch()
-
-    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +38,9 @@ class GeneralSettingsViewController: PIABaseSettingsViewController {
         tableView.estimatedSectionFooterHeight = 1.0
 
         switchGeoServers.addTarget(self, action: #selector(toggleGEOServers(_:)), for: .valueChanged)
+        switchGeoServers.preferredStyle = .sliding
         switchInAppMessages.addTarget(self, action: #selector(toggleShowServiceMessages(_:)), for: .valueChanged)
+        switchInAppMessages.preferredStyle = .sliding
 
         tableView.delegate = self
         tableView.dataSource = self

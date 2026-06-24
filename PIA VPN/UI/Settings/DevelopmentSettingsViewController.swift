@@ -26,11 +26,10 @@
 
     private let log = PIALogger.logger(for: DevelopmentSettingsViewController.self)
 
-    class DevelopmentSettingsViewController: PIABaseSettingsViewController {
+    final class DevelopmentSettingsViewController: PIABaseSettingsViewController {
 
         private let dnsResolverURL = "google-analytics.com"
 
-        @IBOutlet weak var tableView: UITableView!
         private lazy var switchEnvironment = UISwitch()
         private lazy var switchLeakProtectionFlag = UISwitch()
         private lazy var switchLeakProtectionNotificationsFlag = UISwitch()
@@ -38,7 +37,6 @@
         private var controller: OptionsViewController?
 
         override func viewDidLoad() {
-
             super.viewDidLoad()
 
             tableView.sectionFooterHeight = UITableView.automaticDimension

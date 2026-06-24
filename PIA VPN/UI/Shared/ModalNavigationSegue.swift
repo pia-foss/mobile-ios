@@ -48,7 +48,7 @@ final class ModalNavigationSegue: UIStoryboardSegue {
             withTintColor: nil,
             andBarTintColors: nil)
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UserInterface.isIpadOrMac {
             nav.modalPresentationStyle = .formSheet
             nav.isModalInPresentation = true
         } else {

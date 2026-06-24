@@ -905,7 +905,7 @@ You will not be charged during this process.</string>
                                             <outlet property="delegate" destination="J5T-ys-Of8" id="YX4-lH-rTX"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIAUIKit">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oE-jf-tjX" customClass="PIAButton" customModule="PIAUIKit">
                                         <rect key="frame" x="19" y="446" width="337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="prf-nD-f8g"/>

@@ -3,6 +3,7 @@
 "global.ok" = "موافق";
 "global.cancel" = "إلغاء";
 "global.close" = "إغلاق";
+"global.done" = "تم";
 "global.error" = "خطأ";
 "global.automatic" = "تلقائي";
 "global.required" = "مطلوب";

@@ -3,6 +3,7 @@
 "global.ok" = "ตกลง";
 "global.cancel" = "ยกเลิก";
 "global.close" = "ปิด";
+"global.done" = "เสร็จสิ้น";
 "global.error" = "ข้อผิดพลาด";
 "global.automatic" = "อัตโนมัติ";
 "global.required" = "จำเป็น";

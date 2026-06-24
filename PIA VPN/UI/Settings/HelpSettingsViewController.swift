@@ -27,9 +27,9 @@ import UIKit
 
 private let log = PIALogger.logger(for: HelpSettingsViewController.self)
 
-class HelpSettingsViewController: PIABaseSettingsViewController {
+final class HelpSettingsViewController: PIABaseSettingsViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+
     private lazy var switchDebugLogging = UISwitch()
     private lazy var switchShareServiceQualityData = UISwitch()
 
@@ -39,7 +39,6 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
     }
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         tableView.sectionFooterHeight = UITableView.automaticDimension
@@ -49,8 +48,10 @@ class HelpSettingsViewController: PIABaseSettingsViewController {
         tableView.dataSource = self
 
         switchDebugLogging.addTarget(self, action: #selector(toggleDebugLogging(_:)), for: .valueChanged)
+        switchDebugLogging.preferredStyle = .sliding
 
         switchShareServiceQualityData.addTarget(self, action: #selector(toggleShareServiceQualityData(_:)), for: .valueChanged)
+        switchShareServiceQualityData.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
     }

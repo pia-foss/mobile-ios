@@ -52,8 +52,20 @@ final class RootCoordinator: NSObject {
         {
             self.dashboardNavigationController = initialNav
         }
+        configureMacCatalystTitlebar(for: window)
         let initialState: AppRoot = Client.providers.accountProvider.isLoggedIn ? .main : .login
         setRoot(initialState)
+    }
+
+    private func configureMacCatalystTitlebar(for window: UIWindow) {
+        #if targetEnvironment(macCatalyst)
+            let windowScene =
+                window.windowScene
+                ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
+            guard let titlebar = windowScene?.titlebar else { return }
+            titlebar.titleVisibility = .hidden
+            titlebar.toolbarStyle = .unified
+        #endif
     }
 
     func setRoot(_ root: AppRoot) {
@@ -79,9 +91,9 @@ final class RootCoordinator: NSObject {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        if UserInterface.isIpad {
+        if UserInterface.isIpadOrMac {
             let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-            let split = UISplitViewController(style: .doubleColumn)
+            let split = AdaptiveSplitViewController(style: .doubleColumn)
             split.preferredDisplayMode = .oneBesideSecondary
             split.preferredSplitBehavior = .tile
             split.presentsWithGesture = true

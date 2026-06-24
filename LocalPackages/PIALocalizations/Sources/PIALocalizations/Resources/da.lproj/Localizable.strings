@@ -3,6 +3,7 @@
 "global.ok" = "OK";
 "global.cancel" = "Annuller";
 "global.close" = "Luk";
+"global.done" = "Færdig";
 "global.error" = "Fejl";
 "global.automatic" = "Automatisk";
 "global.required" = "Påkrævet";

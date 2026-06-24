@@ -14,6 +14,10 @@ public struct UserInterface {
         UIDevice.current.userInterfaceIdiom == .pad
     }
 
+    public static var isIpadOrMac: Bool {
+        return isIpad || Platform.isRunningOnMac
+    }
+
     public static var isPhone: Bool {
         UIDevice.current.userInterfaceIdiom == .phone
     }

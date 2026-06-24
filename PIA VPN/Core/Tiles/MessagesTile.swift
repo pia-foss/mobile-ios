@@ -24,7 +24,7 @@ import PIALibrary
 import PIAUIKit
 import UIKit
 
-class MessagesTile: UIView, Tileable {
+final class MessagesTile: UIView, Tileable {
 
     var view: UIView!
     var detailSegueIdentifier: String!
@@ -36,6 +36,7 @@ class MessagesTile: UIView, Tileable {
 
     @IBOutlet private weak var messageTextView: UITextView!
     @IBOutlet private weak var alertIcon: UIImageView!
+    @IBOutlet private weak var closeButtonIcon: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,6 +60,7 @@ class MessagesTile: UIView, Tileable {
 
         viewShouldRestyle()
         self.alertIcon.image = Asset.iconAlert.image.withRenderingMode(.alwaysTemplate)
+        self.closeButtonIcon.image = Asset.iconClose.image
 
         if let message = MessagesManager.shared.availableMessage(), let _ = message.linkMessage {
             let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
@@ -88,6 +90,7 @@ class MessagesTile: UIView, Tileable {
                 link: message.localisedLink()
             )
             self.messageTextView.textAlignment = .left
+
             if message.level == .api {
                 self.alertIcon.tintColor = UIColor.piaGreen
                 Theme.current.applyMessageLinkAttributes(messageTextView, withColor: UIColor.piaGreen)
