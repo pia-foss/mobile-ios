@@ -63,7 +63,6 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     /// :nodoc:
     public func prepare() {
         accessedDatabase.transient.isNetworkReachable = true
-        accessedDatabase.transient.isInternetReachable = true
         accessedDatabase.plain.publicIP = mockPublicIP
         accessedDatabase.transient.vpnIP = mockVpnIP
 
@@ -111,7 +110,7 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     }
 
     /// :nodoc:
-    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+    public func reconnect(forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         let disconnectionDelay: Int
         //        if (vpnStatus == .changingServer) {
         //            disconnectionDelay = 1000
@@ -124,7 +123,7 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
             self.vpnStatus = .disconnected
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
 
-            Macros.dispatch(after: .milliseconds(delay ?? self.accessedConfiguration.vpnReconnectionDelay)) {
+            Macros.dispatch(after: .milliseconds(self.accessedConfiguration.vpnReconnectionDelay)) {
                 self.vpnStatus = .connected
                 Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
                 callback?(nil)

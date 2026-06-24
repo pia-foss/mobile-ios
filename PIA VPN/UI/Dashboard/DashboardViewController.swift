@@ -474,8 +474,11 @@ final class DashboardViewController: AutolayoutViewController {
 
     @objc private func checkVPNConnectingStatus(notification: Notification) {
         if let attempt = notification.object as? Int {
+            let oldStatus = connectingStatus
             connectingStatus = DashboardVPNConnectingStatus(rawValue: attempt) ?? .stillLoading
-            updateCurrentStatus()
+            if connectingStatus != oldStatus {
+                updateCurrentStatus()
+            }
         }
     }
 
@@ -717,10 +720,7 @@ final class DashboardViewController: AutolayoutViewController {
 
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(
-                    after: nil, forceDisconnect: true,
-                    { error in
-                    })
+                Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
             }
 
             // later -> close
@@ -1469,7 +1469,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
                 let liveActivityManager = appDelegate.liveActivityManager
             else { return }
             let connState = makeLiveActivityStateForCurrentConnection()
-            liveActivityManager.startLiveActivity(with: connState)
+            Task {
+                await liveActivityManager.startLiveActivity(with: connState)
+            }
         }
 
         @available(iOS 16.2, *)
@@ -1477,7 +1479,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                 let liveActivityManager = appDelegate.liveActivityManager
             else { return }
-            liveActivityManager.endLiveActivities()
+            Task {
+                await liveActivityManager.endLiveActivities()
+            }
         }
     }
 #endif
