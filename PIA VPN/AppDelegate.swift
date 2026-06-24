@@ -85,8 +85,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         Bootstrapper.shared.dispose()
-
-        liveActivityManager?.endLiveActivities()
+        Task { [weak self] in
+            await self?.liveActivityManager?.endLiveActivities()
+        }
     }
 
     // MARK: Orientations

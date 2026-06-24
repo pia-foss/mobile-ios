@@ -151,7 +151,7 @@ class PIAHotspotHelper {
 
                                 if Client.providers.vpnProvider.isVPNConnected {
                                     log.info("HotspotHelper: VPN already connected, reconnecting")
-                                    Client.providers.vpnProvider.reconnect(after: 0, forceDisconnect: true, nil)
+                                    Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
                                 } else {
                                     log.info("HotspotHelper: VPN disconnected, connecting")
                                     Client.providers.vpnProvider.connect(nil)
