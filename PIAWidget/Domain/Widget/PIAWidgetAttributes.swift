@@ -1,15 +1,19 @@
-import ActivityKit
-import Foundation
+#if !targetEnvironment(macCatalyst)
 
-public struct PIAConnectionAttributes: ActivityAttributes {
-    public typealias PIAConnectionStatus = ContentState
+    import ActivityKit
+    import Foundation
 
-    public struct ContentState: Codable, Hashable {
-        var connected: Bool
-        var regionName: String
-        var regionFlag: String
-        var vpnProtocol: String
+    public struct PIAConnectionAttributes: ActivityAttributes {
+        public typealias PIAConnectionStatus = ContentState
+
+        public struct ContentState: Codable, Hashable {
+            var connected: Bool
+            var regionName: String
+            var regionFlag: String
+            var vpnProtocol: String
+
+        }
 
     }
 
-}
+#endif

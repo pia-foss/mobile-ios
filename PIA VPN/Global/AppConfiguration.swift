@@ -68,7 +68,13 @@ struct AppConfiguration {
             case production = 3600  // 1 hour
         }
 
-        static let profileName = "Private Internet Access"
+        static let profileName: String = {
+            var name = "Private Internet Access"
+            #if DEVELOPMENT
+                name += " (DEV)"
+            #endif
+            return name
+        }()
 
         #if os(iOS)
             static let piaDefaultConfigurationBuilder: OpenVPNProvider.ConfigurationBuilder = {

@@ -32,6 +32,7 @@ import WidgetKit
 private let log = PIALogger.logger(for: SettingsViewController.self)
 
 final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
+    static let rowHeight: CGFloat = 51
 
     private struct Cells {
         static let setting = "SettingCell"
@@ -64,6 +65,8 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.rowHeight = Self.rowHeight
 
         reloadSettings()
 
@@ -312,7 +315,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
                 self.pendingVPNAction = nil
 
                 if shouldReconnect && !isDisconnected {
-                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true) { (error) in
+                    Client.providers.vpnProvider.reconnect(forceDisconnect: true) { _ in
                         completionHandler()
                         self.hideLoadingAnimation()
                     }

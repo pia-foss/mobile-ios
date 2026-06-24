@@ -3,6 +3,7 @@
 "global.ok" = "Tamam";
 "global.cancel" = "İptal";
 "global.close" = "Kapat";
+"global.done" = "Bitti";
 "global.error" = "Hata";
 "global.automatic" = "Otomatik";
 "global.required" = "Gerekli";

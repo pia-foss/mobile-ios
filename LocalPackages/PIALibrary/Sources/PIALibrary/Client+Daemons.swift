@@ -33,11 +33,6 @@ extension Client {
             return accessedDatabase.transient.isNetworkReachable
         }
 
-        /// It's `true` when the Internet is reachable.
-        public var isInternetReachable: Bool {
-            return accessedDatabase.transient.isInternetReachable
-        }
-
         /// The public IP address while not on VPN.
         public var publicIP: String? {
             return accessedDatabase.plain.publicIP

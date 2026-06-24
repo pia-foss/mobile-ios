@@ -70,6 +70,7 @@ final class DashboardViewController: AutolayoutViewController {
     @IBOutlet private weak var viewRows: UIView!
 
     @IBOutlet private weak var collectionView: UICollectionView!
+    private var navigationTitleLabel: UILabel? = nil
 
     private var currentPageIndex = 0
     private var isDisconnecting = false
@@ -77,9 +78,11 @@ final class DashboardViewController: AutolayoutViewController {
 
     private var currentStatus: VPNStatus = .disconnected {
         didSet {
-            if #available(iOS 16.2, *) {
-                startConnectionLiveActivityIfNeeded()
-            }
+            #if !targetEnvironment(macCatalyst)
+                if #available(iOS 16.2, *) {
+                    startConnectionLiveActivityIfNeeded()
+                }
+            #endif
         }
     }
     private var connectingStatus: DashboardVPNConnectingStatus = .none
@@ -101,12 +104,12 @@ final class DashboardViewController: AutolayoutViewController {
         // by default use the time we know we established the connection
         if let lastVPNConnectionSuccess = Client.preferences.lastVPNConnectionSuccess {
             connectionTime = now - lastVPNConnectionSuccess
-        // as fallback use system connected time and use that as connection success
+            // as fallback use system connected time and use that as connection success
         } else if let connectedDate = Client.providers.vpnProvider.connectedDate {
             let timeInterval = connectedDate.timeIntervalSince1970
             Client.preferences.lastVPNConnectionSuccess = timeInterval
             connectionTime = now - timeInterval
-        // last resort store current time because we know status is connected
+            // last resort store current time because we know status is connected
         } else if isConnected {
             Client.preferences.lastVPNConnectionSuccess = now
             connectionTime = 0
@@ -366,45 +369,33 @@ final class DashboardViewController: AutolayoutViewController {
 
         switch self.tileModeStatus {  //change the status
         case .normal:
-            if let leftBarButton = navigationItem.leftBarButtonItem,
-                leftBarButton.accessibilityLabel != L10n.Global.cancel
-            {
-                leftBarButton.image = Asset.itemMenu.image
-                leftBarButton.action = #selector(openMenu(_:))
-            } else {
-                navigationItem.leftBarButtonItem = UIBarButtonItem(
-                    image: Asset.itemMenu.image,
-                    style: .plain,
-                    target: self,
-                    action: #selector(openMenu(_:))
-                )
-            }
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: Asset.itemMenu.image,
+                style: .plain,
+                target: self,
+                action: #selector(openMenu(_:))
+            )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
 
-            if navigationItem.rightBarButtonItem == nil {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(
-                    image: Asset.Piax.Global.iconEditTile.image,
-                    style: .plain,
-                    target: self,
-                    action: #selector(updateEditTileStatus(_:))
-                )
-                navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
-            }
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: Asset.Piax.Global.iconEditTile.image,
+                style: .plain,
+                target: self,
+                action: #selector(updateEditTileStatus(_:))
+            )
+            navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
 
         case .edit:
+            navigationItem.leftBarButtonItem = nil
 
-            navigationItem.leftBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .stop,
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: L10n.Global.done,
+                style: .plain,
                 target: self,
                 action: #selector(closeTileEditingMode(_:))
             )
-            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Global.cancel
-            navigationItem.leftBarButtonItem?.accessibilityIdentifier = nil
-            navigationItem.rightBarButtonItem = nil
-
         }
-
     }
 
     private func updateTileLayout() {
@@ -424,7 +415,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         // On iPad we swap the window root entirely instead of presenting login modally —
         // the persistent sidebar/dashboard split view is replaced with the login flow.
-        if UserInterface.isIpad {
+        if UserInterface.isIpadOrMac {
             RootCoordinator.shared.setRoot(.login)
             if isUnauthorized {
                 Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
@@ -496,17 +487,18 @@ final class DashboardViewController: AutolayoutViewController {
 
     @objc private func checkVPNConnectingStatus(notification: Notification) {
         if let attempt = notification.object as? Int {
+            let oldStatus = connectingStatus
             connectingStatus = DashboardVPNConnectingStatus(rawValue: attempt) ?? .stillLoading
-            updateCurrentStatus()
+            if connectingStatus != oldStatus {
+                updateCurrentStatus()
+            }
         }
     }
 
     @objc private func openMenu(_ sender: Any?) {
-        if let splitViewController {
-            let isHidden = splitViewController.displayMode == .secondaryOnly
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
-                splitViewController.preferredDisplayMode = isHidden ? .oneBesideSecondary : .secondaryOnly
-                splitViewController.view.layoutIfNeeded()
+        if let splitViewController = splitViewController as? AdaptiveSplitViewController {
+            splitViewController.toggleSidebar(duration: AppConfiguration.Animations.duration) { [weak view] in
+                view?.layoutIfNeeded()
             }
             return
         }
@@ -697,9 +689,11 @@ final class DashboardViewController: AutolayoutViewController {
     @objc private func accountDidLogout(notification: Notification) {
         AppPreferences.shared.todayWidgetVpnStatus = nil
         AppPreferences.shared.todayWidgetButtonTitle = L10n.Today.Widget.login
-        if #available(iOS 16.2, *) {
-            stopConnectionLiveActivity()
-        }
+        #if !targetEnvironment(macCatalyst)
+            if #available(iOS 16.2, *) {
+                stopConnectionLiveActivity()
+            }
+        #endif
         presentLogin()
     }
 
@@ -739,10 +733,7 @@ final class DashboardViewController: AutolayoutViewController {
 
             // reconnect -> reconnect VPN and close
             alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
-                Client.providers.vpnProvider.reconnect(
-                    after: nil, forceDisconnect: true,
-                    { error in
-                    })
+                Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
             }
 
             // later -> close
@@ -1050,9 +1041,11 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
-        if #available(iOS 16.2, *) {
-            startConnectionLiveActivityIfNeeded()
-        }
+        #if !targetEnvironment(macCatalyst)
+            if #available(iOS 16.2, *) {
+                startConnectionLiveActivityIfNeeded()
+            }
+        #endif
 
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
@@ -1089,7 +1082,6 @@ final class DashboardViewController: AutolayoutViewController {
             let titleLabelView = UILabel(frame: CGRect.zero)
             titleLabelView.style(style: TextStyle.textStyleNavigationBarTitle)
             titleLabelView.textColor = .white
-            // TODO: This string needs localization
             titleLabelView.text = L10n.Dashboard.Vpn.notProtected
             setNavBarTheme(.red, with: titleLabelView)
 
@@ -1143,7 +1135,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     }
 
-    private func setNavBarTheme(_ theme: NavBarTheme, with titleView: UIView) {
+    private func setNavBarTheme(_ theme: NavBarTheme, with titleLabel: UILabel) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
 
@@ -1171,13 +1163,27 @@ final class DashboardViewController: AutolayoutViewController {
                 )
             }
 
-            self.setNavBarTitleView(titleView: titleView)
+            self.setNavBar(titleLabel: titleLabel)
         }
     }
 
-    private func setNavBarTitleView(titleView: UIView) {
-        self.navigationItem.titleView = titleView
-        self.setNeedsStatusBarAppearanceUpdate()
+    private func setNavBar(titleLabel: UILabel) {
+        navigationTitleLabel = titleLabel
+        #if targetEnvironment(macCatalyst)
+            if #available(iOS 16.0, *) {
+                let title = UIBarButtonItem(customView: titleLabel)
+                if #available(macCatalyst 26.0, *) {
+                    title.hidesSharedBackground = true
+                }
+                let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
+                navigationItem.centerItemGroups = [titleGroup]
+            } else {
+                navigationItem.title = titleLabel.text
+            }
+        #else
+            navigationItem.titleView = titleLabel
+        #endif
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     private func reloadWidget() {
@@ -1227,11 +1233,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func updateConnectionTime() {
-        guard let titleLabel = self.navigationItem.titleView as? UILabel else {
-            return
-        }
-
-        titleLabel.text = formattedConnectionTime(isConnected: currentStatus == .connected)
+        navigationTitleLabel?.text = formattedConnectionTime(isConnected: currentStatus == .connected)
     }
 
     // MARK: Restylable
@@ -1245,7 +1247,6 @@ final class DashboardViewController: AutolayoutViewController {
         Theme.current.applyPrincipalBackground(viewRows)
 
         Theme.current.applyLightNavigationBar(navigationController!.navigationBar)
-
         Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()
@@ -1462,32 +1463,38 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
 // MARK: Live Activities
 
-extension DashboardViewController {
-    @available(iOS 16.2, *)
-    private func makeLiveActivityStateForCurrentConnection() -> PIAConnectionAttributes.ContentState {
-        let vpnProvider = Client.providers.vpnProvider
-        let currentServer = Client.preferences.displayedServer
+#if !targetEnvironment(macCatalyst)
+    extension DashboardViewController {
+        @available(iOS 16.2, *)
+        private func makeLiveActivityStateForCurrentConnection() -> PIAConnectionAttributes.ContentState {
+            let vpnProvider = Client.providers.vpnProvider
+            let currentServer = Client.preferences.displayedServer
 
-        let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
+            let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
 
-        let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
-        return state
+            let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
+            return state
+        }
+
+        @available(iOS 16.2, *)
+        private func startConnectionLiveActivityIfNeeded() {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                let liveActivityManager = appDelegate.liveActivityManager
+            else { return }
+            let connState = makeLiveActivityStateForCurrentConnection()
+            Task {
+                await liveActivityManager.startLiveActivity(with: connState)
+            }
+        }
+
+        @available(iOS 16.2, *)
+        private func stopConnectionLiveActivity() {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                let liveActivityManager = appDelegate.liveActivityManager
+            else { return }
+            Task {
+                await liveActivityManager.endLiveActivities()
+            }
+        }
     }
-
-    @available(iOS 16.2, *)
-    private func startConnectionLiveActivityIfNeeded() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let liveActivityManager = appDelegate.liveActivityManager
-        else { return }
-        let connState = makeLiveActivityStateForCurrentConnection()
-        liveActivityManager.startLiveActivity(with: connState)
-    }
-
-    @available(iOS 16.2, *)
-    private func stopConnectionLiveActivity() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let liveActivityManager = appDelegate.liveActivityManager
-        else { return }
-        liveActivityManager.endLiveActivities()
-    }
-}
+#endif

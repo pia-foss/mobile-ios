@@ -64,11 +64,11 @@ extension Client.Preferences {
                 // Before reconnecting, notify that the user is changing server
                 Macros.postNotification(.PIAVPNIsChangingServer)
                 if shouldReconnect {
-                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
+                    vpn.reconnect(forceDisconnect: true, nil)
                 }
             default:
                 if shouldReconnect {
-                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
+                    vpn.reconnect(forceDisconnect: true, nil)
                 }
             }
         #endif
