@@ -59,6 +59,10 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
             anchorCertificate: anchorCertificate, expectedCommonName: config.certDn, logger: logger)
         let session = URLSession(configuration: .ephemeral, delegate: delegate, delegateQueue: nil)
 
+        defer {
+            session.finishTasksAndInvalidate()
+        }
+
         logger.debug("Sending addKey request to \(host):\(config.authPort)")
         let resultData: Data
         do {

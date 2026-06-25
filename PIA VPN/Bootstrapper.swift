@@ -85,12 +85,19 @@ final class Bootstrapper {
                 PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier),
                 PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier)
             ]
+            let group = DispatchGroup()
             for profile in legacyProfiles {
-                profile.disconnect(nil)
-                profile.remove(nil)
+                group.enter()
+                profile.disconnect { _ in
+                    profile.remove { _ in
+                        group.leave()
+                    }
+                }
             }
 
-            AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+            group.notify(queue: .main) {
+                AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+            }
         }
     #endif
 

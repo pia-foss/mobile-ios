@@ -37,6 +37,7 @@ protocol ProtocolSelectionUseCaseType {
     func select(_ vpnProtocol: TvOSVPNProtocol)
 }
 
+@MainActor
 final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
 
     let availableProtocols: [TvOSVPNProtocol] = TvOSVPNProtocol.allCases
@@ -48,6 +49,7 @@ final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
     init(vpnConnectionUseCase: VpnConnectionUseCaseType, vpnStatusMonitor: VPNStatusMonitorType) {
         self.vpnConnectionUseCase = vpnConnectionUseCase
         vpnStatusMonitor.getStatus()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.currentStatus = $0 }
             .store(in: &cancellables)
     }

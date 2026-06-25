@@ -30,8 +30,7 @@ extension PIAEndpointRepository {
 
         logger.info("Found server \(server.name) with \(udpAddresses.count) UDP / \(tcpAddresses.count) TCP OpenVPN address(es)")
 
-        let udpPort = state.openVPNPort != 0 ? state.openVPNPort : Self.openVPNPortUDP
-        let tcpPort = state.openVPNPort != 0 ? state.openVPNPort : Self.openVPNPortTCP
+        let userPort = state.openVPNPort
 
         // Honor the user's transport choice; `.automatic` offers both UDP and TCP (UDP first,
         // then TCP via the SDK's demand-driven failover).
@@ -39,6 +38,22 @@ extension PIAEndpointRepository {
         let includeUDP = transport != .tcp
         let includeTCP = transport != .udp
         logger.info("OpenVPN transport: \(transport.rawValue) (UDP: \(includeUDP), TCP: \(includeTCP))")
+
+        // Apply the user's port override only to the selected transport. In `.automatic` mode
+        // the override applies to UDP (the primary transport); TCP keeps its default port.
+        let udpPort: UInt16
+        let tcpPort: UInt16
+        switch transport {
+        case .udp:
+            udpPort = userPort != 0 ? userPort : Self.openVPNPortUDP
+            tcpPort = Self.openVPNPortTCP
+        case .tcp:
+            udpPort = Self.openVPNPortUDP
+            tcpPort = userPort != 0 ? userPort : Self.openVPNPortTCP
+        case .automatic:
+            udpPort = userPort != 0 ? userPort : Self.openVPNPortUDP
+            tcpPort = Self.openVPNPortTCP
+        }
 
         var configurations: [any VpnConfiguration] = []
 

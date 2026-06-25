@@ -21,6 +21,8 @@
 
 import Foundation
 
+private let log = PIALogger.logger(for: PIATunnelSharedState.self)
+
 /// File-based shared state between the app and the PlatformSDK tunnel extension.
 ///
 /// Mirrors the Kape SDK's `KapeSharedState`: a single `Codable` `State` persisted as a JSON file
@@ -196,19 +198,37 @@ public enum PIATunnelSharedState {
 
     /// Writes the shared state to the App Group container (atomically).
     public static func write(_ state: State, appGroup: String) {
-        guard
-            let url = containerURL(appGroup: appGroup),
-            let data = try? JSONEncoder().encode(state)
-        else {
+        guard let url = containerURL(appGroup: appGroup) else {
+            log.error("Failed to write shared state: no container URL for app group \(appGroup)")
             return
         }
-        try? data.write(to: url, options: .atomic)
+        let data: Data
+        do {
+            data = try JSONEncoder().encode(state)
+        } catch {
+            log.error("Failed to encode shared state: \(error)")
+            return
+        }
+        do {
+            try data.write(to: url, options: .atomic)
+        } catch {
+            log.error("Failed to write shared state file at \(url.path): \(error)")
+        }
     }
 
     /// Deletes the shared state file from the App Group container (e.g. on logout).
     public static func delete(appGroup: String) {
-        guard let url = containerURL(appGroup: appGroup) else { return }
-        try? FileManager.default.removeItem(at: url)
+        guard let url = containerURL(appGroup: appGroup) else {
+            log.error("Failed to delete shared state: no container URL for app group \(appGroup)")
+            return
+        }
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch let error as NSError where error.domain == NSCocoaErrorDomain && error.code == NSFileNoSuchFileError {
+            // File not found is not an error — state was already cleared or never written.
+        } catch {
+            log.error("Failed to delete shared state file at \(url.path): \(error)")
+        }
     }
 
     private static func containerURL(appGroup: String) -> URL? {

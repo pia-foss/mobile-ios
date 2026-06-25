@@ -146,10 +146,11 @@ class BootstraperFactory {
         }
 
         let legacyProfile = IKEv2Profile()
-        legacyProfile.disconnect(nil)
-        legacyProfile.remove(nil)
-
-        AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+        legacyProfile.disconnect { _ in
+            legacyProfile.remove { _ in
+                AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+            }
+        }
     }
 
     private static func acceptDataSharing() {

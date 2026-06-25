@@ -131,6 +131,8 @@ if [ -n "$EXPECTED_SHA" ]; then
   ACTUAL_SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
   [ "$ACTUAL_SHA" = "$EXPECTED_SHA" ] || die "checksum mismatch: expected $EXPECTED_SHA, got $ACTUAL_SHA"
   echo "==> Checksum OK ($ACTUAL_SHA)"
+elif [ "${STRICT:-${CI:-}}" ]; then
+  die "no checksum in metadata; refusing to install unverified archive (STRICT=${STRICT:-}, CI=${CI:-})"
 else
   echo "==> WARNING: no checksum in metadata; skipping integrity verification" >&2
 fi

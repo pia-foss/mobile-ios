@@ -34,10 +34,11 @@ import PIALibrary
 open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     var sessionController: KapeSessionController?
+    private var startTask: Task<Void, Never>?
     private let logger = PIATunnelLogger(label: "PIAPacketTunnelProvider")
 
     open override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        Task {
+        startTask = Task {
             do {
                 try await start()
                 completionHandler(nil)
@@ -84,7 +85,10 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     open override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        startTask?.cancel()
         Task {
+            await startTask?.value
+            startTask = nil
             await sessionController?.stop()
             sessionController = nil
             completionHandler()

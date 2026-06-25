@@ -229,6 +229,10 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     public func disconnect(_ callback: SuccessLibraryCallback?) {
+        if let observer = waitObserver {
+            NotificationCenter.default.removeObserver(observer)
+            waitObserver = nil
+        }
         find { (vpn, error) in
             guard let vpn = vpn else {
                 callback?(error)
