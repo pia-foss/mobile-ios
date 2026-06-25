@@ -88,6 +88,10 @@ public enum PIATunnelSharedState {
         /// MTU for the OpenVPN tunnel. 1400 by default; 1350 when small packets is enabled.
         public var openVPNMtu: UInt16
 
+        /// Custom DNS resolvers for OpenVPN, in priority order (the user's Settings → Network
+        /// choice). Empty → let the server push its DNS (the PIA-default behaviour).
+        public var openVPNDnsServers: [String]
+
         /// MTU for the WireGuard tunnel. 1420 by default; 1280 when small packets is enabled.
         public var wireGuardMtu: UInt16
 
@@ -95,6 +99,10 @@ public enum PIATunnelSharedState {
         /// for a regular server, or the server's `dipUsername` for a Dedicated IP server. Passed via
         /// shared state because the extension can't reliably read account credentials at run time.
         public var wireGuardToken: String?
+
+        /// Custom DNS resolvers for WireGuard, in priority order (the user's Settings → Network
+        /// choice). Empty → the authenticator keeps the server-provided resolvers.
+        public var wireGuardDnsServers: [String]
 
         public init(
             selectedLocationId: String? = nil,
@@ -108,8 +116,10 @@ public enum PIATunnelSharedState {
             openVPNPort: UInt16 = 0,
             openVPNTransport: OpenVPNTransport = .automatic,
             openVPNMtu: UInt16 = UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize),
+            openVPNDnsServers: [String] = [],
             wireGuardMtu: UInt16 = UInt16(AppConstants.WireGuardPacketSize.highPacketSize),
-            wireGuardToken: String? = nil
+            wireGuardToken: String? = nil,
+            wireGuardDnsServers: [String] = []
         ) {
             self.selectedLocationId = selectedLocationId
             self.selectedDipToken = selectedDipToken
@@ -122,15 +132,17 @@ public enum PIATunnelSharedState {
             self.openVPNPort = openVPNPort
             self.openVPNTransport = openVPNTransport
             self.openVPNMtu = openVPNMtu
+            self.openVPNDnsServers = openVPNDnsServers
             self.wireGuardMtu = wireGuardMtu
             self.wireGuardToken = wireGuardToken
+            self.wireGuardDnsServers = wireGuardDnsServers
         }
 
         private enum CodingKeys: String, CodingKey {
             case selectedLocationId, selectedDipToken, servers, selectedProtocol
             case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
-            case openVPNPort, openVPNTransport, openVPNMtu
-            case wireGuardMtu, wireGuardToken
+            case openVPNPort, openVPNTransport, openVPNMtu, openVPNDnsServers
+            case wireGuardMtu, wireGuardToken, wireGuardDnsServers
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
@@ -147,8 +159,10 @@ public enum PIATunnelSharedState {
             openVPNPort = try container.decodeIfPresent(UInt16.self, forKey: .openVPNPort) ?? 0
             openVPNTransport = try container.decodeIfPresent(OpenVPNTransport.self, forKey: .openVPNTransport) ?? .automatic
             openVPNMtu = try container.decodeIfPresent(UInt16.self, forKey: .openVPNMtu) ?? UInt16(AppConstants.OpenVPNPacketSize.defaultPacketSize)
+            openVPNDnsServers = try container.decodeIfPresent([String].self, forKey: .openVPNDnsServers) ?? []
             wireGuardMtu = try container.decodeIfPresent(UInt16.self, forKey: .wireGuardMtu) ?? UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
             wireGuardToken = try container.decodeIfPresent(String.self, forKey: .wireGuardToken)
+            wireGuardDnsServers = try container.decodeIfPresent([String].self, forKey: .wireGuardDnsServers) ?? []
         }
 
         /// The server matching the resolved target within `servers`, if present.

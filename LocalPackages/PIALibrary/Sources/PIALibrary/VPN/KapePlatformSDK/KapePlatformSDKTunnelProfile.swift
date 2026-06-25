@@ -102,8 +102,10 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                     openVPNPort: openVPN.port,
                     openVPNTransport: openVPN.transport,
                     openVPNMtu: openVPN.mtu,
+                    openVPNDnsServers: openVPN.dnsServers,
                     wireGuardMtu: wireGuard.mtu,
-                    wireGuardToken: wireGuard.token
+                    wireGuardToken: wireGuard.token,
+                    wireGuardDnsServers: wireGuard.dnsServers
                 ),
                 appGroup: AppConstants.appGroup
             )
@@ -291,18 +293,42 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     // MARK: - Helpers
 
     /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
-    /// "PIA" (OpenVPN) maps to `.openVPN`; all other types (including "PIAWG") map to `.wireGuard`.
+    /// OpenVPN maps to `.openVPN`; all other types (including WireGuard) map to `.wireGuard`.
     /// The OpenVPN/WireGuard work runs in the PlatformSDK extension (Kape SDK), which supports both
     /// on iOS and tvOS — so this mapping is platform-agnostic and does not gate on `os(iOS)`.
     private func desiredTunnelProtocol() -> PIATunnelSharedState.TunnelProtocol {
-        switch Client.preferences.vpnType {
-        case "PIA":
+        switch KapePlatformSDKVPNType(rawValue: Client.preferences.vpnType) {
+        case .openVPN:
             return .openVPN
-        case "PIAWG":
+        case .wireGuard:
             return .wireGuard
-        default:
+        case nil:
             return .wireGuard
         }
+    }
+
+    /// The user's custom DNS resolvers for the given VPN type (the Settings → Network choice),
+    /// empty when they kept the PIA default (server-pushed DNS). iOS-only feature; tvOS has no UI.
+    ///
+    /// Read from the raw persisted custom-configuration map rather than the parsed
+    /// `VPNCustomConfiguration` so this does not depend on the legacy `PIAWireguard` /
+    /// `TunnelKitOpenVPN` types (which are being removed). The stored maps are plain
+    /// `[String: Any]`: WireGuard keeps a flat `customDNSServers`, while OpenVPN nests it under
+    /// `configuration.dnsServers` (the auto-synthesised `OpenVPN.ProviderConfiguration` Codable shape).
+    func customDnsServers(forVPNType vpnType: KapePlatformSDKVPNType) -> [String] {
+        guard let map = Client.database.plain.vpnCustomConfigurationMaps?[vpnType.rawValue] else {
+            return []
+        }
+
+        if let wireGuardDns = map["customDNSServers"] as? [String] {
+            return wireGuardDns
+        }
+
+        if let session = map["configuration"] as? [String: Any], let openVPNDns = session["dnsServers"] as? [String] {
+            return openVPNDns
+        }
+
+        return []
     }
 
     private func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {

@@ -203,7 +203,41 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 return
             }
 
-            if !isReconnecting {
+            // No internet while a connection was already in progress: keep trying
+            // indefinitely instead of giving up. Reaching this point means the previous
+            // status was not .disconnected, so a connection attempt (or an established
+            // connection) was underway. Force the status back to .connecting and keep
+            // the fallback timer alive — recreating it if it was already invalidated —
+            // so we reconnect as soon as the network becomes reachable again.
+            // Skipped when the user disconnected manually.
+            if !accessedDatabase.transient.isNetworkReachable,
+                !Client.configuration.disconnectedManually
+            {
+                // The PlatformSDK tunnel handles transient network loss internally via
+                // KapePathReconnector. For legacy protocols, force the status back to
+                // .connecting and keep the fallback timer alive.
+                guard !Client.configuration.featureFlags[.usePlatformSDKVPN] else {
+                    isReconnecting = false
+                    invalidateTimer()
+                    reset()
+                    return
+                }
+
+                log.debug("No internet while connecting — staying in .connecting and keeping the retry timer alive")
+                isReconnecting = true
+                scheduleFallbackTimerIfNeeded()
+
+                accessedDatabase.plain.lastKnownVpnStatus = .connecting
+                if previousStatus != .connecting {
+                    accessedDatabase.transient.vpnStatus = .connecting
+                }
+                return
+            }
+
+            // A manual disconnect must always tear down the retry loop, even mid-reconnect
+            // (isReconnecting == true), otherwise the fallback timer would keep firing and
+            // force the status back to .connecting after the user asked to disconnect.
+            if !isReconnecting || Client.configuration.disconnectedManually {
                 invalidateTimer()
                 reset()
             }
@@ -246,6 +280,12 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
             log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
 
+            // The PlatformSDK tunnel handles reconnection internally via KapePathReconnector.
+            // Skip all PIA-level disconnect-error handling: neither the mark-unavailable
+            // reconnect nor .PIAVPNDidFail (the Dashboard observes the latter and calls
+            // vpnProvider.disconnect, which would tear down the SDK tunnel mid-recovery).
+            guard !Client.configuration.featureFlags[.usePlatformSDKVPN] else { return }
+
             let errorDomain = lastDisconnectError.domain
             let errorCode = lastDisconnectError.code
             var connectivityCheckFailed = false
@@ -278,7 +318,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // IKEv2 connectivity check failure.
             // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
             // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
-            if #available(iOS 16, *), !Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            if #available(iOS 16, *) {
                 if errorDomain == NEVPNConnectionErrorDomain || errorDomain == "NEVPNConnectionErrorDomainPlugin" {
                     connectivityCheckFailed = true
                 }
@@ -305,6 +345,65 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
         } else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
+        }
+    }
+
+    // MARK: Fallback timer
+
+    /// Schedules the repeating reconnection timer if it is not already running.
+    /// The timer fires every `vpnConnectivityRetryDelay` seconds, marking the current
+    /// server as unavailable and attempting a reconnect. It keeps retrying while there
+    /// are attempts left, while there is no internet, or while recovering from a
+    /// connectivity failure; otherwise it gives up and disconnects.
+    private func scheduleFallbackTimerIfNeeded() {
+        guard fallbackTimer == nil else { return }
+        // The PlatformSDK tunnel handles reconnection internally via KapePathReconnector
+        // and KapeSessionController, which cycles through all configured endpoints.
+        // Avoid double-reconnecting by suppressing the PIA-level fallback timer.
+        guard !Client.configuration.featureFlags[.usePlatformSDKVPN] else { return }
+        log.debug("Setting up fallbackTimer...")
+
+        fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
+            guard let self else { return }
+            log.debug("Executing fallbackTimer...")
+
+            let address = try? Client.providers.serverProvider.targetServer.bestAddress()
+            address?.markServerAsUnavailable()
+
+            self.numberOfAttempts += 1
+
+            let shouldKeepTrying =
+                numberOfAttempts < Client.configuration.vpnConnectivityMaxAttempts
+                || !accessedDatabase.transient.isNetworkReachable
+                || isReconnectingAfterConnectivityFailure
+
+            if shouldKeepTrying {
+                log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
+                self.updateUIWithAttemptNumber(self.numberOfAttempts)
+                self.isReconnecting = true
+                Client.providers.vpnProvider.reconnect(forceDisconnect: true) { error in
+                    if let clientError = error as? ClientError, clientError == .internetUnreachable {
+                        self.isReconnecting = true
+                        self.isReconnectingAfterConnectivityFailure = true
+
+                    } else if error != nil {
+                        // Reconnect initiation failed — clear flag immediately so the
+                        // subsequent .disconnected status change can clean up normally.
+                        self.isReconnecting = false
+                    }
+                    // On success: leave isReconnecting=true. It will be cleared in
+                    // tryUpdateStatus when .connecting status arrives, ensuring that
+                    // the intermediate .disconnecting → .disconnected transitions do
+                    // not briefly expose vpnStatus = .disconnected to the rest of the app.
+                }
+            } else {
+                log.debug("Max number of VPN reconnections. Disconnecting...")
+                Client.providers.vpnProvider.disconnect { error in
+                    Macros.postNotification(.PIAVPNDidFail)
+                    self.reset()
+                    self.invalidateTimer()
+                }
+            }
         }
     }
 

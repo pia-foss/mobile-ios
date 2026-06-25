@@ -29,6 +29,8 @@ extension KapePlatformSDKTunnelProfile {
         /// Key-exchange token used by `PIAWireguardAuthenticator`: the account `vpnToken` for a
         /// regular server, or the server's `dipUsername` for a Dedicated IP server.
         let token: String?
+        /// User-selected custom DNS resolvers; empty → keep the server-provided resolvers.
+        let dnsServers: [String]
     }
 
     /// Builds the WireGuard settings from the small-packets toggle in app-group UserDefaults,
@@ -39,7 +41,12 @@ extension KapePlatformSDKTunnelProfile {
 
         // DIP uses `dipUsername` as the WireGuard token (mirrors PIAWGTunnelProfile).
         let token = server.dipToken != nil ? server.dipUsername : Client.providers.accountProvider.vpnToken
+        let dnsServers = customDnsServers(forVPNType: .wireGuard)
 
-        return WireGuardSettings(mtu: mtu, token: token)
+        return WireGuardSettings(
+            mtu: mtu,
+            token: token,
+            dnsServers: dnsServers
+        )
     }
 }

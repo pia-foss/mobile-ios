@@ -9,11 +9,12 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardAuthConfiguration {
         logger.info("Authenticating WireGuard key with server")
 
+        let sharedState = PIATunnelSharedState.read(appGroup: AppConstants.appGroup)
+
         // Prefer the token the app resolved at connect time (carried in shared state): the account
         // `vpnToken` for a regular server, or the server's `dipUsername` for a Dedicated IP server.
         // Fall back to the account token in case shared state predates this field.
-        let sharedToken = PIATunnelSharedState.read(appGroup: AppConstants.appGroup).wireGuardToken
-        guard let token = sharedToken ?? Client.providers.accountProvider.vpnToken else {
+        guard let token = sharedState.wireGuardToken ?? Client.providers.accountProvider.vpnToken else {
             logger.error("No VPN token available — cannot authenticate")
             throw PIAWireguardAuthError.noToken
         }
@@ -75,15 +76,23 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
 
         logger.info("WireGuard authentication succeeded (peer ip: \(response.peer_ip))")
 
-        // Pass the server-provided resolvers through so the tunnel uses PIA's real DNS rather than
-        // the SDK's `transformToDns(internalIP)` heuristic, which is wrong for pools whose resolver
-        // isn't at `<a>.<b>.0.1` (e.g. Dedicated IP). Empty list → SDK falls back to the heuristic.
+        // Resolve the DNS the tunnel should use. The user's custom DNS choice (Settings → Network),
+        // carried in shared state, takes precedence. When the user kept the PIA default the list is
+        // empty, so fall back to the server-provided resolvers — these make the tunnel use PIA's real
+        // DNS rather than the SDK's `transformToDns(internalIP)` heuristic, which is wrong for pools
+        // whose resolver isn't at `<a>.<b>.0.1` (e.g. Dedicated IP). Empty here → SDK heuristic.
+        let customDnsServers = sharedState.wireGuardDnsServers
+        let dnsServers = customDnsServers.isEmpty ? (response.dns_servers ?? []) : customDnsServers
+        if !customDnsServers.isEmpty {
+            logger.info("Using \(customDnsServers.count) user-selected DNS resolver(s) for WireGuard")
+        }
+
         return WireguardAuthConfiguration(
             psk: "",
             serverPublicKey: response.server_key,
             clientPrivateKey: privateKeyBase64,
             internalIp: response.peer_ip,
-            dnsServers: response.dns_servers ?? []
+            dnsServers: dnsServers
         )
     }
 }

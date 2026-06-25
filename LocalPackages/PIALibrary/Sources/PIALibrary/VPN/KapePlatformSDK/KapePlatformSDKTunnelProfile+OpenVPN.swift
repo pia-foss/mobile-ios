@@ -32,6 +32,8 @@ extension KapePlatformSDKTunnelProfile {
         let port: UInt16
         let transport: PIATunnelSharedState.OpenVPNTransport
         let mtu: UInt16
+        /// User-selected custom DNS resolvers; empty → keep the server-provided resolvers.
+        let dnsServers: [String]
     }
 
     /// Builds the OpenVPN settings from app-group UserDefaults.
@@ -84,6 +86,7 @@ extension KapePlatformSDKTunnelProfile {
 
         let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.OpenVPN.useSmallPackets)
         let mtu = UInt16(useSmallPackets ? AppConstants.OpenVPNPacketSize.smallPacketSize : AppConstants.OpenVPNPacketSize.defaultPacketSize)
+        let dnsServers = customDnsServers(forVPNType: .openVPN)
 
         return OpenVPNSettings(
             caCertificate: caCertificate,
@@ -92,6 +95,7 @@ extension KapePlatformSDKTunnelProfile {
             ovpnConfig: ovpnConfig,
             port: port,
             transport: transport,
-            mtu: mtu)
+            mtu: mtu,
+            dnsServers: dnsServers)
     }
 }

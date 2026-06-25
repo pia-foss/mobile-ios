@@ -86,7 +86,8 @@ extension PIAEndpointRepository {
             clientCertificate: "",
             clientKey: "",
             tlsAuthKey: "",
-            appGroupIdentifier: AppConstants.appGroup
+            appGroupIdentifier: AppConstants.appGroup,
+            dnsServers: state.openVPNDnsServers
         )
     }
 }
