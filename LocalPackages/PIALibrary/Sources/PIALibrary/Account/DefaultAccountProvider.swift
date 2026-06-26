@@ -351,7 +351,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         Task { @MainActor in
             try? await webServices.logout()
             cleanDatabase()
-            PIATunnelSharedState.delete(appGroup: AppConstants.appGroup)
+            PIATunnelSharedState.delete()
             Macros.postNotification(.PIAAccountDidLogout)
             DispatchQueue.main.async { callback?(nil) }
         }

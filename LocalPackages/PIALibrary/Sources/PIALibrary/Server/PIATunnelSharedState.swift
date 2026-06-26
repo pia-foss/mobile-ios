@@ -36,6 +36,16 @@ public enum PIATunnelSharedState {
 
     private static let fileName = "pia_platformsdk_state.json"
 
+    /// How long a fetched server list stays usable before the tunnel refreshes it. Mirrors the Kape
+    /// low-level SDK's `DEFAULT_MAX_AGE` for instance discovery (1 hour), shortened to 5 minutes in
+    /// DEBUG builds to make refresh behaviour easy to exercise. Used by the extension to decide
+    /// whether to re-fetch.
+    #if DEBUG
+        public static let serversCacheTTL: TimeInterval = 300
+    #else
+        public static let serversCacheTTL: TimeInterval = 3600
+    #endif
+
     /// The VPN protocol the PlatformSDK tunnel should run.
     public enum TunnelProtocol: String, Codable {
         case wireGuard
@@ -57,11 +67,18 @@ public enum PIATunnelSharedState {
 
         /// `dipToken` of the resolved target server, or nil for a regular server. A Dedicated IP
         /// server shares its `identifier` (derived from hostname) with its base region, so the
-        /// extension must disambiguate on `(identifier, dipToken)` — see `selectedServer`.
+        /// extension must disambiguate on `(identifier, dipToken)` — see `selectedServer(in:)`.
         public var selectedDipToken: String?
 
-        /// Snapshot of the server list (the app's `cachedServers`) the extension looks up in.
+        /// Server list the extension looks up in. Seeded by the app from its `cachedServers`, then
+        /// overwritten by the extension with a freshly fetched list (see `serversFetchedAt`).
         public var servers: [Server]
+
+        /// When `servers` was last fetched from the backend by the extension, or nil when the list is
+        /// only the app's unverified snapshot. The extension re-fetches once this is older than
+        /// `serversCacheTTL`; within the TTL it reuses `servers` without hitting the network. This is
+        /// the file-backed cache that survives the extension process being killed on disconnect.
+        public var serversFetchedAt: Date?
 
         /// The protocol the tunnel should establish (mirrors the user's selected VPN protocol).
         public var selectedProtocol: TunnelProtocol
@@ -106,10 +123,11 @@ public enum PIATunnelSharedState {
         /// choice). Empty → the authenticator keeps the server-provided resolvers.
         public var wireGuardDnsServers: [String]
 
-        public init(
+        init(
             selectedLocationId: String? = nil,
             selectedDipToken: String? = nil,
             servers: [Server] = [],
+            serversFetchedAt: Date? = nil,
             selectedProtocol: TunnelProtocol = .wireGuard,
             openVPNCaCertificate: String = "",
             openVPNUsername: String = "",
@@ -126,6 +144,7 @@ public enum PIATunnelSharedState {
             self.selectedLocationId = selectedLocationId
             self.selectedDipToken = selectedDipToken
             self.servers = servers
+            self.serversFetchedAt = serversFetchedAt
             self.selectedProtocol = selectedProtocol
             self.openVPNCaCertificate = openVPNCaCertificate
             self.openVPNUsername = openVPNUsername
@@ -141,7 +160,7 @@ public enum PIATunnelSharedState {
         }
 
         private enum CodingKeys: String, CodingKey {
-            case selectedLocationId, selectedDipToken, servers, selectedProtocol
+            case selectedLocationId, selectedDipToken, servers, serversFetchedAt, selectedProtocol
             case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
             case openVPNPort, openVPNTransport, openVPNMtu, openVPNDnsServers
             case wireGuardMtu, wireGuardToken, wireGuardDnsServers
@@ -153,6 +172,7 @@ public enum PIATunnelSharedState {
             selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
             selectedDipToken = try container.decodeIfPresent(String.self, forKey: .selectedDipToken)
             servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
+            serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
             selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .wireGuard
             openVPNCaCertificate = try container.decodeIfPresent(String.self, forKey: .openVPNCaCertificate) ?? ""
             openVPNUsername = try container.decodeIfPresent(String.self, forKey: .openVPNUsername) ?? ""
@@ -167,12 +187,13 @@ public enum PIATunnelSharedState {
             wireGuardDnsServers = try container.decodeIfPresent([String].self, forKey: .wireGuardDnsServers) ?? []
         }
 
-        /// The server matching the resolved target within `servers`, if present.
+        /// The server matching the resolved target within a server list, if present.
         ///
-        /// A Dedicated IP server shares its `identifier` with its base region, so `identifier`
-        /// alone is ambiguous. Resolve by the unique `dipToken` when this is a DIP target; for a
-        /// regular target match by `identifier` and exclude any DIP entry that shares it.
-        public var selectedServer: Server? {
+        /// Used both for the snapshot (`servers`) and for a freshly fetched list. A Dedicated IP
+        /// server shares its `identifier` with its base region, so `identifier` alone is ambiguous:
+        /// resolve by the unique `dipToken` when this is a DIP target; for a regular target match by
+        /// `identifier` and exclude any DIP entry that shares it.
+        public func selectedServer(in servers: [Server]) -> Server? {
             if let selectedDipToken {
                 return servers.first { $0.dipToken == selectedDipToken }
             }
@@ -185,9 +206,9 @@ public enum PIATunnelSharedState {
         }
     }
 
-    /// Reads the shared state from the App Group container, or defaults if none is written yet.
-    public static func read(appGroup: String) -> State {
-        guard let url = containerURL(appGroup: appGroup),
+    /// Reads the shared state from PIA's App Group container, or defaults if none is written yet.
+    public static func read() -> State {
+        guard let url = containerURL(),
             let data = try? Data(contentsOf: url),
             let state = try? JSONDecoder().decode(State.self, from: data)
         else {
@@ -196,10 +217,10 @@ public enum PIATunnelSharedState {
         return state
     }
 
-    /// Writes the shared state to the App Group container (atomically).
-    public static func write(_ state: State, appGroup: String) {
-        guard let url = containerURL(appGroup: appGroup) else {
-            log.error("Failed to write shared state: no container URL for app group \(appGroup)")
+    /// Writes the shared state to PIA's App Group container (atomically).
+    static func write(_ state: State) {
+        guard let url = containerURL() else {
+            log.error("Failed to write shared state: no container URL for app group \(AppConstants.appGroup)")
             return
         }
         let data: Data
@@ -216,10 +237,10 @@ public enum PIATunnelSharedState {
         }
     }
 
-    /// Deletes the shared state file from the App Group container (e.g. on logout).
-    public static func delete(appGroup: String) {
-        guard let url = containerURL(appGroup: appGroup) else {
-            log.error("Failed to delete shared state: no container URL for app group \(appGroup)")
+    /// Deletes the shared state file from PIA's App Group container (e.g. on logout).
+    static func delete() {
+        guard let url = containerURL() else {
+            log.error("Failed to delete shared state: no container URL for app group \(AppConstants.appGroup)")
             return
         }
         do {
@@ -231,8 +252,21 @@ public enum PIATunnelSharedState {
         }
     }
 
-    private static func containerURL(appGroup: String) -> URL? {
-        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+    /// Replaces the cached server list and stamps `serversFetchedAt` with the current time,
+    /// preserving every other field.
+    ///
+    /// Called by the app whenever it downloads fresh regions and by the tunnel extension after an
+    /// autonomous fetch, so the file-backed cache stays warm across the extension process being
+    /// recreated on each connect.
+    public static func updateServers(_ servers: [Server]) {
+        var state = read()
+        state.servers = servers
+        state.serversFetchedAt = Date()
+        write(state)
+    }
+
+    private static func containerURL() -> URL? {
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConstants.appGroup) else {
             return nil
         }
 

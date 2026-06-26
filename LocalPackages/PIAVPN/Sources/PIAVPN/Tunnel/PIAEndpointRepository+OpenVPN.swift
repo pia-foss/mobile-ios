@@ -7,16 +7,11 @@ extension PIAEndpointRepository {
     static let openVPNPortUDP: UInt16 = 8080
     static let openVPNPortTCP: UInt16 = 443
 
-    func generateOpenVPNConfigurations(state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
+    func generateOpenVPNConfigurations(server: Server, state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
         logger.info("Generating OpenVPN configurations")
 
         guard !state.openVPNCaCertificate.isEmpty else {
             logger.error("OpenVPN CA certificate not set in shared state — returning no configurations")
-            return []
-        }
-
-        guard let server = state.selectedServer else {
-            logger.error("No server found in shared state — returning no configurations")
             return []
         }
 

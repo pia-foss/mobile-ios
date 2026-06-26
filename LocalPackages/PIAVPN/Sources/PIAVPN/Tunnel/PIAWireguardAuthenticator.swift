@@ -9,7 +9,7 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardAuthConfiguration {
         logger.info("Authenticating WireGuard key with server")
 
-        let sharedState = PIATunnelSharedState.read(appGroup: AppConstants.appGroup)
+        let sharedState = PIATunnelSharedState.read()
 
         // Prefer the token the app resolved at connect time (carried in shared state): the account
         // `vpnToken` for a regular server, or the server's `dipUsername` for a Dedicated IP server.
