@@ -6,7 +6,7 @@ import PIALibrary
 final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Sendable {
     private let logger = PIATunnelLogger(label: "PIAWireguardAuthenticator")
 
-    func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardAuthConfiguration {
+    func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardEndpointConfiguration {
         logger.info("Authenticating WireGuard key with server")
 
         let sharedState = PIATunnelSharedState.read()
@@ -86,18 +86,21 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         // DNS rather than the SDK's `transformToDns(internalIP)` heuristic, which is wrong for pools
         // whose resolver isn't at `<a>.<b>.0.1` (e.g. Dedicated IP). Empty here → SDK heuristic.
         let customDnsServers = sharedState.wireGuardDnsServers
-        let dnsServers = customDnsServers.isEmpty ? (response.dns_servers ?? []) : customDnsServers
+        let rawDnsServers = customDnsServers.isEmpty ? (response.dns_servers ?? []) : customDnsServers
         if !customDnsServers.isEmpty {
             logger.info("Using \(customDnsServers.count) user-selected DNS resolver(s) for WireGuard")
         }
+        let dnsServers: [IpAddress] = rawDnsServers.map {
+            $0.contains(":") ? .v6(ipV6: $0) : .v4(ipV4: $0)
+        }
 
-        return WireguardAuthConfiguration(
-            psk: "",
-            serverPublicKey: response.server_key,
-            clientPrivateKey: privateKeyBase64,
-            internalIp: response.peer_ip,
-            dnsServers: dnsServers
-        )
+        // Enrich the endpoint config with the post-auth state, per `PacketTunnelWireguardAuthenticator`.
+        var authenticated = config
+        authenticated.serverPublicKey = response.server_key
+        authenticated.clientPrivateKey = privateKeyBase64
+        authenticated.internalIp = response.peer_ip
+        authenticated.dnsServers = dnsServers
+        return authenticated
     }
 }
 
