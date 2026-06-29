@@ -82,18 +82,31 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         // it: when it's empty or stale the extension fetches the list itself on connect, driven by
         // `serversFetchedAt`.
         do {
+            let server = connectableServer(for: configuration.server)
             let tunnelProtocol = desiredTunnelProtocol()
-            let openVPN = try openVPNSettings(for: configuration.server)
-            let wireGuard = wireGuardSettings(for: configuration.server)
+            let openVPN = try openVPNSettings(for: server)
+            let wireGuard = wireGuardSettings(for: server)
+
+            // "Automatic" region selection is signalled by a nil `preferredServer` on a regular
+            // (non-DIP) target. We write a nil `selectedLocationId` so the extension fans out across
+            // every server, fastest first (see `PIAEndpointRepository.generateConfigurations`),
+            // re-measuring latency at connect time rather than being pinned to the app's pre-resolved
+            // best server. `server` above is still resolved for credential derivation: the OpenVPN /
+            // WireGuard settings are server-independent for the non-DIP case. By `doSave` time
+            // `configuration.server` is already the resolved best server, so `preferredServer` — not
+            // `server.isAutomatic` — is the reliable Automatic signal. A DIP target is never
+            // "automatic": it carries `selectedDipServer` below and connects to that one server.
+            let isAutomaticSelection = server.dipToken == nil && Client.preferences.preferredServer == nil
 
             let existing = PIATunnelSharedState.read()
 
             PIATunnelSharedState.write(
                 .init(
-                    selectedLocationId: configuration.server.identifier,
-                    selectedDipToken: configuration.server.dipToken,
+                    selectedLocationId: isAutomaticSelection ? nil : server.identifier,
+                    selectedDipServer: server.dipToken != nil ? server : nil,
                     servers: existing.servers,
                     serversFetchedAt: existing.serversFetchedAt,
+                    latencyByServerId: existing.latencyByServerId,
                     selectedProtocol: tunnelProtocol,
                     openVPNCaCertificate: openVPN.caCertificate,
                     openVPNUsername: openVPN.username,
@@ -294,6 +307,29 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     // MARK: - Helpers
+
+    /// Resolves the concrete server the tunnel should connect to.
+    ///
+    /// The "Automatic" region — and the first-launch state where the user has never picked a region
+    /// then taps Connect — is represented by a sentinel server (`Server.automatic`, identifier
+    /// `"auto"`) that is not part of the real server list, so the extension can't match it and would
+    /// resolve no endpoints. In that case connect to the fastest server we know of (the lowest
+    /// measured ping, via `bestServer`), falling back to the first available server. A Dedicated IP
+    /// target is always concrete, so it passes through untouched.
+    private func connectableServer(for server: Server) -> Server {
+        if server.dipToken != nil {
+            return server
+        }
+
+        let servers = Client.providers.serverProvider.currentServers
+        let isConcrete = servers.contains { $0.identifier == server.identifier && $0.dipToken == nil }
+        if isConcrete {
+            return server
+        }
+
+        // Automatic / unresolved selection: prefer the fastest server, then any non-offline one.
+        return Client.providers.serverProvider.bestServer ?? servers.first { !$0.offline } ?? server
+    }
 
     /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
     /// OpenVPN maps to `.openVPN`; all other types (including WireGuard) map to `.wireGuard`.

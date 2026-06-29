@@ -65,10 +65,13 @@ public enum PIATunnelSharedState {
         /// should connect to. Concrete even for "Automatic", where `preferredServer` is nil.
         public var selectedLocationId: String?
 
-        /// `dipToken` of the resolved target server, or nil for a regular server. A Dedicated IP
-        /// server shares its `identifier` (derived from hostname) with its base region, so the
-        /// extension must disambiguate on `(identifier, dipToken)` — see `selectedServer(in:)`.
-        public var selectedDipToken: String?
+        /// The resolved Dedicated IP target server, carried in full when a DIP region is selected,
+        /// nil otherwise. DIP servers are per-user and absent from the public regions list the
+        /// extension fetches autonomously, so they cannot be looked up in `servers`; when this is
+        /// set, `selectedServer(in:)` uses it directly. Only the server's addresses are needed by the
+        /// extension (DIP credentials are flattened into the `openVPN*` / `wireGuardToken` fields),
+        /// and those survive `Server`'s `Codable` round-trip.
+        public var selectedDipServer: Server?
 
         /// Server list the extension looks up in. Seeded by the app from its `cachedServers`, then
         /// overwritten by the extension with a freshly fetched list (see `serversFetchedAt`).
@@ -79,6 +82,16 @@ public enum PIATunnelSharedState {
         /// `serversCacheTTL`; within the TTL it reuses `servers` without hitting the network. This is
         /// the file-backed cache that survives the extension process being killed on disconnect.
         public var serversFetchedAt: Date?
+
+        /// Per-server latency measured by the app's `ServersPinger`, keyed by `Server.identifier`
+        /// and expressed in milliseconds (the best/lowest sample, matching the app's plain store).
+        ///
+        /// Carried explicitly because `Server`'s `Codable` form does not round-trip its measured
+        /// `responseTime` — so without this map the extension cannot tell servers apart by speed.
+        /// `selectedServer(in:)` uses it to pick the fastest server when no specific region is
+        /// selected (Automatic, or an app-less autonomous fetch), mirroring the app's `bestServer`.
+        /// Empty until the app has completed a ping cycle.
+        public var latencyByServerId: [String: Int]
 
         /// The protocol the tunnel should establish (mirrors the user's selected VPN protocol).
         public var selectedProtocol: TunnelProtocol
@@ -125,10 +138,11 @@ public enum PIATunnelSharedState {
 
         init(
             selectedLocationId: String? = nil,
-            selectedDipToken: String? = nil,
+            selectedDipServer: Server? = nil,
             servers: [Server] = [],
             serversFetchedAt: Date? = nil,
             selectedProtocol: TunnelProtocol = .wireGuard,
+            latencyByServerId: [String: Int] = [:],
             openVPNCaCertificate: String = "",
             openVPNUsername: String = "",
             openVPNPassword: String = "",
@@ -142,9 +156,10 @@ public enum PIATunnelSharedState {
             wireGuardDnsServers: [String] = []
         ) {
             self.selectedLocationId = selectedLocationId
-            self.selectedDipToken = selectedDipToken
+            self.selectedDipServer = selectedDipServer
             self.servers = servers
             self.serversFetchedAt = serversFetchedAt
+            self.latencyByServerId = latencyByServerId
             self.selectedProtocol = selectedProtocol
             self.openVPNCaCertificate = openVPNCaCertificate
             self.openVPNUsername = openVPNUsername
@@ -160,7 +175,7 @@ public enum PIATunnelSharedState {
         }
 
         private enum CodingKeys: String, CodingKey {
-            case selectedLocationId, selectedDipToken, servers, serversFetchedAt, selectedProtocol
+            case selectedLocationId, selectedDipServer, servers, serversFetchedAt, latencyByServerId, selectedProtocol
             case openVPNCaCertificate, openVPNUsername, openVPNPassword, openVPNOvpnConfig
             case openVPNPort, openVPNTransport, openVPNMtu, openVPNDnsServers
             case wireGuardMtu, wireGuardToken, wireGuardDnsServers
@@ -170,10 +185,11 @@ public enum PIATunnelSharedState {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
-            selectedDipToken = try container.decodeIfPresent(String.self, forKey: .selectedDipToken)
+            selectedDipServer = try container.decodeIfPresent(Server.self, forKey: .selectedDipServer)
             servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
             serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
             selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .wireGuard
+            latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
             openVPNCaCertificate = try container.decodeIfPresent(String.self, forKey: .openVPNCaCertificate) ?? ""
             openVPNUsername = try container.decodeIfPresent(String.self, forKey: .openVPNUsername) ?? ""
             openVPNPassword = try container.decodeIfPresent(String.self, forKey: .openVPNPassword) ?? ""
@@ -189,20 +205,36 @@ public enum PIATunnelSharedState {
 
         /// The server matching the resolved target within a server list, if present.
         ///
-        /// Used both for the snapshot (`servers`) and for a freshly fetched list. A Dedicated IP
-        /// server shares its `identifier` with its base region, so `identifier` alone is ambiguous:
-        /// resolve by the unique `dipToken` when this is a DIP target; for a regular target match by
-        /// `identifier` and exclude any DIP entry that shares it.
+        /// A Dedicated IP target is carried in full (`selectedDipServer`) and used directly — it is
+        /// per-user and not present in `servers`. For a regular target match by `identifier` and
+        /// exclude any DIP entry that shares it; with no selection, fall back to the fastest server.
         public func selectedServer(in servers: [Server]) -> Server? {
-            if let selectedDipToken {
-                return servers.first { $0.dipToken == selectedDipToken }
+            if let selectedDipServer {
+                return selectedDipServer
             }
 
-            guard let selectedLocationId else {
-                return nil
+            // No specific region selected (Automatic / first launch), or the persisted id no longer
+            // matches the current list: behave like the Automatic region and connect to the best
+            // available server rather than returning nothing.
+            if let selectedLocationId, let match = servers.first(where: { $0.identifier == selectedLocationId && $0.dipToken == nil }) {
+                return match
             }
 
-            return servers.first { $0.identifier == selectedLocationId && $0.dipToken == nil }
+            // Pick the fastest server we have a measured latency for, mirroring the app's
+            // `bestServer`. `latencyByServerId` is populated by the app's `ServersPinger`; it
+            // carries the latencies the `servers` list itself cannot (`Server`'s Codable form drops
+            // `responseTime`). When no ping data is present — e.g. an autonomous fetch with no
+            // app-measured latencies — fall back to the first available server.
+            let available = servers.filter { $0.dipToken == nil && !$0.offline }
+            if let fastest =
+                available
+                .compactMap({ server in latencyByServerId[server.identifier].map { (server, $0) } })
+                .min(by: { $0.1 < $1.1 })?.0
+            {
+                return fastest
+            }
+
+            return available.first
         }
     }
 
@@ -262,6 +294,17 @@ public enum PIATunnelSharedState {
         var state = read()
         state.servers = servers
         state.serversFetchedAt = Date()
+        write(state)
+    }
+
+    /// Replaces the per-server latency map (`latencyByServerId`), preserving every other field.
+    ///
+    /// Called by the app each time the `ServersPinger` finishes a ping cycle, so the extension's
+    /// fastest-server fallback in `State.selectedServer(in:)` stays aligned with the app's
+    /// `bestServer`. Keys are `Server.identifier`; values are latencies in milliseconds.
+    public static func updateLatencies(_ latencyByServerId: [String: Int]) {
+        var state = read()
+        state.latencyByServerId = latencyByServerId
         write(state)
     }
 
