@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import PIALibrary
 
+@MainActor
 class ProtocolSelectionViewModel: ObservableObject {
-    @Published private(set) var selectedProtocol: TvOSVPNProtocol
+    @Published private(set) var selectedProtocol: KapePlatformSDKVPNType
 
-    let availableProtocols: [TvOSVPNProtocol]
+    let availableProtocols: [KapePlatformSDKVPNType]
 
     private let useCase: ProtocolSelectionUseCaseType
 
@@ -20,12 +22,12 @@ class ProtocolSelectionViewModel: ObservableObject {
         self.selectedProtocol = useCase.selectedProtocol()
     }
 
-    func select(_ vpnProtocol: TvOSVPNProtocol) {
+    func select(_ vpnProtocol: KapePlatformSDKVPNType) {
         useCase.select(vpnProtocol)
         selectedProtocol = vpnProtocol
     }
 
-    func isSelected(_ vpnProtocol: TvOSVPNProtocol) -> Bool {
+    func isSelected(_ vpnProtocol: KapePlatformSDKVPNType) -> Bool {
         vpnProtocol == selectedProtocol
     }
 }

@@ -29,10 +29,35 @@ import Foundation
 /// They are duplicated here on purpose so the PlatformSDK code does not reference the legacy
 /// `PIATunnelProfile` / `PIAWGTunnelProfile` types (which are being removed); centralising them
 /// keeps the raw strings out of the call sites.
-enum KapePlatformSDKVPNType: String {
+public enum KapePlatformSDKVPNType: String {
     /// Persisted identifier for the OpenVPN profile.
     case openVPN = "PIA"
 
     /// Persisted identifier for the WireGuard profile.
     case wireGuard = "PIAWG"
+
+    /// Persisted identifier for automatic protocol selection (the tunnel tries WireGuard first,
+    /// then falls back to OpenVPN).
+    case automatic = "PIAAutomatic"
+
+    /// Legacy IKEv2 identifier. The PlatformSDK tunnel cannot run IKEv2, so this exists only to
+    /// recognise the value left in `Client.preferences.vpnType` by pre-PlatformSDK installs — e.g.
+    /// to migrate such users onto a supported protocol. It is never a connectable selection here.
+    case iKEv2 = "IKEv2"
+}
+
+public extension KapePlatformSDKVPNType {
+    var displayName: String {
+        switch self {
+        case .wireGuard:
+            return "WireGuard®"
+        case .openVPN:
+            return "OpenVPN"
+        case .iKEv2:
+            return "IPSec (IKEv2)"
+        case .automatic:
+            // TODO: [PlatformSDK] Localize string
+            return "Automatic"
+        }
+    }
 }

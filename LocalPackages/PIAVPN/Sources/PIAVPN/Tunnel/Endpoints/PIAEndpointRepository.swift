@@ -34,6 +34,15 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
             return generateWireGuardConfigurations(server: server, state: state)
         case .openVPN:
             return generateOpenVPNConfigurations(server: server, state: state)
+        case .automatic:
+            // PIA-defined ordering: try every WireGuard endpoint first, then fall back to OpenVPN.
+            // The session controller cycles the combined batch and routes each config to the right
+            // controller by type. Either generator yields [] when its protocol can't be built
+            // (missing addresses/credentials), so automatic degrades to whichever is available.
+            let wireGuard = generateWireGuardConfigurations(server: server, state: state)
+            let openVPN = generateOpenVPNConfigurations(server: server, state: state)
+            logger.info("Automatic protocol: \(wireGuard.count) WireGuard + \(openVPN.count) OpenVPN configuration(s) for \(server.identifier)")
+            return wireGuard + openVPN
         }
     }
 

@@ -96,11 +96,16 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         let completionBlock = {
             profile?.prepare()
 
-            #if os(iOS)
+            // On launch the tunnel may already be up (the app was terminated while connected), but
+            // no NEVPNStatusDidChange fires for an already-stable connection — so the transient
+            // status would stay at its `.disconnected` default and the UI would show "Not Connected".
+            // Seed it from the live tunnel interface (utun/ppp/ipsec0) instead.
+            #if os(iOS) || os(tvOS)
                 if let _ = VPNIPAddressFromInterfaces() {
                     self.accessedDatabase.transient.vpnStatus = .connected
                 }
             #endif
+
             self.activeProfile = profile
         }
 

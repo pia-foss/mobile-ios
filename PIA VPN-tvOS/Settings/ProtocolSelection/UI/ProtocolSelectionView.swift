@@ -6,12 +6,13 @@
 //
 
 import PIAAssetsTV
+import PIALibrary
 import SwiftUI
 
 struct ProtocolSelectionView: View {
     @ObservedObject var viewModel: ProtocolSelectionViewModel
 
-    @FocusState var focusedProtocol: TvOSVPNProtocol?
+    @FocusState var focusedProtocol: KapePlatformSDKVPNType?
 
     var body: some View {
         HStack {
@@ -29,9 +30,9 @@ struct ProtocolSelectionView: View {
 
     var protocolList: some View {
         List {
-            ForEach(viewModel.availableProtocols) { vpnProtocol in
+            ForEach(viewModel.availableProtocols, id: \.self) { vpnProtocol in
                 SettingsButtonView(
-                    title: vpnProtocol.title,
+                    title: vpnProtocol.displayName,
                     style: viewModel.isSelected(vpnProtocol) ? .rightText(content: "✓") : .none
                 ) {
                     viewModel.select(vpnProtocol)

@@ -6,29 +6,36 @@
 //
 
 import Foundation
+import PIALibrary
 import XCTest
 
 @testable import PIA_VPN_tvOS
 
+@MainActor
 class ProtocolSelectionViewModelTests: XCTestCase {
+    @MainActor
     class ProtocolSelectionUseCaseMock: ProtocolSelectionUseCaseType {
-        var availableProtocols: [TvOSVPNProtocol]
-        var selected: TvOSVPNProtocol
-        private(set) var selectedProtocolCalls: [TvOSVPNProtocol] = []
+        var availableProtocols: [KapePlatformSDKVPNType]
+        var selected: KapePlatformSDKVPNType
+        private(set) var selectedProtocolCalls: [KapePlatformSDKVPNType] = []
 
-        init(available: [TvOSVPNProtocol] = TvOSVPNProtocol.allCases, selected: TvOSVPNProtocol = .wireGuard) {
+        init(
+            available: [KapePlatformSDKVPNType] = [.automatic, .wireGuard, .openVPN],
+            selected: KapePlatformSDKVPNType = .wireGuard
+        ) {
             self.availableProtocols = available
             self.selected = selected
         }
 
-        func selectedProtocol() -> TvOSVPNProtocol { selected }
+        func selectedProtocol() -> KapePlatformSDKVPNType { selected }
 
-        func select(_ vpnProtocol: TvOSVPNProtocol) {
+        func select(_ vpnProtocol: KapePlatformSDKVPNType) {
             selectedProtocolCalls.append(vpnProtocol)
             selected = vpnProtocol
         }
     }
 
+    @MainActor
     class Fixture {
         let useCaseMock = ProtocolSelectionUseCaseMock()
     }
@@ -56,8 +63,8 @@ class ProtocolSelectionViewModelTests: XCTestCase {
         // WHEN the view model is created
         instantiateSut()
 
-        // THEN it exposes both protocols and the current selection
-        XCTAssertEqual(sut.availableProtocols, [.wireGuard, .openVPN])
+        // THEN it exposes the selectable protocols and the current selection
+        XCTAssertEqual(sut.availableProtocols, [.automatic, .wireGuard, .openVPN])
         XCTAssertEqual(sut.selectedProtocol, .openVPN)
         XCTAssertTrue(sut.isSelected(.openVPN))
         XCTAssertFalse(sut.isSelected(.wireGuard))
@@ -80,7 +87,7 @@ class ProtocolSelectionViewModelTests: XCTestCase {
 
     func test_vpnTypeRawValues_matchTunnelProfileIdentifiers() {
         // The raw values must match the `vpnType` strings the PlatformSDK tunnel reads.
-        XCTAssertEqual(TvOSVPNProtocol.wireGuard.rawValue, "PIAWG")
-        XCTAssertEqual(TvOSVPNProtocol.openVPN.rawValue, "PIA")
+        XCTAssertEqual(KapePlatformSDKVPNType.wireGuard.rawValue, "PIAWG")
+        XCTAssertEqual(KapePlatformSDKVPNType.openVPN.rawValue, "PIA")
     }
 }

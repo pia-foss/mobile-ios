@@ -9,38 +9,21 @@ import Combine
 import Foundation
 import PIADashboard
 import PIALibrary
+import PIALocalizations
 
 private let log = PIALogger.logger(for: ProtocolSelectionUseCase.self)
 
-/// VPN protocols selectable on tvOS. Both run through the PlatformSDK tunnel; the raw value is the
-/// `Client.preferences.vpnType` the tunnel reads (`KapePlatformSDKTunnelProfile.desiredTunnelProtocol`)
-/// to decide which protocol to run. The literals mirror `PIAWGTunnelProfile`/`PIATunnelProfile`,
-/// which are iOS-only and not linkable on tvOS.
-enum TvOSVPNProtocol: String, CaseIterable, Identifiable, Hashable {
-    case wireGuard = "PIAWG"
-    case openVPN = "PIA"
-
-    var id: String { rawValue }
-
-    /// Brand names — intentionally not localized.
-    var title: String {
-        switch self {
-        case .wireGuard: return "WireGuard"
-        case .openVPN: return "OpenVPN"
-        }
-    }
-}
-
+@MainActor
 protocol ProtocolSelectionUseCaseType {
-    var availableProtocols: [TvOSVPNProtocol] { get }
-    func selectedProtocol() -> TvOSVPNProtocol
-    func select(_ vpnProtocol: TvOSVPNProtocol)
+    var availableProtocols: [KapePlatformSDKVPNType] { get }
+    func selectedProtocol() -> KapePlatformSDKVPNType
+    func select(_ vpnProtocol: KapePlatformSDKVPNType)
 }
 
 @MainActor
 final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
 
-    let availableProtocols: [TvOSVPNProtocol] = TvOSVPNProtocol.allCases
+    let availableProtocols: [KapePlatformSDKVPNType] = [.automatic, .wireGuard, .openVPN]
 
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
     private var currentStatus: VPNStatus = .unknown
@@ -54,11 +37,19 @@ final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
             .store(in: &cancellables)
     }
 
-    func selectedProtocol() -> TvOSVPNProtocol {
-        TvOSVPNProtocol(rawValue: Client.preferences.vpnType) ?? .wireGuard
+    func selectedProtocol() -> KapePlatformSDKVPNType {
+        // `KapePlatformSDKVPNType(rawValue:)` also decodes the non-selectable "IKEv2" value, so map
+        // anything outside the tvOS-selectable set (including a stored IKEv2 or an unknown value)
+        // back to `.automatic` — the PlatformSDK default (this screen is only shown when the
+        // PlatformSDK tunnel is enabled), matching the bootstrap default `vpnType`.
+        let stored = KapePlatformSDKVPNType(rawValue: Client.preferences.vpnType)
+        guard let stored, availableProtocols.contains(stored) else {
+            return .automatic
+        }
+        return stored
     }
 
-    func select(_ vpnProtocol: TvOSVPNProtocol) {
+    func select(_ vpnProtocol: KapePlatformSDKVPNType) {
         guard vpnProtocol != selectedProtocol() else { return }
 
         log.info("VPN protocol selected: \(vpnProtocol.rawValue)")

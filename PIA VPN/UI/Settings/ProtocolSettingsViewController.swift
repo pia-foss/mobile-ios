@@ -92,13 +92,24 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
     private func showProtocolOptions(point: CGPoint) {
 
-        var options = [
-            IKEv2Profile.vpnType,
-            PIAWGTunnelProfile.vpnType,
-            PIATunnelProfile.vpnType
-        ]
-        if Platform.isRunningOnMac {
-            options.removeAll { $0 == IKEv2Profile.vpnType }
+        var options: [KapePlatformSDKVPNType]
+        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            // The PlatformSDK tunnel runs WireGuard, OpenVPN, or automatic (WireGuard first, then
+            // OpenVPN); it can't run IKEv2, so that legacy option is dropped here.
+            options = [
+                .automatic,
+                .wireGuard,
+                .openVPN
+            ]
+        } else {
+            options = [
+                .iKEv2,
+                .wireGuard,
+                .openVPN
+            ]
+            if Platform.isRunningOnMac {
+                options.removeAll { $0 == .iKEv2 }
+            }
         }
 
         let width = self.view.frame.width / 2
@@ -238,7 +249,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             return ProtocolsSections.allCases.count
         } else {
-            return baseSections.count
+            return sections.count
         }
     }
 
@@ -398,11 +409,21 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         return [.protocolSelection, .dataEncryption, .handshake, .useSmallPackets]
     }
 
+    /// Sections shown for the currently selected protocol (OpenVPN handled separately, above).
+    /// Automatic spans both WireGuard and OpenVPN, so the per-protocol crypto/packet rows don't
+    /// apply — only the protocol picker is shown.
+    private var sections: [ProtocolsSections] {
+        if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
+            return [.protocolSelection]
+        }
+        return baseSections
+    }
+
     private func getSection(at indexPath: IndexPath) -> ProtocolsSections? {
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             return ProtocolsSections(rawValue: indexPath.row)
         } else {
-            return baseSections[indexPath.row]
+            return sections[indexPath.row]
         }
     }
 }

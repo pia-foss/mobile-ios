@@ -332,17 +332,22 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     /// Maps the user's selected VPN protocol to the protocol the PlatformSDK tunnel should run.
-    /// OpenVPN maps to `.openVPN`; all other types (including WireGuard) map to `.wireGuard`.
-    /// The OpenVPN/WireGuard work runs in the PlatformSDK extension (Kape SDK), which supports both
-    /// on iOS and tvOS — so this mapping is platform-agnostic and does not gate on `os(iOS)`.
+    /// OpenVPN maps to `.openVPN`, WireGuard to `.wireGuard`, automatic to `.automatic`. Legacy
+    /// IKEv2 — which the PlatformSDK tunnel cannot run — and any unrecognised value fall back to
+    /// `.automatic`, the default (the app also migrates such users off IKEv2; this is the defensive
+    /// fallback). The work runs in the PlatformSDK extension (Kape SDK), which supports OpenVPN and
+    /// WireGuard on both iOS and tvOS — so this mapping is platform-agnostic and does not gate on
+    /// `os(iOS)`.
     private func desiredTunnelProtocol() -> PIATunnelSharedState.TunnelProtocol {
         switch KapePlatformSDKVPNType(rawValue: Client.preferences.vpnType) {
         case .openVPN:
             return .openVPN
         case .wireGuard:
             return .wireGuard
-        case nil:
-            return .wireGuard
+        case .automatic:
+            return .automatic
+        case .iKEv2, nil:
+            return .automatic
         }
     }
 

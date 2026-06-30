@@ -74,10 +74,23 @@ final class Bootstrapper {
         /// — possibly with on-demand active — could auto-start the old tunnel and run
         /// alongside the PlatformSDK profile.
         private func cleanupLegacyVPNProfilesIfNeeded() {
-            guard Client.configuration.featureFlags[.usePlatformSDKVPN],
-                !AppPreferences.shared.didCleanupLegacyVPNProfiles
-            else {
+            guard Client.configuration.featureFlags[.usePlatformSDKVPN], !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
                 return
+            }
+
+            // Migrate users whose persisted protocol is no longer selectable under the PlatformSDK
+            // tunnel (legacy IKEv2) to automatic protocol negotiation. WireGuard / OpenVPN selections
+            // are still supported and kept as-is. Mirrors the tvOS BootstraperFactory migration.
+            let supportedTypes: [KapePlatformSDKVPNType] = [
+                .automatic,
+                .wireGuard,
+                .openVPN
+            ]
+
+            if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
+                let editable = Client.preferences.editable()
+                editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+                editable.commit()
             }
 
             let legacyProfiles: [VPNProfile] = [
@@ -179,6 +192,12 @@ final class Bootstrapper {
         defaults.isPersistentConnection = true
         defaults.mace = false
         #if os(iOS)
+            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
+            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
+            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
+            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+                defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            }
             defaults.vpnCustomConfigurations = [
                 PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
                 PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)

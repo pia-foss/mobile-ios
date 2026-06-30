@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import KapeVPN_PacketTunnel
 import os
 
@@ -29,8 +30,11 @@ import os
 /// attach to. `os.Logger` routes to the unified log, which you can read live
 /// while hooked into the tunnel process via Console.app or:
 ///
-///     log stream --predicate 'subsystem == "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS"' --level debug
+///     log stream --predicate 'subsystem CONTAINS "PlatformSDK-Tunnel"' --level debug
 ///
+/// The subsystem is the extension's own bundle id (e.g.
+/// `…PIA-VPN.PlatformSDK-Tunnel-iOS`, or `…dev.PIA-VPN.…` on Development), so the
+/// `CONTAINS` predicate matches every build configuration and both platforms.
 /// Each logger instance uses its `label` as the os_log category, so you can
 /// further filter by category in Console.app.
 ///
@@ -38,12 +42,13 @@ import os
 /// The message is already a fully-formed `String` here, so it is logged with
 /// `privacy: .public` to keep it readable.
 final class PIATunnelLogger: PacketTunnelLogger, Sendable {
-    private static let subsystem = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel"
-
     private let log: Logger
 
     init(label: String) {
-        self.log = Logger(subsystem: Self.subsystem, category: label)
+        self.log = Logger(
+            subsystem: Bundle.main.bundleIdentifier ?? "PlatformSDK-Tunnel",
+            category: label
+        )
     }
 
     func trace(_ message: @autoclosure () -> String) {

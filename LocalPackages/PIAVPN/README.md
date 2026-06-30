@@ -5,14 +5,15 @@ A **simplified, PIA-owned version of the Kape SDK's `KapeVPN`** module. It provi
 Network Extension target stays a thin shell.
 
 It does **not** reimplement the tunnel engine — it reuses the SDK's `KapeVPN-PacketTunnel`
-(session controller, system tunnel, WireGuard controller). PIAVPN only relocates and hosts PIA's own glue.
+(session controller, system tunnel, WireGuard controller) and `KapeVPN-OpenVPN` (OpenVPN
+connection controller). PIAVPN only relocates and hosts PIA's own glue.
 
 ## What's inside
 
 | Type | Role | Mirrors in `KapeVPN` |
 |------|------|----------------------|
 | `PIAPacketTunnelProvider` | `open` base `NEPacketTunnelProvider`; wires the session engine and runs the tunnel | `KapePacketTunnelProvider` |
-| `PIAEndpointRepository` | `VpnConfigurationGenerator` — resolves the selected server's WireGuard endpoints from the shared state | `KapeEndpointRepository` |
+| `PIAEndpointRepository` | `VpnConfigurationGenerator` — builds WireGuard and/or OpenVPN endpoint configurations from the shared state; autonomously fetches/caches the server list and ranks candidates by latency | `KapeEndpointRepository` |
 | `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` — performs PIA's WireGuard key exchange | `KapeWireguardAuthenticator` |
 | `PIATunnelLogger` | `PacketTunnelLogger` — routes tunnel logs to `os.Logger` | — |
 
@@ -30,12 +31,15 @@ class PacketTunnelProvider: PIAPacketTunnelProvider, @unchecked Sendable {}
 
 ## Scope (intentionally minimal)
 
-- **WireGuard only.** The `ConnectionController` abstraction is kept, so other protocols can be added later;
-  for now any non-WireGuard selection hits a `fatalError` in `PIAPacketTunnelProvider`.
-- **No app-side manager.** PIA's app side keeps using `KapePlatformSDKTunnelProfile` and `SharedServerStore`
-  (in `PIALibrary`); this package is the extension-side engine glue only.
-- The app ↔ extension hand-off (selected location, server list, protocol) flows through `SharedServerStore`
-  (file-based shared state in the App Group), read here by `PIAEndpointRepository` / `PIAPacketTunnelProvider`.
+- **WireGuard, OpenVPN, and Automatic.** `PIAPacketTunnelProvider` registers both a WireGuard and an
+  OpenVPN `ConnectionController`; `PIAEndpointRepository` emits configurations per the selected
+  protocol (`wireGuard`, `openVPN`, or `automatic` — WireGuard first, then OpenVPN), and the session
+  controller routes each configuration to the matching controller by type.
+- **No app-side manager.** PIA's app side keeps using `KapePlatformSDKTunnelProfile` and
+  `PIATunnelSharedState` (in `PIALibrary`); this package is the extension-side engine glue only.
+- The app ↔ extension hand-off (selected location / DIP server, cached server list, protocol,
+  latencies, DNS, MTU, token) flows through `PIATunnelSharedState` (file-based shared state in the
+  App Group), read here by `PIAEndpointRepository` / `PIAPacketTunnelProvider`.
 
 ## Custom DNS
 
@@ -48,7 +52,7 @@ PIA wires it at the configuration layer it already owns (this is the intended co
   `wireGuardDnsServers`). The read goes through the **raw** persisted custom-config maps, so it does
   not depend on `PIAWireguard` / `TunnelKitOpenVPN` (both being removed).
 - **OpenVPN** — `PIAEndpointRepository` passes the list into `OpenVPNConfiguration(..., dnsServers:)`.
-- **WireGuard** — `PIAWireguardAuthenticator` returns it as `WireguardAuthConfiguration.dnsServers`.
+- **WireGuard** — `PIAWireguardAuthenticator` returns it on the enriched `WireguardEndpointConfiguration.dnsServers`.
 
 Resolution precedence (per protocol): **user custom DNS → server-provided DNS → SDK fallback**. So an
 empty selection keeps the PIA default (server-pushed DNS), which also preserves the Dedicated IP fix
@@ -58,6 +62,7 @@ Multiple resolvers (primary + secondary) are supported.
 ## Dependencies
 
 - `KapeVPN-PacketTunnel` (from `../KapePlatformSDK`) — the reused tunnel engine + WireGuard controller.
-- `PIALibrary` — `SharedServerStore`, `AppConstants`, `Server`, and PIA account/crypto helpers.
+- `KapeVPN-OpenVPN` (from `../KapePlatformSDK`) — the OpenVPN connection controller and configuration type.
+- `PIALibrary` — `PIATunnelSharedState`, `AppConstants`, `Server`, and PIA account/crypto helpers.
 
 > Built in Swift 5 language mode to match the code's original (non-strict-concurrency) compilation context.

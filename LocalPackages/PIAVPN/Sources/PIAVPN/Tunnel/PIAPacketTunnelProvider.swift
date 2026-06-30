@@ -89,8 +89,10 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         Task {
             await startTask?.value
             startTask = nil
+
             await sessionController?.stop()
             sessionController = nil
+
             completionHandler()
         }
     }

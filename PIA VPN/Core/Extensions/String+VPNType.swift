@@ -30,12 +30,14 @@ public extension String {
 
     var vpnProtocol: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "WireGuard®"
-        case PIATunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             return "OpenVPN"
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return "IPSec (IKEv2)"
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            return L10n.Global.automatic
         default:
             return self
         }

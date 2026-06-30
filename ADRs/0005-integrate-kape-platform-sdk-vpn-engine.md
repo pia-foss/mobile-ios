@@ -44,7 +44,7 @@ the SDK's interface protocols with thin adapters that run inside the extension:
 | PIA adapter | Kape interface | Responsibility |
 |---|---|---|
 | `PIAPacketTunnelProvider` | `NEPacketTunnelProvider` | Extension entry point; wires up the SDK session/connection controllers. |
-| `PIAEndpointRepository` | `VpnConfigurationGenerator` | Resolves endpoints/settings from shared state. |
+| `PIAEndpointRepository` | `VpnConfigurationGenerator` | Resolves endpoints/settings from shared state; autonomously fetches and caches the server list, and ranks candidates by latency (see below). |
 | `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` | WireGuard key exchange + TLS pinning to the bundled PIA root CA. |
 | `PIATunnelLogger` | `PacketTunnelLogger` | Bridges SDK logging to `os.Logger`. |
 
@@ -52,12 +52,26 @@ the SDK's interface protocols with thin adapters that run inside the extension:
 replaces the per-protocol extensions when active. The app-side profile
 `KapePlatformSDKTunnelProfile: NetworkExtensionProfile` (in `PIALibrary`) configures it.
 
-**App ↔ extension IPC via file-based shared state.** The extension reads everything it needs
-(selected server, protocol, custom DNS, MTU, token) from `PIATunnelSharedState`, persisted as
-`pia_platformsdk_state.json` in the shared app group. Protocol selection (OpenVPN vs WireGuard)
-is mapped through `KapePlatformSDKVPNType`, which centralises the legacy `"PIA"` / `"PIAWG"`
-identifiers so PlatformSDK code never references the legacy `PIATunnelProfile` /
-`PIAWGTunnelProfile` / TunnelKit types directly.
+**App ↔ extension IPC via file-based shared state.** The extension reads its connection
+parameters (selected server, protocol, custom DNS, MTU, token, app-measured latencies) from
+`PIATunnelSharedState`, persisted as `pia_platformsdk_state.json` in the shared app group. The
+server list itself is not solely app-supplied: when the cached list is stale or absent the
+extension autonomously fetches a fresh one (`Client.downloadServerList()`) and caches it back to
+shared state with a TTL, so on-demand reconnects work with no app running.
+
+**Three protocol modes, automatic by default.** Protocol selection is mapped through
+`KapePlatformSDKVPNType`, which centralises the persisted identifiers — `"PIA"` (OpenVPN),
+`"PIAWG"` (WireGuard), and `"PIAAutomatic"` (automatic: WireGuard first, then OpenVPN) — so
+PlatformSDK code never references the legacy `PIATunnelProfile` / `PIAWGTunnelProfile` / TunnelKit
+types directly. **Automatic is the default** when the flag is on (set in `Bootstrapper` on iOS and
+`BootstraperFactory` on tvOS, which also migrate users on an unsupported persisted protocol —
+e.g. legacy IKEv2 — to automatic).
+
+**Server resolution.** For a concrete region the extension connects to that server; for a
+Dedicated IP it uses the per-user DIP server carried in full through shared state (it is absent
+from the public list). For the Automatic region (no selected location) the extension fans out
+across every online server, fastest first, ordered by the app-measured latencies mirrored into
+shared state by `ServersPinger`.
 
 **Reconnection is owned by the SDK.** The engine handles transient network loss and endpoint
 cycling internally. When the feature flag is on, `VPNDaemon` suppresses its own reconnect,
@@ -76,13 +90,12 @@ removed (`cleanupLegacyVPNProfilesIfNeeded`).
   target) depends on the vendored SDK, no target resolves SPM until `pull-kape-platform-sdk.sh`
   has run. Clean checkouts and CI require `CLOUDSMITH_TOKEN`; any new build entry point must run
   the pull first or it fails with an opaque SPM error.
-- **tvOS gains OpenVPN + WireGuard protocol selection** through the same engine
+- **tvOS gains OpenVPN, WireGuard, and Automatic protocol selection** through the same engine
   (`ProtocolSelectionView` / `ProtocolSelectionUseCase`).
 - **New layering rule:** PlatformSDK code must not reference the legacy tunnel-profile or
   TunnelKit types (they are slated for removal); the `KapePlatformSDKVPNType` enum is the seam.
 - **Migration / security trade-offs to track.** VPN credentials now flow through the shared-state
   file rather than only the Keychain (the OpenVPN password is a protection downgrade vs. the
   legacy Keychain-`passwordReference` model), and legacy-profile cleanup is a one-time migration.
-  These and other follow-ups are tracked in `TODO.md` from the PR review.
 - **Forward path:** once the engine is stable behind the flag, the legacy IKEv2/OpenVPN/WireGuard
   extensions and the `mobile-ios-openvpn` / `mobile-ios-wireguard` dependencies can be retired.

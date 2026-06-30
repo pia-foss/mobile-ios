@@ -251,12 +251,18 @@ extension Server {
     public func addresses() -> [ServerAddressIP] {
 
         switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return iKEv2AddressesForUDP ?? []
-        case "PIA":
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP ?? []
-        case "PIAWG":
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return wireGuardAddressesForUDP ?? []
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            // Automatic tries WireGuard first, then OpenVPN (see PIAEndpointRepository); mirror that
+            // preference so the region remains pingable/selectable.
+            let wireGuard = wireGuardAddressesForUDP ?? []
+            let openVPN = openVPNAddressesForUDP ?? []
+            return wireGuard.isEmpty ? openVPN : wireGuard
         case "Mock":
             return iKEv2AddressesForUDP ?? []
         default:
@@ -301,12 +307,16 @@ extension Server {
 
     public func hasEndpoints(for vpnType: String) -> Bool {
         switch vpnType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return iKEv2AddressesForUDP?.isEmpty == false
-        case "PIA":
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
-        case "PIAWG":
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return wireGuardAddressesForUDP?.isEmpty == false
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            // Automatic can run over WireGuard or OpenVPN, so the server is usable if it offers
+            // endpoints for either protocol.
+            return wireGuardAddressesForUDP?.isEmpty == false || openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
         case "Mock":  // Simulator
             return true
         default:
@@ -319,15 +329,19 @@ extension Server {
 
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
         switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
-        case "PIA":
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
-        case "PIAWG":
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            for serverAddressIP in (wireGuardAddressesForUDP ?? []) + (openVPNAddressesForUDP ?? []) where serverAddressIP.ip == address.ip {
+                serverAddressIP.updateResponseTime(time)
+            }
         default:
             break
         }

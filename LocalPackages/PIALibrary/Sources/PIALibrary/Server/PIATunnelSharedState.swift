@@ -46,10 +46,12 @@ public enum PIATunnelSharedState {
         public static let serversCacheTTL: TimeInterval = 3600
     #endif
 
-    /// The VPN protocol the PlatformSDK tunnel should run.
+    /// The VPN protocol the PlatformSDK tunnel should run. `automatic` lets the tunnel try
+    /// WireGuard first and fall back to OpenVPN.
     public enum TunnelProtocol: String, Codable {
         case wireGuard
         case openVPN
+        case automatic
     }
 
     /// The OpenVPN transport the user selected. `automatic` lets the tunnel try both UDP and TCP.
@@ -141,8 +143,8 @@ public enum PIATunnelSharedState {
             selectedDipServer: Server? = nil,
             servers: [Server] = [],
             serversFetchedAt: Date? = nil,
-            selectedProtocol: TunnelProtocol = .wireGuard,
             latencyByServerId: [String: Int] = [:],
+            selectedProtocol: TunnelProtocol = .automatic,
             openVPNCaCertificate: String = "",
             openVPNUsername: String = "",
             openVPNPassword: String = "",
@@ -188,8 +190,8 @@ public enum PIATunnelSharedState {
             selectedDipServer = try container.decodeIfPresent(Server.self, forKey: .selectedDipServer)
             servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
             serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
-            selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .wireGuard
             latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
+            selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .automatic
             openVPNCaCertificate = try container.decodeIfPresent(String.self, forKey: .openVPNCaCertificate) ?? ""
             openVPNUsername = try container.decodeIfPresent(String.self, forKey: .openVPNUsername) ?? ""
             openVPNPassword = try container.decodeIfPresent(String.self, forKey: .openVPNPassword) ?? ""
