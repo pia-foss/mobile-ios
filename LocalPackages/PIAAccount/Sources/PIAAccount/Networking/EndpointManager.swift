@@ -31,6 +31,7 @@ actor EndpointManager {
     ///   - headers: Additional HTTP headers
     ///   - queryParameters: Optional query parameters to append to URL
     ///   - decoder: JSON decoder for response
+    ///   - timeout: Timeout for each endpoint independently. Measured in seconds.
     /// - Returns: The decoded response
     /// - Throws: PIAMultipleErrors if all endpoints fail, or PIAAccountError if only one endpoint
     func executeWithFailover<T: Decodable & Sendable>(
@@ -39,7 +40,8 @@ actor EndpointManager {
         bodyType: RequestBuilder.BodyType? = nil,
         headers: [String: String] = [:],
         queryParameters: [String: String]? = nil,
-        decoder: JSONDecoder = .piaCodable
+        decoder: JSONDecoder = .piaCodable,
+        timeout: TimeInterval? = nil
     ) async throws -> T {
         let endpoints = endpointProvider.accountEndpoints()
         var errors: [PIAAccountError] = []
@@ -61,7 +63,8 @@ actor EndpointManager {
                     url: url,
                     method: method,
                     bodyType: bodyType,
-                    headers: headers
+                    headers: headers,
+                    timeout: timeout
                 )
 
                 // Execute request
