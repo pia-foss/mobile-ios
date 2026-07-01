@@ -98,7 +98,7 @@ public final class PurchasePlan: NSObject {
 
     public static func accessibleString(forPrice price: Decimal, locale: Locale) -> String {
         accessibleFormatter.locale = locale
-        return accessibleFormatter.string(from: price)!
+        return accessibleFormatter.string(for: price)!
     }
 
     private override init() {

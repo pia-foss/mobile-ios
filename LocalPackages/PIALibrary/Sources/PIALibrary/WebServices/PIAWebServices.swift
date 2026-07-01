@@ -22,6 +22,7 @@
 
 import Foundation
 import PIAAccount
+import PIABase
 import PIACSI
 import PIARegions
 
@@ -153,9 +154,9 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     /***
      Generates a new auth token for the specific user
      */
-    func token(receipt: Data) async throws {
+    func token(receipt: JWS) async throws {
         do {
-            try await nativeAccountAPI.loginWithReceipt(receiptBase64: receipt.base64EncodedString())
+            try await nativeAccountAPI.loginWithReceipt(receipt: receipt)
             try handleLoginResponse(error: nil, mapError: mapNativeLoginFromReceiptError)
         } catch {
             try handleLoginResponse(error: error, mapError: mapNativeLoginFromReceiptError)
@@ -267,7 +268,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
 
             let info = IOSSignupInformation(
-                receipt: request.receipt.base64EncodedString(),
+                receipt: request.receipt,
                 email: request.email,
                 marketing: marketingJSON.isEmpty ? nil : marketingJSON,
                 debug: debugJSON.isEmpty ? nil : debugJSON
@@ -312,7 +313,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             }
 
             let info = IOSPaymentInformation(
-                receipt: request.receipt.base64EncodedString(),
+                receipt: request.receipt,
                 marketing: marketingJSON,
                 debug: debugJSON
             )
@@ -370,7 +371,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     // MARK: Store
-    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
+    func subscriptionInformation(with receipt: JWS?) async throws -> AppStoreInformation? {
         do {
             let response = try await nativeAccountAPI.subscriptions(receipt: receipt)
 

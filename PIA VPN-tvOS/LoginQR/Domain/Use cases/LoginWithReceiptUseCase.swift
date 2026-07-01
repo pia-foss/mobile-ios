@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 
 protocol LoginWithReceiptUseCaseType {
@@ -40,7 +41,7 @@ class LoginWithReceiptUseCase: LoginWithReceiptUseCaseType {
         }
     }
 
-    private func login(with receipt: Data, continuation: CheckedContinuation<UserAccount, any Error>) {
+    private func login(with receipt: JWS, continuation: CheckedContinuation<UserAccount, any Error>) {
         loginProvider.login(with: receipt) { [weak self] result in
             guard let self else { return }
 

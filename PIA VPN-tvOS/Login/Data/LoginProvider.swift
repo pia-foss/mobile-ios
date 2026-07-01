@@ -8,8 +8,9 @@
 
 import Foundation
 import PIALibrary
+import PIABase
 
-class LoginProvider: LoginProviderType {
+final class LoginProvider: LoginProviderType {
     private let accountProvider: AccountProvider
 
     init(accountProvider: AccountProvider) {
@@ -24,7 +25,7 @@ class LoginProvider: LoginProviderType {
         }
     }
 
-    func login(with receipt: Data, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, Error>) -> Void) {
         let request = LoginReceiptRequest(receipt: receipt)
 
         accountProvider.login(with: request) { [weak self] userAccount, error in

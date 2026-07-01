@@ -7,6 +7,7 @@
 //
 
 import PIALibrary
+import PIABase
 import XCTest
 
 @testable import PIA_VPN_tvOS
@@ -21,7 +22,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
     var fixture: Fixture!
     var sut: LoginWithReceiptUseCase!
 
-    func instantiateSut(paymentProviderResult: Result<Data, Error>, loginProviderResult: Result<UserAccount, Error>) {
+    func instantiateSut(paymentProviderResult: Result<JWS, Error>, loginProviderResult: Result<UserAccount, Error>) {
         fixture.paymentProviderMock = PaymentProviderMock(result: paymentProviderResult)
         fixture.loginProviderMock = LoginProviderMock(result: loginProviderResult)
 
@@ -42,7 +43,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
 
     func test_login_succeeds_when_paymentProvider_completes_with_receipt_and_loginprovider_completes_with_success() async throws {
         // GIVEN
-        let receipt = Data()
+        let receipt = JWS("jws-transaction")
         let user = UserAccount.makeStub()
 
         instantiateSut(
@@ -81,7 +82,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
 
     func test_login_fails_when_paymentProvider_completes_with_receipt_and_loginprovider_completes_with_failure() async throws {
         // GIVEN
-        let receipt = Data()
+        let receipt = JWS("jws-transaction")
         instantiateSut(
             paymentProviderResult: .success(receipt),
             loginProviderResult: .failure(ClientError.expired))

@@ -21,15 +21,12 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 private let log = PIALogger.logger(for: AppStoreProvider.self)
 
 final class AppStoreProvider: NSObject, InAppProvider {
-    private var receiptRefreshRequest: SKReceiptRefreshRequest?
-
-    private var receiptCallbacks: [SuccessLibraryCallback] = []
-
     private var transactionObserverTask: Task<Void, Never>?
 
     deinit {
@@ -41,17 +38,28 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
     private(set) var availableProducts: [any InAppProduct]?
 
-    var paymentReceipt: Data? {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            return nil
+    func currentEntitlementJWS() async -> JWS? {
+        var newest: (date: Date, jws: JWS)?
+        for await result in Transaction.currentEntitlements {
+            let transaction = result.unsafePayloadValue
+            if newest == nil || transaction.purchaseDate > newest!.date {
+                newest = (transaction.purchaseDate, JWS(result.jwsRepresentation))
+            }
         }
+        if newest == nil {
+            log.debug("No current entitlements found")
+        }
+        return newest?.jws
+    }
+
+    func synchronizeEntitlements() async -> Error? {
+        log.debug("Synchronizing entitlements with the App Store...")
         do {
-            let contents = try Data(contentsOf: url)
-            log.debug("Returning receipt with \(contents.count) bytes.")
-            return contents
-        } catch {
-            log.debug("Failed to read contents of appStoreReceiptURL")
+            try await AppStore.sync()
             return nil
+        } catch {
+            log.error("AppStore.sync() failed: \(error)")
+            return error
         }
     }
 
@@ -60,7 +68,7 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
         transactionObserverTask = Task {
             for await result in Transaction.updates {
-                log.debug("transaction result: \(result)º")
+                log.debug("transaction result: \(result)")
             }
         }
     }
@@ -133,13 +141,17 @@ final class AppStoreProvider: NSObject, InAppProvider {
         }
 
         switch result {
-        case .success(.verified(let transaction)):
-            log.debug("\(#function) success verified")
-            return .success(AppStoreTransaction(native: transaction))
-        case .success(.unverified(let transaction, let error)):
-            log.debug("\(#function) success unverified")
-            log.warning("Unverified transaction: \(error)")
-            return .success(AppStoreTransaction(native: transaction))
+        case .success(let verification):
+            let jwt = JWS(verification.jwsRepresentation)
+            switch verification {
+            case .verified(let transaction):
+                log.debug("\(#function) success verified")
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jwt))
+            case .unverified(let transaction, let error):
+                log.debug("\(#function) success unverified")
+                log.warning("Unverified transaction: \(error)")
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jwt))
+            }
         case .userCancelled:
             log.debug("\(#function) userCancelled")
             return .failure(.userCancelled)
@@ -153,80 +165,12 @@ final class AppStoreProvider: NSObject, InAppProvider {
     }
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
-        guard let transaction = transaction.native as? SKPaymentTransaction else {
-            log.error("Native transaction must be SKPaymentTransaction, but got \(type(of: transaction.native))")
+        guard let native = transaction.native as? Transaction else {
+            log.error("Native transaction must be StoreKit.Transaction, but got \(type(of: transaction.native))")
             return
         }
 
-        finishTransaction(transaction, success: success)
-    }
-
-    func finishTransaction(_ transaction: SKPaymentTransaction?, success: Bool) {
-        guard let transaction else {
-            log.error("finishTransaction called with nil transaction")
-            return
-        }
-
-        if success {
-            log.debug("Finishing successful transaction: \(transaction)")
-        } else {
-            log.debug("Finishing failed/cancelled transaction: \(transaction)")
-        }
-
-        SKPaymentQueue.default().finishTransaction(transaction)
-    }
-
-    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
-        log.debug("Refreshing local copy of payment receipt...")
-
-        if let callback {
-            receiptCallbacks.append(callback)
-        }
-
-        // Coalesce: if a refresh is already in flight, the in-flight request will
-        // fire every queued callback when it finishes.
-        guard receiptRefreshRequest == nil else { return }
-
-        receiptRefreshRequest = SKReceiptRefreshRequest(receiptProperties: nil)
-        receiptRefreshRequest?.delegate = self
-        receiptRefreshRequest?.start()
-    }
-}
-
-extension AppStoreProvider: SKRequestDelegate {
-    func requestDidFinish(_ request: SKRequest) {
-        guard (request == receiptRefreshRequest) else {
-            return
-        }
-        receiptRefreshRequest = nil
-        log.debug("Finished refreshing payment receipt")
-        let callbacks = receiptCallbacks
-        receiptCallbacks.removeAll()
-        callbacks.forEach { $0(nil) }
-    }
-
-    func request(_ request: SKRequest, didFailWithError error: Error) {
-        guard (request == receiptRefreshRequest) else {
-            return
-        }
-        receiptRefreshRequest = nil
-        log.error("Failed to refresh payment receipt (error: \(error))")
-        let callbacks = receiptCallbacks
-        receiptCallbacks.removeAll()
-        callbacks.forEach { $0(error) }
-    }
-}
-
-/// :nodoc:
-extension SKProduct {
-    open override var description: String {
-        return productIdentifier
-    }
-}
-
-/// :nodoc:
-extension SKPaymentTransaction {
-    open override var description: String {
-        return "{'\(transactionIdentifier ?? "")' -> \(payment.productIdentifier)}"
+        log.debug("Finishing transaction: \(native.id)")
+        Task { await native.finish() }
     }
 }

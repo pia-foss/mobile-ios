@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 
 /// Wraps any native implementation of an in-app transaction by providing a common interface.
 public protocol InAppTransaction<Native>: CustomStringConvertible {
@@ -28,6 +29,9 @@ public protocol InAppTransaction<Native>: CustomStringConvertible {
 
     /// The transaction identifier.
     var identifier: String { get }
+
+    /// The signed JWS representation of the transaction, sent to the backend as the `receipt`.
+    var jwsRepresentation: JWS { get }
 
     /// The underlying native transaction implementation.
     var native: Native { get }

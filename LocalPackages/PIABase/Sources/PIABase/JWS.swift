@@ -1,8 +1,8 @@
 //
-//  LoginReceiptRequest.swift
-//  Pods
+//  JWS.swift
+//  PIAAccount
 //
-//  Created by Jose Antonio Blaya Garcia on 17/03/2020.
+//  Created by Mario on 30/06/26.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -21,18 +21,26 @@
 //
 
 import Foundation
-import PIABase
 
-/// A login receipt request.
-///
-/// - Seealso: `AccountProvider.login(...)`
-public struct LoginReceiptRequest {
+public struct JWS: Sendable {
+    public let value: String
 
-    /// The signed JWS transaction used to authenticate.
-    public let receipt: JWS
+    public init(_ value: String) {
+        self.value = value
+    }
 
-    /// :nodoc:
-    public init(receipt: JWS) {
-        self.receipt = receipt
+    @inlinable
+    public var isEmpty: Bool { value.isEmpty }
+}
+
+extension JWS: Codable {
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.value = try container.decode(String.self)
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.value)
     }
 }

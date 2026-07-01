@@ -22,7 +22,7 @@ final class SubscriptionOptionViewModelMapper {
             + (isYearlyPlan
                 ? L10n.Tvos.Signup.Subscription.Paywall.Price.year
                 : L10n.Welcome.Plan.Accessibility.perMonth)
-        let monthlyPriceValue = NSDecimalNumber(value: product.product.price.doubleValue / 12)
+        let monthlyPriceValue = product.product.price / 12
         let monthlyPrice = PurchasePlan.string(forPrice: monthlyPriceValue, locale: locale) + L10n.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
 
         return SubscriptionOptionViewModel(

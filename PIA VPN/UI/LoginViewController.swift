@@ -223,14 +223,16 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             return
         }
 
-        Client.store.refreshPaymentReceipt { [weak self] error in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                guard let receipt = Client.store.paymentReceipt else {
+        Task { [weak self] in
+            _ = await Client.store.synchronizeEntitlements()
+            let jws = await Client.store.currentEntitlementJWS()
+            await MainActor.run {
+                guard let self else { return }
+                guard let jws else {
                     return
                 }
 
-                let request = LoginReceiptRequest(receipt: receipt)
+                let request = LoginReceiptRequest(receipt: jws)
 
                 self.prepareLogin()
                 self.config.accountProvider.login(with: request) { userAccount, error in

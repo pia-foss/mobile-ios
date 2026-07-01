@@ -205,7 +205,7 @@ final class LoginProviderTests: XCTestCase {
         let expectation = expectation(description: "Waiting for login to finish")
 
         // WHEN
-        sut.login(with: Data()) { [weak self] result in
+        sut.login(with: .init("jws")) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
         }
@@ -250,7 +250,7 @@ final class LoginProviderTests: XCTestCase {
         let expectation = expectation(description: "Waiting for login to finish")
 
         // WHEN
-        sut.login(with: Data()) { [weak self] result in
+        sut.login(with: .init("jws")) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
         }
@@ -278,7 +278,7 @@ final class LoginProviderTests: XCTestCase {
         let expectation = expectation(description: "Waiting for login to finish")
 
         // WHEN
-        sut.login(with: Data()) { [weak self] result in
+        sut.login(with: .init("jws")) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
         }
@@ -306,7 +306,7 @@ final class LoginProviderTests: XCTestCase {
         let expectation = expectation(description: "Waiting for login to finish")
 
         // WHEN
-        sut.login(with: Data()) { [weak self] result in
+        sut.login(with: .init("jws")) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
         }
@@ -335,7 +335,7 @@ final class LoginProviderTests: XCTestCase {
         let expectation = expectation(description: "Waiting for login to finish")
 
         // WHEN
-        sut.login(with: Data()) { [weak self] result in
+        sut.login(with: .init("jws")) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
         }

@@ -130,16 +130,19 @@ final class GetStartedViewController: PIAWelcomeViewController {
     @IBAction private func logInWithReceipt(_ sender: Any?) {
         showLoadingAnimation()
 
-        Client.store.refreshPaymentReceipt { [weak self] error in
-            DispatchQueue.main.async {
-                guard let receipt = Client.store.paymentReceipt else {
-                    self?.hideLoadingAnimation()
-                    self?.handleBadReceipt()
+        Task { [weak self] in
+            _ = await Client.store.synchronizeEntitlements()
+            let jws = await Client.store.currentEntitlementJWS()
+            await MainActor.run {
+                guard let self else { return }
+                guard let jws else {
+                    self.hideLoadingAnimation()
+                    self.handleBadReceipt()
                     return
                 }
 
-                let request = LoginReceiptRequest(receipt: receipt)
-                self?.config.accountProvider.login(with: request) { userAccount, error in
+                let request = LoginReceiptRequest(receipt: jws)
+                self.config.accountProvider.login(with: request) { [weak self] userAccount, error in
                     self?.hideLoadingAnimation()
 
                     guard let userAccount else {

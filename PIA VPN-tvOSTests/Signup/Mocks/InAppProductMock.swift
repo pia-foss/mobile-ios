@@ -9,17 +9,17 @@
 import Foundation
 import PIALibrary
 
-final class InAppProductMock: InAppProduct {
-    enum Native: Sendable { case none }
+struct InAppProductMock: InAppProduct {
+    enum Native: Equatable, Sendable { case none }
 
     let identifier: String
-    let price: NSNumber
+    let price: Decimal
     let priceLocale: Locale
     let native: Native
     let hasIntroOffer: Bool = false
     let description: String
 
-    init(identifier: String, price: NSNumber, priceLocale: Locale, native: Native, description: String) {
+    init(identifier: String, price: Decimal, priceLocale: Locale, native: Native, description: String) {
         self.identifier = identifier
         self.price = price
         self.priceLocale = priceLocale

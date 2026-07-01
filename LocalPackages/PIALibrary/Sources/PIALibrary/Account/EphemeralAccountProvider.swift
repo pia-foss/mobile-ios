@@ -112,12 +112,12 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
     }
 
     func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard let signup = request.signup(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
-        }
-
         Task { @MainActor in
+            guard let signup = await request.signup(withStore: accessedStore) else {
+                DispatchQueue.main.async { callback?(nil, ClientError.noReceipt) }
+                return
+            }
+
             do {
                 guard let credentials = try await webServices?.signup(with: signup) else {
                     DispatchQueue.main.async { callback?(nil, nil) }

@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 #if os(iOS) || os(tvOS)
@@ -48,17 +49,19 @@ import StoreKit
 
         let identifier: String = "1234567890"
 
+        let jwsRepresentation: JWS = JWS("mock-jws-transaction")
+
         let native: Native = .none
     }
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {
 
-        init(with receipt: Data? = Data()) {
-            self.paymentReceipt = receipt
+        init(jws: JWS? = JWS("mock-jws-transaction")) {
+            self.entitlementJWS = jws
         }
         var availableProducts: [any InAppProduct]?
 
-        var paymentReceipt: Data?
+        var entitlementJWS: JWS?
 
         func startObservingTransactions() {
         }
@@ -82,8 +85,12 @@ import StoreKit
         func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
         }
 
-        func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
-            callback?(nil)
+        func currentEntitlementJWS() async -> JWS? {
+            return entitlementJWS
+        }
+
+        func synchronizeEntitlements() async -> Error? {
+            return nil
         }
     }
 #endif

@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 struct AppStoreTransaction: InAppTransaction<Transaction> {
@@ -30,7 +31,10 @@ struct AppStoreTransaction: InAppTransaction<Transaction> {
 
     let native: Transaction
 
-    init(native: Transaction) {
+    let jwsRepresentation: JWS
+
+    init(native: Transaction, jwsRepresentation: JWS) {
         self.native = native
+        self.jwsRepresentation = jwsRepresentation
     }
 }

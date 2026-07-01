@@ -21,12 +21,11 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 public protocol InAppProvider: AnyObject {
     var availableProducts: [any InAppProduct]? { get }
-
-    var paymentReceipt: Data? { get }
 
     func startObservingTransactions()
 
@@ -38,5 +37,14 @@ public protocol InAppProvider: AnyObject {
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
-    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?)
+    /// The signed JWS representation of the newest active subscription entitlement, or `nil` if none.
+    ///
+    /// Used as the `receipt` for backend flows where no fresh purchase transaction is available
+    /// (login-with-receipt, restore, subscription pricing).
+    func currentEntitlementJWS() async -> JWS?
+
+    /// Forces a synchronization with the App Store. Used by "restore purchases".
+    ///
+    /// - Returns: an `Error` if the sync failed, or `nil` on success.
+    func synchronizeEntitlements() async -> Error?
 }
