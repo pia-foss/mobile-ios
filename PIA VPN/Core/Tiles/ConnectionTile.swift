@@ -77,6 +77,16 @@ class ConnectionTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(setConnectionValues), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
 
+        // Through the PlatformSDK tunnel the extension writes the actual connection (protocol/server/
+        // transport) into shared state after connecting, out of band with VPN status changes. Observe
+        // those cross-process writes so the tile reflects the resolved values promptly.
+        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            PIATunnelSharedState.startObserving()
+            nc.addObserver(
+                self, selector: #selector(setConnectionValues),
+                name: PIATunnelSharedState.didChangeNotification, object: nil)
+        }
+
         protocolIcon.image = Asset.Piax.Tiles.ConnectionTile.iconProtocol.image
         portIcon.image = Asset.Piax.Tiles.ConnectionTile.iconPort.image
         authenticationIcon.image = Asset.Piax.Tiles.ConnectionTile.iconAuthentication.image
@@ -96,19 +106,26 @@ class ConnectionTile: UIView, Tileable {
             resetValues()
         }
 
-        self.protocolLabel.text = Client.preferences.vpnType.vpnProtocol
-        self.portLabel.text = Client.preferences.vpnType.port
-        self.authenticationLabel.text = Client.preferences.vpnType.authentication
-        self.encryptionLabel.text = Client.preferences.vpnType.encryption
-        self.socketLabel.text = Client.preferences.vpnType.socket
-        self.handshakeLabel.text = Client.preferences.vpnType.handshake
+        // When connected through the PlatformSDK tunnel, show what the tunnel actually resolved (e.g.
+        // WireGuard under "Automatic", or the concrete UDP/TCP for an OpenVPN "Automatic" transport)
+        // rather than the user's selection; otherwise fall back to the selected values.
+        let connection = Client.providers.vpnProvider.actualConnection
+        let displayVPNType = connection?.vpnType ?? Client.preferences.vpnType
+        let displaySocket = connection?.transport.rawValue.uppercased() ?? displayVPNType.socket
 
-        self.protocolLabel.accessibilityLabel = Client.preferences.vpnType.vpnProtocol
-        self.portLabel.accessibilityLabel = Client.preferences.vpnType.port
-        self.authenticationLabel.accessibilityLabel = Client.preferences.vpnType.authentication
-        self.encryptionLabel.accessibilityLabel = Client.preferences.vpnType.encryption
-        self.socketLabel.accessibilityLabel = Client.preferences.vpnType.socket
-        self.handshakeLabel.accessibilityLabel = Client.preferences.vpnType.handshake
+        self.protocolLabel.text = displayVPNType.vpnProtocol
+        self.portLabel.text = displayVPNType.port
+        self.authenticationLabel.text = displayVPNType.authentication
+        self.encryptionLabel.text = displayVPNType.encryption
+        self.socketLabel.text = displaySocket
+        self.handshakeLabel.text = displayVPNType.handshake
+
+        self.protocolLabel.accessibilityLabel = displayVPNType.vpnProtocol
+        self.portLabel.accessibilityLabel = displayVPNType.port
+        self.authenticationLabel.accessibilityLabel = displayVPNType.authentication
+        self.encryptionLabel.accessibilityLabel = displayVPNType.encryption
+        self.socketLabel.accessibilityLabel = displaySocket
+        self.handshakeLabel.accessibilityLabel = displayVPNType.handshake
 
     }
 

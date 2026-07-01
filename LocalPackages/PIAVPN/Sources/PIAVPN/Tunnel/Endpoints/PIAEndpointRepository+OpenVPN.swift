@@ -10,7 +10,7 @@ extension PIAEndpointRepository {
     func generateOpenVPNConfigurations(server: Server, state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
         logger.info("Generating OpenVPN configurations")
 
-        guard !state.openVPNCaCertificate.isEmpty else {
+        guard !state.openVPN.caCertificate.isEmpty else {
             logger.error("OpenVPN CA certificate not set in shared state — returning no configurations")
             return []
         }
@@ -25,11 +25,11 @@ extension PIAEndpointRepository {
 
         logger.info("Found server \(server.name) with \(udpAddresses.count) UDP / \(tcpAddresses.count) TCP OpenVPN address(es)")
 
-        let userPort = state.openVPNPort
+        let userPort = state.openVPN.port
 
         // Honor the user's transport choice; `.automatic` offers both UDP and TCP (UDP first,
         // then TCP via the SDK's demand-driven failover).
-        let transport = state.openVPNTransport
+        let transport = state.openVPN.transport
         let includeUDP = transport != .tcp
         let includeTCP = transport != .udp
         logger.info("OpenVPN transport: \(transport.rawValue) (UDP: \(includeUDP), TCP: \(includeTCP))")
@@ -84,20 +84,20 @@ extension PIAEndpointRepository {
             host: ip,
             port: port,
             transport: transport,
-            ovpnConfiguration: state.openVPNOvpnConfig,
+            ovpnConfiguration: state.openVPN.ovpnConfig,
             ovpnConfigTemplate: nil,
             xorValue: nil,
             usesPIAPatches: usesPIAPatches,
-            mtu: state.openVPNMtu,
+            mtu: state.openVPN.mtu,
             certDn: cn,
-            username: state.openVPNUsername,
-            password: state.openVPNPassword,
-            caCertificate: state.openVPNCaCertificate,
+            username: state.openVPN.username,
+            password: state.openVPN.password,
+            caCertificate: state.openVPN.caCertificate,
             clientCertificate: "",
             clientKey: "",
             tlsAuthKey: "",
             appGroupIdentifier: AppConstants.appGroup,
-            dnsServers: state.openVPNDnsServers
+            dnsServers: state.openVPN.dnsServers
         )
     }
 }

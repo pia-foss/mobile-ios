@@ -72,7 +72,7 @@ public extension String {
         case PIATunnelProfile.vpnType:
             return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
         default:
-            return self
+            return "---"
 
         }
     }
@@ -87,7 +87,7 @@ public extension String {
             let preferences = Client.preferences.editable()
             return preferences.ikeV2IntegrityAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -105,7 +105,7 @@ public extension String {
             let preferences = Client.preferences.editable()
             return preferences.ikeV2EncryptionAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -122,7 +122,7 @@ public extension String {
         case IKEv2Profile.vpnType:
             return "---"
         default:
-            return self
+            return "---"
         }
     }
 

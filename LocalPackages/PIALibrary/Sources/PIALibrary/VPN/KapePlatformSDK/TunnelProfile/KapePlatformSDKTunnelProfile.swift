@@ -104,21 +104,12 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                 .init(
                     selectedLocationId: isAutomaticSelection ? nil : server.identifier,
                     selectedDipServer: server.dipToken != nil ? server : nil,
+                    selectedProtocol: tunnelProtocol,
+                    openVPN: openVPN,
+                    wireGuard: wireGuard,
                     servers: existing.servers,
                     serversFetchedAt: existing.serversFetchedAt,
-                    latencyByServerId: existing.latencyByServerId,
-                    selectedProtocol: tunnelProtocol,
-                    openVPNCaCertificate: openVPN.caCertificate,
-                    openVPNUsername: openVPN.username,
-                    openVPNPassword: openVPN.password,
-                    openVPNOvpnConfig: openVPN.ovpnConfig,
-                    openVPNPort: openVPN.port,
-                    openVPNTransport: openVPN.transport,
-                    openVPNMtu: openVPN.mtu,
-                    openVPNDnsServers: openVPN.dnsServers,
-                    wireGuardMtu: wireGuard.mtu,
-                    wireGuardToken: wireGuard.token,
-                    wireGuardDnsServers: wireGuard.dnsServers
+                    latencyByServerId: existing.latencyByServerId
                 )
             )
         } catch {

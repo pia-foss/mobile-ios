@@ -36,29 +36,82 @@ struct PIATunnelSharedStateTests {
     func dnsRoundTrip() throws {
         let state = PIATunnelSharedState.State(
             selectedProtocol: .wireGuard,
-            openVPNDnsServers: ["8.8.8.8", "8.8.4.4"],
-            wireGuardDnsServers: ["1.1.1.1", "1.0.0.1"]
+            openVPN: .init(dnsServers: ["8.8.8.8", "8.8.4.4"]),
+            wireGuard: .init(dnsServers: ["1.1.1.1", "1.0.0.1"])
         )
 
         let decoded = try roundTrip(state)
 
-        #expect(decoded.openVPNDnsServers == ["8.8.8.8", "8.8.4.4"])
-        #expect(decoded.wireGuardDnsServers == ["1.1.1.1", "1.0.0.1"])
+        #expect(decoded.openVPN.dnsServers == ["8.8.8.8", "8.8.4.4"])
+        #expect(decoded.wireGuard.dnsServers == ["1.1.1.1", "1.0.0.1"])
+    }
+
+    @Test("OpenVPN / WireGuard settings survive an encode/decode round-trip")
+    func settingsRoundTrip() throws {
+        let openVPN = PIATunnelSharedState.OpenVPNSettings(
+            caCertificate: "CERT", username: "user", password: "pass",
+            ovpnConfig: "cipher AES-128-GCM\nauth SHA256", port: 8443,
+            transport: .tcp, mtu: 1350, dnsServers: ["8.8.8.8"])
+        let wireGuard = PIATunnelSharedState.WireGuardSettings(
+            mtu: 1280, token: "tok", dnsServers: ["1.1.1.1"])
+        let state = PIATunnelSharedState.State(openVPN: openVPN, wireGuard: wireGuard)
+
+        let decoded = try roundTrip(state)
+
+        #expect(decoded.openVPN == openVPN)
+        #expect(decoded.wireGuard == wireGuard)
     }
 
     @Test("Default state has empty DNS lists (PIA-default / server-pushed behaviour)")
     func defaultsAreEmpty() {
         let state = PIATunnelSharedState.State()
-        #expect(state.openVPNDnsServers.isEmpty)
-        #expect(state.wireGuardDnsServers.isEmpty)
+        #expect(state.openVPN.dnsServers.isEmpty)
+        #expect(state.wireGuard.dnsServers.isEmpty)
     }
 
-    @Test("An older payload missing the DNS keys decodes to empty lists")
+    @Test("An older payload missing the settings keys decodes to defaults")
     func backwardCompatibleDecode() throws {
-        // Simulates a state file written before the DNS fields existed.
+        // Simulates a state file written before the OpenVPN / WireGuard settings existed.
         let legacyJSON = Data("{}".utf8)
         let decoded = try JSONDecoder().decode(PIATunnelSharedState.State.self, from: legacyJSON)
-        #expect(decoded.openVPNDnsServers.isEmpty)
-        #expect(decoded.wireGuardDnsServers.isEmpty)
+        #expect(decoded.openVPN.dnsServers.isEmpty)
+        #expect(decoded.wireGuard.dnsServers.isEmpty)
+    }
+
+    @Test("activeConnection survives an encode/decode round-trip")
+    func activeConnectionRoundTrip() throws {
+        let connection = PIATunnelSharedState.ActiveConnection(
+            protocol: .openVPN,
+            serverId: "us_chicago",
+            resolvedTransport: .tcp,
+            updatedAt: Date(timeIntervalSince1970: 1_700_000_000)
+        )
+        let state = PIATunnelSharedState.State(activeConnection: connection)
+
+        let decoded = try roundTrip(state)
+
+        #expect(decoded.activeConnection == connection)
+        #expect(decoded.activeConnection?.protocol == .openVPN)
+        #expect(decoded.activeConnection?.serverId == "us_chicago")
+        #expect(decoded.activeConnection?.resolvedTransport == .tcp)
+    }
+
+    @Test("activeConnection defaults to nil and an older payload decodes to nil")
+    func activeConnectionDefaultsNil() throws {
+        #expect(PIATunnelSharedState.State().activeConnection == nil)
+
+        let legacyJSON = Data("{}".utf8)
+        let decoded = try JSONDecoder().decode(PIATunnelSharedState.State.self, from: legacyJSON)
+        #expect(decoded.activeConnection == nil)
+    }
+
+    @Test("A payload written before resolvedTransport existed decodes to .udp")
+    func resolvedTransportBackwardCompat() throws {
+        // An active-connection blob missing the transport key must not fail the whole state decode;
+        // it defaults to `.udp` (WireGuard is always UDP; OpenVPN's primary transport is UDP).
+        let legacyJSON = Data(#"{"protocol":"wireGuard","serverId":"us_chicago","updatedAt":0}"#.utf8)
+        let decoded = try JSONDecoder().decode(PIATunnelSharedState.ActiveConnection.self, from: legacyJSON)
+        #expect(decoded.resolvedTransport == .udp)
+        #expect(decoded.protocol == .wireGuard)
     }
 }

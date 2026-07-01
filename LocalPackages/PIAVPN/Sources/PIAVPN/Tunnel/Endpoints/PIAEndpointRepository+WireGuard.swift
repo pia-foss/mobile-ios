@@ -30,7 +30,7 @@ extension PIAEndpointRepository {
                 host: address.ip,
                 port: Self.wireGuardPort,
                 obfuscation: .none,
-                mtu: state.wireGuardMtu
+                mtu: state.wireGuard.mtu
             )
         }
 

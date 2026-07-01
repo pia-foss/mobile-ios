@@ -71,6 +71,34 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     public var connectionDate: Date? { activeProfile?.connectionDate }
 
+    /// What the PlatformSDK tunnel actually resolved this session (written back by the extension):
+    /// protocol, server, and transport. Only meaningful while connected through that tunnel;
+    /// otherwise `nil` so callers fall back to the user's selection.
+    public var actualConnection: ActualConnection? {
+        guard let active = activeConnectionFromTunnel else { return nil }
+        let vpnType: String?
+        switch active.protocol {
+        case .wireGuard: vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
+        case .openVPN: vpnType = KapePlatformSDKVPNType.openVPN.rawValue
+        case .automatic: vpnType = nil  // never written back resolved; ignore
+        }
+        let server = accessedProviders.serverProvider.find(withIdentifier: active.serverId)
+        return ActualConnection(
+            vpnType: vpnType,
+            server: server,
+            transport: active.resolvedTransport
+        )
+    }
+
+    /// The tunnel's actual-connection write-back, valid only when running through the PlatformSDK
+    /// tunnel and currently connected (so a stale value from a previous session is never shown).
+    private var activeConnectionFromTunnel: PIATunnelSharedState.ActiveConnection? {
+        guard accessedConfiguration.featureFlags[.usePlatformSDKVPN], isVPNConnected else {
+            return nil
+        }
+        return PIATunnelSharedState.read().activeConnection
+    }
+
     private var vpnLog: String {
         return accessedDatabase.transient.vpnLog
     }

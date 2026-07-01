@@ -23,24 +23,11 @@
 import Foundation
 
 extension KapePlatformSDKTunnelProfile {
-    /// Resolved OpenVPN parameters written into `PIATunnelSharedState.State`.
-    struct OpenVPNSettings {
-        let caCertificate: String
-        let username: String
-        let password: String
-        let ovpnConfig: String
-        let port: UInt16
-        let transport: PIATunnelSharedState.OpenVPNTransport
-        let mtu: UInt16
-        /// User-selected custom DNS resolvers; empty → keep the server-provided resolvers.
-        let dnsServers: [String]
-    }
-
     /// Builds the OpenVPN settings from app-group UserDefaults.
     /// For a Dedicated IP server, authenticates with the per-server DIP credentials
     /// (`dipUsername` + the dedicated IP as password) instead of the account VPN token.
     /// Throws if (non-DIP) VPN credentials are unavailable.
-    func openVPNSettings(for server: Server) throws -> OpenVPNSettings {
+    func openVPNSettings(for server: Server) throws -> PIATunnelSharedState.OpenVPNSettings {
         let caCertificate = Client.configuration.rsa4096Certificate ?? ""
 
         let username: String
@@ -88,7 +75,7 @@ extension KapePlatformSDKTunnelProfile {
         let mtu = UInt16(useSmallPackets ? AppConstants.OpenVPNPacketSize.smallPacketSize : AppConstants.OpenVPNPacketSize.defaultPacketSize)
         let dnsServers = customDnsServers(forVPNType: .openVPN)
 
-        return OpenVPNSettings(
+        return PIATunnelSharedState.OpenVPNSettings(
             caCertificate: caCertificate,
             username: username,
             password: password,

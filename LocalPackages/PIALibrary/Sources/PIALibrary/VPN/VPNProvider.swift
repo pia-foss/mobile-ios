@@ -44,6 +44,13 @@ public protocol VPNProvider: AnyObject {
     /// The connection date time, if connected. Otherwise nil.
     var connectionDate: Date? { get }
 
+    /// What the PlatformSDK tunnel is *actually* running this session, as reported by the tunnel —
+    /// the resolved protocol, server, and transport (e.g. under "Automatic"). `nil` when there is no
+    /// active PlatformSDK session; callers fall back to the user's selection per field.
+    ///
+    /// - Seealso: `ActualConnection`
+    var actualConnection: ActualConnection? { get }
+
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
@@ -133,6 +140,9 @@ public extension VPNProvider {
     func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
+
+    /// Default: no tunnel-reported value. Providers that run through the PlatformSDK tunnel override.
+    var actualConnection: ActualConnection? { nil }
 }
 
 extension VPNProvider {

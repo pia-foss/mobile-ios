@@ -63,8 +63,17 @@ final class SelectedServerViewModel: ObservableObject {
 
     private func updateState() {
         useCase.getSelectedServer()
-            .combineLatest(optimalLocationUseCase.getTargetLocaionForOptimalLocation()) { (newSelectedServer, newTargetLocation) in
-                return (selectedServer: newSelectedServer, targetLocation: newTargetLocation)
+            .combineLatest(
+                optimalLocationUseCase.getTargetLocaionForOptimalLocation(),
+                actualConnectedServerPublisher()
+            ) { (newSelectedServer, newTargetLocation, actualServer) in
+                // While connected through the PlatformSDK tunnel, display the server the tunnel
+                // actually connected to (e.g. the fastest region resolved under "Automatic");
+                // otherwise show the user's selection. Display-only — the selection is untouched.
+                return (
+                    selectedServer: actualServer ?? newSelectedServer,
+                    targetLocation: newTargetLocation
+                )
             }
             .receive(on: RunLoop.main)
             .sink { [weak self] result in
@@ -73,6 +82,16 @@ final class SelectedServerViewModel: ObservableObject {
                 self.updateSelectedServerSubtitle(for: result.selectedServer, targetLocation: result.targetLocation)
             }.store(in: &cancellables)
 
+    }
+
+    /// Emits the server the PlatformSDK tunnel actually connected to (or `nil` when not applicable),
+    /// refreshing on VPN status changes. Mirrors how the iOS tiles read
+    /// `vpnProvider.actualConnection?.server`.
+    private func actualConnectedServerPublisher() -> AnyPublisher<ServerType?, Never> {
+        NotificationCenter.default.publisher(for: .PIADaemonsDidUpdateVPNStatus)
+            .map { _ in Client.providers.vpnProvider.actualConnection?.server as ServerType? }
+            .prepend(Client.providers.vpnProvider.actualConnection?.server as ServerType?)
+            .eraseToAnyPublisher()
     }
 
     private func updateSelectedServerSubtitle(for selectedServer: ServerType, targetLocation: ServerType?) {
