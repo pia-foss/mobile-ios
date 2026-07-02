@@ -391,10 +391,16 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
             return info
         } catch {
+            log.warning("Failed to fetch subscription information: \(error)")
             let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-            if code == 400 {
+            switch code {
+            case 400:
                 throw ClientError.badReceipt
-            } else {
+            case 401:
+                throw ClientError.unauthorized
+            case 600:
+                throw ClientError.libraryError(message: error.localizedDescription)
+            default:
                 throw ClientError.invalidParameter
             }
         }
