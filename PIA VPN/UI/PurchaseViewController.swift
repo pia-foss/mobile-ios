@@ -205,14 +205,13 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             )
 
             purchase.title = L10n.Welcome.Plan.Yearly.title
-            let currencySymbol = purchase.product.priceLocale.currencySymbol ?? ""
-            purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
+            purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(purchase.priceString)
             purchase.bestValue = true
 
             allPlans[0] = purchase
 
             textAgreement.attributedText = Theme.current.agreementText(
-                withMessage: L10n.Welcome.Agreement.message(purchase.price.stringValue),
+                withMessage: L10n.Welcome.Agreement.message(purchase.priceString),
                 tos: L10n.Welcome.Agreement.Message.tos,
                 tosUrl: Client.configuration.tosUrl,
                 privacy: L10n.Welcome.Agreement.Message.privacy,
