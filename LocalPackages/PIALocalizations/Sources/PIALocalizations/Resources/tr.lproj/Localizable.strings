@@ -652,7 +652,7 @@
 
 "welcome.plan.price_format"= "%@/ay";
 
-"welcome.plan.yearly.detail_format"= "Yılda %@%@";
+"welcome.plan.yearly.detail_format"= "Yılda %@";
 
 "welcome.plan.yearly.title"= "Yıllık";
 

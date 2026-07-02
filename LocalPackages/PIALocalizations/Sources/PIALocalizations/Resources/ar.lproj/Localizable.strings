@@ -621,7 +621,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 
 "welcome.plan.monthly.title"= "شهريًا";
 "welcome.plan.yearly.title"= "سنويًا";
-"welcome.plan.yearly.detail_format"= "%@%@ في السنة";
+"welcome.plan.yearly.detail_format"= "%@ في السنة";
 "welcome.plan.price_format"= "%@ / شهر";
 "welcome.plan.best_value"= "أفضل قيمة";
 "welcome.plan.accessibility.per_month"= "في الشهر";

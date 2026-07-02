@@ -621,7 +621,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 
 "welcome.plan.monthly.title"= "Mensile";
 "welcome.plan.yearly.title"= "Annuale";
-"welcome.plan.yearly.detail_format"= "%@%@ all'anno";
+"welcome.plan.yearly.detail_format"= "%@ all'anno";
 "welcome.plan.price_format"= "%@ al mese";
 "welcome.plan.best_value"= "Valore migliore";
 "welcome.plan.accessibility.per_month"= "al mese";

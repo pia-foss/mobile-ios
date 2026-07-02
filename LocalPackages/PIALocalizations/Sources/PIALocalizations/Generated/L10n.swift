@@ -1717,9 +1717,9 @@ public enum L10n {
         public static let title = L10n.tr("Localizable", "welcome.plan.monthly.title", fallback: "Monthly")
       }
       public enum Yearly {
-        /// %@%@ per year
-        public static func detailFormat(_ p1: Any, _ p2: Any) -> String {
-          return L10n.tr("Localizable", "welcome.plan.yearly.detail_format", String(describing: p1), String(describing: p2), fallback: "%@%@ per year")
+        /// %@ per year
+        public static func detailFormat(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "welcome.plan.yearly.detail_format", String(describing: p1), fallback: "%@ per year")
         }
         /// Yearly
         public static let title = L10n.tr("Localizable", "welcome.plan.yearly.title", fallback: "Yearly")

@@ -82,19 +82,19 @@ final class SignupViewModelTests: XCTestCase {
         XCTAssertEqual(sut.subscriptionOptions[0].productId, "002")
         XCTAssertEqual(sut.subscriptionOptions[0].option, .yearly)
         XCTAssertEqual(sut.subscriptionOptions[0].optionString, "Yearly")
-        XCTAssertEqual(sut.subscriptionOptions[0].price, "100.99$ per year")
-        XCTAssertEqual(sut.subscriptionOptions[0].monthlyPrice, "8.42$/mo")
+        XCTAssertEqual(sut.subscriptionOptions[0].price, "$100.99 per year")
+        XCTAssertEqual(sut.subscriptionOptions[0].monthlyPrice, "$8.42/mo")
         XCTAssertEqual(sut.subscriptionOptions[0].freeTrial, "BEST VALUE - FREE TRIAL")
 
         XCTAssertEqual(sut.subscriptionOptions[1].productId, "001")
         XCTAssertEqual(sut.subscriptionOptions[1].option, .monthly)
         XCTAssertEqual(sut.subscriptionOptions[1].optionString, "Monthly")
-        XCTAssertEqual(sut.subscriptionOptions[1].price, "10.99$ per month")
+        XCTAssertEqual(sut.subscriptionOptions[1].price, "$10.99 per month")
         XCTAssertNil(sut.subscriptionOptions[1].monthlyPrice)
         XCTAssertNil(sut.subscriptionOptions[1].freeTrial)
 
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.subtitle, "Start your 7 days free trial then 100.99$ per year.")
+        XCTAssertEqual(sut.subtitle, "Start your 7 days free trial then $100.99 per year.")
         XCTAssertFalse(sut.shouldShowErrorMessage)
     }
 
