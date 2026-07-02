@@ -149,6 +149,19 @@ public enum PIATunnelSharedState {
         write(state)
     }
 
+    /// Whether the tunnel has written back a connected endpoint newer than `date` — typically the
+    /// moment a connect / in-place region switch was requested.
+    ///
+    /// `didChangeNotification` fires for *every* shared-state write (latency and server-list
+    /// refreshes, the switch's own clear, the new connection), so comparing `updatedAt` — rather than
+    /// merely checking for a non-nil `activeConnection` — is what distinguishes a genuinely-new
+    /// connection from the stale pre-switch endpoint and from unrelated writes. Coalescing-safe: if
+    /// the intermediate clear is dropped, the final fresh write still satisfies this.
+    public static func hasFreshActiveConnection(since date: Date) -> Bool {
+        guard let updatedAt = read().activeConnection?.updatedAt else { return false }
+        return updatedAt > date
+    }
+
     private static func containerURL() -> URL? {
         guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConstants.appGroup) else {
             return nil

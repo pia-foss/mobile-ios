@@ -141,6 +141,30 @@ public extension VPNProvider {
         return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
 
+    /// Applies the currently-selected server to the tunnel using the mechanism the active stack
+    /// supports, so callers don't need to know which one is running.
+    ///
+    /// - Disconnected: a plain `connect()` starts the tunnel on the selected server.
+    /// - Active (PlatformSDK): `connect()` routes to an in-place `switchLocation` on the live tunnel
+    ///   — no teardown.
+    /// - Active (legacy IKEv2/OpenVPN/WireGuard): those profiles can't switch in place, so a full
+    ///   `reconnect(forceDisconnect:)` is required.
+    ///
+    /// Use this for region changes. It is distinct from `reconnect(forceDisconnect:)`, which callers
+    /// should keep using for changes that must reconfigure the NEVPNManager (protocol, Kill Switch,
+    /// leak protection) and therefore need a full disconnect + `doSave`.
+    func changeServer(_ callback: SuccessLibraryCallback?) {
+        guard vpnStatus != .disconnected else {
+            connect(callback)
+            return
+        }
+        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            connect(callback)
+        } else {
+            reconnect(forceDisconnect: true, callback)
+        }
+    }
+
     /// Default: no tunnel-reported value. Providers that run through the PlatformSDK tunnel override.
     var actualConnection: ActualConnection? { nil }
 }

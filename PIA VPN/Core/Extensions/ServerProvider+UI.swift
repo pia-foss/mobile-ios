@@ -59,16 +59,16 @@ extension Client.Preferences {
 
             switch vpn.vpnStatus {
             case .disconnected:
-                vpn.connect(nil)
+                vpn.changeServer(nil)
             case .connected:
                 // Before reconnecting, notify that the user is changing server
                 Macros.postNotification(.PIAVPNIsChangingServer)
                 if shouldReconnect {
-                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
+                    vpn.changeServer(nil)
                 }
             default:
                 if shouldReconnect {
-                    vpn.reconnect(after: nil, forceDisconnect: true, nil)
+                    vpn.changeServer(nil)
                 }
             }
         #endif

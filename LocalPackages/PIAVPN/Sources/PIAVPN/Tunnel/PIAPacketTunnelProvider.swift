@@ -117,8 +117,22 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     open override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
-        if let handler = completionHandler {
-            handler(messageData)
+        guard let request = try? JSONDecoder().decode(PIAPacketTunnelRequest.self, from: messageData) else {
+            completionHandler?(nil)
+            return
+        }
+
+        switch request {
+        case .switchLocation:
+            logger.info("switchLocation requested")
+            Task {
+                do {
+                    try await sessionController?.switchLocation()
+                } catch {
+                    logger.error("switchLocation failed: \(error)")
+                }
+                completionHandler?(nil)
+            }
         }
     }
 

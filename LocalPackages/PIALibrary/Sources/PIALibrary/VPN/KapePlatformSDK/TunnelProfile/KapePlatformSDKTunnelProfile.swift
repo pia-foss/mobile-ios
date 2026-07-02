@@ -76,42 +76,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
-        // The PlatformSDK extension resolves its endpoints from this shared state. We only carry the
-        // existing server-list cache forward (the app refreshes it on every regions download, and the
-        // extension after an autonomous fetch) so this wholesale write doesn't wipe it. We don't seed
-        // it: when it's empty or stale the extension fetches the list itself on connect, driven by
-        // `serversFetchedAt`.
         do {
-            let server = connectableServer(for: configuration.server)
-            let tunnelProtocol = desiredTunnelProtocol()
-            let openVPN = try openVPNSettings(for: server)
-            let wireGuard = wireGuardSettings(for: server)
-
-            // "Automatic" region selection is signalled by a nil `preferredServer` on a regular
-            // (non-DIP) target. We write a nil `selectedLocationId` so the extension fans out across
-            // every server, fastest first (see `PIAEndpointRepository.generateConfigurations`),
-            // re-measuring latency at connect time rather than being pinned to the app's pre-resolved
-            // best server. `server` above is still resolved for credential derivation: the OpenVPN /
-            // WireGuard settings are server-independent for the non-DIP case. By `doSave` time
-            // `configuration.server` is already the resolved best server, so `preferredServer` — not
-            // `server.isAutomatic` — is the reliable Automatic signal. A DIP target is never
-            // "automatic": it carries `selectedDipServer` below and connects to that one server.
-            let isAutomaticSelection = server.dipToken == nil && Client.preferences.preferredServer == nil
-
-            let existing = PIATunnelSharedState.read()
-
-            PIATunnelSharedState.write(
-                .init(
-                    selectedLocationId: isAutomaticSelection ? nil : server.identifier,
-                    selectedDipServer: server.dipToken != nil ? server : nil,
-                    selectedProtocol: tunnelProtocol,
-                    openVPN: openVPN,
-                    wireGuard: wireGuard,
-                    servers: existing.servers,
-                    serversFetchedAt: existing.serversFetchedAt,
-                    latencyByServerId: existing.latencyByServerId
-                )
-            )
+            try writeSharedState(withConfiguration: configuration)
         } catch {
             callback?(error)
             return
@@ -159,28 +125,37 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                 return
             }
 
+            let currentStatus = vpn.connection.status
+            log.debug("[PlatformSDK] connect — current status: \(currentStatus.descriptionForLog)")
+
+            // If the tunnel is already active, ask the running extension to switch to the new
+            // server in place (see PIAPacketTunnelProvider.handleAppMessage) instead of stopping
+            // and relaunching the Network Extension process. Only the shared-state write
+            // (`writeSharedState`) is needed for this — the extension resolves its endpoints from
+            // PIATunnelSharedState, not from `protocolConfiguration` — so we deliberately skip
+            // `doSave`'s `vpn.saveToPreferences`/`loadFromPreferences`.
+            switch currentStatus {
+            case .connected, .connecting, .reasserting:
+                do {
+                    try self.writeSharedState(withConfiguration: configuration)
+                } catch {
+                    callback?(error)
+                    return
+                }
+                log.debug("[PlatformSDK] connect — switching location on the active tunnel")
+                self.sendSwitchLocationMessage(to: vpn, callback: callback)
+                return
+            default:
+                break
+            }
+
             self.doSave(vpn, withConfiguration: configuration, force: true) { (error) in
                 if let _ = error {
                     callback?(error)
                     return
                 }
 
-                let currentStatus = vpn.connection.status
-                log.debug("[PlatformSDK] connect — current status: \(currentStatus.descriptionForLog)")
-
-                // If the tunnel is already active, stop it before starting the new one.
-                // Calling startTunnel() on a live session may silently retain the existing
-                // connection rather than switching to the new server, leaving the app in a
-                // state where it believes it is connected when it is not. stopVPNTunnel() is
-                // asynchronous, so once a stop has been (or is already being) issued we must
-                // wait for .disconnected before starting — issuing startTunnel() while the
-                // session is still tearing down hits the same fragile state.
                 switch currentStatus {
-                case .connected, .connecting, .reasserting:
-                    log.debug("[PlatformSDK] connect — stopping active tunnel before restart")
-                    vpn.connection.stopVPNTunnel()
-                    self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
-
                 case .disconnecting:
                     log.debug("[PlatformSDK] connect — waiting for .disconnected before start")
                     self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
@@ -197,6 +172,54 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                     }
                 }
             }
+        }
+    }
+
+    /// Writes the tunnel's connection target and credentials to `PIATunnelSharedState` — the only
+    /// input a live `switchLocation` needs, since the extension resolves its endpoints from here,
+    /// not from `protocolConfiguration`. Carries the existing server-list cache forward so this
+    /// wholesale write doesn't wipe it; the extension re-fetches on its own when it's empty or stale.
+    private func writeSharedState(withConfiguration configuration: VPNConfiguration) throws {
+        let server = connectableServer(for: configuration.server)
+        let tunnelProtocol = desiredTunnelProtocol()
+        let openVPN = try openVPNSettings(for: server)
+        let wireGuard = wireGuardSettings(for: server)
+
+        // Automatic selection: `configuration.server` is already resolved to the best server, so a
+        // nil `preferredServer` — not `server.isAutomatic` — is the reliable signal. A nil
+        // `selectedLocationId` makes the extension fan out across all servers, fastest first
+        // (`PIAEndpointRepository.generateConfigurations`). A DIP target is never automatic.
+        let isAutomaticSelection = server.dipToken == nil && Client.preferences.preferredServer == nil
+
+        let existing = PIATunnelSharedState.read()
+
+        PIATunnelSharedState.write(
+            .init(
+                selectedLocationId: isAutomaticSelection ? nil : server.identifier,
+                selectedDipServer: server.dipToken != nil ? server : nil,
+                selectedProtocol: tunnelProtocol,
+                openVPN: openVPN,
+                wireGuard: wireGuard,
+                servers: existing.servers,
+                serversFetchedAt: existing.serversFetchedAt,
+                latencyByServerId: existing.latencyByServerId
+            )
+        )
+    }
+
+    private func sendSwitchLocationMessage(to vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
+        guard let session = vpn.connection as? NETunnelProviderSession else {
+            callback?(nil)
+            return
+        }
+        do {
+            let data = try JSONEncoder().encode(PIAPacketTunnelRequest.switchLocation)
+            try session.sendProviderMessage(data, responseHandler: nil)
+            log.debug("[PlatformSDK] connect — switchLocation message sent")
+            callback?(nil)
+        } catch {
+            log.error("[PlatformSDK] connect — switchLocation send failed: \(error)")
+            callback?(error)
         }
     }
 
