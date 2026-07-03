@@ -99,10 +99,10 @@ final class ConnectionStateMonitor: ConnectionStateMonitorType {
         switch (connectionIntent, vpnStatus) {
         case (.disconnect, _):
             self.connectionState = .disconnecting
-        case (.connect, _):
-            self.connectionState = .connecting
         case (_, .connected):
             self.connectionState = .connected
+        case (.connect, _):
+            self.connectionState = .connecting
         case (_, .disconnected):
             self.connectionState = .disconnected
         default:
