@@ -149,17 +149,23 @@ public enum PIATunnelSharedState {
         write(state)
     }
 
-    /// Whether the tunnel has written back a connected endpoint newer than `date` — typically the
-    /// moment a connect / in-place region switch was requested.
-    ///
-    /// `didChangeNotification` fires for *every* shared-state write (latency and server-list
-    /// refreshes, the switch's own clear, the new connection), so comparing `updatedAt` — rather than
-    /// merely checking for a non-nil `activeConnection` — is what distinguishes a genuinely-new
-    /// connection from the stale pre-switch endpoint and from unrelated writes. Coalescing-safe: if
-    /// the intermediate clear is dropped, the final fresh write still satisfies this.
-    public static func hasFreshActiveConnection(since date: Date) -> Bool {
-        guard let updatedAt = read().activeConnection?.updatedAt else { return false }
-        return updatedAt > date
+    /// Records the live connection status the tunnel reports (see `State.tunnelStatus`), preserving
+    /// every other field. Called by the extension whenever the SDK's status changes; the app folds
+    /// it into its VPN status so mid-session reconnects and in-place region switches surface as
+    /// "Connecting" even though `NEVPNStatus` stays `.connected`.
+    public static func updateTunnelStatus(_ tunnelStatus: TunnelStatus) {
+        var state = read()
+        guard state.tunnelStatus != tunnelStatus else { return }
+        state.tunnelStatus = tunnelStatus
+        write(state)
+    }
+
+    /// Clears the reported tunnel status (e.g. when the extension tears the tunnel down).
+    public static func clearTunnelStatus() {
+        var state = read()
+        guard state.tunnelStatus != nil else { return }
+        state.tunnelStatus = nil
+        write(state)
     }
 
     private static func containerURL() -> URL? {

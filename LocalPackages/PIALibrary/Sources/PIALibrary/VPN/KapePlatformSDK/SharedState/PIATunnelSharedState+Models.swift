@@ -50,6 +50,25 @@ extension PIATunnelSharedState {
         case tcp
     }
 
+    // MARK: - Tunnel Status
+
+    /// The live connection status the PlatformSDK tunnel reports back, written by the extension
+    /// whenever its status changes.
+    ///
+    /// This is the extension's authoritative view of the session — richer than what `NEVPNStatus`
+    /// exposes. In particular an in-place region switch (and any mid-session reconnect) surfaces as
+    /// `.connecting` / `.reconnecting` here even though `NEVPNStatus` stays `.connected` the whole
+    /// time, which is why the app reads this to drive its connection status. Mirrors the SDK's own
+    /// `KapeVPNConnectionStatus`, but PIA-owned so PIALibrary needs no Kape import.
+    public enum TunnelStatus: String, Codable {
+        case connected
+        case connecting
+        case reconnecting
+        case disconnecting
+        case disconnected
+        case paused
+    }
+
     // MARK: - Active Connection
 
     /// What the tunnel is *actually* running, written back by the extension once connected.
@@ -267,6 +286,12 @@ extension PIATunnelSharedState {
         /// the resolved protocol/server instead of the user's (possibly Automatic) selection.
         public var activeConnection: ActiveConnection?
 
+        /// The live connection status the extension reports (see `TunnelStatus`). `nil` before the
+        /// tunnel has reported anything or after it's cleared. The app folds this into its VPN status
+        /// so an in-place region switch / mid-session reconnect surfaces as "Connecting" even though
+        /// `NEVPNStatus` stays `.connected`.
+        public var tunnelStatus: TunnelStatus?
+
         init(
             selectedLocationId: String? = nil,
             selectedDipServer: Server? = nil,
@@ -276,7 +301,8 @@ extension PIATunnelSharedState {
             servers: [Server] = [],
             serversFetchedAt: Date? = nil,
             latencyByServerId: [String: Int] = [:],
-            activeConnection: ActiveConnection? = nil
+            activeConnection: ActiveConnection? = nil,
+            tunnelStatus: TunnelStatus? = nil
         ) {
             self.selectedLocationId = selectedLocationId
             self.selectedDipServer = selectedDipServer
@@ -287,12 +313,13 @@ extension PIATunnelSharedState {
             self.serversFetchedAt = serversFetchedAt
             self.latencyByServerId = latencyByServerId
             self.activeConnection = activeConnection
+            self.tunnelStatus = tunnelStatus
         }
 
         private enum CodingKeys: String, CodingKey {
             case selectedLocationId, selectedDipServer, selectedProtocol, openVPN, wireGuard
             case servers, serversFetchedAt, latencyByServerId
-            case activeConnection
+            case activeConnection, tunnelStatus
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
@@ -307,6 +334,7 @@ extension PIATunnelSharedState {
             serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
             latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
             activeConnection = try container.decodeIfPresent(ActiveConnection.self, forKey: .activeConnection)
+            tunnelStatus = try container.decodeIfPresent(TunnelStatus.self, forKey: .tunnelStatus)
         }
 
         /// The server matching the resolved target within a server list, if present.

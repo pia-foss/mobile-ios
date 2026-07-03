@@ -26,12 +26,6 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
     private var clientPreferences: ClientPreferencesType
     private var cancellables = Set<AnyCancellable>()
 
-    /// When the most recent connect was requested. Used to tell a *fresh* tunnel write-back from a
-    /// stale pre-switch one when clearing the connect intent (see `subscribeToActiveConnectionWriteBack`).
-    private var connectRequestedAt: Date?
-    /// Retains the cross-process shared-state observer for the write-back-driven intent reset.
-    private var activeConnectionObserver: NSObjectProtocol?
-
     public init(serverProvider: ServerProviderType, vpnProvider: VPNStatusProviderType, vpnStatusMonitor: VPNStatusMonitorType, clientPreferences: ClientPreferencesType) {
         self.serverProvider = serverProvider
         self.vpnProvider = vpnProvider
@@ -40,19 +34,11 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
         self.connectionIntent = CurrentValueSubject(.none)
 
         subscribeToVpnStatusState()
-        subscribeToActiveConnectionWriteBack()
-    }
-
-    deinit {
-        if let activeConnectionObserver {
-            NotificationCenter.default.removeObserver(activeConnectionObserver)
-        }
     }
 
     public func connect() async throws {
 
         log.info("VPN connect requested")
-        connectRequestedAt = Date()
         connectionIntent.send(.connect)
 
         return try await withCheckedThrowingContinuation { continuation in
@@ -125,26 +111,5 @@ extension VpnConnectionUseCase {
                 }
             }.store(in: &cancellables)
 
-    }
-
-    /// Clears the `.connect` intent once the tunnel writes back a freshly-resolved connected endpoint
-    /// (see `PIATunnelSharedState.hasFreshActiveConnection(since:)`).
-    ///
-    /// Needed for the PlatformSDK in-place region switch: switching region on an already-connected
-    /// tunnel keeps `NEVPNStatus` at `.connected`, so `subscribeToVpnStatusState` — which only reacts
-    /// to VPN status transitions — never fires, and the intent (and therefore the "Connecting" UI on
-    /// tvOS, see `ConnectionStateMonitor`) would stick forever. Inert for non-PlatformSDK tunnels,
-    /// which never write this back.
-    func subscribeToActiveConnectionWriteBack() {
-        activeConnectionObserver = PIATunnelSharedState.observe { [weak self] _ in
-            guard let self,
-                self.connectionIntent.value == .connect,
-                let requestedAt = self.connectRequestedAt,
-                PIATunnelSharedState.hasFreshActiveConnection(since: requestedAt)
-            else { return }
-
-            log.info("Tunnel reported a fresh connected endpoint — clearing connect intent")
-            self.connectionIntent.send(.none)
-        }
     }
 }

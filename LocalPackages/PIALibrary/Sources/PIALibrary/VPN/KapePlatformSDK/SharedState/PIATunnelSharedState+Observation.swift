@@ -72,24 +72,12 @@ extension PIATunnelSharedState {
 
     /// Begins listening for shared-state changes from the other process. Idempotent — call once per
     /// process (e.g. the app in `Bootstrapper`, the extension in `PIAPacketTunnelProvider.start`)
-    /// before relying on `didChangeNotification` / `observe(_:)`.
+    /// before relying on `didChangeNotification`. Observers register directly against
+    /// `didChangeNotification` (see `VPNDaemon`); a process also receives its *own* writes (Darwin
+    /// notifications have no sender), so handlers must be idempotent and must not write
+    /// unconditionally in response — that would loop.
     public static func startObserving() {
         _ = darwinBridge
-    }
-
-    /// Observes shared-state changes and hands back the freshly-read `State` on the main queue.
-    /// Calls `startObserving()` for you. Returns a token — retain it while interested and pass it to
-    /// `NotificationCenter.default.removeObserver(_:)` to stop.
-    ///
-    /// Note: a process also receives its *own* writes (Darwin notifications have no sender), so
-    /// handlers must be idempotent and must not write unconditionally in response — that would loop.
-    public static func observe(_ handler: @escaping (State) -> Void) -> NSObjectProtocol {
-        startObserving()
-        return NotificationCenter.default.addObserver(
-            forName: didChangeNotification, object: nil, queue: .main
-        ) { _ in
-            handler(read())
-        }
     }
 
     /// Posts the cross-process change signal. Called by `write(_:)` / `delete()` after the file is

@@ -128,9 +128,19 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             // no NEVPNStatusDidChange fires for an already-stable connection — so the transient
             // status would stay at its `.disconnected` default and the UI would show "Not Connected".
             // Seed it from the live tunnel interface (utun/ppp/ipsec0) instead.
+            //
+            // For the PlatformSDK tunnel, seed from the extension's persisted `tunnelStatus` so a
+            // cold relaunch syncs to what the tunnel is *currently* doing (e.g. mid-reconnect →
+            // `.connecting`) rather than always `.connected`. The `VPNDaemon` fold only reacts to
+            // *future* cross-process change notifications, so without this initial read a relaunch
+            // could miss a status the tunnel reached while the app was dead.
             #if os(iOS) || os(tvOS)
                 if let _ = VPNIPAddressFromInterfaces() {
-                    self.accessedDatabase.transient.vpnStatus = .connected
+                    // The interface is up, so the tunnel exists (system == .connected); for the
+                    // PlatformSDK tunnel, layer the current reported `tunnelStatus` on top via the
+                    // shared resolver (nil for legacy → plain `.connected`).
+                    let tunnel = self.accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
+                    self.accessedDatabase.transient.vpnStatus = VPNStatus.resolve(system: .connected, tunnel: tunnel)
                 }
             #endif
 

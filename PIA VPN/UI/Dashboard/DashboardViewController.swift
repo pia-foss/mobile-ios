@@ -87,13 +87,6 @@ final class DashboardViewController: AutolayoutViewController {
     }
     private var connectingStatus: DashboardVPNConnectingStatus = .none
 
-    /// When an in-place PlatformSDK region switch was requested, or `nil` when none is in flight.
-    /// The PlatformSDK tunnel switches servers without tearing down, so NEVPNStatus stays
-    /// `.connected` and no transition arrives — we present "Connecting" while this is set, and clear
-    /// it once the extension writes back the newly-resolved connection (see
-    /// `handleServerSwitchDidStart` / `handleTunnelSharedStateDidChange`).
-    private var serverSwitchRequestedAt: Date?
-
     private var tileModeStatus: TileStatus = .normal {
         didSet {
             self.updateTileLayout()
@@ -281,15 +274,6 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
-
-        // PlatformSDK in-place region switch: it does not move NEVPNStatus, so present "Connecting"
-        // from the change-server notification and clear it on the extension's cross-process
-        // write-back of the newly-resolved connection.
-        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
-            nc.addObserver(self, selector: #selector(handleServerSwitchDidStart), name: .PIAVPNIsChangingServer, object: nil)
-            PIATunnelSharedState.startObserving()
-            nc.addObserver(self, selector: #selector(handleTunnelSharedStateDidChange), name: PIATunnelSharedState.didChangeNotification, object: nil)
-        }
         nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
@@ -728,30 +712,6 @@ final class DashboardViewController: AutolayoutViewController {
         performSelector(onMainThread: #selector(updateCurrentStatusWithUserInfo(_:)), with: notification.userInfo, waitUntilDone: false)
     }
 
-    /// The user picked a new region while connected through the PlatformSDK tunnel. That switch is
-    /// applied in place (no NEVPNStatus transition), so mark it in flight and refresh to show
-    /// "Connecting"; `updateCurrentStatusWithUserInfo` presents Connecting while this is set.
-    @objc private func handleServerSwitchDidStart() {
-        guard Client.providers.vpnProvider.isVPNConnected else { return }
-        serverSwitchRequestedAt = Date()
-        updateCurrentStatus()
-    }
-
-    /// The extension wrote back to shared state. If an in-place switch is in flight and the write is
-    /// a freshly-resolved connection (see `PIATunnelSharedState.hasFreshActiveConnection(since:)`),
-    /// the switch has completed: clear the marker and refresh, returning the UI to "Connected".
-    @objc private func handleTunnelSharedStateDidChange() {
-        guard
-            let requestedAt = serverSwitchRequestedAt,
-            PIATunnelSharedState.hasFreshActiveConnection(since: requestedAt)
-        else {
-            return
-        }
-
-        serverSwitchRequestedAt = nil
-        updateCurrentStatus()
-    }
-
     @objc private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
         alert.addCancelAction(L10n.Global.close)
@@ -1093,16 +1053,10 @@ final class DashboardViewController: AutolayoutViewController {
             }
         #endif
 
-        let resolvedStatus = Client.providers.vpnProvider.vpnStatus
-        // Any genuine non-connected status means a real transition is happening, so an in-place
-        // switch marker (if any) no longer applies — drop it so we don't get stuck on "Connecting".
-        if resolvedStatus != .connected {
-            serverSwitchRequestedAt = nil
-        }
-        // While a PlatformSDK in-place region switch is in flight the tunnel is not torn down, so
-        // NEVPNStatus stays `.connected` and no transition arrives — present "Connecting" until the
-        // extension writes back the newly-resolved connection (see `handleTunnelSharedStateDidChange`).
-        currentStatus = (serverSwitchRequestedAt != nil) ? .connecting : resolvedStatus
+        // `vpnStatus` is the single source of truth: for the PlatformSDK tunnel it already reports
+        // `.connecting` during an in-place region switch (VPNDaemon folds the extension's tunnel
+        // status write-back into it), so no client-side "changing server" override is needed here.
+        currentStatus = Client.providers.vpnProvider.vpnStatus
 
         Macros.postNotification(.PIAServerHasBeenUpdated)
         Macros.postNotification(.PIAVPNUsageUpdate)

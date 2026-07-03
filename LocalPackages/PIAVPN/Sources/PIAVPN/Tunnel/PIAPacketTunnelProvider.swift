@@ -41,8 +41,12 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     /// Mirrors the SDK's actual connected endpoint into `PIATunnelSharedState` for the app to read.
     private var connectedEndpointObservation: AnyCancellable?
 
-    /// Serial queue the connected-endpoint write-back runs on, so its shared-state file I/O never
-    /// blocks the extension's main thread and endpoint updates are applied in order.
+    /// Mirrors the SDK's live tunnel status into `PIATunnelSharedState` so the app can fold it into
+    /// its VPN status (an in-place switch / reconnect keeps `NEVPNStatus` at `.connected`).
+    private var tunnelStatusObservation: AnyCancellable?
+
+    /// Serial queue the write-backs run on, so their shared-state file I/O never blocks the
+    /// extension's main thread and updates are applied in order.
     private let writeBackQueue = DispatchQueue(label: "com.privateinternetaccess.tunnel.activeConnectionWriteBack")
 
     // MARK: - Lifecycle
@@ -92,6 +96,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         )
 
         await observeConnectedEndpoint()
+        await observeTunnelStatus()
 
         try await sessionController?.start()
     }
@@ -108,9 +113,12 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
             await MainActor.run {
                 connectedEndpointObservation?.cancel()
                 connectedEndpointObservation = nil
+                tunnelStatusObservation?.cancel()
+                tunnelStatusObservation = nil
             }
 
             PIATunnelSharedState.clearActiveConnection()
+            PIATunnelSharedState.clearTunnelStatus()
 
             completionHandler()
         }
@@ -155,6 +163,40 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
             .removeDuplicates()
             .receive(on: writeBackQueue)
             .sink(receiveValue: writeBackActiveConnection(for:))
+    }
+
+    /// Mirrors the SDK's live tunnel status into `PIATunnelSharedState`. The app folds this into its
+    /// VPN status so a mid-session reconnect or an in-place region switch — both of which keep
+    /// `NEVPNStatus` at `.connected` — still surface as "Connecting".
+    @MainActor
+    private func observeTunnelStatus() {
+        tunnelStatusObservation = PacketTunnelState
+            .shared
+            .$tunnelStatus
+            .removeDuplicates()
+            .receive(on: writeBackQueue)
+            .sink(receiveValue: writeBackTunnelStatus(for:))
+    }
+
+    private func writeBackTunnelStatus(for status: KapeVPNConnectionStatus?) {
+        guard let status else {
+            PIATunnelSharedState.clearTunnelStatus()
+            return
+        }
+        PIATunnelSharedState.updateTunnelStatus(Self.piaTunnelStatus(from: status))
+    }
+
+    /// Maps the SDK's `KapeVPNConnectionStatus` to PIA's shared-state `TunnelStatus` (a 1:1 mapping;
+    /// PIA-owned so PIALibrary carries no Kape dependency).
+    private static func piaTunnelStatus(from status: KapeVPNConnectionStatus) -> PIATunnelSharedState.TunnelStatus {
+        switch status {
+        case .connected: return .connected
+        case .connecting: return .connecting
+        case .reconnecting: return .reconnecting
+        case .disconnecting: return .disconnecting
+        case .disconnected: return .disconnected
+        case .paused: return .paused
+        }
     }
 
     private func writeBackActiveConnection(for endpoint: PacketTunnelConnectedEndpoint?) {

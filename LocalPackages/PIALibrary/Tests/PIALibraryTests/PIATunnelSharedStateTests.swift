@@ -105,6 +105,21 @@ struct PIATunnelSharedStateTests {
         #expect(decoded.activeConnection == nil)
     }
 
+    @Test("tunnelStatus survives an encode/decode round-trip")
+    func tunnelStatusRoundTrip() throws {
+        let state = PIATunnelSharedState.State(tunnelStatus: .reconnecting)
+        #expect(try roundTrip(state).tunnelStatus == .reconnecting)
+    }
+
+    @Test("tunnelStatus defaults to nil and an older payload (no key) decodes to nil")
+    func tunnelStatusDefaultsNil() throws {
+        #expect(PIATunnelSharedState.State().tunnelStatus == nil)
+
+        let legacyJSON = Data("{}".utf8)
+        let decoded = try JSONDecoder().decode(PIATunnelSharedState.State.self, from: legacyJSON)
+        #expect(decoded.tunnelStatus == nil)
+    }
+
     @Test("A payload written before resolvedTransport existed decodes to .udp")
     func resolvedTransportBackwardCompat() throws {
         // An active-connection blob missing the transport key must not fail the whole state decode;
