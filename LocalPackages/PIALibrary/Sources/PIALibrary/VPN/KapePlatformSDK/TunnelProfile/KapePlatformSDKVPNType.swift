@@ -45,19 +45,3 @@ public enum KapePlatformSDKVPNType: String {
     /// to migrate such users onto a supported protocol. It is never a connectable selection here.
     case iKEv2 = "IKEv2"
 }
-
-public extension KapePlatformSDKVPNType {
-    var displayName: String {
-        switch self {
-        case .wireGuard:
-            return "WireGuard®"
-        case .openVPN:
-            return "OpenVPN"
-        case .iKEv2:
-            return "IPSec (IKEv2)"
-        case .automatic:
-            // TODO: [PlatformSDK] Localize string
-            return "Automatic"
-        }
-    }
-}

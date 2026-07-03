@@ -209,7 +209,7 @@
 		DDC8F5CB23E9C359005D19C6 /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libwg-go.a"; path = "../../../Desktop/libwg-go.a"; sourceTree = "<group>"; };
 		DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA VPN WG Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOS snapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5C507772B0E144D00200A6A /* PIA VPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507862B0E145100200A6A /* PIA VPN-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PlatformSDK-Tunnel-tvOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -571,7 +571,7 @@
 				DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */,
 				8269A6D5251CB5E0000B4DBF /* PIAWidgetExtension.appex */,
 				69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */,
-				E5C507772B0E144D00200A6A /* PIA VPN.app */,
+				E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */,
 				E5C507862B0E145100200A6A /* PIA VPN-tvOSTests.xctest */,
 				E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */,
 				35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */,
@@ -891,7 +891,7 @@
 				3FC0DEC32FEAF47C00063E49 /* OpenSSL */,
 			);
 			productName = "PIA VPN-tvOS";
-			productReference = E5C507772B0E144D00200A6A /* PIA VPN.app */;
+			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E5C507852B0E145100200A6A /* PIA VPN-tvOSTests */ = {

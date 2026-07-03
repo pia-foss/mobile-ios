@@ -144,6 +144,15 @@ final class Bootstrapper {
             Client.providers.accountProvider.cleanDatabase()
         }
 
+        #if os(iOS)
+            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
+            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
+            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
+            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+                Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            }
+        #endif
+
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()
 
@@ -192,12 +201,6 @@ final class Bootstrapper {
         defaults.isPersistentConnection = true
         defaults.mace = false
         #if os(iOS)
-            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
-            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
-            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
-            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
-                defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
-            }
             defaults.vpnCustomConfigurations = [
                 PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
                 PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)

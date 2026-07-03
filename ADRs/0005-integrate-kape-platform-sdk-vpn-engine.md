@@ -32,7 +32,7 @@ regions, CSI, KPI, and UI; only the tunnel implementation is swapped.
 It is pulled from a private Cloudsmith registry by `scripts/pull-kape-platform-sdk.sh` into
 `LocalPackages/KapePlatformSDK/` (gitignored), pinned by hash in
 `scripts/kape-platform-sdk.version`. `ci_scripts/ci_post_clone.sh`
-and the GitHub workflows run the pull (and cache it) before resolving SPM. Imported products:
+and the CI workflows run the pull (and cache it) before resolving SPM. Imported products:
 
 - `KapeVPN-PacketTunnel` — the tunnel engine, WireGuard controller, and internal reconnection.
 - `KapeVPN-OpenVPN` — the OpenVPN connection controller.
@@ -48,38 +48,63 @@ the SDK's interface protocols with thin adapters that run inside the extension:
 | `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` | WireGuard key exchange + TLS pinning to the bundled PIA root CA. |
 | `PIATunnelLogger` | `PacketTunnelLogger` | Bridges SDK logging to `os.Logger`. |
 
-**One extension target.** A single new Network Extension, **PlatformSDK-Tunnel** (iOS + tvOS),
-replaces the per-protocol extensions when active. The app-side profile
+**One extension, shared source, per-platform target.** A single new Network Extension source
+folder, **PlatformSDK-Tunnel** (iOS + tvOS), replaces the per-protocol extensions when active.
+The same sources are built by two platform targets — `PlatformSDK-Tunnel-iOS` and
+`PlatformSDK-Tunnel-tvOS`, producing `PlatformSDK-Tunnel-iOS.appex` and
+`PlatformSDK-Tunnel-tvOS.appex`. The app-side profile
 `KapePlatformSDKTunnelProfile: NetworkExtensionProfile` (in `PIALibrary`) configures it.
 
-**App ↔ extension IPC via file-based shared state.** The extension reads its connection
-parameters (selected server, protocol, custom DNS, MTU, token, app-measured latencies) from
-`PIATunnelSharedState`, persisted as `pia_platformsdk_state.json` in the shared app group. The
-server list itself is not solely app-supplied: when the cached list is stale or absent the
-extension autonomously fetches a fresh one (`Client.downloadServerList()`) and caches it back to
-shared state with a TTL, so on-demand reconnects work with no app running.
+**App ↔ extension IPC — bidirectional shared state plus a provider message.** State flows in
+both directions through `PIATunnelSharedState` (a namespace whose payload is a nested `State`),
+persisted as `pia_platformsdk_state.json` in the shared app group (on tvOS under
+`Library/Caches`). Every write posts a Darwin notification so the other side observes the change
+rather than polling.
+
+- **App → extension (connection inputs).** The extension reads its parameters — selected
+  server/location, DIP server, protocol, custom DNS, MTU, OpenVPN/WireGuard settings, token, and
+  app-measured latencies — from shared state. The server list is not solely app-supplied: when
+  the cached list is stale or absent the extension autonomously fetches a fresh one
+  (`Client.downloadServerList()`) and caches it back with a TTL, so on-demand reconnects work
+  with no app running (the `servers` cache is therefore written by both sides).
+- **Extension → app (write-back).** Once connected the extension writes back `activeConnection`
+  (the resolved protocol / region / transport) and a live `tunnelStatus`. The app reads these to
+  show the actually-resolved endpoint and to drive the *Connecting* UI — `tunnelStatus` is folded
+  into `VPNStatus.resolve(system:tunnel:)` so mid-session reconnects and in-place region switches
+  surface as *Connecting* even while `NEVPNStatus` stays `.connected`.
+- **Provider message (`switchLocation`).** To change region on a live tunnel without tearing
+  down the extension process, the app writes the new target to shared state and sends a
+  `PIAPacketTunnelRequest.switchLocation` message via `sendProviderMessage()`; the extension
+  re-resolves its endpoints from shared state in place. This replaced an earlier client-side
+  server-switch marker.
 
 **Three protocol modes, automatic by default.** Protocol selection is mapped through
 `KapePlatformSDKVPNType`, which centralises the persisted identifiers — `"PIA"` (OpenVPN),
 `"PIAWG"` (WireGuard), and `"PIAAutomatic"` (automatic: WireGuard first, then OpenVPN) — so
 PlatformSDK code never references the legacy `PIATunnelProfile` / `PIAWGTunnelProfile` / TunnelKit
-types directly. **Automatic is the default** when the flag is on (set in `Bootstrapper` on iOS and
-`BootstraperFactory` on tvOS, which also migrate users on an unsupported persisted protocol —
-e.g. legacy IKEv2 — to automatic).
+types directly. The enum also carries a fourth, non-connectable `"IKEv2"` case: it exists only to
+recognise the value left by pre-PlatformSDK installs so those users can be migrated. **Automatic
+is the default** when the flag is on (set in `Bootstrapper` on iOS and `BootstraperFactory` on
+tvOS, which also migrate users on an unsupported persisted protocol — e.g. legacy IKEv2 — to
+automatic).
 
 **Server resolution.** For a concrete region the extension connects to that server; for a
 Dedicated IP it uses the per-user DIP server carried in full through shared state (it is absent
 from the public list). For the Automatic region (no selected location) the extension fans out
-across every online server, fastest first, ordered by the app-measured latencies mirrored into
-shared state by `ServersPinger`.
+across every online non-DIP server, fastest first, ordered by the app-measured latencies mirrored
+into shared state by `ServersPinger`.
 
 **Reconnection is owned by the SDK.** The engine handles transient network loss and endpoint
 cycling internally. When the feature flag is on, `VPNDaemon` suppresses its own reconnect,
 fallback-timer, and disconnect-error handling so the app does not fight the SDK's recovery.
 
 **Gated rollout.** The integration is gated behind the CSI-controlled `usePlatformSDKVPN`
-feature flag. On first launch under the flag, the legacy IKEv2/OpenVPN/WireGuard profiles are
-removed (`cleanupLegacyVPNProfilesIfNeeded`).
+feature flag (`ios_platform_sdk_vpn`). On first launch under the flag, the legacy
+IKEv2/OpenVPN/WireGuard profiles are removed (`cleanupLegacyVPNProfilesIfNeeded`).
+
+> **Current state:** the flag is temporarily hard-forced `true` in `FeatureFlagHolder` on both
+> iOS and tvOS (a `// TODO: [PlatformSDK]` override), so the CSI-driven gating is bypassed while
+> the engine is under active development. Removing that override restores CSI control.
 
 ## Consequences
 
