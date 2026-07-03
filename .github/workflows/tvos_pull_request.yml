@@ -81,6 +81,9 @@ jobs:
         ruby-version: '3.3.5'
         bundler-cache: true
 
+    - name: Prefetch OpenSSL binary artifact
+      run: ./scripts/prefetch-openssl-artifact.sh .build/SourcePackages
+
     - name: Run tvOS unit tests
       uses: nick-fields/retry@v4
       with:
