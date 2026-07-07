@@ -30,6 +30,7 @@ With the Private Internet Access VPN app for iOS and tvOS, you can access our ne
 - [Go][dep-golang] (`brew install go`, required for WireGuard)
 - Ruby with rbenv (recommended)
 - Bundler (`gem install bundler && bundle install`)
+- A Cloudsmith entitlement token to pull the Kape Platform SDK (see [Kape Platform SDK](#kape-platform-sdk))
 
 ## Installation
 
@@ -39,6 +40,59 @@ brew install swiftgen go
 
 # Install Ruby dependencies
 gem install bundler && bundle install
+
+# Pull the Kape Platform SDK (required before building — see below)
+CLOUDSMITH_TOKEN=<your-token> ./scripts/pull-kape-platform-sdk.sh
+```
+
+## Kape Platform SDK
+
+The VPN packet-tunnel engine is provided by the **Kape Platform SDK**, a Swift package
+that is **not committed to this repository**. It is pulled from a private Cloudsmith
+registry into `LocalPackages/KapePlatformSDK/` (gitignored) by
+`scripts/pull-kape-platform-sdk.sh`, and pinned to a specific version in
+`scripts/kape-platform-sdk.version`.
+
+Because `PIALibrary` (consumed by nearly every target) depends on this package,
+**no target will resolve Swift packages or build until the SDK has been pulled.** A clean
+checkout that skips this step fails with an opaque "missing local package" SPM error.
+
+### 1. Provide a Cloudsmith token
+
+You need a Cloudsmith entitlement token with read access to the SDK repository. The script
+resolves the token in this order:
+
+1. `CLOUDSMITH_TOKEN` environment variable
+2. `CLOUDSMITH_API_KEY` environment variable
+3. A `.cloudsmith` file in the repo root (gitignored, containing just the token)
+
+### 2. Pull the SDK
+
+```bash
+# Using an environment variable
+CLOUDSMITH_TOKEN=<your-token> ./scripts/pull-kape-platform-sdk.sh
+
+# Or, with a .cloudsmith file present in the repo root
+./scripts/pull-kape-platform-sdk.sh
+```
+
+The script downloads the pinned version, verifies its checksum, and unpacks it into
+`LocalPackages/KapePlatformSDK/`. It is idempotent — re-running it when the pinned version
+is already installed is a no-op.
+
+### 3. Build as usual
+
+Open the workspace in Xcode (or run `xcodebuild` / `fastlane`) and let SwiftPM resolve.
+
+> **CI:** the same pull runs automatically before the build — `ci_scripts/ci_post_clone.sh`
+> for Xcode Cloud and the GitHub Actions workflows. `CLOUDSMITH_TOKEN` must be configured as
+> a secret environment variable there.
+
+### Updating the pinned version
+
+```bash
+# Fetch the latest version from the registry, update scripts/kape-platform-sdk.version, then pull
+CLOUDSMITH_TOKEN=<your-token> ./scripts/pull-kape-platform-sdk.sh --update
 ```
 
 ## Build Configurations & Schemes
