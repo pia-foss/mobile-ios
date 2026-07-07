@@ -74,7 +74,7 @@ extension Client {
         }
 
         public static func useMockInAppProviderWithReceipt() {
-            store = MockInAppProvider(jws: JWS("abcdefg"))
+            store = MockInAppProvider(jws: JWS("abcdefg")!)
         }
     #endif
 }

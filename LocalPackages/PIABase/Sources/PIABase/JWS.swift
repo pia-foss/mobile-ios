@@ -25,7 +25,8 @@ import Foundation
 public struct JWS: Sendable {
     public let value: String
 
-    public init(_ value: String) {
+    public init?(_ value: String) {
+        if value.isEmpty { return nil }
         self.value = value
     }
 

@@ -17,7 +17,7 @@ class InAppTransactionMock: InAppTransaction {
 
     init(
         identifier: String,
-        jwsRepresentation: JWS = JWS("mock-jws-transaction"),
+        jwsRepresentation: JWS = JWS("mock-jws-transaction")!,
         native: Any? = nil,
         description: String
     ) {

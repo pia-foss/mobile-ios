@@ -43,13 +43,16 @@ final class AppStoreProvider: NSObject, InAppProvider {
         for await result in Transaction.currentEntitlements {
             let transaction = result.unsafePayloadValue
             if newest == nil || transaction.purchaseDate > newest!.date {
-                newest = (transaction.purchaseDate, JWS(result.jwsRepresentation))
+                if let jws = JWS(result.jwsRepresentation) {
+                    newest = (transaction.purchaseDate, jws)
+                }
             }
         }
-        if newest == nil {
-            log.debug("No current entitlements found")
+        if let jws = newest?.jws {
+            return jws
         }
-        return newest?.jws
+        log.debug("No current entitlements found")
+        return nil
     }
 
     func synchronizeEntitlements() async -> Error? {
@@ -142,15 +145,18 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
         switch result {
         case .success(let verification):
-            let jwt = JWS(verification.jwsRepresentation)
+            guard let jws = JWS(verification.jwsRepresentation) else {
+                log.error("Failed to create JWS from: \(verification.jwsRepresentation)")
+                return .failure(.badReceipt)
+            }
             switch verification {
             case .verified(let transaction):
                 log.debug("\(#function) success verified")
-                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jwt))
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jws))
             case .unverified(let transaction, let error):
                 log.debug("\(#function) success unverified")
                 log.warning("Unverified transaction: \(error)")
-                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jwt))
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jws))
             }
         case .userCancelled:
             log.debug("\(#function) userCancelled")

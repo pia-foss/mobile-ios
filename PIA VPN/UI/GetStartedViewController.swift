@@ -46,7 +46,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var isFetchingProducts = true
 
     private var signupEmail: String?
-    private var signupTransaction: InAppTransaction?
+    private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
 
     @IBOutlet private weak var walkthroughImage: UIImageView!
@@ -136,6 +136,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
             await MainActor.run {
                 guard let self else { return }
                 guard let jws else {
+                    log.debug("Failed to get JWS from receipt")
                     self.hideLoadingAnimation()
                     self.handleBadReceipt()
                     return
@@ -144,6 +145,12 @@ final class GetStartedViewController: PIAWelcomeViewController {
                 let request = LoginReceiptRequest(receipt: jws)
                 self.config.accountProvider.login(with: request) { [weak self] userAccount, error in
                     self?.hideLoadingAnimation()
+
+                    if let error {
+                        log.error("Failed to login with receipt: \(error)")
+                        self?.handleBadReceipt()
+                        return
+                    }
 
                     guard let userAccount else {
                         self?.handleBadReceipt()

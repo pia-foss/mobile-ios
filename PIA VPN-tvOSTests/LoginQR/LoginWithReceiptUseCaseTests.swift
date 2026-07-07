@@ -43,7 +43,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
 
     func test_login_succeeds_when_paymentProvider_completes_with_receipt_and_loginprovider_completes_with_success() async throws {
         // GIVEN
-        let receipt = JWS("jws-transaction")
+        let receipt = JWS("jws-transaction")!
         let user = UserAccount.makeStub()
 
         instantiateSut(
@@ -82,7 +82,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
 
     func test_login_fails_when_paymentProvider_completes_with_receipt_and_loginprovider_completes_with_failure() async throws {
         // GIVEN
-        let receipt = JWS("jws-transaction")
+        let receipt = JWS("jws-transaction")!
         instantiateSut(
             paymentProviderResult: .success(receipt),
             loginProviderResult: .failure(ClientError.expired))

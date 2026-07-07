@@ -7,7 +7,7 @@ class PaymentUseCaseTests: XCTestCase {
         let networkClientMock = NetworkRequestClientMock()
         let paymentInformationDataConverter = PaymentInformationDataConverter()
         let credentials = Credentials(username: "username", password: "password")
-        let payment = Payment(receipt: .init("jws-transaction"))
+        let payment = Payment(receipt: .init("jws-transaction")!)
 
         func stubSuccessFullNetworkRequest() {
             let successResponse = NetworkRequestResponseMock(statusCode: 200, data: Data())

@@ -92,10 +92,8 @@ public actor PIAAccountClient: PIAAccountAPI {
     }
 
     public func loginWithReceipt(receipt: JWS) async throws {
-        let bodyData = try JSONEncoder.piaCodable.encode([
-            "store": "apple_app_store",
-            "receipt": receipt.value
-        ])
+        let payload = LoginRestorePurchasePayload(receipt: receipt)
+        let bodyData = try JSONEncoder.piaCodable.encode(payload)
 
         // Request API token
         let apiTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
@@ -360,12 +358,11 @@ public actor PIAAccountClient: PIAAccountAPI {
         if let apiToken = try await tokenManager.getAPITokenString() {
             headers = ["Authorization": "Token \(apiToken)"]
             method = .post
-            var bodyDict: [String: String] = ["store": "apple_app_store"]
             if let receipt = receipt {
-                bodyDict["receipt"] = receipt.value
+                let payload = LoginRestorePurchasePayload(receipt: receipt)
+                let data = try JSONEncoder.piaCodable.encode(payload)
+                bodyType = .json(data)
             }
-            let bodyData = try JSONEncoder.piaCodable.encode(bodyDict)
-            bodyType = .json(bodyData)
         }
 
         return try await endpointManager.executeWithFailover(

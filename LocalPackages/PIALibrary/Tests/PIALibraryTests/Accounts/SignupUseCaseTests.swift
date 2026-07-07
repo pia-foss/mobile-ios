@@ -47,7 +47,7 @@ final class SignupUseCaseTests: XCTestCase {
         let expectation = expectation(description: "Waiting for signup to complete")
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
@@ -71,7 +71,7 @@ final class SignupUseCaseTests: XCTestCase {
         let expectation = expectation(description: "Waiting for signup to complete")
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
@@ -95,7 +95,7 @@ final class SignupUseCaseTests: XCTestCase {
         let expectation = expectation(description: "Waiting for signup to complete")
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
@@ -122,7 +122,7 @@ final class SignupUseCaseTests: XCTestCase {
         let expectation = expectation(description: "Waiting for signup to complete")
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
@@ -146,7 +146,7 @@ final class SignupUseCaseTests: XCTestCase {
         let expectation = expectation(description: "Waiting for signup to complete")
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { [weak self] result in
             self?.capturedResult = result
             expectation.fulfill()
@@ -166,7 +166,7 @@ final class SignupUseCaseTests: XCTestCase {
         // GIVEN
         let expectedBody = SignupInformation(
             store: "apple_app_store",
-            receipt: .init("jws"),
+            receipt: .init("jws")!,
             email: "email",
             marketing: nil,
             debug: nil
@@ -174,7 +174,7 @@ final class SignupUseCaseTests: XCTestCase {
         instantiateSut()
 
         // WHEN signup is executed
-        let signUpRequest = Signup(email: "email", receipt: .init("jws"))
+        let signUpRequest = Signup(email: "email", receipt: .init("jws")!)
         sut.callAsFunction(signup: signUpRequest) { _ in }
 
         // THEN

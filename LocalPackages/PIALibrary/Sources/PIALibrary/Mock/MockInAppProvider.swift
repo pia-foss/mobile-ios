@@ -49,14 +49,14 @@ import StoreKit
 
         let identifier: String = "1234567890"
 
-        let jwsRepresentation: JWS = JWS("mock-jws-transaction")
+        let jwsRepresentation: JWS = JWS("mock-jws-transaction")!
 
         let native: Native = .none
     }
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {
 
-        init(jws: JWS? = JWS("mock-jws-transaction")) {
+        init(jws: JWS? = JWS("mock-jws-transaction")!) {
             self.entitlementJWS = jws
         }
         var availableProducts: [any InAppProduct]?
