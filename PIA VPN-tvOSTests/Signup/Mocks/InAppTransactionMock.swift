@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 
 class InAppTransactionMock: InAppTransaction {

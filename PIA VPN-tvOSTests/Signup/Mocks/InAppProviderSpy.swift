@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 import StoreKit
 
