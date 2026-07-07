@@ -97,6 +97,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             return
         }
         accessedDatabase.transient.vpnStatus = resolvedStatus
+
+        // Safety net for adopting a live tunnel whose start we never observed (the NEVPNStatus path
+        // only records this on a `.disconnected → .connected` transition). Seeding at cold launch
+        // normally sets this first, so this only fills the rare case where the write-back is what
+        // flips us to `.connected`. No `connectedDate` is available here, so fall back to now; only
+        // fill a missing value so an accurate timestamp is preserved. Drives the "Protected | <time>"
+        // label — see the matching backfill in `DefaultVPNProvider.seedInitialVPNStatus`.
+        if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
+            Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
+        }
     }
 
     private func tryUpdateStatus(via connection: NEVPNConnection) {

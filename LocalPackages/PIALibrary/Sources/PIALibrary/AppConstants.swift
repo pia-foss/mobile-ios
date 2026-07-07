@@ -64,10 +64,14 @@ public struct AppConstants {
     }
 
     public struct Extensions {
+        // Legacy per-protocol extensions (pre-PlatformSDK); live only while `usePlatformSDKVPN` is off.
         public static let tunnelBundleIdentifier = Bundle.main.bundleIdentifier! + ".Tunnel"
         public static let tunnelWireguardBundleIdentifier = Bundle.main.bundleIdentifier! + ".WG-Tunnel"
+
+        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard, replacing the legacy pair above.
         public static let tunnelPlatformSDKBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-iOS"
-        public static let tunnelPlatformSDKTvOSBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS"
+        public static let tunnelPlatformSDKTvOSBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-tvOS"
+
         public static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
 

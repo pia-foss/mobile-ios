@@ -119,32 +119,15 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
         log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
 
-        // Adding a [weak self] capture to `completionBlock` breaks the code on Xcode 26.4 / Swift 6.3 (self is captured nil)
-        // It does not need the weak reference as the it is only called inside the current function
         let completionBlock = {
-            profile?.prepare()
-
-            // On launch the tunnel may already be up (the app was terminated while connected), but
-            // no NEVPNStatusDidChange fires for an already-stable connection — so the transient
-            // status would stay at its `.disconnected` default and the UI would show "Not Connected".
-            // Seed it from the live tunnel interface (utun/ppp/ipsec0) instead.
-            //
-            // For the PlatformSDK tunnel, seed from the extension's persisted `tunnelStatus` so a
-            // cold relaunch syncs to what the tunnel is *currently* doing (e.g. mid-reconnect →
-            // `.connecting`) rather than always `.connected`. The `VPNDaemon` fold only reacts to
-            // *future* cross-process change notifications, so without this initial read a relaunch
-            // could miss a status the tunnel reached while the app was dead.
-            #if os(iOS) || os(tvOS)
-                if let _ = VPNIPAddressFromInterfaces() {
-                    // The interface is up, so the tunnel exists (system == .connected); for the
-                    // PlatformSDK tunnel, layer the current reported `tunnelStatus` on top via the
-                    // shared resolver (nil for legacy → plain `.connected`).
-                    let tunnel = self.accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
-                    self.accessedDatabase.transient.vpnStatus = VPNStatus.resolve(system: .connected, tunnel: tunnel)
-                }
-            #endif
-
             self.activeProfile = profile
+
+            // Seed the initial status only once the native profile has finished loading, so
+            // `seedInitialVPNStatus` can read the live manager's connection status (and, for an
+            // already-running tunnel, its `connectedDate`) instead of racing the async load.
+            profile?.prepare { _ in
+                self.seedInitialVPNStatus(from: profile)
+            }
         }
 
         // The legacy IKEv1 → IKEv2 (or WireGuard on Mac) migration instantiates an
@@ -186,6 +169,33 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             self.install(force: force, nil)
         }
 
+    }
+
+    private func seedInitialVPNStatus(from profile: VPNProfile?) {
+        #if os(iOS) || os(tvOS)
+            guard let profile else {
+                return
+            }
+
+            // Every current profile exposes a loaded `NEVPNManager` (IKEv2) or
+            // `NETunnelProviderManager` (the tunnel profiles) by the time `prepare` completes, so
+            // read the live connection status directly.
+            guard let manager = profile.native as? NEVPNManager else {
+                return
+            }
+
+            let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
+            let resolvedStatus = VPNStatus.resolve(system: manager.connection.status, tunnel: tunnel)
+
+            // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
+            // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
+            // `connectedDate`; only fill when missing so an existing value is preserved.
+            if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
+                Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
+            }
+
+            accessedDatabase.transient.vpnStatus = resolvedStatus
+        #endif
     }
 
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {

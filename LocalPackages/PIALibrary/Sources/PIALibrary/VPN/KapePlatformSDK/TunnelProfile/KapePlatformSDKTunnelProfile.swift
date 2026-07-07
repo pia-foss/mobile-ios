@@ -54,8 +54,10 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         return proto
     }
 
-    public func prepare() {
-        find(completionHandler: nil)
+    public func prepare(_ callback: SuccessLibraryCallback?) {
+        find { _, error in
+            callback?(error)
+        }
     }
 
     public func save(withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
@@ -402,17 +404,22 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
                 completionHandler?(nil, error)
                 return
             }
-            var foundVPN: NETunnelProviderManager?
-            for m in managers {
-                guard let tunnelProtocol = m.protocolConfiguration as? NETunnelProviderProtocol else {
-                    continue
-                }
-                guard ((identifier == nil) || (tunnelProtocol.providerBundleIdentifier == identifier)) else {
-                    continue
-                }
-                foundVPN = m
-                break
+
+            let platformSDKManagers = managers.filter { manager in
+                (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == identifier
             }
+
+            // Prefer an already-running manager so we adopt the live tunnel; otherwise take the first.
+            let foundVPN =
+                platformSDKManagers.first { manager in
+                    switch manager.connection.status {
+                    case .connected, .connecting, .reasserting, .disconnecting:
+                        return true
+                    default:
+                        return false
+                    }
+                } ?? platformSDKManagers.first
+
             let vpn = foundVPN ?? NETunnelProviderManager()
             completionHandler?(vpn, nil)
         }
