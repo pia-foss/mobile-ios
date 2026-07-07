@@ -4,23 +4,21 @@ Date: 2026-07-07
 
 ## Context
 
-This ADR adopts the same **unidirectional data flow (MVI) architecture** defined for the CyberGhost Apple client in [CG ADR 0010] as the shared standard for PIA iOS. The decision, primitives, and dependency model are identical; this document records the PIA-specific context, current pain points, and first adoption targets.
+PIA iOS adopts a **lightweight, hand-rolled unidirectional data flow (MVI) architecture** as the shared Apple-platform standard for new and migrated features. This document records the PIA-specific context, current pain points, and first adoption targets.
 
-### PIA vs CyberGhost — starting position
+### Starting position
 
-PIA is in a better structural position than CyberGhost at the time of this ADR: the codebase is smaller (~42k LOC, 935 Swift files), has more SwiftUI Views than ViewControllers (66 vs 44), and has a more developed reactive substrate (25 files with `@Published`, 21 with `ObservableObject`). The navigation layer is already governed by ADR 0006 (Coordinator pattern).
-
-However, PIA shares the same class of state and testability problems — in a different form.
+The navigation layer is already governed by ADR 0006 (Coordinator pattern). The codebase has more SwiftUI Views than ViewControllers and has a developed reactive substrate with `ObservableObject` and `@Published` in use. However, PIA shares a class of state and testability problems that unidirectional data flow is designed to solve.
 
 ### Current pain points
 
 **1. `Client.providers` as a global service locator**
 
-`Client.providers` is PIA's equivalent of CyberGhost's singleton web. It is referenced **242 times** across the codebase as the de-facto way to obtain any service — VPN provider, account provider, server provider, preferences. It is a global, mutable, process-wide dependency graph with no injection seam. Code that calls `Client.providers.vpnProvider` cannot be unit tested without the full `Client` stack being initialised.
+`Client.providers` is referenced across the codebase as the de-facto way to obtain any service — VPN provider, account provider, server provider, preferences. It is a global, mutable, process-wide dependency graph with no injection seam. Code that calls `Client.providers.vpnProvider` cannot be unit tested without the full `Client` stack being initialised.
 
 **2. `NotificationCenter` as an implicit coordination bus**
 
-30 `NotificationCenter.default.post` call sites and 139 `addObserver` call sites. Like in CyberGhost, this is a second hidden dependency graph: events flow between features and layers with no compile-time contract, no defined ownership, and implicit ordering.
+30 `NotificationCenter.default.post` call sites and `addObserver` call sites. This is a second hidden dependency graph: events flow between features and layers with no compile-time contract, no defined ownership, and implicit ordering.
 
 **3. Large provider classes with mixed concerns**
 
@@ -31,7 +29,7 @@ The `PIALibrary` local package contains several large, multi-responsibility type
 - `DefaultAccountProvider.swift` — 701 lines, mixing account API, caching, and domain logic.
 - `DefaultVPNProvider.swift` — 448 lines, VPN state, profile management, and connection logic in one class.
 
-These are the `PIALibrary` equivalent of CyberGhost's massive view controllers: no separation between "what is the state" and "how do we mutate it."
+These classes have no separation between "what is the state" and "how do we mutate it."
 
 **4. VPN connection state is implicit**
 
@@ -44,30 +42,43 @@ The existing test suite has coverage for account use cases (`UpdateAccountUseCas
 ### Impact
 
 - **Testability:** VPN state and preferences logic depend on `Client.providers`, making them effectively untestable in isolation.
-- **Defects:** `NotificationCenter`-coordinated state transitions produce the same class of hard-to-reproduce bugs as in CyberGhost — especially around VPN connect/disconnect sequencing.
+- **Defects:** `NotificationCenter`-coordinated state transitions produce hard-to-reproduce bugs — especially around VPN connect/disconnect sequencing.
 - **Onboarding:** new engineers must understand both `Client.providers` and the `NotificationCenter` event map to trace any non-trivial flow.
-- **Security:** same as CyberGhost — unpredictable VPN state is a trust and safety concern, not just a code quality one.
-- **Shared cost:** the same architecture investment can pay off in both products if the pattern and shared packages are aligned.
+- **Security:** unpredictable VPN state is a trust and safety concern, not just a code quality one.
 
 ### Why not keep the current approach?
 
-PIA's `Client.providers` service locator and `NotificationCenter` coordination layer produce the same failure modes as CyberGhost's singleton web — just with SwiftUI on top. A SwiftUI view calling `Client.providers.vpnProvider` directly is the same anti-pattern as a UIKit view controller calling `VPNManager.shared`. The reactive substrate (`@Published`, `ObservableObject`) already exists in PIA but is used inconsistently; unidirectional flow brings discipline to it rather than adding a new mechanism.
+The `Client.providers` service locator and `NotificationCenter` coordination layer produce unpredictable, untestable state transitions. A SwiftUI view calling `Client.providers.vpnProvider` directly is the same anti-pattern as a UIKit view controller calling a shared singleton. The reactive substrate (`@Published`, `ObservableObject`) already exists in PIA but is used inconsistently; unidirectional flow brings discipline to it rather than adding a new mechanism.
 
 ### Why not adopt TCA?
 
-Same reasons as CG ADR 0010: large external dependency with build-time costs, frequent breaking releases, steep learning curve for a rotating team, and iOS 15 deployment target requiring the Perception backport. The hand-rolled store is the right fit for both products.
+TCA is the best-known library embodiment of this pattern in Swift and is the reference design this ADR mirrors. We are not adopting it (yet) because:
+
+1. It is a large external dependency with documented build-time regressions caused by SwiftSyntax macro compilation, conflicting with the project's minimal-dependency philosophy.
+2. The iOS 15 deployment target requires Point-Free's Perception backport.
+3. Its steep learning curve is a real cost for a rotating team.
+4. Frequent breaking releases create lockstep upgrade pressure across all teams consuming it.
+
+The door remains open: a hand-rolled store that mirrors TCA's core concepts is a natural stepping stone. If needs outgrow this design, migrating to TCA is an evolution, not a rewrite.
 
 ---
 
 ## Decision
 
-We adopt the **same lightweight, hand-rolled unidirectional data flow (MVI) architecture** as CyberGhost (CG ADR 0010). The slogan, primitives, loop, dependency layers, and `Store` implementation are identical. See CG ADR 0010 for the full specification; only PIA-specific details are recorded here.
+We adopt a **lightweight, hand-rolled unidirectional data flow (MVI) architecture** for complex features in PIA iOS. The pattern is commonly labelled **MVI (Model–View–Action)**; in native Swift the same concept is called a *Redux-like / unidirectional store*. It is the same idea as TCA's core loop, without the framework.
 
 The slogan: *state flows down, actions flow up.*
 
 ### Scope
 
-Same as CG ADR 0010: MVI for features with genuine state-machine complexity; MVVM remains acceptable for simple screens.
+This architecture is **not applied universally**. Unidirectional MVI is the right choice when:
+
+- State is a genuine state machine (e.g. connecting / connected / reconnecting / error).
+- There are optimistic updates, error recovery, or multiple transient states.
+- Correctness must be unit-test-provable (VPN, auth, purchases).
+- Multiple async inputs converge (engine + API + timers).
+
+**MVVM remains acceptable** for simple, read-only, or low-risk screens.
 
 The first adoption targets for PIA — where MVI delivers the most leverage:
 
@@ -77,7 +88,7 @@ The first adoption targets for PIA — where MVI delivers the most leverage:
 
 ### `Client.providers` as the migration seam
 
-`Client.providers` plays the same role as `VPNManager.shared` in CyberGhost: it is the incumbent singleton graph. The migration strategy is identical — wrap it behind a `Dependencies` struct injected into the reducer. The reducer never calls `Client.providers` directly; the live dependency wiring does.
+`Client.providers` is the incumbent singleton graph. The migration strategy wraps it behind a `Dependencies` struct injected into the reducer. The reducer never calls `Client.providers` directly; the live dependency wiring does.
 
 ```swift
 // Live — wraps Client.providers during migration
@@ -105,11 +116,15 @@ extension VPNFeatureDependencies {
 
 ### Relationship to ADR 0006 (Coordinator pattern)
 
-ADR 0006 defines the navigation layer. This ADR defines the state and business logic layer. A coordinator starts a feature by creating its `Store` and handing it to the feature view — the same complementary relationship as in CyberGhost.
+ADR 0006 defines the navigation layer. This ADR defines the state and business logic layer. A coordinator starts a feature by creating its `Store` and handing it to the feature view — the two are complementary.
 
-### CG + PIA as a shared standard
+### Shared Apple-platform standard
 
-The `State` / `Action` / `Reducer` / `Dependencies` layer is UI-agnostic. Feature logic that overlaps between CyberGhost and PIA (VPN connection, auth, server selection) belongs in shared SPM packages. Both products converge on the same pattern, the same code-review checklist, and — where features overlap — the same tested implementation.
+The `State` / `Action` / `Reducer` / `Dependencies` layer is UI-agnostic. Feature logic shared across Apple-platform products (VPN connection, auth, server selection) belongs in shared SPM packages. All products converge on:
+
+- the same unidirectional pattern and code-review checklist,
+- shared, tested feature logic for overlapping domains,
+- per-app thin SwiftUI view and live-dependency wiring only.
 
 ---
 
@@ -117,21 +132,20 @@ The `State` / `Action` / `Reducer` / `Dependencies` layer is UI-agnostic. Featur
 
 ### Positive
 
-- **Testability without a device.** Wrapping `Client.providers` behind `Dependencies` closures makes VPN and account logic testable on CI without a real Network Extension — the same gain as in CyberGhost.
+- **Testability without a device.** Wrapping `Client.providers` behind `Dependencies` closures makes VPN and account logic testable on CI without a real Network Extension.
 - **Replaces `NotificationCenter` coordination.** State transitions become explicit `Action`s dispatched through the store; `NotificationCenter` observers are replaced by typed state updates.
-- **Builds on existing reactive investment.** PIA already has `ObservableObject` and `@Published` in 21 and 25 files respectively. The `Store` uses the same substrate — it brings discipline to what already exists rather than adding a new mechanism.
-- **SwiftUI-first codebase is a tailwind.** With 66 SwiftUI Views vs 44 ViewControllers, PIA is already closer to the target state than CyberGhost. New features adopt MVI from day one with less UIKit bridging required.
-- **Shared standard with CyberGhost.** Patterns, code-review criteria, and feature logic are shared across both products.
+- **Builds on existing reactive investment.** PIA already has `ObservableObject` and `@Published` in use. The `Store` uses the same substrate — it brings discipline to what already exists rather than adding a new mechanism.
+- **SwiftUI-first codebase is a tailwind.** With more SwiftUI Views than ViewControllers, new features adopt MVI from day one with less UIKit bridging required.
 
 ### Neutral
 
-- **`ObservableObject` today, `@Observable` later.** Same as CG ADR 0010 — iOS 15 minimum means `ObservableObject` now; the swap to `@Observable` is localized to the `Store` when the deployment target moves to iOS 17.
+- **`ObservableObject` today, `@Observable` later.** iOS 15 minimum means `ObservableObject` now; the swap to `@Observable` is localized to the `Store` when the deployment target moves to iOS 17.
 - **`Client.providers` remains during migration.** The live wiring still calls `Client.providers`; the change is that the reducer cannot see it. The singleton is progressively replaced as features are migrated, not as a precondition.
 - **MVVM and MVI coexist.** Both patterns are intentional; engineers need to know which governs which screen.
 
 ### Negative
 
-- **Bespoke pattern — documentation burden.** Same as CG ADR 0010. This ADR and CG ADR 0010 are the canonical references; a reference feature and internal guidelines are needed for long-term maintainability.
+- **Bespoke pattern — documentation burden.** This is not a named library. It must be documented, maintained across iOS releases, and onboarded into by every new engineer. This ADR is the starting point; it is not sufficient long-term without a reference feature implementation and internal guidelines.
 - **Effect discipline.** Async cancellation and backoff inside `Effect`s must be reviewed carefully, especially for VPN reconnect logic.
 - **No CI enforcement.** Code review is the only gate against a reducer calling `Client.providers` directly.
 - **`PIALibrary` refactor is a longer-term investment.** The large provider classes (`DefaultVPNProvider`, `DefaultAccountProvider`) will need to be broken up before their logic can sit cleanly inside a reducer. This is a migration cost, not a blocker — the `Dependencies` seam lets new features be clean while the library evolves.
@@ -140,7 +154,6 @@ The `State` / `Action` / `Reducer` / `Dependencies` layer is UI-agnostic. Featur
 
 ## References
 
-- [CG ADR 0010](/cg_apple/ADRs/0010-unidirectional-mvi-architecture.md) — the shared architecture standard; full specification of primitives, `Store` implementation, dependency layers, and rationale.
 - ADR 0006 — iOS Coordinator navigation pattern; the complementary navigation layer.
 - `LocalPackages/PIALibrary/Sources/PIALibrary/VPN/DefaultVPNProvider.swift` — primary first migration target.
 - `LocalPackages/PIALibrary/Sources/PIALibrary/Account/DefaultAccountProvider.swift` — second migration target.
