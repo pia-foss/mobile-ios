@@ -621,7 +621,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 
 "welcome.plan.monthly.title"= "Maandelijks";
 "welcome.plan.yearly.title"= "Jaarlijks";
-"welcome.plan.yearly.detail_format"= "%@%@ per jaar";
+"welcome.plan.yearly.detail_format"= "%@ per jaar";
 "welcome.plan.price_format"= "%@/ma";
 "welcome.plan.best_value"= "Beste waarde";
 "welcome.plan.accessibility.per_month"= "per maand";

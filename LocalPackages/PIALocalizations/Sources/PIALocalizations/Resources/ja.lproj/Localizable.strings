@@ -622,7 +622,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 
 "welcome.plan.monthly.title"= "月間";
 "welcome.plan.yearly.title"= "年間";
-"welcome.plan.yearly.detail_format"= "年間%@%@";
+"welcome.plan.yearly.detail_format"= "年間%@";
 "welcome.plan.price_format"= "%@/月";
 "welcome.plan.best_value"= "最もお得";
 "welcome.plan.accessibility.per_month"= "月々";

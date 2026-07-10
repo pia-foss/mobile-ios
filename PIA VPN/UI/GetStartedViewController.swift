@@ -349,10 +349,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
             )
 
             purchase.title = L10n.Welcome.Plan.Yearly.title
-            let currencySymbol = purchase.product.priceLocale.currencySymbol ?? ""
-            purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
+            purchase.detail = L10n.Welcome.Plan.Yearly.detailFormat(purchase.priceString)
             purchase.bestValue = true
-            let price = L10n.Welcome.Plan.Yearly.detailFormat(currencySymbol, purchase.product.price.description)
+            let price = L10n.Welcome.Plan.Yearly.detailFormat(purchase.priceString)
             self.plans[0] = purchase
 
             DispatchQueue.main.async { [weak self] in

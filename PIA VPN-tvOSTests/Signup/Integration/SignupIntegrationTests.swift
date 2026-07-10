@@ -105,19 +105,19 @@ final class SignupIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.subscriptionOptions[0].productId, "002")
         XCTAssertEqual(sut.subscriptionOptions[0].option, .yearly)
         XCTAssertEqual(sut.subscriptionOptions[0].optionString, "Yearly")
-        XCTAssertEqual(sut.subscriptionOptions[0].price, "100.99$ per year")
-        XCTAssertEqual(sut.subscriptionOptions[0].monthlyPrice, "8.42$/mo")
+        XCTAssertEqual(sut.subscriptionOptions[0].price, "$100.99 per year")
+        XCTAssertEqual(sut.subscriptionOptions[0].monthlyPrice, "$8.42/mo")
         XCTAssertEqual(sut.subscriptionOptions[0].freeTrial, "BEST VALUE - FREE TRIAL")
 
         XCTAssertEqual(sut.subscriptionOptions[1].productId, "001")
         XCTAssertEqual(sut.subscriptionOptions[1].option, .monthly)
         XCTAssertEqual(sut.subscriptionOptions[1].optionString, "Monthly")
-        XCTAssertEqual(sut.subscriptionOptions[1].price, "10.99$ per month")
+        XCTAssertEqual(sut.subscriptionOptions[1].price, "$10.99 per month")
         XCTAssertNil(sut.subscriptionOptions[1].monthlyPrice)
         XCTAssertNil(sut.subscriptionOptions[1].freeTrial)
 
         XCTAssertEqual(capturedLoadingState, [true, false])
-        XCTAssertEqual(sut.subtitle, L10n.Tvos.Signup.Subscription.Paywall.subtitle("100.99$"))
+        XCTAssertEqual(sut.subtitle, L10n.Tvos.Signup.Subscription.Paywall.subtitle("$100.99"))
 
         XCTAssertFalse(sut.shouldShowErrorMessage)
         XCTAssertNil(sut.errorMessage)

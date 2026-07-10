@@ -41,12 +41,14 @@ public struct AppConstants {
         public static var bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
-    public struct InApp {
-        public static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.october.2020"
-        public static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.october.2020"
+    public enum InApp {
+        public static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.May2026"
+        public static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.May2026"
     }
 
-    public struct LegacyInApp {
+    public enum LegacyInApp {
+        public static let yearlyOctober2020ProductIdentifier = "com.privateinternetaccess.subscription.year.october.2020"
+        public static let monthlyOctober2020ProductIdentifier = "com.privateinternetaccess.subscription.month.october.2020"
         public static let yearly2020ProductIdentifier = "com.privateinternetaccess.subscription.1year.2020"
         public static let monthly2020ProductIdentifier = "com.privateinternetaccess.subscription.1month.2020"
         public static let yearlySubscriptionProductIdentifier = "com.privateinternetaccess.subscription.1year"

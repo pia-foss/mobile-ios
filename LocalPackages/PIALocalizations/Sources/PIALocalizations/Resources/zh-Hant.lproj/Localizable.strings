@@ -621,7 +621,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 
 "welcome.plan.monthly.title"= "月繳";
 "welcome.plan.yearly.title"= "年繳";
-"welcome.plan.yearly.detail_format"= "每年 %@%@";
+"welcome.plan.yearly.detail_format"= "每年 %@";
 "welcome.plan.price_format"= "每月 %@";
 "welcome.plan.best_value"= "最佳值";
 "welcome.plan.accessibility.per_month"= "/ 月";

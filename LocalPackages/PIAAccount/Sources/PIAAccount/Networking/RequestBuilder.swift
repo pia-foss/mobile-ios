@@ -19,12 +19,14 @@ struct RequestBuilder {
     ///   - method: The HTTP method
     ///   - bodyType: The body type (JSON or form-encoded), if any
     ///   - headers: Additional HTTP headers
+    ///   - timeout: Timeout interval measured in seconds.
     /// - Returns: A configured URLRequest
     static func build(
         url: URL,
         method: HTTPMethod,
         bodyType: BodyType? = nil,
-        headers: [String: String] = [:]
+        headers: [String: String] = [:],
+        timeout: TimeInterval? = nil
     ) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
@@ -46,6 +48,10 @@ struct RequestBuilder {
 
         case .none:
             break
+        }
+
+        if let timeout {
+            request.timeoutInterval = timeout
         }
 
         return request

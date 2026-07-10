@@ -7,21 +7,23 @@
 //
 
 import Foundation
+import PIALibrary
 import PIALocalizations
 
-class SubscriptionOptionViewModelMapper {
+final class SubscriptionOptionViewModelMapper {
     func map(product: SubscriptionProduct) -> SubscriptionOptionViewModel {
         let isYearlyPlan = product.type == .yearly
         let optionString = isYearlyPlan ? L10n.Tiles.Subscription.yearly : L10n.Tiles.Subscription.monthly
 
-        let currency = "\(product.product.priceLocale.currencySymbol ?? "$")"
-        let rawPrice = product.product.price.stringValue + currency
+        let locale = product.product.priceLocale
+        let rawPrice = PurchasePlan.string(forPrice: product.product.price, locale: locale)
         let price =
             rawPrice + " "
             + (isYearlyPlan
                 ? L10n.Tvos.Signup.Subscription.Paywall.Price.year
                 : L10n.Welcome.Plan.Accessibility.perMonth)
-        let monthlyPrice = (monthlyPrice(price: product.product.price.doubleValue) ?? "") + currency + L10n.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
+        let monthlyPriceValue = NSDecimalNumber(value: product.product.price.doubleValue / 12)
+        let monthlyPrice = PurchasePlan.string(forPrice: monthlyPriceValue, locale: locale) + L10n.Tvos.Signup.Subscription.Paywall.Price.Month.simplified
 
         return SubscriptionOptionViewModel(
             productId: product.product.identifier,
@@ -31,15 +33,5 @@ class SubscriptionOptionViewModelMapper {
             rawPrice: rawPrice,
             monthlyPrice: isYearlyPlan ? monthlyPrice : nil,
             freeTrial: isYearlyPlan ? L10n.Tvos.Signup.Subscription.Paywall.Price.trial : nil)
-    }
-
-    private func monthlyPrice(price: Double) -> String? {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
-        formatter.roundingMode = .halfUp
-
-        return formatter.string(from: NSNumber(value: price / 12))
     }
 }
