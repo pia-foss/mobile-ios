@@ -16,6 +16,8 @@ protocol ClientType {
 final class ClientAdapter: ClientType {
     func ping(servers: [ServerType]) {
         guard let serversToPing = servers as? [Server] else { return }
-        Client.ping(servers: serversToPing)
+        Task {
+            await Client.ping(servers: serversToPing)
+        }
     }
 }

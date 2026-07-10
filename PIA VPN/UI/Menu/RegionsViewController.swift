@@ -78,10 +78,7 @@ final class RegionsViewController: AutolayoutViewController {
         selectedServer = Client.preferences.displayedServer
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRegions), name: .PIAThemeDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(pingsDidComplete(notification:)), name: .PIADaemonsDidPingServers, object: nil)
-        if UserInterface.isIpad {
-            NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
         Macros.stylePopupDialog()
@@ -121,9 +118,15 @@ final class RegionsViewController: AutolayoutViewController {
         refreshBarButton?.isEnabled = false
         gradientProgressBar.setProgress(0.5, animated: true)
 
-        Client.ping(servers: self.servers)
-        Macros.dispatch(after: .milliseconds(400)) { [weak self] in
-            self?.filterServers()
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            let result = await Client.ping(servers: self.servers)
+            switch result {
+            case .completed:
+                self.completePingProgress()
+            case .skippedVPNActive, .cancelled:
+                self.gradientProgressBar.setProgress(0, animated: true)
+            }
         }
     }
 
@@ -253,7 +256,7 @@ final class RegionsViewController: AutolayoutViewController {
                 return $0.name < $1.name
             })
         case .latency:
-            self.servers = self.servers.sorted(by: { $0.pingTime ?? 0 < $1.pingTime ?? 0 })
+            self.servers = self.servers.sorted(by: { $0.pingTime ?? Int.max < $1.pingTime ?? Int.max })
         default:
             self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
         }
@@ -272,15 +275,15 @@ final class RegionsViewController: AutolayoutViewController {
         }
     }
 
+    // MARK: Notifications
+
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
     }
 
-    // MARK: Notifications
-
-    @objc private func pingsDidComplete(notification: Notification) {
+    private func completePingProgress() {
         refreshBarButton?.isEnabled = true
-        gradientProgressBar.setProgress(100, animated: true)
+        gradientProgressBar.setProgress(1.0, animated: true)
         DispatchQueue.main.asyncAfter(
             deadline: .now() + AppConfiguration.Animations.duration,
             execute: {

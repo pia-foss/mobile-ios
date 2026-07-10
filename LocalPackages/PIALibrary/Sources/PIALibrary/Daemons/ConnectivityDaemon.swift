@@ -34,6 +34,9 @@ public extension Notification.Name {
 final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
     static let shared = ConnectivityDaemon()
 
+    private let pinger: Pinger = TCPPinger.shared
+    private static let macePingTimeoutSeconds: TimeInterval = 3
+
     private(set) var hasEnabledUpdates: Bool = false
 
     private let reachability = try! Reachability(hostname: "8.8.8.8")
@@ -228,30 +231,17 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
     }
 
     private func enableMACE() {
-        rawEnableMACE { (time) in
-            guard let time = time else {
+        Task {
+            guard
+                let time = await pinger.ping(
+                    ip: accessedConfiguration.maceHostname,
+                    port: accessedConfiguration.macePort,
+                    timeout: Self.macePingTimeoutSeconds)
+            else {
                 log.error("MACE: Failed to enable")
                 return
             }
             log.debug("MACE: Successfully enabled in \(time)ms")
-        }
-    }
-
-    private func rawEnableMACE(completionHandler: ((Int?) -> Void)?) {
-        let background = DispatchQueue.global(qos: .background)
-
-        background.async {
-            guard
-                let pingTime = Macros.ping(
-                    withProtocol: .TCP,
-                    hostname: self.accessedConfiguration.maceHostname,
-                    port: self.accessedConfiguration.macePort)
-            else {
-
-                completionHandler?(nil)
-                return
-            }
-            completionHandler?(pingTime)
         }
     }
 }

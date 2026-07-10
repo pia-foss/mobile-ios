@@ -160,8 +160,6 @@ public final class Server {
     public let iKEv2AddressesForUDP: [ServerAddressIP]?
 
     /// The address on which to "ping" the server.
-    ///
-    /// - Seealso: `Macros.ping(...)`
     public let pingAddress: Address?
 
     /// The meta IP.
