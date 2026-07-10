@@ -1185,7 +1185,7 @@ final class DashboardViewController: AutolayoutViewController {
                 let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
                 navigationItem.centerItemGroups = [titleGroup]
             } else {
-                navigationItem.title = titleLabel.text
+                navigationItem.titleView = titleLabel
             }
         #else
             navigationItem.titleView = titleLabel
