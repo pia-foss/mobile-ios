@@ -140,16 +140,19 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
         enableInteractions(false)
         isRunningActivity = true
         self.showLoadingAnimation()
-        config.accountProvider.restorePurchases { [weak self] error in
+
+        Task { @MainActor [weak self] in
             guard let self else { return }
+            let result = await config.accountProvider.restorePurchases()
             self.hideLoadingAnimation()
             self.isRunningActivity = false
-            if let error {
+            switch result {
+            case .failure(let error):
                 self.reportRestoreFailure(error)
                 self.enableInteractions(true)
-                return
+            case .success:
+                self.reportRestoreSuccess()
             }
-            self.reportRestoreSuccess()
         }
     }
 
@@ -166,7 +169,13 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
     }
 
     private func reportRestoreFailure(_ optionalError: Error?) {
-        let message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
+        let message: String
+        switch optionalError as? ClientError {
+        case .noReceipt, .badReceipt:
+            message = L10n.Account.Restore.Failure.message
+        default:
+            message = optionalError?.localizedDescription ?? L10n.Welcome.Iap.Error.title
+        }
         if let error = optionalError {
             log.error("Failed to restore payment receipt (error: \(error))")
         } else {

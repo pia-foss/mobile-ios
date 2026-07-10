@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 import StoreKit
 import XCTest
@@ -74,7 +75,7 @@ import XCTest
         func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> { .success([:]) }
         func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> { .failure(.userCancelled) }
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
-        func restorePurchases(_ callback: SuccessLibraryCallback?) {}
+        func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
         func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}
         func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?) {}
         func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}

@@ -176,12 +176,14 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapNativeLoginError(_ error: Error) -> ClientError {
         let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-        switch code {
+        switch code ?? 0 {
         case 402:
             return .expired
         case 429:
             let retryAfter = (error as? PIAAccountError)?.retryAfterSeconds ?? 0
             return .throttled(retryAfter: UInt(retryAfter))
+        case 500..<600:
+            return .noServersAvailable
         case PIAAccountError.networkFailureCode:
             return .internetUnreachable
         default:

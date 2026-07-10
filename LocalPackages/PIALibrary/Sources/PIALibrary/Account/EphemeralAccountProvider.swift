@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 fileprivate let log = PIALogger.logger(for: EphemeralAccountProvider.self)
@@ -107,8 +108,8 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         return await accessedProviders.accountProvider.purchase(plan: plan)
     }
 
-    func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        accessedProviders.accountProvider.restorePurchases(callback)
+    func restorePurchases() async -> Result<JWS, ClientError> {
+        return await accessedProviders.accountProvider.restorePurchases()
     }
 
     func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {

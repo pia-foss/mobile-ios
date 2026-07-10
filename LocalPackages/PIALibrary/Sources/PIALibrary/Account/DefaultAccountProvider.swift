@@ -444,10 +444,21 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             return await accessedStore.purchase(product: product)
         }
 
-        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-            Task {
-                let error = await accessedStore.synchronizeEntitlements()
-                DispatchQueue.main.async { callback?(error) }
+        public func restorePurchases() async -> Result<JWS, ClientError> {
+            let syncError = await accessedStore.synchronizeEntitlements()
+            if let syncError {
+                log.warning("Entitlements sync failed: \(syncError)")
+            }
+
+            // Success requires an actual entitlement, not just a successful sync.
+            // A cached entitlement is acceptable when the sync fails (e.g. offline).
+            let jws = await accessedStore.currentEntitlementJWS()
+            if let jws {
+                log.debug("Returning found JWS entitlement (count \(jws.value.count))")
+                return .success(jws)
+            } else {
+                log.debug("No JWS entitlement found")
+                return .failure(.noReceipt)
             }
         }
 

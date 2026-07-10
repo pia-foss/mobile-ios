@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 import StoreKit
 
@@ -95,7 +96,7 @@ final class AccountProviderMock: AccountProvider {
         .failure(.userCancelled)
     }
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
-    func restorePurchases(_ callback: SuccessLibraryCallback?) {}
+    func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
     func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}
     func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?) {}
     func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}

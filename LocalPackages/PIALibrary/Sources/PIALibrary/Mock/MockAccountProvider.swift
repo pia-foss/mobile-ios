@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 /// Simulates account-related operations
@@ -292,8 +293,8 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
 
         /// :nodoc:
-        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-            delegate.restorePurchases(callback)
+        public func restorePurchases() async -> Result<JWS, ClientError> {
+            return await delegate.restorePurchases()
         }
 
         public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {

@@ -48,6 +48,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var signupEmail: String?
     private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
+    private var isRestoring = false
 
     @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
@@ -128,36 +129,43 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     @IBAction private func logInWithReceipt(_ sender: Any?) {
-        showLoadingAnimation()
+        guard !isRestoring else {
+            return
+        }
+        isRestoring = true
+        handleLoadingState()
 
         Task { [weak self] in
-            _ = await Client.store.synchronizeEntitlements()
-            let jws = await Client.store.currentEntitlementJWS()
-            await MainActor.run {
-                guard let self else { return }
-                guard let jws else {
-                    log.debug("Failed to get JWS from receipt")
-                    self.hideLoadingAnimation()
-                    self.handleBadReceipt()
-                    return
-                }
+            guard let self else { return }
 
+            let result = await Client.providers.accountProvider.restorePurchases()
+            switch result {
+            case .failure(let error):
+                log.error("No entitlement found to restore: \(error)")
+                await MainActor.run {
+                    self.isRestoring = false
+                    self.handleLoadingState()
+                    self.handleBadReceipt()
+                }
+                return
+
+            case .success(let jws):
                 let request = LoginReceiptRequest(receipt: jws)
-                self.config.accountProvider.login(with: request) { [weak self] userAccount, error in
-                    self?.hideLoadingAnimation()
+                self.config.accountProvider.login(with: request) { @MainActor userAccount, error in
+                    self.isRestoring = false
+                    self.handleLoadingState()
 
                     if let error {
                         log.error("Failed to login with receipt: \(error)")
-                        self?.handleBadReceipt()
+                        self.handleBadReceipt()
                         return
                     }
 
                     guard let userAccount else {
-                        self?.handleBadReceipt()
+                        self.handleBadReceipt()
                         return
                     }
 
-                    guard let self else { return }
                     self.completionDelegate?.welcomeDidLogin(
                         withUser: userAccount,
                         topViewController: self
@@ -281,7 +289,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     private func handleLoadingState() {
-        if isFetchingProducts || isPurchasing {
+        if isFetchingProducts || isPurchasing || isRestoring {
             showLoadingAnimation()
         } else {
             hideLoadingAnimation()

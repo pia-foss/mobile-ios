@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
 /// Business interface related to user account.
@@ -195,12 +196,8 @@ public protocol AccountProvider: AnyObject {
          */
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?)
 
-        /**
-         Restores the purchase history, possibly recovering from corruption.
-
-         - Parameter callback: Returns `nil` on success.
-         */
-        func restorePurchases(_ callback: SuccessLibraryCallback?)
+        /// Restores the purchase history, possibly recovering from corruption.
+        func restorePurchases() async -> Result<JWS, ClientError>
 
         /**
         Send a login link to the email provided as parameter.

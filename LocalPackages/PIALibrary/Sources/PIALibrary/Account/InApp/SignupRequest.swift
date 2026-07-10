@@ -31,13 +31,13 @@ public struct SignupRequest {
     public let email: String
 
     /// The purchased transaction.
-    public let transaction: InAppTransaction?
+    public let transaction: (any InAppTransaction)?
 
     /// A map of objects attached to the signup request for marketing purposes.
     public let marketing: [String: Any]?
 
     /// :nodoc:
-    public init(email: String, transaction: InAppTransaction? = nil, marketing: [String: Any]? = nil) {
+    public init(email: String, transaction: (any InAppTransaction)? = nil, marketing: [String: Any]? = nil) {
         self.email = email
         self.transaction = transaction
         self.marketing = marketing
