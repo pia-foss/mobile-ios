@@ -38,7 +38,7 @@ public protocol VPNProfile: AnyObject {
     var native: Any? { get }
 
     /// The connection date time, if connected. Otherwise nil.
-    var connectedDate: Date? { get }
+    var connectionDate: Date? { get }
 
     /**
      Prepares the profile for use, like synchronizing with the current VPN status and making sure that the profile is not corrupt.

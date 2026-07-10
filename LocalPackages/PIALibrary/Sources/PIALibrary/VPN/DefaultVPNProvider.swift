@@ -69,7 +69,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return nil
     }
 
-    public var connectedDate: Date? { activeProfile?.connectedDate }
+    public var connectionDate: Date? { activeProfile?.connectionDate }
 
     private var vpnLog: String {
         return accessedDatabase.transient.vpnLog

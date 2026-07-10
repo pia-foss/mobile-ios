@@ -60,7 +60,7 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
         return nil
     }
 
-    public var connectedDate: Date? { nil }
+    public var connectionDate: Date? { nil }
 
     /// :nodoc:
     public func prepare() {

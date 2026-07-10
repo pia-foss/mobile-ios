@@ -125,11 +125,9 @@ import Foundation
         /// :nodoc:
         public var native: Any?
 
-        public var connectedDate: Date? {
-            if let native = native as? NETunnelProviderManager {
-                return native.connection.connectedDate
-            }
-            return nil
+        public var connectionDate: Date? {
+            guard let native = native as? NETunnelProviderManager else { return nil }
+            return native.connection.connectedDate
         }
 
         /// :nodoc:

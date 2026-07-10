@@ -54,7 +54,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
         return currentVPN
     }
 
-    public var connectedDate: Date? { currentVPN.connection.connectedDate }
+    public var connectionDate: Date? { currentVPN.connection.connectedDate }
 
     /// :nodoc:
     public func prepare() {

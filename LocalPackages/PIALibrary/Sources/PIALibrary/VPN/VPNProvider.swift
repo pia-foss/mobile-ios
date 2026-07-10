@@ -42,7 +42,7 @@ public protocol VPNProvider: AnyObject {
     var profileServer: Server? { get }
 
     /// The connection date time, if connected. Otherwise nil.
-    var connectedDate: Date? { get }
+    var connectionDate: Date? { get }
 
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
