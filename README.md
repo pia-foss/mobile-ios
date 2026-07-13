@@ -51,7 +51,8 @@ The VPN packet-tunnel engine is provided by the **Kape Platform SDK**, a Swift p
 that is **not committed to this repository**. It is pulled from a private Cloudsmith
 registry into `LocalPackages/KapePlatformSDK/` (gitignored) by
 `scripts/pull-kape-platform-sdk.sh`, and pinned to a specific version in
-`scripts/kape-platform-sdk.version`.
+`scripts/kape-platform-sdk.version` with its archive SHA-256 pinned in
+`scripts/kape-platform-sdk.checksum`.
 
 Because `PIALibrary` (consumed by nearly every target) depends on this package,
 **no target will resolve Swift packages or build until the SDK has been pulled.** A clean
@@ -76,9 +77,10 @@ CLOUDSMITH_TOKEN=<your-token> ./scripts/pull-kape-platform-sdk.sh
 ./scripts/pull-kape-platform-sdk.sh
 ```
 
-The script downloads the pinned version, verifies its checksum, and unpacks it into
-`LocalPackages/KapePlatformSDK/`. It is idempotent — re-running it when the pinned version
-is already installed is a no-op.
+The script downloads the pinned version, verifies its SHA-256 against the committed
+checksum pin, and unpacks it into `LocalPackages/KapePlatformSDK/`. Verification is
+mandatory — an archive that fails or lacks a checksum is never installed. It is
+idempotent — re-running it when the pinned version is already installed is a no-op.
 
 ### 3. Build as usual
 
@@ -91,7 +93,7 @@ Open the workspace in Xcode (or run `xcodebuild` / `fastlane`) and let SwiftPM r
 ### Updating the pinned version
 
 ```bash
-# Fetch the latest version from the registry, update scripts/kape-platform-sdk.version, then pull
+# Fetch the latest version from the registry, update the version and checksum pins, then pull
 CLOUDSMITH_TOKEN=<your-token> ./scripts/pull-kape-platform-sdk.sh --update
 ```
 

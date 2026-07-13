@@ -57,15 +57,19 @@ jobs:
         echo "Failed to download tvOS platform after $max_attempts attempts"
         exit 1
     
-    - name: Cache KapePlatformSDK
+    # Cache the downloaded archive, not the unpacked package: the pull script
+    # re-verifies the archive's SHA-256 against the committed pin on every run,
+    # so a poisoned cache entry cannot reach the build unnoticed.
+    - name: Cache KapePlatformSDK archive
       uses: actions/cache@v4
       with:
-        path: LocalPackages/KapePlatformSDK
-        key: kape-platform-sdk-${{ hashFiles('scripts/kape-platform-sdk.version') }}
+        path: .kape-sdk-archive-cache
+        key: kape-platform-sdk-archive-${{ hashFiles('scripts/kape-platform-sdk.version', 'scripts/kape-platform-sdk.checksum') }}
 
     - name: Pull KapePlatformSDK
       env:
         CLOUDSMITH_TOKEN: ${{ secrets.CLOUDSMITH_TOKEN }}
+        KAPE_SDK_ARCHIVE_CACHE: .kape-sdk-archive-cache
       run: ./scripts/pull-kape-platform-sdk.sh
 
     - name: Cache SPM packages

@@ -29,10 +29,22 @@
 #       -H "Authorization: Bearer $TOKEN" \
 #       https://swift.cloudsmith.io/expressvpn/kp_platform_sdks_dev/KapePlatformSDK/KapePlatformSDK
 #
+# Integrity:
+#   The archive's SHA-256 is pinned in scripts/kape-platform-sdk.checksum
+#   (committed alongside the version pin; --update refreshes both). The pin is
+#   the trust anchor when pulling the pinned version; for any other version the
+#   checksum from the registry release metadata is required instead. There is
+#   no unverified install path: a missing or mismatching checksum always fails.
+#
+# Archive cache:
+#   Set $KAPE_SDK_ARCHIVE_CACHE to a directory to keep/reuse the downloaded
+#   .zip (used by CI to cache the *archive*, so the checksum is re-verified on
+#   every run — caching the unpacked package would skip verification).
+#
 # Usage:
 #   CLOUDSMITH_TOKEN=<token> ./scripts/pull-kape-platform-sdk.sh
 #   ./scripts/pull-kape-platform-sdk.sh            # with a .cloudsmith file present
-#   ./scripts/pull-kape-platform-sdk.sh --update   # fetch latest from registry, update version file, then pull
+#   ./scripts/pull-kape-platform-sdk.sh --update   # fetch latest from registry, update version+checksum pins, then pull
 
 set -euo pipefail
 
@@ -43,6 +55,7 @@ NAME="KapePlatformSDK"
 DEST="$REPO_ROOT/LocalPackages/KapePlatformSDK"
 ARCHIVE_ROOT="KapePlatformSDKPackage"        # top-level dir inside the .zip
 VERSION_FILE="$REPO_ROOT/scripts/kape-platform-sdk.version"
+CHECKSUM_FILE="$REPO_ROOT/scripts/kape-platform-sdk.checksum"
 STAMP="$DEST/.kape-pulled-version"
 
 die() { echo "ERROR: $*" >&2; exit 1; }
@@ -111,30 +124,53 @@ if [ -f "$STAMP" ] && [ "$(cat "$STAMP" 2>/dev/null)" = "$VERSION" ] && [ -f "$D
   exit 0
 fi
 
-# ── expected checksum (from registry release metadata) ──────────────────────
-echo "==> KapePlatformSDK $VERSION — fetching release metadata"
-META="$(curl -fsSL -H 'Accept: application/vnd.swift.registry.v1+json' -H "$AUTH" "$BASE")" \
-  || die "could not fetch metadata (check token / version '$VERSION' / network)"
-EXPECTED_SHA="$(printf '%s' "$META" | /usr/bin/python3 -c \
-  'import sys,json; d=json.load(sys.stdin); print(next((r.get("checksum","") for r in d.get("resources",[]) if r.get("name")=="source-archive"), ""))' 2>/dev/null || true)"
+# ── expected checksum ────────────────────────────────────────────────────────
+# Trust anchor is the committed pin when pulling the pinned version; otherwise
+# (version override, --update) the registry release metadata must provide one.
+# Fail closed: no expected checksum means no install.
+EXPECTED_SHA=""
+if [ "$UPDATE_LATEST" = "0" ] && [ "$VERSION" = "$(tr -d ' \t\r\n' < "$VERSION_FILE" 2>/dev/null || true)" ] \
+  && [ -f "$CHECKSUM_FILE" ]; then
+  EXPECTED_SHA="$(tr -d ' \t\r\n' < "$CHECKSUM_FILE")"
+fi
+if [ -z "$EXPECTED_SHA" ]; then
+  echo "==> KapePlatformSDK $VERSION — fetching release metadata"
+  META="$(curl -fsSL -H 'Accept: application/vnd.swift.registry.v1+json' -H "$AUTH" "$BASE")" \
+    || die "could not fetch metadata (check token / version '$VERSION' / network)"
+  EXPECTED_SHA="$(printf '%s' "$META" | /usr/bin/python3 -c \
+    'import sys,json; d=json.load(sys.stdin); print(next((r.get("checksum","") for r in d.get("resources",[]) if r.get("name")=="source-archive"), ""))' 2>/dev/null || true)"
+fi
+[ -n "$EXPECTED_SHA" ] \
+  || die "no expected checksum for $VERSION (no pin in $CHECKSUM_FILE and none in registry metadata); refusing to install unverified archive"
 
-# ── download ────────────────────────────────────────────────────────────────
+# ── download (optionally via archive cache) ──────────────────────────────────
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-ZIP="$TMP/kape-platform-sdk.zip"
-echo "==> Downloading source archive"
-curl -fSL --progress-bar -H 'Accept: application/vnd.swift.registry.v1+zip' -H "$AUTH" -o "$ZIP" "$BASE.zip" \
-  || die "download failed"
-
-# ── verify checksum ─────────────────────────────────────────────────────────
-if [ -n "$EXPECTED_SHA" ]; then
-  ACTUAL_SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
-  [ "$ACTUAL_SHA" = "$EXPECTED_SHA" ] || die "checksum mismatch: expected $EXPECTED_SHA, got $ACTUAL_SHA"
-  echo "==> Checksum OK ($ACTUAL_SHA)"
-elif [ "${STRICT:-${CI:-}}" ]; then
-  die "no checksum in metadata; refusing to install unverified archive (STRICT=${STRICT:-}, CI=${CI:-})"
+if [ -n "${KAPE_SDK_ARCHIVE_CACHE:-}" ]; then
+  mkdir -p "$KAPE_SDK_ARCHIVE_CACHE"
+  ZIP="$KAPE_SDK_ARCHIVE_CACHE/KapePlatformSDK-$VERSION.zip"
 else
-  echo "==> WARNING: no checksum in metadata; skipping integrity verification" >&2
+  ZIP="$TMP/kape-platform-sdk.zip"
+fi
+if [ -f "$ZIP" ]; then
+  echo "==> Using cached archive: $ZIP"
+else
+  echo "==> Downloading source archive"
+  curl -fSL --progress-bar -H 'Accept: application/vnd.swift.registry.v1+zip' -H "$AUTH" -o "$ZIP" "$BASE.zip" \
+    || { rm -f "$ZIP"; die "download failed"; }
+fi
+
+# ── verify checksum (always — cached archives included) ──────────────────────
+ACTUAL_SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
+if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
+  rm -f "$ZIP"  # never leave a bad archive where a later run could reuse it
+  die "checksum mismatch: expected $EXPECTED_SHA, got $ACTUAL_SHA"
+fi
+echo "==> Checksum OK ($ACTUAL_SHA)"
+
+if [ "$UPDATE_LATEST" = "1" ]; then
+  echo "$ACTUAL_SHA" > "$CHECKSUM_FILE"
+  echo "==> Updated $CHECKSUM_FILE"
 fi
 
 # ── unpack ──────────────────────────────────────────────────────────────────
