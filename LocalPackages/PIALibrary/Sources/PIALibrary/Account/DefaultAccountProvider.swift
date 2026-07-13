@@ -414,14 +414,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             log.debug("No available products in cache, requesting from store...")
 
             let identifiers = accessedConfiguration.allProductIdentifiers()
-            let result = await accessedStore.fetchProducts(identifiers: identifiers)
-            switch result {
+            switch await accessedStore.fetchProducts(identifiers: identifiers) {
             case .failure(let error):
                 return .failure(error)
             case .success(let products):
                 log.debug("Available products from store: \(products)")
-
-                Macros.postNotification(.__InAppDidFetchProducts, [.products: planProducts!])
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: planProducts ?? [:]])
                 return .success(planProducts!)
             }
         }
@@ -577,10 +575,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
-            Task {
-                do {
-                    _ = try await self.listPlanProducts()
-                } catch {
+            Task { [weak self] in
+                guard let self else { return }
+
+                if case .failure(let error) = await self.listPlanProducts() {
                     callback?(nil, error)
                     return
                 }
