@@ -71,6 +71,7 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
         transactionObserverTask = Task {
             for await result in Transaction.updates {
+                if Task.isCancelled { break }
                 log.debug("transaction result: \(result)")
             }
         }
@@ -163,7 +164,7 @@ final class AppStoreProvider: NSObject, InAppProvider {
             return .failure(.userCancelled)
         case .pending:
             log.debug("\(#function) pending")
-            return .failure(.userCancelled)
+            return .failure(.purchasePending)
         @unknown default:
             log.warning("Unknown purchase result: \(result)")
             return .failure(.unknown(code: 606, message: "Unknown purchase result: \(result)"))
@@ -173,6 +174,13 @@ final class AppStoreProvider: NSObject, InAppProvider {
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
         guard let native = transaction.native as? Transaction else {
             log.error("Native transaction must be StoreKit.Transaction, but got \(type(of: transaction.native))")
+            return
+        }
+
+        guard success else {
+            // Leave the transaction unfinished so StoreKit keeps re-delivering it through
+            // `Transaction.updates` until the content is successfully delivered to the backend.
+            log.debug("Not finishing transaction \(native.id): delivery was not successful")
             return
         }
 

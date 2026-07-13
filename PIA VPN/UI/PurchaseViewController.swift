@@ -180,6 +180,12 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
             switch result {
             case .failure(.userCancelled):
                 break
+            case .failure(.purchasePending):
+                log.debug("Purchase is pending external approval")
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: ClientError.purchasePending.localizedDescription
+                )
             case .failure(let error):
                 let message = error.localizedDescription
                 log.error("Purchase failed (error: \(error))")

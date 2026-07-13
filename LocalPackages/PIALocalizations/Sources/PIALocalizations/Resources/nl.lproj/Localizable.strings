@@ -534,6 +534,7 @@
 "signup.failure.title"= "Account aanmaken mislukt";
 "signup.failure.message"= "We kunnen op dit moment geen account maken. Probeer het later opnieuw. \n\nAls u de app opnieuw opent, wordt opnieuw geprobeerd een account te maken.";
 "signup.failure.purchase.sandbox.message"= "Het geselecteerde sandbox-abonnement is niet beschikbaar in productie.";
+"signup.failure.purchase.pending.message"= "Je aankoop wacht op goedkeuring. Zodra deze is goedgekeurd, open je de app opnieuw om het instellen van je account te voltooien.";
 "signup.failure.redeem.invalid.title"= "Ongeldige pincode";
 "signup.failure.redeem.invalid.message"= "U heeft een ongeldige pincode ingevoerd. Probeer het opnieuw.";
 "signup.failure.redeem.claimed.title"= "Kaart al geclaimd";

@@ -26,7 +26,7 @@ import StoreKit
 
 struct AppStoreTransaction: InAppTransaction<Transaction> {
     var identifier: String {
-        return native.appTransactionID
+        return String(native.id)
     }
 
     let native: Transaction

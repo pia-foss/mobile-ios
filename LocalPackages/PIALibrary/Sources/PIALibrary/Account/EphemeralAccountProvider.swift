@@ -125,6 +125,10 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
                     return
                 }
 
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
+                }
+
                 let user = UserAccount(credentials: credentials, info: nil)
                 self.currentUser = user
                 self.isLoggedIn = true

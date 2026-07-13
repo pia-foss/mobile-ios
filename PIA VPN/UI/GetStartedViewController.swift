@@ -202,6 +202,12 @@ final class GetStartedViewController: PIAWelcomeViewController {
             case .failure(.userCancelled):
                 log.debug("User cancelled purchase")
                 break
+            case .failure(.purchasePending):
+                log.debug("Purchase is pending external approval")
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: ClientError.purchasePending.localizedDescription
+                )
             case .failure(let error):
                 log.warning("Purchase failed with error: \(error)")
                 let message = error.localizedDescription
