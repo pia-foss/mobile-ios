@@ -255,6 +255,11 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(ClientError.vpnClientConfigurationUnavailable)
             return
         }
+
+        // A new connection attempt supersedes any prior manual-disconnect
+        // intent; clear the flag so the daemon's retry logic is not suppressed.
+        accessedConfiguration.disconnectedManually = false
+
         activeProfile.connect(withConfiguration: configuration, callback)
     }
 
@@ -269,16 +274,19 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return
         }
 
-        guard let configuration = vpnClientConfiguration() else {
-            callback?(ClientError.vpnProfileUnavailable)
-            return
-        }
-        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
-            let log = self.accessedDatabase.transient.vpnLog + "\n\n" + (content ?? "Unknown Protocol Logs \(error.debugDescription)")
-            self.accessedDatabase.transient.vpnLog = log
-            activeProfile.disconnect(callback)
+        // Capture the tunnel log best-effort, in parallel: the provider message
+        // never gets a reply when the tunnel process is wedged (e.g. after a
+        // network change), so the disconnect below must not wait on it.
+        if let configuration = vpnClientConfiguration() {
+            activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
+                guard let content, !content.isEmpty else {
+                    return
+                }
+                self.accessedDatabase.transient.vpnLog += "\n\n" + content
+            }
         }
 
+        activeProfile.disconnect(callback)
     }
 
     public func updatePreferences(_ callback: SuccessLibraryCallback?) {
@@ -318,6 +326,13 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
                     callback?(error)
                     return
                 }
+                // The user may have manually disconnected while this reconnect
+                // cycle was in flight — never override that intent.
+                guard !self.accessedConfiguration.disconnectedManually else {
+                    log.debug("reconnect aborted — the user disconnected manually")
+                    callback?(nil)
+                    return
+                }
                 guard let configuration = self.vpnClientConfiguration() else {
                     callback?(ClientError.vpnProfileUnavailable)
                     return
@@ -328,6 +343,13 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             activeProfile.updatePreferences { (error) in
                 if let _ = error {
                     callback?(error)
+                    return
+                }
+                // The user may have manually disconnected while this reconnect
+                // cycle was in flight — never override that intent.
+                guard !self.accessedConfiguration.disconnectedManually else {
+                    log.debug("reconnect aborted — the user disconnected manually")
+                    callback?(nil)
                     return
                 }
                 guard let configuration = self.vpnClientConfiguration() else {
