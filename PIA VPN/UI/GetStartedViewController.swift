@@ -233,6 +233,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.config = config
         vc.delegate = delegate
         vc.completionDelegate = vc
+        vc.preset.shouldRecoverPendingSignup = config.shouldRecoverPendingSignup
         return nav
     }
 
@@ -475,5 +476,6 @@ extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
 extension GetStartedViewController {
     struct Config {
         let accountProvider: AccountProvider
+        let shouldRecoverPendingSignup: Bool
     }
 }

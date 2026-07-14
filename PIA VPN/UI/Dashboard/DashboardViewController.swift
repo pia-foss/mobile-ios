@@ -421,6 +421,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         let config = GetStartedViewController.Config(
             accountProvider: preset.accountProvider,
+            shouldRecoverPendingSignup: preset.shouldRecoverPendingSignup,
         )
         let vc = GetStartedViewController.with(config: config, delegate: self)
         guard let vc else {
