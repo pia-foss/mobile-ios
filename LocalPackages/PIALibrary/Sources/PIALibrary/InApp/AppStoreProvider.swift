@@ -41,10 +41,15 @@ final class AppStoreProvider: NSObject, InAppProvider {
     func currentEntitlementJWS() async -> JWS? {
         var newest: (date: Date, jws: JWS)?
         for await result in Transaction.currentEntitlements {
-            let transaction = result.unsafePayloadValue
-            if newest == nil || transaction.purchaseDate > newest!.date {
-                if let jws = JWS(result.jwsRepresentation) {
-                    newest = (transaction.purchaseDate, jws)
+            switch result {
+            case .unverified(let transaction, let error):
+                log.warning("Ignoring unverified transaction: \(error)")
+                await transaction.finish()
+            case .verified(let transaction):
+                if newest == nil || transaction.purchaseDate > newest!.date {
+                    if let jws = JWS(result.jwsRepresentation) {
+                        newest = (transaction.purchaseDate, jws)
+                    }
                 }
             }
         }
