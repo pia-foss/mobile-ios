@@ -52,6 +52,8 @@ import StoreKit
         let jwsRepresentation: JWS = JWS("mock-jws-transaction")!
 
         let native: Native = .none
+
+        func finish() async {}
     }
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {

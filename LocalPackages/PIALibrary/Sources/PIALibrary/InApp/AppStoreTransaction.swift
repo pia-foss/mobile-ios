@@ -37,4 +37,8 @@ struct AppStoreTransaction: InAppTransaction<Transaction> {
         self.native = native
         self.jwsRepresentation = jwsRepresentation
     }
+
+    func finish() async {
+        await native.finish()
+    }
 }

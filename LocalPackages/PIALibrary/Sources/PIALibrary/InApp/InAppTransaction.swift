@@ -35,6 +35,8 @@ public protocol InAppTransaction<Native>: CustomStringConvertible {
 
     /// The underlying native transaction implementation.
     var native: Native { get }
+
+    func finish() async
 }
 
 extension InAppTransaction {

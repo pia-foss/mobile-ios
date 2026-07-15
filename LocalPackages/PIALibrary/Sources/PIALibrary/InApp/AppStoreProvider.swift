@@ -67,12 +67,21 @@ final class AppStoreProvider: NSObject, InAppProvider {
     }
 
     func startObservingTransactions() {
-        log.debug("Start observing transactions")
+        log.debug("Start observing unfinished transactions")
 
+        // On startup we check for unfinished transactions and finish them. With
+        // out current architecture is difficult to handle them. Users can always
+        // use the restore flow to claim transactions.
         transactionObserverTask = Task {
             for await result in Transaction.updates {
                 if Task.isCancelled { break }
-                log.debug("transaction result: \(result)")
+                switch result {
+                case .unverified(let transaction, let error):
+                    log.warning("Unverified transaction: \(transaction.id) (\(error)")
+                    await transaction.finish()
+                case .verified(let transaction):
+                    await transaction.finish()
+                }
             }
         }
     }
@@ -148,6 +157,7 @@ final class AppStoreProvider: NSObject, InAppProvider {
         case .success(let verification):
             guard let jws = JWS(verification.jwsRepresentation) else {
                 log.error("Failed to create JWS from: \(verification.jwsRepresentation)")
+                await verification.unsafePayloadValue.finish()
                 return .failure(.badReceipt)
             }
             switch verification {
