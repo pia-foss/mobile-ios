@@ -49,6 +49,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
     private var isRestoring = false
+    private var signupAttemptCount: Int = 0
 
     @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
@@ -194,6 +195,15 @@ final class GetStartedViewController: PIAWelcomeViewController {
         Task { [weak self] in
             guard let self else { return }
 
+            if self.signupAttemptCount > 0 {
+                // if it tried to signup (and failed, that's why we're here again)
+                // synchronize entitlements to find missing purchases or purge stale ones.
+                log.debug("Already failed to signup, synchronizing entitlements")
+                if let error = await Client.store.synchronizeEntitlements() {
+                    log.error("Failed to synchronize entitlements: \(error)")
+                }
+            }
+
             let result = await config.accountProvider.purchase(plan: plan.plan)
             self.isPurchasing = false
             self.handleLoadingState()
@@ -219,6 +229,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
                 log.debug("Purchase successful with transaction id \(transaction.identifier)")
                 self.signupEmail = email
                 self.signupTransaction = transaction
+                self.signupAttemptCount += 1
                 self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
             }
         }
