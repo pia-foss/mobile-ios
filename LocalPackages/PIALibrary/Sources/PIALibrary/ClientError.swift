@@ -55,6 +55,9 @@ public enum ClientError: Error, Equatable {
     /// VPN client configuration could not be built (e.g. missing password reference).
     case vpnClientConfigurationUnavailable
 
+    /// The previous VPN session did not finish disconnecting before the restart deadline.
+    case vpnDisconnectTimedOut
+
     /// Error while checking the dip token renewal.
     case dipTokenRenewalError
 

@@ -25,6 +25,95 @@ import NetworkExtension
 
 private let log = PIALogger.logger(for: NetworkExtensionProfile.self)
 
+enum TunnelRestartPolicy {
+    static func canStartTunnel(from status: NEVPNStatus) -> Bool {
+        status == .disconnected || status == .invalid
+    }
+}
+
+/// Serializes the stop/wait/start handoff for a tunnel profile. All observer and timeout
+/// state is confined to the main queue, and a generation prevents a superseded wait from
+/// starting an older configuration.
+final class TunnelRestartCoordinator {
+    private var generation: UInt = 0
+    private var observer: NSObjectProtocol?
+    private var timeoutItem: DispatchWorkItem?
+
+    func wait(
+        for connection: NEVPNConnection,
+        timeout: TimeInterval,
+        onReady: @escaping () -> Void,
+        onTimeout: @escaping () -> Void
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            self?.beginWait(
+                for: connection,
+                timeout: timeout,
+                onReady: onReady,
+                onTimeout: onTimeout
+            )
+        }
+    }
+
+    private func beginWait(
+        for connection: NEVPNConnection,
+        timeout: TimeInterval,
+        onReady: @escaping () -> Void,
+        onTimeout: @escaping () -> Void
+    ) {
+        cancelPendingWait()
+        generation &+= 1
+        let waitGeneration = generation
+
+        guard TunnelRestartPolicy.canStartTunnel(from: connection.status) == false else {
+            onReady()
+            return
+        }
+
+        let finish: (Bool) -> Void = { [weak self, connection] didTimeOut in
+            guard let self, generation == waitGeneration else { return }
+            cancelPendingWait()
+
+            if TunnelRestartPolicy.canStartTunnel(from: connection.status) {
+                onReady()
+            } else if didTimeOut {
+                onTimeout()
+            }
+        }
+
+        observer = NotificationCenter.default.addObserver(
+            forName: .NEVPNStatusDidChange,
+            object: connection,
+            queue: .main
+        ) { [connection] _ in
+            guard TunnelRestartPolicy.canStartTunnel(from: connection.status) else {
+                return
+            }
+            finish(false)
+        }
+
+        let item = DispatchWorkItem { finish(true) }
+        timeoutItem = item
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: item)
+    }
+
+    private func cancelPendingWait() {
+        if let observer {
+            NotificationCenter.default.removeObserver(observer)
+            self.observer = nil
+        }
+        timeoutItem?.cancel()
+        timeoutItem = nil
+    }
+
+    deinit {
+        if let observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        timeoutItem?.cancel()
+    }
+}
+
 /// Specific protocol bridging a `VPNProfile` to a native `NEVPNProtocol` from Apple's NetworkExtension framwork.
 public protocol NetworkExtensionProfile: VPNProfile {
 

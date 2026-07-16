@@ -31,7 +31,7 @@ import Foundation
     /// Implementation of `VPNProfile` providing WireGuard connectivity.
     public final class PIAWGTunnelProfile: NetworkExtensionProfile {
 
-        private var waitObserver: NSObjectProtocol?
+        private let restartCoordinator = TunnelRestartCoordinator()
 
         public func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration? {
 
@@ -158,62 +158,57 @@ import Foundation
                     let currentStatus = vpn.connection.status
                     log.debug("[WG] connect — current status: \(currentStatus.descriptionForLog)")
 
-                    // If the tunnel is already active, stop it before starting the new one.
-                    // Calling startTunnel() on a live session may silently retain the existing
-                    // connection rather than switching to the new server, leaving the app in a
-                    // state where it believes it is connected when it is not.
-                    if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
-                        log.debug("[WG] connect — stopping active tunnel before restart")
-                        vpn.connection.stopVPNTunnel()
-                    }
-
-                    if currentStatus == .disconnecting {
+                    // Only start immediately from a fully settled state. From any other
+                    // state we stop the current session and wait for a clean .disconnected
+                    // before starting. Calling startTunnel() on a session that is still
+                    // active or tearing down may silently retain the existing connection
+                    // (wrong server) or fail the new attempt — the latter being the source
+                    // of the reconnect storm when the fallback timer forces reconnects.
+                    if TunnelRestartPolicy.canStartTunnel(from: currentStatus) {
+                        self.startTunnel(vpn: vpn, context: "connect", callback: callback)
+                    } else {
+                        if currentStatus != .disconnecting {
+                            log.debug("[WG] connect — stopping active tunnel before restart")
+                            vpn.connection.stopVPNTunnel()
+                        }
                         log.debug("[WG] connect — waiting for .disconnected before start")
                         self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
-                    } else {
-                        do {
-                            let session = vpn.connection as? NETunnelProviderSession
-                            try session?.startTunnel(options: nil)
-                            log.debug("[WG] connect — startTunnel issued")
-                            callback?(nil)
-                        } catch let e {
-                            log.error("[WG] connect — startTunnel threw: \(e)")
-                            callback?(e)
-                        }
                     }
                 }
             }
         }
 
+        private func startTunnel(vpn: NETunnelProviderManager, context: String, callback: SuccessLibraryCallback?) {
+            guard let session = vpn.connection as? NETunnelProviderSession else {
+                callback?(ClientError.vpnProfileUnavailable)
+                return
+            }
+            do {
+                try session.startTunnel(options: nil)
+                log.debug("[WG] \(context) — startTunnel issued")
+                callback?(nil)
+            } catch let e {
+                log.error("[WG] \(context) — startTunnel threw: \(e)")
+                callback?(e)
+            }
+        }
+
+        /// Waits for the previous session to settle before starting the replacement tunnel.
+        /// A timeout completes with an error instead of starting against a session that is
+        /// still tearing down.
         private func waitForDisconnectedThenStart(vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
-            if let existing = waitObserver {
-                NotificationCenter.default.removeObserver(existing)
-                waitObserver = nil
-            }
-
-            var token: NSObjectProtocol?
-            token = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [weak self, vpn] _ in
-                guard vpn.connection.status == .disconnected else {
-                    return
+            restartCoordinator.wait(
+                for: vpn.connection,
+                timeout: Client.configuration.vpnDisconnectWaitTimeout,
+                onReady: { [weak self, vpn] in
+                    log.debug("[WG] waitForDisconnectedThenStart — disconnected, starting")
+                    self?.startTunnel(vpn: vpn, context: "waitForDisconnectedThenStart", callback: callback)
+                },
+                onTimeout: {
+                    log.error("[WG] waitForDisconnectedThenStart — timed out while tunnel was still disconnecting")
+                    callback?(ClientError.vpnDisconnectTimedOut)
                 }
-
-                defer {
-                    token.map { NotificationCenter.default.removeObserver($0) }
-                    self?.waitObserver = nil
-                }
-
-                log.debug("[WG] waitForDisconnectedThenStart — disconnected, starting")
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.startTunnel(options: nil)
-                    log.debug("[WG] waitForDisconnectedThenStart — startTunnel issued")
-                    callback?(nil)
-                } catch let e {
-                    log.error("[WG] waitForDisconnectedThenStart — startTunnel threw: \(e)")
-                    callback?(e)
-                }
-            }
-            waitObserver = token
+            )
         }
 
         /// :nodoc:

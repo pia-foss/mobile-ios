@@ -110,11 +110,18 @@ extension Client {
         /// Sets the maximum number of failed connectivity checks before giving up.
         public var connectivityMaxAttempts: Int
 
-        /// Sets the delay after which to retry VPN connectivity checks.
+        /// Sets the initial connection-attempt budget. Later retries back off from this value.
         public var vpnConnectivityRetryDelay: TimeInterval
 
         /// Sets the maximum number of failed VPN connectivity attempts before giving up.
         public var vpnConnectivityMaxAttempts: Int
+
+        /// The maximum delay between VPN reconnection attempts when backing off.
+        public var vpnConnectivityMaximumRetryDelay: TimeInterval
+
+        /// The maximum time to wait for a clean `.disconnected` state before
+        /// (re)starting a tunnel. Guards against hanging if the status never arrives.
+        public var vpnDisconnectWaitTimeout: TimeInterval
 
         /// Sets the rsa certificate to use for pinning puposes.
         public var rsa4096Certificate: String?
@@ -208,8 +215,10 @@ extension Client {
             connectivityRetryDelay = 10000
             connectivityMaxAttempts = 3
 
-            vpnConnectivityRetryDelay = 5.0
+            vpnConnectivityRetryDelay = 20.0
             vpnConnectivityMaxAttempts = 3
+            vpnConnectivityMaximumRetryDelay = 60.0
+            vpnDisconnectWaitTimeout = 10.0
 
             rsa4096Certificate = nil
 
