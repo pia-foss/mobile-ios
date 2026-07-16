@@ -293,6 +293,11 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
 
         /// :nodoc:
+        public func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
+            return await delegate.purchase(product: product)
+        }
+
+        /// :nodoc:
         public func restorePurchases() async -> Result<JWS, ClientError> {
             return await delegate.restorePurchases()
         }

@@ -439,6 +439,11 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return .failure(ClientError.productUnavailable)
             }
 
+            return await purchase(product: product)
+        }
+
+        @inlinable
+        public func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
             return await accessedStore.purchase(product: product)
         }
 

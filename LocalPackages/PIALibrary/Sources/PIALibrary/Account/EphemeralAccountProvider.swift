@@ -108,6 +108,10 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         return await accessedProviders.accountProvider.purchase(plan: plan)
     }
 
+    func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
+        return await accessedProviders.accountProvider.purchase(product: product)
+    }
+
     func restorePurchases() async -> Result<JWS, ClientError> {
         return await accessedProviders.accountProvider.restorePurchases()
     }

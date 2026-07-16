@@ -45,11 +45,14 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     private var isFetchingProducts = true
 
-    private var signupEmail: String?
     private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
     private var isRestoring = false
     private var signupAttemptCount: Int = 0
+
+    // Purchase Intent
+    private let purchaseIntentObserver = PurchaseIntentObserver()
+    private var purchaseIntentsTask: Task<Void, Never>?
 
     @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
@@ -64,6 +67,8 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        purchaseIntentObserver.stop()
+        purchaseIntentsTask?.cancel()
     }
 
     private func setupNavigationBarButtons() {
@@ -106,8 +111,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
         self.styleButtons()
 
-        super.viewDidLoad()
+        self.observePurchaseIntents()
 
+        super.viewDidLoad()
     }
 
     private func composeAgreementText(message: String) -> String {
@@ -121,11 +127,26 @@ final class GetStartedViewController: PIAWelcomeViewController {
         return agreement
     }
 
+    private func observePurchaseIntents() {
+        purchaseIntentObserver.start()
+        purchaseIntentsTask = Task { [weak self] in
+            guard let self else { return }
+            for await product in self.purchaseIntentObserver.purchaseIntents {
+                if Task.isCancelled { break }
+                log.debug("Purchase intent received for product id: \(product.identifier)")
+                await self.startPurchaseProcess(withProduct: product)
+            }
+        }
+    }
+
     // MARK: Actions
 
     @IBAction func confirmPlan() {
         if let plan = plans[safeAt: selectedPlanIndex] {
-            startPurchaseProcessWithEmail("", andPlan: plan)
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                await self.startPurchaseProcess(withPlan: plan)
+            }
         }
     }
 
@@ -185,49 +206,60 @@ final class GetStartedViewController: PIAWelcomeViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    private func startPurchaseProcessWithEmail(
-        _ email: String,
-        andPlan plan: PurchasePlan
-    ) {
+    @MainActor
+    private func startPurchaseProcess(withPlan plan: PurchasePlan) async {
         isPurchasing = true
-        self.handleLoadingState()
+        handleLoadingState()
+        await synchronizeIfNeeded()
+        let result = await config.accountProvider.purchase(plan: plan.plan)
+        isPurchasing = false
+        handleLoadingState()
+        await handlePurchase(result: result)
+    }
 
-        Task { [weak self] in
-            guard let self else { return }
+    @MainActor
+    private func startPurchaseProcess(withProduct product: any InAppProduct) async {
+        isPurchasing = true
+        handleLoadingState()
+        await synchronizeIfNeeded()
+        let result = await config.accountProvider.purchase(product: product)
+        isPurchasing = false
+        handleLoadingState()
+        await handlePurchase(result: result)
+    }
 
-            if self.signupAttemptCount > 0 {
-                // if it tried to signup (and failed, that's why we're here again)
-                // synchronize entitlements to find missing purchases or purge stale ones.
-                log.debug("Already failed to signup, synchronizing entitlements")
-                if let error = await Client.store.synchronizeEntitlements() {
-                    log.error("Failed to synchronize entitlements: \(error)")
-                }
-            }
+    private func synchronizeIfNeeded() async {
+        if signupAttemptCount <= 0 { return }
+        // if it tried to signup (and failed, that's why we're here again)
+        // synchronize entitlements to find missing purchases or purge stale ones.
+        log.debug("Already failed to signup, synchronizing entitlements")
+        if let error = await Client.store.synchronizeEntitlements() {
+            log.error("Failed to synchronize entitlements: \(error)")
+        }
+    }
 
-            let result = await config.accountProvider.purchase(plan: plan.plan)
-            self.isPurchasing = false
-            self.handleLoadingState()
-
-            switch result {
-            case .failure(.userCancelled):
-                log.debug("User cancelled purchase")
-                break
-            case .failure(.purchasePending):
-                log.debug("Purchase is pending external approval")
-                Macros.displayImageNote(
-                    withImage: Asset.iconWarning.image,
-                    message: ClientError.purchasePending.localizedDescription
-                )
-            case .failure(let error):
-                log.warning("Purchase failed with error: \(error)")
-                let message = error.localizedDescription
-                Macros.displayImageNote(
-                    withImage: Asset.iconWarning.image,
-                    message: message
-                )
-            case .success(let transaction):
-                log.debug("Purchase successful with transaction id \(transaction.identifier)")
-                self.signupEmail = email
+    private func handlePurchase(result: Result<any InAppTransaction, ClientError>) async {
+        switch result {
+        case .failure(.userCancelled):
+            log.debug("User cancelled purchase")
+            break
+        case .failure(.purchasePending):
+            log.debug("Purchase is pending external approval")
+            Macros.displayImageNote(
+                withImage: Asset.iconWarning.image,
+                message: ClientError.purchasePending.localizedDescription
+            )
+        case .failure(let error):
+            log.warning("Purchase failed with error: \(error)")
+            let message = error.localizedDescription
+            Macros.displayImageNote(
+                withImage: Asset.iconWarning.image,
+                message: message
+            )
+        case .success(let transaction):
+            log.debug("Purchase successful with transaction id \(transaction.identifier)")
+            await MainActor.run { [weak self] in
+                guard let self else { return }
                 self.signupTransaction = transaction
                 self.signupAttemptCount += 1
                 self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
@@ -255,10 +287,8 @@ final class GetStartedViewController: PIAWelcomeViewController {
             let nav = segue.destination as! UINavigationController
             let vc = nav.topViewController as! SignupInProgressViewController
 
-            guard let email = signupEmail else {
-                log.error("signupEmail is not set in GetStartedViewController")
-                return
-            }
+            // TODO: email has always been empty string, find out if we can remove
+            let email = ""
             var metadata = SignupMetadata(email: email)
             metadata.title = L10n.Signup.InProgress.title
             metadata.bodySubtitle = L10n.Signup.InProgress.message

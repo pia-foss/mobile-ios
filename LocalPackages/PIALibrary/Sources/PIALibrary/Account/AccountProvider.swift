@@ -189,6 +189,12 @@ public protocol AccountProvider: AnyObject {
         /// - Returns: `InAppTransaction` for subsequent sign-up.
         func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError>
 
+        /// Purchase a product and save purchase to history.
+        ///
+        /// - Parameter product: The product (StoreKit) to purchase.
+        /// - Returns: Result with `InAppTransaction` for subsequent sign-up.
+        func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
+
         /**
          Check if the user has access to our servers from the country where is based.
 
