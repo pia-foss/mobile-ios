@@ -92,7 +92,7 @@
                     // Calling startTunnel() on a live session may silently retain the existing
                     // connection rather than switching to the new server, leaving the app in a
                     // state where it believes it is connected when it is not.
-                    if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+                    if currentStatus == .connected {
                         log.debug("[OpenVPN] connect — stopping active tunnel before restart")
                         vpn.connection.stopVPNTunnel()
                     }

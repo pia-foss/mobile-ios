@@ -87,7 +87,7 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
             // the existing connection rather than switching to the new server, resulting
             // in the app believing it is connected when it is not.
-            if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
+            if currentStatus == .connected {
                 log.debug("[IKEv2] connect — stopping active tunnel before restart")
                 self.currentVPN.connection.stopVPNTunnel()
             }
