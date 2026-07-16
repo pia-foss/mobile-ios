@@ -148,23 +148,47 @@
 
         /// :nodoc:
         public func disconnect(_ callback: SuccessLibraryCallback?) {
+            // A disconnect supersedes any pending connect-after-disconnect wait:
+            // without this, a connect() left waiting for .disconnected would
+            // restart the tunnel right after the user stops it.
+            if let existing = waitObserver {
+                NotificationCenter.default.removeObserver(existing)
+                waitObserver = nil
+            }
+
             find { (vpn, error) in
                 guard let vpn = vpn else {
+                    // Preferences could not be loaded — still stop the last known
+                    // session so a disconnect always kills the tunnel.
+                    (self.native as? NETunnelProviderManager)?.connection.stopVPNTunnel()
                     callback?(error)
                     return
+                }
+
+                // Stop the tunnel before the preferences round-trip below: saving
+                // can hang or fail while the network is flapping, and the tunnel
+                // must die regardless.
+                vpn.connection.stopVPNTunnel()
+
+                // If the tunnel was already dead, no NEVPNStatusDidChange follows
+                // the stop above; sync the app status so the UI does not stay
+                // stuck on a stale "connecting" state.
+                if vpn.connection.status == .disconnected || vpn.connection.status == .invalid {
+                    DispatchQueue.main.async {
+                        Client.database.plain.lastKnownVpnStatus = .disconnected
+                        Client.database.transient.vpnStatus = .disconnected
+                    }
                 }
 
                 // prevent reconnection
                 vpn.isOnDemandEnabled = false
 
                 vpn.saveToPreferences { (error) in
-                    if let error = error {
-                        vpn.connection.stopVPNTunnel()
-                        callback?(error)
-                        return
-                    }
+                    // On-demand rules may have resurrected the tunnel between the
+                    // stop above and this save landing — stop again now that
+                    // on-demand is disabled.
                     vpn.connection.stopVPNTunnel()
-                    callback?(nil)
+                    callback?(error)
                 }
             }
         }
