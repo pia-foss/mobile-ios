@@ -45,6 +45,33 @@ struct VPNFallbackPolicy {
     }
 }
 
+/// Decides whether an observed `.disconnected` should terminate the retry cycle.
+///
+/// A forced reconnect is implemented as `disconnect { connect }` (see `DefaultVPNProvider.reconnect`),
+/// so it surfaces an intermediate `.disconnected` with `previousStatus == .connecting` while
+/// `isReconnecting` is still set — status updates are suppressed during a reconnect. That teardown
+/// must never be classified as a failed connect, otherwise the bounded 20/40/60 backoff gives up on
+/// its own first reconnect and never reaches attempts 2–3.
+enum TerminalDisconnectPolicy {
+    /// A `.disconnected` carrying no connectivity error. Give up only for a genuine connect attempt:
+    /// not an intermediate reconnect teardown, and not a manual disconnect (handled elsewhere).
+    static func shouldGiveUpOnCleanDisconnect(
+        previousStatus: VPNStatus,
+        isReconnecting: Bool,
+        wasDisconnectedManually: Bool
+    ) -> Bool {
+        previousStatus == .connecting && !isReconnecting && !wasDisconnectedManually
+    }
+
+    /// A `.disconnected` carrying a non-connectivity error. Same reconnect-teardown guard applies.
+    static func shouldGiveUpOnGenericError(
+        previousStatus: VPNStatus,
+        isReconnecting: Bool
+    ) -> Bool {
+        previousStatus == .connecting && !isReconnecting
+    }
+}
+
 struct VPNGiveUpState {
     private(set) var isActive = false
     private(set) var disconnectCompleted = false
@@ -81,6 +108,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     private(set) var hasEnabledUpdates: Bool
     private var fallbackTimer: Timer!
+    private var giveUpWatchdog: Timer?
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
     private var lastKnownVpnStatus: VPNStatus = .disconnected
@@ -371,14 +399,21 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                     giveUp(connectionIsDisconnected: true)
                 }
             } else {
-                if previousStatus == .connecting {
+                if TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
+                    previousStatus: previousStatus,
+                    isReconnecting: isReconnecting
+                ) {
                     log.error("The VPN did fail \(lastDisconnectError)")
                     giveUp(connectionIsDisconnected: true)
                 }
             }
         } else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
-            if previousStatus == .connecting, !wasDisconnectedManually {
+            if TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
+                previousStatus: previousStatus,
+                isReconnecting: isReconnecting,
+                wasDisconnectedManually: wasDisconnectedManually
+            ) {
                 giveUp(connectionIsDisconnected: true)
             }
         }
@@ -482,6 +517,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         invalidateTimer()
         isReconnecting = false
         giveUpState.begin(connectionIsDisconnected: connectionIsDisconnected || activeConnectionIsSettled)
+        scheduleGiveUpWatchdog()
 
         Client.providers.vpnProvider.disconnect { [weak self] error in
             DispatchQueue.main.async {
@@ -513,8 +549,33 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     private func finishGivingUpIfPossible() {
         guard giveUpState.isComplete else { return }
+        invalidateGiveUpWatchdog()
         giveUpState.reset()
         reset()
+    }
+
+    /// Failsafe so a give-up can never wedge the daemon permanently. `giveUp()` only completes
+    /// once both the `disconnect` completion callback and a settled `.disconnected` are observed;
+    /// if either signal never arrives, `isGivingUp` would stay true forever and silently kill
+    /// every future user connect (see the `.connected`/`.connecting` short-circuits). If the
+    /// terminal disconnect has not settled within `vpnDisconnectWaitTimeout`, force-reset so the
+    /// daemon recovers in-session.
+    private func scheduleGiveUpWatchdog() {
+        invalidateGiveUpWatchdog()
+        let timeout = Client.configuration.vpnDisconnectWaitTimeout
+        giveUpWatchdog = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.giveUpWatchdog = nil
+            guard self.isGivingUp else { return }
+            log.error("Terminal VPN disconnect did not settle within \(timeout)s — force-resetting give-up state")
+            self.giveUpState.reset()
+            self.reset()
+        }
+    }
+
+    private func invalidateGiveUpWatchdog() {
+        giveUpWatchdog?.invalidate()
+        giveUpWatchdog = nil
     }
 
     // MARK: Invalidate

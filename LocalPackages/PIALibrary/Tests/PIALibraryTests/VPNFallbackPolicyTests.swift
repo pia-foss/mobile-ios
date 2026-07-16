@@ -44,6 +44,90 @@ struct TunnelRestartPolicyTests {
     }
 }
 
+struct TerminalDisconnectPolicyTests {
+    // MARK: Clean disconnect (no error reported)
+
+    @Test("A clean failed connect attempt terminates the cycle")
+    func cleanFailedConnectGivesUp() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
+                previousStatus: .connecting,
+                isReconnecting: false,
+                wasDisconnectedManually: false
+            )
+        )
+    }
+
+    @Test("The intermediate teardown of a forced reconnect does NOT terminate the cycle")
+    func reconnectTeardownDoesNotGiveUpOnCleanDisconnect() {
+        // Regression guard: `reconnect(forceDisconnect:)` is `disconnect { connect }`, so it drives
+        // the tunnel through `.disconnected` while `isReconnecting == true` and `previousStatus`
+        // still reads `.connecting`. Without the `isReconnecting` guard this returned true and the
+        // 20/40/60 backoff gave up on its own first reconnect.
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
+                previousStatus: .connecting,
+                isReconnecting: true,
+                wasDisconnectedManually: false
+            ) == false
+        )
+    }
+
+    @Test("A manual disconnect does NOT terminate the cycle here")
+    func manualDisconnectDoesNotGiveUpOnCleanDisconnect() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
+                previousStatus: .connecting,
+                isReconnecting: false,
+                wasDisconnectedManually: true
+            ) == false
+        )
+    }
+
+    @Test("A disconnect that was not preceded by connecting does NOT terminate the cycle")
+    func nonConnectingCleanDisconnectDoesNotGiveUp() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
+                previousStatus: .connected,
+                isReconnecting: false,
+                wasDisconnectedManually: false
+            ) == false
+        )
+    }
+
+    // MARK: Generic (non-connectivity) error
+
+    @Test("A generic error on a genuine connect attempt terminates the cycle")
+    func genericErrorFailedConnectGivesUp() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
+                previousStatus: .connecting,
+                isReconnecting: false
+            )
+        )
+    }
+
+    @Test("A generic error during a forced reconnect teardown does NOT terminate the cycle")
+    func reconnectTeardownDoesNotGiveUpOnGenericError() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
+                previousStatus: .connecting,
+                isReconnecting: true
+            ) == false
+        )
+    }
+
+    @Test("A generic error while not connecting does NOT terminate the cycle")
+    func nonConnectingGenericErrorDoesNotGiveUp() {
+        #expect(
+            TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
+                previousStatus: .disconnecting,
+                isReconnecting: false
+            ) == false
+        )
+    }
+}
+
 struct VPNGiveUpStateTests {
     @Test("Give-up completes when callback arrives before disconnected status")
     func callbackBeforeStatus() {
