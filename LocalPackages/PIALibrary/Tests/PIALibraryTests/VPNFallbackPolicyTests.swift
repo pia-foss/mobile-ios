@@ -30,6 +30,51 @@ struct VPNFallbackPolicyTests {
         #expect(policy.shouldRetry(afterFailedAttempts: 2))
         #expect(policy.shouldRetry(afterFailedAttempts: 3) == false)
     }
+
+    // MARK: Retry-vs-give-up decision
+
+    @Test("No internet always gives up, even mid cold-connect budget")
+    func noInternetGivesUp() {
+        #expect(
+            policy.decision(afterFailedAttempts: 0, internetIsReachable: false, hasEstablishedConnection: false)
+                == .giveUp
+        )
+        // Even with a connection to preserve, being fully offline gives up (kill-switch deadlock fix).
+        #expect(
+            policy.decision(afterFailedAttempts: 0, internetIsReachable: false, hasEstablishedConnection: true)
+                == .giveUp
+        )
+    }
+
+    @Test("An established connection keeps reconnecting indefinitely while online")
+    func establishedConnectionNeverGivesUpWhileOnline() {
+        // Past the cold-connect attempt cap, an established connection must still reconnect —
+        // giving up here would silently expose the user to leaks after they chose to be protected.
+        #expect(
+            policy.decision(afterFailedAttempts: 3, internetIsReachable: true, hasEstablishedConnection: true)
+                == .reconnect
+        )
+        #expect(
+            policy.decision(afterFailedAttempts: 99, internetIsReachable: true, hasEstablishedConnection: true)
+                == .reconnect
+        )
+    }
+
+    @Test("A cold connect is bounded by the attempt cap while online")
+    func coldConnectIsBoundedWhileOnline() {
+        #expect(
+            policy.decision(afterFailedAttempts: 1, internetIsReachable: true, hasEstablishedConnection: false)
+                == .reconnect
+        )
+        #expect(
+            policy.decision(afterFailedAttempts: 2, internetIsReachable: true, hasEstablishedConnection: false)
+                == .reconnect
+        )
+        #expect(
+            policy.decision(afterFailedAttempts: 3, internetIsReachable: true, hasEstablishedConnection: false)
+                == .giveUp
+        )
+    }
 }
 
 struct TunnelRestartPolicyTests {

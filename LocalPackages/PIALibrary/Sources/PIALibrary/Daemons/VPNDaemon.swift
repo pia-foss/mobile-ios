@@ -30,6 +30,8 @@ import NetworkExtension
 
 private let log = PIALogger.logger(for: VPNDaemon.self)
 
+// MARK: - Retry policy
+
 struct VPNFallbackPolicy {
     let initialDelay: TimeInterval
     let maximumDelay: TimeInterval
@@ -43,7 +45,34 @@ struct VPNFallbackPolicy {
     func shouldRetry(afterFailedAttempts failedAttempts: Int) -> Bool {
         failedAttempts < maximumAttempts
     }
+
+    /// Whether to reconnect or give up after a failed/dropped attempt.
+    ///
+    /// - No internet → give up. There is nothing to leak while fully offline, and waiting for a
+    ///   reachability signal can deadlock behind the kill switch (the bug this work fixes).
+    /// - Internet reachable + the user already had an established connection to preserve
+    ///   (`hasEstablishedConnection`) → keep reconnecting indefinitely. Abandoning a connection the
+    ///   user chose would silently expose them to leaks; the delay is already capped, so retrying
+    ///   forever does not storm.
+    /// - Internet reachable + no established connection yet (a cold connect) → bounded by the
+    ///   attempt cap, then give up.
+    func decision(
+        afterFailedAttempts failedAttempts: Int,
+        internetIsReachable: Bool,
+        hasEstablishedConnection: Bool
+    ) -> VPNRetryDecision {
+        guard internetIsReachable else { return .giveUp }
+        if hasEstablishedConnection { return .reconnect }
+        return shouldRetry(afterFailedAttempts: failedAttempts) ? .reconnect : .giveUp
+    }
 }
+
+enum VPNRetryDecision: Equatable {
+    case reconnect
+    case giveUp
+}
+
+// MARK: - Terminal-disconnect policy
 
 /// Decides whether an observed `.disconnected` should terminate the retry cycle.
 ///
@@ -71,6 +100,8 @@ enum TerminalDisconnectPolicy {
         previousStatus == .connecting && !isReconnecting
     }
 }
+
+// MARK: - Give-up state
 
 struct VPNGiveUpState {
     private(set) var isActive = false
@@ -104,6 +135,9 @@ struct VPNGiveUpState {
 }
 
 final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
+
+    // MARK: - Properties
+
     static let shared = VPNDaemon()
 
     private(set) var hasEnabledUpdates: Bool
@@ -114,9 +148,20 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var lastKnownVpnStatus: VPNStatus = .disconnected
     private var giveUpState = VPNGiveUpState()
 
+    /// True once the current VPN session has actually reached `.connected` — i.e. the user has an
+    /// established connection they expect to keep. While this holds and the internet is reachable,
+    /// a dropped tunnel is retried indefinitely (with backoff) instead of giving up: abandoning it
+    /// would silently expose the user to leaks after they chose to be protected. It is a session
+    /// latch on purpose — it survives the intermediate teardowns of recovery reconnects (so it is
+    /// NOT cleared in `reset()`) and is cleared only when we truly stop: a manual disconnect or a
+    /// terminal give-up.
+    private var didReachConnected = false
+
     private var isGivingUp: Bool {
         giveUpState.isActive
     }
+
+    // MARK: - Lifecycle
 
     private init() {
         hasEnabledUpdates = false
@@ -136,8 +181,12 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         if Client.providers.vpnProvider.isVPNConnected {
             self.lastKnownVpnStatus = .connected
+            // The app relaunched onto an already-established session the user expects to keep.
+            self.didReachConnected = true
         }
     }
+
+    // MARK: - Status updates
 
     private func tryUpdateStatus(via connection: NEVPNConnection) {
         guard let profile = accessedDatabase.transient.activeVPNProfile else {
@@ -193,6 +242,9 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
             invalidateTimer()
             reset()
+            // Latch that the user now has a connection to preserve. Set after reset() (reset()
+            // does not touch it) so it stays true across any later recovery reconnects.
+            didReachConnected = true
 
             if self.lastKnownVpnStatus == .disconnected, Client.preferences.shareServiceQualityData {
                 ServiceQualityManager.shared.connectionEstablishedEvent()
@@ -238,8 +290,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             {
                 ServiceQualityManager.shared.connectionAttemptEvent()
             }
-
-            scheduleFallbackTimerIfNeeded()
 
         case .disconnecting:
             nextStatus = .disconnecting
@@ -295,6 +345,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 //VPN disconnected, the user interaction finished. Only reset the value when the source was manual.
                 Client.configuration.disconnectedManually = false
 
+                // The user chose to disconnect — there is no longer a connection to preserve.
+                didReachConnected = false
             }
 
             Client.preferences.lastVPNConnectionSuccess = nil
@@ -315,6 +367,15 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             accessedDatabase.transient.vpnStatus = nextStatus
         }
 
+        // Arm the connect watchdog only after the status is committed to `.connecting`. Scheduling
+        // earlier (mid-switch, before this update) silently no-ops, because the timer guard requires
+        // `transient.vpnStatus == .connecting` — so a connect that hangs after a single `.connecting`
+        // event would never be retried and the app would sit in "Connecting…" forever. Once armed,
+        // each tick reschedules itself from the reconnect callbacks.
+        if nextStatus == .connecting {
+            scheduleFallbackTimerIfNeeded()
+        }
+
         if observedGiveUpDisconnect {
             return
         }
@@ -330,84 +391,25 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             return
         }
 
+        handleDisconnectError(
+            on: connection,
+            previousStatus: previousStatus,
+            wasDisconnectedManually: wasDisconnectedManually
+        )
+    }
+
+    /// Classifies a settled session's sticky `_lastDisconnectError` and drives the retry loop:
+    /// rotate/reconnect on a connectivity-check failure, or give up on a genuine failed connect.
+    /// A `.disconnected` observed mid-reconnect carries a stale error and is ignored so it is not
+    /// double-counted against the attempt cap.
+    private func handleDisconnectError(
+        on connection: NEVPNConnection,
+        previousStatus: VPNStatus,
+        wasDisconnectedManually: Bool
+    ) {
         log.debug("[VPNDaemon] Fetching last disconnect error...")
-        if let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError {
-            log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
 
-            let errorDomain = lastDisconnectError.domain
-            let errorCode = lastDisconnectError.code
-            var connectivityCheckFailed = false
-
-            // WireGuard connectivity check failure
-            #if canImport(PIAWireguard)
-                if errorDomain == PacketTunnelProviderError.errorDomain, errorCode == PacketTunnelProviderError.connectivityCheckFailed.errorCode {
-                    connectivityCheckFailed = true
-                }
-            #endif
-
-            // OpenVPN connectivity check failure
-            #if canImport(TunnelKitOpenVPN)
-                if errorDomain == OpenVPNError.errorDomain, errorCode == OpenVPNError.connectivityCheckFailed.errorCode {
-                    connectivityCheckFailed = true
-                }
-            #endif
-
-            // IKEv2 connectivity check failure.
-            // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
-            // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
-            if #available(iOS 16, *) {
-                if errorDomain == NEVPNConnectionErrorDomain || errorDomain == "NEVPNConnectionErrorDomainPlugin" {
-                    connectivityCheckFailed = true
-                }
-            }
-
-            log.debug("connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
-
-            if connectivityCheckFailed, isReconnecting {
-                // A forced reconnect is already in flight; this .disconnected carries a
-                // stale connectivity error from the session we just tore down. Ignore it
-                // so it is not double-counted against the attempt cap.
-                log.debug("connectivityCheckFailed ignored — reconnect already in progress")
-            } else if connectivityCheckFailed {
-                let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
-                if wholeInternetIsReachable, let lastConnectedCN = accessedDatabase.plain.lastServerCN {
-                    log.debug("connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
-                    let targetRegion = try? Client.providers.serverProvider.targetServer
-                    let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
-                    lastConnectedServer?.markServerAsUnavailable()
-                } else if !wholeInternetIsReachable {
-                    log.debug("There's no internet!")
-                }
-
-                numberOfAttempts += 1
-                if !wholeInternetIsReachable {
-                    giveUp(connectionIsDisconnected: true)
-                } else if fallbackPolicy.shouldRetry(afterFailedAttempts: numberOfAttempts) {
-                    isReconnecting = true
-                    Client.providers.vpnProvider.reconnect(forceDisconnect: true) { [weak self] error in
-                        DispatchQueue.main.async {
-                            guard let self else { return }
-                            if let error {
-                                log.error("Connectivity-failure reconnect could not start: \(error)")
-                                self.giveUp(connectionIsDisconnected: true)
-                            } else {
-                                self.scheduleFallbackTimerIfNeeded()
-                            }
-                        }
-                    }
-                } else {
-                    giveUp(connectionIsDisconnected: true)
-                }
-            } else {
-                if TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
-                    previousStatus: previousStatus,
-                    isReconnecting: isReconnecting
-                ) {
-                    log.error("The VPN did fail \(lastDisconnectError)")
-                    giveUp(connectionIsDisconnected: true)
-                }
-            }
-        } else {
+        guard let lastDisconnectError = connection.value(forKey: "_lastDisconnectError") as? NSError else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
             if TerminalDisconnectPolicy.shouldGiveUpOnCleanDisconnect(
                 previousStatus: previousStatus,
@@ -416,10 +418,90 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             ) {
                 giveUp(connectionIsDisconnected: true)
             }
+            return
+        }
+
+        log.debug("[VPNDaemon] fetchLastDisconnectError — domain=\(lastDisconnectError.domain) code=\(lastDisconnectError.code) description='\(lastDisconnectError.localizedDescription)'")
+
+        let connectivityCheckFailed = isConnectivityCheckFailure(
+            domain: lastDisconnectError.domain,
+            code: lastDisconnectError.code
+        )
+        log.debug("connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
+
+        guard connectivityCheckFailed else {
+            if TerminalDisconnectPolicy.shouldGiveUpOnGenericError(
+                previousStatus: previousStatus,
+                isReconnecting: isReconnecting
+            ) {
+                log.error("The VPN did fail \(lastDisconnectError)")
+                giveUp(connectionIsDisconnected: true)
+            }
+            return
+        }
+
+        guard !isReconnecting else {
+            // A forced reconnect is already in flight; this .disconnected carries a stale
+            // connectivity error from the session we just tore down. Ignore it so it is not
+            // double-counted against the attempt cap.
+            log.debug("connectivityCheckFailed ignored — reconnect already in progress")
+            return
+        }
+
+        let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
+        if wholeInternetIsReachable, let lastConnectedCN = accessedDatabase.plain.lastServerCN {
+            log.debug("connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
+            let targetRegion = try? Client.providers.serverProvider.targetServer
+            let lastConnectedServer = targetRegion?.addresses().first(where: { $0.cn == lastConnectedCN })
+            lastConnectedServer?.markServerAsUnavailable()
+        } else if !wholeInternetIsReachable {
+            log.debug("There's no internet!")
+        }
+
+        numberOfAttempts += 1
+        switch fallbackPolicy.decision(
+            afterFailedAttempts: numberOfAttempts,
+            internetIsReachable: wholeInternetIsReachable,
+            hasEstablishedConnection: didReachConnected
+        ) {
+        case .giveUp:
+            giveUp(connectionIsDisconnected: true)
+        case .reconnect:
+            startReconnect(context: "Connectivity-failure", giveUpConnectionIsDisconnected: true)
         }
     }
 
-    // MARK: Fallback timer
+    /// Whether a Network Extension disconnect error is a tunnel connectivity-check failure for any
+    /// of the three protocols (the signal that a server has gone unreachable), as opposed to a
+    /// generic connect failure.
+    private func isConnectivityCheckFailure(domain: String, code: Int) -> Bool {
+        // WireGuard connectivity check failure
+        #if canImport(PIAWireguard)
+            if domain == PacketTunnelProviderError.errorDomain, code == PacketTunnelProviderError.connectivityCheckFailed.errorCode {
+                return true
+            }
+        #endif
+
+        // OpenVPN connectivity check failure
+        #if canImport(TunnelKitOpenVPN)
+            if domain == OpenVPNError.errorDomain, code == OpenVPNError.connectivityCheckFailed.errorCode {
+                return true
+            }
+        #endif
+
+        // IKEv2 connectivity check failure.
+        // On tvOS, IKEv2 errors are reported under NEVPNConnectionErrorDomainPlugin
+        // rather than NEVPNConnectionErrorDomain, so check both when IKEv2 is active.
+        if #available(iOS 16, *) {
+            if domain == NEVPNConnectionErrorDomain || domain == "NEVPNConnectionErrorDomainPlugin" {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    // MARK: - Fallback timer & retries
 
     /// Delay before the next fallback tick. It grows with the number of attempts so the
     /// app backs off during a sustained outage instead of hammering servers. The first
@@ -471,29 +553,45 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         numberOfAttempts += 1
 
-        guard accessedDatabase.transient.isNetworkReachable else {
-            log.debug("Connection attempt timed out without internet. Giving up.")
-            giveUp()
-            return
+        let internetIsReachable = accessedDatabase.transient.isNetworkReachable
+        if internetIsReachable {
+            let address = try? Client.providers.serverProvider.targetServer.bestAddress()
+            address?.markServerAsUnavailable()
         }
 
-        let address = try? Client.providers.serverProvider.targetServer.bestAddress()
-        address?.markServerAsUnavailable()
-
-        guard fallbackPolicy.shouldRetry(afterFailedAttempts: numberOfAttempts) else {
+        // Once the user has an established connection to preserve, keep rotating servers
+        // indefinitely (the delay is already capped) rather than giving up. Only a cold connect
+        // that never reached .connected is bounded by the attempt cap, and no internet always
+        // gives up.
+        guard
+            case .reconnect = fallbackPolicy.decision(
+                afterFailedAttempts: numberOfAttempts,
+                internetIsReachable: internetIsReachable,
+                hasEstablishedConnection: didReachConnected
+            )
+        else {
+            log.debug("Connection attempt exhausted (reachable=\(internetIsReachable)). Giving up.")
             giveUp()
             return
         }
 
         log.debug("NEVPNManager is still connecting. Reconnecting with a different server (attempt \(numberOfAttempts))...")
         updateUIWithAttemptNumber(numberOfAttempts)
+        startReconnect(context: "Fallback", giveUpConnectionIsDisconnected: false)
+    }
+
+    /// Issues a forced reconnect (`disconnect { connect }`). On success the fallback budget is
+    /// re-armed for the new attempt; if the reconnect cannot even be initiated, the loop gives up.
+    /// `giveUpConnectionIsDisconnected` matches the caller's context: `true` from the connectivity
+    /// path (the session is already down), `false` from the fallback tick (still connecting).
+    private func startReconnect(context: String, giveUpConnectionIsDisconnected: Bool) {
         isReconnecting = true
         Client.providers.vpnProvider.reconnect(forceDisconnect: true) { [weak self] error in
             DispatchQueue.main.async {
                 guard let self else { return }
                 if let error {
-                    log.error("Fallback reconnect could not start: \(error)")
-                    self.giveUp()
+                    log.error("\(context) reconnect could not start: \(error)")
+                    self.giveUp(connectionIsDisconnected: giveUpConnectionIsDisconnected)
                 } else {
                     // Start the next budget only after disconnect/save/start has completed.
                     self.scheduleFallbackTimerIfNeeded()
@@ -501,6 +599,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
         }
     }
+
+    // MARK: - Give up
 
     /// Stops the retry loop, disables on-demand, and tears down the real Network Extension
     /// session. Completion is tracked separately from the `.disconnected` status event so
@@ -516,6 +616,9 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         log.debug("Giving up active VPN reconnection cycle...")
         invalidateTimer()
         isReconnecting = false
+        // Terminal stop: there is no longer a connection to preserve, so a later manual connect
+        // starts a fresh, bounded cold-connect cycle rather than inheriting this latch.
+        didReachConnected = false
         giveUpState.begin(connectionIsDisconnected: connectionIsDisconnected || activeConnectionIsSettled)
         scheduleGiveUpWatchdog()
 
@@ -578,13 +681,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         giveUpWatchdog = nil
     }
 
-    // MARK: Invalidate
+    // MARK: - Invalidate timer
+
     private func invalidateTimer() {
         fallbackTimer?.invalidate()
         fallbackTimer = nil
     }
 
-    // MARK: Reset
+    // MARK: - Reset
 
     private func reset() {
         self.isReconnecting = false
@@ -592,13 +696,13 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         self.updateUIWithAttemptNumber(0)
     }
 
-    // MARK: Update UI
+    // MARK: - Update UI
 
     private func updateUIWithAttemptNumber(_ number: Int) {
         NotificationCenter.default.post(name: .PIADaemonsConnectingVPNStatus, object: number)
     }
 
-    // MARK: Notifications
+    // MARK: - Notifications
 
     @objc private func neStatusDidChange(notification: Notification) {
         guard let connection = notification.object as? NEVPNConnection else {
