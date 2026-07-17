@@ -242,8 +242,13 @@ import Foundation
 
                 // If the tunnel was already dead, no NEVPNStatusDidChange follows
                 // the stop above; sync the app status so the UI does not stay
-                // stuck on a stale "connecting" state.
-                if vpn.connection.status == .disconnected || vpn.connection.status == .invalid {
+                // stuck on a stale "connecting" state. Only do this when this
+                // profile is the active one — disconnecting an inactive profile
+                // (e.g. cleanup of a stale manager on launch) must never clobber
+                // the status of a different, still-connected active tunnel.
+                if (vpn.connection.status == .disconnected || vpn.connection.status == .invalid),
+                    Client.database.transient.activeVPNProfile?.vpnType == self.vpnType
+                {
                     DispatchQueue.main.async {
                         Client.database.plain.lastKnownVpnStatus = .disconnected
                         Client.database.transient.vpnStatus = .disconnected
