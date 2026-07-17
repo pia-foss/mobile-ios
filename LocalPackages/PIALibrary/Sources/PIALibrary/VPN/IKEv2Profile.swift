@@ -28,8 +28,6 @@ private let log = PIALogger.logger(for: IKEv2Profile.self)
 /// Implementation of `VPNProfile` providing IKEv2 connectivity.
 public final class IKEv2Profile: NetworkExtensionProfile {
 
-    private var waitObserver: NSObjectProtocol?
-
     private var currentVPN: NEVPNManager {
         return NEVPNManager.shared()
     }
@@ -81,27 +79,22 @@ public final class IKEv2Profile: NetworkExtensionProfile {
             }
 
             let currentStatus = self.currentVPN.connection.status
-            log.debug("[IKEv2] connect — current status: \(currentStatus.descriptionForLog)")
 
             // If the tunnel is already active, stop it before starting the new one.
             // Calling startVPNTunnel() on a connected IKEv2 tunnel may silently retain
             // the existing connection rather than switching to the new server, resulting
             // in the app believing it is connected when it is not.
             if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
-                log.debug("[IKEv2] connect — stopping active tunnel before restart")
                 self.currentVPN.connection.stopVPNTunnel()
             }
 
             if currentStatus == .disconnecting {
-                log.debug("[IKEv2] connect — waiting for .disconnected before start")
                 self.waitForDisconnectedThenStart(callback: callback)
             } else {
                 do {
                     try self.currentVPN.connection.startVPNTunnel()
-                    log.debug("[IKEv2] connect — startVPNTunnel issued")
                     callback?(nil)
                 } catch let e {
-                    log.error("[IKEv2] connect — startVPNTunnel threw: \(e)")
                     callback?(e)
                 }
             }
@@ -109,33 +102,23 @@ public final class IKEv2Profile: NetworkExtensionProfile {
     }
 
     private func waitForDisconnectedThenStart(callback: SuccessLibraryCallback?) {
-        if let existing = waitObserver {
-            NotificationCenter.default.removeObserver(existing)
-            waitObserver = nil
-        }
-
-        var token: NSObjectProtocol?
-        token = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: currentVPN.connection, queue: .main) { [weak self, currentVPN] _ in
+        var observer: NSObjectProtocol?
+        observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: currentVPN.connection, queue: .main) { [currentVPN] _ in
             guard currentVPN.connection.status == .disconnected else {
                 return
             }
 
-            defer {
-                token.map { NotificationCenter.default.removeObserver($0) }
-                self?.waitObserver = nil
+            if let observer {
+                NotificationCenter.default.removeObserver(observer)
             }
 
-            log.debug("[IKEv2] waitForDisconnectedThenStart — disconnected, starting")
             do {
                 try currentVPN.connection.startVPNTunnel()
-                log.debug("[IKEv2] waitForDisconnectedThenStart — startVPNTunnel issued")
                 callback?(nil)
             } catch let e {
-                log.error("[IKEv2] waitForDisconnectedThenStart — startVPNTunnel threw: \(e)")
                 callback?(e)
             }
         }
-        waitObserver = token
     }
 
     /// :nodoc:

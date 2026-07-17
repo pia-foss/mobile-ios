@@ -26,12 +26,8 @@ import Foundation
     import PIAWireguard
     import NetworkExtension
 
-    private let log = PIALogger.logger(for: PIAWGTunnelProfile.self)
-
     /// Implementation of `VPNProfile` providing WireGuard connectivity.
     public final class PIAWGTunnelProfile: NetworkExtensionProfile {
-
-        private var waitObserver: NSObjectProtocol?
 
         public func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration? {
 
@@ -154,66 +150,15 @@ import Foundation
                         callback?(error)
                         return
                     }
-
-                    let currentStatus = vpn.connection.status
-                    log.debug("[WG] connect — current status: \(currentStatus.descriptionForLog)")
-
-                    // If the tunnel is already active, stop it before starting the new one.
-                    // Calling startTunnel() on a live session may silently retain the existing
-                    // connection rather than switching to the new server, leaving the app in a
-                    // state where it believes it is connected when it is not.
-                    if currentStatus == .connected || currentStatus == .connecting || currentStatus == .reasserting {
-                        log.debug("[WG] connect — stopping active tunnel before restart")
-                        vpn.connection.stopVPNTunnel()
-                    }
-
-                    if currentStatus == .disconnecting {
-                        log.debug("[WG] connect — waiting for .disconnected before start")
-                        self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
-                    } else {
-                        do {
-                            let session = vpn.connection as? NETunnelProviderSession
-                            try session?.startTunnel(options: nil)
-                            log.debug("[WG] connect — startTunnel issued")
-                            callback?(nil)
-                        } catch let e {
-                            log.error("[WG] connect — startTunnel threw: \(e)")
-                            callback?(e)
-                        }
+                    do {
+                        let session = vpn.connection as? NETunnelProviderSession
+                        try session?.startTunnel(options: nil)
+                        callback?(nil)
+                    } catch let e {
+                        callback?(e)
                     }
                 }
             }
-        }
-
-        private func waitForDisconnectedThenStart(vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
-            if let existing = waitObserver {
-                NotificationCenter.default.removeObserver(existing)
-                waitObserver = nil
-            }
-
-            var token: NSObjectProtocol?
-            token = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [weak self, vpn] _ in
-                guard vpn.connection.status == .disconnected else {
-                    return
-                }
-
-                defer {
-                    token.map { NotificationCenter.default.removeObserver($0) }
-                    self?.waitObserver = nil
-                }
-
-                log.debug("[WG] waitForDisconnectedThenStart — disconnected, starting")
-                do {
-                    let session = vpn.connection as? NETunnelProviderSession
-                    try session?.startTunnel(options: nil)
-                    log.debug("[WG] waitForDisconnectedThenStart — startTunnel issued")
-                    callback?(nil)
-                } catch let e {
-                    log.error("[WG] waitForDisconnectedThenStart — startTunnel threw: \(e)")
-                    callback?(e)
-                }
-            }
-            waitObserver = token
         }
 
         /// :nodoc:
@@ -241,13 +186,20 @@ import Foundation
 
         /// :nodoc:
         public func updatePreferences(_ callback: SuccessLibraryCallback?) {
-            // All preference mutations (server address, on-demand rules, etc.) are
-            // applied by connect() via save(force: true) → doSave(). A standalone
-            // loadFromPreferences → saveToPreferences round-trip with no mutations
-            // races with any concurrent connect() call and causes
-            // "configuration is stale" errors.
-            log.debug("[WG] updatePreferences() — skipped (no-op, changes applied by connect)")
-            callback?(nil)
+            find { (vpn, error) in
+                guard let vpn = vpn else {
+                    callback?(error)
+                    return
+                }
+
+                vpn.saveToPreferences { (error) in
+                    if let error = error {
+                        callback?(error)
+                        return
+                    }
+                    callback?(nil)
+                }
+            }
         }
 
         /// :nodoc:
