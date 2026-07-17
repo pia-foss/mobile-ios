@@ -96,6 +96,12 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         var nextStatus: VPNStatus = .disconnected
 
+        // Captured before the switch below, which resets the flag when the
+        // .disconnected transition of a manual disconnect is processed. The
+        // last-disconnect-error handling further down must still know that the
+        // disconnect was user-initiated.
+        let disconnectedManually = Client.configuration.disconnectedManually
+
         switch connection.status {
         case .connected:
             nextStatus = .connected
@@ -260,7 +266,11 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
             log.debug("connectivityCheckFailed=\(connectivityCheckFailed) previousStatus=\(previousStatus)")
 
-            if connectivityCheckFailed {
+            if disconnectedManually {
+                // The user asked to disconnect — never reconnect on their behalf,
+                // whatever error the tunnel died with.
+                log.debug("Manual disconnect — ignoring last disconnect error")
+            } else if connectivityCheckFailed {
                 let wholeInternetIsReachable = accessedDatabase.transient.isNetworkReachable
                 if wholeInternetIsReachable, let lastConnectedCN = accessedDatabase.plain.lastServerCN {
                     log.debug("connectivityCheckFailed — marking current server as unavailable and triggering reconnect")
@@ -298,6 +308,17 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
             guard let self else { return }
             log.debug("Executing fallbackTimer...")
+
+            // The user disconnected manually: stop retrying. Without this check
+            // the timer keeps reconnecting when no NEVPNStatusDidChange arrives
+            // to tear it down (e.g. the tunnel was already dead when the user
+            // tapped disconnect during a network change).
+            guard !Client.configuration.disconnectedManually else {
+                log.debug("Manual disconnect — stopping the reconnection retry timer")
+                self.invalidateTimer()
+                self.reset()
+                return
+            }
 
             let address = try? Client.providers.serverProvider.targetServer.bestAddress()
             address?.markServerAsUnavailable()
