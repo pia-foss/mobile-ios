@@ -28,11 +28,17 @@ We integrate **only the Platform SDK's VPN packet-tunnel engine** — not its ac
 subscription, or UI layers. PIA keeps its existing `AccountProvider`, `ServerProvider`,
 regions, CSI, KPI, and UI; only the tunnel implementation is swapped.
 
-**Dependency model — vendored, pinned, pulled in CI.** The SDK is not a normal SPM dependency.
-It is pulled from a private Cloudsmith registry by `scripts/pull-kape-platform-sdk.sh` into
-`LocalPackages/KapePlatformSDK/` (gitignored), pinned by hash in
-`scripts/kape-platform-sdk.version`. `ci_scripts/ci_post_clone.sh`
-and the CI workflows run the pull (and cache it) before resolving SPM. Imported products:
+**Dependency model — vendored, pinned, checksum-verified, pulled in CI.** The SDK is not a
+normal SPM dependency. It is pulled from a private Cloudsmith registry by
+`scripts/pull-kape-platform-sdk.sh` into `LocalPackages/KapePlatformSDK/` (gitignored). Two pins
+guard it: the version (a semver with a source-commit suffix, e.g. `1.0.0-99f3be8`) in
+`scripts/kape-platform-sdk.version`, and the archive's SHA-256 in
+`scripts/kape-platform-sdk.checksum`. The pull is **fail-closed on integrity**: the script
+verifies the downloaded archive's SHA-256 against the committed checksum on every run — including
+cached archives — and never installs an archive that lacks or fails its checksum. CI caches the
+*archive* (not the unpacked package) precisely so this verification re-runs each time.
+`ci_scripts/ci_post_clone.sh` and the CI workflows run the pull (and cache it) before resolving
+SPM. Imported products:
 
 - `KapeVPN-PacketTunnel` — the tunnel engine, WireGuard controller, and internal reconnection.
 - `KapeVPN-OpenVPN` — the OpenVPN connection controller.
@@ -80,7 +86,10 @@ rather than polling.
 
 **Three protocol modes, automatic by default.** Protocol selection is mapped through
 `KapePlatformSDKVPNType`, which centralises the persisted identifiers — `"PIA"` (OpenVPN),
-`"PIAWG"` (WireGuard), and `"PIAAutomatic"` (automatic: WireGuard first, then OpenVPN) — so
+`"PIAWG"` (WireGuard), and `"PIAAutomatic"` (automatic: a weighted protocol *pecking order* —
+WireGuard, then OpenVPN-UDP, then OpenVPN-TCP, each tried against a fixed number of
+fastest-first distinct endpoints, with transport, port, and OpenVPN crypto (AES-128-GCM /
+SHA256) dictated by the order rather than the user's saved OpenVPN settings) — so
 PlatformSDK code never references the legacy `PIATunnelProfile` / `PIAWGTunnelProfile` / TunnelKit
 types directly. The enum also carries a fourth, non-connectable `"IKEv2"` case: it exists only to
 recognise the value left by pre-PlatformSDK installs so those users can be migrated. **Automatic
@@ -92,7 +101,10 @@ automatic).
 Dedicated IP it uses the per-user DIP server carried in full through shared state (it is absent
 from the public list). For the Automatic region (no selected location) the extension fans out
 across every online non-DIP server, fastest first, ordered by the app-measured latencies mirrored
-into shared state by `ServersPinger`.
+into shared state by `ServersPinger`. When the protocol is also Automatic, endpoint selection
+within that fan-out is **protocol-major**: each pecking-order step draws up to its attempt count
+of distinct endpoints fastest-first (across the eligible servers) before falling through to the
+next protocol, rather than emitting a full per-server WireGuard+OpenVPN batch.
 
 **Reconnection is owned by the SDK.** The engine handles transient network loss and endpoint
 cycling internally. When the feature flag is on, `VPNDaemon` suppresses its own reconnect,
@@ -111,10 +123,12 @@ IKEv2/OpenVPN/WireGuard profiles are removed (`cleanupLegacyVPNProfilesIfNeeded`
 - **One maintained tunnel engine** shared across Kape brands; OpenVPN + WireGuard (and, later,
   Lightway) run behind a single extension instead of three, with reconnection and path
   monitoring handled by the core.
-- **Build/CI now depend on a network pull.** Because `PIALibrary` (consumed by nearly every
-  target) depends on the vendored SDK, no target resolves SPM until `pull-kape-platform-sdk.sh`
-  has run. Clean checkouts and CI require `CLOUDSMITH_TOKEN`; any new build entry point must run
-  the pull first or it fails with an opaque SPM error.
+- **Build/CI now depend on a checksum-verified network pull.** Because `PIALibrary` (consumed by
+  nearly every target) depends on the vendored SDK, no target resolves SPM until
+  `pull-kape-platform-sdk.sh` has run. Clean checkouts and CI require `CLOUDSMITH_TOKEN`; any new
+  build entry point must run the pull first or it fails with an opaque SPM error. The pull is
+  fail-closed on the committed SHA-256 (`scripts/kape-platform-sdk.checksum`), so bumping the
+  pinned version means updating both the version and checksum pins together.
 - **tvOS gains OpenVPN, WireGuard, and Automatic protocol selection** through the same engine
   (`ProtocolSelectionView` / `ProtocolSelectionUseCase`).
 - **New layering rule:** PlatformSDK code must not reference the legacy tunnel-profile or

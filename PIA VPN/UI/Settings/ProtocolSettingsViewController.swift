@@ -205,7 +205,12 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     }
 
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
-        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+        if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
+            // Automatic uses one toggle for the whole pecking order: drive both protocols' keys so
+            // the OpenVPN and WireGuard settings builders each pick it up.
+            AppPreferences.shared.useSmallPackets = sender.isOn
+            AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
+        } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
             AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
         } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             AppPreferences.shared.useSmallPackets = sender.isOn
@@ -313,7 +318,10 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchSmallPackets
             cell.selectionStyle = .none
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
+                // Automatic drives both protocols from one toggle; use the OpenVPN key as the source of truth.
+                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
+            } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
                 switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
@@ -410,11 +418,11 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     /// Sections shown for the currently selected protocol (OpenVPN handled separately, above).
-    /// Automatic spans both WireGuard and OpenVPN, so the per-protocol crypto/packet rows don't
-    /// apply — only the protocol picker is shown.
+    /// Automatic spans both WireGuard and OpenVPN, so the per-protocol crypto rows don't apply —
+    /// only the protocol picker and the shared "Use Small Packets" toggle are shown.
     private var sections: [ProtocolsSections] {
         if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
-            return [.protocolSelection]
+            return [.protocolSelection, .useSmallPackets]
         }
         return baseSections
     }

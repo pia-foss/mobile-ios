@@ -9,40 +9,36 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         let state = PIATunnelSharedState.read()
         let servers = await resolveServers(state: state)
 
-        // A concrete region (or DIP) was selected: connect to that one server, as before.
+        // Resolve the eligible servers, fastest first. A concrete region (or DIP) narrows this to a
+        // single server; "Automatic" (no selected location) fans out across every online server so
+        // the pecking order can draw its distinct endpoints from the lowest-latency ones.
+        let eligible: [Server]
         if state.selectedDipServer != nil || state.selectedLocationId != nil {
             guard let server = state.selectedServer(in: servers) else {
                 logger.error("No server could be resolved — returning no configurations")
                 return []
             }
-            return configurations(for: server, state: state)
+            eligible = [server]
+        } else {
+            eligible = serversByLatency(servers, state: state)
+            logger.info("Automatic (no selection): \(eligible.count) server(s), fastest first")
         }
 
-        // "Automatic" (no selected location): fan out across every online server, fastest first, so
-        // the session controller tries the lowest-latency server first and falls through the rest.
-        let ordered = serversByLatency(servers, state: state)
-        logger.info("Automatic (no selection): \(ordered.count) server(s), fastest first")
-        return ordered.flatMap {
-            configurations(for: $0, state: state)
-        }
+        return configurations(for: eligible, state: state)
     }
 
-    /// Builds the connection configurations for a single server, honoring the selected protocol.
-    private func configurations(for server: Server, state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
+    /// Builds the connection configurations across the eligible servers, honoring the selected protocol.
+    private func configurations(for servers: [Server], state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
         switch state.selectedProtocol {
         case .wireGuard:
-            return generateWireGuardConfigurations(server: server, state: state)
+            return servers.flatMap { generateWireGuardConfigurations(server: $0, state: state) }
         case .openVPN:
-            return generateOpenVPNConfigurations(server: server, state: state)
+            return servers.flatMap { generateOpenVPNConfigurations(server: $0, state: state) }
         case .automatic:
-            // PIA-defined ordering: try every WireGuard endpoint first, then fall back to OpenVPN.
-            // The session controller cycles the combined batch and routes each config to the right
-            // controller by type. Either generator yields [] when its protocol can't be built
-            // (missing addresses/credentials), so automatic degrades to whichever is available.
-            let wireGuard = generateWireGuardConfigurations(server: server, state: state)
-            let openVPN = generateOpenVPNConfigurations(server: server, state: state)
-            logger.info("Automatic protocol: \(wireGuard.count) WireGuard + \(openVPN.count) OpenVPN configuration(s) for \(server.identifier)")
-            return wireGuard + openVPN
+            // Hardcoded "Normal countries" pecking order (WireGuard → OpenVPN UDP → OpenVPN TCP) with
+            // per-protocol distinct-endpoint counts, built in `PIAEndpointRepository+PeckingOrder.swift`.
+            // Transport and port are dictated by the pecking order, not the user's saved OpenVPN settings.
+            return automaticConfigurations(servers: servers, state: state)
         }
     }
 

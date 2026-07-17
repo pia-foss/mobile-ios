@@ -5,7 +5,11 @@ import PIALibrary
 extension PIAEndpointRepository {
     static let wireGuardPort: UInt16 = 1337
 
-    func generateWireGuardConfigurations(server: Server, state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
+    func generateWireGuardConfigurations(
+        server: Server,
+        state: PIATunnelSharedState.State,
+        obfuscation: WireguardObfuscation = .none
+    ) -> [any VpnConfiguration] {
         logger.info("Generating WireGuard configurations")
 
         guard let addresses = server.wireGuardAddressesForUDP, !addresses.isEmpty else {
@@ -22,14 +26,14 @@ extension PIAEndpointRepository {
                 authIp: ip,
                 authPort: Self.wireGuardPort,
                 certDn: address.cn,
-                obfuscation: .none
+                obfuscation: obfuscation
             )
             logger.debug("Built WireGuard endpoint \(address.ip):\(Self.wireGuardPort) (cn: \(address.cn))")
             return KapeWireGuardConfig(
                 endpointConfiguration: endpoint,
                 host: address.ip,
                 port: Self.wireGuardPort,
-                obfuscation: .none,
+                obfuscation: obfuscation,
                 mtu: state.wireGuard.mtu
             )
         }

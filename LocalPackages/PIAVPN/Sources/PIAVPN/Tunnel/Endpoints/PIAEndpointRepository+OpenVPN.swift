@@ -7,97 +7,80 @@ extension PIAEndpointRepository {
     static let openVPNPortUDP: UInt16 = 8080
     static let openVPNPortTCP: UInt16 = 443
 
+    /// Builds OpenVPN configurations honoring the user's saved transport/port (the explicit
+    /// `.openVPN` selection). `.automatic` transport offers both UDP and TCP at their default ports
+    /// (UDP first, then TCP via the SDK's demand-driven failover). Explicit `.udp`/`.tcp` use the
+    /// user's selected port, falling back to the transport default when the port is automatic (0).
     func generateOpenVPNConfigurations(server: Server, state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
-        logger.info("Generating OpenVPN configurations")
+        let transport = state.openVPN.transport
+        let userPort = state.openVPN.port
 
+        let udpPort: UInt16
+        let tcpPort: UInt16
+        if transport == .automatic {
+            udpPort = Self.openVPNPortUDP
+            tcpPort = Self.openVPNPortTCP
+        } else {
+            udpPort = userPort != 0 ? userPort : Self.openVPNPortUDP
+            tcpPort = userPort != 0 ? userPort : Self.openVPNPortTCP
+        }
+
+        var configurations: [any VpnConfiguration] = []
+        if transport == .udp || transport == .automatic {
+            configurations += openVPNConfigurations(for: server, transport: .udp, port: udpPort, state: state)
+        }
+        if transport == .tcp || transport == .automatic {
+            configurations += openVPNConfigurations(for: server, transport: .tcp, port: tcpPort, state: state)
+        }
+        return configurations
+    }
+
+    /// Builds OpenVPN configurations for exactly one transport at a fixed port. `transport` must be
+    /// `.udp` or `.tcp`. The automatic pecking order calls this directly to dictate transport + port
+    /// (UDP 8080, TCP 443) and crypto (passing `crypto: .default`, i.e. AES-128-GCM per spec);
+    /// `generateOpenVPNConfigurations` passes `crypto: nil` to honor the user's persisted crypto
+    /// (`state.openVPN.ovpnConfig`).
+    func openVPNConfigurations(
+        for server: Server,
+        transport: OpenVPNTransport,
+        port: UInt16,
+        state: PIATunnelSharedState.State,
+        crypto: AppConstants.OpenVPNCrypto? = nil
+    ) -> [any VpnConfiguration] {
         guard !state.openVPN.caCertificate.isEmpty else {
             logger.error("OpenVPN CA certificate not set in shared state — returning no configurations")
             return []
         }
 
-        let udpAddresses = server.openVPNAddressesForUDP ?? []
-        let tcpAddresses = server.openVPNAddressesForTCP ?? []
-
-        guard !udpAddresses.isEmpty || !tcpAddresses.isEmpty else {
-            logger.error("No OpenVPN addresses found for \(server.identifier) — returning no configurations")
+        let addresses = (transport == .udp ? server.openVPNAddressesForUDP : server.openVPNAddressesForTCP) ?? []
+        guard !addresses.isEmpty else {
+            logger.error("No OpenVPN \(transport.rawValue) addresses found for \(server.identifier) — returning no configurations")
             return []
         }
 
-        logger.info("Found server \(server.name) with \(udpAddresses.count) UDP / \(tcpAddresses.count) TCP OpenVPN address(es)")
+        return addresses.map { address in
+            let usesPIAPatches = !address.van
+            logger.debug("Built OpenVPN \(transport.rawValue) endpoint \(address.ip):\(port) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
 
-        let userPort = state.openVPN.port
-
-        // Honor the user's transport choice; `.automatic` offers both UDP and TCP (UDP first,
-        // then TCP via the SDK's demand-driven failover).
-        let transport = state.openVPN.transport
-        let includeUDP = transport != .tcp
-        let includeTCP = transport != .udp
-        logger.info("OpenVPN transport: \(transport.rawValue) (UDP: \(includeUDP), TCP: \(includeTCP))")
-
-        // Apply the user's port override only to the selected transport. In `.automatic` mode
-        // the override applies to UDP (the primary transport); TCP keeps its default port.
-        let udpPort: UInt16
-        let tcpPort: UInt16
-        switch transport {
-        case .udp:
-            udpPort = userPort != 0 ? userPort : Self.openVPNPortUDP
-            tcpPort = Self.openVPNPortTCP
-        case .tcp:
-            udpPort = Self.openVPNPortUDP
-            tcpPort = userPort != 0 ? userPort : Self.openVPNPortTCP
-        case .automatic:
-            udpPort = userPort != 0 ? userPort : Self.openVPNPortUDP
-            tcpPort = Self.openVPNPortTCP
+            return OpenVPNConfiguration(
+                host: address.ip,
+                port: port,
+                transport: transport,
+                ovpnConfiguration: crypto?.ovpnConfig ?? state.openVPN.ovpnConfig,
+                ovpnConfigTemplate: nil,
+                xorValue: nil,
+                usesPIAPatches: usesPIAPatches,
+                mtu: state.openVPN.mtu,
+                certDn: address.cn,
+                username: state.openVPN.username,
+                password: state.openVPN.password,
+                caCertificate: state.openVPN.caCertificate,
+                clientCertificate: "",
+                clientKey: "",
+                tlsAuthKey: "",
+                appGroupIdentifier: AppConstants.appGroup,
+                dnsServers: state.openVPN.dnsServers
+            )
         }
-
-        var configurations: [any VpnConfiguration] = []
-
-        if includeUDP {
-            for address in udpAddresses {
-                let usesPIAPatches = !address.van
-                configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .udp, port: udpPort, state: state, usesPIAPatches: usesPIAPatches))
-                logger.debug("Built OpenVPN UDP endpoint \(address.ip):\(udpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
-            }
-        }
-
-        if includeTCP {
-            for address in tcpAddresses {
-                let usesPIAPatches = !address.van
-                configurations.append(makeOpenVPNConfig(ip: address.ip, cn: address.cn, transport: .tcp, port: tcpPort, state: state, usesPIAPatches: usesPIAPatches))
-                logger.debug("Built OpenVPN TCP endpoint \(address.ip):\(tcpPort) (cn: \(address.cn), piaPatches: \(usesPIAPatches))")
-            }
-        }
-
-        logger.info("Generated \(configurations.count) OpenVPN configuration(s)")
-        return configurations
-    }
-
-    private func makeOpenVPNConfig(
-        ip: String,
-        cn: String,
-        transport: OpenVPNTransport,
-        port: UInt16,
-        state: PIATunnelSharedState.State,
-        usesPIAPatches: Bool
-    ) -> OpenVPNConfiguration {
-        OpenVPNConfiguration(
-            host: ip,
-            port: port,
-            transport: transport,
-            ovpnConfiguration: state.openVPN.ovpnConfig,
-            ovpnConfigTemplate: nil,
-            xorValue: nil,
-            usesPIAPatches: usesPIAPatches,
-            mtu: state.openVPN.mtu,
-            certDn: cn,
-            username: state.openVPN.username,
-            password: state.openVPN.password,
-            caCertificate: state.openVPN.caCertificate,
-            clientCertificate: "",
-            clientKey: "",
-            tlsAuthKey: "",
-            appGroupIdentifier: AppConstants.appGroup,
-            dnsServers: state.openVPN.dnsServers
-        )
     }
 }

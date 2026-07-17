@@ -56,9 +56,9 @@ extension KapePlatformSDKTunnelProfile {
             password = accountPassword
         }
 
-        let cipher = sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.cipher) ?? "AES-128-GCM"
-        let auth = sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.auth) ?? "SHA256"
-        let ovpnConfig = "cipher \(cipher)\nauth \(auth)"
+        let cipher = sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.cipher) ?? AppConstants.OpenVPNCrypto.default.rawValue
+        let auth = sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.auth) ?? AppConstants.OpenVPNCrypto.defaultAuth
+        let ovpnConfig = AppConstants.OpenVPNCrypto.ovpnConfig(cipher: cipher, auth: auth)
 
         // 0 means automatic; the extension picks per-transport defaults.
         let port = UInt16(sharedDefaults.integer(forKey: AppConstants.UserDefaultsKeys.OpenVPN.port))

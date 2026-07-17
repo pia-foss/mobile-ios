@@ -96,8 +96,35 @@ public struct AppConstants {
     }
 
     public struct OpenVPNPacketSize {
-        public static let defaultPacketSize = 1400
+        public static let defaultPacketSize = 1420
         public static let smallPacketSize = 1350
+    }
+
+    /// OpenVPN data cipher options (stored as their OpenVPN raw values) plus the `ovpnConfig` blob
+    /// format the SDK OpenVPN controller expects. Single source of truth for both the user-driven
+    /// path (fallback when nothing is persisted) and the automatic pecking order (which dictates the
+    /// `default` cipher regardless of what the user saved).
+    public enum OpenVPNCrypto: String, CaseIterable {
+        case aes128gcm = "AES-128-GCM"
+        case aes256gcm = "AES-256-GCM"
+
+        /// Cipher dictated by the automatic pecking order per the connection-fallback spec, and the
+        /// fallback for the user path when no cipher is persisted.
+        public static let `default`: OpenVPNCrypto = .aes128gcm
+
+        /// Auth digest paired with PIA OpenVPN when none is persisted. There is no dedicated UI for
+        /// it — the app otherwise derives it from the OpenVPN session configuration.
+        public static let defaultAuth = "SHA256"
+
+        /// Formats the `ovpnConfig` blob the SDK OpenVPN controller expects.
+        public static func ovpnConfig(cipher: String, auth: String) -> String {
+            "cipher \(cipher)\nauth \(auth)"
+        }
+
+        /// This cipher's `ovpnConfig` blob, paired with the default auth digest.
+        public var ovpnConfig: String {
+            Self.ovpnConfig(cipher: rawValue, auth: Self.defaultAuth)
+        }
     }
 
     public struct IKEv2PacketSize {
