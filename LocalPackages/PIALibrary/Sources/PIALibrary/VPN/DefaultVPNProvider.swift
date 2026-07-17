@@ -302,10 +302,25 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
 
     public func reconnect(forceDisconnect: Bool, _ callback: SuccessLibraryCallback?) {
-        guard accessedDatabase.transient.isNetworkReachable else {
-            log.warning("Skip reconnect, internet is unreachable")
-            callback?(ClientError.internetUnreachable)
-            return
+        // When always-on (on-demand) is enabled and the tunnel is down, the OS
+        // gates all traffic behind the inactive VPN, so the reachability probe
+        // fails even on a perfectly healthy network — a false negative. Skipping
+        // the reconnect in that state deadlocks: the probe can only succeed once
+        // the tunnel is back up, but the guard refuses to bring it up, so the app
+        // spins forever until the user manually disconnects (which drops
+        // on-demand). Only honor the reachability guard when on-demand is off
+        // (manual mode), where reconnecting into a genuinely dead link would just
+        // cycle servers pointlessly.
+        if accessedPreferences.isPersistentConnection {
+            if !accessedDatabase.transient.isNetworkReachable {
+                log.warning("Reconnect proceeding despite unreachable probe — on-demand is enabled, likely a false negative from VPN routing")
+            }
+        } else {
+            guard accessedDatabase.transient.isNetworkReachable else {
+                log.warning("Skip reconnect, internet is unreachable")
+                callback?(ClientError.internetUnreachable)
+                return
+            }
         }
 
         guard accessedProviders.accountProvider.isLoggedIn else {
