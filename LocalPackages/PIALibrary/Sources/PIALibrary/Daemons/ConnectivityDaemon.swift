@@ -91,6 +91,10 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         networkObserver.whenUnreachable = { [weak self] in
             guard let self else { return }
             DispatchQueue.main.async {
+                guard self.accessedDatabase.transient.vpnStatus != .connecting else {
+                    // while connecting we are unreachable, but expected, skip reporting
+                    return
+                }
                 guard self.accessedDatabase.transient.isNetworkReachable else {
                     return
                 }
