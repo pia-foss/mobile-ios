@@ -237,12 +237,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
 
     public func connect(_ callback: SuccessLibraryCallback?) {
-        guard accessedDatabase.transient.isNetworkReachable else {
-            log.warning("Skip connect, internet is unreachable")
-            callback?(ClientError.internetUnreachable)
-            return
-        }
-
         guard accessedProviders.accountProvider.isLoggedIn else {
             callback?(ClientError.unauthorized)
             return
@@ -303,13 +297,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         activeProfile.updatePreferences(callback)
     }
 
-    public func reconnect(forceDisconnect: Bool, _ callback: SuccessLibraryCallback?) {
-        guard accessedDatabase.transient.isNetworkReachable else {
-            log.warning("Skip reconnect, internet is unreachable")
-            callback?(ClientError.internetUnreachable)
-            return
-        }
-
+    public func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             callback?(ClientError.unauthorized)
             return

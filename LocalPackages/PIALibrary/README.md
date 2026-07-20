@@ -302,7 +302,6 @@ This project is licensed under the [MIT (Expat) license](https://choosealicense.
 
 ## Acknowledgements
 
-- ReachabilitySwift - © 2016 Ashley Mills
 - TunnelKit - © 2018 - Present Davide de Rosa (https://github.com/passepartoutvpn/tunnelkit) - TunnelKit is not MIT software and remains under the terms of the GPL license (https://github.com/passepartoutvpn/tunnelkit/blob/master/LICENSE)
 
 [pia-image]: https://www.privateinternetaccess.com/assets/PIALogo2x-0d1e1094ac909ea4c93df06e2da3db4ee8a73d8b2770f0f7d768a8603c62a82f.png

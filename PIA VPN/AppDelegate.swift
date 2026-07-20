@@ -93,9 +93,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Bootstrapper.shared.dispose()
 
         #if !targetEnvironment(macCatalyst)
-            Task { [weak self] in
-                await self?.liveActivityManager?.endLiveActivities()
-            }
+            liveActivityManager?.endLiveActivities()
         #endif
     }
 
