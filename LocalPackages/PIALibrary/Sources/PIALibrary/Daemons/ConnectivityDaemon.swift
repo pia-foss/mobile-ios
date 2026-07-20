@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import Reachability
 
 private let log = PIALogger.logger(for: ConnectivityDaemon.self)
 
@@ -39,7 +38,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
     private(set) var hasEnabledUpdates: Bool = false
 
-    private let reachability = try! Reachability(hostname: "8.8.8.8")
+    private let networkObserver = NetworkObserver()
 
     private lazy var checker = ConnectivityChecker(webServices: accessedWebServices)
 
@@ -58,7 +57,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        startReachability()
+        startNetworkObserver()
     }
 
     func enableUpdates() {
@@ -70,12 +69,13 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         checkConnectivityOrRetry()
     }
 
-    private func startReachability() {
-        log.debug("Configuring for reachability...")
-        accessedDatabase.transient.isNetworkReachable = (reachability.connection != .unavailable)
+    private func startNetworkObserver() {
+        log.debug("Configuring for network observer...")
+        accessedDatabase.transient.isNetworkReachable = networkObserver.isReachable
         log.debug("Initial network state is \(accessedDatabase.transient.isNetworkReachable ? "REACHABLE" : "NOT REACHABLE")")
 
-        reachability.whenReachable = { (reach) in
+        networkObserver.whenReachable = { [weak self] in
+            guard let self else { return }
             DispatchQueue.main.async {
                 guard !self.accessedDatabase.transient.isNetworkReachable else {
                     if (self.accessedDatabase.transient.vpnStatus != .connected) {
@@ -88,7 +88,8 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 Macros.postNotification(.ConnectivityDaemonDidGetReachable)
             }
         }
-        reachability.whenUnreachable = { (reach) in
+        networkObserver.whenUnreachable = { [weak self] in
+            guard let self else { return }
             DispatchQueue.main.async {
                 guard self.accessedDatabase.transient.isNetworkReachable else {
                     return
@@ -98,9 +99,9 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 Macros.postNotification(.ConnectivityDaemonDidGetUnreachable)
             }
         }
-        try? reachability.startNotifier()
 
-        log.debug("Reachability notifier started")
+        networkObserver.start()
+        log.debug("Network observer started")
     }
 
     private func checkConnectivityOrRetry() {
