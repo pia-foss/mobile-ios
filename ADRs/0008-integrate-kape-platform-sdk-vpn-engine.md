@@ -1,4 +1,4 @@
-# 0005: Integrate the Kape Platform SDK VPN engine
+# 0008: Integrate the Kape Platform SDK VPN engine
 
 Date: 2026-06-25
 
@@ -61,7 +61,7 @@ The same sources are built by two platform targets — `PlatformSDK-Tunnel-iOS` 
 `PlatformSDK-Tunnel-tvOS.appex`. The app-side profile
 `KapePlatformSDKTunnelProfile: NetworkExtensionProfile` (in `PIALibrary`) configures it.
 
-**App ↔ extension IPC — bidirectional shared state plus a provider message.** State flows in
+**App ↔ extension IPC — bidirectional shared state plus provider messages.** State flows in
 both directions through `PIATunnelSharedState` (a namespace whose payload is a nested `State`),
 persisted as `pia_platformsdk_state.json` in the shared app group (on tvOS under
 `Library/Caches`). Every write posts a Darwin notification so the other side observes the change
@@ -83,6 +83,11 @@ rather than polling.
   `PIAPacketTunnelRequest.switchLocation` message via `sendProviderMessage()`; the extension
   re-resolves its endpoints from shared state in place. This replaced an earlier client-side
   server-switch marker.
+- **Provider message (`dataUsage`).** The app queries the active session's cumulative byte counters
+  with `PIAPacketTunnelRequest.dataUsage`. The extension reads them from the SDK session controller
+  and returns a `PIADataUsage`-compatible JSON payload, which `KapePlatformSDKTunnelProfile` maps to
+  PIALibrary's existing `Usage` model. The profile also exposes the Network Extension connection's
+  `connectedDate`, preserving the existing dashboard duration and usage features.
 
 **Three protocol modes, automatic by default.** Protocol selection is mapped through
 `KapePlatformSDKVPNType`, which centralises the persisted identifiers — `"PIA"` (OpenVPN),

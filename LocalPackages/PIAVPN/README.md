@@ -33,13 +33,17 @@ class PacketTunnelProvider: PIAPacketTunnelProvider, @unchecked Sendable {}
 
 - **WireGuard, OpenVPN, and Automatic.** `PIAPacketTunnelProvider` registers both a WireGuard and an
   OpenVPN `ConnectionController`; `PIAEndpointRepository` emits configurations per the selected
-  protocol (`wireGuard`, `openVPN`, or `automatic` — WireGuard first, then OpenVPN), and the session
-  controller routes each configuration to the matching controller by type.
+  protocol. Automatic mode uses a protocol-major pecking order — WireGuard, OpenVPN-UDP, then
+  OpenVPN-TCP — with a fixed number of fastest-first distinct endpoints per step. The order dictates
+  the transport, port, and OpenVPN crypto rather than using the saved OpenVPN settings.
 - **No app-side manager.** PIA's app side keeps using `KapePlatformSDKTunnelProfile` and
   `PIATunnelSharedState` (in `PIALibrary`); this package is the extension-side engine glue only.
-- The app ↔ extension hand-off (selected location / DIP server, cached server list, protocol,
-  latencies, DNS, MTU, token) flows through `PIATunnelSharedState` (file-based shared state in the
-  App Group), read here by `PIAEndpointRepository` / `PIAPacketTunnelProvider`.
+- **Persistent shared state.** Connection inputs (selected location / DIP server, cached server list,
+  protocol, latencies, DNS, MTU, token) and extension write-back (`activeConnection`, `tunnelStatus`)
+  flow through `PIATunnelSharedState`, a file-based snapshot in the App Group.
+- **Live provider messages.** `PIAPacketTunnelRequest.switchLocation` asks the running session to
+  re-resolve endpoints after the app changes shared state. `PIAPacketTunnelRequest.dataUsage` queries
+  the SDK's cumulative byte counters and returns a `PIADataUsage`-compatible response to the app.
 
 ## Custom DNS
 

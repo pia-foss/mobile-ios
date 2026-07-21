@@ -1,4 +1,4 @@
-# 0004: Replace CSI SDK with internal implementation
+# 0006: Replace CSI SDK with internal implementation
 
 Date: 2026-04-02
 

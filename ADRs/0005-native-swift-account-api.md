@@ -1,4 +1,4 @@
-# 0004: Replace KMP PIAAccount with a native Swift implementation
+# 0005: Replace KMP PIAAccount with a native Swift implementation
 
 Date: 2026-03-30
 

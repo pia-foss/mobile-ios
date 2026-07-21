@@ -1,4 +1,4 @@
-# 0003: Development with feature flags
+# 0004: Development with feature flags
 
 Date: 2026-03-20
 
