@@ -40,6 +40,11 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
 
     public var native: Any?
 
+    public var connectionDate: Date? {
+        guard let native = native as? NETunnelProviderManager else { return nil }
+        return native.connection.connectedDate
+    }
+
     public init(bundleIdentifier: String) {
         self.bundleIdentifier = bundleIdentifier
     }
