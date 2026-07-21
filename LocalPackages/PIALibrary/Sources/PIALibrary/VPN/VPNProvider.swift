@@ -161,7 +161,7 @@ public extension VPNProvider {
         if Client.configuration.featureFlags[.usePlatformSDKVPN] {
             connect(callback)
         } else {
-            reconnect(forceDisconnect: true, callback)
+            reconnect(after: nil, forceDisconnect: true, callback)
         }
     }
 

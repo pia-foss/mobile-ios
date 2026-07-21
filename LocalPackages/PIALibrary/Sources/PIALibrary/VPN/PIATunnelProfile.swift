@@ -24,6 +24,8 @@
     import TunnelKitOpenVPN
     import NetworkExtension
 
+    private let log = PIALogger.logger(for: PIATunnelProfile.self)
+
     /// Implementation of `VPNProfile` providing OpenVPN connectivity.
     public final class PIATunnelProfile: NetworkExtensionProfile {
         private let bundleIdentifier: String

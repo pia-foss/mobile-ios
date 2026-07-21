@@ -432,7 +432,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 log.debug("NEVPNManager is still connecting. Reconnecting with a different server...")
                 self.updateUIWithAttemptNumber(self.numberOfAttempts)
                 self.isReconnecting = true
-                Client.providers.vpnProvider.reconnect(forceDisconnect: true) { error in
+                Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true) { error in
                     if let clientError = error as? ClientError, clientError == .internetUnreachable {
                         self.isReconnecting = true
                         self.isReconnectingAfterConnectivityFailure = true
