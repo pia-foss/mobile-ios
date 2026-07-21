@@ -290,7 +290,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Sections.header == section {
-            if !data.isEmpty && AppPreferences.shared.disablesMultiDipTokens {
+            if !data.isEmpty {
                 let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
                 headerView.setup()
                 return headerView
