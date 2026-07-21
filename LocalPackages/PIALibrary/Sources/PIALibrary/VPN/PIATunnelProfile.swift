@@ -52,6 +52,11 @@
         /// :nodoc:
         public var native: Any?
 
+        public var connectionDate: Date? {
+            guard let native = native as? NETunnelProviderManager else { return nil }
+            return native.connection.connectedDate
+        }
+
         /// :nodoc:
         public func prepare() {
             find(completionHandler: nil)

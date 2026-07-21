@@ -46,6 +46,10 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         numberOfAttempts = 0
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func start() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(neStatusDidChange(notification:)), name: .NEVPNStatusDidChange, object: nil)

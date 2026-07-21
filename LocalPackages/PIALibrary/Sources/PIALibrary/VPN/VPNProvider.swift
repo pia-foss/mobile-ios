@@ -41,6 +41,9 @@ public protocol VPNProvider: AnyObject {
     /// The `Server` associated with the current profile.
     var profileServer: Server? { get }
 
+    /// The connection date time, if connected. Otherwise nil.
+    var connectionDate: Date? { get }
+
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
