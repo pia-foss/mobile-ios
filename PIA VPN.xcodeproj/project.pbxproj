@@ -557,7 +557,6 @@
 				3F6300AA2FD8103C00DA8769 /* PlatformSDK-Tunnel */,
 				291C637E183EBC210039EC03 /* Frameworks */,
 				291C637D183EBC210039EC03 /* Products */,
-				3F3BCA722FEAE1A10061639A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -603,14 +602,6 @@
 				8269A67E251CB4BA000B4DBF /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3F3BCA722FEAE1A10061639A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -317,9 +317,32 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         callback?(nil, nil)
     }
 
-    // The Platform SDK exposes no public tx/rx byte API
+    /// Queries the extension for the active session's cumulative tx/rx via a
+    /// `dataUsage` provider message and maps the reply into `Usage`. Returns
+    /// `nil` (no usage) when disconnected or when the active protocol cannot
+    /// report counters — the extension answers with an empty response.
     public func requestDataUsage(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<Usage>?) {
-        callback?(nil, nil)
+        find { (vpn, error) in
+            guard let session = vpn?.connection as? NETunnelProviderSession else {
+                callback?(nil, error)
+                return
+            }
+            do {
+                let data = try JSONEncoder().encode(PIAPacketTunnelRequest.dataUsage)
+                try session.sendProviderMessage(data) { response in
+                    guard let response,
+                        let usage = try? JSONDecoder().decode(PIADataUsage.self, from: response)
+                    else {
+                        callback?(nil, nil)
+                        return
+                    }
+                    // Map received→downloaded, sent→uploaded.
+                    callback?(Usage(uploaded: usage.bytesSent, downloaded: usage.bytesReceived), nil)
+                }
+            } catch {
+                callback?(nil, error)
+            }
+        }
     }
 
     // MARK: - Helpers

@@ -141,6 +141,16 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
                 }
                 completionHandler?(nil)
             }
+
+        case .dataUsage:
+            logger.info("dataUsage requested")
+            Task {
+                if let usage = await sessionController?.currentDataUsage() {
+                    completionHandler?(try? JSONEncoder().encode(usage))
+                } else {
+                    completionHandler?(nil)
+                }
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  PIAPacketTunnelRequest.swift
+//  PIADataUsage.swift
 //  PIALibrary
 //
 //  Created by Diego Trevisan on 09.06.26.
@@ -22,14 +22,21 @@
 
 import Foundation
 
-/// IPC messages sent from the app (`KapePlatformSDKTunnelProfile`) to the PlatformSDK PacketTunnel
-/// extension (`PIAPacketTunnelProvider`) via `NETunnelProviderSession.sendProviderMessage()`.
+/// Response payload for `PIAPacketTunnelRequest.dataUsage`, sent back by the
+/// extension over `sendProviderMessage`. Kept separate from `Usage` because the
+/// extension (PIAVPN) cannot construct `Usage` (its initializer is internal to
+/// PIALibrary); the profile maps this into `Usage` on the app side.
 ///
-/// Mirrors the vendored SDK's own `KapePacketTunnelRequest`, but PIA-owned so PIALibrary — which
-/// does not depend on any Kape module — can send it without a circular dependency on PIAVPN.
-public enum PIAPacketTunnelRequest: String, Codable, Sendable {
-    /// Switch the active session to whatever server is currently in `PIATunnelSharedState`,
-    /// without tearing down the Network Extension process (unlike a `stopVPNTunnel()` +
-    /// `startTunnel()` cycle).
-    case switchLocation
+/// The extension encodes the SDK's `PacketTunnelDataUsage` directly onto the
+/// wire, so this type must stay key-compatible with it (`bytesReceived` /
+/// `bytesSent`). PIALibrary declares its own copy because it depends only on
+/// `TunnelKitPackage`, not the KapeVPN modules where `PacketTunnelDataUsage` lives.
+public struct PIADataUsage: Codable, Sendable {
+    public let bytesReceived: UInt64
+    public let bytesSent: UInt64
+
+    public init(bytesReceived: UInt64, bytesSent: UInt64) {
+        self.bytesReceived = bytesReceived
+        self.bytesSent = bytesSent
+    }
 }
