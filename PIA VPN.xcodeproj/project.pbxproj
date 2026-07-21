@@ -29,7 +29,7 @@
 		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
 		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
 		3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
-		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* PIAVPN */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
@@ -1373,6 +1373,7 @@
 		};
 		3F6300B02FD8103C00DA8769 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS */;
 			targetProxy = 3F6300AF2FD8103C00DA8769 /* PBXContainerItemProxy */;
 		};
