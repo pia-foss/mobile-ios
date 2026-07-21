@@ -27,7 +27,7 @@ import UIKit
 
 private let log = PIALogger.logger(for: ShowConnectionStatsViewController.self)
 
-class ShowConnectionStatsViewController: AutolayoutViewController {
+final class ShowConnectionStatsViewController: AutolayoutViewController {
 
     private var licenseByComponentName: [String: String] = [:]
 
@@ -51,8 +51,10 @@ class ShowConnectionStatsViewController: AutolayoutViewController {
             nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
 
-        ServiceQualityManager.shared.availableData { data in
-            self.textData.text = data.joined(separator: "\n\n")
+        ServiceQualityManager.shared.availableData { [weak self] data in
+            DispatchQueue.main.async {
+                self?.textData.text = data.joined(separator: "\n\n")
+            }
         }
 
         viewDataFooter.isHidden = false

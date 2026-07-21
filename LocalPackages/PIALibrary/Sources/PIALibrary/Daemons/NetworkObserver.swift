@@ -1,8 +1,8 @@
 //
-//  TransientStore.swift
+//  NetworkObserver.swift
 //  PIALibrary
 //
-//  Created by Davide De Rosa on 12/14/17.
+//  Created by Mario on 08/07/2026.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -21,28 +21,33 @@
 //
 
 import Foundation
+import Network
 
-protocol TransientStore: AnyObject {
+final class NetworkObserver {
+    private let monitor: NWPathMonitor = NWPathMonitor()
+    private(set) var isReachable: Bool = false
 
-    // MARK: Server
+    var whenReachable: (() -> Void) = {}
+    var whenUnreachable: (() -> Void) = {}
 
-    var serversConfiguration: ServersBundle.Configuration { get set }
+    func start() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            switch path.status {
+            case .satisfied:
+                self?.isReachable = true
+                self?.whenReachable()
+            case .unsatisfied, .requiresConnection:
+                self?.isReachable = false
+                self?.whenUnreachable()
+            @unknown default:
+                break
+            }
 
-    // MARK: VPN
+        }
+        monitor.start(queue: .global(qos: .background))
+    }
 
-    var activeVPNProfile: VPNProfile? { get set }
-
-    var vpnStatus: VPNStatus { get set }
-
-    // MARK: Connectivity
-
-    var isNetworkReachable: Bool { get set }
-
-    var isInternetReachable: Bool { get set }
-
-    /// Currently connected VPN IP, if any.
-    /// Implementors should post ``Notification.Name.PIADaemonsDidUpdateConnectivity``
-    var vpnIP: String? { get set }
-
-    var vpnLog: String { get set }
+    func stop() {
+        monitor.cancel()
+    }
 }

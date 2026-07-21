@@ -208,7 +208,7 @@ extension Client {
             connectivityRetryDelay = 10000
             connectivityMaxAttempts = 3
 
-            vpnConnectivityRetryDelay = 5.0
+            vpnConnectivityRetryDelay = 20.0
             vpnConnectivityMaxAttempts = 3
 
             rsa4096Certificate = nil

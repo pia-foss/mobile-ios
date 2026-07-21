@@ -41,6 +41,9 @@ public protocol VPNProvider: AnyObject {
     /// The `Server` associated with the current profile.
     var profileServer: Server? { get }
 
+    /// The connection date time, if connected. Otherwise nil.
+    var connectionDate: Date? { get }
+
     /**
      Prepares the provider for VPN operations. Normally invoked when initializing the library.
      */
@@ -97,10 +100,11 @@ public protocol VPNProvider: AnyObject {
     /**
      Reconnects to the VPN.
 
+     - Parameter delay: The delay in milliseconds after which the reconnection is issue.
      - Parameter forceDisconnect: Boolean to indicate if we want to disconnect the VPN before reconnect..
      - Parameter callback: Returns `nil` on success.
      */
-    func reconnect(forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
+    func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
 
     /**
      Submits the debug report containing all relevant information for the current session.
@@ -126,8 +130,8 @@ public protocol VPNProvider: AnyObject {
 }
 
 public extension VPNProvider {
-    func reconnect(forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
-        return reconnect(forceDisconnect: forceDisconnect, callback)
+    func reconnect(after delay: Int?, forceDisconnect: Bool = false, _ callback: SuccessLibraryCallback?) {
+        return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
 }
 
