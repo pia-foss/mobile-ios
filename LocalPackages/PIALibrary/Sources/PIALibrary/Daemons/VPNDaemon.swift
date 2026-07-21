@@ -197,7 +197,10 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 ServiceQualityManager.shared.connectionAttemptEvent()
             }
 
-            if fallbackTimer == nil {
+            // The PlatformSDK tunnel handles reconnection internally via KapePathReconnector
+            // and KapeSessionController. Avoid double-reconnecting by suppressing the
+            // PIA-level fallback timer.
+            if fallbackTimer == nil && !Client.configuration.featureFlags[.usePlatformSDKVPN] {
                 log.debug("Setting up fallbackTimer...")
 
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
