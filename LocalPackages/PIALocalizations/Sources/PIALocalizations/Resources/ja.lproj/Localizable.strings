@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "トークンが無効です。トークンが正しく入力されていることを確認してください。";
 "dedicated.ip.message.valid.token" = "専用IPが正常にアクティベートされました。地域選択リストで利用できるようになります。";
 "dedicated.ip.message.expired.token" = "トークンの有効期限が切れています。ウェブサイトのアカウントページから新しいトークンを生成してください。";
+"dedicated.ip.message.error.alreadyHasOne" = "専用IPは一度に1つしか保有できません";
 "dedicated.ip.message.error.retryafter" = "失敗したトークン有効化リクエストの数が多すぎます。%@秒後にもう一度お試しください。";
 "dedicated.ip.message.token.willexpire" = "あなたの専用IPは間もなく期限が切れます。新しい専用IPを入手してください";
 "dedicated.ip.message.token.willexpire.link" = "新しい専用IPを入手してください";

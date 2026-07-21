@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Twój token jest nieprawidłowy. Sprawdź, czy wpisany token jest prawidłowy.";
 "dedicated.ip.message.valid.token" = "Twój dedykowany adres IP został aktywowany. Będzie dostępny na liście wyboru regionu.";
 "dedicated.ip.message.expired.token" = "Twój token stracił ważność. Wygeneruj nowy na stronie swojego konta w serwisie.";
+"dedicated.ip.message.error.alreadyHasOne" = "Możesz mieć tylko jeden dedykowany adres IP naraz";
 "dedicated.ip.message.error.retryafter" = "Za dużo nieprawidłowych żądań aktywacji tokena. Spróbuj ponownie za %@ s.";
 "dedicated.ip.message.token.willexpire" = "Twój dedykowany adres IP wkrótce wygasa. Kup nowy adres.";
 "dedicated.ip.message.token.willexpire.link" = "Kup nowy adres.";

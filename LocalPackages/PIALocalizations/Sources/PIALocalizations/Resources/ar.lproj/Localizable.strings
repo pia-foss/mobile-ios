@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "الرمز غير صالح. يرجى التأكد من إدخال الرمز بشكل صحيح.";
 "dedicated.ip.message.valid.token" = "تم تنشيط عنوان IP المخصّص بنجاح. سيكون متاحًا في قائمة اختيار المنطقة.";
 "dedicated.ip.message.expired.token" = "انتهت صلاحية الرمز. يرجى إنشاء رمز جديد من صفحة حسابك على الموقع الإلكتروني.";
+"dedicated.ip.message.error.alreadyHasOne" = "يمكنك امتلاك عنوان IP مخصّص واحد فقط في كل مرة";
 "dedicated.ip.message.error.retryafter" = "عدد طلبات تفعيل التوكن كبير جداً. يرجى إعادة المحاولة بعد %@ ثانية.";
 "dedicated.ip.message.token.willexpire" = "ستنتهي صلاحية عنوان IP المخصّص قريبًا. احصل على واحد جديد";
 "dedicated.ip.message.token.willexpire.link" = "احصل على واحد جديد";

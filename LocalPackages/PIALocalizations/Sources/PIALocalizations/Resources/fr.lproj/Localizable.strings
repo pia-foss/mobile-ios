@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Votre jeton n'est pas valide. Veuillez vous assurer que vous avez saisi le jeton correctement.";
 "dedicated.ip.message.valid.token" = "Votre adresse IP dédiée a été activée avec succès. Elle sera disponible dans votre liste de sélection de région.";
 "dedicated.ip.message.expired.token" = "Votre jeton est expiré. Veuillez en générer un nouveau à partir de la page de votre compte sur le site Web.";
+"dedicated.ip.message.error.alreadyHasOne" = "Vous ne pouvez avoir qu'une seule adresse IP dédiée à la fois";
 "dedicated.ip.message.error.retryafter" = "Nombre trop élevé de demandes d’activation de jeton manquées. Veuillez réessayer dans %@ seconde(s).";
 "dedicated.ip.message.token.willexpire" = "Votre adresse IP dédiée expirera bientôt. Obtenez-en une nouvelle";
 "dedicated.ip.message.token.willexpire.link" = "Obtenez-en une nouvelle";

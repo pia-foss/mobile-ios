@@ -33,7 +33,6 @@ import Foundation
 /// See ``FeatureFlagHolder``.
 public enum FeatureFlag: String, CaseIterable, Sendable {
     case forceUpdate = "force_update"
-    case disableMultiDipTokens = "disable-multi-dip-tokens"
     case checkDipExpirationRequest = "check-dip-expiration-request"
     case disableSystemRatingDialog = "disable-system-rating-dialogue"
     case showLeakProtection = "ios_custom_leak_protection_v2"

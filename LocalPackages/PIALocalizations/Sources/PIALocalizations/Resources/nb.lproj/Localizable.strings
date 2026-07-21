@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Tokenet er ugyldig. Kontroller at du har skrevet tokenet riktig.";
 "dedicated.ip.message.valid.token" = "Den dedikerte IP-en din ble aktivert. Den blir tilgjengelig i regionvalg-listen.";
 "dedicated.ip.message.expired.token" = "Tokenet er utløpt. Generer et nytt et fra kontosiden din på nettstedet.";
+"dedicated.ip.message.error.alreadyHasOne" = "Du kan bare ha én dedikert IP om gangen";
 "dedicated.ip.message.error.retryafter" = "For mange mislykkede forespørsler om aktivering av token. Prøv på nytt etter %@ sekund(er).";
 "dedicated.ip.message.token.willexpire" = "Den dedikerte IP-en din utløper snart. Skaff deg en ny en";
 "dedicated.ip.message.token.willexpire.link" = "Skaff deg en ny en";

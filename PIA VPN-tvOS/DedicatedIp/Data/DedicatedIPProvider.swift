@@ -17,6 +17,10 @@ final class DedicatedIPProvider: DedicatedIPProviderType {
     }
 
     func activateDIPToken(_ token: String, completion: @escaping (Result<Void, DedicatedIPError>) -> Void) {
+        guard getDIPTokens().isEmpty else {
+            completion(.failure(.alreadyHasOne))
+            return
+        }
         serverProvider.activateDIPToken(token) { server, error in
             if let error = error {
                 completion(.failure(DedicatedIPError.generic(error)))

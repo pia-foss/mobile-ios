@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "토큰이 유효하지 않습니다. 올바른 토큰을 입력했는지 확인하세요.";
 "dedicated.ip.message.valid.token" = "회원님의 전용 IP가 성공적으로 활성화되었습니다. 지역 선택 목록에서 사용하실 수 있습니다.";
 "dedicated.ip.message.expired.token" = "회원님의 토큰은 만료되었습니다. 웹사이트의 계정 페이지에서 새로운 토큰을 생성하세요.";
+"dedicated.ip.message.error.alreadyHasOne" = "한 번에 하나의 전용 IP만 보유할 수 있습니다";
 "dedicated.ip.message.error.retryafter" = "토큰 활성화 요청이 너무 많이 실패했습니다. %@초 후 다시 시도하십시오.";
 "dedicated.ip.message.token.willexpire" = "회원님의 전용 IP가 곧 만료됩니다. 새로 획득하세요";
 "dedicated.ip.message.token.willexpire.link" = "새로 획득하세요";

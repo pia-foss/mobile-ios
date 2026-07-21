@@ -9,7 +9,12 @@
 import Foundation
 
 enum DedicatedIPError: Error {
+    /// Token is expired.
     case expired
+    /// Token is invalid.
     case invalid
+    /// A Dedicated IP is already activated.
+    case alreadyHasOne
+    /// Other.
     case generic(Error?)
 }

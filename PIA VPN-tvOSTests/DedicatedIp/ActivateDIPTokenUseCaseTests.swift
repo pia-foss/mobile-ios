@@ -63,7 +63,7 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
 extension DedicatedIPError: @retroactive Equatable {
     public static func == (lhs: PIA_VPN_tvOS.DedicatedIPError, rhs: PIA_VPN_tvOS.DedicatedIPError) -> Bool {
         switch (lhs, rhs) {
-        case (.expired, .expired), (.invalid, .invalid), (.generic, .generic):
+        case (.expired, .expired), (.invalid, .invalid), (.alreadyHasOne, .alreadyHasOne), (.generic, .generic):
             return true
         default:
             return false
