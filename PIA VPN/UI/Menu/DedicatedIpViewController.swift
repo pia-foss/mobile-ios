@@ -350,6 +350,13 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                     andImage: Asset.iconWarning.image,
                 )
 
+            case .failure(.alreadyHasOne):
+                log.error("Activate DIP token failed: existing DIP already")
+                Macros.displayStickyNote(
+                    withMessage: L10n.Dedicated.Ip.Message.Error.alreadyHasOne,
+                    andImage: Asset.iconWarning.image
+                )
+
             case let .failure(.generic(error)):
                 self.handleDIPActivationError(error)
             }

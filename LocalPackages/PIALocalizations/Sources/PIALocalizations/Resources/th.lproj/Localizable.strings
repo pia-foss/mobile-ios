@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "โทเค็นของคุณไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้ป้อนโทเค็นอย่างถูกต้อง";
 "dedicated.ip.message.valid.token" = "IP เฉพาะของคุณเปิดใช้งานสำเร็จแล้ว จะมีอยู่ในรายการการเลือกภูมิภาคของคุณ";
 "dedicated.ip.message.expired.token" = "โทเค็นของคุณหมดอายุแล้ว โปรดสร้างใหม่จากหน้าบัญชีของคุณบนเว็บไซต์";
+"dedicated.ip.message.error.alreadyHasOne" = "คุณสามารถมี IP เฉพาะได้เพียงหนึ่งรายการในแต่ละครั้ง";
 "dedicated.ip.message.error.retryafter" = "มีคำขอเปิดใช้งานโทเค็นที่ล้มเหลวมากเกินไป โปรดลองอีกครั้งหลังเวลาผ่านไป %@ วินาที";
 "dedicated.ip.message.token.willexpire" = "IP เฉพาะของคุณจะหมดอายุในไม่ช้า รับใหม่";
 "dedicated.ip.message.token.willexpire.link" = "รับใหม่";
