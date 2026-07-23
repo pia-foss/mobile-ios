@@ -30,12 +30,14 @@ public extension String {
 
     var vpnProtocol: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "WireGuard®"
-        case PIATunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             return "OpenVPN"
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return "IPSec (IKEv2)"
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            return L10n.Global.automatic
         default:
             return self
         }
@@ -70,7 +72,7 @@ public extension String {
         case PIATunnelProfile.vpnType:
             return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
         default:
-            return self
+            return "---"
 
         }
     }
@@ -85,7 +87,7 @@ public extension String {
             let preferences = Client.preferences.editable()
             return preferences.ikeV2IntegrityAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -103,7 +105,7 @@ public extension String {
             let preferences = Client.preferences.editable()
             return preferences.ikeV2EncryptionAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -120,7 +122,7 @@ public extension String {
         case IKEv2Profile.vpnType:
             return "---"
         default:
-            return self
+            return "---"
         }
     }
 

@@ -71,6 +71,34 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     public var connectionDate: Date? { activeProfile?.connectionDate }
 
+    /// What the PlatformSDK tunnel actually resolved this session (written back by the extension):
+    /// protocol, server, and transport. Only meaningful while connected through that tunnel;
+    /// otherwise `nil` so callers fall back to the user's selection.
+    public var actualConnection: ActualConnection? {
+        guard let active = activeConnectionFromTunnel else { return nil }
+        let vpnType: KapePlatformSDKVPNType?
+        switch active.protocol {
+        case .wireGuard: vpnType = .wireGuard
+        case .openVPN: vpnType = .openVPN
+        case .automatic: vpnType = nil  // never written back resolved; ignore
+        }
+        let server = accessedProviders.serverProvider.find(withIdentifier: active.serverId)
+        return ActualConnection(
+            vpnType: vpnType,
+            server: server,
+            transport: active.resolvedTransport
+        )
+    }
+
+    /// The tunnel's actual-connection write-back, valid only when running through the PlatformSDK
+    /// tunnel and currently connected (so a stale value from a previous session is never shown).
+    private var activeConnectionFromTunnel: PIATunnelSharedState.ActiveConnection? {
+        guard accessedConfiguration.featureFlags[.usePlatformSDKVPN], isVPNConnected else {
+            return nil
+        }
+        return PIATunnelSharedState.read().activeConnection
+    }
+
     private var vpnLog: String {
         return accessedDatabase.transient.vpnLog
     }
@@ -91,20 +119,22 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
         log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
 
-        // Adding a [weak self] capture to `completionBlock` breaks the code on Xcode 26.4 / Swift 6.3 (self is captured nil)
-        // It does not need the weak reference as the it is only called inside the current function
         let completionBlock = {
-            profile?.prepare()
-
-            #if os(iOS)
-                if let _ = VPNIPAddressFromInterfaces() {
-                    self.accessedDatabase.transient.vpnStatus = .connected
-                }
-            #endif
             self.activeProfile = profile
+
+            // Seed the initial status only once the native profile has finished loading, so
+            // `seedInitialVPNStatus` can read the live manager's connection status (and, for an
+            // already-running tunnel, its `connectedDate`) instead of racing the async load.
+            profile?.prepare { _ in
+                self.seedInitialVPNStatus(from: profile)
+            }
         }
 
-        if isLegacyProfile() {
+        // The legacy IKEv1 → IKEv2 (or WireGuard on Mac) migration instantiates an
+        // *old* profile and makes it active. Skip it entirely when the PlatformSDK
+        // tunnel is enabled so that an IKEv1 user is not silently routed back onto a
+        // legacy profile; the resolved PlatformSDK profile is used instead.
+        if !accessedConfiguration.featureFlags[.usePlatformSDKVPN], isLegacyProfile() {
             // Set IKEv2 as default if user was using IKEv1.
             profile = IKEv2Profile()
             let preferences = Client.preferences.editable()
@@ -141,18 +171,43 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     }
 
+    private func seedInitialVPNStatus(from profile: VPNProfile?) {
+        guard let profile else {
+            return
+        }
+
+        // Every current profile exposes a loaded `NEVPNManager` (IKEv2) or
+        // `NETunnelProviderManager` (the tunnel profiles) by the time `prepare` completes, so
+        // read the live connection status directly.
+        guard let manager = profile.native as? NEVPNManager else {
+            return
+        }
+
+        let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
+        let resolvedStatus = VPNStatus.resolve(system: manager.connection.status, tunnel: tunnel)
+
+        // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
+        // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
+        // `connectedDate`; only fill when missing so an existing value is preserved.
+        if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
+            Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
+        }
+
+        accessedDatabase.transient.vpnStatus = resolvedStatus
+    }
+
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             callback?(ClientError.unauthorized)
             return
         }
 
-        let newVPNType = accessedPreferences.vpnType
-        guard let profile = accessedConfiguration.profile(forVPNType: newVPNType) else {
+        guard let profile = resolvedActiveProfile() else {
             callback?(ClientError.vpnProfileUnavailable)
             return
         }
 
+        let newVPNType = profile.vpnType
         var previousProfile: VPNProfile?
         if (newVPNType != activeProfile?.vpnType) {
             previousProfile = activeProfile
@@ -380,13 +435,25 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
     }
 
+    /// The profile that should handle the current connection.
+    ///
+    /// When the PlatformSDK feature flag is enabled, every connection is routed
+    /// through the single `KapePlatformSDKTunnelProfile` regardless of the
+    /// user-selected protocol. Otherwise the profile matching the selected
+    /// protocol (`preferences.vpnType`) is used.
+    private func resolvedActiveProfile() -> VPNProfile? {
+        if accessedConfiguration.featureFlags[.usePlatformSDKVPN] {
+            return accessedConfiguration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType)
+        }
+        return accessedConfiguration.profile(forVPNType: accessedPreferences.vpnType)
+    }
+
     @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
-        let activeVPNType = accessedPreferences.vpnType
-        let activeProfile: VPNProfile? = accessedConfiguration.profile(forVPNType: activeVPNType)
+        let activeProfile = resolvedActiveProfile()
 
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
-            guard (vpnType == activeVPNType) else {
+            guard (vpnType == activeProfile?.vpnType) else {
                 if let activeProfile {
                     if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
                         //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead

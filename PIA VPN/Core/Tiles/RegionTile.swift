@@ -78,6 +78,17 @@ class RegionTile: UIView, Tileable {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(updateServer), name: .PIAServerHasBeenUpdated, object: nil)
+        nc.addObserver(self, selector: #selector(updateServer), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+
+        // Through the PlatformSDK tunnel the extension writes the actual connected server into shared
+        // state after connecting, out of band with VPN status changes. Observe those cross-process
+        // writes so the tile reflects the resolved region promptly.
+        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            PIATunnelSharedState.startObserving()
+            nc.addObserver(
+                self, selector: #selector(updateServer),
+                name: PIATunnelSharedState.didChangeNotification, object: nil)
+        }
 
         viewShouldRestyle()
         self.tileTitle.text = L10n.Tiles.Region.title.uppercased()
@@ -88,8 +99,11 @@ class RegionTile: UIView, Tileable {
 
         greenDot?.removeFromSuperview()
 
-        let effectiveServer = Client.preferences.displayedServer
         let vpn = Client.providers.vpnProvider
+        // While connected through the PlatformSDK tunnel, reflect the server the tunnel actually
+        // connected to (e.g. the fastest region resolved under "Automatic"); otherwise show the
+        // user's selected target. This does not change the persisted selection.
+        let effectiveServer = vpn.actualConnection?.server ?? Client.preferences.displayedServer
         self.serverName.text = effectiveServer.name(forStatus: vpn.vpnStatus)
         self.mapImageView.image = Theme.current.mapImage()
 

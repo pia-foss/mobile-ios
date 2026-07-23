@@ -59,11 +59,23 @@ extension DebugMenuView {
         PIALogHandler.logStorage.getAllLogs(includeDebug: true)
     }
 
+    var vpnProtocolDisplayName: String {
+        switch Client.preferences.vpnType {
+        case "PIAWG": return "WireGuard"
+        case "PIA": return "OpenVPN"
+        case "IPSec", "IKEv2": return "IKEv2"
+        default: return Client.preferences.vpnType
+        }
+    }
+
     func buildExportContent() -> String {
         var lines: [String] = []
         lines.append("=== App Info ===")
         lines.append("Version: \(appVersion)")
         lines.append("Environment: \(environment)")
+        lines.append("")
+        lines.append("=== VPN ===")
+        lines.append("Protocol: \(vpnProtocolDisplayName)")
         lines.append("")
         lines.append("=== Account ===")
         lines.append("Username: \(username)")

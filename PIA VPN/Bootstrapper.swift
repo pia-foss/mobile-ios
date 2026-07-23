@@ -27,7 +27,7 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if canImport(TunnelKitCore)
+#if os(iOS)
     import TunnelKitCore
     import TunnelKitOpenVPN
     import PIAWireguard
@@ -67,6 +67,53 @@ final class Bootstrapper {
         #endif
     }
 
+    #if os(iOS)
+        /// One-time removal of the legacy per-protocol VPN configurations (IKEv2 /
+        /// OpenVPN / WireGuard) after migrating to the PlatformSDK tunnel. Without
+        /// this, a Network Extension config left over from before the flag was enabled
+        /// — possibly with on-demand active — could auto-start the old tunnel and run
+        /// alongside the PlatformSDK profile.
+        private func cleanupLegacyVPNProfilesIfNeeded() {
+            guard Client.configuration.featureFlags[.usePlatformSDKVPN], !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+                return
+            }
+
+            // Migrate users whose persisted protocol is no longer selectable under the PlatformSDK
+            // tunnel (legacy IKEv2) to automatic protocol negotiation. WireGuard / OpenVPN selections
+            // are still supported and kept as-is. Mirrors the tvOS BootstraperFactory migration.
+            let supportedTypes: [KapePlatformSDKVPNType] = [
+                .automatic,
+                .wireGuard,
+                .openVPN
+            ]
+
+            if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
+                let editable = Client.preferences.editable()
+                editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+                editable.commit()
+            }
+
+            let legacyProfiles: [VPNProfile] = [
+                IKEv2Profile(),
+                PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier),
+                PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier)
+            ]
+            let group = DispatchGroup()
+            for profile in legacyProfiles {
+                group.enter()
+                profile.disconnect { _ in
+                    profile.remove { _ in
+                        group.leave()
+                    }
+                }
+            }
+
+            group.notify(queue: .main) {
+                AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+            }
+        }
+    #endif
+
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
@@ -97,6 +144,15 @@ final class Bootstrapper {
             Client.providers.accountProvider.cleanDatabase()
         }
 
+        #if os(iOS)
+            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
+            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
+            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
+            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+                Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            }
+        #endif
+
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()
 
@@ -113,7 +169,7 @@ final class Bootstrapper {
             }
         #endif
 
-        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+        Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
 
         #if STAGING
             Client.environment = .staging
@@ -132,9 +188,14 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            Client.configuration.addVPNProfile(IKEv2Profile())
-            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-            Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+                Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
+                cleanupLegacyVPNProfilesIfNeeded()
+            } else {
+                Client.configuration.addVPNProfile(IKEv2Profile())
+                Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+                Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            }
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
@@ -229,6 +290,7 @@ final class Bootstrapper {
         pref.commit()
         #if os(iOS)
             AppPreferences.shared.migrateOVPN()
+            AppPreferences.shared.syncOpenVPNSettingsToAppGroup()
             AppPreferences.shared.migrateWireguard()
 
             // Business objects
@@ -278,17 +340,6 @@ final class Bootstrapper {
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
-    }
-
-    // MARK: Certificate
-
-    func rsa4096Certificate() -> String? {
-        #if os(iOS)
-            return AppPreferences.shared.piaHandshake.pemString()
-        #else
-            // FIXME: Implement for tvOS
-            return nil
-        #endif
     }
 
     // MARK: Notifications

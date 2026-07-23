@@ -39,4 +39,8 @@ public enum FeatureFlag: String, CaseIterable, Sendable {
     case showLeakProtection = "ios_custom_leak_protection_v2"
     case showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
     case showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
+    /// Routes VPN connections through the new `KapePlatformSDKTunnelProfile`
+    /// (PlatformSDK tunnel) instead of the legacy per-protocol profiles
+    /// (IKEv2 / OpenVPN / WireGuard). Defaults to `false` (legacy profiles).
+    case usePlatformSDKVPN = "ios_platform_sdk_vpn"
 }

@@ -138,7 +138,7 @@ public struct DebugMenuView: View {
     private var vpnSection: some View {
         DebugSection("VPN") {
             DebugInfoRow(label: "Status", value: Client.daemons.vpnStatus.rawValue)
-            DebugInfoRow(label: "Protocol", value: Client.preferences.vpnType)
+            DebugInfoRow(label: "Protocol", value: vpnProtocolDisplayName)
             DebugInfoRow(label: "Local IP", value: Client.daemons.publicIP ?? "---")
             DebugInfoRow(label: "VPN IP", value: Client.daemons.vpnIP ?? "---")
         }

@@ -28,6 +28,9 @@
 		3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */; };
 		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
 		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
+		3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
+		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* PIAVPN */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -35,6 +38,8 @@
 		3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */; };
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
+		3FC0DEC42FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
+		3FD44D712FD8376D008A43AD /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3FD44D702FD8376D008A43AD /* PIALibrary */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
 		3FE266BC2F0BE003004B53AA /* PIAUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266BB2F0BE003004B53AA /* PIAUIKit */; };
 		6A66AB9BF1D1DEE0C4CB9FA5 /* PIALocalizations in Frameworks */ = {isa = PBXBuildFile; productRef = 6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */; };
@@ -54,8 +59,10 @@
 		DD606ABA21C7A17900E0781D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DDC8F5F923EC10E4005D19C6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
-		E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
-		E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F20000082FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F20000092FD9000000DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
+		F20000102FD9000000DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = F20000162FD9000000DA8769 /* PIAVPN */; };
+		F20000112FD9000000DA8769 /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F20000172FD9000000DA8769 /* PIALibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +94,13 @@
 			remoteGlobalIDString = E5C507762B0E144D00200A6A;
 			remoteInfo = "PIA VPN-tvOS";
 		};
+		3F6300AF2FD8103C00DA8769 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F6300A72FD8103C00DA8769;
+			remoteInfo = "PlatformSDK-Tunnel-iOS";
+		};
 		69CB24A22B051CED00D83A52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -115,13 +129,6 @@
 			remoteGlobalIDString = E5C507762B0E144D00200A6A;
 			remoteInfo = "PIA VPN-tvOS";
 		};
-		E59D1A1B2B7E2D4B00A2FBFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E59D1A132B7E2D4B00A2FBFB;
-			remoteInfo = "PIA tvOS Tunnel";
-		};
 		E5C507872B0E145100200A6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
@@ -136,6 +143,13 @@
 			remoteGlobalIDString = E5C507762B0E144D00200A6A;
 			remoteInfo = "PIA VPN-tvOS";
 		};
+		F20000052FD9000000DA8769 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291C6374183EBC210039EC03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F20000012FD9000000DA8769;
+			remoteInfo = "PlatformSDK-Tunnel-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -149,6 +163,7 @@
 				DDC8F5F423EC1070005D19C6 /* PIA VPN WG Tunnel.appex in Embed App Extensions */,
 				0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */,
 				8269A6E3251CB5E3000B4DBF /* PIAWidgetExtension.appex in Embed App Extensions */,
+				3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,7 +174,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E59D1A1D2B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex in Embed Foundation Extensions */,
+				F20000082FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +199,7 @@
 		299E58501856BD31004CFD63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		299E585E1856C6EE004CFD63 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_tvOS_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PlatformSDK-Tunnel-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B70AB02ACBF51C0072A09D /* PIA-VPN_E2E_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA-VPN_E2E_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269A67C251CB4BA000B4DBF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8269A67E251CB4BA000B4DBF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -193,10 +209,10 @@
 		DDC8F5CB23E9C359005D19C6 /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libwg-go.a"; path = "../../../Desktop/libwg-go.a"; sourceTree = "<group>"; };
 		DDC8F5EC23EC106F005D19C6 /* PIA VPN WG Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA VPN WG Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOS snapshot.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PIA tvOS Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIA VPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507862B0E145100200A6A /* PIA VPN-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIA VPN-tvOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PlatformSDK-Tunnel-tvOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -274,13 +290,6 @@
 			);
 			target = DDC8F5EB23EC106F005D19C6 /* PIA VPN WG Tunnel */;
 		};
-		3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				PacketTunnelProvider.swift,
-			);
-			target = E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */;
-		};
 		3F0EF9402EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -336,6 +345,20 @@
 			);
 			target = E548E1F42C1238B5001E9874 /* PIA VPN-tvOS snapshot */;
 		};
+		3F6300C12FD8103C00DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SupportingFiles/Info.plist,
+			);
+			target = 3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS */;
+		};
+		F20000182FD9000000DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SupportingFiles/Info.plist,
+			);
+			target = F20000012FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -347,7 +370,6 @@
 		3F0EF6152EDF26990013E4FB /* PIA-VPN_tvOS_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_tvOS_E2E_Tests"; sourceTree = "<group>"; };
 		3F0EF62E2EDF26990013E4FB /* PIA VPN-tvOSUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSUITests"; sourceTree = "<group>"; };
 		3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOSTests"; sourceTree = "<group>"; };
-		3F0EF7232EDF26990013E4FB /* PIA tvOS Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF7262EDF269A0013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA tvOS Tunnel"; sourceTree = "<group>"; };
 		3F0EF8692EDF26D90013E4FB /* PIA VPN-tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9402EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9422EDF26D90013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PIA VPN-tvOS"; sourceTree = "<group>"; };
 		3F0EF9682EDF27910013E4FB /* PIA-VPN_E2E_Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA-VPN_E2E_Tests"; sourceTree = "<group>"; };
 		3F0EF9D42EDF28710013E4FB /* PIAWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F0EF9EE2EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3F0EF9F02EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PIAWidget; sourceTree = "<group>"; };
@@ -356,6 +378,7 @@
 		3F0EFB942EDF29F20013E4FB /* TestPlans */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TestPlans; sourceTree = "<group>"; };
 		3F0EFB992EDF2A270013E4FB /* PIA Common */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PIA Common"; sourceTree = "<group>"; };
 		3F0EFBA02EDF2AAA0013E4FB /* Entitlements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Entitlements; sourceTree = "<group>"; };
+		3F6300AA2FD8103C00DA8769 /* PlatformSDK-Tunnel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3F6300C12FD8103C00DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F20000182FD9000000DA8769 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PlatformSDK-Tunnel"; sourceTree = "<group>"; };
 		3F7B4C892EE72EFB00EE1F4C /* LocalPackages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LocalPackages; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -422,6 +445,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F6300A52FD8103C00DA8769 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FD44D712FD8376D008A43AD /* PIALibrary in Frameworks */,
+				3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */,
+				3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69B70AAD2ACBF51C0072A09D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,18 +493,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E59D1A112B7E2D4B00A2FBFB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E59D1A152B7E2D4B00A2FBFB /* NetworkExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C507742B0E144D00200A6A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC0DEC42FEAF47C00063E49 /* OpenSSL in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */,
 				3F7BD9C02EE8A0AF00EE1F4C /* PIALibrary in Frameworks */,
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
@@ -492,6 +518,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20000032FD9000000DA8769 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F20000112FD9000000DA8769 /* PIALibrary in Frameworks */,
+				F20000102FD9000000DA8769 /* PIAVPN in Frameworks */,
+				F20000092FD9000000DA8769 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,9 +552,9 @@
 				3F0EF8692EDF26D90013E4FB /* PIA VPN-tvOS */,
 				3F0EF6B32EDF26990013E4FB /* PIA VPN-tvOSTests */,
 				3F0EF62E2EDF26990013E4FB /* PIA VPN-tvOSUITests */,
-				3F0EF7232EDF26990013E4FB /* PIA tvOS Tunnel */,
 				3F0EF6152EDF26990013E4FB /* PIA-VPN_tvOS_E2E_Tests */,
 				3F0EF9F22EDF28B40013E4FB /* PIA VPNTests snapshot */,
+				3F6300AA2FD8103C00DA8769 /* PlatformSDK-Tunnel */,
 				291C637E183EBC210039EC03 /* Frameworks */,
 				291C637D183EBC210039EC03 /* Products */,
 			);
@@ -537,9 +573,9 @@
 				E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */,
 				E5C507862B0E145100200A6A /* PIA VPN-tvOSTests.xctest */,
 				E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */,
-				E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */,
 				35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */,
 				E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */,
+				3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -646,6 +682,7 @@
 				0EFB607F203D893E0095398C /* PBXTargetDependency */,
 				DDC8F5F323EC1070005D19C6 /* PBXTargetDependency */,
 				8269A6E2251CB5E3000B4DBF /* PBXTargetDependency */,
+				3F6300B02FD8103C00DA8769 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3F0EF43B2EDF25880013E4FB /* PIA VPN */,
@@ -697,6 +734,30 @@
 			productName = "PIA-VPN_tvOS_E2E_Tests";
 			productReference = 35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F6300B22FD8103C00DA8769 /* Build configuration list for PBXNativeTarget "PlatformSDK-Tunnel-iOS" */;
+			buildPhases = (
+				3F6300A42FD8103C00DA8769 /* Sources */,
+				3F6300A52FD8103C00DA8769 /* Frameworks */,
+				3F6300A62FD8103C00DA8769 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3F6300AA2FD8103C00DA8769 /* PlatformSDK-Tunnel */,
+			);
+			name = "PlatformSDK-Tunnel-iOS";
+			packageProductDependencies = (
+				3F6300B72FD8182D00DA8769 /* PIAVPN */,
+				3FD44D702FD8376D008A43AD /* PIALibrary */,
+			);
+			productName = "PlatformSDK-Tunnel-iOS";
+			productReference = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */ = {
 			isa = PBXNativeTarget;
@@ -791,23 +852,6 @@
 			productReference = E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E59D1A1E2B7E2D4B00A2FBFB /* Build configuration list for PBXNativeTarget "PIA tvOS Tunnel" */;
-			buildPhases = (
-				E59D1A102B7E2D4B00A2FBFB /* Sources */,
-				E59D1A112B7E2D4B00A2FBFB /* Frameworks */,
-				E59D1A122B7E2D4B00A2FBFB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "PIA tvOS Tunnel";
-			productName = "PIA tvOS Tunnel";
-			productReference = E59D1A142B7E2D4B00A2FBFB /* PIA tvOS Tunnel.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		E5C507762B0E144D00200A6A /* PIA VPN-tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5079E2B0E145100200A6A /* Build configuration list for PBXNativeTarget "PIA VPN-tvOS" */;
@@ -821,7 +865,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E59D1A1C2B7E2D4B00A2FBFB /* PBXTargetDependency */,
+				F20000062FD9000000DA8769 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3F0EF8692EDF26D90013E4FB /* PIA VPN-tvOS */,
@@ -835,6 +879,7 @@
 				ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
 				3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */,
+				3FC0DEC32FEAF47C00063E49 /* OpenSSL */,
 			);
 			productName = "PIA VPN-tvOS";
 			productReference = E5C507772B0E144D00200A6A /* PIA VPN-tvOS.app */;
@@ -884,6 +929,30 @@
 			productReference = E5C507902B0E145100200A6A /* PIA VPN-tvOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		F20000012FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F20000152FD9000000DA8769 /* Build configuration list for PBXNativeTarget "PlatformSDK-Tunnel-tvOS" */;
+			buildPhases = (
+				F20000022FD9000000DA8769 /* Sources */,
+				F20000032FD9000000DA8769 /* Frameworks */,
+				F20000042FD9000000DA8769 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3F6300AA2FD8103C00DA8769 /* PlatformSDK-Tunnel */,
+			);
+			name = "PlatformSDK-Tunnel-tvOS";
+			packageProductDependencies = (
+				F20000162FD9000000DA8769 /* PIAVPN */,
+				F20000172FD9000000DA8769 /* PIALibrary */,
+			);
+			productName = "PlatformSDK-Tunnel-tvOS";
+			productReference = F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -891,7 +960,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIA;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Private Internet Access Inc.";
 				TargetAttributes = {
@@ -954,6 +1023,9 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = E5C507762B0E144D00200A6A;
 					};
+					3F6300A72FD8103C00DA8769 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					69B70AAF2ACBF51C0072A09D = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 291C637B183EBC210039EC03;
@@ -967,9 +1039,6 @@
 					E548E1F42C1238B5001E9874 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = E5C507762B0E144D00200A6A;
-					};
-					E59D1A132B7E2D4B00A2FBFB = {
-						CreatedOnToolsVersion = 15.0.1;
 					};
 					E5C507762B0E144D00200A6A = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -1019,6 +1088,7 @@
 				3F557CEE2EF59BE2002FB559 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 				3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */,
 				ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				3FC0DEC22FEAF47C00063E49 /* XCRemoteSwiftPackageReference "OpenSSL-Package" */,
 			);
 			preferredProjectObjectVersion = 46;
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
@@ -1033,11 +1103,12 @@
 				0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */,
 				69B70AAF2ACBF51C0072A09D /* PIA-VPN_E2E_Tests */,
 				E5C507762B0E144D00200A6A /* PIA VPN-tvOS */,
-				E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */,
 				E5C507852B0E145100200A6A /* PIA VPN-tvOSTests */,
 				E5C5078F2B0E145100200A6A /* PIA VPN-tvOSUITests */,
 				35E8E6572B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests */,
 				E548E1F42C1238B5001E9874 /* PIA VPN-tvOS snapshot */,
+				3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS */,
+				F20000012FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1078,6 +1149,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F6300A62FD8103C00DA8769 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69B70AAE2ACBF51C0072A09D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1106,13 +1184,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E59D1A122B7E2D4B00A2FBFB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C507752B0E144D00200A6A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1128,6 +1199,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E5C5078E2B0E145100200A6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20000042FD9000000DA8769 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1214,6 +1292,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F6300A42FD8103C00DA8769 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69B70AAC2ACBF51C0072A09D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1235,13 +1320,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E59D1A102B7E2D4B00A2FBFB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C507732B0E144D00200A6A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1257,6 +1335,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E5C5078C2B0E145100200A6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20000022FD9000000DA8769 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1286,6 +1371,12 @@
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
 			targetProxy = 35E8E65E2B870AD200A3A3DB /* PBXContainerItemProxy */;
 		};
+		3F6300B02FD8103C00DA8769 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 3F6300A72FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS */;
+			targetProxy = 3F6300AF2FD8103C00DA8769 /* PBXContainerItemProxy */;
+		};
 		69CB24A32B051CED00D83A52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 291C637B183EBC210039EC03 /* PIA VPN */;
@@ -1307,11 +1398,6 @@
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
 			targetProxy = E548E1F92C1238B5001E9874 /* PBXContainerItemProxy */;
 		};
-		E59D1A1C2B7E2D4B00A2FBFB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E59D1A132B7E2D4B00A2FBFB /* PIA tvOS Tunnel */;
-			targetProxy = E59D1A1B2B7E2D4B00A2FBFB /* PBXContainerItemProxy */;
-		};
 		E5C507882B0E145100200A6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
@@ -1321,6 +1407,11 @@
 			isa = PBXTargetDependency;
 			target = E5C507762B0E144D00200A6A /* PIA VPN-tvOS */;
 			targetProxy = E5C507912B0E145100200A6A /* PBXContainerItemProxy */;
+		};
+		F20000062FD9000000DA8769 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F20000012FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS */;
+			targetProxy = F20000052FD9000000DA8769 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2195,52 +2286,6 @@
 			};
 			name = Staging;
 		};
-		3F02881F2F1E6DC300DC4BC0 /* Staging */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Entitlements/PIA_tvOS_Tunnel.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5357M5NW9W;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIA-tvOS-Tunnel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.0;
-			};
-			name = Staging;
-		};
 		3F0288202F1E6DC300DC4BC0 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2386,6 +2431,184 @@
 				TVOS_DEPLOYMENT_TARGET = 17.0;
 			};
 			name = Staging;
+		};
+		3F6300B32FD8103C00DA8769 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).PlatformSDK-Tunnel-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		3F6300B42FD8103C00DA8769 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Staging;
+		};
+		3F6300B52FD8103C00DA8769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
 		};
 		69B70AB82ACBF51C0072A09D /* Development */ = {
 			isa = XCBuildConfiguration;
@@ -2699,99 +2922,6 @@
 			};
 			name = Release;
 		};
-		E59D1A1F2B7E2D4B00A2FBFB /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Entitlements/PIA_tvOS_Tunnel.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5357M5NW9W;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PIA-tvOS-Tunnel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.0;
-			};
-			name = Development;
-		};
-		E59D1A202B7E2D4B00A2FBFB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Entitlements/PIA_tvOS_Tunnel.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5357M5NW9W;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "PIA tvOS Tunnel/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PIA tvOS Tunnel";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Private Internet Access Inc. All rights reserved.";
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.0;
-			};
-			name = Release;
-		};
 		E5C507982B0E145100200A6A /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 3F0EFB2D2EDF29880013E4FB /* Resources */;
@@ -2828,7 +2958,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -3033,6 +3163,107 @@
 			};
 			name = Release;
 		};
+		F20000122FD9000000DA8769 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).PlatformSDK-Tunnel-tvOS";
+				PRODUCT_NAME = "PlatformSDK-Tunnel-tvOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Development;
+		};
+		F20000132FD9000000DA8769 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS";
+				PRODUCT_NAME = "PlatformSDK-Tunnel-tvOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Staging;
+		};
+		F20000142FD9000000DA8769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_ENTITLEMENTS = "PlatformSDK-Tunnel/SupportingFiles/PlatformSDK-Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5357M5NW9W;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "PlatformSDK-Tunnel/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-lresolv";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS";
+				PRODUCT_NAME = "PlatformSDK-Tunnel-tvOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3096,6 +3327,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		3F6300B22FD8103C00DA8769 /* Build configuration list for PBXNativeTarget "PlatformSDK-Tunnel-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F6300B32FD8103C00DA8769 /* Development */,
+				3F6300B42FD8103C00DA8769 /* Staging */,
+				3F6300B52FD8103C00DA8769 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		69B70ABA2ACBF51C0072A09D /* Build configuration list for PBXNativeTarget "PIA-VPN_E2E_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3136,16 +3377,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E59D1A1E2B7E2D4B00A2FBFB /* Build configuration list for PBXNativeTarget "PIA tvOS Tunnel" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E59D1A1F2B7E2D4B00A2FBFB /* Development */,
-				3F02881F2F1E6DC300DC4BC0 /* Staging */,
-				E59D1A202B7E2D4B00A2FBFB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		E5C5079E2B0E145100200A6A /* Build configuration list for PBXNativeTarget "PIA VPN-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3172,6 +3403,16 @@
 				E5C5079C2B0E145100200A6A /* Development */,
 				3F0288212F1E6DC300DC4BC0 /* Staging */,
 				E5C5079D2B0E145100200A6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F20000152FD9000000DA8769 /* Build configuration list for PBXNativeTarget "PlatformSDK-Tunnel-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20000122FD9000000DA8769 /* Development */,
+				F20000132FD9000000DA8769 /* Staging */,
+				F20000142FD9000000DA8769 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3209,6 +3450,14 @@
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		3FC0DEC22FEAF47C00063E49 /* XCRemoteSwiftPackageReference "OpenSSL-Package" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/OpenSSL-Package.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.0;
 			};
 		};
 		AA36CDC228A6711300180A33 /* XCRemoteSwiftPackageReference "Popover" */ = {
@@ -3296,6 +3545,10 @@
 			package = 3F557CF12EF59C1C002FB559 /* XCRemoteSwiftPackageReference "PopupDialog" */;
 			productName = PopupDialog;
 		};
+		3F6300B72FD8182D00DA8769 /* PIAVPN */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAVPN;
+		};
 		3F7BD9B72EE8A09800EE1F4C /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
@@ -3323,6 +3576,15 @@
 		3F89AB662F48461B00AC9CCD /* PIADebugMenu */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADebugMenu;
+		};
+		3FC0DEC32FEAF47C00063E49 /* OpenSSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FC0DEC22FEAF47C00063E49 /* XCRemoteSwiftPackageReference "OpenSSL-Package" */;
+			productName = OpenSSL;
+		};
+		3FD44D702FD8376D008A43AD /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
 		};
 		3FE266B92F0BE003004B53AA /* PIASwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3384,6 +3646,14 @@
 		ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADashboard;
+		};
+		F20000162FD9000000DA8769 /* PIAVPN */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAVPN;
+		};
+		F20000172FD9000000DA8769 /* PIALibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIALibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

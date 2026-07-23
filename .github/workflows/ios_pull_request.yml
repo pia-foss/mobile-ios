@@ -57,11 +57,36 @@ jobs:
         echo "Failed to download iOS platform after $max_attempts attempts"
         exit 1
     
+    # Cache the downloaded archive, not the unpacked package: the pull script
+    # re-verifies the archive's SHA-256 against the committed pin on every run,
+    # so a poisoned cache entry cannot reach the build unnoticed.
+    - name: Cache KapePlatformSDK archive
+      uses: actions/cache@v4
+      with:
+        path: .kape-sdk-archive-cache
+        key: kape-platform-sdk-archive-${{ hashFiles('scripts/kape-platform-sdk.version', 'scripts/kape-platform-sdk.checksum') }}
+
+    - name: Pull KapePlatformSDK
+      env:
+        CLOUDSMITH_TOKEN: ${{ secrets.CLOUDSMITH_TOKEN }}
+        KAPE_SDK_ARCHIVE_CACHE: .kape-sdk-archive-cache
+      run: ./scripts/pull-kape-platform-sdk.sh
+
+    - name: Cache SPM packages
+      uses: actions/cache@v4
+      with:
+        path: .build/SourcePackages
+        key: spm-${{ runner.os }}-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: spm-${{ runner.os }}-
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.3.5'
         bundler-cache: true
+
+    - name: Prefetch OpenSSL binary artifact
+      run: ./scripts/prefetch-openssl-artifact.sh .build/SourcePackages
 
     - name: Run iOS unit tests
       uses: nick-fields/retry@v4

@@ -43,4 +43,14 @@ class VPNStatusProviderMock: VPNStatusProviderType {
         callback?(disconnectCalledWithCallbackError)
     }
 
+    var changeServerCalled = false
+    var changeServerCalledAttempt = 0
+    var changeServerCalledWithCallbackError: Error?
+    func changeServer(_ callback: SuccessLibraryCallback?) {
+
+        changeServerCalled = true
+        changeServerCalledAttempt += 1
+        callback?(changeServerCalledWithCallbackError)
+    }
+
 }

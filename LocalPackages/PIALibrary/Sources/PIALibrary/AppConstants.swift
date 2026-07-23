@@ -64,8 +64,14 @@ public struct AppConstants {
     }
 
     public struct Extensions {
-        public static let tunnelBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.Tunnel"
-        public static let tunnelWireguardBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel"
+        // Legacy per-protocol extensions (pre-PlatformSDK); live only while `usePlatformSDKVPN` is off.
+        public static let tunnelBundleIdentifier = Bundle.main.bundleIdentifier! + ".Tunnel"
+        public static let tunnelWireguardBundleIdentifier = Bundle.main.bundleIdentifier! + ".WG-Tunnel"
+
+        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard, replacing the legacy pair above.
+        public static let tunnelPlatformSDKBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-iOS"
+        public static let tunnelPlatformSDKTvOSBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-tvOS"
+
         public static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
 
@@ -90,8 +96,35 @@ public struct AppConstants {
     }
 
     public struct OpenVPNPacketSize {
-        public static let defaultPacketSize = 1400
+        public static let defaultPacketSize = 1420
         public static let smallPacketSize = 1350
+    }
+
+    /// OpenVPN data cipher options (stored as their OpenVPN raw values) plus the `ovpnConfig` blob
+    /// format the SDK OpenVPN controller expects. Single source of truth for both the user-driven
+    /// path (fallback when nothing is persisted) and the automatic pecking order (which dictates the
+    /// `default` cipher regardless of what the user saved).
+    public enum OpenVPNCrypto: String, CaseIterable {
+        case aes128gcm = "AES-128-GCM"
+        case aes256gcm = "AES-256-GCM"
+
+        /// Cipher dictated by the automatic pecking order per the connection-fallback spec, and the
+        /// fallback for the user path when no cipher is persisted.
+        public static let `default`: OpenVPNCrypto = .aes128gcm
+
+        /// Auth digest paired with PIA OpenVPN when none is persisted. There is no dedicated UI for
+        /// it — the app otherwise derives it from the OpenVPN session configuration.
+        public static let defaultAuth = "SHA256"
+
+        /// Formats the `ovpnConfig` blob the SDK OpenVPN controller expects.
+        public static func ovpnConfig(cipher: String, auth: String) -> String {
+            "cipher \(cipher)\nauth \(auth)"
+        }
+
+        /// This cipher's `ovpnConfig` blob, paired with the default auth digest.
+        public var ovpnConfig: String {
+            Self.ovpnConfig(cipher: rawValue, auth: Self.defaultAuth)
+        }
     }
 
     public struct IKEv2PacketSize {
@@ -102,6 +135,30 @@ public struct AppConstants {
     public struct WireGuardPacketSize {
         public static let defaultPacketSize = 1280
         public static let highPacketSize = 1420
+    }
+
+    /// App-group UserDefaults keys read by the PlatformSDK tunnel, keeping its config path
+    /// independent of the `TunnelKitOpenVPN`/`PIAWireguard` packages. The writer is
+    /// `AppPreferences` (app target); its `Entries` use the same literal strings, so these
+    /// values MUST stay in sync with that file.
+    public enum UserDefaultsKeys {
+        public enum OpenVPN {
+            /// Cipher, stored as its OpenVPN raw value (e.g. "AES-128-GCM").
+            public static let cipher = "OpenVPNCipher"
+            /// Auth digest, stored as its OpenVPN raw value (e.g. "SHA256").
+            public static let auth = "OpenVPNAuth"
+            /// Preferred port, stored as an `Int`; 0 means automatic.
+            public static let port = "OpenVPNPort"
+            /// Selected transport, stored as a `SocketType` raw value ("UDP"/"TCP"); absent = automatic.
+            public static let transport = "PIASocketType"
+            /// Small-packets toggle (`Bool`).
+            public static let useSmallPackets = "UseSmallPackets"
+        }
+
+        public enum WireGuard {
+            /// Small-packets toggle (`Bool`).
+            public static let useSmallPackets = "WireGuardUseSmallPackets"
+        }
     }
 
     public struct MagicLink {

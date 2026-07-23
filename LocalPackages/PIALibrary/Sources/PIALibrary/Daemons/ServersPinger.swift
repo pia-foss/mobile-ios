@@ -71,6 +71,7 @@ internal actor ServersPinger: DatabaseAccess {
             if Task.isCancelled { return .cancelled }
 
             self.inflightTask = nil
+            self.mirrorLatenciesToPlatformSDK(destinations)
             self.finish()
             return .completed
         }
@@ -97,6 +98,21 @@ internal actor ServersPinger: DatabaseAccess {
                 }
             }
         }
+    }
+
+    // Mirror the freshly measured latencies into the PlatformSDK shared state so the tunnel
+    // extension can pick the fastest server in its app-less fallback (see
+    // `PIATunnelSharedState.State.selectedServer(in:)`). The `servers` list it carries cannot
+    // hold this — `Server`'s Codable form drops `responseTime`. Keyed by `Server.identifier`;
+    // a DIP server shares its identifier with its base region but resolves to the same latency.
+    private func mirrorLatenciesToPlatformSDK(_ destinations: [Server]) {
+        let latencies = Dictionary(
+            destinations.compactMap { server in
+                accessedDatabase.plain.ping(forServerIdentifier: server.identifier).map { (server.identifier, $0) }
+            },
+            uniquingKeysWith: min
+        )
+        PIATunnelSharedState.updateLatencies(latencies)
     }
 
     private func pingServer(_ server: Server, address: Server.ServerAddressIP) async {

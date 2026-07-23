@@ -42,7 +42,10 @@ public final class VpnConnectionUseCase: VpnConnectionUseCaseType {
         connectionIntent.send(.connect)
 
         return try await withCheckedThrowingContinuation { continuation in
-            vpnProvider.connect { error in
+            // `changeServer` connects when disconnected and switches in place when already connected
+            // (on the PlatformSDK tunnel tvOS runs), so the same call covers first connect and region
+            // change without this use case needing to know the tunnel stack.
+            vpnProvider.changeServer { error in
                 if let error = error {
                     log.error("VPN connect failed: \(error.localizedDescription)")
                     self.connectionIntent.send(.none)
