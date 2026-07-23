@@ -110,7 +110,7 @@ class ConnectionTile: UIView, Tileable {
         // WireGuard under "Automatic", or the concrete UDP/TCP for an OpenVPN "Automatic" transport)
         // rather than the user's selection; otherwise fall back to the selected values.
         let connection = Client.providers.vpnProvider.actualConnection
-        let displayVPNType = connection?.vpnType ?? Client.preferences.vpnType
+        let displayVPNType = connection?.vpnType?.rawValue ?? Client.preferences.vpnType
         let displaySocket = connection?.transport.rawValue.uppercased() ?? displayVPNType.socket
 
         self.protocolLabel.text = displayVPNType.vpnProtocol

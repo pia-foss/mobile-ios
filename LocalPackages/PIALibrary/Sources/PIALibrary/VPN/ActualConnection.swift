@@ -28,9 +28,9 @@ import Foundation
 /// the app can't match). Callers fall back to the user's selection per field.
 public struct ActualConnection {
 
-    /// The VPN type (`vpnType` raw string) the tunnel resolved — e.g. the protocol picked under
-    /// "Automatic". `nil` when unresolved; fall back to the user-selected `currentVPNType`.
-    public let vpnType: String?
+    /// The VPN type the tunnel resolved — e.g. the protocol picked under "Automatic". `nil` when
+    /// unresolved; fall back to the user-selected `currentVPNType`.
+    public let vpnType: KapePlatformSDKVPNType?
 
     /// The `Server` the tunnel connected to — e.g. the fastest server resolved under "Automatic".
     /// `nil` when unresolved; fall back to the user-selected target server.
@@ -41,7 +41,7 @@ public struct ActualConnection {
     public let transport: PIATunnelSharedState.VPNTransport
 
     public init(
-        vpnType: String?,
+        vpnType: KapePlatformSDKVPNType?,
         server: Server?,
         transport: PIATunnelSharedState.VPNTransport
     ) {

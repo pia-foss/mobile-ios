@@ -211,6 +211,7 @@
         /// :nodoc:
         public func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((String?, Error?) -> Void)?) {
             guard let providerConfiguration = customConfiguration as? OpenVPN.ProviderConfiguration else {
+                log.error("[OpenVPN] requestLog: custom configuration is not an OpenVPN.ProviderConfiguration")
                 callback?(nil, nil)
                 return
             }
@@ -232,7 +233,8 @@
         /// :nodoc:
         public func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: ((Usage?, Error?) -> Void)?) {
             guard let providerConfiguration = customConfiguration as? OpenVPN.ProviderConfiguration else {
-                callback?(nil, nil)
+                log.error("[OpenVPN] requestDataUsage: custom configuration is not an OpenVPN.ProviderConfiguration")
+                callback?(nil, ClientError.vpnProfileUnavailable)
                 return
             }
 

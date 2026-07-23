@@ -76,10 +76,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     /// otherwise `nil` so callers fall back to the user's selection.
     public var actualConnection: ActualConnection? {
         guard let active = activeConnectionFromTunnel else { return nil }
-        let vpnType: String?
+        let vpnType: KapePlatformSDKVPNType?
         switch active.protocol {
-        case .wireGuard: vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
-        case .openVPN: vpnType = KapePlatformSDKVPNType.openVPN.rawValue
+        case .wireGuard: vpnType = .wireGuard
+        case .openVPN: vpnType = .openVPN
         case .automatic: vpnType = nil  // never written back resolved; ignore
         }
         let server = accessedProviders.serverProvider.find(withIdentifier: active.serverId)
@@ -172,30 +172,28 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
 
     private func seedInitialVPNStatus(from profile: VPNProfile?) {
-        #if os(iOS) || os(tvOS)
-            guard let profile else {
-                return
-            }
+        guard let profile else {
+            return
+        }
 
-            // Every current profile exposes a loaded `NEVPNManager` (IKEv2) or
-            // `NETunnelProviderManager` (the tunnel profiles) by the time `prepare` completes, so
-            // read the live connection status directly.
-            guard let manager = profile.native as? NEVPNManager else {
-                return
-            }
+        // Every current profile exposes a loaded `NEVPNManager` (IKEv2) or
+        // `NETunnelProviderManager` (the tunnel profiles) by the time `prepare` completes, so
+        // read the live connection status directly.
+        guard let manager = profile.native as? NEVPNManager else {
+            return
+        }
 
-            let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
-            let resolvedStatus = VPNStatus.resolve(system: manager.connection.status, tunnel: tunnel)
+        let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
+        let resolvedStatus = VPNStatus.resolve(system: manager.connection.status, tunnel: tunnel)
 
-            // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
-            // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
-            // `connectedDate`; only fill when missing so an existing value is preserved.
-            if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
-                Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
-            }
+        // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
+        // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
+        // `connectedDate`; only fill when missing so an existing value is preserved.
+        if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
+            Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
+        }
 
-            accessedDatabase.transient.vpnStatus = resolvedStatus
-        #endif
+        accessedDatabase.transient.vpnStatus = resolvedStatus
     }
 
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {

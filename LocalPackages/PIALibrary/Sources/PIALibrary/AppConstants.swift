@@ -141,8 +141,8 @@ public struct AppConstants {
     /// independent of the `TunnelKitOpenVPN`/`PIAWireguard` packages. The writer is
     /// `AppPreferences` (app target); its `Entries` use the same literal strings, so these
     /// values MUST stay in sync with that file.
-    public struct UserDefaultsKeys {
-        public struct OpenVPN {
+    public enum UserDefaultsKeys {
+        public enum OpenVPN {
             /// Cipher, stored as its OpenVPN raw value (e.g. "AES-128-GCM").
             public static let cipher = "OpenVPNCipher"
             /// Auth digest, stored as its OpenVPN raw value (e.g. "SHA256").
@@ -155,7 +155,7 @@ public struct AppConstants {
             public static let useSmallPackets = "UseSmallPackets"
         }
 
-        public struct WireGuard {
+        public enum WireGuard {
             /// Small-packets toggle (`Bool`).
             public static let useSmallPackets = "WireGuardUseSmallPackets"
         }
