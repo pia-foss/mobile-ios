@@ -18,6 +18,7 @@ public struct DebugMenuView: View {
     @State private var logSnapshot: String = ""
     @State private var isSendingReport = false
     @State private var reportResult: ReportResult? = nil
+    @State private var isPresentingManageSubscriptions: Bool = false
     @State private var isLoadingRefundTransaction = false
     @State private var refundTransactionId: UInt64 = 0
     @State private var isRefundSheetPresented = false
@@ -35,6 +36,7 @@ public struct DebugMenuView: View {
                 )
             }
             #if os(iOS)
+                .manageSubscriptionsSheet(isPresented: $isPresentingManageSubscriptions)
                 .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
                     switch result {
                     case .success(let status):
@@ -239,6 +241,9 @@ public struct DebugMenuView: View {
 
     private var subscriptionSection: some View {
         DebugSection("Subscription") {
+            Button("Manage Subscriptions") {
+                isPresentingManageSubscriptions = true
+            }
             Button {
                 isLoadingRefundTransaction = true
                 Task { @MainActor in
