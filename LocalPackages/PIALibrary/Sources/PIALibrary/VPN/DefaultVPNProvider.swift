@@ -427,6 +427,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
 
         let targetServer: Server
+        var usesServerPlaceholder = false
         if let resolvedServer = try? accessedProviders.serverProvider.targetServer {
             targetServer = resolvedServer
         } else if allowServerPlaceholder {
@@ -436,6 +437,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             // the real server and re-saves before starting the tunnel.
             log.warning("vpnClientConfiguration: No target server available, using permission placeholder")
             targetServer = .vpnPermissionPlaceholder
+            usesServerPlaceholder = true
         } else {
             log.error("vpnClientConfiguration: No target server available")
             return nil
@@ -448,7 +450,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
             server: targetServer,
-            isOnDemand: accessedPreferences.isPersistentConnection,
+            // A placeholder profile must never carry on-demand rules: if an enabled
+            // manager already exists, doSave would honor them and the OS could try
+            // to bring up a tunnel to the placeholder endpoint on its own.
+            isOnDemand: usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration,
             leakProtection: accessedPreferences.leakProtection,

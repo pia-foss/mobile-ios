@@ -68,7 +68,12 @@ let package = Package(
         .testTarget(
             name: "PIALibraryTests",
             dependencies: [
-                "PIALibrary"
+                "PIALibrary",
+                .product(
+                    name: "TunnelKitOpenVPN",
+                    package: "mobile-ios-openvpn",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                )
             ],
             resources: [
                 .process("Resources")

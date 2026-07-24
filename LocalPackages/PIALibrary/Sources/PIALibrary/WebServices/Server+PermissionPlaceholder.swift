@@ -30,12 +30,19 @@ extension Server {
     /// The saved configuration is inert: `connect()` always re-resolves the real
     /// `targetServer` and re-saves the profile before starting the tunnel, so this
     /// endpoint is never actually dialed.
-    static let vpnPermissionPlaceholder = Server(
-        serial: "",
-        name: "VPN Permission Placeholder",
-        country: "us",
-        hostname: "placeholder.privateinternetaccess.com",
-        pingAddress: nil,
-        regionIdentifier: "vpn-permission-placeholder"
-    )
+    ///
+    /// The hostname uses the RFC 6761 reserved `.invalid` TLD: it can never resolve
+    /// and never collides with PIA-domain checks such as `needsMigrationToGEN4()`.
+    /// Computed (not `static let`) because `Server` is a mutable class — each access
+    /// returns a fresh instance instead of a shared, mutable process-wide one.
+    static var vpnPermissionPlaceholder: Server {
+        Server(
+            serial: "",
+            name: "VPN Permission Placeholder",
+            country: "us",
+            hostname: "vpn-permission-placeholder.invalid",
+            pingAddress: nil,
+            regionIdentifier: "vpn-permission-placeholder"
+        )
+    }
 }

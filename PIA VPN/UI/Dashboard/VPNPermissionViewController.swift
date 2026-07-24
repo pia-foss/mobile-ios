@@ -73,13 +73,18 @@ final class VPNPermissionViewController: AutolayoutViewController {
 
     @IBAction private func submit() {
         let vpn = Client.providers.vpnProvider
-        vpn.obtainVPNPermission { (error) in
-            if let error {
-                log.error("Failed to obtain VPN permission: \(error)")
-                self.alertRequiredPermission()
-                return
+        vpn.obtainVPNPermission { [weak self] (error) in
+            // saveToPreferences does not document its completion queue; hop to
+            // main before touching UIKit.
+            DispatchQueue.main.async {
+                guard let self else { return }
+                if let error {
+                    log.error("Failed to obtain VPN permission: \(error)")
+                    self.alertRequiredPermission()
+                    return
+                }
+                self.dismissingViewController?.dismiss(animated: true)
             }
-            self.dismissingViewController?.dismiss(animated: true)
         }
     }
 
