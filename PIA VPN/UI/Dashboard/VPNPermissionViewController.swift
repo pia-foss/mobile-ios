@@ -75,7 +75,8 @@ final class VPNPermissionViewController: AutolayoutViewController {
         let vpn = Client.providers.vpnProvider
         vpn.install(
             force: true,
-            { (error) in
+            { [weak self] (error) in
+                guard let self else { return }
                 if let error {
                     log.error("Failed to install VPN: \(error)")
                     self.alertRequiredPermission()
@@ -96,10 +97,22 @@ final class VPNPermissionViewController: AutolayoutViewController {
                 self.contactCustomerSupport()
             }
         }
-        alert.addCancelActionWithTitle(L10n.Global.ok) {
-            self.submit()
+        alert.addCancelActionWithTitle(L10n.Global.ok) { [weak self] in
+            guard let self else { return }
+            self.refreshServersAndRetry()
         }
         present(alert, animated: true, completion: nil)
+    }
+
+    private func refreshServersAndRetry() {
+        Client.providers.serverProvider.download { [weak self] (servers, _) in
+            guard let self else { return }
+            if let servers, !servers.isEmpty {
+                self.submit()
+            } else {
+                self.alertRequiredPermission()
+            }
+        }
     }
 
     private func contactCustomerSupport() {
