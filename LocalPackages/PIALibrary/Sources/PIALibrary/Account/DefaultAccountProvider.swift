@@ -419,8 +419,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return .failure(error)
             case .success(let products):
                 log.debug("Available products from store: \(products)")
+                let planProducts = self.planProducts
+                if planProducts == nil {
+                    log.debug("\(#function) returning empty products")
+                }
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: planProducts ?? [:]])
-                return .success(planProducts!)
+                return .success(planProducts ?? [:])
             }
         }
 
