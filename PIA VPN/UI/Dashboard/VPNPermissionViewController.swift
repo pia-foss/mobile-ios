@@ -73,16 +73,14 @@ final class VPNPermissionViewController: AutolayoutViewController {
 
     @IBAction private func submit() {
         let vpn = Client.providers.vpnProvider
-        vpn.install(
-            force: true,
-            { (error) in
-                if let error {
-                    log.error("Failed to install VPN: \(error)")
-                    self.alertRequiredPermission()
-                    return
-                }
-                self.dismissingViewController?.dismiss(animated: true)
-            })
+        vpn.obtainVPNPermission { (error) in
+            if let error {
+                log.error("Failed to obtain VPN permission: \(error)")
+                self.alertRequiredPermission()
+                return
+            }
+            self.dismissingViewController?.dismiss(animated: true)
+        }
     }
 
     private func alertRequiredPermission() {
@@ -96,9 +94,10 @@ final class VPNPermissionViewController: AutolayoutViewController {
                 self.contactCustomerSupport()
             }
         }
-        alert.addCancelActionWithTitle(L10n.Global.ok) {
-            self.submit()
-        }
+        // Just dismiss the alert. The permission screen stays on screen, so the
+        // user can retry via its OK button. Auto-retrying from here created an
+        // undismissable alert loop when the install failed instantly (KM-17461).
+        alert.addCancelActionWithTitle(L10n.Global.ok) {}
         present(alert, animated: true, completion: nil)
     }
 
