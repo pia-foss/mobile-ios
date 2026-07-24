@@ -82,17 +82,44 @@ public class Keychain {
 
     /// :nodoc:
     public func set(password: String, for username: String) throws {
-        removePassword(for: username)
+        guard let data = password.data(using: .utf8) else {
+            throw KeychainError.add
+        }
 
         var query = [String: Any]()
         setScope(query: &query)
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrAccount as String] = username
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-        query[kSecValueData as String] = password.data(using: .utf8)
 
-        let status = SecItemAdd(query as CFDictionary, nil)
-        guard (status == errSecSuccess) else {
+        let attributesToUpdate: [String: Any] = [
+            kSecValueData as String: data,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+        ]
+        let updateStatus = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
+
+        switch updateStatus {
+        case errSecSuccess:
+            return
+        case errSecItemNotFound:
+            // No existing item — add a fresh one.
+            query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            query[kSecValueData as String] = data
+            let addStatus = SecItemAdd(query as CFDictionary, nil)
+            switch addStatus {
+            case errSecSuccess:
+                return
+            case errSecDuplicateItem:
+                // Lost a first-write race — the item now exists, so update it in place.
+                query.removeValue(forKey: kSecAttrAccessible as String)
+                query.removeValue(forKey: kSecValueData as String)
+                guard SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary) == errSecSuccess
+                else {
+                    throw KeychainError.add
+                }
+            default:
+                throw KeychainError.add
+            }
+        default:
             throw KeychainError.add
         }
     }
