@@ -44,7 +44,6 @@ final class PurchaseProductUseCaseTests: XCTestCase {
         // THEN purchaseProduct returns the provided transaction
         XCTAssertEqual(result.identifier, stub.identifier)
         XCTAssertEqual(result.description, stub.description)
-        XCTAssertNil(result.native)
     }
 
     func test_purchaseProduct_throws_an_error_when_purchaseProductsProvider_completes_with_an_error() async throws {

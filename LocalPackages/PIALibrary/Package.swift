@@ -20,6 +20,7 @@ let package = Package(
         .package(path: "../PIAKPI"),
         .package(path: "../PIACSI"),
         .package(path: "../PIAAccount"),
+        .package(path: "../PIABase"),
         .package(path: "../PIARegions"),
         .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
         .package(url: "git@github.com:pia-foss/mobile-ios-openvpn.git", exact: "2.2.6"),
@@ -37,6 +38,7 @@ let package = Package(
                 .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "PIARegions"),
                 .product(name: "PIAAccount", package: "PIAAccount"),
+                .product(name: "PIABase", package: "PIABase"),
                 .product(
                     name: "PIAWireguard",
                     package: "mobile-ios-wireguard",

@@ -46,13 +46,6 @@ struct PIACSISubscriptionInformationProvider: CSIDataProvider {
         lines.append("is_recurring: \(info.isRecurring)")
         lines.append("can_invite: \(info.canInvite)")
         lines.append("expire_alert: \(info.shouldPresentExpirationAlert)")
-        lines.append("")
-        lines.append("=== Payment Receipt ===")
-        if let receipt = Client.store.paymentReceipt?.base64EncodedString() {
-            lines.append(receipt)
-        } else {
-            lines.append("none")
-        }
 
         return lines.joined(separator: "\n")
     }

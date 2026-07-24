@@ -28,6 +28,8 @@ import PIALocalizations
 import PIAUIKit
 import UIKit
 
+private let log = PIALogger.logger(for: VPNPermissionViewController.self)
+
 final class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var contentCardView: UIView!
     private weak var contentLeadingConstraint: NSLayoutConstraint?
@@ -74,13 +76,12 @@ final class VPNPermissionViewController: AutolayoutViewController {
         vpn.install(
             force: true,
             { (error) in
-                guard (error == nil) else {
+                if let error {
+                    log.error("Failed to install VPN: \(error)")
                     self.alertRequiredPermission()
                     return
                 }
-                self.dismissingViewController?.dismiss(animated: true) {
-                    //                vpn.connect(nil)
-                }
+                self.dismissingViewController?.dismiss(animated: true)
             })
     }
 

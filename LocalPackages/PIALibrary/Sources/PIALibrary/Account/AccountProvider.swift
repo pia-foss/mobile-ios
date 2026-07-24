@@ -21,6 +21,8 @@
 //
 
 import Foundation
+import PIABase
+import StoreKit
 
 /// Business interface related to user account.
 public protocol AccountProvider: AnyObject {
@@ -176,20 +178,16 @@ public protocol AccountProvider: AnyObject {
     func featureFlags(_ callback: SuccessLibraryCallback?)
 
     #if os(iOS) || os(tvOS)
-        /**
-         Lists the available plans with their corresponding product to purchase in order to get them.
+        /// Lists the available plans with their corresponding product to purchase in order to get them.
+        ///
+        /// - Returns: Map of `Plan`s with the associated `InAppProduct` to purchase.
+        func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError>
 
-         - Parameter callback: Returns a map of `Plan`s with the associated `InAppProduct` to purchase.
-         */
-        func listPlanProducts(_ callback: LibraryCallback<[Plan: any InAppProduct]>?)
-
-        /**
-         Purchases a subscription plan and save purchase to history.
-
-         - Parameter plan: The plan to purchase.
-         - Parameter callback: Returns an `InAppTransaction` for subsequent sign-up.
-         */
-        func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?)
+        /// Purchases a subscription plan and save purchase to history.
+        ///
+        /// - Parameter plan: The plan to purchase.
+        /// - Returns: `InAppTransaction` for subsequent sign-up.
+        func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError>
 
         /**
          Check if the user has access to our servers from the country where is based.
@@ -198,12 +196,8 @@ public protocol AccountProvider: AnyObject {
          */
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?)
 
-        /**
-         Restores the purchase history, possibly recovering from corruption.
-
-         - Parameter callback: Returns `nil` on success.
-         */
-        func restorePurchases(_ callback: SuccessLibraryCallback?)
+        /// Restores the purchase history, possibly recovering from corruption.
+        func restorePurchases() async -> Result<JWS, ClientError>
 
         /**
         Send a login link to the email provided as parameter.
@@ -254,4 +248,20 @@ public protocol AccountProvider: AnyObject {
          */
         func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?)
     #endif
+}
+
+public extension AccountProvider {
+    func subscriptionInformation() async -> Result<AppStoreInformation, Error> {
+        return await withCheckedContinuation { continuation in
+            subscriptionInformation { information, error in
+                if let error {
+                    continuation.resume(returning: .failure(error))
+                } else if let information {
+                    continuation.resume(returning: .success(information))
+                } else {
+                    preconditionFailure("callback returned neither error nor result")
+                }
+            }
+        }
+    }
 }

@@ -62,7 +62,6 @@ final class DecoratorPurchaseProductsProviderTests: XCTestCase {
 
         XCTAssertEqual(capturedTransaction.identifier, transactionStub.identifier)
         XCTAssertEqual(capturedTransaction.description, transactionStub.description)
-        XCTAssertNil(capturedTransaction.native)
     }
 
     func test_purchase_fails_with_generic_error_when_provider_returns_error_without_transaction() throws {

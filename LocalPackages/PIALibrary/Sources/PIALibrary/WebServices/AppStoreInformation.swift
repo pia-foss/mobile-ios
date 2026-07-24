@@ -22,8 +22,8 @@
 
 import Foundation
 
-public struct AppStoreInformation: Codable {
-    public let products: [Product]
+public struct AppStoreInformation: Codable, Sendable {
+    public let products: [PIAProduct]
     public let eligibleForTrial: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -31,7 +31,7 @@ public struct AppStoreInformation: Codable {
         case eligibleForTrial = "eligible_for_trial"
     }
 
-    public init(products: [Product], eligibleForTrial: Bool) {
+    public init(products: [PIAProduct], eligibleForTrial: Bool) {
         self.products = products
         self.eligibleForTrial = eligibleForTrial
     }

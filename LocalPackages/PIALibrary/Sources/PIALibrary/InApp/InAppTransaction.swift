@@ -21,19 +21,24 @@
 //
 
 import Foundation
+import PIABase
 
 /// Wraps any native implementation of an in-app transaction by providing a common interface.
-public protocol InAppTransaction: AnyObject, CustomStringConvertible {
+public protocol InAppTransaction<Native>: CustomStringConvertible {
+    associatedtype Native
 
     /// The transaction identifier.
-    var identifier: String? { get }
+    var identifier: String { get }
+
+    /// The signed JWS representation of the transaction, sent to the backend as the `receipt`.
+    var jwsRepresentation: JWS { get }
 
     /// The underlying native transaction implementation.
-    var native: Any? { get }
+    var native: Native { get }
+
+    func finish() async
 }
 
 extension InAppTransaction {
-    var description: String {
-        return identifier ?? "InAppTransaction"
-    }
+    var description: String { identifier }
 }

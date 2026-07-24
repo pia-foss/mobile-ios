@@ -534,6 +534,7 @@
 "signup.failure.title"= "Falló la creación de la cuenta";
 "signup.failure.message"= "No pudimos crear una cuenta en este momento. Por favor, inténtalo de nuevo más tarde. \nSi vuelves a abrir la aplicación intentaremos crear una cuenta otra vez.";
 "signup.failure.purchase.sandbox.message"= "La suscripción del entorno aislado seleccionado no está disponible en la producción.";
+"signup.failure.purchase.pending.message"= "Tu compra está pendiente de aprobación. Una vez aprobada, vuelve a abrir la aplicación para terminar de configurar tu cuenta.";
 "signup.failure.redeem.invalid.title"= "El PIN de la tarjeta no es válido";
 "signup.failure.redeem.invalid.message"= "Parece que ingresaste un PIN de tarjeta inválido. Por favor, inténtalo de nuevo.";
 "signup.failure.redeem.claimed.title"= "La tarjeta ya fue reclamada";

@@ -534,6 +534,7 @@
 "signup.failure.title"= "สร้างบัญชีผู้ใช้ไม่สำเร็จ";
 "signup.failure.message"= "เราไม่สามารถสร้างบัญชีได้ในขณะนี้ กรุณาลองใหม่อีกครั้งภายหลัง การปิดเปิดแอปใหม่จะเป็นการพยายามสร้างบัญชีใหม่";
 "signup.failure.purchase.sandbox.message"= "ไม่มีระบบสมาชิก Sandbox ที่คุณเลือกอยู่ในการผลิต";
+"signup.failure.purchase.pending.message"= "การซื้อของคุณกำลังรอการอนุมัติ เมื่อได้รับการอนุมัติแล้ว โปรดเปิดแอปอีกครั้งเพื่อตั้งค่าบัญชีของคุณให้เสร็จสมบูรณ์";
 "signup.failure.redeem.invalid.title"= "PIN การ์ดไม่ถูกต้อง";
 "signup.failure.redeem.invalid.message"= "ดูเหมือนว่าคุณใส่ PIN การ์ดไม่ถูกต้อง กรุณาลองใหม่";
 "signup.failure.redeem.claimed.title"= "บัตรมีการใช้สิทธิ์แล้ว";

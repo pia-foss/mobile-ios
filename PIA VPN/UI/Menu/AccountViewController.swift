@@ -119,12 +119,17 @@ final class AccountViewController: AutolayoutViewController {
     // MARK: Actions
 
     @IBAction private func renewSubscriptionWithUncreditedPurchase(_ sender: Any?) {
-        Client.providers.accountProvider.restorePurchases { (error) in
-            if let error = error {
-                self.handleReceiptFailureWithError(error)
-                return
+        Task { [weak self] in
+            guard let self else { return }
+            let result = await Client.providers.accountProvider.restorePurchases()
+            await MainActor.run {
+                switch result {
+                case .failure(let error):
+                    self.handleReceiptFailureWithError(error)
+                case .success:
+                    self.handleReceiptRefresh()
+                }
             }
-            self.handleReceiptRefresh()
         }
     }
 

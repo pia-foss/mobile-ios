@@ -534,6 +534,7 @@
 "signup.failure.title"= "Błąd tworzenia konta";
 "signup.failure.message"= "Obecnie nie możemy utworzyć konta. Spróbuj ponownie później.";
 "signup.failure.purchase.sandbox.message"= "Wybrana subskrypcja na piaskownicę (środowisko testowe) nie jest dostępna w produkcji.";
+"signup.failure.purchase.pending.message"= "Twój zakup oczekuje na zatwierdzenie. Po zatwierdzeniu ponownie otwórz aplikację, aby dokończyć konfigurację konta.";
 "signup.failure.redeem.invalid.title"= "Nieprawidłowy PIN karty";
 "signup.failure.redeem.invalid.message"= "Wygląda na to, ze wpisałeś nieprawidłowy PIN karty. Spróbuj ponownie.";
 "signup.failure.redeem.claimed.title"= "Karta już użyta";

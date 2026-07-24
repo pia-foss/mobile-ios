@@ -7,24 +7,36 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
+import StoreKit
 
 class InAppProviderSpy: InAppProvider {
     var startObservingTransactionsCalledAttempt = 0
-    var refreshPaymentReceiptCalledAttempt = 0
-    var availableProducts: [InAppProduct]?
-    var paymentReceipt: Data?
+    var availableProducts: [any InAppProduct]?
+    var entitlementJWS: JWS?
 
     func startObservingTransactions() {
         startObservingTransactionsCalledAttempt += 1
     }
 
     func stopObservingTransactions() {}
-    func fetchProducts(identifiers: [String], _ callback: LibraryCallback<[InAppProduct]>?) {}
-    func purchaseProduct(_ product: InAppProduct, _ callback: LibraryCallback<InAppTransaction>?) {}
-    func finishTransaction(_ transaction: InAppTransaction, success: Bool) {}
-    func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
-        refreshPaymentReceiptCalledAttempt += 1
-        callback?(nil)
+
+    func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
+        return .success([])
+    }
+
+    func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
+        return .failure(.productUnavailable)
+    }
+
+    func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {}
+
+    func currentEntitlementJWS() async -> JWS? {
+        return entitlementJWS
+    }
+
+    func synchronizeEntitlements() async -> Error? {
+        return nil
     }
 }

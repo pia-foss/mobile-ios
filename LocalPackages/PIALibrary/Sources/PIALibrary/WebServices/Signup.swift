@@ -21,17 +21,19 @@
 //
 
 import Foundation
+import PIABase
 
 public struct Signup {
     let email: String
 
-    let receipt: Data
+    /// The signed JWS transaction sent to the backend as `receipt`.
+    let receipt: JWS
 
     var marketing: [String: Any]?
 
     var debug: [String: Any]?
 
-    init(email: String, receipt: Data) {
+    init(email: String, receipt: JWS) {
         self.email = email
         self.receipt = receipt
     }
@@ -41,18 +43,18 @@ private let log = PIALogger.logger(for: SignupRequest.self)
 
 #if os(iOS) || os(tvOS)
     extension SignupRequest {
-        func signup(withStore store: InAppProvider) -> Signup? {
-            var receipt: Data? = store.paymentReceipt
-
-            retryReadReceipt: for attempt in 0..<5 {
-                if let receipt, receipt.count > 100 { break retryReadReceipt }
-                Thread.sleep(forTimeInterval: 0.250)
-                log.debug("Re reading payment receipt \(attempt)...")
-                receipt = store.paymentReceipt
+        func signup(withStore store: InAppProvider) async -> Signup? {
+            // Prefer the JWS of the freshly purchased transaction; otherwise fall back to
+            // the newest active entitlement (e.g. signing up after a restore).
+            let jws: JWS?
+            if let transaction {
+                jws = transaction.jwsRepresentation
+            } else {
+                jws = await store.currentEntitlementJWS()
             }
 
-            guard let receipt else { return nil }
-            var object = Signup(email: email, receipt: receipt)
+            guard let jws else { return nil }
+            var object = Signup(email: email, receipt: jws)
             object.marketing = marketing
             if let txid = transaction?.identifier {
                 object.debug = ["txid": txid]

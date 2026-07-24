@@ -534,6 +534,7 @@
 "signup.failure.title"= "La création du compte a échoué";
 "signup.failure.message"= "Nous ne parvenons pas à créer un compte pour l'instant. Veuillez réessayer plus tard. \n\nRouvrir l'application engendrera une nouvelle tentative de création de compte.";
 "signup.failure.purchase.sandbox.message"= "L'abonnement sandbox sélectionné n'est pas disponible en production.";
+"signup.failure.purchase.pending.message"= "Votre achat est en attente d'approbation. Une fois approuvé, rouvrez l'application pour terminer la configuration de votre compte.";
 "signup.failure.redeem.invalid.title"= "Code PIN de la carte invalide";
 "signup.failure.redeem.invalid.message"= "Il semblerait que le code PIN de la carte saisie soit invalide. Veuillez réessayer.";
 "signup.failure.redeem.claimed.title"= "Carte déjà utilisée";

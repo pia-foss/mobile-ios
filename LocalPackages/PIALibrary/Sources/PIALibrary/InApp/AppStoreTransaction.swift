@@ -21,20 +21,24 @@
 //
 
 import Foundation
+import PIABase
 import StoreKit
 
-class AppStoreTransaction: InAppTransaction {
-    var identifier: String? {
-        return nativeTransaction.transactionIdentifier
+struct AppStoreTransaction: InAppTransaction<Transaction> {
+    var identifier: String {
+        return String(native.id)
     }
 
-    let native: Any?
+    let native: Transaction
 
-    private var nativeTransaction: SKPaymentTransaction {
-        return native as! SKPaymentTransaction
-    }
+    let jwsRepresentation: JWS
 
-    init(native: SKPaymentTransaction) {
+    init(native: Transaction, jwsRepresentation: JWS) {
         self.native = native
+        self.jwsRepresentation = jwsRepresentation
+    }
+
+    func finish() async {
+        await native.finish()
     }
 }

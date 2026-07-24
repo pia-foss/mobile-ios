@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 
 final class MockWebServices: WebServices {
 
@@ -46,7 +47,7 @@ final class MockWebServices: WebServices {
 
     func token(credentials: Credentials) async throws {}
 
-    func token(receipt: Data) async throws {}
+    func token(receipt: JWS) async throws {}
 
     func info() async throws -> AccountInfo {
         let result = accountInfo?()
@@ -102,10 +103,10 @@ final class MockWebServices: WebServices {
         return ""
     }
 
-    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation? {
+    func subscriptionInformation(with receipt: JWS?) async throws -> AppStoreInformation? {
         let result = { () -> AppStoreInformation? in
             if let receipt = receipt {
-                if receipt.count == 0 {
+                if receipt.isEmpty {
                     return self.appstoreInformationNotEligible?()
                 } else {
                     return self.appstoreInformationEligibleButDisabledFromBackend?()

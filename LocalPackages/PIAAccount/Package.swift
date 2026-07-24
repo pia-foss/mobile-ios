@@ -16,11 +16,16 @@ let package = Package(
             targets: ["PIAAccount"]
         )
     ],
+    dependencies: [
+        .package(path: "../PIABase")
+    ],
     targets: [
         // Main library target (merged for simplicity)
         .target(
             name: "PIAAccount",
-            dependencies: [],
+            dependencies: [
+                .product(name: "PIABase", package: "PIABase")
+            ],
             path: "Sources"
         ),
         // Test target using Swift Testing

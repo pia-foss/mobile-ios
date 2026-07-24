@@ -61,6 +61,9 @@ public enum ClientError: Error, Equatable {
     /// The Wireguard Token is missing.
     case missingWireguardToken
 
+    /// Operation was interrupted by the user. Can be ignored most of the time.
+    case userCancelled
+
     /// Internal error in the `mobile-shared-account` library (code 600)
     case libraryError(message: String?)
 
@@ -94,6 +97,10 @@ public enum ClientError: Error, Equatable {
 
         /// The selected sandbox subscription is not available in production.
         case sandboxPurchase
+
+        /// The purchase is pending external action (e.g. "Ask to Buy" approval or SCA).
+        /// The transaction will be delivered later through `Transaction.updates`.
+        case purchasePending
 
         /// Cant retrieve regions
         case noRegions

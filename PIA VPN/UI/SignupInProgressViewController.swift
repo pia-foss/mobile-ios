@@ -91,6 +91,9 @@ final class SignupInProgressViewController: AutolayoutViewController, BrandableN
                     topViewController: self
                 )
             } else {
+                Task {
+                    await request.transaction?.finish()
+                }
                 self.perform(segue: StoryboardSegue.Signup.successSegueIdentifier)
             }
         }

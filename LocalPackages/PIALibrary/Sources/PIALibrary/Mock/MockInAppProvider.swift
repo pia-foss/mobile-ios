@@ -21,14 +21,16 @@
 //
 
 import Foundation
+import PIABase
+import StoreKit
 
 #if os(iOS) || os(tvOS)
-    private final class MockProduct: InAppProduct {
+    struct MockProduct: InAppProduct {
         enum Native { case none }
 
         let identifier: String
 
-        let price: NSNumber
+        let price: Decimal
 
         let priceLocale = Locale.current
 
@@ -36,26 +38,32 @@ import Foundation
 
         var hasIntroOffer: Bool { false }
 
-        init(_ identifier: String, _ price: NSNumber) {
+        init(_ identifier: String, _ price: Decimal) {
             self.identifier = identifier
             self.price = price
         }
     }
 
-    private final class MockTransaction: InAppTransaction {
-        let identifier: String? = "1234567890"
+    private struct MockTransaction: InAppTransaction {
+        enum Native { case none }
 
-        let native: Any? = nil
+        let identifier: String = "1234567890"
+
+        let jwsRepresentation: JWS = JWS("mock-jws-transaction")!
+
+        let native: Native = .none
+
+        func finish() async {}
     }
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {
 
-        init(with receipt: Data? = Data()) {
-            self.paymentReceipt = receipt
+        init(jws: JWS? = JWS("mock-jws-transaction")!) {
+            self.entitlementJWS = jws
         }
         var availableProducts: [any InAppProduct]?
 
-        var paymentReceipt: Data?
+        var entitlementJWS: JWS?
 
         func startObservingTransactions() {
         }
@@ -63,29 +71,28 @@ import Foundation
         func stopObservingTransactions() {
         }
 
-        func fetchProducts(identifiers: [String], _ callback: (([any InAppProduct]?, Error?) -> Void)?) {
+        func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
             availableProducts = []
             for (i, identifier) in accessedConfiguration.allProductIdentifiers().enumerated() {
-                let price = (Double(i + 1) * 50.0) as NSNumber
+                let price = (Decimal(i + 1) * 50.0)
                 availableProducts?.append(MockProduct(identifier, price))
             }
-            callback?(availableProducts, nil)
-            Macros.postNotification(
-                .__InAppDidFetchProducts,
-                [
-                    .products: availableProducts!
-                ])
+            return .success(availableProducts ?? [])
         }
 
-        func purchaseProduct(_ product: any InAppProduct, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-            callback?(MockTransaction(), nil)
+        func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
+            return .success(MockTransaction())
         }
 
-        func finishTransaction(_ transaction: InAppTransaction, success: Bool) {
+        func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
         }
 
-        func refreshPaymentReceipt(_ callback: SuccessLibraryCallback?) {
-            callback?(nil)
+        func currentEntitlementJWS() async -> JWS? {
+            return entitlementJWS
+        }
+
+        func synchronizeEntitlements() async -> Error? {
+            return nil
         }
     }
 #endif

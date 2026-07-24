@@ -1,6 +1,8 @@
 import Foundation
 @preconcurrency import PIALibrary
 
+import struct PIABase.JWS
+
 @available(iOS 16, *)
 extension DebugMenuView {
     var appVersion: String {
@@ -51,8 +53,8 @@ extension DebugMenuView {
         return formatter.string(from: date)
     }
 
-    var receiptBase64: String? {
-        Client.store.paymentReceipt?.base64EncodedString()
+    var transactionJWS: JWS? {
+        entitlementJWS
     }
 
     var logs: String {
@@ -74,8 +76,8 @@ extension DebugMenuView {
         lines.append("Is Renewable: \(isRenewable)")
         lines.append("Is Recurring: \(isRecurring)")
         lines.append("")
-        lines.append("=== Payment Receipt ===")
-        lines.append(receiptBase64 ?? "Not available")
+        lines.append("=== Transaction (JWS) ===")
+        lines.append(transactionJWS?.value ?? "Not available")
         lines.append("")
         lines.append("=== Logs ===")
         lines.append(logs)

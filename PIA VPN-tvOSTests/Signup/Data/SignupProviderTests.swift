@@ -153,42 +153,4 @@ final class SignupProviderTests: XCTestCase {
 
         XCTAssertEqual(error, .generic)
     }
-
-    func test_signup_refreshes_payment_when_there_is_no_paymentReceipt() {
-        // GIVEN there is no payment receipt
-        fixture.storeSpy.paymentReceipt = nil
-        let user = UserAccount.makeStub()
-        let error: Error? = nil
-
-        instantiateSut(accountProviderResult: (user, error))
-        let expectation = expectation(description: "Waiting for signup to finish")
-
-        // WHEN signup is executed
-        sut.signup(email: "anEmail", transaction: nil) { result in
-            expectation.fulfill()
-        }
-
-        // THEN refreshPaymentReceipt method from storeSpy is called
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(fixture.storeSpy.refreshPaymentReceiptCalledAttempt, 1)
-    }
-
-    func test_signup_does_not_refresh_payment_when_there_is_a_paymentReceipt() {
-        // GIVEN there is no payment receipt
-        fixture.storeSpy.paymentReceipt = Data()
-        let user = UserAccount.makeStub()
-        let error: Error? = nil
-
-        instantiateSut(accountProviderResult: (user, error))
-        let expectation = expectation(description: "Waiting for signup to finish")
-
-        // WHEN signup is executed
-        sut.signup(email: "anEmail", transaction: nil) { result in
-            expectation.fulfill()
-        }
-
-        // THEN refreshPaymentReceipt method from storeSpy is not called
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(fixture.storeSpy.refreshPaymentReceiptCalledAttempt, 0)
-    }
 }

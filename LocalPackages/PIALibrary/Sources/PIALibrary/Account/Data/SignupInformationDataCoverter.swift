@@ -1,10 +1,10 @@
 import Foundation
 
-class SignupInformationDataCoverter: SignupInformationDataCoverterType {
+final class SignupInformationDataCoverter: SignupInformationDataCoverterType {
     func callAsFunction(signup: Signup) -> Data? {
         let signupInformation = SignupInformation(
             store: "apple_app_store",
-            receipt: signup.receipt.base64EncodedString(),
+            receipt: signup.receipt,
             email: signup.email,
             marketing: stringify(json: signup.marketing, prettyPrinted: false),
             debug: stringify(json: signup.debug, prettyPrinted: false))

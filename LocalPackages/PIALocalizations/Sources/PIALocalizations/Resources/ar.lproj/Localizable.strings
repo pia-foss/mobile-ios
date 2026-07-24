@@ -534,6 +534,7 @@
 "signup.failure.title"= "فشل إنشاء الحساب";
 "signup.failure.message"= "يتعذر علينا إنشاء حساب في الوقت الحالي. يرجى إعادة المحاولة لاحقًا. \n\nعند إعادة فتح التطبيق سيتم إعادة محاولة إنشاء حساب.";
 "signup.failure.purchase.sandbox.message"= "اشتراك الصندوق المحدد غير متاح في الإنتاج.";
+"signup.failure.purchase.pending.message"= "عملية الشراء الخاصة بك في انتظار الموافقة. بمجرد الموافقة عليها، أعد فتح التطبيق لإكمال إعداد حسابك.";
 "signup.failure.redeem.invalid.title"= "رمز بطاقة غير صالح";
 "signup.failure.redeem.invalid.message"= "يبدو أنك أدخلت رمز بطاقة غير صالح. يرجى إعادة المحاولة.";
 "signup.failure.redeem.claimed.title"= "تم استخدام هذه البطاقة بالفعل";
