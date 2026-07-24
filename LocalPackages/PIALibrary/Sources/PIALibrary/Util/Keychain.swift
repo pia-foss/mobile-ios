@@ -105,7 +105,18 @@ public class Keychain {
             query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
             query[kSecValueData as String] = data
             let addStatus = SecItemAdd(query as CFDictionary, nil)
-            guard addStatus == errSecSuccess else {
+            switch addStatus {
+            case errSecSuccess:
+                return
+            case errSecDuplicateItem:
+                // Lost a first-write race — the item now exists, so update it in place.
+                query.removeValue(forKey: kSecAttrAccessible as String)
+                query.removeValue(forKey: kSecValueData as String)
+                guard SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary) == errSecSuccess
+                else {
+                    throw KeychainError.add
+                }
+            default:
                 throw KeychainError.add
             }
         default:
