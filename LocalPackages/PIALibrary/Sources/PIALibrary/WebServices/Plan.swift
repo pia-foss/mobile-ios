@@ -23,7 +23,7 @@
 import Foundation
 
 /// The available subscription plans.
-public enum Plan: String, Codable {
+public enum Plan: String, Codable, Sendable {
 
     /// Subscription expires/renews after one month.
     case monthly

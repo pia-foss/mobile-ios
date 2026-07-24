@@ -1,17 +1,19 @@
 import Foundation
+import PIABase
 
 // MARK: - iOS Sign Up Information
 
 /// Information required for iOS account sign up with App Store receipt
-public struct IOSSignupInformation: Codable, Sendable {
+public struct IOSSignupInformation: Encodable, Sendable {
     private let store: String = "apple_app_store"
-    public let receipt: String
+    public let receipt: JWS
+    private let receipt_version: Int = 2
     public let email: String
     public let marketing: String?
     public let debug: String?
 
     public init(
-        receipt: String,
+        receipt: JWS,
         email: String,
         marketing: String? = nil,
         debug: String? = nil
@@ -23,17 +25,30 @@ public struct IOSSignupInformation: Codable, Sendable {
     }
 }
 
+// MARK: - Restore purchase information
+
+public struct LoginRestorePurchasePayload: Encodable {
+    private let store: String = "apple_app_store"
+    private let receipt: JWS
+    private let receipt_version: Int = 2
+
+    public init(receipt: JWS) {
+        self.receipt = receipt
+    }
+}
+
 // MARK: - iOS Payment Information
 
 /// Information required for iOS payment updates
-public struct IOSPaymentInformation: Codable, Sendable {
+public struct IOSPaymentInformation: Encodable, Sendable {
     private let store: String = "apple_app_store"
-    public let receipt: String
+    public let receipt: JWS
+    private let receipt_version: Int = 2
     public let marketing: String
     public let debug: String
 
     public init(
-        receipt: String,
+        receipt: JWS,
         marketing: String,
         debug: String
     ) {

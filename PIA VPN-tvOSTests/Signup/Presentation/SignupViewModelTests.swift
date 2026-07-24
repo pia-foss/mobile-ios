@@ -156,7 +156,6 @@ final class SignupViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(capturedTransaction?.identifier, expectedTransaction.identifier)
         XCTAssertEqual(capturedTransaction?.description, expectedTransaction.description)
-        XCTAssertNil(capturedTransaction?.native)
 
         XCTAssertEqual(capturedLoadingState, [true, false])
         XCTAssertFalse(sut.shouldShowErrorMessage)

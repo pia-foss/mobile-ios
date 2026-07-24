@@ -132,12 +132,12 @@ extension SubscriptionProduct {
     }
 }
 
-extension Product {
-    static func makeStubs() -> [Product] {
+extension PIAProduct {
+    static func makeStubs() -> [PIAProduct] {
         [
-            Product(identifier: "001", plan: .monthly, price: "10.99", legacy: false),
-            Product(identifier: "002", plan: .yearly, price: "100.99", legacy: false),
-            Product(identifier: "003", plan: .yearly, price: "87.99", legacy: true)
+            PIAProduct(identifier: "001", plan: .monthly, price: "10.99", legacy: false),
+            PIAProduct(identifier: "002", plan: .yearly, price: "100.99", legacy: false),
+            PIAProduct(identifier: "003", plan: .yearly, price: "87.99", legacy: true)
         ]
     }
 }

@@ -21,6 +21,8 @@
 //
 
 import Foundation
+import PIABase
+import StoreKit
 import UIKit
 
 private let log = PIALogger.logger(for: DefaultAccountProvider.self)
@@ -389,9 +391,8 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
             log.debug("Fetching available product keys...")
 
-            let receipt = accessedStore.paymentReceipt
-
-            Task { @MainActor in
+            Task {
+                let receipt = await accessedStore.currentEntitlementJWS()
                 do {
                     let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
                     DispatchQueue.main.async { callback?(appStoreInformation, nil) }
@@ -401,46 +402,66 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
 
-        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
+        public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
             log.debug("Fetching available products...")
 
             if let products = planProducts {
                 log.debug("Available products in cache: \(products)")
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-                callback?(products, nil)
-                return
+                return .success(products)
             }
 
             log.debug("No available products in cache, requesting from store...")
 
             let identifiers = accessedConfiguration.allProductIdentifiers()
-            accessedStore.fetchProducts(identifiers: identifiers) { (_, error) in
-                let products = self.planProducts ?? [:]
+            switch await accessedStore.fetchProducts(identifiers: identifiers) {
+            case .failure(let error):
+                return .failure(error)
+            case .success(let products):
                 log.debug("Available products from store: \(products)")
-                Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
-                callback?(products, nil)
+                let planProducts = self.planProducts
+                if planProducts == nil {
+                    log.debug("\(#function) returning empty products")
+                }
+                Macros.postNotification(.__InAppDidFetchProducts, [.products: planProducts ?? [:]])
+                return .success(planProducts ?? [:])
             }
         }
 
-        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-            listPlanProducts { (map, error) in
-                guard let product = map?[plan] else {
-                    callback?(nil, ClientError.productUnavailable)
-                    return
-                }
-
-                self.accessedStore.purchaseProduct(product) { (transaction, error) in
-                    guard let transaction = transaction else {
-                        callback?(nil, error)
-                        return
-                    }
-                    callback?(transaction, nil)
-                }
+        public func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+            let products: [Plan: any InAppProduct]
+            switch await listPlanProducts() {
+            case .failure(.userCancelled):
+                return .failure(.userCancelled)
+            case .failure(let error):
+                return .failure(.unknown(code: 606, message: error.localizedDescription))
+            case .success(let products_):
+                products = products_
             }
+
+            guard let product = products[plan] else {
+                return .failure(ClientError.productUnavailable)
+            }
+
+            return await accessedStore.purchase(product: product)
         }
 
-        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-            accessedStore.refreshPaymentReceipt(callback)
+        public func restorePurchases() async -> Result<JWS, ClientError> {
+            let syncError = await accessedStore.synchronizeEntitlements()
+            if let syncError {
+                log.warning("Entitlements sync failed: \(syncError)")
+            }
+
+            // Success requires an actual entitlement, not just a successful sync.
+            // A cached entitlement is acceptable when the sync fails (e.g. offline).
+            let jws = await accessedStore.currentEntitlementJWS()
+            if let jws {
+                log.debug("Returning found JWS entitlement (count \(jws.value.count))")
+                return .success(jws)
+            } else {
+                log.debug("No JWS entitlement found")
+                return .failure(.noReceipt)
+            }
         }
 
         public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
@@ -460,69 +481,69 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
-            // Refresh the on-disk receipt before reading it. On "Designed for iPad"
-            // apps running on Apple Silicon Macs, the post-purchase receipt write is
-            // not always flushed by the time signup runs, causing the backend to
-            // reject signup with badReceipt.
-            accessedStore.refreshPaymentReceipt { [weak self] _ in
-                guard let self else { return }
-                self.performSignup(with: request, callback: callback)
+            Task { @MainActor in
+                await performSignup(with: request, callback: callback)
             }
         }
 
-        private func performSignup(with request: SignupRequest, callback: ((UserAccount?, Error?) -> Void)?) {
-            guard let signup = request.signup(withStore: accessedStore) else {
-                callback?(nil, ClientError.noReceipt)
+        private func performSignup(with request: SignupRequest, callback: ((UserAccount?, Error?) -> Void)?) async {
+            guard let signup = await request.signup(withStore: accessedStore) else {
+                DispatchQueue.main.async { callback?(nil, ClientError.noReceipt) }
                 return
             }
 
             accessedDatabase.plain.lastSignupEmail = request.email
 
-            Task { @MainActor in
-                do {
-                    let credentials = try await webServices.signup(with: signup)
+            do {
+                let credentials = try await webServices.signup(with: signup)
 
-                    if let transaction = request.transaction {
-                        accessedStore.finishTransaction(transaction, success: true)
-                    }
-
-                    accessedDatabase.plain.lastSignupEmail = nil
-                    accessedDatabase.secure.setPublicUsername(credentials.username)
-                    accessedDatabase.secure.setUsername(credentials.username)
-                    accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
-
-                    try await webServices.token(credentials: credentials)
-                    let accountInfo = try await webServices.info()
-                    accessedDatabase.plain.accountInfo = accountInfo
-                    accessedDatabase.secure.setPublicUsername(accountInfo.username)
-
-                    let user = UserAccount(credentials: credentials, info: nil)
-                    Macros.postNotification(.PIAAccountDidSignup, [.user: user])
-                    DispatchQueue.main.async { callback?(user, nil) }
-
-                } catch let error as ClientError where error == .badReceipt {
-                    // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
-                    // This handles returning users (e.g. "Duplicate purchase" from API).
-                    await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
-                } catch {
-                    if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                        DispatchQueue.main.async { callback?(nil, ClientError.internetUnreachable) }
-                        return
-                    }
-
-                    DispatchQueue.main.async { callback?(nil, error) }
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
                 }
+
+                accessedDatabase.plain.lastSignupEmail = nil
+                accessedDatabase.secure.setPublicUsername(credentials.username)
+                accessedDatabase.secure.setUsername(credentials.username)
+                accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
+
+                try await webServices.token(credentials: credentials)
+                let accountInfo = try await webServices.info()
+                accessedDatabase.plain.accountInfo = accountInfo
+                accessedDatabase.secure.setPublicUsername(accountInfo.username)
+
+                let user = UserAccount(credentials: credentials, info: nil)
+                Macros.postNotification(.PIAAccountDidSignup, [.user: user])
+                DispatchQueue.main.async { callback?(user, nil) }
+
+            } catch let error as ClientError where error == .badReceipt {
+                // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
+                // This handles returning users (e.g. "Duplicate purchase" from API).
+                await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
+            } catch {
+                if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
+                    DispatchQueue.main.async { callback?(nil, ClientError.internetUnreachable) }
+                    return
+                }
+
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
 
-        private func attemptLoginWithReceiptFallback(transaction: InAppTransaction?, callback: ((UserAccount?, Error?) -> Void)?) async {
-            guard let receipt = accessedStore.paymentReceipt else {
+        private func attemptLoginWithReceiptFallback(transaction: (any InAppTransaction)?, callback: ((UserAccount?, Error?) -> Void)?) async {
+            let jws: JWS?
+            if let transaction {
+                jws = transaction.jwsRepresentation
+            } else {
+                jws = await accessedStore.currentEntitlementJWS()
+            }
+
+            guard let jws else {
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
 
             do {
-                try await webServices.token(receipt: receipt)
+                try await webServices.token(receipt: jws)
             } catch {
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
@@ -558,8 +579,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
-            listPlanProducts { (_, error) in
-                guard error == nil else {
+            Task { [weak self] in
+                guard let self else { return }
+
+                if case .failure(let error) = await self.listPlanProducts() {
                     callback?(nil, error)
                     return
                 }
@@ -602,37 +625,33 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
-            // Same Mac-receipt-race mitigation as signup: refresh before reading.
-            accessedStore.refreshPaymentReceipt { [weak self] _ in
-                guard let self else { return }
-                self.performRenew(with: request, user: user, callback: callback)
+            Task { @MainActor in
+                await performRenew(with: request, user: user, callback: callback)
             }
         }
 
-        private func performRenew(with request: RenewRequest, user: UserAccount, callback: ((UserAccount?, Error?) -> Void)?) {
-            guard let payment = request.payment(withStore: accessedStore) else {
-                callback?(nil, ClientError.noReceipt)
+        private func performRenew(with request: RenewRequest, user: UserAccount, callback: ((UserAccount?, Error?) -> Void)?) async {
+            guard let payment = await request.payment(withStore: accessedStore) else {
+                DispatchQueue.main.async { callback?(nil, ClientError.noReceipt) }
                 return
             }
 
-            Task { @MainActor in
-                do {
-                    try await webServices.processPayment(credentials: user.credentials, request: payment)
+            do {
+                try await webServices.processPayment(credentials: user.credentials, request: payment)
 
-                    if let transaction = request.transaction {
-                        accessedStore.finishTransaction(transaction, success: true)
-                    }
-                    Macros.postNotification(.PIAAccountDidRenew)
-
-                    let accountInfo = try await webServices.info()
-                    accessedDatabase.plain.accountInfo = accountInfo
-
-                    let user = UserAccount(credentials: user.credentials, info: accountInfo)
-                    Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
-                    DispatchQueue.main.async { callback?(user, nil) }
-                } catch {
-                    DispatchQueue.main.async { callback?(nil, error) }
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
                 }
+                Macros.postNotification(.PIAAccountDidRenew)
+
+                let accountInfo = try await webServices.info()
+                accessedDatabase.plain.accountInfo = accountInfo
+
+                let user = UserAccount(credentials: user.credentials, info: accountInfo)
+                Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
+                DispatchQueue.main.async { callback?(user, nil) }
+            } catch {
+                DispatchQueue.main.async { callback?(nil, error) }
             }
         }
 

@@ -1,8 +1,9 @@
 import Foundation
+import PIABase
 
 struct SignupInformation: Encodable {
     let store: String
-    let receipt: String
+    let receipt: JWS
     let email: String
     let marketing: String?
     let debug: String?

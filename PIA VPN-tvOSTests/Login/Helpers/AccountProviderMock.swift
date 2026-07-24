@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
+import StoreKit
 
 @testable import PIA_VPN_tvOS
 
-class AccountProviderMock: AccountProvider {
-    var planProducts: [Plan: InAppProduct]?
+final class AccountProviderMock: AccountProvider {
+    var planProducts: [Plan: any InAppProduct]?
     var shouldCleanAccount: Bool = true
     var isLoggedIn: Bool = true
     var currentUser: UserAccount?
@@ -87,10 +89,14 @@ class AccountProviderMock: AccountProvider {
     func deleteAccount(_ callback: SuccessLibraryCallback?) {}
     func cleanDatabase() {}
     func featureFlags(_ callback: SuccessLibraryCallback?) {}
-    func listPlanProducts(_ callback: LibraryCallback<[Plan: InAppProduct]>?) {}
-    func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?) {}
+    func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
+        .success([:])
+    }
+    func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+        .failure(.userCancelled)
+    }
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
-    func restorePurchases(_ callback: SuccessLibraryCallback?) {}
+    func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
     func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}
     func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?) {}
     func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}

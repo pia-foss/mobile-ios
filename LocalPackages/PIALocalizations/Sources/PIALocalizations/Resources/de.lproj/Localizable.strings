@@ -534,6 +534,7 @@
 "signup.failure.title"= "Konto nicht erstellt";
 "signup.failure.message"= "Zur Zeit können wir kein Konto erstellen. Bitte später erneut versuchen.\n\nBeim erneuten Öffnen der App wird wieder versucht, ein Konto zu erstellen.";
 "signup.failure.purchase.sandbox.message"= "Das ausgewählte Sandbox-Abonnement ist in der Produktion nicht verfügbar.";
+"signup.failure.purchase.pending.message"= "Dein Kauf wartet auf Genehmigung. Sobald er genehmigt wurde, öffne die App erneut, um die Einrichtung deines Kontos abzuschließen.";
 "signup.failure.redeem.invalid.title"= "Ungültige Karten-PIN";
 "signup.failure.redeem.invalid.message"= "Anscheinend haben Sie eine ungültige PIN eingegeben. Bitte erneut versuchen.";
 "signup.failure.redeem.claimed.title"= "Karte bereits eingelöst";

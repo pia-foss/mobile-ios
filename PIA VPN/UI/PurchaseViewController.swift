@@ -52,7 +52,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
 
     private var isExpired = false
     private var signupEmail: String?
-    private var signupTransaction: InAppTransaction?
+    private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
 
     deinit {
@@ -168,32 +168,37 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
         disableInteractions(fully: true)
         self.showLoadingAnimation()
 
-        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+        Task { [weak self] in
             guard let self else { return }
+
+            let result = await config.accountProvider.purchase(plan: plan.plan)
+
             self.isPurchasing = false
             self.enableInteractions()
             self.hideLoadingAnimation()
 
-            guard let transaction = transaction else {
-                if let error = error {
-                    let message = error.localizedDescription
-                    log.error("Purchase failed (error: \(error))")
-                    Macros.displayImageNote(
-                        withImage: Asset.iconWarning.image,
-                        message: message)
-                } else {
-                    log.warning("Cancelled purchase")
-                }
-                return
+            switch result {
+            case .failure(.userCancelled):
+                break
+            case .failure(.purchasePending):
+                log.debug("Purchase is pending external approval")
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: ClientError.purchasePending.localizedDescription
+                )
+            case .failure(let error):
+                let message = error.localizedDescription
+                log.error("Purchase failed (error: \(error))")
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: message
+                )
+            case .success(let transaction):
+                self.signupEmail = email
+                self.signupTransaction = transaction
+                self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
             }
-
-            log.debug("Purchased with transaction: \(transaction)")
-
-            self.signupEmail = email
-            self.signupTransaction = transaction
-            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
-
     }
 
     private func refreshPlans(_ plans: [Plan: any InAppProduct]) {

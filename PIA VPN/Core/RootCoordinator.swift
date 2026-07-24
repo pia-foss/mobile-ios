@@ -116,6 +116,7 @@ final class RootCoordinator: NSObject {
         }
         let config = GetStartedViewController.Config(
             accountProvider: preset.accountProvider,
+            shouldRecoverPendingSignup: preset.shouldRecoverPendingSignup,
         )
         let vc = GetStartedViewController.with(config: config, delegate: self)
         return vc ?? UIViewController()

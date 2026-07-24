@@ -522,6 +522,7 @@
 "signup.failure.message"= "Şu anda hesap oluşturamıyoruz.\nLütfen daha sonra tekrar deneyin.\n\nUygulama yeniden açıldığından hesap oluşturma tekrar denenecektir.";
 
 "signup.failure.purchase.sandbox.message"= "Seçilen Sandbox aboneliği üretim ortamında mevcut değil.";
+"signup.failure.purchase.pending.message"= "Satın alma işleminiz onay bekliyor. Onaylandığında, hesabınızın kurulumunu tamamlamak için uygulamayı yeniden açın.";
 
 "signup.failure.redeem.claimed.message"= "Bu kart önceden başka bir hesap tarafından talep edilmiş. Farklı bir PIN girmeyi deneyebilirsiniz.";
 

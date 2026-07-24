@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 
 extension Client {
 
@@ -65,15 +66,15 @@ extension Client {
          Uses a mock in-app provider for testing purchases.
          */
         public static func useMockInAppProvider() {
-            store = MockInAppProvider(with: Data())
+            store = MockInAppProvider()
         }
 
         public static func useMockInAppProviderWithoutReceipt() {
-            store = MockInAppProvider(with: nil)
+            store = MockInAppProvider(jws: nil)
         }
 
         public static func useMockInAppProviderWithReceipt() {
-            store = MockInAppProvider(with: "abcdefg".data(using: .utf8))
+            store = MockInAppProvider(jws: JWS("abcdefg")!)
         }
     #endif
 }

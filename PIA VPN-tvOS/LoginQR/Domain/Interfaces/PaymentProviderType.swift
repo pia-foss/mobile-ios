@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import PIABase
 
 protocol PaymentProviderType {
-    func refreshPaymentReceipt(_ completion: @escaping (Result<Data, Error>) -> Void)
+    func refreshPaymentReceipt(_ completion: @escaping (Result<JWS, Error>) -> Void)
 }

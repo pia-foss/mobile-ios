@@ -534,6 +534,7 @@
 "signup.failure.title"= "계정 생성 실패";
 "signup.failure.message"= "지금은 계정을 생성할 수 없습니다. 나중에 다시 시도해주십시오.\n\n 앱을 다시 열면 계정 생성을 다시 시도합니다.";
 "signup.failure.purchase.sandbox.message"= "선택하신 샌드박스 구독은 생산에 사용할 수 없습니다.";
+"signup.failure.purchase.pending.message"= "구매가 승인 대기 중입니다. 승인되면 앱을 다시 열어 계정 설정을 완료하세요.";
 "signup.failure.redeem.invalid.title"= "유효하지 않은 카드 PIN";
 "signup.failure.redeem.invalid.message"= "유효하지 않은 카드 PIN을 입력한 것 같습니다. 다시 시도하세요.";
 "signup.failure.redeem.claimed.title"= "이미 청구한 카드";

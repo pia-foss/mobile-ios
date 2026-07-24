@@ -8,10 +8,11 @@
 
 import Foundation
 import PIALibrary
+import PIABase
 
 @testable import PIA_VPN_tvOS
 
-class LoginProviderMock: LoginProviderType {
+final class LoginProviderMock: LoginProviderType {
     private let result: Result<UserAccount, Error>
 
     init(result: Result<UserAccount, Error>) {
@@ -22,7 +23,7 @@ class LoginProviderMock: LoginProviderType {
         completion(result)
     }
 
-    func login(with receipt: Data, completion: @escaping (Result<UserAccount, any Error>) -> Void) {
+    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, any Error>) -> Void) {
         completion(result)
     }
 }

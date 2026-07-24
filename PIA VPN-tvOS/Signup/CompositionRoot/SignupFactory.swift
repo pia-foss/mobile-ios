@@ -90,6 +90,37 @@ class SignUpFactory {
     }
 }
 
-extension DefaultAccountProvider: ProductsProviderType {}
+// Bridge the library's async `AccountProvider` API to the tvOS callback-based protocols.
+extension DefaultAccountProvider: ProductsProviderType {
+    func listPlanProducts(_ callback: (([Plan: InAppProduct]?, Error?) -> Void)?) {
+        Task {
+            let result = await listPlanProducts()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let products):
+                    callback?(products, nil)
+                case .failure(let error):
+                    callback?(nil, error)
+                }
+            }
+        }
+    }
+}
+
 extension Client.Configuration: ProductConfigurationType {}
-extension DefaultAccountProvider: PurchaseProductsAccountProviderType {}
+
+extension DefaultAccountProvider: PurchaseProductsAccountProviderType {
+    func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?) {
+        Task {
+            let result = await purchase(plan: plan)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let transaction):
+                    callback?(transaction, nil)
+                case .failure(let error):
+                    callback?(nil, error)
+                }
+            }
+        }
+    }
+}

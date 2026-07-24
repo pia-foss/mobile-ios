@@ -534,6 +534,7 @@
 "signup.failure.title"= "账户创建失败";
 "signup.failure.message"= "我们现在无法创建账号。\n请稍后再试。\n\n重新打开本应用将会再次尝试创建账号。";
 "signup.failure.purchase.sandbox.message"= "所选的沙盒订阅不适用于生产";
+"signup.failure.purchase.pending.message"= "您的购买正在等待批准。批准后，请重新打开应用以完成账户设置。";
 "signup.failure.redeem.invalid.title"= "卡片PIN无效";
 "signup.failure.redeem.invalid.message"= "您输入的卡片PIN似乎无效。请重试。";
 "signup.failure.redeem.claimed.title"= "卡片已使用";

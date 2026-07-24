@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIABase
 
 protocol WebServicesConsumer {
     var webServices: WebServices { get }
@@ -34,7 +35,7 @@ protocol WebServices: AnyObject {
 
     func token(credentials: Credentials) async throws
 
-    func token(receipt: Data) async throws
+    func token(receipt: JWS) async throws
 
     func validateLoginQR(qrToken: String) async throws -> String
 
@@ -69,7 +70,7 @@ protocol WebServices: AnyObject {
 
     // MARK: Store
 
-    func subscriptionInformation(with receipt: Data?) async throws -> AppStoreInformation?
+    func subscriptionInformation(with receipt: JWS?) async throws -> AppStoreInformation?
 
     // MARK: Ephemeral
 

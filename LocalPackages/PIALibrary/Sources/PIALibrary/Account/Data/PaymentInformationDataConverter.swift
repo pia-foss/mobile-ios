@@ -9,7 +9,7 @@ class PaymentInformationDataConverter: PaymentInformationDataConverterType, JSON
     func callAsFunction(payment: Payment) -> Data? {
         let paymentInformation = PaymentInformation(
             store: "apple_app_store",
-            receipt: payment.receipt.base64EncodedString(),
+            receipt: payment.receipt.value,
             marketing: stringify(json: payment.marketing, prettyPrinted: false),
             debug: stringify(json: payment.debug, prettyPrinted: false)
         )

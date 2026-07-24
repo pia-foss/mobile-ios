@@ -223,16 +223,23 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             return
         }
 
-        Client.store.refreshPaymentReceipt { [weak self] error in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                guard let receipt = Client.store.paymentReceipt else {
+        prepareLogin()
+        Task { [weak self] in
+            let syncError = await Client.store.synchronizeEntitlements()
+            if let syncError {
+                log.warning("Entitlements sync failed, checking cached entitlements: \(syncError)")
+            }
+            let jws = await Client.store.currentEntitlementJWS()
+            await MainActor.run {
+                guard let self else { return }
+                guard let jws else {
+                    log.debug("No entitlement found to restore")
+                    self.handleLoginResult(user: nil, error: ClientError.badReceipt, loginOption: .receipt)
                     return
                 }
 
-                let request = LoginReceiptRequest(receipt: receipt)
+                let request = LoginReceiptRequest(receipt: jws)
 
-                self.prepareLogin()
                 self.config.accountProvider.login(with: request) { userAccount, error in
                     self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
                 }

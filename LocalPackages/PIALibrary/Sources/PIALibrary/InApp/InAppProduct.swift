@@ -21,17 +21,16 @@
 //
 
 import Foundation
-import StoreKit
 
 /// Wraps any native implementation of an in-app product by providing a common interface.
-public protocol InAppProduct: AnyObject, CustomStringConvertible, Sendable {
-    associatedtype Native: Sendable
+public protocol InAppProduct<Native>: CustomStringConvertible, Equatable, Sendable {
+    associatedtype Native: Equatable, Sendable
 
     /// The product identifier.
     var identifier: String { get }
 
     /// The price of the product (localized).
-    var price: NSNumber { get }
+    var price: Decimal { get }
 
     /// The `Locale` in which `price` is expressed.
     var priceLocale: Locale { get }
@@ -46,20 +45,5 @@ public protocol InAppProduct: AnyObject, CustomStringConvertible, Sendable {
 extension InAppProduct {
     var description: String {
         return "{\(identifier) @ \(priceLocale.currencySymbol ?? "")\(price)}"
-    }
-}
-
-public extension InAppProduct {
-    func isEligibleForIntroOffer() async -> Bool {
-        // Read from the newer `StoreKit.Product` which has the most information, even fetching it via id.
-        // If that fails we get the older `SKProduct` which gives the least information (group wide intro offer).
-        if let subscription = (native as? StoreKit.Product)?.subscription {
-            return await subscription.isEligibleForIntroOffer
-        } else if let subscription = try? await StoreKit.Product.products(for: [identifier]).first?.subscription {
-            return await subscription.isEligibleForIntroOffer
-        } else if let groupId = (native as? SKProduct)?.subscriptionGroupIdentifier {
-            return await StoreKit.Product.SubscriptionInfo.isEligibleForIntroOffer(for: groupId)
-        }
-        return false
     }
 }

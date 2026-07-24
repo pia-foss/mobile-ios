@@ -46,8 +46,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private var isFetchingProducts = true
 
     private var signupEmail: String?
-    private var signupTransaction: InAppTransaction?
+    private var signupTransaction: (any InAppTransaction)?
     private var isPurchasing = false
+    private var isRestoring = false
+    private var signupAttemptCount: Int = 0
 
     @IBOutlet private weak var walkthroughImage: UIImageView!
     @IBOutlet private weak var walkthroughTitle: UILabel!
@@ -128,26 +130,43 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     @IBAction private func logInWithReceipt(_ sender: Any?) {
-        showLoadingAnimation()
+        guard !isRestoring else {
+            return
+        }
+        isRestoring = true
+        handleLoadingState()
 
-        Client.store.refreshPaymentReceipt { [weak self] error in
-            DispatchQueue.main.async {
-                guard let receipt = Client.store.paymentReceipt else {
-                    self?.hideLoadingAnimation()
-                    self?.handleBadReceipt()
-                    return
+        Task { [weak self] in
+            guard let self else { return }
+
+            let result = await Client.providers.accountProvider.restorePurchases()
+            switch result {
+            case .failure(let error):
+                log.error("No entitlement found to restore: \(error)")
+                await MainActor.run {
+                    self.isRestoring = false
+                    self.handleLoadingState()
+                    self.handleBadReceipt()
                 }
+                return
 
-                let request = LoginReceiptRequest(receipt: receipt)
-                self?.config.accountProvider.login(with: request) { userAccount, error in
-                    self?.hideLoadingAnimation()
+            case .success(let jws):
+                let request = LoginReceiptRequest(receipt: jws)
+                self.config.accountProvider.login(with: request) { @MainActor userAccount, error in
+                    self.isRestoring = false
+                    self.handleLoadingState()
 
-                    guard let userAccount else {
-                        self?.handleBadReceipt()
+                    if let error {
+                        log.error("Failed to login with receipt: \(error)")
+                        self.handleBadReceipt()
                         return
                     }
 
-                    guard let self else { return }
+                    guard let userAccount else {
+                        self.handleBadReceipt()
+                        return
+                    }
+
                     self.completionDelegate?.welcomeDidLogin(
                         withUser: userAccount,
                         topViewController: self
@@ -173,23 +192,46 @@ final class GetStartedViewController: PIAWelcomeViewController {
         isPurchasing = true
         self.handleLoadingState()
 
-        config.accountProvider.purchase(plan: plan.plan) { [weak self] transaction, error in
+        Task { [weak self] in
             guard let self else { return }
+
+            if self.signupAttemptCount > 0 {
+                // if it tried to signup (and failed, that's why we're here again)
+                // synchronize entitlements to find missing purchases or purge stale ones.
+                log.debug("Already failed to signup, synchronizing entitlements")
+                if let error = await Client.store.synchronizeEntitlements() {
+                    log.error("Failed to synchronize entitlements: \(error)")
+                }
+            }
+
+            let result = await config.accountProvider.purchase(plan: plan.plan)
             self.isPurchasing = false
             self.handleLoadingState()
 
-            guard let transaction = transaction else {
-                if let error = error {
-                    let message = error.localizedDescription
-                    Macros.displayImageNote(
-                        withImage: Asset.iconWarning.image,
-                        message: message)
-                }
-                return
+            switch result {
+            case .failure(.userCancelled):
+                log.debug("User cancelled purchase")
+                break
+            case .failure(.purchasePending):
+                log.debug("Purchase is pending external approval")
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: ClientError.purchasePending.localizedDescription
+                )
+            case .failure(let error):
+                log.warning("Purchase failed with error: \(error)")
+                let message = error.localizedDescription
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: message
+                )
+            case .success(let transaction):
+                log.debug("Purchase successful with transaction id \(transaction.identifier)")
+                self.signupEmail = email
+                self.signupTransaction = transaction
+                self.signupAttemptCount += 1
+                self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
             }
-            self.signupEmail = email
-            self.signupTransaction = transaction
-            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
     }
 
@@ -202,6 +244,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
         vc.config = config
         vc.delegate = delegate
         vc.completionDelegate = vc
+        vc.preset.shouldRecoverPendingSignup = config.shouldRecoverPendingSignup
         return nav
     }
 
@@ -264,7 +307,7 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     private func handleLoadingState() {
-        if isFetchingProducts || isPurchasing {
+        if isFetchingProducts || isPurchasing || isRestoring {
             showLoadingAnimation()
         } else {
             hideLoadingAnimation()
@@ -444,5 +487,6 @@ extension GetStartedViewController: UICollectionViewDelegateFlowLayout {
 extension GetStartedViewController {
     struct Config {
         let accountProvider: AccountProvider
+        let shouldRecoverPendingSignup: Bool
     }
 }

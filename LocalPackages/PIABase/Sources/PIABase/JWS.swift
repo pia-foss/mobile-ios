@@ -1,8 +1,8 @@
 //
-//  AppStoreProduct.swift
-//  PIALibrary
+//  JWS.swift
+//  PIAAccount
 //
-//  Created by Davide De Rosa on 10/22/17.
+//  Created by Mario on 30/06/26.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -21,27 +21,27 @@
 //
 
 import Foundation
-import StoreKit
 
-struct AppStoreProduct: InAppProduct<Product> {
-    var identifier: String {
-        return native.id
+public struct JWS: Sendable {
+    public let value: String
+
+    public init?(_ value: String) {
+        if value.isEmpty { return nil }
+        self.value = value
     }
 
-    var price: Decimal {
-        return native.price
+    @inlinable
+    public var isEmpty: Bool { value.isEmpty }
+}
+
+extension JWS: Codable {
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.value = try container.decode(String.self)
     }
 
-    var priceLocale: Locale {
-        return native.priceFormatStyle.locale
-    }
-
-    let native: Native
-
-    let hasIntroOffer: Bool
-
-    init(native: Native, hasIntroOffer: Bool) {
-        self.native = native
-        self.hasIntroOffer = hasIntroOffer
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.value)
     }
 }

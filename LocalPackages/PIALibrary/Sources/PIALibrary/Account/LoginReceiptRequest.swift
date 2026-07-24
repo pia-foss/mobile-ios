@@ -21,17 +21,18 @@
 //
 
 import Foundation
+import PIABase
 
 /// A login receipt request.
 ///
 /// - Seealso: `AccountProvider.login(...)`
 public struct LoginReceiptRequest {
 
-    /// The `Data` purchase receipt for the device.
-    public let receipt: Data
+    /// The signed JWS transaction used to authenticate.
+    public let receipt: JWS
 
     /// :nodoc:
-    public init(receipt: Data) {
+    public init(receipt: JWS) {
         self.receipt = receipt
     }
 }

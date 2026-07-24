@@ -8,27 +8,28 @@
 
 import Foundation
 import PIALibrary
+import PIABase
 
-class PaymentProvider: PaymentProviderType {
+final class PaymentProvider: PaymentProviderType {
     private let store: InAppProvider
 
     init(store: InAppProvider) {
         self.store = store
     }
 
-    func refreshPaymentReceipt(_ completion: @escaping (Result<Data, Error>) -> Void) {
-        store.refreshPaymentReceipt { [weak self] error in
-            if let error {
+    func refreshPaymentReceipt(_ completion: @escaping (Result<JWS, Error>) -> Void) {
+        Task { [weak self] in
+            if let error = await self?.store.synchronizeEntitlements() {
                 completion(.failure(error))
                 return
             }
 
-            guard let receipt = self?.store.paymentReceipt else {
+            guard let jws = await self?.store.currentEntitlementJWS() else {
                 completion(.failure(ClientError.unexpectedReply))
                 return
             }
 
-            completion(.success(receipt))
+            completion(.success(jws))
         }
     }
 }

@@ -21,6 +21,8 @@
 //
 
 import Foundation
+import PIABase
+import StoreKit
 
 /// Simulates account-related operations
 public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
@@ -121,7 +123,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationEligible = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
@@ -132,7 +134,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationEligibleButDisabledFromBackend = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
@@ -143,7 +145,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         webServices.appstoreInformationNotEligible = {
             return AppStoreInformation(
                 products: [
-                    Product(
+                    PIAProduct(
                         identifier: "com.product.monthly",
                         plan: .monthly,
                         price: "3.99",
@@ -281,18 +283,18 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
 
     #if os(iOS) || os(tvOS)
         /// :nodoc:
-        public func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
-            delegate.listPlanProducts(callback)
+        public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
+            return await delegate.listPlanProducts()
         }
 
         /// :nodoc:
-        public func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-            delegate.purchase(plan: plan, callback)
+        public func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+            return await delegate.purchase(plan: plan)
         }
 
         /// :nodoc:
-        public func restorePurchases(_ callback: SuccessLibraryCallback?) {
-            delegate.restorePurchases(callback)
+        public func restorePurchases() async -> Result<JWS, ClientError> {
+            return await delegate.restorePurchases()
         }
 
         public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
