@@ -32,8 +32,7 @@ struct KPIEventUtils {
 
         if let createdAt = Self.makeISO8601Formatter().date(from: identifier.createdAt) {
             let now = clock()
-            let elapsedDays = now.timeIntervalSince(createdAt) / (24 * 60 * 60)
-            if elapsedDays > 1.0 {
+            if !Self.utcCalendar.isDate(now, inSameDayAs: createdAt) {
                 identifier = newAggregatedIdentifier()
                 kpiPersistency.clearAll()
             }
@@ -56,4 +55,10 @@ struct KPIEventUtils {
         f.timeZone = TimeZone(identifier: "UTC")
         return f
     }
+
+    private static let utcCalendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        return calendar
+    }()
 }
