@@ -70,11 +70,11 @@ final class MockWebServices: WebServices {
 
     func deleteAccount() async throws {}
 
-    func signup(with request: Signup) async throws -> Credentials {
+    func signup(with request: Signup) async throws -> (credentials: Credentials, needsToken: Bool) {
         guard let result = credentials?() else {
             throw ClientError.unsupported
         }
-        return result
+        return (credentials: result, needsToken: true)
     }
 
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {

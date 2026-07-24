@@ -258,7 +258,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     #if os(iOS) || os(tvOS)
-        func signup(with request: Signup) async throws -> Credentials {
+        func signup(with request: Signup) async throws -> (credentials: Credentials, needsToken: Bool) {
             var marketingJSON = ""
             if let marketing = request.marketing {
                 marketingJSON = stringify(json: marketing)
@@ -278,7 +278,9 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
             do {
                 let response = try await nativeAccountAPI.signUp(information: info)
-                return Credentials(username: response.username, password: response.password)
+                let needsToken = (response.apiToken?.isEmpty ?? true) || (response.expiresAt?.isEmpty ?? true)
+                let credentials = Credentials(username: response.username, password: response.password ?? "")
+                return (credentials: credentials, needsToken: needsToken)
             } catch {
                 let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
                 throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter

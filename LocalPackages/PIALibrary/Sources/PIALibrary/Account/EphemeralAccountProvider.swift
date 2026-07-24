@@ -120,7 +120,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
             }
 
             do {
-                guard let credentials = try await webServices?.signup(with: signup) else {
+                guard let (credentials, _) = try await webServices?.signup(with: signup) else {
                     DispatchQueue.main.async { callback?(nil, nil) }
                     return
                 }

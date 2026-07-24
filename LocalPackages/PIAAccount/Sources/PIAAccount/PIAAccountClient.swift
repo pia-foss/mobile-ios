@@ -408,11 +408,22 @@ public actor PIAAccountClient: PIAAccountAPI {
     public func signUp(information: IOSSignupInformation) async throws -> VpnSignUpInformation {
         let bodyData = try JSONEncoder.piaCodable.encode(information)
 
-        return try await endpointManager.executeWithFailover(
+        let response: VpnSignUpInformation = try await endpointManager.executeWithFailover(
             path: .signup,
             method: .post,
             bodyType: .json(bodyData)
         )
+
+        // store a token if we received one
+        if let token = response.apiToken, let expiresAt = response.expiresAt {
+            let tokenResponse = APITokenResponse(apiToken: token, expiresAt: expiresAt)
+            // Store API token
+            try await tokenManager.storeAPIToken(tokenResponse)
+            // Request VPN token
+            try await refreshVPNToken()
+        }
+
+        return response
     }
 
     // MARK: - Social

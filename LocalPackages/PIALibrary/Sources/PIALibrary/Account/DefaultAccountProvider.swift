@@ -495,7 +495,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             accessedDatabase.plain.lastSignupEmail = request.email
 
             do {
-                let credentials = try await webServices.signup(with: signup)
+                let (credentials, needsToken) = try await webServices.signup(with: signup)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -506,7 +506,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 accessedDatabase.secure.setUsername(credentials.username)
                 accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
-                try await webServices.token(credentials: credentials)
+                if needsToken {
+                    try await webServices.token(credentials: credentials)
+                }
                 let accountInfo = try await webServices.info()
                 accessedDatabase.plain.accountInfo = accountInfo
                 accessedDatabase.secure.setPublicUsername(accountInfo.username)
