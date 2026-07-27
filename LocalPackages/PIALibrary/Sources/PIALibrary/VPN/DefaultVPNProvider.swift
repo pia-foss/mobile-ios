@@ -142,6 +142,14 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     }
 
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
+        install(force: forceInstall, allowServerPlaceholder: false, callback)
+    }
+
+    public func obtainVPNPermission(_ callback: SuccessLibraryCallback?) {
+        install(force: true, allowServerPlaceholder: true, callback)
+    }
+
+    private func install(force forceInstall: Bool, allowServerPlaceholder: Bool, _ callback: SuccessLibraryCallback?) {
         guard accessedProviders.accountProvider.isLoggedIn else {
             callback?(ClientError.unauthorized)
             return
@@ -160,7 +168,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
         let forcedStatuses = DefaultVPNProvider.forcedStatuses.contains(accessedDatabase.transient.vpnStatus)
         let installBlock: SuccessLibraryCallback = { (error) in
-            guard let configuration = self.vpnClientConfiguration(for: profile) else {
+            guard let configuration = self.vpnClientConfiguration(for: profile, allowServerPlaceholder: allowServerPlaceholder) else {
                 callback?(ClientError.vpnProfileUnavailable)
                 return
             }
@@ -400,7 +408,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return activeProfile
     }
 
-    private func vpnClientConfiguration(for profile: VPNProfile? = nil) -> VPNConfiguration? {
+    private func vpnClientConfiguration(for profile: VPNProfile? = nil, allowServerPlaceholder: Bool = false) -> VPNConfiguration? {
         log.info("vpnClientConfiguration: currentUser=\(accessedProviders.accountProvider.currentUser != nil), currentPasswordReference=\(accessedProviders.accountProvider.currentPasswordReference != nil), activeProfile=\(String(describing: (profile ?? activeProfile)?.vpnType))")
 
         guard let currentUser = accessedProviders.accountProvider.currentUser else {
@@ -418,7 +426,19 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return nil
         }
 
-        guard let targetServer = try? accessedProviders.serverProvider.targetServer else {
+        let targetServer: Server
+        var usesServerPlaceholder = false
+        if let resolvedServer = try? accessedProviders.serverProvider.targetServer {
+            targetServer = resolvedServer
+        } else if allowServerPlaceholder {
+            // The server list is not available yet (e.g. right after signup, before
+            // the first download completes). Use a placeholder so the profile can
+            // still be saved to obtain the OS VPN permission; connect() re-resolves
+            // the real server and re-saves before starting the tunnel.
+            log.warning("vpnClientConfiguration: No target server available, using permission placeholder")
+            targetServer = .vpnPermissionPlaceholder
+            usesServerPlaceholder = true
+        } else {
             log.error("vpnClientConfiguration: No target server available")
             return nil
         }
@@ -430,7 +450,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
             server: targetServer,
-            isOnDemand: accessedPreferences.isPersistentConnection,
+            // A placeholder profile must never carry on-demand rules: if an enabled
+            // manager already exists, doSave would honor them and the OS could try
+            // to bring up a tunnel to the placeholder endpoint on its own.
+            isOnDemand: usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration,
             leakProtection: accessedPreferences.leakProtection,

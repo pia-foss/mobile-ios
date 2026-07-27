@@ -316,6 +316,14 @@
                 customCfg = builder.build()
             }
 
+            if serverAddress.isEmpty {
+                // No resolved address for the active socket type (e.g. the server
+                // list is not downloaded yet and a placeholder server is used to
+                // obtain the OS VPN permission). Fall back to the hostname like
+                // WireGuard and IKEv2 do, instead of persisting an empty endpoint.
+                serverAddress = configuration.server.hostname
+            }
+
             var username = configuration.username
             var passwordReference = configuration.passwordReference
 
