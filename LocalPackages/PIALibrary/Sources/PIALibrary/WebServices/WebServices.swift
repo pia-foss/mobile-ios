@@ -62,7 +62,7 @@ protocol WebServices: AnyObject {
      */
     func deleteAccount() async throws
 
-    func signup(with request: Signup) async throws -> (credentials: Credentials, needsToken: Bool)
+    func signup(with request: Signup) async throws -> SignupResponse
 
     func processPayment(credentials: Credentials, request: Payment) async throws
 

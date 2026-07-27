@@ -120,7 +120,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
             }
 
             do {
-                guard let (credentials, _) = try await webServices?.signup(with: signup) else {
+                guard let signupResponse = try await webServices?.signup(with: signup) else {
                     DispatchQueue.main.async { callback?(nil, nil) }
                     return
                 }
@@ -129,7 +129,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
                     accessedStore.finishTransaction(transaction, success: true)
                 }
 
-                let user = UserAccount(credentials: credentials, info: nil)
+                let user = UserAccount(credentials: signupResponse.buildCredentials(), info: nil)
                 self.currentUser = user
                 self.isLoggedIn = true
                 DispatchQueue.main.async { callback?(user, nil) }

@@ -134,7 +134,9 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
                 self?.textEmail.text = ""
 
                 let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
-                alert.addDefaultAction(L10n.Global.close)
+                alert.addActionWithTitle(L10n.Global.close) {
+                    self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
+                }
                 self?.present(alert, animated: true, completion: nil)
 
                 return

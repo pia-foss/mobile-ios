@@ -176,6 +176,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     private func mapNativeLoginError(_ error: Error) -> ClientError {
         let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
+        log.debug("\(#function) code: \(code ?? 0) error: \(error)")
         switch code ?? 0 {
         case 402:
             return .expired
@@ -223,13 +224,9 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {
         do {
-            if reset {
-                let newPassword = try await nativeAccountAPI.setEmail(email: email, resetPassword: reset)
-                if let newPassword = newPassword {
-                    Client.configuration.tempAccountPassword = newPassword
-                }
-            } else {
-                try await nativeAccountAPI.setEmail(username: credentials.username, password: credentials.password, email: email, resetPassword: reset)
+            let newPassword = try await nativeAccountAPI.setEmail(email: email, resetPassword: reset)
+            if reset, let newPassword {
+                Client.configuration.tempAccountPassword = newPassword
             }
         } catch {
             throw mapNativeLoginError(error)
@@ -258,7 +255,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     #if os(iOS) || os(tvOS)
-        func signup(with request: Signup) async throws -> (credentials: Credentials, needsToken: Bool) {
+        func signup(with request: Signup) async throws -> SignupResponse {
             var marketingJSON = ""
             if let marketing = request.marketing {
                 marketingJSON = stringify(json: marketing)
@@ -278,10 +275,13 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
             do {
                 let response = try await nativeAccountAPI.signUp(information: info)
-                let needsToken = (response.apiToken?.isEmpty ?? true) || (response.expiresAt?.isEmpty ?? true)
-                let credentials = Credentials(username: response.username, password: response.password ?? "")
-                return (credentials: credentials, needsToken: needsToken)
+                if let password = response.password {
+                    return .credentials(Credentials(username: response.username, password: password))
+                } else {
+                    return .username(response.username)
+                }
             } catch {
+                log.error("Failed to signup: \(error)")
                 let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
                 throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter
             }
