@@ -500,9 +500,15 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
             accessedDatabase.plain.lastSignupEmail = request.email
 
+            // A new IAP transaction starts processing (Kape verification path).
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .signup)
+
+            var verificationSucceeded = false
             do {
                 let signupResponse = try await webServices.signup(with: signup)
                 let credentials = signupResponse.buildCredentials()
+                verificationSucceeded = true
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -524,14 +530,19 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             } catch let error as ClientError where error == .badReceipt {
                 // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
                 // This handles returning users (e.g. "Duplicate purchase" from API).
+                // The fallback reports the final verification outcome, so no event here.
                 await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
             } catch {
-                if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                    DispatchQueue.main.async { callback?(nil, ClientError.internetUnreachable) }
-                    return
+                let isOffline = (error as? URLError)?.code == .notConnectedToInternet
+                let reportedError: Error = isOffline ? ClientError.internetUnreachable : error
+
+                // Report a verification failure only if success was not already reported
+                // (later account-setup calls failing is not a verification failure).
+                if !verificationSucceeded {
+                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: reportedError)
                 }
 
-                DispatchQueue.main.async { callback?(nil, error) }
+                DispatchQueue.main.async { callback?(nil, reportedError) }
             }
         }
 
@@ -544,6 +555,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
 
             guard let jws else {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: ClientError.badReceipt)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
@@ -551,9 +563,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             do {
                 try await webServices.token(receipt: jws)
             } catch {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
+            // Receipt verified via the login-with-receipt fallback.
+            ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
 
             if let transaction = transaction {
                 accessedStore.finishTransaction(transaction, success: true)
@@ -642,8 +657,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
+            // A renewal IAP transaction starts processing (Kape verification path).
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .renewal)
+
+            var verificationSucceeded = false
             do {
                 try await webServices.processPayment(credentials: user.credentials, request: payment)
+                verificationSucceeded = true
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .renewal)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -657,6 +678,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
                 DispatchQueue.main.async { callback?(user, nil) }
             } catch {
+                if !verificationSucceeded {
+                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .renewal, error: error)
+                }
                 DispatchQueue.main.async { callback?(nil, error) }
             }
         }
