@@ -96,11 +96,13 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
         var nextStatus: VPNStatus = .disconnected
 
-        // Captured before the switch below, which resets the flag when the
-        // .disconnected transition of a manual disconnect is processed. The
-        // last-disconnect-error handling further down must still know that the
-        // disconnect was user-initiated.
+        // Captured before the switch, which clears the flag; the last-disconnect-error
+        // handling below still needs it. Abort here too: for an update already queued
+        // when the user gave up, `disconnect()`'s abort has not landed yet.
         let disconnectedManually = Client.configuration.disconnectedManually
+        if disconnectedManually {
+            abortReconnectCycleIfNeeded()
+        }
 
         switch connection.status {
         case .connected:
@@ -295,6 +297,37 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         } else {
             log.debug("[VPNDaemon] fetchLastDisconnectError — no error reported (clean disconnect)")
         }
+    }
+
+    // MARK: Abort
+
+    /**
+     Abandons any reconnect cycle in flight.
+
+     Called when the user gives up on a connection attempt. A cycle left running
+     would fight that intent on two fronts: the retry timer keeps bringing the
+     tunnel back up, and `isReconnecting` suppresses the status writes below, so
+     the UI never leaves "connecting" and the toggle stays disarmed
+     (`canConnectVPN()` refuses to act while the status reads `.connecting`).
+
+     Safe to call from any thread; the work is serialized onto the main queue,
+     where every other mutation of this daemon's state happens.
+     */
+    func abortReconnectCycleIfNeeded() {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async {
+                self.abortReconnectCycleIfNeeded()
+            }
+            return
+        }
+        guard isReconnecting || fallbackTimer != nil else {
+            return
+        }
+
+        log.debug("Abandoning the reconnect cycle in flight — the user gave up on the attempt")
+        isReconnectingAfterConnectivityFailure = false
+        invalidateTimer()
+        reset()
     }
 
     // MARK: Invalidate

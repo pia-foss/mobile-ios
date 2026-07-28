@@ -158,8 +158,18 @@ extension NetworkExtensionProfile {
         let performOnce = {
             guard !hasRun else { return }
             hasRun = true
-            if let observer {
-                NotificationCenter.default.removeObserver(observer)
+            if let token = observer {
+                NotificationCenter.default.removeObserver(token)
+                // Also breaks the retain cycle: the block below captures this very
+                // token, so removing the observation alone would not release it.
+                observer = nil
+            }
+            // The user may have given up on the attempt while the teardown was in
+            // flight. Never bring the tunnel back up against that intent — the
+            // disconnect that expressed it is what put us in this window.
+            guard !Client.configuration.disconnectedManually else {
+                log.debug("Abandoning the deferred tunnel start — the user gave up on the attempt")
+                return
             }
             do {
                 try perform()
