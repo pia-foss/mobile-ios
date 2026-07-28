@@ -126,6 +126,61 @@ extension NetworkExtensionProfile {
         }
     }
 
+    /**
+     Runs a block once the connection is no longer tearing down, immediately if it
+     is not.
+
+     NetworkExtension silently drops a start request issued while the connection is
+     `.disconnecting`, and no further status change follows to trigger a retry. A
+     reconnect hits that window routinely: `disconnect()` calls back as soon as its
+     preferences round-trip lands, well before the tunnel is actually down. The
+     on-demand rules used to hide this by bringing the tunnel back up, but with the
+     kill switch off — in particular on the reconnect that follows disabling it —
+     nothing does, and the VPN stays down for good.
+
+     Rethrows whatever `perform` throws when it runs right away. A deferred run
+     happens after this returns, so its failure is logged rather than reported.
+
+     - Parameter connection: The connection whose teardown must complete first.
+     - Parameter perform: Issues the actual start request.
+     */
+    func afterTeardown(of connection: NEVPNConnection, perform: @escaping () throws -> Void) throws {
+        guard connection.status == .disconnecting else {
+            try perform()
+            return
+        }
+
+        log.debug("The tunnel is still disconnecting, deferring the start until it is down")
+
+        var observer: NSObjectProtocol?
+        var hasRun = false
+
+        let performOnce = {
+            guard !hasRun else { return }
+            hasRun = true
+            if let observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
+            do {
+                try perform()
+            } catch let e {
+                log.error("The deferred tunnel start failed: \(e)")
+            }
+        }
+
+        observer = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: connection, queue: .main) { _ in
+            guard connection.status != .disconnecting else { return }
+            performOnce()
+        }
+        // The teardown may have completed while the observer was being installed,
+        // in which case no further status change is coming.
+        if connection.status != .disconnecting {
+            performOnce()
+        }
+        // A wedged teardown must not swallow the start for good.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { performOnce() }
+    }
+
     private func configureOnDemandOnWiFiNetworksFor(
         _ trustedNetworks: [String: Int],
         _ vpn: NEVPNManager
