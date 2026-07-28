@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "Tilmeld nu";
 
+"signup.purchase.existing.subscription.title"= "Abonnement fundet";
+"signup.purchase.existing.subscription.message"= "Din App Store-konto har allerede et aktivt Private Internet Access-abonnement. Gendan det for at få dine kontooplysninger i stedet for at købe igen.";
+"signup.purchase.restore.empty.title"= "Intet abonnement fundet";
+"signup.purchase.restore.empty.message"= "Der er intet aktivt Private Internet Access-abonnement på din App Store-konto. Tilmeld dig for at oprette en konto.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Sikre servere i over 90 lande";

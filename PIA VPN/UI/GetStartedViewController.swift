@@ -146,7 +146,9 @@ final class GetStartedViewController: PIAWelcomeViewController {
                 await MainActor.run {
                     self.isRestoring = false
                     self.handleLoadingState()
-                    self.handleBadReceipt()
+                    // The entitlements were just synchronized, so there is
+                    // nothing to restore and the user needs to subscribe.
+                    self.alertNothingToRestore()
                 }
                 return
 
@@ -158,12 +160,13 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
                     if let error {
                         log.error("Failed to login with receipt: \(error)")
-                        self.handleBadReceipt()
+                        self.alertBadReceipt()
                         return
                     }
 
                     guard let userAccount else {
-                        self.handleBadReceipt()
+                        log.error("Failed to retrieve user account")
+                        self.alertBadReceipt()
                         return
                     }
 
@@ -176,15 +179,6 @@ final class GetStartedViewController: PIAWelcomeViewController {
         }
     }
 
-    private func handleBadReceipt() {
-        let alert = Macros.alert(
-            L10n.Account.Restore.Failure.title,
-            L10n.Account.Restore.Failure.message
-        )
-        alert.addDefaultAction(L10n.Global.close)
-        present(alert, animated: true, completion: nil)
-    }
-
     private func startPurchaseProcessWithEmail(
         _ email: String,
         andPlan plan: PurchasePlan
@@ -195,13 +189,15 @@ final class GetStartedViewController: PIAWelcomeViewController {
         Task { [weak self] in
             guard let self else { return }
 
-            if self.signupAttemptCount > 0 {
-                // if it tried to signup (and failed, that's why we're here again)
-                // synchronize entitlements to find missing purchases or purge stale ones.
-                log.debug("Already failed to signup, synchronizing entitlements")
-                if let error = await Client.store.synchronizeEntitlements() {
-                    log.error("Failed to synchronize entitlements: \(error)")
-                }
+            if await Client.store.currentEntitlementJWS() != nil {
+                // The App Store account may already own a subscription. Could be real
+                // or stale data from Apple. Offer to restore it instead which actually
+                // syncs with Apple servers so we know for sure.
+                log.debug("Found an existing entitlement, offering to restore instead of purchasing")
+                self.isPurchasing = false
+                self.handleLoadingState()
+                self.alertExistingEntitlement()
+                return
             }
 
             let result = await config.accountProvider.purchase(plan: plan.plan)
@@ -234,6 +230,41 @@ final class GetStartedViewController: PIAWelcomeViewController {
             }
         }
     }
+
+    // MARK: - Alerts
+
+    private func alertExistingEntitlement() {
+        let alert = Macros.alert(
+            L10n.Signup.Purchase.Existing.Subscription.title,
+            L10n.Signup.Purchase.Existing.Subscription.message
+        )
+        alert.addCancelAction(L10n.Global.close)
+        alert.addActionWithTitle(L10n.Account.Restore.button) { [weak self] in
+            guard let self else { return }
+            self.logInWithReceipt(nil)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func alertBadReceipt() {
+        let alert = Macros.alert(
+            L10n.Account.Restore.Failure.title,
+            L10n.Account.Restore.Failure.message
+        )
+        alert.addDefaultAction(L10n.Global.close)
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func alertNothingToRestore() {
+        let alert = Macros.alert(
+            L10n.Signup.Purchase.Restore.Empty.title,
+            L10n.Signup.Purchase.Restore.Empty.message
+        )
+        alert.addDefaultAction(L10n.Global.close)
+        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - Config and Segues
 
     static func with(config: Config, delegate: PIAWelcomeViewControllerDelegate) -> UIViewController? {
         let nav = StoryboardScene.Welcome.initialScene.instantiate()

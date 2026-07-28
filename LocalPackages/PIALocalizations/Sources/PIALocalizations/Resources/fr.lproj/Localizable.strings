@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "S'abonner maintenant";
 
+"signup.purchase.existing.subscription.title"= "Abonnement trouvé";
+"signup.purchase.existing.subscription.message"= "Votre compte App Store possède déjà un abonnement Private Internet Access actif. Restaurez-le pour obtenir les détails de votre compte au lieu d'acheter à nouveau.";
+"signup.purchase.restore.empty.title"= "Aucun abonnement trouvé";
+"signup.purchase.restore.empty.message"= "Il n'y a aucun abonnement Private Internet Access actif sur votre compte App Store. Abonnez-vous pour créer un compte.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Serveurs sécurisés dans plus de 90 pays";

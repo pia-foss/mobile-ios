@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "Nu abonneren";
 
+"signup.purchase.existing.subscription.title"= "Abonnement gevonden";
+"signup.purchase.existing.subscription.message"= "Uw App Store-account heeft al een actief Private Internet Access-abonnement. Herstel het om uw accountgegevens te ontvangen in plaats van opnieuw te kopen.";
+"signup.purchase.restore.empty.title"= "Geen abonnement gevonden";
+"signup.purchase.restore.empty.message"= "Er is geen actief Private Internet Access-abonnement op uw App Store-account. Abonneer u om een account aan te maken.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Beveiligde servers in meer dan 90 landen";

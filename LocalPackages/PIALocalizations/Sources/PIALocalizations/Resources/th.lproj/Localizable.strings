@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "สมัครสมาชิกตอนนี้";
 
+"signup.purchase.existing.subscription.title"= "พบการสมัครสมาชิก";
+"signup.purchase.existing.subscription.message"= "บัญชี App Store ของคุณมีการสมัครสมาชิก Private Internet Access ที่ใช้งานอยู่แล้ว กู้คืนเพื่อรับรายละเอียดบัญชีของคุณแทนการซื้อใหม่";
+"signup.purchase.restore.empty.title"= "ไม่พบการสมัครสมาชิก";
+"signup.purchase.restore.empty.message"= "ไม่มีการสมัครสมาชิก Private Internet Access ที่ใช้งานอยู่ในบัญชี App Store ของคุณ สมัครสมาชิกเพื่อสร้างบัญชี";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "เซิร์ฟเวอร์ที่ปลอดภัยในกว่า 90 ประเทศ";

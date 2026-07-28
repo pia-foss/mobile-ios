@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "اشتراك الآن";
 
+"signup.purchase.existing.subscription.title"= "تم العثور على اشتراك";
+"signup.purchase.existing.subscription.message"= "يحتوي حساب App Store الخاص بك بالفعل على اشتراك نشط في Private Internet Access. استعده للحصول على تفاصيل حسابك بدلاً من الشراء مرة أخرى.";
+"signup.purchase.restore.empty.title"= "لم يتم العثور على اشتراك";
+"signup.purchase.restore.empty.message"= "لا يوجد اشتراك نشط في Private Internet Access على حساب App Store الخاص بك. اشترك لإنشاء حساب.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "خوادم آمنة في أكثر من 90 دولة";
