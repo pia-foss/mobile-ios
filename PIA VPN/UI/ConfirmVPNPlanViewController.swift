@@ -135,7 +135,7 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
 
                 let alert = Macros.alert(L10n.Signup.Unreachable.vcTitle, L10n.Welcome.Update.Account.Email.error)
                 alert.addActionWithTitle(L10n.Global.close) {
-                    self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
+                    self?.onSuccess(password: password)
                 }
                 self?.present(alert, animated: true, completion: nil)
 
@@ -144,7 +144,20 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
 
             log.debug("Account: Email successfully modified")
             self?.textEmail.endEditing(true)
-            self?.perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
+            self?.onSuccess(password: password)
+        }
+    }
+
+    private func onSuccess(password: String) {
+        if password.isEmpty {
+            // we skip the screen showing username+password
+            guard let user = config.metadata.user else {
+                log.error("User account not set in metadata")
+                return
+            }
+            config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
+        } else {
+            perform(segue: StoryboardSegue.Signup.successShowCredentialsSegueIdentifier)
         }
     }
 
