@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "Subskrybuj teraz";
 
+"signup.purchase.existing.subscription.title"= "Znaleziono subskrypcję";
+"signup.purchase.existing.subscription.message"= "Twoje konto App Store ma już aktywną subskrypcję Private Internet Access. Przywróć ją, aby uzyskać dane swojego konta, zamiast dokonywać ponownego zakupu.";
+"signup.purchase.restore.empty.title"= "Nie znaleziono subskrypcji";
+"signup.purchase.restore.empty.message"= "Na Twoim koncie App Store nie ma aktywnej subskrypcji Private Internet Access. Zasubskrybuj, aby utworzyć konto.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Bezpieczne serwery w ponad 90 krajach";
