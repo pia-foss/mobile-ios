@@ -535,6 +535,7 @@
 "signup.failure.title"= "アカウントの作成に失敗しました";
 "signup.failure.message"= "ただ今アカウントを作成できません。後ほどもう一度お試しください。\n\nアプリを再起動すると、アカウント作成が再試行されます。";
 "signup.failure.purchase.sandbox.message"= "選択されたサンドボックスのサブスクリプションは生産中のため利用できません。";
+"signup.failure.purchase.pending.message"= "ご購入は承認待ちです。承認されたら、アプリを再度開いてアカウントの設定を完了してください。";
 "signup.failure.redeem.invalid.title"= "無効なカードPIN";
 "signup.failure.redeem.invalid.message"= "無効なカードPINを入力したようです。もう一度お試しください。";
 "signup.failure.redeem.claimed.title"= "すでに獲得されたカードです";

@@ -28,6 +28,8 @@ import PIALocalizations
 import PIAUIKit
 import UIKit
 
+private let log = PIALogger.logger(for: VPNPermissionViewController.self)
+
 final class VPNPermissionViewController: AutolayoutViewController {
     @IBOutlet private weak var contentCardView: UIView!
     private weak var contentLeadingConstraint: NSLayoutConstraint?
@@ -71,17 +73,19 @@ final class VPNPermissionViewController: AutolayoutViewController {
 
     @IBAction private func submit() {
         let vpn = Client.providers.vpnProvider
-        vpn.install(
-            force: true,
-            { (error) in
-                guard (error == nil) else {
+        vpn.obtainVPNPermission { [weak self] (error) in
+            // saveToPreferences does not document its completion queue; hop to
+            // main before touching UIKit.
+            DispatchQueue.main.async {
+                guard let self else { return }
+                if let error {
+                    log.error("Failed to obtain VPN permission: \(error)")
                     self.alertRequiredPermission()
                     return
                 }
-                self.dismissingViewController?.dismiss(animated: true) {
-                    //                vpn.connect(nil)
-                }
-            })
+                self.dismissingViewController?.dismiss(animated: true)
+            }
+        }
     }
 
     private func alertRequiredPermission() {
@@ -95,9 +99,10 @@ final class VPNPermissionViewController: AutolayoutViewController {
                 self.contactCustomerSupport()
             }
         }
-        alert.addCancelActionWithTitle(L10n.Global.ok) {
-            self.submit()
-        }
+        // Just dismiss the alert. The permission screen stays on screen, so the
+        // user can retry via its OK button. Auto-retrying from here created an
+        // undismissable alert loop when the install failed instantly (KM-17461).
+        alert.addCancelActionWithTitle(L10n.Global.ok) {}
         present(alert, animated: true, completion: nil)
     }
 

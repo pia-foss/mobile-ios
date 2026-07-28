@@ -79,6 +79,12 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     }
 
     /// :nodoc:
+    public func obtainVPNPermission(_ callback: SuccessLibraryCallback?) {
+        Macros.postNotification(.PIAVPNDidInstall)
+        callback?(nil)
+    }
+
+    /// :nodoc:
     public func uninstall(_ callback: SuccessLibraryCallback?) {
         callback?(nil)
     }

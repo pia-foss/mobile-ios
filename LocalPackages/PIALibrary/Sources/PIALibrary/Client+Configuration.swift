@@ -322,8 +322,8 @@ extension Client {
                 return inAppPlans[productIdentifier]
             }
 
-            func allProductIdentifiers() -> [String] {
-                return [String](inAppPlans.keys)
+            func allProductIdentifiers() -> Set<String> {
+                return Set(inAppPlans.keys)
             }
 
         #endif

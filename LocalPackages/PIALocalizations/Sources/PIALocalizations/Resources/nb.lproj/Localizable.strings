@@ -534,6 +534,7 @@
 "signup.failure.title"= "Kunne ikke opprette kontoen";
 "signup.failure.message"= "Vi kunne ikke opprette en konto nå. Prøv på nytt senere.\n\nNår du åpner appen igjen, vil den prøve å opprette kontoen på nytt.";
 "signup.failure.purchase.sandbox.message"= "Det valgte sandboksabonnementet er ikke tilgjengelig i produksjon.";
+"signup.failure.purchase.pending.message"= "Kjøpet ditt venter på godkjenning. Når det er godkjent, åpne appen på nytt for å fullføre oppsettet av kontoen din.";
 "signup.failure.redeem.invalid.title"= "Ugyldig kort-PIN";
 "signup.failure.redeem.invalid.message"= "Ser ut til at du brukte en ugyldig kort-PIN. Prøv igjen";
 "signup.failure.redeem.claimed.title"= "Kortet er allerede brukt";

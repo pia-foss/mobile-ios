@@ -536,6 +536,7 @@
 "signup.failure.title"= "Falha ao Criar Conta";
 "signup.failure.message"= "Não podemos criar uma conta neste momento. Tente novamente mais tarde.\n\nApós a reabertua do aplicativo, uma nova tentativa de criação de conta será realizada.";
 "signup.failure.purchase.sandbox.message"= "A assinatura da área restrita selecionada não está disponível em produção.";
+"signup.failure.purchase.pending.message"= "Sua compra está aguardando aprovação. Assim que for aprovada, reabra o app para concluir a configuração da sua conta.";
 "signup.failure.redeem.invalid.title"= "PIN de cartão inválido";
 "signup.failure.redeem.invalid.message"= "Parece que você inseriu um PIN de cartão inválido. Por favor, tente novamente.";
 "signup.failure.redeem.claimed.title"= "O cartão já foi resgatado";

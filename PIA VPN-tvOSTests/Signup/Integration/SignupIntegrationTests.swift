@@ -220,7 +220,6 @@ final class SignupIntegrationTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(capturedTransaction?.identifier, inAppTransactionStub.identifier)
         XCTAssertEqual(capturedTransaction?.description, inAppTransactionStub.description)
-        XCTAssertNil(capturedTransaction?.native)
 
         XCTAssertEqual(capturedLoadingState, [true, false])
 

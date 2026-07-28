@@ -8,8 +8,8 @@ class SubscriptionsUseCaseTests: XCTestCase {
         let refreshAuthTokensCheckerMock = RefreshAuthTokensCheckerMock()
         let appStoreInformation = AppStoreInformation(
             products: [
-                Product(identifier: "id1", plan: .monthly, price: "10", legacy: true),
-                Product(identifier: "id2", plan: .yearly, price: "100", legacy: true)
+                PIAProduct(identifier: "id1", plan: .monthly, price: "10", legacy: true),
+                PIAProduct(identifier: "id2", plan: .yearly, price: "100", legacy: true)
             ],
             eligibleForTrial: true
         )

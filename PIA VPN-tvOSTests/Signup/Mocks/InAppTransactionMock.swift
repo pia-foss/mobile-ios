@@ -7,16 +7,26 @@
 //
 
 import Foundation
+import PIABase
 import PIALibrary
 
-class InAppTransactionMock: InAppTransaction {
-    var identifier: String?
+final class InAppTransactionMock: InAppTransaction {
+    var identifier: String
+    var jwsRepresentation: JWS
     var native: Any?
     var description: String
 
-    init(identifier: String? = nil, native: Any? = nil, description: String) {
+    init(
+        identifier: String,
+        jwsRepresentation: JWS = JWS("mock-jws-transaction")!,
+        native: Any? = nil,
+        description: String
+    ) {
         self.identifier = identifier
+        self.jwsRepresentation = jwsRepresentation
         self.native = native
         self.description = description
     }
+
+    func finish() async {}
 }

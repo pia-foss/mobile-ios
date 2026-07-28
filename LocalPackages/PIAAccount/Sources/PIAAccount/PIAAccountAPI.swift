@@ -1,4 +1,5 @@
 import Foundation
+import PIABase
 
 /// Main API protocol for PIA Account operations.
 ///
@@ -79,16 +80,16 @@ public protocol PIAAccountAPI {
     ///           or network/server errors for other failures
     func loginWithCredentials(username: String, password: String) async throws
 
-    /// Authenticates with an App Store receipt (iOS-specific).
+    /// Authenticates with a StoreKit 2 signed transaction (iOS-specific).
     ///
     /// Use this method to authenticate users who have purchased a subscription
-    /// through the iOS App Store. The receipt is validated server-side.
+    /// through the iOS App Store. The transaction is validated server-side.
     ///
-    /// - Parameter receiptBase64: Base64-encoded App Store receipt obtained from
-    ///                            `Bundle.main.appStoreReceiptURL`
-    /// - Throws: `PIAAccountError` with code 400 if receipt is invalid,
+    /// - Parameter receipt: The JWS representation of the StoreKit 2 transaction
+    ///                      (`VerificationResult.jwsRepresentation`).
+    /// - Throws: `PIAAccountError` with code 400 if the transaction is invalid,
     ///           401 if subscription is not active, or network/server errors
-    func loginWithReceipt(receiptBase64: String) async throws
+    func loginWithReceipt(receipt: JWS) async throws
 
     /// Sends a login link via email.
     ///
@@ -220,10 +221,10 @@ public protocol PIAAccountAPI {
     // MARK: - Subscriptions (iOS)
 
     /// Retrieves iOS subscription information
-    /// - Parameter receipt: Optional App Store receipt data
+    /// - Parameter receipt: Optional JWS StoreKit 2 transaction
     /// - Returns: Subscription information
     /// - Throws: PIAAccountError if the request fails
-    func subscriptions(receipt: Data?) async throws -> IOSSubscriptionInformation
+    func subscriptions(receipt: JWS?) async throws -> IOSSubscriptionInformation
 
     // MARK: - Payment (iOS)
 

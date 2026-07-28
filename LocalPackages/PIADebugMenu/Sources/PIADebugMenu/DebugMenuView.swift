@@ -2,6 +2,8 @@
 import StoreKit
 import SwiftUI
 
+import struct PIABase.JWS
+
 // MARK: - DebugMenuView
 
 struct ReportResult: Identifiable {
@@ -16,11 +18,13 @@ public struct DebugMenuView: View {
     @State private var logSnapshot: String = ""
     @State private var isSendingReport = false
     @State private var reportResult: ReportResult? = nil
+    @State private var isPresentingManageSubscriptions: Bool = false
     @State private var isLoadingRefundTransaction = false
     @State private var refundTransactionId: UInt64 = 0
     @State private var isRefundSheetPresented = false
     @State private var availableTransactions: [StoreKit.Transaction] = []
     @State private var isTransactionPickerPresented = false
+    @State var entitlementJWS: JWS? = nil
 
     public var body: some View {
         mainContent
@@ -32,6 +36,7 @@ public struct DebugMenuView: View {
                 )
             }
             #if os(iOS)
+                .manageSubscriptionsSheet(isPresented: $isPresentingManageSubscriptions)
                 .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
                     switch result {
                     case .success(let status):
@@ -65,6 +70,9 @@ public struct DebugMenuView: View {
             .navigationTitle("Debug Menu")
             .onAppear {
                 logSnapshot = logs
+            }
+            .task {
+                entitlementJWS = await Client.store.currentEntitlementJWS()
             }
             .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
                 logSnapshot = logs
@@ -157,11 +165,11 @@ public struct DebugMenuView: View {
     }
 
     private var receiptSection: some View {
-        DebugSection("Payment Receipt") {
-            if let base64 = receiptBase64 {
-                let preview = String(base64.prefix(300)) + "..."
+        DebugSection("Transaction (JWS)") {
+            if let transactionJWS {
+                let preview = String(transactionJWS.value.prefix(300)) + "..."
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Receipt (preview)")
+                    Text("Transaction JWS (preview)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Text(preview)
@@ -179,16 +187,16 @@ public struct DebugMenuView: View {
                 #if os(iOS)
                     ShareLink(
                         item: DebugExportFile(
-                            content: base64,
-                            filename: "receipt_\(Int(Date().timeIntervalSince1970)).txt"
+                            content: transactionJWS.value,
+                            filename: "transaction_\(Int(Date().timeIntervalSince1970)).txt"
                         ),
-                        preview: SharePreview("Receipt")
+                        preview: SharePreview("Transaction JWS")
                     ) {
                         Label("Export", systemImage: "square.and.arrow.up")
                     }
                 #endif
             } else {
-                DebugInfoRow(label: "Receipt", value: "Not available")
+                DebugInfoRow(label: "Transaction", value: "Not available")
             }
         }
     }
@@ -233,6 +241,9 @@ public struct DebugMenuView: View {
 
     private var subscriptionSection: some View {
         DebugSection("Subscription") {
+            Button("Manage Subscriptions") {
+                isPresentingManageSubscriptions = true
+            }
             Button {
                 isLoadingRefundTransaction = true
                 Task { @MainActor in

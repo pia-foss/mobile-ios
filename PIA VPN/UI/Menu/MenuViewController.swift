@@ -306,29 +306,38 @@ final class MenuViewController: AutolayoutViewController {
     }
 
     private func purchaseProductWithPlan(_ plan: Plan) {
-
         self.showLoadingAnimation()
-        Client.providers.accountProvider.purchase(plan: plan) { (transaction, error) in
+
+        Task { [weak self] in
+            guard let self else { return }
+
+            let result = await Client.providers.accountProvider.purchase(plan: plan)
             self.hideLoadingAnimation()
 
-            guard let transaction = transaction else {
+            switch result {
+            case .failure(.userCancelled):
+                log.debug("User cancelled purchase")
+                break
+
+            case .failure(let error):
+                log.warning("Purchase failed with error: \(error)")
                 self.handlePurchaseFailureWithError(error)
-                return
-            }
 
-            log.debug("Account: Submitting new payment receipt...")
+            case .success(let transaction):
+                log.debug("Account: Submitting new payment receipt...")
 
-            let request = RenewRequest(transaction: transaction)
-            self.showLoadingAnimation()
+                let request = RenewRequest(transaction: transaction)
+                self.showLoadingAnimation()
 
-            Client.providers.accountProvider.renew(with: request) { (user, error) in
-                self.hideLoadingAnimation()
+                Client.providers.accountProvider.renew(with: request) { (user, error) in
+                    self.hideLoadingAnimation()
 
-                guard let _ = user else {
-                    self.handleRenewalFailureWithError(error)
-                    return
+                    guard let _ = user else {
+                        self.handleRenewalFailureWithError(error)
+                        return
+                    }
+                    self.handleRenewalSuccess()
                 }
-                self.handleRenewalSuccess()
             }
         }
     }

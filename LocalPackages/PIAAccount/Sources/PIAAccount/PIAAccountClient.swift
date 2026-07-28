@@ -1,4 +1,5 @@
 import Foundation
+import PIABase
 
 /// Main implementation of PIAAccountAPI
 public actor PIAAccountClient: PIAAccountAPI {
@@ -90,11 +91,9 @@ public actor PIAAccountClient: PIAAccountAPI {
         try await refreshVPNToken()
     }
 
-    public func loginWithReceipt(receiptBase64: String) async throws {
-        let bodyData = try JSONEncoder.piaCodable.encode([
-            "store": "apple_app_store",
-            "receipt": receiptBase64
-        ])
+    public func loginWithReceipt(receipt: JWS) async throws {
+        let payload = LoginRestorePurchasePayload(receipt: receipt)
+        let bodyData = try JSONEncoder.piaCodable.encode(payload)
 
         // Request API token
         let apiTokenResponse: APITokenResponse = try await endpointManager.executeWithFailover(
@@ -348,7 +347,7 @@ public actor PIAAccountClient: PIAAccountAPI {
 
     // MARK: - Subscriptions (iOS)
 
-    public func subscriptions(receipt: Data?) async throws -> IOSSubscriptionInformation {
+    public func subscriptions(receipt: JWS?) async throws -> IOSSubscriptionInformation {
         try await refreshTokensIfNeeded()
 
         var headers: [String: String] = [:]
@@ -359,12 +358,11 @@ public actor PIAAccountClient: PIAAccountAPI {
         if let apiToken = try await tokenManager.getAPITokenString() {
             headers = ["Authorization": "Token \(apiToken)"]
             method = .post
-            var bodyDict: [String: String] = ["store": "apple_app_store"]
             if let receipt = receipt {
-                bodyDict["receipt"] = receipt.base64EncodedString()
+                let payload = LoginRestorePurchasePayload(receipt: receipt)
+                let data = try JSONEncoder.piaCodable.encode(payload)
+                bodyType = .json(data)
             }
-            let bodyData = try JSONEncoder.piaCodable.encode(bodyDict)
-            bodyType = .json(bodyData)
         }
 
         return try await endpointManager.executeWithFailover(

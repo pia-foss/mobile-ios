@@ -43,7 +43,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
 
     func test_listPlanProducts_adds_nonLegacy_products_to_productConfiguration_when_there_is_valid_appstoreInformation() {
         // GIVEN subscriptionInformationProvider completes with valid AppStoreInformation with legacy products
-        let productsStub = Product.makeStubs()
+        let productsStub = PIAProduct.makeStubs()
         let appStoreInformation = AppStoreInformation(products: productsStub, eligibleForTrial: false)
         let error: Error? = nil
 

@@ -5,7 +5,7 @@ enum APIPath: String, Sendable {
     case login = "/api/client/v5/api_token"
     case vpnToken = "/api/client/v5/vpn_token"
     case refreshAPIToken = "/api/client/v5/refresh"
-    case signup = "/api/client/signup"
+    case signup = "/api/client/v5/signup"
     case setEmail = "/api/client/account"
     case loginLink = "/api/client/v2/login_link"
     case logout = "/api/client/v2/expire_token"
@@ -28,7 +28,7 @@ enum APIPath: String, Sendable {
     /// Returns the subdomain for this API path
     var subdomain: String {
         switch self {
-        case .login, .vpnToken, .refreshAPIToken, .validateQR, .supportedDedicatedIPCountries, .getDedicatedIP:
+        case .login, .vpnToken, .refreshAPIToken, .validateQR, .supportedDedicatedIPCountries, .getDedicatedIP, .signup:
             return "apiv5"
         case .loginLink, .logout, .accountDetails, .messages, .dedicatedIP, .renewDedicatedIP:
             return "apiv2"
@@ -36,7 +36,7 @@ enum APIPath: String, Sendable {
             return "apiv5"
         case .refreshToken:
             return "apiv4"
-        case .signup, .setEmail, .clientStatus, .invites, .redeem, .iosPayment, .iosSubscriptions, .iosFeatureFlag:
+        case .setEmail, .clientStatus, .invites, .redeem, .iosPayment, .iosSubscriptions, .iosFeatureFlag:
             return "api"
         }
     }

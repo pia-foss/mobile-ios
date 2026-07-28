@@ -1160,6 +1160,10 @@ public enum L10n {
       /// Sign-up failed
       public static let vcTitle = L10n.tr("Localizable", "signup.failure.vc_title", fallback: "Sign-up failed")
       public enum Purchase {
+        public enum Pending {
+          /// Your purchase is awaiting approval. Once it's approved, reopen the app to finish setting up your account.
+          public static let message = L10n.tr("Localizable", "signup.failure.purchase.pending.message", fallback: "Your purchase is awaiting approval. Once it's approved, reopen the app to finish setting up your account.")
+        }
         public enum Sandbox {
           /// The selected sandbox subscription is not available in production.
           public static let message = L10n.tr("Localizable", "signup.failure.purchase.sandbox.message", fallback: "The selected sandbox subscription is not available in production.")

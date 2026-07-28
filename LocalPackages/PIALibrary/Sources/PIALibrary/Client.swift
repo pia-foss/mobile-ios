@@ -50,7 +50,7 @@ public final class Client {
 
     static var webServices: WebServices = PIAWebServices()
 
-    public static var store: InAppProvider = AppStoreProvider()
+    public static var store: any InAppProvider = AppStoreProvider()
 
     // MARK: Initialization
 
@@ -93,12 +93,12 @@ public final class Client {
         Client.webServices = PIAWebServices()
     }
 
-    /**
-     Refresh the list of plan products
-     */
+    /// Refresh the list of plan products
     public static func refreshProducts() {
         #if os(iOS)
-            providers.accountProvider.listPlanProducts(nil)
+            Task {
+                try? await providers.accountProvider.listPlanProducts()
+            }
         #endif
     }
 

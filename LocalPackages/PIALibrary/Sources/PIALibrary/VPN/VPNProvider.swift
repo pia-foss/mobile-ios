@@ -65,6 +65,16 @@ public protocol VPNProvider: AnyObject {
     func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?)
 
     /**
+     Obtains the one-time OS VPN permission by saving a profile to the system
+     preferences. Unlike `install(force:_:)`, this succeeds even when the server
+     list has not been downloaded yet (a placeholder endpoint is used); the real
+     target server is resolved and re-saved on the next `connect(_:)`.
+
+     - Parameter callback: Returns `nil` on success.
+     */
+    func obtainVPNPermission(_ callback: SuccessLibraryCallback?)
+
+    /**
      Disables the current profile.
 
      - Parameter callback: Returns `nil` on success.

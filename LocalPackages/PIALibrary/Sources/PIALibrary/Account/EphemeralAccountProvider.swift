@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import PIABase
+import StoreKit
 
 fileprivate let log = PIALogger.logger(for: EphemeralAccountProvider.self)
 
@@ -98,29 +100,33 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func listPlanProducts(_ callback: (([Plan: any InAppProduct]?, Error?) -> Void)?) {
-        accessedProviders.accountProvider.listPlanProducts(callback)
+    func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
+        return await accessedProviders.accountProvider.listPlanProducts()
     }
 
-    func purchase(plan: Plan, _ callback: ((InAppTransaction?, Error?) -> Void)?) {
-        accessedProviders.accountProvider.purchase(plan: plan, callback)
+    func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> {
+        return await accessedProviders.accountProvider.purchase(plan: plan)
     }
 
-    func restorePurchases(_ callback: SuccessLibraryCallback?) {
-        accessedProviders.accountProvider.restorePurchases(callback)
+    func restorePurchases() async -> Result<JWS, ClientError> {
+        return await accessedProviders.accountProvider.restorePurchases()
     }
 
     func signup(with request: SignupRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard let signup = request.signup(withStore: accessedStore) else {
-            callback?(nil, ClientError.noReceipt)
-            return
-        }
-
         Task { @MainActor in
+            guard let signup = await request.signup(withStore: accessedStore) else {
+                DispatchQueue.main.async { callback?(nil, ClientError.noReceipt) }
+                return
+            }
+
             do {
                 guard let credentials = try await webServices?.signup(with: signup) else {
                     DispatchQueue.main.async { callback?(nil, nil) }
                     return
+                }
+
+                if let transaction = request.transaction {
+                    accessedStore.finishTransaction(transaction, success: true)
                 }
 
                 let user = UserAccount(credentials: credentials, info: nil)

@@ -534,6 +534,7 @@
 "signup.failure.title"= "Errore di creazione account";
 "signup.failure.message"= "Impossibile creare un account in questo momento. Riprova più tardi. \n\nRiaprendo l'app si riproverà a creare un account.";
 "signup.failure.purchase.sandbox.message"= "L'abbonamento del sandbox selezionato on è disponibile in produzione.";
+"signup.failure.purchase.pending.message"= "Il tuo acquisto è in attesa di approvazione. Una volta approvato, riapri l'app per completare la configurazione del tuo account.";
 "signup.failure.redeem.invalid.title"= "PIN della carta non valido";
 "signup.failure.redeem.invalid.message"= "Hai inserito un PIN della carta non valido. Riprova.";
 "signup.failure.redeem.claimed.title"= "Carta già riscattata";

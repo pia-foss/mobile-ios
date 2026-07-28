@@ -21,26 +21,33 @@
 //
 
 import Foundation
+import PIABase
 
 struct Payment {
-    let receipt: Data
+    /// The signed JWS transaction sent to the backend as `receipt`.
+    let receipt: JWS
 
     var marketing: [String: Any]?
 
     var debug: [String: Any]?
 
-    init(receipt: Data) {
+    init(receipt: JWS) {
         self.receipt = receipt
     }
 }
 
 #if os(iOS) || os(tvOS)
     extension RenewRequest {
-        func payment(withStore store: InAppProvider) -> Payment? {
-            guard let receipt = store.paymentReceipt else {
-                return nil
+        func payment(withStore store: InAppProvider) async -> Payment? {
+            let jws: JWS?
+            if let transaction {
+                jws = transaction.jwsRepresentation
+            } else {
+                jws = await store.currentEntitlementJWS()
             }
-            var object = Payment(receipt: receipt)
+
+            guard let jws else { return nil }
+            var object = Payment(receipt: jws)
             object.marketing = marketing
             if let txid = transaction?.identifier {
                 object.debug = ["txid": txid]

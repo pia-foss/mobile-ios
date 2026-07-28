@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import PIABase
 
 @testable import PIA_VPN_tvOS
 
-class PaymentProviderMock: PaymentProviderType {
-    private let result: Result<Data, any Error>
+final class PaymentProviderMock: PaymentProviderType {
+    private let result: Result<JWS, any Error>
 
-    init(result: Result<Data, any Error>) {
+    init(result: Result<JWS, any Error>) {
         self.result = result
     }
 
-    func refreshPaymentReceipt(_ completion: @escaping (Result<Data, Error>) -> Void) {
+    func refreshPaymentReceipt(_ completion: @escaping (Result<JWS, Error>) -> Void) {
         completion(result)
     }
 }

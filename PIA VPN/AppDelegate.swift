@@ -30,7 +30,7 @@ import UIKit
 private let log = PIALogger.logger(for: AppDelegate.self)
 
 @UIApplicationMain
-class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate {
 
     private enum ShortcutItem: String {
         case connect

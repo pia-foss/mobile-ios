@@ -534,6 +534,7 @@
 "signup.failure.title"= "帳戶建立失敗";
 "signup.failure.message"= "我們目前未能建立帳戶，請稍後再試。\n\n應用程式將在重新啟動時再次嘗試建立帳戶。";
 "signup.failure.purchase.sandbox.message"= "所選的沙盒訂閱已不再提供。";
+"signup.failure.purchase.pending.message"= "您的購買正在等待批准。批准後，請重新開啟應用程式以完成帳戶設定。";
 "signup.failure.redeem.invalid.title"= "無效的卡 PIN 碼";
 "signup.failure.redeem.invalid.message"= "您似乎輸入了一個無效的卡 PIN 碼，請再試一次。";
 "signup.failure.redeem.claimed.title"= "此卡已被使用";

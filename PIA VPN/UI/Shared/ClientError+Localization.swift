@@ -16,6 +16,10 @@ extension ClientError: LocalizedError {
             return NSLocalizedString(
                 L10n.Signup.Failure.Purchase.Sandbox.message,
                 comment: L10n.Signup.Failure.Purchase.Sandbox.message)
+        case .purchasePending:
+            return NSLocalizedString(
+                L10n.Signup.Failure.Purchase.Pending.message,
+                comment: L10n.Signup.Failure.Purchase.Pending.message)
         default:
             return nil
         }

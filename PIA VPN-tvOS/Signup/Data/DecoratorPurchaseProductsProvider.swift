@@ -31,7 +31,7 @@ class DecoratorPurchaseProductsProvider: PurchaseProductsProviderType {
         self.store = store
     }
 
-    func purchase(subscriptionOption: SubscriptionOption, _ callback: @escaping (Result<InAppTransaction, PurchaseProductsError>) -> Void) {
+    func purchase(subscriptionOption: SubscriptionOption, _ callback: @escaping (Result<any InAppTransaction, PurchaseProductsError>) -> Void) {
         purchaseProductsProvider.purchase(plan: subscriptionOption.toPlan()) { [weak self] transaction, error in
             guard let self = self else { return }
 
