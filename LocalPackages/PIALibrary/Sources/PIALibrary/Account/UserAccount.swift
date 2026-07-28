@@ -23,7 +23,7 @@
 import Foundation
 
 /// The compound user account.
-public struct UserAccount: CustomStringConvertible, Equatable {
+public struct UserAccount: CustomStringConvertible, Equatable, Sendable {
 
     /// The account credentials.
     public let credentials: Credentials

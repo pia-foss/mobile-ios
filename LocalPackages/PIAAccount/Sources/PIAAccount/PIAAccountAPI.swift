@@ -161,17 +161,6 @@ public protocol PIAAccountAPI {
     @discardableResult
     func setEmail(email: String, resetPassword: Bool) async throws -> String?
 
-    /// Sets or updates the account email (iOS-specific with credentials)
-    /// - Parameters:
-    ///   - username: Account username
-    ///   - password: Account password
-    ///   - email: New email address
-    ///   - resetPassword: Whether to trigger password reset
-    /// - Returns: New password if resetPassword is true, nil otherwise
-    /// - Throws: PIAAccountError if the request fails
-    @discardableResult
-    func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws -> String?
-
     // MARK: - Dedicated IP
 
     /// Retrieves the list of countries and regions where Dedicated IPs are available.
