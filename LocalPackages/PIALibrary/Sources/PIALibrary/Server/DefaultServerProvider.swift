@@ -63,12 +63,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
 
     public var currentServers: [Server] {
         get {
-            return accessedDatabase.plain.cachedServers
+            return pinningCustomServers(to: accessedDatabase.plain.cachedServers)
         }
         set {
-            var servers = newValue
-            servers.insert(contentsOf: accessedConfiguration.customServers, at: 0)
-            accessedDatabase.plain.cachedServers = servers
+            accessedDatabase.plain.cachedServers = pinningCustomServers(to: newValue)
 
             Macros.postNotification(
                 .PIAServerDidUpdateCurrentServers,
@@ -76,6 +74,27 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                     .servers: newValue
                 ])
         }
+    }
+
+    /// Keeps `Client.Configuration.customServers` at the top of the server list.
+    ///
+    /// Applied on read as well as on write: writes only happen when a fresh list is
+    /// loaded or downloaded, and `loadLocalJSON(fromJSON:)` skips the write entirely
+    /// while a cached list exists — so a write-only hook would leave the custom servers
+    /// out of the list for the whole launch.
+    ///
+    /// Servers already present are dropped first, so the DIP flows below — which append
+    /// to `currentServers`, i.e. to a list that already carries them — cannot duplicate
+    /// them.
+    private func pinningCustomServers(to servers: [Server]) -> [Server] {
+        let customServers = accessedConfiguration.customServers
+        guard !customServers.isEmpty else {
+            return servers
+        }
+
+        var pinned = servers.filter { !customServers.contains($0) }
+        pinned.insert(contentsOf: customServers, at: 0)
+        return pinned
     }
 
     public var bestServer: Server? {

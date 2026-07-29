@@ -129,6 +129,10 @@ final class Bootstrapper {
         #if os(iOS)
             Client.configuration.bundledServersJSON = bundledServersJSON
         #endif
+
+        // TEMPORARY: pins the DCO verification servers to the top of the region list.
+        HardcodedTestServers.register()
+
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
