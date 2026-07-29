@@ -28,6 +28,16 @@ private let log = PIALogger.logger(for: SubscriptionManagementUtil.self)
 /// Utility for managing subscription-related functionality across UIKit and SwiftUI
 enum SubscriptionManagementUtil {
 
+    /// Whether the App Store subscription management sheet can be presented for the given account.
+    /// `AppStore.showManageSubscriptions(in:)` is unsupported when running on Mac, and only App Store
+    /// subscriptions can be managed in the first place.
+    ///
+    /// - Parameter info: The account info to check the plan of.
+    static func canManageSubscription(for info: AccountInfo) -> Bool {
+        guard !Platform.isRunningOnMac else { return false }
+        return info.plan == .monthly || info.plan == .yearly || info.plan == .trial
+    }
+
     /// Opens the App Store subscription management sheet using StoreKit 2.
     /// This method presents the native iOS subscription management interface within the app.
     ///
@@ -36,6 +46,11 @@ enum SubscriptionManagementUtil {
     ///                          For SwiftUI, use the `@Environment(\.windowScene)` property wrapper.
     @MainActor
     static func openManageSubscription(in windowScene: UIWindowScene) async {
+        guard !Platform.isRunningOnMac else {
+            log.error("Subscription management is not supported when running on Mac")
+            return
+        }
+
         do {
             try await AppStore.showManageSubscriptions(in: windowScene)
         } catch {

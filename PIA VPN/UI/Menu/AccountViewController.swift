@@ -214,10 +214,7 @@ final class AccountViewController: AutolayoutViewController {
             }
             styleExpirationDate()
 
-            let hasManageablePlan = userInfo.plan == .monthly || userInfo.plan == .yearly || userInfo.plan == .trial
-            let canManageSubscription = hasManageablePlan && !Platform.isRunningOnMac
-
-            if canManageSubscription {
+            if SubscriptionManagementUtil.canManageSubscription(for: userInfo) {
                 labelSubscriptions.isHidden = false
                 labelSubscriptionTopConstraint.constant = 20
             } else {

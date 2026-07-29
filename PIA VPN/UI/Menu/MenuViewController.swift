@@ -148,10 +148,7 @@ final class MenuViewController: AutolayoutViewController {
             let info = currentUser.info
         {
 
-            let hasManageablePlan = info.plan == .monthly || info.plan == .yearly || info.plan == .trial
-            let canManageSubscription = hasManageablePlan && !Platform.isRunningOnMac
-
-            if canManageSubscription {
+            if SubscriptionManagementUtil.canManageSubscription(for: info) {
 
                 switch info.plan {
                 case .yearly:
