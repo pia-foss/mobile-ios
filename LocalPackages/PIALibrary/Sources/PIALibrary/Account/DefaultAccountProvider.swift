@@ -119,9 +119,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             guard let username = accessedDatabase.secure.username() else {
                 return nil
             }
-            guard let password = accessedDatabase.secure.password(for: username) else {
-                return nil
-            }
+            let password = accessedDatabase.secure.password(for: username) ?? ""
             return UserAccount(
                 credentials: Credentials(username: username, password: password),
                 info: accessedDatabase.plain.accountInfo
@@ -496,7 +494,8 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             accessedDatabase.plain.lastSignupEmail = request.email
 
             do {
-                let credentials = try await webServices.signup(with: signup)
+                let signupResponse = try await webServices.signup(with: signup)
+                let credentials = signupResponse.buildCredentials()
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -507,7 +506,6 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 accessedDatabase.secure.setUsername(credentials.username)
                 accessedDatabase.secure.setPassword(credentials.password, for: credentials.username)
 
-                try await webServices.token(credentials: credentials)
                 let accountInfo = try await webServices.info()
                 accessedDatabase.plain.accountInfo = accountInfo
                 accessedDatabase.secure.setPublicUsername(accountInfo.username)

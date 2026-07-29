@@ -26,7 +26,8 @@ let package = Package(
         .package(path: "../KapePlatformSDK/TunnelKitPackage"),
         .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", exact: "1.0.6"),
         .package(url: "https://github.com/apple/swift-algorithms", exact: "1.2.1"),
-        .package(url: "https://github.com/apple/swift-log", exact: "1.13.1")
+        .package(url: "https://github.com/apple/swift-log", exact: "1.13.1"),
+        .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4")
     ],
     targets: [
         .target(
@@ -34,6 +35,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Algorithms", package: "swift-algorithms"),
                 .product(name: "Logging", package: "swift-log"),
+                .product(name: "Reachability", package: "Reachability.swift"),
                 .product(name: "PIAKPI", package: "PIAKPI"),
                 .product(name: "PIACSI", package: "PIACSI"),
                 .product(name: "PIARegions", package: "PIARegions"),

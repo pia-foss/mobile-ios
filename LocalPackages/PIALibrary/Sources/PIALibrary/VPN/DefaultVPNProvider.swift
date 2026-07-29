@@ -333,6 +333,13 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return
         }
 
+        // The user is giving up on the attempt, so abandon any reconnect cycle in
+        // flight: its retries would undo this disconnect, and while it runs the
+        // daemon suppresses status updates and the app never reaches .disconnected.
+        if accessedConfiguration.disconnectedManually {
+            VPNDaemon.shared.abortReconnectCycleIfNeeded()
+        }
+
         // Capture the tunnel log best-effort, in parallel: the provider message
         // never gets a reply when the tunnel process is wedged (e.g. after a
         // network change), so the disconnect below must not wait on it.

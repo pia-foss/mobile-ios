@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "立即订阅";
 
+"signup.purchase.existing.subscription.title"= "找到订阅";
+"signup.purchase.existing.subscription.message"= "您的App Store账户已有有效的Private Internet Access订阅。恢复它以获取您的账户详细信息，而不是再次购买。";
+"signup.purchase.restore.empty.title"= "未找到订阅";
+"signup.purchase.restore.empty.message"= "您的App Store账户上没有有效的Private Internet Access订阅。订阅以创建账户。";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "90多个国家的安全服务器";

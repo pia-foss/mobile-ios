@@ -159,7 +159,7 @@ import Foundation
                     }
                     do {
                         let session = vpn.connection as? NETunnelProviderSession
-                        try session?.startTunnel(options: nil)
+                        try self.afterTeardown(of: vpn.connection) { try session?.startTunnel(options: nil) }
                         callback?(nil)
                     } catch let e {
                         callback?(e)

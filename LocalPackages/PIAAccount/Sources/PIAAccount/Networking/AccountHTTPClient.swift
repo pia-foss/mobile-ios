@@ -1,4 +1,7 @@
 import Foundation
+import Logging
+
+private let log = Logger(label: String(describing: AccountHTTPClient.self))
 
 /// Actor-based HTTP client for making API requests with optional certificate pinning
 actor AccountHTTPClient {
@@ -59,6 +62,9 @@ actor AccountHTTPClient {
         decoder: JSONDecoder = .piaCodable
     ) async throws -> T {
         do {
+            if let method = request.httpMethod, let url = request.url {
+                log.debug("\(method) \(url.absoluteString)")
+            }
             let (data, response) = try await session.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
