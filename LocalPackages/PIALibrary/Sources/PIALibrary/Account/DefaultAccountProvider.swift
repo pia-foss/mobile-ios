@@ -177,11 +177,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
         Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .signup)
 
             do {
                 try await webServices.token(receipt: receiptRequest.receipt)
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
                 self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
             } catch {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error)
                 self.handleLoginResult(error: error, credentials: credentials, callback: callback)
             }
         }
