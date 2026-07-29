@@ -17,14 +17,16 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../PIABase")
+        .package(path: "../PIABase"),
+        .package(url: "https://github.com/apple/swift-log", exact: "1.13.1")
     ],
     targets: [
         // Main library target (merged for simplicity)
         .target(
             name: "PIAAccount",
             dependencies: [
-                .product(name: "PIABase", package: "PIABase")
+                .product(name: "PIABase", package: "PIABase"),
+                .product(name: "Logging", package: "swift-log")
             ],
             path: "Sources"
         ),
