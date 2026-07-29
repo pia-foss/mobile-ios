@@ -89,7 +89,6 @@ public final class ServiceQualityManager: NSObject {
         case environment
         case retryCount
         case error
-        case csi
         case internalError
         case rawError
     }
@@ -284,8 +283,8 @@ public final class ServiceQualityManager: NSObject {
     }
 
     /// A verification attempt failed and is being retried on the KapeClientSDK path.
-    /// NOTE: not wired yet — client-side retry logic is delivered by the separate
-    /// retry/XV ticket, which will call this with the incremented `retryCount`.
+    /// Reported when signup verification returns HTTP 400 and the login-with-receipt
+    /// fallback re-verifies the same transaction; `retryCount` is that attempt's number.
     public func iapProcessingRetryEvent(origin: KPIIapOrigin, error: Error, retryCount: Int) {
         var properties = baseIapProperties(origin: origin)
         properties[KPIIapPropertyKey.retryCount.rawValue] = String(retryCount)
@@ -328,7 +327,8 @@ public final class ServiceQualityManager: NSObject {
     }
 
     /// Optional diagnostic detail for failure events (`internalError`, `rawError`).
-    /// `csi` has no client-side source and is intentionally omitted.
+    /// The XV spec also lists a `csi` property, which has no client-side source on
+    /// Apple platforms and is therefore never reported.
     private func iapErrorDetails(for error: Error) -> [String: String] {
         var details: [String: String] = [
             KPIIapPropertyKey.rawError.rawValue: String(describing: error)

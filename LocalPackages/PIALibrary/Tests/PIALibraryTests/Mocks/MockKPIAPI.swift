@@ -24,8 +24,8 @@ import PIAKPI
 import XCTest
 
 /// Test double for `KPIAPI` that captures submitted events. Events are submitted from a
-/// detached `Task` inside `ServiceQualityManager`, so tests fulfill `submitExpectation`
-/// to await the submission before asserting.
+/// detached `Task` inside `ServiceQualityManager`, so tests await one of the expectations
+/// below before asserting.
 final class MockKPIAPI: KPIAPI, @unchecked Sendable {
 
     private let lock = NSLock()
@@ -38,11 +38,27 @@ final class MockKPIAPI: KPIAPI, @unchecked Sendable {
         return storedEvents
     }
 
-    /// Fulfilled once for every `submit(event:)` call.
-    func expectSubmission(_ expectation: XCTestExpectation) {
+    /// Returns an expectation fulfilled once per `submit(event:)` call and satisfied by
+    /// exactly `count` of them. A further submission over-fulfills it and fails the test,
+    /// so an unexpected extra event cannot pass unnoticed.
+    func expectSubmissions(_ count: Int = 1) -> XCTestExpectation {
+        let expectation = XCTestExpectation(description: "\(count) event(s) submitted")
+        expectation.expectedFulfillmentCount = count
+        return storing(expectation)
+    }
+
+    /// Returns an inverted expectation that fails if any event is submitted.
+    func expectNoSubmission() -> XCTestExpectation {
+        let expectation = XCTestExpectation(description: "no event submitted")
+        expectation.isInverted = true
+        return storing(expectation)
+    }
+
+    private func storing(_ expectation: XCTestExpectation) -> XCTestExpectation {
         lock.lock()
         defer { lock.unlock() }
         submitExpectation = expectation
+        return expectation
     }
 
     func start() async {}
