@@ -71,6 +71,7 @@ final class MenuViewController: AutolayoutViewController {
     @IBOutlet private weak var imvAvatar: UIImageView!
 
     @IBOutlet private weak var labelVersion: UILabel!
+    private var versionGestureRecognizer: UITapGestureRecognizer?
 
     weak var delegate: MenuViewControllerDelegate?
 
@@ -121,6 +122,7 @@ final class MenuViewController: AutolayoutViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        versionGestureRecognizer = nil
     }
 
     override func viewDidLoad() {
@@ -162,14 +164,22 @@ final class MenuViewController: AutolayoutViewController {
                     withMessage: planDescription + "\n" + L10n.Account.Subscriptions.Short.message,
                     link: L10n.Account.Subscriptions.Short.linkMessage)
                 labelVersion.isUserInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
-                labelVersion.addGestureRecognizer(tap)
+                if versionGestureRecognizer == nil {
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
+                    labelVersion.addGestureRecognizer(tap)
+                    versionGestureRecognizer = tap
+                }
+                if !allItems[1].contains(.version) {
+                    allItems[1].append(.version)
+                }
 
             } else {
                 labelVersion.text = Macros.localizedVersionFullString()
-                allItems[1].removeLast()
+                labelVersion.isUserInteractionEnabled = false
+                allItems[1].removeAll { $0 == .version }
             }
         }
+        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -414,7 +424,6 @@ final class MenuViewController: AutolayoutViewController {
     @objc private func accountDidRefresh(notification: Notification) {
         currentUser = Client.providers.accountProvider.currentUser
         setupPlanHeader()
-        tableView.reloadData()
     }
 
     // MARK: Restylable

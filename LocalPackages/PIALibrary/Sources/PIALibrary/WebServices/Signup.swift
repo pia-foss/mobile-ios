@@ -63,3 +63,20 @@ private let log = PIALogger.logger(for: SignupRequest.self)
         }
     }
 #endif
+
+public enum SignupResponse: Sendable {
+    case username(String)
+    case credentials(Credentials)
+
+    /// Creates ``Credentials`` from the reponse.
+    ///
+    /// When on the ``username(_:)`` case, password will be empty string.
+    public func buildCredentials() -> Credentials {
+        switch self {
+        case .username(let username):
+            return Credentials(username: username, password: "")
+        case .credentials(let credentials):
+            return credentials
+        }
+    }
+}

@@ -559,6 +559,11 @@
 
 "signup.purchase.subscribe.now"= "Assine agora";
 
+"signup.purchase.existing.subscription.title"= "Assinatura encontrada";
+"signup.purchase.existing.subscription.message"= "Sua conta da App Store já possui uma assinatura ativa da Private Internet Access. Restaure-a para obter os detalhes da sua conta em vez de comprar novamente.";
+"signup.purchase.restore.empty.title"= "Nenhuma assinatura encontrada";
+"signup.purchase.restore.empty.message"= "Não há nenhuma assinatura ativa da Private Internet Access na sua conta da App Store. Assine para criar uma conta.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Servidores seguros em mais de 90 países";

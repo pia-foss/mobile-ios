@@ -558,6 +558,11 @@
 
 "signup.purchase.subscribe.now"= "今すぐ定期購読を購入";
 
+"signup.purchase.existing.subscription.title"= "サブスクリプションが見つかりました";
+"signup.purchase.existing.subscription.message"= "お使いのApp Storeアカウントには、有効なPrivate Internet Accessのサブスクリプションが既に存在します。再度購入する代わりに復元してアカウント情報を取得してください。";
+"signup.purchase.restore.empty.title"= "サブスクリプションが見つかりません";
+"signup.purchase.restore.empty.message"= "お使いのApp Storeアカウントに有効なPrivate Internet Accessのサブスクリプションがありません。アカウントを作成するには定期購入してください。";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "90ヶ国以上に安全なサーバー";

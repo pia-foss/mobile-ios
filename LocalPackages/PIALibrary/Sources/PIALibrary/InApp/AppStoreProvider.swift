@@ -75,14 +75,14 @@ final class AppStoreProvider: NSObject, InAppProvider {
         log.debug("Start observing unfinished transactions")
 
         // On startup we check for unfinished transactions and finish them. With
-        // out current architecture is difficult to handle them. Users can always
+        // our current architecture is difficult to handle them. Users can always
         // use the restore flow to claim transactions.
         transactionObserverTask = Task {
             for await result in Transaction.updates {
                 if Task.isCancelled { break }
                 switch result {
                 case .unverified(let transaction, let error):
-                    log.warning("Unverified transaction: \(transaction.id) (\(error)")
+                    log.warning("Unverified transaction: \(transaction.id) \(error)")
                     await transaction.finish()
                 case .verified(let transaction):
                     await transaction.finish()

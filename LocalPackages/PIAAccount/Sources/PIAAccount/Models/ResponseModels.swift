@@ -296,8 +296,23 @@ public struct DedicatedIPTokenDetails: Codable, Sendable {
     }
 }
 
-/// New account credentials after VPN sign up
+/// New account credentials after VPN sign up. Can be either:
+/// - username + password
+/// - username + apiToken + expiresAt
 public struct VpnSignUpInformation: Codable, Sendable {
+    /// The newly created user's username
     public let username: String
-    public let password: String
+    /// The newly created user's password. Might be missing due to some error on account creation.
+    public let password: String?
+    /// The API token string
+    public let apiToken: String
+    /// ISO 8601 expiration date string
+    public let expiresAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case username = "username"
+        case password = "password"
+        case apiToken = "api_token"
+        case expiresAt = "expires_at"
+    }
 }

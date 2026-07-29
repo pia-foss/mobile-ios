@@ -203,6 +203,7 @@ public protocol AccountProvider: AnyObject {
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?)
 
         /// Restores the purchase history, possibly recovering from corruption.
+        /// It syncs with the App Store to get latest data.
         func restorePurchases() async -> Result<JWS, ClientError>
 
         /**

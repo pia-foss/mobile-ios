@@ -244,17 +244,14 @@ public final class ServiceQualityManager: NSObject {
     }
 
     private func currentProtocol() -> KPIVpnProtocol {
-
         switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType:
-            return KPIVpnProtocol.ipsec
-        #if (iOS)
-            case PIATunnelProfile.vpnType:
-                return KPIVpnProtocol.ovpn
-            case PIAWGTunnelProfile.vpnType:
-                return KPIVpnProtocol.wireguard
+        case IKEv2Profile.vpnType: return .ipsec
+        #if !os(tvOS)
+            case PIATunnelProfile.vpnType: return .ovpn
+            case PIAWGTunnelProfile.vpnType: return .wireguard
         #endif
-        default:
+        case let other:
+            log.warning("Unknown VPN type: \(other)")
             return KPIVpnProtocol.ipsec
         }
     }

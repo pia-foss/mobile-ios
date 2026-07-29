@@ -172,7 +172,10 @@ final class Bootstrapper {
                     name: .PIAThemeDidChange,
                     object: self,
                     userInfo: nil)
-                Client.providers.vpnProvider.reconnect(forceDisconnect: true, nil)
+                Client.providers.vpnProvider.reconnect(
+                    after: 200, forceDisconnect: true,
+                    { _ in
+                    })
             }
         #endif
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in

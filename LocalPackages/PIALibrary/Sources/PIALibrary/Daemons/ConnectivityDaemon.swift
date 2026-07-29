@@ -76,8 +76,8 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         log.debug("Initial network state is \(accessedDatabase.transient.isNetworkReachable ? "REACHABLE" : "NOT REACHABLE")")
 
         reachability.whenReachable = { [weak self] reach in
+            guard let self else { return }
             DispatchQueue.main.async {
-                guard let self else { return }
                 guard !self.accessedDatabase.transient.isNetworkReachable else {
                     if (self.accessedDatabase.transient.vpnStatus != .connected) {
                         self.checkConnectivityOrRetry()
@@ -90,8 +90,12 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
             }
         }
         reachability.whenUnreachable = { [weak self] reach in
+            guard let self else { return }
             DispatchQueue.main.async {
-                guard let self else { return }
+                guard self.accessedDatabase.transient.vpnStatus != .connecting else {
+                    // while connecting we are unreachable, but expected, skip reporting
+                    return
+                }
                 guard self.accessedDatabase.transient.isNetworkReachable else {
                     return
                 }
@@ -131,7 +135,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 guard (self.failedConnectivityAttempts < self.accessedConfiguration.connectivityMaxAttempts) else {
                     log.debug("Giving up, network is unreachable")
                     self.failedConnectivityAttempts = 0
-                    self.accessedDatabase.transient.isNetworkReachable = false
+                    self.accessedDatabase.transient.isInternetReachable = false
                     Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
                     return
                 }
@@ -144,7 +148,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
             case .success(let connectivity):
                 self.failedConnectivityAttempts = 0
-                self.accessedDatabase.transient.isNetworkReachable = true
+                self.accessedDatabase.transient.isInternetReachable = true
                 log.debug("Saving new info about network connectivity: \(connectivity)")
 
                 let ipAddress = connectivity.ipAddress

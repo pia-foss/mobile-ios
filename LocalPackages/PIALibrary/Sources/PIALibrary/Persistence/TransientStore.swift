@@ -38,6 +38,8 @@ protocol TransientStore: AnyObject {
 
     var isNetworkReachable: Bool { get set }
 
+    var isInternetReachable: Bool { get set }
+
     /// Currently connected VPN IP, if any.
     /// Implementors should post ``Notification.Name.PIADaemonsDidUpdateConnectivity``
     var vpnIP: String? { get set }

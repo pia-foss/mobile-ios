@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "馬上訂閱";
 
+"signup.purchase.existing.subscription.title"= "找到訂閱";
+"signup.purchase.existing.subscription.message"= "您的App Store帳戶已有有效的Private Internet Access訂閱。還原它以取得您的帳戶詳細資訊，而不是再次購買。";
+"signup.purchase.restore.empty.title"= "找不到訂閱";
+"signup.purchase.restore.empty.message"= "您的App Store帳戶上沒有有效的Private Internet Access訂閱。訂閱以建立帳戶。";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "90多個國家的安全伺服器";

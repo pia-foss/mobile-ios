@@ -315,7 +315,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
                 self.pendingVPNAction = nil
 
                 if shouldReconnect && !isDisconnected {
-                    Client.providers.vpnProvider.reconnect(forceDisconnect: true) { _ in
+                    Client.providers.vpnProvider.reconnect(after: nil, forceDisconnect: true) { (error) in
                         completionHandler()
                         self.hideLoadingAnimation()
                     }

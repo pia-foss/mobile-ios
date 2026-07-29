@@ -1191,6 +1191,22 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "signup.in_progress.title", fallback: "Confirm sign-up")
     }
     public enum Purchase {
+      public enum Existing {
+        public enum Subscription {
+          /// Your App Store account already has an active Private Internet Access subscription. Restore it to get your account details instead of purchasing again.
+          public static let message = L10n.tr("Localizable", "signup.purchase.existing.subscription.message", fallback: "Your App Store account already has an active Private Internet Access subscription. Restore it to get your account details instead of purchasing again.")
+          /// Subscription found
+          public static let title = L10n.tr("Localizable", "signup.purchase.existing.subscription.title", fallback: "Subscription found")
+        }
+      }
+      public enum Restore {
+        public enum Empty {
+          /// There is no active Private Internet Access subscription on your App Store account. Subscribe to create an account.
+          public static let message = L10n.tr("Localizable", "signup.purchase.restore.empty.message", fallback: "There is no active Private Internet Access subscription on your App Store account. Subscribe to create an account.")
+          /// No subscription found
+          public static let title = L10n.tr("Localizable", "signup.purchase.restore.empty.title", fallback: "No subscription found")
+        }
+      }
       public enum Subscribe {
         /// Subscribe now
         public static let now = L10n.tr("Localizable", "signup.purchase.subscribe.now", fallback: "Subscribe now")

@@ -241,34 +241,6 @@ public actor PIAAccountClient: PIAAccountAPI {
         return response.password
     }
 
-    public func setEmail(username: String, password: String, email: String, resetPassword: Bool) async throws -> String? {
-        // Create Basic Auth header with username:password (matching Kotlin IOSAccount.kt line 244-247)
-        let credentials = "\(username):\(password)"
-        guard let credentialsData = credentials.data(using: .utf8) else {
-            throw PIAAccountError.encodingFailed(
-                NSError(domain: "PIAAccount", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode credentials"])
-            )
-        }
-        let base64Credentials = credentialsData.base64EncodedString()
-        let headers = ["Authorization": "Basic \(base64Credentials)"]
-
-        let formParams = [
-            "username": username,
-            "password": password,
-            "email": email,
-            "reset_password": resetPassword ? "true" : "false"
-        ]
-
-        let response: SetEmailInformation = try await endpointManager.executeWithFailover(
-            path: .setEmail,
-            method: .post,
-            bodyType: .formEncoded(formParams),
-            headers: headers
-        )
-
-        return response.password
-    }
-
     // MARK: - Dedicated IP
 
     public func supportedDedicatedIPCountries() async throws -> DipCountriesResponse {
@@ -408,11 +380,19 @@ public actor PIAAccountClient: PIAAccountAPI {
     public func signUp(information: IOSSignupInformation) async throws -> VpnSignUpInformation {
         let bodyData = try JSONEncoder.piaCodable.encode(information)
 
-        return try await endpointManager.executeWithFailover(
+        let response: VpnSignUpInformation = try await endpointManager.executeWithFailover(
             path: .signup,
             method: .post,
             bodyType: .json(bodyData)
         )
+
+        let tokenResponse = APITokenResponse(apiToken: response.apiToken, expiresAt: response.expiresAt)
+        // Store API token
+        try await tokenManager.storeAPIToken(tokenResponse)
+        // Request VPN token
+        try await refreshVPNToken()
+
+        return response
     }
 
     // MARK: - Social

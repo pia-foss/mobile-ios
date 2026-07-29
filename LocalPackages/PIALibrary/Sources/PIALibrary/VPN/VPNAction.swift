@@ -51,7 +51,7 @@ final class VPNActionReconnect: VPNAction, ProvidersAccess {
             callback?(nil)
             return
         }
-        vpn.reconnect(callback)
+        vpn.reconnect(after: nil, callback)
     }
 }
 

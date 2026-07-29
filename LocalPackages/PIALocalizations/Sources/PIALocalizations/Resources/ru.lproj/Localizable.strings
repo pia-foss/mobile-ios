@@ -557,6 +557,11 @@
 
 "signup.purchase.subscribe.now"= "Подписаться";
 
+"signup.purchase.existing.subscription.title"= "Подписка найдена";
+"signup.purchase.existing.subscription.message"= "На вашем аккаунте App Store уже есть активная подписка Private Internet Access. Восстановите её, чтобы получить данные своей учетной записи, вместо повторной покупки.";
+"signup.purchase.restore.empty.title"= "Подписка не найдена";
+"signup.purchase.restore.empty.message"= "На вашем аккаунте App Store нет активной подписки Private Internet Access. Оформите подписку, чтобы создать учетную запись.";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Защищенные серверы в более чем 90 странах";

@@ -548,6 +548,11 @@
 
 "signup.purchase.subscribe.now"= "Hemen abone ol";
 
+"signup.purchase.existing.subscription.title"= "Abonelik bulundu";
+"signup.purchase.existing.subscription.message"= "App Store hesabınızda zaten etkin bir Private Internet Access aboneliği var. Yeniden satın almak yerine hesap bilgilerinizi almak için geri yükleyin.";
+"signup.purchase.restore.empty.title"= "Abonelik bulunamadı";
+"signup.purchase.restore.empty.message"= "App Store hesabınızda etkin bir Private Internet Access aboneliği bulunmuyor. Hesap oluşturmak için abone olun.";
+
 
 "signup.purchase.trials.intro"= "7 günlük ücretsiz deneme sürenizi başlatın";
 
