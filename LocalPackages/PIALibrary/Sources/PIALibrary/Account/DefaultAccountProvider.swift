@@ -526,8 +526,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             } catch let error as ClientError where error == .badReceipt {
                 // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
                 // This handles returning users (e.g. "Duplicate purchase" from API).
-                // The fallback reports the final verification outcome, so no event here.
-                await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
+                // That second attempt on the same transaction is the retry; the fallback
+                // reports its outcome, so no failure event here.
+                ServiceQualityManager.shared.iapProcessingRetryEvent(origin: .signup, error: error, retryCount: 1)
+                await attemptLoginWithReceiptFallback(transaction: request.transaction, retryCount: 1, callback: callback)
             } catch {
                 let isOffline = (error as? URLError)?.code == .notConnectedToInternet
                 let reportedError: Error = isOffline ? ClientError.internetUnreachable : error
@@ -542,7 +544,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
 
-        private func attemptLoginWithReceiptFallback(transaction: (any InAppTransaction)?, callback: ((UserAccount?, Error?) -> Void)?) async {
+        private func attemptLoginWithReceiptFallback(transaction: (any InAppTransaction)?, retryCount: Int, callback: ((UserAccount?, Error?) -> Void)?) async {
             let jws: JWS?
             if let transaction {
                 jws = transaction.jwsRepresentation
@@ -551,7 +553,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
 
             guard let jws else {
-                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: ClientError.badReceipt)
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: ClientError.badReceipt, retryCount: retryCount)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
@@ -559,12 +561,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             do {
                 try await webServices.token(receipt: jws)
             } catch {
-                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error)
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error, retryCount: retryCount)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
             // Receipt verified via the login-with-receipt fallback.
-            ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
+            ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup, retryCount: retryCount)
 
             if let transaction = transaction {
                 accessedStore.finishTransaction(transaction, success: true)

@@ -28,17 +28,20 @@ final class ServiceQualityManagerTests: XCTestCase {
 
     private var mockKPI: MockKPIAPI!
     private var sut: ServiceQualityManager!
+    private var originalConsent: Bool!
 
     override func setUp() {
         super.setUp()
         Client.database = Client.Database(group: "group.com.privateinternetaccess")
+        originalConsent = Client.preferences.shareServiceQualityData
         mockKPI = MockKPIAPI()
         sut = ServiceQualityManager(kpiManager: mockKPI)
         setConsent(true)
     }
 
     override func tearDown() {
-        setConsent(false)
+        setConsent(originalConsent)
+        originalConsent = nil
         sut = nil
         mockKPI = nil
         super.tearDown()
@@ -54,8 +57,7 @@ final class ServiceQualityManagerTests: XCTestCase {
         after action: () -> Void,
         timeout: TimeInterval = 2.0
     ) -> KPIClientEvent? {
-        let submitted = expectation(description: "event submitted")
-        mockKPI.expectSubmission(submitted)
+        let submitted = mockKPI.expectSubmissions()
         action()
         wait(for: [submitted], timeout: timeout)
         return mockKPI.submittedEvents.first
@@ -127,9 +129,7 @@ final class ServiceQualityManagerTests: XCTestCase {
     func testEventSuppressedWhenConsentDisabled() {
         setConsent(false)
 
-        let notSubmitted = expectation(description: "no event submitted")
-        notSubmitted.isInverted = true
-        mockKPI.expectSubmission(notSubmitted)
+        let notSubmitted = mockKPI.expectNoSubmission()
 
         sut.iapProcessingPurchaseEvent(origin: .signup)
 
