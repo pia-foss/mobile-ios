@@ -83,8 +83,10 @@ final class AppStoreProvider: NSObject, InAppProvider {
                 switch result {
                 case .unverified(let transaction, let error):
                     log.warning("Unverified transaction: \(transaction.id) \(error)")
+                    log.debug("Finishing transaction: \(transaction.id)")
                     await transaction.finish()
                 case .verified(let transaction):
+                    log.debug("Finishing transaction: \(transaction.id)")
                     await transaction.finish()
                 }
             }

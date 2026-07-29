@@ -53,6 +53,8 @@ import StoreKit
 
         let native: Native = .none
 
+        let isExpired: Bool = false
+
         func finish() async {}
     }
 
