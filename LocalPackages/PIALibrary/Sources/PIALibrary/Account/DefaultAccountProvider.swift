@@ -177,14 +177,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
         Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
-            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .signup)
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .restore)
 
             do {
                 try await webServices.token(receipt: receiptRequest.receipt)
-                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .restore)
                 self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
             } catch {
-                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error)
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .restore, error: error)
                 self.handleLoginResult(error: error, credentials: credentials, callback: callback)
             }
         }
@@ -659,13 +659,13 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
 
             // A renewal IAP transaction starts processing (Kape verification path).
-            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .renewal)
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .renew)
 
             var verificationSucceeded = false
             do {
                 try await webServices.processPayment(credentials: user.credentials, request: payment)
                 verificationSucceeded = true
-                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .renewal)
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .renew)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -680,7 +680,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 DispatchQueue.main.async { callback?(user, nil) }
             } catch {
                 if !verificationSucceeded {
-                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .renewal, error: error)
+                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .renew, error: error)
                 }
                 DispatchQueue.main.async { callback?(nil, error) }
             }

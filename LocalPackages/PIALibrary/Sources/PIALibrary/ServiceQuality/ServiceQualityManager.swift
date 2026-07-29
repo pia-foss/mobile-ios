@@ -95,13 +95,15 @@ public final class ServiceQualityManager: NSObject {
 
     /**
      * The user-facing flow a purchase originated from, reported as the `origin`
-     * property. NOTE: the XV spec lists `origin` but does not enumerate its values;
-     * these map to the two purchase-crediting flows and can be adjusted if XV
-     * expects a fixed literal (e.g. a store name).
+     * property. These are the values enumerated by the XV spec; the raw values are
+     * the wire contract, so they must not be renamed. `update` is not emitted yet:
+     * no plan-change flow is instrumented.
      */
     public enum KPIIapOrigin: String {
         case signup
-        case renewal
+        case renew
+        case restore
+        case update
     }
 
     public override init() {

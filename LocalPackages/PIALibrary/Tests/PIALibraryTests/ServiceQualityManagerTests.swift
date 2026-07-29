@@ -76,27 +76,44 @@ final class ServiceQualityManagerTests: XCTestCase {
         XCTAssertNil(event?.eventProperties["error"])
     }
 
+    /// The `origin` raw values are the XV wire contract, so they are asserted as literals.
+    func testOriginWireValues() {
+        XCTAssertEqual(ServiceQualityManager.KPIIapOrigin.signup.rawValue, "signup")
+        XCTAssertEqual(ServiceQualityManager.KPIIapOrigin.renew.rawValue, "renew")
+        XCTAssertEqual(ServiceQualityManager.KPIIapOrigin.restore.rawValue, "restore")
+        XCTAssertEqual(ServiceQualityManager.KPIIapOrigin.update.rawValue, "update")
+    }
+
+    func testRestoreOriginIsReported() {
+        let event = firstSubmittedEvent {
+            sut.iapProcessingPurchaseEvent(origin: .restore)
+        }
+
+        XCTAssertEqual(event?.eventName, "iap_processing_purchase")
+        XCTAssertEqual(event?.eventProperties["origin"], "restore")
+    }
+
     func testSuccessEventIncludesRetryCount() {
         let event = firstSubmittedEvent {
-            sut.iapProcessingSuccessEvent(origin: .renewal, retryCount: 0)
+            sut.iapProcessingSuccessEvent(origin: .renew, retryCount: 0)
         }
 
         XCTAssertEqual(event?.eventName, "iap_processing_success")
-        XCTAssertEqual(event?.eventProperties["origin"], "renewal")
+        XCTAssertEqual(event?.eventProperties["origin"], "renew")
         XCTAssertEqual(event?.eventProperties["retryCount"], "0")
     }
 
     func testRetryEventIncludesErrorAndRetryCount() {
         let event = firstSubmittedEvent {
             sut.iapProcessingRetryEvent(
-                origin: .renewal,
+                origin: .renew,
                 error: ClientError.throttled(retryAfter: 5),
                 retryCount: 2
             )
         }
 
         XCTAssertEqual(event?.eventName, "iap_processing_retry")
-        XCTAssertEqual(event?.eventProperties["origin"], "renewal")
+        XCTAssertEqual(event?.eventProperties["origin"], "renew")
         XCTAssertEqual(event?.eventProperties["error"], "throttled_5")
         XCTAssertEqual(event?.eventProperties["retryCount"], "2")
     }
