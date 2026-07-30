@@ -129,11 +129,11 @@ final class GetStartedViewController: PIAWelcomeViewController {
     private func observePurchaseIntents() {
         purchaseIntentObserver.start()
         purchaseIntentsTask = Task { [weak self] in
-            guard let self else { return }
-            for await product in self.purchaseIntentObserver.purchaseIntents {
+            guard let intents = self?.purchaseIntentObserver.purchaseIntents else { return }
+            for await product in intents {
                 if Task.isCancelled { break }
                 log.debug("Purchase intent received for product id: \(product.identifier)")
-                await self.startPurchaseProcess(withProduct: product)
+                await self?.startPurchaseProcess(withProduct: product)
             }
         }
     }
@@ -150,7 +150,8 @@ final class GetStartedViewController: PIAWelcomeViewController {
     }
 
     @IBAction private func logInWithReceipt(_ sender: Any?) {
-        guard !isRestoring else {
+        guard !isPurchasing, !isRestoring else {
+            log.debug("Ignoring restore request, purchase or restore already in progress")
             return
         }
         isRestoring = true
@@ -201,6 +202,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     @MainActor
     private func startPurchaseProcess(withPlan plan: PurchasePlan) async {
+        guard !isPurchasing, !isRestoring else {
+            log.debug("Ignoring purchase request, purchase or restore already in progress")
+            return
+        }
         isPurchasing = true
         handleLoadingState()
         if await shouldRestoreInsteadOfPurchase() { return }
@@ -212,6 +217,10 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     @MainActor
     private func startPurchaseProcess(withProduct product: any InAppProduct) async {
+        guard !isPurchasing, !isRestoring else {
+            log.debug("Ignoring purchase request, purchase or restore already in progress")
+            return
+        }
         isPurchasing = true
         handleLoadingState()
         if await shouldRestoreInsteadOfPurchase() { return }

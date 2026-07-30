@@ -20,75 +20,81 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PIABase
-import StoreKit
+#if !os(tvOS)
 
-private let log = PIALogger.logger(for: PurchaseIntentObserver.self)
+    import Foundation
+    import PIABase
+    import StoreKit
 
-/// Observes purchases initiated outside the app (e.g. from the App Store product page)
-/// and emits the purchased product for the caller to handle.
-///
-/// Uses `PurchaseIntent.intents` on iOS 16.4+, falling back to
-/// `SKPaymentTransactionObserver.paymentQueue(_:shouldAddStorePayment:for:)` on iOS 15-16.3.
-public final class PurchaseIntentObserver: NSObject, SKPaymentTransactionObserver {
-    public let purchaseIntents: AsyncStream<any InAppProduct>
-    private let continuation: AsyncStream<any InAppProduct>.Continuation
-    private var observeTask: Task<Void, Never>?
+    private let log = PIALogger.logger(for: PurchaseIntentObserver.self)
 
-    public override init() {
-        var continuation: AsyncStream<any InAppProduct>.Continuation!
-        purchaseIntents = AsyncStream { continuation = $0 }
-        self.continuation = continuation
-        super.init()
-    }
+    /// Observes purchases initiated outside the app (e.g. from the App Store product page)
+    /// and emits the purchased product for the caller to handle.
+    ///
+    /// Uses `PurchaseIntent.intents` on iOS 16.4+, falling back to
+    /// `SKPaymentTransactionObserver.paymentQueue(_:shouldAddStorePayment:for:)` on iOS 15-16.3.
+    public final class PurchaseIntentObserver: NSObject, SKPaymentTransactionObserver {
+        public let purchaseIntents: AsyncStream<any InAppProduct>
+        private let continuation: AsyncStream<any InAppProduct>.Continuation
+        private var observeTask: Task<Void, Never>?
 
-    public func start() {
-        if #available(iOS 16.4, *) {
-            observeTask = Task { [weak self] in
-                for await purchaseIntent in PurchaseIntent.intents {
-                    guard let self, !Task.isCancelled else {
-                        self?.stop()
-                        break
+        public override init() {
+            var continuation: AsyncStream<any InAppProduct>.Continuation!
+            purchaseIntents = AsyncStream { continuation = $0 }
+            self.continuation = continuation
+            super.init()
+        }
+
+        public func start() {
+            if #available(iOS 16.4, *) {
+                observeTask = Task { [weak self] in
+                    for await purchaseIntent in PurchaseIntent.intents {
+                        guard let self, !Task.isCancelled else {
+                            log.debug("Task cancelled, stopping")
+                            self?.stop()
+                            break
+                        }
+                        log.debug("Observed purchase intent for product id: \(purchaseIntent.product.id) SK2")
+                        // we can hardcode `hasIntroOffer` here, it won't be used.
+                        self.continuation.yield(AppStoreProduct(native: purchaseIntent.product, hasIntroOffer: false))
                     }
-                    log.debug("Observed purchase intent for product: \(purchaseIntent.product.id)")
-                    self.continuation.yield(AppStoreProduct(native: purchaseIntent.product, hasIntroOffer: false))
                 }
-            }
-        } else {
-            SKPaymentQueue.default().add(self)
-        }
-    }
-
-    public func stop() {
-        observeTask?.cancel()
-        observeTask = nil
-        SKPaymentQueue.default().remove(self)
-        continuation.finish()
-    }
-
-    // MARK: SKPaymentTransactionObserver
-
-    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {}
-
-    @available(iOS, deprecated: 16.4, message: "Superseded by PurchaseIntent.intents")
-    public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
-        let identifier = product.productIdentifier
-        Task { [weak self] in
-            guard let self else { return }
-            do {
-                guard let product = try await Product.products(for: [identifier]).first else {
-                    log.warning("StoreKit 2 product not found for identifier: \(identifier)")
-                    return
-                }
-                log.debug("Observed store payment for product: \(identifier)")
-                self.continuation.yield(AppStoreProduct(native: product, hasIntroOffer: false))
-            } catch {
-                log.warning("Unable to find StoreKit 2 product with id \(identifier): \(error)")
+            } else {
+                SKPaymentQueue.default().add(self)
             }
         }
 
-        // we don't let StoreKit 1 handle the purchase; it's re-issued through StoreKit 2 above
-        return false
+        public func stop() {
+            observeTask?.cancel()
+            observeTask = nil
+            SKPaymentQueue.default().remove(self)
+        }
+
+        // MARK: SKPaymentTransactionObserver
+
+        public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {}
+
+        @available(iOS, deprecated: 16.4, message: "Superseded by PurchaseIntent.intents")
+        public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+            let identifier = product.productIdentifier
+            log.debug("Observed purchase intent for product id: \(identifier) SK1")
+            Task { [weak self] in
+                guard let self else { return }
+                do {
+                    guard let product = try await Product.products(for: [identifier]).first else {
+                        log.warning("StoreKit 2 product not found for id: \(identifier)")
+                        return
+                    }
+                    log.debug("Found StoreKit 2 product with id: \(product.id)")
+                    self.continuation.yield(AppStoreProduct(native: product, hasIntroOffer: false))
+                } catch {
+                    log.warning("Unable to find StoreKit 2 product with id \(identifier): \(error)")
+                }
+            }
+
+            // we don't let StoreKit 1 handle the purchase; it's re-issued through StoreKit 2 above
+            return false
+        }
     }
-}
+
+#endif
