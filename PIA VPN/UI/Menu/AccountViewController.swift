@@ -214,7 +214,7 @@ final class AccountViewController: AutolayoutViewController {
             }
             styleExpirationDate()
 
-            if userInfo.plan == .monthly || userInfo.plan == .yearly || userInfo.plan == .trial {
+            if SubscriptionManagementUtil.canManageSubscription(for: userInfo) {
                 labelSubscriptions.isHidden = false
                 labelSubscriptionTopConstraint.constant = 20
             } else {

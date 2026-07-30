@@ -33,6 +33,13 @@ struct AppStoreTransaction: InAppTransaction<Transaction> {
 
     let jwsRepresentation: JWS
 
+    var isExpired: Bool {
+        if let expirationDate = native.expirationDate, expirationDate < Date.now {
+            return true
+        }
+        return false
+    }
+
     init(native: Transaction, jwsRepresentation: JWS) {
         self.native = native
         self.jwsRepresentation = jwsRepresentation

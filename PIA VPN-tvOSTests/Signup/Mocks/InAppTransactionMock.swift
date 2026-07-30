@@ -14,17 +14,20 @@ final class InAppTransactionMock: InAppTransaction {
     var identifier: String
     var jwsRepresentation: JWS
     var native: Any?
+    var isExpired: Bool
     var description: String
 
     init(
         identifier: String,
         jwsRepresentation: JWS = JWS("mock-jws-transaction")!,
         native: Any? = nil,
+        isExpired: Bool = false,
         description: String
     ) {
         self.identifier = identifier
         self.jwsRepresentation = jwsRepresentation
         self.native = native
+        self.isExpired = isExpired
         self.description = description
     }
 

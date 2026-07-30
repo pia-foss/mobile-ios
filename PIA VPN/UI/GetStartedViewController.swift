@@ -241,11 +241,20 @@ final class GetStartedViewController: PIAWelcomeViewController {
             )
         case .success(let transaction):
             log.debug("Purchase successful with transaction id \(transaction.identifier)")
-            await MainActor.run { [weak self] in
-                guard let self else { return }
-                self.signupTransaction = transaction
-                self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
+            if transaction.isExpired {
+                // Users in this state (unfished, expired transaction) is a weird edge case,
+                // since we always finish all transactions. However, users still get into this state.
+                // Finishing all transactions is fine because users can use the restore flow.
+                log.warning("Transaction \(transaction.identifier) is expired. Finishing it and cancel purchase.")
+                await transaction.finish()
+                Macros.displayImageNote(
+                    withImage: Asset.iconWarning.image,
+                    message: ClientError.badReceipt.localizedDescription
+                )
+                return
             }
+            self.signupTransaction = transaction
+            self.perform(segue: StoryboardSegue.Welcome.signupViaPurchaseSegue)
         }
     }
 
