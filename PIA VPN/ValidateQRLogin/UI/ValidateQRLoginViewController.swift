@@ -26,11 +26,12 @@ final class ValidateQRLoginViewController: AutolayoutViewController {
 
         piaLogoImageView.image = Asset.navLogo.image
         loadingSpinner.style = .large
-        loadingSpinner.startAnimating()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        guard !loadingSpinner.isAnimating else { return }
+        loadingSpinner.startAnimating()
         requestConfirmation()
     }
 
@@ -41,7 +42,7 @@ final class ValidateQRLoginViewController: AutolayoutViewController {
         }
         alert.addCancelAction(L10n.Global.cancel) { [weak self] in
             self?.cancelQRLogin()
-            self?.dismiss(animated: true)
+            self?.presentingViewController?.dismiss(animated: true)
         }
         present(alert, animated: true)
     }
@@ -51,7 +52,7 @@ final class ValidateQRLoginViewController: AutolayoutViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.dismiss(animated: true)
+                    self?.presentingViewController?.dismiss(animated: true)
                 case .failure:
                     self?.presentError()
                 }
@@ -66,7 +67,7 @@ final class ValidateQRLoginViewController: AutolayoutViewController {
         )
 
         alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
-            self?.dismiss(animated: true)
+            self?.presentingViewController?.dismiss(animated: true)
         }
 
         present(alert, animated: true, completion: nil)

@@ -402,7 +402,7 @@
 "tvos.login.qr.expired.description" = "Generate a new one below";
 "tvos.login.qr.expired.button.generate" = "Generate QR";
 
-"validateqr.confirmation.title" = "Log in into Apple TV?";
+"validateqr.confirmation.title" = "Log in to Apple TV?";
 "validateqr.confirmation.message" = "Make sure you trust this device. Cancel if you are unsure.";
 "validateqr.confirmation.continue" = "Log In";
 

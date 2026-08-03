@@ -1615,8 +1615,8 @@ public enum L10n {
       public static let `continue` = L10n.tr("Localizable", "validateqr.confirmation.continue", fallback: "Log In")
       /// Make sure you trust this device. Cancel if you are unsure.
       public static let message = L10n.tr("Localizable", "validateqr.confirmation.message", fallback: "Make sure you trust this device. Cancel if you are unsure.")
-      /// Log in into Apple TV?
-      public static let title = L10n.tr("Localizable", "validateqr.confirmation.title", fallback: "Log in into Apple TV?")
+      /// Log in to Apple TV?
+      public static let title = L10n.tr("Localizable", "validateqr.confirmation.title", fallback: "Log in to Apple TV?")
     }
   }
   public enum VpnPermission {

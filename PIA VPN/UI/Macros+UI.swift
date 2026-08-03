@@ -518,7 +518,7 @@ public extension UIAlertController {
     /// - Parameter title: The action title
     /// - Parameter handler: The optional action handler
     func addCancelAction(_ title: String, handler: (() -> Void)? = nil) {
-        let action = UIAlertAction(title: title, style: .cancel) { action in
+        let action = UIAlertAction(title: title, style: .cancel) { _ in
             handler?()
         }
         addAction(action)
