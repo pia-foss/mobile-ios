@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "在下方生成新的二维码";
 "tvos.login.qr.expired.button.generate" = "生成 QR";
 
+"validateqr.confirmation.title" = "登录 Apple TV？";
+"validateqr.confirmation.message" = "请确认您信任此设备。如不确定，请取消。";
+"validateqr.confirmation.continue" = "登录";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "无法连接";
 "error_alert.connection_error.no_network.message" = "请检查您的网络连接并重试";

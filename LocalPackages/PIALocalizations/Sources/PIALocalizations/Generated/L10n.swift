@@ -1609,6 +1609,16 @@ public enum L10n {
       }
     }
   }
+  public enum Validateqr {
+    public enum Confirmation {
+      /// Log In
+      public static let `continue` = L10n.tr("Localizable", "validateqr.confirmation.continue", fallback: "Log In")
+      /// Make sure you trust this device. Cancel if you are unsure.
+      public static let message = L10n.tr("Localizable", "validateqr.confirmation.message", fallback: "Make sure you trust this device. Cancel if you are unsure.")
+      /// Log in into Apple TV?
+      public static let title = L10n.tr("Localizable", "validateqr.confirmation.title", fallback: "Log in into Apple TV?")
+    }
+  }
   public enum VpnPermission {
     /// PIA
     public static let title = L10n.tr("Localizable", "vpn_permission.title", fallback: "PIA")

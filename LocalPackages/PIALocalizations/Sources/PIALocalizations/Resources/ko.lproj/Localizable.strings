@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "아래에서 새로운 QR 코드를 생성하세요.";
 "tvos.login.qr.expired.button.generate" = "QR 생성";
 
+"validateqr.confirmation.title" = "Apple TV에 로그인하시겠습니까?";
+"validateqr.confirmation.message" = "이 기기를 신뢰할 수 있는지 확인하세요. 확실하지 않으면 취소하세요.";
+"validateqr.confirmation.continue" = "로그인";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "연결할 수 없음";
 "error_alert.connection_error.no_network.message" = "인터넷 연결 상태를 확인한 뒤 다시 시도하세요.";

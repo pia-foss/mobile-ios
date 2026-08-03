@@ -11,26 +11,49 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-class ValidateQRLoginViewController: AutolayoutViewController {
+final class ValidateQRLoginViewController: AutolayoutViewController {
     @IBOutlet weak var piaLogoImageView: UIImageView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
 
-    var validateQRLogin: ValidateQRLoginUseCaseType?
+    var validateQRLogin: ValidateQRLoginUseCaseType!
+    var cancelQRLogin: CancelQRLoginUseCaseType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setImageforMode(isLightMode: traitCollection.userInterfaceStyle == .light)
+        assert(validateQRLogin != nil, "ValidateQRLoginUseCaseType not set in ValidateQRLoginViewController")
+        assert(cancelQRLogin != nil, "CancelQRLoginUseCaseType not set in ValidateQRLoginViewController")
+
+        piaLogoImageView.image = Asset.navLogo.image
         loadingSpinner.style = .large
         loadingSpinner.startAnimating()
+    }
 
-        validateQRLogin? { result in
-            DispatchQueue.main.async { [self] in
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        requestConfirmation()
+    }
+
+    private func requestConfirmation() {
+        let alert = Macros.alertController(L10n.Validateqr.Confirmation.title, L10n.Validateqr.Confirmation.message)
+        alert.addDefaultAction(L10n.Validateqr.Confirmation.continue) { [weak self] in
+            self?.performValidateLogin()
+        }
+        alert.addCancelAction(L10n.Global.cancel) { [weak self] in
+            self?.cancelQRLogin()
+            self?.dismiss(animated: true)
+        }
+        present(alert, animated: true)
+    }
+
+    private func performValidateLogin() {
+        validateQRLogin { [weak self] result in
+            DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    dismiss(animated: true)
+                    self?.dismiss(animated: true)
                 case .failure:
-                    presentError()
+                    self?.presentError()
                 }
             }
         }
@@ -42,20 +65,10 @@ class ValidateQRLoginViewController: AutolayoutViewController {
             L10n.ErrorAlert.ConnectionError.NoNetwork.message
         )
 
-        alert.addActionWithTitle(L10n.Global.ok) {
-            self.dismiss(animated: true)
+        alert.addActionWithTitle(L10n.Global.ok) { [weak self] in
+            self?.dismiss(animated: true)
         }
 
         present(alert, animated: true, completion: nil)
-    }
-
-    private func setImageforMode(isLightMode: Bool) {
-        piaLogoImageView.image = Asset.navLogo.image
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        setImageforMode(isLightMode: traitCollection.userInterfaceStyle == .light)
     }
 }

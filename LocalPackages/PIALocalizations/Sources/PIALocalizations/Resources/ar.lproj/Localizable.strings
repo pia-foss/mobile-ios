@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "إنشاء رمز QR جديد أدناه";
 "tvos.login.qr.expired.button.generate" = "إنشاء رمز QR";
 
+"validateqr.confirmation.title" = "تسجيل الدخول إلى Apple TV؟";
+"validateqr.confirmation.message" = "تأكد من أنك تثق بهذا الجهاز. ألغِ العملية إذا لم تكن متأكدًا.";
+"validateqr.confirmation.continue" = "تسجيل الدخول";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "تعذر الاتصال";
 "error_alert.connection_error.no_network.message" = "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى";
