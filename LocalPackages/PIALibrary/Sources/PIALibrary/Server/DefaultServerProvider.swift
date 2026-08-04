@@ -122,6 +122,9 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     public var targetServer: Server {
         get throws {
             guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
+                if currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON {
+                    loadLocalJSON(fromJSON: bundledServersJSON)
+                }
                 guard let fallbackServer = currentServers.first else {
                     log.error("No servers available")
                     throw ClientError.noServersAvailable
