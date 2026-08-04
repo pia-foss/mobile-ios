@@ -122,9 +122,11 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
 
     public var targetServer: Server {
         get throws {
-            guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
+            guard let server = resolvedTargetServer else {
                 reloadBundledServersIfEmpty()
-                guard let fallbackServer = currentServers.first else {
+                // Re-resolve: the preferred/last-connected region may now be found in the
+                // freshly-reloaded cache, instead of falling back to an arbitrary server.
+                guard let fallbackServer = resolvedTargetServer ?? currentServers.first else {
                     log.error("No servers available")
                     throw ClientError.noServersAvailable
                 }
@@ -132,6 +134,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             }
             return server
         }
+    }
+
+    private var resolvedTargetServer: Server? {
+        accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion
     }
 
     /// Serializes the check-and-reload so concurrent `targetServer` reads from different

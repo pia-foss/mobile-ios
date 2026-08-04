@@ -28,6 +28,33 @@ class DefaultServerProviderTargetServerTests: XCTestCase {
         XCTAssertFalse(Client.providers.serverProvider.currentServers.isEmpty)
     }
 
+    func test_targetServer_reResolvesLastConnectedRegion_afterReload() throws {
+        guard let serverProvider = Client.providers.serverProvider as? DefaultServerProvider else {
+            return XCTFail("Expected the real DefaultServerProvider")
+        }
+
+        // GIVEN a bundle with more than one server, and a persisted "last connected" region
+        // that isn't the first server in the bundle
+        let serversJSON = bundledServersJSON()
+        Client.configuration.bundledServersJSON = serversJSON
+        serverProvider.loadLocalJSON(fromJSON: serversJSON)
+        let allServers = serverProvider.currentServers
+        let lastConnected = try XCTUnwrap(allServers.dropFirst().first, "fixture needs at least 2 servers")
+        XCTAssertNotEqual(lastConnected.identifier, allServers.first?.identifier)
+        Client.database.plain.lastConnectedRegion = lastConnected
+
+        // AND the cache is empty again (e.g. right after logout, before the daemon re-downloads)
+        serverProvider.currentServers = []
+        XCTAssertTrue(serverProvider.currentServers.isEmpty)
+
+        // WHEN resolving targetServer, which reloads the bundle
+        let resolved = try serverProvider.targetServer
+
+        // THEN it re-resolves the persisted last-connected region instead of returning an
+        // arbitrary server from the freshly-reloaded cache
+        XCTAssertEqual(resolved.identifier, lastConnected.identifier)
+    }
+
     func test_targetServer_stillThrows_whenNoBundledServersJSONAvailable() {
         // GIVEN an empty cache and no bundled servers JSON configured
         Client.configuration.bundledServersJSON = nil
