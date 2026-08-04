@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Token non valido. Assicurati di aver inserito correttamente il token.";
 "dedicated.ip.message.valid.token" = "Il tuo IP dedicato è stato attivato. Sarà disponibile nell'elenco di selezione del paese.";
 "dedicated.ip.message.expired.token" = "Token scaduto. Generane uno nuovo dalla pagina del tuo account sul sito web.";
+"dedicated.ip.message.error.alreadyHasOne" = "Puoi avere un solo IP dedicato alla volta";
 "dedicated.ip.message.error.retryafter" = "Troppe richieste di attivazione token non riuscite. Riprova tra %@ secondo/i.";
 "dedicated.ip.message.token.willexpire" = "Il tuo IP dedicato scade a breve. Ottieni uno nuovo";
 "dedicated.ip.message.token.willexpire.link" = "Ottieni uno nuovo";
