@@ -86,6 +86,8 @@ final class Bootstrapper {
         // Load the database first
         Client.database = Client.Database(group: AppConstants.appGroup)
 
+        WidgetConnectAuthorization.shared.setReloader(WidgetReloaderImpl())
+
         // Force enable debug logging for DEVELOPMENT and STAGING builds
         #if DEVELOPMENT || STAGING
             Client.preferences.debugLogging = true
@@ -96,6 +98,9 @@ final class Bootstrapper {
             //If first install, we need to ensure we don't have data from previous sessions in the Secure Keychain
             Client.providers.accountProvider.cleanDatabase()
         }
+
+        // A new secret on every cold start, so a leaked widget connect URL stops working
+        WidgetConnectAuthorization.shared.rotateSecret()
 
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()

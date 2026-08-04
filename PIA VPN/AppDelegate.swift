@@ -192,6 +192,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
             }
 
         } else if url.absoluteString.starts(with: AppConstants.Widget.connect) {
+            guard WidgetConnectAuthorization.shared.isAuthorized(url) else {
+                log.error("Ignoring a widget connect URL without a valid secret")
+                return false
+            }
             if Client.providers.vpnProvider.isVPNConnected {
                 disconnectAfter(milliseconds: defaultMilliseconds)
             } else {
@@ -220,11 +224,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
             // in case it's too early for notification delivery (vc not loaded)
             TransientState.shouldDisplayRegionPicker = true
-
-        case VPNStatus.disconnected.rawValue:
-            if !Client.providers.vpnProvider.isVPNConnected {
-                connectAfter(milliseconds: defaultMilliseconds)
-            }
 
         default:
             return false

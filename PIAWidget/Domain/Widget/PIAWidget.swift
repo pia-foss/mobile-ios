@@ -21,19 +21,18 @@
 
 import ActivityKit
 import Intents
+import PIALibrary
 import SwiftUI
 import WidgetKit
 
-//@main
 struct PIAWidget: Widget {
 
-    let kind: String = "PIAWidget"
-    let displayName: String = "PIA VPN"
+    private let displayName: String = "PIA VPN"
 
     var body: some WidgetConfiguration {
         let widgetPersistenceDatasource = WidgetUserDefaultsDatasource()
         return StaticConfiguration(
-            kind: kind,
+            kind: AppConstants.Widget.kind,
             provider: PIAWidgetProvider(
                 widgetPersistenceDatasource: widgetPersistenceDatasource
             )

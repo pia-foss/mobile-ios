@@ -58,8 +58,7 @@ struct PIAWidgetView: View {
                     )
                 }
             }
-
         }
-        .widgetURL(URL(string: AppConstants.Widget.connect))
+        .widgetURL(WidgetConnectAuthorization.shared.makeConnectURL())
     }
 }

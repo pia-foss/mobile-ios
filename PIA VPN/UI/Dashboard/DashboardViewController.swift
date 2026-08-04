@@ -1195,7 +1195,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func reloadWidget() {
-        WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: AppConstants.Widget.kind)
     }
 
     private func handleDisconnectedAndTrustedNetwork() {

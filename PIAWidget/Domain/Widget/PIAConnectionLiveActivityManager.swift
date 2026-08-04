@@ -5,6 +5,7 @@
     public protocol PIAConnectionLiveActivityManagerType {
         func startLiveActivity(with state: PIAConnectionAttributes.ContentState)
         func endLiveActivities()
+        func refreshLiveActivities()
     }
 
     @available(iOS 16.2, *)
@@ -29,6 +30,15 @@
 
             createNewLiveActivity(with: state)
 
+        }
+
+        /// Re-pushes the current content, so the views rebuild anything they derive from outside the state.
+        public func refreshLiveActivities() {
+            for activity in Activity<PIAConnectionAttributes>.activities where activity.activityState == .active {
+                Task {
+                    await activity.update(activity.content)
+                }
+            }
         }
 
         public func endLiveActivities() {

@@ -108,7 +108,8 @@ public struct AppConstants {
         public static let url = "piavpn:login?token="
     }
 
-    public struct Widget {
+    public enum Widget {
+        public static let kind = "PIAWidget"
         public static let connect = "piavpn:connect"
     }
 

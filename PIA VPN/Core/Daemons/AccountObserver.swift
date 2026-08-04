@@ -132,5 +132,8 @@ class AccountObserver {
 
         Client.providers.vpnProvider.uninstallAll()
         cancelExpirationNotifications()
+
+        // Drop the widget connect secret this account's URLs were built with
+        WidgetConnectAuthorization.shared.resetSecret()
     }
 }
