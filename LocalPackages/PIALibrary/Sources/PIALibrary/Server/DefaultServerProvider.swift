@@ -30,6 +30,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     private let renewDedicatedIP: RenewDedicatedIPUseCaseType
     private let getDedicatedIPs: GetDedicatedIPsUseCaseType
     private let dedicatedIPServerMapper: DedicatedIPServerMapperType
+    private let bundledServersReloadLock = Mutex<Void>(())
 
     init(webServices: WebServices? = nil, renewDedicatedIP: RenewDedicatedIPUseCaseType, getDedicatedIPs: GetDedicatedIPsUseCaseType, dedicatedIPServerMapper: DedicatedIPServerMapperType) {
         if let webServices = webServices {
@@ -122,9 +123,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     public var targetServer: Server {
         get throws {
             guard let server = accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion else {
-                if currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON {
-                    loadLocalJSON(fromJSON: bundledServersJSON)
-                }
+                reloadBundledServersIfEmpty()
                 guard let fallbackServer = currentServers.first else {
                     log.error("No servers available")
                     throw ClientError.noServersAvailable
@@ -132,6 +131,18 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                 return fallbackServer
             }
             return server
+        }
+    }
+
+    /// Serializes the check-and-reload so concurrent `targetServer` reads from different
+    /// threads (`VPNDaemon`, `DefaultVPNProvider`) can't all see an empty cache at once and
+    /// each independently reload the bundle, duplicating the write, notification, and ping sweep.
+    private func reloadBundledServersIfEmpty() {
+        bundledServersReloadLock.withLock { _ in
+            guard currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON else {
+                return
+            }
+            loadLocalJSON(fromJSON: bundledServersJSON)
         }
     }
 
