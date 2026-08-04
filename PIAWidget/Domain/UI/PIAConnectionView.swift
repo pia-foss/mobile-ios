@@ -49,14 +49,17 @@ internal struct PIAConnectionView: View {
                     Spacer()
                 }
 
-                Link(destination: URL(string: AppConstants.Widget.connect)!) {
-                    PIACircleImageView(
-                        size: 54,
-                        image: context.state.connected ? Asset.connectedButton.swiftUIImage : Asset.disconnectedButton.swiftUIImage
-                    )
+                if let connectUrl = WidgetConnectAuthorization.shared.makeConnectURL() {
+                    Link(destination: connectUrl) {
+                        PIACircleImageView(
+                            size: 54,
+                            image: context.state.connected
+                                ? Asset.connectedButton.swiftUIImage
+                                : Asset.disconnectedButton.swiftUIImage
+                        )
+                    }
                 }
             }
         }
-
     }
 }

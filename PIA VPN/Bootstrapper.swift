@@ -97,6 +97,8 @@ final class Bootstrapper {
             Client.providers.accountProvider.cleanDatabase()
         }
 
+        WidgetConnectAuthorization.shared.createSecretIfNeeded()
+
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()
 
@@ -272,6 +274,7 @@ final class Bootstrapper {
 
     func dispose() {
         Client.dispose()
+        WidgetConnectAuthorization.shared.clearSecret()
     }
 
     private func setupExceptionHandler() {

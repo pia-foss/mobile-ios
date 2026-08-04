@@ -24,11 +24,10 @@ import Intents
 import SwiftUI
 import WidgetKit
 
-//@main
 struct PIAWidget: Widget {
 
-    let kind: String = "PIAWidget"
-    let displayName: String = "PIA VPN"
+    private let kind: String = "PIAWidget"
+    private let displayName: String = "PIA VPN"
 
     var body: some WidgetConfiguration {
         let widgetPersistenceDatasource = WidgetUserDefaultsDatasource()
