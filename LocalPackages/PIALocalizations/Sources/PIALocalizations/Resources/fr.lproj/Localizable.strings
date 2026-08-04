@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "Générez un nouveau QR code ci-dessous";
 "tvos.login.qr.expired.button.generate" = "Générer";
 
+"validateqr.confirmation.title" = "Se connecter à l'Apple TV ?";
+"validateqr.confirmation.message" = "Assurez-vous de faire confiance à cet appareil. Annulez si vous avez un doute.";
+"validateqr.confirmation.continue" = "Connexion";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "Impossible de se connecter";
 "error_alert.connection_error.no_network.message" = "Veuillez vérifier votre connexion internet et réessayez";

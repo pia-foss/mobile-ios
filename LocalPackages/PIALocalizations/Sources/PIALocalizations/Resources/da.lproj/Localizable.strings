@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "Generér en ny nedenfor";
 "tvos.login.qr.expired.button.generate" = "Generér QR";
 
+"validateqr.confirmation.title" = "Log ind på Apple TV?";
+"validateqr.confirmation.message" = "Sørg for, at du har tillid til denne enhed. Annuller, hvis du er i tvivl.";
+"validateqr.confirmation.continue" = "Log ind";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "Kan ikke oprette forbindelse";
 "error_alert.connection_error.no_network.message" = "Tjek din internetforbindelse, og prøv igen";

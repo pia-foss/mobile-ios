@@ -10,12 +10,13 @@ import Foundation
 import PIALibrary
 import UIKit
 
-class ValidateQRLoginFactory {
+enum ValidateQRLoginFactory {
     static func makeValidateQRLoginViewController(apiToken: String, tvOSBindToken: String) -> ValidateQRLoginViewController? {
         let storyboard = UIStoryboard(name: "ValidateQRLoginView", bundle: .main)
         let viewController = storyboard.instantiateInitialViewController() as? ValidateQRLoginViewController
 
         viewController?.validateQRLogin = makeValidateQRLoginUseCase(apiToken: apiToken, tvOSBindToken: tvOSBindToken)
+        viewController?.cancelQRLogin = makeCancelQRLoginUseCase()
 
         return viewController
     }
@@ -26,6 +27,10 @@ class ValidateQRLoginFactory {
             tvOSBindToken: tvOSBindToken,
             loginProvider: makeLoginProvider(),
             tokenProvider: Client.configuration)
+    }
+
+    static private func makeCancelQRLoginUseCase() -> CancelQRLoginUseCase {
+        CancelQRLoginUseCase(tokenProvider: Client.configuration)
     }
 
     static private func makeLoginProvider() -> LoginProviderType {
