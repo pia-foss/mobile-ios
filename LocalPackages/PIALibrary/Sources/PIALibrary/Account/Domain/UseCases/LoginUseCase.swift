@@ -83,11 +83,11 @@ private extension LoginUseCase {
         }
     }
 
-    func handleDataResponse(_ dataResponse: NetworkRequestResponseType, shouldSaveTokenFromResponse: Bool, completion: @escaping RefreshVpnTokenUseCaseType.Completion) {
+    func handleDataResponse(_ dataResponse: NetworkRequestResponseType, shouldSaveTokenFromResponse: Bool, completion: @escaping Completion) {
 
         if shouldSaveTokenFromResponse {
             guard let dataResponseContent = dataResponse.data else {
-                completion(.unauthorized)
+                completion(.noDataContent)
                 return
             }
             saveAPIToken(from: dataResponseContent, completion: completion)
@@ -102,15 +102,13 @@ private extension LoginUseCase {
             try apiTokenProvider.saveAPIToken(from: data)
             // Refresh the Vpn token after successfully login
             refreshVpnTokenUseCase() { error in
-                if error != nil {
-                    completion(.unauthorized)
-                } else {
-                    completion(nil)
-                }
+                completion(error)
             }
 
+        } catch let error as NetworkRequestError {
+            completion(error)
         } catch {
-            completion(.unauthorized)
+            completion(.unableToSaveAPIToken)
         }
     }
 }

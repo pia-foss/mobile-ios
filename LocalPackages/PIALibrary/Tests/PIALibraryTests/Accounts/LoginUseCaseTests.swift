@@ -42,17 +42,38 @@ class LoginUseCaseTests: XCTestCase {
             networkClientMock.executeRequestResponse = successResponse
         }
 
+        /// A non-success status code never reaches the use case as a response: `NetworkRequestClient`
+        /// turns it into an error through `tryNextConnectionOrFail`
         func stubLoginFailedResponseWith401() {
-            let response = NetworkRequestResponseMock(statusCode: 401)
-            networkClientMock.executeRequestResponse = response
+            networkClientMock.executeRequestError = .allConnectionAttemptsFailed(statusCode: 401)
         }
 
         func stubLoginFailedResponseWithError() {
             networkClientMock.executeRequestError = .connectionError(statusCode: 500)
         }
 
+        func stubLoginSuccessfulResponseWithNoData() {
+            networkClientMock.executeRequestResponse = NetworkRequestResponseMock(statusCode: 200)
+        }
+
         func stubFailSavingApiToken() {
             apiTokenProviderMock.saveAPITokenFromDataError = NetworkRequestError.unableToSaveAPIToken
+        }
+
+        func stubFailDecodingApiToken() {
+            apiTokenProviderMock.saveAPITokenFromDataError = NetworkRequestError.unableToDecodeAPIToken
+        }
+
+        func stubFailRefreshingVpnToken() {
+            refreshVpnTokenUseCaseMock.completionError = .connectionError(statusCode: 500)
+        }
+
+        func stubFailRefreshingVpnTokenAsUnauthorized() {
+            refreshVpnTokenUseCaseMock.completionError = .allConnectionAttemptsFailed(statusCode: 401)
+        }
+
+        func stubFailRefreshingVpnTokenAsThrottled() {
+            refreshVpnTokenUseCaseMock.completionError = .allConnectionAttemptsFailed(statusCode: 429)
         }
 
         func stubLoginLinkSuccessfulResponse() {
@@ -142,9 +163,10 @@ class LoginUseCaseTests: XCTestCase {
         // AND the Vpn token is NOT refreshed
         XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
 
-        // AND an 'unauthorized' error is returned
+        // AND the actual 401 error is returned, which ClientErrorMapper maps to 'unauthorized'
         XCTAssertNotNil(capturedError)
-        XCTAssertEqual(capturedError!, .unauthorized)
+        XCTAssertEqual(capturedError!, .allConnectionAttemptsFailed(statusCode: 401))
+        XCTAssertEqual(capturedError!.asClientError(), .unauthorized)
 
     }
 
@@ -243,9 +265,10 @@ class LoginUseCaseTests: XCTestCase {
         // AND the Vpn token is NOT refreshed
         XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
 
-        // AND an 'unauthorized' error is returned
+        // AND the actual 401 error is returned, which ClientErrorMapper maps to 'unauthorized'
         XCTAssertNotNil(capturedError)
-        XCTAssertEqual(capturedError!, .unauthorized)
+        XCTAssertEqual(capturedError!, .allConnectionAttemptsFailed(statusCode: 401))
+        XCTAssertEqual(capturedError!.asClientError(), .unauthorized)
 
     }
 
@@ -337,6 +360,184 @@ class LoginUseCaseTests: XCTestCase {
         // AND the actual connection error is returned (not 'unauthorized')
         XCTAssertNotNil(capturedError)
         XCTAssertEqual(capturedError!, .connectionError(statusCode: 500))
+
+    }
+
+    func testLoginWithCredentialsWhenResponseHasNoData() {
+        // GIVEN that the network request to login with creds succeeds but carries no data
+        fixture.stubLoginSuccessfulResponseWithNoData()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN the API token provider is NOT called to save anything
+        XCTAssertEqual(fixture.apiTokenProviderMock.saveAPITokenFromDataCalledAttempt, 0)
+
+        // AND the Vpn token is NOT refreshed
+        XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
+
+        // AND a malformed response error is returned (not 'unauthorized')
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .noDataContent)
+        XCTAssertEqual(capturedError!.asClientError(), .malformedResponseData)
+
+    }
+
+    func testLoginWithCredentialsWhenDecodingTheApiTokenFails() {
+        // GIVEN that the login succeeds but the API token in the response cannot be decoded
+        fixture.stubLoginSuccessfulResponse()
+        fixture.stubFailDecodingApiToken()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN saving the API token was attempted
+        XCTAssertEqual(fixture.apiTokenProviderMock.saveAPITokenFromDataCalledAttempt, 1)
+
+        // AND the Vpn token is NOT refreshed
+        XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
+
+        // AND the decoding error is propagated (not 'unauthorized')
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .unableToDecodeAPIToken)
+        XCTAssertEqual(capturedError!.asClientError(), .malformedResponseData)
+
+    }
+
+    func testLoginWithCredentialsWhenSavingTheApiTokenFails() {
+        // GIVEN that the login succeeds but the API token cannot be saved
+        fixture.stubLoginSuccessfulResponse()
+        fixture.stubFailSavingApiToken()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN saving the API token was attempted
+        XCTAssertEqual(fixture.apiTokenProviderMock.saveAPITokenFromDataCalledAttempt, 1)
+
+        // AND the Vpn token is NOT refreshed
+        XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 0)
+
+        // AND the save error is returned (not 'unauthorized')
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .unableToSaveAPIToken)
+        XCTAssertEqual(capturedError!.asClientError(), .unexpectedReply)
+
+    }
+
+    func testLoginWithCredentialsWhenRefreshingTheVpnTokenFails() {
+        // GIVEN that the login succeeds but refreshing the Vpn token afterwards fails
+        fixture.stubLoginSuccessfulResponse()
+        fixture.stubFailRefreshingVpnToken()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN the API token from the response was already stored successfully,
+        // so the credentials were valid
+        XCTAssertEqual(fixture.apiTokenProviderMock.saveAPITokenFromDataCalledAttempt, 1)
+        XCTAssertEqual(fixture.apiTokenProviderMock.saveAPITokenFromDataCalledWithArg, fixture.validApiTokenJsonData)
+
+        // AND the Vpn token refresh was attempted
+        XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 1)
+
+        // AND the actual refresh error is returned (not 'unauthorized')
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .connectionError(statusCode: 500))
+        XCTAssertEqual(capturedError!.asClientError(), .unexpectedReply)
+
+    }
+
+    func testLoginWithCredentialsWhenRefreshingTheVpnTokenIsThrottled() {
+        // GIVEN that the login succeeds but refreshing the Vpn token fails with status code 429
+        fixture.stubLoginSuccessfulResponse()
+        fixture.stubFailRefreshingVpnTokenAsThrottled()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN the throttling information is preserved, so the retry delay can be shown
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .allConnectionAttemptsFailed(statusCode: 429))
+        XCTAssertEqual(capturedError!.asClientError(), .throttled(retryAfter: 60))
+
+    }
+
+    func testLoginWithCredentialsWhenRefreshingTheVpnTokenIsUnauthorized() {
+        // GIVEN that the login succeeds but refreshing the Vpn token fails with status code 401
+        fixture.stubLoginSuccessfulResponse()
+        fixture.stubFailRefreshingVpnTokenAsUnauthorized()
+
+        instantiateSut()
+
+        let expectation = expectation(description: "Login call is finished")
+        var capturedError: NetworkRequestError? = nil
+
+        // WHEN login with Creds
+        sut.login(with: fixture.credentials) { error in
+            capturedError = error
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3)
+
+        // THEN the Vpn token refresh was attempted
+        XCTAssertEqual(fixture.refreshVpnTokenUseCaseMock.callAsFunctionCalledAttempt, 1)
+
+        // AND the genuine auth failure is preserved rather than reported as a Vpn token error
+        XCTAssertNotNil(capturedError)
+        XCTAssertEqual(capturedError!, .allConnectionAttemptsFailed(statusCode: 401))
+        XCTAssertEqual(capturedError!.asClientError(), .unauthorized)
 
     }
 
