@@ -45,8 +45,13 @@
             super.init()
         }
 
+        deinit {
+            continuation.finish()
+        }
+
         public func start() {
             if #available(iOS 16.4, *) {
+                guard observeTask == nil else { return }
                 observeTask = Task { [weak self] in
                     for await purchaseIntent in PurchaseIntent.intents {
                         guard let self, !Task.isCancelled else {

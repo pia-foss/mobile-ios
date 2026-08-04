@@ -128,8 +128,8 @@ final class GetStartedViewController: PIAWelcomeViewController {
 
     private func observePurchaseIntents() {
         purchaseIntentObserver.start()
+        let intents = purchaseIntentObserver.purchaseIntents
         purchaseIntentsTask = Task { [weak self] in
-            guard let intents = self?.purchaseIntentObserver.purchaseIntents else { return }
             for await product in intents {
                 if Task.isCancelled { break }
                 log.debug("Purchase intent received for product id: \(product.identifier)")
