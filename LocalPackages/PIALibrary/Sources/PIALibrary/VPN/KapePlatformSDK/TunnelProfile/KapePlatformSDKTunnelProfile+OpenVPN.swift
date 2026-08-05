@@ -84,7 +84,7 @@ extension KapePlatformSDKTunnelProfile {
             default: .automatic
             }
 
-        let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.OpenVPN.useSmallPackets)
+        let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.useSmallPackets)
         let mtu = UInt16(useSmallPackets ? AppConstants.OpenVPNPacketSize.smallPacketSize : AppConstants.OpenVPNPacketSize.defaultPacketSize)
         let dnsServers = customDnsServers(forVPNType: .openVPN)
 

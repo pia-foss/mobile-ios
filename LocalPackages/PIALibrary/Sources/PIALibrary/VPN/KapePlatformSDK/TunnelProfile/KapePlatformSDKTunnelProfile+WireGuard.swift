@@ -26,7 +26,8 @@ extension KapePlatformSDKTunnelProfile {
     /// Builds the WireGuard settings from the small-packets toggle in app-group UserDefaults,
     /// resolving the key-exchange token from the target server (DIP vs account token).
     func wireGuardSettings(for server: Server) -> PIATunnelSharedState.WireGuardSettings {
-        let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.WireGuard.useSmallPackets)
+        // "Use Small Packets" is a single user-facing setting shared with OpenVPN.
+        let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.useSmallPackets)
         let mtu = UInt16(useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
 
         // DIP uses `dipUsername` as the WireGuard token (mirrors PIAWGTunnelProfile).

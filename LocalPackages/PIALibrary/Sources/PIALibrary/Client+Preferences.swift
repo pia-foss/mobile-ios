@@ -65,6 +65,18 @@ private protocol PreferencesStore: AnyObject {
 
     var ikeV2PacketSize: Int { get set }
 
+    var useSmallPackets: Bool { get set }
+
+    var openVPNSocketType: String? { get set }
+
+    var openVPNCipher: String? { get set }
+
+    var openVPNPort: Int { get set }
+
+    var openVPNDnsServers: [String] { get set }
+
+    var wireGuardDnsServers: [String] { get set }
+
     var signInWithAppleFakeEmail: String? { get set }
 
     var debugLogging: Bool { get set }
@@ -105,6 +117,12 @@ private extension PreferencesStore {
         ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
         ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
         ikeV2PacketSize = source.ikeV2PacketSize
+        useSmallPackets = source.useSmallPackets
+        openVPNSocketType = source.openVPNSocketType
+        openVPNCipher = source.openVPNCipher
+        openVPNPort = source.openVPNPort
+        openVPNDnsServers = source.openVPNDnsServers
+        wireGuardDnsServers = source.wireGuardDnsServers
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
         lastKnownException = source.lastKnownException
         versionWhenServiceQualityOpted = source.versionWhenServiceQualityOpted
@@ -268,6 +286,67 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.ikeV2PacketSize = newValue
+            }
+        }
+
+        /// "Use Small Packets" — a single user-facing setting applied to whichever protocol
+        /// (OpenVPN or WireGuard) ends up connecting, including under automatic negotiation.
+        public fileprivate(set) var useSmallPackets: Bool {
+            get {
+                return accessedDatabase.plain.useSmallPackets
+            }
+            set {
+                accessedDatabase.plain.useSmallPackets = newValue
+            }
+        }
+
+        /// The OpenVPN transport (`SocketType` raw value, "UDP"/"TCP"); `nil` means automatic.
+        public fileprivate(set) var openVPNSocketType: String? {
+            get {
+                return accessedDatabase.plain.openVPNSocketType
+            }
+            set {
+                accessedDatabase.plain.openVPNSocketType = newValue
+            }
+        }
+
+        /// The OpenVPN cipher (`OpenVPN.Cipher` raw value, e.g. "AES-128-GCM").
+        public fileprivate(set) var openVPNCipher: String? {
+            get {
+                return accessedDatabase.plain.openVPNCipher
+            }
+            set {
+                accessedDatabase.plain.openVPNCipher = newValue
+            }
+        }
+
+        /// The OpenVPN remote port; `0` means automatic.
+        public fileprivate(set) var openVPNPort: Int {
+            get {
+                return accessedDatabase.plain.openVPNPort
+            }
+            set {
+                accessedDatabase.plain.openVPNPort = newValue
+            }
+        }
+
+        /// Custom DNS resolvers for OpenVPN (the Settings → Network choice); empty means server-provided.
+        public fileprivate(set) var openVPNDnsServers: [String] {
+            get {
+                return accessedDatabase.plain.openVPNDnsServers
+            }
+            set {
+                accessedDatabase.plain.openVPNDnsServers = newValue
+            }
+        }
+
+        /// Custom DNS resolvers for WireGuard (the Settings → Network choice); empty means server-provided.
+        public fileprivate(set) var wireGuardDnsServers: [String] {
+            get {
+                return accessedDatabase.plain.wireGuardDnsServers
+            }
+            set {
+                accessedDatabase.plain.wireGuardDnsServers = newValue
             }
         }
 
@@ -553,6 +632,12 @@ extension Client.Preferences {
             ikeV2IntegrityAlgorithm = .default
             ikeV2EncryptionAlgorithm = .default
             ikeV2PacketSize = 0
+            useSmallPackets = false
+            openVPNSocketType = nil
+            openVPNCipher = nil
+            openVPNPort = 0
+            openVPNDnsServers = []
+            wireGuardDnsServers = []
             signInWithAppleFakeEmail = nil
             lastKnownException = nil
             versionWhenServiceQualityOpted = nil
@@ -654,6 +739,24 @@ extension Client.Preferences {
         public var ikeV2PacketSize: Int
 
         /// :nodoc:
+        public var useSmallPackets: Bool
+
+        /// :nodoc:
+        public var openVPNSocketType: String?
+
+        /// :nodoc:
+        public var openVPNCipher: String?
+
+        /// :nodoc:
+        public var openVPNPort: Int
+
+        /// :nodoc:
+        public var openVPNDnsServers: [String]
+
+        /// :nodoc:
+        public var wireGuardDnsServers: [String]
+
+        /// :nodoc:
         public var signInWithAppleFakeEmail: String?
 
         /// :nodoc: Commits immediately when set
@@ -741,6 +844,24 @@ extension Client.Preferences {
             if (ikeV2PacketSize != target.ikeV2PacketSize) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
+            if (useSmallPackets != target.useSmallPackets) {
+                queue.append(VPNActionReinstall())
+            }
+            if (openVPNSocketType != target.openVPNSocketType) {
+                queue.append(VPNActionReinstall())
+            }
+            if (openVPNCipher != target.openVPNCipher) {
+                queue.append(VPNActionReinstall())
+            }
+            if (openVPNPort != target.openVPNPort) {
+                queue.append(VPNActionReinstall())
+            }
+            if (openVPNDnsServers != target.openVPNDnsServers) {
+                queue.append(VPNActionReinstall())
+            }
+            if (wireGuardDnsServers != target.wireGuardDnsServers) {
+                queue.append(VPNActionReinstall())
+            }
             if let configuration = vpnCustomConfigurations[vpnType],
                 let targetConfiguration = target.activeVPNCustomConfiguration,
                 !configuration.isEqual(to: targetConfiguration)
@@ -778,6 +899,24 @@ extension Client.Preferences {
                 return true
             }
             if (isPersistentConnection != target.isPersistentConnection) {
+                return true
+            }
+            if (useSmallPackets != target.useSmallPackets) {
+                return true
+            }
+            if (openVPNSocketType != target.openVPNSocketType) {
+                return true
+            }
+            if (openVPNCipher != target.openVPNCipher) {
+                return true
+            }
+            if (openVPNPort != target.openVPNPort) {
+                return true
+            }
+            if (openVPNDnsServers != target.openVPNDnsServers) {
+                return true
+            }
+            if (wireGuardDnsServers != target.wireGuardDnsServers) {
                 return true
             }
             if let configuration = vpnCustomConfigurations[vpnType],

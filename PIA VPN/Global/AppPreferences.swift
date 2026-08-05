@@ -53,8 +53,6 @@ final class AppPreferences {
         static let piaSocketType = "PIASocketType"
 
         static let useSmallPackets = "UseSmallPackets"
-        static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
-        static let ikeV2UseSmallPackets = "IKEV2UseSmallPackets"
         static let usesCustomDNS = "usesCustomDNS"
 
         static let openVPNCipher = "OpenVPNCipher"
@@ -340,24 +338,6 @@ final class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.useSmallPackets)
-        }
-    }
-
-    var wireGuardUseSmallPackets: Bool {
-        get {
-            return defaults.bool(forKey: Entries.wireGuardUseSmallPackets)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.wireGuardUseSmallPackets)
-        }
-    }
-
-    var ikeV2UseSmallPackets: Bool {
-        get {
-            return defaults.bool(forKey: Entries.ikeV2UseSmallPackets)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.ikeV2UseSmallPackets)
         }
     }
 
@@ -660,8 +640,6 @@ final class AppPreferences {
                 Entries.quickSettingNetworkToolVisible: true,
                 Entries.quickSettingPrivateBrowserVisible: true,
                 Entries.useSmallPackets: false,
-                Entries.wireGuardUseSmallPackets: false,
-                Entries.ikeV2UseSmallPackets: false,
                 Entries.usesCustomDNS: false,
                 Entries.canAskAgainForReview: false,
                 Entries.successDisconnections: 0,
@@ -939,8 +917,6 @@ final class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         usesCustomDNS = false
         useSmallPackets = false
-        ikeV2UseSmallPackets = false
-        wireGuardUseSmallPackets = false
         #if os(iOS)
             todayWidgetVpnStatus = L10n.Today.Widget.login
             todayWidgetButtonTitle = L10n.Today.Widget.login

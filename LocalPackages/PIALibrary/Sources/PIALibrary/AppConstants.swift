@@ -142,6 +142,10 @@ public struct AppConstants {
     /// `AppPreferences` (app target); its `Entries` use the same literal strings, so these
     /// values MUST stay in sync with that file.
     public enum UserDefaultsKeys {
+        /// Small-packets toggle (`Bool`), a single user-facing setting shared by OpenVPN and
+        /// WireGuard — not protocol-specific, so it lives outside the `OpenVPN` namespace below.
+        public static let useSmallPackets = "UseSmallPackets"
+
         public enum OpenVPN {
             /// Cipher, stored as its OpenVPN raw value (e.g. "AES-128-GCM").
             public static let cipher = "OpenVPNCipher"
@@ -151,13 +155,6 @@ public struct AppConstants {
             public static let port = "OpenVPNPort"
             /// Selected transport, stored as a `SocketType` raw value ("UDP"/"TCP"); absent = automatic.
             public static let transport = "PIASocketType"
-            /// Small-packets toggle (`Bool`).
-            public static let useSmallPackets = "UseSmallPackets"
-        }
-
-        public enum WireGuard {
-            /// Small-packets toggle (`Bool`).
-            public static let useSmallPackets = "WireGuardUseSmallPackets"
         }
     }
 

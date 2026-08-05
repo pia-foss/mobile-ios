@@ -205,17 +205,8 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     }
 
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
-        if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
-            // Automatic uses one toggle for the whole pecking order: drive both protocols' keys so
-            // the OpenVPN and WireGuard settings builders each pick it up.
-            AppPreferences.shared.useSmallPackets = sender.isOn
-            AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
-        } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-            AppPreferences.shared.wireGuardUseSmallPackets = sender.isOn
-        } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            AppPreferences.shared.useSmallPackets = sender.isOn
-        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            AppPreferences.shared.ikeV2UseSmallPackets = sender.isOn
+        pendingPreferences.useSmallPackets = sender.isOn
+        if pendingPreferences.vpnType == IKEv2Profile.vpnType {
             pendingPreferences.ikeV2PacketSize = sender.isOn ? AppConstants.IKEv2PacketSize.defaultPacketSize : AppConstants.IKEv2PacketSize.highPacketSize
         }
         settingsDelegate.savePreferences()
@@ -278,24 +269,18 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         case .transport:
             cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Global.automatic
         case .remotePort:
-            if let port = settingsDelegate.pendingOpenVPNConfiguration.currentPort, port != ProtocolSettingsViewController.AUTOMATIC_PORT {
-                cell.detailTextLabel?.text = port.description
-            } else {
-                cell.detailTextLabel?.text = L10n.Global.automatic
-            }
+            let port = pendingPreferences.openVPNPort
+            cell.detailTextLabel?.text = port != 0 ? "\(port)" : L10n.Global.automatic
         case .dataEncryption:
-
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType, let cipher = settingsDelegate.pendingOpenVPNConfiguration.cipher {
-                cell.detailTextLabel?.text = cipher.description
+            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                cell.detailTextLabel?.text = pendingPreferences.openVPNCipher ?? OpenVPN.Cipher.aes128gcm.description
             } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-
                 guard Flags.shared.enablesEncryptionSettings else {
                     break
                 }
 
                 let encryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
                 cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
-
             } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
                 cell.detailTextLabel?.text = "ChaCha20"
                 cell.accessoryType = .none
@@ -318,16 +303,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
             cell.detailTextLabel?.text = nil
             cell.accessoryView = switchSmallPackets
             cell.selectionStyle = .none
-            if pendingPreferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
-                // Automatic drives both protocols from one toggle; use the OpenVPN key as the source of truth.
-                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
-            } else if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.useSmallPackets
-            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.wireGuardUseSmallPackets
-            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                switchSmallPackets.isOn = AppPreferences.shared.ikeV2UseSmallPackets
-            }
+            switchSmallPackets.isOn = pendingPreferences.useSmallPackets
 
         default:
             cell.detailTextLabel?.text = ""
