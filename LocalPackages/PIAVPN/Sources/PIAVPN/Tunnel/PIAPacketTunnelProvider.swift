@@ -151,6 +151,10 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
                     completionHandler?(nil)
                 }
             }
+
+        case .requestLog:
+            logger.info("requestLog requested")
+            completionHandler?(PIATunnelLogStore.shared.snapshot().data(using: .utf8))
         }
     }
 

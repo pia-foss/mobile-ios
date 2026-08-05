@@ -43,36 +43,51 @@ import os
 /// `privacy: .public` to keep it readable.
 final class PIATunnelLogger: PacketTunnelLogger, Sendable {
     private let log: Logger
+    private let label: String
+    private static let dateFormatter = ISO8601DateFormatter()
 
     init(label: String) {
         self.log = Logger(
             subsystem: Bundle.main.bundleIdentifier ?? "PlatformSDK-Tunnel",
             category: label
         )
+        self.label = label
     }
 
     func trace(_ message: @autoclosure () -> String) {
         let message = message()
         log.trace("\(message, privacy: .public)")
+        store("TRACE", message)
     }
 
     func debug(_ message: @autoclosure () -> String) {
         let message = message()
         log.debug("\(message, privacy: .public)")
+        store("DEBUG", message)
     }
 
     func info(_ message: @autoclosure () -> String) {
         let message = message()
         log.info("\(message, privacy: .public)")
+        store("INFO", message)
     }
 
     func warning(_ message: @autoclosure () -> String) {
         let message = message()
         log.warning("\(message, privacy: .public)")
+        store("WARNING", message)
     }
 
     func error(_ message: @autoclosure () -> String) {
         let message = message()
         log.error("\(message, privacy: .public)")
+        store("ERROR", message)
+    }
+
+    /// Mirrors the line into `PIATunnelLogStore` so `PIAPacketTunnelRequest.requestLog` can hand it
+    /// back to the app — `os.Logger` above is not readable cross-process.
+    private func store(_ level: String, _ message: String) {
+        let timestamp = Self.dateFormatter.string(from: Date())
+        PIATunnelLogStore.shared.append("\(timestamp) [\(level)] \(label): \(message)")
     }
 }

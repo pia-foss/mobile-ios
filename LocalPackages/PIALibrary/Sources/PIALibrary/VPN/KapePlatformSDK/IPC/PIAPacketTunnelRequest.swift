@@ -37,4 +37,8 @@ public enum PIAPacketTunnelRequest: String, Codable, Sendable {
     /// The extension replies with a JSON-encoded `PIADataUsage` (or an empty
     /// response when nothing is connected / the protocol can't report usage).
     case dataUsage
+
+    /// Query the extension for its in-memory tunnel log. The extension replies
+    /// with the log as UTF-8 text (or an empty response if nothing was logged).
+    case requestLog
 }

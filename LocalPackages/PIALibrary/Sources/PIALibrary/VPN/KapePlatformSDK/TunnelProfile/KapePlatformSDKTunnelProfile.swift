@@ -319,7 +319,24 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     }
 
     public func requestLog(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<String>?) {
-        callback?(nil, nil)
+        find { (vpn, error) in
+            guard let session = vpn?.connection as? NETunnelProviderSession else {
+                callback?(nil, error)
+                return
+            }
+            do {
+                let data = try JSONEncoder().encode(PIAPacketTunnelRequest.requestLog)
+                try session.sendProviderMessage(data) { response in
+                    guard let response, let log = String(data: response, encoding: .utf8), !log.isEmpty else {
+                        callback?(nil, nil)
+                        return
+                    }
+                    callback?(log, nil)
+                }
+            } catch {
+                callback?(nil, error)
+            }
+        }
     }
 
     /// Queries the extension for the active session's cumulative tx/rx via a
