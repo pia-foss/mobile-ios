@@ -71,6 +71,7 @@ let package = Package(
             name: "PIALibraryTests",
             dependencies: [
                 "PIALibrary",
+                .product(name: "PIAKPI", package: "PIAKPI"),
                 .product(
                     name: "TunnelKitOpenVPN",
                     package: "mobile-ios-openvpn",
