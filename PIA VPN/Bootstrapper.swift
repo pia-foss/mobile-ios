@@ -274,7 +274,6 @@ final class Bootstrapper {
 
     func dispose() {
         Client.dispose()
-        WidgetConnectAuthorization.shared.clearSecret()
     }
 
     private func setupExceptionHandler() {

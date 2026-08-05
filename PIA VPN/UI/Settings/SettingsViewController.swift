@@ -391,7 +391,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
 
-        WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: AppConstants.Widget.kind)
     }
 
     private func commitPreferences() {

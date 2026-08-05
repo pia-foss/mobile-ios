@@ -28,7 +28,6 @@ private let log = PIALogger.logger(for: WidgetConnectAuthorization.self)
 public protocol WidgetConnectSecretStore {
     func readSecret() -> String?
     func write(_ secret: String)
-    func clear()
 }
 
 /// Authorizes the widget initiated VPN toggle deep link.
@@ -60,13 +59,6 @@ public final class WidgetConnectAuthorization {
 
         guard let secret = Self.makeSecret() else { return }
         store.write(secret)
-    }
-
-    /// Removes the secret from storage
-    public func clearSecret() {
-        lock.lock()
-        defer { lock.unlock() }
-        store.clear()
     }
 
     /// The URL the widget opens to toggle the VPN connection, carrying the shared secret.
@@ -141,28 +133,24 @@ public struct UserDefaultsWidgetConnectSecretStore: WidgetConnectSecretStore {
 
     private static let key = "vpn.widget.connect.secret"
 
-    private let defaults: UserDefaults?
+    private let defaults: UserDefaults
 
     public init(group: String = AppConstants.appGroup) {
-        self.defaults = UserDefaults(suiteName: group)
+        guard let defaults = UserDefaults(suiteName: group) else {
+            log.error("Unable to create UserDefaults for app group")
+            fatalError("No app group container")
+        }
+        self.defaults = defaults
     }
 
     public func readSecret() -> String? {
-        guard let secret = defaults?.string(forKey: Self.key), !secret.isEmpty else {
+        guard let secret = defaults.string(forKey: Self.key), !secret.isEmpty else {
             return nil
         }
         return secret
     }
 
     public func write(_ secret: String) {
-        guard let defaults else {
-            log.error("Could not store the widget connect secret, no app group container")
-            return
-        }
         defaults.set(secret, forKey: Self.key)
-    }
-
-    public func clear() {
-        defaults?.removeObject(forKey: Self.key)
     }
 }
