@@ -37,6 +37,7 @@ extension PIAEndpointRepository {
         state: PIATunnelSharedState.State,
         order: [PeckingStep] = PIAEndpointRepository.normalPeckingOrder
     ) -> [any VpnConfiguration] {
+        logPeckingOrderSummary(order, state: state)
         var batch: [any VpnConfiguration] = []
         for step in order {
             let endpoints: [any VpnConfiguration]

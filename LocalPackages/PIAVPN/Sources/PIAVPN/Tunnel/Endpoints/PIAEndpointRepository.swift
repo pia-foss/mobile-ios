@@ -7,6 +7,7 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
 
     func generateConfigurations() async -> [any VpnConfiguration] {
         let state = PIATunnelSharedState.read()
+        logConnectionSummary(state)
         let servers = await resolveServers(state: state)
 
         // Resolve the eligible servers, fastest first. A concrete region (or DIP) narrows this to a
