@@ -36,6 +36,11 @@ public protocol InAppTransaction<Native>: CustomStringConvertible {
     /// The underlying native transaction implementation.
     var native: Native { get }
 
+    /// Transaction has an expirationDate in the past.
+    ///
+    /// (Less than Date.now)
+    var isExpired: Bool { get }
+
     func finish() async
 }
 

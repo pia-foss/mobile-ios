@@ -13,7 +13,7 @@ protocol ValidateQRLoginUseCaseType {
     func callAsFunction(completion: @escaping (Result<Void, ClientError>) -> Void)
 }
 
-class ValidateQRLoginUseCase: ValidateQRLoginUseCaseType {
+final class ValidateQRLoginUseCase: ValidateQRLoginUseCaseType {
     private let apiToken: String
     private let tvOSBindToken: String
     private let loginProvider: LoginProviderType

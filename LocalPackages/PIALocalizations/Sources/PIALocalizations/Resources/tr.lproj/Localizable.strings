@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "Aşağıda yenisini oluşturun";
 "tvos.login.qr.expired.button.generate" = "QR Oluştur";
 
+"validateqr.confirmation.title" = "Apple TV'de giriş yapılsın mı?";
+"validateqr.confirmation.message" = "Bu cihaza güvendiğinizden emin olun. Emin değilseniz iptal edin.";
+"validateqr.confirmation.continue" = "Giriş Yap";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "Bağlanılamıyor";
 "error_alert.connection_error.no_network.message" = "Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin";

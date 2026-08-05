@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "Maak hieronder een nieuwe aan";
 "tvos.login.qr.expired.button.generate" = "QR aanmaken";
 
+"validateqr.confirmation.title" = "Inloggen op Apple TV?";
+"validateqr.confirmation.message" = "Zorg ervoor dat u dit apparaat vertrouwt. Annuleer als u het niet zeker weet.";
+"validateqr.confirmation.continue" = "Inloggen";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "Kan geen verbinding maken";
 "error_alert.connection_error.no_network.message" = "Controleer je internetverbinding en probeer het opnieuw";

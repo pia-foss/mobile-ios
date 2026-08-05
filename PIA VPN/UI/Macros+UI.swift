@@ -513,13 +513,14 @@ public extension UIAlertController {
         preferredAction = action
     }
 
-    /**
-     Adds a cancel action to an `UIAlertController`.
-
-     - Parameter title: The action title
-     */
-    func addCancelAction(_ title: String) {
-        let action = UIAlertAction(title: title, style: .cancel)
+    /// Adds a cancel action to an `UIAlertController`.
+    ///
+    /// - Parameter title: The action title
+    /// - Parameter handler: The optional action handler
+    func addCancelAction(_ title: String, handler: (() -> Void)? = nil) {
+        let action = UIAlertAction(title: title, style: .cancel) { _ in
+            handler?()
+        }
         addAction(action)
         if (actions.count == 1) {
             preferredAction = action

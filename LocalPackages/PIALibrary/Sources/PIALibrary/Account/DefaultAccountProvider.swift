@@ -482,6 +482,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
             Task { @MainActor in
                 await performSignup(with: request, callback: callback)
+                // In theory we should only finish transactions on success, but then users get into
+                // some weird state (unfinished, expired transactions), so we finish them all.
+                // Finishing all transactions is fine because users can use the restore flow.
+                await request.transaction?.finish()
             }
         }
 

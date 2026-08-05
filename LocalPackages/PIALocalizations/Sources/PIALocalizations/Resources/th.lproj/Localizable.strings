@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "สร้างรหัสใหม่ด้านล่าง";
 "tvos.login.qr.expired.button.generate" = "สร้าง QR";
 
+"validateqr.confirmation.title" = "เข้าสู่ระบบบน Apple TV?";
+"validateqr.confirmation.message" = "โปรดตรวจสอบว่าคุณเชื่อถืออุปกรณ์นี้ ยกเลิกหากคุณไม่แน่ใจ";
+"validateqr.confirmation.continue" = "เข้าสู่ระบบ";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "ไม่สามารถเชื่อมต่อได้";
 "error_alert.connection_error.no_network.message" = "โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง";

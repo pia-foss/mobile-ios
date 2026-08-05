@@ -402,6 +402,10 @@
 "tvos.login.qr.expired.description" = "下で新しいコードを生成";
 "tvos.login.qr.expired.button.generate" = "QRを生成";
 
+"validateqr.confirmation.title" = "Apple TV にログインしますか？";
+"validateqr.confirmation.message" = "このデバイスが信頼できることを確認してください。不明な場合はキャンセルしてください。";
+"validateqr.confirmation.continue" = "ログイン";
+
 //Connection error(tvOS)
 "error_alert.connection_error.no_network.title" = "接続できません";
 "error_alert.connection_error.no_network.message" = "インターネット接続を確認し、もう一度やり直してください";

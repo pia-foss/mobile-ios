@@ -239,6 +239,8 @@ final class Bootstrapper {
                     })
             }
         #endif
+
+        Client.observeTransactions()
         Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
 
             if let _ = error {
@@ -258,7 +260,6 @@ final class Bootstrapper {
             }
 
             Client.refreshProducts()
-            Client.observeTransactions()
         }
 
         if (self.isSimulator || Flags.shared.usesMockVPN) {
