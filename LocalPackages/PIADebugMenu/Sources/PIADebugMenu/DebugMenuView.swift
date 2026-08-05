@@ -16,6 +16,7 @@ struct ReportResult: Identifiable {
 public struct DebugMenuView: View {
     private let onDismiss: () -> Void
     @State private var logSnapshot: String = ""
+    @State var tunnelLogSnapshot: String = ""
     @State private var isSendingReport = false
     @State private var reportResult: ReportResult? = nil
     @State private var isPresentingManageSubscriptions: Bool = false
@@ -69,13 +70,15 @@ public struct DebugMenuView: View {
             #endif
             .navigationTitle("Debug Menu")
             .onAppear {
-                logSnapshot = logs
+                updateLogSnapshotIfNeeded()
+                refreshTunnelLog()
             }
             .task {
                 entitlementJWS = await Client.store.currentEntitlementJWS()
             }
-            .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
-                logSnapshot = logs
+            .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect()) { _ in
+                updateLogSnapshotIfNeeded()
+                refreshTunnelLog()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -116,6 +119,8 @@ public struct DebugMenuView: View {
                         .focusable()
                     logsSection
                         .focusable()
+                    tunnelLogSection
+                        .focusable()
                     supportSection
                 }
                 .padding(.horizontal, 60)
@@ -127,6 +132,7 @@ public struct DebugMenuView: View {
                 accountSection
                 receiptSection
                 logsSection
+                tunnelLogSection
                 subscriptionSection
                 supportSection
             }
@@ -202,20 +208,17 @@ public struct DebugMenuView: View {
     }
 
     private var logsSection: some View {
-        DebugSection("Logs") {
-            let preview = logSnapshot.isEmpty ? "No logs" : logSnapshot.components(separatedBy: "\n").reversed().joined(separator: "\n")
-
+        DebugSection("App Logs") {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Recent logs (newest on top)")
+                Text("Recent logs (newest on top, last \(Self.previewLineCount) lines)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                ScrollView {
-                    Text(preview)
+                ScrollView(.horizontal) {
+                    Text(logSnapshot.isEmpty ? "No logs" : Self.reversedPreview(of: logSnapshot))
                         .font(.system(.caption2, design: .monospaced))
                         .foregroundStyle(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
-                .frame(height: 300)
             }
             #if os(tvOS)
                 .padding(.vertical, 8)
@@ -231,12 +234,60 @@ public struct DebugMenuView: View {
                         content: logs,
                         filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
                     ),
-                    preview: SharePreview("Logs")
+                    preview: SharePreview("App Logs")
                 ) {
                     Label("Export", systemImage: "square.and.arrow.up")
                 }
             #endif
         }
+    }
+
+    private var tunnelLogSection: some View {
+        DebugSection("Tunnel Log") {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Live tunnel-extension log (newest on top, last \(Self.previewLineCount) lines)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                ScrollView(.horizontal) {
+                    Text(tunnelLogSnapshot.isEmpty ? "No tunnel log" : Self.reversedPreview(of: tunnelLogSnapshot))
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+            }
+            #if os(tvOS)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            #else
+                .padding(.vertical, 2)
+            #endif
+
+            #if os(iOS)
+                ShareLink(
+                    item: DebugExportFile(
+                        content: tunnelLogSnapshot,
+                        filename: "tunnel_logs_\(Int(Date().timeIntervalSince1970)).txt"
+                    ),
+                    preview: SharePreview("Tunnel Log")
+                ) {
+                    Label("Export", systemImage: "square.and.arrow.up")
+                }
+            #endif
+        }
+    }
+
+    /// Both log sections show only the tail of the snapshot — the full content is still one tap
+    /// away via Export. Unbounded 1000-line monospaced `Text` inside a scrolling `List` is expensive
+    /// to lay out on every re-render and was a source of scroll jank.
+    private static let previewLineCount = 25
+
+    private static func reversedPreview(of content: String) -> String {
+        content
+            .components(separatedBy: "\n")
+            .reversed()
+            .prefix(previewLineCount)
+            .joined(separator: "\n")
     }
 
     private var subscriptionSection: some View {
@@ -319,6 +370,26 @@ public struct DebugMenuView: View {
                 }
             }
             .disabled(isSendingReport)
+        }
+    }
+
+    // MARK: - Logs
+
+    private func updateLogSnapshotIfNeeded() {
+        let current = logs
+        if current != logSnapshot {
+            logSnapshot = current
+        }
+    }
+
+    private func refreshTunnelLog() {
+        Client.providers.vpnProvider.requestTunnelLog { content, _ in
+            guard let content, !content.isEmpty else { return }
+            DispatchQueue.main.async {
+                if content != tunnelLogSnapshot {
+                    tunnelLogSnapshot = content
+                }
+            }
         }
     }
 

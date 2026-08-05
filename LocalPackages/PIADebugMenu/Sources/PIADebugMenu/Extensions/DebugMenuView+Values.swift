@@ -79,8 +79,11 @@ extension DebugMenuView {
         lines.append("=== Transaction (JWS) ===")
         lines.append(transactionJWS?.value ?? "Not available")
         lines.append("")
-        lines.append("=== Logs ===")
+        lines.append("=== App Logs ===")
         lines.append(logs)
+        lines.append("")
+        lines.append("=== Tunnel Log ===")
+        lines.append(tunnelLogSnapshot.isEmpty ? "No tunnel log" : tunnelLogSnapshot)
         return lines.joined(separator: "\n")
     }
 }
