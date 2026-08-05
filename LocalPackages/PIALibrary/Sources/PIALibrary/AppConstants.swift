@@ -109,6 +109,9 @@ public struct AppConstants {
     }
 
     public struct Widget {
+        // On iOS 15 and 16 we will keep using URL for the connect/disconnect widget action.
+        // Starting on 17 and up, we use AppIntents instead, as a more modern API.
+        @available(iOS, deprecated: 17, message: "Drop URL for connect/disconnect. Use AppIntent instead.")
         public static let connect = "piavpn:connect"
     }
 
