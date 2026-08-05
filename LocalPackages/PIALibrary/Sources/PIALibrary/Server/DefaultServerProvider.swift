@@ -30,7 +30,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     private let renewDedicatedIP: RenewDedicatedIPUseCaseType
     private let getDedicatedIPs: GetDedicatedIPsUseCaseType
     private let dedicatedIPServerMapper: DedicatedIPServerMapperType
-    private let bundledServersReloadLock = Mutex<Void>(())
+    private let bundledServersReloadLock = NSRecursiveLock()
 
     init(webServices: WebServices? = nil, renewDedicatedIP: RenewDedicatedIPUseCaseType, getDedicatedIPs: GetDedicatedIPsUseCaseType, dedicatedIPServerMapper: DedicatedIPServerMapperType) {
         if let webServices = webServices {
@@ -140,16 +140,13 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         accessedPreferences.preferredServer ?? bestServer ?? accessedDatabase.plain.lastConnectedRegion
     }
 
-    /// Serializes the check-and-reload so concurrent `targetServer` reads from different
-    /// threads (`VPNDaemon`, `DefaultVPNProvider`) can't all see an empty cache at once and
-    /// each independently reload the bundle, duplicating the write, notification, and ping sweep.
     private func reloadBundledServersIfEmpty() {
-        bundledServersReloadLock.withLock { _ in
-            guard currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON else {
-                return
-            }
-            loadLocalJSON(fromJSON: bundledServersJSON)
+        bundledServersReloadLock.lock()
+        defer { bundledServersReloadLock.unlock() }
+        guard currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON else {
+            return
         }
+        loadLocalJSON(fromJSON: bundledServersJSON)
     }
 
     public var dipTokens: [String]? {

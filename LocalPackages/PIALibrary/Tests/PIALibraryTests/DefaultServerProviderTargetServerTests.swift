@@ -26,18 +26,21 @@ import XCTest
 class DefaultServerProviderTargetServerTests: XCTestCase {
 
     private var originalServerProvider: ServerProvider!
+    private var serverProvider: DefaultServerProvider!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         originalServerProvider = Client.providers.serverProvider
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
-        Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
+        serverProvider = try XCTUnwrap(ServerProviderFactory.makeDefaultServerProvider() as? DefaultServerProvider)
+        Client.providers.serverProvider = serverProvider
     }
 
     override func tearDown() {
         Client.configuration.bundledServersJSON = nil
         Client.database.truncate()
         Client.providers.serverProvider = originalServerProvider
+        serverProvider = nil
         super.tearDown()
     }
 
@@ -45,22 +48,18 @@ class DefaultServerProviderTargetServerTests: XCTestCase {
         // GIVEN an empty cache (no preferred/best/last-connected server either) and a
         // bundled servers JSON available
         Client.configuration.bundledServersJSON = try minimalBundleJSON(regionIdentifiers: ["region-a", "region-b"])
-        XCTAssertTrue(Client.providers.serverProvider.currentServers.isEmpty)
+        XCTAssertTrue(serverProvider.currentServers.isEmpty)
 
         // WHEN resolving targetServer, which would otherwise throw noServersAvailable
-        let server = try Client.providers.serverProvider.targetServer
+        let server = try serverProvider.targetServer
 
         // THEN it self-heals from the bundle, returning one of the reloaded servers
-        let reloaded = Client.providers.serverProvider.currentServers
+        let reloaded = serverProvider.currentServers
         XCTAssertFalse(reloaded.isEmpty)
         XCTAssertTrue(reloaded.contains { $0.identifier == server.identifier })
     }
 
     func test_targetServer_doesNotReload_whenCacheIsAlreadyPopulated() throws {
-        guard let serverProvider = Client.providers.serverProvider as? DefaultServerProvider else {
-            return XCTFail("Expected the real DefaultServerProvider")
-        }
-
         // GIVEN a cache that's already populated, and a different bundle available
         let existing = Server(
             serial: "",
@@ -82,10 +81,6 @@ class DefaultServerProviderTargetServerTests: XCTestCase {
     }
 
     func test_targetServer_reResolvesPreferredServer_afterReload() throws {
-        guard let serverProvider = Client.providers.serverProvider as? DefaultServerProvider else {
-            return XCTFail("Expected the real DefaultServerProvider")
-        }
-
         // GIVEN a bundle with more than one server, and a persisted preferred server
         // that isn't first in the bundle
         let bundleJSON = try minimalBundleJSON(regionIdentifiers: ["first", "preferred"])
@@ -108,10 +103,6 @@ class DefaultServerProviderTargetServerTests: XCTestCase {
     }
 
     func test_targetServer_reResolvesLastConnectedRegion_afterReload() throws {
-        guard let serverProvider = Client.providers.serverProvider as? DefaultServerProvider else {
-            return XCTFail("Expected the real DefaultServerProvider")
-        }
-
         // GIVEN a bundle with more than one server, and a persisted "last connected" region
         // that isn't the first server in the bundle
         let bundleJSON = try minimalBundleJSON(regionIdentifiers: ["first", "last-connected"])
@@ -136,12 +127,42 @@ class DefaultServerProviderTargetServerTests: XCTestCase {
     func test_targetServer_stillThrows_whenNoBundledServersJSONAvailable() {
         // GIVEN an empty cache and no bundled servers JSON configured
         Client.configuration.bundledServersJSON = nil
-        XCTAssertTrue(Client.providers.serverProvider.currentServers.isEmpty)
+        XCTAssertTrue(serverProvider.currentServers.isEmpty)
 
         // WHEN/THEN resolving targetServer still throws noServersAvailable
-        XCTAssertThrowsError(try Client.providers.serverProvider.targetServer) { error in
+        XCTAssertThrowsError(try serverProvider.targetServer) { error in
             XCTAssertEqual(error as? ClientError, ClientError.noServersAvailable)
         }
+    }
+
+    func test_targetServer_fallsBackToArbitraryRegion_whenPreferredServerIsDIP_afterReload() throws {
+        // GIVEN a persisted preferred server that's a DIP (dedicated IP) server — matched by
+        // both identifier and dipToken — which never appears in the bundled servers JSON
+        let dipServer = Server(
+            serial: "",
+            name: "My Dedicated IP",
+            country: "us",
+            hostname: "dip-server.invalid",
+            pingAddress: nil,
+            dipToken: "dip-token-123",
+            regionIdentifier: "dip-server"
+        )
+        Client.database.plain.preferredServer = dipServer
+
+        // AND the cache is empty again (e.g. right after logout, before the daemon re-downloads)
+        serverProvider.currentServers = []
+        Client.configuration.bundledServersJSON = try minimalBundleJSON(regionIdentifiers: ["region-a", "region-b"])
+        XCTAssertTrue(serverProvider.currentServers.isEmpty)
+
+        // WHEN resolving targetServer, which reloads the bundle
+        let resolved = try serverProvider.targetServer
+
+        // THEN the DIP preference can't be re-resolved — bundled servers never carry a
+        // dipToken — so it silently falls through to an arbitrary regular region instead
+        // of the user's dedicated IP. This pins current behavior; it isn't necessarily the
+        // desired one.
+        XCTAssertNotEqual(resolved.identifier, dipServer.identifier)
+        XCTAssertEqual(resolved.identifier, serverProvider.currentServers.first?.identifier)
     }
 
     /// Builds a minimal `ServersBundle`-shaped JSON with no server addresses, so loading it
