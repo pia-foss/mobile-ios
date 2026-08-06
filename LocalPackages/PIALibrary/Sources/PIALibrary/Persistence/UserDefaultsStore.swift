@@ -639,7 +639,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var debugLogging: Bool? {
         get {
-            return backend.bool(forKey: .debugLogging)
+            return backend.object(forKey: .debugLogging) as? Bool
         }
         set {
             backend.set(newValue, forKey: .debugLogging)
@@ -657,7 +657,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var hasRespondedToServiceQualityConsent: Bool? {
         get {
-            return backend.bool(forKey: .hasRespondedToServiceQualityConsent)
+            return backend.object(forKey: .hasRespondedToServiceQualityConsent) as? Bool
         }
         set {
             backend.set(newValue, forKey: .hasRespondedToServiceQualityConsent)
