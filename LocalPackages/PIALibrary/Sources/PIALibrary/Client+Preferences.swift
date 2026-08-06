@@ -494,6 +494,15 @@ extension Client {
             }
         }
 
+        /// Whether `shareServiceQualityData` has ever been explicitly written, either way.
+        /// Unlike `shareServiceQualityData` itself (which collapses an unset value to `false`),
+        /// this distinguishes "never asked" from an explicit accept/reject — needed to migrate
+        /// users who already answered the legacy share-data panel before
+        /// `hasRespondedToServiceQualityConsent` existed.
+        public var hasExplicitShareServiceQualityDataValue: Bool {
+            return accessedDatabase.plain.shareServiceQualityData != nil
+        }
+
         /// Store app version when user opted-in for service quality stats
         public var versionWhenServiceQualityOpted: String? {
             get {

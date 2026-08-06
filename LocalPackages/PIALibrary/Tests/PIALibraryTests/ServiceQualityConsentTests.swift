@@ -58,4 +58,14 @@ class ServiceQualityConsentTests: XCTestCase {
             "Sanity check: cleanDatabase() should still reset unrelated preferences"
         )
     }
+
+    func testHasExplicitShareServiceQualityDataValueDetectsAnExplicitReject() {
+        // An explicit reject (shareServiceQualityData = false) must still count as "answered" —
+        // it must not collapse to the same signal as never having been asked.
+        let preferences = Client.preferences.editable()
+        preferences.shareServiceQualityData = false
+        preferences.commit()
+
+        XCTAssertTrue(Client.preferences.hasExplicitShareServiceQualityDataValue)
+    }
 }
