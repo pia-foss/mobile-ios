@@ -97,4 +97,10 @@ class ServiceQualityConsentTests: XCTestCase {
         // setUp() truncates the suite, so this runs against a genuinely unwritten key.
         XCTAssertFalse(Client.preferences.hasExplicitShareServiceQualityDataValue)
     }
+
+    func testBoolPreferenceGettersDistinguishUnwrittenFromFalse() {
+        XCTAssertNil(Client.database.plain.debugLogging)
+        XCTAssertNil(Client.database.plain.hasRespondedToServiceQualityConsent)
+        XCTAssertNil(Client.database.plain.shareServiceQualityData)
+    }
 }
