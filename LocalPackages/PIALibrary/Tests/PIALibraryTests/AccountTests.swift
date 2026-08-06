@@ -81,6 +81,27 @@ class AccountTests: XCTestCase {
 
     }
 
+    func testCleanDatabasePreservesServiceQualityConsentFlag() {
+        let preferences = Client.preferences.editable()
+        preferences.hasRespondedToServiceQualityConsent = true
+        preferences.shareServiceQualityData = true
+        preferences.commit()
+
+        XCTAssertTrue(Client.preferences.hasRespondedToServiceQualityConsent)
+        XCTAssertTrue(Client.preferences.shareServiceQualityData)
+
+        mock.accountProvider.cleanDatabase()
+
+        XCTAssertTrue(
+            Client.preferences.hasRespondedToServiceQualityConsent,
+            "Logging out must not re-trigger the consent screen for a user who already answered it"
+        )
+        XCTAssertFalse(
+            Client.preferences.shareServiceQualityData,
+            "Sanity check: cleanDatabase() should still reset other service-quality preferences"
+        )
+    }
+
     /*func testWeb() {
         __testLogin(factory: live)
         sleep(1)

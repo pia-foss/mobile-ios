@@ -102,6 +102,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case shareServiceQualityData = "ShareServiceQualityData"
 
+        case hasRespondedToServiceQualityConsent = "HasRespondedToServiceQualityConsent"
+
         case lastKnownException = "LastKnownException"
 
         case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
@@ -653,6 +655,15 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
+    var hasRespondedToServiceQualityConsent: Bool? {
+        get {
+            return backend.bool(forKey: .hasRespondedToServiceQualityConsent)
+        }
+        set {
+            backend.set(newValue, forKey: .hasRespondedToServiceQualityConsent)
+        }
+    }
+
     var versionWhenServiceQualityOpted: String? {
         get {
             return backend.string(forKey: .versionWhenServiceQualityOpted)
@@ -774,7 +785,11 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     // MARK: Lifecycle
 
     func reset() {
-        for entry in Entry.allCases {
+        // `hasRespondedToServiceQualityConsent` tracks whether this install has ever passed the
+        // mandatory first-run consent gate. That's device-lifetime state, not account-scoped, so
+        // it must survive a logout/account-clean reset() or the consent screen would wrongly
+        // reappear for a user who already answered it.
+        for entry in Entry.allCases where entry != .hasRespondedToServiceQualityConsent {
             backend.removeObject(forKey: entry)
         }
         backend.synchronize()
