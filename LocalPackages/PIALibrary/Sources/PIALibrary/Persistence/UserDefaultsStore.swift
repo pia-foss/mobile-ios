@@ -784,12 +784,18 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     // MARK: Lifecycle
 
+    private static let entriesPreservedAcrossReset: Set<Entry> = [
+        .hasRespondedToServiceQualityConsent,
+        .shareServiceQualityData,
+        .versionWhenServiceQualityOpted
+    ]
+
     func reset() {
-        // `hasRespondedToServiceQualityConsent` tracks whether this install has ever passed the
-        // mandatory first-run consent gate. That's device-lifetime state, not account-scoped, so
-        // it must survive a logout/account-clean reset() or the consent screen would wrongly
-        // reappear for a user who already answered it.
-        for entry in Entry.allCases where entry != .hasRespondedToServiceQualityConsent {
+        // The service-quality consent decision (whether the user was asked, and what they
+        // chose) is device-lifetime state, not account-scoped, so it must survive a
+        // logout/account-clean reset() — otherwise a user who already accepted would be
+        // silently flipped to opted-out with no way to be re-asked.
+        for entry in Entry.allCases where !Self.entriesPreservedAcrossReset.contains(entry) {
             backend.removeObject(forKey: entry)
         }
         backend.synchronize()
