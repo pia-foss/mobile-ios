@@ -648,7 +648,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var shareServiceQualityData: Bool? {
         get {
-            return backend.bool(forKey: .shareServiceQualityData)
+            return backend.object(forKey: .shareServiceQualityData) as? Bool
         }
         set {
             backend.set(newValue, forKey: .shareServiceQualityData)
