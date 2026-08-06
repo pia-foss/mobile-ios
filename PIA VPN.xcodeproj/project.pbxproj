@@ -317,6 +317,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				/Localized/Assets/L10n/PIAWidget.intentdefinition,
+				Domain/Intents/PIAVPNToggleIntent.swift,
 				Domain/Widget/PIAConnectionLiveActivityManager.swift,
 				Domain/Widget/PIAWidgetAttributes.swift,
 			);
