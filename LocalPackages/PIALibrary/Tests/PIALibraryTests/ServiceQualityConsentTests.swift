@@ -92,4 +92,9 @@ class ServiceQualityConsentTests: XCTestCase {
 
         XCTAssertTrue(Client.preferences.hasExplicitShareServiceQualityDataValue)
     }
+
+    func testHasExplicitShareServiceQualityDataValueIsFalseBeforeAnyAnswer() {
+        // setUp() truncates the suite, so this runs against a genuinely unwritten key.
+        XCTAssertFalse(Client.preferences.hasExplicitShareServiceQualityDataValue)
+    }
 }
