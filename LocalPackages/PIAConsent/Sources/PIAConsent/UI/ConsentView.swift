@@ -24,7 +24,7 @@ import PIADesignSystem
 import SwiftUI
 
 public struct ConsentView: View {
-    @ObservedObject private var viewModel: ConsentViewModel
+    private let viewModel: ConsentViewModel
     @State private var isReadMorePresented = false
 
     public init(viewModel: ConsentViewModel) {
@@ -35,12 +35,8 @@ public struct ConsentView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(spacing: 0) {
-                    Spacer(minLength: 0)
-
                     content
                         .frame(maxWidth: 440)
-
-                    Spacer(minLength: 0)
                 }
                 .frame(width: proxy.size.width)
                 .frame(minHeight: proxy.size.height)
@@ -97,6 +93,7 @@ public struct ConsentView: View {
                 .typography(.body2, color: .pia.onSurfaceContainerSecondary)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("id.consent.readMore")
     }
 
     private var acceptButton: some View {
@@ -108,6 +105,7 @@ public struct ConsentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 6))
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("id.consent.accept")
     }
 
     private var noThanksButton: some View {
@@ -122,6 +120,7 @@ public struct ConsentView: View {
                 .contentShape(RoundedRectangle(cornerRadius: 6))
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("id.consent.noThanks")
     }
 }
 

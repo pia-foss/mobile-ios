@@ -13,6 +13,8 @@ extension XCUIApplication {
     var welcomeLoginButtonOldVersion: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
 
     func navigateToLoginScreen() {
+        dismissConsentScreenIfPresented()
+
         if (welcomeLoginButton.waitForElementToAppear()) {
             welcomeLoginButton.tap()
         } else if (welcomeLoginButtonOldVersion.waitForElementToAppear()) {

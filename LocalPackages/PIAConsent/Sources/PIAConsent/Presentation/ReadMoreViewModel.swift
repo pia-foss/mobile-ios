@@ -19,10 +19,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
 import PIALocalizations
 
-public final class ReadMoreViewModel: ObservableObject {
+public struct ReadMoreViewModel {
     private let onClose: () -> Void
 
     public init(onClose: @escaping () -> Void = {}) {

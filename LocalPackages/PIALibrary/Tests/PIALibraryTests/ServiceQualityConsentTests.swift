@@ -30,8 +30,11 @@ class ServiceQualityConsentTests: XCTestCase {
         super.setUp()
 
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
-        Client.bootstrap()
-        Client.providers.accountProvider.cleanDatabase()
+    }
+
+    override func tearDown() {
+        Client.database.truncate()
+        super.tearDown()
     }
 
     func testCleanDatabasePreservesServiceQualityConsentDecision() {
@@ -56,6 +59,27 @@ class ServiceQualityConsentTests: XCTestCase {
         XCTAssertFalse(
             Client.preferences.debugLogging,
             "Sanity check: cleanDatabase() should still reset unrelated preferences"
+        )
+    }
+
+    func testPreConsentResetCommitDoesNotWipeVersionWhenServiceQualityOptedBeforeLogout() {
+        let preferences = Client.preferences.editable()
+        preferences.hasRespondedToServiceQualityConsent = true
+        preferences.shareServiceQualityData = true
+        preferences.versionWhenServiceQualityOpted = "1.2.3"
+        preferences.commit()
+
+        // Mirrors `AppPreferences.reset()`, which `DashboardViewController.closeSession()` runs
+        // before `accountProvider.logout(nil)` on every real logout — i.e. before cleanDatabase()
+        // ever reaches the entries-preserved-across-reset list below.
+        Client.preferences.editable().reset().commit()
+
+        mock.accountProvider.cleanDatabase()
+
+        XCTAssertEqual(
+            Client.preferences.versionWhenServiceQualityOpted,
+            "1.2.3",
+            "The pre-logout preferences reset must not silently wipe the opted-in version before cleanDatabase() runs"
         )
     }
 
