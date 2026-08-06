@@ -42,7 +42,8 @@ public struct ConsentView: View {
 
                     Spacer(minLength: 0)
                 }
-                .frame(width: proxy.size.width, height: proxy.size.height)
+                .frame(width: proxy.size.width)
+                .frame(minHeight: proxy.size.height)
             }
         }
         .background(Color.pia.background.ignoresSafeArea())
