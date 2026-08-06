@@ -40,5 +40,11 @@ public struct PIALibraryAccessibility {
         public struct Dialog {
             public static let destructive = "id.dialog.destructive.button"
         }
+        public struct Consent {
+            public static let accept = "id.consent.accept"
+            public static let noThanks = "id.consent.noThanks"
+            public static let readMore = "id.consent.readMore"
+            public static let readMoreClose = "id.consent.readMore.close"
+        }
     }
 }
