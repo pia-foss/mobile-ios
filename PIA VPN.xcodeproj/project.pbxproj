@@ -11,6 +11,7 @@
 		0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9785851DA82FF000711A24 /* StoreKit.framework */; };
 		0EFB607D203D893E0095398C /* PIA VPN AdBlocker.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EFB6070203D7A2C0095398C /* PIA VPN AdBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1D3C7DDA111CF84A7CD4C4C3 /* PIAConsent in Frameworks */ = {isa = PBXBuildFile; productRef = 52372FB25A33CD5D55DE644A /* PIAConsent */; };
 		2909869018566430002D9687 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2909868F18566430002D9687 /* Security.framework */; };
 		291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C637F183EBC210039EC03 /* Foundation.framework */; };
 		291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C6381183EBC210039EC03 /* CoreGraphics.framework */; };
@@ -386,6 +387,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D3C7DDA111CF84A7CD4C4C3 /* PIAConsent in Frameworks */,
 				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
@@ -667,6 +669,7 @@
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
+				52372FB25A33CD5D55DE644A /* PIAConsent */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -3331,6 +3334,10 @@
 		3FE266BB2F0BE003004B53AA /* PIAUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAUIKit;
+		};
+		52372FB25A33CD5D55DE644A /* PIAConsent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAConsent;
 		};
 		6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */ = {
 			isa = XCSwiftPackageProductDependency;
