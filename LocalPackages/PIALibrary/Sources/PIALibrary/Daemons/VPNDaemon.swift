@@ -67,6 +67,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
 
     private func tryUpdateStatus(via connection: NEVPNConnection) {
         guard let profile = accessedDatabase.transient.activeVPNProfile else {
+            // No active profile means the app has no VPN it can consider "connected"
+            // (e.g. after uninstallAll() on logout, which clears activeVPNProfile before
+            // the OS finishes tearing down the profile asynchronously). Rather than
+            // ignoring the event and leaving a stale non-disconnected status behind,
+            // reconcile it to .disconnected so isVPNConnected cannot remain true once
+            // the profile is gone.
+            if accessedDatabase.transient.vpnStatus != .disconnected {
+                accessedDatabase.plain.lastKnownVpnStatus = .disconnected
+                accessedDatabase.transient.vpnStatus = .disconnected
+            }
             return
         }
         if let session = connection as? NETunnelProviderSession {

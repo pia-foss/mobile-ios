@@ -95,12 +95,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         // It does not need the weak reference as the it is only called inside the current function
         let completionBlock = {
             profile?.prepare()
-
-            #if os(iOS)
-                if let _ = VPNIPAddressFromInterfaces() {
-                    self.accessedDatabase.transient.vpnStatus = .connected
-                }
-            #endif
             self.activeProfile = profile
         }
 
