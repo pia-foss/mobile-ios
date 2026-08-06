@@ -24,7 +24,7 @@ import PIADesignSystem
 import SwiftUI
 
 public struct ReadMoreView: View {
-    @ObservedObject private var viewModel: ReadMoreViewModel
+    private let viewModel: ReadMoreViewModel
 
     public init(viewModel: ReadMoreViewModel) {
         self.viewModel = viewModel
@@ -56,6 +56,7 @@ public struct ReadMoreView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(viewModel.closeAccessibilityLabel))
+            .accessibilityIdentifier("id.consent.readMore.close")
 
             Spacer()
         }

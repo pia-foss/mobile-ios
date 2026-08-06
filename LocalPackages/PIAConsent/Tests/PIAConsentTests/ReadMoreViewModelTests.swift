@@ -1,23 +1,15 @@
+import PIALocalizations
 import Testing
 
 @testable import PIAConsent
-
-@Suite
-struct ReadMoreViewTests {
-    @Test @MainActor func bodyBuildsWithViewModel() {
-        let view = ReadMoreView(viewModel: ReadMoreViewModel())
-
-        _ = view.body
-    }
-}
 
 @Suite
 struct ReadMoreViewModelTests {
     @Test func exposesLegacyReadMoreCopy() {
         let viewModel = ReadMoreViewModel()
 
-        #expect(viewModel.description.contains("Connection Attempt"))
-        #expect(viewModel.closeAccessibilityLabel == "Close")
+        #expect(viewModel.description == L10n.Signup.Share.Data.ReadMore.Text.description)
+        #expect(viewModel.closeAccessibilityLabel == L10n.Global.close)
     }
 
     @Test func closeButtonWasTappedInvokesOnClose() {

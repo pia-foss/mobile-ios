@@ -109,13 +109,13 @@ private extension PreferencesStore {
         ikeV2PacketSize = source.ikeV2PacketSize
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
         lastKnownException = source.lastKnownException
-        versionWhenServiceQualityOpted = source.versionWhenServiceQualityOpted
         lastConnectedRegion = source.lastConnectedRegion
 
         // Skipped because they are committed immediately when changed:
         // - showReconnectNotifications
         // - debugLogging
         // - shareServiceQualityData
+        // - versionWhenServiceQualityOpted
         // - hasRespondedToServiceQualityConsent
     }
 }
@@ -578,12 +578,13 @@ extension Client.Preferences {
             ikeV2PacketSize = 0
             signInWithAppleFakeEmail = nil
             lastKnownException = nil
-            versionWhenServiceQualityOpted = nil
 
             // Computed properties (immediate commit), not initialized here
             // - showReconnectNotifications
             // - debugLogging
             // - shareServiceQualityData
+            // - versionWhenServiceQualityOpted
+            // - hasRespondedToServiceQualityConsent
         }
 
         /**
@@ -699,8 +700,15 @@ extension Client.Preferences {
             }
         }
 
-        /// :nodoc:
-        public var versionWhenServiceQualityOpted: String?
+        /// :nodoc: Commits immediately when set
+        public var versionWhenServiceQualityOpted: String? {
+            get {
+                return target?.versionWhenServiceQualityOpted
+            }
+            set {
+                target?.versionWhenServiceQualityOpted = newValue
+            }
+        }
 
         /// :nodoc: Commits immediately when set
         public var hasRespondedToServiceQualityConsent: Bool {

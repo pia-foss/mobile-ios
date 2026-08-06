@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
     name: "PIAConsent",
     platforms: [
-        .iOS(.v15),
-        .tvOS(.v17)
+        .iOS(.v15)
     ],
     products: [
         .library(

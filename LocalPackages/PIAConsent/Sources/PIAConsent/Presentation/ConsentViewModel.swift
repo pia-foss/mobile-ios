@@ -19,10 +19,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
 import PIALocalizations
 
-public final class ConsentViewModel: ObservableObject {
+public struct ConsentViewModel {
     private let onAccept: () -> Void
     private let onReject: () -> Void
 
