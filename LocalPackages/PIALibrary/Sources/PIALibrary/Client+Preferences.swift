@@ -75,6 +75,8 @@ private protocol PreferencesStore: AnyObject {
 
     var versionWhenServiceQualityOpted: String? { get set }
 
+    var hasRespondedToServiceQualityConsent: Bool { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
 
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -114,6 +116,7 @@ private extension PreferencesStore {
         // - showReconnectNotifications
         // - debugLogging
         // - shareServiceQualityData
+        // - hasRespondedToServiceQualityConsent
     }
 }
 
@@ -501,6 +504,17 @@ extension Client {
             }
         }
 
+        /// Whether the user has already responded (accept or reject) to the service-quality
+        /// share-data consent prompt, regardless of which way they answered.
+        public fileprivate(set) var hasRespondedToServiceQualityConsent: Bool {
+            get {
+                return accessedDatabase.plain.hasRespondedToServiceQualityConsent ?? false
+            }
+            set {
+                accessedDatabase.plain.hasRespondedToServiceQualityConsent = newValue
+            }
+        }
+
         /// Stores last known exception raised by the app at any point
         public var lastKnownException: String? {
             get {
@@ -678,6 +692,16 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var versionWhenServiceQualityOpted: String?
+
+        /// :nodoc: Commits immediately when set
+        public var hasRespondedToServiceQualityConsent: Bool {
+            get {
+                return target?.hasRespondedToServiceQualityConsent ?? false
+            }
+            set {
+                target?.hasRespondedToServiceQualityConsent = newValue
+            }
+        }
 
         /// :nodoc:
         public var lastKnownException: String?
