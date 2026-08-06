@@ -48,7 +48,7 @@ public struct ConsentView: View {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .sheet(isPresented: $isReadMorePresented) {
-            ReadMoreView(viewModel: ReadMoreViewModel(onClose: { isReadMorePresented = false }))
+            ConsentFactory.makeReadMoreView(onClose: { isReadMorePresented = false })
         }
     }
 
