@@ -125,28 +125,26 @@ final class RootCoordinator: NSObject {
     private func makeConsentRoot() -> UIViewController {
         MainActor.assumeIsolated {
             let view = ConsentFactory.makeConsentView(
-                onAccept: { [weak self] in self?.acceptShareData() },
-                onReject: { [weak self] in self?.rejectShareData() }
+                onAccept: { [weak self] in self?.respondToShareData(accepted: true) },
+                onReject: { [weak self] in self?.respondToShareData(accepted: false) }
             )
             return UIHostingController(rootView: view)
         }
     }
 
-    private func acceptShareData() {
+    private func respondToShareData(accepted: Bool) {
         let preferences = Client.preferences.editable()
-        preferences.shareServiceQualityData = true
-        preferences.versionWhenServiceQualityOpted = Macros.versionString()
+        preferences.shareServiceQualityData = accepted
+        preferences.versionWhenServiceQualityOpted = accepted ? Macros.versionString() : nil
         preferences.hasRespondedToServiceQualityConsent = true
         preferences.commit()
-        setRoot(.login)
-    }
 
-    private func rejectShareData() {
-        let preferences = Client.preferences.editable()
-        preferences.shareServiceQualityData = false
-        preferences.versionWhenServiceQualityOpted = nil
-        preferences.hasRespondedToServiceQualityConsent = true
-        preferences.commit()
+        if accepted {
+            ServiceQualityManager.shared.start()
+        } else {
+            ServiceQualityManager.shared.stop()
+        }
+
         setRoot(.login)
     }
 
