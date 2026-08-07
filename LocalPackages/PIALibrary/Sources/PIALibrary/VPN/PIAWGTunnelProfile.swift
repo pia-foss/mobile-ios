@@ -127,8 +127,10 @@ import Foundation
         }
 
         /// :nodoc:
-        public func prepare() {
-            find(completionHandler: nil)
+        public func prepare(_ callback: SuccessLibraryCallback?) {
+            find { _, error in
+                callback?(error)
+            }
         }
 
         /// :nodoc:
