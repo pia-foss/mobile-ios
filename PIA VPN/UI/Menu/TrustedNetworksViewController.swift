@@ -30,7 +30,7 @@ struct Rule {
     var ssid: String
 }
 
-class TrustedNetworksViewController: AutolayoutViewController {
+final class TrustedNetworksViewController: AutolayoutViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
@@ -47,6 +47,11 @@ class TrustedNetworksViewController: AutolayoutViewController {
         static let header = "PIAHeaderCollectionViewCell"
         static let footer = "NetworkFooterCollectionViewCell"
     }
+
+    /// Off-screen cell, let UIKit measure the height the icon and the labels need.
+    private lazy var sizingCell: NetworkCollectionViewCell = {
+        UINib(nibName: Cells.network, bundle: nil).instantiate(withOwner: nil, options: nil).first as! NetworkCollectionViewCell
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,18 +191,26 @@ class TrustedNetworksViewController: AutolayoutViewController {
 
 extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat
         if Macros.isDevicePad {
-            let size = collectionView.frame.width / 6
-            return CGSize(width: size, height: size)
+            width = (collectionView.frame.width / 3) - 28
+        } else if !isLandscape {
+            width = (collectionView.frame.width / 2) - 28
         } else {
-            if !isLandscape {
-                let size = ((collectionView.frame.width / 2) - 28)
-                return CGSize(width: size, height: size)
-            } else {
-                let size = collectionView.frame.width / 4
-                return CGSize(width: size, height: size)
-            }
+            width = collectionView.frame.width / 4
         }
+        // Square by design, but never shorter than its content.
+        return CGSize(width: width, height: max(width, fittingHeight(for: data[indexPath.item], width: width)))
+    }
+
+    private func fittingHeight(for rule: Rule, width: CGFloat) -> CGFloat {
+        sizingCell.data = rule
+        sizingCell.viewShouldRestyle()
+        return sizingCell.systemLayoutSizeFitting(
+            CGSize(width: width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        ).height
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
