@@ -106,13 +106,15 @@ final class AppStoreProvider: NSObject, InAppProvider {
         }
 
         log.debug("Requesting products: \(identifiers)")
+
         let products: [Product]
         do {
             products = try await Product.products(for: identifiers)
         } catch let error as StoreKitError {
+            log.warning("Failed to fetch products from App Store: \(error)")
             return .failure(error)
         } catch {
-            log.warning("returning unknown error from Product.products(for:): \(error)")
+            log.warning("Returning unknown error from Product.products(for:): \(error)")
             return .failure(.unknown)
         }
 

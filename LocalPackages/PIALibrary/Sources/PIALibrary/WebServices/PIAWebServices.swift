@@ -405,7 +405,8 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 throw ClientError.unauthorized
             case 600:
                 throw ClientError.libraryError(message: error.localizedDescription)
-            default:
+            case let code:
+                log.warning("Unhandled error code: \(code ?? 0)")
                 throw ClientError.invalidParameter
             }
         }

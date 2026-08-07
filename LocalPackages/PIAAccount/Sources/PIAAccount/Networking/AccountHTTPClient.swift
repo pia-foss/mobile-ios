@@ -60,7 +60,7 @@ actor AccountHTTPClient {
     func execute<T: Decodable>(
         request: URLRequest,
         decoder: JSONDecoder = .piaCodable
-    ) async throws -> T {
+    ) async throws(PIAAccountError) -> T {
         do {
             if let method = request.httpMethod, let url = request.url {
                 log.debug("\(method) \(url.absoluteString)")
@@ -79,6 +79,9 @@ actor AccountHTTPClient {
 
             // Check for error status codes
             guard !URLBuilder.isErrorStatusCode(httpResponse.statusCode) else {
+                if let method = request.httpMethod, let url = request.url {
+                    log.warning("Failure status \(httpResponse.statusCode) for: \(method) \(url.relativePath)")
+                }
                 throw mapHTTPStatusToError(httpResponse, data: data)
             }
 
@@ -90,6 +93,11 @@ actor AccountHTTPClient {
             }
         } catch let error as PIAAccountError {
             throw error
+        } catch let error as URLError where error.code == .timedOut {
+            if let method = request.httpMethod, let url = request.url {
+                log.warning("Time out for: \(method) \(url.relativePath)")
+            }
+            throw PIAAccountError.networkFailure(error)
         } catch {
             throw PIAAccountError.networkFailure(error)
         }
