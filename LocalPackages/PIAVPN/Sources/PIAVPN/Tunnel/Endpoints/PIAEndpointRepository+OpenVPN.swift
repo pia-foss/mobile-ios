@@ -47,14 +47,15 @@ extension PIAEndpointRepository {
         state: PIATunnelSharedState.State,
         crypto: AppConstants.OpenVPNCrypto? = nil
     ) -> [any VpnConfiguration] {
+        // Runs once per eligible server, so neither guard logs at `error`: the missing CA certificate
+        // is reported once by `configurations(for:state:)`, and missing addresses are expected here.
         guard !state.openVPN.caCertificate.isEmpty else {
-            logger.error("OpenVPN CA certificate not set in shared state — returning no configurations")
             return []
         }
 
         let addresses = (transport == .udp ? server.openVPNAddressesForUDP : server.openVPNAddressesForTCP) ?? []
         guard !addresses.isEmpty else {
-            logger.error("No OpenVPN \(transport.rawValue) addresses found for \(server.identifier) — returning no configurations")
+            logger.debug("No OpenVPN \(transport.rawValue) addresses for \(server.identifier) — contributing no configurations")
             return []
         }
 

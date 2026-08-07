@@ -7,6 +7,7 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
 
     func generateConfigurations() async -> [any VpnConfiguration] {
         let state = PIATunnelSharedState.read()
+        logStateSummary(state)
         logConnectionSummary(state)
         let servers = await resolveServers(state: state)
 
@@ -19,17 +20,28 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
                 logger.error("No server could be resolved — returning no configurations")
                 return []
             }
+            logResolvedServer(server, state: state)
             eligible = [server]
         } else {
             eligible = serversByLatency(servers, state: state)
-            logger.info("Automatic (no selection): \(eligible.count) server(s), fastest first")
         }
 
-        return configurations(for: eligible, state: state)
+        let batch = configurations(for: eligible, state: state)
+        if batch.isEmpty {
+            logger.error("Generated no configurations — the tunnel has nothing to attempt")
+        } else {
+            logger.info("Generated \(batch.count) configuration(s) across \(eligible.count) server(s)")
+        }
+        return batch
     }
 
     /// Builds the connection configurations across the eligible servers, honoring the selected protocol.
     private func configurations(for servers: [Server], state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
+        // Checked once here: the OpenVPN builders run per server, but this is one state-level fault.
+        if state.selectedProtocol != .wireGuard, state.openVPN.caCertificate.isEmpty {
+            logger.error("OpenVPN CA certificate not set in shared state — OpenVPN endpoints will be skipped")
+        }
+
         switch state.selectedProtocol {
         case .wireGuard:
             return servers.flatMap { generateWireGuardConfigurations(server: $0, state: state) }
@@ -54,6 +66,19 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
             $0.dipToken == nil && !$0.offline
         }
 
+        // Explains the fan-out size, and whether the ordering means anything at all: with no measured
+        // latencies the sort is arbitrary.
+        let measured = candidates.filter { state.latencyByServerId[$0.identifier] != nil }.count
+        let dropped = servers.count - candidates.count
+        if candidates.isEmpty {
+            logger.error("Automatic (no selection): no eligible servers — \(servers.count) server(s) all offline or DIP")
+        } else {
+            logger.info(
+                "Automatic (no selection): \(candidates.count) eligible server(s), fastest first — "
+                    + "\(dropped) dropped (offline/DIP), \(measured) with measured latency"
+            )
+        }
+
         return candidates.sorted { lhs, rhs in
             // Unmeasured servers sort to the end (treated as the slowest possible latency).
             let lhsLatency = state.latencyByServerId[lhs.identifier] ?? .max
@@ -73,6 +98,7 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
     /// running, reuses it — and only fall back to the existing list on failure.
     private func resolveServers(state: PIATunnelSharedState.State) async -> [Server] {
         if state.selectedDipServer != nil {
+            logger.info("Dedicated IP target — using the app-provided server list as-is (no fetch)")
             return state.servers
         }
 
@@ -80,17 +106,25 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
             Date().timeIntervalSince(fetchedAt) < PIATunnelSharedState.serversCacheTTL,
             !state.servers.isEmpty
         {
-            logger.info("Reusing cached server list (fetched \(Int(Date().timeIntervalSince(fetchedAt)))s ago)")
+            logger.info(
+                "Reusing cached server list — \(state.servers.count) server(s), "
+                    + "fetched \(Int(Date().timeIntervalSince(fetchedAt)))s ago"
+            )
             return state.servers
         }
 
         if let fetched = await Client.downloadServerList() {
-            logger.info("Fetched fresh server list — caching it in shared state")
+            logger.info("Fetched fresh server list — \(fetched.count) server(s), caching it in shared state")
             PIATunnelSharedState.updateServers(fetched)
             return fetched
         }
 
-        logger.info("Falling back to the existing server list in shared state")
+        // Not routine — everything downstream now runs off a stale or unverified list, so log its age.
+        let age = state.serversFetchedAt.map { "\(Int(Date().timeIntervalSince($0)))s old" } ?? "never fetched"
+        logger.warning(
+            "Server list fetch failed — falling back to the existing list in shared state "
+                + "(\(state.servers.count) server(s), \(age))"
+        )
         return state.servers
     }
 }

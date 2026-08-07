@@ -22,16 +22,23 @@
 
 import Foundation
 
-/// Process-wide in-memory ring buffer capturing everything logged via `PIATunnelLogger`.
+/// Process-wide in-memory ring buffer capturing what is logged via `PIATunnelLogger`.
 ///
 /// `os.Logger` output isn't readable by the app process (only Console.app / `log stream` while
 /// attached to the extension), so this is the only way `PIAPacketTunnelRequest.requestLog` can hand
 /// the app a snapshot of the tunnel's own log. It only holds what this process instance logged since
 /// launch — nothing persists across a tunnel relaunch.
+///
+/// Every level is mirrored here, `trace` and `debug` included — the SDK reports connection state
+/// transitions (OpenVPN status changes, DNS failures, authentication steps) at `debug`, and those are
+/// the lines a CSI report needs. `maxEntries` is sized for that: endpoint generation alone can emit
+/// several hundred lines per connect when the region is Automatic.
 final class PIATunnelLogStore: @unchecked Sendable {
     static let shared = PIATunnelLogStore()
 
-    private let maxEntries = 1000
+    /// ~5k lines is roughly 750 KB of strings — affordable inside a Network Extension's memory budget,
+    /// and enough to hold several connection attempts including their per-candidate detail.
+    private let maxEntries = 5000
     private let queue = DispatchQueue(label: "PIATunnelLogStore", attributes: .concurrent)
     private var lines: [String] = []
 

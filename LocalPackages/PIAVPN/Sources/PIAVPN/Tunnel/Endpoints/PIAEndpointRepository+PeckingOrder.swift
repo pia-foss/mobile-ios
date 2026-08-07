@@ -39,16 +39,23 @@ extension PIAEndpointRepository {
     ) -> [any VpnConfiguration] {
         logPeckingOrderSummary(order, state: state)
         var batch: [any VpnConfiguration] = []
-        for step in order {
+        for (index, step) in order.enumerated() {
             let endpoints: [any VpnConfiguration]
             switch step.kind {
             case .wireGuard(let amnezia):
-                endpoints = servers.flatMap { server -> [any VpnConfiguration] in
-                    let obfuscation = amnezia ? amneziaObfuscation(for: server, state: state) : WireguardObfuscation.none
-                    guard let obfuscation else {
-                        return []
+                // Resolved per step, not per server, so the fan-out can't repeat the same line.
+                let obfuscation: WireguardObfuscation
+                if amnezia {
+                    guard let resolved = amneziaObfuscation(state: state) else {
+                        logger.info("Step \(index + 1)/\(order.count) (AmneziaWG): parameters not available yet — skipped")
+                        continue
                     }
-                    return generateWireGuardConfigurations(
+                    obfuscation = resolved
+                } else {
+                    obfuscation = .none
+                }
+                endpoints = servers.flatMap { server in
+                    generateWireGuardConfigurations(
                         server: server,
                         state: state,
                         obfuscation: obfuscation
@@ -66,15 +73,37 @@ extension PIAEndpointRepository {
                     )
                 }
             }
-            batch.append(contentsOf: endpoints.prefix(step.attempts))
+
+            // `prefix` discards the rest of the fan-out, so log the ratio — a step contributing
+            // nothing is invisible in the batch total alone.
+            let taken = endpoints.prefix(step.attempts)
+            batch.append(contentsOf: taken)
+            let summary =
+                "Step \(index + 1)/\(order.count) (\(stepLabel(step))): "
+                + "took \(taken.count) of \(endpoints.count) candidate endpoint(s), attempts: \(step.attempts)"
+            if taken.isEmpty {
+                logger.warning(summary + " — step contributes nothing")
+            } else {
+                logger.info(summary)
+            }
         }
         logger.info("Automatic pecking order: \(batch.count) endpoint(s) across \(servers.count) server(s)")
         return batch
     }
 
+    /// Short protocol/transport tag identifying a step in the per-step logs.
+    private func stepLabel(_ step: PeckingStep) -> String {
+        switch step.kind {
+        case .wireGuard(let amnezia):
+            return "WireGuard\(amnezia ? " amnezia" : "") :\(step.port)"
+        case .openVPN(let transport):
+            return "OpenVPN \(transport.rawValue) :\(step.port)"
+        }
+    }
+
     /// Resolves the AmneziaWG obfuscation for a censorship WireGuard step. Returns `nil` for now.
-    private func amneziaObfuscation(for server: Server, state: PIATunnelSharedState.State) -> WireguardObfuscation? {
-        logger.info("AmneziaWG parameters not available for \(server.identifier) yet — skipping amnezia step")
-        return nil
+    /// Server-independent — the caller resolves it once per step and logs the outcome there.
+    private func amneziaObfuscation(state: PIATunnelSharedState.State) -> WireguardObfuscation? {
+        nil
     }
 }

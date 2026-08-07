@@ -55,6 +55,7 @@ final class PIATunnelLogger: PacketTunnelLogger, Sendable {
     }
 
     func trace(_ message: @autoclosure () -> String) {
+        // Bound first: `os.Logger`'s interpolation is an escaping autoclosure.
         let message = message()
         log.trace("\(message, privacy: .public)")
         store("TRACE", message)

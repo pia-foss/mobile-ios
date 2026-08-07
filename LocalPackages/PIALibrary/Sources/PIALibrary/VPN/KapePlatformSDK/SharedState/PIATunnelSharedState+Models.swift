@@ -236,7 +236,9 @@ extension PIATunnelSharedState {
         // MARK: App → Tunnel (connection inputs)
 
         /// Identifier of the resolved target server (`serverProvider.targetServer`) the tunnel
-        /// should connect to. Concrete even for "Automatic", where `preferredServer` is nil.
+        /// should connect to, or nil when the user's region selection is "Automatic" — the signal for
+        /// `PIAEndpointRepository.generateConfigurations` to fan out across every online server.
+        /// Automatic is the default, so nil is the common case.
         public var selectedLocationId: String?
 
         /// The resolved Dedicated IP target server, carried in full when a DIP region is selected,

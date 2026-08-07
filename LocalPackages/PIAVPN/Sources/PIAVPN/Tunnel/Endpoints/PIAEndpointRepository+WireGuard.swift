@@ -10,13 +10,12 @@ extension PIAEndpointRepository {
         state: PIATunnelSharedState.State,
         obfuscation: WireguardObfuscation = .none
     ) -> [any VpnConfiguration] {
-        logger.info("Generating WireGuard configurations")
-
+        // Called once per eligible server, so per-server outcomes stay at `debug` — a server without
+        // WireGuard addresses is normal during a fan-out, not an error.
         guard let addresses = server.wireGuardAddressesForUDP, !addresses.isEmpty else {
-            logger.error("No WireGuard UDP addresses found for \(server.identifier) — returning no configurations")
+            logger.debug("No WireGuard UDP addresses for \(server.identifier) — contributing no configurations")
             return []
         }
-        logger.info("Found server \(server.name) with \(addresses.count) WireGuard UDP address(es)")
 
         let configurations: [any VpnConfiguration] = addresses.compactMap { address in
             let ip: IpAddress = address.ip.contains(":") ? .v6(ipV6: address.ip) : .v4(ipV4: address.ip)
@@ -38,7 +37,7 @@ extension PIAEndpointRepository {
             )
         }
 
-        logger.info("Generated \(configurations.count) WireGuard configuration(s)")
+        logger.debug("Built \(configurations.count) WireGuard endpoint(s) for \(server.name)")
         return configurations
     }
 }

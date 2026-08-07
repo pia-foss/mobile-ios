@@ -15,7 +15,23 @@ connection controller). PIAVPN only relocates and hosts PIA's own glue.
 | `PIAPacketTunnelProvider` | `open` base `NEPacketTunnelProvider`; wires the session engine and runs the tunnel | `KapePacketTunnelProvider` |
 | `PIAEndpointRepository` | `VpnConfigurationGenerator` — builds WireGuard and/or OpenVPN endpoint configurations from the shared state; autonomously fetches/caches the server list and ranks candidates by latency | `KapeEndpointRepository` |
 | `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` — performs PIA's WireGuard key exchange | `KapeWireguardAuthenticator` |
-| `PIATunnelLogger` | `PacketTunnelLogger` — routes tunnel logs to `os.Logger` | — |
+| `PIATunnelLogger` | `PacketTunnelLogger` — routes tunnel logs to `os.Logger` and mirrors every level into `PIATunnelLogStore` | — |
+| `PIATunnelLogStore` | Bounded in-memory ring buffer the app reads back via `PIAPacketTunnelRequest.requestLog` | — |
+
+### Logging
+
+`os.Logger` output is only readable while attached to the extension (Console.app, `log stream`), so
+`PIATunnelLogStore` is what the app's debug menu and CSI reports actually show. **Every level is
+mirrored into it, `trace` and `debug` included** — the SDK logs connection state transitions (OpenVPN
+status changes, DNS failures, WireGuard authentication) at `debug`, and dropping those would gut the
+report for exactly the failures worth investigating.
+
+Levels therefore carry their normal meaning; pick by severity, not by volume. What *does* need care is
+duplication: endpoint generation runs once per eligible server, and with the region set to Automatic
+that is the entire online list. Log per-server outcomes once at `debug`, and put the totals a reader
+actually needs — the pecking order, each step's contribution, the final configuration count — at
+`info`. The buffer holds 5000 lines for the lifetime of the process, which is several connection
+attempts' worth, but it is still a ring buffer.
 
 ## How it's used
 
