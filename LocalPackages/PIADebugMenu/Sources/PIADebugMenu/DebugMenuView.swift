@@ -1,35 +1,15 @@
-@preconcurrency import PIALibrary
-import StoreKit
 import SwiftUI
 
-import struct PIABase.JWS
-
 // MARK: - DebugMenuView
-
-struct ReportResult: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-}
 
 @available(iOS 16, tvOS 17, *)
 public struct DebugMenuView: View {
     private let onDismiss: () -> Void
-    @State private var logSnapshot: String = ""
-    @State var tunnelLogSnapshot: String = ""
-    @State private var isSendingReport = false
-    @State private var reportResult: ReportResult? = nil
-    @State private var isPresentingManageSubscriptions: Bool = false
-    @State private var isLoadingRefundTransaction = false
-    @State private var refundTransactionId: UInt64 = 0
-    @State private var isRefundSheetPresented = false
-    @State private var availableTransactions: [StoreKit.Transaction] = []
-    @State private var isTransactionPickerPresented = false
-    @State var entitlementJWS: JWS? = nil
+    @StateObject private var viewModel = DebugMenuViewModel()
 
     public var body: some View {
         mainContent
-            .alert(item: $reportResult) { result in
+            .alert(item: $viewModel.reportResult) { result in
                 Alert(
                     title: Text(result.title),
                     message: Text(result.message),
@@ -37,31 +17,17 @@ public struct DebugMenuView: View {
                 )
             }
             #if os(iOS)
-                .manageSubscriptionsSheet(isPresented: $isPresentingManageSubscriptions)
-                .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
-                    switch result {
-                    case .success(let status):
-                        if status == .success {
-                            reportResult = ReportResult(
-                                title: "Refund Requested",
-                                message: "Your refund request was submitted to the App Store."
-                            )
-                        }
-                    case .failure(let error):
-                        reportResult = ReportResult(
-                            title: "Refund Request Failed",
-                            message: error.localizedDescription
-                        )
-                    }
+                .manageSubscriptionsSheet(isPresented: $viewModel.isPresentingManageSubscriptions)
+                .refundRequestSheet(for: viewModel.refundTransactionId, isPresented: $viewModel.isRefundSheetPresented) {
+                    @MainActor result in
+                    viewModel.handleRefundResult(result)
                 }
-                .sheet(isPresented: $isTransactionPickerPresented) {
+                .sheet(isPresented: $viewModel.isTransactionPickerPresented) {
                     List {
                         Section("Select a transaction to refund") {
-                            ForEach(availableTransactions, id: \.id) { transaction in
+                            ForEach(viewModel.availableTransactions, id: \.id) { transaction in
                                 Button(transaction.productID) {
-                                    isTransactionPickerPresented = false
-                                    refundTransactionId = transaction.id
-                                    isRefundSheetPresented = true
+                                    viewModel.selectTransaction(transaction)
                                 }
                             }
                         }
@@ -70,15 +36,10 @@ public struct DebugMenuView: View {
             #endif
             .navigationTitle("Debug Menu")
             .onAppear {
-                updateLogSnapshotIfNeeded()
-                refreshTunnelLog()
+                viewModel.onAppear()
             }
-            .task {
-                entitlementJWS = await Client.store.currentEntitlementJWS()
-            }
-            .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect()) { _ in
-                updateLogSnapshotIfNeeded()
-                refreshTunnelLog()
+            .onDisappear {
+                viewModel.onDisappear()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -89,7 +50,7 @@ public struct DebugMenuView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         ShareLink(
                             item: DebugExportFile(
-                                content: buildExportContent(),
+                                content: viewModel.buildExportContent(),
                                 filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
                             ),
                             preview: SharePreview("Debug Export")
@@ -143,36 +104,36 @@ public struct DebugMenuView: View {
 
     private var appInfoSection: some View {
         DebugSection("App Info") {
-            DebugInfoRow(label: "Version", value: appVersion)
-            DebugInfoRow(label: "Environment", value: environment)
-            DebugInfoRow(label: "Base URL", value: baseUrl)
+            DebugInfoRow(label: "Version", value: viewModel.appVersion)
+            DebugInfoRow(label: "Environment", value: viewModel.environment)
+            DebugInfoRow(label: "Base URL", value: viewModel.baseUrl)
         }
     }
 
     private var vpnSection: some View {
         DebugSection("VPN") {
-            DebugInfoRow(label: "Status", value: Client.daemons.vpnStatus.rawValue)
-            DebugInfoRow(label: "Protocol", value: Client.preferences.vpnType)
-            DebugInfoRow(label: "Local IP", value: Client.daemons.publicIP ?? "---")
-            DebugInfoRow(label: "VPN IP", value: Client.daemons.vpnIP ?? "---")
+            DebugInfoRow(label: "Status", value: viewModel.vpnStatus)
+            DebugInfoRow(label: "Protocol", value: viewModel.vpnProtocolName)
+            DebugInfoRow(label: "Local IP", value: viewModel.publicIP)
+            DebugInfoRow(label: "VPN IP", value: viewModel.vpnIP)
         }
     }
 
     private var accountSection: some View {
         DebugSection("Account and Subscription") {
-            DebugInfoRow(label: "Username", value: username)
-            DebugInfoRow(label: "Plan", value: plan)
-            DebugInfoRow(label: "Product ID", value: productId)
-            DebugInfoRow(label: "Expiration Date", value: expirationFormatted)
-            DebugInfoRow(label: "Is Expired", value: isExpired)
-            DebugInfoRow(label: "Is Renewable", value: isRenewable)
-            DebugInfoRow(label: "Is Recurring", value: isRecurring)
+            DebugInfoRow(label: "Username", value: viewModel.username)
+            DebugInfoRow(label: "Plan", value: viewModel.plan)
+            DebugInfoRow(label: "Product ID", value: viewModel.productId)
+            DebugInfoRow(label: "Expiration Date", value: viewModel.expirationFormatted)
+            DebugInfoRow(label: "Is Expired", value: viewModel.isExpired)
+            DebugInfoRow(label: "Is Renewable", value: viewModel.isRenewable)
+            DebugInfoRow(label: "Is Recurring", value: viewModel.isRecurring)
         }
     }
 
     private var receiptSection: some View {
         DebugSection("Transaction (JWS)") {
-            if let transactionJWS {
+            if let transactionJWS = viewModel.transactionJWS {
                 let preview = String(transactionJWS.value.prefix(300)) + "..."
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Transaction JWS (preview)")
@@ -210,11 +171,11 @@ public struct DebugMenuView: View {
     private var logsSection: some View {
         DebugSection("App Logs") {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Recent logs (newest on top, last \(Self.previewLineCount) lines)")
+                Text("Recent logs (newest on top, last \(DebugMenuViewModel.previewLineCount) lines)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 ScrollView(.horizontal) {
-                    Text(logSnapshot.isEmpty ? "No logs" : Self.reversedPreview(of: logSnapshot))
+                    Text(viewModel.logPreview)
                         .font(.system(.caption2, design: .monospaced))
                         .foregroundStyle(.primary)
                         .fixedSize(horizontal: true, vertical: false)
@@ -231,7 +192,7 @@ public struct DebugMenuView: View {
             #if os(iOS)
                 ShareLink(
                     item: DebugExportFile(
-                        content: logs,
+                        content: viewModel.logs,
                         filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
                     ),
                     preview: SharePreview("App Logs")
@@ -245,11 +206,11 @@ public struct DebugMenuView: View {
     private var tunnelLogSection: some View {
         DebugSection("Tunnel Log") {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Live tunnel-extension log (newest on top, last \(Self.previewLineCount) lines)")
+                Text("Live tunnel-extension log (newest on top, last \(DebugMenuViewModel.previewLineCount) lines)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 ScrollView(.horizontal) {
-                    Text(tunnelLogSnapshot.isEmpty ? "No tunnel log" : Self.reversedPreview(of: tunnelLogSnapshot))
+                    Text(viewModel.tunnelLogPreview)
                         .font(.system(.caption2, design: .monospaced))
                         .foregroundStyle(.primary)
                         .fixedSize(horizontal: true, vertical: false)
@@ -266,7 +227,7 @@ public struct DebugMenuView: View {
             #if os(iOS)
                 ShareLink(
                     item: DebugExportFile(
-                        content: tunnelLogSnapshot,
+                        content: viewModel.tunnelLogSnapshot,
                         filename: "tunnel_logs_\(Int(Date().timeIntervalSince1970)).txt"
                     ),
                     preview: SharePreview("Tunnel Log")
@@ -277,54 +238,17 @@ public struct DebugMenuView: View {
         }
     }
 
-    /// Both log sections show only the tail of the snapshot — the full content is still one tap
-    /// away via Export. Unbounded 1000-line monospaced `Text` inside a scrolling `List` is expensive
-    /// to lay out on every re-render and was a source of scroll jank.
-    private static let previewLineCount = 25
-
-    private static func reversedPreview(of content: String) -> String {
-        content
-            .components(separatedBy: "\n")
-            .reversed()
-            .prefix(previewLineCount)
-            .joined(separator: "\n")
-    }
-
     private var subscriptionSection: some View {
         DebugSection("Subscription") {
             Button("Manage Subscriptions") {
-                isPresentingManageSubscriptions = true
+                viewModel.presentManageSubscriptions()
             }
             Button {
-                isLoadingRefundTransaction = true
-                Task { @MainActor in
-                    defer {
-                        isLoadingRefundTransaction = false
-                    }
-
-                    var transactions: [StoreKit.Transaction] = []
-                    for await result in Transaction.currentEntitlements {
-                        if case .verified(let transaction) = result {
-                            transactions.append(transaction)
-                        }
-                    }
-
-                    switch transactions.count {
-                    case 0:
-                        reportResult = ReportResult(
-                            title: "No Transaction Found",
-                            message: "No active transaction found to request a refund for."
-                        )
-                    case 1:
-                        refundTransactionId = transactions[0].id
-                        isRefundSheetPresented = true
-                    default:
-                        availableTransactions = transactions
-                        isTransactionPickerPresented = true
-                    }
+                Task {
+                    await viewModel.requestRefund()
                 }
             } label: {
-                if isLoadingRefundTransaction {
+                if viewModel.isLoadingRefundTransaction {
                     HStack {
                         ProgressView()
                         Text("Looking up transaction...")
@@ -333,34 +257,18 @@ public struct DebugMenuView: View {
                     Text("Test Refund Request")
                 }
             }
-            .disabled(isLoadingRefundTransaction)
+            .disabled(viewModel.isLoadingRefundTransaction)
         }
     }
 
     private var supportSection: some View {
         DebugSection("Support") {
             Button {
-                isSendingReport = true
-                Task { @MainActor in
-                    defer {
-                        isSendingReport = false
-                    }
-
-                    do {
-                        let reportId = try await Client.submitDebugReport(includeDebug: true, redactIPs: false)
-                        reportResult = ReportResult(
-                            title: "Debug information submitted",
-                            message: "Report ID: \(reportId)\nPlease note this ID — support will need it to locate your submission."
-                        )
-                    } catch {
-                        reportResult = ReportResult(
-                            title: "Submission failed",
-                            message: "Debug information could not be submitted."
-                        )
-                    }
+                Task {
+                    await viewModel.sendReportToSupport()
                 }
             } label: {
-                if isSendingReport {
+                if viewModel.isSendingReport {
                     HStack {
                         ProgressView()
                         Text("Sending...")
@@ -369,27 +277,7 @@ public struct DebugMenuView: View {
                     Text("Send to Support (CSI)")
                 }
             }
-            .disabled(isSendingReport)
-        }
-    }
-
-    // MARK: - Logs
-
-    private func updateLogSnapshotIfNeeded() {
-        let current = logs
-        if current != logSnapshot {
-            logSnapshot = current
-        }
-    }
-
-    private func refreshTunnelLog() {
-        Client.providers.vpnProvider.requestTunnelLog { content, _ in
-            guard let content, !content.isEmpty else { return }
-            DispatchQueue.main.async {
-                if content != tunnelLogSnapshot {
-                    tunnelLogSnapshot = content
-                }
-            }
+            .disabled(viewModel.isSendingReport)
         }
     }
 
