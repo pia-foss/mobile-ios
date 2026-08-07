@@ -3,8 +3,8 @@ import Foundation
 
 import struct PIABase.JWS
 
-@available(iOS 16, *)
-extension DebugMenuView {
+@available(iOS 16, tvOS 17, *)
+extension DebugMenuViewModel {
     var appVersion: String {
         Macros.versionFullString() ?? "—"
     }
@@ -57,8 +57,49 @@ extension DebugMenuView {
         entitlementJWS
     }
 
+    var vpnStatus: String {
+        vpnConnection.status
+    }
+
+    var connectedVia: String {
+        vpnConnection.connectedVia
+    }
+
+    var vpnProtocolName: String {
+        Client.preferences.vpnType
+    }
+
+    var publicIP: String {
+        Client.daemons.publicIP ?? "---"
+    }
+
+    var vpnIP: String {
+        Client.daemons.vpnIP ?? "---"
+    }
+
     var logs: String {
         PIALogHandler.logStorage.getAllLogs(includeDebug: true)
+    }
+
+    /// Both log sections show only the tail of the snapshot — the full content is still one tap
+    /// away via Export. Unbounded 1000-line monospaced `Text` inside a scrolling `List` is expensive
+    /// to lay out on every re-render and was a source of scroll jank.
+    static let previewLineCount = 25
+
+    var logPreview: String {
+        logSnapshot.isEmpty ? "No logs" : Self.reversedPreview(of: logSnapshot)
+    }
+
+    var tunnelLogPreview: String {
+        tunnelLogSnapshot.isEmpty ? "No tunnel log" : Self.reversedPreview(of: tunnelLogSnapshot)
+    }
+
+    private static func reversedPreview(of content: String) -> String {
+        content
+            .components(separatedBy: "\n")
+            .reversed()
+            .prefix(previewLineCount)
+            .joined(separator: "\n")
     }
 
     func buildExportContent() -> String {
@@ -79,8 +120,11 @@ extension DebugMenuView {
         lines.append("=== Transaction (JWS) ===")
         lines.append(transactionJWS?.value ?? "Not available")
         lines.append("")
-        lines.append("=== Logs ===")
+        lines.append("=== App Logs ===")
         lines.append(logs)
+        lines.append("")
+        lines.append("=== Tunnel Log ===")
+        lines.append(tunnelLogSnapshot.isEmpty ? "No tunnel log" : tunnelLogSnapshot)
         return lines.joined(separator: "\n")
     }
 }

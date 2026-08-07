@@ -1,34 +1,15 @@
-@preconcurrency import PIALibrary
-import StoreKit
 import SwiftUI
 
-import struct PIABase.JWS
-
 // MARK: - DebugMenuView
-
-struct ReportResult: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-}
 
 @available(iOS 16, tvOS 17, *)
 public struct DebugMenuView: View {
     private let onDismiss: () -> Void
-    @State private var logSnapshot: String = ""
-    @State private var isSendingReport = false
-    @State private var reportResult: ReportResult? = nil
-    @State private var isPresentingManageSubscriptions: Bool = false
-    @State private var isLoadingRefundTransaction = false
-    @State private var refundTransactionId: UInt64 = 0
-    @State private var isRefundSheetPresented = false
-    @State private var availableTransactions: [StoreKit.Transaction] = []
-    @State private var isTransactionPickerPresented = false
-    @State var entitlementJWS: JWS? = nil
+    @StateObject private var viewModel = DebugMenuViewModel()
 
     public var body: some View {
         mainContent
-            .alert(item: $reportResult) { result in
+            .alert(item: $viewModel.reportResult) { result in
                 Alert(
                     title: Text(result.title),
                     message: Text(result.message),
@@ -36,31 +17,17 @@ public struct DebugMenuView: View {
                 )
             }
             #if os(iOS)
-                .manageSubscriptionsSheet(isPresented: $isPresentingManageSubscriptions)
-                .refundRequestSheet(for: refundTransactionId, isPresented: $isRefundSheetPresented) { @MainActor result in
-                    switch result {
-                    case .success(let status):
-                        if status == .success {
-                            reportResult = ReportResult(
-                                title: "Refund Requested",
-                                message: "Your refund request was submitted to the App Store."
-                            )
-                        }
-                    case .failure(let error):
-                        reportResult = ReportResult(
-                            title: "Refund Request Failed",
-                            message: error.localizedDescription
-                        )
-                    }
+                .manageSubscriptionsSheet(isPresented: $viewModel.isPresentingManageSubscriptions)
+                .refundRequestSheet(for: viewModel.refundTransactionId, isPresented: $viewModel.isRefundSheetPresented) {
+                    @MainActor result in
+                    viewModel.handleRefundResult(result)
                 }
-                .sheet(isPresented: $isTransactionPickerPresented) {
+                .sheet(isPresented: $viewModel.isTransactionPickerPresented) {
                     List {
                         Section("Select a transaction to refund") {
-                            ForEach(availableTransactions, id: \.id) { transaction in
+                            ForEach(viewModel.availableTransactions, id: \.id) { transaction in
                                 Button(transaction.productID) {
-                                    isTransactionPickerPresented = false
-                                    refundTransactionId = transaction.id
-                                    isRefundSheetPresented = true
+                                    viewModel.selectTransaction(transaction)
                                 }
                             }
                         }
@@ -69,13 +36,10 @@ public struct DebugMenuView: View {
             #endif
             .navigationTitle("Debug Menu")
             .onAppear {
-                logSnapshot = logs
+                viewModel.onAppear()
             }
-            .task {
-                entitlementJWS = await Client.store.currentEntitlementJWS()
-            }
-            .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
-                logSnapshot = logs
+            .onDisappear {
+                viewModel.onDisappear()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -86,7 +50,7 @@ public struct DebugMenuView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         ShareLink(
                             item: DebugExportFile(
-                                content: buildExportContent(),
+                                content: viewModel.buildExportContent(),
                                 filename: "debug_\(Int(Date().timeIntervalSince1970)).txt"
                             ),
                             preview: SharePreview("Debug Export")
@@ -116,6 +80,8 @@ public struct DebugMenuView: View {
                         .focusable()
                     logsSection
                         .focusable()
+                    tunnelLogSection
+                        .focusable()
                     supportSection
                 }
                 .padding(.horizontal, 60)
@@ -124,9 +90,11 @@ public struct DebugMenuView: View {
         #else
             List {
                 appInfoSection
+                vpnSection
                 accountSection
                 receiptSection
                 logsSection
+                tunnelLogSection
                 subscriptionSection
                 supportSection
             }
@@ -137,36 +105,37 @@ public struct DebugMenuView: View {
 
     private var appInfoSection: some View {
         DebugSection("App Info") {
-            DebugInfoRow(label: "Version", value: appVersion)
-            DebugInfoRow(label: "Environment", value: environment)
-            DebugInfoRow(label: "Base URL", value: baseUrl)
+            DebugInfoRow(label: "Version", value: viewModel.appVersion)
+            DebugInfoRow(label: "Environment", value: viewModel.environment)
+            DebugInfoRow(label: "Base URL", value: viewModel.baseUrl)
         }
     }
 
     private var vpnSection: some View {
         DebugSection("VPN") {
-            DebugInfoRow(label: "Status", value: Client.daemons.vpnStatus.rawValue)
-            DebugInfoRow(label: "Protocol", value: Client.preferences.vpnType)
-            DebugInfoRow(label: "Local IP", value: Client.daemons.publicIP ?? "---")
-            DebugInfoRow(label: "VPN IP", value: Client.daemons.vpnIP ?? "---")
+            DebugInfoRow(label: "Status", value: viewModel.vpnStatus)
+            DebugInfoRow(label: "Connected Via", value: viewModel.connectedVia)
+            DebugInfoRow(label: "Protocol", value: viewModel.vpnProtocolName)
+            DebugInfoRow(label: "Local IP", value: viewModel.publicIP)
+            DebugInfoRow(label: "VPN IP", value: viewModel.vpnIP)
         }
     }
 
     private var accountSection: some View {
         DebugSection("Account and Subscription") {
-            DebugInfoRow(label: "Username", value: username)
-            DebugInfoRow(label: "Plan", value: plan)
-            DebugInfoRow(label: "Product ID", value: productId)
-            DebugInfoRow(label: "Expiration Date", value: expirationFormatted)
-            DebugInfoRow(label: "Is Expired", value: isExpired)
-            DebugInfoRow(label: "Is Renewable", value: isRenewable)
-            DebugInfoRow(label: "Is Recurring", value: isRecurring)
+            DebugInfoRow(label: "Username", value: viewModel.username)
+            DebugInfoRow(label: "Plan", value: viewModel.plan)
+            DebugInfoRow(label: "Product ID", value: viewModel.productId)
+            DebugInfoRow(label: "Expiration Date", value: viewModel.expirationFormatted)
+            DebugInfoRow(label: "Is Expired", value: viewModel.isExpired)
+            DebugInfoRow(label: "Is Renewable", value: viewModel.isRenewable)
+            DebugInfoRow(label: "Is Recurring", value: viewModel.isRecurring)
         }
     }
 
     private var receiptSection: some View {
         DebugSection("Transaction (JWS)") {
-            if let transactionJWS {
+            if let transactionJWS = viewModel.transactionJWS {
                 let preview = String(transactionJWS.value.prefix(300)) + "..."
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Transaction JWS (preview)")
@@ -202,20 +171,17 @@ public struct DebugMenuView: View {
     }
 
     private var logsSection: some View {
-        DebugSection("Logs") {
-            let preview = logSnapshot.isEmpty ? "No logs" : logSnapshot.components(separatedBy: "\n").reversed().joined(separator: "\n")
-
+        DebugSection("App Logs") {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Recent logs (newest on top)")
+                Text("Recent logs (newest on top, last \(DebugMenuViewModel.previewLineCount) lines)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                ScrollView {
-                    Text(preview)
+                ScrollView(.horizontal) {
+                    Text(viewModel.logPreview)
                         .font(.system(.caption2, design: .monospaced))
                         .foregroundStyle(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
-                .frame(height: 300)
             }
             #if os(tvOS)
                 .padding(.vertical, 8)
@@ -228,10 +194,45 @@ public struct DebugMenuView: View {
             #if os(iOS)
                 ShareLink(
                     item: DebugExportFile(
-                        content: logs,
+                        content: viewModel.logs,
                         filename: "logs_\(Int(Date().timeIntervalSince1970)).txt"
                     ),
-                    preview: SharePreview("Logs")
+                    preview: SharePreview("App Logs")
+                ) {
+                    Label("Export", systemImage: "square.and.arrow.up")
+                }
+            #endif
+        }
+    }
+
+    private var tunnelLogSection: some View {
+        DebugSection("Tunnel Log") {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Live tunnel-extension log (newest on top, last \(DebugMenuViewModel.previewLineCount) lines)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                ScrollView(.horizontal) {
+                    Text(viewModel.tunnelLogPreview)
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+            }
+            #if os(tvOS)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            #else
+                .padding(.vertical, 2)
+            #endif
+
+            #if os(iOS)
+                ShareLink(
+                    item: DebugExportFile(
+                        content: viewModel.tunnelLogSnapshot,
+                        filename: "tunnel_logs_\(Int(Date().timeIntervalSince1970)).txt"
+                    ),
+                    preview: SharePreview("Tunnel Log")
                 ) {
                     Label("Export", systemImage: "square.and.arrow.up")
                 }
@@ -242,38 +243,14 @@ public struct DebugMenuView: View {
     private var subscriptionSection: some View {
         DebugSection("Subscription") {
             Button("Manage Subscriptions") {
-                isPresentingManageSubscriptions = true
+                viewModel.presentManageSubscriptions()
             }
             Button {
-                isLoadingRefundTransaction = true
-                Task { @MainActor in
-                    defer {
-                        isLoadingRefundTransaction = false
-                    }
-
-                    var transactions: [StoreKit.Transaction] = []
-                    for await result in Transaction.currentEntitlements {
-                        if case .verified(let transaction) = result {
-                            transactions.append(transaction)
-                        }
-                    }
-
-                    switch transactions.count {
-                    case 0:
-                        reportResult = ReportResult(
-                            title: "No Transaction Found",
-                            message: "No active transaction found to request a refund for."
-                        )
-                    case 1:
-                        refundTransactionId = transactions[0].id
-                        isRefundSheetPresented = true
-                    default:
-                        availableTransactions = transactions
-                        isTransactionPickerPresented = true
-                    }
+                Task {
+                    await viewModel.requestRefund()
                 }
             } label: {
-                if isLoadingRefundTransaction {
+                if viewModel.isLoadingRefundTransaction {
                     HStack {
                         ProgressView()
                         Text("Looking up transaction...")
@@ -282,34 +259,18 @@ public struct DebugMenuView: View {
                     Text("Test Refund Request")
                 }
             }
-            .disabled(isLoadingRefundTransaction)
+            .disabled(viewModel.isLoadingRefundTransaction)
         }
     }
 
     private var supportSection: some View {
         DebugSection("Support") {
             Button {
-                isSendingReport = true
-                Task { @MainActor in
-                    defer {
-                        isSendingReport = false
-                    }
-
-                    do {
-                        let reportId = try await Client.submitDebugReport(includeDebug: true, redactIPs: false)
-                        reportResult = ReportResult(
-                            title: "Debug information submitted",
-                            message: "Report ID: \(reportId)\nPlease note this ID — support will need it to locate your submission."
-                        )
-                    } catch {
-                        reportResult = ReportResult(
-                            title: "Submission failed",
-                            message: "Debug information could not be submitted."
-                        )
-                    }
+                Task {
+                    await viewModel.sendReportToSupport()
                 }
             } label: {
-                if isSendingReport {
+                if viewModel.isSendingReport {
                     HStack {
                         ProgressView()
                         Text("Sending...")
@@ -318,7 +279,7 @@ public struct DebugMenuView: View {
                     Text("Send to Support (CSI)")
                 }
             }
-            .disabled(isSendingReport)
+            .disabled(viewModel.isSendingReport)
         }
     }
 
