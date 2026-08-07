@@ -37,12 +37,16 @@ extension AppDelegate {
             }))
 
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
 
         navVC.setViewControllers([hostingVC], animated: false)
         navVC.navigationBar.standardAppearance = appearance
         navVC.navigationBar.scrollEdgeAppearance = appearance
         navVC.navigationBar.compactAppearance = appearance
+        navVC.navigationBar.setBackgroundImage(nil, for: .default)
+        navVC.navigationBar.shadowImage = nil
+        navVC.navigationBar.isTranslucent = false
         navVC.modalPresentationStyle = .overCurrentContext
         top.present(navVC, animated: true)
     }

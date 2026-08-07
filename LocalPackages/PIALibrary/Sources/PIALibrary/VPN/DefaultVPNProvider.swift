@@ -446,6 +446,18 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
     }
 
+    public func requestTunnelLog(_ callback: LibraryCallback<String>?) {
+        guard let activeProfile else {
+            callback?(nil, ClientError.vpnProfileUnavailable)
+            return
+        }
+        guard let configuration = vpnClientConfiguration() else {
+            callback?(nil, ClientError.vpnProfileUnavailable)
+            return
+        }
+        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration, callback)
+    }
+
     private func isLegacyProfile() -> Bool {
         return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
     }

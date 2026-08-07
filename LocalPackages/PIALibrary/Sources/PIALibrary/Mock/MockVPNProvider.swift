@@ -150,6 +150,11 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
         callback?(nil, ClientError.unsupported)
     }
 
+    /// :nodoc:
+    public func requestTunnelLog(_ callback: LibraryCallback<String>?) {
+        callback?(nil, ClientError.unsupported)
+    }
+
     public func needsMigrationToGEN4() -> Bool {
         return false
     }

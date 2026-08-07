@@ -91,19 +91,31 @@ The label renders in `.caption` / `.secondary` style above the value in `.body` 
 
 `DebugExportFile` is a `Transferable` wrapper used by iOS `ShareLink` buttons. It writes the given string to a named temporary file and vends it as a file transfer. It is not used on tvOS.
 
+## Architecture
+
+`DebugMenuView` is a state observer only: it owns a `@StateObject DebugMenuViewModel`, renders `viewModel.*` and forwards user actions to it. All state, polling and side effects live in `DebugMenuViewModel.swift`:
+
+- `@Published` state for every value the view renders or binds to (log snapshots, entitlement JWS, alert/sheet flags, refund transactions).
+- `onAppear()` / `onDisappear()` start and cancel a single refresh `Task` that polls the app log and the tunnel log every 5 seconds.
+- Intents: `sendReportToSupport()`, `requestRefund()`, `selectTransaction(_:)`, `handleRefundResult(_:)`, `presentManageSubscriptions()`.
+
+Read-only values derived from `PIALibrary` (`appVersion`, `username`, `logs`, previews, `buildExportContent()`, …) live in `Extensions/DebugMenuViewModel+Values.swift`.
+
 ## Adding a new section
 
-1. Add a private `var` in `DebugMenuView.swift` returning a `DebugSection`:
+1. Put any new state or side effect on `DebugMenuViewModel` (`@Published` property plus an intent method), and derived read-only values in `DebugMenuViewModel+Values.swift`.
+
+2. Add a private `var` in `DebugMenuView.swift` returning a `DebugSection` that reads from the view model:
 
 ```swift
 private var mySection: some View {
     DebugSection("My Section") {
-        DebugInfoRow(label: "Some Key", value: someValue)
+        DebugInfoRow(label: "Some Key", value: viewModel.someValue)
     }
 }
 ```
 
-2. Add it to `mainContent` in both the `#if os(tvOS)` and `#else` branches:
+3. Add it to `mainContent` in both the `#if os(tvOS)` and `#else` branches:
 
 ```swift
 // tvOS
@@ -121,4 +133,4 @@ List {
 }
 ```
 
-3. If the section is platform-specific, wrap it with `#if os(iOS)` / `#if os(tvOS)` as appropriate (see `subscriptionSection` for an example).
+4. If the section is platform-specific, wrap it with `#if os(iOS)` / `#if os(tvOS)` as appropriate (see `subscriptionSection` for an example).

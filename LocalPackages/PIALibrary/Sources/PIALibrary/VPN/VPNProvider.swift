@@ -138,6 +138,15 @@ public protocol VPNProvider: AnyObject {
     func dataUsage(_ callback: LibraryCallback<Usage>?)
 
     /**
+     Requests the active tunnel's own debug log (distinct from the app-process log in
+     `PIALogHandler`). Best-effort: returns `nil` when there is no active profile, or when the
+     tunnel can't produce a log (e.g. disconnected, or an unresponsive Network Extension process).
+
+     - Parameter callback: Returns the log content on success.
+     */
+    func requestTunnelLog(_ callback: LibraryCallback<String>?)
+
+    /**
      Check if the VPN profile needs to be migrated to GEN4.
      - Precondition: isVPNConnected == true
      - Returns: `Bool`
