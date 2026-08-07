@@ -119,6 +119,14 @@ extension Client {
         /// Sets the rsa certificate to use for pinning puposes.
         public var rsa4096Certificate: String?
 
+        /// Loads the bundled PIA-RSA-4096 certificate from the app bundle.
+        public static func defaultRSACertificate() -> String? {
+            guard let url = Bundle.main.url(forResource: "PIA-RSA-4096", withExtension: "pem") else {
+                return nil
+            }
+            return try? String(contentsOf: url)
+        }
+
         public let maceHostname: String
 
         public let macePort: UInt16

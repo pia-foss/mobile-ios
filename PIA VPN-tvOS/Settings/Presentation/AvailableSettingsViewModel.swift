@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIALibrary
 import PIALocalizations
 
 class AvailableSettingsViewModel: ObservableObject {
@@ -14,6 +15,7 @@ class AvailableSettingsViewModel: ObservableObject {
         case account
         case general
         case dedicatedIp
+        case protocols
 
         var id: Self {
             return self
@@ -27,18 +29,32 @@ class AvailableSettingsViewModel: ObservableObject {
                 return L10n.Global.General.settings
             case .dedicatedIp:
                 return L10n.Dedicated.Ip.title
+            case .protocols:
+                return L10n.Settings.Section.protocols
             }
         }
     }
 
-    var sections: [Sections] = [.account, .dedicatedIp]
+    let sections: [Sections]
 
     private let onAccountSectionSelectedAction: AppRouter.Actions
     private let onDedicatedIpSectionSelectedAction: AppRouter.Actions
+    private let onProtocolSectionSelectedAction: AppRouter.Actions
 
-    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions) {
+    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions, onProtocolSectionSelectedAction: AppRouter.Actions, usePlatformSDKVPN: Bool = Client.configuration.featureFlags[.usePlatformSDKVPN]) {
         self.onAccountSectionSelectedAction = onAccountSelectedAction
         self.onDedicatedIpSectionSelectedAction = onDedicatedIpSectionSelectedAction
+        self.onProtocolSectionSelectedAction = onProtocolSectionSelectedAction
+
+        // Protocol selection only applies to the PlatformSDK tunnel (WireGuard / OpenVPN).
+        // With the flag off, tvOS runs the legacy IKEv2 profile, which offers no choice, so the
+        // Protocols section is hidden.
+        var sections: [Sections] = [.account]
+        if usePlatformSDKVPN {
+            sections.append(.protocols)
+        }
+        sections.append(.dedicatedIp)
+        self.sections = sections
     }
 
     func navigate(to section: Sections) {
@@ -51,6 +67,8 @@ class AvailableSettingsViewModel: ObservableObject {
         case .dedicatedIp:
             onDedicatedIpSectionSelectedAction()
             break
+        case .protocols:
+            onProtocolSectionSelectedAction()
         }
     }
 

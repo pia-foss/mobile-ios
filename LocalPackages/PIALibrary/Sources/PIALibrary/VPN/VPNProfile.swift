@@ -43,7 +43,7 @@ public protocol VPNProfile: AnyObject {
     /**
      Prepares the profile for use, like synchronizing with the current VPN status and making sure that the profile is not corrupt.
      */
-    func prepare()
+    func prepare(_ callback: SuccessLibraryCallback?)
 
     /**
      Saves the profile to the device with a new configuration.

@@ -71,23 +71,8 @@ extension NetworkExtensionProfile {
         vpn.localizedDescription = configuration.name
         vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
 
-        let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
+        applyOnDemandRules(to: vpn, force: force, configuration: configuration)
 
-        vpn.onDemandRules = []
-
-        if vpn.isOnDemandEnabled {
-
-            if Client.preferences.nmtRulesEnabled {
-                log.debug("Network Management Rule Enabled: \(Client.preferences.nmtRulesEnabled)")
-                log.debug("Network Management Rules for Trusted Networks: \(Client.preferences.nmtTrustedNetworkRules)")
-                log.debug("Network Management Generic rules: \(Client.preferences.nmtGenericRules)")
-                self.configureOnDemandOnWiFiNetworksFor(trustedNetworks, vpn)
-                self.configureOnDemandOnCellularNetworks(vpn)
-            } else {
-                log.debug("Network Management Tool is not enabled")
-                self.configureDefaultOnDemandRules(force, vpn, configuration)
-            }
-        }
         #if os(iOS)
             let selectedProtocol = Client.preferences.vpnType
             let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
@@ -123,6 +108,28 @@ extension NetworkExtensionProfile {
             vpn.loadFromPreferences { (error) in
                 callback?(nil)
             }
+        }
+    }
+
+    /// Builds and applies the Connect-on-Demand rules for `vpn` from the user's NMT preferences.
+    /// Shared by the protocol-extension `doSave` (IKEv2 / OpenVPN / WireGuard) and by
+    /// `KapePlatformSDKTunnelProfile`, which provides its own `doSave` but reuses this logic.
+    func applyOnDemandRules(to vpn: NEVPNManager, force: Bool, configuration: VPNConfiguration) {
+        let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
+
+        vpn.onDemandRules = []
+
+        guard vpn.isOnDemandEnabled else { return }
+
+        if Client.preferences.nmtRulesEnabled {
+            log.debug("Network Management Rule Enabled: \(Client.preferences.nmtRulesEnabled)")
+            log.debug("Network Management Rules for Trusted Networks: \(Client.preferences.nmtTrustedNetworkRules)")
+            log.debug("Network Management Generic rules: \(Client.preferences.nmtGenericRules)")
+            configureOnDemandOnWiFiNetworksFor(trustedNetworks, vpn)
+            configureOnDemandOnCellularNetworks(vpn)
+        } else {
+            log.debug("Network Management Tool is not enabled")
+            configureDefaultOnDemandRules(force, vpn, configuration)
         }
     }
 

@@ -75,7 +75,15 @@ class BootstraperFactory {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
         defaults.mace = false
-        defaults.vpnType = IKEv2Profile.vpnType
+        // The default protocol depends on whether VPN runs through the PlatformSDK tunnel.
+        // When the flag is on, tvOS connects through the PlatformSDK tunnel (registered in
+        // `setupConfiguration`) and the user's `vpnType` selects which protocol the tunnel runs
+        // (see the Protocol settings screen): "PIAAutomatic" → automatic (default, WireGuard then
+        // OpenVPN), "PIAWG" → WireGuard, "PIA" → OpenVPN. The WG/OpenVPN literals mirror
+        // `PIAWGTunnelProfile`/`PIATunnelProfile`, which are iOS-only and not linkable on tvOS.
+        // When the flag is off, tvOS keeps the legacy IKEv2 profile, so the default must be IKEv2 —
+        // otherwise `resolvedActiveProfile()` can't match a profile.
+        defaults.vpnType = Client.configuration.featureFlags[.usePlatformSDKVPN] ? KapePlatformSDKVPNType.automatic.rawValue : KapePlatformSDKVPNType.iKEv2.rawValue
     }
 
     private static func cleanCurrentAccount() {
@@ -112,6 +120,51 @@ class BootstraperFactory {
         Client.configuration.enablesServerPings = true
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
+        Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
+
+        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            Client.configuration.addVPNProfile(
+                KapePlatformSDKTunnelProfile(
+                    bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKTvOSBundleIdentifier
+                )
+            )
+            cleanupLegacyVPNProfilesIfNeeded()
+        } else {
+            Client.configuration.addVPNProfile(IKEv2Profile())
+        }
+    }
+
+    /// One-time removal of the legacy IKEv2 VPN configuration after migrating to the PlatformSDK
+    /// tunnel. tvOS only ever shipped IKEv2 (no OpenVPN/WireGuard tunnels), so that is the single
+    /// legacy profile to clear. Without this, an IKEv2 Network Extension config left over from
+    /// before the flag was enabled — possibly with on-demand active — could auto-start the old
+    /// tunnel alongside the PlatformSDK profile.
+    private static func cleanupLegacyVPNProfilesIfNeeded() {
+        guard Client.configuration.featureFlags[.usePlatformSDKVPN], !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+            return
+        }
+
+        // Migrate users whose persisted protocol is no longer selectable (legacy IKEv2) to
+        // automatic protocol negotiation. The literals mirror the PlatformSDK-supported `vpnType`
+        // values ("PIAWG"/"PIA" are iOS-only profiles, not linkable on tvOS).
+        let supportedTypes: [KapePlatformSDKVPNType] = [
+            .automatic,
+            .wireGuard,
+            .openVPN
+        ]
+
+        if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
+            let editable = Client.preferences.editable()
+            editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            editable.commit()
+        }
+
+        let legacyProfile = IKEv2Profile()
+        legacyProfile.disconnect { _ in
+            legacyProfile.remove { _ in
+                AppPreferences.shared.didCleanupLegacyVPNProfiles = true
+            }
+        }
     }
 
     private static func acceptDataSharing() {

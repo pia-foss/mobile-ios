@@ -36,7 +36,21 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd ..
 
-# Xcode cloud does a shallow copy of the repository. 
+# KapePlatformSDK is pulled from the Cloudsmith registry into
+# LocalPackages/KapePlatformSDK/ (gitignored, never committed). Xcode Cloud
+# clones the repo without it, so we must vendor it here — before xcodebuild
+# resolves Swift packages — or the build fails with a missing local package.
+# Mirrors the "Pull KapePlatformSDK" step in .github/workflows/ios_pull_request.yml.
+# CLOUDSMITH_TOKEN must be configured as a secret environment variable in the
+# Xcode Cloud workflow settings.
+if [ -z "$CLOUDSMITH_TOKEN" ]; then
+    echo "ERROR: CLOUDSMITH_TOKEN is not set. Add it as a secret environment variable in the Xcode Cloud workflow." >&2
+    exit 1
+fi
+echo "Pulling KapePlatformSDK..."
+./scripts/pull-kape-platform-sdk.sh
+
+# Xcode cloud does a shallow copy of the repository.
 # We need a full copy to describe the tag history and get the version.
 if [ -d ".git" ] && [ -f "$(git rev-parse --git-dir)/shallow" ]; then
     git fetch --unshallow
@@ -76,7 +90,7 @@ echo "Updating version in the project and Info.plist files..."
 xcrun agvtool new-marketing-version "$version_number"
 
 # As some dependencies are not reachable from the project definition, we manually update Info.plist files
-find "PIA VPN" "PIA VPN-tvOS" "PIA tvOS Tunnel" "PIA VPN AdBlocker" "PIA VPN Tunnel" "PIA VPN WG Tunnel" "PIAWidget" "PIA VPNTests" "PIA VPN-tvOSTests" "PIA VPNUITests" -name '*Info.plist' | \
+find "PIA VPN" "PIA VPN-tvOS" "PIA VPN AdBlocker" "PIA VPN Tunnel" "PIA VPN WG Tunnel" "PlatformSDK-Tunnel" "PIAWidget" "PIA VPNTests" "PIA VPN-tvOSTests" "PIA VPNUITests" -name '*Info.plist' | \
 while read -r plist_file
 do
     setVariableValue "CFBundleShortVersionString" "$version_number" "$plist_file"

@@ -1,7 +1,9 @@
 .DS_Store
 *.swp
 *.pbxuser
-**/xcuserdata
+**/*.xcworkspace/xcuserdata
+**/*.xcodeproj/project.xcworkspace
+**/*.xcodeproj/xcuserdata
 Pods
 fastlane/**/*.html
 fastlane/README.md
@@ -16,3 +18,11 @@ Gemfile.lock
 .build
 .swiftpm
 LocalPackages/**/Package.resolved
+
+# KapePlatformSDK is pulled from the Cloudsmith registry by
+# scripts/pull-kape-platform-sdk.sh — never committed.
+/LocalPackages/KapePlatformSDK/
+# Archive cache used by CI ($KAPE_SDK_ARCHIVE_CACHE).
+/.kape-sdk-archive-cache/
+# Cloudsmith entitlement token used by the pull script (a secret).
+.cloudsmith

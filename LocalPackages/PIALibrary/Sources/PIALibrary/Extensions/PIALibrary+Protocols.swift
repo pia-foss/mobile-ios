@@ -47,6 +47,7 @@ public protocol VPNStatusProviderType {
     var vpnStatus: VPNStatus { get }
     func connect(_ callback: SuccessLibraryCallback?)
     func disconnect(_ callback: SuccessLibraryCallback?)
+    func changeServer(_ callback: SuccessLibraryCallback?)
 
 }
 

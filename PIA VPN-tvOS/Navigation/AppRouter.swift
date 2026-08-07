@@ -176,4 +176,8 @@ extension AppRouter {
         navigateRouterToDestinationAction(SettingsDestinations.dip)
     }
 
+    static var navigateToProtocolSettingsDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(SettingsDestinations.protocols)
+    }
+
 }

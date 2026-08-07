@@ -30,12 +30,14 @@ public extension String {
 
     var vpnProtocol: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "WireGuard®"
-        case PIATunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.openVPN.rawValue:
             return "OpenVPN"
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return "IPSec (IKEv2)"
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            return L10n.Global.automatic
         default:
             return self
         }
@@ -46,16 +48,11 @@ public extension String {
         case PIAWGTunnelProfile.vpnType:
             return "1337"
         case PIATunnelProfile.vpnType:
-            if AppPreferences.shared.piaSocketType != nil {
-                let preferences = Client.preferences.editable()
-                if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
-                    let port = currentOpenVPNConfiguration.sessionConfiguration.builder().endpointProtocols?.first?.port ?? 0
-                    return "\(port)"
-                }
-            } else {
+            guard AppPreferences.shared.piaSocketType != nil else {
                 return L10n.Global.automatic
             }
-            return "---"
+            let port = AppPreferences.shared.openVPNPort
+            return port > 0 ? "\(port)" : L10n.Global.automatic
         case IKEv2Profile.vpnType:
             return "500"
         default:
@@ -70,7 +67,7 @@ public extension String {
         case PIATunnelProfile.vpnType:
             return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
         default:
-            return self
+            return "---"
 
         }
     }
@@ -85,7 +82,7 @@ public extension String {
             let preferences = Client.preferences.editable()
             return preferences.ikeV2IntegrityAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -94,16 +91,12 @@ public extension String {
         case PIAWGTunnelProfile.vpnType:
             return "ChaCha20"
         case PIATunnelProfile.vpnType:
-            let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
-                return currentOpenVPNConfiguration.sessionConfiguration.builder().cipher?.rawValue ?? ""
-            }
-            return "---"
+            return Client.preferences.openVPNCipher ?? OpenVPN.Cipher.aes128gcm.description
         case IKEv2Profile.vpnType:
             let preferences = Client.preferences.editable()
             return preferences.ikeV2EncryptionAlgorithm.description
         default:
-            return self
+            return "---"
         }
     }
 
@@ -112,15 +105,11 @@ public extension String {
         case PIAWGTunnelProfile.vpnType:
             return "Poly1305"
         case PIATunnelProfile.vpnType:
-            let preferences = Client.preferences.editable()
-            if let currentOpenVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration {
-                return currentOpenVPNConfiguration.sessionConfiguration.builder().digest?.rawValue ?? ""
-            }
-            return "---"
+            return AppPreferences.shared.openVPNAuth ?? AppConstants.OpenVPNCrypto.defaultAuth
         case IKEv2Profile.vpnType:
             return "---"
         default:
-            return self
+            return "---"
         }
     }
 

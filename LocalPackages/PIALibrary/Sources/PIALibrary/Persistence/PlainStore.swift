@@ -125,6 +125,19 @@ protocol PlainStore: AnyObject {
 
     var ikeV2PacketSize: Int { get set }
 
+    //MARK: OpenVPN / WireGuard
+    var useSmallPackets: Bool { get set }
+
+    var openVPNSocketType: String? { get set }
+
+    var openVPNCipher: String? { get set }
+
+    var openVPNPort: Int { get set }
+
+    var openVPNDnsServers: [String] { get set }
+
+    var wireGuardDnsServers: [String] { get set }
+
     //MARK: Sign in with Apple
     var signInWithAppleFakeEmail: String? { get set }
 

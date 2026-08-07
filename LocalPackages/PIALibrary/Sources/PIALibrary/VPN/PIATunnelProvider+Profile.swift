@@ -24,25 +24,28 @@
     import TunnelKitOpenVPN
 
     /// :nodoc:
-    extension OpenVPNProvider.Configuration: VPNCustomConfiguration {
+    extension OpenVPN.ProviderConfiguration: VPNCustomConfiguration {
         public func serialized() -> [String: Any] {
-            return generatedProviderConfiguration(appGroup: Client.Configuration.appGroup)
+            // Mirrors TunnelKit's `Encodable.asDictionary()` so the dictionary stored
+            // in `NETunnelProviderProtocol.providerConfiguration` round-trips through
+            // the tunnel's `fromDictionary(OpenVPN.ProviderConfiguration.self, …)`.
+            guard let data = try? JSONEncoder().encode(self),
+                let dictionary = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any]
+            else {
+                return [:]
+            }
+            return dictionary
         }
 
         public func isEqual(to: VPNCustomConfiguration) -> Bool {
-            guard let other = to as? OpenVPNProvider.Configuration else {
+            guard let other = to as? OpenVPN.ProviderConfiguration else {
                 return false
             }
-            guard (sessionConfiguration.mtu == other.sessionConfiguration.mtu) else {
+            guard shouldDebug == other.shouldDebug else {
                 return false
             }
-            guard (shouldDebug == other.shouldDebug) else {
-                return false
-            }
-            guard self.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description == other.builder().build().generatedProviderConfiguration(appGroup: Client.Configuration.appGroup).description else {
-                return false
-            }
-            return true
+            // `OpenVPN.Configuration` is `Equatable`; this also covers `mtu`.
+            return configuration == other.configuration
         }
     }
 #endif

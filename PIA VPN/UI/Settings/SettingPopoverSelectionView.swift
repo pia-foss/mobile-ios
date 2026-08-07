@@ -69,7 +69,7 @@ class SettingPopoverSelectionView: UIView {
 
 class ProtocolPopoverSelectionView: SettingPopoverSelectionView {
 
-    var protocols: [String]!
+    var protocols: [KapePlatformSDKVPNType]!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,8 +97,8 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
         }
         cell.textLabel?.style(style: cellTextStyle)
 
-        cell.textLabel?.text = protocols[indexPath.row].vpnProtocol
-        cell.textLabel?.accessibilityLabel = protocols[indexPath.row].vpnProtocol
+        cell.textLabel?.text = protocols[indexPath.row].displayName
+        cell.textLabel?.accessibilityLabel = protocols[indexPath.row].displayName
 
         Theme.current.applySecondaryBackground(cell)
         let backgroundView = UIView()
@@ -112,7 +112,7 @@ extension ProtocolPopoverSelectionView: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let vpnType = protocols[indexPath.row]
-        pendingPreferences.vpnType = vpnType
+        pendingPreferences.vpnType = vpnType.rawValue
         settingsDelegate.updateSetting(ProtocolsSections.protocolSelection, withValue: nil)
 
         Macros.postNotification(.PIASettingsHaveChanged)

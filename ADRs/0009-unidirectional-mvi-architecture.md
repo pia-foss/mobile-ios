@@ -1,4 +1,4 @@
-# 0007: Unidirectional Data Flow (MVI) Architecture
+# 0009: Unidirectional Data Flow (MVI) Architecture
 
 Date: 2026-07-07
 
@@ -8,7 +8,7 @@ PIA iOS adopts a **lightweight, hand-rolled unidirectional data flow (MVI) archi
 
 ### Starting position
 
-The navigation layer is already governed by ADR 0006 (Coordinator pattern). The codebase has more SwiftUI Views than ViewControllers and has a developed reactive substrate with `ObservableObject` and `@Published` in use. However, PIA shares a class of state and testability problems that unidirectional data flow is designed to solve.
+The navigation layer is already governed by ADR 0007 (Coordinator pattern). The codebase has more SwiftUI Views than ViewControllers and has a developed reactive substrate with `ObservableObject` and `@Published` in use. However, PIA shares a class of state and testability problems that unidirectional data flow is designed to solve.
 
 ### Current pain points
 
@@ -114,9 +114,9 @@ extension VPNFeatureDependencies {
 }
 ```
 
-### Relationship to ADR 0006 (Coordinator pattern)
+### Relationship to ADR 0007 (Coordinator pattern)
 
-ADR 0006 defines the navigation layer. This ADR defines the state and business logic layer. A coordinator starts a feature by creating its `Store` and handing it to the feature view — the two are complementary.
+ADR 0007 defines the navigation layer. This ADR defines the state and business logic layer. A coordinator starts a feature by creating its `Store` and handing it to the feature view — the two are complementary.
 
 ### Shared Apple-platform standard
 
@@ -154,7 +154,7 @@ The `State` / `Action` / `Reducer` / `Dependencies` layer is UI-agnostic. Featur
 
 ## References
 
-- ADR 0006 — iOS Coordinator navigation pattern; the complementary navigation layer.
+- ADR 0007 — iOS Coordinator navigation pattern; the complementary navigation layer.
 - `LocalPackages/PIALibrary/Sources/PIALibrary/VPN/DefaultVPNProvider.swift` — primary first migration target.
 - `LocalPackages/PIALibrary/Sources/PIALibrary/Account/DefaultAccountProvider.swift` — second migration target.
 - [pointfreeco/swift-composable-architecture](https://github.com/pointfreeco/swift-composable-architecture) — the reference framework this pattern mirrors; the intended upgrade path if the hand-rolled design is outgrown.

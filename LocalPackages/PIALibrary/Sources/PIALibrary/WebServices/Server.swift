@@ -242,6 +242,7 @@ extension Server: Equatable {
 extension Server: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
+        hasher.combine(dipToken)
     }
 }
 
@@ -250,14 +251,18 @@ extension Server {
     public func addresses() -> [ServerAddressIP] {
 
         switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return iKEv2AddressesForUDP ?? []
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                return openVPNAddressesForTCP ?? []
-            case PIAWGTunnelProfile.vpnType:
-                return wireGuardAddressesForUDP ?? []
-        #endif
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            return openVPNAddressesForTCP ?? []
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
+            return wireGuardAddressesForUDP ?? []
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            // Automatic tries WireGuard first, then OpenVPN (see PIAEndpointRepository); mirror that
+            // preference so the region remains pingable/selectable.
+            let wireGuard = wireGuardAddressesForUDP ?? []
+            let openVPN = openVPNAddressesForUDP ?? []
+            return wireGuard.isEmpty ? openVPN : wireGuard
         case "Mock":
             return iKEv2AddressesForUDP ?? []
         default:
@@ -302,14 +307,16 @@ extension Server {
 
     public func hasEndpoints(for vpnType: String) -> Bool {
         switch vpnType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             return iKEv2AddressesForUDP?.isEmpty == false
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
-            case PIAWGTunnelProfile.vpnType:
-                return wireGuardAddressesForUDP?.isEmpty == false
-        #endif
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
+            return wireGuardAddressesForUDP?.isEmpty == false
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            // Automatic can run over WireGuard or OpenVPN, so the server is usable if it offers
+            // endpoints for either protocol.
+            return wireGuardAddressesForUDP?.isEmpty == false || openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
         case "Mock":  // Simulator
             return true
         default:
@@ -322,17 +329,19 @@ extension Server {
 
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
         switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.iKEv2.rawValue:
             let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
-        #if os(iOS)
-            case PIATunnelProfile.vpnType:
-                let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
-                serverAddressIP?.updateResponseTime(time)
-            case PIAWGTunnelProfile.vpnType:
-                let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
-                serverAddressIP?.updateResponseTime(time)
-        #endif
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
+            serverAddressIP?.updateResponseTime(time)
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
+            let serverAddressIP = wireGuardAddressesForUDP?.first(where: { $0.ip == address.ip })
+            serverAddressIP?.updateResponseTime(time)
+        case KapePlatformSDKVPNType.automatic.rawValue:
+            for serverAddressIP in (wireGuardAddressesForUDP ?? []) + (openVPNAddressesForUDP ?? []) where serverAddressIP.ip == address.ip {
+                serverAddressIP.updateResponseTime(time)
+            }
         default:
             break
         }
