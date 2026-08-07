@@ -90,6 +90,7 @@ public struct DebugMenuView: View {
         #else
             List {
                 appInfoSection
+                vpnSection
                 accountSection
                 receiptSection
                 logsSection
@@ -113,6 +114,7 @@ public struct DebugMenuView: View {
     private var vpnSection: some View {
         DebugSection("VPN") {
             DebugInfoRow(label: "Status", value: viewModel.vpnStatus)
+            DebugInfoRow(label: "Connected Via", value: viewModel.connectedVia)
             DebugInfoRow(label: "Protocol", value: viewModel.vpnProtocolName)
             DebugInfoRow(label: "Local IP", value: viewModel.publicIP)
             DebugInfoRow(label: "VPN IP", value: viewModel.vpnIP)

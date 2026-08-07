@@ -24,6 +24,7 @@ final class DebugMenuViewModel: ObservableObject {
     @Published var isRefundSheetPresented = false
     @Published var availableTransactions: [StoreKit.Transaction] = []
     @Published var isTransactionPickerPresented = false
+    @Published private(set) var vpnConnection: VPNConnectionState = .unknown
 
     private static let refreshInterval: UInt64 = 5 * NSEC_PER_SEC
     private var refreshTask: Task<Void, Never>?
@@ -64,7 +65,8 @@ final class DebugMenuViewModel: ObservableObject {
             let reportId = try await Client.submitDebugReport(
                 includeDebug: true,
                 redactIPs: false,
-                includeTunnelLog: true
+                includeTunnelLog: true,
+                vpnConnection: VPNConnectionInformation(status: vpnStatus, connectedVia: connectedVia)
             )
             reportResult = ReportResult(
                 title: "Debug information submitted",
@@ -142,7 +144,15 @@ final class DebugMenuViewModel: ObservableObject {
 
     private func refresh() async {
         updateLogSnapshotIfNeeded()
+        await updateVPNConnectionIfNeeded()
         await refreshTunnelLog()
+    }
+
+    private func updateVPNConnectionIfNeeded() async {
+        let current = await VPNConnectionState.current()
+        if current != vpnConnection {
+            vpnConnection = current
+        }
     }
 
     private func updateLogSnapshotIfNeeded() {

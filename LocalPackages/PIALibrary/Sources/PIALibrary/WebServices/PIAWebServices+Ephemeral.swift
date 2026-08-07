@@ -40,7 +40,12 @@ extension PIAWebServices {
         try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
     }
 
-    func submitDebugReport(includeDebug: Bool, redactIPs: Bool, includeTunnelLog: Bool = false) async throws -> String {
+    func submitDebugReport(
+        includeDebug: Bool,
+        redactIPs: Bool,
+        includeTunnelLog: Bool = false,
+        vpnConnection: VPNConnectionInformation? = nil
+    ) async throws -> String {
         var providers: [CSIDataProvider] = [
             PIACSIProtocolInformationProvider(),
             PIACSIDeviceInformationProvider(),
@@ -54,6 +59,12 @@ extension PIAWebServices {
         if includeTunnelLog {
             let tunnelLog = await Client.providers.vpnProvider.tunnelLog()
             providers.append(PIACSITunnelLogInformationProvider(log: tunnelLog, redactIPs: redactIPs))
+        }
+
+        if let vpnConnection {
+            providers.append(
+                PIACSIVPNStatusInformationProvider(connection: vpnConnection, redactIPs: redactIPs)
+            )
         }
 
         let sections = providers.compactMap { provider -> CSIReportSection? in

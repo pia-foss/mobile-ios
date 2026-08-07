@@ -58,7 +58,11 @@ extension DebugMenuViewModel {
     }
 
     var vpnStatus: String {
-        Client.daemons.vpnStatus.rawValue
+        vpnConnection.status
+    }
+
+    var connectedVia: String {
+        vpnConnection.connectedVia
     }
 
     var vpnProtocolName: String {
