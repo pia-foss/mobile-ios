@@ -414,9 +414,13 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             let identifiers = accessedConfiguration.allProductIdentifiers()
             switch await accessedStore.fetchProducts(identifiers: identifiers) {
             case .failure(let error):
+                log.error("Unable to fetch products from store: \(error)")
                 return .failure(error)
             case .success(let products):
                 log.debug("Available products from store: \(products)")
+                if products.isEmpty {
+                    log.warning("No products returned from store")
+                }
                 let planProducts = self.planProducts
                 if planProducts == nil {
                     log.debug("\(#function) returning empty products")
