@@ -55,8 +55,9 @@ public final class IKEv2Profile: NetworkExtensionProfile {
     public var connectionDate: Date? { currentVPN.connection.connectedDate }
 
     /// :nodoc:
-    public func prepare() {
-        currentVPN.loadFromPreferences { (_) in
+    public func prepare(_ callback: SuccessLibraryCallback?) {
+        currentVPN.loadFromPreferences { error in
+            callback?(error)
         }
     }
 
