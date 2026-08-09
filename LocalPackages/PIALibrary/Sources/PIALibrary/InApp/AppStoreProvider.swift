@@ -134,8 +134,23 @@ final class AppStoreProvider: NSObject, InAppProvider {
             result.append(appStoreProduct)
         }
 
-        availableProducts = result
+        cacheAvailableProducts(result)
         return .success(result)
+    }
+
+    /// Stores freshly fetched products as the process-wide cache.
+    ///
+    /// An empty result is deliberately **not** cached. `availableProducts` would otherwise become a
+    /// non-nil empty array, which makes `DefaultAccountProvider.planProducts` a non-nil empty
+    /// dictionary, which makes `listPlanProducts()` serve that as a cache hit for the rest of the
+    /// process — so a transient App Store hiccup would leave the app permanently without prices and
+    /// any retry would be a no-op. Leaving the cache untouched keeps the next call re-requesting.
+    func cacheAvailableProducts(_ products: [any InAppProduct]) {
+        guard !products.isEmpty else {
+            log.warning("App Store returned no products; keeping the existing cache so a retry can refetch")
+            return
+        }
+        availableProducts = products
     }
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
