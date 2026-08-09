@@ -56,6 +56,14 @@ public struct SignupPaywallView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing, PIASpacing.s8)
                 }
+
+                PaywallSheetContainer(
+                    isPresented: store.state.isPlanSheetPresented,
+                    layout: store.state.layout,
+                    onDismiss: { store.send(.planSheetDismissed) }
+                ) {
+                    ChoosePlanSheetContent(store: store)
+                }
             }
             .onAppear {
                 store.send(.layoutChanged(resolveLayout(for: proxy.size)))
@@ -296,5 +304,9 @@ public enum PaywallAccessibility {
     public static let subscribeButton = "id.paywall.subscribe"
     public static let otherPlansButton = "id.paywall.other_plans"
     public static let restoreButton = "id.paywall.restore"
+    public static let sheetSubscribeButton = "id.paywall.sheet.subscribe"
+    public static let maybeLaterButton = "id.paywall.sheet.maybe_later"
+
+    /// Kept as the historical login identifier so the existing UI tests keep finding the way in.
     public static let loginButton = "id.login.submit"
 }

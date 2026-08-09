@@ -127,6 +127,40 @@ final class SignupPaywallSnapshotTests: XCTestCase {
         )
     }
 
+    // MARK: - Choose your plan sheet
+
+    func test_sheetYearlySelected() {
+        assert(PaywallPreviewFixtures.state(isPlanSheetPresented: true, sheetSelection: .yearly))
+    }
+
+    /// Selecting monthly swaps both the disclaimer and the call to action, even though the account
+    /// is trial-eligible: the trial is only ever sold on the yearly plan.
+    func test_sheetMonthlySelected() {
+        assert(PaywallPreviewFixtures.state(isPlanSheetPresented: true, sheetSelection: .monthly))
+    }
+
+    func test_sheetDark() {
+        assert(
+            PaywallPreviewFixtures.state(isPlanSheetPresented: true, sheetSelection: .yearly),
+            colorScheme: .dark
+        )
+    }
+
+    /// On a landscape iPad the sheet is a centred card rather than a bottom sheet.
+    func test_sheetWide() {
+        assert(
+            PaywallPreviewFixtures.state(layout: .wide, isPlanSheetPresented: true),
+            size: Self.landscapeTablet
+        )
+    }
+
+    /// Without a trial the badge must drop the "7-day Free Trial" promise.
+    func test_sheetWithoutTrial() {
+        assert(
+            PaywallPreviewFixtures.state(isEligibleForIntroOffer: false, isPlanSheetPresented: true)
+        )
+    }
+
     // MARK: - Accessibility
 
     /// The timeline connector has to stretch to whatever height the step text needs; this is where
