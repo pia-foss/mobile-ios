@@ -89,6 +89,9 @@ final class SignupCoordinator: NSObject, Coordinator {
         )
         host.paywallDelegate = self
 
+        // Bar visibility is owned by the navigation delegate below, not by the individual push
+        // sites, so it cannot end up out of sync with what is actually on screen.
+        navigationController.delegate = self
         navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.setViewControllers([host], animated: false)
     }
@@ -151,25 +154,37 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     /// Replaces `LoginAccountSegue`.
     ///
+    /// Pushes `PIAWelcomeViewController` rather than `LoginViewController` directly. `LoginViewController`
+    /// styles no navigation bar of its own — it has no `BrandableNavigationBar` conformance and its
+    /// `viewShouldRestyle` never touches the bar — so pushing it bare leaves the app's default green
+    /// bar and no logo. Its container is what supplies both:
+    ///
+    /// ```swift
+    /// navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
+    /// Theme.current.applyNavigationBarStyle(to: self)
+    /// ```
+    ///
+    /// Going through the container keeps the login screen pixel-identical to the one this flow
+    /// replaced, which is what the ticket scoped.
+    ///
     /// - Parameter onPresented: Called once the push has finished, with the screen that is now on
     ///   top. Already-presented is treated as presented.
-    private func showLogin(onPresented: ((LoginViewController) -> Void)? = nil) {
-        if let existing = navigationController.topViewController as? LoginViewController {
+    private func showLogin(onPresented: ((PIAWelcomeViewController) -> Void)? = nil) {
+        if let existing = navigationController.topViewController as? PIAWelcomeViewController {
             onPresented?(existing)
             return
         }
 
-        let controller = LoginViewController.with(
-            config: .init(
-                loginUsername: nil,
-                loginPassword: nil,
-                accountProvider: accountProvider,
-                completionDelegate: self
-            )
-        )
-        // These screens configure their own back button in `viewWillAppear`, so the bar has to come
-        // back before they are pushed.
-        navigationController.setNavigationBarHidden(false, animated: true)
+        var preset = Preset()
+        preset.pages = .login
+        // The pending-signup recovery path is dead — both hosts hard-code it off — and leaving it on
+        // would fire a storyboard segue out from under this flow.
+        preset.shouldRecoverPendingSignup = false
+
+        let controller = StoryboardScene.Welcome.piaWelcomeViewController.instantiate()
+        controller.preset = preset
+        controller.delegate = self
+
         navigationController.pushViewController(controller, animated: true)
 
         guard let onPresented else { return }
@@ -246,5 +261,65 @@ extension SignupCoordinator: WelcomeCompletionDelegate {
 extension SignupCoordinator: SignupPaywallHostingDelegate {
     func signupPaywallHostDidRequestLogin(_ host: SignupPaywallHosting) {
         showLogin()
+    }
+}
+
+// MARK: - PIAWelcomeViewControllerDelegate
+
+/// How the pushed login container reports back.
+extension SignupCoordinator: PIAWelcomeViewControllerDelegate {
+    func welcomeController(
+        _ welcomeController: PIAWelcomeViewController,
+        didLoginWith user: UserAccount,
+        topViewController: UIViewController
+    ) {
+        subject.send(.didAuthenticate(user: user, isSignup: false, topViewController: topViewController))
+    }
+
+    func welcomeController(
+        _ welcomeController: PIAWelcomeViewController,
+        didSignupWith user: UserAccount,
+        topViewController: UIViewController
+    ) {
+        subject.send(.didAuthenticate(user: user, isSignup: true, topViewController: topViewController))
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+/// Owns navigation bar visibility for the whole flow.
+///
+/// The paywall is designed without a bar; everything pushed on top of it needs one. Deciding this
+/// per screen — rather than calling `setNavigationBarHidden` at each push site — is what keeps the
+/// bar from being left behind on the paywall after a pop, and is the only way to get an interactive
+/// swipe-back that the user *cancels* right, since that ends with a different screen on top than the
+/// transition announced.
+extension SignupCoordinator: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController,
+        willShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        applyNavigationBarVisibility(for: viewController, in: navigationController, animated: animated)
+    }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        // Re-asserted once the transition has actually settled, which is what covers a cancelled
+        // interactive pop.
+        applyNavigationBarVisibility(for: viewController, in: navigationController, animated: false)
+    }
+
+    private func applyNavigationBarVisibility(
+        for viewController: UIViewController,
+        in navigationController: UINavigationController,
+        animated: Bool
+    ) {
+        let shouldHide = viewController is SignupPaywallHosting
+        guard navigationController.isNavigationBarHidden != shouldHide else { return }
+        navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }
