@@ -46,6 +46,8 @@ public enum Asset {
       public static let favoriteSelected = ImageAsset(name: "PIAX/Global/favorite-selected")
       public static let favoriteUnselected = ImageAsset(name: "PIAX/Global/favorite-unselected")
       public static let iconBack = ImageAsset(name: "PIAX/Global/icon-back")
+      public static let iconCheck = ImageAsset(name: "PIAX/Global/icon-check")
+      public static let iconCloseSmall = ImageAsset(name: "PIAX/Global/icon-close-small")
       public static let iconEditTile = ImageAsset(name: "PIAX/Global/icon-edit-tile")
       public static let iconFilter = ImageAsset(name: "PIAX/Global/icon-filter")
       public static let iconWarning = ImageAsset(name: "PIAX/Global/icon-warning")
@@ -407,6 +409,7 @@ public enum Asset {
   public static let itemMenu = ImageAsset(name: "item-menu")
   public static let navLogo = ImageAsset(name: "nav-logo")
   public static let offlineServerIcon = ImageAsset(name: "offline-server-icon")
+  public static let paywallHero = ImageAsset(name: "paywall-hero")
   public static let piaSpinner = ImageAsset(name: "pia-spinner")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

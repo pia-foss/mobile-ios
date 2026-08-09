@@ -1190,6 +1190,126 @@ public enum L10n {
       /// Confirm sign-up
       public static let title = L10n.tr("Localizable", "signup.in_progress.title", fallback: "Confirm sign-up")
     }
+    public enum Paywall {
+      /// %1$@ • %2$@ Ratings
+      public static func socialProof(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "signup.paywall.social_proof", String(describing: p1), String(describing: p2), fallback: "%1$@ • %2$@ Ratings")
+      }
+      public enum Accessibility {
+        /// Close
+        public static let close = L10n.tr("Localizable", "signup.paywall.accessibility.close", fallback: "Close")
+        /// Selected
+        public static let planSelected = L10n.tr("Localizable", "signup.paywall.accessibility.plan_selected", fallback: "Selected")
+        /// Rated %1$@ out of 5 stars from %2$@ ratings
+        public static func rating(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("Localizable", "signup.paywall.accessibility.rating", String(describing: p1), String(describing: p2), fallback: "Rated %1$@ out of 5 stars from %2$@ ratings")
+        }
+      }
+      public enum Benefit {
+        /// Protection on unlimited devices
+        public static let devices = L10n.tr("Localizable", "signup.paywall.benefit.devices", fallback: "Protection on unlimited devices")
+        /// Unrestricted access to worldwide servers
+        public static let servers = L10n.tr("Localizable", "signup.paywall.benefit.servers", fallback: "Unrestricted access to worldwide servers")
+        /// 10-Gbps connection speeds
+        public static let speed = L10n.tr("Localizable", "signup.paywall.benefit.speed", fallback: "10-Gbps connection speeds")
+      }
+      public enum Cta {
+        /// Already have an account? Log in
+        public static let login = L10n.tr("Localizable", "signup.paywall.cta.login", fallback: "Already have an account? Log in")
+        /// See Other Plans
+        public static let otherPlans = L10n.tr("Localizable", "signup.paywall.cta.other_plans", fallback: "See Other Plans")
+        /// Restore Purchases
+        public static let restore = L10n.tr("Localizable", "signup.paywall.cta.restore", fallback: "Restore Purchases")
+        /// Start My 7-day Free Trial
+        public static let startTrial = L10n.tr("Localizable", "signup.paywall.cta.start_trial", fallback: "Start My 7-day Free Trial")
+        /// Subscribe • %@
+        public static func subscribe(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "signup.paywall.cta.subscribe", String(describing: p1), fallback: "Subscribe • %@")
+        }
+      }
+      public enum Disclaimer {
+        public enum Monthly {
+          /// %@ per month, billed monthly.
+          public static func headline(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.disclaimer.monthly.headline", String(describing: p1), fallback: "%@ per month, billed monthly.")
+          }
+        }
+        public enum Renewal {
+          /// Renews automatically unless cancelled at least 24 hours before expiry date.
+          public static let detail = L10n.tr("Localizable", "signup.paywall.disclaimer.renewal.detail", fallback: "Renews automatically unless cancelled at least 24 hours before expiry date.")
+        }
+        public enum Trial {
+          /// You will be charged on the last day of your trial, unless you cancel before your free trial ends.
+          public static let detail = L10n.tr("Localizable", "signup.paywall.disclaimer.trial.detail", fallback: "You will be charged on the last day of your trial, unless you cancel before your free trial ends.")
+          /// Free for 7 days, then %@. Cancel anytime.
+          public static func headline(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.disclaimer.trial.headline", String(describing: p1), fallback: "Free for 7 days, then %@. Cancel anytime.")
+          }
+        }
+        public enum Yearly {
+          /// %@ per year, billed annually.
+          public static func headline(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.disclaimer.yearly.headline", String(describing: p1), fallback: "%@ per year, billed annually.")
+          }
+        }
+      }
+      public enum Error {
+        /// That subscription has already expired. Please choose a plan to continue.
+        public static let expiredTransaction = L10n.tr("Localizable", "signup.paywall.error.expired_transaction", fallback: "That subscription has already expired. Please choose a plan to continue.")
+        /// We couldn't load the subscription options. Please check your connection and try again.
+        public static let productsUnavailable = L10n.tr("Localizable", "signup.paywall.error.products_unavailable", fallback: "We couldn't load the subscription options. Please check your connection and try again.")
+        /// We couldn't complete your purchase. Please try again.
+        public static let purchaseFailed = L10n.tr("Localizable", "signup.paywall.error.purchase_failed", fallback: "We couldn't complete your purchase. Please try again.")
+        /// Try again
+        public static let retry = L10n.tr("Localizable", "signup.paywall.error.retry", fallback: "Try again")
+      }
+      public enum Plans {
+        /// Maybe Later
+        public static let maybeLater = L10n.tr("Localizable", "signup.paywall.plans.maybe_later", fallback: "Maybe Later")
+        /// Choose your plan
+        public static let title = L10n.tr("Localizable", "signup.paywall.plans.title", fallback: "Choose your plan")
+        public enum Badge {
+          /// Best Value
+          public static let bestValue = L10n.tr("Localizable", "signup.paywall.plans.badge.best_value", fallback: "Best Value")
+          /// Best Value – 7-day Free Trial
+          public static let bestValueTrial = L10n.tr("Localizable", "signup.paywall.plans.badge.best_value_trial", fallback: "Best Value – 7-day Free Trial")
+        }
+        public enum Billing {
+          /// Billed monthly
+          public static let monthly = L10n.tr("Localizable", "signup.paywall.plans.billing.monthly", fallback: "Billed monthly")
+          /// Billed annually
+          public static let yearly = L10n.tr("Localizable", "signup.paywall.plans.billing.yearly", fallback: "Billed annually")
+        }
+        public enum Price {
+          /// %@/month
+          public static func monthly(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.price.monthly", String(describing: p1), fallback: "%@/month")
+          }
+          /// %@/year
+          public static func yearly(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.price.yearly", String(describing: p1), fallback: "%@/year")
+          }
+        }
+      }
+      public enum Trial {
+        public enum Card {
+          /// How your free trial works
+          public static let title = L10n.tr("Localizable", "signup.paywall.trial.card.title", fallback: "How your free trial works")
+        }
+        public enum Step1 {
+          /// Full access unlocked instantly
+          public static let description = L10n.tr("Localizable", "signup.paywall.trial.step1.description", fallback: "Full access unlocked instantly")
+          /// Today
+          public static let title = L10n.tr("Localizable", "signup.paywall.trial.step1.title", fallback: "Today")
+        }
+        public enum Step2 {
+          /// Subscription begins, cancel anytime
+          public static let description = L10n.tr("Localizable", "signup.paywall.trial.step2.description", fallback: "Subscription begins, cancel anytime")
+          /// Day 7
+          public static let title = L10n.tr("Localizable", "signup.paywall.trial.step2.title", fallback: "Day 7")
+        }
+      }
+    }
     public enum Purchase {
       public enum Existing {
         public enum Subscription {
