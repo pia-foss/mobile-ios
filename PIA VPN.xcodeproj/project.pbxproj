@@ -28,6 +28,7 @@
 		3F557CF02EF59BE2002FB559 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CEF2EF59BE2002FB559 /* SwiftEntryKit */; };
 		3F557CF32EF59C1C002FB559 /* PopupDialog in Frameworks */ = {isa = PBXBuildFile; productRef = 3F557CF22EF59C1C002FB559 /* PopupDialog */; };
 		3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */ = {isa = PBXBuildFile; productRef = ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */; };
+		3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA11002F9A0001007F7092 /* PIAPaywall */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -386,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
+				3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
@@ -665,6 +667,7 @@
 				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
+				3FAA11002F9A0001007F7092 /* PIAPaywall */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
 			);
 			productName = "PIA VPN";
@@ -3383,6 +3386,10 @@
 		ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADashboard;
+		};
+		3FAA11002F9A0001007F7092 /* PIAPaywall */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAPaywall;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
