@@ -93,10 +93,25 @@ final class SignupCoordinator: NSObject, Coordinator {
         navigationController.setViewControllers([host], animated: false)
     }
 
-    /// Jumps straight to the login screen. Used by the magic-link deep link, which previously
-    /// reached into `GetStartedViewController` by name.
-    func handleMagicLink() {
-        showLogin()
+    /// Signs in from a magic-link deep link.
+    ///
+    /// Replaces the old `AppDelegate` path, which cast the root to `GetStartedViewController` by
+    /// name and then slept for a fixed 1000ms hoping the login screen had finished appearing. Here
+    /// the push reports when it is actually done, so the sign-in starts at the right moment on any
+    /// device speed — and `LoginViewController`, which observes the completion notification, is
+    /// guaranteed to be on screen to receive it.
+    func handleMagicLink(token: String) {
+        showLogin { controller in
+            controller.showLoadingAnimation()
+            Client.providers.accountProvider.login(with: token) { _, error in
+                controller.hideLoadingAnimation()
+                var userInfo: [NotificationKey: Any]?
+                if let error {
+                    userInfo = [.error: error]
+                }
+                Macros.postNotification(.PIAFinishLoginWithMagicLink, userInfo)
+            }
+        }
     }
 
     // MARK: Paywall output
@@ -135,8 +150,14 @@ final class SignupCoordinator: NSObject, Coordinator {
     // MARK: Destinations
 
     /// Replaces `LoginAccountSegue`.
-    private func showLogin() {
-        guard !(navigationController.topViewController is LoginViewController) else { return }
+    ///
+    /// - Parameter onPresented: Called once the push has finished, with the screen that is now on
+    ///   top. Already-presented is treated as presented.
+    private func showLogin(onPresented: ((LoginViewController) -> Void)? = nil) {
+        if let existing = navigationController.topViewController as? LoginViewController {
+            onPresented?(existing)
+            return
+        }
 
         let controller = LoginViewController.with(
             config: .init(
@@ -150,6 +171,15 @@ final class SignupCoordinator: NSObject, Coordinator {
         // back before they are pushed.
         navigationController.setNavigationBarHidden(false, animated: true)
         navigationController.pushViewController(controller, animated: true)
+
+        guard let onPresented else { return }
+        // The transition coordinator reports when the push has actually landed; without it the
+        // caller would be guessing with a sleep.
+        if let transition = navigationController.transitionCoordinator {
+            transition.animate(alongsideTransition: nil) { _ in onPresented(controller) }
+        } else {
+            onPresented(controller)
+        }
     }
 
     /// Replaces `signupViaPurchaseSegue`.
