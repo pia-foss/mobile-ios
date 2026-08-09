@@ -1198,6 +1198,8 @@ public enum L10n {
       public enum Accessibility {
         /// Close
         public static let close = L10n.tr("Localizable", "signup.paywall.accessibility.close", fallback: "Close")
+        /// Signs in to an existing account
+        public static let loginHint = L10n.tr("Localizable", "signup.paywall.accessibility.login_hint", fallback: "Signs in to an existing account")
         /// Selected
         public static let planSelected = L10n.tr("Localizable", "signup.paywall.accessibility.plan_selected", fallback: "Selected")
         /// Rated %1$@ out of 5 stars from %2$@ ratings
@@ -1214,8 +1216,8 @@ public enum L10n {
         public static let speed = L10n.tr("Localizable", "signup.paywall.benefit.speed", fallback: "10-Gbps connection speeds")
       }
       public enum Cta {
-        /// Already have an account? Log in
-        public static let login = L10n.tr("Localizable", "signup.paywall.cta.login", fallback: "Already have an account? Log in")
+        /// Already have an account?
+        public static let login = L10n.tr("Localizable", "signup.paywall.cta.login", fallback: "Already have an account?")
         /// See Other Plans
         public static let otherPlans = L10n.tr("Localizable", "signup.paywall.cta.other_plans", fallback: "See Other Plans")
         /// Restore Purchases

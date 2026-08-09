@@ -181,7 +181,7 @@ public struct SignupPaywallView: View {
 
             restoreButton
             loginButton
-            LegalLinksRow(termsURL: legal.termsURL, privacyURL: legal.privacyURL)
+            LegalAgreementText(termsURL: legal.termsURL, privacyURL: legal.privacyURL)
                 .padding(.top, PIASpacing.s8)
         }
     }
@@ -230,6 +230,9 @@ public struct SignupPaywallView: View {
             Text(L10n.Signup.Paywall.Cta.login).typography(.button2)
         }
         .buttonStyle(PIAButtonStyle(.plain))
+        // The label is a question rather than an action, so on its own VoiceOver would announce
+        // "Already have an account?, button" without saying what tapping does.
+        .accessibilityHint(L10n.Signup.Paywall.Accessibility.loginHint)
         .accessibilityIdentifier(PaywallAccessibility.loginButton)
     }
 

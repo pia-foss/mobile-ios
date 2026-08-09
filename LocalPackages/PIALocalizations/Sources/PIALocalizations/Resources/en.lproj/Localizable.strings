@@ -592,7 +592,7 @@
 "signup.paywall.cta.subscribe"= "Subscribe • %@";
 "signup.paywall.cta.other_plans"= "See Other Plans";
 "signup.paywall.cta.restore"= "Restore Purchases";
-"signup.paywall.cta.login"= "Already have an account? Log in";
+"signup.paywall.cta.login"= "Already have an account?";
 
 "signup.paywall.plans.title"= "Choose your plan";
 "signup.paywall.plans.maybe_later"= "Maybe Later";
@@ -609,6 +609,7 @@
 "signup.paywall.error.purchase_failed"= "We couldn't complete your purchase. Please try again.";
 
 "signup.paywall.accessibility.close"= "Close";
+"signup.paywall.accessibility.login_hint"= "Signs in to an existing account";
 "signup.paywall.accessibility.rating"= "Rated %1$@ out of 5 stars from %2$@ ratings";
 "signup.paywall.accessibility.plan_selected"= "Selected";
 
