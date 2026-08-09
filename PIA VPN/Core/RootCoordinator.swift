@@ -26,7 +26,7 @@ import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
 /// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone) and the
-/// logged-out login UI (`GetStartedViewController`).
+/// logged-out signup UI (`SignupCoordinator`).
 @MainActor
 final class RootCoordinator: NSObject {
     enum AppRoot {
