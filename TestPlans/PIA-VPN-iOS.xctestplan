@@ -71,6 +71,13 @@
         "identifier" : "PIAUIKitTests",
         "name" : "PIAUIKitTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAPaywall",
+        "identifier" : "PIAPaywallTests",
+        "name" : "PIAPaywallTests"
+      }
     }
   ],
   "version" : 1
