@@ -153,6 +153,18 @@ final class AppStoreProvider: NSObject, InAppProvider {
         availableProducts = products
     }
 
+    func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
+        guard let native = product.native as? Product else {
+            log.error("Product must be a StoreKit.Product, but got \(type(of: product.native))")
+            return false
+        }
+        guard let subscription = native.subscription else {
+            log.debug("Product \(native.id) is not a subscription, so it has no intro offer")
+            return false
+        }
+        return await Product.SubscriptionInfo.isEligibleForIntroOffer(for: subscription.subscriptionGroupID)
+    }
+
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
         guard product is AppStoreProduct else {
             log.error("Product must be AppStoreProduct, but got \(type(of: product))")

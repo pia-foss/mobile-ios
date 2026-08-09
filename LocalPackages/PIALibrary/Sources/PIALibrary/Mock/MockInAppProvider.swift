@@ -60,12 +60,15 @@ import StoreKit
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {
 
-        init(jws: JWS? = JWS("mock-jws-transaction")!) {
+        init(jws: JWS? = JWS("mock-jws-transaction")!, isEligibleForIntroOffer: Bool = false) {
             self.entitlementJWS = jws
+            self.isEligibleForIntroOffer = isEligibleForIntroOffer
         }
         var availableProducts: [any InAppProduct]?
 
         var entitlementJWS: JWS?
+
+        var isEligibleForIntroOffer: Bool
 
         func startObservingTransactions() {
         }
@@ -80,6 +83,10 @@ import StoreKit
                 availableProducts?.append(MockProduct(identifier, price))
             }
             return .success(availableProducts ?? [])
+        }
+
+        func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
+            return isEligibleForIntroOffer
         }
 
         func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

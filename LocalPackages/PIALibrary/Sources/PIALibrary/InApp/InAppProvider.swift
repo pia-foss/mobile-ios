@@ -35,6 +35,15 @@ public protocol InAppProvider: AnyObject {
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
 
+    /// Asks the App Store whether the account is eligible for an introductory offer on the
+    /// subscription group `product` belongs to, **at the moment of the call**.
+    ///
+    /// Prefer this over `InAppProduct.hasIntroOffer`, which is resolved once when products are
+    /// fetched and then frozen for the lifetime of the process. Eligibility can change while the
+    /// app is running (the user subscribes on another device, or a trial is consumed elsewhere),
+    /// so any screen that advertises a free trial should re-ask before it renders.
+    func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool
+
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
     /// The signed JWS representation of the newest active subscription entitlement, or `nil` if none.
