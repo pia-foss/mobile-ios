@@ -68,6 +68,16 @@ public extension Color {
         /// Light: #323642 / Dark: #EEEEEE
         public static let onBackground = Color(.Background.onBackground)
 
+        /// A subtle page-background wash, drawn diagonally from top-leading to bottom-trailing.
+        ///
+        /// Light: #F7F7F7 → #E6E6E7 (a gentle variation either side of `background`).
+        /// Dark: flat #323642 — the design has no gradient in dark mode, so both stops are the
+        /// same colour and the gradient renders as a solid fill.
+        public static let backgroundGradientGrey = PIAGradient(
+            start: Color(.Background.Gradient.BackgroundGrey.start),
+            end: Color(.Background.Gradient.BackgroundGrey.end)
+        )
+
         /// Light: #EEEEEE / Dark: #323642
         public static let surface = Color(.Surface.surface)
 
