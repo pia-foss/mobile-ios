@@ -20,12 +20,14 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Combine
 import PIALibrary
 import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
 /// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone) and the
 /// logged-out login UI (`GetStartedViewController`).
+@MainActor
 final class RootCoordinator: NSObject {
     enum AppRoot {
         case login
@@ -38,6 +40,14 @@ final class RootCoordinator: NSObject {
     private(set) var currentRoot: AppRoot?
     private(set) var splitViewController: UISplitViewController?
     private(set) var dashboardNavigationController: UINavigationController?
+
+    /// The signup flow currently installed as the root, if any.
+    private var signupCoordinator: SignupCoordinator?
+    private var signupCancellables = Set<AnyCancellable>()
+
+    /// Whichever signup flow is on screen — the root one here, or the modal one the dashboard
+    /// presents on iPhone. Used by the magic-link deep link, which has no other way to reach it.
+    weak var activeSignupCoordinator: SignupCoordinator?
 
     var dashboard: DashboardViewController? {
         dashboardNavigationController?.viewControllers.first as? DashboardViewController
@@ -78,6 +88,7 @@ final class RootCoordinator: NSObject {
             splitViewController = nil
             dashboardNavigationController = nil
             newRoot = makeLoginRoot()
+            activeSignupCoordinator = signupCoordinator
         case .main:
             newRoot = makeMainRoot()
         }
@@ -114,12 +125,29 @@ final class RootCoordinator: NSObject {
         if !TransientState.didRetryPendingSignup {
             TransientState.didRetryPendingSignup = true
         }
-        let config = GetStartedViewController.Config(
+
+        signupCancellables.removeAll()
+        let coordinator = SignupCoordinator(
             accountProvider: preset.accountProvider,
-            shouldRecoverPendingSignup: preset.shouldRecoverPendingSignup,
+            // Login-as-root has nothing to dismiss back to.
+            isDismissable: false
         )
-        let vc = GetStartedViewController.with(config: config, delegate: self)
-        return vc ?? UIViewController()
+        coordinator.output
+            .sink { [weak self] event in
+                guard case .didAuthenticate(let user, let isSignup, _) = event else { return }
+                // Preserves the ephemeral-signup branch the old delegate had.
+                if isSignup, preset.isEphemeral {
+                    Client.providers.accountProvider.currentUser = user
+                }
+                self?.handleAuthenticationSuccess()
+            }
+            .store(in: &signupCancellables)
+
+        coordinator.start()
+        // Held strongly: every legacy screen's `completionDelegate` is `weak`, so a coordinator
+        // that is not retained here would be deallocated mid-signup and the flow would stall.
+        signupCoordinator = coordinator
+        return coordinator.rootViewController
     }
 
     private static func instantiateDashboardNavigationController() -> UINavigationController {
