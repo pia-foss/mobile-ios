@@ -62,7 +62,7 @@ public struct PaywallState: Equatable {
     ///
     /// Captured when the offers load and then left alone: re-deciding mid-session would swap the
     /// call to action from "Start My Free Trial" to "Subscribe" under the customer's finger.
-    public var isEligibleForIntroOffer: Bool
+    public var trialOffer: PaywallTrialOffer?
 
     /// The plan the main screen sells. Not changed by the sheet.
     public var defaultPlan: PaywallPlanID
@@ -83,7 +83,7 @@ public struct PaywallState: Equatable {
         phase: Phase = .loadingProducts,
         activity: Activity = .idle,
         offers: [PaywallPlanID: PaywallOffer] = [:],
-        isEligibleForIntroOffer: Bool = false,
+        trialOffer: PaywallTrialOffer? = nil,
         defaultPlan: PaywallPlanID = .yearly,
         sheetSelection: PaywallPlanID = .yearly,
         isPlanSheetPresented: Bool = false,
@@ -94,7 +94,7 @@ public struct PaywallState: Equatable {
         self.phase = phase
         self.activity = activity
         self.offers = offers
-        self.isEligibleForIntroOffer = isEligibleForIntroOffer
+        self.trialOffer = trialOffer
         self.defaultPlan = defaultPlan
         self.sheetSelection = sheetSelection
         self.isPlanSheetPresented = isPlanSheetPresented

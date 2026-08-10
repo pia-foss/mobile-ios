@@ -42,7 +42,7 @@ public protocol InAppProvider: AnyObject {
     /// fetched and then frozen for the lifetime of the process. Eligibility can change while the
     /// app is running (the user subscribes on another device, or a trial is consumed elsewhere),
     /// so any screen that advertises a free trial should re-ask before it renders.
-    func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool
+    func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 

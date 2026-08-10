@@ -99,8 +99,8 @@ public struct SignupPaywallView: View {
             BenefitsList(layout: .compact)
                 .padding(.horizontal, PaywallLayoutMetrics.headerMargin)
 
-            if store.state.showsTrialTimeline {
-                TrialTimelineCard(layout: .compact)
+            if let trialDays = store.state.trialOffer?.days {
+                TrialTimelineCard(layout: .compact, trialDays: trialDays)
                     .padding(.horizontal, PaywallLayoutMetrics.contentMargin)
             }
 
@@ -120,8 +120,8 @@ public struct SignupPaywallView: View {
 
             HStack(alignment: .center, spacing: PIASpacing.s40) {
                 hero
-                if store.state.showsTrialTimeline {
-                    TrialTimelineCard(layout: .wide)
+                if let trialDays = store.state.trialOffer?.days {
+                    TrialTimelineCard(layout: .wide, trialDays: trialDays)
                 }
             }
 

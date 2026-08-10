@@ -45,13 +45,10 @@ public extension PaywallState {
     /// The plan the sheet's call to action buys.
     var sheetOffer: PaywallOffer? { offers[sheetSelection] }
 
-    /// Whether a free trial is advertised for `plan`.
-    ///
-    /// The App Store resolves eligibility per subscription group, so both plans share one answer —
-    /// but the design only ever sells the trial on the yearly plan. Monthly is always presented as a
-    /// straight subscription.
-    func isTrialOffered(for plan: PaywallPlanID) -> Bool {
-        isEligibleForIntroOffer && plan == .yearly
+    /// Trial offered for `plan`, if any.
+    func trialOffered(for plan: PaywallPlanID) -> PaywallTrialOffer? {
+        guard plan == .yearly else { return nil }
+        return trialOffer
     }
 
     // MARK: Screen state
@@ -71,9 +68,6 @@ public extension PaywallState {
     /// A one-row sheet is worse than no sheet, so the entry point only appears with a real choice.
     var showsOtherPlansButton: Bool { offers.count > 1 }
 
-    /// The "How your free trial works" card only makes sense when a trial is actually on offer.
-    var showsTrialTimeline: Bool { isTrialOffered(for: defaultPlan) }
-
     // MARK: Copy
 
     /// The main screen's call to action.
@@ -87,12 +81,13 @@ public extension PaywallState {
     var sheetDisclaimer: PaywallDisclaimer? { disclaimer(for: sheetSelection) }
 
     func buttonTitle(for plan: PaywallPlanID) -> String {
-        guard !isTrialOffered(for: plan) else {
-            return L10n.Signup.Paywall.Cta.startTrial
+        if let introOffer = trialOffered(for: plan) {
+            // Show "free trial" copy
+            return L10n.Signup.Paywall.Cta.startTrial(introOffer.days)
         }
         guard let offer = offers[plan] else {
             // Only reachable in the skeleton state, where the label is redacted anyway.
-            return L10n.Signup.Paywall.Cta.startTrial
+            return L10n.Signup.Paywall.Cta.subscribe("--")
         }
         return L10n.Signup.Paywall.Cta.subscribe(L10n.Welcome.Plan.priceFormat(offer.monthlyPriceString))
     }
@@ -100,9 +95,9 @@ public extension PaywallState {
     func disclaimer(for plan: PaywallPlanID) -> PaywallDisclaimer? {
         guard let offer = offers[plan] else { return nil }
 
-        if isTrialOffered(for: plan) {
+        if let introOffer = trialOffered(for: plan) {
             return PaywallDisclaimer(
-                headline: L10n.Signup.Paywall.Disclaimer.Trial.headline(priceString(for: offer)),
+                headline: L10n.Signup.Paywall.Disclaimer.Trial.headline(introOffer.days, priceString(for: offer)),
                 detail: L10n.Signup.Paywall.Disclaimer.Trial.detail
             )
         }
@@ -148,8 +143,9 @@ public extension PaywallState {
     /// The badge on a plan card, or `nil` when it carries none.
     func badgeTitle(for plan: PaywallPlanID) -> String? {
         guard plan == .yearly else { return nil }
-        return isTrialOffered(for: .yearly)
-            ? L10n.Signup.Paywall.Plans.Badge.bestValueTrial
-            : L10n.Signup.Paywall.Plans.Badge.bestValue
+        if let introOffer = trialOffered(for: plan) {
+            return L10n.Signup.Paywall.Plans.Badge.bestValueTrial(introOffer.days)
+        }
+        return L10n.Signup.Paywall.Plans.Badge.bestValue
     }
 }

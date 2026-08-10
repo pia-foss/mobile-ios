@@ -41,18 +41,12 @@ public extension PaywallDependencies {
                 case .success(let products):
                     let offers = makeOffers(from: products)
                     guard !offers.isEmpty else { return .failure(.productsUnavailable) }
-
-                    // Ask the App Store now rather than trusting the flag captured when products
-                    // were first fetched: eligibility can change while the app is running, and a
-                    // backend override must never promise a trial Apple will not grant.
-                    let eligible: Bool
+                    var trialOffer: PaywallTrialOffer? = nil
                     if let product = products[.yearly] ?? products[.monthly] {
-                        eligible = await store.isEligibleForIntroOffer(for: product)
-                    } else {
-                        eligible = false
+                        let days = await store.eligibleDaysForIntroOffer(for: product)
+                        trialOffer = PaywallTrialOffer(days: days)
                     }
-
-                    return .success(OffersPayload(offers: offers, isEligibleForIntroOffer: eligible))
+                    return .success(OffersPayload(offers: offers, trialOffer: trialOffer))
                 }
             },
 

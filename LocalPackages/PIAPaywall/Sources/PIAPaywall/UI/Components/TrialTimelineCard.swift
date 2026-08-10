@@ -29,6 +29,7 @@ import SwiftUI
 /// something that is not going to happen.
 struct TrialTimelineCard: View {
     let layout: PaywallLayout
+    let trialDays: Int
 
     private enum Metrics {
         static let gutterWidth: CGFloat = 30
@@ -92,7 +93,7 @@ struct TrialTimelineCard: View {
                     description: L10n.Signup.Paywall.Trial.Step1.description
                 )
                 step(
-                    title: L10n.Signup.Paywall.Trial.Step2.title,
+                    title: L10n.Signup.Paywall.Trial.Step2.title(trialDays),
                     description: L10n.Signup.Paywall.Trial.Step2.description
                 )
             }
