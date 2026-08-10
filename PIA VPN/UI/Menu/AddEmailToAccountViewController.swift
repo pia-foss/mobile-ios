@@ -187,7 +187,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         labelOr.text = L10n.Global.or.uppercased()
         labelOr.textAlignment = .center
 
-        let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
+        let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .continue, style: Theme.current.palette.appearance == .dark ? .whiteOutline : .black)
         signInWithAppleButton.addTarget(self, action: #selector(handleAuthorizationAppleID), for: .touchUpInside)
 
         self.addEmailContainer.addSubview(signInWithAppleButton)
@@ -219,6 +219,7 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
         controller.delegate = self
         controller.presentationContextProvider = self
 
+        log.debug("Requesting email via Sign In With Apple")
         controller.performRequests()
     }
 
@@ -293,12 +294,13 @@ class AddEmailToAccountViewController: AutolayoutViewController, BrandableNaviga
 extension AddEmailToAccountViewController: ASAuthorizationControllerPresentationContextProviding {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredentials = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        if let email = appleIDCredentials.email {
+        if let email = appleIDCredentials.resolvedEmail, !email.isEmpty {
             textEmail.text = email
             let preferences = Client.preferences.editable()
             preferences.signInWithAppleFakeEmail = email
             preferences.commit()
         } else {
+            log.error("Sign In With Apple returned no email, falling back to the stored one")
             textEmail.text = Client.preferences.signInWithAppleFakeEmail
         }
         self.signUp(nil)
