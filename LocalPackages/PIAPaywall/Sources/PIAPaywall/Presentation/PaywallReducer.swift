@@ -56,7 +56,7 @@ public enum PaywallReducer {
                 return .none
             }
             state.offers = payload.offers
-            state.isEligibleForIntroOffer = payload.isEligibleForIntroOffer
+            state.trialOffer = payload.trialOffer
             state.defaultPlan = payload.offers[.yearly] != nil ? .yearly : .monthly
             state.sheetSelection = state.defaultPlan
             state.phase = .ready

@@ -1222,8 +1222,10 @@ public enum L10n {
         public static let otherPlans = L10n.tr("Localizable", "signup.paywall.cta.other_plans", fallback: "See Other Plans")
         /// Restore Purchases
         public static let restore = L10n.tr("Localizable", "signup.paywall.cta.restore", fallback: "Restore Purchases")
-        /// Start My 7-day Free Trial
-        public static let startTrial = L10n.tr("Localizable", "signup.paywall.cta.start_trial", fallback: "Start My 7-day Free Trial")
+        /// Start My %d-day Free Trial
+        public static func startTrial(_ p1: Int) -> String {
+          return L10n.tr("Localizable", "signup.paywall.cta.start_trial", p1, fallback: "Start My %d-day Free Trial")
+        }
         /// Subscribe • %@
         public static func subscribe(_ p1: Any) -> String {
           return L10n.tr("Localizable", "signup.paywall.cta.subscribe", String(describing: p1), fallback: "Subscribe • %@")
@@ -1243,9 +1245,9 @@ public enum L10n {
         public enum Trial {
           /// You will be charged on the last day of your trial, unless you cancel before your free trial ends.
           public static let detail = L10n.tr("Localizable", "signup.paywall.disclaimer.trial.detail", fallback: "You will be charged on the last day of your trial, unless you cancel before your free trial ends.")
-          /// Free for 7 days, then %@. Cancel anytime.
-          public static func headline(_ p1: Any) -> String {
-            return L10n.tr("Localizable", "signup.paywall.disclaimer.trial.headline", String(describing: p1), fallback: "Free for 7 days, then %@. Cancel anytime.")
+          /// Free for %d days, then %@. Cancel anytime.
+          public static func headline(_ p1: Int, _ p2: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.disclaimer.trial.headline", p1, String(describing: p2), fallback: "Free for %d days, then %@. Cancel anytime.")
           }
         }
         public enum Yearly {
@@ -1273,8 +1275,10 @@ public enum L10n {
         public enum Badge {
           /// Best Value
           public static let bestValue = L10n.tr("Localizable", "signup.paywall.plans.badge.best_value", fallback: "Best Value")
-          /// Best Value – 7-day Free Trial
-          public static let bestValueTrial = L10n.tr("Localizable", "signup.paywall.plans.badge.best_value_trial", fallback: "Best Value – 7-day Free Trial")
+          /// Best Value – %d-day Free Trial
+          public static func bestValueTrial(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.badge.best_value_trial", p1, fallback: "Best Value – %d-day Free Trial")
+          }
         }
         public enum Billing {
           /// Billed monthly
@@ -1307,8 +1311,10 @@ public enum L10n {
         public enum Step2 {
           /// Subscription begins, cancel anytime
           public static let description = L10n.tr("Localizable", "signup.paywall.trial.step2.description", fallback: "Subscription begins, cancel anytime")
-          /// Day 7
-          public static let title = L10n.tr("Localizable", "signup.paywall.trial.step2.title", fallback: "Day 7")
+          /// Day %d
+          public static func title(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "signup.paywall.trial.step2.title", p1, fallback: "Day %d")
+          }
         }
       }
     }

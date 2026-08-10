@@ -579,16 +579,16 @@
 "signup.paywall.trial.card.title"= "How your free trial works";
 "signup.paywall.trial.step1.title"= "Today";
 "signup.paywall.trial.step1.description"= "Full access unlocked instantly";
-"signup.paywall.trial.step2.title"= "Day 7";
+"signup.paywall.trial.step2.title"= "Day %d";
 "signup.paywall.trial.step2.description"= "Subscription begins, cancel anytime";
 
-"signup.paywall.disclaimer.trial.headline"= "Free for 7 days, then %@. Cancel anytime.";
+"signup.paywall.disclaimer.trial.headline"= "Free for %d days, then %@. Cancel anytime.";
 "signup.paywall.disclaimer.trial.detail"= "You will be charged on the last day of your trial, unless you cancel before your free trial ends.";
 "signup.paywall.disclaimer.monthly.headline"= "%@ per month, billed monthly.";
 "signup.paywall.disclaimer.yearly.headline"= "%@ per year, billed annually.";
 "signup.paywall.disclaimer.renewal.detail"= "Renews automatically unless cancelled at least 24 hours before expiry date.";
 
-"signup.paywall.cta.start_trial"= "Start My 7-day Free Trial";
+"signup.paywall.cta.start_trial"= "Start My %d-day Free Trial";
 "signup.paywall.cta.subscribe"= "Subscribe • %@";
 "signup.paywall.cta.other_plans"= "See Other Plans";
 "signup.paywall.cta.restore"= "Restore Purchases";
@@ -601,7 +601,7 @@
 "signup.paywall.plans.billing.yearly"= "Billed annually";
 "signup.paywall.plans.billing.monthly"= "Billed monthly";
 "signup.paywall.plans.badge.best_value"= "Best Value";
-"signup.paywall.plans.badge.best_value_trial"= "Best Value – 7-day Free Trial";
+"signup.paywall.plans.badge.best_value_trial"= "Best Value – %d-day Free Trial";
 
 "signup.paywall.error.products_unavailable"= "We couldn't load the subscription options. Please check your connection and try again.";
 "signup.paywall.error.retry"= "Try again";

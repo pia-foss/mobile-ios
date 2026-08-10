@@ -83,8 +83,8 @@ import StoreKit
             return .success(availableProducts ?? [])
         }
 
-        func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
-            return isEligibleForIntroOffer
+        func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {
+            return isEligibleForIntroOffer ? 7 : 0
         }
 
         func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
