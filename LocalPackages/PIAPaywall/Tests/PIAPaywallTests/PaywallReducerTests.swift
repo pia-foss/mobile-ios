@@ -66,7 +66,7 @@ final class PaywallReducerTests: XCTestCase {
         XCTAssertEqual(state.phase, .ready)
         XCTAssertEqual(state.defaultPlan, .yearly)
         XCTAssertEqual(state.sheetSelection, .yearly)
-        XCTAssertTrue(state.isEligibleForIntroOffer)
+        XCTAssertEqual(state.trialOffer, PaywallTrialOffer(days: 7))
     }
 
     func test_offersResponse_WHEN_onlyMonthlyReturned_THEN_monthlyBecomesDefaultAndSheetIsHidden() {

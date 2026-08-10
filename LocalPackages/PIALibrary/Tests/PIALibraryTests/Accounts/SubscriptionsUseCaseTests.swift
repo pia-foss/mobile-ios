@@ -2,7 +2,7 @@ import XCTest
 
 @testable import PIALibrary
 
-class SubscriptionsUseCaseTests: XCTestCase {
+final class SubscriptionsUseCaseTests: XCTestCase {
     class Fixture {
         let networkClientMock = NetworkRequestClientMock()
         let refreshAuthTokensCheckerMock = RefreshAuthTokensCheckerMock()
@@ -10,8 +10,7 @@ class SubscriptionsUseCaseTests: XCTestCase {
             products: [
                 PIAProduct(identifier: "id1", plan: .monthly, price: "10", legacy: true),
                 PIAProduct(identifier: "id2", plan: .yearly, price: "100", legacy: true)
-            ],
-            eligibleForTrial: true
+            ]
         )
 
         let receiptBase64 = Data().base64EncodedString()
@@ -99,8 +98,6 @@ class SubscriptionsUseCaseTests: XCTestCase {
 
         // AND the AppStoreInformation is returned with 2 products
         XCTAssertEqual(capturedAppStoreInformation!.products.count, 2)
-        // AND eligible for free trial
-        XCTAssertTrue(capturedAppStoreInformation!.eligibleForTrial)
 
     }
 
@@ -144,8 +141,6 @@ class SubscriptionsUseCaseTests: XCTestCase {
 
         // AND the AppStoreInformation is returned with 2 products
         XCTAssertEqual(capturedAppStoreInformation!.products.count, 2)
-        // AND eligible for free trial
-        XCTAssertTrue(capturedAppStoreInformation!.eligibleForTrial)
 
     }
 
@@ -311,9 +306,5 @@ class SubscriptionsUseCaseTests: XCTestCase {
 
         // AND the AppStoreInformation is returned with 2 products
         XCTAssertEqual(capturedAppStoreInformation!.products.count, 2)
-        // AND eligible for free trial
-        XCTAssertTrue(capturedAppStoreInformation!.eligibleForTrial)
-
     }
-
 }
