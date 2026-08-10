@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 /// Everything that can happen to the paywall, from the customer or from the App Store.
 ///
@@ -44,6 +45,7 @@ public enum PaywallAction: Equatable {
     case planSelected(PaywallPlanID)
 
     case purchaseTapped(source: PurchaseSource)
+    case purchaseIntentReceived(AppStoreProduct)
     case existingEntitlementFound
     case purchaseSucceeded(isExpired: Bool)
     case purchaseFailed(PaywallError)
