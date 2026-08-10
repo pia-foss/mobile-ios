@@ -129,7 +129,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
                         price: "3.99",
                         legacy: false)
                 ],
-                eligibleForTrial: true)
+            )
         }
         webServices.appstoreInformationEligibleButDisabledFromBackend = {
             return AppStoreInformation(
@@ -140,7 +140,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
                         price: "3.99",
                         legacy: false)
                 ],
-                eligibleForTrial: false)
+            )
         }
         webServices.appstoreInformationNotEligible = {
             return AppStoreInformation(
@@ -151,18 +151,16 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
                         price: "3.99",
                         legacy: false)
                 ],
-                eligibleForTrial: false)
+            )
         }
     }
 
     // MARK: AccountProvider
 
-    #if os(iOS) || os(tvOS)
-        /// :nodoc:
-        public var planProducts: [Plan: any InAppProduct]? {
-            return delegate.planProducts
-        }
-    #endif
+    /// :nodoc:
+    public var planProducts: [Plan: any InAppProduct]? {
+        return delegate.planProducts
+    }
 
     /// :nodoc:
     public var shouldCleanAccount: Bool {

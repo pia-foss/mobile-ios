@@ -37,9 +37,6 @@ public protocol InAppProduct<Native>: CustomStringConvertible, Equatable, Sendab
 
     /// The underlying native product implementation.
     var native: Native { get }
-
-    /// `true` if the user is eligible for an intro offer.
-    var hasIntroOffer: Bool { get }
 }
 
 extension InAppProduct {
