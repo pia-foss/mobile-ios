@@ -34,9 +34,6 @@ public enum PaywallReducer {
 
         // MARK: Lifecycle
 
-        case .none:
-            return .none
-
         case .onAppear:
             // it is safe to send these again
             // .observePurchaseIntents recreates the observer

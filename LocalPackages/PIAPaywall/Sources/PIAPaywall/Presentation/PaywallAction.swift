@@ -34,7 +34,6 @@ public enum PaywallAction: Equatable {
         case planSheet
     }
 
-    case none
     case onAppear
     case layoutChanged(PaywallLayout)
     case offersResponse(Result<OffersPayload, PaywallError>)

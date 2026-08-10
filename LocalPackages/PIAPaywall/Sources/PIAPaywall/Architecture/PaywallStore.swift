@@ -98,10 +98,10 @@ public final class PaywallStore: ObservableObject {
                 for await product in purchaseIntentObserver.purchaseIntents {
                     log.debug("Purchase intent received for product id: \(product.identifier)")
                     guard let product = product as? AppStoreProduct else { continue }
-                    self?.run(.checkEntitlementThenPurchase(.product(product)))
+                    self?.send(.purchaseIntentReceived(product))
                 }
                 purchaseIntentObserver.stop()
-                return .none
+                return nil
             }
 
         case .loadOffers:
@@ -170,13 +170,15 @@ public final class PaywallStore: ObservableObject {
         }
     }
 
-    private func start(_ id: EffectID, _ work: @escaping () async -> PaywallAction) {
+    private func start(_ id: EffectID, _ work: @escaping () async -> PaywallAction?) {
         inFlight[id]?.cancel()
         inFlight[id] = Task { [weak self] in
             let action = await work()
             guard !Task.isCancelled else { return }
             self?.inFlight[id] = nil
-            self?.send(action)
+            if let action {
+                self?.send(action)
+            }
         }
     }
 }
