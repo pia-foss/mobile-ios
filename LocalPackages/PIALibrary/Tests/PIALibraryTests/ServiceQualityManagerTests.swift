@@ -143,6 +143,88 @@ final class ServiceQualityManagerTests: XCTestCase {
         XCTAssertEqual(event?.eventProperties["internalError"], "boom")
     }
 
+    // MARK: Common properties
+
+    func testIapEventsCarryPlatformAndVersion() {
+        let event = firstSubmittedEvent {
+            sut.iapProcessingPurchaseEvent(origin: .signup)
+        }
+
+        XCTAssertEqual(event?.eventProperties["platform"], Self.expectedPlatform)
+        XCTAssertEqual(event?.eventProperties["version"], Macros.versionString() ?? "Unknown")
+    }
+
+    /// The ticket puts these properties on every event, not only the IAP ones.
+    func testConnectionEventsCarryPlatformAndVersion() {
+        Client.configuration.connectedManually = true
+        defer { Client.configuration.connectedManually = false }
+
+        let event = firstSubmittedEvent {
+            sut.connectionAttemptEvent()
+        }
+
+        XCTAssertEqual(event?.eventName, "VPN_CONNECTION_ATTEMPT")
+        XCTAssertEqual(event?.eventProperties["platform"], Self.expectedPlatform)
+        XCTAssertEqual(event?.eventProperties["version"], Macros.versionString() ?? "Unknown")
+        // The pre-existing connection properties must survive the change.
+        XCTAssertEqual(event?.eventProperties["connection_source"], "Manual")
+        XCTAssertNotNil(event?.eventProperties["vpn_protocol"])
+    }
+
+    /// Spelled out rather than delegating to `Macros`, so the wire values stay
+    /// asserted against literals.
+    private static var expectedPlatform: String {
+        #if targetEnvironment(macCatalyst)
+            return "macOS"
+        #elseif os(macOS)
+            return "macOS"
+        #elseif os(tvOS)
+            return "tvOS"
+        #else
+            return "iOS"
+        #endif
+    }
+
+    // MARK: Error detail
+
+    /// A non-`ClientError` enum must report its case name, not the opaque case
+    /// index that `NSError` bridging produces.
+    func testNonClientErrorReportsCaseName() {
+        let event = firstSubmittedEvent {
+            sut.iapProcessingFailureEvent(origin: .renew, error: SampleError.receiptRejected)
+        }
+
+        XCTAssertEqual(event?.eventProperties["error"], "receiptRejected")
+    }
+
+    /// Associated values are described inline, so the value is not a bare case name.
+    func testNonClientErrorWithAssociatedValueReportsCaseName() {
+        let event = firstSubmittedEvent {
+            sut.iapProcessingFailureEvent(origin: .renew, error: SampleError.rejected(status: 409))
+        }
+
+        XCTAssertEqual(event?.eventProperties["error"], "rejected(status: 409)")
+    }
+
+    /// A genuine `NSError` is described rather than reduced to domain/code.
+    /// The error is held as `Error` on purpose: `String(describing:)` renders a
+    /// bridged type differently once its static type is the existential, which
+    /// is how the production call site receives it.
+    func testNSErrorIsDescribed() {
+        let urlError: Error = URLError(.notConnectedToInternet)
+        let event = firstSubmittedEvent {
+            sut.iapProcessingFailureEvent(origin: .renew, error: urlError)
+        }
+
+        XCTAssertEqual(event?.eventProperties["error"], String(describing: urlError))
+        XCTAssertEqual(event?.eventProperties["error"], "Error Domain=NSURLErrorDomain Code=-1009 \"(null)\"")
+    }
+
+    private enum SampleError: Error {
+        case receiptRejected
+        case rejected(status: Int)
+    }
+
     func testEventSuppressedWhenConsentDisabled() {
         setConsent(false)
 
