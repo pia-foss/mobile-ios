@@ -90,3 +90,39 @@ struct ChoosePlanSheetContent: View {
         )
     }
 }
+
+#Preview {
+    let offers: [PaywallPlanID: PaywallOffer] = [
+        .yearly: PaywallOffer(
+            id: .yearly,
+            priceString: "$72.98",
+            monthlyPriceString: "$6.08",
+            accessibleMonthlyPriceString: "6.08 US dollars"
+        ),
+        .monthly: PaywallOffer(
+            id: .monthly,
+            priceString: "$16.99",
+            monthlyPriceString: "$16.99",
+            accessibleMonthlyPriceString: "16.99 US dollars"
+        )
+    ]
+
+    return ChoosePlanSheetContent(
+        store: PaywallStore(
+            initialState: PaywallState(
+                phase: .ready,
+                offers: offers,
+                isEligibleForIntroOffer: true,
+                sheetSelection: .yearly
+            ),
+            dependencies: PaywallDependencies(
+                loadOffers: { .success(OffersPayload(offers: offers, isEligibleForIntroOffer: true)) },
+                hasExistingEntitlement: { false },
+                purchase: { _ in .failure(.userCancelled) },
+                finishTransaction: { _ in },
+                restore: { .failure(.nothingToRestore) }
+            )
+        )
+    )
+    .background(Color.pia.surfaceContainerPrimary)
+}

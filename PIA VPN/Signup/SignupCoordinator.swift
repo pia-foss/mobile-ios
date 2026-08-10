@@ -89,11 +89,15 @@ final class SignupCoordinator: NSObject, Coordinator {
         )
         host.paywallDelegate = self
 
-        // Bar visibility is owned by the navigation delegate below, not by the individual push
-        // sites, so it cannot end up out of sync with what is actually on screen.
+        // The delegate below owns the bar across pushes and pops, so no push site has to; the paywall
+        // asserts its own on top of that, because on iOS 15 none of these calls survives layout.
         navigationController.delegate = self
-        navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.setViewControllers([host], animated: false)
+
+        // Loading the view first is what makes the next line stick: on iOS 15 a bar hidden before this
+        // controller's view exists is shown again when that view loads.
+        navigationController.loadViewIfNeeded()
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     /// Signs in from a magic-link deep link.
@@ -318,8 +322,9 @@ extension SignupCoordinator: UINavigationControllerDelegate {
         in navigationController: UINavigationController,
         animated: Bool
     ) {
+        // Applied even when the flag already agrees: on iOS 15 it reads `true` while the bar is still
+        // laid out, so a short-circuit here would skip the call that corrects it.
         let shouldHide = viewController is SignupPaywallHosting
-        guard navigationController.isNavigationBarHidden != shouldHide else { return }
         navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }

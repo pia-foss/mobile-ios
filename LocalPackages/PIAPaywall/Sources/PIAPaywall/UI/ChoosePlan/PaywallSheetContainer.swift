@@ -136,3 +136,23 @@ private struct RoundedCornerShape: Shape {
         )
     }
 }
+
+#Preview("Bottom sheet") {
+    PaywallSheetContainer(isPresented: true, layout: .compact, onDismiss: {}) {
+        Text("Sheet content")
+            .typography(.title2, color: .pia.onSurface)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, PIASpacing.s40)
+    }
+    .background(Color.pia.background)
+}
+
+#Preview("Centred card") {
+    PaywallSheetContainer(isPresented: true, layout: .wide, onDismiss: {}) {
+        Text("Sheet content")
+            .typography(.title2, color: .pia.onSurface)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, PIASpacing.s40)
+    }
+    .background(Color.pia.background)
+}

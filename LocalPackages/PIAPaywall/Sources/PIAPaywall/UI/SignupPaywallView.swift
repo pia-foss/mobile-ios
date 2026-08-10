@@ -30,10 +30,51 @@ import SwiftUI
 /// Holds no navigation of its own: every outcome leaves through the store's `output` publisher, so
 /// the same view works whether it is the app's root or a modal over the dashboard.
 public struct SignupPaywallView: View {
+    /// Measurements taken from the 402pt-wide design.
+    private enum Metrics {
+        /// Side margin for the trial card and the button stack.
+        static let contentMargin: CGFloat = 33
+
+        /// The benefits block. The design insets it to 42.5, which leaves the longest benefit exactly
+        /// one point of slack — but only because every text style there carries `letterSpacing: -0.4`,
+        /// and `PIADesignSystem` does not apply tracking (SwiftUI gained `Text.tracking` in iOS 16 and
+        /// the deployment target is iOS 15). Without that tightening the line wraps, so the block is
+        /// inset to the same margin as the cards below it instead.
+        static let headerMargin: CGFloat = 33
+
+        /// Keeps the single column readable when the canvas is much wider than a phone. Both
+        /// arrangements share it: landscape widens what sits *inside* the column rather than the
+        /// column itself.
+        static let maxContentWidth: CGFloat = 480
+
+        static let heroWidth: CGFloat = 149
+        static let heroHeight: CGFloat = 120
+
+        /// The tablet's vertical rhythm. Deliberately between the `PIASpacing` steps either side of
+        /// it, which jump 24 → 40.
+        static let tabletBlockSpacing: CGFloat = 32
+
+        /// How much larger a portrait iPad draws the hero.
+        static let tabletHeroScale: CGFloat = 1.17
+    }
+
     @ObservedObject private var store: PaywallStore
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     private let legal: PaywallLegalLinks
+
+    /// Portrait iPad and portrait iPhone are both `PaywallLayout.compact`; the size class separates
+    /// them.
+    private var isTablet: Bool { horizontalSizeClass == .regular }
+
+    private var blockSpacing: CGFloat {
+        isTablet ? Metrics.tabletBlockSpacing : PIASpacing.s24
+    }
+
+    /// Landscape has width to spare, but not height.
+    private var heroScale: CGFloat {
+        isTablet && store.state.layout == .compact ? Metrics.tabletHeroScale : 1
+    }
 
     public init(store: PaywallStore, legal: PaywallLegalLinks) {
         self.store = store
@@ -49,6 +90,17 @@ public struct SignupPaywallView: View {
                     content
                         .padding(.top, PIASpacing.s16)
                         .padding(.bottom, PIASpacing.s24)
+                        // Without this the stretched frame below truncates wrapped text.
+                        .fixedSize(horizontal: false, vertical: true)
+                        // Centres the column on a canvas taller than it; inert on a phone.
+                        .frame(minHeight: proxy.size.height, alignment: .center)
+                }
+
+                if store.state.layout == .wide {
+                    logo
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, PIASpacing.s40)
+                        .padding(.top, PIASpacing.s40)
                 }
 
                 if store.state.isDismissable {
@@ -94,51 +146,43 @@ public struct SignupPaywallView: View {
     }
 
     private var compactContent: some View {
-        VStack(spacing: PIASpacing.s24) {
+        VStack(spacing: blockSpacing) {
             header
             BenefitsList(layout: .compact)
-                .padding(.horizontal, PaywallLayoutMetrics.headerMargin)
+                .padding(.horizontal, Metrics.headerMargin)
 
             if let trialDays = store.state.trialOffer?.days {
                 TrialTimelineCard(layout: .compact, trialDays: trialDays)
-                    .padding(.horizontal, PaywallLayoutMetrics.contentMargin)
+                    .padding(.horizontal, Metrics.contentMargin)
             }
 
             actions
-                .padding(.horizontal, PaywallLayoutMetrics.contentMargin)
+                .padding(.horizontal, Metrics.contentMargin)
         }
-        .frame(maxWidth: PaywallLayoutMetrics.maxContentWidth)
+        .frame(maxWidth: Metrics.maxContentWidth)
         .frame(maxWidth: .infinity)
     }
 
+    /// The same column as `compactContent`, at the same width: only its contents change.
     private var wideContent: some View {
-        VStack(spacing: PIASpacing.s24) {
-            VStack(spacing: PIASpacing.s16) {
-                logo
-                SocialProofRow()
-            }
-
-            HStack(alignment: .center, spacing: PIASpacing.s40) {
-                hero
-                if let trialDays = store.state.trialOffer?.days {
-                    TrialTimelineCard(layout: .wide, trialDays: trialDays)
-                }
-            }
-
+        VStack(spacing: blockSpacing) {
+            SocialProofRow()
+            hero
             BenefitsList(layout: .wide)
 
+            if if let trialDays = store.state.trialOffer?.days {
+                    TrialTimelineCard(layout: .wide, trialDays: trialDays)
+            }
+
             actions
-                .frame(maxWidth: PaywallLayoutMetrics.wideMaxContentWidth)
         }
-        .padding(.horizontal, PaywallLayoutMetrics.contentMargin)
-        // Without a ceiling the row of benefits and the trial card stretch to the full width of a
-        // 13" iPad, which leaves the text marooned at opposite edges.
-        .frame(maxWidth: PaywallLayoutMetrics.wideMaxCanvasWidth)
+        // No inset: the benefits row and the card need the column's full width.
+        .frame(maxWidth: Metrics.maxContentWidth)
         .frame(maxWidth: .infinity)
     }
 
     private var header: some View {
-        VStack(spacing: PIASpacing.s12) {
+        VStack(spacing: isTablet ? PIASpacing.s20 : PIASpacing.s12) {
             logo
             SocialProofRow()
             hero
@@ -158,8 +202,8 @@ public struct SignupPaywallView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(
-                width: PaywallLayoutMetrics.heroWidth,
-                height: PaywallLayoutMetrics.heroHeight
+                width: Metrics.heroWidth * heroScale,
+                height: Metrics.heroHeight * heroScale
             )
             .accessibilityHidden(true)
     }
@@ -221,7 +265,7 @@ public struct SignupPaywallView: View {
         .accessibilityIdentifier(PaywallAccessibility.restoreButton)
     }
 
-    /// Not in the Figma, but this screen is the logged-out root — without it an existing customer
+    /// Not in the design, but this screen is the logged-out root — without it an existing customer
     /// has no way into their account.
     private var loginButton: some View {
         Button {
@@ -312,4 +356,49 @@ public enum PaywallAccessibility {
 
     /// Kept as the historical login identifier so the existing UI tests keep finding the way in.
     public static let loginButton = "id.login.submit"
+}
+
+// MARK: - Preview
+
+/// The trial-eligible ready state.
+///
+/// `loadOffers` hands back the same offers the initial state already holds, so `.task`'s `onAppear`
+/// resolves to exactly what is on screen rather than flipping the preview to a loading or error
+/// state. The remaining dependencies are never reached: previews are not tapped.
+#Preview {
+    let offers: [PaywallPlanID: PaywallOffer] = [
+        .yearly: PaywallOffer(
+            id: .yearly,
+            priceString: "$72.98",
+            monthlyPriceString: "$6.08",
+            accessibleMonthlyPriceString: "6.08 US dollars"
+        ),
+        .monthly: PaywallOffer(
+            id: .monthly,
+            priceString: "$16.99",
+            monthlyPriceString: "$16.99",
+            accessibleMonthlyPriceString: "16.99 US dollars"
+        )
+    ]
+
+    return SignupPaywallView(
+        store: PaywallStore(
+            initialState: PaywallState(
+                phase: .ready,
+                offers: offers,
+                isEligibleForIntroOffer: true
+            ),
+            dependencies: PaywallDependencies(
+                loadOffers: { .success(OffersPayload(offers: offers, isEligibleForIntroOffer: true)) },
+                hasExistingEntitlement: { false },
+                purchase: { _ in .failure(.userCancelled) },
+                finishTransaction: { _ in },
+                restore: { .failure(.nothingToRestore) }
+            )
+        ),
+        legal: PaywallLegalLinks(
+            termsURL: URL(string: "https://www.privateinternetaccess.com/pages/terms-of-service")!,
+            privacyURL: URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy")!
+        )
+    )
 }
