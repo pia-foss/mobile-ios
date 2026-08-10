@@ -94,6 +94,8 @@ final class SignupCoordinator: NSObject, Coordinator {
         navigationController.delegate = self
         navigationController.setViewControllers([host], animated: false)
 
+        // Loading the view first is what makes the next line stick: on iOS 15 a bar hidden before this
+        // controller's view exists is shown again when that view loads.
         navigationController.loadViewIfNeeded()
         navigationController.setNavigationBarHidden(true, animated: false)
     }
