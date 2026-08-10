@@ -50,3 +50,21 @@ struct PaywallDisclaimerView: View {
         .redacted(reason: disclaimer == nil ? .placeholder : [])
     }
 }
+
+#Preview("Priced") {
+    PaywallDisclaimerView(
+        disclaimer: PaywallDisclaimer(
+            headline: "7 days free, then $72.98 per year.",
+            detail: "Renews automatically unless cancelled at least 24 hours before the period ends."
+        )
+    )
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}
+
+/// Prices have not arrived: two redacted placeholder lines of roughly the real length.
+#Preview("Loading") {
+    PaywallDisclaimerView(disclaimer: nil)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+}

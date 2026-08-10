@@ -60,14 +60,17 @@ struct TrialTimelineCard: View {
             case .wide:
                 HStack(alignment: .center, spacing: PIASpacing.s24) {
                     title
-                    steps
+                    // The steps claim their width first, so it is the heading that wraps onto a
+                    // second line rather than "Subscription begins, cancel anytime" breaking.
+                    steps.layoutPriority(1)
                 }
             }
         }
         .padding(Metrics.cardPadding)
-        // Compact fills the column; wide sits beside the hero and must size to its content instead
-        // of stretching across the whole canvas.
-        .frame(maxWidth: layout == .compact ? .infinity : nil, alignment: .leading)
+        // Both arrangements fill the column they are given — in wide that is what puts the title at
+        // the leading edge and the steps out to the right, rather than the pair huddled together in
+        // the middle of the card.
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: PIARadius.r12, style: .continuous)
                 .fill(Color.pia.surfaceContainerPrimary)
@@ -107,7 +110,7 @@ struct TrialTimelineCard: View {
             activeNode
 
             Rectangle()
-                .fill(PaywallColor.timelineInactive)
+                .fill(Color.pia.onSuccessOutline)
                 .frame(width: Metrics.connectorWidth)
                 .frame(maxHeight: .infinity)
 
@@ -116,7 +119,7 @@ struct TrialTimelineCard: View {
             Rectangle()
                 .fill(
                     LinearGradient(
-                        colors: [PaywallColor.timelineInactive, PaywallColor.timelineInactive.opacity(0)],
+                        colors: [Color.pia.onSuccessOutline, Color.pia.onSuccessOutline.opacity(0)],
                         startPoint: .top,
                         endPoint: .bottom
                     )
@@ -127,18 +130,20 @@ struct TrialTimelineCard: View {
         .accessibilityHidden(true)
     }
 
+    // The timeline greens are the `onSuccess*` tokens because those are fixed in both modes;
+    // `.pia.primary` turns #5DDF5A in dark.
     private var activeNode: some View {
         Circle()
-            .fill(PaywallColor.timelineActive)
+            .fill(Color.pia.onSuccessContainer)
             .frame(width: Metrics.activeNodeSize, height: Metrics.activeNodeSize)
             .overlay(
                 Circle()
-                    .fill(PaywallColor.onTimelineNode)
+                    .fill(Color.white)
                     .frame(width: Metrics.activeInnerSize, height: Metrics.activeInnerSize)
             )
             .background(
                 Circle()
-                    .fill(PaywallColor.timelineInactive.opacity(0.35))
+                    .fill(Color.pia.onSuccessOutline.opacity(0.35))
                     .frame(width: Metrics.activeGlowSize, height: Metrics.activeGlowSize)
             )
             // The halo is wider than the node; without this it would push the line off-centre.
@@ -147,11 +152,11 @@ struct TrialTimelineCard: View {
 
     private var inactiveNode: some View {
         Circle()
-            .fill(PaywallColor.timelineInactive)
+            .fill(Color.pia.onSuccessOutline)
             .frame(width: Metrics.inactiveNodeSize, height: Metrics.inactiveNodeSize)
             .overlay(
                 Circle()
-                    .fill(PaywallColor.onTimelineNode)
+                    .fill(Color.white)
                     .frame(width: Metrics.inactiveInnerSize, height: Metrics.inactiveInnerSize)
             )
     }
@@ -164,4 +169,25 @@ struct TrialTimelineCard: View {
         // Read as one sentence rather than two disconnected fragments.
         .accessibilityElement(children: .combine)
     }
+}
+
+#Preview("Compact") {
+    TrialTimelineCard(layout: .compact)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+}
+
+#Preview("Wide") {
+    TrialTimelineCard(layout: .wide)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+}
+
+/// Where a hardcoded connector height would show up: the gutter has to stretch to whatever height
+/// the step text needs, and the tail has to keep the Day 7 node level with its heading.
+#Preview("Largest accessibility text size") {
+    TrialTimelineCard(layout: .compact)
+        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
 }

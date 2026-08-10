@@ -44,6 +44,24 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
         view.backgroundColor = .clear
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    /// The bar off the paywall, asserted late: on iOS 15 every earlier call runs before the bar is laid
+    /// out and is lost. Only while the paywall is on top, or it fights the bar a push just asked for.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        guard let navigationController,
+            navigationController.topViewController === self,
+            !navigationController.isNavigationBarHidden
+        else { return }
+
+        navigationController.setNavigationBarHidden(true, animated: false)
+    }
+
     // MARK: SignupPaywallHosting
 
     func navigateToLogin() {

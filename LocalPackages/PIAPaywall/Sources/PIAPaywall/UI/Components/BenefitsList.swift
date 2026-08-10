@@ -55,6 +55,8 @@ struct BenefitsList: View {
 }
 
 private struct BenefitRow: View {
+    private static let iconSize: CGFloat = 20
+
     let text: String
     let layout: PaywallLayout
 
@@ -80,11 +82,20 @@ private struct BenefitRow: View {
         Asset.Piax.Global.iconCheck.swiftUIImage
             .renderingMode(.template)
             .resizable()
-            .frame(
-                width: PaywallLayoutMetrics.benefitIconSize,
-                height: PaywallLayoutMetrics.benefitIconSize
-            )
+            .frame(width: Self.iconSize, height: Self.iconSize)
             .foregroundColor(.pia.primary)
             .accessibilityHidden(true)
     }
+}
+
+#Preview("Compact") {
+    BenefitsList(layout: .compact)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+}
+
+#Preview("Wide") {
+    BenefitsList(layout: .wide)
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
 }

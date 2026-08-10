@@ -92,8 +92,10 @@ final class SignupCoordinator: NSObject, Coordinator {
         // Bar visibility is owned by the navigation delegate below, not by the individual push
         // sites, so it cannot end up out of sync with what is actually on screen.
         navigationController.delegate = self
-        navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.setViewControllers([host], animated: false)
+
+        navigationController.loadViewIfNeeded()
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     /// Signs in from a magic-link deep link.
@@ -319,7 +321,6 @@ extension SignupCoordinator: UINavigationControllerDelegate {
         animated: Bool
     ) {
         let shouldHide = viewController is SignupPaywallHosting
-        guard navigationController.isNavigationBarHidden != shouldHide else { return }
         navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }

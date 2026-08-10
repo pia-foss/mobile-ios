@@ -102,9 +102,33 @@ struct PlanOptionCard: View {
             }
 
             if let badge {
-                PIABadge(badge, background: PaywallColor.badgeBackground, foreground: .pia.onSurface)
+                PIABadge(badge, background: .pia.onWarningOutline, foreground: .pia.onSurface)
                     .padding(.top, PIASpacing.s4)
             }
         }
     }
+}
+
+#Preview {
+    VStack(spacing: PIASpacing.s12) {
+        PlanOptionCard(
+            title: "Yearly",
+            price: "$6.08",
+            billingPeriod: "/mo",
+            badge: "Best Value",
+            isSelected: true,
+            action: {}
+        )
+
+        PlanOptionCard(
+            title: "Monthly",
+            price: "$16.99",
+            billingPeriod: "/mo",
+            badge: nil,
+            isSelected: false,
+            action: {}
+        )
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
 }
