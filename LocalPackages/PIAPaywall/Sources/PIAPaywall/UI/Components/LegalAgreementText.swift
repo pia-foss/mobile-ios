@@ -27,8 +27,8 @@ import SwiftUI
 /// named documents linked in place.
 ///
 /// App Store Review Guideline 3.1.2 requires both links on any screen that sells a subscription.
-/// The Figma for KM-17721 omits them, so the sentence is carried over verbatim from the screen this
-/// one replaces — links embedded in the prose rather than standing alone, as before.
+/// The design omits them, so the sentence is carried over verbatim from the screen this one
+/// replaces — links embedded in the prose rather than standing alone, as before.
 struct LegalAgreementText: View {
     let termsURL: URL
     let privacyURL: URL
@@ -76,4 +76,13 @@ extension AttributedString {
 
         replaceSubrange(range, with: link)
     }
+}
+
+#Preview {
+    LegalAgreementText(
+        termsURL: URL(string: "https://www.privateinternetaccess.com/pages/terms-of-service")!,
+        privacyURL: URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy")!
+    )
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
 }

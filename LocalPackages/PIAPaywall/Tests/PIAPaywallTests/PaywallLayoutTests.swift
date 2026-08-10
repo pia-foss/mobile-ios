@@ -70,11 +70,32 @@ final class PaywallLayoutTests: XCTestCase {
         XCTAssertEqual(layout, .wide)
     }
 
-    func test_iPadHalfSplitView_THEN_compact() {
-        // GIVEN a landscape iPad sharing the screen 1/2
+    /// An 11" split is narrow enough that the system reports `.compact`, so the size class alone
+    /// already rules out the wide layout.
+    func test_iPad11InchHalfSplitView_THEN_compact() {
+        // GIVEN an 11" landscape iPad sharing the screen 1/2
         let layout = PaywallLayout.resolve(size: CGSize(width: 570, height: 834), horizontalSizeClass: .compact)
 
         // THEN too narrow for the three-across benefits row
+        XCTAssertEqual(layout, .compact)
+    }
+
+    /// The same split on a 13" iPad is wide enough to stay `.regular`, so only the measured canvas
+    /// keeps it off the wide layout — this is the case a size-class check on its own would get wrong.
+    func test_iPad13InchHalfSplitView_THEN_compact() {
+        // GIVEN a 13" landscape iPad sharing the screen 1/2
+        let layout = PaywallLayout.resolve(size: CGSize(width: 678, height: 1024), horizontalSizeClass: .regular)
+
+        // THEN taller than it is wide, so the single column
+        XCTAssertEqual(layout, .compact)
+    }
+
+    /// A 2/3 split is the widest a shared canvas gets, and it is still taller than it is wide.
+    func test_iPadTwoThirdsSplitView_THEN_compact() {
+        // GIVEN a 13" landscape iPad taking 2/3 of the screen
+        let layout = PaywallLayout.resolve(size: CGSize(width: 904, height: 1024), horizontalSizeClass: .regular)
+
+        // THEN past the 900pt floor, but portrait-shaped, so still the single column
         XCTAssertEqual(layout, .compact)
     }
 

@@ -27,26 +27,58 @@ import SwiftUI
 /// The ring is drawn rather than shipped as artwork — it is one primitive, and drawing keeps it crisp
 /// at any size and correct in both colour schemes without an asset.
 struct PaywallBackgroundView: View {
+    /// The ring as designed: in a 402pt-wide frame, 444pt across and 62pt thick, centred 262pt in
+    /// from the left and 68pt above the top edge. Scaled by the canvas's shorter edge, so a 402pt
+    /// phone draws these points unchanged and a landscape iPad is sized by its height.
+    private enum Ring {
+        static let frameWidth: CGFloat = 402
+        static let diameter: CGFloat = 444
+        static let lineWidth: CGFloat = 62
+        static let centre = CGPoint(x: 262, y: -68)
+        static let opacity: CGFloat = 0.6
+
+        static func scale(on canvas: CGSize) -> CGFloat {
+            min(canvas.width, canvas.height) / frameWidth
+        }
+    }
+
     var body: some View {
+        // `ignoresSafeArea` sits on the colour, and the `GeometryReader` measuring the ring sits
+        // inside the overlay. The other way round — a `GeometryReader` carrying the modifier — leaves
+        // the status-bar strip unpainted on iOS 15, where the window's black shows through.
         Color.pia.background
             .overlay(alignment: .topLeading) {
-                Circle()
-                    .strokeBorder(
-                        PaywallColor.backgroundRing,
-                        lineWidth: PaywallLayoutMetrics.ringLineWidth
-                    )
-                    .frame(
-                        width: PaywallLayoutMetrics.ringDiameter,
-                        height: PaywallLayoutMetrics.ringDiameter
-                    )
-                    .offset(
-                        x: PaywallLayoutMetrics.ringCentreX - PaywallLayoutMetrics.ringDiameter / 2,
-                        y: PaywallLayoutMetrics.ringCentreY - PaywallLayoutMetrics.ringDiameter / 2
-                    )
-                    // The ring is decoration that runs past the top of the screen.
-                    .clipped()
-                    .accessibilityHidden(true)
+                GeometryReader { proxy in
+                    ring(on: proxy.size)
+                }
+                .clipped()
             }
             .ignoresSafeArea()
     }
+
+    private func ring(on canvas: CGSize) -> some View {
+        let scale = Ring.scale(on: canvas)
+        let diameter = Ring.diameter * scale
+
+        return Circle()
+            .strokeBorder(
+                Color.pia.surfaceContainerPrimary.opacity(Ring.opacity),
+                lineWidth: Ring.lineWidth * scale
+            )
+            .frame(width: diameter, height: diameter)
+            .offset(
+                x: Ring.centre.x * scale - diameter / 2,
+                y: Ring.centre.y * scale - diameter / 2
+            )
+            .accessibilityHidden(true)
+    }
+}
+
+#Preview("Light") {
+    PaywallBackgroundView()
+}
+
+#Preview("Dark") {
+    PaywallBackgroundView()
+        .environment(\.colorScheme, .dark)
 }

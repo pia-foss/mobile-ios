@@ -61,6 +61,11 @@ private struct RatingStars: View {
         static let spacing: CGFloat = 1
     }
 
+    /// The App Store's own rating-star orange: a colour belonging to Apple's rating widget rather
+    /// than to PIA, so it stays a literal instead of borrowing a design token that means something
+    /// else.
+    private static let starColor = Color(red: 0xFB / 255, green: 0x91 / 255, blue: 0x00 / 255)
+
     var body: some View {
         HStack(spacing: Metrics.spacing) {
             ForEach(0..<starCount, id: \.self) { index in
@@ -80,9 +85,15 @@ private struct RatingStars: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: Metrics.starSize, height: Metrics.starSize)
-            .foregroundColor(PaywallColor.ratingStar)
+            .foregroundColor(Self.starColor)
             .mask(alignment: .leading) {
                 Rectangle().frame(width: Metrics.starSize * fillFraction)
             }
     }
+}
+
+#Preview {
+    SocialProofRow()
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
 }

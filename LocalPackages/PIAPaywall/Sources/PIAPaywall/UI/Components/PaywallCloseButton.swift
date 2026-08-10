@@ -26,6 +26,11 @@ import SwiftUI
 
 /// The corner dismiss control.
 struct PaywallCloseButton: View {
+    private enum Metrics {
+        static let glyphSize: CGFloat = 24
+        static let tapTarget: CGFloat = 44
+    }
+
     let action: () -> Void
 
     var body: some View {
@@ -33,15 +38,17 @@ struct PaywallCloseButton: View {
             Asset.Piax.Global.iconCloseSmall.swiftUIImage
                 .renderingMode(.template)
                 .resizable()
-                .frame(
-                    width: PaywallLayoutMetrics.closeButtonSize,
-                    height: PaywallLayoutMetrics.closeButtonSize
-                )
+                .frame(width: Metrics.glyphSize, height: Metrics.glyphSize)
                 .foregroundColor(.pia.onSurfaceContainerPrimary)
-                // A 24pt glyph is below the 44pt minimum tap target on its own.
-                .frame(width: 44, height: 44)
+                .frame(width: Metrics.tapTarget, height: Metrics.tapTarget)
                 .contentShape(Rectangle())
         }
         .accessibilityLabel(L10n.Signup.Paywall.Accessibility.close)
     }
+}
+
+#Preview {
+    PaywallCloseButton {}
+        .padding(PIASpacing.s8)
+        .background(Color.pia.background)
 }
