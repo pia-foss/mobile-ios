@@ -35,6 +35,26 @@ public class Macros {
     }
 
     /**
+     Returns the Apple platform the app is running on.
+
+     Mac Catalyst is reported as macOS even though it compiles as iOS, since it
+     is a Mac build to anyone reading the data.
+
+     - Returns: The platform name, as reported to backend services.
+     */
+    public static func platformName() -> String {
+        #if targetEnvironment(macCatalyst)
+            return "macOS"
+        #elseif os(macOS)
+            return "macOS"
+        #elseif os(tvOS)
+            return "tvOS"
+        #else
+            return "iOS"
+        #endif
+    }
+
+    /**
      Returns a full version string.
 
      - Returns: The full version string, including both x.y.z version and build number.

@@ -27,7 +27,7 @@ private let log = PIALogger.logger(for: ServiceQualityManager.self)
 public final class ServiceQualityManager: NSObject {
 
     public static let shared = ServiceQualityManager()
-    private let kpiPreferenceName = "PIA_KPI_PREFERENCE_NAME"
+    private static let kpiPreferenceName = "PIA_KPI_PREFERENCE_NAME"
     private var kpiManager: KPIAPI?
     private var isAppActive = true
 
@@ -68,12 +68,74 @@ public final class ServiceQualityManager: NSObject {
         case timeToConnect = "time_to_connect"
     }
 
+    /**
+     * Property keys reported on every event, whatever its type.
+     */
+    private enum KPICommonPropertyKey: String {
+        case platform
+        case version
+    }
+
+    /**
+     * Enum defining the in-app-purchase processing events.
+     * These track the KapeClientSDK receipt-verification funnel.
+     */
+    private enum KPIIapEvent: String {
+        case iapProcessingPurchase = "iap_processing_purchase"
+        case iapProcessingSuccess = "iap_processing_success"
+        case iapProcessingRetry = "iap_processing_retry"
+        case iapProcessingFailure = "iap_processing_failure"
+    }
+
+    /**
+     * Property keys for the IAP processing events. Their raw values are camelCase
+     * on purpose: they are the cross-platform (XV) wire contract, unlike the
+     * lower_snake_case keys used by the connection events above.
+     */
+    private enum KPIIapPropertyKey: String {
+        case origin
+        case environment
+        case retryCount
+        case error
+        case internalError
+        case rawError
+    }
+
+    /**
+     * The user-facing flow a purchase originated from, reported as the `origin`
+     * property. These are the values enumerated by the XV spec; the raw values are
+     * the wire contract, so they must not be renamed. `update` is not emitted yet:
+     * no plan-change flow is instrumented.
+     */
+    public enum KPIIapOrigin: String {
+        case signup
+        case renew
+        case restore
+        case update
+    }
+
+    private static let commonEventProperties: [String: String] = [
+        KPICommonPropertyKey.platform.rawValue: Macros.platformName(),
+        KPICommonPropertyKey.version.rawValue: Macros.versionString() ?? "Unknown"
+    ]
+
     public override init() {
         super.init()
+        kpiManager = ServiceQualityManager.makeKPIManager()
+        registerAppStateObservers()
+    }
 
+    /// Injectable initializer used by unit tests to supply a mock `KPIAPI`.
+    init(kpiManager: KPIAPI?) {
+        super.init()
+        self.kpiManager = kpiManager
+        registerAppStateObservers()
+    }
+
+    private static func makeKPIManager() -> KPIAPI? {
         do {
             let provider: KPIClientStateProvider = Client.environment == .staging ? PIAKPIStagingClientStateProvider() : PIAKPIClientStateProvider()
-            kpiManager = try KPIBuilder()
+            return try KPIBuilder()
                 .setFlushEventMode(.perBatch)
                 .setKPIClientStateProvider(provider)
                 .setEventTimeRoundGranularity(.hours)
@@ -84,8 +146,11 @@ public final class ServiceQualityManager: NSObject {
                 .build()
         } catch {
             log.error("KPI manager build failed: \(error)")
+            return nil
         }
+    }
 
+    private func registerAppStateObservers() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appChangedState(with:)),
@@ -96,7 +161,6 @@ public final class ServiceQualityManager: NSObject {
             selector: #selector(appChangedState(with:)),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
-
     }
 
     deinit {
@@ -150,62 +214,135 @@ public final class ServiceQualityManager: NSObject {
 
     public func connectionAttemptEvent() {
         let connectionSource = connectionSource()
-        guard connectionSource == .manual, isAppActive, let kpiManager else { return }
+        guard connectionSource == .manual, isAppActive else { return }
 
-        let event = KPIClientEvent(
-            eventCountry: nil,
-            eventName: KPIConnectionEvent.vpnConnectionAttempt.rawValue,
-            eventProperties: [
+        submitEvent(
+            named: KPIConnectionEvent.vpnConnectionAttempt.rawValue,
+            properties: [
                 KPIEventPropertyKey.connectionSource.rawValue: connectionSource.rawValue,
                 KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
                 KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-            ],
-            eventInstant: Date()
+            ]
         )
-
-        Task {
-            do {
-                try await kpiManager.submit(event: event)
-                log.debug("KPI event submitted \(event)")
-            } catch {
-                log.error("\(error)")
-            }
-        }
     }
 
     public func connectionEstablishedEvent() {
         let connectionSource = connectionSource()
-        guard connectionSource == .manual, isAppActive, let kpiManager else { return }
+        guard connectionSource == .manual, isAppActive else { return }
 
-        let event = KPIClientEvent(
-            eventCountry: nil,
-            eventName: KPIConnectionEvent.vpnConnectionEstablished.rawValue,
-            eventProperties: createEstablishedEventProperties(),
-            eventInstant: Date()
+        submitEvent(
+            named: KPIConnectionEvent.vpnConnectionEstablished.rawValue,
+            properties: createEstablishedEventProperties()
         )
-
-        Task {
-            do {
-                try await kpiManager.submit(event: event)
-                log.debug("KPI event submitted \(event)")
-            } catch {
-                log.error("\(error)")
-            }
-        }
     }
 
     public func connectionCancelledEvent() {
         let disconnectionSource = disconnectionSource()
-        guard disconnectionSource == .manual, isAppActive, let kpiManager else { return }
+        guard disconnectionSource == .manual, isAppActive else { return }
 
-        let event = KPIClientEvent(
-            eventCountry: nil,
-            eventName: KPIConnectionEvent.vpnConnectionCancelled.rawValue,
-            eventProperties: [
+        submitEvent(
+            named: KPIConnectionEvent.vpnConnectionCancelled.rawValue,
+            properties: [
                 KPIEventPropertyKey.connectionSource.rawValue: disconnectionSource.rawValue,
                 KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
                 KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-            ],
+            ]
+        )
+    }
+
+    // MARK: IAP processing events
+
+    /// A new IAP transaction starts processing on the KapeClientSDK path.
+    public func iapProcessingPurchaseEvent(origin: KPIIapOrigin) {
+        submitIapEvent(.iapProcessingPurchase, properties: baseIapProperties(origin: origin))
+    }
+
+    /// The purchase succeeded verification using KapeClientSDK.
+    public func iapProcessingSuccessEvent(origin: KPIIapOrigin, retryCount: Int = 0) {
+        var properties = baseIapProperties(origin: origin)
+        properties[KPIIapPropertyKey.retryCount.rawValue] = String(retryCount)
+        submitIapEvent(.iapProcessingSuccess, properties: properties)
+    }
+
+    /// A verification attempt failed and is being retried on the KapeClientSDK path.
+    /// Reported when signup verification returns HTTP 400 and the login-with-receipt
+    /// fallback re-verifies the same transaction; `retryCount` is that attempt's number.
+    public func iapProcessingRetryEvent(origin: KPIIapOrigin, error: Error, retryCount: Int) {
+        var properties = baseIapProperties(origin: origin)
+        properties[KPIIapPropertyKey.retryCount.rawValue] = String(retryCount)
+        properties[KPIIapPropertyKey.error.rawValue] = iapErrorCode(for: error)
+        submitIapEvent(.iapProcessingRetry, properties: properties)
+    }
+
+    /// The purchase failed verification using KapeClientSDK.
+    public func iapProcessingFailureEvent(origin: KPIIapOrigin, error: Error, retryCount: Int? = nil) {
+        var properties = baseIapProperties(origin: origin)
+        properties[KPIIapPropertyKey.error.rawValue] = iapErrorCode(for: error)
+        if let retryCount {
+            properties[KPIIapPropertyKey.retryCount.rawValue] = String(retryCount)
+        }
+        properties.merge(iapErrorDetails(for: error)) { _, new in new }
+        submitIapEvent(.iapProcessingFailure, properties: properties)
+    }
+
+    private func baseIapProperties(origin: KPIIapOrigin) -> [String: String] {
+        [
+            KPIIapPropertyKey.origin.rawValue: origin.rawValue,
+            KPIIapPropertyKey.environment.rawValue: Client.environment.rawValue
+        ]
+    }
+
+    /// Short, stable identifier for the primary `error` property.
+    private func iapErrorCode(for error: Error) -> String {
+        switch error {
+        case let clientError as ClientError:
+            switch clientError {
+            case .unknown(let code, _): return "unknown_\(code)"
+            case .throttled(let retryAfter): return "throttled_\(retryAfter)"
+            case .libraryError: return "library_error"
+            default: return String(describing: clientError)
+            }
+        default:
+            // Describing the error keeps the case name readable; bridging to
+            // NSError would report the case index instead, which says nothing
+            // to whoever reads the event.
+            return String(describing: error)
+        }
+    }
+
+    /// Optional diagnostic detail for failure events (`internalError`, `rawError`).
+    /// The XV spec also lists a `csi` property, which has no client-side source on
+    /// Apple platforms and is therefore never reported.
+    private func iapErrorDetails(for error: Error) -> [String: String] {
+        var details: [String: String] = [
+            KPIIapPropertyKey.rawError.rawValue: String(describing: error)
+        ]
+        if let clientError = error as? ClientError {
+            switch clientError {
+            case .unknown(_, let message), .libraryError(let message):
+                if let message {
+                    details[KPIIapPropertyKey.internalError.rawValue] = message
+                }
+            default:
+                break
+            }
+        }
+        return details
+    }
+
+    private func submitIapEvent(_ event: KPIIapEvent, properties: [String: String]) {
+        guard Client.preferences.shareServiceQualityData else { return }
+        submitEvent(named: event.rawValue, properties: properties)
+    }
+
+    /// Single submission path for every event, stamping the common properties.
+    private func submitEvent(named name: String, properties: [String: String]) {
+        guard let kpiManager else { return }
+
+        let event = KPIClientEvent(
+            eventCountry: nil,
+            eventName: name,
+            eventProperties: properties.merging(Self.commonEventProperties) { current, _ in current },
             eventInstant: Date()
         )
 
