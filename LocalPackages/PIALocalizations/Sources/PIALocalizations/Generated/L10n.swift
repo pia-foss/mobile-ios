@@ -1253,6 +1253,10 @@ public enum L10n {
             ///     - Connection Attempt
             ///     - Connection Canceled
             ///     - Connection Established
+            ///     - Time to Connect
+            ///     - In-app processing purchase
+            ///     - In-app processing success
+            ///     - In-app processing failure
             /// 
             /// For all of these events, we will collect the following information:
             ///     - Platform
@@ -1265,7 +1269,7 @@ public enum L10n {
             /// All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
             /// 
             /// You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.
-            public static let description = L10n.tr("Localizable", "signup.share.data.readMore.text.description", fallback: "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.\n\nWe will collect information about the following events:\n\n    - Connection Attempt\n    - Connection Canceled\n    - Connection Established\n\nFor all of these events, we will collect the following information:\n    - Platform\n    - App version\n    - App type (pre-release or not)\n    - Protocol used\n    - Connection source (manual or using automation)\n    - Time To Connect (time between connecting and connected state)\n\nAll events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.\n\nYou will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.")
+            public static let description = L10n.tr("Localizable", "signup.share.data.readMore.text.description", fallback: "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.\n\nWe will collect information about the following events:\n\n    - Connection Attempt\n    - Connection Canceled\n    - Connection Established\n    - Time to Connect\n    - In-app processing purchase\n    - In-app processing success\n    - In-app processing failure\n\nFor all of these events, we will collect the following information:\n    - Platform\n    - App version\n    - App type (pre-release or not)\n    - Protocol used\n    - Connection source (manual or using automation)\n    - Time To Connect (time between connecting and connected state)\n\nAll events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.\n\nYou will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.")
           }
         }
         public enum Text {

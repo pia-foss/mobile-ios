@@ -585,6 +585,10 @@ We will collect information about the following events:
     - Connection Attempt
     - Connection Canceled
     - Connection Established
+    - Time to Connect
+    - In-app processing purchase
+    - In-app processing success
+    - In-app processing failure
 
 For all of these events, we will collect the following information:
     - Platform
