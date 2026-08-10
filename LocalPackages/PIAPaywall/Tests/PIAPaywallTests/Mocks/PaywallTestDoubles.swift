@@ -111,7 +111,7 @@ extension PaywallDependencies {
     static func test(
         loadOffers: @escaping () async -> Result<OffersPayload, PaywallError> = { .success(Stub.payload()) },
         hasExistingEntitlement: @escaping () async -> Bool = { false },
-        purchase: @escaping (PaywallPlanID) async -> Result<any InAppTransaction, PaywallError> = { _ in
+        purchase: @escaping (PurchaseRequest) async -> Result<any InAppTransaction, PaywallError> = { _ in
             .success(InAppTransactionStub())
         },
         finishTransaction: @escaping (any InAppTransaction) async -> Void = { _ in },
@@ -131,7 +131,7 @@ extension PaywallDependencies {
 final class DependencySpy: @unchecked Sendable {
     private(set) var loadOffersCallCount = 0
     private(set) var entitlementCheckCallCount = 0
-    private(set) var purchasedPlans: [PaywallPlanID] = []
+    private(set) var purchasedPlans: [PurchaseRequest] = []
     private(set) var finishedTransactions: [String] = []
     private(set) var restoreCallCount = 0
 
@@ -156,8 +156,8 @@ final class DependencySpy: @unchecked Sendable {
                 callOrder.append("hasExistingEntitlement")
                 return hasEntitlement
             },
-            purchase: { [self] plan in
-                purchasedPlans.append(plan)
+            purchase: { [self] request in
+                purchasedPlans.append(request)
                 callOrder.append("purchase")
                 return purchaseResult
             },

@@ -104,7 +104,7 @@ final class PaywallStoreTests: XCTestCase {
 
         // THEN the entitlement check ran first
         XCTAssertEqual(fixture.spy.callOrder, ["hasExistingEntitlement", "purchase"])
-        XCTAssertEqual(fixture.spy.purchasedPlans, [.yearly])
+        XCTAssertEqual(fixture.spy.purchasedPlans, [.plan(.yearly)])
     }
 
     func test_purchase_WHEN_entitlementExists_THEN_neverCharges() async {
@@ -167,7 +167,7 @@ final class PaywallStoreTests: XCTestCase {
         await fixture.settle()
 
         // THEN only one purchase reaches StoreKit
-        XCTAssertEqual(fixture.spy.purchasedPlans, [.yearly])
+        XCTAssertEqual(fixture.spy.purchasedPlans, [.plan(.yearly)])
     }
 
     // MARK: - Restore

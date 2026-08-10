@@ -54,8 +54,15 @@ public extension PaywallDependencies {
                 await store.currentEntitlementJWS() != nil
             },
 
-            purchase: { plan in
-                switch await accountProvider.purchase(plan: plan.libraryPlan) {
+            purchase: { request in
+                let result: Result<any InAppTransaction, ClientError>
+                switch request {
+                case .plan(let plan):
+                    result = await accountProvider.purchase(plan: plan.libraryPlan)
+                case .product(let product):
+                    result = await accountProvider.purchase(product: product)
+                }
+                switch result {
                 case .success(let transaction):
                     return .success(transaction)
                 case .failure(let error):

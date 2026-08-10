@@ -151,7 +151,7 @@ public struct SignupPaywallView: View {
             BenefitsList(layout: .compact)
                 .padding(.horizontal, Metrics.headerMargin)
 
-            if let trialDays = store.state.trialOffer?.days {
+            if let trialDays = store.state.trialOffered(for: .yearly)?.days {
                 TrialTimelineCard(layout: .compact, trialDays: trialDays)
                     .padding(.horizontal, Metrics.contentMargin)
             }
@@ -170,7 +170,7 @@ public struct SignupPaywallView: View {
             hero
             BenefitsList(layout: .wide)
 
-            if let trialDays = store.state.trialOffer?.days {
+            if let trialDays = store.state.trialOffered(for: .yearly)?.days {
                 TrialTimelineCard(layout: .wide, trialDays: trialDays)
             }
 

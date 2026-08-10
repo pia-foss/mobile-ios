@@ -36,7 +36,7 @@ public struct PaywallDependencies {
     /// `true` when this App Store account already owns a subscription.
     public var hasExistingEntitlement: @MainActor () async -> Bool
 
-    public var purchase: @MainActor (PaywallPlanID) async -> Result<any InAppTransaction, PaywallError>
+    public var purchase: @MainActor (PurchaseRequest) async -> Result<any InAppTransaction, PaywallError>
 
     /// Tells the App Store a transaction has been dealt with, so it stops being redelivered.
     public var finishTransaction: @MainActor (any InAppTransaction) async -> Void
@@ -47,7 +47,7 @@ public struct PaywallDependencies {
     public init(
         loadOffers: @escaping @MainActor () async -> Result<OffersPayload, PaywallError>,
         hasExistingEntitlement: @escaping @MainActor () async -> Bool,
-        purchase: @escaping @MainActor (PaywallPlanID) async -> Result<any InAppTransaction, PaywallError>,
+        purchase: @escaping @MainActor (PurchaseRequest) async -> Result<any InAppTransaction, PaywallError>,
         finishTransaction: @escaping @MainActor (any InAppTransaction) async -> Void,
         restore: @escaping @MainActor () async -> Result<UserAccount, PaywallError>
     ) {

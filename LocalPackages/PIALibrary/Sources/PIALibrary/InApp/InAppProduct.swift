@@ -40,7 +40,7 @@ public protocol InAppProduct<Native>: CustomStringConvertible, Equatable, Sendab
 }
 
 extension InAppProduct {
-    var description: String {
+    public var description: String {
         return "{\(identifier) @ \(priceLocale.currencySymbol ?? "")\(price)}"
     }
 }

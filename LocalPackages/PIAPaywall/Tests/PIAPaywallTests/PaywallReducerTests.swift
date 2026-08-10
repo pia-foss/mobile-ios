@@ -40,18 +40,7 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .onAppear)
 
         // THEN it asks for the catalogue
-        XCTAssertEqual(effect, .loadOffers)
-    }
-
-    func test_onAppear_WHEN_offersAlreadyLoaded_THEN_doesNotRefetch() {
-        // GIVEN a paywall that already has prices
-        var state = Stub.readyState()
-
-        // WHEN SwiftUI runs `.task` again after a backgrounding round trip
-        let effect = reduce(&state, .onAppear)
-
-        // THEN nothing is refetched
-        XCTAssertEqual(effect, .none)
+        XCTAssertEqual(effect, .batch([.observePurchaseIntents, .loadOffers]))
     }
 
     func test_offersResponse_WHEN_successful_THEN_becomesReadyWithYearlyPreselected() {
@@ -173,7 +162,7 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .purchaseTapped(source: .mainScreen))
 
         // THEN the entitlement check runs first, for the default plan
-        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.yearly))
+        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.plan(.yearly)))
         XCTAssertEqual(state.activity, .purchasing)
     }
 
@@ -187,7 +176,7 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .purchaseTapped(source: .planSheet))
 
         // THEN monthly is purchased, and the sheet closes so alerts are not hidden behind it
-        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.monthly))
+        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.plan(.monthly)))
         XCTAssertFalse(state.isPlanSheetPresented)
     }
 

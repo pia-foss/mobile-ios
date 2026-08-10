@@ -1,9 +1,9 @@
 //
-//  AppStoreProduct.swift
-//  PIALibrary
+//  PurchaseRequest.swift
+//  PIAPaywall
 //
-//  Created by Davide De Rosa on 10/22/17.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Mario on 10/08/2026.
+//  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -18,27 +18,11 @@
 //
 //  You should have received a copy of the GNU General Public License along with the Private
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
-//
 
 import Foundation
-import StoreKit
+import PIALibrary
 
-public struct AppStoreProduct: InAppProduct<Product>, Equatable, Hashable {
-    public var identifier: String {
-        return native.id
-    }
-
-    public var price: Decimal {
-        return native.price
-    }
-
-    public var priceLocale: Locale {
-        return native.priceFormatStyle.locale
-    }
-
-    public let native: Native
-
-    public init(native: Native) {
-        self.native = native
-    }
+public enum PurchaseRequest: Equatable {
+    case plan(PaywallPlanID)
+    case product(AppStoreProduct)
 }

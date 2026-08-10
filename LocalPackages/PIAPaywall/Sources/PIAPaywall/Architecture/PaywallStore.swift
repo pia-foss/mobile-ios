@@ -23,6 +23,8 @@ import Combine
 import Foundation
 import PIALibrary
 
+private let log = PIALogger.logger(for: PaywallStore.self)
+
 /// Holds the paywall's state and runs the effects the reducer asks for.
 ///
 /// State flows down (`state`), actions flow up (`send`), and anything the host must act on leaves
@@ -44,6 +46,7 @@ public final class PaywallStore: ObservableObject {
     private enum EffectID: Hashable {
         case offers
         case purchase
+        case purchaseIntents
         case restore
     }
 
@@ -88,19 +91,32 @@ public final class PaywallStore: ObservableObject {
         case .emit(let signal):
             emit(signal)
 
+        case .observePurchaseIntents:
+            start(.purchaseIntents) { [weak self] in
+                let purchaseIntentObserver = PurchaseIntentObserver()
+                purchaseIntentObserver.start()
+                for await product in purchaseIntentObserver.purchaseIntents {
+                    log.debug("Purchase intent received for product id: \(product.identifier)")
+                    guard let product = product as? AppStoreProduct else { continue }
+                    self?.send(.purchaseIntentReceived(product))
+                }
+                purchaseIntentObserver.stop()
+                return nil
+            }
+
         case .loadOffers:
             start(.offers) { [dependencies] in
                 .offersResponse(await dependencies.loadOffers())
             }
 
-        case .checkEntitlementThenPurchase(let plan):
+        case .checkEntitlementThenPurchase(let request):
             start(.purchase) { [dependencies, weak self] in
                 // Ordering matters: an account that already owns a subscription must be offered a
                 // restore rather than being charged a second time.
                 if await dependencies.hasExistingEntitlement() {
                     return .existingEntitlementFound
                 }
-                switch await dependencies.purchase(plan) {
+                switch await dependencies.purchase(request) {
                 case .success(let transaction):
                     self?.pendingTransaction = transaction
                     return .purchaseSucceeded(isExpired: transaction.isExpired)
@@ -154,13 +170,15 @@ public final class PaywallStore: ObservableObject {
         }
     }
 
-    private func start(_ id: EffectID, _ work: @escaping () async -> PaywallAction) {
+    private func start(_ id: EffectID, _ work: @escaping () async -> PaywallAction?) {
         inFlight[id]?.cancel()
         inFlight[id] = Task { [weak self] in
             let action = await work()
             guard !Task.isCancelled else { return }
             self?.inFlight[id] = nil
-            self?.send(action)
+            if let action {
+                self?.send(action)
+            }
         }
     }
 }
