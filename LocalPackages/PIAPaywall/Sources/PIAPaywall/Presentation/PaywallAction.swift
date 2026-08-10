@@ -62,10 +62,10 @@ public enum PaywallAction: Equatable {
 /// What a successful catalogue load produced.
 public struct OffersPayload: Equatable, Sendable {
     public let offers: [PaywallPlanID: PaywallOffer]
-    public let isEligibleForIntroOffer: Bool
+    public let trialOffer: PaywallTrialOffer?
 
-    public init(offers: [PaywallPlanID: PaywallOffer], isEligibleForIntroOffer: Bool) {
+    public init(offers: [PaywallPlanID: PaywallOffer], trialOffer: PaywallTrialOffer?) {
         self.offers = offers
-        self.isEligibleForIntroOffer = isEligibleForIntroOffer
+        self.trialOffer = trialOffer
     }
 }

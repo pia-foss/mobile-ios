@@ -151,8 +151,8 @@ public struct SignupPaywallView: View {
             BenefitsList(layout: .compact)
                 .padding(.horizontal, Metrics.headerMargin)
 
-            if store.state.showsTrialTimeline {
-                TrialTimelineCard(layout: .compact)
+            if let trialDays = store.state.trialOffer?.days {
+                TrialTimelineCard(layout: .compact, trialDays: trialDays)
                     .padding(.horizontal, Metrics.contentMargin)
             }
 
@@ -170,8 +170,8 @@ public struct SignupPaywallView: View {
             hero
             BenefitsList(layout: .wide)
 
-            if store.state.showsTrialTimeline {
-                TrialTimelineCard(layout: .wide)
+            if let trialDays = store.state.trialOffer?.days {
+                TrialTimelineCard(layout: .wide, trialDays: trialDays)
             }
 
             actions
@@ -386,10 +386,10 @@ public enum PaywallAccessibility {
             initialState: PaywallState(
                 phase: .ready,
                 offers: offers,
-                isEligibleForIntroOffer: true
+                trialOffer: PaywallTrialOffer(days: 7)
             ),
             dependencies: PaywallDependencies(
-                loadOffers: { .success(OffersPayload(offers: offers, isEligibleForIntroOffer: true)) },
+                loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
                 hasExistingEntitlement: { false },
                 purchase: { _ in .failure(.userCancelled) },
                 finishTransaction: { _ in },

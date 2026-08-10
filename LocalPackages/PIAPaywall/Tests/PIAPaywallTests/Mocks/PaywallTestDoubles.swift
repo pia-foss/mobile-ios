@@ -52,7 +52,7 @@ enum Stub {
         offers: [PaywallPlanID: PaywallOffer] = Stub.bothOffers,
         isEligibleForIntroOffer: Bool = true
     ) -> OffersPayload {
-        OffersPayload(offers: offers, isEligibleForIntroOffer: isEligibleForIntroOffer)
+        OffersPayload(offers: offers, trialOffer: isEligibleForIntroOffer ? .init(days: 7) : nil)
     }
 
     static let user = UserAccount(
@@ -69,7 +69,7 @@ enum Stub {
         PaywallState(
             phase: .ready,
             offers: offers,
-            isEligibleForIntroOffer: isEligibleForIntroOffer,
+            trialOffer: isEligibleForIntroOffer ? .init(days: 7) : nil,
             defaultPlan: defaultPlan,
             sheetSelection: defaultPlan
         )

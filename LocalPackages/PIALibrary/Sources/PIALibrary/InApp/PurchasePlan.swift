@@ -35,8 +35,6 @@ public final class PurchasePlan: NSObject {
         let priceLocale = Locale.current
 
         let native: Native = .none
-
-        let hasIntroOffer: Bool = false
     }
 
     private static let formatter: NumberFormatter = {

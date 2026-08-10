@@ -27,10 +27,8 @@ import StoreKit
 /// Business interface related to user account.
 public protocol AccountProvider: AnyObject {
 
-    #if os(iOS) || os(tvOS)
-        /// The in-app products required to purchase a `Plan`.
-        var planProducts: [Plan: any InAppProduct]? { get }
-    #endif
+    /// The in-app products required to purchase a `Plan`.
+    var planProducts: [Plan: any InAppProduct]? { get }
 
     /// Returns `true` if accountInfo is nil and loggedIn true.
     var shouldCleanAccount: Bool { get }

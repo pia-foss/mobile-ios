@@ -24,7 +24,7 @@ import XCTest
 
 @testable import PIALibrary
 
-class AccountSignupTests: XCTestCase {
+final class AccountSignupTests: XCTestCase {
     private var observers = [NSObjectProtocol]()
 
     private let live = Client.providers
@@ -33,8 +33,10 @@ class AccountSignupTests: XCTestCase {
         super.setUp()
 
         Client.store = MockInAppProvider()
-        Client.configuration.setPlan(.monthly, forProductIdentifier: "com.example.first")
-        Client.configuration.setPlan(.yearly, forProductIdentifier: "com.example.second")
+        Client.configuration.setPlans([
+            "com.example.first": .monthly,
+            "com.example.second": .yearly
+        ])
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
         Client.bootstrap()
         Client.refreshProducts()

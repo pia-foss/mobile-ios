@@ -118,22 +118,7 @@ final class AppStoreProvider: NSObject, InAppProvider {
             return .failure(.unknown)
         }
 
-        var introOffers: [String: Bool] = [:]
-        var result: [AppStoreProduct] = []
-        for product in products {
-            var hasIntroOffer: Bool = false
-            if let subscription = product.subscription {
-                if let has = introOffers[subscription.subscriptionGroupID] {
-                    hasIntroOffer = has
-                } else {
-                    hasIntroOffer = await subscription.isEligibleForIntroOffer
-                    introOffers[subscription.subscriptionGroupID] = hasIntroOffer
-                }
-            }
-            let appStoreProduct = AppStoreProduct(native: product, hasIntroOffer: hasIntroOffer)
-            result.append(appStoreProduct)
-        }
-
+        let result = products.map { AppStoreProduct(native: $0) }
         cacheAvailableProducts(result)
         return .success(result)
     }
@@ -153,16 +138,36 @@ final class AppStoreProvider: NSObject, InAppProvider {
         availableProducts = products
     }
 
-    func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
-        guard let native = product.native as? Product else {
+    func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {
+        guard let product = product.native as? Product else {
             log.error("Product must be a StoreKit.Product, but got \(type(of: product.native))")
-            return false
+            return 0
         }
-        guard let subscription = native.subscription else {
-            log.debug("Product \(native.id) is not a subscription, so it has no intro offer")
-            return false
+        guard let subscription = product.subscription else {
+            log.debug("Product \(product.id) is not a subscription, so it has no intro offer")
+            return 0
         }
-        return await Product.SubscriptionInfo.isEligibleForIntroOffer(for: subscription.subscriptionGroupID)
+
+        var days = 0
+        if let offer = subscription.introductoryOffer {
+            days = offer.period.value
+            switch offer.period.unit {
+            case .day:
+                days *= 1
+            case .week:
+                days *= 7
+            case .month:
+                days *= 30
+            case .year:
+                days *= 365
+            @unknown default:
+                log.error("Unknown offer period unit: \(offer.period.unit)")
+                break
+            }
+        }
+
+        let isEligible = await subscription.isEligibleForIntroOffer
+        return isEligible ? days : 0
     }
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

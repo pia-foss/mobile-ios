@@ -29,6 +29,7 @@ import SwiftUI
 /// something that is not going to happen.
 struct TrialTimelineCard: View {
     let layout: PaywallLayout
+    let trialDays: Int
 
     private enum Metrics {
         static let gutterWidth: CGFloat = 30
@@ -95,7 +96,7 @@ struct TrialTimelineCard: View {
                     description: L10n.Signup.Paywall.Trial.Step1.description
                 )
                 step(
-                    title: L10n.Signup.Paywall.Trial.Step2.title,
+                    title: L10n.Signup.Paywall.Trial.Step2.title(trialDays),
                     description: L10n.Signup.Paywall.Trial.Step2.description
                 )
             }
@@ -172,13 +173,13 @@ struct TrialTimelineCard: View {
 }
 
 #Preview("Compact") {
-    TrialTimelineCard(layout: .compact)
+    TrialTimelineCard(layout: .compact, trialDays: 7)
         .padding(PIASpacing.s24)
         .background(Color.pia.background)
 }
 
 #Preview("Wide") {
-    TrialTimelineCard(layout: .wide)
+    TrialTimelineCard(layout: .wide, trialDays: 7)
         .padding(PIASpacing.s24)
         .background(Color.pia.background)
 }
@@ -186,7 +187,7 @@ struct TrialTimelineCard: View {
 /// Where a hardcoded connector height would show up: the gutter has to stretch to whatever height
 /// the step text needs, and the tail has to keep the Day 7 node level with its heading.
 #Preview("Largest accessibility text size") {
-    TrialTimelineCard(layout: .compact)
+    TrialTimelineCard(layout: .compact, trialDays: 7)
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
         .padding(PIASpacing.s24)
         .background(Color.pia.background)

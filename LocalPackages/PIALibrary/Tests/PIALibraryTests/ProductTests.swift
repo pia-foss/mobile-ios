@@ -24,7 +24,7 @@ import XCTest
 
 @testable import PIALibrary
 
-class ProductTests: XCTestCase {
+final class ProductTests: XCTestCase {
 
     private let mock = MockProviders()
     private let subscriptionProductIds = [
@@ -76,7 +76,6 @@ class ProductTests: XCTestCase {
                 XCTAssert(false)
                 return
             }
-            XCTAssertFalse(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
 
@@ -100,7 +99,6 @@ class ProductTests: XCTestCase {
                 XCTAssert(false)
                 return
             }
-            XCTAssertTrue(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
 
@@ -124,7 +122,6 @@ class ProductTests: XCTestCase {
                 XCTAssert(false)
                 return
             }
-            XCTAssertFalse(Client.configuration.eligibleForTrial)
             expUpdate.fulfill()
         }
 

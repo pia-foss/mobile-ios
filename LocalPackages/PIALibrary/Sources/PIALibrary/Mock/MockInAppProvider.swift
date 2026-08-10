@@ -36,8 +36,6 @@ import StoreKit
 
         let native: Native = .none
 
-        var hasIntroOffer: Bool { false }
-
         init(_ identifier: String, _ price: Decimal) {
             self.identifier = identifier
             self.price = price
@@ -78,15 +76,15 @@ import StoreKit
 
         func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
             availableProducts = []
-            for (i, identifier) in accessedConfiguration.allProductIdentifiers().enumerated() {
+            for (i, identifier) in await accessedConfiguration.allProductIdentifiers(timeout: 0).enumerated() {
                 let price = (Decimal(i + 1) * 50.0)
                 availableProducts?.append(MockProduct(identifier, price))
             }
             return .success(availableProducts ?? [])
         }
 
-        func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
-            return isEligibleForIntroOffer
+        func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {
+            return isEligibleForIntroOffer ? 7 : 0
         }
 
         func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

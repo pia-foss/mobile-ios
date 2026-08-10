@@ -1,9 +1,9 @@
 //
-//  AppStoreProduct.swift
-//  PIALibrary
+//  PaywallTrialOffer.swift
+//  PIAPaywall
 //
-//  Created by Davide De Rosa on 10/22/17.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Created by Mario on 10/08/2026.
+//  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -20,25 +20,14 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import StoreKit
+/// Available introductory offer period for subscriptions.
+public struct PaywallTrialOffer: Equatable, Sendable {
+    public let days: Int
 
-struct AppStoreProduct: InAppProduct<Product>, Hashable {
-    var identifier: String {
-        return native.id
-    }
-
-    var price: Decimal {
-        return native.price
-    }
-
-    var priceLocale: Locale {
-        return native.priceFormatStyle.locale
-    }
-
-    let native: Native
-
-    init(native: Native) {
-        self.native = native
+    public init?(days: Int) {
+        if days <= 0 {
+            return nil
+        }
+        self.days = days
     }
 }

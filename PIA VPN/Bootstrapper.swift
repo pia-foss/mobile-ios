@@ -182,22 +182,19 @@ final class Bootstrapper {
         #endif
 
         Client.observeTransactions()
-        Client.providers.accountProvider.subscriptionInformation { [weak self] (info, error) in
-
-            if let _ = error {
-                self?.setDefaultPlanProducts()
+        Client.providers.accountProvider.subscriptionInformation { info, error in
+            if let error {
+                log.error("Failed to load subscription information: \(error)")
+                Client.configuration.setDefaultPlanProducts()
+                return
             }
 
-            if let info = info {
-
-                if info.products.count > 0 {
-                    for product in info.products {
-                        if !product.legacy {
-                            Client.configuration.setPlan(product.plan, forProductIdentifier: product.identifier)
-                        }
-                    }
+            if let info {
+                var plans: [String: Plan] = [:]
+                for product in info.products where !product.legacy {
+                    plans[product.identifier] = product.plan
                 }
-
+                Client.configuration.setPlans(plans)
             }
 
             Client.refreshProducts()
@@ -265,12 +262,6 @@ final class Bootstrapper {
         }
 
         setupExceptionHandler()
-    }
-
-    private func setDefaultPlanProducts() {
-        log.debug("Using fallback product identifiers")
-        Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
-        Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
     }
 
     func dispose() {

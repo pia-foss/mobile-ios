@@ -116,8 +116,6 @@ final class MockWebServices: WebServices {
             }
         }
 
-        Client.configuration.eligibleForTrial = result()!.eligibleForTrial
-
         return result()
     }
 
