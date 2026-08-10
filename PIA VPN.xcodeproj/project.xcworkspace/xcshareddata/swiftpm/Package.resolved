@@ -1,151 +1,230 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "CwlCatchException",
-        "repositoryURL": "https://github.com/mattgallagher/CwlCatchException.git",
-        "state": {
-          "branch": null,
-          "revision": "07b2ba21d361c223e25e3c1e924288742923f08c",
-          "version": "2.2.1"
-        }
-      },
-      {
-        "package": "CwlPreconditionTesting",
-        "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
-        "state": {
-          "branch": null,
-          "revision": "0139c665ebb45e6a9fbdb68aabfd7c39f3fe0071",
-          "version": "2.2.2"
-        }
-      },
-      {
-        "package": "DynamicBlurView",
-        "repositoryURL": "https://github.com/KyoheiG3/DynamicBlurView.git",
-        "state": {
-          "branch": null,
-          "revision": "d69b09d70a689dc7b8ea6aa6de3e63f9e6c545ce",
-          "version": "5.0.5"
-        }
-      },
-      {
-        "package": "DZNEmptyDataSet",
-        "repositoryURL": "https://github.com/dzenbot/DZNEmptyDataSet.git",
-        "state": {
-          "branch": "master",
-          "revision": "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179",
-          "version": null
-        }
-      },
-      {
-        "package": "GradientProgressBar",
-        "repositoryURL": "https://github.com/fxm90/GradientProgressBar.git",
-        "state": {
-          "branch": null,
-          "revision": "0d07228b9d7be44dce231819962f8e23146330ca",
-          "version": "3.0.0"
-        }
-      },
-      {
-        "package": "Nimble",
-        "repositoryURL": "https://github.com/Quick/Nimble",
-        "state": {
-          "branch": null,
-          "revision": "035b88ad6ae8035f5ce2b50b0a6d69c3b16d2120",
-          "version": "14.0.0"
-        }
-      },
-      {
-        "package": "Popover",
-        "repositoryURL": "https://github.com/sarathsarah/Popover.git",
-        "state": {
-          "branch": "master",
-          "revision": "3674e94551307502995f363681b6b51e93fcdf3e",
-          "version": null
-        }
-      },
-      {
-        "package": "PopupDialog",
-        "repositoryURL": "https://github.com/Orderella/PopupDialog.git",
-        "state": {
-          "branch": "master",
-          "revision": "d41ac7c7fa7b940c355490281ea8b2fc39c8f599",
-          "version": null
-        }
-      },
-      {
-        "package": "Quick",
-        "repositoryURL": "https://github.com/Quick/Quick",
-        "state": {
-          "branch": null,
-          "revision": "1163a1b1b114a657c7432b63dd1f92ce99fe11a6",
-          "version": "7.6.2"
-        }
-      },
-      {
-        "package": "SideMenu",
-        "repositoryURL": "https://github.com/jonkykong/SideMenu.git",
-        "state": {
-          "branch": null,
-          "revision": "8bd4fd128923cf5494fa726839af8afe12908ad9",
-          "version": "6.5.0"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
-        "state": {
-          "branch": null,
-          "revision": "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
-          "version": "1.7.0"
-        }
-      },
-      {
-        "package": "swift-custom-dump",
-        "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
-        "state": {
-          "branch": null,
-          "revision": "06c57924455064182d6b217f06ebc05d00cb2990",
-          "version": "1.5.0"
-        }
-      },
-      {
-        "package": "swift-snapshot-testing",
-        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
-        "state": {
-          "branch": null,
-          "revision": "ad5e3190cc63dc288f28546f9c6827efc1e9d495",
-          "version": "1.19.2"
-        }
-      },
-      {
-        "package": "swift-syntax",
-        "repositoryURL": "https://github.com/swiftlang/swift-syntax",
-        "state": {
-          "branch": null,
-          "revision": "4799286537280063c85a32f09884cfbca301b1a1",
-          "version": "602.0.0"
-        }
-      },
-      {
-        "package": "SwiftEntryKit",
-        "repositoryURL": "https://github.com/huri000/SwiftEntryKit.git",
-        "state": {
-          "branch": null,
-          "revision": "5ad36cccf0c4b9fea32f4e9b17a8e38f07563ef0",
-          "version": "2.0.0"
-        }
-      },
-      {
-        "package": "xctest-dynamic-overlay",
-        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
-        "state": {
-          "branch": null,
-          "revision": "dfd70507def84cb5fb821278448a262c6ff2bbad",
-          "version": "1.9.0"
-        }
+  "pins" : [
+    {
+      "identity" : "cwlcatchexception",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattgallagher/CwlCatchException.git",
+      "state" : {
+        "revision" : "07b2ba21d361c223e25e3c1e924288742923f08c",
+        "version" : "2.2.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "cwlpreconditiontesting",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattgallagher/CwlPreconditionTesting.git",
+      "state" : {
+        "revision" : "0139c665ebb45e6a9fbdb68aabfd7c39f3fe0071",
+        "version" : "2.2.2"
+      }
+    },
+    {
+      "identity" : "dynamicblurview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/KyoheiG3/DynamicBlurView.git",
+      "state" : {
+        "revision" : "d69b09d70a689dc7b8ea6aa6de3e63f9e6c545ce",
+        "version" : "5.0.5"
+      }
+    },
+    {
+      "identity" : "dznemptydataset",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dzenbot/DZNEmptyDataSet.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179"
+      }
+    },
+    {
+      "identity" : "gradientprogressbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fxm90/GradientProgressBar.git",
+      "state" : {
+        "revision" : "0d07228b9d7be44dce231819962f8e23146330ca",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "ios-openssl",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/ios-openssl.git",
+      "state" : {
+        "revision" : "e7f9ffdd072fa8709ee25ba8cd2aa5d95f90a6a5",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "mobile-ios-networking",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-networking.git",
+      "state" : {
+        "revision" : "a513646305e68492a5613abe1debf8399d6e8546",
+        "version" : "1.3.2"
+      }
+    },
+    {
+      "identity" : "mobile-ios-openvpn",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-openvpn.git",
+      "state" : {
+        "revision" : "f2c8825f61a57ba664971e72c37efd92ebc366c9",
+        "version" : "2.2.6"
+      }
+    },
+    {
+      "identity" : "mobile-ios-wireguard",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
+      "state" : {
+        "revision" : "59e5e7a0c5cb05d2f701ce48458e4f7ab16086ab",
+        "version" : "1.0.6"
+      }
+    },
+    {
+      "identity" : "nimble",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Nimble",
+      "state" : {
+        "revision" : "035b88ad6ae8035f5ce2b50b0a6d69c3b16d2120",
+        "version" : "14.0.0"
+      }
+    },
+    {
+      "identity" : "popover",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sarathsarah/Popover.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "3674e94551307502995f363681b6b51e93fcdf3e"
+      }
+    },
+    {
+      "identity" : "popupdialog",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Orderella/PopupDialog.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "d41ac7c7fa7b940c355490281ea8b2fc39c8f599"
+      }
+    },
+    {
+      "identity" : "quick",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Quick",
+      "state" : {
+        "revision" : "1163a1b1b114a657c7432b63dd1f92ce99fe11a6",
+        "version" : "7.6.2"
+      }
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift.git",
+      "state" : {
+        "revision" : "21d1dc412cfecbe6e34f1f4c4eb88d3f912654a6",
+        "version" : "5.2.4"
+      }
+    },
+    {
+      "identity" : "sidemenu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jonkykong/SideMenu.git",
+      "state" : {
+        "revision" : "8bd4fd128923cf5494fa726839af8afe12908ad9",
+        "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "swift-algorithms",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-algorithms.git",
+      "state" : {
+        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
+      }
+    },
+    {
+      "identity" : "swift-custom-dump",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
+      "state" : {
+        "revision" : "06c57924455064182d6b217f06ebc05d00cb2990",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log",
+      "state" : {
+        "revision" : "2aed77ae5ec9a86d8fe42c12275e4c2653a286ee",
+        "version" : "1.13.1"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
+      "state" : {
+        "revision" : "ad5e3190cc63dc288f28546f9c6827efc1e9d495",
+        "version" : "1.19.2"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax",
+      "state" : {
+        "revision" : "4799286537280063c85a32f09884cfbca301b1a1",
+        "version" : "602.0.0"
+      }
+    },
+    {
+      "identity" : "swiftentrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/huri000/SwiftEntryKit.git",
+      "state" : {
+        "revision" : "5ad36cccf0c4b9fea32f4e9b17a8e38f07563ef0",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "tweetnacl-swiftwrap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bitmark-inc/tweetnacl-swiftwrap.git",
+      "state" : {
+        "revision" : "f8fd111642bf2336b11ef9ea828510693106e954",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "dfd70507def84cb5fb821278448a262c6ff2bbad",
+        "version" : "1.9.0"
+      }
+    }
+  ],
+  "version" : 2
 }

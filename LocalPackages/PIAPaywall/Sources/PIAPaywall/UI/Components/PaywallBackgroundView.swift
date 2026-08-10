@@ -35,6 +35,7 @@ struct PaywallBackgroundView: View {
         static let diameter: CGFloat = 444
         static let lineWidth: CGFloat = 62
         static let centre = CGPoint(x: 262, y: -68)
+        static let opacity: CGFloat = 0.6
 
         static func scale(on canvas: CGSize) -> CGFloat {
             min(canvas.width, canvas.height) / frameWidth
@@ -61,7 +62,7 @@ struct PaywallBackgroundView: View {
 
         return Circle()
             .strokeBorder(
-                Color.pia.surfaceContainerPrimary.opacity(0.6),
+                Color.pia.surfaceContainerPrimary.opacity(Ring.opacity),
                 lineWidth: Ring.lineWidth * scale
             )
             .frame(width: diameter, height: diameter)

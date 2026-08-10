@@ -46,7 +46,9 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        // Unanimated: on a pop back the delegate has already animated the bar away, and animating it
+        // a second time shows the move twice.
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     /// The bar off the paywall, asserted late: on iOS 15 every earlier call runs before the bar is laid

@@ -49,6 +49,13 @@ public struct SignupPaywallView: View {
 
         static let heroWidth: CGFloat = 149
         static let heroHeight: CGFloat = 120
+
+        /// The tablet's vertical rhythm. Deliberately between the `PIASpacing` steps either side of
+        /// it, which jump 24 → 40.
+        static let tabletBlockSpacing: CGFloat = 32
+
+        /// How much larger a portrait iPad draws the hero.
+        static let tabletHeroScale: CGFloat = 1.17
     }
 
     @ObservedObject private var store: PaywallStore
@@ -60,11 +67,13 @@ public struct SignupPaywallView: View {
     /// them.
     private var isTablet: Bool { horizontalSizeClass == .regular }
 
-    private var blockSpacing: CGFloat { isTablet ? 32 : PIASpacing.s24 }
+    private var blockSpacing: CGFloat {
+        isTablet ? Metrics.tabletBlockSpacing : PIASpacing.s24
+    }
 
     /// Landscape has width to spare, but not height.
     private var heroScale: CGFloat {
-        isTablet && store.state.layout == .compact ? 1.17 : 1
+        isTablet && store.state.layout == .compact ? Metrics.tabletHeroScale : 1
     }
 
     public init(store: PaywallStore, legal: PaywallLegalLinks) {
