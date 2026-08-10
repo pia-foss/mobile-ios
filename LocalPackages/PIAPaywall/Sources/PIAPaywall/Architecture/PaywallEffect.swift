@@ -20,6 +20,7 @@
 //
 
 import Foundation
+import PIALibrary
 
 /// Work the reducer asks the store to perform.
 ///
@@ -29,11 +30,12 @@ import Foundation
 /// expectations and no test clock. Only `PaywallStore` knows how to actually run them.
 public enum PaywallEffect: Equatable {
     case none
+    case observePurchaseIntents
     case loadOffers
 
     /// The entitlement check must happen *before* the purchase: an App Store account that already
     /// owns a subscription is offered a restore instead of being charged twice.
-    case checkEntitlementThenPurchase(PaywallPlanID)
+    case checkEntitlementThenPurchase(PurchaseRequest)
 
     case restore
 

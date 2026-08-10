@@ -34,11 +34,14 @@ public enum PaywallReducer {
 
         // MARK: Lifecycle
 
+        case .none:
+            return .none
+
         case .onAppear:
             // Re-entrant: SwiftUI can run `.task` again after a backgrounding round trip, and the
             // catalogue must not be refetched once it has resolved.
             guard state.phase == .loadingProducts, state.activity == .idle else { return .none }
-            return .loadOffers
+            return .batch([.observePurchaseIntents, .loadOffers])
 
         case .retryTapped:
             guard state.phase == .productsUnavailable, state.activity == .idle else { return .none }
@@ -96,7 +99,7 @@ public enum PaywallReducer {
             state.activity = .purchasing
             // A banner or alert would otherwise be hidden behind the sheet.
             state.isPlanSheetPresented = false
-            return .checkEntitlementThenPurchase(plan)
+            return .checkEntitlementThenPurchase(.plan(plan))
 
         case .existingEntitlementFound:
             state.activity = .idle
