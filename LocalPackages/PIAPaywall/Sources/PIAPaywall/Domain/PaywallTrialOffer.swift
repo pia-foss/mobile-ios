@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+/// Available introductory offer period for subscriptions.
 public struct PaywallTrialOffer: Equatable, Sendable {
     public let days: Int
 
