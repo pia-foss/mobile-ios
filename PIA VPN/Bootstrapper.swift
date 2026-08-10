@@ -148,6 +148,15 @@ final class Bootstrapper {
             ]
         #endif
 
+        // Users who already answered the legacy share-data panel (pre-dating the consent-gate
+        // screen) never get `hasRespondedToServiceQualityConsent` set, which would otherwise
+        // re-show that screen on their next logged-out launch.
+        if !Client.preferences.hasRespondedToServiceQualityConsent && Client.preferences.hasExplicitShareServiceQualityDataValue {
+            let preferences = Client.preferences.editable()
+            preferences.hasRespondedToServiceQualityConsent = true
+            preferences.commit()
+        }
+
         if Client.preferences.shareServiceQualityData {
             ServiceQualityManager.shared.start()
         } else {

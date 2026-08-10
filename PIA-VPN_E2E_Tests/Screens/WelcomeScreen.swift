@@ -17,6 +17,7 @@ extension XCUIApplication {
     var welcomeLoginButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
 
     func navigateToLoginScreen() {
+        dismissConsentScreenIfPresented()
         XCTAssertTrue(welcomeLoginButton.waitForElementToAppear())
         welcomeLoginButton.tap()
         XCTAssertTrue(loginButton.waitForElementToAppear())

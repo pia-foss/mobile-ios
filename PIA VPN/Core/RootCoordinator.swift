@@ -21,15 +21,19 @@
 //
 
 import Combine
+import PIAConsent
 import PIALibrary
+import SwiftUI
 import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
-/// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone) and the
+/// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone), the
+/// share-data consent screen (`ConsentView`) shown first when logged out, and the
 /// logged-out signup UI (`SignupCoordinator`).
 @MainActor
 final class RootCoordinator: NSObject {
     enum AppRoot {
+        case consent
         case login
         case main
     }
@@ -63,7 +67,16 @@ final class RootCoordinator: NSObject {
             self.dashboardNavigationController = initialNav
         }
         configureMacCatalystTitlebar(for: window)
-        let initialState: AppRoot = Client.providers.accountProvider.isLoggedIn ? .main : .login
+
+        let initialState: AppRoot =
+            if Client.providers.accountProvider.isLoggedIn {
+                .main
+            } else if Client.preferences.hasRespondedToServiceQualityConsent {
+                .login
+            } else {
+                .consent
+            }
+
         setRoot(initialState)
     }
 
@@ -84,6 +97,8 @@ final class RootCoordinator: NSObject {
 
         let newRoot: UIViewController
         switch root {
+        case .consent:
+            newRoot = makeConsentRoot()
         case .login:
             splitViewController = nil
             dashboardNavigationController = nil
@@ -117,6 +132,30 @@ final class RootCoordinator: NSObject {
             splitViewController = nil
             return dashboardNav
         }
+    }
+
+    private func makeConsentRoot() -> UIViewController {
+        let view = ConsentFactory.makeConsentView(
+            onAccept: { [weak self] in self?.respondToShareData(accepted: true) },
+            onReject: { [weak self] in self?.respondToShareData(accepted: false) }
+        )
+        return UIHostingController(rootView: view)
+    }
+
+    private func respondToShareData(accepted: Bool) {
+        let preferences = Client.preferences.editable()
+        preferences.shareServiceQualityData = accepted
+        preferences.versionWhenServiceQualityOpted = accepted ? Macros.versionString() : nil
+        preferences.hasRespondedToServiceQualityConsent = true
+        preferences.commit()
+
+        if accepted {
+            ServiceQualityManager.shared.start()
+        } else {
+            ServiceQualityManager.shared.stop()
+        }
+
+        setRoot(.login)
     }
 
     private func makeLoginRoot() -> UIViewController {
