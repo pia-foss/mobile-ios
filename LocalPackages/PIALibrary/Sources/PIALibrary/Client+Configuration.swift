@@ -285,8 +285,14 @@ extension Client {
         // MARK: InApp
 
         /// Defines multiple ``Plan``s for corresponding product identifiers.
+        ///
+        /// If `plans` is empty, the default product identifiers are used instead.
         public func setPlans(_ plans: [String: Plan]) {
-            inAppPlans = plans
+            if plans.isEmpty {
+                setDefaultPlanProducts()
+            } else {
+                inAppPlans = plans
+            }
         }
 
         public func setDefaultPlanProducts() {

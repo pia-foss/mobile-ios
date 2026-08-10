@@ -107,7 +107,8 @@ extension DefaultAccountProvider: ProductsProviderType {
     }
 }
 
-extension Client.Configuration: ProductConfigurationType {}
+extension Client.Configuration: ProductConfigurationType {
+}
 
 extension DefaultAccountProvider: PurchaseProductsAccountProviderType {
     func purchase(plan: Plan, _ callback: LibraryCallback<InAppTransaction>?) {

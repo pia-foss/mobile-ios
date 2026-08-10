@@ -11,7 +11,7 @@ import PIABase
 import PIALibrary
 import StoreKit
 
-class InAppProviderSpy: InAppProvider {
+final class InAppProviderSpy: InAppProvider {
     var startObservingTransactionsCalledAttempt = 0
     var availableProducts: [any InAppProduct]?
     var entitlementJWS: JWS?
@@ -28,9 +28,9 @@ class InAppProviderSpy: InAppProvider {
         return .success([])
     }
 
-    func isEligibleForIntroOffer(for product: any InAppProduct) async -> Bool {
+    func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {
         isEligibleForIntroOfferCalledAttempt += 1
-        return isEligibleForIntroOfferResult
+        return isEligibleForIntroOfferResult ? 7 : 0
     }
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

@@ -386,10 +386,10 @@ public enum PaywallAccessibility {
             initialState: PaywallState(
                 phase: .ready,
                 offers: offers,
-                isEligibleForIntroOffer: true
+                trialOffer: PaywallTrialOffer(days: 7)
             ),
             dependencies: PaywallDependencies(
-                loadOffers: { .success(OffersPayload(offers: offers, isEligibleForIntroOffer: true)) },
+                loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
                 hasExistingEntitlement: { false },
                 purchase: { _ in .failure(.userCancelled) },
                 finishTransaction: { _ in },
