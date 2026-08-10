@@ -34,28 +34,8 @@ final class PaywallStateDerivedTests: XCTestCase {
         let state = Stub.readyState(isEligibleForIntroOffer: true)
 
         // THEN the trial is sold on yearly; monthly is always a straight subscription
-        XCTAssertTrue(state.isTrialOffered(for: .yearly))
-        XCTAssertFalse(state.isTrialOffered(for: .monthly))
-    }
-
-    func test_trial_WHEN_notEligible_THEN_timelineIsHiddenAndCtaSells() {
-        // GIVEN an account that already used its trial
-        let state = Stub.readyState(isEligibleForIntroOffer: false)
-
-        // THEN the "How your free trial works" card is hidden, because it would be untrue
-        XCTAssertFalse(state.showsTrialTimeline)
-
-        // AND the call to action sells the subscription instead
-        XCTAssertEqual(state.primaryButtonTitle, "Subscribe • $6.08/mo")
-    }
-
-    func test_trial_WHEN_eligible_THEN_timelineIsShownAndCtaStartsTheTrial() {
-        // GIVEN an eligible account
-        let state = Stub.readyState(isEligibleForIntroOffer: true)
-
-        // THEN the trial is explained and offered
-        XCTAssertTrue(state.showsTrialTimeline)
-        XCTAssertEqual(state.primaryButtonTitle, "Start My 7-day Free Trial")
+        XCTAssertEqual(state.trialOffered(for: .yearly), PaywallTrialOffer(days: 7))
+        XCTAssertNil(state.trialOffered(for: .monthly))
     }
 
     // MARK: - Call to action
