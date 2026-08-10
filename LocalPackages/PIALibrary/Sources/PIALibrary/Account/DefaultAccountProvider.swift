@@ -46,21 +46,19 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
     // MARK: AccountProvider
 
-    #if os(iOS) || os(tvOS)
-        public var planProducts: [Plan: any InAppProduct]? {
-            guard let products = accessedStore.availableProducts else {
-                return nil
-            }
-            var map = [Plan: any InAppProduct]()
-            for product in products {
-                guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
-                    continue
-                }
-                map[plan] = product
-            }
-            return map
+    public var planProducts: [Plan: any InAppProduct]? {
+        guard let products = accessedStore.availableProducts else {
+            return nil
         }
-    #endif
+        var map = [Plan: any InAppProduct]()
+        for product in products {
+            guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
+                continue
+            }
+            map[plan] = product
+        }
+        return map
+    }
 
     public var isLoggedIn: Bool {
         guard let username = accessedDatabase.secure.username() else {
@@ -403,15 +401,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
             log.debug("Fetching available products...")
 
-            if let products = planProducts {
+            if let products = planProducts, !products.isEmpty {
                 log.debug("Available products in cache: \(products)")
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
                 return .success(products)
             }
 
             log.debug("No available products in cache, requesting from store...")
-
-            let identifiers = accessedConfiguration.allProductIdentifiers()
+            let identifiers = await accessedConfiguration.allProductIdentifiers(timeout: 10_000)  // 10s
             switch await accessedStore.fetchProducts(identifiers: identifiers) {
             case .failure(let error):
                 log.error("Unable to fetch products from store: \(error)")
@@ -420,6 +417,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 log.debug("Available products from store: \(products)")
                 if products.isEmpty {
                     log.warning("No products returned from store")
+                    return .failure(.unknown)
                 }
                 let planProducts = self.planProducts
                 if planProducts == nil {

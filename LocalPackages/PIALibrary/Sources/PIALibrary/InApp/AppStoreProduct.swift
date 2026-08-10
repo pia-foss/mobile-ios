@@ -23,7 +23,7 @@
 import Foundation
 import StoreKit
 
-struct AppStoreProduct: InAppProduct<Product> {
+struct AppStoreProduct: InAppProduct<Product>, Hashable {
     var identifier: String {
         return native.id
     }
@@ -38,10 +38,7 @@ struct AppStoreProduct: InAppProduct<Product> {
 
     let native: Native
 
-    let hasIntroOffer: Bool
-
-    init(native: Native, hasIntroOffer: Bool) {
+    init(native: Native) {
         self.native = native
-        self.hasIntroOffer = hasIntroOffer
     }
 }
