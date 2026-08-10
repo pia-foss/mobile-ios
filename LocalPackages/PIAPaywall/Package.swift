@@ -20,8 +20,7 @@ let package = Package(
         .package(path: "../PIALibrary"),
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
-        .package(path: "../PIAAssets"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.19.2")
+        .package(path: "../PIAAssets")
     ],
     targets: [
         .target(
@@ -43,10 +42,7 @@ let package = Package(
         ),
         .testTarget(
             name: "PIAPaywallTests",
-            dependencies: [
-                "PIAPaywall",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
-            ]
+            dependencies: ["PIAPaywall"]
         )
     ]
 )

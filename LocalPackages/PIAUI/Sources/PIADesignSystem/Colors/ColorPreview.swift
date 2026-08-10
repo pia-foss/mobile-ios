@@ -53,7 +53,7 @@ struct ColorPreview: View {
                 ColorSection(title: "Error", colors: errorColors)
                 ColorSection(title: "Fixed", colors: fixedColors)
 
-                GradientSection(title: "Gradients", gradients: gradientColors)
+                GradientSection(title: "Fixed Gradients", gradients: gradientColors)
             }
             .padding()
         }
@@ -130,8 +130,7 @@ struct ColorPreview: View {
         [
             .init(name: "SurfaceStatusConnected", gradient: Color.pia.surfaceStatusConnected, startHex: "#4CB649", endHex: "#5DD5FA"),
             .init(name: "SurfaceStatusConnecting", gradient: Color.pia.surfaceStatusConnecting, startHex: "#E6B400", endHex: "#F9CF01"),
-            .init(name: "SurfaceStatusError", gradient: Color.pia.surfaceStatusError, startHex: "#B2352D", endHex: "#F24458"),
-            .init(name: "BackgroundGrey", gradient: Color.pia.backgroundGradientGrey, startHex: "#F7F7F7", endHex: "#E6E6E7")
+            .init(name: "SurfaceStatusError", gradient: Color.pia.surfaceStatusError, startHex: "#B2352D", endHex: "#F24458")
         ]
     }
 }

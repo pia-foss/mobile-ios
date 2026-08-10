@@ -57,10 +57,7 @@ let package = Package(
         ),
         .testTarget(
             name: "PIASwiftUITests",
-            dependencies: [
-                "PIASwiftUI",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
-            ]
+            dependencies: ["PIASwiftUI"]
         )
     ]
 )

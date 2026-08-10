@@ -156,3 +156,61 @@ extension PIAButtonStyle {
         }
     }
 }
+
+// The loading buttons pass no `activityImage` on purpose: `LoadingView` spins forever, whereas the
+// `ProgressView` fallback renders statically in the canvas.
+#Preview("Primary") {
+    VStack(spacing: PIASpacing.s8) {
+        Button(action: {}) {
+            Text("Start My 7-day Free Trial").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.primary))
+
+        Button(action: {}) {
+            Text("Loading").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.primary, isLoading: true))
+
+        Button(action: {}) {
+            Text("Disabled").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.primary))
+        .disabled(true)
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}
+
+#Preview("Secondary") {
+    VStack(spacing: PIASpacing.s8) {
+        Button(action: {}) {
+            Text("See Other Plans").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.secondary))
+
+        Button(action: {}) {
+            Text("Disabled").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.secondary))
+        .disabled(true)
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}
+
+#Preview("Plain") {
+    VStack(spacing: PIASpacing.s8) {
+        Button(action: {}) {
+            Text("Restore Purchases").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.plain))
+
+        Button(action: {}) {
+            Text("Disabled").typography(.button1)
+        }
+        .buttonStyle(PIAButtonStyle(.plain))
+        .disabled(true)
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}

@@ -51,3 +51,12 @@ public struct PIABadge: View {
             .fixedSize(horizontal: false, vertical: true)
     }
 }
+
+#Preview {
+    VStack(alignment: .leading, spacing: PIASpacing.s8) {
+        PIABadge("Best Value", background: .pia.onWarningOutline, foreground: .pia.onSurface)
+        PIABadge("7-day Free Trial", background: .pia.successContainer, foreground: .pia.onSuccessContainer)
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}

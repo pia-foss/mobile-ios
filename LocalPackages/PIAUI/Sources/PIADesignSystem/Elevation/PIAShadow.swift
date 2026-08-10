@@ -62,3 +62,12 @@ public extension View {
         self.shadow(color: shadow.color, radius: shadow.radius, x: shadow.x, y: shadow.y)
     }
 }
+
+#Preview {
+    RoundedRectangle(cornerRadius: PIARadius.r12, style: .continuous)
+        .fill(Color.pia.surfaceContainerPrimary)
+        .frame(height: 64)
+        .piaShadow()
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+}

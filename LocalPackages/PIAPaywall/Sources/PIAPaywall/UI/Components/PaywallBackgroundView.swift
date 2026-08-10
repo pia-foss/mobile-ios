@@ -22,38 +22,31 @@
 import PIADesignSystem
 import SwiftUI
 
-/// The paywall's backdrop: a diagonal grey wash with a large ring bleeding off the top edge.
+/// The paywall's backdrop: the standard page background with a large ring bleeding off the top edge.
 ///
-/// Drawn rather than shipped as artwork — it is two primitives, and drawing keeps it crisp at any
-/// size and correct in both colour schemes without a second asset.
+/// The ring is drawn rather than shipped as artwork — it is one primitive, and drawing keeps it crisp
+/// at any size and correct in both colour schemes without an asset.
 struct PaywallBackgroundView: View {
     var body: some View {
-        LinearGradient(
-            gradient: Gradient(colors: [
-                Color.pia.backgroundGradientGrey.start,
-                Color.pia.backgroundGradientGrey.end
-            ]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .overlay(alignment: .topLeading) {
-            Circle()
-                .strokeBorder(
-                    PaywallColor.backgroundRing,
-                    lineWidth: PaywallLayoutMetrics.ringLineWidth
-                )
-                .frame(
-                    width: PaywallLayoutMetrics.ringDiameter,
-                    height: PaywallLayoutMetrics.ringDiameter
-                )
-                .offset(
-                    x: PaywallLayoutMetrics.ringCentreX - PaywallLayoutMetrics.ringDiameter / 2,
-                    y: PaywallLayoutMetrics.ringCentreY - PaywallLayoutMetrics.ringDiameter / 2
-                )
-                // The ring is decoration that runs past the top of the screen.
-                .clipped()
-                .accessibilityHidden(true)
-        }
-        .ignoresSafeArea()
+        Color.pia.background
+            .overlay(alignment: .topLeading) {
+                Circle()
+                    .strokeBorder(
+                        PaywallColor.backgroundRing,
+                        lineWidth: PaywallLayoutMetrics.ringLineWidth
+                    )
+                    .frame(
+                        width: PaywallLayoutMetrics.ringDiameter,
+                        height: PaywallLayoutMetrics.ringDiameter
+                    )
+                    .offset(
+                        x: PaywallLayoutMetrics.ringCentreX - PaywallLayoutMetrics.ringDiameter / 2,
+                        y: PaywallLayoutMetrics.ringCentreY - PaywallLayoutMetrics.ringDiameter / 2
+                    )
+                    // The ring is decoration that runs past the top of the screen.
+                    .clipped()
+                    .accessibilityHidden(true)
+            }
+            .ignoresSafeArea()
     }
 }
