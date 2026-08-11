@@ -37,6 +37,8 @@ extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
 }
 
+private let log = PIALogger.logger(for: Bootstrapper.self)
+
 final class Bootstrapper {
 
     static let shared = Bootstrapper()
@@ -328,6 +330,7 @@ final class Bootstrapper {
     }
 
     private func setDefaultPlanProducts() {
+        log.debug("Using fallback product identifiers")
         Client.configuration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
         Client.configuration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
     }

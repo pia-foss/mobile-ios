@@ -17,6 +17,11 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "PIABase"
+        ),
+        // Test target using Swift Testing
+        .testTarget(
+            name: "PIABaseTests",
+            dependencies: ["PIABase"]
         )
 
     ],
