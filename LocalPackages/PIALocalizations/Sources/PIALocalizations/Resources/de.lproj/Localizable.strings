@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "Um uns zu helfen, die Verbindungsleistung unseres Dienstes sicherzustellen, können Sie Ihre Verbindungsstatistiken anonym mit uns teilen. Diese Berichte enthalten keine persönlich identifizierbaren Informationen.";
 "signup.share.data.text.footer"= "Sie können dies jederzeit über Ihre Einstellungen steuern";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Diese minimalen Informationen helfen uns, mögliche Verbindungsprobleme zu erkennen und zu beheben. Beachten Sie, dass das Teilen dieser Informationen Ihre Zustimmung und eine manuelle Aktivierung erfordert, da es standardmäßig deaktiviert ist.
 
-We will collect information about the following events:
+Wir erfassen Informationen zu den folgenden Ereignissen:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Verbindungsversuch
+    - Verbindung abgebrochen
+    - Verbindung hergestellt
+    - Verbindungsdauer
+    - In-App-Kauf wird verarbeitet
+    - In-App-Kauf erfolgreich
+    - In-App-Kauf fehlgeschlagen
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+Für alle diese Ereignisse erfassen wir die folgenden Informationen:
+    - Plattform
+    - App-Version
+    - App-Typ (Vorabversion oder nicht)
+    - Verwendetes Protokoll
+    - Verbindungsquelle (manuell oder per Automatisierung)
+    - Verbindungsdauer (Zeit zwischen dem Status „Verbindung wird hergestellt“ und „Verbunden“)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Alle Ereignisse enthalten eine eindeutige ID, die zufällig generiert wird. Diese ID ist nicht mit Ihrem Benutzerkonto verknüpft. Aus Datenschutzgründen wird diese eindeutige ID täglich neu generiert.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Daten wir erfasst haben, und die Funktion jederzeit deaktivieren.";
 
 "welcome.login.title"= "An deinem Konto anmelden";
 "welcome.login.username.placeholder"= "Benutzername (p1234567)";

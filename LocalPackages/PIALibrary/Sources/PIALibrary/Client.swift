@@ -95,31 +95,24 @@ public final class Client {
 
     /// Refresh the list of plan products
     public static func refreshProducts() {
-        #if os(iOS)
-            Task {
-                try? await providers.accountProvider.listPlanProducts()
+        Task {
+            log.debug("Listing plan products")
+            if case .failure(let error) = await providers.accountProvider.listPlanProducts() {
+                log.error("Failed to refresh products: \(error)")
             }
-        #endif
+        }
     }
 
-    /**
-    Observe Purchase transactions
-    */
+    /// Observe Purchase transactions
     public static func observeTransactions() {
-        #if os(iOS)
-            store.startObservingTransactions()
-        #endif
+        store.startObservingTransactions()
     }
 
-    /**
-     Disposes the client resources and observers.
-
-     Do this when the consumer application is about to terminate.
-     */
+    /// Disposes the client resources and observers.
+    ///
+    /// Do this when the consumer application is about to terminate.
     public static func dispose() {
-        #if os(iOS)
-            store.stopObservingTransactions()
-        #endif
+        store.stopObservingTransactions()
     }
 
     /// Refresh the ping number to the given servers and await the outcome,

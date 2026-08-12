@@ -106,7 +106,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
         let rootViewController = topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
         switch rootViewController {
-        case is GetStartedViewController, is PIACardsViewController:
+        // Matched on a protocol rather than a concrete class: the previous
+        // `is GetStartedViewController` check would have silently stopped locking the orientation
+        // the moment that screen was replaced.
+        case is PortraitLockedViewController, is PIACardsViewController:
             return .portrait
         default:
             return .all
@@ -172,24 +175,16 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                 return false
             }
 
-            if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
-                rootViewController.navigationController?.popToRootViewController(animated: false)
-                if let getStartedViewController = self.topViewControllerWithRootViewController(rootViewController: self.window?.rootViewController) as? GetStartedViewController {
-                    getStartedViewController.navigateToLoginView()
-                    getStartedViewController.showLoadingAnimation()
-                    Macros.dispatch(after: .milliseconds(1000)) {  //TODO: Improve this, we are giving some time to push the view
-                        let token = url.absoluteString[AppConstants.MagicLink.url.count...]
-                        Client.providers.accountProvider.login(with: token) { (user, error) in
-                            var userInfo: [NotificationKey: Any]? = nil
-                            if let error = error {
-                                userInfo = [.error: error]
-                            }
-                            getStartedViewController.hideLoadingAnimation()
-                            Macros.postNotification(.PIAFinishLoginWithMagicLink, userInfo)
-                        }
-                    }
-                }
+            guard let signupCoordinator = RootCoordinator.shared.activeSignupCoordinator else {
+                log.error("Magic link opened with no signup flow on screen")
+                return false
             }
+
+            let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
+            rootViewController?.navigationController?.popToRootViewController(animated: false)
+
+            let token = url.absoluteString[AppConstants.MagicLink.url.count...]
+            signupCoordinator.handleMagicLink(token: token)
 
         } else if url.absoluteString.starts(with: AppConstants.Widget.connect), #unavailable(iOS 17) {
             if Client.providers.vpnProvider.isVPNConnected {

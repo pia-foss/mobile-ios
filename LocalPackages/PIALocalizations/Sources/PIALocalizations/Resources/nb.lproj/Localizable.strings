@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "For å hjelpe oss med å sikre tjenestens tilkoblingsytelse, kan du anonymt dele tilkoblingsstatistikken din med oss. Disse rapportene inkluderer informasjon som ikke er personlig identifiserbar.";
 "signup.share.data.text.footer"= "Du kan kontrollere dette fra innstillingene dine";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Denne minimale informasjonen hjelper oss med å identifisere og løse potensielle tilkoblingsproblemer. Vær oppmerksom på at deling av denne informasjonen krever samtykke og manuell aktivering, ettersom den er slått av som standard.
 
-We will collect information about the following events:
+Vi samler inn informasjon om følgende hendelser:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Tilkoblingsforsøk
+    - Tilkobling avbrutt
+    - Tilkobling opprettet
+    - Tilkoblingstid
+    - Behandling av kjøp i appen
+    - Kjøp i appen fullført
+    - Kjøp i appen mislyktes
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+For alle disse hendelsene samler vi inn følgende informasjon:
+    - Plattform
+    - Appversjon
+    - Apptype (forhåndsversjon eller ikke)
+    - Protokoll som brukes
+    - Tilkoblingskilde (manuelt eller ved hjelp av automatisering)
+    - Tilkoblingstid (tiden mellom tilstanden kobler til og tilkoblet)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Alle hendelser inneholder en unik ID som genereres tilfeldig. Denne ID-en er ikke knyttet til brukerkontoen din. Den unike ID-en genereres på nytt hver dag av personvernhensyn.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+Du har alltid kontrollen. Du kan se hvilke data vi har samlet inn, i innstillingene, og du kan slå det av når som helst.";
 
 "welcome.login.title"= "Logg inn på kontoen din";
 "welcome.login.username.placeholder"= "Brukernavn (p1234567)";

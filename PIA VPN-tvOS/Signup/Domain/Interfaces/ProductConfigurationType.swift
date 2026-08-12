@@ -10,5 +10,6 @@ import Foundation
 import PIALibrary
 
 protocol ProductConfigurationType {
-    func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String)
+    func setPlans(_ plans: [String: Plan])
+    func setDefaultPlanProducts()
 }

@@ -27,10 +27,8 @@ import StoreKit
 /// Business interface related to user account.
 public protocol AccountProvider: AnyObject {
 
-    #if os(iOS) || os(tvOS)
-        /// The in-app products required to purchase a `Plan`.
-        var planProducts: [Plan: any InAppProduct]? { get }
-    #endif
+    /// The in-app products required to purchase a `Plan`.
+    var planProducts: [Plan: any InAppProduct]? { get }
 
     /// Returns `true` if accountInfo is nil and loggedIn true.
     var shouldCleanAccount: Bool { get }
@@ -188,6 +186,12 @@ public protocol AccountProvider: AnyObject {
         /// - Parameter plan: The plan to purchase.
         /// - Returns: `InAppTransaction` for subsequent sign-up.
         func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError>
+
+        /// Purchase a product and save purchase to history.
+        ///
+        /// - Parameter product: The product (StoreKit) to purchase.
+        /// - Returns: Result with `InAppTransaction` for subsequent sign-up.
+        func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
 
         /**
          Check if the user has access to our servers from the country where is based.

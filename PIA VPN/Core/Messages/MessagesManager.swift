@@ -93,6 +93,9 @@ private extension InAppMessage {
 
 extension InAppMessage {
 
+    /// Runs a command that navigates or shows a banner, so main-actor isolated. Only ever called
+    /// from a tap on the messages tile.
+    @MainActor
     func executeAction() {
 
         var command: Command? = nil

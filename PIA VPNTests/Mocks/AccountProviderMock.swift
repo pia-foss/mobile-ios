@@ -74,6 +74,9 @@ import XCTest
         func featureFlags(_ callback: SuccessLibraryCallback?) {}
         func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> { .success([:]) }
         func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> { .failure(.userCancelled) }
+        func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
+            .failure(.userCancelled)
+        }
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
         func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
         func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}

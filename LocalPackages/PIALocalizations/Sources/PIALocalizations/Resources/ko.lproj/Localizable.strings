@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "연결 상태를 저희와 익명으로 공유해 주시면 저희 서비스의 연결 성능을 개선하는 데 도움이 됩니다. 이 보고서에는 개인 식별 정보가 포함되지 않습니다.";
 "signup.share.data.text.footer"= "언제든지 설정에서 이 옵션을 관리할 수 있습니다.";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "이 최소한의 정보는 잠재적인 연결 문제를 파악하고 해결하는 데 도움이 됩니다. 이 정보 공유는 기본적으로 꺼져 있으므로 동의와 수동 활성화가 필요합니다.
 
-We will collect information about the following events:
+저희는 다음 이벤트에 대한 정보를 수집합니다.
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - 연결 시도
+    - 연결 취소
+    - 연결 완료
+    - 연결 소요 시간
+    - 인앱 구매 처리
+    - 인앱 구매 성공
+    - 인앱 구매 실패
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+이러한 모든 이벤트에 대해 다음 정보를 수집합니다.
+    - 플랫폼
+    - 앱 버전
+    - 앱 유형(사전 출시 여부)
+    - 사용된 프로토콜
+    - 연결 소스(수동 또는 자동화 사용)
+    - 연결 소요 시간(연결 중 상태에서 연결됨 상태가 될 때까지 걸린 시간)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+모든 이벤트에는 무작위로 생성된 고유 ID가 포함됩니다. 이 ID는 사용자 계정과 연결되지 않습니다. 이 고유 ID는 개인정보 보호를 위해 매일 다시 생성됩니다.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+언제나 사용자가 제어할 수 있습니다. 저희가 수집한 데이터는 설정에서 확인할 수 있으며, 언제든지 이 기능을 끌 수 있습니다.";
 
 "welcome.login.title"= "계정에 로그인";
 "welcome.login.username.placeholder"= "사용자 이름 (p1234567)";

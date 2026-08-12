@@ -579,25 +579,29 @@
 "signup.share.data.text.description"= "弊社のサービスの接続パフォーマンス確保にご協力いただくには、接続データを匿名で弊社と共有してください。これらのレポートには、個人を特定できる情報は含まれません。";
 "signup.share.data.text.footer"= "これは、設定からいつでもコントロール可能です";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "これらの最小限の情報は、潜在的な接続の問題を特定して修正するのに役立ちます。この情報の共有には同意と手動での有効化が必要です。デフォルトではオフになっています。
 
-We will collect information about the following events:
+弊社は以下のイベントに関する情報を収集します。
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - 接続の試行
+    - 接続のキャンセル
+    - 接続の確立
+    - 接続までの時間
+    - アプリ内購入の処理
+    - アプリ内購入の成功
+    - アプリ内購入の失敗
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+これらすべてのイベントについて、以下の情報を収集します。
+    - プラットフォーム
+    - アプリのバージョン
+    - アプリの種類（プレリリース版かどうか）
+    - 使用されたプロトコル
+    - 接続元（手動または自動化による）
+    - 接続までの時間（接続中の状態から接続済みの状態になるまでの時間）
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+すべてのイベントには、ランダムに生成される一意のIDが含まれます。このIDはお客様のユーザーアカウントとは関連付けられていません。この一意のIDは、プライバシー保護のため毎日再生成されます。
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+コントロールは常にお客様にあります。弊社が収集したデータは設定から確認でき、いつでもオフにできます。";
 
 "welcome.login.title"= "アカウントにサインイン";
 "welcome.login.username.placeholder"= "ユーザー名 (p1234567)";

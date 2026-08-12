@@ -49,6 +49,8 @@ class LinkCommand: Command {
     }
 }
 
+/// Navigates the dashboard, so main-actor isolated.
+@MainActor
 class ViewCommand: Command {
 
     private enum AvailableViews: String {

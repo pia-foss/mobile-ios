@@ -388,11 +388,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 )
             }
 
-            let info = AppStoreInformation(
-                products: products,
-                eligibleForTrial: response.eligibleForTrial
-            )
-            Client.configuration.eligibleForTrial = info.eligibleForTrial
+            let info = AppStoreInformation(products: products)
 
             return info
         } catch {
@@ -405,7 +401,8 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 throw ClientError.unauthorized
             case 600:
                 throw ClientError.libraryError(message: error.localizedDescription)
-            default:
+            case let code:
+                log.warning("Unhandled error code: \(code ?? 0)")
                 throw ClientError.invalidParameter
             }
         }
