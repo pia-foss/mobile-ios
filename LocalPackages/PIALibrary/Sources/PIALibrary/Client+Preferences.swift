@@ -87,6 +87,8 @@ private protocol PreferencesStore: AnyObject {
 
     var versionWhenServiceQualityOpted: String? { get set }
 
+    var hasRespondedToServiceQualityConsent: Bool { get set }
+
     func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
 
     func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
@@ -125,13 +127,14 @@ private extension PreferencesStore {
         wireGuardDnsServers = source.wireGuardDnsServers
         signInWithAppleFakeEmail = source.signInWithAppleFakeEmail
         lastKnownException = source.lastKnownException
-        versionWhenServiceQualityOpted = source.versionWhenServiceQualityOpted
         lastConnectedRegion = source.lastConnectedRegion
 
         // Skipped because they are committed immediately when changed:
         // - showReconnectNotifications
         // - debugLogging
         // - shareServiceQualityData
+        // - versionWhenServiceQualityOpted
+        // - hasRespondedToServiceQualityConsent
     }
 }
 
@@ -570,6 +573,15 @@ extension Client {
             }
         }
 
+        /// Whether `shareServiceQualityData` has ever been explicitly written, either way.
+        /// Unlike `shareServiceQualityData` itself (which collapses an unset value to `false`),
+        /// this distinguishes "never asked" from an explicit accept/reject — needed to migrate
+        /// users who already answered the legacy share-data panel before
+        /// `hasRespondedToServiceQualityConsent` existed.
+        public var hasExplicitShareServiceQualityDataValue: Bool {
+            return accessedDatabase.plain.shareServiceQualityData != nil
+        }
+
         /// Store app version when user opted-in for service quality stats
         public var versionWhenServiceQualityOpted: String? {
             get {
@@ -577,6 +589,17 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.versionWhenServiceQualityOpted = newValue
+            }
+        }
+
+        /// Whether the user has already responded (accept or reject) to the service-quality
+        /// share-data consent prompt, regardless of which way they answered.
+        public fileprivate(set) var hasRespondedToServiceQualityConsent: Bool {
+            get {
+                return accessedDatabase.plain.hasRespondedToServiceQualityConsent ?? false
+            }
+            set {
+                accessedDatabase.plain.hasRespondedToServiceQualityConsent = newValue
             }
         }
 
@@ -640,12 +663,13 @@ extension Client.Preferences {
             wireGuardDnsServers = []
             signInWithAppleFakeEmail = nil
             lastKnownException = nil
-            versionWhenServiceQualityOpted = nil
 
             // Computed properties (immediate commit), not initialized here
             // - showReconnectNotifications
             // - debugLogging
             // - shareServiceQualityData
+            // - versionWhenServiceQualityOpted
+            // - hasRespondedToServiceQualityConsent
         }
 
         /**
@@ -779,8 +803,25 @@ extension Client.Preferences {
             }
         }
 
-        /// :nodoc:
-        public var versionWhenServiceQualityOpted: String?
+        /// :nodoc: Commits immediately when set
+        public var versionWhenServiceQualityOpted: String? {
+            get {
+                return target?.versionWhenServiceQualityOpted
+            }
+            set {
+                target?.versionWhenServiceQualityOpted = newValue
+            }
+        }
+
+        /// :nodoc: Commits immediately when set
+        public var hasRespondedToServiceQualityConsent: Bool {
+            get {
+                return target?.hasRespondedToServiceQualityConsent ?? false
+            }
+            set {
+                target?.hasRespondedToServiceQualityConsent = newValue
+            }
+        }
 
         /// :nodoc:
         public var lastKnownException: String?

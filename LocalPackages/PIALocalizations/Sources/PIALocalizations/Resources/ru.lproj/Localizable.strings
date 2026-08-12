@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "Вы можете анонимно делиться с нами своей статистикой соединения, чтобы помочь нам обеспечить производительность подключения нашей службы. Эти отчеты не включают какую-либо личную информацию.";
 "signup.share.data.text.footer"= "Вы всегда можете управлять этим параметром через настройки";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Эта минимальная информация помогает нам выявлять и устранять возможные проблемы с подключением. Обратите внимание, что для передачи этой информации требуется ваше согласие и включение вручную, так как по умолчанию она отключена.
 
-We will collect information about the following events:
+Мы будем собирать информацию о следующих событиях:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Попытка подключения
+    - Подключение отменено
+    - Подключение установлено
+    - Время подключения
+    - Обработка покупки в приложении
+    - Успешная покупка в приложении
+    - Ошибка покупки в приложении
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+По всем этим событиям мы будем собирать следующую информацию:
+    - Платформа
+    - Версия приложения
+    - Тип приложения (предварительная версия или нет)
+    - Используемый протокол
+    - Источник подключения (вручную или с помощью автоматизации)
+    - Время подключения (время между состоянием «подключение» и состоянием «подключено»)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Все события будут содержать уникальный идентификатор, созданный случайным образом. Этот идентификатор не связан с вашей учетной записью. В целях конфиденциальности он создается заново каждый день.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+Вы всегда сохраняете контроль. Вы можете посмотреть в настройках, какие данные мы собрали, и отключить сбор в любое время.";
 
 "welcome.login.title"= "Войдите в свою учетную запсь";
 "welcome.login.username.placeholder"= "Имя пользователя (p1234567)";

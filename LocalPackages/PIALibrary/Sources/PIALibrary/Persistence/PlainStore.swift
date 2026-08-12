@@ -152,4 +152,6 @@ protocol PlainStore: AnyObject {
 
     var shareServiceQualityData: Bool? { get set }
 
+    var hasRespondedToServiceQualityConsent: Bool? { get set }
+
 }

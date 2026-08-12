@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "เพื่อช่วยให้เรามั่นใจในประสิทธิภาพการเชื่อมต่อของบริการของเรา คุณสามารถแชร์สถิติการเชื่อมต่อของคุณกับเราโดยไม่ระบุชื่อ รายงานเหล่านี้ไม่รวมข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
 "signup.share.data.text.footer"= "คุณสามารถควบคุมสิ่งนี้ได้จากการตั้งค่าของคุณ";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "ข้อมูลขั้นต่ำนี้ช่วยให้เราระบุและแก้ไขปัญหาการเชื่อมต่อที่อาจเกิดขึ้นได้ โปรดทราบว่าการแชร์ข้อมูลนี้ต้องได้รับความยินยอมและต้องเปิดใช้งานด้วยตนเอง เนื่องจากมีการปิดใช้งานไว้ตามค่าเริ่มต้น
 
-We will collect information about the following events:
+เราจะเก็บรวบรวมข้อมูลเกี่ยวกับเหตุการณ์ต่อไปนี้:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - ความพยายามในการเชื่อมต่อ
+    - การยกเลิกการเชื่อมต่อ
+    - การเชื่อมต่อสำเร็จ
+    - เวลาที่ใช้ในการเชื่อมต่อ
+    - การประมวลผลการซื้อในแอป
+    - การซื้อในแอปสำเร็จ
+    - การซื้อในแอปล้มเหลว
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+สำหรับเหตุการณ์ทั้งหมดนี้ เราจะเก็บรวบรวมข้อมูลต่อไปนี้:
+    - แพลตฟอร์ม
+    - เวอร์ชันของแอป
+    - ประเภทของแอป (เวอร์ชันก่อนเปิดตัวหรือไม่)
+    - โปรโตคอลที่ใช้
+    - แหล่งที่มาของการเชื่อมต่อ (ด้วยตนเองหรือใช้ระบบอัตโนมัติ)
+    - เวลาที่ใช้ในการเชื่อมต่อ (เวลาระหว่างสถานะกำลังเชื่อมต่อและสถานะเชื่อมต่อแล้ว)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+เหตุการณ์ทั้งหมดจะมี ID เฉพาะที่สร้างขึ้นแบบสุ่ม ID นี้ไม่ได้เชื่อมโยงกับบัญชีผู้ใช้ของคุณ และจะถูกสร้างขึ้นใหม่ทุกวันเพื่อความเป็นส่วนตัว
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+คุณเป็นผู้ควบคุมเสมอ คุณสามารถดูข้อมูลที่เราเก็บรวบรวมได้จากการตั้งค่า และปิดใช้งานได้ทุกเมื่อ";
 
 "welcome.login.title"= "ลงชื่อเข้าใช้บัญชีของคุณ";
 "welcome.login.username.placeholder"= "ชื่อผู้ใช้ (p1234567)";

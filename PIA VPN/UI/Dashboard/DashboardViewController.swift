@@ -21,6 +21,7 @@
 //
 
 import ActivityKit
+import Combine
 import NetworkExtension
 import PIAAssetsMobile
 import PIADesignSystem
@@ -41,6 +42,10 @@ enum DashboardVPNConnectingStatus: Int {
 }
 
 final class DashboardViewController: AutolayoutViewController {
+
+    /// The modally presented signup flow, retained while it is on screen.
+    private var signupCoordinator: SignupCoordinator?
+    private var signupCancellables = Set<AnyCancellable>()
 
     enum TileSize: CGFloat {
         case standard = 116.0
@@ -438,15 +443,36 @@ final class DashboardViewController: AutolayoutViewController {
             TransientState.didRetryPendingSignup = true
         }
 
-        let config = GetStartedViewController.Config(
+        signupCancellables.removeAll()
+        let coordinator = SignupCoordinator(
             accountProvider: preset.accountProvider,
-            shouldRecoverPendingSignup: preset.shouldRecoverPendingSignup,
+            isDismissable: true
         )
-        let vc = GetStartedViewController.with(config: config, delegate: self)
-        guard let vc else {
-            log.error("Unable to create GetStartedViewController")
-            return
-        }
+        coordinator.output
+            .sink { [weak self] event in
+                guard let self else { return }
+                switch event {
+                case .didAuthenticate(let user, let isSignup, _):
+                    if isSignup, preset.isEphemeral {
+                        Client.providers.accountProvider.currentUser = user
+                    }
+                    // The modal host *pushes* the VPN permission screen, where the root host
+                    // presents it. Keeping that difference is the reason the coordinator reports
+                    // out rather than deciding for itself.
+                    self.dismiss(animated: true) { self.showVPNModal(target: self) }
+                case .didCancel:
+                    self.dismiss(animated: true)
+                }
+            }
+            .store(in: &signupCancellables)
+
+        coordinator.start()
+        // Retained for the lifetime of the presentation: the legacy screens hold their
+        // `completionDelegate` weakly.
+        signupCoordinator = coordinator
+        RootCoordinator.shared.activeSignupCoordinator = coordinator
+
+        let vc = coordinator.rootViewController
         vc.modalPresentationStyle = .fullScreen
 
         if let presented = self.navigationController?.presentedViewController,

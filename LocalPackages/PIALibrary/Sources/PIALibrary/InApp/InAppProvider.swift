@@ -35,6 +35,9 @@ public protocol InAppProvider: AnyObject {
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
 
+    /// The number of free-trial days the account is eligible for. 0 if not.
+    func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int
+
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
     /// The signed JWS representation of the newest active subscription entitlement, or `nil` if none.

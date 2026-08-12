@@ -23,7 +23,9 @@ import Foundation
 import PIAAssetsMobile
 import UIKit
 
-public typealias CTAFunc = () -> Void
+/// A card's call to action. Main-actor isolated: every implementation presents a view controller or
+/// posts a UI notification, and they are only ever invoked from a tap.
+public typealias CTAFunc = @MainActor () -> Void
 
 protocol Collectable {
 

@@ -22,7 +22,7 @@
 
 import Foundation
 
-fileprivate let log = PIALogger.logger(for: Client.Configuration.self)
+private let log = PIALogger.logger(for: Client.Configuration.self)
 
 extension Client {
     /// Encapsulates internal and public parameters of the client. When not specified otherwise, time intervals are in milliseconds.
@@ -143,16 +143,7 @@ extension Client {
         /// The default delay of VPN reconnection attempts.
         public var vpnReconnectionDelay: Int
 
-        #if os(iOS) || os(tvOS)
-
-            // MARK: InApp
-
-            private var inAppPlans: [String: Plan]
-
-            /// Enables background server pinging.
-            public var eligibleForTrial: Bool
-
-        #endif
+        private var inAppPlans: [String: Plan]? = nil
 
         /// The value of the max of servers appearing in the quick connect tile.
         public var maxQuickConnectServers: Int
@@ -224,11 +215,6 @@ extension Client {
             maceHostname = "209.222.18.222"
             macePort = 1111
             maceDelay = 5000
-
-            #if os(iOS) || os(tvOS)
-                inAppPlans = [:]
-                eligibleForTrial = true
-            #endif
 
             maxQuickConnectServers = 6
             tempAccountPassword = ""
@@ -304,28 +290,57 @@ extension Client {
             }
         }
 
-        #if os(iOS) || os(tvOS)
+        // MARK: InApp
 
-            // MARK: InApp
-
-            /**
-             Defines the `Plan` that a product identifier is able to purchase.
-
-             - Parameter plan: The `Plan` to associate with a product.
-             - Parameter productIdentifier: The identifier of the in-app product.
-             */
-            public func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String) {
-                inAppPlans[productIdentifier] = plan
+        /// Defines multiple ``Plan``s for corresponding product identifiers.
+        ///
+        /// If `plans` is empty, the default product identifiers are used instead.
+        public func setPlans(_ plans: [String: Plan]) {
+            if plans.isEmpty {
+                setDefaultPlanProducts()
+            } else {
+                inAppPlans = plans
             }
+        }
 
-            func plan(forProductIdentifier productIdentifier: String) -> Plan? {
-                return inAppPlans[productIdentifier]
+        public func setDefaultPlanProducts() {
+            log.debug("Using fallback product identifiers")
+            setPlans([
+                AppConstants.InApp.yearlyProductIdentifier: .yearly,
+                AppConstants.InApp.monthlyProductIdentifier: .monthly
+            ])
+        }
+
+        func plan(forProductIdentifier productIdentifier: String) -> Plan? {
+            guard let inAppPlans else {
+                log.warning("inAppPlans wasn't loaded yet, returning nil Plan")
+                return nil
             }
+            return inAppPlans[productIdentifier]
+        }
 
-            func allProductIdentifiers() -> Set<String> {
-                return Set(inAppPlans.keys)
+        /// Product identifiers to show, loaded from the backend.
+        ///
+        /// Waits `timeout` milliseconds. If it timeuts, it sets and returns the default
+        /// plan products hardcoded in the app, instead of the backend loades ones.
+        ///
+        /// - Parameter timeout: Time to wait in milliseconds.
+        func allProductIdentifiers(timeout: UInt64) async -> Set<String> {
+            var millisecondsWaited: UInt64 = 0
+            waitForInAppPlans: while inAppPlans == nil {
+                if millisecondsWaited >= timeout {
+                    setDefaultPlanProducts()
+                    break waitForInAppPlans
+                }
+                let wait: UInt64 = 100
+                millisecondsWaited += wait
+                try? await Task.sleep(nanoseconds: wait * 1_000_000)
             }
-
-        #endif
+            guard let inAppPlans else {
+                log.warning("inAppPlans wasn't loaded yet, returning empty set")
+                return []
+            }
+            return Set(inAppPlans.keys)
+        }
     }
 }

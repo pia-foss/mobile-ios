@@ -11,10 +11,12 @@ import PIABase
 import PIALibrary
 import StoreKit
 
-class InAppProviderSpy: InAppProvider {
+final class InAppProviderSpy: InAppProvider {
     var startObservingTransactionsCalledAttempt = 0
     var availableProducts: [any InAppProduct]?
     var entitlementJWS: JWS?
+    var isEligibleForIntroOfferResult = false
+    private(set) var isEligibleForIntroOfferCalledAttempt = 0
 
     func startObservingTransactions() {
         startObservingTransactionsCalledAttempt += 1
@@ -24,6 +26,11 @@ class InAppProviderSpy: InAppProvider {
 
     func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
         return .success([])
+    }
+
+    func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {
+        isEligibleForIntroOfferCalledAttempt += 1
+        return isEligibleForIntroOfferResult ? 7 : 0
     }
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

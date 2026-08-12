@@ -580,25 +580,29 @@
 "signup.share.data.text.description"= "Para nos ajudar a garantir o desempenho da conexão de nosso serviço, você pode compartilhar anonimamente as estatísticas da sua conexão conosco. Esses relatórios não incluem nenhuma informação de identificação pessoal.";
 "signup.share.data.text.footer"= "Você sempre poderá controlar isso em suas configurações";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Essas informações mínimas nos ajudam a identificar e corrigir possíveis problemas de conexão. Observe que o compartilhamento dessas informações exige consentimento e ativação manual, pois está desativado por padrão.
 
-We will collect information about the following events:
+Coletaremos informações sobre os seguintes eventos:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Tentativa de conexão
+    - Conexão cancelada
+    - Conexão estabelecida
+    - Tempo de conexão
+    - Processamento de compra no aplicativo
+    - Compra no aplicativo bem-sucedida
+    - Falha na compra no aplicativo
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+Para todos esses eventos, coletaremos as seguintes informações:
+    - Plataforma
+    - Versão do aplicativo
+    - Tipo de aplicativo (pré-lançamento ou não)
+    - Protocolo usado
+    - Origem da conexão (manual ou por automação)
+    - Tempo de conexão (tempo entre o estado conectando e conectado)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Todos os eventos conterão um ID exclusivo gerado aleatoriamente. Esse ID não está associado à sua conta de usuário. Por motivos de privacidade, esse ID exclusivo é gerado novamente todos os dias.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+Você sempre terá o controle. Você pode ver quais dados coletamos nas configurações e desativar esse recurso a qualquer momento.";
 
 "welcome.login.title"= "Entre na sua conta";
 "welcome.login.username.placeholder"= "Nome de usuário (p1234567)";

@@ -46,21 +46,19 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
     // MARK: AccountProvider
 
-    #if os(iOS) || os(tvOS)
-        public var planProducts: [Plan: any InAppProduct]? {
-            guard let products = accessedStore.availableProducts else {
-                return nil
-            }
-            var map = [Plan: any InAppProduct]()
-            for product in products {
-                guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
-                    continue
-                }
-                map[plan] = product
-            }
-            return map
+    public var planProducts: [Plan: any InAppProduct]? {
+        guard let products = accessedStore.availableProducts else {
+            return nil
         }
-    #endif
+        var map = [Plan: any InAppProduct]()
+        for product in products {
+            guard let plan = accessedConfiguration.plan(forProductIdentifier: product.identifier) else {
+                continue
+            }
+            map[plan] = product
+        }
+        return map
+    }
 
     public var isLoggedIn: Bool {
         guard let username = accessedDatabase.secure.username() else {
@@ -177,11 +175,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
         Task { @MainActor in
             let credentials = Credentials(username: "", password: "")
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .restore)
 
             do {
                 try await webServices.token(receipt: receiptRequest.receipt)
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .restore)
                 self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
             } catch {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .restore, error: error)
                 self.handleLoginResult(error: error, credentials: credentials, callback: callback)
             }
         }
@@ -404,15 +405,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         public func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> {
             log.debug("Fetching available products...")
 
-            if let products = planProducts {
+            if let products = planProducts, !products.isEmpty {
                 log.debug("Available products in cache: \(products)")
                 Macros.postNotification(.__InAppDidFetchProducts, [.products: products])
                 return .success(products)
             }
 
             log.debug("No available products in cache, requesting from store...")
-
-            let identifiers = accessedConfiguration.allProductIdentifiers()
+            let identifiers = await accessedConfiguration.allProductIdentifiers(timeout: 10_000)  // 10s
             switch await accessedStore.fetchProducts(identifiers: identifiers) {
             case .failure(let error):
                 log.error("Unable to fetch products from store: \(error)")
@@ -421,6 +421,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 log.debug("Available products from store: \(products)")
                 if products.isEmpty {
                     log.warning("No products returned from store")
+                    return .failure(.unknown)
                 }
                 let planProducts = self.planProducts
                 if planProducts == nil {
@@ -446,6 +447,10 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return .failure(ClientError.productUnavailable)
             }
 
+            return await purchase(product: product)
+        }
+
+        public func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {
             return await accessedStore.purchase(product: product)
         }
 
@@ -501,9 +506,15 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
             accessedDatabase.plain.lastSignupEmail = request.email
 
+            // A new IAP transaction starts processing (Kape verification path).
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .signup)
+
+            var verificationSucceeded = false
             do {
                 let signupResponse = try await webServices.signup(with: signup)
                 let credentials = signupResponse.buildCredentials()
+                verificationSucceeded = true
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -525,18 +536,25 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             } catch let error as ClientError where error == .badReceipt {
                 // If signup failed with badReceipt (HTTP 400), try login-with-receipt.
                 // This handles returning users (e.g. "Duplicate purchase" from API).
-                await attemptLoginWithReceiptFallback(transaction: request.transaction, callback: callback)
+                // That second attempt on the same transaction is the retry; the fallback
+                // reports its outcome, so no failure event here.
+                ServiceQualityManager.shared.iapProcessingRetryEvent(origin: .signup, error: error, retryCount: 1)
+                await attemptLoginWithReceiptFallback(transaction: request.transaction, retryCount: 1, callback: callback)
             } catch {
-                if let urlError = error as? URLError, (urlError.code == .notConnectedToInternet) {
-                    DispatchQueue.main.async { callback?(nil, ClientError.internetUnreachable) }
-                    return
+                let isOffline = (error as? URLError)?.code == .notConnectedToInternet
+                let reportedError: Error = isOffline ? ClientError.internetUnreachable : error
+
+                // Report a verification failure only if success was not already reported
+                // (later account-setup calls failing is not a verification failure).
+                if !verificationSucceeded {
+                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: reportedError)
                 }
 
-                DispatchQueue.main.async { callback?(nil, error) }
+                DispatchQueue.main.async { callback?(nil, reportedError) }
             }
         }
 
-        private func attemptLoginWithReceiptFallback(transaction: (any InAppTransaction)?, callback: ((UserAccount?, Error?) -> Void)?) async {
+        private func attemptLoginWithReceiptFallback(transaction: (any InAppTransaction)?, retryCount: Int, callback: ((UserAccount?, Error?) -> Void)?) async {
             let jws: JWS?
             if let transaction {
                 jws = transaction.jwsRepresentation
@@ -545,6 +563,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
 
             guard let jws else {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: ClientError.badReceipt, retryCount: retryCount)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
@@ -552,9 +571,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             do {
                 try await webServices.token(receipt: jws)
             } catch {
+                ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .signup, error: error, retryCount: retryCount)
                 DispatchQueue.main.async { callback?(nil, ClientError.badReceipt) }
                 return
             }
+            // Receipt verified via the login-with-receipt fallback.
+            ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .signup, retryCount: retryCount)
 
             if let transaction = transaction {
                 accessedStore.finishTransaction(transaction, success: true)
@@ -643,8 +665,14 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 return
             }
 
+            // A renewal IAP transaction starts processing (Kape verification path).
+            ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .renew)
+
+            var verificationSucceeded = false
             do {
                 try await webServices.processPayment(credentials: user.credentials, request: payment)
+                verificationSucceeded = true
+                ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .renew)
 
                 if let transaction = request.transaction {
                     accessedStore.finishTransaction(transaction, success: true)
@@ -658,6 +686,9 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 Macros.postNotification(.PIAAccountDidRefresh, [.user: user])
                 DispatchQueue.main.async { callback?(user, nil) }
             } catch {
+                if !verificationSucceeded {
+                    ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .renew, error: error)
+                }
                 DispatchQueue.main.async { callback?(nil, error) }
             }
         }

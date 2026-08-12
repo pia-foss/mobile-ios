@@ -11,6 +11,7 @@
 		0E435DA11E748C3900101226 /* PIA VPN Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E67FC221E3F802D00EF9929 /* PIA VPN Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E9785861DA82FF000711A24 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9785851DA82FF000711A24 /* StoreKit.framework */; };
 		0EFB607D203D893E0095398C /* PIA VPN AdBlocker.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EFB6070203D7A2C0095398C /* PIA VPN AdBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1D3C7DDA111CF84A7CD4C4C3 /* PIAConsent in Frameworks */ = {isa = PBXBuildFile; productRef = 52372FB25A33CD5D55DE644A /* PIAConsent */; };
 		2909869018566430002D9687 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2909868F18566430002D9687 /* Security.framework */; };
 		291C6380183EBC210039EC03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C637F183EBC210039EC03 /* Foundation.framework */; };
 		291C6382183EBC210039EC03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C6381183EBC210039EC03 /* CoreGraphics.framework */; };
@@ -31,6 +32,7 @@
 		3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* PIAVPN */; };
+		3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA11002F9A0001007F7092 /* PIAPaywall */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -409,7 +411,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D3C7DDA111CF84A7CD4C4C3 /* PIAConsent in Frameworks */,
 				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
+				3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
 				AA36CDC428A6711300180A33 /* Popover in Frameworks */,
@@ -703,7 +707,9 @@
 				3F89AB662F48461B00AC9CCD /* PIADebugMenu */,
 				093894D7D6B2BF4F8CE18D9C /* PIALocalizations */,
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
+				3FAA11002F9A0001007F7092 /* PIAPaywall */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
+				52372FB25A33CD5D55DE644A /* PIAConsent */,
 			);
 			productName = "PIA VPN";
 			productReference = 291C637C183EBC210039EC03 /* PIA VPN.app */;
@@ -3594,6 +3600,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAUIKit;
 		};
+		52372FB25A33CD5D55DE644A /* PIAConsent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAConsent;
+		};
 		6A66AB9BF1D1DEE0C4CB9FA6 /* PIALocalizations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALocalizations;
@@ -3654,6 +3664,10 @@
 		F20000172FD9000000DA8769 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
+		};
+		3FAA11002F9A0001007F7092 /* PIAPaywall */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAPaywall;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

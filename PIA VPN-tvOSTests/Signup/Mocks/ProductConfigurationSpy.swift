@@ -11,12 +11,21 @@ import PIALibrary
 
 @testable import PIA_VPN_tvOS
 
-class ProductConfigurationSpy: ProductConfigurationType {
+final class ProductConfigurationSpy: ProductConfigurationType {
     var setPlanCalledAttempt = 0
     var capturedProducts = [Plan: String]()
 
-    func setPlan(_ plan: Plan, forProductIdentifier productIdentifier: String) {
-        capturedProducts[plan] = productIdentifier
+    func setPlans(_ plans: [String: Plan]) {
+        for (identifier, plan) in plans {
+            capturedProducts[plan] = identifier
+        }
         setPlanCalledAttempt += 1
+    }
+
+    func setDefaultPlanProducts() {
+        setPlans([
+            AppConstants.InApp.monthlyProductIdentifier: .monthly,
+            AppConstants.InApp.yearlyProductIdentifier: .yearly
+        ])
     }
 }

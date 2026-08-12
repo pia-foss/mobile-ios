@@ -24,15 +24,12 @@ import Foundation
 
 public struct AppStoreInformation: Codable, Sendable {
     public let products: [PIAProduct]
-    public let eligibleForTrial: Bool
 
     enum CodingKeys: String, CodingKey {
         case products = "available_products"
-        case eligibleForTrial = "eligible_for_trial"
     }
 
-    public init(products: [PIAProduct], eligibleForTrial: Bool) {
+    public init(products: [PIAProduct]) {
         self.products = products
-        self.eligibleForTrial = eligibleForTrial
     }
 }

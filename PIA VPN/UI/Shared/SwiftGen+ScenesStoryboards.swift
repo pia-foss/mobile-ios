@@ -45,10 +45,6 @@ internal enum StoryboardScene {
   internal enum Welcome: StoryboardType {
     internal static let storyboardName = "Welcome"
 
-    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
-
-    internal static let getStartedViewController = SceneType<GetStartedViewController>(storyboard: Self.self, identifier: "GetStartedViewController")
-
     internal static let loginViewController = SceneType<LoginViewController>(storyboard: Self.self, identifier: "LoginViewController")
 
     internal static let magicLinkLoginViewController = SceneType<MagicLinkLoginViewController>(storyboard: Self.self, identifier: "MagicLinkLoginViewController")

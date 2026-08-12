@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "Per aiutarci a garantire le prestazioni di connessione del nostro servizio, puoi condividere in modo anonimo le tue statistiche di connessione con noi. Questi rapporti non contengono informazioni d'identificazione personale.";
 "signup.share.data.text.footer"= "Puoi sempre controllare questa funzione dalle tue impostazioni";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Queste informazioni minime ci aiutano a individuare e risolvere eventuali problemi di connessione. Tieni presente che la condivisione di queste informazioni richiede il consenso e l'attivazione manuale, poiché è disattivata per impostazione predefinita.
 
-We will collect information about the following events:
+Raccoglieremo informazioni sui seguenti eventi:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Tentativo di connessione
+    - Connessione annullata
+    - Connessione stabilita
+    - Tempo di connessione
+    - Elaborazione dell'acquisto in-app
+    - Acquisto in-app riuscito
+    - Acquisto in-app non riuscito
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+Per tutti questi eventi, raccoglieremo le seguenti informazioni:
+    - Piattaforma
+    - Versione dell'app
+    - Tipo di app (versione preliminare o meno)
+    - Protocollo utilizzato
+    - Origine della connessione (manuale o tramite automazione)
+    - Tempo di connessione (tempo trascorso tra lo stato di connessione in corso e quello di connessione stabilita)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Tutti gli eventi conterranno un ID univoco generato in modo casuale. Questo ID non è associato al tuo account utente. Per motivi di privacy, l'ID univoco viene rigenerato ogni giorno.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+Avrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto dalle impostazioni e puoi disattivare questa funzione in qualsiasi momento.";
 
 "welcome.login.title"= "Accedi al tuo account";
 "welcome.login.username.placeholder"= "Nome utente (p1234567)";

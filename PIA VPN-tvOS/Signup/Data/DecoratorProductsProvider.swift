@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-class DecoratorProductsProvider: ProductsProviderType {
+final class DecoratorProductsProvider: ProductsProviderType {
     private let subscriptionInformationProvider: SubscriptionInformationProviderType
     private let decoratee: ProductsProviderType
     private let store: InAppProvider
@@ -29,24 +29,21 @@ class DecoratorProductsProvider: ProductsProviderType {
     }
 
     private func setupProducts(completion: @escaping () -> Void) {
-        subscriptionInformationProvider.subscriptionInformation { [weak self] (info, error) in
-            if let _ = error {
-                self?.setDefaultPlanProducts()
+        subscriptionInformationProvider.subscriptionInformation { [weak self] info, error in
+            if error != nil {
+                self?.productConfiguration.setDefaultPlanProducts()
             }
 
-            if let info = info {
+            if let info {
+                var plans: [String: Plan] = [:]
                 for product in info.products where !product.legacy {
-                    self?.productConfiguration.setPlan(product.plan, forProductIdentifier: product.identifier)
+                    plans[product.identifier] = product.plan
                 }
+                self?.productConfiguration.setPlans(plans)
             }
 
             self?.store.startObservingTransactions()
             completion()
         }
-    }
-
-    private func setDefaultPlanProducts() {
-        productConfiguration.setPlan(.yearly, forProductIdentifier: AppConstants.InApp.yearlyProductIdentifier)
-        productConfiguration.setPlan(.monthly, forProductIdentifier: AppConstants.InApp.monthlyProductIdentifier)
     }
 }

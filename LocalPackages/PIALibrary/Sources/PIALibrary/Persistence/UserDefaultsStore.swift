@@ -114,6 +114,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case shareServiceQualityData = "ShareServiceQualityData"
 
+        case hasRespondedToServiceQualityConsent = "HasRespondedToServiceQualityConsent"
+
         case lastKnownException = "LastKnownException"
 
         case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
@@ -706,7 +708,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var debugLogging: Bool? {
         get {
-            return backend.bool(forKey: .debugLogging)
+            return backend.object(forKey: .debugLogging) as? Bool
         }
         set {
             backend.set(newValue, forKey: .debugLogging)
@@ -715,10 +717,19 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var shareServiceQualityData: Bool? {
         get {
-            return backend.bool(forKey: .shareServiceQualityData)
+            return backend.object(forKey: .shareServiceQualityData) as? Bool
         }
         set {
             backend.set(newValue, forKey: .shareServiceQualityData)
+        }
+    }
+
+    var hasRespondedToServiceQualityConsent: Bool? {
+        get {
+            return backend.object(forKey: .hasRespondedToServiceQualityConsent) as? Bool
+        }
+        set {
+            backend.set(newValue, forKey: .hasRespondedToServiceQualityConsent)
         }
     }
 
@@ -842,8 +853,18 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     // MARK: Lifecycle
 
+    private static let entriesPreservedAcrossReset: Set<Entry> = [
+        .hasRespondedToServiceQualityConsent,
+        .shareServiceQualityData,
+        .versionWhenServiceQualityOpted
+    ]
+
     func reset() {
-        for entry in Entry.allCases {
+        // The service-quality consent decision (whether the user was asked, and what they
+        // chose) is device-lifetime state, not account-scoped, so it must survive a
+        // logout/account-clean reset() — otherwise a user who already accepted would be
+        // silently flipped to opted-out with no way to be re-asked.
+        for entry in Entry.allCases where !Self.entriesPreservedAcrossReset.contains(entry) {
             backend.removeObject(forKey: entry)
         }
         backend.synchronize()
