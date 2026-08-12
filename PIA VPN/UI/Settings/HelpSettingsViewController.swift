@@ -29,7 +29,6 @@ private let log = PIALogger.logger(for: HelpSettingsViewController.self)
 
 final class HelpSettingsViewController: PIABaseSettingsViewController {
 
-
     private lazy var switchDebugLogging = UISwitch()
     private lazy var switchShareServiceQualityData = UISwitch()
 
@@ -72,8 +71,7 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController, let pendingPreferences {
-            trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
-            trustedNetworksVC.vpnType = pendingPreferences.vpnType
+            trustedNetworksVC.pendingPreferences = pendingPreferences
         }
     }
 
