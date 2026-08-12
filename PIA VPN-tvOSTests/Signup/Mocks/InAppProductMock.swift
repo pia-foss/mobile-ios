@@ -16,7 +16,6 @@ struct InAppProductMock: InAppProduct {
     let price: Decimal
     let priceLocale: Locale
     let native: Native
-    let hasIntroOffer: Bool = false
     let description: String
 
     init(identifier: String, price: Decimal, priceLocale: Locale, native: Native, description: String) {

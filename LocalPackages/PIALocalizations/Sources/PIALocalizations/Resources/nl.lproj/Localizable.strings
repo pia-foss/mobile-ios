@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "Om ons te helpen de verbindingsprestaties van onze dienst te verbeteren, kunt u uw verbindingsstatistieken anoniem met ons delen. Deze rapporten bevatten geen persoonsgegevens.";
 "signup.share.data.text.footer"= "U kunt dit via de Instellingen beheren";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "Deze minimale informatie helpt ons potentiële verbindingsproblemen te herkennen en op te lossen. Houd er rekening mee dat het delen van deze informatie toestemming en handmatige activering vereist, omdat het standaard is uitgeschakeld.
 
-We will collect information about the following events:
+We verzamelen informatie over de volgende gebeurtenissen:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - Verbindingspoging
+    - Verbinding geannuleerd
+    - Verbinding tot stand gebracht
+    - Verbindingstijd
+    - Verwerking van in-app-aankoop
+    - In-app-aankoop geslaagd
+    - In-app-aankoop mislukt
 
-For all of these events, we will collect the following information:
+Voor al deze gebeurtenissen verzamelen we de volgende informatie:
     - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+    - Appversie
+    - Apptype (voorlopige versie of niet)
+    - Gebruikt protocol
+    - Verbindingsbron (handmatig of via automatisering)
+    - Verbindingstijd (tijd tussen de status verbinding maken en verbonden)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+Alle gebeurtenissen bevatten een unieke ID die willekeurig wordt gegenereerd. Deze ID is niet gekoppeld aan uw gebruikersaccount. Deze unieke ID wordt dagelijks opnieuw gegenereerd omwille van uw privacy.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+U houdt altijd de controle. U kunt in de Instellingen zien welke gegevens we hebben verzameld en u kunt dit op elk moment uitschakelen.";
 
 "welcome.login.title"= "Aanmelden bij uw account";
 "welcome.login.username.placeholder"= "Gebruikersnaam (p1234567)";

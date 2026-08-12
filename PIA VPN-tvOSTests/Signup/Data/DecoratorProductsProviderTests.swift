@@ -44,7 +44,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
     func test_listPlanProducts_adds_nonLegacy_products_to_productConfiguration_when_there_is_valid_appstoreInformation() {
         // GIVEN subscriptionInformationProvider completes with valid AppStoreInformation with legacy products
         let productsStub = PIAProduct.makeStubs()
-        let appStoreInformation = AppStoreInformation(products: productsStub, eligibleForTrial: false)
+        let appStoreInformation = AppStoreInformation(products: productsStub)
         let error: Error? = nil
 
         instantiateSut(
@@ -58,7 +58,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
 
         // THEN productConfigurationSpy captures non legacy products provided by subscriptionInformationProvider
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(fixture.productConfigurationSpy.setPlanCalledAttempt, 2)
+        XCTAssertEqual(fixture.productConfigurationSpy.setPlanCalledAttempt, 1)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts.count, 2)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts[.monthly], productsStub[0].identifier)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts[.yearly], productsStub[1].identifier)
@@ -83,7 +83,7 @@ final class DecoratorProductsProviderTests: XCTestCase {
 
         // THEN productConfigurationSpy captures default products provided
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(fixture.productConfigurationSpy.setPlanCalledAttempt, 2)
+        XCTAssertEqual(fixture.productConfigurationSpy.setPlanCalledAttempt, 1)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts.count, 2)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts[.monthly], AppConstants.InApp.monthlyProductIdentifier)
         XCTAssertEqual(fixture.productConfigurationSpy.capturedProducts[.yearly], AppConstants.InApp.yearlyProductIdentifier)

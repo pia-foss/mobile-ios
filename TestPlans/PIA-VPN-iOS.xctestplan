@@ -21,6 +21,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAConsent",
+        "identifier" : "PIAConsentTests",
+        "name" : "PIAConsentTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
         "identifier" : "0EEE1BE61E4F6EF400397DE2",
         "name" : "PIA VPNTests"
@@ -70,6 +77,13 @@
         "containerPath" : "container:LocalPackages\/PIAUI",
         "identifier" : "PIAUIKitTests",
         "name" : "PIAUIKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAPaywall",
+        "identifier" : "PIAPaywallTests",
+        "name" : "PIAPaywallTests"
       }
     }
   ],

@@ -25,6 +25,9 @@ import XCTest
 
 @testable import PIA_VPN
 
+/// `InAppMessage.executeAction()` is main-actor isolated, because the commands it runs navigate and
+/// show banners.
+@MainActor
 class PIACommandTests: XCTestCase {
 
     private let testOVPNAction = InAppMessage(withMessage: ["en": "This is a message"], id: "1", link: ["en": "message"], type: .action, level: .api, actions: ["ovpn": true], view: nil, uri: nil)

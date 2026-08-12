@@ -23,25 +23,22 @@
 import Foundation
 import StoreKit
 
-struct AppStoreProduct: InAppProduct<Product> {
-    var identifier: String {
+public struct AppStoreProduct: InAppProduct<Product>, Equatable, Hashable {
+    public var identifier: String {
         return native.id
     }
 
-    var price: Decimal {
+    public var price: Decimal {
         return native.price
     }
 
-    var priceLocale: Locale {
+    public var priceLocale: Locale {
         return native.priceFormatStyle.locale
     }
 
-    let native: Native
+    public let native: Native
 
-    let hasIntroOffer: Bool
-
-    init(native: Native, hasIntroOffer: Bool) {
+    public init(native: Native) {
         self.native = native
-        self.hasIntroOffer = hasIntroOffer
     }
 }

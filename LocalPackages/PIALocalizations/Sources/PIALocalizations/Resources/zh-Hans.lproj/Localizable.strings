@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "为了帮助我们保持服务的连接性能，您可以匿名与我们共享您的连接统计数据。这些报告不包括任何可识别个人身份的信息。";
 "signup.share.data.text.footer"= "您始终可以从设置中进行控制";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "这些最少量的信息有助于我们发现并解决潜在的连接问题。请注意，共享这些信息需要您的同意并手动开启，因为该功能默认处于关闭状态。
 
-We will collect information about the following events:
+我们将收集以下事件的相关信息：
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - 连接尝试
+    - 连接已取消
+    - 连接已建立
+    - 连接耗时
+    - 应用内购买处理
+    - 应用内购买成功
+    - 应用内购买失败
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+对于所有这些事件，我们将收集以下信息：
+    - 平台
+    - 应用版本
+    - 应用类型（是否为预发布版本）
+    - 使用的协议
+    - 连接来源（手动或使用自动化）
+    - 连接耗时（从正在连接状态到已连接状态所用的时间）
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+所有事件都将包含一个随机生成的唯一 ID。该 ID 不会与您的用户账户关联。出于隐私保护考虑，该唯一 ID 每天都会重新生成。
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+您始终拥有控制权。您可以在设置中查看我们收集了哪些数据，并可随时将其关闭。";
 
 "welcome.login.title"= "登录到您的帐户";
 "welcome.login.username.placeholder"= "用户名 (p1234567)";

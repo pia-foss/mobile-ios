@@ -566,6 +566,53 @@
 "signup.purchase.restore.empty.title"= "No subscription found";
 "signup.purchase.restore.empty.message"= "There is no active Private Internet Access subscription on your App Store account. Subscribe to create an account.";
 
+// SIGNUP PAYWALL (KM-17721)
+// Every price is formatted at runtime from the StoreKit product and its locale. Never hardcode a
+// currency symbol or an amount in these strings.
+
+"signup.paywall.social_proof"= "%1$@ • %2$@ Ratings";
+
+"signup.paywall.benefit.servers"= "Unrestricted access to worldwide servers";
+"signup.paywall.benefit.speed"= "10-Gbps connection speeds";
+"signup.paywall.benefit.devices"= "Protection on unlimited devices";
+
+"signup.paywall.trial.card.title"= "How your free trial works";
+"signup.paywall.trial.step1.title"= "Today";
+"signup.paywall.trial.step1.description"= "Full access unlocked instantly";
+"signup.paywall.trial.step2.title"= "Day %d";
+"signup.paywall.trial.step2.description"= "Subscription begins, cancel anytime";
+
+"signup.paywall.disclaimer.trial.headline"= "Free for %d days, then %@. Cancel anytime.";
+"signup.paywall.disclaimer.trial.detail"= "You will be charged on the last day of your trial, unless you cancel before your free trial ends.";
+"signup.paywall.disclaimer.monthly.headline"= "%@ per month, billed monthly.";
+"signup.paywall.disclaimer.yearly.headline"= "%@ per year, billed annually.";
+"signup.paywall.disclaimer.renewal.detail"= "Renews automatically unless cancelled at least 24 hours before expiry date.";
+
+"signup.paywall.cta.start_trial"= "Start My %d-day Free Trial";
+"signup.paywall.cta.subscribe"= "Subscribe • %@";
+"signup.paywall.cta.other_plans"= "See Other Plans";
+"signup.paywall.cta.restore"= "Restore Purchases";
+"signup.paywall.cta.login"= "Already have an account?";
+
+"signup.paywall.plans.title"= "Choose your plan";
+"signup.paywall.plans.maybe_later"= "Maybe Later";
+"signup.paywall.plans.price.yearly"= "%@/year";
+"signup.paywall.plans.price.monthly"= "%@/month";
+"signup.paywall.plans.billing.yearly"= "Billed annually";
+"signup.paywall.plans.billing.monthly"= "Billed monthly";
+"signup.paywall.plans.badge.best_value"= "Best Value";
+"signup.paywall.plans.badge.best_value_trial"= "Best Value – %d-day Free Trial";
+
+"signup.paywall.error.products_unavailable"= "We couldn't load the subscription options. Please check your connection and try again.";
+"signup.paywall.error.retry"= "Try again";
+"signup.paywall.error.expired_transaction"= "That subscription has already expired. Please choose a plan to continue.";
+"signup.paywall.error.purchase_failed"= "We couldn't complete your purchase. Please try again.";
+
+"signup.paywall.accessibility.close"= "Close";
+"signup.paywall.accessibility.login_hint"= "Signs in to an existing account";
+"signup.paywall.accessibility.rating"= "Rated %1$@ out of 5 stars from %2$@ ratings";
+"signup.paywall.accessibility.plan_selected"= "Selected";
+
 // WALKTHROUGH
 
 "signup.walkthrough.page.2.title"= "Secure servers in 90+ countries";
@@ -585,6 +632,10 @@ We will collect information about the following events:
     - Connection Attempt
     - Connection Canceled
     - Connection Established
+    - Time to Connect
+    - In-app processing purchase
+    - In-app processing success
+    - In-app processing failure
 
 For all of these events, we will collect the following information:
     - Platform

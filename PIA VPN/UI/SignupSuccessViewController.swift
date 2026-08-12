@@ -21,7 +21,6 @@
 //
 
 import Foundation
-import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
@@ -42,16 +41,6 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
     @IBOutlet private weak var buttonSubmit: PIAButton!
     @IBOutlet private weak var usernameContainer: UIView!
     @IBOutlet private weak var passwordContainer: UIView!
-
-    //Share data
-    @IBOutlet private weak var shareDataContainer: UIView!
-    @IBOutlet private weak var shareDataImageView: UIImageView!
-    @IBOutlet private weak var shareDataTitleLabel: UILabel!
-    @IBOutlet private weak var shareDataDescriptionLabel: UILabel!
-    @IBOutlet private weak var readMoreButton: PIAButton!
-    @IBOutlet private weak var acceptButton: PIAButton!
-    @IBOutlet private weak var cancelButton: PIAButton!
-    @IBOutlet private weak var shareDataFooterLabel: UILabel!
 
     @IBOutlet private weak var constraintPictureXOffset: NSLayoutConstraint!
 
@@ -80,12 +69,6 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
 
         self.styleSubmitButton()
         self.styleContainers()
-
-        shareDataImageView.image = Asset.imageDocumentConsent.image
-        shareDataTitleLabel.text = L10n.Signup.Share.Data.Text.title
-        shareDataDescriptionLabel.text = L10n.Signup.Share.Data.Text.description
-        shareDataFooterLabel.text = L10n.Signup.Share.Data.Text.footer
-        self.styleShareDataButtons()
     }
 
     @IBAction private func submit() {
@@ -96,30 +79,6 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         config.completionDelegate?.welcomeDidSignup(withUser: user, topViewController: self)
     }
 
-    @IBAction private func acceptShareData() {
-        let preferences = Client.preferences.editable()
-        preferences.shareServiceQualityData = true
-        preferences.versionWhenServiceQualityOpted = Macros.versionString()
-        preferences.commit()
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.shareDataContainer.alpha = 0
-            }
-        }
-    }
-
-    @IBAction private func rejectShareData() {
-        let preferences = Client.preferences.editable()
-        preferences.shareServiceQualityData = false
-        preferences.versionWhenServiceQualityOpted = nil
-        preferences.commit()
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.shareDataContainer.alpha = 0
-            }
-        }
-    }
-
     // MARK: Restylable
 
     override public func viewShouldRestyle() {
@@ -128,18 +87,9 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         Theme.current.applyNavigationBarStyle(to: self)
         Theme.current.applyPrincipalBackground(view)
         Theme.current.applyPrincipalBackground(viewContainer!)
-        Theme.current.applyPrincipalBackground(shareDataContainer!)
 
         Theme.current.applyTitle(labelTitle, appearance: .dark)
         Theme.current.applySubtitle(labelMessage)
-
-        Theme.current.applyTitle(shareDataTitleLabel, appearance: .dark)
-        Theme.current.applySubtitle(shareDataDescriptionLabel)
-        Theme.current.applySmallSubtitle(shareDataFooterLabel)
-        Theme.current.applyTransparentButton(
-            cancelButton,
-            withSize: 1.0)
-        Theme.current.applyButtonLabelMediumStyle(acceptButton)
 
         Theme.current.applySubtitle(labelUsernameCaption)
         Theme.current.applyTitle(labelUsername, appearance: .dark)
@@ -153,24 +103,6 @@ final class SignupSuccessViewController: AutolayoutViewController, BrandableNavi
         buttonSubmit.setTitle(
             L10n.Signup.Success.submit.uppercased(),
             for: [])
-    }
-
-    private func styleShareDataButtons() {
-        acceptButton.setRounded()
-        acceptButton.style(style: TextStyle.Buttons.piaGreenButton)
-        acceptButton.setTitle(
-            L10n.Signup.Share.Data.Buttons.accept.uppercased(),
-            for: [])
-        cancelButton.setRounded()
-        cancelButton.style(style: TextStyle.Buttons.piaPlainTextButton)
-        cancelButton.setTitle(
-            L10n.Signup.Share.Data.Buttons.noThanks.uppercased(),
-            for: [])
-        Theme.current.applyTransparentButton(
-            cancelButton,
-            withSize: 1.0)
-        readMoreButton.setTitle(L10n.Signup.Share.Data.Buttons.readMore, for: .normal)
-        Theme.current.applyUnderlinedSubtitleButton(readMoreButton)
     }
 
     private func styleContainers() {

@@ -516,10 +516,10 @@
 "tvos.signup.terms_conditions.qr_code.message" = "امسح رمز QR للاطلاع على سياسة الشروط والأحكام الكاملة على جهازك.";
 
 //Force update (iOS)
-“forceupdate.label.title” = “طوّر تجربتك”;
-“forceupdate.label.subtitle” = “أنت تستخدم إصداراً قديماً من PIA. حدّث تطبيقك الآن للاستمتاع بتجربة محسّنة مع جميع أحدث الميزات.”;
-“forceupdate.button.update” = “حدّث الآن”;
-“forceupdate.label.vpn.connected” = “سيؤدي النقر على \”حدّث الآن\” إلى قطع اتصال VPN.”;
+"forceupdate.label.title" = "طوّر تجربتك";
+"forceupdate.label.subtitle" = "أنت تستخدم إصداراً قديماً من PIA. حدّث تطبيقك الآن للاستمتاع بتجربة محسّنة مع جميع أحدث الميزات.";
+"forceupdate.button.update" = "حدّث الآن";
+"forceupdate.label.vpn.connected" = "سيؤدي النقر على ”حدّث الآن“ إلى قطع اتصال VPN.";
 
 "global.version.format" = "الإصدار %@ (%@)";
 
@@ -578,25 +578,29 @@
 "signup.share.data.text.description"= "لمساعدتنا في ضمان أداء اتصال خدمتنا، يمكنك مشاركة إحصائيات اتصالك معنا دون الكشف عن هويتك. لا تتضمن هذه التقارير أي معلومات محددة للشخصية.";
 "signup.share.data.text.footer"= "يمكنك دائمًا التحكم في ذلك من إعداداتك";
 
-"signup.share.data.readMore.text.description"= "This minimal information assists us in identifying and fixing potential connection issues. Note that sharing this information requires consent and manual activation as it is turned off by default.
+"signup.share.data.readMore.text.description"= "تساعدنا هذه المعلومات البسيطة في تحديد مشكلات الاتصال المحتملة وإصلاحها. يُرجى ملاحظة أن مشاركة هذه المعلومات تتطلب موافقتك وتفعيلها يدويًا لأنها معطلة بشكل افتراضي.
 
-We will collect information about the following events:
+سنجمع معلومات حول الأحداث التالية:
 
-    - Connection Attempt
-    - Connection Canceled
-    - Connection Established
+    - محاولة الاتصال
+    - إلغاء الاتصال
+    - تأسيس الاتصال
+    - وقت الاتصال
+    - معالجة عملية الشراء داخل التطبيق
+    - نجاح عملية الشراء داخل التطبيق
+    - فشل عملية الشراء داخل التطبيق
 
-For all of these events, we will collect the following information:
-    - Platform
-    - App version
-    - App type (pre-release or not)
-    - Protocol used
-    - Connection source (manual or using automation)
-    - Time To Connect (time between connecting and connected state)
+وسنجمع المعلومات التالية لكل هذه الأحداث:
+    - النظام الأساسي
+    - إصدار التطبيق
+    - نوع التطبيق (إصدار أولي أم لا)
+    - البروتوكول المستخدم
+    - مصدر الاتصال (يدوي أو باستخدام الأتمتة)
+    - وقت الاتصال (الوقت بين حالة جارٍ الاتصال وحالة تم الاتصال)
 
-All events will contain a unique ID, which is randomly generated. This ID is not associated with your user account. This unique ID is re-generated daily for privacy purposes.
+ستحتوي جميع الأحداث على معرّف فريد يتم إنشاؤه عشوائيًا. هذا المعرّف غير مرتبط بحساب المستخدم الخاص بك. ويتم إعادة إنشاء هذا المعرّف الفريد يوميًا لأغراض الخصوصية.
 
-You will always be in control. You can see what data we’ve collected from Settings, and you can turn it off at any time.";
+ستظل دائمًا متحكمًا. يمكنك الاطلاع على البيانات التي جمعناها من الإعدادات، ويمكنك إيقاف تشغيلها في أي وقت.";
 
 "welcome.login.title"= "سجل الدخول إلى حسابك";
 "welcome.login.username.placeholder"= "اسم المستخدم (p1234567)";

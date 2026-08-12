@@ -66,11 +66,10 @@ final class PurchasePlanCell: UICollectionViewCell, Restylable {
         log.debug(
             #function,
             metadata: [
-                "isEligibleForIntroOffer": .stringConvertible(plan.product.hasIntroOffer),
-                "eligibleForTrial": .stringConvertible(Client.configuration.eligibleForTrial),
                 "plan": .stringConvertible(plan)
             ])
-        let showFreeTrialLabel = plan.product.hasIntroOffer && Client.configuration.eligibleForTrial
+        // legacy, hardcode to false, is replaced with SwiftUI view
+        let showFreeTrialLabel = false
         labelBestValue.text =
             showFreeTrialLabel
             ? "\(L10n.Welcome.Plan.bestValue.uppercased()) - FREE TRIAL"

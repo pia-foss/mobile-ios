@@ -18,15 +18,15 @@ class PIALoginTests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app.launch()
-        navigateToGetStartedViewController()
+        logOutIfSignedIn()
     }
 
     override func tearDownWithError() throws {
         // when test finishes logout
-        navigateToGetStartedViewController()
+        logOutIfSignedIn()
     }
 
-    private func navigateToGetStartedViewController() {
+    private func logOutIfSignedIn() {
         // check if we have a side menu
         if app.navigationBars.buttons[Accessibility.Id.Dashboard.menu].exists {
             openSideMenuAndTapLogout()
@@ -49,27 +49,17 @@ class PIALoginTests: XCTestCase {
     }
 
     private func navigateToLoginViewController() {
-        var conversionSubviewVisible = false
+        // The signup paywall keeps the historical `id.login.submit` identifier on its Log In button.
+        // The previous `submitNew` fallback referenced an identifier that was never declared, so
+        // this target did not compile.
+        let loginButton = app.buttons[Accessibility.Id.Login.submit]
 
-        // wait for feature flags
-        var submitButtonExists = app.buttons[Accessibility.Id.Login.submit].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-
-        // check if new button should be used
-        if !submitButtonExists {
-            submitButtonExists = app.buttons[Accessibility.Id.Login.submitNew].waitForExistence(timeout: PIALoginTests.timeoutUIOps)
-            conversionSubviewVisible = true
+        guard loginButton.waitForExistence(timeout: PIALoginTests.timeoutUIOps) else {
+            XCTAssert(false, "PIALoginTests:: The Log In button on the signup paywall is not identifiable or has moved")
+            return
         }
 
-        if submitButtonExists {
-            if submitButtonExists && !conversionSubviewVisible {
-                app.buttons[Accessibility.Id.Login.submit].tap()
-            } else {
-                app.buttons[Accessibility.Id.Login.submitNew].tap()
-            }
-
-        } else {
-            XCTAssert(false, "PIALoginTests:: One of the Login buttons on GetStartedViewController is either not identifiable or have been moved")
-        }
+        loginButton.tap()
     }
 
     private func fillLoginScreen(with credentials: Credentials) {

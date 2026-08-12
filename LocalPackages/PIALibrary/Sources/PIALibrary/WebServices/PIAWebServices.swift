@@ -388,11 +388,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 )
             }
 
-            let info = AppStoreInformation(
-                products: products,
-                eligibleForTrial: response.eligibleForTrial
-            )
-            Client.configuration.eligibleForTrial = info.eligibleForTrial
+            let info = AppStoreInformation(products: products)
 
             return info
         } catch {

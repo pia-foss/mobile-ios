@@ -9,16 +9,17 @@
 import XCTest
 
 extension XCUIApplication {
-    var welcomeLoginButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submitNew) }
-    var welcomeLoginButtonOldVersion: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
+    /// The signup paywall's Log In button. It keeps the historical `id.login.submit` identifier so
+    /// this path survived the paywall rewrite.
+    ///
+    /// The previous implementation also looked for a `submitNew` identifier that was never declared
+    /// anywhere, so this file did not compile.
+    var welcomeLoginButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
 
     func navigateToLoginScreen() {
-        if (welcomeLoginButton.waitForElementToAppear()) {
-            welcomeLoginButton.tap()
-        } else if (welcomeLoginButtonOldVersion.waitForElementToAppear()) {
-            welcomeLoginButtonOldVersion.tap()
-        }
-
+        dismissConsentScreenIfPresented()
+        XCTAssertTrue(welcomeLoginButton.waitForElementToAppear())
+        welcomeLoginButton.tap()
         XCTAssertTrue(loginButton.waitForElementToAppear())
     }
 }
