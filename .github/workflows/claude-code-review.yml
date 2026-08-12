@@ -5,56 +5,7 @@ on:
     types: [opened, synchronize, ready_for_review]
 
 jobs:
-  claude-review:
-    if: |
-      !contains(github.event.pull_request.labels.*.name, 'DO NOT REVIEW') &&
-      !github.event.pull_request.draft
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: read
-      id-token: write
-      actions: read
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Full history for proper diff analysis
-
-      - name: Run Claude Code Review
-        id: claude-review
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-
-          # Creates a single tracking comment with progress checkboxes
-          # that updates as the review proceeds.
-          track_progress: true
-
-          # Direct prompt for automated review (no @claude mention needed)
-          prompt: |
-            REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number }}
-
-            Please review this pull request for an iOS and tvOS Swift application and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Memory management and retain cycles
-            - Threading issues (main thread usage, race conditions)
-            - Performance considerations
-            - Security concerns
-            - Test coverage
-            - Which features are impacted and which flows should be tested
-
-            Provide constructive feedback with specific suggestions for improvement.
-            Include CLAUDE.md guidelines in your context for every review.
-
-            Provide detailed feedback using inline comments for specific issues.
-            Use top-level comments for general observations or praise.
-
-          # Tools Claude needs to post the review back to GitHub.
-          claude_args: |
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
+  review:
+    uses: xvpn/kp_reusable_workflows/.github/workflows/claude-code-review.yml@main
+    secrets:
+      anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
