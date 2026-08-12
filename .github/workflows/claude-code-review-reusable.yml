@@ -1,0 +1,244 @@
+name: claude-code-review-reusable
+
+on:
+  workflow_call:
+    inputs:
+      prompt:
+        description: |
+          Replaces the default review philosophy (tone, severity model,
+          rules) with your own. The posting and formatting scaffolding is
+          always applied on top, so a custom prompt does not need to
+          respecify how to read prior comments, post, or format. Most repos
+          should use additional_prompt instead; reach for this only when the
+          default philosophy is wrong for the repo.
+        required: false
+        type: string
+      additional_prompt:
+        description: |
+          Extra instructions appended to the default review prompt, given
+          explicit precedence over the defaults on conflict (so it can widen
+          scope, change tone, or ask for finding types the defaults
+          suppress). Use this for repo-specific rules (threat models,
+          framework conventions, scope-based review). Ignored if prompt is
+          set.
+        required: false
+        type: string
+      claude_args:
+        description: |
+          Additional CLI arguments for Claude (e.g. "--model claude-sonnet-4-6").
+          Note: the workflow always includes default --allowedTools for
+          GitHub interactions (inline comments, PR diff/view/comment).
+          Extra tools passed here are appended to the defaults.
+        required: false
+        type: string
+        default: ""
+      use_sticky_comment:
+        description: |
+          Reuse the same PR comment on subsequent pushes instead of
+          creating new comments.
+        required: false
+        type: boolean
+        default: true
+      show_full_output:
+        description: |
+          Show full Claude output in the workflow logs. Useful for
+          debugging permission denials or prompt issues. Default false.
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      anthropic_api_key:
+        description: Anthropic API key for the Claude CLI
+        required: true
+
+jobs:
+  claude-review:
+    if: |
+      (github.event_name == 'pull_request' &&
+        !contains(github.event.pull_request.labels.*.name, 'DO NOT REVIEW') &&
+        !github.event.pull_request.draft) ||
+      (github.event_name == 'issue_comment' &&
+        contains(github.event.comment.body, '@claude'))
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build claude args
+        id: args
+        env:
+          INPUT_CLAUDE_ARGS: ${{ inputs.claude_args }}
+        run: |
+          DEFAULT_TOOLS="Read,Glob,Grep,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh api:*),Bash(git diff:*),Bash(git log:*),Bash(git show:*),mcp__github_inline_comment__create_inline_comment"
+          if [ -n "$INPUT_CLAUDE_ARGS" ]; then
+            echo "CLAUDE_ARGS=--allowedTools \"${DEFAULT_TOOLS}\" ${INPUT_CLAUDE_ARGS}" >> "$GITHUB_OUTPUT"
+          else
+            echo "CLAUDE_ARGS=--allowedTools \"${DEFAULT_TOOLS}\"" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build review prompt
+        id: prompt
+        env:
+          INPUT_PROMPT: ${{ inputs.prompt }}
+          INPUT_ADDITIONAL: ${{ inputs.additional_prompt }}
+        run: |
+          {
+            echo 'REVIEW_PROMPT<<PROMPT_EOF'
+
+            if [ -n "$INPUT_PROMPT" ]; then
+              # Full override - use as-is
+              echo "$INPUT_PROMPT"
+            else
+              # Default prompt
+              cat <<'DEFAULT'
+          Be direct. No praise. No fluff. Harsh but fair.
+
+          Read the PR title and description to understand intent before
+          looking at the diff. Read the full diff before commenting.
+          If this repo has a CLAUDE.md, treat its conventions as hard
+          requirements.
+
+          ## Severity
+
+          **CRITICAL** (inline comment required) - will break production or lose data:
+          - Secrets, API keys, or credentials in code
+          - SQL injection, command injection, XSS, or other OWASP top 10
+          - Data loss (dropping tables, deleting without backup)
+          - Error handling that swallows failures silently
+          - Race conditions or deadlocks in concurrent code
+
+          **HIGH** (inline comment required) - likely bug or significant risk:
+          - Logic errors (wrong comparison, off-by-one, null dereference)
+          - Missing input validation at system boundaries
+          - IAM policies granting broader access than needed
+          - Unhandled async errors or missing await
+          - Resource leaks (connections, file handles, listeners)
+
+          **MEDIUM** (summary only) - worth noting, does not block merge:
+          - Performance issues (N+1 queries, unnecessary allocations in hot paths)
+          - Missing edge case handling that could cause user-visible errors
+          - Test coverage gaps for new code paths
+
+          **SKIP** - do not comment on these at all:
+          - Code formatting and style (linters handle this)
+          - Variable or function naming preferences
+          - Comment style or missing comments
+          - Import ordering
+          - TODO or FIXME annotations
+          - Suggestions beyond the PR scope
+
+          ## Rules
+
+          - If a pattern looks intentional (noted in the PR description or
+            a deliberate trade-off), do not flag it unless it is CRITICAL.
+          - When in doubt, do not comment. False positives erode trust
+            faster than missed findings.
+          - Do not summarize what the PR does beyond the one-liner in a
+            clean review.
+          - Do not suggest improvements unrelated to correctness or safety.
+          - Do not end with encouragement or sign-off.
+          DEFAULT
+
+              # Append repo-specific instructions if provided. These are
+              # given explicit precedence over the defaults above so a repo
+              # can widen scope, change tone, or ask for finding types the
+              # defaults suppress, without being silently overridden.
+              if [ -n "$INPUT_ADDITIONAL" ]; then
+                echo ""
+                echo "## Repo-specific rules (these OVERRIDE the defaults above on conflict)"
+                echo ""
+                echo "The rules in this section take precedence over everything"
+                echo "above. Where a repo-specific rule conflicts with a default"
+                echo "(scope, tone, severity routing, or what to comment on),"
+                echo "follow the repo-specific rule."
+                echo ""
+                echo "$INPUT_ADDITIONAL"
+              fi
+            fi
+
+            # Posting + formatting scaffolding. Always emitted, for both the
+            # default prompt and a full override, so a custom prompt never
+            # has to respecify how to read prior comments, post, or format.
+            cat <<'SCAFFOLD'
+
+          ## Prior comments
+
+          Before posting any comment, get the PR number and read existing
+          review comments:
+          `PR_NUM=$(gh pr view --json number --jq .number) && gh api "repos/{owner}/{repo}/pulls/$PR_NUM/comments" --jq '.[] | {path, line, body}'`
+
+          Do NOT re-post a finding if an existing comment already covers the
+          same file, line, and issue. The PR author may have resolved or
+          acknowledged it. Re-posting resolved findings wastes everyone's
+          time and erodes trust in the review bot. If you have nothing new
+          to add beyond what was already commented, post only a short
+          summary saying so and skip all inline comments.
+
+          ## Output
+
+          Post your review yourself; nothing else posts it for you. Get the
+          PR number with `gh pr view --json number --jq .number`.
+
+          - Put line-specific findings inline, on the exact line, via the
+            MCP tool (`mcp__github_inline_comment__create_inline_comment`).
+            One finding per comment.
+          - Post one summary comment for anything not tied to a single line,
+            plus the overall verdict, with
+            `gh pr comment <number> --body "<your review>"`.
+          - Always post something. If you found nothing, post a short
+            summary (under 3 lines) saying so and stop. Never finish
+            silently.
+          - If you are blocked by permission errors (tools denied, files
+            unreadable, API calls rejected), post a comment naming what you
+            could not access and that the review is incomplete. A visible
+            incomplete review is better than an invisible one.
+
+          Summary comments: no introductions, no section headers beyond
+          filenames, no sign-off. Group findings by file.
+
+          ## Formatting
+
+          Write every comment in GitHub-flavored Markdown and use its native
+          affordances so findings are scannable and actionable:
+
+          - Lead each finding with a short bold label (its severity or
+            category), e.g. **HIGH** or **bug**.
+          - Open the most serious findings with a `> [!CAUTION]` or
+            `> [!WARNING]` alert so they stand out.
+          - When the fix is an exact one-line or few-line replacement, put
+            it in a ```suggestion block inside the inline comment so the
+            author can commit it in one click. Only do this when the
+            replacement is complete and correct as written.
+          - Use language-tagged code fences (```ts, ```py, ```go) for any
+            other snippet, and wrap file paths, symbols, and identifiers in
+            backticks.
+          - If a comment runs long, collapse the detail inside a
+            `<details><summary>...</summary>` block so the thread stays
+            readable. Do not use raw HTML beyond `<details>`/`<summary>`.
+          SCAFFOLD
+
+            echo 'PROMPT_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run Claude Code Review
+        id: claude-review
+        # Pinned to last known working version. @v1 is a floating tag that
+        # picked up regressions: .claude/skills ENOENT crash, allowedTools
+        # behavior change. Upgrade deliberately after testing.
+        uses: anthropics/claude-code-action@4d7e1f0cd85743fdc93b1c8040ab54395da024e2
+        with:
+          anthropic_api_key: ${{ secrets.anthropic_api_key }}
+          claude_args: ${{ steps.args.outputs.CLAUDE_ARGS }}
+          show_full_output: ${{ inputs.show_full_output }}
+          use_sticky_comment: ${{ inputs.use_sticky_comment }}
+          prompt: ${{ steps.prompt.outputs.REVIEW_PROMPT }}
