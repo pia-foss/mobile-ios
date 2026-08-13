@@ -191,6 +191,46 @@ final class ServersDaemonTests: XCTestCase {
         XCTAssertEqual(invocations, 1)
     }
 
+    /// A download that never calls back must not wedge the loop. The watchdog has to abandon it
+    /// rather than wait for it, so the cadence keeps running.
+    func testHungDownloadDoesNotWedgeTheLoop() async {
+        let sleeps = SleepRecorder(honorRequestedDelay: false)
+        let daemon = ServersDaemon(
+            downloadServers: {
+                // Suspends forever and ignores cancellation, like a provider that drops its callback.
+                await withCheckedContinuation { (_: CheckedContinuation<Void, Never>) in }
+                return (nil, nil)
+            },
+            sleep: { await sleeps.record($0) },
+            downloadTimeout: 50_000_000
+        )
+
+        daemon.enableUpdates()
+        let rescheduled = await waitUntil(timeout: 3) { await sleeps.delays.count >= 1 }
+        await daemon.reset()
+
+        XCTAssertTrue(rescheduled, "the watchdog did not release the loop")
+    }
+
+    func testForceUpdatesReportsTheWatchdogTimeout() async {
+        let daemon = ServersDaemon(
+            downloadServers: {
+                await withCheckedContinuation { (_: CheckedContinuation<Void, Never>) in }
+                return (nil, nil)
+            },
+            sleep: { _ in },
+            downloadTimeout: 50_000_000
+        )
+
+        do {
+            try await daemon.forceUpdates()
+            XCTFail("expected forceUpdates() to throw the watchdog error")
+        } catch {
+            XCTAssertNotNil(error as? ClientError)
+        }
+        await daemon.reset()
+    }
+
     func testResetStopsTheLoop() async {
         let sleeps = SleepRecorder(honorRequestedDelay: false)
         let daemon = ServersDaemon(

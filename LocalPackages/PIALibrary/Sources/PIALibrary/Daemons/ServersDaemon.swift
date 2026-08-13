@@ -55,6 +55,7 @@ internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provi
 
     private let downloadServers: DownloadServers
     private let sleep: Sleep
+    private let downloadTimeout: UInt64
 
     private var hasEnabledUpdates = false
     private var lastUpdateDate: Date?
@@ -69,10 +70,12 @@ internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provi
 
     init(
         downloadServers: DownloadServers? = nil,
-        sleep: Sleep? = nil
+        sleep: Sleep? = nil,
+        downloadTimeout: UInt64? = nil
     ) {
         self.downloadServers = downloadServers ?? Self.downloadFromCurrentProvider
         self.sleep = sleep ?? { try? await Task.sleep(nanoseconds: $0) }
+        self.downloadTimeout = downloadTimeout ?? Constants.downloadTimeout
     }
 
     // MARK: - Daemon
@@ -238,34 +241,32 @@ internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provi
     }
 
     private func downloadWithWatchdog() async -> DownloadResult {
-        await withTaskGroup(of: DownloadResult?.self) { group in
-            group.addTask { [downloadServers] in
-                await downloadServers()
-            }
+        let outcome = DownloadOutcome()
 
-            group.addTask {
-                try? await Task.sleep(nanoseconds: Constants.downloadTimeout)
-                return nil
-            }
-
-            let first = await group.next() ?? nil
-            group.cancelAll()
-
-            guard let first else {
-                log.error("Servers download did not call back within the timeout")
-                return (nil, ClientError.libraryError(message: "Servers download timed out"))
-            }
-            return first
+        let download = Task { [downloadServers] in
+            outcome.resume(with: await downloadServers())
         }
+
+        let watchdog = Task { [downloadTimeout] in
+            try? await Task.sleep(nanoseconds: downloadTimeout)
+            log.error("Servers download did not call back within the timeout")
+            outcome.resume(with: (nil, ClientError.libraryError(message: "Servers download timed out")))
+        }
+
+        let result = await outcome.value()
+
+        download.cancel()
+        watchdog.cancel()
+
+        return result
     }
 
     private static let downloadFromCurrentProvider: DownloadServers = {
-        await withCheckedContinuation { continuation in
-            let once = DownloadContinuation(continuation)
-            Client.providers.serverProvider.download { servers, error in
-                once.resume(with: (servers, error))
-            }
+        let outcome = DownloadOutcome()
+        Client.providers.serverProvider.download { servers, error in
+            outcome.resume(with: (servers, error))
         }
+        return await outcome.value()
     }
 
     // MARK: - Pings
@@ -346,17 +347,41 @@ internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provi
     }
 }
 
-private final class DownloadContinuation: @unchecked Sendable {
-    private var continuation: Mutex<CheckedContinuation<ServersDaemon.DownloadResult, Never>?>
+private final class DownloadOutcome: @unchecked Sendable {
+    private struct State {
+        var continuation: CheckedContinuation<ServersDaemon.DownloadResult, Never>?
+        var pending: ServersDaemon.DownloadResult?
+        var isResolved = false
+    }
 
-    init(_ continuation: CheckedContinuation<ServersDaemon.DownloadResult, Never>) {
-        self.continuation = .init(continuation)
+    private var state = Mutex(State())
+
+    func value() async -> ServersDaemon.DownloadResult {
+        await withCheckedContinuation { continuation in
+            state.withLock { state in
+                guard let pending = state.pending else {
+                    state.continuation = continuation
+                    return
+                }
+                state.pending = nil
+                state.isResolved = true
+                continuation.resume(returning: pending)
+            }
+        }
     }
 
     func resume(with result: ServersDaemon.DownloadResult) {
-        continuation.withLock { continuation in
-            continuation?.resume(returning: result)
-            continuation = nil
+        state.withLock { state in
+            guard !state.isResolved, state.pending == nil else {
+                return
+            }
+            guard let continuation = state.continuation else {
+                state.pending = result
+                return
+            }
+            state.continuation = nil
+            state.isResolved = true
+            continuation.resume(returning: result)
         }
     }
 }
