@@ -37,8 +37,6 @@ final class TrustedNetworksViewController: AutolayoutViewController {
     private var data = [Rule]()
 
     private var hotspotHelper: PIAHotspotHelper!
-    private var persistentConnectionValue: Bool { pendingPreferences?.isPersistentConnection ?? false }
-    private var vpnType: String { pendingPreferences?.vpnType ?? "" }
 
     weak var pendingPreferences: Client.Preferences.Editable?
 
@@ -56,6 +54,8 @@ final class TrustedNetworksViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        assert(pendingPreferences != nil, "pendingPreferences not set in TrustedNetworksViewController")
+
         reloadRulesData()
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
 
@@ -71,12 +71,9 @@ final class TrustedNetworksViewController: AutolayoutViewController {
 
         configureCollectionView()
 
-        if !persistentConnectionValue,
-            Client.preferences.nmtRulesEnabled
-        {
+        if let pendingPreferences, !pendingPreferences.isPersistentConnection, Client.preferences.nmtRulesEnabled {
             presentKillSwitchAlert()
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {

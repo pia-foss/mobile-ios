@@ -69,12 +69,6 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
         self.tableView.reloadData()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController, let pendingPreferences {
-            trustedNetworksVC.pendingPreferences = pendingPreferences
-        }
-    }
-
     @objc private func reloadSettings() {
         tableView.reloadData()
     }
