@@ -23,8 +23,6 @@
 import Foundation
 
 protocol Daemon: AnyObject {
-    var hasEnabledUpdates: Bool { get }
-
     func start()
 
     func enableUpdates()

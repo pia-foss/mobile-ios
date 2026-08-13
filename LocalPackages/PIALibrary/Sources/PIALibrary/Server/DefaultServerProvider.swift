@@ -211,6 +211,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                                 log.error("Get DIPs failed with unauthorized error. Logging out...")
                                 Client.providers.accountProvider.logout(nil)
                                 Macros.postNotification(.PIAUnauthorized)
+                                callback?(self.currentServers, clientError)
                             }
                         } else {
                             DispatchQueue.main.async { [self] in
