@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Uw code is ongeldig. Zorg ervoor dat u de code juist heeft ingevoerd.";
 "dedicated.ip.message.valid.token" = "Uw dedicated IP is geactiveerd. Het is beschikbaar in uw regioselectielijst.";
 "dedicated.ip.message.expired.token" = "Uw code is verlopen. Genereer een nieuwe via uw accountpagina op de website.";
+"dedicated.ip.message.error.alreadyHasOne" = "U kunt slechts één dedicated IP tegelijk hebben";
 "dedicated.ip.message.error.retryafter" = "Teveel mislukte aanvragen voor het activeren van tokens. Probeer het opnieuw na %@ seconde(n).";
 "dedicated.ip.message.token.willexpire" = "Uw dedicated IP verloopt binnenkort. Haal een nieuwe";
 "dedicated.ip.message.token.willexpire.link" = "Haal een nieuwe";
