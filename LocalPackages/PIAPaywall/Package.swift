@@ -20,12 +20,14 @@ let package = Package(
         .package(path: "../PIALibrary"),
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
-        .package(path: "../PIAAssets")
+        .package(path: "../PIAAssets"),
+        .package(url: "git@github.com:pia-foss/apple-core.git", exact: "0.1.0")
     ],
     targets: [
         .target(
             name: "PIAPaywall",
             dependencies: [
+                .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "PIALibrary", package: "PIALibrary"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
@@ -42,7 +44,10 @@ let package = Package(
         ),
         .testTarget(
             name: "PIAPaywallTests",
-            dependencies: ["PIAPaywall"]
+            dependencies: [
+                "PIAPaywall",
+                .product(name: "CoreArchitecture", package: "apple-core")
+            ]
         )
     ]
 )
