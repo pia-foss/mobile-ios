@@ -109,18 +109,20 @@ struct ChoosePlanSheetContent: View {
 
     return ChoosePlanSheetContent(
         store: PaywallStore(
-            initialState: PaywallState(
+            initialState: Paywall.State(
                 phase: .ready,
                 offers: offers,
                 trialOffer: PaywallTrialOffer(days: 7),
                 sheetSelection: .yearly
             ),
-            dependencies: PaywallDependencies(
+            dependencies: Paywall.Dependencies(
                 loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
                 hasExistingEntitlement: { false },
                 purchase: { _ in .failure(.userCancelled) },
                 finishTransaction: { _ in },
-                restore: { .failure(.nothingToRestore) }
+                restore: { .failure(.nothingToRestore) },
+                purchaseIntents: { AsyncStream { $0.finish() } },
+                emit: { _ in }
             )
         )
     )

@@ -1,5 +1,5 @@
 //
-//  PaywallState+Derived.swift
+//  Paywall+Derived.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -32,7 +32,7 @@ public struct PaywallDisclaimer: Equatable {
 
 // Everything here is computed. Nothing derived is ever stored in `PaywallState`, so there is no way
 // for a title and the price it quotes to drift apart.
-public extension PaywallState {
+public extension Paywall.State {
 
     // MARK: Offers
 

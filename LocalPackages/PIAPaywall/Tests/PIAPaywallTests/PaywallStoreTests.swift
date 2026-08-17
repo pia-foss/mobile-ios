@@ -19,214 +19,360 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
+import CoreArchitecture
+import Foundation
 import PIALibrary
-import XCTest
+import Testing
 
 @testable import PIAPaywall
 
 /// Covers the part the reducer cannot: that effects are actually run, in the right order, and that
 /// the non-`Equatable` payloads reach the host intact.
+///
+/// `TestStore` runs the same reducer and the same effect machinery as `PaywallStore`, with one
+/// difference: actions produced by effects are queued rather than applied, and the test decides when
+/// to let each one in. That is what makes an entitlement check followed by a charge assertable in
+/// order rather than raced.
 @MainActor
-final class PaywallStoreTests: XCTestCase {
+struct PaywallStoreTests {
 
-    @MainActor
-    private final class Fixture {
-        let spy = DependencySpy()
-        var cancellables = Set<AnyCancellable>()
-        private(set) var outputs: [PaywallOutput] = []
+    /// A fresh spy per test, because Swift Testing builds a new suite instance for each one.
+    private let spy = DependencySpy()
 
-        func makeStore(state: PaywallState = PaywallState()) -> PaywallStore {
-            let store = PaywallStore(initialState: state, dependencies: spy.makeDependencies())
-            store.output
-                .sink { [weak self] in self?.outputs.append($0) }
-                .store(in: &cancellables)
-            return store
-        }
-
-        /// Lets the store's detached `Task`s run to completion.
-        func settle() async {
-            for _ in 0..<10 {
-                await Task.yield()
-            }
-        }
-    }
-
-    private var fixture: Fixture!
-
-    override func setUp() {
-        super.setUp()
-        fixture = Fixture()
-    }
-
-    override func tearDown() {
-        fixture = nil
-        super.tearDown()
+    private func makeStore(state: Paywall.State = Paywall.State()) -> TestStore<Paywall.State, Paywall.Action> {
+        TestStore(
+            initial: state,
+            reduce: Paywall.Reducer(dependencies: spy.makeDependencies()).reduce
+        )
     }
 
     // MARK: - Loading
 
-    func test_onAppear_THEN_loadsOffersAndBecomesReady() async {
+    @Test("Appearing fetches the catalogue once and becomes ready")
+    func onAppearLoadsOffersAndBecomesReady() async throws {
         // GIVEN a store with both plans available
-        let sut = fixture.makeStore()
+        let sut = makeStore()
 
         // WHEN it appears
         sut.send(.onAppear)
-        await fixture.settle()
 
         // THEN the catalogue is fetched once and the screen is ready
-        XCTAssertEqual(fixture.spy.loadOffersCallCount, 1)
-        XCTAssertEqual(sut.state.phase, .ready)
+        _ = try #require(await sut.receive())
+        #expect(spy.loadOffersCallCount == 1)
+        #expect(sut.state.phase == .ready)
     }
 
-    func test_onAppear_WHEN_offersFail_THEN_phaseIsUnavailable() async {
+    @Test("A catalogue that cannot load leaves the paywall unavailable")
+    func onAppearWithFailingOffersIsUnavailable() async throws {
         // GIVEN a store whose catalogue cannot load
-        fixture.spy.offersResult = .failure(.productsUnavailable)
-        let sut = fixture.makeStore()
+        spy.offersResult = .failure(.productsUnavailable)
+        let sut = makeStore()
 
         // WHEN it appears
         sut.send(.onAppear)
-        await fixture.settle()
 
         // THEN the screen reports it, rather than spinning forever as the old paywall did
-        XCTAssertEqual(sut.state.phase, .productsUnavailable)
+        _ = try #require(await sut.receive())
+        #expect(sut.state.phase == .productsUnavailable)
+    }
+
+    @Test("Retrying picks up a catalogue that has since become available")
+    func retryFetchesTheCatalogueAgain() async throws {
+        // GIVEN a paywall that failed to load
+        spy.offersResult = .failure(.productsUnavailable)
+        let sut = makeStore()
+        sut.send(.onAppear)
+        _ = try #require(await sut.receive())
+
+        // WHEN the customer retries and the catalogue is available this time
+        spy.offersResult = .success(Stub.payload())
+        sut.send(.retryTapped)
+
+        // THEN the second fetch is what the screen renders
+        _ = try #require(await sut.receive())
+        #expect(spy.loadOffersCallCount == 2)
+        #expect(sut.state.phase == .ready)
+    }
+
+    /// The intent stream and the offers load run under separate ids, so re-appearing restarts both
+    /// rather than one cancelling the other.
+    @Test("Re-appearing reloads and resubscribes")
+    func onAppearTwiceReloadsAndResubscribes() async throws {
+        // GIVEN a paywall that has already appeared once
+        let sut = makeStore()
+        sut.send(.onAppear)
+        _ = try #require(await sut.receive())
+
+        // WHEN it appears again
+        sut.send(.onAppear)
+        _ = try #require(await sut.receive())
+
+        // THEN both effects ran again
+        #expect(spy.loadOffersCallCount == 2)
+        #expect(spy.purchaseIntentsCallCount == 2)
     }
 
     // MARK: - Purchase
 
-    func test_purchase_THEN_checksEntitlementBeforeCharging() async {
+    @Test("The entitlement check runs before any charge")
+    func purchaseChecksEntitlementBeforeCharging() async throws {
         // GIVEN a ready store
-        let sut = fixture.makeStore(state: Stub.readyState())
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN a purchase is started
         sut.send(.purchaseTapped(source: .mainScreen))
-        await fixture.settle()
+        _ = try #require(await sut.receive())
 
         // THEN the entitlement check ran first
-        XCTAssertEqual(fixture.spy.callOrder, ["hasExistingEntitlement", "purchase"])
-        XCTAssertEqual(fixture.spy.purchasedPlans, [.plan(.yearly)])
+        #expect(Array(spy.callOrder.prefix(2)) == ["hasExistingEntitlement", "purchase"])
+        #expect(spy.purchasedPlans == [.plan(.yearly)])
     }
 
-    func test_purchase_WHEN_entitlementExists_THEN_neverCharges() async {
+    /// The sheet's call to action buys the sheet's selection, not the plan the main screen sells.
+    @Test("Buying from the sheet charges the sheet's selection")
+    func purchaseFromTheSheetChargesTheSheetSelection() async throws {
+        // GIVEN a sheet showing monthly selected over a yearly default
+        var state = Stub.readyState()
+        state.sheetSelection = .monthly
+        state.isPlanSheetPresented = true
+        let sut = makeStore(state: state)
+
+        // WHEN the sheet's button is tapped
+        sut.send(.purchaseTapped(source: .planSheet))
+        _ = try #require(await sut.receive())
+
+        // THEN monthly is what reaches StoreKit
+        #expect(spy.purchasedPlans == [.plan(.monthly)])
+    }
+
+    @Test("An account that already owns a subscription is never charged")
+    func purchaseWithExistingEntitlementNeverCharges() async {
         // GIVEN an App Store account that already owns a subscription
-        fixture.spy.hasEntitlement = true
-        let sut = fixture.makeStore(state: Stub.readyState())
+        spy.hasEntitlement = true
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN a purchase is started
         sut.send(.purchaseTapped(source: .mainScreen))
-        await fixture.settle()
 
         // THEN no charge is attempted and the customer is offered a restore
-        XCTAssertTrue(fixture.spy.purchasedPlans.isEmpty)
-        XCTAssertEqual(sut.state.alert, .existingEntitlement)
+        #expect(await sut.receive() == .existingEntitlementFound)
+        #expect(spy.purchasedPlans.isEmpty)
+        #expect(sut.state.alert == .existingEntitlement)
     }
 
-    func test_purchase_WHEN_successful_THEN_emitsTheTransaction() async {
+    @Test("The host receives the very transaction the App Store returned")
+    func successfulPurchaseEmitsTheTransaction() async throws {
         // GIVEN a purchase that will succeed
-        let transaction = InAppTransactionStub(identifier: "txn-42")
-        fixture.spy.purchaseResult = .success(transaction)
-        let sut = fixture.makeStore(state: Stub.readyState())
+        spy.purchaseResult = .success(InAppTransactionStub(identifier: "txn-42"))
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN it completes
         sut.send(.purchaseTapped(source: .mainScreen))
-        await fixture.settle()
+        _ = try #require(await sut.receive())
+        await sut.finish()
 
         // THEN the host receives the very transaction the App Store returned
-        guard case .didPurchase(let emitted)? = fixture.outputs.last else {
-            return XCTFail("Expected didPurchase, got \(fixture.outputs)")
-        }
-        XCTAssertEqual(emitted.identifier, "txn-42")
+        let emitted = try #require(spy.purchasedTransactions.last)
+        #expect(emitted.identifier == "txn-42")
     }
 
-    func test_purchase_WHEN_transactionExpired_THEN_finishesItAndEmitsNoPurchase() async {
+    @Test("An expired transaction is finished, warned about, and creates no account")
+    func expiredTransactionIsFinishedAndEmitsNoPurchase() async throws {
         // GIVEN an already-expired transaction
-        fixture.spy.purchaseResult = .success(InAppTransactionStub(identifier: "txn-old", isExpired: true))
-        let sut = fixture.makeStore(state: Stub.readyState())
+        spy.purchaseResult = .success(InAppTransactionStub(identifier: "txn-old", isExpired: true))
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN the purchase completes
         sut.send(.purchaseTapped(source: .mainScreen))
-        await fixture.settle()
+        _ = try #require(await sut.receive())
+        await sut.finish()
 
         // THEN it is finished exactly once so the App Store stops redelivering it
-        XCTAssertEqual(fixture.spy.finishedTransactions, ["txn-old"])
+        #expect(spy.finishedTransactions == ["txn-old"])
 
         // AND no account creation is started
-        XCTAssertFalse(fixture.outputs.contains { if case .didPurchase = $0 { return true } else { return false } })
+        #expect(spy.purchasedTransactions.isEmpty)
 
-        // AND the customer is told why nothing happened
-        XCTAssertTrue(fixture.outputs.contains { if case .showWarning = $0 { return true } else { return false } })
+        // AND the customer is told why nothing happened, only after the transaction was dealt with
+        #expect(spy.emittedWarnings.count == 1)
+        #expect(Array(spy.callOrder.suffix(2)) == ["finishTransaction", "emit"])
     }
 
-    func test_purchase_WHEN_tappedTwice_THEN_onlyChargesOnce() async {
+    @Test("A double tap only charges once")
+    func doubleTapOnlyChargesOnce() async throws {
         // GIVEN a ready store
-        let sut = fixture.makeStore(state: Stub.readyState())
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN the button is tapped twice in a row
         sut.send(.purchaseTapped(source: .mainScreen))
         sut.send(.purchaseTapped(source: .mainScreen))
-        await fixture.settle()
+        _ = try #require(await sut.receive())
 
         // THEN only one purchase reaches StoreKit
-        XCTAssertEqual(fixture.spy.purchasedPlans, [.plan(.yearly)])
+        #expect(spy.purchasedPlans == [.plan(.yearly)])
+        #expect(sut.unconsumedActionCount == 0)
+    }
+
+    @Test("A failed purchase emits the mapped message")
+    func failedPurchaseEmitsTheMappedMessage() async throws {
+        // GIVEN a purchase that fails with a message worth showing
+        spy.purchaseResult = .failure(.failed(message: "Purchase failed"))
+        let sut = makeStore(state: Stub.readyState())
+
+        // WHEN it completes
+        sut.send(.purchaseTapped(source: .mainScreen))
+        _ = try #require(await sut.receive())
+        await sut.finish()
+
+        // THEN the host is asked to raise that message
+        #expect(spy.emittedWarnings == ["Purchase failed"])
+    }
+
+    /// A cancelled App Store sheet is not a failure, so nothing is shown at all.
+    @Test("A cancelled purchase says nothing and returns to idle")
+    func cancelledPurchaseEmitsNothing() async throws {
+        // GIVEN a customer who dismisses the App Store sheet
+        spy.purchaseResult = .failure(.userCancelled)
+        let sut = makeStore(state: Stub.readyState())
+
+        // WHEN the purchase comes back
+        sut.send(.purchaseTapped(source: .mainScreen))
+        _ = try #require(await sut.receive())
+        await sut.finish()
+
+        // THEN the screen simply returns to idle
+        #expect(spy.emittedOutputs.isEmpty)
+        #expect(sut.state.activity == .idle)
     }
 
     // MARK: - Restore
 
-    func test_restore_WHEN_successful_THEN_emitsTheAuthenticatedUser() async {
+    @Test("A successful restore hands the signed-in account to the host")
+    func successfulRestoreEmitsTheAuthenticatedUser() async throws {
         // GIVEN a restorable subscription
-        let sut = fixture.makeStore(state: Stub.readyState())
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN restore runs
         sut.send(.restoreTapped)
-        await fixture.settle()
+        _ = try #require(await sut.receive())
+        await sut.finish()
 
         // THEN the host receives the signed-in account
-        guard case .didAuthenticate(let user)? = fixture.outputs.last else {
-            return XCTFail("Expected didAuthenticate, got \(fixture.outputs)")
-        }
-        XCTAssertEqual(user.credentials.username, "p0000000")
+        let user = try #require(spy.authenticatedUsers.last)
+        #expect(user.credentials.username == "p0000000")
     }
 
-    func test_restore_WHEN_nothingToRestore_THEN_showsTheEmptyAlert() async {
+    @Test("No receipt raises the empty alert")
+    func restoreWithNothingToRestoreShowsTheEmptyAlert() async {
         // GIVEN an App Store account with no receipt
-        fixture.spy.restoreResult = .failure(.nothingToRestore)
-        let sut = fixture.makeStore(state: Stub.readyState())
+        spy.restoreResult = .failure(.nothingToRestore)
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN restore runs
         sut.send(.restoreTapped)
-        await fixture.settle()
 
         // THEN the "no subscription found" alert appears
-        XCTAssertEqual(sut.state.alert, .nothingToRestore)
+        #expect(await sut.receive() == .restoreFailedNothingToRestore)
+        #expect(sut.state.alert == .nothingToRestore)
     }
 
     /// A receipt that exists but cannot be signed in with is a different problem, and the design
     /// gives it different wording.
-    func test_restore_WHEN_loginFails_THEN_showsTheRestoreFailedAlert() async {
+    @Test("A receipt that cannot be signed in with raises the other alert")
+    func restoreWithFailedLoginShowsTheRestoreFailedAlert() async {
         // GIVEN a receipt that cannot be exchanged for an account
-        fixture.spy.restoreResult = .failure(.restoreLoginFailed)
-        let sut = fixture.makeStore(state: Stub.readyState())
+        spy.restoreResult = .failure(.restoreLoginFailed)
+        let sut = makeStore(state: Stub.readyState())
 
         // WHEN restore runs
         sut.send(.restoreTapped)
-        await fixture.settle()
 
         // THEN the other alert appears
-        XCTAssertEqual(sut.state.alert, .restoreFailed)
+        #expect(await sut.receive() == .restoreFailedBadReceipt)
+        #expect(sut.state.alert == .restoreFailed)
+    }
+
+    // MARK: - Navigation outputs
+
+    @Test("Log In asks the host for the login screen")
+    func loginTappedAsksTheHostForLogin() async {
+        // GIVEN an idle paywall
+        let sut = makeStore(state: Stub.readyState())
+
+        // WHEN the login button is tapped
+        sut.send(.loginTapped)
+        await sut.finish()
+
+        // THEN the host is asked to push it, and the paywall decides nothing more
+        #expect(spy.didRequestLogin)
+    }
+
+    @Test("Close reports the dismissal and decides nothing")
+    func closeTappedReportsTheDismissal() async {
+        // GIVEN a modally presented paywall
+        var state = Stub.readyState()
+        state.isDismissable = true
+        let sut = makeStore(state: state)
+
+        // WHEN the close button is tapped
+        sut.send(.closeTapped)
+        await sut.finish()
+
+        // THEN the host is told, and decides what dismissing means
+        #expect(spy.didCancel)
     }
 
     // MARK: - Lifecycle
 
-    func test_cancelAll_THEN_inFlightWorkStopsReportingBack() async {
+    /// Uses the real `PaywallStore` rather than `TestStore`: the claim is about the store the app
+    /// actually runs, including that its `@Published` state reaches a view.
+    @Test("The real store publishes state and runs its effects")
+    func theRealStorePublishesStateAndRunsItsEffects() async {
+        // GIVEN the store the app builds
+        let sut = PaywallStore(dependencies: spy.makeDependencies())
+
+        // WHEN the paywall appears
+        sut.send(.onAppear)
+
+        // THEN the offers arrived through the effect and are visible on `state`
+        await waitUntil { sut.state.phase == .ready }
+        #expect(spy.loadOffersCallCount == 1)
+    }
+
+    /// `Effect.task` hands its action to the sink without checking cancellation, so this is what
+    /// `Effect.cancellableTask` exists for: the work still runs, but its action is dropped.
+    @Test("Work cancelled mid-flight stops reporting back")
+    func cancelAllEffectsStopsInFlightWorkReportingBack() async {
         // GIVEN a store with a purchase in flight
-        let sut = fixture.makeStore(state: Stub.readyState())
+        let sut = PaywallStore(initialState: Stub.readyState(), dependencies: spy.makeDependencies())
         sut.send(.purchaseTapped(source: .mainScreen))
 
-        // WHEN the paywall disappears before it completes
-        sut.cancelAll()
-        await fixture.settle()
+        // WHEN the paywall is torn down before it completes
+        sut.cancelAllEffects()
+
+        // AND the cancelled work runs to completion anyway
+        await waitUntil { self.spy.purchasedPlans.isEmpty == false }
 
         // THEN nothing is emitted to a host that is no longer listening
-        XCTAssertTrue(fixture.outputs.isEmpty)
+        #expect(spy.emittedOutputs.isEmpty)
+    }
+
+    // MARK: - Helpers
+
+    /// Waits for the store's effect tasks to drive `condition` true.
+    ///
+    /// A deadline rather than a fixed number of yields: tests run in parallel, so how many main-actor
+    /// hops an effect needs is not something a test can count on.
+    private func waitUntil(
+        within seconds: TimeInterval = 2,
+        sourceLocation: SourceLocation = #_sourceLocation,
+        _ condition: () -> Bool
+    ) async {
+        let deadline = Date().addingTimeInterval(seconds)
+        while Date() < deadline {
+            if condition() { return }
+            await Task.yield()
+        }
+        Issue.record("Condition was not met within \(seconds)s", sourceLocation: sourceLocation)
     }
 }

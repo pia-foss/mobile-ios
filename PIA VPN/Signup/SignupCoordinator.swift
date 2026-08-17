@@ -31,7 +31,7 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// Runs the logged-out signup flow: the paywall, and everything reachable from it.
 ///
 /// The paywall itself knows nothing about navigation — it reports what happened through
-/// `PaywallOutput` and this coordinator decides what that means. The downstream screens are still
+/// `Paywall.Output` and this coordinator decides what that means. The downstream screens are still
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
@@ -51,8 +51,6 @@ final class SignupCoordinator: NSObject, Coordinator {
     private let isDismissable: Bool
 
     private let subject = PassthroughSubject<Output, Never>()
-    private var cancellables = Set<AnyCancellable>()
-    private var store: PaywallStore?
 
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
@@ -74,18 +72,18 @@ final class SignupCoordinator: NSObject, Coordinator {
     // MARK: Coordinator
 
     func start() {
-        let store = PaywallStore(
-            initialState: PaywallState(isDismissable: isDismissable),
-            dependencies: .live(accountProvider: accountProvider, store: Client.store)
-        )
-        self.store = store
-
-        store.output
-            .sink { [weak self] output in self?.handle(output) }
-            .store(in: &cancellables)
-
         let host = SignupPaywallHostingController(
-            rootView: SignupPaywallView(store: store, legal: legalLinks)
+            rootView: SignupPaywallView(
+                initialState: Paywall.State(isDismissable: isDismissable),
+                dependencies: .live(
+                    accountProvider: accountProvider,
+                    store: Client.store,
+                    emit: { [weak self] output in
+                        self?.handle(output)
+                    }
+                ),
+                legal: legalLinks
+            )
         )
         host.paywallDelegate = self
 
@@ -123,7 +121,7 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     // MARK: Paywall output
 
-    private func handle(_ output: PaywallOutput) {
+    private func handle(_ output: Paywall.Output) {
         switch output {
         case .requestLogin:
             showLogin()
