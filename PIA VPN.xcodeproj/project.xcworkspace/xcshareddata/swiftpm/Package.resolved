@@ -3,7 +3,7 @@
     {
       "identity" : "apple-core",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pia-foss/apple-core.git",
+      "location" : "https://github.com/pia-foss/apple-core.git",
       "state" : {
         "revision" : "e0c0c37eaf8afa1f133b123bbcaad06dde2cf1ff",
         "version" : "0.1.0"
