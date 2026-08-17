@@ -67,6 +67,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         #endif
 
         setupDebugMenuObserver()
+        observeVPNStatusForShortcutItems(in: application)
 
         if let window {
             RootCoordinator.shared.install(in: window)
@@ -266,6 +267,21 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         }
     }
 
+    private func observeVPNStatusForShortcutItems(in application: UIApplication) {
+        // call first on app open
+        refreshShortcutItems(in: application)
+        // observe vpn status change
+        NotificationCenter.default
+            .publisher(for: .PIADaemonsDidUpdateVPNStatus)
+            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global(qos: .background))
+            .sink { [weak self] _ in
+                let status = Client.providers.vpnProvider.vpnStatus
+                guard status == .connected || status == .disconnected else { return }
+                self?.refreshShortcutItems(in: application)
+            }
+            .store(in: &cancellables)
+    }
+
     private func refreshShortcutItems(in application: UIApplication) {
         guard Client.providers.accountProvider.isLoggedIn else {
             return
@@ -304,7 +320,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         )
         items.append(selectRegion)
 
-        application.shortcutItems = items
+        DispatchQueue.main.async { [weak application] in
+            application?.shortcutItems = items
+        }
     }
 
     private func handleShortcutItem(_ item: UIApplicationShortcutItem) {
