@@ -28,7 +28,7 @@ import PIALocalizations
 import PIAUIKit
 import UIKit
 
-class FavoriteServersTile: UIView, Tileable {
+final class FavoriteServersTile: UIView, Tileable {
 
     weak var delegate: ServerSelectionDelegate?
 
@@ -63,6 +63,7 @@ class FavoriteServersTile: UIView, Tileable {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIADaemonsDidPingServers, object: nil)
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIAServerHasBeenUpdated, object: nil)
 
         self.accessibilityIdentifier = "FavoriteServersTile"
@@ -98,9 +99,14 @@ class FavoriteServersTile: UIView, Tileable {
 
         var favServers: [Server] = []
         let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
+        let showGeo = AppPreferences.shared.showGeoServers
 
         for identifier in favoriteServers.reversed() {
-            let servers = currentServers.filter({ $0.identifier + ($0.dipToken ?? "") == identifier })
+            let servers = currentServers
+                // filter servers (including DIPs) by favorite identifier
+                .filter { $0.identifier + ($0.dipToken ?? "") == identifier }
+                // then, include geolocated servers only if `showGeo` is on
+                .filter { $0.geo ? showGeo : true }
             favServers.append(contentsOf: servers)
         }
 

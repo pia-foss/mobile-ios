@@ -69,7 +69,6 @@ final class GeneralSettingsViewController: PIABaseSettingsViewController {
 
     @objc private func toggleGEOServers(_ sender: UISwitch) {
         AppPreferences.shared.showGeoServers = sender.isOn
-        tableView.reloadData()
         NotificationCenter.default.post(
             name: .PIADaemonsDidPingServers,
             object: self,
