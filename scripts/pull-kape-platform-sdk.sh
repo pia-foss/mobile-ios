@@ -77,6 +77,7 @@ fi
 [ -n "$TOKEN" ] || die "no Cloudsmith token: set CLOUDSMITH_TOKEN / CLOUDSMITH_API_KEY, or create $REPO_ROOT/.cloudsmith"
 
 AUTH="Authorization: Bearer $TOKEN"
+CURL_RETRY_OPTS=(--ipv4 --retry 5 --retry-all-errors --connect-timeout 30)
 
 # ── version ───────────────────────────────────────────────────────────────
 VERSION="${KAPE_PLATFORM_SDK_VERSION:-}"
@@ -88,7 +89,7 @@ if [ "$UPDATE_LATEST" = "1" ]; then
   # and the /latest pseudo-version endpoint can point to stale releases.
   CLOUDSMITH_ORG="$(printf '%s' "$REGISTRY" | awk -F/ '{print $(NF-1)}')"
   CLOUDSMITH_REPO="$(printf '%s' "$REGISTRY" | awk -F/ '{print $NF}')"
-  LATEST_VERSION="$(curl -fsSL \
+  LATEST_VERSION="$(curl -fsSL "${CURL_RETRY_OPTS[@]}" \
     -H "Authorization: Token $TOKEN" \
     "https://api.cloudsmith.io/v1/packages/$CLOUDSMITH_ORG/$CLOUDSMITH_REPO/?q=name%3A$NAME&sort=-date&page_size=1" \
     | /usr/bin/python3 -c \
@@ -135,7 +136,7 @@ if [ "$UPDATE_LATEST" = "0" ] && [ "$VERSION" = "$(tr -d ' \t\r\n' < "$VERSION_F
 fi
 if [ -z "$EXPECTED_SHA" ]; then
   echo "==> KapePlatformSDK $VERSION — fetching release metadata"
-  META="$(curl -fsSL -H 'Accept: application/vnd.swift.registry.v1+json' -H "$AUTH" "$BASE")" \
+  META="$(curl -fsSL "${CURL_RETRY_OPTS[@]}" -H 'Accept: application/vnd.swift.registry.v1+json' -H "$AUTH" "$BASE")" \
     || die "could not fetch metadata (check token / version '$VERSION' / network)"
   EXPECTED_SHA="$(printf '%s' "$META" | /usr/bin/python3 -c \
     'import sys,json; d=json.load(sys.stdin); print(next((r.get("checksum","") for r in d.get("resources",[]) if r.get("name")=="source-archive"), ""))' 2>/dev/null || true)"
@@ -156,8 +157,9 @@ if [ -f "$ZIP" ]; then
   echo "==> Using cached archive: $ZIP"
 else
   echo "==> Downloading source archive"
-  curl -fSL --progress-bar -H 'Accept: application/vnd.swift.registry.v1+zip' -H "$AUTH" -o "$ZIP" "$BASE.zip" \
-    || { rm -f "$ZIP"; die "download failed"; }
+  curl -fSL --progress-bar "${CURL_RETRY_OPTS[@]}" --max-time 600 \
+    -H 'Accept: application/vnd.swift.registry.v1+zip' -H "$AUTH" -o "$ZIP" "$BASE.zip" \
+    || { rm -f "$ZIP"; die "download failed after retries — could not reach $REGISTRY (runner network / Cloudsmith availability)"; }
 fi
 
 # ── verify checksum (always — cached archives included) ──────────────────────
