@@ -94,14 +94,23 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         // Adding a [weak self] capture to `completionBlock` breaks the code on Xcode 26.4 / Swift 6.3 (self is captured nil)
         // It does not need the weak reference as the it is only called inside the current function
         let completionBlock = {
-            profile?.prepare()
-
-            #if os(iOS)
-                if let _ = VPNIPAddressFromInterfaces() {
-                    self.accessedDatabase.transient.vpnStatus = .connected
-                }
-            #endif
             self.activeProfile = profile
+
+            if self.accessedDatabase.plain.lastKnownVpnStatus == .connected {
+                self.accessedDatabase.transient.vpnStatus = .connected
+            }
+
+            // The restore might miss a tunnel that on-demand rules brought up while
+            // the app was not running. Reconcile against the real status of the NE
+            // configuration as soon as it is loaded: no NEVPNStatusDidChange is
+            // delivered for a change that happened while the app was not running.
+            profile?.prepare { error in
+                if let error {
+                    log.error("prepare: could not load our own VPN configuration (\(error.localizedDescription)); leaving the restored status untouched")
+                    return
+                }
+                self.reconcileStatusWithOwnConfiguration(of: profile)
+            }
         }
 
         if isLegacyProfile() {
@@ -121,6 +130,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             preferences.commit()
 
             completionBlock()
+            // `completionBlock` restores the status synchronously from the PIA-owned persisted
+            // mirror, so this still means "PIA's own VPN was up when we last saw it".
             force = accessedDatabase.transient.vpnStatus == .connected
 
         } else {
@@ -405,6 +416,31 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     private func isLegacyProfile() -> Bool {
         return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
+    }
+
+    /// Reconciles the status restored at launch (see ``prepare()``) with the real status of the
+    /// active profile's own NetworkExtension configuration.
+    private func reconcileStatusWithOwnConfiguration(of profile: VPNProfile?) {
+        guard let profile, let manager = profile.native as? NEVPNManager else {
+            return
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            guard self.activeProfile === profile else {
+                return
+            }
+
+            let currentStatus = self.accessedDatabase.transient.vpnStatus
+            let nativeStatus = manager.connection.status
+            guard let reconciledStatus = VPNStatus.reconciled(current: currentStatus, nativeStatus: nativeStatus) else {
+                return
+            }
+
+            log.debug("prepare: reconciling restored VPN status \(currentStatus) -> \(reconciledStatus) (own configuration status: \(nativeStatus.rawValue))")
+            self.accessedDatabase.plain.lastKnownVpnStatus = reconciledStatus
+            self.accessedDatabase.transient.vpnStatus = reconciledStatus
+        }
     }
 
     @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
