@@ -118,59 +118,29 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func updateSocketType(socketType: SocketType?) {
-
-        let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
-        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
-        var newProtocols: [EndpointProtocol] = []
-
-        if let socketType = socketType {
-            let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
-            if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
-                newProtocols.append(EndpointProtocol(socketType, currentPort))
-            } else {
-                for port in ports {
-                    newProtocols.append(EndpointProtocol(socketType, port))
-                }
-            }
-        } else {
-            newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-        }
         pendingOpenVPNSocketType = socketType
         pendingPreferences.openVPNSocketType = socketType?.rawValue
-        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
-        savePreferences()
-
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
     func updateRemotePort(port: UInt16) {
+        var endpoints = AppConfiguration.VPN.piaAutomaticProtocols
 
-        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
-
-        var newProtocols: [EndpointProtocol] = []
-        if (port != ProtocolSettingsViewController.AUTOMATIC_PORT) {
-            guard let socketType = pendingOpenVPNSocketType else {
-                log.error("Port cannot be set manually when socket type is automatic. Using automatic protocols.")
-                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-                return
-            }
-            newProtocols.append(EndpointProtocol(socketType, port))
-        } else {
-            if (pendingOpenVPNSocketType == nil) {
-                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-            } else if (pendingOpenVPNSocketType == .udp) {
-                for port in serversCfg.ovpnPorts.udp {
-                    newProtocols.append(EndpointProtocol(.udp, port))
-                }
-            } else if (pendingOpenVPNSocketType == .tcp) {
-                for port in serversCfg.ovpnPorts.tcp {
-                    newProtocols.append(EndpointProtocol(.tcp, port))
+        if let socketType = pendingOpenVPNSocketType {
+            if port != ProtocolSettingsViewController.AUTOMATIC_PORT {
+                endpoints = [EndpointProtocol(socketType, port)]
+            } else {
+                let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
+                let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
+                if !servedPorts.isEmpty {
+                    endpoints = servedPorts.map { EndpointProtocol(socketType, $0) }
                 }
             }
         }
-        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
+
+        pendingOpenVPNConfiguration.endpointProtocols = endpoints
         pendingPreferences.openVPNPort = Int(port)
         savePreferences()
-
     }
 
     func updateDataEncryption(encryption value: String) {
@@ -195,6 +165,11 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     func updateSetting(_ setting: SettingSection, withValue value: Any?) {
 
+        if let protocolSection = setting as? ProtocolsSections, protocolSection == .protocolSelection {
+            resetProtocolSettings()
+            return
+        }
+
         if let networkSection = setting as? NetworkSections {
             switch networkSection {
             case .dns:
@@ -213,6 +188,42 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
         savePreferences()
 
+    }
+
+    // MARK: Protocol settings
+
+    private func validateRemotePort() {
+        let port = UInt16(exactly: pendingPreferences.openVPNPort) ?? 0
+        guard port != ProtocolSettingsViewController.AUTOMATIC_PORT else {
+            return
+        }
+
+        if let socketType = pendingOpenVPNSocketType {
+            let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
+            let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
+            guard !servedPorts.isEmpty, !servedPorts.contains(port) else {
+                return
+            }
+        }
+
+        log.debug("Remote port \(port) is not served over \(pendingOpenVPNSocketType?.rawValue ?? "automatic") — resetting it to automatic")
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
+    }
+
+    private func resetProtocolSettings() {
+        pendingOpenVPNSocketType = nil
+        pendingPreferences.openVPNSocketType = nil
+
+        pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: AppConstants.OpenVPNCrypto.default.rawValue)
+        pendingOpenVPNConfiguration.digest = OpenVPN.Digest(rawValue: AppConstants.OpenVPNCrypto.defaultAuth)
+        pendingPreferences.openVPNCipher = AppConstants.OpenVPNCrypto.default.rawValue
+
+        pendingPreferences.ikeV2EncryptionAlgorithm = .default
+        if let integrity = IKEv2EncryptionAlgorithm.default.integrityAlgorithms().first {
+            pendingPreferences.ikeV2IntegrityAlgorithm = integrity
+        }
+
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
     // MARK: Actions
@@ -445,6 +456,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
 
+        validateRemotePort()
         validateDNSList()
         tableView.reloadData()
     }
