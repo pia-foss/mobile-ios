@@ -307,21 +307,6 @@ struct PaywallStoreTests {
         #expect(spy.didRequestLogin)
     }
 
-    @Test("Close reports the dismissal and decides nothing")
-    func closeTappedReportsTheDismissal() async {
-        // GIVEN a modally presented paywall
-        var state = Stub.readyState()
-        state.isDismissable = true
-        let sut = makeStore(state: state)
-
-        // WHEN the close button is tapped
-        sut.send(.closeTapped)
-        await sut.finish()
-
-        // THEN the host is told, and decides what dismissing means
-        #expect(spy.didCancel)
-    }
-
     // MARK: - Lifecycle
 
     /// Uses the real `PaywallStore` rather than `TestStore`: the claim is about the store the app

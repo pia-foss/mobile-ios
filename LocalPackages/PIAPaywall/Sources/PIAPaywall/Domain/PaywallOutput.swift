@@ -42,9 +42,6 @@ extension Paywall {
         /// The customer wants to sign in to an existing account.
         case requestLogin
 
-        /// The customer dismissed a paywall that was presented modally.
-        case didCancel
-
         /// A transient message to show in the host's banner. Already localized.
         case showWarning(message: String)
     }

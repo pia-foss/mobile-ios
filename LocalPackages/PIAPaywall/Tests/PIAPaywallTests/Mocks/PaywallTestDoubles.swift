@@ -216,8 +216,4 @@ final class DependencySpy: @unchecked Sendable {
     var didRequestLogin: Bool {
         emittedOutputs.contains { if case .requestLogin = $0 { return true } else { return false } }
     }
-
-    var didCancel: Bool {
-        emittedOutputs.contains { if case .didCancel = $0 { return true } else { return false } }
-    }
 }

@@ -103,7 +103,6 @@ extension Paywall {
 
             case .alertDismissed: return dismissAlert(in: &state)
             case .loginTapped: return requestLogin(in: state)
-            case .closeTapped: return requestDismissal()
             }
         }
     }
@@ -279,10 +278,6 @@ extension Paywall.Reducer {
     private func requestLogin(in state: State) -> Effect<Action>? {
         guard state.activity == .idle else { return nil }
         return emit(.requestLogin)
-    }
-
-    private func requestDismissal() -> Effect<Action>? {
-        emit(.didCancel)
     }
 }
 

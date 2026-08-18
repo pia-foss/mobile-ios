@@ -80,10 +80,6 @@ extension Paywall {
         public var alert: AlertKind?
         public var layout: PaywallLayout
 
-        /// `true` when the paywall was presented modally and can be dismissed, or when the wide layout
-        /// shows its corner close button.
-        public var isDismissable: Bool
-
         public init(
             phase: Phase = .loadingProducts,
             activity: Activity = .idle,
@@ -94,7 +90,6 @@ extension Paywall {
             isPlanSheetPresented: Bool = false,
             alert: AlertKind? = nil,
             layout: PaywallLayout = .compact,
-            isDismissable: Bool = false
         ) {
             self.phase = phase
             self.activity = activity
@@ -105,7 +100,6 @@ extension Paywall {
             self.isPlanSheetPresented = isPlanSheetPresented
             self.alert = alert
             self.layout = layout
-            self.isDismissable = isDismissable
         }
     }
 
@@ -174,7 +168,6 @@ extension Paywall {
         case alertRestoreConfirmed
 
         case loginTapped
-        case closeTapped
     }
 
     /// Everything the paywall needs from the outside world, as closures.

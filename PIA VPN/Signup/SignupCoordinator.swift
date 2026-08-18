@@ -42,13 +42,10 @@ final class SignupCoordinator: NSObject, Coordinator {
         /// The customer signed up or signed in. `isSignup` distinguishes the two, because an
         /// ephemeral signup has to have its user written back to the account provider.
         case didAuthenticate(user: UserAccount, isSignup: Bool, topViewController: UIViewController)
-        /// A modally presented paywall was dismissed without authenticating.
-        case didCancel
     }
 
     private let navigationController: UINavigationController
     private let accountProvider: AccountProvider
-    private let isDismissable: Bool
 
     private let subject = PassthroughSubject<Output, Never>()
 
@@ -60,11 +57,9 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     init(
         accountProvider: AccountProvider,
-        isDismissable: Bool,
         navigationController: UINavigationController = UINavigationController()
     ) {
         self.accountProvider = accountProvider
-        self.isDismissable = isDismissable
         self.navigationController = navigationController
         super.init()
     }
@@ -74,7 +69,7 @@ final class SignupCoordinator: NSObject, Coordinator {
     func start() {
         let host = SignupPaywallHostingController(
             rootView: SignupPaywallView(
-                initialState: Paywall.State(isDismissable: isDismissable),
+                initialState: Paywall.State(),
                 dependencies: .live(
                     accountProvider: accountProvider,
                     store: Client.store,
@@ -131,9 +126,6 @@ final class SignupCoordinator: NSObject, Coordinator {
 
         case .didAuthenticate(let user):
             finish(user: user, isSignup: false)
-
-        case .didCancel:
-            subject.send(.didCancel)
 
         case .showWarning(let message):
             // SwiftEntryKit lives in the app target, so the banner is raised here rather than

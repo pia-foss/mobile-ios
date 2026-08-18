@@ -113,12 +113,6 @@ public struct SignupPaywallView: View {
                         .padding(.top, PIASpacing.s40)
                 }
 
-                if store.state.isDismissable {
-                    PaywallCloseButton { store.send(.closeTapped) }
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, PIASpacing.s8)
-                }
-
                 PaywallSheetContainer(
                     isPresented: store.state.isPlanSheetPresented,
                     layout: store.state.layout,
