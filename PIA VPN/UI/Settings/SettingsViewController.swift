@@ -308,14 +308,15 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func commitChanges(_ completionHandler: @escaping () -> Void) {
+        let isResettingToDefaults = isResetting
+        isResetting = false
+
         pendingPreferences.mace = false
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
-        if pendingVPNAction == nil && Client.providers.vpnProvider.isVPNConnected && isResetting {
+        if isResettingToDefaults && pendingVPNAction == nil {
             pendingVPNAction = pendingPreferences.defaultVPNAction()
         }
-
-        isResetting = false
 
         guard let action = pendingVPNAction else {
             commitNMTPreferences()
@@ -348,6 +349,28 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         guard !isDisconnected else {
             commitPreferences()
             completionHandlerAfterVPNAction(false)
+            return
+        }
+
+        if isResettingToDefaults {
+            commitPreferences()
+
+            let alert = Macros.alert(
+                title,
+                L10n.Settings.Commit.Messages.shouldReconnect
+            )
+
+            // reconnect -> reconnect VPN and close
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
+                completionHandlerAfterVPNAction(true)
+            }
+
+            // later -> close
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
+                completionHandler()
+            }
+
+            present(alert, animated: true, completion: nil)
             return
         }
 
