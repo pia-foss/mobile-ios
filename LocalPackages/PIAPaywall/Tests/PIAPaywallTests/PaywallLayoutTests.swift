@@ -20,100 +20,109 @@
 //
 
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import PIAPaywall
 
 /// Layout selection is a pure function of the canvas, so the whole reflow matrix is covered here
 /// without rendering anything.
-final class PaywallLayoutTests: XCTestCase {
+struct PaywallLayoutTests {
 
-    func test_iPhonePortrait_THEN_compact() {
-        // GIVEN an iPhone 17 Pro in portrait
-        let layout = PaywallLayout.resolve(size: CGSize(width: 402, height: 874), horizontalSizeClass: .compact)
+    /// One canvas the layout must resolve, named for the device that produces it.
+    ///
+    /// The matrix is data rather than a test each, so a new device is a new row.
+    struct Canvas: Sendable, CustomTestStringConvertible {
+        let device: String
+        let size: CGSize
+        let horizontalSizeClass: UserInterfaceSizeClass
+        let expected: PaywallLayout
 
-        // THEN the single column layout
-        XCTAssertEqual(layout, .compact)
+        /// Why this row is in the matrix, when that is not obvious from the numbers.
+        let because: String
+
+        var testDescription: String { "\(device) → \(expected)" }
     }
 
-    /// Wider than it is tall, but still a phone. A pure width > height test would wrongly reflow it.
-    func test_iPhoneLandscape_THEN_compact() {
-        // GIVEN an iPhone in landscape
-        let layout = PaywallLayout.resolve(size: CGSize(width: 874, height: 402), horizontalSizeClass: .compact)
+    @Test("Canvas reflow matrix", arguments: PaywallLayoutTests.canvases)
+    func resolvesLayout(for canvas: Canvas) {
+        let layout = PaywallLayout.resolve(
+            size: canvas.size,
+            horizontalSizeClass: canvas.horizontalSizeClass
+        )
 
-        // THEN still the single column layout
-        XCTAssertEqual(layout, .compact)
+        #expect(layout == canvas.expected, "\(canvas.device): \(canvas.because)")
     }
 
-    /// Both iPad orientations are `(.regular, .regular)`, so size class alone cannot separate them.
-    func test_iPadPortrait_THEN_compact() {
-        // GIVEN an 11" iPad in portrait
-        let layout = PaywallLayout.resolve(size: CGSize(width: 834, height: 1194), horizontalSizeClass: .regular)
-
-        // THEN the design keeps the single column
-        XCTAssertEqual(layout, .compact)
-    }
-
-    func test_iPadLandscape_THEN_wide() {
-        // GIVEN an 11" iPad in landscape
-        let layout = PaywallLayout.resolve(size: CGSize(width: 1194, height: 834), horizontalSizeClass: .regular)
-
-        // THEN the reflowed layout
-        XCTAssertEqual(layout, .wide)
-    }
-
-    func test_iPadLargeLandscape_THEN_wide() {
-        // GIVEN a 13" iPad in landscape
-        let layout = PaywallLayout.resolve(size: CGSize(width: 1366, height: 1024), horizontalSizeClass: .regular)
-
-        // THEN the reflowed layout
-        XCTAssertEqual(layout, .wide)
-    }
-
-    /// An 11" split is narrow enough that the system reports `.compact`, so the size class alone
-    /// already rules out the wide layout.
-    func test_iPad11InchHalfSplitView_THEN_compact() {
-        // GIVEN an 11" landscape iPad sharing the screen 1/2
-        let layout = PaywallLayout.resolve(size: CGSize(width: 570, height: 834), horizontalSizeClass: .compact)
-
-        // THEN too narrow for the three-across benefits row
-        XCTAssertEqual(layout, .compact)
-    }
-
-    /// The same split on a 13" iPad is wide enough to stay `.regular`, so only the measured canvas
-    /// keeps it off the wide layout — this is the case a size-class check on its own would get wrong.
-    func test_iPad13InchHalfSplitView_THEN_compact() {
-        // GIVEN a 13" landscape iPad sharing the screen 1/2
-        let layout = PaywallLayout.resolve(size: CGSize(width: 678, height: 1024), horizontalSizeClass: .regular)
-
-        // THEN taller than it is wide, so the single column
-        XCTAssertEqual(layout, .compact)
-    }
-
-    /// A 2/3 split is the widest a shared canvas gets, and it is still taller than it is wide.
-    func test_iPadTwoThirdsSplitView_THEN_compact() {
-        // GIVEN a 13" landscape iPad taking 2/3 of the screen
-        let layout = PaywallLayout.resolve(size: CGSize(width: 904, height: 1024), horizontalSizeClass: .regular)
-
-        // THEN past the 900pt floor, but portrait-shaped, so still the single column
-        XCTAssertEqual(layout, .compact)
-    }
-
-    func test_iPadThirdSplitView_THEN_compact() {
-        // GIVEN a landscape iPad sharing the screen 1/3
-        let layout = PaywallLayout.resolve(size: CGSize(width: 375, height: 834), horizontalSizeClass: .compact)
-
-        // THEN the single column layout
-        XCTAssertEqual(layout, .compact)
-    }
-
-    /// A regular-width canvas that is landscape-shaped but still narrow, e.g. a resized Catalyst
-    /// window. The 900pt floor keeps it on the layout that fits.
-    func test_regularButNarrowLandscape_THEN_compact() {
-        // GIVEN an 880pt wide landscape canvas
-        let layout = PaywallLayout.resolve(size: CGSize(width: 880, height: 700), horizontalSizeClass: .regular)
-
-        // THEN below the floor, so single column
-        XCTAssertEqual(layout, .compact)
-    }
+    static let canvases: [Canvas] = [
+        Canvas(
+            device: "iPhone 17 Pro portrait",
+            size: CGSize(width: 402, height: 874),
+            horizontalSizeClass: .compact,
+            expected: .compact,
+            because: "the single column layout"
+        ),
+        Canvas(
+            device: "iPhone landscape",
+            size: CGSize(width: 874, height: 402),
+            horizontalSizeClass: .compact,
+            expected: .compact,
+            because: "wider than it is tall, but still a phone — a pure width > height test would wrongly reflow it"
+        ),
+        Canvas(
+            device: "11-inch iPad portrait",
+            size: CGSize(width: 834, height: 1194),
+            horizontalSizeClass: .regular,
+            expected: .compact,
+            because: "both iPad orientations are (.regular, .regular), so size class alone cannot separate them"
+        ),
+        Canvas(
+            device: "11-inch iPad landscape",
+            size: CGSize(width: 1194, height: 834),
+            horizontalSizeClass: .regular,
+            expected: .wide,
+            because: "the reflowed layout"
+        ),
+        Canvas(
+            device: "13-inch iPad landscape",
+            size: CGSize(width: 1366, height: 1024),
+            horizontalSizeClass: .regular,
+            expected: .wide,
+            because: "the reflowed layout"
+        ),
+        Canvas(
+            device: "11-inch iPad, 1/2 split",
+            size: CGSize(width: 570, height: 834),
+            horizontalSizeClass: .compact,
+            expected: .compact,
+            because: "narrow enough that the system reports .compact, so the size class already rules out wide"
+        ),
+        Canvas(
+            device: "13-inch iPad, 1/2 split",
+            size: CGSize(width: 678, height: 1024),
+            horizontalSizeClass: .regular,
+            expected: .compact,
+            because: "stays .regular, so only the measured canvas keeps it off wide — a size-class check would get this wrong"
+        ),
+        Canvas(
+            device: "13-inch iPad, 2/3 split",
+            size: CGSize(width: 904, height: 1024),
+            horizontalSizeClass: .regular,
+            expected: .compact,
+            because: "past the 900pt floor, but portrait-shaped, so still the single column"
+        ),
+        Canvas(
+            device: "iPad, 1/3 split",
+            size: CGSize(width: 375, height: 834),
+            horizontalSizeClass: .compact,
+            expected: .compact,
+            because: "the single column layout"
+        ),
+        Canvas(
+            device: "resized Catalyst window",
+            size: CGSize(width: 880, height: 700),
+            horizontalSizeClass: .regular,
+            expected: .compact,
+            because: "regular and landscape-shaped but below the 900pt floor, so the layout that fits"
+        )
+    ]
 }

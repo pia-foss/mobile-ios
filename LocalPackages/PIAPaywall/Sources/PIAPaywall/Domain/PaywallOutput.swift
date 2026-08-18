@@ -21,27 +21,28 @@
 
 import PIALibrary
 
-/// Everything the paywall asks its host to do.
-///
-/// The paywall knows nothing about navigation, storyboards or toast banners — it only reports what
-/// happened. The host (a coordinator in the app target) decides what that means. This is the
-/// "a screen should never know what comes next" rule from ADR 0006.
-///
-/// These travel on their own publisher rather than through `PaywallState`, because `UserAccount` and
-/// `InAppTransaction` are neither `Equatable` nor `Sendable`, and the state has to stay both.
-public enum PaywallOutput {
-    /// A subscription was purchased. The host starts account creation with this transaction.
-    case didPurchase(transaction: any InAppTransaction)
+extension Paywall {
 
-    /// A restore found an existing subscription and signed the customer in.
-    case didAuthenticate(user: UserAccount)
+    /// Everything the paywall asks its host to do.
+    ///
+    /// The paywall knows nothing about navigation, storyboards or toast banners — it only reports what
+    /// happened. The host (a coordinator in the app target) decides what that means. This is the
+    /// "a screen should never know what comes next" rule from ADR 0006.
+    ///
+    /// These leave through `Paywall.Dependencies.emit` rather than through `Paywall.State`, because
+    /// `UserAccount` and `InAppTransaction` are neither `Equatable` nor `Sendable`, and the state has to
+    /// stay both.
+    public enum Output {
+        /// A subscription was purchased. The host starts account creation with this transaction.
+        case didPurchase(transaction: any InAppTransaction)
 
-    /// The customer wants to sign in to an existing account.
-    case requestLogin
+        /// A restore found an existing subscription and signed the customer in.
+        case didAuthenticate(user: UserAccount)
 
-    /// The customer dismissed a paywall that was presented modally.
-    case didCancel
+        /// The customer wants to sign in to an existing account.
+        case requestLogin
 
-    /// A transient message to show in the host's banner. Already localized.
-    case showWarning(message: String)
+        /// A transient message to show in the host's banner. Already localized.
+        case showWarning(message: String)
+    }
 }
