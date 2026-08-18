@@ -427,18 +427,6 @@ struct PaywallReducerTests {
         #expect(effect == nil)
     }
 
-    @Test("Close asks the host to dismiss")
-    func closeTappedAsksTheHostToDismiss() {
-        // GIVEN a dismissable paywall
-        var state = Stub.readyState()
-
-        // WHEN close is tapped
-        let effect = reduce(&state, .closeTapped)
-
-        // THEN the host dismisses it
-        #expect(effect != nil)
-    }
-
     @Test("Dismissing an alert clears it and does nothing else")
     func alertDismissedClearsTheAlert() {
         // GIVEN an alert on screen

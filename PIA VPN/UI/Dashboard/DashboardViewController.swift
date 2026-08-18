@@ -444,10 +444,7 @@ final class DashboardViewController: AutolayoutViewController {
         }
 
         signupCancellables.removeAll()
-        let coordinator = SignupCoordinator(
-            accountProvider: preset.accountProvider,
-            isDismissable: true
-        )
+        let coordinator = SignupCoordinator(accountProvider: preset.accountProvider)
         coordinator.output
             .sink { [weak self] event in
                 guard let self else { return }
@@ -460,8 +457,6 @@ final class DashboardViewController: AutolayoutViewController {
                     // presents it. Keeping that difference is the reason the coordinator reports
                     // out rather than deciding for itself.
                     self.dismiss(animated: true) { self.showVPNModal(target: self) }
-                case .didCancel:
-                    self.dismiss(animated: true)
                 }
             }
             .store(in: &signupCancellables)
