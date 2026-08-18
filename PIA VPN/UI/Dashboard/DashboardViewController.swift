@@ -65,6 +65,8 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private let ratingManager: RatingManagerProtocol = RatingManager.shared
+    private var fixedTileContent: FixedTileContent = .none
+
     private var viewContentHeight: CGFloat = 0
     @IBOutlet weak var viewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContentLandscapeHeightConstraint: NSLayoutConstraint!
@@ -194,7 +196,7 @@ final class DashboardViewController: AutolayoutViewController {
         viewContent.isHidden = false
         viewRows.isHidden = false
 
-        collectionView.reloadData()
+        reloadTiles()
         updateCurrentStatus()
         setupCallingCards()
 
@@ -418,7 +420,7 @@ final class DashboardViewController: AutolayoutViewController {
                 self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
                 self.view.layoutIfNeeded()
             })
-        collectionView.reloadData()
+        reloadTiles()
         setupNavigationBarButtons()
     }
 
@@ -1054,13 +1056,56 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func updateTiles() {
-        collectionView.reloadData()
+        reloadTiles()
     }
 
     @objc private func updateFixedTileWithAnimation() {
-        // Ensure UI updates happen on main queue
-        DispatchQueue.main.async {
-            self.collectionView.reloadSections(IndexSet(integer: 0))
+        DispatchQueue.main.async { [weak self] in
+            self?.applyFixedTileUpdate()
+        }
+    }
+
+    private func applyFixedTileUpdate() {
+        let section = DashboardSections.fixedTiles.rawValue
+        guard isViewLoaded, collectionView.numberOfSections > section else {
+            return
+        }
+
+        let previousCount = collectionView.numberOfItems(inSection: section)
+        refreshFixedTileContent()
+        let newCount = fixedTileContent.itemCount
+        let indexPath = IndexPath(item: 0, section: section)
+
+        switch (previousCount, newCount) {
+        case (0, 1):
+            collectionView.insertItems(at: [indexPath])
+        case (1, 0):
+            collectionView.deleteItems(at: [indexPath])
+        case (1, 1):
+            // Count is unchanged, reload
+            collectionView.reloadItems(at: [indexPath])
+        default:
+            break
+        }
+    }
+
+    private func reloadTiles() {
+        refreshFixedTileContent()
+        collectionView.reloadData()
+    }
+
+    private func refreshFixedTileContent() {
+        guard Client.providers.accountProvider.isLoggedIn, tileModeStatus == .normal else {
+            fixedTileContent = .none
+            return
+        }
+
+        if MessagesManager.shared.availableMessage() != nil {
+            fixedTileContent = .messages
+        } else if ratingManager.shouldShowFeedbackTile() {
+            fixedTileContent = .feedback
+        } else {
+            fixedTileContent = .none
         }
     }
 
@@ -1285,7 +1330,7 @@ final class DashboardViewController: AutolayoutViewController {
         Theme.current.applyPrincipalBackground(collectionView)
 
         collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.reloadData()
+        reloadTiles()
     }
 }
 
@@ -1399,11 +1444,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         var identifier = FixedCells(rawValue: tileIndex)!.identifier
 
         if indexPath.section == DashboardSections.fixedTiles.rawValue {
-            if MessagesManager.shared.availableMessage() != nil {
-                identifier = FixedCells.messages.identifier
-            } else if ratingManager.shouldShowFeedbackTile() {
-                identifier = FixedCells.feedback.identifier
-            }
+            identifier = fixedTileContent.cellIdentifier ?? identifier
         } else if indexPath.section == DashboardSections.tiles.rawValue {
             tileIndex = tileModeStatus == .normal ? Client.providers.tileProvider.visibleTiles[indexPath.row].rawValue : Client.providers.tileProvider.orderedTiles[indexPath.row].rawValue
             identifier = Cells(rawValue: tileIndex)!.identifier
@@ -1430,10 +1471,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             return 0
         }
         if section == DashboardSections.fixedTiles.rawValue {
-            let hasAvailableMessage = MessagesManager.shared.availableMessage() != nil
-            let shouldShowFeedbackCard = ratingManager.shouldShowFeedbackTile()
-            let hasFixedTile = hasAvailableMessage || shouldShowFeedbackCard
-            return tileModeStatus == .normal && hasFixedTile ? 1 : 0
+            return fixedTileContent.itemCount
         } else {
             return tileModeStatus == .normal ? Client.providers.tileProvider.visibleTiles.count : Client.providers.tileProvider.orderedTiles.count
         }
@@ -1491,7 +1529,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             let tile = orderedTiles.remove(at: sourceIndexPath.row)
             orderedTiles.insert(tile, at: destinationIndexPath.row)
             Client.providers.tileProvider.orderedTiles = orderedTiles
-            collectionView.reloadData()
+            reloadTiles()
         }
     }
 }

@@ -49,6 +49,26 @@ enum FixedCells: Int {
 
 }
 
+enum FixedTileContent {
+
+    case none
+    case messages
+    case feedback
+
+    var itemCount: Int {
+        self == .none ? 0 : 1
+    }
+
+    var cellIdentifier: String? {
+        switch self {
+        case .none: nil
+        case .messages: FixedCells.messages.identifier
+        case .feedback: FixedCells.feedback.identifier
+        }
+    }
+
+}
+
 enum Cells: Int, CaseIterable {
 
     case region = 0
