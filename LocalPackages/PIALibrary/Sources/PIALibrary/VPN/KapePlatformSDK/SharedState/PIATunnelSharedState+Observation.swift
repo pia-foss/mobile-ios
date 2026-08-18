@@ -21,39 +21,29 @@
 
 import Foundation
 
-/// Cross-process change observation for the shared-state file.
+/// Cross-process change observation for the shared state.
 ///
-/// The app and the tunnel extension are separate processes, so ordinary `NotificationCenter` / KVO
-/// can't signal between them. A **Darwin notification** (device-global, delivered across the process
-/// boundary via Mach) is used instead — the mechanism Apple's app-group IPC is built on and the same
-/// one PIA uses for its other app↔extension signalling. It carries no payload: the shared file is the
-/// single source of truth, so observers simply re-`read()`.
+/// `NotificationCenter` can't cross the app/extension process boundary, so a Darwin notification is
+/// used instead. It carries no payload — the files are the source of truth, so observers re-read.
 ///
-/// **Best-effort, not a queue.** Darwin notifications are *not* delivered to a suspended process
-/// (posted with `.deliverImmediately` to minimise this), and rapid posts coalesce. So treat this as
-/// an optimisation that makes updates prompt when both processes are live — not a guaranteed channel.
-/// The file stays authoritative, and reliable read triggers (e.g. the app re-reading on
-/// `.PIADaemonsDidUpdateVPNStatus`, the extension reading on every tunnel start) must remain in place.
-///
-/// `write(_:)` and `delete()` post the signal automatically. Each process opts in with
-/// `startObserving()` (once, at launch), then listens via `observe(_:)` or `didChangeNotification`.
+/// **Best-effort, not a queue**: Darwin notifications aren't delivered to a suspended process and
+/// rapid posts coalesce. Reliable read triggers (the app on `.PIADaemonsDidUpdateVPNStatus`, the
+/// extension on every tunnel start) must stay in place. Each process opts in once via
+/// `startObserving()`; the mutators post the signal themselves.
 extension PIATunnelSharedState {
 
     // MARK: - Observation
 
-    /// In-process notification re-posted (on the main queue) whenever the shared-state file changes
-    /// in *either* process. Carries no payload; handlers should re-`read()`. Prefer `observe(_:)`,
-    /// which hands back the freshly-read `State` for you.
+    /// Re-posted on the main queue whenever the shared state changes in *either* process. Carries no
+    /// payload; handlers re-read.
     public static let didChangeNotification = Notification.Name("PIATunnelSharedState.didChange")
 
-    /// Device-global Darwin notification name, namespaced by app group so it can't collide with
-    /// other apps' notifications.
+    /// Namespaced by app group so it can't collide with other apps.
     private static let darwinNotificationName = "\(AppConstants.appGroup).PIATunnelSharedState.didChange"
 
-    /// Registers the cross-process Darwin observer exactly once and bridges it into
-    /// `didChangeNotification` on the main queue. Lazily-initialised `static let` → thread-safe and
-    /// idempotent. The callback is a non-capturing C function pointer (required by
-    /// `CFNotificationCenterAddObserver`); it only touches globals, so it stays non-capturing.
+    /// Registers the Darwin observer once and bridges it to `didChangeNotification` on the main queue.
+    /// Lazy `static let` → thread-safe and idempotent. The callback must stay non-capturing, as
+    /// `CFNotificationCenterAddObserver` takes a C function pointer.
     private static let darwinBridge: Void = {
         let onDarwinNotification: CFNotificationCallback = { _, _, _, _, _ in
             DispatchQueue.main.async {
@@ -70,18 +60,15 @@ extension PIATunnelSharedState {
         return ()
     }()
 
-    /// Begins listening for shared-state changes from the other process. Idempotent — call once per
-    /// process (e.g. the app in `Bootstrapper`, the extension in `PIAPacketTunnelProvider.start`)
-    /// before relying on `didChangeNotification`. Observers register directly against
-    /// `didChangeNotification` (see `VPNDaemon`); a process also receives its *own* writes (Darwin
-    /// notifications have no sender), so handlers must be idempotent and must not write
-    /// unconditionally in response — that would loop.
+    /// Begins listening for changes. Idempotent; call once per process (the app in `Bootstrapper`, the
+    /// extension in `PIAPacketTunnelProvider.start`). A process also receives its *own* writes — Darwin
+    /// notifications have no sender — so handlers must be idempotent and must not write unconditionally.
     public static func startObserving() {
         _ = darwinBridge
     }
 
-    /// Posts the cross-process change signal. Called by `write(_:)` / `delete()` after the file is
-    /// updated, so every mutator notifies both processes without callers having to remember to.
+    /// Posts the change signal. Called by `Store` after a write or delete, so every mutator notifies
+    /// both processes without callers having to remember to.
     static func postDidChange() {
         CFNotificationCenterPostNotification(
             CFNotificationCenterGetDarwinNotifyCenter(),

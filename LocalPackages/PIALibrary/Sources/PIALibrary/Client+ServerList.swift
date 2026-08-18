@@ -31,7 +31,7 @@ extension Client {
     /// fetch performs no app-state mutations.
     ///
     /// Callers throttle how often they call this themselves; the result is cached across connects via
-    /// `PIATunnelSharedState.serversFetchedAt`, not here.
+    /// `PIATunnelSharedState.ServersCache.serversFetchedAt`, not here.
     public static func downloadServerList() async -> [Server]? {
         await withCheckedContinuation { continuation in
             webServices.downloadServers { bundle, _ in

@@ -87,7 +87,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     /// `.connected`. Teardown drops the manager out of `.connected`, leaving that to the NEVPNStatus
     /// path; cold start is covered by `DefaultVPNProvider.reconcileStatusWithOwnConfiguration`.
     @objc private func platformSDKTunnelStatusDidChange() {
-        guard let tunnel = PIATunnelSharedState.read().tunnelStatus,
+        guard let tunnel = PIATunnelSharedState.readStatus().tunnelStatus,
             let manager = accessedDatabase.transient.activeVPNProfile?.native as? NEVPNManager,
             manager.connection.status == .connected
         else {
@@ -287,7 +287,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         // fold agree on one combination. For legacy protocols `tunnel` is nil, so this is exactly the
         // pure `NEVPNStatus` mapping computed above (no behaviour change); for the PlatformSDK tunnel
         // it layers the `.connecting` nuance if the tunnel is mid-reconnect when this event fires.
-        let tunnel = Client.configuration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
+        let tunnel = Client.configuration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.readStatus().tunnelStatus : nil
         let resolvedStatus = VPNStatus.resolve(system: connection.status, tunnel: tunnel)
 
         let previousStatus = accessedDatabase.transient.vpnStatus

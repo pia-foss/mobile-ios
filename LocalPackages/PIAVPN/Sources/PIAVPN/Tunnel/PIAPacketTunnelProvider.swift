@@ -64,6 +64,9 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     private func start() async throws {
+        // Clear any status that might have been left by a previous tunnel
+        PIATunnelSharedState.clearStatus()
+
         let endpointRepository = PIAEndpointRepository()
         let systemTunnel = KapeSystemTunnel(packetTunnelProvider: self, packetIOMode: .utunFd)
 

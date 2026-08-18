@@ -21,30 +21,27 @@
 
 import Foundation
 
-// The `Codable` value types persisted in the shared-state file. The persistence API that reads and
-// writes them (`read`/`write`/`delete`/`update*`) lives in `PIATunnelSharedState.swift`.
+// The `Codable` value types persisted per slice (`Config`, `ServersCache`, `Status`), plus the
+// read-side `State` aggregate. The persistence API lives in `PIATunnelSharedState.swift`.
 extension PIATunnelSharedState {
 
     // MARK: - Protocol & Transport
 
-    /// The VPN protocol the PlatformSDK tunnel should run. `automatic` lets the tunnel try
-    /// WireGuard first and fall back to OpenVPN.
+    /// `automatic` tries WireGuard first, then falls back to OpenVPN.
     public enum TunnelProtocol: String, Codable {
         case wireGuard
         case openVPN
         case automatic
     }
 
-    /// The OpenVPN transport the user selected. `automatic` lets the tunnel try both UDP and TCP.
+    /// The user-selected OpenVPN transport; `automatic` allows both UDP and TCP.
     public enum OpenVPNTransport: String, Codable {
         case automatic
         case udp
         case tcp
     }
 
-    /// A concrete transport actually carrying an established tunnel — protocol-neutral and never
-    /// `automatic` (a live connection always runs over exactly one). WireGuard is always `.udp`;
-    /// OpenVPN is whichever of UDP/TCP the SDK resolved.
+    /// The transport actually carrying a live tunnel — never `automatic`.
     public enum VPNTransport: String, Codable {
         case udp
         case tcp
@@ -52,14 +49,9 @@ extension PIATunnelSharedState {
 
     // MARK: - Tunnel Status
 
-    /// The live connection status the PlatformSDK tunnel reports back, written by the extension
-    /// whenever its status changes.
-    ///
-    /// This is the extension's authoritative view of the session — richer than what `NEVPNStatus`
-    /// exposes. In particular an in-place region switch (and any mid-session reconnect) surfaces as
-    /// `.connecting` / `.reconnecting` here even though `NEVPNStatus` stays `.connected` the whole
-    /// time, which is why the app reads this to drive its connection status. Mirrors the SDK's own
-    /// `KapeVPNConnectionStatus`, but PIA-owned so PIALibrary needs no Kape import.
+    /// The status the tunnel reports — richer than `NEVPNStatus`, which stays `.connected` through an
+    /// in-place switch or mid-session reconnect. Mirrors `KapeVPNConnectionStatus`, PIA-owned so
+    /// PIALibrary needs no Kape import.
     public enum TunnelStatus: String, Codable {
         case connected
         case connecting
@@ -71,22 +63,15 @@ extension PIATunnelSharedState {
 
     // MARK: - Active Connection
 
-    /// What the tunnel is *actually* running, written back by the extension once connected.
-    ///
-    /// Distinct from the user's *selection*: when the user picks Automatic the tunnel resolves a
-    /// concrete protocol (`.wireGuard`/`.openVPN`) and a concrete server, which the app reads to
-    /// display the live state. Carries only the protocol and the region **identifier** — never the
-    /// endpoint IP (the extension resolves host → `serverId` in-process and persists only the id).
+    /// What the tunnel is *actually* running, as opposed to the user's (possibly Automatic) selection.
+    /// Carries the region identifier only — never the endpoint IP.
     public struct ActiveConnection: Codable, Equatable {
-        /// The protocol actually serving the tunnel (never `.automatic`).
+        /// Never `.automatic`.
         public var `protocol`: TunnelProtocol
-        /// `Server.identifier` of the server the tunnel actually connected to.
         public var serverId: String
-        /// The transport actually carrying the tunnel. WireGuard is always `.udp`; OpenVPN is the
-        /// transport the SDK resolved — relevant when the user selected Automatic transport and the
-        /// SDK picks UDP/TCP via demand-driven failover, which the app can't otherwise derive.
+        /// The transport the SDK resolved — the app can't derive this under Automatic transport.
         public var resolvedTransport: VPNTransport
-        /// When this was written, so a stale value from a previous session can be ignored.
+        /// So a stale value from a previous session can be ignored.
         public var updatedAt: Date
 
         public init(
@@ -105,9 +90,7 @@ extension PIATunnelSharedState {
             case `protocol`, serverId, resolvedTransport, updatedAt
         }
 
-        // Tolerate a payload written before `resolvedTransport` existed by defaulting to `.udp`
-        // (WireGuard is always UDP and OpenVPN's primary transport is UDP) — so an older
-        // active-connection blob never fails the whole state decode.
+        // A payload predating `resolvedTransport` defaults to `.udp` rather than failing the decode.
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             `protocol` = try container.decode(TunnelProtocol.self, forKey: .protocol)
@@ -119,33 +102,29 @@ extension PIATunnelSharedState {
 
     // MARK: - Protocol Settings
 
-    /// OpenVPN parameters the app resolves at connect time and the extension
-    /// (`PIAEndpointRepository+OpenVPN`) reads to build its endpoints.
+    /// OpenVPN parameters the app resolves at connect time; read by `PIAEndpointRepository+OpenVPN`.
     public struct OpenVPNSettings: Codable, Equatable {
-        /// CA certificate PEM (`PIA-RSA-4096.pem`). Required by `OpenVPNConnectionController`.
+        /// CA certificate PEM (`PIA-RSA-4096.pem`).
         public var caCertificate: String
 
-        /// VPN username (`vpnTokenUsername` from `AccountProvider`).
+        /// `vpnTokenUsername` from `AccountProvider`.
         public var username: String
 
-        /// VPN password (`vpnTokenPassword` from `AccountProvider`).
+        /// `vpnTokenPassword` from `AccountProvider`.
         public var password: String
 
-        /// Minimal OVPN config text supplying `cipher` and `auth` directives, e.g.
-        /// `"cipher AES-128-GCM\nauth SHA256"`. Parsed by `OpenVPNConfigParser` in the SDK.
+        /// Minimal OVPN text supplying `cipher` and `auth`, parsed by the SDK's `OpenVPNConfigParser`.
         public var ovpnConfig: String
 
-        /// Preferred port for the chosen transport, or 0 for automatic (use protocol defaults).
+        /// Preferred port, or 0 for the protocol defaults.
         public var port: UInt16
 
-        /// The user-selected OpenVPN transport. `automatic` allows both UDP and TCP endpoints.
         public var transport: OpenVPNTransport
 
-        /// MTU for the OpenVPN tunnel. 1400 by default; 1350 when small packets is enabled.
+        /// 1400 by default; 1350 with small packets.
         public var mtu: UInt16
 
-        /// Custom DNS resolvers for OpenVPN, in priority order (the user's Settings → Network
-        /// choice). Empty → let the server push its DNS (the PIA-default behaviour).
+        /// Custom resolvers in priority order. Empty → let the server push its DNS.
         public var dnsServers: [String]
 
         public init(
@@ -172,7 +151,7 @@ extension PIATunnelSharedState {
             case caCertificate, username, password, ovpnConfig, port, transport, mtu, dnsServers
         }
 
-        // Tolerate a missing/older payload by falling back to defaults per field.
+        // Missing keys fall back to defaults.
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             caCertificate = try container.decodeIfPresent(String.self, forKey: .caCertificate) ?? ""
@@ -186,19 +165,17 @@ extension PIATunnelSharedState {
         }
     }
 
-    /// WireGuard parameters the app resolves at connect time and the extension
-    /// (`PIAEndpointRepository+WireGuard`, `PIAWireguardAuthenticator`) reads to build its endpoints.
+    /// WireGuard parameters the app resolves at connect time; read by `PIAEndpointRepository+WireGuard`
+    /// and `PIAWireguardAuthenticator`.
     public struct WireGuardSettings: Codable, Equatable {
-        /// MTU for the WireGuard tunnel. 1420 by default; 1280 when small packets is enabled.
+        /// 1420 by default; 1280 with small packets.
         public var mtu: UInt16
 
-        /// WireGuard key-exchange token used by `PIAWireguardAuthenticator`. The account `vpnToken`
-        /// for a regular server, or the server's `dipUsername` for a Dedicated IP server. Passed via
-        /// shared state because the extension can't reliably read account credentials at run time.
+        /// Key-exchange token: the account `vpnToken`, or the server's `dipUsername` for a Dedicated IP.
+        /// Passed through shared state because the extension can't reliably read account credentials.
         public var token: String?
 
-        /// Custom DNS resolvers for WireGuard, in priority order (the user's Settings → Network
-        /// choice). Empty → the authenticator keeps the server-provided resolvers.
+        /// Custom resolvers in priority order. Empty → keep the server-provided ones.
         public var dnsServers: [String]
 
         public init(
@@ -215,7 +192,7 @@ extension PIATunnelSharedState {
             case mtu, token, dnsServers
         }
 
-        // Tolerate a missing/older payload by falling back to defaults per field.
+        // Missing keys fall back to defaults.
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             mtu = try container.decodeIfPresent(UInt16.self, forKey: .mtu) ?? UInt16(AppConstants.WireGuardPacketSize.highPacketSize)
@@ -224,74 +201,147 @@ extension PIATunnelSharedState {
         }
     }
 
+    // MARK: - Persisted Slices
+
+    /// App → tunnel connection inputs plus the app's measured latencies, in
+    /// `pia_platformsdk_config.json`. Written only by the app; the extension reads it.
+    public struct Config: Codable {
+
+        /// The resolved target server's identifier, or nil for "Automatic" — the signal for
+        /// `PIAEndpointRepository.generateConfigurations` to fan out across every online server. nil is
+        /// the common case.
+        public var selectedLocationId: String?
+
+        /// The resolved Dedicated IP target, carried in full because DIP servers are per-user and absent
+        /// from the public list the extension fetches. nil for a regular region.
+        public var selectedDipServer: Server?
+
+        public var selectedProtocol: TunnelProtocol
+
+        public var openVPN: OpenVPNSettings
+
+        public var wireGuard: WireGuardSettings
+
+        /// Latencies from the app's `ServersPinger`, keyed by `Server.identifier`, in milliseconds.
+        /// Carried explicitly because `Server`'s `Codable` form drops its measured `responseTime`;
+        /// `State.selectedServer(in:)` uses it to mirror the app's `bestServer`. App-owned, so a
+        /// connect-time write and a ping cycle can't lose each other's values.
+        public var latencyByServerId: [String: Int]
+
+        public init(
+            selectedLocationId: String? = nil,
+            selectedDipServer: Server? = nil,
+            selectedProtocol: TunnelProtocol = .automatic,
+            openVPN: OpenVPNSettings = OpenVPNSettings(),
+            wireGuard: WireGuardSettings = WireGuardSettings(),
+            latencyByServerId: [String: Int] = [:]
+        ) {
+            self.selectedLocationId = selectedLocationId
+            self.selectedDipServer = selectedDipServer
+            self.selectedProtocol = selectedProtocol
+            self.openVPN = openVPN
+            self.wireGuard = wireGuard
+            self.latencyByServerId = latencyByServerId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case selectedLocationId, selectedDipServer, selectedProtocol, openVPN, wireGuard
+            case latencyByServerId
+        }
+
+        // Tolerate a missing/older file by falling back to defaults per field.
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
+            selectedDipServer = try container.decodeIfPresent(Server.self, forKey: .selectedDipServer)
+            selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .automatic
+            openVPN = try container.decodeIfPresent(OpenVPNSettings.self, forKey: .openVPN) ?? OpenVPNSettings()
+            wireGuard = try container.decodeIfPresent(WireGuardSettings.self, forKey: .wireGuard) ?? WireGuardSettings()
+            latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
+        }
+    }
+
+    /// The server list the extension looks up in, in `pia_platformsdk_servers.json`. The one slice both
+    /// processes write — but only ever whole (`updateServers`), so a concurrent write means "the other
+    /// list won" rather than a lost field.
+    public struct ServersCache: Codable {
+
+        public var servers: [Server]
+
+        /// When `servers` was last fetched, or nil while the list is only the app's unverified snapshot.
+        /// The extension re-fetches past `serversCacheTTL` and reuses `servers` within it.
+        public var serversFetchedAt: Date?
+
+        public init(servers: [Server] = [], serversFetchedAt: Date? = nil) {
+            self.servers = servers
+            self.serversFetchedAt = serversFetchedAt
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case servers, serversFetchedAt
+        }
+
+        // Tolerate a missing/older file by falling back to defaults per field.
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
+            serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
+        }
+    }
+
+    /// Tunnel → app write-back, in `pia_platformsdk_status.json`. Written only by the extension, which
+    /// clears it at tunnel start and on `stopTunnel`. Its own file because the app writes shared state
+    /// on paths that overlap a connect, and sharing one file let those revert `tunnelStatus`.
+    public struct Status: Codable {
+
+        /// `nil` when not connected. The app reads it, gated on `vpnStatus`, to show the resolved
+        /// protocol/server rather than the user's selection.
+        public var activeConnection: ActiveConnection?
+
+        /// `nil` before the tunnel reports anything, or once cleared.
+        public var tunnelStatus: TunnelStatus?
+
+        public init(activeConnection: ActiveConnection? = nil, tunnelStatus: TunnelStatus? = nil) {
+            self.activeConnection = activeConnection
+            self.tunnelStatus = tunnelStatus
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case activeConnection, tunnelStatus
+        }
+
+        // Tolerate a missing/older file by falling back to defaults per field.
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            activeConnection = try container.decodeIfPresent(ActiveConnection.self, forKey: .activeConnection)
+            tunnelStatus = try container.decodeIfPresent(TunnelStatus.self, forKey: .tunnelStatus)
+        }
+    }
+
     // MARK: - State
 
-    /// Everything the PlatformSDK tunnel needs to resolve its endpoints, plus what it reports back.
-    ///
-    /// A single self-consistent snapshot. Fields are grouped by IPC direction: connection inputs the
-    /// app writes for the tunnel, a server cache both sides write, and the tunnel's write-back the
-    /// app reads. Every mutator (`update*`) reads the whole state, changes one field, and rewrites it.
-    public struct State: Codable {
+    /// Every slice combined, for consumers that need more than one. Not persisted itself — the slices
+    /// are the units on disk — so a snapshot is consistent *per slice*, not across all three. Only
+    /// readers combine these fields, so that's enough.
+    public struct State {
 
         // MARK: App → Tunnel (connection inputs)
 
-        /// Identifier of the resolved target server (`serverProvider.targetServer`) the tunnel
-        /// should connect to, or nil when the user's region selection is "Automatic" — the signal for
-        /// `PIAEndpointRepository.generateConfigurations` to fan out across every online server.
-        /// Automatic is the default, so nil is the common case.
         public var selectedLocationId: String?
-
-        /// The resolved Dedicated IP target server, carried in full when a DIP region is selected,
-        /// nil otherwise. DIP servers are per-user and absent from the public regions list the
-        /// extension fetches autonomously, so they cannot be looked up in `servers`; when this is
-        /// set, `selectedServer(in:)` uses it directly. Only the server's addresses are needed by the
-        /// extension (DIP credentials are flattened into the `openVPN` / `wireGuard.token` fields),
-        /// and those survive `Server`'s `Codable` round-trip.
         public var selectedDipServer: Server?
-
-        /// The protocol the tunnel should establish (mirrors the user's selected VPN protocol).
         public var selectedProtocol: TunnelProtocol
-
-        /// OpenVPN parameters (written by the app at connect time, read by `PIAEndpointRepository+OpenVPN`).
         public var openVPN: OpenVPNSettings
-
-        /// WireGuard parameters (written by the app at connect time, read by `PIAEndpointRepository+WireGuard`
-        /// and `PIAWireguardAuthenticator`).
         public var wireGuard: WireGuardSettings
-
-        // MARK: Shared cache (written by both app and extension)
-
-        /// Server list the extension looks up in. Seeded by the app from its `cachedServers`, then
-        /// overwritten by the extension with a freshly fetched list (see `serversFetchedAt`).
-        public var servers: [Server]
-
-        /// When `servers` was last fetched from the backend by the extension, or nil when the list is
-        /// only the app's unverified snapshot. The extension re-fetches once this is older than
-        /// `serversCacheTTL`; within the TTL it reuses `servers` without hitting the network. This is
-        /// the file-backed cache that survives the extension process being killed on disconnect.
-        public var serversFetchedAt: Date?
-
-        /// Per-server latency measured by the app's `ServersPinger`, keyed by `Server.identifier`
-        /// and expressed in milliseconds (the best/lowest sample, matching the app's plain store).
-        ///
-        /// Carried explicitly because `Server`'s `Codable` form does not round-trip its measured
-        /// `responseTime` — so without this map the extension cannot tell servers apart by speed.
-        /// `selectedServer(in:)` uses it to pick the fastest server when no specific region is
-        /// selected (Automatic, or an app-less autonomous fetch), mirroring the app's `bestServer`.
-        /// Empty until the app has completed a ping cycle.
         public var latencyByServerId: [String: Int]
+
+        // MARK: Shared cache
+
+        public var servers: [Server]
+        public var serversFetchedAt: Date?
 
         // MARK: Tunnel → App (write-back)
 
-        /// What the tunnel is actually running, written back by the extension on connect and cleared
-        /// on disconnect. `nil` when not connected. The app reads it (gated on `vpnStatus`) to show
-        /// the resolved protocol/server instead of the user's (possibly Automatic) selection.
         public var activeConnection: ActiveConnection?
-
-        /// The live connection status the extension reports (see `TunnelStatus`). `nil` before the
-        /// tunnel has reported anything or after it's cleared. The app folds this into its VPN status
-        /// so an in-place region switch / mid-session reconnect surfaces as "Connecting" even though
-        /// `NEVPNStatus` stays `.connected`.
         public var tunnelStatus: TunnelStatus?
 
         init(
@@ -318,49 +368,36 @@ extension PIATunnelSharedState {
             self.tunnelStatus = tunnelStatus
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case selectedLocationId, selectedDipServer, selectedProtocol, openVPN, wireGuard
-            case servers, serversFetchedAt, latencyByServerId
-            case activeConnection, tunnelStatus
+        init(config: Config, serversCache: ServersCache, status: Status) {
+            self.init(
+                selectedLocationId: config.selectedLocationId,
+                selectedDipServer: config.selectedDipServer,
+                selectedProtocol: config.selectedProtocol,
+                openVPN: config.openVPN,
+                wireGuard: config.wireGuard,
+                servers: serversCache.servers,
+                serversFetchedAt: serversCache.serversFetchedAt,
+                latencyByServerId: config.latencyByServerId,
+                activeConnection: status.activeConnection,
+                tunnelStatus: status.tunnelStatus
+            )
         }
 
-        // Tolerate a missing/older file by falling back to defaults per field.
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            selectedLocationId = try container.decodeIfPresent(String.self, forKey: .selectedLocationId)
-            selectedDipServer = try container.decodeIfPresent(Server.self, forKey: .selectedDipServer)
-            selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .automatic
-            openVPN = try container.decodeIfPresent(OpenVPNSettings.self, forKey: .openVPN) ?? OpenVPNSettings()
-            wireGuard = try container.decodeIfPresent(WireGuardSettings.self, forKey: .wireGuard) ?? WireGuardSettings()
-            servers = try container.decodeIfPresent([Server].self, forKey: .servers) ?? []
-            serversFetchedAt = try container.decodeIfPresent(Date.self, forKey: .serversFetchedAt)
-            latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
-            activeConnection = try container.decodeIfPresent(ActiveConnection.self, forKey: .activeConnection)
-            tunnelStatus = try container.decodeIfPresent(TunnelStatus.self, forKey: .tunnelStatus)
-        }
-
-        /// The server matching the resolved target within a server list, if present.
-        ///
-        /// A Dedicated IP target is carried in full (`selectedDipServer`) and used directly — it is
-        /// per-user and not present in `servers`. For a regular target match by `identifier` and
-        /// exclude any DIP entry that shares it; with no selection, fall back to the fastest server.
+        /// The server matching the resolved target, if present. A DIP target is used directly; a regular
+        /// one matches by `identifier`, excluding any DIP entry sharing it; with no selection, the
+        /// fastest server wins.
         public func selectedServer(in servers: [Server]) -> Server? {
             if let selectedDipServer {
                 return selectedDipServer
             }
 
-            // No specific region selected (Automatic / first launch), or the persisted id no longer
-            // matches the current list: behave like the Automatic region and connect to the best
-            // available server rather than returning nothing.
+            // An unmatched id falls through to the Automatic behaviour below rather than returning nil.
             if let selectedLocationId, let match = servers.first(where: { $0.identifier == selectedLocationId && $0.dipToken == nil }) {
                 return match
             }
 
-            // Pick the fastest server we have a measured latency for, mirroring the app's
-            // `bestServer`. `latencyByServerId` is populated by the app's `ServersPinger`; it
-            // carries the latencies the `servers` list itself cannot (`Server`'s Codable form drops
-            // `responseTime`). When no ping data is present — e.g. an autonomous fetch with no
-            // app-measured latencies — fall back to the first available server.
+            // Fastest measured server, mirroring the app's `bestServer`; with no ping data (e.g. an
+            // autonomous fetch) fall back to the first available one.
             let available = servers.filter { $0.dipToken == nil && !$0.offline }
             if let fastest =
                 available

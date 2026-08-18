@@ -96,7 +96,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         guard accessedConfiguration.featureFlags[.usePlatformSDKVPN], isVPNConnected else {
             return nil
         }
-        return PIATunnelSharedState.read().activeConnection
+        return PIATunnelSharedState.readStatus().activeConnection
     }
 
     private var vpnLog: String {
@@ -483,9 +483,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             // Under the PlatformSDK tunnel a native `.connected` only says the Network Extension
             // is up; the tunnel's own write-back is what tells us whether it is actually carrying
             // traffic or still (re)connecting. Fold it in before applying the adoption policy.
-            let tunnel =
-                accessedConfiguration.featureFlags[.usePlatformSDKVPN]
-                ? PIATunnelSharedState.read().tunnelStatus : nil
+            let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.readStatus().tunnelStatus : nil
             let resolvedStatus = VPNStatus.resolve(system: nativeStatus, tunnel: tunnel)
 
             // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a

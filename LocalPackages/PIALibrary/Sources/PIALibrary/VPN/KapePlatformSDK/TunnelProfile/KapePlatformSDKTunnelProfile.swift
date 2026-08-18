@@ -184,8 +184,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
 
     /// Writes the tunnel's connection target and credentials to `PIATunnelSharedState` — the only
     /// input a live `switchLocation` needs, since the extension resolves its endpoints from here,
-    /// not from `protocolConfiguration`. Carries the existing server-list cache forward so this
-    /// wholesale write doesn't wipe it; the extension re-fetches on its own when it's empty or stale.
+    /// not from `protocolConfiguration`. Touches only the app-owned config slice, so the server cache
+    /// and the tunnel's write-back need neither carrying forward nor protecting from this write.
     private func writeSharedState(withConfiguration configuration: VPNConfiguration) throws {
         let server = connectableServer(for: configuration.server)
         let tunnelProtocol = desiredTunnelProtocol()
@@ -198,19 +198,12 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         // (`PIAEndpointRepository.generateConfigurations`). A DIP target is never automatic.
         let isAutomaticSelection = server.dipToken == nil && Client.preferences.preferredServer == nil
 
-        let existing = PIATunnelSharedState.read()
-
-        PIATunnelSharedState.write(
-            .init(
-                selectedLocationId: isAutomaticSelection ? nil : server.identifier,
-                selectedDipServer: server.dipToken != nil ? server : nil,
-                selectedProtocol: tunnelProtocol,
-                openVPN: openVPN,
-                wireGuard: wireGuard,
-                servers: existing.servers,
-                serversFetchedAt: existing.serversFetchedAt,
-                latencyByServerId: existing.latencyByServerId
-            )
+        PIATunnelSharedState.writeConnectionInputs(
+            selectedLocationId: isAutomaticSelection ? nil : server.identifier,
+            selectedDipServer: server.dipToken != nil ? server : nil,
+            selectedProtocol: tunnelProtocol,
+            openVPN: openVPN,
+            wireGuard: wireGuard
         )
     }
 

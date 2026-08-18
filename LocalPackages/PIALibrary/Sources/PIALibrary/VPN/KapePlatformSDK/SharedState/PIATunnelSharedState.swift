@@ -23,169 +23,308 @@ import Foundation
 
 private let log = PIALogger.logger(for: PIATunnelSharedState.self)
 
-/// File-based shared state between the app and the PlatformSDK tunnel extension.
+/// File-based shared state between the app and the PlatformSDK tunnel extension. Uses the App Group
+/// container rather than `UserDefaults`, which can return stale values in a Network Extension.
 ///
-/// Mirrors the Kape SDK's `KapeSharedState`: a single `Codable` `State` persisted as a JSON file
-/// in the App Group container — **not** `UserDefaults`, which can be unreliable to read from a
-/// Network Extension (per-process `cfprefsd` caching can return stale values right after a write).
+/// Split into three files, each with a **single writing process**:
+/// - `…_config.json` — connection inputs + measured latencies (`Config`); app only
+/// - `…_status.json` — the tunnel's write-back (`Status`); extension only
+/// - `…_servers.json` — the server cache (`ServersCache`); either side, wholesale writes only
 ///
-/// The app writes the state at connect time (`KapePlatformSDKTunnelProfile.doSave`); the extension
-/// reads it on every tunnel start (`PIAEndpointRepository`). Because the resolved location and the
-/// server list are written together, the file is always a self-consistent snapshot.
+/// One file for all of it was not safe: every mutation is a read-modify-write, and `.atomic` only
+/// prevents torn reads, not interleaved writers — so the app updating `servers`/`latencies` (which it
+/// does on every VPN status change) could revert the extension's `tunnelStatus` and strand the app's
+/// surfaced VPN status. Splitting by writer removes the interleaving; `Store` additionally locks each
+/// read-modify-write so the app's own concurrent writers can't lose updates. `NSFileCoordinator` is
+/// avoided on purpose: it can block for a long time when the peer process is suspended, and one peer
+/// here writes on the tunnel's start path.
 ///
-/// The persisted value types (`State`, `ActiveConnection`, `OpenVPNSettings`, …) live in
-/// `PIATunnelSharedState+Models.swift`; this file holds the read/write/update API over them.
+/// Value types live in `PIATunnelSharedState+Models.swift`.
 public enum PIATunnelSharedState {
 
-    private static let fileName = "pia_platformsdk_state.json"
+    // MARK: - Files
 
-    /// How long a fetched server list stays usable before the tunnel refreshes it. Mirrors the Kape
-    /// low-level SDK's `DEFAULT_MAX_AGE` for instance discovery (1 hour), shortened to 5 minutes in
-    /// DEBUG builds to make refresh behaviour easy to exercise. Used by the extension to decide
-    /// whether to re-fetch.
-    #if DEBUG
-        public static let serversCacheTTL: TimeInterval = 300
-    #else
-        public static let serversCacheTTL: TimeInterval = 3600
-    #endif
+    private static let configFileName = "pia_platformsdk_config.json"
+    private static let serversFileName = "pia_platformsdk_servers.json"
+    private static let statusFileName = "pia_platformsdk_status.json"
 
-    // MARK: - Persistence
+    static let configStore = Store(fileName: configFileName) { Config() }
+    static let serversStore = Store(fileName: serversFileName) { ServersCache() }
+    static let statusStore = Store(fileName: statusFileName) { Status() }
 
-    /// Reads the shared state from PIA's App Group container, or defaults if none is written yet.
+    public static let serversCacheTTL: TimeInterval = 3600
+
+    // MARK: - Reading
+
     public static func read() -> State {
-        guard let url = containerURL(),
-            let data = try? Data(contentsOf: url),
-            let state = try? JSONDecoder().decode(State.self, from: data)
-        else {
-            return State()
-        }
-        return state
+        State(
+            config: configStore.read(),
+            serversCache: serversStore.read(),
+            status: statusStore.read()
+        )
     }
 
-    /// Writes the shared state to PIA's App Group container (atomically).
-    static func write(_ state: State) {
-        guard let url = containerURL() else {
-            log.error("Failed to write shared state: no container URL for app group \(AppConstants.appGroup)")
-            return
-        }
-        let data: Data
-        do {
-            data = try JSONEncoder().encode(state)
-        } catch {
-            log.error("Failed to encode shared state: \(error)")
-            return
-        }
-        do {
-            try data.write(to: url, options: .atomic)
-            postDidChange()
-        } catch {
-            log.error("Failed to write shared state file at \(url.path): \(error)")
-        }
+    public static func readConfig() -> Config {
+        configStore.read()
     }
 
-    /// Deletes the shared state file from PIA's App Group container (e.g. on logout).
-    static func delete() {
-        guard let url = containerURL() else {
-            log.error("Failed to delete shared state: no container URL for app group \(AppConstants.appGroup)")
-            return
-        }
-        do {
-            try FileManager.default.removeItem(at: url)
-            postDidChange()
-        } catch let error as NSError where error.domain == NSCocoaErrorDomain && error.code == NSFileNoSuchFileError {
-            // File not found is not an error — state was already cleared or never written.
-        } catch {
-            log.error("Failed to delete shared state file at \(url.path): \(error)")
+    public static func readServersCache() -> ServersCache {
+        serversStore.read()
+    }
+
+    /// The tunnel's write-back. Cheap enough for status-change handlers to read on the main thread.
+    public static func readStatus() -> Status {
+        statusStore.read()
+    }
+
+    // MARK: - Writing (app)
+
+    /// Replaces the connection inputs the tunnel resolves its endpoints from, leaving the measured
+    /// latencies in place. Called by the app at connect time (`KapePlatformSDKTunnelProfile.doSave`).
+    static func writeConnectionInputs(
+        selectedLocationId: String?,
+        selectedDipServer: Server?,
+        selectedProtocol: TunnelProtocol,
+        openVPN: OpenVPNSettings,
+        wireGuard: WireGuardSettings
+    ) {
+        configStore.mutate { config in
+            config.selectedLocationId = selectedLocationId
+            config.selectedDipServer = selectedDipServer
+            config.selectedProtocol = selectedProtocol
+            config.openVPN = openVPN
+            config.wireGuard = wireGuard
+            return true
         }
     }
 
-    /// Replaces the cached server list and stamps `serversFetchedAt` with the current time,
-    /// preserving every other field.
-    ///
-    /// Called by the app whenever it downloads fresh regions and by the tunnel extension after an
-    /// autonomous fetch, so the file-backed cache stays warm across the extension process being
-    /// recreated on each connect.
-    public static func updateServers(_ servers: [Server]) {
-        var state = read()
-        state.servers = servers
-        state.serversFetchedAt = Date()
-        write(state)
-    }
-
-    /// Replaces the per-server latency map (`latencyByServerId`), preserving every other field.
-    ///
-    /// Called by the app each time the `ServersPinger` finishes a ping cycle, so the extension's
-    /// fastest-server fallback in `State.selectedServer(in:)` stays aligned with the app's
-    /// `bestServer`. Keys are `Server.identifier`; values are latencies in milliseconds.
+    /// Replaces the per-server latency map, preserving the connection inputs. Called after each
+    /// `ServersPinger` cycle so the extension's fastest-server fallback stays aligned with the app's
+    /// `bestServer`. Keys are `Server.identifier`; values are milliseconds.
     public static func updateLatencies(_ latencyByServerId: [String: Int]) {
-        var state = read()
-        state.latencyByServerId = latencyByServerId
-        write(state)
+        configStore.mutate { config in
+            guard config.latencyByServerId != latencyByServerId else { return false }
+            config.latencyByServerId = latencyByServerId
+            return true
+        }
     }
 
-    /// Records what the tunnel actually connected to (resolved protocol + region id + transport),
-    /// preserving every other field. Called by the extension once `.connected`. The app re-reads
-    /// this when it observes the VPN status change (`.PIADaemonsDidUpdateVPNStatus`).
+    // MARK: - Writing (shared cache)
+
+    /// Replaces the cached server list wholesale and stamps it with the current time. Called by the
+    /// app on a regions download and by the extension after an autonomous fetch, so the cache survives
+    /// the extension process being recreated on each connect. Both processes write this slice, but
+    /// only ever whole — so a concurrent write means "the other list won", not a lost field.
+    public static func updateServers(_ servers: [Server]) {
+        serversStore.write(ServersCache(servers: servers, serversFetchedAt: Date()))
+    }
+
+    // MARK: - Writing (extension)
+
+    /// Records what the tunnel actually connected to. Written by the extension once `.connected`; the
+    /// app re-reads it on `.PIADaemonsDidUpdateVPNStatus`.
     public static func updateActiveConnection(
         protocol vpnProtocol: TunnelProtocol,
         serverId: String,
         resolvedTransport: VPNTransport
     ) {
-        var state = read()
-        state.activeConnection = ActiveConnection(
-            protocol: vpnProtocol,
-            serverId: serverId,
-            resolvedTransport: resolvedTransport,
-            updatedAt: Date()
-        )
-        write(state)
+        statusStore.mutate { status in
+            status.activeConnection = ActiveConnection(
+                protocol: vpnProtocol,
+                serverId: serverId,
+                resolvedTransport: resolvedTransport,
+                updatedAt: Date()
+            )
+            return true
+        }
     }
 
     /// Clears the actual-connection write-back (e.g. on disconnect/pause).
     public static func clearActiveConnection() {
-        var state = read()
-        guard state.activeConnection != nil else { return }
-        state.activeConnection = nil
-        write(state)
+        statusStore.mutate { status in
+            guard status.activeConnection != nil else { return false }
+            status.activeConnection = nil
+            return true
+        }
     }
 
-    /// Records the live connection status the tunnel reports (see `State.tunnelStatus`), preserving
-    /// every other field. Called by the extension whenever the SDK's status changes; the app folds
-    /// it into its VPN status so mid-session reconnects and in-place region switches surface as
-    /// "Connecting" even though `NEVPNStatus` stays `.connected`.
+    /// Records the status the tunnel reports. The app folds it into its VPN status so a mid-session
+    /// reconnect or in-place switch surfaces as "Connecting" while `NEVPNStatus` stays `.connected`.
+    /// The changed-check runs inside the mutation, so compare and write are one atomic step.
     public static func updateTunnelStatus(_ tunnelStatus: TunnelStatus) {
-        var state = read()
-        guard state.tunnelStatus != tunnelStatus else { return }
-        state.tunnelStatus = tunnelStatus
-        write(state)
+        statusStore.mutate { status in
+            guard status.tunnelStatus != tunnelStatus else { return false }
+            status.tunnelStatus = tunnelStatus
+            return true
+        }
     }
 
     /// Clears the reported tunnel status (e.g. when the extension tears the tunnel down).
     public static func clearTunnelStatus() {
-        var state = read()
-        guard state.tunnelStatus != nil else { return }
-        state.tunnelStatus = nil
-        write(state)
+        statusStore.mutate { status in
+            guard status.tunnelStatus != nil else { return false }
+            status.tunnelStatus = nil
+            return true
+        }
     }
 
-    private static func containerURL() -> URL? {
+    /// Drops the whole write-back. Called by the extension at tunnel start so a status left by a
+    /// previous tunnel process — including one killed without a graceful `stopTunnel` — isn't read as
+    /// current. The app must not call this: it doesn't own the slice.
+    public static func clearStatus() {
+        statusStore.delete()
+    }
+
+    // MARK: - Teardown
+
+    /// Deletes all shared state from PIA's App Group container (e.g. on logout).
+    static func delete() {
+        configStore.delete()
+        serversStore.delete()
+        statusStore.delete()
+    }
+
+    // MARK: - Container
+
+    static func containerDirectory() -> URL? {
         guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConstants.appGroup) else {
             return nil
         }
 
-        let baseURL: URL
-
         #if os(tvOS)
             // On tvOS only the Library/Caches subdirectory is shareable/writable
             // between the app and the network extension.
-            baseURL =
+            return
                 container
                 .appendingPathComponent("Library", isDirectory: true)
                 .appendingPathComponent("Caches", isDirectory: true)
         #else
-            baseURL = container
+            return container
         #endif
+    }
+}
 
-        return baseURL.appendingPathComponent(fileName)
+// MARK: - Store
+
+extension PIATunnelSharedState {
+
+    /// One persisted slice: a `Codable` value in its own file in the App Group container.
+    ///
+    /// `mutate(_:)` holds the mutex across the whole read-modify-write, so two writers in the *same*
+    /// process can't build on a snapshot the other superseded. Cross-process safety comes from
+    /// single-writer ownership per file, not from this mutex.
+    final class Store<Value: Codable>: Sendable {
+
+        private let fileName: String
+        private let directory: @Sendable () -> URL?
+        private let makeDefault: @Sendable () -> Value
+
+        /// Guards the file, not in-memory state — hence `Void`. `PIALibrary.Mutex` is the repo's
+        /// backport, so this becomes `Synchronization.Mutex` for free once the floor reaches iOS 18.
+        private let mutex = Mutex<Void>(())
+
+        /// - Parameter directory: injectable so the read-modify-write is testable without an App
+        ///   Group entitlement, which a unit-test process doesn't have.
+        init(
+            fileName: String,
+            directory: @escaping @Sendable () -> URL? = { PIATunnelSharedState.containerDirectory() },
+            makeDefault: @escaping @Sendable () -> Value
+        ) {
+            self.fileName = fileName
+            self.directory = directory
+            self.makeDefault = makeDefault
+        }
+
+        /// The persisted value, or a default when the file is absent or unreadable.
+        func read() -> Value {
+            mutex.withLock { _ in readLocked() }
+        }
+
+        /// Replaces the persisted value wholesale.
+        func write(_ value: Value) {
+            let didWrite = mutex.withLock { _ in writeLocked(value) }
+
+            if didWrite {
+                PIATunnelSharedState.postDidChange()
+            }
+        }
+
+        /// Reads, edits and writes back under the mutex, so no concurrent mutation in this process is
+        /// lost. `body` returns `false` to skip the write, keeping an "only if changed" test atomic
+        /// with the write it guards.
+        func mutate(_ body: (inout Value) -> Bool) {
+            let didWrite = mutex.withLock { _ in
+                var value = readLocked()
+                return body(&value) ? writeLocked(value) : false
+            }
+
+            if didWrite {
+                PIATunnelSharedState.postDidChange()
+            }
+        }
+
+        /// Removes the file, so the next `read()` returns defaults.
+        func delete() {
+            let didDelete = mutex.withLock { _ in deleteLocked() }
+
+            if didDelete {
+                PIATunnelSharedState.postDidChange()
+            }
+        }
+
+        // MARK: Guarded primitives
+
+        private func fileURL() -> URL? {
+            directory()?.appendingPathComponent(fileName)
+        }
+
+        private func readLocked() -> Value {
+            guard let url = fileURL(),
+                let data = try? Data(contentsOf: url),
+                let value = try? JSONDecoder().decode(Value.self, from: data)
+            else {
+                return makeDefault()
+            }
+            return value
+        }
+
+        private func writeLocked(_ value: Value) -> Bool {
+            guard let url = fileURL() else {
+                log.error("Failed to write \(fileName): no container URL for app group \(AppConstants.appGroup)")
+                return false
+            }
+            let data: Data
+            do {
+                data = try JSONEncoder().encode(value)
+            } catch {
+                log.error("Failed to encode \(fileName): \(error)")
+                return false
+            }
+            do {
+                // `.atomic` prevents torn reads only; serialization is `mutex` + single-writer ownership.
+                try data.write(to: url, options: .atomic)
+                return true
+            } catch {
+                log.error("Failed to write \(fileName) at \(url.path): \(error)")
+                return false
+            }
+        }
+
+        private func deleteLocked() -> Bool {
+            guard let url = fileURL() else {
+                log.error("Failed to delete \(fileName): no container URL for app group \(AppConstants.appGroup)")
+                return false
+            }
+            do {
+                try FileManager.default.removeItem(at: url)
+                return true
+            } catch let error as NSError where error.domain == NSCocoaErrorDomain && error.code == NSFileNoSuchFileError {
+                // Already cleared or never written — not an error.
+                return false
+            } catch {
+                log.error("Failed to delete \(fileName) at \(url.path): \(error)")
+                return false
+            }
+        }
     }
 }
