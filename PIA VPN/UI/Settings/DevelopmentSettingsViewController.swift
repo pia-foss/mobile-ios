@@ -67,8 +67,7 @@
 
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController {
-                trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
-                trustedNetworksVC.vpnType = pendingPreferences.vpnType
+                trustedNetworksVC.pendingPreferences = pendingPreferences
             }
         }
 

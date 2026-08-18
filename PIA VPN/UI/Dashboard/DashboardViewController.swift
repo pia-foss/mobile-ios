@@ -682,9 +682,6 @@ final class DashboardViewController: AutolayoutViewController {
 
         if let sideMenu = segue.destination as? SideMenuNavigationController {
             setMenuDelegate(menuNavigationController: sideMenu)
-        } else if let nmt = segue.destination as? TrustedNetworksViewController {
-            nmt.shouldReconnectAutomatically = true
-            nmt.persistentConnectionValue = Client.preferences.isPersistentConnection
         } else if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
         } else if let vc = segue.destination as? RegionsViewController {
