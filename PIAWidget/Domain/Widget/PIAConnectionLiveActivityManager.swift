@@ -6,7 +6,7 @@
     @available(iOS 16.2, *)
     private let log = PIALogger.logger(for: PIAConnectionLiveActivityManager.self)
 
-    protocol PIAConnectionLiveActivityManagerType: Sendable {
+    protocol PIAConnectionLiveActivityManagerType: AnyObject, Sendable {
         func startLiveActivity(with state: PIAConnectionAttributes.ContentState) async
         func endLiveActivities() async
     }
