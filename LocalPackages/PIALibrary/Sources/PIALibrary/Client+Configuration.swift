@@ -119,12 +119,6 @@ extension Client {
         /// Sets the rsa certificate to use for pinning puposes.
         public var rsa4096Certificate: String?
 
-        public let maceHostname: String
-
-        public let macePort: UInt16
-
-        public let maceDelay: Int
-
         // MARK: VPN
 
         private var availableVPNProfiles: [VPNProfile]
@@ -203,10 +197,6 @@ extension Client {
             vpnConnectivityMaxAttempts = 3
 
             rsa4096Certificate = nil
-
-            maceHostname = "209.222.18.222"
-            macePort = 1111
-            maceDelay = 5000
 
             maxQuickConnectServers = 6
             tempAccountPassword = ""

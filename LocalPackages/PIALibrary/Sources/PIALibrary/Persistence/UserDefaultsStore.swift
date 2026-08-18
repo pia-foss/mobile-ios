@@ -64,8 +64,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case showReconnectNotifications = "ShowReconnectNotifications"
 
-        case mace = "MACE"  // legacy
-
         case visibleTiles = "VisibleTiles"
 
         case orderedTiles = "OrderedTiles"
@@ -611,18 +609,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: .nmtMigrationSuccess)
-        }
-    }
-
-    var mace: Bool? {
-        get {
-            guard let value = backend.object(forKey: .mace) as? Bool else {
-                return nil
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: .mace)
         }
     }
 

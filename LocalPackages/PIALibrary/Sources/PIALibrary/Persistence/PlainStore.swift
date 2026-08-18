@@ -99,8 +99,6 @@ protocol PlainStore: AnyObject {
 
     var nmtMigrationSuccess: Bool? { get set }
 
-    var mace: Bool? { get set }
-
     // MARK: Lifecycle
 
     func reset()

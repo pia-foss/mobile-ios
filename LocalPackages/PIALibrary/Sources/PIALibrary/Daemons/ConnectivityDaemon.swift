@@ -35,7 +35,6 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
     static let shared = ConnectivityDaemon()
 
     private let pinger: Pinger = TCPPinger.shared
-    private static let macePingTimeoutSeconds: TimeInterval = 3
 
     private(set) var hasEnabledUpdates: Bool = false
 
@@ -170,9 +169,6 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
     @objc private func vpnStatusDidChange(notification: Notification) {
         switch accessedDatabase.transient.vpnStatus {
         case .connected:
-            if accessedPreferences.mace {
-                invokeMACERequest()
-            }
             handleVPNDidConnect()
             wasConnected = true
 
@@ -220,32 +216,6 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
         let delay = accessedConfiguration.connectivityVPNLag
         Macros.dispatch(after: .milliseconds(delay)) {
             self.checkConnectivityOrRetry()
-        }
-    }
-
-    // MARK: MACE
-
-    private func invokeMACERequest() {
-        log.debug("MACE: Enabling PIA ad-blocking...")
-
-        enableMACE()
-        Macros.dispatch(after: .milliseconds(accessedConfiguration.maceDelay)) {
-            self.enableMACE()
-        }
-    }
-
-    private func enableMACE() {
-        Task {
-            guard
-                let time = await pinger.ping(
-                    ip: accessedConfiguration.maceHostname,
-                    port: accessedConfiguration.macePort,
-                    timeout: Self.macePingTimeoutSeconds)
-            else {
-                log.error("MACE: Failed to enable")
-                return
-            }
-            log.debug("MACE: Successfully enabled in \(time)ms")
         }
     }
 }

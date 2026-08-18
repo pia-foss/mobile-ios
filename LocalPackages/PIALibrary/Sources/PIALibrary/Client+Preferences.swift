@@ -33,8 +33,6 @@ private protocol PreferencesStore: AnyObject {
 
     var showReconnectNotifications: Bool { get set }
 
-    var mace: Bool { get set }
-
     var useWiFiProtection: Bool { get set }
 
     var trustCellularData: Bool { get set }
@@ -91,7 +89,6 @@ private extension PreferencesStore {
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
-        mace = source.mace
         useWiFiProtection = source.useWiFiProtection
         trustCellularData = source.trustCellularData
         nmtMigrationSuccess = source.nmtMigrationSuccess
@@ -178,16 +175,6 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.showReconnectNotifications = newValue
-            }
-        }
-
-        /// The MACE option for ad-blocking.
-        public fileprivate(set) var mace: Bool {
-            get {
-                return accessedDatabase.plain.mace ?? defaults.mace
-            }
-            set {
-                accessedDatabase.plain.mace = newValue
             }
         }
 
@@ -548,7 +535,6 @@ extension Client.Preferences {
             preferredServer = nil
             lastConnectedRegion = nil
             isPersistentConnection = true
-            mace = false
             useWiFiProtection = true
             trustCellularData = false
             nmtMigrationSuccess = false
@@ -628,9 +614,6 @@ extension Client.Preferences {
                 target?.showReconnectNotifications = newValue
             }
         }
-
-        /// :nodoc:
-        public var mace: Bool
 
         /// :nodoc:
         public var useWiFiProtection: Bool
@@ -764,9 +747,6 @@ extension Client.Preferences {
             if (vpnDisconnectsOnSleep != target.vpnDisconnectsOnSleep) {
                 queue.append(VPNActionReinstall())
             }
-            if (mace != target.mace) {
-                queue.append(VPNActionReconnect())
-            }
             if !isPreferredServer(equalTo: target.preferredServer) {
                 queue.append(VPNActionReinstall())
             }
@@ -814,9 +794,6 @@ extension Client.Preferences {
         public func suggestsVPNReconnection() -> Bool {
             guard let target = target else {
                 return false
-            }
-            if (mace != target.mace) {
-                return true
             }
             if (isPersistentConnection != target.isPersistentConnection) {
                 return true
