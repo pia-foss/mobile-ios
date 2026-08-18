@@ -21,93 +21,150 @@
 //
 
 import Foundation
-import UIKit
+
+#if os(iOS)
+    import UIKit
+#endif
 
 private let log = PIALogger.logger(for: ServersDaemon.self)
 
-final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {
+extension ServersDaemon {
+    private enum Constants {
+        static let downloadTimeout: UInt64 = 60 * NSEC_PER_SEC
+    }
+
+    private enum WakeSignal {
+        case serversMayBeStale
+        case pingOnly
+    }
+
+    typealias DownloadResult = (servers: [Server]?, error: Error?)
+    typealias DownloadServers = @Sendable () async -> DownloadResult
+    typealias Sleep = @Sendable (UInt64) async -> Void
+}
+
+/// Keeps the server list fresh.
+///
+/// The cadence is owned by a single `loopTask` that alternates between evaluating staleness and
+/// sleeping. Notifications and callers never reschedule anything themselves; they only `wake()` the
+/// loop, which then re-evaluates. The previous design recreated a `DispatchSourceTimer` from five
+/// call sites across two thread families, and racing threads would release a source that had not
+/// been resumed yet — a libdispatch trap.
+internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, ProvidersAccess {
     static let shared = ServersDaemon()
 
-    private(set) var hasEnabledUpdates: Bool
+    private let downloadServers: DownloadServers
+    private let sleep: Sleep
+    private let downloadTimeout: UInt64
 
-    private(set) var updating: Bool
-
+    private var hasEnabledUpdates = false
     private var lastUpdateDate: Date?
-
     private var lastPingDate: Date?
 
-    private var pendingUpdateTimer: DispatchSourceTimer?
+    private var loopTask: Task<Void, Never>?
+    private var sleepTask: Task<Void, Never>?
 
-    private init() {
-        hasEnabledUpdates = false
-        updating = false
+    private var inflightUpdate: Task<DownloadResult, Never>?
+    private var inflightGeneration = 0
+    private var observationTasks: [Task<Void, Never>] = []
+
+    init(
+        downloadServers: DownloadServers? = nil,
+        sleep: Sleep? = nil,
+        downloadTimeout: UInt64? = nil
+    ) {
+        self.downloadServers = downloadServers ?? Self.downloadFromCurrentProvider
+        self.sleep = sleep ?? { try? await Task.sleep(nanoseconds: $0) }
+        self.downloadTimeout = downloadTimeout ?? Constants.downloadTimeout
     }
 
-    func start() {
-        let nc = NotificationCenter.default
-        #if os(iOS)
-            nc.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
-        #endif
-        nc.addObserver(self, selector: #selector(handleReachable), name: .ConnectivityDaemonDidGetReachable, object: nil)
-        nc.addObserver(self, selector: #selector(vpnStatusDidChange(notification:)), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+    // MARK: - Daemon
+
+    nonisolated func start() {
+        Task {
+            await beginObserving()
+        }
     }
 
-    func enableUpdates() {
+    nonisolated func enableUpdates() {
+        Task {
+            await enableUpdatesIfNeeded()
+        }
+    }
+
+    // MARK: - Lifecycle
+
+    func forceUpdates() async throws {
         guard !hasEnabledUpdates else {
+            log.debug("Updates already enabled, skipping forced update")
             return
         }
         hasEnabledUpdates = true
 
-        checkOutdatedServers()
-    }
-
-    func forceUpdates(completionBlock: @escaping (Error?) -> Void) {
-        guard !hasEnabledUpdates else {
-            return
-        }
-        hasEnabledUpdates = true
-        let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
-        accessedProviders.serverProvider.download { (servers, error) in
-            self.lastUpdateDate = Date()
-            log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
-            self.scheduleServersUpdate(withDelay: pollInterval)
-
-            guard let servers = servers else {
-                if let error = error as? ClientError, error == ClientError.noRegions {
-                    self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
-                }
-                completionBlock(error)
-                return
-            }
-            self.pingIfOffline(servers: servers)
-            completionBlock(error)
+        defer {
+            startUpdateLoop()
         }
 
+        try await refresh()
     }
 
-    func reset() {
+    func reset() async {
+        loopTask?.cancel()
+        loopTask = nil
+        sleepTask?.cancel()
+        sleepTask = nil
+        inflightUpdate?.cancel()
+        inflightUpdate = nil
+        inflightGeneration += 1
         lastUpdateDate = nil
         lastPingDate = nil
         hasEnabledUpdates = false
     }
 
-    @objc private func checkOutdatedServers() {
-
-        if updating {
+    private func enableUpdatesIfNeeded() {
+        guard !hasEnabledUpdates else {
             return
         }
+        hasEnabledUpdates = true
 
+        startUpdateLoop()
+    }
+
+    private func startUpdateLoop() {
+        loopTask?.cancel()
+        sleepTask?.cancel()
+
+        loopTask = Task {
+            await runUpdateLoop()
+        }
+    }
+
+    // MARK: - Update loop
+
+    private func runUpdateLoop() async {
+        while !Task.isCancelled {
+            let delay = await nextUpdateDelay()
+
+            guard !Task.isCancelled else {
+                return
+            }
+            await sleepInterruptibly(milliseconds: delay)
+        }
+    }
+
+    private func nextUpdateDelay() async -> Int {
         let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
         log.debug("Poll interval is \(pollInterval)")
 
         if let lastUpdateDate = lastUpdateDate {
             let elapsed = Int(-lastUpdateDate.timeIntervalSinceNow * 1000.0)
-            guard (elapsed >= pollInterval) else {
+            guard elapsed >= pollInterval else {
                 let leftDelay = pollInterval - elapsed
-                log.debug("Elapsed \(elapsed) milliseconds (< \(pollInterval)) since last update (\(lastUpdateDate)), retrying in \(leftDelay) milliseconds...")
+                log.debug(
+                    "Elapsed \(elapsed) milliseconds (< \(pollInterval)) since last update (\(lastUpdateDate)), retrying in \(leftDelay) milliseconds..."
+                )
 
-                scheduleServersUpdate(withDelay: leftDelay)
-                return
+                return leftDelay
             }
         } else {
             log.debug("Never updated so far, updating now...")
@@ -116,62 +173,128 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
         guard accessedDatabase.transient.isNetworkReachable else {
             let delay = accessedConfiguration.serversUpdateWhenNetworkDownDelay
             log.debug("Not updating when network is down, retrying in \(delay) milliseconds...")
-            scheduleServersUpdate(withDelay: delay)
-            return
+            return delay
         }
 
-        updating = true
-        accessedProviders.serverProvider.download { (servers, error) in
-            self.updating = false
-            self.lastUpdateDate = Date()
-            log.debug("Servers updated on \(self.lastUpdateDate!), will repeat in \(pollInterval) milliseconds")
-            self.scheduleServersUpdate(withDelay: pollInterval)
+        try? await refresh()
 
-            guard let servers = servers else {
-                if let error = error as? ClientError, error == ClientError.noRegions {
-                    self.pingIfOffline(servers: Client.providers.serverProvider.currentServers)
-                }
-                return
-            }
-            self.pingIfOffline(servers: servers)
+        return accessedDatabase.transient.serversConfiguration.pollInterval
+    }
+
+    private func sleepInterruptibly(milliseconds: Int) async {
+        let nanoseconds = UInt64(max(0, milliseconds)) * NSEC_PER_MSEC
+        let task = Task { [sleep] in
+            await sleep(nanoseconds)
+        }
+        sleepTask = task
+        await task.value
+        sleepTask = nil
+    }
+
+    private func wake() {
+        sleepTask?.cancel()
+    }
+
+    // MARK: - Downloading
+
+    private func refresh() async throws {
+        let result = await runDeduplicatedDownload()
+
+        let updateDate = Date()
+        lastUpdateDate = updateDate
+        let pollInterval = accessedDatabase.transient.serversConfiguration.pollInterval
+        log.debug("Servers updated on \(updateDate), will repeat in \(pollInterval) milliseconds")
+
+        if let servers = result.servers {
+            pingIfOffline(servers: servers)
+        } else if let error = result.error as? ClientError, error == ClientError.noRegions {
+            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
+        }
+
+        if let error = result.error {
+            throw error
         }
     }
 
-    private func scheduleServersUpdate(withDelay delay: Int) {
-        pendingUpdateTimer?.cancel()
-        pendingUpdateTimer = DispatchSource.makeTimerSource(flags: .strict, queue: .main)
-        pendingUpdateTimer?.schedule(
-            deadline: DispatchTime.now() + .milliseconds(delay),
-            repeating: .never
-        )
-        pendingUpdateTimer?.setEventHandler {
-            self.checkOutdatedServers()
+    private func runDeduplicatedDownload() async -> DownloadResult {
+        // Join an in-flight download instead of starting a second one.
+        if let inflightUpdate = inflightUpdate {
+            log.debug("Servers download already in flight, joining it")
+            return await inflightUpdate.value
         }
-        pendingUpdateTimer?.resume()
+
+        inflightGeneration += 1
+        let generation = inflightGeneration
+        let task = Task {
+            await downloadWithWatchdog()
+        }
+        inflightUpdate = task
+
+        let result = await task.value
+
+        // Only the owning call clears the slot; reset() may have installed a newer generation.
+        if inflightGeneration == generation {
+            inflightUpdate = nil
+        }
+
+        return result
     }
+
+    private func downloadWithWatchdog() async -> DownloadResult {
+        let outcome = DownloadOutcome()
+
+        let download = Task { [downloadServers] in
+            outcome.resume(with: await downloadServers())
+        }
+
+        let watchdog = Task { [downloadTimeout] in
+            try? await Task.sleep(nanoseconds: downloadTimeout)
+            log.error("Servers download did not call back within the timeout")
+            outcome.resume(with: (nil, ClientError.libraryError(message: "Servers download timed out")))
+        }
+
+        let result = await outcome.value()
+
+        download.cancel()
+        watchdog.cancel()
+
+        return result
+    }
+
+    private static let downloadFromCurrentProvider: DownloadServers = {
+        let outcome = DownloadOutcome()
+        Client.providers.serverProvider.download { servers, error in
+            outcome.resume(with: (servers, error))
+        }
+        return await outcome.value()
+    }
+
+    // MARK: - Pings
 
     private func pingIfOffline(servers: [Server]) {
         guard accessedConfiguration.enablesServerPings else {
             return
         }
 
-        // not before minimum interval
         if let last = lastPingDate {
             let elapsed = Int(-last.timeIntervalSinceNow * 1000.0)
-            guard (elapsed >= accessedConfiguration.minPingInterval) else {
-                log.debug("Not pinging servers before \(accessedConfiguration.minPingInterval) milliseconds (elapsed: \(elapsed))")
+            guard elapsed >= accessedConfiguration.minPingInterval else {
+                log.debug(
+                    "Not pinging servers before \(accessedConfiguration.minPingInterval) milliseconds (elapsed: \(elapsed))"
+                )
                 return
             }
         }
         lastPingDate = Date()
 
         // pings must be issued when VPN is NOT active to avoid biased response times
-        guard (accessedDatabase.transient.vpnStatus == .disconnected) else {
+        guard accessedDatabase.transient.vpnStatus == .disconnected else {
             log.debug("Not pinging servers while on VPN, will try on next update")
             return
         }
         log.debug("Start pinging servers")
 
+        // Deliberately not awaited: the update cadence must not wait on a full ping pass.
         Task {
             await ServersPinger.shared.ping(withDestinations: servers)
         }
@@ -179,24 +302,86 @@ final class ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provider
 
     // MARK: Notifications
 
-    @objc private func applicationDidBecomeActive(notification: Notification) {
-        if hasEnabledUpdates {
-            let currentServers = accessedProviders.serverProvider.currentServers
-            pingIfOffline(servers: currentServers)
+    private func beginObserving() {
+        guard observationTasks.isEmpty else {
+            return
+        }
+
+        var tasks = [
+            observationTask(for: .ConnectivityDaemonDidGetReachable, signal: .serversMayBeStale),
+            observationTask(for: .PIADaemonsDidUpdateVPNStatus, signal: .serversMayBeStale)
+        ]
+        #if os(iOS)
+            tasks.append(
+                observationTask(for: UIApplication.didBecomeActiveNotification, signal: .pingOnly)
+            )
+        #endif
+        observationTasks = tasks
+    }
+
+    private func observationTask(for name: Notification.Name, signal: WakeSignal) -> Task<Void, Never> {
+        Task { [weak self] in
+            // Mapped to Void: the notification itself is never read, only used as a signal.
+            for await _ in NotificationCenter.default.notifications(named: name).map({ _ in () }) {
+                guard let self = self else {
+                    return
+                }
+                await self.handle(signal)
+            }
         }
     }
 
-    @objc private func vpnStatusDidChange(notification: Notification) {
-        if hasEnabledUpdates {
-            checkOutdatedServers()
-            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
+    private func handle(_ signal: WakeSignal) {
+        guard hasEnabledUpdates else {
+            return
+        }
+
+        switch signal {
+        case .serversMayBeStale:
+            wake()
+        case .pingOnly:
+            break
+        }
+
+        pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
+    }
+}
+
+private final class DownloadOutcome: @unchecked Sendable {
+    private struct State {
+        var continuation: CheckedContinuation<ServersDaemon.DownloadResult, Never>?
+        var pending: ServersDaemon.DownloadResult?
+        var isResolved = false
+    }
+
+    private var state = Mutex(State())
+
+    func value() async -> ServersDaemon.DownloadResult {
+        await withCheckedContinuation { continuation in
+            state.withLock { state in
+                guard let pending = state.pending else {
+                    state.continuation = continuation
+                    return
+                }
+                state.pending = nil
+                state.isResolved = true
+                continuation.resume(returning: pending)
+            }
         }
     }
 
-    @objc private func handleReachable() {
-        if hasEnabledUpdates {
-            checkOutdatedServers()
-            pingIfOffline(servers: accessedProviders.serverProvider.currentServers)
+    func resume(with result: ServersDaemon.DownloadResult) {
+        state.withLock { state in
+            guard !state.isResolved, state.pending == nil else {
+                return
+            }
+            guard let continuation = state.continuation else {
+                state.pending = result
+                return
+            }
+            state.continuation = nil
+            state.isResolved = true
+            continuation.resume(returning: result)
         }
     }
 }

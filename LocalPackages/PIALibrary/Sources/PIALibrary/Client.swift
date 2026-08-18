@@ -83,10 +83,14 @@ public final class Client {
     public static func resetServers(completionBlock: @escaping (Error?) -> Void) {
         Task {
             await ServersPinger.shared.reset()
+            await ServersDaemon.shared.reset()
+            do {
+                try await ServersDaemon.shared.forceUpdates()
+                completionBlock(nil)
+            } catch {
+                completionBlock(error)
+            }
         }
-
-        ServersDaemon.shared.reset()
-        ServersDaemon.shared.forceUpdates(completionBlock: completionBlock)
     }
 
     public static func resetWebServices() {
