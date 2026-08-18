@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Belirteciniz geçersiz. Lütfen belirteci doğru şekilde girdiğinizden emin olun.";
 "dedicated.ip.message.valid.token" = "Özel IP'niz başarıyla etkinleştirildi. Bölge seçim listenizde mevcut olacak.";
 "dedicated.ip.message.expired.token" = "Belirtecinizin süresi doldu. Lütfen web sitemizde Hesap sayfanızdan yenisini oluşturun.";
+"dedicated.ip.message.error.alreadyHasOne" = "Aynı anda yalnızca bir Özel IP'ye sahip olabilirsiniz";
 "dedicated.ip.message.error.retryafter" = "Çok fazla başarısız belirteç etkinleştirme talebi. Lütfen %@ saniye sonra tekrar deneyin.";
 "dedicated.ip.message.token.willexpire" = "Özel IP adresiniz yakında sona erecek. Yenisini edinin";
 "dedicated.ip.message.token.willexpire.link" = "Yenisini al";

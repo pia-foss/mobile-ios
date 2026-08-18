@@ -40,9 +40,13 @@ public protocol VPNProfile: AnyObject {
     /// The connection date time, if connected. Otherwise nil.
     var connectionDate: Date? { get }
 
-    /**
-     Prepares the profile for use, like synchronizing with the current VPN status and making sure that the profile is not corrupt.
-     */
+    /// Prepares the profile for use, like synchronizing with the current VPN status
+    /// and making sure that the profile is not corrupt.
+    ///
+    /// - Parameter callback: Returns `nil` once the profile has finished loading its own
+    /// NetworkExtension configuration, at which point `native` is set and its
+    /// `connection.status` reflects PIA's own VPN. Returns an error if the configuration could
+    /// not be loaded, in which case `native` must not be trusted.
     func prepare(_ callback: SuccessLibraryCallback?)
 
     /**

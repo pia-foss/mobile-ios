@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Недействительный токен. Убедитесь, что вы правильно ввели токен.";
 "dedicated.ip.message.valid.token" = "Ваш выделенный IP-адрес успешно активирован. Теперь он будет доступен в списке выбора региона.";
 "dedicated.ip.message.expired.token" = "Срок действия вашего токена истек. Сгенерируйте новый на странице своей учетной записи на нашем веб-сайте.";
+"dedicated.ip.message.error.alreadyHasOne" = "У вас может быть только один выделенный IP-адрес одновременно";
 "dedicated.ip.message.error.retryafter" = "Слишком много неудачных запросов активации токена. Повторите попытку через %@ сек.";
 "dedicated.ip.message.token.willexpire" = "Действие вашего выделенного IP-адреса скоро заканчивается. Получите новый адрес";
 "dedicated.ip.message.token.willexpire.link" = "Получите новый адрес";

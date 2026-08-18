@@ -237,6 +237,8 @@ public enum L10n {
       }
       public enum Message {
         public enum Error {
+          /// You can only have one Dedicated IP at a time
+          public static let alreadyHasOne = L10n.tr("Localizable", "dedicated.ip.message.error.alreadyHasOne", fallback: "You can only have one Dedicated IP at a time")
           /// Too many failed token activation requests. Please try again after %@ second(s).
           public static func retryafter(_ p1: Any) -> String {
             return L10n.tr("Localizable", "dedicated.ip.message.error.retryafter", String(describing: p1), fallback: "Too many failed token activation requests. Please try again after %@ second(s).")

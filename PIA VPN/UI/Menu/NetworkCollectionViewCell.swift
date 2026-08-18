@@ -26,7 +26,7 @@ import PIALocalizations
 import Popover
 import UIKit
 
-class NetworkCollectionViewCell: UICollectionViewCell {
+final class NetworkCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var statusColor: UIImageView!
     @IBOutlet private weak var networkIconBackground: UIImageView!

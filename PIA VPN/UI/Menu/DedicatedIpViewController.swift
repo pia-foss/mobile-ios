@@ -290,7 +290,7 @@ extension DedicatedIpViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if Sections.header == section {
-            if !data.isEmpty && AppPreferences.shared.disablesMultiDipTokens {
+            if !data.isEmpty {
                 let headerView = tableView.dequeueReusableCell(withIdentifier: Cells.activeHeader) as! ActiveDedicatedIpHeaderViewCell
                 headerView.setup()
                 return headerView
@@ -348,6 +348,13 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
                 Macros.displayStickyNote(
                     withMessage: Self.invalidTokenLocalisedString,
                     andImage: Asset.iconWarning.image,
+                )
+
+            case .failure(.alreadyHasOne):
+                log.error("Activate DIP token failed: existing DIP already")
+                Macros.displayStickyNote(
+                    withMessage: L10n.Dedicated.Ip.Message.Error.alreadyHasOne,
+                    andImage: Asset.iconWarning.image
                 )
 
             case let .failure(.generic(error)):

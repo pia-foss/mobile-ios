@@ -80,15 +80,14 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     /// only signal for an in-place switch / mid-session reconnect, where NEVPNStatus stays
     /// `.connected` and `.NEVPNStatusDidChange` never fires.
     ///
-    /// The "is the tunnel up" gate is `VPNIPAddressFromInterfaces()` — the live tunnel interface —
+    /// The "is the tunnel up" gate is `tunnelStatus != nil` — written by our own tunnel extension —
     /// NOT the `NETunnelProviderManager` connection status. The manager loads asynchronously, so on a
     /// cold relaunch (tunnel still alive) it isn't available yet and an early write-back would be
-    /// dropped; the interface is present immediately. With the interface up the tunnel exists, so we
-    /// pass `system: .connected` and let `resolve` layer the tunnel's `.connecting` nuance on top.
-    /// The `tunnelStatus != nil` guard means teardown (which clears it) is left to the NEVPNStatus
-    /// path, and it ignores a stale write-back while disconnected (no interface).
+    /// dropped; the shared state is readable immediately. A non-nil status means our tunnel exists,
+    /// so we pass `system: .connected` and let `resolve` layer the tunnel's `.connecting` nuance on
+    /// top. Teardown clears the status, so it is left to the NEVPNStatus path.
     @objc private func platformSDKTunnelStatusDidChange() {
-        guard let tunnel = PIATunnelSharedState.read().tunnelStatus, VPNIPAddressFromInterfaces() != nil else {
+        guard let tunnel = PIATunnelSharedState.read().tunnelStatus else {
             return
         }
 
@@ -99,11 +98,12 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         accessedDatabase.transient.vpnStatus = resolvedStatus
 
         // Safety net for adopting a live tunnel whose start we never observed (the NEVPNStatus path
-        // only records this on a `.disconnected → .connected` transition). Seeding at cold launch
+        // only records this on a `.disconnected → .connected` transition). Reconciling at cold launch
         // normally sets this first, so this only fills the rare case where the write-back is what
         // flips us to `.connected`. No `connectedDate` is available here, so fall back to now; only
         // fill a missing value so an accurate timestamp is preserved. Drives the "Protected | <time>"
-        // label — see the matching backfill in `DefaultVPNProvider.seedInitialVPNStatus`.
+        // label — see the matching backfill in
+        // `DefaultVPNProvider.reconcileStatusWithOwnConfiguration`.
         if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
             Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
         }

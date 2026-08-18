@@ -331,6 +331,7 @@
 "dedicated.ip.message.invalid.token" = "Ihr Token ist ungültig. Bitte stellen Sie sicher, dass Sie das Token korrekt eingegeben haben.";
 "dedicated.ip.message.valid.token" = "Ihre Dedizierte IP wurde erfolgreich aktiviert. Sie wird in der Auswahlliste Ihrer Region verfügbar sein.";
 "dedicated.ip.message.expired.token" = "Ihr Token ist abgelaufen. Bitte generieren Sie von Ihrer Konto-Seite auf der Webseite ein neues.";
+"dedicated.ip.message.error.alreadyHasOne" = "Sie können jeweils nur eine Dedizierte IP haben";
 "dedicated.ip.message.error.retryafter" = "Zu viele fehlgeschlagene Token-Aktivierungsanforderungen. Bitte versuche es nach %@ Sekunde(n) erneut.";
 "dedicated.ip.message.token.willexpire" = "Ihre dedizierte IP wird bald ablaufen. Eine neue abrufen";
 "dedicated.ip.message.token.willexpire.link" = "Eine neue abrufen";

@@ -122,11 +122,23 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         let completionBlock = {
             self.activeProfile = profile
 
-            // Seed the initial status only once the native profile has finished loading, so
-            // `seedInitialVPNStatus` can read the live manager's connection status (and, for an
-            // already-running tunnel, its `connectedDate`) instead of racing the async load.
-            profile?.prepare { _ in
-                self.seedInitialVPNStatus(from: profile)
+            if self.accessedDatabase.plain.lastKnownVpnStatus == .connected {
+                self.accessedDatabase.transient.vpnStatus = .connected
+            }
+
+            // The restore might miss a tunnel that on-demand rules brought up while
+            // the app was not running. Reconcile against the real status of the NE
+            // configuration as soon as it is loaded: no NEVPNStatusDidChange is
+            // delivered for a change that happened while the app was not running.
+            // Reconciling only once the native profile has finished loading also lets it read
+            // the live manager's connection status (and, for an already-running tunnel, its
+            // `connectedDate`) instead of racing the async load.
+            profile?.prepare { error in
+                if let error {
+                    log.error("prepare: could not load our own VPN configuration (\(error.localizedDescription)); leaving the restored status untouched")
+                    return
+                }
+                self.reconcileStatusWithOwnConfiguration(of: profile)
             }
         }
 
@@ -151,6 +163,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             preferences.commit()
 
             completionBlock()
+            // `completionBlock` restores the status synchronously from the PIA-owned persisted
+            // mirror, so this still means "PIA's own VPN was up when we last saw it".
             force = accessedDatabase.transient.vpnStatus == .connected
 
         } else {
@@ -169,31 +183,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             self.install(force: force, nil)
         }
 
-    }
-
-    private func seedInitialVPNStatus(from profile: VPNProfile?) {
-        guard let profile else {
-            return
-        }
-
-        // Every current profile exposes a loaded `NEVPNManager` (IKEv2) or
-        // `NETunnelProviderManager` (the tunnel profiles) by the time `prepare` completes, so
-        // read the live connection status directly.
-        guard let manager = profile.native as? NEVPNManager else {
-            return
-        }
-
-        let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.read().tunnelStatus : nil
-        let resolvedStatus = VPNStatus.resolve(system: manager.connection.status, tunnel: tunnel)
-
-        // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
-        // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
-        // `connectedDate`; only fill when missing so an existing value is preserved.
-        if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
-            Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
-        }
-
-        accessedDatabase.transient.vpnStatus = resolvedStatus
     }
 
     public func install(force forceInstall: Bool, _ callback: SuccessLibraryCallback?) {
@@ -473,6 +462,55 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return accessedConfiguration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType)
         }
         return accessedConfiguration.profile(forVPNType: accessedPreferences.vpnType)
+    }
+
+    /// Reconciles the status restored at launch (see ``prepare()``) with the real status of the
+    /// active profile's own NetworkExtension configuration.
+    private func reconcileStatusWithOwnConfiguration(of profile: VPNProfile?) {
+        guard let profile, let manager = profile.native as? NEVPNManager else {
+            return
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            guard self.activeProfile === profile else {
+                return
+            }
+
+            let currentStatus = self.accessedDatabase.transient.vpnStatus
+            let nativeStatus = manager.connection.status
+
+            // Under the PlatformSDK tunnel a native `.connected` only says the Network Extension
+            // is up; the tunnel's own write-back is what tells us whether it is actually carrying
+            // traffic or still (re)connecting. Fold it in before applying the adoption policy.
+            let tunnel =
+                accessedConfiguration.featureFlags[.usePlatformSDKVPN]
+                ? PIATunnelSharedState.read().tunnelStatus : nil
+            let resolvedStatus = VPNStatus.resolve(system: nativeStatus, tunnel: tunnel)
+
+            // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
+            // case the `VPNDaemon` transition path never observes. Prefer the tunnel's real
+            // `connectedDate`; only fill when missing so an existing value is preserved. Done
+            // ahead of the adoption guard so it still runs when the restored status already
+            // matched and there is nothing to write back.
+            if resolvedStatus == .connected, Client.preferences.lastVPNConnectionSuccess == nil {
+                Client.preferences.lastVPNConnectionSuccess = (manager.connection.connectedDate ?? Date()).timeIntervalSince1970
+            }
+
+            guard
+                let reconciledStatus = VPNStatus.reconciled(
+                    current: currentStatus,
+                    resolved: resolvedStatus,
+                    isOwnConnectionUp: nativeStatus == .connected
+                )
+            else {
+                return
+            }
+
+            log.debug("prepare: reconciling restored VPN status \(currentStatus) -> \(reconciledStatus) (own configuration status: \(nativeStatus.rawValue), tunnel: \(String(describing: tunnel)))")
+            self.accessedDatabase.plain.lastKnownVpnStatus = reconciledStatus
+            self.accessedDatabase.transient.vpnStatus = reconciledStatus
+        }
     }
 
     @discardableResult private func activeProfileRemovingInactive() -> VPNProfile? {
