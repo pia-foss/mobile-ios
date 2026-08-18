@@ -80,14 +80,17 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     /// only signal for an in-place switch / mid-session reconnect, where NEVPNStatus stays
     /// `.connected` and `.NEVPNStatusDidChange` never fires.
     ///
-    /// The "is the tunnel up" gate is `tunnelStatus != nil` — written by our own tunnel extension —
-    /// NOT the `NETunnelProviderManager` connection status. The manager loads asynchronously, so on a
-    /// cold relaunch (tunnel still alive) it isn't available yet and an early write-back would be
-    /// dropped; the shared state is readable immediately. A non-nil status means our tunnel exists,
-    /// so we pass `system: .connected` and let `resolve` layer the tunnel's `.connecting` nuance on
-    /// top. Teardown clears the status, so it is left to the NEVPNStatus path.
+    /// `resolve` is called with a hardcoded `system: .connected`, so our own manager has to confirm
+    /// that. `tunnelStatus` can't: it is non-nil for `.disconnected`/`.disconnecting` and survives a
+    /// tunnel that died without a graceful `stopTunnel`, and this handler also runs for the app's own
+    /// shared-state writes (server list, latencies) — so alone it would let a stale value flip us to
+    /// `.connected`. Teardown drops the manager out of `.connected`, leaving that to the NEVPNStatus
+    /// path; cold start is covered by `DefaultVPNProvider.reconcileStatusWithOwnConfiguration`.
     @objc private func platformSDKTunnelStatusDidChange() {
-        guard let tunnel = PIATunnelSharedState.read().tunnelStatus else {
+        guard let tunnel = PIATunnelSharedState.read().tunnelStatus,
+            let manager = accessedDatabase.transient.activeVPNProfile?.native as? NEVPNManager,
+            manager.connection.status == .connected
+        else {
             return
         }
 
