@@ -74,7 +74,6 @@ class BootstraperFactory {
     private static func setupPreferences() {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
-        defaults.mace = false
         defaults.vpnType = IKEv2Profile.vpnType
     }
 

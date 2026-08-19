@@ -291,7 +291,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func commitChanges(_ completionHandler: @escaping () -> Void) {
-        pendingPreferences.mace = false
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         if pendingVPNAction == nil && Client.providers.vpnProvider.isVPNConnected && isResetting {
