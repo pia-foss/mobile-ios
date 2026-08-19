@@ -612,6 +612,7 @@
 "welcome.login.error.validation"= "يجب إدخال اسم المستخدم وكلمة المرور";
 "welcome.login.error.unauthorized"= "اسم المستخدم أو كلمة المرور غير صحيحة.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "خادمنا غير متاح في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقاً.";
 "welcome.login.receipt.button"= "تسجيل الدخول باستخدام إيصال الشراء";
 "welcome.login.magic.link.title"= "تسجيل الدخول باستخدام رابط البريد الإلكتروني السحري";
 "welcome.login.magic.link.response"= "يرجى إلقاء نظرة على بريدك الإلكتروني للحصول على رابط تسجيل الدخول.";

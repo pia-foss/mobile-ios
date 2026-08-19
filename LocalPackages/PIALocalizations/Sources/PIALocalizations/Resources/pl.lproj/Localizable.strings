@@ -612,6 +612,7 @@ Zawsze masz kontrolę. W ustawieniach możesz sprawdzić, jakie dane zebraliśmy
 "welcome.login.error.validation"= "Musisz podać nazwę użytkownika i hasło.";
 "welcome.login.error.unauthorized"= "Twoja nazwa użytkownika i hasło są nieprawidłowe.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Nasz serwer jest obecnie niedostępny. Spróbuj ponownie później.";
 "welcome.login.receipt.button"= "Zaloguj się, używając pokwitowania zakupu";
 "welcome.login.magic.link.title"= "Zaloguj się, używając sekretnego linku z e-maila";
 "welcome.login.magic.link.response"= "Link do logowania wysłaliśmy e-mailem,";

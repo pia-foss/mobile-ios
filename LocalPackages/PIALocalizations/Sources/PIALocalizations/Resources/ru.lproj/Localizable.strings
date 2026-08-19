@@ -612,6 +612,7 @@
 "welcome.login.error.validation"= "Нужно ввести имя пользователя и пароль.";
 "welcome.login.error.unauthorized"= "Неправильное имя пользователя или пароль.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Наш сервер в настоящее время недоступен. Пожалуйста, повторите попытку позже.";
 "welcome.login.receipt.button"= "Выполните вход по квитанции о покупке";
 "welcome.login.magic.link.title"= "Войти через волшебную ссылку из письма";
 "welcome.login.magic.link.response"= "Поищите ссылку для входа в письме.";

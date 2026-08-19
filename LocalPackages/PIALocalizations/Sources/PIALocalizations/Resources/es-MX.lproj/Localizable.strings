@@ -612,6 +612,7 @@ Siempre tendrás el control. Puedes ver los datos que hemos recopilado desde los
 "welcome.login.error.validation"= "Debe ingresar un nombre de usuario y una contraseña.";
 "welcome.login.error.unauthorized"= "Tu nombre de usuario o contraseña son incorrectos.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Nuestro servidor no está disponible en este momento. Por favor, inténtalo de nuevo más tarde.";
 "welcome.login.receipt.button"= "Inicia sesión con el recibo de compra";
 "welcome.login.magic.link.title"= "Inicia sesión con el vínculo mágico del correo electrónico.";
 "welcome.login.magic.link.response"= "Busca en tu correo electrónico un enlace de inicio de sesión.";

@@ -613,6 +613,7 @@
 "welcome.login.error.validation"= "ユーザー名とパスワードを入力してください。";
 "welcome.login.error.unauthorized"= "ユーザー名またはパスワードが間違っています。";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "現在、サーバーは利用できません。後でもう一度お試しください。";
 "welcome.login.receipt.button"= "購入領収書を使用してログイン";
 "welcome.login.magic.link.title"= "魔法のメールリンクを使用してログイン";
 "welcome.login.magic.link.response"= "ログインリンクについては、メールを確認してください。";
