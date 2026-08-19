@@ -580,6 +580,7 @@
 				35E8E6582B870AD200A3A3DB /* PIA-VPN_tvOS_E2E_Tests.xctest */,
 				E548E1F52C1238B5001E9874 /* PIA VPN-tvOS snapshot.xctest */,
 				3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */,
+				F20000072FD9000000DA8769 /* PlatformSDK-Tunnel-tvOS.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
