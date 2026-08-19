@@ -345,20 +345,16 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
     private func handleLoginFailed(_ error: ClientError, loginOption: LoginOption) {
         log.error("Failed to log in: \(error)")
 
-        var displayDuration: Double?
         let errorMessage: String
 
         switch error {
         case .unauthorized:
             errorMessage = L10n.Welcome.Login.Error.unauthorized
 
-        case .throttled(retryAfter: let retryAfter):
-            let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
-            errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
+        case .throttled(let retryAfter):
+            errorMessage = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
 
             let retryAfterSeconds = Double(retryAfter)
-            displayDuration = retryAfterSeconds
-
             updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
 
         case .expired:
@@ -387,7 +383,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             errorMessage = L10n.Signup.Failure.unknown(error.localizedDescription, 0)
         }
 
-        displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
+        displayErrorMessage(errorMessage: errorMessage)
     }
 
     private func displayErrorMessage(errorMessage: String, displayDuration: Double? = nil) {

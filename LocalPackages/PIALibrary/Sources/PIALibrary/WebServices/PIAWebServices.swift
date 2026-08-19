@@ -180,7 +180,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         case .http(let status):
             return .unknown(code: status, message: error.localizedDescription)
         case .network:
-            return .internetUnreachable
+            return .backendUnavailable
         case let type:
             return .libraryError(code: type.code, message: error.localizedDescription)
         }

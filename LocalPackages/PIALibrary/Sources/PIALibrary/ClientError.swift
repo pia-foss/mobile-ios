@@ -28,7 +28,7 @@ public enum ClientError: Error, Equatable {
     /// The Internet is unreachable.
     case internetUnreachable
 
-    /// Our backend is down, or returning 5xx errors.
+    /// Our backend is down, timing out, or returning 5xx errors.
     case backendUnavailable
 
     /// The service has been denied authorization.

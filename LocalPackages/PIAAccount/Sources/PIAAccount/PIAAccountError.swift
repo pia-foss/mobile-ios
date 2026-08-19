@@ -162,7 +162,8 @@ public struct PIAMultipleErrors: PIAError, Sendable {
     public let errors: [PIAAccountError]
 
     public init(errors: [PIAAccountError]) {
-        self.errors = errors
+        // sort them by importance, highest first
+        self.errors = errors.sorted(using: KeyPathComparator(\.type.importance, order: .reverse))
     }
 
     // MARK: - PIAError
