@@ -269,7 +269,7 @@ import Foundation
             let cfg = NETunnelProviderProtocol()
             cfg.providerBundleIdentifier = bundleIdentifier
             cfg.serverAddress = serverAddress
-            cfg.username = Client.providers.accountProvider.publicUsername
+            cfg.username = Client.providers.accountProvider.publicUsername ?? Client.providers.accountProvider.vpnTokenUsername ?? ""
             cfg.disconnectOnSleep = configuration.disconnectsOnSleep
 
             let token = configuration.server.dipUsername != nil ? configuration.server.dipUsername : (Client.providers.accountProvider.vpnToken ?? Client.providers.accountProvider.oldToken)
