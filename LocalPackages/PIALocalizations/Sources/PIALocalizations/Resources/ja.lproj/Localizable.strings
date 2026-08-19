@@ -547,7 +547,7 @@
 "signup.failure.redeem.claimed.message"= "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
 "signup.failure.submit"= "戻る";
 "signup.failure.internal"= "内部アプリエラー (%d)";
-"signup.failure.unknown"= "不明なエラー: %s (%d)";
+"signup.failure.unknown"= "不明なエラー: %@ (%d)";
 
 "signup.unreachable.vc_title"= "エラー";
 "signup.unreachable.title"= "おっと！";

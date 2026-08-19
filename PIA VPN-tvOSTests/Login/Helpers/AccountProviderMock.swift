@@ -56,13 +56,25 @@ final class AccountProviderMock: AccountProvider {
         self.appStoreInformationResult = appStoreInformationResult
     }
 
-    func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?) {
-        callback?(userResult, errorResult)
+    func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+        if let clientError = errorResult as? ClientError {
+            callback(.failure(clientError))
+        } else if let userResult {
+            callback(.success(userResult))
+        } else {
+            callback(.failure(.unexpectedReply))
+        }
     }
 
-    func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+    func login(with linkToken: String, _ callback: @escaping ClientCallback<UserAccount>) {
         loginWithTokenCalledAttempt += 1
-        callback?(userResult, errorResult)
+        if let clientError = errorResult as? ClientError {
+            callback(.failure(clientError))
+        } else if let userResult {
+            callback(.success(userResult))
+        } else {
+            callback(.failure(.unexpectedReply))
+        }
     }
 
     func signup(with request: SignupRequest, _ callback: LibraryCallback<UserAccount>?) {
@@ -73,8 +85,14 @@ final class AccountProviderMock: AccountProvider {
         callback?(appStoreInformationResult, errorResult)
     }
 
-    func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {
-        callback?(userResult, errorResult)
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+        if let clientError = errorResult as? ClientError {
+            callback(.failure(clientError))
+        } else if let userResult {
+            callback(.success(userResult))
+        } else {
+            callback(.failure(.unexpectedReply))
+        }
     }
 
     func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?) {}
@@ -100,7 +118,7 @@ final class AccountProviderMock: AccountProvider {
     }
     func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
     func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
-    func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}
+    func loginUsingMagicLink(withEmail email: String, _ callback: @escaping SuccessClientCallback) {}
     func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?) {}
     func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}
 

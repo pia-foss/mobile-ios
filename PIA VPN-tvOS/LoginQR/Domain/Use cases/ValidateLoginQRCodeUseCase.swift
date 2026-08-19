@@ -26,8 +26,8 @@ class ValidateLoginQRCodeUseCase: ValidateLoginQRCodeUseCaseType {
         let apiToken = try await validateLoginQRCodeProvider.validateLoginQRCodeToken(qrCodeToken)
 
         return try await withCheckedThrowingContinuation { continuation in
-            accountProviderType.login(with: apiToken) { _, error in
-                if let error = error {
+            accountProviderType.login(with: apiToken) { result in
+                if case let .failure(error) = result {
                     continuation.resume(throwing: error)
                     return
                 }

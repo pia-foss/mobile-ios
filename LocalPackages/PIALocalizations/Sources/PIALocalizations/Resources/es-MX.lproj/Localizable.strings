@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "Parece que esta tarjeta ha sido reclamada por otra cuenta. Puedes intentar ingresar un PIN diferente.";
 "signup.failure.submit"= "ATRÁS";
 "signup.failure.internal"= "Error interno de la aplicación (%d)";
-"signup.failure.unknown"= "Error desconocido: %s (%d)";
+"signup.failure.unknown"= "Error desconocido: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Error";
 "signup.unreachable.title"= "¡Ups!";

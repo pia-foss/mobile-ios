@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "이 카드는 이미 다른 계정에서 청구한 것 같습니다. 다른 PIN을 입력해 보세요.";
 "signup.failure.submit"= "뒤로";
 "signup.failure.internal"= "내부 앱 오류 (%d)";
-"signup.failure.unknown"= "알 수 없는 오류: %s (%d)";
+"signup.failure.unknown"= "알 수 없는 오류: %@ (%d)";
 
 "signup.unreachable.vc_title"= "오류";
 "signup.unreachable.title"= "앗!";

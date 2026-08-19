@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "يبدو أن هذه البطاقة استُخدمت في حساب آخر. حاول إدخال رمز جديد.";
 "signup.failure.submit"= "عودة";
 "signup.failure.internal"= "خطأ داخلي في التطبيق (%d)";
-"signup.failure.unknown"= "خطأ غير معروف: %s (%d)";
+"signup.failure.unknown"= "خطأ غير معروف: %@ (%d)";
 
 "signup.unreachable.vc_title"= "خطأ";
 "signup.unreachable.title"= "أوبس!";

@@ -20,26 +20,29 @@ final class LoginProvider: LoginProviderType {
     func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
         let request = LoginRequest(credentials: credentials)
 
-        accountProvider.login(with: request) { [weak self] userAccount, error in
-            self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
+        accountProvider.login(with: request) { [weak self] result in
+            self?.handleLoginResult(result: result, completion: completion)
         }
     }
 
     func login(with receipt: JWS, completion: @escaping (Result<UserAccount, Error>) -> Void) {
         let request = LoginReceiptRequest(receipt: receipt)
 
-        accountProvider.login(with: request) { [weak self] userAccount, error in
-            self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
+        accountProvider.login(with: request) { [weak self] result in
+            self?.handleLoginResult(result: result, completion: completion)
         }
     }
 
-    private func handleLoginResult(userAccount: UserAccount?, error: Error?, completion: @escaping (Result<UserAccount, Error>) -> Void) {
-        if let error = error {
+    private func handleLoginResult(
+        result: ClientResult<UserAccount>,
+        completion: @escaping (Result<UserAccount, Error>) -> Void
+    ) {
+        if case let .failure(error) = result {
             completion(.failure(error))
             return
         }
 
-        guard let userAccount = userAccount else {
+        guard case let .success(userAccount) = result else {
             completion(.failure(ClientError.unexpectedReply))
             return
         }

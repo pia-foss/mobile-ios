@@ -548,7 +548,7 @@
 "signup.failure.redeem.claimed.message"= "Parece que este cartão já foi resgatado por outra conta. Você pode tentar usar um PIN diferente.";
 "signup.failure.submit"= "VOLTAR";
 "signup.failure.internal"= "Erro interno do aplicativo (%d)";
-"signup.failure.unknown"= "Erro desconhecido: %s (%d)";
+"signup.failure.unknown"= "Erro desconhecido: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Erro";
 "signup.unreachable.title"= "Ops!";

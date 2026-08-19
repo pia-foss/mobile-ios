@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "這張卡似乎已經被另一個帳戶使用。您可以嘗試輸入不同的 PIN 碼。";
 "signup.failure.submit"= "返回";
 "signup.failure.internal"= "內部應用程式錯誤 (%d)";
-"signup.failure.unknown"= "未知錯誤：%s (%d)";
+"signup.failure.unknown"= "未知錯誤：%@ (%d)";
 
 "signup.unreachable.vc_title"= "錯誤";
 "signup.unreachable.title"= "噢！";

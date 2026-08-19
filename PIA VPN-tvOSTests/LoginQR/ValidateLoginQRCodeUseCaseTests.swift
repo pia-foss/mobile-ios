@@ -89,7 +89,7 @@ final class ValidateLoginQRCodeUseCaseTests: XCTestCase {
 
         instantiateSut(
             userResult: nil,
-            errorResult: LoginQRCodeError.generic,
+            errorResult: ClientError.unexpectedReply,
             validateLoginQRCodeResult: .success(apiToken))
 
         var capturedError: Error?
@@ -103,7 +103,7 @@ final class ValidateLoginQRCodeUseCaseTests: XCTestCase {
         }
 
         // THEN
-        let error = try XCTUnwrap(capturedError as? LoginQRCodeError)
-        XCTAssertEqual(error, .generic)
+        let error = try XCTUnwrap(capturedError as? ClientError)
+        XCTAssertEqual(error, .unexpectedReply)
     }
 }

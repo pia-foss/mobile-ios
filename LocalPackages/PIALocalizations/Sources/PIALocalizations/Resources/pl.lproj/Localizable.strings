@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "Wygląda na to, że ta karta została użyta na innym koncie. Możesz spróbować wpisać inny PIN.";
 "signup.failure.submit"= "WSTECZ";
 "signup.failure.internal"= "Wewnętrzny błąd aplikacji (%d)";
-"signup.failure.unknown"= "Nieznany błąd: %s (%d)";
+"signup.failure.unknown"= "Nieznany błąd: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Błąd";
 "signup.unreachable.title"= "Ups!";

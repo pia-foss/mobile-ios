@@ -31,19 +31,19 @@ protocol WebServices: AnyObject {
 
     // MARK: Account
 
-    func migrateToken(token: String) async throws
+    func migrateToken(token: String) async throws(ClientError)
 
-    func token(credentials: Credentials) async throws
+    func token(credentials: Credentials) async throws(ClientError)
 
-    func token(receipt: JWS) async throws
+    func token(receipt: JWS) async throws(ClientError)
 
     func validateLoginQR(qrToken: String) async throws -> String
 
-    func info() async throws -> AccountInfo
+    func info() async throws(ClientError) -> AccountInfo
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws
 
-    func loginLink(email: String) async throws
+    func loginLink(email: String) async throws(ClientError)
 
     /// The token to use for protocol authentication.
     var vpnToken: String? { get }

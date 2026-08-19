@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "Похоже, эту карту уже использовали с другой учетной записи. Попробуйте ввести другой PIN.";
 "signup.failure.submit"= "ВОЗВРАТ";
 "signup.failure.internal"= "Внутренняя ошибка приложения (%d)";
-"signup.failure.unknown"= "Неизвестная ошибка: %s (%d)";
+"signup.failure.unknown"= "Неизвестная ошибка: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Ошибка";
 "signup.unreachable.title"= "Ой!";

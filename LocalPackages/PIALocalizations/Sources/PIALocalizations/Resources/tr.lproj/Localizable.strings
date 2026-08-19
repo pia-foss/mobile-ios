@@ -541,7 +541,7 @@
 
 "signup.failure.internal"= "Dahili uygulama hatası (%d)";
 
-"signup.failure.unknown"= "Bilinmeyen hata: %s (%d)";
+"signup.failure.unknown"= "Bilinmeyen hata: %@ (%d)";
 
 "signup.failure.title"= "Hesap Oluşturma Hatası";
 

@@ -180,21 +180,18 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         }
 
         self.showLoadingAnimation()
-        self.config.accountProvider.loginUsingMagicLink(
-            withEmail: email,
-            { error in
-
-                self.hideLoadingAnimation()
-                guard error == nil else {
-                    self.handleLoginFailed(error, loginOption: .magicLink)
-                    return
-                }
-
+        self.config.accountProvider.loginUsingMagicLink(withEmail: email) { [weak self] result in
+            self?.hideLoadingAnimation()
+            switch result {
+            case .failure(let error):
+                self?.handleLoginFailed(error, loginOption: .magicLink)
+            case .success:
                 Macros.displaySuccessImageNote(
                     withImage: Asset.iconWarning.image,
                     message: L10n.Welcome.Login.Magic.Link.response
                 )
-            })
+            }
+        }
     }
 
     @objc private func finishLoginWithMagicLink(notification: Notification) {
@@ -234,14 +231,14 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
                 guard let self else { return }
                 guard let jws else {
                     log.debug("No entitlement found to restore")
-                    self.handleLoginResult(user: nil, error: ClientError.badReceipt, loginOption: .receipt)
+                    self.handleLoginResult(result: .failure(.noReceipt), loginOption: .receipt)
                     return
                 }
 
                 let request = LoginReceiptRequest(receipt: jws)
 
-                self.config.accountProvider.login(with: request) { userAccount, error in
-                    self.handleLoginResult(user: userAccount, error: error, loginOption: .receipt)
+                self.config.accountProvider.login(with: request) { result in
+                    self.handleLoginResult(result: result, loginOption: .receipt)
                 }
             }
         }
@@ -264,8 +261,8 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         let request = LoginRequest(credentials: credentials)
 
         prepareLogin()
-        config.accountProvider.login(with: request) { [weak self] userAccount, error in
-            self?.handleLoginResult(user: userAccount, error: error, loginOption: .credentials)
+        config.accountProvider.login(with: request) { [weak self] result in
+            self?.handleLoginResult(result: result, loginOption: .credentials)
         }
     }
 
@@ -318,19 +315,19 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         showLoadingAnimation()
     }
 
-    private func handleLoginResult(user: UserAccount?, error: Error?, loginOption: LoginOption) {
+    private func handleLoginResult(result: ClientResult<UserAccount>, loginOption: LoginOption) {
         enableInteractions(true)
 
         hideLoadingAnimation()
 
-        guard let user = user else {
+        switch result {
+        case .failure(let error):
             handleLoginFailed(error, loginOption: loginOption)
-            return
+
+        case .success(let user):
+            log.debug("Login succeeded!")
+            config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
         }
-
-        log.debug("Login succeeded!")
-
-        config.completionDelegate?.welcomeDidLogin(withUser: user, topViewController: self)
     }
 
     private func updateTimeToRetry(loginOption: LoginOption, retryAfterSeconds: Double) {
@@ -345,57 +342,58 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
         }
     }
 
-    private func handleLoginFailed(_ error: Error?, loginOption: LoginOption) {
+    private func handleLoginFailed(_ error: ClientError, loginOption: LoginOption) {
+        log.error("Failed to log in: \(error)")
+
         var displayDuration: Double?
-        var errorMessage: String?
-        if let error {
-            log.error("Failed to log in: \(error)")
-            switch error as? ClientError {
-            case .unauthorized:
-                errorMessage = L10n.Welcome.Login.Error.unauthorized
+        let errorMessage: String
 
-            case .throttled(retryAfter: let retryAfter):
-                let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
-                errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
+        switch error {
+        case .unauthorized:
+            errorMessage = L10n.Welcome.Login.Error.unauthorized
 
-                let retryAfterSeconds = Double(retryAfter)
-                displayDuration = retryAfterSeconds
+        case .throttled(retryAfter: let retryAfter):
+            let localisedThrottlingString = L10n.Welcome.Login.Error.throttled("\(retryAfter)")
+            errorMessage = NSLocalizedString(localisedThrottlingString, comment: localisedThrottlingString)
 
-                updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
+            let retryAfterSeconds = Double(retryAfter)
+            displayDuration = retryAfterSeconds
 
-            case .expired:
-                handleExpiredAccount()
-                return
+            updateTimeToRetry(loginOption: loginOption, retryAfterSeconds: retryAfterSeconds)
 
-            case .badReceipt:
-                handleBadReceipt()
-                return
+        case .expired:
+            handleExpiredAccount()
+            return
 
-            case .internetUnreachable:
-                errorMessage = L10n.Global.unreachable
+        case .badReceipt:
+            handleBadReceipt()
+            return
 
-            case let .libraryError(message):
-                let message = message ?? error.localizedDescription
-                log.error("Account library error: \(message)")
-                // we shouldn't show this message to the user since this is an internal error
-                errorMessage = L10n.Signup.Failure.internal(PIAAccountError.networkFailureCode)
+        case .internetUnreachable:
+            errorMessage = L10n.Global.unreachable
 
-            case let .unknown(code, message):
-                let message = message ?? error.localizedDescription
-                errorMessage = L10n.Signup.Failure.unknown(message, code)
+        case .backendUnavailable:
+            errorMessage = L10n.Welcome.Login.Error.backendUnavailable
 
-            default:
-                errorMessage = error.localizedDescription
-            }
+        case let .libraryError(code, message):
+            log.error("Account library error: \(message)")
+            // we shouldn't show this message to the user since this is an internal error
+            errorMessage = L10n.Signup.Failure.internal(code)
+
+        case let .unknown(code, message):
+            errorMessage = L10n.Signup.Failure.unknown(message, code)
+
+        default:
+            errorMessage = L10n.Signup.Failure.unknown(error.localizedDescription, 0)
         }
+
         displayErrorMessage(errorMessage: errorMessage, displayDuration: displayDuration)
     }
 
-    private func displayErrorMessage(errorMessage: String?, displayDuration: Double? = nil) {
-
+    private func displayErrorMessage(errorMessage: String, displayDuration: Double? = nil) {
         Macros.displayImageNote(
             withImage: Asset.iconWarning.image,
-            message: errorMessage ?? L10n.Welcome.Login.Error.title, andDuration: displayDuration,
+            message: errorMessage, andDuration: displayDuration,
             accessbilityIdentifier: Accessibility.Id.Login.Error.banner)
     }
 

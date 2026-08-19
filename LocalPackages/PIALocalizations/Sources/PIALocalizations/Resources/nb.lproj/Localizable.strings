@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
 "signup.failure.submit"= "GÅ TILBAKE";
 "signup.failure.internal"= "Intern app-feil (%d)";
-"signup.failure.unknown"= "Ukjent feil: %s (%d)";
+"signup.failure.unknown"= "Ukjent feil: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Feil";
 "signup.unreachable.title"= "Ups!";

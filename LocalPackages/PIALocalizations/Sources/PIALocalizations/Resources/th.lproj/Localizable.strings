@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
 "signup.failure.submit"= "ย้อนกลับ";
 "signup.failure.internal"= "ข้อผิดพลาดภายในแอป (%d)";
-"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %s (%d)";
+"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %@ (%d)";
 
 "signup.unreachable.vc_title"= "ข้อผิดพลาด";
 "signup.unreachable.title"= "อุ๊ปส์!";

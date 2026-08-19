@@ -250,7 +250,7 @@ internal actor ServersDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Provi
         let watchdog = Task { [downloadTimeout] in
             try? await Task.sleep(nanoseconds: downloadTimeout)
             log.error("Servers download did not call back within the timeout")
-            outcome.resume(with: (nil, ClientError.libraryError(message: "Servers download timed out")))
+            outcome.resume(with: (nil, ClientError.noServersAvailable))
         }
 
         let result = await outcome.value()

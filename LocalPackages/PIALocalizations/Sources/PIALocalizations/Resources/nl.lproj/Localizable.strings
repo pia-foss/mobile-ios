@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "Deze kaart is door een ander account geclaimd. Probeer een andere pincode.";
 "signup.failure.submit"= "GA TERUG";
 "signup.failure.internal"= "Interne app-fout (%d)";
-"signup.failure.unknown"= "Onbekende fout: %s (%d)";
+"signup.failure.unknown"= "Onbekende fout: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Fout";
 "signup.unreachable.title"= "Oeps!";
