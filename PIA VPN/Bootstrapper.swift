@@ -236,7 +236,6 @@ final class Bootstrapper {
             // Business objects
 
             AccountObserver.shared.start()
-        //        DataCounter.shared.startCounting()
         #endif
         // Notifications
 

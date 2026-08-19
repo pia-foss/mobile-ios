@@ -55,14 +55,10 @@ public enum Asset {
       public static let killswitchInactive = ImageAsset(name: "PIAX/Global/killswitch-inactive")
       public static let nmtActive = ImageAsset(name: "PIAX/Global/nmt-active")
       public static let nmtInactive = ImageAsset(name: "PIAX/Global/nmt-inactive")
-      public static let pagecontrolSelectedDot = ImageAsset(name: "PIAX/Global/pagecontrol-selected-dot")
-      public static let pagecontrolUnselectedDot = ImageAsset(name: "PIAX/Global/pagecontrol-unselected-dot")
       public static let planSelected = ImageAsset(name: "PIAX/Global/plan-selected")
       public static let planUnselected = ImageAsset(name: "PIAX/Global/plan-unselected")
       public static let regionSelected = ImageAsset(name: "PIAX/Global/region-selected")
       public static let scrollableMap = ImageAsset(name: "PIAX/Global/scrollableMap")
-      public static let themeActive = ImageAsset(name: "PIAX/Global/theme-active")
-      public static let themeInactive = ImageAsset(name: "PIAX/Global/theme-inactive")
     }
     public enum Nmt {
       public static let iconAddRule = ImageAsset(name: "PIAX/NMT/icon-add-rule")
@@ -405,7 +401,6 @@ public enum Asset {
   public static let imageRedeemSuccess = ImageAsset(name: "image-redeem-success")
   public static let imageRobot = ImageAsset(name: "image-robot")
   public static let imageVpnAllow = ImageAsset(name: "image-vpn-allow")
-  public static let imageWalkthrough2 = ImageAsset(name: "image-walkthrough-2")
   public static let itemMenu = ImageAsset(name: "item-menu")
   public static let navLogo = ImageAsset(name: "nav-logo")
   public static let offlineServerIcon = ImageAsset(name: "offline-server-icon")

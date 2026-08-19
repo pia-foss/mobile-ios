@@ -61,7 +61,6 @@ public class WhitelistUtil {
             "AppleLocale",
             "com.apple.content-rating.MovieRating",
             "NSInterfaceStyle",
-            "quickSettingThemeVisible",
             "PKLogNotificationServiceResponsesKey",
             "com.apple.content-rating.ExplicitBooksAllowed",
             "AppleITunesStoreItemKinds",

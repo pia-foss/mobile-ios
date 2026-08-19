@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Gegevensversleuteling";
 "settings.encryption.handshake.title" = "Handdruk";
 
-"settings.application_settings.active_theme.title" = "Actief thema";
 "settings.application_settings.kill_switch.title" = "VPN-killswitch";
 "settings.application_settings.kill_switch.footer" = "De VPN kill switch voorkomt toegang tot internet als de VPN-verbinding opnieuw tot stand wordt gebracht. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
 "settings.application_settings.reconnect_notifications.title" = "Herverbindingsmeldingen";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "Beveiligde servers in meer dan 90 landen";
-"signup.walkthrough.page.2.description"= "Met servers over de hele wereld wordt u altijd beschermd.";
 
 "signup.share.data.buttons.accept"= "Accepteren";
 "signup.share.data.buttons.noThanks"= "Nee, bedankt";

@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "資料加密";
 "settings.encryption.handshake.title" = "握手";
 
-"settings.application_settings.active_theme.title" = "使用中的主題";
 "settings.application_settings.kill_switch.title" = "VPN 切斷開關";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 重新連接，VPN 的終止開關將阻止互聯網連線。這不包括手動斷開連接。";
 "settings.application_settings.reconnect_notifications.title" = "重新連接通知";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "90多個國家的安全伺服器";
-"signup.walkthrough.page.2.description"= "我們的伺服器遍佈全球，能為您提供全面保護。";
 
 "signup.share.data.buttons.accept"= "接受";
 "signup.share.data.buttons.noThanks"= "不了，謝謝";

@@ -8,16 +8,6 @@
 
 import Foundation
 
-public protocol AccountProviderType {
-    var isLoggedIn: Bool { get }
-    var isExpired: Bool { get }
-    var publicUsername: String? { get }
-    var currentUser: PIALibrary.UserAccount? { get set }
-    func logout(_ callback: ((Error?) -> Void)?)
-    func login(with linkToken: String, _ callback: ((PIALibrary.UserAccount?, Error?) -> Void)?)
-    func accountInformation(_ callback: ((PIALibrary.AccountInfo?, Error?) -> Void)?)
-}
-
 public protocol ServerType {
     var id: ObjectIdentifier { get }
     var name: String { get }

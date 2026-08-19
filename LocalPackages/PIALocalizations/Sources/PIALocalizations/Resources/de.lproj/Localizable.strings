@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Datenverschlüsselung";
 "settings.encryption.handshake.title" = "Handshake";
 
-"settings.application_settings.active_theme.title" = "Aktives Theme";
 "settings.application_settings.kill_switch.title" = "VPN-Killswitch";
 "settings.application_settings.kill_switch.footer" = "Der VPN-Notausschalter unterbricht den Internetzugang, wenn die VPN-Verbindung neu aufgebaut wird. Dies schließt manuelles Trennen aus.";
 "settings.application_settings.reconnect_notifications.title" = "Wiederverbindungsbenachrichtigungen";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "Sichere Server in über 90 Ländern";
-"signup.walkthrough.page.2.description"= "Mit Servern auf der ganzen Welt bist du immer geschützt.";
 
 "signup.share.data.buttons.accept"= "Akzeptieren";
 "signup.share.data.buttons.noThanks"= "Nein danke";
