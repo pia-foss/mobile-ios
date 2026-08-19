@@ -25,19 +25,13 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         let privateKeyBase64 = privateKey.rawRepresentation.base64EncodedString()
 
         // authIp/authPort is the HTTP key-exchange endpoint, distinct from the WireGuard UDP endpoint (ip/port).
-        let host: String
-        switch config.authIp {
-        case .v4(ipV4: let ip):
-            host = ip
-        case .v6(ipV6: let ip):
-            host = "[\(ip)]"
-        }
+        let host = config.authIp.hostLiteral
         // Note: deliberately not logging the token or private key — these are secrets.
         logger.debug("Key-exchange endpoint: \(host):\(config.authPort)")
 
         guard
-            let encodedPubkey = publicKeyBase64.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let encodedPubkey = publicKeyBase64.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved),
+            let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved),
             let url = URL(string: "https://\(host):\(config.authPort)/addKey?pubkey=\(encodedPubkey)&pt=\(encodedToken)")
         else {
             logger.error("Failed to build key-exchange URL for \(host):\(config.authPort)")
@@ -65,14 +59,23 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
 
         logger.debug("Sending addKey request to \(host):\(config.authPort)")
         let resultData: Data
+        let urlResponse: URLResponse
         do {
-            (resultData, _) = try await session.data(for: request)
+            (resultData, urlResponse) = try await session.data(for: request)
         } catch {
             logger.error("addKey request to \(host) failed: \(error.localizedDescription)")
             throw error
         }
 
-        let response = try JSONDecoder().decode(WGKeyResponse.self, from: resultData)
+        let statusCode = (urlResponse as? HTTPURLResponse)?.statusCode ?? -1
+        let response: WGKeyResponse
+        do {
+            response = try JSONDecoder().decode(WGKeyResponse.self, from: resultData)
+        } catch {
+            let detail = errorDetail(in: resultData, redacting: token)
+            logger.error("addKey to \(host):\(config.authPort) rejected — http \(statusCode), \(detail)")
+            throw PIAWireguardAuthError.serverError("http \(statusCode): \(detail)")
+        }
         guard response.status == "OK" else {
             logger.error("Key-exchange server returned non-OK status: \(response.status)")
             throw PIAWireguardAuthError.serverError(response.status)
@@ -90,9 +93,7 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         if !customDnsServers.isEmpty {
             logger.info("Using \(customDnsServers.count) user-selected DNS resolver(s) for WireGuard")
         }
-        let dnsServers: [IpAddress] = rawDnsServers.map {
-            $0.contains(":") ? .v6(ipV6: $0) : .v4(ipV4: $0)
-        }
+        let dnsServers = rawDnsServers.map(IpAddress.init(parsing:))
 
         // Enrich the endpoint config with the post-auth state, per `PacketTunnelWireguardAuthenticator`.
         var authenticated = config
@@ -101,6 +102,21 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         authenticated.internalIp = response.peer_ip
         authenticated.dnsServers = dnsServers
         return authenticated
+    }
+
+    private func errorDetail(in data: Data, redacting token: String) -> String {
+        guard let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return "\(data.count) byte(s), body is not a JSON object"
+        }
+
+        return
+            object
+            .sorted { $0.key < $1.key }
+            .map { key, value in
+                let text = String(describing: value)
+                return "\(key)=\(text == token ? "<redacted>" : text)"
+            }
+            .joined(separator: ", ")
     }
 }
 

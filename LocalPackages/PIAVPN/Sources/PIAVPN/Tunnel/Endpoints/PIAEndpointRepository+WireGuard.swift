@@ -18,7 +18,7 @@ extension PIAEndpointRepository {
         }
 
         let configurations: [any VpnConfiguration] = addresses.compactMap { address in
-            let ip: IpAddress = address.ip.contains(":") ? .v6(ipV6: address.ip) : .v4(ipV4: address.ip)
+            let ip = IpAddress(parsing: address.ip)
             let endpoint = WireguardEndpointConfiguration(
                 ip: ip,
                 port: Self.wireGuardPort,
