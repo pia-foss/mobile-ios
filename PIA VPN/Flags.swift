@@ -46,8 +46,6 @@ class Flags: NSObject {
 
     @objc private(set) var enablesProtocolSelection = true
 
-    @objc private(set) var enablesMACESetting = false
-
     @objc private(set) var enablesContentBlockerSetting = true
 
     @objc private(set) var enablesEncryptionSettings = true

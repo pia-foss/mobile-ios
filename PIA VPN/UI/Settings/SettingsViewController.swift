@@ -311,7 +311,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         let isResettingToDefaults = isResetting
         isResetting = false
 
-        pendingPreferences.mace = false
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
         if isResettingToDefaults && pendingVPNAction == nil {

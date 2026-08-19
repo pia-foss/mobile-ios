@@ -29,7 +29,6 @@ private let log = PIALogger.logger(for: HelpSettingsViewController.self)
 
 final class HelpSettingsViewController: PIABaseSettingsViewController {
 
-
     private lazy var switchDebugLogging = UISwitch()
     private lazy var switchShareServiceQualityData = UISwitch()
 
@@ -68,13 +67,6 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.tableView.reloadData()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let trustedNetworksVC = segue.destination as? TrustedNetworksViewController, let pendingPreferences {
-            trustedNetworksVC.persistentConnectionValue = pendingPreferences.isPersistentConnection
-            trustedNetworksVC.vpnType = pendingPreferences.vpnType
-        }
     }
 
     @objc private func reloadSettings() {

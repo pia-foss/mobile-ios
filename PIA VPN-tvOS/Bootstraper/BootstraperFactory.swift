@@ -74,7 +74,6 @@ class BootstraperFactory {
     private static func setupPreferences() {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
-        defaults.mace = false
         // The default protocol depends on whether VPN runs through the PlatformSDK tunnel.
         // When the flag is on, tvOS connects through the PlatformSDK tunnel (registered in
         // `setupConfiguration`) and the user's `vpnType` selects which protocol the tunnel runs

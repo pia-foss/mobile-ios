@@ -201,7 +201,6 @@ final class Bootstrapper {
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
-        defaults.mace = false
         #if os(iOS)
             defaults.vpnCustomConfigurations = [
                 PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
@@ -289,11 +288,6 @@ final class Bootstrapper {
         // Preferences
 
         let pref = Client.preferences.editable()
-
-        // as per App Store guidelines
-        if !Flags.shared.enablesMACESetting {
-            pref.mace = false
-        }
 
         pref.commit()
         #if os(iOS)

@@ -37,10 +37,8 @@ final class TrustedNetworksViewController: AutolayoutViewController {
     private var data = [Rule]()
 
     private var hotspotHelper: PIAHotspotHelper!
-    var shouldReconnectAutomatically = false
-    var hasUpdatedPreferences = false
-    var persistentConnectionValue = false
-    var vpnType = ""
+
+    weak var pendingPreferences: Client.Preferences.Editable?
 
     private struct Cells {
         static let network = "NetworkCollectionViewCell"
@@ -55,6 +53,8 @@ final class TrustedNetworksViewController: AutolayoutViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        assert(pendingPreferences != nil, "pendingPreferences not set in TrustedNetworksViewController")
 
         reloadRulesData()
         self.hotspotHelper = PIAHotspotHelper(withDelegate: self)
@@ -71,29 +71,14 @@ final class TrustedNetworksViewController: AutolayoutViewController {
 
         configureCollectionView()
 
-        if !persistentConnectionValue,
-            Client.preferences.nmtRulesEnabled
-        {
+        if let pendingPreferences, !pendingPreferences.isPersistentConnection, Client.preferences.nmtRulesEnabled {
             presentKillSwitchAlert()
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filterAvailableNetworks()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if shouldReconnectAutomatically,
-            hasUpdatedPreferences
-        {
-            NotificationCenter.default.post(
-                name: .PIASettingsHaveChanged,
-                object: self,
-                userInfo: nil)
-        }
     }
 
     deinit {
@@ -119,14 +104,8 @@ final class TrustedNetworksViewController: AutolayoutViewController {
     private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
         alert.addCancelAction(L10n.Global.close)
-        alert.addActionWithTitle(L10n.Global.enable) {
-            let preferences = Client.preferences.editable()
-            preferences.isPersistentConnection = true
-            preferences.commit()
-            NotificationCenter.default.post(
-                name: .PIAPersistentConnectionSettingHaveChanged,
-                object: self,
-                userInfo: nil)
+        alert.addActionWithTitle(L10n.Global.enable) { [weak pendingPreferences] in
+            pendingPreferences?.isPersistentConnection = true
         }
         present(alert, animated: true, completion: nil)
     }

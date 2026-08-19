@@ -94,8 +94,7 @@ extension NetworkExtensionProfile {
             }
         #endif
 
-        log.debug("Configured with server: \(protocolConfiguration.serverAddress!)")
-        log.debug("Username: \(protocolConfiguration.username!)")
+        log.debug("Configured with server: \(protocolConfiguration.serverAddress ?? "none")")
         log.debug("On-demand is now \(vpn.isOnDemandEnabled ? "ENABLED" : "DISABLED")")
         log.debug("Raw manager: \(vpn)")
 
