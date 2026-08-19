@@ -1,31 +1,9 @@
 import Foundation
 
-public enum PIAErrorType: Equatable, Sendable {
-    case network
-    case decoding
-    case encoding
-    case configuration
-    case keychain
-    case certificatePinning
-    case http(status: Int)
-
-    public var code: Int {
-        return switch self {
-        case .network: 600
-        case .decoding: 601
-        case .encoding: 602
-        case .configuration: 603
-        case .keychain: 604
-        case .certificatePinning: 605
-        case .http(let status): status
-        }
-    }
-}
-
 /// Base protocol for all PIA SDK errors
 public protocol PIAError: Error, LocalizedError {
     /// HTTP status code or custom error code
-    var type: PIAErrorType { get }
+    var type: PIAAccountErrorType { get }
 
     /// The underlying error that caused this error, if any
     var underlyingError: Error? { get }
@@ -34,10 +12,10 @@ public protocol PIAError: Error, LocalizedError {
 /// Error type for account-related operations
 public struct PIAAccountError: PIAError, Sendable {
     /// HTTP status code or custom error code (600+ for local errors)
-    public let type: PIAErrorType
+    public let type: PIAAccountErrorType
 
     /// Human-readable error message from the API or SDK
-    public let message: String?
+    public let message: String
 
     /// Number of seconds to wait before retrying (from Retry-After header)
     public let retryAfterSeconds: TimeInterval
@@ -46,8 +24,8 @@ public struct PIAAccountError: PIAError, Sendable {
     public let underlyingError: Error?
 
     public init(
-        type: PIAErrorType,
-        message: String?,
+        type: PIAAccountErrorType,
+        message: String,
         retryAfterSeconds: TimeInterval = 0,
         underlyingError: Error? = nil
     ) {
@@ -59,20 +37,7 @@ public struct PIAAccountError: PIAError, Sendable {
 
     // MARK: - LocalizedError
 
-    public var errorDescription: String? {
-        if let message = message {
-            return message
-        }
-        return switch type {
-        case .network: "Network failure"
-        case .decoding: "Decoding error"
-        case .encoding: "Encoding error"
-        case .configuration: "Configuration error"
-        case .keychain: "Keychain error"
-        case .certificatePinning: "Certificate pinning error"
-        case .http(let status): HTTPURLResponse.localizedString(forStatusCode: status)
-        }
-    }
+    public var errorDescription: String? { message }
 
     public var failureReason: String? {
         if retryAfterSeconds > 0 {
@@ -80,11 +45,6 @@ public struct PIAAccountError: PIAError, Sendable {
         }
         return nil
     }
-
-    // MARK: - Error Codes
-
-    /// Error code for network-level failures (not an HTTP status code)
-    public static let networkFailureCode = 600
 
     // MARK: - Factory Methods
 
@@ -97,7 +57,7 @@ public struct PIAAccountError: PIAError, Sendable {
         let message = data.flatMap { parseErrorMessage(from: $0) }
         return PIAAccountError(
             type: .http(status: status),
-            message: message,
+            message: message ?? HTTPURLResponse.localizedString(forStatusCode: status),
             retryAfterSeconds: retryAfter,
             underlyingError: nil
         )
@@ -126,7 +86,7 @@ public struct PIAAccountError: PIAError, Sendable {
     /// Creates a decoding failure error (601)
     public static func decodingFailed(_ error: Error) -> PIAAccountError {
         return PIAAccountError(
-            type: .encoding,
+            type: .decoding,
             message: "Failed to decode response: \(error.localizedDescription)",
             retryAfterSeconds: 0,
             underlyingError: error
@@ -136,7 +96,7 @@ public struct PIAAccountError: PIAError, Sendable {
     /// Creates an encoding failure error (602)
     public static func encodingFailed(_ error: Error) -> PIAAccountError {
         return PIAAccountError(
-            type: .decoding,
+            type: .encoding,
             message: "Failed to encode request: \(error.localizedDescription)",
             retryAfterSeconds: 0,
             underlyingError: error
@@ -207,7 +167,7 @@ public struct PIAMultipleErrors: PIAError, Sendable {
 
     // MARK: - PIAError
 
-    public var type: PIAErrorType {
+    public var type: PIAAccountErrorType {
         errors.first?.type ?? .network
     }
 

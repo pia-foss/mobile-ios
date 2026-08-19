@@ -13,17 +13,17 @@ import PIABase
 @testable import PIA_VPN_tvOS
 
 final class LoginProviderMock: LoginProviderType {
-    private let result: Result<UserAccount, Error>
+    private let result: ClientResult<UserAccount>
 
-    init(result: Result<UserAccount, Error>) {
+    init(result: ClientResult<UserAccount>) {
         self.result = result
     }
 
-    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with credentials: Credentials, completion: @escaping ClientCallback<UserAccount>) {
         completion(result)
     }
 
-    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, any Error>) -> Void) {
+    func login(with receipt: JWS, completion: @escaping ClientCallback<UserAccount>) {
         completion(result)
     }
 }

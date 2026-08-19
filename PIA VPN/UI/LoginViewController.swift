@@ -365,7 +365,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             handleExpiredAccount()
             return
 
-        case .badReceipt:
+        case .noReceipt, .badReceipt:
             handleBadReceipt()
             return
 

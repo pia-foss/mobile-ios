@@ -102,7 +102,7 @@ extension URLBuilder {
         case 500...599:
             // Server error response
             return true
-        case PIAAccountError.networkFailureCode...:
+        case PIAAccountErrorType.network.code...:
             // Unknown/local error response
             return true
         default:

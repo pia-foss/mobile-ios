@@ -17,7 +17,7 @@ final class LoginProvider: LoginProviderType {
         self.accountProvider = accountProvider
     }
 
-    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with credentials: Credentials, completion: @escaping ClientCallback<UserAccount>) {
         let request = LoginRequest(credentials: credentials)
 
         accountProvider.login(with: request) { [weak self] result in
@@ -25,7 +25,7 @@ final class LoginProvider: LoginProviderType {
         }
     }
 
-    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with receipt: JWS, completion: @escaping ClientCallback<UserAccount>) {
         let request = LoginReceiptRequest(receipt: receipt)
 
         accountProvider.login(with: request) { [weak self] result in
@@ -35,23 +35,18 @@ final class LoginProvider: LoginProviderType {
 
     private func handleLoginResult(
         result: ClientResult<UserAccount>,
-        completion: @escaping (Result<UserAccount, Error>) -> Void
+        completion: @escaping ClientCallback<UserAccount>
     ) {
-        if case let .failure(error) = result {
+        switch result {
+        case .failure(let error):
             completion(.failure(error))
-            return
-        }
 
-        guard case let .success(userAccount) = result else {
-            completion(.failure(ClientError.unexpectedReply))
-            return
+        case .success(let userAccount):
+            if let info = userAccount.info, info.isExpired {
+                completion(.failure(.expired))
+            } else {
+                completion(.success(userAccount))
+            }
         }
-
-        guard userAccount.info?.isExpired == true else {
-            completion(.success(userAccount))
-            return
-        }
-
-        completion(.failure(ClientError.expired))
     }
 }

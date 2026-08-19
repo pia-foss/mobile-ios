@@ -56,7 +56,7 @@ final class AccountProviderMock: AccountProvider {
         self.appStoreInformationResult = appStoreInformationResult
     }
 
-    func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+    private func handleCallback(_ callback: ClientCallback<UserAccount>) {
         if let clientError = errorResult as? ClientError {
             callback(.failure(clientError))
         } else if let userResult {
@@ -66,15 +66,13 @@ final class AccountProviderMock: AccountProvider {
         }
     }
 
+    func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+        handleCallback(callback)
+    }
+
     func login(with linkToken: String, _ callback: @escaping ClientCallback<UserAccount>) {
         loginWithTokenCalledAttempt += 1
-        if let clientError = errorResult as? ClientError {
-            callback(.failure(clientError))
-        } else if let userResult {
-            callback(.success(userResult))
-        } else {
-            callback(.failure(.unexpectedReply))
-        }
+        handleCallback(callback)
     }
 
     func signup(with request: SignupRequest, _ callback: LibraryCallback<UserAccount>?) {
@@ -86,13 +84,7 @@ final class AccountProviderMock: AccountProvider {
     }
 
     func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {
-        if let clientError = errorResult as? ClientError {
-            callback(.failure(clientError))
-        } else if let userResult {
-            callback(.success(userResult))
-        } else {
-            callback(.failure(.unexpectedReply))
-        }
+        handleCallback(callback)
     }
 
     func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?) {}

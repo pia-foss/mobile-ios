@@ -52,11 +52,11 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         return nil
     }
 
-    func login(with request: LoginRequest, _ callback: ClientCallback<UserAccount>) {
+    func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
         log.error("Not implemented")
     }
 
-    func login(with receiptRequest: LoginReceiptRequest, _ callback: ClientCallback<UserAccount>) {
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {
         log.error("Not implemented")
     }
 
@@ -72,7 +72,7 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func login(with token: String, _ callback: ClientCallback<UserAccount>) {
+    func login(with token: String, _ callback: @escaping ClientCallback<UserAccount>) {
         log.error("Not implemented")
     }
 

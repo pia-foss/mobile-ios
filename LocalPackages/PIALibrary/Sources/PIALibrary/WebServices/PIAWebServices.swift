@@ -177,12 +177,12 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             return .throttled(retryAfter: UInt(retryAfter))
         case .http(500..<600):
             return .backendUnavailable
+        case .http(let status):
+            return .unknown(code: status, message: error.localizedDescription)
         case .network:
             return .internetUnreachable
         case let type:
             return .libraryError(code: type.code, message: error.localizedDescription)
-        default:
-            return .unknown(code: 0, message: error.localizedDescription)
         }
     }
 
