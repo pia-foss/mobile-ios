@@ -23,7 +23,7 @@
 import Foundation
 
 /// Strongly typed, extensible `struct` for storing entries into the `Notification.userInfo` map.
-public struct NotificationKey: Hashable {
+public struct NotificationKey: Hashable, Sendable {
     public static let products = NotificationKey("ProductsKey")
 
     public static let token = NotificationKey("TokenKey")

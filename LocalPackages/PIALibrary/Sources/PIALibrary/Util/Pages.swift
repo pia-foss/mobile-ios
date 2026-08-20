@@ -23,7 +23,7 @@
 import Foundation
 
 /// The sub-pages offered in the `PIAWelcomeViewController` user interface.
-public struct Pages: OptionSet {
+public struct Pages: OptionSet, Sendable {
 
     /// The login page.
     public static let login = Pages(rawValue: 1 << 0)

@@ -1,11 +1,10 @@
 import Foundation
 
-protocol NetworkRequestURLProviderType {
+protocol NetworkRequestURLProviderType: Sendable {
     func getURL(for endpoint: PinningEndpoint, path: RequestAPI.Path, query: [String: String]?) -> URL?
 }
 
-class NetworkRequestURLProvider: NetworkRequestURLProviderType {
-
+final class NetworkRequestURLProvider: NetworkRequestURLProviderType {
     private let stagingSubdomain = "staging"
     private let domainRegex = "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$"
     private let ipv4Regex = "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\.(?!$)|$)){4}$"

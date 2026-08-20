@@ -170,8 +170,7 @@ final class RatingManager: RatingManagerProtocol {
     // MARK: Configuration fetching
 
     func loadInAppRatingConfig() {
-        let testFlightDetector = TestFlightDetector.shared
-        let isStaging = testFlightDetector.isTestFlight
+        let isStaging = TestFlightDetector.isTestFlight
 
         Task {
             let inAppRatingConfig: InAppRatingConfig? = await loadConfig(

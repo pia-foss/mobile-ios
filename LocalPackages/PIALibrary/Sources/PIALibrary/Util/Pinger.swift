@@ -23,7 +23,7 @@
 import Foundation
 import Network
 
-protocol Pinger {
+protocol Pinger: Sendable {
     func ping(ip: String, port: UInt16, timeout: TimeInterval) async -> Int?
 }
 

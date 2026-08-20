@@ -25,7 +25,7 @@ import Foundation
 extension Client {
 
     /// The available client environments.
-    public enum Environment: String {
+    public enum Environment: String, Sendable {
 
         /// Use staging endpoints.
         case staging

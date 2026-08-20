@@ -23,7 +23,7 @@
 import Foundation
 import NetworkExtension
 
-public enum IKEv2IntegrityAlgorithm: String, CaseIterable {
+public enum IKEv2IntegrityAlgorithm: String, CaseIterable, Sendable {
 
     public static let `default`: IKEv2IntegrityAlgorithm = {
         #if os(iOS)

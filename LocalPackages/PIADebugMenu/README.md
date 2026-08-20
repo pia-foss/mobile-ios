@@ -34,7 +34,7 @@ The observer is registered only in Development/Staging builds, or in Release bui
 #if DEVELOPMENT || STAGING
 addDebugMenuObserver()
 #else
-if TestFlightDetector.shared.isTestFlight {
+if TestFlightDetector.isTestFlight {
     addDebugMenuObserver()
 }
 #endif

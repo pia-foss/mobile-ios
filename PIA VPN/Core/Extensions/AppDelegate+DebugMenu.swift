@@ -8,7 +8,7 @@ extension AppDelegate {
         #if DEVELOPMENT || STAGING
             addDebugMenuObserver()
         #else
-            if TestFlightDetector.shared.isTestFlight {
+            if TestFlightDetector.isTestFlight {
                 addDebugMenuObserver()
             }
         #endif

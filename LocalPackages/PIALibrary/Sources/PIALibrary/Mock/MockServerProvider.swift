@@ -23,7 +23,7 @@
 import Foundation
 
 /// Simulates server-related operations
-public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesConsumer {
+public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServicesConsumer, @unchecked Sendable {
 
     /// Fakes a `Server` list.
     public var mockServers: [Server]
