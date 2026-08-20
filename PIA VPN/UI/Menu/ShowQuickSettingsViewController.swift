@@ -27,17 +27,16 @@ import PIALocalizations
 import UIKit
 
 private enum QuickSettingOptions: Int {
-    case theme = 0
-    case killswitch
+    case killswitch = 0
     case networkTools
     case privateBrowsing
 
     static func totalCount() -> Int {
-        return !Flags.shared.enablesThemeSwitch ? 3 : 4
+        return options().count
     }
 
     static func options() -> [QuickSettingOptions] {
-        return !Flags.shared.enablesThemeSwitch ? [killswitch, networkTools, privateBrowsing] : [theme, killswitch, networkTools, privateBrowsing]
+        return [killswitch, networkTools, privateBrowsing]
     }
 }
 
@@ -51,7 +50,6 @@ final class ShowQuickSettingsCell: UITableViewCell {
 final class ShowQuickSettingsViewController: AutolayoutViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private lazy var switchThemeSettings = UISwitch()
     private lazy var switchKillSwitchSetting = UISwitch()
     private lazy var switchNetworkToolsSetting = UISwitch()
     private lazy var switchPrivateBrowserSetting = UISwitch()
@@ -65,7 +63,6 @@ final class ShowQuickSettingsViewController: AutolayoutViewController {
         tableView.estimatedSectionFooterHeight = 1.0
         tableView.rowHeight = 51
 
-        switchThemeSettings.addTarget(self, action: #selector(toggleThemeSetting), for: .valueChanged)
         switchKillSwitchSetting.addTarget(self, action: #selector(toggleKillSwitchSetting), for: .valueChanged)
         switchNetworkToolsSetting.addTarget(self, action: #selector(toggleNetworkToolsSetting), for: .valueChanged)
         switchPrivateBrowserSetting.addTarget(self, action: #selector(togglePrivateBrowserSetting), for: .valueChanged)
@@ -81,16 +78,6 @@ final class ShowQuickSettingsViewController: AutolayoutViewController {
     }
 
     // MARK: Switch actions
-    @objc private func toggleThemeSetting(_ sender: UISwitch) {
-        if enabledSettingsCount() == 1 && !sender.isOn {
-            cancelDisablingAction()
-            return
-        }
-        AppPreferences.shared.quickSettingThemeVisible = sender.isOn
-        tableView.reloadData()
-        Macros.postNotification(.PIATilesDidChange)
-    }
-
     @objc private func toggleKillSwitchSetting(_ sender: UISwitch) {
         if enabledSettingsCount() == 1 && !sender.isOn {
             cancelDisablingAction()
@@ -133,7 +120,7 @@ final class ShowQuickSettingsViewController: AutolayoutViewController {
     }
 
     private func enabledSettingsCount() -> Int {
-        return (Flags.shared.enablesThemeSwitch && AppPreferences.shared.quickSettingThemeVisible).intValue + AppPreferences.shared.quickSettingKillswitchVisible.intValue + AppPreferences.shared.quickSettingNetworkToolVisible.intValue + AppPreferences.shared.quickSettingPrivateBrowserVisible.intValue
+        return AppPreferences.shared.quickSettingKillswitchVisible.intValue + AppPreferences.shared.quickSettingNetworkToolVisible.intValue + AppPreferences.shared.quickSettingPrivateBrowserVisible.intValue
     }
 
     // MARK: Restylable
@@ -180,13 +167,6 @@ extension ShowQuickSettingsViewController: UITableViewDataSource, UITableViewDel
             let options = QuickSettingOptions.options()
             let option = options[indexPath.row]
             switch option {
-            case .theme:
-                cell.titleLabel.text = L10n.Settings.ApplicationSettings.ActiveTheme.title
-                cell.accessoryView = switchThemeSettings
-                cell.settingImage.image = Asset.Piax.Global.themeInactive.image
-                cell.settingImage.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
-                switchThemeSettings.isOn = AppPreferences.shared.quickSettingThemeVisible
-                switchThemeSettings.preferredStyle = .sliding
             case .killswitch:
                 cell.titleLabel.text = L10n.Settings.ApplicationSettings.KillSwitch.title
                 cell.accessoryView = switchKillSwitchSetting

@@ -863,10 +863,6 @@ public enum L10n {
       }
     }
     public enum ApplicationSettings {
-      public enum ActiveTheme {
-        /// Active theme
-        public static let title = L10n.tr("Localizable", "settings.application_settings.active_theme.title", fallback: "Active theme")
-      }
       public enum AllowLocalNetwork {
         /// Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)
         public static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer", fallback: "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)")
@@ -1449,16 +1445,6 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "signup.unreachable.title", fallback: "Whoops!")
       /// Error
       public static let vcTitle = L10n.tr("Localizable", "signup.unreachable.vc_title", fallback: "Error")
-    }
-    public enum Walkthrough {
-      public enum Page {
-        public enum _2 {
-          /// With servers around the globe, you are always under protection.
-          public static let description = L10n.tr("Localizable", "signup.walkthrough.page.2.description", fallback: "With servers around the globe, you are always under protection.")
-          /// Secure servers in 90+ countries
-          public static let title = L10n.tr("Localizable", "signup.walkthrough.page.2.title", fallback: "Secure servers in 90+ countries")
-        }
-      }
     }
   }
   public enum Siri {

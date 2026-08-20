@@ -13,7 +13,6 @@
                 <outlet property="browserButton" destination="MIc-dc-WeZ" id="pJw-Mn-UJ7"/>
                 <outlet property="buttonsStackView" destination="0Qp-uW-eAj" id="M2v-H4-mup"/>
                 <outlet property="killSwitchButton" destination="aBB-hV-AgG" id="HeK-0V-a7q"/>
-                <outlet property="themeButton" destination="5Bu-uZ-L11" id="3JV-eF-LvL"/>
                 <outlet property="tileTitle" destination="Gno-Iw-R4F" id="USa-nN-CEW"/>
             </connections>
         </placeholder>
@@ -31,13 +30,6 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-uW-eAj">
                     <rect key="frame" x="20" y="35.5" width="362" height="53.5"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-uZ-L11">
-                            <rect key="frame" x="0.0" y="0.0" width="75.5" height="53.5"/>
-                            <state key="normal" image="PIAX/Global/theme-dark-active"/>
-                            <connections>
-                                <action selector="changeTheme:" destination="-1" eventType="touchUpInside" id="yMQ-vt-Pvt"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-hV-AgG">
                             <rect key="frame" x="95.5" y="0.0" width="75.5" height="53.5"/>
                             <state key="normal" image="PIAX/Global/killswitch-dark-active"/>
@@ -76,6 +68,5 @@
     </objects>
     <resources>
         <image name="PIAX/Global/killswitch-dark-active" width="35" height="24"/>
-        <image name="PIAX/Global/theme-dark-active" width="26" height="30"/>
     </resources>
 </document>

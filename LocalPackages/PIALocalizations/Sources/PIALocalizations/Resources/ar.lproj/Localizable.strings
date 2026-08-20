@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "تشفير البيانات";
 "settings.encryption.handshake.title" = "مصافحة";
 
-"settings.application_settings.active_theme.title" = "النسق النشط";
 "settings.application_settings.kill_switch.title" = "مفتاح إيقاف VPN";
 "settings.application_settings.kill_switch.footer" = "يؤدي استخدام مفتاح إيقاف VPN إلى تعطيل اتصالك بالإنترنت إذا كان الـ VPN في وضع إعادة الاتصال. لا ينطبق ذلك ذلك على الاتصال اليدوي.";
 "settings.application_settings.reconnect_notifications.title" = "إشعارات إعادة الاتصال";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "خوادم آمنة في أكثر من 90 دولة";
-"signup.walkthrough.page.2.description"= "مع خوادم في جميع أنحاء العالم، أنت دائما تحت الحماية.";
 
 "signup.share.data.buttons.accept"= "قبول";
 "signup.share.data.buttons.noThanks"= "لا، شكرًا";
