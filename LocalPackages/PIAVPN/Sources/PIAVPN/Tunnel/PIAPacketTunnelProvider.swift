@@ -239,21 +239,35 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         )
     }
 
-    /// Resolves a connected endpoint host (IP) to the `Server.identifier` it belongs to, by scanning
-    /// the current shared-state servers for the one that advertises this endpoint IP. The tunnel's
-    /// endpoints are built from these same address lists (see `PIAEndpointRepository`), so a connected
-    /// host always belongs to one of them; `nil` if no server matches (e.g. the list changed since
-    /// connecting). The Dedicated IP target is carried separately in `selectedDipServer` (it is
-    /// per-user and absent from the public `servers` list), so it must be included explicitly or DIP
-    /// connections would never resolve. Called once per connect, so the linear scan is cheap.
+    /// Resolves a connected endpoint host (IP) to the `Server.identifier` it belongs to.
+    ///
+    /// A host is not a unique key: sibling regions share physical servers — DE Frankfurt and DE Germany
+    /// Streaming Optimized advertise two of the same three WireGuard addresses — so a scan returns
+    /// whichever the name-sorted list carries first, relabelling a selection as its sibling. Hence
+    /// `selectedLocationId` wins when it advertises the host; only "Automatic" falls back to the scan.
+    /// DIP is included explicitly (`selectedDipServer` is per-user, absent from `servers`). `nil` when
+    /// nothing matches, e.g. the list changed since connecting.
     private static func serverId(forConnectedHost host: String) -> String? {
         let state = PIATunnelSharedState.read()
         let candidates = state.servers + [state.selectedDipServer].compactMap { $0 }
-        return candidates.first { server in
-            (server.openVPNAddressesForUDP ?? []).contains { $0.ip == host }
-                || (server.openVPNAddressesForTCP ?? []).contains { $0.ip == host }
-                || (server.wireGuardAddressesForUDP ?? []).contains { $0.ip == host }
-        }?.identifier
+
+        if let selectedLocationId = state.selectedLocationId,
+            let target = candidates.first(where: { $0.identifier == selectedLocationId && $0.dipToken == nil }),
+            advertises(target, host: host)
+        {
+            return target.identifier
+        }
+
+        return candidates.first { advertises($0, host: host) }?.identifier
+    }
+
+    /// Whether `server` lists `host` among the addresses `PIAEndpointRepository` builds endpoints from.
+    private static func advertises(_ server: Server, host: String) -> Bool {
+        let openVPNAddressesForUDP = server.openVPNAddressesForUDP ?? []
+        let openVPNAddressesForTCP = server.openVPNAddressesForTCP ?? []
+        let wireGuardAddressesForUDP = server.wireGuardAddressesForUDP ?? []
+
+        return (openVPNAddressesForUDP + openVPNAddressesForTCP + wireGuardAddressesForUDP).contains { $0.ip == host }
     }
 
     /// Maps the SDK's `PacketTunnelConnectedEndpoint.protocolDescription` to the PIA shared-state
