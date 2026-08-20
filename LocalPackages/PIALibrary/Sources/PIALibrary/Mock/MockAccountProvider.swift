@@ -217,25 +217,25 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
         }
     #endif
 
-    public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
+    public func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
         guard !mockIsUnauthorized else {
-            callback?(nil, ClientError.unauthorized)
+            callback(.failure(ClientError.unauthorized))
             return
         }
         delegate.login(with: request, callback)
     }
 
-    public func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {
+    public func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {
         guard !mockIsUnauthorized else {
-            callback?(nil, ClientError.unauthorized)
+            callback(.failure(ClientError.unauthorized))
             return
         }
         delegate.login(with: receiptRequest, callback)
     }
 
-    public func login(with token: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+    public func login(with token: String, _ callback: @escaping ClientCallback<UserAccount>) {
         guard !mockIsUnauthorized else {
-            callback?(nil, ClientError.unauthorized)
+            callback(.failure(ClientError.unauthorized))
             return
         }
         delegate.login(with: "12345", callback)
@@ -300,7 +300,7 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
             return await delegate.restorePurchases()
         }
 
-        public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+        public func loginUsingMagicLink(withEmail email: String, _ callback: @escaping SuccessClientCallback) {
             delegate.loginUsingMagicLink(withEmail: email, callback)
         }
 

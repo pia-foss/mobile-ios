@@ -540,7 +540,7 @@
 
 "signup.failure.internal"= "Dahili uygulama hatası (%d)";
 
-"signup.failure.unknown"= "Bilinmeyen hata: %s (%d)";
+"signup.failure.unknown"= "Bilinmeyen hata: %@ (%d)";
 
 "signup.failure.title"= "Hesap Oluşturma Hatası";
 
@@ -627,6 +627,7 @@
 "welcome.iap.error.title"= "Hata";
 
 "welcome.login.error.throttled"= "Bu kullanıcı adı ile çok fazla kez yanlış giriş yapıldı. Lütfen daha sonra tekrar deneyin.";
+"welcome.login.error.backendUnavailable"= "Sunucumuz şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
 
 "welcome.login.error.title"= "Giriş yap";
 

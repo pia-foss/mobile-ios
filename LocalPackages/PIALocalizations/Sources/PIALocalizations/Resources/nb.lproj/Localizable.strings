@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "Ser ut til at kortet allerede er brukt av en annen konto. Du kan prøve med en annen PIN.";
 "signup.failure.submit"= "GÅ TILBAKE";
 "signup.failure.internal"= "Intern app-feil (%d)";
-"signup.failure.unknown"= "Ukjent feil: %s (%d)";
+"signup.failure.unknown"= "Ukjent feil: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Feil";
 "signup.unreachable.title"= "Ups!";
@@ -609,6 +609,7 @@ Du har alltid kontrollen. Du kan se hvilke data vi har samlet inn, i innstilling
 "welcome.login.error.validation"= "Du må oppgi et brukernavn og passord.";
 "welcome.login.error.unauthorized"= "Brukernavnet eller passordet ditt er feil.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Serveren vår er for øyeblikket utilgjengelig. Prøv igjen senere.";
 "welcome.login.receipt.button"= "Logg på med kjøpsbevis";
 "welcome.login.magic.link.title"= "Pålogging med magisk e-postkobling";
 "welcome.login.magic.link.response"= "Sjekk e-posten din for å finne påloggingskoblingen.";

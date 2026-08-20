@@ -81,29 +81,22 @@ class AccountTests: XCTestCase {
 
     }
 
-    /*func testWeb() {
-        __testLogin(factory: live)
-        sleep(1)
-        __testUpdate(factory: live)
-        sleep(1)
-        __testLogout(factory: live)
-    }*/
-
     private func __testLogin(factory: Client.Providers) {
         let expLogin = expectation(description: "login")
         let credentials = Credentials(username: "p0000000", password: "foobarbogus")
 
-        factory.accountProvider.login(with: LoginRequest(credentials: credentials)) { (user, error) in
-            guard let _ = user else {
-                print("Login error: \(error!)")
+        factory.accountProvider.login(with: LoginRequest(credentials: credentials)) { result in
+            switch result {
+            case .failure(let error):
+                print("Login error: \(error)")
                 expLogin.fulfill()
                 XCTAssert(false)
-                return
+            case .success:
+                XCTAssert(factory.accountProvider.isLoggedIn)
+                XCTAssertNotNil(factory.accountProvider.currentUser)
+                print("Logged in with: \(factory.accountProvider.currentUser)")
+                expLogin.fulfill()
             }
-            XCTAssert(factory.accountProvider.isLoggedIn)
-            XCTAssertNotNil(factory.accountProvider.currentUser)
-            print("Logged in with: \(factory.accountProvider.currentUser)")
-            expLogin.fulfill()
         }
         waitForExpectations(timeout: 5.0, handler: nil)
     }

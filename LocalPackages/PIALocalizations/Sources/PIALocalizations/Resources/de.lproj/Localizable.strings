@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "Anscheinend wurde diese Karte bereits über ein anderes Konto eingelöst. Geben Sie eine andere PIN ein.";
 "signup.failure.submit"= "ZURÜCK";
 "signup.failure.internal"= "Interner App-Fehler (%d)";
-"signup.failure.unknown"= "Unbekannter Fehler: %s (%d)";
+"signup.failure.unknown"= "Unbekannter Fehler: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Fehler";
 "signup.unreachable.title"= "Ups!";
@@ -609,6 +609,7 @@ Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Da
 "welcome.login.error.validation"= "Du musst einen Benutzernamen und ein Passwort angeben.";
 "welcome.login.error.unauthorized"= "Dein Benutzername oder Passwort ist falsch.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Unser Server ist derzeit nicht verfügbar. Bitte versuche es später erneut.";
 "welcome.login.receipt.button"= "Anmeldung mit Kaufbeleg";
 "welcome.login.magic.link.title"= "Anmeldung mit magischem E-Mail-Link";
 "welcome.login.magic.link.response"= "Bitte überprüfen Sie Ihre E-Mail auf einen Login-Link.";

@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "ดูเหมือนว่าบัตรนี้มีการใช้สิทธิ์แล้วโดยบัญชีอื่น กรุณาลองใส่ PIN อื่น";
 "signup.failure.submit"= "ย้อนกลับ";
 "signup.failure.internal"= "ข้อผิดพลาดภายในแอป (%d)";
-"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %s (%d)";
+"signup.failure.unknown"= "ข้อผิดพลาดที่ไม่ทราบสาเหตุ: %@ (%d)";
 
 "signup.unreachable.vc_title"= "ข้อผิดพลาด";
 "signup.unreachable.title"= "อุ๊ปส์!";
@@ -609,6 +609,7 @@
 "welcome.login.error.validation"= "คุณต้องกรอกชื่อผู้ใช้และรหัสผ่าน";
 "welcome.login.error.unauthorized"= "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "เซิร์ฟเวอร์ของเราไม่พร้อมใช้งานในขณะนี้ กรุณาลองอีกครั้งในภายหลัง";
 "welcome.login.receipt.button"= "เข้าสู่ระบบโดยใช้ใบเสร็จรับเงิน";
 "welcome.login.magic.link.title"= "เข้าสู่ระบบโดยใช้ลิงก์อีเมลวิเศษ";
 "welcome.login.magic.link.response"= "โปรดตรวจสอบอีเมลของคุณเพื่อดูลิงค์สำหรับเข้าสู่ระบบ";

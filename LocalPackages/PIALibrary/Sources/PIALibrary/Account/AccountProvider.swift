@@ -75,7 +75,7 @@ public protocol AccountProvider: AnyObject {
      - Parameter request: The login request.
      - Parameter callback: Returns an `UserAccount`.
      */
-    func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?)
+    func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>)
 
     /**
      Logs into system using the purchase receipt. The `isLoggedIn` variable becomes `true` on success.
@@ -87,7 +87,7 @@ public protocol AccountProvider: AnyObject {
      - Parameter request: The login receipt request.
      - Parameter callback: Returns an `UserAccount`.
      */
-    func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?)
+    func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>)
 
     /**
     Logs into system using the login link token directly. The `isLoggedIn` variable becomes `true` on success.
@@ -99,7 +99,7 @@ public protocol AccountProvider: AnyObject {
     - Parameter linkToken: A valid token.
     - Parameter callback: Returns an `UserAccount`.
     */
-    func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?)
+    func login(with linkToken: String, _ callback: @escaping ClientCallback<UserAccount>)
 
     /**
     Validates the QR token and generated a new API Token.
@@ -208,9 +208,9 @@ public protocol AccountProvider: AnyObject {
         Send a login link to the email provided as parameter.
 
         - Parameter email: The associated email to the account where the magic link is sent.
-        - Parameter callback: Returns `nil` on success.
+        - Parameter callback: Returns `.success(())` on success.
         */
-        func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?)
+        func loginUsingMagicLink(withEmail email: String, _ callback: @escaping SuccessClientCallback)
 
         /**
          Signs up with current purchase history.

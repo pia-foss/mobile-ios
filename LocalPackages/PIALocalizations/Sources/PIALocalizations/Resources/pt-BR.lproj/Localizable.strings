@@ -547,7 +547,7 @@
 "signup.failure.redeem.claimed.message"= "Parece que este cartão já foi resgatado por outra conta. Você pode tentar usar um PIN diferente.";
 "signup.failure.submit"= "VOLTAR";
 "signup.failure.internal"= "Erro interno do aplicativo (%d)";
-"signup.failure.unknown"= "Erro desconhecido: %s (%d)";
+"signup.failure.unknown"= "Erro desconhecido: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Erro";
 "signup.unreachable.title"= "Ops!";
@@ -611,6 +611,7 @@ Você sempre terá o controle. Você pode ver quais dados coletamos nas configur
 "welcome.login.error.validation"= "Você deve inserir um nome de usuário e senha.";
 "welcome.login.error.unauthorized"= "Seu nome de usuário ou senha está incorreto.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Nosso servidor está temporariamente indisponível. Tente novamente mais tarde.";
 "welcome.login.receipt.button"= "Faça login usando o recibo de compra";
 "welcome.login.magic.link.title"= "Faça login usando o link mágico enviado por e-mail";
 "welcome.login.magic.link.response"= "Veja se você recebeu por e-mail um link para fazer login.";

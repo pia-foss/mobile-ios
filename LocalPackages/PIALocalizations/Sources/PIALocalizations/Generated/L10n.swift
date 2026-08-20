@@ -1151,9 +1151,9 @@ public enum L10n {
       public static let submit = L10n.tr("Localizable", "signup.failure.submit", fallback: "GO BACK")
       /// Account creation failed
       public static let title = L10n.tr("Localizable", "signup.failure.title", fallback: "Account creation failed")
-      /// Unknown error: %s (%d)
-      public static func unknown(_ p1: UnsafePointer<CChar>, _ p2: Int) -> String {
-        return L10n.tr("Localizable", "signup.failure.unknown", p1, p2, fallback: "Unknown error: %s (%d)")
+      /// Unknown error: %@ (%d)
+      public static func unknown(_ p1: Any, _ p2: Int) -> String {
+        return L10n.tr("Localizable", "signup.failure.unknown", String(describing: p1), p2, fallback: "Unknown error: %@ (%d)")
       }
       /// Sign-up failed
       public static let vcTitle = L10n.tr("Localizable", "signup.failure.vc_title", fallback: "Sign-up failed")
@@ -1813,6 +1813,8 @@ public enum L10n {
       /// Sign in to your account
       public static let title = L10n.tr("Localizable", "welcome.login.title", fallback: "Sign in to your account")
       public enum Error {
+        /// Our server is unavailable at the moment. Please try again later.
+        public static let backendUnavailable = L10n.tr("Localizable", "welcome.login.error.backendUnavailable", fallback: "Our server is unavailable at the moment. Please try again later.")
         /// Too many failed login attempts with this username. Please try again after %@ second(s).
         public static func throttled(_ p1: Any) -> String {
           return L10n.tr("Localizable", "welcome.login.error.throttled", String(describing: p1), fallback: "Too many failed login attempts with this username. Please try again after %@ second(s).")

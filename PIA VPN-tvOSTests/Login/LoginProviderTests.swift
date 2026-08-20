@@ -18,7 +18,7 @@ final class LoginProviderTests: XCTestCase {
 
     var fixture: Fixture!
     var sut: LoginProvider!
-    var capturedResult: Result<UserAccount, Error>?
+    var capturedResult: ClientResult<UserAccount>?
 
     func instantiateSut(accountProviderResult: (UserAccount?, Error?)) {
         fixture.accountProviderMock = AccountProviderMock(userResult: accountProviderResult.0, errorResult: accountProviderResult.1)

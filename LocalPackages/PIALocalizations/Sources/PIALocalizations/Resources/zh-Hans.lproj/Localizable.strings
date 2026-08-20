@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "此卡片似乎已被另一个账号使用。您可尝试输入另一个PIN。";
 "signup.failure.submit"= "返回";
 "signup.failure.internal"= "内部应用错误 (%d)";
-"signup.failure.unknown"= "未知错误：%s (%d)";
+"signup.failure.unknown"= "未知错误：%@ (%d)";
 
 "signup.unreachable.vc_title"= "错误";
 "signup.unreachable.title"= "糟糕！";
@@ -609,6 +609,7 @@
 "welcome.login.error.validation"= "您必须输入用户名和密码。";
 "welcome.login.error.unauthorized"= "您的用户名或密码不正确。";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "我们的服务器目前不可用。请稍后再试。";
 "welcome.login.receipt.button"= "使用购买收据登录";
 "welcome.login.magic.link.title"= "使用魔法电子邮件链接登录";
 "welcome.login.magic.link.response"= "请检查您的电子邮件，以查找登录链接。";

@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "Il semblerait que cette carte soit déjà utilisée sur un autre compte. Vous pouvez essayer de saisir un code PIN différent.";
 "signup.failure.submit"= "REVENIR";
 "signup.failure.internal"= "Erreur interne de l'application (%d)";
-"signup.failure.unknown"= "Erreur inconnue: %s (%d)";
+"signup.failure.unknown"= "Erreur inconnue: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Erreur";
 "signup.unreachable.title"= "Oups !";
@@ -609,6 +609,7 @@ Vous gardez toujours le contrôle. Vous pouvez consulter les données que nous a
 "welcome.login.error.validation"= "Vous devez saisir un nom d'utilisateur et un mot de passe.";
 "welcome.login.error.unauthorized"= "Votre nom d'utilisateur ou mot de passe est incorrect.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Notre serveur est temporairement indisponible. Veuillez réessayer plus tard.";
 "welcome.login.receipt.button"= "Connectez-vous à l'aide du reçu d'achat";
 "welcome.login.magic.link.title"= "Connectez-vous à l'aide du lien e-mail magique";
 "welcome.login.magic.link.response"= "Veuillez vérifier vos e-mails pour trouver un lien de connexion.";

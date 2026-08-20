@@ -11,6 +11,6 @@ import PIABase
 import PIALibrary
 
 protocol LoginProviderType {
-    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void)
-    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, Error>) -> Void)
+    func login(with credentials: Credentials, completion: @escaping ClientCallback<UserAccount>)
+    func login(with receipt: JWS, completion: @escaping ClientCallback<UserAccount>)
 }

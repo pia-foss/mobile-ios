@@ -41,7 +41,7 @@ import XCTest
             logoutCalledAttempt += 1
         }
 
-        func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
+        func login(with linkToken: String, _ callback: @escaping ClientCallback<UserAccount>) {
             loginWithTokenCalledAttempt += 1
         }
 
@@ -63,10 +63,10 @@ import XCTest
         var currentPasswordReference: Data?
         var lastSignupRequest: SignupRequest?
 
-        func login(with request: LoginRequest, _ callback: LibraryCallback<UserAccount>?) {}
+        func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {}
         func signup(with request: SignupRequest, _ callback: LibraryCallback<UserAccount>?) {}
         func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {}
-        func login(with receiptRequest: LoginReceiptRequest, _ callback: LibraryCallback<UserAccount>?) {}
+        func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {}
         func refreshAccountInfo(_ callback: LibraryCallback<AccountInfo>?) {}
         func update(with request: UpdateAccountRequest, resetPassword reset: Bool, andPassword password: String, _ callback: LibraryCallback<AccountInfo>?) {}
         func deleteAccount(_ callback: SuccessLibraryCallback?) {}
@@ -79,7 +79,7 @@ import XCTest
         }
         func isAPIEndpointAvailable(_ callback: LibraryCallback<Bool>?) {}
         func restorePurchases() async -> Result<JWS, ClientError> { .success(JWS("jws")!) }
-        func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {}
+        func loginUsingMagicLink(withEmail email: String, _ callback: @escaping SuccessClientCallback) {}
         func listRenewablePlans(_ callback: LibraryCallback<[Plan]>?) {}
         func renew(with request: RenewRequest, _ callback: LibraryCallback<UserAccount>?) {}
         func validateLoginQR(with qrToken: String, _ callback: ((String?, (any Error)?) -> Void)?) {}
