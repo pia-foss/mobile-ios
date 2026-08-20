@@ -10,7 +10,7 @@ private enum DebugMenuAvailability {
         #if DEVELOPMENT || STAGING
             return true
         #else
-            return TestFlightDetector.shared.isTestFlight
+            return TestFlightDetector.isTestFlight
         #endif
     }
 }

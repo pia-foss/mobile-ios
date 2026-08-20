@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol UpdateAccountUseCaseType {
+public protocol UpdateAccountUseCaseType: Sendable {
     typealias Completion = ((Result<String?, NetworkRequestError>) -> Void)
 
     func setEmail(email: String, resetPassword: Bool, completion: @escaping Completion)
@@ -8,7 +8,7 @@ public protocol UpdateAccountUseCaseType {
     func setEmail(username: String, password: String, email: String, resetPassword: Bool, completion: @escaping Completion)
 }
 
-class UpdateAccountUseCase: UpdateAccountUseCaseType {
+final class UpdateAccountUseCase: UpdateAccountUseCaseType {
 
     private let networkClient: NetworkRequestClientType
     private let refreshAuthTokensChecker: RefreshAuthTokensCheckerType

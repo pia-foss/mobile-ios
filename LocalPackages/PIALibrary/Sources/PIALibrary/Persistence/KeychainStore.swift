@@ -22,7 +22,7 @@
 
 import Foundation
 
-class KeychainStore: SecureStore {
+final class KeychainStore: SecureStore {
 
     private let backend: Keychain
 

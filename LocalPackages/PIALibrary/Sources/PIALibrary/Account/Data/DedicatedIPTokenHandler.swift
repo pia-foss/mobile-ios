@@ -1,6 +1,6 @@
 import Foundation
 
-class DedicatedIPTokenHandler: DedicatedIPTokenHandlerType {
+final class DedicatedIPTokenHandler: DedicatedIPTokenHandlerType {
     private let secureStore: SecureStore
 
     init(secureStore: SecureStore) {

@@ -1,5 +1,5 @@
 import Foundation
 
-protocol DedicatedIPServerMapperType {
+protocol DedicatedIPServerMapperType: Sendable {
     func map(dedicatedIps: [DedicatedIPInformation]) -> Result<[Server], ClientError>
 }

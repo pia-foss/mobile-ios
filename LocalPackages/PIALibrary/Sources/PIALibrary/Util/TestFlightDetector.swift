@@ -22,17 +22,9 @@
 
 import Foundation
 
-public protocol TestFlightDetectorProtocol {
-    var isTestFlight: Bool { get }
-}
-
-public struct TestFlightDetector: TestFlightDetectorProtocol {
-    public static let shared = TestFlightDetector()
-
-    public init() {}
-
+public enum TestFlightDetector: Sendable {
     /// Checks if app is running in TestFlight
-    public var isTestFlight: Bool {
+    public static var isTestFlight: Bool {
         #if targetEnvironment(macCatalyst)
             return hasStoreReceipt && hasProvisioningProfile
         #else
@@ -41,15 +33,15 @@ public struct TestFlightDetector: TestFlightDetectorProtocol {
     }
 
     #if targetEnvironment(macCatalyst)
-        private var hasStoreReceipt: Bool {
+        private static var hasStoreReceipt: Bool {
             bundleContentsContain("_MASReceipt/receipt")
         }
 
-        private var hasProvisioningProfile: Bool {
+        private static var hasProvisioningProfile: Bool {
             bundleContentsContain("embedded.provisionprofile")
         }
 
-        private func bundleContentsContain(_ relativePath: String) -> Bool {
+        private static func bundleContentsContain(_ relativePath: String) -> Bool {
             let url = Bundle.main.bundleURL
                 .appendingPathComponent("Contents", isDirectory: true)
                 .appendingPathComponent(relativePath)

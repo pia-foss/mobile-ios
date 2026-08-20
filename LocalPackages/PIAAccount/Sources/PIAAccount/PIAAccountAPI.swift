@@ -29,7 +29,7 @@ import PIABase
 ///
 /// For operations that try multiple endpoints, `PIAMultipleErrors` aggregates
 /// all failures if none succeed.
-public protocol PIAAccountAPI {
+public protocol PIAAccountAPI: Sendable {
     // MARK: - Token Access
 
     /// Returns the cached API token, if available.

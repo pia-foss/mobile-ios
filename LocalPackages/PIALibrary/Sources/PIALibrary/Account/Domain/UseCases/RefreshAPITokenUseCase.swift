@@ -3,13 +3,12 @@ import NWHttpConnection
 
 private let log = PIALogger.logger(for: RefreshAPITokenUseCase.self)
 
-protocol RefreshAPITokenUseCaseType {
+protocol RefreshAPITokenUseCaseType: Sendable {
     typealias Completion = ((NetworkRequestError?) -> Void)
     func callAsFunction(completion: @escaping RefreshAPITokenUseCaseType.Completion)
 }
 
-class RefreshAPITokenUseCase: RefreshAPITokenUseCaseType {
-
+final class RefreshAPITokenUseCase: RefreshAPITokenUseCaseType {
     private let apiTokenProvider: APITokenProviderType
     private let networkClient: NetworkRequestClientType
 
