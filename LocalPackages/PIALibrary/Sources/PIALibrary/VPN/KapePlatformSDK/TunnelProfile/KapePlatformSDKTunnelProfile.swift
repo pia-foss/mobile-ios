@@ -81,7 +81,9 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
 
         // TODO: [PlatformSDK] Temporary — use configuration.name
         vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
-        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
+
+        let isTunnelLiveOrStarting = Client.providers.vpnProvider.isVPNConnected || force
+        vpn.isOnDemandEnabled = isTunnelLiveOrStarting ? configuration.isOnDemand : false
 
         do {
             try writeSharedState(withConfiguration: configuration)
