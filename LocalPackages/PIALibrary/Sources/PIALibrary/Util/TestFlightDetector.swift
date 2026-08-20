@@ -22,19 +22,11 @@
 
 import Foundation
 
-public protocol TestFlightDetectorProtocol {
-    var isTestFlight: Bool { get }
-}
-
-public struct TestFlightDetector: TestFlightDetectorProtocol {
-
-    public static let shared = TestFlightDetector()
-
-    public init() {}
+public struct TestFlightDetector: Sendable {
+    private init() {}
 
     /// Checks if app is running in TestFlight
-    public var isTestFlight: Bool {
+    static public var isTestFlight: Bool {
         Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
-
 }

@@ -38,7 +38,7 @@ public enum KeychainError: Error {
 }
 
 /// Encapsulates Apple keychain operations.
-public class Keychain {
+public final class Keychain: Sendable {
     private let service: String?
 
     private let accessGroup: String?

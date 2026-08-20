@@ -1,5 +1,5 @@
 import Foundation
 
-class MockRenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {
+final class MockRenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {
     func callAsFunction(dipToken: String, completion: @escaping Completion) {}
 }

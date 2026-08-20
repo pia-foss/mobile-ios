@@ -25,7 +25,7 @@ private struct DebugMenuModifier: ViewModifier {
         #if DEVELOPMENT || STAGING
             return true
         #else
-            return TestFlightDetector.shared.isTestFlight
+            return TestFlightDetector.isTestFlight
         #endif
     }
 }

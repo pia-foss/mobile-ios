@@ -1,6 +1,6 @@
 import Foundation
 
-class AnchorCertificateProvider {
+enum AnchorCertificateProvider {
     static func getAnchorCertificate() -> SecCertificate? {
 
         #if SWIFT_PACKAGE
