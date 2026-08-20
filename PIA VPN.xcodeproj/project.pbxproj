@@ -319,6 +319,7 @@
 		3F0EF9EE2EDF28710013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+			    Domain/Intents/PIAVPNToggleIntent.swift,
 				Domain/Widget/PIAConnectionLiveActivityManager.swift,
 				Domain/Widget/PIAWidgetAttributes.swift,
 			);
