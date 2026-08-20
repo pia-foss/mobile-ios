@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "データ暗号化";
 "settings.encryption.handshake.title" = "ハンドシェイク";
 
-"settings.application_settings.active_theme.title" = "アクティブなテーマ";
 "settings.application_settings.kill_switch.title" = "VPNキルスイッチ";
 "settings.application_settings.kill_switch.footer" = "VPNキルスイッチは、VPNの再接続時にインターネット接続を無効にします。これには手動での切断が含まれません。";
 "settings.application_settings.reconnect_notifications.title" = "再接続通知";
@@ -570,8 +569,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "90ヶ国以上に安全なサーバー";
-"signup.walkthrough.page.2.description"= "世界中にサーバがあるので、常に保護された状態でいることができます。";
 
 "signup.share.data.buttons.accept"= "同意する";
 "signup.share.data.buttons.noThanks"= "いいえ、結構です";

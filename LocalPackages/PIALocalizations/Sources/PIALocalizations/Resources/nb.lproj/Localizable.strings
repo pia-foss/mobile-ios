@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Datakryptering";
 "settings.encryption.handshake.title" = "Håndtrykk";
 
-"settings.application_settings.active_theme.title" = "Aktivt tema";
 "settings.application_settings.kill_switch.title" = "Kill switch for VPN";
 "settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
 "settings.application_settings.reconnect_notifications.title" = "Tilkoblingsmeldinger";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "Sikre servere i over 90 land";
-"signup.walkthrough.page.2.description"= "Med serverer rundt om i hele verden, er du alltid beskyttet.";
 
 "signup.share.data.buttons.accept"= "Godta";
 "signup.share.data.buttons.noThanks"= "Nei takk";

@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Cifrado de datos";
 "settings.encryption.handshake.title" = "Apretón de manos";
 
-"settings.application_settings.active_theme.title" = "Activar tema";
 "settings.application_settings.kill_switch.title" = "Interruptor de corte de VPN";
 "settings.application_settings.kill_switch.footer" = "El botón de pánico de VPN evita el acceso a Internet si la conexión VPN se está volviendo a conectar. Esto excluye la desconexión manual.";
 "settings.application_settings.reconnect_notifications.title" = "Notificaciones de reconexión";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "Servidores seguros en más de 90 países";
-"signup.walkthrough.page.2.description"= "Con servidores en todo el mundo, siempre estarás protegido.";
 
 "signup.share.data.buttons.accept"= "Aceptar";
 "signup.share.data.buttons.noThanks"= "No, gracias";

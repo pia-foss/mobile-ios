@@ -77,7 +77,6 @@ final class AppPreferences {
         static let todayWidgetTrustedNetwork = "vpn.widget.trusted.network"
 
         // Quick Settings options
-        static let quickSettingThemeVisible = "quickSettingThemeVisible"
         static let quickSettingKillswitchVisible = "quickSettingKillswitchVisible"
         static let quickSettingNetworkToolVisible = "quickSettingNetworkToolVisible"
         static let quickSettingPrivateBrowserVisible = "quickSettingPrivateBrowserVisible"
@@ -413,15 +412,6 @@ final class AppPreferences {
             }
         }
     #endif
-    var quickSettingThemeVisible: Bool {
-        get {
-            return defaults.bool(forKey: Entries.quickSettingThemeVisible)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.quickSettingThemeVisible)
-        }
-    }
-
     var quickSettingKillswitchVisible: Bool {
         get {
             return defaults.bool(forKey: Entries.quickSettingKillswitchVisible)
@@ -625,7 +615,6 @@ final class AppPreferences {
                 Entries.todayWidgetVpnPort: "1337",
                 Entries.todayWidgetVpnSocket: "UDP",
                 Entries.todayWidgetTrustedNetwork: false,
-                Entries.quickSettingThemeVisible: true,
                 Entries.quickSettingKillswitchVisible: true,
                 Entries.quickSettingNetworkToolVisible: true,
                 Entries.quickSettingPrivateBrowserVisible: true,
@@ -900,7 +889,6 @@ final class AppPreferences {
         #endif
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
-        quickSettingThemeVisible = true
         quickSettingKillswitchVisible = true
         quickSettingNetworkToolVisible = true
         quickSettingPrivateBrowserVisible = true

@@ -34,7 +34,6 @@ final class QuickSettingsTile: UIView, Tileable {
     var status: TileStatus = .normal
 
     @IBOutlet private weak var tileTitle: UILabel!
-    @IBOutlet private weak var themeButton: UIButton!
     @IBOutlet private weak var killSwitchButton: UIButton!
     @IBOutlet private weak var automationButton: UIButton!
     @IBOutlet private weak var browserButton: UIButton!
@@ -78,7 +77,6 @@ final class QuickSettingsTile: UIView, Tileable {
 
     @objc private func setupButtons() {
 
-        self.themeButton.isHidden = !Flags.shared.enablesThemeSwitch || !AppPreferences.shared.quickSettingThemeVisible
         self.killSwitchButton.isHidden = !AppPreferences.shared.quickSettingKillswitchVisible
         self.automationButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
         self.browserButton.isHidden = !AppPreferences.shared.quickSettingPrivateBrowserVisible
@@ -98,15 +96,6 @@ final class QuickSettingsTile: UIView, Tileable {
         automationButton.accessibilityLabel = L10n.Tiles.Quicksetting.Automation.title
         browserButton.accessibilityLabel = L10n.Tiles.Quicksetting.Private.Browser.title
 
-        if Flags.shared.enablesThemeSwitch {
-            themeButton.accessibilityLabel = L10n.Settings.ApplicationSettings.ActiveTheme.title
-            if AppPreferences.shared.currentThemeCode == ThemeCode.light {
-                themeButton.setImage(Asset.Piax.Global.themeActive.image, for: [])
-            } else {
-                themeButton.setImage(Asset.Piax.Global.themeInactive.image, for: [])
-            }
-        }
-
         if Client.preferences.isPersistentConnection {
             killSwitchButton.accessibilityLabel = L10n.Global.disable + " " + L10n.Settings.ApplicationSettings.KillSwitch.title
             killSwitchButton.setImage(Asset.Piax.Global.killswitchActive.image, for: [])
@@ -124,18 +113,6 @@ final class QuickSettingsTile: UIView, Tileable {
         }
 
         browserButton.setImage(Asset.Piax.Global.browserInactive.image, for: [])
-
-    }
-
-    @IBAction func changeTheme(_ sender: Any) {
-
-        if AppPreferences.shared.currentThemeCode == ThemeCode.light {
-            AppPreferences.shared.transitionTheme(to: ThemeCode.dark)
-        } else {
-            AppPreferences.shared.transitionTheme(to: ThemeCode.light)
-        }
-
-        updateButtons()
 
     }
 

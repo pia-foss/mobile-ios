@@ -30,12 +30,6 @@ import UIKit
 #endif
 
 struct AppConfiguration {
-    private static let customClientEnvironment: Client.Environment = .staging
-
-    static var clientEnvironment: Client.Environment {
-        return (Flags.shared.customizesClientEnvironment ? customClientEnvironment : .production)
-    }
-
     struct About {
         static let copyright = "2014-2021"
 
@@ -145,10 +139,6 @@ struct AppConfiguration {
 
     struct Animations {
         static let duration = 0.3
-    }
-
-    struct DataCounter {
-        static let interval = 1.0
     }
 
     struct Mock {

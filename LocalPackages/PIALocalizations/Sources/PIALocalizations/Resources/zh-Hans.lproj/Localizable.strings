@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "数据加密";
 "settings.encryption.handshake.title" = "握手";
 
-"settings.application_settings.active_theme.title" = "活跃主题";
 "settings.application_settings.kill_switch.title" = "VPN 切断开关";
 "settings.application_settings.kill_switch.footer" = "如果 VPN 连接重新连线，VPN 终止开关会阻止访问互联网。这不包括手动断开连接。";
 "settings.application_settings.reconnect_notifications.title" = "重新连接通知";
@@ -569,8 +568,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "90多个国家的安全服务器";
-"signup.walkthrough.page.2.description"= "服务器遍布世界各地，您始终受到保护。";
 
 "signup.share.data.buttons.accept"= "接受";
 "signup.share.data.buttons.noThanks"= "不用，谢谢";

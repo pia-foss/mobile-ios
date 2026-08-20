@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Criptografia de dados";
 "settings.encryption.handshake.title" = "Aperto de mãos";
 
-"settings.application_settings.active_theme.title" = "Tema ativo";
 "settings.application_settings.kill_switch.title" = "Kill switch de VPN";
 "settings.application_settings.kill_switch.footer" = "O kill switch do VPN impede o acesso à internet se a conexão de VPN estiver se reconectando. Isto exclui a desconexão manual.";
 "settings.application_settings.reconnect_notifications.title" = "Notificações de reconexão";
@@ -571,8 +570,6 @@
 
 // WALKTHROUGH
 
-"signup.walkthrough.page.2.title"= "Servidores seguros em mais de 90 países";
-"signup.walkthrough.page.2.description"= "Com servidores ao redor do mundo, você está sempre protegido.";
 
 "signup.share.data.buttons.accept"= "Aceitar";
 "signup.share.data.buttons.noThanks"= "Não, obrigado";

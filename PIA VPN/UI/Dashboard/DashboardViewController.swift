@@ -694,14 +694,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    // MARK: Unwind segues
-
-    @IBAction private func unwoundWalkthroughViewController(_ segue: UIStoryboardSegue) {
-    }
-
-    @IBAction private func unwoundRegionsViewController(_ segue: UIStoryboardSegue) {
-    }
-
     // MARK: Notifications
 
     @objc private func vpnDidInstall(notification: Notification) {

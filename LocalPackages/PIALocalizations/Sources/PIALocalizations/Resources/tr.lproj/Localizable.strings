@@ -111,7 +111,6 @@
 "settings.encryption.cipher.title" = "Veri Şifrelemesi";
 "settings.encryption.handshake.title" = "El sıkışma";
 
-"settings.application_settings.active_theme.title" = "Aktif tema";
 "settings.application_settings.kill_switch.title" = "VPN Acil Anahtarı";
 "settings.application_settings.kill_switch.footer" = "VPN kill switch, VPN bağlantınız yeniden bağlanırken internete erişimi önler. Bu, manuel bağlantı sonlandırmayı kapsamaz.";
 "settings.application_settings.reconnect_notifications.title" = "Yeniden Bağlanma Bildirimleri";
@@ -607,9 +606,7 @@
 
 
 
-"signup.walkthrough.page.2.description"= "Dünya çapındaki sunucularla daima koruma altındasınız.";
 
-"signup.walkthrough.page.2.title"= "90'dan fazla ülkede güvenli sunucular";
 
 
 

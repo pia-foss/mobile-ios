@@ -729,7 +729,6 @@ You will not be charged during this process.</string>
         <image name="PIAX/Global/plan-selected" width="34" height="34"/>
         <image name="PIAX/Global/plan-unselected" width="46" height="46"/>
         <image name="PIAX/Global/scrollableMap-dark" width="1740" height="870"/>
-        <image name="image-walkthrough-2" width="274" height="229"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
