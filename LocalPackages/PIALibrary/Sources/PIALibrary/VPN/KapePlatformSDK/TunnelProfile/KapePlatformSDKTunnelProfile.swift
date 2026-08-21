@@ -79,8 +79,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         let protocolConfiguration = generatedProtocol(withConfiguration: configuration)
         vpn.protocolConfiguration = protocolConfiguration
 
-        // TODO: [PlatformSDK] Temporary — use configuration.name
-        vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
+        //        vpn.localizedDescription = "[PlatformSDK] \(configuration.name)"
+        vpn.localizedDescription = configuration.name
 
         let isTunnelLiveOrStarting = Client.providers.vpnProvider.isVPNConnected || force
         vpn.isOnDemandEnabled = isTunnelLiveOrStarting ? configuration.isOnDemand : false
