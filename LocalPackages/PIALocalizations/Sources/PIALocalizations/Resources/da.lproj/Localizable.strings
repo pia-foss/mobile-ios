@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "Det ser ud til, at dette kort allerede er taget af en anden konto. Prøv at indtaste en anden pinkode.";
 "signup.failure.submit"= "GÅ TILBAGE";
 "signup.failure.internal"= "Intern app-fejl (%d)";
-"signup.failure.unknown"= "Ukendt fejl: %s (%d)";
+"signup.failure.unknown"= "Ukendt fejl: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Fejl";
 "signup.unreachable.title"= "Ups!";
@@ -609,6 +609,7 @@ Du har altid kontrollen. Du kan se, hvilke data vi har indsamlet, under Indstill
 "welcome.login.error.validation"= "Du skal indtaste et brugernavn og et kodeord.";
 "welcome.login.error.unauthorized"= "Dit brugernavn eller kodeord er forkert.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Vores server er i øjeblikket utilgængelig. Prøv igen senere.";
 "welcome.login.receipt.button"= "Log på med købskvittering";
 "welcome.login.magic.link.title"= "Log ind ved hjælp af magisk e-maillink";
 "welcome.login.magic.link.response"= "Se i din e-mail for et login-link.";

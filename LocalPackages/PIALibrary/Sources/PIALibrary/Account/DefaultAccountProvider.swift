@@ -167,13 +167,15 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
     }
 
-    public func login(with receiptRequest: LoginReceiptRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            callback?(currentUser, nil)
+    public func login(with receiptRequest: LoginReceiptRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+        if isLoggedIn, let currentUser {
+            log.debug("User is already logged in, returning current user")
+            callback(.success(currentUser))
             return
         }
 
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self else { return }
             let credentials = Credentials(username: "", password: "")
             ServiceQualityManager.shared.iapProcessingPurchaseEvent(origin: .restore)
 
@@ -181,43 +183,48 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
                 try await webServices.token(receipt: receiptRequest.receipt)
                 ServiceQualityManager.shared.iapProcessingSuccessEvent(origin: .restore)
                 self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
-            } catch {
+            } catch let error as ClientError {
                 ServiceQualityManager.shared.iapProcessingFailureEvent(origin: .restore, error: error)
                 self.handleLoginResult(error: error, credentials: credentials, callback: callback)
             }
         }
     }
 
-    public func login(with linkToken: String, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            callback?(currentUser, nil)
+    public func login(with linkToken: String, _ callback: @escaping ClientCallback<UserAccount>) {
+        if isLoggedIn, let currentUser {
+            log.debug("User is already logged in, returning current user")
+            callback(.success(currentUser))
             return
         }
 
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self else { return }
             let credentials = Credentials(username: "", password: "")
 
             do {
                 try await webServices.migrateToken(token: linkToken)
                 self.handleLoginResult(error: nil, credentials: credentials, callback: callback)
-            } catch {
+            } catch let error as ClientError {
                 self.handleLoginResult(error: error, credentials: credentials, callback: callback)
             }
         }
     }
 
-    public func login(with request: LoginRequest, _ callback: ((UserAccount?, Error?) -> Void)?) {
-        guard !isLoggedIn else {
-            callback?(currentUser, nil)
+    public func login(with request: LoginRequest, _ callback: @escaping ClientCallback<UserAccount>) {
+        if isLoggedIn, let currentUser {
+            log.debug("User is already logged in, returning current user")
+            callback(.success(currentUser))
             return
         }
 
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+
             do {
                 try await webServices.token(credentials: request.credentials)
-                handleLoginResult(error: nil, credentials: request.credentials, callback: callback)
-            } catch {
-                handleLoginResult(error: error, credentials: request.credentials, callback: callback)
+                self.handleLoginResult(error: nil, credentials: request.credentials, callback: callback)
+            } catch let error as ClientError {
+                self.handleLoginResult(error: error, credentials: request.credentials, callback: callback)
             }
         }
     }
@@ -233,43 +240,47 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
     }
 
-    private func handleLoginResult(error: Error?, credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
-        guard error == nil else {
-            DispatchQueue.main.async { callback?(nil, error) }
+    private func handleLoginResult(
+        error: ClientError?,
+        credentials: Credentials,
+        callback: @escaping ClientCallback<UserAccount>
+    ) {
+        if let error {
+            DispatchQueue.main.async { callback(.failure(error)) }
             return
         }
 
         guard vpnToken != nil else {
-            DispatchQueue.main.async { callback?(nil, ClientError.unauthorized) }
+            DispatchQueue.main.async { callback(.failure(ClientError.unauthorized)) }
             return
         }
 
-        self.updateUser(credentials: credentials) { userAccount, error in
-            if let userAccount = userAccount {
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            let result = await self.updateUser(credentials: credentials)
+            if case let .success(userAccount) = result {
                 Macros.postNotification(.PIAAccountDidLogin, [.user: userAccount])
             }
-            callback?(userAccount, error)
+            DispatchQueue.main.async { callback(result) }
         }
     }
 
-    private func updateUser(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
+    private func updateUser(credentials: Credentials) async -> ClientResult<UserAccount> {
         self.updateUsernamePassword()
-        self.updateUserAccount(credentials: credentials, callback: callback)
+        return await updateUserAccount(credentials: credentials)
     }
 
-    private func updateUserAccount(credentials: Credentials, callback: ((UserAccount?, Error?) -> Void)?) {
-        Task { @MainActor in
-            do {
-                let accountInfo = try await self.webServices.info()
-                self.accessedDatabase.plain.accountInfo = accountInfo
-                self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
-                let userAccount = UserAccount(credentials: credentials, info: accountInfo)
-                DispatchQueue.main.async { callback?(userAccount, nil) }
-            } catch {
-                try? await self.webServices.logout()
-                self.cleanDatabase()
-                DispatchQueue.main.async { callback?(nil, ClientError.unauthorized) }
-            }
+    private func updateUserAccount(credentials: Credentials) async -> ClientResult<UserAccount> {
+        do {
+            let accountInfo = try await self.webServices.info()
+            self.accessedDatabase.plain.accountInfo = accountInfo
+            self.accessedDatabase.secure.setPublicUsername(accountInfo.username)
+            let userAccount = UserAccount(credentials: credentials, info: accountInfo)
+            return .success(userAccount)
+        } catch {
+            try? await self.webServices.logout()
+            self.cleanDatabase()
+            return .failure(error)
         }
     }
 
@@ -472,13 +483,13 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             }
         }
 
-        public func loginUsingMagicLink(withEmail email: String, _ callback: SuccessLibraryCallback?) {
+        public func loginUsingMagicLink(withEmail email: String, _ callback: @escaping SuccessClientCallback) {
             Task { @MainActor in
                 do {
                     try await webServices.loginLink(email: email)
-                    DispatchQueue.main.async { callback?(nil) }
-                } catch {
-                    DispatchQueue.main.async { callback?(error) }
+                    DispatchQueue.main.async { callback(.success(())) }
+                } catch let error as ClientError {
+                    DispatchQueue.main.async { callback(.failure(error)) }
                 }
             }
         }

@@ -17,38 +17,36 @@ final class LoginProvider: LoginProviderType {
         self.accountProvider = accountProvider
     }
 
-    func login(with credentials: Credentials, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with credentials: Credentials, completion: @escaping ClientCallback<UserAccount>) {
         let request = LoginRequest(credentials: credentials)
 
-        accountProvider.login(with: request) { [weak self] userAccount, error in
-            self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
+        accountProvider.login(with: request) { [weak self] result in
+            self?.handleLoginResult(result: result, completion: completion)
         }
     }
 
-    func login(with receipt: JWS, completion: @escaping (Result<UserAccount, Error>) -> Void) {
+    func login(with receipt: JWS, completion: @escaping ClientCallback<UserAccount>) {
         let request = LoginReceiptRequest(receipt: receipt)
 
-        accountProvider.login(with: request) { [weak self] userAccount, error in
-            self?.handleLoginResult(userAccount: userAccount, error: error, completion: completion)
+        accountProvider.login(with: request) { [weak self] result in
+            self?.handleLoginResult(result: result, completion: completion)
         }
     }
 
-    private func handleLoginResult(userAccount: UserAccount?, error: Error?, completion: @escaping (Result<UserAccount, Error>) -> Void) {
-        if let error = error {
+    private func handleLoginResult(
+        result: ClientResult<UserAccount>,
+        completion: @escaping ClientCallback<UserAccount>
+    ) {
+        switch result {
+        case .failure(let error):
             completion(.failure(error))
-            return
-        }
 
-        guard let userAccount = userAccount else {
-            completion(.failure(ClientError.unexpectedReply))
-            return
+        case .success(let userAccount):
+            if let info = userAccount.info, info.isExpired {
+                completion(.failure(.expired))
+            } else {
+                completion(.success(userAccount))
+            }
         }
-
-        guard userAccount.info?.isExpired == true else {
-            completion(.success(userAccount))
-            return
-        }
-
-        completion(.failure(ClientError.expired))
     }
 }

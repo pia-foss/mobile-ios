@@ -130,12 +130,8 @@ public extension PaywallDependencies {
         accountProvider: AccountProvider
     ) async -> Result<UserAccount, PaywallError> {
         await withCheckedContinuation { continuation in
-            accountProvider.login(with: LoginReceiptRequest(receipt: jws)) { user, error in
-                if let user, error == nil {
-                    continuation.resume(returning: .success(user))
-                } else {
-                    continuation.resume(returning: .failure(.restoreLoginFailed))
-                }
+            accountProvider.login(with: LoginReceiptRequest(receipt: jws)) { result in
+                continuation.resume(returning: result.mapError(PaywallError.init(client:)))
             }
         }
     }

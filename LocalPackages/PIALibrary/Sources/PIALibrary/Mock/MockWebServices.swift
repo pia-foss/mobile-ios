@@ -43,13 +43,13 @@ final class MockWebServices: WebServices {
 
     var apiToken: String?
 
-    func migrateToken(token: String) async throws {}
+    func migrateToken(token: String) async throws(ClientError) {}
 
-    func token(credentials: Credentials) async throws {}
+    func token(credentials: Credentials) async throws(ClientError) {}
 
-    func token(receipt: JWS) async throws {}
+    func token(receipt: JWS) async throws(ClientError) {}
 
-    func info() async throws -> AccountInfo {
+    func info() async throws(ClientError) -> AccountInfo {
         let result = accountInfo?()
         let error: ClientError? = (result == nil) ? .unsupported : nil
 
@@ -64,7 +64,7 @@ final class MockWebServices: WebServices {
 
     func update(credentials: Credentials, resetPassword reset: Bool, email: String) async throws {}
 
-    func loginLink(email: String) async throws {}
+    func loginLink(email: String) async throws(ClientError) {}
 
     func logout() async throws {}
 

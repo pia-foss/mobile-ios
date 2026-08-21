@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIALibrary
 import PIALocalizations
 
 /// Everything that can go wrong on the paywall, reduced to the cases the UI treats differently.
@@ -49,6 +50,23 @@ public enum PaywallError: Error, Equatable, Sendable {
 }
 
 extension PaywallError {
+    init(client: ClientError) {
+        switch client {
+        case .userCancelled:
+            self = .userCancelled
+        case .purchasePending:
+            self = .purchasePending
+        case .productUnavailable:
+            self = .productsUnavailable
+        case .noReceipt:
+            self = .nothingToRestore
+        case .badReceipt:
+            self = .restoreLoginFailed
+        default:
+            self = .failed(message: client.localizedDescription)
+        }
+    }
+
     /// The message to surface, or `nil` when the failure should be silent.
     var userFacingMessage: String? {
         switch self {

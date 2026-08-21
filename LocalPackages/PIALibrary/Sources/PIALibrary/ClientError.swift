@@ -28,6 +28,9 @@ public enum ClientError: Error, Equatable {
     /// The Internet is unreachable.
     case internetUnreachable
 
+    /// Our backend is down, timing out, or returning 5xx errors.
+    case backendUnavailable
+
     /// The service has been denied authorization.
     case unauthorized
 
@@ -64,48 +67,46 @@ public enum ClientError: Error, Equatable {
     /// Operation was interrupted by the user. Can be ignored most of the time.
     case userCancelled
 
-    /// Internal error in the `mobile-shared-account` library (code 600)
-    case libraryError(message: String?)
+    /// Internal error in the `mobile-shared-account` library (code 6xx)
+    case libraryError(code: Int, message: String)
+
+    /// No in-app history receipt is available.
+    case noReceipt
+
+    /// The in-app history receipt is not eligible for a plan or is corrupt.
+    case badReceipt
+
+    /// The selected in-app product is not available.
+    case productUnavailable
+
+    /// The redeem code is invalid.
+    case redeemInvalid
+
+    /// The redeem code was claimed already.
+    case redeemClaimed
+
+    /// Trial accounts are not renewable.
+    case renewingTrial
+
+    /// The account is not renewable.
+    case renewingNonRenewable
+
+    /// Invalid parameter
+    case invalidParameter
+
+    /// The selected sandbox subscription is not available in production.
+    case sandboxPurchase
+
+    /// The purchase is pending external action (e.g. "Ask to Buy" approval or SCA).
+    /// The transaction will be delivered later through `Transaction.updates`.
+    case purchasePending
+
+    /// Cant retrieve regions
+    case noRegions
+
+    /// No servers available
+    case noServersAvailable
 
     /// Unknown error
-    case unknown(code: Int, message: String?)
-
-    #if os(iOS) || os(tvOS)
-        /// No in-app history receipt is available.
-        case noReceipt
-
-        /// The in-app history receipt is not eligible for a plan or is corrupt.
-        case badReceipt
-
-        /// The selected in-app product is not available.
-        case productUnavailable
-
-        /// The redeem code is invalid.
-        case redeemInvalid
-
-        /// The redeem code was claimed already.
-        case redeemClaimed
-
-        /// Trial accounts are not renewable.
-        case renewingTrial
-
-        /// The account is not renewable.
-        case renewingNonRenewable
-
-        /// Invalid parameter
-        case invalidParameter
-
-        /// The selected sandbox subscription is not available in production.
-        case sandboxPurchase
-
-        /// The purchase is pending external action (e.g. "Ask to Buy" approval or SCA).
-        /// The transaction will be delivered later through `Transaction.updates`.
-        case purchasePending
-
-        /// Cant retrieve regions
-        case noRegions
-
-        /// No servers available
-        case noServersAvailable
-    #endif
+    case unknown(code: Int, message: String)
 }

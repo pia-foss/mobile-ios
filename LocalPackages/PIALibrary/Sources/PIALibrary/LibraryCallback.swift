@@ -27,3 +27,14 @@ public typealias LibraryCallback<T> = (T?, Error?) -> Void
 
 /// A simple callback returning `nil` on success and `Error` on failure.
 public typealias SuccessLibraryCallback = (Error?) -> Void
+
+// MARK: ClientError
+
+/// Result that contains either value `T` or error ``ClientError``.
+public typealias ClientResult<T> = Result<T, ClientError>
+
+/// Callback that returns either a value or a ``ClientError``.
+public typealias ClientCallback<T> = (ClientResult<T>) -> Void
+
+/// Simple callback that doesn't return a value, but can return a ``ClientError``.
+public typealias SuccessClientCallback = ClientCallback<Void>

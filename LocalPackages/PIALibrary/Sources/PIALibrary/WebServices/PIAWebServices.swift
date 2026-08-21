@@ -115,21 +115,17 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         return self.nativeAccountAPI.syncApiToken
     }
 
-    /***
-     Generates a new auth expiring token based on a previous non-expiry one.
-     */
-    func migrateToken(token: String) async throws {
+    /// Generates a new auth expiring token based on a previous non-expiry one.
+    func migrateToken(token: String) async throws(ClientError) {
         do {
             try await nativeAccountAPI.migrateApiToken(apiToken: token)
         } catch {
-            throw ClientError.unauthorized
+            throw mapNativeLoginError(error)
         }
     }
 
-    /***
-     Generates a new auth token for the specific user
-     */
-    func token(credentials: Credentials) async throws {
+    /// Generates a new auth token for the specific user
+    func token(credentials: Credentials) async throws(ClientError) {
         do {
             try await nativeAccountAPI.loginWithCredentials(
                 username: credentials.username,
@@ -151,69 +147,57 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
 
-    /***
-     Generates a new auth token for the specific user
-     */
-    func token(receipt: JWS) async throws {
+    /// Generates a new auth token for the specific user
+    func token(receipt: JWS) async throws(ClientError) {
         do {
             try await nativeAccountAPI.loginWithReceipt(receipt: receipt)
-            try handleLoginResponse(error: nil, mapError: mapNativeLoginFromReceiptError)
         } catch {
-            try handleLoginResponse(error: error, mapError: mapNativeLoginFromReceiptError)
-        }
-    }
-
-    private func handleLoginResponse(
-        error: Error?,
-        mapError: ((Error) -> (ClientError))
-    ) throws {
-        if let error {
-            throw mapError(error)
+            throw mapNativeLoginFromReceiptError(error)
         }
     }
 
     // MARK: - Error mapping
 
     private func mapNativeLoginError(_ error: Error) -> ClientError {
-        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-        log.debug("\(#function) code: \(code ?? 0) error: \(error)")
-        switch code ?? 0 {
-        case 402:
+        guard let error = error as? PIAError else {
+            return .unknown(code: 0, message: error.localizedDescription)
+        }
+
+        log.debug("\(#function) code: \(error.type) error: \(error)")
+
+        switch error.type {
+        case .http(400):
+            return .invalidParameter
+        case .http(401), .http(403):
+            return .unauthorized
+        case .http(402):
             return .expired
-        case 429:
+        case .http(429):
             let retryAfter = (error as? PIAAccountError)?.retryAfterSeconds ?? 0
             return .throttled(retryAfter: UInt(retryAfter))
-        case 500..<600:
-            return .noServersAvailable
-        case PIAAccountError.networkFailureCode:
-            return .internetUnreachable
-        default:
-            return .unauthorized
+        case .http(500..<600):
+            return .backendUnavailable
+        case .http(let status):
+            return .unknown(code: status, message: error.localizedDescription)
+        case .network:
+            return .backendUnavailable
+        case let type:
+            return .libraryError(code: type.code, message: error.localizedDescription)
         }
     }
 
     private func mapNativeLoginFromReceiptError(_ error: Error) -> ClientError {
-        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-        switch code {
+        let type = (error as? PIAError)?.type
+        switch type {
         // Errors that indicate the receipt is either invalid or expired
-        case 400, 401:
+        case .http(400), .http(401):
             return .badReceipt
         default:
             return mapNativeLoginError(error)
         }
     }
 
-    private func mapNativeLoginLinkError(_ error: Error) -> ClientError {
-        let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-        switch code {
-        case 401, 402, 429:
-            return mapNativeLoginError(error)
-        default:
-            return .invalidParameter
-        }
-    }
-
-    func info() async throws -> AccountInfo {
+    func info() async throws(ClientError) -> AccountInfo {
         do {
             let account = try await nativeAccountAPI.accountDetails()
             return AccountInfo(accountInformation: account)
@@ -233,11 +217,11 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         }
     }
 
-    func loginLink(email: String) async throws {
+    func loginLink(email: String) async throws(ClientError) {
         do {
             try await nativeAccountAPI.loginLink(email: email)
         } catch {
-            throw mapNativeLoginLinkError(error)
+            throw mapNativeLoginError(error)
         }
     }
 
@@ -282,8 +266,8 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
                 }
             } catch {
                 log.error("Failed to signup: \(error)")
-                let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-                throw code == 400 ? ClientError.badReceipt : ClientError.invalidParameter
+                let type = (error as? PIAError)?.type
+                throw type == .http(status: 400) ? ClientError.badReceipt : ClientError.invalidParameter
             }
         }
 
@@ -393,18 +377,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             return info
         } catch {
             log.warning("Failed to fetch subscription information: \(error)")
-            let code = (error as? PIAAccountError)?.code ?? (error as? PIAMultipleErrors)?.code
-            switch code {
-            case 400:
-                throw ClientError.badReceipt
-            case 401:
-                throw ClientError.unauthorized
-            case 600:
-                throw ClientError.libraryError(message: error.localizedDescription)
-            case let code:
-                log.warning("Unhandled error code: \(code ?? 0)")
-                throw ClientError.invalidParameter
-            }
+            throw mapNativeLoginError(error)
         }
     }
 }

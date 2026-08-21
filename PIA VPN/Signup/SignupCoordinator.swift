@@ -110,10 +110,10 @@ final class SignupCoordinator: NSObject, Coordinator {
     func handleMagicLink(token: String) {
         showLogin { controller in
             controller.showLoadingAnimation()
-            Client.providers.accountProvider.login(with: token) { _, error in
+            Client.providers.accountProvider.login(with: token) { result in
                 controller.hideLoadingAnimation()
                 var userInfo: [NotificationKey: Any]?
-                if let error {
+                if case let .failure(error) = result {
                     userInfo = [.error: error]
                 }
                 Macros.postNotification(.PIAFinishLoginWithMagicLink, userInfo)

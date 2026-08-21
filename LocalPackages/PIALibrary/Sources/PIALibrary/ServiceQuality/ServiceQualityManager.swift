@@ -299,7 +299,7 @@ public final class ServiceQualityManager: NSObject {
             switch clientError {
             case .unknown(let code, _): return "unknown_\(code)"
             case .throttled(let retryAfter): return "throttled_\(retryAfter)"
-            case .libraryError: return "library_error"
+            case .libraryError(let code, _): return "library_error_\(code)"
             default: return String(describing: clientError)
             }
         default:
@@ -319,10 +319,8 @@ public final class ServiceQualityManager: NSObject {
         ]
         if let clientError = error as? ClientError {
             switch clientError {
-            case .unknown(_, let message), .libraryError(let message):
-                if let message {
-                    details[KPIIapPropertyKey.internalError.rawValue] = message
-                }
+            case .unknown(_, let message), .libraryError(_, let message):
+                details[KPIIapPropertyKey.internalError.rawValue] = message
             default:
                 break
             }

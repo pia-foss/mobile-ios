@@ -546,7 +546,7 @@
 "signup.failure.redeem.claimed.message"= "このカードは、すでに別のアカウントが獲得したようです。別のPINを入力してください。";
 "signup.failure.submit"= "戻る";
 "signup.failure.internal"= "内部アプリエラー (%d)";
-"signup.failure.unknown"= "不明なエラー: %s (%d)";
+"signup.failure.unknown"= "不明なエラー: %@ (%d)";
 
 "signup.unreachable.vc_title"= "エラー";
 "signup.unreachable.title"= "おっと！";
@@ -610,6 +610,7 @@
 "welcome.login.error.validation"= "ユーザー名とパスワードを入力してください。";
 "welcome.login.error.unauthorized"= "ユーザー名またはパスワードが間違っています。";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "現在、サーバーは利用できません。後でもう一度お試しください。";
 "welcome.login.receipt.button"= "購入領収書を使用してログイン";
 "welcome.login.magic.link.title"= "魔法のメールリンクを使用してログイン";
 "welcome.login.magic.link.response"= "ログインリンクについては、メールを確認してください。";

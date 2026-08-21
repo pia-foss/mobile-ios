@@ -68,12 +68,14 @@ actor AccountHTTPClient {
             let (data, response) = try await session.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw PIAAccountError.networkFailure(
+                throw PIAAccountError.decodingFailed(
                     NSError(
-                        domain: "PIAAccount", code: 0,
+                        domain: "PIAAccount",
+                        code: 0,
                         userInfo: [
-                            NSLocalizedDescriptionKey: "Invalid response type"
-                        ])
+                            NSLocalizedDescriptionKey: "Invalid response type \(type(of: response))"
+                        ]
+                    )
                 )
             }
 
@@ -111,12 +113,14 @@ actor AccountHTTPClient {
             let (data, response) = try await session.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw PIAAccountError.networkFailure(
+                throw PIAAccountError.decodingFailed(
                     NSError(
-                        domain: "PIAAccount", code: 0,
+                        domain: "PIAAccount",
+                        code: 0,
                         userInfo: [
-                            NSLocalizedDescriptionKey: "Invalid response type"
-                        ])
+                            NSLocalizedDescriptionKey: "Invalid response type \(type(of: response))"
+                        ]
+                    )
                 )
             }
 

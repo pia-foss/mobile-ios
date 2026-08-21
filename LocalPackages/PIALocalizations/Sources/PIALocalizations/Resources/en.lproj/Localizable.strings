@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "Looks like this card has already been claimed by another account. You can try entering a different PIN.";
 "signup.failure.submit"= "GO BACK";
 "signup.failure.internal"= "Internal app error (%d)";
-"signup.failure.unknown"= "Unknown error: %s (%d)";
+"signup.failure.unknown"= "Unknown error: %@ (%d)";
 
 "signup.unreachable.vc_title"= "Error";
 "signup.unreachable.title"= "Whoops!";
@@ -656,6 +656,7 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.login.error.validation"= "You must enter a username and password.";
 "welcome.login.error.unauthorized"= "Your username or password is incorrect.";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "Our server is unavailable at the moment. Please try again later.";
 "welcome.login.receipt.button"= "Login using purchase receipt";
 "welcome.login.magic.link.title"= "Login using magic email link";
 "welcome.login.magic.link.response"= "Please check your e-mail for a login link.";

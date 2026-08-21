@@ -22,7 +22,7 @@ final class LoginWithReceiptUseCaseTests: XCTestCase {
     var fixture: Fixture!
     var sut: LoginWithReceiptUseCase!
 
-    func instantiateSut(paymentProviderResult: Result<JWS, Error>, loginProviderResult: Result<UserAccount, Error>) {
+    func instantiateSut(paymentProviderResult: Result<JWS, Error>, loginProviderResult: ClientResult<UserAccount>) {
         fixture.paymentProviderMock = PaymentProviderMock(result: paymentProviderResult)
         fixture.loginProviderMock = LoginProviderMock(result: loginProviderResult)
 

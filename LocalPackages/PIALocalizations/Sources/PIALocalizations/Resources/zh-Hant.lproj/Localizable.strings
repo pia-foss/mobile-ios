@@ -545,7 +545,7 @@
 "signup.failure.redeem.claimed.message"= "這張卡似乎已經被另一個帳戶使用。您可以嘗試輸入不同的 PIN 碼。";
 "signup.failure.submit"= "返回";
 "signup.failure.internal"= "內部應用程式錯誤 (%d)";
-"signup.failure.unknown"= "未知錯誤：%s (%d)";
+"signup.failure.unknown"= "未知錯誤：%@ (%d)";
 
 "signup.unreachable.vc_title"= "錯誤";
 "signup.unreachable.title"= "噢！";
@@ -609,6 +609,7 @@
 "welcome.login.error.validation"= "您必須輸入使用者名稱及密碼。";
 "welcome.login.error.unauthorized"= "您的使用者名稱或密碼不正確。";
 "welcome.login.error.throttled"= "Too many failed login attempts with this username. Please try again after %@ second(s).";
+"welcome.login.error.backendUnavailable"= "我們的伺服器目前無法使用。請稍後再試。";
 "welcome.login.receipt.button"= "使用購買收據登入";
 "welcome.login.magic.link.title"= "使用神奇的電子郵件連結登入";
 "welcome.login.magic.link.response"= "請確認電子信箱是否已收到登入連結。";
