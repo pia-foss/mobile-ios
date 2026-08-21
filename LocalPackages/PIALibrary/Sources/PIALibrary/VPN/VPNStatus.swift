@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import NetworkExtension
 
 /// The status of a VPN connection.
 public enum VPNStatus: String {
@@ -41,4 +42,42 @@ public enum VPNStatus: String {
     case unknown
 
     //    case changingServer
+}
+
+extension VPNStatus {
+
+    /// The single place that resolves the app's connection status from the two authoritative
+    /// signals feeding it:
+    ///
+    /// - `system` — the OS-level `NEVPNStatus`. It owns whether the tunnel *exists*: bring-up and,
+    ///   crucially, teardown (a crashed/killed extension can't report `.disconnected`, so this is the
+    ///   safety net).
+    /// - `tunnel` — the PlatformSDK extension's reported `TunnelStatus`, or `nil` for legacy
+    ///   protocols and before the tunnel has reported anything. It adds the nuance `NEVPNStatus`
+    ///   can't express: an in-place region switch / mid-session reconnect keeps `NEVPNStatus` at
+    ///   `.connected` while the tunnel is really re-establishing.
+    ///
+    /// So `tunnel` is consulted only while `system` is `.connected` — layering `.connecting` over an
+    /// otherwise-connected tunnel, never contradicting the OS about whether the tunnel is there.
+    /// With `tunnel == nil` this collapses to a pure `NEVPNStatus` mapping (the legacy path).
+    ///
+    /// PIA-owned mirror of the SDK's `KapeVPNStatusPublisher.resolveStatus`, kept here so PIALibrary
+    /// needs no Kape dependency.
+    public static func resolve(system: NEVPNStatus, tunnel: PIATunnelSharedState.TunnelStatus?) -> VPNStatus {
+        switch system {
+        case .connected:
+            switch tunnel {
+            case .connecting, .reconnecting, .paused: return .connecting
+            case .connected, .disconnecting, .disconnected, .none: return .connected
+            }
+        case .connecting, .reasserting:
+            return .connecting
+        case .disconnecting:
+            return .disconnecting
+        case .disconnected, .invalid:
+            return .disconnected
+        @unknown default:
+            return .disconnected
+        }
+    }
 }

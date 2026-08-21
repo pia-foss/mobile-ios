@@ -25,7 +25,7 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if canImport(TunnelKitCore)
+#if os(iOS)
     import TunnelKitCore
     import TunnelKitOpenVPN
 #endif
@@ -53,9 +53,11 @@ final class AppPreferences {
         static let piaSocketType = "PIASocketType"
 
         static let useSmallPackets = "UseSmallPackets"
-        static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
-        static let ikeV2UseSmallPackets = "IKEV2UseSmallPackets"
         static let usesCustomDNS = "usesCustomDNS"
+
+        static let openVPNCipher = "OpenVPNCipher"
+        static let openVPNAuth = "OpenVPNAuth"
+        static let openVPNPort = "OpenVPNPort"
 
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
@@ -105,6 +107,8 @@ final class AppPreferences {
         static let showLeakProtection = "showLeakProtection"
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
+        static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
+        static let usePlatformSDKVPN = "usePlatformSDKVPN"
 
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -186,6 +190,46 @@ final class AppPreferences {
             }
             set {
                 defaults.set(newValue.rawValue, forKey: Entries.piaHandshake)
+            }
+        }
+
+        // User-set OpenVPN options mirrored as plain app-group values so the PlatformSDK tunnel
+        // can read them without the TunnelKitOpenVPN package. Written on the settings-save path
+        // (see `SettingsViewController.savePreferences()`). cipher/auth hold OpenVPN raw values
+        // (e.g. "AES-128-GCM", "SHA256"); port is 0 for automatic.
+        var openVPNCipher: String? {
+            get {
+                return defaults.string(forKey: Entries.openVPNCipher)
+            }
+            set {
+                if let newValue = newValue {
+                    defaults.set(newValue, forKey: Entries.openVPNCipher)
+                } else {
+                    defaults.removeObject(forKey: Entries.openVPNCipher)
+                }
+            }
+        }
+
+        var openVPNAuth: String? {
+            get {
+                return defaults.string(forKey: Entries.openVPNAuth)
+            }
+            set {
+                if let newValue = newValue {
+                    defaults.set(newValue, forKey: Entries.openVPNAuth)
+                } else {
+                    defaults.removeObject(forKey: Entries.openVPNAuth)
+                }
+            }
+        }
+
+        // 0 = automatic
+        var openVPNPort: UInt16 {
+            get {
+                return UInt16(defaults.integer(forKey: Entries.openVPNPort))
+            }
+            set {
+                defaults.set(Int(newValue), forKey: Entries.openVPNPort)
             }
         }
     #endif
@@ -293,24 +337,6 @@ final class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.useSmallPackets)
-        }
-    }
-
-    var wireGuardUseSmallPackets: Bool {
-        get {
-            return defaults.bool(forKey: Entries.wireGuardUseSmallPackets)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.wireGuardUseSmallPackets)
-        }
-    }
-
-    var ikeV2UseSmallPackets: Bool {
-        get {
-            return defaults.bool(forKey: Entries.ikeV2UseSmallPackets)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.ikeV2UseSmallPackets)
         }
     }
 
@@ -549,6 +575,32 @@ final class AppPreferences {
         }
     }
 
+    /// The `ios_platform_sdk_vpn` flag as of the last fetch. Bootstrap picks the VPN
+    /// profile from this, since the flag itself only arrives later in the launch.
+    ///
+    /// Defaults to `true` when unset, so the flag acts as a kill switch: once the server
+    /// stops advertising it, the next launch falls back to the legacy profiles.
+    var usePlatformSDKVPN: Bool {
+        get {
+            return defaults.object(forKey: Entries.usePlatformSDKVPN) as? Bool ?? true
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.usePlatformSDKVPN)
+        }
+    }
+
+    /// Tracks whether the legacy per-protocol VPN configurations (IKEv2 / OpenVPN /
+    /// WireGuard) have been removed after migrating to the PlatformSDK tunnel. Runs
+    /// once so stale Network Extension configs cannot auto-start via on-demand.
+    var didCleanupLegacyVPNProfiles: Bool {
+        get {
+            return defaults.bool(forKey: Entries.didCleanupLegacyVPNProfiles)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.didCleanupLegacyVPNProfiles)
+        }
+    }
+
     var appEnvironmentIsProduction: Bool {
         get {
             return defaults.bool(forKey: Entries.appEnvironmentIsProduction)
@@ -582,8 +634,6 @@ final class AppPreferences {
                 Entries.quickSettingNetworkToolVisible: true,
                 Entries.quickSettingPrivateBrowserVisible: true,
                 Entries.useSmallPackets: false,
-                Entries.wireGuardUseSmallPackets: false,
-                Entries.ikeV2UseSmallPackets: false,
                 Entries.usesCustomDNS: false,
                 Entries.canAskAgainForReview: false,
                 Entries.successDisconnections: 0,
@@ -663,6 +713,27 @@ final class AppPreferences {
                 pendingPreferences.commit()
             }
 
+        }
+
+        /// One-time bridge for installs upgraded before the PlatformSDK tunnel read OpenVPN options
+        /// from plain app-group keys. Populates `openVPNCipher`/`openVPNAuth`/`openVPNPort` from the
+        /// committed `OpenVPN.ProviderConfiguration` so existing users keep their cipher/port until
+        /// they next save settings. No-op once the keys exist (the settings-save path keeps them fresh).
+        func syncOpenVPNSettingsToAppGroup() {
+            guard openVPNCipher == nil else {
+                return
+            }
+            guard let configuration = (Client.preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration) else {
+                return
+            }
+
+            let session = configuration.sessionConfiguration
+            openVPNCipher = session.cipher?.rawValue
+            openVPNAuth = session.digest?.rawValue
+
+            // Single distinct remote port → that port; otherwise automatic (0).
+            let ports = Set((session.remotes ?? []).map { $0.proto.port })
+            openVPNPort = ports.count == 1 ? (ports.first ?? 0) : 0
         }
 
         func migrateWireguard() {
@@ -838,8 +909,6 @@ final class AppPreferences {
         quickSettingPrivateBrowserVisible = true
         usesCustomDNS = false
         useSmallPackets = false
-        ikeV2UseSmallPackets = false
-        wireGuardUseSmallPackets = false
         #if os(iOS)
             todayWidgetVpnStatus = L10n.Today.Widget.login
             todayWidgetButtonTitle = L10n.Today.Widget.login

@@ -49,13 +49,29 @@ extension VPNStatus {
     ///   own manager, or from the user tapping Connect while the configuration was still
     ///   loading, and must not be clobbered by this late callback.
     static func reconciled(current: VPNStatus, nativeStatus: NEVPNStatus) -> VPNStatus? {
-        let native = VPNStatus.from(nativeStatus: nativeStatus)
-        if native == .connected {
-            return (current == .connected) ? nil : .connected
+        return reconciled(
+            current: current,
+            resolved: VPNStatus.from(nativeStatus: nativeStatus),
+            isOwnConnectionUp: nativeStatus == .connected
+        )
+    }
+
+    /// The same adoption policy, expressed over an already-resolved app-level status.
+    ///
+    /// Under the PlatformSDK tunnel the native status alone is not the whole truth: the NE can be
+    /// `.connected` while the tunnel is still (re)connecting, so the caller resolves the two into
+    /// `resolved` (see ``VPNStatus/resolve(system:tunnel:)``) and reports separately, via
+    /// `isOwnConnectionUp`, whether PIA's own configuration is natively up. That flag — not
+    /// `resolved` — is what makes this hard, PIA-specific evidence worth adopting; `resolved` is
+    /// then the status actually adopted, so an on-demand tunnel that came up mid-reconnect
+    /// surfaces as `.connecting` rather than a premature `.connected`.
+    static func reconciled(current: VPNStatus, resolved: VPNStatus, isOwnConnectionUp: Bool) -> VPNStatus? {
+        if isOwnConnectionUp {
+            return (current == resolved) ? nil : resolved
         }
         guard current == .connected else {
             return nil
         }
-        return native
+        return resolved
     }
 }

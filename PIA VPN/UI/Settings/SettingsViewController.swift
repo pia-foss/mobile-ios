@@ -118,62 +118,35 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func updateSocketType(socketType: SocketType?) {
-
-        let currentProtocols = pendingOpenVPNConfiguration.endpointProtocols
-        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
-        var newProtocols: [EndpointProtocol] = []
-
-        if let socketType = socketType {
-            let ports = (socketType == .udp) ? serversCfg.ovpnPorts.udp : serversCfg.ovpnPorts.tcp
-            if currentProtocols?.count == 1, let currentPort = pendingOpenVPNConfiguration?.currentPort, ports.contains(currentPort) {
-                newProtocols.append(EndpointProtocol(socketType, currentPort))
-            } else {
-                for port in ports {
-                    newProtocols.append(EndpointProtocol(socketType, port))
-                }
-            }
-        } else {
-            newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-        }
         pendingOpenVPNSocketType = socketType
-        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
-        savePreferences()
-
+        pendingPreferences.openVPNSocketType = socketType?.rawValue
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
     func updateRemotePort(port: UInt16) {
+        var endpoints = AppConfiguration.VPN.piaAutomaticProtocols
 
-        let serversCfg = Client.providers.serverProvider.currentServersConfiguration
-
-        var newProtocols: [EndpointProtocol] = []
-        if (port != ProtocolSettingsViewController.AUTOMATIC_PORT) {
-            guard let socketType = pendingOpenVPNSocketType else {
-                log.error("Port cannot be set manually when socket type is automatic. Using automatic protocols.")
-                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-                return
-            }
-            newProtocols.append(EndpointProtocol(socketType, port))
-        } else {
-            if (pendingOpenVPNSocketType == nil) {
-                newProtocols = AppConfiguration.VPN.piaAutomaticProtocols
-            } else if (pendingOpenVPNSocketType == .udp) {
-                for port in serversCfg.ovpnPorts.udp {
-                    newProtocols.append(EndpointProtocol(.udp, port))
-                }
-            } else if (pendingOpenVPNSocketType == .tcp) {
-                for port in serversCfg.ovpnPorts.tcp {
-                    newProtocols.append(EndpointProtocol(.tcp, port))
+        if let socketType = pendingOpenVPNSocketType {
+            if port != ProtocolSettingsViewController.AUTOMATIC_PORT {
+                endpoints = [EndpointProtocol(socketType, port)]
+            } else {
+                let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
+                let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
+                if !servedPorts.isEmpty {
+                    endpoints = servedPorts.map { EndpointProtocol(socketType, $0) }
                 }
             }
         }
-        pendingOpenVPNConfiguration.endpointProtocols = newProtocols
-        savePreferences()
 
+        pendingOpenVPNConfiguration.endpointProtocols = endpoints
+        pendingPreferences.openVPNPort = Int(port)
+        savePreferences()
     }
 
     func updateDataEncryption(encryption value: String) {
         if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
             pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: value)!
+            pendingPreferences.openVPNCipher = value
         } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
             let algorithm = IKEv2EncryptionAlgorithm(rawValue: value) ?? .default
             pendingPreferences.ikeV2EncryptionAlgorithm = algorithm
@@ -192,14 +165,22 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     func updateSetting(_ setting: SettingSection, withValue value: Any?) {
 
+        if let protocolSection = setting as? ProtocolsSections, protocolSection == .protocolSelection {
+            resetProtocolSettings()
+            return
+        }
+
         if let networkSection = setting as? NetworkSections {
             switch networkSection {
             case .dns:
                 if let settingValue = value as? String {
+                    let dnsServers = DNSList.shared.valueForKey(settingValue)
                     if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                        pendingOpenVPNConfiguration.dnsServers = DNSList.shared.valueForKey(settingValue)
+                        pendingOpenVPNConfiguration.dnsServers = dnsServers
+                        pendingPreferences.openVPNDnsServers = dnsServers
                     } else {
-                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: DNSList.shared.valueForKey(settingValue), packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: dnsServers, packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                        pendingPreferences.wireGuardDnsServers = dnsServers
                     }
                 }
             }
@@ -207,6 +188,42 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
         savePreferences()
 
+    }
+
+    // MARK: Protocol settings
+
+    private func validateRemotePort() {
+        let port = UInt16(exactly: pendingPreferences.openVPNPort) ?? 0
+        guard port != ProtocolSettingsViewController.AUTOMATIC_PORT else {
+            return
+        }
+
+        if let socketType = pendingOpenVPNSocketType {
+            let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
+            let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
+            guard !servedPorts.isEmpty, !servedPorts.contains(port) else {
+                return
+            }
+        }
+
+        log.debug("Remote port \(port) is not served over \(pendingOpenVPNSocketType?.rawValue ?? "automatic") — resetting it to automatic")
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
+    }
+
+    private func resetProtocolSettings() {
+        pendingOpenVPNSocketType = nil
+        pendingPreferences.openVPNSocketType = nil
+
+        pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: AppConstants.OpenVPNCrypto.default.rawValue)
+        pendingOpenVPNConfiguration.digest = OpenVPN.Digest(rawValue: AppConstants.OpenVPNCrypto.defaultAuth)
+        pendingPreferences.openVPNCipher = AppConstants.OpenVPNCrypto.default.rawValue
+
+        pendingPreferences.ikeV2EncryptionAlgorithm = .default
+        if let integrity = IKEv2EncryptionAlgorithm.default.integrityAlgorithms().first {
+            pendingPreferences.ikeV2IntegrityAlgorithm = integrity
+        }
+
+        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
     // MARK: Actions
@@ -291,13 +308,14 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func commitChanges(_ completionHandler: @escaping () -> Void) {
+        let isResettingToDefaults = isResetting
+        isResetting = false
+
         pendingVPNAction = pendingPreferences.requiredVPNAction()
 
-        if pendingVPNAction == nil && Client.providers.vpnProvider.isVPNConnected && isResetting {
+        if isResettingToDefaults && pendingVPNAction == nil {
             pendingVPNAction = pendingPreferences.defaultVPNAction()
         }
-
-        isResetting = false
 
         guard let action = pendingVPNAction else {
             commitNMTPreferences()
@@ -330,6 +348,28 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         guard !isDisconnected else {
             commitPreferences()
             completionHandlerAfterVPNAction(false)
+            return
+        }
+
+        if isResettingToDefaults {
+            commitPreferences()
+
+            let alert = Macros.alert(
+                title,
+                L10n.Settings.Commit.Messages.shouldReconnect
+            )
+
+            // reconnect -> reconnect VPN and close
+            alert.addActionWithTitle(L10n.Settings.Commit.Buttons.reconnect) {
+                completionHandlerAfterVPNAction(true)
+            }
+
+            // later -> close
+            alert.addCancelActionWithTitle(L10n.Settings.Commit.Buttons.later) {
+                completionHandler()
+            }
+
+            present(alert, animated: true, completion: nil)
             return
         }
 
@@ -386,6 +426,12 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
         AppPreferences.shared.piaHandshake = pendingHandshake
 
+        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+            AppPreferences.shared.openVPNCipher = pendingOpenVPNConfiguration.cipher?.rawValue
+            AppPreferences.shared.openVPNAuth = pendingOpenVPNConfiguration.digest?.rawValue
+            AppPreferences.shared.openVPNPort = pendingOpenVPNConfiguration.currentPort ?? 0
+        }
+
         AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
@@ -432,6 +478,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
         pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
 
+        validateRemotePort()
         validateDNSList()
         tableView.reloadData()
     }
@@ -447,7 +494,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
 
             if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                if AppPreferences.shared.useSmallPackets {
+                if pendingPreferences.useSmallPackets {
                     builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
                 } else {
                     builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
@@ -457,7 +504,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
         } else {
             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                if AppPreferences.shared.wireGuardUseSmallPackets {
+                if pendingPreferences.useSmallPackets {
                     pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize), for: pendingPreferences.vpnType)
                 } else {
                     pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.highPacketSize), for: pendingPreferences.vpnType)
@@ -523,7 +570,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
                     }
                 }
                 if !isValid {
-                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
                 }
             }
         } else {

@@ -66,7 +66,12 @@ extension DebugMenuViewModel {
     }
 
     var vpnProtocolName: String {
-        Client.preferences.vpnType
+        switch Client.preferences.vpnType {
+        case "PIAWG": return "WireGuard"
+        case "PIA": return "OpenVPN"
+        case "IPSec", "IKEv2": return "IKEv2"
+        default: return Client.preferences.vpnType
+        }
     }
 
     var publicIP: String {
@@ -107,6 +112,9 @@ extension DebugMenuViewModel {
         lines.append("=== App Info ===")
         lines.append("Version: \(appVersion)")
         lines.append("Environment: \(environment)")
+        lines.append("")
+        lines.append("=== VPN ===")
+        lines.append("Protocol: \(vpnProtocolName)")
         lines.append("")
         lines.append("=== Account ===")
         lines.append("Username: \(username)")

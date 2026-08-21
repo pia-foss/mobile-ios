@@ -119,6 +119,14 @@ extension Client {
         /// Sets the rsa certificate to use for pinning puposes.
         public var rsa4096Certificate: String?
 
+        /// Loads the bundled PIA-RSA-4096 certificate from the app bundle.
+        public static func defaultRSACertificate() -> String? {
+            guard let url = Bundle.main.url(forResource: "PIA-RSA-4096", withExtension: "pem") else {
+                return nil
+            }
+            return try? String(contentsOf: url)
+        }
+
         // MARK: VPN
 
         private var availableVPNProfiles: [VPNProfile]
@@ -252,6 +260,16 @@ extension Client {
 
         func profile(forVPNType type: String) -> VPNProfile? {
             return availableVPNProfiles.first { $0.vpnType == type }
+        }
+
+        /// Whether VPN connections run through the PlatformSDK tunnel.
+        ///
+        /// Derived from the registered profiles — the decision the app made at launch from
+        /// the `ios_platform_sdk_vpn` flag — rather than from ``featureFlags`` directly: the
+        /// flags are still being fetched while the VPN stack is prepared, so reading them
+        /// here would disagree with the profile that was actually registered.
+        public var usesPlatformSDKTunnel: Bool {
+            return profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType) != nil
         }
 
         /**

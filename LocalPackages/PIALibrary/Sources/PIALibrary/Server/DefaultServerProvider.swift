@@ -174,6 +174,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             }
 
             currentServers = allServers
+            PIATunnelSharedState.updateServers(currentServers)
             DispatchQueue.main.async { [self] in
                 Macros.postNotification(.PIAThemeDidChange)
                 callback?(currentServers, nil)
@@ -247,6 +248,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                 }*/
             } else {
                 self.currentServers = bundle.servers
+                PIATunnelSharedState.updateServers(self.currentServers)
                 callback?(self.currentServers, error)
             }
         }

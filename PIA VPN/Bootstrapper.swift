@@ -22,12 +22,13 @@
 
 import Foundation
 import Logging
+import NetworkExtension
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if canImport(TunnelKitCore)
+#if os(iOS)
     import TunnelKitCore
     import TunnelKitOpenVPN
     import PIAWireguard
@@ -69,6 +70,76 @@ final class Bootstrapper {
         #endif
     }
 
+    #if os(iOS)
+        /// One-time deletion of every VPN configuration this app owns, so the PlatformSDK
+        /// tunnel starts from a clean slate.
+        private func cleanupLegacyVPNProfilesIfNeeded() {
+            guard AppPreferences.shared.usePlatformSDKVPN, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+                return
+            }
+
+            let supportedTypes: [KapePlatformSDKVPNType] = [
+                .automatic,
+                .wireGuard,
+                .openVPN
+            ]
+
+            if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
+                let editable = Client.preferences.editable()
+                editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+                editable.commit()
+            }
+
+            NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+                // Retried on the next launch when the configurations cannot be read.
+                guard let managers else { return }
+
+                let wasConnected = managers.contains { manager in
+                    [NEVPNStatus.connected, .connecting, .reasserting].contains(manager.connection.status)
+                }
+
+                log.info("cleanupLegacyVPNProfiles: removing \(managers.count) VPN configuration(s), connected: \(wasConnected)")
+
+                let group = DispatchGroup()
+                for manager in managers {
+                    group.enter()
+                    manager.connection.stopVPNTunnel()
+                    manager.removeFromPreferences { _ in group.leave() }
+                }
+
+                // The legacy IKEv2 configuration sits in the app's single non-tunnel-provider slot,
+                // which `loadAllFromPreferences` never returns.
+                group.enter()
+                IKEv2Profile().remove { _ in group.leave() }
+
+                group.notify(queue: .main) {
+                    // Re-read instead of trusting the removals, so a silent failure is retried.
+                    // `prepare()` reinstalls the PlatformSDK configuration in this same launch, so
+                    // that one is expected to be back; anything else is a leftover.
+                    NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+                        let didCleanupLegacyVPNProfiles = managers?.allSatisfy { manager in
+                            (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
+                        }
+
+                        AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
+                    }
+
+                    // Deleting the configuration of a live tunnel disconnects the user: bring the
+                    // PlatformSDK tunnel up to take the connection over.
+                    guard wasConnected, Client.providers.accountProvider.isLoggedIn else {
+                        return
+                    }
+
+                    Client.providers.vpnProvider.connect { error in
+                        if let error {
+                            log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
+                        }
+                    }
+                }
+            }
+        }
+    #endif
+
     func bootstrap() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
@@ -99,6 +170,15 @@ final class Bootstrapper {
             Client.providers.accountProvider.cleanDatabase()
         }
 
+        #if os(iOS)
+            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
+            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
+            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
+            if AppPreferences.shared.usePlatformSDKVPN {
+                Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            }
+        #endif
+
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()
 
@@ -115,7 +195,7 @@ final class Bootstrapper {
             }
         #endif
 
-        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+        Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
 
         #if STAGING
             Client.environment = .staging
@@ -134,9 +214,14 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            Client.configuration.addVPNProfile(IKEv2Profile())
-            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-            Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            if AppPreferences.shared.usePlatformSDKVPN {
+                Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
+                cleanupLegacyVPNProfilesIfNeeded()
+            } else {
+                Client.configuration.addVPNProfile(IKEv2Profile())
+                Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+                Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            }
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
@@ -164,6 +249,7 @@ final class Bootstrapper {
 
         Client.providers.accountProvider.featureFlags { _ in
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
+            AppPreferences.shared.usePlatformSDKVPN = Client.configuration.featureFlags[.usePlatformSDKVPN]
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)
@@ -231,6 +317,7 @@ final class Bootstrapper {
         pref.commit()
         #if os(iOS)
             AppPreferences.shared.migrateOVPN()
+            AppPreferences.shared.syncOpenVPNSettingsToAppGroup()
             AppPreferences.shared.migrateWireguard()
 
             // Business objects
@@ -274,17 +361,6 @@ final class Bootstrapper {
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
-    }
-
-    // MARK: Certificate
-
-    func rsa4096Certificate() -> String? {
-        #if os(iOS)
-            return AppPreferences.shared.piaHandshake.pemString()
-        #else
-            // FIXME: Implement for tvOS
-            return nil
-        #endif
     }
 
     // MARK: Notifications
