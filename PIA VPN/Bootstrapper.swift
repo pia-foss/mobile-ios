@@ -22,6 +22,7 @@
 
 import Foundation
 import Logging
+import NetworkExtension
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
@@ -70,19 +71,13 @@ final class Bootstrapper {
     }
 
     #if os(iOS)
-        /// One-time removal of the legacy per-protocol VPN configurations (IKEv2 /
-        /// OpenVPN / WireGuard) after migrating to the PlatformSDK tunnel. Without
-        /// this, a Network Extension config left over from before the flag was enabled
-        /// — possibly with on-demand active — could auto-start the old tunnel and run
-        /// alongside the PlatformSDK profile.
+        /// One-time deletion of every VPN configuration this app owns, so the PlatformSDK
+        /// tunnel starts from a clean slate.
         private func cleanupLegacyVPNProfilesIfNeeded() {
             guard AppPreferences.shared.usePlatformSDKVPN, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
                 return
             }
 
-            // Migrate users whose persisted protocol is no longer selectable under the PlatformSDK
-            // tunnel (legacy IKEv2) to automatic protocol negotiation. WireGuard / OpenVPN selections
-            // are still supported and kept as-is. Mirrors the tvOS BootstraperFactory migration.
             let supportedTypes: [KapePlatformSDKVPNType] = [
                 .automatic,
                 .wireGuard,
@@ -95,23 +90,52 @@ final class Bootstrapper {
                 editable.commit()
             }
 
-            let legacyProfiles: [VPNProfile] = [
-                IKEv2Profile(),
-                PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier),
-                PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier)
-            ]
-            let group = DispatchGroup()
-            for profile in legacyProfiles {
+            NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+                // Retried on the next launch when the configurations cannot be read.
+                guard let managers else { return }
+
+                let wasConnected = managers.contains { manager in
+                    [NEVPNStatus.connected, .connecting, .reasserting].contains(manager.connection.status)
+                }
+
+                log.info("cleanupLegacyVPNProfiles: removing \(managers.count) VPN configuration(s), connected: \(wasConnected)")
+
+                let group = DispatchGroup()
+                for manager in managers {
+                    group.enter()
+                    manager.connection.stopVPNTunnel()
+                    manager.removeFromPreferences { _ in group.leave() }
+                }
+
+                // The legacy IKEv2 configuration sits in the app's single non-tunnel-provider slot,
+                // which `loadAllFromPreferences` never returns.
                 group.enter()
-                profile.disconnect { _ in
-                    profile.remove { _ in
-                        group.leave()
+                IKEv2Profile().remove { _ in group.leave() }
+
+                group.notify(queue: .main) {
+                    // Re-read instead of trusting the removals, so a silent failure is retried.
+                    // `prepare()` reinstalls the PlatformSDK configuration in this same launch, so
+                    // that one is expected to be back; anything else is a leftover.
+                    NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+                        let didCleanupLegacyVPNProfiles = managers?.allSatisfy { manager in
+                            (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
+                        }
+
+                        AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
+                    }
+
+                    // Deleting the configuration of a live tunnel disconnects the user: bring the
+                    // PlatformSDK tunnel up to take the connection over.
+                    guard wasConnected, Client.providers.accountProvider.isLoggedIn else {
+                        return
+                    }
+
+                    Client.providers.vpnProvider.connect { error in
+                        if let error {
+                            log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
+                        }
                     }
                 }
-            }
-
-            group.notify(queue: .main) {
-                AppPreferences.shared.didCleanupLegacyVPNProfiles = true
             }
         }
     #endif
