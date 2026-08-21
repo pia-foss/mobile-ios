@@ -59,7 +59,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         // live status into `PIATunnelSharedState`; fold that into `transient.vpnStatus` so the app's
         // single source of truth reflects "Connecting" during a switch. Legacy tunnels don't write
         // it and this observer isn't registered — their status stays purely NEVPNStatus-driven.
-        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+        if Client.configuration.usesPlatformSDKTunnel {
             PIATunnelSharedState.startObserving()
             nc.addObserver(self, selector: #selector(platformSDKTunnelStatusDidChange), name: PIATunnelSharedState.didChangeNotification, object: nil)
         }
@@ -205,7 +205,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // The PlatformSDK tunnel handles reconnection internally via KapePathReconnector
             // and KapeSessionController. Avoid double-reconnecting by suppressing the
             // PIA-level fallback timer.
-            if fallbackTimer == nil && !Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            if fallbackTimer == nil && !Client.configuration.usesPlatformSDKTunnel {
                 log.debug("Setting up fallbackTimer...")
 
                 fallbackTimer = Timer.scheduledTimer(withTimeInterval: Client.configuration.vpnConnectivityRetryDelay, repeats: true) { [weak self] timer in
@@ -287,7 +287,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         // fold agree on one combination. For legacy protocols `tunnel` is nil, so this is exactly the
         // pure `NEVPNStatus` mapping computed above (no behaviour change); for the PlatformSDK tunnel
         // it layers the `.connecting` nuance if the tunnel is mid-reconnect when this event fires.
-        let tunnel = Client.configuration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.readStatus().tunnelStatus : nil
+        let tunnel = Client.configuration.usesPlatformSDKTunnel ? PIATunnelSharedState.readStatus().tunnelStatus : nil
         let resolvedStatus = VPNStatus.resolve(system: connection.status, tunnel: tunnel)
 
         let previousStatus = accessedDatabase.transient.vpnStatus
@@ -309,7 +309,7 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             // Skip all PIA-level disconnect-error handling: neither the mark-unavailable
             // reconnect nor .PIAVPNDidFail (the Dashboard observes the latter and calls
             // vpnProvider.disconnect, which would tear down the SDK tunnel mid-recovery).
-            guard !Client.configuration.featureFlags[.usePlatformSDKVPN] else { return }
+            guard !Client.configuration.usesPlatformSDKTunnel else { return }
 
             let errorDomain = lastDisconnectError.domain
             let errorCode = lastDisconnectError.code

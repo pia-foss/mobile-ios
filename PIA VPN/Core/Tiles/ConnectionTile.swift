@@ -80,7 +80,7 @@ class ConnectionTile: UIView, Tileable {
         // Through the PlatformSDK tunnel the extension writes the actual connection (protocol/server/
         // transport) into shared state after connecting, out of band with VPN status changes. Observe
         // those cross-process writes so the tile reflects the resolved values promptly.
-        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+        if Client.configuration.usesPlatformSDKTunnel {
             PIATunnelSharedState.startObserving()
             nc.addObserver(
                 self, selector: #selector(setConnectionValues),

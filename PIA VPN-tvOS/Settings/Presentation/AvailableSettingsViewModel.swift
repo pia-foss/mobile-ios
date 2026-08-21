@@ -41,7 +41,7 @@ class AvailableSettingsViewModel: ObservableObject {
     private let onDedicatedIpSectionSelectedAction: AppRouter.Actions
     private let onProtocolSectionSelectedAction: AppRouter.Actions
 
-    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions, onProtocolSectionSelectedAction: AppRouter.Actions, usePlatformSDKVPN: Bool = Client.configuration.featureFlags[.usePlatformSDKVPN]) {
+    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions, onProtocolSectionSelectedAction: AppRouter.Actions, usePlatformSDKVPN: Bool = Client.configuration.usesPlatformSDKTunnel) {
         self.onAccountSectionSelectedAction = onAccountSelectedAction
         self.onDedicatedIpSectionSelectedAction = onDedicatedIpSectionSelectedAction
         self.onProtocolSectionSelectedAction = onProtocolSectionSelectedAction

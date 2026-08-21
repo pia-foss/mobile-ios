@@ -262,6 +262,16 @@ extension Client {
             return availableVPNProfiles.first { $0.vpnType == type }
         }
 
+        /// Whether VPN connections run through the PlatformSDK tunnel.
+        ///
+        /// Derived from the registered profiles — the decision the app made at launch from
+        /// the `ios_platform_sdk_vpn` flag — rather than from ``featureFlags`` directly: the
+        /// flags are still being fetched while the VPN stack is prepared, so reading them
+        /// here would disagree with the profile that was actually registered.
+        public var usesPlatformSDKTunnel: Bool {
+            return profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType) != nil
+        }
+
         /**
         Returns true if the purchase feature is available
          - Returns: A boolean indicating if purchases are available.

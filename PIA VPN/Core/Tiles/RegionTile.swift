@@ -83,7 +83,7 @@ class RegionTile: UIView, Tileable {
         // Through the PlatformSDK tunnel the extension writes the actual connected server into shared
         // state after connecting, out of band with VPN status changes. Observe those cross-process
         // writes so the tile reflects the resolved region promptly.
-        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+        if Client.configuration.usesPlatformSDKTunnel {
             PIATunnelSharedState.startObserving()
             nc.addObserver(
                 self, selector: #selector(updateServer),

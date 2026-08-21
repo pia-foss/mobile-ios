@@ -93,7 +93,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     private func showProtocolOptions(point: CGPoint) {
 
         var options: [KapePlatformSDKVPNType]
-        if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+        if Client.configuration.usesPlatformSDKTunnel {
             // The PlatformSDK tunnel runs WireGuard, OpenVPN, or automatic (WireGuard first, then
             // OpenVPN); it can't run IKEv2, so that legacy option is dropped here.
             options = [

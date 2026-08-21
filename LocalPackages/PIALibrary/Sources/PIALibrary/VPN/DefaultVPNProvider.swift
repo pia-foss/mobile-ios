@@ -93,7 +93,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     /// The tunnel's actual-connection write-back, valid only when running through the PlatformSDK
     /// tunnel and currently connected (so a stale value from a previous session is never shown).
     private var activeConnectionFromTunnel: PIATunnelSharedState.ActiveConnection? {
-        guard accessedConfiguration.featureFlags[.usePlatformSDKVPN], isVPNConnected else {
+        guard accessedConfiguration.usesPlatformSDKTunnel, isVPNConnected else {
             return nil
         }
         return PIATunnelSharedState.readStatus().activeConnection
@@ -146,7 +146,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         // *old* profile and makes it active. Skip it entirely when the PlatformSDK
         // tunnel is enabled so that an IKEv1 user is not silently routed back onto a
         // legacy profile; the resolved PlatformSDK profile is used instead.
-        if !accessedConfiguration.featureFlags[.usePlatformSDKVPN], isLegacyProfile() {
+        if !accessedConfiguration.usesPlatformSDKTunnel, isLegacyProfile() {
             // Set IKEv2 as default if user was using IKEv1.
             profile = IKEv2Profile()
             let preferences = Client.preferences.editable()
@@ -453,12 +453,12 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     /// The profile that should handle the current connection.
     ///
-    /// When the PlatformSDK feature flag is enabled, every connection is routed
+    /// When the PlatformSDK tunnel is registered, every connection is routed
     /// through the single `KapePlatformSDKTunnelProfile` regardless of the
     /// user-selected protocol. Otherwise the profile matching the selected
     /// protocol (`preferences.vpnType`) is used.
     private func resolvedActiveProfile() -> VPNProfile? {
-        if accessedConfiguration.featureFlags[.usePlatformSDKVPN] {
+        if accessedConfiguration.usesPlatformSDKTunnel {
             return accessedConfiguration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType)
         }
         return accessedConfiguration.profile(forVPNType: accessedPreferences.vpnType)
@@ -483,7 +483,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             // Under the PlatformSDK tunnel a native `.connected` only says the Network Extension
             // is up; the tunnel's own write-back is what tells us whether it is actually carrying
             // traffic or still (re)connecting. Fold it in before applying the adoption policy.
-            let tunnel = accessedConfiguration.featureFlags[.usePlatformSDKVPN] ? PIATunnelSharedState.readStatus().tunnelStatus : nil
+            let tunnel = accessedConfiguration.usesPlatformSDKTunnel ? PIATunnelSharedState.readStatus().tunnelStatus : nil
             let resolvedStatus = VPNStatus.resolve(system: nativeStatus, tunnel: tunnel)
 
             // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
