@@ -108,6 +108,7 @@ final class AppPreferences {
         static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
         static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
+        static let usePlatformSDKVPN = "usePlatformSDKVPN"
 
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -571,6 +572,20 @@ final class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.checksDipExpirationRequest)
+        }
+    }
+
+    /// The `ios_platform_sdk_vpn` flag as of the last fetch. Bootstrap picks the VPN
+    /// profile from this, since the flag itself only arrives later in the launch.
+    ///
+    /// Defaults to `true` when unset, so the flag acts as a kill switch: once the server
+    /// stops advertising it, the next launch falls back to the legacy profiles.
+    var usePlatformSDKVPN: Bool {
+        get {
+            return defaults.object(forKey: Entries.usePlatformSDKVPN) as? Bool ?? true
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.usePlatformSDKVPN)
         }
     }
 

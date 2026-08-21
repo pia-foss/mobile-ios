@@ -76,7 +76,7 @@ final class Bootstrapper {
         /// — possibly with on-demand active — could auto-start the old tunnel and run
         /// alongside the PlatformSDK profile.
         private func cleanupLegacyVPNProfilesIfNeeded() {
-            guard Client.configuration.featureFlags[.usePlatformSDKVPN], !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+            guard AppPreferences.shared.usePlatformSDKVPN, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
                 return
             }
 
@@ -150,7 +150,7 @@ final class Bootstrapper {
             // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
             // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
             // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
-            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            if AppPreferences.shared.usePlatformSDKVPN {
                 Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
             }
         #endif
@@ -190,7 +190,7 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            if Client.configuration.featureFlags[.usePlatformSDKVPN] {
+            if AppPreferences.shared.usePlatformSDKVPN {
                 Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
                 cleanupLegacyVPNProfilesIfNeeded()
             } else {
@@ -225,6 +225,7 @@ final class Bootstrapper {
 
         Client.providers.accountProvider.featureFlags { _ in
             AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
+            AppPreferences.shared.usePlatformSDKVPN = Client.configuration.featureFlags[.usePlatformSDKVPN]
 
             /// Updates the feature flags values to the ones set on the server only on Release builds.
             /// (like Leak protection feature)

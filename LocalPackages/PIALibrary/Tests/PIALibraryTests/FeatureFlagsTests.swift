@@ -33,9 +33,7 @@ import Testing
 
 @Suite("FeatureFlagHolder Tests")
 struct FeatureFlagHolderTests {
-    // .usePlatformSDKVPN is force-overridden to true in FeatureFlagHolder during
-    // PlatformSDK integration; all other flags must still default to false.
-    @Test("Default to false", arguments: FeatureFlag.allCases.filter { $0 != .usePlatformSDKVPN })
+    @Test("Default to false", arguments: FeatureFlag.allCases)
     func defaultToFalse(flag: FeatureFlag) {
         let holder = FeatureFlagHolder()
         #expect(holder[flag] == false, "flags should default to false")
