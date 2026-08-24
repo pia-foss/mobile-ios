@@ -109,6 +109,7 @@ final class AppPreferences {
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
         static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
         static let usePlatformSDKVPN = "usePlatformSDKVPN"
+        static let didConfirmPlatformSDKMigration = "didConfirmPlatformSDKMigration"
 
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -578,14 +579,27 @@ final class AppPreferences {
     /// The `ios_platform_sdk_vpn` flag as of the last fetch. Bootstrap picks the VPN
     /// profile from this, since the flag itself only arrives later in the launch.
     ///
-    /// Defaults to `true` when unset, so the flag acts as a kill switch: once the server
+    /// Defaults to `false` until the server has answered once: no user is migrated before the
+    /// rollout selects them. Once stored, the flag also acts as a kill switch — when the server
     /// stops advertising it, the next launch falls back to the legacy profiles.
     var usePlatformSDKVPN: Bool {
         get {
-            return defaults.object(forKey: Entries.usePlatformSDKVPN) as? Bool ?? true
+            return defaults.bool(forKey: Entries.usePlatformSDKVPN)
         }
         set {
             defaults.set(newValue, forKey: Entries.usePlatformSDKVPN)
+        }
+    }
+
+    /// Whether the user confirmed the migration to the PlatformSDK tunnel. Migrating disconnects
+    /// a live tunnel, so bootstrap waits behind a confirmation notice until this is set. Read with
+    /// an explicit fallback since the registered defaults below are iOS-only.
+    var didConfirmPlatformSDKMigration: Bool {
+        get {
+            return defaults.object(forKey: Entries.didConfirmPlatformSDKMigration) as? Bool ?? false
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.didConfirmPlatformSDKMigration)
         }
     }
 

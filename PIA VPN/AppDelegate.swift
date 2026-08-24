@@ -57,6 +57,25 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
         AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
 
+        // Keep the launch screen presented while the migration check runs
+        window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
+
+        Bootstrapper.shared.shouldConfirmPlatformSDKMigration { [weak self] shouldConfirm in
+            guard shouldConfirm else {
+                self?.startApp(application)
+                return
+            }
+
+            self?.window?.rootViewController = PlatformSDKMigrationViewController {
+                Bootstrapper.shared.confirmPlatformSDKMigration()
+                self?.startApp(application)
+            }
+        }
+
+        return true
+    }
+
+    private func startApp(_ application: UIApplication) {
         Bootstrapper.shared.bootstrap()
         application.shortcutItems = []
         hotspotHelper = PIAHotspotHelper()
@@ -72,8 +91,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         if let window {
             RootCoordinator.shared.install(in: window)
         }
-
-        return true
     }
 
     #if !targetEnvironment(macCatalyst)

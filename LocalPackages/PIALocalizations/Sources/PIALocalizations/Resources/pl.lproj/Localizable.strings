@@ -657,3 +657,9 @@ Zawsze masz kontrolę. W ustawieniach możesz sprawdzić, jakie dane zebraliśmy
 "welcome.gdpr.accept.button.title"= "Zaakceptuj i kontynuuj";
 
 "welcome.update.account.email.error"= "Nie udało się zmienić adresu e-mail konta";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "Aktualizacja VPN";
+"platform_sdk_migration.label.subtitle" = "Ulepszamy sposób, w jaki łączy się Twoja sieć VPN. Połączenie VPN zostanie na chwilę rozłączone i automatycznie nawiązane ponownie.";
+"platform_sdk_migration.button.confirm" = "Kontynuuj";

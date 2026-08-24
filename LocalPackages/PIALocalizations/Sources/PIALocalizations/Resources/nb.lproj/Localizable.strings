@@ -657,3 +657,9 @@ Du har alltid kontrollen. Du kan se hvilke data vi har samlet inn, i innstilling
 "welcome.gdpr.accept.button.title"= "Godta og fortsett";
 
 "welcome.update.account.email.error"= "Kunne ikke endre kontoens e-post";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN-oppgradering";
+"platform_sdk_migration.label.subtitle" = "Vi oppgraderer måten VPN-en din kobler til på. VPN-en frakobles et kort øyeblikk og kobles automatisk til igjen.";
+"platform_sdk_migration.button.confirm" = "Fortsett";

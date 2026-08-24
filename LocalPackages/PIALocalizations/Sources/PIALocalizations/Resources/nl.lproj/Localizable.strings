@@ -657,3 +657,9 @@ U houdt altijd de controle. U kunt in de Instellingen zien welke gegevens we heb
 "welcome.gdpr.accept.button.title"= "Akkoord en doorgaan";
 
 "welcome.update.account.email.error"= "Kan accountmail niet aanpassen";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN-upgrade";
+"platform_sdk_migration.label.subtitle" = "We verbeteren de manier waarop je VPN verbinding maakt. De verbinding met je VPN wordt kort verbroken en daarna automatisch hersteld.";
+"platform_sdk_migration.button.confirm" = "Doorgaan";

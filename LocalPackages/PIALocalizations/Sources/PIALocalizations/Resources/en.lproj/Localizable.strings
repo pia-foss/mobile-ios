@@ -704,3 +704,9 @@ You will always be in control. You can see what data we’ve collected from Sett
 "welcome.gdpr.accept.button.title"= "Agree and continue";
 
 "welcome.update.account.email.error"= "Failed to modify account email";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN Upgrade";
+"platform_sdk_migration.label.subtitle" = "We’re upgrading how your VPN connects. Your VPN will disconnect briefly and reconnect automatically.";
+"platform_sdk_migration.button.confirm" = "Continue";

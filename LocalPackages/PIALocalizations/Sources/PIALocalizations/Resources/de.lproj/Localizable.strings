@@ -657,3 +657,9 @@ Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Da
 "welcome.gdpr.accept.button.title"= "Zustimmen und fortfahren";
 
 "welcome.update.account.email.error"= "Konto-E-Mail nicht geändert";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN-Upgrade";
+"platform_sdk_migration.label.subtitle" = "Wir upgraden die Art, wie Ihr VPN eine Verbindung herstellt. Die Verbindung zum VPN wird kurz getrennt und automatisch wiederhergestellt.";
+"platform_sdk_migration.button.confirm" = "Weiter";

@@ -657,3 +657,9 @@
 "welcome.gdpr.accept.button.title"= "同意並繼續";
 
 "welcome.update.account.email.error"= "無法修改帳戶電子郵件";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN 升級";
+"platform_sdk_migration.label.subtitle" = "我們正在升級您的 VPN 連線方式。您的 VPN 將短暫斷開並自動重新連線。";
+"platform_sdk_migration.button.confirm" = "繼續";

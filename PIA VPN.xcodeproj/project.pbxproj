@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 76;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,7 +32,6 @@
 		3F6300A92FD8103C00DA8769 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD606AB921C7A17900E0781D /* NetworkExtension.framework */; };
 		3F6300B12FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F6300A82FD8103C00DA8769 /* PlatformSDK-Tunnel-iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3F6300B82FD8182D00DA8769 /* PIAVPN in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6300B72FD8182D00DA8769 /* PIAVPN */; };
-		3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA11002F9A0001007F7092 /* PIAPaywall */; };
 		3F7BD9B82EE8A09800EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9B72EE8A09800EE1F4C /* PIALibrary */; };
 		3F7BD9BC2EE8A0A600EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BB2EE8A0A600EE1F4C /* PIALibrary */; };
 		3F7BD9BE2EE8A0AB00EE1F4C /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7BD9BD2EE8A0AB00EE1F4C /* PIALibrary */; };
@@ -40,6 +39,7 @@
 		3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */; };
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
+		3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA11002F9A0001007F7092 /* PIAPaywall */; };
 		3FC0DEC42FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
 		3FD44D712FD8376D008A43AD /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3FD44D702FD8376D008A43AD /* PIALibrary */; };
 		3FE266BA2F0BE003004B53AA /* PIASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE266B92F0BE003004B53AA /* PIASwiftUI */; };
@@ -1061,6 +1061,7 @@
 				};
 			};
 			buildConfigurationList = 291C6377183EBC210039EC03 /* Build configuration list for PBXProject "PIA VPN" */;
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1097,7 +1098,6 @@
 				ACADC5F62F51AA1F00986EAF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				3FC0DEC22FEAF47C00063E49 /* XCRemoteSwiftPackageReference "OpenSSL-Package" */,
 			);
-			preferredProjectObjectVersion = 46;
 			productRefGroup = 291C637D183EBC210039EC03 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3584,6 +3584,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIADebugMenu;
 		};
+		3FAA11002F9A0001007F7092 /* PIAPaywall */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAPaywall;
+		};
 		3FC0DEC32FEAF47C00063E49 /* OpenSSL */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3FC0DEC22FEAF47C00063E49 /* XCRemoteSwiftPackageReference "OpenSSL-Package" */;
@@ -3665,10 +3669,6 @@
 		F20000172FD9000000DA8769 /* PIALibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIALibrary;
-		};
-		3FAA11002F9A0001007F7092 /* PIAPaywall */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PIAPaywall;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

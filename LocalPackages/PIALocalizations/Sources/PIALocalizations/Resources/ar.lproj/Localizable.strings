@@ -657,3 +657,9 @@
 "welcome.gdpr.accept.button.title"= "موافق ومتابعة";
 
 "welcome.update.account.email.error"= "تعذَّر تعديل البريد الإلكتروني للحساب";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "ترقية VPN";
+"platform_sdk_migration.label.subtitle" = "نحن نطور طريقة اتصال VPN. سيتم قطع اتصال VPN لفترة وجيزة ثم يعاد الاتصال تلقائيًا.";
+"platform_sdk_migration.button.confirm" = "متابعة";

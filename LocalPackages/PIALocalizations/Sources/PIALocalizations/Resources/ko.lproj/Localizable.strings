@@ -657,3 +657,9 @@
 "welcome.gdpr.accept.button.title"= "동의 및 계속";
 
 "welcome.update.account.email.error"= "계정 이메일을 수정하지 못했습니다";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN 업그레이드";
+"platform_sdk_migration.label.subtitle" = "VPN 연결 방식을 업그레이드하고 있습니다. VPN 연결이 잠시 해제된 후 자동으로 다시 연결됩니다.";
+"platform_sdk_migration.button.confirm" = "계속";

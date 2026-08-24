@@ -702,3 +702,9 @@
 "welcome.upgrade.renew.now"= "Hemen yenileyin";
 
 "welcome.upgrade.title"= "Private Internet Access kullanabilmek için aboneliğinizi yenilemeniz gerekiyor.";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPN Yükseltmesi";
+"platform_sdk_migration.label.subtitle" = "VPN’inizin bağlanma şeklini yükseltiyoruz. VPN bağlantınız kısa süre kesilecek ve otomatik olarak yeniden bağlanacak.";
+"platform_sdk_migration.button.confirm" = "Devam et";
