@@ -27,14 +27,33 @@ public protocol TestFlightDetectorProtocol {
 }
 
 public struct TestFlightDetector: TestFlightDetectorProtocol {
-
     public static let shared = TestFlightDetector()
 
     public init() {}
 
     /// Checks if app is running in TestFlight
     public var isTestFlight: Bool {
-        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        #if targetEnvironment(macCatalyst)
+            return hasStoreReceipt && hasProvisioningProfile
+        #else
+            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        #endif
     }
 
+    #if targetEnvironment(macCatalyst)
+        private var hasStoreReceipt: Bool {
+            bundleContentsContain("_MASReceipt/receipt")
+        }
+
+        private var hasProvisioningProfile: Bool {
+            bundleContentsContain("embedded.provisionprofile")
+        }
+
+        private func bundleContentsContain(_ relativePath: String) -> Bool {
+            let url = Bundle.main.bundleURL
+                .appendingPathComponent("Contents", isDirectory: true)
+                .appendingPathComponent(relativePath)
+            return FileManager.default.fileExists(atPath: url.path)
+        }
+    #endif
 }
