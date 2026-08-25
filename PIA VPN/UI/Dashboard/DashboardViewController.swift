@@ -1160,6 +1160,8 @@ final class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
 
         case .connecting:
+            stopConnectionTimer()
+
             toggleConnection.isOn = false
             toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true
