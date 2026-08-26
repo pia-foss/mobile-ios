@@ -175,6 +175,8 @@ public protocol AccountProvider: AnyObject {
      */
     func featureFlags(_ callback: SuccessLibraryCallback?)
 
+    func promoOffers() async -> Result<[String], Error>
+
     #if os(iOS) || os(tvOS)
         /// Lists the available plans with their corresponding product to purchase in order to get them.
         ///

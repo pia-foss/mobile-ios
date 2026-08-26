@@ -325,6 +325,10 @@ public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
             }
         }
 
+        public func promoOffers() async -> Result<[String], any Error> {
+            await delegate.promoOffers()
+        }
+
         /// :nodoc:
         public func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
             delegate.listRenewablePlans(callback)

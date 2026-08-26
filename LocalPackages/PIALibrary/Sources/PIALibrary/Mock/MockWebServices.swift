@@ -77,6 +77,10 @@ final class MockWebServices: WebServices {
         return .credentials(result)
     }
 
+    func promoOffersEligibility(receipt: PIABase.JWS, country: String?) async throws -> [String] {
+        return []
+    }
+
     func redeem(with request: Redeem, _ callback: ((Credentials?, Error?) -> Void)?) {
         let result = credentials?()
         let error: ClientError? = (result == nil) ? .unsupported : nil

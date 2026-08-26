@@ -233,6 +233,40 @@ public protocol PIAAccountAPI {
     /// - Throws: PIAAccountError if sign up fails
     func signUp(information: IOSSignupInformation) async throws -> VpnSignUpInformation
 
+    // MARK: - Apple Promotional Offers (iOS)
+
+    /// Checks which Apple promotional offers the subscriber may redeem.
+    ///
+    /// Unauthenticated (the signed transaction is the proof of subscription). A `PIAAccountError`
+    /// with `code == 404` means the feature is disabled server-side (kill switch) — treat as
+    /// "no offers available".
+    /// - Parameters:
+    ///   - receipt: StoreKit 2 signed transaction JWS (current or expired subscription).
+    ///   - country: Optional ISO 3166-1 alpha-2 device country.
+    /// - Returns: The eligible offer identifiers (empty = not eligible).
+    /// - Throws: PIAAccountError if the request fails.
+    func promoOffersEligibility(receipt: JWS, country: String?) async throws -> PromoOffersEligibilityResponse
+
+    /// Requests the one-time signature the App Store requires to apply a promotional offer.
+    ///
+    /// Unauthenticated. A `PIAAccountError` with `code == 403` means the user is not eligible for
+    /// this offer — re-run eligibility rather than retrying with the same input.
+    /// - Parameters:
+    ///   - receipt: StoreKit 2 signed transaction JWS.
+    ///   - productIdentifier: App Store product id of the subscription being purchased.
+    ///   - offerIdentifier: One of the identifiers returned by `promoOffersEligibility`.
+    ///   - appAccountToken: UUID that must match the value set on the purchase.
+    ///   - country: Optional ISO 3166-1 alpha-2 device country.
+    /// - Returns: The signature payload to attach to the purchase.
+    /// - Throws: PIAAccountError if signing fails.
+    func promoOffersSign(
+        receipt: JWS,
+        productIdentifier: String,
+        offerIdentifier: String,
+        appAccountToken: UUID,
+        country: String?
+    ) async throws -> PromoOffersSignResponse
+
     // MARK: - Social
 
     /// Sends an invite to an email address

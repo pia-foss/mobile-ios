@@ -98,6 +98,22 @@ import StoreKit
             return entitlementJWS
         }
 
+        func latestSubscriptionJWS() async -> JWS? {
+            return entitlementJWS
+        }
+
+        func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer] {
+            return []
+        }
+
+        func purchase(
+            product: any InAppProduct,
+            promotionalOffer signature: InAppPromotionalOfferSignature,
+            appAccountToken: UUID
+        ) async -> Result<any InAppTransaction, ClientError> {
+            return .success(MockTransaction())
+        }
+
         func synchronizeEntitlements() async -> Error? {
             return nil
         }

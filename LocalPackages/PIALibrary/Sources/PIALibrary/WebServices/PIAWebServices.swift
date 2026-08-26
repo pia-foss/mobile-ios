@@ -237,6 +237,10 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
         try await nativeAccountAPI.featureFlags().flags
     }
 
+    func promoOffersEligibility(receipt: JWS, country: String?) async throws -> [String] {
+        try await nativeAccountAPI.promoOffersEligibility(receipt: receipt, country: country).offerIdentifiers
+    }
+
     #if os(iOS) || os(tvOS)
         func signup(with request: Signup) async throws -> SignupResponse {
             var marketingJSON = ""

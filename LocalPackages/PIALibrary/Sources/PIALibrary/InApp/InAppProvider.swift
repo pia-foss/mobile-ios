@@ -35,16 +35,31 @@ public protocol InAppProvider: AnyObject {
 
     func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError>
 
+    /// Purchases a subscription with a signed Apple promotional offer applied.
+    ///
+    /// - Parameters:
+    ///   - product: the subscription product.
+    ///   - signature: the signature payload returned by the backend signing endpoint.
+    ///   - appAccountToken: the UUID that was sent to the signing endpoint; set on the purchase.
+    func purchase(
+        product: any InAppProduct,
+        promotionalOffer signature: InAppPromotionalOfferSignature,
+        appAccountToken: UUID
+    ) async -> Result<any InAppTransaction, ClientError>
+
     /// The number of free-trial days the account is eligible for. 0 if not.
     func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
     /// The signed JWS representation of the newest active subscription entitlement, or `nil` if none.
-    ///
-    /// Used as the `receipt` for backend flows where no fresh purchase transaction is available
-    /// (login-with-receipt, restore, subscription pricing).
     func currentEntitlementJWS() async -> JWS?
+
+    /// The signed JWS of the newest subscription transaction, **including expired ones**.
+    func latestSubscriptionJWS() async -> JWS?
+
+    /// The promotional offers configured on the given subscription product.
+    func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer]
 
     /// Forces a synchronization with the App Store. Used by "restore purchases".
     ///
