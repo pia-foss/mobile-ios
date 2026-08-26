@@ -19,99 +19,138 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import XCTest
+import CoreArchitecture
+import Testing
 
 @testable import PIAPaywall
 
 /// The reducer is a pure function, so every one of these is a synchronous value comparison.
-final class PaywallReducerTests: XCTestCase {
+///
+/// `Effect` carries closures and is not `Equatable`, so what a test can claim here is the state
+/// transition and *whether* work was returned. Which work it was — which plan reaches StoreKit,
+/// which output the host receives — is asserted in `PaywallStoreTests`, where the effect actually
+/// runs against a spy.
+@MainActor
+struct PaywallReducerTests {
 
-    private func reduce(_ state: inout PaywallState, _ action: PaywallAction) -> PaywallEffect {
-        PaywallReducer.reduce(into: &state, action: action)
+    private let sut = Paywall.Reducer(dependencies: .test())
+
+    private func reduce(_ state: inout Paywall.State, _ action: Paywall.Action) -> Effect<Paywall.Action>? {
+        sut.reduce(&state, action)
     }
 
     // MARK: - Loading
 
-    func test_onAppear_WHEN_stillLoading_THEN_loadsOffers() {
+    @Test("Appearing asks for the catalogue")
+    func onAppearLoadsOffers() {
         // GIVEN a fresh paywall
-        var state = PaywallState()
+        var state = Paywall.State()
 
         // WHEN it appears
         let effect = reduce(&state, .onAppear)
 
         // THEN it asks for the catalogue
-        XCTAssertEqual(effect, .batch([.observePurchaseIntents, .loadOffers]))
+        #expect(effect != nil)
     }
 
-    func test_offersResponse_WHEN_successful_THEN_becomesReadyWithYearlyPreselected() {
+    @Test("Both plans arriving leaves the paywall ready and selling yearly")
+    func offersBecomeReadyWithYearlyPreselected() {
         // GIVEN a loading paywall
-        var state = PaywallState()
+        var state = Paywall.State()
 
         // WHEN both plans arrive
         let effect = reduce(&state, .offersResponse(.success(Stub.payload())))
 
         // THEN it is ready, selling yearly by default
-        XCTAssertEqual(effect, .none)
-        XCTAssertEqual(state.phase, .ready)
-        XCTAssertEqual(state.defaultPlan, .yearly)
-        XCTAssertEqual(state.sheetSelection, .yearly)
-        XCTAssertEqual(state.trialOffer, PaywallTrialOffer(days: 7))
+        #expect(effect == nil)
+        #expect(state.phase == .ready)
+        #expect(state.defaultPlan == .yearly)
+        #expect(state.sheetSelection == .yearly)
+        #expect(state.trialOffer == PaywallTrialOffer(days: 7))
     }
 
-    func test_offersResponse_WHEN_onlyMonthlyReturned_THEN_monthlyBecomesDefaultAndSheetIsHidden() {
+    @Test("With only monthly on sale, monthly becomes the default and the sheet is hidden")
+    func onlyMonthlyMakesMonthlyTheDefault() {
         // GIVEN a loading paywall
-        var state = PaywallState()
+        var state = Paywall.State()
 
         // WHEN only the monthly plan comes back
         _ = reduce(&state, .offersResponse(.success(Stub.payload(offers: [.monthly: Stub.monthly]))))
 
         // THEN monthly is what the main button buys, and a one-row sheet is not offered
-        XCTAssertEqual(state.defaultPlan, .monthly)
-        XCTAssertFalse(state.showsOtherPlansButton)
+        #expect(state.defaultPlan == .monthly)
+        #expect(state.showsOtherPlansButton == false)
     }
 
-    /// The empty dictionary is a real case: `listPlanProducts()` can succeed with no products.
-    /// Treating it as "loaded" would render a paywall with no prices and a dead button.
-    func test_offersResponse_WHEN_successfulButEmpty_THEN_productsAreUnavailable() {
+    /// An empty dictionary is a real case: `listPlanProducts()` can succeed with no products.
+    /// Treating it as "loaded" would render a paywall with no prices and a dead button. A failure
+    /// lands in the same place, so both are covered here.
+    @Test(
+        "Nothing to sell leaves the paywall unavailable, however that is reported",
+        arguments: [
+            Result<OffersPayload, PaywallError>.success(Stub.payload(offers: [:])),
+            .failure(.productsUnavailable)
+        ]
+    )
+    func nothingToSellIsUnavailable(response: Result<OffersPayload, PaywallError>) {
         // GIVEN a loading paywall
-        var state = PaywallState()
+        var state = Paywall.State()
 
-        // WHEN the store succeeds with nothing to sell
-        _ = reduce(&state, .offersResponse(.success(Stub.payload(offers: [:]))))
-
-        // THEN it is treated as unavailable, not as loaded
-        XCTAssertEqual(state.phase, .productsUnavailable)
-    }
-
-    func test_offersResponse_WHEN_failed_THEN_productsUnavailableAndRestoreStillWorks() {
-        // GIVEN a loading paywall
-        var state = PaywallState()
-
-        // WHEN the catalogue fails to load
-        let effect = reduce(&state, .offersResponse(.failure(.productsUnavailable)))
+        // WHEN the catalogue comes back with nothing purchasable
+        let effect = reduce(&state, .offersResponse(response))
 
         // THEN the failure is inline, not a banner, and restore is unaffected
-        XCTAssertEqual(effect, .none)
-        XCTAssertEqual(state.phase, .productsUnavailable)
-        XCTAssertTrue(state.canRestore)
-        XCTAssertFalse(state.canPurchase)
+        #expect(effect == nil)
+        #expect(state.phase == .productsUnavailable)
+        #expect(state.canRestore)
+        #expect(state.canPurchase == false)
     }
 
-    func test_retry_WHEN_productsUnavailable_THEN_loadsOffersAgain() {
+    @Test("Retrying an unavailable paywall refetches")
+    func retryLoadsOffersAgain() {
         // GIVEN a paywall that failed to load
-        var state = PaywallState(phase: .productsUnavailable)
+        var state = Paywall.State(phase: .productsUnavailable)
 
         // WHEN the customer retries
         let effect = reduce(&state, .retryTapped)
 
         // THEN it goes back to loading and refetches
-        XCTAssertEqual(effect, .loadOffers)
-        XCTAssertEqual(state.phase, .loadingProducts)
+        #expect(effect != nil)
+        #expect(state.phase == .loadingProducts)
+    }
+
+    @Test("Retrying while already loading is ignored")
+    func retryWhileLoadingIsIgnored() {
+        // GIVEN a paywall that is already fetching
+        var state = Paywall.State(phase: .loadingProducts)
+
+        // WHEN retry arrives anyway
+        let effect = reduce(&state, .retryTapped)
+
+        // THEN nothing is refetched
+        #expect(effect == nil)
+    }
+
+    /// The paywall disappears when it is covered as well as when it is torn down, so a purchase that
+    /// settles behind the login screen must still reach the host.
+    @Test("Disappearing leaves an in-flight purchase running")
+    func disappearingKeepsThePurchaseAlive() {
+        // GIVEN a paywall with a purchase in flight
+        var state = Stub.readyState()
+        state.activity = .purchasing
+
+        // WHEN it disappears
+        let effect = reduce(&state, .disappeared)
+
+        // THEN only the intent subscription is torn down, and the purchase is still running
+        #expect(effect != nil)
+        #expect(state.activity == .purchasing)
     }
 
     // MARK: - Plan sheet
 
-    func test_seeOtherPlans_THEN_sheetOpensOnTheDefaultPlan() {
+    @Test("The sheet opens on the plan the main screen was selling")
+    func sheetOpensOnTheDefaultPlan() {
         // GIVEN a ready paywall selling yearly
         var state = Stub.readyState()
 
@@ -119,29 +158,31 @@ final class PaywallReducerTests: XCTestCase {
         _ = reduce(&state, .seeOtherPlansTapped)
 
         // THEN it starts on the plan the main screen was selling
-        XCTAssertTrue(state.isPlanSheetPresented)
-        XCTAssertEqual(state.sheetSelection, .yearly)
+        #expect(state.isPlanSheetPresented)
+        #expect(state.sheetSelection == .yearly)
     }
 
     /// "Maybe Later" is a plain dismissal: the sheet's selection must not leak back to the main
     /// screen, which has no mockup for a non-default call to action.
-    func test_planSheetDismissed_WHEN_monthlyWasSelected_THEN_selectionIsDiscarded() {
+    @Test("Dismissing the sheet discards its selection")
+    func dismissingTheSheetDiscardsTheSelection() {
         // GIVEN an open sheet with monthly picked
         var state = Stub.readyState()
         _ = reduce(&state, .seeOtherPlansTapped)
         _ = reduce(&state, .planSelected(.monthly))
-        XCTAssertEqual(state.sheetSelection, .monthly)
+        #expect(state.sheetSelection == .monthly)
 
         // WHEN it is dismissed
         _ = reduce(&state, .planSheetDismissed)
 
         // THEN the main screen still sells yearly
-        XCTAssertFalse(state.isPlanSheetPresented)
-        XCTAssertEqual(state.sheetSelection, .yearly)
-        XCTAssertEqual(state.defaultPlan, .yearly)
+        #expect(state.isPlanSheetPresented == false)
+        #expect(state.sheetSelection == .yearly)
+        #expect(state.defaultPlan == .yearly)
     }
 
-    func test_planSelected_WHEN_planHasNoOffer_THEN_selectionIsUnchanged() {
+    @Test("Selecting a plan with no offer leaves the selection alone")
+    func selectingAPlanWithoutAnOfferIsIgnored() {
         // GIVEN a paywall where only yearly is purchasable
         var state = Stub.readyState(offers: [.yearly: Stub.yearly])
 
@@ -149,24 +190,26 @@ final class PaywallReducerTests: XCTestCase {
         _ = reduce(&state, .planSelected(.monthly))
 
         // THEN the selection stays on a plan that can actually be bought
-        XCTAssertEqual(state.sheetSelection, .yearly)
+        #expect(state.sheetSelection == .yearly)
     }
 
     // MARK: - Purchase
 
-    func test_purchaseTapped_fromMainScreen_THEN_checksEntitlementForTheDefaultPlan() {
+    @Test("Tapping the main call to action starts purchasing")
+    func purchaseFromMainScreenStartsPurchasing() {
         // GIVEN a ready paywall selling yearly
         var state = Stub.readyState()
 
         // WHEN the main call to action is tapped
         let effect = reduce(&state, .purchaseTapped(source: .mainScreen))
 
-        // THEN the entitlement check runs first, for the default plan
-        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.plan(.yearly)))
-        XCTAssertEqual(state.activity, .purchasing)
+        // THEN work starts and the button shows its spinner
+        #expect(effect != nil)
+        #expect(state.activity == .purchasing)
     }
 
-    func test_purchaseTapped_fromSheet_THEN_buysTheSheetSelection() {
+    @Test("Buying from the sheet closes it, so an alert is not hidden behind it")
+    func purchaseFromSheetClosesTheSheet() {
         // GIVEN an open sheet with monthly picked
         var state = Stub.readyState()
         _ = reduce(&state, .seeOtherPlansTapped)
@@ -175,14 +218,15 @@ final class PaywallReducerTests: XCTestCase {
         // WHEN the sheet's call to action is tapped
         let effect = reduce(&state, .purchaseTapped(source: .planSheet))
 
-        // THEN monthly is purchased, and the sheet closes so alerts are not hidden behind it
-        XCTAssertEqual(effect, .checkEntitlementThenPurchase(.plan(.monthly)))
-        XCTAssertFalse(state.isPlanSheetPresented)
+        // THEN the sheet closes so alerts are not hidden behind it
+        #expect(effect != nil)
+        #expect(state.isPlanSheetPresented == false)
     }
 
     /// The old paywall wrote `isPurchasing` but never read it, so a double tap started two
     /// overlapping StoreKit operations.
-    func test_purchaseTapped_WHEN_alreadyPurchasing_THEN_isIgnored() {
+    @Test("A second tap while purchasing is ignored")
+    func purchaseWhileAlreadyPurchasingIsIgnored() {
         // GIVEN a purchase already in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
@@ -191,10 +235,11 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .purchaseTapped(source: .mainScreen))
 
         // THEN nothing further happens
-        XCTAssertEqual(effect, .none)
+        #expect(effect == nil)
     }
 
-    func test_restoreTapped_WHEN_purchasing_THEN_isIgnored() {
+    @Test("Restore does not run alongside a purchase")
+    func restoreWhilePurchasingIsIgnored() {
         // GIVEN a purchase in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
@@ -203,24 +248,26 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .restoreTapped)
 
         // THEN it does not run alongside the purchase
-        XCTAssertEqual(effect, .none)
-        XCTAssertEqual(state.activity, .purchasing)
+        #expect(effect == nil)
+        #expect(state.activity == .purchasing)
     }
 
-    func test_purchaseTapped_WHEN_productsUnavailable_THEN_isIgnored() {
+    @Test("With nothing to sell, the call to action does nothing")
+    func purchaseWhileProductsUnavailableIsIgnored() {
         // GIVEN a paywall with nothing to sell
-        var state = PaywallState(phase: .productsUnavailable)
+        var state = Paywall.State(phase: .productsUnavailable)
 
         // WHEN the call to action is somehow tapped
         let effect = reduce(&state, .purchaseTapped(source: .mainScreen))
 
         // THEN no purchase is attempted
-        XCTAssertEqual(effect, .none)
-        XCTAssertEqual(state.activity, .idle)
+        #expect(effect == nil)
+        #expect(state.activity == .idle)
     }
 
     /// Charging a customer who already owns a subscription is the worst failure this screen has.
-    func test_existingEntitlementFound_THEN_offersRestoreAndDoesNotPurchase() {
+    @Test("An existing entitlement stops the purchase and offers a restore")
+    func existingEntitlementOffersRestore() {
         // GIVEN a purchase in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
@@ -229,72 +276,74 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .existingEntitlementFound)
 
         // THEN the purchase stops and the customer is offered a restore
-        XCTAssertEqual(effect, .none)
-        XCTAssertEqual(state.alert, .existingEntitlement)
-        XCTAssertEqual(state.activity, .idle)
+        #expect(effect == nil)
+        #expect(state.alert == .existingEntitlement)
+        #expect(state.activity == .idle)
     }
 
-    func test_purchaseSucceeded_WHEN_transactionIsExpired_THEN_finishesItAndDoesNotSignUp() {
+    @Test("An expired transaction returns to idle without raising an alert")
+    func expiredTransactionReturnsToIdle() {
         // GIVEN a purchase in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
 
         // WHEN the App Store returns an already-expired transaction
-        let effect = reduce(&state, .purchaseSucceeded(isExpired: true))
+        let effect = reduce(&state, .purchaseSucceeded(Stub.transaction(isExpired: true)))
 
-        // THEN it is finished and the signup never starts
-        guard case .batch(let effects) = effect else {
-            return XCTFail("Expected a batch, got \(effect)")
-        }
-        XCTAssertTrue(effects.contains(.finishPendingTransaction))
-        XCTAssertFalse(effects.contains(.emit(.didPurchase)))
-        XCTAssertEqual(state.activity, .idle)
+        // THEN the transaction is dealt with as an effect, and the screen is usable again
+        #expect(effect != nil)
+        #expect(state.activity == .idle)
+        #expect(state.alert == nil)
     }
 
-    func test_purchaseSucceeded_THEN_emitsDidPurchase() {
+    @Test("A successful purchase returns to idle")
+    func purchaseSucceededReturnsToIdle() {
         // GIVEN a purchase in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
 
         // WHEN it succeeds
-        let effect = reduce(&state, .purchaseSucceeded(isExpired: false))
+        let effect = reduce(&state, .purchaseSucceeded(Stub.transaction()))
 
         // THEN the host is told to start account creation
-        XCTAssertEqual(effect, .emit(.didPurchase))
-        XCTAssertEqual(state.activity, .idle)
+        #expect(effect != nil)
+        #expect(state.activity == .idle)
     }
 
-    func test_purchaseFailed_WHEN_userCancelled_THEN_saysNothing() {
+    /// A cancelled App Store sheet is not an error, so it is the one failure that says nothing at
+    /// all. Every other failure has to reach the customer somehow.
+    @Test(
+        "Only a cancellation is silent",
+        arguments: [
+            (PaywallError.userCancelled, false),
+            (.purchasePending, true),
+            (.failed(message: "Purchase failed"), true)
+        ]
+    )
+    func purchaseFailureIsReportedUnlessCancelled(error: PaywallError, reports: Bool) {
         // GIVEN a purchase in flight
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
 
-        // WHEN the customer dismisses the App Store sheet
-        let effect = reduce(&state, .purchaseFailed(.userCancelled))
+        // WHEN it fails
+        let effect = reduce(&state, .purchaseFailed(error))
 
-        // THEN no banner and no alert — cancelling is not an error
-        XCTAssertEqual(effect, .none)
-        XCTAssertNil(state.alert)
-        XCTAssertEqual(state.activity, .idle)
-    }
-
-    func test_purchaseFailed_WHEN_pending_THEN_warnsTheCustomer() {
-        // GIVEN a purchase in flight
-        var state = Stub.readyState()
-        _ = reduce(&state, .purchaseTapped(source: .mainScreen))
-
-        // WHEN it needs external approval
-        let effect = reduce(&state, .purchaseFailed(.purchasePending))
-
-        // THEN a warning is emitted
-        guard case .emit(.showWarning) = effect else {
-            return XCTFail("Expected a warning, got \(effect)")
-        }
+        // THEN only the cancellation passes without a word
+        #expect((effect != nil) == reports)
+        #expect(state.alert == nil)
+        #expect(state.activity == .idle)
     }
 
     // MARK: - Restore
 
-    func test_restore_WHEN_nothingToRestore_THEN_showsTheEmptyAlert() {
+    // The two restore failures differ only in wording, and the design gives each its own alert:
+    // a receipt that cannot be signed in with is a different problem from no receipt at all. They
+    // stay two tests rather than one parameterized test because `Paywall.Action` cannot be
+    // `Sendable` — it carries `InAppTransaction`, `UserAccount` and `AppStoreProduct` — and
+    // parameterized arguments must be.
+
+    @Test("No receipt at all raises the empty alert")
+    func restoreWithNothingToRestoreRaisesTheEmptyAlert() {
         // GIVEN a restore in flight
         var state = Stub.readyState()
         _ = reduce(&state, .restoreTapped)
@@ -303,35 +352,40 @@ final class PaywallReducerTests: XCTestCase {
         _ = reduce(&state, .restoreFailedNothingToRestore)
 
         // THEN the "no subscription found" alert appears
-        XCTAssertEqual(state.alert, .nothingToRestore)
-        XCTAssertEqual(state.activity, .idle)
+        #expect(state.alert == .nothingToRestore)
+        #expect(state.activity == .idle)
     }
 
-    func test_restore_WHEN_loginWithReceiptFails_THEN_showsTheFailureAlert() {
+    @Test("A receipt that cannot be signed in with raises the failure alert")
+    func restoreWithBadReceiptRaisesTheFailureAlert() {
         // GIVEN a restore in flight
         var state = Stub.readyState()
         _ = reduce(&state, .restoreTapped)
 
-        // WHEN the receipt cannot be signed in with
+        // WHEN the receipt cannot be exchanged for an account
         _ = reduce(&state, .restoreFailedBadReceipt)
 
         // THEN a different alert appears
-        XCTAssertEqual(state.alert, .restoreFailed)
+        #expect(state.alert == .restoreFailed)
+        #expect(state.activity == .idle)
     }
 
-    func test_restore_WHEN_successful_THEN_emitsDidAuthenticate() {
+    @Test("A successful restore returns to idle")
+    func restoreSucceededReturnsToIdle() {
         // GIVEN a restore in flight
         var state = Stub.readyState()
         _ = reduce(&state, .restoreTapped)
 
         // WHEN it succeeds
-        let effect = reduce(&state, .restoreSucceeded)
+        let effect = reduce(&state, .restoreSucceeded(Stub.account))
 
         // THEN the host completes the flow as a login
-        XCTAssertEqual(effect, .emit(.didAuthenticate))
+        #expect(effect != nil)
+        #expect(state.activity == .idle)
     }
 
-    func test_alertRestoreConfirmed_THEN_dismissesTheAlertAndRestores() {
+    @Test("Confirming the entitlement alert closes it and starts a restore")
+    func alertRestoreConfirmedStartsRestore() {
         // GIVEN the "subscription found" alert is up
         var state = Stub.readyState()
         _ = reduce(&state, .purchaseTapped(source: .mainScreen))
@@ -341,14 +395,15 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .alertRestoreConfirmed)
 
         // THEN the alert closes and a restore starts
-        XCTAssertEqual(effect, .restore)
-        XCTAssertNil(state.alert)
-        XCTAssertEqual(state.activity, .restoring)
+        #expect(effect != nil)
+        #expect(state.alert == nil)
+        #expect(state.activity == .restoring)
     }
 
     // MARK: - Misc
 
-    func test_loginTapped_THEN_asksTheHostToShowLogin() {
+    @Test("Log In asks the host to navigate")
+    func loginTappedAsksTheHostToShowLogin() {
         // GIVEN an idle paywall
         var state = Stub.readyState()
 
@@ -356,28 +411,46 @@ final class PaywallReducerTests: XCTestCase {
         let effect = reduce(&state, .loginTapped)
 
         // THEN the host is asked to navigate; the paywall itself knows nothing about login
-        XCTAssertEqual(effect, .emit(.requestLogin))
+        #expect(effect != nil)
     }
 
-    func test_closeTapped_THEN_asksTheHostToDismiss() {
-        // GIVEN a dismissable paywall
+    @Test("Log In is ignored mid-charge")
+    func loginWhilePurchasingIsIgnored() {
+        // GIVEN a purchase in flight
         var state = Stub.readyState()
+        _ = reduce(&state, .purchaseTapped(source: .mainScreen))
 
-        // WHEN close is tapped
-        let effect = reduce(&state, .closeTapped)
+        // WHEN Log In is tapped anyway
+        let effect = reduce(&state, .loginTapped)
 
-        // THEN the host dismisses it
-        XCTAssertEqual(effect, .emit(.didCancel))
+        // THEN the flow is not navigated away from a charge in progress
+        #expect(effect == nil)
     }
 
-    func test_layoutChanged_THEN_isStored() {
+    @Test("Dismissing an alert clears it and does nothing else")
+    func alertDismissedClearsTheAlert() {
+        // GIVEN an alert on screen
+        var state = Stub.readyState()
+        _ = reduce(&state, .purchaseTapped(source: .mainScreen))
+        _ = reduce(&state, .existingEntitlementFound)
+
+        // WHEN it is dismissed
+        let effect = reduce(&state, .alertDismissed)
+
+        // THEN nothing else happens
+        #expect(effect == nil)
+        #expect(state.alert == nil)
+    }
+
+    @Test("A layout change is remembered")
+    func layoutChangeIsStored() {
         // GIVEN a compact paywall
-        var state = PaywallState()
+        var state = Paywall.State()
 
         // WHEN it is rendered on a landscape iPad
         _ = reduce(&state, .layoutChanged(.wide))
 
         // THEN the layout is remembered
-        XCTAssertEqual(state.layout, .wide)
+        #expect(state.layout == .wide)
     }
 }

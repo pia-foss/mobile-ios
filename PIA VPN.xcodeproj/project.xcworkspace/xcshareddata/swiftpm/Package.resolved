@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "apple-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pia-foss/apple-core.git",
+      "state" : {
+        "revision" : "e0c0c37eaf8afa1f133b123bbcaad06dde2cf1ff",
+        "version" : "0.1.0"
+      }
+    },
+    {
       "identity" : "cwlcatchexception",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattgallagher/CwlCatchException.git",
@@ -138,7 +147,7 @@
     {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-algorithms.git",
+      "location" : "https://github.com/apple/swift-algorithms",
       "state" : {
         "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
         "version" : "1.2.1"

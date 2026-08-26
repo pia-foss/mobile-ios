@@ -1,5 +1,5 @@
 //
-//  PaywallDependencies+Live.swift
+//  Paywall+Live.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -24,15 +24,21 @@ import PIABase
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: Paywall.Dependencies.self)
+
 // The only file in PIAPaywall that touches `Client`. Everything above this line is testable without
 // a `Client` stack; everything here is the thin adapter onto PIALibrary.
-public extension PaywallDependencies {
+public extension Paywall.Dependencies {
 
     /// `@MainActor` because `AccountProvider` and `InAppProvider` are not `Sendable`: pinning the
     /// adapter to one actor is what allows them to be captured by the dependency closures at all.
     @MainActor
-    static func live(accountProvider: AccountProvider, store: InAppProvider) -> PaywallDependencies {
-        PaywallDependencies(
+    static func live(
+        accountProvider: AccountProvider,
+        store: InAppProvider,
+        emit: @escaping @MainActor (Paywall.Output) -> Void
+    ) -> Paywall.Dependencies {
+        Paywall.Dependencies(
             loadOffers: {
                 switch await accountProvider.listPlanProducts() {
                 case .failure:
@@ -84,7 +90,29 @@ public extension PaywallDependencies {
                 case .success(let jws):
                     return await loginWithReceipt(jws, accountProvider: accountProvider)
                 }
-            }
+            },
+
+            purchaseIntents: {
+                AsyncStream { continuation in
+                    let observer = PurchaseIntentObserver()
+                    observer.start()
+                    // The observer is held by this task alone, so `onTermination` needs to capture
+                    // nothing but the task — which is what keeps a non-`Sendable` type out of a
+                    // `@Sendable` closure.
+                    let task = Task { @MainActor in
+                        for await product in observer.purchaseIntents {
+                            log.debug("Purchase intent received for product id: \(product.identifier)")
+                            guard let product = product as? AppStoreProduct else { continue }
+                            continuation.yield(product)
+                        }
+                        observer.stop()
+                        continuation.finish()
+                    }
+                    continuation.onTermination = { _ in task.cancel() }
+                }
+            },
+
+            emit: emit
         )
     }
 
