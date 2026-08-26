@@ -9,7 +9,7 @@ platform :ios do
 
   # Claude API key for translations
   anthropic_api_key = ENV['ANTHROPIC_API_KEY']
-  anthropic_model = "claude-sonnet-4-5"
+  anthropic_model = ENV.fetch('ANTHROPIC_TRANSLATION_MODEL', 'claude-sonnet-5')
 
   lane :iOStests do
     run_tests(
@@ -347,6 +347,9 @@ platform :ios do
       "tr" => "Turkish"
     }
 
+    # Collect every written translation so the log ends with a full record.
+    written_translations = {}
+
     # Translate to each language
     languages.each do |locale, language_name|
       UI.message("Translating to #{language_name} (#{locale})...")
@@ -356,7 +359,9 @@ platform :ios do
         target_path = "#{metadata_base}/#{locale}/release_notes.txt"
         FileUtils.mkdir_p(File.dirname(target_path))
         File.write(target_path, english_text)
-        UI.success("Copied to #{locale}")
+        written_translations[locale] = english_text
+        UI.success("✓ #{locale} (copied from source):")
+        UI.message(english_text)
         next
       end
 
@@ -364,7 +369,7 @@ platform :ios do
       uri = URI('https://api.anthropic.com/v1/messages')
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
       http.read_timeout = 60
 
       request = Net::HTTP::Post.new(uri.path)
@@ -372,11 +377,18 @@ platform :ios do
       request['x-api-key'] = anthropic_api_key
       request['anthropic-version'] = '2023-06-01'
 
-      prompt = "Translate the following app release notes to #{language_name}. These are release notes for Private Internet Access (PIA) VPN, a privacy and security app. Keep the same tone and style, and use appropriate VPN/privacy terminology for the target language. Only return the translated text, nothing else:\n\n#{english_text}"
+      system_prompt = "You translate App Store release notes for Private Internet Access (PIA) VPN, a privacy and security app. " \
+        "Keep the tone and style of the source, and use the target language's conventional VPN/privacy terminology. " \
+        "Output ONLY the translated text as plain prose. Never wrap it in XML or HTML tags, markdown, or code fences, " \
+        "and never add a preamble, a heading, or any commentary. App Store Connect rejects release notes containing markup."
+
+      prompt = "Translate the following app release notes to #{language_name}:\n\n#{english_text}"
 
       request.body = {
         model: anthropic_model,
-        max_tokens: 1024,
+        max_tokens: 4096,
+        system: system_prompt,
+        output_config: { effort: 'low' },
         messages: [
           {
             role: 'user',
@@ -390,14 +402,27 @@ platform :ios do
 
         if response.code.to_i == 200
           result = JSON.parse(response.body)
-          translated_text = result['content'][0]['text'].strip
+
+          # Adaptive thinking is on by default, so content[0] may be a thinking
+          # block - take the text block rather than indexing blindly.
+          text_block = (result['content'] || []).find { |b| b['type'] == 'text' }
+          if text_block.nil?
+            UI.user_error!("No text block in response for #{locale} (stop_reason: #{result['stop_reason']})")
+          end
+          if result['stop_reason'] == 'max_tokens'
+            UI.user_error!("Translation for #{locale} was truncated at max_tokens")
+          end
+
+          translated_text = sanitize_translation(text_block['text'], locale)
 
           # Write to the locale's release_notes.txt
           target_path = "#{metadata_base}/#{locale}/release_notes.txt"
           FileUtils.mkdir_p(File.dirname(target_path))
           File.write(target_path, translated_text)
 
-          UI.success("✓ #{locale}: #{translated_text[0..50]}...")
+          written_translations[locale] = translated_text
+          UI.success("✓ #{locale} (#{language_name}):")
+          UI.message(translated_text)
         else
           UI.error("Failed to translate to #{locale}: #{response.code} - #{response.body}")
         end
@@ -409,7 +434,51 @@ platform :ios do
       sleep(0.5)
     end
 
+    UI.header("Release notes as uploaded (#{written_translations.size} locales)")
+    written_translations.each do |locale, text|
+      UI.message("--- #{locale} (#{languages[locale]}) ---")
+      UI.message(text)
+    end
+
+    missing = languages.keys - written_translations.keys
+    UI.error("No translation written for: #{missing.join(', ')}") unless missing.empty?
+
     UI.success("Translation complete! All release_notes.txt files have been updated.")
+  end
+
+  # App Store Connect rejects release notes containing markup, so strip anything
+  # the model may have wrapped the translation in (XML/HTML-ish tags, code
+  # fences) before the text is written out and uploaded by `deliver`.
+  def sanitize_translation(raw, locale)
+    text = raw.to_s.strip
+    text = text.gsub(/\A```[a-zA-Z0-9_-]*[ \t]*\r?\n?/, '').gsub(/\r?\n?```\z/, '')
+
+    # Drop whole elements that carry no prose (e.g. a leaked
+    # <budget:token_budget>200000</budget:token_budget> control token), so the
+    # payload does not survive as a stray number once the tags come off.
+    cleaned = text.dup
+    loop do
+      stripped = cleaned.gsub(%r{<(?<tag>[^<>/\s]+)[^<>]*>(?<inner>[^<>]*)</\k<tag>\s*>}) do
+        Regexp.last_match[:inner].match?(/\p{L}/) ? Regexp.last_match(0) : ''
+      end
+      break if stripped == cleaned
+      cleaned = stripped
+    end
+
+    # Then remove any remaining tags, keeping the prose they wrapped.
+    cleaned = cleaned.gsub(/<[^<>]*>/, '').gsub(/\n{3,}/, "\n\n").strip
+
+    if cleaned != text.strip
+      UI.important("Stripped markup from the #{locale} translation before writing it")
+    end
+    if cleaned.empty?
+      UI.user_error!("Translation for #{locale} was empty after stripping markup")
+    end
+    if cleaned.match?(/[<>]/)
+      UI.user_error!("Translation for #{locale} still contains angle brackets; App Store Connect would reject it")
+    end
+
+    cleaned
   end
 
   desc "Increase build number for TestFlight"
