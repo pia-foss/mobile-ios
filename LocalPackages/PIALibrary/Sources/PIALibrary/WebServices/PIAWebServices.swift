@@ -234,8 +234,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
     }
 
     func featureFlags() async throws -> [String] {
-        let flags = try? await nativeAccountAPI.featureFlags().flags
-        return flags ?? []
+        try await nativeAccountAPI.featureFlags().flags
     }
 
     #if os(iOS) || os(tvOS)

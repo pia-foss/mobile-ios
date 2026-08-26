@@ -57,7 +57,7 @@ class VpnConnectionUseCaseTests: XCTestCase {
 
     func test_connect() async throws {
         // GIVEN that there is no error connecting the vpn provider
-        fixture.vpnProviderMock.connectCalledWithCallbackError = nil
+        fixture.vpnProviderMock.changeServerCalledWithCallbackError = nil
 
         // AND GIVEN that the seleced region is Barcelona
         fixture.serverProviderMock.targetServerTypeResult = Fixture.barcelona
@@ -78,9 +78,9 @@ class VpnConnectionUseCaseTests: XCTestCase {
         // THEN the connection intent becomes 'connect'
         XCTAssertEqual(sut.connectionIntent.value, .connect)
 
-        // AND the vpn provider is called to connect once
-        XCTAssertTrue(fixture.vpnProviderMock.connectCalled)
-        XCTAssertEqual(fixture.vpnProviderMock.connectCalledAttempt, 1)
+        // AND the vpn provider is called to apply the selected server once (connect / in-place switch)
+        XCTAssertTrue(fixture.vpnProviderMock.changeServerCalled)
+        XCTAssertEqual(fixture.vpnProviderMock.changeServerCalledAttempt, 1)
 
         // AND WHEN the connection succeeds
         fixture.vpnStatusMonitorMock.status.send(.connected)
@@ -96,7 +96,7 @@ class VpnConnectionUseCaseTests: XCTestCase {
 
     func test_connect_when_vpnProvider_sendsError() async throws {
         // GIVEN that there is an error connecting the vpn provider
-        fixture.vpnProviderMock.connectCalledWithCallbackError = NSError(domain: "com.piavpn.tests", code: 1)
+        fixture.vpnProviderMock.changeServerCalledWithCallbackError = NSError(domain: "com.piavpn.tests", code: 1)
 
         instantiateSut()
         // The initial state of the connection intent is 'none'

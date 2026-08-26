@@ -657,3 +657,9 @@ Vous gardez toujours le contrôle. Vous pouvez consulter les données que nous a
 "welcome.gdpr.accept.button.title"= "Accepter et continuer";
 
 "welcome.update.account.email.error"= "Échec de la modification de l'e-mail du compte";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "Mise à niveau du VPN";
+"platform_sdk_migration.label.subtitle" = "Nous améliorons la façon dont votre VPN se connecte. Votre VPN se déconnectera brièvement puis se reconnectera automatiquement.";
+"platform_sdk_migration.button.confirm" = "Continuer";

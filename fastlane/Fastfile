@@ -16,6 +16,7 @@ platform :ios do
       scheme: "PIA VPN Development",
       output_directory: "fastlane/test_output",
       result_bundle: true,
+      cloned_source_packages_path: ".build/SourcePackages",
       destination: "platform=iOS Simulator,name=iPhone 17 Pro"
     )
   end
@@ -25,6 +26,7 @@ platform :ios do
       scheme: "PIA VPN-tvOS Development",
       output_directory: "fastlane/test_output",
       result_bundle: true,
+      cloned_source_packages_path: ".build/SourcePackages",
       destination: "platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"
     )
   end

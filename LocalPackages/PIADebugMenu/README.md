@@ -19,37 +19,67 @@ Sections:
 
 ## Triggering the debug menu
 
+Every trigger is just a poster of `Notification.Name.debugMenuRequested` (declared in
+`UIWindow+MotionEnded.swift`). The presentation side observes that one notification, so adding a trigger
+for a new platform means posting it — nothing about the menu itself changes.
+
 ### iOS — shake gesture
 
-`UIWindow+MotionEnded.swift` overrides `UIWindow.motionEnded(_:with:)` and posts `Notification.Name.debugShakeDetected` whenever a shake event is detected. `AppDelegate+DebugMenu.swift` subscribes to that notification and presents `DebugMenuView` wrapped in a `UINavigationController` over the current top view controller.
+`UIWindow+MotionEnded.swift` overrides `UIWindow.motionEnded(_:with:)` and posts
+`.debugMenuRequested` whenever a shake is detected. `AppDelegate+DebugMenu.swift` subscribes and
+presents `DebugMenuView` wrapped in a `UINavigationController` over the current top view controller.
 
 ```swift
 // AppDelegate.swift (or equivalent setup point)
 setupDebugMenuObserver()
 ```
 
-The observer is registered only in Development/Staging builds, or in Release builds running under TestFlight:
+### Mac Catalyst — Debug menu bar item (⌘⇧D)
 
-```swift
-#if DEVELOPMENT || STAGING
-addDebugMenuObserver()
-#else
-if TestFlightDetector.shared.isTestFlight {
-    addDebugMenuObserver()
-}
-#endif
-```
+A Mac cannot be shaken, so the override above is compiled out under
+`targetEnvironment(macCatalyst)` and the trigger is a menu bar item instead: **Debug → Debug Menu**,
+with ⌘⇧D.
+
+`AppDelegate+DebugMenu.swift` overrides `buildMenu(with:)` to insert the menu as a sibling after
+**View**, and its action posts `.debugMenuRequested`. Two things this depends on:
+
+- `AppDelegate` is a `UIResponder` (not `NSObject`). `buildMenu(with:)` is a `UIResponder` method,
+  and the responder chain is also how the item finds its action selector — the app delegate is the
+  chain's last link, so the item stays enabled on every screen with no per-screen wiring.
+- The insert is guarded on `builder.system == .main`, since `buildMenu(with:)` is also called for
+  contextual menus.
 
 ### tvOS — Play/Pause button
 
-On tvOS there is no shake gesture. Instead, the `View+DebugMenu.swift` modifier listens for `.onPlayPauseCommand` on the Siri Remote and presents `DebugMenuView` as a `fullScreenCover`. Apply it to the root view:
+On tvOS there is no shake gesture either. The `View+DebugMenu.swift` modifier listens for
+`.onPlayPauseCommand` on the Siri Remote and presents `DebugMenuView` as a `fullScreenCover`. Apply
+it to the root view:
 
 ```swift
 RootContainerView()
     .withDebugMenu()
 ```
 
-The same Development/Staging/TestFlight gate applies.
+### Build gating
+
+The menu is reachable in Development and Staging builds, and in Release builds running under
+TestFlight. It is never reachable in a production App Store build. On iOS/Catalyst that decision is
+`DebugMenuAvailability.isEnabled` in `AppDelegate+DebugMenu.swift`, which gates both the notification
+observer and the Catalyst menu bar item; tvOS keeps an equivalent check in `View+DebugMenu.swift`.
+
+```swift
+#if DEVELOPMENT || STAGING
+    return true
+#else
+    return TestFlightDetector.shared.isTestFlight
+#endif
+```
+
+Note that this check **cannot live in this package**. `DEVELOPMENT` and `STAGING` are
+`SWIFT_ACTIVE_COMPILATION_CONDITIONS` set by `Resources/Configurations/*.xcconfig` on the app
+targets, and Xcode does not propagate those conditions to local Swift packages. A copy here would
+compile both branches away and leave the menu reachable only under TestFlight — so the gate stays in
+the app targets and the package exposes no opinion about it.
 
 ## Platform differences
 
@@ -61,7 +91,7 @@ The same Development/Staging/TestFlight gate applies.
 | Export | `ShareLink` buttons for logs and receipt; "Export All" toolbar item | Not available |
 | Subscription section | Shown (refund flow requires StoreKit on iOS) | Hidden |
 | Presentation | `UIHostingController` inside `UINavigationController` | `fullScreenCover` |
-| Trigger | Shake gesture | Play/Pause button on Siri Remote |
+| Trigger | Shake gesture — on Mac Catalyst, the **Debug → Debug Menu** menu bar item (⌘⇧D) | Play/Pause button on Siri Remote |
 
 ## Key components
 

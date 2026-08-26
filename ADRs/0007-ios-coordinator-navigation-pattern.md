@@ -1,4 +1,4 @@
-# 0005: iOS Navigation Architecture — Coordinator Pattern
+# 0007: iOS Navigation Architecture — Coordinator Pattern
 
 Date: 2026-06-05
 
@@ -245,4 +245,4 @@ Adoption is incremental. No existing screen needs to change until it is wrapped 
 
 - `PIA VPN/Core/RootCoordinator.swift` — existing root coordinator; starting point for `AppCoordinator` evolution
 - `PIA VPN/UI/` — existing ViewControllers; candidates for closure output adoption per flow
-- [ADR 0002](0002-swiftui-feature-modules-as-swift-packages.md) — SwiftUI feature modules as Swift packages (complementary to coordinator-owned SwiftUI flows)
+- [ADR 0003](0003-swiftui-feature-modules-as-swift-packages.md) — SwiftUI feature modules as Swift packages (complementary to coordinator-owned SwiftUI flows)

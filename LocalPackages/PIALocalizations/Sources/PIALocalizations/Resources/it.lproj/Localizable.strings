@@ -657,3 +657,9 @@ Avrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto dalle imposta
 "welcome.gdpr.accept.button.title"= "Accetta e continua";
 
 "welcome.update.account.email.error"= "Modifica email account non riuscita";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "Aggiornamento della VPN";
+"platform_sdk_migration.label.subtitle" = "Stiamo migliorando la modalità di connessione della tua VPN. La VPN si disconnetterà brevemente e si riconnetterà automaticamente.";
+"platform_sdk_migration.button.confirm" = "Continua";

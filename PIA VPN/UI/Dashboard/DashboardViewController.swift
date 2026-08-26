@@ -1109,6 +1109,9 @@ final class DashboardViewController: AutolayoutViewController {
             }
         #endif
 
+        // `vpnStatus` is the single source of truth: for the PlatformSDK tunnel it already reports
+        // `.connecting` during an in-place region switch (VPNDaemon folds the extension's tunnel
+        // status write-back into it), so no client-side "changing server" override is needed here.
         currentStatus = Client.providers.vpnProvider.vpnStatus
 
         Macros.postNotification(.PIAServerHasBeenUpdated)
@@ -1152,6 +1155,8 @@ final class DashboardViewController: AutolayoutViewController {
             toggleConnection.stopButtonAnimation()
 
         case .connecting:
+            stopConnectionTimer()
+
             toggleConnection.isOn = false
             toggleConnection.isWarning = false
             toggleConnection.isIndeterminate = true

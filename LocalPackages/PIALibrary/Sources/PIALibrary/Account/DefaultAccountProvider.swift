@@ -363,6 +363,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         Task { @MainActor in
             try? await webServices.logout()
             cleanDatabase()
+            PIATunnelSharedState.delete()
             Macros.postNotification(.PIAAccountDidLogout)
             DispatchQueue.main.async { callback?(nil) }
         }
@@ -386,8 +387,12 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
     public func featureFlags(_ callback: SuccessLibraryCallback?) {
         Task { @MainActor in
-            guard let features = try? await webServices.featureFlags() else {
-                DispatchQueue.main.async { callback?(nil) }
+            let features: [String]
+            do {
+                features = try await webServices.featureFlags()
+            } catch {
+                log.error("Failed to fetch the feature flags: \(error)")
+                DispatchQueue.main.async { callback?(error) }
                 return
             }
 

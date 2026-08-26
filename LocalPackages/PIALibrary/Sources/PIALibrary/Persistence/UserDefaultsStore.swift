@@ -84,6 +84,18 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case ikeV2PacketSize = "IKEV2PacketSize"
 
+        case useSmallPackets = "UseSmallPackets"
+
+        case openVPNSocketType = "PIASocketType"
+
+        case openVPNCipher = "OpenVPNCipher"
+
+        case openVPNPort = "OpenVPNPort"
+
+        case openVPNDnsServers = "OpenVPNDnsServers"
+
+        case wireGuardDnsServers = "WireGuardDnsServers"
+
         case signInWithAppleFakeEmail = "SignInWithAppleFakeEmail"
 
         case nmtRulesEnabled = "NMTRulesEnabled"
@@ -597,6 +609,63 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: .ikeV2PacketSize)
+        }
+    }
+
+    var useSmallPackets: Bool {
+        get {
+            backend.bool(forKey: .useSmallPackets)
+        }
+        set {
+            backend.set(newValue, forKey: .useSmallPackets)
+        }
+    }
+
+    var openVPNSocketType: String? {
+        get {
+            backend.string(forKey: .openVPNSocketType)
+        }
+        set {
+            backend.set(newValue, forKey: .openVPNSocketType)
+        }
+    }
+
+    var openVPNCipher: String? {
+        get {
+            backend.string(forKey: .openVPNCipher)
+        }
+        set {
+            backend.set(newValue, forKey: .openVPNCipher)
+        }
+    }
+
+    var openVPNPort: Int {
+        get {
+            guard let value = backend.object(forKey: .openVPNPort) as? Int else {
+                return 0
+            }
+            return value
+        }
+        set {
+            backend.set(newValue, forKey: .openVPNPort)
+        }
+    }
+
+    var openVPNDnsServers: [String] {
+        get {
+            backend.array(forKey: .openVPNDnsServers) as? [String] ?? []
+        }
+        set {
+            backend.set(newValue, forKey: .openVPNDnsServers)
+        }
+    }
+
+    var wireGuardDnsServers: [String] {
+        get {
+            backend.array(forKey: .wireGuardDnsServers) as? [String] ?? []
+        }
+        set {
+            backend.set(newValue, forKey: .wireGuardDnsServers)
         }
     }
 

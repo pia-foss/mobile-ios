@@ -118,9 +118,9 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
         case .dns:
             cell.textLabel?.text = Self.DNS
 
-            var dnsValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
+            var dnsValue = pendingPreferences.openVPNDnsServers
             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                dnsValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
+                dnsValue = pendingPreferences.wireGuardDnsServers
             }
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
@@ -221,9 +221,9 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             }
 
             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                controller?.selectedOption = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers
+                controller?.selectedOption = pendingPreferences.wireGuardDnsServers
             } else {
-                controller?.selectedOption = settingsDelegate.pendingOpenVPNConfiguration.dnsServers
+                controller?.selectedOption = pendingPreferences.openVPNDnsServers
             }
 
             if let controller = controller {
@@ -306,9 +306,9 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                     }
                 }
 
-                var dnsJoinedValue = settingsDelegate.pendingOpenVPNConfiguration.dnsServers?.joined()
+                var dnsJoinedValue = pendingPreferences.openVPNDnsServers.joined()
                 if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                    dnsJoinedValue = settingsDelegate.pendingWireguardVPNConfiguration.customDNSServers.joined()
+                    dnsJoinedValue = pendingPreferences.wireGuardDnsServers.joined()
                 }
 
                 for dns in DNSList.shared.dnsList {
@@ -356,9 +356,11 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                         if key == option {
                             isFound = true
                             if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                                settingsDelegate.pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value, packetSize: AppPreferences.shared.wireGuardUseSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                                settingsDelegate.pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value, packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                                pendingPreferences.wireGuardDnsServers = value
                             } else {
                                 settingsDelegate.pendingOpenVPNConfiguration.dnsServers = value
+                                pendingPreferences.openVPNDnsServers = value
                             }
                             break
                         }

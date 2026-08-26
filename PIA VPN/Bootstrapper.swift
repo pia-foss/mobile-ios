@@ -27,7 +27,7 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if canImport(TunnelKitCore)
+#if os(iOS)
     import TunnelKitCore
     import TunnelKitOpenVPN
     import PIAWireguard
@@ -99,6 +99,15 @@ final class Bootstrapper {
             Client.providers.accountProvider.cleanDatabase()
         }
 
+        #if os(iOS)
+            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
+            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
+            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
+            if shouldUsePlatformSDKTunnel {
+                Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            }
+        #endif
+
         AppPreferences.shared.migrate()
         AppPreferences.shared.migrateNMT()
 
@@ -115,7 +124,7 @@ final class Bootstrapper {
             }
         #endif
 
-        Client.configuration.rsa4096Certificate = rsa4096Certificate()
+        Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
 
         #if STAGING
             Client.environment = .staging
@@ -134,9 +143,15 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            Client.configuration.addVPNProfile(IKEv2Profile())
-            Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-            Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+            if shouldUsePlatformSDKTunnel {
+                Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
+                cleanupLegacyVPNProfilesIfNeeded()
+            } else {
+                Client.configuration.addVPNProfile(IKEv2Profile())
+                Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
+                Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
+                migrateToLegacyVPNProfilesIfNeeded()
+            }
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
@@ -162,12 +177,14 @@ final class Bootstrapper {
             ServiceQualityManager.shared.stop()
         }
 
-        Client.providers.accountProvider.featureFlags { _ in
-            AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
-
-            /// Updates the feature flags values to the ones set on the server only on Release builds.
-            /// (like Leak protection feature)
-            self.updateFeatureFlagsForReleaseIfNeeded()
+        Client.providers.accountProvider.featureFlags { error in
+            if let error {
+                log.error("Could not fetch the feature flags: \(error.localizedDescription)")
+            } else {
+                AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
+                AppPreferences.shared.usePlatformSDKVPN = Client.configuration.featureFlags[.usePlatformSDKVPN]
+                self.updateFeatureFlagsForReleaseIfNeeded()
+            }
 
             self.checkForceUpdateIfNeeded()
         }
@@ -231,6 +248,7 @@ final class Bootstrapper {
         pref.commit()
         #if os(iOS)
             AppPreferences.shared.migrateOVPN()
+            AppPreferences.shared.syncOpenVPNSettingsToAppGroup()
             AppPreferences.shared.migrateWireguard()
 
             // Business objects
@@ -274,17 +292,6 @@ final class Bootstrapper {
             let stackTrace = exception.callStackSymbols.joined(separator: "\n")
             Client.preferences.lastKnownException = "Exception: \(exception.name.rawValue)\nReason: \(exception.reason ?? "Unknown")\nStack:\n\(stackTrace)"
         }
-    }
-
-    // MARK: Certificate
-
-    func rsa4096Certificate() -> String? {
-        #if os(iOS)
-            return AppPreferences.shared.piaHandshake.pemString()
-        #else
-            // FIXME: Implement for tvOS
-            return nil
-        #endif
     }
 
     // MARK: Notifications

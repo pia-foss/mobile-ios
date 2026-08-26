@@ -43,7 +43,7 @@ public struct DebugMenuView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Close", action: onDismiss)
+                    closeButton
                 }
 
                 #if os(iOS)
@@ -63,6 +63,19 @@ public struct DebugMenuView: View {
             #if os(tvOS)
                 .background(Color.black.ignoresSafeArea())
             #endif
+    }
+
+    @ViewBuilder
+    private var closeButton: some View {
+        #if os(iOS)
+            if #available(iOS 26, *) {
+                Button(role: .close, action: onDismiss)
+            } else {
+                Button("Close", action: onDismiss)
+            }
+        #else
+            Button("Close", action: onDismiss)
+        #endif
     }
 
     @ViewBuilder

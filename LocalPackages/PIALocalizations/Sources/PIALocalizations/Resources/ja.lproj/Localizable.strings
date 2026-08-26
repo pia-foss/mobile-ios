@@ -658,3 +658,9 @@
 "welcome.gdpr.accept.button.title"= "同意して続行する";
 
 "welcome.update.account.email.error"= "アカウントのメールを変更できませんでした";
+
+// PLATFORM SDK MIGRATION
+
+"platform_sdk_migration.label.title" = "VPNのアップグレード";
+"platform_sdk_migration.label.subtitle" = "VPNの接続方法をアップグレードしています。VPNは一時的に切断し、自動的に再接続します。";
+"platform_sdk_migration.button.confirm" = "続行";

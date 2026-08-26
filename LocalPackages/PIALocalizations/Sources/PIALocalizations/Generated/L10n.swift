@@ -657,6 +657,18 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "onboarding.vpn_configuration.title", fallback: "Configure PIA")
     }
   }
+  public enum PlatformSdkMigration {
+    public enum Button {
+      /// Continue
+      public static let confirm = L10n.tr("Localizable", "platform_sdk_migration.button.confirm", fallback: "Continue")
+    }
+    public enum Label {
+      /// We’re upgrading how your VPN connects. Your VPN will disconnect briefly and reconnect automatically.
+      public static let subtitle = L10n.tr("Localizable", "platform_sdk_migration.label.subtitle", fallback: "We’re upgrading how your VPN connects. Your VPN will disconnect briefly and reconnect automatically.")
+      /// VPN Upgrade
+      public static let title = L10n.tr("Localizable", "platform_sdk_migration.label.title", fallback: "VPN Upgrade")
+    }
+  }
   public enum Rating {
     public enum Error {
       /// The connection couldn't be established
