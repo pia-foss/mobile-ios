@@ -25,13 +25,28 @@ import Foundation
 extension KapePlatformSDKTunnelProfile {
     /// Builds the WireGuard settings from the small-packets toggle in app-group UserDefaults,
     /// resolving the key-exchange token from the target server (DIP vs account token).
-    func wireGuardSettings(for server: Server) -> PIATunnelSharedState.WireGuardSettings {
+    /// Throws if no token is available.
+    func wireGuardSettings(for server: Server) throws(TunnelSettingsError) -> PIATunnelSharedState.WireGuardSettings {
         // "Use Small Packets" is a single user-facing setting shared with OpenVPN.
         let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.useSmallPackets)
         let mtu = UInt16(useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
 
-        // DIP uses `dipUsername` as the WireGuard token (mirrors PIAWGTunnelProfile).
-        let token = server.dipToken != nil ? server.dipUsername : Client.providers.accountProvider.vpnToken
+        // DIP uses `dipUsername` as the WireGuard token (mirrors PIAWGTunnelProfile). A DIP server
+        // without one must fail rather than fall through to the account token: the extension would
+        // otherwise authenticate against a DIP endpoint with account credentials.
+        let token: String
+        if server.dipToken != nil {
+            guard let dipUsername = server.dipUsername, !dipUsername.isEmpty else {
+                throw .dedicatedIPUnavailable(protocol: .wireGuard, serverIdentifier: server.identifier)
+            }
+            token = dipUsername
+        } else {
+            guard let accountToken = Client.providers.accountProvider.vpnToken, !accountToken.isEmpty else {
+                throw .credentialsUnavailable(protocol: .wireGuard)
+            }
+            token = accountToken
+        }
+
         let dnsServers = customDnsServers(forVPNType: .wireGuard)
 
         return PIATunnelSharedState.WireGuardSettings(

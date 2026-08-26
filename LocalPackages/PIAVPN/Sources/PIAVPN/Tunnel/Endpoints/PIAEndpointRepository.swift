@@ -37,11 +37,6 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
 
     /// Builds the connection configurations across the eligible servers, honoring the selected protocol.
     private func configurations(for servers: [Server], state: PIATunnelSharedState.State) -> [any VpnConfiguration] {
-        // Checked once here: the OpenVPN builders run per server, but this is one state-level fault.
-        if state.selectedProtocol != .wireGuard, state.openVPN.caCertificate.isEmpty {
-            logger.error("OpenVPN CA certificate not set in shared state — OpenVPN endpoints will be skipped")
-        }
-
         switch state.selectedProtocol {
         case .wireGuard:
             return servers.flatMap { generateWireGuardConfigurations(server: $0, state: state) }

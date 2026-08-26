@@ -191,8 +191,35 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     private func writeSharedState(withConfiguration configuration: VPNConfiguration) throws {
         let server = connectableServer(for: configuration.server)
         let tunnelProtocol = desiredTunnelProtocol()
-        let openVPN = try openVPNSettings(for: server)
-        let wireGuard = wireGuardSettings(for: server)
+
+        // Obtain OpenVPN settings but if it fails, only throw if the desired protocol is OpenVPN
+        var openVPN: PIATunnelSharedState.OpenVPNSettings?
+        do {
+            openVPN = try openVPNSettings(for: server)
+        } catch {
+            guard tunnelProtocol != .openVPN else {
+                throw error
+            }
+            log.error("[PlatformSDK] OpenVPN settings unavailable (\(error.localizedDescription)) — not required by \(tunnelProtocol.rawValue), continuing without them")
+        }
+
+        // Obtain WireGuard settings but if it fails, only throw if the desired protocol is WireGuard
+        var wireGuard: PIATunnelSharedState.WireGuardSettings?
+        do {
+            wireGuard = try wireGuardSettings(for: server)
+        } catch {
+            guard tunnelProtocol != .wireGuard else {
+                throw error
+            }
+            log.error("[PlatformSDK] WireGuard settings unavailable (\(error.localizedDescription)) — not required by \(tunnelProtocol.rawValue), continuing without them")
+        }
+
+        // Only reachable under `.automatic`: an explicit selection has already thrown its own,
+        // more specific error above.
+        guard openVPN != nil || wireGuard != nil else {
+            log.error("[PlatformSDK] neither protocol has usable credentials — not writing connection inputs")
+            throw TunnelSettingsError.noProtocolAvailable
+        }
 
         // Automatic selection: `configuration.server` is already resolved to the best server, so a
         // nil `preferredServer` — not `server.isAutomatic` — is the reliable signal. A nil
@@ -204,8 +231,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             selectedLocationId: isAutomaticSelection ? nil : server.identifier,
             selectedDipServer: server.dipToken != nil ? server : nil,
             selectedProtocol: tunnelProtocol,
-            openVPN: openVPN,
-            wireGuard: wireGuard
+            openVPN: openVPN ?? PIATunnelSharedState.OpenVPNSettings(),
+            wireGuard: wireGuard ?? PIATunnelSharedState.WireGuardSettings()
         )
     }
 

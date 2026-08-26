@@ -47,9 +47,9 @@ extension PIAEndpointRepository {
         state: PIATunnelSharedState.State,
         crypto: AppConstants.OpenVPNCrypto? = nil
     ) -> [any VpnConfiguration] {
-        // Runs once per eligible server, so neither guard logs at `error`: the missing CA certificate
-        // is reported once by `configurations(for:state:)`, and missing addresses are expected here.
-        guard !state.openVPN.caCertificate.isEmpty else {
+        // Runs once per eligible server, so neither guard logs at `error`: empty settings mean the app
+        // deliberately elided a protocol it does not need, and missing addresses are expected here.
+        guard !state.openVPN.caCertificate.isEmpty, !state.openVPN.username.isEmpty, !state.openVPN.password.isEmpty else {
             return []
         }
 
