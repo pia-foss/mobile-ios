@@ -109,12 +109,17 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
             return "\(data.count) byte(s), body is not a JSON object"
         }
 
+        let secrets = [token, token.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved)].compactMap { $0 }
+
         return
             object
             .sorted { $0.key < $1.key }
             .map { key, value in
-                let text = String(describing: value)
-                return "\(key)=\(text == token ? "<redacted>" : text)"
+                var text = String(describing: value)
+                for secret in secrets {
+                    text = text.replacingOccurrences(of: secret, with: "<redacted>")
+                }
+                return "\(key)=\(text)"
             }
             .joined(separator: ", ")
     }
