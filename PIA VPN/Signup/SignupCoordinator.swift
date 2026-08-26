@@ -31,7 +31,7 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// Runs the logged-out signup flow: the paywall, and everything reachable from it.
 ///
 /// The paywall itself knows nothing about navigation — it reports what happened through
-/// `PaywallOutput` and this coordinator decides what that means. The downstream screens are still
+/// `Paywall.Output` and this coordinator decides what that means. The downstream screens are still
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
@@ -42,17 +42,12 @@ final class SignupCoordinator: NSObject, Coordinator {
         /// The customer signed up or signed in. `isSignup` distinguishes the two, because an
         /// ephemeral signup has to have its user written back to the account provider.
         case didAuthenticate(user: UserAccount, isSignup: Bool, topViewController: UIViewController)
-        /// A modally presented paywall was dismissed without authenticating.
-        case didCancel
     }
 
     private let navigationController: UINavigationController
     private let accountProvider: AccountProvider
-    private let isDismissable: Bool
 
     private let subject = PassthroughSubject<Output, Never>()
-    private var cancellables = Set<AnyCancellable>()
-    private var store: PaywallStore?
 
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
@@ -62,11 +57,9 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     init(
         accountProvider: AccountProvider,
-        isDismissable: Bool,
         navigationController: UINavigationController = UINavigationController()
     ) {
         self.accountProvider = accountProvider
-        self.isDismissable = isDismissable
         self.navigationController = navigationController
         super.init()
     }
@@ -74,18 +67,18 @@ final class SignupCoordinator: NSObject, Coordinator {
     // MARK: Coordinator
 
     func start() {
-        let store = PaywallStore(
-            initialState: PaywallState(isDismissable: isDismissable),
-            dependencies: .live(accountProvider: accountProvider, store: Client.store)
-        )
-        self.store = store
-
-        store.output
-            .sink { [weak self] output in self?.handle(output) }
-            .store(in: &cancellables)
-
         let host = SignupPaywallHostingController(
-            rootView: SignupPaywallView(store: store, legal: legalLinks)
+            rootView: SignupPaywallView(
+                initialState: Paywall.State(),
+                dependencies: .live(
+                    accountProvider: accountProvider,
+                    store: Client.store,
+                    emit: { [weak self] output in
+                        self?.handle(output)
+                    }
+                ),
+                legal: legalLinks
+            )
         )
         host.paywallDelegate = self
 
@@ -123,7 +116,7 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     // MARK: Paywall output
 
-    private func handle(_ output: PaywallOutput) {
+    private func handle(_ output: Paywall.Output) {
         switch output {
         case .requestLogin:
             showLogin()
@@ -133,9 +126,6 @@ final class SignupCoordinator: NSObject, Coordinator {
 
         case .didAuthenticate(let user):
             finish(user: user, isSignup: false)
-
-        case .didCancel:
-            subject.send(.didCancel)
 
         case .showWarning(let message):
             // SwiftEntryKit lives in the app target, so the banner is raised here rather than

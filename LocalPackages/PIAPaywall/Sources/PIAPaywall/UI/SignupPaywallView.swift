@@ -27,8 +27,8 @@ import SwiftUI
 
 /// The signup paywall.
 ///
-/// Holds no navigation of its own: every outcome leaves through the store's `output` publisher, so
-/// the same view works whether it is the app's root or a modal over the dashboard.
+/// Holds no navigation of its own: every outcome leaves through `Paywall.Dependencies.emit`, so the
+/// same view works whether it is the app's root or a modal over the dashboard.
 public struct SignupPaywallView: View {
     /// Measurements taken from the 402pt-wide design.
     private enum Metrics {
@@ -58,7 +58,7 @@ public struct SignupPaywallView: View {
         static let tabletHeroScale: CGFloat = 1.17
     }
 
-    @ObservedObject private var store: PaywallStore
+    @StateObject private var store: PaywallStore
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     private let legal: PaywallLegalLinks
@@ -76,8 +76,18 @@ public struct SignupPaywallView: View {
         isTablet && store.state.layout == .compact ? Metrics.tabletHeroScale : 1
     }
 
-    public init(store: PaywallStore, legal: PaywallLegalLinks) {
-        self.store = store
+    /// Creates the paywall and the store behind it.
+    ///
+    /// The view owns its store, so the store's lifetime is the screen's: releasing the view cancels
+    /// whatever the reducer still had in flight.
+    public init(
+        initialState: Paywall.State = Paywall.State(),
+        dependencies: Paywall.Dependencies,
+        legal: PaywallLegalLinks
+    ) {
+        _store = StateObject(
+            wrappedValue: PaywallStore(initialState: initialState, dependencies: dependencies)
+        )
         self.legal = legal
     }
 
@@ -103,12 +113,6 @@ public struct SignupPaywallView: View {
                         .padding(.top, PIASpacing.s40)
                 }
 
-                if store.state.isDismissable {
-                    PaywallCloseButton { store.send(.closeTapped) }
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, PIASpacing.s8)
-                }
-
                 PaywallSheetContainer(
                     isPresented: store.state.isPlanSheetPresented,
                     layout: store.state.layout,
@@ -125,7 +129,7 @@ public struct SignupPaywallView: View {
             }
         }
         .task { store.send(.onAppear) }
-        .onDisappear { store.cancelAll() }
+        .onDisappear { store.send(.disappeared) }
         .alert(item: alertBinding) { kind in makeAlert(kind) }
     }
 
@@ -297,14 +301,14 @@ public struct SignupPaywallView: View {
 
     // MARK: - Alerts
 
-    private var alertBinding: Binding<PaywallState.AlertKind?> {
+    private var alertBinding: Binding<Paywall.State.AlertKind?> {
         Binding(
             get: { store.state.alert },
             set: { if $0 == nil { store.send(.alertDismissed) } }
         )
     }
 
-    private func makeAlert(_ kind: PaywallState.AlertKind) -> Alert {
+    private func makeAlert(_ kind: Paywall.State.AlertKind) -> Alert {
         switch kind {
         case .existingEntitlement:
             return Alert(
@@ -382,19 +386,19 @@ public enum PaywallAccessibility {
     ]
 
     return SignupPaywallView(
-        store: PaywallStore(
-            initialState: PaywallState(
-                phase: .ready,
-                offers: offers,
-                trialOffer: PaywallTrialOffer(days: 7)
-            ),
-            dependencies: PaywallDependencies(
-                loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
-                hasExistingEntitlement: { false },
-                purchase: { _ in .failure(.userCancelled) },
-                finishTransaction: { _ in },
-                restore: { .failure(.nothingToRestore) }
-            )
+        initialState: Paywall.State(
+            phase: .ready,
+            offers: offers,
+            trialOffer: PaywallTrialOffer(days: 7)
+        ),
+        dependencies: Paywall.Dependencies(
+            loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
+            hasExistingEntitlement: { false },
+            purchase: { _ in .failure(.userCancelled) },
+            finishTransaction: { _ in },
+            restore: { .failure(.nothingToRestore) },
+            purchaseIntents: { AsyncStream { $0.finish() } },
+            emit: { _ in }
         ),
         legal: PaywallLegalLinks(
             termsURL: URL(string: "https://www.privateinternetaccess.com/pages/terms-of-service")!,

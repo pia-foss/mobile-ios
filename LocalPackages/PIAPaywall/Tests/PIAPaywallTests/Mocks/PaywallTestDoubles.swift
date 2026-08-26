@@ -60,13 +60,19 @@ enum Stub {
         info: nil
     )
 
+    static var account: Paywall.Action.Account { .init(user) }
+
+    static func transaction(identifier: String = "txn-1", isExpired: Bool = false) -> Paywall.Action.Transaction {
+        .init(InAppTransactionStub(identifier: identifier, isExpired: isExpired))
+    }
+
     /// A state that has finished loading, so purchase actions are not rejected by the guards.
     static func readyState(
         offers: [PaywallPlanID: PaywallOffer] = Stub.bothOffers,
         isEligibleForIntroOffer: Bool = true,
         defaultPlan: PaywallPlanID = .yearly
-    ) -> PaywallState {
-        PaywallState(
+    ) -> Paywall.State {
+        Paywall.State(
             phase: .ready,
             offers: offers,
             trialOffer: isEligibleForIntroOffer ? .init(days: 7) : nil,
@@ -105,7 +111,7 @@ final class InAppTransactionStub: InAppTransaction, @unchecked Sendable {
 
 // MARK: - Dependencies
 
-extension PaywallDependencies {
+extension Paywall.Dependencies {
     /// Fails loudly if the feature reaches for something a test did not configure, so a missing
     /// stub shows up as a clear failure rather than a silent default.
     static func test(
@@ -115,14 +121,18 @@ extension PaywallDependencies {
             .success(InAppTransactionStub())
         },
         finishTransaction: @escaping (any InAppTransaction) async -> Void = { _ in },
-        restore: @escaping () async -> Result<UserAccount, PaywallError> = { .success(Stub.user) }
-    ) -> PaywallDependencies {
-        PaywallDependencies(
+        restore: @escaping () async -> Result<UserAccount, PaywallError> = { .success(Stub.user) },
+        purchaseIntents: @escaping () -> AsyncStream<AppStoreProduct> = { AsyncStream { $0.finish() } },
+        emit: @escaping (Paywall.Output) -> Void = { _ in }
+    ) -> Paywall.Dependencies {
+        Paywall.Dependencies(
             loadOffers: loadOffers,
             hasExistingEntitlement: hasExistingEntitlement,
             purchase: purchase,
             finishTransaction: finishTransaction,
-            restore: restore
+            restore: restore,
+            purchaseIntents: purchaseIntents,
+            emit: emit
         )
     }
 }
@@ -135,6 +145,9 @@ final class DependencySpy: @unchecked Sendable {
     private(set) var finishedTransactions: [String] = []
     private(set) var restoreCallCount = 0
 
+    /// Everything the feature reported to its host, in order.
+    private(set) var emittedOutputs: [Paywall.Output] = []
+
     /// The order in which the entitlement check and the purchase happened. The check must come
     /// first, or a customer who already owns a subscription gets charged twice.
     private(set) var callOrder: [String] = []
@@ -144,8 +157,14 @@ final class DependencySpy: @unchecked Sendable {
     var purchaseResult: Result<any InAppTransaction, PaywallError> = .success(InAppTransactionStub())
     var restoreResult: Result<UserAccount, PaywallError> = .success(Stub.user)
 
-    func makeDependencies() -> PaywallDependencies {
-        PaywallDependencies(
+    /// How many times the feature subscribed to purchases started outside the app.
+    ///
+    /// `AppStoreProduct` wraps a StoreKit `Product`, which no unit test can construct, so the
+    /// subscription is what is observable here rather than the products it would deliver.
+    private(set) var purchaseIntentsCallCount = 0
+
+    func makeDependencies() -> Paywall.Dependencies {
+        Paywall.Dependencies(
             loadOffers: { [self] in
                 loadOffersCallCount += 1
                 callOrder.append("loadOffers")
@@ -169,7 +188,32 @@ final class DependencySpy: @unchecked Sendable {
                 restoreCallCount += 1
                 callOrder.append("restore")
                 return restoreResult
+            },
+            purchaseIntents: { [self] in
+                purchaseIntentsCallCount += 1
+                callOrder.append("purchaseIntents")
+                return AsyncStream { $0.finish() }
+            },
+            emit: { [self] output in
+                emittedOutputs.append(output)
+                callOrder.append("emit")
             }
         )
+    }
+
+    var purchasedTransactions: [any InAppTransaction] {
+        emittedOutputs.compactMap { if case .didPurchase(let transaction) = $0 { return transaction } else { return nil } }
+    }
+
+    var authenticatedUsers: [UserAccount] {
+        emittedOutputs.compactMap { if case .didAuthenticate(let user) = $0 { return user } else { return nil } }
+    }
+
+    var emittedWarnings: [String] {
+        emittedOutputs.compactMap { if case .showWarning(let message) = $0 { return message } else { return nil } }
+    }
+
+    var didRequestLogin: Bool {
+        emittedOutputs.contains { if case .requestLogin = $0 { return true } else { return false } }
     }
 }

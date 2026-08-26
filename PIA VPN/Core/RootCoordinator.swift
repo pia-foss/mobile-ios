@@ -166,11 +166,7 @@ final class RootCoordinator: NSObject {
         }
 
         signupCancellables.removeAll()
-        let coordinator = SignupCoordinator(
-            accountProvider: preset.accountProvider,
-            // Login-as-root has nothing to dismiss back to.
-            isDismissable: false
-        )
+        let coordinator = SignupCoordinator(accountProvider: preset.accountProvider)
         coordinator.output
             .sink { [weak self] event in
                 guard case .didAuthenticate(let user, let isSignup, _) = event else { return }
