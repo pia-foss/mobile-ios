@@ -26,7 +26,6 @@ private let log = PIALogger.logger(for: KapePlatformSDKTunnelProfile.self)
 
 public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     private let bundleIdentifier: String
-    private var waitObserver: NSObjectProtocol?
 
     /// App-group UserDefaults, the source of all user-set connection config read by this profile.
     /// Internal (not private) so the per-protocol extensions in `+WireGuard`/`+OpenVPN` can read it.
@@ -159,26 +158,21 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             }
 
             self.doSave(vpn, withConfiguration: configuration, force: true) { (error) in
-                if let _ = error {
+                if let error {
                     callback?(error)
                     return
                 }
 
-                switch currentStatus {
-                case .disconnecting:
-                    log.debug("[PlatformSDK] connect — waiting for .disconnected before start")
-                    self.waitForDisconnectedThenStart(vpn: vpn, callback: callback)
-
-                default:
-                    do {
-                        let session = vpn.connection as? NETunnelProviderSession
+                do {
+                    let session = vpn.connection as? NETunnelProviderSession
+                    try self.afterTeardown(of: vpn.connection) {
                         try session?.startTunnel(options: nil)
-                        log.debug("[PlatformSDK] connect — startTunnel issued")
-                        callback?(nil)
-                    } catch let e {
-                        log.error("[PlatformSDK] connect — startTunnel threw: \(e)")
-                        callback?(e)
                     }
+                    log.debug("[PlatformSDK] connect — tunnel start issued, or scheduled behind the teardown")
+                    callback?(nil)
+                } catch {
+                    log.error("[PlatformSDK] connect — startTunnel threw: \(error)")
+                    callback?(error)
                 }
             }
         }
@@ -252,42 +246,7 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    private func waitForDisconnectedThenStart(vpn: NETunnelProviderManager, callback: SuccessLibraryCallback?) {
-        if let existing = waitObserver {
-            NotificationCenter.default.removeObserver(existing)
-            waitObserver = nil
-        }
-
-        var token: NSObjectProtocol?
-        token = NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: vpn.connection, queue: .main) { [weak self, vpn] _ in
-            guard vpn.connection.status == .disconnected else {
-                return
-            }
-
-            defer {
-                token.map { NotificationCenter.default.removeObserver($0) }
-                self?.waitObserver = nil
-            }
-
-            log.debug("[PlatformSDK] waitForDisconnectedThenStart — disconnected, starting")
-            do {
-                let session = vpn.connection as? NETunnelProviderSession
-                try session?.startTunnel(options: nil)
-                log.debug("[PlatformSDK] waitForDisconnectedThenStart — startTunnel issued")
-                callback?(nil)
-            } catch let e {
-                log.error("[PlatformSDK] waitForDisconnectedThenStart — startTunnel threw: \(e)")
-                callback?(e)
-            }
-        }
-        waitObserver = token
-    }
-
     public func disconnect(_ callback: SuccessLibraryCallback?) {
-        if let observer = waitObserver {
-            NotificationCenter.default.removeObserver(observer)
-            waitObserver = nil
-        }
         find { (vpn, error) in
             guard let vpn = vpn else {
                 callback?(error)
