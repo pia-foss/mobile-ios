@@ -567,15 +567,23 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
         let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
 
+        // isOnDemand will cause the VPN to auto connect, but given in staging
+        // builds it's not possible to make a connection then we prevent that
+        let isOnDemand = if Client.environment == .staging {
+            false
+        } else {
+            // A placeholder profile must never carry on-demand rules: if an enabled
+            // manager already exists, doSave would honor them and the OS could try
+            // to bring up a tunnel to the placeholder endpoint on its own.
+            usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection
+        }
+
         return VPNConfiguration(
             name: accessedConfiguration.vpnProfileName,
             username: currentUser.credentials.username,
             passwordReference: currentPasswordReference,
             server: targetServer,
-            // A placeholder profile must never carry on-demand rules: if an enabled
-            // manager already exists, doSave would honor them and the OS could try
-            // to bring up a tunnel to the placeholder endpoint on its own.
-            isOnDemand: usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection,
+            isOnDemand: isOnDemand,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
             customConfiguration: customConfiguration,
             leakProtection: accessedPreferences.leakProtection,
