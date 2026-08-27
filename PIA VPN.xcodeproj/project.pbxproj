@@ -277,6 +277,7 @@
 				Core/Messages/PIACommandTests.swift,
 				Core/NMTTests.swift,
 				Core/PIACardTests.swift,
+				Core/PromoOffers/PromoOfferPresentationTests.swift,
 				Core/Utils/AppleIDIdentityTokenTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
 				"Helpers/Stubs+PIALibrary.swift",

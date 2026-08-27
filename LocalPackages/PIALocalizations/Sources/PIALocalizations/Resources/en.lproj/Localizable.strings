@@ -710,3 +710,21 @@ You will always be in control. You can see what data we’ve collected from Sett
 "platform_sdk_migration.label.title" = "VPN Upgrade";
 "platform_sdk_migration.label.subtitle" = "We’re upgrading how your VPN connects. Your VPN will disconnect briefly and reconnect automatically.";
 "platform_sdk_migration.button.confirm" = "Continue";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "One-time Offer • Ends %@";
+"promo_offer.header.headline"= "%d days free";
+"promo_offer.header.subtitle"= "Automatically added to your plan";
+
+"promo_offer.cta.claim"= "Claim My Free Days";
+"promo_offer.banner.dismiss"= "Dismiss offer";
+"promo_offer.banner.expiry"= "Your access Ends on **%@**";
+"promo_offer.banner.days"= "%d days";
+"promo_offer.banner.free"= "free";
+"promo_offer.banner.subtitle"= "Resume subscription to claim your free days.";
+
+"promo_offer.sheet.summary"= "On %1$@, **%2$d days** will be added to your subscription for **free**.";
+"promo_offer.sheet.disclaimer_with_price"= "No payment until billing resumes at %1$@ on **%2$@**. Cancel anytime in Settings.";
+"promo_offer.sheet.disclaimer"= "No payment until billing resumes on **%@**. Cancel anytime in Settings.";
+"promo_offer.sheet.close"= "Close";

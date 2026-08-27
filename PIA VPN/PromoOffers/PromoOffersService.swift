@@ -4,9 +4,8 @@
 //
 //  Copyright © 2026 Private Internet Access, Inc.
 //
-//  Proof-of-concept only: exercises the Apple promotional (win-back) offer business logic
-//  end-to-end. Not wired into the shipping app and intentionally does not follow the project's
-//  UI/architecture conventions.
+//  Exercises the Apple promotional (win-back) offer business logic end-to-end. Grown from a
+//  proof of concept, so it does not yet follow the project's architecture conventions.
 //
 
 import Foundation
@@ -26,8 +25,9 @@ final class PromoOffersService {
         case notEligible
         case productNotFound(String)
         case malformedSignature
-        case backend(code: Int, message: String?)
         case purchase(String)
+        case backend(code: Int, message: String?)
+        case unknown(error: Error)
 
         var errorDescription: String? {
             switch self {
@@ -41,10 +41,12 @@ final class PromoOffersService {
                 return "App Store returned no product for identifier \(id)."
             case .malformedSignature:
                 return "The signing response could not be decoded into a StoreKit signature."
-            case .backend(let code, let message):
-                return "Backend error \(code): \(message ?? "no message")."
             case .purchase(let message):
                 return "Purchase failed: \(message)."
+            case .backend(let code, let message):
+                return "Backend error \(code): \(message ?? "no message")."
+            case .unknown(let error):
+                return "Unknown error: \(error)."
             }
         }
     }
@@ -81,7 +83,7 @@ final class PromoOffersService {
     func loadCatalog(country: String?) async throws -> Catalog {
         let products = [
             ("Monthly", AppConstants.InApp.monthlyProductIdentifier),
-            ("Yearly", AppConstants.InApp.yearlyProductIdentifier),
+            ("Yearly", AppConstants.InApp.yearlyProductIdentifier)
         ]
 
         let fetch = await Client.store.fetchProducts(identifiers: Set(products.map { $0.1 }))
@@ -105,14 +107,15 @@ final class PromoOffersService {
         var offerIdentifiers: [String] = []
         var note: String?
         var receiptJWS: String?
-        if let jws = await Client.store.latestSubscriptionJWS() {
+        if let jws = await Client.store.latestSubscriptionJWS(), !jws.value.isEmpty {
             receiptJWS = jws.value
             do {
-                let response = try await  Client.nativeAccountAPI.promoOffersEligibility(
+                let response = try await Client.nativeAccountAPI.promoOffersEligibility(
                     receipt: jws,
                     country: country
                 )
-                offerIdentifiers = response.offerIdentifiers
+                // TODO: sync with backend to only include "autobilloff" offers
+                offerIdentifiers = response.offerIdentifiers.filter { $0.contains("autobilloff") }
                 note = response.reason
             } catch let error as PIAError {
                 note =
@@ -148,13 +151,13 @@ final class PromoOffersService {
 
     // MARK: Step 2 + 3 — sign and purchase
 
-    /// - Returns: a human-readable summary of the resulting transaction (for the PoC log).
+    /// - Returns: a human-readable summary of the resulting transaction.
     func signAndPurchase(
         productIdentifier: String,
         offerIdentifier: String,
         appAccountToken: UUID,
         country: String?
-    ) async throws -> String {
+    ) async throws(ServiceError) -> String {
         guard let jws = await Client.store.latestSubscriptionJWS() else {
             throw ServiceError.noReceipt
         }
@@ -175,7 +178,7 @@ final class PromoOffersService {
             default: throw ServiceError.backend(code: error.type.code, message: error.localizedDescription)
             }
         } catch {
-            throw ServiceError.backend(code: 0, message: error.localizedDescription)
+            throw ServiceError.unknown(error: error)
         }
 
         guard
@@ -211,7 +214,7 @@ final class PromoOffersService {
 
     // MARK: Helpers
 
-    private func product(for identifier: String) async throws -> any InAppProduct {
+    private func product(for identifier: String) async throws(ServiceError) -> any InAppProduct {
         let result = await Client.store.fetchProducts(identifiers: [identifier])
         switch result {
         case .success(let products):

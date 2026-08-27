@@ -95,14 +95,26 @@ final class AppStoreProvider: NSObject, InAppProvider {
             return []
         }
 
-        return subscription.promotionalOffers.compactMap { offer in
+        return subscription.promotionalOffers.compactMap { offer -> InAppPromotionalOffer? in
             guard let id = offer.id else {
                 log.warning("Skipping promotional offer without an identifier on \(product.id)")
                 return nil
             }
+            let unit: SubscriptionPeriodUnit
+            switch offer.period.unit {
+            case .day: unit = .day
+            case .week: unit = .week
+            case .month: unit = .month
+            case .year: unit = .year
+            @unknown default: unit = .day
+            }
             return InAppPromotionalOffer(
                 id: id,
-                displayPrice: offer.displayPrice
+                displayPrice: offer.displayPrice,
+                periodValue: offer.period.value,
+                periodUnit: unit,
+                periodCount: offer.periodCount,
+                price: offer.price
             )
         }
     }

@@ -395,7 +395,7 @@ public actor PIAAccountClient: PIAAccountAPI {
         return response
     }
 
-    // MARK: - Apple Promotional Offers (iOS)
+    // MARK: - Apple Promotional Offers
 
     public func promoOffersEligibility(
         receipt: JWS,

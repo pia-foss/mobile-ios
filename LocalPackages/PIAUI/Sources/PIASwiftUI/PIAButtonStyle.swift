@@ -47,18 +47,40 @@ public struct PIAButtonStyle: ButtonStyle {
         case plain
     }
 
+    public enum Size: Sendable {
+        /// 50pt tall. A screen's main action.
+        case regular
+        /// 40pt tall, for cards and banners where the action sits beside the copy rather than under it.
+        case compact
+
+        var height: CGFloat {
+            switch self {
+            case .regular: return 50
+            case .compact: return 40
+            }
+        }
+    }
+
     private let kind: Kind
+    private let size: Size
     private let isLoading: Bool
     private let activityImage: Image?
 
     /// - Parameters:
     ///   - kind: Which of the three PIA button appearances to use.
+    ///   - size: How tall the button is. Defaults to the full-height `.regular`.
     ///   - isLoading: When `true` the label is replaced by a spinner and the button stops responding.
     ///   - activityImage: The spinner artwork. `PIASwiftUI` deliberately ships no assets, so the
     ///     host passes its own (the same contract as `LoadingView`). Falls back to a
     ///     `ProgressView` when `nil`.
-    public init(_ kind: Kind, isLoading: Bool = false, activityImage: Image? = nil) {
+    public init(
+        _ kind: Kind,
+        size: Size = .regular,
+        isLoading: Bool = false,
+        activityImage: Image? = nil
+    ) {
         self.kind = kind
+        self.size = size
         self.isLoading = isLoading
         self.activityImage = activityImage
     }
@@ -66,6 +88,7 @@ public struct PIAButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         ButtonContent(
             kind: kind,
+            size: size,
             isLoading: isLoading,
             activityImage: activityImage,
             configuration: configuration
@@ -82,13 +105,16 @@ extension PIAButtonStyle {
         @Environment(\.isEnabled) private var isEnabled
 
         let kind: Kind
+        let size: Size
         let isLoading: Bool
         let activityImage: Image?
         let configuration: Configuration
 
         private enum Layout {
-            static let height: CGFloat = 50
             static let minimumTapTarget: CGFloat = 44
+            /// A full-width button hides the absence of this, its label being centred with room to
+            /// spare; one sized to its content has the label flush against the fill without it.
+            static let horizontalPadding: CGFloat = PIASpacing.s16
             static let borderWidth: CGFloat = 1
             static let indicatorSize: CGFloat = 20
             static let pressedOpacity: CGFloat = 0.7
@@ -104,8 +130,9 @@ extension PIAButtonStyle {
                     indicator
                 }
             }
+            .padding(.horizontal, Layout.horizontalPadding)
             .frame(maxWidth: .infinity)
-            .frame(height: kind == .plain ? Layout.minimumTapTarget : Layout.height)
+            .frame(height: kind == .plain ? Layout.minimumTapTarget : size.height)
             .foregroundColor(foregroundColor)
             .background(background)
             .contentShape(Rectangle())
@@ -176,6 +203,23 @@ extension PIAButtonStyle {
         }
         .buttonStyle(PIAButtonStyle(.primary))
         .disabled(true)
+    }
+    .padding(PIASpacing.s24)
+    .background(Color.pia.background)
+}
+
+#Preview("Compact") {
+    VStack(spacing: PIASpacing.s8) {
+        Button(action: {}) {
+            Text("Claim My Free Days").typography(.button2)
+        }
+        .buttonStyle(PIAButtonStyle(.primary, size: .compact))
+        .fixedSize(horizontal: true, vertical: false)
+
+        Button(action: {}) {
+            Text("See Other Plans").typography(.button2)
+        }
+        .buttonStyle(PIAButtonStyle(.secondary, size: .compact))
     }
     .padding(PIASpacing.s24)
     .background(Color.pia.background)

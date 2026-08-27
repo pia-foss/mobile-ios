@@ -21,6 +21,13 @@
 
 import Foundation
 
+public enum SubscriptionPeriodUnit: Int, Sendable, Equatable {
+    case day = 0
+    case week = 1
+    case month = 2
+    case year = 3
+}
+
 /// A promotional (win-back) offer configured on a subscription in App Store Connect.
 ///
 /// A store-agnostic projection of `Product.SubscriptionOffer` so callers do not need to import
@@ -31,10 +38,38 @@ public struct InAppPromotionalOffer: Sendable, Equatable, Identifiable {
     public let id: String
     /// Localized price of the offer (e.g. "$2.99").
     public let displayPrice: String
+    public let periodValue: Int
+    public let periodUnit: SubscriptionPeriodUnit
+    public let periodCount: Int
+    public let price: Decimal
 
-    public init(id: String, displayPrice: String) {
+    public var isFree: Bool { price == 0 }
+
+    public var totalDays: Int {
+        let daysPerUnit: Int
+        switch periodUnit {
+        case .day: daysPerUnit = 1
+        case .week: daysPerUnit = 7
+        case .month: daysPerUnit = 30
+        case .year: daysPerUnit = 365
+        }
+        return periodValue * periodCount * daysPerUnit
+    }
+
+    public init(
+        id: String,
+        displayPrice: String,
+        periodValue: Int = 0,
+        periodUnit: SubscriptionPeriodUnit = .day,
+        periodCount: Int = 0,
+        price: Decimal = 0
+    ) {
         self.id = id
         self.displayPrice = displayPrice
+        self.periodValue = periodValue
+        self.periodUnit = periodUnit
+        self.periodCount = periodCount
+        self.price = price
     }
 }
 

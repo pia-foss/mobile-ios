@@ -30,7 +30,8 @@ let package = Package(
         .target(
             name: "PIADesignSystem",
             resources: [
-                .process("Colors/Colors.xcassets")
+                .process("Colors/Colors.xcassets"),
+                .process("Icons/Icons.xcassets")
             ]
         ),
         .target(
