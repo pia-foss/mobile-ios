@@ -663,3 +663,21 @@ Du har alltid kontrollen. Du kan se hvilke data vi har samlet inn, i innstilling
 "platform_sdk_migration.label.title" = "VPN-oppgradering";
 "platform_sdk_migration.label.subtitle" = "Vi oppgraderer måten VPN-en din kobler til på. VPN-en frakobles et kort øyeblikk og kobles automatisk til igjen.";
 "platform_sdk_migration.button.confirm" = "Fortsett";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Engangstilbud • Slutter %@";
+"promo_offer.header.headline"= "%d dager gratis";
+"promo_offer.header.subtitle"= "Legges automatisk til abonnementet ditt";
+
+"promo_offer.cta.claim"= "Få mine gratis dager";
+"promo_offer.banner.dismiss"= "Avvis tilbud";
+"promo_offer.banner.expiry"= "Tilgangen din slutter **%@**";
+"promo_offer.banner.days"= "%d dager";
+"promo_offer.banner.free"= "gratis";
+"promo_offer.banner.subtitle"= "Gjenoppta abonnementet for å få gratisdagene dine.";
+
+"promo_offer.sheet.summary"= "Den %1$@ legges **%2$d dager** til abonnementet ditt **gratis**.";
+"promo_offer.sheet.disclaimer_with_price"= "Ingen betaling før faktureringen gjenopptas med %1$@ den **%2$@**. Avbestill når som helst i Innstillinger.";
+"promo_offer.sheet.disclaimer"= "Ingen betaling før faktureringen gjenopptas den **%@**. Avbestill når som helst i Innstillinger.";
+"promo_offer.sheet.close"= "Lukk";

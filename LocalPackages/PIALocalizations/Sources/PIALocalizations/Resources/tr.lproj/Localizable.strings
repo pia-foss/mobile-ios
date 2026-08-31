@@ -708,3 +708,21 @@
 "platform_sdk_migration.label.title" = "VPN Yükseltmesi";
 "platform_sdk_migration.label.subtitle" = "VPN’inizin bağlanma şeklini yükseltiyoruz. VPN bağlantınız kısa süre kesilecek ve otomatik olarak yeniden bağlanacak.";
 "platform_sdk_migration.button.confirm" = "Devam et";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Tek seferlik teklif • Bitiş: %@";
+"promo_offer.header.headline"= "%d gün ücretsiz";
+"promo_offer.header.subtitle"= "Planınıza otomatik olarak eklenir";
+
+"promo_offer.cta.claim"= "Ücretsiz Günlerimi Al";
+"promo_offer.banner.dismiss"= "Teklifi kapat";
+"promo_offer.banner.expiry"= "Erişiminiz **%@** tarihinde sona eriyor";
+"promo_offer.banner.days"= "%d gün";
+"promo_offer.banner.free"= "ücretsiz";
+"promo_offer.banner.subtitle"= "Ücretsiz günlerinizi almak için aboneliğinizi devam ettirin.";
+
+"promo_offer.sheet.summary"= "%1$@ tarihinde, aboneliğinize **ücretsiz** olarak **%2$d gün** eklenecek.";
+"promo_offer.sheet.disclaimer_with_price"= "Faturalandırma %1$@ tutarıyla **%2$@** tarihinde yeniden başlayana kadar herhangi bir ödeme yapılmaz. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.";
+"promo_offer.sheet.disclaimer"= "Faturalandırma **%@** tarihinde yeniden başlayana kadar herhangi bir ödeme yapılmaz. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.";
+"promo_offer.sheet.close"= "Kapat";

@@ -663,3 +663,21 @@ Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Da
 "platform_sdk_migration.label.title" = "VPN-Upgrade";
 "platform_sdk_migration.label.subtitle" = "Wir upgraden die Art, wie Ihr VPN eine Verbindung herstellt. Die Verbindung zum VPN wird kurz getrennt und automatisch wiederhergestellt.";
 "platform_sdk_migration.button.confirm" = "Weiter";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Einmaliges Angebot • Endet am %@";
+"promo_offer.header.headline"= "%d Tage gratis";
+"promo_offer.header.subtitle"= "Wird automatisch zu Ihrem Plan hinzugefügt";
+
+"promo_offer.cta.claim"= "Meine kostenlosen Tage sichern";
+"promo_offer.banner.dismiss"= "Angebot ausblenden";
+"promo_offer.banner.expiry"= "Ihr Zugang endet am **%@**";
+"promo_offer.banner.days"= "%d Tage";
+"promo_offer.banner.free"= "gratis";
+"promo_offer.banner.subtitle"= "Setzen Sie Ihr Abonnement fort, um Ihre kostenlosen Tage zu erhalten.";
+
+"promo_offer.sheet.summary"= "Am %1$@ werden Ihrem Abonnement **%2$d Tage** **kostenlos** hinzugefügt.";
+"promo_offer.sheet.disclaimer_with_price"= "Keine Zahlung, bis die Abrechnung mit %1$@ am **%2$@** fortgesetzt wird. Jederzeit in den Einstellungen kündbar.";
+"promo_offer.sheet.disclaimer"= "Keine Zahlung, bis die Abrechnung am **%@** fortgesetzt wird. Jederzeit in den Einstellungen kündbar.";
+"promo_offer.sheet.close"= "Schließen";

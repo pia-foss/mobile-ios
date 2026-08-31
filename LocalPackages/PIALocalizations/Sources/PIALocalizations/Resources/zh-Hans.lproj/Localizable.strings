@@ -663,3 +663,21 @@
 "platform_sdk_migration.label.title" = "VPN 升级";
 "platform_sdk_migration.label.subtitle" = "我们正在升级您的 VPN 连接方式。您的 VPN 将短暂断开并自动重新连接。";
 "platform_sdk_migration.button.confirm" = "继续";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "限时优惠 • %@ 结束";
+"promo_offer.header.headline"= "免费 %d 天";
+"promo_offer.header.subtitle"= "自动添加到您的套餐中";
+
+"promo_offer.cta.claim"= "领取我的免费天数";
+"promo_offer.banner.dismiss"= "关闭优惠";
+"promo_offer.banner.expiry"= "您的访问权限将于 **%@** 结束";
+"promo_offer.banner.days"= "%d 天";
+"promo_offer.banner.free"= "免费";
+"promo_offer.banner.subtitle"= "恢复订阅以领取您的免费天数。";
+
+"promo_offer.sheet.summary"= "在 %1$@，您的订阅将**免费**增加 **%2$d 天**。";
+"promo_offer.sheet.disclaimer_with_price"= "在 **%2$@** 以 %1$@ 恢复计费之前不会收取任何费用。您可以随时在设置中取消。";
+"promo_offer.sheet.disclaimer"= "在 **%@** 恢复计费之前不会收取任何费用。您可以随时在设置中取消。";
+"promo_offer.sheet.close"= "关闭";

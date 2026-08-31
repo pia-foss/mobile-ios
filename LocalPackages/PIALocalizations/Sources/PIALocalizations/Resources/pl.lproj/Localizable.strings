@@ -663,3 +663,21 @@ Zawsze masz kontrolę. W ustawieniach możesz sprawdzić, jakie dane zebraliśmy
 "platform_sdk_migration.label.title" = "Aktualizacja VPN";
 "platform_sdk_migration.label.subtitle" = "Ulepszamy sposób, w jaki łączy się Twoja sieć VPN. Połączenie VPN zostanie na chwilę rozłączone i automatycznie nawiązane ponownie.";
 "platform_sdk_migration.button.confirm" = "Kontynuuj";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Oferta jednorazowa • Kończy się %@";
+"promo_offer.header.headline"= "%d dni za darmo";
+"promo_offer.header.subtitle"= "Automatycznie dodane do Twojego planu";
+
+"promo_offer.cta.claim"= "Odbierz darmowe dni";
+"promo_offer.banner.dismiss"= "Odrzuć ofertę";
+"promo_offer.banner.expiry"= "Twój dostęp kończy się **%@**";
+"promo_offer.banner.days"= "%d dni";
+"promo_offer.banner.free"= "za darmo";
+"promo_offer.banner.subtitle"= "Wznów subskrypcję, aby odebrać darmowe dni.";
+
+"promo_offer.sheet.summary"= "%1$@ do Twojej subskrypcji zostanie dodanych **%2$d dni** za **darmo**.";
+"promo_offer.sheet.disclaimer_with_price"= "Płatność nie zostanie pobrana, dopóki rozliczenia nie zostaną wznowione w kwocie %1$@ dnia **%2$@**. Możesz anulować w dowolnym momencie w Ustawieniach.";
+"promo_offer.sheet.disclaimer"= "Płatność nie zostanie pobrana, dopóki rozliczenia nie zostaną wznowione dnia **%@**. Możesz anulować w dowolnym momencie w Ustawieniach.";
+"promo_offer.sheet.close"= "Zamknij";

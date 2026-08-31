@@ -663,3 +663,21 @@
 "platform_sdk_migration.label.title" = "การอัปเกรด VPN";
 "platform_sdk_migration.label.subtitle" = "เรากำลังอัปเกรดวิธีการเชื่อมต่อ VPN ของคุณ VPN จะยกเลิกการเชื่อมต่อหนึ่งครู่และเชื่อมต่อใหม่โดยอัตโนมัติ";
 "platform_sdk_migration.button.confirm" = "ดำเนินการต่อ";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "ข้อเสนอครั้งเดียว • สิ้นสุด %@";
+"promo_offer.header.headline"= "ฟรี %d วัน";
+"promo_offer.header.subtitle"= "เพิ่มลงในแผนของคุณโดยอัตโนมัติ";
+
+"promo_offer.cta.claim"= "รับวันฟรีของฉัน";
+"promo_offer.banner.dismiss"= "ปิดข้อเสนอ";
+"promo_offer.banner.expiry"= "การเข้าถึงของคุณสิ้นสุดในวันที่ **%@**";
+"promo_offer.banner.days"= "%d วัน";
+"promo_offer.banner.free"= "ฟรี";
+"promo_offer.banner.subtitle"= "เริ่มการสมัครสมาชิกใหม่เพื่อรับวันฟรีของคุณ";
+
+"promo_offer.sheet.summary"= "ในวันที่ %1$@ จะมีการเพิ่ม **%2$d วัน** ลงในการสมัครสมาชิกของคุณ**ฟรี**";
+"promo_offer.sheet.disclaimer_with_price"= "จะไม่มีการเรียกเก็บเงินจนกว่าการเรียกเก็บเงินจะเริ่มใหม่ที่ %1$@ ในวันที่ **%2$@** ยกเลิกได้ทุกเมื่อในการตั้งค่า";
+"promo_offer.sheet.disclaimer"= "จะไม่มีการเรียกเก็บเงินจนกว่าการเรียกเก็บเงินจะเริ่มใหม่ในวันที่ **%@** ยกเลิกได้ทุกเมื่อในการตั้งค่า";
+"promo_offer.sheet.close"= "ปิด";
