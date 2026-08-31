@@ -27,9 +27,9 @@ set -euo pipefail
 
 SPM_DIR="${1:-.build/SourcePackages}"
 
-VERSION="3.6.2000"
+VERSION="3.6.3000"
 URL="https://github.com/krzyzanowskim/OpenSSL/releases/download/${VERSION}/OpenSSL.xcframework.zip"
-CHECKSUM="37846a8bd302cb2443eff47f1045ab844d0cd40bf82cc6159cfad9aa5c3eff9e"
+CHECKSUM="6c4b064d12b8de2ae77ac59fbcbbd1c20b4fecfb7fc50b8ab326347c52ecbf0c"
 
 ART_DIR="$SPM_DIR/artifacts/openssl-package/OpenSSL"
 XCF="$ART_DIR/OpenSSL.xcframework"
