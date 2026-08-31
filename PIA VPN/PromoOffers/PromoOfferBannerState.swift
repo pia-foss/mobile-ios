@@ -10,10 +10,11 @@ final class PromoOfferBannerState {
     static let shared = PromoOfferBannerState()
 
     struct BannerData: Equatable {
+        /// Approximate length in days. 1 month is always 30 days.
         let freeDays: Int
         /// When current access ends, and so the day the free days start.
         let expiryDate: Date
-        /// `expiryDate` plus `freeDays`.
+        /// `expiryDate` plus the offer's calendar length.
         let renewalDate: Date
         /// Already localized, e.g. "$11.95/month". `nil` when the App Store returned no price.
         let renewalPrice: String?
@@ -163,13 +164,12 @@ final class PromoOfferBannerState {
                 return
             }
 
-            let freeDays = best.offer.totalDays
             let expiryDate = Client.providers.accountProvider.currentUser?.info?.expirationDate ?? Date()
+            let renewalDate = Calendar.current.date(byAdding: best.offer.periodComponents, to: expiryDate)!
             bannerData = BannerData(
-                freeDays: freeDays,
+                freeDays: best.offer.totalDays,
                 expiryDate: expiryDate,
-                renewalDate: Calendar.current.date(byAdding: .day, value: freeDays, to: expiryDate)
-                    ?? expiryDate,
+                renewalDate: renewalDate,
                 renewalPrice: renewalPrice(for: best),
                 productIdentifier: best.productIdentifier,
                 offerIdentifier: best.offer.id

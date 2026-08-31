@@ -45,6 +45,8 @@ public struct InAppPromotionalOffer: Sendable, Equatable, Identifiable {
 
     public var isFree: Bool { price == 0 }
 
+    /// Approximate length for display only — a month always reads as 30 days.
+    /// Use `periodComponents` for date math.
     public var totalDays: Int {
         let daysPerUnit: Int
         switch periodUnit {
@@ -54,6 +56,18 @@ public struct InAppPromotionalOffer: Sendable, Equatable, Identifiable {
         case .year: daysPerUnit = 365
         }
         return periodValue * periodCount * daysPerUnit
+    }
+
+    /// The offer's full length as calendar components, for adding to a date with `Calendar` so real
+    /// month and year lengths are respected.
+    public var periodComponents: DateComponents {
+        let length = periodValue * periodCount
+        switch periodUnit {
+        case .day: return DateComponents(day: length)
+        case .week: return DateComponents(weekOfYear: length)
+        case .month: return DateComponents(month: length)
+        case .year: return DateComponents(year: length)
+        }
     }
 
     public init(
