@@ -4,18 +4,22 @@
 //
 //  Copyright © 2026 Private Internet Access, Inc.
 //
-//  Exercises the Apple promotional (win-back) offer business logic end-to-end. Grown from a
-//  proof of concept, so it does not yet follow the project's architecture conventions.
-//
 
 import Foundation
+import Logging
 import PIAAccount
 import PIALibrary
 import StoreKit
 
-/// Thin orchestrator for the Apple promotional-offer flow:
+private let log = PIALogger.logger(for: PromoOffersService.self)
+
+/// Stateless orchestrator for the Apple promotional-offer flow:
 /// eligibility → display → sign → purchase. Talks to the shared `Client.store` (StoreKit) and
 /// `Client.nativeAccountAPI` (backend) only.
+///
+/// The three steps are separate calls on purpose: per the backend contract, signing happens when the
+/// offer is *displayed*, not when it is purchased, so the sign round-trip is not paid inside the
+/// user's tap.
 @MainActor
 final class PromoOffersService {
 
@@ -25,7 +29,7 @@ final class PromoOffersService {
         case notEligible
         case productNotFound(String)
         case malformedSignature
-        case purchase(String)
+        case purchase(ClientError)
         case backend(code: Int, message: String?)
         case unknown(error: Error)
 
@@ -41,8 +45,8 @@ final class PromoOffersService {
                 return "App Store returned no product for identifier \(id)."
             case .malformedSignature:
                 return "The signing response could not be decoded into a StoreKit signature."
-            case .purchase(let message):
-                return "Purchase failed: \(message)."
+            case .purchase(let error):
+                return "Purchase failed: \(error)."
             case .backend(let code, let message):
                 return "Backend error \(code): \(message ?? "no message")."
             case .unknown(let error):
@@ -51,113 +55,90 @@ final class PromoOffersService {
         }
     }
 
-    /// One subscription product plus the promotional offers (StoreKit's `discounts`) the user is
-    /// eligible to redeem on it.
-    struct ProductRow: Identifiable {
-        let id: String  // product identifier
-        let label: String  // "Monthly" / "Yearly"
-        /// Whether the App Store returned this product.
-        let available: Bool
-        let displayName: String?
+    /// One promotional offer the backend said this user may redeem, on the product it belongs to.
+    struct EligibleOffer {
+        let productIdentifier: String
+        /// The product's own localized price, for the renewal disclaimer. `nil` when the App Store
+        /// returned no price.
         let displayPrice: String?
-        /// Offers configured on the product (`discounts`) that the backend also said are eligible.
-        let eligibleOffers: [(offer: InAppPromotionalOffer, eligible: Bool)]
+        let offer: InAppPromotionalOffer
     }
 
-    struct Catalog {
-        let receiptJWS: String?
-        let offerIdentifiers: [String]
-        /// A human note about eligibility (reason / disabled / no-receipt), if any.
-        let note: String?
-        let rows: [ProductRow]
-    }
+    // MARK: Step 1 — eligibility
 
-    // MARK: Step 1 — load products and match eligible offers
-
-    /// Fetches the monthly + yearly products, asks the backend which offers the user is eligible
-    /// for, and matches those identifiers against each product's promotional offers (the StoreKit 2
-    /// equivalent of `SKProduct.discounts`, per Apple's *Implementing promotional offers* doc).
+    /// Fetches the subscription products, asks the backend which offers the user is eligible for, and
+    /// matches those identifiers against each product's promotional offers (the StoreKit 2 equivalent
+    /// of `SKProduct.discounts`, per Apple's *Implementing promotional offers* doc).
     ///
-    /// Eligibility failures are **soft**: the products still load (shown disabled) with an
-    /// explanatory `note`. Only a total product-fetch failure throws.
-    func loadCatalog(country: String?) async throws -> Catalog {
-        let products = [
-            ("Monthly", AppConstants.InApp.monthlyProductIdentifier),
-            ("Yearly", AppConstants.InApp.yearlyProductIdentifier)
-        ]
+    /// Returns an empty array for every "no offer to show" outcome — no receipt on this Apple ID, an
+    /// empty eligibility response, the server-side kill switch (HTTP 404), or an eligibility error.
+    /// Only a total product-fetch failure throws.
+    func eligibleOffers(country: String?) async throws(ServiceError) -> [EligibleOffer] {
+        let identifiers = Set([
+            AppConstants.InApp.monthlyProductIdentifier,
+            AppConstants.InApp.yearlyProductIdentifier
+        ])
 
-        let fetch = await Client.store.fetchProducts(identifiers: Set(products.map { $0.1 }))
-        let fetched: [any InAppProduct]
-        switch fetch {
-        case .success(let value): fetched = value
-        case .failure(let error): throw ServiceError.backend(code: 606, message: "fetchProducts failed: \(error)")
-        }
+        let products = try await fetchProducts(identifiers)
+        let eligibleIdentifiers = await eligibleOfferIdentifiers(country: country)
+        guard !eligibleIdentifiers.isEmpty else { return [] }
 
-        for fetchedProduct in fetched {
-            if let product = fetchedProduct.native as? Product {
-                if let offers = product.subscription?.promotionalOffers {
-                    print(product.id)
-                    print(offers)
-                    print("----")
-                }
+        var offers: [EligibleOffer] = []
+        for product in products {
+            let displayPrice = (product.native as? Product)?.displayPrice
+            for offer in await Client.store.promotionalOffers(for: product)
+            where eligibleIdentifiers.contains(offer.id) {
+                offers.append(
+                    EligibleOffer(
+                        productIdentifier: product.identifier,
+                        displayPrice: displayPrice,
+                        offer: offer
+                    ))
             }
         }
 
-        // Eligibility (soft-fail so products always display).
-        var offerIdentifiers: [String] = []
-        var note: String?
-        var receiptJWS: String?
-        if let jws = await Client.store.latestSubscriptionJWS(), !jws.value.isEmpty {
-            receiptJWS = jws.value
-            do {
-                let response = try await Client.nativeAccountAPI.promoOffersEligibility(
-                    receipt: jws,
-                    country: country
-                )
-                // TODO: sync with backend to only include "autobilloff" offers
-                offerIdentifiers = response.offerIdentifiers.filter { $0.contains("autobilloff") }
-                note = response.reason
-            } catch let error as PIAError {
-                note =
-                    error.type == .http(status: 404)
-                    ? "Offers disabled server-side (404)."
-                    : "Eligibility error \(error.type): \(error.localizedDescription)"
-            }
-        } else {
-            note = "No current or expired subscription on this Apple ID — no receipt to check eligibility."
-        }
-
-        var rows: [ProductRow] = []
-        for (label, identifier) in products {
-            guard let product = fetched.first(where: { $0.identifier == identifier }) else {
-                rows.append(
-                    ProductRow(
-                        id: identifier, label: label, available: false,
-                        displayName: nil, displayPrice: nil, eligibleOffers: []))
-                continue
-            }
-            let native = product.native as? Product
-            let offers = await Client.store.promotionalOffers(for: product)
-            let eligible = offers.map { (offer: $0, eligible: offerIdentifiers.contains($0.id)) }
-            rows.append(
-                ProductRow(
-                    id: identifier, label: label, available: true,
-                    displayName: native?.displayName, displayPrice: native?.displayPrice,
-                    eligibleOffers: eligible))
-        }
-
-        return Catalog(receiptJWS: receiptJWS, offerIdentifiers: offerIdentifiers, note: note, rows: rows)
+        return offers
     }
 
-    // MARK: Step 2 + 3 — sign and purchase
+    /// The offer identifiers the backend says this user may redeem, or `[]` for any reason it cannot
+    /// say — the banner treats "no offers" and "eligibility unavailable" identically.
+    private func eligibleOfferIdentifiers(country: String?) async -> [String] {
+        guard let jws = await Client.store.latestSubscriptionJWS(), !jws.value.isEmpty else {
+            log.debug("No current or expired subscription on this Apple ID — no receipt to check eligibility")
+            return []
+        }
 
-    /// - Returns: a human-readable summary of the resulting transaction.
-    func signAndPurchase(
+        do {
+            let response = try await Client.nativeAccountAPI.promoOffersEligibility(
+                receipt: jws,
+                country: country
+            )
+            if let reason = response.reason {
+                log.debug("Eligibility reason: \(reason)")
+            }
+            // TODO: sync with backend to only include "autobilloff" offers
+            return response.offerIdentifiers.filter { $0.contains("autobilloff") }
+        } catch let error as PIAError where error.type == .http(status: 404) {
+            log.debug("Promotional offers disabled server-side (404)")
+            return []
+        } catch {
+            log.error("Eligibility failed: \(error.localizedDescription)")
+            return []
+        }
+    }
+
+    // MARK: Step 3 — sign
+
+    /// Asks the backend to sign one offer. The signature's nonce is single-use and its timestamp is
+    /// time-sensitive, so a signature that goes unused has to be requested again.
+    ///
+    /// `appAccountToken` must be the exact value the purchase then sends.
+    func sign(
         productIdentifier: String,
         offerIdentifier: String,
         appAccountToken: UUID,
         country: String?
-    ) async throws(ServiceError) -> String {
+    ) async throws(ServiceError) -> InAppPromotionalOfferSignature {
         guard let jws = await Client.store.latestSubscriptionJWS() else {
             throw ServiceError.noReceipt
         }
@@ -188,14 +169,23 @@ final class PromoOffersService {
             throw ServiceError.malformedSignature
         }
 
-        let signature = InAppPromotionalOfferSignature(
+        return InAppPromotionalOfferSignature(
             offerID: offerIdentifier,
             keyID: signed.keyIdentifier,
             nonce: nonce,
             signature: signatureData,
             timestamp: signed.timestamp
         )
+    }
 
+    // MARK: Step 4 — purchase
+
+    /// Attaches `signature` to the purchase so the App Store applies the discount.
+    func purchase(
+        productIdentifier: String,
+        signature: InAppPromotionalOfferSignature,
+        appAccountToken: UUID
+    ) async throws(ServiceError) {
         let product = try await product(for: productIdentifier)
         let result = await Client.store.purchase(
             product: product,
@@ -206,41 +196,42 @@ final class PromoOffersService {
         switch result {
         case .success(let transaction):
             Client.store.finishTransaction(transaction, success: true)
-            return summary(for: transaction)
+            logOfferMetadata(of: transaction)
         case .failure(let error):
-            throw ServiceError.purchase(error.localizedDescription)
+            throw ServiceError.purchase(error)
         }
     }
 
     // MARK: Helpers
 
-    private func product(for identifier: String) async throws(ServiceError) -> any InAppProduct {
-        let result = await Client.store.fetchProducts(identifiers: [identifier])
-        switch result {
+    private func fetchProducts(_ identifiers: Set<String>) async throws(ServiceError) -> [any InAppProduct] {
+        switch await Client.store.fetchProducts(identifiers: identifiers) {
         case .success(let products):
-            guard let product = products.first(where: { $0.identifier == identifier }) else {
-                throw ServiceError.productNotFound(identifier)
-            }
-            return product
+            return products
         case .failure(let error):
             throw ServiceError.backend(code: 606, message: "fetchProducts failed: \(error)")
         }
     }
 
-    /// Reads back the offer metadata Apple stamped onto the transaction — the ground-truth check
-    /// that the discount applied (`offerType` should be 2 / promotional, with our `offerID`).
-    private func summary(for transaction: any InAppTransaction) -> String {
+    private func product(for identifier: String) async throws(ServiceError) -> any InAppProduct {
+        guard let product = try await fetchProducts([identifier]).first(where: { $0.identifier == identifier })
+        else {
+            throw ServiceError.productNotFound(identifier)
+        }
+        return product
+    }
+
+    /// Reads back the offer metadata Apple stamped onto the transaction — the ground-truth check that
+    /// the discount applied (`offerType` should be 2 / promotional, with our `offerID`).
+    private func logOfferMetadata(of transaction: any InAppTransaction) {
         guard let native = transaction.native as? Transaction else {
-            return "Purchased. (Could not read native transaction.)"
+            log.debug("Purchased, but could not read the native transaction")
+            return
         }
         let offerType = native.offerType.map { "\($0.rawValue)" } ?? "nil"
         let offerID = native.offerID ?? "nil"
-        return """
-            Purchased ✅
-            transactionID: \(native.id)
-            productID: \(native.productID)
-            offerType: \(offerType)  (2 = promotional)
-            offerID: \(offerID)
-            """
+        log.debug(
+            "Purchased transaction \(native.id) for \(native.productID): offerType \(offerType) (2 = promotional), offerID \(offerID)"
+        )
     }
 }

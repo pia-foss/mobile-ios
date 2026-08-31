@@ -64,8 +64,6 @@ protocol WebServices: AnyObject {
 
     func signup(with request: Signup) async throws -> SignupResponse
 
-    func promoOffersEligibility(receipt: JWS, country: String?) async throws -> [String]
-
     func processPayment(credentials: Credentials, request: Payment) async throws
 
     // MARK: Store

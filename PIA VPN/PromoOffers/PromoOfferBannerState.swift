@@ -1,11 +1,13 @@
 import Foundation
+import Logging
 import PIALibrary
 import PIALocalizations
+
+private let log = PIALogger.logger(for: PromoOfferBannerState.self)
 
 @MainActor
 final class PromoOfferBannerState {
     static let shared = PromoOfferBannerState()
-    nonisolated(unsafe) static var forceShow = false
 
     struct BannerData {
         let freeDays: Int
@@ -19,10 +21,22 @@ final class PromoOfferBannerState {
         let offerIdentifier: String
     }
 
+    /// A signed offer waiting to be purchased, together with the token it was signed for: the
+    /// purchase has to send back the exact same `appAccountToken`.
+    private struct Preparation {
+        let signature: InAppPromotionalOfferSignature
+        let appAccountToken: UUID
+    }
+
+    private typealias PreparationTask = Task<Preparation, Error>
+
+    private let service = PromoOffersService()
+
     private(set) var bannerData: BannerData?
     private(set) var isDismissed = false
-    private(set) var isPurchasing = false
+    private var isPurchasing = false
     private var hasChecked = false
+    private var preparation: PreparationTask?
 
     var shouldShowBanner: Bool {
         !isDismissed && bannerData != nil
@@ -36,18 +50,30 @@ final class PromoOfferBannerState {
         Task { await loadBannerOffer() }
     }
 
+    /// Signs the offer ahead of the purchase, which the backend contract asks us to do while the
+    /// offer is on screen rather than when it is claimed. Idempotent, and deliberately silent: a
+    /// failure only surfaces if the user goes on to claim.
+    func prepare() {
+        guard let data = bannerData else { return }
+        _ = preparation(for: data)
+    }
+
     func claimOffer() async throws {
         guard let data = bannerData, !isPurchasing else { return }
         isPurchasing = true
         defer { isPurchasing = false }
 
-        let service = PromoOffersService()
-        _ = try await service.signAndPurchase(
-            productIdentifier: data.productIdentifier,
-            offerIdentifier: data.offerIdentifier,
-            appAccountToken: UUID(),
-            country: nil
-        )
+        do {
+            try await purchase(data)
+        } catch let error as PromoOffersService.ServiceError where error.isWorthRetrying {
+            // The signature may have gone stale while the sheet sat open — its nonce is single-use
+            // and its timestamp time-sensitive — so sign again and make one more attempt.
+            log.debug("Claim failed (\(error)); re-signing the offer and retrying once")
+            try await purchase(data)
+        }
+
+        // The nonce is spent, so nothing may reuse this signature.
+        preparation = nil
         isDismissed = true
         NotificationCenter.default.post(name: .PIAUpdateFixedTiles, object: nil)
     }
@@ -57,20 +83,48 @@ final class PromoOfferBannerState {
         NotificationCenter.default.post(name: .PIAUpdateFixedTiles, object: nil)
     }
 
-    func reset() {
-        isDismissed = false
-        hasChecked = false
-        bannerData = nil
+    /// Purchases with the prepared signature, waiting for the signing started at display time — or
+    /// starting it now, if the sheet was never shown.
+    ///
+    /// Any failure discards the preparation, so a retry signs a fresh, unused signature.
+    private func purchase(_ data: BannerData) async throws {
+        do {
+            let prepared = try await preparation(for: data).value
+            try await service.purchase(
+                productIdentifier: data.productIdentifier,
+                signature: prepared.signature,
+                appAccountToken: prepared.appAccountToken
+            )
+        } catch {
+            preparation = nil
+            throw error
+        }
+    }
+
+    /// The signing already in flight for `data`, or a new one.
+    private func preparation(for data: BannerData) -> PreparationTask {
+        if let preparation { return preparation }
+
+        let task = PreparationTask {
+            let appAccountToken = UUID()
+            let signature = try await self.service.sign(
+                productIdentifier: data.productIdentifier,
+                offerIdentifier: data.offerIdentifier,
+                appAccountToken: appAccountToken,
+                country: nil
+            )
+            return Preparation(signature: signature, appAccountToken: appAccountToken)
+        }
+        preparation = task
+        return task
     }
 
     /// Reuses the paywall's price strings so both screens phrase the billing period identically in
     /// every language.
-    private func renewalPrice(for productIdentifier: String, in catalog: PromoOffersService.Catalog) -> String? {
-        guard let price = catalog.rows.first(where: { $0.id == productIdentifier })?.displayPrice else {
-            return nil
-        }
+    private func renewalPrice(for offer: PromoOffersService.EligibleOffer) -> String? {
+        guard let price = offer.displayPrice else { return nil }
 
-        switch productIdentifier {
+        switch offer.productIdentifier {
         case AppConstants.InApp.yearlyProductIdentifier:
             return L10n.Signup.Paywall.Plans.Price.yearly(price)
         case AppConstants.InApp.monthlyProductIdentifier:
@@ -81,44 +135,45 @@ final class PromoOfferBannerState {
     }
 
     private func loadBannerOffer() async {
-        let service = PromoOffersService()
         do {
-            let catalog = try await service.loadCatalog(country: nil)
-
-            let allOffers = catalog.rows.flatMap { row in
-                row.eligibleOffers.map { (productId: row.id, offer: $0.offer, eligible: $0.eligible) }
-            }
-            // `forceShow` applies only when the backend returned nothing, so a genuinely eligible
-            // offer always wins over a forced one.
-            var candidates = allOffers.filter { $0.eligible }
-            if candidates.isEmpty, Self.forceShow {
-                candidates = allOffers
-            }
-
-            let bestOffer =
-                candidates
-                .map { ($0.productId, $0.offer) }
-                .filter { $0.1.isFree && $0.1.totalDays > 0 }
-                .max { $0.1.totalDays < $1.1.totalDays }
-
-            guard let (productId, offer) = bestOffer else {
+            let offers = try await service.eligibleOffers(country: nil)
+            // The longest run of free days on offer; the banner only ever promises free days.
+            let freeOffers = offers.filter { $0.offer.isFree && $0.offer.totalDays > 0 }
+            guard let best = freeOffers.max(by: { $0.offer.totalDays < $1.offer.totalDays }) else {
                 bannerData = nil
                 return
             }
 
+            let freeDays = best.offer.totalDays
             let expiryDate = Client.providers.accountProvider.currentUser?.info?.expirationDate ?? Date()
             bannerData = BannerData(
-                freeDays: offer.totalDays,
+                freeDays: freeDays,
                 expiryDate: expiryDate,
-                renewalDate: Calendar.current.date(byAdding: .day, value: offer.totalDays, to: expiryDate)
+                renewalDate: Calendar.current.date(byAdding: .day, value: freeDays, to: expiryDate)
                     ?? expiryDate,
-                renewalPrice: renewalPrice(for: productId, in: catalog),
-                productIdentifier: productId,
-                offerIdentifier: offer.id
+                renewalPrice: renewalPrice(for: best),
+                productIdentifier: best.productIdentifier,
+                offerIdentifier: best.offer.id
             )
             NotificationCenter.default.post(name: .PIAUpdateFixedTiles, object: nil)
         } catch {
+            log.error("Could not load the promotional offer: \(error.localizedDescription)")
             bannerData = nil
+        }
+    }
+}
+
+extension PromoOffersService.ServiceError {
+    /// Whether signing the offer again and purchasing again could plausibly succeed. The terminal
+    /// cases are the ones where a fresh signature would change nothing.
+    var isWorthRetrying: Bool {
+        switch self {
+        case .noReceipt, .offersDisabled, .notEligible, .productNotFound:
+            return false
+        case .purchase(let error):
+            return error != .userCancelled && error != .purchasePending && error != .sandboxPurchase
+        case .malformedSignature, .backend, .unknown:
+            return true
         }
     }
 }

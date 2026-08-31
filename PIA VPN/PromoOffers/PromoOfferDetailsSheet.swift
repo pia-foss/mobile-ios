@@ -115,7 +115,7 @@ struct PromoOfferDetailsSheet: View {
         PromoOfferDetailsSheet(
             data: .preview,
             isPurchasing: false,
-            errorMessage: "Not eligible for this offer. Re-run eligibility.",
+            errorMessage: L10n.PromoOffer.Sheet.error,
             onClaim: {}
         )
         .frame(width: 375)

@@ -713,6 +713,8 @@ public enum L10n {
       public static func disclaimerWithPrice(_ p1: Any, _ p2: Any) -> String {
         return L10n.tr("Localizable", "promo_offer.sheet.disclaimer_with_price", String(describing: p1), String(describing: p2), fallback: "No payment until billing resumes at %1$@ on **%2$@**. Cancel anytime in Settings.")
       }
+      /// Something went wrong. Please try again.
+      public static let error = L10n.tr("Localizable", "promo_offer.sheet.error", fallback: "Something went wrong. Please try again.")
       /// On %1$@, **%2$d days** will be added to your subscription for **free**.
       public static func summary(_ p1: Any, _ p2: Int) -> String {
         return L10n.tr("Localizable", "promo_offer.sheet.summary", String(describing: p1), p2, fallback: "On %1$@, **%2$d days** will be added to your subscription for **free**.")

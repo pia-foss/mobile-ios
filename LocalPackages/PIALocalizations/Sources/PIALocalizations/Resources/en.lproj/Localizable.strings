@@ -728,3 +728,4 @@ You will always be in control. You can see what data we’ve collected from Sett
 "promo_offer.sheet.disclaimer_with_price"= "No payment until billing resumes at %1$@ on **%2$@**. Cancel anytime in Settings.";
 "promo_offer.sheet.disclaimer"= "No payment until billing resumes on **%@**. Cancel anytime in Settings.";
 "promo_offer.sheet.close"= "Close";
+"promo_offer.sheet.error"= "Something went wrong. Please try again.";

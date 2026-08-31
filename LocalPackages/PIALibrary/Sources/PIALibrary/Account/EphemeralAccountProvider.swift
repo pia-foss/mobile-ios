@@ -143,10 +143,6 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         }
     }
 
-    func promoOffers() async -> Result<[String], any Error> {
-        return .success([])
-    }
-
     func listRenewablePlans(_ callback: (([Plan]?, Error?) -> Void)?) {
         log.error("Not implemented")
     }

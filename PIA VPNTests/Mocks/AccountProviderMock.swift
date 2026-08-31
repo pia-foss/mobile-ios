@@ -72,7 +72,6 @@ import XCTest
         func deleteAccount(_ callback: SuccessLibraryCallback?) {}
         func cleanDatabase() {}
         func featureFlags(_ callback: SuccessLibraryCallback?) {}
-        func promoOffers() async -> Result<[String], Error> { .success([]) }
         func listPlanProducts() async -> Result<[Plan: any InAppProduct], StoreKitError> { .success([:]) }
         func purchase(plan: Plan) async -> Result<any InAppTransaction, ClientError> { .failure(.userCancelled) }
         func purchase(product: any InAppProduct) async -> Result<any InAppTransaction, ClientError> {

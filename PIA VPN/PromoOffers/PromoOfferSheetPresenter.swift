@@ -5,8 +5,13 @@
 //  Copyright © 2026 Private Internet Access, Inc.
 //
 
+import Logging
+import PIALibrary
+import PIALocalizations
 import SwiftUI
 import UIKit
+
+private let log = PIALogger.logger(for: PromoOfferSheetHost.self)
 
 /// Owns the presentation animation and the purchase in flight, which keeps `PromoOfferDetailsSheet`
 /// a pure function of its inputs.
@@ -35,7 +40,12 @@ struct PromoOfferSheetHost: View {
                 )
             }
         }
-        .onAppear { isPresented = true }
+        .onAppear {
+            isPresented = true
+            // The backend contract asks us to sign while the offer is displayed, so the sign
+            // round-trip is not paid inside the user's tap.
+            state.prepare()
+        }
     }
 
     private func claim() {
@@ -47,11 +57,32 @@ struct PromoOfferSheetHost: View {
                 try await state.claimOffer()
                 close()
             } catch {
+                log.error("Claiming the promotional offer failed: \(error.localizedDescription)")
                 // Kept on the sheet rather than dismissing: the user asked for the offer, so they
-                // need to see why they did not get it.
-                errorMessage = error.localizedDescription
+                // need to know they did not get it. `ServiceError`'s own messages are developer
+                // text, so only these localized ones reach the user.
+                if let message = Self.message(for: error) {
+                    errorMessage = message
+                } else {
+                    close()
+                }
             }
             isPurchasing = false
+        }
+    }
+
+    /// The message to show for a failed claim, or `nil` when the user caused it themselves and needs
+    /// no telling — cancelling the App Store sheet just closes ours.
+    private static func message(for error: Error) -> String? {
+        guard case PromoOffersService.ServiceError.purchase(let clientError) = error else {
+            return L10n.PromoOffer.Sheet.error
+        }
+
+        switch clientError {
+        case .userCancelled: return nil
+        case .purchasePending: return L10n.Signup.Failure.Purchase.Pending.message
+        case .sandboxPurchase: return L10n.Signup.Failure.Purchase.Sandbox.message
+        default: return L10n.PromoOffer.Sheet.error
         }
     }
 

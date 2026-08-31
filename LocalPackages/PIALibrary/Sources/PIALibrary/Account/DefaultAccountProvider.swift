@@ -402,22 +402,6 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
         }
     }
 
-    public func promoOffers() async -> Result<[String], Error> {
-        guard let jws = await accessedStore.latestSubscriptionJWS() else {
-            log.debug("No existing or expired subscription found")
-            return .success([])
-        }
-
-        do {
-            let identifiers = try await Client.webServices.promoOffersEligibility(receipt: jws, country: nil)
-            log.debug("Promo offer identifiers: \(identifiers)")
-            return .success(identifiers)
-        } catch {
-            log.error("Failed to load promo offers: \(error)")
-            return .failure(error)
-        }
-    }
-
     #if os(iOS) || os(tvOS)
         public func subscriptionInformation(_ callback: LibraryCallback<AppStoreInformation>?) {
             log.debug("Fetching available product keys...")
