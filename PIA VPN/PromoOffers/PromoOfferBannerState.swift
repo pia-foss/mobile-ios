@@ -9,7 +9,7 @@ private let log = PIALogger.logger(for: PromoOfferBannerState.self)
 final class PromoOfferBannerState {
     static let shared = PromoOfferBannerState()
 
-    struct BannerData {
+    struct BannerData: Equatable {
         let freeDays: Int
         /// When current access ends, and so the day the free days start.
         let expiryDate: Date
@@ -37,6 +37,17 @@ final class PromoOfferBannerState {
     private var isPurchasing = false
     private var hasChecked = false
     private var preparation: PreparationTask?
+
+    private init() {
+        // Eligibility and the account-derived dates are per session.
+        NotificationCenter.default.addObserver(
+            forName: .PIAAccountDidLogout,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.reset() }
+        }
+    }
 
     var shouldShowBanner: Bool {
         !isDismissed && bannerData != nil
@@ -81,6 +92,14 @@ final class PromoOfferBannerState {
     func dismiss() {
         isDismissed = true
         NotificationCenter.default.post(name: .PIAUpdateFixedTiles, object: nil)
+    }
+
+    private func reset() {
+        preparation?.cancel()
+        preparation = nil
+        bannerData = nil
+        isDismissed = false
+        hasChecked = false
     }
 
     /// Purchases with the prepared signature, waiting for the signing started at display time — or

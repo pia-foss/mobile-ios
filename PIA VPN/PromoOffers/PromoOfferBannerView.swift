@@ -120,15 +120,43 @@ struct PromoOfferBannerView: View {
 }
 
 extension PromoOfferBannerView {
+    private struct Measurement {
+        let width: CGFloat
+        let contentSizeCategory: UIContentSizeCategory
+        let data: PromoOfferBannerState.BannerData?
+        let height: CGFloat
+    }
+
+    private static var lastMeasurement: Measurement?
+
     /// The height the banner needs at the current text size.
     ///
     /// Measured rather than hardcoded because the card grows with Dynamic Type, and the dashboard's
-    /// fixed tile height would otherwise clip the button.
+    /// fixed tile height would otherwise clip the button. Cached: the collection view asks on every
+    /// layout pass.
     static func preferredHeight(forWidth width: CGFloat, data: PromoOfferBannerState.BannerData?) -> CGFloat {
+        let contentSizeCategory = UIApplication.shared.preferredContentSizeCategory
+
+        if let last = lastMeasurement, last.width == width,
+            last.contentSizeCategory == contentSizeCategory, last.data == data
+        {
+            return last.height
+        }
+
         let controller = UIHostingController(
             rootView: PromoOfferBannerView(data: data, onShowDetails: {}, onDismiss: {})
         )
-        return controller.sizeThatFits(in: CGSize(width: width, height: .greatestFiniteMagnitude)).height
+        let height = controller.sizeThatFits(
+            in: CGSize(width: width, height: .greatestFiniteMagnitude)
+        ).height
+
+        lastMeasurement = Measurement(
+            width: width,
+            contentSizeCategory: contentSizeCategory,
+            data: data,
+            height: height
+        )
+        return height
     }
 }
 
