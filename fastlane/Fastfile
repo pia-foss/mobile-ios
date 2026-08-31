@@ -264,6 +264,7 @@ platform :ios do
 
   desc "Update What's New text for all languages from metadata folder"
   desc "Usage: fastlane update_release_notes platform:ios|tvos"
+  desc "The ios platform also updates the Mac Catalyst version, which shares the iOS release notes"
   desc "Edit fastlane/metadata/{locale}/release_notes.txt files before running this lane"
   lane :update_release_notes do |options|
     platform = options[:platform] || "ios"
@@ -274,8 +275,6 @@ platform :ios do
       issuer_id: issuer_id,
       key_content: key_content
     )
-
-    UI.message("Uploading release notes from fastlane/metadata/ folder (platform: #{platform})...")
 
     deliver_options = {
       api_key: api_key,
@@ -288,15 +287,20 @@ platform :ios do
     }
 
     if is_tvos
-      deliver_options[:platform] = "appletvos"
       deliver_options[:metadata_path] = "./fastlane/metadata/tvos"
+      # App Store Connect platforms sharing this metadata folder
+      target_platforms = ["appletvos"]
     else
       deliver_options[:metadata_path] = "./fastlane/metadata/ios"
+      # The Mac Catalyst version lives on the same app record and reuses the iOS notes
+      target_platforms = ["ios", "osx"]
     end
 
-    deliver(deliver_options)
-
-    UI.success("Successfully updated What's New text for all languages!")
+    target_platforms.each do |target_platform|
+      UI.message("Uploading release notes from #{deliver_options[:metadata_path]} (platform: #{target_platform})...")
+      deliver(deliver_options.merge(platform: target_platform))
+      UI.success("Successfully updated What's New text for all languages on #{target_platform}!")
+    end
   end
 
   desc "Translate release notes from English to all supported languages using Claude"

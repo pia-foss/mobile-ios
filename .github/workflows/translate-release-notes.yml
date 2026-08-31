@@ -11,14 +11,19 @@ on:
         description: "Target platform"
         required: true
         type: choice
-        default: 'ios'
+        default: 'ios + macos'
         options:
-          - ios
+          - ios + macos
           - tvos
 
 jobs:
   translate-and-update:
     runs-on: macos-latest
+
+    env:
+      # The dropdown label is for humans; fastlane takes ios|tvos, and the
+      # ios lane covers the Mac Catalyst version off the same metadata folder.
+      FASTLANE_PLATFORM: ${{ inputs.platform == 'tvos' && 'tvos' || 'ios' }}
 
     steps:
       - name: Checkout repository
@@ -31,22 +36,18 @@ jobs:
           bundler-cache: true
 
       - name: Write English release notes
+        env:
+          RELEASE_NOTES: ${{ inputs.release_notes }}
         run: |
-          if [ "${{ inputs.platform }}" = "tvos" ]; then
-            mkdir -p fastlane/metadata/tvos/en-US
-            echo "${{ inputs.release_notes }}" > fastlane/metadata/tvos/en-US/release_notes.txt
-            cat fastlane/metadata/tvos/en-US/release_notes.txt
-          else
-            mkdir -p fastlane/metadata/ios/en-US
-            echo "${{ inputs.release_notes }}" > fastlane/metadata/ios/en-US/release_notes.txt
-            cat fastlane/metadata/ios/en-US/release_notes.txt
-          fi
+          mkdir -p "fastlane/metadata/$FASTLANE_PLATFORM/en-US"
+          echo "$RELEASE_NOTES" > "fastlane/metadata/$FASTLANE_PLATFORM/en-US/release_notes.txt"
+          cat "fastlane/metadata/$FASTLANE_PLATFORM/en-US/release_notes.txt"
 
       - name: Translate release notes
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          bundle exec fastlane translate_release_notes platform:${{ inputs.platform }}
+          bundle exec fastlane translate_release_notes platform:$FASTLANE_PLATFORM
 
       - name: Upload to App Store Connect
         env:
@@ -54,4 +55,4 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
         run: |
-          bundle exec fastlane update_release_notes platform:${{ inputs.platform }}
+          bundle exec fastlane update_release_notes platform:$FASTLANE_PLATFORM
