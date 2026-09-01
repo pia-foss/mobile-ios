@@ -36,7 +36,7 @@ final class PromoOffersService {
         var errorDescription: String? {
             switch self {
             case .noReceipt:
-                return "No current or expired subscription found on this Apple ID — nothing to send."
+                return "No active subscription found on this Apple ID — nothing to send."
             case .offersDisabled:
                 return "Promotional offers are disabled server-side (kill switch)."
             case .notEligible:
@@ -62,6 +62,8 @@ final class PromoOffersService {
         /// returned no price.
         let displayPrice: String?
         let offer: InAppPromotionalOffer
+        /// When the Apple subscription behind the receipt expires; `nil` when the receipt carries no date.
+        let subscriptionExpiration: Date?
     }
 
     // MARK: Step 1 — eligibility
@@ -70,8 +72,9 @@ final class PromoOffersService {
     /// matches those identifiers against each product's promotional offers (the StoreKit 2 equivalent
     /// of `SKProduct.discounts`, per Apple's *Implementing promotional offers* doc).
     ///
-    /// Returns an empty array for every "no offer to show" outcome — no receipt on this Apple ID, an
-    /// empty eligibility response, the server-side kill switch (HTTP 404), or an eligibility error.
+    /// Returns an empty array for every "no offer to show" outcome — no active subscription on this
+    /// Apple ID, an empty eligibility response, the server-side kill switch (HTTP 404), or an
+    /// eligibility error.
     /// Only a total product-fetch failure throws.
     func eligibleOffers(country: String?) async throws(ServiceError) -> [EligibleOffer] {
         let identifiers = Set([
@@ -80,19 +83,20 @@ final class PromoOffersService {
         ])
 
         let products = try await fetchProducts(identifiers)
-        let eligibleIdentifiers = await eligibleOfferIdentifiers(country: country)
-        guard !eligibleIdentifiers.isEmpty else { return [] }
+        let eligibility = await eligibleOfferIdentifiers(country: country)
+        guard !eligibility.identifiers.isEmpty else { return [] }
 
         var offers: [EligibleOffer] = []
         for product in products {
             let displayPrice = (product.native as? Product)?.displayPrice
             for offer in await Client.store.promotionalOffers(for: product)
-            where eligibleIdentifiers.contains(offer.id) {
+            where eligibility.identifiers.contains(offer.id) {
                 offers.append(
                     EligibleOffer(
                         productIdentifier: product.identifier,
                         displayPrice: displayPrice,
-                        offer: offer
+                        offer: offer,
+                        subscriptionExpiration: eligibility.expiration
                     ))
             }
         }
@@ -101,29 +105,33 @@ final class PromoOffersService {
     }
 
     /// The offer identifiers the backend says this user may redeem, or `[]` for any reason it cannot
-    /// say — the banner treats "no offers" and "eligibility unavailable" identically.
-    private func eligibleOfferIdentifiers(country: String?) async -> [String] {
-        guard let jws = await Client.store.latestSubscriptionJWS(), !jws.value.isEmpty else {
-            log.debug("No current or expired subscription on this Apple ID — no receipt to check eligibility")
-            return []
+    /// say — the banner treats "no offers" and "eligibility unavailable" identically. The receipt's own
+    /// expiration comes back with them, so the banner can date the offer off the Apple subscription.
+    private func eligibleOfferIdentifiers(
+        country: String?
+    ) async -> (identifiers: [String], expiration: Date?) {
+        guard let latest = await Client.store.currentSubscriptionReceipt() else {
+            log.debug("No active subscription on this Apple ID — no receipt to check eligibility")
+            return ([], nil)
         }
 
         do {
             let response = try await Client.nativeAccountAPI.promoOffersEligibility(
-                receipt: jws,
+                receipt: latest.jws,
                 country: country
             )
             if let reason = response.reason {
                 log.debug("Eligibility reason: \(reason)")
             }
             // TODO: sync with backend to only include "autobilloff" offers
-            return response.offerIdentifiers.filter { $0.contains("autobilloff") }
+            let identifiers = response.offerIdentifiers.filter { $0.contains("autobilloff") }
+            return (identifiers, latest.expiration)
         } catch let error as PIAError where error.type == .http(status: 404) {
             log.debug("Promotional offers disabled server-side (404)")
-            return []
+            return ([], latest.expiration)
         } catch {
             log.error("Eligibility failed: \(error.localizedDescription)")
-            return []
+            return ([], latest.expiration)
         }
     }
 
@@ -139,14 +147,14 @@ final class PromoOffersService {
         appAccountToken: UUID,
         country: String?
     ) async throws(ServiceError) -> InAppPromotionalOfferSignature {
-        guard let jws = await Client.store.latestSubscriptionJWS() else {
+        guard let latest = await Client.store.currentSubscriptionReceipt() else {
             throw ServiceError.noReceipt
         }
 
         let signed: PromoOffersSignResponse
         do {
             signed = try await Client.nativeAccountAPI.promoOffersSign(
-                receipt: jws,
+                receipt: latest.jws,
                 productIdentifier: productIdentifier,
                 offerIdentifier: offerIdentifier,
                 appAccountToken: appAccountToken,

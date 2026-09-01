@@ -15,6 +15,7 @@ final class InAppProviderSpy: InAppProvider {
     var startObservingTransactionsCalledAttempt = 0
     var availableProducts: [any InAppProduct]?
     var entitlementJWS: JWS?
+    var subscriptionExpiration: Date?
     var isEligibleForIntroOfferResult = false
     private(set) var isEligibleForIntroOfferCalledAttempt = 0
 
@@ -47,12 +48,8 @@ final class InAppProviderSpy: InAppProvider {
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {}
 
-    func currentEntitlementJWS() async -> JWS? {
-        return entitlementJWS
-    }
-
-    func latestSubscriptionJWS() async -> JWS? {
-        return entitlementJWS
+    func currentSubscriptionReceipt() async -> SubscriptionReceipt? {
+        entitlementJWS.map { SubscriptionReceipt(jws: $0, expiration: subscriptionExpiration) }
     }
 
     func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer] {

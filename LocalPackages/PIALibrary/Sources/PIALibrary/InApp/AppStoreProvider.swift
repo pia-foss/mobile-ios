@@ -38,50 +38,27 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
     private(set) var availableProducts: [any InAppProduct]?
 
-    func currentEntitlementJWS() async -> JWS? {
-        var newest: (date: Date, jws: JWS)?
+    func currentSubscriptionReceipt() async -> SubscriptionReceipt? {
+        var newest: (purchaseDate: Date, receipt: SubscriptionReceipt?)?
         for await result in Transaction.currentEntitlements {
             switch result {
             case .unverified(let transaction, let error):
                 log.warning("Unverified transaction: \(error)")
+                // we allow unverified transactions, the backend will allways re verify them with Apple.
                 fallthrough
             case .verified(let transaction):
-                if newest == nil || transaction.purchaseDate > newest!.date {
+                if newest == nil || transaction.purchaseDate > newest!.purchaseDate {
                     if let jws = JWS(result.jwsRepresentation) {
-                        newest = (transaction.purchaseDate, jws)
+                        let receipt = SubscriptionReceipt(jws: jws, expiration: transaction.expirationDate)
+                        newest = (purchaseDate: transaction.purchaseDate, receipt: receipt)
                     }
                 }
             }
         }
-        if let jws = newest?.jws {
-            return jws
+        if let newest {
+            return newest.receipt
         }
         log.debug("No current entitlements found")
-        return nil
-    }
-
-    func latestSubscriptionJWS() async -> JWS? {
-        var newest: (date: Date, jws: JWS)?
-        for await result in Transaction.all {
-            switch result {
-            case .unverified(let transaction, let error):
-                log.warning("Unverified transaction: \(error)")
-                fallthrough
-            case .verified(let transaction):
-                // Only auto-renewable subscriptions carry a receipt the promo flow can use, whether
-                // the subscription is currently active or already expired.
-                guard transaction.productType == .autoRenewable else { continue }
-                if newest == nil || transaction.purchaseDate > newest!.date {
-                    if let jws = JWS(result.jwsRepresentation) {
-                        newest = (transaction.purchaseDate, jws)
-                    }
-                }
-            }
-        }
-        if let jws = newest?.jws {
-            return jws
-        }
-        log.debug("No current or expired subscription transactions found")
         return nil
     }
 

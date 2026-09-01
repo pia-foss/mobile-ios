@@ -164,7 +164,11 @@ final class PromoOfferBannerState {
                 return
             }
 
-            let expiryDate = Client.providers.accountProvider.currentUser?.info?.expirationDate ?? Date()
+            // The Apple receipt is the source of truth; the account may be stale or not loaded yet.
+            let expiryDate =
+                best.subscriptionExpiration
+                ?? Client.providers.accountProvider.currentUser?.info?.expirationDate
+                ?? Date()
             let renewalDate = Calendar.current.date(byAdding: best.offer.periodComponents, to: expiryDate)!
             bannerData = BannerData(
                 freeDays: best.offer.totalDays,

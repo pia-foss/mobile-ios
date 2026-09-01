@@ -52,11 +52,8 @@ public protocol InAppProvider: AnyObject {
 
     func finishTransaction(_ transaction: any InAppTransaction, success: Bool)
 
-    /// The signed JWS representation of the newest active subscription entitlement, or `nil` if none.
-    func currentEntitlementJWS() async -> JWS?
-
-    /// The signed JWS of the newest subscription transaction, **including expired ones**.
-    func latestSubscriptionJWS() async -> JWS?
+    /// The newest active subscription entitlement, or `nil` if none.
+    func currentSubscriptionReceipt() async -> SubscriptionReceipt?
 
     /// The promotional offers configured on the given subscription product.
     func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer]
@@ -65,4 +62,19 @@ public protocol InAppProvider: AnyObject {
     ///
     /// - Returns: an `Error` if the sync failed, or `nil` on success.
     func synchronizeEntitlements() async -> Error?
+}
+
+// MARK: - Data structs
+
+/// A signed App Store entitlement, with what the transaction says about when it runs out.
+public struct SubscriptionReceipt: Sendable {
+    /// The signed JSON token.
+    public let jws: JWS
+    /// `nil` for entitlements that carry no expiration, e.g. a non-renewing purchase.
+    public let expiration: Date?
+
+    public init(jws: JWS, expiration: Date?) {
+        self.jws = jws
+        self.expiration = expiration
+    }
 }
