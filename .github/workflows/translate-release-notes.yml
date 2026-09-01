@@ -14,6 +14,8 @@ on:
         default: 'ios + macos'
         options:
           - ios + macos
+          - ios
+          - macos
           - tvos
 
 jobs:
@@ -21,9 +23,12 @@ jobs:
     runs-on: macos-latest
 
     env:
-      # The dropdown label is for humans; fastlane takes ios|tvos, and the
-      # ios lane covers the Mac Catalyst version off the same metadata folder.
+      # The iOS and Mac Catalyst apps share one metadata folder, so anything
+      # that is not tvOS is written and translated under 'ios'.
       FASTLANE_PLATFORM: ${{ inputs.platform == 'tvos' && 'tvos' || 'ios' }}
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
 
     steps:
       - name: Checkout repository
@@ -49,10 +54,41 @@ jobs:
         run: |
           bundle exec fastlane translate_release_notes platform:$FASTLANE_PLATFORM
 
-      - name: Upload to App Store Connect
+      # Each App Store Connect app is uploaded on its own so that a failure on
+      # one (or no editable version to update) never blocks the others.
+      - name: Upload to App Store Connect (iOS)
+        id: upload_ios
+        if: inputs.platform == 'ios' || inputs.platform == 'ios + macos'
+        continue-on-error: true
+        run: bundle exec fastlane update_release_notes platform:ios
+
+      - name: Upload to App Store Connect (macOS)
+        id: upload_macos
+        if: inputs.platform == 'macos' || inputs.platform == 'ios + macos'
+        continue-on-error: true
+        run: bundle exec fastlane update_release_notes platform:macos
+
+      - name: Upload to App Store Connect (tvOS)
+        id: upload_tvos
+        if: inputs.platform == 'tvos'
+        continue-on-error: true
+        run: bundle exec fastlane update_release_notes platform:tvos
+
+      - name: Report upload results
+        if: always()
         env:
-          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+          IOS_OUTCOME: ${{ steps.upload_ios.outcome }}
+          MACOS_OUTCOME: ${{ steps.upload_macos.outcome }}
+          TVOS_OUTCOME: ${{ steps.upload_tvos.outcome }}
         run: |
-          bundle exec fastlane update_release_notes platform:$FASTLANE_PLATFORM
+          failed=0
+          for entry in "iOS:$IOS_OUTCOME" "macOS:$MACOS_OUTCOME" "tvOS:$TVOS_OUTCOME"; do
+            name="${entry%%:*}"
+            outcome="${entry#*:}"
+            case "$outcome" in
+              success) echo "✅ $name: release notes updated" ;;
+              failure) echo "❌ $name: release notes update failed"; failed=1 ;;
+              *) echo "⏭️ $name: not part of this run" ;;
+            esac
+          done
+          exit "$failed"
