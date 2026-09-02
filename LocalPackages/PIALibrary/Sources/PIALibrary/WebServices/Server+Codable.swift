@@ -45,6 +45,7 @@ extension Server: Codable {
         let ovpntcp: [ServerAddressIP]?
         let ovpnudp: [ServerAddressIP]?
         let wg: [ServerAddressIP]?
+        let awg: [ServerAddressIP]?
         let ikev2: [ServerAddressIP]?
     }
 
@@ -68,6 +69,7 @@ extension Server: Codable {
         var ovpnTCP: [ServerAddressIP]?
         var ovpnUDP: [ServerAddressIP]?
         var wg: [ServerAddressIP]?
+        var awg: [ServerAddressIP]?
         var ikev2: [ServerAddressIP]?
 
         if let serverAddresses = try? container.decode(ServerAddresses.self, forKey: .servers) {
@@ -75,6 +77,7 @@ extension Server: Codable {
             ovpnTCP = serverAddresses.ovpntcp
             ovpnUDP = serverAddresses.ovpnudp
             wg = serverAddresses.wg
+            awg = serverAddresses.awg
             ikev2 = serverAddresses.ikev2
         }
 
@@ -86,6 +89,7 @@ extension Server: Codable {
             openVPNAddressesForTCP: ovpnTCP,
             openVPNAddressesForUDP: ovpnUDP,
             wireGuardAddressesForUDP: wg,
+            amneziaAddressesForUDP: awg,
             iKEv2AddressesForUDP: ikev2,
             pingAddress: pingAddress,
             geo: geo,
@@ -123,6 +127,7 @@ extension Server: Codable {
             ovpntcp: openVPNAddressesForTCP,
             ovpnudp: openVPNAddressesForUDP,
             wg: wireGuardAddressesForUDP,
+            awg: amneziaAddressesForUDP,
             ikev2: iKEv2AddressesForUDP,
         )
         try container.encode(serverAddresses, forKey: .servers)
@@ -133,7 +138,7 @@ extension Server: Codable {
 
 extension Server.ServerAddressIP: Decodable {
     enum CodingKeys: CodingKey {
-        case ip, cn, van, responseTime, available
+        case ip, cn, van, port, responseTime, available
     }
 
     public convenience init(from decoder: any Decoder) throws {
@@ -142,6 +147,7 @@ extension Server.ServerAddressIP: Decodable {
             ip: try container.decode(String.self, forKey: .ip),
             cn: try container.decode(String.self, forKey: .cn),
             van: (try? container.decode(Bool.self, forKey: .van)) ?? false,
+            port: try? container.decode(UInt16.self, forKey: .port),
         )
     }
 }
