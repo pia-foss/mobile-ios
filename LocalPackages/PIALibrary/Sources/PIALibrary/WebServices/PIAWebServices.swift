@@ -49,7 +49,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
             .setCertificate(rsa4096Certificate)
             .setUserAgent(PIAWebServices.userAgent)
             .setMetadataRequestPath("/vpninfo/regions/v2")
-            .setVPNRegionsRequestPath("/vpninfo/servers/v6")
+            .setVPNRegionsRequestPath("/vpninfo/servers/v7")
             .setShadowsocksRegionsRequestPath("/shadow_socks")
             .build()
 
