@@ -1540,19 +1540,19 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
         @available(iOS 16.2, *)
         private func startConnectionLiveActivityIfNeeded() {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                let liveActivityManager = appDelegate.liveActivityManager
-            else { return }
+            guard let liveActivityManager = AppDelegate.delegate().liveActivityManager else { return }
             let connState = makeLiveActivityStateForCurrentConnection()
-            liveActivityManager.startLiveActivity(with: connState)
+            Task {
+                await liveActivityManager.startLiveActivity(with: connState)
+            }
         }
 
         @available(iOS 16.2, *)
         private func stopConnectionLiveActivity() {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                let liveActivityManager = appDelegate.liveActivityManager
-            else { return }
-            liveActivityManager.endLiveActivities()
+            guard let liveActivityManager = AppDelegate.delegate().liveActivityManager else { return }
+            Task {
+                await liveActivityManager.endLiveActivities()
+            }
         }
     }
 #endif

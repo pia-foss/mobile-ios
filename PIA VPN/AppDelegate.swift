@@ -111,7 +111,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         Bootstrapper.shared.dispose()
 
         #if !targetEnvironment(macCatalyst)
-            liveActivityManager?.endLiveActivities()
+            Task.blockingThreadUnsafe { [weak liveActivityManager] in
+                await liveActivityManager?.endLiveActivities()
+            }
         #endif
     }
 
