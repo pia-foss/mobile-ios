@@ -44,10 +44,10 @@ struct PIAWidgetView: View {
             PIAIconView(iconSize: targetIconSize, padding: targetPadding)
             HStack {
                 if widgetPersistenceDatasource.getIsTrustedNetwork() {
-                    PIACircleVpnButton(color: Color("TrustedNetworkColor"))
+                    vpnButton(color: Color("TrustedNetworkColor"))
                 } else {
                     let targetColor = widgetPersistenceDatasource.getIsVPNConnected() ? "AccentColor" : "RedColor"
-                    PIACircleVpnButton(color: Color(targetColor))
+                    vpnButton(color: Color(targetColor))
                 }
 
                 if widgetFamily == .systemMedium {
@@ -60,6 +60,25 @@ struct PIAWidgetView: View {
             }
 
         }
-        .widgetURL(URL(string: AppConstants.Widget.connect))
+        .widgetURL(widgetLegacyURL)
+    }
+
+    @ViewBuilder
+    private func vpnButton(color: Color) -> some View {
+        if #available(iOS 17.0, *) {
+            Button(intent: PIAVPNToggleIntent()) {
+                PIACircleVpnButton(color: color)
+            }
+            .buttonStyle(.plain)
+        } else {
+            PIACircleVpnButton(color: color)
+        }
+    }
+
+    private var widgetLegacyURL: URL? {
+        if #available(iOS 17.0, *) {
+            return nil
+        }
+        return URL(string: AppConstants.Widget.connect)
     }
 }

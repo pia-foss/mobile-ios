@@ -206,7 +206,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             let token = url.absoluteString[AppConstants.MagicLink.url.count...]
             signupCoordinator.handleMagicLink(token: token)
 
-        } else if url.absoluteString.starts(with: AppConstants.Widget.connect) {
+        } else if url.absoluteString.starts(with: AppConstants.Widget.connect), #unavailable(iOS 17) {
             if Client.providers.vpnProvider.isVPNConnected {
                 disconnectAfter(milliseconds: defaultMilliseconds)
             } else {
@@ -235,11 +235,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // in case it's too early for notification delivery (vc not loaded)
             TransientState.shouldDisplayRegionPicker = true
-
-        case VPNStatus.disconnected.rawValue:
-            if !Client.providers.vpnProvider.isVPNConnected {
-                connectAfter(milliseconds: defaultMilliseconds)
-            }
 
         default:
             return false
