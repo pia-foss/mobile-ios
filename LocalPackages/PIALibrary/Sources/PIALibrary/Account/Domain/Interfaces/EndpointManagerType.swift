@@ -1,6 +1,6 @@
 import Foundation
 
-protocol EndpointManagerType {
+protocol EndpointManagerType: Sendable {
     func availableEndpoints() -> [PinningEndpoint]
 }
 

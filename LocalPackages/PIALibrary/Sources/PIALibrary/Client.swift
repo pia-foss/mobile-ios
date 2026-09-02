@@ -21,12 +21,11 @@
 //
 
 import Foundation
-import UIKit
 
 private let log = PIALogger.logger(for: Client.self)
 
 /// The entry point for client initialization and usage.
-public final class Client {
+public enum Client {
 
     // MARK: Strategies
 
@@ -46,9 +45,9 @@ public final class Client {
     public static let preferences = Client.Preferences()
 
     /// The business providers (customizable).
-    public static var providers = Client.Providers()
+    public static let providers = Client.Providers()
 
-    static var webServices: WebServices = PIAWebServices()
+    private(set) static var webServices: WebServices = PIAWebServices()
 
     public static var store: any InAppProvider = AppStoreProvider()
 

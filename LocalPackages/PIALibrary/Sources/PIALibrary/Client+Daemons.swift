@@ -26,7 +26,7 @@ import Foundation
 extension Client {
 
     /// Provides access to passive library updates.
-    public final class Daemons: DatabaseAccess {
+    public final class Daemons: DatabaseAccess, Sendable {
 
         /// It's `true` when the network is reachable.
         public var isNetworkReachable: Bool {

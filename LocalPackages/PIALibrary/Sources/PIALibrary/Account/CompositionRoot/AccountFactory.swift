@@ -1,6 +1,6 @@
 import Foundation
 
-public class AccountFactory {
+public enum AccountFactory {
     public static func makeLoginUseCase() -> LoginUseCaseType {
         LoginUseCase(networkClient: NetworkRequestFactory.maketNetworkRequestClient(), apiTokenProvider: makeAPITokenProvider(), refreshVpnTokenUseCase: makeRefreshVpnTokenUseCase())
     }
@@ -76,19 +76,19 @@ public class AccountFactory {
 
 private extension AccountFactory {
 
-    static var apitokenProviderShared: APITokenProviderType = {
+    static let apitokenProviderShared: APITokenProviderType = {
         APITokenProvider(keychainStore: makeSecureStore(), tokenSerializer: makeAuthTokenSerializer())
     }()
 
-    static var vpnTokenProviderShared: VpnTokenProviderType = {
+    static let vpnTokenProviderShared: VpnTokenProviderType = {
         VpnTokenProvider(keychainStore: makeSecureStore(), tokenSerializer: makeAuthTokenSerializer())
     }()
 
-    static var secureStoreShared: SecureStore = {
+    static let secureStoreShared: SecureStore = {
         KeychainStore(team: Client.Configuration.teamId, group: Client.Configuration.appGroup)
     }()
 
-    static var refreshAuthTokensCheckerShared: RefreshAuthTokensCheckerType = {
+    static let refreshAuthTokensCheckerShared: RefreshAuthTokensCheckerType = {
         RefreshAuthTokensChecker(apiTokenProvider: makeAPITokenProvider(), vpnTokenProvier: makeVpnTokenProvider(), refreshAPITokenUseCase: makeRefreshAPITokenUseCase(), refreshVpnTokenUseCase: makeRefreshVpnTokenUseCase())
     }()
 

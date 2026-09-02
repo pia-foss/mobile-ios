@@ -2,13 +2,12 @@ import Foundation
 
 private let log = PIALogger.logger(for: RefreshVpnTokenUseCase.self)
 
-protocol RefreshVpnTokenUseCaseType {
+protocol RefreshVpnTokenUseCaseType: Sendable {
     typealias Completion = ((NetworkRequestError?) -> Void)
     func callAsFunction(completion: @escaping RefreshVpnTokenUseCaseType.Completion)
 }
 
-class RefreshVpnTokenUseCase: RefreshVpnTokenUseCaseType {
-
+final class RefreshVpnTokenUseCase: RefreshVpnTokenUseCaseType {
     private let vpnTokenProvider: VpnTokenProviderType
     private let networkClient: NetworkRequestClientType
 

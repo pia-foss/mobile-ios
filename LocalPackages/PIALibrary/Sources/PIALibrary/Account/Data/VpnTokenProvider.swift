@@ -1,15 +1,15 @@
 import Foundation
 
-protocol VpnTokenProviderType {
+protocol VpnTokenProviderType: Sendable {
     func getVpnToken() -> VpnToken?
     func save(vpnToken: VpnToken)
     func saveVpnToken(from data: Data) throws
     func clearVpnToken()
 }
 
-class VpnTokenProvider: VpnTokenProviderType {
+final class VpnTokenProvider: VpnTokenProviderType, Sendable {
     private let keychainStore: SecureStore
-    let tokenSerializer: AuthTokenSerializerType
+    private let tokenSerializer: AuthTokenSerializerType
     private let vpnTokenKey = "VPN_TOKEN_KEY"
 
     init(keychainStore: SecureStore, tokenSerializer: AuthTokenSerializerType) {

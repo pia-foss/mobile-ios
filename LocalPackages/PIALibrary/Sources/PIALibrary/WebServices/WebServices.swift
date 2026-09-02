@@ -23,11 +23,11 @@
 import Foundation
 import PIABase
 
-protocol WebServicesConsumer {
+protocol WebServicesConsumer: Sendable {
     var webServices: WebServices { get }
 }
 
-protocol WebServices: AnyObject {
+protocol WebServices: AnyObject, Sendable {
 
     // MARK: Account
 

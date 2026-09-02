@@ -222,7 +222,7 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
 
 // MARK: - ConnectivityChecker
 
-private actor ConnectivityChecker {
+private actor ConnectivityChecker: Sendable {
     enum Error: Swift.Error {
         case alreadyChecking
         case other(Swift.Error)

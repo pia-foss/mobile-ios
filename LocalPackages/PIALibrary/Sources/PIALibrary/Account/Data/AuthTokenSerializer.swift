@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AuthTokenSerializerType {
+protocol AuthTokenSerializerType: Sendable {
     func decodeAPIToken(from data: Data) -> APIToken?
     func decodeVpnToken(from data: Data) -> VpnToken?
     func encode(apiToken: APIToken) -> String?
@@ -8,7 +8,7 @@ protocol AuthTokenSerializerType {
 
 }
 
-class AuthTokenSerializer: AuthTokenSerializerType {
+final class AuthTokenSerializer: AuthTokenSerializerType {
     private let jsonDecoder = JSONDecoder()
     private let jsonEncoder = JSONEncoder()
 
