@@ -8,6 +8,7 @@ private let log = PIALogger.logger(for: RootContainerViewModel.self)
 class RootContainerViewModel: ObservableObject {
     enum State {
         case splash
+        case platformSDKMigration
         case notActivated
         case activatedNotOnboarded
         case activated
@@ -24,11 +25,12 @@ class RootContainerViewModel: ObservableObject {
     private let bootstrap: BootstraperType
     private let userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType
     private let refreshLatencyUseCase: RefreshServersLatencyUseCaseType
+    private let platformSDKMigration: PlatformSDKMigrationUseCaseType
 
     private let appRouter: AppRouterType
     private var cancellables = Set<AnyCancellable>()
 
-    init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType) {
+    init(accountProvider: AccountProvider, notificationCenter: NotificationCenterType = NotificationCenter.default, vpnConfigurationAvailability: VPNConfigurationAvailabilityType, connectionStatsPermissonType: ConnectionStatsPermissonType, bootstrap: BootstraperType, userAuthenticationStatusMonitor: UserAuthenticationStatusMonitorType, appRouter: AppRouterType, refreshLatencyUseCase: RefreshServersLatencyUseCaseType, platformSDKMigration: PlatformSDKMigrationUseCaseType) {
 
         self.accountProvider = accountProvider
         self.notificationCenter = notificationCenter
@@ -38,12 +40,34 @@ class RootContainerViewModel: ObservableObject {
         self.userAuthenticationStatusMonitor = userAuthenticationStatusMonitor
         self.appRouter = appRouter
         self.refreshLatencyUseCase = refreshLatencyUseCase
+        self.platformSDKMigration = platformSDKMigration
 
         subscribeToAccountUpdates()
         setup()
     }
 
     private func setup() {
+        platformSDKMigration.shouldConfirmMigration { [weak self] shouldConfirm in
+            guard let self else { return }
+
+            guard shouldConfirm else {
+                self.bootstrapApp()
+                return
+            }
+
+            log.info("App state: platformSDKMigration")
+            self.state = .platformSDKMigration
+        }
+    }
+
+    func confirmPlatformSDKMigration() {
+        platformSDKMigration.confirmMigration()
+        bootstrapApp()
+    }
+
+    private func bootstrapApp() {
+        guard !isBootstrapped else { return }
+
         bootstrap()
         isBootstrapped = true
         updateState(isLoggedIn: accountProvider.isLoggedIn, isExpired: accountProvider.isExpired)
