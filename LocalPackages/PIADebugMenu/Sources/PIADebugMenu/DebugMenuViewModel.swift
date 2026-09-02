@@ -139,7 +139,7 @@ final class DebugMenuViewModel: ObservableObject {
 
     private func loadEntitlementJWSIfNeeded() async {
         guard entitlementJWS == nil else { return }
-        entitlementJWS = await Client.store.currentEntitlementJWS()
+        entitlementJWS = await Client.store.currentSubscriptionReceipt()?.jws
     }
 
     private func refresh() async {

@@ -199,6 +199,7 @@ final class DashboardViewController: AutolayoutViewController {
         reloadTiles()
         updateCurrentStatus()
         setupCallingCards()
+        PromoOfferBannerState.shared.checkEligibilityIfNeeded()
 
         checkTVOSTokenToBind()
     }
@@ -1084,7 +1085,9 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
-        if MessagesManager.shared.availableMessage() != nil {
+        if PromoOfferBannerState.shared.shouldShowBanner {
+            fixedTileContent = .promoOffer
+        } else if MessagesManager.shared.availableMessage() != nil {
             fixedTileContent = .messages
         } else if ratingManager.shouldShowFeedbackTile() {
             fixedTileContent = .feedback
@@ -1400,9 +1403,15 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
                 width: collectionView.frame.width,
                 height: tileHeight)
         } else {
+            let height: CGFloat =
+                fixedTileContent == .promoOffer
+                ? PromoOfferBannerView.preferredHeight(
+                    forWidth: collectionView.frame.width,
+                    data: PromoOfferBannerState.shared.bannerData)
+                : TileSize.standard.rawValue
             return CGSize(
                 width: collectionView.frame.width,
-                height: TileSize.standard.rawValue)
+                height: height)
         }
 
     }

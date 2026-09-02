@@ -226,7 +226,7 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             if let syncError {
                 log.warning("Entitlements sync failed, checking cached entitlements: \(syncError)")
             }
-            let jws = await Client.store.currentEntitlementJWS()
+            let jws = await Client.store.currentSubscriptionReceipt()?.jws
             await MainActor.run {
                 guard let self else { return }
                 guard let jws else {

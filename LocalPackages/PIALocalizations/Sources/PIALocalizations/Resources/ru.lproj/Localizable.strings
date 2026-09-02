@@ -663,3 +663,21 @@
 "platform_sdk_migration.label.title" = "Обновление VPN";
 "platform_sdk_migration.label.subtitle" = "Мы улучшаем способ подключения вашего VPN. Соединение VPN будет ненадолго прервано и восстановится автоматически.";
 "platform_sdk_migration.button.confirm" = "Продолжить";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Разовое предложение • Заканчивается %@";
+"promo_offer.header.headline"= "%d дней бесплатно";
+"promo_offer.header.subtitle"= "Автоматически добавляется к вашему плану";
+
+"promo_offer.cta.claim"= "Получить бесплатные дни";
+"promo_offer.banner.dismiss"= "Скрыть предложение";
+"promo_offer.banner.expiry"= "Доступ заканчивается **%@**";
+"promo_offer.banner.days"= "%d дней";
+"promo_offer.banner.free"= "бесплатно";
+"promo_offer.banner.subtitle"= "Возобновите подписку, чтобы получить бесплатные дни.";
+
+"promo_offer.sheet.summary"= "%1$@ к вашей подписке будут добавлены **%2$d дней** **бесплатно**.";
+"promo_offer.sheet.disclaimer_with_price"= "Оплата не будет списана, пока выставление счетов не возобновится на сумму %1$@ **%2$@**. Отменить можно в любое время в настройках.";
+"promo_offer.sheet.disclaimer"= "Оплата не будет списана, пока выставление счетов не возобновится **%@**. Отменить можно в любое время в настройках.";
+"promo_offer.sheet.close"= "Закрыть";

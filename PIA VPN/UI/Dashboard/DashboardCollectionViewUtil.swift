@@ -32,11 +32,13 @@ enum FixedCells: Int {
 
     case messages = 0
     case feedback
+    case promoOffer
 
     var identifier: String {
         switch self {
         case .messages: "MessagesTileCell"
         case .feedback: "FeedbackTileCell"
+        case .promoOffer: "PromoOfferTileCell"
         }
     }
 
@@ -44,6 +46,7 @@ enum FixedCells: Int {
         switch self {
         case .messages: "MessagesTileCollectionViewCell"
         case .feedback: "FeedbackTileCollectionViewCell"
+        case .promoOffer: "PromoOfferTileCollectionViewCell"
         }
     }
 
@@ -54,6 +57,7 @@ enum FixedTileContent {
     case none
     case messages
     case feedback
+    case promoOffer
 
     var itemCount: Int {
         self == .none ? 0 : 1
@@ -64,6 +68,7 @@ enum FixedTileContent {
         case .none: nil
         case .messages: FixedCells.messages.identifier
         case .feedback: FixedCells.feedback.identifier
+        case .promoOffer: FixedCells.promoOffer.identifier
         }
     }
 
@@ -120,6 +125,11 @@ class DashboardCollectionViewUtil: NSObject {
                 nibName: FixedCells.feedback.className,
                 bundle: nil),
             forCellWithReuseIdentifier: FixedCells.feedback.identifier)
+        collectionView.register(
+            UINib(
+                nibName: FixedCells.promoOffer.className,
+                bundle: nil),
+            forCellWithReuseIdentifier: FixedCells.promoOffer.identifier)
         collectionView.register(
             UINib(
                 nibName: Cells.ipTile.className,

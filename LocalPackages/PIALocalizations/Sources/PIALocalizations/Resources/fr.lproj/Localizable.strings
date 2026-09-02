@@ -663,3 +663,21 @@ Vous gardez toujours le contrôle. Vous pouvez consulter les données que nous a
 "platform_sdk_migration.label.title" = "Mise à niveau du VPN";
 "platform_sdk_migration.label.subtitle" = "Nous améliorons la façon dont votre VPN se connecte. Votre VPN se déconnectera brièvement puis se reconnectera automatiquement.";
 "platform_sdk_migration.button.confirm" = "Continuer";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Offre unique • Se termine le %@";
+"promo_offer.header.headline"= "%d jours gratuits";
+"promo_offer.header.subtitle"= "Ajouté automatiquement à votre forfait";
+
+"promo_offer.cta.claim"= "Profiter de mes jours gratuits";
+"promo_offer.banner.dismiss"= "Ignorer l'offre";
+"promo_offer.banner.expiry"= "Votre accès se termine le **%@**";
+"promo_offer.banner.days"= "%d jours";
+"promo_offer.banner.free"= "gratuits";
+"promo_offer.banner.subtitle"= "Reprenez votre abonnement pour profiter de vos jours gratuits.";
+
+"promo_offer.sheet.summary"= "Le %1$@, **%2$d jours** seront ajoutés **gratuitement** à votre abonnement.";
+"promo_offer.sheet.disclaimer_with_price"= "Aucun paiement tant que la facturation ne reprend pas à %1$@ le **%2$@**. Annulez à tout moment dans les paramètres.";
+"promo_offer.sheet.disclaimer"= "Aucun paiement tant que la facturation ne reprend pas le **%@**. Annulez à tout moment dans les paramètres.";
+"promo_offer.sheet.close"= "Fermer";

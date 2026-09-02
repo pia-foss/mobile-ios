@@ -663,3 +663,21 @@
 "platform_sdk_migration.label.title" = "ترقية VPN";
 "platform_sdk_migration.label.subtitle" = "نحن نطور طريقة اتصال VPN. سيتم قطع اتصال VPN لفترة وجيزة ثم يعاد الاتصال تلقائيًا.";
 "platform_sdk_migration.button.confirm" = "متابعة";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "عرض لمرة واحدة • ينتهي في %@";
+"promo_offer.header.headline"= "%d أيام مجانية";
+"promo_offer.header.subtitle"= "تُضاف تلقائيًا إلى خطتك";
+
+"promo_offer.cta.claim"= "احصل على أيامي المجانية";
+"promo_offer.banner.dismiss"= "إغلاق العرض";
+"promo_offer.banner.expiry"= "ينتهي وصولك في **%@**";
+"promo_offer.banner.days"= "%d أيام";
+"promo_offer.banner.free"= "مجانًا";
+"promo_offer.banner.subtitle"= "استأنف اشتراكك للحصول على أيامك المجانية.";
+
+"promo_offer.sheet.summary"= "في %1$@، ستتم إضافة **%2$d أيام** إلى اشتراكك **مجانًا**.";
+"promo_offer.sheet.disclaimer_with_price"= "لن يتم الدفع حتى يُستأنف الفوترة بسعر %1$@ في **%2$@**. يمكنك الإلغاء في أي وقت من الإعدادات.";
+"promo_offer.sheet.disclaimer"= "لن يتم الدفع حتى يُستأنف الفوترة في **%@**. يمكنك الإلغاء في أي وقت من الإعدادات.";
+"promo_offer.sheet.close"= "إغلاق";

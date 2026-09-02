@@ -57,7 +57,7 @@ public extension Paywall.Dependencies {
             },
 
             hasExistingEntitlement: {
-                await store.currentEntitlementJWS() != nil
+                await store.currentSubscriptionReceipt() != nil
             },
 
             purchase: { request in

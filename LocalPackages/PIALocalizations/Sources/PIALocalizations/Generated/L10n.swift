@@ -669,6 +669,58 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "platform_sdk_migration.label.title", fallback: "VPN Upgrade")
     }
   }
+  public enum PromoOffer {
+    public enum Banner {
+      /// %d days
+      public static func days(_ p1: Int) -> String {
+        return L10n.tr("Localizable", "promo_offer.banner.days", p1, fallback: "%d days")
+      }
+      /// Dismiss offer
+      public static let dismiss = L10n.tr("Localizable", "promo_offer.banner.dismiss", fallback: "Dismiss offer")
+      /// Your access Ends on **%@**
+      public static func expiry(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "promo_offer.banner.expiry", String(describing: p1), fallback: "Your access Ends on **%@**")
+      }
+      /// free
+      public static let free = L10n.tr("Localizable", "promo_offer.banner.free", fallback: "free")
+      /// Resume subscription to claim your free days.
+      public static let subtitle = L10n.tr("Localizable", "promo_offer.banner.subtitle", fallback: "Resume subscription to claim your free days.")
+    }
+    public enum Cta {
+      /// Claim My Free Days
+      public static let claim = L10n.tr("Localizable", "promo_offer.cta.claim", fallback: "Claim My Free Days")
+    }
+    public enum Header {
+      /// One-time Offer • Ends %@
+      public static func eyebrow(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "promo_offer.header.eyebrow", String(describing: p1), fallback: "One-time Offer • Ends %@")
+      }
+      /// %d days free
+      public static func headline(_ p1: Int) -> String {
+        return L10n.tr("Localizable", "promo_offer.header.headline", p1, fallback: "%d days free")
+      }
+      /// Automatically added to your plan
+      public static let subtitle = L10n.tr("Localizable", "promo_offer.header.subtitle", fallback: "Automatically added to your plan")
+    }
+    public enum Sheet {
+      /// Close
+      public static let close = L10n.tr("Localizable", "promo_offer.sheet.close", fallback: "Close")
+      /// No payment until billing resumes on **%@**. Cancel anytime in Settings.
+      public static func disclaimer(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "promo_offer.sheet.disclaimer", String(describing: p1), fallback: "No payment until billing resumes on **%@**. Cancel anytime in Settings.")
+      }
+      /// No payment until billing resumes at %1$@ on **%2$@**. Cancel anytime in Settings.
+      public static func disclaimerWithPrice(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "promo_offer.sheet.disclaimer_with_price", String(describing: p1), String(describing: p2), fallback: "No payment until billing resumes at %1$@ on **%2$@**. Cancel anytime in Settings.")
+      }
+      /// Something went wrong. Please try again.
+      public static let error = L10n.tr("Localizable", "promo_offer.sheet.error", fallback: "Something went wrong. Please try again.")
+      /// On %1$@, **%2$d days** will be added to your subscription for **free**.
+      public static func summary(_ p1: Any, _ p2: Int) -> String {
+        return L10n.tr("Localizable", "promo_offer.sheet.summary", String(describing: p1), p2, fallback: "On %1$@, **%2$d days** will be added to your subscription for **free**.")
+      }
+    }
+  }
   public enum Rating {
     public enum Error {
       /// The connection couldn't be established

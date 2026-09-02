@@ -663,3 +663,21 @@ U houdt altijd de controle. U kunt in de Instellingen zien welke gegevens we heb
 "platform_sdk_migration.label.title" = "VPN-upgrade";
 "platform_sdk_migration.label.subtitle" = "We verbeteren de manier waarop je VPN verbinding maakt. De verbinding met je VPN wordt kort verbroken en daarna automatisch hersteld.";
 "platform_sdk_migration.button.confirm" = "Doorgaan";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "Eenmalige aanbieding • Eindigt %@";
+"promo_offer.header.headline"= "%d dagen gratis";
+"promo_offer.header.subtitle"= "Automatisch toegevoegd aan je abonnement";
+
+"promo_offer.cta.claim"= "Mijn gratis dagen claimen";
+"promo_offer.banner.dismiss"= "Aanbieding sluiten";
+"promo_offer.banner.expiry"= "Je toegang eindigt op **%@**";
+"promo_offer.banner.days"= "%d dagen";
+"promo_offer.banner.free"= "gratis";
+"promo_offer.banner.subtitle"= "Hervat je abonnement om je gratis dagen te claimen.";
+
+"promo_offer.sheet.summary"= "Op %1$@ worden er **%2$d dagen** **gratis** aan je abonnement toegevoegd.";
+"promo_offer.sheet.disclaimer_with_price"= "Geen betaling totdat de facturering wordt hervat voor %1$@ op **%2$@**. Op elk moment op te zeggen in Instellingen.";
+"promo_offer.sheet.disclaimer"= "Geen betaling totdat de facturering wordt hervat op **%@**. Op elk moment op te zeggen in Instellingen.";
+"promo_offer.sheet.close"= "Sluiten";

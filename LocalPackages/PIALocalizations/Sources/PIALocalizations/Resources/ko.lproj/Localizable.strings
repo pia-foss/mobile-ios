@@ -663,3 +663,21 @@
 "platform_sdk_migration.label.title" = "VPN 업그레이드";
 "platform_sdk_migration.label.subtitle" = "VPN 연결 방식을 업그레이드하고 있습니다. VPN 연결이 잠시 해제된 후 자동으로 다시 연결됩니다.";
 "platform_sdk_migration.button.confirm" = "계속";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "일회성 혜택 • %@ 종료";
+"promo_offer.header.headline"= "%d일 무료";
+"promo_offer.header.subtitle"= "요금제에 자동으로 추가됩니다";
+
+"promo_offer.cta.claim"= "무료 일수 받기";
+"promo_offer.banner.dismiss"= "혜택 닫기";
+"promo_offer.banner.expiry"= "**%@**에 액세스가 종료됩니다";
+"promo_offer.banner.days"= "%d일";
+"promo_offer.banner.free"= "무료";
+"promo_offer.banner.subtitle"= "구독을 재개하여 무료 일수를 받으세요.";
+
+"promo_offer.sheet.summary"= "%1$@에 구독에 **%2$d일**이 **무료로** 추가됩니다.";
+"promo_offer.sheet.disclaimer_with_price"= "%1$@ 요금으로 **%2$@**에 청구가 재개되기 전까지는 결제되지 않습니다. 설정에서 언제든지 취소할 수 있습니다.";
+"promo_offer.sheet.disclaimer"= "**%@**에 청구가 재개되기 전까지는 결제되지 않습니다. 설정에서 언제든지 취소할 수 있습니다.";
+"promo_offer.sheet.close"= "닫기";

@@ -664,3 +664,21 @@
 "platform_sdk_migration.label.title" = "VPNのアップグレード";
 "platform_sdk_migration.label.subtitle" = "VPNの接続方法をアップグレードしています。VPNは一時的に切断し、自動的に再接続します。";
 "platform_sdk_migration.button.confirm" = "続行";
+
+// PROMO OFFERS
+
+"promo_offer.header.eyebrow"= "期間限定オファー • %@ 終了";
+"promo_offer.header.headline"= "%d日間無料";
+"promo_offer.header.subtitle"= "自動的にプランに追加されます";
+
+"promo_offer.cta.claim"= "無料日数を受け取る";
+"promo_offer.banner.dismiss"= "オファーを閉じる";
+"promo_offer.banner.expiry"= "アクセスの終了日：**%@**";
+"promo_offer.banner.days"= "%d日間";
+"promo_offer.banner.free"= "無料";
+"promo_offer.banner.subtitle"= "サブスクリプションを再開して無料日数を受け取りましょう。";
+
+"promo_offer.sheet.summary"= "%1$@に、**%2$d日間**がサブスクリプションに**無料**で追加されます。";
+"promo_offer.sheet.disclaimer_with_price"= "%1$@の請求が**%2$@**に再開されるまでお支払いは発生しません。設定からいつでもキャンセルできます。";
+"promo_offer.sheet.disclaimer"= "請求が**%@**に再開されるまでお支払いは発生しません。設定からいつでもキャンセルできます。";
+"promo_offer.sheet.close"= "閉じる";
