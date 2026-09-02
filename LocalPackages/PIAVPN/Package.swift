@@ -17,7 +17,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../KapePlatformSDK"),
-        .package(path: "../PIALibrary")
+        .package(path: "../PIALibrary"),
+        .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2")
     ],
     targets: [
         .target(
@@ -25,7 +26,8 @@ let package = Package(
             dependencies: [
                 .product(name: "KapeVPN-OpenVPN", package: "KapePlatformSDK"),
                 .product(name: "KapeVPN-PacketTunnel", package: "KapePlatformSDK"),
-                .product(name: "PIALibrary", package: "PIALibrary")
+                .product(name: "PIALibrary", package: "PIALibrary"),
+                .product(name: "NWHttpConnection", package: "mobile-ios-networking")
             ]
         )
     ],
