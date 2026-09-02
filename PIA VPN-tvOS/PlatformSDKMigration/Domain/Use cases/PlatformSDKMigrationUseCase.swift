@@ -10,7 +10,7 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: PlatformSDKMigrationUseCase.self)
 
-protocol PlatformSDKMigrationUseCaseType {
+protocol PlatformSDKMigrationUseCaseType: Sendable {
     var shouldUsePlatformSDKTunnel: Bool { get }
 
     func shouldConfirmMigration(_ completion: @escaping (Bool) -> Void)
@@ -18,7 +18,7 @@ protocol PlatformSDKMigrationUseCaseType {
     func cleanupLegacyVPNProfilesIfNeeded()
 }
 
-final class PlatformSDKMigrationUseCase: PlatformSDKMigrationUseCaseType {
+final class PlatformSDKMigrationUseCase: PlatformSDKMigrationUseCaseType, @unchecked Sendable {
 
     private let legacyVPNProfiles: LegacyVPNProfilesType
     private let appPreferences: AppPreferencesType

@@ -9,7 +9,7 @@ import Foundation
 
 @testable import PIA_VPN_tvOS
 
-class LegacyVPNProfilesMock: LegacyVPNProfilesType {
+final class LegacyVPNProfilesMock: LegacyVPNProfilesType, @unchecked Sendable {
 
     var isVPNConnectedResult = false
     // When set, the completion is stashed instead of called, so a test can drive the timeout.

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LegacyVPNProfilesType {
+protocol LegacyVPNProfilesType: Sendable {
     func isVPNConnected(_ completion: @escaping (Bool) -> Void)
     func removeAll(_ completion: @escaping (Bool) -> Void)
 }

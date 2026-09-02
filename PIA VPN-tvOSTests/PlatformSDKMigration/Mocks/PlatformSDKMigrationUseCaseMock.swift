@@ -9,7 +9,7 @@ import Foundation
 
 @testable import PIA_VPN_tvOS
 
-class PlatformSDKMigrationUseCaseMock: PlatformSDKMigrationUseCaseType {
+final class PlatformSDKMigrationUseCaseMock: PlatformSDKMigrationUseCaseType, @unchecked Sendable {
 
     var shouldUsePlatformSDKTunnel = true
 
