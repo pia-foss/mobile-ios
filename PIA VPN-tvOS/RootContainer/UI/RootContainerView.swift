@@ -18,6 +18,10 @@ struct RootContainerView: View {
             switch viewModel.state {
             case .splash:
                 SplashView()
+            case .platformSDKMigration:
+                PlatformSDKMigrationFactory.makePlatformSDKMigrationView(
+                    onConfirm: viewModel.confirmPlatformSDKMigration
+                )
             case .notActivated:
                 WelcomeFactory.makeWelcomeView()
                     .withAuthenticationRoutes()

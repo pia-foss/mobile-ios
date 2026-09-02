@@ -24,6 +24,7 @@ final class RootContainerViewModelTests: XCTestCase {
         let connectionStatusMonitorMock = ConnectionStateMonitorMock()
         let refreshLatencyUseCaseMock = RefreshServersLatencyUseCaseMock()
         var userAuthenticationStatusMonitorMock = UserAuthenticationStatusMonitorMock(status: .loggedOut)
+        let platformSDKMigrationMock = PlatformSDKMigrationUseCaseMock()
 
         func stubUserAuthenticationStatusMonitor(status: UserAuthenticationStatus) {
             self.userAuthenticationStatusMonitorMock = UserAuthenticationStatusMonitorMock(status: status)
@@ -51,7 +52,8 @@ final class RootContainerViewModelTests: XCTestCase {
             bootstrap: fixture.bootstrapMock,
             userAuthenticationStatusMonitor: fixture.userAuthenticationStatusMonitorMock,
             appRouter: fixture.appRouterSpy,
-            refreshLatencyUseCase: fixture.refreshLatencyUseCaseMock
+            refreshLatencyUseCase: fixture.refreshLatencyUseCaseMock,
+            platformSDKMigration: fixture.platformSDKMigrationMock
         )
         sut.isBootstrapped = bootStrapped
     }
@@ -142,6 +144,100 @@ final class RootContainerViewModelTests: XCTestCase {
 
         // THEN Boostrapper is called
         XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 1)
+    }
+
+    // MARK: - PlatformSDK migration
+
+    func testState_WhenThePlatformSDKMigrationNeedsConfirmation() {
+        // GIVEN that the migration needs the user's confirmation
+        fixture.platformSDKMigrationMock.shouldConfirmMigrationResult = true
+
+        // WHEN the app is launched
+        instantiateSut(bootStrapped: false)
+
+        // THEN the state becomes 'platformSDKMigration'
+        XCTAssertEqual(sut.state, .platformSDKMigration)
+
+        // AND the app does not bootstrap until the user answers, so the VPN profiles are untouched
+        XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 0)
+    }
+
+    func testState_WhenThePlatformSDKMigrationNeedsNoConfirmation() {
+        // GIVEN that the migration needs no confirmation
+        fixture.platformSDKMigrationMock.shouldConfirmMigrationResult = false
+        // AND GIVEN that the user is logged in with the Onboarding Vpn Profile installed
+        fixture.accountProvierMock.isLoggedIn = true
+        stubOnboardingVpnInstallation(finished: true)
+
+        // WHEN the app is launched
+        instantiateSut()
+
+        // THEN the migration screen is skipped and the app bootstraps straight away
+        XCTAssertEqual(sut.state, .activated)
+        XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 1)
+        XCTAssertEqual(fixture.platformSDKMigrationMock.confirmMigrationCalledAttempt, 0)
+    }
+
+    func testState_WhenThePlatformSDKMigrationIsConfirmed() {
+        // GIVEN an app parked on the migration screen
+        fixture.platformSDKMigrationMock.shouldConfirmMigrationResult = true
+        fixture.accountProvierMock.isLoggedIn = true
+        stubOnboardingVpnInstallation(finished: true)
+        instantiateSut(bootStrapped: false)
+        XCTAssertEqual(sut.state, .platformSDKMigration)
+
+        // WHEN the user confirms the migration
+        sut.confirmPlatformSDKMigration()
+
+        // THEN the consent is recorded before the app bootstraps
+        XCTAssertEqual(fixture.platformSDKMigrationMock.confirmMigrationCalledAttempt, 1)
+        XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 1)
+
+        // AND the app resumes the normal state machine
+        XCTAssertEqual(sut.state, .activated)
+    }
+
+    func testBootstrapper_WhenThePlatformSDKMigrationIsConfirmedTwice() {
+        // GIVEN an app parked on the migration screen
+        fixture.platformSDKMigrationMock.shouldConfirmMigrationResult = true
+        fixture.accountProvierMock.isLoggedIn = true
+        stubOnboardingVpnInstallation(finished: true)
+        instantiateSut(bootStrapped: false)
+
+        // WHEN the confirm button is pressed twice before the screen goes away
+        sut.confirmPlatformSDKMigration()
+        sut.confirmPlatformSDKMigration()
+
+        // THEN the app bootstraps once: a second run traps in `LoggingSystem.bootstrap` and
+        // registers the VPN profiles again
+        XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 1)
+    }
+
+    func testState_WhileThePlatformSDKMigrationCheckIsStillRunning() {
+        // GIVEN a migration check that has not answered yet
+        fixture.platformSDKMigrationMock.withholdsShouldConfirmMigrationAnswer = true
+
+        // WHEN the app is launched
+        instantiateSut(bootStrapped: false)
+
+        // THEN the splash screen stays up and nothing is bootstrapped
+        XCTAssertEqual(sut.state, .splash)
+        XCTAssertEqual(fixture.bootstrapMock.callAsFunctionTimesCalled, 0)
+    }
+
+    func testState_WhenTheAccountChangesWhileTheMigrationScreenIsUp() {
+        // GIVEN an app parked on the migration screen
+        fixture.platformSDKMigrationMock.shouldConfirmMigrationResult = true
+        fixture.stubUserAuthenticationStatusMonitor(status: .loggedOut)
+        instantiateSut(bootStrapped: false)
+        XCTAssertEqual(sut.state, .platformSDKMigration)
+
+        // WHEN the account status changes underneath it
+        fixture.accountProvierMock.isLoggedIn = true
+        fixture.userAuthenticationStatusMonitorMock.status.send(.loggedIn)
+
+        // THEN the migration screen is not replaced
+        XCTAssertEqual(sut.state, .platformSDKMigration)
     }
 
     func testState_WhenUserIsNotAuthenticatedAndAuthenticates() {
