@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Informações de depuração em branco. Conecte-se antes de tentar reenviar.";
 "settings.application_information.debug.success.title" = "Informações de depuração enviadas";
 "settings.application_information.debug.success.message" = "Informações de depuração enviadas com sucesso.\nID: %@\nPor favor, anote este ID, pois a nossa equipe de suporte irá solicitá-lo para localizar o envio.";
+"settings.application_information.debug.success.copyId" = "Copiar ID";
 
 "settings.commit.messages.must_disconnect" = "A VPN deve reconectar para que algumas mudanças entrem em efeito.";
 "settings.commit.messages.should_reconnect" = "Reconecte a VPN para aplicar as mudanças.";

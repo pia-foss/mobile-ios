@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Les informations de débogage sont vides, veuillez tenter une connexion avant de réessayer l'envoi.";
 "settings.application_information.debug.success.title" = "Informations de débogage envoyées";
 "settings.application_information.debug.success.message" = "Informations de débogage envoyées avec succès.\nID : %@\nVeuillez noter cet ID car notre équipe d'assistance en a besoin pour localiser votre message.";
+"settings.application_information.debug.success.copyId" = "Copier l'ID";
 
 "settings.commit.messages.must_disconnect" = "Le VPN doit se reconnecter pour appliquer certaines modifications.";
 "settings.commit.messages.should_reconnect" = "Reconnectez le VPN pour appliquer les modifications.";

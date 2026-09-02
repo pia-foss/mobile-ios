@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Отладочная информация пуста, перед тем как повторно отправлять информацию, повторите попытку подключения.";
 "settings.application_information.debug.success.title" = "Отладочная информация отправлена";
 "settings.application_information.debug.success.message" = "Отладочная информация успешно отправлена.\nКод: %@\nЗапишите этот код, т. к. наша служба поддержки запрашивает его для поиска переданных вами данных.";
+"settings.application_information.debug.success.copyId" = "Копировать код";
 
 "settings.commit.messages.must_disconnect" = "Чтобы некоторые изменения вступили в силу, надо переподключиться к VPN.";
 "settings.commit.messages.should_reconnect" = "Чтобы изменения вступили в силу, переподключитесь к VPN.";

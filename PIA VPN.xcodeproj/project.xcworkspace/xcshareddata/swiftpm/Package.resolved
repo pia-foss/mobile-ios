@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "appauth-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/openid/AppAuth-iOS.git",
+      "state" : {
+        "revision" : "2781038865a80e2c425a1da12cc1327bcd56501f",
+        "version" : "1.7.6"
+      }
+    },
+    {
       "identity" : "apple-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pia-foss/apple-core.git",
@@ -151,6 +160,15 @@
       "state" : {
         "revision" : "6a52f3251125d74daf04fcbd5e6f08a75d074382",
         "version" : "1.8.2"
+      }
+    },
+    {
+      "identity" : "swift-async-dns-resolver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-async-dns-resolver",
+      "state" : {
+        "revision" : "e145f21e97cc40ee744e1276b21426ed47ab9d88",
+        "version" : "0.7.1"
       }
     },
     {

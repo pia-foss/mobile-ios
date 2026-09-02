@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Feilsøkinfo er tom. Prøv å koble deg på igjen før du sender inn på nytt.";
 "settings.application_information.debug.success.title" = "Feilsøkinfo sendt inn";
 "settings.application_information.debug.success.message" = "Feilsøkinfo sendt. \nID: %@\nSkriv ned ID-en. Kundestøtte trenger den for å finne meldingen din.";
+"settings.application_information.debug.success.copyId" = "Kopier ID";
 
 "settings.commit.messages.must_disconnect" = "VPN-en må koble til igjen for at enkelte endringer skal tre i kraft.";
 "settings.commit.messages.should_reconnect" = "Koble til VPN-en igjen for å ta i bruk endringene.";

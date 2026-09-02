@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "ข้อมูลแก้จุดบกพร่องว่างเปล่า กรุณาพยายามเชื่อมต่อก่อนลองส่งใหม่อีกครั้ง";
 "settings.application_information.debug.success.title" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว";
 "settings.application_information.debug.success.message" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว \nID: %@\nกรุณาจด ID นี้ไว้ เนื่องจากทีมสนับสนุนของเราอาจสอบถามข้อมูลนี้เพื่อตรวจสอบการส่งข้อมูลของคุณ";
+"settings.application_information.debug.success.copyId" = "คัดลอก ID";
 
 "settings.commit.messages.must_disconnect" = "ต้องเชื่อมต่อ VPN อีกครั้งเพื่อให้เกิดความเปลี่ยนแปลง";
 "settings.commit.messages.should_reconnect" = "เชื่อมต่อ VPN อีกครั้งเพื่อใช้ความเปลี่ยนแปลง";

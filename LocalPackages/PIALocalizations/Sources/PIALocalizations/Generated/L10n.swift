@@ -859,6 +859,8 @@ public enum L10n {
           public static let title = L10n.tr("Localizable", "settings.application_information.debug.failure.title", fallback: "Error during submission")
         }
         public enum Success {
+          /// Copy ID
+          public static let copyId = L10n.tr("Localizable", "settings.application_information.debug.success.copyId", fallback: "Copy ID")
           /// Debug information successfully submitted.
           /// ID: %@
           /// Please note this ID, as our support team will require this to locate your submission.

@@ -273,34 +273,46 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
 
     private func submitDebugReport() {
         self.showLoadingAnimation()
-        Task { @MainActor in
-            defer { self.hideLoadingAnimation() }
+        Task { [weak self] in
+            guard let self else { return }
 
             let title: String
             let message: String
+            let reportId: String?
 
             do {
-                let reportId = try await Client.submitDebugReport()
-                guard !reportId.isEmpty else {
+                reportId = try await Client.submitDebugReport()
+                if let reportId, !reportId.isEmpty {
+                    title = L10n.Settings.ApplicationInformation.Debug.Success.title
+                    message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
+                } else {
+                    log.warning("CSI report ID was empty")
                     title = L10n.Settings.ApplicationInformation.Debug.Empty.title
                     message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                    self.showAlert(title: title, message: message)
-                    return
                 }
-                title = L10n.Settings.ApplicationInformation.Debug.Success.title
-                message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
             } catch {
+                log.error("Failed to submit debug report: \(error)")
                 title = L10n.Settings.ApplicationInformation.Debug.Failure.title
                 message = L10n.Settings.ApplicationInformation.Debug.Failure.message
+                reportId = nil
             }
 
-            self.showAlert(title: title, message: message)
+            await MainActor.run {
+                self.hideLoadingAnimation()
+                self.showAlert(title: title, message: message, reportId: reportId)
+            }
         }
     }
 
-    private func showAlert(title: String, message: String) {
+    @MainActor
+    private func showAlert(title: String, message: String, reportId: String?) {
         let alert = Macros.alert(title, message)
-        alert.addDefaultAction(L10n.Global.ok)
+        alert.addCancelAction(L10n.Global.close)
+        if let reportId, !reportId.isEmpty {
+            alert.addActionWithTitle(L10n.Settings.ApplicationInformation.Debug.Success.copyId) {
+                UIPasteboard.general.string = reportId
+            }
+        }
         self.present(alert, animated: true, completion: nil)
     }
 

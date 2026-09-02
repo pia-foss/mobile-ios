@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "调试信息为空，请尝试连接，然后重试提交。";
 "settings.application_information.debug.success.title" = "调试信息已提交";
 "settings.application_information.debug.success.message" = "调试信息成功提交。\nID：%@\n请记下此 ID，因为我们的支持团队需要该信息来找到您提交的内容。";
+"settings.application_information.debug.success.copyId" = "复制 ID";
 
 "settings.commit.messages.must_disconnect" = "VPN 必须重新连接，某些更改才能生效。";
 "settings.commit.messages.should_reconnect" = "重新连接 VPN 以应用更改。";
