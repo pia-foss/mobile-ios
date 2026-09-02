@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "디버그 정보가 비어 있습니다. 다시 제출하시기 전에 연결을 시도하십시오.";
 "settings.application_information.debug.success.title" = "디버그 정보 제출 완료";
 "settings.application_information.debug.success.message" = "디버그 정보 제출 성공. \nID: %@\n저희 지원팀이 귀하의 제출 정보를 확인하려면 이 ID가 필요하므로 적어두시기 바랍니다.";
+"settings.application_information.debug.success.copyId" = "ID 복사";
 
 "settings.commit.messages.must_disconnect" = "변경사항이 반영되려면 VPN을 다시 연결해야 합니다.";
 "settings.commit.messages.should_reconnect" = "변경사항을 적용하려면 VPN에 다시 연결하세요.";

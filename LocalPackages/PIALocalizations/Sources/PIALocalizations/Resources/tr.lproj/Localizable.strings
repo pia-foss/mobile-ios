@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Hata bulma bilgileri boş, tekrar göndermeyi denemeden önce lütfen bir bağlantı gerçekleştirin.";
 "settings.application_information.debug.success.title" = "Hata ayıklama bilgileri gönderildi";
 "settings.application_information.debug.success.message" = "Hata bulma bilgileri başarıyla gönderildi.\nID: %@\nLütfen bu ID'yi not edin, destek ekibimiz gönderinizi bulmak için isteyecek.";
+"settings.application_information.debug.success.copyId" = "ID'yi kopyala";
 
 "settings.commit.messages.must_disconnect" = "Bazı değişikliklerin uygulanması için VPN'in yeniden bağlanması gerekiyor.";
 "settings.commit.messages.should_reconnect" = "Değişiklikleri uygulamak için VPN'e tekrar bağlanın.";

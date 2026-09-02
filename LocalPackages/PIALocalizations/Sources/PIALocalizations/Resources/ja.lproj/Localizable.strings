@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "デバッグ情報が空です。送信を再試行する前に接続してみてください。";
 "settings.application_information.debug.success.title" = "デバッグ情報が送信されました";
 "settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
+"settings.application_information.debug.success.copyId" = "IDをコピー";
 
 "settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";
 "settings.commit.messages.should_reconnect" = "変更を適用するにはVPNに再度接続してください。";

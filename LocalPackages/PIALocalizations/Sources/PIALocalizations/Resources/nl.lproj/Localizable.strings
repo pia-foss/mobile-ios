@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Debuginformatie is leeg. Maak verbinding voordat u de informatie opnieuw verstuurt.";
 "settings.application_information.debug.success.title" = "Debuginformatie verzonden";
 "settings.application_information.debug.success.message" = "Debuginformatie verzonden.\nID: %@\nLet op: ons ondersteuningsteam heeft deze ID nodig om uw inzending te vinden.";
+"settings.application_information.debug.success.copyId" = "ID kopiëren";
 
 "settings.commit.messages.must_disconnect" = "De VPN moet opnieuw verbinding maken om de wijzigingen door te voeren.";
 "settings.commit.messages.should_reconnect" = "Laat de VPN opnieuw verbinding maken om de wijzigingen toe te passen.";

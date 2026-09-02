@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Fejloplysninger er tomt. Prøv venligst at oprette forbindelse, før du forsøger at indsende igen.";
 "settings.application_information.debug.success.title" = "Fejloplysninger indsendt";
 "settings.application_information.debug.success.message" = "Fejloplysninger indsendt.\nID: %@\nGem venligst dette ID, da vores supportteam har brug for det, for at finde din indsendelse.";
+"settings.application_information.debug.success.copyId" = "Kopiér ID";
 
 "settings.commit.messages.must_disconnect" = "VPN'en skal genoprette forbindelse før nogle ændringer træder i kraft.";
 "settings.commit.messages.should_reconnect" = "Opret forbindelse til VPN igen, for at anvende ændringer.";

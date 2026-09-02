@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Non ci sono informazioni di debug, per favore prova a connetterti prima di riprovare l'invio.";
 "settings.application_information.debug.success.title" = "Informazioni di debug inviate";
 "settings.application_information.debug.success.message" = "Informazioni di debug inviate.\nID: %@\nPrendi nota di questo ID, il nostro team di assistenza te lo chiederà per localizzare la tua richiesta.";
+"settings.application_information.debug.success.copyId" = "Copia ID";
 
 "settings.commit.messages.must_disconnect" = "La VPN deve riconnettersi perché alcune modifiche vengano applicate.";
 "settings.commit.messages.should_reconnect" = "Riconnetti la VPN per applicare le modifiche.";

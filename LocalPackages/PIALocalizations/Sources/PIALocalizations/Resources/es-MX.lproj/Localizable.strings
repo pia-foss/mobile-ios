@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "La información de depuración está vacía. Intenta conectarte antes de volver a intentar el envío.";
 "settings.application_information.debug.success.title" = "Información de depuración enviada";
 "settings.application_information.debug.success.message" = "Se envió correctamente la información de depuración.\nID: %@\nPor favor, anota esta ID, ya que nuestro equipo de asistencia la solicitará para ubicar tu envío.";
+"settings.application_information.debug.success.copyId" = "Copiar ID";
 
 "settings.commit.messages.must_disconnect" = "La VPN debe conectarse de nuevo para que algunos cambios tengan efecto.";
 "settings.commit.messages.should_reconnect" = "Volver a conectar la VPN para aplicar los cambios.";
