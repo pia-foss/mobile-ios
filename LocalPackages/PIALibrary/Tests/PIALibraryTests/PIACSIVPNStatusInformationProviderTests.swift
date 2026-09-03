@@ -38,6 +38,7 @@ struct PIACSIVPNStatusInformationProviderTests {
         status: String = "connected",
         connectedVia: String = "PIA",
         vpnType: String = "WireGuard",
+        obfuscation: String? = "none",
         publicIP: String? = "10.0.12.34",
         vpnIP: String? = "10.9.8.7",
         redactIPs: Bool = false
@@ -46,10 +47,23 @@ struct PIACSIVPNStatusInformationProviderTests {
             status: status,
             connectedVia: connectedVia,
             vpnType: vpnType,
+            obfuscation: obfuscation,
             publicIP: publicIP,
             vpnIP: vpnIP,
             redactIPs: redactIPs
         )
+    }
+
+    @Test("An AmneziaWG connection is distinguishable from plain WireGuard")
+    func reportsAmneziaObfuscation() {
+        let content = makeProvider(obfuscation: "amnezia").content
+        #expect(content?.contains("Obfuscation: amnezia") == true)
+    }
+
+    @Test("An unresolved obfuscation is reported as a placeholder")
+    func missingObfuscation() {
+        let content = makeProvider(obfuscation: nil).content
+        #expect(content?.contains("Obfuscation: ---") == true)
     }
 
     @Test("Section name matches the CSI report contract")
@@ -62,14 +76,16 @@ struct PIACSIVPNStatusInformationProviderTests {
         let content = makeProvider().content
         #expect(
             content
-                == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nPublic IP: 10.0.12.34\nVPN IP: 10.9.8.7"
+                == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nObfuscation: none\nPublic IP: 10.0.12.34\nVPN IP: 10.9.8.7"
         )
     }
 
     @Test("Unknown IPs are reported as placeholders")
     func missingIPs() {
         let content = makeProvider(publicIP: nil, vpnIP: nil).content
-        #expect(content == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nPublic IP: ---\nVPN IP: ---")
+        #expect(
+            content
+                == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nObfuscation: none\nPublic IP: ---\nVPN IP: ---")
     }
 
     @Test("IP addresses are redacted when requested")
@@ -77,7 +93,7 @@ struct PIACSIVPNStatusInformationProviderTests {
         let content = makeProvider(redactIPs: true).content
         #expect(
             content
-                == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nPublic IP: REDACTED\nVPN IP: REDACTED"
+                == "Status: connected\nConnected Via: PIA\nProtocol: WireGuard\nObfuscation: none\nPublic IP: REDACTED\nVPN IP: REDACTED"
         )
     }
 
@@ -86,7 +102,7 @@ struct PIACSIVPNStatusInformationProviderTests {
         let content = makeProvider(status: "disconnected", connectedVia: "Not PIA", vpnIP: nil).content
         #expect(
             content
-                == "Status: disconnected\nConnected Via: Not PIA\nProtocol: WireGuard\nPublic IP: 10.0.12.34\nVPN IP: ---"
+                == "Status: disconnected\nConnected Via: Not PIA\nProtocol: WireGuard\nObfuscation: none\nPublic IP: 10.0.12.34\nVPN IP: ---"
         )
     }
 
@@ -95,7 +111,7 @@ struct PIACSIVPNStatusInformationProviderTests {
         let content = makeProvider(status: "disconnected", connectedVia: "---", vpnIP: nil).content
         #expect(
             content
-                == "Status: disconnected\nConnected Via: ---\nProtocol: WireGuard\nPublic IP: 10.0.12.34\nVPN IP: ---"
+                == "Status: disconnected\nConnected Via: ---\nProtocol: WireGuard\nObfuscation: none\nPublic IP: 10.0.12.34\nVPN IP: ---"
         )
     }
 }
