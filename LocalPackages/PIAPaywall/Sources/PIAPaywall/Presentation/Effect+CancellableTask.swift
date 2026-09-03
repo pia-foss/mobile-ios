@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  Effect+CancellableTask.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -21,18 +21,17 @@
 
 import CoreArchitecture
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+extension Effect {
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    /// Like `Effect.task`, but drops the resulting action if the effect was cancelled while the
+    /// work was in flight.
+    static func cancellableTask(
+        id: AnyHashable,
+        _ work: @escaping @MainActor () async -> Action?
+    ) -> Effect {
+        .task(id: id) {
+            let action = await work()
+            return Task.isCancelled ? nil : action
+        }
     }
 }

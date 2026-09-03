@@ -107,7 +107,7 @@ public struct SignupPaywallView: View {
                 }
 
                 if store.state.layout == .wide {
-                    logo
+                    PIALogoView()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, PIASpacing.s40)
                         .padding(.top, PIASpacing.s40)
@@ -187,18 +187,10 @@ public struct SignupPaywallView: View {
 
     private var header: some View {
         VStack(spacing: isTablet ? PIASpacing.s20 : PIASpacing.s12) {
-            logo
+            PIALogoView()
             SocialProofRow()
             hero
         }
-    }
-
-    private var logo: some View {
-        Asset.navLogo.swiftUIImage
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 50)
-            .accessibilityHidden(true)
     }
 
     private var hero: some View {

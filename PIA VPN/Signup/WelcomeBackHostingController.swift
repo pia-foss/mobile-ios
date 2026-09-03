@@ -1,6 +1,6 @@
 //
-//  PaywallStore.swift
-//  PIAPaywall
+//  WelcomeBackHostingController.swift
+//  PIA VPN
 //
 //  Copyright © 2026 Private Internet Access, Inc.
 //
@@ -19,20 +19,16 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import PIAPaywall
+import SwiftUI
+import UIKit
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+/// Hosts the SwiftUI welcome-back screen inside UIKit.
+final class WelcomeBackHostingController: UIHostingController<WelcomeBackView> {
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        traitCollection.userInterfaceStyle == .dark ? .lightContent : .darkContent
     }
 }
+
+extension WelcomeBackHostingController: PortraitLockedViewController {}
