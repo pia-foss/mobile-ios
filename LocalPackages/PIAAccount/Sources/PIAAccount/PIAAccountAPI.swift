@@ -150,6 +150,12 @@ public protocol PIAAccountAPI {
     /// - Throws: PIAAccountError if the request fails
     func clientStatus(requestTimeoutMillis: UInt) async throws -> ClientStatusInformation
 
+    /// Retrieves the geolocation of the caller's public IP
+    /// - Parameter requestTimeoutMillis: Timeout in milliseconds
+    /// - Returns: Geo information
+    /// - Throws: PIAAccountError if the request fails
+    func geo(requestTimeoutMillis: UInt) async throws -> GeoInformation
+
     // MARK: - Email Management
 
     /// Sets or updates the account email

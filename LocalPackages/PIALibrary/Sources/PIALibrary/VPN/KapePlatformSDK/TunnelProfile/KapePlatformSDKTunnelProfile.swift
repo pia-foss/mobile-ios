@@ -226,7 +226,8 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
             selectedDipServer: server.dipToken != nil ? server : nil,
             selectedProtocol: tunnelProtocol,
             openVPN: openVPN ?? PIATunnelSharedState.OpenVPNSettings(),
-            wireGuard: wireGuard ?? PIATunnelSharedState.WireGuardSettings()
+            wireGuard: wireGuard ?? PIATunnelSharedState.WireGuardSettings(),
+            geoCountryCode: Client.database.plain.geoCountryCode
         )
     }
 

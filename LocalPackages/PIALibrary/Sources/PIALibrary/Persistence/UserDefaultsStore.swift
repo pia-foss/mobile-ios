@@ -36,6 +36,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case publicIP = "PublicIP"
 
+        case geoCountryCode = "GeoCountryCode"
+
         case lastServerCN = "LastServerCN"
 
         case historicalServers = "HistoricalServers"
@@ -246,6 +248,19 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
                 backend.set(publicIP, forKey: .publicIP)
             } else {
                 backend.removeObject(forKey: .publicIP)
+            }
+        }
+    }
+
+    var geoCountryCode: String? {
+        get {
+            return backend.string(forKey: .geoCountryCode)
+        }
+        set {
+            if let geoCountryCode = newValue {
+                backend.set(geoCountryCode, forKey: .geoCountryCode)
+            } else {
+                backend.removeObject(forKey: .geoCountryCode)
             }
         }
     }
