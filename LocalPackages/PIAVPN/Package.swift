@@ -27,6 +27,10 @@ let package = Package(
                 .product(name: "KapeVPN-PacketTunnel", package: "KapePlatformSDK"),
                 .product(name: "PIALibrary", package: "PIALibrary")
             ]
+        ),
+        .testTarget(
+            name: "PIAVPNTests",
+            dependencies: ["PIAVPN"]
         )
     ],
     swiftLanguageModes: [.v5]

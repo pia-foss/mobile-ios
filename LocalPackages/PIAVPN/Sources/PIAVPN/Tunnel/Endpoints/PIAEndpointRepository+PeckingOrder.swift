@@ -17,6 +17,11 @@ extension PIAEndpointRepository {
         let attempts: Int
     }
 
+    /// Stands in for the real AmneziaWG parameters, which only exist once the AWG server has answered
+    /// the key exchange — `PIAWireguardAuthenticator` overwrites this with the values it receives.
+    static let amneziaPlaceholder: WireguardObfuscation = .amnezia(
+        s1: 0, s2: 0, jc: 0, jmin: 0, jmax: 0, h1: 0, h2: 0, h3: 0, h4: 0)
+
     static let normalPeckingOrder: [PeckingStep] = [
         PeckingStep(kind: .wireGuard(amnezia: false), port: wireGuardPort, attempts: 3),
         PeckingStep(kind: .openVPN(.udp), port: openVPNPortUDP, attempts: 2),
@@ -24,11 +29,29 @@ extension PIAEndpointRepository {
     ]
 
     static let censorshipPeckingOrder: [PeckingStep] = [
-        PeckingStep(kind: .wireGuard(amnezia: true), port: wireGuardPort, attempts: 3),
+        PeckingStep(kind: .wireGuard(amnezia: true), port: amneziaPort, attempts: 3),
         PeckingStep(kind: .wireGuard(amnezia: false), port: wireGuardPort, attempts: 3),
         PeckingStep(kind: .openVPN(.tcp), port: openVPNPortTCP, attempts: 2),
         PeckingStep(kind: .openVPN(.udp), port: openVPNPortUDP, attempts: 2)
     ]
+
+    /// Countries whose networks censor plain VPN protocols, so AmneziaWG is tried first. ISO
+    /// `country_code2` values, matching what `/api/geo` returns.
+    static let censoredCountryCodes: Set<String> = ["CN", "IR", "RU"]
+
+    /// Picks the pecking order from the user's own country, resolved by the app while disconnected
+    /// (`ConnectivityDaemon`) and carried in shared state. Unknown country keeps the normal order:
+    /// AmneziaWG is served by very few regions, so guessing censorship would waste attempts.
+    func peckingOrder(for state: PIATunnelSharedState.State) -> [PeckingStep] {
+        guard let countryCode = state.geoCountryCode?.uppercased() else {
+            logger.info("No resolved country — using the normal pecking order")
+            return Self.normalPeckingOrder
+        }
+
+        let isCensored = Self.censoredCountryCodes.contains(countryCode)
+        logger.info("Country \(countryCode) — using the \(isCensored ? "censorship" : "normal") pecking order")
+        return isCensored ? Self.censorshipPeckingOrder : Self.normalPeckingOrder
+    }
 
     /// Builds the automatic-mode batch by walking a pecking order across the eligible servers, each
     /// step contributing up to `attempts` distinct endpoints. Defaults to the Normal-countries order.
@@ -43,22 +66,12 @@ extension PIAEndpointRepository {
             let endpoints: [any VpnConfiguration]
             switch step.kind {
             case .wireGuard(let amnezia):
-                // Resolved per step, not per server, so the fan-out can't repeat the same line.
-                let obfuscation: WireguardObfuscation
-                if amnezia {
-                    guard let resolved = amneziaObfuscation(state: state) else {
-                        logger.info("Step \(index + 1)/\(order.count) (AmneziaWG): parameters not available yet — skipped")
-                        continue
-                    }
-                    obfuscation = resolved
-                } else {
-                    obfuscation = .none
-                }
                 endpoints = servers.flatMap { server in
                     generateWireGuardConfigurations(
                         server: server,
                         state: state,
-                        obfuscation: obfuscation
+                        obfuscation: amnezia ? Self.amneziaPlaceholder : .none,
+                        port: step.port
                     )
                 }
 
@@ -99,11 +112,5 @@ extension PIAEndpointRepository {
         case .openVPN(let transport):
             return "OpenVPN \(transport.rawValue) :\(step.port)"
         }
-    }
-
-    /// Resolves the AmneziaWG obfuscation for a censorship WireGuard step. Returns `nil` for now.
-    /// Server-independent — the caller resolves it once per step and logs the outcome there.
-    private func amneziaObfuscation(state: PIATunnelSharedState.State) -> WireguardObfuscation? {
-        nil
     }
 }

@@ -7,7 +7,17 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
     private let logger = PIATunnelLogger(label: "PIAWireguardAuthenticator")
 
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardEndpointConfiguration {
-        logger.info("Authenticating WireGuard key with server")
+        // AmneziaWG servers serve their key exchange on their own path and port.
+        let isAmnezia = if case .amnezia = config.obfuscation {
+            true
+        } else {
+            false
+        }
+
+        let label = isAmnezia ? "AmneziaWG" : "WireGuard"
+        let path = isAmnezia ? "add-awg-key" : "addKey"
+
+        logger.info("Authenticating \(label) key with server")
 
         let sharedState = PIATunnelSharedState.read()
 
@@ -32,7 +42,7 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         guard
             let encodedPubkey = publicKeyBase64.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved),
             let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved),
-            let url = URL(string: "https://\(host):\(config.authPort)/addKey?pubkey=\(encodedPubkey)&pt=\(encodedToken)")
+            let url = URL(string: "https://\(host):\(config.authPort)/\(path)?pubkey=\(encodedPubkey)&pt=\(encodedToken)")
         else {
             logger.error("Failed to build key-exchange URL for \(host):\(config.authPort)")
             throw PIAWireguardAuthError.invalidURL
@@ -73,7 +83,7 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
             response = try JSONDecoder().decode(WGKeyResponse.self, from: resultData)
         } catch {
             let detail = errorDetail(in: resultData, redacting: token)
-            logger.error("addKey to \(host):\(config.authPort) rejected — http \(statusCode), \(detail)")
+            logger.error("\(path) to \(host):\(config.authPort) rejected — http \(statusCode), \(detail)")
             throw PIAWireguardAuthError.serverError("http \(statusCode): \(detail)")
         }
         guard response.status == "OK" else {
@@ -81,7 +91,11 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
             throw PIAWireguardAuthError.serverError(response.status)
         }
 
-        logger.info("WireGuard authentication succeeded (peer ip: \(response.peer_ip))")
+        logger.info("\(label) authentication succeeded (peer ip: \(response.peer_ip))")
+
+        if let echoed = response.peer_pubkey, echoed != publicKeyBase64 {
+            logger.warning("Key-exchange server echoed a different public key than the one sent")
+        }
 
         // Resolve the DNS the tunnel should use. The user's custom DNS choice (Settings → Network),
         // carried in shared state, takes precedence. When the user kept the PIA default the list is
@@ -101,6 +115,18 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         authenticated.clientPrivateKey = privateKeyBase64
         authenticated.internalIp = response.peer_ip
         authenticated.dnsServers = dnsServers
+
+        // The endpoint was built with placeholder parameters; only the server knows the real ones, so
+        // an amnezia endpoint that gets none back must fail rather than connect with the placeholder.
+        if isAmnezia {
+            guard let obfuscation = response.obfuscation else {
+                logger.error("AmneziaWG key exchange returned no obfuscation parameters")
+                throw PIAWireguardAuthError.missingObfuscation
+            }
+            authenticated.obfuscation = obfuscation.asWireguardObfuscation
+            logger.info("AmneziaWG obfuscation resolved — \(obfuscation.summary)")
+        }
+
         return authenticated
     }
 
@@ -130,13 +156,36 @@ private enum PIAWireguardAuthError: Error {
     case invalidURL
     case serverError(String)
     case missingAnchorCertificate
+    case missingObfuscation
 }
 
-private struct WGKeyResponse: Decodable {
+struct WGKeyResponse: Decodable {
     let status: String
     let server_key: String
     let peer_ip: String
     let dns_servers: [String]?
+    let peer_pubkey: String?
+    let obfuscation: WGObfuscationResponse?
+}
+
+struct WGObfuscationResponse: Decodable {
+    let s1: UInt64
+    let s2: UInt64
+    let jc: UInt64
+    let jmin: UInt64
+    let jmax: UInt64
+    let h1: UInt64
+    let h2: UInt64
+    let h3: UInt64
+    let h4: UInt64
+
+    var asWireguardObfuscation: WireguardObfuscation {
+        .amnezia(s1: s1, s2: s2, jc: jc, jmin: jmin, jmax: jmax, h1: h1, h2: h2, h3: h3, h4: h4)
+    }
+
+    var summary: String {
+        "s1: \(s1), s2: \(s2), jc: \(jc), jmin: \(jmin), jmax: \(jmax), h1: \(h1), h2: \(h2), h3: \(h3), h4: \(h4)"
+    }
 }
 
 /// `URLSessionDelegate` that pins the key-exchange TLS connection to the bundled PIA root CA.
