@@ -84,9 +84,12 @@ final class IPTile: UIView, Tileable {
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue
         self.localIpValue.accessibilityLabel = Client.daemons.publicIP ?? L10n.Global.empty
+        self.localIpValue.numberOfLines = 3
+        self.localIpValue.lineBreakMode = .byWordWrapping
         self.vpnIpValue.text = emptyIPValue
         self.vpnIpValue.accessibilityLabel = L10n.Global.empty
-
+        self.vpnIpValue.numberOfLines = 3
+        self.vpnIpValue.lineBreakMode = .byWordWrapping
     }
 
     private func viewShouldRestyle() {
