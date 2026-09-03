@@ -36,6 +36,19 @@ extension PIAWebServices {
         }
     }
 
+    func geoCheck() async -> Result<GeoStatus, Error> {
+        do {
+            let information = try await nativeAccountAPI.geo(requestTimeoutMillis: 3_000)
+            guard let countryCode = information.countryCode, !countryCode.isEmpty else {
+                return .failure(ClientError.malformedResponseData)
+            }
+            return .success(
+                GeoStatus(countryCode: countryCode, isUsingPIAServer: information.usingPIAServer ?? false))
+        } catch {
+            return .failure(error)
+        }
+    }
+
     func submitDebugReport() async throws -> String {
         try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
     }

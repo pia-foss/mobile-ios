@@ -36,6 +36,10 @@ protocol PlainStore: AnyObject {
 
     var publicIP: String? { get set }
 
+    /// ISO country code of the user's own public IP, from `/api/geo`. Only ever written while
+    /// disconnected, so it stays the user's country and not a VPN exit's.
+    var geoCountryCode: String? { get set }
+
     var lastServerCN: String? { get set }
 
     // MARK: Server
