@@ -157,10 +157,29 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 } else {
                     self.accessedDatabase.plain.publicIP = ipAddress
                     log.debug("Public IP -> \(ipAddress)")
+                    await self.refreshGeoCountryCode()
                 }
 
                 Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             }
+        }
+    }
+
+    /// Resolves the user's country from `/api/geo`, for the censorship pecking order. Only called
+    /// while disconnected: through the tunnel the endpoint would report the exit node's country.
+    /// A failure leaves the last known value in place — a stale country beats none.
+    private func refreshGeoCountryCode() async {
+        switch await accessedWebServices.geoCheck() {
+        case .failure(let error):
+            log.error("Failed to resolve geo country (error: \(error))")
+
+        case .success(let geo):
+            guard !geo.isUsingPIAServer else {
+                log.debug("Skipping geo country: the lookup was answered through a PIA server")
+                return
+            }
+            accessedDatabase.plain.geoCountryCode = geo.countryCode
+            log.debug("Geo country -> \(geo.countryCode)")
         }
     }
 

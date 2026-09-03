@@ -301,6 +301,7 @@ import Testing
         #expect(APIPath.signup.subdomain == "api")
         #expect(APIPath.setEmail.subdomain == "api")
         #expect(APIPath.clientStatus.subdomain == "api")
+        #expect(APIPath.geo.subdomain == "api")
         #expect(APIPath.invites.subdomain == "api")
         #expect(APIPath.redeem.subdomain == "api")
         #expect(APIPath.iosPayment.subdomain == "api")

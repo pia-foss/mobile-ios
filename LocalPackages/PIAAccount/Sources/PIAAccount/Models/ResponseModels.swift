@@ -169,6 +169,19 @@ public struct ClientStatusInformation: Codable, Sendable {
     public let ip: String
 }
 
+// MARK: - Geo Information
+
+/// Geolocation of the caller's public IP. Only the fields the client acts on are decoded.
+public struct GeoInformation: Codable, Sendable {
+    public let countryCode: String?
+    public let usingPIAServer: Bool?
+
+    private enum CodingKeys: String, CodingKey {
+        case countryCode = "country_code2"
+        case usingPIAServer = "using_pia_server"
+    }
+}
+
 // MARK: - Feature Flags Information
 
 /// Feature flags for the application
