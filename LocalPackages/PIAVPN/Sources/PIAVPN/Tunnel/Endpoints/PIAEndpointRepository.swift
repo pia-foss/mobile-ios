@@ -43,10 +43,9 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         case .openVPN:
             return servers.flatMap { generateOpenVPNConfigurations(server: $0, state: state) }
         case .automatic:
-            // Hardcoded "Normal countries" pecking order (WireGuard → OpenVPN UDP → OpenVPN TCP) with
-            // per-protocol distinct-endpoint counts, built in `PIAEndpointRepository+PeckingOrder.swift`.
+            // Pecking order per country, built in `PIAEndpointRepository+PeckingOrder.swift`.
             // Transport and port are dictated by the pecking order, not the user's saved OpenVPN settings.
-            return automaticConfigurations(servers: servers, state: state)
+            return automaticConfigurations(servers: servers, state: state, order: peckingOrder(for: state))
         }
     }
 
