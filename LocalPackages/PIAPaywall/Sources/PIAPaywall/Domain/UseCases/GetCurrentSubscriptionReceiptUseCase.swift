@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  GetCurrentSubscriptionReceiptUseCase.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -19,20 +19,20 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import PIABase
+import PIALibrary
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
+/// The signed receipt for this App Store account's current subscription, if any.
 ///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+/// Reads what StoreKit already knows; does not call `AppStore.sync()`.
+public struct GetCurrentSubscriptionReceiptUseCase {
+    private let store: InAppProvider
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    public init(store: InAppProvider) {
+        self.store = store
+    }
+
+    public func callAsFunction() async -> JWS? {
+        await store.currentEntitlementJWS()
     }
 }

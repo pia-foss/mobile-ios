@@ -1460,6 +1460,22 @@ public enum L10n {
       /// Error
       public static let vcTitle = L10n.tr("Localizable", "signup.unreachable.vc_title", fallback: "Error")
     }
+    public enum WelcomeBack {
+      /// You have a Private Internet Access subscription linked to the App Store. Sign in to protect your device and see our latest features.
+      public static let message = L10n.tr("Localizable", "signup.welcome_back.message", fallback: "You have a Private Internet Access subscription linked to the App Store. Sign in to protect your device and see our latest features.")
+      /// Or
+      public static let or = L10n.tr("Localizable", "signup.welcome_back.or", fallback: "Or")
+      /// Sign In with
+      public static let signInWith = L10n.tr("Localizable", "signup.welcome_back.sign_in_with", fallback: "Sign In with")
+      /// Welcome Back!
+      public static let title = L10n.tr("Localizable", "signup.welcome_back.title", fallback: "Welcome Back!")
+      public enum Cta {
+        /// App Store Account
+        public static let appStore = L10n.tr("Localizable", "signup.welcome_back.cta.app_store", fallback: "App Store Account")
+        /// Username and Password
+        public static let credentials = L10n.tr("Localizable", "signup.welcome_back.cta.credentials", fallback: "Username and Password")
+      }
+    }
   }
   public enum Siri {
     public enum Shortcuts {

@@ -35,7 +35,6 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
-@MainActor
 final class SignupCoordinator: NSObject, Coordinator {
 
     enum Output {
@@ -49,6 +48,9 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
+    private var welcomeBackCoordinator: WelcomeBackCoordinator?
+    private var welcomeBackCancellables = Set<AnyCancellable>()
+
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
     /// What the host installs as its root or presents modally. A navigation controller, because the
@@ -57,15 +59,17 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     init(
         accountProvider: AccountProvider,
-        navigationController: UINavigationController = UINavigationController()
+        navigationController: UINavigationController? = nil
     ) {
         self.accountProvider = accountProvider
-        self.navigationController = navigationController
+        self.navigationController = navigationController ?? UINavigationController()
         super.init()
     }
 
     // MARK: Coordinator
 
+    // MainActor because Paywall.Dependencies.live requires it for now.
+    @MainActor
     func start() {
         let host = SignupPaywallHostingController(
             rootView: SignupPaywallView(
@@ -91,6 +95,23 @@ final class SignupCoordinator: NSObject, Coordinator {
         // controller's view exists is shown again when that view loads.
         navigationController.loadViewIfNeeded()
         navigationController.setNavigationBarHidden(true, animated: false)
+
+        startWelcomeBack()
+    }
+
+    private func startWelcomeBack() {
+        let coordinator = WelcomeBackCoordinator(
+            presentingViewController: navigationController,
+            accountProvider: accountProvider,
+            store: Client.store
+        )
+        welcomeBackCoordinator = coordinator
+
+        coordinator.output
+            .sink { [weak self] output in self?.handle(output) }
+            .store(in: &welcomeBackCancellables)
+
+        coordinator.start()
     }
 
     /// Signs in from a magic-link deep link.
@@ -131,6 +152,34 @@ final class SignupCoordinator: NSObject, Coordinator {
             // SwiftEntryKit lives in the app target, so the banner is raised here rather than
             // inside the feature package.
             Macros.displayImageNote(withImage: Asset.Piax.Global.iconWarning.image, message: message)
+        }
+    }
+
+    // MARK: Welcome back output
+
+    private func handle(_ output: WelcomeBack.Output) {
+        func endWelcomeBack() {
+            welcomeBackCancellables.removeAll()
+            welcomeBackCoordinator = nil
+        }
+
+        switch output {
+        case .didAuthenticate(let user):
+            welcomeBackCoordinator?.dismiss(animated: false) { [weak self] in
+                endWelcomeBack()
+                self?.finish(user: user, isSignup: false)
+            }
+
+        case .requestLogin:
+            showLogin()
+            welcomeBackCoordinator?.dismiss(animated: true) {
+                endWelcomeBack()
+            }
+
+        case .didDismiss:
+            welcomeBackCoordinator?.dismiss(animated: false) {
+                endWelcomeBack()
+            }
         }
     }
 
