@@ -28,6 +28,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAVPN",
+        "identifier" : "PIAVPNTests",
+        "name" : "PIAVPNTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:PIA VPN.xcodeproj",
         "identifier" : "0EEE1BE61E4F6EF400397DE2",
         "name" : "PIA VPNTests"
