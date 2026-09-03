@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  AccountBox.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -19,20 +19,17 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import PIALibrary
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+/// A `UserAccount`, boxed so it can ride on an `Equatable` action. Compared by username.
+public struct AccountBox: Equatable {
+    public let value: UserAccount
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    public init(_ value: UserAccount) {
+        self.value = value
+    }
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.value.credentials.username == rhs.value.credentials.username
     }
 }

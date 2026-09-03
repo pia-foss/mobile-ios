@@ -38,7 +38,10 @@ public extension Paywall.Dependencies {
         store: InAppProvider,
         emit: @escaping @MainActor (Paywall.Output) -> Void
     ) -> Paywall.Dependencies {
-        Paywall.Dependencies(
+        let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
+        let loginWithReceipt = LoginWithReceiptUseCase(accountProvider: accountProvider)
+
+        return Paywall.Dependencies(
             loadOffers: {
                 switch await accountProvider.listPlanProducts() {
                 case .failure:
@@ -57,7 +60,7 @@ public extension Paywall.Dependencies {
             },
 
             hasExistingEntitlement: {
-                await store.currentEntitlementJWS() != nil
+                await currentReceipt() != nil
             },
 
             purchase: { request in
@@ -88,7 +91,7 @@ public extension Paywall.Dependencies {
                     return .failure(.nothingToRestore)
 
                 case .success(let jws):
-                    return await loginWithReceipt(jws, accountProvider: accountProvider)
+                    return await loginWithReceipt(jws)
                 }
             },
 
@@ -148,19 +151,6 @@ public extension Paywall.Dependencies {
             return .productsUnavailable
         default:
             return .failed(message: L10n.Signup.Paywall.Error.purchaseFailed)
-        }
-    }
-
-    /// `AccountProvider.login(with:)` is still callback-based, so it is bridged here — the same
-    /// pattern the tvOS signup use cases already follow.
-    private static func loginWithReceipt(
-        _ jws: JWS,
-        accountProvider: AccountProvider
-    ) async -> Result<UserAccount, PaywallError> {
-        await withCheckedContinuation { continuation in
-            accountProvider.login(with: LoginReceiptRequest(receipt: jws)) { result in
-                continuation.resume(returning: result.mapError(PaywallError.init(client:)))
-            }
         }
     }
 }

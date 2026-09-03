@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  WelcomeBackStore.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -21,18 +21,13 @@
 
 import CoreArchitecture
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+typealias WelcomeBackStore = Store<WelcomeBack.State, WelcomeBack.Action>
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
+extension WelcomeBackStore {
+    convenience init(
+        initialState: WelcomeBack.State = WelcomeBack.State(isRestoring: false),
+        dependencies: WelcomeBack.Dependencies
     ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+        self.init(initial: initialState, reduce: WelcomeBack.Reducer(dependencies: dependencies).reduce)
     }
 }

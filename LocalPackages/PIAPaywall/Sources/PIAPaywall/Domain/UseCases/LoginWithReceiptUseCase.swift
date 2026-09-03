@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  LoginWithReceiptUseCase.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -19,20 +19,22 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import PIABase
+import PIALibrary
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+/// Signs in with a StoreKit receipt.
+public struct LoginWithReceiptUseCase {
+    private let accountProvider: AccountProvider
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    public init(accountProvider: AccountProvider) {
+        self.accountProvider = accountProvider
+    }
+
+    public func callAsFunction(_ jws: JWS) async -> Result<UserAccount, PaywallError> {
+        await withCheckedContinuation { continuation in
+            accountProvider.login(with: LoginReceiptRequest(receipt: jws)) { result in
+                continuation.resume(returning: result.mapError(PaywallError.init(client:)))
+            }
+        }
     }
 }

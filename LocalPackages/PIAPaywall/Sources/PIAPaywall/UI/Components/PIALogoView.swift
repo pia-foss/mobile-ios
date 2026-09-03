@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  PIALogoView.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -19,20 +19,18 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import PIAAssetsMobile
+import SwiftUI
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+/// The horizontal PIA wordmark.
+struct PIALogoView: View {
+    private static let height: CGFloat = 50
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    var body: some View {
+        Asset.navLogo.swiftUIImage
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(height: Self.height)
+            .accessibilityHidden(true)
     }
 }
