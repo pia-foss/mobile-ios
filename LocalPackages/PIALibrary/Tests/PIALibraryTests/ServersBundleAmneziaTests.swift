@@ -100,6 +100,20 @@ struct ServersBundleAmneziaTests {
         #expect(server.wireGuardAddressesForUDP?.isEmpty == false)
     }
 
+    @Test("keys the client does not know are ignored rather than failing the parse")
+    func toleratesUnknownKeys() throws {
+        let withUnknowns = """
+            "wg": [{ "ip": "1.1.1.1", "cn": "Server-1", "future_flag": true }],
+            "awg": [{ "ip": "2.2.2.2", "cn": "Server-2", "port": 1338, "mtu": 1280 }],
+            "quantum": [{ "ip": "4.4.4.4", "cn": "Server-4" }]
+            """
+        let bundle = try #require(ServersBundle.parse(from: Self.payload(regionServers: withUnknowns)))
+        let server = try #require(bundle.servers.first)
+
+        #expect(server.amneziaAddressesForUDP?.first?.port == 1338)
+        #expect(server.wireGuardAddressesForUDP?.first?.ip == "1.1.1.1")
+    }
+
     @Test("awg addresses survive an encode/decode round trip")
     func roundTrip() throws {
         let bundle = try #require(ServersBundle.parse(from: Self.payload(regionServers: Self.wireGuardAndAmnezia)))
