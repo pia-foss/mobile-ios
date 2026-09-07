@@ -84,7 +84,6 @@ final class SignupCoordinator: NSObject, Coordinator {
                 legal: legalLinks
             )
         )
-        host.paywallDelegate = self
 
         // The delegate below owns the bar across pushes and pops, so no push site has to; the paywall
         // asserts its own on top of that, because on iOS 15 none of these calls survives layout.
@@ -299,14 +298,6 @@ extension SignupCoordinator: WelcomeCompletionDelegate {
     }
 }
 
-// MARK: - SignupPaywallHostingDelegate
-
-extension SignupCoordinator: SignupPaywallHostingDelegate {
-    func signupPaywallHostDidRequestLogin(_ host: SignupPaywallHosting) {
-        showLogin()
-    }
-}
-
 // MARK: - PIAWelcomeViewControllerDelegate
 
 /// How the pushed login container reports back.
@@ -363,7 +354,7 @@ extension SignupCoordinator: UINavigationControllerDelegate {
     ) {
         // Applied even when the flag already agrees: on iOS 15 it reads `true` while the bar is still
         // laid out, so a short-circuit here would skip the call that corrects it.
-        let shouldHide = viewController is SignupPaywallHosting
+        let shouldHide = viewController is SignupPaywallHostingController
         navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }

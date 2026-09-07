@@ -28,10 +28,7 @@ import UIKit
 /// Exists mainly so the rest of the app has a concrete type to recognise: the orientation lock and
 /// the theme's status-bar rules used to switch on `GetStartedViewController`. They now match on
 /// `SignupPaywallHosting` instead, so those call sites never learn about SwiftUI.
-final class SignupPaywallHostingController: UIHostingController<SignupPaywallView>, SignupPaywallHosting {
-
-    /// Set by the coordinator so the magic-link deep link can jump straight to the login screen.
-    weak var paywallDelegate: SignupPaywallHostingDelegate?
+final class SignupPaywallHostingController: UIHostingController<SignupPaywallView> {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         // `Theme`'s rules take an `AutolayoutViewController`, which this is not, so the style is
@@ -63,26 +60,6 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
 
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
-    // MARK: SignupPaywallHosting
-
-    func navigateToLogin() {
-        paywallDelegate?.signupPaywallHostDidRequestLogin(self)
-    }
-}
-
-/// What the app needs from whatever is currently showing the signup paywall.
-///
-/// A marker protocol rather than a concrete class check: `AppDelegate` and `Theme` previously
-/// matched on `GetStartedViewController` by name, which silently stops working the moment the class
-/// is replaced.
-protocol SignupPaywallHosting: UIViewController {
-    /// Pushes the login screen. Used by the magic-link deep link.
-    func navigateToLogin()
-}
-
-protocol SignupPaywallHostingDelegate: AnyObject {
-    func signupPaywallHostDidRequestLogin(_ host: SignupPaywallHosting)
 }
 
 /// The logged-out root and the cards screen are portrait-only on iPhone.
