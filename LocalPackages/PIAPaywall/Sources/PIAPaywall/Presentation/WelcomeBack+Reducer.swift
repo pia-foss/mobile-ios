@@ -35,37 +35,28 @@ extension WelcomeBack {
 
         func reduce(_ state: inout State, _ action: Action) -> Effect<Action>? {
             switch action {
-            case .appStoreAccountTapped: return beginRestore(in: &state)
-            case .restoreSucceeded(let account): return completeRestore(account, in: &state)
-            case .restoreFailed: return failRestore(in: &state)
-            case .usernameAndPasswordTapped: return requestLogin(in: state)
+            case .appStoreAccountTapped:
+                guard !state.isRestoring else { return nil }
+                state.isRestoring = true
+                return restore
+
+            case .restoreSucceeded(let account):
+                state.isRestoring = false
+                return emit(.didAuthenticate(user: account.value))
+
+            case .restoreFailed:
+                state.isRestoring = false
+                return emit(.didDismiss)
+
+            case .usernameAndPasswordTapped:
+                guard !state.isRestoring else { return nil }
+                return emit(.requestLogin)
             }
         }
     }
 }
 
 extension WelcomeBack.Reducer {
-
-    private func beginRestore(in state: inout State) -> Effect<Action>? {
-        guard !state.isRestoring else { return nil }
-        state.isRestoring = true
-        return restore
-    }
-
-    private func completeRestore(_ account: AccountBox, in state: inout State) -> Effect<Action>? {
-        state.isRestoring = false
-        return emit(.didAuthenticate(user: account.value))
-    }
-
-    private func failRestore(in state: inout State) -> Effect<Action>? {
-        state.isRestoring = false
-        return emit(.didDismiss)
-    }
-
-    private func requestLogin(in state: State) -> Effect<Action>? {
-        guard !state.isRestoring else { return nil }
-        return emit(.requestLogin)
-    }
 
     fileprivate var restore: Effect<Action> {
         .cancellableTask(id: EffectID.restore) { [dependencies] in

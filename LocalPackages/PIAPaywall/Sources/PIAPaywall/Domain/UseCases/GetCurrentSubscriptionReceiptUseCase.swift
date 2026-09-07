@@ -22,9 +22,8 @@
 import PIABase
 import PIALibrary
 
-/// The signed receipt for this App Store account's current subscription, if any.
-///
-/// Reads what StoreKit already knows; does not call `AppStore.sync()`.
+/// The signed receipt for this App Store account's current subscription, if any. Reads what
+/// StoreKit already knows; does not call `AppStore.sync()`.
 public struct GetCurrentSubscriptionReceiptUseCase {
     private let store: InAppProvider
 

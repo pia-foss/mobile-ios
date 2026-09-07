@@ -23,16 +23,10 @@ import PIALibrary
 
 extension WelcomeBack {
 
-    /// Everything the welcome-back screen asks its host to do. The screen knows nothing about
-    /// navigation — it only reports what happened.
+    /// What happened on the welcome-back screen. It knows nothing about what any of it leads to.
     public enum Output {
-        /// The receipt signed the customer in.
         case didAuthenticate(user: UserAccount)
-
-        /// The customer wants to sign in with a username and password instead.
         case requestLogin
-
-        /// Nothing could be restored.
         case didDismiss
     }
 }

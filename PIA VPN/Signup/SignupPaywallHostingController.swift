@@ -23,16 +23,12 @@ import PIAPaywall
 import SwiftUI
 import UIKit
 
-/// Hosts the SwiftUI paywall inside UIKit.
-///
-/// Exists mainly so the rest of the app has a concrete type to recognise: the orientation lock and
-/// the theme's status-bar rules used to switch on `GetStartedViewController`. They now match on
-/// `SignupPaywallHosting` instead, so those call sites never learn about SwiftUI.
+/// Hosts the SwiftUI paywall inside UIKit, and gives the orientation lock and the theme's
+/// status-bar rules a concrete type to recognise.
 final class SignupPaywallHostingController: UIHostingController<SignupPaywallView> {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        // `Theme`'s rules take an `AutolayoutViewController`, which this is not, so the style is
-        // resolved here from the trait collection instead.
+        // `Theme`'s rules take an `AutolayoutViewController`, which this is not.
         traitCollection.userInterfaceStyle == .dark ? .lightContent : .darkContent
     }
 
@@ -41,29 +37,15 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
         view.backgroundColor = .clear
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        hideNavigationBar()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         hideNavigationBarWhileTopmost()
     }
 }
 
-// MARK: - Bar-less screens
-
-/// Shared by the two roots of the signup flow, both designed without a navigation bar.
+/// On iOS 15 the flow's `UINavigationControllerDelegate` hides the bar before it is laid out and the
+/// call is lost, so the screens designed without one re-assert it here.
 extension UIViewController {
-    /// Unanimated: on a pop back the flow's delegate has already animated the bar away, and animating
-    /// it a second time shows the move twice.
-    func hideNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-
-    /// The same, asserted late: on iOS 15 every call that runs before the bar is laid out is lost.
-    /// Only while this screen is on top, or it fights the bar a push just asked for.
     func hideNavigationBarWhileTopmost() {
         guard let navigationController,
             navigationController.topViewController === self,

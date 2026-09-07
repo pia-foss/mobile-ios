@@ -48,8 +48,7 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
-    /// Retained so the welcome-back flow can hand the screen back to the very paywall it replaced,
-    /// with the plans it had already fetched.
+    /// Retained so welcome-back can hand the screen back to it with its plans already fetched.
     private var paywallHost: SignupPaywallHostingController?
 
     private var welcomeBackCoordinator: WelcomeBackCoordinator?
@@ -90,14 +89,9 @@ final class SignupCoordinator: NSObject, Coordinator {
         )
         paywallHost = host
 
-        // The delegate below owns the bar across pushes and pops, so no push site has to; the paywall
-        // asserts its own on top of that, because on iOS 15 none of these calls survives layout.
+        // The delegate below owns the bar across pushes and pops, so no push site has to.
         navigationController.delegate = self
         navigationController.setViewControllers([host], animated: false)
-
-        // Loading the view first is what makes the next line stick: on iOS 15 a bar hidden before this
-        // controller's view exists is shown again when that view loads.
-        navigationController.loadViewIfNeeded()
         navigationController.setNavigationBarHidden(true, animated: false)
 
         startWelcomeBack()
@@ -120,13 +114,11 @@ final class SignupCoordinator: NSObject, Coordinator {
         coordinator.start()
     }
 
-    /// Makes the paywall the only screen again, which is both what happens when there is no
-    /// welcome-back flow to run and what a failed restore falls back to.
+    /// Where welcome-back leaves the flow when there is nothing to restore, or a restore fails.
     @MainActor
     private func restorePaywallRoot() {
-        if let paywallHost, navigationController.viewControllers != [paywallHost] {
-            navigationController.setViewControllers([paywallHost], animated: false)
-        }
+        guard let paywallHost else { return }
+        navigationController.setViewControllers([paywallHost], animated: false)
         endWelcomeBack()
     }
 
@@ -178,7 +170,6 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     // MARK: Welcome back output
 
-    /// Only a successful restore reaches here: welcome-back handles its own navigation.
     private func handle(_ output: WelcomeBackCoordinator.Output) {
         switch output {
         case .didAuthenticate(let user):

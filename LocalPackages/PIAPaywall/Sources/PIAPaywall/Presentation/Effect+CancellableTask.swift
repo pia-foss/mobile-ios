@@ -23,8 +23,7 @@ import CoreArchitecture
 
 extension Effect {
 
-    /// Like `Effect.task`, but drops the resulting action if the effect was cancelled while the
-    /// work was in flight.
+    /// Like `Effect.task`, but drops the action if the effect was cancelled mid-flight.
     static func cancellableTask(
         id: AnyHashable,
         _ work: @escaping @MainActor () async -> Action?

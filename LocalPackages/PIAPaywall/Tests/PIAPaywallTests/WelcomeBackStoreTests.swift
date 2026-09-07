@@ -54,6 +54,22 @@ struct WelcomeBackStoreTests {
         #expect(!sut.state.isRestoring)
     }
 
+    @Test("A second tap while restoring does not restore twice")
+    func secondTapIsIgnored() async throws {
+        // GIVEN the screen as it is presented
+        let sut = makeStore()
+
+        // WHEN the App Store button is tapped twice
+        sut.send(.appStoreAccountTapped)
+        sut.send(.appStoreAccountTapped)
+        _ = try #require(await sut.receive())
+        await sut.finish()
+
+        // THEN only the first tap ran
+        #expect(spy.restoreCallCount == 1)
+        #expect(spy.authenticatedUsers.count == 1)
+    }
+
     @Test("A failed restore asks the host to dismiss")
     func failedRestoreDismisses() async throws {
         // GIVEN a receipt that cannot be signed in with

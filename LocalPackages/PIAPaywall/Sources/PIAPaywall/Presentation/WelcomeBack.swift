@@ -41,8 +41,7 @@ extension WelcomeBack {
     }
 
     public struct Dependencies {
-        /// Signs in with the receipt this App Store account already holds. Does not synchronise
-        /// entitlements with Apple first.
+        /// Signs in with the receipt this App Store account already holds.
         public var restore: @MainActor () async -> Result<UserAccount, PaywallError>
 
         public var emit: @MainActor (Output) -> Void

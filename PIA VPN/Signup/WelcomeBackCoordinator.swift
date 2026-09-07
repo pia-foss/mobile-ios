@@ -25,14 +25,9 @@ import PIAPaywall
 import UIKit
 
 /// Runs the welcome-back flow: the screen offered to a returning customer whose App Store account
-/// still holds a live subscription.
-///
-/// Owns both its appearance and its departure. `start()` checks for a receipt and, when there is one,
-/// makes the welcome-back screen the navigation controller's only view controller — it replaces the
-/// paywall rather than covering it. Every way out is handled here too: the login screen is asked for
-/// through `showLogin`, and both "nothing to restore" and a failed restore hand the flow back to the
-/// paywall through `showPaywall`. Only a successful restore is reported upward, since the host is the
-/// one that knows what an authenticated customer leads to.
+/// still holds a live subscription. It replaces the paywall as the navigation controller's only
+/// screen, and hands the flow on itself — through `showLogin`, `showPaywall`, or, once the receipt
+/// has signed the customer in, its output.
 final class WelcomeBackCoordinator: Coordinator {
 
     enum Output {

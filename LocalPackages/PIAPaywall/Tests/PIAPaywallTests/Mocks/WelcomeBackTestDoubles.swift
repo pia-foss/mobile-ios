@@ -24,15 +24,6 @@ import PIALibrary
 
 @testable import PIAPaywall
 
-extension WelcomeBack.Dependencies {
-    static func test(
-        restore: @escaping () async -> Result<UserAccount, PaywallError> = { .success(Stub.user) },
-        emit: @escaping (WelcomeBack.Output) -> Void = { _ in }
-    ) -> WelcomeBack.Dependencies {
-        WelcomeBack.Dependencies(restore: restore, emit: emit)
-    }
-}
-
 final class WelcomeBackDependencySpy: @unchecked Sendable {
     private(set) var restoreCallCount = 0
     private(set) var emittedOutputs: [WelcomeBack.Output] = []

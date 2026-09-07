@@ -30,16 +30,6 @@ final class WelcomeBackHostingController: UIHostingController<WelcomeBackView> {
         traitCollection.userInterfaceStyle == .dark ? .lightContent : .darkContent
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .clear
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        hideNavigationBar()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         hideNavigationBarWhileTopmost()

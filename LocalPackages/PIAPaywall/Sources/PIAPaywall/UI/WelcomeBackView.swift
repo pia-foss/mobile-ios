@@ -28,20 +28,14 @@ import SwiftUI
 /// Replaces the paywall when the App Store already holds a live subscription for this Apple ID.
 public struct WelcomeBackView: View {
     fileprivate enum Metrics {
-        static let contentMargin: CGFloat = 20
         static let maxContentWidth: CGFloat = 480
         static let heroHeight: CGFloat = 297
     }
 
     @StateObject private var store: WelcomeBackStore
 
-    public init(
-        initialState: WelcomeBack.State = WelcomeBack.State(),
-        dependencies: WelcomeBack.Dependencies
-    ) {
-        _store = StateObject(
-            wrappedValue: WelcomeBackStore(initialState: initialState, dependencies: dependencies)
-        )
+    public init(dependencies: WelcomeBack.Dependencies) {
+        _store = StateObject(wrappedValue: WelcomeBackStore(dependencies: dependencies))
     }
 
     public var body: some View {
@@ -55,7 +49,7 @@ public struct WelcomeBackView: View {
                 Spacer(minLength: PIASpacing.s20)
                 WelcomeBackActions(isRestoring: store.state.isRestoring, send: store.send(_:))
             }
-            .padding(.horizontal, Metrics.contentMargin)
+            .padding(.horizontal, PIASpacing.s20)
             .padding(.vertical, PIASpacing.s16)
             .frame(maxWidth: Metrics.maxContentWidth)
             .frame(maxWidth: .infinity)

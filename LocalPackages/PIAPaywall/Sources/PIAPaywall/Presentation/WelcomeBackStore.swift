@@ -25,7 +25,7 @@ typealias WelcomeBackStore = Store<WelcomeBack.State, WelcomeBack.Action>
 
 extension WelcomeBackStore {
     convenience init(
-        initialState: WelcomeBack.State = WelcomeBack.State(isRestoring: false),
+        initialState: WelcomeBack.State = WelcomeBack.State(),
         dependencies: WelcomeBack.Dependencies
     ) {
         self.init(initial: initialState, reduce: WelcomeBack.Reducer(dependencies: dependencies).reduce)
