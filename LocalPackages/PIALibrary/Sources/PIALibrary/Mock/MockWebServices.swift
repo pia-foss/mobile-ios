@@ -96,11 +96,13 @@ final class MockWebServices: WebServices {
     }
 
     func connectivityCheck() async -> Result<ConnectivityStatus, Error> {
-        return .success(ConnectivityStatus(ipAddress: "8.8.8.8", isVPN: true))
-    }
-
-    func geoCheck() async -> Result<GeoStatus, Error> {
-        .success(GeoStatus(countryCode: "US", isUsingPIAServer: false))
+        return .success(
+            ConnectivityStatus(
+                ipAddress: "8.8.8.8",
+                countryCode: "US",
+                isVPN: true
+            )
+        )
     }
 
     func submitDebugReport() async throws -> String {

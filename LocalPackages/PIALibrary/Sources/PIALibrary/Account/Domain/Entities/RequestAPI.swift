@@ -11,8 +11,6 @@ enum RequestAPI {
         case logout = "/api/client/v2/expire_token"
         case accountDetails = "/api/client/v2/account"
         case deleteAccount = "/api/client/v5/account"
-        // TODO: Exclude proxy endpoints when performing this request (clientStatus)
-        case clientStatus = "/api/client/status"
         case invites = "/api/client/invites"
         case redeem = "/api/client/giftcard_redeem"
         case refreshToken = "/api/client/v4/refresh"  //TODO: check if this refreshToken is actually in use
@@ -45,8 +43,6 @@ enum RequestAPI {
             return "apiv2"
         case .deleteAccount:
             return "apiv5"
-        case .clientStatus:
-            return "api"
         case .invites:
             return "api"
         case .redeem:

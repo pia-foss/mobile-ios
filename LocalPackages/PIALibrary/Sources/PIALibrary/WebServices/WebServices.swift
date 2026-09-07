@@ -76,8 +76,6 @@ protocol WebServices: AnyObject {
 
     func connectivityCheck() async -> Result<ConnectivityStatus, Error>
 
-    func geoCheck() async -> Result<GeoStatus, Error>
-
     func submitDebugReport() async throws -> String
 
     func featureFlags() async throws -> [String]

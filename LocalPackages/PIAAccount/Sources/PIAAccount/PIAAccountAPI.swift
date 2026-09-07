@@ -144,12 +144,6 @@ public protocol PIAAccountAPI {
     /// - Throws: PIAAccountError if deletion fails
     func deleteAccount() async throws
 
-    /// Retrieves client connection status
-    /// - Parameter requestTimeoutMillis: Timeout in milliseconds
-    /// - Returns: Client status information
-    /// - Throws: PIAAccountError if the request fails
-    func clientStatus(requestTimeoutMillis: UInt) async throws -> ClientStatusInformation
-
     /// Retrieves the geolocation of the caller's public IP
     /// - Parameter requestTimeoutMillis: Timeout in milliseconds
     /// - Returns: Geo information
