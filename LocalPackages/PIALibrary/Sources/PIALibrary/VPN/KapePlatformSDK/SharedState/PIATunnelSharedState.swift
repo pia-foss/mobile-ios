@@ -86,7 +86,8 @@ public enum PIATunnelSharedState {
         selectedDipServer: Server?,
         selectedProtocol: TunnelProtocol,
         openVPN: OpenVPNSettings,
-        wireGuard: WireGuardSettings
+        wireGuard: WireGuardSettings,
+        geoCountryCode: String?
     ) {
         configStore.mutate { config in
             config.selectedLocationId = selectedLocationId
@@ -94,6 +95,7 @@ public enum PIATunnelSharedState {
             config.selectedProtocol = selectedProtocol
             config.openVPN = openVPN
             config.wireGuard = wireGuard
+            config.geoCountryCode = geoCountryCode
             return true
         }
     }
@@ -126,13 +128,15 @@ public enum PIATunnelSharedState {
     public static func updateActiveConnection(
         protocol vpnProtocol: TunnelProtocol,
         serverId: String,
-        resolvedTransport: VPNTransport
+        resolvedTransport: VPNTransport,
+        obfuscation: String?
     ) {
         statusStore.mutate { status in
             status.activeConnection = ActiveConnection(
                 protocol: vpnProtocol,
                 serverId: serverId,
                 resolvedTransport: resolvedTransport,
+                obfuscation: obfuscation,
                 updatedAt: Date()
             )
             return true

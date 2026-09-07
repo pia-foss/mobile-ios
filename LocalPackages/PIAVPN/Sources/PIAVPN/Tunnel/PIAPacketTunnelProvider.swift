@@ -235,7 +235,8 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         PIATunnelSharedState.updateActiveConnection(
             protocol: tunnelProtocol,
             serverId: serverId,
-            resolvedTransport: transport
+            resolvedTransport: transport,
+            obfuscation: endpoint.obfuscationDescription
         )
     }
 
@@ -266,8 +267,11 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         let openVPNAddressesForUDP = server.openVPNAddressesForUDP ?? []
         let openVPNAddressesForTCP = server.openVPNAddressesForTCP ?? []
         let wireGuardAddressesForUDP = server.wireGuardAddressesForUDP ?? []
+        let amneziaAddressesForUDP = server.amneziaAddressesForUDP ?? []
 
-        return (openVPNAddressesForUDP + openVPNAddressesForTCP + wireGuardAddressesForUDP).contains { $0.ip == host }
+        return (openVPNAddressesForUDP + openVPNAddressesForTCP + wireGuardAddressesForUDP + amneziaAddressesForUDP).contains {
+            $0.ip == host
+        }
     }
 
     /// Maps the SDK's `PacketTunnelConnectedEndpoint.protocolDescription` to the PIA shared-state

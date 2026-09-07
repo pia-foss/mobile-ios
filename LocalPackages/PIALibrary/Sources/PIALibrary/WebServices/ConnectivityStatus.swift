@@ -24,10 +24,9 @@ import Foundation
 
 struct ConnectivityStatus {
     let ipAddress: String
-    let isVPN: Bool
+    let countryCode: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case ipAddress = "ip"
-        case isVPN = "connected"
-    }
+    /// `true` when the lookup was answered through a PIA server, so `ipAddress` is the exit node's
+    /// and `countryCode` is not the user's own.
+    let isVPN: Bool
 }

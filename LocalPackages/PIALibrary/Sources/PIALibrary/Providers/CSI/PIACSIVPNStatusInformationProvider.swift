@@ -32,6 +32,7 @@ struct PIACSIVPNStatusInformationProvider: CSIDataProvider {
     let status: String
     let connectedVia: String
     let vpnType: String
+    let obfuscation: String?
     let publicIP: String?
     let vpnIP: String?
     let redactIPs: Bool
@@ -43,6 +44,7 @@ struct PIACSIVPNStatusInformationProvider: CSIDataProvider {
             "Status: \(status)",
             "Connected Via: \(connectedVia)",
             "Protocol: \(vpnType)",
+            "Obfuscation: \(obfuscation ?? Self.unavailable)",
             "Public IP: \(publicIP ?? Self.unavailable)",
             "VPN IP: \(vpnIP ?? Self.unavailable)"
         ].joined(separator: "\n")
@@ -57,6 +59,7 @@ extension PIACSIVPNStatusInformationProvider {
             status: connection.status,
             connectedVia: connection.connectedVia,
             vpnType: Client.preferences.vpnType,
+            obfuscation: PIATunnelSharedState.readStatus().activeConnection?.obfuscation,
             publicIP: Client.daemons.publicIP,
             vpnIP: Client.daemons.vpnIP,
             redactIPs: redactIPs

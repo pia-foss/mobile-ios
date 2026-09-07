@@ -1235,7 +1235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piaios.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piaios.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piaios.tmp\"\nfi\n";
+			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piaios.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v7\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piaios.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piaios.tmp\"\nfi\n";
 		};
 		3F4D43172F8640C70028380A /* Download Latest Regions List */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1253,7 +1253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piatvos.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v6\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piatvos.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piatvos.tmp\"\nfi\n";
+			shellScript = "# update max once an hour\nset -e\n\nREGIONS_FILE=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Regions.json\"\n\nif [[ ! -r \"${REGIONS_FILE}\" || $(find \"${REGIONS_FILE}\" -mmin +60) ]]; then\necho \"downloading regions list to ${REGIONS_FILE}\"\ncurl -sfo \"/tmp/piatvos.tmp\" \"https://serverlist.piaservers.net/vpninfo/servers/v7\"\n\nif [ $? -ne 0 ]; then\necho \"failed to fetch regions list from server\"\nexit 1\nfi\n\nhead -n 1 \"/tmp/piatvos.tmp\" > \"${REGIONS_FILE}\"\nrm \"/tmp/piatvos.tmp\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2510,6 +2510,21 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lresolv";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-simulator/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=macosx*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-maccatalyst/libwg-go.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).PlatformSDK-Tunnel-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2561,6 +2576,21 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-lresolv";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-simulator/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=macosx*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-maccatalyst/libwg-go.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2609,6 +2639,21 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-lresolv";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-simulator/libwg-go.a",
+				);
+				"OTHER_LDFLAGS[sdk=macosx*]" = (
+					"-lresolv",
+					"-force_load",
+					"$(SRCROOT)/LocalPackages/KapePlatformSDK/WireGuardKitPackage/Sources/WireGuardKitGo/WireGuardKitGo.xcframework/ios-arm64_x86_64-maccatalyst/libwg-go.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

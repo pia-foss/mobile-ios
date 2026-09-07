@@ -24,6 +24,8 @@ let package = Package(
         .package(path: "../PIARegions"),
         .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
         .package(path: "../KapePlatformSDK/TunnelKitPackage"),
+        // TODO: when this goes, delete the OTHER_LDFLAGS[sdk=*] force-load blocks on
+        // PlatformSDK-Tunnel-iOS whole — they override the base -lresolv. ADR 0010, T1.
         .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", exact: "1.0.6"),
         .package(url: "https://github.com/apple/swift-algorithms", exact: "1.2.1"),
         .package(url: "https://github.com/apple/swift-log", exact: "1.15.0"),

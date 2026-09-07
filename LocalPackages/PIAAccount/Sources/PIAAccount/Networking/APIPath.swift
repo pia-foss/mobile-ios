@@ -11,7 +11,7 @@ enum APIPath: String, Sendable {
     case logout = "/api/client/v2/expire_token"
     case accountDetails = "/api/client/v2/account"
     case deleteAccount = "/api/client/v5/account"
-    case clientStatus = "/api/client/status"
+    case geo = "/api/geo"
     case invites = "/api/client/invites"
     case redeem = "/api/client/giftcard_redeem"
     case refreshToken = "/api/client/v4/refresh"
@@ -36,7 +36,7 @@ enum APIPath: String, Sendable {
             return "apiv5"
         case .refreshToken:
             return "apiv4"
-        case .setEmail, .clientStatus, .invites, .redeem, .iosPayment, .iosSubscriptions, .iosFeatureFlag:
+        case .setEmail, .geo, .invites, .redeem, .iosPayment, .iosSubscriptions, .iosFeatureFlag:
             return "api"
         }
     }

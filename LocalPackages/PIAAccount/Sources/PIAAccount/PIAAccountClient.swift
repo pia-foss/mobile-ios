@@ -209,10 +209,11 @@ public actor PIAAccountClient: PIAAccountAPI {
         try await tokenManager.clearAllTokens()
     }
 
-    public func clientStatus(requestTimeoutMillis: UInt) async throws -> ClientStatusInformation {
+    public func geo(requestTimeoutMillis: UInt) async throws -> GeoInformation {
         return try await endpointManager.executeWithFailover(
-            path: .clientStatus,
-            method: .get
+            path: .geo,
+            method: .get,
+            timeout: timeoutInterval(forMillis: requestTimeoutMillis)
         )
     }
 
@@ -528,5 +529,9 @@ public actor PIAAccountClient: PIAAccountAPI {
         )
 
         try await tokenManager.storeVPNToken(vpnTokenResponse)
+    }
+
+    private func timeoutInterval(forMillis millis: UInt) -> TimeInterval? {
+        millis > 0 ? TimeInterval(millis) / 1000 : nil
     }
 }

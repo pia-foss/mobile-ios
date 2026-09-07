@@ -66,12 +66,26 @@ extension DebugMenuViewModel {
     }
 
     var vpnProtocolName: String {
-        switch Client.preferences.vpnType {
-        case "PIAWG": return "WireGuard"
-        case "PIA": return "OpenVPN"
-        case "IPSec", "IKEv2": return "IKEv2"
-        default: return Client.preferences.vpnType
+        let name = switch Client.preferences.vpnType {
+            case "PIAWG": "WireGuard"
+            case "PIA": "OpenVPN"
+            case "IPSec", "IKEv2": "IKEv2"
+            default: Client.preferences.vpnType
         }
+
+        guard let obfuscation = activeObfuscation else { return name }
+        return "\(name) (\(obfuscation))"
+    }
+
+    var activeObfuscation: String? {
+        guard
+            let obfuscation = PIATunnelSharedState.readStatus().activeConnection?.obfuscation,
+            obfuscation != "none"
+        else {
+            return nil
+        }
+
+        return obfuscation
     }
 
     var publicIP: String {

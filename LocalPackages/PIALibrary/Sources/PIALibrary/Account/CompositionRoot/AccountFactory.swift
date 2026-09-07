@@ -66,10 +66,6 @@ public class AccountFactory {
     static func makeFeatureFlagsUseCase() -> FeatureFlagsUseCaseType {
         FeatureFlagsUseCase(networkClient: NetworkRequestFactory.maketNetworkRequestClient(), refreshAuthTokensChecker: makeRefreshAuthTokensChecker())
     }
-
-    public static func makeClientStatusUseCase() -> ClientStatusUseCaseType {
-        ClientStatusUseCase(networkClient: NetworkRequestFactory.maketNetworkRequestClient(), refreshAuthTokensChecker: makeRefreshAuthTokensChecker(), clientStatusDecoder: makeClientStatusInfoDecoder())
-    }
 }
 
 // MARK: - Private
@@ -102,10 +98,6 @@ private extension AccountFactory {
 
     static func makeAccountInfoDecoder() -> AccountInfoDecoderType {
         AccountInfoDecoder()
-    }
-
-    static func makeClientStatusInfoDecoder() -> ClientStatusInformationDecoderType {
-        ClientStatusInformationDecoder()
     }
 
     static func makePaymentInformationDataConverter() -> PaymentInformationDataConverterType {
