@@ -2,12 +2,12 @@ import Foundation
 
 private let log = PIALogger.logger(for: RefreshAuthTokensChecker.self)
 
-protocol RefreshAuthTokensCheckerType {
+protocol RefreshAuthTokensCheckerType: Sendable {
     typealias Completion = ((NetworkRequestError?) -> Void)
     func refreshIfNeeded(completion: @escaping Completion)
 }
 
-class RefreshAuthTokensChecker: RefreshAuthTokensCheckerType {
+final class RefreshAuthTokensChecker: RefreshAuthTokensCheckerType {
 
     let apiTokenProvider: APITokenProviderType
     let vpnTokenProvier: VpnTokenProviderType

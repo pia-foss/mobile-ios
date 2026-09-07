@@ -3,12 +3,12 @@ import NWHttpConnection
 
 private let log = PIALogger.logger(for: NetworkRequestClient.self)
 
-protocol NetworkRequestClientType {
+protocol NetworkRequestClientType: Sendable {
     typealias Completion = ((NetworkRequestError?, NetworkRequestResponseType?) -> Void)
     func executeRequest(with configuration: NetworkRequestConfigurationType, completion: @escaping Completion)
 }
 
-class NetworkRequestClient: NetworkRequestClientType {
+final class NetworkRequestClient: NetworkRequestClientType {
     private let networkConnectionRequestProvider: NetworkConnectionRequestProviderType
     private let endpointManager: EndpointManagerType
 

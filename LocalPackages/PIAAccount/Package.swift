@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PIABase"),
-        .package(url: "https://github.com/apple/swift-log", exact: "1.13.1")
+        .package(url: "https://github.com/apple/swift-log", exact: "1.15.0")
     ],
     targets: [
         // Main library target (merged for simplicity)
@@ -35,5 +35,6 @@ let package = Package(
             name: "PIAAccountTests",
             dependencies: ["PIAAccount"]
         )
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )

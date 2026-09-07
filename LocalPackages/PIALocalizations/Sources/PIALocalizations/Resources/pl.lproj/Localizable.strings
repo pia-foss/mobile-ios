@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Pakiet informacji z debugowania jest pusty; spróbuj się połączyć przed ponowną wysyłką.";
 "settings.application_information.debug.success.title" = "Wysłano informacje z debugowania";
 "settings.application_information.debug.success.message" = "Wysłano informacje z debugowania.\nIdentyfikator: %@\nProszę zapisać ten identyfikator, gdyż poprosi o niego nasz dział obsługi, aby znaleźć twoją przesyłkę.";
+"settings.application_information.debug.success.copyId" = "Kopiuj identyfikator";
 
 "settings.commit.messages.must_disconnect" = "VPN musi połączyć się ponownie, aby niektóre zmiany zostały wprowadzone.";
 "settings.commit.messages.should_reconnect" = "Połącz ponownie z VPN, aby zastosować zmiany.";

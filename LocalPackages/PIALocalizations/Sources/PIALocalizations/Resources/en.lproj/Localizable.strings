@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Debug information is empty, please attempt a connection before retrying submission.";
 "settings.application_information.debug.success.title" = "Debug information submitted";
 "settings.application_information.debug.success.message" = "Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.";
+"settings.application_information.debug.success.copyId" = "Copy ID";
 
 "settings.commit.messages.must_disconnect" = "The VPN must reconnect for some changes to take effect.";
 "settings.commit.messages.should_reconnect" = "Reconnect the VPN to apply changes.";

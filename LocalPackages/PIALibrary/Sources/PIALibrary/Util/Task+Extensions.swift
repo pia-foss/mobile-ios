@@ -1,8 +1,8 @@
 //
-//  Pages.swift
-//  PIALibrary-iOS
+//  Task+Extensions.swift
+//  PIALibrary
 //
-//  Created by Jose Antonio Blaya Garcia on 31/10/2018.
+//  Created by Mario on 18/08/2026.
 //  Copyright © 2020 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -22,29 +22,20 @@
 
 import Foundation
 
-/// The sub-pages offered in the `PIAWelcomeViewController` user interface.
-public struct Pages: OptionSet, Sendable {
-
-    /// The login page.
-    public static let login = Pages(rawValue: 1 << 0)
-
-    /// The purchase plan page.
-    public static let purchase = Pages(rawValue: 1 << 1)
-
-    /// The direct purchase plan page.
-    public static let directPurchase = Pages(rawValue: 1 << 2)
-
-    /// The restore page.
-    public static let restore = Pages(rawValue: 1 << 3)
-
-    /// All pages.
-    public static let all: Pages = [.login, .purchase, .directPurchase, .restore]
-
-    /// :nodoc:
-    public let rawValue: Int
-
-    /// :nodoc:
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
+public extension Task where Failure == Never, Success == Void {
+    /// Run an async operation in a synchronous context, and wait for it to finish.
+    ///
+    /// Blocks the thread until the operation is finished. The caller is responsible for managing multithreading.
+    static func blockingThreadUnsafe(
+        name: String? = nil,
+        priority: TaskPriority? = nil,
+        operation: sending @escaping @isolated(any) () async -> Void
+    ) {
+        let semaphore = DispatchSemaphore(value: 0)
+        Task(name: name, priority: priority) {
+            await operation()
+            semaphore.signal()
+        }
+        semaphore.wait()
     }
 }

@@ -66,7 +66,7 @@ final class RootCoordinator: NSObject {
         {
             self.dashboardNavigationController = initialNav
         }
-        configureMacCatalystTitlebar(for: window)
+        configureMacCatalystWindow(for: window)
 
         let initialState: AppRoot =
             if Client.providers.accountProvider.isLoggedIn {
@@ -80,14 +80,20 @@ final class RootCoordinator: NSObject {
         setRoot(initialState)
     }
 
-    private func configureMacCatalystTitlebar(for window: UIWindow) {
+    private func configureMacCatalystWindow(for window: UIWindow) {
         #if targetEnvironment(macCatalyst)
             let windowScene =
                 window.windowScene
                 ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
-            guard let titlebar = windowScene?.titlebar else { return }
-            titlebar.titleVisibility = .hidden
-            titlebar.toolbarStyle = .unified
+
+            if let titlebar = windowScene?.titlebar {
+                titlebar.titleVisibility = .hidden
+                titlebar.toolbarStyle = .unified
+            }
+
+            if let sizeRestrictions = windowScene?.sizeRestrictions, #available(macCatalyst 16.0, *) {
+                sizeRestrictions.allowsFullScreen = false
+            }
         #endif
     }
 

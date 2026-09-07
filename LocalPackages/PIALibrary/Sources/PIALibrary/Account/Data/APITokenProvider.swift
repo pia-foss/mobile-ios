@@ -1,15 +1,15 @@
 import Foundation
 
-protocol APITokenProviderType {
+protocol APITokenProviderType: Sendable {
     func getAPIToken() -> APIToken?
     func save(apiToken: APIToken)
     func saveAPIToken(from data: Data) throws
     func clearAPIToken()
 }
 
-class APITokenProvider: APITokenProviderType {
+final class APITokenProvider: APITokenProviderType {
     private let keychainStore: SecureStore
-    let tokenSerializer: AuthTokenSerializerType
+    private let tokenSerializer: AuthTokenSerializerType
     private let apiTokenKey = "API_TOKEN_KEY"
 
     init(keychainStore: SecureStore, tokenSerializer: AuthTokenSerializerType) {

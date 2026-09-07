@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "Debug-Daten sind leer. Bitte vor erneutem Versuch versuchen eine Verbindung herzustellen.";
 "settings.application_information.debug.success.title" = "Debug-Daten übermittelt";
 "settings.application_information.debug.success.message" = "Debug-Informationen erfolgreich übermittelt. \nID: %@\nBitte notiere diese ID, da unser Support-Team sie benötigt, um Ihre Einsendung zu lokalisieren.";
+"settings.application_information.debug.success.copyId" = "ID kopieren";
 
 "settings.commit.messages.must_disconnect" = "Das VPN muss sich neu verbinden, damit einige Änderungen wirksam werden.";
 "settings.commit.messages.should_reconnect" = "VPN neu verbinden, um Änderungen zu übernehmen.";

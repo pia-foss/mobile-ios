@@ -20,7 +20,7 @@
 
 import Foundation
 
-public enum DedicatedIPStatus {
+public enum DedicatedIPStatus: Sendable {
 
     case active
     case expired

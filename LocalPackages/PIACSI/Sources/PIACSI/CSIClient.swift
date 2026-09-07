@@ -28,7 +28,7 @@ public enum CSIError: Error {
     case unexpectedResponse
 }
 
-public struct CSIClient {
+public struct CSIClient: Sendable {
     private let baseURL = "https://csi.supreme.tools/api/v2/report"
     private let userAgent: String
 

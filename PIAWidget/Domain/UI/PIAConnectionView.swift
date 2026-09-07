@@ -7,10 +7,10 @@ import WidgetKit
 @available(iOSApplicationExtension 16.1, *)
 internal struct PIAConnectionView: View {
 
-    internal let context: ActivityViewContext<PIAConnectionAttributes>
-    internal let showProtocol: Bool
-    let localizedRegionText = L10n.Widget.LiveActivity.Region.title
-    let localizedProtocolText = L10n.Widget.LiveActivity.SelectedProtocol.title
+    private let context: ActivityViewContext<PIAConnectionAttributes>
+    private let showProtocol: Bool
+    private let localizedRegionText = L10n.Widget.LiveActivity.Region.title
+    private let localizedProtocolText = L10n.Widget.LiveActivity.SelectedProtocol.title
 
     init(context: ActivityViewContext<PIAConnectionAttributes>, showProtocol: Bool = false) {
         self.context = context
@@ -49,14 +49,8 @@ internal struct PIAConnectionView: View {
                     Spacer()
                 }
 
-                Link(destination: URL(string: AppConstants.Widget.connect)!) {
-                    PIACircleImageView(
-                        size: 54,
-                        image: context.state.connected ? Asset.connectedButton.swiftUIImage : Asset.disconnectedButton.swiftUIImage
-                    )
-                }
+                PIAToggleButton(size: 54, isConnected: context.state.connected)
             }
         }
-
     }
 }

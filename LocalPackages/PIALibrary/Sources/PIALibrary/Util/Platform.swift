@@ -28,7 +28,7 @@ public struct Platform {
 
     /// True when an iOS binary is running on Apple Silicon Mac as "Designed for iPad".
     /// Always false on real iPhone/iPad, on the iOS Simulator, and on tvOS.
-    public static var isiOSAppOnMac: Bool = {
+    public static let isiOSAppOnMac: Bool = {
         #if os(iOS)
             return ProcessInfo.processInfo.isiOSAppOnMac
         #else
@@ -37,7 +37,7 @@ public struct Platform {
     }()
 
     /// True when the platform is Max Catalyst
-    public static var isMacCatalystApp: Bool = {
+    public static let isMacCatalystApp: Bool = {
         #if targetEnvironment(macCatalyst)
             return ProcessInfo.processInfo.isMacCatalystApp
         #else

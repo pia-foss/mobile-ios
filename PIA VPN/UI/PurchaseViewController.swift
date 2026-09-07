@@ -47,7 +47,7 @@ final class PurchaseViewController: AutolayoutViewController, BrandableNavigatio
     @IBOutlet private weak var buttonPurchase: PIAButton!
 
     private var config: Config!
-    private var allPlans: [PurchasePlan] = [.dummy, .dummy]
+    private var allPlans: [PurchasePlan] = [.dummy(), .dummy()]
     private var selectedPlanIndex: Int = 0
 
     private var isExpired = false

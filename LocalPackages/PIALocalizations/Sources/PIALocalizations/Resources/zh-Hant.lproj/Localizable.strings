@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "偵錯資料為空白，請先嘗試連線後再重新提交。";
 "settings.application_information.debug.success.title" = "偵錯資料已提交";
 "settings.application_information.debug.success.message" = "偵錯資料已成功提交。\nID：%@\n請記下此 ID，我們的支援團隊將需要它來處理您的個案。";
+"settings.application_information.debug.success.copyId" = "複製 ID";
 
 "settings.commit.messages.must_disconnect" = "部分修改須待VPN 重新連接，方可生效。";
 "settings.commit.messages.should_reconnect" = "重新連接 VPN ，進行修改。";

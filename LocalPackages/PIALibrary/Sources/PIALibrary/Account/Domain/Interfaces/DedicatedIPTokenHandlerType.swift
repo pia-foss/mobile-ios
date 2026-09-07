@@ -1,5 +1,5 @@
 import Foundation
 
-protocol DedicatedIPTokenHandlerType {
+protocol DedicatedIPTokenHandlerType: Sendable {
     func callAsFunction(dedicatedIp: DedicatedIPInformation, dipUsername: String)
 }

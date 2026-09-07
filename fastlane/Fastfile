@@ -263,12 +263,24 @@ platform :ios do
   end
 
   desc "Update What's New text for all languages from metadata folder"
-  desc "Usage: fastlane update_release_notes platform:ios|tvos"
-  desc "The ios platform also updates the Mac Catalyst version, which shares the iOS release notes"
+  desc "Usage: fastlane update_release_notes platform:ios|macos|tvos"
+  desc "iOS and macOS share the metadata folder but are separate App Store Connect versions, so they are uploaded one platform per run"
   desc "Edit fastlane/metadata/{locale}/release_notes.txt files before running this lane"
   lane :update_release_notes do |options|
+    require 'spaceship'
+
     platform = options[:platform] || "ios"
-    is_tvos = platform == "tvos"
+
+    # deliver_platform is what `deliver` calls it, asc_platform what the App Store Connect API calls it
+    config = {
+      "ios" => { label: "iOS", metadata_path: "./fastlane/metadata/ios", deliver_platform: "ios", asc_platform: "IOS" },
+      "macos" => { label: "macOS", metadata_path: "./fastlane/metadata/ios", deliver_platform: "osx", asc_platform: "MAC_OS" },
+      "tvos" => { label: "tvOS", metadata_path: "./fastlane/metadata/tvos", deliver_platform: "appletvos", asc_platform: "TV_OS" }
+    }[platform]
+
+    UI.user_error!("Unknown platform '#{platform}'. Use ios, macos or tvos.") if config.nil?
+
+    app_identifier = "com.privateinternetaccess.ios.PIA-VPN"
 
     api_key = app_store_connect_api_key(
       key_id: key_id,
@@ -276,31 +288,35 @@ platform :ios do
       key_content: key_content
     )
 
-    deliver_options = {
+    # Only an editable (not yet released) version accepts a What's New change
+    has_editable_version = begin
+      app = Spaceship::ConnectAPI::App.find(app_identifier)
+      UI.user_error!("App #{app_identifier} not found on App Store Connect") if app.nil?
+      !app.get_edit_app_store_version(platform: config[:asc_platform]).nil?
+    rescue StandardError => e
+      # Never let the pre-flight check itself stop the upload, let deliver report the real error
+      UI.important("Could not tell whether #{config[:label]} has an editable version (#{e.message}), attempting the upload anyway.")
+      true
+    end
+
+    unless has_editable_version
+      UI.important("No editable #{config[:label]} version on App Store Connect, skipping the release notes update.")
+      next
+    end
+
+    UI.message("Uploading release notes from #{config[:metadata_path]} (#{config[:label]})...")
+    deliver(
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
+      app_identifier: app_identifier,
+      platform: config[:deliver_platform],
+      metadata_path: config[:metadata_path],
       skip_binary_upload: true,
       skip_screenshots: true,
       skip_metadata: false,
       force: true,
       precheck_include_in_app_purchases: false
-    }
-
-    if is_tvos
-      deliver_options[:metadata_path] = "./fastlane/metadata/tvos"
-      # App Store Connect platforms sharing this metadata folder
-      target_platforms = ["appletvos"]
-    else
-      deliver_options[:metadata_path] = "./fastlane/metadata/ios"
-      # The Mac Catalyst version lives on the same app record and reuses the iOS notes
-      target_platforms = ["ios", "osx"]
-    end
-
-    target_platforms.each do |target_platform|
-      UI.message("Uploading release notes from #{deliver_options[:metadata_path]} (platform: #{target_platform})...")
-      deliver(deliver_options.merge(platform: target_platform))
-      UI.success("Successfully updated What's New text for all languages on #{target_platform}!")
-    end
+    )
+    UI.success("Successfully updated What's New text for all languages on #{config[:label]}!")
   end
 
   desc "Translate release notes from English to all supported languages using Claude"

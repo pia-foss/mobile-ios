@@ -38,13 +38,7 @@ struct PIAConnectionActivityWidget: Widget {
                 }
 
                 DynamicIslandExpandedRegion(.trailing, priority: 200) {
-                    Link(destination: URL(string: AppConstants.Widget.connect)!) {
-                        PIACircleImageView(
-                            size: 50,
-                            image: context.state.connected ? Asset.connectedButton.swiftUIImage : Asset.disconnectedButton.swiftUIImage
-                        )
-
-                    }
+                    PIAToggleButton(size: 50, isConnected: context.state.connected)
                 }
 
                 DynamicIslandExpandedRegion(.center, priority: 100) {

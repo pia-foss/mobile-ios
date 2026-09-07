@@ -35,7 +35,7 @@ public struct PinningEndpoint {
     }
 }
 
-public final class EndpointManager {
+public final class EndpointManager: Sendable {
 
     private let internalUrl = "10.0.0.1"
     private let proxy = "piaproxy.net"

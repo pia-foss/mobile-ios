@@ -1,10 +1,10 @@
 import Foundation
 
-protocol PaymentInformationDataConverterType {
+protocol PaymentInformationDataConverterType: Sendable {
     func callAsFunction(payment: Payment) -> Data?
 }
 
-class PaymentInformationDataConverter: PaymentInformationDataConverterType, JSONToStringCoverterType {
+final class PaymentInformationDataConverter: PaymentInformationDataConverterType, JSONToStringCoverterType {
 
     func callAsFunction(payment: Payment) -> Data? {
         let paymentInformation = PaymentInformation(

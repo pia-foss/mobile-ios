@@ -23,15 +23,15 @@
 import Foundation
 
 /// A `ServersBundle` wraps a list of `Server` with additional metadata.
-public struct ServersBundle {
+public struct ServersBundle: Sendable {
 
     /// Holds the metadata of the `ServerProvider` configuration.
     ///
     /// - Seealso: `ServerProvider.currentServersConfiguration`
-    public struct Configuration {
+    public struct Configuration: Sendable {
 
         /// A set of available ports to connect to the VPN servers found in this configuration.
-        public struct Ports {
+        public struct Ports: Sendable {
 
             /// The available ports over UDP.
             public let udp: [UInt16]

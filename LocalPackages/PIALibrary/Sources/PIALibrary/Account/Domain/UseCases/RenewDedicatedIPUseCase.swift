@@ -1,11 +1,11 @@
 import Foundation
 
-public protocol RenewDedicatedIPUseCaseType {
+public protocol RenewDedicatedIPUseCaseType: Sendable {
     typealias Completion = ((Result<Void, NetworkRequestError>) -> Void)
     func callAsFunction(dipToken: String, completion: @escaping Completion)
 }
 
-class RenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {
+final class RenewDedicatedIPUseCase: RenewDedicatedIPUseCaseType {
     private let networkClient: NetworkRequestClientType
     private let refreshAuthTokensChecker: RefreshAuthTokensCheckerType
 

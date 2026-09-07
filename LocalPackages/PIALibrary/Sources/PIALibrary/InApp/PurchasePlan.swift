@@ -22,7 +22,7 @@
 
 import Foundation
 
-public final class PurchasePlan: NSObject {
+public final class PurchasePlan {
     private struct DummyInAppProduct: InAppProduct {
         enum Native: Equatable {
             case none
@@ -51,10 +51,8 @@ public final class PurchasePlan: NSObject {
         return f
     }()
 
-    public static let dummy = PurchasePlan()
-
     public var isDummy: Bool {
-        return (self == .dummy)
+        return product is DummyInAppProduct
     }
 
     public let plan: Plan
@@ -99,10 +97,12 @@ public final class PurchasePlan: NSObject {
         return accessibleFormatter.string(for: price)!
     }
 
-    private override init() {
-        plan = .trial
-        product = DummyInAppProduct()
-        monthlyFactor = 1.0
+    public static func dummy() -> PurchasePlan {
+        return PurchasePlan(
+            plan: .trial,
+            product: DummyInAppProduct(),
+            monthlyFactor: 1.0
+        )
     }
 
     public init(plan: Plan, product: any InAppProduct, monthlyFactor: Decimal) {
@@ -111,10 +111,10 @@ public final class PurchasePlan: NSObject {
         self.product = product
         self.monthlyFactor = monthlyFactor
     }
+}
 
-    // MARK: CustomStringConvertible
-
-    public override var description: String {
+extension PurchasePlan: CustomStringConvertible {
+    public var description: String {
         return product.identifier
     }
 }

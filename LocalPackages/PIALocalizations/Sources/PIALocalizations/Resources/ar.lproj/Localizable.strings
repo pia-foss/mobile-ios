@@ -134,6 +134,7 @@
 "settings.application_information.debug.empty.message" = "معلومات تتبع الأخطاء فارغة. يرجى محاولة إجراء اتصال قبل محاولة إعادة الإرسال.";
 "settings.application_information.debug.success.title" = "تم إرسال معلومات تتبع الأخطاء";
 "settings.application_information.debug.success.message" = "تم إرسال معلومات تتبع الأخطاء بنجاح.\nالمعرف: %@\nيرجى تدوين هذا المعرف، حيث أن فريق الدعم سيحتاجه لتحديد ما أرسلته.";
+"settings.application_information.debug.success.copyId" = "نسخ المعرف";
 
 "settings.commit.messages.must_disconnect" = "يجب إعادة اتصال VPN حتى تسري بعض التغييرات.";
 "settings.commit.messages.should_reconnect" = "أعد اتصال VPN لتطبيق التغييرات.";

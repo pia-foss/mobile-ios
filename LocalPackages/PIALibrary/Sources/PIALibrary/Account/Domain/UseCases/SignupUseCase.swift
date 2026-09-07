@@ -1,11 +1,11 @@
 import Foundation
 
-public protocol SignupUseCaseType {
+public protocol SignupUseCaseType: Sendable {
     typealias Completion = ((Result<Credentials, NetworkRequestError>) -> Void)
     func callAsFunction(signup: Signup, completion: @escaping SignupUseCaseType.Completion)
 }
 
-class SignupUseCase: SignupUseCaseType {
+final class SignupUseCase: SignupUseCaseType {
     private let networkClient: NetworkRequestClientType
     private let signupInformationDataCoverter: SignupInformationDataCoverterType
 
