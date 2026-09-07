@@ -21,63 +21,38 @@
 //
 
 import Combine
-import NetworkExtension
-import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
 import UIKit
 
 private let log = PIALogger.logger(for: AppDelegate.self)
 
-@UIApplicationMain
+@main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private enum ShortcutItem: String {
-        case connect
-
-        case disconnect
-
-        case selectRegion
-    }
-
-    private let defaultMilliseconds = 200
-
-    var window: UIWindow?
     private var hotspotHelper: PIAHotspotHelper!
     #if !targetEnvironment(macCatalyst)
         private(set) var liveActivityManager: PIAConnectionLiveActivityManagerType?
     #endif
     var cancellables = Set<AnyCancellable>()
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    /// The scene starts the app once the migration check clears, and a scene can connect more than
+    /// once over the process' lifetime.
+    private var didStartApp = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
         AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
 
-        // Keep the launch screen presented while the migration check runs
-        window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
-
-        Bootstrapper.shared.shouldConfirmPlatformSDKMigration { [weak self] shouldConfirm in
-            guard shouldConfirm else {
-                self?.startApp(application)
-                return
-            }
-
-            self?.window?.rootViewController = PlatformSDKMigrationViewController {
-                Bootstrapper.shared.confirmPlatformSDKMigration()
-                self?.startApp(application)
-            }
-        }
-
         return true
     }
 
-    private func startApp(_ application: UIApplication) {
+    /// Called by `SceneDelegate` once the PlatformSDK migration check has been answered.
+    func startApp() {
+        guard !didStartApp else { return }
+        didStartApp = true
+
         Bootstrapper.shared.bootstrap()
-        application.shortcutItems = []
         hotspotHelper = PIAHotspotHelper()
         _ = hotspotHelper.configureHotspotHelper()
 
@@ -86,15 +61,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         setupDebugMenuObserver()
-        observeVPNStatusForShortcutItems(in: application)
-
-        if let window {
-            RootCoordinator.shared.install(in: window)
-        }
     }
 
     #if !targetEnvironment(macCatalyst)
-        private func instantiateLiveActivityManagerIfNeeded() {
+        func instantiateLiveActivityManagerIfNeeded() {
             if #available(iOS 16.2, *) {
                 // Only instantiates the LiveActivities if the Feature Flag for it is enabled
                 guard AppPreferences.shared.showDynamicIslandLiveActivity else {
@@ -119,12 +89,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Orientations
 
+    // Deprecated in favour of `UIWindowSceneDelegate.supportedInterfaceOrientations(for:)`, which
+    // is iOS 27+ only. This stays on the app delegate until the deployment target allows the move.
+    @available(iOS, deprecated: 27.0)
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard UserInterface.isPhone else {
             return .all
         }
 
-        let rootViewController = topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
+        let rootViewController = Self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
         switch rootViewController {
         // Matched on a protocol rather than a concrete class: the previous
         // `is GetStartedViewController` check would have silently stopped locking the orientation
@@ -136,7 +109,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
+    static func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
         if (rootViewController == nil) { return nil }
         if let nav = rootViewController as? UINavigationController {
             return topViewControllerWithRootViewController(rootViewController: nav.visibleViewController)
@@ -174,7 +147,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 completionHandler: nil)
         }
         alert.addCancelAction(L10n.Global.ok)
-        window?.rootViewController?.present(alert, animated: true, completion: nil)
+        RootCoordinator.shared.topPresentedViewController()?.present(alert, animated: true, completion: nil)
     }
 
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
@@ -183,253 +156,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        log.debug("Opened app from URL: \(url)")
-
-        if url.absoluteString.starts(with: AppConstants.MagicLink.url) {
-
-            log.debug("Trying to login using magic link")
-
-            guard !Client.providers.accountProvider.isLoggedIn else {
-                log.debug("User is already logged in")
-                return false
-            }
-
-            guard let signupCoordinator = RootCoordinator.shared.activeSignupCoordinator else {
-                log.error("Magic link opened with no signup flow on screen")
-                return false
-            }
-
-            let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController)
-            rootViewController?.navigationController?.popToRootViewController(animated: false)
-
-            let token = url.absoluteString[AppConstants.MagicLink.url.count...]
-            signupCoordinator.handleMagicLink(token: token)
-
-        } else if url.absoluteString.starts(with: AppConstants.Widget.connect), #unavailable(iOS 17) {
-            if Client.providers.vpnProvider.isVPNConnected {
-                disconnectAfter(milliseconds: defaultMilliseconds)
-            } else {
-                connectAfter(milliseconds: defaultMilliseconds)
-            }
-        } else if url.absoluteString.starts(with: AppConstants.QRSignin.url) {
-            let token = url.absoluteString[AppConstants.QRSignin.url.count...]
-            Client.configuration.tvOSBindToken = token
-
-            if let dashboardViewController = RootCoordinator.shared.dashboard {
-                if let apiToken = Client.providers.accountProvider.apiToken,
-                    let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token)
-                {
-                    viewController.modalPresentationStyle = .fullScreen
-                    dashboardViewController.present(viewController, animated: true)
-                }
-            }
-        }
-
-        guard let host = url.host else {
-            return false
-        }
-
-        switch host {
-        case AppConstants.AppURL.hostRegion:
-
-            // in case it's too early for notification delivery (vc not loaded)
-            TransientState.shouldDisplayRegionPicker = true
-
-        default:
-            return false
-        }
-
-        return true
-    }
-
-    // MARK: Shortcut items
-
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        log.debug("Opened app from shortcut item: \(shortcutItem.type)")
-
-        guard Client.providers.accountProvider.isLoggedIn else {
-            completionHandler(false)
-            return
-        }
-
-        handleShortcutItem(shortcutItem)
-        completionHandler(true)
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        refreshShortcutItems(in: application)
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
-        // Remove the Non compliant Wifi local notification as the app is in foreground now
-        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
-
-        #if !targetEnvironment(macCatalyst)
-            instantiateLiveActivityManagerIfNeeded()
-        #endif
-
-        let accountInformationVerifier = AccountInformationAvailabilityFactory.makeAccountInformationAvailabilityVerifier()
-
-        accountInformationVerifier.verifyAccountInformationAvailabity(after: AccountInformationAvailabilityVerifier.defaultDeadlineInSeconds, completion: nil)
-
-        Client.providers.accountProvider.featureFlags { _ in
-            if Client.configuration.featureFlags[.forceUpdate] {
-                NotificationCenter.default.post(name: Notification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
-            }
-        }
-    }
-
-    private func observeVPNStatusForShortcutItems(in application: UIApplication) {
-        // call first on app open
-        refreshShortcutItems(in: application)
-        // observe vpn status change
-        NotificationCenter.default
-            .publisher(for: .PIADaemonsDidUpdateVPNStatus)
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global(qos: .background))
-            .sink { [weak self] _ in
-                let status = Client.providers.vpnProvider.vpnStatus
-                guard status == .connected || status == .disconnected else { return }
-                self?.refreshShortcutItems(in: application)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func refreshShortcutItems(in application: UIApplication) {
-        guard Client.providers.accountProvider.isLoggedIn else {
-            return
-        }
-
-        let connected = Client.providers.vpnProvider.isVPNConnected
-        let connecting = (Client.providers.vpnProvider.vpnStatus == .connecting)
-        let disconnecting = (Client.providers.vpnProvider.vpnStatus == .disconnecting)
-        let isNotDisconnected = (connected || connecting) && !disconnecting
-        var itemAsset: ImageAsset!
-
-        let connectionStatusType = (isNotDisconnected ? ShortcutItem.disconnect : ShortcutItem.connect)
-        let connectionStatusString = (isNotDisconnected ? L10n.Shortcuts.disconnect : L10n.Shortcuts.connect)
-
-        var items: [UIApplicationShortcutItem] = []
-
-        itemAsset = (isNotDisconnected ? Asset.icon3dtDisconnect : Asset.icon3dtConnect)
-        let connectionStatusIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
-        let connect = UIApplicationShortcutItem(
-            type: connectionStatusType.rawValue,
-            localizedTitle: connectionStatusString,
-            localizedSubtitle: nil,
-            icon: connectionStatusIcon,
-            userInfo: nil
-        )
-        items.append(connect)
-
-        itemAsset = Asset.icon3dtSelectRegion
-        let selectRegionIcon = UIApplicationShortcutIcon(templateImageName: itemAsset.name)
-        let selectRegion = UIApplicationShortcutItem(
-            type: ShortcutItem.selectRegion.rawValue,
-            localizedTitle: L10n.Shortcuts.selectRegion,
-            localizedSubtitle: nil,
-            icon: selectRegionIcon,
-            userInfo: nil
-        )
-        items.append(selectRegion)
-
-        DispatchQueue.main.async { [weak application] in
-            application?.shortcutItems = items
-        }
-    }
-
-    private func handleShortcutItem(_ item: UIApplicationShortcutItem) {
-        guard let type = ShortcutItem(rawValue: item.type) else {
-            return
-        }
-
-        switch type {
-        case .connect:
-            if !Client.providers.vpnProvider.isVPNConnected {
-                // Dismiss any modally presented view controller on dashboard
-                NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
-
-                // this time delay seems to fix a strange issue of the VPN connecting from a fresh launch
-                connectAfter(milliseconds: defaultMilliseconds)
-            }
-
-        case .disconnect:
-            if Client.providers.vpnProvider.isVPNConnected {
-                // Dismiss any modally presented view controller on dashboard
-                NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
-
-                // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
-                dismissLeakProtectionAlert()
-
-                // this time delay seems to fix a strange issue of the VPN disconnecting and
-                // then automatically reconnecting when it's done from a fresh launch
-                disconnectAfter(milliseconds: defaultMilliseconds)
-            }
-
-        case .selectRegion:
-            guard let dashboard = RootCoordinator.shared.dashboard else {
-                return
-            }
-            dashboard.selectRegion(animated: true)
-        }
-    }
-
-    //MARK: Siri Shortcuts
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if userActivity.activityType == AppConstants.SiriShortcuts.shortcutConnect {
-            guard AppPreferences.shared.useConnectSiriShortcuts, !TrustedNetworkUtils.isTrustedNetwork else {
-                return false
-            }
-            Client.configuration.connectedManually = true
-            connectAfter(milliseconds: defaultMilliseconds)
-        } else {
-            guard AppPreferences.shared.useDisconnectSiriShortcuts, !TrustedNetworkUtils.isTrustedNetwork else {
-                return false
-            }
-
-            Client.configuration.disconnectedManually = true
-            disconnectAfter(milliseconds: defaultMilliseconds)
-        }
-        return true
-    }
-
-    private func connectAfter(milliseconds: Int) {
-        Macros.dispatch(after: .milliseconds(milliseconds)) {
-            Client.providers.vpnProvider.connect(nil)
-        }
-    }
-
-    private func disconnectAfter(milliseconds: Int) {
-        Macros.dispatch(after: .milliseconds(milliseconds)) {
-            Client.providers.vpnProvider.disconnect(nil)
-        }
-    }
-
 }
 
 extension AppDelegate {
-
-    // MARK: - App Delegate Ref
     static func delegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
     static func getRootTopViewController() -> UIViewController? {
         return RootCoordinator.shared.topPresentedViewController()
-    }
-
-}
-
-extension AppDelegate {
-
-    private func dismissLeakProtectionAlert() {
-        if let presentedAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController {
-            let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-
-            if presentedAlert.title == leakProtectionAlertTitle {
-                presentedAlert.dismiss(animated: true)
-            }
-        }
     }
 }
