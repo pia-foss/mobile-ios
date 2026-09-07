@@ -2,12 +2,12 @@ import Foundation
 
 fileprivate let log = PIALogger.logger(for: GetDedicatedIPsUseCase.self)
 
-public protocol GetDedicatedIPsUseCaseType {
+public protocol GetDedicatedIPsUseCaseType: Sendable {
     typealias Completion = ((Result<[DedicatedIPInformation], NetworkRequestError>) -> Void)
     func callAsFunction(dipTokens: [String], completion: @escaping Completion)
 }
 
-class GetDedicatedIPsUseCase: GetDedicatedIPsUseCaseType {
+final class GetDedicatedIPsUseCase: GetDedicatedIPsUseCaseType {
     private let networkClient: NetworkRequestClientType
     private let refreshAuthTokensChecker: RefreshAuthTokensCheckerType
 

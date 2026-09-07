@@ -25,7 +25,7 @@ import PIABase
 import StoreKit
 
 /// Simulates account-related operations
-public final class MockAccountProvider: AccountProvider, WebServicesConsumer {
+public final class MockAccountProvider: AccountProvider, WebServicesConsumer, @unchecked Sendable {
 
     /// Mocks the outcome of a sign-up operation.
     ///

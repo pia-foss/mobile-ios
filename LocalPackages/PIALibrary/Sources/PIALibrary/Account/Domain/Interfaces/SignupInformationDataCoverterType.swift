@@ -1,5 +1,5 @@
 import Foundation
 
-protocol SignupInformationDataCoverterType {
+protocol SignupInformationDataCoverterType: Sendable {
     func callAsFunction(signup: Signup) -> Data?
 }

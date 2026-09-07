@@ -22,23 +22,23 @@
 
 import Foundation
 
-public struct AppConstants {
+public enum AppConstants: Sendable {
 
     public static let appId = "955626407"
     public static let teamId = "5357M5NW9W"
     public static let appGroup = "group.com.privateinternetaccess"
 
-    public struct Reviews {
-        public static var appReviewUrl = "https://itunes.apple.com/app/id\(appId)?action=write-review"
-        public static var feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
+    public enum Reviews {
+        public static let appReviewUrl = "https://itunes.apple.com/app/id\(appId)?action=write-review"
+        public static let feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
     }
 
-    public struct About {
-        public static var componentsPath = Bundle.main.path(forResource: "Components", ofType: "plist")
+    public enum About {
+        public static let componentsPath = Bundle.main.path(forResource: "Components", ofType: "plist")
     }
 
-    public struct RegionsGEN4 {
-        public static var bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
+    public enum RegionsGEN4 {
+        public static let bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
     public enum InApp {
@@ -59,11 +59,11 @@ public struct AppConstants {
         public static let oldMonthlyProductIdentifier = "com.privateinternetaccess.ios.iap.1month"
     }
 
-    public struct AppURL {
+    public enum AppURL {
         public static let hostRegion = "region"
     }
 
-    public struct Extensions {
+    public enum Extensions {
         // Legacy per-protocol extensions (pre-PlatformSDK); live only while `usePlatformSDKVPN` is off.
         public static let tunnelBundleIdentifier = Bundle.main.bundleIdentifier! + ".Tunnel"
         public static let tunnelWireguardBundleIdentifier = Bundle.main.bundleIdentifier! + ".WG-Tunnel"
@@ -75,12 +75,12 @@ public struct AppConstants {
         public static let adBlockerBundleIdentifier = "com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
     }
 
-    public struct SiriShortcuts {
+    public enum SiriShortcuts {
         public static let shortcutConnect = "com.privateinternetaccess.ios.PIA-VPN.connect"
         public static let shortcutDisconnect = "com.privateinternetaccess.ios.PIA-VPN.disconnect"
     }
 
-    public struct Web {
+    public enum Web {
         public static let homeURL = URL(string: "https://www.privateinternetaccess.com/")!
         public static let supportURL = URL(string: "https://www.privateinternetaccess.com/helpdesk")!
         public static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
@@ -89,13 +89,13 @@ public struct AppConstants {
         public static let leakProtectionURL = URL(string: "\(Self.supportURL.absoluteString)/kb/articles/what-is-pia-s-leak-protection-feature-on-ios")!
     }
 
-    public struct Browser {
+    public enum Browser {
         public static let scheme = "inbrowser://?www.privateinternetaccess.com"
         public static let appStoreUrl = "itms-apps://itunes.apple.com/app/id598907571"
         public static let safariUrl = "https://apps.apple.com/us/app/inbrowser-private-browsing/id598907571?ls=1"
     }
 
-    public struct OpenVPNPacketSize {
+    public enum OpenVPNPacketSize {
         public static let defaultPacketSize = 1420
         public static let smallPacketSize = 1350
     }
@@ -132,7 +132,7 @@ public struct AppConstants {
         public static let highPacketSize = 1420
     }
 
-    public struct WireGuardPacketSize {
+    public enum WireGuardPacketSize {
         public static let defaultPacketSize = 1280
         public static let highPacketSize = 1420
     }
@@ -158,22 +158,22 @@ public struct AppConstants {
         }
     }
 
-    public struct MagicLink {
+    public enum MagicLink {
         public static let url = "piavpn:login?token="
     }
 
-    public struct Widget {
+    public enum Widget {
         // On iOS 15 and 16 we will keep using URL for the connect/disconnect widget action.
         // Starting on 17 and up, we use AppIntents instead, as a more modern API.
         @available(iOS, deprecated: 17, message: "Drop URL for connect/disconnect. Use AppIntent instead.")
         public static let connect = "piavpn:connect"
     }
 
-    public struct QRSignin {
+    public enum QRSignin {
         public static let url = "piavpn:loginqr?token="
     }
 
-    public struct HotspotHelper {
+    public enum HotspotHelper {
         public static let queueLabel = "com.privateinternetaccess.hotspothelper"
     }
 }

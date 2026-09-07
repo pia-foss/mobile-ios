@@ -1,6 +1,6 @@
 import Foundation
 
-class DedicatedIPServerMapper: DedicatedIPServerMapperType {
+final class DedicatedIPServerMapper: DedicatedIPServerMapperType {
     private let dedicatedIPTokenHandler: DedicatedIPTokenHandlerType
 
     init(dedicatedIPTokenHandler: DedicatedIPTokenHandlerType) {

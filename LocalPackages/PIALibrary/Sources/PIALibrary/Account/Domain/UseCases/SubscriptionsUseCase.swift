@@ -1,12 +1,13 @@
 import Foundation
 
-protocol SubscriptionsUseCaseType {
+protocol SubscriptionsUseCaseType: Sendable {
     typealias Completion = ((Result<AppStoreInformation?, NetworkRequestError>) -> Void)
     func callAsFunction(receiptBase64: String?, completion: @escaping Completion)
 }
-class SubscriptionsUseCase: SubscriptionsUseCaseType {
-    let networkClient: NetworkRequestClientType
-    let refreshAuthTokensChecker: RefreshAuthTokensCheckerType
+
+final class SubscriptionsUseCase: SubscriptionsUseCaseType {
+    private let networkClient: NetworkRequestClientType
+    private let refreshAuthTokensChecker: RefreshAuthTokensCheckerType
 
     init(networkClient: NetworkRequestClientType, refreshAuthTokensChecker: RefreshAuthTokensCheckerType) {
         self.networkClient = networkClient

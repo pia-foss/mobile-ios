@@ -38,7 +38,7 @@ public final class Server {
     public let serial: String
 
     /// Represents a VPN server address endpoint.
-    public struct Address: CustomStringConvertible {
+    public struct Address: CustomStringConvertible, Sendable {
 
         /// The endpoint hostname.
         public let hostname: String
@@ -174,7 +174,7 @@ public final class Server {
 
     public let dipUsername: String?
 
-    var isAutomatic: Bool
+    let isAutomatic: Bool
 
     /// :nodoc:
     public init(

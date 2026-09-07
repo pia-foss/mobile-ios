@@ -1,6 +1,6 @@
 import Foundation
 
-public class NetworkRequestFactory {
+public enum NetworkRequestFactory: Sendable {
     static func maketNetworkRequestClient() -> NetworkRequestClientType {
         networkRequestClientShared
     }
@@ -9,7 +9,7 @@ public class NetworkRequestFactory {
 // MARK: - Private
 
 private extension NetworkRequestFactory {
-    static var networkRequestClientShared: NetworkRequestClientType = {
+    static let networkRequestClientShared: NetworkRequestClientType = {
         NetworkRequestClient(networkConnectionRequestProvider: makeNetworkConnectionRequestProvider(), endpointManager: makeEndpointManager())
     }()
 

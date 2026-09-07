@@ -23,7 +23,7 @@
 import Foundation
 import PIABase
 
-final class MockWebServices: WebServices {
+final class MockWebServices: WebServices, @unchecked Sendable {
 
     var messageType: InAppMessageType = .view
 

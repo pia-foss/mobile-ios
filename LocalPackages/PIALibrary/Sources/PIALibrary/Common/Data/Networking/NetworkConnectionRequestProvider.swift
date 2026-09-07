@@ -1,14 +1,14 @@
 import Foundation
 import NWHttpConnection
 
-protocol NetworkConnectionRequestProviderType {
+protocol NetworkConnectionRequestProviderType: Sendable {
     func makeNetworkRequestConnection(for endpoint: PinningEndpoint, with configuration: NetworkRequestConfigurationType) -> NWHttpConnectionType?
 
 }
 
-class NetworkConnectionRequestProvider: NetworkConnectionRequestProviderType {
-    let apiTokenProvider: APITokenProviderType
-    let networkRequestURLProvider: NetworkRequestURLProviderType
+final class NetworkConnectionRequestProvider: NetworkConnectionRequestProviderType {
+    private let apiTokenProvider: APITokenProviderType
+    private let networkRequestURLProvider: NetworkRequestURLProviderType
 
     init(apiTokenProvider: APITokenProviderType, networkRequestURLProvider: NetworkRequestURLProviderType) {
         self.apiTokenProvider = apiTokenProvider

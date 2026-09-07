@@ -35,5 +35,6 @@ let package = Package(
             name: "PIAAccountTests",
             dependencies: ["PIAAccount"]
         )
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )

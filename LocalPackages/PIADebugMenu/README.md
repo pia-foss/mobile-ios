@@ -71,7 +71,7 @@ observer and the Catalyst menu bar item; tvOS keeps an equivalent check in `View
 #if DEVELOPMENT || STAGING
     return true
 #else
-    return TestFlightDetector.shared.isTestFlight
+    return TestFlightDetector.isTestFlight
 #endif
 ```
 

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol JSONToStringCoverterType {
+protocol JSONToStringCoverterType: Sendable {
     func stringify(json: [String: Any]?, prettyPrinted: Bool) -> String?
 }
 

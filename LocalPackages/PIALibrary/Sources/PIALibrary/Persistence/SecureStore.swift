@@ -22,7 +22,7 @@
 
 import Foundation
 
-protocol SecureStore: AnyObject {
+protocol SecureStore: AnyObject, Sendable {
 
     func username() -> String?
 
