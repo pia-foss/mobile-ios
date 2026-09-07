@@ -20,7 +20,6 @@
 //
 
 import Combine
-import CoreArchitecture
 import PIALibrary
 import PIAPaywall
 import UIKit
@@ -28,47 +27,48 @@ import UIKit
 /// Runs the welcome-back flow: the screen offered to a returning customer whose App Store account
 /// still holds a live subscription.
 ///
-/// Decides on its own whether there is a flow to run — `start()` checks for a receipt and reports
-/// `.didDismiss` without presenting anything when there is none. It does not decide when it goes
-/// away, though: the caller tears it down through `dismiss`, since only the caller knows what comes
-/// on screen next.
-final class WelcomeBackCoordinator: FlowCoordinator {
-    typealias Output = WelcomeBack.Output
+/// Owns both its appearance and its departure. `start()` checks for a receipt and, when there is one,
+/// makes the welcome-back screen the navigation controller's only view controller — it replaces the
+/// paywall rather than covering it. Every way out is handled here too: the login screen is asked for
+/// through `showLogin`, and both "nothing to restore" and a failed restore hand the flow back to the
+/// paywall through `showPaywall`. Only a successful restore is reported upward, since the host is the
+/// one that knows what an authenticated customer leads to.
+final class WelcomeBackCoordinator: Coordinator {
 
-    private let presentingViewController: UIViewController
+    enum Output {
+        case didAuthenticate(user: UserAccount)
+    }
+
+    private let navigationController: UINavigationController
     private let accountProvider: AccountProvider
     private let store: InAppProvider
+    private let showLogin: @MainActor () -> Void
+    private let showPaywall: @MainActor () -> Void
 
     private let subject = PassthroughSubject<Output, Never>()
-
-    private weak var hostViewController: UIViewController?
 
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
     init(
-        presentingViewController: UIViewController,
+        navigationController: UINavigationController,
         accountProvider: AccountProvider,
-        store: InAppProvider
+        store: InAppProvider,
+        showLogin: @escaping @MainActor () -> Void,
+        showPaywall: @escaping @MainActor () -> Void
     ) {
-        self.presentingViewController = presentingViewController
+        self.navigationController = navigationController
         self.accountProvider = accountProvider
         self.store = store
+        self.showLogin = showLogin
+        self.showPaywall = showPaywall
     }
 
-    // MARK: FlowCoordinator
+    // MARK: Coordinator
 
     func start() {
         Task { @MainActor [weak self] in
             await self?.presentIfEntitled()
         }
-    }
-
-    func dismiss(animated: Bool, completion: (() -> Void)? = nil) {
-        guard let hostViewController, hostViewController.presentingViewController != nil else {
-            completion?()
-            return
-        }
-        presentingViewController.dismiss(animated: animated, completion: completion)
     }
 
     // MARK: Flow
@@ -77,7 +77,7 @@ final class WelcomeBackCoordinator: FlowCoordinator {
     private func presentIfEntitled() async {
         let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
         guard await currentReceipt() != nil else {
-            subject.send(.didDismiss)
+            showPaywall()
             return
         }
 
@@ -87,13 +87,25 @@ final class WelcomeBackCoordinator: FlowCoordinator {
                     accountProvider: accountProvider,
                     store: store,
                     emit: { [weak self] output in
-                        self?.subject.send(output)
+                        self?.handle(output)
                     }
                 )
             )
         )
-        host.modalPresentationStyle = .fullScreen
-        hostViewController = host
-        presentingViewController.present(host, animated: false)
+        navigationController.setViewControllers([host], animated: false)
+    }
+
+    @MainActor
+    private func handle(_ output: WelcomeBack.Output) {
+        switch output {
+        case .didAuthenticate(let user):
+            subject.send(.didAuthenticate(user: user))
+
+        case .requestLogin:
+            showLogin()
+
+        case .didDismiss:
+            showPaywall()
+        }
     }
 }

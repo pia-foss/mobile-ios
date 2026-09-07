@@ -48,6 +48,10 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
+    /// Retained so the welcome-back flow can hand the screen back to the very paywall it replaced,
+    /// with the plans it had already fetched.
+    private var paywallHost: SignupPaywallHostingController?
+
     private var welcomeBackCoordinator: WelcomeBackCoordinator?
     private var welcomeBackCancellables = Set<AnyCancellable>()
 
@@ -84,6 +88,7 @@ final class SignupCoordinator: NSObject, Coordinator {
                 legal: legalLinks
             )
         )
+        paywallHost = host
 
         // The delegate below owns the bar across pushes and pops, so no push site has to; the paywall
         // asserts its own on top of that, because on iOS 15 none of these calls survives layout.
@@ -100,9 +105,11 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     private func startWelcomeBack() {
         let coordinator = WelcomeBackCoordinator(
-            presentingViewController: navigationController,
+            navigationController: navigationController,
             accountProvider: accountProvider,
-            store: Client.store
+            store: Client.store,
+            showLogin: { [weak self] in self?.showLogin() },
+            showPaywall: { [weak self] in self?.restorePaywallRoot() }
         )
         welcomeBackCoordinator = coordinator
 
@@ -111,6 +118,21 @@ final class SignupCoordinator: NSObject, Coordinator {
             .store(in: &welcomeBackCancellables)
 
         coordinator.start()
+    }
+
+    /// Makes the paywall the only screen again, which is both what happens when there is no
+    /// welcome-back flow to run and what a failed restore falls back to.
+    @MainActor
+    private func restorePaywallRoot() {
+        if let paywallHost, navigationController.viewControllers != [paywallHost] {
+            navigationController.setViewControllers([paywallHost], animated: false)
+        }
+        endWelcomeBack()
+    }
+
+    private func endWelcomeBack() {
+        welcomeBackCancellables.removeAll()
+        welcomeBackCoordinator = nil
     }
 
     /// Signs in from a magic-link deep link.
@@ -156,29 +178,12 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     // MARK: Welcome back output
 
-    private func handle(_ output: WelcomeBack.Output) {
-        func endWelcomeBack() {
-            welcomeBackCancellables.removeAll()
-            welcomeBackCoordinator = nil
-        }
-
+    /// Only a successful restore reaches here: welcome-back handles its own navigation.
+    private func handle(_ output: WelcomeBackCoordinator.Output) {
         switch output {
         case .didAuthenticate(let user):
-            welcomeBackCoordinator?.dismiss(animated: false) { [weak self] in
-                endWelcomeBack()
-                self?.finish(user: user, isSignup: false)
-            }
-
-        case .requestLogin:
-            showLogin()
-            welcomeBackCoordinator?.dismiss(animated: true) {
-                endWelcomeBack()
-            }
-
-        case .didDismiss:
-            welcomeBackCoordinator?.dismiss(animated: false) {
-                endWelcomeBack()
-            }
+            endWelcomeBack()
+            finish(user: user, isSignup: false)
         }
     }
 
@@ -354,7 +359,9 @@ extension SignupCoordinator: UINavigationControllerDelegate {
     ) {
         // Applied even when the flag already agrees: on iOS 15 it reads `true` while the bar is still
         // laid out, so a short-circuit here would skip the call that corrects it.
-        let shouldHide = viewController is SignupPaywallHostingController
+        let shouldHide =
+            viewController is SignupPaywallHostingController
+            || viewController is WelcomeBackHostingController
         navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }

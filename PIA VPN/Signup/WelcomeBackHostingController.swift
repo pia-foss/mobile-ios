@@ -29,6 +29,21 @@ final class WelcomeBackHostingController: UIHostingController<WelcomeBackView> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         traitCollection.userInterfaceStyle == .dark ? .lightContent : .darkContent
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideNavigationBar()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hideNavigationBarWhileTopmost()
+    }
 }
 
 extension WelcomeBackHostingController: PortraitLockedViewController {}

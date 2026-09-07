@@ -43,16 +43,28 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Unanimated: on a pop back the delegate has already animated the bar away, and animating it
-        // a second time shows the move twice.
+        hideNavigationBar()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        hideNavigationBarWhileTopmost()
+    }
+}
+
+// MARK: - Bar-less screens
+
+/// Shared by the two roots of the signup flow, both designed without a navigation bar.
+extension UIViewController {
+    /// Unanimated: on a pop back the flow's delegate has already animated the bar away, and animating
+    /// it a second time shows the move twice.
+    func hideNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    /// The bar off the paywall, asserted late: on iOS 15 every earlier call runs before the bar is laid
-    /// out and is lost. Only while the paywall is on top, or it fights the bar a push just asked for.
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
+    /// The same, asserted late: on iOS 15 every call that runs before the bar is laid out is lost.
+    /// Only while this screen is on top, or it fights the bar a push just asked for.
+    func hideNavigationBarWhileTopmost() {
         guard let navigationController,
             navigationController.topViewController === self,
             !navigationController.isNavigationBarHidden

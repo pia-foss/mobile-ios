@@ -25,7 +25,7 @@ import PIALocalizations
 import PIASwiftUI
 import SwiftUI
 
-/// Shown over the paywall when the App Store already holds a live subscription for this Apple ID.
+/// Replaces the paywall when the App Store already holds a live subscription for this Apple ID.
 public struct WelcomeBackView: View {
     fileprivate enum Metrics {
         static let contentMargin: CGFloat = 20
