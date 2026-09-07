@@ -36,8 +36,7 @@ The country comes from `GET /api/geo` (`country_code2`), and `["CN", "IR", "RU"]
 `censorshipPeckingOrder`. The lookup lives in the **app**, not the tunnel:
 
 ```
-ConnectivityDaemon (only while !connectivity.isVPN)
-  → geoCheck() → /api/geo → plain.geoCountryCode
+ConnectivityDaemon → connectivityCheck() → /api/geo → plain.geoCountryCode (only while !isVPN)
 KapePlatformSDKTunnelProfile.doSave → PIATunnelSharedState.writeConnectionInputs(…, geoCountryCode:)
 PIAEndpointRepository.peckingOrder(for:)  (tunnel) → censorship | normal
 ```
@@ -53,6 +52,9 @@ was updated then.
 
 Supporting choices:
 
+- **One endpoint, one call.** `/api/geo` returns `ip`, `country_code2` and `using_pia_server`, so the
+  connectivity check reads it instead of `/api/client/status` — same round trip the daemon already made,
+  and `/api/client/status` is gone.
 - **Shared state carries the country code, not a boolean.** The censored set sits beside
   `censorshipPeckingOrder`, so "what counts as censorship" lives next to "what we do about it", and the
   tunnel logs the code so support can see why an order was chosen.

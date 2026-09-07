@@ -29,21 +29,14 @@ extension PIAWebServices {
 
     func connectivityCheck() async -> Result<ConnectivityStatus, Error> {
         do {
-            let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 1_000)
-            return .success(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected))
-        } catch {
-            return .failure(error)
-        }
-    }
-
-    func geoCheck() async -> Result<GeoStatus, Error> {
-        do {
             let information = try await nativeAccountAPI.geo(requestTimeoutMillis: 3_000)
-            guard let countryCode = information.countryCode, !countryCode.isEmpty else {
-                return .failure(ClientError.malformedResponseData)
-            }
             return .success(
-                GeoStatus(countryCode: countryCode, isUsingPIAServer: information.usingPIAServer ?? false))
+                ConnectivityStatus(
+                    ipAddress: information.ip,
+                    countryCode: information.countryCode,
+                    isVPN: information.usingPIAServer ?? false
+                )
+            )
         } catch {
             return .failure(error)
         }
