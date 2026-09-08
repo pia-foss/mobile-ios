@@ -31,7 +31,7 @@ import NetworkExtension
 /// caller, because it is a step of connecting rather than a query with a reply.
 extension KapePlatformSDKTunnelProfile {
 
-    public func requestLog(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<String>?) {
+    public func requestLog(_ callback: LibraryCallback<String>?) {
         find { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
@@ -56,7 +56,7 @@ extension KapePlatformSDKTunnelProfile {
     /// `dataUsage` provider message and maps the reply into `Usage`. Returns
     /// `nil` (no usage) when disconnected or when the active protocol cannot
     /// report counters — the extension answers with an empty response.
-    public func requestDataUsage(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<Usage>?) {
+    public func requestDataUsage(_ callback: LibraryCallback<Usage>?) {
         find { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)

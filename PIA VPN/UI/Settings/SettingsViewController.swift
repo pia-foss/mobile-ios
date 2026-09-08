@@ -22,10 +22,7 @@
 
 import PIALibrary
 import PIALocalizations
-import PIAWireguard
 import SafariServices
-import TunnelKitCore
-import TunnelKitOpenVPN
 import UIKit
 import WidgetKit
 
@@ -46,14 +43,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     private var isResetting = false
 
     private var pendingPreferences: Client.Preferences.Editable!
-
-    var pendingOpenVPNSocketType: SocketType?
-
-    private var pendingHandshake: OpenVPN.Configuration.Handshake!
-
-    var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder!
-
-    var pendingWireguardVPNConfiguration: PIAWireguardConfiguration!
 
     private var pendingVPNAction: VPNAction?
 
@@ -117,49 +106,20 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         }
     }
 
-    func updateSocketType(socketType: SocketType?) {
-        pendingOpenVPNSocketType = socketType
-        pendingPreferences.openVPNSocketType = socketType?.rawValue
+    func updateSocketType(socketType: String?) {
+        pendingPreferences.openVPNSocketType = socketType
         updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
+    /// The tunnel derives its endpoints from the stored port and transport, so the port is all this
+    /// has to record — the endpoint list the legacy OpenVPN builder needed is gone with it.
     func updateRemotePort(port: UInt16) {
-        var endpoints = AppConfiguration.VPN.piaAutomaticProtocols
-
-        if let socketType = pendingOpenVPNSocketType {
-            if port != ProtocolSettingsViewController.AUTOMATIC_PORT {
-                endpoints = [EndpointProtocol(socketType, port)]
-            } else {
-                let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
-                let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
-                if !servedPorts.isEmpty {
-                    endpoints = servedPorts.map { EndpointProtocol(socketType, $0) }
-                }
-            }
-        }
-
-        pendingOpenVPNConfiguration.endpointProtocols = endpoints
         pendingPreferences.openVPNPort = Int(port)
         savePreferences()
     }
 
     func updateDataEncryption(encryption value: String) {
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: value)!
-            pendingPreferences.openVPNCipher = value
-        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            let algorithm = IKEv2EncryptionAlgorithm(rawValue: value) ?? .default
-            pendingPreferences.ikeV2EncryptionAlgorithm = algorithm
-            //reset integrity algorithm if the encryption changes
-            if let integrity = algorithm.integrityAlgorithms().first {
-                pendingPreferences.ikeV2IntegrityAlgorithm = integrity
-            }
-        }
-        savePreferences()
-    }
-
-    func updateHandshake(handshake value: IKEv2IntegrityAlgorithm) {
-        pendingPreferences.ikeV2IntegrityAlgorithm = value
+        pendingPreferences.openVPNCipher = value
         savePreferences()
     }
 
@@ -175,11 +135,16 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             case .dns:
                 if let settingValue = value as? String {
                     let dnsServers = DNSList.shared.valueForKey(settingValue)
-                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                        pendingOpenVPNConfiguration.dnsServers = dnsServers
+                    // Automatic can end up running either protocol, so its choice has to reach both
+                    // slots — previously it only ever wrote the WireGuard one, and a fallback to
+                    // OpenVPN silently ignored the user's resolvers.
+                    switch KapePlatformSDKVPNType(rawValue: pendingPreferences.vpnType) {
+                    case .openVPN:
                         pendingPreferences.openVPNDnsServers = dnsServers
-                    } else {
-                        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: dnsServers, packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                    case .wireGuard:
+                        pendingPreferences.wireGuardDnsServers = dnsServers
+                    default:
+                        pendingPreferences.openVPNDnsServers = dnsServers
                         pendingPreferences.wireGuardDnsServers = dnsServers
                     }
                 }
@@ -198,7 +163,8 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             return
         }
 
-        if let socketType = pendingOpenVPNSocketType {
+        let socketType = AppConstants.OpenVPNSocketType(rawValue: pendingPreferences.openVPNSocketType ?? "")
+        if let socketType {
             let ovpnPorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
             let servedPorts = (socketType == .udp) ? ovpnPorts.udp : ovpnPorts.tcp
             guard !servedPorts.isEmpty, !servedPorts.contains(port) else {
@@ -206,22 +172,14 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
             }
         }
 
-        log.debug("Remote port \(port) is not served over \(pendingOpenVPNSocketType?.rawValue ?? "automatic") — resetting it to automatic")
+        log.debug("Remote port \(port) is not served over \(socketType?.rawValue ?? "automatic") — resetting it to automatic")
         updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
     private func resetProtocolSettings() {
-        pendingOpenVPNSocketType = nil
         pendingPreferences.openVPNSocketType = nil
-
-        pendingOpenVPNConfiguration.cipher = OpenVPN.Cipher(rawValue: AppConstants.OpenVPNCrypto.default.rawValue)
-        pendingOpenVPNConfiguration.digest = OpenVPN.Digest(rawValue: AppConstants.OpenVPNCrypto.defaultAuth)
         pendingPreferences.openVPNCipher = AppConstants.OpenVPNCrypto.default.rawValue
-
-        pendingPreferences.ikeV2EncryptionAlgorithm = .default
-        if let integrity = IKEv2EncryptionAlgorithm.default.integrityAlgorithms().first {
-            pendingPreferences.ikeV2IntegrityAlgorithm = integrity
-        }
+        pendingPreferences.openVPNAuth = AppConstants.OpenVPNCrypto.defaultAuth
 
         updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
@@ -241,13 +199,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     @objc private func refreshWireGuardSettings() {
-        guard let currentWireguardVPNConfiguration = Client.preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
-            return
-        }
-
-        pendingPreferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
-        pendingPreferences.vpnType = PIAWGTunnelProfile.vpnType
+        pendingPreferences.vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
         savePreferences()
     }
 
@@ -284,21 +236,10 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         preferences.availableNetworks = pendingPreferences.availableNetworks
         preferences.nmtGenericRules = genericRules
 
-        preferences.ikeV2IntegrityAlgorithm = pendingPreferences.ikeV2IntegrityAlgorithm
-        preferences.ikeV2EncryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
-        preferences.ikeV2PacketSize = pendingPreferences.ikeV2PacketSize
         preferences.commit()
 
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            log.error("No default VPN custom configuration provided for PIA protocol")
-            return
-        }
         AppPreferences.shared.reset()
         DNSList.shared.resetPlist()
-        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingHandshake = AppPreferences.shared.piaHandshake
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
 
         refreshSettings()
         reportUpdatedPreferences()
@@ -423,15 +364,9 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     private func commitAppPreferences() {
-        AppPreferences.shared.piaSocketType = pendingOpenVPNSocketType
-        AppPreferences.shared.piaHandshake = pendingHandshake
-
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            AppPreferences.shared.openVPNCipher = pendingOpenVPNConfiguration.cipher?.rawValue
-            AppPreferences.shared.openVPNAuth = pendingOpenVPNConfiguration.digest?.rawValue
-            AppPreferences.shared.openVPNPort = pendingOpenVPNConfiguration.currentPort ?? 0
-        }
-
+        // The OpenVPN options used to be mirrored into `AppPreferences` here. They are staged in
+        // `pendingPreferences` now, and `AppPreferences` writes the *same* app-group keys, so
+        // `pendingPreferences.commit()` below is the single write.
         AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
         AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
         AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
@@ -463,21 +398,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     @objc func reloadSettings() {
         pendingPreferences = Client.preferences.editable()
 
-        guard let currentOpenVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            log.error("No default VPN custom configuration provided for PIA OpenVPN protocol")
-            return
-        }
-
-        guard let currentWireguardVPNConfiguration = pendingPreferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
-            return
-        }
-
-        pendingOpenVPNSocketType = AppPreferences.shared.piaSocketType
-        pendingHandshake = AppPreferences.shared.piaHandshake
-        pendingOpenVPNConfiguration = currentOpenVPNConfiguration.sessionConfiguration.builder()
-        pendingWireguardVPNConfiguration = currentWireguardVPNConfiguration
-
         validateRemotePort()
         validateDNSList()
         tableView.reloadData()
@@ -487,47 +407,21 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingVPNAction = pendingPreferences.requiredVPNAction()
     }
 
+    /// MTU no longer belongs here: the tunnel derives it from `useSmallPackets`, which is already a
+    /// staged preference.
     func savePreferences() {
-        log.debug("OpenVPN endpoints: \(pendingOpenVPNConfiguration.endpointProtocols ?? [])")
-
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-            var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: pendingOpenVPNConfiguration.build())
-
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                if pendingPreferences.useSmallPackets {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
-                } else {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
-                }
-            }
-            builder.shouldDebug = true
-            pendingPreferences.setVPNCustomConfiguration(builder.build(), for: pendingPreferences.vpnType)
-        } else {
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                if pendingPreferences.useSmallPackets {
-                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize), for: pendingPreferences.vpnType)
-                } else {
-                    pendingPreferences.setVPNCustomConfiguration(PIAWireguardConfiguration(customDNSServers: pendingWireguardVPNConfiguration.customDNSServers, packetSize: AppConstants.WireGuardPacketSize.highPacketSize), for: pendingPreferences.vpnType)
-                }
-            }
-        }
-
         updateCustomDNSAppPreferences()
         refreshSettings()
         reportUpdatedPreferences()
     }
 
     private func updateCustomDNSAppPreferences() {
-        var dnsServers = pendingOpenVPNConfiguration.dnsServers
-        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-            dnsServers = pendingWireguardVPNConfiguration.customDNSServers
-        }
+        let dnsServers =
+            KapePlatformSDKVPNType(rawValue: pendingPreferences.vpnType) == .wireGuard
+            ? pendingPreferences.wireGuardDnsServers
+            : pendingPreferences.openVPNDnsServers
 
-        if let dnsServers = dnsServers {
-            AppPreferences.shared.usesCustomDNS = DNSList.shared.hasCustomDNS(for: pendingPreferences.vpnType, in: dnsServers)
-        } else {
-            AppPreferences.shared.usesCustomDNS = false
-        }
+        AppPreferences.shared.usesCustomDNS = DNSList.shared.hasCustomDNS(for: pendingPreferences.vpnType, in: dnsServers)
     }
 
     // MARK: ModalController
@@ -558,36 +452,22 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     ///Check if the current value of the DNS is valid. If not, reset to default PIA server
     private func validateDNSList() {
-        if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-            if Flags.shared.enablesDNSSettings {
-                var isValid = false
-                for dns in DNSList.shared.dnsList {
-                    for (_, value) in dns {
-                        if pendingWireguardVPNConfiguration.customDNSServers == value {
-                            isValid = true
-                            break
-                        }
-                    }
-                }
-                if !isValid {
-                    pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: [], packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
-                }
+        guard Flags.shared.enablesDNSSettings else {
+            return
+        }
+
+        let isKnown: ([String]) -> Bool = { servers in
+            DNSList.shared.dnsList.contains { dns in
+                dns.contains { $0.value == servers }
             }
-        } else {
-            if Flags.shared.enablesDNSSettings {
-                var isValid = false
-                for dns in DNSList.shared.dnsList {
-                    for (_, value) in dns {
-                        if pendingOpenVPNConfiguration.dnsServers == value {
-                            isValid = true
-                            break
-                        }
-                    }
-                }
-                if !isValid {
-                    pendingOpenVPNConfiguration.dnsServers = []
-                }
-            }
+        }
+
+        if !isKnown(pendingPreferences.wireGuardDnsServers) {
+            pendingPreferences.wireGuardDnsServers = []
+        }
+
+        if !isKnown(pendingPreferences.openVPNDnsServers) {
+            pendingPreferences.openVPNDnsServers = []
         }
     }
 
@@ -604,12 +484,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         if !Flags.shared.enablesDevelopmentSettings {
             sections.removeAll(where: { $0 == SettingOptions.development })
         }
-        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
-            sections.removeAll(where: { $0 == SettingOptions.network })
-            return sections.count
-        } else {
-            return sections.count
-        }
+        return sections.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -618,15 +493,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.accessoryView = nil
         cell.selectionStyle = .default
 
-        guard var section = SettingOptions(rawValue: indexPath.row) else {
+        guard let section = SettingOptions(rawValue: indexPath.row) else {
             log.debug("unknown section raw value \(indexPath.row)")
             return cell
-        }
-
-        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
-            var sections = SettingOptions.allCases
-            sections.removeAll(where: { $0 == SettingOptions.network })
-            section = sections[indexPath.row]
         }
 
         cell.textLabel?.text = section.localizedTitleMessage()
@@ -661,15 +530,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard var section = SettingOptions(rawValue: indexPath.row) else {
+        guard let section = SettingOptions(rawValue: indexPath.row) else {
             log.debug("unknown section raw value \(indexPath.row)")
             return
-        }
-
-        if pendingPreferences?.vpnType == IKEv2Profile.vpnType {
-            var sections = SettingOptions.allCases
-            sections.removeAll(where: { $0 == SettingOptions.network })
-            section = sections[indexPath.row]
         }
 
         switch section {
@@ -696,22 +559,4 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         Theme.current.applyTableSectionFooter(view)
     }
 
-}
-
-extension OpenVPN.ConfigurationBuilder {
-
-    var currentPort: UInt16? {
-        guard endpointProtocols?.count == 1 else {
-            return nil
-        }
-        guard let port = endpointProtocols?.first?.port else {
-            log.error("Zero current protocols. Returning automatic port.")
-            return nil
-        }
-        return port
-    }
-
-    func isEncryptionGCM() -> Bool {
-        return (cipher == .aes128gcm) || (cipher == .aes256gcm)
-    }
 }

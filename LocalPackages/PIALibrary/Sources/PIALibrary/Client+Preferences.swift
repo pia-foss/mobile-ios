@@ -43,8 +43,6 @@ private protocol PreferencesStore: AnyObject {
 
     var vpnDisconnectsOnSleep: Bool { get set }
 
-    var vpnCustomConfigurations: [String: VPNCustomConfiguration] { get set }
-
     var availableNetworks: [String] { get set }
 
     var trustedNetworks: [String] { get set }
@@ -57,17 +55,13 @@ private protocol PreferencesStore: AnyObject {
 
     var nmtRulesEnabled: Bool { get set }
 
-    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm { get set }
-
-    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm { get set }
-
-    var ikeV2PacketSize: Int { get set }
-
     var useSmallPackets: Bool { get set }
 
     var openVPNSocketType: String? { get set }
 
     var openVPNCipher: String? { get set }
+
+    var openVPNAuth: String? { get set }
 
     var openVPNPort: Int { get set }
 
@@ -87,17 +81,9 @@ private protocol PreferencesStore: AnyObject {
 
     var hasRespondedToServiceQualityConsent: Bool { get set }
 
-    func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration?
-
-    func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String)
-
 }
 
 private extension PreferencesStore {
-    var activeVPNCustomConfiguration: VPNCustomConfiguration? {
-        return vpnCustomConfiguration(for: vpnType)
-    }
-
     func load(from source: PreferencesStore) {
         preferredServer = source.preferredServer
         isPersistentConnection = source.isPersistentConnection
@@ -106,19 +92,16 @@ private extension PreferencesStore {
         nmtMigrationSuccess = source.nmtMigrationSuccess
         vpnType = source.vpnType
         vpnDisconnectsOnSleep = source.vpnDisconnectsOnSleep
-        vpnCustomConfigurations = source.vpnCustomConfigurations
         availableNetworks = source.availableNetworks
         trustedNetworks = source.trustedNetworks
         nmtTrustedNetworkRules = source.nmtTrustedNetworkRules
         nmtTemporaryOpenNetworks = source.nmtTemporaryOpenNetworks
         nmtGenericRules = source.nmtGenericRules
         nmtRulesEnabled = source.nmtRulesEnabled
-        ikeV2IntegrityAlgorithm = source.ikeV2IntegrityAlgorithm
-        ikeV2EncryptionAlgorithm = source.ikeV2EncryptionAlgorithm
-        ikeV2PacketSize = source.ikeV2PacketSize
         useSmallPackets = source.useSmallPackets
         openVPNSocketType = source.openVPNSocketType
         openVPNCipher = source.openVPNCipher
+        openVPNAuth = source.openVPNAuth
         openVPNPort = source.openVPNPort
         openVPNDnsServers = source.openVPNDnsServers
         wireGuardDnsServers = source.wireGuardDnsServers
@@ -249,36 +232,6 @@ extension Client {
             }
         }
 
-        /// Integrity algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm {
-            get {
-                return accessedDatabase.plain.ikeV2IntegrityAlgorithm
-            }
-            set {
-                accessedDatabase.plain.ikeV2IntegrityAlgorithm = newValue
-            }
-        }
-
-        /// Encryption algorithm for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm {
-            get {
-                return accessedDatabase.plain.ikeV2EncryptionAlgorithm
-            }
-            set {
-                accessedDatabase.plain.ikeV2EncryptionAlgorithm = newValue
-            }
-        }
-
-        /// Packet size value for IKEv2 VPN configuration
-        public fileprivate(set) var ikeV2PacketSize: Int {
-            get {
-                return accessedDatabase.plain.ikeV2PacketSize
-            }
-            set {
-                accessedDatabase.plain.ikeV2PacketSize = newValue
-            }
-        }
-
         /// "Use Small Packets" — a single user-facing setting applied to whichever protocol
         /// (OpenVPN or WireGuard) ends up connecting, including under automatic negotiation.
         public fileprivate(set) var useSmallPackets: Bool {
@@ -290,7 +243,7 @@ extension Client {
             }
         }
 
-        /// The OpenVPN transport (`SocketType` raw value, "UDP"/"TCP"); `nil` means automatic.
+        /// The OpenVPN transport (`AppConstants.OpenVPNSocketType` raw value); `nil` means automatic.
         public fileprivate(set) var openVPNSocketType: String? {
             get {
                 return accessedDatabase.plain.openVPNSocketType
@@ -307,6 +260,16 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.openVPNCipher = newValue
+            }
+        }
+
+        /// The OpenVPN auth digest (raw value, e.g. "SHA256").
+        public fileprivate(set) var openVPNAuth: String? {
+            get {
+                return accessedDatabase.plain.openVPNAuth
+            }
+            set {
+                accessedDatabase.plain.openVPNAuth = newValue
             }
         }
 
@@ -339,63 +302,6 @@ extension Client {
                 accessedDatabase.plain.wireGuardDnsServers = newValue
             }
         }
-
-        /// A dictionary of custom VPN configurations, mapped by `VPNProfile.vpnType`.
-        public fileprivate(set) var vpnCustomConfigurations: [String: VPNCustomConfiguration] {
-            get {
-                //                return accessedDatabase.plain.vpnCustomConfigurationMaps?.map {
-                //                    let profile = configuration.profile(forVPNType: $0.key)
-                //                    return profile?.parseCustomConfiguration($0.value)
-                //                }
-                guard let allMaps = accessedDatabase.plain.vpnCustomConfigurationMaps, !allMaps.isEmpty else {
-                    return defaults.vpnCustomConfigurations
-                }
-                var allConfigurations: [String: VPNCustomConfiguration] = [:]
-                for (vpnType, map) in allMaps {
-                    let profile = configuration.profile(forVPNType: vpnType)
-                    guard let configuration = profile?.parsedCustomConfiguration(from: map) ?? defaults.vpnCustomConfiguration(for: vpnType) else {
-                        continue
-                    }
-                    allConfigurations[vpnType] = configuration
-                }
-                return allConfigurations
-            }
-            set {
-                accessedDatabase.plain.vpnCustomConfigurationMaps = newValue.mapValues { $0.serialized() }
-            }
-        }
-
-        /**
-         Returns the custom VPN configuration for a given `VPNProfile.vpnType`.
-
-         - Parameter vpnType: The VPN profile type.
-         - Returns: The associated `VPNCustomConfiguration` or `nil` if none.
-         */
-        public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
-            guard let map = accessedDatabase.plain.vpnCustomConfigurationMaps?[vpnType] else {
-                return defaults.vpnCustomConfigurations[vpnType]
-            }
-            let profile = configuration.profile(forVPNType: vpnType)
-            return profile?.parsedCustomConfiguration(from: map)
-        }
-
-        /**
-         Sets the custom VPN configuration for a given `VPNProfile.vpnType`.
-
-         - Parameter customConfiguration: The `VPNCustomConfiguration` to associate or `nil` if none.
-         - Parameter vpnType: The VPN profile type.
-         */
-        public func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String) {
-            var allMaps = accessedDatabase.plain.vpnCustomConfigurationMaps ?? [:]
-            allMaps[vpnType] = customConfiguration.serialized()
-            accessedDatabase.plain.vpnCustomConfigurationMaps = allMaps
-        }
-
-        #if os(iOS)
-            public func setVpnTypeToWireguard() {
-                self.vpnType = PIAWGTunnelProfile.vpnType
-            }
-        #endif
 
         /// The `String` array of available WiFi networks
         public fileprivate(set) var availableNetworks: [String] {
@@ -618,16 +524,11 @@ extension Client.Preferences {
             trustCellularData = false
             nmtMigrationSuccess = false
 
-            #if os(iOS)
-                vpnType = PIAWGTunnelProfile.vpnType
-            #endif
-
-            #if os(tvOS)
-                vpnType = IKEv2Profile.vpnType
-            #endif
+            // Both platforms connect through the PlatformSDK tunnel, whose protocol this preference
+            // selects; automatic negotiation is the default.
+            vpnType = KapePlatformSDKVPNType.automatic.rawValue
 
             vpnDisconnectsOnSleep = false
-            vpnCustomConfigurations = [:]
             availableNetworks = []
             trustedNetworks = []
             nmtTrustedNetworkRules = [:]
@@ -638,12 +539,10 @@ extension Client.Preferences {
                 NMTType.cellular.rawValue: NMTRules.alwaysConnect.rawValue
             ]
             nmtRulesEnabled = false
-            ikeV2IntegrityAlgorithm = .default
-            ikeV2EncryptionAlgorithm = .default
-            ikeV2PacketSize = 0
             useSmallPackets = false
             openVPNSocketType = nil
             openVPNCipher = nil
+            openVPNAuth = nil
             openVPNPort = 0
             openVPNDnsServers = []
             wireGuardDnsServers = []
@@ -716,8 +615,6 @@ extension Client.Preferences {
         public var vpnDisconnectsOnSleep: Bool
 
         /// :nodoc:
-        public var vpnCustomConfigurations: [String: VPNCustomConfiguration]
-
         /// :nodoc:
         public var availableNetworks: [String]
 
@@ -737,15 +634,6 @@ extension Client.Preferences {
         public var nmtRulesEnabled: Bool
 
         /// :nodoc:
-        public var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm
-
-        /// :nodoc:
-        public var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm
-
-        /// :nodoc:
-        public var ikeV2PacketSize: Int
-
-        /// :nodoc:
         public var useSmallPackets: Bool
 
         /// :nodoc:
@@ -753,6 +641,8 @@ extension Client.Preferences {
 
         /// :nodoc:
         public var openVPNCipher: String?
+
+        public var openVPNAuth: String?
 
         /// :nodoc:
         public var openVPNPort: Int
@@ -809,16 +699,6 @@ extension Client.Preferences {
         /// :nodoc:
         public var lastKnownException: String?
 
-        /// :nodoc:
-        public func vpnCustomConfiguration(for vpnType: String) -> VPNCustomConfiguration? {
-            return vpnCustomConfigurations[vpnType]
-        }
-
-        /// :nodoc:
-        public func setVPNCustomConfiguration(_ customConfiguration: VPNCustomConfiguration, for vpnType: String) {
-            vpnCustomConfigurations[vpnType] = customConfiguration
-        }
-
         // MARK: Required actions
 
         /**
@@ -856,15 +736,6 @@ extension Client.Preferences {
             if (vpnType != target.vpnType) {
                 queue.append(VPNActionDisconnectAndReinstall())
             }
-            if (ikeV2IntegrityAlgorithm != target.ikeV2IntegrityAlgorithm) {
-                queue.append(VPNActionDisconnectAndReinstall())
-            }
-            if (ikeV2EncryptionAlgorithm != target.ikeV2EncryptionAlgorithm) {
-                queue.append(VPNActionDisconnectAndReinstall())
-            }
-            if (ikeV2PacketSize != target.ikeV2PacketSize) {
-                queue.append(VPNActionDisconnectAndReinstall())
-            }
             if (useSmallPackets != target.useSmallPackets) {
                 queue.append(VPNActionReinstall())
             }
@@ -874,6 +745,9 @@ extension Client.Preferences {
             if (openVPNCipher != target.openVPNCipher) {
                 queue.append(VPNActionReinstall())
             }
+            if (openVPNAuth != target.openVPNAuth) {
+                queue.append(VPNActionReinstall())
+            }
             if (openVPNPort != target.openVPNPort) {
                 queue.append(VPNActionReinstall())
             }
@@ -881,13 +755,6 @@ extension Client.Preferences {
                 queue.append(VPNActionReinstall())
             }
             if (wireGuardDnsServers != target.wireGuardDnsServers) {
-                queue.append(VPNActionReinstall())
-            }
-            if let configuration = vpnCustomConfigurations[vpnType],
-                let targetConfiguration = target.activeVPNCustomConfiguration,
-                !configuration.isEqual(to: targetConfiguration)
-            {
-
                 queue.append(VPNActionReinstall())
             }
             return queue.max { $0.priority < $1.priority }
@@ -928,6 +795,9 @@ extension Client.Preferences {
             if (openVPNCipher != target.openVPNCipher) {
                 return true
             }
+            if (openVPNAuth != target.openVPNAuth) {
+                return true
+            }
             if (openVPNPort != target.openVPNPort) {
                 return true
             }
@@ -935,13 +805,6 @@ extension Client.Preferences {
                 return true
             }
             if (wireGuardDnsServers != target.wireGuardDnsServers) {
-                return true
-            }
-            if let configuration = vpnCustomConfigurations[vpnType],
-                let targetConfiguration = target.activeVPNCustomConfiguration,
-                !configuration.isEqual(to: targetConfiguration)
-            {
-
                 return true
             }
             return false
