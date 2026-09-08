@@ -314,7 +314,8 @@ platform :ios do
       skip_screenshots: true,
       skip_metadata: false,
       force: true,
-      precheck_include_in_app_purchases: false
+      precheck_include_in_app_purchases: false,
+      version_check_wait_retry_limit: 1
     )
     UI.success("Successfully updated What's New text for all languages on #{config[:label]}!")
   end
