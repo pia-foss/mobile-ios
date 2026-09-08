@@ -1534,7 +1534,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
 
             let vpnProtocol = vpnProvider.currentVPNType.vpnProtocol
 
-            let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionFlag: "flag-\(currentServer.country.lowercased())", vpnProtocol: vpnProtocol)
+            let state = PIAConnectionAttributes.ContentState(connected: vpnProvider.isVPNConnected, regionName: currentServer.name, regionCountryCode: currentServer.country, vpnProtocol: vpnProtocol)
             return state
         }
 

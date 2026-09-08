@@ -1,5 +1,4 @@
 #if !targetEnvironment(macCatalyst)
-
     import ActivityKit
     import Foundation
 
@@ -9,7 +8,7 @@
         public struct ContentState: Codable, Hashable, Sendable {
             let connected: Bool
             let regionName: String
-            let regionFlag: String
+            let regionCountryCode: String
             let vpnProtocol: String
         }
     }

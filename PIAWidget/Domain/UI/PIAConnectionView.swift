@@ -1,3 +1,4 @@
+import PIAAssetsFlags
 import PIAAssetsWidget
 import PIALibrary
 import PIALocalizations
@@ -20,7 +21,9 @@ internal struct PIAConnectionView: View {
     var body: some View {
         HStack {
             HStack {
-                PIACircleImageView(size: 24, image: Image(context.state.regionFlag), contentMode: .fill)
+                if let flagImage = Flag.swiftUIImage(forCountry: context.state.regionCountryCode) {
+                    PIACircleImageView(size: 24, image: flagImage, contentMode: .fill)
+                }
                 VStack(alignment: .leading) {
                     Text(localizedRegionText)
                         .font(.caption)
