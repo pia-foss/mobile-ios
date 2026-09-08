@@ -7,7 +7,8 @@ let package = Package(
     products: [
         .library(name: "PIAAssetsMobile", targets: ["PIAAssetsMobile"]),
         .library(name: "PIAAssetsTV", targets: ["PIAAssetsTV"]),
-        .library(name: "PIAAssetsWidget", targets: ["PIAAssetsWidget"])
+        .library(name: "PIAAssetsWidget", targets: ["PIAAssetsWidget"]),
+        .library(name: "PIAAssetsFlags", targets: ["PIAAssetsFlags"])
     ],
     targets: [
         .target(
@@ -24,6 +25,11 @@ let package = Package(
             name: "PIAAssetsWidget",
             resources: [.process("Resources")],
             swiftSettings: [.swiftLanguageMode(.v5)]
+        ),
+        .target(
+            name: "PIAAssetsFlags",
+            resources: [.process("Resources")],
+            swiftSettings: [.swiftLanguageMode(.v6)]
         )
     ]
 )

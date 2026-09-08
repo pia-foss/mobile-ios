@@ -1,4 +1,5 @@
 import Foundation
+import PIAAssetsFlags
 import PIAAssetsTV
 import PIALibrary
 
@@ -8,8 +9,7 @@ protocol QuickConnectButtonViewModelDelegate: AnyObject {
     func quickConnectButtonViewModel(didSelect server: ServerType)
 }
 
-class QuickConnectButtonViewModel: ObservableObject {
-
+final class QuickConnectButtonViewModel: ObservableObject {
     private let server: ServerType
     private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
 
@@ -17,7 +17,7 @@ class QuickConnectButtonViewModel: ObservableObject {
         if getDedicatedIpUseCase.isDedicatedIp(server) {
             return Asset.iconDipLocation.swiftUIImage
         }
-        return Asset.flag(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
+        return Flag.swiftUIImage(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
     }
 
     var titleText: String {
