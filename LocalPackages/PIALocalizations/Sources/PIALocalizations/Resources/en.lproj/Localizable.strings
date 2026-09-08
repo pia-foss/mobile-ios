@@ -614,6 +614,16 @@
 "signup.paywall.accessibility.rating"= "Rated %1$@ out of 5 stars from %2$@ ratings";
 "signup.paywall.accessibility.plan_selected"= "Selected";
 
+// WELCOME BACK
+// Shown over the paywall when the App Store reports a live subscription on this Apple ID.
+
+"signup.welcome_back.title"= "Welcome Back!";
+"signup.welcome_back.message"= "You have a Private Internet Access subscription linked to the App Store. Sign in to protect your device and see our latest features.";
+"signup.welcome_back.sign_in_with"= "Sign In with";
+"signup.welcome_back.or"= "Or";
+"signup.welcome_back.cta.app_store"= "App Store Account";
+"signup.welcome_back.cta.credentials"= "Username and Password";
+
 // WALKTHROUGH
 
 

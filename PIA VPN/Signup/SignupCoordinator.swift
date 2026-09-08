@@ -35,7 +35,6 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
-@MainActor
 final class SignupCoordinator: NSObject, Coordinator {
 
     enum Output {
@@ -49,6 +48,12 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
+    /// Retained so welcome-back can hand the screen back to it with its plans already fetched.
+    private var paywallHost: SignupPaywallHostingController?
+
+    private var welcomeBackCoordinator: WelcomeBackCoordinator?
+    private var welcomeBackCancellables = Set<AnyCancellable>()
+
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
     /// What the host installs as its root or presents modally. A navigation controller, because the
@@ -57,15 +62,17 @@ final class SignupCoordinator: NSObject, Coordinator {
 
     init(
         accountProvider: AccountProvider,
-        navigationController: UINavigationController = UINavigationController()
+        navigationController: UINavigationController? = nil
     ) {
         self.accountProvider = accountProvider
-        self.navigationController = navigationController
+        self.navigationController = navigationController ?? UINavigationController()
         super.init()
     }
 
     // MARK: Coordinator
 
+    // MainActor because Paywall.Dependencies.live requires it for now.
+    @MainActor
     func start() {
         let host = SignupPaywallHostingController(
             rootView: SignupPaywallView(
@@ -80,17 +87,44 @@ final class SignupCoordinator: NSObject, Coordinator {
                 legal: legalLinks
             )
         )
-        host.paywallDelegate = self
+        paywallHost = host
 
-        // The delegate below owns the bar across pushes and pops, so no push site has to; the paywall
-        // asserts its own on top of that, because on iOS 15 none of these calls survives layout.
+        // The delegate below owns the bar across pushes and pops, so no push site has to.
         navigationController.delegate = self
         navigationController.setViewControllers([host], animated: false)
-
-        // Loading the view first is what makes the next line stick: on iOS 15 a bar hidden before this
-        // controller's view exists is shown again when that view loads.
-        navigationController.loadViewIfNeeded()
         navigationController.setNavigationBarHidden(true, animated: false)
+
+        startWelcomeBack()
+    }
+
+    private func startWelcomeBack() {
+        let coordinator = WelcomeBackCoordinator(
+            navigationController: navigationController,
+            accountProvider: accountProvider,
+            store: Client.store,
+            showLogin: { [weak self] in self?.showLogin() },
+            showPaywall: { [weak self] in self?.restorePaywallRoot() }
+        )
+        welcomeBackCoordinator = coordinator
+
+        coordinator.output
+            .sink { [weak self] output in self?.handle(output) }
+            .store(in: &welcomeBackCancellables)
+
+        coordinator.start()
+    }
+
+    /// Where welcome-back leaves the flow when there is nothing to restore, or a restore fails.
+    @MainActor
+    private func restorePaywallRoot() {
+        guard let paywallHost else { return }
+        navigationController.setViewControllers([paywallHost], animated: false)
+        endWelcomeBack()
+    }
+
+    private func endWelcomeBack() {
+        welcomeBackCancellables.removeAll()
+        welcomeBackCoordinator = nil
     }
 
     /// Signs in from a magic-link deep link.
@@ -131,6 +165,16 @@ final class SignupCoordinator: NSObject, Coordinator {
             // SwiftEntryKit lives in the app target, so the banner is raised here rather than
             // inside the feature package.
             Macros.displayImageNote(withImage: Asset.Piax.Global.iconWarning.image, message: message)
+        }
+    }
+
+    // MARK: Welcome back output
+
+    private func handle(_ output: WelcomeBackCoordinator.Output) {
+        switch output {
+        case .didAuthenticate(let user):
+            endWelcomeBack()
+            finish(user: user, isSignup: false)
         }
     }
 
@@ -250,14 +294,6 @@ extension SignupCoordinator: WelcomeCompletionDelegate {
     }
 }
 
-// MARK: - SignupPaywallHostingDelegate
-
-extension SignupCoordinator: SignupPaywallHostingDelegate {
-    func signupPaywallHostDidRequestLogin(_ host: SignupPaywallHosting) {
-        showLogin()
-    }
-}
-
 // MARK: - PIAWelcomeViewControllerDelegate
 
 /// How the pushed login container reports back.
@@ -314,7 +350,9 @@ extension SignupCoordinator: UINavigationControllerDelegate {
     ) {
         // Applied even when the flag already agrees: on iOS 15 it reads `true` while the bar is still
         // laid out, so a short-circuit here would skip the call that corrects it.
-        let shouldHide = viewController is SignupPaywallHosting
+        let shouldHide =
+            viewController is SignupPaywallHostingController
+            || viewController is WelcomeBackHostingController
         navigationController.setNavigationBarHidden(shouldHide, animated: animated)
     }
 }

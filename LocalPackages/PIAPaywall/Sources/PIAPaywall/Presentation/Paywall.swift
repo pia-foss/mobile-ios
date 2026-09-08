@@ -130,18 +130,8 @@ extension Paywall {
             }
         }
 
-        /// A restored account, compared by username.
-        public struct Account: Equatable {
-            public let value: UserAccount
-
-            public init(_ value: UserAccount) {
-                self.value = value
-            }
-
-            public static func == (lhs: Self, rhs: Self) -> Bool {
-                lhs.value.credentials.username == rhs.value.credentials.username
-            }
-        }
+        /// A restored account, compared by username. Shared with the welcome-back screen.
+        public typealias Account = AccountBox
 
         case onAppear
         case disappeared
