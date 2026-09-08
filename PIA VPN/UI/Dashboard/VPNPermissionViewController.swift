@@ -45,12 +45,6 @@ final class VPNPermissionViewController: AutolayoutViewController {
 
     @IBOutlet private weak var buttonSubmit: PIAButton!
 
-    weak var dismissingViewController: UIViewController?
-
-    override var navigationController: UINavigationController? {
-        return super.navigationController ?? parent?.navigationController
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -83,8 +77,18 @@ final class VPNPermissionViewController: AutolayoutViewController {
                     self.alertRequiredPermission()
                     return
                 }
-                self.dismissingViewController?.dismiss(animated: true)
+                self.finish()
             }
+        }
+    }
+
+    /// Leaves the screen whichever way it was installed: pushed onto the dashboard's stack, or
+    /// presented as the root of its own navigation controller.
+    private func finish() {
+        if let nav = navigationController, nav.viewControllers.first !== self {
+            nav.popViewController(animated: true)
+        } else {
+            presentingViewController?.dismiss(animated: true)
         }
     }
 
@@ -95,15 +99,15 @@ final class VPNPermissionViewController: AutolayoutViewController {
         }
         let alert = Macros.alert(L10n.VpnPermission.title, message)
         if MFMailComposeViewController.canSendMail() {
-            alert.addActionWithTitle(L10n.VpnPermission.Disallow.contact) {
-                self.contactCustomerSupport()
+            alert.addActionWithTitle(L10n.VpnPermission.Disallow.contact) { [weak self] in
+                self?.contactCustomerSupport()
             }
         }
         // Just dismiss the alert. The permission screen stays on screen, so the
         // user can retry via its OK button. Auto-retrying from here created an
         // undismissable alert loop when the install failed instantly (KM-17461).
-        alert.addCancelActionWithTitle(L10n.Global.ok) {}
-        present(alert, animated: true, completion: nil)
+        alert.addCancelAction(L10n.Global.ok)
+        present(alert, animated: true)
     }
 
     private func contactCustomerSupport() {
@@ -147,7 +151,11 @@ final class VPNPermissionViewController: AutolayoutViewController {
 }
 
 extension VPNPermissionViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true, completion: nil)
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
+        controller.presentingViewController?.dismiss(animated: true)
     }
 }
