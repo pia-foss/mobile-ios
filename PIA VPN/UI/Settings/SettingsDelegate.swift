@@ -21,17 +21,8 @@
 
 import Foundation
 import PIALibrary
-import PIAWireguard
-import TunnelKitCore
-import TunnelKitOpenVPN
 
 protocol SettingsDelegate: AnyObject {
-
-    var pendingOpenVPNSocketType: SocketType? { get set }
-
-    var pendingOpenVPNConfiguration: OpenVPN.ConfigurationBuilder! { get set }
-
-    var pendingWireguardVPNConfiguration: PIAWireguardConfiguration! { get set }
 
     /**
      Called to update the setting sent as parameter.
@@ -65,7 +56,7 @@ protocol SettingsDelegate: AnyObject {
         Updates the socket type for OVPN
         - Parameter SocketType: UDP or TCP.
      */
-    func updateSocketType(socketType: SocketType?)
+    func updateSocketType(socketType: String?)
 
     /**
         Updates the port for OVPN
@@ -78,11 +69,5 @@ protocol SettingsDelegate: AnyObject {
         - Parameter String: The encryption method.
      */
     func updateDataEncryption(encryption value: String)
-
-    /**
-        Updates the handshake value
-        - Parameter String: The handshake value.
-     */
-    func updateHandshake(handshake value: IKEv2IntegrityAlgorithm)
 
 }

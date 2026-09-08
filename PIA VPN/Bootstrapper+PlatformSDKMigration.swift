@@ -35,16 +35,10 @@ extension Bootstrapper {
 
     // MARK: - Consent
 
-    /// The flag is on *and* the consent is recorded: a launch that never got an answer out of the
-    /// consent check stays on the legacy profiles rather than migrating unannounced.
-    var shouldUsePlatformSDKTunnel: Bool {
-        return AppPreferences.shared.usePlatformSDKVPN && AppPreferences.shared.didConfirmPlatformSDKMigration
-    }
-
-    /// Only ask for migration consent when legacy tunnel was previously connected.
-    /// User is unformed there will be a short connection interruption.
+    /// Only ask for migration consent when a legacy tunnel was previously connected.
+    /// The user is informed there will be a short connection interruption.
     func shouldConfirmPlatformSDKMigration(_ completion: @escaping (Bool) -> Void) {
-        guard AppPreferences.shared.usePlatformSDKVPN, !AppPreferences.shared.didConfirmPlatformSDKMigration else {
+        guard !AppPreferences.shared.didConfirmPlatformSDKMigration else {
             completion(false)
             return
         }
@@ -56,8 +50,9 @@ extension Bootstrapper {
         }
 
         // The caller holds the launch screen until it hears back, and the read below can stall.
-        // Timing out answers "no": this launch stays on the legacy profiles and asks again.
+        // Timing out answers "no": this launch skips the prune and asks again next time.
         var didAnswer = false
+
         let answer: (Bool) -> Void = { shouldConfirm in
             didAnswer = true
             completion(shouldConfirm)
@@ -66,7 +61,7 @@ extension Bootstrapper {
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.vpnStatusTimeout) {
             guard !didAnswer else { return }
 
-            log.error("shouldConfirmPlatformSDKMigration: timed out, staying on the legacy profiles")
+            log.error("shouldConfirmPlatformSDKMigration: timed out, deferring the legacy cleanup")
             answer(false)
         }
 
@@ -74,7 +69,7 @@ extension Bootstrapper {
             guard !didAnswer else { return }
 
             guard isConnected else {
-                log.info("shouldConfirmPlatformSDKMigration: no live tunnel, migrating without asking")
+                log.info("shouldConfirmPlatformSDKMigration: no live tunnel, cleaning up without asking")
                 AppPreferences.shared.didConfirmPlatformSDKMigration = true
                 answer(false)
                 return
@@ -93,8 +88,12 @@ extension Bootstrapper {
 
     /// One-time deletion of every VPN configuration this app owns, so the PlatformSDK tunnel starts
     /// from a clean slate.
+    ///
+    /// The PlatformSDK profile is registered unconditionally; this prune is what the consent notice
+    /// gates, because it disconnects a live legacy tunnel. `SceneDelegate` resolves the consent
+    /// before `startApp()` runs bootstrap, so by the time this is called the answer is always in.
     func cleanupLegacyVPNProfilesIfNeeded() {
-        guard shouldUsePlatformSDKTunnel, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+        guard AppPreferences.shared.didConfirmPlatformSDKMigration, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
             return
         }
 
@@ -125,19 +124,26 @@ extension Bootstrapper {
                 }
 
                 // The IKEv2 configuration sits in the non-tunnel-provider slot, which the load above
-                // never returns.
+                // never returns. Shared with tvOS, which has only this half.
+                var didRemoveLegacyIKEv2 = false
                 group.enter()
-                IKEv2Profile().remove { _ in group.leave() }
+                LegacyVPNConfigurationCleanup.remove { didRemove in
+                    didRemoveLegacyIKEv2 = didRemove
+                    group.leave()
+                }
 
                 group.notify(queue: .main) {
                     // Re-read instead of trusting the removals: bootstrap reinstalls the PlatformSDK
                     // configuration on this launch, so anything else left is a failed removal.
                     NETunnelProviderManager.loadAllFromPreferences { managers, _ in
-                        let didCleanupLegacyVPNProfiles = managers?.allSatisfy { manager in
+                        let didRemoveTunnelProviders = managers?.allSatisfy { manager in
                             (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
                         }
 
-                        AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
+                        // The re-read above cannot see the personal VPN slot, so the IKEv2 result has
+                        // to be carried in: without it a failed IKEv2 removal would still be recorded
+                        // as a completed migration and never retried.
+                        AppPreferences.shared.didCleanupLegacyVPNProfiles = (didRemoveTunnelProviders == true) && didRemoveLegacyIKEv2
                     }
 
                     // Deleting a live tunnel's configuration disconnects the user.
@@ -155,66 +161,6 @@ extension Bootstrapper {
         }
     }
 
-    // MARK: - Rolling back to the legacy profiles
-
-    /// Reverses the migration when the tunnel is turned back off: no legacy profile answers to
-    /// `automatic`, so the protocol maps back onto WireGuard, and the consent and cleanup are
-    /// re-armed for a flag that returns.
-    func migrateToLegacyVPNProfilesIfNeeded() {
-        AppPreferences.shared.didCleanupLegacyVPNProfiles = false
-        AppPreferences.shared.didConfirmPlatformSDKMigration = false
-
-        if Client.preferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
-            let preferences = Client.preferences.editable()
-            preferences.vpnType = PIAWGTunnelProfile.vpnType
-            preferences.commit()
-        }
-
-        removePlatformSDKVPNProfiles()
-    }
-
-    /// Nothing else prunes these: the profile is no longer registered, so its on-demand rules would
-    /// keep starting a tunnel the app no longer tracks. No-ops once nothing matches, so a failed
-    /// removal is retried on the next launch.
-    private func removePlatformSDKVPNProfiles() {
-        NETunnelProviderManager.loadAllFromPreferences { managers, _ in
-            let platformSDKManagers = (managers ?? []).filter { manager in
-                (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
-            }
-
-            guard !platformSDKManagers.isEmpty else { return }
-
-            let wasConnected = platformSDKManagers.contains { manager in
-                Self.liveVPNStatuses.contains(manager.connection.status)
-            }
-
-            log.info("removePlatformSDKVPNProfiles: removing \(platformSDKManagers.count) PlatformSDK configuration(s), connected: \(wasConnected)")
-
-            let group = DispatchGroup()
-            for manager in platformSDKManagers {
-                group.enter()
-                // Disarm on-demand first, so a failed removal cannot start the tunnel again.
-                manager.isOnDemandEnabled = false
-                manager.saveToPreferences { _ in
-                    manager.connection.stopVPNTunnel()
-                    manager.removeFromPreferences { _ in group.leave() }
-                }
-            }
-
-            group.notify(queue: .main) {
-                // Removing a live tunnel's configuration disconnects the user.
-                guard wasConnected, Client.providers.accountProvider.isLoggedIn else {
-                    return
-                }
-
-                Client.providers.vpnProvider.connect { error in
-                    if let error {
-                        log.error("removePlatformSDKVPNProfiles: could not reconnect (\(error.localizedDescription))")
-                    }
-                }
-            }
-        }
-    }
     // MARK: - Helpers
 
     /// Reads the NE preferences rather than `VPNProvider.isVPNConnected`, so it works before

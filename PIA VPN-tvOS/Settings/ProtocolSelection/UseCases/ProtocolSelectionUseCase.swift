@@ -23,7 +23,7 @@ protocol ProtocolSelectionUseCaseType {
 @MainActor
 final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
 
-    let availableProtocols: [KapePlatformSDKVPNType] = [.automatic, .wireGuard, .openVPN]
+    let availableProtocols: [KapePlatformSDKVPNType] = SelectableVPNProtocol.all
 
     private let vpnConnectionUseCase: VpnConnectionUseCaseType
     private var currentStatus: VPNStatus = .unknown
@@ -38,15 +38,7 @@ final class ProtocolSelectionUseCase: ProtocolSelectionUseCaseType {
     }
 
     func selectedProtocol() -> KapePlatformSDKVPNType {
-        // `KapePlatformSDKVPNType(rawValue:)` also decodes the non-selectable "IKEv2" value, so map
-        // anything outside the tvOS-selectable set (including a stored IKEv2 or an unknown value)
-        // back to `.automatic` — the PlatformSDK default (this screen is only shown when the
-        // PlatformSDK tunnel is enabled), matching the bootstrap default `vpnType`.
-        let stored = KapePlatformSDKVPNType(rawValue: Client.preferences.vpnType)
-        guard let stored, availableProtocols.contains(stored) else {
-            return .automatic
-        }
-        return stored
+        SelectableVPNProtocol.resolved(fromStored: Client.preferences.vpnType)
     }
 
     func select(_ vpnProtocol: KapePlatformSDKVPNType) {

@@ -11,7 +11,7 @@ With the Private Internet Access VPN app for iOS and tvOS, you can access our ne
 ## Features
 
 - [x] Plenty of countries to connect to
-- [x] IKEv2, OpenVPN and WireGuard VPN protocols (iOS) / IKEv2 (tvOS)
+- [x] OpenVPN and WireGuard VPN protocols, with automatic protocol selection
 - [x] Kill switch
 - [x] Fine-grained VPN settings
 - [x] DNS leak protection
@@ -27,7 +27,7 @@ With the Private Internet Access VPN app for iOS and tvOS, you can access our ne
 - Xcode 26+
 - [Homebrew][dep-brew]
 - [SwiftGen][dep-swiftgen] (`brew install swiftgen`)
-- [Go][dep-golang] (`brew install go`, required for WireGuard)
+- [Go][dep-golang] (`brew install go`, required to build WireGuard-Go in the vendored Kape Platform SDK)
 - Ruby with rbenv (recommended)
 - Bundler (`gem install bundler && bundle install`)
 - A Cloudsmith entitlement token to pull the Kape Platform SDK (see [Kape Platform SDK](#kape-platform-sdk))

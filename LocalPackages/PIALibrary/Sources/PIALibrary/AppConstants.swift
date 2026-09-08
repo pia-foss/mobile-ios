@@ -64,11 +64,7 @@ public enum AppConstants: Sendable {
     }
 
     public enum Extensions {
-        // Legacy per-protocol extensions (pre-PlatformSDK); live only while `usePlatformSDKVPN` is off.
-        public static let tunnelBundleIdentifier = Bundle.main.bundleIdentifier! + ".Tunnel"
-        public static let tunnelWireguardBundleIdentifier = Bundle.main.bundleIdentifier! + ".WG-Tunnel"
-
-        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard, replacing the legacy pair above.
+        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard.
         public static let tunnelPlatformSDKBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-iOS"
         public static let tunnelPlatformSDKTvOSBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-tvOS"
 
@@ -127,9 +123,16 @@ public enum AppConstants: Sendable {
         }
     }
 
-    public struct IKEv2PacketSize {
-        public static let defaultPacketSize = 0
-        public static let highPacketSize = 1420
+    /// The OpenVPN transport the user selected, as persisted in
+    /// `Client.preferences.openVPNSocketType` (the `PIASocketType` app-group key). Absent means
+    /// automatic — the tunnel then tries both.
+    ///
+    /// Distinct from `PIATunnelSharedState.OpenVPNTransport`, which is the tunnel-side type: that one
+    /// also has an `automatic` case and uses lowercase raw values. These raw values are the ones on
+    /// disk, so they must not change.
+    public enum OpenVPNSocketType: String, CaseIterable {
+        case udp = "UDP"
+        case tcp = "TCP"
     }
 
     public enum WireGuardPacketSize {
@@ -153,7 +156,7 @@ public enum AppConstants: Sendable {
             public static let auth = "OpenVPNAuth"
             /// Preferred port, stored as an `Int`; 0 means automatic.
             public static let port = "OpenVPNPort"
-            /// Selected transport, stored as a `SocketType` raw value ("UDP"/"TCP"); absent = automatic.
+            /// Selected transport, stored as an `OpenVPNSocketType` raw value; absent = automatic.
             public static let transport = "PIASocketType"
         }
     }

@@ -110,7 +110,7 @@ extension ServerTypeStub {
             pingTime: 0,
             isAutomatic: true,
             dipToken: "dipToken",
-            dipIKEv2IP: "dipIKEv2IP",
+            dedicatedIP: "dedicatedIP",
             dipStatusString: "dipStatusString")
     }
 
@@ -124,7 +124,7 @@ extension ServerTypeStub {
             pingTime: 0,
             isAutomatic: true,
             dipToken: "dipToken2",
-            dipIKEv2IP: "dipIKEv2IP2",
+            dedicatedIP: "dedicatedIP2",
             dipStatusString: "dipStatusString")
     }
 }

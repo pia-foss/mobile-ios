@@ -115,13 +115,14 @@ next protocol, rather than emitting a full per-server WireGuard+OpenVPN batch.
 cycling internally. When the feature flag is on, `VPNDaemon` suppresses its own reconnect,
 fallback-timer, and disconnect-error handling so the app does not fight the SDK's recovery.
 
-**Gated rollout.** The integration is gated behind the CSI-controlled `usePlatformSDKVPN`
+**Gated rollout.** The integration was gated behind the CSI-controlled `usePlatformSDKVPN`
 feature flag (`ios_platform_sdk_vpn`). On first launch under the flag, the legacy
 IKEv2/OpenVPN/WireGuard profiles are removed (`cleanupLegacyVPNProfilesIfNeeded`).
 
-> **Current state:** the flag is temporarily hard-forced `true` in `FeatureFlagHolder` on both
-> iOS and tvOS (a `// TODO: [PlatformSDK]` override), so the CSI-driven gating is bypassed while
-> the engine is under active development. Removing that override restores CSI control.
+> **Superseded (KM-18239):** the flag reached 100% everywhere and has been **removed entirely** —
+> every platform now runs the PlatformSDK tunnel unconditionally, with no CSI kill switch. The
+> one-time legacy-profile cleanup is kept for upgrading installs. See
+> [ADR-0011](0011-retire-the-legacy-vpn-stack.md).
 
 ## Consequences
 
@@ -141,5 +142,6 @@ IKEv2/OpenVPN/WireGuard profiles are removed (`cleanupLegacyVPNProfilesIfNeeded`
 - **Migration / security trade-offs to track.** VPN credentials now flow through the shared-state
   file rather than only the Keychain (the OpenVPN password is a protection downgrade vs. the
   legacy Keychain-`passwordReference` model), and legacy-profile cleanup is a one-time migration.
-- **Forward path:** once the engine is stable behind the flag, the legacy IKEv2/OpenVPN/WireGuard
-  extensions and the `mobile-ios-openvpn` / `mobile-ios-wireguard` dependencies can be retired.
+- **Forward path: done.** The legacy IKEv2/OpenVPN/WireGuard extensions and their dependencies are
+  retired on every platform — tvOS 2026-09-07, iOS and Mac Catalyst 2026-09-08 (KM-18239). The flag
+  is gone with them. See [ADR-0011](0011-retire-the-legacy-vpn-stack.md).

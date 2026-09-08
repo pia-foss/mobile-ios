@@ -38,7 +38,7 @@ class PIACommandTests: XCTestCase {
         Client.useMockAccountProvider()
         AppPreferences.shared.dismissedMessages = []
 
-        Client.preferences.defaults.vpnType = IKEv2Profile.vpnType
+        Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
 
         let pref = Client.preferences.editable()
         pref.reset()
@@ -72,11 +72,13 @@ class PIACommandTests: XCTestCase {
     }
 
     func testCommandAction() throws {
-        XCTAssertTrue(Client.preferences.vpnType == IKEv2Profile.vpnType)
+        // Starts on a protocol the "ovpn" action has to move away from — IKEv2 used to serve that
+        // role, so WireGuard stands in now.
+        XCTAssertTrue(Client.preferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue)
 
         testOVPNAction.executeAction()
 
-        XCTAssertTrue(Client.preferences.vpnType == PIATunnelProfile.vpnType)
+        XCTAssertTrue(Client.preferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue)
 
     }
 

@@ -32,10 +32,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         .connecting
     ]
 
-    private static let legacyProtocols: [String] = [
-        IPSecProfile.vpnType
-    ]
-
     private let customWebServices: WebServices?
 
     init(webServices: WebServices? = nil) {
@@ -93,7 +89,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     /// The tunnel's actual-connection write-back, valid only when running through the PlatformSDK
     /// tunnel and currently connected (so a stale value from a previous session is never shown).
     private var activeConnectionFromTunnel: PIATunnelSharedState.ActiveConnection? {
-        guard accessedConfiguration.usesPlatformSDKTunnel, isVPNConnected else {
+        guard isVPNConnected else {
             return nil
         }
         return PIATunnelSharedState.readStatus().activeConnection
@@ -114,8 +110,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
 
     public func prepare() throws {
 
-        var profile = activeProfileRemovingInactive()
-        var force = false
+        let profile = activeProfileRemovingInactive()
+        let force = false
 
         log.info("prepare: vpnType=\(accessedPreferences.vpnType), resolvedProfile=\(String(describing: profile?.vpnType))")
 
@@ -142,42 +138,15 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             }
         }
 
-        // The legacy IKEv1 → IKEv2 (or WireGuard on Mac) migration instantiates an
-        // *old* profile and makes it active. Skip it entirely when the PlatformSDK
-        // tunnel is enabled so that an IKEv1 user is not silently routed back onto a
-        // legacy profile; the resolved PlatformSDK profile is used instead.
-        if !accessedConfiguration.usesPlatformSDKTunnel, isLegacyProfile() {
-            // Set IKEv2 as default if user was using IKEv1.
-            profile = IKEv2Profile()
-            let preferences = Client.preferences.editable()
-            preferences.vpnType = IKEv2Profile.vpnType
-            #if os(iOS) || os(macOS)
-                // On macOS we avoid IKEv2.
-                if Platform.isRunningOnMac {
-                    profile = PIAWGTunnelProfile(
-                        bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier
-                    )
-                    preferences.vpnType = PIAWGTunnelProfile.vpnType
-                }
-            #endif
-            preferences.commit()
-
-            completionBlock()
-            // `completionBlock` restores the status synchronously from the PIA-owned persisted
-            // mirror, so this still means "PIA's own VPN was up when we last saw it".
-            force = accessedDatabase.transient.vpnStatus == .connected
-
-        } else {
-
-            // should never happen, IKEv2 is always available
-            guard profile != nil else {
-                log.error("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
-                throw ClientError.vpnProfileUnavailable
-            }
-
-            completionBlock()
-
+        // The PlatformSDK tunnel is the only profile now, so there is no legacy IKEv1 → IKEv2
+        // migration left to run here — an upgrading install is moved onto a supported protocol by
+        // the app's one-time cleanup instead.
+        guard profile != nil else {
+            log.error("VPN protocol \(accessedPreferences.vpnType) is not available, please set accessedPreferences.vpnType to one of the following: \(availableVPNTypes)")
+            throw ClientError.vpnProfileUnavailable
         }
+
+        completionBlock()
 
         if self.accessedProviders.accountProvider.isLoggedIn {
             self.install(force: force, nil)
@@ -223,10 +192,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
                 }
                 self.activeProfile = profile
 
-                if let previousProfile = previousProfile,
-                    !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (previousProfile.vpnType == IPSecProfile.vpnType || previousProfile.vpnType == IKEv2Profile.vpnType))
-                {
-                    //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
+                if let previousProfile = previousProfile {
                     previousProfile.remove({ _ in
                         Macros.postNotification(.PIAVPNDidInstall)
                         callback?(nil)
@@ -332,8 +298,10 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         // Capture the tunnel log best-effort, in parallel: the provider message
         // never gets a reply when the tunnel process is wedged (e.g. after a
         // network change), so the disconnect below must not wait on it.
-        if let configuration = vpnClientConfiguration() {
-            activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration) { (content, error) in
+        // The configuration is not passed to `requestLog` any more — its presence is still the
+        // check for "we have something to talk to".
+        if vpnClientConfiguration() != nil {
+            activeProfile.requestLog { (content, error) in
                 guard let content, !content.isEmpty else {
                     return
                 }
@@ -367,46 +335,25 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return
         }
 
-        let shouldDisconnectFirst = (activeProfile.vpnType != IKEv2Profile.vpnType || forceDisconnect)
-
-        if shouldDisconnectFirst {
-            activeProfile.disconnect { (error) in
-                if let _ = error {
-                    callback?(error)
-                    return
-                }
-                // The user may have manually disconnected while this reconnect
-                // cycle was in flight — never override that intent.
-                guard !self.accessedConfiguration.disconnectedManually else {
-                    log.debug("reconnect aborted — the user disconnected manually")
-                    callback?(nil)
-                    return
-                }
-                guard let configuration = self.vpnClientConfiguration() else {
-                    callback?(ClientError.vpnProfileUnavailable)
-                    return
-                }
-                activeProfile.connect(withConfiguration: configuration, callback)
+        // IKEv2 could be reconfigured in place via `updatePreferences`; a tunnel provider cannot, so
+        // a reconnect always tears the session down first.
+        activeProfile.disconnect { (error) in
+            if let _ = error {
+                callback?(error)
+                return
             }
-        } else {
-            activeProfile.updatePreferences { (error) in
-                if let _ = error {
-                    callback?(error)
-                    return
-                }
-                // The user may have manually disconnected while this reconnect
-                // cycle was in flight — never override that intent.
-                guard !self.accessedConfiguration.disconnectedManually else {
-                    log.debug("reconnect aborted — the user disconnected manually")
-                    callback?(nil)
-                    return
-                }
-                guard let configuration = self.vpnClientConfiguration() else {
-                    callback?(ClientError.vpnProfileUnavailable)
-                    return
-                }
-                activeProfile.connect(withConfiguration: configuration, callback)
+            // The user may have manually disconnected while this reconnect
+            // cycle was in flight — never override that intent.
+            guard !self.accessedConfiguration.disconnectedManually else {
+                log.debug("reconnect aborted — the user disconnected manually")
+                callback?(nil)
+                return
             }
+            guard let configuration = self.vpnClientConfiguration() else {
+                callback?(ClientError.vpnProfileUnavailable)
+                return
+            }
+            activeProfile.connect(withConfiguration: configuration, callback)
         }
     }
 
@@ -422,11 +369,11 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
-        guard let configuration = vpnClientConfiguration() else {
+        guard vpnClientConfiguration() != nil else {
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.requestDataUsage(withCustomConfiguration: configuration.customConfiguration) { (usage, error) in
+        activeProfile.requestDataUsage { (usage, error) in
             guard let usage = usage else {
                 callback?(nil, error)
                 return
@@ -440,15 +387,11 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
-        guard let configuration = vpnClientConfiguration() else {
+        guard vpnClientConfiguration() != nil else {
             callback?(nil, ClientError.vpnProfileUnavailable)
             return
         }
-        activeProfile.requestLog(withCustomConfiguration: configuration.customConfiguration, callback)
-    }
-
-    private func isLegacyProfile() -> Bool {
-        return DefaultVPNProvider.legacyProtocols.contains(accessedPreferences.vpnType)
+        activeProfile.requestLog(callback)
     }
 
     /// The profile that should handle the current connection.
@@ -458,10 +401,9 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
     /// user-selected protocol. Otherwise the profile matching the selected
     /// protocol (`preferences.vpnType`) is used.
     private func resolvedActiveProfile() -> VPNProfile? {
-        if accessedConfiguration.usesPlatformSDKTunnel {
-            return accessedConfiguration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType)
-        }
-        return accessedConfiguration.profile(forVPNType: accessedPreferences.vpnType)
+        // Every connection runs through the single PlatformSDK profile; the user's `vpnType` selects
+        // which protocol that tunnel runs, not which profile handles it.
+        return accessedConfiguration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType)
     }
 
     /// Reconciles the status restored at launch (see ``prepare()``) with the real status of the
@@ -483,7 +425,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             // Under the PlatformSDK tunnel a native `.connected` only says the Network Extension
             // is up; the tunnel's own write-back is what tells us whether it is actually carrying
             // traffic or still (re)connecting. Fold it in before applying the adoption policy.
-            let tunnel = accessedConfiguration.usesPlatformSDKTunnel ? PIATunnelSharedState.readStatus().tunnelStatus : nil
+            let tunnel = PIATunnelSharedState.readStatus().tunnelStatus
             let resolvedStatus = VPNStatus.resolve(system: nativeStatus, tunnel: tunnel)
 
             // Seed the "Protected | <time>" timestamp when adopting an already-running tunnel, a
@@ -517,12 +459,9 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         for vpnType in availableVPNTypes {
             let profile = accessedConfiguration.profile(forVPNType: vpnType)!
             guard (vpnType == activeProfile?.vpnType) else {
-                if let activeProfile {
-                    if !((profile.vpnType == IPSecProfile.vpnType || profile.vpnType == IKEv2Profile.vpnType) && (activeProfile.vpnType == IPSecProfile.vpnType || activeProfile.vpnType == IKEv2Profile.vpnType)) {
-                        //only remove the profile if is not Ipsec or IKEv2, if are one of them, override instead
-                        profile.disconnect(nil)
-                        profile.remove(nil)
-                    }
+                if activeProfile != nil {
+                    profile.disconnect(nil)
+                    profile.remove(nil)
                 }
                 continue
             }
@@ -543,7 +482,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return nil
         }
 
-        guard let profile = profile ?? activeProfile else {
+        guard profile ?? activeProfile != nil else {
             log.error("vpnClientConfiguration: No VPN profile available")
             return nil
         }
@@ -565,18 +504,17 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return nil
         }
 
-        let customConfiguration = accessedPreferences.vpnCustomConfiguration(for: profile.vpnType)
-
         // isOnDemand will cause the VPN to auto connect, but given in staging
         // builds it's not possible to make a connection then we prevent that
-        let isOnDemand = if Client.environment == .staging {
-            false
-        } else {
-            // A placeholder profile must never carry on-demand rules: if an enabled
-            // manager already exists, doSave would honor them and the OS could try
-            // to bring up a tunnel to the placeholder endpoint on its own.
-            usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection
-        }
+        let isOnDemand =
+            if Client.environment == .staging {
+                false
+            } else {
+                // A placeholder profile must never carry on-demand rules: if an enabled
+                // manager already exists, doSave would honor them and the OS could try
+                // to bring up a tunnel to the placeholder endpoint on its own.
+                usesServerPlaceholder ? false : accessedPreferences.isPersistentConnection
+            }
 
         return VPNConfiguration(
             name: accessedConfiguration.vpnProfileName,
@@ -585,7 +523,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             server: targetServer,
             isOnDemand: isOnDemand,
             disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
-            customConfiguration: customConfiguration,
             leakProtection: accessedPreferences.leakProtection,
             allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
         )

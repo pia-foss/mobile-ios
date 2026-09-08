@@ -378,16 +378,30 @@ public final class ServiceQualityManager: NSObject {
         return Client.configuration.disconnectedManually ? KPIConnectionSource.manual : KPIConnectionSource.automatic
     }
 
+    /// The protocol to report for this session.
+    ///
+    /// Prefers what the tunnel actually negotiated over what the user selected — under Automatic the
+    /// selection does not say which protocol ran. IKEv2 is no longer reportable: the `.ipsec` value
+    /// this used to emit is retired along with the protocol.
     private func currentProtocol() -> KPIVpnProtocol {
-        switch Client.providers.vpnProvider.currentVPNType {
-        case IKEv2Profile.vpnType: return .ipsec
-        #if !os(tvOS)
-            case PIATunnelProfile.vpnType: return .ovpn
-            case PIAWGTunnelProfile.vpnType: return .wireguard
-        #endif
-        case let other:
-            log.warning("Unknown VPN type: \(other)")
-            return KPIVpnProtocol.ipsec
+        if let resolved = Client.providers.vpnProvider.actualConnection?.vpnType {
+            switch resolved {
+            case .openVPN: return .ovpn
+            case .wireGuard: return .wireguard
+            case .automatic, .iKEv2: break
+            }
+        }
+
+        switch KapePlatformSDKVPNType(rawValue: Client.providers.vpnProvider.currentVPNType) {
+        case .openVPN: return .ovpn
+        case .wireGuard: return .wireguard
+        case .automatic:
+            // Selected Automatic but the tunnel has not reported back yet. It tries WireGuard first,
+            // so that is the best estimate available.
+            return .wireguard
+        case .iKEv2, nil:
+            log.warning("Unknown VPN type: \(Client.providers.vpnProvider.currentVPNType)")
+            return .wireguard
         }
     }
 

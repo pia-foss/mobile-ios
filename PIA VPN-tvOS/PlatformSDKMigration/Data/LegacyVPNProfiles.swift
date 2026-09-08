@@ -38,18 +38,16 @@ final class LegacyVPNProfiles: LegacyVPNProfilesType {
         }
     }
 
+    /// Removes the legacy IKEv2 configuration from the personal-VPN slot.
+    ///
+    /// `IKEv2Profile` is gone with the rest of the legacy stack (KM-18239), so this delegates to
+    /// `LegacyVPNConfigurationCleanup` — shared with the iOS app, which needs the same personal-slot
+    /// removal as one half of its wider prune. That helper already treats "no configuration
+    /// installed" as success and never writes the app's VPN status, so the missing-configuration and
+    /// re-read fallbacks this method used to need are handled inside it.
     func removeAll(_ completion: @escaping (Bool) -> Void) {
-        let legacyProfile = IKEv2Profile()
-        legacyProfile.disconnect { _ in
-            legacyProfile.remove { error in
-                if let error, !Self.isConfigurationMissing(error) {
-                    log.error("removeAll: could not remove the legacy profile (\(error.localizedDescription))")
-                    Self.loadIsLegacyProfileRemoved(completion)
-                    return
-                }
-
-                DispatchQueue.main.async { completion(true) }
-            }
+        LegacyVPNConfigurationCleanup.remove { didRemove in
+            DispatchQueue.main.async { completion(didRemove) }
         }
     }
 
@@ -58,16 +56,4 @@ final class LegacyVPNProfiles: LegacyVPNProfilesType {
         return providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKTvOSBundleIdentifier
     }
 
-    private static func isConfigurationMissing(_ error: Error) -> Bool {
-        let error = error as NSError
-        return error.domain == "NEConfigurationErrorDomain" && error.code == 7
-    }
-
-    private static func loadIsLegacyProfileRemoved(_ completion: @escaping (Bool) -> Void) {
-        let ikEv2Manager = NEVPNManager.shared()
-        ikEv2Manager.loadFromPreferences { _ in
-            let isRemoved = ikEv2Manager.protocolConfiguration == nil
-            DispatchQueue.main.async { completion(isRemoved) }
-        }
-    }
 }
