@@ -279,7 +279,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AccountInformationAvailability/AccountInformationAvailabilityVerifierTests.swift,
-				Core/FlagAssetTests.swift,
 				Core/Messages/PIACommandTests.swift,
 				Core/NMTTests.swift,
 				Core/PIACardTests.swift,
