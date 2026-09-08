@@ -455,9 +455,6 @@ final class DashboardViewController: AutolayoutViewController {
                     if isSignup, preset.isEphemeral {
                         Client.providers.accountProvider.currentUser = user
                     }
-                    // The modal host *pushes* the VPN permission screen, where the root host
-                    // presents it. Keeping that difference is the reason the coordinator reports
-                    // out rather than deciding for itself.
                     self.dismiss(animated: true) { self.showVPNModal(target: self) }
                 }
             }
@@ -1344,8 +1341,9 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
 
     private func showVPNModal(target: UIViewController) {
         let vc = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-        vc.dismissingViewController = self
-        target.navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        target.present(nav, animated: true)
     }
 }
 
