@@ -32,6 +32,6 @@ public struct GetCurrentSubscriptionReceiptUseCase {
     }
 
     public func callAsFunction() async -> JWS? {
-        await store.currentEntitlementJWS()
+        await store.currentSubscriptionReceipt()?.jws
     }
 }

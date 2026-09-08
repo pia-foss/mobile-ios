@@ -395,6 +395,45 @@ public actor PIAAccountClient: PIAAccountAPI {
         return response
     }
 
+    // MARK: - Apple Promotional Offers
+
+    public func promoOffersEligibility(
+        receipt: JWS,
+        country: String?
+    ) async throws -> PromoOffersEligibilityResponse {
+        let payload = PromoOffersEligibilityRequest(receipt: receipt, country: country)
+        let bodyData = try JSONEncoder.piaCodable.encode(payload)
+
+        return try await endpointManager.executeWithFailover(
+            path: .promoOffersEligibility,
+            method: .post,
+            bodyType: .json(bodyData)
+        )
+    }
+
+    public func promoOffersSign(
+        receipt: JWS,
+        productIdentifier: String,
+        offerIdentifier: String,
+        appAccountToken: UUID,
+        country: String?
+    ) async throws -> PromoOffersSignResponse {
+        let payload = PromoOffersSignRequest(
+            receipt: receipt,
+            productIdentifier: productIdentifier,
+            offerIdentifier: offerIdentifier,
+            appAccountToken: appAccountToken,
+            country: country
+        )
+        let bodyData = try JSONEncoder.piaCodable.encode(payload)
+
+        return try await endpointManager.executeWithFailover(
+            path: .promoOffersSign,
+            method: .post,
+            bodyType: .json(bodyData)
+        )
+    }
+
     // MARK: - Social
 
     public func sendInvite(email: String, name: String) async throws {

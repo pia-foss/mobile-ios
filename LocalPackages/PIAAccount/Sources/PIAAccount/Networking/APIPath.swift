@@ -24,11 +24,14 @@ enum APIPath: String, Sendable {
     case validateQR = "/api/client/v5/login_token/auth"
     case supportedDedicatedIPCountries = "/api/client/v5/dip_regions"
     case getDedicatedIP = "/api/client/v5/redeem_dip_token"
+    case promoOffersEligibility = "/api/client/v5/promo_offers/eligibility"
+    case promoOffersSign = "/api/client/v5/promo_offers/sign"
 
     /// Returns the subdomain for this API path
     var subdomain: String {
         switch self {
-        case .login, .vpnToken, .refreshAPIToken, .validateQR, .supportedDedicatedIPCountries, .getDedicatedIP, .signup:
+        case .login, .vpnToken, .refreshAPIToken, .validateQR, .supportedDedicatedIPCountries, .getDedicatedIP, .signup,
+            .promoOffersEligibility, .promoOffersSign:
             return "apiv5"
         case .loginLink, .logout, .accountDetails, .messages, .dedicatedIP, .renewDedicatedIP:
             return "apiv2"

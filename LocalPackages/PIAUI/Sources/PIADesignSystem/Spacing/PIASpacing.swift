@@ -50,6 +50,9 @@ public enum PIASpacing {
     /// Figma `Spacing/spacing-24`
     public static let s24: CGFloat = 24
 
+    /// Figma `Spacing/spacing-32`
+    public static let s32: CGFloat = 32
+
     /// Figma `Spacing/spacing-40`
     public static let s40: CGFloat = 40
 }
@@ -58,4 +61,7 @@ public enum PIASpacing {
 public enum PIARadius {
     /// Figma `Radius/radius-12`. Cards, plan options and buttons.
     public static let r12: CGFloat = 12
+
+    /// Figma `Radius/radius-pill`. Fully rounded ends: grabbers, pills and capsules.
+    public static let pill: CGFloat = 999
 }

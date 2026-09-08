@@ -58,13 +58,20 @@ import StoreKit
 
     final class MockInAppProvider: InAppProvider, ConfigurationAccess {
 
-        init(jws: JWS? = JWS("mock-jws-transaction")!, isEligibleForIntroOffer: Bool = false) {
+        init(
+            jws: JWS? = JWS("mock-jws-transaction")!,
+            subscriptionExpiration: Date? = nil,
+            isEligibleForIntroOffer: Bool = false
+        ) {
             self.entitlementJWS = jws
+            self.subscriptionExpiration = subscriptionExpiration
             self.isEligibleForIntroOffer = isEligibleForIntroOffer
         }
         var availableProducts: [any InAppProduct]?
 
         var entitlementJWS: JWS?
+
+        var subscriptionExpiration: Date?
 
         var isEligibleForIntroOffer: Bool
 
@@ -94,8 +101,20 @@ import StoreKit
         func finishTransaction(_ transaction: any InAppTransaction, success: Bool) {
         }
 
-        func currentEntitlementJWS() async -> JWS? {
-            return entitlementJWS
+        func currentSubscriptionReceipt() async -> SubscriptionReceipt? {
+            entitlementJWS.map { SubscriptionReceipt(jws: $0, expiration: subscriptionExpiration) }
+        }
+
+        func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer] {
+            return []
+        }
+
+        func purchase(
+            product: any InAppProduct,
+            promotionalOffer signature: InAppPromotionalOfferSignature,
+            appAccountToken: UUID
+        ) async -> Result<any InAppTransaction, ClientError> {
+            return .success(MockTransaction())
         }
 
         func synchronizeEntitlements() async -> Error? {

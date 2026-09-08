@@ -33,9 +33,10 @@ public enum AvailableTiles: Int {
     case connectionTile
     case feedback
     case messages
+    case promoOffer
 
     public static func fixedTiles() -> [AvailableTiles] {
-        return [.messages, .feedback]
+        return [.promoOffer, .messages, .feedback]
     }
 
     public static func allTiles() -> [AvailableTiles] {

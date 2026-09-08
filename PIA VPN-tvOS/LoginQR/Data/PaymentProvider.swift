@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import PIALibrary
 import PIABase
+import PIALibrary
 
 final class PaymentProvider: PaymentProviderType {
     private let store: InAppProvider
@@ -24,7 +24,7 @@ final class PaymentProvider: PaymentProviderType {
                 return
             }
 
-            guard let jws = await self?.store.currentEntitlementJWS() else {
+            guard let jws = await self?.store.currentSubscriptionReceipt()?.jws else {
                 completion(.failure(ClientError.unexpectedReply))
                 return
             }
