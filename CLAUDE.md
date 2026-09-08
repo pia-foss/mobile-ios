@@ -43,9 +43,13 @@ fastlane and xcode cloud are used for ci/cd
 
 ## Key Components
 
-**VPN**: 3 protocols via Network Extensions
-- IKEv2 (native), OpenVPN (TunnelKit), WireGuard (WireGuard-Go)
-- Each protocol = separate Network Extension target
+**VPN**: one engine, one extension per platform — the Kape PlatformSDK tunnel (see ADR-0008, ADR-0011)
+- OpenVPN, WireGuard and Automatic all run through a single Network Extension:
+  `PlatformSDK-Tunnel-iOS` (iOS and Mac Catalyst) / `PlatformSDK-Tunnel-tvOS`.
+- The legacy per-protocol stack (IKEv2, TunnelKit OpenVPN, WireGuard-Go) was removed in KM-18239.
+  Only the one-time upgrade migration remains, and it is the only place legacy identifiers appear.
+- Protocol selection is a *preference* (`Client.preferences.vpnType`), not a profile choice; the
+  tunnel reads its settings from app-group `UserDefaults`.
 - IPC via shared app group + Darwin notifications
 
 **Test Targets**: PIALibraryTests, PIADesignSystemTests, **PIA VPNTests (preferred)**, PIA-VPN_E2E_Tests, PIA VPN-tvOSTests, PIA-VPN_tvOS_E2E_Tests, PIA VPN-tvOS snapshot
@@ -157,9 +161,11 @@ command to format a single $FILE `swift format -i $FILE`
 
 ## Dependencies
 
-**PIA Packages**: mobile-ios-releases-{kpi,csi,account,regions,networking}, mobile-ios-{openvpn,wireguard}
+**PIA Packages**: mobile-ios-releases-{kpi,csi,account,regions,networking}. The VPN engine is the
+vendored `KapePlatformSDK` (pulled by `scripts/pull-kape-platform-sdk.sh`), which ships its own
+TunnelKit and WireGuard packages — `mobile-ios-{openvpn,wireguard}` were retired in KM-18239.
 
-**Third-party**: SwiftEntryKit, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, TweetNacl
+**Third-party**: SwiftEntryKit, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, OpenSSL
 
 ## Security
 

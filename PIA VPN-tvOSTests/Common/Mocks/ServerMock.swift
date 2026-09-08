@@ -23,7 +23,7 @@ class ServerMock: ServerType {
 
     var dipToken: String?
 
-    var dipIKEv2IP: String?
+    var dedicatedIP: String?
 
     var dipStatusString: String?
 

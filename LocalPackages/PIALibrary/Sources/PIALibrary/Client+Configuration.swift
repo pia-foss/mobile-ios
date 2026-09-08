@@ -189,10 +189,6 @@ extension Client {
 
             availableVPNProfiles = []
 
-            #if os(tvOS)
-                availableVPNProfiles = [IKEv2Profile()]
-            #endif
-
             vpnProfileName = "Private Internet Access"
             vpnReconnectionDelay = 2000
 
@@ -244,7 +240,6 @@ extension Client {
          - Parameter profile: The `VPNProfile` to add.
          */
         public func addVPNProfile(_ profile: VPNProfile) {
-            if profile is IKEv2Profile && Platform.isRunningOnMac { return }
             availableVPNProfiles.append(profile)
         }
 
@@ -260,16 +255,6 @@ extension Client {
 
         func profile(forVPNType type: String) -> VPNProfile? {
             return availableVPNProfiles.first { $0.vpnType == type }
-        }
-
-        /// Whether VPN connections run through the PlatformSDK tunnel.
-        ///
-        /// Derived from the registered profiles — the decision the app made at launch from
-        /// the `ios_platform_sdk_vpn` flag — rather than from ``featureFlags`` directly: the
-        /// flags are still being fetched while the VPN stack is prepared, so reading them
-        /// here would disagree with the profile that was actually registered.
-        public var usesPlatformSDKTunnel: Bool {
-            return profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType) != nil
         }
 
         /**

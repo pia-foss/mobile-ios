@@ -67,11 +67,11 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
                 ips.append(secondaryDNS)
             }
             DNSList.shared.addNewServerWithName(
-                (vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY),
+                (vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY),
                 andIPs: ips)
             self.delegate?.updateSetting(
                 NetworkSections.dns,
-                withValue: (vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
+                withValue: (vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
             Macros.postNotification(.PIASettingsHaveChanged)
             self.navigationController?.popViewController(animated: true)
         }
@@ -84,7 +84,7 @@ class CustomDNSSettingsViewController: AutolayoutViewController {
 
         alertController.addActionWithTitle(L10n.Global.ok) {
             if let firstKey = DNSList.shared.firstKey() {
-                DNSList.shared.removeServer(name: (self.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
+                DNSList.shared.removeServer(name: (self.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
                 self.delegate?.updateSetting(
                     NetworkSections.dns,
                     withValue: firstKey)

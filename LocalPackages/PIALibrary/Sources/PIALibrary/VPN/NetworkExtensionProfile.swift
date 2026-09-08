@@ -75,8 +75,8 @@ extension NetworkExtensionProfile {
 
         #if os(iOS)
             let selectedProtocol = Client.preferences.vpnType
-            let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
-            let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
+            let isWireGuard = selectedProtocol == KapePlatformSDKVPNType.wireGuard.rawValue
+            let isOpenVPN = selectedProtocol == KapePlatformSDKVPNType.openVPN.rawValue
 
             // Do not apply Leak Protection settings on WireGuard and OpenVPN
             if isWireGuard || isOpenVPN {

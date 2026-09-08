@@ -67,8 +67,6 @@ protocol PlainStore: AnyObject {
 
     var vpnDisconnectsOnSleep: Bool { get set }
 
-    var vpnCustomConfigurationMaps: [String: [String: Any]]? { get set }
-
     var lastKnownVpnStatus: VPNStatus { get set }
 
     var lastVPNConnectionAttempt: Double { get set }
@@ -117,18 +115,14 @@ protocol PlainStore: AnyObject {
     var nmtTemporaryOpenNetworks: [String] { get set }
 
     //MARK: IKEv2
-    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm { get set }
-
-    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm { get set }
-
-    var ikeV2PacketSize: Int { get set }
-
     //MARK: OpenVPN / WireGuard
     var useSmallPackets: Bool { get set }
 
     var openVPNSocketType: String? { get set }
 
     var openVPNCipher: String? { get set }
+
+    var openVPNAuth: String? { get set }
 
     var openVPNPort: Int { get set }
 
