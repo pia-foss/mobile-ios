@@ -332,20 +332,3 @@ extension Paywall.Reducer {
         .fireAndForget { [dependencies] in dependencies.emit(output) }
     }
 }
-
-extension Effect {
-
-    /// `Effect.task` dispatches its action even when the effect was cancelled while the work was in
-    /// flight, because nothing between the `await` and the sink checks. A purchase settling after
-    /// the paywall has gone away would then still be reported to a host that stopped listening, so
-    /// the action is dropped here instead.
-    fileprivate static func cancellableTask(
-        id: AnyHashable,
-        _ work: @escaping @MainActor () async -> Action?
-    ) -> Effect {
-        .task(id: id) {
-            let action = await work()
-            return Task.isCancelled ? nil : action
-        }
-    }
-}

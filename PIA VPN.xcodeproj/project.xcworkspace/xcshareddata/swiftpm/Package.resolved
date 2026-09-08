@@ -167,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-async-dns-resolver",
       "state" : {
-        "revision" : "e145f21e97cc40ee744e1276b21426ed47ab9d88",
-        "version" : "0.7.1"
+        "revision" : "1bd427a37a8fa276a96189f22c714e79b7d5ac03",
+        "version" : "0.8.0"
       }
     },
     {

@@ -1,5 +1,5 @@
 //
-//  SignupPaywallHostingController.swift
+//  WelcomeBackHostingController.swift
 //  PIA VPN
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -23,18 +23,11 @@ import PIAPaywall
 import SwiftUI
 import UIKit
 
-/// Hosts the SwiftUI paywall inside UIKit, and gives the orientation lock and the theme's
-/// status-bar rules a concrete type to recognise.
-final class SignupPaywallHostingController: UIHostingController<SignupPaywallView> {
+/// Hosts the SwiftUI welcome-back screen inside UIKit.
+final class WelcomeBackHostingController: UIHostingController<WelcomeBackView> {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        // `Theme`'s rules take an `AutolayoutViewController`, which this is not.
         traitCollection.userInterfaceStyle == .dark ? .lightContent : .darkContent
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .clear
     }
 
     override func viewDidLayoutSubviews() {
@@ -43,20 +36,4 @@ final class SignupPaywallHostingController: UIHostingController<SignupPaywallVie
     }
 }
 
-/// On iOS 15 the flow's `UINavigationControllerDelegate` hides the bar before it is laid out and the
-/// call is lost, so the screens designed without one re-assert it here.
-extension UIViewController {
-    func hideNavigationBarWhileTopmost() {
-        guard let navigationController,
-            navigationController.topViewController === self,
-            !navigationController.isNavigationBarHidden
-        else { return }
-
-        navigationController.setNavigationBarHidden(true, animated: false)
-    }
-}
-
-/// The logged-out root and the cards screen are portrait-only on iPhone.
-protocol PortraitLockedViewController: UIViewController {}
-
-extension SignupPaywallHostingController: PortraitLockedViewController {}
+extension WelcomeBackHostingController: PortraitLockedViewController {}

@@ -13,6 +13,9 @@ class RootContainerFactory {
             connectionStatsPermissonType: ConnectionStatsPermisson(),
             bootstrap: BootstraperFactory.makeBootstrapper(),
             userAuthenticationStatusMonitor: StateMonitorsFactory.makeUserAuthenticationStatusMonitor,
-            appRouter: AppRouterFactory.makeAppRouter(), refreshLatencyUseCase: RefreshLatencyFactory.makeRefreshServersLatencyUseCase)
+            appRouter: AppRouterFactory.makeAppRouter(),
+            refreshLatencyUseCase: RefreshLatencyFactory.makeRefreshServersLatencyUseCase,
+            platformSDKMigration: PlatformSDKMigrationFactory.makePlatformSDKMigrationUseCase
+        )
     }
 }

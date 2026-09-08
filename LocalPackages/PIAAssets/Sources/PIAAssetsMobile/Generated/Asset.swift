@@ -406,6 +406,7 @@ public enum Asset {
   public static let offlineServerIcon = ImageAsset(name: "offline-server-icon")
   public static let paywallHero = ImageAsset(name: "paywall-hero")
   public static let piaSpinner = ImageAsset(name: "pia-spinner")
+  public static let welcomeBackHero = ImageAsset(name: "welcome-back-hero")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -1,5 +1,5 @@
 //
-//  PaywallStore.swift
+//  WelcomeBack+Live.swift
 //  PIAPaywall
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -19,20 +19,26 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import CoreArchitecture
+import Foundation
+import PIALibrary
 
-/// The paywall's store, which is `CoreArchitecture.Store` with this feature's types filled in.
-///
-/// Named so that hosts never write the generic parameters, and so that nothing outside this package
-/// has to import `CoreArchitecture` to hold one.
-public typealias PaywallStore = Store<Paywall.State, Paywall.Action>
+extension WelcomeBack.Dependencies {
 
-extension PaywallStore {
-    /// Creates the paywall's store, wiring the reducer to `dependencies`.
-    public convenience init(
-        initialState: Paywall.State = Paywall.State(),
-        dependencies: Paywall.Dependencies
-    ) {
-        self.init(initial: initialState, reduce: Paywall.Reducer(dependencies: dependencies).reduce)
+    @MainActor
+    public static func live(
+        accountProvider: AccountProvider,
+        store: InAppProvider,
+        emit: @escaping @MainActor (WelcomeBack.Output) -> Void
+    ) -> WelcomeBack.Dependencies {
+        let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
+        let loginWithReceipt = LoginWithReceiptUseCase(accountProvider: accountProvider)
+
+        return WelcomeBack.Dependencies(
+            restore: {
+                guard let jws = await currentReceipt() else { return .failure(.nothingToRestore) }
+                return await loginWithReceipt(jws)
+            },
+            emit: emit
+        )
     }
 }
