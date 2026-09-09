@@ -177,11 +177,9 @@ public extension VPNProvider {
             connect(callback)
             return
         }
-        if Client.configuration.usesPlatformSDKTunnel {
-            connect(callback)
-        } else {
-            reconnect(after: nil, forceDisconnect: true, callback)
-        }
+
+        // The PlatformSDK tunnel switches location in place; it needs no disconnect first.
+        connect(callback)
     }
 
     /// Default: no tunnel-reported value. Providers that run through the PlatformSDK tunnel override.

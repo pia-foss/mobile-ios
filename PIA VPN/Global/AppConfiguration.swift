@@ -25,8 +25,6 @@ import PIALibrary
 import UIKit
 
 #if os(iOS)
-    import TunnelKitCore
-    import TunnelKitOpenVPN
 #endif
 
 struct AppConfiguration {
@@ -52,16 +50,6 @@ struct AppConfiguration {
     }
 
     struct VPN {
-        enum Renegotiation: Int {
-            case never
-
-            case qa = 120  // 2 minutes
-
-            case crazy = 30  // 30 seconds
-
-            case production = 3600  // 1 hour
-        }
-
         static let profileName: String = {
             var name = "Private Internet Access"
             #if DEVELOPMENT
@@ -70,41 +58,6 @@ struct AppConfiguration {
             return name
         }()
 
-        #if os(iOS)
-            static let piaDefaultConfigurationBuilder: OpenVPNProvider.ConfigurationBuilder = {
-                var sessionBuilder = OpenVPN.ConfigurationBuilder()
-                sessionBuilder.renegotiatesAfter = piaRenegotiationInterval
-                sessionBuilder.cipher = .aes128gcm
-                sessionBuilder.digest = .sha256
-                if let pem = AppPreferences.shared.piaHandshake.pemString() {
-                    sessionBuilder.ca = OpenVPN.CryptoContainer(pem: pem)
-                }
-                sessionBuilder.endpointProtocols = piaAutomaticProtocols
-                sessionBuilder.dnsServers = []
-                sessionBuilder.usesPIAPatches = true
-                var builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-                if AppPreferences.shared.useSmallPackets {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.smallPacketSize
-                } else {
-                    builder.sessionConfiguration.mtu = AppConstants.OpenVPNPacketSize.defaultPacketSize
-                }
-                builder.shouldDebug = true
-                return builder
-            }()
-
-            static let piaAutomaticProtocols: [EndpointProtocol] = [
-                //            let vpnPorts = Client.providers.serverProvider.currentServersConfiguration.vpnPorts
-                EndpointProtocol(.udp, 8080),
-                EndpointProtocol(.tcp, 443)
-            ]
-        #endif
-
-        private static let piaCustomRenegotiation: Renegotiation = .qa
-
-        private static var piaRenegotiationInterval: TimeInterval {
-            let reneg: Renegotiation = (Flags.shared.customizesVPNRenegotiation ? piaCustomRenegotiation : .production)
-            return TimeInterval(reneg.rawValue)
-        }
     }
 
     struct ClientConfiguration {

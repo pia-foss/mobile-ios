@@ -822,8 +822,8 @@ final class DashboardViewController: AutolayoutViewController {
         let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
 
         let selectedProtocol = Client.preferences.vpnType.vpnProtocol
-        let isWireguardSelected = selectedProtocol == PIAWGTunnelProfile.vpnType.vpnProtocol
-        let isOpenVPNSelected = selectedProtocol == PIATunnelProfile.vpnType.vpnProtocol
+        let isWireguardSelected = selectedProtocol == KapePlatformSDKVPNType.wireGuard.rawValue.vpnProtocol
+        let isOpenVPNSelected = selectedProtocol == KapePlatformSDKVPNType.openVPN.rawValue.vpnProtocol
 
         guard !isWireguardSelected,
             !isOpenVPNSelected
@@ -976,7 +976,9 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func handleSwitchProtocolAction(_ action: UIAlertAction) {
         let editable = Client.preferences.editable()
-        editable.vpnType = Platform.isRunningOnMac ? PIAWGTunnelProfile.vpnType : IKEv2Profile.vpnType
+        // Both arms used to pick a legacy profile; automatic negotiation is the default now,
+        // on Mac Catalyst as well as iOS.
+        editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
         let action = editable.requiredVPNAction()
         editable.commit()
 

@@ -23,7 +23,6 @@ import Foundation
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
-import PIAWireguard
 import UIKit
 
 private let log = PIALogger.logger(for: CardFactory.self)
@@ -83,20 +82,14 @@ struct CardFactory {
 
     private static func activateWireGuard() {
 
-        if Client.preferences.vpnType == PIAWGTunnelProfile.vpnType,
+        if Client.preferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue,
             Client.providers.vpnProvider.isVPNConnected
         {
             return
         }
 
         let preferences = Client.preferences.editable()
-        guard let currentWireguardVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
-            return
-        }
-
-        preferences.setVPNCustomConfiguration(currentWireguardVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
-        preferences.vpnType = PIAWGTunnelProfile.vpnType
+        preferences.vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
         preferences.commit()
 
         Macros.postNotification(.PIASettingsHaveChanged)

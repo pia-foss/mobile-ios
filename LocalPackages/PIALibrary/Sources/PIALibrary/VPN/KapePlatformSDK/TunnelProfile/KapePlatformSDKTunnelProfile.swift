@@ -295,11 +295,7 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    public func parsedCustomConfiguration(from map: [String: Any]) -> (any VPNCustomConfiguration)? {
-        nil
-    }
-
-    public func requestLog(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<String>?) {
+    public func requestLog(_ callback: LibraryCallback<String>?) {
         find { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
@@ -324,7 +320,7 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     /// `dataUsage` provider message and maps the reply into `Usage`. Returns
     /// `nil` (no usage) when disconnected or when the active protocol cannot
     /// report counters — the extension answers with an empty response.
-    public func requestDataUsage(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<Usage>?) {
+    public func requestDataUsage(_ callback: LibraryCallback<Usage>?) {
         find { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
@@ -396,25 +392,17 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     /// The user's custom DNS resolvers for the given VPN type (the Settings → Network choice),
     /// empty when they kept the PIA default (server-pushed DNS). iOS-only feature; tvOS has no UI.
     ///
-    /// Read from the raw persisted custom-configuration map rather than the parsed
-    /// `VPNCustomConfiguration` so this does not depend on the legacy `PIAWireguard` /
-    /// `TunnelKitOpenVPN` types (which are being removed). The stored maps are plain
-    /// `[String: Any]`: WireGuard keeps a flat `customDNSServers`, while OpenVPN nests it under
-    /// `configuration.dnsServers` (the auto-synthesised `OpenVPN.ProviderConfiguration` Codable shape).
+    /// Read from the same app-group preferences that hold every other tunnel setting. Installs that
+    /// chose their DNS before those keys existed are backfilled once at launch
+    /// (`Bootstrapper.migrateLegacyCustomDNSIfNeeded`), so there is no need to consult the legacy
+    /// custom-configuration maps here.
     func customDnsServers(forVPNType vpnType: KapePlatformSDKVPNType) -> [String] {
-        guard let map = Client.database.plain.vpnCustomConfigurationMaps?[vpnType.rawValue] else {
-            return []
+        switch vpnType {
+        case .wireGuard:
+            return Client.preferences.wireGuardDnsServers
+        default:
+            return Client.preferences.openVPNDnsServers
         }
-
-        if let wireGuardDns = map["customDNSServers"] as? [String] {
-            return wireGuardDns
-        }
-
-        if let session = map["configuration"] as? [String: Any], let openVPNDns = session["dnsServers"] as? [String] {
-            return openVPNDns
-        }
-
-        return []
     }
 
     private func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {

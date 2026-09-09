@@ -19,19 +19,19 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-// PIATunnelProfile and PIAWGTunnelProfile are only declared for iOS.
 #if os(iOS)
 
-    import TunnelKitCore
-    import TunnelKitOpenVPN
     import XCTest
 
     @testable import PIALibrary
 
-    /// Locks the invariant behind the VPN-permission placeholder (KM-17461): a profile
-    /// generated from `Server.vpnPermissionPlaceholder` must always carry a non-empty
-    /// `serverAddress`, so the OS profile save that grants the one-time VPN permission
-    /// cannot fail or persist an empty endpoint when the server list is unavailable.
+    /// Locks what survives of KM-17461's VPN-permission placeholder invariant.
+    ///
+    /// The original tests asserted that a profile generated from `Server.vpnPermissionPlaceholder`
+    /// carries a non-empty `serverAddress`. That was a property of the *legacy* profiles, where
+    /// `serverAddress` was the endpoint. `KapePlatformSDKTunnelProfile` deliberately leaves it empty
+    /// — the extension resolves endpoints from `PIATunnelSharedState` — so only the placeholder
+    /// server's own invariants are still meaningful here.
     class VPNPermissionPlaceholderTests: XCTestCase {
 
         private var previousLastServerCN: String?
@@ -53,36 +53,6 @@
             super.tearDown()
         }
 
-        private func makeConfiguration(customConfiguration: VPNCustomConfiguration? = nil) -> VPNConfiguration {
-            VPNConfiguration(
-                name: "PIA Test",
-                username: "p0000000",
-                passwordReference: Data(),
-                server: .vpnPermissionPlaceholder,
-                isOnDemand: false,
-                disconnectsOnSleep: false,
-                customConfiguration: customConfiguration,
-                leakProtection: false,
-                allowLocalDeviceAccess: false
-            )
-        }
-
-        /// Mirrors the session configuration the app passes in production
-        /// (`AppConfiguration.VPN.piaDefaultConfigurationBuilder`), so the test walks the
-        /// real `endpointProtocols` / `bestAddressForOVPN(tcp:)` branch and not just the
-        /// trivial no-custom-configuration path.
-        private func makeOpenVPNConfiguration() -> OpenVPNProvider.Configuration {
-            var sessionBuilder = OpenVPN.ConfigurationBuilder()
-            sessionBuilder.cipher = .aes128gcm
-            sessionBuilder.digest = .sha256
-            sessionBuilder.endpointProtocols = [
-                EndpointProtocol(.udp, 8080),
-                EndpointProtocol(.tcp, 443)
-            ]
-            sessionBuilder.usesPIAPatches = true
-            return OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build()).build()
-        }
-
         func testPlaceholderServerHasNonEmptyHostname() {
             XCTAssertFalse(Server.vpnPermissionPlaceholder.hostname.isEmpty)
             // RFC 6761 reserved TLD: never resolves, never matches PIA-domain checks
@@ -91,21 +61,6 @@
             XCTAssertFalse(Server.vpnPermissionPlaceholder.hostname.contains("privateinternetaccess.com"))
         }
 
-        func testWireGuardGeneratedProtocolFallsBackToPlaceholderHostname() throws {
-            let profile = PIAWGTunnelProfile(bundleIdentifier: "com.test.wg-tunnel")
-            let proto = try profile.generatedProtocol(withConfiguration: makeConfiguration())
-
-            XCTAssertEqual(proto.serverAddress, Server.vpnPermissionPlaceholder.hostname)
-        }
-
-        func testOpenVPNGeneratedProtocolFallsBackToPlaceholderHostname() {
-            let profile = PIATunnelProfile(bundleIdentifier: "com.test.ovpn-tunnel")
-            let configuration = makeConfiguration(customConfiguration: makeOpenVPNConfiguration())
-            let proto = profile.generatedProtocol(withConfiguration: configuration)
-
-            XCTAssertEqual(proto.serverAddress, Server.vpnPermissionPlaceholder.hostname)
-            XCTAssertNotEqual(proto.serverAddress, "")
-        }
     }
 
 #endif

@@ -23,8 +23,6 @@ import PIADesignSystem
 import PIALibrary
 import PIALocalizations
 import Popover
-import TunnelKitCore
-import TunnelKitOpenVPN
 import UIKit
 
 class SettingPopoverSelectionView: UIView {
@@ -170,10 +168,7 @@ extension TransportPopoverSelectionView: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let socketType = options[indexPath.row]
-
-        let type = SocketType(rawValue: socketType)
-        settingsDelegate.updateSocketType(socketType: type)
+        settingsDelegate.updateSocketType(socketType: options[indexPath.row])
         Macros.postNotification(.PIASettingsHaveChanged)
 
         currentPopover.dismiss()
@@ -285,59 +280,6 @@ extension DataEncryptionPopoverSelectionView: UITableViewDelegate, UITableViewDa
         let value = options[indexPath.row]
 
         settingsDelegate.updateDataEncryption(encryption: value)
-        Macros.postNotification(.PIASettingsHaveChanged)
-
-        currentPopover.dismiss()
-    }
-
-}
-
-final class HandshakePopoverSelectionView: SettingPopoverSelectionView {
-
-    var options: [IKEv2IntegrityAlgorithm]!
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-extension HandshakePopoverSelectionView: UITableViewDelegate, UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.accessibilityIdentifier = "HandshakePopoverSelectionView"
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
-            fatalError("no transport available")
-        }
-        cell.textLabel?.style(style: cellTextStyle)
-
-        cell.textLabel?.text = options[indexPath.row].description
-        cell.textLabel?.accessibilityLabel = options[indexPath.row].description
-
-        Theme.current.applySecondaryBackground(cell)
-        let backgroundView = UIView()
-        Theme.current.applyPrincipalBackground(backgroundView)
-        cell.selectedBackgroundView = backgroundView
-
-        return cell
-
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let value = options[indexPath.row]
-
-        settingsDelegate.updateHandshake(handshake: value)
         Macros.postNotification(.PIASettingsHaveChanged)
 
         currentPopover.dismiss()

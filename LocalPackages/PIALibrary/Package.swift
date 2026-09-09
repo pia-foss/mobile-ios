@@ -23,8 +23,6 @@ let package = Package(
         .package(path: "../PIABase"),
         .package(path: "../PIARegions"),
         .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
-        .package(path: "../KapePlatformSDK/TunnelKitPackage"),
-        .package(url: "git@github.com:pia-foss/mobile-ios-wireguard.git", exact: "1.0.6"),
         .package(url: "https://github.com/apple/swift-algorithms", exact: "1.2.1"),
         .package(url: "https://github.com/apple/swift-log", exact: "1.15.0"),
         .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4")
@@ -41,26 +39,6 @@ let package = Package(
                 .product(name: "PIARegions", package: "PIARegions"),
                 .product(name: "PIAAccount", package: "PIAAccount"),
                 .product(name: "PIABase", package: "PIABase"),
-                .product(
-                    name: "PIAWireguard",
-                    package: "mobile-ios-wireguard",
-                    condition: .when(platforms: [.iOS, .macCatalyst])
-                ),
-                .product(
-                    name: "TunnelKit",
-                    package: "TunnelKitPackage",
-                    condition: .when(platforms: [.iOS, .macCatalyst])
-                ),
-                .product(
-                    name: "TunnelKitOpenVPN",
-                    package: "TunnelKitPackage",
-                    condition: .when(platforms: [.iOS, .macCatalyst])
-                ),
-                .product(
-                    name: "TunnelKitOpenVPNAppExtension",
-                    package: "TunnelKitPackage",
-                    condition: .when(platforms: [.iOS, .macCatalyst])
-                ),
                 .product(name: "NWHttpConnection", package: "mobile-ios-networking")
             ],
             resources: [
@@ -71,12 +49,7 @@ let package = Package(
             name: "PIALibraryTests",
             dependencies: [
                 "PIALibrary",
-                .product(name: "PIAKPI", package: "PIAKPI"),
-                .product(
-                    name: "TunnelKitOpenVPN",
-                    package: "TunnelKitPackage",
-                    condition: .when(platforms: [.iOS, .macCatalyst])
-                )
+                .product(name: "PIAKPI", package: "PIAKPI")
             ],
             resources: [
                 .process("Resources")

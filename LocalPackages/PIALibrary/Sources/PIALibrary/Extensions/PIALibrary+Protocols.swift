@@ -18,7 +18,7 @@ public protocol ServerType {
     var pingTime: Int? { get }
     var isAutomatic: Bool { get }
     var dipToken: String? { get }
-    var dipIKEv2IP: String? { get }
+    var dedicatedIP: String? { get }
     var dipStatusString: String? { get }
     func hasEndpoints(for vpnType: String) -> Bool
 }
