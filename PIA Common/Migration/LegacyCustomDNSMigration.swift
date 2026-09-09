@@ -10,41 +10,40 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: LegacyCustomDNSMigration.self)
 
-/// One-time backfill of the custom DNS resolvers an install chose before
-/// `openVPNDnsServers` / `wireGuardDnsServers` existed.
-///
-/// Custom DNS used to live only in the legacy custom-configuration maps, in two different shapes.
-/// Those maps are going away with the rest of the legacy VPN stack, and the PlatformSDK tunnel now
-/// reads the preferences instead — so anything that only ever landed in a map has to be carried
-/// across, or the user silently drops back to server-pushed DNS.
-///
-/// The preferences win when both are populated: Settings has been writing them on every change
-/// since the PlatformSDK tunnel shipped, so they are the fresher of the two.
+/// One-time backfill of settings (DNS, cipher, auth, port, small packets) that only ever lived in
+/// the legacy custom-configuration maps, into the app-group keys the PlatformSDK tunnel reads.
 enum LegacyCustomDNSMigration {
 
-    /// The two shapes the legacy maps used. WireGuard kept a flat list; OpenVPN nested it under the
-    /// `OpenVPN.ProviderConfiguration` Codable shape that TunnelKit synthesised.
-    ///
-    /// Read straight out of the app-group defaults: `Client.database.plain` is internal to
-    /// PIALibrary, and the typed `vpnCustomConfiguration(for:)` accessor cannot help — the
-    /// PlatformSDK profile's `parsedCustomConfiguration` returns `nil` by design. This is
-    /// throwaway migration code reading a key that is being deleted, so reaching past the store is
-    /// the lesser evil against widening PIALibrary's public surface for it.
+    /// OpenVPN's session settings nest under `"sessionConfiguration"` (`mobile-ios-openvpn`, what
+    /// every real legacy install shipped) or `"configuration"` (the vendored Kape fork, briefly used
+    /// during the PlatformSDK transition). Both are checked. Same split for the remote list:
+    /// `"endpointProtocols"` (`"<socketType>:<port>"`) vs `"remotes"` (`"<address>:<socketType>:<port>"`)
+    /// — taking the last `:`-separated component reads the port out of either.
     private enum LegacyKey {
         static let maps = "VPNCustomConfigurationMaps"
         static let wireGuardMap = "PIAWG"
         static let openVPNMap = "PIA"
         static let wireGuardServers = "customDNSServers"
+        static let openVPNSessionConfiguration = "sessionConfiguration"
         static let openVPNConfiguration = "configuration"
         static let openVPNServers = "dnsServers"
+        static let openVPNCipher = "cipher"
+        static let openVPNDigest = "digest"
+        static let openVPNEndpointProtocols = "endpointProtocols"
+        static let openVPNRemotes = "remotes"
+        static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
     }
 
-    /// The DNS servers a legacy map should contribute, given what the preferences already hold.
-    ///
-    /// Pure, so the shape handling can be tested exhaustively without the app-group defaults,
-    /// `AppPreferences` or `Client.preferences`. `nil` for a protocol means "leave the preference
-    /// alone" — either it is already populated (a populated preference is always the more recent
-    /// choice) or the legacy map has nothing usable for it.
+    private static func openVPNSessionConfiguration(from maps: [String: [String: Any]]) -> [String: Any]? {
+        guard let map = maps[LegacyKey.openVPNMap] else {
+            return nil
+        }
+
+        return (map[LegacyKey.openVPNSessionConfiguration] ?? map[LegacyKey.openVPNConfiguration]) as? [String: Any]
+    }
+
+    /// `nil` for a protocol means "leave the preference alone": already populated, or nothing to
+    /// migrate.
     static func migratedServers(
         from maps: [String: [String: Any]],
         currentOpenVPN: [String],
@@ -53,7 +52,6 @@ enum LegacyCustomDNSMigration {
         var wireGuard: [String]?
         var openVPN: [String]?
 
-        // WireGuard kept a flat list.
         if currentWireGuard.isEmpty,
             let servers = maps[LegacyKey.wireGuardMap]?[LegacyKey.wireGuardServers] as? [String],
             !servers.isEmpty
@@ -61,9 +59,8 @@ enum LegacyCustomDNSMigration {
             wireGuard = servers
         }
 
-        // OpenVPN nested it under the `OpenVPN.ProviderConfiguration` Codable shape.
         if currentOpenVPN.isEmpty,
-            let configuration = maps[LegacyKey.openVPNMap]?[LegacyKey.openVPNConfiguration] as? [String: Any],
+            let configuration = openVPNSessionConfiguration(from: maps),
             let servers = configuration[LegacyKey.openVPNServers] as? [String],
             !servers.isEmpty
         {
@@ -73,47 +70,111 @@ enum LegacyCustomDNSMigration {
         return (openVPN: openVPN, wireGuard: wireGuard)
     }
 
-    /// Copies any legacy custom DNS into the preferences, once.
-    ///
-    /// Must run before the first tunnel-settings build of the launch: the tunnel reads the
-    /// preferences, so a late backfill means one session on the wrong resolvers.
+    static func migratedOpenVPNSettings(
+        from maps: [String: [String: Any]],
+        currentCipher: String?,
+        currentAuth: String?,
+        currentPort: Int
+    ) -> (cipher: String?, auth: String?, port: Int?) {
+        guard let configuration = openVPNSessionConfiguration(from: maps) else {
+            return (nil, nil, nil)
+        }
+
+        var cipher: String?
+        if currentCipher == nil,
+            let legacyCipher = configuration[LegacyKey.openVPNCipher] as? String,
+            AppConstants.OpenVPNCrypto(rawValue: legacyCipher) != nil
+        {
+            cipher = legacyCipher
+        }
+
+        var auth: String?
+        if currentAuth == nil, let legacyAuth = configuration[LegacyKey.openVPNDigest] as? String {
+            auth = legacyAuth
+        }
+
+        var port: Int?
+        if currentPort == 0,
+            let remotes = (configuration[LegacyKey.openVPNEndpointProtocols] ?? configuration[LegacyKey.openVPNRemotes]) as? [String]
+        {
+            let ports = Set(remotes.compactMap { $0.split(separator: ":").last.flatMap { Int($0) } })
+            if ports.count == 1 {
+                port = ports.first
+            }
+        }
+
+        return (cipher, auth, port)
+    }
+
+    /// OpenVPN and WireGuard had separate legacy small-packets keys that now share one preference.
+    /// OpenVPN's carries across for free (same key name); this folds in WireGuard's, only turning
+    /// the shared value on, never off.
+    static func migratedUseSmallPackets(currentValue: Bool, legacyWireGuardValue: Bool) -> Bool? {
+        guard !currentValue, legacyWireGuardValue else {
+            return nil
+        }
+
+        return true
+    }
+
+    /// Must run before the first tunnel-settings build of the launch, or the tunnel reads stale
+    /// preferences for one session.
     static func run() {
         guard !AppPreferences.shared.didMigrateLegacyCustomDNS else {
             return
         }
 
-        defer { AppPreferences.shared.didMigrateLegacyCustomDNS = true }
-
-        let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
-        guard let maps = sharedDefaults.dictionary(forKey: LegacyKey.maps) as? [String: [String: Any]] else {
-            return
+        defer {
+            AppPreferences.shared.didMigrateLegacyCustomDNS = true
         }
 
-        let migrated = migratedServers(
+        let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
+        let maps = sharedDefaults.dictionary(forKey: LegacyKey.maps) as? [String: [String: Any]] ?? [:]
+
+        let migratedDNS = migratedServers(
             from: maps,
             currentOpenVPN: Client.preferences.openVPNDnsServers,
             currentWireGuard: Client.preferences.wireGuardDnsServers)
 
-        if migrated.openVPN != nil || migrated.wireGuard != nil {
+        let migratedOpenVPN = migratedOpenVPNSettings(
+            from: maps,
+            currentCipher: Client.preferences.openVPNCipher,
+            currentAuth: Client.preferences.openVPNAuth,
+            currentPort: Client.preferences.openVPNPort)
+
+        let migratedSmallPackets = migratedUseSmallPackets(
+            currentValue: Client.preferences.useSmallPackets,
+            legacyWireGuardValue: sharedDefaults.bool(forKey: LegacyKey.wireGuardUseSmallPackets))
+
+        if migratedDNS.openVPN != nil || migratedDNS.wireGuard != nil || migratedOpenVPN.cipher != nil || migratedOpenVPN.auth != nil
+            || migratedOpenVPN.port != nil || migratedSmallPackets != nil
+        {
             let preferences = Client.preferences.editable()
-            if let wireGuard = migrated.wireGuard {
+            if let wireGuard = migratedDNS.wireGuard {
                 preferences.wireGuardDnsServers = wireGuard
             }
-            if let openVPN = migrated.openVPN {
+            if let openVPN = migratedDNS.openVPN {
                 preferences.openVPNDnsServers = openVPN
+            }
+            if let cipher = migratedOpenVPN.cipher {
+                preferences.openVPNCipher = cipher
+            }
+            if let auth = migratedOpenVPN.auth {
+                preferences.openVPNAuth = auth
+            }
+            if let port = migratedOpenVPN.port {
+                preferences.openVPNPort = port
+            }
+            if let smallPackets = migratedSmallPackets {
+                preferences.useSmallPackets = smallPackets
             }
             preferences.commit()
 
-            log.info("Legacy custom DNS migrated into the tunnel preferences")
+            log.info("Legacy OpenVPN/WireGuard settings migrated into the tunnel preferences")
         }
 
-        // The maps are the last of the legacy custom-configuration store: nothing reads them any
-        // more, and nothing will ever write them again. Drop the blob once its DNS has been carried
-        // across — or found to hold nothing worth carrying — rather than leaving it in every
-        // upgraded install's app group forever.
-        //
-        // Deliberately after the commit above, so a crash in between leaves the legacy data intact
-        // rather than losing a setting that never reached the preferences.
+        // After the commit above, so a crash in between leaves the legacy data intact instead of
+        // losing a setting that never reached the preferences.
         sharedDefaults.removeObject(forKey: LegacyKey.maps)
     }
 }

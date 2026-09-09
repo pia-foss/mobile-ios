@@ -25,7 +25,27 @@ final class LegacyCustomDNSMigrationTests: XCTestCase {
     }
 
     private func openVPNMap(_ servers: [String]) -> [String: [String: Any]] {
-        ["PIA": ["configuration": ["dnsServers": servers]]]
+        ["PIA": ["sessionConfiguration": ["dnsServers": servers]]]
+    }
+
+    // The shape every real legacy install shipped: `OpenVPNProvider.Configuration.sessionConfiguration`,
+    // whose `endpointProtocols` are `EndpointProtocol.rawValue` — "<socketType>:<port>", no address.
+    private func openVPNConfigurationMap(
+        cipher: String? = nil,
+        digest: String? = nil,
+        endpointProtocols: [String]? = nil,
+        nestingKey: String = "sessionConfiguration",
+        remotesKey: String = "endpointProtocols"
+    ) -> [String: [String: Any]] {
+        var configuration: [String: Any] = [:]
+        configuration["cipher"] = cipher
+        configuration["digest"] = digest
+        configuration[remotesKey] = endpointProtocols
+        return ["PIA": [nestingKey: configuration]]
+    }
+
+    private func endpointProtocol(_ socketTypeAndPort: String) -> String {
+        socketTypeAndPort
     }
 
     // MARK: The two legacy shapes
@@ -152,5 +172,110 @@ final class LegacyCustomDNSMigrationTests: XCTestCase {
 
         XCTAssertNil(second.wireGuard)
         XCTAssertNil(second.openVPN)
+    }
+
+    // MARK: OpenVPN cipher, auth digest and remote port
+
+    func test_openVPNCipherAuthAndPortMigrateTogether() {
+        let maps = openVPNConfigurationMap(
+            cipher: "AES-256-GCM", digest: "SHA256",
+            endpointProtocols: [endpointProtocol("UDP:8080"), endpointProtocol("TCP:8080")])
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertEqual(result.cipher, "AES-256-GCM")
+        XCTAssertEqual(result.auth, "SHA256")
+        XCTAssertEqual(result.port, 8080)
+    }
+
+    func test_unsupportedCipherIsIgnored() {
+        // Only the two GCM ciphers the PlatformSDK tunnel still supports are carried across; a
+        // legacy CBC cipher falls back to the app's default rather than being written verbatim.
+        let maps = openVPNConfigurationMap(cipher: "AES-256-CBC")
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertNil(result.cipher)
+    }
+
+    func test_multipleDistinctPortsFallBackToAutomatic() {
+        let maps = openVPNConfigurationMap(endpointProtocols: [endpointProtocol("UDP:8080"), endpointProtocol("UDP:9201")])
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertNil(result.port)
+    }
+
+    func test_populatedOpenVPNSettingsAreNotOverwritten() {
+        let maps = openVPNConfigurationMap(
+            cipher: "AES-256-GCM", digest: "SHA256", endpointProtocols: [endpointProtocol("UDP:8080")])
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: "AES-128-GCM", currentAuth: "SHA1", currentPort: 1198)
+
+        XCTAssertNil(result.cipher)
+        XCTAssertNil(result.auth)
+        XCTAssertNil(result.port)
+    }
+
+    func test_noOpenVPNMapLeavesSettingsAlone() {
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: [:], currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertNil(result.cipher)
+        XCTAssertNil(result.auth)
+        XCTAssertNil(result.port)
+    }
+
+    // MARK: The Kape-transitional shape (nested under "configuration", remotes carry an address)
+
+    func test_transitionalConfigurationShapeMigratesDNS() {
+        let maps: [String: [String: Any]] = ["PIA": ["configuration": ["dnsServers": openVPNServers]]]
+
+        let result = LegacyCustomDNSMigration.migratedServers(
+            from: maps, currentOpenVPN: [], currentWireGuard: [])
+
+        XCTAssertEqual(result.openVPN, openVPNServers)
+    }
+
+    func test_transitionalConfigurationShapeMigratesCipherAndPort() {
+        let maps = openVPNConfigurationMap(
+            cipher: "AES-256-GCM",
+            digest: "SHA256",
+            endpointProtocols: ["209.222.18.222:UDP:8080"],
+            nestingKey: "configuration",
+            remotesKey: "remotes")
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertEqual(result.cipher, "AES-256-GCM")
+        XCTAssertEqual(result.auth, "SHA256")
+        XCTAssertEqual(result.port, 8080)
+    }
+
+    // MARK: Use Small Packets
+
+    func test_wireGuardSmallPacketsMigratesWhenSharedPreferenceIsOff() {
+        let result = LegacyCustomDNSMigration.migratedUseSmallPackets(currentValue: false, legacyWireGuardValue: true)
+
+        XCTAssertEqual(result, true)
+    }
+
+    func test_wireGuardSmallPacketsOffLeavesSharedPreferenceAlone() {
+        let result = LegacyCustomDNSMigration.migratedUseSmallPackets(currentValue: false, legacyWireGuardValue: false)
+
+        XCTAssertNil(result)
+    }
+
+    func test_sharedPreferenceAlreadyOnIsNeverTurnedOff() {
+        // OpenVPN's "UseSmallPackets" key is unchanged, so it already carried across. A WireGuard
+        // legacy value of false must not disable what OpenVPN's toggle already turned on.
+        let result = LegacyCustomDNSMigration.migratedUseSmallPackets(currentValue: true, legacyWireGuardValue: false)
+
+        XCTAssertNil(result)
     }
 }
