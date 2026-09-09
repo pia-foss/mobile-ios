@@ -192,15 +192,12 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
                 }
                 self.activeProfile = profile
 
-                if let previousProfile = previousProfile {
+                if let previousProfile {
                     previousProfile.remove({ _ in
                         Macros.postNotification(.PIAVPNDidInstall)
                         callback?(nil)
                     })
                 } else {
-                    if previousProfile != nil {  // dont connect after install
-                        self.connect(nil)
-                    }
                     Macros.postNotification(.PIAVPNDidInstall)
                     callback?(nil)
                 }
