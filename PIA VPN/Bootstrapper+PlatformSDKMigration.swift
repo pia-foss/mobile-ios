@@ -163,9 +163,19 @@ extension Bootstrapper {
 
     // MARK: - Helpers
 
+    private static let lastKnownVpnStatusKey = "LastKnownVPNStatus"
+
     /// Reads the NE preferences rather than `VPNProvider.isVPNConnected`, so it works before
     /// bootstrap, and covers the IKEv2 slot that `loadAllFromPreferences` never returns.
     static func loadIsVPNConnected(_ completion: @escaping (Bool) -> Void) {
+        let sharedDefaults = UserDefaults(suiteName: AppConstants.appGroup) ?? .standard
+        let wasLastKnownConnected = sharedDefaults.string(forKey: lastKnownVpnStatusKey) == VPNStatus.connected.rawValue
+
+        guard !wasLastKnownConnected else {
+            DispatchQueue.main.async { completion(true) }
+            return
+        }
+
         NETunnelProviderManager.loadAllFromPreferences { managers, _ in
             let isTunnelProviderConnected =
                 managers?.contains { manager in

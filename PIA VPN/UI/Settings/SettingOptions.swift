@@ -124,6 +124,7 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection {
     case transport
     case remotePort
     case dataEncryption
+    case handshake
     case useSmallPackets
 
     public func localizedTitleMessage() -> String {
@@ -132,6 +133,7 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection {
         case .transport: return L10n.Settings.Connection.Transport.title
         case .remotePort: return L10n.Settings.Connection.RemotePort.title
         case .dataEncryption: return L10n.Settings.Encryption.Cipher.title
+        case .handshake: return L10n.Settings.Encryption.Handshake.title
         case .useSmallPackets: return L10n.Settings.Small.Packets.title
         }
     }
@@ -142,6 +144,7 @@ public enum ProtocolsSections: Int, CaseIterable, SettingSection {
         case .transport: return ""
         case .remotePort: return ""
         case .dataEncryption: return ""
+        case .handshake: return ""
         case .useSmallPackets: return ""
         }
     }
