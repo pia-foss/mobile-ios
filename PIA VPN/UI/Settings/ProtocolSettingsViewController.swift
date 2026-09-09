@@ -229,6 +229,9 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
                 cell.detailTextLabel?.text = "ChaCha20"
                 cell.accessoryType = .none
             }
+        case .handshake:
+            cell.detailTextLabel?.text = pendingPreferences.vpnType.handshake
+            cell.accessoryType = .none
         case .useSmallPackets:
             cell.textLabel?.text = L10n.Settings.Small.Packets.title
             cell.detailTextLabel?.text = nil
@@ -314,7 +317,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     private var baseSections: [ProtocolsSections] {
-        return [.protocolSelection, .dataEncryption, .useSmallPackets]
+        return [.protocolSelection, .dataEncryption, .handshake, .useSmallPackets]
     }
 
     /// Sections shown for the currently selected protocol (OpenVPN handled separately, above).
