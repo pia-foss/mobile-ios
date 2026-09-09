@@ -554,9 +554,6 @@ final class AppPreferences {
         }
     }
 
-    /// Tracks whether the legacy per-protocol VPN configurations (IKEv2 / OpenVPN /
-    /// WireGuard) have been removed after migrating to the PlatformSDK tunnel. Runs
-    /// once so stale Network Extension configs cannot auto-start via on-demand.
     /// Whether the one-time backfill of legacy custom DNS into the tunnel preferences has run.
     /// See ``LegacyCustomDNSMigration``.
     var didMigrateLegacyCustomDNS: Bool {
@@ -568,6 +565,9 @@ final class AppPreferences {
         }
     }
 
+    /// Tracks whether the legacy per-protocol VPN configurations (IKEv2 / OpenVPN /
+    /// WireGuard) have been removed after migrating to the PlatformSDK tunnel. Runs
+    /// once so stale Network Extension configs cannot auto-start via on-demand.
     var didCleanupLegacyVPNProfiles: Bool {
         get {
             return defaults.bool(forKey: Entries.didCleanupLegacyVPNProfiles)

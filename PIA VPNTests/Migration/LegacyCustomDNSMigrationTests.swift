@@ -178,7 +178,7 @@ final class LegacyCustomDNSMigrationTests: XCTestCase {
 
     func test_openVPNCipherAuthAndPortMigrateTogether() {
         let maps = openVPNConfigurationMap(
-            cipher: "AES-256-GCM", digest: "SHA256",
+            cipher: "AES-256-GCM", digest: "SHA1",
             endpointProtocols: [endpointProtocol("UDP:8080"), endpointProtocol("TCP:8080")])
 
         let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
@@ -187,6 +187,17 @@ final class LegacyCustomDNSMigrationTests: XCTestCase {
         XCTAssertEqual(result.cipher, "AES-256-GCM")
         XCTAssertEqual(result.auth, "SHA256")
         XCTAssertEqual(result.port, 8080)
+    }
+
+    func test_legacyDigestIsNormalizedNotCopied() {
+        // Auth has no UI: the app always pins SHA256, so a stale pre-normalization digest (e.g. an
+        // install from before the old `migrateOVPN()` enforced SHA256) must not be copied verbatim.
+        let maps = openVPNConfigurationMap(digest: "SHA1")
+
+        let result = LegacyCustomDNSMigration.migratedOpenVPNSettings(
+            from: maps, currentCipher: nil, currentAuth: nil, currentPort: 0)
+
+        XCTAssertEqual(result.auth, "SHA256")
     }
 
     func test_unsupportedCipherIsIgnored() {
@@ -244,7 +255,6 @@ final class LegacyCustomDNSMigrationTests: XCTestCase {
     func test_transitionalConfigurationShapeMigratesCipherAndPort() {
         let maps = openVPNConfigurationMap(
             cipher: "AES-256-GCM",
-            digest: "SHA256",
             endpointProtocols: ["209.222.18.222:UDP:8080"],
             nestingKey: "configuration",
             remotesKey: "remotes")

@@ -28,7 +28,6 @@ enum LegacyCustomDNSMigration {
         static let openVPNConfiguration = "configuration"
         static let openVPNServers = "dnsServers"
         static let openVPNCipher = "cipher"
-        static let openVPNDigest = "digest"
         static let openVPNEndpointProtocols = "endpointProtocols"
         static let openVPNRemotes = "remotes"
         static let wireGuardUseSmallPackets = "WireGuardUseSmallPackets"
@@ -89,8 +88,8 @@ enum LegacyCustomDNSMigration {
         }
 
         var auth: String?
-        if currentAuth == nil, let legacyAuth = configuration[LegacyKey.openVPNDigest] as? String {
-            auth = legacyAuth
+        if currentAuth == nil {
+            auth = AppConstants.OpenVPNCrypto.defaultAuth
         }
 
         var port: Int?
