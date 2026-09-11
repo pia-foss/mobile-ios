@@ -78,6 +78,7 @@ final class RegionsViewController: AutolayoutViewController {
         selectedServer = Client.preferences.displayedServer
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRegions), name: .PIAThemeDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(justRefreshRegions), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
@@ -292,8 +293,12 @@ final class RegionsViewController: AutolayoutViewController {
         self.filterServers()
     }
 
+    @objc private func justRefreshRegions() {
+        tableView.reloadData()
+    }
+
     @objc private func reloadRegions() {
-        self.filterServers()
+        filterServers()
     }
 
     // MARK: Restylable
@@ -360,6 +365,9 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Latency is only meaningful when measured off-VPN.
+        let showsPingTime = (Client.providers.vpnProvider.vpnStatus == .disconnected)
+
         switch Section(rawValue: indexPath.section) {
         case .automatic:
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.region, for: indexPath) as! RegionCell
@@ -367,7 +375,7 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.separatorInset = .zero
             let server = Server.automatic
             let isSelected = (server.identifier == selectedServer.identifier)
-            cell.fill(withServer: server, isSelected: isSelected)
+            cell.fill(with: .init(server: server, isSelected: isSelected, showsPingTime: showsPingTime))
             return cell
 
         case .dip:
@@ -404,7 +412,7 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
             let isSelected = (server.identifier == selectedServer.identifier && selectedServer.dipToken == nil)
-            cell.fill(withServer: server, isSelected: isSelected)
+            cell.fill(with: .init(server: server, isSelected: isSelected, showsPingTime: showsPingTime))
 
             return cell
         }

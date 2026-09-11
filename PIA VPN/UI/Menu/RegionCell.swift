@@ -31,7 +31,7 @@ public enum RegionStatus {
     case offline
 }
 
-class RegionCell: UITableViewCell, Restylable {
+final class RegionCell: UITableViewCell, Restylable {
 
     @IBOutlet private weak var imvFlag: UIImageView!
 
@@ -46,22 +46,28 @@ class RegionCell: UITableViewCell, Restylable {
 
     private var isFavorite: Bool!
     private var iconSelected = false
+    private var showsPingTime = true
     private weak var server: Server!
+
+    struct Configuration {
+        let server: Server
+        let isSelected: Bool
+        let showsPingTime: Bool
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     }
 
-    func fill(withServer server: Server, isSelected: Bool) {
+    func fill(with configuration: Configuration) {
         viewShouldRestyle()
 
-        self.server = server
+        server = configuration.server
+        showsPingTime = configuration.showsPingTime
+        iconSelected = configuration.isSelected
+
         setupServerAvailability()
-
         imvFlag.setImage(fromServer: server)
-
         labelRegion.text = server.name
-
-        iconSelected = isSelected
         prepareCellIcons()
 
         accessibilityIdentifier = "uitests.regions.region_name"
@@ -95,9 +101,8 @@ class RegionCell: UITableViewCell, Restylable {
             rightIconImageView.alpha = 1.0
 
             var pingTimeString: String?
-            if let pingTime = server.pingTime {
+            if let pingTime = server.pingTime, showsPingTime {
                 pingTimeString = "\(pingTime)ms"
-
                 Theme.current.applyPingTime(labelPingTime, time: pingTime)
             }
             labelPingTime.text = pingTimeString
