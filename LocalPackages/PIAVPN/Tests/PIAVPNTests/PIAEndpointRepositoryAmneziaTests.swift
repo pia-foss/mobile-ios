@@ -120,8 +120,8 @@ struct PIAEndpointRepositoryAmneziaTests {
         #expect(wireGuardSteps.dropFirst().first?.obfuscationDescription == "none")
     }
 
-    @Test("the normal order never produces an amnezia endpoint")
-    func normalOrderHasNoAmnezia() {
+    @Test("the normal order falls back to amnezia only after the plain protocols")
+    func normalOrderTriesAmneziaLast() throws {
         let server = Self.server(
             wireGuard: [Self.address("1.1.1.1", cn: "wg-cn")],
             amnezia: [Self.address("2.2.2.2", cn: "awg-cn", port: 1338)]
@@ -133,6 +133,10 @@ struct PIAEndpointRepositoryAmneziaTests {
             order: PIAEndpointRepository.normalPeckingOrder
         )
 
-        #expect(batch.allSatisfy { $0.connectedEndpointSnapshot?.obfuscationDescription != "amnezia" })
+        let snapshots = batch.compactMap(\.connectedEndpointSnapshot)
+        let firstAmnezia = try #require(snapshots.firstIndex { $0.obfuscationDescription == "amnezia" })
+        let lastPlain = try #require(snapshots.lastIndex { $0.obfuscationDescription != "amnezia" })
+        #expect(firstAmnezia > lastPlain)
+        #expect(snapshots[firstAmnezia].host == "2.2.2.2")
     }
 }

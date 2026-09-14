@@ -44,24 +44,35 @@ struct PIAEndpointRepositoryPeckingOrderTests {
         #expect(order.count == PIAEndpointRepository.normalPeckingOrder.count)
     }
 
-    @Test("the censorship order tries amnezia, then plain wireguard, then OpenVPN TCP before UDP")
-    func censorshipOrderShape() {
-        let order = PIAEndpointRepository.censorshipPeckingOrder
-        let labels: [String] = order.map { step in
+    private static func labels(_ order: [PIAEndpointRepository.PeckingStep]) -> [String] {
+        order.map { step in
             switch step.kind {
             case .wireGuard(let amnezia): return amnezia ? "awg" : "wg"
             case .openVPN(let transport): return "ovpn-\(transport.rawValue)"
             }
         }
-        #expect(labels == ["awg", "wg", "ovpn-tcp", "ovpn-udp"])
     }
 
-    @Test("the normal order never contains an amnezia step")
+    @Test("the censorship order tries amnezia, then OpenVPN TCP, then plain wireguard before UDP")
+    func censorshipOrderShape() {
+        let order = PIAEndpointRepository.censorshipPeckingOrder
+        #expect(Self.labels(order) == ["awg", "ovpn-tcp", "wg", "ovpn-udp"])
+    }
+
+    @Test("the normal order falls back to amnezia last")
     func normalOrderShape() {
-        let hasAmnezia = PIAEndpointRepository.normalPeckingOrder.contains { step in
-            if case .wireGuard(let amnezia) = step.kind { return amnezia }
-            return false
+        let order = PIAEndpointRepository.normalPeckingOrder
+        #expect(Self.labels(order) == ["wg", "ovpn-udp", "ovpn-tcp", "awg"])
+    }
+
+    @Test("amnezia steps use the amnezia port")
+    func amneziaStepsUseAmneziaPort() {
+        let orders = [
+            PIAEndpointRepository.normalPeckingOrder, PIAEndpointRepository.censorshipPeckingOrder
+        ]
+        for step in orders.flatMap({ $0 }) {
+            guard case .wireGuard(true) = step.kind else { continue }
+            #expect(step.port == PIAEndpointRepository.amneziaPort)
         }
-        #expect(!hasAmnezia)
     }
 }
