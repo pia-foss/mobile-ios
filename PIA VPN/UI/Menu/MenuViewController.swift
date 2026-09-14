@@ -136,6 +136,8 @@ final class MenuViewController: AutolayoutViewController {
         setupPlanHeader()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+        // Catalyst: keyboard focus must not activate a row, only highlight it.
+        tableView.selectionFollowsFocus = false
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(setupPlanHeader), name: .PIAAccountDidLogin, object: nil)
@@ -521,12 +523,13 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
         if (indexPath.section == 0) {
             renewSubscription()
         } else {
             let sectionItems = allItems[indexPath.section - 1]
             let item = sectionItems[indexPath.row]
-            tableView.deselectRow(at: indexPath, animated: true)
             guard (item != .logout) else {
                 showLogoutAlert()
                 return
