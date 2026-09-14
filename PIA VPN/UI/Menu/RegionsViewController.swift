@@ -52,7 +52,11 @@ final class RegionsViewController: AutolayoutViewController {
     private var filteredServers = [Server]()
     private var selectedServer: Server!
     private var refreshBarButton: UIBarButtonItem?
-    private var refreshControl = UIRefreshControl()
+    private var refreshControl: UIRefreshControl?
+
+    private var vpnStatus: VPNStatus { Client.providers.vpnProvider.vpnStatus }
+    private var isPingingServers: Bool = false
+    private var isRefreshButtonEnabled: Bool { !isPingingServers && (vpnStatus == .disconnected) }
 
     private let searchController = UISearchController(searchResultsController: nil)
 
@@ -78,7 +82,7 @@ final class RegionsViewController: AutolayoutViewController {
         selectedServer = Client.preferences.displayedServer
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRegions), name: .PIAThemeDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(justRefreshRegions), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleVpnStatusChange), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
@@ -97,14 +101,15 @@ final class RegionsViewController: AutolayoutViewController {
 
     private func setupPullToRefresh() {
         #if !targetEnvironment(macCatalyst)
-            refreshControl.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
-            tableView.refreshControl = refreshControl
+            let control = UIRefreshControl()
+            control.addTarget(self, action: #selector(refreshLatency), for: .valueChanged)
+            tableView.refreshControl = control
+            refreshControl = control
         #endif
     }
 
     @objc private func refreshLatency(_ sender: Any) {
-
-        refreshControl.endRefreshing()
+        refreshControl?.endRefreshing()
 
         guard (Client.providers.vpnProvider.vpnStatus == .disconnected) else {
             Macros.displayImageNote(
@@ -116,12 +121,15 @@ final class RegionsViewController: AutolayoutViewController {
             return
         }
 
-        refreshBarButton?.isEnabled = false
+        isPingingServers = true
+        setupRefreshButtonIsEnabled()
         gradientProgressBar.setProgress(0.5, animated: true)
 
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             let result = await Client.ping(servers: self.servers)
+            self.isPingingServers = false
+            self.setupRefreshButtonIsEnabled()
             switch result {
             case .completed:
                 self.completePingProgress()
@@ -155,6 +163,13 @@ final class RegionsViewController: AutolayoutViewController {
         }
     }
 
+    private func setupRefreshButtonIsEnabled() {
+        refreshBarButton?.isEnabled = isRefreshButtonEnabled
+        #if !targetEnvironment(macCatalyst)
+            tableView.refreshControl = isRefreshButtonEnabled ? refreshControl : nil
+        #endif
+    }
+
     override func dismissModal(completion: (() -> Void)? = nil) {
 
         if searchController.isActive {
@@ -183,6 +198,7 @@ final class RegionsViewController: AutolayoutViewController {
 
         styleNavigationBarWithTitle(L10n.Menu.Item.region)
         setupRightBarButton()
+        setupRefreshButtonIsEnabled()
         tableView.reloadData()
 
         if selectedServer.isAutomatic {
@@ -283,7 +299,7 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func completePingProgress() {
-        refreshBarButton?.isEnabled = true
+        setupRefreshButtonIsEnabled()
         gradientProgressBar.setProgress(1.0, animated: true)
         DispatchQueue.main.asyncAfter(
             deadline: .now() + AppConfiguration.Animations.duration,
@@ -293,8 +309,9 @@ final class RegionsViewController: AutolayoutViewController {
         self.filterServers()
     }
 
-    @objc private func justRefreshRegions() {
+    @objc private func handleVpnStatusChange() {
         tableView.reloadData()
+        setupRefreshButtonIsEnabled()
     }
 
     @objc private func reloadRegions() {
@@ -314,7 +331,7 @@ final class RegionsViewController: AutolayoutViewController {
 
         Theme.current.applyRegionSolidLightBackground(tableView)
         Theme.current.applyDividerToSeparator(tableView)
-        Theme.current.applyRefreshControlStyle(refreshControl)
+        refreshControl.flatMap { Theme.current.applyRefreshControlStyle($0) }
 
         let bgView = UIView()
         bgView.backgroundColor = .clear
