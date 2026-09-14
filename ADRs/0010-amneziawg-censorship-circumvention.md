@@ -10,7 +10,7 @@ named exit condition.
 ## Context
 
 KM-16249 adds AmneziaWG (AWG) to the automatic-protocol pecking order as a censorship-circumvention
-step: AWG is tried first in censored countries, falling through to plain WireGuard and then OpenVPN.
+step: AWG is tried first in censored countries. KM-18459 then rebalanced both orders (see below).
 
 The client chain is implemented and verified on an iOS device, end to end through the real
 country-detection path:
@@ -66,10 +66,24 @@ Supporting choices:
 
 **Known gap:** if `/api/geo` is blocked inside a censored country — which is what censorship does — we
 fall back to the normal order precisely where the censorship order was wanted. Last-known-good covers a
-returning user; a **first** launch behind the firewall gets it wrong. Whether to offer a manual
-"I'm in a censored country" override is an open product question.
+returning user; a **first** launch behind the firewall gets it wrong. The normal order's trailing AWG
+step (KM-18459) softens this — such a user still reaches AWG, just after the plain protocols have timed
+out — but does not close it. Whether to offer a manual "I'm in a censored country" override is an open
+product question.
 
-### 2. Never hardcode the obfuscation parameters
+### 2. Both orders end in the protocol the other one starts with (KM-18459)
+
+```
+Normal:      WG(3)  → OpenVPN UDP(2) → OpenVPN TCP(3) → AWG(2)
+Censorship:  AWG(3) → OpenVPN TCP(3) → WG(2)          → OpenVPN UDP(2)
+```
+
+Each order leads with what works in its own environment and keeps the other's opener as a last resort,
+so a misread country degrades to "slow" rather than "never connects" — which is what makes the gap
+above survivable. Censorship promotes OpenVPN TCP over plain WG, since a firewall that blocks AWG is
+far more likely to also block plain WireGuard UDP than to block TCP.
+
+### 3. Never hardcode the obfuscation parameters
 
 `/add-awg-key` currently returns identical values from every server, and `h1`–`h4` are
 `1234567891`–`1234567894` — AmneziaWG's stock example magic headers. Read them per connection anyway.
@@ -78,7 +92,7 @@ Fixed magic headers are exactly what DPI fingerprints, so production deployments
 randomise them. This decision is permanent; it is recorded because the constant-looking values invite
 the opposite shortcut.
 
-### 3. `awg` is a separate address list, and not user-selectable
+### 4. `awg` is a separate address list, and not user-selectable
 
 Server-list v7 advertises `awg` endpoints as **distinct addresses from `wg`**, each carrying its own
 `port` (1338, which serves both the tunnel and the key exchange). There is no `groups.awg` block, so

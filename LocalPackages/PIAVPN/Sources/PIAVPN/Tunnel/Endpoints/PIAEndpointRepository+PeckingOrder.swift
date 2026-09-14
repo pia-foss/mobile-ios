@@ -25,13 +25,14 @@ extension PIAEndpointRepository {
     static let normalPeckingOrder: [PeckingStep] = [
         PeckingStep(kind: .wireGuard(amnezia: false), port: wireGuardPort, attempts: 3),
         PeckingStep(kind: .openVPN(.udp), port: openVPNPortUDP, attempts: 2),
-        PeckingStep(kind: .openVPN(.tcp), port: openVPNPortTCP, attempts: 3)
+        PeckingStep(kind: .openVPN(.tcp), port: openVPNPortTCP, attempts: 3),
+        PeckingStep(kind: .wireGuard(amnezia: true), port: amneziaPort, attempts: 2)
     ]
 
     static let censorshipPeckingOrder: [PeckingStep] = [
         PeckingStep(kind: .wireGuard(amnezia: true), port: amneziaPort, attempts: 3),
-        PeckingStep(kind: .wireGuard(amnezia: false), port: wireGuardPort, attempts: 3),
-        PeckingStep(kind: .openVPN(.tcp), port: openVPNPortTCP, attempts: 2),
+        PeckingStep(kind: .openVPN(.tcp), port: openVPNPortTCP, attempts: 3),
+        PeckingStep(kind: .wireGuard(amnezia: false), port: wireGuardPort, attempts: 2),
         PeckingStep(kind: .openVPN(.udp), port: openVPNPortUDP, attempts: 2)
     ]
 
