@@ -19,7 +19,7 @@ extension Server: @retroactive ServerType {
         dipStatus?.getStatus()
     }
 
-    public var dipIKEv2IP: String? {
+    public var dedicatedIP: String? {
         iKEv2AddressesForUDP?.first?.ip
     }
 }

@@ -56,8 +56,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case vpnDisconnectsOnSleep = "VPNDisconnectsOnSleep"
 
-        case vpnCustomConfigurationMaps = "VPNCustomConfigurationMaps"
-
         case lastKnownVpnStatus = "LastKnownVPNStatus"
 
         case persistentConnection = "PersistentConnection"  // legacy
@@ -78,17 +76,13 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case serverNetwork = "ServerNetwork"
 
-        case ikeV2IntegrityAlgorithm = "IKEV2IntegrityAlgorithm"
-
-        case ikeV2EncryptionAlgorithm = "IKEV2EncryptionAlgorithm"
-
-        case ikeV2PacketSize = "IKEV2PacketSize"
-
         case useSmallPackets = "UseSmallPackets"
 
         case openVPNSocketType = "PIASocketType"
 
         case openVPNCipher = "OpenVPNCipher"
+
+        case openVPNAuth = "OpenVPNAuth"
 
         case openVPNPort = "OpenVPNPort"
 
@@ -459,15 +453,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
-    var vpnCustomConfigurationMaps: [String: [String: Any]]? {
-        get {
-            return backend.dictionary(forKey: .vpnCustomConfigurationMaps) as? [String: [String: Any]]
-        }
-        set {
-            backend.set(newValue, forKey: .vpnCustomConfigurationMaps)
-        }
-    }
-
     var lastKnownVpnStatus: VPNStatus {
         get {
             return VPNStatus(rawValue: backend.string(forKey: .lastKnownVpnStatus) ?? "") ?? .unknown
@@ -576,42 +561,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
     }
 
-    var ikeV2IntegrityAlgorithm: IKEv2IntegrityAlgorithm {
-        get {
-            guard let value = backend.object(forKey: .ikeV2IntegrityAlgorithm) as? String,
-                let algorithm = IKEv2IntegrityAlgorithm(rawValue: value)
-            else { return .default }
-            return algorithm
-        }
-        set {
-            backend.set(newValue.rawValue, forKey: .ikeV2IntegrityAlgorithm)
-        }
-    }
-
-    var ikeV2EncryptionAlgorithm: IKEv2EncryptionAlgorithm {
-        get {
-            guard let value = backend.object(forKey: .ikeV2EncryptionAlgorithm) as? String,
-                let algorithm = IKEv2EncryptionAlgorithm(rawValue: value)
-            else { return .default }
-            return algorithm
-        }
-        set {
-            backend.set(newValue.rawValue, forKey: .ikeV2EncryptionAlgorithm)
-        }
-    }
-
-    var ikeV2PacketSize: Int {
-        get {
-            guard let value = backend.object(forKey: .ikeV2PacketSize) as? Int else {
-                return 0
-            }
-            return value
-        }
-        set {
-            backend.set(newValue, forKey: .ikeV2PacketSize)
-        }
-    }
-
     var useSmallPackets: Bool {
         get {
             backend.bool(forKey: .useSmallPackets)
@@ -636,6 +585,15 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: .openVPNCipher)
+        }
+    }
+
+    var openVPNAuth: String? {
+        get {
+            backend.string(forKey: .openVPNAuth)
+        }
+        set {
+            backend.set(newValue, forKey: .openVPNAuth)
         }
     }
 

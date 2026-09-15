@@ -664,3 +664,10 @@ Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Da
 "platform_sdk_migration.label.title" = "VPN-Upgrade";
 "platform_sdk_migration.label.subtitle" = "Wir upgraden die Art, wie Ihr VPN eine Verbindung herstellt. Die Verbindung zum VPN wird kurz getrennt und automatisch wiederhergestellt.";
 "platform_sdk_migration.button.confirm" = "Weiter";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Verbindungsprobleme?";
+"auto_protocol_nudge.message" = "Wenn Sie zu Automatisch wechseln, wählt die App das leistungsstärkste Protokoll für Ihr Netzwerk aus, was bei Verbindungsproblemen wie diesen helfen kann.";
+"auto_protocol_nudge.confirm" = "Zu Automatisch wechseln";
+"auto_protocol_nudge.dismiss" = "Nicht jetzt";

@@ -664,3 +664,10 @@
 "platform_sdk_migration.label.title" = "VPN 업그레이드";
 "platform_sdk_migration.label.subtitle" = "VPN 연결 방식을 업그레이드하고 있습니다. VPN 연결이 잠시 해제된 후 자동으로 다시 연결됩니다.";
 "platform_sdk_migration.button.confirm" = "계속";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "연결에 문제가 있나요?";
+"auto_protocol_nudge.message" = "자동으로 전환하면 앱이 네트워크에 가장 적합한 프로토콜을 선택할 수 있어 이와 같은 연결 문제를 해결하는 데 도움이 됩니다.";
+"auto_protocol_nudge.confirm" = "자동으로 전환";
+"auto_protocol_nudge.dismiss" = "나중에";

@@ -41,6 +41,28 @@ public enum AppConstants: Sendable {
         public static let bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
+    /// Tuning for the "switch to Automatic" nudge. Compiled in, so retuning needs a
+    /// release — keep them injectable where they are used.
+    public enum AutoProtocolNudge {
+        /// A session must have been failing at least this long before it can nudge.
+        public static let connectTimeout: TimeInterval = 30
+
+        /// Failed attempts before nudging when endpoint identity is unavailable, i.e. batch wrap
+        /// can't be detected.
+        public static let qualifyingAttempts = 6
+
+        /// Gap between posts while a session keeps failing. Load-bearing: a post that lands while the
+        /// app is suspended is gone, and this is the only retry.
+        public static let minimumInterval: TimeInterval = 180
+
+        /// Frequency caps, copied from Android's `ConnectionProblemDetector` so both platforms nag at
+        /// the same rate.
+        public static let promptCapWindow: TimeInterval = 14 * 86_400
+        public static let lifetimeCap = 3
+        public static let dismissCooldown: TimeInterval = 7 * 86_400
+        public static let dismissStopCount = 2
+    }
+
     public enum InApp {
         public static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.May2026"
         public static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.May2026"
@@ -64,11 +86,7 @@ public enum AppConstants: Sendable {
     }
 
     public enum Extensions {
-        // Legacy per-protocol extensions (pre-PlatformSDK); live only while `usePlatformSDKVPN` is off.
-        public static let tunnelBundleIdentifier = Bundle.main.bundleIdentifier! + ".Tunnel"
-        public static let tunnelWireguardBundleIdentifier = Bundle.main.bundleIdentifier! + ".WG-Tunnel"
-
-        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard, replacing the legacy pair above.
+        // PlatformSDK tunnel: a single extension handling OpenVPN and WireGuard.
         public static let tunnelPlatformSDKBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-iOS"
         public static let tunnelPlatformSDKTvOSBundleIdentifier = Bundle.main.bundleIdentifier! + ".PlatformSDK-Tunnel-tvOS"
 
@@ -127,9 +145,16 @@ public enum AppConstants: Sendable {
         }
     }
 
-    public struct IKEv2PacketSize {
-        public static let defaultPacketSize = 0
-        public static let highPacketSize = 1420
+    /// The OpenVPN transport the user selected, as persisted in
+    /// `Client.preferences.openVPNSocketType` (the `PIASocketType` app-group key). Absent means
+    /// automatic — the tunnel then tries both.
+    ///
+    /// Distinct from `PIATunnelSharedState.OpenVPNTransport`, which is the tunnel-side type: that one
+    /// also has an `automatic` case and uses lowercase raw values. These raw values are the ones on
+    /// disk, so they must not change.
+    public enum OpenVPNSocketType: String, CaseIterable {
+        case udp = "UDP"
+        case tcp = "TCP"
     }
 
     public enum WireGuardPacketSize {
@@ -153,7 +178,7 @@ public enum AppConstants: Sendable {
             public static let auth = "OpenVPNAuth"
             /// Preferred port, stored as an `Int`; 0 means automatic.
             public static let port = "OpenVPNPort"
-            /// Selected transport, stored as a `SocketType` raw value ("UDP"/"TCP"); absent = automatic.
+            /// Selected transport, stored as an `OpenVPNSocketType` raw value; absent = automatic.
             public static let transport = "PIASocketType"
         }
     }

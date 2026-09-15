@@ -95,7 +95,9 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
             appGroupIdentifier: AppConstants.appGroup,
             loggerFactory: { label in PIATunnelLogger(label: label) },
             reassertingController: systemTunnel,
-            systemTunnel: systemTunnel
+            systemTunnel: systemTunnel,
+            analytics: AutoProtocolNudgeDetector(),
+            selectedProtocol: PIATunnelSharedState.readConfig().selectedProtocol.rawValue
         )
 
         await observeConnectedEndpoint()

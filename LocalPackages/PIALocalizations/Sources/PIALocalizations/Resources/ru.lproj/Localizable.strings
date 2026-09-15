@@ -664,3 +664,10 @@
 "platform_sdk_migration.label.title" = "Обновление VPN";
 "platform_sdk_migration.label.subtitle" = "Мы улучшаем способ подключения вашего VPN. Соединение VPN будет ненадолго прервано и восстановится автоматически.";
 "platform_sdk_migration.button.confirm" = "Продолжить";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Проблемы с подключением?";
+"auto_protocol_nudge.message" = "Переключение на Автоматически позволяет приложению выбрать наиболее производительный протокол для вашей сети, что может помочь при таких проблемах с подключением.";
+"auto_protocol_nudge.confirm" = "Переключить на Автоматически";
+"auto_protocol_nudge.dismiss" = "Не сейчас";

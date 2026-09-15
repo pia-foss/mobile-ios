@@ -74,6 +74,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAVPN",
+        "identifier" : "PIAVPNTests",
+        "name" : "PIAVPNTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:LocalPackages\/PIAUI",
         "identifier" : "PIAUIKitTests",
         "name" : "PIAUIKitTests"

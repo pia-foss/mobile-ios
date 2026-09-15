@@ -96,28 +96,18 @@ public protocol VPNProfile: AnyObject {
     func disable(_ callback: SuccessLibraryCallback?)
 
     /**
-     Returns a concrete `VPNCustomConfiguration` from a map of raw parameters.
+     Requests the debug log of the VPN profile.
 
-     - Parameter map: A set of raw parameters of the custom configuration.
-     - Returns: A high-level `VPNCustomConfiguration` object or `nil` if the map doesn't represent a custom configuration for this profile.
+     - Parameter callback: Returns the log content.
      */
-    func parsedCustomConfiguration(from map: [String: Any]) -> VPNCustomConfiguration?
+    func requestLog(_ callback: LibraryCallback<String>?)
 
     /**
-     Requests a log from this profile.
+     Requests the data usage of the VPN profile.
 
-     - Parameter customConfiguration: The optional `VPNCustomConfiguration` required to access the debug log.
-     - Parameter callback: Returns `ClientError.unsupported` if the profile doesn't support logging.
+     - Parameter callback: Returns the `Usage`.
      */
-    func requestLog(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<String>?)
-
-    /**
-     Requests the data usage from this profile.
-
-     - Parameter customConfiguration: The optional `VPNCustomConfiguration` required to access the debug log.
-     - Parameter callback: Returns `ClientError.unsupported` if the profile doesn't support logging.
-     */
-    func requestDataUsage(withCustomConfiguration customConfiguration: VPNCustomConfiguration?, _ callback: LibraryCallback<Usage>?)
+    func requestDataUsage(_ callback: LibraryCallback<Usage>?)
 
 }
 

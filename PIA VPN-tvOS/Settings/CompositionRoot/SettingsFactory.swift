@@ -22,7 +22,7 @@ class SettingsFactory {
     }
 
     @MainActor
-    private static func makeProtocolSelectionUseCase() -> ProtocolSelectionUseCaseType {
+    static func makeProtocolSelectionUseCase() -> ProtocolSelectionUseCaseType {
         return ProtocolSelectionUseCase(
             vpnConnectionUseCase: VpnConnectionFactory.makeVpnConnectionUseCase,
             vpnStatusMonitor: StateMonitorsFactory.makeVPNStatusMonitor)

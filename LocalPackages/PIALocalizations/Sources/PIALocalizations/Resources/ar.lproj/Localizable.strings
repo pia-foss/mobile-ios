@@ -664,3 +664,10 @@
 "platform_sdk_migration.label.title" = "ترقية VPN";
 "platform_sdk_migration.label.subtitle" = "نحن نطور طريقة اتصال VPN. سيتم قطع اتصال VPN لفترة وجيزة ثم يعاد الاتصال تلقائيًا.";
 "platform_sdk_migration.button.confirm" = "متابعة";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "هل تواجه مشكلة في الاتصال؟";
+"auto_protocol_nudge.message" = "يؤدي التبديل إلى تلقائي إلى تمكين التطبيق من اختيار البروتوكول الأفضل أداءً لشبكتك، مما قد يساعد في حل مشكلات الاتصال كهذه.";
+"auto_protocol_nudge.confirm" = "التبديل إلى تلقائي";
+"auto_protocol_nudge.dismiss" = "ليس الآن";
