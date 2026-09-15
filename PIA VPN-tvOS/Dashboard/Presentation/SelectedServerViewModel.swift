@@ -88,16 +88,16 @@ final class SelectedServerViewModel: ObservableObject {
     /// refreshing on VPN status changes. Mirrors how the iOS tiles read
     /// `vpnProvider.actualConnection?.server`.
     ///
-    /// Also refreshes on `PIATunnelSharedState.didChangeNotification`: an in-place region switch on
+    /// Also refreshes on `PIATunnelSignal.sharedStateDidChange`: an in-place region switch on
     /// an active tunnel (`KapePlatformSDKTunnelProfile.connect`) deliberately produces no
     /// `NEVPNStatus` transition, so the extension's cross-process write-back of the resolved server
     /// is the only signal that the region changed. Without observing it, the tvOS label would stay
     /// stuck on the previous region after a switch. Mirrors the iOS `RegionTile`/`ConnectionTile`.
     private func actualConnectedServerPublisher() -> AnyPublisher<ServerType?, Never> {
-        PIATunnelSharedState.startObserving()
+        PIATunnelSignal.startObserving()
         return Publishers.Merge(
             NotificationCenter.default.publisher(for: .PIADaemonsDidUpdateVPNStatus),
-            NotificationCenter.default.publisher(for: PIATunnelSharedState.didChangeNotification)
+            NotificationCenter.default.publisher(for: PIATunnelSignal.sharedStateDidChange.notificationName)
         )
         .map { _ in () }  // both notifications just mean "re-read"
         .prepend(())  // seed an initial read so combineLatest emits without waiting

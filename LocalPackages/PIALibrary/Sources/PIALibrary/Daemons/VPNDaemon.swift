@@ -53,8 +53,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         // at `.connected`, so `.NEVPNStatusDidChange` never fires. The extension instead writes its
         // live status into `PIATunnelSharedState`; fold that into `transient.vpnStatus` so the app's
         // single source of truth reflects "Connecting" during a switch.
-        PIATunnelSharedState.startObserving()
-        nc.addObserver(self, selector: #selector(platformSDKTunnelStatusDidChange), name: PIATunnelSharedState.didChangeNotification, object: nil)
+        PIATunnelSignal.startObserving()
+        nc.addObserver(self, selector: #selector(platformSDKTunnelStatusDidChange), name: PIATunnelSignal.sharedStateDidChange.notificationName, object: nil)
 
         do {
             try accessedProviders.vpnProvider.prepare()
