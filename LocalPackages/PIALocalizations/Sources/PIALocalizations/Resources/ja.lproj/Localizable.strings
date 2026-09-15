@@ -665,3 +665,10 @@
 "platform_sdk_migration.label.title" = "VPNのアップグレード";
 "platform_sdk_migration.label.subtitle" = "VPNの接続方法をアップグレードしています。VPNは一時的に切断し、自動的に再接続します。";
 "platform_sdk_migration.button.confirm" = "続行";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "接続に問題がありますか？";
+"auto_protocol_nudge.message" = "自動に切り替えると、アプリがお使いのネットワークに最適なプロトコルを選択できるようになり、このような接続の問題の解決に役立ちます。";
+"auto_protocol_nudge.confirm" = "自動に切り替える";
+"auto_protocol_nudge.dismiss" = "後で";

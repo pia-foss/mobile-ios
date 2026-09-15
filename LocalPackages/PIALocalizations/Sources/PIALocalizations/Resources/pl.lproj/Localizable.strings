@@ -664,3 +664,10 @@ Zawsze masz kontrolę. W ustawieniach możesz sprawdzić, jakie dane zebraliśmy
 "platform_sdk_migration.label.title" = "Aktualizacja VPN";
 "platform_sdk_migration.label.subtitle" = "Ulepszamy sposób, w jaki łączy się Twoja sieć VPN. Połączenie VPN zostanie na chwilę rozłączone i automatycznie nawiązane ponownie.";
 "platform_sdk_migration.button.confirm" = "Kontynuuj";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemy z połączeniem?";
+"auto_protocol_nudge.message" = "Przełączenie na Automatyczny pozwala aplikacji wybrać protokół o najlepszej wydajności dla Twojej sieci, co może pomóc w takich problemach z połączeniem.";
+"auto_protocol_nudge.confirm" = "Przełącz na Automatyczny";
+"auto_protocol_nudge.dismiss" = "Nie teraz";

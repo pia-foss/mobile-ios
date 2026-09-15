@@ -664,3 +664,10 @@
 "platform_sdk_migration.label.title" = "VPN 升级";
 "platform_sdk_migration.label.subtitle" = "我们正在升级您的 VPN 连接方式。您的 VPN 将短暂断开并自动重新连接。";
 "platform_sdk_migration.button.confirm" = "继续";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "连接遇到问题？";
+"auto_protocol_nudge.message" = "切换到自动可让应用为你的网络选择性能最佳的协议，这有助于解决此类连接问题。";
+"auto_protocol_nudge.confirm" = "切换到自动";
+"auto_protocol_nudge.dismiss" = "暂不";

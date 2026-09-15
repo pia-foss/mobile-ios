@@ -664,3 +664,10 @@ Du har alltid kontrollen. Du kan se hvilke data vi har samlet inn, i innstilling
 "platform_sdk_migration.label.title" = "VPN-oppgradering";
 "platform_sdk_migration.label.subtitle" = "Vi oppgraderer måten VPN-en din kobler til på. VPN-en frakobles et kort øyeblikk og kobles automatisk til igjen.";
 "platform_sdk_migration.button.confirm" = "Fortsett";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemer med å koble til?";
+"auto_protocol_nudge.message" = "Når du bytter til Automatisk, kan appen velge protokollen som fungerer best for nettverket ditt, noe som kan hjelpe med tilkoblingsproblemer som dette.";
+"auto_protocol_nudge.confirm" = "Bytt til Automatisk";
+"auto_protocol_nudge.dismiss" = "Ikke nå";

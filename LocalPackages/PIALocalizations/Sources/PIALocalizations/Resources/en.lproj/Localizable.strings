@@ -721,3 +721,10 @@ You will always be in control. You can see what data we’ve collected from Sett
 "platform_sdk_migration.label.title" = "VPN Upgrade";
 "platform_sdk_migration.label.subtitle" = "We’re upgrading how your VPN connects. Your VPN will disconnect briefly and reconnect automatically.";
 "platform_sdk_migration.button.confirm" = "Continue";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Trouble Connecting?";
+"auto_protocol_nudge.message" = "Switching to Automatic lets the app pick the best-performing protocol for your network, which can help with connection issues like this.";
+"auto_protocol_nudge.confirm" = "Switch to Automatic";
+"auto_protocol_nudge.dismiss" = "Not Now";

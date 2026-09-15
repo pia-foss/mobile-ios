@@ -709,3 +709,10 @@
 "platform_sdk_migration.label.title" = "VPN Yükseltmesi";
 "platform_sdk_migration.label.subtitle" = "VPN’inizin bağlanma şeklini yükseltiyoruz. VPN bağlantınız kısa süre kesilecek ve otomatik olarak yeniden bağlanacak.";
 "platform_sdk_migration.button.confirm" = "Devam et";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Bağlantı sorunu mu yaşıyorsunuz?";
+"auto_protocol_nudge.message" = "Otomatik’e geçmek, uygulamanın ağınız için en iyi performans gösteren protokolü seçmesini sağlar; bu da bunun gibi bağlantı sorunlarına yardımcı olabilir.";
+"auto_protocol_nudge.confirm" = "Otomatik’e geç";
+"auto_protocol_nudge.dismiss" = "Şimdi değil";

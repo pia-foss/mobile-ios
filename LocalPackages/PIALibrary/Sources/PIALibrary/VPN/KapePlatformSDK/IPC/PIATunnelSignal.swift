@@ -36,7 +36,7 @@ public enum PIATunnelSignal: String, CaseIterable, Sendable {
     /// `Store`, so every mutator notifies both processes without callers having to remember to.
     case sharedStateDidChange
 
-    /// The user's pinned protocol keeps failing and the app should offer switching to Automatic (KM-18462).
+    /// The user's pinned protocol keeps failing and the app should offer switching to Automatic.
     case switchToAutomaticSuggested
 
     /// Namespaced by app group so it can't collide with other apps.

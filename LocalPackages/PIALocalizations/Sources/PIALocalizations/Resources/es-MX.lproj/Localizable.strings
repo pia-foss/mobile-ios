@@ -664,3 +664,10 @@ Siempre tendrás el control. Puedes ver los datos que hemos recopilado desde los
 "platform_sdk_migration.label.title" = "Actualización de la VPN";
 "platform_sdk_migration.label.subtitle" = "Estamos mejorando la forma en que se conecta tu VPN. Tu VPN se desconectará brevemente y se volverá a conectar automáticamente.";
 "platform_sdk_migration.button.confirm" = "Continuar";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "¿Problemas de conexión?";
+"auto_protocol_nudge.message" = "Cambiar a Automática permite que la app elija el protocolo con mejor rendimiento para tu red, lo que puede ayudar con problemas de conexión como este.";
+"auto_protocol_nudge.confirm" = "Cambiar a Automática";
+"auto_protocol_nudge.dismiss" = "Ahora no";
