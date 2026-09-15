@@ -73,15 +73,6 @@
       }
     },
     {
-      "identity" : "mobile-ios-wireguard",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pia-foss/mobile-ios-wireguard.git",
-      "state" : {
-        "revision" : "59e5e7a0c5cb05d2f701ce48458e4f7ab16086ab",
-        "version" : "1.0.6"
-      }
-    },
-    {
       "identity" : "nimble",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Quick/Nimble",
@@ -232,15 +223,6 @@
       "state" : {
         "revision" : "12b5acf96d98f91d50de447369bd18df74600f1a",
         "version" : "1.9.6"
-      }
-    },
-    {
-      "identity" : "tweetnacl-swiftwrap",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bitmark-inc/tweetnacl-swiftwrap.git",
-      "state" : {
-        "revision" : "f8fd111642bf2336b11ef9ea828510693106e954",
-        "version" : "1.1.0"
       }
     },
     {

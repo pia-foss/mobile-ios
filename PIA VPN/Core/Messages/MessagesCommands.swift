@@ -21,9 +21,6 @@
 
 import Foundation
 import PIALibrary
-import PIAWireguard
-import TunnelKitCore
-import TunnelKitOpenVPN
 import UIKit
 
 private let log = PIALogger.logger(for: ActionCommand.self)
@@ -127,9 +124,10 @@ final class ActionCommand: Command {
                         activateWireGuard()
                     }
                 case .ikev2:
-                    if value && !Platform.isRunningOnMac {
-                        activateIKEv2()
-                    }
+                    // IKEv2 is no longer a protocol this app can run. The action stays decodable so
+                    // older server messages still parse, but it is ignored rather than switching the
+                    // user to some other protocol they did not ask for.
+                    break
                 case .geo:
                     enableGEOServers(enable: value)
                 }
@@ -145,37 +143,16 @@ final class ActionCommand: Command {
     }
 
     private func activateWireGuard() {
-
-        let preferences = Client.preferences.editable()
-        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIAWGTunnelProfile.vpnType) as? PIAWireguardConfiguration else {
-            log.error("No default VPN custom configuration provided for PIA Wireguard protocol")
-            return
-        }
-
-        preferences.setVPNCustomConfiguration(currentVPNConfiguration, for: PIAWGTunnelProfile.vpnType)
-        preferences.vpnType = PIAWGTunnelProfile.vpnType
-        preferences.commit()
-
+        select(KapePlatformSDKVPNType.wireGuard)
     }
 
     private func activateOpenVPN() {
-
-        let preferences = Client.preferences.editable()
-        guard let currentVPNConfiguration = preferences.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration ?? Client.preferences.defaults.vpnCustomConfiguration(for: PIATunnelProfile.vpnType) as? OpenVPNProvider.Configuration else {
-            log.error("No default VPN custom configuration provided for PIA OpenVPN protocol")
-            return
-        }
-
-        preferences.setVPNCustomConfiguration(currentVPNConfiguration, for: PIATunnelProfile.vpnType)
-        preferences.vpnType = PIATunnelProfile.vpnType
-        preferences.commit()
-
+        select(KapePlatformSDKVPNType.openVPN)
     }
 
-    private func activateIKEv2() {
-        guard !Platform.isRunningOnMac else { return }
+    private func select(_ vpnProtocol: KapePlatformSDKVPNType) {
         let preferences = Client.preferences.editable()
-        preferences.vpnType = IKEv2Profile.vpnType
+        preferences.vpnType = vpnProtocol.rawValue
         preferences.commit()
     }
 
