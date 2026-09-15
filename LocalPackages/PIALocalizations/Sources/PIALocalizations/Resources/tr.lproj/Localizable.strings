@@ -727,3 +727,10 @@
 "promo_offer.sheet.disclaimer_with_price"= "Faturalandırma %1$@ tutarıyla **%2$@** tarihinde yeniden başlayana kadar herhangi bir ödeme yapılmaz. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.";
 "promo_offer.sheet.disclaimer"= "Faturalandırma **%@** tarihinde yeniden başlayana kadar herhangi bir ödeme yapılmaz. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.";
 "promo_offer.sheet.close"= "Kapat";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Bağlantı sorunu mu yaşıyorsunuz?";
+"auto_protocol_nudge.message" = "Otomatik’e geçmek, uygulamanın ağınız için en iyi performans gösteren protokolü seçmesini sağlar; bu da bunun gibi bağlantı sorunlarına yardımcı olabilir.";
+"auto_protocol_nudge.confirm" = "Otomatik’e geç";
+"auto_protocol_nudge.dismiss" = "Şimdi değil";
