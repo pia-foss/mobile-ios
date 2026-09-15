@@ -41,6 +41,9 @@ public enum PIATunnelSignal: String, CaseIterable, Sendable {
     /// for lives in the extension's memory rather than on disk, so the re-read is an IPC round-trip.
     case connectionConfigurationsDidChange
 
+    /// The user's pinned protocol keeps failing and the app should offer switching to Automatic (KM-18462).
+    case switchToAutomaticSuggested
+
     /// Namespaced by app group so it can't collide with other apps.
     private static let darwinNamePrefix = "\(AppConstants.appGroup).PIATunnelSignal."
 
