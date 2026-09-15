@@ -682,3 +682,10 @@ Avrai sempre il controllo. Puoi vedere quali dati abbiamo raccolto dalle imposta
 "promo_offer.sheet.disclaimer_with_price"= "Nessun pagamento fino alla ripresa della fatturazione a %1$@ il **%2$@**. Annulla in qualsiasi momento dalle Impostazioni.";
 "promo_offer.sheet.disclaimer"= "Nessun pagamento fino alla ripresa della fatturazione il **%@**. Annulla in qualsiasi momento dalle Impostazioni.";
 "promo_offer.sheet.close"= "Chiudi";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemi di connessione?";
+"auto_protocol_nudge.message" = "Passando ad Automatica, l’app può scegliere il protocollo più performante per la tua rete, il che può aiutare in caso di problemi di connessione come questo.";
+"auto_protocol_nudge.confirm" = "Passa ad Automatica";
+"auto_protocol_nudge.dismiss" = "Non ora";

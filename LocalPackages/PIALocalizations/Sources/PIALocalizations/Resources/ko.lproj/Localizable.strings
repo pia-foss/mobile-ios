@@ -682,3 +682,10 @@
 "promo_offer.sheet.disclaimer_with_price"= "%1$@ 요금으로 **%2$@**에 청구가 재개되기 전까지는 결제되지 않습니다. 설정에서 언제든지 취소할 수 있습니다.";
 "promo_offer.sheet.disclaimer"= "**%@**에 청구가 재개되기 전까지는 결제되지 않습니다. 설정에서 언제든지 취소할 수 있습니다.";
 "promo_offer.sheet.close"= "닫기";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "연결에 문제가 있나요?";
+"auto_protocol_nudge.message" = "자동으로 전환하면 앱이 네트워크에 가장 적합한 프로토콜을 선택할 수 있어 이와 같은 연결 문제를 해결하는 데 도움이 됩니다.";
+"auto_protocol_nudge.confirm" = "자동으로 전환";
+"auto_protocol_nudge.dismiss" = "나중에";

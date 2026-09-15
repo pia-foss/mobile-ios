@@ -81,6 +81,16 @@ public enum L10n {
       public static let caption = L10n.tr("Localizable", "account.username.caption", fallback: "Username")
     }
   }
+  public enum AutoProtocolNudge {
+    /// Switch to Automatic
+    public static let confirm = L10n.tr("Localizable", "auto_protocol_nudge.confirm", fallback: "Switch to Automatic")
+    /// Not Now
+    public static let dismiss = L10n.tr("Localizable", "auto_protocol_nudge.dismiss", fallback: "Not Now")
+    /// Switching to Automatic lets the app pick the best-performing protocol for your network, which can help with connection issues like this.
+    public static let message = L10n.tr("Localizable", "auto_protocol_nudge.message", fallback: "Switching to Automatic lets the app pick the best-performing protocol for your network, which can help with connection issues like this.")
+    /// Trouble Connecting?
+    public static let title = L10n.tr("Localizable", "auto_protocol_nudge.title", fallback: "Trouble Connecting?")
+  }
   public enum Card {
     public enum Wireguard {
       /// It's a new, more efficient VPN protocol that offers better performance, lower CPU usage and longer battery life.

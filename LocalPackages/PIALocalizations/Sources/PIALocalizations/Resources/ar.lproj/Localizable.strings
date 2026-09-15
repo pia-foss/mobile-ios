@@ -682,3 +682,10 @@
 "promo_offer.sheet.disclaimer_with_price"= "لن يتم الدفع حتى يُستأنف الفوترة بسعر %1$@ في **%2$@**. يمكنك الإلغاء في أي وقت من الإعدادات.";
 "promo_offer.sheet.disclaimer"= "لن يتم الدفع حتى يُستأنف الفوترة في **%@**. يمكنك الإلغاء في أي وقت من الإعدادات.";
 "promo_offer.sheet.close"= "إغلاق";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "هل تواجه مشكلة في الاتصال؟";
+"auto_protocol_nudge.message" = "يؤدي التبديل إلى تلقائي إلى تمكين التطبيق من اختيار البروتوكول الأفضل أداءً لشبكتك، مما قد يساعد في حل مشكلات الاتصال كهذه.";
+"auto_protocol_nudge.confirm" = "التبديل إلى تلقائي";
+"auto_protocol_nudge.dismiss" = "ليس الآن";

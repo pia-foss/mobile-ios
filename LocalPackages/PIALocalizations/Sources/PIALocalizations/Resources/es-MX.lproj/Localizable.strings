@@ -682,3 +682,10 @@ Siempre tendrás el control. Puedes ver los datos que hemos recopilado desde los
 "promo_offer.sheet.disclaimer_with_price"= "No se realizará ningún cobro hasta que se reanude la facturación por %1$@ el **%2$@**. Cancela cuando quieras en Configuración.";
 "promo_offer.sheet.disclaimer"= "No se realizará ningún cobro hasta que se reanude la facturación el **%@**. Cancela cuando quieras en Configuración.";
 "promo_offer.sheet.close"= "Cerrar";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "¿Problemas de conexión?";
+"auto_protocol_nudge.message" = "Cambiar a Automática permite que la app elija el protocolo con mejor rendimiento para tu red, lo que puede ayudar con problemas de conexión como este.";
+"auto_protocol_nudge.confirm" = "Cambiar a Automática";
+"auto_protocol_nudge.dismiss" = "Ahora no";

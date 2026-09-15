@@ -83,6 +83,12 @@ final class AppPreferences {
         // Dismissed messages
         static let dismissedMessages = "DismissedMessages"
 
+        // Switch to Automatic nudge
+        static let autoProtocolPromptDates = "AutoProtocolPromptDates"
+        static let autoProtocolDismissCount = "AutoProtocolDismissCount"
+        static let autoProtocolLastDismissedAt = "AutoProtocolLastDismissedAt"
+        static let autoProtocolAccepted = "AutoProtocolAccepted"
+
         // Dedicated IP relations
         static let tokenIPRelation_deprecated = "TokenIPRelation"
 
@@ -439,6 +445,42 @@ final class AppPreferences {
         }
     }
 
+    var autoProtocolPromptDates: [Date] {
+        get {
+            return defaults.array(forKey: Entries.autoProtocolPromptDates) as? [Date] ?? []
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.autoProtocolPromptDates)
+        }
+    }
+
+    var autoProtocolDismissCount: Int {
+        get {
+            return defaults.integer(forKey: Entries.autoProtocolDismissCount)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.autoProtocolDismissCount)
+        }
+    }
+
+    var autoProtocolLastDismissedAt: Date? {
+        get {
+            return defaults.object(forKey: Entries.autoProtocolLastDismissedAt) as? Date
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.autoProtocolLastDismissedAt)
+        }
+    }
+
+    var autoProtocolAccepted: Bool {
+        get {
+            return defaults.bool(forKey: Entries.autoProtocolAccepted)
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.autoProtocolAccepted)
+        }
+    }
+
     var dismissedMessages: [String] {
         get {
             return defaults.array(forKey: Entries.dismissedMessages) as? [String] ?? []
@@ -568,6 +610,9 @@ final class AppPreferences {
                 Entries.failureConnections: 0,
                 Entries.showGeoServers: true,
                 Entries.dismissedMessages: [],
+                Entries.autoProtocolPromptDates: [],
+                Entries.autoProtocolDismissCount: 0,
+                Entries.autoProtocolAccepted: false,
                 Entries.showServiceMessages: false,
                 Entries.checksDipExpirationRequest: true,
                 Entries.stagingVersion: 0,
@@ -762,6 +807,10 @@ final class AppPreferences {
         showGeoServers = true
         showServiceMessages = false
         dismissedMessages = []
+        autoProtocolPromptDates = []
+        autoProtocolDismissCount = 0
+        autoProtocolLastDismissedAt = nil
+        autoProtocolAccepted = false
         dedicatedTokenIPReleation = [:]
         appEnvironmentIsProduction = Client.environment == .production ? true : false
         #if os(iOS)
