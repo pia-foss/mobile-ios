@@ -60,8 +60,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         // single source of truth reflects "Connecting" during a switch. Legacy tunnels don't write
         // it and this observer isn't registered — their status stays purely NEVPNStatus-driven.
         if Client.configuration.usesPlatformSDKTunnel {
-            PIATunnelSharedState.startObserving()
-            nc.addObserver(self, selector: #selector(platformSDKTunnelStatusDidChange), name: PIATunnelSharedState.didChangeNotification, object: nil)
+            PIATunnelSignal.startObserving()
+            nc.addObserver(self, selector: #selector(platformSDKTunnelStatusDidChange), name: PIATunnelSignal.sharedStateDidChange.notificationName, object: nil)
         }
 
         do {

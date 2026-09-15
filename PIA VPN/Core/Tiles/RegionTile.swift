@@ -84,10 +84,10 @@ class RegionTile: UIView, Tileable {
         // state after connecting, out of band with VPN status changes. Observe those cross-process
         // writes so the tile reflects the resolved region promptly.
         if Client.configuration.usesPlatformSDKTunnel {
-            PIATunnelSharedState.startObserving()
+            PIATunnelSignal.startObserving()
             nc.addObserver(
                 self, selector: #selector(updateServer),
-                name: PIATunnelSharedState.didChangeNotification, object: nil)
+                name: PIATunnelSignal.sharedStateDidChange.notificationName, object: nil)
         }
 
         viewShouldRestyle()
