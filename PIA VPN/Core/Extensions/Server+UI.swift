@@ -21,7 +21,7 @@
 //
 
 import Foundation
-import PIAAssetsMobile
+import PIAAssetsFlags
 import PIALibrary
 import PIALocalizations
 import UIKit
@@ -60,16 +60,19 @@ extension Server: @retroactive CustomStringConvertible {
 
 extension UIImageView {
     func setImage(fromServer server: Server) {
-        guard let image = Asset.Flags.flag(forCountry: server.country) else {
+        guard let image = Flag.image(forCountry: server.country) else {
             return
         }
         self.image = image.withRenderingMode(.alwaysOriginal)
+        self.contentMode = .scaleAspectFill
+        self.layer.cornerRadius = self.layer.bounds.height / 2
+        self.clipsToBounds = true
     }
 }
 
 extension UIButton {
     func setImage(fromServer server: Server) {
-        guard let image = Asset.Flags.flag(forCountry: server.country) else {
+        guard let image = Flag.image(forCountry: server.country) else {
             return
         }
         let original = image.withRenderingMode(.alwaysOriginal)
@@ -80,7 +83,11 @@ extension UIButton {
             self.setImage(original.image(alpha: 0.3), for: .normal)
         }
         self.setImage(image.withRenderingMode(.alwaysOriginal), for: .highlighted)
-
+        if let imageView {
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.cornerRadius = imageView.layer.bounds.height / 2
+            imageView.clipsToBounds = true
+        }
     }
 }
 

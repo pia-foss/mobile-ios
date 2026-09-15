@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import PIAAssetsFlags
 import PIAAssetsTV
 import PIADashboard
 import PIALibrary
@@ -53,7 +54,7 @@ final class SelectedServerViewModel: ObservableObject {
         if currentServer.isAutomatic {
             return focused ? Asset.iconSmartLocationHighlighted.swiftUIImage : Asset.iconSmartLocation.swiftUIImage
         } else {
-            return Asset.flag(forCountry: currentServer.country) ?? Asset.iconSmartLocation.swiftUIImage
+            return Flag.swiftUIImage(forCountry: currentServer.country) ?? Asset.iconSmartLocation.swiftUIImage
         }
     }
 

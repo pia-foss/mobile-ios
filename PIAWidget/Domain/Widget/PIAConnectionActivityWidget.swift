@@ -1,3 +1,4 @@
+import PIAAssetsFlags
 import PIAAssetsWidget
 import PIALibrary
 import PIALocalizations
@@ -34,7 +35,9 @@ struct PIAConnectionActivityWidget: Widget {
             DynamicIsland {
                 // This content will be shown when user expands the island
                 DynamicIslandExpandedRegion(.leading, priority: 300) {
-                    PIACircleImageView(size: 46, image: Image(context.state.regionFlag), contentMode: .fill)
+                    if let flagImage = Flag.swiftUIImage(forCountry: context.state.regionCountryCode) {
+                        PIACircleImageView(size: 46, image: flagImage, contentMode: .fill)
+                    }
                 }
 
                 DynamicIslandExpandedRegion(.trailing, priority: 200) {

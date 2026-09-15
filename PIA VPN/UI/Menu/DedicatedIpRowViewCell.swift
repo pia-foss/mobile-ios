@@ -25,7 +25,7 @@ import PIALocalizations
 import PIAUIKit
 import UIKit
 
-class DedicatedIpRowViewCell: UITableViewCell, Restylable {
+final class DedicatedIpRowViewCell: UITableViewCell, Restylable {
 
     @IBOutlet private weak var imvFlag: UIImageView!
     @IBOutlet private weak var dipBadgeImageView: UIImageView!

@@ -8,12 +8,13 @@
 
 import Combine
 import Foundation
+import PIAAssetsFlags
 import PIAAssetsTV
 import PIALibrary
 import PIALocalizations
 import SwiftUI
 
-class RegionsListViewModel: ObservableObject {
+final class RegionsListViewModel: ObservableObject {
 
     private let listUseCase: RegionsListUseCaseType
     private let favoriteUseCase: FavoriteRegionUseCaseType
@@ -86,7 +87,7 @@ class RegionsListViewModel: ObservableObject {
         if server.isAutomatic {
             return (unfocused: Asset.iconSmartLocation.swiftUIImage, focused: Asset.iconSmartLocationHighlighted.swiftUIImage)
         } else {
-            let flag = Asset.flag(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
+            let flag = Flag.swiftUIImage(forCountry: server.country) ?? Asset.iconSmartLocation.swiftUIImage
             return (unfocused: flag, focused: flag)
         }
     }

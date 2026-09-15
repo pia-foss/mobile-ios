@@ -23,10 +23,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-r8-dPQ">
-                        <rect key="frame" x="19" y="5" width="32" height="34"/>
+                        <rect key="frame" x="19" y="6" width="32" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="08I-O5-hk2"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="nLt-Uq-06i"/>
+                            <constraint firstAttribute="height" constant="32" id="nLt-Uq-06i"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dip-badge-dark" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-1U-KaG">
@@ -51,13 +51,13 @@
                     <constraint firstItem="7Kt-Io-znj" firstAttribute="top" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="4Dl-Em-YBN"/>
                     <constraint firstItem="7Kt-Io-znj" firstAttribute="leading" secondItem="l15-wQ-QpA" secondAttribute="trailing" constant="14" id="GR9-2N-ewe"/>
                     <constraint firstAttribute="bottom" secondItem="7Kt-Io-znj" secondAttribute="bottom" constant="5" id="IhJ-Wq-V2f"/>
-                    <constraint firstItem="Ma2-r8-dPQ" firstAttribute="top" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="Iob-ZS-u5p"/>
+                    <constraint firstItem="Ma2-r8-dPQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="Iob-ZS-u5p"/>
                     <constraint firstAttribute="bottom" secondItem="l15-wQ-QpA" secondAttribute="bottom" constant="5" id="JTf-dE-Vgc"/>
                     <constraint firstItem="gIe-1U-KaG" firstAttribute="centerX" secondItem="Ma2-r8-dPQ" secondAttribute="centerX" constant="16" id="QVv-MO-GgT"/>
                     <constraint firstAttribute="trailing" secondItem="7Kt-Io-znj" secondAttribute="trailing" constant="19" id="SXr-yt-0l6"/>
                     <constraint firstItem="gIe-1U-KaG" firstAttribute="centerY" secondItem="Ma2-r8-dPQ" secondAttribute="centerY" constant="-8" id="UDA-06-vQM"/>
                     <constraint firstItem="l15-wQ-QpA" firstAttribute="top" secondItem="BCJ-Zo-rKL" secondAttribute="top" constant="5" id="dpv-2y-IbW"/>
-                    <constraint firstAttribute="bottom" secondItem="Ma2-r8-dPQ" secondAttribute="bottom" constant="5" id="e3I-qe-EbR"/>
+                    <constraint firstItem="Ma2-r8-dPQ" firstAttribute="centerY" secondItem="BCJ-Zo-rKL" secondAttribute="centerY" id="Fg1-cY-flg"/>
                     <constraint firstItem="l15-wQ-QpA" firstAttribute="leading" secondItem="Ma2-r8-dPQ" secondAttribute="trailing" constant="14" id="lyf-wv-nSC"/>
                 </constraints>
             </tableViewCellContentView>

@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-tu-dGY">
-                    <rect key="frame" x="25" y="39" width="315" height="40"/>
+                    <rect key="frame" x="25" y="23" width="315" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-L8-QwR">
                             <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
@@ -295,7 +295,7 @@
                 <constraint firstItem="4bj-c2-OSN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="C27-fH-o4D"/>
                 <constraint firstItem="c6v-zh-Gcf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="PMO-cw-Gue"/>
                 <constraint firstAttribute="trailing" secondItem="c6v-zh-Gcf" secondAttribute="trailing" constant="25" id="Rc2-Ch-Saj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5tQ-tu-dGY" secondAttribute="bottom" constant="10" id="cnq-mg-NfM"/>
+                <constraint firstItem="c6v-zh-Gcf" firstAttribute="top" secondItem="5tQ-tu-dGY" secondAttribute="bottom" constant="4" id="cnq-mg-NfM"/>
                 <constraint firstItem="5tQ-tu-dGY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="jF0-26-mz6"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5tQ-tu-dGY" secondAttribute="trailing" constant="25" id="kXN-se-6Xi"/>
                 <constraint firstItem="4bj-c2-OSN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="oD2-SY-pNZ"/>

@@ -31,7 +31,7 @@ public enum RegionStatus {
     case offline
 }
 
-class RegionCell: UITableViewCell, Restylable {
+final class RegionCell: UITableViewCell, Restylable {
 
     @IBOutlet private weak var imvFlag: UIImageView!
 

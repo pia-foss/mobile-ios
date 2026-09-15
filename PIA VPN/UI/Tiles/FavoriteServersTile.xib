@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9eh-pB-Hca">
-                    <rect key="frame" x="25" y="34" width="315" height="40"/>
+                    <rect key="frame" x="25" y="23" width="315" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDf-Ol-AIs">
                             <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
@@ -250,7 +250,7 @@
                 <constraint firstItem="Iuh-fe-bTm" firstAttribute="trailing" secondItem="GV3-1J-mvn" secondAttribute="trailing" constant="25" id="Gdk-tN-Zww"/>
                 <constraint firstItem="9eh-pB-Hca" firstAttribute="leading" secondItem="Iuh-fe-bTm" secondAttribute="leading" constant="25" id="HOz-m1-QFg"/>
                 <constraint firstItem="6aZ-dJ-EIp" firstAttribute="leading" secondItem="Iuh-fe-bTm" secondAttribute="leading" constant="25" id="Jes-7k-0zG"/>
-                <constraint firstAttribute="bottom" secondItem="9eh-pB-Hca" secondAttribute="bottom" constant="15" id="euo-oq-3DM"/>
+                <constraint firstItem="GV3-1J-mvn" firstAttribute="top" secondItem="9eh-pB-Hca" secondAttribute="bottom" constant="4" id="euo-oq-3DM"/>
                 <constraint firstItem="Iuh-fe-bTm" firstAttribute="trailing" secondItem="9eh-pB-Hca" secondAttribute="trailing" constant="25" id="lqK-fp-p1L"/>
                 <constraint firstItem="Iuh-fe-bTm" firstAttribute="bottom" secondItem="GV3-1J-mvn" secondAttribute="bottom" constant="10" id="pyG-Ep-Jd6"/>
             </constraints>

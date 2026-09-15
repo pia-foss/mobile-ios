@@ -84,7 +84,11 @@ final class FavoriteServersTile: UIView, Tileable {
         for containerView in stackView.subviews {
             if let button = containerView.subviews.first as? ServerButton {
                 button.setImage(Asset.Piax.Tiles.quickConnectPlaceholder.image, for: .normal)
-                button.imageView?.contentMode = .scaleAspectFit
+                if let buttonImageView = button.imageView {
+                    buttonImageView.contentMode = .scaleAspectFill
+                    buttonImageView.layer.cornerRadius = buttonImageView.layer.bounds.height / 2
+                    buttonImageView.clipsToBounds = true
+                }
                 button.isUserInteractionEnabled = false
                 button.accessibilityLabel = L10n.Global.empty
             }
