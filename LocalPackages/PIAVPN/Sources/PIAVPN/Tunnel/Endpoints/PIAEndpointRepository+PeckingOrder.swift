@@ -38,7 +38,9 @@ extension PIAEndpointRepository {
 
     /// Countries whose networks censor plain VPN protocols, so AmneziaWG is tried first. ISO
     /// `country_code2` values, matching what `/api/geo` returns.
-    static let censoredCountryCodes: Set<String> = ["CN", "IR", "RU"]
+    // TEMPORARY (testing only): "DE" is not censored. It is here so the censorship pecking order
+    // can be exercised on a real device from Germany. Remove before merging.
+    static let censoredCountryCodes: Set<String> = ["CN", "IR", "RU", "DE"]
 
     /// Picks the pecking order from the user's own country, resolved by the app while disconnected
     /// (`ConnectivityDaemon`) and carried in shared state. Unknown country keeps the normal order:
