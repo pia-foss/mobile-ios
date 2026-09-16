@@ -36,6 +36,8 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
     var sessionController: KapeSessionController?
     private var startTask: Task<Void, Never>?
+
+    private var endpointRepository: PIAEndpointRepository?
     private let logger = PIATunnelLogger(label: "PIAPacketTunnelProvider")
 
     /// Mirrors the SDK's actual connected endpoint into `PIATunnelSharedState` for the app to read.
@@ -68,6 +70,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         PIATunnelSharedState.clearStatus()
 
         let endpointRepository = PIAEndpointRepository()
+        self.endpointRepository = endpointRepository
         let systemTunnel = KapeSystemTunnel(packetTunnelProvider: self, packetIOMode: .utunFd)
 
         let wgController = KapeWireGuardController(
@@ -112,6 +115,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
             await sessionController?.stop()
             sessionController = nil
+            endpointRepository = nil
 
             await MainActor.run {
                 connectedEndpointObservation?.cancel()
@@ -158,6 +162,13 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         case .requestLog:
             logger.info("requestLog requested")
             completionHandler?(PIATunnelLogStore.shared.snapshot().data(using: .utf8))
+
+        case .connectionConfigurations:
+            logger.info("connectionConfigurations requested")
+            Task { [endpointRepository] in
+                let configurations = await endpointRepository?.latestConfigurations ?? []
+                completionHandler?(try? JSONEncoder().encode(configurations))
+            }
         }
     }
 

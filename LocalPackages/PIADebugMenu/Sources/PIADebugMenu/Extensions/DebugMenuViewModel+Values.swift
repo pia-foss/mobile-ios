@@ -70,6 +70,7 @@ extension DebugMenuViewModel {
         case "PIAWG": return "WireGuard"
         case "PIA": return "OpenVPN"
         case "IPSec", "IKEv2": return "IKEv2"
+        case "PIAAutomatic": return "Automatic"
         default: return Client.preferences.vpnType
         }
     }
@@ -80,6 +81,18 @@ extension DebugMenuViewModel {
 
     var vpnIP: String {
         Client.daemons.vpnIP ?? "---"
+    }
+
+    /// Capped like the log sections, and for the same reason: a pinned protocol with an Automatic
+    /// region yields one configuration per online server — hundreds of rows. Export is uncapped.
+    var connectionConfigurationsPreview: [PIAConnectionConfiguration] {
+        Array(connectionConfigurations.prefix(Self.previewLineCount))
+    }
+
+    /// `vpnProtocol` already carries the obfuscation ("WireGuard+Amnezia"), so the endpoint alone is
+    /// the whole value.
+    func connectionConfigurationEndpoint(_ configuration: PIAConnectionConfiguration) -> String {
+        "\(configuration.host):\(configuration.port)"
     }
 
     var logs: String {
@@ -115,6 +128,17 @@ extension DebugMenuViewModel {
         lines.append("")
         lines.append("=== VPN ===")
         lines.append("Protocol: \(vpnProtocolName)")
+        lines.append("VPN IP (PIA's Endpoint): \(vpnIP)")
+        lines.append("VPN IP (ipify): \(ipifyIP)")
+        lines.append("")
+        lines.append("=== Connection Configurations ===")
+        if connectionConfigurations.isEmpty {
+            lines.append("Tunnel not running")
+        } else {
+            lines += connectionConfigurations.map { configuration in
+                "\(configuration.vpnProtocol)  \(connectionConfigurationEndpoint(configuration))"
+            }
+        }
         lines.append("")
         lines.append("=== Account ===")
         lines.append("Username: \(username)")

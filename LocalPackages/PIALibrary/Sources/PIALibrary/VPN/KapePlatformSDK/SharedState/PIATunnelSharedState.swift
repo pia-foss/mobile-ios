@@ -245,7 +245,7 @@ extension PIATunnelSharedState {
             let didWrite = mutex.withLock { _ in writeLocked(value) }
 
             if didWrite {
-                PIATunnelSharedState.postDidChange()
+                PIATunnelSignal.sharedStateDidChange.post()
             }
         }
 
@@ -259,7 +259,7 @@ extension PIATunnelSharedState {
             }
 
             if didWrite {
-                PIATunnelSharedState.postDidChange()
+                PIATunnelSignal.sharedStateDidChange.post()
             }
         }
 
@@ -268,7 +268,7 @@ extension PIATunnelSharedState {
             let didDelete = mutex.withLock { _ in deleteLocked() }
 
             if didDelete {
-                PIATunnelSharedState.postDidChange()
+                PIATunnelSignal.sharedStateDidChange.post()
             }
         }
 

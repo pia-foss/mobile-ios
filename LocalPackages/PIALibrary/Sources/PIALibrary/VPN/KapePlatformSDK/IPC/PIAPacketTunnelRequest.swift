@@ -41,4 +41,9 @@ public enum PIAPacketTunnelRequest: String, Codable, Sendable {
     /// Query the extension for its in-memory tunnel log. The extension replies
     /// with the log as UTF-8 text (or an empty response if nothing was logged).
     case requestLog
+
+    /// Query the extension for the endpoints it will attempt, in attempt order. The extension
+    /// replies with a JSON-encoded `[PIAConnectionConfiguration]` (or an empty response before it
+    /// has generated a batch).
+    case connectionConfigurations
 }

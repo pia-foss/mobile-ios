@@ -1,8 +1,7 @@
 //
-//  VPNProvider+TunnelLog.swift
+//  VPNProvider+ConnectionConfigurations.swift
 //  PIALibrary
 //
-//  Created by Diego Trevisan on 07.08.26.
 //  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -24,17 +23,29 @@ import Foundation
 
 extension VPNProvider {
 
-    // Resolves to nil on error or timeout. The tunnel never replies to the provider message when
-    // its process is wedged (e.g. after a network change), so an unguarded bridge would suspend
-    // forever; the caller treats a missing log as a non-fatal, reportable condition.
-    public func tunnelLog(timeout: TimeInterval = 5) async -> String? {
+    /// The endpoints the tunnel will attempt, in attempt order — Automatic's pecking order, or the
+    /// pinned protocol's fan-out. Answered by the extension process, so it is empty whenever that
+    /// process isn't running (i.e. while disconnected).
+    ///
+    /// Not a `VPNProvider` requirement: it is specific to the PlatformSDK tunnel, so it resolves
+    /// that profile directly rather than going through `activeProfile` and forcing every legacy
+    /// profile to implement it.
+    ///
+    /// Resolves to an empty list on error or timeout, for the same reason as `tunnelLog()`: the
+    /// tunnel never replies to the provider message when its process is wedged, so an unguarded
+    /// bridge would suspend forever.
+    public func connectionConfigurations(timeout: TimeInterval = 5) async -> [PIAConnectionConfiguration] {
+        guard let profile = Client.configuration.profile(forVPNType: KapePlatformSDKTunnelProfile.vpnType) as? KapePlatformSDKTunnelProfile else {
+            return []
+        }
+
         // Whichever of the tunnel reply and the timeout arrives first wins. `AsyncStream` is what
         // makes that safe: yielding to a finished continuation is a no-op, whereas resuming a
         // `CheckedContinuation` twice would trap when a slow tunnel replies after the timeout.
-        let results = AsyncStream<String?> { continuation in
+        let results = AsyncStream<[PIAConnectionConfiguration]> { continuation in
             let timeoutTask = Task {
                 try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
-                continuation.yield(nil)
+                continuation.yield([])
                 continuation.finish()
             }
 
@@ -42,16 +53,16 @@ extension VPNProvider {
             // timer is still sleeping out its full interval for nothing.
             continuation.onTermination = { _ in timeoutTask.cancel() }
 
-            requestTunnelLog { log, _ in
-                continuation.yield(log)
+            profile.requestConnectionConfigurations { configurations, _ in
+                continuation.yield(configurations ?? [])
                 continuation.finish()
             }
         }
 
-        for await log in results {
-            return log
+        for await configurations in results {
+            return configurations
         }
 
-        return nil
+        return []
     }
 }

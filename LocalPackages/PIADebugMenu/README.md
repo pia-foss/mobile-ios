@@ -11,6 +11,8 @@ Sections:
 | Section | Contents |
 |---|---|
 | App Info | App version, build environment, base URL |
+| VPN | Status, connected via, protocol, local IP, and the VPN IP twice — as PIA's connectivity checker reports it, and as ipify independently sees it (they should agree) |
+| Connection Configurations | The endpoints the tunnel will attempt, in attempt order, labelled by protocol — first 25 on screen, all of them in Export |
 | Account and Subscription | Username, plan name, product ID, expiration date, expired / renewable / recurring flags |
 | Payment Receipt | Base64 receipt preview (first 300 chars); export button on iOS |
 | Logs | Last N log entries (newest on top), refreshed every 2 seconds; export button on iOS |
@@ -120,6 +122,21 @@ The label renders in `.caption` / `.secondary` style above the value in `.body` 
 ### DebugExportFile
 
 `DebugExportFile` is a `Transferable` wrapper used by iOS `ShareLink` buttons. It writes the given string to a named temporary file and vends it as a file transfer. It is not used on tvOS.
+
+## File layout
+
+```
+Sources/PIADebugMenu/
+├── DebugMenuView.swift        the screen: layout and one private var per section
+├── DebugMenuViewModel.swift   state, polling and intents
+├── Components/                reusable view pieces (DebugSection, DebugInfoRow, DebugExportFile)
+├── Extensions/                extensions on other types, one file per `X+Y`
+└── Probes/                    ask the system or the network something, return a value
+```
+
+`Probes/` is the one that needs explaining. `VPNConnectionState` reads NetworkExtension and the tunnel
+interfaces; `IpifyAddress` does an HTTP round-trip. Both answer a question about the device rather than
+rendering anything, and neither belongs to the view or the view model — a new data source goes here.
 
 ## Architecture
 

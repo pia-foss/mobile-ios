@@ -81,10 +81,10 @@ class ConnectionTile: UIView, Tileable {
         // transport) into shared state after connecting, out of band with VPN status changes. Observe
         // those cross-process writes so the tile reflects the resolved values promptly.
         if Client.configuration.usesPlatformSDKTunnel {
-            PIATunnelSharedState.startObserving()
+            PIATunnelSignal.startObserving()
             nc.addObserver(
                 self, selector: #selector(setConnectionValues),
-                name: PIATunnelSharedState.didChangeNotification, object: nil)
+                name: PIATunnelSignal.sharedStateDidChange.notificationName, object: nil)
         }
 
         protocolIcon.image = Asset.Piax.Tiles.ConnectionTile.iconProtocol.image

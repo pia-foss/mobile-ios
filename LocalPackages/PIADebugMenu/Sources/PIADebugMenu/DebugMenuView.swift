@@ -87,6 +87,8 @@ public struct DebugMenuView: View {
                         .focusable()
                     vpnSection
                         .focusable()
+                    connectionConfigurationsSection
+                        .focusable()
                     accountSection
                         .focusable()
                     receiptSection
@@ -104,6 +106,7 @@ public struct DebugMenuView: View {
             List {
                 appInfoSection
                 vpnSection
+                connectionConfigurationsSection
                 accountSection
                 receiptSection
                 logsSection
@@ -130,7 +133,27 @@ public struct DebugMenuView: View {
             DebugInfoRow(label: "Connected Via", value: viewModel.connectedVia)
             DebugInfoRow(label: "Protocol", value: viewModel.vpnProtocolName)
             DebugInfoRow(label: "Local IP", value: viewModel.publicIP)
-            DebugInfoRow(label: "VPN IP", value: viewModel.vpnIP)
+            DebugInfoRow(label: "VPN IP (PIA's Endpoint)", value: viewModel.vpnIP)
+            DebugInfoRow(label: "VPN IP (ipify)", value: viewModel.ipifyIP)
+        }
+    }
+
+    /// The endpoints the tunnel will attempt, in attempt order. Empty while the tunnel is down —
+    /// the extension process, which owns the list, only exists while connecting or connected.
+    private var connectionConfigurationsSection: some View {
+        DebugSection("Connection Configurations") {
+            if viewModel.connectionConfigurations.isEmpty {
+                DebugInfoRow(label: "Endpoints", value: "Tunnel not running")
+            } else {
+                // Keyed by position: the same endpoint can legitimately repeat across pecking-order
+                // steps, so the configuration itself is not a stable identity.
+                ForEach(Array(viewModel.connectionConfigurationsPreview.enumerated()), id: \.offset) { _, configuration in
+                    DebugInfoRow(
+                        label: configuration.vpnProtocol,
+                        value: viewModel.connectionConfigurationEndpoint(configuration)
+                    )
+                }
+            }
         }
     }
 
