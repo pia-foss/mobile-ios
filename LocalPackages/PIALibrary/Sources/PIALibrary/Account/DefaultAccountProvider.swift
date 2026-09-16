@@ -407,7 +407,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             log.debug("Fetching available product keys...")
 
             Task {
-                let receipt = await accessedStore.currentEntitlementJWS()
+                let receipt = await accessedStore.currentSubscriptionReceipt()?.jws
                 do {
                     let appStoreInformation = try await webServices.subscriptionInformation(with: receipt)
                     DispatchQueue.main.async { callback?(appStoreInformation, nil) }
@@ -477,7 +477,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
 
             // Success requires an actual entitlement, not just a successful sync.
             // A cached entitlement is acceptable when the sync fails (e.g. offline).
-            let jws = await accessedStore.currentEntitlementJWS()
+            let jws = await accessedStore.currentSubscriptionReceipt()?.jws
             if let jws {
                 log.debug("Returning found JWS entitlement (count \(jws.value.count))")
                 return .success(jws)
@@ -574,7 +574,7 @@ public final class DefaultAccountProvider: AccountProvider, ConfigurationAccess,
             if let transaction {
                 jws = transaction.jwsRepresentation
             } else {
-                jws = await accessedStore.currentEntitlementJWS()
+                jws = await accessedStore.currentSubscriptionReceipt()?.jws
             }
 
             guard let jws else {

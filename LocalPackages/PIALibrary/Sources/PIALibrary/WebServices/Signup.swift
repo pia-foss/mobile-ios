@@ -50,7 +50,7 @@ private let log = PIALogger.logger(for: SignupRequest.self)
             if let transaction {
                 jws = transaction.jwsRepresentation
             } else {
-                jws = await store.currentEntitlementJWS()
+                jws = await store.currentSubscriptionReceipt()?.jws
             }
 
             guard let jws else { return nil }

@@ -38,26 +38,62 @@ final class AppStoreProvider: NSObject, InAppProvider {
 
     private(set) var availableProducts: [any InAppProduct]?
 
-    func currentEntitlementJWS() async -> JWS? {
-        var newest: (date: Date, jws: JWS)?
+    func currentSubscriptionReceipt() async -> SubscriptionReceipt? {
+        var newest: (purchaseDate: Date, receipt: SubscriptionReceipt?)?
         for await result in Transaction.currentEntitlements {
             switch result {
             case .unverified(let transaction, let error):
-                log.warning("Ignoring unverified transaction: \(error)")
-                await transaction.finish()
+                log.warning("Unverified transaction: \(error)")
+                // we allow unverified transactions, the backend will allways re verify them with Apple.
+                fallthrough
             case .verified(let transaction):
-                if newest == nil || transaction.purchaseDate > newest!.date {
+                if newest == nil || transaction.purchaseDate > newest!.purchaseDate {
                     if let jws = JWS(result.jwsRepresentation) {
-                        newest = (transaction.purchaseDate, jws)
+                        let receipt = SubscriptionReceipt(jws: jws, expiration: transaction.expirationDate)
+                        newest = (purchaseDate: transaction.purchaseDate, receipt: receipt)
                     }
                 }
             }
         }
-        if let jws = newest?.jws {
-            return jws
+        if let newest {
+            return newest.receipt
         }
         log.debug("No current entitlements found")
         return nil
+    }
+
+    func promotionalOffers(for product: any InAppProduct) async -> [InAppPromotionalOffer] {
+        guard let product = product.native as? Product else {
+            log.error("Product must be a StoreKit.Product, but got \(type(of: product.native))")
+            return []
+        }
+        guard let subscription = product.subscription else {
+            log.debug("Product \(product.id) is not a subscription, so it has no promotional offers")
+            return []
+        }
+
+        return subscription.promotionalOffers.compactMap { offer -> InAppPromotionalOffer? in
+            guard let id = offer.id else {
+                log.warning("Skipping promotional offer without an identifier on \(product.id)")
+                return nil
+            }
+            let unit: SubscriptionPeriodUnit
+            switch offer.period.unit {
+            case .day: unit = .day
+            case .week: unit = .week
+            case .month: unit = .month
+            case .year: unit = .year
+            @unknown default: unit = .day
+            }
+            return InAppPromotionalOffer(
+                id: id,
+                displayPrice: offer.displayPrice,
+                periodValue: offer.period.value,
+                periodUnit: unit,
+                periodCount: offer.periodCount,
+                price: offer.price
+            )
+        }
     }
 
     func synchronizeEntitlements() async -> Error? {
@@ -190,6 +226,74 @@ final class AppStoreProvider: NSObject, InAppProvider {
         let result: Product.PurchaseResult
         do {
             result = try await product.purchase()
+        } catch {
+            return .failure(.unknown(code: 606, message: error.localizedDescription))
+        }
+
+        switch result {
+        case .success(let verification):
+            guard let jws = JWS(verification.jwsRepresentation) else {
+                log.error("Failed to create JWS from: \(verification.jwsRepresentation)")
+                await verification.unsafePayloadValue.finish()
+                return .failure(.badReceipt)
+            }
+            switch verification {
+            case .verified(let transaction):
+                log.debug("\(#function) success verified")
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jws))
+            case .unverified(let transaction, let error):
+                log.debug("\(#function) success unverified")
+                log.warning("Unverified transaction: \(error)")
+                return .success(AppStoreTransaction(native: transaction, jwsRepresentation: jws))
+            }
+        case .userCancelled:
+            log.debug("\(#function) userCancelled")
+            return .failure(.userCancelled)
+        case .pending:
+            log.debug("\(#function) pending")
+            return .failure(.purchasePending)
+        @unknown default:
+            log.warning("Unknown purchase result: \(result)")
+            return .failure(.unknown(code: 606, message: "Unknown purchase result: \(result)"))
+        }
+    }
+
+    func purchase(
+        product: any InAppProduct,
+        promotionalOffer signature: InAppPromotionalOfferSignature,
+        appAccountToken: UUID
+    ) async -> Result<any InAppTransaction, ClientError> {
+        guard product is AppStoreProduct else {
+            log.error("Product must be AppStoreProduct, but got \(type(of: product))")
+            return .failure(ClientError.productUnavailable)
+        }
+
+        if !Client.configuration.arePurchasesAvailable() {
+            log.warning("Purchases not available in sandbox")
+            return .failure(ClientError.sandboxPurchase)
+        }
+
+        guard let product = product.native as? Product else {
+            log.error("Product is not a StoreKit.Product: \(product)")
+            return .failure(.invalidParameter)
+        }
+
+        log.debug("Purchasing product \(product.id) with promotional offer \(signature.offerID)")
+        let result: Product.PurchaseResult
+        do {
+            // The `promotionalOffer(offerID:keyID:nonce:signature:timestamp:)` option is the
+            // iOS 15-compatible API. It is deprecated in iOS 18 in favour of the
+            // `Product.SubscriptionOffer.Signature` variant, but the app deploys to iOS 15.
+            result = try await product.purchase(options: [
+                .promotionalOffer(
+                    offerID: signature.offerID,
+                    keyID: signature.keyID,
+                    nonce: signature.nonce,
+                    signature: signature.signature,
+                    timestamp: signature.timestamp
+                ),
+                .appAccountToken(appAccountToken)
+            ])
         } catch {
             return .failure(.unknown(code: 606, message: error.localizedDescription))
         }
