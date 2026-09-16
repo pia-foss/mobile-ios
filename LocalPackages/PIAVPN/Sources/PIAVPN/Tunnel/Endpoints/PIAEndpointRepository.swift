@@ -4,6 +4,7 @@ import PIALibrary
 
 final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
     let logger = PIATunnelLogger(label: "PIAEndpointRepository")
+    let latestBatch = LatestBatch()
 
     func generateConfigurations() async -> [any VpnConfiguration] {
         let state = PIATunnelSharedState.read()
@@ -18,6 +19,10 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         if state.selectedDipServer != nil || state.selectedLocationId != nil {
             guard let server = state.selectedServer(in: servers) else {
                 logger.error("No server could be resolved — returning no configurations")
+
+                // Clear the snapshot
+                await retain([])
+
                 return []
             }
             logResolvedServer(server, state: state)
@@ -27,6 +32,8 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         }
 
         let batch = configurations(for: eligible, state: state)
+        await retain(batch)
+
         if batch.isEmpty {
             logger.error("Generated no configurations — the tunnel has nothing to attempt")
         } else {

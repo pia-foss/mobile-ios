@@ -25,9 +25,21 @@ final class DebugMenuViewModel: ObservableObject {
     @Published var availableTransactions: [StoreKit.Transaction] = []
     @Published var isTransactionPickerPresented = false
     @Published private(set) var vpnConnection: VPNConnectionState = .unknown
+    @Published private(set) var connectionConfigurations: [PIAConnectionConfiguration] = []
+    @Published private(set) var ipifyIP: String = "—"
 
     private static let refreshInterval: UInt64 = 5 * NSEC_PER_SEC
     private var refreshTask: Task<Void, Never>?
+
+    /// What makes the attempt list change. The tunnel posts `connectionConfigurationsDidChange` when
+    /// it generates a batch; `PIADaemonsDidUpdateVPNStatus` covers the disconnect, where no signal
+    /// can arrive because the process that would post it is gone.
+    private static let connectionConfigurationTriggers: [Notification.Name] = [
+        PIATunnelSignal.connectionConfigurationsDidChange.notificationName,
+        .PIADaemonsDidUpdateVPNStatus
+    ]
+
+    private var connectionConfigurationsTask: Task<Void, Never>?
 
     // MARK: - Lifecycle
 
@@ -36,17 +48,42 @@ final class DebugMenuViewModel: ObservableObject {
 
         refreshTask = Task { [weak self] in
             await self?.loadEntitlementJWSIfNeeded()
+            await self?.refreshIpifyIP()
 
             while !Task.isCancelled {
                 await self?.refresh()
                 try? await Task.sleep(nanoseconds: Self.refreshInterval)
             }
         }
+
+        observeConnectionConfigurations()
     }
 
     func onDisappear() {
         refreshTask?.cancel()
         refreshTask = nil
+        connectionConfigurationsTask?.cancel()
+        connectionConfigurationsTask = nil
+    }
+
+    /// Event-driven rather than polled: the list only changes when the tunnel builds a new batch, and
+    /// asking for it costs an IPC round-trip. Seeds once, because a signal posted before the menu
+    /// opened is gone — Darwin notifications are a prod, not a queue.
+    private func observeConnectionConfigurations() {
+        PIATunnelSignal.startObserving()
+        connectionConfigurationsTask = Task { [weak self] in
+            await self?.refreshConnectionConfigurations()
+
+            await withTaskGroup(of: Void.self) { group in
+                for name in Self.connectionConfigurationTriggers {
+                    group.addTask { [weak self] in
+                        for await _ in NotificationCenter.default.notifications(named: name).map({ _ in () }) {
+                            await self?.refreshConnectionConfigurations()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - Actions
@@ -148,11 +185,28 @@ final class DebugMenuViewModel: ObservableObject {
         await refreshTunnelLog()
     }
 
+    /// Answered by the extension process, so this empties itself while the tunnel is down. Polled
+    /// here rather than computed in the view: the IPC round-trip must not happen during a body
+    /// evaluation.
+    private func refreshConnectionConfigurations() async {
+        let current = await Client.providers.vpnProvider.connectionConfigurations()
+        if current != connectionConfigurations {
+            connectionConfigurations = current
+        }
+    }
+
     private func updateVPNConnectionIfNeeded() async {
         let current = await VPNConnectionState.current()
         if current != vpnConnection {
             vpnConnection = current
+            // Re-asked only when the tunnel actually changes, rather than on every 5s tick: the
+            // answer only moves when the egress does, and this is somebody else's service.
+            await refreshIpifyIP()
         }
+    }
+
+    private func refreshIpifyIP() async {
+        ipifyIP = await IpifyAddress.current() ?? "unavailable"
     }
 
     private func updateLogSnapshotIfNeeded() {

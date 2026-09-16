@@ -39,6 +39,11 @@ public enum PIATunnelSignal: String, CaseIterable, Sendable {
     /// The user's pinned protocol keeps failing and the app should offer switching to Automatic (KM-18462).
     case switchToAutomaticSuggested
 
+    /// The tunnel generated a new batch of connection configurations; observers re-request it with
+    /// `PIAPacketTunnelRequest.connectionConfigurations`. Unlike the other signals the state it prods
+    /// for lives in the extension's memory rather than on disk, so the re-read is an IPC round-trip.
+    case connectionConfigurationsDidChange
+
     /// Namespaced by app group so it can't collide with other apps.
     private static let darwinNamePrefix = "\(AppConstants.appGroup).PIATunnelSignal."
 
