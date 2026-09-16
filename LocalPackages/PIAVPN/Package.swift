@@ -29,6 +29,10 @@ let package = Package(
                 .product(name: "PIALibrary", package: "PIALibrary"),
                 .product(name: "NWHttpConnection", package: "mobile-ios-networking")
             ]
+        ),
+        .testTarget(
+            name: "PIAVPNTests",
+            dependencies: ["PIAVPN"]
         )
     ],
     swiftLanguageModes: [.v5]

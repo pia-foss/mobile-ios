@@ -29,8 +29,14 @@ extension PIAWebServices {
 
     func connectivityCheck() async -> Result<ConnectivityStatus, Error> {
         do {
-            let information = try await nativeAccountAPI.clientStatus(requestTimeoutMillis: 1_000)
-            return .success(ConnectivityStatus(ipAddress: information.ip, isVPN: information.connected))
+            let information = try await nativeAccountAPI.geo(requestTimeoutMillis: 3_000)
+            return .success(
+                ConnectivityStatus(
+                    ipAddress: information.ip,
+                    countryCode: information.countryCode,
+                    isVPN: information.usingPIAServer ?? false
+                )
+            )
         } catch {
             return .failure(error)
         }

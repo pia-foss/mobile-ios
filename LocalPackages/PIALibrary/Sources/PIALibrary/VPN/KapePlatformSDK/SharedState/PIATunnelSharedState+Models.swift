@@ -71,6 +71,10 @@ extension PIATunnelSharedState {
         public var serverId: String
         /// The transport the SDK resolved — the app can't derive this under Automatic transport.
         public var resolvedTransport: VPNTransport
+
+        /// The SDK's obfuscation label ("none", "amnezia"). The only way the app can tell an
+        /// AmneziaWG connection from a plain WireGuard one — both are `.wireGuard`.
+        public var obfuscation: String?
         /// So a stale value from a previous session can be ignored.
         public var updatedAt: Date
 
@@ -78,16 +82,18 @@ extension PIATunnelSharedState {
             protocol: TunnelProtocol,
             serverId: String,
             resolvedTransport: VPNTransport,
+            obfuscation: String? = nil,
             updatedAt: Date
         ) {
             self.protocol = `protocol`
             self.serverId = serverId
             self.resolvedTransport = resolvedTransport
+            self.obfuscation = obfuscation
             self.updatedAt = updatedAt
         }
 
         private enum CodingKeys: String, CodingKey {
-            case `protocol`, serverId, resolvedTransport, updatedAt
+            case `protocol`, serverId, resolvedTransport, obfuscation, updatedAt
         }
 
         // A payload predating `resolvedTransport` defaults to `.udp` rather than failing the decode.
@@ -96,6 +102,7 @@ extension PIATunnelSharedState {
             `protocol` = try container.decode(TunnelProtocol.self, forKey: .protocol)
             serverId = try container.decode(String.self, forKey: .serverId)
             resolvedTransport = try container.decodeIfPresent(VPNTransport.self, forKey: .resolvedTransport) ?? .udp
+            obfuscation = try container.decodeIfPresent(String.self, forKey: .obfuscation)
             updatedAt = try container.decode(Date.self, forKey: .updatedAt)
         }
     }
@@ -222,6 +229,10 @@ extension PIATunnelSharedState {
 
         public var wireGuard: WireGuardSettings
 
+        /// ISO country code of the user's own public IP, resolved by the app while disconnected.
+        /// nil when never resolved — `PIAEndpointRepository` then keeps the normal pecking order.
+        public var geoCountryCode: String?
+
         /// Latencies from the app's `ServersPinger`, keyed by `Server.identifier`, in milliseconds.
         /// Carried explicitly because `Server`'s `Codable` form drops its measured `responseTime`;
         /// `State.selectedServer(in:)` uses it to mirror the app's `bestServer`. App-owned, so a
@@ -234,6 +245,7 @@ extension PIATunnelSharedState {
             selectedProtocol: TunnelProtocol = .automatic,
             openVPN: OpenVPNSettings = OpenVPNSettings(),
             wireGuard: WireGuardSettings = WireGuardSettings(),
+            geoCountryCode: String? = nil,
             latencyByServerId: [String: Int] = [:]
         ) {
             self.selectedLocationId = selectedLocationId
@@ -241,12 +253,13 @@ extension PIATunnelSharedState {
             self.selectedProtocol = selectedProtocol
             self.openVPN = openVPN
             self.wireGuard = wireGuard
+            self.geoCountryCode = geoCountryCode
             self.latencyByServerId = latencyByServerId
         }
 
         private enum CodingKeys: String, CodingKey {
             case selectedLocationId, selectedDipServer, selectedProtocol, openVPN, wireGuard
-            case latencyByServerId
+            case geoCountryCode, latencyByServerId
         }
 
         // Tolerate a missing/older file by falling back to defaults per field.
@@ -257,6 +270,7 @@ extension PIATunnelSharedState {
             selectedProtocol = try container.decodeIfPresent(TunnelProtocol.self, forKey: .selectedProtocol) ?? .automatic
             openVPN = try container.decodeIfPresent(OpenVPNSettings.self, forKey: .openVPN) ?? OpenVPNSettings()
             wireGuard = try container.decodeIfPresent(WireGuardSettings.self, forKey: .wireGuard) ?? WireGuardSettings()
+            geoCountryCode = try container.decodeIfPresent(String.self, forKey: .geoCountryCode)
             latencyByServerId = try container.decodeIfPresent([String: Int].self, forKey: .latencyByServerId) ?? [:]
         }
     }
@@ -332,6 +346,7 @@ extension PIATunnelSharedState {
         public var selectedProtocol: TunnelProtocol
         public var openVPN: OpenVPNSettings
         public var wireGuard: WireGuardSettings
+        public var geoCountryCode: String?
         public var latencyByServerId: [String: Int]
 
         // MARK: Shared cache
@@ -350,6 +365,7 @@ extension PIATunnelSharedState {
             selectedProtocol: TunnelProtocol = .automatic,
             openVPN: OpenVPNSettings = OpenVPNSettings(),
             wireGuard: WireGuardSettings = WireGuardSettings(),
+            geoCountryCode: String? = nil,
             servers: [Server] = [],
             serversFetchedAt: Date? = nil,
             latencyByServerId: [String: Int] = [:],
@@ -361,6 +377,7 @@ extension PIATunnelSharedState {
             self.selectedProtocol = selectedProtocol
             self.openVPN = openVPN
             self.wireGuard = wireGuard
+            self.geoCountryCode = geoCountryCode
             self.servers = servers
             self.serversFetchedAt = serversFetchedAt
             self.latencyByServerId = latencyByServerId
@@ -375,6 +392,7 @@ extension PIATunnelSharedState {
                 selectedProtocol: config.selectedProtocol,
                 openVPN: config.openVPN,
                 wireGuard: config.wireGuard,
+                geoCountryCode: config.geoCountryCode,
                 servers: serversCache.servers,
                 serversFetchedAt: serversCache.serversFetchedAt,
                 latencyByServerId: config.latencyByServerId,

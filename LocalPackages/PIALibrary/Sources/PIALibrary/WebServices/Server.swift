@@ -89,6 +89,9 @@ public final class Server {
         /// The server is using the latest OVPN version.
         public let van: Bool
 
+        /// The endpoint port, when the server list carries one (AmneziaWG only).
+        public let port: UInt16?
+
         /// The response time for this address.
         private(set) var responseTime: Int?
 
@@ -99,10 +102,11 @@ public final class Server {
         }
 
         /// :nodoc:
-        public init(ip: String, cn: String, van: Bool) {
+        public init(ip: String, cn: String, van: Bool, port: UInt16? = nil) {
             self.ip = ip
             self.cn = cn
             self.van = van
+            self.port = port
         }
 
         func updateResponseTime(_ time: Int) {
@@ -156,6 +160,9 @@ public final class Server {
     /// The best server IPs for establishing a WireGuard connection over UDP.
     public let wireGuardAddressesForUDP: [ServerAddressIP]?
 
+    /// The best server IPs for establishing an AmneziaWG connection over UDP.
+    public let amneziaAddressesForUDP: [ServerAddressIP]?
+
     /// The best server IPs for establishing an IKEv2 connection over UDP.
     public let iKEv2AddressesForUDP: [ServerAddressIP]?
 
@@ -185,6 +192,7 @@ public final class Server {
         openVPNAddressesForTCP: [ServerAddressIP]? = nil,
         openVPNAddressesForUDP: [ServerAddressIP]? = nil,
         wireGuardAddressesForUDP: [ServerAddressIP]? = nil,
+        amneziaAddressesForUDP: [ServerAddressIP]? = nil,
         iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
         pingAddress: Address?,
         responseTime: Int? = 0,
@@ -215,6 +223,7 @@ public final class Server {
         self.openVPNAddressesForTCP = openVPNAddressesForTCP
         self.openVPNAddressesForUDP = openVPNAddressesForUDP
         self.wireGuardAddressesForUDP = wireGuardAddressesForUDP
+        self.amneziaAddressesForUDP = amneziaAddressesForUDP
         self.iKEv2AddressesForUDP = iKEv2AddressesForUDP
 
         self.meta = meta

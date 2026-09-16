@@ -187,7 +187,7 @@ import Testing
             .vpnToken,
             .accountDetails,
             .deleteAccount,
-            .clientStatus,
+            .geo,
             .setEmail,
             .dedicatedIP,
             .renewDedicatedIP,
@@ -300,7 +300,7 @@ import Testing
         // api paths (no version)
         #expect(APIPath.signup.subdomain == "api")
         #expect(APIPath.setEmail.subdomain == "api")
-        #expect(APIPath.clientStatus.subdomain == "api")
+        #expect(APIPath.geo.subdomain == "api")
         #expect(APIPath.invites.subdomain == "api")
         #expect(APIPath.redeem.subdomain == "api")
         #expect(APIPath.iosPayment.subdomain == "api")

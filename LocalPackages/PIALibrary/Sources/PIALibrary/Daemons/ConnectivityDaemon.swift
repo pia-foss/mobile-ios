@@ -157,11 +157,24 @@ final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, Pre
                 } else {
                     self.accessedDatabase.plain.publicIP = ipAddress
                     log.debug("Public IP -> \(ipAddress)")
+                    self.storeGeoCountryCode(connectivity.countryCode)
                 }
 
                 Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
             }
         }
+    }
+
+    /// Stores the user's country, for the censorship pecking order. Only called while disconnected:
+    /// through the tunnel the endpoint would report the exit node's country. A missing value leaves
+    /// the last known one in place — a stale country beats none.
+    private func storeGeoCountryCode(_ countryCode: String?) {
+        guard let countryCode else {
+            log.error("Failed to resolve geo country")
+            return
+        }
+        accessedDatabase.plain.geoCountryCode = countryCode
+        log.debug("Geo country -> \(countryCode)")
     }
 
     // MARK: Notifications
