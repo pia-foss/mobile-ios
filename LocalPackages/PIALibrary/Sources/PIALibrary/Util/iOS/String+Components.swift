@@ -37,10 +37,20 @@ extension String {
     }
 
     func redactIPs() -> String {
-        replacingOccurrences(
-            of: "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b",
-            with: "REDACTED",
-            options: [.regularExpression]
-        )
+        self
+            .replacingOccurrences(of: Self.ipv6Pattern, with: "REDACTED", options: [.regularExpression])
+            .replacingOccurrences(of: Self.ipv4Pattern, with: "REDACTED", options: [.regularExpression])
     }
+
+    private static let ipv4Pattern =
+        "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b"
+
+    private static let ipv6Pattern =
+        "(?<![0-9A-Za-z.])(?<![0-9A-Fa-f]:)"
+        + "(?=[0-9A-Fa-f:.]{0,45}::|(?:[0-9A-Fa-f]{1,4}:){6})"
+        + "[0-9A-Fa-f]{0,4}(?::[0-9A-Fa-f]{0,4}){1,8}"
+        + "(?:\\.[0-9]{1,3}){0,3}"
+        + "(?:(?<=[0-9A-Fa-f])|(?<=::))"
+        + "(?:%[0-9A-Za-z._-]+)?"
+        + "(?![0-9A-Za-z]|:[0-9A-Fa-f]|\\.[0-9])"
 }
