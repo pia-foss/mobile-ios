@@ -36,9 +36,6 @@ public enum PIATunnelSignal: String, CaseIterable, Sendable {
     /// `Store`, so every mutator notifies both processes without callers having to remember to.
     case sharedStateDidChange
 
-    /// The user's pinned protocol keeps failing and the app should offer switching to Automatic (KM-18462).
-    case switchToAutomaticSuggested
-
     /// The tunnel generated a new batch of connection configurations; observers re-request it with
     /// `PIAPacketTunnelRequest.connectionConfigurations`. Unlike the other signals the state it prods
     /// for lives in the extension's memory rather than on disk, so the re-read is an IPC round-trip.

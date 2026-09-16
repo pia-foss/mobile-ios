@@ -43,14 +43,18 @@ extension VPNProvider {
         // makes that safe: yielding to a finished continuation is a no-op, whereas resuming a
         // `CheckedContinuation` twice would trap when a slow tunnel replies after the timeout.
         let results = AsyncStream<[PIAConnectionConfiguration]> { continuation in
-            profile.requestConnectionConfigurations { configurations, _ in
-                continuation.yield(configurations ?? [])
+            let timeoutTask = Task {
+                try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
+                continuation.yield([])
                 continuation.finish()
             }
 
-            Task {
-                try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
-                continuation.yield([])
+            // Installed before the request is sent, so a reply can never finish the stream while the
+            // timer is still sleeping out its full interval for nothing.
+            continuation.onTermination = { _ in timeoutTask.cancel() }
+
+            profile.requestConnectionConfigurations { configurations, _ in
+                continuation.yield(configurations ?? [])
                 continuation.finish()
             }
         }
