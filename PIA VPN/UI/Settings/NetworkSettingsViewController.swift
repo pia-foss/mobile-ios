@@ -22,10 +22,7 @@
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
-import PIAWireguard
 import Popover
-import TunnelKitCore
-import TunnelKitOpenVPN
 import UIKit
 
 private let log = PIALogger.logger(for: NetworkSettingsViewController.self)
@@ -73,8 +70,8 @@ final class NetworkSettingsViewController: PIABaseSettingsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let customDNSSettingsVC = segue.destination as? CustomDNSSettingsViewController {
             customDNSSettingsVC.delegate = self
-            customDNSSettingsVC.vpnType = pendingPreferences.vpnType == PIATunnelProfile.vpnType ? PIATunnelProfile.vpnType : PIAWGTunnelProfile.vpnType
-            let ips = DNSList.shared.valueForKey(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+            customDNSSettingsVC.vpnType = pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? KapePlatformSDKVPNType.openVPN.rawValue : KapePlatformSDKVPNType.wireGuard.rawValue
+            let ips = DNSList.shared.valueForKey(pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
             if !ips.isEmpty {
                 customDNSSettingsVC.primaryDNSValue = ips.first
                 if ips.count > 1 {
@@ -119,13 +116,13 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.text = Self.DNS
 
             var dnsValue = pendingPreferences.openVPNDnsServers
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            if pendingPreferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue {
                 dnsValue = pendingPreferences.wireGuardDnsServers
             }
             for dns in DNSList.shared.dnsList {
                 for (key, value) in dns {
                     if dnsValue == value {
-                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
+                        cell.detailTextLabel?.text = DNSList.shared.descriptionForKey(key, andCustomKey: (pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY))
                         break
                     }
                 }
@@ -181,7 +178,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             controller = OptionsViewController()
             if let dnsList = DNSList.shared.dnsList {
                 let filtered = dnsList.filter({
-                    if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                    if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
                         return $0.first?.key != DNSList.CUSTOM_WIREGUARD_DNS_KEY
                     } else {
                         return $0.first?.key != DNSList.CUSTOM_OPENVPN_DNS_KEY
@@ -196,9 +193,9 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             }
 
             if let options = controller?.options,
-                !options.contains(pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                !options.contains(pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
             {
-                if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+                if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
                     controller?.options.append(DNSList.CUSTOM_OPENVPN_DNS_KEY)
                 } else {
                     controller?.options.append(DNSList.CUSTOM_WIREGUARD_DNS_KEY)
@@ -206,7 +203,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
             } else {
                 for dns in DNSList.shared.dnsList {
                     for (key, value) in dns {
-                        if key == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                        if key == (pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                             if !value.isEmpty {
                                 controller?.navigationItem.rightBarButtonItem = UIBarButtonItem(
                                     title: L10n.Global.edit,
@@ -220,7 +217,7 @@ extension NetworkSettingsViewController: UITableViewDelegate, UITableViewDataSou
                 }
             }
 
-            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            if pendingPreferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue {
                 controller?.selectedOption = pendingPreferences.wireGuardDnsServers
             } else {
                 controller?.selectedOption = pendingPreferences.openVPNDnsServers
@@ -288,8 +285,8 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
 
         case .dns:
             if let option = option as? String {
-                cell.textLabel?.text = DNSList.shared.descriptionForKey(option, andCustomKey: pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
-                if option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                cell.textLabel?.text = DNSList.shared.descriptionForKey(option, andCustomKey: pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY)
+                if option == (pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                     var isFound = false
                     for dns in DNSList.shared.dnsList {
                         for (key, value) in dns {
@@ -307,7 +304,7 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                 }
 
                 var dnsJoinedValue = pendingPreferences.openVPNDnsServers.joined()
-                if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+                if pendingPreferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue {
                     dnsJoinedValue = pendingPreferences.wireGuardDnsServers.joined()
                 }
 
@@ -355,11 +352,14 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                     for (key, value) in dns {
                         if key == option {
                             isFound = true
-                            if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                                settingsDelegate.pendingWireguardVPNConfiguration = PIAWireguardConfiguration(customDNSServers: value, packetSize: pendingPreferences.useSmallPackets ? AppConstants.WireGuardPacketSize.defaultPacketSize : AppConstants.WireGuardPacketSize.highPacketSize)
+                            // Automatic can run either protocol, so its choice reaches both slots.
+                            switch KapePlatformSDKVPNType(rawValue: pendingPreferences.vpnType) {
+                            case .wireGuard:
                                 pendingPreferences.wireGuardDnsServers = value
-                            } else {
-                                settingsDelegate.pendingOpenVPNConfiguration.dnsServers = value
+                            case .openVPN:
+                                pendingPreferences.openVPNDnsServers = value
+                            default:
+                                pendingPreferences.wireGuardDnsServers = value
                                 pendingPreferences.openVPNDnsServers = value
                             }
                             break
@@ -367,7 +367,7 @@ extension NetworkSettingsViewController: OptionsViewControllerDelegate {
                     }
                 }
 
-                if !isFound && option == (pendingPreferences.vpnType == PIATunnelProfile.vpnType ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
+                if !isFound && option == (pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue ? DNSList.CUSTOM_OPENVPN_DNS_KEY : DNSList.CUSTOM_WIREGUARD_DNS_KEY) {
                     let alertController = Macros.alert(
                         L10n.Settings.Dns.Custom.dns,
                         L10n.Settings.Dns.Alert.Create.message)
