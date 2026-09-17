@@ -108,23 +108,23 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         guard let profile = accessedDatabase.transient.activeVPNProfile else {
             return
         }
+
         if let session = connection as? NETunnelProviderSession {
             guard profile.isTunnel else {
                 return
             }
-            // Verify the connection belongs to the active profile's loaded manager.
+            // Verify the connection belongs to our own Network Extension configuration.
             // Without this, NEVPNStatusDidChange events from other tunnel providers
-            // (e.g. a previously installed OpenVPN profile being cleaned up on startup)
-            // pass the isTunnel check and incorrectly reset vpnStatus to .disconnected
-            // while WireGuard is still connected.
+            // (a legacy configuration left by an upgrade, still being cleaned up) pass
+            // the isTunnel check and incorrectly reset vpnStatus to .disconnected while
+            // our tunnel is still connected.
             //
-            // When tryUpdateStatus runs (via DispatchQueue.main.async), the active
-            // profile's loadAllFromPreferences callback has always already completed
-            // and set profile.native, so this guard is safe to make strict.
-            guard
-                let activeManager = profile.native as? NETunnelProviderManager,
-                session.manager === activeManager
-            else {
+            // Matched on the provider bundle identifier rather than on identity with
+            // `profile.native`: every `find()` rebinds `native` to a fresh manager
+            // instance, so an identity check drops status updates whenever an unrelated
+            // lookup lands in between — which the dashboard's data-usage polling does
+            // continuously, leaving the app stranded on a stale status.
+            guard let neProfile = profile as? NetworkExtensionProfile, neProfile.owns(session.manager) else {
                 return
             }
         } else {

@@ -37,6 +37,10 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         return true
     }
 
+    public var providerBundleIdentifier: String? {
+        return bundleIdentifier
+    }
+
     public var native: Any?
 
     public var connectionDate: Date? {
@@ -357,6 +361,15 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
+    /// Resolves the tunnel manager and binds it as ``native``.
+    ///
+    /// Only for paths that take ownership of the tunnel (connect, disconnect, save, prepare,
+    /// remove, disable). ``native`` is shared state — `DefaultVPNProvider` reconciles status
+    /// against it and `VPNDaemon` reads it while folding the extension's write-back into
+    /// `transient.vpnStatus` — and every call rebinds it to a fresh manager instance. A read-only
+    /// path that binds here keeps moving that state underneath the connection it is reporting on;
+    /// the dashboard polls data usage on every status change, which is enough to strand the app on
+    /// a stale status. Such callers use the static lookup below instead.
     func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {
         KapePlatformSDKTunnelProfile.find(withBundleIdentifier: bundleIdentifier) { (vpn, error) in
             self.native = vpn
@@ -364,7 +377,11 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    private static func find(withBundleIdentifier identifier: String?, completionHandler: LibraryCallback<NETunnelProviderManager>?) {
+    /// Pure lookup: resolves the tunnel manager without touching ``native``.
+    ///
+    /// Internal rather than private so the read-only IPC paths in `+IPC.swift` can use it in place
+    /// of ``find``, which would rebind ``native``.
+    static func find(withBundleIdentifier identifier: String?, completionHandler: LibraryCallback<NETunnelProviderManager>?) {
         NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
             guard let managers = managers else {
                 completionHandler?(nil, error)

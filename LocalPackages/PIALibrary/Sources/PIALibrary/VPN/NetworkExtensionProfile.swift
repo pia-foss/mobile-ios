@@ -35,6 +35,12 @@ public protocol NetworkExtensionProfile: VPNProfile {
      - Returns: A native `NEVPNProtocol` object for use with NetworkExtension.
      */
     func generatedProtocol(withConfiguration configuration: VPNConfiguration) throws -> NEVPNProtocol
+
+    /// The bundle identifier of the Network Extension this profile installs and drives.
+    ///
+    /// Identifies the profile's own NE configuration independently of any particular
+    /// `NETunnelProviderManager` object, which `loadAllFromPreferences` vends anew on every call.
+    var providerBundleIdentifier: String? { get }
 }
 
 extension NetworkExtensionProfile {
@@ -42,6 +48,29 @@ extension NetworkExtensionProfile {
     /// :nodoc:
     private var neProfile: NEVPNManager? {
         return native as? NEVPNManager
+    }
+
+    /**
+     Whether `manager` drives this profile's own Network Extension configuration.
+
+     `.NEVPNStatusDidChange` is delivered for every tunnel provider the process has loaded — a
+     stale legacy configuration left behind by an upgrade keeps posting while it is torn down — so
+     status handling has to tell our own events apart from theirs.
+
+     Matched on the provider bundle identifier rather than on identity with ``native``: `find()`
+     rebinds ``native`` to a fresh manager instance on every lookup, so an identity anchor is only
+     valid until the next one. A lookup from an unrelated path (the dashboard polls data usage
+     continuously) would otherwise move it mid-connection and every subsequent status change would
+     be silently dropped, stranding the app on a stale status.
+     */
+    func owns(_ manager: NEVPNManager) -> Bool {
+        guard let expected = providerBundleIdentifier,
+            let tunnelProtocol = manager.protocolConfiguration as? NETunnelProviderProtocol,
+            let actual = tunnelProtocol.providerBundleIdentifier
+        else {
+            return false
+        }
+        return actual == expected
     }
 
     /// :nodoc:
