@@ -107,7 +107,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     }
 
     func updateSocketType(socketType: String?) {
-        pendingPreferences.openVPNSocketType = socketType
+        pendingPreferences.openVPNSocketType = AppConstants.OpenVPNSocketType(rawValue: socketType ?? "")?.rawValue
         updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
     }
 
