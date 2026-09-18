@@ -9,8 +9,8 @@
 import Foundation
 import PIALibrary
 
-protocol DipServerProviderType {
-    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?)
+protocol DipServerProviderType: Sendable {
+    func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>)
     func removeDIPToken(_ dipToken: String)
     func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?)
     func getDIPTokens() -> [String]

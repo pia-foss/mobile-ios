@@ -16,28 +16,23 @@ final class DedicatedIPProvider: DedicatedIPProviderType {
         self.serverProvider = serverProvider
     }
 
-    func activateDIPToken(_ token: String, completion: @escaping (Result<Void, DedicatedIPError>) -> Void) {
+    func activateDIPToken(_ token: String, completion: @escaping (Result<ServerType, DedicatedIPError>) -> Void) {
         guard getDIPTokens().isEmpty else {
             completion(.failure(.alreadyHasOne))
             return
         }
-        serverProvider.activateDIPToken(token) { server, error in
-            if let error = error {
-                completion(.failure(DedicatedIPError.generic(error)))
-                return
-            }
+        serverProvider.activateDIPToken(token) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(.generic(error)))
 
-            guard let server = server, let status = server?.dipStatus else {
-                completion(.failure(DedicatedIPError.generic(nil)))
-                return
-            }
-
-            guard status == .active else {
+            case .success(let server) where server.dipStatus != .active:
+                let status = server.dipStatus ?? .error
                 completion(.failure(status.toDedicatedIPError()))
-                return
-            }
 
-            completion(.success(()))
+            case .success(let server):
+                completion(.success(server))
+            }
         }
     }
 

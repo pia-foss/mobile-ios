@@ -88,10 +88,6 @@ final class EphemeralAccountProvider: AccountProvider, ProvidersAccess, InAppAcc
         log.error("Not implemented")
     }
 
-    func activateDIPTokens(_ dipToken: String, _ callback: LibraryCallback<DedicatedIPStatus>?) {
-        log.error("Not implemented")
-    }
-
     func cleanDatabase() {
         log.error("Not implemented")
     }

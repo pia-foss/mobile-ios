@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import PIALibrary
 
-protocol DedicatedIPProviderType {
-    func activateDIPToken(_ token: String, completion: @escaping (Result<Void, DedicatedIPError>) -> Void)
+protocol DedicatedIPProviderType: Sendable {
+    func activateDIPToken(_ token: String, completion: @escaping (Result<ServerType, DedicatedIPError>) -> Void)
     func removeDIPToken(_ token: String)
     func renewDIPToken(_ token: String)
     func getDIPTokens() -> [String]

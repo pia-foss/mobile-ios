@@ -11,17 +11,23 @@ import PIALibrary
 
 @testable import PIA_VPN_tvOS
 
-class DipServerProviderMock: DipServerProviderType {
+final class DipServerProviderMock: DipServerProviderType {
     private let server: Server?
-    private let error: Error?
+    private let error: ClientError?
 
-    init(server: Server?, error: Error?) {
+    init(server: Server?, error: ClientError?) {
         self.server = server
         self.error = error
     }
 
-    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
-        callback?(server, error)
+    func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>) {
+        if let error {
+            callback(.failure(error))
+        } else if let server {
+            callback(.success(server))
+        } else {
+            precondition(false)
+        }
     }
 
     func removeDIPToken(_ dipToken: String) {}

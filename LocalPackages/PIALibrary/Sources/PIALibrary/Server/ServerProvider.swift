@@ -96,22 +96,13 @@ public protocol ServerProvider: AnyObject {
     func resetCurrentServers()
 
     /**
-     Activates the dedicated IP tokens.
-
-     - Precondition: `isLoggedIn` is `true`.
-     - Parameter tokens: The `String` array of DIP token to activate.
-     - Parameter callback: Returns the status of the DIP region `Server` array.
-     */
-    func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?)
-
-    /**
      Activates the dedicated IP token.
 
      - Precondition: `isLoggedIn` is `true`.
      - Parameter tokens: The `String`  DIP token to activate.
      - Parameter callback: Returns the status of the DIP region `Server`.
      */
-    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?)
+    func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>)
 
     /**
      Removes the dedicated IP region.

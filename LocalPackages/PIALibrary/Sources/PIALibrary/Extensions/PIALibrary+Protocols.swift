@@ -27,7 +27,7 @@ public protocol DedicatedIPStatusType {
     func getStatus() -> String
 }
 
-public protocol ServerProviderType {
+public protocol ServerProviderType: Sendable {
     var historicalServersType: [ServerType] { get }
     var targetServerType: ServerType { get throws }
     var currentServersType: [ServerType] { get }
