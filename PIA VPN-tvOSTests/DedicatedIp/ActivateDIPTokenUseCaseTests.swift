@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PIALibrary
 
 @testable import PIA_VPN_tvOS
 
@@ -18,7 +19,7 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
     var fixture: Fixture!
     var sut: ActivateDIPTokenUseCase!
 
-    func instantiateSut(result: Result<Void, DedicatedIPError>) {
+    func instantiateSut(result: Result<ServerType, DedicatedIPError>) {
         fixture.dipServerProviderMock = DedicatedIPProviderMock(result: result)
         sut = ActivateDIPTokenUseCase(dipServerProvider: fixture.dipServerProviderMock)
     }
@@ -34,7 +35,7 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
 
     func test_activatesDIPToken_complets_successfully_when_DedicatedIPProvider_complets_with_success() async {
         // GIVEN
-        instantiateSut(result: .success(()))
+        instantiateSut(result: .success(ServerTypeStub.makeValidServerTypeStub()))
 
         // WHEN
         if case let .failure(error) = await sut(token: "token") {

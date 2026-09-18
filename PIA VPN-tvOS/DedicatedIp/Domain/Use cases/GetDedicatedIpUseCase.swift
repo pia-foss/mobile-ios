@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-protocol GetDedicatedIpUseCaseType {
+protocol GetDedicatedIpUseCaseType: Sendable {
     func callAsFunction() -> ServerType?
     func isDedicatedIp(_ server: ServerType) -> Bool
 }

@@ -271,10 +271,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         }
     }
 
-    public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
+    public func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>) {
         guard Client.providers.accountProvider.isLoggedIn else {
             log.error("Client not logged in when activating DIP token.")
-            callback?(nil, ClientError.unauthorized)
+            callback(.failure(.unauthorized))
             return
         }
 
@@ -283,77 +283,38 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             switch result {
             case .success(let servers):
                 DispatchQueue.main.async {
-                    self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers), callback)
+                    let result = self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers))
+                    callback(result)
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    callback?(nil, ClientErrorMapper.map(networkRequestError: error))
+                    callback(.failure(ClientErrorMapper.map(networkRequestError: error)))
                 }
             }
         }
     }
 
-    private func handleDIPServerResponse(_ response: Result<[Server], ClientError>, _ callback: LibraryCallback<Server>?) {
+    private func handleDIPServerResponse(_ response: Result<[Server], ClientError>) -> Result<Server, ClientError> {
         guard case .success(let servers) = response else {
             guard case .failure(let error) = response else {
-                callback?(nil, ClientError.unexpectedReply)
-                return
+                return .failure(ClientError.unexpectedReply)
             }
-
-            callback?(nil, error)
-            return
+            return .failure(error)
         }
 
         guard let first = servers.first, let status = first.dipStatus else {
-            callback?(nil, ClientError.unexpectedReply)
-            return
+            log.warning("No servers returned or no DIP status")
+            return .failure(.unexpectedReply)
         }
 
+        log.debug("Got DIP server id \(first.identifier) with status: \(status)")
+
         if !self.currentServers.contains(where: { $0.dipToken == first.dipToken }) && status == .active {
+            log.debug("Adding DIP server to current servers")
             self.currentServers.append(contentsOf: servers)
         }
 
-        callback?(first, nil)
-    }
-
-    public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        guard Client.providers.accountProvider.isLoggedIn else {
-            log.error("Client not logged in when activating DIP tokens.")
-            callback?(nil, ClientError.unauthorized)
-            return
-        }
-
-        getDedicatedIPs(dipTokens: tokens) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let servers):
-                DispatchQueue.main.async {
-                    self.handleDIPServersResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers), callback)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    callback?([], ClientErrorMapper.map(networkRequestError: error))
-                }
-            }
-        }
-    }
-
-    private func handleDIPServersResponse(_ response: Result<[Server], ClientError>, _ callback: LibraryCallback<[Server]>?) {
-        guard case .success(let servers) = response else {
-            guard case .failure(let error) = response else {
-                callback?(nil, ClientError.unexpectedReply)
-                return
-            }
-
-            callback?(nil, error)
-            return
-        }
-
-        for server in servers where !self.currentServers.contains(where: { $0.dipToken == server.dipToken }) {
-            self.currentServers.append(server)
-        }
-
-        callback?(servers, nil)
+        return .success(first)
     }
 
     public func removeDIPToken(_ dipToken: String) {
