@@ -282,8 +282,8 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             guard let self else { return }
             switch result {
             case .success(let servers):
-                let result = self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers))
                 DispatchQueue.main.async {
+                    let result = self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers))
                     callback(result)
                 }
             case .failure(let error):

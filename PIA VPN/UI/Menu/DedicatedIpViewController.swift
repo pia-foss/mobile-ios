@@ -68,7 +68,6 @@ final class DedicatedIpViewController: AutolayoutViewController {
         if UserInterface.isIpad {
             nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
-        nc.addObserver(self, selector: #selector(reloadTableView), name: .DedicatedIpReload, object: nil)
         nc.addObserver(self, selector: #selector(showLoadingAnimation), name: .DedicatedIpShowAnimation, object: nil)
         nc.addObserver(self, selector: #selector(hideLoadingAnimation), name: .DedicatedIpHideAnimation, object: nil)
         nc.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -125,8 +124,14 @@ final class DedicatedIpViewController: AutolayoutViewController {
     }
 
     @MainActor
-    @objc private func reloadTableView() {
-        data = if let server = getDipServer() as? Server { [server] } else { [] }
+    private func reloadTableView(server: ServerType? = nil) {
+        let server = server ?? getDipServer()
+        if let server = server as? Server {
+            data = [server]
+        } else {
+            log.error("Returned server was not of type `Server`, instead: \(type(of: server))")
+            data = []
+        }
         tableView.reloadData()
     }
 
@@ -330,11 +335,14 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             guard let self else { return }
 
             switch await self.activateDipToken(token: token) {
-            case .success:
+            case .success(let server):
                 Macros.displaySuccessImageNote(
                     withImage: Asset.iconWarning.image,
                     message: L10n.Dedicated.Ip.Message.Valid.token,
                 )
+                await MainActor.run {
+                    self.reloadTableView(server: server)
+                }
 
             case .failure(.expired):
                 log.error("Activate DIP token failed with expired token error.")
@@ -362,7 +370,6 @@ extension DedicatedIpViewController: DedicatedIpEmptyHeaderViewCellDelegate {
             }
 
             Macros.postNotification(.DedicatedIpHideAnimation)
-            Macros.postNotification(.DedicatedIpReload)
             Macros.postNotification(.PIAThemeDidChange)
         }
     }
