@@ -48,6 +48,10 @@ protocol PlainStore: AnyObject {
 
     var cachedServers: [Server] { get set }
 
+    /// Reads, edits and writes ``cachedServers`` back atomically, so a concurrent writer cannot
+    /// clobber the edit. `body` returns `false` to skip the write.
+    @discardableResult func mutateCachedServers(_ body: (inout [Server]) -> Bool) -> Bool
+
     var preferredServer: Server? { get set }
 
     var lastConnectedRegion: Server? { get set }

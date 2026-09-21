@@ -141,7 +141,9 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     private var historicalServersCopy: [Server]?
 
-    private var cachedServersCopy: [Server]?
+    /// The cached server list is read and written from several threads at once, so it is the one
+    /// piece of this store that is synchronized. See ``ServerStore``.
+    private let serverStore: ServerStore
 
     private var visibleTilesCopy: [AvailableTiles]?
 
@@ -154,8 +156,15 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     init(group: String? = nil) {
         let backend = group.flatMap(UserDefaults.init(suiteName:)) ?? UserDefaults.standard
-        self.backend = UserDefaultsKeyed(defaults: backend)
+        let keyedBackend = UserDefaultsKeyed<Entry>(defaults: backend)
+        self.backend = keyedBackend
         self.group = group
+        // Built from the backend rather than `self`, so it can be a `let`: a `lazy var` would let
+        // two concurrent first reads race to create two stores, which defeats the point.
+        self.serverStore = ServerStore(
+            load: { Self.readServers(from: keyedBackend, key: .cachedServers) },
+            save: { servers in keyedBackend.set(try? JSONEncoder().encode(servers), forKey: .cachedServers) }
+        )
         loadComplexMaps()
     }
 
@@ -353,16 +362,23 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var cachedServers: [Server] {
         get {
-            return readServers(key: .cachedServers, copy: cachedServersCopy)
+            return serverStore.read()
         }
         set {
-            cachedServersCopy = newValue
-            backend.set(try? JSONEncoder().encode(newValue), forKey: .cachedServers)
+            serverStore.write(newValue)
         }
+    }
+
+    @discardableResult func mutateCachedServers(_ body: (inout [Server]) -> Bool) -> Bool {
+        return serverStore.mutate(body)
     }
 
     private func readServers(key: Entry, copy: [Server]?) -> [Server] {
         if let copy { return copy }
+        return Self.readServers(from: backend, key: key)
+    }
+
+    private static func readServers(from backend: UserDefaultsKeyed<Entry>, key: Entry) -> [Server] {
         let decoder = JSONDecoder()
         if let data = backend.data(forKey: key) {
             do {
@@ -893,9 +909,11 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.removeObject(forKey: entry)
         }
         backend.synchronize()
+        serverStore.invalidate()
     }
 
     func clear() {
+        serverStore.invalidate()
         if let group = group {
             backend.removePersistentDomain(forName: group)
         } else {

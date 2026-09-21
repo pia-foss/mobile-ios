@@ -30,7 +30,6 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     private let renewDedicatedIP: RenewDedicatedIPUseCaseType
     private let getDedicatedIPs: GetDedicatedIPsUseCaseType
     private let dedicatedIPServerMapper: DedicatedIPServerMapperType
-    private let bundledServersReloadLock = NSRecursiveLock()
 
     init(webServices: WebServices? = nil, renewDedicatedIP: RenewDedicatedIPUseCaseType, getDedicatedIPs: GetDedicatedIPsUseCaseType, dedicatedIPServerMapper: DedicatedIPServerMapperType) {
         if let webServices = webServices {
@@ -51,15 +50,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     }
 
     public var historicalServers: [Server] {
-        get {
-            if let dipTokens = dipTokens {
-                return accessedDatabase.plain.historicalServers.filter({ $0.dipToken == nil || dipTokens.contains($0.dipToken ?? "") })
-            }
-            return accessedDatabase.plain.historicalServers
+        if let dipTokens = dipTokens {
+            return accessedDatabase.plain.historicalServers.filter({ $0.dipToken == nil || dipTokens.contains($0.dipToken ?? "") })
         }
-        set {
-            accessedDatabase.plain.cachedServers = newValue
-        }
+        return accessedDatabase.plain.historicalServers
     }
 
     public var currentServers: [Server] {
@@ -67,16 +61,42 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             return accessedDatabase.plain.cachedServers
         }
         set {
-            var servers = newValue
-            servers.insert(contentsOf: accessedConfiguration.customServers, at: 0)
-            accessedDatabase.plain.cachedServers = servers
-
-            Macros.postNotification(
-                .PIAServerDidUpdateCurrentServers,
-                [
-                    .servers: newValue
-                ])
+            updateCurrentServers { servers in
+                servers = newValue
+                return true
+            }
         }
+    }
+
+    /// The one way this provider writes the server list.
+    ///
+    /// `body` runs under the store's lock, so a check and the write it guards stay atomic against a
+    /// refresh landing on another thread — that interleaving used to drop a just-activated
+    /// dedicated IP. It must not touch the provider or the store; the notification is posted
+    /// afterwards, outside the lock, so observers can read the list back.
+    ///
+    /// - Returns: whether `body` asked for the write.
+    @discardableResult private func updateCurrentServers(_ body: (inout [Server]) -> Bool) -> Bool {
+        var updatedServers: [Server]?
+        accessedDatabase.plain.mutateCachedServers { servers in
+            guard body(&servers) else {
+                return false
+            }
+
+            updatedServers = servers
+            return true
+        }
+
+        guard let updatedServers else {
+            return false
+        }
+
+        Macros.postNotification(
+            .PIAServerDidUpdateCurrentServers,
+            [
+                .servers: updatedServers
+            ])
+        return true
     }
 
     public var bestServer: Server? {
@@ -141,8 +161,8 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     }
 
     private func reloadBundledServersIfEmpty() {
-        bundledServersReloadLock.lock()
-        defer { bundledServersReloadLock.unlock() }
+        // `loadLocalJSON` re-checks emptiness under the store's lock, so two concurrent reloads
+        // cannot both load the bundle.
         guard currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON else {
             return
         }
@@ -160,9 +180,16 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         if let configuration = bundle.configuration {
             accessedDatabase.transient.serversConfiguration = configuration
         }
-        if currentServers.isEmpty {
-            currentServers = bundle.servers
+        let didLoad = updateCurrentServers { servers in
+            guard servers.isEmpty else {
+                return false
+            }
 
+            servers = bundle.servers
+            return true
+        }
+
+        if didLoad {
             Task {
                 await ServersPinger.shared.ping(withDestinations: currentServers)
             }
@@ -176,8 +203,13 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         if let configuration = bundle.configuration {
             accessedDatabase.transient.serversConfiguration = configuration
         }
-        if currentServers.isEmpty {
-            currentServers = bundle.servers
+        updateCurrentServers { servers in
+            guard servers.isEmpty else {
+                return false
+            }
+
+            servers = bundle.servers
+            return true
         }
     }
 
@@ -269,12 +301,15 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                 // unlock. The downloaded bundle never carries DIP servers, so overwriting with it
                 // would drop them from the persisted cache and, with them, the user's selection.
                 // `removeDIPToken` already prunes the ones the user gave up.
-                let cachedDedicatedIPServers = self.currentServers.filter { $0.dipToken != nil }
-                if !cachedDedicatedIPServers.isEmpty {
-                    log.debug("No DIP tokens readable; keeping \(cachedDedicatedIPServers.count) cached DIP server(s)")
-                }
+                self.updateCurrentServers { servers in
+                    let cachedDedicatedIPServers = servers.filter { $0.dipToken != nil }
+                    if !cachedDedicatedIPServers.isEmpty {
+                        log.debug("No DIP tokens readable; keeping \(cachedDedicatedIPServers.count) cached DIP server(s)")
+                    }
 
-                self.currentServers = bundle.servers + cachedDedicatedIPServers
+                    servers = bundle.servers + cachedDedicatedIPServers
+                    return true
+                }
                 PIATunnelSharedState.updateServers(self.currentServers)
                 callback?(self.currentServers, error)
             }
@@ -319,9 +354,18 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
 
         log.debug("Got DIP server id \(first.identifier) with status: \(status)")
 
-        if !self.currentServers.contains(where: { $0.dipToken == first.dipToken }) && status == .active {
+        guard status == .active else {
+            return .success(first)
+        }
+
+        updateCurrentServers { currentServers in
+            guard !currentServers.contains(where: { $0.dipToken == first.dipToken }) else {
+                return false
+            }
+
             log.debug("Adding DIP server to current servers")
-            self.currentServers.append(contentsOf: servers)
+            currentServers.append(contentsOf: servers)
+            return true
         }
 
         return .success(first)
@@ -333,7 +377,12 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             return
         }
         accessedDatabase.secure.remove(dipToken)
-        currentServers = currentServers.filter { $0.dipToken != dipToken }
+        // Writes unconditionally: callers rely on the update notification to refresh, even when
+        // the token was not in the list.
+        updateCurrentServers { servers in
+            servers = servers.filter { $0.dipToken != dipToken }
+            return true
+        }
     }
 
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {
