@@ -37,7 +37,15 @@ extension Server: Codable {
         case isAutomatic = "auto_region"
         case pingAddress = "ping"
         case servers
+
+        // Dedicated IP. Only `dipToken` comes from the server list API; the rest are filled in by
+        // `DedicatedIPServerMapper` and must survive the round trip through `cachedServers`.
+        // `dipUsername` in particular is randomly generated and keys the password in the keychain,
+        // so losing it costs the user their DIP credentials until the next successful refresh.
         case dipToken
+        case dipUsername
+        case dipExpire
+        case dipStatus
     }
 
     private struct ServerAddresses: Codable {
@@ -62,6 +70,9 @@ extension Server: Codable {
         let longitude = try? container.decode(String.self, forKey: .longitude)
         let regionIdentifier = try container.decode(String.self, forKey: .regionIdentifier)
         let dipToken = try? container.decode(String.self, forKey: .dipToken)
+        let dipUsername = try? container.decode(String.self, forKey: .dipUsername)
+        let dipStatus = try? container.decode(DedicatedIPStatus.self, forKey: .dipStatus)
+        let dipExpire = (try? container.decode(Double.self, forKey: .dipExpire)).map(Date.init(timeIntervalSince1970:))
         let pingAddress = try? container.decode(Address.self, forKey: .pingAddress)
         let isAutomatic = (try? container.decode(Bool.self, forKey: .isAutomatic)) ?? false
 
@@ -97,7 +108,10 @@ extension Server: Codable {
             latitude: latitude,
             longitude: longitude,
             meta: meta,
+            dipExpire: dipExpire,
             dipToken: dipToken,
+            dipStatus: dipStatus,
+            dipUsername: dipUsername,
             regionIdentifier: regionIdentifier,
             isAutomatic: isAutomatic
         )
@@ -118,6 +132,9 @@ extension Server: Codable {
         try container.encode(isAutomatic, forKey: .isAutomatic)
         try container.encodeIfPresent(pingAddress?.description, forKey: .pingAddress)
         try container.encodeIfPresent(dipToken, forKey: .dipToken)
+        try container.encodeIfPresent(dipUsername, forKey: .dipUsername)
+        try container.encodeIfPresent(dipStatus, forKey: .dipStatus)
+        try container.encodeIfPresent(dipExpire?.timeIntervalSince1970, forKey: .dipExpire)
         var metaArray: [ServerAddressIP]?
         if let meta {
             metaArray = [meta]

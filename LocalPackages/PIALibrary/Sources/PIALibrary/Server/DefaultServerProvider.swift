@@ -264,7 +264,17 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                     callback?(self.currentServers, error)
                 }*/
             } else {
-                self.currentServers = bundle.servers
+                // An empty token list can also mean the keychain was unreadable — it is
+                // `kSecAttrAccessibleAfterFirstUnlock`, and a refresh can run before the first
+                // unlock. The downloaded bundle never carries DIP servers, so overwriting with it
+                // would drop them from the persisted cache and, with them, the user's selection.
+                // `removeDIPToken` already prunes the ones the user gave up.
+                let cachedDedicatedIPServers = self.currentServers.filter { $0.dipToken != nil }
+                if !cachedDedicatedIPServers.isEmpty {
+                    log.debug("No DIP tokens readable; keeping \(cachedDedicatedIPServers.count) cached DIP server(s)")
+                }
+
+                self.currentServers = bundle.servers + cachedDedicatedIPServers
                 PIATunnelSharedState.updateServers(self.currentServers)
                 callback?(self.currentServers, error)
             }

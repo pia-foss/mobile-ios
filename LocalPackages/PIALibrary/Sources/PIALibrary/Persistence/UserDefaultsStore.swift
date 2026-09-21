@@ -388,6 +388,15 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             return cachedServers.first { $0.identifier == identifier && $0.dipToken == dipToken }
         }
         set {
+            // The getter resolves through `cachedServers` and reads nil while the selected server
+            // is missing from it — a DIP region awaiting its refresh, say. Writing that nil back
+            // would erase the choice for good, and preferences are snapshot and committed
+            // wholesale on every launch, so keep the selection until it resolves again.
+            if newValue == nil, hasUnresolvedSelection(forKey: .preferredServer, dipToken: preferredServerDIPToken) {
+                log.warning("Not clearing the preferred server: the current selection is not in the server list yet")
+                return
+            }
+
             backend.set(newValue?.identifier, forKey: .preferredServer)
             backend.set(newValue?.dipToken, forKey: .preferredServerDIPToken)
             var lastServers = historicalServers
@@ -413,8 +422,23 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             return cachedServers.first { $0.identifier == identifier }
         }
         set {
+            // Same lossy resolution as `preferredServer` above.
+            if newValue == nil, hasUnresolvedSelection(forKey: .lastConnectedRegion, dipToken: nil) {
+                log.warning("Not clearing the last connected region: the current selection is not in the server list yet")
+                return
+            }
+
             backend.set(newValue?.identifier, forKey: .lastConnectedRegion)
         }
+    }
+
+    /// Whether a server is stored under `key` that the current server list cannot resolve, which
+    /// makes the matching getter's nil a lookup miss rather than "nothing is selected".
+    private func hasUnresolvedSelection(forKey key: Entry, dipToken: String?) -> Bool {
+        guard let identifier = backend.string(forKey: key) else {
+            return false
+        }
+        return !cachedServers.contains { $0.identifier == identifier && $0.dipToken == dipToken }
     }
 
     var preferredServerDIPToken: String? {
