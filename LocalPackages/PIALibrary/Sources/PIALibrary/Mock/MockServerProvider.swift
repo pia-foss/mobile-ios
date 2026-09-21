@@ -133,11 +133,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
     }
 
     /// :nodoc:
-    public func load(fromJSON jsonData: Data) {
-        return delegate.load(fromJSON: jsonData)
-    }
-
-    /// :nodoc:
     public func loadLocalJSON(fromJSON jsonData: Data) {
         return delegate.loadLocalJSON(fromJSON: jsonData)
     }
