@@ -145,7 +145,8 @@ final class Bootstrapper {
         #if os(iOS)
             if shouldUsePlatformSDKTunnel {
                 Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
-                cleanupLegacyVPNProfilesIfNeeded()
+                // Before `Client.bootstrap()`, which overwrites the status this reads.
+                capturePlatformSDKMigrationIntentIfNeeded()
             } else {
                 Client.configuration.addVPNProfile(IKEv2Profile())
                 Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
@@ -237,6 +238,15 @@ final class Bootstrapper {
 
         Client.bootstrap()
 
+        #if os(iOS)
+            // After `Client.bootstrap()`: the migration reconnects, and `prepare()` has to have
+            // resolved the active profile before `connect` can use it.
+            if shouldUsePlatformSDKTunnel {
+                cleanupLegacyVPNProfilesIfNeeded()
+                reconnectAfterMigrationIfNeeded()
+            }
+        #endif
+
         // Configurations
 
         RatingManager.shared.loadInAppRatingConfig()
@@ -306,6 +316,9 @@ final class Bootstrapper {
         switch vpnStatus {
         case .connected:
             AppPreferences.shared.incrementSuccessConnections()
+            #if os(iOS)
+                clearPendingPlatformSDKReconnect()
+            #endif
         case .disconnected:
             AppPreferences.shared.incrementSuccessDisconnections()
         default:

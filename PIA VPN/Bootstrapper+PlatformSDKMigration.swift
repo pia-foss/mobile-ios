@@ -31,6 +31,9 @@ extension Bootstrapper {
     // MARK: - Constants
 
     private static let liveVPNStatuses: [NEVPNStatus] = [.connected, .connecting, .reasserting]
+    /// Also counts a tunnel on its way down: an app upgrade tears the extension down, so a
+    /// connection the user still wants can read `.disconnecting` for the length of this launch.
+    private static let liveOrClosingVPNStatuses: [NEVPNStatus] = liveVPNStatuses + [.disconnecting]
     private static let vpnStatusTimeout: DispatchTimeInterval = .seconds(3)
 
     // MARK: - Consent
@@ -110,12 +113,18 @@ extension Bootstrapper {
             editable.commit()
         }
 
-        Self.loadIsVPNConnected { wasConnected in
+        Self.loadShouldReconnectAfterCleanup { wasConnected in
             NETunnelProviderManager.loadAllFromPreferences { managers, _ in
                 // Retried on the next launch when the configurations cannot be read.
                 guard let managers else { return }
 
                 log.info("cleanupLegacyVPNProfiles: removing \(managers.count) VPN configuration(s), connected: \(wasConnected)")
+
+                // Recorded before anything is torn down, so a crash or a kill mid-migration still
+                // leaves the next launch with the reconnect to finish. Only ever adds to the intent
+                // captured before bootstrap, which saw a persisted status this read no longer can.
+                AppPreferences.shared.pendingPlatformSDKReconnect =
+                    AppPreferences.shared.pendingPlatformSDKReconnect || wasConnected
 
                 let group = DispatchGroup()
                 for manager in managers {
@@ -137,22 +146,77 @@ extension Bootstrapper {
                             (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
                         }
 
-                        AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
-                    }
+                        DispatchQueue.main.async {
+                            AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
 
-                    // Deleting a live tunnel's configuration disconnects the user.
-                    guard wasConnected, Client.providers.accountProvider.isLoggedIn else {
-                        return
-                    }
-
-                    Client.providers.vpnProvider.connect { error in
-                        if let error {
-                            log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
+                            // Deleting a live tunnel's configuration disconnects the user.
+                            self.reconnectAfterMigrationIfNeeded()
                         }
                     }
                 }
             }
         }
+    }
+
+    // MARK: - Finishing the migration
+
+    /// Records the reconnect the migration owes the user, read from the status persisted across
+    /// launches. Must run before `Client.bootstrap()`: its status reconciliation writes that value
+    /// back as `.disconnected` when the PlatformSDK configuration does not exist yet.
+    func capturePlatformSDKMigrationIntentIfNeeded() {
+        guard
+            PlatformSDKMigrationDecision.shouldOweReconnectBeforeBootstrap(
+                usesPlatformSDKTunnel: shouldUsePlatformSDKTunnel,
+                didCleanup: AppPreferences.shared.didCleanupLegacyVPNProfiles,
+                hasStoredValue: AppPreferences.shared.hasPendingPlatformSDKReconnectValue,
+                lastKnownStatus: Client.daemons.lastKnownVPNStatus
+            )
+        else {
+            return
+        }
+
+        log.info("capturePlatformSDKMigrationIntent: the last known status was connected, owing a reconnect")
+        AppPreferences.shared.pendingPlatformSDKReconnect = true
+    }
+
+    /// Finishes a migration that owes the user a reconnect. Idempotent and safe to call on every
+    /// launch: the intent is only cleared once the VPN reports connected.
+    func reconnectAfterMigrationIfNeeded() {
+        guard shouldUsePlatformSDKTunnel,
+            // Reconnecting before the cleanup has finished would only install a configuration for
+            // its removal loop to delete again.
+            AppPreferences.shared.didCleanupLegacyVPNProfiles,
+            AppPreferences.shared.pendingPlatformSDKReconnect,
+            Client.providers.accountProvider.isLoggedIn,
+            Client.daemons.vpnStatus != .connected
+        else {
+            return
+        }
+
+        // The cleanup removed every configuration this app owns, so install before connecting:
+        // without a saved configuration there are no on-demand rules to bring the tunnel back.
+        Client.providers.vpnProvider.install(force: true) { error in
+            if let error {
+                log.error("reconnectAfterMigration: could not install the VPN configuration (\(error.localizedDescription))")
+                return
+            }
+
+            Client.providers.vpnProvider.connect { error in
+                if let error {
+                    log.error("reconnectAfterMigration: could not reconnect (\(error.localizedDescription))")
+                }
+            }
+        }
+    }
+
+    /// Clears the intent once the reconnect has visibly succeeded. Anything short of that leaves it
+    /// set, so the next launch tries again.
+    func clearPendingPlatformSDKReconnect() {
+        guard AppPreferences.shared.pendingPlatformSDKReconnect else {
+            return
+        }
+
+        AppPreferences.shared.pendingPlatformSDKReconnect = false
     }
 
     // MARK: - Rolling back to the legacy profiles
@@ -163,6 +227,7 @@ extension Bootstrapper {
     func migrateToLegacyVPNProfilesIfNeeded() {
         AppPreferences.shared.didCleanupLegacyVPNProfiles = false
         AppPreferences.shared.didConfirmPlatformSDKMigration = false
+        AppPreferences.shared.pendingPlatformSDKReconnect = false
 
         if Client.preferences.vpnType == KapePlatformSDKVPNType.automatic.rawValue {
             let preferences = Client.preferences.editable()
@@ -216,6 +281,34 @@ extension Bootstrapper {
         }
     }
     // MARK: - Helpers
+
+    /// Whether deleting the legacy configurations owes the user a reconnect.
+    ///
+    /// Deliberately wider than ``loadIsVPNConnected``, which only decides whether to warn about an
+    /// interruption: the live status alone is a false negative when the upgrade has just torn the
+    /// extension down, so armed on-demand rules and the persisted status are weighed in too.
+    private static func loadShouldReconnectAfterCleanup(_ completion: @escaping (Bool) -> Void) {
+        let lastKnownStatus = Client.daemons.lastKnownVPNStatus
+
+        NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+            let managers = managers ?? []
+            let isTunnelProviderLive = managers.contains { manager in
+                liveOrClosingVPNStatuses.contains(manager.connection.status)
+            }
+            let isTunnelProviderOnDemandArmed = managers.contains { $0.isOnDemandEnabled }
+
+            let ikEv2Manager = NEVPNManager.shared()
+            ikEv2Manager.loadFromPreferences { _ in
+                let shouldReconnect = PlatformSDKMigrationDecision.shouldReconnectAfterCleanup(
+                    isNativeLive: isTunnelProviderLive || liveOrClosingVPNStatuses.contains(ikEv2Manager.connection.status),
+                    isOnDemandArmed: isTunnelProviderOnDemandArmed || ikEv2Manager.isOnDemandEnabled,
+                    lastKnownStatus: lastKnownStatus
+                )
+
+                DispatchQueue.main.async { completion(shouldReconnect) }
+            }
+        }
+    }
 
     /// Reads the NE preferences rather than `VPNProvider.isVPNConnected`, so it works before
     /// bootstrap, and covers the IKEv2 slot that `loadAllFromPreferences` never returns.

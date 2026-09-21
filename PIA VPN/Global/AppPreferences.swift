@@ -110,6 +110,7 @@ final class AppPreferences {
         static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
         static let usePlatformSDKVPN = "usePlatformSDKVPN"
         static let didConfirmPlatformSDKMigration = "didConfirmPlatformSDKMigration"
+        static let pendingPlatformSDKReconnect = "pendingPlatformSDKReconnect"
 
         // Dev
         static let appEnvironmentIsProduction = "AppEnvironmentIsProduction"
@@ -613,6 +614,24 @@ final class AppPreferences {
         set {
             defaults.set(newValue, forKey: Entries.didCleanupLegacyVPNProfiles)
         }
+    }
+
+    /// Whether the PlatformSDK migration still owes the user a reconnect. Set before the legacy
+    /// configurations are deleted and cleared only once the VPN reports connected, so an
+    /// interrupted or failed reconnect is retried on the next launch instead of stranding the user.
+    var pendingPlatformSDKReconnect: Bool {
+        get {
+            return defaults.object(forKey: Entries.pendingPlatformSDKReconnect) as? Bool ?? false
+        }
+        set {
+            defaults.set(newValue, forKey: Entries.pendingPlatformSDKReconnect)
+        }
+    }
+
+    /// Whether ``pendingPlatformSDKReconnect`` was ever written, as opposed to reading `false`
+    /// because it is missing. Tells a build that predates the flag apart from a recorded "no".
+    var hasPendingPlatformSDKReconnectValue: Bool {
+        return defaults.object(forKey: Entries.pendingPlatformSDKReconnect) != nil
     }
 
     var appEnvironmentIsProduction: Bool {

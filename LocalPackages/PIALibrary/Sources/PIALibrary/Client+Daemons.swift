@@ -53,6 +53,11 @@ extension Client {
             return accessedDatabase.transient.vpnStatus
         }
 
+        /// PIA's own VPN status as of the last time the app saw it. Persists across app restarts.
+        public var lastKnownVPNStatus: VPNStatus {
+            return accessedDatabase.plain.lastKnownVpnStatus
+        }
+
         /// The CN of the last server that was successfully connected to. Persists across app restarts.
         public var lastServerCN: String? {
             return accessedDatabase.plain.lastServerCN

@@ -284,6 +284,7 @@
 				Core/PIACardTests.swift,
 				Core/Utils/AppleIDIdentityTokenTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
+				Core/Utils/PlatformSDKMigrationDecisionTests.swift,
 				"Helpers/Stubs+PIALibrary.swift",
 				Mocks/AccountProviderMock.swift,
 				Mocks/NotificationCenterMock.swift,
