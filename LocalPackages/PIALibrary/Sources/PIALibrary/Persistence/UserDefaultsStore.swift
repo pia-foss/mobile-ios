@@ -141,7 +141,8 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     private var historicalServersCopy: [Server]?
 
-    private var cachedServersCopy: [Server]?
+    /// The one piece of this store read and written from several threads at once.
+    private let serverStore: ServerStore
 
     private var visibleTilesCopy: [AvailableTiles]?
 
@@ -154,8 +155,22 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     init(group: String? = nil) {
         let backend = group.flatMap(UserDefaults.init(suiteName:)) ?? UserDefaults.standard
-        self.backend = UserDefaultsKeyed(defaults: backend)
+        let keyedBackend = UserDefaultsKeyed<Entry>(defaults: backend)
+        self.backend = keyedBackend
         self.group = group
+        // Built from the backend rather than `self`, so it can be a `let`.
+        self.serverStore = ServerStore(
+            load: { Self.readServers(from: keyedBackend, key: .cachedServers) },
+            save: { servers in
+                let data = try? JSONEncoder().encode(servers)
+                if let data {
+                    log.debug("Encoded \(servers.count) cached server(s) into \(data.count) byte(s)")
+                } else {
+                    log.error("Failed to encode \(servers.count) cached server(s)")
+                }
+                keyedBackend.set(data, forKey: .cachedServers)
+            }
+        )
         loadComplexMaps()
     }
 
@@ -339,7 +354,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
     // MARK: Server
     var historicalServers: [Server] {
         get {
-            return readServers(key: .historicalServers, copy: historicalServersCopy)
+            return historicalServersCopy ?? Self.readServers(from: backend, key: .historicalServers)
         }
         set {
             var servers = newValue
@@ -353,18 +368,21 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     var cachedServers: [Server] {
         get {
-            return readServers(key: .cachedServers, copy: cachedServersCopy)
+            return serverStore.read()
         }
         set {
-            cachedServersCopy = newValue
-            backend.set(try? JSONEncoder().encode(newValue), forKey: .cachedServers)
+            serverStore.write(newValue)
         }
     }
 
-    private func readServers(key: Entry, copy: [Server]?) -> [Server] {
-        if let copy { return copy }
+    @discardableResult func mutateCachedServers(_ body: (inout [Server]) -> Bool) -> Bool {
+        return serverStore.mutate(body)
+    }
+
+    private static func readServers(from backend: UserDefaultsKeyed<Entry>, key: Entry) -> [Server] {
         let decoder = JSONDecoder()
         if let data = backend.data(forKey: key) {
+            log.debug("Decoding servers for \(key.rawValue) from \(data.count) byte(s)")
             do {
                 return try decoder.decode([Server].self, from: data)
             } catch {
@@ -388,6 +406,13 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             return cachedServers.first { $0.identifier == identifier && $0.dipToken == dipToken }
         }
         set {
+            // The getter reads nil while the selection is missing from `cachedServers`, and
+            // preferences are committed wholesale on every launch: writing that back would erase it.
+            if newValue == nil, hasUnresolvedSelection(forKey: .preferredServer, dipToken: preferredServerDIPToken) {
+                log.warning("Not clearing the preferred server: the current selection is not in the server list yet")
+                return
+            }
+
             backend.set(newValue?.identifier, forKey: .preferredServer)
             backend.set(newValue?.dipToken, forKey: .preferredServerDIPToken)
             var lastServers = historicalServers
@@ -413,8 +438,22 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             return cachedServers.first { $0.identifier == identifier }
         }
         set {
+            // Same lossy resolution as `preferredServer`.
+            if newValue == nil, hasUnresolvedSelection(forKey: .lastConnectedRegion, dipToken: nil) {
+                log.warning("Not clearing the last connected region: the current selection is not in the server list yet")
+                return
+            }
+
             backend.set(newValue?.identifier, forKey: .lastConnectedRegion)
         }
+    }
+
+    /// Whether `key` holds a server the current list cannot resolve, making the getter's nil a miss.
+    private func hasUnresolvedSelection(forKey key: Entry, dipToken: String?) -> Bool {
+        guard let identifier = backend.string(forKey: key) else {
+            return false
+        }
+        return !cachedServers.contains { $0.identifier == identifier && $0.dipToken == dipToken }
     }
 
     var preferredServerDIPToken: String? {
@@ -869,9 +908,11 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             backend.removeObject(forKey: entry)
         }
         backend.synchronize()
+        serverStore.invalidate()
     }
 
     func clear() {
+        serverStore.invalidate()
         if let group = group {
             backend.removePersistentDomain(forName: group)
         } else {
