@@ -1,9 +1,10 @@
 import Foundation
 
 final class DedicatedIPTokenHandler: DedicatedIPTokenHandlerType {
-    private let secureStore: SecureStore
+    // Resolved per call: providers can be built before the app sets its app-group database.
+    private let secureStore: @Sendable () -> SecureStore
 
-    init(secureStore: SecureStore) {
+    init(secureStore: @escaping @Sendable () -> SecureStore) {
         self.secureStore = secureStore
     }
 
@@ -14,6 +15,7 @@ final class DedicatedIPTokenHandler: DedicatedIPTokenHandlerType {
 
         Macros.postNotification(.PIADIPCheckIP, [.token: dedicatedIp.dipToken, .ip: dedicatedIp.ip!])
 
+        let secureStore = secureStore()
         secureStore.setDIPToken(dedicatedIp.dipToken)
         secureStore.setPassword(dedicatedIp.ip!, forDipToken: dipUsername)
     }
