@@ -33,6 +33,7 @@ extension Bootstrapper {
 
     private static let liveVPNStatuses: [NEVPNStatus] = [.connected, .connecting, .reasserting]
     private static let vpnStatusTimeout: DispatchTimeInterval = .seconds(3)
+    private static let reconnectAfterCleanupLoadingTimeout: DispatchTimeInterval = .seconds(10)
 
     // MARK: - Consent
 
@@ -160,11 +161,21 @@ extension Bootstrapper {
         if let targetServer, targetServer.dipToken != nil, targetServer.dipUsername?.isEmpty ?? true {
             log.info("cleanupLegacyVPNProfiles: waiting for the server list to restore the Dedicated IP credentials")
 
+            let dashboard = DashboardViewController.instanceInNavigationStack()
+            dashboard?.showLoadingAnimation()
+
+            // The loading locks the UI: release it if the server list is slow, the reconnect keeps waiting.
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.reconnectAfterCleanupLoadingTimeout) {
+                dashboard?.hideLoadingAnimation()
+            }
+
             reconnectAfterCleanupCancellable = NotificationCenter.default
                 .publisher(for: .PIAServerDidUpdateCurrentServers)
                 .first()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
+                    dashboard?.hideLoadingAnimation()
+
                     // The user may have connected, or logged out, while the list was refreshing.
                     guard Client.providers.accountProvider.isLoggedIn, Client.providers.vpnProvider.vpnStatus == .disconnected else {
                         return
