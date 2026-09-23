@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 import NetworkExtension
 import PIALibrary
@@ -151,12 +152,38 @@ extension Bootstrapper {
                         return
                     }
 
-                    Client.providers.vpnProvider.connect { error in
-                        if let error {
-                            log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
-                        }
-                    }
+                    self.reconnectAfterCleanup()
                 }
+            }
+        }
+    }
+
+    /// Reconnects once the tunnel can authenticate. A Dedicated IP server cached by a build before
+    /// 3.36 keeps its token but not `dipUsername`, the WireGuard credential, until the first server
+    /// download maps it again. Connecting before that fails ahead of the VPN permission prompt.
+    private func reconnectAfterCleanup() {
+        let targetServer = try? Client.providers.serverProvider.targetServer
+        if let targetServer, targetServer.dipToken != nil, targetServer.dipUsername?.isEmpty ?? true {
+            log.info("cleanupLegacyVPNProfiles: waiting for the server list to restore the Dedicated IP credentials")
+
+            reconnectAfterCleanupCancellable = NotificationCenter.default
+                .publisher(for: .PIAServerDidUpdateCurrentServers)
+                .first()
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] _ in
+                    // The user may have connected, or logged out, while the list was refreshing.
+                    guard Client.providers.accountProvider.isLoggedIn, Client.providers.vpnProvider.vpnStatus == .disconnected else {
+                        return
+                    }
+
+                    self?.reconnectAfterCleanup()
+                }
+            return
+        }
+
+        Client.providers.vpnProvider.connect { error in
+            if let error {
+                log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
             }
         }
     }

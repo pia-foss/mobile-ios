@@ -13,7 +13,7 @@ import XCTest
 
 final class RemoveDIPUseCaseTests: XCTestCase {
     class Fixture {
-        var dipServerProviderMock = DedicatedIPProviderMock(result: .success(()))
+        var dipServerProviderMock = DedicatedIPProviderMock(result: .success(ServerTypeStub.makeValidServerTypeStub()))
         var favoriteRegionsUseCaseMock = FavoriteRegionUseCaseMock()
         var getDedicatedIPUseCaseMock: GetDedicatedIpUseCaseMock!
         var vpnConnectionUseCaseMock = VpnConnectionUseCaseMock()

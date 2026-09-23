@@ -133,11 +133,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
     }
 
     /// :nodoc:
-    public func load(fromJSON jsonData: Data) {
-        return delegate.load(fromJSON: jsonData)
-    }
-
-    /// :nodoc:
     public func loadLocalJSON(fromJSON jsonData: Data) {
         return delegate.loadLocalJSON(fromJSON: jsonData)
     }
@@ -159,12 +154,8 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
         delegate.removeDIPToken(dipToken)
     }
 
-    public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
+    public func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>) {
         delegate.activateDIPToken(token, callback)
-    }
-
-    public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        delegate.activateDIPTokens(tokens, callback)
     }
 
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {

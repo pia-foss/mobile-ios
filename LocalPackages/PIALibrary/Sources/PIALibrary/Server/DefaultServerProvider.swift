@@ -30,7 +30,6 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     private let renewDedicatedIP: RenewDedicatedIPUseCaseType
     private let getDedicatedIPs: GetDedicatedIPsUseCaseType
     private let dedicatedIPServerMapper: DedicatedIPServerMapperType
-    private let bundledServersReloadLock = NSRecursiveLock()
 
     init(webServices: WebServices? = nil, renewDedicatedIP: RenewDedicatedIPUseCaseType, getDedicatedIPs: GetDedicatedIPsUseCaseType, dedicatedIPServerMapper: DedicatedIPServerMapperType) {
         if let webServices = webServices {
@@ -51,15 +50,10 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     }
 
     public var historicalServers: [Server] {
-        get {
-            if let dipTokens = dipTokens {
-                return accessedDatabase.plain.historicalServers.filter({ $0.dipToken == nil || dipTokens.contains($0.dipToken ?? "") })
-            }
-            return accessedDatabase.plain.historicalServers
+        if let dipTokens = dipTokens {
+            return accessedDatabase.plain.historicalServers.filter({ $0.dipToken == nil || dipTokens.contains($0.dipToken ?? "") })
         }
-        set {
-            accessedDatabase.plain.cachedServers = newValue
-        }
+        return accessedDatabase.plain.historicalServers
     }
 
     public var currentServers: [Server] {
@@ -67,16 +61,31 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             return accessedDatabase.plain.cachedServers
         }
         set {
-            var servers = newValue
-            servers.insert(contentsOf: accessedConfiguration.customServers, at: 0)
-            accessedDatabase.plain.cachedServers = servers
-
-            Macros.postNotification(
-                .PIAServerDidUpdateCurrentServers,
-                [
-                    .servers: newValue
-                ])
+            updateCurrentServers { servers in
+                servers = newValue
+                return true
+            }
         }
+    }
+
+    /// The one way this provider writes the server list. `body` runs under the store's lock, so it
+    /// must not touch the provider or the store; the notification is posted after the lock is out.
+    @discardableResult private func updateCurrentServers(_ body: (inout [Server]) -> Bool) -> Bool {
+        var updatedServers: [Server]?
+        accessedDatabase.plain.mutateCachedServers { servers in
+            guard body(&servers) else { return false }
+            updatedServers = servers
+            return true
+        }
+
+        guard let updatedServers else {
+            log.debug("Current servers unchanged")
+            return false
+        }
+
+        log.debug("Current servers updated to \(updatedServers.count), posting the update notification")
+        Macros.postNotification(.PIAServerDidUpdateCurrentServers, [.servers: updatedServers])
+        return true
     }
 
     public var bestServer: Server? {
@@ -141,8 +150,7 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
     }
 
     private func reloadBundledServersIfEmpty() {
-        bundledServersReloadLock.lock()
-        defer { bundledServersReloadLock.unlock() }
+        // `loadLocalJSON` re-checks emptiness under the store's lock.
         guard currentServers.isEmpty, let bundledServersJSON = accessedConfiguration.bundledServersJSON else {
             return
         }
@@ -160,24 +168,16 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
         if let configuration = bundle.configuration {
             accessedDatabase.transient.serversConfiguration = configuration
         }
-        if currentServers.isEmpty {
-            currentServers = bundle.servers
+        let didLoad = updateCurrentServers { servers in
+            guard servers.isEmpty else { return false }
+            servers = bundle.servers
+            return true
+        }
 
+        if didLoad {
             Task {
                 await ServersPinger.shared.ping(withDestinations: currentServers)
             }
-        }
-    }
-
-    public func load(fromJSON jsonData: Data) {
-        guard let bundle = ServersBundle.parse(from: jsonData) else {
-            return
-        }
-        if let configuration = bundle.configuration {
-            accessedDatabase.transient.serversConfiguration = configuration
-        }
-        if currentServers.isEmpty {
-            currentServers = bundle.servers
         }
     }
 
@@ -264,17 +264,22 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
                     callback?(self.currentServers, error)
                 }*/
             } else {
-                self.currentServers = bundle.servers
+                // No readable tokens can just mean a locked keychain, and the bundle never carries
+                // DIP servers, so keep the cached ones. `removeDIPToken` prunes the released ones.
+                self.updateCurrentServers { servers in
+                    servers = bundle.servers + servers.filter { $0.dipToken != nil }
+                    return true
+                }
                 PIATunnelSharedState.updateServers(self.currentServers)
                 callback?(self.currentServers, error)
             }
         }
     }
 
-    public func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?) {
+    public func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>) {
         guard Client.providers.accountProvider.isLoggedIn else {
             log.error("Client not logged in when activating DIP token.")
-            callback?(nil, ClientError.unauthorized)
+            callback(.failure(.unauthorized))
             return
         }
 
@@ -283,77 +288,44 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             switch result {
             case .success(let servers):
                 DispatchQueue.main.async {
-                    self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers), callback)
+                    let result = self.handleDIPServerResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers))
+                    callback(result)
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    callback?(nil, ClientErrorMapper.map(networkRequestError: error))
+                    callback(.failure(ClientErrorMapper.map(networkRequestError: error)))
                 }
             }
         }
     }
 
-    private func handleDIPServerResponse(_ response: Result<[Server], ClientError>, _ callback: LibraryCallback<Server>?) {
+    private func handleDIPServerResponse(_ response: Result<[Server], ClientError>) -> Result<Server, ClientError> {
         guard case .success(let servers) = response else {
             guard case .failure(let error) = response else {
-                callback?(nil, ClientError.unexpectedReply)
-                return
+                return .failure(ClientError.unexpectedReply)
             }
-
-            callback?(nil, error)
-            return
+            return .failure(error)
         }
 
         guard let first = servers.first, let status = first.dipStatus else {
-            callback?(nil, ClientError.unexpectedReply)
-            return
+            log.warning("No servers returned or no DIP status")
+            return .failure(.unexpectedReply)
         }
 
-        if !self.currentServers.contains(where: { $0.dipToken == first.dipToken }) && status == .active {
-            self.currentServers.append(contentsOf: servers)
+        log.debug("Got DIP server id \(first.identifier) with status: \(status)")
+
+        guard status == .active else {
+            return .success(first)
         }
 
-        callback?(first, nil)
-    }
-
-    public func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?) {
-        guard Client.providers.accountProvider.isLoggedIn else {
-            log.error("Client not logged in when activating DIP tokens.")
-            callback?(nil, ClientError.unauthorized)
-            return
+        updateCurrentServers { currentServers in
+            guard !currentServers.contains(where: { $0.dipToken == first.dipToken }) else { return false }
+            log.debug("Adding DIP server to current servers")
+            currentServers.append(contentsOf: servers)
+            return true
         }
 
-        getDedicatedIPs(dipTokens: tokens) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let servers):
-                DispatchQueue.main.async {
-                    self.handleDIPServersResponse(self.dedicatedIPServerMapper.map(dedicatedIps: servers), callback)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    callback?([], ClientErrorMapper.map(networkRequestError: error))
-                }
-            }
-        }
-    }
-
-    private func handleDIPServersResponse(_ response: Result<[Server], ClientError>, _ callback: LibraryCallback<[Server]>?) {
-        guard case .success(let servers) = response else {
-            guard case .failure(let error) = response else {
-                callback?(nil, ClientError.unexpectedReply)
-                return
-            }
-
-            callback?(nil, error)
-            return
-        }
-
-        for server in servers where !self.currentServers.contains(where: { $0.dipToken == server.dipToken }) {
-            self.currentServers.append(server)
-        }
-
-        callback?(servers, nil)
+        return .success(first)
     }
 
     public func removeDIPToken(_ dipToken: String) {
@@ -362,7 +334,11 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             return
         }
         accessedDatabase.secure.remove(dipToken)
-        currentServers = currentServers.filter { $0.dipToken != dipToken }
+        // Writes unconditionally: callers rely on the notification even when the token was absent.
+        updateCurrentServers { servers in
+            servers = servers.filter { $0.dipToken != dipToken }
+            return true
+        }
     }
 
     public func handleDIPTokenExpiration(dipToken: String, _ callback: SuccessLibraryCallback?) {

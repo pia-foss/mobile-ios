@@ -19,7 +19,7 @@ final class DedicatedIPProviderTests: XCTestCase {
     var fixture: Fixture!
     var sut: DedicatedIPProvider!
 
-    func instantiateSut(server: Server?, error: Error?) {
+    func instantiateSut(server: Server?, error: ClientError?) {
         fixture.dipServerProviderMock = DipServerProviderMock(server: server, error: error)
         sut = DedicatedIPProvider(serverProvider: fixture.dipServerProviderMock)
     }
@@ -129,7 +129,7 @@ final class DedicatedIPProviderTests: XCTestCase {
 
     func test_activateDIPToken_fails_when_there_is_no_server() {
         // GIVEN
-        let anyError = NSError(domain: "", code: 0)
+        let anyError = ClientError.backendUnavailable
         instantiateSut(server: nil, error: anyError)
 
         let expectation = expectation(description: "Waiting for activateDIPToken to complete")

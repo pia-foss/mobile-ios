@@ -47,25 +47,8 @@ public protocol ServerProvider: AnyObject {
     /// The array of DIP tokens stored in the keychain, or `nil` if logged out.
     var dipTokens: [String]? { get }
 
-    /**
-     Loads this provider with a local JSON, as seen on the /servers web client API.
-
-     - Postcondition:
-        - Sets `currentServers` and `currentServersConfiguration`.
-        - Posts `Notification.Name.PIAServerDidUpdateCurrentServers`.
-     - Parameter jsonData: The JSON data to load.
-     */
+    /// Loads this provider with a local JSON, as seen on the /servers web client API.
     func loadLocalJSON(fromJSON jsonData: Data)
-
-    /**
-     Loads this provider with a JSON, as seen on the /servers web client API.
-
-     - Postcondition:
-        - Sets `currentServers` and `currentServersConfiguration`.
-        - Posts `Notification.Name.PIAServerDidUpdateCurrentServers`.
-     - Parameter jsonData: The JSON data to load.
-     */
-    func load(fromJSON jsonData: Data)
 
     /**
      Downloads or refreshes the current servers and configuration.
@@ -96,22 +79,13 @@ public protocol ServerProvider: AnyObject {
     func resetCurrentServers()
 
     /**
-     Activates the dedicated IP tokens.
-
-     - Precondition: `isLoggedIn` is `true`.
-     - Parameter tokens: The `String` array of DIP token to activate.
-     - Parameter callback: Returns the status of the DIP region `Server` array.
-     */
-    func activateDIPTokens(_ tokens: [String], _ callback: LibraryCallback<[Server]>?)
-
-    /**
      Activates the dedicated IP token.
 
      - Precondition: `isLoggedIn` is `true`.
      - Parameter tokens: The `String`  DIP token to activate.
      - Parameter callback: Returns the status of the DIP region `Server`.
      */
-    func activateDIPToken(_ token: String, _ callback: LibraryCallback<Server?>?)
+    func activateDIPToken(_ token: String, _ callback: @escaping ClientCallback<Server>)
 
     /**
      Removes the dedicated IP region.

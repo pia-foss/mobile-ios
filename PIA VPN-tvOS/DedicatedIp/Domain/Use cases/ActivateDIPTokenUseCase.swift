@@ -11,8 +11,8 @@ import PIALibrary
 
 private let log = PIALogger.logger(for: ActivateDIPTokenUseCase.self)
 
-protocol ActivateDIPTokenUseCaseType {
-    func callAsFunction(token: String) async -> Result<Void, DedicatedIPError>
+protocol ActivateDIPTokenUseCaseType: Sendable {
+    func callAsFunction(token: String) async -> Result<ServerType, DedicatedIPError>
 }
 
 final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
@@ -22,7 +22,7 @@ final class ActivateDIPTokenUseCase: ActivateDIPTokenUseCaseType {
         self.dipServerProvider = dipServerProvider
     }
 
-    func callAsFunction(token: String) async -> Result<Void, DedicatedIPError> {
+    func callAsFunction(token: String) async -> Result<ServerType, DedicatedIPError> {
         log.info("Activating DIP token")
         return await withCheckedContinuation { continuation in
             dipServerProvider.activateDIPToken(token) { result in

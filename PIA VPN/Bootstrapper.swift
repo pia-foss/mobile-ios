@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 import Logging
 import PIAAssetsMobile
@@ -39,6 +40,9 @@ private let log = PIALogger.logger(for: Bootstrapper.self)
 final class Bootstrapper {
 
     static let shared = Bootstrapper()
+
+    /// The PlatformSDK migration's pending wait for the server list, see `reconnectAfterCleanup()`.
+    var reconnectAfterCleanupCancellable: AnyCancellable?
 
     private init() {
     }
