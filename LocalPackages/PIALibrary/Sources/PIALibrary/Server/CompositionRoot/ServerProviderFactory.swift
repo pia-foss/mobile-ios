@@ -19,7 +19,7 @@ public class ServerProviderFactory {
     }
 
     static func makeDedicatedIPTokenHandler() -> DedicatedIPTokenHandlerType {
-        DedicatedIPTokenHandler(secureStore: Client.database.secure)
+        DedicatedIPTokenHandler(secureStore: { Client.database.secure })
     }
 
     public static func makeRenewDedicatedIPUseCase() -> RenewDedicatedIPUseCaseType {
