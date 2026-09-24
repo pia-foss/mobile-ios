@@ -84,20 +84,38 @@ internal actor ServersPinger: DatabaseAccess {
         inflightTask = nil
     }
 
+    private enum PingOutcome {
+        case responded
+        case timedOut
+        case discarded
+    }
+
+    // One summary line per pass: logging every address fills the 1000-entry log buffer at launch
+    // and evicts everything logged before the pass.
     private func runPingPass(_ destinations: [Server]) async {
+        log.debug("Pinging \(destinations.count) server(s)")
+
+        var outcomes: [PingOutcome] = []
         for destinations in destinations.chunks(ofCount: Self.maxConcurrentPings) {
             if Task.isCancelled { break }
-            await withTaskGroup(of: Void.self) { group in
+            await withTaskGroup(of: PingOutcome.self) { group in
                 for server in destinations {
-                    log.debug("Pinging \(server.identifier)")
                     for address in server.addresses() {
                         group.addTask {
                             await self.pingServer(server, address: address)
                         }
                     }
                 }
+                for await outcome in group {
+                    outcomes.append(outcome)
+                }
             }
         }
+
+        let responded = outcomes.filter { $0 == .responded }.count
+        let timedOut = outcomes.filter { $0 == .timedOut }.count
+        let discarded = outcomes.filter { $0 == .discarded }.count
+        log.debug("Pinged \(outcomes.count) address(es): \(responded) responded, \(timedOut) timed out, \(discarded) discarded while on VPN")
     }
 
     // Mirror the freshly measured latencies into the PlatformSDK shared state so the tunnel
@@ -115,23 +133,19 @@ internal actor ServersPinger: DatabaseAccess {
         PIATunnelSharedState.updateLatencies(latencies)
     }
 
-    private func pingServer(_ server: Server, address: Server.ServerAddressIP) async {
-        log.debug("Starting to Ping \(server.identifier) with address: \(address.ip)")
-
+    private func pingServer(_ server: Server, address: Server.ServerAddressIP) async -> PingOutcome {
         guard let responseTime = await pinger.ping(ip: address.ip, port: 443, timeout: Self.pingTimeout) else {
-            log.warning("Timeout/error for \(server.identifier)")
-            return
+            return .timedOut
         }
 
         // Discards results where VPN connected during the ping.
         guard accessedDatabase.transient.vpnStatus == .disconnected else {
-            log.warning("Discarded VPN-biased response from \(server.identifier): \(responseTime)")
-            return
+            return .discarded
         }
 
-        log.debug("Response time from \(server.identifier): \(responseTime)")
         server.updateResponseTime(responseTime, forAddress: address)
         accessedDatabase.plain.setPing(responseTime, forServerIdentifier: server.identifier)
+        return .responded
     }
 
     private func finish() {
