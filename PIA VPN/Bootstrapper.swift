@@ -73,7 +73,10 @@ final class Bootstrapper {
         #endif
     }
 
-    func bootstrap() {
+    /// Must run before anything logs: a `Logger` keeps the handler it was created with, so a logger
+    /// created earlier (e.g. by the PlatformSDK migration check, which runs before `bootstrap()`)
+    /// never writes into `PIALogStorage`.
+    func bootstrapLogging() {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
 
@@ -88,7 +91,9 @@ final class Bootstrapper {
                 PIALogHandler(label: label)
             ])
         }
+    }
 
+    func bootstrap() {
         // Load the database first
         Client.database = Client.Database(group: AppConstants.appGroup)
 
