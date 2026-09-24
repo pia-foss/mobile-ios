@@ -81,13 +81,13 @@ extension Bootstrapper {
             }
 
             guard isConnected else {
-                log.info("shouldConfirmPlatformSDKMigration: no live tunnel, migrating without asking")
+                log.info("shouldConfirmPlatformSDKMigration: no live or on-demand tunnel, migrating without asking")
                 AppPreferences.shared.didConfirmPlatformSDKMigration = true
                 answer(false)
                 return
             }
 
-            log.info("shouldConfirmPlatformSDKMigration: live tunnel, asking for consent")
+            log.info("shouldConfirmPlatformSDKMigration: live or on-demand tunnel, asking for consent")
             answer(true)
         }
     }
@@ -236,9 +236,7 @@ extension Bootstrapper {
 
             guard !platformSDKManagers.isEmpty else { return }
 
-            let wasConnected = platformSDKManagers.contains { manager in
-                Self.liveVPNStatuses.contains(manager.connection.status)
-            }
+            let wasConnected = platformSDKManagers.contains(where: Self.isConnectedOrOnDemand)
 
             log.info("removePlatformSDKVPNProfiles: removing \(platformSDKManagers.count) PlatformSDK configuration(s), connected: \(wasConnected)")
 
@@ -271,6 +269,7 @@ extension Bootstrapper {
 
     /// Reads the NE preferences rather than `VPNProvider.isVPNConnected`, so it works before
     /// bootstrap, and covers the IKEv2 slot that `loadAllFromPreferences` never returns.
+    /// Counts a configuration armed for on-demand as connected, see `isConnectedOrOnDemand(_:)`.
     static func loadIsVPNConnected(_ completion: @escaping (Bool) -> Void) {
         NETunnelProviderManager.loadAllFromPreferences { managers, error in
             if let error {
@@ -278,10 +277,7 @@ extension Bootstrapper {
             }
             log.info("loadIsVPNConnected: \(managers?.count ?? 0) configuration(s)\((managers ?? []).map { "\n  \(describeForLog($0))" }.joined())")
 
-            let isTunnelProviderConnected =
-                managers?.contains { manager in
-                    liveVPNStatuses.contains(manager.connection.status)
-                } == true
+            let isTunnelProviderConnected = managers?.contains(where: isConnectedOrOnDemand) == true
 
             guard !isTunnelProviderConnected else {
                 DispatchQueue.main.async { completion(true) }
@@ -291,10 +287,17 @@ extension Bootstrapper {
             let ikEv2Manager = NEVPNManager.shared()
             ikEv2Manager.loadFromPreferences { _ in
                 log.info("loadIsVPNConnected: IKEv2 \(describeForLog(ikEv2Manager))")
-                let isIKEv2Connected = liveVPNStatuses.contains(ikEv2Manager.connection.status)
+                let isIKEv2Connected = isConnectedOrOnDemand(ikEv2Manager)
                 DispatchQueue.main.async { completion(isIKEv2Connected) }
             }
         }
+    }
+
+    /// A manual disconnect turns on-demand off, so an enabled configuration still armed for it
+    /// belongs to a user who meant to stay connected, even when the tunnel is down at launch (seen
+    /// on iOS 15 after the app update: `disconnected`, enabled, on-demand on).
+    private static func isConnectedOrOnDemand(_ manager: NEVPNManager) -> Bool {
+        return liveVPNStatuses.contains(manager.connection.status) || (manager.isEnabled && manager.isOnDemandEnabled)
     }
 
     private static func describeForLog(_ manager: NEVPNManager) -> String {
