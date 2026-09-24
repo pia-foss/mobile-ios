@@ -47,11 +47,13 @@ extension Bootstrapper {
     /// User is unformed there will be a short connection interruption.
     func shouldConfirmPlatformSDKMigration(_ completion: @escaping (Bool) -> Void) {
         guard AppPreferences.shared.usePlatformSDKVPN, !AppPreferences.shared.didConfirmPlatformSDKMigration else {
+            log.info("shouldConfirmPlatformSDKMigration: not asking, usePlatformSDKVPN: \(AppPreferences.shared.usePlatformSDKVPN), didConfirm: \(AppPreferences.shared.didConfirmPlatformSDKMigration)")
             completion(false)
             return
         }
 
         guard !AppPreferences.shared.didCleanupLegacyVPNProfiles, AppPreferences.shared.wasLaunched else {
+            log.info("shouldConfirmPlatformSDKMigration: migrating without asking, didCleanup: \(AppPreferences.shared.didCleanupLegacyVPNProfiles), wasLaunched: \(AppPreferences.shared.wasLaunched)")
             AppPreferences.shared.didConfirmPlatformSDKMigration = true
             completion(false)
             return
@@ -73,7 +75,10 @@ extension Bootstrapper {
         }
 
         Self.loadIsVPNConnected { isConnected in
-            guard !didAnswer else { return }
+            guard !didAnswer else {
+                log.info("shouldConfirmPlatformSDKMigration: status arrived after the timeout, connected: \(isConnected)")
+                return
+            }
 
             guard isConnected else {
                 log.info("shouldConfirmPlatformSDKMigration: no live tunnel, migrating without asking")
@@ -82,6 +87,7 @@ extension Bootstrapper {
                 return
             }
 
+            log.info("shouldConfirmPlatformSDKMigration: live tunnel, asking for consent")
             answer(true)
         }
     }
@@ -97,6 +103,7 @@ extension Bootstrapper {
     /// from a clean slate.
     func cleanupLegacyVPNProfilesIfNeeded() {
         guard shouldUsePlatformSDKTunnel, !AppPreferences.shared.didCleanupLegacyVPNProfiles else {
+            log.info("cleanupLegacyVPNProfiles: skipped, shouldUsePlatformSDKTunnel: \(shouldUsePlatformSDKTunnel), didCleanup: \(AppPreferences.shared.didCleanupLegacyVPNProfiles)")
             return
         }
 
@@ -113,9 +120,12 @@ extension Bootstrapper {
         }
 
         Self.loadIsVPNConnected { wasConnected in
-            NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+            NETunnelProviderManager.loadAllFromPreferences { managers, error in
                 // Retried on the next launch when the configurations cannot be read.
-                guard let managers else { return }
+                guard let managers else {
+                    log.error("cleanupLegacyVPNProfiles: could not load the VPN configurations (\(error?.localizedDescription ?? "no error")), retrying on the next launch")
+                    return
+                }
 
                 log.info("cleanupLegacyVPNProfiles: removing \(managers.count) VPN configuration(s), connected: \(wasConnected)")
 
@@ -139,11 +149,13 @@ extension Bootstrapper {
                             (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier
                         }
 
+                        log.info("cleanupLegacyVPNProfiles: removal verified: \(didCleanupLegacyVPNProfiles == true), remaining: \(managers?.count ?? -1)")
                         AppPreferences.shared.didCleanupLegacyVPNProfiles = (didCleanupLegacyVPNProfiles == true)
                     }
 
                     // Deleting a live tunnel's configuration disconnects the user.
                     guard wasConnected, Client.providers.accountProvider.isLoggedIn else {
+                        log.info("cleanupLegacyVPNProfiles: not reconnecting, wasConnected: \(wasConnected), isLoggedIn: \(Client.providers.accountProvider.isLoggedIn)")
                         return
                     }
 
@@ -178,6 +190,7 @@ extension Bootstrapper {
 
                     // The user may have connected, or logged out, while the list was refreshing.
                     guard Client.providers.accountProvider.isLoggedIn, Client.providers.vpnProvider.vpnStatus == .disconnected else {
+                        log.info("cleanupLegacyVPNProfiles: server list updated, not reconnecting, isLoggedIn: \(Client.providers.accountProvider.isLoggedIn), vpnStatus: \(Client.providers.vpnProvider.vpnStatus)")
                         return
                     }
 
@@ -186,6 +199,7 @@ extension Bootstrapper {
             return
         }
 
+        log.info("cleanupLegacyVPNProfiles: reconnecting, dedicated IP: \(targetServer?.dipToken != nil)")
         Client.providers.vpnProvider.connect { error in
             if let error {
                 log.error("cleanupLegacyVPNProfiles: could not reconnect (\(error.localizedDescription))")
@@ -258,7 +272,12 @@ extension Bootstrapper {
     /// Reads the NE preferences rather than `VPNProvider.isVPNConnected`, so it works before
     /// bootstrap, and covers the IKEv2 slot that `loadAllFromPreferences` never returns.
     static func loadIsVPNConnected(_ completion: @escaping (Bool) -> Void) {
-        NETunnelProviderManager.loadAllFromPreferences { managers, _ in
+        NETunnelProviderManager.loadAllFromPreferences { managers, error in
+            if let error {
+                log.error("loadIsVPNConnected: could not load the VPN configurations (\(error.localizedDescription))")
+            }
+            log.info("loadIsVPNConnected: \(managers?.count ?? 0) configuration(s)\((managers ?? []).map { "\n  \(describeForLog($0))" }.joined())")
+
             let isTunnelProviderConnected =
                 managers?.contains { manager in
                     liveVPNStatuses.contains(manager.connection.status)
@@ -271,9 +290,27 @@ extension Bootstrapper {
 
             let ikEv2Manager = NEVPNManager.shared()
             ikEv2Manager.loadFromPreferences { _ in
+                log.info("loadIsVPNConnected: IKEv2 \(describeForLog(ikEv2Manager))")
                 let isIKEv2Connected = liveVPNStatuses.contains(ikEv2Manager.connection.status)
                 DispatchQueue.main.async { completion(isIKEv2Connected) }
             }
+        }
+    }
+
+    private static func describeForLog(_ manager: NEVPNManager) -> String {
+        let bundleIdentifier = (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier ?? "none"
+        return "\(bundleIdentifier) status: \(describeForLog(manager.connection.status)), enabled: \(manager.isEnabled), onDemand: \(manager.isOnDemandEnabled)"
+    }
+
+    private static func describeForLog(_ status: NEVPNStatus) -> String {
+        switch status {
+        case .invalid: return "invalid"
+        case .disconnected: return "disconnected"
+        case .connecting: return "connecting"
+        case .connected: return "connected"
+        case .reasserting: return "reasserting"
+        case .disconnecting: return "disconnecting"
+        @unknown default: return "unknown(\(status.rawValue))"
         }
     }
 }
