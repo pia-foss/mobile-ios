@@ -37,7 +37,7 @@
 
         private func makeSubject(
             publicUsername: String?
-        ) -> (PIAWGTunnelProfile, NETunnelProviderManager, VPNConfiguration) {
+        ) -> (KapePlatformSDKTunnelProfile, NETunnelProviderManager, VPNConfiguration) {
             Client.database = Client.Database(group: "group.com.privateinternetaccess")
             Client.providers.vpnProvider = MockVPNProvider()
 
@@ -67,31 +67,28 @@
                 server: server,
                 isOnDemand: false,
                 disconnectsOnSleep: false,
-                customConfiguration: nil,
                 leakProtection: false,
                 allowLocalDeviceAccess: false
             )
 
-            let profile = PIAWGTunnelProfile(
-                bundleIdentifier: "com.privateinternetaccess.ios.PIA-VPN.WGTunnel")
+            let profile = KapePlatformSDKTunnelProfile(
+                bundleIdentifier: "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS")
 
             return (profile, NETunnelProviderManager(), configuration)
         }
 
-        func testUsernameFallsBackToVpnTokenUsernameWhenPublicUsernameIsMissing() throws {
+        /// The PlatformSDK tunnel carries neither credentials nor an endpoint in its `NEVPNProtocol`
+        /// — the extension reads both from `PIATunnelSharedState` — so the username and
+        /// server-address assertions the legacy WireGuard profile needed no longer apply. What still
+        /// matters is that the protocol names the extension to launch.
+        func testGeneratedProtocolTargetsTheTunnelExtension() {
             let (profile, _, configuration) = makeSubject(publicUsername: nil)
 
-            let cfg = try profile.generatedProtocol(withConfiguration: configuration)
+            let cfg = profile.generatedProtocol(withConfiguration: configuration)
 
-            XCTAssertEqual(cfg.username, "USER")
-        }
-
-        func testUsernamePrefersPublicUsernameWhenAvailable() throws {
-            let (profile, _, configuration) = makeSubject(publicUsername: "p0000000")
-
-            let cfg = try profile.generatedProtocol(withConfiguration: configuration)
-
-            XCTAssertEqual(cfg.username, "p0000000")
+            XCTAssertEqual(
+                (cfg as? NETunnelProviderProtocol)?.providerBundleIdentifier,
+                "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS")
         }
 
         // Reaching the callback is the assertion: a regression traps at

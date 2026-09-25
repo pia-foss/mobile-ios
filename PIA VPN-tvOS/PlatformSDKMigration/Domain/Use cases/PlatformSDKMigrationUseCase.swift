@@ -106,15 +106,13 @@ final class PlatformSDKMigrationUseCase: PlatformSDKMigrationUseCaseType, @unche
             return
         }
 
-        let supportedTypes: [KapePlatformSDKVPNType] = [
-            .automatic,
-            .wireGuard,
-            .openVPN
-        ]
-
-        if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
+        // Migrate users whose persisted protocol is no longer selectable (a legacy "IKEv2", or an
+        // unrecognised value) onto automatic negotiation. `SelectableVPNProtocol` is the single
+        // definition shared with the Protocol settings screen, so the read and write sides cannot
+        // disagree about what is still selectable.
+        if let migratedVPNType = SelectableVPNProtocol.migration(fromStored: Client.preferences.vpnType) {
             let editable = Client.preferences.editable()
-            editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+            editable.vpnType = migratedVPNType.rawValue
             editable.commit()
         }
 

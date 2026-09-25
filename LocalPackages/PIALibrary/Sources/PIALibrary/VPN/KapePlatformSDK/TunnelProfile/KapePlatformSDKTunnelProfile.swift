@@ -37,6 +37,10 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         return true
     }
 
+    public var providerBundleIdentifier: String? {
+        return bundleIdentifier
+    }
+
     public var native: Any?
 
     public var connectionDate: Date? {
@@ -296,10 +300,6 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    public func parsedCustomConfiguration(from map: [String: Any]) -> (any VPNCustomConfiguration)? {
-        nil
-    }
-
     // MARK: - Helpers
 
     /// Resolves the concrete server the tunnel should connect to.
@@ -348,27 +348,28 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     /// The user's custom DNS resolvers for the given VPN type (the Settings → Network choice),
     /// empty when they kept the PIA default (server-pushed DNS). iOS-only feature; tvOS has no UI.
     ///
-    /// Read from the raw persisted custom-configuration map rather than the parsed
-    /// `VPNCustomConfiguration` so this does not depend on the legacy `PIAWireguard` /
-    /// `TunnelKitOpenVPN` types (which are being removed). The stored maps are plain
-    /// `[String: Any]`: WireGuard keeps a flat `customDNSServers`, while OpenVPN nests it under
-    /// `configuration.dnsServers` (the auto-synthesised `OpenVPN.ProviderConfiguration` Codable shape).
+    /// Read from the same app-group preferences that hold every other tunnel setting. Installs that
+    /// chose their DNS before those keys existed are backfilled once at launch
+    /// (`Bootstrapper.migrateLegacyCustomDNSIfNeeded`), so there is no need to consult the legacy
+    /// custom-configuration maps here.
     func customDnsServers(forVPNType vpnType: KapePlatformSDKVPNType) -> [String] {
-        guard let map = Client.database.plain.vpnCustomConfigurationMaps?[vpnType.rawValue] else {
-            return []
+        switch vpnType {
+        case .wireGuard:
+            return Client.preferences.wireGuardDnsServers
+        default:
+            return Client.preferences.openVPNDnsServers
         }
-
-        if let wireGuardDns = map["customDNSServers"] as? [String] {
-            return wireGuardDns
-        }
-
-        if let session = map["configuration"] as? [String: Any], let openVPNDns = session["dnsServers"] as? [String] {
-            return openVPNDns
-        }
-
-        return []
     }
 
+    /// Resolves the tunnel manager and binds it as ``native``.
+    ///
+    /// Only for paths that take ownership of the tunnel (connect, disconnect, save, prepare,
+    /// remove, disable). ``native`` is shared state — `DefaultVPNProvider` reconciles status
+    /// against it and `VPNDaemon` reads it while folding the extension's write-back into
+    /// `transient.vpnStatus` — and every call rebinds it to a fresh manager instance. A read-only
+    /// path that binds here keeps moving that state underneath the connection it is reporting on;
+    /// the dashboard polls data usage on every status change, which is enough to strand the app on
+    /// a stale status. Such callers use the static lookup below instead.
     func find(completionHandler: LibraryCallback<NETunnelProviderManager>?) {
         KapePlatformSDKTunnelProfile.find(withBundleIdentifier: bundleIdentifier) { (vpn, error) in
             self.native = vpn
@@ -376,7 +377,11 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    private static func find(withBundleIdentifier identifier: String?, completionHandler: LibraryCallback<NETunnelProviderManager>?) {
+    /// Pure lookup: resolves the tunnel manager without touching ``native``.
+    ///
+    /// Internal rather than private so the read-only IPC paths in `+IPC.swift` can use it in place
+    /// of ``find``, which would rebind ``native``.
+    static func find(withBundleIdentifier identifier: String?, completionHandler: LibraryCallback<NETunnelProviderManager>?) {
         NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
             guard let managers = managers else {
                 completionHandler?(nil, error)

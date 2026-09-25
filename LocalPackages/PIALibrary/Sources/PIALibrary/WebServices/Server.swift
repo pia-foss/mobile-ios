@@ -260,8 +260,6 @@ extension Server {
     public func addresses() -> [ServerAddressIP] {
 
         switch Client.providers.vpnProvider.currentVPNType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            return iKEv2AddressesForUDP ?? []
         case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP ?? []
         case KapePlatformSDKVPNType.wireGuard.rawValue:
@@ -316,8 +314,6 @@ extension Server {
 
     public func hasEndpoints(for vpnType: String) -> Bool {
         switch vpnType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            return iKEv2AddressesForUDP?.isEmpty == false
         case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
         case KapePlatformSDKVPNType.wireGuard.rawValue:
@@ -338,9 +334,6 @@ extension Server {
 
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
         switch Client.providers.vpnProvider.currentVPNType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
-            serverAddressIP?.updateResponseTime(time)
         case KapePlatformSDKVPNType.openVPN.rawValue:
             let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)

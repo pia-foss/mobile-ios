@@ -22,9 +22,6 @@
 import Foundation
 import PIALibrary
 import PIALocalizations
-import PIAWireguard
-import TunnelKitCore
-import TunnelKitOpenVPN
 
 public extension String {
 
@@ -34,8 +31,6 @@ public extension String {
             return "WireGuard®"
         case KapePlatformSDKVPNType.openVPN.rawValue:
             return "OpenVPN"
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            return "IPSec (IKEv2)"
         case KapePlatformSDKVPNType.automatic.rawValue:
             return L10n.Global.automatic
         default:
@@ -45,16 +40,14 @@ public extension String {
 
     var port: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "1337"
-        case PIATunnelProfile.vpnType:
-            guard AppPreferences.shared.piaSocketType != nil else {
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            guard Client.preferences.openVPNSocketType != nil else {
                 return L10n.Global.automatic
             }
-            let port = AppPreferences.shared.openVPNPort
+            let port = Client.preferences.openVPNPort
             return port > 0 ? "\(port)" : L10n.Global.automatic
-        case IKEv2Profile.vpnType:
-            return "500"
         default:
             return "---"
         }
@@ -62,25 +55,22 @@ public extension String {
 
     var socket: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType, IKEv2Profile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "UDP"
-        case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.piaSocketType?.rawValue ?? L10n.Global.automatic
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            return Client.preferences.openVPNSocketType ?? L10n.Global.automatic
         default:
             return "---"
-
         }
     }
 
     var handshake: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "Noise_IK"
-        case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.piaHandshake.description
-        case IKEv2Profile.vpnType:
-            let preferences = Client.preferences.editable()
-            return preferences.ikeV2IntegrityAlgorithm.description
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            // The PlatformSDK tunnel pins the bundled PIA root CA for both protocols.
+            return "RSA-4096"
         default:
             return "---"
         }
@@ -88,13 +78,10 @@ public extension String {
 
     var encryption: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "ChaCha20"
-        case PIATunnelProfile.vpnType:
-            return Client.preferences.openVPNCipher ?? OpenVPN.Cipher.aes128gcm.description
-        case IKEv2Profile.vpnType:
-            let preferences = Client.preferences.editable()
-            return preferences.ikeV2EncryptionAlgorithm.description
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            return Client.preferences.openVPNCipher ?? AppConstants.OpenVPNCrypto.default.rawValue
         default:
             return "---"
         }
@@ -102,12 +89,10 @@ public extension String {
 
     var authentication: String {
         switch self {
-        case PIAWGTunnelProfile.vpnType:
+        case KapePlatformSDKVPNType.wireGuard.rawValue:
             return "Poly1305"
-        case PIATunnelProfile.vpnType:
-            return AppPreferences.shared.openVPNAuth ?? AppConstants.OpenVPNCrypto.defaultAuth
-        case IKEv2Profile.vpnType:
-            return "---"
+        case KapePlatformSDKVPNType.openVPN.rawValue:
+            return Client.preferences.openVPNAuth ?? AppConstants.OpenVPNCrypto.defaultAuth
         default:
             return "---"
         }
