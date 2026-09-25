@@ -41,6 +41,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private var didStartApp = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // Ahead of the scene, whose migration check logs before `startApp()`.
+        Bootstrapper.shared.bootstrapLogging()
 
         AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
 

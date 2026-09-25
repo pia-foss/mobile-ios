@@ -129,7 +129,7 @@ final class DedicatedIpViewController: AutolayoutViewController {
         if let server = server as? Server {
             data = [server]
         } else {
-            log.error("Returned server was not of type `Server`, instead: \(type(of: server))")
+            log.error("No dedicated IP server to show, got: \(server.map { "\(type(of: $0))" } ?? "nil")")
             data = []
         }
         tableView.reloadData()
