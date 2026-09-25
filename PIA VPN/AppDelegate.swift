@@ -46,6 +46,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
 
+        #if targetEnvironment(macCatalyst)
+            MacCatalystHelper.allowQuitWhileModal()
+        #endif
+
         return true
     }
 
