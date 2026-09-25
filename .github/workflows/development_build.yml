@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   development_build:
-    runs-on: macos-26
+    runs-on: ${{ vars.MACOS_RUNNER || 'macos-26' }}
     env:
       CERTIFICATE_PASSWORD: ${{ secrets.DEVELOPER_CERTIFICATE_PASSWORD }}
       KEYCHAIN_NAME: ${{ secrets.KEYCHAIN_NAME }}
