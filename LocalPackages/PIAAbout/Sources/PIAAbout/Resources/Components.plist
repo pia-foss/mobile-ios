@@ -37,7 +37,7 @@
 			<key>Copyright</key>
 			<string>Copyright (c) 1998-2018 The OpenSSL Project. All rights reserved.</string>
 			<key>LicenseURL</key>
-			<string>https://www.openssl.org/source/license.txt</string>
+			<string>https://raw.githubusercontent.com/openssl/openssl/refs/heads/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>

@@ -20,6 +20,7 @@
 //
 
 import Combine
+import CoreArchitecture
 import PIALibrary
 import PIAPaywall
 import UIKit
@@ -28,7 +29,7 @@ import UIKit
 /// still holds a live subscription. It replaces the paywall as the navigation controller's only
 /// screen, and hands the flow on itself — through `showLogin`, `showPaywall`, or, once the receipt
 /// has signed the customer in, its output.
-final class WelcomeBackCoordinator: Coordinator {
+final class WelcomeBackCoordinator: FlowCoordinator {
 
     enum Output {
         case didAuthenticate(user: UserAccount)
