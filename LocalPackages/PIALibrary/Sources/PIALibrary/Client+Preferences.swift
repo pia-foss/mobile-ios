@@ -404,16 +404,6 @@ extension Client {
             }
         }
 
-        /// Store a bool that represents whether we already attempted to migrate to wireguard
-        public var wireguardMigrationPerformed: Bool {
-            get {
-                return accessedDatabase.plain.wireguardMigrationPerformed
-            }
-            set {
-                accessedDatabase.plain.wireguardMigrationPerformed = newValue
-            }
-        }
-
         /// Store a bool that represents the status of leak protection property
         public var leakProtection: Bool {
             get {

@@ -288,18 +288,6 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
         }
     }
 
-    public func disable(_ callback: SuccessLibraryCallback?) {
-        find { (vpn, error) in
-            guard let vpn = vpn else {
-                callback?(error)
-                return
-            }
-            vpn.isEnabled = false
-            vpn.isOnDemandEnabled = false
-            vpn.saveToPreferences(completionHandler: callback)
-        }
-    }
-
     // MARK: - Helpers
 
     /// Resolves the concrete server the tunnel should connect to.
@@ -364,7 +352,7 @@ public final class KapePlatformSDKTunnelProfile: NetworkExtensionProfile {
     /// Resolves the tunnel manager and binds it as ``native``.
     ///
     /// Only for paths that take ownership of the tunnel (connect, disconnect, save, prepare,
-    /// remove, disable). ``native`` is shared state — `DefaultVPNProvider` reconciles status
+    /// remove). ``native`` is shared state — `DefaultVPNProvider` reconciles status
     /// against it and `VPNDaemon` reads it while folding the extension's write-back into
     /// `transient.vpnStatus` — and every call rebinds it to a fresh manager instance. A read-only
     /// path that binds here keeps moving that state underneath the connection it is reporting on;

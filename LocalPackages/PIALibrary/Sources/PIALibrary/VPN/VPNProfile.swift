@@ -89,13 +89,6 @@ public protocol VPNProfile: AnyObject {
     func remove(_ callback: SuccessLibraryCallback?)
 
     /**
-     Disables the profile.
-
-     - Parameter callback: Returns `nil` on success.
-     */
-    func disable(_ callback: SuccessLibraryCallback?)
-
-    /**
      Requests the debug log of the VPN profile.
 
      - Parameter callback: Returns the log content.

@@ -49,10 +49,6 @@ final class AppPreferences {
         static let useSmallPackets = "UseSmallPackets"
         static let usesCustomDNS = "usesCustomDNS"
 
-        static let openVPNCipher = "OpenVPNCipher"
-        static let openVPNAuth = "OpenVPNAuth"
-        static let openVPNPort = "OpenVPNPort"
-
         static let favoriteServerIdentifiersGen4_deprecated = "FavoriteServerIdentifiersGen4"
 
         static let regionFilter = "RegionFilter"
@@ -158,48 +154,6 @@ final class AppPreferences {
             defaults.set(newValue.rawValue, forKey: Entries.lastVPNConnectionStatus)
         }
     }
-    #if os(iOS)
-        // nil = automatic
-        // The same app-group values `Client.preferences` exposes (identical keys). Settings stages
-        // its edits on `Client.preferences` and commits them; these accessors remain for the readers
-        // that already had them. cipher/auth hold OpenVPN raw values (e.g. "AES-128-GCM", "SHA256");
-        // port is 0 for automatic.
-        var openVPNCipher: String? {
-            get {
-                return defaults.string(forKey: Entries.openVPNCipher)
-            }
-            set {
-                if let newValue = newValue {
-                    defaults.set(newValue, forKey: Entries.openVPNCipher)
-                } else {
-                    defaults.removeObject(forKey: Entries.openVPNCipher)
-                }
-            }
-        }
-
-        var openVPNAuth: String? {
-            get {
-                return defaults.string(forKey: Entries.openVPNAuth)
-            }
-            set {
-                if let newValue = newValue {
-                    defaults.set(newValue, forKey: Entries.openVPNAuth)
-                } else {
-                    defaults.removeObject(forKey: Entries.openVPNAuth)
-                }
-            }
-        }
-
-        // 0 = automatic
-        var openVPNPort: UInt16 {
-            get {
-                return UInt16(defaults.integer(forKey: Entries.openVPNPort))
-            }
-            set {
-                defaults.set(Int(newValue), forKey: Entries.openVPNPort)
-            }
-        }
-    #endif
     var favoriteServerIdentifiersGen4: [String] {
         get {
             let keychain = Keychain(team: AppConstants.teamId, group: AppConstants.appGroup)

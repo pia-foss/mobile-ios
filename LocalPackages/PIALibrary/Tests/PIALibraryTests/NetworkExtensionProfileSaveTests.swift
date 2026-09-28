@@ -91,8 +91,8 @@
                 "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-iOS")
         }
 
-        // Reaching the callback is the assertion: a regression traps at
-        // NetworkExtensionProfile.swift:113 and takes the test process down.
+        // Reaching the callback is the assertion: a regression traps and takes the test
+        // process down.
         func testDoSaveSurvivesAnAccountWithoutAPublicUsername() {
             bootstrapShippingReleaseLogging()
             let (profile, vpn, configuration) = makeSubject(publicUsername: nil)

@@ -28,7 +28,6 @@ struct PIACSIRegionInformationProvider: CSIDataProvider {
                 wireGuardAddressesForUDP: nil,
                 iKEv2AddressesForUDP: nil,
                 pingAddress: nil,
-                responseTime: nil,
                 geo: server.geo,
                 offline: server.offline,
                 latitude: server.latitude,

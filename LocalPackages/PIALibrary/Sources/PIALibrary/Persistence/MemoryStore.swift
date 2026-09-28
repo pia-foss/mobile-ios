@@ -69,6 +69,4 @@ final class MemoryStore: TransientStore, ConfigurationAccess {
             Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
         }
     }
-
-    var vpnLog: String = ""
 }

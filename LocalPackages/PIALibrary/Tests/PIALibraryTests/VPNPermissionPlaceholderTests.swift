@@ -55,8 +55,7 @@
 
         func testPlaceholderServerHasNonEmptyHostname() {
             XCTAssertFalse(Server.vpnPermissionPlaceholder.hostname.isEmpty)
-            // RFC 6761 reserved TLD: never resolves, never matches PIA-domain checks
-            // such as needsMigrationToGEN4().
+            // RFC 6761 reserved TLD: never resolves, never matches PIA-domain checks.
             XCTAssertTrue(Server.vpnPermissionPlaceholder.hostname.hasSuffix(".invalid"))
             XCTAssertFalse(Server.vpnPermissionPlaceholder.hostname.contains("privateinternetaccess.com"))
         }

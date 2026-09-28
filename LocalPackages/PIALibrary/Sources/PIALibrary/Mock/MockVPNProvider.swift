@@ -38,9 +38,6 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     // MARK: VPNProvider
 
     /// :nodoc:
-    public var availableVPNTypes: [String] = []
-
-    /// :nodoc:
     public var currentVPNType: String {
         return "Mock"
     }
@@ -101,11 +98,6 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     }
 
     /// :nodoc:
-    public func disable(_ callback: SuccessLibraryCallback?) {
-        callback?(nil)
-    }
-
-    /// :nodoc:
     public func disconnect(_ callback: SuccessLibraryCallback?) {
         vpnStatus = .disconnected
         Macros.postNotification(.PIADaemonsDidUpdateConnectivity)
@@ -141,11 +133,6 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     }
 
     /// :nodoc:
-    public func submitDebugReport() async throws -> String {
-        throw ClientError.unsupported
-    }
-
-    /// :nodoc:
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
         callback?(nil, ClientError.unsupported)
     }
@@ -153,9 +140,5 @@ public final class MockVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAc
     /// :nodoc:
     public func requestTunnelLog(_ callback: LibraryCallback<String>?) {
         callback?(nil, ClientError.unsupported)
-    }
-
-    public func needsMigrationToGEN4() -> Bool {
-        return false
     }
 }

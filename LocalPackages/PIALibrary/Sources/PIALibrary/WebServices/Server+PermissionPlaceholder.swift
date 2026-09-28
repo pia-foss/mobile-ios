@@ -32,7 +32,7 @@ extension Server {
     /// endpoint is never actually dialed.
     ///
     /// The hostname uses the RFC 6761 reserved `.invalid` TLD: it can never resolve
-    /// and never collides with PIA-domain checks such as `needsMigrationToGEN4()`.
+    /// and never collides with PIA-domain checks.
     /// Computed (not `static let`) because `Server` is a mutable class — each access
     /// returns a fresh instance instead of a shared, mutable process-wide one.
     static var vpnPermissionPlaceholder: Server {

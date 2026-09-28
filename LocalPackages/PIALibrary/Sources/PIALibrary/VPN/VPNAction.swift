@@ -40,21 +40,6 @@ public protocol VPNAction {
     func execute(_ callback: SuccessLibraryCallback?)
 }
 
-final class VPNActionReconnect: VPNAction, ProvidersAccess {
-    let priority = 10
-
-    let canRetainConnection = true
-
-    func execute(_ callback: SuccessLibraryCallback?) {
-        let vpn = accessedProviders.vpnProvider
-        guard (vpn.vpnStatus != .disconnected) else {
-            callback?(nil)
-            return
-        }
-        vpn.reconnect(after: nil, callback)
-    }
-}
-
 final class VPNActionReinstall: VPNAction, ProvidersAccess {
     let priority = 20
 

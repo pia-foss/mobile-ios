@@ -25,11 +25,6 @@ import Foundation
 /// Business interface related to the VPN connection.
 public protocol VPNProvider: AnyObject {
 
-    /// The available VPN types.
-    ///
-    /// - Seealso: `VPNProfile.vpnType`
-    var availableVPNTypes: [String] { get }
-
     /// The current VPN type to determine the `VPNProfile` that this provider controls.
     ///
     /// - Seealso: `VPNProfile.vpnType`
@@ -75,13 +70,6 @@ public protocol VPNProvider: AnyObject {
     func obtainVPNPermission(_ callback: SuccessLibraryCallback?)
 
     /**
-     Disables the current profile.
-
-     - Parameter callback: Returns `nil` on success.
-     */
-    func disable(_ callback: SuccessLibraryCallback?)
-
-    /**
      Uninstalls the current profile.
 
      - Parameter callback: Returns `nil` on success.
@@ -89,7 +77,7 @@ public protocol VPNProvider: AnyObject {
     func uninstall(_ callback: SuccessLibraryCallback?)
 
     /**
-     Uninstalls all profiles, known as per `availableVPNTypes`.
+     Uninstalls all known profiles.
      */
     func uninstallAll()
 
@@ -124,13 +112,6 @@ public protocol VPNProvider: AnyObject {
     func reconnect(after delay: Int?, forceDisconnect: Bool, _ callback: SuccessLibraryCallback?)
 
     /**
-     Submits the debug report containing all relevant information for the current session.
-
-     - Parameter callback: Returns the report identifier on success.
-     */
-    func submitDebugReport() async throws -> String
-
-    /**
      Submits the usage information associated with the current VPN connection.
 
      - Parameter callback: Returns the `Usage` information on success.
@@ -146,13 +127,6 @@ public protocol VPNProvider: AnyObject {
      */
     func requestTunnelLog(_ callback: LibraryCallback<String>?)
 
-    /**
-     Check if the VPN profile needs to be migrated to GEN4.
-     - Precondition: isVPNConnected == true
-     - Returns: `Bool`
-     */
-    func needsMigrationToGEN4() -> Bool
-
 }
 
 public extension VPNProvider {
@@ -160,25 +134,14 @@ public extension VPNProvider {
         return reconnect(after: delay, forceDisconnect: forceDisconnect, callback)
     }
 
-    /// Applies the currently-selected server to the tunnel using the mechanism the active stack
-    /// supports, so callers don't need to know which one is running.
-    ///
-    /// - Disconnected: a plain `connect()` starts the tunnel on the selected server.
-    /// - Active (PlatformSDK): `connect()` routes to an in-place `switchLocation` on the live tunnel
-    ///   — no teardown.
-    /// - Active (legacy IKEv2/OpenVPN/WireGuard): those profiles can't switch in place, so a full
-    ///   `reconnect(forceDisconnect:)` is required.
+    /// Applies the currently-selected server to the tunnel. When disconnected, `connect()` starts
+    /// the tunnel on the selected server; when active, it routes to an in-place `switchLocation`
+    /// on the live tunnel — no teardown.
     ///
     /// Use this for region changes. It is distinct from `reconnect(forceDisconnect:)`, which callers
     /// should keep using for changes that must reconfigure the NEVPNManager (protocol, Kill Switch,
     /// leak protection) and therefore need a full disconnect + `doSave`.
     func changeServer(_ callback: SuccessLibraryCallback?) {
-        guard vpnStatus != .disconnected else {
-            connect(callback)
-            return
-        }
-
-        // The PlatformSDK tunnel switches location in place; it needs no disconnect first.
         connect(callback)
     }
 

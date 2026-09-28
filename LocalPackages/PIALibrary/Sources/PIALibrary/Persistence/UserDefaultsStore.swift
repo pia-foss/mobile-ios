@@ -32,8 +32,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case lastSignupEmail = "LastSignupEmail"
 
-        case tokenMigrated = "TokenMigrated"
-
         case publicIP = "PublicIP"
 
         case geoCountryCode = "GeoCountryCode"
@@ -119,8 +117,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         case lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
 
         case timeToConnectVPN = "timeToConnectVPN"
-
-        case wireguardMigrationPerformed = "WireguardMigrationPerformed"
 
         case leakProtection = "LeakProtection"
 
@@ -236,15 +232,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
             } else {
                 backend.removeObject(forKey: .lastSignupEmail)
             }
-        }
-    }
-
-    var tokenMigrated: Bool {
-        get {
-            return backend.bool(forKey: .tokenMigrated)
-        }
-        set {
-            backend.set(newValue, forKey: .tokenMigrated)
         }
     }
 
@@ -541,18 +528,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: .timeToConnectVPN)
-        }
-    }
-
-    var wireguardMigrationPerformed: Bool {
-        get {
-            if backend.object(forKey: .wireguardMigrationPerformed) == nil {
-                backend.set(false, forKey: .wireguardMigrationPerformed)
-            }
-            return backend.bool(forKey: .wireguardMigrationPerformed)
-        }
-        set {
-            backend.set(newValue, forKey: .wireguardMigrationPerformed)
         }
     }
 

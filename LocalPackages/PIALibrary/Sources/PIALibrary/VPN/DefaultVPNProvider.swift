@@ -25,26 +25,16 @@ import NetworkExtension
 
 fileprivate let log = PIALogger.logger(for: DefaultVPNProvider.self)
 
-public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess, WebServicesAccess {
+public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, DatabaseAccess, PreferencesAccess, ProvidersAccess {
 
     private static let forcedStatuses: [VPNStatus] = [
         .connected,
         .connecting
     ]
 
-    private let customWebServices: WebServices?
-
-    init(webServices: WebServices? = nil) {
-        if let webServices = webServices {
-            customWebServices = webServices
-        } else {
-            customWebServices = nil
-        }
-    }
-
     // MARK: VPNProvider
 
-    public var availableVPNTypes: [String] {
+    private var availableVPNTypes: [String] {
         return accessedConfiguration.availableVPNTypes()
     }
 
@@ -93,10 +83,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             return nil
         }
         return PIATunnelSharedState.readStatus().activeConnection
-    }
-
-    private var vpnLog: String {
-        return accessedDatabase.transient.vpnLog
     }
 
     private var activeProfile: VPNProfile? {
@@ -216,15 +202,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         }
     }
 
-    public func disable(_ callback: SuccessLibraryCallback?) {
-        guard let activeProfile else {
-            callback?(ClientError.vpnProfileUnavailable)
-            return
-        }
-        activeProfile.disconnect(nil)
-        activeProfile.disable(callback)
-    }
-
     public func uninstall(_ callback: SuccessLibraryCallback?) {
         guard let activeProfile else {
             callback?(ClientError.vpnProfileUnavailable)
@@ -292,20 +269,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             VPNDaemon.shared.abortReconnectCycleIfNeeded()
         }
 
-        // Capture the tunnel log best-effort, in parallel: the provider message
-        // never gets a reply when the tunnel process is wedged (e.g. after a
-        // network change), so the disconnect below must not wait on it.
-        // The configuration is not passed to `requestLog` any more — its presence is still the
-        // check for "we have something to talk to".
-        if vpnClientConfiguration() != nil {
-            activeProfile.requestLog { (content, error) in
-                guard let content, !content.isEmpty else {
-                    return
-                }
-                self.accessedDatabase.transient.vpnLog += "\n\n" + content
-            }
-        }
-
         activeProfile.disconnect(callback)
     }
 
@@ -352,13 +315,6 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             }
             activeProfile.connect(withConfiguration: configuration, callback)
         }
-    }
-
-    public func submitDebugReport() async throws -> String {
-        guard activeProfile != nil else {
-            throw ClientError.vpnProfileUnavailable
-        }
-        return try await webServices.submitDebugReport()
     }
 
     public func dataUsage(_ callback: LibraryCallback<Usage>?) {
@@ -523,25 +479,5 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             leakProtection: accessedPreferences.leakProtection,
             allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
         )
-    }
-
-    // MARK: WebServicesConsumer
-
-    var webServices: WebServices {
-        return customWebServices ?? accessedWebServices
-    }
-
-    // MARK: Migration
-    public func needsMigrationToGEN4() -> Bool {
-        if isVPNConnected {
-            let manager = NEVPNManager.shared()
-            if let protocolConfiguration = manager.protocolConfiguration,
-                let address = protocolConfiguration.serverAddress,
-                address.contains("privateinternetaccess.com")
-            {
-                return true
-            }
-        }
-        return false
     }
 }

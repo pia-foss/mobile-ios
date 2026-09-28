@@ -182,22 +182,6 @@ final class Bootstrapper {
             self.checkForceUpdateIfNeeded()
         }
 
-        //FORCE THE MIGRATION TO GEN4
-        #if os(iOS)
-            if Client.providers.vpnProvider.needsMigrationToGEN4() {
-
-                Client.preferences.displayedServer = Server.automatic
-                NotificationCenter.default.post(
-                    name: .PIAThemeDidChange,
-                    object: self,
-                    userInfo: nil)
-                Client.providers.vpnProvider.reconnect(
-                    after: 200, forceDisconnect: true,
-                    { _ in
-                    })
-            }
-        #endif
-
         Client.observeTransactions()
         Client.providers.accountProvider.subscriptionInformation { info, error in
             if let error {

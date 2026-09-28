@@ -34,8 +34,6 @@ extension Client {
 
         static let appGroup = "group.com.privateinternetaccess"
 
-        static let debugLogKey = "LastVPNLog"
-
         /// If `true`, the connection to the VPN was initiated by the user
         public var connectedManually: Bool
 

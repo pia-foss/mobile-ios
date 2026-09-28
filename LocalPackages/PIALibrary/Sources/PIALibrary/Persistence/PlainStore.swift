@@ -30,8 +30,6 @@ protocol PlainStore: AnyObject {
 
     var lastSignupEmail: String? { get set }
 
-    var tokenMigrated: Bool { get set }
-
     // MARK: IP
 
     var publicIP: String? { get set }
@@ -81,8 +79,6 @@ protocol PlainStore: AnyObject {
     var lastVPNConnectionSuccess: Double? { get set }
 
     var timeToConnectVPN: Double { get set }
-
-    var wireguardMigrationPerformed: Bool { get set }
 
     var leakProtection: Bool { get set }
 
