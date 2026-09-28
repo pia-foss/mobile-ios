@@ -28,15 +28,14 @@ private let log = PIALogger.logger(for: ModalNavigationSegue.self)
 
 final class ModalNavigationSegue: UIStoryboardSegue {
 
-    // XXX: dismissModal accessed via protocol is not exposed to Obj-C
     override func perform() {
         guard let modal = destination as? AutolayoutViewController else {
-            log.error("Segue destination is not a ModalController")
+            log.error("Segue destination is not a AutolayoutViewController")
             return
         }
 
         modal.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+            barButtonSystemItem: .close,
             target: modal,
             action: #selector(modal.dismissModal)
         )

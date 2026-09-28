@@ -52,9 +52,9 @@
 		A1A1A1A1A1A1A1A1A1A1A102 /* PIAAssetsTV in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */; };
 		A1A1A1A1A1A1A1A1A1A1A104 /* PIAAssetsWidget in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A105 /* PIAAssetsWidget */; };
 		A1A1A1A1A1A1A1A1A1A1A106 /* PIAAssetsFlags in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A107 /* PIAAssetsFlags */; };
-		A1A1A1A1A1A1A1A1A1A1A112 /* PIAAssetsFlags in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A113 /* PIAAssetsFlags */; };
 		A1A1A1A1A1A1A1A1A1A1A108 /* PIAAssetsFlags in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A109 /* PIAAssetsFlags */; };
 		A1A1A1A1A1A1A1A1A1A1A10A /* PIAAssetsFlags in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A10B /* PIAAssetsFlags */; };
+		A1A1A1A1A1A1A1A1A1A1A112 /* PIAAssetsFlags in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1A1A1A1A1A1A1A1A1A113 /* PIAAssetsFlags */; };
 		AA36CDC428A6711300180A33 /* Popover in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC328A6711300180A33 /* Popover */; };
 		AA36CDC928A6733500180A33 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDC828A6733500180A33 /* DZNEmptyDataSet */; };
 		AA36CDCC28A673C900180A33 /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = AA36CDCB28A673C900180A33 /* GradientProgressBar */; };
@@ -656,10 +656,10 @@
 			dependencies = (
 				0EEE1BED1E4F6EF400397DE2 /* PBXTargetDependency */,
 			);
+			name = "PIA VPNTests";
 			packageProductDependencies = (
 				A1A1A1A1A1A1A1A1A1A1A113 /* PIAAssetsFlags */,
 			);
-			name = "PIA VPNTests";
 			productName = "PIA VPNTests";
 			productReference = 0EEE1BE71E4F6EF400397DE2 /* PIA VPNTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -3710,15 +3710,15 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAAssetsFlags;
 		};
-		A1A1A1A1A1A1A1A1A1A1A113 /* PIAAssetsFlags */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PIAAssetsFlags;
-		};
 		A1A1A1A1A1A1A1A1A1A1A109 /* PIAAssetsFlags */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAAssetsFlags;
 		};
 		A1A1A1A1A1A1A1A1A1A1A10B /* PIAAssetsFlags */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAAssetsFlags;
+		};
+		A1A1A1A1A1A1A1A1A1A1A113 /* PIAAssetsFlags */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAAssetsFlags;
 		};
