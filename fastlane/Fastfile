@@ -17,7 +17,7 @@ platform :ios do
       output_directory: "fastlane/test_output",
       result_bundle: true,
       cloned_source_packages_path: ".build/SourcePackages",
-      destination: "platform=iOS Simulator,name=iPhone 17 Pro"
+      destination: "platform=iOS Simulator,name=iPhone 18 Pro"
     )
   end
 
@@ -35,7 +35,7 @@ platform :ios do
     run_tests(
       scheme: "PIA VPN Development",
       testplan: "PIA-VPN-e2e-simulator",
-      destination: "platform=iOS Simulator,name=iPhone 17 Pro",
+      destination: "platform=iOS Simulator,name=iPhone 18 Pro",
       prelaunch_simulator: true,
       test_without_building: true
     )
