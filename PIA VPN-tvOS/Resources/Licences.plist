@@ -70,27 +70,11 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>QuickLayout</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2017 huri000@gmail.com</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/huri000/QuickLayout/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>SwiftEntryKit</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2018 Daniel Huri</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/huri000/SwiftEntryKit/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>nanopb</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2011 Petteri Aimonen</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>
