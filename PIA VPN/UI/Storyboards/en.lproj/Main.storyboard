@@ -399,50 +399,6 @@
             </objects>
             <point key="canvasLocation" x="3962.4000000000001" y="904.43349753694588"/>
         </scene>
-        <!--Dedicated Ip View Controller-->
-        <scene sceneID="nJ5-pl-27N">
-            <objects>
-                <viewController id="PW2-xO-eP5" customClass="DedicatedIpViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dN1-YI-Ruq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="762"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DO-6R-6fa">
-                                <rect key="frame" x="0.0" y="50" width="375" height="712"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgy-HC-kgn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="712"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="hgy-HC-kgn" firstAttribute="leading" secondItem="1DO-6R-6fa" secondAttribute="leading" id="PoH-5w-l2C"/>
-                                    <constraint firstItem="hgy-HC-kgn" firstAttribute="top" secondItem="1DO-6R-6fa" secondAttribute="top" id="c15-u2-F20"/>
-                                    <constraint firstAttribute="trailing" secondItem="hgy-HC-kgn" secondAttribute="trailing" id="i2h-jv-Kig"/>
-                                    <constraint firstAttribute="bottom" secondItem="hgy-HC-kgn" secondAttribute="bottom" id="kfL-BD-0b6"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="tRH-kf-Psh"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="1DO-6R-6fa" firstAttribute="leading" secondItem="tRH-kf-Psh" secondAttribute="leading" id="TFg-l4-Emt"/>
-                            <constraint firstItem="1DO-6R-6fa" firstAttribute="top" secondItem="tRH-kf-Psh" secondAttribute="top" id="cG7-75-Ba1"/>
-                            <constraint firstItem="tRH-kf-Psh" firstAttribute="bottom" secondItem="1DO-6R-6fa" secondAttribute="bottom" id="dsr-AQ-kE3"/>
-                            <constraint firstItem="tRH-kf-Psh" firstAttribute="trailing" secondItem="1DO-6R-6fa" secondAttribute="trailing" id="oAW-5C-Khl"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="TLs-Dr-ZRv"/>
-                    <connections>
-                        <outlet property="tableView" destination="hgy-HC-kgn" id="7FX-fT-QEm"/>
-                        <outlet property="viewContainer" destination="1DO-6R-6fa" id="l6R-K6-7BW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l1w-hP-ebK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="377" y="1782"/>
-        </scene>
         <!--Account-->
         <scene sceneID="eBk-KP-ts6">
             <objects>
@@ -965,7 +921,6 @@
                         <segue destination="MU8-v2-7Zn" kind="show" identifier="ShowQuickSettingsViewController" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="gOr-cS-0Jn"/>
                         <segue destination="Jcq-Qm-xQ1" kind="presentation" identifier="ShowAddEmailSegue" id="2vQ-Ts-0N1"/>
                         <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsAndWireGuardSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="jku-ph-JBL"/>
-                        <segue destination="PW2-xO-eP5" kind="presentation" identifier="DedicatedIpSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="0Jo-gy-IXH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcN-zf-hGC" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -665,13 +665,9 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openDedicatedIp() {
-        if Client.configuration.featureFlags[.swiftuiDedicatedIp] {
-            let screen = DedicatedIPFactory.makeDedicatedIPView()
-            let vc = AutolayoutHostingController(rootView: screen)
-            ModalNavigationSegue.configureAndPresent(modal: vc, from: self)
-        } else {
-            perform(segue: StoryboardSegue.Main.dedicatedIpSegueIdentifier)
-        }
+        let screen = DedicatedIPFactory.makeDedicatedIPView()
+        let vc = AutolayoutHostingController(rootView: screen)
+        ModalNavigationSegue.configureAndPresent(modal: vc, from: self)
     }
 
     func openAbout() {

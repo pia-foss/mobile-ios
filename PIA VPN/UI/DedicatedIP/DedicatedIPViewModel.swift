@@ -70,13 +70,13 @@ final class DedicatedIPViewModel: ObservableObject {
         isLoading = false
 
         switch result {
-        case .success:
+        case let .success(server):
             Macros.displaySuccessImageNote(
                 withImage: Asset.iconWarning.image,
                 message: L10n.Dedicated.Ip.Message.Valid.token
             )
             token = ""
-            await load()
+            dedicatedIp = server
 
         case .failure(.alreadyHasOne):
             log.error("Activate DIP token failed: existing DIP already")
@@ -103,7 +103,6 @@ final class DedicatedIPViewModel: ObservableObject {
             handleActivationError(error)
         }
 
-        Macros.postNotification(.DedicatedIpReload)
         Macros.postNotification(.PIAThemeDidChange)
     }
 

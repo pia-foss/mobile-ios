@@ -30,8 +30,7 @@ import UIKit
 
 struct DedicatedIPView: View, ViewWithTitle {
     @ObservedObject private var viewModel: DedicatedIPViewModel
-    @State private var showDeleteAlert = false
-    @FocusState private var isTokenFieldFocused: Bool
+    @State private var isShowingRemoveAlert = false
 
     init(viewModel: DedicatedIPViewModel) {
         self._viewModel = .init(wrappedValue: viewModel)
@@ -41,9 +40,13 @@ struct DedicatedIPView: View, ViewWithTitle {
 
     var body: some View {
         List {
-            headerListRow
-            if viewModel.dedicatedIp != nil {
-                dipListSection
+            DipHeader(hasDedicatedIP: viewModel.dedicatedIp != nil, token: $viewModel.token) {
+                Task {
+                    await viewModel.activate()
+                }
+            }
+            if let server = viewModel.dedicatedIp {
+                ListSection(server: server, isShowingRemoveAlert: $isShowingRemoveAlert)
             }
         }
         .listStyle(.plain)
@@ -51,12 +54,12 @@ struct DedicatedIPView: View, ViewWithTitle {
         .background(Color.pia.background)
         .overlay {
             if viewModel.isLoading {
-                loadingOverlay
+                LoadingOverlay()
             }
         }
-        .alert(L10n.Dedicated.Ip.remove, isPresented: $showDeleteAlert) {
+        .alert(L10n.Dedicated.Ip.remove, isPresented: $isShowingRemoveAlert) {
             Button(L10n.Global.cancel, role: .cancel) {}
-            Button(L10n.Global.ok, role: .destructive) {
+            Button(L10n.Global.remove, role: .destructive) {
                 Task { await viewModel.deactivate() }
             }
         }
@@ -64,21 +67,24 @@ struct DedicatedIPView: View, ViewWithTitle {
             await viewModel.load()
         }
     }
+}
 
-    // MARK: - Header row
+private struct DipHeader: View {
+    let hasDedicatedIP: Bool
+    @Binding var token: String
+    let activate: () -> Void
 
-    private var headerListRow: some View {
+    var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.Dedicated.Ip.title)
                     .typography(.title1, color: .pia.onBackground)
 
-                if viewModel.dedicatedIp == nil {
-                    Text(L10n.Dedicated.Ip.Activation.description)
-                    tokenInputView
-
-                } else {
+                if hasDedicatedIP {
                     Text(L10n.Dedicated.Ip.Limit.title)
+                } else {
+                    Text(L10n.Dedicated.Ip.Activation.description)
+                    TokenInput(token: $token, activate: activate)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -90,44 +96,21 @@ struct DedicatedIPView: View, ViewWithTitle {
             .typography(.body2, color: .pia.onSurfaceContainerPrimary)
         }
     }
+}
 
-    // MARK: - Token input
+private struct ListSection: View {
+    let server: ServerType
+    @Binding var isShowingRemoveAlert: Bool
 
-    private var tokenInputView: some View {
-        HStack(spacing: 8) {
-            TextField(L10n.Dedicated.Ip.Token.Textfield.placeholder, text: $viewModel.token)
-                .typography(.body1)
-                .focused($isTokenFieldFocused)
-                .padding(.leading, 6)
-                .accessibilityLabel(L10n.Dedicated.Ip.Token.Textfield.accessibility)
-                .onSubmit {
-                    Task { await viewModel.activate() }
-                }
-
-            Button(L10n.Dedicated.Ip.Activate.Button.title) {
-                Task { await viewModel.activate() }
-            }
-            .primaryButton(radius: 6)
-        }
-        .padding(6)
-        .modifier(TextFieldModifier(isFocused: isTokenFieldFocused, focusedOutline: .pia.primary))
-    }
-
-    // MARK: - DIP list section
-
-    private var dipListSection: some View {
+    var body: some View {
         Section {
-            if let server = viewModel.dedicatedIp {
-                dipRow(server)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            showDeleteAlert = true
-                        } label: {
-                            // TODO: delete
-                            Label(L10n.Global.disable, systemImage: "trash")
-                        }
-                    }
-            }
+            DipRow(server: server)
+                .swipeActions(edge: .trailing) {
+                    RemoveButton(isShowingRemoveAlert: $isShowingRemoveAlert)
+                }
+                .contextMenu {
+                    RemoveButton(isShowingRemoveAlert: $isShowingRemoveAlert)
+                }
         } header: {
             HStack {
                 Text(L10n.Dedicated.Ip.Plural.title.uppercased())
@@ -143,10 +126,46 @@ struct DedicatedIPView: View, ViewWithTitle {
             .listRowSeparator(.hidden)
         }
     }
+}
 
-    // MARK: - DIP row
+private struct TokenInput: View {
+    @FocusState private var isTokenFieldFocused: Bool
+    @Binding var token: String
+    let activate: () -> Void
 
-    private func dipRow(_ server: ServerType) -> some View {
+    var body: some View {
+        HStack(spacing: 8) {
+            TextField(L10n.Dedicated.Ip.Token.Textfield.placeholder, text: $token)
+                .typography(.body1)
+                .focused($isTokenFieldFocused)
+                .padding(.leading, 6)
+                .accessibilityLabel(L10n.Dedicated.Ip.Token.Textfield.accessibility)
+                .onSubmit(activate)
+
+            Button(L10n.Dedicated.Ip.Activate.Button.title, action: activate)
+                .primaryButton(radius: 6)
+        }
+        .padding(6)
+        .modifier(TextFieldModifier(isFocused: isTokenFieldFocused, focusedOutline: .pia.primary))
+    }
+}
+
+private struct RemoveButton: View {
+    @Binding var isShowingRemoveAlert: Bool
+
+    var body: some View {
+        Button(role: .destructive) {
+            isShowingRemoveAlert = true
+        } label: {
+            Label(L10n.Global.remove, systemImage: "trash")
+        }
+    }
+}
+
+private struct DipRow: View {
+    let server: any ServerType
+
+    var body: some View {
         HStack(spacing: 12) {
             ServerFlagButton(
                 name: server.name,
@@ -171,10 +190,10 @@ struct DedicatedIPView: View, ViewWithTitle {
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)
     }
+}
 
-    // MARK: - Loading
-
-    private var loadingOverlay: some View {
+private struct LoadingOverlay: View {
+    var body: some View {
         ZStack {
             Color.black.opacity(0.3).ignoresSafeArea()
             ProgressView()
