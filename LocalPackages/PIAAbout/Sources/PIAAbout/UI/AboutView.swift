@@ -21,12 +21,15 @@
 
 import PIADesignSystem
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
-public struct AboutView: View {
+public struct AboutView: View, ViewWithTitle {
     @StateObject private var store: AboutStore
 
-    init(header: String, dependencies: About.Dependencies) {
+    public var navigationTitle: String { L10n.Menu.Item.about }
+
+    public init(header: String, dependencies: About.Dependencies) {
         _store = StateObject(wrappedValue: AboutStore(initialState: .init(header: header), dependencies: dependencies))
     }
 

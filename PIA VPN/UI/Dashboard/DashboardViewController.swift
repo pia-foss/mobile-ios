@@ -32,8 +32,6 @@ import SideMenu
 import UIKit
 import WidgetKit
 
-import class SwiftUI.UIHostingController
-
 private let log = PIALogger.logger(for: DashboardViewController.self)
 
 enum DashboardVPNConnectingStatus: Int {
@@ -47,8 +45,6 @@ final class DashboardViewController: AutolayoutViewController {
 
     /// The modally presented signup flow, retained while it is on screen.
     private var signupCoordinator: SignupCoordinator?
-    private var dedicatedIPCoordinator: DedicatedIPCoordinator?
-    private var dedicatedIPCancellables = Set<AnyCancellable>()
     private var signupCancellables = Set<AnyCancellable>()
 
     enum TileSize: CGFloat {
@@ -667,13 +663,10 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openDedicatedIp() {
-        dedicatedIPCancellables.removeAll()
         let coordinator = DedicatedIPCoordinator(presenter: self)
-        dedicatedIPCoordinator = coordinator
-        coordinator.output
-            .sink { [weak self] _ in self?.dedicatedIPCoordinator = nil }
-            .store(in: &dedicatedIPCancellables)
-        coordinator.start()
+        Task {
+            await coordinator.startAsync()
+        }
     }
 
     func openAbout() {

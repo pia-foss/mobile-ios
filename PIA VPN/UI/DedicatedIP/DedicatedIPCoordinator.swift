@@ -19,46 +19,22 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
-import CoreArchitecture
 import PIAAssetsMobile
 import PIADedicatedIP
 import PIALibrary
-import UIKit
 
-/// Presents the Dedicated IP screen modally and turns its outputs into banners, notifications and
-/// logout.
-final class DedicatedIPCoordinator: FlowCoordinator {
-
-    enum Output {
-        case didFinish
-    }
-
-    private let presenter: UIViewController
-    private let subject = PassthroughSubject<Output, Never>()
-
-    var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
-
-    init(presenter: UIViewController) {
-        self.presenter = presenter
-    }
-
-    // MARK: FlowCoordinator
-
-    func start() {
-        MainActor.assumeIsolated {
-            let store = DedicatedIPStore(
-                dependencies: .live(
-                    getDedicatedIp: DedicatedIPFactory.makeGetDedicatedIpUseCase(),
-                    activateDIPToken: DedicatedIPFactory.makeActivateDIPTokenUseCase(),
-                    removeDIPToken: DedicatedIPFactory.makeRemoveDIPUseCase(),
-                    emit: { [weak self] in self?.handle($0) }
-                )
+final class DedicatedIPCoordinator: ModalCoordinator<DedicatedIPView> {
+    @MainActor
+    override func buildContent() -> DedicatedIPView {
+        let store = DedicatedIPStore(
+            dependencies: .live(
+                getDedicatedIp: DedicatedIPFactory.makeGetDedicatedIpUseCase(),
+                activateDIPToken: DedicatedIPFactory.makeActivateDIPTokenUseCase(),
+                removeDIPToken: DedicatedIPFactory.makeRemoveDIPUseCase(),
+                emit: { [weak self] in self?.handle($0) }
             )
-            let host = AutolayoutHostingController(rootView: DedicatedIPView(store: store))
-            host.onDismiss = { [weak self] in self?.subject.send(.didFinish) }
-            ModalNavigationSegue.configureAndPresent(modal: host, from: presenter)
-        }
+        )
+        return DedicatedIPView(store: store)
     }
 
     // MARK: Outputs
