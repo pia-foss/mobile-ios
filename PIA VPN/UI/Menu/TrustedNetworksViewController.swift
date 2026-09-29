@@ -145,14 +145,19 @@ final class TrustedNetworksViewController: AutolayoutViewController {
         }
         data = data.sorted(by: { $0.type.order() < $1.type.order() })
 
-        let networks = Client.preferences.nmtTrustedNetworkRules
-        let sortedKeys = networks.keys.sorted()
+        #if targetEnvironment(macCatalyst)
+            // Macs have no cellular and can't read the Wi-Fi name, so only the Secure Wi-Fi rule applies
+            data.removeAll { $0.type == .openWiFi || $0.type == .cellular }
+        #else
+            let networks = Client.preferences.nmtTrustedNetworkRules
+            let sortedKeys = networks.keys.sorted()
 
-        for key in sortedKeys {
-            if let raw = networks[key], let rule = NMTRules(rawValue: raw) {
-                data.append(Rule(type: NMTType.trustedNetwork, rule: rule, ssid: key))
+            for key in sortedKeys {
+                if let raw = networks[key], let rule = NMTRules(rawValue: raw) {
+                    data.append(Rule(type: NMTType.trustedNetwork, rule: rule, ssid: key))
+                }
             }
-        }
+        #endif
 
     }
 
@@ -246,14 +251,18 @@ extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UIC
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 
-        let nib = UINib(nibName: Cells.footer, bundle: nil)
-        let footerView = nib.instantiate(withOwner: nil, options: nil).first as! NetworkFooterCollectionViewCell
-        footerView.setup()
+        #if targetEnvironment(macCatalyst)
+            return .zero
+        #else
+            let nib = UINib(nibName: Cells.footer, bundle: nil)
+            let footerView = nib.instantiate(withOwner: nil, options: nil).first as! NetworkFooterCollectionViewCell
+            footerView.setup()
 
-        return footerView.systemLayoutSizeFitting(
-            CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
-            withHorizontalFittingPriority: .defaultHigh,
-            verticalFittingPriority: .fittingSizeLevel)
+            return footerView.systemLayoutSizeFitting(
+                CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
+                withHorizontalFittingPriority: .defaultHigh,
+                verticalFittingPriority: .fittingSizeLevel)
+        #endif
 
     }
 
