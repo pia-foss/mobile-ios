@@ -24,9 +24,6 @@ import Foundation
 import PIALibrary
 import UIKit
 
-#if os(iOS)
-#endif
-
 struct AppConfiguration {
     struct About {
         static let copyright = "2014-2021"

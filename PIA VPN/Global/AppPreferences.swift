@@ -25,9 +25,6 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if os(iOS)
-#endif
-
 private let log = PIALogger.logger(for: AppPreferences.self)
 
 final class AppPreferences {

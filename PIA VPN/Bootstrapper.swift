@@ -28,9 +28,6 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if os(iOS)
-#endif
-
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
 }
