@@ -464,6 +464,7 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
         let currentServer = Client.preferences.displayedServer
         let isVPNConnected = Client.providers.vpnProvider.isVPNConnected
         guard !isVPNConnected || selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken else {
+            dismissModal(completion: nil)
             return
         }
 
