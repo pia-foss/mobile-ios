@@ -37,7 +37,7 @@
 			<key>Copyright</key>
 			<string>Copyright (c) 1998-2018 The OpenSSL Project. All rights reserved.</string>
 			<key>LicenseURL</key>
-			<string>https://www.openssl.org/source/license.txt</string>
+			<string>https://raw.githubusercontent.com/openssl/openssl/refs/heads/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -54,14 +54,6 @@
 			<string>Copyright (c) 2017 fxm90</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/fxm90/GradientProgressBar/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>TPKeyboardAvoiding</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2013 Michael Tyson</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/michaeltyson/TPKeyboardAvoiding/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>
@@ -97,27 +89,11 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>QuickLayout</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2017 huri000@gmail.com</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/huri000/QuickLayout/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>SwiftEntryKit</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2018 Daniel Huri</string>
 			<key>LicenseURL</key>
 			<string>https://raw.githubusercontent.com/huri000/SwiftEntryKit/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>nanopb</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2011 Petteri Aimonen</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/nanopb/nanopb/master/LICENSE.txt</string>
 		</dict>
 		<dict>
 			<key>Name</key>

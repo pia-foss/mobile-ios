@@ -20,6 +20,7 @@
 //
 
 import Combine
+import CoreArchitecture
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
@@ -35,7 +36,7 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
-final class SignupCoordinator: NSObject, Coordinator {
+final class SignupCoordinator: NSObject, FlowCoordinator {
 
     enum Output {
         /// The customer signed up or signed in. `isSignup` distinguishes the two, because an
