@@ -460,8 +460,10 @@ extension RegionsViewController: UITableViewDataSource, UITableViewDelegate {
 
         TransientState.shouldDisplayRegionPicker = false
 
+        // While disconnected, tapping the current selection still has to connect.
         let currentServer = Client.preferences.displayedServer
-        guard (selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken) else {
+        let isVPNConnected = Client.providers.vpnProvider.isVPNConnected
+        guard !isVPNConnected || selectedServer.identifier != currentServer.identifier || selectedServer.dipToken != currentServer.dipToken else {
             return
         }
 
