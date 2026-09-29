@@ -334,6 +334,12 @@ public final class DefaultServerProvider: ServerProvider, ConfigurationAccess, D
             return
         }
         accessedDatabase.secure.remove(dipToken)
+
+        if accessedDatabase.plain.preferredServer?.dipToken == dipToken {
+            log.info("Removed DIP server was selected, falling back to automatic")
+            accessedDatabase.plain.preferredServer = nil
+        }
+
         // Writes unconditionally: callers rely on the notification even when the token was absent.
         updateCurrentServers { servers in
             servers = servers.filter { $0.dipToken != dipToken }
