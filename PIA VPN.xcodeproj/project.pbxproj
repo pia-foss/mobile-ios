@@ -256,6 +256,7 @@
 				Core/PIACardTests.swift,
 				Core/Utils/AppleIDIdentityTokenTests.swift,
 				Core/Utils/PIAHotspotHelperTests.swift,
+				Core/Utils/TrustedNetworkUtilsTests.swift,
 				"Helpers/Stubs+PIALibrary.swift",
 				Migration/LegacyCustomDNSMigrationTests.swift,
 				Mocks/AccountProviderMock.swift,

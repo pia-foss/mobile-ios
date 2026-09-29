@@ -12,21 +12,40 @@ import WidgetKit
 class TrustedNetworkUtils {
 
     static var isTrustedNetwork: Bool {
-        if Client.preferences.nmtRulesEnabled {
-            if let ssid = PIAHotspotHelper().currentWiFiNetwork() {
-                if Client.preferences.nmtGenericRules[NMTType.protectedWiFi.rawValue] == NMTRules.alwaysDisconnect.rawValue || (Client.preferences.nmtTrustedNetworkRules[ssid] == NMTRules.alwaysDisconnect.rawValue) {
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            } else {
-                if Client.preferences.nmtGenericRules[NMTType.cellular.rawValue] == NMTRules.alwaysDisconnect.rawValue {
-                    setWidgetTrustedNetworkStatus(isTrustedNetwork: true)
-                    return true
-                }
-            }
+        #if targetEnvironment(macCatalyst)
+            let hasCellular = false
+        #else
+            let hasCellular = true
+        #endif
+
+        return isTrustedNetwork(
+            ssid: PIAHotspotHelper().currentWiFiNetwork(),
+            isOnWiFi: WiFiPathMonitor.shared.isOnWiFi,
+            hasCellular: hasCellular
+        )
+    }
+
+    static func isTrustedNetwork(ssid: String?, isOnWiFi: Bool, hasCellular: Bool) -> Bool {
+        let alwaysDisconnect = NMTRules.alwaysDisconnect.rawValue
+        let genericRules = Client.preferences.nmtGenericRules
+        let isTrusted: Bool
+
+        if !Client.preferences.nmtRulesEnabled {
+            isTrusted = false
+        } else if let ssid {
+            isTrusted = genericRules[NMTType.protectedWiFi.rawValue] == alwaysDisconnect || Client.preferences.nmtTrustedNetworkRules[ssid] == alwaysDisconnect
+        } else if isOnWiFi {
+            // The SSID is unavailable on Mac Catalyst, the generic Wi-Fi rule still applies
+            isTrusted = genericRules[NMTType.protectedWiFi.rawValue] == alwaysDisconnect
+        } else if !hasCellular {
+            // Without cellular (Mac) this is Ethernet, which no rule covers
+            isTrusted = false
+        } else {
+            isTrusted = genericRules[NMTType.cellular.rawValue] == alwaysDisconnect
         }
-        setWidgetTrustedNetworkStatus(isTrustedNetwork: false)
-        return false
+
+        setWidgetTrustedNetworkStatus(isTrustedNetwork: isTrusted)
+        return isTrusted
     }
 
     private static func setWidgetTrustedNetworkStatus(isTrustedNetwork: Bool) {
