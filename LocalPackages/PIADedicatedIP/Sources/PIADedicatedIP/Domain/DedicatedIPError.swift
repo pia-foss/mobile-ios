@@ -1,6 +1,6 @@
 //
 //  DedicatedIPError.swift
-//  PIA VPN-tvOS
+//  PIADedicatedIP
 //
 //  Created by Said Rehouni on 14/2/24.
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DedicatedIPError: Error {
+public enum DedicatedIPError: Error {
     /// Token is expired.
     case expired
     /// Token is invalid.

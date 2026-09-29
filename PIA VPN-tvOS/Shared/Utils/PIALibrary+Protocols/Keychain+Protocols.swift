@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-protocol KeychainType {
+protocol KeychainType: Sendable {
     func getFavorites() throws -> [String]
     func set(favorites: [String]) throws
     func eraseAllFavorites() throws

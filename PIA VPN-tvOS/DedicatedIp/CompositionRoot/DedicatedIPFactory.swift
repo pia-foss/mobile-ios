@@ -7,19 +7,22 @@
 //
 
 import Foundation
+import PIADedicatedIP
 import PIALibrary
 
 public enum DedicatedIPFactory {
-    static func makeDedicatedIPView() -> DedicatedIPView {
-        DedicatedIPView(viewModel: makeDedicatedIPViewModel())
-    }
+    #if os(tvOS)
+        static func makeDedicatedIPView() -> DedicatedIPView {
+            DedicatedIPView(viewModel: makeDedicatedIPViewModel())
+        }
 
-    private static func makeDedicatedIPViewModel() -> DedicatedIPViewModel {
-        DedicatedIPViewModel(
-            getDedicatedIp: makeGetDedicatedIpUseCase(),
-            activateDIPToken: makeActivateDIPTokenUseCase(),
-            removeDIPToken: makeRemoveDIPUseCase())
-    }
+        private static func makeDedicatedIPViewModel() -> DedicatedIPViewModel {
+            DedicatedIPViewModel(
+                getDedicatedIp: makeGetDedicatedIpUseCase(),
+                activateDIPToken: makeActivateDIPTokenUseCase(),
+                removeDIPToken: makeRemoveDIPUseCase())
+        }
+    #endif
 
     static func makeGetDedicatedIpUseCase() -> GetDedicatedIpUseCaseType {
         GetDedicatedIpUseCase(
@@ -41,7 +44,7 @@ public enum DedicatedIPFactory {
     }
 
     private static func makeDedicatedIPProvider() -> DedicatedIPProviderType {
-        DedicatedIPProvider(serverProvider: makeDefaultServerProvider())
+        DedicatedIPProvider(serverProvider: makeDefaultServerProvider(), makeServerType: { $0 })
     }
 
     private static func makeDefaultServerProvider() -> DefaultServerProvider {

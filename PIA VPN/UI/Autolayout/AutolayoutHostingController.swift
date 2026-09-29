@@ -13,6 +13,8 @@ import SwiftUI
 
 public final class AutolayoutHostingController<Content: ViewWithTitle>: UIHostingController<Content>, ModalController, Restylable {
 
+    public var onDismiss: (() -> Void)?
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -35,7 +37,10 @@ public final class AutolayoutHostingController<Content: ViewWithTitle>: UIHostin
     }
 
     public func dismissModal(completion: (() -> Void)?) {
-        dismiss(animated: true, completion: completion)
+        dismiss(animated: true) { [weak self] in
+            completion?()
+            self?.onDismiss?()
+        }
     }
 
     // MARK: Restylable

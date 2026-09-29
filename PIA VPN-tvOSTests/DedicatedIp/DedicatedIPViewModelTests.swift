@@ -7,6 +7,7 @@
 //
 
 import Combine
+import PIADedicatedIP
 import PIALibrary
 import PIALocalizations
 import XCTest

@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import PIADedicatedIP
 import PIALibrary
 import XCTest
 

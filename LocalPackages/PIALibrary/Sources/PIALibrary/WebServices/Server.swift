@@ -32,7 +32,7 @@ public enum ServerError: Error {
 }
 
 /// Represents a VPN server.
-public final class Server {
+public final class Server: Sendable {
 
     /// Serial host
     public let serial: String
@@ -77,8 +77,9 @@ public final class Server {
         }
     }
 
+    // TODO: remove "unchecked" Sendable
     /// Represents a VPN server IP endpoint.
-    public final class ServerAddressIP: Encodable {
+    public final class ServerAddressIP: Encodable, @unchecked Sendable {
 
         /// The endpoint ip.
         public let ip: String

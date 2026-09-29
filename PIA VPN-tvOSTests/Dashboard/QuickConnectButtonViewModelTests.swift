@@ -1,3 +1,4 @@
+import PIADedicatedIP
 import XCTest
 
 @testable import PIA_VPN_tvOS

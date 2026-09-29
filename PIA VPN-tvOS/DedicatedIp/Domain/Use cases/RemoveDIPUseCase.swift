@@ -8,11 +8,8 @@
 
 import Foundation
 import PIADashboard
+import PIADedicatedIP
 import PIALibrary
-
-protocol RemoveDIPUseCaseType {
-    func callAsFunction() async throws
-}
 
 private let log = PIALogger.logger(for: RemoveDIPUseCase.self)
 

@@ -13,13 +13,13 @@ extension XCUIApplication {
     var dedicatedIPHeader: XCUIElement { staticText(with: dedicatedIPTitleString) }
     var dedicatedIPTextFieldString: String { getString(key: "dedicated.ip.token.textfield.accessibility", comment: "The textfield to type the Dedicated IP token") }
     var dedicatedIPTextField: XCUIElement { textField(with: dedicatedIPTextFieldString) }
-    var dedicatedIPList: XCUIElement { cell(with: "DedicatedIpRowViewCell") }
+    var dedicatedIPList: XCUIElement { cell(with: "DedicatedIpRow") }
     var invalidTokenErrorString: String { getString(key: "dedicated.ip.message.invalid.token", comment: "Your token is invalid. Please make sure you have entered the token correctly.") }
     var invalidTokenErrorMessage: XCUIElement { staticText(with: invalidTokenErrorString) }
     var emptyTokenErrorString: String { getString(key: "dedicated.ip.message.incorrect.token", comment: "Please make sure you have entered the token correctly") }
     var emptyTokenErrorMessage: XCUIElement { staticText(with: emptyTokenErrorString) }
-    var deleteTokenButton: XCUIElement { button(with: "Delete") }
-    var confirmDeleteButton: XCUIElement { staticText(with: "OK") }
+    var deleteTokenButton: XCUIElement { button(with: "Remove") }
+    var confirmDeleteButton: XCUIElement { alerts.buttons["Remove"] }
 
     func navigateToDedicatedIPScreen() {
         selectSideMenu(menuName: "Dedicated IP")
@@ -40,6 +40,7 @@ extension XCUIApplication {
         let leftmostCoordinate = coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
         sourceCoordinate.press(forDuration: pressDuration, thenDragTo: leftmostCoordinate)
 
+        deleteTokenButton.tap()
         confirmDeleteButton.tap()
         XCTAssertTrue(dedicatedIPTextField.waitForElementToAppear())
     }

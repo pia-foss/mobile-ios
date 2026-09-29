@@ -1,6 +1,6 @@
 //
 //  DedicatedIPProviderType.swift
-//  PIA VPN-tvOS
+//  PIADedicatedIP
 //
 //  Created by Said Rehouni on 14/2/24.
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import PIALibrary
 
-protocol DedicatedIPProviderType: Sendable {
+public protocol DedicatedIPProviderType: Sendable {
     func activateDIPToken(_ token: String, completion: @escaping (Result<ServerType, DedicatedIPError>) -> Void)
     func removeDIPToken(_ token: String)
     func renewDIPToken(_ token: String)

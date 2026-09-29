@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIADedicatedIP
 import PIALibrary
 import PIALocalizations
 import SwiftUI

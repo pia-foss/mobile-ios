@@ -1,8 +1,7 @@
 //
-//  ViewWithTitle.swift
-//  PIAUI
+//  DedicatedIPStore.swift
+//  PIADedicatedIP
 //
-//  Created by Mario on 30/03/2026.
 //  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -20,9 +19,16 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import CoreArchitecture
 
-@MainActor
-public protocol ViewWithTitle: View {
-    var navigationTitle: String { get }
+/// The screen's store, which is `CoreArchitecture.Store` with this feature's types filled in.
+public typealias DedicatedIPStore = Store<DedicatedIP.State, DedicatedIP.Action>
+
+extension DedicatedIPStore {
+    public convenience init(dependencies: DedicatedIP.Dependencies) {
+        self.init(
+            initial: DedicatedIP.State(dip: dependencies.getDedicatedIP()),
+            reduce: DedicatedIP.Reducer(dependencies: dependencies).reduce
+        )
+    }
 }

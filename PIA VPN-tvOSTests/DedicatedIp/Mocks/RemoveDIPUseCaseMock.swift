@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIADedicatedIP
 
 @testable import PIA_VPN_tvOS
 
