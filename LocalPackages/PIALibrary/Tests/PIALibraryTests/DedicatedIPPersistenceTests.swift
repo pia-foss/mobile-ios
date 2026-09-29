@@ -27,16 +27,19 @@ import XCTest
 final class DedicatedIPPersistenceTests: XCTestCase {
 
     private var originalServerProvider: ServerProvider!
+    private var originalAccountProvider: AccountProvider!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         originalServerProvider = Client.providers.serverProvider
+        originalAccountProvider = Client.providers.accountProvider
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
     }
 
     override func tearDown() {
         Client.database.truncate()
         Client.providers.serverProvider = originalServerProvider
+        Client.providers.accountProvider = originalAccountProvider
         super.tearDown()
     }
 
@@ -112,6 +115,33 @@ final class DedicatedIPPersistenceTests: XCTestCase {
         XCTAssertNil(Client.database.plain.preferredServer)
     }
 
+    // MARK: - Removal
+
+    func testRemovingTheSelectedDedicatedIPClearsTheSelection() {
+        let dipServer = makeDedicatedIPServer()
+        let provider = makeLoggedInProvider()
+        provider.currentServers = [dipServer, makeRegularServer()]
+        Client.database.plain.preferredServer = dipServer
+
+        provider.removeDIPToken(dipServer.dipToken!)
+
+        // Re-adding the same token must not resurrect the stale selection.
+        provider.currentServers = [dipServer, makeRegularServer()]
+        XCTAssertNil(Client.database.plain.preferredServer)
+    }
+
+    func testRemovingAnUnselectedDedicatedIPKeepsTheSelection() {
+        let dipServer = makeDedicatedIPServer()
+        let regularServer = makeRegularServer()
+        let provider = makeLoggedInProvider()
+        provider.currentServers = [dipServer, regularServer]
+        Client.database.plain.preferredServer = regularServer
+
+        provider.removeDIPToken(dipServer.dipToken!)
+
+        XCTAssertEqual(Client.database.plain.preferredServer?.identifier, regularServer.identifier)
+    }
+
     // MARK: - Refresh
 
     func testDownloadKeepsCachedDedicatedIPServersWhenNoTokensAreReadable() throws {
@@ -140,6 +170,20 @@ final class DedicatedIPPersistenceTests: XCTestCase {
     }
 
     // MARK: - Helpers
+
+    private func makeLoggedInProvider() -> DefaultServerProvider {
+        let account = EphemeralAccountProvider()
+        account.isLoggedIn = true
+        Client.providers.accountProvider = account
+
+        let provider = DefaultServerProvider(
+            renewDedicatedIP: MockRenewDedicatedIPUseCase(),
+            getDedicatedIPs: MockGetDedicatedIPsUseCase(),
+            dedicatedIPServerMapper: MockDedicatedIPServerMapper()
+        )
+        Client.providers.serverProvider = provider
+        return provider
+    }
 
     private func makeDedicatedIPServer() -> Server {
         return Server(
