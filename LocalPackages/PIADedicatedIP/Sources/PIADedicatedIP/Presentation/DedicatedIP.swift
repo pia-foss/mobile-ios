@@ -53,19 +53,23 @@ extension DedicatedIP {
         case throttled(retryAfter: TimeInterval)
     }
 
-    public enum Action: Equatable {
+    public enum RemoveFailure: Error, Equatable, Sendable {
+        case remove
+    }
+
+    public enum Action {
         case tokenChanged(String)
         case activateTapped
         case activated(Result<Info, Failure>)
         case removeConfirmed
-        case removed(Info?)
+        case removed(Result<Void, RemoveFailure>)
     }
 
     /// A banner the host should display.
     public struct Note: Equatable, Sendable {
         public enum Kind: Equatable, Sendable {
             case success
-            case sticky
+            case error
             case timed(TimeInterval)
         }
 
@@ -90,13 +94,13 @@ extension DedicatedIP {
     public struct Dependencies: Sendable {
         public var getDedicatedIP: @Sendable () -> Info?
         public var activate: @Sendable (String) async -> Result<Info, Failure>
-        public var remove: @Sendable () async -> Void
+        public var remove: @Sendable () async -> Result<Void, RemoveFailure>
         public var emit: @MainActor (Output) -> Void
 
         public init(
             getDedicatedIP: @Sendable @escaping () -> Info?,
             activate: @Sendable @escaping (String) async -> Result<Info, Failure>,
-            remove: @Sendable @escaping () async -> Void,
+            remove: @Sendable @escaping () async -> Result<Void, RemoveFailure>,
             emit: @MainActor @escaping (Output) -> Void
         ) {
             self.getDedicatedIP = getDedicatedIP

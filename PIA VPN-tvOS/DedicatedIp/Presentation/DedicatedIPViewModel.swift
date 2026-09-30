@@ -80,11 +80,15 @@ final class DedicatedIPViewModel: ObservableObject {
 
     func removeDIP() async {
         log.info("DIP removal requested")
-        do {
-            try await removeDIPToken()
-        } catch {
+        switch await removeDIPToken() {
+        case .failure(let error):
             log.error("Error removing dedicated IP \(error)")
+            Task { @MainActor in
+                shouldShowErrorMessage = true
+            }
+        case .success:
+            log.info("DIP removed successfully")
+            dedicatedIPStats = []
         }
-        dedicatedIPStats = []
     }
 }

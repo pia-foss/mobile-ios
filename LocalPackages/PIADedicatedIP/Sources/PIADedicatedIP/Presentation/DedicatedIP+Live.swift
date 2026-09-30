@@ -42,11 +42,11 @@ extension DedicatedIP.Dependencies {
                     .mapError(DedicatedIP.Failure.init)
             },
             remove: {
-                do {
-                    try await removeDIPToken()
-                } catch {
-                    log.error("Failed to remove DIP token:\(error)")
-                }
+                await removeDIPToken()
+                    .mapError { error in
+                        log.error("Error removing DIP: \(error)")
+                        return .remove
+                    }
             },
             emit: emit
         )

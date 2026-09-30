@@ -58,8 +58,8 @@ final class DedicatedIPCoordinator: ModalCoordinator<DedicatedIPView> {
         switch note.kind {
         case .success:
             Macros.displaySuccessImageNote(withImage: image, message: note.message)
-        case .sticky:
-            Macros.displayStickyNote(withMessage: note.message, andImage: image)
+        case .error:
+            Macros.displayImageNote(withImage: image, message: note.message)
         case .timed(let duration):
             Macros.displayImageNote(withImage: image, message: note.message, andDuration: duration)
         }

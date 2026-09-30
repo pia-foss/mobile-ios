@@ -7,5 +7,5 @@
 //
 
 public protocol RemoveDIPUseCaseType: Sendable {
-    func callAsFunction() async throws
+    func callAsFunction() async -> Result<Void, RemoveDedicatedIPError>
 }

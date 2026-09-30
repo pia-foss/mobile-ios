@@ -54,14 +54,17 @@ extension DedicatedIP {
             case .removeConfirmed:
                 state.isLoading = true
                 return .task {
-                    await dependencies.remove()
-                    return .removed(dependencies.getDedicatedIP())
+                    return .removed(await dependencies.remove())
                 }
 
-            case .removed(let info):
+            case .removed(.success):
                 state.isLoading = false
-                state.dip = info
+                state.dip = nil
                 return emit(.didChange)
+
+            case .removed(.failure):
+                state.isLoading = false
+                return note(.error, L10n.Settings.Dedicatedip.Alert.Failure.title)
             }
         }
 
@@ -75,7 +78,7 @@ extension DedicatedIP {
             }
 
             guard !state.token.isEmpty else {
-                return note(.sticky, L10n.Dedicated.Ip.Message.Incorrect.token)
+                return note(.error, L10n.Dedicated.Ip.Message.Incorrect.token)
             }
 
             state.isLoading = true
@@ -86,11 +89,11 @@ extension DedicatedIP {
         private func activationFailed(_ state: inout State, _ failure: Failure) -> Effect<Action> {
             switch failure {
             case .alreadyHasOne:
-                return note(.sticky, L10n.Dedicated.Ip.Message.Error.alreadyHasOne)
+                return note(.error, L10n.Dedicated.Ip.Message.Error.alreadyHasOne)
             case .expired:
-                return note(.sticky, L10n.Dedicated.Ip.Message.Expired.token)
+                return note(.error, L10n.Dedicated.Ip.Message.Expired.token)
             case .invalid:
-                return note(.sticky, L10n.Dedicated.Ip.Message.Invalid.token)
+                return note(.error, L10n.Dedicated.Ip.Message.Invalid.token)
             case .unauthorized:
                 return emit(.unauthorized)
             case .throttled(let retryAfter):

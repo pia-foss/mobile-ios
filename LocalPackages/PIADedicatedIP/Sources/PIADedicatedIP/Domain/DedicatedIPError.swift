@@ -18,3 +18,12 @@ public enum DedicatedIPError: Error {
     /// Other.
     case generic(Error?)
 }
+
+public enum RemoveDedicatedIPError: Error {
+    /// No current Dedicated IP activated.
+    case doesntHaveOne
+    /// Failed to disconnect from the VPN.
+    case disconect(Error)
+    /// Failed to remove Dedicated IP from favorites.
+    case favorite(Error)
+}
