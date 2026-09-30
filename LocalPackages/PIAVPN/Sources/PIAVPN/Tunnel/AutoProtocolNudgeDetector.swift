@@ -23,12 +23,14 @@ import Foundation
 import KapeVPN_PacketTunnel
 import PIALibrary
 
-/// Watches the SDK's connection events and, once a user pinned to one protocol has been failing long
-/// enough, posts the signal that offers them Automatic.
+/// Watches the SDK's connection events and, once a user pinned to one protocol keeps failing to
+/// connect, posts the signal that offers them Automatic.
 ///
-/// It infers "stuck" from the run of attempts itself because the SDK reports no terminal failure for
-/// this case: a pinned protocol that never connects produces an unbounded stream of failed attempts
-/// and nothing else.
+/// The SDK reports no terminal failure for this case — a pinned protocol that never connects produces
+/// an unbounded stream of failed attempts — so every `connectTimeout` a session spends failing without
+/// connecting counts as one qualifying failure. The nudge fires on 2 within `shortFailureWindow` or 3
+/// within `longFailureWindow`, matching Android's `ConnectionProblemDetector`. Failures are kept in
+/// memory, so they span in-place session restarts but not a new tunnel process.
 ///
 /// The SDK calls these on its own serial queue, so state is held under a mutex. The per-attempt
 /// callbacks stay cheap — no file I/O, no waiting; only the once-per-session `sessionDidBegin` reads
@@ -37,28 +39,35 @@ final class AutoProtocolNudgeDetector: VpnConnectionAnalytics {
 
     struct Thresholds: Sendable {
         let connectTimeout: TimeInterval
-        let qualifyingAttempts: Int
+        let shortFailureWindow: TimeInterval
+        let shortFailureWindowCount: Int
+        let longFailureWindow: TimeInterval
+        let longFailureWindowCount: Int
         let minimumInterval: TimeInterval
 
         init(
             connectTimeout: TimeInterval = AppConstants.AutoProtocolNudge.connectTimeout,
-            qualifyingAttempts: Int = AppConstants.AutoProtocolNudge.qualifyingAttempts,
+            shortFailureWindow: TimeInterval = AppConstants.AutoProtocolNudge.shortFailureWindow,
+            shortFailureWindowCount: Int = AppConstants.AutoProtocolNudge.shortFailureWindowCount,
+            longFailureWindow: TimeInterval = AppConstants.AutoProtocolNudge.longFailureWindow,
+            longFailureWindowCount: Int = AppConstants.AutoProtocolNudge.longFailureWindowCount,
             minimumInterval: TimeInterval = AppConstants.AutoProtocolNudge.minimumInterval
         ) {
             self.connectTimeout = connectTimeout
-            self.qualifyingAttempts = qualifyingAttempts
+            self.shortFailureWindow = shortFailureWindow
+            self.shortFailureWindowCount = shortFailureWindowCount
+            self.longFailureWindow = longFailureWindow
+            self.longFailureWindowCount = longFailureWindowCount
             self.minimumInterval = minimumInterval
         }
     }
 
     private struct SessionState {
         var selectedProtocol: PIATunnelSharedState.TunnelProtocol = .automatic
-        var startedAt: Date?
+        var nextFailureAt: Date?
         var hasConnected = false
-        var qualifyingFailures = 0
-        var attemptedEndpoints: Set<String> = []
-        var batchExhausted = false
         var lastPostedAt: Date?
+        var failures: [Date] = []
     }
 
     private let thresholds: Thresholds
@@ -92,9 +101,9 @@ final class AutoProtocolNudgeDetector: VpnConnectionAnalytics {
         // Read the user's choice from shared state rather than the event: it is authoritative and is
         // re-read on an in-place protocol switch.
         let selected = selectedProtocol()
-        let startedAt = now()
+        let nextFailureAt = now().addingTimeInterval(thresholds.connectTimeout)
         sessionState.withLock { state in
-            state = SessionState(selectedProtocol: selected, startedAt: startedAt)
+            state = SessionState(selectedProtocol: selected, nextFailureAt: nextFailureAt, failures: state.failures)
         }
     }
 
@@ -104,32 +113,17 @@ final class AutoProtocolNudgeDetector: VpnConnectionAnalytics {
 
     func connectionDidEnd(_ event: VpnAnalyticsConnectionEndEvent) {}
 
-    func attemptDidBegin(_ event: VpnAnalyticsAttemptBeginEvent) {
-        // Re-dialling an endpoint already tried means the generator wrapped — the tunnel has tried
-        // everything this protocol offers, a far stronger signal than any attempt count.
-        guard let endpoint = event.configuration.connectedEndpointSnapshot.map({ "\($0.host):\($0.port)" }) else {
-            return
-        }
-
-        sessionState.withLock { state in
-            state.batchExhausted = state.batchExhausted || !state.attemptedEndpoints.insert(endpoint).inserted
-        }
-    }
+    func attemptDidBegin(_ event: VpnAnalyticsAttemptBeginEvent) {}
 
     func attemptDidEnd(_ event: VpnAnalyticsAttemptEndEvent) {
         switch event.result {
         case .connected:
             sessionState.withLock { state in
                 state.hasConnected = true
-                state.qualifyingFailures = 0
-                state.attemptedEndpoints = []
-                state.batchExhausted = false
             }
 
         case .cancelled:
-            sessionState.withLock { state in
-                state.batchExhausted = false
-            }
+            break
 
         case .failed(let error):
             guard
@@ -148,20 +142,21 @@ final class AutoProtocolNudgeDetector: VpnConnectionAnalytics {
 
     private func recordFailure(at date: Date) -> Bool {
         sessionState.withLock { state in
-            guard state.selectedProtocol != .automatic, !state.hasConnected else {
-                return false
-            }
-
-            state.qualifyingFailures += 1
-
             guard
-                let startedAt = state.startedAt,
-                date.timeIntervalSince(startedAt) >= thresholds.connectTimeout
+                state.selectedProtocol != .automatic,
+                !state.hasConnected,
+                let nextFailureAt = state.nextFailureAt,
+                date >= nextFailureAt
             else {
                 return false
             }
 
-            guard state.batchExhausted || state.qualifyingFailures >= thresholds.qualifyingAttempts else {
+            state.nextFailureAt = date.addingTimeInterval(thresholds.connectTimeout)
+
+            state.failures = state.failures.filter { date.timeIntervalSince($0) < thresholds.longFailureWindow } + [date]
+
+            let shortWindowFailures = state.failures.filter { date.timeIntervalSince($0) < thresholds.shortFailureWindow }
+            guard shortWindowFailures.count >= thresholds.shortFailureWindowCount || state.failures.count >= thresholds.longFailureWindowCount else {
                 return false
             }
 

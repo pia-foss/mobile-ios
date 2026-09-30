@@ -40,12 +40,16 @@ public enum AppConstants: Sendable {
     /// Tuning for the "switch to Automatic" nudge. Compiled in, so retuning needs a
     /// release — keep them injectable where they are used.
     public enum AutoProtocolNudge {
-        /// A session must have been failing at least this long before it can nudge.
+        /// Each stretch this long that a session spends failing without connecting counts as one
+        /// qualifying failure.
         public static let connectTimeout: TimeInterval = 30
 
-        /// Failed attempts before nudging when endpoint identity is unavailable, i.e. batch wrap
-        /// can't be detected.
-        public static let qualifyingAttempts = 6
+        /// The nudge fires on `shortFailureWindowCount` failures within `shortFailureWindow`, or
+        /// `longFailureWindowCount` within `longFailureWindow`.
+        public static let shortFailureWindow: TimeInterval = 10 * 60
+        public static let shortFailureWindowCount = 2
+        public static let longFailureWindow: TimeInterval = 86_400
+        public static let longFailureWindowCount = 3
 
         /// Gap between posts while a session keeps failing. Load-bearing: a post that lands while the
         /// app is suspended is gone, and this is the only retry.
