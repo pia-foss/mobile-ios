@@ -59,12 +59,15 @@ extension KapePlatformSDKTunnelProfile {
         // 0 means automatic; the extension picks per-transport defaults.
         let port = UInt16(sharedDefaults.integer(forKey: AppConstants.UserDefaultsKeys.OpenVPN.port))
 
-        // `PIASocketType` holds a SocketType raw value ("UDP"/"TCP"); absent = automatic (try both).
+        // `PIASocketType` holds an `AppConstants.OpenVPNSocketType` raw value; absent or
+        // unrecognised = automatic (try both).
         let transport: PIATunnelSharedState.OpenVPNTransport =
-            switch sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.transport) {
-            case "UDP": .udp
-            case "TCP": .tcp
-            default: .automatic
+            switch sharedDefaults.string(forKey: AppConstants.UserDefaultsKeys.OpenVPN.transport)
+                .flatMap(AppConstants.OpenVPNSocketType.init(rawValue:))
+            {
+            case .udp: .udp
+            case .tcp: .tcp
+            case nil: .automatic
             }
 
         let useSmallPackets = sharedDefaults.bool(forKey: AppConstants.UserDefaultsKeys.useSmallPackets)

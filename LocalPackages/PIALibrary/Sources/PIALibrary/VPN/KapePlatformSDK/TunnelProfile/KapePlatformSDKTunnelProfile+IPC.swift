@@ -31,8 +31,9 @@ import NetworkExtension
 /// caller, because it is a step of connecting rather than a query with a reply.
 extension KapePlatformSDKTunnelProfile {
 
-    public func requestLog(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<String>?) {
-        find { (vpn, error) in
+    public func requestLog(_ callback: LibraryCallback<String>?) {
+        // Read-only: the static lookup, so this poll does not rebind `native` (see `find`).
+        KapePlatformSDKTunnelProfile.find(withBundleIdentifier: providerBundleIdentifier) { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
                 return
@@ -56,8 +57,9 @@ extension KapePlatformSDKTunnelProfile {
     /// `dataUsage` provider message and maps the reply into `Usage`. Returns
     /// `nil` (no usage) when disconnected or when the active protocol cannot
     /// report counters — the extension answers with an empty response.
-    public func requestDataUsage(withCustomConfiguration customConfiguration: (any VPNCustomConfiguration)?, _ callback: LibraryCallback<Usage>?) {
-        find { (vpn, error) in
+    public func requestDataUsage(_ callback: LibraryCallback<Usage>?) {
+        // Read-only: the static lookup, so this poll does not rebind `native` (see `find`).
+        KapePlatformSDKTunnelProfile.find(withBundleIdentifier: providerBundleIdentifier) { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
                 return
@@ -84,7 +86,8 @@ extension KapePlatformSDKTunnelProfile {
     /// `connectionConfigurations` provider message. Returns an empty list when the tunnel process
     /// isn't running (nothing to ask) or hasn't generated a batch yet.
     public func requestConnectionConfigurations(_ callback: LibraryCallback<[PIAConnectionConfiguration]>?) {
-        find { (vpn, error) in
+        // Read-only: the static lookup, so this poll does not rebind `native` (see `find`).
+        KapePlatformSDKTunnelProfile.find(withBundleIdentifier: providerBundleIdentifier) { (vpn, error) in
             guard let session = vpn?.connection as? NETunnelProviderSession else {
                 callback?(nil, error)
                 return

@@ -171,7 +171,7 @@ class DNSList: NSObject {
 
     /// Return if a custom DNS is set for given protocol and its configured DNS servers
     func hasCustomDNS(for vpnType: String, in dnsServers: [String]) -> Bool {
-        guard vpnType != IKEv2Profile.vpnType && !dnsServers.isEmpty else {
+        guard !dnsServers.isEmpty else {
             return false
         }
 

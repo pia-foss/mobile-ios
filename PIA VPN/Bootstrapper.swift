@@ -28,12 +28,6 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-#if os(iOS)
-    import TunnelKitCore
-    import TunnelKitOpenVPN
-    import PIAWireguard
-#endif
-
 extension NSNotification.Name {
     public static let __AppDidFetchForceUpdateFeatureFlag = Notification.Name("__AppDidFetchForceUpdateFeatureFlag")
 }
@@ -109,12 +103,9 @@ final class Bootstrapper {
         }
 
         #if os(iOS)
-            // Default the protocol to automatic negotiation when the PlatformSDK tunnel is enabled —
-            // it can't run IKEv2, so the legacy default would leave a fresh install on a protocol the
-            // profile maps to WireGuard rather than automatic. Mirrors the tvOS BootstraperFactory default.
-            if shouldUsePlatformSDKTunnel {
-                Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
-            }
+            // The PlatformSDK tunnel can't run IKEv2, so a fresh install defaults to automatic
+            // negotiation. Mirrors the tvOS BootstraperFactory default.
+            Client.preferences.defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
         #endif
 
         AppPreferences.shared.migrate()
@@ -152,24 +143,15 @@ final class Bootstrapper {
         Client.configuration.webTimeout = AppConfiguration.ClientConfiguration.webTimeout
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         #if os(iOS)
-            if shouldUsePlatformSDKTunnel {
-                Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
-                cleanupLegacyVPNProfilesIfNeeded()
-            } else {
-                Client.configuration.addVPNProfile(IKEv2Profile())
-                Client.configuration.addVPNProfile(PIATunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelBundleIdentifier))
-                Client.configuration.addVPNProfile(PIAWGTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelWireguardBundleIdentifier))
-                migrateToLegacyVPNProfilesIfNeeded()
-            }
+            // Before the profile is registered: the tunnel settings it builds read the DNS
+            // preferences this backfills.
+            LegacyCustomDNSMigration.run()
+
+            Client.configuration.addVPNProfile(KapePlatformSDKTunnelProfile(bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKBundleIdentifier))
+            cleanupLegacyVPNProfilesIfNeeded()
         #endif
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
-        #if os(iOS)
-            defaults.vpnCustomConfigurations = [
-                PIATunnelProfile.vpnType: AppConfiguration.VPN.piaDefaultConfigurationBuilder.build(),
-                PIAWGTunnelProfile.vpnType: PIAWireguardConfiguration(customDNSServers: [], packetSize: AppConstants.WireGuardPacketSize.defaultPacketSize)
-            ]
-        #endif
 
         // Users who already answered the legacy share-data panel (pre-dating the consent-gate
         // screen) never get `hasRespondedToServiceQualityConsent` set, which would otherwise
@@ -191,28 +173,11 @@ final class Bootstrapper {
                 log.error("Could not fetch the feature flags: \(error.localizedDescription)")
             } else {
                 AppPreferences.shared.checksDipExpirationRequest = Client.configuration.featureFlags[.checkDipExpirationRequest]
-                AppPreferences.shared.usePlatformSDKVPN = Client.configuration.featureFlags[.usePlatformSDKVPN]
                 self.updateFeatureFlagsForReleaseIfNeeded()
             }
 
             self.checkForceUpdateIfNeeded()
         }
-
-        //FORCE THE MIGRATION TO GEN4
-        #if os(iOS)
-            if Client.providers.vpnProvider.needsMigrationToGEN4() {
-
-                Client.preferences.displayedServer = Server.automatic
-                NotificationCenter.default.post(
-                    name: .PIAThemeDidChange,
-                    object: self,
-                    userInfo: nil)
-                Client.providers.vpnProvider.reconnect(
-                    after: 200, forceDisconnect: true,
-                    { _ in
-                    })
-            }
-        #endif
 
         Client.observeTransactions()
         Client.providers.accountProvider.subscriptionInformation { info, error in
@@ -256,10 +221,6 @@ final class Bootstrapper {
 
         pref.commit()
         #if os(iOS)
-            AppPreferences.shared.migrateOVPN()
-            AppPreferences.shared.syncOpenVPNSettingsToAppGroup()
-            AppPreferences.shared.migrateWireguard()
-
             // Business objects
 
             AccountObserver.shared.start()

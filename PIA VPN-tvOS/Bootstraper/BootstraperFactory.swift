@@ -79,15 +79,14 @@ class BootstraperFactory {
     private static func setupPreferences() {
         let defaults = Client.preferences.defaults
         defaults.isPersistentConnection = true
-        // The default protocol depends on whether this launch migrated to the PlatformSDK tunnel.
-        // Once migrated, tvOS connects through the PlatformSDK tunnel (registered in
-        // `setupConfiguration`) and the user's `vpnType` selects which protocol the tunnel runs
-        // (see the Protocol settings screen): "PIAAutomatic" → automatic (default, WireGuard then
-        // OpenVPN), "PIAWG" → WireGuard, "PIA" → OpenVPN. The WG/OpenVPN literals mirror
-        // `PIAWGTunnelProfile`/`PIATunnelProfile`, which are iOS-only and not linkable on tvOS.
-        // Until the user consents, tvOS keeps the legacy IKEv2 profile, so the default must be
-        // IKEv2 — otherwise `resolvedActiveProfile()` can't match a profile.
-        defaults.vpnType = platformSDKMigration.shouldUsePlatformSDKTunnel ? KapePlatformSDKVPNType.automatic.rawValue : KapePlatformSDKVPNType.iKEv2.rawValue
+        // tvOS connects through the PlatformSDK tunnel (registered in `setupConfiguration`), and the
+        // user's `vpnType` selects which protocol that tunnel runs (see the Protocol settings
+        // screen): "PIAAutomatic" → automatic (default, WireGuard then OpenVPN), "PIAWG" →
+        // WireGuard, "PIA" → OpenVPN.
+        //
+        // This no longer depends on the migration having been consented to: there is no legacy
+        // IKEv2 profile left to fall back to, so automatic is the only sensible default either way.
+        defaults.vpnType = KapePlatformSDKVPNType.automatic.rawValue
     }
 
     private static func cleanCurrentAccount() {
@@ -126,16 +125,16 @@ class BootstraperFactory {
         Client.configuration.vpnProfileName = AppConfiguration.VPN.profileName
         Client.configuration.rsa4096Certificate = Client.Configuration.defaultRSACertificate()
 
-        if platformSDKMigration.shouldUsePlatformSDKTunnel {
-            Client.configuration.addVPNProfile(
-                KapePlatformSDKTunnelProfile(
-                    bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKTvOSBundleIdentifier
-                )
+        // The PlatformSDK profile is the only profile now, so it is registered unconditionally —
+        // there is no legacy IKEv2 profile to register instead while the user has yet to consent.
+        // Consent still gates the *prune*, which is the disruptive part the migration screen warns
+        // about; `cleanupLegacyVPNProfilesIfNeeded` checks it internally.
+        Client.configuration.addVPNProfile(
+            KapePlatformSDKTunnelProfile(
+                bundleIdentifier: AppConstants.Extensions.tunnelPlatformSDKTvOSBundleIdentifier
             )
-            platformSDKMigration.cleanupLegacyVPNProfilesIfNeeded()
-        } else {
-            Client.configuration.addVPNProfile(IKEv2Profile())
-        }
+        )
+        platformSDKMigration.cleanupLegacyVPNProfilesIfNeeded()
     }
 
     private static func acceptDataSharing() {

@@ -23,8 +23,6 @@ import PIADesignSystem
 import PIALibrary
 import PIALocalizations
 import Popover
-import TunnelKitCore
-import TunnelKitOpenVPN
 import UIKit
 
 private let log = PIALogger.logger(for: ProtocolSettingsViewController.self)
@@ -35,7 +33,6 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
     private var transportPopover: Popover!
     private var portsPopover: Popover!
     private var dataEncryptionPopover: Popover!
-    private var handshakePopover: Popover!
 
     static let AUTOMATIC_SOCKET = "automatic"
     static let AUTOMATIC_PORT: UInt16 = 0
@@ -63,7 +60,6 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
         self.transportPopover = Popover(options: options, showHandler: nil, dismissHandler: nil)
         self.portsPopover = Popover(options: options, showHandler: nil, dismissHandler: nil)
         self.dataEncryptionPopover = Popover(options: options, showHandler: nil, dismissHandler: nil)
-        self.handshakePopover = Popover(options: options, showHandler: nil, dismissHandler: nil)
 
         switchSmallPackets.addTarget(self, action: #selector(toggleSmallPackets(_:)), for: .valueChanged)
         switchSmallPackets.preferredStyle = .sliding
@@ -92,25 +88,9 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
     private func showProtocolOptions(point: CGPoint) {
 
-        var options: [KapePlatformSDKVPNType]
-        if Client.configuration.usesPlatformSDKTunnel {
-            // The PlatformSDK tunnel runs WireGuard, OpenVPN, or automatic (WireGuard first, then
-            // OpenVPN); it can't run IKEv2, so that legacy option is dropped here.
-            options = [
-                .automatic,
-                .wireGuard,
-                .openVPN
-            ]
-        } else {
-            options = [
-                .iKEv2,
-                .wireGuard,
-                .openVPN
-            ]
-            if Platform.isRunningOnMac {
-                options.removeAll { $0 == .iKEv2 }
-            }
-        }
+        // The PlatformSDK tunnel runs WireGuard, OpenVPN, or automatic (WireGuard first, then
+        // OpenVPN). Shared with tvOS, which offers exactly the same three.
+        let options = SelectableVPNProtocol.all
 
         let width = self.view.frame.width / 2
         let height = heightForOptions(options)  //Default height * 3 for 3 protocols
@@ -124,11 +104,10 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
     private func showTransportOptions(point: CGPoint) {
 
-        let options: [String] = [
-            ProtocolSettingsViewController.AUTOMATIC_SOCKET,
-            SocketType.udp.rawValue,
-            SocketType.tcp.rawValue
-        ]
+        // Raw values the tunnel reads back from `PIASocketType`.
+        let options: [String] =
+            [ProtocolSettingsViewController.AUTOMATIC_SOCKET]
+            + AppConstants.OpenVPNSocketType.allCases.map(\.rawValue)
 
         let width = self.view.frame.width / 2
         let height = heightForOptions(options)  //Default height * 3 for 3 protocols
@@ -144,7 +123,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
         var options = [UInt16]()
 
-        if let socketType = settingsDelegate.pendingOpenVPNSocketType {
+        if let socketType = AppConstants.OpenVPNSocketType(rawValue: pendingPreferences.openVPNSocketType ?? "") {
             let availablePorts = Client.providers.serverProvider.currentServersConfiguration.ovpnPorts
             options = (socketType == .udp) ? availablePorts.udp : availablePorts.tcp
         }
@@ -165,15 +144,8 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
         var options = [String]()
 
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-
-            options.append(contentsOf: [
-                OpenVPN.Cipher.aes128gcm.description,
-                OpenVPN.Cipher.aes256gcm.description
-            ])
-
-        } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            options.append(contentsOf: IKEv2EncryptionAlgorithm.allCases.map(\.rawValue))
+        if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
+            options.append(contentsOf: AppConstants.OpenVPNCrypto.allCases.map(\.rawValue))
         }
 
         let width = self.view.frame.width / 2
@@ -187,28 +159,8 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 
     }
 
-    private func showHandshakeOptions(point: CGPoint) {
-        let encryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
-        let options = encryptionAlgorithm.integrityAlgorithms()
-
-        guard options.count > 1 else { return }
-
-        let width = self.view.frame.width / 2
-        let height = 44 * options.count
-        let optionsView = HandshakePopoverSelectionView(frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
-        optionsView.pendingPreferences = self.pendingPreferences
-        optionsView.settingsDelegate = self.settingsDelegate
-        optionsView.currentPopover = handshakePopover
-        optionsView.options = options
-        handshakePopover.show(optionsView, point: point, inView: view)
-
-    }
-
     @objc private func toggleSmallPackets(_ sender: UISwitch) {
         pendingPreferences.useSmallPackets = sender.isOn
-        if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-            pendingPreferences.ikeV2PacketSize = sender.isOn ? AppConstants.IKEv2PacketSize.defaultPacketSize : AppConstants.IKEv2PacketSize.highPacketSize
-        }
         settingsDelegate.savePreferences()
     }
 
@@ -234,7 +186,6 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
         transportPopover?.dismiss()
         portsPopover?.dismiss()
         dataEncryptionPopover?.dismiss()
-        handshakePopover?.dismiss()
     }
 
 }
@@ -242,7 +193,7 @@ final class ProtocolSettingsViewController: PIABaseSettingsViewController {
 extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+        if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
             return ProtocolsSections.allCases.count
         } else {
             return sections.count
@@ -267,37 +218,20 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
         case .protocolSelection:
             cell.detailTextLabel?.text = pendingPreferences.vpnType.vpnProtocol
         case .transport:
-            cell.detailTextLabel?.text = settingsDelegate.pendingOpenVPNSocketType?.rawValue ?? L10n.Global.automatic
+            cell.detailTextLabel?.text = pendingPreferences.openVPNSocketType ?? L10n.Global.automatic
         case .remotePort:
             let port = pendingPreferences.openVPNPort
             cell.detailTextLabel?.text = port != 0 ? "\(port)" : L10n.Global.automatic
         case .dataEncryption:
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                cell.detailTextLabel?.text = pendingPreferences.openVPNCipher ?? OpenVPN.Cipher.aes128gcm.description
-            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                guard Flags.shared.enablesEncryptionSettings else {
-                    break
-                }
-
-                let encryptionAlgorithm = pendingPreferences.ikeV2EncryptionAlgorithm
-                cell.detailTextLabel?.text = encryptionAlgorithm.rawValue
-            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
+            if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
+                cell.detailTextLabel?.text = pendingPreferences.openVPNCipher ?? AppConstants.OpenVPNCrypto.default.rawValue
+            } else if pendingPreferences.vpnType == KapePlatformSDKVPNType.wireGuard.rawValue {
                 cell.detailTextLabel?.text = "ChaCha20"
                 cell.accessoryType = .none
             }
         case .handshake:
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
-                cell.detailTextLabel?.text = AppPreferences.shared.piaHandshake.description
-                cell.accessoryType = .none
-            } else if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                cell.detailTextLabel?.text = pendingPreferences.ikeV2IntegrityAlgorithm.description
-                let options = pendingPreferences.ikeV2EncryptionAlgorithm.integrityAlgorithms()
-                let canChoose = options.count > 1
-                cell.accessoryType = canChoose ? .disclosureIndicator : .none
-            } else if pendingPreferences.vpnType == PIAWGTunnelProfile.vpnType {
-                cell.detailTextLabel?.text = "Noise_IK"
-                cell.accessoryType = .none
-            }
+            cell.detailTextLabel?.text = pendingPreferences.vpnType.handshake
+            cell.accessoryType = .none
         case .useSmallPackets:
             cell.textLabel?.text = L10n.Settings.Small.Packets.title
             cell.detailTextLabel?.text = nil
@@ -361,15 +295,8 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
             guard Flags.shared.enablesEncryptionSettings else {
                 break
             }
-            if pendingPreferences.vpnType == PIATunnelProfile.vpnType || pendingPreferences.vpnType == IKEv2Profile.vpnType {
+            if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
                 showDataEncryptionOptions(point: point)
-            }
-        case .handshake:
-            guard Flags.shared.enablesEncryptionSettings else {
-                break
-            }
-            if pendingPreferences.vpnType == IKEv2Profile.vpnType {
-                showHandshakeOptions(point: point)
             }
         default:
             break
@@ -404,7 +331,7 @@ extension ProtocolSettingsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     private func getSection(at indexPath: IndexPath) -> ProtocolsSections? {
-        if pendingPreferences.vpnType == PIATunnelProfile.vpnType {
+        if pendingPreferences.vpnType == KapePlatformSDKVPNType.openVPN.rawValue {
             return ProtocolsSections(rawValue: indexPath.row)
         } else {
             return sections[indexPath.row]

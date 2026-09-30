@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PIALibrary
 import PIALocalizations
 
 class AvailableSettingsViewModel: ObservableObject {
@@ -41,20 +40,11 @@ class AvailableSettingsViewModel: ObservableObject {
     private let onDedicatedIpSectionSelectedAction: AppRouter.Actions
     private let onProtocolSectionSelectedAction: AppRouter.Actions
 
-    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions, onProtocolSectionSelectedAction: AppRouter.Actions, usePlatformSDKVPN: Bool = Client.configuration.usesPlatformSDKTunnel) {
+    init(onAccountSelectedAction: AppRouter.Actions, onDedicatedIpSectionSelectedAction: AppRouter.Actions, onProtocolSectionSelectedAction: AppRouter.Actions) {
         self.onAccountSectionSelectedAction = onAccountSelectedAction
         self.onDedicatedIpSectionSelectedAction = onDedicatedIpSectionSelectedAction
         self.onProtocolSectionSelectedAction = onProtocolSectionSelectedAction
-
-        // Protocol selection only applies to the PlatformSDK tunnel (WireGuard / OpenVPN).
-        // With the flag off, tvOS runs the legacy IKEv2 profile, which offers no choice, so the
-        // Protocols section is hidden.
-        var sections: [Sections] = [.account]
-        if usePlatformSDKVPN {
-            sections.append(.protocols)
-        }
-        sections.append(.dedicatedIp)
-        self.sections = sections
+        self.sections = [.account, .protocols, .dedicatedIp]
     }
 
     func navigate(to section: Sections) {

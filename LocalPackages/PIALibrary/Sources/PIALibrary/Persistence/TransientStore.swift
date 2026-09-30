@@ -43,6 +43,4 @@ protocol TransientStore: AnyObject {
     /// Currently connected VPN IP, if any.
     /// Implementors should post ``Notification.Name.PIADaemonsDidUpdateConnectivity``
     var vpnIP: String? { get set }
-
-    var vpnLog: String { get set }
 }

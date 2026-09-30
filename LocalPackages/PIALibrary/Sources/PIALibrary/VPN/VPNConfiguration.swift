@@ -43,30 +43,9 @@ public struct VPNConfiguration {
     /// When `true`, the VPN will disconnect on device sleep.
     public let disconnectsOnSleep: Bool
 
-    /// An optional custom configuration.
-    ///
-    /// - Seealso: `VPNCustomConfiguration`
-    public let customConfiguration: VPNCustomConfiguration?
-
     /// When `true`, the VPN will enable leak protection.
     public let leakProtection: Bool
 
     /// When `true`, the VPN will enable access to local.
     public let allowLocalDeviceAccess: Bool
-}
-
-/// Holds the configuration parameters of a custom VPN profile.
-///
-/// - Seealso: `VPNProfile`
-public protocol VPNCustomConfiguration {
-
-    /**
-     Returns a dictionary representation of this configuration.
-
-     - Returns: A hash map with the raw parameters of this configuration.
-     */
-    func serialized() -> [String: Any]
-
-    /// :nodoc:
-    func isEqual(to: VPNCustomConfiguration) -> Bool
 }

@@ -61,9 +61,6 @@ public enum ClientError: Error, Equatable {
     /// Error while checking the dip token renewal.
     case dipTokenRenewalError
 
-    /// The Wireguard Token is missing.
-    case missingWireguardToken
-
     /// Operation was interrupted by the user. Can be ignored most of the time.
     case userCancelled
 

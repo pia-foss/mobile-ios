@@ -84,22 +84,8 @@ platform :ios do
       fail_on_name_taken: true
     )
 
-    get_provisioning_profile(
-      development: development_profiles,
-      api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.Tunnel",
-      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.Tunnel",
-      fail_on_name_taken: true
-    )
 
 
-    get_provisioning_profile(
-      development: development_profiles,
-      api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
-      provisioning_name: "#{prov_name_preffix} com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
-      fail_on_name_taken: true
-    )
 
     get_provisioning_profile(
       development: development_profiles,
@@ -140,8 +126,8 @@ platform :ios do
 
     get_provisioning_profile(
       api_key: api_key,
-      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel",
-      provisioning_name: "PIA Distribution tvOS PacketTunnel",
+      app_identifier: "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS",
+      provisioning_name: "PIA Distribution tvOS PlatformSDK-Tunnel",
       platform: "tvos",
       fail_on_name_taken: true
     )
@@ -177,8 +163,6 @@ platform :ios do
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
-          "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.Tunnel",
-          "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
         }
@@ -218,8 +202,6 @@ platform :ios do
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
-          "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
-          "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
         }
@@ -249,8 +231,6 @@ platform :ios do
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
-          "com.privateinternetaccess.ios.PIA-VPN.Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.Tunnel",
-          "com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel" => "match Development com.privateinternetaccess.ios.PIA-VPN.WG-Tunnel",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
         }
@@ -540,7 +520,7 @@ desc "This line is for creating testflight build for tvOS"
       export_options: {
         provisioningProfiles: { 
           "com.privateinternetaccess.ios.PIA-VPN" => "PIA Distribution tvOS",
-          "com.privateinternetaccess.ios.PIA-VPN.PacketTunnel" => "PIA Distribution tvOS PacketTunnel"
+          "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS" => "PIA Distribution tvOS PlatformSDK-Tunnel"
         }
       }
     )

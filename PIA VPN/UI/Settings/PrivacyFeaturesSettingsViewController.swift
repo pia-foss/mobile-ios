@@ -379,6 +379,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
 extension PrivacyFeaturesSettingsViewController {
     func isCurrentProtocolWireguardOrOpenVPN() -> Bool {
         let vpnType = pendingPreferences?.vpnType
-        return vpnType == PIATunnelProfile.vpnType || vpnType == PIAWGTunnelProfile.vpnType
+        return vpnType == KapePlatformSDKVPNType.openVPN.rawValue || vpnType == KapePlatformSDKVPNType.wireGuard.rawValue
     }
 }

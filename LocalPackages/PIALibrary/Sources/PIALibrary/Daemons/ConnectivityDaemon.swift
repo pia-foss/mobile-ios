@@ -34,8 +34,6 @@ public extension Notification.Name {
 final class ConnectivityDaemon: Daemon, ConfigurationAccess, DatabaseAccess, PreferencesAccess, WebServicesAccess {
     static let shared = ConnectivityDaemon()
 
-    private let pinger: Pinger = TCPPinger.shared
-
     private(set) var hasEnabledUpdates: Bool = false
 
     private let reachability = try! Reachability(hostname: "8.8.8.8")

@@ -98,7 +98,6 @@ struct KapePlatformSDKTunnelSettingsTests {
             server: server,
             isOnDemand: false,
             disconnectsOnSleep: false,
-            customConfiguration: nil,
             leakProtection: false,
             allowLocalDeviceAccess: false
         )

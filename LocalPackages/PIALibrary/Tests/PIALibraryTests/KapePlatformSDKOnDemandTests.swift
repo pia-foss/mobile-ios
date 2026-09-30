@@ -76,7 +76,6 @@ final class KapePlatformSDKOnDemandTests: XCTestCase {
             ),
             isOnDemand: true,
             disconnectsOnSleep: false,
-            customConfiguration: nil,
             leakProtection: false,
             allowLocalDeviceAccess: false
         )

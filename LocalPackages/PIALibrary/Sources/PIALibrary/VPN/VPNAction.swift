@@ -40,21 +40,6 @@ public protocol VPNAction {
     func execute(_ callback: SuccessLibraryCallback?)
 }
 
-final class VPNActionReconnect: VPNAction, ProvidersAccess {
-    let priority = 10
-
-    let canRetainConnection = true
-
-    func execute(_ callback: SuccessLibraryCallback?) {
-        let vpn = accessedProviders.vpnProvider
-        guard (vpn.vpnStatus != .disconnected) else {
-            callback?(nil)
-            return
-        }
-        vpn.reconnect(after: nil, callback)
-    }
-}
-
 final class VPNActionReinstall: VPNAction, ProvidersAccess {
     let priority = 20
 
@@ -62,17 +47,8 @@ final class VPNActionReinstall: VPNAction, ProvidersAccess {
 
     func execute(_ callback: SuccessLibraryCallback?) {
         let vpn = accessedProviders.vpnProvider
-
-        // For IKEv2, connect() always follows a server/preference change and applies all
-        // settings via save(force:true) → doSave → saveToPreferences. Running install()
-        // or updatePreferences() concurrently causes "configuration is stale" races on
-        // NEVPNManager.shared(). Both branches are no-ops for IKEv2.
-        guard vpn.currentVPNType != IKEv2Profile.vpnType else {
-            callback?(nil)
-            return
-        }
-
         let connected = accessedProviders.vpnProvider.isVPNConnected
+
         if connected {
             vpn.install(
                 force: true,

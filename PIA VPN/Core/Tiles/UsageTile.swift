@@ -79,42 +79,22 @@ class UsageTile: UIView, Tileable {
     }
 
     @objc private func displayUsageInformation() {
-        updateStyleForVPNType(Client.providers.vpnProvider.currentVPNType)
-        if Client.providers.vpnProvider.currentVPNType != IKEv2Profile.vpnType {
-            Client.providers.vpnProvider.dataUsage { (usage, error) in
-                var uploaded = Int64(0)
-                var downloaded = Int64(0)
-                if error == nil,
-                    let usage = usage
-                {
-                    uploaded = Int64(usage.uploaded)
-                    downloaded = Int64(usage.downloaded)
-                }
-                self.uploadValue.text = ByteCountFormatter.string(
-                    fromByteCount: uploaded,
-                    countStyle: .file)
-                self.downloadValue.text = ByteCountFormatter.string(
-                    fromByteCount: downloaded,
-                    countStyle: .file)
+        Client.providers.vpnProvider.dataUsage { (usage, error) in
+            var uploaded = Int64(0)
+            var downloaded = Int64(0)
+            if error == nil,
+                let usage = usage
+            {
+                uploaded = Int64(usage.uploaded)
+                downloaded = Int64(usage.downloaded)
             }
+            self.uploadValue.text = ByteCountFormatter.string(
+                fromByteCount: uploaded,
+                countStyle: .file)
+            self.downloadValue.text = ByteCountFormatter.string(
+                fromByteCount: downloaded,
+                countStyle: .file)
         }
     }
 
-    private func updateStyleForVPNType(_ vpnType: String) {
-        if vpnType == IKEv2Profile.vpnType {
-            self.uploadValue.text = ByteCountFormatter.string(
-                fromByteCount: Int64(0),
-                countStyle: .file)
-            self.downloadValue.text = ByteCountFormatter.string(
-                fromByteCount: Int64(0),
-                countStyle: .file)
-            self.uploadValue.alpha = 0.2
-            self.downloadValue.alpha = 0.2
-            self.usageTitle.text = L10n.Tiles.Usage.Ipsec.title
-        } else {
-            self.usageTitle.text = L10n.Tiles.Usage.title.uppercased()
-            self.uploadValue.alpha = 1
-            self.downloadValue.alpha = 1
-        }
-    }
 }

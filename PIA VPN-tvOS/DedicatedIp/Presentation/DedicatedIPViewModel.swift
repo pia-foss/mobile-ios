@@ -35,7 +35,7 @@ final class DedicatedIPViewModel: ObservableObject {
 
     func onAppear() {
         guard let server = getDedicatedIp(),
-            let dipIKEv2IP = server.dipIKEv2IP,
+            let dedicatedIP = server.dedicatedIP,
             let dipStatusString = server.dipStatusString
         else {
             Task { @MainActor in
@@ -46,7 +46,7 @@ final class DedicatedIPViewModel: ObservableObject {
         Task { @MainActor in
             dedicatedIPStats = [
                 DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: dipStatusString),
-                DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: dipIKEv2IP),
+                DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: dedicatedIP),
                 DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: server.name + " (\(server.country))")
             ]
         }

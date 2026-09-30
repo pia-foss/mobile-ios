@@ -22,8 +22,6 @@
 
 import Foundation
 
-private let log = PIALogger.logger(for: Server.self)
-
 /// Possible errors raised when parsing a `Server`.
 public enum ServerError: Error {
 
@@ -113,15 +111,6 @@ public final class Server {
             self.responseTime = time
         }
 
-        func markServerAsUnavailable() {
-            log.debug("[Server] Marking address as unavailable — ip=\(ip) cn=\(cn)")
-            available = false
-        }
-
-        func reset() {
-            available = true
-        }
-
     }
 
     /// The server name.
@@ -195,7 +184,6 @@ public final class Server {
         amneziaAddressesForUDP: [ServerAddressIP]? = nil,
         iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
         pingAddress: Address?,
-        responseTime: Int? = 0,
         geo: Bool = false,
         offline: Bool = false,
         latitude: String? = nil,
@@ -260,8 +248,6 @@ extension Server {
     public func addresses() -> [ServerAddressIP] {
 
         switch Client.providers.vpnProvider.currentVPNType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            return iKEv2AddressesForUDP ?? []
         case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP ?? []
         case KapePlatformSDKVPNType.wireGuard.rawValue:
@@ -280,44 +266,12 @@ extension Server {
 
     }
 
-    public func ovpnAddresses(tcp: Bool) -> [ServerAddressIP] {
-
-        if tcp {
-            return openVPNAddressesForTCP ?? []
-        } else {
-            return openVPNAddressesForUDP ?? []
-        }
-
-    }
-
     public func bestAddress() -> ServerAddressIP? {
-        guard !addresses().isEmpty else {
-            return nil
-        }
-        let availableServer = addresses().first(where: { $0.available })
-        if availableServer == nil {
-            addresses().forEach({ $0.reset() })
-            return bestAddress()
-        }
-        return availableServer
-    }
-
-    public func bestAddressForOVPN(tcp: Bool) -> ServerAddressIP? {
-        guard !ovpnAddresses(tcp: tcp).isEmpty else {
-            return nil
-        }
-        let availableServer = ovpnAddresses(tcp: tcp).first(where: { $0.available })
-        if availableServer == nil {
-            ovpnAddresses(tcp: tcp).forEach({ $0.reset() })
-            return bestAddress()
-        }
-        return availableServer
+        addresses().first
     }
 
     public func hasEndpoints(for vpnType: String) -> Bool {
         switch vpnType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            return iKEv2AddressesForUDP?.isEmpty == false
         case KapePlatformSDKVPNType.openVPN.rawValue:
             return openVPNAddressesForTCP?.isEmpty == false || openVPNAddressesForUDP?.isEmpty == false
         case KapePlatformSDKVPNType.wireGuard.rawValue:
@@ -338,9 +292,6 @@ extension Server {
 
     func updateResponseTime(_ time: Int, forAddress address: ServerAddressIP) {
         switch Client.providers.vpnProvider.currentVPNType {
-        case KapePlatformSDKVPNType.iKEv2.rawValue:
-            let serverAddressIP = iKEv2AddressesForUDP?.first(where: { $0.ip == address.ip })
-            serverAddressIP?.updateResponseTime(time)
         case KapePlatformSDKVPNType.openVPN.rawValue:
             let serverAddressIP = openVPNAddressesForUDP?.first(where: { $0.ip == address.ip })
             serverAddressIP?.updateResponseTime(time)
@@ -354,17 +305,6 @@ extension Server {
         default:
             break
         }
-    }
-
-}
-
-extension Server {
-
-    func dipPassword() -> Data? {
-        if let dipUsername = dipUsername {
-            return Client.database.secure.passwordReference(forDipToken: dipUsername)
-        }
-        return nil
     }
 
 }

@@ -28,13 +28,11 @@ private let log = PIALogger.logger(for: NetworkExtensionProfile.self)
 /// Specific protocol bridging a `VPNProfile` to a native `NEVPNProtocol` from Apple's NetworkExtension framwork.
 public protocol NetworkExtensionProfile: VPNProfile {
 
-    /**
-     Returns a native `NEVPNProtocol` from this profile given a configuration.
-
-     - Parameter configuration: The `VPNConfiguration` to build the protocol upon.
-     - Returns: A native `NEVPNProtocol` object for use with NetworkExtension.
-     */
-    func generatedProtocol(withConfiguration configuration: VPNConfiguration) throws -> NEVPNProtocol
+    /// The bundle identifier of the Network Extension this profile installs and drives.
+    ///
+    /// Identifies the profile's own NE configuration independently of any particular
+    /// `NETunnelProviderManager` object, which `loadAllFromPreferences` vends anew on every call.
+    var providerBundleIdentifier: String? { get }
 }
 
 extension NetworkExtensionProfile {
@@ -44,75 +42,35 @@ extension NetworkExtensionProfile {
         return native as? NEVPNManager
     }
 
+    /**
+     Whether `manager` drives this profile's own Network Extension configuration.
+
+     `.NEVPNStatusDidChange` is delivered for every tunnel provider the process has loaded — a
+     stale legacy configuration left behind by an upgrade keeps posting while it is torn down — so
+     status handling has to tell our own events apart from theirs.
+
+     Matched on the provider bundle identifier rather than on identity with ``native``: `find()`
+     rebinds ``native`` to a fresh manager instance on every lookup, so an identity anchor is only
+     valid until the next one. A lookup from an unrelated path (the dashboard polls data usage
+     continuously) would otherwise move it mid-connection and every subsequent status change would
+     be silently dropped, stranding the app on a stale status.
+     */
+    func owns(_ manager: NEVPNManager) -> Bool {
+        guard let expected = providerBundleIdentifier,
+            let tunnelProtocol = manager.protocolConfiguration as? NETunnelProviderProtocol,
+            let actual = tunnelProtocol.providerBundleIdentifier
+        else {
+            return false
+        }
+        return actual == expected
+    }
+
     /// :nodoc:
     public var serverAddress: String? {
         return neProfile?.protocolConfiguration?.serverAddress
     }
 
-    /**
-     Takes care of saving the profile as `NEVPNProtocol` to a given `NEVPNManager`.
-
-     - Parameter vpn: The target `NEVPNManager` to which the generated protocol will be committed.
-     - Parameter configuration: The `VPNConfiguration` to use for generating the `NEVPNProtocol` object.
-     - Parameter force: If `true`, apply changes forcibly.
-     - Parameter callback: Returns `nil` on success.
-     - Seealso: `NetworkExtensionProfile.generatedProtocol(...)`
-     */
-    public func doSave(_ vpn: NEVPNManager, withConfiguration configuration: VPNConfiguration, force: Bool, _ callback: SuccessLibraryCallback?) {
-        do {
-            vpn.protocolConfiguration = try generatedProtocol(withConfiguration: configuration)
-        } catch {
-            callback?(error)
-            return
-        }
-
-        let protocolConfiguration = vpn.protocolConfiguration!  // Safe to force unwrap
-
-        vpn.localizedDescription = configuration.name
-        vpn.isOnDemandEnabled = Client.providers.vpnProvider.isVPNConnected || vpn.isEnabled ? configuration.isOnDemand : false  //if the VPN is disconnected, don't activate the onDemand property to don't autoconnect the VPN without user permission
-
-        applyOnDemandRules(to: vpn, force: force, configuration: configuration)
-
-        #if os(iOS)
-            let selectedProtocol = Client.preferences.vpnType
-            let isWireGuard = selectedProtocol == PIAWGTunnelProfile.vpnType
-            let isOpenVPN = selectedProtocol == PIATunnelProfile.vpnType
-
-            // Do not apply Leak Protection settings on WireGuard and OpenVPN
-            if isWireGuard || isOpenVPN {
-                vpn.protocolConfiguration?.includeAllNetworks = false
-                vpn.protocolConfiguration?.excludeLocalNetworks = true
-            } else {
-                // Apply Leak Protection settings when the Feature Flag is enabled
-                if Client.configuration.featureFlags[.showLeakProtection] {
-                    vpn.protocolConfiguration?.includeAllNetworks = configuration.leakProtection
-                    vpn.protocolConfiguration?.excludeLocalNetworks = configuration.allowLocalDeviceAccess
-                } else {
-                    vpn.protocolConfiguration?.includeAllNetworks = false
-                    vpn.protocolConfiguration?.excludeLocalNetworks = true
-                }
-            }
-        #endif
-
-        log.debug("Configured with server: \(protocolConfiguration.serverAddress ?? "none")")
-        log.debug("On-demand is now \(vpn.isOnDemandEnabled ? "ENABLED" : "DISABLED")")
-        log.debug("Raw manager: \(vpn)")
-
-        vpn.isEnabled = true
-        vpn.saveToPreferences { (error) in
-            if let error = error {
-                callback?(error)
-                return
-            }
-            vpn.loadFromPreferences { (error) in
-                callback?(nil)
-            }
-        }
-    }
-
     /// Builds and applies the Connect-on-Demand rules for `vpn` from the user's NMT preferences.
-    /// Shared by the protocol-extension `doSave` (IKEv2 / OpenVPN / WireGuard) and by
-    /// `KapePlatformSDKTunnelProfile`, which provides its own `doSave` but reuses this logic.
     func applyOnDemandRules(to vpn: NEVPNManager, force: Bool, configuration: VPNConfiguration) {
         let trustedNetworks = Client.preferences.nmtTrustedNetworkRules
 

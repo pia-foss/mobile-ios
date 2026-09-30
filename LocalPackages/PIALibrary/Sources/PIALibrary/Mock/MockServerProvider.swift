@@ -41,7 +41,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 country: "fr",
                 hostname: "france.example.com",
                 pingAddress: nil,
-                responseTime: 0,
                 regionIdentifier: ""
             ),
             Server(
@@ -50,7 +49,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 country: "de",
                 hostname: "germany.example.com",
                 pingAddress: nil,
-                responseTime: 0,
                 regionIdentifier: ""
             ),
             Server(
@@ -59,7 +57,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 country: "it",
                 hostname: "italy.example.com",
                 pingAddress: nil,
-                responseTime: 0,
                 regionIdentifier: ""
             ),
             Server(
@@ -68,7 +65,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 country: "us",
                 hostname: "us-east.example.com",
                 pingAddress: nil,
-                responseTime: 0,
                 regionIdentifier: ""
             ),
             Server(
@@ -77,7 +73,6 @@ public final class MockServerProvider: ServerProvider, DatabaseAccess, WebServic
                 country: "us",
                 hostname: "us-east.example.com",
                 pingAddress: nil,
-                responseTime: 0,
                 geo: true,
                 offline: true,
                 regionIdentifier: ""

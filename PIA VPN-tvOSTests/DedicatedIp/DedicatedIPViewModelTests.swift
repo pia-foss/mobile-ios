@@ -48,7 +48,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
         let server = ServerTypeStub.makeValidServerTypeStub()
         let expectedStats = [
             DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
-            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dedicatedIP"),
             DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: "name (country)")
         ]
 
@@ -92,7 +92,7 @@ final class DedicatedIPViewModelTests: XCTestCase {
         let server = ServerTypeStub.makeValidServerTypeStub()
         let expectedStats = [
             DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.dedicatedip, description: "dipStatusString"),
-            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dipIKEv2IP"),
+            DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.ip, description: "dedicatedIP"),
             DedicatedIpData(title: L10n.Settings.Dedicatedip.Stats.location, description: "name (country)")
         ]
 
@@ -162,7 +162,7 @@ struct ServerTypeStub: ServerType {
     var pingTime: Int?
     var isAutomatic: Bool
     var dipToken: String?
-    var dipIKEv2IP: String?
+    var dedicatedIP: String?
     var dipStatusString: String?
 
     func hasEndpoints(for vpnType: String) -> Bool {
@@ -179,7 +179,7 @@ struct ServerTypeStub: ServerType {
             pingTime: 0,
             isAutomatic: true,
             dipToken: "dipToken",
-            dipIKEv2IP: "dipIKEv2IP",
+            dedicatedIP: "dedicatedIP",
             dipStatusString: "dipStatusString")
     }
 
@@ -193,7 +193,7 @@ struct ServerTypeStub: ServerType {
             pingTime: 0,
             isAutomatic: true,
             dipToken: "dipToken",
-            dipIKEv2IP: nil,
+            dedicatedIP: nil,
             dipStatusString: nil)
     }
 }
