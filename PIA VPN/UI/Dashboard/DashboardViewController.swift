@@ -667,7 +667,10 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openAbout() {
-        perform(segue: StoryboardSegue.Main.aboutSegueIdentifier)
+        let coordinator = AboutCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -33,10 +33,6 @@ public enum AppConstants: Sendable {
         public static let feedbackUrl = "https://www.privateinternetaccess.com/helpdesk/new-ticket"
     }
 
-    public enum About {
-        public static let componentsPath = Bundle.main.path(forResource: "Components", ofType: "plist")
-    }
-
     public enum RegionsGEN4 {
         public static let bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }

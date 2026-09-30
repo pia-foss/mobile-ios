@@ -1,6 +1,6 @@
 //
-//  Coordinator.swift
-//  PIA VPN
+//  AboutFactory.swift
+//  PIAAbout
 //
 //  Copyright © 2026 Private Internet Access, Inc.
 //
@@ -21,11 +21,9 @@
 
 import Foundation
 
-/// Owns a flow's navigation, per ADR 0006.
-///
-/// Deliberately minimal: a coordinator that reports upward exposes its own typed `Output` publisher
-/// rather than this protocol prescribing one. Screens hold no reference to their coordinator — they
-/// expose output closures, and the coordinator decides what comes next.
-protocol Coordinator: AnyObject {
-    func start()
+public enum AboutFactory {
+    @MainActor
+    public static func makeAboutView(header: String) -> AboutView {
+        AboutView(header: header, dependencies: .live)
+    }
 }
