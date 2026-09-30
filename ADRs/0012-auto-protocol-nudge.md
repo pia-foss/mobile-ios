@@ -45,19 +45,22 @@ Detection runs where the events are produced, not in the app.
 - The only SDK-side change the feature required was making `PIATunnelSharedState.TunnelProtocol`
   `Sendable`; no engine behaviour was modified.
 
-### "Stuck" is inferred from the run of attempts
+### "Stuck" is counted in connect timeouts, over the ticket's rolling windows
 
-The SDK reports no terminal failure, so the detector infers it:
+The SDK reports no terminal failure, so the detector infers it, using the trigger KM-18462 defines and
+Android's `ConnectionProblemDetector` implements:
 
 - **Qualifying failures only.** A failure counts only if `PacketTunnelError.suggestsProtocolChange` is
   true. Auth, no-endpoints, license-excluded endpoints, unsupported-protocol, and every DIP error are
   excluded — those follow the user to every protocol and must never nudge.
-- **Dwell floor.** A session must have been failing for at least `connectTimeout` (30 s) before it can
-  nudge, so a one-off slow attempt does not.
-- **Trigger: a batch wrap, or an attempt-count floor.** Re-dialling an endpoint that this session
-  already tried means the configuration generator wrapped — the tunnel has exhausted what this
-  protocol offers, a far stronger signal than any count. Without endpoint identity (the config reports
-  none), the fallback is `qualifyingAttempts` (6) failures.
+- **One failure per connect timeout.** Every `connectTimeout` (30 s) a session spends failing without
+  connecting records one qualifying failure, however many engine attempts fail inside it. Android
+  counts one per CONNECTING stretch, but the PlatformSDK tunnel retries inside a single session
+  forever, so counting per stretch would never nudge a user stuck on one endless *Connecting…*.
+- **Trigger: 2 failures within 10 minutes, or 3 within 24 hours.** Failures are kept in memory for
+  the life of the tunnel process, so they span in-place session restarts (region change, protocol
+  switch) but are lost when the user disconnects and the extension exits. A user stuck in one session
+  is nudged after about 60 s.
 - **Once per interval, at most.** Posts are rate-limited by `minimumInterval` (180 s). Because the app
   may be suspended and miss a post, the detector keeps re-posting on continued failure; this interval
   is the only retry mechanism.
@@ -112,8 +115,8 @@ matches where the prompt and the user's preferences already live.
 - It is **not** the default-protocol migration — that shipped with ADR-0011.
 - It does **not** try to detect a connected-but-dead tunnel. That needs app-side reachability and
   conflicts with "stop after a successful connect"; the analytics stream does not provide it.
-- The trigger is tuned to the signal the SDK actually gives (batch wrap / attempt count) rather than
-  to a fixed failure count, and the caps exist so the prompt cannot become noise.
+- It does **not** count a connect-then-immediate-drop as a failure, which the ticket suggests; see
+  "Post-connect failures are not nudged" below.
 
 ## Consequences
 
@@ -125,9 +128,14 @@ matches where the prompt and the user's preferences already live.
   on the pinned protocol will not be offered Automatic for the rest of the session. This was chosen
   deliberately ("if it connected, the protocol works"), at the cost of not catching a protocol that
   connects and then immediately drops.
+- **Separate short tries are not accumulated.** A user who gives up after 30–59 s, disconnects and
+  retries records one failure per try, and each is lost with the extension process, so they are never
+  nudged. Persisting the failures in the app group would close that; it was judged not worth the extra
+  state, since a session stuck for about a minute already nudges on its own.
 - **Tuning is a release.** Thresholds live in `AppConstants.AutoProtocolNudge` (PIALibrary), compiled
   in so both the tunnel detector and the shared caps read one source of truth; changing them needs an
-  app/extension release. They are injectable (`AutoProtocolNudgeDetector.Thresholds`, `now`, `post`,
+  app/extension release. KM-18462 asks for remote-configurable thresholds; Android hardcodes them too,
+  so neither platform has that mechanism yet. They are injectable (`AutoProtocolNudgeDetector.Thresholds`, `now`, `post`,
   `selectedProtocol`) so the decision is unit-tested without wall-clock or OS dependencies.
 - **Testing spans three homes.** The detector's decision logic is tested in the package
   (`LocalPackages/PIAVPN/Tests/PIAVPNTests/`); the iOS guard/caps via `shouldPresent` in
