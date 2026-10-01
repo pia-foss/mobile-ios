@@ -46,11 +46,6 @@ final class ShowConnectionStatsViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UserInterface.isIpad {
-            let nc = NotificationCenter.default
-            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-
         ServiceQualityManager.shared.availableData { [weak self] data in
             DispatchQueue.main.async {
                 self?.textData.text = data.joined(separator: "\n\n")
@@ -83,6 +78,13 @@ final class ShowConnectionStatsViewController: AutolayoutViewController {
     }
 
     // MARK: Helpers
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            self?.viewHasRotated()
+        }
+    }
 
     @objc private func viewHasRotated() {
         styleNavigationBarWithTitle(L10n.Settings.Service.Quality.Show.title)

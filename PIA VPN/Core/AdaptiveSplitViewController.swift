@@ -33,8 +33,9 @@ import UIKit
 ///   takes the full width and the sidebar slides over it when shown via `toggleSidebar`.
 final class AdaptiveSplitViewController: UISplitViewController {
 
-    /// Window width (in points) below which the sidebar collapses into a hidden overlay.
-    private let narrowWidthThreshold: CGFloat = 700
+    /// Window width (in points) below which the sidebar collapses into a hidden overlay, so the dashboard keeps the
+    /// full width (iPhone Duo inner display, iPad portrait).
+    private let narrowWidthThreshold: CGFloat = 1000
 
     private enum LayoutMode {
         case wide
@@ -42,10 +43,23 @@ final class AdaptiveSplitViewController: UISplitViewController {
     }
 
     private var currentLayoutMode: LayoutMode?
+    private var foldAlignedPrimaryWidth: CGFloat?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        #if !targetEnvironment(macCatalyst)
+            view.relayoutOnHingeChange()
+        #endif
+    }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         updateLayoutMode(for: view.bounds.width)
+        #if !targetEnvironment(macCatalyst)
+            if #available(iOS 27.1, *) {
+                alignSidebarWithFold()
+            }
+        #endif
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -66,6 +80,41 @@ final class AdaptiveSplitViewController: UISplitViewController {
         } completion: { _ in
             completion()
         }
+    }
+
+    #if !targetEnvironment(macCatalyst)
+        @available(iOS 27.1, *)
+        private func alignSidebarWithFold() {
+            // Book-style fold: the sliding sidebar covers one page, clear of the fold's margins.
+            guard let fold = view.bookFold(includingInactive: false), !isCollapsed, preferredSplitBehavior == .overlay
+            else {
+                resetFoldAlignment()
+                return
+            }
+
+            let isRightToLeft = view.effectiveUserInterfaceLayoutDirection == .rightToLeft
+            let primaryWidth = isRightToLeft ? view.bounds.width - fold.frame.midX : fold.frame.midX
+            guard primaryWidth != foldAlignedPrimaryWidth else { return }
+            foldAlignedPrimaryWidth = primaryWidth
+
+            minimumPrimaryColumnWidth = primaryWidth
+            maximumPrimaryColumnWidth = primaryWidth
+            preferredPrimaryColumnWidth = primaryWidth
+            viewController(for: .primary)?.additionalSafeAreaInsets =
+                isRightToLeft
+                ? UIEdgeInsets(top: 0, left: fold.frame.maxX - fold.frame.midX, bottom: 0, right: 0)
+                : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: fold.frame.midX - fold.frame.minX)
+        }
+    #endif
+
+    private func resetFoldAlignment() {
+        guard foldAlignedPrimaryWidth != nil else { return }
+        foldAlignedPrimaryWidth = nil
+
+        minimumPrimaryColumnWidth = UISplitViewController.automaticDimension
+        maximumPrimaryColumnWidth = UISplitViewController.automaticDimension
+        preferredPrimaryColumnWidth = UISplitViewController.automaticDimension
+        viewController(for: .primary)?.additionalSafeAreaInsets = .zero
     }
 
     /// Re-applies the split behavior only when crossing the threshold, so we don't override the

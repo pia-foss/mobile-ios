@@ -33,18 +33,10 @@ extension Theme {
 
     func applySideMenu() {
 
-        // SideMenu is only used as the iPhone drawer. On iPad the menu lives inside the
-        // root UISplitViewController, so skip the no-op configuration here.
-        guard !UserInterface.isIpadOrMac else { return }
-
-        let screenSize = UIScreen.main.bounds.size
-        let minEdge = min(screenSize.width, screenSize.height)
-
         if SideMenuManager.default.leftMenuNavigationController == nil {
             SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         }
 
-        SideMenuManager.default.leftMenuNavigationController?.menuWidth = min(320.0, minEdge - 44.0)
         SideMenuManager.default.leftMenuNavigationController?.statusBarEndAlpha = 0
         SideMenuManager.default.leftMenuNavigationController?.presentationStyle = .menuSlideIn
         SideMenuManager.default.leftMenuNavigationController?.presentationStyle.presentingEndAlpha = 0.5

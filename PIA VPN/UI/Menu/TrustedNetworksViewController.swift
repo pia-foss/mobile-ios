@@ -176,7 +176,7 @@ final class TrustedNetworksViewController: AutolayoutViewController {
 extension TrustedNetworksViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat
-        if Macros.isDevicePad {
+        if traitCollection.horizontalSizeClass == .regular {
             width = (collectionView.frame.width / 3) - 28
         } else if !isLandscape {
             width = (collectionView.frame.width / 2) - 28

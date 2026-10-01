@@ -28,6 +28,7 @@ import SwiftUI
 
 struct FeedbackTileView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     private let ratingManager: RatingManagerProtocol = RatingManager.shared
 
@@ -90,14 +91,14 @@ struct FeedbackTileView: View {
 
     @ViewBuilder
     private func leadingSpacerIfNeeded() -> some View {
-        if Macros.isDevicePad {
+        if horizontalSizeClass == .regular {
             Spacer()
         }
     }
 
     @ViewBuilder
     private func middleSpacerIfNeeded() -> some View {
-        if !Macros.isDevicePad {
+        if horizontalSizeClass != .regular {
             Spacer()
         }
     }

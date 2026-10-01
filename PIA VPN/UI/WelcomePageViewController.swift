@@ -130,14 +130,13 @@ final class WelcomePageViewController: UIPageViewController {
         guard let window = view.window else {
             return super.traitCollection
         }
-        let isLandscape = (window.bounds.size.width > window.bounds.size.height)
         let minHeight: CGFloat
         if childViewController is LoginViewController {
             minHeight = 568.0
         } else {
             minHeight = 667.0
         }
-        if !Macros.isDevicePad && (isLandscape || (window.bounds.size.height < minHeight)) {
+        if traitCollection.verticalSizeClass == .compact || (window.bounds.size.height < minHeight) {
             return UITraitCollection(verticalSizeClass: .compact)
         } else {
             return UITraitCollection(verticalSizeClass: .regular)
