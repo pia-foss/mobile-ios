@@ -76,10 +76,6 @@ public final class OptionsViewController: AutolayoutViewController, UITableViewD
 
         delegate?.optionsController(self, didLoad: tableView)
 
-        if UserInterface.isIpad {
-            NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-
         viewShouldRestyle()
 
     }
@@ -91,6 +87,13 @@ public final class OptionsViewController: AutolayoutViewController, UITableViewD
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationBarWithTitle(self.navigationController?.title ?? "")
+    }
+
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            self?.viewHasRotated()
+        }
     }
 
     @objc private func viewHasRotated() {

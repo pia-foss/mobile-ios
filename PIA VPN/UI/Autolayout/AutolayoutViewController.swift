@@ -64,7 +64,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
 
     /// The outlet to the main view container (optional).
     ///
-    /// - Seealso: `ThemeStrategy.autolayoutContainerMargins(for:)`
+    /// - Seealso: `ThemeStrategy.autolayoutContainerMargins(for:traitCollection:)`
     @IBOutlet public weak var viewContainer: UIView?
 
     /// :nodoc:
@@ -116,7 +116,7 @@ open class AutolayoutViewController: UIViewController, ModalController, Restylab
     private func refreshOrientationConstraints(size: CGSize) {
         if let viewContainer = viewContainer {
             let orientation: UIInterfaceOrientationMask = (isLandscape ? .landscape : .portrait)
-            viewContainer.layoutMargins = Theme.current.autolayoutContainerMargins(for: orientation)
+            viewContainer.layoutMargins = Theme.current.autolayoutContainerMargins(for: orientation, traitCollection: traitCollection)
         }
         didRefreshOrientationConstraints()
     }
@@ -253,12 +253,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         // If already showing, keep it
         guard loadingViewController == nil else { return }
 
-        guard
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let window = windowScene.windows.first
-        else {
-            return
-        }
+        guard let window = view.window else { return }
 
         // Lock UI
         window.isUserInteractionEnabled = false
@@ -284,9 +279,7 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         guard loadingViewController != nil else { return }
 
         // Unlock UI
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.isUserInteractionEnabled = true
+        loadingViewController?.view.window?.isUserInteractionEnabled = true
 
         loadingViewController?.view.removeFromSuperview()
         loadingViewController = nil
@@ -296,13 +289,12 @@ extension AutolayoutViewController: AnimatingLoadingDelegate {
         loadingView: UIView,
         in parentView: UIView
     ) {
-        // Loading view centered in parent with fixed size
-        let loadingSize = UIScreen.main.bounds.width / 4
+        // Loading view centered in parent, a quarter of its width
         NSLayoutConstraint.activate([
             loadingView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             loadingView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
-            loadingView.widthAnchor.constraint(equalToConstant: loadingSize),
-            loadingView.heightAnchor.constraint(equalToConstant: loadingSize)
+            loadingView.widthAnchor.constraint(equalTo: parentView.widthAnchor, multiplier: 0.25),
+            loadingView.heightAnchor.constraint(equalTo: loadingView.widthAnchor)
         ])
     }
 

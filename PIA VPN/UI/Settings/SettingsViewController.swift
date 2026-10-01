@@ -59,13 +59,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
         reloadSettings()
 
-        if UserInterface.isIpad {
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(viewHasRotated),
-                name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-
         NotificationCenter.default.addObserver(
             self, selector: #selector(refreshSettings),
             name: .RefreshSettings,
@@ -97,6 +90,9 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         tableView.reloadData()
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            self?.viewHasRotated()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

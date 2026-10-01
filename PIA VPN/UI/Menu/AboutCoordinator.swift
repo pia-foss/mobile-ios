@@ -51,7 +51,7 @@ final class AboutCoordinator: @MainActor FlowCoordinator {
 
         let nav = EscapeNavigationController(rootViewController: host) { [weak self] in self?.finish() }
         Theme.current.applyCustomNavigationBar(nav.navigationBar, withTintColor: nil, andBarTintColors: nil)
-        if UserInterface.isIpadOrMac {
+        if presenter?.traitCollection.horizontalSizeClass == .regular {
             nav.modalPresentationStyle = .formSheet
             nav.isModalInPresentation = true
         } else {

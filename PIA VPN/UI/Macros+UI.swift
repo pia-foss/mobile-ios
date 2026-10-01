@@ -90,33 +90,6 @@ extension Macros {
         )
     }
 
-    /// Checks iPad device.
-    ///
-    /// - Returns: `true` if the device is an iPad
-    public static var isDevicePad: Bool {
-        return UIDevice.current.userInterfaceIdiom == .pad
-    }
-
-    /**
-     Checks iPhone Plus device.
-
-     - Returns: `true` if the device is an iPhone Plus
-     */
-    public static var isDevicePlus: Bool {
-        let screen = UIScreen.main
-        let maxEdge = max(screen.bounds.size.width, screen.bounds.size.height)
-        return ((screen.scale >= 3.0) && (maxEdge < 812.0))
-    }
-
-    /**
-     Checks big devices, typically an iPad or iPhone Plus.
-
-     - Returns: `true` if the device is an iPad or an iPhone Plus
-     */
-    public static var isDeviceBig: Bool {
-        return (isDevicePad || (UIScreen.main.scale >= 3.0))
-    }
-
     /**
      Returns a localized full version string.
 

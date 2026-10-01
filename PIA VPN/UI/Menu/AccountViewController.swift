@@ -83,10 +83,6 @@ final class AccountViewController: AutolayoutViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(redisplayAccount), name: .PIAAccountDidRefresh, object: nil)
 
-        if UserInterface.isIpad {
-            nc.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-
         let tap = UITapGestureRecognizer(target: self, action: #selector(openManageSubscription))
         labelSubscriptions.addGestureRecognizer(tap)
 
@@ -110,6 +106,13 @@ final class AccountViewController: AutolayoutViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         establishUncreditedVisibility()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            self?.viewHasRotated()
+        }
     }
 
     @objc private func viewHasRotated() {

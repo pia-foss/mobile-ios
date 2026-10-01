@@ -82,6 +82,10 @@ final class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
+    private var menuPresentGestures: [UIGestureRecognizer] = []
+    private var foldHeaderWidth: CGFloat?
+    private var storyboardSideBySideConstraints: [NSLayoutConstraint] = []
+    private var swappedSideBySideConstraints: [NSLayoutConstraint] = []
 
     private var currentStatus: VPNStatus = .disconnected {
         didSet {
@@ -164,6 +168,10 @@ final class DashboardViewController: AutolayoutViewController {
         addObservers()
 
         self.viewContentHeight = self.viewContentHeightConstraint.constant
+
+        #if !targetEnvironment(macCatalyst)
+            view.relayoutOnHingeChange()
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -235,8 +243,19 @@ final class DashboardViewController: AutolayoutViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        #if !targetEnvironment(macCatalyst)
+            if #available(iOS 27.1, *) {
+                updateFoldLayout()
+            }
+        #endif
         // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
+        // The drawer only opens when the menu isn't already shown as a sidebar.
+        let isDrawerAvailable = splitViewController == nil
+        menuPresentGestures.forEach { $0.isEnabled = isDrawerAvailable }
+        if isDrawerAvailable {
+            SideMenuManager.default.leftMenuNavigationController?.menuWidth = min(320.0, view.bounds.width - 44.0)
+        }
     }
 
     override func didRefreshOrientationConstraints() {
@@ -316,21 +335,15 @@ final class DashboardViewController: AutolayoutViewController {
 
     // MARK: Menu
     private func setupMenu() {
-        // On iPad we live inside a UISplitViewController and MenuViewController is the
-        // persistent sidebar — no SideMenu drawer is needed. The split view wires up the
-        // menu delegate via prepare(for:) when the sidebar nav is set as the primary column.
-        if splitViewController != nil {
-            if let menuNav = splitViewController?.viewController(for: .primary) as? UINavigationController {
-                setMenuDelegate(menuNavigationController: menuNav)
-            }
-            return
-        }
-
+        // In regular width the menu is the split view sidebar, whose delegate
+        // `AdaptiveRootViewController` wires up. The drawer is set up regardless, because the
+        // window can become compact at any time; its gestures are toggled in viewDidLayoutSubviews.
         if SideMenuManager.default.leftMenuNavigationController == nil {
             SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         }
-        SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        menuPresentGestures =
+            [SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)]
+            + SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
 
         if let menuNavigationController = SideMenuManager.default.leftMenuNavigationController {
             setMenuDelegate(menuNavigationController: menuNavigationController)
@@ -412,13 +425,87 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
+    #if !targetEnvironment(macCatalyst)
+        @available(iOS 27.1, *)
+        private func updateFoldLayout() {
+            // Tiles on one page, connect button on the other, using the side-by-side layout the storyboard has for
+            // compact height with its sides swapped. The inactive fold of a fully open display counts too, so the
+            // arrangement stays the same between the half-open and fully open poses.
+            guard let fold = view.bookFold(includingInactive: true), let container = viewContent.superview else {
+                foldHeaderWidth = nil
+                unswapSideBySideLayout()
+                if traitOverrides.contains(UITraitVerticalSizeClass.self) {
+                    traitOverrides.remove(UITraitVerticalSizeClass.self)
+                }
+                return
+            }
+
+            // The header ends 5 pt after the tiles, so it starts where the fold's margins start.
+            let foldFrame = container.convert(fold.frame, from: view)
+            let margins = container.layoutMargins
+            let isRightToLeft = view.effectiveUserInterfaceLayoutDirection == .rightToLeft
+            foldHeaderWidth =
+                isRightToLeft
+                ? foldFrame.maxX - margins.left - 5
+                : container.bounds.width - margins.right - foldFrame.minX - 5
+            if !traitOverrides.contains(UITraitVerticalSizeClass.self) {
+                traitOverrides.verticalSizeClass = .compact
+            }
+            if traitCollection.verticalSizeClass == .compact {
+                swapSideBySideLayout(in: container)
+            }
+        }
+    #endif
+
+    private func swapSideBySideLayout(in container: UIView) {
+        guard swappedSideBySideConstraints.isEmpty else { return }
+        let active = container.constraints.filter(\.isActive)
+        // Wait for the storyboard's compact-height constraints; installing them triggers another layout pass.
+        guard
+            let tilesAfterHeader = active.first(where: {
+                $0.firstItem === viewRows && $0.firstAttribute == .leading && $0.secondItem === viewContent
+            }),
+            let headerAtLeading = active.first(where: {
+                $0.firstItem === viewContent && $0.firstAttribute == .leading && $0.secondAttribute == .leadingMargin
+            }),
+            let tilesAtTrailing = active.first(where: {
+                $0.secondItem === viewRows && $0.secondAttribute == .trailing && $0.firstAttribute == .trailingMargin
+            })
+        else { return }
+
+        storyboardSideBySideConstraints = [tilesAfterHeader, headerAtLeading, tilesAtTrailing]
+        swappedSideBySideConstraints = [
+            viewRows.leadingAnchor.constraint(equalTo: container.layoutMarginsGuide.leadingAnchor),
+            viewContent.leadingAnchor.constraint(equalTo: viewRows.trailingAnchor, constant: 5),
+            viewContent.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor)
+        ]
+        NSLayoutConstraint.deactivate(storyboardSideBySideConstraints)
+        NSLayoutConstraint.activate(swappedSideBySideConstraints)
+    }
+
+    private func unswapSideBySideLayout() {
+        guard !swappedSideBySideConstraints.isEmpty else { return }
+        NSLayoutConstraint.deactivate(swappedSideBySideConstraints)
+        NSLayoutConstraint.activate(storyboardSideBySideConstraints)
+        swappedSideBySideConstraints = []
+        storyboardSideBySideConstraints = []
+    }
+
+    // Below 680 pt of usable height the header gives the difference to the tiles, keeping room for the
+    // 150 pt connect button.
+    private var stackedHeaderHeight: CGFloat {
+        let shortfall = max(0, 680 - view.safeAreaLayoutGuide.layoutFrame.height)
+        return max(180, viewContentHeight - shortfall)
+    }
+
     private func updateTileLayout() {
         UIView.animate(
             withDuration: AppConfiguration.Animations.duration,
             animations: {
                 self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
-                self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
-                self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+                self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.stackedHeaderHeight : 0
+                self.viewContentLandscapeHeightConstraint.constant =
+                    self.tileModeStatus == .normal ? (self.foldHeaderWidth ?? self.viewContentHeight) : 0
                 self.view.layoutIfNeeded()
             })
         reloadTiles()
@@ -1099,7 +1186,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func reloadTheme() {
-        AppPreferences.shared.reloadTheme()
+        AppPreferences.shared.reloadTheme(in: view)
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {
