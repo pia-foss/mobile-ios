@@ -40,6 +40,7 @@
 		3FAA22012F9B0001007F7092 /* PIADedicatedIP in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA22002F9B0001007F7092 /* PIADedicatedIP */; };
 		3FAA22032F9B0001007F7092 /* PIADedicatedIP in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA22022F9B0001007F7092 /* PIADedicatedIP */; };
 		3FAB22012F9A0001007F7092 /* PIAAbout in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAB22002F9A0001007F7092 /* PIAAbout */; };
+		3FAB22112F9A0001007F7092 /* PIAValidateQRLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAB22102F9A0001007F7092 /* PIAValidateQRLogin */; };
 		3FC0DEC42FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
 		3FC0DED02FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
 		3FD44D712FD8376D008A43AD /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3FD44D702FD8376D008A43AD /* PIALibrary */; };
@@ -272,7 +273,6 @@
 				DedicatedIp/CompositionRoot/DedicatedIPFactory.swift,
 				"DedicatedIp/Domain/Use cases/RemoveDIPUseCase.swift",
 				"Login/Utils/Foundation+PIA.swift",
-				LoginQR/Infrastructure/URLSessionHTTPClient.swift,
 				RegionsSelection/CompositionRoot/RegionsSelectionFactory.swift,
 				RegionsSelection/UseCases/FavoriteRegionUseCase.swift,
 				Shared/CompositionRoot/KeychainFactory.swift,
@@ -375,6 +375,7 @@
 				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
 				3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */,
 				3FAB22012F9A0001007F7092 /* PIAAbout in Frameworks */,
+				3FAB22112F9A0001007F7092 /* PIAValidateQRLogin in Frameworks */,
 				3FAA22012F9B0001007F7092 /* PIADedicatedIP in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A106 /* PIAAssetsFlags in Frameworks */,
@@ -646,6 +647,7 @@
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
 				3FAA11002F9A0001007F7092 /* PIAPaywall */,
 				3FAB22002F9A0001007F7092 /* PIAAbout */,
+				3FAB22102F9A0001007F7092 /* PIAValidateQRLogin */,
 				3FAA22002F9B0001007F7092 /* PIADedicatedIP */,
 				AC11E0010000000000000002 /* CoreArchitecture */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
@@ -3222,6 +3224,10 @@
 		3FAB22002F9A0001007F7092 /* PIAAbout */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAAbout;
+		};
+		3FAB22102F9A0001007F7092 /* PIAValidateQRLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIAValidateQRLogin;
 		};
 		3FC0DEC32FEAF47C00063E49 /* OpenSSL */ = {
 			isa = XCSwiftPackageProductDependency;

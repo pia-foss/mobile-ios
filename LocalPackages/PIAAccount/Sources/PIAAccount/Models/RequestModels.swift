@@ -58,6 +58,17 @@ public struct IOSPaymentInformation: Encodable, Sendable {
     }
 }
 
+// MARK: - Bind Login Token Request
+
+/// Request body for binding a tvOS QR login token to the current account
+struct BindLoginTokenRequest: Encodable, Sendable {
+    let loginToken: String
+
+    enum CodingKeys: String, CodingKey {
+        case loginToken = "login_token"
+    }
+}
+
 // MARK: - Dedicated IP Token Request
 
 /// Request body for acquiring a Dedicated IP token

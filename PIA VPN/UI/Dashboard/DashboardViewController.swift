@@ -305,13 +305,20 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func checkTVOSTokenToBind() {
-        guard let apiToken = Client.providers.accountProvider.apiToken,
-            let token = Client.configuration.tvOSBindToken
-        else { return }
+        guard Client.providers.accountProvider.apiToken != nil,
+              let token = Client.configuration.tvOSBindToken
+        else {
+            return
+        }
 
-        guard let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token) else { return }
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
+        let coordinator = ValidateQRLoginCoordinator(
+            presenter: self,
+            qrToken: token
+        )
+
+        Task {
+            await coordinator.startAsync()
+        }
     }
 
     // MARK: Menu

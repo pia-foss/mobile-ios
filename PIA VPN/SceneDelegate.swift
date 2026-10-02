@@ -166,12 +166,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let token = url.absoluteString[AppConstants.QRSignin.url.count...]
             Client.configuration.tvOSBindToken = token
 
-            if let dashboardViewController = RootCoordinator.shared.dashboard {
-                if let apiToken = Client.providers.accountProvider.apiToken,
-                    let viewController = ValidateQRLoginFactory.makeValidateQRLoginViewController(apiToken: apiToken, tvOSBindToken: token)
-                {
-                    viewController.modalPresentationStyle = .fullScreen
-                    dashboardViewController.present(viewController, animated: true)
+            if let dashboardViewController = RootCoordinator.shared.dashboard, Client.providers.accountProvider.apiToken != nil {
+                let coordinator = ValidateQRLoginCoordinator(
+                    presenter: dashboardViewController,
+                    qrToken: token
+                )
+
+                Task {
+                    await coordinator.startAsync()
                 }
             }
         }
