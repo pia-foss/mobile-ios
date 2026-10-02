@@ -146,7 +146,7 @@ PLATFORMS.each do |platform|
     end
     run_git('push', 'origin', "#{sha}:refs/tags/#{tag}")
     tags[tag] = sha
-    puts "✅ Created #{tag}"
+    puts DRY_RUN ? "Would create #{tag}" : "✅ Created #{tag}"
   elsif tags[tag] == sha
     puts "#{tag} already points at #{sha}"
   elsif platform[:shared]
@@ -163,7 +163,7 @@ PLATFORMS.each do |platform|
 
   run_git('push', 'origin', '--delete', *rc_tags.map { |t| "refs/tags/#{t}" })
   rc_tags.each { |t| tags.delete(t) }
-  puts "🗑️ Deleted #{rc_tags.join(', ')}"
+  puts DRY_RUN ? "Would delete #{rc_tags.join(', ')}" : "🗑️ Deleted #{rc_tags.join(', ')}"
 end
 
 exit(failed ? 1 : 0)
