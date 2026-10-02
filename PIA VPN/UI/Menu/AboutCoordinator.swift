@@ -19,51 +19,13 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
-import CoreArchitecture
 import PIAAbout
 import PIALibrary
 import PIALocalizations
-import SwiftUI
-import UIKit
 
-final class AboutCoordinator: @MainActor FlowCoordinator {
-    private weak var presenter: UIViewController?
-    private let subject = PassthroughSubject<Void, Never>()
-    var output: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
-
-    init(presenter: UIViewController) {
-        self.presenter = presenter
-    }
-
-    @MainActor
-    func start() {
+final class AboutCoordinator: ModalCoordinator<AboutView> {
+    override func buildContent() -> AboutView {
         let header = "Copyright © \(AppConfiguration.About.copyright) \(AppConfiguration.About.companyName)\n\(L10n.About.app) \(Macros.versionFullString() ?? "")"
-        let host = UIHostingController(rootView: AboutFactory.makeAboutView(header: header))
-        host.title = L10n.Menu.Item.about
-
-        let close = UIBarButtonItem(
-            systemItem: .close,
-            primaryAction: UIAction { [weak self] _ in self?.finish() }
-        )
-        close.accessibilityLabel = L10n.Global.close
-        host.navigationItem.leftBarButtonItem = close
-
-        let nav = EscapeNavigationController(rootViewController: host) { [weak self] in self?.finish() }
-        Theme.current.applyCustomNavigationBar(nav.navigationBar, withTintColor: nil, andBarTintColors: nil)
-        if UserInterface.isIpadOrMac {
-            nav.modalPresentationStyle = .formSheet
-            nav.isModalInPresentation = true
-        } else {
-            nav.modalPresentationStyle = .overFullScreen
-        }
-
-        presenter?.present(nav, animated: true)
-    }
-
-    @MainActor
-    private func finish() {
-        presenter?.dismiss(animated: true)
-        subject.send(completion: .finished)
+        return AboutView(header: header, dependencies: .live)
     }
 }

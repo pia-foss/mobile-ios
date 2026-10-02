@@ -1,6 +1,6 @@
 //
 //  DedicatedIPProvider.swift
-//  PIA VPN-tvOS
+//  PIADedicatedIP
 //
 //  Created by Said Rehouni on 14/2/24.
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
@@ -9,19 +9,24 @@
 import Foundation
 import PIALibrary
 
-final class DedicatedIPProvider: DedicatedIPProviderType {
+public final class DedicatedIPProvider: DedicatedIPProviderType {
     private let serverProvider: DipServerProviderType
+    private let makeServerType: @Sendable (Server) -> ServerType
 
-    init(serverProvider: DipServerProviderType) {
+    public init(
+        serverProvider: DipServerProviderType,
+        makeServerType: @escaping @Sendable (Server) -> ServerType
+    ) {
         self.serverProvider = serverProvider
+        self.makeServerType = makeServerType
     }
 
-    func activateDIPToken(_ token: String, completion: @escaping (Result<ServerType, DedicatedIPError>) -> Void) {
+    public func activateDIPToken(_ token: String, completion: @escaping (Result<ServerType, DedicatedIPError>) -> Void) {
         guard getDIPTokens().isEmpty else {
             completion(.failure(.alreadyHasOne))
             return
         }
-        serverProvider.activateDIPToken(token) { result in
+        serverProvider.activateDIPToken(token) { [makeServerType] result in
             switch result {
             case .failure(let error):
                 completion(.failure(.generic(error)))
@@ -31,20 +36,20 @@ final class DedicatedIPProvider: DedicatedIPProviderType {
                 completion(.failure(status.toDedicatedIPError()))
 
             case .success(let server):
-                completion(.success(server))
+                completion(.success(makeServerType(server)))
             }
         }
     }
 
-    func removeDIPToken(_ token: String) {
+    public func removeDIPToken(_ token: String) {
         serverProvider.removeDIPToken(token)
     }
 
-    func renewDIPToken(_ token: String) {
+    public func renewDIPToken(_ token: String) {
         serverProvider.handleDIPTokenExpiration(dipToken: token, nil)
     }
 
-    func getDIPTokens() -> [String] {
+    public func getDIPTokens() -> [String] {
         serverProvider.getDIPTokens()
     }
 }

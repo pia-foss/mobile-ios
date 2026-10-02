@@ -1,7 +1,8 @@
 //
-//  AboutFactory.swift
-//  PIAAbout
+//  ViewWithTitle.swift
+//  PIAUI
 //
+//  Created by Mario on 30/03/2026.
 //  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
@@ -19,11 +20,9 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AboutFactory {
-    @MainActor
-    public static func makeAboutView(header: String) -> AboutView {
-        AboutView(header: header, dependencies: .live)
-    }
+@MainActor
+public protocol ViewWithTitle: View {
+    var navigationTitle: String { get }
 }

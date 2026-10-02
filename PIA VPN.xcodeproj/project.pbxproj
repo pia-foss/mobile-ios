@@ -37,6 +37,8 @@
 		3F807D4C2F164B44002015ED /* PIALibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 3F807D4B2F164B44002015ED /* PIALibrary */; };
 		3F89AB672F48461B00AC9CCD /* PIADebugMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3F89AB662F48461B00AC9CCD /* PIADebugMenu */; };
 		3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA11002F9A0001007F7092 /* PIAPaywall */; };
+		3FAA22012F9B0001007F7092 /* PIADedicatedIP in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA22002F9B0001007F7092 /* PIADedicatedIP */; };
+		3FAA22032F9B0001007F7092 /* PIADedicatedIP in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAA22022F9B0001007F7092 /* PIADedicatedIP */; };
 		3FAB22012F9A0001007F7092 /* PIAAbout in Frameworks */ = {isa = PBXBuildFile; productRef = 3FAB22002F9A0001007F7092 /* PIAAbout */; };
 		3FC0DEC42FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
 		3FC0DED02FEAF47C00063E49 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC0DEC32FEAF47C00063E49 /* OpenSSL */; };
@@ -268,12 +270,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				DedicatedIp/CompositionRoot/DedicatedIPFactory.swift,
-				DedicatedIp/Data/DedicatedIPProvider.swift,
-				DedicatedIp/Data/DipServerProvider.swift,
-				DedicatedIp/Domain/Entities/DedicatedIPError.swift,
-				DedicatedIp/Domain/Interfaces/DipServerProviderType.swift,
-				"DedicatedIp/Domain/Use cases/ActivateDIPTokenUseCase.swift",
-				"DedicatedIp/Domain/Use cases/GetDedicatedIpUseCase.swift",
 				"DedicatedIp/Domain/Use cases/RemoveDIPUseCase.swift",
 				"Login/Utils/Foundation+PIA.swift",
 				LoginQR/Infrastructure/URLSessionHTTPClient.swift,
@@ -379,6 +375,7 @@
 				3F56EF832F8CCBDF007F7092 /* PIADashboard in Frameworks */,
 				3FAA11012F9A0001007F7092 /* PIAPaywall in Frameworks */,
 				3FAB22012F9A0001007F7092 /* PIAAbout in Frameworks */,
+				3FAA22012F9B0001007F7092 /* PIADedicatedIP in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A100 /* PIAAssetsMobile in Frameworks */,
 				A1A1A1A1A1A1A1A1A1A1A106 /* PIAAssetsFlags in Frameworks */,
 				093894D7D6B2BF4F8CE18D9B /* PIALocalizations in Frameworks */,
@@ -467,6 +464,7 @@
 				3F3203CE2F0BE52C0070EC47 /* PIASwiftUI in Frameworks */,
 				ACD8FEEB2F72CB0B007A0BB0 /* PIADashboard in Frameworks */,
 				3F7CA2672F7D0EE4001F7786 /* PIADebugMenu in Frameworks */,
+				3FAA22032F9B0001007F7092 /* PIADedicatedIP in Frameworks */,
 				3B9F2063FD0AA1F499E8A6ED /* PIALocalizations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,6 +646,7 @@
 				ACD8FEEE2F72CF95007A0BB0 /* PIADashboard */,
 				3FAA11002F9A0001007F7092 /* PIAPaywall */,
 				3FAB22002F9A0001007F7092 /* PIAAbout */,
+				3FAA22002F9B0001007F7092 /* PIADedicatedIP */,
 				AC11E0010000000000000002 /* CoreArchitecture */,
 				A1A1A1A1A1A1A1A1A1A1A101 /* PIAAssetsMobile */,
 				A1A1A1A1A1A1A1A1A1A1A107 /* PIAAssetsFlags */,
@@ -808,6 +807,7 @@
 				ACD8FEEA2F72CB0B007A0BB0 /* PIADashboard */,
 				A1A1A1A1A1A1A1A1A1A1A103 /* PIAAssetsTV */,
 				A1A1A1A1A1A1A1A1A1A1A109 /* PIAAssetsFlags */,
+				3FAA22022F9B0001007F7092 /* PIADedicatedIP */,
 				3F7CA2662F7D0EE4001F7786 /* PIADebugMenu */,
 				3FC0DEC32FEAF47C00063E49 /* OpenSSL */,
 			);
@@ -3210,6 +3210,14 @@
 		3FAA11002F9A0001007F7092 /* PIAPaywall */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PIAPaywall;
+		};
+		3FAA22002F9B0001007F7092 /* PIADedicatedIP */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADedicatedIP;
+		};
+		3FAA22022F9B0001007F7092 /* PIADedicatedIP */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PIADedicatedIP;
 		};
 		3FAB22002F9A0001007F7092 /* PIAAbout */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,6 +8,7 @@
 
 import Foundation
 import PIADashboard
+import PIADedicatedIP
 import PIALibrary
 
 enum RegionsListFilter: Equatable, Hashable {

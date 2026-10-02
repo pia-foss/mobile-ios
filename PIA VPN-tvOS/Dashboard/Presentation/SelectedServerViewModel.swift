@@ -3,6 +3,7 @@ import Foundation
 import PIAAssetsFlags
 import PIAAssetsTV
 import PIADashboard
+import PIADedicatedIP
 import PIALibrary
 import PIALocalizations
 import SwiftUI

@@ -663,7 +663,10 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openDedicatedIp() {
-        perform(segue: StoryboardSegue.Main.dedicatedIpSegueIdentifier)
+        let coordinator = DedicatedIPCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+        }
     }
 
     func openAbout() {

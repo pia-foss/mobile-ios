@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import PIAAssetsFlags
 import PIAAssetsTV
+import PIADedicatedIP
 import PIALibrary
 import PIALocalizations
 import SwiftUI

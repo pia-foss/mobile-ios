@@ -42,12 +42,12 @@ extension About {
     }
 
     public struct Dependencies: Sendable {
-        public var loadComponents: @MainActor () -> AboutComponents
-        public var fetchLicense: @MainActor (URL) async -> String?
+        public var loadComponents: @Sendable () -> AboutComponents
+        public var fetchLicense: @Sendable (URL) async -> String?
 
         public init(
-            loadComponents: @escaping @MainActor () -> AboutComponents,
-            fetchLicense: @escaping @MainActor (URL) async -> String?
+            loadComponents: @Sendable @escaping () -> AboutComponents,
+            fetchLicense: @Sendable @escaping (URL) async -> String?
         ) {
             self.loadComponents = loadComponents
             self.fetchLicense = fetchLicense

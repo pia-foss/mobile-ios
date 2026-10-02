@@ -26,6 +26,7 @@ let package = Package(
             dependencies: [
                 .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
+                .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations")
             ],
             resources: [.process("Resources")]

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIADedicatedIP
 import PIALibrary
 
 public enum DedicatedIPFactory {
@@ -43,7 +44,7 @@ public enum DedicatedIPFactory {
     }
 
     private static func makeDedicatedIPProvider() -> DedicatedIPProviderType {
-        DedicatedIPProvider(serverProvider: makeDefaultServerProvider())
+        DedicatedIPProvider(serverProvider: makeDefaultServerProvider(), makeServerType: { $0 })
     }
 
     private static func makeDefaultServerProvider() -> DefaultServerProvider {

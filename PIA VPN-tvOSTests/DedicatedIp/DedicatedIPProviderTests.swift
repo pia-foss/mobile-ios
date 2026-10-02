@@ -6,9 +6,11 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIADedicatedIP
 import PIALibrary
 import XCTest
 
+@testable import PIADedicatedIP
 @testable import PIA_VPN_tvOS
 
 final class DedicatedIPProviderTests: XCTestCase {
@@ -21,7 +23,7 @@ final class DedicatedIPProviderTests: XCTestCase {
 
     func instantiateSut(server: Server?, error: ClientError?) {
         fixture.dipServerProviderMock = DipServerProviderMock(server: server, error: error)
-        sut = DedicatedIPProvider(serverProvider: fixture.dipServerProviderMock)
+        sut = DedicatedIPProvider(serverProvider: fixture.dipServerProviderMock, makeServerType: { $0 })
     }
 
     override func setUp() {

@@ -6,9 +6,11 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import XCTest
+import PIADedicatedIP
 import PIALibrary
+import XCTest
 
+@testable import PIADedicatedIP
 @testable import PIA_VPN_tvOS
 
 final class ActivateDIPTokenUseCaseTests: XCTestCase {
@@ -62,7 +64,7 @@ final class ActivateDIPTokenUseCaseTests: XCTestCase {
 }
 
 extension DedicatedIPError: @retroactive Equatable {
-    public static func == (lhs: PIA_VPN_tvOS.DedicatedIPError, rhs: PIA_VPN_tvOS.DedicatedIPError) -> Bool {
+    public static func == (lhs: PIADedicatedIP.DedicatedIPError, rhs: PIADedicatedIP.DedicatedIPError) -> Bool {
         switch (lhs, rhs) {
         case (.expired, .expired), (.invalid, .invalid), (.alreadyHasOne, .alreadyHasOne), (.generic, .generic):
             return true

@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import PIADedicatedIP
 
 @testable import PIA_VPN_tvOS
 
-class RemoveDIPUseCaseMock: RemoveDIPUseCaseType {
+final class RemoveDIPUseCaseMock: RemoveDIPUseCaseType, @unchecked Sendable {
     var useCaseWasCalled = 0
 
-    func callAsFunction() {
+    func callAsFunction() async -> Result<Void, RemoveDedicatedIPError> {
         useCaseWasCalled += 1
+        return .success(())
     }
 }

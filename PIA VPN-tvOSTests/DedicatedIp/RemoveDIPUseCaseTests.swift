@@ -6,6 +6,7 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIADedicatedIP
 import PIALibrary
 import XCTest
 

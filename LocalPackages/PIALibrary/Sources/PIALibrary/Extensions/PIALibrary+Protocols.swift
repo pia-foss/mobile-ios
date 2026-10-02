@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ServerType {
+public protocol ServerType: Sendable {
     var id: ObjectIdentifier { get }
     var name: String { get }
     var identifier: String { get }
