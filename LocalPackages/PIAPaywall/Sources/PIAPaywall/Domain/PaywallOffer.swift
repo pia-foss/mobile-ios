@@ -42,15 +42,25 @@ public struct PaywallOffer: Equatable, Sendable {
     /// A spelled-out price for VoiceOver, e.g. `"6.08 US dollars"`.
     public let accessibleMonthlyPriceString: String
 
+    /// The unformatted per-month price, used to compare plans.
+    public let monthlyPrice: Decimal
+
+    /// The introductory offer the App Store will apply to this plan, if this account is eligible.
+    public let trial: PaywallTrialOffer?
+
     public init(
         id: PaywallPlanID,
         priceString: String,
         monthlyPriceString: String,
-        accessibleMonthlyPriceString: String
+        accessibleMonthlyPriceString: String,
+        monthlyPrice: Decimal,
+        trial: PaywallTrialOffer? = nil
     ) {
         self.id = id
         self.priceString = priceString
         self.monthlyPriceString = monthlyPriceString
         self.accessibleMonthlyPriceString = accessibleMonthlyPriceString
+        self.monthlyPrice = monthlyPrice
+        self.trial = trial
     }
 }

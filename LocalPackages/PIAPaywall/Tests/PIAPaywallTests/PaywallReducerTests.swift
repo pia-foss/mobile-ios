@@ -66,7 +66,7 @@ struct PaywallReducerTests {
         #expect(state.phase == .ready)
         #expect(state.defaultPlan == .yearly)
         #expect(state.sheetSelection == .yearly)
-        #expect(state.trialOffer == PaywallTrialOffer(days: 7))
+        #expect(state.trialOffered(for: .yearly) == PaywallTrialOffer(days: 7))
     }
 
     @Test("With only monthly on sale, monthly becomes the default and the sheet is hidden")

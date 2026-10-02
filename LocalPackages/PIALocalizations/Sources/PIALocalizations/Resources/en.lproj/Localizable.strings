@@ -599,10 +599,11 @@
 "signup.paywall.plans.maybe_later"= "Maybe Later";
 "signup.paywall.plans.price.yearly"= "%@/year";
 "signup.paywall.plans.price.monthly"= "%@/month";
-"signup.paywall.plans.billing.yearly"= "Billed annually";
+"signup.paywall.plans.billing.yearly_price"= "%@ billed once a year";
 "signup.paywall.plans.billing.monthly"= "Billed monthly";
-"signup.paywall.plans.badge.best_value"= "Best Value";
-"signup.paywall.plans.badge.best_value_trial"= "Best Value – %d-day Free Trial";
+"signup.paywall.plans.badge.save"= "Save %@";
+"signup.paywall.plans.trial.free"= "Try FREE for %d Days";
+"signup.paywall.plans.trial.unavailable"= "No free trial on this plan";
 
 "signup.paywall.error.products_unavailable"= "We couldn't load the subscription options. Please check your connection and try again.";
 "signup.paywall.error.retry"= "Try again";

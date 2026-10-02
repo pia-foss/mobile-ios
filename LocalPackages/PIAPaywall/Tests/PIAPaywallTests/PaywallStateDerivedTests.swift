@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import Testing
 
 @testable import PIAPaywall
@@ -29,14 +30,50 @@ struct PaywallStateDerivedTests {
 
     // MARK: - Trial eligibility
 
-    @Test("An eligible account is offered the trial on yearly only")
-    func trialIsOfferedOnYearlyOnly() {
-        // GIVEN an account the App Store says is eligible
+    @Test("Each plan reports the trial its own App Store product carries")
+    func trialIsReadFromEachOffer() {
+        // GIVEN an eligible account where only the yearly product has an intro offer
         let state = Stub.readyState(isEligibleForIntroOffer: true)
 
-        // THEN the trial is sold on yearly; monthly is always a straight subscription
+        // THEN yearly offers the trial and monthly does not
         #expect(state.trialOffered(for: .yearly) == PaywallTrialOffer(days: 7))
         #expect(state.trialOffered(for: .monthly) == nil)
+    }
+
+    @Test("An ineligible account is offered no trial on any plan")
+    func ineligibleAccountGetsNoTrial() {
+        // GIVEN an account the App Store says is not eligible
+        let state = Stub.readyState(isEligibleForIntroOffer: false)
+
+        // THEN no plan offers a trial
+        #expect(state.trialOffered(for: .yearly) == nil)
+        #expect(state.trialOffered(for: .monthly) == nil)
+    }
+
+    @Test("A monthly intro offer is sold in the sheet like the yearly one")
+    func monthlyTrialIsSoldInTheSheet() throws {
+        // GIVEN a monthly product that carries its own 3-day intro offer
+        let monthly = Stub.offer(
+            .monthly,
+            price: "$16.99",
+            monthly: "$16.99",
+            monthlyPrice: Decimal(string: "16.99")!,
+            trialDays: 3
+        )
+        var state = Stub.readyState(offers: [.yearly: Stub.yearly, .monthly: monthly])
+
+        // WHEN monthly is picked in the sheet
+        state.sheetSelection = .monthly
+
+        // THEN the sheet sells monthly's own trial, with its own length
+        #expect(state.trialOffered(for: .monthly) == PaywallTrialOffer(days: 3))
+        #expect(state.sheetButtonTitle == "Start My 3-day Free Trial")
+        let disclaimer = try #require(state.sheetDisclaimer)
+        #expect(disclaimer.headline == "Free for 3 days, then $16.99/month. Cancel anytime.")
+        #expect(state.trialFooter(for: .monthly) == "Try FREE for 3 Days")
+
+        // AND the main screen keeps selling yearly's trial
+        #expect(state.primaryButtonTitle == "Start My 7-day Free Trial")
     }
 
     // MARK: - Call to action
@@ -47,8 +84,8 @@ struct PaywallStateDerivedTests {
         var state = Stub.readyState(isEligibleForIntroOffer: true)
         state.sheetSelection = .monthly
 
-        // THEN the sheet's button sells monthly even though the account could take a trial,
-        // because the trial is only ever offered on the yearly plan
+        // THEN the sheet's button sells monthly at its price, because the monthly product has no
+        // intro offer
         #expect(state.sheetButtonTitle == "Subscribe • $16.99/mo")
 
         // AND the main screen is untouched
@@ -113,40 +150,75 @@ struct PaywallStateDerivedTests {
 
     // MARK: - Plan cards
 
-    @Test("Only yearly carries a badge, and it names the trial when there is one")
-    func yearlyCarriesTheTrialBadge() {
-        // GIVEN an eligible account
-        let state = Stub.readyState(isEligibleForIntroOffer: true)
-
-        // THEN yearly is badged with the trial and monthly carries nothing
-        #expect(state.badgeTitle(for: .yearly) == "Best Value – 7-day Free Trial")
-        #expect(state.badgeTitle(for: .monthly) == nil)
-    }
-
-    @Test("Without a trial the yearly badge stops promising one")
-    func yearlyKeepsThePlainBestValueBadge() {
-        // GIVEN an ineligible account
-        let state = Stub.readyState(isEligibleForIntroOffer: false)
-
-        // THEN the badge no longer promises a trial
-        #expect(state.badgeTitle(for: .yearly) == "Best Value")
-    }
-
     @Test(
-        "Each plan card shows its own billing period",
+        "Each card leads with the per-month price and explains how it is billed",
         arguments: [
-            (PaywallPlanID.yearly, "$72.98/year", "Billed annually"),
+            (PaywallPlanID.yearly, "$6.08/month", "$72.98 billed once a year"),
             (PaywallPlanID.monthly, "$16.99/month", "Billed monthly")
         ]
     )
-    func planCardsUseTheBillingPeriodSuffix(plan: PaywallPlanID, price: String, period: String) throws {
+    func planCardPrices(plan: PaywallPlanID, price: String, detail: String) throws {
         // GIVEN a loaded paywall
         let state = Stub.readyState()
 
-        // THEN each card shows its own billing period
+        // THEN each card shows the per-month price and its billing detail
         let offer = try #require(state.offers[plan])
-        #expect(state.priceString(for: offer) == price)
-        #expect(state.billingPeriodString(for: plan) == period)
+        #expect(state.cardPrice(for: offer) == price)
+        #expect(state.cardBillingDetail(for: offer) == detail)
+    }
+
+    @Test("Yearly shows its saving against monthly, rounded to a whole percent")
+    func yearlyShowsItsSaving() {
+        // GIVEN $47.99/year against $11.99/month, a 66.6% saving
+        let yearly = Stub.offer(.yearly, price: "$47.99", monthly: "$4.00", monthlyPrice: Decimal(string: "47.99")! / 12)
+        let monthly = Stub.offer(.monthly, price: "$11.99", monthly: "$11.99", monthlyPrice: Decimal(string: "11.99")!)
+        let state = Stub.readyState(offers: [.yearly: yearly, .monthly: monthly])
+
+        // THEN yearly is tagged with the rounded saving and monthly carries no tag
+        let locale = Locale(identifier: "en_US")
+        #expect(state.savingsTitle(for: .yearly, locale: locale) == "Save 67%")
+        #expect(state.savingsTitle(for: .monthly, locale: locale) == nil)
+    }
+
+    @Test("No saving is claimed without a monthly plan to compare against")
+    func noSavingWithoutMonthly() {
+        // GIVEN only yearly on sale
+        let state = Stub.readyState(offers: [.yearly: Stub.yearly])
+
+        // THEN there is nothing to compare, so no tag
+        #expect(state.savingsTitle(for: .yearly, locale: Locale(identifier: "en_US")) == nil)
+    }
+
+    @Test("No saving is claimed when yearly is not cheaper per month")
+    func noSavingWhenYearlyIsNotCheaper() {
+        // GIVEN a yearly plan that costs the same per month as monthly
+        let yearly = Stub.offer(.yearly, price: "$120.00", monthly: "$10.00", monthlyPrice: 10)
+        let monthly = Stub.offer(.monthly, price: "$10.00", monthly: "$10.00", monthlyPrice: 10)
+        let state = Stub.readyState(offers: [.yearly: yearly, .monthly: monthly])
+
+        // THEN no saving is claimed
+        #expect(state.savingsTitle(for: .yearly, locale: Locale(identifier: "en_US")) == nil)
+    }
+
+    @Test("The trial footer follows each plan's own trial length")
+    func trialFooterUsesTheOfferedDays() {
+        // GIVEN a yearly product with a 14-day intro offer
+        let yearly = Stub.offer(.yearly, trialDays: 14)
+        let state = Stub.readyState(offers: [.yearly: yearly, .monthly: Stub.monthly])
+
+        // THEN yearly promises 14 days and monthly says it has no trial
+        #expect(state.trialFooter(for: .yearly) == "Try FREE for 14 Days")
+        #expect(state.trialFooter(for: .monthly) == "No free trial on this plan")
+    }
+
+    @Test("Without any trial every card says so")
+    func everyCardSaysNoTrialWhenIneligible() {
+        // GIVEN an ineligible account
+        let state = Stub.readyState(isEligibleForIntroOffer: false)
+
+        // THEN both cards say there is no trial
+        #expect(state.trialFooter(for: .yearly) == "No free trial on this plan")
+        #expect(state.trialFooter(for: .monthly) == "No free trial on this plan")
     }
 
     // MARK: - Screen state
