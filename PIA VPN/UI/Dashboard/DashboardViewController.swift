@@ -84,8 +84,6 @@ final class DashboardViewController: AutolayoutViewController {
     private var isUnauthorized = false
     private var menuPresentGestures: [UIGestureRecognizer] = []
     private var foldHeaderWidth: CGFloat?
-    private var storyboardSideBySideConstraints: [NSLayoutConstraint] = []
-    private var swappedSideBySideConstraints: [NSLayoutConstraint] = []
 
     private var currentStatus: VPNStatus = .disconnected {
         didSet {
@@ -168,10 +166,6 @@ final class DashboardViewController: AutolayoutViewController {
         addObservers()
 
         self.viewContentHeight = self.viewContentHeightConstraint.constant
-
-        #if !targetEnvironment(macCatalyst)
-            view.relayoutOnHingeChange()
-        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -243,18 +237,16 @@ final class DashboardViewController: AutolayoutViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        #if !targetEnvironment(macCatalyst)
-            if #available(iOS 27.1, *) {
-                updateFoldLayout()
-            }
-        #endif
+        let fold = bookFoldFrame
+        updateFoldLayout(fold)
         // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
-        // The drawer only opens when the menu isn't already shown as a sidebar.
+        // The drawer only opens when the menu isn't already shown as a sidebar. With a fold it covers one page.
         let isDrawerAvailable = splitViewController == nil
         menuPresentGestures.forEach { $0.isEnabled = isDrawerAvailable }
         if isDrawerAvailable {
-            SideMenuManager.default.leftMenuNavigationController?.menuWidth = min(320.0, view.bounds.width - 44.0)
+            SideMenuManager.default.leftMenuNavigationController?.menuWidth =
+                fold?.minX ?? min(320.0, view.bounds.width - 44.0)
         }
     }
 
@@ -432,70 +424,44 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    #if !targetEnvironment(macCatalyst)
-        @available(iOS 27.1, *)
-        private func updateFoldLayout() {
-            // Tiles on one page, connect button on the other, using the side-by-side layout the storyboard has for
-            // compact height with its sides swapped. The inactive fold of a fully open display counts too, so the
-            // arrangement stays the same between the half-open and fully open poses.
-            guard let fold = view.bookFold(includingInactive: true), let container = viewContent.superview else {
-                foldHeaderWidth = nil
-                unswapSideBySideLayout()
-                if traitOverrides.contains(UITraitVerticalSizeClass.self) {
-                    traitOverrides.remove(UITraitVerticalSizeClass.self)
-                }
-                return
+    // A book-style fold splitting the dashboard into two pages of at least 320 pt. The inactive fold of a fully open
+    // display counts too, so the layout is the same half-open and fully open.
+    private var bookFoldFrame: CGRect? {
+        // Isolated because reservedRegions fails to compile for Catalyst on the 27.1 seed SDK.
+        #if targetEnvironment(macCatalyst)
+            return nil
+        #else
+            guard #available(iOS 27.1, *) else { return nil }
+            let width = view.bounds.width
+            let folds = view.reservedRegions(kind: .division, options: .includeInactive).filter { region in
+                region.frame.height > region.frame.width && region.frame.minX >= 320 && width - region.frame.maxX >= 320
             }
-
-            // The header ends 5 pt after the tiles, so it starts where the fold's margins start.
-            let foldFrame = container.convert(fold.frame, from: view)
-            let margins = container.layoutMargins
-            let isRightToLeft = view.effectiveUserInterfaceLayoutDirection == .rightToLeft
-            foldHeaderWidth =
-                isRightToLeft
-                ? foldFrame.maxX - margins.left - 5
-                : container.bounds.width - margins.right - foldFrame.minX - 5
-            if !traitOverrides.contains(UITraitVerticalSizeClass.self) {
-                traitOverrides.verticalSizeClass = .compact
-            }
-            if traitCollection.verticalSizeClass == .compact {
-                swapSideBySideLayout(in: container)
-            }
-        }
-    #endif
-
-    private func swapSideBySideLayout(in container: UIView) {
-        guard swappedSideBySideConstraints.isEmpty else { return }
-        let active = container.constraints.filter(\.isActive)
-        // Wait for the storyboard's compact-height constraints; installing them triggers another layout pass.
-        guard
-            let tilesAfterHeader = active.first(where: {
-                $0.firstItem === viewRows && $0.firstAttribute == .leading && $0.secondItem === viewContent
-            }),
-            let headerAtLeading = active.first(where: {
-                $0.firstItem === viewContent && $0.firstAttribute == .leading && $0.secondAttribute == .leadingMargin
-            }),
-            let tilesAtTrailing = active.first(where: {
-                $0.secondItem === viewRows && $0.secondAttribute == .trailing && $0.firstAttribute == .trailingMargin
-            })
-        else { return }
-
-        storyboardSideBySideConstraints = [tilesAfterHeader, headerAtLeading, tilesAtTrailing]
-        swappedSideBySideConstraints = [
-            viewRows.leadingAnchor.constraint(equalTo: container.layoutMarginsGuide.leadingAnchor),
-            viewContent.leadingAnchor.constraint(equalTo: viewRows.trailingAnchor, constant: 5),
-            viewContent.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor)
-        ]
-        NSLayoutConstraint.deactivate(storyboardSideBySideConstraints)
-        NSLayoutConstraint.activate(swappedSideBySideConstraints)
+            return (folds.first(where: \.isActive) ?? folds.first)?.frame
+        #endif
     }
 
-    private func unswapSideBySideLayout() {
-        guard !swappedSideBySideConstraints.isEmpty else { return }
-        NSLayoutConstraint.deactivate(swappedSideBySideConstraints)
-        NSLayoutConstraint.activate(storyboardSideBySideConstraints)
-        swappedSideBySideConstraints = []
-        storyboardSideBySideConstraints = []
+    // Tiles on one page and the connect button on the other, using the storyboard's compact-height layout.
+    private func updateFoldLayout(_ fold: CGRect?) {
+        guard #available(iOS 17, *) else { return }
+        guard let fold, let container = viewContent.superview else {
+            foldHeaderWidth = nil
+            if traitOverrides.contains(UITraitVerticalSizeClass.self) {
+                traitOverrides.remove(UITraitVerticalSizeClass.self)
+            }
+            return
+        }
+
+        // The tiles end 5 pt before the header, so the header starts where the fold's margins start.
+        let foldFrame = container.convert(fold, from: view)
+        let margins = container.layoutMargins
+        let isRightToLeft = view.effectiveUserInterfaceLayoutDirection == .rightToLeft
+        foldHeaderWidth =
+            isRightToLeft
+            ? foldFrame.maxX - margins.left - 5
+            : container.bounds.width - margins.right - foldFrame.minX - 5
+        if !traitOverrides.contains(UITraitVerticalSizeClass.self) {
+            traitOverrides.verticalSizeClass = .compact
+        }
     }
 
     // Below 680 pt of usable height the header gives the difference to the tiles, keeping room for the
@@ -615,9 +581,10 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func openMenu(_ sender: Any?) {
-        if let splitViewController = splitViewController as? AdaptiveSplitViewController {
-            splitViewController.toggleSidebar(duration: AppConfiguration.Animations.duration) { [weak view] in
-                view?.layoutIfNeeded()
+        if let splitViewController {
+            let isHidden = splitViewController.displayMode == .secondaryOnly
+            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
+                splitViewController.preferredDisplayMode = isHidden ? .oneBesideSecondary : .secondaryOnly
             }
             return
         }
