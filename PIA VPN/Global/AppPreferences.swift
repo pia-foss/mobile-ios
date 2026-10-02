@@ -772,7 +772,7 @@ final class AppPreferences {
 
     //    + (void)eraseForTesting;
     #if os(iOS)
-        func transitionTheme(to code: ThemeCode, withDuration duration: Double = AppConfiguration.Animations.duration) {
+        func transitionTheme(to code: ThemeCode, in window: UIWindow?, withDuration duration: Double = AppConfiguration.Animations.duration) {
             guard !isTransitioningTheme else {
                 return
             }
@@ -781,7 +781,7 @@ final class AppPreferences {
             }
 
             AppPreferences.shared.currentThemeCode = code
-            guard let window = UIApplication.shared.windows.first else {
+            guard let window else {
                 log.error("No window available for theme transition")
                 return
             }
@@ -802,13 +802,14 @@ final class AppPreferences {
         }
 
         //MARK: Dark Mode
-        public func reloadTheme(withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
-            DispatchQueue.main.async {
+        public func reloadTheme(in view: UIView? = nil, withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
+            DispatchQueue.main.async { [weak view] in
+                let window = view?.window
                 switch UITraitCollection.current.userInterfaceStyle {
                 case .dark:
-                    AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
+                    AppPreferences.shared.transitionTheme(to: .dark, in: window, withDuration: duration)
                 default:
-                    AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
+                    AppPreferences.shared.transitionTheme(to: .light, in: window, withDuration: duration)
                 }
             }
         }

@@ -76,11 +76,6 @@ final class RestoreSignupViewController: AutolayoutViewController, BrandableNavi
 
         textEmail.text = config.purchaseEmail
 
-        // XXX: signup scrolling hack, disable on iPad and iPhone Plus
-        if Macros.isDeviceBig {
-            scrollView.isScrollEnabled = false
-        }
-
         styleRestoreButton()
     }
 
