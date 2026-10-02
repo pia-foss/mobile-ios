@@ -55,7 +55,7 @@ extension DedicatedIP.Dependencies {
 
 extension DedicatedIP.Info {
     fileprivate init(_ server: ServerType) {
-        self.init(name: server.name, country: server.country.lowercased(), ip: server.dipIKEv2IP)
+        self.init(name: server.name, country: server.country.lowercased(), ip: server.dedicatedIP)
     }
 }
 
