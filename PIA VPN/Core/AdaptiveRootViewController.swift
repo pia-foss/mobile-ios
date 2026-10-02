@@ -22,20 +22,22 @@
 import SideMenu
 import UIKit
 
-/// Logged-in window root that follows the horizontal size class while the window resizes.
+/// Logged-in window root that follows the window width while it resizes.
 ///
-/// - **regular**: the dashboard is the secondary column of an `AdaptiveSplitViewController`
-///   with the menu as a sidebar.
-/// - **compact**: the dashboard navigation controller is embedded directly and the menu is the
+/// - **1000 pt and wider**: the dashboard is the secondary column of a split view with the menu as a
+///   sidebar.
+/// - **narrower**: the dashboard navigation controller is embedded directly and the menu is the
 ///   SideMenu drawer.
 ///
 /// The root itself never changes, so modals presented over the dashboard survive the switch.
 final class AdaptiveRootViewController: UIViewController {
 
+    private let sidebarMinimumWidth: CGFloat = 1000
+
     let dashboardNavigationController: UINavigationController
 
-    private var split: AdaptiveSplitViewController?
-    private var isRegular: Bool?
+    private var split: UISplitViewController?
+    private var showsSidebar: Bool?
 
     init(dashboardNavigationController: UINavigationController) {
         self.dashboardNavigationController = dashboardNavigationController
@@ -58,32 +60,23 @@ final class AdaptiveRootViewController: UIViewController {
         contentViewController
     }
 
-    // Isolated because the vertical bar API fails to compile for Catalyst on the 27.1 seed SDK.
-    #if !targetEnvironment(macCatalyst)
-        @available(iOS 27.1, *)
-        override var childForPreferredVerticalBarBehavior: UIViewController? {
-            contentViewController
-        }
-    #endif
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateLayout()
+        updateLayout(for: view.bounds.width)
     }
 
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        updateLayout(horizontalSizeClass: newCollection.horizontalSizeClass)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        updateLayout(for: size.width)
     }
 
-    private func updateLayout(horizontalSizeClass: UIUserInterfaceSizeClass? = nil) {
-        let sizeClass = horizontalSizeClass ?? traitCollection.horizontalSizeClass
-        guard sizeClass != .unspecified else { return }
-        let regular = sizeClass == .regular
-        guard regular != isRegular else { return }
-        isRegular = regular
+    private func updateLayout(for width: CGFloat) {
+        guard width > 0 else { return }
+        let sidebar = width >= sidebarMinimumWidth
+        guard sidebar != showsSidebar else { return }
+        showsSidebar = sidebar
 
-        if regular {
+        if sidebar {
             showSplit()
         } else {
             showDashboardOnly()
@@ -112,12 +105,12 @@ final class AdaptiveRootViewController: UIViewController {
         embed(dashboardNavigationController)
     }
 
-    private func makeSplit() -> AdaptiveSplitViewController {
+    private func makeSplit() -> UISplitViewController {
         let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         (menuNav.topViewController as? MenuViewController)?.delegate =
             dashboardNavigationController.viewControllers.first as? DashboardViewController
 
-        let split = AdaptiveSplitViewController(style: .doubleColumn)
+        let split = UISplitViewController(style: .doubleColumn)
         split.preferredDisplayMode = .oneBesideSecondary
         split.preferredSplitBehavior = .tile
         split.presentsWithGesture = true
@@ -134,11 +127,6 @@ final class AdaptiveRootViewController: UIViewController {
         view.addSubview(child.view)
         child.didMove(toParent: self)
         setNeedsStatusBarAppearanceUpdate()
-        #if !targetEnvironment(macCatalyst)
-            if #available(iOS 27.1, *) {
-                setNeedsUpdateOfVerticalBarConfiguration()
-            }
-        #endif
     }
 
     private func unembed(_ child: UIViewController) {
