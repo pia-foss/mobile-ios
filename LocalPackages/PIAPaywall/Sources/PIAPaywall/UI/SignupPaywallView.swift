@@ -155,7 +155,7 @@ public struct SignupPaywallView: View {
             BenefitsList(layout: .compact)
                 .padding(.horizontal, Metrics.headerMargin)
 
-            if let trialDays = store.state.trialOffered(for: .yearly)?.days {
+            if let trialDays = store.state.trialOffered(for: store.state.defaultPlan)?.days {
                 TrialTimelineCard(layout: .compact, trialDays: trialDays)
                     .padding(.horizontal, Metrics.contentMargin)
             }
@@ -174,7 +174,7 @@ public struct SignupPaywallView: View {
             hero
             BenefitsList(layout: .wide)
 
-            if let trialDays = store.state.trialOffered(for: .yearly)?.days {
+            if let trialDays = store.state.trialOffered(for: store.state.defaultPlan)?.days {
                 TrialTimelineCard(layout: .wide, trialDays: trialDays)
             }
 
@@ -367,24 +367,26 @@ public enum PaywallAccessibility {
             id: .yearly,
             priceString: "$72.98",
             monthlyPriceString: "$6.08",
-            accessibleMonthlyPriceString: "6.08 US dollars"
+            accessibleMonthlyPriceString: "6.08 US dollars",
+            monthlyPrice: 72.98 / 12,
+            trial: PaywallTrialOffer(days: 7)
         ),
         .monthly: PaywallOffer(
             id: .monthly,
             priceString: "$16.99",
             monthlyPriceString: "$16.99",
-            accessibleMonthlyPriceString: "16.99 US dollars"
+            accessibleMonthlyPriceString: "16.99 US dollars",
+            monthlyPrice: 16.99
         )
     ]
 
     return SignupPaywallView(
         initialState: Paywall.State(
             phase: .ready,
-            offers: offers,
-            trialOffer: PaywallTrialOffer(days: 7)
+            offers: offers
         ),
         dependencies: Paywall.Dependencies(
-            loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
+            loadOffers: { .success(OffersPayload(offers: offers)) },
             hasExistingEntitlement: { false },
             purchase: { _ in .failure(.userCancelled) },
             finishTransaction: { _ in },

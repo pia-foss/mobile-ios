@@ -47,8 +47,7 @@ public extension Paywall.State {
 
     /// Trial offered for `plan`, if any.
     func trialOffered(for plan: PaywallPlanID) -> PaywallTrialOffer? {
-        guard plan == .yearly else { return nil }
-        return trialOffer
+        offers[plan]?.trial
     }
 
     // MARK: Screen state
@@ -125,7 +124,7 @@ public extension Paywall.State {
         }
     }
 
-    /// The headline price on a plan card, e.g. `"$72.98/year"`.
+    /// The billing-period price, e.g. `"$72.98/year"`.
     func priceString(for offer: PaywallOffer) -> String {
         switch offer.id {
         case .yearly: return L10n.Signup.Paywall.Plans.Price.yearly(offer.priceString)
@@ -133,19 +132,37 @@ public extension Paywall.State {
         }
     }
 
-    func billingPeriodString(for plan: PaywallPlanID) -> String {
-        switch plan {
-        case .yearly: return L10n.Signup.Paywall.Plans.Billing.yearly
+    /// The headline price on a plan card, always per month, e.g. `"$4.00/month"`.
+    func cardPrice(for offer: PaywallOffer) -> String {
+        L10n.Signup.Paywall.Plans.Price.monthly(offer.monthlyPriceString)
+    }
+
+    /// The line under a card's headline price, e.g. `"$47.99 billed once a year"`.
+    func cardBillingDetail(for offer: PaywallOffer) -> String {
+        switch offer.id {
+        case .yearly: return L10n.Signup.Paywall.Plans.Billing.yearlyPrice(offer.priceString)
         case .monthly: return L10n.Signup.Paywall.Plans.Billing.monthly
         }
     }
 
-    /// The badge on a plan card, or `nil` when it carries none.
-    func badgeTitle(for plan: PaywallPlanID) -> String? {
-        guard plan == .yearly else { return nil }
-        if let introOffer = trialOffered(for: plan) {
-            return L10n.Signup.Paywall.Plans.Badge.bestValueTrial(introOffer.days)
-        }
-        return L10n.Signup.Paywall.Plans.Badge.bestValue
+    /// How much `plan` saves against paying monthly, e.g. `"Save 67%"`, or `nil` when it saves nothing.
+    func savingsTitle(for plan: PaywallPlanID, locale: Locale = .current) -> String? {
+        guard plan != .monthly,
+            let offer = offers[plan],
+            let monthly = offers[.monthly],
+            monthly.monthlyPrice > 0
+        else { return nil }
+
+        let saving = 1 - offer.monthlyPrice / monthly.monthlyPrice
+        guard saving > 0.005 else { return nil }
+        return L10n.Signup.Paywall.Plans.Badge.save(
+            saving.formatted(.percent.precision(.fractionLength(0)).locale(locale))
+        )
+    }
+
+    /// The footer of a plan card, which says whether the plan comes with a free trial.
+    func trialFooter(for plan: PaywallPlanID) -> String {
+        guard let trial = trialOffered(for: plan) else { return L10n.Signup.Paywall.Plans.Trial.unavailable }
+        return L10n.Signup.Paywall.Plans.Trial.free(trial.days)
     }
 }

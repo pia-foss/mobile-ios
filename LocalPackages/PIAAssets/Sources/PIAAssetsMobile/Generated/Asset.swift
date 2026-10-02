@@ -123,6 +123,7 @@ public enum Asset {
   public static let iconGeo = ImageAsset(name: "icon-geo")
   public static let iconHomepage = ImageAsset(name: "icon-homepage")
   public static let iconLogout = ImageAsset(name: "icon-logout")
+  public static let iconPaywallGift = ImageAsset(name: "icon-paywall-gift")
   public static let iconRegion = ImageAsset(name: "icon-region")
   public static let iconSettings = ImageAsset(name: "icon-settings")
   public static let iconThumbsDown = ImageAsset(name: "icon-thumbs-down")
