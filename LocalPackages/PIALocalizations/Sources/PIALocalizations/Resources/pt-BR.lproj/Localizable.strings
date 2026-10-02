@@ -684,3 +684,10 @@ Você sempre terá o controle. Você pode ver quais dados coletamos nas configur
 "promo_offer.sheet.disclaimer_with_price"= "Nenhum pagamento será feito até que a cobrança seja retomada por %1$@ em **%2$@**. Cancele quando quiser nas Configurações.";
 "promo_offer.sheet.disclaimer"= "Nenhum pagamento será feito até que a cobrança seja retomada em **%@**. Cancele quando quiser nas Configurações.";
 "promo_offer.sheet.close"= "Fechar";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemas para conectar?";
+"auto_protocol_nudge.message" = "Mudar para Automático permite que o app escolha o protocolo com melhor desempenho para a sua rede, o que pode ajudar com problemas de conexão como este.";
+"auto_protocol_nudge.confirm" = "Mudar para Automático";
+"auto_protocol_nudge.dismiss" = "Agora não";

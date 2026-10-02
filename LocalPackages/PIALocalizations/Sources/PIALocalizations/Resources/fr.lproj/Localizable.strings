@@ -682,3 +682,10 @@ Vous gardez toujours le contrôle. Vous pouvez consulter les données que nous a
 "promo_offer.sheet.disclaimer_with_price"= "Aucun paiement tant que la facturation ne reprend pas à %1$@ le **%2$@**. Annulez à tout moment dans les paramètres.";
 "promo_offer.sheet.disclaimer"= "Aucun paiement tant que la facturation ne reprend pas le **%@**. Annulez à tout moment dans les paramètres.";
 "promo_offer.sheet.close"= "Fermer";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problèmes de connexion ?";
+"auto_protocol_nudge.message" = "Le passage à Automatique permet à l’app de choisir le protocole le plus performant pour votre réseau, ce qui peut aider à résoudre des problèmes de connexion comme celui-ci.";
+"auto_protocol_nudge.confirm" = "Passer à Automatique";
+"auto_protocol_nudge.dismiss" = "Pas maintenant";

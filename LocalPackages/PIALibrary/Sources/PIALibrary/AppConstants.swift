@@ -37,6 +37,32 @@ public enum AppConstants: Sendable {
         public static let bundleURL = Bundle.main.url(forResource: "Regions", withExtension: "json")
     }
 
+    /// Tuning for the "switch to Automatic" nudge. Compiled in, so retuning needs a
+    /// release — keep them injectable where they are used.
+    public enum AutoProtocolNudge {
+        /// Each stretch this long that a session spends failing without connecting counts as one
+        /// qualifying failure.
+        public static let connectTimeout: TimeInterval = 30
+
+        /// The nudge fires on `shortFailureWindowCount` failures within `shortFailureWindow`, or
+        /// `longFailureWindowCount` within `longFailureWindow`.
+        public static let shortFailureWindow: TimeInterval = 10 * 60
+        public static let shortFailureWindowCount = 2
+        public static let longFailureWindow: TimeInterval = 86_400
+        public static let longFailureWindowCount = 3
+
+        /// Gap between posts while a session keeps failing. Load-bearing: a post that lands while the
+        /// app is suspended is gone, and this is the only retry.
+        public static let minimumInterval: TimeInterval = 180
+
+        /// Frequency caps, copied from Android's `ConnectionProblemDetector` so both platforms nag at
+        /// the same rate.
+        public static let promptCapWindow: TimeInterval = 14 * 86_400
+        public static let lifetimeCap = 3
+        public static let dismissCooldown: TimeInterval = 7 * 86_400
+        public static let dismissStopCount = 2
+    }
+
     public enum InApp {
         public static let yearlyProductIdentifier = "com.privateinternetaccess.subscription.year.May2026"
         public static let monthlyProductIdentifier = "com.privateinternetaccess.subscription.month.May2026"

@@ -682,3 +682,10 @@ Du har altid kontrollen. Du kan se, hvilke data vi har indsamlet, under Indstill
 "promo_offer.sheet.disclaimer_with_price"= "Ingen betaling, før fakturering genoptages med %1$@ den **%2$@**. Annuller når som helst i Indstillinger.";
 "promo_offer.sheet.disclaimer"= "Ingen betaling, før fakturering genoptages den **%@**. Annuller når som helst i Indstillinger.";
 "promo_offer.sheet.close"= "Luk";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemer med at oprette forbindelse?";
+"auto_protocol_nudge.message" = "Når du skifter til Automatisk, kan appen vælge den protokol, der fungerer bedst på dit netværk, hvilket kan hjælpe med forbindelsesproblemer som dette.";
+"auto_protocol_nudge.confirm" = "Skift til Automatisk";
+"auto_protocol_nudge.dismiss" = "Ikke nu";

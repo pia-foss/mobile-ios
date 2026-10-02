@@ -682,3 +682,10 @@ Zawsze masz kontrolę. W ustawieniach możesz sprawdzić, jakie dane zebraliśmy
 "promo_offer.sheet.disclaimer_with_price"= "Płatność nie zostanie pobrana, dopóki rozliczenia nie zostaną wznowione w kwocie %1$@ dnia **%2$@**. Możesz anulować w dowolnym momencie w Ustawieniach.";
 "promo_offer.sheet.disclaimer"= "Płatność nie zostanie pobrana, dopóki rozliczenia nie zostaną wznowione dnia **%@**. Możesz anulować w dowolnym momencie w Ustawieniach.";
 "promo_offer.sheet.close"= "Zamknij";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Problemy z połączeniem?";
+"auto_protocol_nudge.message" = "Przełączenie na Automatyczny pozwala aplikacji wybrać protokół o najlepszej wydajności dla Twojej sieci, co może pomóc w takich problemach z połączeniem.";
+"auto_protocol_nudge.confirm" = "Przełącz na Automatyczny";
+"auto_protocol_nudge.dismiss" = "Nie teraz";
