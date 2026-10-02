@@ -1337,18 +1337,18 @@ public enum L10n {
         /// Choose your plan
         public static let title = L10n.tr("Localizable", "signup.paywall.plans.title", fallback: "Choose your plan")
         public enum Badge {
-          /// Best Value
-          public static let bestValue = L10n.tr("Localizable", "signup.paywall.plans.badge.best_value", fallback: "Best Value")
-          /// Best Value – %d-day Free Trial
-          public static func bestValueTrial(_ p1: Int) -> String {
-            return L10n.tr("Localizable", "signup.paywall.plans.badge.best_value_trial", p1, fallback: "Best Value – %d-day Free Trial")
+          /// Save %@
+          public static func save(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.badge.save", String(describing: p1), fallback: "Save %@")
           }
         }
         public enum Billing {
           /// Billed monthly
           public static let monthly = L10n.tr("Localizable", "signup.paywall.plans.billing.monthly", fallback: "Billed monthly")
-          /// Billed annually
-          public static let yearly = L10n.tr("Localizable", "signup.paywall.plans.billing.yearly", fallback: "Billed annually")
+          /// %@ billed once a year
+          public static func yearlyPrice(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.billing.yearly_price", String(describing: p1), fallback: "%@ billed once a year")
+          }
         }
         public enum Price {
           /// %@/month
@@ -1359,6 +1359,14 @@ public enum L10n {
           public static func yearly(_ p1: Any) -> String {
             return L10n.tr("Localizable", "signup.paywall.plans.price.yearly", String(describing: p1), fallback: "%@/year")
           }
+        }
+        public enum Trial {
+          /// Try FREE for %d Days
+          public static func free(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "signup.paywall.plans.trial.free", p1, fallback: "Try FREE for %d Days")
+          }
+          /// No free trial on this plan
+          public static let unavailable = L10n.tr("Localizable", "signup.paywall.plans.trial.unavailable", fallback: "No free trial on this plan")
         }
       }
       public enum Trial {

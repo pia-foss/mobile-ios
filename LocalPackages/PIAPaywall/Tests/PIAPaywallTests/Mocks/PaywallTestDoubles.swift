@@ -31,28 +31,52 @@ enum Stub {
     static func offer(
         _ id: PaywallPlanID,
         price: String = "$72.98",
-        monthly: String = "$6.08"
+        monthly: String = "$6.08",
+        monthlyPrice: Decimal = Decimal(string: "6.08")!,
+        trialDays: Int? = nil
     ) -> PaywallOffer {
         PaywallOffer(
             id: id,
             priceString: price,
             monthlyPriceString: monthly,
-            accessibleMonthlyPriceString: "\(monthly) per month"
+            accessibleMonthlyPriceString: "\(monthly) per month",
+            monthlyPrice: monthlyPrice,
+            trial: trialDays.flatMap(PaywallTrialOffer.init(days:))
         )
     }
 
-    static let yearly = offer(.yearly, price: "$72.98", monthly: "$6.08")
-    static let monthly = offer(.monthly, price: "$16.99", monthly: "$16.99")
+    /// Yearly carries the trial by default, as it does in the App Store today.
+    static let yearly = offer(
+        .yearly,
+        price: "$72.98",
+        monthly: "$6.08",
+        monthlyPrice: Decimal(string: "72.98")! / 12,
+        trialDays: 7
+    )
+    static let monthly = offer(.monthly, price: "$16.99", monthly: "$16.99", monthlyPrice: Decimal(string: "16.99")!)
 
     static var bothOffers: [PaywallPlanID: PaywallOffer] {
         [.yearly: yearly, .monthly: monthly]
+    }
+
+    /// The same offers as an account the App Store says is not eligible for an intro offer sees them.
+    static func withoutTrials(_ offers: [PaywallPlanID: PaywallOffer]) -> [PaywallPlanID: PaywallOffer] {
+        offers.mapValues {
+            PaywallOffer(
+                id: $0.id,
+                priceString: $0.priceString,
+                monthlyPriceString: $0.monthlyPriceString,
+                accessibleMonthlyPriceString: $0.accessibleMonthlyPriceString,
+                monthlyPrice: $0.monthlyPrice
+            )
+        }
     }
 
     static func payload(
         offers: [PaywallPlanID: PaywallOffer] = Stub.bothOffers,
         isEligibleForIntroOffer: Bool = true
     ) -> OffersPayload {
-        OffersPayload(offers: offers, trialOffer: isEligibleForIntroOffer ? .init(days: 7) : nil)
+        OffersPayload(offers: isEligibleForIntroOffer ? offers : withoutTrials(offers))
     }
 
     static let user = UserAccount(
@@ -74,8 +98,7 @@ enum Stub {
     ) -> Paywall.State {
         Paywall.State(
             phase: .ready,
-            offers: offers,
-            trialOffer: isEligibleForIntroOffer ? .init(days: 7) : nil,
+            offers: isEligibleForIntroOffer ? offers : withoutTrials(offers),
             defaultPlan: defaultPlan,
             sheetSelection: defaultPlan
         )
