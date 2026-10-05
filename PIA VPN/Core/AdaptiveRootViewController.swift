@@ -64,6 +64,10 @@ final class AdaptiveRootViewController: UIViewController {
         isWide == true
     }
 
+    var isSidebarVisible: Bool {
+        showsSidebar && !isMenuCardHidden
+    }
+
     override var childForStatusBarStyle: UIViewController? {
         contentViewController
     }
@@ -188,7 +192,10 @@ final class AdaptiveRootViewController: UIViewController {
 
     // Taken out of the storyboard's SideMenuNavigationController, which on Mac hides the dashboard's bar items.
     private func makeMenuViewController() -> UIViewController {
+        // Every storyboard SideMenuNavigationController registers itself as the drawer; keep the real one.
+        let drawer = SideMenuManager.default.leftMenuNavigationController
         let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
+        SideMenuManager.default.leftMenuNavigationController = drawer
         let menu = menuNav.topViewController ?? UIViewController()
         menuNav.setViewControllers([], animated: false)
         (menu as? MenuViewController)?.delegate = dashboardNavigationController.viewControllers.first as? DashboardViewController

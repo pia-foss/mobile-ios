@@ -170,6 +170,9 @@ final class DashboardViewController: AutolayoutViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        #if targetEnvironment(macCatalyst)
+            navigationTitleLabel?.isHidden = false
+        #endif
 
         setupNavigationBarButtons()
 
@@ -205,6 +208,16 @@ final class DashboardViewController: AutolayoutViewController {
 
         checkTVOSTokenToBind()
     }
+
+    #if targetEnvironment(macCatalyst)
+        // The title sits over the title bar outside the navigation bar, so it leaves with the dashboard.
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            if navigationController?.topViewController !== self {
+                navigationTitleLabel?.isHidden = true
+            }
+        }
+    #endif
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -249,17 +262,9 @@ final class DashboardViewController: AutolayoutViewController {
                 fold?.minX ?? min(320.0, view.bounds.width - 44.0)
         }
         #if targetEnvironment(macCatalyst)
-            centerTitleOverContent()
+            alignSidebarMenuButton()
         #endif
     }
-
-    #if targetEnvironment(macCatalyst)
-        // The Mac bar centers the title in the window; move it over the content beside the sidebar card.
-        private func centerTitleOverContent() {
-            let sidebarInsets = navigationController?.additionalSafeAreaInsets ?? .zero
-            navigationTitleLabel?.transform = CGAffineTransform(translationX: (sidebarInsets.left - sidebarInsets.right) / 2, y: 0)
-        }
-    #endif
 
     override func didRefreshOrientationConstraints() {
         super.didRefreshOrientationConstraints()
@@ -394,52 +399,84 @@ final class DashboardViewController: AutolayoutViewController {
         collectionViewUtil.registerCellsFor(collectionView)
     }
 
+    private lazy var menuBarItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: Asset.itemMenu.image, style: .plain, target: self, action: #selector(openMenu(_:)))
+        item.accessibilityLabel = L10n.Menu.Accessibility.item
+        item.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
+        return item
+    }()
+
+    private lazy var editTilesBarItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(
+            image: Asset.Piax.Global.iconEditTile.image, style: .plain, target: self, action: #selector(updateEditTileStatus(_:)))
+        item.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
+        return item
+    }()
+
+    private lazy var doneEditingBarItem = UIBarButtonItem(
+        title: L10n.Global.done, style: .plain, target: self, action: #selector(closeTileEditingMode(_:)))
+
+    // Runs on every layout pass, so it only assigns items that changed: replacing them mid-click loses the click.
     private func setupNavigationBarButtons() {
-
-        guard AppPreferences.shared.wasLaunched,
-            Client.providers.accountProvider.isLoggedIn
-        else {
-            navigationItem.leftBarButtonItem = nil
-            navigationItem.rightBarButtonItem = nil
-            return
+        var left: UIBarButtonItem?
+        var right: UIBarButtonItem?
+        if AppPreferences.shared.wasLaunched, Client.providers.accountProvider.isLoggedIn {
+            switch self.tileModeStatus {
+            case .normal:
+                left = menuBarItem
+                right = editTilesBarItem
+            case .edit:
+                right = doneEditingBarItem
+            }
         }
-
-        switch self.tileModeStatus {  //change the status
-        case .normal:
-            navigationItem.leftBarButtonItem = UIBarButtonItem(
-                image: Asset.itemMenu.image,
-                style: .plain,
-                target: self,
-                action: #selector(openMenu(_:))
-            )
-            navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
-            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
-            #if targetEnvironment(macCatalyst)
-                // The Mac bar can't move the button clear of the sidebar card, which is never hidden there.
-                if adaptiveRootViewController?.showsSidebar == true {
-                    navigationItem.leftBarButtonItem = nil
-                }
-            #endif
-
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: Asset.Piax.Global.iconEditTile.image,
-                style: .plain,
-                target: self,
-                action: #selector(updateEditTileStatus(_:))
-            )
-            navigationItem.rightBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.Edit.tile
-
-        case .edit:
-            navigationItem.leftBarButtonItem = nil
-
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: L10n.Global.done,
-                style: .plain,
-                target: self,
-                action: #selector(closeTileEditingMode(_:))
-            )
+        var leftItems = left.map { [$0] } ?? []
+        #if targetEnvironment(macCatalyst)
+            if left === menuBarItem, adaptiveRootViewController?.isSidebarVisible == true {
+                leftItems.insert(sidebarSpacerBarItem, at: 0)
+            }
+        #endif
+        if (navigationItem.leftBarButtonItems ?? []).map(ObjectIdentifier.init) != leftItems.map(ObjectIdentifier.init) {
+            navigationItem.leftBarButtonItems = leftItems
+        }
+        if navigationItem.rightBarButtonItem !== right {
+            navigationItem.rightBarButtonItem = right
         }
     }
+
+    #if targetEnvironment(macCatalyst)
+        // The Mac bar ignores the safe area and fixed spaces, so while the sidebar card shows an empty item as wide as
+        // the card pushes the menu button past it.
+        private var sidebarSpacerWidth: NSLayoutConstraint?
+
+        private lazy var sidebarSpacerBarItem: UIBarButtonItem = {
+            let spacer = UIView()
+            spacer.isUserInteractionEnabled = false
+            spacer.translatesAutoresizingMaskIntoConstraints = false
+            let width = spacer.widthAnchor.constraint(equalToConstant: 1)
+            NSLayoutConstraint.activate([width, spacer.heightAnchor.constraint(equalToConstant: 36)])
+            sidebarSpacerWidth = width
+
+            let item = UIBarButtonItem(customView: spacer)
+            if #available(macCatalyst 26.0, *) {
+                item.hidesSharedBackground = true
+            }
+            return item
+        }()
+
+        // Where the Mac bar starts its leading items, after the traffic lights, and the gap it puts between items. The
+        // items are hosted by AppKit, so these can't be read from UIKit; measured on macOS 26.
+        private let leadingBarItemOrigin: CGFloat = 96
+        private let barItemSpacing: CGFloat = 8
+
+        private func alignSidebarMenuButton() {
+            guard navigationItem.leftBarButtonItems?.first === sidebarSpacerBarItem, let width = sidebarSpacerWidth else { return }
+            let buttonLeading = (navigationController?.additionalSafeAreaInsets.left ?? 0) + 8
+            let desired = max(1, buttonLeading - leadingBarItemOrigin - barItemSpacing)
+            if abs(width.constant - desired) > 0.5 {
+                width.constant = desired
+            }
+        }
+    #endif
 
     // A book-style fold splitting the dashboard into two pages of at least 320 pt. The inactive fold of a fully open
     // display counts too, so the layout is the same half-open and fully open.
@@ -1319,24 +1356,36 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func setNavBar(titleLabel: UILabel) {
-        navigationTitleLabel = titleLabel
         #if targetEnvironment(macCatalyst)
-            if #available(iOS 16.0, *) {
-                let title = UIBarButtonItem(customView: titleLabel)
-                if #available(macCatalyst 26.0, *) {
-                    title.hidesSharedBackground = true
-                }
-                let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
-                navigationItem.centerItemGroups = [titleGroup]
-                centerTitleOverContent()
+            if let host = adaptiveRootViewController?.view {
+                showTitleOverHeader(titleLabel, in: host)
             } else {
                 navigationItem.titleView = titleLabel
             }
         #else
             navigationItem.titleView = titleLabel
         #endif
+        navigationTitleLabel = titleLabel
         setNeedsStatusBarAppearanceUpdate()
     }
+
+    #if targetEnvironment(macCatalyst)
+        // The Mac bar never starts a window drag on its items, so the title is a plain label over the title bar instead
+        // of a bar item, centered over the dashboard content rather than the window.
+        private func showTitleOverHeader(_ titleLabel: UILabel, in host: UIView) {
+            if navigationTitleLabel !== titleLabel {
+                navigationTitleLabel?.removeFromSuperview()
+            }
+            titleLabel.isUserInteractionEnabled = false
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            host.addSubview(titleLabel)
+            NSLayoutConstraint.activate([
+                titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                titleLabel.centerYAnchor.constraint(equalTo: host.topAnchor, constant: 26)
+            ])
+            titleLabel.isHidden = navigationController?.topViewController !== self
+        }
+    #endif
 
     private func reloadWidget() {
         WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
