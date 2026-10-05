@@ -24,7 +24,6 @@ struct Endpoint {
         enum Authentication: String {
             case validateLogin = "client/v5/login_token/auth"
             case generateLoginQR = "client/v5/login_token"
-            case bindLoginToken = "client/v5/login_token/bind"
         }
     }
 
@@ -32,8 +31,6 @@ struct Endpoint {
         case application_json = "application/json"
         case authorization = "Authorization"
         case user_agent = "user-agent"
-        case accept = "accept"
-        case content_type = "Content-Type"
     }
 }
 
