@@ -27,7 +27,7 @@ import SwiftUI
 import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
-/// (`AdaptiveRootViewController`, floating menu card at 1000 pt and wider, drawer below), the
+/// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone), the
 /// share-data consent screen (`ConsentView`) shown first when logged out, and the
 /// logged-out signup UI (`SignupCoordinator`).
 @MainActor
@@ -42,6 +42,7 @@ final class RootCoordinator: NSObject {
 
     private weak var window: UIWindow?
     private(set) var currentRoot: AppRoot?
+    private(set) var splitViewController: UISplitViewController?
     private(set) var dashboardNavigationController: UINavigationController?
 
     /// The signup flow currently installed as the root, if any.
@@ -103,6 +104,7 @@ final class RootCoordinator: NSObject {
         case .consent:
             newRoot = makeConsentRoot()
         case .login:
+            splitViewController = nil
             dashboardNavigationController = nil
             newRoot = makeLoginRoot()
             activeSignupCoordinator = signupCoordinator
@@ -119,7 +121,21 @@ final class RootCoordinator: NSObject {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        return AdaptiveRootViewController(dashboardNavigationController: dashboardNav)
+        if window?.traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
+            let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
+            let split = AdaptiveSplitViewController(style: .doubleColumn)
+            split.preferredDisplayMode = .oneBesideSecondary
+            split.preferredSplitBehavior = .tile
+            split.presentsWithGesture = true
+            split.displayModeButtonVisibility = .never
+            split.setViewController(menuNav, for: .primary)
+            split.setViewController(dashboardNav, for: .secondary)
+            splitViewController = split
+            return split
+        } else {
+            splitViewController = nil
+            return dashboardNav
+        }
     }
 
     private func makeConsentRoot() -> UIViewController {
@@ -182,8 +198,8 @@ final class RootCoordinator: NSObject {
     }
 
     /// Returns the topmost view controller suitable for presenting alerts / modals,
-    /// drilling through nav, split, and presented chains. Works for both the split view
-    /// and the drawer layout.
+    /// drilling through nav, split, and presented chains. Works for both iPad split view
+    /// and the iPhone single-nav layout.
     func topPresentedViewController() -> UIViewController? {
         guard let root = window?.rootViewController else { return nil }
         return Self.deepestTop(of: root)
@@ -196,8 +212,13 @@ final class RootCoordinator: NSObject {
         if let nav = vc as? UINavigationController, let top = nav.visibleViewController {
             return deepestTop(of: top)
         }
-        if let root = vc as? AdaptiveRootViewController, let content = root.contentViewController {
-            return deepestTop(of: content)
+        if let split = vc as? UISplitViewController {
+            if let secondary = split.viewController(for: .secondary) {
+                return deepestTop(of: secondary)
+            }
+            if let last = split.viewControllers.last {
+                return deepestTop(of: last)
+            }
         }
         return vc
     }
