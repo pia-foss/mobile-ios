@@ -58,6 +58,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Keep the launch screen presented while the migration check runs
         window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
 
+        if let window {
+            AppPreferences.shared.reloadTheme(in: window, withAnimationDuration: 0)
+        }
+
         Bootstrapper.shared.shouldConfirmPlatformSDKMigration { [weak self] shouldConfirm in
             guard shouldConfirm else {
                 self?.startApp(with: connectionOptions)

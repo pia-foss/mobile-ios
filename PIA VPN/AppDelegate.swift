@@ -44,8 +44,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Ahead of the scene, whose migration check logs before `startApp()`.
         Bootstrapper.shared.bootstrapLogging()
 
-        AppPreferences.shared.reloadTheme(withAnimationDuration: 0)
-
         #if targetEnvironment(macCatalyst)
             MacCatalystHelper.allowQuitWhileModal()
         #endif
@@ -100,7 +98,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // is iOS 27+ only. This stays on the app delegate until the deployment target allows the move.
     @available(iOS, deprecated: 27.0)
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        guard UserInterface.isPhone else {
+        guard window?.traitCollection.userInterfaceIdiom == .phone else {
             return .all
         }
 
@@ -123,14 +121,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if let root = rootViewController as? AdaptiveRootViewController {
             return topViewControllerWithRootViewController(rootViewController: root.presentedViewController ?? root.contentViewController)
-        }
-        if let split = rootViewController as? UISplitViewController {
-            if let secondary = split.viewController(for: .secondary) {
-                return topViewControllerWithRootViewController(rootViewController: secondary)
-            }
-            if let last = split.viewControllers.last {
-                return topViewControllerWithRootViewController(rootViewController: last)
-            }
         }
         return rootViewController
     }

@@ -242,13 +242,24 @@ final class DashboardViewController: AutolayoutViewController {
         // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
         // The drawer only opens when the menu isn't already shown as a sidebar. With a fold it covers one page.
-        let isDrawerAvailable = splitViewController == nil
+        let isDrawerAvailable = adaptiveRootViewController?.showsSidebar != true
         menuPresentGestures.forEach { $0.isEnabled = isDrawerAvailable }
         if isDrawerAvailable {
             SideMenuManager.default.leftMenuNavigationController?.menuWidth =
                 fold?.minX ?? min(320.0, view.bounds.width - 44.0)
         }
+        #if targetEnvironment(macCatalyst)
+            centerTitleOverContent()
+        #endif
     }
+
+    #if targetEnvironment(macCatalyst)
+        // The Mac bar centers the title in the window; move it over the content beside the sidebar card.
+        private func centerTitleOverContent() {
+            let sidebarInsets = navigationController?.additionalSafeAreaInsets ?? .zero
+            navigationTitleLabel?.transform = CGAffineTransform(translationX: (sidebarInsets.left - sidebarInsets.right) / 2, y: 0)
+        }
+    #endif
 
     override func didRefreshOrientationConstraints() {
         super.didRefreshOrientationConstraints()
@@ -334,7 +345,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     // MARK: Menu
     private func setupMenu() {
-        // In regular width the menu is the split view sidebar, whose delegate
+        // At 1000 pt and wider the menu is the sidebar card, whose delegate
         // `AdaptiveRootViewController` wires up. The drawer is set up regardless, because the
         // window can become compact at any time; its gestures are toggled in viewDidLayoutSubviews.
         if SideMenuManager.default.leftMenuNavigationController == nil {
@@ -403,6 +414,12 @@ final class DashboardViewController: AutolayoutViewController {
             )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
             navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
+            #if targetEnvironment(macCatalyst)
+                // The Mac bar can't move the button clear of the sidebar card, which is never hidden there.
+                if adaptiveRootViewController?.showsSidebar == true {
+                    navigationItem.leftBarButtonItem = nil
+                }
+            #endif
 
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: Asset.Piax.Global.iconEditTile.image,
@@ -487,9 +504,9 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func presentLogin() {
 
-        // On iPad we swap the window root entirely instead of presenting login modally —
-        // the persistent sidebar/dashboard split view is replaced with the login flow.
-        if UserInterface.isIpadOrMac {
+        // On iPad and Mac the window root is swapped for the login flow; on iPhone, iPhone Duo
+        // included, login is presented modally over the dashboard.
+        if traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
             RootCoordinator.shared.setRoot(.login)
             if isUnauthorized {
                 Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
@@ -581,11 +598,8 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func openMenu(_ sender: Any?) {
-        if let splitViewController {
-            let isHidden = splitViewController.displayMode == .secondaryOnly
-            UIView.animate(withDuration: AppConfiguration.Animations.duration) {
-                splitViewController.preferredDisplayMode = isHidden ? .oneBesideSecondary : .secondaryOnly
-            }
+        if let root = adaptiveRootViewController, root.showsSidebar {
+            root.toggleSidebar()
             return
         }
         Theme.current.applySideMenu()
@@ -1314,6 +1328,7 @@ final class DashboardViewController: AutolayoutViewController {
                 }
                 let titleGroup = UIBarButtonItemGroup.fixedGroup(items: [title])
                 navigationItem.centerItemGroups = [titleGroup]
+                centerTitleOverContent()
             } else {
                 navigationItem.titleView = titleLabel
             }

@@ -719,7 +719,7 @@ public class Theme {
                     var updatedFrame = navigationBar.bounds
                     updatedFrame.size.height += navigationBar.frame.origin.y
                     let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
-                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage())
+                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage(), colorAboveBar: barTintColors.first)
                 }
             } else {
                 navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)

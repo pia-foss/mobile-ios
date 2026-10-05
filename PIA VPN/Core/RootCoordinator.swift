@@ -27,7 +27,7 @@ import SwiftUI
 import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
-/// (`AdaptiveRootViewController`, split view or drawer by horizontal size class), the
+/// (`AdaptiveRootViewController`, floating menu card at 1000 pt and wider, drawer below), the
 /// share-data consent screen (`ConsentView`) shown first when logged out, and the
 /// logged-out signup UI (`SignupCoordinator`).
 @MainActor
@@ -81,9 +81,7 @@ final class RootCoordinator: NSObject {
 
     private func configureMacCatalystWindow(for window: UIWindow) {
         #if targetEnvironment(macCatalyst)
-            let windowScene =
-                window.windowScene
-                ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let windowScene = window.windowScene
 
             if let titlebar = windowScene?.titlebar {
                 titlebar.titleVisibility = .hidden
@@ -200,14 +198,6 @@ final class RootCoordinator: NSObject {
         }
         if let root = vc as? AdaptiveRootViewController, let content = root.contentViewController {
             return deepestTop(of: content)
-        }
-        if let split = vc as? UISplitViewController {
-            if let secondary = split.viewController(for: .secondary) {
-                return deepestTop(of: secondary)
-            }
-            if let last = split.viewControllers.last {
-                return deepestTop(of: last)
-            }
         }
         return vc
     }

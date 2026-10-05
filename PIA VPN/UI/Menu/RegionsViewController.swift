@@ -83,7 +83,6 @@ final class RegionsViewController: AutolayoutViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRegions), name: .PIAThemeDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleVpnStatusChange), name: .PIADaemonsDidUpdateVPNStatus, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
         Macros.stylePopupDialog()
@@ -289,6 +288,13 @@ final class RegionsViewController: AutolayoutViewController {
         tableView.reloadData()
         if tableView.numberOfRows(inSection: 0) > 0 {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            self?.viewHasRotated()
         }
     }
 

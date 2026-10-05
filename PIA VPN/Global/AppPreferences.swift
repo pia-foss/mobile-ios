@@ -782,7 +782,9 @@ final class AppPreferences {
 
             AppPreferences.shared.currentThemeCode = code
             guard let window else {
-                log.error("No window available for theme transition")
+                // Nothing on screen to fade, but the theme must still match the saved code or a
+                // later reload would see no change and skip it.
+                code.apply(theme: Theme.current, reload: true)
                 return
             }
             isTransitioningTheme = true
@@ -802,10 +804,11 @@ final class AppPreferences {
         }
 
         //MARK: Dark Mode
-        public func reloadTheme(in view: UIView? = nil, withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
+        public func reloadTheme(in view: UIView, withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
             DispatchQueue.main.async { [weak view] in
-                let window = view?.window
-                switch UITraitCollection.current.userInterfaceStyle {
+                guard let view else { return }
+                let window = view as? UIWindow ?? view.window
+                switch view.traitCollection.userInterfaceStyle {
                 case .dark:
                     AppPreferences.shared.transitionTheme(to: .dark, in: window, withDuration: duration)
                 default:

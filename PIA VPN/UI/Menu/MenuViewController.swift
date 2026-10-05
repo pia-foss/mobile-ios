@@ -411,8 +411,8 @@ final class MenuViewController: AutolayoutViewController {
                 }
             }
 
-            if self.splitViewController != nil {
-                // Sidebar in split view — nothing to dismiss.
+            if self.adaptiveRootViewController?.showsSidebar == true {
+                // Sidebar — nothing to dismiss.
                 proceed()
             } else {
                 self.dismiss(animated: true, completion: proceed)
@@ -559,8 +559,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
 
-            if splitViewController != nil {
-                // Sidebar in split view — nothing to dismiss, delegate handles the navigation.
+            if adaptiveRootViewController?.showsSidebar == true {
+                // Sidebar — nothing to dismiss, delegate handles the navigation.
                 delegate?.menu(self, didSelect: item)
             } else {
                 dismiss(animated: true) {
