@@ -54,21 +54,28 @@ public struct ValidateQRLoginView: View {
                 .overlay(alignment: .bottom) {
                     ProgressView()
                         .controlSize(.large)
+                        .accessibilityIdentifier(ValidateQRLoginAccessibility.loadingIndicator)
                         .alignmentGuide(.bottom) { $0[.top] - 7 }
                 }
                 .offset(y: -70)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(ValidateQRLoginAccessibility.screenBackground)
+        .accessibilityValue(store.state.phase.accessibilityValue)
         .onAppear {
             store.send(.onAppear)
         }
         .alert(L10n.Validateqr.Confirmation.title, isPresented: isPresented(.confirming)) {
             Button(L10n.Global.cancel, role: .cancel) { store.send(.cancelTapped) }
+                .accessibilityIdentifier(ValidateQRLoginAccessibility.cancelButton)
             Button(L10n.Validateqr.Confirmation.continue) { store.send(.confirmTapped) }
+                .accessibilityIdentifier(ValidateQRLoginAccessibility.confirmButton)
         } message: {
             Text(L10n.Validateqr.Confirmation.message)
         }
         .alert(L10n.ErrorAlert.ConnectionError.NoNetwork.title, isPresented: isPresented(.failed)) {
             Button(L10n.Global.ok) { store.send(.errorAcknowledged) }
+                .accessibilityIdentifier(ValidateQRLoginAccessibility.errorDismissButton)
         } message: {
             Text(L10n.ErrorAlert.ConnectionError.NoNetwork.message)
         }
@@ -79,6 +86,30 @@ public struct ValidateQRLoginView: View {
             get: { store.state.phase == phase },
             set: { _ in }
         )
+    }
+}
+
+/// Stable identifiers for the UI tests.
+public enum ValidateQRLoginAccessibility {
+    /// Its value is the current phase: `idle`, `confirming`, `validating`, `failed` or `finished`.
+    public static let screenBackground = "ValidateQRLoginScreenBackground"
+    public static let loadingIndicator = "ValidateQRLoginScreenLoadingIndicator"
+
+    public static let confirmButton = "ValidateQRLoginScreenConfirmButton"
+    public static let cancelButton = "ValidateQRLoginScreenCancelButton"
+    public static let errorDismissButton = "ValidateQRLoginScreenErrorDismissButton"
+}
+
+extension ValidateQRLogin.Phase {
+    /// Stable phase names the UI tests read from the screen's value.
+    fileprivate var accessibilityValue: String {
+        switch self {
+        case .idle: "idle"
+        case .confirming: "confirming"
+        case .validating: "validating"
+        case .failed: "failed"
+        case .finished: "finished"
+        }
     }
 }
 
