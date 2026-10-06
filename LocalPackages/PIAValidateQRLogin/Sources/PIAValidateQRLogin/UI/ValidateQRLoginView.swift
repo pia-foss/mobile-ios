@@ -65,27 +65,50 @@ public struct ValidateQRLoginView: View {
         .onAppear {
             store.send(.onAppear)
         }
-        .alert(L10n.Validateqr.Confirmation.title, isPresented: isPresented(.confirming)) {
-            Button(L10n.Global.cancel, role: .cancel) { store.send(.cancelTapped) }
-                .accessibilityIdentifier(ValidateQRLoginAccessibility.cancelButton)
-            Button(L10n.Validateqr.Confirmation.continue) { store.send(.confirmTapped) }
-                .accessibilityIdentifier(ValidateQRLoginAccessibility.confirmButton)
-        } message: {
-            Text(L10n.Validateqr.Confirmation.message)
-        }
-        .alert(L10n.ErrorAlert.ConnectionError.NoNetwork.title, isPresented: isPresented(.failed)) {
-            Button(L10n.Global.ok) { store.send(.errorAcknowledged) }
-                .accessibilityIdentifier(ValidateQRLoginAccessibility.errorDismissButton)
-        } message: {
-            Text(L10n.ErrorAlert.ConnectionError.NoNetwork.message)
-        }
+        .identifiedAlert(alert)
     }
 
-    private func isPresented(_ phase: ValidateQRLogin.Phase) -> Binding<Bool> {
-        Binding(
-            get: { store.state.phase == phase },
-            set: { _ in }
-        )
+    private var alert: IdentifiedAlert? {
+        switch store.state.phase {
+        case .confirming:
+            IdentifiedAlert(
+                title: L10n.Validateqr.Confirmation.title,
+                message: L10n.Validateqr.Confirmation.message,
+                actions: [
+                    .init(
+                        title: L10n.Global.cancel,
+                        style: .cancel,
+                        identifier: ValidateQRLoginAccessibility.cancelButton,
+                        handler: {
+                            store.send(.cancelTapped)
+                        }
+                    ),
+                    .init(
+                        title: L10n.Validateqr.Confirmation.continue,
+                        identifier: ValidateQRLoginAccessibility.confirmButton,
+                        handler: {
+                            store.send(.confirmTapped)
+                        }
+                    )
+                ]
+            )
+        case .failed:
+            IdentifiedAlert(
+                title: L10n.ErrorAlert.ConnectionError.NoNetwork.title,
+                message: L10n.ErrorAlert.ConnectionError.NoNetwork.message,
+                actions: [
+                    .init(
+                        title: L10n.Global.ok,
+                        identifier: ValidateQRLoginAccessibility.errorDismissButton,
+                        handler: {
+                            store.send(.errorAcknowledged)
+                        }
+                    )
+                ]
+            )
+        case .idle, .validating, .finished:
+            nil
+        }
     }
 }
 
