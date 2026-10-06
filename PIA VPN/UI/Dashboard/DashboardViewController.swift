@@ -427,7 +427,7 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    // A book-style fold splitting the dashboard into two pages of at least 320 pt. The inactive fold of a fully open
+    // A book-style fold splitting the dashboard into two pages. The inactive fold of a fully open
     // display counts too, so the layout is the same half-open and fully open.
     private var bookFoldFrame: CGRect? {
         // Isolated because reservedRegions fails to compile for Catalyst on the 27.1 seed SDK.
@@ -436,10 +436,15 @@ final class DashboardViewController: AutolayoutViewController {
         #else
             guard #available(iOS 27.1, *) else { return nil }
             let width = view.bounds.width
-            let folds = view.reservedRegions(kind: .division, options: .includeInactive).filter { region in
-                region.frame.height > region.frame.width && region.frame.minX >= 320 && width - region.frame.maxX >= 320
-            }
-            return (folds.first(where: \.isActive) ?? folds.first)?.frame
+            // The fold is a vertical division region: active while the device is folded, inactive
+            // (and zero-width) while it is flat.
+            let folds = view.reservedRegions(kind: .division, options: .includeInactive)
+                .filter { $0.frame.height > $0.frame.width }
+            // Prefer a fold that leaves two usable pages, but fall back to the active fold so the
+            // dashboard keeps the two-page layout half-open as well as fully open.
+            let twoPage = folds.filter { $0.frame.minX >= 320 && width - $0.frame.maxX >= 320 }
+            return (twoPage.first(where: \.isActive) ?? twoPage.first
+                ?? folds.first(where: \.isActive) ?? folds.first)?.frame
         #endif
     }
 
