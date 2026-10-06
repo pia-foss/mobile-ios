@@ -166,6 +166,8 @@ public enum AppConstants: Sendable {
         // Starting on 17 and up, we use AppIntents instead, as a more modern API.
         @available(iOS, deprecated: 17, message: "Drop URL for connect/disconnect. Use AppIntent instead.")
         public static let connect = "piavpn:connect"
+        public static let tokenQueryItem = "token"
+        public static let openApp = "piavpn:"
     }
 
     public enum QRSignin {
