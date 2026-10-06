@@ -155,7 +155,16 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
 
             isReconnectingAfterConnectivityFailure = false
-            Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
+
+            // Only seed a missing timestamp. The PlatformSDK tunnel reconnects in place (it
+            // reasserts instead of tearing the session down), so an automatic reconnect reaches
+            // here as a `.connected` transition without a prior `.disconnected` and must keep the
+            // original "Protected" time. A user-initiated server change resets it explicitly in
+            // `Client.Preferences.displayedServer`, and a real disconnect clears it below.
+            if Client.preferences.lastVPNConnectionSuccess == nil {
+                Client.preferences.lastVPNConnectionSuccess = Date().timeIntervalSince1970
+            }
+
             invalidateTimer()
             reset()
 
