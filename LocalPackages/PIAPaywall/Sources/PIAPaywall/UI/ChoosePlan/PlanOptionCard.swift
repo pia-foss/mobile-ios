@@ -29,26 +29,33 @@ import SwiftUI
 struct PlanOptionCard: View {
     let title: String
     let price: String
-    let billingPeriod: String
-    let badge: String?
+    let billingDetail: String
+    let savings: String?
+    let footer: String
+    let hasTrial: Bool
     let isSelected: Bool
     let action: () -> Void
 
     private enum Metrics {
         static let radioSize: CGFloat = 24
+        static let radioPadding: CGFloat = 12
         static let checkSize: CGFloat = 14
+        static let giftSize: CGFloat = 20
         static let selectedBorderWidth: CGFloat = 2
         static let borderWidth: CGFloat = 1
     }
 
     var body: some View {
         Button(action: action) {
-            HStack(alignment: .center, spacing: PIASpacing.s16) {
-                radio
-                details
-                Spacer(minLength: 0)
+            VStack(alignment: .leading, spacing: PIASpacing.s16) {
+                HStack(alignment: .center, spacing: PIASpacing.s16) {
+                    radio
+                    details
+                    Spacer(minLength: 0)
+                }
+                footerView
             }
-            .padding(PIASpacing.s16)
+            .padding(PIASpacing.s12)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: PIARadius.r12, style: .continuous)
@@ -64,7 +71,7 @@ struct PlanOptionCard: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        // Announced as one radio option rather than four separate labels.
+        // Announced as one radio option rather than separate labels.
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
     }
@@ -86,25 +93,58 @@ struct PlanOptionCard: View {
             }
         }
         .frame(width: Metrics.radioSize, height: Metrics.radioSize)
+        .padding(Metrics.radioPadding)
         .accessibilityHidden(true)
     }
 
     private var details: some View {
-        VStack(alignment: .leading, spacing: PIASpacing.s4) {
+        VStack(alignment: .leading, spacing: PIASpacing.s8) {
             Text(title)
                 .typography(.body2, color: .pia.onSurfaceContainerPrimary)
 
-            HStack(alignment: .firstTextBaseline, spacing: PIASpacing.s8) {
-                Text(price)
-                    .typography(.subtitle1, color: .pia.onSurface)
-                Text(billingPeriod)
+            VStack(alignment: .leading, spacing: PIASpacing.s4) {
+                HStack(alignment: .center, spacing: PIASpacing.s8) {
+                    Text(price)
+                        .typography(.subtitle1, color: .pia.onSurface)
+                    if let savings {
+                        savingsTag(savings)
+                    }
+                }
+                Text(billingDetail)
                     .typography(.body2, color: .pia.onSurfaceContainerPrimary)
             }
+        }
+    }
 
-            if let badge {
-                PIABadge(badge, background: .pia.onWarningOutline, foreground: .pia.onSurface)
-                    .padding(.top, PIASpacing.s4)
+    private func savingsTag(_ text: String) -> some View {
+        Text(text)
+            .bold()
+            .typography(.caption1, color: .pia.onSuccessContainer)
+            .padding(.horizontal, PIASpacing.s8)
+            .padding(.vertical, PIASpacing.s4)
+            .background(Capsule().fill(Color.pia.successContainer))
+            .fixedSize()
+    }
+
+    private var footerView: some View {
+        VStack(alignment: .leading, spacing: PIASpacing.s8) {
+            Rectangle()
+                .fill(Color.pia.outline)
+                .frame(height: Metrics.borderWidth)
+
+            HStack(alignment: .center, spacing: PIASpacing.s4) {
+                if hasTrial {
+                    Asset.iconPaywallGift.swiftUIImage
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: Metrics.giftSize, height: Metrics.giftSize)
+                        .foregroundColor(.pia.primary)
+                        .accessibilityHidden(true)
+                }
+                Text(footer)
+                    .typography(.body2, color: hasTrial ? Color.pia.primary : Color.pia.onSurfaceContainerPrimary)
             }
+            .padding(.vertical, PIASpacing.s4)
         }
     }
 }
@@ -113,18 +153,22 @@ struct PlanOptionCard: View {
     VStack(spacing: PIASpacing.s12) {
         PlanOptionCard(
             title: "Yearly",
-            price: "$6.08",
-            billingPeriod: "/mo",
-            badge: "Best Value",
+            price: "$4.00/month",
+            billingDetail: "$47.99 billed once a year",
+            savings: "Save 67%",
+            footer: "Try FREE for 7 Days",
+            hasTrial: true,
             isSelected: true,
             action: {}
         )
 
         PlanOptionCard(
             title: "Monthly",
-            price: "$16.99",
-            billingPeriod: "/mo",
-            badge: nil,
+            price: "$11.99/month",
+            billingDetail: "Billed monthly",
+            savings: nil,
+            footer: "No free trial on this plan",
+            hasTrial: false,
             isSelected: false,
             action: {}
         )

@@ -61,13 +61,11 @@ extension Paywall {
 
         public var phase: Phase
         public var activity: Activity
-        public var offers: [PaywallPlanID: PaywallOffer]
-
-        /// Whether the App Store says this account can still take an introductory offer.
+        /// Each offer carries its own intro-offer eligibility.
         ///
         /// Captured when the offers load and then left alone: re-deciding mid-session would swap the
         /// call to action from "Start My Free Trial" to "Subscribe" under the customer's finger.
-        public var trialOffer: PaywallTrialOffer?
+        public var offers: [PaywallPlanID: PaywallOffer]
 
         /// The plan the main screen sells. Not changed by the sheet.
         public var defaultPlan: PaywallPlanID
@@ -84,7 +82,6 @@ extension Paywall {
             phase: Phase = .loadingProducts,
             activity: Activity = .idle,
             offers: [PaywallPlanID: PaywallOffer] = [:],
-            trialOffer: PaywallTrialOffer? = nil,
             defaultPlan: PaywallPlanID = .yearly,
             sheetSelection: PaywallPlanID = .yearly,
             isPlanSheetPresented: Bool = false,
@@ -94,7 +91,6 @@ extension Paywall {
             self.phase = phase
             self.activity = activity
             self.offers = offers
-            self.trialOffer = trialOffer
             self.defaultPlan = defaultPlan
             self.sheetSelection = sheetSelection
             self.isPlanSheetPresented = isPlanSheetPresented
@@ -168,7 +164,7 @@ extension Paywall {
     /// Every closure is `@MainActor`: `InAppTransaction` and `AccountProvider` are not `Sendable`, so
     /// keeping the whole seam on one actor is what lets those values be passed around at all.
     public struct Dependencies {
-        /// Fetches the purchasable plans together with the App Store's current intro-offer eligibility.
+        /// Fetches the purchasable plans, each with the App Store's current intro-offer eligibility.
         public var loadOffers: @MainActor () async -> Result<OffersPayload, PaywallError>
 
         /// `true` when this App Store account already owns a subscription.
@@ -214,10 +210,8 @@ extension Paywall {
 /// What a successful catalogue load produced.
 public struct OffersPayload: Equatable, Sendable {
     public let offers: [PaywallPlanID: PaywallOffer]
-    public let trialOffer: PaywallTrialOffer?
 
-    public init(offers: [PaywallPlanID: PaywallOffer], trialOffer: PaywallTrialOffer?) {
+    public init(offers: [PaywallPlanID: PaywallOffer]) {
         self.offers = offers
-        self.trialOffer = trialOffer
     }
 }

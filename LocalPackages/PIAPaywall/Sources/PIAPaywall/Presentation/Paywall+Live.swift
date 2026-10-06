@@ -48,14 +48,9 @@ public extension Paywall.Dependencies {
                     return .failure(.productsUnavailable)
 
                 case .success(let products):
-                    let offers = makeOffers(from: products)
+                    let offers = await makeOffers(from: products, store: store)
                     guard !offers.isEmpty else { return .failure(.productsUnavailable) }
-                    var trialOffer: PaywallTrialOffer? = nil
-                    if let product = products[.yearly] ?? products[.monthly] {
-                        let days = await store.eligibleDaysForIntroOffer(for: product)
-                        trialOffer = PaywallTrialOffer(days: days)
-                    }
-                    return .success(OffersPayload(offers: offers, trialOffer: trialOffer))
+                    return .success(OffersPayload(offers: offers))
                 }
             },
 
@@ -122,16 +117,24 @@ public extension Paywall.Dependencies {
     // MARK: - Mapping
 
     /// Formats each product once, while the StoreKit product and its locale are still in scope.
-    private static func makeOffers(from products: [Plan: any InAppProduct]) -> [PaywallPlanID: PaywallOffer] {
+    /// Intro-offer eligibility is asked per product, so any plan can carry a trial.
+    @MainActor
+    private static func makeOffers(
+        from products: [Plan: any InAppProduct],
+        store: InAppProvider
+    ) async -> [PaywallPlanID: PaywallOffer] {
         var offers: [PaywallPlanID: PaywallOffer] = [:]
         for id in PaywallPlanID.allCases {
             guard let product = products[id.libraryPlan] else { continue }
             let purchasePlan = PurchasePlan(plan: id.libraryPlan, product: product, monthlyFactor: id.monthlyFactor)
+            let trialDays = await store.eligibleDaysForIntroOffer(for: product)
             offers[id] = PaywallOffer(
                 id: id,
                 priceString: purchasePlan.priceString,
                 monthlyPriceString: purchasePlan.monthlyPriceString,
-                accessibleMonthlyPriceString: purchasePlan.accessibleMonthlyPriceString
+                accessibleMonthlyPriceString: purchasePlan.accessibleMonthlyPriceString,
+                monthlyPrice: purchasePlan.monthlyPrice,
+                trial: PaywallTrialOffer(days: trialDays)
             )
         }
         return offers

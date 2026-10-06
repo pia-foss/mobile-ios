@@ -82,9 +82,11 @@ struct ChoosePlanSheetContent: View {
 
         return PlanOptionCard(
             title: state.planTitle(for: plan),
-            price: offer.map(state.priceString(for:)) ?? "",
-            billingPeriod: state.billingPeriodString(for: plan),
-            badge: state.badgeTitle(for: plan),
+            price: offer.map(state.cardPrice(for:)) ?? "",
+            billingDetail: offer.map(state.cardBillingDetail(for:)) ?? "",
+            savings: state.savingsTitle(for: plan),
+            footer: state.trialFooter(for: plan),
+            hasTrial: state.trialOffered(for: plan) != nil,
             isSelected: state.sheetSelection == plan,
             action: { store.send(.planSelected(plan)) }
         )
@@ -97,13 +99,16 @@ struct ChoosePlanSheetContent: View {
             id: .yearly,
             priceString: "$72.98",
             monthlyPriceString: "$6.08",
-            accessibleMonthlyPriceString: "6.08 US dollars"
+            accessibleMonthlyPriceString: "6.08 US dollars",
+            monthlyPrice: 72.98 / 12,
+            trial: PaywallTrialOffer(days: 7)
         ),
         .monthly: PaywallOffer(
             id: .monthly,
             priceString: "$16.99",
             monthlyPriceString: "$16.99",
-            accessibleMonthlyPriceString: "16.99 US dollars"
+            accessibleMonthlyPriceString: "16.99 US dollars",
+            monthlyPrice: 16.99
         )
     ]
 
@@ -112,11 +117,10 @@ struct ChoosePlanSheetContent: View {
             initialState: Paywall.State(
                 phase: .ready,
                 offers: offers,
-                trialOffer: PaywallTrialOffer(days: 7),
                 sheetSelection: .yearly
             ),
             dependencies: Paywall.Dependencies(
-                loadOffers: { .success(OffersPayload(offers: offers, trialOffer: PaywallTrialOffer(days: 7))) },
+                loadOffers: { .success(OffersPayload(offers: offers)) },
                 hasExistingEntitlement: { false },
                 purchase: { _ in .failure(.userCancelled) },
                 finishTransaction: { _ in },
