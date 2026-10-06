@@ -252,17 +252,7 @@
 		3F0EF5F22EDF26510013E4FB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				AccountInformationAvailability/AccountInformationAvailabilityVerifierTests.swift,
-				Core/Messages/PIACommandTests.swift,
-				Core/NMTTests.swift,
-				Core/PIACardTests.swift,
-				Core/Utils/AppleIDIdentityTokenTests.swift,
-				Core/Utils/PIAHotspotHelperTests.swift,
-				"Helpers/Stubs+PIALibrary.swift",
-				Migration/LegacyCustomDNSMigrationTests.swift,
-				Mocks/AccountProviderMock.swift,
-				Mocks/NotificationCenterMock.swift,
-				Mocks/UserDefaultsMock.swift,
+				"Supporting files/Info.plist",
 			);
 			target = 0EEE1BE61E4F6EF400397DE2 /* PIA VPNTests */;
 		};
@@ -578,6 +568,9 @@
 			);
 			dependencies = (
 				0EEE1BED1E4F6EF400397DE2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3F0EF5EB2EDF26510013E4FB /* PIA VPNTests */,
 			);
 			name = "PIA VPNTests";
 			packageProductDependencies = (

@@ -35,6 +35,10 @@ extension Client.Preferences {
                 connectToSelectedServerIfNeeded()
                 return
             }
+            // A user-initiated switch restarts the "Protected" timer; automatic reconnects keep it.
+            if Client.providers.vpnProvider.isVPNConnected {
+                lastVPNConnectionSuccess = Date().timeIntervalSince1970
+            }
             let ed = editable()
             if newValue.isAutomatic {
                 ed.preferredServer = nil
