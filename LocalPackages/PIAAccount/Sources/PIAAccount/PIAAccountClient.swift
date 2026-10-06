@@ -172,6 +172,28 @@ public actor PIAAccountClient: PIAAccountAPI {
         return apiTokenResponse.apiToken
     }
 
+    public func bindLoginQR(qrToken: String) async throws {
+        try await refreshTokensIfNeeded()
+
+        guard let apiToken = try await tokenManager.getAPITokenString() else {
+            throw PIAAccountError.unauthorized()
+        }
+
+        // The bind endpoint authenticates with a Bearer API token
+        let headers = [
+            "Authorization": "Bearer \(apiToken)",
+            "accept": "application/json"
+        ]
+        let bodyData = try JSONEncoder.piaCodable.encode(BindLoginTokenRequest(loginToken: qrToken))
+
+        try await endpointManager.executeVoidWithFailover(
+            path: .bindLoginToken,
+            method: .post,
+            bodyType: .json(bodyData),
+            headers: headers
+        )
+    }
+
     // MARK: - Account Management
 
     public func accountDetails() async throws -> AccountInformation {

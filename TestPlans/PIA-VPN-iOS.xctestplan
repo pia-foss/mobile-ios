@@ -92,6 +92,13 @@
         "identifier" : "PIAPaywallTests",
         "name" : "PIAPaywallTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAValidateQRLogin",
+        "identifier" : "PIAValidateQRLoginTests",
+        "name" : "PIAValidateQRLoginTests"
+      }
     }
   ],
   "version" : 1

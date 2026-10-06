@@ -133,6 +133,13 @@ public protocol PIAAccountAPI: Sendable {
     ///           or network/server errors
     func validateLoginQR(qrToken: String) async throws -> String
 
+    /// Binds a QR login token shown on another device (tvOS) to the current account,
+    /// signing that device in.
+    ///
+    /// - Parameter qrToken: The QR token scanned from the other device
+    /// - Throws: `PIAAccountError` if the user is not logged in or the request fails
+    func bindLoginQR(qrToken: String) async throws
+
     // MARK: - Account Management
 
     /// Retrieves current account details

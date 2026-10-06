@@ -413,17 +413,6 @@ extension Macros {
         }
     }
 
-    /**
-     Shortcut to create an `UIAlertController` with `.actionSheet` preferred style.
-
-     - Parameter request: The sheet title
-     - Parameter message: The sheet message
-     - Returns: An `UIAlertController` with `.actionSheet` preferred style
-     */
-    public static func actionSheet(_ title: String?, _ message: String?) -> UIAlertController {
-        return UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-    }
-
 }
 
 /// Convenience methods for `PopupDialog`.
@@ -494,52 +483,6 @@ public extension PopupDialog {
         self.addButton(button)
     }
 
-}
-
-/// Convenience methods for `UIAlertController`.
-public extension UIAlertController {
-
-    /**
-     Adds a default action to an `UIAlertController`.
-
-     - Parameter title: The action title
-     - Parameter handler: The action handler
-     */
-    func addDefaultAction(_ title: String, handler: @escaping () -> Void) {
-        let action = UIAlertAction(title: title, style: .default) { (action) in
-            handler()
-        }
-        addAction(action)
-        preferredAction = action
-    }
-
-    /// Adds a cancel action to an `UIAlertController`.
-    ///
-    /// - Parameter title: The action title
-    /// - Parameter handler: The optional action handler
-    func addCancelAction(_ title: String, handler: (() -> Void)? = nil) {
-        let action = UIAlertAction(title: title, style: .cancel) { _ in
-            handler?()
-        }
-        addAction(action)
-        if (actions.count == 1) {
-            preferredAction = action
-        }
-    }
-
-    /**
-     Adds a destructive action to an `UIAlertController`.
-
-     - Parameter title: The action title
-     - Parameter handler: The action handler
-     */
-    func addDestructiveAction(_ title: String, handler: @escaping () -> Void) {
-        let action = UIAlertAction(title: title, style: .destructive) { (action) in
-            handler()
-        }
-        addAction(action)
-        preferredAction = action
-    }
 }
 
 public extension String {
