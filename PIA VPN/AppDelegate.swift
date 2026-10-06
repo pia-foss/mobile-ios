@@ -59,6 +59,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didStartApp = true
 
         Bootstrapper.shared.bootstrap()
+        WiFiPathMonitor.shared.start()
         hotspotHelper = PIAHotspotHelper()
         _ = hotspotHelper.configureHotspotHelper()
 
