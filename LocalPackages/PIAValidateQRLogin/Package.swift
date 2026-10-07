@@ -21,7 +21,7 @@ let package = Package(
         .package(path: "../PIALocalizations"),
         .package(path: "../PIAUI"),
         .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0"),
-        .package(url: "https://github.com/apple/swift-log", exact: "1.15.0")
+        .package(url: "https://github.com/apple/swift-log", exact: "1.15.1")
     ],
     targets: [
         .target(

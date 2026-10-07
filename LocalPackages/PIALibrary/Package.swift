@@ -24,7 +24,7 @@ let package = Package(
         .package(path: "../PIARegions"),
         .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2"),
         .package(url: "https://github.com/apple/swift-algorithms", exact: "1.2.1"),
-        .package(url: "https://github.com/apple/swift-log", exact: "1.15.0"),
+        .package(url: "https://github.com/apple/swift-log", exact: "1.15.1"),
         .package(url: "https://github.com/ashleymills/Reachability.swift.git", exact: "5.2.4")
     ],
     targets: [
