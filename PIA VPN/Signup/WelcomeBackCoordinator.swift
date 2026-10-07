@@ -26,16 +26,15 @@ import PIAPaywall
 import UIKit
 
 /// Runs the welcome-back flow: the screen offered to a returning customer whose App Store account
-/// still holds a live subscription. It replaces the paywall as the navigation controller's only
-/// screen, and hands the flow on itself — through `showLogin`, `showPaywall`, or, once the receipt
-/// has signed the customer in, its output.
+/// still holds a live subscription. It is pushed over the paywall, and hands the flow on itself —
+/// through `showLogin`, `showPaywall`, or, once the receipt has signed the customer in, its output.
 final class WelcomeBackCoordinator: FlowCoordinator {
 
     enum Output {
         case didAuthenticate(user: UserAccount)
     }
 
-    private let navigationController: UINavigationController
+    private weak var navigationController: UINavigationController?
     private let accountProvider: AccountProvider
     private let store: InAppProvider
     private let showLogin: @MainActor () -> Void
@@ -72,8 +71,11 @@ final class WelcomeBackCoordinator: FlowCoordinator {
     @MainActor
     private func presentIfEntitled() async {
         let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
-        guard await currentReceipt() != nil else {
-            showPaywall()
+        // Only over the bare paywall; the user may have moved on while the receipt was read.
+        guard await currentReceipt() != nil,
+              navigationController?.viewControllers.last is SignupPaywallHostingController
+        else {
+            handle(.didDismiss)
             return
         }
 
@@ -88,7 +90,11 @@ final class WelcomeBackCoordinator: FlowCoordinator {
                 )
             )
         )
-        navigationController.setViewControllers([host], animated: false)
+        if let navigationController {
+            navigationController.pushViewController(host, animated: true)
+        } else {
+            handle(.didDismiss)
+        }
     }
 
     @MainActor

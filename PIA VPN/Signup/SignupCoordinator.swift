@@ -49,9 +49,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
-    /// Retained so welcome-back can hand the screen back to it with its plans already fetched.
-    private var paywallHost: SignupPaywallHostingController?
-
     private var welcomeBackCoordinator: WelcomeBackCoordinator?
     private var welcomeBackCancellables = Set<AnyCancellable>()
 
@@ -88,7 +85,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
                 legal: legalLinks
             )
         )
-        paywallHost = host
 
         // The delegate below owns the bar across pushes and pops, so no push site has to.
         navigationController.delegate = self
@@ -104,7 +100,7 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
             accountProvider: accountProvider,
             store: Client.store,
             showLogin: { [weak self] in self?.showLogin() },
-            showPaywall: { [weak self] in self?.restorePaywallRoot() }
+            showPaywall: { [weak self] in self?.returnToPaywall() }
         )
         welcomeBackCoordinator = coordinator
 
@@ -115,11 +111,10 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
         coordinator.start()
     }
 
-    /// Where welcome-back leaves the flow when there is nothing to restore, or a restore fails.
+    /// Dismiss all pushed view controllers and return to the paywall.
     @MainActor
-    private func restorePaywallRoot() {
-        guard let paywallHost else { return }
-        navigationController.setViewControllers([paywallHost], animated: false)
+    private func returnToPaywall() {
+        navigationController.popToRootViewController(animated: true)
         endWelcomeBack()
     }
 

@@ -25,7 +25,7 @@ import PIALocalizations
 import PIASwiftUI
 import SwiftUI
 
-/// Replaces the paywall when the App Store already holds a live subscription for this Apple ID.
+/// Shown over the paywall when the App Store already holds a live subscription for this Apple ID.
 public struct WelcomeBackView: View {
     fileprivate enum Metrics {
         static let maxContentWidth: CGFloat = 480
@@ -43,7 +43,13 @@ public struct WelcomeBackView: View {
             PaywallBackgroundView()
 
             VStack(spacing: 0) {
-                PIALogoView()
+                ZStack(alignment: .trailing) {
+                    PIALogoView()
+                        .frame(maxWidth: .infinity)
+                    PaywallCloseButton { store.send(.closeTapped) }
+                        .disabled(store.state.isRestoring)
+                        .accessibilityIdentifier(WelcomeBackAccessibility.closeButton)
+                }
                 Spacer(minLength: PIASpacing.s20)
                 WelcomeBackBody()
                 Spacer(minLength: PIASpacing.s20)
@@ -113,6 +119,7 @@ private struct WelcomeBackActions: View {
 public enum WelcomeBackAccessibility {
     public static let appStoreButton = "id.welcome_back.app_store"
     public static let credentialsButton = "id.welcome_back.credentials"
+    public static let closeButton = "id.welcome_back.close"
 }
 
 // MARK: - Preview
