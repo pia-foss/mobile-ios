@@ -904,7 +904,7 @@ final class DashboardViewController: AutolayoutViewController {
 
         if let alertController = presenter as? UIAlertController, alertController.title == title { return }
 
-        let sheet = Macros.alertController(title, message)
+        let sheet = Macros.alert(title, message)
 
         for action in actions {
             let alertAction = UIAlertAction(

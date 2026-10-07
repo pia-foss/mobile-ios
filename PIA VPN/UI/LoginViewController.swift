@@ -149,19 +149,22 @@ final class LoginViewController: AutolayoutViewController, PIAWelcomeViewControl
             return
         }
 
-        let storyboard = UIStoryboard(name: "Welcome", bundle: Bundle.main)
-        if let magicLinkLoginViewController = storyboard.instantiateViewController(withIdentifier: "MagicLinkLoginViewController") as? MagicLinkLoginViewController {
-            let alert = Macros.alert(magicLinkLoginViewController)
-            alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
-            alert.addActionWithTitle(
-                L10n.Welcome.Login.Magic.Link.send.uppercased(),
-                handler: {
-                    let email = magicLinkLoginViewController.email().trimmed()
-                    self.loginUsingMagicLink(email: email)
-                })
-            present(alert, animated: true, completion: nil)
+        var magicLinkEmailField: UITextField?
+        let alert = Macros.alert(L10n.Welcome.Login.Magic.Link.title, nil)
+        alert.addTextField { textField in
+            textField.placeholder = L10n.Welcome.Purchase.Email.placeholder
+            textField.autocapitalizationType = .none
+            textField.keyboardType = .emailAddress
+            textField.textContentType = .emailAddress
+            textField.returnKeyType = .send
+            magicLinkEmailField = textField
         }
-
+        alert.addCancelAction(L10n.Signup.Purchase.Uncredited.Alert.Button.cancel)
+        alert.addActionWithTitle(L10n.Welcome.Login.Magic.Link.send) { [weak self] in
+            let email = magicLinkEmailField?.text?.trimmed() ?? ""
+            self?.loginUsingMagicLink(email: email)
+        }
+        present(alert, animated: true)
     }
 
     private func loginUsingMagicLink(email: String) {

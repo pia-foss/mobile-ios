@@ -142,39 +142,12 @@ extension Macros {
         return versionNumber
     }
 
-    /**
-     Shortcut to create a `PopupDialog`.
-
-     - Parameter title: The alert title
-     - Parameter message: The alert message
-     - Returns: A `PopupDialog` object
-     */
-    public static func alert(_ title: String?, _ message: String?) -> PopupDialog {
-        Macros.styleAlertPopupDialog()
-        let popup = PopupDialog(
-            title: title,
-            message: message,
-            buttonAlignment: .horizontal)
-        return popup
-    }
-
-    public static func alert(_ viewController: UIViewController, completionHandler completion: (() -> Void)? = nil) -> PopupDialog {
-        Macros.styleAlertPopupDialog()
-        let popup = PopupDialog(
-            viewController: viewController,
-            buttonAlignment: .horizontal,
-            completion: completion)
-        return popup
-    }
-
-    /**
-     Shortcut to create an `UIAlertController`.
-
-     - Parameter title: The alert title
-     - Parameter message: The alert message
-     - Returns: An `UIAlertController` object
-     */
-    public static func alertController(_ title: String?, _ message: String?) -> UIAlertController {
+    /// Shortcut to create a `UIAlertController`.
+    ///
+    /// - Parameter title: The alert title
+    /// - Parameter message: The alert message
+    /// - Returns: A `UIAlertController` object
+    public static func alert(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .alert)
     }
 
@@ -202,46 +175,6 @@ extension Macros {
         buttonAppearance.titleColor = TextStyle.textStyle21.color
         buttonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
         buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-    }
-
-    /**
-    Style a PopupDialog alert view object.
-     */
-    public static func styleAlertPopupDialog() {
-        let dialogAppearance = PopupDialogDefaultView.appearance()
-        dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        dialogAppearance.titleFont = TextStyle.textStyle7.font!
-        dialogAppearance.titleColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle7.color
-        dialogAppearance.messageFont = TextStyle.textStyle12.font!
-        dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
-        let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius = 0
-        containerAppearance.shadowEnabled = false
-
-        let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color = .black
-        overlayAppearance.blurEnabled = false
-        overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity = 0.5
-
-        let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont = TextStyle.textStyle14.font!
-        buttonAppearance.titleColor = TextStyle.textStyle14.color
-        buttonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-
-        let cancelButtonAppearance = CancelButton.appearance()
-        cancelButtonAppearance.titleFont = TextStyle.textStyle21.font!
-        cancelButtonAppearance.titleColor = TextStyle.textStyle21.color
-        cancelButtonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        cancelButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-
-        let destructiveButtonAppearance = DestructiveButton.appearance()
-        destructiveButtonAppearance.titleFont = TextStyle.textStyle15.font!
-        destructiveButtonAppearance.titleColor = TextStyle.textStyle15.color
-        destructiveButtonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        destructiveButtonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
-
     }
 
     /**
@@ -415,74 +348,53 @@ extension Macros {
 
 }
 
-/// Convenience methods for `PopupDialog`.
-public extension PopupDialog {
-
-    /// Add a PopupDialog DefaultButton with the handler action
+extension UIAlertController {
+    /// Add a default button with the handler action
     /// - Parameter title: The button title
     /// - Parameter handler: The button action
     func addActionWithTitle(_ title: String, handler: @escaping () -> Void) {
-        let button = DefaultButton(title: title.uppercased(), dismissOnTap: true) {
+        let action = UIAlertAction(title: title, style: .default) { _ in
             handler()
         }
-        self.addButton(button)
+        addAction(action)
+        preferredAction = action
     }
 
-    /// Add a PopupDialog DestructiveButton with the handler action
+    /// Add a destructive button with the handler action
     /// - Parameter title: The button title
     /// - Parameter handler: The button action
     func addDestructiveActionWithTitle(_ title: String, handler: @escaping () -> Void) {
-        let button = DestructiveButton(title: title.uppercased(), dismissOnTap: true) {
+        let action = UIAlertAction(title: title, style: .destructive) { _ in
             handler()
         }
-        button.accessibilityIdentifier = Accessibility.Id.Dialog.destructive
-        self.addButton(button)
+        action.accessibilityIdentifier = Accessibility.Id.Dialog.destructive
+        addAction(action)
     }
 
-    /// Add a PopupDialog CancelButton with the handler action
+    /// Add a cancel button with the handler action
     /// - Parameter title: The button title
     /// - Parameter handler: The button action
     func addCancelActionWithTitle(_ title: String, handler: @escaping () -> Void) {
-        let button = CancelButton(title: title.uppercased(), dismissOnTap: true) {
+        let action = UIAlertAction(title: title, style: .cancel) { _ in
             handler()
         }
-        self.addButton(button)
+        addAction(action)
     }
 
-    /// Add a PopupDialog Button with the handler action depending of the UIAlertAction given
-    /// - Parameter action: The UIAlertAction to convert into PopupDialog button
-    /// - Parameter handler: The button action
-    func addAction(_ action: UIAlertAction, handler: @escaping () -> Void) {
-        if let title = action.title {
-            switch action.style {
-            case .cancel:
-                let button = CancelButton(title: title.uppercased(), dismissOnTap: true) {
-                    handler()
-                }
-                self.addButton(button)
-            default:
-                let button = DefaultButton(title: title.uppercased(), dismissOnTap: true) {
-                    handler()
-                }
-                self.addButton(button)
-            }
-        }
-    }
-
-    /// Add a PopupDialog simple CancelButton without handler and dismissing on tap
+    /// Add a cancel button without handler and dismissing on tap
     /// - Parameter title: The button title
     func addCancelAction(_ title: String) {
-        let button = CancelButton(title: title.uppercased(), dismissOnTap: true, action: nil)
-        self.addButton(button)
+        let action = UIAlertAction(title: title, style: .cancel)
+        addAction(action)
     }
 
-    /// Add a PopupDialog simple DefaultButton without handler and dismissing on tap
+    /// Add a default button without handler and dismissing on tap
     /// - Parameter title: The button title
     func addDefaultAction(_ title: String) {
-        let button = DefaultButton(title: title.uppercased(), dismissOnTap: true, action: nil)
-        self.addButton(button)
+        let action = UIAlertAction(title: title, style: .default)
+        addAction(action)
+        preferredAction = action
     }
-
 }
 
 public extension String {
