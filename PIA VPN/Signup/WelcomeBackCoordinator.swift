@@ -102,11 +102,14 @@ final class WelcomeBackCoordinator: FlowCoordinator {
         switch output {
         case .didAuthenticate(let user):
             subject.send(.didAuthenticate(user: user))
+            subject.send(completion: .finished)
 
         case .requestLogin:
             showLogin()
+            // don't finish yet, user can come back
 
         case .didDismiss:
+            subject.send(completion: .finished)
             showPaywall()
         }
     }

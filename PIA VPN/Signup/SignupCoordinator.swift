@@ -49,9 +49,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
-    private var welcomeBackCoordinator: WelcomeBackCoordinator?
-    private var welcomeBackCancellables = Set<AnyCancellable>()
-
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
     /// What the host installs as its root or presents modally. A navigation controller, because the
@@ -102,25 +99,18 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
             showLogin: { [weak self] in self?.showLogin() },
             showPaywall: { [weak self] in self?.returnToPaywall() }
         )
-        welcomeBackCoordinator = coordinator
 
-        coordinator.output
-            .sink { [weak self] output in self?.handle(output) }
-            .store(in: &welcomeBackCancellables)
-
-        coordinator.start()
+        Task { @MainActor [weak self] in
+            if let output = await coordinator.startAsync() {
+                self?.handle(output)
+            }
+        }
     }
 
     /// Dismiss all pushed view controllers and return to the paywall.
     @MainActor
     private func returnToPaywall() {
         navigationController.popToRootViewController(animated: true)
-        endWelcomeBack()
-    }
-
-    private func endWelcomeBack() {
-        welcomeBackCancellables.removeAll()
-        welcomeBackCoordinator = nil
     }
 
     /// Signs in from a magic-link deep link.
@@ -169,7 +159,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
     private func handle(_ output: WelcomeBackCoordinator.Output) {
         switch output {
         case .didAuthenticate(let user):
-            endWelcomeBack()
             finish(user: user, isSignup: false)
         }
     }
