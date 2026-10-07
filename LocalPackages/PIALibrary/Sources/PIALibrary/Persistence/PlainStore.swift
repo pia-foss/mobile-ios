@@ -74,11 +74,7 @@ protocol PlainStore: AnyObject {
 
     var lastKnownVpnStatus: VPNStatus { get set }
 
-    var lastVPNConnectionAttempt: Double { get set }
-
     var lastVPNConnectionSuccess: Double? { get set }
-
-    var timeToConnectVPN: Double { get set }
 
     var leakProtection: Bool { get set }
 
