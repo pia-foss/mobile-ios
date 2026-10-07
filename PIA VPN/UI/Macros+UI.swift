@@ -24,7 +24,6 @@ import Foundation
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
-import PopupDialog
 import SwiftEntryKit
 import UIKit
 
@@ -149,32 +148,6 @@ extension Macros {
     /// - Returns: A `UIAlertController` object
     public static func alert(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .alert)
-    }
-
-    /**
-     Style a `PopupDialog` object.
-     */
-    public static func stylePopupDialog() {
-        let dialogAppearance = PopupDialogDefaultView.appearance()
-        dialogAppearance.backgroundColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        dialogAppearance.messageFont = TextStyle.textStyle12.font!
-        dialogAppearance.messageColor = Theme.current.palette.appearance == .dark ? .white : TextStyle.textStyle12.color
-
-        let containerAppearance = PopupDialogContainerView.appearance()
-        containerAppearance.cornerRadius = 0
-        containerAppearance.shadowEnabled = false
-
-        let overlayAppearance = PopupDialogOverlayView.appearance()
-        overlayAppearance.color = .black
-        overlayAppearance.blurEnabled = false
-        overlayAppearance.liveBlurEnabled = false
-        overlayAppearance.opacity = 0.5
-
-        let buttonAppearance = DefaultButton.appearance()
-        buttonAppearance.titleFont = TextStyle.textStyle21.font!
-        buttonAppearance.titleColor = TextStyle.textStyle21.color
-        buttonAppearance.buttonColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey6 : .white
-        buttonAppearance.separatorColor = Theme.current.palette.appearance == .dark ? UIColor.piaGrey10 : UIColor.piaGrey1
     }
 
     /**

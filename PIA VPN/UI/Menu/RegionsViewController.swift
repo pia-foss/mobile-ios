@@ -25,7 +25,6 @@ import GradientProgressBar
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
-import PopupDialog
 import UIKit
 
 private let log = PIALogger.logger(for: AutolayoutViewController.self)
@@ -60,6 +59,30 @@ final class RegionsViewController: AutolayoutViewController {
 
     private let searchController = UISearchController(searchResultsController: nil)
 
+    // Filter button + menu
+
+    private lazy var filterButton = UIBarButtonItem(
+        image: Asset.Piax.Global.iconFilter.image,
+        style: .plain,
+        target: self,
+        action: nil
+    )
+
+    private lazy var nameFilterAction = UIAction(title: L10n.Region.Filter.name) { [weak self] action in
+        AppPreferences.shared.regionFilter = .name
+        self?.filterServers()
+    }
+
+    private lazy var latencyFilterAction = UIAction(title: L10n.Region.Filter.latency) { [weak self] action in
+        AppPreferences.shared.regionFilter = .latency
+        self?.filterServers()
+    }
+
+    private lazy var favoritesFilterAction = UIAction(title: L10n.Region.Filter.favorites) { [weak self] action in
+        AppPreferences.shared.regionFilter = .favorite
+        self?.filterServers()
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -86,7 +109,6 @@ final class RegionsViewController: AutolayoutViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(viewHasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         setupSearchBarController()
-        Macros.stylePopupDialog()
 
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
@@ -140,13 +162,8 @@ final class RegionsViewController: AutolayoutViewController {
     }
 
     private func setupRightBarButton() {
-        let filterButton = UIBarButtonItem(
-            image: Asset.Piax.Global.iconFilter.image,
-            style: .plain,
-            target: self,
-            action: #selector(showFilter(_:))
-        )
         filterButton.accessibilityLabel = L10n.Region.Accessibility.filter
+        filterButton.menu = buildFilterMenu()
 
         // Mac has no pull-to-refresh, so expose the latency refresh as a navigation bar button.
         if Platform.isRunningOnMac {
@@ -227,42 +244,20 @@ final class RegionsViewController: AutolayoutViewController {
     override var disablesAutomaticKeyboardDismissal: Bool { true }
 
     // MARK: Actions
-    @objc private func showFilter(_ sender: Any?) {
 
-        if searchController.isActive {
-            searchController.searchBar.text = ""
-            searchController.dismiss(animated: false)
-        }
+    private func buildFilterMenu() -> UIMenu {
+        let menu = UIMenu(
+            title: "",
+            subtitle: L10n.Region.Filter.sortby,
+            options: .displayInline,
+            children: [nameFilterAction, latencyFilterAction, favoritesFilterAction]
+        )
 
-        let popup = PopupDialog(
-            title: nil,
-            message: L10n.Region.Filter.sortby.uppercased())
+        nameFilterAction.state = AppPreferences.shared.regionFilter == .name ? .on : .off
+        latencyFilterAction.state = AppPreferences.shared.regionFilter == .latency ? .on : .off
+        favoritesFilterAction.state = AppPreferences.shared.regionFilter == .favorite ? .on : .off
 
-        let buttonName = DefaultButton(title: L10n.Region.Filter.name.uppercased(), dismissOnTap: true) {
-            AppPreferences.shared.regionFilter = .name
-            self.filterServers()
-        }
-        let buttonLatency = DefaultButton(title: L10n.Region.Filter.latency.uppercased(), dismissOnTap: true) {
-            AppPreferences.shared.regionFilter = .latency
-            self.filterServers()
-        }
-        let buttonFavorites = DefaultButton(title: L10n.Region.Filter.favorites.uppercased(), dismissOnTap: true) {
-            AppPreferences.shared.regionFilter = .favorite
-            self.filterServers()
-        }
-
-        switch AppPreferences.shared.regionFilter {
-        case .name:
-            buttonName.titleColor = UIColor.piaGreenDark20
-        case .latency:
-            buttonLatency.titleColor = UIColor.piaGreenDark20
-        default:
-            buttonFavorites.titleColor = UIColor.piaGreenDark20
-        }
-
-        popup.addButtons([buttonName, buttonLatency, buttonFavorites])
-        self.present(popup, animated: true, completion: nil)
-
+        return menu
     }
 
     private func filterServers() {
@@ -274,7 +269,7 @@ final class RegionsViewController: AutolayoutViewController {
             })
         case .latency:
             self.servers = self.servers.sorted(by: { $0.pingTime ?? Int.max < $1.pingTime ?? Int.max })
-        default:
+        case .favorite:
             self.servers = self.servers.sorted(by: { $0.isFavorite && !$1.isFavorite })
         }
         if AppPreferences.shared.showGeoServers == false {
@@ -285,6 +280,8 @@ final class RegionsViewController: AutolayoutViewController {
         self.servers = self.servers.filter { server in
             server.dipToken != nil || server.hasEndpoints(for: currentVPNType)
         }
+
+        filterButton.menu = buildFilterMenu()
 
         tableView.reloadData()
         if tableView.numberOfRows(inSection: 0) > 0 {
