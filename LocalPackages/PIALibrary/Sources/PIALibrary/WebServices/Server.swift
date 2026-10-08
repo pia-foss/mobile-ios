@@ -153,9 +153,6 @@ public final class Server: Sendable {
     /// The best server IPs for establishing an AmneziaWG connection over UDP.
     public let amneziaAddressesForUDP: [ServerAddressIP]?
 
-    /// The best server IPs for establishing an IKEv2 connection over UDP.
-    public let iKEv2AddressesForUDP: [ServerAddressIP]?
-
     /// The address on which to "ping" the server.
     public let pingAddress: Address?
 
@@ -183,7 +180,6 @@ public final class Server: Sendable {
         openVPNAddressesForUDP: [ServerAddressIP]? = nil,
         wireGuardAddressesForUDP: [ServerAddressIP]? = nil,
         amneziaAddressesForUDP: [ServerAddressIP]? = nil,
-        iKEv2AddressesForUDP: [ServerAddressIP]? = nil,
         pingAddress: Address?,
         geo: Bool = false,
         offline: Bool = false,
@@ -213,7 +209,6 @@ public final class Server: Sendable {
         self.openVPNAddressesForUDP = openVPNAddressesForUDP
         self.wireGuardAddressesForUDP = wireGuardAddressesForUDP
         self.amneziaAddressesForUDP = amneziaAddressesForUDP
-        self.iKEv2AddressesForUDP = iKEv2AddressesForUDP
 
         self.meta = meta
         self.pingAddress = pingAddress
@@ -260,7 +255,9 @@ extension Server {
             let openVPN = openVPNAddressesForUDP ?? []
             return wireGuard.isEmpty ? openVPN : wireGuard
         case "Mock":
-            return iKEv2AddressesForUDP ?? []
+            // No protocol is running under the mock provider; surface WireGuard first, like
+            // Automatic, so the simulator can still ping and display regions.
+            return wireGuardAddressesForUDP ?? openVPNAddressesForUDP ?? []
         default:
             return []
         }

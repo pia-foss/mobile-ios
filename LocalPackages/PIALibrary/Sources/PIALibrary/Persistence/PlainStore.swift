@@ -111,7 +111,6 @@ protocol PlainStore: AnyObject {
 
     var nmtTemporaryOpenNetworks: [String] { get set }
 
-    //MARK: IKEv2
     //MARK: OpenVPN / WireGuard
     var useSmallPackets: Bool { get set }
 
