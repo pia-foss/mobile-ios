@@ -247,9 +247,8 @@ final class RegionsViewController: AutolayoutViewController {
 
     private func buildFilterMenu() -> UIMenu {
         let menu = UIMenu(
-            title: "",
-            subtitle: L10n.Region.Filter.sortby,
-            options: .displayInline,
+            title: L10n.Region.Filter.sortby,
+            options: [.displayInline, .singleSelection],
             children: [nameFilterAction, latencyFilterAction, favoritesFilterAction]
         )
 
