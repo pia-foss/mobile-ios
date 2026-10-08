@@ -165,8 +165,8 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
             cell.selectionStyle = .none
             switchDebugLogging.isOn = pendingPreferences?.debugLogging ?? false
 
-            // DebugLogging must be always on under DEVELOPMENT or STAGING
-            #if DEVELOPMENT || STAGING
+            // DebugLogging must be always on under DEBUG or STAGING
+            #if DEBUG || STAGING
                 switchDebugLogging.isEnabled = false
             #endif
         case .kpiShareStatistics:

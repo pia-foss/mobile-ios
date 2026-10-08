@@ -31,7 +31,7 @@ platform :ios do
 
   lane :iOStests do
     run_tests(
-      scheme: "PIA VPN Development",
+      scheme: "PIA VPN",
       output_directory: "fastlane/test_output",
       result_bundle: true,
       cloned_source_packages_path: ".build/SourcePackages",
@@ -41,7 +41,7 @@ platform :ios do
 
   lane :tvOStests do
     run_tests(
-      scheme: "PIA VPN-tvOS Development",
+      scheme: "PIA VPN-tvOS",
       output_directory: "fastlane/test_output",
       result_bundle: true,
       cloned_source_packages_path: ".build/SourcePackages",
@@ -51,7 +51,7 @@ platform :ios do
 
   lane :ios_e2e_tests do
     run_tests(
-      scheme: "PIA VPN Development",
+      scheme: "PIA VPN",
       testplan: "PIA-VPN-e2e-simulator",
       destination: "platform=iOS Simulator,name=iPhone 18 Pro",
       prelaunch_simulator: true,
@@ -61,7 +61,7 @@ platform :ios do
 
   lane :tvos_e2e_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS Development",
+      scheme: "PIA VPN-tvOS",
       testplan: "PIA-VPN_tvOS_E2E_Tests",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -71,7 +71,7 @@ platform :ios do
 
   lane :tvos_snapshot_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS Development",
+      scheme: "PIA VPN-tvOS",
       testplan: "PIA VPN-tvOS snapshot",
       test_without_building: true,
       prelaunch_simulator: true,
@@ -179,7 +179,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match AppStore com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match AppStore com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
@@ -218,7 +218,7 @@ platform :ios do
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
@@ -240,14 +240,14 @@ platform :ios do
     archive_path = "PIA_VPN_dev_iOS.#{current_branch}_#{short_hash}"
     archive_zip_name = "#{archive_path}.zip"
 
-    build_app(scheme: "PIA VPN Development",
+    build_app(scheme: "PIA VPN Staging",
       export_method: "development",
       clean: true,
-      configuration: "Debug",
+      configuration: "Staging",
       build_path: "build/#{archive_path}",
       output_name: "#{archive_path}.ipa",
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "match Development com.privateinternetaccess.ios.PIA-VPN",
           "com.privateinternetaccess.ios.PIA-VPN.PIAWidget" => "match Development com.privateinternetaccess.ios.PIA-VPN.PIAWidget",
           "com.privateinternetaccess.ios.PIA-VPN.AdBlocker" => "match Development com.privateinternetaccess.ios.PIA-VPN.AdBlocker"
@@ -510,7 +510,7 @@ end
 
 desc "This line is for creating testflight build for tvOS"
   lane :testflight_build_tvos do
-    
+
     key_id = ENV['APP_STORE_CONNECT_KEY_ID']
     issuer_id = ENV['APP_STORE_CONNECT_ISSUER_ID']
     key_content = ENV['APP_STORE_CONNECT_KEY']
@@ -526,13 +526,13 @@ desc "This line is for creating testflight build for tvOS"
       platform: "appletvos"
     )
     set_project_build_number(build_number + 1)
-    
-    build_app(scheme: "PIA VPN-tvOS Release",
+
+    build_app(scheme: "PIA VPN-tvOS",
       export_method: "app-store",
       xcargs: "-destination 'platform=tvOS'",
       clean: true,
       export_options: {
-        provisioningProfiles: { 
+        provisioningProfiles: {
           "com.privateinternetaccess.ios.PIA-VPN" => "PIA Distribution tvOS",
           "com.privateinternetaccess.ios.PIA-VPN.PlatformSDK-Tunnel-tvOS" => "PIA Distribution tvOS PlatformSDK-Tunnel"
         }
