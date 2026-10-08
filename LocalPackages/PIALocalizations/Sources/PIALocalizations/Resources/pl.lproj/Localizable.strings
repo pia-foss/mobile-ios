@@ -35,8 +35,6 @@
 "expiration.title" = "Odnowienie";
 "expiration.message" = "Twoja subskrypcja wkrótce wygasa. Odnów ją, aby utrzymać ochronę.";
 
-"local_notification.non_compliant_wifi.title" = "Niezabezpieczona sieć Wi-Fi: %@";
-"local_notification.non_compliant_wifi.text" = "Dotknij tutaj, aby zabezpieczyć urządzenie";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "Wyłącznik awaryjny VPN zapobiega dostępowi do internetu, jeśli połączenie VPN jest nawiązywane ponownie. Nie obejmuje to ręcznego rozłączenia.";
 "settings.application_settings.reconnect_notifications.title" = "Powiadomienia o ponownym połączeniu";
 "settings.application_settings.reconnect_notifications.footer" = "Otrzymuj powiadomienia, gdy VPN ponownie łączy się z inną lokalizacją. Wyłącz, aby przestać otrzymywać te powiadomienia.";
-"settings.application_settings.leak_protection.title" = "Ochrona przed wyciekami";
-"settings.application_settings.leak_protection.footer" = "iOS zawiera funkcje zaprojektowane domyślnie do działania poza VPN, takie jak AirDrop, CarPlay, AirPlay i osobiste hotspoty. Włączenie niestandardowej ochrony przed wyciekiem kieruje ten ruch przez VPN, ale może wpłynąć na działanie tych funkcji. Więcej informacji";
-"settings.application_settings.leak_protection.more_info" = "Więcej informacji";
-"settings.application_settings.allow_local_network.title" = "Zezwól na dostęp do urządzeń w sieci lokalnej";
-"settings.application_settings.allow_local_network.footer" = "Pozostań w kontakcie z lokalnymi urządzeniami, takimi jak drukarki lub serwery plików, podczas połączenia z VPN. (Zezwalaj na to tylko wtedy, gdy ufasz osobom i urządzeniom w Twojej sieci).";
-"settings.application_settings.leak_protection.alert.title" = "Zmiany w Ustawieniach VPN zostaną zastosowane przy kolejnym nawiązaniu połączenia";
 
 "settings.content_blocker.title" = "Stan blokady zawartości Safari";
 "settings.content_blocker.refresh.title" = "Odśwież listę blokowanych";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "Przycisk połączenia z VPN. VPN jest teraz podłączona.";
 "dashboard.accessibility.vpn.button.isOff" = "Przycisk połączenia z VPN. VPN jest teraz odłączona.";
 
-"dashboard.vpn.leakprotection.alert.title" = "Wykryto niezabezpieczoną sieć Wi-Fi";
-"dashboard.vpn.leakprotection.alert.message" = "Aby zapobiec wyciekom danych, dotknij Wyłącz teraz, aby wyłączyć opcję „Zezwól na dostęp do urządzeń w sieci lokalnej” i automatycznie połączyć się ponownie.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Wyłącz teraz";
-"dashboard.vpn.leakprotection.alert.cta2" = "Dowiedz się więcej";
-"dashboard.vpn.leakprotection.alert.cta3" = "Ignoruj";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "Aby zapobiec wyciekom danych, dotknij opcji Przełącz teraz, aby zmienić protokół na IKEv2 VPN i automatycznie połączyć się ponownie.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Przełącz teraz";
 
 "dashboard.vpn.change_location.alert.title" = "Zmiana lokalizacji?";
 "dashboard.vpn.change_location.alert.message" = "Twoja sieć VPN zostanie na krótko rozłączona podczas łączenia z nową lokalizacją.";

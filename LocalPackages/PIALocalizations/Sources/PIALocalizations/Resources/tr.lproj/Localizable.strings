@@ -35,8 +35,6 @@
 "expiration.title" = "Yenileme";
 "expiration.message" = "Aboneliğiniz yakında sona erecek. Korunmaya devam etmek için yenileyin.";
 
-"local_notification.non_compliant_wifi.title" = "Güvenilmeyen Wi-Fi: %@";
-"local_notification.non_compliant_wifi.text" = "Cihazınızı güvence altına almak için buraya dokunun";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "VPN kill switch, VPN bağlantınız yeniden bağlanırken internete erişimi önler. Bu, manuel bağlantı sonlandırmayı kapsamaz.";
 "settings.application_settings.reconnect_notifications.title" = "Yeniden Bağlanma Bildirimleri";
 "settings.application_settings.reconnect_notifications.footer" = "VPN farklı bir konuma yeniden bağlanırken uyarılar alın. Bu bildirimleri almayı durdurmak için devre dışı bırakın.";
-"settings.application_settings.leak_protection.title" = "Sızıntı Koruması";
-"settings.application_settings.leak_protection.footer" = "iOS, varsayılan olarak VPN dışında çalışacak şekilde tasarlanmış özellikleri içerir. Bunlar AirDrop, CarPlay, AirPlay ve Kişisel Erişim Noktaları gibi özellikleri içerir. Özel sızıntı koruması etkinleştirildiğinde, bu trafiğin VPN üzerinden yönlendirilmesi ancak bu özelliklerin işlevselliğini etkileyebilir. Daha fazla bilgi";
-"settings.application_settings.leak_protection.more_info" = "Daha fazla bilgi";
-"settings.application_settings.allow_local_network.title" = "Yerel ağdaki cihazlara erişim izni ver";
-"settings.application_settings.allow_local_network.footer" = "VPN'e bağlıyken yazıcılar veya dosya sunucuları gibi yerel cihazlara bağlı kalın. (Buna yalnızca ağınızdaki kişilere ve cihazlara güveniyorsanız izin verin.)";
-"settings.application_settings.leak_protection.alert.title" = "VPN Ayarlarındaki değişiklikler, bir sonraki bağlantıda etkili olacak";
 
 "settings.content_blocker.title" = "Safari İçerik Engelleyici durumu";
 "settings.content_blocker.refresh.title" = "Engelleme listesini yenile";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "VPN Bağlantı butonu. VPN şu anda bağlı";
 "dashboard.accessibility.vpn.button.isOff" = "VPN Bağlantı butonu. VPN şu anda bağlı değil";
 
-"dashboard.vpn.leakprotection.alert.title" = "Güvenilmeyen Wi-Fi algılandı";
-"dashboard.vpn.leakprotection.alert.message" = "Veri sızıntısını önlemek için, \"Yerel ağdaki cihazlara erişime izin ver\" özelliğini devre dışı bırakmak ve otomatik olarak yeniden bağlanmak için Şimdi Devre Dışı Bırak'a dokunun.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Şimdi Kapat";
-"dashboard.vpn.leakprotection.alert.cta2" = "Daha fazlasını öğrenin";
-"dashboard.vpn.leakprotection.alert.cta3" = "Yoksay";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "Veri sızıntısını önlemek için, IKEv2 VPN protokolüne geçmek ve otomatik olarak yeniden bağlanmak için Şimdi Değiştir'e dokunun.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Şimdi Değiştir";
 
 "dashboard.vpn.change_location.alert.title" = "Konum değiştiriliyor?";
 "dashboard.vpn.change_location.alert.message" = "VPN'iniz yeni konuma bağlanırken kısa bir süre bağlantısı kesilecek.";
