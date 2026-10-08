@@ -80,12 +80,6 @@ protocol PlainStore: AnyObject {
 
     var timeToConnectVPN: Double { get set }
 
-    var leakProtection: Bool { get set }
-
-    var allowLocalDeviceAccess: Bool { get set }
-
-    var currentRFC1918VulnerableWifi: String? { get set }
-
     // MARK: Service Quality
 
     var versionWhenServiceQualityOpted: String? { get set }

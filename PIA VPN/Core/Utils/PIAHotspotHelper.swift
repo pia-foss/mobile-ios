@@ -42,11 +42,9 @@ public protocol PIAHotspotHelperDelegate: AnyObject {
 class PIAHotspotHelper {
 
     private var delegate: PIAHotspotHelperDelegate?
-    private let networkMonitor: NetworkMonitor
 
-    init(withDelegate delegate: PIAHotspotHelperDelegate? = nil, networkMonitor: NetworkMonitor = WifiNetworkMonitor()) {
+    init(withDelegate delegate: PIAHotspotHelperDelegate? = nil) {
         self.delegate = delegate
-        self.networkMonitor = networkMonitor
     }
 
     /**
@@ -119,12 +117,6 @@ class PIAHotspotHelper {
                 } else if cmd.commandType == .evaluate {
                     log.info("HotspotHelper: Processing evaluate command for network: \(cmd.network?.ssid ?? "unknown")")
 
-                    if AppPreferences.shared.showLeakProtectionNotifications {
-                        weakSelf.checkForRFC1918VulnerableWifi(cmd: cmd)
-                    } else {
-                        Client.preferences.currentRFC1918VulnerableWifi = nil
-                    }
-
                     if let currentNetwork = cmd.network {
                         log.info("HotspotHelper: Network '\(currentNetwork.ssid)' isSecure: \(currentNetwork.isSecure)")
 
@@ -169,24 +161,6 @@ class PIAHotspotHelper {
 
                     cmd.createResponse(.success).deliver()
                 }
-            }
-        }
-    }
-
-    private func checkForRFC1918VulnerableWifi(cmd: NEHotspotHelperCommand) {
-        if networkMonitor.checkForRFC1918Vulnerability() {
-            log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi detected")
-            Client.preferences.currentRFC1918VulnerableWifi = cmd.network?.ssid.trimmingCharacters(in: CharacterSet.whitespaces)
-
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
-            }
-        } else {
-            log.info("HotspotHelper: APIHotspotDidDetectRFC1918VulnerableWifi NOT detected")
-            Client.preferences.currentRFC1918VulnerableWifi = nil
-
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .DeviceDidConnectToRFC1918CompliantWifi, object: nil)
             }
         }
     }
@@ -270,13 +244,4 @@ class PIAHotspotHelper {
         preferences.commit()
     }
 
-}
-
-public extension Notification.Name {
-
-    /// Posted when device detects RFC1918 vulnerable Wifi
-    static let DeviceDidConnectToRFC1918VulnerableWifi: Notification.Name = Notification.Name("DeviceDidConnectToRFC1918VulnerableWifi")
-
-    /// Posted when device detects RFC1918 compliant Wifi
-    static let DeviceDidConnectToRFC1918CompliantWifi: Notification.Name = Notification.Name("DeviceDidConnectToRFC1918CompliantWifi")
 }

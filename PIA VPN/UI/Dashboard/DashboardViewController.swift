@@ -100,8 +100,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    private var shouldReconnect = false
-
     private var connectionTimer: Timer?
 
     private func getOrUpdateConnectionTime(isConnected: Bool) -> TimeInterval? {
@@ -281,9 +279,6 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
-        nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         nc.addObserver(self, selector: #selector(handleDismissModal), name: .PIADashboardShouldDismissModal, object: nil)
     }
@@ -780,84 +775,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    @objc func connectionVPNStatusDidChange(_ notification: Notification? = nil) {
-        guard let connection = notification?.object as? NEVPNConnection else { return }
-
-        switch connection.status {
-        case .connected:
-            if !Client.providers.vpnProvider.isVPNConnected {
-                handleNonCompliantWifiConnection()
-            }
-        case .disconnected:
-
-            let state = UIApplication.shared.applicationState
-
-            // Only remove the notification if the app is on the foreground
-            if state == .active {
-                removeNonCompliantWifiLocalNotification()
-            }
-
-            if shouldReconnect {
-                Client.providers.vpnProvider.connect { _ in }
-                shouldReconnect = false
-            }
-        default:
-            break
-        }
-    }
-
-    @objc func checkConnectToRFC1918VulnerableWifi(_ notification: Notification? = nil) {
-        guard Client.providers.vpnProvider.isVPNConnected else { return }
-
-        handleNonCompliantWifiConnection()
-    }
-
-    @objc func handleDidConnectToRFC1918CompliantWifi(_ notification: Notification) {
-        // Remove non compliant wifi notification if it was present in notification center
-        removeNonCompliantWifiLocalNotification()
-
-        // Remove leak protection alert when connecting to a compliant Wi-Fi
-        removeLeakProtectionAlert()
-    }
-
-    private func handleNonCompliantWifiConnection() {
-        guard WifiNetworkMonitor().isConnected() else { return }
-
-        guard
-            Client.preferences.currentRFC1918VulnerableWifi != nil
-                || WifiNetworkMonitor().checkForRFC1918Vulnerability()
-        else { return }
-
-        guard AppPreferences.shared.showLeakProtectionNotifications else { return }
-
-        let currentRFC1918VulnerableWifiName = Client.preferences.currentRFC1918VulnerableWifi ?? ""
-
-        let selectedProtocol = Client.preferences.vpnType.vpnProtocol
-        let isWireguardSelected = selectedProtocol == KapePlatformSDKVPNType.wireGuard.rawValue.vpnProtocol
-        let isOpenVPNSelected = selectedProtocol == KapePlatformSDKVPNType.openVPN.rawValue.vpnProtocol
-
-        guard !isWireguardSelected,
-            !isOpenVPNSelected
-        else {
-            DispatchQueue.main.async {
-                self.presentNonCompliantWireguardWifiAlert()
-                self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
-            }
-
-            return
-        }
-
-        guard
-            Client.preferences.allowLocalDeviceAccess
-                && Client.preferences.leakProtection
-        else { return }
-
-        DispatchQueue.main.async {
-            self.presentNonCompliantWifiAlert()
-            self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
-        }
-    }
-
     @objc func presentForceUpdate() {
         #if !STAGING
             let forceUpdate = ForceUpdateViewController()
@@ -889,137 +806,6 @@ final class DashboardViewController: AutolayoutViewController {
         } else {
             completion?()
         }
-    }
-
-    //MARK: Non compliant Wifi alert
-
-    private struct WifiAlertAction {
-        let title: String
-        let style: UIAlertAction.Style
-        let action: ((UIAlertAction) -> Void)?
-    }
-
-    private func showNonCompliantWifiAlert(title: String, message: String, actions: [WifiAlertAction]) {
-        guard let presenter = RootCoordinator.shared.topPresentedViewController() else { return }
-
-        if let alertController = presenter as? UIAlertController, alertController.title == title { return }
-
-        let sheet = Macros.alertController(title, message)
-
-        for action in actions {
-            let alertAction = UIAlertAction(
-                title: action.title,
-                style: action.style,
-                handler: action.action)
-            sheet.addAction(alertAction)
-        }
-
-        presenter.present(sheet, animated: true, completion: nil)
-    }
-
-    private func presentNonCompliantWifiAlert() {
-        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-        let message = L10n.Dashboard.Vpn.Leakprotection.Alert.message
-
-        var alertActions = [WifiAlertAction]()
-        let reconnectAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta1,
-            style: .default,
-            action: handleDisconnectAndReconnectAction)
-        alertActions.append(reconnectAction)
-
-        let learnMoreAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
-            style: .default,
-            action: handleLearnMoreAction)
-        alertActions.append(learnMoreAction)
-
-        let cancelAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
-            style: .cancel,
-            action: nil)
-        alertActions.append(cancelAction)
-
-        showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
-    }
-
-    private func presentNonCompliantWireguardWifiAlert() {
-        let title = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-        let message = L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.message
-
-        var alertActions = [WifiAlertAction]()
-        let reconnectAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Ikev2.Alert.cta1,
-            style: .default,
-            action: handleSwitchProtocolAction)
-        alertActions.append(reconnectAction)
-
-        let learnMoreAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta2,
-            style: .default,
-            action: handleLearnMoreAction)
-        alertActions.append(learnMoreAction)
-
-        let cancelAction = WifiAlertAction(
-            title: L10n.Dashboard.Vpn.Leakprotection.Alert.cta3,
-            style: .cancel,
-            action: nil)
-        alertActions.append(cancelAction)
-
-        showNonCompliantWifiAlert(title: title, message: message, actions: alertActions)
-    }
-
-    private func handleDisconnectAndReconnectAction(_ action: UIAlertAction) {
-        Client.preferences.allowLocalDeviceAccess = false
-        Client.providers.vpnProvider.disconnect { _ in
-            self.shouldReconnect = true
-        }
-    }
-
-    private func handleLearnMoreAction(_ action: UIAlertAction) {
-        let application = UIApplication.shared
-        let learnMoreURL = AppConstants.Web.leakProtectionURL
-
-        if application.canOpenURL(learnMoreURL) {
-            application.open(learnMoreURL)
-        }
-    }
-
-    private func handleSwitchProtocolAction(_ action: UIAlertAction) {
-        let editable = Client.preferences.editable()
-        // Both arms used to pick a legacy profile; automatic negotiation is the default now,
-        // on Mac Catalyst as well as iOS.
-        editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
-        let action = editable.requiredVPNAction()
-        editable.commit()
-
-        Client.preferences.leakProtection = true
-        Client.preferences.allowLocalDeviceAccess = false
-
-        action?.execute { _ in
-            self.shouldReconnect = true
-        }
-    }
-
-    func showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: String) {
-        // 1. Remove previous non-compliant wifi notification
-        removeNonCompliantWifiLocalNotification()
-
-        // 2. Show the local notification for the current non-compliant wifi
-        Macros.showLocalNotificationIfNotAlreadyPresent(NotificationCategory.nonCompliantWifi, type: NotificationCategory.nonCompliantWifi, body: L10n.LocalNotification.NonCompliantWifi.text, title: L10n.LocalNotification.NonCompliantWifi.title(currentRFC1918VulnerableWifiName), delay: 0)
-    }
-
-    private func removeNonCompliantWifiLocalNotification() {
-        // Remove non compliant wifi notification if it was present in notification center
-        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
-    }
-
-    private func removeLeakProtectionAlert() {
-        guard let presentedLeakProtectionAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController,
-            presentedLeakProtectionAlert.title == L10n.Dashboard.Vpn.Leakprotection.Alert.title
-        else { return }
-
-        presentedLeakProtectionAlert.dismiss(animated: true)
     }
 
     // MARK: Helpers
