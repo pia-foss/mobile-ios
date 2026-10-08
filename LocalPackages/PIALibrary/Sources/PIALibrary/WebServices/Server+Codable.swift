@@ -52,7 +52,6 @@ extension Server: Codable {
         let ovpnudp: [ServerAddressIP]?
         let wg: [ServerAddressIP]?
         let awg: [ServerAddressIP]?
-        let ikev2: [ServerAddressIP]?
     }
 
     public convenience init(from decoder: Decoder) throws {
@@ -79,7 +78,6 @@ extension Server: Codable {
         var ovpnUDP: [ServerAddressIP]?
         var wg: [ServerAddressIP]?
         var awg: [ServerAddressIP]?
-        var ikev2: [ServerAddressIP]?
 
         if let serverAddresses = try? container.decode(ServerAddresses.self, forKey: .servers) {
             meta = serverAddresses.meta?.last
@@ -87,7 +85,6 @@ extension Server: Codable {
             ovpnUDP = serverAddresses.ovpnudp
             wg = serverAddresses.wg
             awg = serverAddresses.awg
-            ikev2 = serverAddresses.ikev2
         }
 
         self.init(
@@ -99,7 +96,6 @@ extension Server: Codable {
             openVPNAddressesForUDP: ovpnUDP,
             wireGuardAddressesForUDP: wg,
             amneziaAddressesForUDP: awg,
-            iKEv2AddressesForUDP: ikev2,
             pingAddress: pingAddress,
             geo: geo,
             offline: offline,
@@ -142,8 +138,7 @@ extension Server: Codable {
             ovpntcp: openVPNAddressesForTCP,
             ovpnudp: openVPNAddressesForUDP,
             wg: wireGuardAddressesForUDP,
-            awg: amneziaAddressesForUDP,
-            ikev2: iKEv2AddressesForUDP,
+            awg: amneziaAddressesForUDP
         )
         try container.encode(serverAddresses, forKey: .servers)
     }
