@@ -12,7 +12,7 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
-class PIACardsViewController: UIViewController {
+final class PIACardsViewController: UIViewController {
 
     private var cards: [Card]!
     private var slides: [PIACard] = []
