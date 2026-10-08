@@ -70,14 +70,14 @@ TestFlight. It is never reachable in a production App Store build. On iOS/Cataly
 observer and the Catalyst menu bar item; tvOS keeps an equivalent check in `View+DebugMenu.swift`.
 
 ```swift
-#if DEVELOPMENT || STAGING
+#if DEBUG || STAGING
     return true
 #else
     return TestFlightDetector.isTestFlight
 #endif
 ```
 
-Note that this check **cannot live in this package**. `DEVELOPMENT` and `STAGING` are
+Note that this check **cannot live in this package**. `DEBUG` and `STAGING` are
 `SWIFT_ACTIVE_COMPILATION_CONDITIONS` set by `Resources/Configurations/*.xcconfig` on the app
 targets, and Xcode does not propagate those conditions to local Swift packages. A copy here would
 compile both branches away and leave the menu reachable only under TestFlight — so the gate stays in

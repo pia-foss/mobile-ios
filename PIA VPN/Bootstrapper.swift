@@ -74,7 +74,7 @@ final class Bootstrapper {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
 
-            #if DEVELOPMENT || STAGING
+            #if DEBUG || STAGING
                 handler.logLevel = .debug
             #else
                 handler.logLevel = .info
@@ -91,8 +91,8 @@ final class Bootstrapper {
         // Load the database first
         Client.database = Client.Database(group: AppConstants.appGroup)
 
-        // Force enable debug logging for DEVELOPMENT and STAGING builds
-        #if DEVELOPMENT || STAGING
+        // Force enable debug logging for DEBUG and STAGING builds
+        #if DEBUG || STAGING
             Client.preferences.debugLogging = true
         #endif
 

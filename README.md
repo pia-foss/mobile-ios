@@ -103,12 +103,10 @@ The project uses three build configurations, each with iOS and tvOS variants:
 
 | Scheme | Endpoints | Use for |
 |--------|-----------|---------|
-| `PIA VPN Development` | Production | Local development |
+| `PIA VPN` | Production | Release builds and local development |
 | `PIA VPN Staging` | Staging | Staging environment testing |
-| `PIA VPN Release` | Production | Release builds |
-| `PIA VPN-tvOS Development` | Production | tvOS local development |
+| `PIA VPN-tvOS` | Production | tvOS release builds and local development |
 | `PIA VPN-tvOS Staging` | Staging | tvOS staging environment testing |
-| `PIA VPN-tvOS Release` | Production | tvOS release builds |
 
 ## Testing
 
