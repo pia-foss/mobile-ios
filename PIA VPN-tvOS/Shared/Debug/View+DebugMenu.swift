@@ -22,7 +22,7 @@ private struct DebugMenuModifier: ViewModifier {
     }
 
     private var isEnabled: Bool {
-        #if DEVELOPMENT || STAGING
+        #if DEBUG || STAGING
             return true
         #else
             return TestFlightDetector.isTestFlight

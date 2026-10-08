@@ -46,15 +46,8 @@ struct AppConfiguration {
         }
     }
 
-    struct VPN {
-        static let profileName: String = {
-            var name = "Private Internet Access"
-            #if DEVELOPMENT
-                name += " (DEV)"
-            #endif
-            return name
-        }()
-
+    enum VPN {
+        static let profileName: String = "Private Internet Access"
     }
 
     struct ClientConfiguration {

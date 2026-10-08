@@ -63,21 +63,12 @@ fastlane and xcode cloud are used for ci/cd
 - Homebrew: `swiftgen`, `go`
 - `gem install bundler && bundle install`
 
-**Build Configurations** (defined in `Resources/Configurations/`):
-- **Development** - Local development with DEVELOPMENT flag, debug logging enabled
-- **Staging** - Staging environment with STAGING flag, debug logging enabled
-- **Release** - Production build, no development flags
-
 **Schemes** (PIA VPN target with different configurations):
-- **`PIA VPN Development`** - Development configuration (use for local testing)
-- **`PIA VPN Staging`** - Staging configuration (staging endpoints)
-- **`PIA VPN Release`** - Release configuration (production)
-- `PIA VPN-tvOS` - tvOS production
-- `PIALibrary`, `PIADesignSystem` - Package development
+- `PIA VPN` iOS Production endpoints. Has DEBUG flag when building locally. No special flag when archiving.
+- `PIA VPN Staging` iOS Staging endpoints. Has STAGING flag.
+- `PIA VPN-tvOS` tvOS production
 
-**Compilation Flags**:
-- `DEVELOPMENT` - Set for Development configuration via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
-- `STAGING` - Set for Staging configuration via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
+Build configurations found in @Resources/Configurations/
 
 ## Common Commands
 
@@ -109,18 +100,17 @@ bundle exec fastlane certificates
 swiftgen config run --config swiftgen.yml        # Regenerate type-safe resources
 
 # Direct xcodebuild
-xcodebuild build -scheme "PIA VPN Development" -configuration Development -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild build -scheme "PIA VPN" -configuration Release -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild test -scheme "PIA VPN" -configuration Release -destination "platform=iOS Simulator,name=iPhone 17 Pro"
 xcodebuild build -scheme "PIA VPN Staging" -configuration Staging -destination "platform=iOS Simulator,name=iPhone 17 Pro"
-xcodebuild build -scheme "PIA VPN Release" -configuration Release -destination "platform=iOS Simulator,name=iPhone 17 Pro"
-xcodebuild test -scheme "PIA VPN Development" -configuration Development -destination "platform=iOS Simulator,name=iPhone 17 Pro"
 ```
 
 ## Code Guidelines
 
 **Build Configurations**:
-- Use `PIA VPN Development` scheme for local development (DEVELOPMENT flag set)
+
+- Use `PIA VPN` scheme for production builds (DEBUG flag set when building locally)
 - Use `PIA VPN Staging` scheme for staging environment testing (STAGING flag set)
-- Use `PIA VPN Release` scheme for production builds
 - **Debug Logging**: Automatically enabled and locked ON for Development and Staging builds (set in `Bootstrapper.swift`), user-controllable for Release builds
 
 **Testing**: New features → PIA VPNTests for iOS, Mock providers available in PIALibrary
@@ -200,4 +190,4 @@ Requires special Apple entitlement. If unavailable:
 - Compilation flags set via `SWIFT_ACTIVE_COMPILATION_CONDITIONS`
 - Base URL and bundle identifier configured per environment in xcconfig
 
-**Development Flow**: Use `PIA VPN Development` scheme for local testing, `PIA VPN Staging` for staging environment testing
+**Development Flow**: Use `PIA VPN` scheme for local testing, `PIA VPN Staging` for staging environment testing
