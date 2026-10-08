@@ -25,6 +25,7 @@ import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
 import UIKit
+import WidgetKit
 
 private let log = PIALogger.logger(for: SceneDelegate.self)
 
@@ -134,7 +135,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     @discardableResult
     private func handle(url: URL) -> Bool {
-        log.debug("Opened app from URL: \(url)")
+        log.debug("Opened app from URL: \(url.absoluteString.prefix { $0 != "?" })")
 
         if url.absoluteString.starts(with: AppConstants.MagicLink.url) {
 
@@ -157,6 +158,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             signupCoordinator.handleMagicLink(token: token)
 
         } else if url.absoluteString.starts(with: AppConstants.Widget.connect), #unavailable(iOS 17) {
+            guard WidgetConnectToken().consume(from: url) else {
+                log.warning("Ignoring widget connect URL without a valid token")
+                return false
+            }
+            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+
             if Client.providers.vpnProvider.isVPNConnected {
                 disconnectAfter(milliseconds: defaultMilliseconds)
             } else {
