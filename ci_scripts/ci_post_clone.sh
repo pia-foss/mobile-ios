@@ -86,8 +86,11 @@ fi
 
 echo "Updating version in the project and Info.plist files..."
 
-# We need to set the marketing version for the project and all dependencies.
-xcrun agvtool new-marketing-version "$version_number"
+# Set the marketing version in the project. `agvtool` only understands the
+# legacy project.pbxproj, so use the project-format aware script instead. Some
+# dependencies aren't reachable from the project definition, so we also update
+# their Info.plist files below.
+ruby ./scripts/set_project_version.rb --marketing "$version_number"
 
 # As some dependencies are not reachable from the project definition, we manually update Info.plist files
 find "PIA VPN" "PIA VPN-tvOS" "PIA VPN AdBlocker" "PlatformSDK-Tunnel" "PIAWidget" "PIA VPNTests" "PIA VPN-tvOSTests" "PIA VPNUITests" -name '*Info.plist' | \
