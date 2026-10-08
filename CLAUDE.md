@@ -30,7 +30,7 @@ fastlane and xcode cloud are used for ci/cd
 
 **Provider Pattern (Core)**: Protocol-based services accessed via `Client.providers.*`
 - `AccountProvider` - Authentication, subscriptions
-- `VPNProvider` - VPN connection (IKEv2/OpenVPN/WireGuard)
+- `VPNProvider` - VPN connection (OpenVPN/WireGuard)
 - `ServerProvider` - Server list, region management
 - `InAppProvider` - Purchase handling
 

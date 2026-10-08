@@ -47,9 +47,6 @@ public struct ServersBundle: Sendable {
         /// The available ports for WireGuard.
         public let wgPorts: Ports
 
-        /// The available ports for IKEv2.
-        public let ikev2Ports: Ports
-
         /// Deprecated
         let latestVersion: Int
 

@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "Jaarlijks";
 "tiles.subscription.days.left" = "(Nog %d dagen)";
 "tiles.usage.title" = "Gebruik";
-"tiles.usage.ipsec.title" = "GEBRUIK (niet beschikbaar op IKEv2)";
 "tiles.usage.upload" = "Uploaden";
 "tiles.usage.download" = "Downloaden";
 "tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";

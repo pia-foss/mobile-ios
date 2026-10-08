@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "연간";
 "tiles.subscription.days.left" = "(%d일 남음)";
 "tiles.usage.title" = "사용 현황";
-"tiles.usage.ipsec.title" = "사용 현황 (IKEv2에서는 사용 불가)";
 "tiles.usage.upload" = "업로드";
 "tiles.usage.download" = "다운로드";
 "tiles.nmt.accessibility.trusted" = "신뢰할 수 있는 네트워크";

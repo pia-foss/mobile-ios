@@ -46,26 +46,6 @@ class ServerConnectionTests: BaseTest {
             }
 
             context("when the user changes protocol type") {
-                it("should connect the user to vpn successfully when the user enables small packet for IPSec(IKEv2)") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.enableSmallPackets()
-                    app.selectProtocol(protocolName: "IPSec (IKEv2)")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-
-                it("should connect the user to vpn successfully when the user disables small packet for IPSec(IKEv2)") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.disableSmallPackets()
-                    app.selectProtocol(protocolName: "IPSec (IKEv2)")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-
                 it("should connect the user to vpn successfully when the user enables small packet for Wireguard") {
                     app.disconnectToVPN()
                     app.navigateToProtocolSettings()

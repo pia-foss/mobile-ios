@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "Årligt";
 "tiles.subscription.days.left" = "(%d dage tilbage)";
 "tiles.usage.title" = "Brug";
-"tiles.usage.ipsec.title" = "BRUG (Ikke tilgængelig på IKEv2)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
 "tiles.nmt.accessibility.trusted" = "Betroet netværk";

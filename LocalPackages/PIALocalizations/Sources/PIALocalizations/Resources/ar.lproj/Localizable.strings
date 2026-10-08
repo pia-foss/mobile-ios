@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "سنويًا";
 "tiles.subscription.days.left" = "(متبقي %d أيام)";
 "tiles.usage.title" = "الاستخدام";
-"tiles.usage.ipsec.title" = "(غير متاح على IKEv2)";
 "tiles.usage.upload" = "تحميل";
 "tiles.usage.download" = "تنزيل";
 "tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
