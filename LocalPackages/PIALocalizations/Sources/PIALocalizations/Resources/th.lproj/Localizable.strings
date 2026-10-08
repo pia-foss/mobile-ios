@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "รายปี";
 "tiles.subscription.days.left" = "(เหลือ %d วัน)";
 "tiles.usage.title" = "การใช้งาน";
-"tiles.usage.ipsec.title" = "การใช้งาน (ไม่สามารถใช้ได้บน IKEv2)";
 "tiles.usage.upload" = "อัพโหลด";
 "tiles.usage.download" = "ดาวน์โหลด";
 "tiles.nmt.accessibility.trusted" = "เครือข่ายที่เชื่อถือ";

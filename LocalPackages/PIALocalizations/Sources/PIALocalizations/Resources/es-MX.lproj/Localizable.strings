@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "Anual";
 "tiles.subscription.days.left" = "(hace %d días)";
 "tiles.usage.title" = "Uso";
-"tiles.usage.ipsec.title" = "USO (No disponible en IKEv2)";
 "tiles.usage.upload" = "Subir";
 "tiles.usage.download" = "Descargar";
 "tiles.nmt.accessibility.trusted" = "Red fiable";

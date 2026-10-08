@@ -1597,10 +1597,6 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "tiles.usage.title", fallback: "Usage")
       /// Upload
       public static let upload = L10n.tr("Localizable", "tiles.usage.upload", fallback: "Upload")
-      public enum Ipsec {
-        /// USAGE (Not available on IKEv2)
-        public static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title", fallback: "USAGE (Not available on IKEv2)")
-      }
     }
   }
   public enum Today {

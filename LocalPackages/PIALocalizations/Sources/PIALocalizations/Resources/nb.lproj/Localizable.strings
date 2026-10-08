@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "Årlig";
 "tiles.subscription.days.left" = "(%d dager igjen)";
 "tiles.usage.title" = "Bruk";
-"tiles.usage.ipsec.title" = "BRUK (ikke tilgjengelig på IKEv2)";
 "tiles.usage.upload" = "Last opp";
 "tiles.usage.download" = "Last ned";
 "tiles.nmt.accessibility.trusted" = "Klarert nettverk";

@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "Yıllık";
 "tiles.subscription.days.left" = "(%d gün kaldı)";
 "tiles.usage.title" = "Kullanım";
-"tiles.usage.ipsec.title" = "KULLANIM (IKEv2 ile kullanılamaz)";
 "tiles.usage.upload" = "Yükle";
 "tiles.usage.download" = "İndir";
 "tiles.nmt.accessibility.trusted" = "Güvenilen ağ";

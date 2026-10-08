@@ -257,7 +257,6 @@
 "tiles.subscription.yearly" = "年繳";
 "tiles.subscription.days.left" = "（尚餘 %d 天）";
 "tiles.usage.title" = "使用狀況";
-"tiles.usage.ipsec.title" = "使用情況（無法用於 IKEv2）";
 "tiles.usage.upload" = "上傳";
 "tiles.usage.download" = "下載";
 "tiles.nmt.accessibility.trusted" = "信任網路";
