@@ -24,7 +24,7 @@ With the Private Internet Access VPN app for iOS and tvOS, you can access our ne
 ## Requirements
 
 - iOS 15.0+ / tvOS 17.0+
-- Xcode 26+
+- Xcode 27+
 - [Homebrew][dep-brew]
 - [SwiftGen][dep-swiftgen] (`brew install swiftgen`)
 - [Go][dep-golang] (`brew install go`, required to build WireGuard-Go in the vendored Kape Platform SDK)

@@ -1,6 +1,24 @@
 default_platform(:ios)
 import("./Certificates")
 
+# This project uses Xcode's JSON project format (project.xcproj). Apple's
+# `agvtool` - which fastlane's `increment_build_number` shells out to - only
+# understands the legacy project.pbxproj and silently does nothing here, so we
+# update the build number through scripts/set_project_version.rb instead.
+def set_project_build_number(number)
+  require "rbconfig"
+  require "shellwords"
+
+  script = [
+    "scripts/set_project_version.rb",
+    "../scripts/set_project_version.rb",
+    "../../scripts/set_project_version.rb"
+  ].map { |path| File.expand_path(path) }.find { |path| File.file?(path) }
+  UI.user_error!("Could not find scripts/set_project_version.rb") if script.nil?
+
+  sh("#{RbConfig.ruby.shellescape} #{script.shellescape} --build #{number.to_s.shellescape}")
+end
+
 platform :ios do
   # App Store Connect API credentials
   key_id = ENV['APP_STORE_CONNECT_KEY_ID']
@@ -486,9 +504,7 @@ platform :ios do
     build_number = latest_testflight_build_number(
       app_identifier: "com.privateinternetaccess.ios.PIA-VPN"
     )
-    increment_build_number(
-      build_number: build_number + 1 
-    )
+    set_project_build_number(build_number + 1)
   end
 end
 
@@ -509,9 +525,7 @@ desc "This line is for creating testflight build for tvOS"
       app_identifier: "com.privateinternetaccess.ios.PIA-VPN",
       platform: "appletvos"
     )
-    increment_build_number(
-      build_number: build_number + 1 
-    )
+    set_project_build_number(build_number + 1)
     
     build_app(scheme: "PIA VPN-tvOS Release",
       export_method: "app-store",
