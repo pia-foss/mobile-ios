@@ -333,6 +333,9 @@
           "product-name": "PIAFavorites",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAForceUpdate",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIALibrary",
           "build-phase": { "build-phase": "frameworks" },
         }, {

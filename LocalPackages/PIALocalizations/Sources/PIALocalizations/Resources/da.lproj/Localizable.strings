@@ -520,7 +520,7 @@
 "forceupdate.label.title" = "Opgrader din oplevelse";
 "forceupdate.label.subtitle" = "Du bruger en ældre version af PIA. Opdater din app nu for at få en forbedret oplevelse med alle de nyeste funktioner.";
 "forceupdate.button.update" = "Opdater nu";
-"forceupdate.label.vpn.connected" = "Hvis vælger “Opdater nu”, afbrydes din VPN.";
+"forceupdate.label.vpn.connected" = "Opdateringen afbryder midlertidigt din VPN.";
 
 "global.version.format" = "Version %@ (%@)";
 
