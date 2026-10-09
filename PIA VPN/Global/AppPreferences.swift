@@ -772,7 +772,7 @@ final class AppPreferences {
 
     //    + (void)eraseForTesting;
     #if os(iOS)
-        func transitionTheme(to code: ThemeCode, withDuration duration: Double = AppConfiguration.Animations.duration) {
+        func transitionTheme(to code: ThemeCode, in window: UIWindow?, withDuration duration: Double = AppConfiguration.Animations.duration) {
             guard !isTransitioningTheme else {
                 return
             }
@@ -781,8 +781,10 @@ final class AppPreferences {
             }
 
             AppPreferences.shared.currentThemeCode = code
-            guard let window = UIApplication.shared.windows.first else {
-                log.error("No window available for theme transition")
+            guard let window else {
+                // Nothing on screen to fade, but the theme must still match the saved code or a
+                // later reload would see no change and skip it.
+                code.apply(theme: Theme.current, reload: true)
                 return
             }
             isTransitioningTheme = true
@@ -802,13 +804,15 @@ final class AppPreferences {
         }
 
         //MARK: Dark Mode
-        public func reloadTheme(withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
-            DispatchQueue.main.async {
-                switch UITraitCollection.current.userInterfaceStyle {
+        public func reloadTheme(in view: UIView, withAnimationDuration duration: Double = AppConfiguration.Animations.duration) {
+            DispatchQueue.main.async { [weak view] in
+                guard let view else { return }
+                let window = view as? UIWindow ?? view.window
+                switch view.traitCollection.userInterfaceStyle {
                 case .dark:
-                    AppPreferences.shared.transitionTheme(to: .dark, withDuration: duration)
+                    AppPreferences.shared.transitionTheme(to: .dark, in: window, withDuration: duration)
                 default:
-                    AppPreferences.shared.transitionTheme(to: .light, withDuration: duration)
+                    AppPreferences.shared.transitionTheme(to: .light, in: window, withDuration: duration)
                 }
             }
         }

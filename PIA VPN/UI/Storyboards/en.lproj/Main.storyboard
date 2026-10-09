@@ -863,14 +863,14 @@
                                     <constraint firstItem="Azf-f1-8fS" firstAttribute="top" secondItem="1MA-tt-PhN" secondAttribute="top" id="WD1-dz-FMO"/>
                                     <constraint firstItem="1MA-tt-PhN" firstAttribute="leading" secondItem="R8e-Ar-VG6" secondAttribute="leadingMargin" id="Yfu-PR-2PB"/>
                                     <constraint firstItem="Azf-f1-8fS" firstAttribute="leading" secondItem="R8e-Ar-VG6" secondAttribute="leadingMargin" id="cMc-Tj-r1f"/>
-                                    <constraint firstItem="Azf-f1-8fS" firstAttribute="leading" secondItem="1MA-tt-PhN" secondAttribute="trailing" constant="5" id="h4j-AQ-HUo"/>
+                                    <constraint firstItem="1MA-tt-PhN" firstAttribute="leading" secondItem="Azf-f1-8fS" secondAttribute="trailing" constant="5" id="h4j-AQ-HUo"/>
                                     <constraint firstItem="Azf-f1-8fS" firstAttribute="bottom" secondItem="1MA-tt-PhN" secondAttribute="bottom" id="zXd-hg-iLn"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="EPo-Bm-l0R"/>
+                                        <exclude reference="PuB-Jp-U1f"/>
                                         <exclude reference="SA3-u0-ZRt"/>
-                                        <exclude reference="cMc-Tj-r1f"/>
+                                        <exclude reference="Yfu-PR-2PB"/>
                                         <exclude reference="Dp1-9r-6fw"/>
                                         <exclude reference="h4j-AQ-HUo"/>
                                         <exclude reference="zXd-hg-iLn"/>
@@ -888,8 +888,8 @@
                                 </variation>
                                 <variation key="heightClass=regular">
                                     <mask key="constraints">
-                                        <include reference="EPo-Bm-l0R"/>
-                                        <include reference="cMc-Tj-r1f"/>
+                                        <include reference="PuB-Jp-U1f"/>
+                                        <include reference="Yfu-PR-2PB"/>
                                         <include reference="Dp1-9r-6fw"/>
                                         <include reference="FcF-Mk-McK"/>
                                     </mask>
@@ -942,7 +942,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNK-Ry-Knm">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNK-Ry-Knm">
                                             <rect key="frame" x="24" y="48.666666666666664" width="336" height="12.666666666666664"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="pqu-Kk-BvJ">

@@ -82,9 +82,7 @@ final class RootCoordinator: NSObject {
 
     private func configureMacCatalystWindow(for window: UIWindow) {
         #if targetEnvironment(macCatalyst)
-            let windowScene =
-                window.windowScene
-                ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let windowScene = window.windowScene
 
             if let titlebar = windowScene?.titlebar {
                 titlebar.titleVisibility = .hidden
@@ -123,7 +121,7 @@ final class RootCoordinator: NSObject {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        if UserInterface.isIpadOrMac {
+        if window?.traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
             let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
             let split = AdaptiveSplitViewController(style: .doubleColumn)
             split.preferredDisplayMode = .oneBesideSecondary

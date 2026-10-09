@@ -668,8 +668,8 @@ public class Theme {
     }
 
     /// :nodoc:
-    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
-        return strategy.autolayoutContainerMargins(for: mask)
+    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask, traitCollection: UITraitCollection) -> UIEdgeInsets {
+        return strategy.autolayoutContainerMargins(for: mask, traitCollection: traitCollection)
     }
 
     // MARK: Navigation bar
@@ -719,7 +719,7 @@ public class Theme {
                     var updatedFrame = navigationBar.bounds
                     updatedFrame.size.height += navigationBar.frame.origin.y
                     let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: barTintColors)
-                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage())
+                    navigationBar.setBackgroundAppearenceImage(gradientLayer.createGradientImage(), colorAboveBar: barTintColors.first)
                 }
             } else {
                 navigationBar.setBackgroundAppearenceColor(self.palette.principalBackground)
@@ -791,9 +791,10 @@ public protocol ThemeStrategy {
      Returns a set of margins to apply to `AutolayoutViewController.viewContainer` in a specific orientation mask.
 
      - Parameter mask: The current `UIInterfaceOrientationMask`.
+     - Parameter traitCollection: The trait collection of the view controller being laid out.
      - Returns: The desired `UIEdgeInsets` margins to apply to `AutolayoutViewController.viewContainer`.
      */
-    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets
+    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask, traitCollection: UITraitCollection) -> UIEdgeInsets
 }
 
 private struct DefaultThemeStrategy: ThemeStrategy {
@@ -811,7 +812,7 @@ private struct DefaultThemeStrategy: ThemeStrategy {
         return .lightContent
     }
 
-    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask) -> UIEdgeInsets {
+    func autolayoutContainerMargins(for mask: UIInterfaceOrientationMask, traitCollection: UITraitCollection) -> UIEdgeInsets {
         return .zero
     }
 }
