@@ -38,6 +38,7 @@ extension WelcomeBack {
         case restoreSucceeded(AccountBox)
         case restoreFailed
         case usernameAndPasswordTapped
+        case closeTapped
     }
 
     public struct Dependencies {

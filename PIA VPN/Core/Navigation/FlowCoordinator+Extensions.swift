@@ -22,9 +22,28 @@
 import CoreArchitecture
 
 extension FlowCoordinator where Output == Void {
+    /// Start a coordinator that returns nothing (`Void`) and wait for it to finish.
+    ///
+    /// The coordinator should finish the `output` stream.
     @MainActor
     func startAsync() async {
         start()
         for await _ in output.values {}
+    }
+}
+
+extension FlowCoordinator {
+    /// Start a coordinator that returns something and wait for it to finish.
+    ///
+    /// The coordinator should emit zero or one values and finish the `output` stream.
+    /// Multiple emited values are omitted and only the last one is returned, or `nil`.
+    @MainActor
+    func startAsync() async -> Output? {
+        var res: Output?
+        start()
+        for await output in output.values {
+            res = output
+        }
+        return res
     }
 }

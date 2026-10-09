@@ -49,12 +49,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
 
     private let subject = PassthroughSubject<Output, Never>()
 
-    /// Retained so welcome-back can hand the screen back to it with its plans already fetched.
-    private var paywallHost: SignupPaywallHostingController?
-
-    private var welcomeBackCoordinator: WelcomeBackCoordinator?
-    private var welcomeBackCancellables = Set<AnyCancellable>()
-
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
     /// What the host installs as its root or presents modally. A navigation controller, because the
@@ -88,7 +82,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
                 legal: legalLinks
             )
         )
-        paywallHost = host
 
         // The delegate below owns the bar across pushes and pops, so no push site has to.
         navigationController.delegate = self
@@ -104,28 +97,20 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
             accountProvider: accountProvider,
             store: Client.store,
             showLogin: { [weak self] in self?.showLogin() },
-            showPaywall: { [weak self] in self?.restorePaywallRoot() }
+            showPaywall: { [weak self] in self?.returnToPaywall() }
         )
-        welcomeBackCoordinator = coordinator
 
-        coordinator.output
-            .sink { [weak self] output in self?.handle(output) }
-            .store(in: &welcomeBackCancellables)
-
-        coordinator.start()
+        Task { @MainActor [weak self] in
+            if let output = await coordinator.startAsync() {
+                self?.handle(output)
+            }
+        }
     }
 
-    /// Where welcome-back leaves the flow when there is nothing to restore, or a restore fails.
+    /// Dismiss all pushed view controllers and return to the paywall.
     @MainActor
-    private func restorePaywallRoot() {
-        guard let paywallHost else { return }
-        navigationController.setViewControllers([paywallHost], animated: false)
-        endWelcomeBack()
-    }
-
-    private func endWelcomeBack() {
-        welcomeBackCancellables.removeAll()
-        welcomeBackCoordinator = nil
+    private func returnToPaywall() {
+        navigationController.popToRootViewController(animated: true)
     }
 
     /// Signs in from a magic-link deep link.
@@ -174,7 +159,6 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
     private func handle(_ output: WelcomeBackCoordinator.Output) {
         switch output {
         case .didAuthenticate(let user):
-            endWelcomeBack()
             finish(user: user, isSignup: false)
         }
     }
