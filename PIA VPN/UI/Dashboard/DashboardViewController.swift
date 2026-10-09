@@ -82,6 +82,7 @@ final class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
+    private var foldHeaderWidth: CGFloat?
 
     private var currentStatus: VPNStatus = .disconnected {
         didSet {
@@ -235,8 +236,15 @@ final class DashboardViewController: AutolayoutViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        let fold = bookFoldFrame
+        updateFoldLayout(fold)
         // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
+        // With a fold the drawer covers one page.
+        if splitViewController == nil {
+            SideMenuManager.default.leftMenuNavigationController?.menuWidth =
+                fold?.minX ?? min(320.0, view.bounds.width - 44.0)
+        }
     }
 
     override func didRefreshOrientationConstraints() {
@@ -419,13 +427,66 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
+    // A book-style fold splitting the dashboard into two pages. The inactive fold of a fully open
+    // display counts too, so the layout is the same half-open and fully open.
+    private var bookFoldFrame: CGRect? {
+        // Isolated because reservedRegions fails to compile for Catalyst on the 27.1 seed SDK.
+        #if targetEnvironment(macCatalyst)
+            return nil
+        #else
+            guard #available(iOS 27.1, *) else { return nil }
+            let width = view.bounds.width
+            // The fold is a vertical division region: active while the device is folded, inactive
+            // (and zero-width) while it is flat.
+            let folds = view.reservedRegions(kind: .division, options: .includeInactive)
+                .filter { $0.frame.height > $0.frame.width }
+            // Prefer a fold that leaves two usable pages, but fall back to the active fold so the
+            // dashboard keeps the two-page layout half-open as well as fully open.
+            let twoPage = folds.filter { $0.frame.minX >= 320 && width - $0.frame.maxX >= 320 }
+            return (twoPage.first(where: \.isActive) ?? twoPage.first
+                ?? folds.first(where: \.isActive) ?? folds.first)?.frame
+        #endif
+    }
+
+    // Tiles on one page and the connect button on the other, using the storyboard's compact-height layout.
+    private func updateFoldLayout(_ fold: CGRect?) {
+        guard #available(iOS 17, *) else { return }
+        guard let fold, let container = viewContent.superview else {
+            foldHeaderWidth = nil
+            if traitOverrides.contains(UITraitVerticalSizeClass.self) {
+                traitOverrides.remove(UITraitVerticalSizeClass.self)
+            }
+            return
+        }
+
+        // The tiles end 5 pt before the header, so the header starts where the fold's margins start.
+        let foldFrame = container.convert(fold, from: view)
+        let margins = container.layoutMargins
+        let isRightToLeft = view.effectiveUserInterfaceLayoutDirection == .rightToLeft
+        foldHeaderWidth =
+            isRightToLeft
+            ? foldFrame.maxX - margins.left - 5
+            : container.bounds.width - margins.right - foldFrame.minX - 5
+        if !traitOverrides.contains(UITraitVerticalSizeClass.self) {
+            traitOverrides.verticalSizeClass = .compact
+        }
+    }
+
+    // Below 680 pt of usable height the header gives the difference to the tiles, keeping room for the
+    // 150 pt connect button.
+    private var stackedHeaderHeight: CGFloat {
+        let shortfall = max(0, 680 - view.safeAreaLayoutGuide.layoutFrame.height)
+        return max(180, viewContentHeight - shortfall)
+    }
+
     private func updateTileLayout() {
         UIView.animate(
             withDuration: AppConfiguration.Animations.duration,
             animations: {
                 self.toggleConnection.alpha = self.tileModeStatus == .normal ? 1 : 0
-                self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
-                self.viewContentLandscapeHeightConstraint.constant = self.tileModeStatus == .normal ? self.viewContentHeight : 0
+                self.viewContentHeightConstraint.constant = self.tileModeStatus == .normal ? self.stackedHeaderHeight : 0
+                self.viewContentLandscapeHeightConstraint.constant =
+                    self.tileModeStatus == .normal ? (self.foldHeaderWidth ?? self.viewContentHeight) : 0
                 self.view.layoutIfNeeded()
             })
         reloadTiles()
@@ -434,9 +495,9 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func presentLogin() {
 
-        // On iPad we swap the window root entirely instead of presenting login modally —
-        // the persistent sidebar/dashboard split view is replaced with the login flow.
-        if UserInterface.isIpadOrMac {
+        // On iPad and Mac the window root is swapped for the login flow; on iPhone, iPhone Duo
+        // included, login is presented modally over the dashboard.
+        if traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
             RootCoordinator.shared.setRoot(.login)
             if isUnauthorized {
                 Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
@@ -1109,7 +1170,7 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func reloadTheme() {
-        AppPreferences.shared.reloadTheme()
+        AppPreferences.shared.reloadTheme(in: view)
     }
 
     @objc private func updateCurrentStatusWithUserInfo(_ userInfo: [AnyHashable: Any]?) {

@@ -49,7 +49,7 @@ class BootstraperFactory {
         LoggingSystem.bootstrap { label in
             var handler = StreamLogHandler.standardOutput(label: label)
 
-            #if DEVELOPMENT || STAGING
+            #if DEBUG || STAGING
                 handler.logLevel = .debug
             #else
                 handler.logLevel = .info
@@ -70,8 +70,8 @@ class BootstraperFactory {
         Client.database = Client.Database(group: AppConstants.appGroup)
         Client.providers.serverProvider = ServerProviderFactory.makeDefaultServerProvider()
 
-        // Force enable debug logging for DEVELOPMENT and STAGING builds
-        #if DEVELOPMENT || STAGING
+        // Force enable debug logging for DEBUG and STAGING builds
+        #if DEBUG || STAGING
             Client.preferences.debugLogging = true
         #endif
     }

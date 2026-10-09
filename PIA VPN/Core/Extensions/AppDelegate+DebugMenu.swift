@@ -3,11 +3,11 @@ import PIADebugMenu
 import PIALibrary
 import SwiftUI
 
-/// Whether this build may expose the debug menu. Lives in the app target because `DEVELOPMENT` and
+/// Whether this build may expose the debug menu. Lives in the app target because `DEBUG` and
 /// `STAGING` are app-target compilation conditions that Xcode does not propagate to local packages.
 private enum DebugMenuAvailability {
     static var isEnabled: Bool {
-        #if DEVELOPMENT || STAGING
+        #if DEBUG || STAGING
             return true
         #else
             return TestFlightDetector.isTestFlight
