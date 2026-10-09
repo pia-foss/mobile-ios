@@ -38,8 +38,6 @@ internal enum StoryboardScene {
 
     internal static let gdprViewController = SceneType<GDPRViewController>(storyboard: Self.self, identifier: "GDPRViewController")
 
-    internal static let shareDataInformationViewController = SceneType<ShareDataInformationViewController>(storyboard: Self.self, identifier: "ShareDataInformationViewController")
-
     internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Self.self, identifier: "SignupSuccessViewController")
   }
   internal enum Welcome: StoryboardType {
