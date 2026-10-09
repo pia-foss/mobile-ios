@@ -75,12 +75,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/Orderella/PopupDialog.git",
-      "version": {
-        "branch": "master",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/pointfreeco/swift-snapshot-testing",
       "version": {
         "version": "1.19.6",
@@ -393,10 +387,6 @@
         }, {
           "package": "Popover",
           "product-name": "Popover",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "PopupDialog",
-          "product-name": "PopupDialog",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "SideMenu",

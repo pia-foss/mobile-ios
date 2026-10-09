@@ -193,7 +193,7 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
             return
         }
 
-        let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
+        let sheet = Macros.alert(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
         sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         present(sheet, animated: true)
     }

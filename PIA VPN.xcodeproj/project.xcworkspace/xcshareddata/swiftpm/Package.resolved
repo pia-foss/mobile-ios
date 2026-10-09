@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "dynamicblurview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/KyoheiG3/DynamicBlurView.git",
-      "state" : {
-        "revision" : "d69b09d70a689dc7b8ea6aa6de3e63f9e6c545ce",
-        "version" : "5.0.5"
-      }
-    },
-    {
       "identity" : "dznemptydataset",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dzenbot/DZNEmptyDataSet.git",
@@ -97,15 +88,6 @@
       "state" : {
         "branch" : "master",
         "revision" : "3674e94551307502995f363681b6b51e93fcdf3e"
-      }
-    },
-    {
-      "identity" : "popupdialog",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Orderella/PopupDialog.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "d41ac7c7fa7b940c355490281ea8b2fc39c8f599"
       }
     },
     {
