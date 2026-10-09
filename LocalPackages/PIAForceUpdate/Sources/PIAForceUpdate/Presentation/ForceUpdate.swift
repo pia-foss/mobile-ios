@@ -1,0 +1,56 @@
+//
+//  ForceUpdate.swift
+//  PIAForceUpdate
+//
+//  Copyright © 2026 Private Internet Access, Inc.
+//
+//  This file is part of the Private Internet Access iOS Client.
+//
+//  The Private Internet Access iOS Client is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The Private Internet Access iOS Client is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with the Private
+//  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+import Foundation
+
+public enum ForceUpdate {}
+
+extension ForceUpdate {
+
+    public struct State: Equatable {
+        /// Drives the "updating will disconnect the VPN" hint.
+        public var isVPNConnected: Bool
+
+        public init(isVPNConnected: Bool = false) {
+            self.isVPNConnected = isVPNConnected
+        }
+    }
+
+    public enum Action {
+        case onAppear
+        case vpnStatusLoaded(isConnected: Bool)
+        case updateTapped
+    }
+
+    /// The screen has no outputs: it blocks the app until the person installs the update.
+    public struct Dependencies: Sendable {
+        public var isVPNConnected: @MainActor () -> Bool
+        public var update: @MainActor () -> Void
+
+        public init(
+            isVPNConnected: @MainActor @escaping () -> Bool,
+            update: @MainActor @escaping () -> Void
+        ) {
+            self.isVPNConnected = isVPNConnected
+            self.update = update
+        }
+    }
+}
