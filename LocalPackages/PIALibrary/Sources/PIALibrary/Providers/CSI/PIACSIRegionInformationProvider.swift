@@ -26,7 +26,6 @@ struct PIACSIRegionInformationProvider: CSIDataProvider {
                 openVPNAddressesForTCP: nil,
                 openVPNAddressesForUDP: nil,
                 wireGuardAddressesForUDP: nil,
-                iKEv2AddressesForUDP: nil,
                 pingAddress: nil,
                 geo: server.geo,
                 offline: server.offline,

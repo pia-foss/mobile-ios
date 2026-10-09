@@ -55,7 +55,6 @@ public final class ServiceQualityManager: NSObject {
     private enum KPIVpnProtocol: String {
         case ovpn = "OpenVPN"
         case wireguard = "WireGuard"
-        case ipsec = "IPSec"
     }
 
     /**
@@ -381,8 +380,7 @@ public final class ServiceQualityManager: NSObject {
     /// The protocol to report for this session.
     ///
     /// Prefers what the tunnel actually negotiated over what the user selected — under Automatic the
-    /// selection does not say which protocol ran. IKEv2 is no longer reportable: the `.ipsec` value
-    /// this used to emit is retired along with the protocol.
+    /// selection does not say which protocol ran. IKEv2 is no longer reportable.
     private func currentProtocol() -> KPIVpnProtocol {
         if let resolved = Client.providers.vpnProvider.actualConnection?.vpnType {
             switch resolved {

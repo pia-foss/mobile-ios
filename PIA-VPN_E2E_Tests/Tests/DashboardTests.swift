@@ -14,20 +14,6 @@ class DashboardTests: BaseTest {
 
         describe("dashboard tests") {
             context("updated dashboard connection settings") {
-                it("should update the connection details on dashboard, when the user sets up IPSec (IKEv2)") {
-                    app.navigateToProtocolSettings()
-                    app.selectProtocol(protocolName: "IPSec (IKEv2)")
-                    app.selectDataEncryption(dataEncryption: "AES-256-CBC")
-                    app.selectHandshake(handshake: "SHA96")
-                    app.navigateToHomeFromSettings()
-
-                    app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCollectionViewCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "IPSec (IKEv2)")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "AES-256-CBC")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "SHA96")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-
                 it("should update the connection details on dashboard, when the user sets up WireGuard®") {
                     app.navigateToProtocolSettings()
                     app.selectProtocol(protocolName: "WireGuard®")

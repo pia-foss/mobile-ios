@@ -475,9 +475,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             passwordReference: currentPasswordReference,
             server: targetServer,
             isOnDemand: isOnDemand,
-            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
-            leakProtection: accessedPreferences.leakProtection,
-            allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
+            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep
         )
     }
 }

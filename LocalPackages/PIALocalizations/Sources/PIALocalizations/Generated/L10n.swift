@@ -183,28 +183,6 @@ public enum L10n {
           }
         }
       }
-      public enum Leakprotection {
-        public enum Alert {
-          /// Disable Now
-          public static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta1", fallback: "Disable Now")
-          /// Learn more
-          public static let cta2 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta2", fallback: "Learn more")
-          /// Ignore
-          public static let cta3 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.cta3", fallback: "Ignore")
-          /// To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network" and automatically reconnect.
-          public static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.message", fallback: "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.")
-          /// Unsecured Wi-Fi detected
-          public static let title = L10n.tr("Localizable", "dashboard.vpn.leakprotection.alert.title", fallback: "Unsecured Wi-Fi detected")
-        }
-        public enum Ikev2 {
-          public enum Alert {
-            /// Switch Now
-            public static let cta1 = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.cta1", fallback: "Switch Now")
-            /// To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.
-            public static let message = L10n.tr("Localizable", "dashboard.vpn.leakprotection.ikev2.alert.message", fallback: "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.")
-          }
-        }
-      }
     }
   }
   public enum Dedicated {
@@ -484,16 +462,6 @@ public enum L10n {
       public enum Toggle {
         /// Show Service Communication Messages
         public static let title = L10n.tr("Localizable", "inapp.messages.toggle.title", fallback: "Show Service Communication Messages")
-      }
-    }
-  }
-  public enum LocalNotification {
-    public enum NonCompliantWifi {
-      /// Tap here to secure your device
-      public static let text = L10n.tr("Localizable", "local_notification.non_compliant_wifi.text", fallback: "Tap here to secure your device")
-      /// Unsecured Wi-Fi: %@
-      public static func title(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "local_notification.non_compliant_wifi.title", String(describing: p1), fallback: "Unsecured Wi-Fi: %@")
       }
     }
   }
@@ -929,29 +897,11 @@ public enum L10n {
       }
     }
     public enum ApplicationSettings {
-      public enum AllowLocalNetwork {
-        /// Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)
-        public static let footer = L10n.tr("Localizable", "settings.application_settings.allow_local_network.footer", fallback: "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)")
-        /// Allow access to devices on local network
-        public static let title = L10n.tr("Localizable", "settings.application_settings.allow_local_network.title", fallback: "Allow access to devices on local network")
-      }
       public enum KillSwitch {
         /// The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.
         public static let footer = L10n.tr("Localizable", "settings.application_settings.kill_switch.footer", fallback: "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.")
         /// VPN Kill Switch
         public static let title = L10n.tr("Localizable", "settings.application_settings.kill_switch.title", fallback: "VPN Kill Switch")
-      }
-      public enum LeakProtection {
-        /// iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info
-        public static let footer = L10n.tr("Localizable", "settings.application_settings.leak_protection.footer", fallback: "iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info")
-        /// More info
-        public static let moreInfo = L10n.tr("Localizable", "settings.application_settings.leak_protection.more_info", fallback: "More info")
-        /// Leak Protection
-        public static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.title", fallback: "Leak Protection")
-        public enum Alert {
-          /// Changes to the VPN Settings will take effect on the next connection
-          public static let title = L10n.tr("Localizable", "settings.application_settings.leak_protection.alert.title", fallback: "Changes to the VPN Settings will take effect on the next connection")
-        }
       }
       public enum ReconnectNotifications {
         /// Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.
@@ -1647,10 +1597,6 @@ public enum L10n {
       public static let title = L10n.tr("Localizable", "tiles.usage.title", fallback: "Usage")
       /// Upload
       public static let upload = L10n.tr("Localizable", "tiles.usage.upload", fallback: "Upload")
-      public enum Ipsec {
-        /// USAGE (Not available on IKEv2)
-        public static let title = L10n.tr("Localizable", "tiles.usage.ipsec.title", fallback: "USAGE (Not available on IKEv2)")
-      }
     }
   }
   public enum Today {
