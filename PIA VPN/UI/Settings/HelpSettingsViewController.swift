@@ -34,7 +34,6 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
 
     struct ViewControllerIdentifiers {
         static let piaCards = "PIACardsViewController"
-        static let shareDataInformation = "ShareDataInformationViewController"
     }
 
     override func viewDidLoad() {
@@ -246,9 +245,10 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     @objc private func showShareDataInformation() {
-        let storyboard = Client.signupStoryboard()
-        let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
-        presentModally(viewController: shareDataInformationViewController)
+        let coordinator = ShareDataInformationCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+        }
     }
 
     private func showKPIStats() {
