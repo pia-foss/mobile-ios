@@ -32,8 +32,8 @@ Traffic flows, with no DNS or IPv6 leaks.
 
 ### 1. Censored countries are resolved in the app, from `/api/geo`
 
-The country comes from `GET /api/geo` (`country_code2`), and `["CN", "IR", "RU"]` selects
-`censorshipPeckingOrder`. The lookup lives in the **app**, not the tunnel:
+The country comes from `GET /api/geo` (`country_code2`), and `["AE", "CN", "IR", "RU"]` selects
+`censorshipPeckingOrder` (AE added after UAE users failed on plain WireGuard and OpenVPN). The lookup lives in the **app**, not the tunnel:
 
 ```
 ConnectivityDaemon → connectivityCheck() → /api/geo → plain.geoCountryCode (only while !isVPN)
