@@ -16,7 +16,8 @@ extension Client {
     /// Submits a CSI debug report directly, bypassing the VPN provider.
     /// Use this instead of `providers.vpnProvider.submitDebugReport` when a VPN
     /// profile may not be configured (e.g. simulator, mock VPN builds).
-    /// Includes debug logs only if the user has enabled debug logging. IPs are always redacted.
+    /// Includes debug logs only if the user has enabled debug logging, and the tunnel log (see
+    /// `includeTunnelLog` below). IPs are always redacted.
     public static func submitDebugReport() async throws -> String {
         try await PIAWebServices().submitDebugReport()
     }
@@ -24,9 +25,10 @@ extension Client {
     /// Submits a CSI debug report with explicit control over log verbosity and IP redaction.
     /// Use this overload when the caller needs to override the defaults, e.g. internal debug tools
     /// that always include debug logs and don't need IP redaction.
-    /// `includeTunnelLog` adds a `tunnel.log` section fetched from the Network Extension, and
-    /// `vpnConnection` a `vpn_status` section. Both are omitted by default so the user-facing
-    /// report is unaffected.
+    /// `includeTunnelLog` adds a `tunnel.log` section fetched from the Network Extension, or a
+    /// `last_tunnel.log` section with the log it persisted last when the tunnel is down; and
+    /// `vpnConnection` a `vpn_status` section. Both are omitted by default here; the user-facing
+    /// `submitDebugReport()` above opts into the tunnel log.
     public static func submitDebugReport(
         includeDebug: Bool,
         redactIPs: Bool,

@@ -43,7 +43,11 @@ extension PIAWebServices {
     }
 
     func submitDebugReport() async throws -> String {
-        try await submitDebugReport(includeDebug: Client.preferences.debugLogging, redactIPs: true)
+        try await submitDebugReport(
+            includeDebug: Client.preferences.debugLogging,
+            redactIPs: true,
+            includeTunnelLog: true
+        )
     }
 
     func submitDebugReport(
@@ -63,8 +67,7 @@ extension PIAWebServices {
         ]
 
         if includeTunnelLog {
-            let tunnelLog = await Client.providers.vpnProvider.tunnelLog()
-            providers.append(PIACSITunnelLogInformationProvider(log: tunnelLog, redactIPs: redactIPs))
+            providers.append(await tunnelLogProvider(redactIPs: redactIPs))
         }
 
         if let vpnConnection {
@@ -91,5 +94,30 @@ extension PIAWebServices {
             log.error("CSI submission failed: \(error)")
             throw ClientError.internetUnreachable
         }
+    }
+
+    /// The running tunnel's log when it answers, otherwise the copy it persisted last — the tunnel
+    /// is usually down when a user reports a failed connection, and its in-memory log went with it.
+    ///
+    /// Decided by the VPN status, not by whether the extension replies: iOS keeps the provider process
+    /// around after a disconnect, or relaunches it to deliver the message, so a stopped tunnel still
+    /// answers — and asking it would only append a restore marker and the request to its log.
+    private func tunnelLogProvider(redactIPs: Bool) async -> PIACSITunnelLogInformationProvider {
+        let vpnProvider = Client.providers.vpnProvider
+        let isTunnelUp: Bool
+        switch vpnProvider.vpnStatus {
+        case .connecting, .connected, .disconnecting: isTunnelUp = true
+        case .disconnected, .unknown: isTunnelUp = false
+        }
+
+        if isTunnelUp, let live = await vpnProvider.tunnelLog(), !live.isEmpty {
+            return PIACSITunnelLogInformationProvider(log: live, redactIPs: redactIPs)
+        }
+
+        return PIACSITunnelLogInformationProvider(
+            sectionName: PIACSITunnelLogInformationProvider.lastSessionSectionName,
+            log: PIATunnelSharedState.readLastTunnelLog(),
+            redactIPs: redactIPs
+        )
     }
 }
