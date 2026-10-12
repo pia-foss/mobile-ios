@@ -31,19 +31,12 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
     private lazy var switchPersistent = UISwitch()
     private lazy var switchReconnectNotifications = UISwitch()
     private lazy var switchContentBlocker = UISwitch()
-    private lazy var switchLeakProtection = UISwitch()
-    private lazy var switchAllowDevicesOnLocalNetwork = UISwitch()
     private var isContentBlockerEnabled = false
 
-    private var preferences: AppPreferences?
     private var sections = [PrivacyFeaturesSections]()
-    private var vpnProvider: VPNProvider?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        preferences = AppPreferences.shared
-        vpnProvider = Client.providers.vpnProvider
 
         updateSections()
         setupUI()
@@ -52,15 +45,7 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
     private func updateSections() {
         guard let pendingPreferences else { return }
 
-        // Show Leak protection settings when:
-        // - The feature flag is ON (`showLeakProtection`)
-        // - Wireguard or OpenVPN is NOT selected
-        var filteredSections: [PrivacyFeaturesSections]
-        if let preferences = preferences, preferences.showLeakProtection, !isCurrentProtocolWireguardOrOpenVPN() {
-            filteredSections = PrivacyFeaturesSections.allCases
-        } else {
-            filteredSections = PrivacyFeaturesSections.allCases.filter { $0 != .leakProtection && $0 != .allowAccessOnLocalNetwork }
-        }
+        var filteredSections = PrivacyFeaturesSections.allCases
 
         // Hide reconnection warning section if kill switch is off
         if !pendingPreferences.isPersistentConnection {
@@ -83,10 +68,6 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
         switchReconnectNotifications.preferredStyle = .sliding
         switchContentBlocker.addTarget(self, action: #selector(showContentBlockerTutorial), for: .touchUpInside)
         switchContentBlocker.preferredStyle = .sliding
-        switchLeakProtection.addTarget(self, action: #selector(toggleLeakProtection(_:)), for: .valueChanged)
-        switchLeakProtection.preferredStyle = .sliding
-        switchAllowDevicesOnLocalNetwork.addTarget(self, action: #selector(toggleAllowDevicesOnLocalNetwork(_:)), for: .valueChanged)
-        switchAllowDevicesOnLocalNetwork.preferredStyle = .sliding
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .PIASettingsHaveChanged, object: nil)
         NotificationCenter.default.addObserver(
@@ -177,27 +158,6 @@ final class PrivacyFeaturesSettingsViewController: PIABaseSettingsViewController
         perform(segue: StoryboardSegue.Main.contentBlockerSegueIdentifier)
     }
 
-    @objc private func toggleLeakProtection(_ sender: UISwitch) {
-        Client.preferences.leakProtection = sender.isOn
-        tableView.reloadData()
-        presentUpdateSettingsAlertWhenConnected()
-    }
-
-    @objc private func toggleAllowDevicesOnLocalNetwork(_ sender: UISwitch) {
-        Client.preferences.allowLocalDeviceAccess = sender.isOn
-        presentUpdateSettingsAlertWhenConnected()
-    }
-
-    private func presentUpdateSettingsAlertWhenConnected() {
-        guard let vpnProvider = vpnProvider, vpnProvider.vpnStatus == .connected else {
-            return
-        }
-
-        let sheet = Macros.alertController(L10n.Settings.ApplicationSettings.LeakProtection.Alert.title, nil)
-        sheet.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
-        present(sheet, animated: true)
-    }
-
     // MARK: Restylable
 
     override func viewShouldRestyle() {
@@ -246,17 +206,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         case .reconnectNotifications:
             cell.textLabel?.text = L10n.Settings.ApplicationSettings.ReconnectNotifications.footer
             return cell
-        case .leakProtection:
-            let leakProtectionDescription = L10n.Settings.ApplicationSettings.LeakProtection.footer
-            let attributtedDescription = NSMutableAttributedString(string: leakProtectionDescription)
-            let moreInfoText = L10n.Settings.ApplicationSettings.LeakProtection.moreInfo
-            let moreInfoTextRange = (leakProtectionDescription as NSString).range(of: moreInfoText)
-            attributtedDescription.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: moreInfoTextRange)
-            cell.textLabel?.attributedText = attributtedDescription
-            return cell
-        case .allowAccessOnLocalNetwork:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.footer
-            return cell
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.footer
             return cell
@@ -288,19 +237,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
             cell.accessoryView = switchReconnectNotifications
             cell.selectionStyle = .none
             switchReconnectNotifications.isOn = pendingPreferences.showReconnectNotifications
-        case .leakProtection:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.LeakProtection.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchLeakProtection
-            cell.selectionStyle = .none
-            switchLeakProtection.isOn = Client.preferences.leakProtection
-        case .allowAccessOnLocalNetwork:
-            cell.textLabel?.text = L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
-            cell.detailTextLabel?.text = nil
-            cell.accessoryView = switchAllowDevicesOnLocalNetwork
-            cell.selectionStyle = .none
-            switchAllowDevicesOnLocalNetwork.isEnabled = Client.preferences.leakProtection
-            switchAllowDevicesOnLocalNetwork.isOn = !Client.preferences.leakProtection ? false : Client.preferences.allowLocalDeviceAccess
         case .safariContentBlocker:
             cell.textLabel?.text = L10n.Settings.ContentBlocker.title
             cell.detailTextLabel?.text = nil
@@ -339,15 +275,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         switch section {
         case .refresh:
             refreshContentBlockerRules()
-        case .leakProtection:
-            let application = UIApplication.shared
-            let learnMoreURL = AppConstants.Web.leakProtectionURL
-
-            // Open the Learn more url when the user taps on the Leak Protection cell
-            if application.canOpenURL(learnMoreURL) {
-                application.open(learnMoreURL)
-            }
-
         default: break
         }
 
@@ -374,11 +301,4 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         Theme.current.applyTableSectionFooter(view)
     }
 
-}
-
-extension PrivacyFeaturesSettingsViewController {
-    func isCurrentProtocolWireguardOrOpenVPN() -> Bool {
-        let vpnType = pendingPreferences?.vpnType
-        return vpnType == KapePlatformSDKVPNType.openVPN.rawValue || vpnType == KapePlatformSDKVPNType.wireGuard.rawValue
-    }
 }

@@ -404,36 +404,6 @@ extension Client {
             }
         }
 
-        /// Store a bool that represents the status of leak protection property
-        public var leakProtection: Bool {
-            get {
-                return accessedDatabase.plain.leakProtection
-            }
-            set {
-                accessedDatabase.plain.leakProtection = newValue
-            }
-        }
-
-        /// Store a bool that represents the status of allowLocalDeviceAccess property
-        public var allowLocalDeviceAccess: Bool {
-            get {
-                return accessedDatabase.plain.allowLocalDeviceAccess
-            }
-            set {
-                accessedDatabase.plain.allowLocalDeviceAccess = newValue
-            }
-        }
-
-        /// If the current connected WIFI is a RFC1918 vulnerable WIFI it stores the name, otherwise it returns nil
-        public var currentRFC1918VulnerableWifi: String? {
-            get {
-                return accessedDatabase.plain.currentRFC1918VulnerableWifi
-            }
-            set {
-                accessedDatabase.plain.currentRFC1918VulnerableWifi = newValue
-            }
-        }
-
         // MARK: Service Quality
 
         /// Shares anonymous data to the service quality library.

@@ -42,10 +42,4 @@ public struct VPNConfiguration {
 
     /// When `true`, the VPN will disconnect on device sleep.
     public let disconnectsOnSleep: Bool
-
-    /// When `true`, the VPN will enable leak protection.
-    public let leakProtection: Bool
-
-    /// When `true`, the VPN will enable access to local.
-    public let allowLocalDeviceAccess: Bool
 }

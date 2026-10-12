@@ -288,7 +288,7 @@ private func makeServers(count: Int) -> [Server] {
             name: "Server \(index)",
             country: "us",
             hostname: "server\(index).example.com",
-            iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.\(index)", cn: "cn", van: false)],
+            wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.\(index)", cn: "cn", van: false)],
             pingAddress: nil,
             regionIdentifier: "region-\(index)"
         )
