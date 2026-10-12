@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import NetworkExtension
 import PIAKPI
 import XCTest
 
@@ -160,7 +161,7 @@ final class ServiceQualityManagerTests: XCTestCase {
         defer { Client.configuration.connectedManually = false }
 
         let event = firstSubmittedEvent {
-            sut.connectionAttemptEvent()
+            sut.connectionStatusDidChange(system: .connecting, tunnel: nil)
         }
 
         XCTAssertEqual(event?.eventName, "VPN_CONNECTION_ATTEMPT")
@@ -169,6 +170,65 @@ final class ServiceQualityManagerTests: XCTestCase {
         // The pre-existing connection properties must survive the change.
         XCTAssertEqual(event?.eventProperties["connection_source"], "Manual")
         XCTAssertNotNil(event?.eventProperties["vpn_protocol"])
+    }
+
+    func testEstablishedEventReportsTimeToConnect() {
+        let submitted = mockKPI.expectSubmissions(2)
+        sut.connectionStatusDidChange(system: .connecting, tunnel: nil)
+        sut.connectionStatusDidChange(system: .connected, tunnel: .connected)
+        wait(for: [submitted], timeout: 2.0)
+
+        let established = mockKPI.submittedEvents.first { $0.eventName == "VPN_CONNECTION_ESTABLISHED" }
+        XCTAssertNotNil(established)
+        XCTAssertNotNil(established?.eventProperties["connection_source"])
+    }
+
+    func testCancelledEventReportsConnectionSource() {
+        Client.configuration.connectedManually = true
+        defer { Client.configuration.connectedManually = false }
+
+        let submitted = mockKPI.expectSubmissions(2)
+        sut.connectionStatusDidChange(system: .connecting, tunnel: nil)
+        sut.connectionStatusDidChange(system: .disconnected, tunnel: nil)
+        wait(for: [submitted], timeout: 2.0)
+
+        let cancelled = mockKPI.submittedEvents.first { $0.eventName == "VPN_CONNECTION_CANCELLED" }
+        XCTAssertNotNil(cancelled)
+        // Cancellation is attributed to the connection source (matching Android), not the disconnection source.
+        XCTAssertEqual(cancelled?.eventProperties["connection_source"], "Manual")
+    }
+
+    /// A mid-session reconnect must report one attempt and one established per cycle — never a
+    /// second established (or cancelled) for the same attempt, which is what made the rates sum
+    /// above 100%.
+    func testReconnectReportsOneAttemptPerCycle() {
+        let submitted = mockKPI.expectSubmissions(4)
+        sut.connectionStatusDidChange(system: .connecting, tunnel: nil)  // attempt
+        sut.connectionStatusDidChange(system: .connected, tunnel: .connected)  // established
+        sut.connectionStatusDidChange(system: .connected, tunnel: .reconnecting)  // attempt
+        sut.connectionStatusDidChange(system: .connected, tunnel: .connected)  // established
+        wait(for: [submitted], timeout: 2.0)
+
+        let names = mockKPI.submittedEvents.map(\.eventName)
+        XCTAssertEqual(names.filter { $0 == "VPN_CONNECTION_ATTEMPT" }.count, 2)
+        XCTAssertEqual(names.filter { $0 == "VPN_CONNECTION_ESTABLISHED" }.count, 2)
+        XCTAssertFalse(names.contains("VPN_CONNECTION_CANCELLED"))
+    }
+
+    /// A tunnel adopted on cold start was never attempted by this process, so it reports nothing.
+    func testAdoptedConnectedTunnelIsNotReported() {
+        let notSubmitted = mockKPI.expectNoSubmission()
+        sut.connectionStatusDidChange(system: .connected, tunnel: .connected)
+        wait(for: [notSubmitted], timeout: 0.5)
+    }
+
+    func testConnectionEventsAreNotSubmittedWithoutConsent() {
+        setConsent(false)
+
+        let submitted = mockKPI.expectNoSubmission()
+        sut.connectionStatusDidChange(system: .connecting, tunnel: nil)
+        sut.connectionStatusDidChange(system: .disconnected, tunnel: nil)
+        wait(for: [submitted], timeout: 0.5)
     }
 
     /// Spelled out rather than delegating to `Macros`, so the wire values stay
