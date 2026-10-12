@@ -70,7 +70,7 @@ final class PIAWebServices: WebServices, ConfigurationAccess {
 
     public static let userAgent: String = {
         if let info = Bundle.main.infoDictionary {
-            let executable = Client.environment == .staging ? "PIA VPN" : "PIA VPN Staging"
+            let executable = Client.environment == .staging ? "PIA VPN Staging" : "PIA VPN"
             let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
             let appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
             let appBuild = info[kCFBundleVersionKey as String] as? String ?? "Unknown"

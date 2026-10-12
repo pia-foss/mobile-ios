@@ -186,6 +186,33 @@ public enum PIATunnelSharedState {
         configStore.delete()
         serversStore.delete()
         statusStore.delete()
+        deleteLastTunnelLog()
+    }
+
+    // MARK: - Tunnel log
+
+    /// Plain text, not a `Store`: the extension's `PIATunnelLogStore` is its single writer and
+    /// persists its whole buffer wholesale, so the app can attach it to a CSI report after the tunnel
+    /// process — and its in-memory log — is gone.
+    private static let lastTunnelLogFileName = "pia_platformsdk_last_tunnel.log"
+
+    public static func lastTunnelLogURL() -> URL? {
+        containerDirectory()?.appendingPathComponent(lastTunnelLogFileName)
+    }
+
+    /// The tunnel log as last persisted by the extension, or `nil` when none was ever written.
+    public static func readLastTunnelLog() -> String? {
+        guard let url = lastTunnelLogURL() else {
+            return nil
+        }
+        return try? String(contentsOf: url, encoding: .utf8)
+    }
+
+    private static func deleteLastTunnelLog() {
+        guard let url = lastTunnelLogURL() else {
+            return
+        }
+        try? FileManager.default.removeItem(at: url)
     }
 
     // MARK: - Container

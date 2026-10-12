@@ -60,6 +60,8 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
                 completionHandler(nil)
             } catch {
                 logger.error("Failed to start tunnel: \(error)")
+                // The system tears the process down without a `stopTunnel` after a failed start.
+                PIATunnelLogStore.shared.flush()
                 completionHandler(error)
             }
         }
@@ -126,6 +128,10 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
             PIATunnelSharedState.clearActiveConnection()
             PIATunnelSharedState.clearTunnelStatus()
+
+            // Last chance before the process exits; the report falls back to this file once the
+            // tunnel is down.
+            PIATunnelLogStore.shared.flush()
 
             completionHandler()
         }

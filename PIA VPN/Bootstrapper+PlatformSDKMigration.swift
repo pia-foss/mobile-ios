@@ -106,17 +106,11 @@ extension Bootstrapper {
             return
         }
 
-        let supportedTypes: [KapePlatformSDKVPNType] = [
-            .automatic,
-            .wireGuard,
-            .openVPN
-        ]
-
-        if !supportedTypes.map(\.rawValue).contains(Client.preferences.vpnType) {
-            let editable = Client.preferences.editable()
-            editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
-            editable.commit()
-        }
+        // Every migrating install starts on automatic negotiation, whatever it had selected before:
+        // a protocol picked for the legacy stack says nothing about what works best on the new one.
+        let editable = Client.preferences.editable()
+        editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+        editable.commit()
 
         Self.loadIsVPNConnected { wasConnected in
             NETunnelProviderManager.loadAllFromPreferences { managers, error in

@@ -106,15 +106,11 @@ final class PlatformSDKMigrationUseCase: PlatformSDKMigrationUseCaseType, @unche
             return
         }
 
-        // Migrate users whose persisted protocol is no longer selectable (a legacy "IKEv2", or an
-        // unrecognised value) onto automatic negotiation. `SelectableVPNProtocol` is the single
-        // definition shared with the Protocol settings screen, so the read and write sides cannot
-        // disagree about what is still selectable.
-        if let migratedVPNType = SelectableVPNProtocol.migration(fromStored: Client.preferences.vpnType) {
-            let editable = Client.preferences.editable()
-            editable.vpnType = migratedVPNType.rawValue
-            editable.commit()
-        }
+        // Every migrating install starts on automatic negotiation, whatever it had selected before:
+        // a protocol picked for the legacy stack says nothing about what works best on the new one.
+        let editable = Client.preferences.editable()
+        editable.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+        editable.commit()
 
         let wasConnected = wasConnectedBeforeMigration
 
