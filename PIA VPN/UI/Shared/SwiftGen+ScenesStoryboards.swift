@@ -47,8 +47,6 @@ internal enum StoryboardScene {
 
     internal static let loginViewController = SceneType<LoginViewController>(storyboard: Self.self, identifier: "LoginViewController")
 
-    internal static let magicLinkLoginViewController = SceneType<MagicLinkLoginViewController>(storyboard: Self.self, identifier: "MagicLinkLoginViewController")
-
     internal static let piaWelcomeViewController = SceneType<PIAWelcomeViewController>(storyboard: Self.self, identifier: "PIAWelcomeViewController")
 
     internal static let purchaseViewController = SceneType<PurchaseViewController>(storyboard: Self.self, identifier: "PurchaseViewController")
