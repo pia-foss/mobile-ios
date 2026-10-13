@@ -51,6 +51,10 @@ extension WelcomeBack {
             case .usernameAndPasswordTapped:
                 guard !state.isRestoring else { return nil }
                 return emit(.requestLogin)
+
+            case .closeTapped:
+                guard !state.isRestoring else { return nil }
+                return emit(.didDismiss)
             }
         }
     }
