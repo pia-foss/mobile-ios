@@ -313,7 +313,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func checkTVOSTokenToBind() {
         guard Client.providers.accountProvider.apiToken != nil,
-              let token = Client.configuration.tvOSBindToken
+            let token = Client.configuration.tvOSBindToken
         else {
             return
         }
@@ -442,7 +442,8 @@ final class DashboardViewController: AutolayoutViewController {
             // Prefer a fold that leaves two usable pages, but fall back to the active fold so the
             // dashboard keeps the two-page layout half-open as well as fully open.
             let twoPage = folds.filter { $0.frame.minX >= 320 && width - $0.frame.maxX >= 320 }
-            return (twoPage.first(where: \.isActive) ?? twoPage.first
+            return
+                (twoPage.first(where: \.isActive) ?? twoPage.first
                 ?? folds.first(where: \.isActive) ?? folds.first)?.frame
         #endif
     }
@@ -1397,10 +1398,8 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     }
 
     private func showVPNModal(target: UIViewController) {
-        let vc = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        target.present(nav, animated: true)
+        let coordinator = VPNPermissionCoordinator(presenter: target)
+        Task { await coordinator.startAsync() }
     }
 }
 

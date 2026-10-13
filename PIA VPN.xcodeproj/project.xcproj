@@ -372,6 +372,9 @@
           "product-name": "PIAValidateQRLogin",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAVPNPermission",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "package": "DZNEmptyDataSet",
           "product-name": "DZNEmptyDataSet",
           "build-phase": { "build-phase": "frameworks" },

@@ -272,10 +272,8 @@ extension RootCoordinator: PIAWelcomeViewControllerDelegate {
         // the user grants permission before reaching the dashboard tiles.
         DispatchQueue.main.async { [weak self] in
             guard let self, let dashboard = self.dashboard else { return }
-            let permissionVC = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-            let nav = UINavigationController(rootViewController: permissionVC)
-            nav.modalPresentationStyle = .fullScreen
-            dashboard.present(nav, animated: true)
+            let coordinator = VPNPermissionCoordinator(presenter: dashboard)
+            Task { await coordinator.startAsync() }
         }
     }
 }
