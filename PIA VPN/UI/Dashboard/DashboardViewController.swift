@@ -1313,10 +1313,8 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     }
 
     private func showVPNModal(target: UIViewController) {
-        let vc = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        target.present(nav, animated: true)
+        let coordinator = VPNPermissionCoordinator(presenter: target)
+        Task { await coordinator.startAsync() }
     }
 }
 

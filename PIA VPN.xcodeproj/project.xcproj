@@ -360,6 +360,9 @@
           "product-name": "PIAValidateQRLogin",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAVPNPermission",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "package": "OpenSSL-Package",
           "product-name": "OpenSSL",
           "build-phase": { "build-phase": "frameworks" },

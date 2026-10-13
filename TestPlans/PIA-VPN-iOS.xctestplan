@@ -120,6 +120,13 @@
         "identifier" : "PIARegionListTests",
         "name" : "PIARegionListTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAVPNPermission",
+        "identifier" : "PIAVPNPermissionTests",
+        "name" : "PIAVPNPermissionTests"
+      }
     }
   ],
   "version" : 1
