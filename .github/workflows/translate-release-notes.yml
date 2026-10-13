@@ -20,7 +20,7 @@ on:
 
 jobs:
   translate-and-update:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     env:
       # The iOS and Mac Catalyst apps share one metadata folder, so anything
