@@ -3,7 +3,8 @@ import Testing
 
 @testable import PIAVPN
 
-@Suite("Tunnel log persistence")
+// EXPERIMENT: disabled to check whether this suite is what stalls PIAVPNTests on CI. Do not merge.
+@Suite("Tunnel log persistence", .disabled("CI stall experiment"))
 struct PIATunnelLogStoreTests {
 
     private static let marker = "new tunnel process; lines above are restored from the previous one"
