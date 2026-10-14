@@ -68,9 +68,17 @@ class SettingsTests: BaseTest {
                 }
 
                 context("help settings interaction") {
-                    xit("should return 'Debug information submitted' when user clicks 'Send Debug Log to support'") {
+                    it("should show the debug report review screen when user clicks 'Send Debug Log to support'") {
                         app.navigateToHelpSettings()
                         app.sendDebugButton.tap()
+
+                        expect(app.debugReportReviewSendButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+                        expect(app.debugReportReviewShareButton.exists).to(beTrue())
+                    }
+
+                    xit("should return 'Debug information submitted' when user clicks 'Send Debug Log to support'") {
+                        app.navigateToDebugReportReview()
+                        app.debugReportReviewSendButton.tap()
                         //active bug: this returns error in simulator
                         expect(app.successfulSendDebugMessage.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
                     }
