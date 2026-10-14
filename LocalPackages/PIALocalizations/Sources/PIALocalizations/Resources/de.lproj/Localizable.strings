@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Debug-Informationen erfolgreich übermittelt. \nID: %@\nBitte notiere diese ID, da unser Support-Team sie benötigt, um Ihre Einsendung zu lokalisieren.";
 "settings.application_information.debug.success.copyId" = "ID kopieren";
 
+"debug_report_review.title" = "Debug-Protokolle senden";
+"debug_report_review.privacy" = "Dadurch werden Debug-Protokolle und Informationen über deine Netzwerkkonfiguration an unser Support-Team hochgeladen. Sie enthalten keine Informationen über deine Internetnutzung.";
+"debug_report_review.redacted" = "IP-Adressen werden unkenntlich gemacht.";
+"debug_report_review.sections.title" = "Was gesendet wird";
+"debug_report_review.sections.empty" = "Es sind keine Diagnoseinformationen verfügbar. Aktiviere die Debug-Protokollierung und versuche es erneut.";
+"debug_report_review.sections.truncated" = "Vorschau gekürzt. Verwende „Bericht speichern“, um den vollständigen Inhalt anzuzeigen.";
+"debug_report_review.sections.expand_hint" = "Blendet den Inhalt dieses Abschnitts ein oder aus.";
+"debug_report_review.section.protocol_information" = "Verbindungseinstellungen";
+"debug_report_review.section.device_information" = "Geräteinformationen";
+"debug_report_review.section.application_log" = "App-Debug-Protokoll";
+"debug_report_review.section.subscription_information" = "Abonnement";
+"debug_report_review.section.regions" = "Serverliste";
+"debug_report_review.section.user_settings" = "App-Einstellungen";
+"debug_report_review.section.last_known_exception" = "Letzter Fehler";
+"debug_report_review.section.tunnel_log" = "Tunnel-Protokoll";
+"debug_report_review.section.last_tunnel_log" = "Tunnel-Protokoll (letzte Sitzung)";
+"debug_report_review.section.vpn_status" = "VPN-Status";
+"debug_report_review.share" = "Bericht speichern";
+"debug_report_review.send" = "Senden";
+
 "settings.commit.messages.must_disconnect" = "Das VPN muss sich neu verbinden, damit einige Änderungen wirksam werden.";
 "settings.commit.messages.should_reconnect" = "VPN neu verbinden, um Änderungen zu übernehmen.";
 "settings.commit.buttons.reconnect" = "Erneut verbinden";

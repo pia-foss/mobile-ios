@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "偵錯資料已成功提交。\nID：%@\n請記下此 ID，我們的支援團隊將需要它來處理您的個案。";
 "settings.application_information.debug.success.copyId" = "複製 ID";
 
+"debug_report_review.title" = "傳送偵錯記錄";
+"debug_report_review.privacy" = "這會將偵錯記錄及您網路設定的相關資訊上傳給我們的支援團隊，其中不包含任何有關您網際網路使用情況的資訊。";
+"debug_report_review.redacted" = "IP 位址已隱藏。";
+"debug_report_review.sections.title" = "將傳送的內容";
+"debug_report_review.sections.empty" = "沒有可用的診斷資訊。請啟用偵錯記錄，然後再試一次。";
+"debug_report_review.sections.truncated" = "預覽已縮短。使用「儲存報告」查看完整內容。";
+"debug_report_review.sections.expand_hint" = "顯示或隱藏此區段的內容。";
+"debug_report_review.section.protocol_information" = "連線設定";
+"debug_report_review.section.device_information" = "裝置資訊";
+"debug_report_review.section.application_log" = "App 偵錯記錄";
+"debug_report_review.section.subscription_information" = "訂閱";
+"debug_report_review.section.regions" = "伺服器列表";
+"debug_report_review.section.user_settings" = "App 設定";
+"debug_report_review.section.last_known_exception" = "上一個錯誤";
+"debug_report_review.section.tunnel_log" = "通道記錄";
+"debug_report_review.section.last_tunnel_log" = "通道記錄（上次工作階段）";
+"debug_report_review.section.vpn_status" = "VPN 狀態";
+"debug_report_review.share" = "儲存報告";
+"debug_report_review.send" = "傳送";
+
 "settings.commit.messages.must_disconnect" = "部分修改須待VPN 重新連接，方可生效。";
 "settings.commit.messages.should_reconnect" = "重新連接 VPN ，進行修改。";
 "settings.commit.buttons.reconnect" = "重新連接";

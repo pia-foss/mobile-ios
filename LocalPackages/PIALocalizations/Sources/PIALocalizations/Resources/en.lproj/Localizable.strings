@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Debug information successfully submitted.\nID: %@\nPlease note this ID, as our support team will require this to locate your submission.";
 "settings.application_information.debug.success.copyId" = "Copy ID";
 
+"debug_report_review.title" = "Send Debug Logs";
+"debug_report_review.privacy" = "This uploads debug logs and information about your network setup to our support team. It does not contain any information about your internet usage.";
+"debug_report_review.redacted" = "IP addresses are redacted.";
+"debug_report_review.sections.title" = "What will be sent";
+"debug_report_review.sections.empty" = "No diagnostic information is available. Enable debug logging and try again.";
+"debug_report_review.sections.truncated" = "Preview shortened. Use “Save report” to see the full contents.";
+"debug_report_review.sections.expand_hint" = "Shows or hides the contents of this section.";
+"debug_report_review.section.protocol_information" = "Connection settings";
+"debug_report_review.section.device_information" = "Device information";
+"debug_report_review.section.application_log" = "App debug log";
+"debug_report_review.section.subscription_information" = "Subscription";
+"debug_report_review.section.regions" = "Server list";
+"debug_report_review.section.user_settings" = "App settings";
+"debug_report_review.section.last_known_exception" = "Last error";
+"debug_report_review.section.tunnel_log" = "Tunnel log";
+"debug_report_review.section.last_tunnel_log" = "Tunnel log (last session)";
+"debug_report_review.section.vpn_status" = "VPN status";
+"debug_report_review.share" = "Save report";
+"debug_report_review.send" = "Send";
+
 "settings.commit.messages.must_disconnect" = "The VPN must reconnect for some changes to take effect.";
 "settings.commit.messages.should_reconnect" = "Reconnect the VPN to apply changes.";
 "settings.commit.buttons.reconnect" = "Reconnect";

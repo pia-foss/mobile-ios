@@ -207,6 +207,50 @@ public enum L10n {
       }
     }
   }
+  public enum DebugReportReview {
+    /// This uploads debug logs and information about your network setup to our support team. It does not contain any information about your internet usage.
+    public static let privacy = L10n.tr("Localizable", "debug_report_review.privacy", fallback: "This uploads debug logs and information about your network setup to our support team. It does not contain any information about your internet usage.")
+    /// IP addresses are redacted.
+    public static let redacted = L10n.tr("Localizable", "debug_report_review.redacted", fallback: "IP addresses are redacted.")
+    /// Send
+    public static let send = L10n.tr("Localizable", "debug_report_review.send", fallback: "Send")
+    /// Save report
+    public static let share = L10n.tr("Localizable", "debug_report_review.share", fallback: "Save report")
+    /// Send Debug Logs
+    public static let title = L10n.tr("Localizable", "debug_report_review.title", fallback: "Send Debug Logs")
+    public enum Section {
+      /// App debug log
+      public static let applicationLog = L10n.tr("Localizable", "debug_report_review.section.application_log", fallback: "App debug log")
+      /// Device information
+      public static let deviceInformation = L10n.tr("Localizable", "debug_report_review.section.device_information", fallback: "Device information")
+      /// Last error
+      public static let lastKnownException = L10n.tr("Localizable", "debug_report_review.section.last_known_exception", fallback: "Last error")
+      /// Tunnel log (last session)
+      public static let lastTunnelLog = L10n.tr("Localizable", "debug_report_review.section.last_tunnel_log", fallback: "Tunnel log (last session)")
+      /// Connection settings
+      public static let protocolInformation = L10n.tr("Localizable", "debug_report_review.section.protocol_information", fallback: "Connection settings")
+      /// Server list
+      public static let regions = L10n.tr("Localizable", "debug_report_review.section.regions", fallback: "Server list")
+      /// Subscription
+      public static let subscriptionInformation = L10n.tr("Localizable", "debug_report_review.section.subscription_information", fallback: "Subscription")
+      /// Tunnel log
+      public static let tunnelLog = L10n.tr("Localizable", "debug_report_review.section.tunnel_log", fallback: "Tunnel log")
+      /// App settings
+      public static let userSettings = L10n.tr("Localizable", "debug_report_review.section.user_settings", fallback: "App settings")
+      /// VPN status
+      public static let vpnStatus = L10n.tr("Localizable", "debug_report_review.section.vpn_status", fallback: "VPN status")
+    }
+    public enum Sections {
+      /// No diagnostic information is available. Enable debug logging and try again.
+      public static let empty = L10n.tr("Localizable", "debug_report_review.sections.empty", fallback: "No diagnostic information is available. Enable debug logging and try again.")
+      /// Shows or hides the contents of this section.
+      public static let expandHint = L10n.tr("Localizable", "debug_report_review.sections.expand_hint", fallback: "Shows or hides the contents of this section.")
+      /// What will be sent
+      public static let title = L10n.tr("Localizable", "debug_report_review.sections.title", fallback: "What will be sent")
+      /// Preview shortened. Use “Save report” to see the full contents.
+      public static let truncated = L10n.tr("Localizable", "debug_report_review.sections.truncated", fallback: "Preview shortened. Use “Save report” to see the full contents.")
+    }
+  }
   public enum Dedicated {
     public enum Ip {
       /// Are you sure you want to remove the selected region?

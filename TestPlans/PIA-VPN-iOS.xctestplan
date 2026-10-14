@@ -99,6 +99,13 @@
         "identifier" : "PIAValidateQRLoginTests",
         "name" : "PIAValidateQRLoginTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIADebugReport",
+        "identifier" : "PIADebugReportTests",
+        "name" : "PIADebugReportTests"
+      }
     }
   ],
   "version" : 1
