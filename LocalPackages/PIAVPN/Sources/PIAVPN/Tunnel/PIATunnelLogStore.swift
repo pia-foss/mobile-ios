@@ -41,20 +41,7 @@ import PIALibrary
 /// the lines a CSI report needs. `maxEntries` is sized for that: endpoint generation alone can emit
 /// several hundred lines per connect when the region is Automatic.
 final class PIATunnelLogStore: @unchecked Sendable {
-    static let shared = PIATunnelLogStore(fileURL: persistentFileURL(bundleURL: Bundle.main.bundleURL))
-
-    /// Where `shared` persists: the App Group file inside the tunnel extension, nowhere elsewhere.
-    ///
-    /// Any process that logs through `PIATunnelLogger` creates `shared` — unit tests included. Looking
-    /// up the App Group container there asks a system service on first use, inside the lazy-init lock
-    /// every logging thread waits on; on CI that stalled the whole test bundle. Only the extension
-    /// needs the file, so everything else keeps the log in memory.
-    static func persistentFileURL(bundleURL: URL) -> URL? {
-        guard bundleURL.pathExtension == "appex" else {
-            return nil
-        }
-        return PIATunnelSharedState.lastTunnelLogURL()
-    }
+    static let shared = PIATunnelLogStore(fileURL: PIATunnelSharedState.lastTunnelLogURL())
 
     /// ~5k lines is roughly 750 KB of strings — affordable inside a Network Extension's memory budget,
     /// and enough to hold several connection attempts including their per-candidate detail.

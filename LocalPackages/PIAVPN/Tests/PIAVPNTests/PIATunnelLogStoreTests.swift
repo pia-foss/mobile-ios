@@ -97,10 +97,4 @@ struct PIATunnelLogStoreTests {
 
         #expect(store.snapshot() == "line")
     }
-
-    @Test("outside the tunnel extension the shared store is not persisted")
-    func sharedStoreSkipsAppGroupOutsideExtension() {
-        let testBundle = URL(fileURLWithPath: "/tmp/PIAVPNTests.xctest")
-        #expect(PIATunnelLogStore.persistentFileURL(bundleURL: testBundle) == nil)
-    }
 }
