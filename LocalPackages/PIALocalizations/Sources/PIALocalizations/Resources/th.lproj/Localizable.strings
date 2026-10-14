@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "ส่งข้อมูลแก้จุดบกพร่องเรียบร้อยแล้ว \nID: %@\nกรุณาจด ID นี้ไว้ เนื่องจากทีมสนับสนุนของเราอาจสอบถามข้อมูลนี้เพื่อตรวจสอบการส่งข้อมูลของคุณ";
 "settings.application_information.debug.success.copyId" = "คัดลอก ID";
 
+"debug_report_review.title" = "ส่งประวัติการแก้จุดบกพร่อง";
+"debug_report_review.privacy" = "การดำเนินการนี้จะอัปโหลดประวัติการแก้จุดบกพร่องและข้อมูลเกี่ยวกับการตั้งค่าเครือข่ายของคุณไปยังทีมสนับสนุนของเรา โดยไม่มีข้อมูลใดๆ เกี่ยวกับการใช้งานอินเทอร์เน็ตของคุณ";
+"debug_report_review.redacted" = "ที่อยู่ IP จะถูกปิดบัง";
+"debug_report_review.sections.title" = "สิ่งที่จะถูกส่ง";
+"debug_report_review.sections.empty" = "ไม่มีข้อมูลการวินิจฉัย เปิดใช้งานการบันทึกการแก้จุดบกพร่องแล้วลองอีกครั้ง";
+"debug_report_review.sections.truncated" = "ตัวอย่างถูกย่อให้สั้นลง ใช้ “บันทึกรายงาน” เพื่อดูเนื้อหาทั้งหมด";
+"debug_report_review.sections.expand_hint" = "แสดงหรือซ่อนเนื้อหาของส่วนนี้";
+"debug_report_review.section.protocol_information" = "การตั้งค่าการเชื่อมต่อ";
+"debug_report_review.section.device_information" = "ข้อมูลอุปกรณ์";
+"debug_report_review.section.application_log" = "ประวัติการแก้จุดบกพร่องของแอป";
+"debug_report_review.section.subscription_information" = "การสมัครสมาชิก";
+"debug_report_review.section.regions" = "รายการเซิร์ฟเวอร์";
+"debug_report_review.section.user_settings" = "การตั้งค่าแอป";
+"debug_report_review.section.last_known_exception" = "ข้อผิดพลาดล่าสุด";
+"debug_report_review.section.tunnel_log" = "ประวัติอุโมงค์";
+"debug_report_review.section.last_tunnel_log" = "ประวัติอุโมงค์ (เซสชันล่าสุด)";
+"debug_report_review.section.vpn_status" = "สถานะ VPN";
+"debug_report_review.share" = "บันทึกรายงาน";
+"debug_report_review.send" = "ส่ง";
+
 "settings.commit.messages.must_disconnect" = "ต้องเชื่อมต่อ VPN อีกครั้งเพื่อให้เกิดความเปลี่ยนแปลง";
 "settings.commit.messages.should_reconnect" = "เชื่อมต่อ VPN อีกครั้งเพื่อใช้ความเปลี่ยนแปลง";
 "settings.commit.buttons.reconnect" = "เชื่อมต่ออีกครั้ง";

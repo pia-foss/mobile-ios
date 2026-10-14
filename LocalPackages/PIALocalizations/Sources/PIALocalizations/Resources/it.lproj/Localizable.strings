@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Informazioni di debug inviate.\nID: %@\nPrendi nota di questo ID, il nostro team di assistenza te lo chiederà per localizzare la tua richiesta.";
 "settings.application_information.debug.success.copyId" = "Copia ID";
 
+"debug_report_review.title" = "Invia log di debug";
+"debug_report_review.privacy" = "Questa operazione carica i log di debug e le informazioni sulla configurazione della tua rete per il nostro team di assistenza. Non contiene alcuna informazione sul tuo utilizzo di Internet.";
+"debug_report_review.redacted" = "Gli indirizzi IP vengono oscurati.";
+"debug_report_review.sections.title" = "Cosa verrà inviato";
+"debug_report_review.sections.empty" = "Nessuna informazione diagnostica disponibile. Attiva il log di debug e riprova.";
+"debug_report_review.sections.truncated" = "Anteprima abbreviata. Usa «Salva report» per vedere il contenuto completo.";
+"debug_report_review.sections.expand_hint" = "Mostra o nasconde il contenuto di questa sezione.";
+"debug_report_review.section.protocol_information" = "Impostazioni di connessione";
+"debug_report_review.section.device_information" = "Informazioni sul dispositivo";
+"debug_report_review.section.application_log" = "Log di debug dell'app";
+"debug_report_review.section.subscription_information" = "Abbonamento";
+"debug_report_review.section.regions" = "Elenco dei server";
+"debug_report_review.section.user_settings" = "Impostazioni dell'app";
+"debug_report_review.section.last_known_exception" = "Ultimo errore";
+"debug_report_review.section.tunnel_log" = "Log del tunnel";
+"debug_report_review.section.last_tunnel_log" = "Log del tunnel (ultima sessione)";
+"debug_report_review.section.vpn_status" = "Stato VPN";
+"debug_report_review.share" = "Salva report";
+"debug_report_review.send" = "Invia";
+
 "settings.commit.messages.must_disconnect" = "La VPN deve riconnettersi perché alcune modifiche vengano applicate.";
 "settings.commit.messages.should_reconnect" = "Riconnetti la VPN per applicare le modifiche.";
 "settings.commit.buttons.reconnect" = "Riconnetti";

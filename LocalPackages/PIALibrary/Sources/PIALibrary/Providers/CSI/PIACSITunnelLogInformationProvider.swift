@@ -31,13 +31,48 @@ struct PIACSITunnelLogInformationProvider: CSIDataProvider {
     var sectionName: String = Self.liveSectionName
     var content: String? { getTunnelLogs() }
     let log: String?
+    let includeDebug: Bool
     let redactIPs: Bool
 
     private func getTunnelLogs() -> String {
-        guard let logs = log, !logs.isEmpty else {
+        guard let log, !log.isEmpty else {
             return "No tunnel logs available"
         }
 
+        let logs = includeDebug ? log : Self.removingDebugEntries(from: log)
         return redactIPs ? logs.redactIPs() : logs
     }
+
+    /// Drops `TRACE` and `DEBUG` entries, matching `PIALogHandler.getAllLogs(includeDebug:)`. An entry
+    /// is a line written by `PIATunnelLogger` as `<timestamp> [<LEVEL>] <label>: <message>`; lines
+    /// without that prefix continue a multi-line message and go with the entry they belong to.
+    static func removingDebugEntries(from log: String) -> String {
+        var isDroppingEntry = false
+        return
+            log
+            .split(separator: "\n", omittingEmptySubsequences: false)
+            .filter { line in
+                if let level = entryLevel(of: line) {
+                    isDroppingEntry = debugLevels.contains(level)
+                }
+                return !isDroppingEntry
+            }
+            .joined(separator: "\n")
+    }
+
+    private static let debugLevels: Set<Substring> = ["TRACE", "DEBUG"]
+
+    /// The level of a line that starts an entry, or `nil` for a continuation line.
+    private static func entryLevel(of line: Substring) -> Substring? {
+        guard let open = line.firstIndex(of: " "),
+            line[line.index(after: open)...].hasPrefix("["),
+            let close = line[open...].firstIndex(of: "]")
+        else {
+            return nil
+        }
+        let level = line[line.index(open, offsetBy: 2)..<close]
+        return allLevels.contains(level) ? level : nil
+    }
+
+    private static let allLevels: Set<Substring> = ["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"]
 }
