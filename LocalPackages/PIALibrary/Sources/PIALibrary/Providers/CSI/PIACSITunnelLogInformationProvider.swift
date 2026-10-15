@@ -24,7 +24,11 @@ import Foundation
 import PIACSI
 
 struct PIACSITunnelLogInformationProvider: CSIDataProvider {
-    var sectionName: String { "tunnel.log" }
+    static let liveSectionName = "tunnel.log"
+    /// Used when the tunnel is down and the log comes from the copy it persisted last.
+    static let lastSessionSectionName = "last_tunnel.log"
+
+    var sectionName: String = Self.liveSectionName
     var content: String? { getTunnelLogs() }
     let log: String?
     let redactIPs: Bool

@@ -25,76 +25,78 @@ import Testing
 
 @testable import PIA_VPN
 
-@MainActor
-@Suite(.serialized)
-final class DisplayedServerConnectionTimeTests {
+extension ClientPreferencesTests {
+    @MainActor
+    @Suite(.serialized)
+    final class DisplayedServerConnectionTimeTests {
 
-    private let oldConnectionSuccess = Date(timeIntervalSinceNow: -3600).timeIntervalSince1970
-    private let vpnProvider = MockVPNProvider()
-    private let serverProvider = Client.providers.serverProvider as! DefaultServerProvider
-    private let originalVPNProvider = Client.providers.vpnProvider
-    private let originalVPNStatus = Client.providers.vpnProvider.vpnStatus
-    private let originalServers: [Server]
-    private let originalPreferredServer = Client.preferences.preferredServer
-    private let originalConnectionSuccess = Client.preferences.lastVPNConnectionSuccess
+        private let oldConnectionSuccess = Date(timeIntervalSinceNow: -3600).timeIntervalSince1970
+        private let vpnProvider = MockVPNProvider()
+        private let serverProvider = Client.providers.serverProvider as! DefaultServerProvider
+        private let originalVPNProvider = Client.providers.vpnProvider
+        private let originalVPNStatus = Client.providers.vpnProvider.vpnStatus
+        private let originalServers: [Server]
+        private let originalPreferredServer = Client.preferences.preferredServer
+        private let originalConnectionSuccess = Client.preferences.lastVPNConnectionSuccess
 
-    init() {
-        originalServers = serverProvider.currentServers
-        serverProvider.currentServers = [makeServer("us-east"), makeServer("de-berlin")]
-        Client.useMockVPNProvider(vpnProvider)
-        setPreferredServer(makeServer("us-east"))
-    }
+        init() {
+            originalServers = serverProvider.currentServers
+            serverProvider.currentServers = [makeServer("us-east"), makeServer("de-berlin")]
+            Client.useMockVPNProvider(vpnProvider)
+            setPreferredServer(makeServer("us-east"))
+        }
 
-    isolated deinit {
-        setPreferredServer(originalPreferredServer)
-        serverProvider.currentServers = originalServers
-        vpnProvider.vpnStatus = originalVPNStatus
-        Client.providers.vpnProvider = originalVPNProvider
-        Client.preferences.lastVPNConnectionSuccess = originalConnectionSuccess
-    }
+        isolated deinit {
+            setPreferredServer(originalPreferredServer)
+            serverProvider.currentServers = originalServers
+            vpnProvider.vpnStatus = originalVPNStatus
+            Client.providers.vpnProvider = originalVPNProvider
+            Client.preferences.lastVPNConnectionSuccess = originalConnectionSuccess
+        }
 
-    @Test func changingServerWhileConnectedResetsConnectionTime() throws {
-        vpnProvider.vpnStatus = .connected
-        Client.preferences.lastVPNConnectionSuccess = oldConnectionSuccess
+        @Test func changingServerWhileConnectedResetsConnectionTime() throws {
+            vpnProvider.vpnStatus = .connected
+            Client.preferences.lastVPNConnectionSuccess = oldConnectionSuccess
 
-        Client.preferences.displayedServer = makeServer("de-berlin")
+            Client.preferences.displayedServer = makeServer("de-berlin")
 
-        let connectionSuccess = try #require(Client.preferences.lastVPNConnectionSuccess)
-        #expect(connectionSuccess > oldConnectionSuccess)
-    }
+            let connectionSuccess = try #require(Client.preferences.lastVPNConnectionSuccess)
+            #expect(connectionSuccess > oldConnectionSuccess)
+        }
 
-    @Test func selectingSameServerWhileConnectedKeepsConnectionTime() {
-        vpnProvider.vpnStatus = .connected
-        Client.preferences.lastVPNConnectionSuccess = oldConnectionSuccess
+        @Test func selectingSameServerWhileConnectedKeepsConnectionTime() {
+            vpnProvider.vpnStatus = .connected
+            Client.preferences.lastVPNConnectionSuccess = oldConnectionSuccess
 
-        Client.preferences.displayedServer = makeServer("us-east")
+            Client.preferences.displayedServer = makeServer("us-east")
 
-        #expect(Client.preferences.lastVPNConnectionSuccess == oldConnectionSuccess)
-    }
+            #expect(Client.preferences.lastVPNConnectionSuccess == oldConnectionSuccess)
+        }
 
-    @Test func changingServerWhileDisconnectedDoesNotSetConnectionTime() {
-        vpnProvider.vpnStatus = .disconnected
-        Client.preferences.lastVPNConnectionSuccess = nil
+        @Test func changingServerWhileDisconnectedDoesNotSetConnectionTime() {
+            vpnProvider.vpnStatus = .disconnected
+            Client.preferences.lastVPNConnectionSuccess = nil
 
-        Client.preferences.displayedServer = makeServer("de-berlin")
+            Client.preferences.displayedServer = makeServer("de-berlin")
 
-        #expect(Client.preferences.lastVPNConnectionSuccess == nil)
-    }
+            #expect(Client.preferences.lastVPNConnectionSuccess == nil)
+        }
 
-    private func setPreferredServer(_ server: Server?) {
-        let preferences = Client.preferences.editable()
-        preferences.preferredServer = server
-        preferences.commit()
-    }
+        private func setPreferredServer(_ server: Server?) {
+            let preferences = Client.preferences.editable()
+            preferences.preferredServer = server
+            preferences.commit()
+        }
 
-    private func makeServer(_ identifier: String) -> Server {
-        Server(
-            serial: "",
-            name: identifier,
-            country: "",
-            hostname: "\(identifier).privacy.network",
-            pingAddress: nil,
-            regionIdentifier: identifier
-        )
+        private func makeServer(_ identifier: String) -> Server {
+            Server(
+                serial: "",
+                name: identifier,
+                country: "",
+                hostname: "\(identifier).privacy.network",
+                pingAddress: nil,
+                regionIdentifier: identifier
+            )
+        }
     }
 }

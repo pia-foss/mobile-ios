@@ -19,7 +19,7 @@ struct PIAEndpointRepositoryPeckingOrderTests {
         return amnezia
     }
 
-    @Test("censored countries get the censorship order", arguments: ["CN", "IR", "RU"])
+    @Test("censored countries get the censorship order", arguments: ["AE", "CN", "IR", "RU"])
     func censoredCountries(code: String) {
         let order = PIAEndpointRepository().peckingOrder(for: Self.state(countryCode: code))
         #expect(Self.isCensorshipOrder(order))

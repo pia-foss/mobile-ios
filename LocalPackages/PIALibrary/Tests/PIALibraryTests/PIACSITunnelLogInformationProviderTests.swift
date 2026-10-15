@@ -42,6 +42,16 @@ struct PIACSITunnelLogInformationProviderTests {
         #expect(provider.sectionName == "tunnel.log")
     }
 
+    @Test("The persisted fallback is reported under its own section")
+    func lastSessionSectionName() {
+        let provider = PIACSITunnelLogInformationProvider(
+            sectionName: PIACSITunnelLogInformationProvider.lastSessionSectionName,
+            log: "anything",
+            redactIPs: false
+        )
+        #expect(provider.sectionName == "last_tunnel.log", "support must tell a live log from a stale one")
+    }
+
     @Test("Missing log yields a placeholder", arguments: [nil, ""] as [String?])
     func missingLog(log: String?) {
         let provider = PIACSITunnelLogInformationProvider(log: log, redactIPs: false)

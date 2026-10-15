@@ -30,13 +30,4 @@ enum SelectableVPNProtocol {
         }
         return stored
     }
-
-    /// The protocol an upgrading install must be moved to, or `nil` when the stored value is already
-    /// selectable and must be left alone.
-    static func migration(fromStored storedVPNType: String) -> KapePlatformSDKVPNType? {
-        guard let stored = KapePlatformSDKVPNType(rawValue: storedVPNType), all.contains(stored) else {
-            return resolved(fromStored: storedVPNType)
-        }
-        return nil
-    }
 }

@@ -73,22 +73,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>DynamicBlurView</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2015 Kyohei Ito</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/KyoheiG3/DynamicBlurView/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>PopupDialog</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2016 Orderella Ltd.</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/Orderella/PopupDialog/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>SwiftEntryKit</string>
 			<key>Copyright</key>
 			<string>Copyright (c) 2018 Daniel Huri</string>

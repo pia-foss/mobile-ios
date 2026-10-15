@@ -82,12 +82,14 @@ import StoreKit
         }
 
         func fetchProducts(identifiers: Set<String>) async -> Result<[any InAppProduct], StoreKitError> {
-            availableProducts = []
+            // Built locally and assigned once, so a concurrent reader never sees a half-filled list.
+            var products: [any InAppProduct] = []
             for (i, identifier) in await accessedConfiguration.allProductIdentifiers(timeout: 0).enumerated() {
                 let price = (Decimal(i + 1) * 50.0)
-                availableProducts?.append(MockProduct(identifier, price))
+                products.append(MockProduct(identifier, price))
             }
-            return .success(availableProducts ?? [])
+            availableProducts = products
+            return .success(products)
         }
 
         func eligibleDaysForIntroOffer(for product: any InAppProduct) async -> Int {

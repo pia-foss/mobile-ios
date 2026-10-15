@@ -100,4 +100,31 @@ struct WelcomeBackStoreTests {
         #expect(spy.didRequestLogin)
         #expect(spy.restoreCallCount == 0)
     }
+
+    @Test("The close button asks the host to dismiss")
+    func closeDismisses() async {
+        // GIVEN the screen as it is presented
+        let sut = makeStore()
+
+        // WHEN the close button is tapped
+        sut.send(.closeTapped)
+        await sut.finish()
+
+        // THEN the host is asked to dismiss, and no restore was attempted
+        #expect(spy.didDismiss)
+        #expect(spy.restoreCallCount == 0)
+    }
+
+    @Test("The close button is ignored while restoring")
+    func closeIgnoredWhileRestoring() async {
+        // GIVEN a restore in flight
+        let sut = makeStore(state: WelcomeBack.State(isRestoring: true))
+
+        // WHEN the close button is tapped
+        sut.send(.closeTapped)
+        await sut.finish()
+
+        // THEN nothing is emitted
+        #expect(!spy.didDismiss)
+    }
 }
