@@ -85,6 +85,13 @@ User-facing strings live in `PIALocalizations`, like every other feature package
   deliberate: a report missing its logs is rarely actionable.
 - **An extra step before sending.** Submitting is now review → send instead of a single tap. This is
   the intended trade-off.
+- **Debug logging opt-out no longer clears stored logs.** `HelpSettingsViewController` used to call
+  `PIALogHandler.logStorage.clear()` when the user turned debug logging off; that call is gone, so
+  stored logs now survive the opt-out. This is deliberate: `logStorage` is an in-memory, 1000-entry
+  ring buffer (it is never persisted and dies with the process), and whether debug entries are
+  *sent* is decided separately at build time by `includeDebug`. Opting out therefore still keeps
+  them out of the report; the only difference is that re-enabling logging can include debug entries
+  captured before the opt-out window.
 - **`submitDebugReport` remains** as a build-then-submit convenience for callers that do not need a
   preview (e.g. the internal debug menu).
 
