@@ -40,7 +40,11 @@ import PIALibrary
 /// transitions (OpenVPN status changes, DNS failures, authentication steps) at `debug`, and those are
 /// the lines a CSI report needs. `maxEntries` is sized for that: endpoint generation alone can emit
 /// several hundred lines per connect when the region is Automatic.
-final class PIATunnelLogStore: @unchecked Sendable {
+///
+/// State is guarded by locks, never by a queue callers wait on: every logging thread lands here, and
+/// a caller blocked on queued work can starve the threads that work needs — on a CI runner with few
+/// cores that froze the whole test bundle.
+final class PIATunnelLogStore: Sendable {
     static let shared = PIATunnelLogStore(fileURL: PIATunnelSharedState.lastTunnelLogURL())
 
     /// ~5k lines is roughly 750 KB of strings — affordable inside a Network Extension's memory budget,
@@ -48,9 +52,17 @@ final class PIATunnelLogStore: @unchecked Sendable {
     private let maxEntries: Int
     private let fileURL: URL?
     private let flushDelay: DispatchTimeInterval
-    private let queue = DispatchQueue(label: "PIATunnelLogStore", attributes: .concurrent)
-    private var lines: [String] = []
-    private var isFlushScheduled = false
+    private let state: Mutex<State>
+    /// Held across a whole snapshot-and-write, so an older snapshot never overwrites a newer one.
+    /// Always taken before `state`, never inside it.
+    private let fileLock = Mutex<Void>(())
+    /// Only runs the debounced write; nothing ever waits on it.
+    private let writeQueue = DispatchQueue(label: "PIATunnelLogStore.write", qos: .utility)
+
+    private struct State {
+        var lines: [String]
+        var isFlushScheduled = false
+    }
 
     /// - Parameter fileURL: where the buffer persists; `nil` keeps it in memory only. Injectable so
     ///   tests don't need the App Group entitlement.
@@ -58,55 +70,48 @@ final class PIATunnelLogStore: @unchecked Sendable {
         self.fileURL = fileURL
         self.maxEntries = maxEntries
         self.flushDelay = flushDelay
-        lines = Self.restoredLines(from: fileURL, maxEntries: maxEntries)
+        state = Mutex(State(lines: Self.restoredLines(from: fileURL, maxEntries: maxEntries)))
     }
 
     func append(_ line: String) {
-        queue.async(flags: .barrier) { [weak self] in
-            guard let self else { return }
-            appendLocked(line)
-            scheduleFlushLocked()
+        let needsFlush = state.withLock { state in
+            state.lines.append(line)
+            if state.lines.count > maxEntries {
+                state.lines.removeFirst(state.lines.count - maxEntries)
+            }
+            guard fileURL != nil, !state.isFlushScheduled else { return false }
+            state.isFlushScheduled = true
+            return true
+        }
+
+        if needsFlush {
+            writeQueue.asyncAfter(deadline: .now() + flushDelay) { [weak self] in
+                self?.write()
+            }
         }
     }
 
     func snapshot() -> String {
-        queue.sync {
-            lines.joined(separator: "\n")
-        }
+        state.withLock { $0.lines.joined(separator: "\n") }
     }
 
-    /// Persists the buffer now, after any pending `append`. Call it where the process may be torn
-    /// down before the debounced write fires.
+    /// Persists the buffer now, including every `append` that already returned. Call it where the
+    /// process may be torn down before the debounced write fires.
     func flush() {
-        queue.sync(flags: .barrier) {
-            writeLocked()
-        }
+        write()
     }
 
-    // MARK: Guarded by `queue`
-
-    private func appendLocked(_ line: String) {
-        lines.append(line)
-        if lines.count > maxEntries {
-            lines.removeFirst(lines.count - maxEntries)
-        }
-    }
-
-    private func scheduleFlushLocked() {
-        guard fileURL != nil, !isFlushScheduled else { return }
-        isFlushScheduled = true
-        queue.asyncAfter(deadline: .now() + flushDelay, flags: .barrier) { [weak self] in
-            guard let self else { return }
-            isFlushScheduled = false
-            writeLocked()
-        }
-    }
-
-    private func writeLocked() {
+    private func write() {
         guard let fileURL else { return }
-        // Not logged on failure: the logger writes into this store, so it would only recurse. A missed
-        // write costs a CSI report its fallback log, nothing more.
-        try? Data(lines.joined(separator: "\n").utf8).write(to: fileURL, options: .atomic)
+        fileLock.withLock { _ in
+            let text = state.withLock { state in
+                state.isFlushScheduled = false
+                return state.lines.joined(separator: "\n")
+            }
+            // Not logged on failure: the logger writes into this store, so it would only recurse. A
+            // missed write costs a CSI report its fallback log, nothing more.
+            try? Data(text.utf8).write(to: fileURL, options: .atomic)
+        }
     }
 
     /// The persisted log's newest lines, followed by a marker so a reader can tell where this process
