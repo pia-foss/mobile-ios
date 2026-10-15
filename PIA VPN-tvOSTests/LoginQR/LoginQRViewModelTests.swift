@@ -13,6 +13,9 @@ import XCTest
 @testable import PIA_VPN_tvOS
 
 final class LoginQRViewModelTests: XCTestCase {
+    /// Generous on purpose: `wait` returns as soon as the expectation is met, and a loaded CI simulator
+    /// has taken more than a second to resume the view model on the main actor.
+    private static let timeout: TimeInterval = 10
     class Fixture {
         var generateLoginQRCodeMock: GenerateLoginQRCodeUseCaseMock!
         var validateLoginQRCodeMock: ValidateLoginQRCodeMock!
@@ -73,7 +76,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.generateQRCode()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
         XCTAssertEqual(sut.qrCodeURL, loginQRCode.url)
         XCTAssertEqual(capturedState, [.loading, .validating])
         XCTAssertFalse(sut.shouldShowErrorMessage)
@@ -104,7 +107,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.generateQRCode()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
         XCTAssertNil(sut.qrCodeURL)
         XCTAssertEqual(capturedState, [.loading, .validating])
         XCTAssertTrue(sut.shouldShowErrorMessage)
@@ -136,7 +139,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.generateQRCode()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
         XCTAssertEqual(sut.qrCodeURL, loginQRCode.url)
         XCTAssertEqual(capturedState, [.loading, .validating, .expired])
         XCTAssertTrue(sut.shouldShowErrorMessage)
@@ -160,7 +163,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.navigateToRoute()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
     }
 
     func test_recoverPurchases_succeeds_when_there_is_a_valid_purchase() {
@@ -186,7 +189,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.recoverPurchases()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
         XCTAssertEqual(capturedState, [.loading])
         XCTAssertFalse(sut.shouldShowErrorMessage)
     }
@@ -217,7 +220,7 @@ final class LoginQRViewModelTests: XCTestCase {
         sut.recoverPurchases()
 
         // THEN
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: Self.timeout)
         XCTAssertEqual(capturedState, [.loading, .validating])
         XCTAssertTrue(sut.shouldShowErrorMessage)
     }
