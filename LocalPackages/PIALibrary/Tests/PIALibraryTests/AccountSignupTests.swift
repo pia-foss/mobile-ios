@@ -29,8 +29,8 @@ final class AccountSignupTests: XCTestCase {
 
     private let live = Client.providers
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
 
         Client.store = MockInAppProvider()
         Client.configuration.setPlans([
@@ -39,7 +39,9 @@ final class AccountSignupTests: XCTestCase {
         ])
         Client.database = Client.Database(group: "group.com.privateinternetaccess").truncate()
         Client.bootstrap()
-        Client.refreshProducts()
+        // Awaited rather than `Client.refreshProducts()`, which fetches in a detached task that would
+        // race the test's own fetch on the same mock store.
+        _ = await live.accountProvider.listPlanProducts()
     }
 
     override func tearDown() {

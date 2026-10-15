@@ -48,23 +48,21 @@ class LoginQRViewModel: ObservableObject {
     func generateQRCode() {
         log.info("Generating QR code for login")
         state = .loading
-        Task {
+        // One main-actor task for the whole flow: separate tasks per update could run out of order,
+        // e.g. `.validating` landing after `.expired`, or `onSuccessAction` before the QR code is set.
+        Task { @MainActor in
             do {
                 let qrCode = try await generateLoginQRCode()
                 log.info("QR code generated successfully")
-                Task { @MainActor in
-                    qrCodeURL = qrCode.url
-                    expirationDate = qrCode.expiresAt
-                    state = .validating
-                    startTimer()
-                }
+                qrCodeURL = qrCode.url
+                expirationDate = qrCode.expiresAt
+                state = .validating
+                startTimer()
                 await validateQRCode(loginQRCode: qrCode)
             } catch {
                 log.error("QR code generation failed: \(error.localizedDescription)")
-                Task { @MainActor in
-                    state = .validating
-                    shouldShowErrorMessage = true
-                }
+                state = .validating
+                shouldShowErrorMessage = true
             }
         }
     }
@@ -105,21 +103,17 @@ class LoginQRViewModel: ObservableObject {
         onNavigateAction()
     }
 
+    @MainActor
     private func validateQRCode(loginQRCode: LoginQRCode) async {
         log.info("Validating QR code login")
         do {
             try await validateLoginQRCode(qrCodeToken: loginQRCode)
             log.info("QR code login succeeded")
-            Task { @MainActor in
-                onSuccessAction()
-            }
-
+            onSuccessAction()
         } catch {
             log.error("QR code login validation failed: \(error.localizedDescription)")
-            Task { @MainActor in
-                state = .expired
-                shouldShowErrorMessage = true
-            }
+            state = .expired
+            shouldShowErrorMessage = true
         }
     }
 
