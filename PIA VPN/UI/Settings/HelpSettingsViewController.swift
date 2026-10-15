@@ -25,8 +25,6 @@ import PIALocalizations
 import SafariServices
 import UIKit
 
-private let log = PIALogger.logger(for: HelpSettingsViewController.self)
-
 final class HelpSettingsViewController: PIABaseSettingsViewController {
 
     private lazy var switchDebugLogging = UISwitch()
@@ -73,14 +71,12 @@ final class HelpSettingsViewController: PIABaseSettingsViewController {
         tableView.reloadData()
     }
 
+    /// Only decides whether debug-level entries are included when a report is sent; stored logs are
+    /// never cleared here.
     @objc private func toggleDebugLogging(_ sender: UISwitch) {
         guard let pendingPreferences else { return }
         pendingPreferences.debugLogging = sender.isOn
         reloadSettings()
-
-        if !sender.isOn {
-            PIALogHandler.logStorage.clear()
-        }
     }
 
     @objc private func toggleShareServiceQualityData(_ sender: UISwitch) {
@@ -202,7 +198,7 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
 
         switch section {
         case .sendDebugLogs:
-            submitDebugReport()
+            presentDebugReportReview()
         case .latestNews:
             showLatestNews()
         case .kpiViewEvents:
@@ -245,6 +241,13 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
         label?.attributedText = attributedString
     }
 
+    private func presentDebugReportReview() {
+        let coordinator = DebugReportCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
     @objc private func showShareDataInformation() {
         let storyboard = Client.signupStoryboard()
         let shareDataInformationViewController = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.shareDataInformation)
@@ -269,51 +272,6 @@ extension HelpSettingsViewController: UITableViewDelegate, UITableViewDataSource
     private func presentModally(viewController: UIViewController) {
         viewController.modalPresentationStyle = .overCurrentContext
         self.present(viewController, animated: true, completion: nil)
-    }
-
-    private func submitDebugReport() {
-        self.showLoadingAnimation()
-        Task { [weak self] in
-            guard let self else { return }
-
-            let title: String
-            let message: String
-            let reportId: String?
-
-            do {
-                reportId = try await Client.submitDebugReport()
-                if let reportId, !reportId.isEmpty {
-                    title = L10n.Settings.ApplicationInformation.Debug.Success.title
-                    message = L10n.Settings.ApplicationInformation.Debug.Success.message(reportId)
-                } else {
-                    log.warning("CSI report ID was empty")
-                    title = L10n.Settings.ApplicationInformation.Debug.Empty.title
-                    message = L10n.Settings.ApplicationInformation.Debug.Empty.message
-                }
-            } catch {
-                log.error("Failed to submit debug report: \(error)")
-                title = L10n.Settings.ApplicationInformation.Debug.Failure.title
-                message = L10n.Settings.ApplicationInformation.Debug.Failure.message
-                reportId = nil
-            }
-
-            await MainActor.run {
-                self.hideLoadingAnimation()
-                self.showAlert(title: title, message: message, reportId: reportId)
-            }
-        }
-    }
-
-    @MainActor
-    private func showAlert(title: String, message: String, reportId: String?) {
-        let alert = Macros.alert(title, message)
-        alert.addCancelAction(L10n.Global.close)
-        if let reportId, !reportId.isEmpty {
-            alert.addActionWithTitle(L10n.Settings.ApplicationInformation.Debug.Success.copyId) {
-                UIPasteboard.general.string = reportId
-            }
-        }
-        self.present(alert, animated: true, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

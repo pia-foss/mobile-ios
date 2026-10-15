@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Feilsøkinfo sendt. \nID: %@\nSkriv ned ID-en. Kundestøtte trenger den for å finne meldingen din.";
 "settings.application_information.debug.success.copyId" = "Kopier ID";
 
+"debug_report_review.title" = "Send feilsøkingslogger";
+"debug_report_review.privacy" = "Dette laster opp feilsøkingslogger og informasjon om nettverksoppsettet ditt til kundestøtteteamet vårt. Det inneholder ingen informasjon om internettbruken din.";
+"debug_report_review.redacted" = "IP-adresser er skjult.";
+"debug_report_review.sections.title" = "Hva som blir sendt";
+"debug_report_review.sections.empty" = "Ingen diagnoseinformasjon er tilgjengelig. Slå på feilsøkingslogging og prøv igjen.";
+"debug_report_review.sections.truncated" = "Forhåndsvisningen er forkortet. Bruk «Lagre rapport» for å se hele innholdet.";
+"debug_report_review.sections.expand_hint" = "Viser eller skjuler innholdet i denne delen.";
+"debug_report_review.section.protocol_information" = "Tilkoblingsinnstillinger";
+"debug_report_review.section.device_information" = "Enhetsinformasjon";
+"debug_report_review.section.application_log" = "Appens feilsøkingslogg";
+"debug_report_review.section.subscription_information" = "Abonnement";
+"debug_report_review.section.regions" = "Serverliste";
+"debug_report_review.section.user_settings" = "Appinnstillinger";
+"debug_report_review.section.last_known_exception" = "Siste feil";
+"debug_report_review.section.tunnel_log" = "Tunnellogg";
+"debug_report_review.section.last_tunnel_log" = "Tunnellogg (siste økt)";
+"debug_report_review.section.vpn_status" = "VPN-status";
+"debug_report_review.share" = "Lagre rapport";
+"debug_report_review.send" = "Send";
+
 "settings.commit.messages.must_disconnect" = "VPN-en må koble til igjen for at enkelte endringer skal tre i kraft.";
 "settings.commit.messages.should_reconnect" = "Koble til VPN-en igjen for å ta i bruk endringene.";
 "settings.commit.buttons.reconnect" = "Koble til igjen";

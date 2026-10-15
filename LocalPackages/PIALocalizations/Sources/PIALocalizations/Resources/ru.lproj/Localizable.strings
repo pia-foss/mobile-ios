@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Отладочная информация успешно отправлена.\nКод: %@\nЗапишите этот код, т. к. наша служба поддержки запрашивает его для поиска переданных вами данных.";
 "settings.application_information.debug.success.copyId" = "Копировать код";
 
+"debug_report_review.title" = "Отправить журналы отладки";
+"debug_report_review.privacy" = "Журналы отладки и сведения о настройках вашей сети будут переданы нашей службе поддержки. Они не содержат никакой информации о том, как вы пользуетесь интернетом.";
+"debug_report_review.redacted" = "IP-адреса скрыты.";
+"debug_report_review.sections.title" = "Что будет отправлено";
+"debug_report_review.sections.empty" = "Диагностические данные недоступны. Включите журнал отладки и повторите попытку.";
+"debug_report_review.sections.truncated" = "Предпросмотр сокращён. Чтобы увидеть всё содержимое, используйте «Сохранить отчёт».";
+"debug_report_review.sections.expand_hint" = "Показывает или скрывает содержимое этого раздела.";
+"debug_report_review.section.protocol_information" = "Настройки подключения";
+"debug_report_review.section.device_information" = "Сведения об устройстве";
+"debug_report_review.section.application_log" = "Журнал отладки приложения";
+"debug_report_review.section.subscription_information" = "Подписка";
+"debug_report_review.section.regions" = "Список серверов";
+"debug_report_review.section.user_settings" = "Настройки приложения";
+"debug_report_review.section.last_known_exception" = "Последняя ошибка";
+"debug_report_review.section.tunnel_log" = "Журнал туннеля";
+"debug_report_review.section.last_tunnel_log" = "Журнал туннеля (последний сеанс)";
+"debug_report_review.section.vpn_status" = "Состояние VPN";
+"debug_report_review.share" = "Сохранить отчёт";
+"debug_report_review.send" = "Отправить";
+
 "settings.commit.messages.must_disconnect" = "Чтобы некоторые изменения вступили в силу, надо переподключиться к VPN.";
 "settings.commit.messages.should_reconnect" = "Чтобы изменения вступили в силу, переподключитесь к VPN.";
 "settings.commit.buttons.reconnect" = "Переподключиться";

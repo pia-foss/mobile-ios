@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Wysłano informacje z debugowania.\nIdentyfikator: %@\nProszę zapisać ten identyfikator, gdyż poprosi o niego nasz dział obsługi, aby znaleźć twoją przesyłkę.";
 "settings.application_information.debug.success.copyId" = "Kopiuj identyfikator";
 
+"debug_report_review.title" = "Wyślij dzienniki debugowania";
+"debug_report_review.privacy" = "Spowoduje to przesłanie dzienników debugowania i informacji o konfiguracji Twojej sieci do naszego działu obsługi. Nie zawierają one żadnych informacji o korzystaniu przez Ciebie z internetu.";
+"debug_report_review.redacted" = "Adresy IP są ukrywane.";
+"debug_report_review.sections.title" = "Co zostanie wysłane";
+"debug_report_review.sections.empty" = "Brak dostępnych informacji diagnostycznych. Włącz rejestrowanie debugowania i spróbuj ponownie.";
+"debug_report_review.sections.truncated" = "Podgląd skrócony. Użyj opcji „Zapisz raport”, aby zobaczyć pełną zawartość.";
+"debug_report_review.sections.expand_hint" = "Pokazuje lub ukrywa zawartość tej sekcji.";
+"debug_report_review.section.protocol_information" = "Ustawienia połączenia";
+"debug_report_review.section.device_information" = "Informacje o urządzeniu";
+"debug_report_review.section.application_log" = "Dziennik debugowania aplikacji";
+"debug_report_review.section.subscription_information" = "Subskrypcja";
+"debug_report_review.section.regions" = "Lista serwerów";
+"debug_report_review.section.user_settings" = "Ustawienia aplikacji";
+"debug_report_review.section.last_known_exception" = "Ostatni błąd";
+"debug_report_review.section.tunnel_log" = "Dziennik tunelu";
+"debug_report_review.section.last_tunnel_log" = "Dziennik tunelu (ostatnia sesja)";
+"debug_report_review.section.vpn_status" = "Stan VPN";
+"debug_report_review.share" = "Zapisz raport";
+"debug_report_review.send" = "Wyślij";
+
 "settings.commit.messages.must_disconnect" = "VPN musi połączyć się ponownie, aby niektóre zmiany zostały wprowadzone.";
 "settings.commit.messages.should_reconnect" = "Połącz ponownie z VPN, aby zastosować zmiany.";
 "settings.commit.buttons.reconnect" = "Połącz ponownie";

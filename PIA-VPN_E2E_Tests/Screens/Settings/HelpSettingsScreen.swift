@@ -25,6 +25,17 @@ extension XCUIApplication {
     var tryWireguardNowButtonString: String { getString(key: "card.wireguard.cta.activate", comment: "Try WireGuard® now") }
     var tryWireguardNowButton: XCUIElement { findElementWithPartialText(tryWireguardNowButtonString)! }
 
+    // Debug report review screen, opened by the "Send Debug Log to support" row. Queried by
+    // accessibility identifier because its strings live in the PIALocalizations package bundle.
+    var debugReportReviewSendButton: XCUIElement { button(with: "debugReportSendButton") }
+    var debugReportReviewShareButton: XCUIElement { button(with: "debugReportShareButton") }
+
+    func navigateToDebugReportReview() {
+        navigateToHelpSettings()
+        sendDebugButton.tap()
+        XCTAssertTrue(debugReportReviewSendButton.waitForElementToAppear())
+    }
+
     func navigateToHelpSettings() {
         navigateToSettings()
         helpSettingsButton.waitForElementToAppear()
