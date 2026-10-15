@@ -54,10 +54,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         return nav
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     /// :nodoc:
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,12 +68,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
         }
 
         buttonCancel.isHidden = true
-
-        #if os(iOS)
-            let nc = NotificationCenter.default
-            nc.addObserver(self, selector: #selector(presentForceUpdate(notification:)), name: .__AppDidFetchForceUpdateFeatureFlag, object: nil)
-        #endif
-
     }
 
     /// :nodoc:
@@ -174,33 +164,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
 
     func welcomeDidSignup(withUser user: UserAccount, topViewController: UIViewController) {
         delegate?.welcomeController(self, didSignupWith: user, topViewController: topViewController)
-    }
-
-    // MARK: Notifications
-
-    @objc func presentForceUpdate(notification: Notification) {
-        #if !STAGING
-            let forceUpdate = ForceUpdateViewController()
-            forceUpdate.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async { [weak self] in
-                var isOtherViewPresented = false
-                if let presented = self?.presentedViewController {
-                    if !(presented is ForceUpdateViewController) {
-                        isOtherViewPresented = true
-                    }
-                }
-
-                if isOtherViewPresented {
-                    self?.dismiss(
-                        animated: false,
-                        completion: {
-                            self?.present(forceUpdate, animated: false)
-                        })
-                } else {
-                    self?.present(forceUpdate, animated: false)
-                }
-            }
-        #endif
     }
 
     // MARK: Restylable

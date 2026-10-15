@@ -292,7 +292,6 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(connectionVPNStatusDidChange(_:)), name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
         nc.addObserver(self, selector: #selector(handleDidConnectToRFC1918CompliantWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918CompliantWifi, object: nil)
         nc.addObserver(self, selector: #selector(checkConnectToRFC1918VulnerableWifi(_:)), name: NSNotification.Name.DeviceDidConnectToRFC1918VulnerableWifi, object: nil)
-        nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         nc.addObserver(self, selector: #selector(handleDismissModal), name: .PIADashboardShouldDismissModal, object: nil)
     }
 
@@ -314,7 +313,7 @@ final class DashboardViewController: AutolayoutViewController {
 
     private func checkTVOSTokenToBind() {
         guard Client.providers.accountProvider.apiToken != nil,
-              let token = Client.configuration.tvOSBindToken
+            let token = Client.configuration.tvOSBindToken
         else {
             return
         }
@@ -443,7 +442,8 @@ final class DashboardViewController: AutolayoutViewController {
             // Prefer a fold that leaves two usable pages, but fall back to the active fold so the
             // dashboard keeps the two-page layout half-open as well as fully open.
             let twoPage = folds.filter { $0.frame.minX >= 320 && width - $0.frame.maxX >= 320 }
-            return (twoPage.first(where: \.isActive) ?? twoPage.first
+            return
+                (twoPage.first(where: \.isActive) ?? twoPage.first
                 ?? folds.first(where: \.isActive) ?? folds.first)?.frame
         #endif
     }
@@ -917,27 +917,6 @@ final class DashboardViewController: AutolayoutViewController {
             self.presentNonCompliantWifiAlert()
             self.showNonCompliantWifiLocalNotification(currentRFC1918VulnerableWifiName: currentRFC1918VulnerableWifiName)
         }
-    }
-
-    @objc func presentForceUpdate() {
-        #if !STAGING
-            let forceUpdate = ForceUpdateViewController()
-            forceUpdate.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async {
-                guard let presenter = RootCoordinator.shared.topPresentedViewController() else { return }
-                if presenter is ForceUpdateViewController { return }
-                if presenter.presentingViewController != nil {
-                    presenter.dismiss(
-                        animated: false,
-                        completion: {
-                            RootCoordinator.shared.topPresentedViewController()?
-                                .present(forceUpdate, animated: false)
-                        })
-                } else {
-                    presenter.present(forceUpdate, animated: false)
-                }
-            }
-        #endif
     }
 
     @objc private func handleDismissModal() {
@@ -1419,10 +1398,8 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     }
 
     private func showVPNModal(target: UIViewController) {
-        let vc = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        target.present(nav, animated: true)
+        let coordinator = VPNPermissionCoordinator(presenter: target)
+        Task { await coordinator.startAsync() }
     }
 }
 
