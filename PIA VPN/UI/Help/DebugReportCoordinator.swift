@@ -22,6 +22,8 @@ import PIALibrary
 import PIALocalizations
 import UIKit
 
+private let log = PIALogger.logger(for: DebugReportCoordinator.self)
+
 /// Drives the "Send Debug Logs" review flow: it hands the screen the live `Client` closures and
 /// reports the submission result back to the user.
 final class DebugReportCoordinator: ModalCoordinator<DebugReportReviewView> {
@@ -43,7 +45,12 @@ final class DebugReportCoordinator: ModalCoordinator<DebugReportReviewView> {
                         )
                     },
                     submitReport: { report in
-                        try await Client.submitDebugReport(report)
+                        do {
+                            return try await Client.submitDebugReport(report)
+                        } catch {
+                            log.error("Failed to submit debug report: \(error)")
+                            throw error
+                        }
                     },
                     emit: { [weak self] output in
                         self?.handle(output)
@@ -60,6 +67,7 @@ final class DebugReportCoordinator: ModalCoordinator<DebugReportReviewView> {
         switch output {
         case .didSubmit(let reportId):
             if reportId.isEmpty {
+                log.warning("CSI report ID was empty")
                 presentResult(
                     title: L10n.Settings.ApplicationInformation.Debug.Empty.title,
                     message: L10n.Settings.ApplicationInformation.Debug.Empty.message,
