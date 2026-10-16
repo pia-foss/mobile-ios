@@ -149,7 +149,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return false
             }
 
-            guard let signupCoordinator = RootCoordinator.shared.activeSignupCoordinator else {
+            guard let signupCoordinator = RootCoordinator.shared.signupCoordinator else {
                 log.error("Magic link opened with no signup flow on screen")
                 return false
             }

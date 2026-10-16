@@ -51,12 +51,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/jonkykong/SideMenu.git",
-      "version": {
-        "version": "6.5.0",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/Quick/Quick",
       "version": {
         "version": "7.6.2",
@@ -387,10 +381,6 @@
         }, {
           "package": "Popover",
           "product-name": "Popover",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "SideMenu",
-          "product-name": "SideMenu",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "SwiftEntryKit",

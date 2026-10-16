@@ -4,7 +4,6 @@
 // swiftlint:disable sorted_imports
 import Foundation
 import PIALibrary
-import SideMenu
 import UIKit
 
 // swiftlint:disable superfluous_disable_command
@@ -22,7 +21,6 @@ internal enum StoryboardSegue {
         case developmentSettingsSegue = "DevelopmentSettingsSegue"
         case generalSettingsSegue = "GeneralSettingsSegue"
         case helpSettingsSegue = "HelpSettingsSegue"
-        case menuSegueIdentifier = "MenuSegueIdentifier"
         case networkSettingsSegue = "NetworkSettingsSegue"
         case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"
         case protocolSettingsSegue = "ProtocolSettingsSegue"
