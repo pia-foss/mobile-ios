@@ -24,24 +24,11 @@ import Foundation
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
-import SideMenu
 import UIKit
 
 extension Theme {
 
     // MARK: Customizations
-
-    func applySideMenu() {
-
-        if SideMenuManager.default.leftMenuNavigationController == nil {
-            SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-        }
-
-        SideMenuManager.default.leftMenuNavigationController?.statusBarEndAlpha = 0
-        SideMenuManager.default.leftMenuNavigationController?.presentationStyle = .menuSlideIn
-        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.presentingEndAlpha = 0.5
-        SideMenuManager.default.leftMenuNavigationController?.presentationStyle.backgroundColor = palette.appearance == .dark ? UIColor.black.withAlphaComponent(0.72) : UIColor.piaGrey1.withAlphaComponent(0.75)
-    }
 
     func applyPingTime(_ label: UILabel, time: Int) {
         switch AppConfiguration.ServerPing.from(value: time) {

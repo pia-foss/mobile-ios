@@ -119,6 +119,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         if let nav = rootViewController as? UINavigationController {
             return topViewControllerWithRootViewController(rootViewController: nav.visibleViewController)
         }
+        if let sidebarRoot = rootViewController as? SidebarRootViewController {
+            return topViewControllerWithRootViewController(rootViewController: sidebarRoot.split)
+        }
         if let split = rootViewController as? UISplitViewController {
             if let secondary = split.viewController(for: .secondary) {
                 return topViewControllerWithRootViewController(rootViewController: secondary)
