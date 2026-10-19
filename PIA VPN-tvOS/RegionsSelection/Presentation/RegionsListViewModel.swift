@@ -11,8 +11,10 @@ import Foundation
 import PIAAssetsFlags
 import PIAAssetsTV
 import PIADedicatedIP
+import PIAFavorites
 import PIALibrary
 import PIALocalizations
+import PIARegionListDomain
 import SwiftUI
 
 final class RegionsListViewModel: ObservableObject {

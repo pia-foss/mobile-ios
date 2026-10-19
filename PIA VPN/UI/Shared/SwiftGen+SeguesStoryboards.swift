@@ -26,8 +26,6 @@ internal enum StoryboardSegue {
         case networkSettingsSegue = "NetworkSettingsSegue"
         case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"
         case protocolSettingsSegue = "ProtocolSettingsSegue"
-        case selectRegionAnimatedSegueIdentifier = "SelectRegionAnimatedSegueIdentifier"
-        case selectRegionSegueIdentifier = "SelectRegionSegueIdentifier"
         case serviceQualityDataSegueIdentifier = "ServiceQualityDataSegueIdentifier"
         case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
         case settingsSegueIdentifier = "SettingsSegueIdentifier"

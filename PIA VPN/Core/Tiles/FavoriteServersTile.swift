@@ -23,6 +23,7 @@
 import Foundation
 import PIAAssetsMobile
 import PIADesignSystem
+import PIAFavorites
 import PIALibrary
 import PIALocalizations
 import PIAUIKit
@@ -102,13 +103,13 @@ final class FavoriteServersTile: UIView, Tileable {
         }
 
         var favServers: [Server] = []
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
+        let favoriteServers = RegionsSelectionFactory.makeFavoriteRegionUseCase.favoriteIdentifiers.filterDuplicate { ($0) }
         let showGeo = AppPreferences.shared.showGeoServers
 
         for identifier in favoriteServers.reversed() {
             let servers = currentServers
                 // filter servers (including DIPs) by favorite identifier
-                .filter { $0.identifier + ($0.dipToken ?? "") == identifier }
+                .filter { $0.favoriteKey == identifier }
                 // then, include geolocated servers only if `showGeo` is on
                 .filter { $0.geo ? showGeo : true }
             favServers.append(contentsOf: servers)

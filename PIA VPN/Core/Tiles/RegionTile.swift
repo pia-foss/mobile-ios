@@ -73,7 +73,6 @@ class RegionTile: UIView, Tileable {
 
     private func setupView() {
         self.accessibilityIdentifier = "RegionTile"
-        self.detailSegueIdentifier = StoryboardSegue.Main.selectRegionSegueIdentifier.rawValue
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)

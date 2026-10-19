@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import PIAFavorites
 
 @testable import PIA_VPN_tvOS
 

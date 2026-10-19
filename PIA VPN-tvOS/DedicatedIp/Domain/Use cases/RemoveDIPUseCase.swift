@@ -9,6 +9,7 @@
 import Foundation
 import PIADashboard
 import PIADedicatedIP
+import PIAFavorites
 import PIALibrary
 
 private let log = PIALogger.logger(for: RemoveDIPUseCase.self)

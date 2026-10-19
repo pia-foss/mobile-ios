@@ -49,6 +49,13 @@
         "identifier" : "PIASwiftUITests",
         "name" : "PIASwiftUITests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAFavorites",
+        "identifier" : "PIAFavoritesTests",
+        "name" : "PIAFavoritesTests"
+      }
     }
   ],
   "version" : 1

@@ -39,18 +39,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/dzenbot/DZNEmptyDataSet.git",
-      "version": {
-        "branch": "master",
-      },
-    }, {
-      "kind": "remote",
-      "repository": "https://github.com/fxm90/GradientProgressBar.git",
-      "version": {
-        "version": "3.0.0",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/jonkykong/SideMenu.git",
       "version": {
         "version": "6.5.0",
@@ -131,7 +119,6 @@
             "Core/Extensions/ServerProvider+UI.swift",
             "Core/Foundation+Protocols.swift",
             "Core/Models/AboutComponent.swift",
-            "Core/Utils/RegionFilter.swift",
             "Flags.swift",
             "Global/AppConfiguration.swift",
             "Global/AppPreferences.swift",
@@ -203,13 +190,11 @@
             "DedicatedIp/Domain/Use cases/RemoveDIPUseCase.swift",
             "Login/Utils/Foundation+PIA.swift",
             "RegionsSelection/CompositionRoot/RegionsSelectionFactory.swift",
-            "RegionsSelection/UseCases/FavoriteRegionUseCase.swift",
             "Shared/CompositionRoot/KeychainFactory.swift",
             "Shared/CompositionRoot/VpnConnectionFactory.swift",
             "Shared/StateMonitors/StateMonitorsFactory.swift",
             "Shared/StateMonitors/VPNStatusMonitor.swift",
             "Shared/Utils/PIALibrary+Protocols/ClientPreferences+Protocols.swift",
-            "Shared/Utils/PIALibrary+Protocols/Keychain+Protocols.swift",
             "Shared/Utils/PIALibrary+Protocols/PIALibrary+Protocols.swift",
           ],
         }, {
@@ -351,6 +336,9 @@
           "product-name": "PIADedicatedIP",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAFavorites",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIALibrary",
           "build-phase": { "build-phase": "frameworks" },
         }, {
@@ -360,6 +348,12 @@
           "product-name": "PIAPaywall",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIARegionList",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIARegionListDomain",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIASwiftUI",
           "build-phase": { "build-phase": "frameworks" },
         }, {
@@ -367,14 +361,6 @@
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIAValidateQRLogin",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "DZNEmptyDataSet",
-          "product-name": "DZNEmptyDataSet",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "GradientProgressBar",
-          "product-name": "GradientProgressBar",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "OpenSSL-Package",
@@ -760,10 +746,16 @@
           "product-name": "PIADedicatedIP",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAFavorites",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIALibrary",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIALocalizations",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIARegionListDomain",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIASwiftUI",

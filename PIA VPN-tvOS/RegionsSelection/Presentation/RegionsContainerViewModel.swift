@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import PIAFavorites
 import PIALocalizations
 import SwiftUI
 

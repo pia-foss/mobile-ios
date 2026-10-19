@@ -54,24 +54,6 @@ struct AppConfiguration {
         static let webTimeout = 5000
     }
 
-    enum ServerPing: Int {  // ms
-        case low = 100
-
-        case medium = 200
-
-        case high = 1000  // or timeout
-
-        static func from(value: Int) -> ServerPing {
-            if (value < low.rawValue) {
-                return .low
-            }
-            if (value < medium.rawValue) {
-                return .medium
-            }
-            return .high
-        }
-    }
-
     struct Rating {
         static let errorInConnectionsUntilPrompt = 1
     }
