@@ -42,6 +42,8 @@ struct SignupView: View {
             }
         }.onAppear {
             viewModel.getproducts()
+        }.task {
+            await viewModel.checkForActiveSubscription()
         }.alert(
             "", isPresented: $viewModel.shouldShowErrorMessage,
             actions: {

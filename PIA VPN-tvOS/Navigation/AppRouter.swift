@@ -53,6 +53,11 @@ class AppRouter: ObservableObject, AppRouterType {
         path.removeLast(path.count)
     }
 
+    /// Whether `destination` is the screen currently on top of the stack.
+    func isShowing<Destination: Destinations>(_ destination: Destination) -> Bool {
+        (pathDestinations.last as? Destination) == destination
+    }
+
 }
 
 extension AppRouter {
@@ -153,6 +158,10 @@ extension AppRouter {
 
     static var navigateToTermsAndConditionsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(AuthenticationDestinations.signupTerms)
+    }
+
+    static var navigateToWelcomeBackDestinationAction: AppRouter.Actions {
+        navigateRouterToDestinationAction(AuthenticationDestinations.welcomeBack)
     }
 }
 

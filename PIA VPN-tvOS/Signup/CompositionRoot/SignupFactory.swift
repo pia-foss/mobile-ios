@@ -10,6 +10,8 @@ import Foundation
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: SignUpFactory.self)
+
 class SignUpFactory {
     static func makeSignupQRView() -> SignupQRView {
         let url = URL(string: "https://apps.apple.com/us/app/vpn-by-private-internet-access/id955626407")!
@@ -39,6 +41,14 @@ class SignUpFactory {
                 onSuccessAction: { transaction in
                     SignupEmailFactory.transaction = transaction
                     AppRouter.navigateToSignUpEmailDestinationAction()
+                },
+                hasActiveSubscription: WelcomeBackFactory.makeHasActiveSubscriptionUseCase(),
+                onActiveSubscriptionFound: {
+                    guard AppRouter.shared.isShowing(AuthenticationDestinations.signup) else {
+                        log.info("Welcome back: paywall no longer on top (\(AppRouter.shared.pathDestinations)); not shown")
+                        return
+                    }
+                    AppRouter.navigateToWelcomeBackDestinationAction()
                 }))
     }
 

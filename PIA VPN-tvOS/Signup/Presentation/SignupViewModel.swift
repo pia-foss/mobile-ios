@@ -10,6 +10,8 @@ import Foundation
 import PIALibrary
 import PIALocalizations
 
+private let log = PIALogger.logger(for: SignupViewModel.self)
+
 class SignupViewModel: ObservableObject {
     let title: String = L10n.Signup.Purchase.Trials.region
     let optionButtons: [OnboardingComponentButton]
@@ -26,14 +28,46 @@ class SignupViewModel: ObservableObject {
     private let viewModelMapper: SubscriptionOptionViewModelMapper
     private let signupPresentableMapper: SignupPresentableErrorMapper
     private let onSuccessAction: (InAppTransaction?) -> Void
+    private let hasActiveSubscription: HasActiveSubscriptionUseCaseType
+    private let onActiveSubscriptionFound: () -> Void
+    private var hasCheckedActiveSubscription = false
 
-    init(optionButtons: [OnboardingComponentButton], getAvailableProducts: GetAvailableProductsUseCaseType, purchaseProduct: PurchaseProductUseCaseType, viewModelMapper: SubscriptionOptionViewModelMapper, signupPresentableMapper: SignupPresentableErrorMapper, onSuccessAction: @escaping (InAppTransaction?) -> Void) {
+    init(
+        optionButtons: [OnboardingComponentButton],
+        getAvailableProducts: GetAvailableProductsUseCaseType,
+        purchaseProduct: PurchaseProductUseCaseType,
+        viewModelMapper: SubscriptionOptionViewModelMapper,
+        signupPresentableMapper: SignupPresentableErrorMapper,
+        onSuccessAction: @escaping (InAppTransaction?) -> Void,
+        hasActiveSubscription: HasActiveSubscriptionUseCaseType,
+        onActiveSubscriptionFound: @escaping () -> Void = {}
+    ) {
         self.optionButtons = optionButtons
         self.getAvailableProducts = getAvailableProducts
         self.purchaseProduct = purchaseProduct
         self.viewModelMapper = viewModelMapper
         self.signupPresentableMapper = signupPresentableMapper
         self.onSuccessAction = onSuccessAction
+        self.hasActiveSubscription = hasActiveSubscription
+        self.onActiveSubscriptionFound = onActiveSubscriptionFound
+    }
+
+    /// Offers the welcome-back screen when this Apple ID already holds a live subscription, so a
+    /// returning customer signs in instead of buying a second account. Runs once per signup screen:
+    /// coming back from welcome-back must leave the customer on the paywall.
+    @MainActor
+    func checkForActiveSubscription() async {
+        guard !hasCheckedActiveSubscription else {
+            log.info("Welcome back: active subscription already checked for this paywall")
+            return
+        }
+        hasCheckedActiveSubscription = true
+
+        let isSubscribed = await hasActiveSubscription()
+        log.info("Welcome back: active subscription on this Apple ID: \(isSubscribed)")
+        if isSubscribed {
+            onActiveSubscriptionFound()
+        }
     }
 
     func getproducts() {

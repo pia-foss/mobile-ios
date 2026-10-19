@@ -32,4 +32,8 @@ final class PaymentProvider: PaymentProviderType {
             completion(.success(jws))
         }
     }
+
+    func currentPaymentReceipt() async -> JWS? {
+        await store.currentSubscriptionReceipt()?.jws
+    }
 }

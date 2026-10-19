@@ -13,12 +13,18 @@ import PIABase
 
 final class PaymentProviderMock: PaymentProviderType {
     private let result: Result<JWS, any Error>
+    private let currentReceipt: JWS?
 
-    init(result: Result<JWS, any Error>) {
+    init(result: Result<JWS, any Error>, currentReceipt: JWS? = nil) {
         self.result = result
+        self.currentReceipt = currentReceipt
     }
 
     func refreshPaymentReceipt(_ completion: @escaping (Result<JWS, Error>) -> Void) {
         completion(result)
+    }
+
+    func currentPaymentReceipt() async -> JWS? {
+        currentReceipt
     }
 }

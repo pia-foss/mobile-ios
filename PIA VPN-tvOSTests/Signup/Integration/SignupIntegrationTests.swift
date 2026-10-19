@@ -58,7 +58,8 @@ final class SignupIntegrationTests: XCTestCase {
             purchaseProduct: purchaseProductUseCase,
             viewModelMapper: SubscriptionOptionViewModelMapper(),
             signupPresentableMapper: SignupPresentableErrorMapper(),
-            onSuccessAction: onSuccessAction)
+            onSuccessAction: onSuccessAction,
+            hasActiveSubscription: HasActiveSubscriptionUseCaseMock(result: false))
     }
 
     override func setUp() {

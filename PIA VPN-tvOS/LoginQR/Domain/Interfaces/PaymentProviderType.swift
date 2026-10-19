@@ -11,4 +11,6 @@ import PIABase
 
 protocol PaymentProviderType {
     func refreshPaymentReceipt(_ completion: @escaping (Result<JWS, Error>) -> Void)
+    /// The receipt the App Store already holds for this Apple ID, without syncing first.
+    func currentPaymentReceipt() async -> JWS?
 }
