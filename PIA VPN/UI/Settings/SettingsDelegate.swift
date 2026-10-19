@@ -33,11 +33,6 @@ protocol SettingsDelegate: AnyObject {
     func updateSetting(_ setting: SettingSection, withValue value: Any?)
 
     /**
-        Reset settings to default
-     */
-    func resetToDefaultSettings()
-
-    /**
         Save VPN preferences
      */
     func savePreferences()
