@@ -267,7 +267,6 @@ final class Bootstrapper {
     // MARK: Notifications
     #if os(iOS)
         @objc private func reloadTheme() {
-            Theme.current.applySideMenu()
             Theme.current.applyAppearance()
         }
     #endif

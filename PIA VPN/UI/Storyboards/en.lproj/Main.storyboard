@@ -913,7 +913,6 @@
                         <outlet property="viewContentHeightConstraint" destination="LrV-0j-7SB" id="MFV-y1-aYU"/>
                         <outlet property="viewContentLandscapeHeightConstraint" destination="xD9-nS-1Fh" id="hC0-nQ-h8R"/>
                         <outlet property="viewRows" destination="Azf-f1-8fS" id="qgu-NB-b1a"/>
-                        <segue destination="kH0-rw-uGL" kind="presentation" identifier="MenuSegueIdentifier" id="mub-pZ-Rbt"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" animates="NO" id="Z3b-zh-fBg"/>
                         <segue destination="LrP-0B-Ym4" kind="show" identifier="SelectRegionAnimatedSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="Ic8-R6-xho"/>
                         <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="Skk-3e-UDA"/>
@@ -1122,7 +1121,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Xf0-2s-sV4">
             <objects>
-                <navigationController storyboardIdentifier="SideMenuNavigationController" navigationBarHidden="YES" id="kH0-rw-uGL" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SideMenuNavigationController" navigationBarHidden="YES" id="kH0-rw-uGL" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vQq-KR-4e0">
                         <rect key="frame" x="0.0" y="-50" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>

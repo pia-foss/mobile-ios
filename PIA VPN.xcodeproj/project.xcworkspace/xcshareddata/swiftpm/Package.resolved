@@ -109,15 +109,6 @@
       }
     },
     {
-      "identity" : "sidemenu",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jonkykong/SideMenu.git",
-      "state" : {
-        "revision" : "8bd4fd128923cf5494fa726839af8afe12908ad9",
-        "version" : "6.5.0"
-      }
-    },
-    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",

@@ -128,8 +128,6 @@ final class MenuViewController: AutolayoutViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Theme.current.applySideMenu()
-
         modalPresentationCapturesStatusBarAppearance = true
 
         imvAvatar.image = Asset.imageRobot.image
@@ -293,10 +291,10 @@ final class MenuViewController: AutolayoutViewController {
             L10n.Menu.Renewal.Message.trial
         )
         alert.addCancelAction(L10n.Global.cancel)
-        alert.addActionWithTitle(L10n.Menu.Renewal.purchase) {
-            self.dismiss(animated: true) {
-                self.delegate?.menu(didDetectTrialUpgrade: self)
-            }
+        alert.addActionWithTitle(L10n.Menu.Renewal.purchase) { [weak self] in
+            guard let self else { return }
+            self.hideOverlaySidebar()
+            self.delegate?.menu(didDetectTrialUpgrade: self)
         }
         present(alert, animated: true, completion: nil)
     }
@@ -400,25 +398,20 @@ final class MenuViewController: AutolayoutViewController {
             L10n.Menu.Logout.message
         )
         sheet.addCancelAction(L10n.Global.cancel)
-        sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) { [weak self] in
-            guard let self else { return }
-            let proceed: () -> Void = {
-                log.debug("Account: Logging out...")
-                let dashboard = DashboardViewController.instanceInNavigationStack()
-                dashboard?.showLoadingAnimation()
-                MenuViewController.performLogout { _ in
-                    dashboard?.hideLoadingAnimation()
-                }
-            }
-
-            if self.splitViewController != nil {
-                // Sidebar in split view — nothing to dismiss.
-                proceed()
-            } else {
-                self.dismiss(animated: true, completion: proceed)
+        sheet.addDestructiveActionWithTitle(L10n.Menu.Logout.confirm) {
+            log.debug("Account: Logging out...")
+            let dashboard = DashboardViewController.instanceInNavigationStack()
+            dashboard?.showLoadingAnimation()
+            MenuViewController.performLogout { _ in
+                dashboard?.hideLoadingAnimation()
             }
         }
         present(sheet, animated: true, completion: nil)
+    }
+
+    private func hideOverlaySidebar() {
+        guard splitViewController?.displayMode == .oneOverSecondary else { return }
+        splitViewController?.hide(.primary)
     }
 
     // MARK: Notifications
@@ -559,14 +552,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
 
-            if splitViewController != nil {
-                // Sidebar in split view — nothing to dismiss, delegate handles the navigation.
-                delegate?.menu(self, didSelect: item)
-            } else {
-                dismiss(animated: true) {
-                    self.delegate?.menu(self, didSelect: item)
-                }
-            }
+            hideOverlaySidebar()
+            delegate?.menu(self, didSelect: item)
         }
     }
 }

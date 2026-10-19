@@ -27,11 +27,10 @@ import SwiftUI
 import UIKit
 
 /// Owns the app's `window.rootViewController` and switches between the logged-in main UI
-/// (`UISplitViewController` on iPad, `UINavigationController(Dashboard)` on iPhone), the
-/// share-data consent screen (`ConsentView`) shown first when logged out, and the
-/// logged-out signup UI (`SignupCoordinator`).
+/// (`SidebarRootViewController`), the share-data consent screen (`ConsentView`) shown first when
+/// logged out, and the logged-out signup UI (`SignupCoordinator`).
 @MainActor
-final class RootCoordinator: NSObject {
+final class RootCoordinator {
     enum AppRoot {
         case consent
         case login
@@ -42,16 +41,11 @@ final class RootCoordinator: NSObject {
 
     private weak var window: UIWindow?
     private(set) var currentRoot: AppRoot?
-    private(set) var splitViewController: UISplitViewController?
     private(set) var dashboardNavigationController: UINavigationController?
 
-    /// The signup flow currently installed as the root, if any.
-    private var signupCoordinator: SignupCoordinator?
+    /// The signup flow currently installed as the root, if any. Reached by the magic-link deep link.
+    private(set) var signupCoordinator: SignupCoordinator?
     private var signupCancellables = Set<AnyCancellable>()
-
-    /// Whichever signup flow is on screen — the root one here, or the modal one the dashboard
-    /// presents on iPhone. Used by the magic-link deep link, which has no other way to reach it.
-    weak var activeSignupCoordinator: SignupCoordinator?
 
     var dashboard: DashboardViewController? {
         dashboardNavigationController?.viewControllers.first as? DashboardViewController
@@ -104,11 +98,11 @@ final class RootCoordinator: NSObject {
         case .consent:
             newRoot = makeConsentRoot()
         case .login:
-            splitViewController = nil
             dashboardNavigationController = nil
             newRoot = makeLoginRoot()
-            activeSignupCoordinator = signupCoordinator
         case .main:
+            signupCoordinator = nil
+            signupCancellables.removeAll()
             newRoot = makeMainRoot()
         }
 
@@ -121,21 +115,15 @@ final class RootCoordinator: NSObject {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        if window?.traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
-            let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-            let split = AdaptiveSplitViewController(style: .doubleColumn)
-            split.preferredDisplayMode = .oneBesideSecondary
-            split.preferredSplitBehavior = .tile
-            split.presentsWithGesture = true
-            split.displayModeButtonVisibility = .never
-            split.setViewController(menuNav, for: .primary)
-            split.setViewController(dashboardNav, for: .secondary)
-            splitViewController = split
-            return split
-        } else {
-            splitViewController = nil
-            return dashboardNav
-        }
+        let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
+        let split = AdaptiveSplitViewController(style: .doubleColumn)
+        split.preferredDisplayMode = .oneBesideSecondary
+        split.preferredSplitBehavior = .tile
+        split.presentsWithGesture = true
+        split.displayModeButtonVisibility = .never
+        split.setViewController(menuNav, for: .primary)
+        split.setViewController(dashboardNav, for: .secondary)
+        return SidebarRootViewController(split: split)
     }
 
     private func makeConsentRoot() -> UIViewController {
@@ -198,8 +186,7 @@ final class RootCoordinator: NSObject {
     }
 
     /// Returns the topmost view controller suitable for presenting alerts / modals,
-    /// drilling through nav, split, and presented chains. Works for both iPad split view
-    /// and the iPhone single-nav layout.
+    /// drilling through nav, split, and presented chains.
     func topPresentedViewController() -> UIViewController? {
         guard let root = window?.rootViewController else { return nil }
         return Self.deepestTop(of: root)
@@ -211,6 +198,9 @@ final class RootCoordinator: NSObject {
         }
         if let nav = vc as? UINavigationController, let top = nav.visibleViewController {
             return deepestTop(of: top)
+        }
+        if let sidebarRoot = vc as? SidebarRootViewController {
+            return deepestTop(of: sidebarRoot.split)
         }
         if let split = vc as? UISplitViewController {
             if let secondary = split.viewController(for: .secondary) {
@@ -224,24 +214,9 @@ final class RootCoordinator: NSObject {
     }
 }
 
-// MARK: - PIAWelcomeViewControllerDelegate (used when login is the root, i.e. iPad logged-out)
+// MARK: - SignupCoordinator actions
 
-extension RootCoordinator: PIAWelcomeViewControllerDelegate {
-    func welcomeController(_ welcomeController: PIAWelcomeViewController, didLoginWith user: UserAccount, topViewController: UIViewController) {
-        handleAuthenticationSuccess()
-    }
-
-    func welcomeController(_ welcomeController: PIAWelcomeViewController, didSignupWith user: UserAccount, topViewController: UIViewController) {
-        if welcomeController.preset.isEphemeral {
-            Client.providers.accountProvider.currentUser = user
-        }
-        handleAuthenticationSuccess()
-    }
-
-    func welcomeControllerDidCancel(_ welcomeController: PIAWelcomeViewController) {
-        // No-op: cancel inside login-as-root has nothing to dismiss back to.
-    }
-
+extension RootCoordinator {
     private func handleAuthenticationSuccess() {
         setRoot(.main)
         // After the root swap settles, present the VPN permission modal over Dashboard so
