@@ -1,5 +1,6 @@
 import Foundation
 import KapeVPN_PacketTunnel
+import KapeVPN_WireGuard
 import PIALibrary
 
 extension PIAEndpointRepository {
