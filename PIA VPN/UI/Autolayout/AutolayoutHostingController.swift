@@ -25,7 +25,7 @@ import PIASwiftUI
 import PIAUIKit
 import SwiftUI
 
-public final class AutolayoutHostingController<Content: ViewWithTitle>: UIHostingController<Content>, ModalController, Restylable {
+public class AutolayoutHostingController<Content: ViewWithTitle>: UIHostingController<Content>, ModalController, Restylable {
 
     public let onDismiss: () -> Void
 

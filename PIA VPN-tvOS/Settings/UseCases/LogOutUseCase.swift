@@ -8,7 +8,9 @@
 
 import Foundation
 import PIADashboard
+import PIAFavorites
 import PIALibrary
+import PIARegionListDomain
 
 private let log = PIALogger.logger(for: LogOutUseCase.self)
 

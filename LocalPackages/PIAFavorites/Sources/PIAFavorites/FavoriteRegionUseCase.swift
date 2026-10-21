@@ -1,15 +1,28 @@
 //
 //  FavoriteRegionUseCase.swift
-//  PIA VPN-tvOS
+//  PIAFavorites
 //
-//  Created by Laura S on 1/26/24.
-//  Copyright © 2024 Private Internet Access Inc. All rights reserved.
+//  Copyright © 2026 Private Internet Access, Inc.
+//
+//  This file is part of the Private Internet Access iOS Client.
+//
+//  The Private Internet Access iOS Client is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The Private Internet Access iOS Client is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with the Private
+//  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Combine
 import Foundation
 
-protocol FavoriteRegionUseCaseType {
+public protocol FavoriteRegionUseCaseType: Sendable {
     var favoriteIdentifiers: [String] { get }
     var favoriteIdentifiersPublisher: Published<[String]>.Publisher { get }
     @discardableResult
@@ -21,17 +34,18 @@ protocol FavoriteRegionUseCaseType {
     func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool
 }
 
-final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
-    static let favDipIdPreffix = "favDIP:"
+// The Keychain is the source of truth; `favorites` only mirrors it for observers.
+public final class FavoriteRegionUseCase: FavoriteRegionUseCaseType, @unchecked Sendable {
+    public static let favDipIdPreffix = "favDIP:"
 
-    private let keychain: KeychainType
+    let keychain: KeychainType
 
-    init(keychain: KeychainType) {
+    public init(keychain: KeychainType) {
         self.keychain = keychain
         self.favorites = favoriteIdentifiers
     }
 
-    var favoriteIdentifiers: [String] {
+    public var favoriteIdentifiers: [String] {
         if let favorites = try? keychain.getFavorites() {
             return favorites
         }
@@ -41,12 +55,12 @@ final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
 
     @Published internal var favorites: [String] = []
 
-    var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
+    public var favoriteIdentifiersPublisher: Published<[String]>.Publisher {
         $favorites
     }
 
     @discardableResult
-    func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
+    public func addToFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
         var newFavorites = favoriteIdentifiers
         let newFavoriteId = isDipServer ? calculateServerIdForDipServer(id) : id
         newFavorites.append(newFavoriteId)
@@ -56,7 +70,7 @@ final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     }
 
     @discardableResult
-    func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
+    public func removeFromFavorites(_ id: String, isDipServer: Bool) throws -> [String] {
         let storedFavoriteId = isDipServer ? calculateServerIdForDipServer(id) : id
         let newFavorites = favoriteIdentifiers.filter { storedFavoriteId != $0 }
         try keychain.set(favorites: newFavorites)
@@ -64,7 +78,7 @@ final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
         return newFavorites
     }
 
-    func eraseAllFavorites() {
+    public func eraseAllFavorites() {
         do {
             try keychain.eraseAllFavorites()
             self.favorites = []
@@ -75,11 +89,16 @@ final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
     }
 
     private func calculateServerIdForDipServer(_ id: String) -> String {
-        return "\(Self.favDipIdPreffix)\(id)"
+        return Self.favoriteKey(identifier: id, isDipServer: true)
     }
 
-    func getFavoriteDIPServerId() -> String? {
-        guard let storedFavIdWithPreffix = favoriteIdentifiers.filter { $0.hasPrefix(Self.favDipIdPreffix) }.first else {
+    /// The identifier stored in the Keychain for a server.
+    public static func favoriteKey(identifier: String, isDipServer: Bool) -> String {
+        isDipServer ? "\(favDipIdPreffix)\(identifier)" : identifier
+    }
+
+    public func getFavoriteDIPServerId() -> String? {
+        guard let storedFavIdWithPreffix = favoriteIdentifiers.filter({ $0.hasPrefix(Self.favDipIdPreffix) }).first else {
             return nil
         }
 
@@ -88,7 +107,7 @@ final class FavoriteRegionUseCase: FavoriteRegionUseCaseType {
         return dipServerIdWithoutPreffix
     }
 
-    func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool {
+    public func isFavoriteServerWith(identifier: String, isDipServer: Bool) -> Bool {
         if isDipServer {
             guard let savedFavoriteDipServerId = getFavoriteDIPServerId() else { return false }
             return savedFavoriteDipServerId == identifier

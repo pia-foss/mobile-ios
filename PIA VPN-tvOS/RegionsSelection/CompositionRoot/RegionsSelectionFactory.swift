@@ -8,8 +8,10 @@
 
 import Foundation
 import PIADedicatedIP
+import PIAFavorites
 import PIALibrary
 import PIALocalizations
+import PIARegionListDomain
 import SwiftUI
 
 public enum RegionsSelectionFactory {
@@ -81,7 +83,7 @@ public enum RegionsSelectionFactory {
 
     /// FavoritesUseCase is the same instance across the whole app
     /// in order to be able to publish updates to the favorites collection
-    static var makeFavoriteRegionUseCase: FavoriteRegionUseCaseType = {
+    static let makeFavoriteRegionUseCase: any FavoriteRegionUseCaseType & Sendable = {
         return FavoriteRegionUseCase(keychain: KeychainFactory.makeKeychain())
     }()
     #if os(tvOS)

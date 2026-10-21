@@ -8,6 +8,7 @@
 
 import Foundation
 import PIALibrary
+import PIARegionListDomain
 
 @testable import PIA_VPN_tvOS
 

@@ -210,6 +210,7 @@ final class Bootstrapper {
         }
 
         Client.bootstrap()
+        Server.migrateLegacyDIPFavorites()
 
         // Configurations
 

@@ -1,6 +1,7 @@
 import Foundation
 import PIADashboard
 import PIALibrary
+import PIARegionListDomain
 
 final class QuickConnectViewModel: ObservableObject {
 

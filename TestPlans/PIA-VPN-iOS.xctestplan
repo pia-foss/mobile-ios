@@ -99,6 +99,20 @@
         "identifier" : "PIAValidateQRLoginTests",
         "name" : "PIAValidateQRLoginTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAFavorites",
+        "identifier" : "PIAFavoritesTests",
+        "name" : "PIAFavoritesTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIARegionList",
+        "identifier" : "PIARegionListTests",
+        "name" : "PIARegionListTests"
+      }
     }
   ],
   "version" : 1

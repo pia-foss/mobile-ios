@@ -9,13 +9,9 @@
 import Foundation
 import PIADashboard
 import PIALibrary
+import PIARegionListDomain
 
 private let log = PIALogger.logger(for: RegionsListUseCase.self)
-
-protocol RegionsListUseCaseType {
-    func getCurrentServers() -> [ServerType]
-    func select(server: ServerType)
-}
 
 final class RegionsListUseCase: RegionsListUseCaseType {
 

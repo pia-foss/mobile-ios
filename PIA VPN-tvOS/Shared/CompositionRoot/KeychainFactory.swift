@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PIAFavorites
 import PIALibrary
 
 enum KeychainFactory {

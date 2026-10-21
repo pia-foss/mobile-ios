@@ -23,6 +23,7 @@
 import Intents
 import PIALibrary
 import PIALocalizations
+import PIARegionListDomain
 import UIKit
 
 private let log = PIALogger.logger(for: AppPreferences.self)

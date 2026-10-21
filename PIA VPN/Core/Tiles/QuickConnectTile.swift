@@ -23,6 +23,7 @@
 
 import PIAAssetsMobile
 import PIADesignSystem
+import PIAFavorites
 import PIALibrary
 import PIALocalizations
 import PIAUIKit
@@ -133,9 +134,9 @@ class QuickConnectTile: UIView, Tileable {
             }
         }
 
-        let favoriteServers = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
-
         autocompleteRecentServers()
+
+        let favorites = Set(RegionsSelectionFactory.makeFavoriteRegionUseCase.favoriteIdentifiers)
 
         for (index, server) in historicalServers.enumerated().reversed() {
             let buttonIndex = historicalServers.count - (index + 1)
@@ -155,11 +156,7 @@ class QuickConnectTile: UIView, Tileable {
                 } else if let imageView = element as? UIImageView {
                     if imageView.tag == 0 {
                         imageView.image = Asset.Piax.Global.favoriteGreen.image
-                        if let dipToken = server.dipToken {
-                            imageView.isHidden = !favoriteServers.contains(server.identifier + dipToken)
-                        } else {
-                            imageView.isHidden = !favoriteServers.contains(server.identifier)
-                        }
+                        imageView.isHidden = !favorites.contains(server.favoriteKey)
                     } else {
                         imageView.image = Asset.dipBadge.image
                         imageView.isHidden = server.dipToken == nil

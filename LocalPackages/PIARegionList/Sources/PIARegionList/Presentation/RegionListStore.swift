@@ -1,9 +1,8 @@
 //
-//  RegionFilter.swift
-//  PIA VPN
+//  RegionListStore.swift
+//  PIARegionList
 //
-//  Created by Jose Antonio Blaya Garcia on 28/12/2018.
-//  Copyright © 2020 Private Internet Access, Inc.
+//  Copyright © 2026 Private Internet Access, Inc.
 //
 //  This file is part of the Private Internet Access iOS Client.
 //
@@ -20,10 +19,15 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import CoreArchitecture
 
-public enum RegionFilter: String {
-    case name
-    case latency
-    case favorite
+public typealias RegionListStore = Store<RegionList.State, RegionList.Action>
+
+extension RegionListStore {
+    public convenience init(dependencies: RegionList.Dependencies) {
+        self.init(
+            initial: RegionList.State(content: dependencies.load(), vpnState: dependencies.vpnState()),
+            reduce: RegionList.Reducer(dependencies: dependencies).reduce
+        )
+    }
 }

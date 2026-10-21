@@ -21,47 +21,18 @@
 //
 
 import Foundation
+import PIAFavorites
 import PIALibrary
 
-protocol Favoritable {
+extension Server {
 
-    /// Favorite this server and update the cached servers
-    func favorite()
-
-    /// Unfavorite this server and update the cached servers
-    func unfavorite()
-
-}
-
-extension Server: Favoritable, PropertyStoring {
-
-    typealias T = Bool
-
-    private struct CustomProperties {
-        static var isFavorite = false
-    }
-
-    var isFavorite: Bool {
-        get {
-            return getAssociatedObject(&CustomProperties.isFavorite, defaultValue: CustomProperties.isFavorite)
+    /// iOS used to store Dedicated IP favorites as `identifier + dipToken`.
+    static func migrateLegacyDIPFavorites() {
+        guard let favorites = RegionsSelectionFactory.makeFavoriteRegionUseCase as? FavoriteRegionUseCase else { return }
+        let dipServers = Client.providers.serverProvider.currentServers.compactMap { server in
+            server.dipToken.map { (identifier: server.identifier, dipToken: $0) }
         }
-        set {
-            return objc_setAssociatedObject(self, &CustomProperties.isFavorite, newValue, .OBJC_ASSOCIATION_RETAIN)
-        }
+        guard !dipServers.isEmpty else { return }
+        try? favorites.migrateLegacyDIPFavorites(dipServers: dipServers)
     }
-
-    func favorite() {
-        self.isFavorite = true
-        var currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
-        currentFavorites.append(self.identifier + (self.dipToken ?? ""))
-        AppPreferences.shared.favoriteServerIdentifiersGen4 = currentFavorites
-    }
-
-    func unfavorite() {
-        self.isFavorite = false
-        let currentFavorites = AppPreferences.shared.favoriteServerIdentifiersGen4.filterDuplicate { ($0) }
-        let filteredFavorites = currentFavorites.filter({ $0 != self.identifier + (self.dipToken ?? "") })
-        AppPreferences.shared.favoriteServerIdentifiersGen4 = filteredFavorites
-    }
-
 }

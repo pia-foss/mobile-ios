@@ -1,24 +1,36 @@
 //
 //  RegionsFilterUseCase.swift
-//  PIA VPN-tvOS
+//  PIARegionListDomain
 //
-//  Created by Laura S on 2/2/24.
-//  Copyright © 2024 Private Internet Access Inc. All rights reserved.
+//  Copyright © 2026 Private Internet Access, Inc.
+//
+//  This file is part of the Private Internet Access iOS Client.
+//
+//  The Private Internet Access iOS Client is free software: you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License as published by the Free
+//  Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+//  The Private Internet Access iOS Client is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+//  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with the Private
+//  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
 import Foundation
-import PIADashboard
-import PIADedicatedIP
+import PIAFavorites
 import PIALibrary
 
-enum RegionsListFilter: Equatable, Hashable {
+public enum RegionsListFilter: Equatable, Hashable {
     case all
     case favorites
     case recommended
     case searchResults(String)
     case previouslySearched
 
-    var isSearchResultsWithAnySearchTerm: Bool {
+    public var isSearchResultsWithAnySearchTerm: Bool {
         switch self {
         case .searchResults(_):
             return true
@@ -27,7 +39,7 @@ enum RegionsListFilter: Equatable, Hashable {
         }
     }
 
-    static func == (lhs: RegionsListFilter, rhs: RegionsListFilter) -> Bool {
+    public static func == (lhs: RegionsListFilter, rhs: RegionsListFilter) -> Bool {
         switch (lhs, rhs) {
         case (.all, .all):
             return true
@@ -45,35 +57,46 @@ enum RegionsListFilter: Equatable, Hashable {
     }
 }
 
-enum SortingOrder {
+public enum SortingOrder {
     case ascending, descending
 }
 
-protocol RegionsFilterUseCaseType {
+public protocol RegionsFilterUseCaseType {
     func getServers(with filter: RegionsListFilter) -> [ServerType]
     func saveToPreviouslySearched(servers: [ServerType])
 }
 
-class RegionsFilterUseCase: RegionsFilterUseCaseType {
+open class RegionsFilterUseCase: RegionsFilterUseCaseType {
     private let maxReccommendedServersCount = 12
     private let serversUseCase: RegionsListUseCaseType
     private let favoritesUseCase: FavoriteRegionUseCaseType
     private let previouslySearchedAvailability: SearchedRegionsAvailabilityType
-    private let getDedicatedIpUseCase: GetDedicatedIpUseCaseType
+    private let automaticServer: ServerType
+    private let isDedicatedIp: (ServerType) -> Bool
+    private let currentVPNType: () -> String
     internal let maxPreviouslySearchedCount = 12
 
-    init(serversUseCase: RegionsListUseCaseType, favoritesUseCase: FavoriteRegionUseCaseType, searchedRegionsAvailability: SearchedRegionsAvailabilityType, getDedicatedIpUseCase: GetDedicatedIpUseCaseType) {
+    public init(
+        serversUseCase: RegionsListUseCaseType,
+        favoritesUseCase: FavoriteRegionUseCaseType,
+        searchedRegionsAvailability: SearchedRegionsAvailabilityType,
+        automaticServer: ServerType,
+        isDedicatedIp: @escaping (ServerType) -> Bool,
+        currentVPNType: @escaping () -> String
+    ) {
         self.serversUseCase = serversUseCase
         self.favoritesUseCase = favoritesUseCase
         self.previouslySearchedAvailability = searchedRegionsAvailability
-        self.getDedicatedIpUseCase = getDedicatedIpUseCase
+        self.automaticServer = automaticServer
+        self.isDedicatedIp = isDedicatedIp
+        self.currentVPNType = currentVPNType
     }
 
-    func getServers(with filter: RegionsListFilter) -> [ServerType] {
+    public func getServers(with filter: RegionsListFilter) -> [ServerType] {
         return getServers(with: filter, sorting: .ascending)
     }
 
-    func saveToPreviouslySearched(servers: [ServerType]) {
+    public func saveToPreviouslySearched(servers: [ServerType]) {
         func belongToTheSameCountry(_ servers: [ServerType]) -> Bool {
             let countries = Set(servers.map { $0.country })
             return countries.count == 1
@@ -127,21 +150,19 @@ extension RegionsFilterUseCase {
     }
 
     private func filteredByProtocol(_ servers: [ServerType]) -> [ServerType] {
-        let currentVPNType = Client.providers.vpnProvider.currentVPNType
-        return servers.filter { server in
-            server.dipToken != nil || server.hasEndpoints(for: currentVPNType)
-        }
+        let vpnType = currentVPNType()
+        return servers.filter { ProtocolFilter.isReachable(dipToken: $0.dipToken, vpnType: vpnType, hasEndpoints: $0.hasEndpoints(for:)) }
     }
 
     private func getServersWithoutDip(from servers: [ServerType]) -> [ServerType] {
         return servers.filter {
-            self.getDedicatedIpUseCase.isDedicatedIp($0) == false
+            self.isDedicatedIp($0) == false
                 && $0.dipToken == nil
         }
     }
 
     private func getFavorites(from servers: [ServerType]) -> [ServerType] {
-        let autoServer = SelectedServerUseCase.automaticServer()
+        let autoServer = automaticServer
         let favoritesIds = favoritesUseCase.favoriteIdentifiers
 
         var favoriteServers = servers.filter {

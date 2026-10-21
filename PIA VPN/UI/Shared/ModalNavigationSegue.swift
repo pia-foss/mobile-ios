@@ -39,6 +39,7 @@ final class ModalNavigationSegue: UIStoryboardSegue {
     static func configureAndPresent<Modal>(
         modal: Modal,
         from source: UIViewController,
+        animated: Bool = true,
     ) where Modal: UIViewController & ModalController {
         modal.navigationItem.leftBarButtonItem = UIBarButtonItem(
             systemItem: .close,
@@ -64,10 +65,10 @@ final class ModalNavigationSegue: UIStoryboardSegue {
         if let coordinator = source.transitionCoordinator {
             coordinator.animate(
                 alongsideTransition: { (context) in
-                    source.present(nav, animated: true, completion: nil)
+                    source.present(nav, animated: animated, completion: nil)
                 }, completion: nil)
         } else {
-            source.present(nav, animated: true, completion: nil)
+            source.present(nav, animated: animated, completion: nil)
         }
     }
 }

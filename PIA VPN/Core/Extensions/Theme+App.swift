@@ -30,19 +30,6 @@ extension Theme {
 
     // MARK: Customizations
 
-    func applyPingTime(_ label: UILabel, time: Int) {
-        switch AppConfiguration.ServerPing.from(value: time) {
-        case .low:
-            label.textColor = UIColor.piaGreenDark20
-
-        case .medium:
-            label.textColor = UIColor.piaOrange
-
-        case .high:
-            label.textColor = UIColor.piaRed
-        }
-    }
-
     func applyVPNStatus(_ label: UILabel, forStatus status: VPNStatus) {
         label.font = typeface.mediumFont(size: 24.0)
 
@@ -102,10 +89,6 @@ extension Theme {
         label.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle16 : TextStyle.textStyle17)
     }
 
-    public func applyFavoriteUnselectedImage(_ imageView: UIImageView) {
-        imageView.image = Asset.Piax.Global.favoriteUnselected.image
-    }
-
     public func geoImage(selected: Bool = false) -> UIImage {
         if selected {
             return Asset.iconGeoSelected.image
@@ -120,10 +103,6 @@ extension Theme {
         label.layer.cornerRadius = 3.0
         label.layer.masksToBounds = true
         label.backgroundColor = UIColor.piaGreen
-    }
-
-    public func noResultsImage() -> UIImage {
-        return Asset.Piax.Regions.noResults.image
     }
 
     public func mapImage() -> UIImage? {

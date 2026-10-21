@@ -614,10 +614,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    @IBAction private func selectRegion(_ sender: Any?) {
-        selectRegion(animated: true)
-    }
-
     /// Dismisses any already presented view controllers and then performs the segue.
     private func perform(segue: StoryboardSegue.Main) {
         dismissModalViewController { [weak self] in
@@ -629,8 +625,17 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func selectRegion(animated: Bool) {
-        let segue = (animated ? StoryboardSegue.Main.selectRegionAnimatedSegueIdentifier : StoryboardSegue.Main.selectRegionSegueIdentifier)
-        perform(segue: segue)
+        dismissModalViewController { [weak self] in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                let coordinator = RegionSelectionCoordinator(presenter: self, animated: animated)
+                Task {
+                    if let server = await coordinator.startAsync() {
+                        self.didSelectServer(server)
+                    }
+                }
+            }
+        }
     }
 
     @objc func openSettings() {
@@ -664,8 +669,6 @@ final class DashboardViewController: AutolayoutViewController {
 
         if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
-        } else if let vc = segue.destination as? RegionsViewController {
-            vc.serverSelectionDelegate = self
         } else if let identifier = segue.identifier,
             identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
             let vc = segue.destination as? SettingsViewController
@@ -1465,7 +1468,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if tileModeStatus == .normal {
             let cell = collectionView.cellForItem(at: indexPath)
-            if let detailedCell = cell as? DetailedTileCell,
+            if cell is RegionTileCollectionViewCell {
+                selectRegion(animated: true)
+            } else if let detailedCell = cell as? DetailedTileCell,
                 detailedCell.hasDetailView(),
                 let segueIdentifier = detailedCell.segueIdentifier()
             {

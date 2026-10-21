@@ -9,6 +9,7 @@
 import Foundation
 import PIADedicatedIP
 import PIALibrary
+import PIARegionListDomain
 import XCTest
 
 @testable import PIA_VPN_tvOS
