@@ -64,7 +64,14 @@ public struct VPNPermissionView: View {
         .background(Color.pia.background.ignoresSafeArea())
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(VPNPermissionAccessibility.screen)
-        .piaDialog(deniedDialog)
+        .alert(L10n.VpnPermission.title, isPresented: isShowingDeniedAlert) {
+            if store.state.canContactSupport {
+                Button(L10n.VpnPermission.Disallow.contact) { store.send(.contactSupportTapped) }
+            }
+            Button(L10n.Global.ok, role: .cancel) { store.send(.deniedAcknowledged) }
+        } message: {
+            Text(deniedMessage)
+        }
         .onAppear {
             store.send(.onAppear)
         }
@@ -105,29 +112,14 @@ public struct VPNPermissionView: View {
         }
     }
 
-    private var deniedDialog: PIADialog? {
-        guard store.state.phase == .denied else { return nil }
+    /// Read-only: both buttons move `phase` off `.denied` themselves, which is what dismisses it.
+    private var isShowingDeniedAlert: Binding<Bool> {
+        Binding(get: { store.state.phase == .denied }, set: { _ in })
+    }
 
-        var message = L10n.VpnPermission.Disallow.Message.basic
-        var actions: [PIADialog.Action] = []
-        if store.state.canContactSupport {
-            message += "\n" + L10n.VpnPermission.Disallow.Message.support
-            actions.append(
-                .init(
-                    title: L10n.VpnPermission.Disallow.contact,
-                    identifier: VPNPermissionAccessibility.contactSupportButton,
-                    handler: { store.send(.contactSupportTapped) }
-                ))
-        }
-        actions.append(
-            .init(
-                title: L10n.Global.ok,
-                role: .cancel,
-                identifier: VPNPermissionAccessibility.deniedOKButton,
-                handler: { store.send(.deniedAcknowledged) }
-            ))
-
-        return PIADialog(title: L10n.VpnPermission.title, message: message, actions: actions)
+    private var deniedMessage: String {
+        guard store.state.canContactSupport else { return L10n.VpnPermission.Disallow.Message.basic }
+        return L10n.VpnPermission.Disallow.Message.basic + "\n" + L10n.VpnPermission.Disallow.Message.support
     }
 }
 
@@ -138,8 +130,6 @@ public struct VPNPermissionView: View {
 public enum VPNPermissionAccessibility {
     public static let screen = "id.vpnPermission.screen"
     public static let submit = "id.vpnPermission.ok.button"
-    public static let contactSupportButton = "id.vpnPermission.denied.contact.button"
-    public static let deniedOKButton = "id.vpnPermission.denied.ok.button"
 }
 
 private extension VPNPermission.Dependencies {
