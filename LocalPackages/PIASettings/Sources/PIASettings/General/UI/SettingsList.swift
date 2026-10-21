@@ -22,14 +22,14 @@
 import PIADesignSystem
 import SwiftUI
 
-public struct PIASettingsList<Content: View>: View {
+struct SettingsList<Content: View>: View {
     private let content: Content
 
-    public init(@ViewBuilder content: () -> Content) {
+    init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
 
-    public var body: some View {
+    var body: some View {
         List {
             content
         }
@@ -55,17 +55,17 @@ extension View {
 }
 
 #Preview {
-    PIASettingsList {
-        PIASettingsNavigationRow("'Connect' Siri Shortcut") {}
-        PIASettingsNavigationRow("'Disconnect' Siri Shortcut", value: "Added") {}
-        PIASettingsToggleRow("Show Service Communication Messages", isOn: .constant(true))
-        PIASettingsToggleRow(
-            "Show Geo-located Regions",
+    SettingsList {
+        SettingsNavigationRow(title: "'Connect' Siri Shortcut") {}
+        SettingsNavigationRow(title: "'Disconnect' Siri Shortcut", value: "Added") {}
+        SettingsToggleRow(title: "Show Service Communication Messages", isOn: .constant(true))
+        SettingsToggleRow(
+            title: "Show Geo-located Regions",
             description: "Regions whose servers are not physically in the country",
             isOn: .constant(false)
         )
-        PIASettingsNavigationRow(
-            "Reset settings to default",
+        SettingsNavigationRow(
+            title: "Reset settings to default",
             description: "This will reset all of the above settings to default."
         ) {}
     }

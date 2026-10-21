@@ -39,23 +39,23 @@ public struct GeneralSettingsView: View, ViewWithTitle {
     }
 
     public var body: some View {
-        PIASettingsList {
-            PIASettingsNavigationRow(L10n.Siri.Shortcuts.Connect.Row.title) {
+        SettingsList {
+            SettingsNavigationRow(title: L10n.Siri.Shortcuts.Connect.Row.title) {
                 store.send(.connectSiriShortcutTapped)
             }
-            PIASettingsNavigationRow(L10n.Siri.Shortcuts.Disconnect.Row.title) {
+            SettingsNavigationRow(title: L10n.Siri.Shortcuts.Disconnect.Row.title) {
                 store.send(.disconnectSiriShortcutTapped)
             }
-            PIASettingsToggleRow(
-                L10n.Inapp.Messages.Toggle.title,
+            SettingsToggleRow(
+                title: L10n.Inapp.Messages.Toggle.title,
                 isOn: store.binding(\.preferences.showsServiceMessages) { .serviceMessagesToggled($0) }
             )
-            PIASettingsToggleRow(
-                L10n.Settings.Geo.Servers.description,
+            SettingsToggleRow(
+                title: L10n.Settings.Geo.Servers.description,
                 isOn: store.binding(\.preferences.showsGeoRegions) { .geoRegionsToggled($0) }
             )
-            PIASettingsNavigationRow(
-                L10n.Settings.Reset.Defaults.title,
+            SettingsNavigationRow(
+                title: L10n.Settings.Reset.Defaults.title,
                 description: L10n.Settings.Reset.footer
             ) {
                 store.send(.resetTapped)

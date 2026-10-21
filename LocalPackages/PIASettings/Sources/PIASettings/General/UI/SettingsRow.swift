@@ -22,24 +22,16 @@
 import PIADesignSystem
 import SwiftUI
 
-public struct PIASettingsRow<Accessory: View>: View {
+struct SettingsRow<Accessory: View>: View {
     private let title: String
     private let description: String?
     private let accessory: Accessory
     private let isLabelAccessibilityHidden: Bool
 
-    public init(
-        _ title: String,
-        description: String? = nil,
-        @ViewBuilder accessory: () -> Accessory
-    ) {
-        self.init(title, description: description, isLabelAccessibilityHidden: false, accessory: accessory)
-    }
-
     init(
         _ title: String,
-        description: String?,
-        isLabelAccessibilityHidden: Bool,
+        description: String? = nil,
+        isLabelAccessibilityHidden: Bool = false,
         @ViewBuilder accessory: () -> Accessory
     ) {
         self.title = title
@@ -48,7 +40,7 @@ public struct PIASettingsRow<Accessory: View>: View {
         self.accessory = accessory()
     }
 
-    public var body: some View {
+    var body: some View {
         content
             .piaSettingsListRow()
     }
@@ -77,19 +69,13 @@ public struct PIASettingsRow<Accessory: View>: View {
     }
 }
 
-public struct PIASettingsToggleRow: View {
-    private let title: String
-    private let description: String?
-    @Binding private var isOn: Bool
+struct SettingsToggleRow: View {
+    let title: String
+    var description: String? = nil
+    @Binding var isOn: Bool
 
-    public init(_ title: String, description: String? = nil, isOn: Binding<Bool>) {
-        self.title = title
-        self.description = description
-        self._isOn = isOn
-    }
-
-    public var body: some View {
-        PIASettingsRow(title, description: description, isLabelAccessibilityHidden: true) {
+    var body: some View {
+        SettingsRow(title, description: description, isLabelAccessibilityHidden: true) {
             Toggle(title, isOn: $isOn)
                 .labelsHidden()
                 .piaToggleStyle()
@@ -99,27 +85,15 @@ public struct PIASettingsToggleRow: View {
     }
 }
 
-public struct PIASettingsNavigationRow: View {
-    private let title: String
-    private let description: String?
-    private let value: String?
-    private let action: () -> Void
+struct SettingsNavigationRow: View {
+    let title: String
+    var description: String? = nil
+    var value: String? = nil
+    let action: () -> Void
 
-    public init(
-        _ title: String,
-        description: String? = nil,
-        value: String? = nil,
-        action: @escaping () -> Void
-    ) {
-        self.title = title
-        self.description = description
-        self.value = value
-        self.action = action
-    }
-
-    public var body: some View {
+    var body: some View {
         Button(action: action) {
-            PIASettingsRow(title, description: description) {
+            SettingsRow(title, description: description) {
                 HStack(spacing: PIASpacing.s8) {
                     if let value {
                         Text(value)
@@ -132,7 +106,7 @@ public struct PIASettingsNavigationRow: View {
             }
             .content
         }
-        .buttonStyle(PIASettingsRowButtonStyle())
+        .buttonStyle(SettingsRowButtonStyle())
         .piaSettingsListRow()
         .accessibilityLabel(title)
         .accessibilityValue(value ?? "")
@@ -140,15 +114,15 @@ public struct PIASettingsNavigationRow: View {
     }
 }
 
-private struct PIASettingsRowButtonStyle: ButtonStyle {
+private struct SettingsRowButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .background(configuration.isPressed ? Color.pia.surfaceContainerSecondary : Color.clear)
     }
 }
 
-extension View {
-    fileprivate func piaSettingsListRow() -> some View {
+private extension View {
+    func piaSettingsListRow() -> some View {
         listRowInsets(EdgeInsets())
             .listRowBackground(Color.pia.surfaceContainerPrimary)
     }
