@@ -29,7 +29,7 @@ extension ForceUpdate.Dependencies {
     ///   - uninstallVPNProfiles: Runs before the App Store opens, so the update never replaces the
     ///     app while its tunnel is up.
     public static func live(
-        isVPNConnected: @MainActor @escaping () -> Bool,
+        isVPNConnected: @Sendable @escaping () -> Bool,
         uninstallVPNProfiles: @MainActor @escaping () -> Void,
         openURL: @MainActor @escaping (URL) -> Void
     ) -> ForceUpdate.Dependencies {

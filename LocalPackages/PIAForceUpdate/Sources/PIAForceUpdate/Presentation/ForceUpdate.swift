@@ -42,11 +42,11 @@ extension ForceUpdate {
 
     /// The screen has no outputs: it blocks the app until the person installs the update.
     public struct Dependencies: Sendable {
-        public var isVPNConnected: @MainActor () -> Bool
+        public var isVPNConnected: @Sendable () -> Bool
         public var update: @MainActor () -> Void
 
         public init(
-            isVPNConnected: @MainActor @escaping () -> Bool,
+            isVPNConnected: @Sendable @escaping () -> Bool,
             update: @MainActor @escaping () -> Void
         ) {
             self.isVPNConnected = isVPNConnected

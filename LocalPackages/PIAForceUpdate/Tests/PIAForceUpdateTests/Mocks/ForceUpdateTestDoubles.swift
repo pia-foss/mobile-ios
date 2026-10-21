@@ -23,8 +23,7 @@ import Foundation
 
 @testable import PIAForceUpdate
 
-@MainActor
-final class ForceUpdateDependencySpy {
+final class ForceUpdateDependencySpy: @unchecked Sendable {
     var isVPNConnected = false
     private(set) var updateCallCount = 0
 
