@@ -24,13 +24,13 @@ import UIKit
 
 /// A `UISplitViewController` that adapts its split behavior to the available window width.
 ///
-/// On Mac Catalyst (and iPad multitasking / Stage Manager) the horizontal size class stays
-/// `.regular` no matter how narrow the user drags the window, so the system never collapses the
-/// sidebar on its own. Watching our own width lets us switch between:
+/// On Mac Catalyst and iPad multitasking / Stage Manager the horizontal size class stays `.regular`
+/// however narrow the window is, so the system never collapses the sidebar on its own. Watching our
+/// own width lets us switch between the modes below; iPhone is always narrow:
 /// - **wide** (≥ `narrowWidthThreshold`): `.tile` behavior — the sidebar sits beside the content
 ///   (the default behavior).
 /// - **narrow** (< `narrowWidthThreshold`): `.overlay` behavior with the sidebar hidden — content
-///   takes the full width and the sidebar slides over it when shown via `toggleSidebar`.
+///   takes the full width and the sidebar slides over it when shown.
 final class AdaptiveSplitViewController: UISplitViewController {
 
     /// Window width (in points) below which the sidebar collapses into a hidden overlay.
@@ -53,27 +53,13 @@ final class AdaptiveSplitViewController: UISplitViewController {
         updateLayoutMode(for: size.width)
     }
 
-    /// Shows the sidebar if it is hidden, hides it if it is visible.
-    ///
-    /// The shown state respects the current split behavior, so callers don't need to know the
-    /// layout: in `.overlay` (narrow window) the sidebar slides over the content
-    /// (`.oneOverSecondary`); in `.tile` (wide window) it sits beside it (`.oneBesideSecondary`).
-    func toggleSidebar(duration: TimeInterval, completion: @escaping () -> Void) {
-        let isHidden = displayMode == .secondaryOnly
-        let shownMode: DisplayMode = preferredSplitBehavior == .overlay ? .oneOverSecondary : .oneBesideSecondary
-        UIView.animate(withDuration: AppConfiguration.Animations.duration) { [weak self] in
-            self?.preferredDisplayMode = isHidden ? shownMode : .secondaryOnly
-        } completion: { _ in
-            completion()
-        }
-    }
-
     /// Re-applies the split behavior only when crossing the threshold, so we don't override the
     /// user's manual show/hide of the sidebar (via the dashboard menu button) while staying in the
     /// same mode.
     private func updateLayoutMode(for width: CGFloat) {
         guard width > 0 else { return }
-        let newMode: LayoutMode = width < narrowWidthThreshold ? .narrow : .wide
+        let isNarrow = traitCollection.userInterfaceIdiom == .phone || width < narrowWidthThreshold
+        let newMode: LayoutMode = isNarrow ? .narrow : .wide
         guard newMode != currentLayoutMode else { return }
         currentLayoutMode = newMode
 

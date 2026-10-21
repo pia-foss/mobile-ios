@@ -4,7 +4,6 @@
 
 // swiftlint:disable sorted_imports
 import Foundation
-import SideMenu
 import UIKit
 
 // swiftlint:disable superfluous_disable_command
@@ -25,7 +24,7 @@ internal enum StoryboardScene {
 
     internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Self.self, identifier: "PIACardsViewController")
 
-    internal static let sideMenuNavigationController = SceneType<SideMenu.SideMenuNavigationController>(storyboard: Self.self, identifier: "SideMenuNavigationController")
+    internal static let sideMenuNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "SideMenuNavigationController")
 
     internal static let vpnPermissionViewController = SceneType<VPNPermissionViewController>(storyboard: Self.self, identifier: "VPNPermissionViewController")
   }

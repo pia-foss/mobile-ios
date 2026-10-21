@@ -21,14 +21,12 @@
 //
 
 import ActivityKit
-import Combine
 import NetworkExtension
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
 import PIAUIKit
-import SideMenu
 import UIKit
 import WidgetKit
 
@@ -42,10 +40,6 @@ enum DashboardVPNConnectingStatus: Int {
 }
 
 final class DashboardViewController: AutolayoutViewController {
-
-    /// The modally presented signup flow, retained while it is on screen.
-    private var signupCoordinator: SignupCoordinator?
-    private var signupCancellables = Set<AnyCancellable>()
 
     enum TileSize: CGFloat {
         case standard = 116.0
@@ -240,10 +234,14 @@ final class DashboardViewController: AutolayoutViewController {
         updateFoldLayout(fold)
         // needed to relayout the cells when rotating the screen on an iPad
         updateTileLayout()
-        // With a fold the drawer covers one page.
-        if splitViewController == nil {
-            SideMenuManager.default.leftMenuNavigationController?.menuWidth =
-                fold?.minX ?? min(320.0, view.bounds.width - 44.0)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // Tile widths are read from the collection view, which only has its final size here.
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let self, self.isViewLoaded else { return }
+            self.reloadTiles()
         }
     }
 
@@ -331,31 +329,9 @@ final class DashboardViewController: AutolayoutViewController {
 
     // MARK: Menu
     private func setupMenu() {
-        // On iPad we live inside a UISplitViewController and MenuViewController is the
-        // persistent sidebar — no SideMenu drawer is needed. The split view wires up the
-        // menu delegate via prepare(for:) when the sidebar nav is set as the primary column.
-        if splitViewController != nil {
-            if let menuNav = splitViewController?.viewController(for: .primary) as? UINavigationController {
-                setMenuDelegate(menuNavigationController: menuNav)
-            }
-            return
-        }
-
-        if SideMenuManager.default.leftMenuNavigationController == nil {
-            SideMenuManager.default.leftMenuNavigationController = StoryboardScene.Main.sideMenuNavigationController.instantiate()
-        }
-        SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
-
-        if let menuNavigationController = SideMenuManager.default.leftMenuNavigationController {
-            setMenuDelegate(menuNavigationController: menuNavigationController)
-        }
-    }
-
-    private func setMenuDelegate(menuNavigationController: UINavigationController) {
-        guard let menu = menuNavigationController.topViewController as? MenuViewController else {
-            return
-        }
+        guard let menuNav = splitViewController?.viewController(for: .primary) as? UINavigationController,
+            let menu = menuNav.topViewController as? MenuViewController
+        else { return }
         menu.delegate = self
     }
 
@@ -495,75 +471,15 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     private func presentLogin() {
-
-        // On iPad and Mac the window root is swapped for the login flow; on iPhone, iPhone Duo
-        // included, login is presented modally over the dashboard.
-        if traitCollection.userInterfaceIdiom != .phone || Platform.isRunningOnMac {
-            RootCoordinator.shared.setRoot(.login)
-            if isUnauthorized {
-                Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
-                isUnauthorized = false
-            }
-            return
-        }
-
-        dismissExistingViewController()
-
-        var preset = AppConfiguration.Welcome.defaultPreset()
-        preset.shouldRecoverPendingSignup = false  //!TransientState.didRetryPendingSignup
-        if !TransientState.didRetryPendingSignup {
-            TransientState.didRetryPendingSignup = true
-        }
-
-        signupCancellables.removeAll()
-        let coordinator = SignupCoordinator(accountProvider: preset.accountProvider)
-        coordinator.output
-            .sink { [weak self] event in
-                guard let self else { return }
-                switch event {
-                case .didAuthenticate(let user, let isSignup, _):
-                    if isSignup, preset.isEphemeral {
-                        Client.providers.accountProvider.currentUser = user
-                    }
-                    self.dismiss(animated: true) { self.showVPNModal(target: self) }
-                }
-            }
-            .store(in: &signupCancellables)
-
-        coordinator.start()
-        // Retained for the lifetime of the presentation: the legacy screens hold their
-        // `completionDelegate` weakly.
-        signupCoordinator = coordinator
-        RootCoordinator.shared.activeSignupCoordinator = coordinator
-
-        let vc = coordinator.rootViewController
-        vc.modalPresentationStyle = .fullScreen
-
-        if let presented = self.navigationController?.presentedViewController,
-            presented != self
-        {
-            self.present(
-                vc, animated: true,
-                completion: {
-                    presented.dismiss(animated: true, completion: nil)
-                })
-        } else {
-            present(vc, animated: false, completion: nil)
-        }
-
+        RootCoordinator.shared.setRoot(.login)
         if isUnauthorized {
             Macros.displayImageNote(withImage: Asset.iconWarning.image, message: L10n.Account.unauthorized)
             isUnauthorized = false
         }
-
     }
 
     public static func instanceInNavigationStack() -> DashboardViewController? {
         return RootCoordinator.shared.dashboard
-    }
-
-    func dismissExistingViewController() {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
     private func presentPurchaseForTrial() {
@@ -590,14 +506,12 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func openMenu(_ sender: Any?) {
-        if let splitViewController = splitViewController as? AdaptiveSplitViewController {
-            splitViewController.toggleSidebar(duration: AppConfiguration.Animations.duration) { [weak view] in
-                view?.layoutIfNeeded()
-            }
-            return
+        guard let splitViewController else { return }
+        if splitViewController.displayMode == .secondaryOnly {
+            splitViewController.show(.primary)
+        } else {
+            splitViewController.hide(.primary)
         }
-        Theme.current.applySideMenu()
-        present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
 
     @objc private func closeTileEditingMode(_ sender: Any?) {
@@ -753,9 +667,7 @@ final class DashboardViewController: AutolayoutViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
-        if let sideMenu = segue.destination as? SideMenuNavigationController {
-            setMenuDelegate(menuNavigationController: sideMenu)
-        } else if let vc = segue.destination as? AddEmailToAccountViewController {
+        if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
         } else if let identifier = segue.identifier,
             identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
