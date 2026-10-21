@@ -95,6 +95,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAAlertBanners",
+        "identifier" : "PIAAlertBannersTests",
+        "name" : "PIAAlertBannersTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:LocalPackages\/PIAValidateQRLogin",
         "identifier" : "PIAValidateQRLoginTests",
         "name" : "PIAValidateQRLoginTests"
