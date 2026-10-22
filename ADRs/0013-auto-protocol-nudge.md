@@ -1,4 +1,4 @@
-# 0012: Nudge users pinned to a failing protocol to switch to Automatic
+# 0013: Nudge users pinned to a failing protocol to switch to Automatic
 
 Date: 2026-09-15
 
