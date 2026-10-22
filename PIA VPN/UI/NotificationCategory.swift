@@ -2,10 +2,6 @@ import Foundation
 import PIALibrary
 import UserNotifications
 
-public struct NotificationCategory {
-    public static let nonCompliantWifi = "NONCOMPLIANTWIFI"
-}
-
 // MARK: Local Notifications
 
 extension Macros {

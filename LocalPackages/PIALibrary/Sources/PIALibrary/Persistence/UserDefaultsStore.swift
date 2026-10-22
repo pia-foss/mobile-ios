@@ -113,12 +113,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
 
         case lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
-
-        case leakProtection = "LeakProtection"
-
-        case allowLocalDeviceAccess = "AllowLocalDeviceAccess"
-
-        case currentRFC1918VulnerableWifi = "CurrentRFC1918VulnerableWifi"
     }
 
     private let backend: UserDefaultsKeyed<Entry>
@@ -506,39 +500,6 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
         }
         set {
             backend.set(newValue, forKey: .lastVPNConnectionSuccess)
-        }
-    }
-
-    var leakProtection: Bool {
-        get {
-            if backend.object(forKey: .leakProtection) == nil {
-                backend.set(true, forKey: .leakProtection)
-            }
-            return backend.bool(forKey: .leakProtection)
-        }
-        set {
-            backend.set(newValue, forKey: .leakProtection)
-        }
-    }
-
-    var allowLocalDeviceAccess: Bool {
-        get {
-            if backend.object(forKey: .allowLocalDeviceAccess) == nil {
-                backend.set(true, forKey: .allowLocalDeviceAccess)
-            }
-            return backend.bool(forKey: .allowLocalDeviceAccess)
-        }
-        set {
-            backend.set(newValue, forKey: .allowLocalDeviceAccess)
-        }
-    }
-
-    var currentRFC1918VulnerableWifi: String? {
-        get {
-            return backend.string(forKey: .currentRFC1918VulnerableWifi)
-        }
-        set {
-            backend.set(newValue, forKey: .currentRFC1918VulnerableWifi)
         }
     }
 

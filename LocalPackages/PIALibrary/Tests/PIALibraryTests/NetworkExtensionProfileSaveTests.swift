@@ -55,7 +55,7 @@
                 name: "Server 1",
                 country: "us",
                 hostname: "server1.example.com",
-                iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.1", cn: "cn", van: false)],
+                wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.1", cn: "cn", van: false)],
                 pingAddress: nil,
                 regionIdentifier: "region-1"
             )
@@ -66,9 +66,7 @@
                 passwordReference: Data(),
                 server: server,
                 isOnDemand: false,
-                disconnectsOnSleep: false,
-                leakProtection: false,
-                allowLocalDeviceAccess: false
+                disconnectsOnSleep: false
             )
 
             let profile = KapePlatformSDKTunnelProfile(

@@ -35,8 +35,6 @@
 "expiration.title" = "Vernieuwing";
 "expiration.message" = "Uw abonnement verloopt binnenkort. Vernieuw uw abonnement om beschermd te blijven.";
 
-"local_notification.non_compliant_wifi.title" = "Onbeveiligde wifi: %@";
-"local_notification.non_compliant_wifi.text" = "Tik hier om je apparaat te beschermen";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "De VPN kill switch voorkomt toegang tot internet als de VPN-verbinding opnieuw tot stand wordt gebracht. Dit geldt niet wanneer de verbinding handmatig wordt verbroken.";
 "settings.application_settings.reconnect_notifications.title" = "Herverbindingsmeldingen";
 "settings.application_settings.reconnect_notifications.footer" = "Ontvang meldingen wanneer de VPN opnieuw verbinding maakt met een andere locatie. Schakel uit om deze meldingen niet meer te ontvangen.";
-"settings.application_settings.leak_protection.title" = "Lekbescherming";
-"settings.application_settings.leak_protection.footer" = "iOS bevat functies die ontworpen zijn om standaard te werken buiten het VPN, zoals AirDrop, CarPlay, AirPlay en persoonlijke hotspots. Het inschakelen van aangepaste lekbescherming leidt dit verkeer om via het VPN, maar kan de werking van deze functies beïnvloeden. Meer info";
-"settings.application_settings.leak_protection.more_info" = "Meer info";
-"settings.application_settings.allow_local_network.title" = "Sta toegang toe tot apparaten op een lokaal netwerk";
-"settings.application_settings.allow_local_network.footer" = "Blijf verbonden met lokale apparaten, zoals printers of bestandsservers die verbonden zijn met het VPN. (Sta dit alleen toe als je de personen en apparaten op je netwerk vertrouwt.)";
-"settings.application_settings.leak_protection.alert.title" = "Wijzigingen aan de VPN-instellingen worden van kracht bij de volgende verbinding";
 
 "settings.content_blocker.title" = "Status Safari Content Blocker";
 "settings.content_blocker.refresh.title" = "Zwarte lijst verversen";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "VPN-verbindingsknop. De VPN is verbonden";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-verbindingsknop. De VPN is niet verbonden";
 
-"dashboard.vpn.leakprotection.alert.title" = "Onbeveiligde wifi gedetecteerd";
-"dashboard.vpn.leakprotection.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu uit\" om \"Sta toegang toe tot apparaten op een lokaal netwerk\" uit te schakelen en automatisch opnieuw verbinding te maken.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Schakel nu uit";
-"dashboard.vpn.leakprotection.alert.cta2" = "Meer informatie";
-"dashboard.vpn.leakprotection.alert.cta3" = "Negeer";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "Om gegevenslekken te voorkomen, tik je op \"Schakel nu\" om te wijzigen naar het IKEv2 VPN-protocol en automatisch opnieuw verbinding te maken.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Schakel nu";
 
 "dashboard.vpn.change_location.alert.title" = "Locatie wijzigen?";
 "dashboard.vpn.change_location.alert.message" = "Je VPN wordt kort losgekoppeld tijdens het verbinden met de nieuwe locatie.";
@@ -272,7 +257,6 @@
 "tiles.subscription.yearly" = "Jaarlijks";
 "tiles.subscription.days.left" = "(Nog %d dagen)";
 "tiles.usage.title" = "Gebruik";
-"tiles.usage.ipsec.title" = "GEBRUIK (niet beschikbaar op IKEv2)";
 "tiles.usage.upload" = "Uploaden";
 "tiles.usage.download" = "Downloaden";
 "tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";
