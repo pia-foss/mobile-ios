@@ -312,6 +312,9 @@
           "product-name": "PIAAbout",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAAccountDetails",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIAAssetsFlags",
           "build-phase": { "build-phase": "frameworks" },
         }, {
