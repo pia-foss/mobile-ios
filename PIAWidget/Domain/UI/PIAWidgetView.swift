@@ -79,6 +79,6 @@ struct PIAWidgetView: View {
         if #available(iOS 17.0, *) {
             return nil
         }
-        return URL(string: AppConstants.Widget.connect)
+        return WidgetConnectToken().connectURL
     }
 }

@@ -21,7 +21,7 @@ internal struct PIAToggleButton: View {
             }
             .buttonStyle(.plain)
         } else {
-            Link(destination: URL(string: AppConstants.Widget.connect)!) {
+            Link(destination: WidgetConnectToken().connectURL ?? URL(string: AppConstants.Widget.openApp)!) {
                 buttonContent
             }
         }
