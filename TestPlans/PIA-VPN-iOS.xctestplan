@@ -95,6 +95,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAForceUpdate",
+        "identifier" : "PIAForceUpdateTests",
+        "name" : "PIAForceUpdateTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:LocalPackages\/PIAValidateQRLogin",
         "identifier" : "PIAValidateQRLoginTests",
         "name" : "PIAValidateQRLoginTests"
@@ -112,6 +119,13 @@
         "containerPath" : "container:LocalPackages\/PIARegionList",
         "identifier" : "PIARegionListTests",
         "name" : "PIARegionListTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAVPNPermission",
+        "identifier" : "PIAVPNPermissionTests",
+        "name" : "PIAVPNPermissionTests"
       }
     }
   ],

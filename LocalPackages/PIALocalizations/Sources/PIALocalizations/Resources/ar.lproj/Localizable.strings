@@ -520,7 +520,7 @@
 "forceupdate.label.title" = "طوّر تجربتك";
 "forceupdate.label.subtitle" = "أنت تستخدم إصداراً قديماً من PIA. حدّث تطبيقك الآن للاستمتاع بتجربة محسّنة مع جميع أحدث الميزات.";
 "forceupdate.button.update" = "حدّث الآن";
-"forceupdate.label.vpn.connected" = "سيؤدي النقر على ”حدّث الآن“ إلى قطع اتصال VPN.";
+"forceupdate.label.vpn.connected" = "سيؤدي التحديث إلى قطع اتصال VPN مؤقتًا.";
 
 "global.version.format" = "الإصدار %@ (%@)";
 

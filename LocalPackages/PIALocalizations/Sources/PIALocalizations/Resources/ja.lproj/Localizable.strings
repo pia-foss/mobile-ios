@@ -521,7 +521,7 @@
 "forceupdate.label.title" = "体験をアップグレードしよう";
 "forceupdate.label.subtitle" = "現在お使いのPIAは旧バージョンです。今すぐアプリをアップデートして、最新機能でより素晴らしい体験をお楽しみください。";
 "forceupdate.button.update" = "今すぐアップデート";
-"forceupdate.label.vpn.connected" = "「今すぐアップデート」をタップするとVPNが切断します。";
+"forceupdate.label.vpn.connected" = "アップデート中はVPNが一時的に切断されます。";
 
 "global.version.format" = "バージョン%@ (%@)";
 

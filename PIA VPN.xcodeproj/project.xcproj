@@ -333,6 +333,9 @@
           "product-name": "PIAFavorites",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAForceUpdate",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIALibrary",
           "build-phase": { "build-phase": "frameworks" },
         }, {
@@ -355,6 +358,9 @@
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIAValidateQRLogin",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIAVPNPermission",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "OpenSSL-Package",
