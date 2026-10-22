@@ -46,6 +46,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// Set by UIKit from `UISceneStoryboardFile` before `scene(_:willConnectTo:options:)` runs.
     var window: UIWindow?
     private var cancellables = Set<AnyCancellable>()
+    private let protectedDataGate = ProtectedDataGate()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -58,6 +59,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Keep the launch screen presented while the migration check runs
         window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
 
+        protectedDataGate.whenAvailable { [weak self] in
+            self?.checkMigrationAndStartApp(with: connectionOptions)
+        }
+    }
+
+    private func checkMigrationAndStartApp(with connectionOptions: UIScene.ConnectionOptions) {
         if let window {
             AppPreferences.shared.reloadTheme(in: window, withAnimationDuration: 0)
         }
