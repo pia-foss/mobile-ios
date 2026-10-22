@@ -35,8 +35,7 @@ final class SignupViewModelTests: XCTestCase {
             purchaseProduct: fixture.purchaseProductUseCaseMock,
             viewModelMapper: SubscriptionOptionViewModelMapper(),
             signupPresentableMapper: SignupPresentableErrorMapper(),
-            onSuccessAction: onSuccessAction,
-            hasActiveSubscription: HasActiveSubscriptionUseCaseMock(result: false))
+            onSuccessAction: onSuccessAction)
     }
 
     override func setUp() {
@@ -240,46 +239,5 @@ final class SignupViewModelTests: XCTestCase {
         XCTAssertNil(capturedTransaction)
         XCTAssertTrue(sut.shouldShowErrorMessage)
         XCTAssertEqual(sut.errorMessage, L10n.Signup.Purchase.Uncredited.Alert.message)
-    }
-
-    // MARK: - Active subscription
-
-    private func makeSut(hasActiveSubscription: Bool, onActiveSubscriptionFound: @escaping () -> Void) -> SignupViewModel {
-        SignupViewModel(
-            optionButtons: [],
-            getAvailableProducts: GetAvailableProductsUseCaseMock(result: .success([])),
-            purchaseProduct: PurchaseProductUseCaseMock(result: .failure(NSError(domain: "anError", code: 0))),
-            viewModelMapper: SubscriptionOptionViewModelMapper(),
-            signupPresentableMapper: SignupPresentableErrorMapper(),
-            onSuccessAction: { _ in },
-            hasActiveSubscription: HasActiveSubscriptionUseCaseMock(result: hasActiveSubscription),
-            onActiveSubscriptionFound: onActiveSubscriptionFound)
-    }
-
-    @MainActor
-    func test_checkForActiveSubscription_offersWelcomeBack_onlyOnce() async {
-        // GIVEN this Apple ID holds a live subscription
-        var foundCount = 0
-        let sut = makeSut(hasActiveSubscription: true, onActiveSubscriptionFound: { foundCount += 1 })
-
-        // WHEN the signup screen appears, and appears again after returning from welcome-back
-        await sut.checkForActiveSubscription()
-        await sut.checkForActiveSubscription()
-
-        // THEN welcome-back is offered a single time
-        XCTAssertEqual(foundCount, 1)
-    }
-
-    @MainActor
-    func test_checkForActiveSubscription_withoutSubscription_staysOnPaywall() async {
-        // GIVEN this Apple ID holds no subscription
-        var foundCount = 0
-        let sut = makeSut(hasActiveSubscription: false, onActiveSubscriptionFound: { foundCount += 1 })
-
-        // WHEN the signup screen appears
-        await sut.checkForActiveSubscription()
-
-        // THEN welcome-back is not offered
-        XCTAssertEqual(foundCount, 0)
     }
 }

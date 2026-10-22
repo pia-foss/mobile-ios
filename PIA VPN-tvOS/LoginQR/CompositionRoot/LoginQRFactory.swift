@@ -59,7 +59,7 @@ class LoginQRFactory {
             errorMapper: LoginDomainErrorMapper())
     }
 
-    static func makePaymentProvider() -> PaymentProviderType {
+    private static func makePaymentProvider() -> PaymentProviderType {
         PaymentProvider(store: Client.store)
     }
 }

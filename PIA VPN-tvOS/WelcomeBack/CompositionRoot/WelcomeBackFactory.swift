@@ -7,38 +7,43 @@
 
 import Foundation
 import PIALibrary
+import PIAPaywall
 
 class WelcomeBackFactory {
     @MainActor
     static func makeWelcomeBackView() -> WelcomeBackView {
-        WelcomeBackView(viewModel: makeWelcomeBackViewModel())
+        WelcomeBackView(
+            dependencies: .live(
+                accountProvider: Client.providers.accountProvider,
+                store: Client.store,
+                emit: handle))
+    }
+
+    static func makeHasActiveSubscriptionUseCase() -> HasActiveSubscriptionUseCase {
+        HasActiveSubscriptionUseCase(store: Client.store)
     }
 
     @MainActor
-    private static func makeWelcomeBackViewModel() -> WelcomeBackViewModel {
-        WelcomeBackViewModel(
-            loginWithCurrentReceipt: makeLoginWithCurrentReceiptUseCase(),
-            onSuccessAction: {
+    private static func handle(_ output: WelcomeBack.Output) {
+        switch output {
+        case .didAuthenticate(let user):
+            // Same as signing in with credentials: an expired account goes to the expired screen.
+            if user.info?.isExpired == true {
+                AppRouter.navigateToExpiredDestinationAction()
+            } else {
                 AppRouter.navigateToConnectionstatsDestinationAction()
-            },
-            onRequestLoginAction: {
-                AppRouter.navigateToLoginWithCredentialsDestinationAction()
-            },
-            onDismissAction: {
-                // Back to the paywall, unless the user already left this screen.
-                guard AppRouter.shared.isShowing(AuthenticationDestinations.welcomeBack) else { return }
-                AppRouter.shared.pop()
-            })
-    }
+            }
 
-    static func makeHasActiveSubscriptionUseCase() -> HasActiveSubscriptionUseCaseType {
-        HasActiveSubscriptionUseCase(paymentProvider: LoginQRFactory.makePaymentProvider())
-    }
+        case .requestLogin:
+            AppRouter.navigateToLoginWithCredentialsDestinationAction()
 
-    static func makeLoginWithCurrentReceiptUseCase() -> LoginWithCurrentReceiptUseCaseType {
-        LoginWithCurrentReceiptUseCase(
-            paymentProvider: LoginQRFactory.makePaymentProvider(),
-            loginProvider: LoginFactory.makeLoginProvider(),
-            errorMapper: LoginDomainErrorMapper())
+        case .requestQRLogin:
+            AppRouter.navigateToLoginQRCodeDestinationAction()
+
+        case .didDismiss:
+            // Back to the paywall, unless the user already left this screen.
+            guard AppRouter.shared.isShowing(AuthenticationDestinations.welcomeBack) else { return }
+            AppRouter.shared.pop()
+        }
     }
 }

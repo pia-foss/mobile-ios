@@ -159,10 +159,6 @@ extension AppRouter {
     static var navigateToTermsAndConditionsDestinationAction: AppRouter.Actions {
         navigateRouterToDestinationAction(AuthenticationDestinations.signupTerms)
     }
-
-    static var navigateToWelcomeBackDestinationAction: AppRouter.Actions {
-        navigateRouterToDestinationAction(AuthenticationDestinations.welcomeBack)
-    }
 }
 
 // MARK: - Settings Navigation Actions

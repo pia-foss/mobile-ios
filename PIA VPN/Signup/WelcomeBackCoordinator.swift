@@ -70,10 +70,10 @@ final class WelcomeBackCoordinator: FlowCoordinator {
 
     @MainActor
     private func presentIfEntitled() async {
-        let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
+        let hasActiveSubscription = HasActiveSubscriptionUseCase(store: store)
         // Only over the bare paywall; the user may have moved on while the receipt was read.
-        guard await currentReceipt() != nil,
-              navigationController?.viewControllers.last is SignupPaywallHostingController
+        guard await hasActiveSubscription(),
+            navigationController?.viewControllers.last is SignupPaywallHostingController
         else {
             handle(.didDismiss)
             return
@@ -105,8 +105,7 @@ final class WelcomeBackCoordinator: FlowCoordinator {
             subject.send(completion: .finished)
 
         case .requestLogin:
-            showLogin()
-            // don't finish yet, user can come back
+            showLogin()  // don't finish yet, user can come back
 
         case .didDismiss:
             subject.send(completion: .finished)

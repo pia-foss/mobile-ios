@@ -24,7 +24,7 @@ class WelcomeFactory {
         }
 
         let signupButton = OnboardingComponentButton(title: L10n.Tvos.Welcome.Button.signup) {
-            AppRouter.navigateToSignUpDestinationAction()
+            Task { await SignUpFactory.openSignup() }
         }
 
         return OnboardingComponentViewModel(

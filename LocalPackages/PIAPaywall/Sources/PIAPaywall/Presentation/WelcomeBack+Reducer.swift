@@ -52,6 +52,12 @@ extension WelcomeBack {
                 guard !state.isRestoring else { return nil }
                 return emit(.requestLogin)
 
+            #if os(tvOS)
+                case .qrCodeTapped:
+                    guard !state.isRestoring else { return nil }
+                    return emit(.requestQRLogin)
+            #endif
+
             case .closeTapped:
                 guard !state.isRestoring else { return nil }
                 return emit(.didDismiss)

@@ -7,6 +7,7 @@
 //
 
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
 struct SignupEmailView: View {
