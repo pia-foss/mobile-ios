@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Fejloplysninger indsendt.\nID: %@\nGem venligst dette ID, da vores supportteam har brug for det, for at finde din indsendelse.";
 "settings.application_information.debug.success.copyId" = "Kopiér ID";
 
+"debug_report_review.title" = "Send fejlfindingslogs";
+"debug_report_review.privacy" = "Dette uploader fejlfindingslogs og oplysninger om din netværksopsætning til vores supportteam. Det indeholder ingen oplysninger om din internetbrug.";
+"debug_report_review.redacted" = "IP-adresser er skjult.";
+"debug_report_review.sections.title" = "Hvad der bliver sendt";
+"debug_report_review.sections.empty" = "Der er ingen diagnosticeringsoplysninger tilgængelige. Aktivér fejlfindingslogning, og prøv igen.";
+"debug_report_review.sections.truncated" = "Forhåndsvisningen er forkortet. Brug „Gem rapport“ for at se hele indholdet.";
+"debug_report_review.sections.expand_hint" = "Viser eller skjuler indholdet af denne sektion.";
+"debug_report_review.section.protocol_information" = "Forbindelsesindstillinger";
+"debug_report_review.section.device_information" = "Enhedsoplysninger";
+"debug_report_review.section.application_log" = "Appens fejlfindingslog";
+"debug_report_review.section.subscription_information" = "Abonnement";
+"debug_report_review.section.regions" = "Serverliste";
+"debug_report_review.section.user_settings" = "Appindstillinger";
+"debug_report_review.section.last_known_exception" = "Seneste fejl";
+"debug_report_review.section.tunnel_log" = "Tunnellog";
+"debug_report_review.section.last_tunnel_log" = "Tunnellog (seneste session)";
+"debug_report_review.section.vpn_status" = "VPN-status";
+"debug_report_review.share" = "Gem rapport";
+"debug_report_review.send" = "Send";
+
 "settings.commit.messages.must_disconnect" = "VPN'en skal genoprette forbindelse før nogle ændringer træder i kraft.";
 "settings.commit.messages.should_reconnect" = "Opret forbindelse til VPN igen, for at anvende ændringer.";
 "settings.commit.buttons.reconnect" = "Anbefal";

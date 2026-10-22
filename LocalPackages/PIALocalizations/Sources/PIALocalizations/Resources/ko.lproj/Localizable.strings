@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "디버그 정보 제출 성공. \nID: %@\n저희 지원팀이 귀하의 제출 정보를 확인하려면 이 ID가 필요하므로 적어두시기 바랍니다.";
 "settings.application_information.debug.success.copyId" = "ID 복사";
 
+"debug_report_review.title" = "디버그 로그 보내기";
+"debug_report_review.privacy" = "디버그 로그와 네트워크 설정에 관한 정보를 지원팀에 업로드합니다. 인터넷 사용에 관한 정보는 포함되지 않습니다.";
+"debug_report_review.redacted" = "IP 주소는 가려집니다.";
+"debug_report_review.sections.title" = "전송될 내용";
+"debug_report_review.sections.empty" = "사용 가능한 진단 정보가 없습니다. 디버그 로깅을 켠 후 다시 시도하세요.";
+"debug_report_review.sections.truncated" = "미리보기가 축약되었습니다. 전체 내용을 보려면 ‘보고서 저장’을 사용하세요.";
+"debug_report_review.sections.expand_hint" = "이 섹션의 내용을 표시하거나 숨깁니다.";
+"debug_report_review.section.protocol_information" = "연결 설정";
+"debug_report_review.section.device_information" = "기기 정보";
+"debug_report_review.section.application_log" = "앱 디버그 로그";
+"debug_report_review.section.subscription_information" = "구독";
+"debug_report_review.section.regions" = "서버 목록";
+"debug_report_review.section.user_settings" = "앱 설정";
+"debug_report_review.section.last_known_exception" = "마지막 오류";
+"debug_report_review.section.tunnel_log" = "터널 로그";
+"debug_report_review.section.last_tunnel_log" = "터널 로그(마지막 세션)";
+"debug_report_review.section.vpn_status" = "VPN 상태";
+"debug_report_review.share" = "보고서 저장";
+"debug_report_review.send" = "보내기";
+
 "settings.commit.messages.must_disconnect" = "변경사항이 반영되려면 VPN을 다시 연결해야 합니다.";
 "settings.commit.messages.should_reconnect" = "변경사항을 적용하려면 VPN에 다시 연결하세요.";
 "settings.commit.buttons.reconnect" = "다시 연결";

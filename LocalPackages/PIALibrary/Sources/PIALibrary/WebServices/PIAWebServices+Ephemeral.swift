@@ -56,37 +56,39 @@ extension PIAWebServices {
         includeTunnelLog: Bool = false,
         vpnConnection: VPNConnectionInformation? = nil
     ) async throws -> String {
-        var providers: [CSIDataProvider] = [
-            PIACSIProtocolInformationProvider(),
-            PIACSIDeviceInformationProvider(),
-            PIACSILogInformationProvider(includeDebug: includeDebug, redactIPs: redactIPs),
-            PIACSISubscriptionInformationProvider(),
-            PIACSIRegionInformationProvider(redactIPs: redactIPs),
-            PIACSIUserInformationProvider(redactIPs: redactIPs),
-            PIACSILastKnownExceptionProvider()
-        ]
+        let report = await buildDebugReport(
+            includeDebug: includeDebug,
+            redactIPs: redactIPs,
+            includeTunnelLog: includeTunnelLog,
+            vpnConnection: vpnConnection
+        )
+        return try await submit(report: report)
+    }
 
-        if includeTunnelLog {
-            providers.append(await tunnelLogProvider(redactIPs: redactIPs))
-        }
+    /// Builds the report that would be submitted, without sending it, so a review screen can show
+    /// exactly what is about to leave the device.
+    func buildDebugReport(
+        includeDebug: Bool,
+        redactIPs: Bool,
+        includeTunnelLog: Bool = false,
+        vpnConnection: VPNConnectionInformation? = nil
+    ) async -> DebugReport {
+        await DebugReportBuilder.build(
+            includeDebug: includeDebug,
+            redactIPs: redactIPs,
+            includeTunnelLog: includeTunnelLog,
+            vpnConnection: vpnConnection
+        )
+    }
 
-        if let vpnConnection {
-            providers.append(
-                PIACSIVPNStatusInformationProvider(connection: vpnConnection, redactIPs: redactIPs)
-            )
-        }
-
-        let sections = providers.compactMap { provider -> CSIReportSection? in
-            guard let content = provider.content else { return nil }
-            return CSIReportSection(name: provider.sectionName, content: content)
-        }
-        let reportData = CSIReportBuilder.build(sections: sections)
+    /// Submits a report that has already been built (and possibly reviewed).
+    func submit(report: DebugReport) async throws -> String {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
         let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
 
         do {
             return try await csiClient.submit(
-                data: reportData,
+                data: report.text,
                 team: Client.Configuration.teamIdentifierCSI,
                 appVersion: "\(appVersion) (\(appBuild))"
             )
@@ -94,30 +96,5 @@ extension PIAWebServices {
             log.error("CSI submission failed: \(error)")
             throw ClientError.internetUnreachable
         }
-    }
-
-    /// The running tunnel's log when it answers, otherwise the copy it persisted last — the tunnel
-    /// is usually down when a user reports a failed connection, and its in-memory log went with it.
-    ///
-    /// Decided by the VPN status, not by whether the extension replies: iOS keeps the provider process
-    /// around after a disconnect, or relaunches it to deliver the message, so a stopped tunnel still
-    /// answers — and asking it would only append a restore marker and the request to its log.
-    private func tunnelLogProvider(redactIPs: Bool) async -> PIACSITunnelLogInformationProvider {
-        let vpnProvider = Client.providers.vpnProvider
-        let isTunnelUp: Bool
-        switch vpnProvider.vpnStatus {
-        case .connecting, .connected, .disconnecting: isTunnelUp = true
-        case .disconnected, .unknown: isTunnelUp = false
-        }
-
-        if isTunnelUp, let live = await vpnProvider.tunnelLog(), !live.isEmpty {
-            return PIACSITunnelLogInformationProvider(log: live, redactIPs: redactIPs)
-        }
-
-        return PIACSITunnelLogInformationProvider(
-            sectionName: PIACSITunnelLogInformationProvider.lastSessionSectionName,
-            log: PIATunnelSharedState.readLastTunnelLog(),
-            redactIPs: redactIPs
-        )
     }
 }

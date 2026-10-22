@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Debuginformatie verzonden.\nID: %@\nLet op: ons ondersteuningsteam heeft deze ID nodig om uw inzending te vinden.";
 "settings.application_information.debug.success.copyId" = "ID kopiëren";
 
+"debug_report_review.title" = "Debuglogboeken versturen";
+"debug_report_review.privacy" = "Hiermee worden debuglogboeken en informatie over je netwerkconfiguratie naar ons klantenserviceteam geüpload. Ze bevatten geen informatie over je internetgebruik.";
+"debug_report_review.redacted" = "IP-adressen worden afgeschermd.";
+"debug_report_review.sections.title" = "Wat er wordt verstuurd";
+"debug_report_review.sections.empty" = "Er is geen diagnostische informatie beschikbaar. Schakel debuglogging in en probeer het opnieuw.";
+"debug_report_review.sections.truncated" = "Voorbeeld ingekort. Gebruik ‘Rapport opslaan’ om de volledige inhoud te bekijken.";
+"debug_report_review.sections.expand_hint" = "Toont of verbergt de inhoud van dit gedeelte.";
+"debug_report_review.section.protocol_information" = "Verbindingsinstellingen";
+"debug_report_review.section.device_information" = "Apparaatgegevens";
+"debug_report_review.section.application_log" = "Debuglogboek van de app";
+"debug_report_review.section.subscription_information" = "Abonnement";
+"debug_report_review.section.regions" = "Serverlijst";
+"debug_report_review.section.user_settings" = "App-instellingen";
+"debug_report_review.section.last_known_exception" = "Laatste fout";
+"debug_report_review.section.tunnel_log" = "Tunnellogboek";
+"debug_report_review.section.last_tunnel_log" = "Tunnellogboek (laatste sessie)";
+"debug_report_review.section.vpn_status" = "VPN-status";
+"debug_report_review.share" = "Rapport opslaan";
+"debug_report_review.send" = "Versturen";
+
 "settings.commit.messages.must_disconnect" = "De VPN moet opnieuw verbinding maken om de wijzigingen door te voeren.";
 "settings.commit.messages.should_reconnect" = "Laat de VPN opnieuw verbinding maken om de wijzigingen toe te passen.";
 "settings.commit.buttons.reconnect" = "Opnieuw verbinden";
