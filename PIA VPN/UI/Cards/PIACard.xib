@@ -17,13 +17,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Pc-Obc">
                     <rect key="frame" x="20" y="124" width="374" height="692"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-dark" translatesAutoresizingMaskIntoConstraints="NO" id="ZCz-fa-4Og">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="background-dark" translatesAutoresizingMaskIntoConstraints="NO" id="ZCz-fa-4Og">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="374"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="ZCz-fa-4Og" secondAttribute="height" multiplier="1:1" id="ak0-Ww-RLU"/>
+                                <constraint firstAttribute="width" secondItem="ZCz-fa-4Og" secondAttribute="height" multiplier="1:1" priority="700" id="ak0-Ww-RLU"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="ODi-c0-hPO">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="ODi-c0-hPO">
                             <rect key="frame" x="60" y="80" width="254" height="254"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="ODi-c0-hPO" secondAttribute="height" multiplier="1:1" id="XRC-fW-ipt"/>
@@ -65,7 +65,7 @@
                     <color key="backgroundColor" red="0.098039215686274508" green="0.10980392156862745" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="WhC-Mx-rlx" secondAttribute="trailing" constant="19" id="1TM-AW-yGk"/>
-                        <constraint firstItem="ODi-c0-hPO" firstAttribute="leading" secondItem="KXf-Pc-Obc" secondAttribute="leading" constant="60" id="8Y0-KS-XRz"/>
+                        <constraint firstItem="ODi-c0-hPO" firstAttribute="leading" secondItem="KXf-Pc-Obc" secondAttribute="leading" constant="60" priority="700" id="8Y0-KS-XRz"/>
                         <constraint firstAttribute="trailing" secondItem="Dc1-lm-CkY" secondAttribute="trailing" constant="19" id="E49-KP-78W"/>
                         <constraint firstAttribute="bottom" secondItem="KaJ-Bi-FUu" secondAttribute="bottom" constant="19" id="Er8-Az-BLr"/>
                         <constraint firstItem="KaJ-Bi-FUu" firstAttribute="leading" secondItem="KXf-Pc-Obc" secondAttribute="leading" constant="19" id="GGr-Wp-VJP"/>
@@ -78,11 +78,14 @@
                         <constraint firstItem="Aog-Os-w7G" firstAttribute="leading" secondItem="KXf-Pc-Obc" secondAttribute="leading" constant="19" id="cMv-D5-Nv2"/>
                         <constraint firstItem="ODi-c0-hPO" firstAttribute="top" secondItem="KXf-Pc-Obc" secondAttribute="top" constant="80" id="eVg-V7-v8f"/>
                         <constraint firstAttribute="trailing" secondItem="3E4-jm-ndr" secondAttribute="trailing" id="hM0-yp-NUS"/>
-                        <constraint firstAttribute="trailing" secondItem="ODi-c0-hPO" secondAttribute="trailing" constant="60" id="hP9-Kw-51Q"/>
+                        <constraint firstAttribute="trailing" secondItem="ODi-c0-hPO" secondAttribute="trailing" constant="60" priority="700" id="hP9-Kw-51Q"/>
                         <constraint firstItem="ZCz-fa-4Og" firstAttribute="leading" secondItem="KXf-Pc-Obc" secondAttribute="leading" id="jeB-wR-WiW"/>
                         <constraint firstAttribute="trailing" secondItem="ZCz-fa-4Og" secondAttribute="trailing" id="lgr-zT-Gb0"/>
                         <constraint firstItem="ZCz-fa-4Og" firstAttribute="top" secondItem="KXf-Pc-Obc" secondAttribute="top" id="qa8-V3-yrN"/>
                         <constraint firstItem="3E4-jm-ndr" firstAttribute="top" secondItem="KXf-Pc-Obc" secondAttribute="top" id="xrR-6S-piq"/>
+                        <constraint firstItem="Aog-Os-w7G" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZCz-fa-4Og" secondAttribute="bottom" constant="20" id="Kq3-bT-7xA"/>
+                        <constraint firstItem="ODi-c0-hPO" firstAttribute="centerX" secondItem="KXf-Pc-Obc" secondAttribute="centerX" id="p4V-cN-2hE"/>
+                        <constraint firstItem="ZCz-fa-4Og" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ODi-c0-hPO" secondAttribute="bottom" constant="40" id="Ym8-Rd-9sW"/>
                     </constraints>
                 </view>
             </subviews>
