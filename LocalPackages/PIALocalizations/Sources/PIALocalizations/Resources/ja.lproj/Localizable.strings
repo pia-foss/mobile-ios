@@ -683,3 +683,10 @@
 "promo_offer.sheet.disclaimer_with_price"= "%1$@の請求が**%2$@**に再開されるまでお支払いは発生しません。設定からいつでもキャンセルできます。";
 "promo_offer.sheet.disclaimer"= "請求が**%@**に再開されるまでお支払いは発生しません。設定からいつでもキャンセルできます。";
 "promo_offer.sheet.close"= "閉じる";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "接続に問題がありますか？";
+"auto_protocol_nudge.message" = "自動に切り替えると、アプリがお使いのネットワークに最適なプロトコルを選択できるようになり、このような接続の問題の解決に役立ちます。";
+"auto_protocol_nudge.confirm" = "自動に切り替える";
+"auto_protocol_nudge.dismiss" = "後で";
