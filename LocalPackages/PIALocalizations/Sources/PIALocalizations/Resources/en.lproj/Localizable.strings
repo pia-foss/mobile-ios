@@ -624,6 +624,7 @@
 "signup.welcome_back.or"= "Or";
 "signup.welcome_back.cta.app_store"= "App Store Account";
 "signup.welcome_back.cta.credentials"= "Username and Password";
+"signup.welcome_back.cta.qr_code"= "QR Code";
 
 // WALKTHROUGH
 

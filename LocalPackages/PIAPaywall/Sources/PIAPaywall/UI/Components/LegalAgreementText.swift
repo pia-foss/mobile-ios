@@ -19,70 +19,72 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIADesignSystem
-import PIALocalizations
-import SwiftUI
+#if os(iOS)
+    import PIADesignSystem
+    import PIALocalizations
+    import SwiftUI
 
-/// "Signing up constitutes acceptance of the Terms of Service and the Privacy Policy", with both
-/// named documents linked in place.
-///
-/// App Store Review Guideline 3.1.2 requires both links on any screen that sells a subscription.
-/// The design omits them, so the sentence is carried over verbatim from the screen this one
-/// replaces — links embedded in the prose rather than standing alone, as before.
-struct LegalAgreementText: View {
-    let termsURL: URL
-    let privacyURL: URL
-
-    var body: some View {
-        Text(agreement)
-            .typography(.caption1, color: .pia.onSurfaceContainerPrimary)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity)
-    }
-
-    private var agreement: AttributedString {
-        var attributed = AttributedString(Self.sentence)
-        attributed.replacingPlaceholder("$1", with: L10n.Welcome.Agreement.Message.tos, linkedTo: termsURL)
-        attributed.replacingPlaceholder("$2", with: L10n.Welcome.Agreement.Message.privacy, linkedTo: privacyURL)
-        return attributed
-    }
-
-    /// The closing sentence of the agreement paragraph.
+    /// "Signing up constitutes acceptance of the Terms of Service and the Privacy Policy", with both
+    /// named documents linked in place.
     ///
-    /// `welcome.agreement.message` holds the long renewal terms, then a blank line, then the
-    /// sentence shown here — and it is already translated into all 18 locales, which is why it is
-    /// reused rather than replaced by a new key that would ship as English-only legal text.
-    /// This is the same split the previous screen performed.
-    ///
-    /// If a translation ever drops the blank line the whole paragraph is shown, which is verbose but
-    /// still correct — better than showing nothing.
-    private static var sentence: String {
-        // The paragraph's price placeholder belongs to the part being discarded.
-        let full = L10n.Welcome.Agreement.message("")
-        guard let separator = full.range(of: "\n\n", options: .backwards) else { return full }
-        return String(full[separator.upperBound...])
+    /// App Store Review Guideline 3.1.2 requires both links on any screen that sells a subscription.
+    /// The design omits them, so the sentence is carried over verbatim from the screen this one
+    /// replaces — links embedded in the prose rather than standing alone, as before.
+    struct LegalAgreementText: View {
+        let termsURL: URL
+        let privacyURL: URL
+
+        var body: some View {
+            Text(agreement)
+                .typography(.caption1, color: .pia.onSurfaceContainerPrimary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+        }
+
+        private var agreement: AttributedString {
+            var attributed = AttributedString(Self.sentence)
+            attributed.replacingPlaceholder("$1", with: L10n.Welcome.Agreement.Message.tos, linkedTo: termsURL)
+            attributed.replacingPlaceholder("$2", with: L10n.Welcome.Agreement.Message.privacy, linkedTo: privacyURL)
+            return attributed
+        }
+
+        /// The closing sentence of the agreement paragraph.
+        ///
+        /// `welcome.agreement.message` holds the long renewal terms, then a blank line, then the
+        /// sentence shown here — and it is already translated into all 18 locales, which is why it is
+        /// reused rather than replaced by a new key that would ship as English-only legal text.
+        /// This is the same split the previous screen performed.
+        ///
+        /// If a translation ever drops the blank line the whole paragraph is shown, which is verbose but
+        /// still correct — better than showing nothing.
+        private static var sentence: String {
+            // The paragraph's price placeholder belongs to the part being discarded.
+            let full = L10n.Welcome.Agreement.message("")
+            guard let separator = full.range(of: "\n\n", options: .backwards) else { return full }
+            return String(full[separator.upperBound...])
+        }
     }
-}
 
-extension AttributedString {
-    /// Swaps a `$n` placeholder for a tappable, underlined link.
-    fileprivate mutating func replacingPlaceholder(_ placeholder: String, with title: String, linkedTo url: URL) {
-        guard let range = range(of: placeholder) else { return }
+    extension AttributedString {
+        /// Swaps a `$n` placeholder for a tappable, underlined link.
+        fileprivate mutating func replacingPlaceholder(_ placeholder: String, with title: String, linkedTo url: URL) {
+            guard let range = range(of: placeholder) else { return }
 
-        var link = AttributedString(title)
-        link.link = url
-        link.foregroundColor = .pia.primary
-        link.underlineStyle = .single
+            var link = AttributedString(title)
+            link.link = url
+            link.foregroundColor = .pia.primary
+            link.underlineStyle = .single
 
-        replaceSubrange(range, with: link)
+            replaceSubrange(range, with: link)
+        }
     }
-}
 
-#Preview {
-    LegalAgreementText(
-        termsURL: URL(string: "https://www.privateinternetaccess.com/pages/terms-of-service")!,
-        privacyURL: URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy")!
-    )
-    .padding(PIASpacing.s24)
-    .background(Color.pia.background)
-}
+    #Preview {
+        LegalAgreementText(
+            termsURL: URL(string: "https://www.privateinternetaccess.com/pages/terms-of-service")!,
+            privacyURL: URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy")!
+        )
+        .padding(PIASpacing.s24)
+        .background(Color.pia.background)
+    }
+#endif

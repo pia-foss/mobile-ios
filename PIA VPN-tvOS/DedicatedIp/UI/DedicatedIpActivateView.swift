@@ -7,6 +7,7 @@
 //
 
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
 struct DedicatedIpActivateView: View {

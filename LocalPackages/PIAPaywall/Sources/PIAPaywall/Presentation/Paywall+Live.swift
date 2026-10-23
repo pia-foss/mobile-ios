@@ -19,141 +19,143 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PIABase
-import PIALibrary
-import PIALocalizations
+#if os(iOS)
+    import Foundation
+    import PIABase
+    import PIALibrary
+    import PIALocalizations
 
-private let log = PIALogger.logger(for: Paywall.Dependencies.self)
+    private let log = PIALogger.logger(for: Paywall.Dependencies.self)
 
-// The only file in PIAPaywall that touches `Client`. Everything above this line is testable without
-// a `Client` stack; everything here is the thin adapter onto PIALibrary.
-public extension Paywall.Dependencies {
+    // The only file in PIAPaywall that touches `Client`. Everything above this line is testable without
+    // a `Client` stack; everything here is the thin adapter onto PIALibrary.
+    public extension Paywall.Dependencies {
 
-    /// `@MainActor` because `AccountProvider` and `InAppProvider` are not `Sendable`: pinning the
-    /// adapter to one actor is what allows them to be captured by the dependency closures at all.
-    @MainActor
-    static func live(
-        accountProvider: AccountProvider,
-        store: InAppProvider,
-        emit: @escaping @MainActor (Paywall.Output) -> Void
-    ) -> Paywall.Dependencies {
-        let currentReceipt = GetCurrentSubscriptionReceiptUseCase(store: store)
-        let loginWithReceipt = LoginWithReceiptUseCase(accountProvider: accountProvider)
+        /// `@MainActor` because `AccountProvider` and `InAppProvider` are not `Sendable`: pinning the
+        /// adapter to one actor is what allows them to be captured by the dependency closures at all.
+        @MainActor
+        static func live(
+            accountProvider: AccountProvider,
+            store: InAppProvider,
+            emit: @escaping @MainActor (Paywall.Output) -> Void
+        ) -> Paywall.Dependencies {
+            let hasActiveSubscription = HasActiveSubscriptionUseCase(store: store)
+            let loginWithReceipt = LoginWithReceiptUseCase(accountProvider: accountProvider)
 
-        return Paywall.Dependencies(
-            loadOffers: {
-                switch await accountProvider.listPlanProducts() {
-                case .failure:
-                    return .failure(.productsUnavailable)
+            return Paywall.Dependencies(
+                loadOffers: {
+                    switch await accountProvider.listPlanProducts() {
+                    case .failure:
+                        return .failure(.productsUnavailable)
 
-                case .success(let products):
-                    let offers = await makeOffers(from: products, store: store)
-                    guard !offers.isEmpty else { return .failure(.productsUnavailable) }
-                    return .success(OffersPayload(offers: offers))
-                }
-            },
-
-            hasExistingEntitlement: {
-                await currentReceipt() != nil
-            },
-
-            purchase: { request in
-                let result: Result<any InAppTransaction, ClientError>
-                switch request {
-                case .plan(let plan):
-                    result = await accountProvider.purchase(plan: plan.libraryPlan)
-                case .product(let product):
-                    result = await accountProvider.purchase(product: product)
-                }
-                switch result {
-                case .success(let transaction):
-                    return .success(transaction)
-                case .failure(let error):
-                    return .failure(map(error))
-                }
-            },
-
-            finishTransaction: { transaction in
-                await transaction.finish()
-            },
-
-            restore: {
-                switch await accountProvider.restorePurchases() {
-                case .failure:
-                    // No receipt at all. Distinct from finding one that cannot be signed in with,
-                    // because the two produce different alerts.
-                    return .failure(.nothingToRestore)
-
-                case .success(let jws):
-                    return await loginWithReceipt(jws)
-                }
-            },
-
-            purchaseIntents: {
-                AsyncStream { continuation in
-                    let observer = PurchaseIntentObserver()
-                    observer.start()
-                    // The observer is held by this task alone, so `onTermination` needs to capture
-                    // nothing but the task — which is what keeps a non-`Sendable` type out of a
-                    // `@Sendable` closure.
-                    let task = Task { @MainActor in
-                        for await product in observer.purchaseIntents {
-                            log.debug("Purchase intent received for product id: \(product.identifier)")
-                            guard let product = product as? AppStoreProduct else { continue }
-                            continuation.yield(product)
-                        }
-                        observer.stop()
-                        continuation.finish()
+                    case .success(let products):
+                        let offers = await makeOffers(from: products, store: store)
+                        guard !offers.isEmpty else { return .failure(.productsUnavailable) }
+                        return .success(OffersPayload(offers: offers))
                     }
-                    continuation.onTermination = { _ in task.cancel() }
-                }
-            },
+                },
 
-            emit: emit
-        )
-    }
+                hasExistingEntitlement: {
+                    await hasActiveSubscription()
+                },
 
-    // MARK: - Mapping
+                purchase: { request in
+                    let result: Result<any InAppTransaction, ClientError>
+                    switch request {
+                    case .plan(let plan):
+                        result = await accountProvider.purchase(plan: plan.libraryPlan)
+                    case .product(let product):
+                        result = await accountProvider.purchase(product: product)
+                    }
+                    switch result {
+                    case .success(let transaction):
+                        return .success(transaction)
+                    case .failure(let error):
+                        return .failure(map(error))
+                    }
+                },
 
-    /// Formats each product once, while the StoreKit product and its locale are still in scope.
-    /// Intro-offer eligibility is asked per product, so any plan can carry a trial.
-    @MainActor
-    private static func makeOffers(
-        from products: [Plan: any InAppProduct],
-        store: InAppProvider
-    ) async -> [PaywallPlanID: PaywallOffer] {
-        var offers: [PaywallPlanID: PaywallOffer] = [:]
-        for id in PaywallPlanID.allCases {
-            guard let product = products[id.libraryPlan] else { continue }
-            let purchasePlan = PurchasePlan(plan: id.libraryPlan, product: product, monthlyFactor: id.monthlyFactor)
-            let trialDays = await store.eligibleDaysForIntroOffer(for: product)
-            offers[id] = PaywallOffer(
-                id: id,
-                priceString: purchasePlan.priceString,
-                monthlyPriceString: purchasePlan.monthlyPriceString,
-                accessibleMonthlyPriceString: purchasePlan.accessibleMonthlyPriceString,
-                monthlyPrice: purchasePlan.monthlyPrice,
-                trial: PaywallTrialOffer(days: trialDays)
+                finishTransaction: { transaction in
+                    await transaction.finish()
+                },
+
+                restore: {
+                    switch await accountProvider.restorePurchases() {
+                    case .failure:
+                        // No receipt at all. Distinct from finding one that cannot be signed in with,
+                        // because the two produce different alerts.
+                        return .failure(.nothingToRestore)
+
+                    case .success(let jws):
+                        return await loginWithReceipt(jws)
+                    }
+                },
+
+                purchaseIntents: {
+                    AsyncStream { continuation in
+                        let observer = PurchaseIntentObserver()
+                        observer.start()
+                        // The observer is held by this task alone, so `onTermination` needs to capture
+                        // nothing but the task — which is what keeps a non-`Sendable` type out of a
+                        // `@Sendable` closure.
+                        let task = Task { @MainActor in
+                            for await product in observer.purchaseIntents {
+                                log.debug("Purchase intent received for product id: \(product.identifier)")
+                                guard let product = product as? AppStoreProduct else { continue }
+                                continuation.yield(product)
+                            }
+                            observer.stop()
+                            continuation.finish()
+                        }
+                        continuation.onTermination = { _ in task.cancel() }
+                    }
+                },
+
+                emit: emit
             )
         }
-        return offers
-    }
 
-    /// `ClientError` carries no usable message of its own (see `PaywallError`), so every case is
-    /// mapped to an explicit localized string here.
-    private static func map(_ error: ClientError) -> PaywallError {
-        switch error {
-        case .userCancelled:
-            return .userCancelled
-        case .purchasePending:
-            return .purchasePending
-        case .sandboxPurchase:
-            return .failed(message: L10n.Signup.Failure.Purchase.Sandbox.message)
-        case .productUnavailable:
-            return .productsUnavailable
-        default:
-            return .failed(message: L10n.Signup.Paywall.Error.purchaseFailed)
+        // MARK: - Mapping
+
+        /// Formats each product once, while the StoreKit product and its locale are still in scope.
+        /// Intro-offer eligibility is asked per product, so any plan can carry a trial.
+        @MainActor
+        private static func makeOffers(
+            from products: [Plan: any InAppProduct],
+            store: InAppProvider
+        ) async -> [PaywallPlanID: PaywallOffer] {
+            var offers: [PaywallPlanID: PaywallOffer] = [:]
+            for id in PaywallPlanID.allCases {
+                guard let product = products[id.libraryPlan] else { continue }
+                let purchasePlan = PurchasePlan(plan: id.libraryPlan, product: product, monthlyFactor: id.monthlyFactor)
+                let trialDays = await store.eligibleDaysForIntroOffer(for: product)
+                offers[id] = PaywallOffer(
+                    id: id,
+                    priceString: purchasePlan.priceString,
+                    monthlyPriceString: purchasePlan.monthlyPriceString,
+                    accessibleMonthlyPriceString: purchasePlan.accessibleMonthlyPriceString,
+                    monthlyPrice: purchasePlan.monthlyPrice,
+                    trial: PaywallTrialOffer(days: trialDays)
+                )
+            }
+            return offers
+        }
+
+        /// `ClientError` carries no usable message of its own (see `PaywallError`), so every case is
+        /// mapped to an explicit localized string here.
+        private static func map(_ error: ClientError) -> PaywallError {
+            switch error {
+            case .userCancelled:
+                return .userCancelled
+            case .purchasePending:
+                return .purchasePending
+            case .sandboxPurchase:
+                return .failed(message: L10n.Signup.Failure.Purchase.Sandbox.message)
+            case .productUnavailable:
+                return .productsUnavailable
+            default:
+                return .failed(message: L10n.Signup.Paywall.Error.purchaseFailed)
+            }
         }
     }
-}
+#endif

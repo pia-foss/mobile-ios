@@ -748,6 +748,9 @@
           "product-name": "PIALocalizations",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAPaywall",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIARegionListDomain",
           "build-phase": { "build-phase": "frameworks" },
         }, {
