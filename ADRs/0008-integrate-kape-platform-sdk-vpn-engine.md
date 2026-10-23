@@ -50,8 +50,8 @@ the SDK's interface protocols with thin adapters that run inside the extension:
 | PIA adapter | Kape interface | Responsibility |
 |---|---|---|
 | `PIAPacketTunnelProvider` | `NEPacketTunnelProvider` | Extension entry point; wires up the SDK session/connection controllers. |
-| `PIAEndpointRepository` | `VpnConfigurationGenerator` | Resolves endpoints/settings from shared state; autonomously fetches and caches the server list, and ranks candidates by latency (see below). |
-| `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` | WireGuard key exchange + TLS pinning to the bundled PIA root CA. |
+| `PIAEndpointRepository` | `VpnConfigurationGenerator` | Resolves endpoints/settings from shared state; autonomously fetches and caches the server list, and ranks candidates by latency (see below). Hands the batch out one configuration per `nextConfiguration()` call, authorizing WireGuard ones first; the queue is dropped on `switchLocation`. |
+| `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` | WireGuard key exchange + TLS pinning to the bundled PIA root CA. Called by `PIAEndpointRepository`, not the WireGuard controller, since SDK `1.0.0-7c31624`. |
 | `PIATunnelLogger` | `PacketTunnelLogger` | Bridges SDK logging to `os.Logger`. |
 
 **One extension, shared source, per-platform target.** A single new Network Extension source

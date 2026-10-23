@@ -1,11 +1,47 @@
 import Foundation
 import KapeVPN_PacketTunnel
+import KapeVPN_WireGuard
 import PIALibrary
 
 final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
     let logger = PIATunnelLogger(label: "PIAEndpointRepository")
     let latestBatch = LatestBatch()
+    let queue: ConfigurationQueue
+    private let wireGuardAuthenticator: any PacketTunnelWireguardAuthenticator
 
+    init(wireGuardAuthenticator: any PacketTunnelWireguardAuthenticator = PIAWireguardAuthenticator()) {
+        self.wireGuardAuthenticator = wireGuardAuthenticator
+        self.queue = ConfigurationQueue(logger: logger)
+    }
+
+    /// Hands out the batch one configuration at a time, authorized and ready to connect, building a
+    /// new batch when it runs dry.
+    func nextConfiguration() async throws -> (any VpnConfiguration)? {
+        try await queue.next(
+            buildBatch: { await self.generateConfigurations() },
+            authorize: { try await self.authorize($0) },
+            didInstall: { await self.retain($0) }
+        )
+    }
+
+    /// Drops what's left of the batch and supersedes a pull still in flight. Call before the session
+    /// controller restarts for a new selection, which would otherwise keep connecting to the
+    /// previous one.
+    func reset() async {
+        await queue.reset()
+    }
+
+    /// WireGuard exchanges keys with the server right before connecting; OpenVPN carries its
+    /// credentials in the configuration already.
+    func authorize(_ configuration: any VpnConfiguration) async throws -> any VpnConfiguration {
+        guard let wireGuard = configuration as? KapeWireGuardConfig else {
+            return configuration
+        }
+        return try await wireGuardAuthenticator.authorize(wireGuard, logger: logger)
+    }
+
+    /// Builds a batch from shared state. The queue retains it for the debug menu once installed, so a
+    /// batch discarded after a location switch doesn't replace the current one there.
     func generateConfigurations() async -> [any VpnConfiguration] {
         let state = PIATunnelSharedState.read()
         logStateSummary(state)
@@ -19,10 +55,6 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         if state.selectedDipServer != nil || state.selectedLocationId != nil {
             guard let server = state.selectedServer(in: servers) else {
                 logger.error("No server could be resolved — returning no configurations")
-
-                // Clear the snapshot
-                await retain([])
-
                 return []
             }
             logResolvedServer(server, state: state)
@@ -32,7 +64,6 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         }
 
         let batch = configurations(for: eligible, state: state)
-        await retain(batch)
 
         if batch.isEmpty {
             logger.error("Generated no configurations — the tunnel has nothing to attempt")
