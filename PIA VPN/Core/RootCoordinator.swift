@@ -21,6 +21,7 @@
 //
 
 import Combine
+import PIAAlertBanners
 import PIAConsent
 import PIALibrary
 import SwiftUI
@@ -61,6 +62,9 @@ final class RootCoordinator {
             self.dashboardNavigationController = initialNav
         }
         configureMacCatalystWindow(for: window)
+        if let windowScene = window.windowScene {
+            AlertBanners.shared.install(in: windowScene)
+        }
 
         let initialState: AppRoot =
             if Client.providers.accountProvider.isLoggedIn {

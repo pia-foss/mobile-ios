@@ -148,8 +148,8 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
             finish(user: user, isSignup: false)
 
         case .showWarning(let message):
-            // SwiftEntryKit lives in the app target, so the banner is raised here rather than
-            // inside the feature package.
+            // Banner styling lives in the app target (`Macros`), so the banner is raised here rather
+            // than inside the feature package.
             Macros.displayImageNote(withImage: Asset.Piax.Global.iconWarning.image, message: message)
         }
     }
