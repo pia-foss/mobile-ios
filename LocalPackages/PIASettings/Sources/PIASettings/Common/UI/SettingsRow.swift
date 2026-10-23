@@ -114,6 +114,54 @@ struct SettingsNavigationRow: View {
     }
 }
 
+struct SettingsValueRow: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        SettingsRow(title) {
+            Text(value)
+                .typography(.body2, color: .pia.onSurfaceContainerSecondary)
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+struct SettingsMenuRow<Option: Hashable>: View {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+
+    let title: String
+    let options: [Option]
+    @Binding var selection: Option
+    let label: (Option) -> String
+
+    var body: some View {
+        SettingsRow(title, isLabelAccessibilityHidden: true) {
+            // Menu + Picker approach improves UI customization
+            Menu {
+                Picker(title, selection: $selection) {
+                    ForEach(options, id: \.self) { option in
+                        Text(label(option)).tag(option)
+                    }
+                }
+                .pickerStyle(.inline)
+                .labelsHidden()
+            } label: {
+                HStack(spacing: PIASpacing.s8) {
+                    Text(label(selection))
+                        .typography(.body2, color: .pia.onSurfaceContainerSecondary)
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundColor(.pia.onSurfaceContainerSecondary)
+                }
+            }
+            .accessibilityLabel(title)
+            .accessibilityValue(label(selection))
+        }
+        .opacity(isEnabled ? 1 : 0.5)
+    }
+}
+
 private struct SettingsRowButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
