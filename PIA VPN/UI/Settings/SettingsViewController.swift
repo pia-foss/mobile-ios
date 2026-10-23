@@ -199,19 +199,8 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         savePreferences()
     }
 
-    func resetToDefaultSettings() {
-        let alert = Macros.alert(
-            L10n.Settings.Reset.Defaults.Confirm.title,
-            L10n.Settings.Reset.Defaults.Confirm.message
-        )
-        alert.addDestructiveActionWithTitle(L10n.Settings.Reset.Defaults.Confirm.button) {
-            self.doReset()
-        }
-        alert.addCancelAction(L10n.Global.cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    private func doReset() {
+    @MainActor
+    private func resetToDefaultSettings() {
 
         isResetting = true
 
@@ -545,7 +534,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .development:
             self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
-            self.perform(segue: StoryboardSegue.Main.generalSettingsSegue, sender: nil)
+            showGeneralSettings()
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
@@ -555,4 +544,19 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         Theme.current.applyTableSectionFooter(view)
     }
 
+}
+
+extension SettingsViewController {
+    private func showGeneralSettings() {
+        guard let navigationController else { return }
+        let coordinator = GeneralSettingsCoordinator(
+            parent: navigationController,
+            resetToDefaults: { [weak self] in
+                self?.resetToDefaultSettings()
+            },
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
 }
