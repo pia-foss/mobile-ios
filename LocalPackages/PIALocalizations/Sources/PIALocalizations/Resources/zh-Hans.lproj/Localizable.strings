@@ -682,3 +682,10 @@
 "promo_offer.sheet.disclaimer_with_price"= "在 **%2$@** 以 %1$@ 恢复计费之前不会收取任何费用。您可以随时在设置中取消。";
 "promo_offer.sheet.disclaimer"= "在 **%@** 恢复计费之前不会收取任何费用。您可以随时在设置中取消。";
 "promo_offer.sheet.close"= "关闭";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "连接遇到问题？";
+"auto_protocol_nudge.message" = "切换到自动可让应用为你的网络选择性能最佳的协议，这有助于解决此类连接问题。";
+"auto_protocol_nudge.confirm" = "切换到自动";
+"auto_protocol_nudge.dismiss" = "暂不";

@@ -682,3 +682,10 @@ Sie haben immer die Kontrolle. In den Einstellungen können Sie sehen, welche Da
 "promo_offer.sheet.disclaimer_with_price"= "Keine Zahlung, bis die Abrechnung mit %1$@ am **%2$@** fortgesetzt wird. Jederzeit in den Einstellungen kündbar.";
 "promo_offer.sheet.disclaimer"= "Keine Zahlung, bis die Abrechnung am **%@** fortgesetzt wird. Jederzeit in den Einstellungen kündbar.";
 "promo_offer.sheet.close"= "Schließen";
+
+// AUTO PROTOCOL NUDGE
+
+"auto_protocol_nudge.title" = "Verbindungsprobleme?";
+"auto_protocol_nudge.message" = "Wenn Sie zu Automatisch wechseln, wählt die App das leistungsstärkste Protokoll für Ihr Netzwerk aus, was bei Verbindungsproblemen wie diesen helfen kann.";
+"auto_protocol_nudge.confirm" = "Zu Automatisch wechseln";
+"auto_protocol_nudge.dismiss" = "Nicht jetzt";
