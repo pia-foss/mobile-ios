@@ -520,7 +520,7 @@
 "forceupdate.label.title" = "Deneyiminizi Artırın";
 "forceupdate.label.subtitle" = "PIA'nın eski bir sürümünü kullanıyorsunuz. En son özelliklerle gelişmiş bir deneyimin keyfini çıkarmak için uygulamanızı hemen güncelleyin.";
 "forceupdate.button.update" = "Hemen Güncelle";
-"forceupdate.label.vpn.connected" = "\"Hemen Güncelle\"ye dokunmak VPN bağlantısını keser.";
+"forceupdate.label.vpn.connected" = "Güncelleme, VPN bağlantısını geçici olarak kesecek.";
 
 "global.version.format" = "Sürüm %@ (%@)";
 

@@ -46,6 +46,7 @@ final class RootCoordinator {
     /// The signup flow currently installed as the root, if any. Reached by the magic-link deep link.
     private(set) var signupCoordinator: SignupCoordinator?
     private var signupCancellables = Set<AnyCancellable>()
+    private var forceUpdateSubscription: AnyCancellable?
 
     var dashboard: DashboardViewController? {
         dashboardNavigationController?.viewControllers.first as? DashboardViewController
@@ -53,6 +54,7 @@ final class RootCoordinator {
 
     func install(in window: UIWindow) {
         self.window = window
+        observeForceUpdate()
         // The storyboard auto-loads a UINavigationController(Dashboard) as the initial root.
         // Reuse it when we end up in `.main` so we don't double-instantiate.
         if let initialNav = window.rootViewController as? UINavigationController,
@@ -109,6 +111,28 @@ final class RootCoordinator {
         window.rootViewController = newRoot
         window.makeKeyAndVisible()
         window.isUserInteractionEnabled = true
+
+        // Replacing the root drops anything presented over the old one, force update included.
+        if Client.configuration.featureFlags[.forceUpdate] {
+            DispatchQueue.main.async { [weak self] in self?.presentForceUpdate() }
+        }
+    }
+
+    // MARK: Force update
+
+    /// The flag can arrive from either feature-flag fetch while any root is on screen, so it is
+    /// handled here rather than by the screens.
+    private func observeForceUpdate() {
+        forceUpdateSubscription = NotificationCenter.default
+            .publisher(for: .__AppDidFetchForceUpdateFeatureFlag)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.presentForceUpdate() }
+    }
+
+    /// Presents over the root, so whatever is on screen is dismissed first.
+    private func presentForceUpdate() {
+        guard let root = window?.rootViewController else { return }
+        ForceUpdateCoordinator(presenter: root).start()
     }
 
     private func makeMainRoot() -> UIViewController {
@@ -223,10 +247,8 @@ extension RootCoordinator {
         // the user grants permission before reaching the dashboard tiles.
         DispatchQueue.main.async { [weak self] in
             guard let self, let dashboard = self.dashboard else { return }
-            let permissionVC = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-            let nav = UINavigationController(rootViewController: permissionVC)
-            nav.modalPresentationStyle = .fullScreen
-            dashboard.present(nav, animated: true)
+            let coordinator = VPNPermissionCoordinator(presenter: dashboard)
+            Task { await coordinator.startAsync() }
         }
     }
 }

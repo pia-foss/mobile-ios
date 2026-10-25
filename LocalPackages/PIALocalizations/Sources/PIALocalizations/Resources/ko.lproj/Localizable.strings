@@ -520,7 +520,7 @@
 "forceupdate.label.title" = "사용자 경험 업그레이드";
 "forceupdate.label.subtitle" = "고객님은 이전 버전의 PIA를 사용 중입니다. 지금 앱을 업데이트하여 모든 최신 기능을 통해 향상된 경험을 즐기세요.";
 "forceupdate.button.update" = "지금 업데이트";
-"forceupdate.label.vpn.connected" = "“지금 업데이트”를 탭하면 VPN 연결이 해제됩니다.";
+"forceupdate.label.vpn.connected" = "업데이트하는 동안 VPN 연결이 일시적으로 해제됩니다.";
 
 "global.version.format" = "버전 %@ (%@)";
 

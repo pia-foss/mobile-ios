@@ -326,8 +326,8 @@ public enum L10n {
       /// Upgrade Your Experience
       public static let title = L10n.tr("Localizable", "forceupdate.label.title", fallback: "Upgrade Your Experience")
       public enum Vpn {
-        /// Tapping “Update Now” will disconnect the VPN.
-        public static let connected = L10n.tr("Localizable", "forceupdate.label.vpn.connected", fallback: "Tapping “Update Now” will disconnect the VPN.")
+        /// Updating will temporarily disconnect the VPN.
+        public static let connected = L10n.tr("Localizable", "forceupdate.label.vpn.connected", fallback: "Updating will temporarily disconnect the VPN.")
       }
     }
   }

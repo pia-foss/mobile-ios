@@ -55,6 +55,7 @@ public struct ReadMoreView: View {
                     .frame(width: 44, height: 44)
             }
             .buttonStyle(.plain)
+            .keyboardShortcut(.cancelAction)
             .accessibilityLabel(Text(viewModel.closeAccessibilityLabel))
             .accessibilityIdentifier("id.consent.readMore.close")
 

@@ -520,7 +520,7 @@
 "forceupdate.label.title" = "Améliorez votre expérience";
 "forceupdate.label.subtitle" = "Vous utilisez une ancienne version de PIA. Mettez votre application à jour maintenant pour bénéficier d'une meilleure expérience avec toutes les nouvelles fonctionnalités.";
 "forceupdate.button.update" = "Mise à jour";
-"forceupdate.label.vpn.connected" = "Le VPN se déconnectera lorsque vous appuierez sur “Mise à jour”.";
+"forceupdate.label.vpn.connected" = "La mise à jour déconnectera temporairement le VPN.";
 
 "global.version.format" = "Version %@ (%@)";
 
