@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "デバッグ情報が正常に送信されました。\nID: %@\n送信された情報を特定するためにサポートチームがこのIDを必要としますので、このIDを書き留めておいてください。";
 "settings.application_information.debug.success.copyId" = "IDをコピー";
 
+"debug_report_review.title" = "デバッグログを送信";
+"debug_report_review.privacy" = "デバッグログとネットワーク設定に関する情報をサポートチームにアップロードします。インターネットの利用状況に関する情報は含まれません。";
+"debug_report_review.redacted" = "IPアドレスは伏せられます。";
+"debug_report_review.sections.title" = "送信される内容";
+"debug_report_review.sections.empty" = "利用可能な診断情報がありません。デバッグログを有効にして、もう一度お試しください。";
+"debug_report_review.sections.truncated" = "プレビューは一部のみ表示されています。すべての内容を確認するには「レポートを保存」を使用してください。";
+"debug_report_review.sections.expand_hint" = "このセクションの内容を表示または非表示にします。";
+"debug_report_review.section.protocol_information" = "接続設定";
+"debug_report_review.section.device_information" = "デバイス情報";
+"debug_report_review.section.application_log" = "アプリのデバッグログ";
+"debug_report_review.section.subscription_information" = "サブスクリプション";
+"debug_report_review.section.regions" = "サーバーリスト";
+"debug_report_review.section.user_settings" = "アプリの設定";
+"debug_report_review.section.last_known_exception" = "最後のエラー";
+"debug_report_review.section.tunnel_log" = "トンネルログ";
+"debug_report_review.section.last_tunnel_log" = "トンネルログ（前回のセッション）";
+"debug_report_review.section.vpn_status" = "VPNステータス";
+"debug_report_review.share" = "レポートを保存";
+"debug_report_review.send" = "送信";
+
 "settings.commit.messages.must_disconnect" = "変更を反映するには、VPNを再接続する必要があります。";
 "settings.commit.messages.should_reconnect" = "変更を適用するにはVPNに再度接続してください。";
 "settings.commit.buttons.reconnect" = "再接続";

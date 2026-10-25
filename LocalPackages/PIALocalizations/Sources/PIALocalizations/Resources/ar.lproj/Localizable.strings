@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "تم إرسال معلومات تتبع الأخطاء بنجاح.\nالمعرف: %@\nيرجى تدوين هذا المعرف، حيث أن فريق الدعم سيحتاجه لتحديد ما أرسلته.";
 "settings.application_information.debug.success.copyId" = "نسخ المعرف";
 
+"debug_report_review.title" = "إرسال سجلات تتبع الأخطاء";
+"debug_report_review.privacy" = "يؤدي هذا إلى رفع سجلات تتبع الأخطاء ومعلومات حول إعداد شبكتك إلى فريق الدعم لدينا. لا يحتوي على أي معلومات حول استخدامك للإنترنت.";
+"debug_report_review.redacted" = "يتم إخفاء عناوين IP.";
+"debug_report_review.sections.title" = "ما سيتم إرساله";
+"debug_report_review.sections.empty" = "لا تتوفر معلومات تشخيصية. فعّل تسجيل تتبع الأخطاء وحاول مرة أخرى.";
+"debug_report_review.sections.truncated" = "تم اختصار المعاينة. استخدم «حفظ التقرير» لرؤية المحتوى الكامل.";
+"debug_report_review.sections.expand_hint" = "يعرض محتوى هذا القسم أو يخفيه.";
+"debug_report_review.section.protocol_information" = "إعدادات الاتصال";
+"debug_report_review.section.device_information" = "معلومات الجهاز";
+"debug_report_review.section.application_log" = "سجل تتبع أخطاء التطبيق";
+"debug_report_review.section.subscription_information" = "الاشتراك";
+"debug_report_review.section.regions" = "قائمة الخوادم";
+"debug_report_review.section.user_settings" = "إعدادات التطبيق";
+"debug_report_review.section.last_known_exception" = "آخر خطأ";
+"debug_report_review.section.tunnel_log" = "سجل النفق";
+"debug_report_review.section.last_tunnel_log" = "سجل النفق (الجلسة الأخيرة)";
+"debug_report_review.section.vpn_status" = "حالة VPN";
+"debug_report_review.share" = "حفظ التقرير";
+"debug_report_review.send" = "إرسال";
+
 "settings.commit.messages.must_disconnect" = "يجب إعادة اتصال VPN حتى تسري بعض التغييرات.";
 "settings.commit.messages.should_reconnect" = "أعد اتصال VPN لتطبيق التغييرات.";
 "settings.commit.buttons.reconnect" = "إعادة اتصال";

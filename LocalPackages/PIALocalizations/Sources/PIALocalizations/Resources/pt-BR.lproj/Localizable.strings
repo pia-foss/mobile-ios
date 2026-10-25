@@ -136,6 +136,26 @@
 "settings.application_information.debug.success.message" = "Informações de depuração enviadas com sucesso.\nID: %@\nPor favor, anote este ID, pois a nossa equipe de suporte irá solicitá-lo para localizar o envio.";
 "settings.application_information.debug.success.copyId" = "Copiar ID";
 
+"debug_report_review.title" = "Enviar logs de depuração";
+"debug_report_review.privacy" = "Isso envia logs de depuração e informações sobre a configuração da sua rede para nossa equipe de suporte. Não contém nenhuma informação sobre o seu uso da internet.";
+"debug_report_review.redacted" = "Os endereços IP são ocultados.";
+"debug_report_review.sections.title" = "O que será enviado";
+"debug_report_review.sections.empty" = "Nenhuma informação de diagnóstico disponível. Ative o log de depuração e tente novamente.";
+"debug_report_review.sections.truncated" = "Prévia reduzida. Use “Salvar relatório” para ver o conteúdo completo.";
+"debug_report_review.sections.expand_hint" = "Mostra ou oculta o conteúdo desta seção.";
+"debug_report_review.section.protocol_information" = "Configurações de conexão";
+"debug_report_review.section.device_information" = "Informações do dispositivo";
+"debug_report_review.section.application_log" = "Log de depuração do app";
+"debug_report_review.section.subscription_information" = "Assinatura";
+"debug_report_review.section.regions" = "Lista de servidores";
+"debug_report_review.section.user_settings" = "Configurações do app";
+"debug_report_review.section.last_known_exception" = "Último erro";
+"debug_report_review.section.tunnel_log" = "Log do túnel";
+"debug_report_review.section.last_tunnel_log" = "Log do túnel (última sessão)";
+"debug_report_review.section.vpn_status" = "Status da VPN";
+"debug_report_review.share" = "Salvar relatório";
+"debug_report_review.send" = "Enviar";
+
 "settings.commit.messages.must_disconnect" = "A VPN deve reconectar para que algumas mudanças entrem em efeito.";
 "settings.commit.messages.should_reconnect" = "Reconecte a VPN para aplicar as mudanças.";
 "settings.commit.buttons.reconnect" = "Reconectar";
