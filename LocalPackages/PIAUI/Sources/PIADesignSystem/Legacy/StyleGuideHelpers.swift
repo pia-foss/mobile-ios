@@ -23,7 +23,7 @@
 import UIKit
 
 // MARK: Structs
-public struct TextStyle {
+public struct TextStyle: Sendable {
 
     public let font: UIFont?
     public let color: UIColor?
@@ -50,7 +50,7 @@ public struct TextStyle {
 
 }
 
-public struct ViewStyle {
+public struct ViewStyle: Sendable {
 
     let backgroundColor: UIColor?
     let tintColor: UIColor?
@@ -62,7 +62,7 @@ public struct ViewStyle {
         self.layerStyle = layerStyle
     }
 
-    public struct LayerStyle {
+    public struct LayerStyle: Sendable {
 
         let masksToBounds: Bool?
         let cornerRadius: CGFloat?
@@ -76,7 +76,7 @@ public struct ViewStyle {
             self.shadowStyle = shadowStyle
         }
 
-        public struct BorderStyle {
+        public struct BorderStyle: Sendable {
             let color: UIColor
             let width: CGFloat
 
@@ -87,7 +87,7 @@ public struct ViewStyle {
 
         }
 
-        public struct ShadowStyle {
+        public struct ShadowStyle: Sendable {
             let color: UIColor
             let radius: CGFloat
             let offset: CGSize
@@ -145,7 +145,7 @@ public struct TextAttributeStyle {
 }
 
 // MARK: Helper extensions
-extension UIView: ViewStyling {
+extension UIView: @MainActor ViewStyling {
 
     public func style(style: ViewStyle) {
         if let backgroundColor = style.backgroundColor {
@@ -200,7 +200,7 @@ extension CALayer {
     }
 }
 
-extension UILabel: TextStyling {
+extension UILabel: @MainActor TextStyling {
 
     public func style(style: TextStyle) {
         let textAlignment = self.textAlignment
@@ -214,7 +214,7 @@ extension UILabel: TextStyling {
 
 }
 
-extension UIButton: TextStyling {
+extension UIButton: @MainActor TextStyling {
 
     public func style(style: TextStyle) {
         titleLabel?.font = style.font
@@ -235,7 +235,7 @@ extension UIButton: TextStyling {
 
 }
 
-extension UITextField: TextStyling {
+extension UITextField: @MainActor TextStyling {
 
     public func style(style: TextStyle) {
         font = style.font
@@ -246,7 +246,7 @@ extension UITextField: TextStyling {
 
 }
 
-extension UITextView: TextStyling {
+extension UITextView: @MainActor TextStyling {
 
     public func style(style: TextStyle) {
         font = style.font
