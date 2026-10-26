@@ -41,6 +41,7 @@ final class RootCoordinator {
     static let shared = RootCoordinator()
 
     private weak var window: UIWindow?
+    private(set) var alertBanners: AlertBanners?
     private(set) var currentRoot: AppRoot?
     private(set) var dashboardNavigationController: UINavigationController?
 
@@ -63,7 +64,7 @@ final class RootCoordinator {
         }
         configureMacCatalystWindow(for: window)
         if let windowScene = window.windowScene {
-            AlertBanners.shared.install(in: windowScene)
+            alertBanners = AlertBanners(windowScene: windowScene)
         }
 
         let initialState: AppRoot =

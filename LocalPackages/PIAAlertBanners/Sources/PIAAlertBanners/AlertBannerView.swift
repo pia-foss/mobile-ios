@@ -6,6 +6,7 @@
 //
 
 import PIADesignSystem
+import PIASwiftUI
 import SwiftUI
 
 struct AlertBannerView: View {
@@ -44,16 +45,14 @@ struct AlertBannerOverlay: View {
     @ObservedObject var presenter: AlertBannerPresenter
     let onBannerFrameChange: (CGRect) -> Void
 
-    @State private var dragOffset: CGFloat = 0
-
     var body: some View {
         VStack(spacing: 0) {
             if let presentation = presenter.current {
                 AlertBannerView(banner: presentation.banner)
-                    .offset(y: dragOffset)
-                    .onTapGesture { presenter.dismiss(presentation.id) }
-                    .gesture(swipeUpToDismiss(presentation))
+                    .onSwipeUp { presenter.dismiss(presentationID: presentation.id) }
+                    .onTapGesture { presenter.dismiss(presentationID: presentation.id) }
                     .background(frameReader)
+                    .task(id: presentation.id) { await dismissWhenExpired(presentation) }
                     .id(presentation.id)
                     .transition(.move(edge: .top).combined(with: .opacity))
             }
@@ -67,7 +66,6 @@ struct AlertBannerOverlay: View {
         .onPreferenceChange(BannerFrameKey.self) { frame in
             MainActor.assumeIsolated { onBannerFrameChange(frame) }
         }
-        .onChange(of: presenter.current?.id) { _ in dragOffset = 0 }
     }
 
     private var frameReader: some View {
@@ -76,19 +74,11 @@ struct AlertBannerOverlay: View {
         }
     }
 
-    private func swipeUpToDismiss(_ presentation: AlertBannerHub.Presentation) -> some Gesture {
-        DragGesture()
-            .onChanged { value in
-                let height = value.translation.height
-                dragOffset = height < 0 ? height : height / 6
-            }
-            .onEnded { value in
-                if value.translation.height < -24 || value.predictedEndTranslation.height < -80 {
-                    presenter.dismiss(presentation.id)
-                } else {
-                    withAnimation(.spring()) { dragOffset = 0 }
-                }
-            }
+    private func dismissWhenExpired(_ presentation: AlertBannerPresenter.Presentation) async {
+        guard case .seconds(let seconds) = presentation.banner.duration else { return }
+        try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+        guard !Task.isCancelled else { return }
+        presenter.dismiss(presentationID: presentation.id)
     }
 }
 

@@ -136,6 +136,7 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
 
     // MARK: Paywall output
 
+    @MainActor
     private func handle(_ output: Paywall.Output) {
         switch output {
         case .requestLogin:

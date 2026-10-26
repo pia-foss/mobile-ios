@@ -11,96 +11,53 @@ import UIKit
 
 /// Shows `AlertBanner`s in a pass-through window above every other window, so a banner stays on
 /// top of any presented view controller.
-///
-/// Safe to call from any thread: calls are queued and applied in order on `AlertBannerActor`, and
-/// only the window work runs on the main actor.
-@AlertBannerActor
+@MainActor
 public final class AlertBanners {
-    nonisolated public static let shared = AlertBanners()
+    let presenter = AlertBannerPresenter()
 
-    private enum Command: Sendable {
-        case show(AlertBanner)
-        case dismiss
-        case dismissBanner(id: String)
-        case dismissPresentation(id: UUID)
-        case isDisplaying(id: String, CheckedContinuation<Bool, Never>)
-    }
-
-    private nonisolated let commands: AsyncStream<Command>.Continuation
-    private nonisolated let presenter: AlertBannerPresenter
-
-    nonisolated init() {
-        let (commandStream, commands) = AsyncStream.makeStream(of: Command.self)
-        let (updateStream, updates) = AsyncStream.makeStream(of: AlertBannerHub.Presentation?.self)
-        let hub = AlertBannerHub(onChange: { updates.yield($0) })
-        let presenter = AlertBannerPresenter { commands.yield(.dismissPresentation(id: $0)) }
-        self.commands = commands
-        self.presenter = presenter
-
-        Task { @AlertBannerActor in
-            for await command in commandStream {
-                Self.apply(command, to: hub)
-            }
-        }
-        Task { @AlertBannerActor in
-            for await presentation in updateStream {
-                await MainActor.run { presenter.update(presentation) }
-            }
-        }
-    }
+    #if DEBUG
+        public init() {}
+    #endif
 
     /// Sets the scene banners appear in. Without it, the first foreground scene is used.
-    @MainActor
-    public func install(in windowScene: UIWindowScene) {
+    public init(windowScene: UIWindowScene) {
         presenter.install(in: windowScene)
     }
 
     /// Shows `banner`, replacing the one on screen.
-    public nonisolated func show(_ banner: AlertBanner) {
-        commands.yield(.show(banner))
+    public func show(_ banner: AlertBanner) {
+        presenter.show(banner)
     }
 
     /// Dismisses the banner on screen if its id is `id`.
-    public nonisolated func dismiss(id: String) {
-        commands.yield(.dismissBanner(id: id))
+    public func dismiss(id: String) {
+        presenter.dismiss(bannerID: id)
     }
 
     /// Dismisses the banner on screen, whatever it is.
-    public nonisolated func dismiss() {
-        commands.yield(.dismiss)
-    }
-
-    /// Whether the banner on screen has id `id`, once every earlier call has been applied.
-    public nonisolated func isDisplaying(id: String) async -> Bool {
-        await withCheckedContinuation { commands.yield(.isDisplaying(id: id, $0)) }
-    }
-
-    private static func apply(_ command: Command, to hub: AlertBannerHub) {
-        switch command {
-        case .show(let banner): hub.show(banner)
-        case .dismiss: hub.dismiss()
-        case .dismissBanner(let id): hub.dismiss(bannerID: id)
-        case .dismissPresentation(let id): hub.dismiss(presentationID: id)
-        case .isDisplaying(let id, let continuation): continuation.resume(returning: hub.isDisplaying(bannerID: id))
-        }
+    public func dismiss() {
+        presenter.dismiss()
     }
 }
 
-/// Owns the overlay window. On Mac Catalyst a sheet lives in a scene of its own, so the window
-/// follows the scene of the topmost presented view controller.
+/// Holds the banner on screen and owns the overlay window. A new banner always replaces the
+/// current one. On Mac Catalyst a sheet lives in a scene of its own, so the window follows the
+/// scene of the topmost presented view controller.
 @MainActor
 final class AlertBannerPresenter: ObservableObject {
-    @Published private(set) var current: AlertBannerHub.Presentation?
+    struct Presentation: Identifiable {
+        let id = UUID()
+        let banner: AlertBanner
+    }
 
-    private let onDismiss: @Sendable (UUID) -> Void
+    @Published private(set) var current: Presentation? {
+        didSet { currentDidChange(from: oldValue) }
+    }
+
     private weak var windowScene: UIWindowScene?
     private var window: AlertBannerWindow?
     private var hideTask: Task<Void, Never>?
     private var windowObservation: AnyCancellable?
-
-    nonisolated init(onDismiss: @escaping @Sendable (UUID) -> Void) {
-        self.onDismiss = onDismiss
-    }
 
     func install(in windowScene: UIWindowScene) {
         guard windowScene !== self.windowScene else { return }
@@ -112,13 +69,30 @@ final class AlertBannerPresenter: ObservableObject {
         }
     }
 
-    func update(_ presentation: AlertBannerHub.Presentation?) {
-        let isNew = presentation != nil && presentation?.id != current?.id
-        current = presentation
+    func show(_ banner: AlertBanner) {
+        current = Presentation(banner: banner)
+    }
+
+    func dismiss() {
+        guard current != nil else { return }
+        current = nil
+    }
+
+    func dismiss(bannerID: String) {
+        guard current?.banner.id == bannerID else { return }
+        dismiss()
+    }
+
+    func dismiss(presentationID: UUID) {
+        guard current?.id == presentationID else { return }
+        dismiss()
+    }
+
+    private func currentDidChange(from previous: Presentation?) {
         hideTask?.cancel()
         hideTask = nil
 
-        guard let presentation else {
+        guard let current else {
             window?.bannerFrame = .zero
             // Keeps the window up until the exit transition has finished.
             hideTask = Task { [weak self] in
@@ -130,14 +104,10 @@ final class AlertBannerPresenter: ObservableObject {
         }
 
         showWindow()
-        if isNew {
-            UINotificationFeedbackGenerator().notificationOccurred(presentation.banner.style.feedbackType)
-            UIAccessibility.post(notification: .announcement, argument: presentation.banner.message)
+        if current.id != previous?.id {
+            UINotificationFeedbackGenerator().notificationOccurred(current.banner.style.feedbackType)
+            UIAccessibility.post(notification: .announcement, argument: current.banner.message)
         }
-    }
-
-    func dismiss(_ presentationID: UUID) {
-        onDismiss(presentationID)
     }
 
     private func showWindow() {

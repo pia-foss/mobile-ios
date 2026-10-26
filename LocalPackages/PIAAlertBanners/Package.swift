@@ -21,7 +21,8 @@ let package = Package(
         .target(
             name: "PIAAlertBanners",
             dependencies: [
-                .product(name: "PIADesignSystem", package: "PIAUI")
+                .product(name: "PIADesignSystem", package: "PIAUI"),
+                .product(name: "PIASwiftUI", package: "PIAUI")
             ]
         ),
         .testTarget(

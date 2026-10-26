@@ -6,6 +6,7 @@ let package = Package(
     name: "PIAUI",
     platforms: [
         .iOS(.v15),
+        .macCatalyst(.v15),
         .tvOS(.v17)
     ],
     products: [

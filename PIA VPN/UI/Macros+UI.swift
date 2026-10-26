@@ -129,13 +129,14 @@ extension Macros {
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displayImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil,
         accessbilityIdentifier: String = ""
     ) {
-        AlertBanners.shared.show(
+        RootCoordinator.shared.alertBanners?.show(
             AlertBanner(
                 message: message,
                 image: image,
@@ -151,12 +152,13 @@ extension Macros {
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displaySuccessImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil
     ) {
-        AlertBanners.shared.show(
+        RootCoordinator.shared.alertBanners?.show(
             AlertBanner(message: message, image: image, style: .success, duration: bannerDuration(duration)))
     }
 
@@ -167,12 +169,13 @@ extension Macros {
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displayWarningImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil
     ) {
-        AlertBanners.shared.show(
+        RootCoordinator.shared.alertBanners?.show(
             AlertBanner(message: message, image: image, style: .warning, duration: bannerDuration(duration)))
     }
 
@@ -182,19 +185,21 @@ extension Macros {
      - Parameter message: The note message
      - Parameter image: The note image
      */
+    @MainActor
     public static func displayStickyNote(
         withMessage message: String,
         andImage image: UIImage
     ) {
-        AlertBanners.shared.show(
+        RootCoordinator.shared.alertBanners?.show(
             AlertBanner(id: stickyNoteName, message: message, image: image, style: .error, duration: .indefinite))
     }
 
     /**
      Removes the sticky note, if it is the banner on screen.
     */
+    @MainActor
     public static func removeStickyNote() {
-        AlertBanners.shared.dismiss(id: stickyNoteName)
+        RootCoordinator.shared.alertBanners?.dismiss(id: stickyNoteName)
     }
 
     private static func bannerDuration(_ seconds: Double?) -> AlertBanner.Duration {
