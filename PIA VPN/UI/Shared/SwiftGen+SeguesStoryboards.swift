@@ -19,7 +19,6 @@ internal enum StoryboardSegue {
         case contentBlockerSegueIdentifier = "ContentBlockerSegueIdentifier"
         case customDNSSegueIdentifier = "CustomDNSSegueIdentifier"
         case developmentSettingsSegue = "DevelopmentSettingsSegue"
-        case generalSettingsSegue = "GeneralSettingsSegue"
         case helpSettingsSegue = "HelpSettingsSegue"
         case networkSettingsSegue = "NetworkSettingsSegue"
         case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"

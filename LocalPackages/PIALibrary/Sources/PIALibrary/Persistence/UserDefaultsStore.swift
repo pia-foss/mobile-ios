@@ -112,11 +112,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
 
-        case lastVPNConnectionAttempt = "lastVPNConnectionAttempt"
-
         case lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
-
-        case timeToConnectVPN = "timeToConnectVPN"
 
         case leakProtection = "LeakProtection"
 
@@ -504,30 +500,12 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     }
 
-    var lastVPNConnectionAttempt: Double {
-        get {
-            return backend.double(forKey: .lastVPNConnectionAttempt)
-        }
-        set {
-            backend.set(newValue, forKey: .lastVPNConnectionAttempt)
-        }
-    }
-
     var lastVPNConnectionSuccess: Double? {
         get {
             return backend.object(forKey: .lastVPNConnectionSuccess) as? Double
         }
         set {
             backend.set(newValue, forKey: .lastVPNConnectionSuccess)
-        }
-    }
-
-    var timeToConnectVPN: Double {
-        get {
-            return backend.double(forKey: .timeToConnectVPN)
-        }
-        set {
-            backend.set(newValue, forKey: .timeToConnectVPN)
         }
     }
 

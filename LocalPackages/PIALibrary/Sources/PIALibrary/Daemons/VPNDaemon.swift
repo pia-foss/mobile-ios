@@ -33,7 +33,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     private var numberOfAttempts: Int
     private var isReconnecting: Bool
     private var isReconnectingAfterConnectivityFailure: Bool = false
-    private var lastKnownVpnStatus: VPNStatus = .disconnected
 
     private init() {
         hasEnabledUpdates = false
@@ -61,10 +60,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         } catch {
             log.error("Failed to prepare VPN provider: \(error.localizedDescription)")
         }
-
-        if Client.providers.vpnProvider.isVPNConnected {
-            self.lastKnownVpnStatus = .connected
-        }
     }
 
     /// Folds the PlatformSDK tunnel's reported status (`PIATunnelSharedState.tunnelStatus`) into
@@ -79,10 +74,13 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
     /// `.connected`. Teardown drops the manager out of `.connected`, leaving that to the NEVPNStatus
     /// path; cold start is covered by `DefaultVPNProvider.reconcileStatusWithOwnConfiguration`.
     @objc private func platformSDKTunnelStatusDidChange() {
-        guard let tunnel = PIATunnelSharedState.readStatus().tunnelStatus,
-            let manager = accessedDatabase.transient.activeVPNProfile?.native as? NEVPNManager,
-            manager.connection.status == .connected
-        else {
+        guard let manager = accessedDatabase.transient.activeVPNProfile?.native as? NEVPNManager else {
+            return
+        }
+        let tunnelStatus = PIATunnelSharedState.readStatus().tunnelStatus
+        ServiceQualityManager.shared.connectionStatusDidChange(system: manager.connection.status, tunnel: tunnelStatus)
+
+        guard let tunnel = tunnelStatus, manager.connection.status == .connected else {
             return
         }
 
@@ -133,6 +131,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
         }
 
+        ServiceQualityManager.shared.connectionStatusDidChange(system: connection.status, tunnel: PIATunnelSharedState.readStatus().tunnelStatus)
+
         var nextStatus: VPNStatus = .disconnected
 
         // Captured before the switch, which clears the flag; the last-disconnect-error
@@ -146,7 +146,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
         switch connection.status {
         case .connected:
             nextStatus = .connected
-            Client.preferences.timeToConnectVPN = Date().timeIntervalSince1970 - Client.preferences.lastVPNConnectionAttempt
 
             let previousStatus = accessedDatabase.transient.vpnStatus
 
@@ -168,11 +167,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             invalidateTimer()
             reset()
 
-            if self.lastKnownVpnStatus == .disconnected, Client.preferences.shareServiceQualityData {
-                ServiceQualityManager.shared.connectionEstablishedEvent()
-                self.lastKnownVpnStatus = .connected
-            }
-
             //Connection successful, the user interaction finished
             Client.configuration.connectedManually = false
 
@@ -193,14 +187,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             if numberOfAttempts > 0 {
                 numberOfAttempts = 0
                 updateUIWithAttemptNumber(0)
-            }
-            Client.preferences.lastVPNConnectionAttempt = Date().timeIntervalSince1970
-
-            if accessedDatabase.transient.vpnStatus == .disconnected,
-                self.lastKnownVpnStatus == .disconnected,
-                Client.preferences.shareServiceQualityData
-            {
-                ServiceQualityManager.shared.connectionAttemptEvent()
             }
 
         // Reconnection is the PlatformSDK tunnel's job (KapePathReconnector /
@@ -224,16 +210,8 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
                 reset()
             }
 
-            //triggered only when the user is manually aborting connection (before being established).
             if Client.configuration.disconnectedManually {
                 isReconnectingAfterConnectivityFailure = false
-
-                if self.lastKnownVpnStatus != .connected,
-                    (previousStatus == .connecting || previousStatus == .disconnecting),
-                    Client.preferences.shareServiceQualityData
-                {
-                    ServiceQualityManager.shared.connectionCancelledEvent()
-                }
 
                 //VPN disconnected, the user interaction finished. Only reset the value when the source was manual.
                 Client.configuration.disconnectedManually = false
@@ -241,7 +219,6 @@ final class VPNDaemon: Daemon, DatabaseAccess, ProvidersAccess {
             }
 
             Client.preferences.lastVPNConnectionSuccess = nil
-            self.lastKnownVpnStatus = .disconnected
 
         default:
             nextStatus = .disconnected
