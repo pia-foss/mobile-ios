@@ -282,12 +282,14 @@ final class Bootstrapper {
         #endif
     }
 
+    @MainActor
     @objc private func internetReachable(notification: Notification) {
         #if os(iOS)
             Macros.removeStickyNote()
         #endif
     }
 
+    @MainActor
     @objc private func internetUnreachable(notification: Notification) {
         #if os(iOS)
             Macros.displayStickyNote(

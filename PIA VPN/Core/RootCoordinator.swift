@@ -21,6 +21,7 @@
 //
 
 import Combine
+import PIAAlertBanners
 import PIAConsent
 import PIALibrary
 import SwiftUI
@@ -40,6 +41,7 @@ final class RootCoordinator {
     static let shared = RootCoordinator()
 
     private weak var window: UIWindow?
+    private(set) var alertBanners: AlertBanners?
     private(set) var currentRoot: AppRoot?
     private(set) var dashboardNavigationController: UINavigationController?
 
@@ -61,6 +63,9 @@ final class RootCoordinator {
             self.dashboardNavigationController = initialNav
         }
         configureMacCatalystWindow(for: window)
+        if let windowScene = window.windowScene {
+            alertBanners = AlertBanners(windowScene: windowScene)
+        }
 
         let initialState: AppRoot =
             if Client.providers.accountProvider.isLoggedIn {

@@ -21,15 +21,14 @@
 //
 
 import Foundation
+import PIAAlertBanners
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
-import SwiftEntryKit
 import UIKit
 
 extension Macros {
 
-    private static let bannerHeight: CGFloat = 78.5
     private static let stickyNoteName: String = "sticky_note"
 
     /**
@@ -124,172 +123,87 @@ extension Macros {
     }
 
     /**
-     Shortcut to display an `EKImageNoteMessageView`.
+     Shortcut to display an error banner.
 
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displayImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil,
         accessbilityIdentifier: String = ""
     ) {
-
-        var attributes = EKAttributes()
-        attributes = .topToast
-        attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor(UIColor.piaRed))
-        attributes.positionConstraints.size = .init(
-            width: EKAttributes.PositionConstraints.Edge.fill,
-            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-
-        if let duration = duration {
-            attributes.displayDuration = duration
-        }
-
-        let labelContent = EKProperty.LabelContent(
-            text: message,
-            style: .init(
-                font: TextStyle.textStyle7.font!,
-                color: .white))
-        let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(
-            with: labelContent,
-            imageContent: imageContent)
-        contentView.accessibilityIdentifier = accessbilityIdentifier
-
-        SwiftEntryKit.display(
-            entry: contentView,
-            using: attributes)
-
+        RootCoordinator.shared.alertBanners?.show(
+            AlertBanner(
+                message: message,
+                image: image,
+                style: .error,
+                duration: bannerDuration(duration),
+                accessibilityIdentifier: accessbilityIdentifier))
     }
 
     /**
-     Shortcut to display a success `EKImageNoteMessageView`.
+     Shortcut to display a success banner.
 
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displaySuccessImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil
     ) {
-
-        var attributes = EKAttributes()
-        attributes = .topToast
-        attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor(UIColor.piaGreenDark20))
-        attributes.positionConstraints.size = .init(
-            width: EKAttributes.PositionConstraints.Edge.fill,
-            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-
-        if let duration = duration {
-            attributes.displayDuration = duration
-        }
-
-        let labelContent = EKProperty.LabelContent(
-            text: message,
-            style: .init(
-                font: TextStyle.textStyle7.font!,
-                color: .white))
-        let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(
-            with: labelContent,
-            imageContent: imageContent)
-
-        SwiftEntryKit.display(
-            entry: contentView,
-            using: attributes)
-
+        RootCoordinator.shared.alertBanners?.show(
+            AlertBanner(message: message, image: image, style: .success, duration: bannerDuration(duration)))
     }
 
     /**
-     Shortcut to display a warning `EKImageNoteMessageView`.
+     Shortcut to display a warning banner.
 
      - Parameter image: The note image
      - Parameter message: The note message
      - Parameter duration: Optional duration of the note
      */
+    @MainActor
     public static func displayWarningImageNote(
         withImage image: UIImage,
         message: String,
         andDuration duration: Double? = nil
     ) {
-
-        var attributes = EKAttributes()
-        attributes = .topToast
-        attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor(UIColor.piaOrange))
-        attributes.positionConstraints.size = .init(
-            width: EKAttributes.PositionConstraints.Edge.fill,
-            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-
-        if let duration = duration {
-            attributes.displayDuration = duration
-        }
-
-        let labelContent = EKProperty.LabelContent(
-            text: message,
-            style: .init(
-                font: TextStyle.textStyle7.font!,
-                color: .white))
-        let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(
-            with: labelContent,
-            imageContent: imageContent)
-
-        SwiftEntryKit.display(
-            entry: contentView,
-            using: attributes)
-
+        RootCoordinator.shared.alertBanners?.show(
+            AlertBanner(message: message, image: image, style: .warning, duration: bannerDuration(duration)))
     }
+
     /**
-     Shortcut to display an infinite `EKImageNoteMessageView`.
+     Shortcut to display an error banner that stays until `removeStickyNote()` is called.
 
      - Parameter message: The note message
      - Parameter image: The note image
      */
+    @MainActor
     public static func displayStickyNote(
         withMessage message: String,
         andImage image: UIImage
     ) {
-
-        var attributes = EKAttributes()
-        attributes = .topToast
-        attributes.name = stickyNoteName
-        attributes.hapticFeedbackType = .success
-        attributes.entryBackground = .color(color: EKColor(UIColor.piaRed))
-        attributes.positionConstraints.size = .init(
-            width: EKAttributes.PositionConstraints.Edge.fill,
-            height: EKAttributes.PositionConstraints.Edge.constant(value: bannerHeight))
-        attributes.displayDuration = .infinity
-
-        let labelContent = EKProperty.LabelContent(
-            text: message,
-            style: .init(
-                font: TextStyle.textStyle7.font!,
-                color: .white))
-        let imageContent = EKProperty.ImageContent(image: image)
-        let contentView = EKImageNoteMessageView(
-            with: labelContent,
-            imageContent: imageContent)
-        SwiftEntryKit.display(
-            entry: contentView,
-            using: attributes)
-
+        RootCoordinator.shared.alertBanners?.show(
+            AlertBanner(id: stickyNoteName, message: message, image: image, style: .error, duration: .indefinite))
     }
 
     /**
-     Removes the current presented sticky note `EKImageNoteMessageView`.
+     Removes the sticky note, if it is the banner on screen.
     */
+    @MainActor
     public static func removeStickyNote() {
-        if SwiftEntryKit.isCurrentlyDisplaying(entryNamed: stickyNoteName) {
-            SwiftEntryKit.dismiss()
-        }
+        RootCoordinator.shared.alertBanners?.dismiss(id: stickyNoteName)
+    }
+
+    private static func bannerDuration(_ seconds: Double?) -> AlertBanner.Duration {
+        seconds.map { .seconds($0) } ?? .default
     }
 
 }

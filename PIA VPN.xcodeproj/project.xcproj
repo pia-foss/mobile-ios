@@ -51,12 +51,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/huri000/SwiftEntryKit.git",
-      "version": {
-        "version": "2.0.0",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/pointfreeco/swift-snapshot-testing",
       "version": {
         "version": "1.19.6",
@@ -315,6 +309,9 @@
           "product-name": "PIAAccountDetails",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAAlertBanners",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIAAssetsFlags",
           "build-phase": { "build-phase": "frameworks" },
         }, {
@@ -373,10 +370,6 @@
         }, {
           "package": "Popover",
           "product-name": "Popover",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "SwiftEntryKit",
-          "product-name": "SwiftEntryKit",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "apple-core",

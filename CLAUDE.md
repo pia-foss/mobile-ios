@@ -155,7 +155,7 @@ command to format a single $FILE `swift format -i $FILE`
 vendored `KapePlatformSDK` (pulled by `scripts/pull-kape-platform-sdk.sh`), which ships its own
 TunnelKit and WireGuard packages — `mobile-ios-{openvpn,wireguard}` were retired in KM-18239.
 
-**Third-party**: SwiftEntryKit, Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, OpenSSL
+**Third-party**: Reachability, swift-log, Alamofire (legacy), SwiftyBeaver, OpenSSL
 
 ## Security
 

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -6,6 +6,7 @@ let package = Package(
     name: "PIAUI",
     platforms: [
         .iOS(.v15),
+        .macCatalyst(.v15),
         .tvOS(.v17)
     ],
     products: [
