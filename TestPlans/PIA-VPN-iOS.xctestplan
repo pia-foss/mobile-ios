@@ -120,6 +120,13 @@
         "identifier" : "PIARegionListTests",
         "name" : "PIARegionListTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAAccountDetails",
+        "identifier" : "PIAAccountDetailsTests",
+        "name" : "PIAAccountDetailsTests"
+      }
     }
   ],
   "version" : 1

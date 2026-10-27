@@ -35,7 +35,5 @@ public enum FeatureFlag: String, CaseIterable, Sendable {
     case forceUpdate = "force_update"
     case checkDipExpirationRequest = "check-dip-expiration-request"
     case disableSystemRatingDialog = "disable-system-rating-dialogue"
-    case showLeakProtection = "ios_custom_leak_protection_v2"
-    case showLeakProtectionNotifications = "ios_custom_leak_protection_notifications_v2"
     case showDynamicIslandLiveActivity = "ios_dynamic_island_live_activity_v2"
 }

@@ -306,6 +306,9 @@
           "product-name": "PIAAbout",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAAccountDetails",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIAAlertBanners",
           "build-phase": { "build-phase": "frameworks" },
         }, {

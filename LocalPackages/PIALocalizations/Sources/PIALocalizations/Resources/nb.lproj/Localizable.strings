@@ -35,8 +35,6 @@
 "expiration.title" = "Forny";
 "expiration.message" = "Abonnementet ditt utløper snart. Forny det for å forbli beskyttet.";
 
-"local_notification.non_compliant_wifi.title" = "Usikret WiFi:%@";
-"local_notification.non_compliant_wifi.text" = "Trykk her for å sikre enheten din";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "Kill switch for VPN hindrer tilgang til Internett hvis VPN-tilkoblingen mister forbindelsen og prøver å koble til igjen. Dette ekskluderer manuell frakobling.";
 "settings.application_settings.reconnect_notifications.title" = "Tilkoblingsmeldinger";
 "settings.application_settings.reconnect_notifications.footer" = "Få varsler når VPN kobler til på nytt til en annen plassering. Deaktiver for å slutte å motta disse varslene.";
-"settings.application_settings.leak_protection.title" = "Lekkasjebeskyttelse";
-"settings.application_settings.leak_protection.footer" = "iOS har funksjoner som er utviklet for å fungere utenfor VPN-et, for eksempel AirDrop, CarPlay, AirPlay og delt Internett. Ved å aktivere tilpasset lekkasjebeskyttelse kan du rute denne trafikken gjennom VPN-et, men det kan påvirke hvordan disse funksjonene fungerer. Mer informasjon";
-"settings.application_settings.leak_protection.more_info" = "Mer informasjon";
-"settings.application_settings.allow_local_network.title" = "Tillat tilgang til enheter på lokalnettverk";
-"settings.application_settings.allow_local_network.footer" = "Behold tilgang til lokale enheter som skrivere eller filservere mens du er koblet til VPN-et. (Tillat dette bare hvis du stoler på personene og enhetene på nettverket ditt.)";
-"settings.application_settings.leak_protection.alert.title" = "Endringer i VPN-innstillingene vil tre i kraft ved neste tilkobling";
 
 "settings.content_blocker.title" = "Safari Innholdsblokkerer – status";
 "settings.content_blocker.refresh.title" = "Oppdater utestengningslisten";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket tilkoblet";
 "dashboard.accessibility.vpn.button.isOff" = "VPN-tilkoblingsknapp. VPN-klienten er for øyeblikket frakoblet";
 
-"dashboard.vpn.leakprotection.alert.title" = "Usikret WiFi oppdaget";
-"dashboard.vpn.leakprotection.alert.message" = "For å hindre datalekkasjer trykker du på Deaktiver nå for å slå av \"Tillat tillat tilgang til enheter på lokalnettverk\" og automatisk koble til på nytt.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Deaktiver nå";
-"dashboard.vpn.leakprotection.alert.cta2" = "Les mer";
-"dashboard.vpn.leakprotection.alert.cta3" = "Ignorer";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "For å hindre datalekkasjer trykker du på Bytt nå for å bytte til VPN-protokollen IKEv2 og automatisk koble til på nytt.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Bytt nå";
 
 "dashboard.vpn.change_location.alert.title" = "Endrer plassering?";
 "dashboard.vpn.change_location.alert.message" = "VPN-en din kobles fra kort mens den kobler til den nye plasseringen.";
@@ -272,7 +257,6 @@
 "tiles.subscription.yearly" = "Årlig";
 "tiles.subscription.days.left" = "(%d dager igjen)";
 "tiles.usage.title" = "Bruk";
-"tiles.usage.ipsec.title" = "BRUK (ikke tilgjengelig på IKEv2)";
 "tiles.usage.upload" = "Last opp";
 "tiles.usage.download" = "Last ned";
 "tiles.nmt.accessibility.trusted" = "Klarert nettverk";

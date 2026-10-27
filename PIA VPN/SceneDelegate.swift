@@ -46,6 +46,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// Set by UIKit from `UISceneStoryboardFile` before `scene(_:willConnectTo:options:)` runs.
     var window: UIWindow?
     private var cancellables = Set<AnyCancellable>()
+    private let protectedDataGate = ProtectedDataGate()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -58,6 +59,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Keep the launch screen presented while the migration check runs
         window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
 
+        protectedDataGate.whenAvailable { [weak self] in
+            self?.checkMigrationAndStartApp(with: connectionOptions)
+        }
+    }
+
+    private func checkMigrationAndStartApp(with connectionOptions: UIScene.ConnectionOptions) {
         if let window {
             AppPreferences.shared.reloadTheme(in: window, withAnimationDuration: 0)
         }
@@ -110,8 +117,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
-        // Remove the Non compliant Wifi local notification as the app is in foreground now
-        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
 
         #if !targetEnvironment(macCatalyst)
             AppDelegate.delegate().instantiateLiveActivityManagerIfNeeded()
@@ -296,9 +301,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // Dismiss any modally presented view controller on dashboard
                 NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
 
-                // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
-                dismissLeakProtectionAlert()
-
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
                 disconnectAfter(milliseconds: defaultMilliseconds)
@@ -348,16 +350,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func disconnectAfter(milliseconds: Int) {
         Macros.dispatch(after: .milliseconds(milliseconds)) {
             Client.providers.vpnProvider.disconnect(nil)
-        }
-    }
-
-    private func dismissLeakProtectionAlert() {
-        if let presentedAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController {
-            let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-
-            if presentedAlert.title == leakProtectionAlertTitle {
-                presentedAlert.dismiss(animated: true)
-            }
         }
     }
 }

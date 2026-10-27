@@ -14,7 +14,6 @@ import UIKit
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardSegue {
     internal enum Main: String, SegueType {
-        case accountSegueIdentifier = "AccountSegueIdentifier"
         case automationSettingsSegue = "AutomationSettingsSegue"
         case contentBlockerSegueIdentifier = "ContentBlockerSegueIdentifier"
         case customDNSSegueIdentifier = "CustomDNSSegueIdentifier"
@@ -22,7 +21,6 @@ internal enum StoryboardSegue {
         case helpSettingsSegue = "HelpSettingsSegue"
         case networkSettingsSegue = "NetworkSettingsSegue"
         case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"
-        case protocolSettingsSegue = "ProtocolSettingsSegue"
         case serviceQualityDataSegueIdentifier = "ServiceQualityDataSegueIdentifier"
         case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
         case settingsSegueIdentifier = "SettingsSegueIdentifier"

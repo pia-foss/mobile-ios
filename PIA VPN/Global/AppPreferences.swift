@@ -92,8 +92,6 @@ final class AppPreferences {
 
         // Features
         static let checksDipExpirationRequest = "checksDipExpirationRequest"
-        static let showLeakProtection = "showLeakProtection"
-        static let showLeakProtectionNotifications = "showLeakProtectionNotifications"
         static let showDynamicIslandLiveActivity = "showDynamicIslandLiveActivity"
         static let didCleanupLegacyVPNProfiles = "didCleanupLegacyVPNProfiles"
         static let didConfirmPlatformSDKMigration = "didConfirmPlatformSDKMigration"
@@ -455,24 +453,6 @@ final class AppPreferences {
         }
         set {
             defaults.set(newValue, forKey: Entries.showServiceMessages)
-        }
-    }
-
-    var showLeakProtection: Bool {
-        get {
-            return defaults.bool(forKey: Entries.showLeakProtection)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showLeakProtection)
-        }
-    }
-
-    var showLeakProtectionNotifications: Bool {
-        get {
-            return defaults.bool(forKey: Entries.showLeakProtectionNotifications)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.showLeakProtectionNotifications)
         }
     }
 
