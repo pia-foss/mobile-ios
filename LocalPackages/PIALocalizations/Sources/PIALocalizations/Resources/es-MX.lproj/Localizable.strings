@@ -35,8 +35,6 @@
 "expiration.title" = "Renovación";
 "expiration.message" = "Tu suscripción expira pronto. Renueva para estar protegido.";
 
-"local_notification.non_compliant_wifi.title" = "Wifi no protegida: %@";
-"local_notification.non_compliant_wifi.text" = "Toca aquí para proteger el dispositivo";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "El botón de pánico de VPN evita el acceso a Internet si la conexión VPN se está volviendo a conectar. Esto excluye la desconexión manual.";
 "settings.application_settings.reconnect_notifications.title" = "Notificaciones de reconexión";
 "settings.application_settings.reconnect_notifications.footer" = "Recibe alertas cuando la VPN se reconecta a una ubicación diferente. Desactiva esta opción para dejar de recibir estas notificaciones.";
-"settings.application_settings.leak_protection.title" = "Protección contra filtraciones";
-"settings.application_settings.leak_protection.footer" = "iOS incluye funciones diseñadas para operar fuera de la VPN por omisión, como AirDrop, CarPlay, AirPlay y los puntos de acceso personales. Habilitar la protección personalizada contra las filtraciones dirige este tráfico a través de la VPN, pero puede afectar a su funcionamiento. Más información";
-"settings.application_settings.leak_protection.more_info" = "Más información";
-"settings.application_settings.allow_local_network.title" = "Permitir acceso a dispositivos de la red local";
-"settings.application_settings.allow_local_network.footer" = "Mantente conectado a dispositivos locales como impresoras o servidores de archivos mientras estés conectado a la VPN. (Solo debes permitirlo si confías en las personas y los dispositivos de tu red.)";
-"settings.application_settings.leak_protection.alert.title" = "Los cambios en la configuración de la VPN tendrán efecto en la próxima conexión";
 
 "settings.content_blocker.title" = "Estado del bloqueador de contenido de Safari";
 "settings.content_blocker.refresh.title" = "Actualizar la lista de bloqueos";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "Botón de conexión de VPN. La VPN está conectada en este momento.";
 "dashboard.accessibility.vpn.button.isOff" = "Botón de conexión de VPN. La VPN está desconectada en este momento.";
 
-"dashboard.vpn.leakprotection.alert.title" = "Detectada red wifi no protegida";
-"dashboard.vpn.leakprotection.alert.message" = "Para evitar filtraciones de datos, toca en \"Desactivar ahora\" para desactivar la opción \"Permitir acceso a dispositivos de la red local\" y restablecer la conexión automáticamente.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Desactivar ahora";
-"dashboard.vpn.leakprotection.alert.cta2" = "Más información";
-"dashboard.vpn.leakprotection.alert.cta3" = "Ignorar";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "Para evitar las filtraciones de datos, toca en \"Cambiar ahora\" para cambiar al protocolo VPN IKEv2 y restablecer la conexión automáticamente.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Cambiar ahora";
 
 "dashboard.vpn.change_location.alert.title" = "¿Cambiando ubicación?";
 "dashboard.vpn.change_location.alert.message" = "Tu VPN se desconectará brevemente mientras se conecta a la nueva ubicación.";
@@ -272,7 +257,6 @@
 "tiles.subscription.yearly" = "Anual";
 "tiles.subscription.days.left" = "(hace %d días)";
 "tiles.usage.title" = "Uso";
-"tiles.usage.ipsec.title" = "USO (No disponible en IKEv2)";
 "tiles.usage.upload" = "Subir";
 "tiles.usage.download" = "Descargar";
 "tiles.nmt.accessibility.trusted" = "Red fiable";

@@ -78,7 +78,6 @@ public enum AppConstants: Sendable {
         public static let privacyURL = URL(string: "https://www.privateinternetaccess.com/pages/privacy-policy/")!
         public static let deleteAccountUrl = URL(string: "https://helpdesk.privateinternetaccess.com/guides/account-changes/change-account-information/delete-pia-account")!
         public static let csEmail = "helpdesk+vpnpermissions.ios@privateinternetaccess.com"
-        public static let leakProtectionURL = URL(string: "\(Self.supportURL.absoluteString)/kb/articles/what-is-pia-s-leak-protection-feature-on-ios")!
     }
 
     public enum Browser {

@@ -35,8 +35,6 @@
 "expiration.title" = "Renewal";
 "expiration.message" = "Your subscription expires soon. Renew to stay protected.";
 
-"local_notification.non_compliant_wifi.title" = "Unsecured Wi-Fi: %@";
-"local_notification.non_compliant_wifi.text" = "Tap here to secure your device";
 
 // SHORTCUTS
 
@@ -115,12 +113,6 @@
 "settings.application_settings.kill_switch.footer" = "The VPN kill switch prevents access to the Internet if the VPN connection is reconnecting. This excludes disconnecting manually.";
 "settings.application_settings.reconnect_notifications.title" = "Reconnect Notifications";
 "settings.application_settings.reconnect_notifications.footer" = "Get alerts when VPN is reconnecting to a different location. Disable to stop receiving these notifications.";
-"settings.application_settings.leak_protection.title" = "Leak Protection";
-"settings.application_settings.leak_protection.footer" = "iOS includes features designed to operate outside the VPN by default, such as AirDrop, CarPlay, AirPlay, and Personal Hotspots. Enabling custom leak protection routes this traffic through the VPN but may affect how these features function. More info";
-"settings.application_settings.leak_protection.more_info" = "More info";
-"settings.application_settings.allow_local_network.title" = "Allow access to devices on local network";
-"settings.application_settings.allow_local_network.footer" = "Stay connected to local devices like printers or file servers while connected to the VPN. (Allow this only if you trust the people and devices on your network.)";
-"settings.application_settings.leak_protection.alert.title" = "Changes to the VPN Settings will take effect on the next connection";
 
 "settings.content_blocker.title" = "Safari Content Blocker state";
 "settings.content_blocker.refresh.title" = "Refresh block list";
@@ -187,14 +179,7 @@
 "dashboard.accessibility.vpn.button.isOn" = "VPN Connection button. The VPN is currently connected";
 "dashboard.accessibility.vpn.button.isOff" = "VPN Connection button. The VPN is currently disconnected";
 
-"dashboard.vpn.leakprotection.alert.title" = "Unsecured Wi-Fi detected";
-"dashboard.vpn.leakprotection.alert.message" = "To prevent data leaks, tap Disable Now to turn off “Allow access to devices on local network\" and automatically reconnect.";
-"dashboard.vpn.leakprotection.alert.cta1" = "Disable Now";
-"dashboard.vpn.leakprotection.alert.cta2" = "Learn more";
-"dashboard.vpn.leakprotection.alert.cta3" = "Ignore";
 
-"dashboard.vpn.leakprotection.ikev2.alert.message" = "To prevent data leaks, tap Switch Now to change to the IKEv2 VPN protocol and automatically reconnect.";
-"dashboard.vpn.leakprotection.ikev2.alert.cta1" = "Switch Now";
 
 "dashboard.vpn.change_location.alert.title" = "Changing Location?";
 "dashboard.vpn.change_location.alert.message" = "Your VPN will briefly disconnect while connecting to the new location.";
@@ -272,7 +257,6 @@
 "tiles.subscription.yearly" = "Yearly";
 "tiles.subscription.days.left" = "(%d days left)";
 "tiles.usage.title" = "Usage";
-"tiles.usage.ipsec.title" = "USAGE (Not available on IKEv2)";
 "tiles.usage.upload" = "Upload";
 "tiles.usage.download" = "Download";
 "tiles.nmt.accessibility.trusted" = "Trusted network";

@@ -21,8 +21,8 @@ struct PIAWidgetProvider: TimelineProvider {
         WidgetInformation(
             date: Date(),
             connected: false,
-            vpnProtocol: "IPSec (IKEv2)",
-            vpnPort: "500",
+            vpnProtocol: "WireGuard®",
+            vpnPort: "1337",
             vpnSocket: "UDP"
         )
     }

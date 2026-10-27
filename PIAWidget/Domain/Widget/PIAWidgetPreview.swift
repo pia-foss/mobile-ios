@@ -20,8 +20,8 @@ import WidgetKit
         WidgetInformation(
             date: Date(),
             connected: true,
-            vpnProtocol: "IKEv2",
-            vpnPort: "500",
+            vpnProtocol: "WireGuard",
+            vpnPort: "1337",
             vpnSocket: "UDP"
         )
     })

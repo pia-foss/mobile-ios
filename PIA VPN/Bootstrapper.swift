@@ -54,14 +54,10 @@ final class Bootstrapper {
 
     /// Update the values of the flags from the CSI server
     private func updateFeatureFlagsForReleaseIfNeeded() {
-        // Some feature flags like Leak Protection are controled from the Developer menu on Dev builds.
+        // Some feature flags are controlled from the Developer menu on Dev builds.
         // So we skip updating the flag from the server on dev builds
 
         #if !STAGING
-            // Leak Protection feature flags
-            AppPreferences.shared.showLeakProtection = Client.configuration.featureFlags[.showLeakProtection]
-            AppPreferences.shared.showLeakProtectionNotifications = Client.configuration.featureFlags[.showLeakProtectionNotifications]
-
             // DynamicIsland LiveActivity
             AppPreferences.shared.showDynamicIslandLiveActivity = Client.configuration.featureFlags[.showDynamicIslandLiveActivity]
         #endif

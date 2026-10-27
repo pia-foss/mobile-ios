@@ -168,10 +168,6 @@ extension Client {
                     udp: [1337],
                     tcp: []
                 ),
-                ikev2Ports: ServersBundle.Configuration.Ports(
-                    udp: [500, 4500],
-                    tcp: []
-                ),
                 latestVersion: 60,
                 pollInterval: 600000,
                 automaticIdentifiers: nil

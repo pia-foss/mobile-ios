@@ -24,8 +24,7 @@ extension XCUIApplication {
     var useSmallPacketsString: String { getString(key: "settings.small.packets.title", comment: "Use Small Packets") }
     var useSmallPacketsSwitch: XCUIElement { switches(with: useSmallPacketsString) }
     var openVPN: XCUIElement { selectedProtocol("OpenVPN") }
-    var ipsec: XCUIElement { staticText(with: "IPSec (IKEv2)") }
-    var wireguard: XCUIElement { selectedProtocol("WireGuard®") }
+    var wireguard: XCUIElement { staticText(with: "WireGuard®") }
 
     func navigateToProtocolSettings() {
         navigateToSettings()
