@@ -647,7 +647,14 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     func openAccount() {
-        perform(segue: StoryboardSegue.Main.accountSegueIdentifier)
+        // Dismisses first, as the segue did: an in-app message can open Account over another modal.
+        dismissModalViewController { [weak self] in
+            guard let self else { return }
+            let coordinator = AccountDetailsCoordinator(presenter: self)
+            Task {
+                await coordinator.startAsync()
+            }
+        }
     }
 
     func openDedicatedIp() {
