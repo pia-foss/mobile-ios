@@ -11,15 +11,15 @@ import XCTest
 extension XCUIApplication {
     var generalHeader: XCUIElement { staticText(with: generalTitleString) }
     var connectSiriButtonString: String { getString(key: "siri.shortcuts.connect.row.title", comment: "'Connect' Siri Shortcut") }
-    var connectSiriButton: XCUIElement { staticText(with: connectSiriButtonString) }
+    var connectSiriButton: XCUIElement { button(with: connectSiriButtonString) }
     var disconnectSiriButtonString: String { getString(key: "siri.shortcuts.disconnect.row.title", comment: "'Disconnect' Siri Shortcut") }
-    var disconnectSiriButton: XCUIElement { staticText(with: disconnectSiriButtonString) }
+    var disconnectSiriButton: XCUIElement { button(with: disconnectSiriButtonString) }
     var serviceCommMessageString: String { getString(key: "inapp.messages.toggle.title", comment: "Show Service Communication Messages") }
     var serviceCommMessageSwitch: XCUIElement { switches(with: serviceCommMessageString) }
     var geoLocatedRegionsString: String { getString(key: "settings.geo.servers.description", comment: "Show Geo-located Regions") }
     var geoLocatedRegionsSwitch: XCUIElement { switches(with: geoLocatedRegionsString) }
     var resetSettingsString: String { getString(key: "settings.reset.defaults.title", comment: "Reset settings to default") }
-    var resetSettingsButton: XCUIElement { staticText(with: resetSettingsString) }
+    var resetSettingsButton: XCUIElement { button(with: resetSettingsString) }
 
     func navigateToGeneralSettings() {
         navigateToSettings()

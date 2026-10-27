@@ -80,11 +80,6 @@ extension Theme {
         label.style(style: palette.appearance == .dark ? TextStyle.textStyle11 : TextStyle.textStyle12)
     }
 
-    public func applyClearTextfield(_ textfield: UITextField) {
-        textfield.style(style: palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
-        textfield.backgroundColor = .clear
-    }
-
     public func applyCountryNameStyleFor(_ label: UILabel) {
         label.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle16 : TextStyle.textStyle17)
     }
@@ -129,37 +124,12 @@ extension Theme {
         Asset.Piax.Global.eyeInactive.image
     }
 
-    public func trashIconImage() -> UIImage {
-        return Asset.iconTrash.image
-    }
-
     public func applyLicenseMonospaceFontAndColor(
         _ textView: UITextView,
         appearance: Appearance
     ) {
         textView.font = typeface.monospaceFont(size: 14.0)
         textView.textColor = palette.appearance == .dark ? .white : palette.textColor(forRelevance: 2, appearance: appearance)
-    }
-
-    public func textWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {
-        let plain =
-            message.replacingOccurrences(
-                of: "$1",
-                with: link
-            ) as NSString
-
-        let attributed = NSMutableAttributedString(string: plain as String)
-
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .left
-        paragraph.minimumLineHeight = 16
-        let fullRange = NSMakeRange(0, plain.length)
-        attributed.addAttribute(.font, value: TextStyle.textStyleSubscriptionInformation.font!, range: fullRange)
-        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle8.color!, range: fullRange)
-        attributed.addAttribute(.paragraphStyle, value: paragraph, range: fullRange)
-        let range1 = plain.range(of: link)
-        attributed.addAttribute(.foregroundColor, value: TextStyle.textStyle9.color!, range: range1)
-        return attributed
     }
 
     public func smallTextWithColoredLink(withMessage message: String, link: String) -> NSAttributedString {

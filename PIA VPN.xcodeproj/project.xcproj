@@ -312,6 +312,9 @@
           "product-name": "PIAAbout",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIAAccountDetails",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIAAssetsFlags",
           "build-phase": { "build-phase": "frameworks" },
         }, {
@@ -346,6 +349,9 @@
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIARegionListDomain",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIASettings",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIASwiftUI",
