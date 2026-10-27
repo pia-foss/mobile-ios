@@ -353,9 +353,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         // The OpenVPN options used to be mirrored into `AppPreferences` here. They are staged in
         // `pendingPreferences` now, and `AppPreferences` writes the *same* app-group keys, so
         // `pendingPreferences.commit()` below is the single write.
-        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
-        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
-        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        WidgetConnectionDetails.current.save()
 
         WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
     }

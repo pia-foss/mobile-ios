@@ -71,6 +71,8 @@ extension PIATunnelSharedState {
         public var serverId: String
         /// The transport the SDK resolved — the app can't derive this under Automatic transport.
         public var resolvedTransport: VPNTransport
+        /// The port the tunnel connected to. `nil` in payloads written before it was recorded.
+        public var resolvedPort: UInt16?
 
         /// The SDK's obfuscation label ("none", "amnezia"). The only way the app can tell an
         /// AmneziaWG connection from a plain WireGuard one — both are `.wireGuard`.
@@ -82,18 +84,20 @@ extension PIATunnelSharedState {
             protocol: TunnelProtocol,
             serverId: String,
             resolvedTransport: VPNTransport,
+            resolvedPort: UInt16?,
             obfuscation: String? = nil,
             updatedAt: Date
         ) {
             self.protocol = `protocol`
             self.serverId = serverId
             self.resolvedTransport = resolvedTransport
+            self.resolvedPort = resolvedPort
             self.obfuscation = obfuscation
             self.updatedAt = updatedAt
         }
 
         private enum CodingKeys: String, CodingKey {
-            case `protocol`, serverId, resolvedTransport, obfuscation, updatedAt
+            case `protocol`, serverId, resolvedTransport, resolvedPort, obfuscation, updatedAt
         }
 
         // A payload predating `resolvedTransport` defaults to `.udp` rather than failing the decode.
@@ -102,6 +106,7 @@ extension PIATunnelSharedState {
             `protocol` = try container.decode(TunnelProtocol.self, forKey: .protocol)
             serverId = try container.decode(String.self, forKey: .serverId)
             resolvedTransport = try container.decodeIfPresent(VPNTransport.self, forKey: .resolvedTransport) ?? .udp
+            resolvedPort = try container.decodeIfPresent(UInt16.self, forKey: .resolvedPort)
             obfuscation = try container.decodeIfPresent(String.self, forKey: .obfuscation)
             updatedAt = try container.decode(Date.self, forKey: .updatedAt)
         }

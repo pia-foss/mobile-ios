@@ -253,6 +253,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
             protocol: tunnelProtocol,
             serverId: serverId,
             resolvedTransport: transport,
+            resolvedPort: endpoint.port,
             obfuscation: endpoint.obfuscationDescription
         )
     }
