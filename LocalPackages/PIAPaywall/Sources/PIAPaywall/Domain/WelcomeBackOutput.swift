@@ -27,6 +27,10 @@ extension WelcomeBack {
     public enum Output {
         case didAuthenticate(user: UserAccount)
         case requestLogin
+        #if os(tvOS)
+            /// Sign in by scanning a QR code with the PIA app on a phone.
+            case requestQRLogin
+        #endif
         case didDismiss
     }
 }

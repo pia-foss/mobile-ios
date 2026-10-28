@@ -8,6 +8,7 @@
 
 import PIAAssetsTV
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
 struct LoginView: View {

@@ -19,83 +19,85 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIAAssetsMobile
-import PIADesignSystem
-import PIALocalizations
-import SwiftUI
+#if os(iOS)
+    import PIAAssetsMobile
+    import PIADesignSystem
+    import PIALocalizations
+    import SwiftUI
 
-/// What the subscription buys, as three check-marked lines.
-struct BenefitsList: View {
-    let layout: PaywallLayout
+    /// What the subscription buys, as three check-marked lines.
+    struct BenefitsList: View {
+        let layout: PaywallLayout
 
-    private static let benefits = [
-        L10n.Signup.Paywall.Benefit.servers,
-        L10n.Signup.Paywall.Benefit.speed,
-        L10n.Signup.Paywall.Benefit.devices
-    ]
+        private static let benefits = [
+            L10n.Signup.Paywall.Benefit.servers,
+            L10n.Signup.Paywall.Benefit.speed,
+            L10n.Signup.Paywall.Benefit.devices
+        ]
 
-    var body: some View {
-        switch layout {
-        case .compact:
-            VStack(alignment: .leading, spacing: PIASpacing.s8) {
-                ForEach(Self.benefits, id: \.self) { benefit in
-                    BenefitRow(text: benefit, layout: .compact)
+        var body: some View {
+            switch layout {
+            case .compact:
+                VStack(alignment: .leading, spacing: PIASpacing.s8) {
+                    ForEach(Self.benefits, id: \.self) { benefit in
+                        BenefitRow(text: benefit, layout: .compact)
+                    }
                 }
-            }
-        case .wide:
-            // Three across, each with the icon above centred text.
-            HStack(alignment: .top, spacing: PIASpacing.s20) {
-                ForEach(Self.benefits, id: \.self) { benefit in
-                    BenefitRow(text: benefit, layout: .wide)
-                        .frame(maxWidth: .infinity)
+            case .wide:
+                // Three across, each with the icon above centred text.
+                HStack(alignment: .top, spacing: PIASpacing.s20) {
+                    ForEach(Self.benefits, id: \.self) { benefit in
+                        BenefitRow(text: benefit, layout: .wide)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
         }
     }
-}
 
-private struct BenefitRow: View {
-    private static let iconSize: CGFloat = 20
+    private struct BenefitRow: View {
+        private static let iconSize: CGFloat = 20
 
-    let text: String
-    let layout: PaywallLayout
+        let text: String
+        let layout: PaywallLayout
 
-    var body: some View {
-        switch layout {
-        case .compact:
-            HStack(alignment: .top, spacing: PIASpacing.s12) {
-                icon
-                Text(text).typography(.body2, color: .pia.onSurface)
-                Spacer(minLength: 0)
+        var body: some View {
+            switch layout {
+            case .compact:
+                HStack(alignment: .top, spacing: PIASpacing.s12) {
+                    icon
+                    Text(text).typography(.body2, color: .pia.onSurface)
+                    Spacer(minLength: 0)
+                }
+            case .wide:
+                VStack(spacing: PIASpacing.s8) {
+                    icon
+                    Text(text)
+                        .typography(.body2, color: .pia.onSurface)
+                        .multilineTextAlignment(.center)
+                }
             }
-        case .wide:
-            VStack(spacing: PIASpacing.s8) {
-                icon
-                Text(text)
-                    .typography(.body2, color: .pia.onSurface)
-                    .multilineTextAlignment(.center)
-            }
+        }
+
+        private var icon: some View {
+            Asset.Piax.Global.iconCheck.swiftUIImage
+                .renderingMode(.template)
+                .resizable()
+                .frame(width: Self.iconSize, height: Self.iconSize)
+                .foregroundColor(.pia.primary)
+                .accessibilityHidden(true)
         }
     }
 
-    private var icon: some View {
-        Asset.Piax.Global.iconCheck.swiftUIImage
-            .renderingMode(.template)
-            .resizable()
-            .frame(width: Self.iconSize, height: Self.iconSize)
-            .foregroundColor(.pia.primary)
-            .accessibilityHidden(true)
+    #Preview("Compact") {
+        BenefitsList(layout: .compact)
+            .padding(PIASpacing.s24)
+            .background(Color.pia.background)
     }
-}
 
-#Preview("Compact") {
-    BenefitsList(layout: .compact)
-        .padding(PIASpacing.s24)
-        .background(Color.pia.background)
-}
-
-#Preview("Wide") {
-    BenefitsList(layout: .wide)
-        .padding(PIASpacing.s24)
-        .background(Color.pia.background)
-}
+    #Preview("Wide") {
+        BenefitsList(layout: .wide)
+            .padding(PIASpacing.s24)
+            .background(Color.pia.background)
+    }
+#endif

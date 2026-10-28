@@ -1484,6 +1484,8 @@ public enum L10n {
         public static let appStore = L10n.tr("Localizable", "signup.welcome_back.cta.app_store", fallback: "App Store Account")
         /// Username and Password
         public static let credentials = L10n.tr("Localizable", "signup.welcome_back.cta.credentials", fallback: "Username and Password")
+        /// QR Code
+        public static let qrCode = L10n.tr("Localizable", "signup.welcome_back.cta.qr_code", fallback: "QR Code")
       }
     }
   }

@@ -7,6 +7,7 @@
 //
 
 import PIAAssetsTV
+import PIASwiftUI
 import SwiftUI
 
 struct AccountSettingsView: View {
