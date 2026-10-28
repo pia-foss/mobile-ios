@@ -33,16 +33,15 @@
 
         var body: some View {
             let style = RegionListStyle(colorScheme: colorScheme)
-            HStack(alignment: .top, spacing: 0) {
+            HStack(spacing: 0) {
                 ZStack(alignment: .topLeading) {
                     RegionFlag(country: region.country)
                     Image(asset: Asset.dipBadge)
                         .resizable()
-                        .frame(width: 10, height: 10)
-                        .offset(x: 23, y: 38)
+                        .frame(width: 12, height: 12)
+                        .offset(x: 23, y: 1)
                         .accessibilityHidden(true)
                 }
-                .padding(.top, 18)
                 .padding(.leading, 14)
                 .padding(.trailing, 9)
 
@@ -50,14 +49,19 @@
                     Text(region.name)
                         .font(RegionListStyle.font(size: 14))
                         .foregroundColor(style.title)
-                        .frame(maxHeight: .infinity, alignment: .center)
+
                     HStack(spacing: 10) {
+                        if let dedicatedIP = region.dedicatedIP {
+                            Text(dedicatedIP)
+                                .font(RegionListStyle.font(size: 12))
+                                .foregroundColor(style.secondary)
+                                .lineLimit(1)
+                        }
                         Text(L10n.Dedicated.Ip.title.uppercased())
+                            .accessibilityLabel(L10n.Dedicated.Ip.title)
                             .font(RegionListStyle.font(size: 10))
                             .foregroundColor(style.secondary)
-                        Text(region.dedicatedIP ?? "")
-                            .font(RegionListStyle.font(size: 12))
-                            .foregroundColor(style.secondary)
+                            .lineLimit(1)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
                             .overlay(
@@ -65,23 +69,19 @@
                                     .stroke(style.secondary, lineWidth: 0.5)
                             )
                     }
-                    .frame(maxHeight: .infinity, alignment: .center)
                 }
-                .padding(.vertical, 5)
+                .padding(.vertical, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 Image(asset: Asset.Piax.Global.regionSelected)
                     .resizable()
                     .frame(width: 18, height: 18)
                     .opacity(isSelected ? 1 : 0)
-                    .frame(maxHeight: .infinity)
                     .padding(.horizontal, 10)
 
                 FavoriteButton(isFavorite: region.isFavorite, action: toggleFavorite)
-                    .frame(maxHeight: .infinity)
                     .padding(.horizontal, 5)
             }
-            .frame(height: RegionListStyle.dedicatedRowHeight)
             .accessibilityElement(children: .contain)
             .accessibilityLabel(region.name)
         }
