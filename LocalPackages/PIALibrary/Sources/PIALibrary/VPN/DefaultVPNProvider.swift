@@ -72,7 +72,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return ActualConnection(
             vpnType: vpnType,
             server: server,
-            transport: active.resolvedTransport
+            transport: active.resolvedTransport,
+            port: active.resolvedPort
         )
     }
 

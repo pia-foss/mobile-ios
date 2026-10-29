@@ -40,13 +40,18 @@ public struct ActualConnection {
     /// OpenVPN, or `.udp` for WireGuard. Always present within an active session.
     public let transport: PIATunnelSharedState.VPNTransport
 
+    /// The port the tunnel connected to. `nil` when the tunnel didn't report it.
+    public let port: UInt16?
+
     public init(
         vpnType: KapePlatformSDKVPNType?,
         server: Server?,
-        transport: PIATunnelSharedState.VPNTransport
+        transport: PIATunnelSharedState.VPNTransport,
+        port: UInt16?
     ) {
         self.vpnType = vpnType
         self.server = server
         self.transport = transport
+        self.port = port
     }
 }

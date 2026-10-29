@@ -38,6 +38,17 @@ public extension String {
         }
     }
 
+    /// Names the resolved protocol under Automatic, e.g. "Automatic (WireGuard®)".
+    func vpnProtocol(resolvedAs resolvedVPNType: String?) -> String {
+        guard let resolvedVPNType else {
+            return vpnProtocol
+        }
+        guard self == KapePlatformSDKVPNType.automatic.rawValue else {
+            return resolvedVPNType.vpnProtocol
+        }
+        return "\(vpnProtocol) (\(resolvedVPNType.vpnProtocol))"
+    }
+
     var port: String {
         switch self {
         case KapePlatformSDKVPNType.wireGuard.rawValue:

@@ -115,6 +115,7 @@ struct PIATunnelSharedStateCodableTests {
             protocol: .openVPN,
             serverId: "us_chicago",
             resolvedTransport: .tcp,
+            resolvedPort: 443,
             updatedAt: Date(timeIntervalSince1970: 1_700_000_000)
         )
 
@@ -124,6 +125,7 @@ struct PIATunnelSharedStateCodableTests {
         #expect(decoded.activeConnection?.protocol == .openVPN)
         #expect(decoded.activeConnection?.serverId == "us_chicago")
         #expect(decoded.activeConnection?.resolvedTransport == .tcp)
+        #expect(decoded.activeConnection?.resolvedPort == 443)
     }
 
     @Test("activeConnection defaults to nil and an older payload decodes to nil")
@@ -155,6 +157,15 @@ struct PIATunnelSharedStateCodableTests {
         let decoded = try JSONDecoder().decode(PIATunnelSharedState.ActiveConnection.self, from: legacyJSON)
         #expect(decoded.resolvedTransport == .udp)
         #expect(decoded.protocol == .wireGuard)
+    }
+
+    @Test("A payload written before resolvedPort existed decodes to nil")
+    func resolvedPortBackwardCompat() throws {
+        let legacyJSON = Data(
+            #"{"protocol":"openVPN","serverId":"us_chicago","resolvedTransport":"tcp","updatedAt":0}"#.utf8)
+        let decoded = try JSONDecoder().decode(PIATunnelSharedState.ActiveConnection.self, from: legacyJSON)
+        #expect(decoded.resolvedPort == nil)
+        #expect(decoded.resolvedTransport == .tcp)
     }
 }
 

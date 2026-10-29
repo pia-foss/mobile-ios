@@ -287,6 +287,12 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
         nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         nc.addObserver(self, selector: #selector(handleDismissModal), name: .PIADashboardShouldDismissModal, object: nil)
+
+        // The tunnel reports the resolved protocol, port and transport after connecting.
+        PIATunnelSignal.startObserving()
+        nc.addObserver(
+            self, selector: #selector(tunnelSharedStateDidChange),
+            name: PIATunnelSignal.sharedStateDidChange.notificationName, object: nil)
     }
 
     private func removeObservers() {
@@ -715,6 +721,12 @@ final class DashboardViewController: AutolayoutViewController {
         performSelector(onMainThread: #selector(updateCurrentStatusWithUserInfo(_:)), with: notification.userInfo, waitUntilDone: false)
     }
 
+    @objc private func tunnelSharedStateDidChange() {
+        if WidgetConnectionDetails.current.save() {
+            reloadWidget()
+        }
+    }
+
     @objc private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
         alert.addCancelAction(L10n.Global.close)
@@ -981,9 +993,7 @@ final class DashboardViewController: AutolayoutViewController {
         //            labelStatus.text = L10n.Dashboard.Vpn.changingRegion
         }
 
-        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
-        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
-        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        WidgetConnectionDetails.current.save()
         reloadWidget()
 
     }
