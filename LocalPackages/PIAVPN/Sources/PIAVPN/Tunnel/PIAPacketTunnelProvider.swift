@@ -23,6 +23,7 @@
 import Combine
 import KapeVPN_OpenVPN
 import KapeVPN_PacketTunnel
+import KapeVPN_WireGuard
 import NetworkExtension
 import PIALibrary
 
@@ -77,7 +78,6 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
         let wgController = KapeWireGuardController(
             systemTunnel: systemTunnel,
-            authenticator: PIAWireguardAuthenticator(),
             logger: PIATunnelLogger(label: "KapeWireGuardController")
         )
 
@@ -146,7 +146,8 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         switch request {
         case .switchLocation:
             logger.info("switchLocation requested")
-            Task {
+            Task { [endpointRepository] in
+                await endpointRepository?.reset()
                 do {
                     try await sessionController?.switchLocation()
                 } catch {

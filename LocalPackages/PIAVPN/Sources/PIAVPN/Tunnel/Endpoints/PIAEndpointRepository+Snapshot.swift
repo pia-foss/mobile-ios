@@ -26,10 +26,8 @@ import PIALibrary
 /// Retention of the batch the tunnel is actually working through, so
 /// `PIAPacketTunnelRequest.connectionConfigurations` can hand it to the app.
 ///
-/// The SDK keeps no copy to read back: `VpnConfigurationStream.AsyncIterator.pending` is private, is
-/// owned by a local iterator inside the session controller's run loop, and is consumed destructively
-/// — by the time a connection is up it holds only the endpoints *not* tried, which is the opposite of
-/// what the debug menu needs.
+/// `ConfigurationQueue` can't answer this: it is consumed destructively — by the time a connection is
+/// up it holds only the endpoints *not* tried, which is the opposite of what the debug menu needs.
 ///
 /// Retained rather than regenerated on demand, because `generateConfigurations()` is not free of side
 /// effects: it can fetch the server list over the network, writes that list back to shared state, and
@@ -38,7 +36,7 @@ import PIALibrary
 extension PIAEndpointRepository {
 
     /// Generation runs on `KapeSessionController`'s executor while the read arrives on whatever thread
-    /// `handleAppMessage` is delivered on. Isolating the one piece of mutable state here keeps
+    /// `handleAppMessage` is delivered on. Isolating the mutable state here keeps
     /// `PIAEndpointRepository` itself `Sendable`, with no manual locking.
     actor LatestBatch {
         private var configurations: [PIAConnectionConfiguration] = []
