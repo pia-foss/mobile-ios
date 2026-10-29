@@ -114,8 +114,11 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
             return state.servers
         }
 
-        if let fetched = await Client.downloadServerList() {
-            logger.info("Fetched fresh server list — \(fetched.count) server(s), caching it in shared state")
+        let fetchStart = Date()
+        let fetched = await Client.downloadServerList()
+        let fetchMs = PIATunnelDiagnostics.elapsedMs(since: fetchStart)
+        if let fetched {
+            logger.info("Fetched fresh server list in \(fetchMs)ms — \(fetched.count) server(s), caching it in shared state")
             PIATunnelSharedState.updateServers(fetched)
             return fetched
         }
@@ -123,7 +126,7 @@ final class PIAEndpointRepository: VpnConfigurationGenerator, Sendable {
         // Not routine — everything downstream now runs off a stale or unverified list, so log its age.
         let age = state.serversFetchedAt.map { "\(Int(Date().timeIntervalSince($0)))s old" } ?? "never fetched"
         logger.warning(
-            "Server list fetch failed — falling back to the existing list in shared state "
+            "Server list fetch failed after \(fetchMs)ms — falling back to the existing list in shared state "
                 + "(\(state.servers.count) server(s), \(age))"
         )
         return state.servers

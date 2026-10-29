@@ -17,6 +17,8 @@ connection controller). PIAVPN only relocates and hosts PIA's own glue.
 | `PIAWireguardAuthenticator` | `PacketTunnelWireguardAuthenticator` — performs PIA's WireGuard key exchange | `KapeWireguardAuthenticator` |
 | `PIATunnelLogger` | `PacketTunnelLogger` — routes tunnel logs to `os.Logger` and mirrors every level into `PIATunnelLogStore` | — |
 | `PIATunnelLogStore` | Bounded in-memory ring buffer the app reads back via `PIAPacketTunnelRequest.requestLog` | — |
+| `PIALoggingConnectionController` | Decorator around each `ConnectionController`; logs every attempt's endpoint, duration and failure reason | — |
+| `PIATunnelDiagnostics` | Error description (NWError / NSError chains), failure categories, and secret redaction for log lines | — |
 
 ### Logging
 

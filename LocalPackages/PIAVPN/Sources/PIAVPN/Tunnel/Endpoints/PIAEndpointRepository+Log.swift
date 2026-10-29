@@ -18,8 +18,10 @@ extension PIAEndpointRepository {
             target = "automatic (no selection)"
         }
 
+        let listAge = state.serversFetchedAt.map { "\(Int(Date().timeIntervalSince($0)))s" } ?? "never fetched"
         logger.info(
-            "Shared state: target: \(target), servers: \(state.servers.count), "
+            "Shared state: target: \(target), protocol: \(state.selectedProtocol.rawValue), "
+                + "country: \(state.geoCountryCode ?? "unknown"), servers: \(state.servers.count) (age: \(listAge)), "
                 + "latencies: \(state.latencyByServerId.count), status: \(state.tunnelStatus?.rawValue ?? "none")"
         )
     }
@@ -29,7 +31,13 @@ extension PIAEndpointRepository {
     /// about rather than left to be inferred.
     func logResolvedServer(_ server: Server, state: PIATunnelSharedState.State) {
         let kind = server.dipToken != nil ? "dedicated IP" : "region"
-        logger.info("Resolved \(kind) server: \(server.name) (\(server.identifier))")
+        let latency = state.latencyByServerId[server.identifier].map { "\($0)ms" } ?? "unmeasured"
+        logger.info(
+            "Resolved \(kind) server: \(server.name) (\(server.identifier)), offline: \(server.offline), "
+                + "latency: \(latency), addresses: \(addressInventory(server))"
+        )
+        logger.debug("Addresses for \(server.identifier):\n" + addressLines(server).map { "  \($0)" }.joined(separator: "\n"))
+        warnAboutMissingAddresses(server, state: state)
 
         if let requested = state.selectedLocationId, server.identifier != requested, server.dipToken == nil {
             logger.warning(
@@ -37,6 +45,57 @@ extension PIAEndpointRepository {
                     + "fell back to \(server.name) (\(server.identifier))"
             )
         }
+    }
+
+    private func addressInventory(_ server: Server) -> String {
+        "wg: \(server.wireGuardAddressesForUDP?.count ?? 0), ovpn-udp: \(server.openVPNAddressesForUDP?.count ?? 0), "
+            + "ovpn-tcp: \(server.openVPNAddressesForTCP?.count ?? 0), awg: \(server.amneziaAddressesForUDP?.count ?? 0)"
+    }
+
+    private func addressLines(_ server: Server) -> [String] {
+        let groups: [(String, [Server.ServerAddressIP]?)] = [
+            ("wg", server.wireGuardAddressesForUDP),
+            ("ovpn-udp", server.openVPNAddressesForUDP),
+            ("ovpn-tcp", server.openVPNAddressesForTCP),
+            ("awg", server.amneziaAddressesForUDP)
+        ]
+        return groups.map { name, addresses in
+            let list = (addresses ?? []).map { address in
+                "\(address.ip)\(address.port.map { ":\($0)" } ?? "") (cn: \(address.cn))"
+            }
+            return "\(name): \(list.isEmpty ? "none" : list.joined(separator: ", "))"
+        }
+    }
+
+    /// A region lacking addresses for what we are about to try is the usual "can't connect to X" cause.
+    private func warnAboutMissingAddresses(_ server: Server, state: PIATunnelSharedState.State) {
+        let isMissing: [String: Bool] = [
+            "wg": server.wireGuardAddressesForUDP?.isEmpty ?? true,
+            "ovpn-udp": server.openVPNAddressesForUDP?.isEmpty ?? true,
+            "ovpn-tcp": server.openVPNAddressesForTCP?.isEmpty ?? true,
+            "awg": server.amneziaAddressesForUDP?.isEmpty ?? true
+        ]
+
+        let needed: [String]
+        switch state.selectedProtocol {
+        case .wireGuard:
+            needed = ["wg"]
+        case .openVPN:
+            switch state.openVPN.transport {
+            case .udp: needed = ["ovpn-udp"]
+            case .tcp: needed = ["ovpn-tcp"]
+            case .automatic: needed = ["ovpn-udp", "ovpn-tcp"]
+            }
+        case .automatic:
+            needed = ["wg", "ovpn-udp", "ovpn-tcp", "awg"]
+        }
+
+        let missing = needed.filter { isMissing[$0] == true }
+        guard !missing.isEmpty else { return }
+        logger.warning(
+            "\(server.name) (\(server.identifier)) has no \(missing.joined(separator: ", ")) addresses — "
+                + "protocol: \(state.selectedProtocol.rawValue)\(missing.count == needed.count ? ", nothing to attempt" : "")"
+        )
     }
 
     func logConnectionSummary(_ state: PIATunnelSharedState.State) {

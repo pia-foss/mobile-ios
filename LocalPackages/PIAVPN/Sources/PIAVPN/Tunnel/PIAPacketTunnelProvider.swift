@@ -51,15 +51,35 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     /// extension's main thread and updates are applied in order.
     private let writeBackQueue = DispatchQueue(label: "com.privateinternetaccess.tunnel.activeConnectionWriteBack")
 
+    /// Path, error and reconnect changes, logged only.
+    private var diagnosticObservations: Set<AnyCancellable> = []
+
+    /// Only touched on `writeBackQueue`.
+    private var lastLoggedTunnelStatus: KapeVPNConnectionStatus?
+
+    private var tunnelStartedAt: Date?
+
     // MARK: - Lifecycle
 
     open override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        let startedAt = Date()
+        tunnelStartedAt = startedAt
+        let optionKeys = options.map { $0.keys.sorted().joined(separator: ", ") } ?? "none"
+        logger.info(
+            "Starting tunnel — trigger: \(options == nil ? "system (on-demand)" : "app"), option keys: \(optionKeys), "
+                + Self.environmentSummary
+        )
+
         startTask = Task {
             do {
                 try await start()
+                logger.info("Tunnel started in \(PIATunnelDiagnostics.elapsedMs(since: startedAt))ms")
                 completionHandler(nil)
             } catch {
-                logger.error("Failed to start tunnel: \(error)")
+                logger.error(
+                    "Failed to start tunnel after \(PIATunnelDiagnostics.elapsedMs(since: startedAt))ms — "
+                        + "reason: \(PIATunnelDiagnostics.failureReason(for: error)), error: \(PIATunnelDiagnostics.describe(error))"
+                )
                 // The system tears the process down without a `stopTunnel` after a failed start.
                 PIATunnelLogStore.shared.flush()
                 completionHandler(error)
@@ -75,18 +95,26 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         self.endpointRepository = endpointRepository
         let systemTunnel = KapeSystemTunnel(packetTunnelProvider: self, packetIOMode: .utunFd)
 
-        let wgController = KapeWireGuardController(
-            systemTunnel: systemTunnel,
-            authenticator: PIAWireguardAuthenticator(),
-            logger: PIATunnelLogger(label: "KapeWireGuardController")
+        let wgController = PIALoggingConnectionController(
+            KapeWireGuardController(
+                systemTunnel: systemTunnel,
+                authenticator: PIAWireguardAuthenticator(),
+                logger: PIATunnelLogger(label: "KapeWireGuardController")
+            ),
+            label: "WireGuard",
+            logger: PIATunnelLogger(label: "ConnectionAttempts")
         )
 
-        let openVPNController = OpenVPNConnectionController(
-            systemTunnel: systemTunnel,
-            logger: PIATunnelLogger(label: "OpenVPNConnectionController"),
-            driverFactory: {
-                TunnelKitOpenVPNDriver(logger: PIATunnelLogger(label: "TunnelKitOpenVPNDriver"))
-            }
+        let openVPNController = PIALoggingConnectionController(
+            OpenVPNConnectionController(
+                systemTunnel: systemTunnel,
+                logger: PIATunnelLogger(label: "OpenVPNConnectionController"),
+                driverFactory: {
+                    TunnelKitOpenVPNDriver(logger: PIATunnelLogger(label: "TunnelKitOpenVPNDriver"))
+                }
+            ),
+            label: "OpenVPN",
+            logger: PIATunnelLogger(label: "ConnectionAttempts")
         )
 
         // Pass `systemTunnel` as the reasserting controller so the session controller can drive
@@ -105,11 +133,14 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
         await observeConnectedEndpoint()
         await observeTunnelStatus()
+        await observeDiagnostics()
 
         try await sessionController?.start()
     }
 
     open override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        let uptime = tunnelStartedAt.map { "\(Int(Date().timeIntervalSince($0)))s" } ?? "unknown"
+        logger.info("Stopping tunnel — reason: \(Self.describe(reason)) (\(reason.rawValue)), uptime: \(uptime)")
         startTask?.cancel()
         Task {
             await startTask?.value
@@ -124,6 +155,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
                 connectedEndpointObservation = nil
                 tunnelStatusObservation?.cancel()
                 tunnelStatusObservation = nil
+                diagnosticObservations.removeAll()
             }
 
             PIATunnelSharedState.clearActiveConnection()
@@ -139,6 +171,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
 
     open override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
         guard let request = try? JSONDecoder().decode(PIAPacketTunnelRequest.self, from: messageData) else {
+            logger.warning("Ignoring undecodable app message (\(messageData.count) byte(s))")
             completionHandler?(nil)
             return
         }
@@ -150,7 +183,7 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
                 do {
                     try await sessionController?.switchLocation()
                 } catch {
-                    logger.error("switchLocation failed: \(error)")
+                    logger.error("switchLocation failed: \(PIATunnelDiagnostics.describe(error))")
                 }
                 completionHandler?(nil)
             }
@@ -179,10 +212,64 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     open override func sleep(completionHandler: @escaping () -> Void) {
+        logger.info("Device going to sleep")
         completionHandler()
     }
 
-    open override func wake() {}
+    open override func wake() {
+        logger.info("Device woke up")
+    }
+
+    // MARK: - Diagnostics
+
+    private static var environmentSummary: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "?"
+        let build = info?["CFBundleVersion"] as? String ?? "?"
+        return "app: \(version) (\(build)), os: \(ProcessInfo.processInfo.operatingSystemVersionString)"
+    }
+
+    private static func describe(_ reason: NEProviderStopReason) -> String {
+        switch reason {
+        case .none: return "none"
+        case .userInitiated: return "userInitiated"
+        case .providerFailed: return "providerFailed"
+        case .noNetworkAvailable: return "noNetworkAvailable"
+        case .unrecoverableNetworkChange: return "unrecoverableNetworkChange"
+        case .providerDisabled: return "providerDisabled"
+        case .authenticationCanceled: return "authenticationCanceled"
+        case .configurationFailed: return "configurationFailed"
+        case .idleTimeout: return "idleTimeout"
+        case .configurationDisabled: return "configurationDisabled"
+        case .configurationRemoved: return "configurationRemoved"
+        case .superceded: return "superceded"
+        case .userLogout: return "userLogout"
+        case .userSwitch: return "userSwitch"
+        case .connectionFailed: return "connectionFailed"
+        case .sleep: return "sleep"
+        case .appUpdate: return "appUpdate"
+        default: return "unknown"
+        }
+    }
+
+    @MainActor
+    private func observeDiagnostics() {
+        let state = PacketTunnelState.shared
+        let logger = self.logger
+        diagnosticObservations = [
+            state.$networkPathStatus
+                .removeDuplicates()
+                .sink { logger.info("Network path: \($0.rawValue)") },
+            state.$tunnelError
+                .removeDuplicates()
+                .compactMap { $0 }
+                .sink { logger.warning("SDK reported tunnel error: \($0)") },
+            state.$reconnectInProgress
+                .removeDuplicates()
+                .dropFirst()
+                .sink { logger.info("Reconnect in progress: \($0)") }
+        ]
+    }
 
     // MARK: - Active Connection Write-Back
 
@@ -213,6 +300,9 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
     }
 
     private func writeBackTunnelStatus(for status: KapeVPNConnectionStatus?) {
+        logger.info("Tunnel status: \(lastLoggedTunnelStatus.map { "\($0)" } ?? "none") → \(status.map { "\($0)" } ?? "none")")
+        lastLoggedTunnelStatus = status
+
         guard let status else {
             PIATunnelSharedState.clearTunnelStatus()
             return
@@ -243,11 +333,20 @@ open class PIAPacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable 
         let serverId = Self.serverId(forConnectedHost: endpoint.host)
 
         guard let tunnelProtocol, let serverId else {
+            logger.warning(
+                "Connected to \(endpoint.protocolDescription) \(endpoint.host):\(endpoint.port) but could not resolve "
+                    + "protocol (\(tunnelProtocol?.rawValue ?? "unknown")) or server (\(serverId ?? "unknown")) — "
+                    + "clearing the active connection"
+            )
             PIATunnelSharedState.clearActiveConnection()
             return
         }
 
         let transport = Self.resolvedTransport(forProtocol: tunnelProtocol, description: endpoint.protocolDescription)
+        logger.info(
+            "Connected endpoint: \(endpoint.protocolDescription) \(endpoint.host):\(endpoint.port), "
+                + "transport: \(transport.rawValue), obfuscation: \(endpoint.obfuscationDescription), server: \(serverId)"
+        )
 
         PIATunnelSharedState.updateActiveConnection(
             protocol: tunnelProtocol,

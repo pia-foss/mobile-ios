@@ -5,30 +5,47 @@ import NWHttpConnection
 import PIALibrary
 
 final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Sendable {
+    static let keyExchangeTimeout: TimeInterval = 10
+
     private let logger = PIATunnelLogger(label: "PIAWireguardAuthenticator")
 
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardEndpointConfiguration {
         // AmneziaWG servers serve their key exchange on their own path and port.
-        let isAmnezia = if case .amnezia = config.obfuscation {
-            true
-        } else {
-            false
-        }
+        let isAmnezia =
+            if case .amnezia = config.obfuscation {
+                true
+            } else {
+                false
+            }
 
         let label = isAmnezia ? "AmneziaWG" : "WireGuard"
         let path = isAmnezia ? "add-awg-key" : "addKey"
 
-        logger.info("Authenticating \(label) key with server")
+        logger.info(
+            "Authenticating \(label) key with server — tunnel endpoint: \(config.ip.hostLiteral):\(config.port), "
+                + "key exchange: \(config.authIp.hostLiteral):\(config.authPort), expected cn: \(config.certDn)"
+        )
 
         let sharedState = PIATunnelSharedState.read()
 
         // Prefer the token the app resolved at connect time (carried in shared state): the account
         // `vpnToken` for a regular server, or the server's `dipUsername` for a Dedicated IP server.
         // Fall back to the account token in case shared state predates this field.
-        guard let token = sharedState.wireGuard.token ?? Client.providers.accountProvider.vpnToken else {
-            logger.error("No VPN token available — cannot authenticate")
+        let tokenSource: String
+        let resolvedToken: String?
+        if let sharedToken = sharedState.wireGuard.token {
+            tokenSource = sharedState.selectedDipServer != nil ? "shared state (dedicated IP)" : "shared state (account)"
+            resolvedToken = sharedToken
+        } else {
+            tokenSource = "account provider fallback"
+            resolvedToken = Client.providers.accountProvider.vpnToken
+        }
+        guard let token = resolvedToken, !token.isEmpty else {
+            logger.error("No VPN token available (source: \(tokenSource)) — cannot authenticate")
             throw PIAWireguardAuthError.noToken
         }
+        logger.debug("Token source: \(tokenSource), length: \(token.count)")
+        let secrets = [token]
 
         // Ephemeral key pair per connection — WireGuard's forward-secrecy model.
         let privateKey = Curve25519.KeyAgreement.PrivateKey()
@@ -38,7 +55,10 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         // authIp/authPort is the HTTP key-exchange endpoint, distinct from the WireGuard UDP endpoint (ip/port).
         let host = config.authIp.hostLiteral
         // Note: deliberately not logging the token or private key — these are secrets.
-        logger.debug("Key-exchange endpoint: \(host):\(config.authPort)")
+        logger.debug(
+            "Key-exchange request: GET https://\(host):\(config.authPort)/\(path)?pubkey=\(publicKeyBase64)&pt=<redacted>, "
+                + "timeout: \(Int(Self.keyExchangeTimeout))s"
+        )
 
         guard
             let encodedPubkey = publicKeyBase64.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved),
@@ -64,39 +84,47 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
             body: nil,
             certificateValidation: .anchor(certificate: anchorCertificate, commonName: config.certDn),
             dataResponseType: .jsonData,
-            timeout: 10)
+            timeout: Self.keyExchangeTimeout)
         let connection = NWHttpConnectionFactory.makeNWHttpConnection(with: configuration)
 
-        logger.debug("Sending addKey request to \(host):\(config.authPort)")
+        let start = Date()
         let httpResponse: NWHttpConnectionDataResponseType
         do {
             httpResponse = try await connection.singleResponse()
         } catch {
-            logger.error("addKey request to \(host) failed: \(String(describing: error))")
+            let elapsedMs = PIATunnelDiagnostics.elapsedMs(since: start)
+            logger.error(
+                "\(path) request to \(host):\(config.authPort) failed after \(elapsedMs)ms "
+                    + "(\(Self.failureHint(for: error, elapsedMs: elapsedMs))): "
+                    + PIATunnelDiagnostics.redact(PIATunnelDiagnostics.describe(error), secrets: secrets)
+            )
             throw error
         }
 
+        let elapsedMs = PIATunnelDiagnostics.elapsedMs(since: start)
         let statusCode = httpResponse.statusCode ?? -1
 
         guard let resultData = httpResponse.data else {
-            logger.error("addKey to \(host):\(config.authPort) rejected — http \(statusCode), no JSON body")
+            logger.error("\(path) to \(host):\(config.authPort) rejected after \(elapsedMs)ms — http \(statusCode), no JSON body")
             throw PIAWireguardAuthError.serverError("http \(statusCode): no JSON body")
         }
+
+        let detail = PIATunnelDiagnostics.payload(resultData, redacting: secrets)
+        logger.debug("\(path) response from \(host):\(config.authPort) after \(elapsedMs)ms — http \(statusCode), \(detail)")
 
         let response: WGKeyResponse
         do {
             response = try JSONDecoder().decode(WGKeyResponse.self, from: resultData)
         } catch {
-            let detail = errorDetail(in: resultData, redacting: token)
             logger.error("\(path) to \(host):\(config.authPort) rejected — http \(statusCode), \(detail)")
             throw PIAWireguardAuthError.serverError("http \(statusCode): \(detail)")
         }
         guard response.status == "OK" else {
-            logger.error("Key-exchange server returned non-OK status: \(response.status)")
+            logger.error("Key-exchange server returned non-OK status: \(response.status) (http \(statusCode)), \(detail)")
             throw PIAWireguardAuthError.serverError(response.status)
         }
 
-        logger.info("\(label) authentication succeeded (peer ip: \(response.peer_ip))")
+        logger.info("\(label) authentication succeeded in \(elapsedMs)ms (peer ip: \(response.peer_ip))")
 
         if let echoed = response.peer_pubkey, echoed != publicKeyBase64 {
             logger.warning("Key-exchange server echoed a different public key than the one sent")
@@ -110,7 +138,11 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         let customDnsServers = sharedState.wireGuard.dnsServers
         let rawDnsServers = customDnsServers.isEmpty ? (response.dns_servers ?? []) : customDnsServers
         if !customDnsServers.isEmpty {
-            logger.info("Using \(customDnsServers.count) user-selected DNS resolver(s) for WireGuard")
+            logger.info("Using \(customDnsServers.count) user-selected DNS resolver(s) for WireGuard: \(customDnsServers.joined(separator: ", "))")
+        } else if !rawDnsServers.isEmpty {
+            logger.info("Using server-provided DNS for WireGuard: \(rawDnsServers.joined(separator: ", "))")
+        } else {
+            logger.warning("No DNS from user or server — the SDK will derive it from the peer ip")
         }
         let dnsServers = rawDnsServers.map(IpAddress.init(parsing:))
 
@@ -135,24 +167,17 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
         return authenticated
     }
 
-    private func errorDetail(in data: Data, redacting token: String) -> String {
-        guard let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            return "\(data.count) byte(s), body is not a JSON object"
+    static func failureHint(for error: Error, elapsedMs: Int) -> String {
+        if case NWHttpConnectionError.connection(.tls(_)) = error {
+            return "TLS pinning failure"
         }
-
-        let secrets = [token, token.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved)].compactMap { $0 }
-
-        return
-            object
-            .sorted { $0.key < $1.key }
-            .map { key, value in
-                var text = String(describing: value)
-                for secret in secrets {
-                    text = text.replacingOccurrences(of: secret, with: "<redacted>")
-                }
-                return "\(key)=\(text)"
-            }
-            .joined(separator: ", ")
+        if case NWHttpConnectionError.wait(.tls(_)) = error {
+            return "TLS pinning failure"
+        }
+        if elapsedMs >= Int(keyExchangeTimeout * 1000) {
+            return "likely timeout"
+        }
+        return "transport error"
     }
 }
 
