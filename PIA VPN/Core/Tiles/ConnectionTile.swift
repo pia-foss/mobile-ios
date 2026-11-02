@@ -90,6 +90,10 @@ class ConnectionTile: UIView, Tileable {
         socketIcon.image = Asset.Piax.Tiles.ConnectionTile.iconSocket.image
         handshakeIcon.image = Asset.Piax.Tiles.ConnectionTile.iconHandshake.image
 
+        // Fits "Automatic (WireGuard®)" and its longer translations in the fixed-height tile.
+        protocolLabel.adjustsFontSizeToFitWidth = true
+        protocolLabel.minimumScaleFactor = 0.65
+
         setConnectionValues()
         viewShouldRestyle()
         self.tileTitle.text = L10n.Settings.Connection.title.uppercased()
@@ -108,16 +112,18 @@ class ConnectionTile: UIView, Tileable {
         let connection = Client.providers.vpnProvider.actualConnection
         let displayVPNType = connection?.vpnType?.rawValue ?? Client.preferences.vpnType
         let displaySocket = connection?.transport.rawValue.uppercased() ?? displayVPNType.socket
+        let displayPort = (connection?.port).map(String.init) ?? displayVPNType.port
+        let displayProtocol = Client.preferences.vpnType.vpnProtocol(resolvedAs: connection?.vpnType?.rawValue)
 
-        self.protocolLabel.text = displayVPNType.vpnProtocol
-        self.portLabel.text = displayVPNType.port
+        self.protocolLabel.text = displayProtocol
+        self.portLabel.text = displayPort
         self.authenticationLabel.text = displayVPNType.authentication
         self.encryptionLabel.text = displayVPNType.encryption
         self.socketLabel.text = displaySocket
         self.handshakeLabel.text = displayVPNType.handshake
 
-        self.protocolLabel.accessibilityLabel = displayVPNType.vpnProtocol
-        self.portLabel.accessibilityLabel = displayVPNType.port
+        self.protocolLabel.accessibilityLabel = displayProtocol
+        self.portLabel.accessibilityLabel = displayPort
         self.authenticationLabel.accessibilityLabel = displayVPNType.authentication
         self.encryptionLabel.accessibilityLabel = displayVPNType.encryption
         self.socketLabel.accessibilityLabel = displaySocket

@@ -22,6 +22,7 @@
 
 import PIALibrary
 import PIALocalizations
+import PIASettings
 import SafariServices
 import UIKit
 import WidgetKit
@@ -104,7 +105,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     func updateSocketType(socketType: String?) {
         pendingPreferences.openVPNSocketType = AppConstants.OpenVPNSocketType(rawValue: socketType ?? "")?.rawValue
-        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
+        updateRemotePort(port: ProtocolSettings.automaticPort)
     }
 
     /// The tunnel derives its endpoints from the stored port and transport, so the port is all this
@@ -155,7 +156,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
 
     private func validateRemotePort() {
         let port = UInt16(exactly: pendingPreferences.openVPNPort) ?? 0
-        guard port != ProtocolSettingsViewController.AUTOMATIC_PORT else {
+        guard port != ProtocolSettings.automaticPort else {
             return
         }
 
@@ -169,7 +170,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         }
 
         log.debug("Remote port \(port) is not served over \(socketType?.rawValue ?? "automatic") — resetting it to automatic")
-        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
+        updateRemotePort(port: ProtocolSettings.automaticPort)
     }
 
     private func resetProtocolSettings() {
@@ -177,7 +178,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingPreferences.openVPNCipher = AppConstants.OpenVPNCrypto.default.rawValue
         pendingPreferences.openVPNAuth = AppConstants.OpenVPNCrypto.defaultAuth
 
-        updateRemotePort(port: ProtocolSettingsViewController.AUTOMATIC_PORT)
+        updateRemotePort(port: ProtocolSettings.automaticPort)
     }
 
     // MARK: Actions
@@ -199,19 +200,8 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         savePreferences()
     }
 
-    func resetToDefaultSettings() {
-        let alert = Macros.alert(
-            L10n.Settings.Reset.Defaults.Confirm.title,
-            L10n.Settings.Reset.Defaults.Confirm.message
-        )
-        alert.addDestructiveActionWithTitle(L10n.Settings.Reset.Defaults.Confirm.button) {
-            self.doReset()
-        }
-        alert.addCancelAction(L10n.Global.cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    private func doReset() {
+    @MainActor
+    private func resetToDefaultSettings() {
 
         isResetting = true
 
@@ -363,9 +353,7 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         // The OpenVPN options used to be mirrored into `AppPreferences` here. They are staged in
         // `pendingPreferences` now, and `AppPreferences` writes the *same* app-group keys, so
         // `pendingPreferences.commit()` below is the single write.
-        AppPreferences.shared.todayWidgetVpnProtocol = Client.preferences.vpnType.vpnProtocol
-        AppPreferences.shared.todayWidgetVpnSocket = Client.preferences.vpnType.port
-        AppPreferences.shared.todayWidgetVpnPort = Client.preferences.vpnType.socket
+        WidgetConnectionDetails.current.save()
 
         WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
     }
@@ -533,7 +521,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
         switch section {
         case .protocols:
-            self.perform(segue: StoryboardSegue.Main.protocolSettingsSegue, sender: nil)
+            showProtocolSettings()
         case .network:
             self.perform(segue: StoryboardSegue.Main.networkSettingsSegue, sender: nil)
         case .privacyFeatures:
@@ -545,7 +533,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .development:
             self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
-            self.perform(segue: StoryboardSegue.Main.generalSettingsSegue, sender: nil)
+            showGeneralSettings()
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
@@ -555,4 +543,31 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         Theme.current.applyTableSectionFooter(view)
     }
 
+}
+
+extension SettingsViewController {
+    private func showGeneralSettings() {
+        guard let navigationController else { return }
+        let coordinator = GeneralSettingsCoordinator(
+            parent: navigationController,
+            resetToDefaults: { [weak self] in
+                self?.resetToDefaultSettings()
+            },
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showProtocolSettings() {
+        guard let navigationController else { return }
+        let coordinator = ProtocolSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
 }

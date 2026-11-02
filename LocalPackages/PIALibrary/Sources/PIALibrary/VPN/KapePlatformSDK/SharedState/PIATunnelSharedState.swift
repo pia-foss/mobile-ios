@@ -129,6 +129,7 @@ public enum PIATunnelSharedState {
         protocol vpnProtocol: TunnelProtocol,
         serverId: String,
         resolvedTransport: VPNTransport,
+        resolvedPort: UInt16,
         obfuscation: String?
     ) {
         statusStore.mutate { status in
@@ -136,6 +137,7 @@ public enum PIATunnelSharedState {
                 protocol: vpnProtocol,
                 serverId: serverId,
                 resolvedTransport: resolvedTransport,
+                resolvedPort: resolvedPort,
                 obfuscation: obfuscation,
                 updatedAt: Date()
             )

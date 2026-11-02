@@ -12,7 +12,7 @@ import PIALibrary
 import PIAUIKit
 import UIKit
 
-class PIACard: UIView {
+final class PIACard: UIView {
 
     var cardBackgroundImage: ImageAsset!
 

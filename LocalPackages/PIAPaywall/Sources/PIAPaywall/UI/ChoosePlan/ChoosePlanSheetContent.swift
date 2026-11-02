@@ -19,116 +19,118 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIADesignSystem
-import PIALocalizations
-import PIASwiftUI
-import SwiftUI
+#if os(iOS)
+    import PIADesignSystem
+    import PIALocalizations
+    import PIASwiftUI
+    import SwiftUI
 
-/// The plan picker's contents.
-///
-/// The selection made here is deliberately throwaway: "Maybe Later", the close button, the backdrop
-/// and the swipe all discard it, so the main screen keeps selling its default plan.
-struct ChoosePlanSheetContent: View {
-    @ObservedObject var store: PaywallStore
+    /// The plan picker's contents.
+    ///
+    /// The selection made here is deliberately throwaway: "Maybe Later", the close button, the backdrop
+    /// and the swipe all discard it, so the main screen keeps selling its default plan.
+    struct ChoosePlanSheetContent: View {
+        @ObservedObject var store: PaywallStore
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: PIASpacing.s16) {
-            header
+        var body: some View {
+            VStack(alignment: .leading, spacing: PIASpacing.s16) {
+                header
 
-            VStack(spacing: PIASpacing.s12) {
-                ForEach(PaywallPlanID.allCases, id: \.self) { plan in
-                    if store.state.offers[plan] != nil {
-                        planCard(for: plan)
+                VStack(spacing: PIASpacing.s12) {
+                    ForEach(PaywallPlanID.allCases, id: \.self) { plan in
+                        if store.state.offers[plan] != nil {
+                            planCard(for: plan)
+                        }
                     }
                 }
+
+                PaywallDisclaimerView(disclaimer: store.state.sheetDisclaimer)
+
+                VStack(spacing: PIASpacing.s8) {
+                    Button {
+                        store.send(.purchaseTapped(source: .planSheet))
+                    } label: {
+                        Text(store.state.sheetButtonTitle).typography(.button1)
+                    }
+                    .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isPurchasing))
+                    .disabled(!store.state.canPurchase)
+                    .accessibilityIdentifier(PaywallAccessibility.sheetSubscribeButton)
+
+                    Button {
+                        store.send(.planSheetDismissed)
+                    } label: {
+                        Text(L10n.Signup.Paywall.Plans.maybeLater).typography(.button1)
+                    }
+                    .buttonStyle(PIAButtonStyle(.plain))
+                    .accessibilityIdentifier(PaywallAccessibility.maybeLaterButton)
+                }
             }
+            .padding(PIASpacing.s24)
+        }
 
-            PaywallDisclaimerView(disclaimer: store.state.sheetDisclaimer)
-
-            VStack(spacing: PIASpacing.s8) {
-                Button {
-                    store.send(.purchaseTapped(source: .planSheet))
-                } label: {
-                    Text(store.state.sheetButtonTitle).typography(.button1)
-                }
-                .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isPurchasing))
-                .disabled(!store.state.canPurchase)
-                .accessibilityIdentifier(PaywallAccessibility.sheetSubscribeButton)
-
-                Button {
-                    store.send(.planSheetDismissed)
-                } label: {
-                    Text(L10n.Signup.Paywall.Plans.maybeLater).typography(.button1)
-                }
-                .buttonStyle(PIAButtonStyle(.plain))
-                .accessibilityIdentifier(PaywallAccessibility.maybeLaterButton)
+        private var header: some View {
+            HStack(alignment: .center) {
+                Text(L10n.Signup.Paywall.Plans.title)
+                    .typography(.title2, color: .pia.onSurface)
+                Spacer(minLength: PIASpacing.s16)
+                PaywallCloseButton { store.send(.planSheetDismissed) }
             }
         }
-        .padding(PIASpacing.s24)
-    }
 
-    private var header: some View {
-        HStack(alignment: .center) {
-            Text(L10n.Signup.Paywall.Plans.title)
-                .typography(.title2, color: .pia.onSurface)
-            Spacer(minLength: PIASpacing.s16)
-            PaywallCloseButton { store.send(.planSheetDismissed) }
+        private func planCard(for plan: PaywallPlanID) -> some View {
+            let state = store.state
+            let offer = state.offers[plan]
+
+            return PlanOptionCard(
+                title: state.planTitle(for: plan),
+                price: offer.map(state.cardPrice(for:)) ?? "",
+                billingDetail: offer.map(state.cardBillingDetail(for:)) ?? "",
+                savings: state.savingsTitle(for: plan),
+                footer: state.trialFooter(for: plan),
+                hasTrial: state.trialOffered(for: plan) != nil,
+                isSelected: state.sheetSelection == plan,
+                action: { store.send(.planSelected(plan)) }
+            )
         }
     }
 
-    private func planCard(for plan: PaywallPlanID) -> some View {
-        let state = store.state
-        let offer = state.offers[plan]
-
-        return PlanOptionCard(
-            title: state.planTitle(for: plan),
-            price: offer.map(state.cardPrice(for:)) ?? "",
-            billingDetail: offer.map(state.cardBillingDetail(for:)) ?? "",
-            savings: state.savingsTitle(for: plan),
-            footer: state.trialFooter(for: plan),
-            hasTrial: state.trialOffered(for: plan) != nil,
-            isSelected: state.sheetSelection == plan,
-            action: { store.send(.planSelected(plan)) }
-        )
-    }
-}
-
-#Preview {
-    let offers: [PaywallPlanID: PaywallOffer] = [
-        .yearly: PaywallOffer(
-            id: .yearly,
-            priceString: "$72.98",
-            monthlyPriceString: "$6.08",
-            accessibleMonthlyPriceString: "6.08 US dollars",
-            monthlyPrice: 72.98 / 12,
-            trial: PaywallTrialOffer(days: 7)
-        ),
-        .monthly: PaywallOffer(
-            id: .monthly,
-            priceString: "$16.99",
-            monthlyPriceString: "$16.99",
-            accessibleMonthlyPriceString: "16.99 US dollars",
-            monthlyPrice: 16.99
-        )
-    ]
-
-    return ChoosePlanSheetContent(
-        store: PaywallStore(
-            initialState: Paywall.State(
-                phase: .ready,
-                offers: offers,
-                sheetSelection: .yearly
+    #Preview {
+        let offers: [PaywallPlanID: PaywallOffer] = [
+            .yearly: PaywallOffer(
+                id: .yearly,
+                priceString: "$72.98",
+                monthlyPriceString: "$6.08",
+                accessibleMonthlyPriceString: "6.08 US dollars",
+                monthlyPrice: 72.98 / 12,
+                trial: PaywallTrialOffer(days: 7)
             ),
-            dependencies: Paywall.Dependencies(
-                loadOffers: { .success(OffersPayload(offers: offers)) },
-                hasExistingEntitlement: { false },
-                purchase: { _ in .failure(.userCancelled) },
-                finishTransaction: { _ in },
-                restore: { .failure(.nothingToRestore) },
-                purchaseIntents: { AsyncStream { $0.finish() } },
-                emit: { _ in }
+            .monthly: PaywallOffer(
+                id: .monthly,
+                priceString: "$16.99",
+                monthlyPriceString: "$16.99",
+                accessibleMonthlyPriceString: "16.99 US dollars",
+                monthlyPrice: 16.99
+            )
+        ]
+
+        return ChoosePlanSheetContent(
+            store: PaywallStore(
+                initialState: Paywall.State(
+                    phase: .ready,
+                    offers: offers,
+                    sheetSelection: .yearly
+                ),
+                dependencies: Paywall.Dependencies(
+                    loadOffers: { .success(OffersPayload(offers: offers)) },
+                    hasExistingEntitlement: { false },
+                    purchase: { _ in .failure(.userCancelled) },
+                    finishTransaction: { _ in },
+                    restore: { .failure(.nothingToRestore) },
+                    purchaseIntents: { AsyncStream { $0.finish() } },
+                    emit: { _ in }
+                )
             )
         )
-    )
-    .background(Color.pia.surfaceContainerPrimary)
-}
+        .background(Color.pia.surfaceContainerPrimary)
+    }
+#endif

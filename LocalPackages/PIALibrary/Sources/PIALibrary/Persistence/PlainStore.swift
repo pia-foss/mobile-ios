@@ -74,17 +74,7 @@ protocol PlainStore: AnyObject {
 
     var lastKnownVpnStatus: VPNStatus { get set }
 
-    var lastVPNConnectionAttempt: Double { get set }
-
     var lastVPNConnectionSuccess: Double? { get set }
-
-    var timeToConnectVPN: Double { get set }
-
-    var leakProtection: Bool { get set }
-
-    var allowLocalDeviceAccess: Bool { get set }
-
-    var currentRFC1918VulnerableWifi: String? { get set }
 
     // MARK: Service Quality
 
@@ -117,7 +107,6 @@ protocol PlainStore: AnyObject {
 
     var nmtTemporaryOpenNetworks: [String] { get set }
 
-    //MARK: IKEv2
     //MARK: OpenVPN / WireGuard
     var useSmallPackets: Bool { get set }
 

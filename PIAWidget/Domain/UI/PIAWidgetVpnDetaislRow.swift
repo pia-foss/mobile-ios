@@ -32,6 +32,8 @@ internal struct PIAWidgetVpnDetaislRow: View {
             Text(text)
                 .font(.system(size: fontSize))
                 .foregroundColor(Color("FontColor"))
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

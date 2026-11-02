@@ -68,7 +68,7 @@ If a message is available, it replaces the feedback/rating tile in the fixed til
 
 - Messages render as a tile in the dashboard `UICollectionView` section 0
 - The tile shows an orange alert icon, message text, and a dismiss button
-- A separate SwiftEntryKit-based banner system (`Macros+UI.swift`) is used for transient toast notifications after action commands, but is not part of the message tile display
+- A separate banner system (`PIAAlertBanners`, wrapped by `Macros+UI.swift`) is used for transient toast notifications after action commands, but is not part of the message tile display
 
 ## Key Files
 

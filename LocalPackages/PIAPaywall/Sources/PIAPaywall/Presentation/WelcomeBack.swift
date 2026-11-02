@@ -38,6 +38,9 @@ extension WelcomeBack {
         case restoreSucceeded(AccountBox)
         case restoreFailed
         case usernameAndPasswordTapped
+        #if os(tvOS)
+            case qrCodeTapped
+        #endif
         case closeTapped
     }
 
@@ -55,4 +58,11 @@ extension WelcomeBack {
             self.emit = emit
         }
     }
+}
+
+public enum WelcomeBackAccessibility {
+    public static let appStoreButton = "id.welcome_back.app_store"
+    public static let credentialsButton = "id.welcome_back.credentials"
+    public static let qrCodeButton = "id.welcome_back.qr_code"
+    public static let closeButton = "id.welcome_back.close"
 }

@@ -19,6 +19,7 @@
 //
 
 import Foundation
+import NetworkExtension
 import PIAKPI
 import UIKit
 
@@ -29,7 +30,8 @@ public final class ServiceQualityManager: NSObject {
     public static let shared = ServiceQualityManager()
     private static let kpiPreferenceName = "PIA_KPI_PREFERENCE_NAME"
     private var kpiManager: KPIAPI?
-    private var isAppActive = true
+    private var connectionTracker = KPIConnectionTracker()
+    private var connectionAttemptDate: Date?
 
     /**
      * Enum defining the different connection sources.
@@ -41,21 +43,11 @@ public final class ServiceQualityManager: NSObject {
     }
 
     /**
-     * Enum defining the supported connection related events.
-     */
-    private enum KPIConnectionEvent: String {
-        case vpnConnectionAttempt = "VPN_CONNECTION_ATTEMPT"
-        case vpnConnectionCancelled = "VPN_CONNECTION_CANCELLED"
-        case vpnConnectionEstablished = "VPN_CONNECTION_ESTABLISHED"
-    }
-
-    /**
      * Enum defining the supported vpn protocols to report.
      */
     private enum KPIVpnProtocol: String {
         case ovpn = "OpenVPN"
         case wireguard = "WireGuard"
-        case ipsec = "IPSec"
     }
 
     /**
@@ -156,11 +148,6 @@ public final class ServiceQualityManager: NSObject {
             selector: #selector(appChangedState(with:)),
             name: UIApplication.didEnterBackgroundNotification,
             object: nil)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appChangedState(with:)),
-            name: UIApplication.didBecomeActiveNotification,
-            object: nil)
     }
 
     deinit {
@@ -190,13 +177,7 @@ public final class ServiceQualityManager: NSObject {
     }
 
     @objc private func appChangedState(with notification: Notification) {
-        switch notification.name {
-        case UIApplication.didEnterBackgroundNotification:
-            isAppActive = false
-            flushEvents()
-        default:
-            isAppActive = true
-        }
+        flushEvents()
     }
 
     @objc private func flushEvents() {
@@ -212,41 +193,20 @@ public final class ServiceQualityManager: NSObject {
         }
     }
 
-    public func connectionAttemptEvent() {
-        let connectionSource = connectionSource()
-        guard connectionSource == .manual, isAppActive else { return }
+    func connectionStatusDidChange(system: NEVPNStatus, tunnel: PIATunnelSharedState.TunnelStatus?) {
+        guard let event = connectionTracker.update(to: KPIConnectionStatus(system: system, tunnel: tunnel)) else {
+            return
+        }
+        if event == .vpnConnectionAttempt {
+            connectionAttemptDate = Date()
+        }
+        guard Client.preferences.shareServiceQualityData else {
+            return
+        }
 
         submitEvent(
-            named: KPIConnectionEvent.vpnConnectionAttempt.rawValue,
-            properties: [
-                KPIEventPropertyKey.connectionSource.rawValue: connectionSource.rawValue,
-                KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
-                KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-            ]
-        )
-    }
-
-    public func connectionEstablishedEvent() {
-        let connectionSource = connectionSource()
-        guard connectionSource == .manual, isAppActive else { return }
-
-        submitEvent(
-            named: KPIConnectionEvent.vpnConnectionEstablished.rawValue,
-            properties: createEstablishedEventProperties()
-        )
-    }
-
-    public func connectionCancelledEvent() {
-        let disconnectionSource = disconnectionSource()
-        guard disconnectionSource == .manual, isAppActive else { return }
-
-        submitEvent(
-            named: KPIConnectionEvent.vpnConnectionCancelled.rawValue,
-            properties: [
-                KPIEventPropertyKey.connectionSource.rawValue: disconnectionSource.rawValue,
-                KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
-                KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
-            ]
+            named: event.rawValue,
+            properties: event == .vpnConnectionEstablished ? createEstablishedEventProperties() : connectionEventProperties()
         )
     }
 
@@ -374,15 +334,10 @@ public final class ServiceQualityManager: NSObject {
         return Client.configuration.connectedManually ? KPIConnectionSource.manual : KPIConnectionSource.automatic
     }
 
-    private func disconnectionSource() -> KPIConnectionSource {
-        return Client.configuration.disconnectedManually ? KPIConnectionSource.manual : KPIConnectionSource.automatic
-    }
-
     /// The protocol to report for this session.
     ///
     /// Prefers what the tunnel actually negotiated over what the user selected — under Automatic the
-    /// selection does not say which protocol ran. IKEv2 is no longer reportable: the `.ipsec` value
-    /// this used to emit is retired along with the protocol.
+    /// selection does not say which protocol ran. IKEv2 is no longer reportable.
     private func currentProtocol() -> KPIVpnProtocol {
         if let resolved = Client.providers.vpnProvider.actualConnection?.vpnType {
             switch resolved {
@@ -405,12 +360,16 @@ public final class ServiceQualityManager: NSObject {
         }
     }
 
-    private func createEstablishedEventProperties() -> [String: String] {
-        var eventProperties: [String: String] = [
+    private func connectionEventProperties() -> [String: String] {
+        [
             KPIEventPropertyKey.connectionSource.rawValue: connectionSource().rawValue,
             KPIEventPropertyKey.userAgent.rawValue: PIAWebServices.userAgent,
             KPIEventPropertyKey.vpnProtocol.rawValue: currentProtocol().rawValue
         ]
+    }
+
+    private func createEstablishedEventProperties() -> [String: String] {
+        var eventProperties = connectionEventProperties()
         if let appVersion = Macros.versionString(),
             let optedVersion = Client.preferences.versionWhenServiceQualityOpted,
             appVersion.isVersionGreaterThanEqual(to: optedVersion)
@@ -421,7 +380,7 @@ public final class ServiceQualityManager: NSObject {
     }
 
     private func getTimeToConnect() -> String {
-        return "\(Client.preferences.timeToConnectVPN)"
+        return "\(Date().timeIntervalSince(connectionAttemptDate ?? Date()))"
     }
 }
 

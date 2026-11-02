@@ -20,7 +20,7 @@ extension Server: @retroactive ServerType {
     }
 
     public var dedicatedIP: String? {
-        iKEv2AddressesForUDP?.first?.ip
+        (wireGuardAddressesForUDP ?? openVPNAddressesForUDP)?.first?.ip
     }
 }
 

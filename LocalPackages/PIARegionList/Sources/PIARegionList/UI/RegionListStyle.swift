@@ -36,7 +36,6 @@
         var secondary: Color { Color(UIColor.piaGrey4) }
 
         static let rowHeight: CGFloat = 50
-        static let dedicatedRowHeight: CGFloat = 135
         static let animationDuration = 0.3
 
         static func font(size: CGFloat) -> Font {

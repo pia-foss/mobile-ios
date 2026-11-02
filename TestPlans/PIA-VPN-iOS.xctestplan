@@ -95,6 +95,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIAAlertBanners",
+        "identifier" : "PIAAlertBannersTests",
+        "name" : "PIAAlertBannersTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:LocalPackages\/PIAForceUpdate",
         "identifier" : "PIAForceUpdateTests",
         "name" : "PIAForceUpdateTests"
@@ -119,6 +126,13 @@
         "containerPath" : "container:LocalPackages\/PIARegionList",
         "identifier" : "PIARegionListTests",
         "name" : "PIARegionListTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIAAccountDetails",
+        "identifier" : "PIAAccountDetailsTests",
+        "name" : "PIAAccountDetailsTests"
       }
     },
     {

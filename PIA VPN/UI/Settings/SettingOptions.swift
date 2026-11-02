@@ -169,8 +169,6 @@ public enum NetworkSections: Int, CaseIterable, SettingSection {
 public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
     case killswitch = 0
     case reconnectNotifications
-    case leakProtection
-    case allowAccessOnLocalNetwork
     case safariContentBlocker
     case refresh
 
@@ -178,8 +176,6 @@ public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
         switch self {
         case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
         case .reconnectNotifications: return L10n.Settings.ApplicationSettings.ReconnectNotifications.title
-        case .leakProtection: return L10n.Settings.ApplicationSettings.LeakProtection.title
-        case .allowAccessOnLocalNetwork: return L10n.Settings.ApplicationSettings.AllowLocalNetwork.title
         case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
         case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
         }
@@ -189,8 +185,6 @@ public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
         switch self {
         case .killswitch: return ""
         case .reconnectNotifications: return ""
-        case .leakProtection: return ""
-        case .allowAccessOnLocalNetwork: return ""
         case .safariContentBlocker: return ""
         case .refresh: return ""
         }
@@ -265,8 +259,6 @@ public enum DevelopmentSections: Int, CaseIterable, SettingSection {
     case resolveGoogleAdsDomain
     case deleteKeychain
     case crash
-    case leakProtectionFlag
-    case leakProtectionNotificationsFlag
     case dynamicIslandLiveActivityFlag
 
     public func localizedTitleMessage() -> String {
@@ -278,8 +270,6 @@ public enum DevelopmentSections: Int, CaseIterable, SettingSection {
         case .resolveGoogleAdsDomain: return "Resolve Google Ads Domain"
         case .deleteKeychain: return "Delete the Keychain"
         case .crash: return "Crash the app"
-        case .leakProtectionFlag: return "FF - Leak Protection"
-        case .leakProtectionNotificationsFlag: return "FF - Leak Protection Notifications"
         case .dynamicIslandLiveActivityFlag: return "FF - Dynamic Island Live Activity"
         }
     }
@@ -293,8 +283,6 @@ public enum DevelopmentSections: Int, CaseIterable, SettingSection {
         case .resolveGoogleAdsDomain: return ""
         case .deleteKeychain: return ""
         case .crash: return ""
-        case .leakProtectionFlag: return ""
-        case .leakProtectionNotificationsFlag: return ""
         case .dynamicIslandLiveActivityFlag: return ""
         }
     }

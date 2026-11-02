@@ -373,16 +373,6 @@ extension Client {
             }
         }
 
-        /// Store a date as a number when last VPN Connection was attempted.
-        public var lastVPNConnectionAttempt: Double {
-            get {
-                return accessedDatabase.plain.lastVPNConnectionAttempt
-            }
-            set {
-                accessedDatabase.plain.lastVPNConnectionAttempt = newValue
-            }
-        }
-
         /// Store a date as a number when last VPN Connection has succeeded.
         public var lastVPNConnectionSuccess: Double? {
             get {
@@ -390,47 +380,6 @@ extension Client {
             }
             set {
                 accessedDatabase.plain.lastVPNConnectionSuccess = newValue
-            }
-        }
-
-        /// Store a decimal number which represents time (in seconds) between
-        /// connecting and connect state of VPNDaemon
-        public var timeToConnectVPN: Double {
-            get {
-                return accessedDatabase.plain.timeToConnectVPN
-            }
-            set {
-                accessedDatabase.plain.timeToConnectVPN = newValue
-            }
-        }
-
-        /// Store a bool that represents the status of leak protection property
-        public var leakProtection: Bool {
-            get {
-                return accessedDatabase.plain.leakProtection
-            }
-            set {
-                accessedDatabase.plain.leakProtection = newValue
-            }
-        }
-
-        /// Store a bool that represents the status of allowLocalDeviceAccess property
-        public var allowLocalDeviceAccess: Bool {
-            get {
-                return accessedDatabase.plain.allowLocalDeviceAccess
-            }
-            set {
-                accessedDatabase.plain.allowLocalDeviceAccess = newValue
-            }
-        }
-
-        /// If the current connected WIFI is a RFC1918 vulnerable WIFI it stores the name, otherwise it returns nil
-        public var currentRFC1918VulnerableWifi: String? {
-            get {
-                return accessedDatabase.plain.currentRFC1918VulnerableWifi
-            }
-            set {
-                accessedDatabase.plain.currentRFC1918VulnerableWifi = newValue
             }
         }
 

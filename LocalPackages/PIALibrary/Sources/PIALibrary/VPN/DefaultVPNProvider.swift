@@ -72,7 +72,8 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
         return ActualConnection(
             vpnType: vpnType,
             server: server,
-            transport: active.resolvedTransport
+            transport: active.resolvedTransport,
+            port: active.resolvedPort
         )
     }
 
@@ -475,9 +476,7 @@ public final class DefaultVPNProvider: VPNProvider, ConfigurationAccess, Databas
             passwordReference: currentPasswordReference,
             server: targetServer,
             isOnDemand: isOnDemand,
-            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep,
-            leakProtection: accessedPreferences.leakProtection,
-            allowLocalDeviceAccess: accessedPreferences.allowLocalDeviceAccess
+            disconnectsOnSleep: accessedPreferences.vpnDisconnectsOnSleep
         )
     }
 }

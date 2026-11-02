@@ -33,8 +33,8 @@ public enum KeychainError: Error {
     /// Couldn't find entry.
     case notFound
 
-    //    /// Returned entry has an unexpected type.
-    //    case typeMismatch
+    /// The entry may exist but the device hasn't been unlocked since boot.
+    case locked
 }
 
 /// Encapsulates Apple keychain operations.
@@ -148,7 +148,7 @@ public final class Keychain: Sendable {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -171,7 +171,7 @@ public final class Keychain: Sendable {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -190,7 +190,7 @@ public final class Keychain: Sendable {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -202,6 +202,13 @@ public final class Keychain: Sendable {
     }
 
     // MARK: Helpers
+
+    static func readError(for status: OSStatus) -> KeychainError {
+        return switch status {
+        case errSecInteractionNotAllowed: .locked
+        default: .notFound
+        }
+    }
 
     private func setScope(query: inout [String: Any]) {
         if let service = service {
@@ -259,7 +266,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -317,7 +324,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -358,7 +365,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -380,7 +387,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -472,7 +479,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -523,7 +530,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound
@@ -581,7 +588,7 @@ extension Keychain {
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         guard (status == errSecSuccess) else {
-            throw KeychainError.notFound
+            throw Self.readError(for: status)
         }
         guard let data = result as? Data else {
             throw KeychainError.notFound

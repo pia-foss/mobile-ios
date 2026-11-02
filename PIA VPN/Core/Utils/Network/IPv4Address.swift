@@ -9,22 +9,6 @@
 import Foundation
 import Network
 
-extension IPv4Address {
-
-    /// https://datatracker.ietf.org/doc/html/rfc1918
-    public var isRFC1918Compliant: Bool {
-        inRange("10.0.0.0"..."10.255.255.255") || inRange("172.16.0.0"..."172.31.255.255")
-            || inRange("192.168.0.0"..."192.168.255.255")
-    }
-
-    /// Checks if IPAddress is in range of other address
-    /// - Parameter range: A range of IPAddress
-    /// - Returns: True if this address is within range
-    public func inRange(_ range: ClosedRange<IPv4Address>) -> Bool {
-        range.contains(self)
-    }
-}
-
 extension IPv4Address: Comparable {
     /// Comparison is done by converting Ipaddress to Integer
     public static func < (lhs: IPv4Address, rhs: IPv4Address) -> Bool {

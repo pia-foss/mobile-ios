@@ -158,7 +158,7 @@ Client.providers.accountProvider.currentUser = user
 
 // establish VPN type (protocol)
 let prefs = Client.preferences.editable()
-prefs.vpnType = IKEv2Profile.vpnType
+prefs.vpnType = KapePlatformSDKVPNType.wireGuard.rawValue
 prefs.commit()
 
 // observe VPN updates
@@ -192,33 +192,19 @@ NotificationCenter.default.addObserver(forName: .PIADaemonsDidUpdateConnectivity
 
 The *VPN* module complements part of the Library module dedicated to VPN profiles, normally based on the NetworkExtension framework for iOS and macOS.
 
-Today, it offers the `PIATunnelProfile` bridge to integrate [TunnelKit](https://github.com/pia-foss/tunnel-apple) into the library. In the pre-bootstrap code, do something like:
+Today, VPN profiles are supplied by the Kape Platform SDK tunnel rather than a TunnelKit bridge. In the pre-bootstrap code, register the tunnel profile and pick a protocol through `Client.preferences.vpnType`:
 
 ```swift
 let packetTunnelBundle = "com.example.MyApp.MyTunnel"
-let group = "group.com.example"
-let ca = OpenVPN.CryptoContainer(pem: """
------BEGIN CERTIFICATE-----
-MIIFqzCCBJOgAwIBAgIJAKZ7D5Yv87qDMA0GCSqGSIb3DQEBDQUAMIHoMQswCQYD
------END CERTIFICATE-----
-""")
 
-var sessionBuilder = OpenVPN.ConfigurationBuilder()
-sessionBuilder.cipher = .aes128gcm
-sessionBuilder.digest = .sha1
-
-var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-builder.mtu = 1350
-        
 Client.configuration.addVPNProfile(
-    PIATunnelProfile(bundleIdentifier: packetTunnelBundle)
+    KapePlatformSDKTunnelProfile(bundleIdentifier: packetTunnelBundle)
 )
-Client.preferences.defaults.vpnCustomConfigurations = [
-    PIATunnelProfile.vpnType: builder.build()
-]
-```
 
-to enable it as a VPN type in `Client.preferences.vpnType`.
+let prefs = Client.preferences.editable()
+prefs.vpnType = KapePlatformSDKVPNType.automatic.rawValue
+prefs.commit()
+```
 
 ### Mock
 

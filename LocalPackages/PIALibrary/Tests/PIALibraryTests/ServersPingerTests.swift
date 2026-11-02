@@ -29,7 +29,7 @@ final class ServersPingerTests: XCTestCase {
         super.setUp()
 
         // MockVPNProvider reports "Mock" as VPN type, so Server.addresses()
-        // resolves to iKEv2AddressesForUDP.
+        // resolves to the WireGuard addresses.
         Client.providers.vpnProvider = MockVPNProvider()
         Client.database.transient.vpnStatus = .disconnected
     }
@@ -46,7 +46,7 @@ final class ServersPingerTests: XCTestCase {
                 name: "Server \(index)",
                 country: "us",
                 hostname: "server\(index).example.com",
-                iKEv2AddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.\(index)", cn: "cn", van: false)],
+                wireGuardAddressesForUDP: [Server.ServerAddressIP(ip: "10.0.0.\(index)", cn: "cn", van: false)],
                 pingAddress: nil,
                 regionIdentifier: "region-\(index)"
             )

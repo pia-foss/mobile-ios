@@ -6,6 +6,7 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIASwiftUI
 import SwiftUI
 
 struct SignupSubscriptionView: View {

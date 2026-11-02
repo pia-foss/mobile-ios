@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -6,6 +6,7 @@ let package = Package(
     name: "PIAUI",
     platforms: [
         .iOS(.v15),
+        .macCatalyst(.v15),
         .tvOS(.v17)
     ],
     products: [
@@ -24,6 +25,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PIALibrary"),
+        .package(path: "../PIAAssets"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.19.6")
     ],
     targets: [
@@ -43,7 +45,10 @@ let package = Package(
         ),
         .target(
             name: "PIASwiftUI",
-            dependencies: ["PIADesignSystem"]
+            dependencies: [
+                "PIADesignSystem",
+                .product(name: "PIAAssetsTV", package: "PIAAssets", condition: .when(platforms: [.tvOS]))
+            ]
         ),
         .testTarget(
             name: "PIADesignSystemTests",

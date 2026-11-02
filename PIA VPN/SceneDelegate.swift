@@ -25,6 +25,7 @@ import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
 import UIKit
+import WidgetKit
 
 private let log = PIALogger.logger(for: SceneDelegate.self)
 
@@ -46,6 +47,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// Set by UIKit from `UISceneStoryboardFile` before `scene(_:willConnectTo:options:)` runs.
     var window: UIWindow?
     private var cancellables = Set<AnyCancellable>()
+    private let protectedDataGate = ProtectedDataGate()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -58,6 +60,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Keep the launch screen presented while the migration check runs
         window?.rootViewController = UIStoryboard(name: "Launch Screen", bundle: nil).instantiateInitialViewController() ?? UIViewController()
 
+        protectedDataGate.whenAvailable { [weak self] in
+            self?.checkMigrationAndStartApp(with: connectionOptions)
+        }
+    }
+
+    private func checkMigrationAndStartApp(with connectionOptions: UIScene.ConnectionOptions) {
         if let window {
             AppPreferences.shared.reloadTheme(in: window, withAnimationDuration: 0)
         }
@@ -110,8 +118,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
-        // Remove the Non compliant Wifi local notification as the app is in foreground now
-        Macros.removeLocalNotification(NotificationCategory.nonCompliantWifi)
 
         #if !targetEnvironment(macCatalyst)
             AppDelegate.delegate().instantiateLiveActivityManagerIfNeeded()
@@ -138,7 +144,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     @discardableResult
     private func handle(url: URL) -> Bool {
-        log.debug("Opened app from URL: \(url)")
+        log.debug("Opened app from URL: \(url.absoluteString.prefix { $0 != "?" })")
 
         if url.absoluteString.starts(with: AppConstants.MagicLink.url) {
 
@@ -161,6 +167,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             signupCoordinator.handleMagicLink(token: token)
 
         } else if url.absoluteString.starts(with: AppConstants.Widget.connect), #unavailable(iOS 17) {
+            guard WidgetConnectToken().consume(from: url) else {
+                log.warning("Ignoring widget connect URL without a valid token")
+                return false
+            }
+            WidgetCenter.shared.reloadTimelines(ofKind: "PIAWidget")
+
             if Client.providers.vpnProvider.isVPNConnected {
                 disconnectAfter(milliseconds: defaultMilliseconds)
             } else {
@@ -296,9 +308,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // Dismiss any modally presented view controller on dashboard
                 NotificationCenter.default.post(name: .PIADashboardShouldDismissModal, object: nil)
 
-                // Dismiss the Leak Protection alert if present when disconnecting from a Quick Action
-                dismissLeakProtectionAlert()
-
                 // this time delay seems to fix a strange issue of the VPN disconnecting and
                 // then automatically reconnecting when it's done from a fresh launch
                 disconnectAfter(milliseconds: defaultMilliseconds)
@@ -348,16 +357,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func disconnectAfter(milliseconds: Int) {
         Macros.dispatch(after: .milliseconds(milliseconds)) {
             Client.providers.vpnProvider.disconnect(nil)
-        }
-    }
-
-    private func dismissLeakProtectionAlert() {
-        if let presentedAlert = RootCoordinator.shared.topPresentedViewController() as? UIAlertController {
-            let leakProtectionAlertTitle = L10n.Dashboard.Vpn.Leakprotection.Alert.title
-
-            if presentedAlert.title == leakProtectionAlertTitle {
-                presentedAlert.dismiss(animated: true)
-            }
         }
     }
 }

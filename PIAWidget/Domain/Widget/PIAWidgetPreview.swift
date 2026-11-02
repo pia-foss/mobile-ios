@@ -20,8 +20,8 @@ import WidgetKit
         WidgetInformation(
             date: Date(),
             connected: true,
-            vpnProtocol: "IKEv2",
-            vpnPort: "500",
+            vpnProtocol: "WireGuard",
+            vpnPort: "1337",
             vpnSocket: "UDP"
         )
     })
@@ -39,5 +39,20 @@ import WidgetKit
             vpnProtocol: "WireGuard",
             vpnPort: "1443",
             vpnSocket: "UDP"
+        )
+        WidgetInformation(
+            date: Date(),
+            connected: true,
+            vpnProtocol: "Automatic (WireGuard®)",
+            vpnPort: "1337",
+            vpnSocket: "UDP"
+        )
+        // The longest localized Automatic label.
+        WidgetInformation(
+            date: Date(),
+            connected: true,
+            vpnProtocol: "Автоматически (WireGuard®)",
+            vpnPort: "8080",
+            vpnSocket: "TCP"
         )
     })

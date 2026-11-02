@@ -65,14 +65,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>SwiftEntryKit</string>
-			<key>Copyright</key>
-			<string>Copyright (c) 2018 Daniel Huri</string>
-			<key>LicenseURL</key>
-			<string>https://raw.githubusercontent.com/huri000/SwiftEntryKit/master/LICENSE</string>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Popover</string>
 			<key>Copyright</key>
 			<string>© 2020 corin8823</string>

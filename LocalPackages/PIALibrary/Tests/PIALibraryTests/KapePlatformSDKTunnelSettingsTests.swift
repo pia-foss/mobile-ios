@@ -97,9 +97,7 @@ struct KapePlatformSDKTunnelSettingsTests {
             passwordReference: Data(),
             server: server,
             isOnDemand: false,
-            disconnectsOnSleep: false,
-            leakProtection: false,
-            allowLocalDeviceAccess: false
+            disconnectsOnSleep: false
         )
     }
 

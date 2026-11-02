@@ -112,17 +112,7 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
         case versionWhenServiceQualityOpted = "versionWhenServiceQualityOpted"
 
-        case lastVPNConnectionAttempt = "lastVPNConnectionAttempt"
-
         case lastVPNConnectionSuccess = "lastVPNConnectionSuccess"
-
-        case timeToConnectVPN = "timeToConnectVPN"
-
-        case leakProtection = "LeakProtection"
-
-        case allowLocalDeviceAccess = "AllowLocalDeviceAccess"
-
-        case currentRFC1918VulnerableWifi = "CurrentRFC1918VulnerableWifi"
     }
 
     private let backend: UserDefaultsKeyed<Entry>
@@ -504,63 +494,12 @@ final class UserDefaultsStore: PlainStore, ConfigurationAccess {
 
     }
 
-    var lastVPNConnectionAttempt: Double {
-        get {
-            return backend.double(forKey: .lastVPNConnectionAttempt)
-        }
-        set {
-            backend.set(newValue, forKey: .lastVPNConnectionAttempt)
-        }
-    }
-
     var lastVPNConnectionSuccess: Double? {
         get {
             return backend.object(forKey: .lastVPNConnectionSuccess) as? Double
         }
         set {
             backend.set(newValue, forKey: .lastVPNConnectionSuccess)
-        }
-    }
-
-    var timeToConnectVPN: Double {
-        get {
-            return backend.double(forKey: .timeToConnectVPN)
-        }
-        set {
-            backend.set(newValue, forKey: .timeToConnectVPN)
-        }
-    }
-
-    var leakProtection: Bool {
-        get {
-            if backend.object(forKey: .leakProtection) == nil {
-                backend.set(true, forKey: .leakProtection)
-            }
-            return backend.bool(forKey: .leakProtection)
-        }
-        set {
-            backend.set(newValue, forKey: .leakProtection)
-        }
-    }
-
-    var allowLocalDeviceAccess: Bool {
-        get {
-            if backend.object(forKey: .allowLocalDeviceAccess) == nil {
-                backend.set(true, forKey: .allowLocalDeviceAccess)
-            }
-            return backend.bool(forKey: .allowLocalDeviceAccess)
-        }
-        set {
-            backend.set(newValue, forKey: .allowLocalDeviceAccess)
-        }
-    }
-
-    var currentRFC1918VulnerableWifi: String? {
-        get {
-            return backend.string(forKey: .currentRFC1918VulnerableWifi)
-        }
-        set {
-            backend.set(newValue, forKey: .currentRFC1918VulnerableWifi)
         }
     }
 

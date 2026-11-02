@@ -19,36 +19,38 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIAAssetsMobile
-import PIADesignSystem
-import PIALocalizations
-import SwiftUI
+#if os(iOS)
+    import PIAAssetsMobile
+    import PIADesignSystem
+    import PIALocalizations
+    import SwiftUI
 
-/// The corner dismiss control.
-struct PaywallCloseButton: View {
-    private enum Metrics {
-        static let glyphSize: CGFloat = 24
-        static let tapTarget: CGFloat = 44
-    }
-
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Asset.Piax.Global.iconCloseSmall.swiftUIImage
-                .renderingMode(.template)
-                .resizable()
-                .frame(width: Metrics.glyphSize, height: Metrics.glyphSize)
-                .foregroundColor(.pia.onSurfaceContainerPrimary)
-                .frame(width: Metrics.tapTarget, height: Metrics.tapTarget)
-                .contentShape(Rectangle())
+    /// The corner dismiss control.
+    struct PaywallCloseButton: View {
+        private enum Metrics {
+            static let glyphSize: CGFloat = 24
+            static let tapTarget: CGFloat = 44
         }
-        .accessibilityLabel(L10n.Signup.Paywall.Accessibility.close)
-    }
-}
 
-#Preview {
-    PaywallCloseButton {}
-        .padding(PIASpacing.s8)
-        .background(Color.pia.background)
-}
+        let action: () -> Void
+
+        var body: some View {
+            Button(action: action) {
+                Asset.Piax.Global.iconCloseSmall.swiftUIImage
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: Metrics.glyphSize, height: Metrics.glyphSize)
+                    .foregroundColor(.pia.onSurfaceContainerPrimary)
+                    .frame(width: Metrics.tapTarget, height: Metrics.tapTarget)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel(L10n.Signup.Paywall.Accessibility.close)
+        }
+    }
+
+    #Preview {
+        PaywallCloseButton {}
+            .padding(PIASpacing.s8)
+            .background(Color.pia.background)
+    }
+#endif

@@ -52,9 +52,9 @@ struct PIAWidgetView: View {
 
                 if widgetFamily == .systemMedium {
                     PIAWidgetVpnDetailsView(
-                        vpnProtocol: widgetPersistenceDatasource.getVpnProtocol(),
-                        port: widgetPersistenceDatasource.getVpnPort(),
-                        socket: widgetPersistenceDatasource.getVpnSocket()
+                        vpnProtocol: entry.vpnProtocol,
+                        port: entry.vpnPort,
+                        socket: entry.vpnSocket
                     )
                 }
             }
@@ -79,6 +79,6 @@ struct PIAWidgetView: View {
         if #available(iOS 17.0, *) {
             return nil
         }
-        return URL(string: AppConstants.Widget.connect)
+        return WidgetConnectToken().connectURL
     }
 }

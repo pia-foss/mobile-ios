@@ -75,9 +75,7 @@ final class KapePlatformSDKOnDemandTests: XCTestCase {
                 regionIdentifier: "region-1"
             ),
             isOnDemand: true,
-            disconnectsOnSleep: false,
-            leakProtection: false,
-            allowLocalDeviceAccess: false
+            disconnectsOnSleep: false
         )
     }
 
