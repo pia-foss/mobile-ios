@@ -5,10 +5,11 @@ import PackageDescription
 let package = Package(
     name: "PIAPaywall",
     defaultLocalization: "en",
-    // iOS only: tvOS has its own signup flow in `PIA VPN-tvOS/Signup`, and this design is
-    // iPhone/iPad specific. A package may declare fewer platforms than its dependencies.
+    // The paywall is iPhone/iPad only; tvOS has its own signup flow in `PIA VPN-tvOS/Signup`.
+    // Welcome-back runs on both: shared domain and presentation, one view per platform.
     platforms: [
-        .iOS(.v15)
+        .iOS(.v15),
+        .tvOS(.v17)
     ],
     products: [
         .library(
@@ -32,7 +33,8 @@ let package = Package(
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
-                .product(name: "PIAAssetsMobile", package: "PIAAssets")
+                .product(name: "PIAAssetsMobile", package: "PIAAssets", condition: .when(platforms: [.iOS])),
+                .product(name: "PIAAssetsTV", package: "PIAAssets", condition: .when(platforms: [.tvOS]))
             ],
             // Swift 5 language mode, matching PIAAssets. `AccountProvider` and `InAppProvider` are
             // not `Sendable` yet expose `nonisolated async` methods, so every call into PIALibrary

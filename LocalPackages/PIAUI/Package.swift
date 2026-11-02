@@ -25,6 +25,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PIALibrary"),
+        .package(path: "../PIAAssets"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.19.6")
     ],
     targets: [
@@ -44,7 +45,10 @@ let package = Package(
         ),
         .target(
             name: "PIASwiftUI",
-            dependencies: ["PIADesignSystem"]
+            dependencies: [
+                "PIADesignSystem",
+                .product(name: "PIAAssetsTV", package: "PIAAssets", condition: .when(platforms: [.tvOS]))
+            ]
         ),
         .testTarget(
             name: "PIADesignSystemTests",

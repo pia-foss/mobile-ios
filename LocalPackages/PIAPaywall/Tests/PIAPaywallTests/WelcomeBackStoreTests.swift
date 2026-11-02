@@ -101,6 +101,35 @@ struct WelcomeBackStoreTests {
         #expect(spy.restoreCallCount == 0)
     }
 
+    #if os(tvOS)
+        @Test("The QR code button asks the host for the QR login screen")
+        func qrCodeRequestsQRLogin() async {
+            // GIVEN the screen as it is presented
+            let sut = makeStore()
+
+            // WHEN the QR code button is tapped
+            sut.send(.qrCodeTapped)
+            await sut.finish()
+
+            // THEN the host is asked to show QR login, and no restore was attempted
+            #expect(spy.didRequestQRLogin)
+            #expect(spy.restoreCallCount == 0)
+        }
+
+        @Test("The QR code button is ignored while restoring")
+        func qrCodeIgnoredWhileRestoring() async {
+            // GIVEN a restore in flight
+            let sut = makeStore(state: WelcomeBack.State(isRestoring: true))
+
+            // WHEN the QR code button is tapped
+            sut.send(.qrCodeTapped)
+            await sut.finish()
+
+            // THEN nothing is emitted
+            #expect(!spy.didRequestQRLogin)
+        }
+    #endif
+
     @Test("The close button asks the host to dismiss")
     func closeDismisses() async {
         // GIVEN the screen as it is presented

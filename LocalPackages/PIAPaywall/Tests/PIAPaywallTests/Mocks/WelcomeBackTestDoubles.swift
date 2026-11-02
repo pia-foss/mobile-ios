@@ -50,6 +50,12 @@ final class WelcomeBackDependencySpy: @unchecked Sendable {
         emittedOutputs.contains { if case .requestLogin = $0 { return true } else { return false } }
     }
 
+    #if os(tvOS)
+        var didRequestQRLogin: Bool {
+            emittedOutputs.contains { if case .requestQRLogin = $0 { return true } else { return false } }
+        }
+    #endif
+
     var didDismiss: Bool {
         emittedOutputs.contains { if case .didDismiss = $0 { return true } else { return false } }
     }

@@ -38,6 +38,7 @@ public enum Asset {
   public static let settingsBgImage = ImageAsset(name: "settings-bg-image")
   public static let loadingPiaBrand = ImageAsset(name: "loading-pia-brand")
   public static let setupScreen = ImageAsset(name: "setup-screen")
+  public static let welcomeBack = ImageAsset(name: "welcome-back")
   public static let favoriteFilledIcon = ImageAsset(name: "favorite-filled-icon")
   public static let favoriteStrokeIcon = ImageAsset(name: "favorite-stroke-icon")
   public static let termsAndConditions = ImageAsset(name: "terms-and-conditions")

@@ -19,18 +19,20 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIAAssetsMobile
-import SwiftUI
+#if os(iOS)
+    import PIAAssetsMobile
+    import SwiftUI
 
-/// The horizontal PIA wordmark.
-struct PIALogoView: View {
-    private static let height: CGFloat = 50
+    /// The horizontal PIA wordmark.
+    struct PIALogoView: View {
+        private static let height: CGFloat = 50
 
-    var body: some View {
-        Asset.navLogo.swiftUIImage
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: Self.height)
-            .accessibilityHidden(true)
+        var body: some View {
+            Asset.navLogo.swiftUIImage
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: Self.height)
+                .accessibilityHidden(true)
+        }
     }
-}
+#endif

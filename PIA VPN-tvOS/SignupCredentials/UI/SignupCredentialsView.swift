@@ -9,6 +9,7 @@
 import PIAAssetsTV
 import PIALibrary
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
 struct SignupCredentialsView: View {

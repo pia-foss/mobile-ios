@@ -7,6 +7,7 @@
 
 import PIAAssetsTV
 import PIALocalizations
+import PIASwiftUI
 import SwiftUI
 
 struct PlatformSDKMigrationView: View {

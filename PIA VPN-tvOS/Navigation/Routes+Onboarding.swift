@@ -18,6 +18,7 @@ enum AuthenticationDestinations: Destinations {
     case signupCredentials
     case signupPrivacy
     case signupTerms
+    case welcomeBack
 }
 
 enum OnboardingDestinations: Destinations {
@@ -45,6 +46,8 @@ public extension View {
                 SignUpFactory.makePrivacySignupTermsView()
             case .signupTerms:
                 SignUpFactory.makeTermsConditionsSignupTermsView()
+            case .welcomeBack:
+                WelcomeBackFactory.makeWelcomeBackView()
             }
         }
     }

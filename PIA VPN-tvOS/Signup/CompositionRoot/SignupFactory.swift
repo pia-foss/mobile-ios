@@ -9,8 +9,34 @@
 import Foundation
 import PIALibrary
 import PIALocalizations
+import PIAPaywall
+
+private let log = PIALogger.logger(for: SignUpFactory.self)
 
 class SignUpFactory {
+    /// Opens the paywall, with welcome-back already on top of it when this Apple ID holds a live
+    /// subscription, so a returning customer signs in instead of buying a second account.
+    ///
+    /// The check runs before navigating, so the paywall never shows before welcome-back covers it.
+    /// Both screens are pushed together: Menu on welcome-back lands on the paywall.
+    @MainActor
+    static func openSignup(
+        router: AppRouterType = AppRouter.shared,
+        hasActiveSubscription: () async -> Bool = { await WelcomeBackFactory.makeHasActiveSubscriptionUseCase()() }
+    ) async {
+        let stackCount = router.stackCount
+        let isSubscribed = await hasActiveSubscription()
+        log.info("Welcome back: active subscription on this Apple ID: \(isSubscribed)")
+
+        // The user may have moved on, or tapped twice, while StoreKit was read.
+        guard router.stackCount == stackCount else { return }
+
+        router.navigate(to: AuthenticationDestinations.signup)
+        if isSubscribed {
+            router.navigate(to: AuthenticationDestinations.welcomeBack)
+        }
+    }
+
     static func makeSignupQRView() -> SignupQRView {
         let url = URL(string: "https://apps.apple.com/us/app/vpn-by-private-internet-access/id955626407")!
         return SignupQRView(signUpURL: url)
