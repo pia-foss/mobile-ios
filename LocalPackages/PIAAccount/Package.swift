@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PIABase"),
-        .package(url: "https://github.com/apple/swift-log", exact: "1.15.1")
+        .package(url: "https://github.com/apple/swift-log", exact: "1.16.2")
     ],
     targets: [
         // Main library target (merged for simplicity)

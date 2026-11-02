@@ -7,6 +7,7 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
+        .macCatalyst(.v15),
         .tvOS(.v17)
     ],
     products: [
@@ -31,8 +32,16 @@ let package = Package(
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
-                .product(name: "PIAAssetsMobile", package: "PIAAssets", condition: .when(platforms: [.iOS])),
-                .product(name: "PIAAssetsFlags", package: "PIAAssets", condition: .when(platforms: [.iOS]))
+                .product(
+                    name: "PIAAssetsMobile",
+                    package: "PIAAssets",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
+                .product(
+                    name: "PIAAssetsFlags",
+                    package: "PIAAssets",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                )
             ]
         )
     ]
