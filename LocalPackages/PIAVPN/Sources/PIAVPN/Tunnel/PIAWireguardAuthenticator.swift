@@ -10,11 +10,12 @@ final class PIAWireguardAuthenticator: PacketTunnelWireguardAuthenticator, Senda
 
     func authenticate(config: WireguardEndpointConfiguration) async throws -> WireguardEndpointConfiguration {
         // AmneziaWG servers serve their key exchange on their own path and port.
-        let isAmnezia = if case .amnezia = config.obfuscation {
-            true
-        } else {
-            false
-        }
+        let isAmnezia =
+            if case .amnezia = config.obfuscation {
+                true
+            } else {
+                false
+            }
 
         let label = isAmnezia ? "AmneziaWG" : "WireGuard"
         let path = isAmnezia ? "add-awg-key" : "addKey"

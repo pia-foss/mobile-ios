@@ -285,7 +285,6 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(openSettings), name: .OpenSettings, object: nil)
         nc.addObserver(self, selector: #selector(openSettingsAndWireGuard), name: .OpenSettingsAndActivateWireGuard, object: nil)
         nc.addObserver(self, selector: #selector(checkVPNConnectingStatus(notification:)), name: .PIADaemonsConnectingVPNStatus, object: nil)
-        nc.addObserver(self, selector: #selector(presentForceUpdate), name: NSNotification.Name.__AppDidFetchForceUpdateFeatureFlag, object: nil)
         nc.addObserver(self, selector: #selector(handleDismissModal), name: .PIADashboardShouldDismissModal, object: nil)
 
         // The tunnel reports the resolved protocol, port and transport after connecting.
@@ -771,27 +770,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    @objc func presentForceUpdate() {
-        #if !STAGING
-            let forceUpdate = ForceUpdateViewController()
-            forceUpdate.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async {
-                guard let presenter = RootCoordinator.shared.topPresentedViewController() else { return }
-                if presenter is ForceUpdateViewController { return }
-                if presenter.presentingViewController != nil {
-                    presenter.dismiss(
-                        animated: false,
-                        completion: {
-                            RootCoordinator.shared.topPresentedViewController()?
-                                .present(forceUpdate, animated: false)
-                        })
-                } else {
-                    presenter.present(forceUpdate, animated: false)
-                }
-            }
-        #endif
-    }
-
     @objc private func handleDismissModal() {
         dismissModalViewController()
     }
@@ -1138,10 +1116,8 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     }
 
     private func showVPNModal(target: UIViewController) {
-        let vc = StoryboardScene.Main.vpnPermissionViewController.instantiate()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        target.present(nav, animated: true)
+        let coordinator = VPNPermissionCoordinator(presenter: target)
+        Task { await coordinator.startAsync() }
     }
 }
 

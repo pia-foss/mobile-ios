@@ -25,8 +25,6 @@ internal enum StoryboardScene {
     internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Self.self, identifier: "PIACardsViewController")
 
     internal static let sideMenuNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "SideMenuNavigationController")
-
-    internal static let vpnPermissionViewController = SceneType<VPNPermissionViewController>(storyboard: Self.self, identifier: "VPNPermissionViewController")
   }
   internal enum Signup: StoryboardType {
     internal static let storyboardName = "Signup"
@@ -36,8 +34,6 @@ internal enum StoryboardScene {
     internal static let confirmVPNPlanViewController = SceneType<ConfirmVPNPlanViewController>(storyboard: Self.self, identifier: "ConfirmVPNPlanViewController")
 
     internal static let gdprViewController = SceneType<GDPRViewController>(storyboard: Self.self, identifier: "GDPRViewController")
-
-    internal static let shareDataInformationViewController = SceneType<ShareDataInformationViewController>(storyboard: Self.self, identifier: "ShareDataInformationViewController")
 
     internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Self.self, identifier: "SignupSuccessViewController")
   }

@@ -13,11 +13,12 @@ extension PIAEndpointRepository {
         obfuscation: WireguardObfuscation = .none,
         port: UInt16 = PIAEndpointRepository.wireGuardPort
     ) -> [any VpnConfiguration] {
-        let isAmnezia = if case .amnezia = obfuscation {
-            true
-        } else {
-            false
-        }
+        let isAmnezia =
+            if case .amnezia = obfuscation {
+                true
+            } else {
+                false
+            }
 
         let label = isAmnezia ? "AmneziaWG" : "WireGuard"
         let addresses = isAmnezia ? server.amneziaAddressesForUDP : server.wireGuardAddressesForUDP
