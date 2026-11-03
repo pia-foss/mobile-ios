@@ -28,7 +28,7 @@ extension PIATunnelSharedState {
     // MARK: - Protocol & Transport
 
     /// `automatic` tries WireGuard first, then falls back to OpenVPN.
-    public enum TunnelProtocol: String, Codable {
+    public enum TunnelProtocol: String, Codable, Sendable {
         case wireGuard
         case openVPN
         case automatic
