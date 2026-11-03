@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
         .package(path: "../KapePlatformSDK"),
         .package(path: "../PIALibrary"),
-        .package(url: "git@github.com:pia-foss/mobile-ios-networking.git", exact: "1.3.2")
+        .package(url: "https://github.com/pia-foss/mobile-ios-networking.git", exact: "1.3.2")
     ],
     targets: [
         .target(

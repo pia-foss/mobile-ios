@@ -7,7 +7,8 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
-        .tvOS(.v17),
+        .macCatalyst(.v15),
+        .tvOS(.v17)
     ],
     products: [
         // Shared with tvOS: region filtering, sorting and search history.
@@ -19,7 +20,7 @@ let package = Package(
         .library(
             name: "PIARegionList",
             targets: ["PIARegionList"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "../PIALibrary"),
@@ -27,14 +28,14 @@ let package = Package(
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
         .package(path: "../PIAAssets"),
-        .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0"),
+        .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0")
     ],
     targets: [
         .target(
             name: "PIARegionListDomain",
             dependencies: [
                 .product(name: "PIALibrary", package: "PIALibrary"),
-                .product(name: "PIAFavorites", package: "PIAFavorites"),
+                .product(name: "PIAFavorites", package: "PIAFavorites")
             ]
         ),
         .target(
@@ -47,8 +48,16 @@ let package = Package(
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
-                .product(name: "PIAAssetsMobile", package: "PIAAssets", condition: .when(platforms: [.iOS])),
-                .product(name: "PIAAssetsFlags", package: "PIAAssets", condition: .when(platforms: [.iOS])),
+                .product(
+                    name: "PIAAssetsMobile",
+                    package: "PIAAssets",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                ),
+                .product(
+                    name: "PIAAssetsFlags",
+                    package: "PIAAssets",
+                    condition: .when(platforms: [.iOS, .macCatalyst])
+                )
             ]
         ),
         .testTarget(
@@ -56,8 +65,8 @@ let package = Package(
             dependencies: [
                 "PIARegionList",
                 "PIARegionListDomain",
-                .product(name: "CoreArchitecture", package: "apple-core"),
+                .product(name: "CoreArchitecture", package: "apple-core")
             ]
-        ),
+        )
     ]
 )
