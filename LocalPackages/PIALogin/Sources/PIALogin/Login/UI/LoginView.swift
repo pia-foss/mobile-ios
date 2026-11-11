@@ -51,7 +51,7 @@ public struct LoginView: View {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .disabled(store.state.inFlight != nil)
-        .task { store.send(.onAppear) }
+        .onAppear { store.send(.onAppear) }
         .alert(
             L10n.Account.Restore.Failure.title,
             isPresented: store.binding(\.isBadReceiptAlertPresented) { _ in .alertDismissed },
@@ -143,10 +143,6 @@ public struct LoginView: View {
     }
 }
 
-extension Login.State {
-    fileprivate var isBadReceiptAlertPresented: Bool { alert == .badReceipt }
-}
-
 /// Asks for the email to send the sign-in link to.
 ///
 /// Alerts only take text fields from iOS 16, so iOS 15 gets a small sheet instead.
@@ -174,6 +170,7 @@ private struct MagicLinkPrompt: ViewModifier {
     }
 }
 
+@available(iOS, obsoleted: 16, message: "Use alert with text field.")
 private struct MagicLinkSheet: View {
     @Binding var email: String
     let cancel: () -> Void
@@ -222,7 +219,6 @@ public enum LoginAccessibility {
     public static let submit = "id.login.submit"
     public static let username = "id.login.username"
     public static let password = "id.login.submit"
-    public static let errorBanner = "id.login.error.banner"
 }
 
 private extension Login.Dependencies {

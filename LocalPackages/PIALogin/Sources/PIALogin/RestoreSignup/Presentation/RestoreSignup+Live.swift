@@ -46,12 +46,3 @@ extension RestoreSignup.Dependencies {
         )
     }
 }
-
-extension RestoreSignupError {
-    init(_ error: any Error) {
-        switch error as? ClientError {
-        case .noReceipt, .badReceipt: self = .nothingToRestore
-        default: self = .failed(message: error.localizedDescription)
-        }
-    }
-}

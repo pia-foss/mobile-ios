@@ -22,7 +22,6 @@
 import CoreArchitecture
 import Foundation
 import PIALibrary
-import PIALocalizations
 
 extension RestoreSignup {
     struct Reducer: Sendable {
@@ -39,9 +38,8 @@ extension RestoreSignup {
 
             case .submitTapped:
                 guard !state.isRestoring else { return nil }
-                let email = state.email.trimmingCharacters(in: .whitespacesAndNewlines)
                 do {
-                    try Validator.validate(email: email)
+                    try Validator.validate(email: state.trimmedEmail)
                 } catch {
                     state.isEmailInvalid = true
                     return emit(.showError(message: error.message))
@@ -56,8 +54,7 @@ extension RestoreSignup {
             case .restoreResponse(.success):
                 guard state.isRestoring else { return nil }
                 state.isRestoring = false
-                let email = state.email.trimmingCharacters(in: .whitespacesAndNewlines)
-                return emit(.didRestore(email: email))
+                return emit(.didRestore(email: state.trimmedEmail))
 
             case .restoreResponse(.failure(let error)):
                 guard state.isRestoring else { return nil }
@@ -72,11 +69,6 @@ extension RestoreSignup {
     }
 }
 
-extension RestoreSignupError {
-    var message: String {
-        switch self {
-        case .nothingToRestore: L10n.Account.Restore.Failure.message
-        case .failed(let message): message
-        }
-    }
+extension RestoreSignup.State {
+    fileprivate var trimmedEmail: String { email.trimmingCharacters(in: .whitespacesAndNewlines) }
 }

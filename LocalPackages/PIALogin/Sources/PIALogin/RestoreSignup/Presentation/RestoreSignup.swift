@@ -66,10 +66,3 @@ extension RestoreSignup {
         }
     }
 }
-
-public enum RestoreSignupError: Error, Equatable, Sendable {
-    /// No receipt, or one the backend rejected.
-    case nothingToRestore
-    /// Anything else, already localized.
-    case failed(message: String)
-}

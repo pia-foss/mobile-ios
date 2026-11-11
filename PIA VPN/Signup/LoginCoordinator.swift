@@ -95,11 +95,9 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
     /// Signs in with the token from a magic-link deep link.
     @MainActor
     func handleMagicLink(token: String) {
-        if let magicLinkContinuation {
-            magicLinkContinuation.yield(token)
-        } else {
-            pendingMagicLinkToken = token
-        }
+        // Kept for the next subscription when the screen is between streams.
+        if case .enqueued = magicLinkContinuation?.yield(token) { return }
+        pendingMagicLinkToken = token
     }
 
     /// Whether the login screen is still somewhere in the navigation stack.

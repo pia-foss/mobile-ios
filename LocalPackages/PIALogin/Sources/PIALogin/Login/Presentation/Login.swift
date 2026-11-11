@@ -41,11 +41,6 @@ extension Login {
         case password
     }
 
-    public enum Alert: Equatable, Sendable {
-        /// Restoring from the App Store receipt found nothing usable.
-        case badReceipt
-    }
-
     public struct State: Equatable, Sendable {
         public var username: String
         public var password: String
@@ -56,7 +51,8 @@ extension Login {
         public var retryAfter: [Method: Date]
         public var isMagicLinkPromptPresented: Bool
         public var magicLinkEmail: String
-        public var alert: Alert?
+        /// Restoring from the App Store receipt found nothing usable.
+        public var isBadReceiptAlertPresented: Bool
 
         public init(
             username: String = "",
@@ -66,7 +62,7 @@ extension Login {
             retryAfter: [Method: Date] = [:],
             isMagicLinkPromptPresented: Bool = false,
             magicLinkEmail: String = "",
-            alert: Alert? = nil
+            isBadReceiptAlertPresented: Bool = false
         ) {
             self.username = username
             self.password = password
@@ -75,7 +71,7 @@ extension Login {
             self.retryAfter = retryAfter
             self.isMagicLinkPromptPresented = isMagicLinkPromptPresented
             self.magicLinkEmail = magicLinkEmail
-            self.alert = alert
+            self.isBadReceiptAlertPresented = isBadReceiptAlertPresented
         }
     }
 

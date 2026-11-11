@@ -191,11 +191,11 @@ struct LoginStoreTests {
         _ = try #require(await sut.receive())
         await sut.finish()
 
-        #expect(sut.state.alert == .badReceipt)
+        #expect(sut.state.isBadReceiptAlertPresented)
         #expect(spy.emittedOutputs.isEmpty)
 
         sut.send(.alertDismissed)
-        #expect(sut.state.alert == nil)
+        #expect(!sut.state.isBadReceiptAlertPresented)
     }
 
     // MARK: Magic link

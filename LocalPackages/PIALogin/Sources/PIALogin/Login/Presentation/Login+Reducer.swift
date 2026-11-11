@@ -148,7 +148,7 @@ extension Login {
                 return fail(.magicLink, with: error, state: &state)
 
             case .alertDismissed:
-                state.alert = nil
+                state.isBadReceiptAlertPresented = false
                 return nil
             }
         }
@@ -184,14 +184,13 @@ extension Login {
                 return emit(.accountExpired)
 
             case .badReceipt:
-                state.alert = .badReceipt
+                state.isBadReceiptAlertPresented = true
                 return nil
 
-            case .throttled(let retryAfter):
-                state.retryAfter[method] = dependencies.now().addingTimeInterval(TimeInterval(retryAfter))
-                return emit(.showError(message: error.message, duration: nil))
-
             default:
+                if case .throttled(let retryAfter) = error {
+                    state.retryAfter[method] = dependencies.now().addingTimeInterval(TimeInterval(retryAfter))
+                }
                 return emit(.showError(message: error.message, duration: nil))
             }
         }

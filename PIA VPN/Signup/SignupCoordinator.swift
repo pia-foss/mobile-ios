@@ -36,7 +36,7 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
-final class SignupCoordinator: NSObject, FlowCoordinator {
+final class SignupCoordinator: NSObject, @MainActor FlowCoordinator {
 
     enum Output {
         /// The customer signed up or signed in. `isSignup` distinguishes the two, because an
@@ -178,15 +178,19 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
             accountProvider: accountProvider,
             store: Client.store
         )
+        // Replacing the cancellable drops the previous login flow's subscription.
         loginCancellable = coordinator.output.sink(
-            receiveCompletion: { [weak self, weak coordinator] _ in
-                guard let self, self.loginCoordinator === coordinator else { return }
-                self.loginCoordinator = nil
-                self.loginCancellable = nil
+            receiveCompletion: { [weak self] _ in
+                self?.loginCoordinator = nil
+                self?.loginCancellable = nil
             },
-            receiveValue: { [weak self] event in
-                guard case .didAuthenticate(let user, let isSignup, let topViewController) = event else { return }
-                self?.subject.send(.didAuthenticate(user: user, isSignup: isSignup, topViewController: topViewController))
+            receiveValue: { [weak self] output in
+                switch output {
+                case .didAuthenticate(let user, let isSignup, let topViewController):
+                    self?.subject.send(
+                        .didAuthenticate(user: user, isSignup: isSignup, topViewController: topViewController)
+                    )
+                }
             }
         )
         loginCoordinator = coordinator
