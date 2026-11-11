@@ -141,6 +141,13 @@
         "identifier" : "PIAVPNPermissionTests",
         "name" : "PIAVPNPermissionTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIALogin",
+        "identifier" : "PIALoginTests",
+        "name" : "PIALoginTests"
+      }
     }
   ],
   "version" : 1
