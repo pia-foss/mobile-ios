@@ -23,15 +23,17 @@ import Combine
 import CoreArchitecture
 import PIAAssetsMobile
 import PIALibrary
+import PIALocalizations
 import PIALogin
 import UIKit
 
 private let log = PIALogger.logger(for: LoginCoordinator.self)
 
-/// Pushes the login screen and reports once the customer is signed in.
+/// Pushes the login screen and the restore screen behind it, and reports once the customer is
+/// signed in.
 ///
-/// The expired-account and restore screens reachable from it are still the UIKit welcome flow;
-/// they report back through `PIAWelcomeViewControllerDelegate`.
+/// The expired-account purchase screen and the signup-in-progress screen are still UIKit; they
+/// report back through `PIAWelcomeViewControllerDelegate` and `WelcomeCompletionDelegate`.
 final class LoginCoordinator: @MainActor FlowCoordinator {
 
     enum Output {
@@ -39,7 +41,7 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
     }
 
     private weak var navigationController: UINavigationController?
-    private weak var host: LoginHostingController?
+    private weak var host: BrandedHostingController<LoginView>?
     private let accountProvider: AccountProvider
     private let store: InAppProvider
     private let subject = PassthroughSubject<Output, Never>()
@@ -84,7 +86,7 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
                 emit: { [weak self] in self?.handle($0) }
             )
         )
-        let host = LoginHostingController(rootView: view)
+        let host = BrandedHostingController(rootView: view)
         host.onFinish = { [subject] in subject.send(completion: .finished) }
         self.host = host
         navigationController.pushViewController(host, animated: true)
@@ -125,22 +127,38 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
             subject.send(.didAuthenticate(user: user, isSignup: false, topViewController: topViewController))
 
         case .accountExpired:
-            showWelcome(pages: .purchase, isExpired: true)
+            showExpiredPurchase()
 
         case .restorePurchaseRequested:
-            showWelcome(pages: .restore, isExpired: false)
+            showRestoreSignup()
 
         case .showError(let message, let duration):
-            Macros.displayImageNote(
-                withImage: Asset.iconWarning.image,
-                message: message,
-                andDuration: duration,
-                accessbilityIdentifier: Accessibility.Id.Login.Error.banner
-            )
+            showError(message, duration: duration)
 
         case .showMessage(let message):
             Macros.displaySuccessImageNote(withImage: Asset.iconWarning.image, message: message)
         }
+    }
+
+    @MainActor
+    private func handle(_ output: RestoreSignup.Output) {
+        switch output {
+        case .didRestore(let email):
+            showSignupInProgress(email: email)
+
+        case .showError(let message):
+            showError(message, duration: nil)
+        }
+    }
+
+    @MainActor
+    private func showError(_ message: String, duration: TimeInterval?) {
+        Macros.displayImageNote(
+            withImage: Asset.iconWarning.image,
+            message: message,
+            andDuration: duration,
+            accessbilityIdentifier: Accessibility.Id.Login.Error.banner
+        )
     }
 
     // MARK: Magic link
@@ -160,12 +178,52 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
 
     // MARK: Destinations
 
-    /// The legacy purchase (expired account) and restore screens.
+    /// "Didn't receive account details?" — re-sends them for a purchase whose signup never finished.
     @MainActor
-    private func showWelcome(pages: Pages, isExpired: Bool) {
+    private func showRestoreSignup() {
+        let accountProvider = accountProvider
+        let view = RestoreSignupView(
+            initialState: .init(email: AppConfiguration.Welcome.defaultPreset().purchaseEmail ?? ""),
+            dependencies: .live(
+                restorePurchases: {
+                    guard case .failure(let error) = await accountProvider.restorePurchases() else { return nil }
+                    return error
+                },
+                emit: { [weak self] in self?.handle($0) }
+            )
+        )
+        navigationController?.pushViewController(BrandedHostingController(rootView: view), animated: true)
+    }
+
+    /// Creates the account for the restored purchase, as the old `SignupViaRestoreSegue` did.
+    @MainActor
+    private func showSignupInProgress(email: String) {
+        let navigation = StoryboardScene.Signup.initialScene.instantiate()
+        guard let controller = navigation.topViewController as? SignupInProgressViewController else {
+            log.error("Signup storyboard did not produce a SignupInProgressViewController")
+            return
+        }
+
+        var metadata = SignupMetadata(email: email)
+        metadata.title = L10n.Signup.InProgress.title
+        metadata.bodySubtitle = L10n.Signup.InProgress.message
+        controller.config = .init(
+            metadata: metadata,
+            accountProvider: accountProvider,
+            signupRequest: SignupRequest(email: email),
+            completionDelegate: self
+        )
+
+        navigation.modalPresentationStyle = .fullScreen
+        navigationController?.present(navigation, animated: true)
+    }
+
+    /// The legacy purchase screen for an expired account.
+    @MainActor
+    private func showExpiredPurchase() {
         var preset = AppConfiguration.Welcome.defaultPreset()
-        preset.pages = pages
-        preset.isExpired = isExpired
+        preset.pages = .purchase
+        preset.isExpired = true
         preset.shouldRecoverPendingSignup = false
 
         let controller = StoryboardScene.Welcome.piaWelcomeViewController.instantiate()
@@ -191,6 +249,19 @@ extension LoginCoordinator: PIAWelcomeViewControllerDelegate {
         didSignupWith user: UserAccount,
         topViewController: UIViewController
     ) {
+        subject.send(.didAuthenticate(user: user, isSignup: true, topViewController: topViewController))
+    }
+}
+
+// MARK: - WelcomeCompletionDelegate
+
+/// How the signup-in-progress screen reports back after a restore.
+extension LoginCoordinator: WelcomeCompletionDelegate {
+    func welcomeDidLogin(withUser user: UserAccount, topViewController: UIViewController) {
+        subject.send(.didAuthenticate(user: user, isSignup: false, topViewController: topViewController))
+    }
+
+    func welcomeDidSignup(withUser user: UserAccount, topViewController: UIViewController) {
         subject.send(.didAuthenticate(user: user, isSignup: true, topViewController: topViewController))
     }
 }

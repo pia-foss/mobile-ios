@@ -47,15 +47,6 @@ final class WelcomePageViewController: UIPageViewController {
                 ))
             source.append(vc)
         }
-        if config.pages.contains(.restore) {
-            let vc = RestoreSignupViewController.with(
-                config: .init(
-                    purchaseEmail: config.purchaseEmail,
-                    accountProvider: config.accountProvider,
-                    completionDelegate: config.completionDelegate,
-                ))
-            source.append(vc)
-        }
         dataSource = self
 
         guard !source.isEmpty else {
@@ -124,9 +115,6 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
 
 extension WelcomePageViewController {
     struct Config {
-        /// The purchase email address.
-        let purchaseEmail: String?
-
         /// If `true`, shows variations based on the user expiration.
         let isExpired: Bool
 

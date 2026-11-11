@@ -42,11 +42,13 @@ extension Login {
                 }
 
             case .usernameChanged(let username):
+                guard username != state.username else { return nil }
                 state.username = username
                 state.invalidFields.remove(.username)
                 return nil
 
             case .passwordChanged(let password):
+                guard password != state.password else { return nil }
                 state.password = password
                 state.invalidFields.remove(.password)
                 return nil
@@ -192,15 +194,6 @@ extension Login {
             default:
                 return emit(.showError(message: error.message, duration: nil))
             }
-        }
-    }
-}
-
-extension Validator.EmailValidationError {
-    fileprivate var message: String {
-        switch self {
-        case .emailIsEmpty: L10n.Email.Validation.empty
-        case .emailIsInvalid: L10n.Email.Validation.invalid
         }
     }
 }

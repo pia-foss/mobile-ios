@@ -1,5 +1,5 @@
 //
-//  LoginHostingController.swift
+//  BrandedHostingController.swift
 //  PIA VPN
 //
 //  Copyright © 2026 Private Internet Access, Inc.
@@ -20,14 +20,12 @@
 //
 
 import PIALibrary
-import PIALocalizations
-import PIALogin
 import PIAUIKit
 import SwiftUI
 import UIKit
 
-/// Hosts the SwiftUI login screen under the branded logo bar the signup flow uses.
-final class LoginHostingController: UIHostingController<LoginView>, Restylable {
+/// Hosts a SwiftUI sign-in screen under the branded logo bar the signup flow uses.
+final class BrandedHostingController<Content: View>: UIHostingController<Content>, Restylable {
     /// Runs once, when the screen leaves the navigation stack.
     var onFinish: (() -> Void)?
 

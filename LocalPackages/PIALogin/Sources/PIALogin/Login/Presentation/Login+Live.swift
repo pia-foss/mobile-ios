@@ -59,7 +59,7 @@ extension Login.Dependencies {
             requestMagicLink: { email in
                 await withCheckedContinuation { continuation in
                     accountProvider.loginUsingMagicLink(withEmail: email) { result in
-                        continuation.resume(returning: result.map { Login.Success() }.mapError(LoginError.init))
+                        continuation.resume(returning: result.map { Success() }.mapError(LoginError.init))
                     }
                 }
             },

@@ -96,11 +96,6 @@ extension Login {
         case alertDismissed
     }
 
-    /// `Void` is not `Equatable`, so successful requests that return nothing carry this instead.
-    public struct Success: Equatable, Sendable {
-        public init() {}
-    }
-
     /// Everything the screen asks its host to do.
     public enum Output: Equatable, Sendable {
         case didLogin(UserAccount)

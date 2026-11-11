@@ -31,11 +31,8 @@ public struct Pages: OptionSet, Sendable {
     /// The direct purchase plan page.
     public static let directPurchase = Pages(rawValue: 1 << 2)
 
-    /// The restore page.
-    public static let restore = Pages(rawValue: 1 << 3)
-
     /// All pages.
-    public static let all: Pages = [.purchase, .directPurchase, .restore]
+    public static let all: Pages = [.purchase, .directPurchase]
 
     /// :nodoc:
     public let rawValue: Int

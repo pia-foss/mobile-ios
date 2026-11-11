@@ -28,7 +28,6 @@ import SwiftUI
 /// Signs in with a username and password, an App Store receipt or a magic email link.
 public struct LoginView: View {
     private enum Metrics {
-        static let fieldHeight: CGFloat = 50
         static let fieldSpacing: CGFloat = 15
         /// Keeps the column readable on iPad, Mac Catalyst and the unfolded iPhone Duo.
         static let maxContentWidth: CGFloat = 480
@@ -128,10 +127,9 @@ public struct LoginView: View {
     }
 
     private func fieldStyle(_ field: Login.Field) -> some ViewModifier {
-        LoginFieldStyle(
+        FormFieldStyle(
             isFocused: focusedField == field,
-            isInvalid: store.state.invalidFields.contains(field),
-            height: Metrics.fieldHeight
+            isInvalid: store.state.invalidFields.contains(field)
         )
     }
 
@@ -147,26 +145,6 @@ public struct LoginView: View {
 
 extension Login.State {
     fileprivate var isBadReceiptAlertPresented: Bool { alert == .badReceipt }
-}
-
-private struct LoginFieldStyle: ViewModifier {
-    let isFocused: Bool
-    let isInvalid: Bool
-    let height: CGFloat
-
-    func body(content: Content) -> some View {
-        content
-            .typography(.body2, color: .pia.onSurface)
-            .padding(.horizontal, PIASpacing.s16)
-            .frame(height: height)
-            .modifier(
-                TextFieldModifier(
-                    isFocused: isFocused || isInvalid,
-                    outline: .pia.outline,
-                    focusedOutline: isInvalid ? .pia.error : .pia.primary
-                )
-            )
-    }
 }
 
 /// Asks for the email to send the sign-in link to.
@@ -216,7 +194,7 @@ private struct MagicLinkSheet: View {
                 .submitLabel(.send)
                 .focused($isFocused)
                 .onSubmit(send)
-                .modifier(LoginFieldStyle(isFocused: isFocused, isInvalid: false, height: 50))
+                .modifier(FormFieldStyle(isFocused: isFocused, isInvalid: false))
 
             Button(action: send) {
                 Text(L10n.Welcome.Login.Magic.Link.send).typography(.button1)
@@ -253,7 +231,7 @@ private extension Login.Dependencies {
             login: { _ in .failure(.unauthorized) },
             loginWithReceipt: { .failure(.badReceipt) },
             loginWithMagicLinkToken: { _ in .failure(.unauthorized) },
-            requestMagicLink: { _ in .success(Login.Success()) },
+            requestMagicLink: { _ in .success(Success()) },
             magicLinkTokens: { AsyncStream { $0.finish() } },
             emit: { _ in }
         )

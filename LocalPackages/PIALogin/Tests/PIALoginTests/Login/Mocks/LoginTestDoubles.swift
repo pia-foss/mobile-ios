@@ -29,7 +29,7 @@ final class LoginDependencySpy {
     var loginResult: Result<UserAccount, LoginError> = .success(.stub)
     var receiptResult: Result<UserAccount, LoginError> = .success(.stub)
     var tokenResult: Result<UserAccount, LoginError> = .success(.stub)
-    var magicLinkResult: Result<Login.Success, LoginError> = .success(Login.Success())
+    var magicLinkResult: Result<Success, LoginError> = .success(Success())
     nonisolated(unsafe) var now = Date(timeIntervalSince1970: 1_000)
 
     private(set) var loggedInCredentials: [Credentials] = []
