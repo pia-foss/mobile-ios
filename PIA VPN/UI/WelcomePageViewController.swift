@@ -38,29 +38,10 @@ final class WelcomePageViewController: UIPageViewController {
             return
         }
 
-        if config.pages.contains(.login) {
-            let vc = LoginViewController.with(
-                config: .init(
-                    loginUsername: config.loginUsername,
-                    loginPassword: config.loginPassword,
-                    accountProvider: config.accountProvider,
-                    completionDelegate: config.completionDelegate,
-                ))
-            source.append(vc)
-        }
         if config.pages.contains(.purchase) {
             let vc = PurchaseViewController.with(
                 config: .init(
                     isExpired: config.isExpired,
-                    accountProvider: config.accountProvider,
-                    completionDelegate: config.completionDelegate,
-                ))
-            source.append(vc)
-        }
-        if config.pages.contains(.restore) {
-            let vc = RestoreSignupViewController.with(
-                config: .init(
-                    purchaseEmail: config.purchaseEmail,
                     accountProvider: config.accountProvider,
                     completionDelegate: config.completionDelegate,
                 ))
@@ -88,37 +69,6 @@ final class WelcomePageViewController: UIPageViewController {
 
     }
 
-    func show(page: Pages) {
-
-        // XXX: quick temp solution for log2
-        let index: Int
-        switch page {
-        case .login:
-            index = 0
-
-        case .purchase:
-            index = 1
-
-        case .restore:
-            index = 3
-
-        default:
-            return
-        }
-
-        guard (index < source.count) else {
-            log.error("Page \(index) beyond source controllers (\(source.count))")
-            return
-        }
-        guard let vc = viewControllers?.first, let currentIndex = source.firstIndex(of: vc) else {
-            log.error("No page displayed yet")
-            return
-        }
-        let controller = source[index]
-        let direction: UIPageViewController.NavigationDirection = (index > currentIndex) ? .forward : .reverse
-        setViewControllers([controller], direction: direction, animated: true, completion: nil)
-    }
-
     // MARK: Unwind
 
     @IBAction private func unwoundSignupFailure(segue: UIStoryboardSegue) {
@@ -130,12 +80,7 @@ final class WelcomePageViewController: UIPageViewController {
         guard let window = view.window else {
             return super.traitCollection
         }
-        let minHeight: CGFloat
-        if childViewController is LoginViewController {
-            minHeight = 568.0
-        } else {
-            minHeight = 667.0
-        }
+        let minHeight: CGFloat = 667.0
         if traitCollection.verticalSizeClass == .compact || (window.bounds.size.height < minHeight) {
             return UITraitCollection(verticalSizeClass: .compact)
         } else {
@@ -170,15 +115,6 @@ extension WelcomePageViewController: UIPageViewControllerDataSource {
 
 extension WelcomePageViewController {
     struct Config {
-        /// The login username.
-        let loginUsername: String?
-
-        /// The login password.
-        let loginPassword: String?
-
-        /// The purchase email address.
-        let purchaseEmail: String?
-
         /// If `true`, shows variations based on the user expiration.
         let isExpired: Bool
 

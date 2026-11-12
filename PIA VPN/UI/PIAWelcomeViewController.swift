@@ -126,9 +126,6 @@ public class PIAWelcomeViewController: AutolayoutViewController, WelcomeCompleti
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? WelcomePageViewController {
             vc.config = WelcomePageViewController.Config(
-                loginUsername: preset.loginUsername,
-                loginPassword: preset.loginPassword,
-                purchaseEmail: preset.purchaseEmail,
                 isExpired: preset.isExpired,
                 accountProvider: preset.accountProvider,
                 pages: preset.pages,
