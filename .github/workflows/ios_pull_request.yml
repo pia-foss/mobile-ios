@@ -90,9 +90,6 @@ jobs:
 
     - name: Run iOS unit tests
       uses: nick-fields/retry@v4
-      env:
-        FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
-        FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 3
       with:
         timeout_minutes: 20
         max_attempts: 2
