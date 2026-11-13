@@ -59,10 +59,10 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
             dependencies: .init(
                 loadPreferences: { [weak self] in self?.preferences() ?? .init(killSwitch: false, reconnectNotifications: false) },
                 isAutomationEnabled: { Client.preferences.nmtRulesEnabled },
-                preferencesChanges: { Self.notifications(named: .PIASettingsHaveChanged) },
+                preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 savePreferences: { [weak self] in self?.save($0) },
                 isContentBlockerEnabled: { await Self.isContentBlockerEnabled() },
-                appDidBecomeActive: { Self.notifications(named: UIApplication.didBecomeActiveNotification) },
+                appDidBecomeActive: { NotificationCenter.default.signals(named: UIApplication.didBecomeActiveNotification) },
                 reloadContentBlocker: { await Self.reloadContentBlocker() },
                 showContentBlockerTutorial: { [weak self] in self?.showContentBlockerTutorial() },
             )
@@ -101,17 +101,6 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
             })
         tutorial.isModalInPresentation = true
         host.present(tutorial, animated: true)
-    }
-
-    private static func notifications(named name: Notification.Name) -> AsyncStream<Void> {
-        AsyncStream { continuation in
-            let task = Task {
-                for await _ in NotificationCenter.default.notifications(named: name) {
-                    continuation.yield()
-                }
-            }
-            continuation.onTermination = { _ in task.cancel() }
-        }
     }
 
     private static func isContentBlockerEnabled() async -> Bool {
