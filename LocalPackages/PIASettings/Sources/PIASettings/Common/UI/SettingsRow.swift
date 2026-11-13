@@ -120,13 +120,15 @@ struct SettingsNavigationRow: View {
                         Text(value)
                             .typography(.body2, color: .pia.onSurfaceContainerSecondary)
                     }
-                    if isLoading {
+                    ZStack(alignment: .trailing) {
                         ProgressView()
-                    } else {
+                            .opacity(isLoading ? 1 : 0)
                         Image(systemName: "chevron.right")
                             .font(.footnote.weight(.semibold))
                             .foregroundColor(.pia.onSurfaceContainerSecondary)
+                            .opacity(isLoading ? 0 : 1)
                     }
+                    .animation(nil, value: isLoading)
                 }
             }
             .content
