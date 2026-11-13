@@ -65,6 +65,7 @@ public struct NetworkSettingsView: View, ViewWithTitle {
                 Button(L10n.Global.ok) {
                     store.send(.customDNSWarningConfirmed)
                 }
+                .keyboardShortcut(.defaultAction)
                 Button(L10n.Global.cancel, role: .cancel) {}
             },
             message: {

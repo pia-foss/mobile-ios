@@ -22,20 +22,28 @@
 import PIADesignSystem
 import SwiftUI
 
+struct SettingsLink {
+    let title: String
+    let action: () -> Void
+}
+
 struct SettingsRow<Accessory: View>: View {
     private let title: String
     private let description: String?
+    private let link: SettingsLink?
     private let accessory: Accessory
     private let isLabelAccessibilityHidden: Bool
 
     init(
         _ title: String,
         description: String? = nil,
+        link: SettingsLink? = nil,
         isLabelAccessibilityHidden: Bool = false,
         @ViewBuilder accessory: () -> Accessory
     ) {
         self.title = title
         self.description = description
+        self.link = link
         self.isLabelAccessibilityHidden = isLabelAccessibilityHidden
         self.accessory = accessory()
     }
@@ -48,17 +56,28 @@ struct SettingsRow<Accessory: View>: View {
     var content: some View {
         HStack(spacing: PIASpacing.s12) {
             VStack(alignment: .leading, spacing: PIASpacing.s4) {
-                Text(title)
-                    .typography(.body1, color: .pia.onSurface)
-                if let description {
-                    Text(description)
-                        .typography(.caption1, color: .pia.onSurfaceContainerSecondary)
+                VStack(alignment: .leading, spacing: PIASpacing.s4) {
+                    Text(title)
+                        .typography(.body1, color: .pia.onSurface)
+                    if let description {
+                        Text(description)
+                            .typography(.caption1, color: .pia.onSurfaceContainerSecondary)
+                    }
+                }
+                .accessibilityHidden(isLabelAccessibilityHidden)
+
+                if let link {
+                    Button(action: link.action) {
+                        Text(link.title)
+                            .underline()
+                            .typography(.caption1, color: .pia.onSurfaceContainerSecondary)
+                    }
+                    .buttonStyle(.borderless)
                 }
             }
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)
-            .accessibilityHidden(isLabelAccessibilityHidden)
 
             accessory
         }
@@ -72,10 +91,11 @@ struct SettingsRow<Accessory: View>: View {
 struct SettingsToggleRow: View {
     let title: String
     var description: String? = nil
+    var link: SettingsLink? = nil
     @Binding var isOn: Bool
 
     var body: some View {
-        SettingsRow(title, description: description, isLabelAccessibilityHidden: true) {
+        SettingsRow(title, description: description, link: link, isLabelAccessibilityHidden: true) {
             Toggle(title, isOn: $isOn)
                 .labelsHidden()
                 .piaToggleStyle()
@@ -89,6 +109,7 @@ struct SettingsNavigationRow: View {
     let title: String
     var description: String? = nil
     var value: String? = nil
+    var isLoading = false
     let action: () -> Void
 
     var body: some View {
@@ -99,9 +120,13 @@ struct SettingsNavigationRow: View {
                         Text(value)
                             .typography(.body2, color: .pia.onSurfaceContainerSecondary)
                     }
-                    Image(systemName: "chevron.right")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundColor(.pia.onSurfaceContainerSecondary)
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        Image(systemName: "chevron.right")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundColor(.pia.onSurfaceContainerSecondary)
+                    }
                 }
             }
             .content
@@ -159,6 +184,17 @@ struct SettingsMenuRow<Option: Hashable>: View {
             .accessibilityValue(label(selection))
         }
         .opacity(isEnabled ? 1 : 0.5)
+    }
+}
+
+struct SettingsGap: View {
+    var body: some View {
+        Color.clear
+            .frame(height: PIASpacing.s40)
+            .listRowInsets(EdgeInsets())
+            .listRowBackground(Color.pia.background)
+            .listRowSeparator(.hidden)
+            .accessibilityHidden(true)
     }
 }
 
