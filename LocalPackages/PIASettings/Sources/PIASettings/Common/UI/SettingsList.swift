@@ -34,6 +34,7 @@ struct SettingsList<Content: View>: View {
             content
         }
         .listStyle(.plain)
+        .environment(\.defaultMinListRowHeight, 0)
         .hideScrollContentBackground()
         .background(Color.pia.background.ignoresSafeArea())
     }
