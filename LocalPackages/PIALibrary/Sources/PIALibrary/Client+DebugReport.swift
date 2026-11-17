@@ -42,4 +42,26 @@ extension Client {
             vpnConnection: vpnConnection
         )
     }
+
+    /// Builds the CSI debug report that `submitDebugReport()` would send, without submitting it, so
+    /// a review screen can show exactly what is about to leave the device. Pair it with
+    /// `submitDebugReport(_:)` below to guarantee the submitted content matches what was shown.
+    public static func buildDebugReport(
+        includeDebug: Bool,
+        redactIPs: Bool,
+        includeTunnelLog: Bool = false,
+        vpnConnection: VPNConnectionInformation? = nil
+    ) async -> DebugReport {
+        await PIAWebServices().buildDebugReport(
+            includeDebug: includeDebug,
+            redactIPs: redactIPs,
+            includeTunnelLog: includeTunnelLog,
+            vpnConnection: vpnConnection
+        )
+    }
+
+    /// Submits a report that was previously built, e.g. after the user reviewed it.
+    public static func submitDebugReport(_ report: DebugReport) async throws -> String {
+        try await PIAWebServices().submit(report: report)
+    }
 }

@@ -35,13 +35,9 @@ public struct HelpSettingsView: View, ViewWithTitle {
 
     public var body: some View {
         SettingsList {
-            SettingsNavigationRow(
-                title: L10n.Settings.ApplicationInformation.Debug.title,
-                isLoading: store.state.isSubmittingDebugReport
-            ) {
+            SettingsNavigationRow(title: L10n.Settings.ApplicationInformation.Debug.title) {
                 store.send(.sendDebugReportTapped)
             }
-            .disabled(store.state.isSubmittingDebugReport)
 
             SettingsToggleRow(
                 title: L10n.Settings.ApplicationInformation.DebugLogging.title,
@@ -76,41 +72,6 @@ public struct HelpSettingsView: View, ViewWithTitle {
             SettingsRow(store.state.version) {
                 EmptyView()
             }
-        }
-        .alert(
-            store.state.debugReport?.title ?? "",
-            isPresented: store.binding(\.isDebugReportPresented) { _ in .debugReportDismissed },
-            presenting: store.state.debugReport,
-            actions: { report in
-                if case .submitted(let id) = report {
-                    Button(L10n.Settings.ApplicationInformation.Debug.Success.copyId) {
-                        store.send(.copyDebugReportIDTapped(id))
-                    }
-                    .keyboardShortcut(.defaultAction)
-                }
-                Button(L10n.Global.close, role: .cancel) {}
-            },
-            message: { report in
-                Text(report.message)
-            }
-        )
-    }
-}
-
-extension HelpSettings.DebugReport {
-    fileprivate var title: String {
-        switch self {
-        case .submitted: L10n.Settings.ApplicationInformation.Debug.Success.title
-        case .empty: L10n.Settings.ApplicationInformation.Debug.Empty.title
-        case .failed: L10n.Settings.ApplicationInformation.Debug.Failure.title
-        }
-    }
-
-    fileprivate var message: String {
-        switch self {
-        case .submitted(let id): L10n.Settings.ApplicationInformation.Debug.Success.message(id)
-        case .empty: L10n.Settings.ApplicationInformation.Debug.Empty.message
-        case .failed: L10n.Settings.ApplicationInformation.Debug.Failure.message
         }
     }
 }

@@ -25,8 +25,6 @@ import PIALibrary
 import PIASettings
 import UIKit
 
-private let log = PIALogger.logger(for: HelpSettingsCoordinator.self)
-
 final class HelpSettingsCoordinator: @MainActor FlowCoordinator {
     private weak var parent: UINavigationController?
     private weak var host: UIViewController?
@@ -58,10 +56,8 @@ final class HelpSettingsCoordinator: @MainActor FlowCoordinator {
             ),
             dependencies: .init(
                 setDebugLogging: { [weak self] in self?.pendingPreferences?.debugLogging = $0 },
-                clearLogs: { PIALogHandler.logStorage.clear() },
                 setSharesServiceQualityData: { [weak self] in self?.setSharesServiceQualityData($0) },
-                submitDebugReport: { try await Self.submitDebugReport() },
-                copyToPasteboard: { UIPasteboard.general.string = $0 },
+                showDebugReport: { [weak self] in self?.showDebugReport() },
                 showServiceQualityInformation: { [weak self] in self?.showServiceQualityInformation() },
                 showServiceQualityEvents: { [weak self] in self?.showServiceQualityEvents() },
                 showLatestNews: { [weak self] in self?.showLatestNews() },
@@ -83,16 +79,12 @@ final class HelpSettingsCoordinator: @MainActor FlowCoordinator {
         #endif
     }
 
-    private static func submitDebugReport() async throws -> String {
-        do {
-            let id = try await Client.submitDebugReport()
-            if id.isEmpty {
-                log.warning("CSI report ID was empty")
-            }
-            return id
-        } catch {
-            log.error("Failed to submit debug report: \(error)")
-            throw error
+    @MainActor
+    private func showDebugReport() {
+        guard let host else { return }
+        let coordinator = DebugReportCoordinator(presenter: host)
+        Task {
+            await coordinator.startAsync()
         }
     }
 
