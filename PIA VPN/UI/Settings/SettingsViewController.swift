@@ -523,7 +523,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .protocols:
             showProtocolSettings()
         case .network:
-            self.perform(segue: StoryboardSegue.Main.networkSettingsSegue, sender: nil)
+            showNetworkSettings()
         case .privacyFeatures:
             self.perform(segue: StoryboardSegue.Main.privacyFeaturesSettingsSegue, sender: nil)
         case .automation:
@@ -562,6 +562,18 @@ extension SettingsViewController {
     private func showProtocolSettings() {
         guard let navigationController else { return }
         let coordinator = ProtocolSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showNetworkSettings() {
+        guard let navigationController else { return }
+        let coordinator = NetworkSettingsCoordinator(
             parent: navigationController,
             pendingPreferences: pendingPreferences,
             settingsDelegate: self

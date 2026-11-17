@@ -281,10 +281,6 @@ extension PrivacyFeaturesSettingsViewController: UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    @objc private func edit(_ sender: Any?) {
-        self.perform(segue: StoryboardSegue.Main.customDNSSegueIdentifier)
-    }
-
     private func refreshContentBlockerRules() {
         self.showLoadingAnimation()
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: AppConstants.Extensions.adBlockerBundleIdentifier) { (error) in

@@ -16,10 +16,8 @@ internal enum StoryboardSegue {
     internal enum Main: String, SegueType {
         case automationSettingsSegue = "AutomationSettingsSegue"
         case contentBlockerSegueIdentifier = "ContentBlockerSegueIdentifier"
-        case customDNSSegueIdentifier = "CustomDNSSegueIdentifier"
         case developmentSettingsSegue = "DevelopmentSettingsSegue"
         case helpSettingsSegue = "HelpSettingsSegue"
-        case networkSettingsSegue = "NetworkSettingsSegue"
         case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"
         case serviceQualityDataSegueIdentifier = "ServiceQualityDataSegueIdentifier"
         case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
