@@ -69,18 +69,6 @@ public enum SettingOptions: Int, CaseIterable {
         case .development: return Asset.Piax.Settings.iconGeneral.image
         }
     }
-
-    public func sectionsForSetting() -> [SettingSection] {
-        switch self {
-        case .general: return GeneralSections.allCases
-        case .protocols: return ProtocolsSections.allCases
-        case .network: return NetworkSections.allCases
-        case .privacyFeatures: return PrivacyFeaturesSections.allCases
-        case .automation: return AutomationSections.allCases
-        case .help: return HelpSections.all()
-        case .development: return DevelopmentSections.allCases
-        }
-    }
 }
 
 public protocol SettingSection {
@@ -208,47 +196,6 @@ public enum AutomationSections: Int, CaseIterable, SettingSection {
         case .manageAutomation: return ""
         }
     }
-}
-
-public enum HelpSections: Int, SettingSection {
-
-    case sendDebugLogs
-    case debugLogging
-    case kpiShareStatistics
-    case kpiViewEvents
-    case latestNews
-    case version
-
-    public func localizedTitleMessage() -> String {
-        switch self {
-        case .sendDebugLogs: return L10n.Settings.ApplicationInformation.Debug.title
-        case .debugLogging: return L10n.Settings.ApplicationInformation.DebugLogging.title
-        case .kpiShareStatistics: return L10n.Settings.Service.Quality.Share.title
-        case .kpiViewEvents: return L10n.Settings.Service.Quality.Show.title
-        case .latestNews: return L10n.Settings.Cards.History.title
-        case .version: return L10n.Global.version
-        }
-    }
-
-    public func localizedSubtitleMessage() -> String {
-        switch self {
-        case .sendDebugLogs: return ""
-        case .debugLogging: return ""
-        case .kpiShareStatistics: return ""
-        case .kpiViewEvents: return ""
-        case .latestNews: return ""
-        case .version: return ""
-        }
-    }
-
-    public static func all() -> [Self] {
-        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .latestNews, .version]
-    }
-
-    public static func allWithEvents() -> [Self] {
-        return [.sendDebugLogs, .debugLogging, .kpiShareStatistics, .kpiViewEvents, .latestNews, .version]
-    }
-
 }
 
 public enum DevelopmentSections: Int, CaseIterable, SettingSection {

@@ -529,7 +529,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .automation:
             self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
         case .help:
-            self.perform(segue: StoryboardSegue.Main.helpSettingsSegue, sender: nil)
+            showHelpSettings()
         case .development:
             self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
@@ -565,6 +565,17 @@ extension SettingsViewController {
             parent: navigationController,
             pendingPreferences: pendingPreferences,
             settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showHelpSettings() {
+        guard let navigationController else { return }
+        let coordinator = HelpSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences
         )
         Task {
             await coordinator.startAsync()
