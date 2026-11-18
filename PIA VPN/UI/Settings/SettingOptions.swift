@@ -149,22 +149,3 @@ public enum NetworkSections: Int, CaseIterable, SettingSection {
         }
     }
 }
-
-public enum AutomationSections: Int, CaseIterable, SettingSection {
-    case automation
-    case manageAutomation
-
-    public func localizedTitleMessage() -> String {
-        switch self {
-        case .automation: return L10n.Network.Management.Tool.Enable.automation
-        case .manageAutomation: return L10n.Network.Management.Tool.title
-        }
-    }
-
-    public func localizedSubtitleMessage() -> String {
-        switch self {
-        case .automation: return ""
-        case .manageAutomation: return ""
-        }
-    }
-}
