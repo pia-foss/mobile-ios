@@ -518,7 +518,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .privacyFeatures:
             showPrivacyFeaturesSettings()
         case .automation:
-            self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
+            showAutomationSettings()
         case .help:
             showHelpSettings()
         default:
@@ -574,6 +574,18 @@ extension SettingsViewController {
     private func showPrivacyFeaturesSettings() {
         guard let navigationController else { return }
         let coordinator = PrivacyFeaturesSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showAutomationSettings() {
+        guard let navigationController else { return }
+        let coordinator = AutomationSettingsCoordinator(
             parent: navigationController,
             pendingPreferences: pendingPreferences,
             settingsDelegate: self
