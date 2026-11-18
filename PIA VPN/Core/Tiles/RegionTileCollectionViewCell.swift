@@ -43,10 +43,6 @@ class RegionTileCollectionViewCell: UICollectionViewCell, TileableCell {
         return tile.hasDetailView()
     }
 
-    func segueIdentifier() -> String? {
-        return tile.detailSegueIdentifier
-    }
-
     func setupCellForStatus(_ status: TileStatus) {
         self.accessibilityIdentifier = "RegionTileCollectionViewCell"
         self.accessibilityLabel = L10n.Tiles.Region.title

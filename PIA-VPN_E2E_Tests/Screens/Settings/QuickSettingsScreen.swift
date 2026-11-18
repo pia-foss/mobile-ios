@@ -10,11 +10,11 @@ import XCTest
 
 extension XCUIApplication {
     var vpnKillSwitchString: String { getString(key: "settings.application_settings.kill_switch.title", comment: "VPN Kill Switch") }
-    var vpnKillSwitchQuickSettings: XCUIElement { cells.containing(.staticText, identifier: vpnKillSwitchString).firstMatch.switches.firstMatch }
-    var networkManagementString: String { getString(key: "tiles.quicksetting.nmt.title", comment: "Network Management") }
-    var networkManagementQuickSettings: XCUIElement { cells.containing(.staticText, identifier: networkManagementString).firstMatch.switches.firstMatch }
+    var vpnKillSwitchQuickSettings: XCUIElement { switches(with: vpnKillSwitchString) }
+    var networkManagementString: String { getString(key: "tiles.quicksetting.automation.title", comment: "Automation") }
+    var networkManagementQuickSettings: XCUIElement { switches(with: networkManagementString) }
     var privateBrowserString: String { getString(key: "tiles.quicksetting.private.browser.title", comment: "Private Browser") }
-    var privateBrowserQuickSettings: XCUIElement { cells.containing(.staticText, identifier: privateBrowserString).firstMatch.switches.firstMatch }
+    var privateBrowserQuickSettings: XCUIElement { switches(with: privateBrowserString) }
 
     func navigateToQuickSettings() {
         guard quickSettingsButton.waitForExistence(timeout: defaultTimeout) else { return }

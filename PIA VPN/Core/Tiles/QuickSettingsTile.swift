@@ -30,7 +30,6 @@ import UIKit
 final class QuickSettingsTile: UIView, Tileable {
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal
 
     @IBOutlet private weak var tileTitle: UILabel!
@@ -59,8 +58,6 @@ final class QuickSettingsTile: UIView, Tileable {
     }
 
     private func setupView() {
-
-        self.detailSegueIdentifier = StoryboardSegue.Main.showQuickSettingsViewController.rawValue
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)

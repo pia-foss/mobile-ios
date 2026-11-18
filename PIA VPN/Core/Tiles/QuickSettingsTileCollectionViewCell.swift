@@ -43,10 +43,6 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
         return tile.hasDetailView()
     }
 
-    func segueIdentifier() -> String? {
-        return tile.detailSegueIdentifier
-    }
-
     func setupCellForStatus(_ status: TileStatus) {
         self.accessibilityIdentifier = "QuickSettingsTileCollectionViewCell"
         Theme.current.applyPrincipalBackground(self)

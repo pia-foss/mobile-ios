@@ -34,7 +34,6 @@ final class IPTile: UIView, Tileable {
 
     private let emptyIPValue = "---"
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal
 
     private var cancellables = Set<AnyCancellable>()

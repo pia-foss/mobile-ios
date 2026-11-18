@@ -29,7 +29,6 @@ import UIKit
 class SubscriptionTile: UIView, Tileable {
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal
 
     @IBOutlet private weak var subscriptionTitle: UILabel!

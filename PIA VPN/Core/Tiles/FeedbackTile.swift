@@ -27,7 +27,6 @@ import UIKit
 
 class FeedbackTile: UIView, Tileable {
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
         didSet {
             statusUpdated()

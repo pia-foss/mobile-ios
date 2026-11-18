@@ -5,7 +5,6 @@ import UIKit
 
 class PromoOfferTile: UIView, Tileable {
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
         didSet { statusUpdated() }
     }

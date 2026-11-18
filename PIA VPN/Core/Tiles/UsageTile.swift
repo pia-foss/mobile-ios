@@ -30,7 +30,6 @@ import UIKit
 class UsageTile: UIView, Tileable {
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal
 
     @IBOutlet private weak var usageTitle: UILabel!

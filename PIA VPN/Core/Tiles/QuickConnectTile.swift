@@ -36,7 +36,6 @@ class QuickConnectTile: UIView, Tileable {
     private let maxElementsInArray = 6
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
         didSet {
             statusUpdated()

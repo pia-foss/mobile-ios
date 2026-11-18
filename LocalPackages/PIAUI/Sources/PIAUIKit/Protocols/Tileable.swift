@@ -29,7 +29,6 @@ typealias Func = () -> Void
 public protocol Tileable {
 
     var view: UIView! { get set }
-    var detailSegueIdentifier: String! { get set }
     var status: TileStatus { get set }
 
     func isEditable() -> Bool

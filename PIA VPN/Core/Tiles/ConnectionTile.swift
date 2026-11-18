@@ -29,7 +29,6 @@ import WidgetKit
 class ConnectionTile: UIView, Tileable {
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
         didSet {
             statusUpdated()

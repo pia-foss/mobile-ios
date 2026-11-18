@@ -33,7 +33,6 @@ public protocol EditableTileCell {
 public protocol DetailedTileCell: EditableTileCell {
 
     func hasDetailView() -> Bool
-    func segueIdentifier() -> String?
     func highlightCell()
     func unhighlightCell()
 
@@ -63,10 +62,6 @@ public extension TileableCell where Entity: Tileable {
 
     func hasDetailView() -> Bool {
         return false
-    }
-
-    func segueIdentifier() -> String? {
-        return nil
     }
 
     func highlightCell() {

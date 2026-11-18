@@ -671,6 +671,13 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
+    private func openQuickSettings() {
+        let coordinator = ShowQuickSettingsCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
 
@@ -1249,11 +1256,8 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.cellForItem(at: indexPath)
             if cell is RegionTileCollectionViewCell {
                 selectRegion(animated: true)
-            } else if let detailedCell = cell as? DetailedTileCell,
-                detailedCell.hasDetailView(),
-                let segueIdentifier = detailedCell.segueIdentifier()
-            {
-                performSegue(withIdentifier: segueIdentifier, sender: nil)
+            } else if cell is QuickSettingsTileCollectionViewCell {
+                openQuickSettings()
             }
         }
     }

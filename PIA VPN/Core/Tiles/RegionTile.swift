@@ -33,7 +33,6 @@ class RegionTile: UIView, Tileable {
     private let geoLeadingDistance: CGFloat = 49
 
     var view: UIView!
-    var detailSegueIdentifier: String!
     var status: TileStatus = .normal {
         didSet {
             statusUpdated()
