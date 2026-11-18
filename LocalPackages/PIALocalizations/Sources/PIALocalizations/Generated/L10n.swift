@@ -1609,6 +1609,18 @@ public enum L10n {
     public enum Quicksettings {
       /// Quick settings
       public static let title = L10n.tr("Localizable", "tiles.quicksettings.title", fallback: "Quick settings")
+      public enum Automation {
+        /// Automation disabled
+        public static let disabled = L10n.tr("Localizable", "tiles.quicksettings.automation.disabled", fallback: "Automation disabled")
+        /// Automation enabled
+        public static let enabled = L10n.tr("Localizable", "tiles.quicksettings.automation.enabled", fallback: "Automation enabled")
+      }
+      public enum Killswitch {
+        /// VPN Kill Switch disabled
+        public static let disabled = L10n.tr("Localizable", "tiles.quicksettings.killswitch.disabled", fallback: "VPN Kill Switch disabled")
+        /// VPN Kill Switch enabled
+        public static let enabled = L10n.tr("Localizable", "tiles.quicksettings.killswitch.enabled", fallback: "VPN Kill Switch enabled")
+      }
     }
     public enum Region {
       /// VPN Server

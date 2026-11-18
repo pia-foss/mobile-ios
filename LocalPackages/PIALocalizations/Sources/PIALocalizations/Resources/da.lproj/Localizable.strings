@@ -281,6 +281,10 @@
 "tiles.usage.download" = "Download";
 "tiles.nmt.accessibility.trusted" = "Betroet netværk";
 "tiles.quicksettings.title" = "Hurtig-indstillinger";
+"tiles.quicksettings.killswitch.enabled" = "VPN-afbryderknap aktiveret";
+"tiles.quicksettings.killswitch.disabled" = "VPN-afbryderknap deaktiveret";
+"tiles.quicksettings.automation.enabled" = "Automatisering aktiveret";
+"tiles.quicksettings.automation.disabled" = "Automatisering deaktiveret";
 "tiles.accessibility.visible.tile.action" = "Tryk for at fjerne denne flise fra instrumentbrættet";
 "tiles.accessibility.invisible.tile.action" = "Tryk for at tilføje denne flise til instrumentbrættet";
 "tiles.feedback.title" = "Hvordan klarer vi os?";

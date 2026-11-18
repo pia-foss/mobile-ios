@@ -281,6 +281,10 @@
 "tiles.usage.download" = "Télécharger";
 "tiles.nmt.accessibility.trusted" = "Réseau de confiance";
 "tiles.quicksettings.title" = "Paramètres rapides";
+"tiles.quicksettings.killswitch.enabled" = "Killswitch du VPN activé";
+"tiles.quicksettings.killswitch.disabled" = "Killswitch du VPN désactivé";
+"tiles.quicksettings.automation.enabled" = "Automatisation activée";
+"tiles.quicksettings.automation.disabled" = "Automatisation désactivée";
 "tiles.accessibility.visible.tile.action" = "Touchez pour supprimer cette case du tableau de bord";
 "tiles.accessibility.invisible.tile.action" = "Touchez pour ajouter cette case dans le tableau de bord";
 "tiles.feedback.title" = "Satisfait de notre VPN ?";

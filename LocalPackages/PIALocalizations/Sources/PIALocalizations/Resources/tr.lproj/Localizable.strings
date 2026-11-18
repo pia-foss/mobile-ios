@@ -281,6 +281,10 @@
 "tiles.usage.download" = "İndir";
 "tiles.nmt.accessibility.trusted" = "Güvenilen ağ";
 "tiles.quicksettings.title" = "Hızlı ayarlar";
+"tiles.quicksettings.killswitch.enabled" = "VPN Acil Anahtarı etkinleştirildi";
+"tiles.quicksettings.killswitch.disabled" = "VPN Acil Anahtarı devre dışı bırakıldı";
+"tiles.quicksettings.automation.enabled" = "Otomasyon etkinleştirildi";
+"tiles.quicksettings.automation.disabled" = "Otomasyon devre dışı bırakıldı";
 "tiles.accessibility.visible.tile.action" = "Bu deseni panodan silmek için dokunun";
 "tiles.accessibility.invisible.tile.action" = "Bu deseni panoya eklemek için dokunun";
 "tiles.feedback.title" = "Bizi nasıl buldunuz?";

@@ -281,6 +281,10 @@
 "tiles.usage.download" = "تنزيل";
 "tiles.nmt.accessibility.trusted" = "شبكة موثوقة";
 "tiles.quicksettings.title" = "إعدادات سريعة";
+"tiles.quicksettings.killswitch.enabled" = "تم تمكين مفتاح إيقاف VPN";
+"tiles.quicksettings.killswitch.disabled" = "تم تعطيل مفتاح إيقاف VPN";
+"tiles.quicksettings.automation.enabled" = "تم تمكين الأتمتة";
+"tiles.quicksettings.automation.disabled" = "تم تعطيل الأتمتة";
 "tiles.accessibility.visible.tile.action" = "اضغط لإزالة هذا المربع من لوحة المعلومات";
 "tiles.accessibility.invisible.tile.action" = "اضغط لإضافة هذا المربع إلى لوحة المعلومات";
 "tiles.feedback.title" = "كيف أبلينا؟";

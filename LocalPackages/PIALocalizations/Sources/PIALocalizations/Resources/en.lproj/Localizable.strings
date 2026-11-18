@@ -281,6 +281,10 @@
 "tiles.usage.download" = "Download";
 "tiles.nmt.accessibility.trusted" = "Trusted network";
 "tiles.quicksettings.title" = "Quick settings";
+"tiles.quicksettings.killswitch.enabled" = "VPN Kill Switch enabled";
+"tiles.quicksettings.killswitch.disabled" = "VPN Kill Switch disabled";
+"tiles.quicksettings.automation.enabled" = "Automation enabled";
+"tiles.quicksettings.automation.disabled" = "Automation disabled";
 "tiles.accessibility.visible.tile.action" = "Tap to remove this tile from the dashboard";
 "tiles.accessibility.invisible.tile.action" = "Tap to add this tile to the dashboard";
 "tiles.feedback.title" = "How are we doing?";
