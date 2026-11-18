@@ -281,7 +281,10 @@
 "tiles.usage.download" = "Загрузить";
 "tiles.nmt.accessibility.trusted" = "Доверенная сеть";
 "tiles.quicksettings.title" = "Быстрые настройки";
-"tiles.quicksettings.min.elements.message" = "Следует оставить как минимум один элемент на плитке «Быстрые настройки» видимым";
+"tiles.quicksettings.killswitch.enabled" = "Авторазрыв соединения включён";
+"tiles.quicksettings.killswitch.disabled" = "Авторазрыв соединения отключён";
+"tiles.quicksettings.automation.enabled" = "Автоматизация включена";
+"tiles.quicksettings.automation.disabled" = "Автоматизация отключена";
 "tiles.accessibility.visible.tile.action" = "Нажмите, чтобы удалить эту плитку с панели";
 "tiles.accessibility.invisible.tile.action" = "Нажмите, чтобы добавить эту плитку на панель";
 "tiles.feedback.title" = "Как мы справляемся?";

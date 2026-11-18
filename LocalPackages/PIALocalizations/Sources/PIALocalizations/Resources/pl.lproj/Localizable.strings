@@ -281,7 +281,10 @@
 "tiles.usage.download" = "Pobierz";
 "tiles.nmt.accessibility.trusted" = "Zaufana sieć";
 "tiles.quicksettings.title" = "Szybkie ustawienia";
-"tiles.quicksettings.min.elements.message" = "Na kafelku Szybkich ustawień musisz zachować widoczny co najmniej jeden element.";
+"tiles.quicksettings.killswitch.enabled" = "Wyłącznik awaryjny VPN włączony";
+"tiles.quicksettings.killswitch.disabled" = "Wyłącznik awaryjny VPN wyłączony";
+"tiles.quicksettings.automation.enabled" = "Automatyzacja włączona";
+"tiles.quicksettings.automation.disabled" = "Automatyzacja wyłączona";
 "tiles.accessibility.visible.tile.action" = "Dotknij, aby usunąć tę płytkę z panelu sterowania";
 "tiles.accessibility.invisible.tile.action" = "Dotknij, aby dodać tę płytkę do panelu sterowania";
 "tiles.feedback.title" = "Jak nas oceniasz?";

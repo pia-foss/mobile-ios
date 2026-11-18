@@ -281,7 +281,10 @@
 "tiles.usage.download" = "Descargar";
 "tiles.nmt.accessibility.trusted" = "Red fiable";
 "tiles.quicksettings.title" = "Ajustes rápidos";
-"tiles.quicksettings.min.elements.message" = "Debes mantener como mínimo un elemento visible en la casilla de configuración rápida.";
+"tiles.quicksettings.killswitch.enabled" = "Interruptor de corte de VPN habilitado";
+"tiles.quicksettings.killswitch.disabled" = "Interruptor de corte de VPN deshabilitado";
+"tiles.quicksettings.automation.enabled" = "Automatización habilitada";
+"tiles.quicksettings.automation.disabled" = "Automatización deshabilitada";
 "tiles.accessibility.visible.tile.action" = "Toca para quitar este cuadro del panel de control";
 "tiles.accessibility.invisible.tile.action" = "Toca para agregar este cuadro al panel de control";
 "tiles.feedback.title" = "¿Cómo lo estamos haciendo?";

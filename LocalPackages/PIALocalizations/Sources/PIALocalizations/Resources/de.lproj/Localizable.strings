@@ -281,7 +281,10 @@
 "tiles.usage.download" = "Download";
 "tiles.nmt.accessibility.trusted" = "Vertrauenswürdiges Netzwerk";
 "tiles.quicksettings.title" = "Schnelleinstellungen";
-"tiles.quicksettings.min.elements.message" = "Sie sollten mindestens ein Element in den Schnelleinstellungen sichtbar halten.";
+"tiles.quicksettings.killswitch.enabled" = "VPN-Killswitch aktiviert";
+"tiles.quicksettings.killswitch.disabled" = "VPN-Killswitch deaktiviert";
+"tiles.quicksettings.automation.enabled" = "Automatisierung aktiviert";
+"tiles.quicksettings.automation.disabled" = "Automatisierung deaktiviert";
 "tiles.accessibility.visible.tile.action" = "Tippen, um diese Kachel vom Dashboard zu entfernen";
 "tiles.accessibility.invisible.tile.action" = "Tippen, um diese Kachel dem Dashboard hinzuzufügen";
 "tiles.feedback.title" = "Gefällt dir unsere App?";

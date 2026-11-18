@@ -64,11 +64,6 @@ final class AppPreferences {
         static let todayWidgetVpnSocket = "vpn.widget.socket"
         static let todayWidgetTrustedNetwork = "vpn.widget.trusted.network"
 
-        // Quick Settings options
-        static let quickSettingKillswitchVisible = "quickSettingKillswitchVisible"
-        static let quickSettingNetworkToolVisible = "quickSettingNetworkToolVisible"
-        static let quickSettingPrivateBrowserVisible = "quickSettingPrivateBrowserVisible"
-
         // Rating Settings
         static let successConnections = "successConnections"
         static let failureConnections = "failureConnections"
@@ -330,32 +325,6 @@ final class AppPreferences {
             }
         }
     #endif
-    var quickSettingKillswitchVisible: Bool {
-        get {
-            return defaults.bool(forKey: Entries.quickSettingKillswitchVisible)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.quickSettingKillswitchVisible)
-        }
-    }
-
-    var quickSettingNetworkToolVisible: Bool {
-        get {
-            return defaults.bool(forKey: Entries.quickSettingNetworkToolVisible)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.quickSettingNetworkToolVisible)
-        }
-    }
-
-    var quickSettingPrivateBrowserVisible: Bool {
-        get {
-            return defaults.bool(forKey: Entries.quickSettingPrivateBrowserVisible)
-        }
-        set {
-            defaults.set(newValue, forKey: Entries.quickSettingPrivateBrowserVisible)
-        }
-    }
 
     var canAskAgainForReview: Bool {
         get {
@@ -538,9 +507,6 @@ final class AppPreferences {
                 Entries.todayWidgetVpnPort: "1337",
                 Entries.todayWidgetVpnSocket: "UDP",
                 Entries.todayWidgetTrustedNetwork: false,
-                Entries.quickSettingKillswitchVisible: true,
-                Entries.quickSettingNetworkToolVisible: true,
-                Entries.quickSettingPrivateBrowserVisible: true,
                 Entries.useSmallPackets: false,
                 Entries.usesCustomDNS: false,
                 Entries.canAskAgainForReview: false,
@@ -719,9 +685,6 @@ final class AppPreferences {
         #endif
         let preferences = Client.preferences.editable().reset()
         preferences.commit()
-        quickSettingKillswitchVisible = true
-        quickSettingNetworkToolVisible = true
-        quickSettingPrivateBrowserVisible = true
         usesCustomDNS = false
         useSmallPackets = false
         #if os(iOS)

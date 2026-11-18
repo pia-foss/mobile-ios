@@ -54,34 +54,17 @@ final class QuickSettingsTile: UIView, Tileable {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func hasDetailView() -> Bool {
-        return true
-    }
-
     private func setupView() {
-
-        self.detailSegueIdentifier = StoryboardSegue.Main.showQuickSettingsViewController.rawValue
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)
-        nc.addObserver(self, selector: #selector(setupButtons), name: .PIAAccountDidLogin, object: nil)
-        nc.addObserver(self, selector: #selector(setupButtons), name: .PIATilesDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(updateButtons), name: .PIAAccountDidLogin, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIASettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(updateButtons), name: .PIAQuickSettingsHaveChanged, object: nil)
 
         self.tileTitle.text = L10n.Tiles.Quicksettings.title.uppercased()
 
-        setupButtons()
         viewShouldRestyle()
-    }
-
-    @objc private func setupButtons() {
-
-        self.killSwitchButton.isHidden = !AppPreferences.shared.quickSettingKillswitchVisible
-        self.automationButton.isHidden = !AppPreferences.shared.quickSettingNetworkToolVisible
-        self.browserButton.isHidden = !AppPreferences.shared.quickSettingPrivateBrowserVisible
-
-        updateButtons()
     }
 
     @objc private func viewShouldRestyle() {
@@ -123,6 +106,7 @@ final class QuickSettingsTile: UIView, Tileable {
 
         updateProfile()
         updateButtons()
+        showKillSwitchFeedback()
         presentKillSwitchAlertIfNeeded()
 
     }
@@ -134,6 +118,7 @@ final class QuickSettingsTile: UIView, Tileable {
 
         updateProfile()
         updateButtons()
+        showAutomationFeedback()
         presentKillSwitchAlertIfNeeded()
 
     }
@@ -155,6 +140,34 @@ final class QuickSettingsTile: UIView, Tileable {
             }
         }
 
+    }
+
+    // MARK: Feedback
+
+    // The shortcuts are icon-only, so a banner names what was just switched.
+
+    private func showKillSwitchFeedback() {
+        if Client.preferences.isPersistentConnection {
+            showFeedback(L10n.Tiles.Quicksettings.Killswitch.enabled, image: Asset.Piax.Global.killswitchActive.image, isEnabled: true)
+        } else {
+            showFeedback(L10n.Tiles.Quicksettings.Killswitch.disabled, image: Asset.Piax.Global.killswitchInactive.image, isEnabled: false)
+        }
+    }
+
+    private func showAutomationFeedback() {
+        if Client.preferences.nmtRulesEnabled {
+            showFeedback(L10n.Tiles.Quicksettings.Automation.enabled, image: Asset.Piax.Global.nmtActive.image, isEnabled: true)
+        } else {
+            showFeedback(L10n.Tiles.Quicksettings.Automation.disabled, image: Asset.Piax.Global.nmtInactive.image, isEnabled: false)
+        }
+    }
+
+    private func showFeedback(_ message: String, image: UIImage, isEnabled: Bool) {
+        if isEnabled {
+            Macros.displaySuccessImageNote(withImage: image, message: message)
+        } else {
+            Macros.displayWarningImageNote(withImage: image, message: message)
+        }
     }
 
     private func presentKillSwitchAlertIfNeeded() {

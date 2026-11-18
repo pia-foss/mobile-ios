@@ -32,7 +32,7 @@
                         <rect key="frame" x="641" y="58" width="12" height="12"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuN-F1-bgp" customClass="QuickSettingsTile" customModule="PIA_VPN" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="641" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="668" height="128"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
@@ -44,7 +44,7 @@
                 <constraint firstItem="wgc-RE-7Z4" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Rip-2u-GeR"/>
                 <constraint firstAttribute="bottom" secondItem="LuN-F1-bgp" secondAttribute="bottom" id="dUv-5w-e47"/>
                 <constraint firstItem="LuN-F1-bgp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ruk-06-dQc"/>
-                <constraint firstItem="C2G-Hq-Q6g" firstAttribute="leading" secondItem="LuN-F1-bgp" secondAttribute="trailing" id="rxZ-BY-aaw"/>
+                <constraint firstAttribute="trailing" secondItem="LuN-F1-bgp" secondAttribute="trailing" id="rxZ-BY-aaw"/>
                 <constraint firstItem="C2G-Hq-Q6g" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ui0-e1-y2n"/>
                 <constraint firstItem="C2G-Hq-Q6g" firstAttribute="width" secondItem="C2G-Hq-Q6g" secondAttribute="height" multiplier="1:1" id="zl1-1M-LYB"/>
             </constraints>
@@ -54,6 +54,7 @@
                 <outlet property="accessoryImageRight" destination="C2G-Hq-Q6g" id="cJr-cm-nWN"/>
                 <outlet property="tile" destination="LuN-F1-bgp" id="a34-zg-oEn"/>
                 <outlet property="tileLeftConstraint" destination="ruk-06-dQc" id="Qob-SD-ckD"/>
+                <outlet property="tileRightConstraint" destination="rxZ-BY-aaw" id="Wq3-Ds-TrC"/>
             </connections>
             <point key="canvasLocation" x="140.80000000000001" y="154.72263868065968"/>
         </collectionViewCell>

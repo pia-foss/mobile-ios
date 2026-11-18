@@ -9,93 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Show Quick Settings View Controller-->
-        <scene sceneID="bdy-hC-dhW">
-            <objects>
-                <viewController id="MU8-v2-7Zn" customClass="ShowQuickSettingsViewController" customModule="PIA_Staging" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rsa-kn-TH2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODB-Vu-79R">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0eK-zr-cho">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingCell" id="Qen-ak-muC" customClass="ShowQuickSettingsCell" customModule="PIA_Staging" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="51"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qen-ak-muC" id="hn7-01-E4e">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PIAX/Global/killswitch-dark-inactive" translatesAutoresizingMaskIntoConstraints="NO" id="gpB-yq-orh">
-                                                            <rect key="frame" x="20" y="13" width="25" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="25" id="Svg-aL-qZ0"/>
-                                                                <constraint firstAttribute="width" constant="25" id="dgb-Cr-4gG"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Nnc-qq-Svb">
-                                                            <rect key="frame" x="60" y="25.666666666666668" width="219" height="0.0"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="gpB-yq-orh" firstAttribute="centerY" secondItem="hn7-01-E4e" secondAttribute="centerY" id="ENC-Xg-HMe"/>
-                                                        <constraint firstItem="gpB-yq-orh" firstAttribute="leading" secondItem="hn7-01-E4e" secondAttribute="leading" constant="20" id="GfM-aX-6gn"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="Nnc-qq-Svb" secondAttribute="trailing" constant="80" id="TKC-ho-An7"/>
-                                                        <constraint firstItem="Nnc-qq-Svb" firstAttribute="centerY" secondItem="hn7-01-E4e" secondAttribute="centerY" id="WM9-gr-CG0"/>
-                                                        <constraint firstItem="Nnc-qq-Svb" firstAttribute="leading" secondItem="gpB-yq-orh" secondAttribute="trailing" constant="15" id="rsi-xH-bBe"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="settingImage" destination="gpB-yq-orh" id="UF7-3j-I6U"/>
-                                                    <outlet property="titleLabel" destination="Nnc-qq-Svb" id="yoY-MZ-64t"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <sections/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="MU8-v2-7Zn" id="7kG-aN-V01"/>
-                                            <outlet property="delegate" destination="MU8-v2-7Zn" id="iN3-n6-fgp"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="0eK-zr-cho" secondAttribute="bottom" id="Apk-kn-wX1"/>
-                                    <constraint firstItem="0eK-zr-cho" firstAttribute="top" secondItem="ODB-Vu-79R" secondAttribute="top" id="Ig1-Lv-JUT"/>
-                                    <constraint firstItem="0eK-zr-cho" firstAttribute="leading" secondItem="ODB-Vu-79R" secondAttribute="leading" id="PVn-l2-1WT"/>
-                                    <constraint firstAttribute="trailing" secondItem="0eK-zr-cho" secondAttribute="trailing" id="anc-z4-yGT"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="EIG-Qo-Ou9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ODB-Vu-79R" secondAttribute="bottom" id="DVF-PR-xRw"/>
-                            <constraint firstItem="ODB-Vu-79R" firstAttribute="top" secondItem="EIG-Qo-Ou9" secondAttribute="top" id="QDg-kC-I0H"/>
-                            <constraint firstItem="ODB-Vu-79R" firstAttribute="trailing" secondItem="EIG-Qo-Ou9" secondAttribute="trailing" id="UZb-Op-MUr"/>
-                            <constraint firstItem="ODB-Vu-79R" firstAttribute="leading" secondItem="EIG-Qo-Ou9" secondAttribute="leading" id="odq-s0-nwe"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="otR-i3-QuL"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <connections>
-                        <outlet property="tableView" destination="0eK-zr-cho" id="1Ue-MX-HGN"/>
-                        <outlet property="viewContainer" destination="ODB-Vu-79R" id="UA8-30-aqY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7WU-j3-0AK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3962.4000000000001" y="904.43349753694588"/>
-        </scene>
         <!--Account-->
         <!--Settings-->
         <scene sceneID="wLQ-Xt-jeE">
@@ -405,7 +318,6 @@
                         <outlet property="viewContentLandscapeHeightConstraint" destination="xD9-nS-1Fh" id="hC0-nQ-h8R"/>
                         <outlet property="viewRows" destination="Azf-f1-8fS" id="qgu-NB-b1a"/>
                         <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="Skk-3e-UDA"/>
-                        <segue destination="MU8-v2-7Zn" kind="show" identifier="ShowQuickSettingsViewController" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="gOr-cS-0Jn"/>
                         <segue destination="Jcq-Qm-xQ1" kind="presentation" identifier="ShowAddEmailSegue" id="2vQ-Ts-0N1"/>
                         <segue destination="SAw-ll-7Hp" kind="presentation" identifier="SettingsAndWireGuardSegueIdentifier" customClass="ModalNavigationSegue" customModule="PIA_Staging" customModuleProvider="target" id="jku-ph-JBL"/>
                     </connections>
@@ -1355,7 +1267,6 @@
         <segue reference="jku-ph-JBL"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="PIAX/Global/killswitch-dark-inactive" width="35" height="24"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
