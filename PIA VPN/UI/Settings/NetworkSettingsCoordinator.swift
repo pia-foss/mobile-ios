@@ -55,16 +55,7 @@ final class NetworkSettingsCoordinator: @MainActor FlowCoordinator {
             dependencies: .init(
                 loadPreferences: { [weak self] in self?.preferences() ?? .init(presets: [], customServers: [], dns: .preset("")) },
                 isEditable: { Flags.shared.enablesDNSSettings },
-                preferencesChanges: {
-                    AsyncStream { continuation in
-                        let task = Task {
-                            for await _ in NotificationCenter.default.notifications(named: .PIASettingsHaveChanged) {
-                                continuation.yield()
-                            }
-                        }
-                        continuation.onTermination = { _ in task.cancel() }
-                    }
-                },
+                preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 setDNS: { [weak self] dns in
                     guard let self else { return }
                     switch dns {

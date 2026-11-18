@@ -154,31 +154,6 @@ public enum NetworkSections: Int, CaseIterable, SettingSection {
     }
 }
 
-public enum PrivacyFeaturesSections: Int, CaseIterable, SettingSection {
-    case killswitch = 0
-    case reconnectNotifications
-    case safariContentBlocker
-    case refresh
-
-    public func localizedTitleMessage() -> String {
-        switch self {
-        case .killswitch: return L10n.Settings.ApplicationSettings.KillSwitch.title
-        case .reconnectNotifications: return L10n.Settings.ApplicationSettings.ReconnectNotifications.title
-        case .safariContentBlocker: return L10n.Settings.ContentBlocker.title
-        case .refresh: return L10n.Settings.ContentBlocker.Refresh.title
-        }
-    }
-
-    public func localizedSubtitleMessage() -> String {
-        switch self {
-        case .killswitch: return ""
-        case .reconnectNotifications: return ""
-        case .safariContentBlocker: return ""
-        case .refresh: return ""
-        }
-    }
-}
-
 public enum AutomationSections: Int, CaseIterable, SettingSection {
     case automation
     case manageAutomation

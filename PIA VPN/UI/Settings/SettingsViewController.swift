@@ -372,11 +372,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingPreferences.nmtGenericRules = Client.preferences.nmtGenericRules
     }
 
-    // MARK: Unwind segues
-
-    @IBAction private func unwoundContentBlockerViewController(_ segue: UIStoryboardSegue) {
-    }
-
     // MARK: Helpers
 
     @objc func reloadSettings() {
@@ -525,7 +520,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .network:
             showNetworkSettings()
         case .privacyFeatures:
-            self.perform(segue: StoryboardSegue.Main.privacyFeaturesSettingsSegue, sender: nil)
+            showPrivacyFeaturesSettings()
         case .automation:
             self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
         case .help:
@@ -576,6 +571,18 @@ extension SettingsViewController {
         let coordinator = HelpSettingsCoordinator(
             parent: navigationController,
             pendingPreferences: pendingPreferences
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showPrivacyFeaturesSettings() {
+        guard let navigationController else { return }
+        let coordinator = PrivacyFeaturesSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
         )
         Task {
             await coordinator.startAsync()

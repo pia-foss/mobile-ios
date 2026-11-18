@@ -109,6 +109,7 @@ struct SettingsNavigationRow: View {
     let title: String
     var description: String? = nil
     var value: String? = nil
+    var isLoading = false
     let action: () -> Void
 
     var body: some View {
@@ -119,9 +120,15 @@ struct SettingsNavigationRow: View {
                         Text(value)
                             .typography(.body2, color: .pia.onSurfaceContainerSecondary)
                     }
-                    Image(systemName: "chevron.right")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundColor(.pia.onSurfaceContainerSecondary)
+                    ZStack(alignment: .trailing) {
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                        Image(systemName: "chevron.right")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundColor(.pia.onSurfaceContainerSecondary)
+                            .opacity(isLoading ? 0 : 1)
+                    }
+                    .animation(nil, value: isLoading)
                 }
             }
             .content

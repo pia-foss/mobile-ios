@@ -53,16 +53,7 @@ final class GeneralSettingsCoordinator: @MainActor FlowCoordinator {
                         showsGeoRegions: AppPreferences.shared.showGeoServers
                     )
                 },
-                preferencesChanges: {
-                    AsyncStream { continuation in
-                        let task = Task {
-                            for await _ in NotificationCenter.default.notifications(named: .PIASettingsHaveChanged) {
-                                continuation.yield()
-                            }
-                        }
-                        continuation.onTermination = { _ in task.cancel() }
-                    }
-                },
+                preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 setShowsServiceMessages: { AppPreferences.shared.showServiceMessages = $0 },
                 setShowsGeoRegions: {
                     AppPreferences.shared.showGeoServers = $0
