@@ -281,7 +281,6 @@
 "tiles.usage.download" = "İndir";
 "tiles.nmt.accessibility.trusted" = "Güvenilen ağ";
 "tiles.quicksettings.title" = "Hızlı ayarlar";
-"tiles.quicksettings.min.elements.message" = "Hızlı Ayarlar Deseninde en az bir öğeyi görünür tutmalısınız";
 "tiles.accessibility.visible.tile.action" = "Bu deseni panodan silmek için dokunun";
 "tiles.accessibility.invisible.tile.action" = "Bu deseni panoya eklemek için dokunun";
 "tiles.feedback.title" = "Bizi nasıl buldunuz?";

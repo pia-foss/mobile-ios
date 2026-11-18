@@ -20,7 +20,6 @@ internal enum StoryboardSegue {
         case settingsSegueIdentifier = "SettingsSegueIdentifier"
         case showAddEmailSegue = "ShowAddEmailSegue"
         case showCustomNetworks = "ShowCustomNetworks"
-        case showQuickSettingsViewController = "ShowQuickSettingsViewController"
         case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
     }
     internal enum Signup: String, SegueType {

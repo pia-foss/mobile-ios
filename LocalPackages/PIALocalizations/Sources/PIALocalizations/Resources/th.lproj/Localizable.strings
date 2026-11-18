@@ -281,7 +281,6 @@
 "tiles.usage.download" = "ดาวน์โหลด";
 "tiles.nmt.accessibility.trusted" = "เครือข่ายที่เชื่อถือ";
 "tiles.quicksettings.title" = "การตั้งค่าด่วน";
-"tiles.quicksettings.min.elements.message" = "คุณควรเปิดไว้อย่างน้อยหนึ่งรายการในช่องการตั้งค่าด่วน";
 "tiles.accessibility.visible.tile.action" = "แตะเพื่อลบช่องนี้ลงในแดชบอร์ด";
 "tiles.accessibility.invisible.tile.action" = "แตะเพื่อเพิ่มช่องนี้ลงในแดชบอร์ด";
 "tiles.feedback.title" = "พวกเราทำได้ดีหรือไม่?";

@@ -1609,12 +1609,6 @@ public enum L10n {
     public enum Quicksettings {
       /// Quick settings
       public static let title = L10n.tr("Localizable", "tiles.quicksettings.title", fallback: "Quick settings")
-      public enum Min {
-        public enum Elements {
-          /// You should keep at least one element visible in the Quick Settings Tile
-          public static let message = L10n.tr("Localizable", "tiles.quicksettings.min.elements.message", fallback: "You should keep at least one element visible in the Quick Settings Tile")
-        }
-      }
     }
     public enum Region {
       /// VPN Server

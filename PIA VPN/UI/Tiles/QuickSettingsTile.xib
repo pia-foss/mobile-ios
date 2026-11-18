@@ -59,7 +59,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0Qp-uW-eAj" secondAttribute="bottom" id="OhQ-hF-kHh"/>
                 <constraint firstItem="0Qp-uW-eAj" firstAttribute="top" secondItem="Gno-Iw-R4F" secondAttribute="bottom" id="bI1-DA-HQj"/>
                 <constraint firstItem="0Qp-uW-eAj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="csA-Ky-er2"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Qp-uW-eAj" secondAttribute="trailing" constant="-7" id="oOS-xB-q3f"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Qp-uW-eAj" secondAttribute="trailing" constant="20" id="oOS-xB-q3f"/>
                 <constraint firstItem="Gno-Iw-R4F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="tPY-7o-dlf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

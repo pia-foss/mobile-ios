@@ -281,7 +281,6 @@
 "tiles.usage.download" = "ダウンロード";
 "tiles.nmt.accessibility.trusted" = "信頼されたネットワーク";
 "tiles.quicksettings.title" = "クイック設定";
-"tiles.quicksettings.min.elements.message" = "クイック設定タイルの少なくとも1つのエレメントを可視状態にしておくべきです";
 "tiles.accessibility.visible.tile.action" = "タップしてこのタイトルをダッシュボードから削除";
 "tiles.accessibility.invisible.tile.action" = "タップしてこのタイトルをダッシュボードに追加";
 "tiles.feedback.title" = "ご満足いただけましたか？";

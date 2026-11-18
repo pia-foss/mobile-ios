@@ -281,7 +281,6 @@
 "tiles.usage.download" = "Last ned";
 "tiles.nmt.accessibility.trusted" = "Klarert nettverk";
 "tiles.quicksettings.title" = "Hurtiginnstillinger";
-"tiles.quicksettings.min.elements.message" = "Du burde ha minst ett element synlig i feltet Hurtiginnstillinger.";
 "tiles.accessibility.visible.tile.action" = "Trykk for å fjerne denne ruten fra instrumentbordet";
 "tiles.accessibility.invisible.tile.action" = "Trykk for å legge til denne ruten på instrumentbordet";
 "tiles.feedback.title" = "Hvordan synes du vi gjør det?";

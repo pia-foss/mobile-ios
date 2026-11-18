@@ -10,6 +10,7 @@ import XCTest
 
 extension XCUIApplication {
     var privacyHeader: XCUIElement { staticText(with: privacyFeaturesString) }
+    var vpnKillSwitchString: String { getString(key: "settings.application_settings.kill_switch.title", comment: "VPN Kill Switch") }
     var vpnKillSwitch: XCUIElement { switches(with: vpnKillSwitchString) }
     var safariContentBlockerTitleString: String { getString(key: "settings.content_blocker.title", comment: "Safari Content Blocker state") }
     var safariContentBlockerSwitch: XCUIElement { switches(with: safariContentBlockerTitleString) }

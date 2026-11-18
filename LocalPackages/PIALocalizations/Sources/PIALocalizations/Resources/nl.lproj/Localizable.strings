@@ -281,7 +281,6 @@
 "tiles.usage.download" = "Downloaden";
 "tiles.nmt.accessibility.trusted" = "Vertrouwd netwerk";
 "tiles.quicksettings.title" = "Snelle instellingen";
-"tiles.quicksettings.min.elements.message" = "Houd ten minste één element zichtbaar in de tegel Snelle instellingen";
 "tiles.accessibility.visible.tile.action" = "Tik om deze tegel van het dashboard te verwijderen";
 "tiles.accessibility.invisible.tile.action" = "Tik om deze tegel aan het dashboard toe te voegen";
 "tiles.feedback.title" = "Hoe presteren we?";

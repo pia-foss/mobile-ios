@@ -35,17 +35,9 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
     @IBOutlet weak var accessoryImageRight: UIImageView!
     @IBOutlet weak var accessoryButtonLeft: UIButton!
     @IBOutlet weak var tileLeftConstraint: NSLayoutConstraint!
-    var tileRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tileRightConstraint: NSLayoutConstraint!
 
     private var currentTileStatus: TileStatus?
-
-    func hasDetailView() -> Bool {
-        return tile.hasDetailView()
-    }
-
-    func segueIdentifier() -> String? {
-        return tile.detailSegueIdentifier
-    }
 
     func setupCellForStatus(_ status: TileStatus) {
         self.accessibilityIdentifier = "QuickSettingsTileCollectionViewCell"
@@ -59,18 +51,14 @@ class QuickSettingsTileCollectionViewCell: UICollectionViewCell, TileableCell {
             animations: {
                 switch status {
                 case .normal:
-                    self.accessibilityTraits = UIAccessibilityTraits.button
-                    self.isAccessibilityElement = true
-                    self.accessoryImageRight.image = Asset.Piax.Tiles.openTileDetails.image
                     self.tileLeftConstraint.constant = 0
+                    self.tileRightConstraint.constant = 0
                     self.accessoryButtonLeft.isHidden = true
                 case .edit:
-                    self.accessibilityTraits = UIAccessibilityTraits.none
-                    self.isAccessibilityElement = false
-                    self.accessoryImageRight.image = Theme.current.dragDropImage()
                     self.tileLeftConstraint.constant = self.leftConstraintValue
-                    self.setupVisibilityButton()
+                    self.tileRightConstraint.constant = self.rightConstraintValue
                     self.accessoryButtonLeft.isHidden = false
+                    self.setupVisibilityButton()
                 }
                 self.layoutIfNeeded()
                 self.currentTileStatus = status

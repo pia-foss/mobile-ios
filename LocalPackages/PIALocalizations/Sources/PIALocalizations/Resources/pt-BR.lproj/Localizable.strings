@@ -281,7 +281,6 @@
 "tiles.usage.download" = "Baixar";
 "tiles.nmt.accessibility.trusted" = "Rede de confiança";
 "tiles.quicksettings.title" = "Configurações rápidas";
-"tiles.quicksettings.min.elements.message" = "Você deve manter pelo menos um elemento visível no bloco Configurações Rápidas";
 "tiles.accessibility.visible.tile.action" = "Toque para remover este bloco do painel";
 "tiles.accessibility.invisible.tile.action" = "Toque para adicionar este bloco ao painel";
 "tiles.feedback.title" = "Como estamos indo?";

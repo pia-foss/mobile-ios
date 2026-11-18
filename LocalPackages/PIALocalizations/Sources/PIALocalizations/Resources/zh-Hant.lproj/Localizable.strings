@@ -281,7 +281,6 @@
 "tiles.usage.download" = "下載";
 "tiles.nmt.accessibility.trusted" = "信任網路";
 "tiles.quicksettings.title" = "快速設定";
-"tiles.quicksettings.min.elements.message" = "您應在快速設定磚中保留至少一個可見的元素";
 "tiles.accessibility.visible.tile.action" = "點選將此標題從剪貼簿移除";
 "tiles.accessibility.invisible.tile.action" = "點選將此標題新增到剪貼簿";
 "tiles.feedback.title" = "用得還滿意嗎？";
