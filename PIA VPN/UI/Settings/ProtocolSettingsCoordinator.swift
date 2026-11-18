@@ -64,16 +64,7 @@ final class ProtocolSettingsCoordinator: @MainActor FlowCoordinator {
                         isCipherEditable: Flags.shared.enablesEncryptionSettings
                     )
                 },
-                preferencesChanges: {
-                    AsyncStream { continuation in
-                        let task = Task {
-                            for await _ in NotificationCenter.default.notifications(named: .PIASettingsHaveChanged) {
-                                continuation.yield()
-                            }
-                        }
-                        continuation.onTermination = { _ in task.cancel() }
-                    }
-                },
+                preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 setVPNProtocol: { [weak self] in self?.setVPNProtocol($0) },
                 setTransport: { [weak self] transport in
                     self?.settingsDelegate?.updateSocketType(socketType: transport.socketType?.rawValue)

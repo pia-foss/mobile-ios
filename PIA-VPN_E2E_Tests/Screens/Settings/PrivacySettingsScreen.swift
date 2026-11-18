@@ -14,7 +14,7 @@ extension XCUIApplication {
     var safariContentBlockerTitleString: String { getString(key: "settings.content_blocker.title", comment: "Safari Content Blocker state") }
     var safariContentBlockerSwitch: XCUIElement { switches(with: safariContentBlockerTitleString) }
     var blockerRefreshTitleString: String { getString(key: "settings.content_blocker.refresh.title", comment: "Refresh block list") }
-    var refreshBlockListButton: XCUIElement { staticText(with: blockerRefreshTitleString) }
+    var refreshBlockListButton: XCUIElement { button(with: blockerRefreshTitleString) }
 
     func navigateToPrivacySettings() {
         navigateToSettings()

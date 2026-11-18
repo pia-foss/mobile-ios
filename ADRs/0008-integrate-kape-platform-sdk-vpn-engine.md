@@ -29,9 +29,9 @@ subscription, or UI layers. PIA keeps its existing `AccountProvider`, `ServerPro
 regions, CSI, KPI, and UI; only the tunnel implementation is swapped.
 
 **Dependency model — vendored, pinned, checksum-verified, pulled in CI.** The SDK is not a
-normal SPM dependency. It is pulled from a private Cloudsmith registry by
-`scripts/pull-kape-platform-sdk.sh` into `LocalPackages/KapePlatformSDK/` (gitignored). Two pins
-guard it: the version (a semver with a source-commit suffix, e.g. `1.0.0-99f3be8`) in
+normal SPM dependency. It is pulled from the private Cloudsmith release registry
+(`expressvpn/kp_platform_sdks`) by `scripts/pull-kape-platform-sdk.sh` into
+`LocalPackages/KapePlatformSDK/` (gitignored). Two pins guard it: the release version (e.g. `4.0.0`) in
 `scripts/kape-platform-sdk.version`, and the archive's SHA-256 in
 `scripts/kape-platform-sdk.checksum`. The pull is **fail-closed on integrity**: the script
 verifies the downloaded archive's SHA-256 against the committed checksum on every run — including

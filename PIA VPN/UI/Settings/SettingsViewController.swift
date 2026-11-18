@@ -372,11 +372,6 @@ final class SettingsViewController: AutolayoutViewController, SettingsDelegate {
         pendingPreferences.nmtGenericRules = Client.preferences.nmtGenericRules
     }
 
-    // MARK: Unwind segues
-
-    @IBAction private func unwoundContentBlockerViewController(_ segue: UIStoryboardSegue) {
-    }
-
     // MARK: Helpers
 
     @objc func reloadSettings() {
@@ -523,13 +518,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .protocols:
             showProtocolSettings()
         case .network:
-            self.perform(segue: StoryboardSegue.Main.networkSettingsSegue, sender: nil)
+            showNetworkSettings()
         case .privacyFeatures:
-            self.perform(segue: StoryboardSegue.Main.privacyFeaturesSettingsSegue, sender: nil)
+            showPrivacyFeaturesSettings()
         case .automation:
             self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
         case .help:
-            self.perform(segue: StoryboardSegue.Main.helpSettingsSegue, sender: nil)
+            showHelpSettings()
         case .development:
             self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
@@ -562,6 +557,41 @@ extension SettingsViewController {
     private func showProtocolSettings() {
         guard let navigationController else { return }
         let coordinator = ProtocolSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showHelpSettings() {
+        guard let navigationController else { return }
+        let coordinator = HelpSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showPrivacyFeaturesSettings() {
+        guard let navigationController else { return }
+        let coordinator = PrivacyFeaturesSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showNetworkSettings() {
+        guard let navigationController else { return }
+        let coordinator = NetworkSettingsCoordinator(
             parent: navigationController,
             pendingPreferences: pendingPreferences,
             settingsDelegate: self

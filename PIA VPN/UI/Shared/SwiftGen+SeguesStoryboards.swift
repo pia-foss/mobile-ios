@@ -15,20 +15,13 @@ import UIKit
 internal enum StoryboardSegue {
     internal enum Main: String, SegueType {
         case automationSettingsSegue = "AutomationSettingsSegue"
-        case contentBlockerSegueIdentifier = "ContentBlockerSegueIdentifier"
-        case customDNSSegueIdentifier = "CustomDNSSegueIdentifier"
         case developmentSettingsSegue = "DevelopmentSettingsSegue"
-        case helpSettingsSegue = "HelpSettingsSegue"
-        case networkSettingsSegue = "NetworkSettingsSegue"
-        case privacyFeaturesSettingsSegue = "PrivacyFeaturesSettingsSegue"
-        case serviceQualityDataSegueIdentifier = "ServiceQualityDataSegueIdentifier"
         case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
         case settingsSegueIdentifier = "SettingsSegueIdentifier"
         case showAddEmailSegue = "ShowAddEmailSegue"
         case showCustomNetworks = "ShowCustomNetworks"
         case showQuickSettingsViewController = "ShowQuickSettingsViewController"
         case trustedNetworksSegueIdentifier = "TrustedNetworksSegueIdentifier"
-        case unwindContentBlockerSegueIdentifier = "UnwindContentBlockerSegueIdentifier"
     }
     internal enum Signup: String, SegueType {
         case failureSegueIdentifier = "FailureSegueIdentifier"

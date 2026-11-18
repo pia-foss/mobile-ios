@@ -16,6 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAssets"),
         .package(path: "../PIALocalizations"),
         .package(path: "../PIAUI"),
         .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0")
@@ -25,6 +26,7 @@ let package = Package(
             name: "PIASettings",
             dependencies: [
                 .product(name: "CoreArchitecture", package: "apple-core"),
+                .product(name: "PIAAssetsMobile", package: "PIAAssets"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
                 .product(name: "PIASwiftUI", package: "PIAUI")
