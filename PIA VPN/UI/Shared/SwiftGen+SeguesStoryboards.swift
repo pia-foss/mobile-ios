@@ -15,7 +15,6 @@ import UIKit
 internal enum StoryboardSegue {
     internal enum Main: String, SegueType {
         case automationSettingsSegue = "AutomationSettingsSegue"
-        case developmentSettingsSegue = "DevelopmentSettingsSegue"
         case settingsAndWireGuardSegueIdentifier = "SettingsAndWireGuardSegueIdentifier"
         case settingsSegueIdentifier = "SettingsSegueIdentifier"
         case showAddEmailSegue = "ShowAddEmailSegue"

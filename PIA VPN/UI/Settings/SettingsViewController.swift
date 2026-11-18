@@ -459,11 +459,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var sections = SettingOptions.allCases
-        if !Flags.shared.enablesDevelopmentSettings {
-            sections.removeAll(where: { $0 == SettingOptions.development })
-        }
-        return sections.count
+        return SettingOptions.allCases.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -525,8 +521,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
         case .help:
             showHelpSettings()
-        case .development:
-            self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
             showGeneralSettings()
         }
