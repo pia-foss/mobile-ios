@@ -34,35 +34,20 @@ extension HelpSettings {
         }
     }
 
-    public enum DebugReport: Equatable, Sendable {
-        case submitted(id: String)
-        case empty
-        case failed
-    }
-
     public struct State: Equatable, Sendable {
         public var preferences: Preferences
         public let version: String
         public let isDebugLoggingEditable: Bool
-        public var isSubmittingDebugReport = false
-        public var debugReport: DebugReport?
 
         public init(preferences: Preferences, version: String, isDebugLoggingEditable: Bool) {
             self.preferences = preferences
             self.version = version
             self.isDebugLoggingEditable = isDebugLoggingEditable
         }
-
-        var isDebugReportPresented: Bool {
-            debugReport != nil
-        }
     }
 
     public enum Action: Equatable, Sendable {
         case sendDebugReportTapped
-        case debugReportSubmitted(DebugReport)
-        case debugReportDismissed
-        case copyDebugReportIDTapped(String)
         case debugLoggingToggled(Bool)
         case shareServiceQualityDataToggled(Bool)
         case serviceQualityInformationTapped
@@ -72,29 +57,23 @@ extension HelpSettings {
 
     public struct Dependencies: Sendable {
         public let setDebugLogging: @MainActor @Sendable (Bool) -> Void
-        public let clearLogs: @MainActor @Sendable () -> Void
         public let setSharesServiceQualityData: @MainActor @Sendable (Bool) -> Void
-        public let submitDebugReport: @Sendable () async throws -> String
-        public let copyToPasteboard: @MainActor @Sendable (String) -> Void
+        public let showDebugReport: @MainActor @Sendable () -> Void
         public let showServiceQualityInformation: @MainActor @Sendable () -> Void
         public let showServiceQualityEvents: @MainActor @Sendable () -> Void
         public let showLatestNews: @MainActor @Sendable () -> Void
 
         public init(
             setDebugLogging: @MainActor @Sendable @escaping (Bool) -> Void,
-            clearLogs: @MainActor @Sendable @escaping () -> Void,
             setSharesServiceQualityData: @MainActor @Sendable @escaping (Bool) -> Void,
-            submitDebugReport: @Sendable @escaping () async throws -> String,
-            copyToPasteboard: @MainActor @Sendable @escaping (String) -> Void,
+            showDebugReport: @MainActor @Sendable @escaping () -> Void,
             showServiceQualityInformation: @MainActor @Sendable @escaping () -> Void,
             showServiceQualityEvents: @MainActor @Sendable @escaping () -> Void,
             showLatestNews: @MainActor @Sendable @escaping () -> Void,
         ) {
             self.setDebugLogging = setDebugLogging
-            self.clearLogs = clearLogs
             self.setSharesServiceQualityData = setSharesServiceQualityData
-            self.submitDebugReport = submitDebugReport
-            self.copyToPasteboard = copyToPasteboard
+            self.showDebugReport = showDebugReport
             self.showServiceQualityInformation = showServiceQualityInformation
             self.showServiceQualityEvents = showServiceQualityEvents
             self.showLatestNews = showLatestNews

@@ -3,7 +3,7 @@
 # pull-kape-platform-sdk.sh
 #
 # Pulls the KapePlatformSDK Swift package from the Cloudsmith Swift registry
-# (expressvpn/kp_platform_sdks_dev) and unpacks it as a *local* Swift package at
+# (expressvpn/kp_platform_sdks) and unpacks it as a *local* Swift package at
 # LocalPackages/KapePlatformSDK/. That directory is gitignored — it is never
 # committed; every machine (and CI) populates it by running this script.
 #
@@ -27,7 +27,7 @@
 #   $KAPE_PLATFORM_SDK_VERSION. To list what the registry offers:
 #     curl -fsSL -H 'Accept: application/vnd.swift.registry.v1+json' \
 #       -H "Authorization: Bearer $TOKEN" \
-#       https://swift.cloudsmith.io/expressvpn/kp_platform_sdks_dev/KapePlatformSDK/KapePlatformSDK
+#       https://swift.cloudsmith.io/expressvpn/kp_platform_sdks/KapePlatformSDK/KapePlatformSDK
 #
 # Integrity:
 #   The archive's SHA-256 is pinned in scripts/kape-platform-sdk.checksum
@@ -49,7 +49,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REGISTRY="https://swift.cloudsmith.io/expressvpn/kp_platform_sdks_dev"
+REGISTRY="https://swift.cloudsmith.io/expressvpn/kp_platform_sdks"
 SCOPE="KapePlatformSDK"
 NAME="KapePlatformSDK"
 DEST="$REPO_ROOT/LocalPackages/KapePlatformSDK"

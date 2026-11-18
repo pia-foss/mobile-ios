@@ -28,39 +28,12 @@ extension HelpSettings {
         func reduce(_ state: inout State, _ action: Action) -> Effect<Action>? {
             switch action {
             case .sendDebugReportTapped:
-                guard !state.isSubmittingDebugReport else { return nil }
-                state.isSubmittingDebugReport = true
-                return .task { [dependencies] in
-                    do {
-                        let id = try await dependencies.submitDebugReport()
-                        return .debugReportSubmitted(id.isEmpty ? .empty : .submitted(id: id))
-                    } catch {
-                        return .debugReportSubmitted(.failed)
-                    }
-                }
-
-            case .debugReportSubmitted(let report):
-                state.isSubmittingDebugReport = false
-                state.debugReport = report
-                return nil
-
-            case .debugReportDismissed:
-                state.debugReport = nil
-                return nil
-
-            case .copyDebugReportIDTapped(let id):
-                state.debugReport = nil
-                return .fireAndForget { [dependencies] in dependencies.copyToPasteboard(id) }
+                return .fireAndForget { [dependencies] in dependencies.showDebugReport() }
 
             case .debugLoggingToggled(let isOn):
                 guard state.isDebugLoggingEditable, state.preferences.debugLogging != isOn else { return nil }
                 state.preferences.debugLogging = isOn
-                return .fireAndForget { [dependencies] in
-                    dependencies.setDebugLogging(isOn)
-                    if !isOn {
-                        dependencies.clearLogs()
-                    }
-                }
+                return .fireAndForget { [dependencies] in dependencies.setDebugLogging(isOn) }
 
             case .shareServiceQualityDataToggled(let isOn):
                 guard state.preferences.sharesServiceQualityData != isOn else { return nil }

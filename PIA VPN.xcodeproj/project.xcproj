@@ -327,6 +327,9 @@
           "product-name": "PIADebugMenu",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIADebugReport",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIADedicatedIP",
           "build-phase": { "build-phase": "frameworks" },
         }, {

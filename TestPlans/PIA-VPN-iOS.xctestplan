@@ -141,6 +141,13 @@
         "identifier" : "PIAVPNPermissionTests",
         "name" : "PIAVPNPermissionTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIADebugReport",
+        "identifier" : "PIADebugReportTests",
+        "name" : "PIADebugReportTests"
+      }
     }
   ],
   "version" : 1
