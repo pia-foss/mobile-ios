@@ -459,11 +459,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var sections = SettingOptions.allCases
-        if !Flags.shared.enablesDevelopmentSettings {
-            sections.removeAll(where: { $0 == SettingOptions.development })
-        }
-        return sections.count
+        return SettingOptions.allCases.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -522,11 +518,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case .privacyFeatures:
             showPrivacyFeaturesSettings()
         case .automation:
-            self.perform(segue: StoryboardSegue.Main.automationSettingsSegue, sender: nil)
+            showAutomationSettings()
         case .help:
             showHelpSettings()
-        case .development:
-            self.perform(segue: StoryboardSegue.Main.developmentSettingsSegue, sender: nil)
         default:
             showGeneralSettings()
         }
@@ -580,6 +574,18 @@ extension SettingsViewController {
     private func showPrivacyFeaturesSettings() {
         guard let navigationController else { return }
         let coordinator = PrivacyFeaturesSettingsCoordinator(
+            parent: navigationController,
+            pendingPreferences: pendingPreferences,
+            settingsDelegate: self
+        )
+        Task {
+            await coordinator.startAsync()
+        }
+    }
+
+    private func showAutomationSettings() {
+        guard let navigationController else { return }
+        let coordinator = AutomationSettingsCoordinator(
             parent: navigationController,
             pendingPreferences: pendingPreferences,
             settingsDelegate: self

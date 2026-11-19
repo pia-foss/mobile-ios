@@ -281,7 +281,10 @@
 "tiles.usage.download" = "다운로드";
 "tiles.nmt.accessibility.trusted" = "신뢰할 수 있는 네트워크";
 "tiles.quicksettings.title" = "빠른 설정";
-"tiles.quicksettings.min.elements.message" = "빠른 설정 타일에서 적어도 하나 이상의 항목이 표시되게 해야 합니다";
+"tiles.quicksettings.killswitch.enabled" = "VPN 킬 스위치가 활성화되었습니다";
+"tiles.quicksettings.killswitch.disabled" = "VPN 킬 스위치가 비활성화되었습니다";
+"tiles.quicksettings.automation.enabled" = "자동화가 활성화되었습니다";
+"tiles.quicksettings.automation.disabled" = "자동화가 비활성화되었습니다";
 "tiles.accessibility.visible.tile.action" = "탭하여 이 타일을 대시보드에서 제거합니다";
 "tiles.accessibility.invisible.tile.action" = "탭하여 이 타일을 대시보드에 추가합니다";
 "tiles.feedback.title" = "서비스를 평가해 주세요!";

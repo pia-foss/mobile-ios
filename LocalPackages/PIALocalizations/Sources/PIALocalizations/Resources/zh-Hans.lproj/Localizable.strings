@@ -281,7 +281,10 @@
 "tiles.usage.download" = "下载";
 "tiles.nmt.accessibility.trusted" = "受信任网络";
 "tiles.quicksettings.title" = "快速设置";
-"tiles.quicksettings.min.elements.message" = "应该在“快速设置”图块中保持至少一个元素可见";
+"tiles.quicksettings.killswitch.enabled" = "VPN 切断开关已启用";
+"tiles.quicksettings.killswitch.disabled" = "VPN 切断开关已禁用";
+"tiles.quicksettings.automation.enabled" = "自动化已启用";
+"tiles.quicksettings.automation.disabled" = "自动化已禁用";
 "tiles.accessibility.visible.tile.action" = "点击以从仪表板中删除此图块";
 "tiles.accessibility.invisible.tile.action" = "点击以将此图块添加到仪表板";
 "tiles.feedback.title" = "用得还满意吗？";

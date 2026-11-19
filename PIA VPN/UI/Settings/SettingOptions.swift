@@ -32,7 +32,6 @@ public enum SettingOptions: Int, CaseIterable {
     case privacyFeatures
     case automation
     case help
-    case development
 
     public func localizedTitleMessage() -> String {
         switch self {
@@ -42,7 +41,6 @@ public enum SettingOptions: Int, CaseIterable {
         case .privacyFeatures: return L10n.Settings.Section.privacyFeatures
         case .automation: return L10n.Settings.Section.automation
         case .help: return L10n.Settings.Section.help
-        case .development: return "Development"
         }
     }
 
@@ -54,7 +52,6 @@ public enum SettingOptions: Int, CaseIterable {
         case .privacyFeatures: return ""
         case .automation: return ""
         case .help: return ""
-        case .development: return ""
         }
     }
 
@@ -66,7 +63,6 @@ public enum SettingOptions: Int, CaseIterable {
         case .privacyFeatures: return Asset.Piax.Settings.iconPrivacy.image
         case .automation: return Asset.Piax.Settings.iconAutomation.image
         case .help: return Asset.Piax.Settings.iconAbout.image
-        case .development: return Asset.Piax.Settings.iconGeneral.image
         }
     }
 }
@@ -150,62 +146,6 @@ public enum NetworkSections: Int, CaseIterable, SettingSection {
     public func localizedSubtitleMessage() -> String {
         switch self {
         case .dns: return ""
-        }
-    }
-}
-
-public enum AutomationSections: Int, CaseIterable, SettingSection {
-    case automation
-    case manageAutomation
-
-    public func localizedTitleMessage() -> String {
-        switch self {
-        case .automation: return L10n.Network.Management.Tool.Enable.automation
-        case .manageAutomation: return L10n.Network.Management.Tool.title
-        }
-    }
-
-    public func localizedSubtitleMessage() -> String {
-        switch self {
-        case .automation: return ""
-        case .manageAutomation: return ""
-        }
-    }
-}
-
-public enum DevelopmentSections: Int, CaseIterable, SettingSection {
-    case publicUsername
-    case username
-    case password
-    case environment
-    case resolveGoogleAdsDomain
-    case deleteKeychain
-    case crash
-    case dynamicIslandLiveActivityFlag
-
-    public func localizedTitleMessage() -> String {
-        switch self {
-        case .publicUsername: return "Public Username"
-        case .username: return "Username"
-        case .password: return "Password"
-        case .environment: return "Environment"
-        case .resolveGoogleAdsDomain: return "Resolve Google Ads Domain"
-        case .deleteKeychain: return "Delete the Keychain"
-        case .crash: return "Crash the app"
-        case .dynamicIslandLiveActivityFlag: return "FF - Dynamic Island Live Activity"
-        }
-    }
-
-    public func localizedSubtitleMessage() -> String {
-        switch self {
-        case .publicUsername: return ""
-        case .username: return ""
-        case .password: return ""
-        case .environment: return ""
-        case .resolveGoogleAdsDomain: return ""
-        case .deleteKeychain: return ""
-        case .crash: return ""
-        case .dynamicIslandLiveActivityFlag: return ""
         }
     }
 }
