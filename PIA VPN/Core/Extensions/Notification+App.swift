@@ -25,7 +25,6 @@ import PIALibrary
 
 extension Notification.Name {
 
-    static let RefreshSettings = Notification.Name("RefreshSettings")
     static let ReloadSettings = Notification.Name("ReloadSettings")
     static let ResetSettingsNavigationStack = Notification.Name("ResetSettingsNavigationStack")
     static let Unauthorized = Notification.Name("Unauthorized")

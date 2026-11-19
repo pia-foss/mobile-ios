@@ -93,9 +93,8 @@ final class ProtocolSettingsCoordinator: @MainActor FlowCoordinator {
     @MainActor
     private func setVPNProtocol(_ vpnProtocol: ProtocolSettings.VPNProtocol) {
         pendingPreferences?.vpnType = vpnProtocol.vpnType.rawValue
-        settingsDelegate?.updateSetting(ProtocolsSections.protocolSelection, withValue: nil)
+        settingsDelegate?.resetProtocolSettings()
         Macros.postNotification(.PIASettingsHaveChanged)
-        Macros.postNotification(.RefreshSettings)
     }
 
     private static func preferences(from preferences: Client.Preferences.Editable) -> ProtocolSettings.Preferences {
