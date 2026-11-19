@@ -36,7 +36,7 @@ private let log = PIALogger.logger(for: SignupCoordinator.self)
 /// the existing UIKit ones; they report back through `WelcomeCompletionDelegate`, which (unlike
 /// `PIAWelcomeViewControllerDelegate`) takes a plain `UIViewController` and so can be satisfied by a
 /// SwiftUI-hosted flow.
-final class SignupCoordinator: NSObject, FlowCoordinator {
+final class SignupCoordinator: NSObject, @MainActor FlowCoordinator {
 
     enum Output {
         /// The customer signed up or signed in. `isSignup` distinguishes the two, because an
@@ -48,6 +48,9 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
     private let accountProvider: AccountProvider
 
     private let subject = PassthroughSubject<Output, Never>()
+
+    private var loginCoordinator: LoginCoordinator?
+    private var loginCancellable: AnyCancellable?
 
     var output: AnyPublisher<Output, Never> { subject.eraseToAnyPublisher() }
 
@@ -113,25 +116,10 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
         navigationController.popToRootViewController(animated: true)
     }
 
-    /// Signs in from a magic-link deep link.
-    ///
-    /// Replaces the old `AppDelegate` path, which cast the root to `GetStartedViewController` by
-    /// name and then slept for a fixed 1000ms hoping the login screen had finished appearing. Here
-    /// the push reports when it is actually done, so the sign-in starts at the right moment on any
-    /// device speed — and `LoginViewController`, which observes the completion notification, is
-    /// guaranteed to be on screen to receive it.
+    /// Signs in from a magic-link deep link, showing the login screen first.
+    @MainActor
     func handleMagicLink(token: String) {
-        showLogin { controller in
-            controller.showLoadingAnimation()
-            Client.providers.accountProvider.login(with: token) { result in
-                controller.hideLoadingAnimation()
-                var userInfo: [NotificationKey: Any]?
-                if case let .failure(error) = result {
-                    userInfo = [.error: error]
-                }
-                Macros.postNotification(.PIAFinishLoginWithMagicLink, userInfo)
-            }
-        }
+        showLogin().handleMagicLink(token: token)
     }
 
     // MARK: Paywall output
@@ -176,49 +164,38 @@ final class SignupCoordinator: NSObject, FlowCoordinator {
 
     // MARK: Destinations
 
-    /// Replaces `LoginAccountSegue`.
-    ///
-    /// Pushes `PIAWelcomeViewController` rather than `LoginViewController` directly. `LoginViewController`
-    /// styles no navigation bar of its own — it has no `BrandableNavigationBar` conformance and its
-    /// `viewShouldRestyle` never touches the bar — so pushing it bare leaves the app's default green
-    /// bar and no logo. Its container is what supplies both:
-    ///
-    /// ```swift
-    /// navigationItem.titleView = NavigationLogoView(logo: Theme.current.palette.logo)
-    /// Theme.current.applyNavigationBarStyle(to: self)
-    /// ```
-    ///
-    /// Going through the container keeps the login screen pixel-identical to the one this flow
-    /// replaced, which is what the ticket scoped.
-    ///
-    /// - Parameter onPresented: Called once the push has finished, with the screen that is now on
-    ///   top. Already-presented is treated as presented.
-    private func showLogin(onPresented: ((PIAWelcomeViewController) -> Void)? = nil) {
-        if let existing = navigationController.topViewController as? PIAWelcomeViewController {
-            onPresented?(existing)
-            return
+    /// Pushes the login screen, or brings back the one already in the stack.
+    @MainActor
+    @discardableResult
+    private func showLogin() -> LoginCoordinator {
+        if let loginCoordinator, loginCoordinator.isInNavigationStack {
+            loginCoordinator.showLogin()
+            return loginCoordinator
         }
 
-        var preset = Preset()
-        preset.pages = .login
-        // The pending-signup recovery path is dead — both hosts hard-code it off — and leaving it on
-        // would fire a storyboard segue out from under this flow.
-        preset.shouldRecoverPendingSignup = false
-
-        let controller = StoryboardScene.Welcome.piaWelcomeViewController.instantiate()
-        controller.preset = preset
-        controller.delegate = self
-
-        navigationController.pushViewController(controller, animated: true)
-
-        guard let onPresented else { return }
-        // The transition coordinator reports when the push has actually landed; without it the
-        // caller would be guessing with a sleep.
-        if let transition = navigationController.transitionCoordinator {
-            transition.animate(alongsideTransition: nil) { _ in onPresented(controller) }
-        } else {
-            onPresented(controller)
-        }
+        let coordinator = LoginCoordinator(
+            navigationController: navigationController,
+            accountProvider: accountProvider,
+            store: Client.store
+        )
+        // Replacing the cancellable drops the previous login flow's subscription.
+        loginCancellable = coordinator.output.sink(
+            receiveCompletion: { [weak self] _ in
+                self?.loginCoordinator = nil
+                self?.loginCancellable = nil
+            },
+            receiveValue: { [weak self] output in
+                switch output {
+                case .didAuthenticate(let user, let isSignup, let topViewController):
+                    self?.subject.send(
+                        .didAuthenticate(user: user, isSignup: isSignup, topViewController: topViewController)
+                    )
+                }
+            }
+        )
+        loginCoordinator = coordinator
+        coordinator.start()
+        return coordinator
     }
 
     /// Replaces `signupViaPurchaseSegue`.
@@ -276,27 +253,6 @@ extension SignupCoordinator: WelcomeCompletionDelegate {
     }
 
     func welcomeDidSignup(withUser user: UserAccount, topViewController: UIViewController) {
-        subject.send(.didAuthenticate(user: user, isSignup: true, topViewController: topViewController))
-    }
-}
-
-// MARK: - PIAWelcomeViewControllerDelegate
-
-/// How the pushed login container reports back.
-extension SignupCoordinator: PIAWelcomeViewControllerDelegate {
-    func welcomeController(
-        _ welcomeController: PIAWelcomeViewController,
-        didLoginWith user: UserAccount,
-        topViewController: UIViewController
-    ) {
-        subject.send(.didAuthenticate(user: user, isSignup: false, topViewController: topViewController))
-    }
-
-    func welcomeController(
-        _ welcomeController: PIAWelcomeViewController,
-        didSignupWith user: UserAccount,
-        topViewController: UIViewController
-    ) {
         subject.send(.didAuthenticate(user: user, isSignup: true, topViewController: topViewController))
     }
 }

@@ -37,7 +37,7 @@ struct DebugReportTests {
     func textMatchesCSIFormat() {
         let report = DebugReport(sections: [
             section("application.log", "line one"),
-            section("device_information", "iPhone14,2"),
+            section("device_information", "iPhone14,2")
         ])
 
         #expect(
@@ -56,7 +56,7 @@ struct DebugReportTests {
         let report = DebugReport(sections: [
             section("protocol_information", "a"),
             section("application.log", "b", .debugLog),
-            section("tunnel.log", "c", .tunnelLog),
+            section("tunnel.log", "c", .tunnelLog)
         ])
 
         #expect(report.sections(of: .mandatory).map(\.name) == ["protocol_information"])
@@ -72,7 +72,7 @@ struct DebugReportBuilderTests {
     func contentBecomesSection() {
         let report = DebugReportBuilder.assemble([
             .init(sectionName: "application.log", content: "line", kind: .debugLog),
-            .init(sectionName: "device_information", content: "iPhone14,2", kind: .mandatory),
+            .init(sectionName: "device_information", content: "iPhone14,2", kind: .mandatory)
         ])
 
         #expect(report.sections.map(\.name) == ["application.log", "device_information"])
@@ -85,14 +85,14 @@ struct DebugReportBuilderTests {
         "Components without content are dropped, empty content is kept",
         arguments: [
             (nil as String?, ["a", "c"]),
-            ("" as String?, ["a", "b", "c"]),
+            ("" as String?, ["a", "b", "c"])
         ]
     )
     func nilContentIsDropped(content: String?, expectedNames: [String]) {
         let report = DebugReportBuilder.assemble([
             .init(sectionName: "a", content: "kept", kind: .mandatory),
             .init(sectionName: "b", content: content, kind: .debugLog),
-            .init(sectionName: "c", content: "", kind: .tunnelLog),
+            .init(sectionName: "c", content: "", kind: .tunnelLog)
         ])
 
         #expect(report.sections.map(\.name) == expectedNames)
