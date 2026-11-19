@@ -639,11 +639,21 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc func openSettings() {
-        perform(segue: StoryboardSegue.Main.settingsSegueIdentifier)
+        presentSettings(activatesWireGuard: false)
     }
 
     @objc func openSettingsAndWireGuard() {
-        perform(segue: StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier)
+        presentSettings(activatesWireGuard: true)
+    }
+
+    private func presentSettings(activatesWireGuard: Bool) {
+        dismissModalViewController { [weak self] in
+            guard let self else { return }
+            let coordinator = SettingsCoordinator(presenter: self, activatesWireGuard: activatesWireGuard)
+            Task {
+                await coordinator.startAsync()
+            }
+        }
     }
 
     func openAccount() {
@@ -676,11 +686,6 @@ final class DashboardViewController: AutolayoutViewController {
 
         if let vc = segue.destination as? AddEmailToAccountViewController {
             vc.modalPresentationStyle = .fullScreen
-        } else if let identifier = segue.identifier,
-            identifier == StoryboardSegue.Main.settingsAndWireGuardSegueIdentifier.rawValue,
-            let vc = segue.destination as? SettingsViewController
-        {
-            vc.shouldSetWireGuardSettings = true
         }
     }
 

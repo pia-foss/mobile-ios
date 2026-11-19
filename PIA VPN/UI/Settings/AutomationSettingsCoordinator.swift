@@ -28,19 +28,16 @@ import UIKit
 final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
     private weak var parent: UINavigationController?
     private weak var pendingPreferences: Client.Preferences.Editable?
-    private weak var settingsDelegate: SettingsDelegate?
     private let subject = PassthroughSubject<Void, Never>()
 
     var output: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
 
     init(
         parent: UINavigationController,
-        pendingPreferences: Client.Preferences.Editable,
-        settingsDelegate: SettingsDelegate
+        pendingPreferences: Client.Preferences.Editable
     ) {
         self.parent = parent
         self.pendingPreferences = pendingPreferences
-        self.settingsDelegate = settingsDelegate
     }
 
     @MainActor
@@ -69,7 +66,6 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = isOn
         preferences.commit()
-        settingsDelegate?.refreshSettings()
     }
 
     @MainActor

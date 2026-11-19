@@ -22,47 +22,12 @@
 import Foundation
 import PIALibrary
 
+@MainActor
 protocol SettingsDelegate: AnyObject {
-
-    /**
-     Called to update the setting sent as parameter.
-
-     - Parameter setting: The setting to update.
-     - Parameter value: Optional value to update the setting
-     */
-    func updateSetting(_ setting: SettingSection, withValue value: Any?)
-
-    /**
-        Save VPN preferences
-     */
     func savePreferences()
-
-    /**
-        Reloads the Settings table view
-     */
-    func refreshSettings()
-
-    /**
-        Updates the value for the VPN action
-     */
-    func reportUpdatedPreferences()
-
-    /**
-        Updates the socket type for OVPN
-        - Parameter SocketType: UDP or TCP.
-     */
+    func resetProtocolSettings()
     func updateSocketType(socketType: String?)
-
-    /**
-        Updates the port for OVPN
-        - Parameter UInt16: The available port retrieved from the region list.
-     */
     func updateRemotePort(port: UInt16)
-
-    /**
-        Updates the encryption method for the VPN connection
-        - Parameter String: The encryption method.
-     */
     func updateDataEncryption(encryption value: String)
-
+    func updateDNS(key: String)
 }
