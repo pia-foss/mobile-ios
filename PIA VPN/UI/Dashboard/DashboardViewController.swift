@@ -76,6 +76,8 @@ final class DashboardViewController: AutolayoutViewController {
     private var currentPageIndex = 0
     private var isDisconnecting = false
     private var isUnauthorized = false
+    /// Set while the add email screen is up, so an account refresh doesn't present it again.
+    private var isShowingAddEmail = false
     private var foldHeaderWidth: CGFloat?
 
     private var currentStatus: VPNStatus = .disconnected {
@@ -683,10 +685,6 @@ final class DashboardViewController: AutolayoutViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.setEmptyBackButton()
-
-        if let vc = segue.destination as? AddEmailToAccountViewController {
-            vc.modalPresentationStyle = .fullScreen
-        }
     }
 
     // MARK: Notifications
@@ -800,16 +798,19 @@ final class DashboardViewController: AutolayoutViewController {
     }
 
     @objc private func checkAccountEmail() {
+        let accountProvider = Client.providers.accountProvider
+        guard !isShowingAddEmail,
+            accountProvider.isLoggedIn,
+            let info = accountProvider.currentUser?.info,
+            info.email?.isEmpty ?? true
+        else { return }
 
-        if let currentUser = Client.providers.accountProvider.currentUser,
-            let info = currentUser.info
-        {
-            if info.email == nil || info.email == "" {
-                //No email, we need to show the account email view
-                if Client.providers.accountProvider.isLoggedIn {
-                    self.perform(segue: StoryboardSegue.Main.showAddEmailSegue)
-                }
-            }
+        //No email, we need to show the account email view
+        isShowingAddEmail = true
+        let coordinator = AddEmailCoordinator(presenter: self)
+        Task {
+            await coordinator.startAsync()
+            isShowingAddEmail = false
         }
     }
 

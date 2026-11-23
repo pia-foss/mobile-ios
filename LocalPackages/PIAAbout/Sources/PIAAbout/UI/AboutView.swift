@@ -127,11 +127,7 @@ private struct MonospacedText: View {
 
 extension View {
     fileprivate func aboutCard() -> some View {
-        multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(PIASpacing.s16)
-            .background(Color.pia.surfaceContainerPrimary)
-            .clipShape(RoundedRectangle(cornerRadius: PIARadius.r12, style: .continuous))
+        multilineTextAlignment(.leading).piaCard()
     }
 }
 
