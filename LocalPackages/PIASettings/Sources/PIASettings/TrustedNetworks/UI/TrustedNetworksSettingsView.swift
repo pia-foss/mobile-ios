@@ -112,32 +112,30 @@ public struct TrustedNetworksSettingsView: View, ViewWithTitle {
     }
 }
 
-#if DEBUG
-    extension TrustedNetworksSettingsStore {
-        static var preview: TrustedNetworksSettingsStore {
-            let rules: [TrustedNetworksSettings.Rule] = [
-                .init(network: .secureWiFi, behavior: .alwaysConnect),
-                .init(network: .openWiFi, behavior: .alwaysDisconnect),
-                .init(network: .mobileData, behavior: .retainState),
-                .init(network: .custom(ssid: "Home"), behavior: .alwaysDisconnect)
-            ]
-            var state = TrustedNetworksSettings.State(rules: rules, canAddNetworks: true, isKillSwitchWarningPresented: false)
-            state.availableNetworks = ["Cafe Guest", "Office"]
-            return TrustedNetworksSettingsStore(
-                initialState: state,
-                dependencies: .init(
-                    loadRules: { rules },
-                    loadAvailableNetworks: { ["Cafe Guest", "Office"] },
-                    saveRule: { _, _ in },
-                    appDidBecomeActive: { AsyncStream { $0.finish() } },
-                    enableKillSwitch: {},
-                    showAddNetwork: {},
-                    didAddNetwork: {},
-                )
+extension TrustedNetworksSettingsStore {
+    static var preview: TrustedNetworksSettingsStore {
+        let rules: [TrustedNetworksSettings.Rule] = [
+            .init(network: .secureWiFi, behavior: .alwaysConnect),
+            .init(network: .openWiFi, behavior: .alwaysDisconnect),
+            .init(network: .mobileData, behavior: .retainState),
+            .init(network: .custom(ssid: "Home"), behavior: .alwaysDisconnect)
+        ]
+        var state = TrustedNetworksSettings.State(rules: rules, canAddNetworks: true, isKillSwitchWarningPresented: false)
+        state.availableNetworks = ["Cafe Guest", "Office"]
+        return TrustedNetworksSettingsStore(
+            initialState: state,
+            dependencies: .init(
+                loadRules: { rules },
+                loadAvailableNetworks: { ["Cafe Guest", "Office"] },
+                saveRule: { _, _ in },
+                appDidBecomeActive: { AsyncStream { $0.finish() } },
+                enableKillSwitch: {},
+                showAddNetwork: {},
+                didAddNetwork: {},
             )
-        }
+        )
     }
-#endif
+}
 
 #Preview {
     TrustedNetworksSettingsView(store: .preview)
