@@ -33,12 +33,6 @@
   "packages": [
     {
       "kind": "remote",
-      "repository": "https://github.com/sarathsarah/Popover.git",
-      "version": {
-        "branch": "master",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/Quick/Quick",
       "version": {
         "version": "7.6.2",
@@ -381,10 +375,6 @@
         }, {
           "package": "OpenSSL-Package",
           "product-name": "OpenSSL",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "Popover",
-          "product-name": "Popover",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "apple-core",
