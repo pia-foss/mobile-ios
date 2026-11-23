@@ -28,9 +28,8 @@ import UIKit
 final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
     private weak var parent: UINavigationController?
     private weak var pendingPreferences: Client.Preferences.Editable?
-    private weak var trustedNetworksStore: TrustedNetworksSettingsStore?
-    private weak var addCustomNetworksHost: UIViewController?
-    private let networkRules = NetworkManagementRules()
+    private var childCoordinator: TrustedNetworksSettingsCoordinator?
+    private var cancellables = Set<AnyCancellable>()
     private let subject = PassthroughSubject<Void, Never>()
 
     var output: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
@@ -73,108 +72,16 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
 
     @MainActor
     private func showManageAutomation() {
-        guard let parent else { return }
-        let networkRules = networkRules
-        let store = TrustedNetworksSettingsStore(
-            initialState: .init(
-                rules: networkRules.settingsRules(),
-                canAddNetworks: networkRules.canAddNetworks,
-                isKillSwitchWarningPresented: pendingPreferences?.isPersistentConnection == false && Client.preferences.nmtRulesEnabled
-            ),
-            dependencies: .init(
-                loadRules: { networkRules.settingsRules() },
-                loadAvailableNetworks: { networkRules.availableNetworks() },
-                saveRule: { networkRules.save($1, for: $0) },
-                appDidBecomeActive: { NotificationCenter.default.signals(named: UIApplication.didBecomeActiveNotification) },
-                enableKillSwitch: { [weak self] in self?.pendingPreferences?.isPersistentConnection = true },
-                showAddNetwork: { [weak self] in self?.showAddCustomNetworks() },
-                closeAddNetwork: { [weak self] in self?.closeAddCustomNetworks() },
+        guard let parent, let pendingPreferences else { return }
+        cancellables.removeAll()
+        let coordinator = TrustedNetworksSettingsCoordinator(parent: parent, pendingPreferences: pendingPreferences)
+        childCoordinator = coordinator
+        coordinator.output
+            .sink(
+                receiveCompletion: { [weak self] _ in self?.childCoordinator = nil },
+                receiveValue: { _ in }
             )
-        )
-        // Both hosts own the store through their root views, so it goes away with them
-        trustedNetworksStore = store
-        let host = NavigationHostingController(rootView: TrustedNetworksSettingsView(store: store)) {}
-        parent.pushViewController(host, animated: true)
-    }
-
-    @MainActor
-    private func showAddCustomNetworks() {
-        guard let parent, let trustedNetworksStore else { return }
-        let host = NavigationHostingController(rootView: AddCustomNetworksView(store: trustedNetworksStore)) {}
-        addCustomNetworksHost = host
-        parent.pushViewController(host, animated: true)
-    }
-
-    @MainActor
-    private func closeAddCustomNetworks() {
-        guard let parent, let addCustomNetworksHost, parent.topViewController === addCustomNetworksHost else { return }
-        parent.popViewController(animated: true)
-    }
-}
-
-// MARK: - Trusted Networks mapping
-
-extension NetworkManagementRules {
-    fileprivate func settingsRules() -> [TrustedNetworksSettings.Rule] {
-        rules().compactMap(TrustedNetworksSettings.Rule.init)
-    }
-
-    fileprivate func save(_ behavior: TrustedNetworksSettings.Behavior?, for network: TrustedNetworksSettings.Network) {
-        switch (network, behavior) {
-        case (.custom(let ssid), let behavior?):
-            setRule(behavior.rule, forNetwork: ssid)
-        case (.custom(let ssid), nil):
-            removeNetwork(ssid)
-        case (_, let behavior?):
-            guard let type = network.type else { return }
-            setRule(behavior.rule, for: type)
-        case (_, nil):
-            // Only Wi-Fi networks can be removed
-            break
-        }
-    }
-}
-
-extension TrustedNetworksSettings.Rule {
-    fileprivate init?(_ rule: NetworkManagementRules.Rule) {
-        let network: TrustedNetworksSettings.Network
-        switch rule.type {
-        case .protectedWiFi: network = .secureWiFi
-        case .openWiFi: network = .openWiFi
-        case .cellular: network = .mobileData
-        case .trustedNetwork:
-            guard let ssid = rule.ssid else { return nil }
-            network = .custom(ssid: ssid)
-        }
-        self.init(network: network, behavior: .init(rule.rule))
-    }
-}
-
-extension TrustedNetworksSettings.Network {
-    fileprivate var type: NMTType? {
-        switch self {
-        case .secureWiFi: .protectedWiFi
-        case .openWiFi: .openWiFi
-        case .mobileData: .cellular
-        case .custom: nil
-        }
-    }
-}
-
-extension TrustedNetworksSettings.Behavior {
-    fileprivate init(_ rule: NMTRules) {
-        switch rule {
-        case .alwaysConnect: self = .alwaysConnect
-        case .alwaysDisconnect: self = .alwaysDisconnect
-        case .retainState: self = .retainState
-        }
-    }
-
-    fileprivate var rule: NMTRules {
-        switch self {
-        case .alwaysConnect: .alwaysConnect
-        case .alwaysDisconnect: .alwaysDisconnect
-        case .retainState: .retainState
-        }
+            .store(in: &cancellables)
+        coordinator.start()
     }
 }

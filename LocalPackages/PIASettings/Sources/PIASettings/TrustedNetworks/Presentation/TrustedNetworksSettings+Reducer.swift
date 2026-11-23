@@ -72,7 +72,7 @@ extension TrustedNetworksSettings {
                 state.availableNetworks.removeAll { $0 == ssid }
                 return .task { [dependencies] in
                     dependencies.saveRule(.custom(ssid: ssid), behavior)
-                    dependencies.closeAddNetwork()
+                    dependencies.didAddNetwork()
                     return .rulesLoaded(dependencies.loadRules())
                 }
 

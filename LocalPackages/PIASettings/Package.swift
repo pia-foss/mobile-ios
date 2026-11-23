@@ -31,6 +31,13 @@ let package = Package(
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
                 .product(name: "PIASwiftUI", package: "PIAUI")
             ]
+        ),
+        .testTarget(
+            name: "PIASettingsTests",
+            dependencies: [
+                "PIASettings",
+                .product(name: "CoreArchitecture", package: "apple-core")
+            ]
         )
     ]
 )

@@ -83,7 +83,8 @@ extension TrustedNetworksSettings {
         public let appDidBecomeActive: @Sendable () -> AsyncStream<Void>
         public let enableKillSwitch: @MainActor @Sendable () -> Void
         public let showAddNetwork: @MainActor @Sendable () -> Void
-        public let closeAddNetwork: @MainActor @Sendable () -> Void
+        /// Reports that a Wi-Fi network got a rule; the coordinator decides what comes next
+        public let didAddNetwork: @MainActor @Sendable () -> Void
 
         public init(
             loadRules: @MainActor @Sendable @escaping () -> [Rule],
@@ -92,7 +93,7 @@ extension TrustedNetworksSettings {
             appDidBecomeActive: @Sendable @escaping () -> AsyncStream<Void>,
             enableKillSwitch: @MainActor @Sendable @escaping () -> Void,
             showAddNetwork: @MainActor @Sendable @escaping () -> Void,
-            closeAddNetwork: @MainActor @Sendable @escaping () -> Void,
+            didAddNetwork: @MainActor @Sendable @escaping () -> Void,
         ) {
             self.loadRules = loadRules
             self.loadAvailableNetworks = loadAvailableNetworks
@@ -100,7 +101,7 @@ extension TrustedNetworksSettings {
             self.appDidBecomeActive = appDidBecomeActive
             self.enableKillSwitch = enableKillSwitch
             self.showAddNetwork = showAddNetwork
-            self.closeAddNetwork = closeAddNetwork
+            self.didAddNetwork = didAddNetwork
         }
     }
 }

@@ -29,6 +29,10 @@ public struct TrustedNetworksSettingsView: View, ViewWithTitle {
     @ScaledMetric(relativeTo: .title2) private var minimumCardWidth: CGFloat = 150
     @ObservedObject private var store: TrustedNetworksSettingsStore
 
+    private static let gridHorizontalPadding = PIASpacing.s20
+    private static let columnSpacing = PIASpacing.s16
+    private static let rowSpacing = PIASpacing.s20
+
     public var navigationTitle: String { L10n.Network.Management.Tool.title }
 
     public init(store: TrustedNetworksSettingsStore) {
@@ -42,7 +46,7 @@ public struct TrustedNetworksSettingsView: View, ViewWithTitle {
                     NMTDescription(text: L10n.Settings.Hotspothelper.description)
 
                     rulesGrid(width: proxy.size.width)
-                        .padding(.horizontal, PIASpacing.s20)
+                        .padding(.horizontal, Self.gridHorizontalPadding)
 
                     if store.state.canAddNetworks {
                         addRuleButton
@@ -69,19 +73,22 @@ public struct TrustedNetworksSettingsView: View, ViewWithTitle {
         )
     }
 
+    /// Fits as many columns of at least `minimumCardWidth` as the width allows, wherever the screen is shown
+    /// (iPhone, a Settings sheet on iPad, either iPhone Duo display, Split View). Cards stay square while
+    /// there are several columns; in a single column they size to their content.
     private func rulesGrid(width: CGFloat) -> some View {
-        let metrics = GridMetrics(width: width, minimumCardWidth: minimumCardWidth)
-        let columns = Array(
-            repeating: GridItem(.fixed(metrics.cardWidth), spacing: GridMetrics.columnSpacing),
-            count: metrics.columnCount
+        let metrics = AdaptiveGridMetrics(
+            width: width - 2 * Self.gridHorizontalPadding,
+            minimumItemWidth: minimumCardWidth,
+            spacing: Self.columnSpacing
         )
 
-        return LazyVGrid(columns: columns, alignment: .leading, spacing: GridMetrics.rowSpacing) {
+        return LazyVGrid(columns: metrics.columns, alignment: .leading, spacing: Self.rowSpacing) {
             ForEach(store.state.rules) { rule in
                 NetworkRuleCard(
                     rule: rule,
-                    width: metrics.cardWidth,
-                    isSquare: metrics.isSquare,
+                    width: metrics.itemWidth,
+                    isSquare: metrics.columnCount > 1,
                     onSelect: { store.send(.behaviorSelected(rule.network, $0)) },
                     onRemove: rule.network.ssid.map { ssid in { store.send(.removeTapped(ssid: ssid)) } }
                 )
@@ -99,32 +106,9 @@ public struct TrustedNetworksSettingsView: View, ViewWithTitle {
                 Text(L10n.Network.Management.Tool.Add.rule)
                     .typography(.button1, color: .pia.primary)
             }
-            .foregroundColor(.pia.primary)
-            .frame(maxWidth: .infinity)
-            .frame(height: 44)
         }
+        .buttonStyle(PIAButtonStyle(.plain))
         .accessibilityLabel(L10n.Network.Management.Tool.Add.rule)
-    }
-}
-
-/// Fits as many columns of at least `minimumCardWidth` as the width allows, wherever the screen is shown
-/// (iPhone, a Settings sheet on iPad, either iPhone Duo display, Split View). Cards stay square while
-/// there are several columns; in a single column they size to their content.
-private struct GridMetrics {
-    static let columnSpacing = PIASpacing.s16
-    static let rowSpacing = PIASpacing.s20
-
-    let columnCount: Int
-    let cardWidth: CGFloat
-
-    var isSquare: Bool { columnCount > 1 }
-
-    init(width: CGFloat, minimumCardWidth: CGFloat) {
-        let available = max(0, width - 2 * PIASpacing.s20)
-        let columnCount = max(1, Int((available + Self.columnSpacing) / (minimumCardWidth + Self.columnSpacing)))
-
-        self.columnCount = columnCount
-        self.cardWidth = (available - Self.columnSpacing * CGFloat(columnCount - 1)) / CGFloat(columnCount)
     }
 }
 
@@ -148,7 +132,7 @@ private struct GridMetrics {
                     appDidBecomeActive: { AsyncStream { $0.finish() } },
                     enableKillSwitch: {},
                     showAddNetwork: {},
-                    closeAddNetwork: {},
+                    didAddNetwork: {},
                 )
             )
         }
