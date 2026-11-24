@@ -1,6 +1,6 @@
 //
-//  PaywallCloseButton.swift
-//  PIAPaywall
+//  PIACloseButton.swift
+//  PIASwiftUI
 //
 //  Copyright © 2026 Private Internet Access, Inc.
 //
@@ -22,35 +22,53 @@
 #if os(iOS)
     import PIAAssetsMobile
     import PIADesignSystem
-    import PIALocalizations
     import SwiftUI
 
-    /// The corner dismiss control.
-    struct PaywallCloseButton: View {
+    /// The corner "X" that dismisses a sheet or modal screen.
+    ///
+    /// Also answers the Escape key, so a hardware keyboard can close the screen.
+    public struct PIACloseButton: View {
         private enum Metrics {
             static let glyphSize: CGFloat = 24
             static let tapTarget: CGFloat = 44
         }
 
-        let action: () -> Void
+        private let color: Color
+        private let accessibilityLabel: String
+        private let action: () -> Void
 
-        var body: some View {
+        public init(
+            color: Color = .pia.onSurfaceContainerPrimary,
+            accessibilityLabel: String,
+            action: @escaping () -> Void
+        ) {
+            self.color = color
+            self.accessibilityLabel = accessibilityLabel
+            self.action = action
+        }
+
+        public var body: some View {
             Button(action: action) {
                 Asset.Piax.Global.iconCloseSmall.swiftUIImage
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: Metrics.glyphSize, height: Metrics.glyphSize)
-                    .foregroundColor(.pia.onSurfaceContainerPrimary)
+                    .foregroundColor(color)
                     .frame(width: Metrics.tapTarget, height: Metrics.tapTarget)
                     .contentShape(Rectangle())
             }
-            .accessibilityLabel(L10n.Signup.Paywall.Accessibility.close)
+            .buttonStyle(.plain)
+            .keyboardShortcut(.cancelAction)
+            .accessibilityLabel(Text(accessibilityLabel))
         }
     }
 
     #Preview {
-        PaywallCloseButton {}
-            .padding(PIASpacing.s8)
-            .background(Color.pia.background)
+        HStack {
+            PIACloseButton(accessibilityLabel: "Close") {}
+            PIACloseButton(color: .pia.onSurfaceContainerSecondary, accessibilityLabel: "Close") {}
+        }
+        .padding(PIASpacing.s8)
+        .background(Color.pia.background)
     }
 #endif

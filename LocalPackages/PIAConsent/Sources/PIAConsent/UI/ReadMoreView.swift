@@ -19,8 +19,8 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-import PIAAssetsMobile
 import PIADesignSystem
+import PIASwiftUI
 import SwiftUI
 
 public struct ReadMoreView: View {
@@ -48,15 +48,11 @@ public struct ReadMoreView: View {
 
     private var closeButton: some View {
         HStack {
-            Button(action: viewModel.closeButtonWasTapped) {
-                Asset.iconClose.swiftUIImage
-                    .renderingMode(.template)
-                    .foregroundColor(.pia.onSurfaceContainerSecondary)
-                    .frame(width: 44, height: 44)
-            }
-            .buttonStyle(.plain)
-            .keyboardShortcut(.cancelAction)
-            .accessibilityLabel(Text(viewModel.closeAccessibilityLabel))
+            PIACloseButton(
+                color: .pia.onSurfaceContainerSecondary,
+                accessibilityLabel: viewModel.closeAccessibilityLabel,
+                action: viewModel.closeButtonWasTapped
+            )
             .accessibilityIdentifier("id.consent.readMore.close")
 
             Spacer()

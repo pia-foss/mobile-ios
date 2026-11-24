@@ -360,6 +360,9 @@
           "product-name": "PIASettings",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "product-name": "PIASignup",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "product-name": "PIASwiftUI",
           "build-phase": { "build-phase": "frameworks" },
         }, {

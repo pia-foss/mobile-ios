@@ -22,7 +22,6 @@ internal enum StoryboardSegue {
     internal enum Signup: String, SegueType {
         case failureSegueIdentifier = "FailureSegueIdentifier"
         case internetUnreachableSegueIdentifier = "InternetUnreachableSegueIdentifier"
-        case presentGDPRTermsSegue = "PresentGDPRTermsSegue"
         case successSegueIdentifier = "SuccessSegueIdentifier"
         case successShowCredentialsSegueIdentifier = "SuccessShowCredentialsSegueIdentifier"
         case unwindFailureSegueIdentifier = "UnwindFailureSegueIdentifier"

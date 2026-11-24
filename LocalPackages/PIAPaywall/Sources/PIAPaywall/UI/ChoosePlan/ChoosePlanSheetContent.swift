@@ -73,7 +73,9 @@
                 Text(L10n.Signup.Paywall.Plans.title)
                     .typography(.title2, color: .pia.onSurface)
                 Spacer(minLength: PIASpacing.s16)
-                PaywallCloseButton { store.send(.planSheetDismissed) }
+                PIACloseButton(accessibilityLabel: L10n.Signup.Paywall.Accessibility.close) {
+                    store.send(.planSheetDismissed)
+                }
             }
         }
 
