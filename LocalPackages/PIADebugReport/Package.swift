@@ -8,7 +8,7 @@ let package = Package(
     // iOS only: the Help settings flow this screen belongs to is iOS/Mac Catalyst.
     platforms: [
         .iOS(.v15),
-        .macCatalyst(.v15),
+        .macCatalyst(.v15)
     ],
     products: [
         .library(
@@ -20,7 +20,7 @@ let package = Package(
         .package(path: "../PIALibrary"),
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
-        .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0"),
+        .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0")
     ],
     targets: [
         .target(
@@ -30,7 +30,7 @@ let package = Package(
                 .product(name: "PIALibrary", package: "PIALibrary"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
-                .product(name: "PIALocalizations", package: "PIALocalizations"),
+                .product(name: "PIALocalizations", package: "PIALocalizations")
             ]
         ),
         .testTarget(
@@ -38,8 +38,8 @@ let package = Package(
             dependencies: [
                 "PIADebugReport",
                 .product(name: "CoreArchitecture", package: "apple-core"),
-                .product(name: "PIALibrary", package: "PIALibrary"),
+                .product(name: "PIALibrary", package: "PIALibrary")
             ]
-        ),
+        )
     ]
 )
