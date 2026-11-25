@@ -252,13 +252,11 @@ final class RootCoordinator {
 
 extension RootCoordinator {
     private func handleAuthenticationSuccess() {
+        // The dashboard asks for the VPN permission once it appears, so the user grants it before
+        // reaching the tiles. Presenting it from here raced the root swap: when the dashboard
+        // wasn't in the window yet, UIKit dropped the presentation and the permission was never
+        // asked.
+        TransientState.shouldRequestVPNPermission = true
         setRoot(.main)
-        // After the root swap settles, present the VPN permission modal over Dashboard so
-        // the user grants permission before reaching the dashboard tiles.
-        DispatchQueue.main.async { [weak self] in
-            guard let self, let dashboard = self.dashboard else { return }
-            let coordinator = VPNPermissionCoordinator(presenter: dashboard)
-            Task { await coordinator.startAsync() }
-        }
     }
 }

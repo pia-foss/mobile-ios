@@ -26,4 +26,7 @@ class TransientState {
     static var didRetryPendingSignup = false
 
     static var shouldDisplayRegionPicker = false
+
+    /// Set on login, so the dashboard asks for the VPN permission once it is on screen.
+    static var shouldRequestVPNPermission = false
 }
