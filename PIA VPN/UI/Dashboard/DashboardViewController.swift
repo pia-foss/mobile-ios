@@ -616,16 +616,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    /// Dismisses any already presented view controllers and then performs the segue.
-    private func perform(segue: StoryboardSegue.Main) {
-        dismissModalViewController { [weak self] in
-            DispatchQueue.main.async {
-                guard let self else { return }
-                self.performSegue(withIdentifier: segue.rawValue, sender: self)
-            }
-        }
-    }
-
     func selectRegion(animated: Bool) {
         dismissModalViewController { [weak self] in
             DispatchQueue.main.async {
@@ -681,10 +671,6 @@ final class DashboardViewController: AutolayoutViewController {
         Task {
             await coordinator.startAsync()
         }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        navigationItem.setEmptyBackButton()
     }
 
     // MARK: Notifications
