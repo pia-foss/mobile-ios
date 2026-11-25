@@ -97,7 +97,12 @@ final class RootCoordinator {
     }
 
     func setRoot(_ root: AppRoot) {
-        guard let window else { return }
+        // Already there, or being installed: swapping the root while a screen is presented over the
+        // dashboard (e.g. add email) makes the dashboard appear logged out, and it asks for the
+        // login root again from inside this call. A second signup flow would replace the one being
+        // installed, leaving a screen on display whose coordinator is gone and whose buttons do
+        // nothing.
+        guard let window, root != currentRoot else { return }
         currentRoot = root
 
         let newRoot: UIViewController
