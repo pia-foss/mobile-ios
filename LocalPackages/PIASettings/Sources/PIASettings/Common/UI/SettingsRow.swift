@@ -28,6 +28,7 @@ struct SettingsLink {
 }
 
 struct SettingsRow<Accessory: View>: View {
+    private let icon: Image?
     private let title: String
     private let description: String?
     private let link: SettingsLink?
@@ -36,11 +37,13 @@ struct SettingsRow<Accessory: View>: View {
 
     init(
         _ title: String,
+        icon: Image? = nil,
         description: String? = nil,
         link: SettingsLink? = nil,
         isLabelAccessibilityHidden: Bool = false,
         @ViewBuilder accessory: () -> Accessory
     ) {
+        self.icon = icon
         self.title = title
         self.description = description
         self.link = link
@@ -55,6 +58,14 @@ struct SettingsRow<Accessory: View>: View {
 
     var content: some View {
         HStack(spacing: PIASpacing.s12) {
+            if let icon {
+                icon
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+                    .accessibilityHidden(true)
+            }
+
             VStack(alignment: .leading, spacing: PIASpacing.s4) {
                 VStack(alignment: .leading, spacing: PIASpacing.s4) {
                     Text(title)
@@ -107,6 +118,7 @@ struct SettingsToggleRow: View {
 
 struct SettingsNavigationRow: View {
     let title: String
+    var icon: Image? = nil
     var description: String? = nil
     var value: String? = nil
     var isLoading = false
@@ -114,7 +126,7 @@ struct SettingsNavigationRow: View {
 
     var body: some View {
         Button(action: action) {
-            SettingsRow(title, description: description) {
+            SettingsRow(title, icon: icon, description: description) {
                 HStack(spacing: PIASpacing.s8) {
                     if let value {
                         Text(value)

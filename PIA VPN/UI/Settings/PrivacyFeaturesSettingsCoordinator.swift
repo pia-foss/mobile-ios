@@ -33,19 +33,16 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
     private weak var parent: UINavigationController?
     private weak var host: UIViewController?
     private weak var pendingPreferences: Client.Preferences.Editable?
-    private weak var settingsDelegate: SettingsDelegate?
     private let subject = PassthroughSubject<Void, Never>()
 
     var output: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
 
     init(
         parent: UINavigationController,
-        pendingPreferences: Client.Preferences.Editable,
-        settingsDelegate: SettingsDelegate
+        pendingPreferences: Client.Preferences.Editable
     ) {
         self.parent = parent
         self.pendingPreferences = pendingPreferences
-        self.settingsDelegate = settingsDelegate
     }
 
     @MainActor
@@ -88,8 +85,6 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
         guard let pendingPreferences else { return }
         pendingPreferences.isPersistentConnection = preferences.killSwitch
         pendingPreferences.showReconnectNotifications = preferences.reconnectNotifications
-        settingsDelegate?.refreshSettings()
-        settingsDelegate?.reportUpdatedPreferences()
     }
 
     @MainActor

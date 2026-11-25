@@ -109,7 +109,6 @@ extension SiriShortcutsManager: INUIAddVoiceShortcutViewControllerDelegate {
                     AppPreferences.shared.disconnectShortcut = voiceShortcut
                 }
             }
-            NotificationCenter.default.post(name: .RefreshSettings, object: self, userInfo: nil)
             controller.dismiss(animated: true, completion: nil)
         }
     }
@@ -140,7 +139,6 @@ extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
                 AppPreferences.shared.disconnectShortcut = nil
             }
         }
-        NotificationCenter.default.post(name: .RefreshSettings, object: self, userInfo: nil)
         controller.dismiss(animated: true, completion: nil)
     }
 
@@ -152,7 +150,6 @@ extension SiriShortcutsManager: INUIEditVoiceShortcutViewControllerDelegate {
             AppPreferences.shared.useDisconnectSiriShortcuts = false
             AppPreferences.shared.disconnectShortcut = nil
         }
-        NotificationCenter.default.post(name: .RefreshSettings, object: self, userInfo: nil)
         controller.dismiss(animated: true, completion: nil)
     }
 

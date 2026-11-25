@@ -64,7 +64,7 @@ public final class OptionsViewController: AutolayoutViewController, UITableViewD
         tableView.backgroundColor = bgColor
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = SettingsViewController.rowHeight
+        tableView.rowHeight = 51
 
         viewContainer.addSubview(tableView)
 

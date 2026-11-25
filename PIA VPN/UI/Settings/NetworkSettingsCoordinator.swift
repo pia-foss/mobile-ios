@@ -102,7 +102,7 @@ final class NetworkSettingsCoordinator: @MainActor FlowCoordinator {
 
     @MainActor
     private func applyDNS(key: String) {
-        settingsDelegate?.updateSetting(NetworkSections.dns, withValue: key)
+        settingsDelegate?.updateDNS(key: key)
         Macros.postNotification(.PIASettingsHaveChanged)
     }
 

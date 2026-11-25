@@ -57,7 +57,7 @@ struct CardFactory {
                     return
                 }
 
-                if rootView is SettingsViewController {
+                if rootView is SettingsHostingController {
                     NotificationCenter.default.post(
                         name: .RefreshWireGuardSettings,
                         object: nil,
