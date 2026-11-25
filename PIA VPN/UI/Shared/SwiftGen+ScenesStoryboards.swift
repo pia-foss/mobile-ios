@@ -35,8 +35,6 @@ internal enum StoryboardScene {
 
     internal static let confirmVPNPlanViewController = SceneType<ConfirmVPNPlanViewController>(storyboard: Self.self, identifier: "ConfirmVPNPlanViewController")
 
-    internal static let gdprViewController = SceneType<GDPRViewController>(storyboard: Self.self, identifier: "GDPRViewController")
-
     internal static let signupSuccessViewController = SceneType<SignupSuccessViewController>(storyboard: Self.self, identifier: "SignupSuccessViewController")
   }
   internal enum Welcome: StoryboardType {

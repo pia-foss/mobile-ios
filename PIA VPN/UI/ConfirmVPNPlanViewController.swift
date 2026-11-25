@@ -25,7 +25,9 @@ import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
+import PIASignup
 import PIAUIKit
+import SwiftUI
 import UIKit
 
 private let log = PIALogger.logger(for: ConfirmVPNPlanViewController.self)
@@ -74,12 +76,32 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         if termsAndConditionsAgreed {
             updateAccountEmail()
         } else {
-            //present term and conditions
-            self.performSegue(
-                withIdentifier: StoryboardSegue.Signup.presentGDPRTermsSegue.rawValue,
-                sender: nil
-            )
+            presentGDPRConsent()
         }
+    }
+
+    /// Asks for consent before the email is attached to the account.
+    ///
+    /// Accepting continues only once the sheet is gone, so the success screen or an error toast
+    /// never lands under it. Closing (or swiping the sheet away) leaves the person here.
+    ///
+    /// Both callbacks dismiss the sheet itself rather than calling `dismiss` on `self`: once the
+    /// sheet is gone, a late second callback (Close and Escape together) would otherwise dismiss
+    /// this screen's own presentation and with it the signup flow.
+    private func presentGDPRConsent() {
+        let view = GDPRView(
+            onAccept: { [weak self] in
+                self?.presentedViewController?.dismiss(animated: true) {
+                    self?.termsAndConditionsAgreed = true
+                    self?.presentTermsAndConditionsAndUpdateEmail()
+                }
+            },
+            onReject: { [weak self] in
+                self?.termsAndConditionsAgreed = false
+                self?.presentedViewController?.dismiss(animated: true)
+            }
+        )
+        present(UIHostingController(rootView: view), animated: true)
     }
 
     private func updateAccountEmail() {
@@ -182,10 +204,6 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
                 completionDelegate: config.completionDelegate,
             )
             break
-        case .presentGDPRTermsSegue:
-            let gdprViewController = segue.destination as! GDPRViewController
-            gdprViewController.delegate = self
-            break
         default:
             break
         }
@@ -253,19 +271,6 @@ final class ConfirmVPNPlanViewController: AutolayoutViewController, BrandableNav
         buttonConfirm.setTitle(
             L10n.Welcome.Purchase.submit.uppercased(),
             for: [])
-    }
-
-}
-
-extension ConfirmVPNPlanViewController: GDPRDelegate {
-
-    public func gdprViewWasAccepted() {
-        termsAndConditionsAgreed = true
-        presentTermsAndConditionsAndUpdateEmail()
-    }
-
-    public func gdprViewWasRejected() {
-        self.termsAndConditionsAgreed = false
     }
 
 }

@@ -47,6 +47,7 @@ let package = Package(
             name: "PIASwiftUI",
             dependencies: [
                 "PIADesignSystem",
+                .product(name: "PIAAssetsMobile", package: "PIAAssets", condition: .when(platforms: [.iOS, .macCatalyst])),
                 .product(name: "PIAAssetsTV", package: "PIAAssets", condition: .when(platforms: [.tvOS]))
             ]
         ),

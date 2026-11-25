@@ -47,9 +47,11 @@
                     ZStack(alignment: .trailing) {
                         PIALogoView()
                             .frame(maxWidth: .infinity)
-                        PaywallCloseButton { store.send(.closeTapped) }
-                            .disabled(store.state.isRestoring)
-                            .accessibilityIdentifier(WelcomeBackAccessibility.closeButton)
+                        PIACloseButton(accessibilityLabel: L10n.Signup.Paywall.Accessibility.close) {
+                            store.send(.closeTapped)
+                        }
+                        .disabled(store.state.isRestoring)
+                        .accessibilityIdentifier(WelcomeBackAccessibility.closeButton)
                     }
                     Spacer(minLength: PIASpacing.s20)
                     WelcomeBackBody()

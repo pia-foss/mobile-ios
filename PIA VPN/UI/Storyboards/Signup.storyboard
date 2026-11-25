@@ -825,108 +825,14 @@ You can come back to the app later to finish the process.</string>
                         <outlet property="labelTitle" destination="8dA-qn-p1Q" id="zDW-ML-hpx"/>
                         <outlet property="textEmail" destination="crp-gi-gwj" id="6ks-qD-j88"/>
                         <segue destination="Zr7-rl-bTc" kind="show" identifier="SuccessShowCredentialsSegueIdentifier" id="FNt-dK-q5C"/>
-                        <segue destination="6bm-eY-LuK" kind="presentation" identifier="PresentGDPRTermsSegue" id="i2f-wq-as1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0P-Df-sXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2466" y="-1900"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="LT1-bC-zXU">
-            <objects>
-                <viewController storyboardIdentifier="GDPRViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6bm-eY-LuK" customClass="GDPRViewController" customModule="PIA_VPN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VWt-1O-nc0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBV-cC-tfm">
-                                <rect key="frame" x="0.0" y="309" width="375" height="184"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1DX-s0-Zhl">
-                                        <rect key="frame" x="19" y="19" width="337" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZAl-mk-l4G">
-                                        <rect key="frame" x="19" y="58.333333333333321" width="337" height="20.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T6U-KF-bGk">
-                                        <rect key="frame" x="19" y="88.666666666666686" width="337" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90x-Dw-ob9" customClass="PIAButton" customModule="PIAUIKit">
-                                        <rect key="frame" x="19" y="134" width="337" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="J8Q-Kq-etA"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="accept:" destination="6bm-eY-LuK" eventType="touchUpInside" id="z1C-RC-hug"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="T6U-KF-bGk" firstAttribute="top" secondItem="ZAl-mk-l4G" secondAttribute="bottom" constant="10" id="0ks-xz-pZM"/>
-                                    <constraint firstItem="90x-Dw-ob9" firstAttribute="top" secondItem="T6U-KF-bGk" secondAttribute="bottom" constant="25" id="6hF-FU-IRn"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZAl-mk-l4G" secondAttribute="trailing" constant="19" id="EOS-y5-QaJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="90x-Dw-ob9" secondAttribute="bottom" id="FEX-wl-Qg1"/>
-                                    <constraint firstItem="ZAl-mk-l4G" firstAttribute="leading" secondItem="PBV-cC-tfm" secondAttribute="leading" constant="19" id="GwC-kL-kVg"/>
-                                    <constraint firstAttribute="trailing" secondItem="T6U-KF-bGk" secondAttribute="trailing" constant="19" id="Kiv-2z-x1H"/>
-                                    <constraint firstItem="T6U-KF-bGk" firstAttribute="leading" secondItem="PBV-cC-tfm" secondAttribute="leading" constant="19" id="Rst-tB-keS"/>
-                                    <constraint firstItem="1DX-s0-Zhl" firstAttribute="leading" secondItem="PBV-cC-tfm" secondAttribute="leading" constant="19" id="VRj-Rw-T3Q"/>
-                                    <constraint firstAttribute="trailing" secondItem="90x-Dw-ob9" secondAttribute="trailing" constant="19" id="d1F-3k-5Ik"/>
-                                    <constraint firstAttribute="trailing" secondItem="1DX-s0-Zhl" secondAttribute="trailing" constant="19" id="eP2-i1-tIh"/>
-                                    <constraint firstItem="ZAl-mk-l4G" firstAttribute="top" secondItem="1DX-s0-Zhl" secondAttribute="bottom" constant="19" id="hci-Ic-bBu"/>
-                                    <constraint firstItem="90x-Dw-ob9" firstAttribute="leading" secondItem="PBV-cC-tfm" secondAttribute="leading" constant="19" id="pBd-A2-qHd"/>
-                                    <constraint firstItem="1DX-s0-Zhl" firstAttribute="top" secondItem="PBV-cC-tfm" secondAttribute="top" constant="19" id="wsM-CN-mFo"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGQ-Dm-kB4">
-                                <rect key="frame" x="5" y="5" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="9ib-u3-IH3"/>
-                                    <constraint firstAttribute="width" constant="44" id="G64-JW-bc2"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="PIAX/Global/icon-close"/>
-                                <connections>
-                                    <action selector="reject:" destination="6bm-eY-LuK" eventType="touchUpInside" id="dTI-g0-1t1"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="TKv-FU-VAb"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="PBV-cC-tfm" firstAttribute="leading" secondItem="VWt-1O-nc0" secondAttribute="leading" id="0kV-o6-4Bk"/>
-                            <constraint firstAttribute="trailing" secondItem="PBV-cC-tfm" secondAttribute="trailing" id="OWp-G8-MgG"/>
-                            <constraint firstItem="UGQ-Dm-kB4" firstAttribute="top" secondItem="TKv-FU-VAb" secondAttribute="top" constant="5" id="TzX-4C-AJ9"/>
-                            <constraint firstItem="PBV-cC-tfm" firstAttribute="centerY" secondItem="VWt-1O-nc0" secondAttribute="centerY" id="UIQ-Be-3jd"/>
-                            <constraint firstItem="UGQ-Dm-kB4" firstAttribute="leading" secondItem="TKv-FU-VAb" secondAttribute="leading" constant="5" id="vgS-I6-Z58"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="acceptButton" destination="90x-Dw-ob9" id="nWL-Ww-mda"/>
-                        <outlet property="closeButton" destination="UGQ-Dm-kB4" id="ZXk-4D-e51"/>
-                        <outlet property="labelCollectDescription" destination="ZAl-mk-l4G" id="kzr-yK-yW2"/>
-                        <outlet property="labelCollectTitle" destination="1DX-s0-Zhl" id="Jlu-0B-ieZ"/>
-                        <outlet property="labelUseDataDescription" destination="T6U-KF-bGk" id="TJm-gm-Mu9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IM2-br-Gm8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3730" y="-1158"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="PIAX/Global/icon-close" width="50.333332061767578" height="50.333332061767578"/>
         <image name="image-account-failed" width="572" height="372"/>
         <image name="image-no-internet" width="1250" height="661"/>
         <image name="image-purchase-success" width="65.666664123535156" height="71.666664123535156"/>

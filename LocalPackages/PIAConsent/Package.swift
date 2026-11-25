@@ -23,6 +23,7 @@ let package = Package(
             name: "PIAConsent",
             dependencies: [
                 .product(name: "PIADesignSystem", package: "PIAUI"),
+                .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),
                 .product(name: "PIAAssetsMobile", package: "PIAAssets")
             ]

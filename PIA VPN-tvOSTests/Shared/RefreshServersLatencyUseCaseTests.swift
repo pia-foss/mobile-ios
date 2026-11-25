@@ -20,9 +20,12 @@ class RefreshServersLatencyUseCaseTests: XCTestCase {
         let notificationCenterMock = NotificationCenterMock()
         let servers = [ServerMock(), ServerMock()]
         let connectionStateMonitorMock = ConnectionStateMonitorMock()
+        /// Not `.default`: the host app's daemons post `PIADaemonsDidPingServers` there too, and a
+        /// stray ping during a test would update the state (and fulfill expectations) again.
+        let notificationCenter = NotificationCenter()
 
         init() {
-            notificationCenterMock.notificationPublisher = NotificationCenter.Publisher(center: NotificationCenter.default, name: Notification.Name.PIADaemonsDidPingServers)
+            notificationCenterMock.notificationPublisher = NotificationCenter.Publisher(center: notificationCenter, name: Notification.Name.PIADaemonsDidPingServers)
         }
 
     }
@@ -95,7 +98,7 @@ class RefreshServersLatencyUseCaseTests: XCTestCase {
         XCTAssertEqual(fixture.clientMock.pingServersCalledWithServers.count, 2)
 
         // AND WHEN pinging finishes
-        NotificationCenter.default.post(name: Notification.Name.PIADaemonsDidPingServers, object: nil)
+        fixture.notificationCenter.post(name: Notification.Name.PIADaemonsDidPingServers, object: nil)
 
         wait(for: [expectation], timeout: 3)
 
