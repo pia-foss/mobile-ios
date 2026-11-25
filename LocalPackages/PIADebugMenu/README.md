@@ -15,7 +15,7 @@ Sections:
 | Connection Configurations | The endpoints the tunnel will attempt, in attempt order, labelled by protocol — first 25 on screen, all of them in Export |
 | Account and Subscription | Username, plan name, product ID, expiration date, expired / renewable / recurring flags |
 | Payment Receipt | Base64 receipt preview (first 300 chars); export button on iOS |
-| Logs | Last N log entries (newest on top), refreshed every 2 seconds; export button on iOS |
+| Logs | Last N log entries (newest on top), refreshed every 5 seconds; export button on iOS |
 | Subscription | Test Refund Request button (iOS only — triggers StoreKit refund sheet) |
 | Support | "Send to Support (CSI)" button — calls `Client.submitDebugReport()` and displays the returned report code |
 
@@ -127,37 +127,52 @@ The label renders in `.caption` / `.secondary` style above the value in `.body` 
 
 ```
 Sources/PIADebugMenu/
-├── DebugMenuView.swift        the screen: layout and one private var per section
-├── DebugMenuViewModel.swift   state, polling and intents
-├── Components/                reusable view pieces (DebugSection, DebugInfoRow, DebugExportFile)
-├── Extensions/                extensions on other types, one file per `X+Y`
-└── Probes/                    ask the system or the network something, return a value
+├── Presentation/
+│   ├── DebugMenu.swift                   State, Action, Output, Dependencies
+│   ├── DebugMenu+Reducer.swift           state transitions and effects (polling, refresh, report, refund)
+│   ├── DebugMenu+Values.swift            read-only values derived from state (previews, export)
+│   ├── DebugMenu+Live.swift              the real dependencies: Client, StoreKit, Probes
+│   └── DebugMenuStore.swift              Store typealias
+├── UI/
+│   ├── DebugMenuView.swift               the screen: layout and one private var per section
+│   └── Components/                       reusable view pieces (DebugSection, DebugInfoRow, DebugExportFile)
+├── Extensions/                           extensions on other types, one file per `X+Y`
+└── Probes/                               ask the system or the network something, return a value
 ```
 
 `Probes/` is the one that needs explaining. `VPNConnectionState` reads NetworkExtension and the tunnel
 interfaces; `IpifyAddress` does an HTTP round-trip. Both answer a question about the device rather than
-rendering anything, and neither belongs to the view or the view model — a new data source goes here.
+rendering anything, and neither belongs to the view or the reducer — a new data source goes here, and
+is reached through a closure on `DebugMenu.Dependencies`.
 
 ## Architecture
 
-`DebugMenuView` is a state observer only: it owns a `@StateObject DebugMenuViewModel`, renders `viewModel.*` and forwards user actions to it. All state, polling and side effects live in `DebugMenuViewModel.swift`:
+The menu follows the unidirectional `CoreArchitecture` pattern used by every SwiftUI feature (ADR 0009):
 
-- `@Published` state for every value the view renders or binds to (log snapshots, entitlement JWS, alert/sheet flags, refund transactions).
-- `onAppear()` / `onDisappear()` start and cancel a single refresh `Task` that polls the app log and the tunnel log every 5 seconds.
-- Intents: `sendReportToSupport()`, `requestRefund()`, `selectTransaction(_:)`, `handleRefundResult(_:)`, `presentManageSubscriptions()`.
+- `DebugMenuView` owns a `DebugMenuStore`, renders `store.state` and dispatches `DebugMenu.Action`s. Sheet and alert flags are bound with `store.binding(_:send:)`, so dismissing one also goes through the reducer.
+- `DebugMenu.Reducer` is pure. On `.onAppear` it starts two streams: `pollTicks` (every 5 seconds: app log, account, live VPN info, VPN connection, and the tunnel log unless a CSI report is in flight) and `connectionConfigurationChanges` (event-driven). `.onDisappear` cancels both. The ipify lookup reruns only when the VPN connection changes.
+- `DebugMenu.Dependencies.live(emit:)` is the only place that touches `Client`, StoreKit or the probes. The host passes it in and receives `.dismiss` through `emit`:
 
-Read-only values derived from `PIALibrary` (`appVersion`, `username`, `logs`, previews, `buildExportContent()`, …) live in `Extensions/DebugMenuViewModel+Values.swift`.
+```swift
+DebugMenuView(dependencies: .live(emit: { output in
+    switch output {
+    case .dismiss: // close the menu
+    }
+}))
+```
+
+Reducer behaviour is covered by `Tests/PIADebugMenuTests` using `TestStore`.
 
 ## Adding a new section
 
-1. Put any new state or side effect on `DebugMenuViewModel` (`@Published` property plus an intent method), and derived read-only values in `DebugMenuViewModel+Values.swift`.
+1. Add the value to `DebugMenu.State`. If it comes from outside, add a closure to `DebugMenu.Dependencies` (implemented in `DebugMenu+Live.swift`), plus an action that stores the result and an effect in the reducer that fetches it. Derived read-only values go in `DebugMenu+Values.swift`.
 
-2. Add a private `var` in `DebugMenuView.swift` returning a `DebugSection` that reads from the view model:
+2. Add a private `var` in `DebugMenuView.swift` returning a `DebugSection` that reads from state:
 
 ```swift
 private var mySection: some View {
     DebugSection("My Section") {
-        DebugInfoRow(label: "Some Key", value: viewModel.someValue)
+        DebugInfoRow(label: "Some Key", value: state.someValue)
     }
 }
 ```

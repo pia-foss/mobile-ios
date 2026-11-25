@@ -36,9 +36,13 @@ extension AppDelegate {
 
         let navVC = UINavigationController()
         let hostingVC = UIHostingController(
-            rootView: DebugMenuView(onDismiss: { [weak navVC] in
-                navVC?.dismiss(animated: true)
-            }))
+            rootView: DebugMenuView(
+                dependencies: .live(emit: { [weak navVC] output in
+                    switch output {
+                    case .dismiss: navVC?.dismiss(animated: true)
+                    }
+                })
+            ))
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()

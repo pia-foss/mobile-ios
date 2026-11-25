@@ -151,6 +151,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:LocalPackages\/PIADebugMenu",
+        "identifier" : "PIADebugMenuTests",
+        "name" : "PIADebugMenuTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:LocalPackages\/PIALogin",
         "identifier" : "PIALoginTests",
         "name" : "PIALoginTests"

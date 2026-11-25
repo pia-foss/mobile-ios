@@ -12,7 +12,13 @@ private struct DebugMenuModifier: ViewModifier {
             content
                 .fullScreenCover(isPresented: $showingDebugMenu) {
                     NavigationStack {
-                        DebugMenuView(onDismiss: { showingDebugMenu = false })
+                        DebugMenuView(
+                            dependencies: .live(emit: { output in
+                                switch output {
+                                case .dismiss: showingDebugMenu = false
+                                }
+                            })
+                        )
                     }
                 }
                 .onPlayPauseCommand { showingDebugMenu = true }

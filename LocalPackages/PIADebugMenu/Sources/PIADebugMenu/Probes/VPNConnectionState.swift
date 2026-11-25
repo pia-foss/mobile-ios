@@ -9,7 +9,7 @@ import NetworkExtension
 /// by another app. The tunnel interfaces see every VPN on the device but carry no ownership
 /// information, since PIA's own tunnel appears among them identically. Reading both and checking
 /// ours first is what separates "PIA" from "somebody else".
-struct VPNConnectionState: Equatable {
+struct VPNConnectionState: Equatable, Sendable {
     static let unknown = VPNConnectionState(profileState: .unavailable, isTunnelActive: false)
 
     let profileState: VPNProfileState
@@ -43,7 +43,7 @@ struct VPNConnectionState: Equatable {
 }
 
 /// State of the VPN profiles installed by *this* app.
-enum VPNProfileState: Equatable {
+enum VPNProfileState: Equatable, Sendable {
     case connected
     case connecting
     case reasserting
