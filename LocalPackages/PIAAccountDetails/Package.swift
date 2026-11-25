@@ -19,6 +19,7 @@ let package = Package(
         .package(path: "../PIAAssets"),
         .package(path: "../PIALibrary"),
         .package(path: "../PIALocalizations"),
+        .package(path: "../PIASignup"),
         .package(path: "../PIAUI"),
         .package(url: "https://github.com/pia-foss/apple-core.git", exact: "0.2.0")
     ],
@@ -31,7 +32,8 @@ let package = Package(
                 .product(name: "PIALibrary", package: "PIALibrary"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
-                .product(name: "PIALocalizations", package: "PIALocalizations")
+                .product(name: "PIALocalizations", package: "PIALocalizations"),
+                .product(name: "PIASignup", package: "PIASignup")
             ]
         ),
         .testTarget(

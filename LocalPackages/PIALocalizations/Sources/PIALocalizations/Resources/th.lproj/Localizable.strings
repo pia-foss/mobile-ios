@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "ข้อมูลส่วนบุคคลที่เรารวบรวม";
-"gdpr.collect.data.description" = "อีเมลสำหรับการจัดการบัญชีและป้องกันการละเมิดข้อมูล\n\nอีเมลใช้ในการส่งข้อมูลสมาชิก การยืนยันการชำระเงิน การติดต่อกับลูกค้า และข้อเสนอส่งเสริมการขาย Private Internet Access เท่านั้น";
-"gdpr.accept.button.title" = "ยอมรับและดำเนินการต่อ";
 
 // SET EMAIL
 "set.email.form.email" = "ใส่อีเมลของคุณ";

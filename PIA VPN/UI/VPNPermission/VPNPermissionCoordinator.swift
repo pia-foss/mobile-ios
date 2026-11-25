@@ -60,7 +60,14 @@ final class VPNPermissionCoordinator: NSObject, @MainActor FlowCoordinator {
         // stack (e.g. the force-update screen), so `startAsync()` never waits forever.
         host.onDismissed = { [subject] in subject.send(completion: .finished) }
         self.host = host
-        presenter.present(host, animated: true)
+        // Over whatever is already up (e.g. the add email screen the dashboard asks for right after
+        // login): presenting on a controller that already presents fails silently, and the
+        // permission would never be asked. Once granted, that screen is back.
+        var top = presenter
+        while let presented = top.presentedViewController {
+            top = presented
+        }
+        top.present(host, animated: true)
     }
 
     @MainActor

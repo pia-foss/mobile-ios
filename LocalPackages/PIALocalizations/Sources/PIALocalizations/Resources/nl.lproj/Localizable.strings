@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Persoonlijke informatie die we verzamelen";
-"gdpr.collect.data.description" = "E-mailadres wordt gebruikt voor accountbeheer en bescherming tegen misbruik.\n\nE-mailadres wordt alleen gebruikt voor het verzenden van abonnementsinformatie, betalingsbevestigingen, correspondentie met klanten en promotionele aanbiedingen van Private Internet Access.";
-"gdpr.accept.button.title" = "Akkoord en doorgaan";
 
 // SET EMAIL
 "set.email.form.email" = "Voer uw e-mailadres in";

@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "我们收集的个人信息";
-"gdpr.collect.data.description" = "用于管理账户和防止滥用的电子邮件地址。\n\n电子邮件地址仅用于发送订阅信息、付款确认、客户通信以及 Private Internet Access 促销优惠。";
-"gdpr.accept.button.title" = "同意并继续";
 
 // SET EMAIL
 "set.email.form.email" = "请输入您的电子邮件地址";

@@ -38,9 +38,20 @@ extension AddEmail {
             case .submitTapped:
                 return submit(&state)
 
-            case .consentGiven:
+            case .consentAccepted:
+                guard state.isAskingConsent else { return nil }
                 state.hasConsented = true
-                state.alert = nil
+                state.isAskingConsent = false
+                // Sent once the screen is gone (`consentDismissed`), so a failure alert never
+                // lands under it.
+                return nil
+
+            case .consentRejected:
+                state.isAskingConsent = false
+                return nil
+
+            case .consentDismissed:
+                guard state.hasConsented else { return nil }
                 return submit(&state)
 
             case .alertDismissed:
@@ -107,7 +118,7 @@ extension AddEmail {
             }
 
             guard state.hasConsented else {
-                state.alert = .consent
+                state.isAskingConsent = true
                 return nil
             }
 

@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Topladığımız kişisel bilgiler";
-"gdpr.collect.data.description" = "Hesap yönetimi ve suistimalden koruma amaçlarıyla e-posta adresi.\n\nE-posta adresi; yalnızca abonelik bilgilerini, ödeme doğrulamalarını, müşteri yazışmalarını ve Private Internet Access promosyon tekliflerini göndermek için kullanılır.";
-"gdpr.accept.button.title" = "Kabul edip devam et";
 
 // SET EMAIL
 "set.email.form.email" = "E-posta adresinizi girin";
