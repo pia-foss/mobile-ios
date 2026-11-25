@@ -109,7 +109,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
                 .accessibilityIdentifier(AccountDetailsAccessibility.manageSubscription)
             }
         }
-        .accountCard()
+        .piaCard()
     }
 
     private func expiryText(_ expiry: AccountDetails.Account.Expiry) -> Text {
@@ -154,7 +154,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
             .buttonStyle(PIAButtonStyle(.secondary, isLoading: store.state.isRestoring))
             .accessibilityIdentifier(AccountDetailsAccessibility.restore)
         }
-        .accountCard()
+        .piaCard()
     }
 
     // MARK: Delete
@@ -217,15 +217,6 @@ public enum AccountDetailsAccessibility {
     public static let manageSubscription = "id.accountDetails.manageSubscription.button"
     public static let restore = "id.accountDetails.restore.button"
     public static let deleteAccount = "id.accountDetails.delete.button"
-}
-
-extension View {
-    fileprivate func accountCard() -> some View {
-        frame(maxWidth: .infinity, alignment: .leading)
-            .padding(PIASpacing.s16)
-            .background(Color.pia.surfaceContainerPrimary)
-            .clipShape(RoundedRectangle(cornerRadius: PIARadius.r12, style: .continuous))
-    }
 }
 
 private extension AccountDetails.Account {

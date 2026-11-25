@@ -18,8 +18,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Self.self)
 
-    internal static let confirmVPNPlanViewController = SceneType<AddEmailToAccountViewController>(storyboard: Self.self, identifier: "ConfirmVPNPlanViewController")
-
     internal static let dashboardNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "DashboardNavigationController")
 
     internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Self.self, identifier: "PIACardsViewController")

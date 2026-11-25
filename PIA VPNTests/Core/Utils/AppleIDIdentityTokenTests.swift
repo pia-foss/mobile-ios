@@ -19,9 +19,8 @@
 //
 
 import PIABase
+import PIALibrary
 import XCTest
-
-@testable import PIA_VPN
 
 class AppleIDIdentityTokenTests: XCTestCase {
 

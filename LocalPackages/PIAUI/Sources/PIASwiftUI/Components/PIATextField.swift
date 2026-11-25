@@ -22,18 +22,22 @@
 import PIADesignSystem
 import SwiftUI
 
-/// Outlined text field with an optional title above it.
+/// Outlined text field with an optional title above it and an optional error below it.
 public struct PIATextField: View {
     @FocusState private var isFocused: Bool
 
     private let title: String?
     private let placeholder: String
     @Binding private var text: String
+    private let errorMessage: String?
 
-    public init(_ title: String? = nil, placeholder: String, text: Binding<String>) {
+    /// - Parameter errorMessage: Shown under the field, which is outlined in the error colour while
+    ///   it is set.
+    public init(_ title: String? = nil, placeholder: String, text: Binding<String>, errorMessage: String? = nil) {
         self.title = title
         self.placeholder = placeholder
         self._text = text
+        self.errorMessage = errorMessage
     }
 
     public var body: some View {
@@ -48,9 +52,21 @@ public struct PIATextField: View {
                 .typography(.body1, color: .pia.onSurface)
                 .focused($isFocused)
                 .padding(PIASpacing.s12)
-                .modifier(TextFieldModifier(isFocused: isFocused, focusedOutline: .pia.primary))
+                .modifier(outline)
                 .accessibilityLabel(title ?? placeholder)
+
+            if let errorMessage {
+                Text(errorMessage)
+                    .typography(.caption1, color: .pia.error)
+            }
         }
+    }
+
+    private var outline: TextFieldModifier {
+        guard errorMessage != nil else {
+            return TextFieldModifier(isFocused: isFocused, focusedOutline: .pia.primary)
+        }
+        return TextFieldModifier(isFocused: isFocused, outline: .pia.error, focusedOutline: .pia.error)
     }
 }
 
@@ -59,6 +75,7 @@ public struct PIATextField: View {
         PIATextField("Primary DNS", placeholder: "Required", text: .constant("1.1.1.1"))
         PIATextField("Secondary DNS", placeholder: "Optional", text: .constant(""))
         PIATextField(placeholder: "No title", text: .constant(""))
+        PIATextField("Email", placeholder: "Email", text: .constant("foo@"), errorMessage: "Invalid email")
     }
     .padding()
     .background(Color.pia.background)
