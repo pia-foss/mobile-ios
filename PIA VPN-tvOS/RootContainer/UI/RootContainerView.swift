@@ -34,6 +34,7 @@ struct RootContainerView: View {
             }
         }
         .withDebugMenu()
+        .withSwitchToAutomaticPrompt()
         .onChange(of: scenePhase) { _, newPhase in
             switch newPhase {
             case .active:

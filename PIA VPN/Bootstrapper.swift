@@ -221,6 +221,7 @@ final class Bootstrapper {
             // Business objects
 
             AccountObserver.shared.start()
+            SwitchToAutomaticPrompt.shared.start()
         #endif
         // Notifications
 
