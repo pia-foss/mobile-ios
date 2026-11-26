@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Informações pessoais que coletamos";
-"gdpr.collect.data.description" = "Endereço de e-mail para fins de gerenciamento de contas e proteção contra abusos.\n\nO endereço de e-mail é usado apenas para enviar informações da assinatura, confirmações de pagamento, correspondência de clientes e ofertas promocionais da Private Internet Access.";
-"gdpr.accept.button.title" = "Concordar e continuar";
 
 // SET EMAIL
 "set.email.form.email" = "Insira seu endereço de e-mail";

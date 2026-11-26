@@ -97,7 +97,12 @@ final class RootCoordinator {
     }
 
     func setRoot(_ root: AppRoot) {
-        guard let window else { return }
+        // Already there, or being installed: swapping the root while a screen is presented over the
+        // dashboard (e.g. add email) makes the dashboard appear logged out, and it asks for the
+        // login root again from inside this call. A second signup flow would replace the one being
+        // installed, leaving a screen on display whose coordinator is gone and whose buttons do
+        // nothing.
+        guard let window, root != currentRoot else { return }
         currentRoot = root
 
         let newRoot: UIViewController
@@ -247,13 +252,11 @@ final class RootCoordinator {
 
 extension RootCoordinator {
     private func handleAuthenticationSuccess() {
+        // The dashboard asks for the VPN permission once it appears, so the user grants it before
+        // reaching the tiles. Presenting it from here raced the root swap: when the dashboard
+        // wasn't in the window yet, UIKit dropped the presentation and the permission was never
+        // asked.
+        TransientState.shouldRequestVPNPermission = true
         setRoot(.main)
-        // After the root swap settles, present the VPN permission modal over Dashboard so
-        // the user grants permission before reaching the dashboard tiles.
-        DispatchQueue.main.async { [weak self] in
-            guard let self, let dashboard = self.dashboard else { return }
-            let coordinator = VPNPermissionCoordinator(presenter: dashboard)
-            Task { await coordinator.startAsync() }
-        }
     }
 }

@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "당사가 수집하는 개인 정보";
-"gdpr.collect.data.description" = "계정 관리 및 악용 방지를 위한 이메일 주소.\n\n이메일 주소는 구독 정보, 결제 확인, 고객 공지 사항 및 Private Internet Access 프로모션 정보를 보내는 데에만 사용됩니다.";
-"gdpr.accept.button.title" = "동의 및 계속";
 
 // SET EMAIL
 "set.email.form.email" = "이메일 주소를 입력하세요";

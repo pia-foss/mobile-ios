@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Personlige oplysninger, vi indsamler";
-"gdpr.collect.data.description" = "E-mailadresse bruges udelukkende til kontoadministrationsformål og til beskyttelse mod misbrug.\n\nE-mailadresse bruges kun til at sende abonnementsoplysninger, betalingsbekræftelser, kundekorrespondance og salgsfremmende tilbud fra Private Internet Access.";
-"gdpr.accept.button.title" = "Accepter og fortsæt";
 
 // SET EMAIL
 "set.email.form.email" = "Angiv din e-mailadresse";

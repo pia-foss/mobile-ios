@@ -80,18 +80,21 @@ struct AddEmailStoreTests {
         sut.send(.submitTapped)
         await sut.finish()
 
-        #expect(sut.state.alert == .consent)
+        #expect(sut.state.isAskingConsent)
         #expect(!sut.state.isSubmitting)
         #expect(spy.updatedEmails.isEmpty)
     }
 
-    @Test("Agreeing sends the email and remembers the consent")
+    @Test("Agreeing closes the consent screen and sends the email once it is gone")
     func consentSends() async throws {
-        let sut = makeStore(state: .init(email: "user@example.com", alert: .consent))
+        let sut = makeStore(state: .init(email: "user@example.com", isAskingConsent: true))
 
-        sut.send(.consentGiven)
+        sut.send(.consentAccepted)
         #expect(sut.state.hasConsented)
-        #expect(sut.state.alert == nil)
+        #expect(!sut.state.isAskingConsent)
+        #expect(!sut.state.isSubmitting)
+
+        sut.send(.consentDismissed)
         #expect(sut.state.isSubmitting)
         _ = try #require(await sut.receive())
         await sut.finish()
@@ -99,16 +102,48 @@ struct AddEmailStoreTests {
         #expect(spy.updatedEmails == ["user@example.com"])
     }
 
-    @Test("Declining consent sends nothing")
-    func decliningConsent() async {
-        let sut = makeStore(state: .init(email: "user@example.com", alert: .consent))
+    @Test("A second agree while the consent screen closes is ignored")
+    func consentAcceptedTwice() async {
+        let sut = makeStore(state: .init(email: "user@example.com", isAskingConsent: true))
 
-        sut.send(.alertDismissed)
+        sut.send(.consentAccepted)
+        sut.send(.consentAccepted)
         await sut.finish()
 
-        #expect(sut.state.alert == nil)
+        #expect(sut.state.hasConsented)
+        #expect(!sut.state.isAskingConsent)
+    }
+
+    @Test("Closing the consent screen sends nothing and asks again on the next submit")
+    func decliningConsent() async {
+        let sut = makeStore(state: .init(email: "user@example.com", isAskingConsent: true))
+
+        sut.send(.consentRejected)
+        sut.send(.consentDismissed)
+        await sut.finish()
+
+        #expect(!sut.state.isAskingConsent)
         #expect(!sut.state.hasConsented)
+        #expect(!sut.state.isSubmitting)
         #expect(spy.updatedEmails.isEmpty)
+
+        sut.send(.submitTapped)
+        await sut.finish()
+
+        #expect(sut.state.isAskingConsent)
+    }
+
+    @Test("Once agreed, later submits don't ask again")
+    func consentRemembered() async throws {
+        let sut = makeStore(state: .init(email: "user@example.com", hasConsented: true))
+
+        sut.send(.submitTapped)
+        #expect(!sut.state.isAskingConsent)
+        #expect(sut.state.isSubmitting)
+        _ = try #require(await sut.receive())
+        await sut.finish()
+
+        #expect(spy.updatedEmails == ["user@example.com"])
     }
 
     // MARK: Update
@@ -167,7 +202,7 @@ struct AddEmailStoreTests {
         #expect(spy.storedAppleIDEmails == ["abc@privaterelay.appleid.com"])
         #expect(sut.state.email == "abc@privaterelay.appleid.com")
         // Still asks for consent first, as a typed email would.
-        #expect(sut.state.alert == .consent)
+        #expect(sut.state.isAskingConsent)
     }
 
     @Test("Without an email from Apple, the one it shared before is used")

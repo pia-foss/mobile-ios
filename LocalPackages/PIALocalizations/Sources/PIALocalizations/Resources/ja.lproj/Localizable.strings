@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "弊社が収集する個人情報";
-"gdpr.collect.data.description" = "メールアドレスは、アカウント管理および乱用防止の目的にのみ使用されます。\n\nメールアドレスは、サブスクリプション情報、お支払確認、お客様とのやり取り、およびPrivate Internet Access のプロモーションオファーを送信するために使用されます。";
-"gdpr.accept.button.title" = "同意して続行する";
 
 // SET EMAIL
 "set.email.form.email" = "メールアドレスを入力してください";

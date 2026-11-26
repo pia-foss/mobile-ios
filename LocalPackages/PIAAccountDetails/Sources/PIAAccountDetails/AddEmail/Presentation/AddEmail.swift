@@ -46,8 +46,6 @@ extension AddEmail {
     }
 
     public enum Alert: Hashable, Identifiable, Sendable {
-        /// Asks to agree to the data collection before the email is sent.
-        case consent
         case updateFailed
 
         public var id: Self { self }
@@ -58,6 +56,8 @@ extension AddEmail {
         public var emailError: Validator.EmailValidationError?
         /// Asked once per screen, then remembered for later submits.
         public var hasConsented: Bool
+        /// The consent screen is up, asking to agree to the data collection before the email is sent.
+        public var isAskingConsent: Bool
         public var isSubmitting: Bool
         public var isLoggingOut: Bool
         public var alert: Alert?
@@ -67,6 +67,7 @@ extension AddEmail {
             email: String = "",
             emailError: Validator.EmailValidationError? = nil,
             hasConsented: Bool = false,
+            isAskingConsent: Bool = false,
             isSubmitting: Bool = false,
             isLoggingOut: Bool = false,
             alert: Alert? = nil,
@@ -75,6 +76,7 @@ extension AddEmail {
             self.email = email
             self.emailError = emailError
             self.hasConsented = hasConsented
+            self.isAskingConsent = isAskingConsent
             self.isSubmitting = isSubmitting
             self.isLoggingOut = isLoggingOut
             self.alert = alert
@@ -85,7 +87,11 @@ extension AddEmail {
     public enum Action: Equatable {
         case emailChanged(String)
         case submitTapped
-        case consentGiven
+        case consentAccepted
+        /// Closed, or swiped away, without agreeing.
+        case consentRejected
+        /// The consent screen is gone, whichever way it was closed.
+        case consentDismissed
         case alertDismissed
         /// Sign in with Apple finished; `nil` when Apple shared no email.
         case appleIDAuthorized(email: String?)

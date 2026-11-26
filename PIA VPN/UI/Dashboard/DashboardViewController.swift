@@ -206,19 +206,27 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
+        // give up pending signup if logged in
+        TransientState.didRetryPendingSignup = true
+
+        // allows CollectionView updates when visible
+        addCollectionViewObservers()
+
+        // Right after a login, the VPN permission comes first. The region picker and the email
+        // check run on the next appearance, once it is dismissed.
+        if TransientState.shouldRequestVPNPermission {
+            TransientState.shouldRequestVPNPermission = false
+            showVPNModal(target: self)
+            return
+        }
+
         if TransientState.shouldDisplayRegionPicker {
             TransientState.shouldDisplayRegionPicker = false
             selectRegion(animated: false)
         }
 
-        // give up pending signup if logged in
-        TransientState.didRetryPendingSignup = true
-
         // check account email
         checkAccountEmail()
-
-        // allows CollectionView updates when visible
-        addCollectionViewObservers()
     }
 
     override func viewDidDisappear(_ animated: Bool) {

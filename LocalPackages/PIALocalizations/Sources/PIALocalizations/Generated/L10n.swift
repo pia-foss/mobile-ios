@@ -353,24 +353,6 @@ public enum L10n {
       }
     }
   }
-  public enum Gdpr {
-    public enum Accept {
-      public enum Button {
-        /// Agree and continue
-        public static let title = L10n.tr("Localizable", "gdpr.accept.button.title", fallback: "Agree and continue")
-      }
-    }
-    public enum Collect {
-      public enum Data {
-        /// E-mail Address for the purposes of account management and protection from abuse.
-        /// 
-        /// E-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.
-        public static let description = L10n.tr("Localizable", "gdpr.collect.data.description", fallback: "E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.")
-        /// Personal information we collect
-        public static let title = L10n.tr("Localizable", "gdpr.collect.data.title", fallback: "Personal information we collect")
-      }
-    }
-  }
   public enum Global {
     /// Add
     public static let add = L10n.tr("Localizable", "global.add", fallback: "Add")

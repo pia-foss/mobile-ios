@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Personopplysninger vi samler inn";
-"gdpr.collect.data.description" = "E-postadresse for kontoadministrering og beskyttelse mot misbruk.\n\nE-postadresse blir kun brukt for å sende ut informasjon om abonnementet, betalingsbekreftelser, kundekorrespondanse og tilbud om Private Internet Access.";
-"gdpr.accept.button.title" = "Godta og fortsett";
 
 // SET EMAIL
 "set.email.form.email" = "Skriv inn e-postadressen din";

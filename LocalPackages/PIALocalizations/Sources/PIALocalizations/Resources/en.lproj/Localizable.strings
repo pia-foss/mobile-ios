@@ -302,9 +302,6 @@
 //FRIEND REFERRALS
 
 // GDPR
-"gdpr.collect.data.title" = "Personal information we collect";
-"gdpr.collect.data.description" = "E-mail Address for the purposes of account management and protection from abuse.\n\nE-mail address is used to send subscription information, payment confirmations, customer correspondence, and Private Internet Access promotional offers only.";
-"gdpr.accept.button.title" = "Agree and continue";
 
 // SET EMAIL
 "set.email.form.email" = "Enter your email address";

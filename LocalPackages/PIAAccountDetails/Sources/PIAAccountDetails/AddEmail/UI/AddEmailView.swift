@@ -24,6 +24,7 @@ import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
+import PIASignup
 import PIASwiftUI
 import SwiftUI
 
@@ -78,6 +79,12 @@ public struct AddEmailView: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(AddEmailAccessibility.screen)
         .alert(item: alertBinding, content: makeAlert)
+        .sheet(isPresented: consentBinding, onDismiss: { store.send(.consentDismissed) }) {
+            GDPRView(
+                onAccept: { store.send(.consentAccepted) },
+                onReject: { store.send(.consentRejected) }
+            )
+        }
     }
 
     // MARK: Form
@@ -202,7 +209,15 @@ public struct AddEmailView: View {
         .accessibilityElement(children: .combine)
     }
 
-    // MARK: Alerts
+    // MARK: Consent and alerts
+
+    /// Swiping the sheet away counts as closing it.
+    private var consentBinding: Binding<Bool> {
+        Binding(
+            get: { store.state.isAskingConsent },
+            set: { if !$0 { store.send(.consentRejected) } }
+        )
+    }
 
     private var alertBinding: Binding<AddEmail.Alert?> {
         Binding(
@@ -213,13 +228,6 @@ public struct AddEmailView: View {
 
     private func makeAlert(_ alert: AddEmail.Alert) -> Alert {
         switch alert {
-        case .consent:
-            return Alert(
-                title: Text(L10n.Gdpr.Collect.Data.title),
-                message: Text(L10n.Gdpr.Collect.Data.description),
-                primaryButton: .default(Text(L10n.Gdpr.Accept.Button.title)) { store.send(.consentGiven) },
-                secondaryButton: .cancel(Text(L10n.Global.cancel)) { store.send(.alertDismissed) }
-            )
         case .updateFailed:
             return Alert(
                 title: Text(L10n.Global.error),
