@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
@@ -72,7 +73,7 @@ class RegionTile: UIView, Tileable {
     }
 
     private func setupView() {
-        self.accessibilityIdentifier = "RegionTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.region
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(viewShouldRestyle), name: .PIAThemeDidChange, object: nil)

@@ -18,6 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAccessibility"),
         .package(path: "../PIALibrary"),
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
@@ -28,6 +29,7 @@ let package = Package(
         .target(
             name: "PIAPaywall",
             dependencies: [
+                .product(name: "PIAAccessibility", package: "PIAAccessibility"),
                 .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "PIALibrary", package: "PIALibrary"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),

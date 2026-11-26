@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIADesignSystem
 import PIALocalizations
 import PIASwiftUI
@@ -50,7 +51,7 @@ public struct GDPRView: View {
             PIACloseButton(accessibilityLabel: L10n.Global.close, action: onReject)
                 .padding(.leading, PIASpacing.s8)
                 .padding(.top, PIASpacing.s8)
-                .accessibilityIdentifier(GDPRAccessibility.closeButton)
+                .accessibilityIdentifier(AccessibilityID.GDPR.closeButton)
 
             GeometryReader { proxy in
                 ScrollView {
@@ -64,7 +65,7 @@ public struct GDPRView: View {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(GDPRAccessibility.screen)
+        .accessibilityIdentifier(AccessibilityID.GDPR.screen)
     }
 
     private var content: some View {
@@ -89,17 +90,10 @@ public struct GDPRView: View {
             }
             .buttonStyle(PIAButtonStyle(.primary))
             .disabled(didAccept)
-            .accessibilityIdentifier(GDPRAccessibility.acceptButton)
+            .accessibilityIdentifier(AccessibilityID.GDPR.acceptButton)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum GDPRAccessibility {
-    public static let screen = "GDPRScreen"
-    public static let acceptButton = "GDPRScreenAcceptButton"
-    public static let closeButton = "GDPRScreenCloseButton"
 }
 
 #Preview("Light") {

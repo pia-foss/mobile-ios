@@ -18,6 +18,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIADesignSystem
     import PIALibrary
     import PIALocalizations
@@ -137,7 +138,7 @@
                 }
                 .buttonStyle(.plain)
                 .accessibilityHint(L10n.DebugReportReview.Sections.expandHint)
-                .accessibilityIdentifier("debugReportSection.\(section.id)")
+                .accessibilityIdentifier(AccessibilityID.DebugReport.section(section.id))
 
                 if isExpanded {
                     VStack(alignment: .leading, spacing: PIASpacing.s8) {
@@ -230,7 +231,7 @@
                 // While sending the style shows its spinner and stops taps itself; disabling it too
                 // would dim the fill and bury the spinner.
                 .disabled(!state.canSend && !state.isSending)
-                .accessibilityIdentifier("debugReportSendButton")
+                .accessibilityIdentifier(AccessibilityID.DebugReport.sendButton)
 
                 Button(action: share) {
                     HStack(spacing: PIASpacing.s8) {
@@ -241,7 +242,7 @@
                 }
                 .buttonStyle(PIAButtonStyle(.plain))
                 .disabled(!state.canSend)
-                .accessibilityIdentifier("debugReportShareButton")
+                .accessibilityIdentifier(AccessibilityID.DebugReport.shareButton)
             }
             .padding(.horizontal, PIASpacing.s16)
             .padding(.top, PIASpacing.s12)

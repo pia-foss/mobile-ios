@@ -20,6 +20,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIAAssetsMobile
     import PIADesignSystem
     import PIALocalizations
@@ -51,7 +52,7 @@
                             store.send(.closeTapped)
                         }
                         .disabled(store.state.isRestoring)
-                        .accessibilityIdentifier(WelcomeBackAccessibility.closeButton)
+                        .accessibilityIdentifier(AccessibilityID.WelcomeBack.closeButton)
                     }
                     Spacer(minLength: PIASpacing.s20)
                     WelcomeBackBody()
@@ -101,7 +102,7 @@
                     Text(L10n.Signup.WelcomeBack.Cta.appStore).typography(.button1)
                 }
                 .buttonStyle(PIAButtonStyle(.primary, isLoading: isRestoring))
-                .accessibilityIdentifier(WelcomeBackAccessibility.appStoreButton)
+                .accessibilityIdentifier(AccessibilityID.WelcomeBack.appStoreButton)
 
                 Text(L10n.Signup.WelcomeBack.or)
                     .typography(.body2, color: .pia.onBackground)
@@ -113,7 +114,7 @@
                 }
                 .buttonStyle(PIAButtonStyle(.secondary))
                 .disabled(isRestoring)
-                .accessibilityIdentifier(WelcomeBackAccessibility.credentialsButton)
+                .accessibilityIdentifier(AccessibilityID.WelcomeBack.credentialsButton)
             }
             .padding(.bottom, PIASpacing.s16)
         }

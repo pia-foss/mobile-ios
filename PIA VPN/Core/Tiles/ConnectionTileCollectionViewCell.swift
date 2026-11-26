@@ -18,6 +18,7 @@
 //  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import PIAAccessibility
 import PIALibrary
 import PIALocalizations
 import PIAUIKit
@@ -37,7 +38,7 @@ class ConnectionTileCollectionViewCell: UICollectionViewCell, TileableCell {
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
-        self.accessibilityIdentifier = "ConnectionTileCollectionViewCell"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.connectionCell
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
         self.accessoryImageRight.image = Theme.current.dragDropImage()

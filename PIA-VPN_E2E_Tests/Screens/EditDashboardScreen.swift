@@ -6,15 +6,16 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
-    var quickConnectTileCollectionViewCell: XCUIElement { cell(with: "QuickConnectTileCollectionViewCell") }
-    var ipTileCollectionViewCell: XCUIElement { cell(with: "IPTileCollectionViewCell") }
-    var subscriptionTileCollectionViewCell: XCUIElement { cell(with: "SubscriptionTileCollectionViewCell") }
-    var usageTileCollectionViewCell: XCUIElement { cell(with: "UsageTileCollectionViewCell") }
-    var favoriteServersTileCollectionViewCell: XCUIElement { cell(with: "FavoriteServersTileCollectionViewCell") }
-    var connectionTileCollectionViewCell: XCUIElement { cell(with: "ConnectionTileCollectionViewCell") }
+    var quickConnectTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.quickConnectCell) }
+    var ipTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.ipCell) }
+    var subscriptionTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.subscriptionCell) }
+    var usageTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.usageCell) }
+    var favoriteServersTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.favoriteServersCell) }
+    var connectionTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.connectionCell) }
     var cancelButton: XCUIElement { button(with: "Cancel") }
 
     func navigateToEditDashboardScreen() {

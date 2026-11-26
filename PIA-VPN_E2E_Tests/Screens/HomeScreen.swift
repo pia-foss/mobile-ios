@@ -6,26 +6,27 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
-    var dashboardMenuButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Dashboard.menu) }
+    var dashboardMenuButton: XCUIElement { button(with: AccessibilityID.Dashboard.menu) }
     var editString: String { getString(key: "menu.accessibility.edit.tile", comment: "Edit") }
     var dashboardEditButton: XCUIElement { button(with: editString) }
-    var connectionButton: XCUIElement { button(with: AccessibilityId.Dashboard.connectionButton) }
+    var connectionButton: XCUIElement { button(with: AccessibilityID.Dashboard.connectionButton) }
     var connectedStatusString: String { getString(key: "dashboard.accessibility.vpn.button.isOn", comment: "VPN Connection button. The VPN is currently connected") }
     var connectedStatusLabel: XCUIElement { button(with: connectedStatusString) }
     var disconnectedStatusString: String { getString(key: "dashboard.accessibility.vpn.button.isOff", comment: "VPN Connection button. The VPN is currently disconnected") }
     var disconnectedStatusLabel: XCUIElement { button(with: disconnectedStatusString) }
-    var confirmationDialogButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Dialog.destructive) }
-    var quickSettingsButton: XCUIElement { cell(with: "QuickSettingsTileCollectionViewCell") }
+    var confirmationDialogButton: XCUIElement { button(with: AccessibilityID.Dialog.destructive) }
+    var quickSettingsButton: XCUIElement { cell(with: AccessibilityID.Tiles.quickSettingsCell) }
     var privateBrowserButtonString: String { getString(key: "tiles.quicksetting.private.browser.title", comment: "Private Browser") }
     var privateBrowserButton: XCUIElement { button(with: privateBrowserButtonString) }
     var enableNetworkManagementButton: XCUIElement { button(with: "Enable Network Management") }
     var disableNetworkManagementButton: XCUIElement { button(with: "Disable Network Management") }
     var enableVPNKillSwitchButton: XCUIElement { button(with: "Enable VPN Kill Switch") }
     var disableVPNKillSwitchButton: XCUIElement { button(with: "Disable VPN Kill Switch") }
-    var regionTileCollectionViewCell: XCUIElement { cell(with: "RegionTileCollectionViewCell") }
+    var regionTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.regionCell) }
 
     func logOut() {
         if (welcomeLoginButton.waitForElementToAppear()) {

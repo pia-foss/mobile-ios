@@ -21,6 +21,7 @@
 //
 
 import Combine
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
@@ -79,7 +80,7 @@ final class IPTile: UIView, Tileable {
 
         triangleImageView.image = Asset.Piax.Tiles.ipTriangle.image
         viewShouldRestyle()
-        self.accessibilityIdentifier = "IPTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.ip
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue

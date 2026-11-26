@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALocalizations
@@ -54,13 +55,13 @@ public struct ValidateQRLoginView: View {
                 .overlay(alignment: .bottom) {
                     ProgressView()
                         .controlSize(.large)
-                        .accessibilityIdentifier(ValidateQRLoginAccessibility.loadingIndicator)
+                        .accessibilityIdentifier(AccessibilityID.ValidateQRLogin.loadingIndicator)
                         .alignmentGuide(.bottom) { $0[.top] - 7 }
                 }
                 .offset(y: -70)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(ValidateQRLoginAccessibility.screenBackground)
+        .accessibilityIdentifier(AccessibilityID.ValidateQRLogin.screenBackground)
         .accessibilityValue(store.state.phase.accessibilityValue)
         .onAppear {
             store.send(.onAppear)
@@ -78,14 +79,14 @@ public struct ValidateQRLoginView: View {
                     .init(
                         title: L10n.Global.cancel,
                         style: .cancel,
-                        identifier: ValidateQRLoginAccessibility.cancelButton,
+                        identifier: AccessibilityID.ValidateQRLogin.cancelButton,
                         handler: {
                             store.send(.cancelTapped)
                         }
                     ),
                     .init(
                         title: L10n.Validateqr.Confirmation.continue,
-                        identifier: ValidateQRLoginAccessibility.confirmButton,
+                        identifier: AccessibilityID.ValidateQRLogin.confirmButton,
                         handler: {
                             store.send(.confirmTapped)
                         }
@@ -99,7 +100,7 @@ public struct ValidateQRLoginView: View {
                 actions: [
                     .init(
                         title: L10n.Global.ok,
-                        identifier: ValidateQRLoginAccessibility.errorDismissButton,
+                        identifier: AccessibilityID.ValidateQRLogin.errorDismissButton,
                         handler: {
                             store.send(.errorAcknowledged)
                         }
@@ -110,17 +111,6 @@ public struct ValidateQRLoginView: View {
             nil
         }
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum ValidateQRLoginAccessibility {
-    /// Its value is the current phase: `idle`, `confirming`, `validating`, `failed` or `finished`.
-    public static let screenBackground = "ValidateQRLoginScreenBackground"
-    public static let loadingIndicator = "ValidateQRLoginScreenLoadingIndicator"
-
-    public static let confirmButton = "ValidateQRLoginScreenConfirmButton"
-    public static let cancelButton = "ValidateQRLoginScreenCancelButton"
-    public static let errorDismissButton = "ValidateQRLoginScreenErrorDismissButton"
 }
 
 extension ValidateQRLogin.Phase {

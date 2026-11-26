@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIAAccessibility
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
@@ -64,7 +65,7 @@ class UsageTile: UIView, Tileable {
         self.usageTitle.text = L10n.Tiles.Usage.title.uppercased()
         self.uploadTitle.text = L10n.Tiles.Usage.upload
         self.downloadTitle.text = L10n.Tiles.Usage.download
-        self.accessibilityIdentifier = "UsageTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.usage
         displayUsageInformation()
     }
 

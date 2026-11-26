@@ -1,3 +1,4 @@
+import PIAAccessibility
 import PIALibrary
 import PIAUIKit
 import SwiftUI
@@ -49,7 +50,7 @@ class PromoOfferTile: UIView, Tileable {
         self.view = hostedView
 
         Theme.current.applyPrincipalBackground(self)
-        self.accessibilityIdentifier = "PromoOfferTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.promoOffer
     }
 
     /// The tile is built inside a cell before it has an owning view controller, so the hosting

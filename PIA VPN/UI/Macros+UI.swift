@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIAAccessibility
 import PIAAlertBanners
 import PIADesignSystem
 import PIALibrary
@@ -227,7 +228,7 @@ extension UIAlertController {
         let action = UIAlertAction(title: title, style: .destructive) { _ in
             handler()
         }
-        action.accessibilityIdentifier = Accessibility.Id.Dialog.destructive
+        action.accessibilityIdentifier = AccessibilityID.Dialog.destructive
         addAction(action)
     }
 

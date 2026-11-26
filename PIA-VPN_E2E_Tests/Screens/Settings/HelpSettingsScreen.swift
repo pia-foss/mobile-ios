@@ -6,6 +6,7 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
@@ -27,8 +28,8 @@ extension XCUIApplication {
 
     // Debug report review screen, opened by the "Send Debug Log to support" row. Queried by
     // accessibility identifier because its strings live in the PIALocalizations package bundle.
-    var debugReportReviewSendButton: XCUIElement { button(with: "debugReportSendButton") }
-    var debugReportReviewShareButton: XCUIElement { button(with: "debugReportShareButton") }
+    var debugReportReviewSendButton: XCUIElement { button(with: AccessibilityID.DebugReport.sendButton) }
+    var debugReportReviewShareButton: XCUIElement { button(with: AccessibilityID.DebugReport.shareButton) }
 
     func navigateToDebugReportReview() {
         navigateToHelpSettings()

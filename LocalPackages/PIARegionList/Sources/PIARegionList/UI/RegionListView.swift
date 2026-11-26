@@ -20,6 +20,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIAAssetsMobile
     import PIALocalizations
     import PIASwiftUI
@@ -92,7 +93,7 @@
                 .overlay {
                     if visible.isEmpty {
                         Image(asset: Asset.Piax.Regions.noResults)
-                            .accessibilityIdentifier("empty set background image")
+                            .accessibilityIdentifier(AccessibilityID.RegionList.emptyBackground)
                     }
                 }
                 .modifier(PullToRefresh(isEnabled: state.vpnState == .disconnected) { store.send(.refreshTriggered) })
@@ -145,7 +146,7 @@
                 .allowsHitTesting(isEnabled)
                 .accessibilityAddTraits(.isButton)
                 .accessibilityAction(.default, action)
-                .accessibilityIdentifier("uitests.regions.region_name")
+                .accessibilityIdentifier(AccessibilityID.RegionList.region)
                 .listRow(style: style)
         }
     }

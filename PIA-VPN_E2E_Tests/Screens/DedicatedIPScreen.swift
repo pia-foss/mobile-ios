@@ -6,6 +6,7 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
@@ -13,7 +14,7 @@ extension XCUIApplication {
     var dedicatedIPHeader: XCUIElement { staticText(with: dedicatedIPTitleString) }
     var dedicatedIPTextFieldString: String { getString(key: "dedicated.ip.token.textfield.accessibility", comment: "The textfield to type the Dedicated IP token") }
     var dedicatedIPTextField: XCUIElement { textField(with: dedicatedIPTextFieldString) }
-    var dedicatedIPList: XCUIElement { cell(with: "DedicatedIpRow") }
+    var dedicatedIPList: XCUIElement { cell(with: AccessibilityID.DedicatedIP.row) }
     var invalidTokenErrorString: String { getString(key: "dedicated.ip.message.invalid.token", comment: "Your token is invalid. Please make sure you have entered the token correctly.") }
     var invalidTokenErrorMessage: XCUIElement { staticText(with: invalidTokenErrorString) }
     var emptyTokenErrorString: String { getString(key: "dedicated.ip.message.incorrect.token", comment: "Please make sure you have entered the token correctly") }

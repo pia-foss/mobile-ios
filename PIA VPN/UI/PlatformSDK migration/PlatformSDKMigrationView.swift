@@ -5,6 +5,7 @@
 //  Copyright © 2026 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALocalizations
@@ -71,7 +72,7 @@ struct PlatformSDKMigrationView: View {
                 activityImage: Asset.piaSpinner.swiftUIImage
             )
         )
-        .accessibilityIdentifier("id.platformSDKMigration.confirm")
+        .accessibilityIdentifier(AccessibilityID.PlatformSDKMigration.confirm)
     }
 
     private func confirmButtonWasTapped() {

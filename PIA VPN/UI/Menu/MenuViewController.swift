@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
@@ -54,6 +55,22 @@ final class MenuViewController: AutolayoutViewController {
         case privacy
 
         case version
+
+        /// Every row has one, so a reused cell never keeps the identifier of the row it showed before.
+        var accessibilityIdentifier: String {
+            switch self {
+            case .selectRegion: AccessibilityID.Menu.selectRegion
+            case .account: AccessibilityID.Menu.account
+            case .dedicatedIp: AccessibilityID.Menu.dedicatedIP
+            case .settings: AccessibilityID.Menu.settings
+            case .logout: AccessibilityID.Menu.logout
+            case .homepage: AccessibilityID.Menu.homepage
+            case .support: AccessibilityID.Menu.support
+            case .about: AccessibilityID.Menu.about
+            case .privacy: AccessibilityID.Menu.privacy
+            case .version: AccessibilityID.Menu.version
+            }
+        }
     }
 
     private struct Cells {
@@ -481,16 +498,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 cell.fill(withTitle: title, icon: iconAsset.image)
             }
-            switch item {
-            case .account:
-                cell.accessibilityIdentifier = "uitests.menu.account"
-
-            case .logout:
-                cell.accessibilityIdentifier = Accessibility.Id.Menu.logout
-
-            default:
-                break
-            }
+            cell.accessibilityIdentifier = item.accessibilityIdentifier
 
             let backgroundView = UIView()
             Theme.current.applySecondaryBackground(backgroundView)

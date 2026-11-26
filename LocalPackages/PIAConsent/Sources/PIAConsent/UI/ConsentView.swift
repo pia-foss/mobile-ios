@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import SwiftUI
@@ -93,7 +94,7 @@ public struct ConsentView: View {
                 .typography(.body2, color: .pia.onSurfaceContainerSecondary)
         }
         .buttonStyle(.plain)
-        .accessibilityIdentifier("id.consent.readMore")
+        .accessibilityIdentifier(AccessibilityID.Consent.readMore)
     }
 
     private var acceptButton: some View {
@@ -105,7 +106,7 @@ public struct ConsentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 6))
         }
         .buttonStyle(.plain)
-        .accessibilityIdentifier("id.consent.accept")
+        .accessibilityIdentifier(AccessibilityID.Consent.accept)
     }
 
     private var noThanksButton: some View {
@@ -120,7 +121,7 @@ public struct ConsentView: View {
                 .contentShape(RoundedRectangle(cornerRadius: 6))
         }
         .buttonStyle(.plain)
-        .accessibilityIdentifier("id.consent.noThanks")
+        .accessibilityIdentifier(AccessibilityID.Consent.noThanks)
     }
 }
 

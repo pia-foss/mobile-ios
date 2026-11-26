@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
@@ -57,7 +58,7 @@ class SubscriptionTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(displayAccountInformation), name: .PIAAccountDidRefresh, object: nil)
 
         viewShouldRestyle()
-        self.accessibilityIdentifier = "SubscriptionTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.subscription
         self.subscriptionTitle.text = L10n.Tiles.Subscription.title.uppercased()
         displayAccountInformation()
     }
