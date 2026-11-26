@@ -16,6 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAccessibility"),
         .package(path: "../PIAAccount"),
         .package(path: "../PIAAssets"),
         .package(path: "../PIALocalizations"),
@@ -27,6 +28,7 @@ let package = Package(
         .target(
             name: "PIAValidateQRLogin",
             dependencies: [
+                .product(name: "PIAAccessibility", package: "PIAAccessibility"),
                 .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "PIAAccount", package: "PIAAccount"),

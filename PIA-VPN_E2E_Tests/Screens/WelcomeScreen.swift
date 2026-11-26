@@ -6,15 +6,12 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
-    /// The signup paywall's Log In button. It keeps the historical `id.login.submit` identifier so
-    /// this path survived the paywall rewrite.
-    ///
-    /// The previous implementation also looked for a `submitNew` identifier that was never declared
-    /// anywhere, so this file did not compile.
-    var welcomeLoginButton: XCUIElement { button(with: PIALibraryAccessibility.Id.Login.submit) }
+    /// The signup paywall's Log In button.
+    var welcomeLoginButton: XCUIElement { button(with: AccessibilityID.Paywall.loginButton) }
 
     func navigateToLoginScreen() {
         dismissConsentScreenIfPresented()

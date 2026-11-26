@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIADesignSystem
 import PIASwiftUI
 import SwiftUI
@@ -53,7 +54,7 @@ public struct ReadMoreView: View {
                 accessibilityLabel: viewModel.closeAccessibilityLabel,
                 action: viewModel.closeButtonWasTapped
             )
-            .accessibilityIdentifier("id.consent.readMore.close")
+            .accessibilityIdentifier(AccessibilityID.Consent.readMoreClose)
 
             Spacer()
         }

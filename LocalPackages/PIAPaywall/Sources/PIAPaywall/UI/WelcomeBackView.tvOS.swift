@@ -20,6 +20,7 @@
 //
 
 #if os(tvOS)
+    import PIAAccessibility
     import PIAAssetsTV
     import PIADesignSystem
     import PIALocalizations
@@ -69,21 +70,21 @@
                                     action: { store.send(.appStoreAccountTapped) }
                                 )
                                 .frame(width: Metrics.buttonSize.width, height: Metrics.buttonSize.height)
-                                .accessibilityIdentifier(WelcomeBackAccessibility.appStoreButton)
+                                .accessibilityIdentifier(AccessibilityID.WelcomeBack.appStoreButton)
 
                                 ActionButton(
                                     title: L10n.Signup.WelcomeBack.Cta.qrCode,
                                     action: { store.send(.qrCodeTapped) }
                                 )
                                 .frame(width: Metrics.buttonSize.width, height: Metrics.buttonSize.height)
-                                .accessibilityIdentifier(WelcomeBackAccessibility.qrCodeButton)
+                                .accessibilityIdentifier(AccessibilityID.WelcomeBack.qrCodeButton)
 
                                 ActionButton(
                                     title: L10n.Signup.WelcomeBack.Cta.credentials,
                                     action: { store.send(.usernameAndPasswordTapped) }
                                 )
                                 .frame(width: Metrics.buttonSize.width, height: Metrics.buttonSize.height)
-                                .accessibilityIdentifier(WelcomeBackAccessibility.credentialsButton)
+                                .accessibilityIdentifier(AccessibilityID.WelcomeBack.credentialsButton)
                             }
                         }
                     }

@@ -23,6 +23,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAccessibility"),
         .package(path: "../PIALibrary"),
         .package(path: "../PIAFavorites"),
         .package(path: "../PIAUI"),
@@ -41,6 +42,7 @@ let package = Package(
         .target(
             name: "PIARegionList",
             dependencies: [
+                .product(name: "PIAAccessibility", package: "PIAAccessibility"),
                 "PIARegionListDomain",
                 .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "PIALibrary", package: "PIALibrary"),

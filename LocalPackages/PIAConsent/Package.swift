@@ -14,6 +14,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAccessibility"),
         .package(path: "../PIAUI"),
         .package(path: "../PIALocalizations"),
         .package(path: "../PIAAssets")
@@ -22,6 +23,7 @@ let package = Package(
         .target(
             name: "PIAConsent",
             dependencies: [
+                .product(name: "PIAAccessibility", package: "PIAAccessibility"),
                 .product(name: "PIADesignSystem", package: "PIAUI"),
                 .product(name: "PIASwiftUI", package: "PIAUI"),
                 .product(name: "PIALocalizations", package: "PIALocalizations"),

@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIAFavorites
@@ -67,7 +68,7 @@ final class FavoriteServersTile: UIView, Tileable {
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIADaemonsDidPingServers, object: nil)
         nc.addObserver(self, selector: #selector(updateFavoriteList), name: .PIAServerHasBeenUpdated, object: nil)
 
-        self.accessibilityIdentifier = "FavoriteServersTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.favoriteServers
         viewShouldRestyle()
         self.tileTitle.text = L10n.Tiles.Favorite.Servers.title.uppercased()
         updateFavoriteList()
@@ -107,7 +108,8 @@ final class FavoriteServersTile: UIView, Tileable {
         let showGeo = AppPreferences.shared.showGeoServers
 
         for identifier in favoriteServers.reversed() {
-            let servers = currentServers
+            let servers =
+                currentServers
                 // filter servers (including DIPs) by favorite identifier
                 .filter { $0.favoriteKey == identifier }
                 // then, include geolocated servers only if `showGeo` is on

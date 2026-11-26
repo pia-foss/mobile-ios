@@ -20,6 +20,7 @@
 //
 
 import AuthenticationServices
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
@@ -77,7 +78,7 @@ public struct AddEmailView: View {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(AddEmailAccessibility.screen)
+        .accessibilityIdentifier(AccessibilityID.AddEmail.screen)
         .alert(item: alertBinding, content: makeAlert)
         .sheet(isPresented: consentBinding, onDismiss: { store.send(.consentDismissed) }) {
             GDPRView(
@@ -118,7 +119,7 @@ public struct AddEmailView: View {
             .submitLabel(.done)
             .onSubmit { store.send(.submitTapped) }
             .disabled(isBusy)
-            .accessibilityIdentifier(AddEmailAccessibility.email)
+            .accessibilityIdentifier(AccessibilityID.AddEmail.email)
 
             Button {
                 store.send(.submitTapped)
@@ -127,7 +128,7 @@ public struct AddEmailView: View {
             }
             .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isSubmitting))
             .disabled(store.state.isLoggingOut)
-            .accessibilityIdentifier(AddEmailAccessibility.submit)
+            .accessibilityIdentifier(AccessibilityID.AddEmail.submit)
 
             Text(L10n.Global.or)
                 .textCase(.uppercase)
@@ -147,7 +148,7 @@ public struct AddEmailView: View {
             .id(colorScheme)
             .frame(height: Metrics.appleButtonHeight)
             .disabled(isBusy)
-            .accessibilityIdentifier(AddEmailAccessibility.signInWithApple)
+            .accessibilityIdentifier(AccessibilityID.AddEmail.signInWithApple)
 
             Button {
                 store.send(.logoutTapped)
@@ -156,7 +157,7 @@ public struct AddEmailView: View {
             }
             .buttonStyle(PIAButtonStyle(.plain, isLoading: store.state.isLoggingOut))
             .disabled(store.state.isSubmitting)
-            .accessibilityIdentifier(AddEmailAccessibility.logout)
+            .accessibilityIdentifier(AccessibilityID.AddEmail.logout)
             .padding(.top, PIASpacing.s8)
         }
     }
@@ -171,18 +172,18 @@ public struct AddEmailView: View {
             Text(L10n.Set.Email.Success.messageFormat(email))
                 .typography(.body1, color: .pia.onBackground)
                 .multilineTextAlignment(.center)
-                .accessibilityIdentifier(AddEmailAccessibility.successMessage)
+                .accessibilityIdentifier(AccessibilityID.AddEmail.successMessage)
 
             VStack(alignment: .leading, spacing: PIASpacing.s16) {
                 credential(
                     caption: L10n.Account.Username.caption,
                     value: credentials.username,
-                    identifier: AddEmailAccessibility.username
+                    identifier: AccessibilityID.AddEmail.username
                 )
                 credential(
                     caption: L10n.Set.Email.Password.caption,
                     value: credentials.password,
-                    identifier: AddEmailAccessibility.password
+                    identifier: AccessibilityID.AddEmail.password
                 )
             }
             .piaCard()
@@ -193,7 +194,7 @@ public struct AddEmailView: View {
                 Text(L10n.Global.close).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.primary))
-            .accessibilityIdentifier(AddEmailAccessibility.close)
+            .accessibilityIdentifier(AccessibilityID.AddEmail.close)
         }
     }
 
@@ -236,19 +237,6 @@ public struct AddEmailView: View {
             )
         }
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum AddEmailAccessibility {
-    public static let screen = "id.addEmail.screen"
-    public static let email = "id.addEmail.email.field"
-    public static let submit = "id.addEmail.submit.button"
-    public static let signInWithApple = "id.addEmail.signInWithApple.button"
-    public static let logout = "id.addEmail.logout.button"
-    public static let successMessage = "id.addEmail.success.message"
-    public static let username = "id.addEmail.username"
-    public static let password = "id.addEmail.password"
-    public static let close = "id.addEmail.close.button"
 }
 
 private extension Validator.EmailValidationError {

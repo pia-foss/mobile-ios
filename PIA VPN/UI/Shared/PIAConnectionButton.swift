@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import PIAAccessibility
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
@@ -71,7 +72,7 @@ class PIAConnectionButton: UIButton, Restylable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupView()
-        self.accessibilityIdentifier = AccessibilityId.Dashboard.connectionButton
+        self.accessibilityIdentifier = AccessibilityID.Dashboard.connectionButton
     }
 
     deinit {

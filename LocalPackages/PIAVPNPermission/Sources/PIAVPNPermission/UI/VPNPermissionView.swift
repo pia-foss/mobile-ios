@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALocalizations
@@ -63,7 +64,7 @@ public struct VPNPermissionView: View {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(VPNPermissionAccessibility.screen)
+        .accessibilityIdentifier(AccessibilityID.VPNPermission.screen)
         .alert(L10n.VpnPermission.title, isPresented: isShowingDeniedAlert) {
             if store.state.canContactSupport {
                 Button(L10n.VpnPermission.Disallow.contact) { store.send(.contactSupportTapped) }
@@ -102,7 +103,7 @@ public struct VPNPermissionView: View {
                 Text(L10n.Global.ok).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.phase == .requesting))
-            .accessibilityIdentifier(VPNPermissionAccessibility.submit)
+            .accessibilityIdentifier(AccessibilityID.VPNPermission.submit)
             .padding(.top, Metrics.buttonSpacing)
 
             Text(L10n.VpnPermission.Body.footer)
@@ -121,15 +122,6 @@ public struct VPNPermissionView: View {
         guard store.state.canContactSupport else { return L10n.VpnPermission.Disallow.Message.basic }
         return L10n.VpnPermission.Disallow.Message.basic + "\n" + L10n.VpnPermission.Disallow.Message.support
     }
-}
-
-/// Stable identifiers for the UI tests.
-///
-/// `screen` and `submit` must match `AccessibilityId.VPNPermission` in the app, which the E2E
-/// tests read.
-public enum VPNPermissionAccessibility {
-    public static let screen = "id.vpnPermission.screen"
-    public static let submit = "id.vpnPermission.ok.button"
 }
 
 private extension VPNPermission.Dependencies {

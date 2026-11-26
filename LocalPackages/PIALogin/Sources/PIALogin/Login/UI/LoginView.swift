@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIADesignSystem
 import PIALibrary
 import PIALocalizations
@@ -89,7 +90,7 @@ public struct LoginView: View {
                 .submitLabel(.next)
                 .focused($focusedField, equals: .username)
                 .onSubmit { focusedField = .password }
-                .accessibilityIdentifier(LoginAccessibility.username)
+                .accessibilityIdentifier(AccessibilityID.Login.username)
                 .modifier(fieldStyle(.username))
 
                 SecureField(
@@ -100,7 +101,7 @@ public struct LoginView: View {
                 .submitLabel(.go)
                 .focused($focusedField, equals: .password)
                 .onSubmit(logIn)
-                .accessibilityIdentifier(LoginAccessibility.password)
+                .accessibilityIdentifier(AccessibilityID.Login.password)
                 .modifier(fieldStyle(.password))
             }
             .padding(.top, PIASpacing.s32)
@@ -109,7 +110,7 @@ public struct LoginView: View {
                 Text(L10n.Welcome.Login.submit.uppercased()).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.inFlight != nil))
-            .accessibilityIdentifier(LoginAccessibility.submit)
+            .accessibilityIdentifier(AccessibilityID.Login.submit)
             .padding(.top, Metrics.fieldSpacing)
 
             VStack(spacing: 0) {
@@ -209,16 +210,6 @@ private struct MagicLinkSheet: View {
         .background(Color.pia.background.ignoresSafeArea())
         .onAppear { isFocused = true }
     }
-}
-
-/// Stable identifiers for the UI tests.
-///
-/// Must match `Accessibility.Id.Login` in the app, which the E2E tests read. `password` shares the
-/// submit button's identifier for historical reasons; the tests tell them apart by element type.
-public enum LoginAccessibility {
-    public static let submit = "id.login.submit"
-    public static let username = "id.login.username"
-    public static let password = "id.login.submit"
 }
 
 private extension Login.Dependencies {

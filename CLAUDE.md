@@ -23,6 +23,7 @@ fastlane and xcode cloud are used for ci/cd
 @"PIA VPN WG Tunnel/"           WireGuard Network Extension
 @LocalPackages/PIALibrary/      Shared Core: providers, VPN, persistence
 @LocalPackages/PIAUI/           Shared UI components
+@LocalPackages/PIAAccessibility/ Accessibility identifiers shared by views and UI tests
 @Resources/Configurations       xcconfig files, Build configurations
 @TestPlans/                     Xcode test plans
 
@@ -116,6 +117,8 @@ xcodebuild build -scheme "PIA VPN Staging" -configuration Staging -destination "
 **Testing**: New features → PIA VPNTests for iOS, Mock providers available in PIALibrary
 
 **Resources**: Use SwiftGen accessors for strings, assets, storyboards (type-safe)
+
+**Accessibility identifiers**: always `AccessibilityID` from PIAAccessibility, in views and UI tests alike; never inline strings (ADR-0015)
 
 **VPN Extensions**: Separate process, memory constraints, shared app group for IPC, Keychain sharing required
 

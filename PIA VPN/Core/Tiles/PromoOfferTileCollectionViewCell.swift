@@ -1,3 +1,4 @@
+import PIAAccessibility
 import PIALibrary
 import PIAUIKit
 import UIKit
@@ -16,7 +17,7 @@ class PromoOfferTileCollectionViewCell: UICollectionViewCell, TileableCell {
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
-        self.accessibilityIdentifier = "PromoOfferTileCollectionViewCell"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.promoOfferCell
 
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)

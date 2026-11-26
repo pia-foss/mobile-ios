@@ -6,12 +6,13 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
-    var vpnPermissionScreen: XCUIElement { otherElement(with: AccessibilityId.VPNPermission.screen) }
+    var vpnPermissionScreen: XCUIElement { otherElement(with: AccessibilityID.VPNPermission.screen) }
     var vpnPermissionLabel: XCUIElement { staticText(with: "PIA needs access to your VPN profiles to secure your traffic") }
-    var vpnPermissionButton: XCUIElement { button(with: AccessibilityId.VPNPermission.submit) }
+    var vpnPermissionButton: XCUIElement { button(with: AccessibilityID.VPNPermission.submit) }
     var vpnPermissionAlertText: XCUIElement { alert(with: "PIA VPN dev” Would Like to Add VPN Configurations") }
     var vpnAllowButton: XCUIElement { button(with: "Allow").firstMatch }
 

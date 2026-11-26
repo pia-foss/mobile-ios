@@ -20,6 +20,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIADesignSystem
     import PIALocalizations
     import PIASwiftUI
@@ -54,7 +55,7 @@
                     }
                     .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isPurchasing))
                     .disabled(!store.state.canPurchase)
-                    .accessibilityIdentifier(PaywallAccessibility.sheetSubscribeButton)
+                    .accessibilityIdentifier(AccessibilityID.Paywall.sheetSubscribeButton)
 
                     Button {
                         store.send(.planSheetDismissed)
@@ -62,7 +63,7 @@
                         Text(L10n.Signup.Paywall.Plans.maybeLater).typography(.button1)
                     }
                     .buttonStyle(PIAButtonStyle(.plain))
-                    .accessibilityIdentifier(PaywallAccessibility.maybeLaterButton)
+                    .accessibilityIdentifier(AccessibilityID.Paywall.maybeLaterButton)
                 }
             }
             .padding(PIASpacing.s24)

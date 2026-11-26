@@ -16,6 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PIAAccessibility"),
         .package(path: "../PIAAssets"),
         .package(path: "../PIALocalizations"),
         .package(path: "../PIAUI"),
@@ -26,6 +27,7 @@ let package = Package(
         .target(
             name: "PIAVPNPermission",
             dependencies: [
+                .product(name: "PIAAccessibility", package: "PIAAccessibility"),
                 .product(name: "CoreArchitecture", package: "apple-core"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "PIAAssetsMobile", package: "PIAAssets"),

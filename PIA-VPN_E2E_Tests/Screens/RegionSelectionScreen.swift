@@ -6,6 +6,7 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
+import PIAAccessibility
 import XCTest
 
 extension XCUIApplication {
@@ -18,7 +19,7 @@ extension XCUIApplication {
     var sortButton: XCUIElement { button(with: filterButtonString) }
     var sortByString: String { getString(key: "region.filter.sortby", comment: "Sort regions by") }
     var sortPopUpHeader: XCUIElement { staticText(with: sortByString) }
-    var emptyListScreen: XCUIElement { image(with: "empty set background image") }
+    var emptyListScreen: XCUIElement { image(with: AccessibilityID.RegionList.emptyBackground) }
 
     func navigateToRegionSelection() {
         regionTileCollectionViewCell.waitForElementToAppear()
@@ -45,7 +46,7 @@ extension XCUIApplication {
         while (!searchRegionField.isHittable) {
             swipeDown()
         }
-        let query = cells.matching(NSPredicate(format: "identifier == %@", "uitests.regions.region_name"))
+        let query = cells.matching(NSPredicate(format: "identifier == %@", AccessibilityID.RegionList.region))
         return query
     }
 

@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALocalizations
@@ -82,7 +83,7 @@ public struct ForceUpdateView: View {
         .background(Color.pia.background.ignoresSafeArea())
         .interactiveDismissDisabled()
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(ForceUpdateAccessibility.screen)
+        .accessibilityIdentifier(AccessibilityID.ForceUpdate.screen)
         .onAppear {
             store.send(.onAppear)
         }
@@ -96,23 +97,16 @@ public struct ForceUpdateView: View {
                 Text(L10n.Forceupdate.Button.update).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.primary))
-            .accessibilityIdentifier(ForceUpdateAccessibility.updateButton)
+            .accessibilityIdentifier(AccessibilityID.ForceUpdate.updateButton)
 
             if store.state.isVPNConnected {
                 Text(L10n.Forceupdate.Label.Vpn.connected)
                     .typography(.subtitle3, color: .pia.onBackground)
                     .multilineTextAlignment(.center)
-                    .accessibilityIdentifier(ForceUpdateAccessibility.vpnConnectedHint)
+                    .accessibilityIdentifier(AccessibilityID.ForceUpdate.vpnConnectedHint)
             }
         }
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum ForceUpdateAccessibility {
-    public static let screen = "ForceUpdateScreen"
-    public static let updateButton = "ForceUpdateScreenUpdateButton"
-    public static let vpnConnectedHint = "ForceUpdateScreenVPNConnectedHint"
 }
 
 #Preview("VPN connected") {

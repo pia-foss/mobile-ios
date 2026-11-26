@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIALibrary
 import PIAUIKit
 import SwiftUI
@@ -82,7 +83,7 @@ class FeedbackTile: UIView, Tileable {
         self.view = hostedView
 
         Theme.current.applyPrincipalBackground(self)
-        self.accessibilityIdentifier = "FeedbackTile"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.feedback
     }
 
     private func statusUpdated() {

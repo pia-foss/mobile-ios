@@ -20,6 +20,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIAAssetsMobile
     import PIADesignSystem
     import PIALocalizations
@@ -237,7 +238,7 @@
             }
             .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isPurchasing))
             .disabled(!store.state.canPurchase)
-            .accessibilityIdentifier(PaywallAccessibility.subscribeButton)
+            .accessibilityIdentifier(AccessibilityID.Paywall.subscribeButton)
         }
 
         private var secondaryButton: some View {
@@ -248,7 +249,7 @@
             }
             .buttonStyle(PIAButtonStyle(.secondary))
             .disabled(!store.state.canPurchase)
-            .accessibilityIdentifier(PaywallAccessibility.otherPlansButton)
+            .accessibilityIdentifier(AccessibilityID.Paywall.otherPlansButton)
         }
 
         private var restoreButton: some View {
@@ -259,7 +260,7 @@
             }
             .buttonStyle(PIAButtonStyle(.plain, isLoading: store.state.isRestoring))
             .disabled(!store.state.canRestore)
-            .accessibilityIdentifier(PaywallAccessibility.restoreButton)
+            .accessibilityIdentifier(AccessibilityID.Paywall.restoreButton)
         }
 
         /// Not in the design, but this screen is the logged-out root — without it an existing customer
@@ -274,7 +275,7 @@
             // The label is a question rather than an action, so on its own VoiceOver would announce
             // "Already have an account?, button" without saying what tapping does.
             .accessibilityHint(L10n.Signup.Paywall.Accessibility.loginHint)
-            .accessibilityIdentifier(PaywallAccessibility.loginButton)
+            .accessibilityIdentifier(AccessibilityID.Paywall.loginButton)
         }
 
         private var unavailableNotice: some View {
@@ -341,18 +342,6 @@
             self.termsURL = termsURL
             self.privacyURL = privacyURL
         }
-    }
-
-    /// Stable identifiers for the UI tests.
-    public enum PaywallAccessibility {
-        public static let subscribeButton = "id.paywall.subscribe"
-        public static let otherPlansButton = "id.paywall.other_plans"
-        public static let restoreButton = "id.paywall.restore"
-        public static let sheetSubscribeButton = "id.paywall.sheet.subscribe"
-        public static let maybeLaterButton = "id.paywall.sheet.maybe_later"
-
-        /// Kept as the historical login identifier so the existing UI tests keep finding the way in.
-        public static let loginButton = "id.login.submit"
     }
 
     // MARK: - Preview

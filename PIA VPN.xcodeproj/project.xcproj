@@ -95,11 +95,6 @@
             "Resources/Images/Assets.xcassets",
           ],
         }, {
-          "target": "PIA-VPN_E2E_Tests",
-          "inclusions": [
-            "UI/Shared/AccessibilityId.swift",
-          ],
-        }, {
           "target": "PIA VPN-tvOS",
           "inclusions": [
             "Core/Extensions/EmailValidationError+ErrorMessage.swift",
@@ -304,6 +299,9 @@
       "package-product-members": [
         {
           "product-name": "PIAAbout",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIAAccessibility",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "PIAAccountDetails",
@@ -647,6 +645,9 @@
         }, {
           "package": "Quick",
           "product-name": "Quick",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIAAccessibility",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],

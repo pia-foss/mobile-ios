@@ -21,6 +21,7 @@
 
 import Combine
 import CoreArchitecture
+import PIAAccessibility
 import PIAAssetsMobile
 import PIALibrary
 import PIALocalizations
@@ -155,7 +156,7 @@ final class LoginCoordinator: @MainActor FlowCoordinator {
             withImage: Asset.iconWarning.image,
             message: message,
             andDuration: duration,
-            accessbilityIdentifier: Accessibility.Id.Login.Error.banner
+            accessbilityIdentifier: AccessibilityID.Login.errorBanner
         )
     }
 

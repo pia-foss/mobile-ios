@@ -21,6 +21,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIADesignSystem
     import PIALocalizations
     import PIASwiftUI
@@ -100,7 +101,7 @@
         var body: some View {
             Section {
                 DipRow(dip: dip)
-                    .accessibilityIdentifier("DedicatedIpRow")
+                    .accessibilityIdentifier(AccessibilityID.DedicatedIP.row)
                     .swipeActions(edge: .trailing) {
                         RemoveButton(action: remove)
                     }

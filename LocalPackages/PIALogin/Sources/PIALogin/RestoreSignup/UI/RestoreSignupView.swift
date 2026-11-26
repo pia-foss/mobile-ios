@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIADesignSystem
 import PIALocalizations
 import PIASwiftUI
@@ -80,7 +81,7 @@ public struct RestoreSignupView: View {
             .submitLabel(.send)
             .focused($isEmailFocused)
             .onSubmit(submit)
-            .accessibilityIdentifier(RestoreSignupAccessibility.email)
+            .accessibilityIdentifier(AccessibilityID.RestoreSignup.email)
             .modifier(FormFieldStyle(isFocused: isEmailFocused, isInvalid: store.state.isEmailInvalid))
             .padding(.top, PIASpacing.s32)
 
@@ -88,7 +89,7 @@ public struct RestoreSignupView: View {
                 Text(L10n.Welcome.Restore.submit.uppercased()).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.primary, isLoading: store.state.isRestoring))
-            .accessibilityIdentifier(RestoreSignupAccessibility.submit)
+            .accessibilityIdentifier(AccessibilityID.RestoreSignup.submit)
             .padding(.top, PIASpacing.s16)
         }
     }
@@ -97,12 +98,6 @@ public struct RestoreSignupView: View {
         isEmailFocused = false
         store.send(.submitTapped)
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum RestoreSignupAccessibility {
-    public static let email = "id.restoreSignup.email"
-    public static let submit = "id.restoreSignup.submit"
 }
 
 private extension RestoreSignup.Dependencies {

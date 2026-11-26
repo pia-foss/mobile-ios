@@ -22,6 +22,7 @@
 
 import ActivityKit
 import NetworkExtension
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALibrary
@@ -391,7 +392,7 @@ final class DashboardViewController: AutolayoutViewController {
                 action: #selector(openMenu(_:))
             )
             navigationItem.leftBarButtonItem?.accessibilityLabel = L10n.Menu.Accessibility.item
-            navigationItem.leftBarButtonItem?.accessibilityIdentifier = Accessibility.Id.Dashboard.menu
+            navigationItem.leftBarButtonItem?.accessibilityIdentifier = AccessibilityID.Dashboard.menu
 
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: Asset.Piax.Global.iconEditTile.image,

@@ -19,6 +19,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIAAssetsMobile
 import PIADesignSystem
 import PIALocalizations
@@ -74,7 +75,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
         }
         .background(Color.pia.background.ignoresSafeArea())
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(AccountDetailsAccessibility.screen)
+        .accessibilityIdentifier(AccessibilityID.AccountDetails.screen)
         .alert(item: alertBinding, content: makeAlert)
         .onAppear {
             store.send(.onAppear)
@@ -91,12 +92,12 @@ public struct AccountDetailsView: View, ViewWithTitle {
                 Text(account.username)
                     .typography(.subtitle1, color: .pia.onSurface)
                     .textSelection(.enabled)
-                    .accessibilityIdentifier(AccountDetailsAccessibility.username)
+                    .accessibilityIdentifier(AccessibilityID.AccountDetails.username)
             }
 
             expiryText(account.expiry)
                 .typography(.body2, color: .pia.onSurfaceContainerSecondary)
-                .accessibilityIdentifier(AccountDetailsAccessibility.expiry)
+                .accessibilityIdentifier(AccessibilityID.AccountDetails.expiry)
 
             if account.canManageSubscription {
                 Button {
@@ -106,7 +107,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
                         .typography(.body2, color: .pia.onSurfaceContainerSecondary)
                         .multilineTextAlignment(.leading)
                 }
-                .accessibilityIdentifier(AccountDetailsAccessibility.manageSubscription)
+                .accessibilityIdentifier(AccessibilityID.AccountDetails.manageSubscription)
             }
         }
         .piaCard()
@@ -152,7 +153,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
                 Text(L10n.Account.Restore.button).typography(.button1)
             }
             .buttonStyle(PIAButtonStyle(.secondary, isLoading: store.state.isRestoring))
-            .accessibilityIdentifier(AccountDetailsAccessibility.restore)
+            .accessibilityIdentifier(AccessibilityID.AccountDetails.restore)
         }
         .piaCard()
     }
@@ -176,7 +177,7 @@ public struct AccountDetailsView: View, ViewWithTitle {
             }
             .foregroundColor(.pia.error)
         }
-        .accessibilityIdentifier(AccountDetailsAccessibility.deleteAccount)
+        .accessibilityIdentifier(AccessibilityID.AccountDetails.deleteAccount)
     }
 
     // MARK: Alerts
@@ -207,16 +208,6 @@ public struct AccountDetailsView: View, ViewWithTitle {
             return Alert(title: Text(L10n.Global.error), message: Text(message), dismissButton: close)
         }
     }
-}
-
-/// Stable identifiers for the UI tests.
-public enum AccountDetailsAccessibility {
-    public static let screen = "id.accountDetails.screen"
-    public static let username = "id.accountDetails.username"
-    public static let expiry = "id.accountDetails.expiry"
-    public static let manageSubscription = "id.accountDetails.manageSubscription.button"
-    public static let restore = "id.accountDetails.restore.button"
-    public static let deleteAccount = "id.accountDetails.delete.button"
 }
 
 private extension AccountDetails.Account {

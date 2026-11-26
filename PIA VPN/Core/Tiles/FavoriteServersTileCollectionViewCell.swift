@@ -20,6 +20,7 @@
 //  Internet Access iOS Client.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import PIAAccessibility
 import PIALibrary
 import PIALocalizations
 import PIAUIKit
@@ -48,7 +49,7 @@ class FavoriteServersTileCollectionViewCell: UICollectionViewCell, TileableCell,
     private var currentTileStatus: TileStatus?
 
     func setupCellForStatus(_ status: TileStatus) {
-        self.accessibilityIdentifier = "FavoriteServersTileCollectionViewCell"
+        self.accessibilityIdentifier = AccessibilityID.Tiles.favoriteServersCell
 
         Theme.current.applyPrincipalBackground(self)
         Theme.current.applyPrincipalBackground(self.contentView)
