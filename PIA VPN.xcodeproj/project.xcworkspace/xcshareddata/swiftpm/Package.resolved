@@ -64,15 +64,6 @@
       }
     },
     {
-      "identity" : "popover",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sarathsarah/Popover.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "3674e94551307502995f363681b6b51e93fcdf3e"
-      }
-    },
-    {
       "identity" : "quick",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Quick/Quick",

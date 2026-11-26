@@ -28,6 +28,8 @@ import UIKit
 final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
     private weak var parent: UINavigationController?
     private weak var pendingPreferences: Client.Preferences.Editable?
+    private var childCoordinator: TrustedNetworksSettingsCoordinator?
+    private var cancellables = Set<AnyCancellable>()
     private let subject = PassthroughSubject<Void, Never>()
 
     var output: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
@@ -70,9 +72,16 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
 
     @MainActor
     private func showManageAutomation() {
-        guard let parent else { return }
-        let trustedNetworks = StoryboardScene.Main.trustedNetworksViewController.instantiate()
-        trustedNetworks.pendingPreferences = pendingPreferences
-        parent.pushViewController(trustedNetworks, animated: true)
+        guard let parent, let pendingPreferences else { return }
+        cancellables.removeAll()
+        let coordinator = TrustedNetworksSettingsCoordinator(parent: parent, pendingPreferences: pendingPreferences)
+        childCoordinator = coordinator
+        coordinator.output
+            .sink(
+                receiveCompletion: { [weak self] _ in self?.childCoordinator = nil },
+                receiveValue: { _ in }
+            )
+            .store(in: &cancellables)
+        coordinator.start()
     }
 }
