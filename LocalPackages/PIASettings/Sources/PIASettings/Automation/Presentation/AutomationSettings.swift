@@ -50,7 +50,8 @@ extension AutomationSettings {
         public let preferencesChanges: @Sendable () -> AsyncStream<Void>
         public let setAutomationEnabled: @MainActor @Sendable (Bool) -> Void
         public let isKillSwitchEnabled: @MainActor @Sendable () -> Bool
-        public let enableKillSwitch: @MainActor @Sendable () -> Void
+        /// Turns the kill switch and Automation on together, so one is never saved without the other.
+        public let enableAutomationWithKillSwitch: @MainActor @Sendable () -> Void
         public let showManageAutomation: @MainActor @Sendable () -> Void
 
         public init(
@@ -58,14 +59,14 @@ extension AutomationSettings {
             preferencesChanges: @Sendable @escaping () -> AsyncStream<Void>,
             setAutomationEnabled: @MainActor @Sendable @escaping (Bool) -> Void,
             isKillSwitchEnabled: @MainActor @Sendable @escaping () -> Bool,
-            enableKillSwitch: @MainActor @Sendable @escaping () -> Void,
+            enableAutomationWithKillSwitch: @MainActor @Sendable @escaping () -> Void,
             showManageAutomation: @MainActor @Sendable @escaping () -> Void,
         ) {
             self.isAutomationEnabled = isAutomationEnabled
             self.preferencesChanges = preferencesChanges
             self.setAutomationEnabled = setAutomationEnabled
             self.isKillSwitchEnabled = isKillSwitchEnabled
-            self.enableKillSwitch = enableKillSwitch
+            self.enableAutomationWithKillSwitch = enableAutomationWithKillSwitch
             self.showManageAutomation = showManageAutomation
         }
     }

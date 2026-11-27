@@ -32,7 +32,7 @@ struct AutomationSettingsReducerTests {
         var isAutomationEnabled = false
         var isKillSwitchEnabled = true
         var savedValues: [Bool] = []
-        var enableKillSwitchCount = 0
+        var enableAutomationWithKillSwitchCount = 0
         var showManageAutomationCount = 0
     }
 
@@ -51,7 +51,7 @@ struct AutomationSettingsReducerTests {
                 preferencesChanges: { stream },
                 setAutomationEnabled: { spy.savedValues.append($0) },
                 isKillSwitchEnabled: { spy.isKillSwitchEnabled },
-                enableKillSwitch: { spy.enableKillSwitchCount += 1 },
+                enableAutomationWithKillSwitch: { spy.enableAutomationWithKillSwitchCount += 1 },
                 showManageAutomation: { spy.showManageAutomationCount += 1 },
             )
         )
@@ -127,7 +127,7 @@ struct AutomationSettingsReducerTests {
         #expect(spy.savedValues.isEmpty)
     }
 
-    @Test func confirmingTheKillSwitchAlertEnablesBoth() async {
+    @Test func confirmingTheKillSwitchAlertEnablesBothTogether() async {
         let store = makeStore(isAutomationEnabled: false, isKillSwitchEnabled: false)
         store.send(.automationToggled(true))
 
@@ -137,8 +137,9 @@ struct AutomationSettingsReducerTests {
         #expect(!store.state.isKillSwitchRequiredAlertPresented)
         #expect(store.state.isAutomationEnabled)
         #expect(store.state.isKillSwitchEnabled)
-        #expect(spy.enableKillSwitchCount == 1)
-        #expect(spy.savedValues == [true])
+        // One combined call, never Automation on its own, so the two can't be persisted apart.
+        #expect(spy.enableAutomationWithKillSwitchCount == 1)
+        #expect(spy.savedValues.isEmpty)
     }
 
     @Test func dismissingTheKillSwitchAlertLeavesAutomationOff() async {
@@ -150,7 +151,7 @@ struct AutomationSettingsReducerTests {
 
         #expect(!store.state.isKillSwitchRequiredAlertPresented)
         #expect(!store.state.isAutomationEnabled)
-        #expect(spy.enableKillSwitchCount == 0)
+        #expect(spy.enableAutomationWithKillSwitchCount == 0)
         #expect(spy.savedValues.isEmpty)
     }
 

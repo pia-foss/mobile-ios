@@ -50,15 +50,16 @@ extension AutomationSettings {
                     return nil
                 }
                 state.isAutomationEnabled = isOn
-                return .fireAndForget { [dependencies] in dependencies.setAutomationEnabled(isOn) }
+                return .fireAndForget { [dependencies] in
+                    dependencies.setAutomationEnabled(isOn)
+                }
 
             case .killSwitchRequiredConfirmed:
                 state.isKillSwitchRequiredAlertPresented = false
                 state.isKillSwitchEnabled = true
                 state.isAutomationEnabled = true
                 return .fireAndForget { [dependencies] in
-                    dependencies.enableKillSwitch()
-                    dependencies.setAutomationEnabled(true)
+                    dependencies.enableAutomationWithKillSwitch()
                 }
 
             case .killSwitchRequiredDismissed:
@@ -66,7 +67,9 @@ extension AutomationSettings {
                 return nil
 
             case .manageAutomationTapped:
-                return .fireAndForget { [dependencies] in dependencies.showManageAutomation() }
+                return .fireAndForget { [dependencies] in
+                    dependencies.showManageAutomation()
+                }
 
             case .preferencesLoaded(let isAutomationEnabled, let isKillSwitchEnabled):
                 state.isAutomationEnabled = isAutomationEnabled

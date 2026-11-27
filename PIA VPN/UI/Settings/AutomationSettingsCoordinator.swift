@@ -55,7 +55,7 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
                 preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 setAutomationEnabled: { [weak self] in self?.setAutomationEnabled($0) },
                 isKillSwitchEnabled: { [weak self] in self?.pendingPreferences?.isPersistentConnection ?? Client.preferences.isPersistentConnection },
-                enableKillSwitch: { [weak self] in self?.enableKillSwitch() },
+                enableAutomationWithKillSwitch: { [weak self] in self?.enableAutomationWithKillSwitch() },
                 showManageAutomation: { [weak self] in self?.showManageAutomation() },
             )
         )
@@ -72,10 +72,18 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
         preferences.commit()
     }
 
-    /// The kill switch is edited with the other settings and committed when Settings closes. Reconnect notifications
-    /// follow it, as on the Privacy Features screen.
+    /// Commits the kill switch together with Automation, like the dashboard does, so they are never persisted apart.
+    /// Deferring the kill switch to the Settings commit would lose it if that commit is cancelled (the "must disconnect"
+    /// alert) or never runs. The pending preferences mirror it so the Settings commit doesn't turn it back off.
+    /// Reconnect notifications follow the kill switch, as on the Privacy Features screen.
     @MainActor
-    private func enableKillSwitch() {
+    private func enableAutomationWithKillSwitch() {
+        let preferences = Client.preferences.editable()
+        preferences.isPersistentConnection = true
+        preferences.showReconnectNotifications = true
+        preferences.nmtRulesEnabled = true
+        preferences.commit()
+
         pendingPreferences?.isPersistentConnection = true
         pendingPreferences?.showReconnectNotifications = true
     }

@@ -80,7 +80,7 @@ public struct AutomationSettingsView: View, ViewWithTitle {
             preferencesChanges: { AsyncStream { $0.finish() } },
             setAutomationEnabled: { _ in },
             isKillSwitchEnabled: { true },
-            enableKillSwitch: {},
+            enableAutomationWithKillSwitch: {},
             showManageAutomation: {},
         )
     )
