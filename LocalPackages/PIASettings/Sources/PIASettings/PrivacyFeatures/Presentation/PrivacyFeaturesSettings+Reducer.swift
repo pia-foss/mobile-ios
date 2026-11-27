@@ -57,15 +57,22 @@ extension PrivacyFeaturesSettings {
 
             case .killSwitchToggled(let isOn):
                 guard state.preferences.killSwitch != isOn else { return nil }
-                state.isKillSwitchWarningPresented = !isOn && state.isAutomationEnabled
+                if !isOn && state.isAutomationEnabled {
+                    state.isDisableKillSwitchConfirmationPresented = true
+                    return nil
+                }
                 return setKillSwitch(isOn, in: &state)
 
-            case .killSwitchWarningConfirmed:
-                state.isKillSwitchWarningPresented = false
-                return setKillSwitch(true, in: &state)
+            case .disableKillSwitchConfirmed:
+                state.isDisableKillSwitchConfirmationPresented = false
+                state.isAutomationEnabled = false
+                return .merge(
+                    setKillSwitch(false, in: &state),
+                    .fireAndForget { [dependencies] in dependencies.disableAutomation() }
+                )
 
-            case .killSwitchWarningDismissed:
-                state.isKillSwitchWarningPresented = false
+            case .disableKillSwitchCancelled:
+                state.isDisableKillSwitchConfirmationPresented = false
                 return nil
 
             case .reconnectNotificationsToggled(let isOn):

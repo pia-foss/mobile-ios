@@ -1116,6 +1116,10 @@ public enum L10n {
       public enum Killswitch {
         /// The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.
         public static let disabled = L10n.tr("Localizable", "settings.nmt.killswitch.disabled", fallback: "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.")
+        public enum Disable {
+          /// Turning off the VPN kill switch also turns off Automation.
+          public static let confirmation = L10n.tr("Localizable", "settings.nmt.killswitch.disable.confirmation", fallback: "Turning off the VPN kill switch also turns off Automation.")
+        }
       }
     }
     public enum Reset {

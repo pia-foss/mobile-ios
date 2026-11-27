@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Otomasyon";
 "tiles.quicksetting.private.browser.title" = "Özel Tarayıcı";
 "settings.nmt.killswitch.disabled" = "VPN kill switch şu anda devre dışı. Ağ Yönetim Aracı'nın çalıştığından ve ağ değiştirirken tekrar bağlanbildiğinizden emin olmak için lütfen ayarlarınızdan VPN kill switch'i etkinleştirin.";
+"settings.nmt.killswitch.disable.confirmation" = "VPN Acil Anahtarını kapatmak Otomasyonu da kapatır.";
 "settings.service.quality.share.title" = "PIA'yı İyileştirilmeye Yardım Edin";
 "settings.service.quality.share.description" = "VPN bağlantı istatistiklerini bizimle paylaşarak uygulamamızı geliştirmemize yardımcı olun. Bu raporlar hiç bir şekilde kişisel olarak tanımlanabilir bilgiler içermez.";
 "settings.service.quality.share.findoutmore" = "Daha çok bilgi";

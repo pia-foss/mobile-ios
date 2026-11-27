@@ -36,10 +36,11 @@ extension PrivacyFeaturesSettings {
 
     public struct State: Equatable, Sendable {
         public var preferences: Preferences
-        public let isAutomationEnabled: Bool
+        public var isAutomationEnabled: Bool
         public var isContentBlockerEnabled = false
         public var isRefreshingBlockList = false
-        public var isKillSwitchWarningPresented = false
+        /// Automation only works with the kill switch on, so turning the kill switch off while it's on asks first.
+        public var isDisableKillSwitchConfirmationPresented = false
 
         public init(preferences: Preferences, isAutomationEnabled: Bool) {
             self.preferences = preferences
@@ -51,8 +52,8 @@ extension PrivacyFeaturesSettings {
         case onAppear
         case preferencesLoaded(Preferences)
         case killSwitchToggled(Bool)
-        case killSwitchWarningConfirmed
-        case killSwitchWarningDismissed
+        case disableKillSwitchConfirmed
+        case disableKillSwitchCancelled
         case reconnectNotificationsToggled(Bool)
         case contentBlockerToggled
         case contentBlockerStateLoaded(Bool)
@@ -65,6 +66,7 @@ extension PrivacyFeaturesSettings {
         public let isAutomationEnabled: @MainActor @Sendable () -> Bool
         public let preferencesChanges: @Sendable () -> AsyncStream<Void>
         public let savePreferences: @MainActor @Sendable (Preferences) -> Void
+        public let disableAutomation: @MainActor @Sendable () -> Void
         public let isContentBlockerEnabled: @MainActor @Sendable () async -> Bool
         public let appDidBecomeActive: @Sendable () -> AsyncStream<Void>
         public let reloadContentBlocker: @MainActor @Sendable () async -> Void
@@ -75,6 +77,7 @@ extension PrivacyFeaturesSettings {
             isAutomationEnabled: @MainActor @Sendable @escaping () -> Bool,
             preferencesChanges: @Sendable @escaping () -> AsyncStream<Void>,
             savePreferences: @MainActor @Sendable @escaping (Preferences) -> Void,
+            disableAutomation: @MainActor @Sendable @escaping () -> Void,
             isContentBlockerEnabled: @MainActor @Sendable @escaping () async -> Bool,
             appDidBecomeActive: @Sendable @escaping () -> AsyncStream<Void>,
             reloadContentBlocker: @MainActor @Sendable @escaping () async -> Void,
@@ -84,6 +87,7 @@ extension PrivacyFeaturesSettings {
             self.isAutomationEnabled = isAutomationEnabled
             self.preferencesChanges = preferencesChanges
             self.savePreferences = savePreferences
+            self.disableAutomation = disableAutomation
             self.isContentBlockerEnabled = isContentBlockerEnabled
             self.appDidBecomeActive = appDidBecomeActive
             self.reloadContentBlocker = reloadContentBlocker

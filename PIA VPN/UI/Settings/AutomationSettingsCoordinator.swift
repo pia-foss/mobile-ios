@@ -54,6 +54,8 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
                 isAutomationEnabled: { Client.preferences.nmtRulesEnabled },
                 preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 setAutomationEnabled: { [weak self] in self?.setAutomationEnabled($0) },
+                isKillSwitchEnabled: { [weak self] in self?.pendingPreferences?.isPersistentConnection ?? Client.preferences.isPersistentConnection },
+                enableKillSwitch: { [weak self] in self?.enableKillSwitch() },
                 showManageAutomation: { [weak self] in self?.showManageAutomation() },
             )
         )
@@ -68,6 +70,14 @@ final class AutomationSettingsCoordinator: @MainActor FlowCoordinator {
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = isOn
         preferences.commit()
+    }
+
+    /// The kill switch is edited with the other settings and committed when Settings closes. Reconnect notifications
+    /// follow it, as on the Privacy Features screen.
+    @MainActor
+    private func enableKillSwitch() {
+        pendingPreferences?.isPersistentConnection = true
+        pendingPreferences?.showReconnectNotifications = true
     }
 
     @MainActor

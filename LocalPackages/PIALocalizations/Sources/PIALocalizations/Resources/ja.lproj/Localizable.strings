@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "自動化";
 "tiles.quicksetting.private.browser.title" = "プライベートブラウザ";
 "settings.nmt.killswitch.disabled" = "現在VPNキルスイッチが無効になっています。「ネットワーク管理ツール」が確かに機能している状態にし、ネットワークを切り替えたときに再度接続できるようにするには、設定でVPNキルスイッチを有効にしてください。";
+"settings.nmt.killswitch.disable.confirmation" = "VPNキルスイッチをオフにすると、自動化もオフになります。";
 "settings.service.quality.share.title" = "PIAの改善に協力する";
 "settings.service.quality.share.description" = "VPN接続データを共有することにより、改善にご協力ください。これらのレポートには、個人を特定できる情報は含まれません。";
 "settings.service.quality.share.findoutmore" = "詳しく知る";

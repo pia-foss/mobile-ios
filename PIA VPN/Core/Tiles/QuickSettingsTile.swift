@@ -99,7 +99,15 @@ final class QuickSettingsTile: UIView, Tileable {
 
     }
 
+    // Automation runs on the kill switch's on-demand rules, so it only works while the kill switch is on. Changes that
+    // would leave Automation on without the kill switch go through the dashboard's alerts instead.
+
     @IBAction func updateKillSwitchSetting(_ sender: Any) {
+        if Client.preferences.isPersistentConnection, Client.preferences.nmtRulesEnabled {
+            NotificationCenter.default.post(name: .PIAKillSwitchDisableNeedsConfirmation, object: self)
+            return
+        }
+
         let preferences = Client.preferences.editable()
         preferences.isPersistentConnection = !Client.preferences.isPersistentConnection
         preferences.commit()
@@ -107,11 +115,14 @@ final class QuickSettingsTile: UIView, Tileable {
         updateProfile()
         updateButtons()
         showKillSwitchFeedback()
-        presentKillSwitchAlertIfNeeded()
-
     }
 
     @IBAction func updateNMTSetting(_ sender: Any) {
+        if !Client.preferences.nmtRulesEnabled, !Client.preferences.isPersistentConnection {
+            NotificationCenter.default.post(name: .PIAAutomationRequiresKillSwitch, object: self)
+            return
+        }
+
         let preferences = Client.preferences.editable()
         preferences.nmtRulesEnabled = !Client.preferences.nmtRulesEnabled
         preferences.commit()
@@ -119,8 +130,6 @@ final class QuickSettingsTile: UIView, Tileable {
         updateProfile()
         updateButtons()
         showAutomationFeedback()
-        presentKillSwitchAlertIfNeeded()
-
     }
 
     @IBAction func openBrowser(_ sender: Any) {
@@ -167,17 +176,6 @@ final class QuickSettingsTile: UIView, Tileable {
             Macros.displaySuccessImageNote(withImage: image, message: message)
         } else {
             Macros.displayWarningImageNote(withImage: image, message: message)
-        }
-    }
-
-    private func presentKillSwitchAlertIfNeeded() {
-        if !Client.preferences.isPersistentConnection,
-            Client.preferences.nmtRulesEnabled
-        {
-            NotificationCenter.default.post(
-                name: .PIAPersistentConnectionTileHaveChanged,
-                object: self,
-                userInfo: nil)
         }
     }
 
