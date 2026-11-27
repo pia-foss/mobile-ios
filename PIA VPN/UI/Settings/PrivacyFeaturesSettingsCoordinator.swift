@@ -54,7 +54,7 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
 
         let view = PrivacyFeaturesSettingsView(
             dependencies: .init(
-                loadPreferences: { [weak self] in self?.preferences() ?? .init(killSwitch: false, reconnectNotifications: false) },
+                loadPreferences: { [weak self] in self?.preferences() ?? Self.savedPreferences() },
                 isAutomationEnabled: { Client.preferences.nmtRulesEnabled },
                 preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 savePreferences: { [weak self] in self?.save($0) },
@@ -78,6 +78,15 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
         return .init(
             killSwitch: pendingPreferences.isPersistentConnection,
             reconnectNotifications: pendingPreferences.showReconnectNotifications
+        )
+    }
+
+    /// The saved settings, shown when Settings' pending preferences are gone, instead of defaulting everything to off.
+    @MainActor
+    private static func savedPreferences() -> PrivacyFeaturesSettings.Preferences {
+        .init(
+            killSwitch: Client.preferences.isPersistentConnection,
+            reconnectNotifications: Client.preferences.showReconnectNotifications
         )
     }
 

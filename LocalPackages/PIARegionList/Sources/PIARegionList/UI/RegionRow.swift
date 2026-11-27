@@ -137,9 +137,9 @@
             .disabled(isOffline || isHidden)
             .opacity(isHidden ? 0 : 1)
             .accessibilityHidden(isHidden)
-            // Kept inverted: the E2E tests read "Add a favorite region" as "is a favorite".
+            // Names the action the button performs.
             .accessibilityLabel(
-                isOffline ? L10n.Global.disabled : (isFavorite ? L10n.Region.Accessibility.favorite : L10n.Region.Accessibility.unfavorite)
+                isOffline ? L10n.Global.disabled : (isFavorite ? L10n.Region.Accessibility.unfavorite : L10n.Region.Accessibility.favorite)
             )
         }
 

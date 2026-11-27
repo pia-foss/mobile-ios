@@ -176,7 +176,7 @@ final class DashboardViewController: AutolayoutViewController {
             return
         }
 
-        #if !TARGET_IPHONE_SIMULATOR
+        #if !targetEnvironment(simulator)
             let types: UIUserNotificationType = [.alert, .badge, .sound]
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
