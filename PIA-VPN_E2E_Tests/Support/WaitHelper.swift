@@ -18,6 +18,13 @@ extension XCUIElement {
         return result == .completed
     }
 
+    /// Waits until the element can be tapped: on screen, and not covered or mid-animation.
+    @discardableResult
+    func waitForHittable(timeout: TimeInterval = 5) -> Bool {
+        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: self)
+        return XCTWaiter.wait(for: [expectation], timeout: timeout) == .completed
+    }
+
     @discardableResult
     func waitForElementToBeHidden(timeout: TimeInterval = 10) -> Bool {
         let predicate = NSPredicate(format: "exists == false")

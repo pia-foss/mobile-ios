@@ -37,16 +37,25 @@ extension XCUIApplication {
         while Date() < deadline {
             if savePasswordSheet.exists {
                 // Not Now is the leading button, Save the trailing one.
-                savePasswordSheet.buttons.element(boundBy: 0).tap()
-                XCTAssertTrue(savePasswordSheet.waitForElementToBeHidden(), "Save Password sheet still showing")
+                dismiss(savePasswordSheet, tapping: savePasswordSheet.buttons.element(boundBy: 0), "Save Password sheet")
             } else if notificationsAlert.exists {
                 // Don't Allow is the leading button, Allow the trailing one.
-                notificationsAlert.buttons.element(boundBy: 1).tap()
-                XCTAssertTrue(notificationsAlert.waitForElementToBeHidden(), "Notifications alert still showing")
+                dismiss(notificationsAlert, tapping: notificationsAlert.buttons.element(boundBy: 1), "Notifications alert")
             } else {
                 Thread.sleep(forTimeInterval: 0.5)
             }
         }
+    }
+
+    /// Taps `button` to dismiss `prompt`. A prompt is in the element tree before it finishes sliding in, and a tap
+    /// before then is ignored, so this waits until the button can be tapped and taps again if the prompt stays up.
+    private func dismiss(_ prompt: XCUIElement, tapping button: XCUIElement, _ name: String) {
+        _ = button.waitForHittable()
+        button.tap()
+        if !prompt.waitForElementToBeHidden(timeout: shortTimeout), button.waitForHittable() {
+            button.tap()
+        }
+        XCTAssertTrue(prompt.waitForElementToBeHidden(), "\(name) still showing")
     }
 
     /// Taps Allow on the system "Would Like to Add VPN Configurations" alert. iOS shows it whenever the VPN profile is
