@@ -39,24 +39,24 @@ extension XCUIApplication {
 
     func navigateToHelpSettings() {
         navigateToSettings()
-        helpSettingsButton.waitForElementToAppear()
+        XCTAssertTrue(helpSettingsButton.waitForElementToAppear(), "Help settings button not found")
         helpSettingsButton.tap()
         XCTAssertTrue(helpHeader.waitForElementToAppear())
     }
 
     func enableHelpImprovePIA() {
-        helpImprovePIASwitch.waitForElementToAppear()
+        XCTAssertTrue(helpImprovePIASwitch.waitForElementToAppear(), "Help Improve PIA switch not found")
         if (helpImprovePIASwitch.value as! String == "1") {
             return
         }
-        helpImprovePIASwitch.tap()
+        helpImprovePIASwitch.tapTrailingControl()
     }
 
     func disableHelpImprovePIA() {
-        helpImprovePIASwitch.waitForElementToAppear()
+        XCTAssertTrue(helpImprovePIASwitch.waitForElementToAppear(), "Help Improve PIA switch not found")
         if (helpImprovePIASwitch.value as! String == "0") {
             return
         }
-        helpImprovePIASwitch.tap()
+        helpImprovePIASwitch.tapTrailingControl()
     }
 }

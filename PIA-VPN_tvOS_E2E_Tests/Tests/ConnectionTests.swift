@@ -6,55 +6,48 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class ConnectionTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = true
-        super.spec()
+    // MARK: - Dashboard screen
 
-        describe("connection tests") {
-            context("when in the dashboard screen") {
-                it("should update the status to 'connected' when the user clicks the connect button from disconnected state") {
-                    app.connect()
-                    expect(app.connectedStatus.waitForElementToAppear()).to(beTrue())
-                }
+    func testShowsConnectedAfterConnectingFromDisconnectedState() {
+        app.connect()
+        XCTAssertTrue(app.connectedStatus.waitForElementToAppear())
+    }
 
-                it("should update the status to 'not connected' when the user clicks the connect button from connected state") {
-                    app.connect()
-                    app.disconnect()
-                    expect(app.notConnectedStatus.waitForElementToAppear()).to(beTrue())
-                }
-            }
+    func testShowsNotConnectedAfterDisconnectingFromConnectedState() {
+        app.connect()
+        app.disconnect()
+        XCTAssertTrue(app.notConnectedStatus.waitForElementToAppear())
+    }
 
-            context("when connecting to a specific location") {
-                it("should allow the user to connect to the selectied location") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.connectTo(region: "Peru")
-                    expect(app.connectedStatus.waitForElementToAppear()).to(beTrue())
-                    expect(app.selectedLocationButton.label.contains("Peru")).to(beTrue())
-                }
+    // MARK: - Connecting to a specific location
 
-                it("should allow the user to connect to previously connected location on the quick locations") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.connectTo(region: "Peru")
-                    expect(app.selectedLocationButton.label.contains("Peru")).to(beTrue())
+    func testConnectsToSelectedLocation() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.connectTo(region: "Peru")
+        XCTAssertTrue(app.connectedStatus.waitForElementToAppear())
+        XCTAssertTrue(app.selectedLocationButton.label.contains("Peru"))
+    }
 
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.connectTo(region: "Ohio")
-                    expect(app.selectedLocationButton.label.contains("Ohio")).to(beTrue())
-                    expect(app.button(with: "PE").waitForElementToAppear()).to(beTrue())
+    func testQuickLocationsShowPreviouslyConnectedLocations() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.connectTo(region: "Peru")
+        XCTAssertTrue(app.selectedLocationButton.label.contains("Peru"))
 
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.connectTo(region: "Nepal")
-                    expect(app.selectedLocationButton.label.contains("Nepal")).to(beTrue())
-                    expect(app.button(with: "US").waitForElementToAppear()).to(beTrue())
-                }
-            }
-        }
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.connectTo(region: "Ohio")
+        XCTAssertTrue(app.selectedLocationButton.label.contains("Ohio"))
+        XCTAssertTrue(app.button(with: "PE").waitForElementToAppear())
+
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.connectTo(region: "Nepal")
+        XCTAssertTrue(app.selectedLocationButton.label.contains("Nepal"))
+        XCTAssertTrue(app.button(with: "US").waitForElementToAppear())
     }
 }

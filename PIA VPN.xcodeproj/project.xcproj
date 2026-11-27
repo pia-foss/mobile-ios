@@ -39,18 +39,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/Quick/Quick",
-      "version": {
-        "version": "7.6.2",
-      },
-    }, {
-      "kind": "remote",
-      "repository": "https://github.com/Quick/Nimble",
-      "version": {
-        "version": "14.0.0",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/pointfreeco/swift-snapshot-testing",
       "version": {
         "version": "1.19.7",
@@ -639,15 +627,10 @@
       ],
       "package-product-members": [
         {
-          "package": "Nimble",
-          "product-name": "Nimble",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "Quick",
-          "product-name": "Quick",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
           "product-name": "PIAAccessibility",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "PIALocalizations",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],
@@ -954,14 +937,6 @@
       "package-product-members": [
         {
           "product-name": "PIALocalizations",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "Nimble",
-          "product-name": "Nimble",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "Quick",
-          "product-name": "Quick",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],

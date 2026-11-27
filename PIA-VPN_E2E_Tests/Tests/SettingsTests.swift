@@ -6,105 +6,159 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class SettingsTests: BaseTest {
-    override class func spec() {
-        let geoLocatedRegionDefaultValue = "1"
-        let vpnKillSwitchDefaultValue = "1"
-        let automationDefaultValue = "0"
+    private let geoLocatedRegionDefaultValue = "1"
+    private let vpnKillSwitchDefaultValue = "1"
+    private let automationDefaultValue = "0"
 
-        super.spec()
+    // MARK: - Updated settings for each category
 
-        describe("settings tests") {
-            context("updated settings for each category") {
-                it("should revert changes made on to default value after logging out and logging back in") {
-                    //update general settings
-                    app.navigateToGeneralSettings()
-                    app.disableGeoLocatedRegionSwitch()
+    func testRevertsSettingsToDefaultsAfterLoggingOutAndBackIn() {
+        // Update general settings
+        app.navigateToGeneralSettings()
+        app.disableGeoLocatedRegionSwitch()
 
-                    // This check is flaky in CI because the switch has a small animation and there is a small amount of delay when the value gets updated after tapping the switch.
-                    // TODO: Enable this check when we disable the animations on E2E tests
-                    // expect((app.geoLocatedRegionsSwitch.value as! String)) != geoLocatedRegionDefaultValue
+        // This check is flaky in CI because the switch has a small animation and there is a small amount of delay when
+        // the value gets updated after tapping the switch.
+        // TODO: Enable this check when we disable the animations on E2E tests
+        // XCTAssertNotEqual(app.geoLocatedRegionsSwitch.value as? String, geoLocatedRegionDefaultValue)
 
-                    //update protocol settings
-                    app.navigateToHomeFromSettings()
-                    app.navigateToProtocolSettings()
-                    app.selectProtocol(protocolName: "OpenVPN")
-                    expect(app.openVPN.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+        // Update protocol settings
+        app.navigateToHomeFromSettings()
+        app.navigateToProtocolSettings()
+        app.selectProtocol(protocolName: VPNProtocolName.openVPN)
+        XCTAssertTrue(app.openVPN.waitForExistence(timeout: app.defaultTimeout))
 
-                    //update privacy settings
-                    app.navigateToHomeFromSettings()
-                    app.navigateToPrivacySettings()
-                    app.disableVPNKillSwitch()
-                    expect((app.vpnKillSwitch.value as! String)) != vpnKillSwitchDefaultValue
+        // Saving the protocol reinstalls the VPN profile, which iOS asks to allow.
+        app.navigateToHomeFromSettings()
+        app.allowVPNConfigurationIfPrompted()
 
-                    //update automation settings
-                    app.navigateToHomeFromSettings()
-                    app.navigateToAutomationSettings()
-                    app.enableAutomationSwitch.tap()
+        // Turn the kill switch off on the dashboard, then check Privacy Features shows it off.
+        app.disableVPNKillSwitchOnHome()
+        app.navigateToPrivacySettings()
+        XCTAssertNotEqual(
+            app.vpnKillSwitch.value as? String, vpnKillSwitchDefaultValue,
+            "Privacy Features shows the kill switch on after turning it off on the dashboard")
 
-                    app.navigateToHomeFromSettings()
-                    app.logOut()
-                    app.navigateToLoginScreen()
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
+        // Automation needs the kill switch, which is now off: turning it on asks to enable the kill switch, and Close
+        // leaves it off.
+        app.navigateToHomeFromSettings()
+        app.navigateToAutomationSettings()
+        app.enableAutomationSwitch.tapTrailingControl()
+        XCTAssertTrue(app.killSwitchAlertCloseButton.waitForElementToAppear(), "No alert asking to enable the kill switch")
+        app.killSwitchAlertCloseButton.tap()
+        XCTAssertEqual(app.enableAutomationSwitch.value as? String, automationDefaultValue)
 
-                    //expect that the settings are reverted to default value
-                    app.navigateToGeneralSettings()
-                    expect((app.geoLocatedRegionsSwitch.value as! String)) == geoLocatedRegionDefaultValue
+        app.navigateToHomeFromSettings()
+        app.logOut()
+        app.navigateToLoginScreen()
+        app.logIn(with: Credentials.valid)
+        app.acceptVPNPermission()
 
-                    app.navigateToHomeFromSettings()
-                    app.navigateToProtocolSettings()
-                    expect(app.wireguard.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+        // Expect the settings to be reverted to their default values
+        app.navigateToGeneralSettings()
+        XCTAssertEqual(app.geoLocatedRegionsSwitch.value as? String, geoLocatedRegionDefaultValue)
 
-                    app.navigateToHomeFromSettings()
-                    app.navigateToPrivacySettings()
-                    expect((app.vpnKillSwitch.value as! String)) == vpnKillSwitchDefaultValue
+        app.navigateToHomeFromSettings()
+        app.navigateToProtocolSettings()
+        XCTAssertTrue(app.automaticProtocol.waitForExistence(timeout: app.defaultTimeout))
 
-                    app.navigateToHomeFromSettings()
-                    app.navigateToAutomationSettings()
-                    expect((app.enableAutomationSwitch.value as! String)) == automationDefaultValue
-                }
+        app.navigateToHomeFromSettings()
+        app.navigateToPrivacySettings()
+        XCTAssertEqual(app.vpnKillSwitch.value as? String, vpnKillSwitchDefaultValue)
 
-                context("help settings interaction") {
-                    it("should show the debug report review screen when user clicks 'Send Debug Log to support'") {
-                        app.navigateToHelpSettings()
-                        app.sendDebugButton.tap()
+        app.navigateToHomeFromSettings()
+        app.navigateToAutomationSettings()
+        XCTAssertEqual(app.enableAutomationSwitch.value as? String, automationDefaultValue)
+    }
 
-                        expect(app.debugReportReviewSendButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                        expect(app.debugReportReviewShareButton.exists).to(beTrue())
-                    }
+    // MARK: - Automation requires the kill switch
 
-                    xit("should return 'Debug information submitted' when user clicks 'Send Debug Log to support'") {
-                        app.navigateToDebugReportReview()
-                        app.debugReportReviewSendButton.tap()
-                        //active bug: this returns error in simulator
-                        expect(app.successfulSendDebugMessage.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    }
+    func testPrivacyFeaturesConfirmsTurningOffKillSwitchUnderAutomation() {
+        // Changing the kill switch while connected asks to reconnect on closing Settings.
+        app.disconnectToVPN()
+        app.enableVPNKillSwitchOnHome()
+        app.enableAutomationOnHome()
+        app.navigateToPrivacySettings()
 
-                    it("should display 'try wireguard' news when user clicks 'Latest News'") {
-                        app.navigateToHelpSettings()
-                        app.latestNewsButton.tap()
-                        expect(app.tryWireguardNowButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
+        // Cancel leaves the kill switch on.
+        app.vpnKillSwitch.tapTrailingControl()
+        XCTAssertTrue(app.disableKillSwitchCancelButton.waitForElementToAppear(), "No confirmation before turning off the kill switch")
+        app.disableKillSwitchCancelButton.tap()
+        XCTAssertTrue(app.vpnKillSwitch.waitForValue("1"), "Kill switch turned off although the change was cancelled")
 
-                        app.tryWireguardNowButton.tap()
-                        expect(app.protocolsSettingsButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                        expect(app.wireguard.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    }
+        // Disable turns the kill switch off, and Automation with it.
+        app.vpnKillSwitch.tapTrailingControl()
+        XCTAssertTrue(app.disableKillSwitchConfirmButton.waitForElementToAppear(), "No confirmation before turning off the kill switch")
+        app.disableKillSwitchConfirmButton.tap()
+        XCTAssertTrue(app.vpnKillSwitch.waitForValue("0"), "Kill switch still on after confirming")
 
-                    it("should display connection stats when user clicks 'Help improve PIA'") {
-                        app.navigateToHelpSettings()
-                        app.enableHelpImprovePIA()
-                        expect(app.connectionStatsButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    }
+        app.navigateToHomeFromSettings()
+        XCTAssertTrue(app.scrollToElement(app.quickSettingsButton), "Quick Settings tile not found")
+        XCTAssertTrue(app.enableVPNKillSwitchButton.waitForElementToAppear(), "Kill switch still on")
+        XCTAssertTrue(app.enableAutomationButton.exists, "Automation still on with the kill switch off")
+    }
 
-                    it("should display version number") {
-                        app.navigateToHelpSettings()
-                        expect(app.versionNo.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    }
-                }
-            }
-        }
+    func testAutomationSettingsAsksToEnableKillSwitch() {
+        app.disconnectToVPN()
+        app.disableAutomationOnHome()
+        app.disableVPNKillSwitchOnHome()
+        app.navigateToAutomationSettings()
+
+        // Close leaves Automation off.
+        app.enableAutomationSwitch.tapTrailingControl()
+        XCTAssertTrue(app.killSwitchAlertCloseButton.waitForElementToAppear(), "No alert asking to enable the kill switch")
+        app.killSwitchAlertCloseButton.tap()
+        XCTAssertTrue(app.enableAutomationSwitch.waitForValue("0"), "Automation turned on without the kill switch")
+
+        // Enable turns both on.
+        app.enableAutomationSwitch.tapTrailingControl()
+        XCTAssertTrue(app.killSwitchAlertEnableButton.waitForElementToAppear(), "No alert asking to enable the kill switch")
+        app.killSwitchAlertEnableButton.tap()
+        XCTAssertTrue(app.enableAutomationSwitch.waitForValue("1"), "Automation still off after enabling the kill switch")
+
+        app.navigateToHomeFromSettings()
+        XCTAssertTrue(app.scrollToElement(app.quickSettingsButton), "Quick Settings tile not found")
+        XCTAssertTrue(app.disableVPNKillSwitchButton.waitForElementToAppear(), "Kill switch still off")
+        XCTAssertTrue(app.disableAutomationButton.exists, "Automation still off")
+    }
+
+    // MARK: - Help settings interaction
+
+    func testShowsDebugReportReviewWhenSendingDebugLog() {
+        app.navigateToHelpSettings()
+        app.sendDebugButton.tap()
+
+        XCTAssertTrue(app.debugReportReviewSendButton.waitForExistence(timeout: app.defaultTimeout))
+        XCTAssertTrue(app.debugReportReviewShareButton.exists)
+    }
+
+    func testConfirmsDebugInformationSubmitted() throws {
+        app.navigateToDebugReportReview()
+        app.debugReportReviewSendButton.tap()
+        XCTAssertTrue(app.successfulSendDebugMessage.waitForExistence(timeout: app.defaultTimeout))
+    }
+
+    func testLatestNewsShowsTryWireGuard() {
+        app.navigateToHelpSettings()
+        app.latestNewsButton.tap()
+        XCTAssertTrue(app.tryWireguardNowButton.waitForExistence(timeout: app.defaultTimeout))
+
+        app.tryWireguardNowButton.tap()
+        XCTAssertTrue(app.protocolsSettingsButton.waitForExistence(timeout: app.defaultTimeout))
+        XCTAssertTrue(app.wireguard.waitForExistence(timeout: app.defaultTimeout))
+    }
+
+    func testHelpImprovePIAShowsConnectionStats() {
+        app.navigateToHelpSettings()
+        app.enableHelpImprovePIA()
+        XCTAssertTrue(app.connectionStatsButton.waitForExistence(timeout: app.defaultTimeout))
+    }
+
+    func testDisplaysVersionNumber() {
+        app.navigateToHelpSettings()
+        XCTAssertTrue(app.versionNo.waitForExistence(timeout: app.defaultTimeout))
     }
 }

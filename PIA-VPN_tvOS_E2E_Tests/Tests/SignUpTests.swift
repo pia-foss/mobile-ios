@@ -6,34 +6,29 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class SignUpTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = false
-        super.spec()
+    override class var shouldLogIn: Bool { false }
 
-        describe("sign up tests") {
-            context("when navigating to sign up page") {
-                it("should display the plan selection") {
-                    app.logout()
-                    app.navigateToSignUpScreen()
-                    expect(app.yearlyPlanButton.waitForElementToAppear()).to(beTrue())
-                    expect(app.monthlyPlanButton.waitForElementToAppear()).to(beTrue())
-                }
-            }
+    // MARK: - Navigating to the sign up page
 
-            context("when clicking the footer navigations") {
-                it("should navigate to Privacy Policy page") {
-                    app.logout()
-                    app.navigateToSignUpScreen()
-                    app.navigateToPrivacyPolicyScreen()
-                    expect(app.privacyPolicyTitle.waitForElementToAppear()).to(beTrue())
-                    app.navigateBackToSignUp()
-                    app.navigateToTermsOfService()
-                    expect(app.termsAndConditionsTitle.waitForElementToAppear()).to(beTrue())
-                }
-            }
-        }
+    func testShowsPlanSelection() {
+        app.logout()
+        app.navigateToSignUpScreen()
+        XCTAssertTrue(app.yearlyPlanButton.waitForElementToAppear())
+        XCTAssertTrue(app.monthlyPlanButton.waitForElementToAppear())
+    }
+
+    // MARK: - Footer navigation
+
+    func testFooterNavigatesToPrivacyPolicyAndTermsOfService() {
+        app.logout()
+        app.navigateToSignUpScreen()
+        app.navigateToPrivacyPolicyScreen()
+        XCTAssertTrue(app.privacyPolicyTitle.waitForElementToAppear())
+        app.navigateBackToSignUp()
+        app.navigateToTermsOfService()
+        XCTAssertTrue(app.termsAndConditionsTitle.waitForElementToAppear())
     }
 }

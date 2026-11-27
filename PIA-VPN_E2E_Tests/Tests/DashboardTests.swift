@@ -6,66 +6,80 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class DashboardTests: BaseTest {
-    override class func spec() {
-        super.spec()
+    // MARK: - Updated dashboard connection settings
 
-        describe("dashboard tests") {
-            context("updated dashboard connection settings") {
-                it("should update the connection details on dashboard, when the user sets up WireGuard®") {
-                    app.navigateToProtocolSettings()
-                    app.selectProtocol(protocolName: "WireGuard®")
-                    app.navigateToHomeFromSettings()
+    func testConnectionTileShowsWireGuardDetails() {
+        // The tile shows the live connection while connected, and the selected settings otherwise.
+        app.disconnectToVPN()
+        app.navigateToProtocolSettings()
+        app.selectProtocol(protocolName: VPNProtocolName.wireGuard)
+        app.navigateToHomeFromSettings()
 
-                    app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCollectionViewCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "WireGuard®")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "ChaCha20")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "Noise_IK")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+        app.navigateToEditDashboardScreen()
+        XCTAssertTrue(app.scrollToElement(app.connectionTileCollectionViewCell))
+        XCTAssertTrue(connectionTileText(VPNProtocolName.wireGuard))
+        XCTAssertTrue(connectionTileText("ChaCha20"))
+        XCTAssertTrue(connectionTileText("Noise_IK"))
+    }
 
-                it("should update the connection details on dashboard, when the user sets up OpenVPN") {
-                    app.navigateToProtocolSettings()
-                    app.selectProtocol(protocolName: "OpenVPN")
-                    app.selectDataEncryption(dataEncryption: "AES-256-GCM")
-                    app.selectTransport(transport: "TCP")
-                    app.selectRemotePort(port: "443")
-                    app.navigateToHomeFromSettings()
+    func testConnectionTileShowsOpenVPNDetails() {
+        // The tile shows the live connection while connected, and the selected settings otherwise.
+        app.disconnectToVPN()
+        app.navigateToProtocolSettings()
+        app.selectProtocol(protocolName: VPNProtocolName.openVPN)
+        app.selectDataEncryption(dataEncryption: "AES-256-GCM")
+        app.selectTransport(transport: "TCP")
+        app.selectRemotePort(port: "443")
+        app.navigateToHomeFromSettings()
 
-                    app.navigateToEditDashboardScreen()
-                    expect(app.connectionTileCollectionViewCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "OpenVPN")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "AES-256-GCM")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "TCP")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "443")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.connectionTileCollectionViewCell.findChildElement(matching: .staticText, identifier: "RSA-4096")?.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+        app.navigateToEditDashboardScreen()
+        XCTAssertTrue(app.scrollToElement(app.connectionTileCollectionViewCell))
+        XCTAssertTrue(connectionTileText(VPNProtocolName.openVPN))
+        XCTAssertTrue(connectionTileText("AES-256-GCM"))
+        XCTAssertTrue(connectionTileText("TCP"))
+        XCTAssertTrue(connectionTileText("443"))
+        XCTAssertTrue(connectionTileText("RSA-4096"))
+    }
 
-            context("dashboard reordering tests") {
-                it("should display enabled sections") {
-                    app.navigateToEditDashboardScreen()
-                    app.addTile(tileName: app.subscriptionTileCollectionViewCell)
-                    app.navigateToHome(using: app.cancelButton)
-                    expect(app.subscriptionTileCollectionViewCell.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    // MARK: - Dashboard reordering
 
-                it("should hide disabled sections") {
-                    app.navigateToEditDashboardScreen()
-                    app.removeTile(tileName: app.subscriptionTileCollectionViewCell)
-                    app.navigateToHome(using: app.cancelButton)
-                    expect(app.subscriptionTileCollectionViewCell.waitForExistence(timeout: app.defaultTimeout)).to(beFalse())
-                }
+    func testDisplaysEnabledSections() {
+        app.navigateToEditDashboardScreen()
+        app.addTile(tileName: app.subscriptionTileCollectionViewCell)
+        app.navigateToHome(using: app.doneEditingButton)
+        XCTAssertTrue(app.scrollToElement(app.subscriptionTileCollectionViewCell))
+    }
 
-                it("should display the dashboard sections based on user preferred order") {
-                    app.navigateToEditDashboardScreen()
-                    app.moveTile(firstTileName: app.quickConnectTileCollectionViewCell, secondTileName: app.regionTileCollectionViewCell)
-                    app.navigateToHome(using: app.cancelButton)
-                    expect(app.quickConnectTileCollectionViewCell.isElementHigher(than: app.regionTileCollectionViewCell)).to(beTrue())
-                }
-            }
+    func testHidesDisabledSections() {
+        app.navigateToEditDashboardScreen()
+        app.removeTile(tileName: app.subscriptionTileCollectionViewCell)
+        app.navigateToHome(using: app.doneEditingButton)
+        XCTAssertFalse(app.scrollToElement(app.subscriptionTileCollectionViewCell))
+    }
+
+    func testDisplaysSectionsInUserPreferredOrder() {
+        app.navigateToEditDashboardScreen()
+        let quickConnect = app.quickConnectTileCollectionViewCell
+        let region = app.regionTileCollectionViewCell
+        // Move whichever tile is lower above the other, so the test doesn't depend on the order a previous run left.
+        let quickConnectWasHigher = quickConnect.isElementHigher(than: region)
+        if quickConnectWasHigher {
+            app.moveTile(region, onto: quickConnect)
+        } else {
+            app.moveTile(quickConnect, onto: region)
         }
+        app.navigateToHome(using: app.doneEditingButton)
+        XCTAssertEqual(quickConnect.isElementHigher(than: region), !quickConnectWasHigher)
+    }
+
+    // MARK: - Helpers
+
+    private func connectionTileText(_ identifier: String) -> Bool {
+        app.connectionTileCollectionViewCell
+            .findChildElement(matching: .staticText, identifier: identifier)?
+            .waitForExistence(timeout: app.defaultTimeout) ?? false
     }
 }

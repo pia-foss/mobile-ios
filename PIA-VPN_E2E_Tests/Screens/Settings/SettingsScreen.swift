@@ -21,7 +21,7 @@ extension XCUIApplication {
     var helpSettingsButton: XCUIElement { staticText(with: helpTitleString) }
     var developmentSettingsButton: XCUIElement { staticText(with: "Development") }
     var closeButton: XCUIElement { button(with: "Close") }
-    var settingsBackButton: XCUIElement { button(with: settingsButtonString) }
+    var settingsBackButton: XCUIElement { navigationBars.buttons["BackButton"].firstMatch }
     var settingsHeader: XCUIElement { staticText(with: settingsButtonString) }
 
     func navigateToSettings() {
@@ -30,7 +30,7 @@ extension XCUIApplication {
     }
 
     func navigateToHomeFromSettings() {
-        settingsBackButton.waitForElementToAppear()
+        XCTAssertTrue(settingsBackButton.waitForElementToAppear(), "Settings back button not found")
         settingsBackButton.tap()
         navigateToHome(using: closeButton)
         XCTAssertTrue(connectionButton.waitForElementToAppear())

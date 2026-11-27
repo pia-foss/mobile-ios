@@ -19,7 +19,7 @@ extension XCUIApplication {
 
     func navigateToPrivacySettings() {
         navigateToSettings()
-        privacySettingsButton.waitForElementToAppear()
+        XCTAssertTrue(privacySettingsButton.waitForElementToAppear(), "Privacy settings button not found")
         privacySettingsButton.tap()
         XCTAssertTrue(privacyHeader.waitForElementToAppear())
     }
@@ -28,17 +28,18 @@ extension XCUIApplication {
         if ((vpnKillSwitch.value as! String) == "1") {
             return
         }
-        vpnKillSwitch.tap()
+        vpnKillSwitch.tapTrailingControl()
     }
 
     func disableVPNKillSwitch() {
         if ((vpnKillSwitch.value as! String) == "0") {
             return
         }
-        vpnKillSwitch.tap()
+        vpnKillSwitch.tapTrailingControl()
 
-        if (button(with: "CLOSE").exists) {
-            button(with: "CLOSE").tap()
+        // With Automation on, turning the kill switch off asks to confirm turning both off.
+        if disableKillSwitchConfirmButton.waitForExistence(timeout: shortTimeout) {
+            disableKillSwitchConfirmButton.tap()
         }
     }
 }

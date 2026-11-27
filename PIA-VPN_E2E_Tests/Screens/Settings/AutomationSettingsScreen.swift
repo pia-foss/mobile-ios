@@ -15,7 +15,7 @@ extension XCUIApplication {
 
     func navigateToAutomationSettings() {
         navigateToSettings()
-        automationSettingsButton.waitForElementToAppear()
+        XCTAssertTrue(automationSettingsButton.waitForElementToAppear(), "Automation settings button not found")
         automationSettingsButton.tap()
         XCTAssertTrue(automationHeader.waitForElementToAppear())
     }

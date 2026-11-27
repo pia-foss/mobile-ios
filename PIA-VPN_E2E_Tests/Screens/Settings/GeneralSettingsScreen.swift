@@ -23,7 +23,7 @@ extension XCUIApplication {
 
     func navigateToGeneralSettings() {
         navigateToSettings()
-        generalSettingsButton.waitForElementToAppear()
+        XCTAssertTrue(generalSettingsButton.waitForElementToAppear(), "General settings button not found")
         generalSettingsButton.tap()
         XCTAssertTrue(generalHeader.waitForElementToAppear())
     }
@@ -32,13 +32,13 @@ extension XCUIApplication {
         if ((geoLocatedRegionsSwitch.value as! String) == "1") {
             return
         }
-        geoLocatedRegionsSwitch.tap()
+        geoLocatedRegionsSwitch.tapTrailingControl()
     }
 
     func disableGeoLocatedRegionSwitch() {
         if ((geoLocatedRegionsSwitch.value as! String) == "0") {
             return
         }
-        geoLocatedRegionsSwitch.tap()
+        geoLocatedRegionsSwitch.tapTrailingControl()
     }
 }

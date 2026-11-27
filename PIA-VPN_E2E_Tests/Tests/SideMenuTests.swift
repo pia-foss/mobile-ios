@@ -6,30 +6,24 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class SideMenuTests: BaseTest {
-    override class func spec() {
-        super.spec()
+    // MARK: - Selecting a side menu item
 
-        describe("side menu tests") {
-            context("when an item is selected from the side menu") {
-                it("when region selectionshould be redirected to its respective navigation") {
-                    if (app.closeButton.exists) {
-                        app.navigateToHome(using: app.closeButton)
-                    }
-                    app.selectSideMenu(menuName: "Region selection")
-                    expect(app.regionSelectionHeader.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-
-                    app.navigateToHome(using: app.closeButton)
-                    app.selectSideMenu(menuName: "Account")
-                    expect(app.staticText(with: "Account").waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-
-                    app.navigateToHome(using: app.closeButton)
-                    app.selectSideMenu(menuName: "About")
-                    expect(app.staticText(with: "About").waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+    func testSideMenuItemsNavigateToTheirScreens() {
+        if app.closeButton.exists {
+            app.navigateToHome(using: app.closeButton)
         }
+        app.selectSideMenu(menuName: "Region selection")
+        XCTAssertTrue(app.regionSelectionHeader.waitForExistence(timeout: app.defaultTimeout))
+
+        app.navigateToHome(using: app.closeButton)
+        app.selectSideMenu(menuName: "Account")
+        XCTAssertTrue(app.staticText(with: "Account").waitForExistence(timeout: app.defaultTimeout))
+
+        app.navigateToHome(using: app.closeButton)
+        app.selectSideMenu(menuName: "About")
+        XCTAssertTrue(app.staticText(with: "About").waitForExistence(timeout: app.defaultTimeout))
     }
 }

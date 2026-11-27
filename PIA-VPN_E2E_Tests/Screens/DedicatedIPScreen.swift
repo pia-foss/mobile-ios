@@ -14,34 +14,42 @@ extension XCUIApplication {
     var dedicatedIPHeader: XCUIElement { staticText(with: dedicatedIPTitleString) }
     var dedicatedIPTextFieldString: String { getString(key: "dedicated.ip.token.textfield.accessibility", comment: "The textfield to type the Dedicated IP token") }
     var dedicatedIPTextField: XCUIElement { textField(with: dedicatedIPTextFieldString) }
-    var dedicatedIPList: XCUIElement { cell(with: AccessibilityID.DedicatedIP.row) }
+    var dedicatedIPList: XCUIElement { cells.containing(.any, identifier: AccessibilityID.DedicatedIP.row).firstMatch }
     var invalidTokenErrorString: String { getString(key: "dedicated.ip.message.invalid.token", comment: "Your token is invalid. Please make sure you have entered the token correctly.") }
     var invalidTokenErrorMessage: XCUIElement { staticText(with: invalidTokenErrorString) }
     var emptyTokenErrorString: String { getString(key: "dedicated.ip.message.incorrect.token", comment: "Please make sure you have entered the token correctly") }
     var emptyTokenErrorMessage: XCUIElement { staticText(with: emptyTokenErrorString) }
-    var deleteTokenButton: XCUIElement { button(with: "Remove") }
-    var confirmDeleteButton: XCUIElement { alerts.buttons["Remove"] }
+    var removeString: String { getString(key: "global.remove", comment: "Remove") }
+    var deleteTokenButton: XCUIElement { buttons[removeString].firstMatch }
+    var confirmDeleteButton: XCUIElement { alerts.buttons[removeString] }
+    var activateDedicatedIPButton: XCUIElement { button(with: getString(key: "dedicated.ip.activate.button.title", comment: "Activate")) }
+
+    /// The listed dedicated IP's region name, e.g. "JP Tokyo".
+    var dedicatedIPName: String { dedicatedIPRowTexts.first ?? "" }
+    /// The listed dedicated IP's address.
+    var dedicatedIPAddress: String {
+        dedicatedIPRowTexts.first { $0.range(of: ipv4Pattern, options: .regularExpression) != nil } ?? ""
+    }
+    private var dedicatedIPRowTexts: [String] { dedicatedIPList.staticTexts.allElementsBoundByIndex.map(\.label) }
 
     func navigateToDedicatedIPScreen() {
-        selectSideMenu(menuName: "Dedicated IP")
+        selectSideMenu(menuName: dedicatedIPTitleString)
         XCTAssertTrue(dedicatedIPHeader.waitForElementToAppear())
     }
 
     func activateDedicatedIP(with dedicatedIP: DedicatedIP) {
-        dedicatedIPTextField.waitForElementToAppear()
+        XCTAssertTrue(dedicatedIPTextField.waitForElementToAppear(), "Dedicated IP token field not found")
         dedicatedIPTextField.tap()
         dedicatedIPTextField.typeText(dedicatedIP.token)
-        button(with: "Activate").tap()
+        activateDedicatedIPButton.tap()
     }
 
     func deleteDedicatedIP() {
-        dedicatedIPList.waitForElementToAppear()
-        let pressDuration: TimeInterval = 1.0
-        let sourceCoordinate = dedicatedIPList.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5))
-        let leftmostCoordinate = coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
-        sourceCoordinate.press(forDuration: pressDuration, thenDragTo: leftmostCoordinate)
-
+        XCTAssertTrue(dedicatedIPList.waitForElementToAppear())
+        dedicatedIPList.swipeLeft()
+        XCTAssertTrue(deleteTokenButton.waitForElementToAppear())
         deleteTokenButton.tap()
+        XCTAssertTrue(confirmDeleteButton.waitForElementToAppear())
         confirmDeleteButton.tap()
         XCTAssertTrue(dedicatedIPTextField.waitForElementToAppear())
     }

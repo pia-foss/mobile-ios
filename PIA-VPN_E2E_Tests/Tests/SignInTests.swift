@@ -6,29 +6,23 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class SignInTests: BaseTest {
-    override class func spec() {
-        super.spec()
+    // MARK: - Account validations
 
-        describe("sign in tests") {
-            context("account validations") {
-                it("should successfully sign in with valid credentials") {
-                    app.logOut()
-                    app.navigateToLoginScreen()
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    expect(app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    func testSignsInWithValidCredentials() {
+        app.logOut()
+        app.navigateToLoginScreen()
+        app.logIn(with: Credentials.valid)
+        XCTAssertTrue(app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout))
+    }
 
-                it("should display error mesages with invalid credentials") {
-                    app.logOut()
-                    app.navigateToLoginScreen()
-                    app.logIn(with: CredentialsUtil.credentials(type: .invalid))
-                    expect(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout)).to(beTrue())
-                    expect(app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout)).to(beFalse())
-                }
-            }
-        }
+    func testShowsErrorForInvalidCredentials() {
+        app.logOut()
+        app.navigateToLoginScreen()
+        app.logIn(with: Credentials.invalid)
+        XCTAssertTrue(app.loginErrorMessage.waitForExistence(timeout: app.shortTimeout))
+        XCTAssertFalse(app.vpnPermissionScreen.waitForExistence(timeout: app.defaultTimeout))
     }
 }

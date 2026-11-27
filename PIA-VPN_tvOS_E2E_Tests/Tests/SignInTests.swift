@@ -6,28 +6,24 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class SignInTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = false
-        super.spec()
-        describe("sign in tests") {
-            context("account validations") {
-                it("should successfully sign in with valid credentials") {
-                    app.logout()
-                    app.navigateToSignInScreen()
-                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
-                    expect(app.helpImprovePIATitle.waitForElementToAppear()).to(beTrue())
-                }
+    override class var shouldLogIn: Bool { false }
 
-                it("should display error mesages with invalid credentials") {
-                    app.logout()
-                    app.navigateToSignInScreen()
-                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .invalid))
-                    expect(app.incorrectCredentialsErrorMessage.waitForElementToAppear()).to(beTrue())
-                }
-            }
-        }
+    // MARK: - Account validations
+
+    func testSignsInWithValidCredentials() {
+        app.logout()
+        app.navigateToSignInScreen()
+        app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
+        XCTAssertTrue(app.helpImprovePIATitle.waitForElementToAppear())
+    }
+
+    func testShowsErrorForInvalidCredentials() {
+        app.logout()
+        app.navigateToSignInScreen()
+        app.loginViaUsername(with: CredentialsUtil.credentials(type: .invalid))
+        XCTAssertTrue(app.incorrectCredentialsErrorMessage.waitForElementToAppear())
     }
 }

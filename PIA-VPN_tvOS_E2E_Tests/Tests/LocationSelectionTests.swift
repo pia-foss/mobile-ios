@@ -1,67 +1,59 @@
 //
-//  RegionSelectionTests.swift
+//  LocationSelectionTests.swift
 //  PIA-VPN_tvOS_E2E_Tests
 //
 //  Created by Geneva Parayno on 8/3/24.
-//  Copyright © 2024 Private Internet Ac`cess Inc. All rights reserved.
+//  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
 import XCTest
 
 class LocationSelectionTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = true
-        super.spec()
+    // MARK: - "All" tab
 
-        describe("location selection tests") {
-            context("when the user goes to 'All' tab") {
-                it("then the user sees all available locations") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToAllLocationsScreen()
+    func testAllTabShowsAllAvailableLocations() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToAllLocationsScreen()
 
-                    expect(app.allLocationsTitle.exists).to(beTrue())
-                    expect(app.optimalLocationsTitle.exists).to(beTrue())
-                }
-            }
+        XCTAssertTrue(app.allLocationsTitle.exists)
+        XCTAssertTrue(app.optimalLocationsTitle.exists)
+    }
 
-            context("when the user goes to 'Search' tab") {
-                it("should display recommended locations and search location button") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    expect(app.searchForALocationButton.exists).to(beTrue())
-                    expect(app.recommendedLocationsTitle.exists || app.lastSearchedLocationsTitle.exists).to(beTrue())
-                }
+    // MARK: - "Search" tab
 
-                it("should return related results when the user searches a keyword") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.searchLocation(keyword: "Chi")
-                    expect(app.getSearchResultButtonLabels().allSatisfy { $0.contains("Chi") }).to(beTrue())
-                }
-            }
+    func testSearchTabShowsRecommendedLocationsAndSearchButton() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        XCTAssertTrue(app.searchForALocationButton.exists)
+        XCTAssertTrue(app.recommendedLocationsTitle.exists || app.lastSearchedLocationsTitle.exists)
+    }
 
-            context("display of the favourites tab") {
-                it("should display the favourites tab when a region is added to favourites") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToAllLocationsScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.addToFavorites(region: "India")
-                    expect(app.favouritesTabButton.exists).to(beTrue())
-                    app.navigateToFavouriteLocationScreen()
-                    expect(app.getSearchResultButtonLabels().contains { $0.contains("India") }).to(beTrue())
-                }
+    func testSearchReturnsRelatedResults() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.searchLocation(keyword: "Chi")
+        XCTAssertTrue(app.getSearchResultButtonLabels().allSatisfy { $0.contains("Chi") })
+    }
 
-                it("should hide the favourites tab when all regions are removed from favourites") {
-                    app.navigateToLocationSelectionScreen()
-                    app.navigateToSearchLocationScreen()
-                    app.addToFavorites(region: "Peru")
-                    app.addToFavorites(region: "Chile")
-                    app.navigateToFavouriteLocationScreen()
-                    app.removeAllRegionsFromFavorites()
-                    expect(!app.favouritesTabButton.exists).to(beTrue())
-                }
-            }
-        }
+    // MARK: - Favourites tab
+
+    func testShowsFavouritesTabWhenRegionIsFavourited() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToAllLocationsScreen()
+        app.navigateToSearchLocationScreen()
+        app.addToFavorites(region: "India")
+        XCTAssertTrue(app.favouritesTabButton.exists)
+        app.navigateToFavouriteLocationScreen()
+        XCTAssertTrue(app.getSearchResultButtonLabels().contains { $0.contains("India") })
+    }
+
+    func testHidesFavouritesTabWhenAllFavouritesAreRemoved() {
+        app.navigateToLocationSelectionScreen()
+        app.navigateToSearchLocationScreen()
+        app.addToFavorites(region: "Peru")
+        app.addToFavorites(region: "Chile")
+        app.navigateToFavouriteLocationScreen()
+        app.removeAllRegionsFromFavorites()
+        XCTAssertFalse(app.favouritesTabButton.exists)
     }
 }

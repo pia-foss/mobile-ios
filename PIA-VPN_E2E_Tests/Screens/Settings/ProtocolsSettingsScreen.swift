@@ -23,18 +23,19 @@ extension XCUIApplication {
     var remotePortButton: XCUIElement { button(with: remotePortButtonString) }
     var useSmallPacketsString: String { getString(key: "settings.small.packets.title", comment: "Use Small Packets") }
     var useSmallPacketsSwitch: XCUIElement { switches(with: useSmallPacketsString) }
-    var openVPN: XCUIElement { selectedProtocol("OpenVPN") }
-    var wireguard: XCUIElement { staticText(with: "WireGuard®") }
+    var openVPN: XCUIElement { selectedProtocol(VPNProtocolName.openVPN) }
+    var automaticProtocol: XCUIElement { selectedProtocol(automaticString) }
+    var wireguard: XCUIElement { staticText(with: VPNProtocolName.wireGuard) }
 
     func navigateToProtocolSettings() {
         navigateToSettings()
-        protocolsSettingsButton.waitForElementToAppear()
+        XCTAssertTrue(protocolsSettingsButton.waitForElementToAppear(), "Protocols settings button not found")
         protocolsSettingsButton.tap()
         XCTAssertTrue(protocolsHeader.waitForElementToAppear())
     }
 
     func selectProtocol(protocolName: String) {
-        protocolSelectionButton.waitForElementToAppear()
+        XCTAssertTrue(protocolSelectionButton.waitForElementToAppear(), "Protocol selection button not found")
         selectMenuOption(protocolName, in: protocolSelectionButton)
     }
 
@@ -44,9 +45,9 @@ extension XCUIApplication {
 
     func selectHandshake(handshake: String) {
         handshakeButton.tap()
-        handshakePopover.waitForElementToAppear()
+        XCTAssertTrue(handshakePopover.waitForElementToAppear(), "Handshake popover not found")
         handshakePopover.staticTexts[handshake].tap()
-        handshakePopover.waitForElementToBeHidden()
+        XCTAssertTrue(handshakePopover.waitForElementToBeHidden(), "Handshake popover still showing")
     }
 
     func selectTransport(transport: String) {
@@ -58,11 +59,12 @@ extension XCUIApplication {
     }
 
     private func selectMenuOption(_ option: String, in menuButton: XCUIElement) {
-        menuButton.tap()
+        XCTAssertTrue(menuButton.waitForElementToAppear(), "\(option) menu not found")
+        menuButton.tapTrailingControl()
         let optionButton = buttons[option]
-        optionButton.waitForElementToAppear()
+        XCTAssertTrue(optionButton.waitForElementToAppear(), "\(option) option not found")
         optionButton.tap()
-        optionButton.waitForElementToBeHidden()
+        XCTAssertTrue(optionButton.waitForElementToBeHidden(), "\(option) menu still showing")
     }
 
     private func selectedProtocol(_ protocolName: String) -> XCUIElement {
@@ -73,13 +75,19 @@ extension XCUIApplication {
         if ((useSmallPacketsSwitch.value as! String) == "1") {
             return
         }
-        useSmallPacketsSwitch.tap()
+        useSmallPacketsSwitch.tapTrailingControl()
     }
 
     func disableSmallPackets() {
         if ((useSmallPacketsSwitch.value as! String) == "0") {
             return
         }
-        useSmallPacketsSwitch.tap()
+        useSmallPacketsSwitch.tapTrailingControl()
     }
+}
+
+/// The protocols' product names, which the app shows untranslated in every language.
+enum VPNProtocolName {
+    static let openVPN = "OpenVPN"
+    static let wireGuard = "WireGuard®"
 }

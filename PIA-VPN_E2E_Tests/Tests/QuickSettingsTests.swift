@@ -6,60 +6,81 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class QuickSettingsTests: BaseTest {
-    override class func spec() {
-        super.spec()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
 
-        describe("quick settings on homescreen tests") {
-            context("when quick settings items are displayed on homescreen") {
-                it("should show every shortcut") {
-                    expect(app.privateBrowserButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect {
-                        app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
-                            || app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
-                    }.to(beTrue())
-                    expect {
-                        app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)
-                            || app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)
-                    }.to(beTrue())
-                }
-
-                it("should indicate that it's enabled when the user enables it") {
-                    app.enableVPNKillSwitchOnHome()
-                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-
-                    app.enableNetworkManagementOnHome()
-                    expect(app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-
-                it("should indicate that it's disabled when the user disables it") {
-                    app.disableVPNKillSwitchOnHome()
-                    expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-
-                    app.enableVPNKillSwitchOnHome()
-                    app.disableNetworkManagementOnHome()
-                    expect(app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-
-                xit("should display a notification message and not allow enabling the network management when vpn kill switch is disabled") {
-                    app.enableVPNKillSwitchOnHome()
-                    app.disableVPNKillSwitchOnHome()
-                    app.enableNetworkManagementOnHome()
-
-                    app.staticText(with: "ENABLE").tap()
-                    expect(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.disableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-
-                    app.disableVPNKillSwitchOnHome()
-                    app.staticText(with: "CLOSE").tap()
-
-                    //active bug: https://polymoon.atlassian.net/browse/PIA-938
-                    expect(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.enableNetworkManagementButton.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+        // Changing these settings while connected asks to reconnect; start disconnected, closing any leftover prompt.
+        if app.reconnectAlertLaterButton.waitForExistence(timeout: 2) {
+            app.reconnectAlertLaterButton.tap()
         }
+        app.disconnectToVPN()
+    }
+
+    // MARK: - Quick settings items displayed on home screen
+
+    func testShowsEveryShortcut() {
+        XCTAssertTrue(app.privateBrowserButton.waitForExistence(timeout: app.defaultTimeout))
+        XCTAssertTrue(
+            app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
+                || app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout)
+        )
+        XCTAssertTrue(
+            app.enableAutomationButton.waitForExistence(timeout: app.defaultTimeout)
+                || app.disableAutomationButton.waitForExistence(timeout: app.defaultTimeout)
+        )
+    }
+
+    func testIndicatesEnabledWhenUserEnablesShortcut() {
+        app.enableVPNKillSwitchOnHome()
+        XCTAssertTrue(app.disableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout))
+
+        app.enableAutomationOnHome()
+        XCTAssertTrue(app.disableAutomationButton.waitForExistence(timeout: app.defaultTimeout))
+    }
+
+    func testIndicatesDisabledWhenUserDisablesShortcut() {
+        app.disableVPNKillSwitchOnHome()
+        XCTAssertTrue(app.enableVPNKillSwitchButton.waitForExistence(timeout: app.defaultTimeout))
+
+        app.enableVPNKillSwitchOnHome()
+        app.disableAutomationOnHome()
+        XCTAssertTrue(app.enableAutomationButton.waitForExistence(timeout: app.defaultTimeout))
+    }
+
+    /// Automation runs on the kill switch's on-demand rules, so it can never be on while the kill switch is off.
+    func testAutomationRequiresKillSwitch() {
+        app.disableAutomationOnHome()
+        app.disableVPNKillSwitchOnHome()
+
+        // Turning Automation on without the kill switch asks to enable it; Close leaves both off.
+        app.enableAutomationButton.tap()
+        XCTAssertTrue(app.killSwitchAlertCloseButton.waitForElementToAppear(), "No alert asking to enable the kill switch")
+        app.killSwitchAlertCloseButton.tap()
+        XCTAssertTrue(app.enableAutomationButton.waitForElementToAppear(), "Automation turned on without the kill switch")
+        XCTAssertTrue(app.enableVPNKillSwitchButton.exists)
+
+        // Enable turns both on.
+        app.enableAutomationButton.tap()
+        XCTAssertTrue(app.killSwitchAlertEnableButton.waitForElementToAppear(), "No alert asking to enable the kill switch")
+        app.killSwitchAlertEnableButton.tap()
+        XCTAssertTrue(app.disableAutomationButton.waitForElementToAppear())
+        XCTAssertTrue(app.disableVPNKillSwitchButton.waitForElementToAppear())
+
+        // Turning the kill switch off asks to confirm; Cancel leaves both on.
+        app.disableVPNKillSwitchButton.tap()
+        XCTAssertTrue(app.disableKillSwitchCancelButton.waitForElementToAppear(), "No confirmation before turning off the kill switch")
+        app.disableKillSwitchCancelButton.tap()
+        XCTAssertTrue(app.disableVPNKillSwitchButton.waitForElementToAppear())
+        XCTAssertTrue(app.disableAutomationButton.exists, "Automation turned off when the kill switch change was cancelled")
+
+        // Disable turns both off.
+        app.disableVPNKillSwitchButton.tap()
+        XCTAssertTrue(app.disableKillSwitchConfirmButton.waitForElementToAppear(), "No confirmation before turning off the kill switch")
+        app.disableKillSwitchConfirmButton.tap()
+        XCTAssertTrue(app.enableVPNKillSwitchButton.waitForElementToAppear())
+        XCTAssertTrue(app.enableAutomationButton.waitForElementToAppear(), "Automation still on with the kill switch off")
     }
 }

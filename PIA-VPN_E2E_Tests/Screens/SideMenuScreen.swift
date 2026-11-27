@@ -15,7 +15,7 @@ extension XCUIApplication {
     var settingsButton: XCUIElement { staticText(with: settingsButtonString) }
 
     func selectSideMenu(menuName: String) {
-        dashboardMenuButton.waitForElementToAppear()
+        XCTAssertTrue(dashboardMenuButton.waitForElementToAppear(), "Dashboard menu button not found")
         dashboardMenuButton.tap()
         XCTAssertTrue(staticText(with: menuName).waitForElementToAppear())
         staticText(with: menuName).tap()

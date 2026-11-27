@@ -6,40 +6,33 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class HelpTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = true
-        super.spec()
+    // MARK: - Help screen
 
-        describe("help tests") {
-            context("when the user navigates to the help screen") {
-                it("should display the following: app version, about, help improve PIA, and contact support qr") {
-                    app.navigateToHelpScreen()
-                    expect(app.appVersion.waitForElementToAppear()).to(beTrue())
-                    expect(app.aboutButton.waitForElementToAppear()).to(beTrue())
-                    expect(app.helpImprovePIAButton.waitForElementToAppear()).to(beTrue())
-                    expect(app.scanQRCodeContactUsMessage.waitForElementToAppear()).to(beTrue())
-                }
-            }
+    func testShowsVersionAboutHelpImproveAndContactSupport() {
+        app.navigateToHelpScreen()
+        XCTAssertTrue(app.appVersion.waitForElementToAppear())
+        XCTAssertTrue(app.aboutButton.waitForElementToAppear())
+        XCTAssertTrue(app.helpImprovePIAButton.waitForElementToAppear())
+        XCTAssertTrue(app.scanQRCodeContactUsMessage.waitForElementToAppear())
+    }
 
-            context("when the user navigates to about screen") {
-                it("should display the privacy policy screen, and the privacy policy qr upon navigating to it") {
-                    app.navigateToHelpScreen()
-                    app.navigateToAboutScreen()
-                    app.navigateToPrivacyPolicyScreen()
-                    expect(app.privacyPolicyMessage.waitForElementToAppear()).to(beTrue())
-                    expect(app.scanQRCodePrivacyPolicyMessage.waitForElementToAppear()).to(beTrue())
-                }
+    // MARK: - About screen
 
-                it("should display the acknowledgments screen, and the third party contents and services upon navigating to it") {
-                    app.navigateToHelpScreen()
-                    app.navigateToAboutScreen()
-                    app.navigateToAcknowledgmentsScreen()
-                    expect(app.acknowledgementsMessage.waitForElementToAppear()).to(beTrue())
-                }
-            }
-        }
+    func testShowsPrivacyPolicyAndItsQRCode() {
+        app.navigateToHelpScreen()
+        app.navigateToAboutScreen()
+        app.navigateToPrivacyPolicyScreen()
+        XCTAssertTrue(app.privacyPolicyMessage.waitForElementToAppear())
+        XCTAssertTrue(app.scanQRCodePrivacyPolicyMessage.waitForElementToAppear())
+    }
+
+    func testShowsAcknowledgments() {
+        app.navigateToHelpScreen()
+        app.navigateToAboutScreen()
+        app.navigateToAcknowledgmentsScreen()
+        XCTAssertTrue(app.acknowledgementsMessage.waitForElementToAppear())
     }
 }

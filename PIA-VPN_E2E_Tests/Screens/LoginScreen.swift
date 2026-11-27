@@ -8,12 +8,28 @@ extension XCUIApplication {
     var loginErrorMessage: XCUIElement { otherElement(with: AccessibilityID.Login.errorBanner) }
 
     func logIn(with credentials: Credentials) {
-        loginUsernameTextField.waitForElementToAppear()
-        loginPasswordTextField.waitForElementToAppear()
+        XCTAssertTrue(loginUsernameTextField.waitForElementToAppear(), "Login username text field not found")
+        XCTAssertTrue(loginPasswordTextField.waitForElementToAppear(), "Login password text field not found")
         loginUsernameTextField.tap()
         loginUsernameTextField.typeText(credentials.username)
-        loginPasswordTextField.tap()
+        // Move between fields and submit with Return (LoginView's onSubmit) rather than tapping: when the device has a
+        // saved password for the typed username, iOS Password AutoFill draws a suggestion over the password field and,
+        // once that field has focus, over the submit button. A tap there fills in the saved password or dismisses the
+        // suggestion instead.
+        loginUsernameTextField.typeText("\n")
         loginPasswordTextField.typeText(credentials.password)
-        loginButton.tap()
+
+        // Fail here, with a clear reason, rather than later on a screen that never appears.
+        XCTAssertEqual(
+            loginUsernameTextField.value as? String,
+            credentials.username,
+            "Username field doesn't hold the typed username"
+        )
+        XCTAssertEqual(
+            (loginPasswordTextField.value as? String)?.count,
+            credentials.password.count,
+            "Password field doesn't hold just the typed password; iOS Password AutoFill may have inserted text"
+        )
+        loginPasswordTextField.typeText("\n")
     }
 }

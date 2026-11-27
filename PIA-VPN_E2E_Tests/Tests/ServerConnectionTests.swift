@@ -6,86 +6,85 @@
 //  Copyright © 2023 Private Internet Access Inc. All rights reserved.
 //
 
-import Nimble
+import XCTest
 
 class ServerConnectionTests: BaseTest {
-    override class func spec() {
-        super.spec()
+    // MARK: - Home screen after logging in
 
-        describe("server connection tests") {
-            context("when the user navigates to homescreen upon logging in") {
-                it("should display the vpn server defaulted to 'Automatic'") {
-                    app.logOut()
-                    app.navigateToLoginScreen()
-                    app.logIn(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptVPNPermission()
-                    expect(app.regionTileCollectionViewCell.staticTexts["Automatic"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    func testDefaultsVPNServerToAutomatic() {
+        app.logOut()
+        app.navigateToLoginScreen()
+        app.logIn(with: Credentials.valid)
+        app.acceptVPNPermission()
+        XCTAssertTrue(app.regionTileCollectionViewCell.staticTexts[app.automaticString].waitForExistence(timeout: app.defaultTimeout))
+    }
 
-                it("should connect the user to vpn when the user taps the connect button") {
-                    app.disconnectToVPN()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    func testConnectsWhenTappingConnectButton() throws {
+        try requireRealDevice()
+        app.disconnectToVPN()
+        let publicIP = app.publicIPAddress()
+        app.connectToVPN()
+        XCTAssertTrue(app.connectedStatusLabel.waitForExistence(timeout: app.vpnConnectionTimeout))
+        app.assertConnectedThroughVPN(publicIPBeforeConnecting: publicIP)
+    }
 
-                it("should disconnect the user from vpn when the user taps button to disconnect") {
-                    app.connectToVPN()
-                    app.disconnectToVPN()
-                    expect(app.disconnectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+    func testDisconnectsWhenTappingDisconnectButton() throws {
+        try requireRealDevice()
+        app.connectToVPN()
+        app.disconnectToVPN()
+        XCTAssertTrue(app.disconnectedStatusLabel.waitForExistence(timeout: app.vpnConnectionTimeout))
+    }
 
-            context("when the user navigates to the regional selection list") {
-                it("should connect the user to the selection region when the region is tapped") {
-                    app.disconnectToVPN()
-                    app.navigateToRegionSelection()
-                    app.searchRegion(regionName: "Philippines").firstMatch.tap()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                    expect(app.regionTileCollectionViewCell.staticTexts["Philippines"].waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+    // MARK: - Region selection list
 
-            context("when the user changes protocol type") {
-                it("should connect the user to vpn successfully when the user enables small packet for Wireguard") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.enableSmallPackets()
-                    app.selectProtocol(protocolName: "WireGuard®")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    func testConnectsToTappedRegion() throws {
+        try requireRealDevice()
+        app.disconnectToVPN()
+        let publicIP = app.publicIPAddress()
+        app.navigateToRegionSelection()
+        app.searchRegion(regionName: "Philippines").firstMatch.tap()
+        XCTAssertTrue(app.connectedStatusLabel.waitForExistence(timeout: app.vpnConnectionTimeout))
+        XCTAssertTrue(app.regionTileCollectionViewCell.staticTexts["Philippines"].waitForExistence(timeout: app.defaultTimeout))
+        app.assertConnectedThroughVPN(publicIPBeforeConnecting: publicIP)
+    }
 
-                it("should connect the user to vpn successfully when the user disables small packet for Wireguard") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.disableSmallPackets()
-                    app.selectProtocol(protocolName: "WireGuard®")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    // MARK: - Protocol changes
 
-                it("should connect the user to vpn successfully when the user enables small packet for OpenVPN") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.enableSmallPackets()
-                    app.selectProtocol(protocolName: "OpenVPN")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
+    func testConnectsWithWireGuardSmallPacketsEnabled() throws {
+        try requireRealDevice()
+        connect(protocolName: VPNProtocolName.wireGuard, smallPackets: true)
+    }
 
-                it("should connect the user to vpn successfully when the user disables small packet for OpenVPN") {
-                    app.disconnectToVPN()
-                    app.navigateToProtocolSettings()
-                    app.disableSmallPackets()
-                    app.selectProtocol(protocolName: "OpenVPN")
-                    app.navigateToHomeFromSettings()
-                    app.connectToVPN()
-                    expect(app.connectedStatusLabel.waitForExistence(timeout: app.defaultTimeout)).to(beTrue())
-                }
-            }
+    func testConnectsWithWireGuardSmallPacketsDisabled() throws {
+        try requireRealDevice()
+        connect(protocolName: VPNProtocolName.wireGuard, smallPackets: false)
+    }
+
+    func testConnectsWithOpenVPNSmallPacketsEnabled() throws {
+        try requireRealDevice()
+        connect(protocolName: VPNProtocolName.openVPN, smallPackets: true)
+    }
+
+    func testConnectsWithOpenVPNSmallPacketsDisabled() throws {
+        try requireRealDevice()
+        connect(protocolName: VPNProtocolName.openVPN, smallPackets: false)
+    }
+
+    // MARK: - Helpers
+
+    private func connect(protocolName: String, smallPackets: Bool, file: StaticString = #filePath, line: UInt = #line) {
+        app.disconnectToVPN()
+        let publicIP = app.publicIPAddress(file: file, line: line)
+        app.navigateToProtocolSettings()
+        if smallPackets {
+            app.enableSmallPackets()
+        } else {
+            app.disableSmallPackets()
         }
+        app.selectProtocol(protocolName: protocolName)
+        app.navigateToHomeFromSettings()
+        app.connectToVPN()
+        XCTAssertTrue(app.connectedStatusLabel.waitForExistence(timeout: app.vpnConnectionTimeout), file: file, line: line)
+        app.assertConnectedThroughVPN(publicIPBeforeConnecting: publicIP, file: file, line: line)
     }
 }

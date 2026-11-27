@@ -6,85 +6,53 @@
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
 
-import Foundation
-import Nimble
-import Quick
 import XCTest
 
-class BaseTest: QuickSpec {
-    static var app: XCUIApplication!
+/// Launches the app before each test, signing in with the valid test account when `shouldLogIn` is true and the
+/// dashboard isn't showing, and terminates it afterwards.
+class BaseTest: XCTestCase {
     static let bundle = Bundle(for: BaseTest.self)
-    static var shouldLogIn = true
 
-    //    override class func spec() {
-    //        beforeSuite {
-    //            app = XCUIApplication()
-    //            app.launch()
-    //
-    //            if(app.helpImprovePIATitle.exists){
-    //                app.acceptSharingVPNStats()
-    //                app.acceptVPNConfiguration()
-    //            }
-    //
-    //            if(shouldLogIn){
-    //                if (!app.connectButton.exists)
-    //                {
-    //                    app.signinImage.waitForElementToAppear()
-    //                    app.navigateToSignInScreen()
-    //                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
-    //                    app.acceptSharingVPNStats()
-    //                    app.acceptVPNConfiguration()
-    //                }
-    //            }
-    //        }
-    //
-    //        beforeEach {
-    //            app.launch()
-    //
-    //            if(app.helpImprovePIATitle.exists){
-    //                app.acceptSharingVPNStats()
-    //                app.acceptVPNConfiguration()
-    //            }
-    //        }
-    //
-    //        afterEach {
-    //            app.terminate()
-    //        }
-    //    }
+    /// Whether `setUp` signs in before each test. Test classes that drive the sign-in flow themselves override it.
+    class var shouldLogIn: Bool { true }
 
-    override class func spec() {
-        beforeEach {
-            initializeApp()
-            configureAppSettings()
-            attemptLoginIfNeeded()
-        }
+    var app: XCUIApplication!
 
-        afterEach {
-            terminateApp()
-        }
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        continueAfterFailure = false
+
+        initializeApp()
+        configureAppSettings()
+        attemptLoginIfNeeded()
     }
 
-    static func initializeApp() {
+    override func tearDown() {
+        terminateApp()
+        app = nil
+        super.tearDown()
+    }
+
+    func initializeApp() {
         app = XCUIApplication()
         app.launch()
     }
 
-    static func configureAppSettings() {
+    func configureAppSettings() {
         if app.helpImprovePIATitle.exists {
             app.acceptSharingVPNStats()
             app.acceptVPNConfiguration()
         }
     }
 
-    static func attemptLoginIfNeeded() {
-        if shouldLogIn && !app.connectButton.exists {
+    func attemptLoginIfNeeded() {
+        if Self.shouldLogIn && !app.connectButton.exists {
             performLoginProcess()
         }
     }
 
-    static func performLoginProcess() {
-        let signInImageAppeared = app.signinImage.waitForElementToAppear(timeout: 5)
-        assert(signInImageAppeared, "Sign-in image did not appear")
+    func performLoginProcess() {
+        XCTAssertTrue(app.signinImage.waitForElementToAppear(timeout: 5), "Sign-in image did not appear")
 
         app.navigateToSignInScreen()
         app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
@@ -92,12 +60,12 @@ class BaseTest: QuickSpec {
         app.acceptVPNConfiguration()
     }
 
-    static func relaunchApp() {
+    func relaunchApp() {
         app.launch()
         configureAppSettings()
     }
 
-    static func terminateApp() {
-        app.terminate()
+    func terminateApp() {
+        app?.terminate()
     }
 }

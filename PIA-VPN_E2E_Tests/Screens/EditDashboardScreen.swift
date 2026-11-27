@@ -16,10 +16,10 @@ extension XCUIApplication {
     var usageTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.usageCell) }
     var favoriteServersTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.favoriteServersCell) }
     var connectionTileCollectionViewCell: XCUIElement { cell(with: AccessibilityID.Tiles.connectionCell) }
-    var cancelButton: XCUIElement { button(with: "Cancel") }
+    var doneEditingButton: XCUIElement { button(with: getString(key: "global.done", comment: "Done")) }
 
     func navigateToEditDashboardScreen() {
-        dashboardEditButton.waitForElementToAppear()
+        XCTAssertTrue(dashboardEditButton.waitForElementToAppear(), "Dashboard edit button not found")
         dashboardEditButton.tap()
         XCTAssertTrue(connectionButton.waitForElementToBeHidden())
     }
@@ -50,8 +50,8 @@ extension XCUIApplication {
         XCTAssertTrue(removeTileButton.waitForElementToBeHidden())
     }
 
-    func moveTile(firstTileName: XCUIElement, secondTileName: XCUIElement) {
-        let moveButton = firstTileName.images["drag-drop-indicator-light"]
-        moveButton.press(forDuration: 2.0, thenDragTo: secondTileName)
+    /// Long-presses `tile` and drops it on `target`, taking the target's place.
+    func moveTile(_ tile: XCUIElement, onto target: XCUIElement) {
+        tile.press(forDuration: 1.0, thenDragTo: target, withVelocity: .slow, thenHoldForDuration: 0.5)
     }
 }

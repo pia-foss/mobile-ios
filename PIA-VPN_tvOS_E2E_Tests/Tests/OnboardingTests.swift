@@ -5,24 +5,20 @@
 //  Created by Geneva Parayno on 28/2/24.
 //  Copyright © 2024 Private Internet Access Inc. All rights reserved.
 //
-import Nimble
+
+import XCTest
 
 class OnboardingTests: BaseTest {
-    override class func spec() {
-        shouldLogIn = false
-        super.spec()
+    override class var shouldLogIn: Bool { false }
 
-        describe("onboarding tests") {
-            context("vpn profile installation permission") {
-                it("should display the home screen after allowing vpn profile installation") {
-                    app.logout()
-                    app.navigateToSignInScreen()
-                    app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
-                    app.acceptSharingVPNStats()
-                    app.acceptVPNConfiguration()
-                    expect(app.connectButton.waitForElementToAppear()).to(beTrue())
-                }
-            }
-        }
+    // MARK: - VPN profile installation permission
+
+    func testShowsHomeScreenAfterAllowingVPNProfileInstallation() {
+        app.logout()
+        app.navigateToSignInScreen()
+        app.loginViaUsername(with: CredentialsUtil.credentials(type: .valid))
+        app.acceptSharingVPNStats()
+        app.acceptVPNConfiguration()
+        XCTAssertTrue(app.connectButton.waitForElementToAppear())
     }
 }
