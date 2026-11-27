@@ -1,6 +1,10 @@
 name: "Run E2E tests for iOS"
 on:
   workflow_dispatch:
+  # Temporary, to run this workflow before it reaches master (manual runs need it on the default branch).
+  # Remove before merging KM-20076.
+  push:
+    branches: [KM-20076-e2e-xctest]
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: true
