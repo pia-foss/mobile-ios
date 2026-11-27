@@ -49,23 +49,36 @@ platform :ios do
     )
   end
 
+  # E2E tests sign in with the test account from the PIA_TEST_USER, PIA_TEST_PASSWORD and PIA_TEST_DEDICATEDIP
+  # environment variables, passed to the test runner as TEST_RUNNER_PIA_TEST_* (see .github/workflows/ios_e2e_tests.yml).
+  # Tests that need a real VPN tunnel skip themselves on the Simulator.
   lane :ios_e2e_tests do
     run_tests(
-      scheme: "PIA VPN",
+      scheme: "PIA-VPN_E2E_Tests",
       testplan: "PIA-VPN-e2e-simulator",
+      output_directory: "fastlane/test_output",
+      result_bundle: true,
+      cloned_source_packages_path: ".build/SourcePackages",
+      # `test` builds what it needs; a separate `build` action finds no destination for a scheme that builds only for
+      # testing, like PIA-VPN_E2E_Tests.
+      skip_build: true,
       destination: "platform=iOS Simulator,name=iPhone 18 Pro",
-      prelaunch_simulator: true,
-      test_without_building: true
+      prelaunch_simulator: true
     )
   end
 
   lane :tvos_e2e_tests do
     run_tests(
-      scheme: "PIA VPN-tvOS",
-      testplan: "PIA-VPN_tvOS_E2E_Tests",
-      test_without_building: true,
-      prelaunch_simulator: true,
-      destination: "platform=tvOS Simulator,name=Apple TV 4K (4th generation)"
+      scheme: "PIA-VPN_tvOS_E2E_Tests",
+      testplan: "PIA-VPN-tvOS-E2E-Tests",
+      output_directory: "fastlane/test_output",
+      result_bundle: true,
+      cloned_source_packages_path: ".build/SourcePackages",
+      # `test` builds what it needs; a separate `build` action finds no destination for a scheme that builds only for
+      # testing, like PIA-VPN_E2E_Tests.
+      skip_build: true,
+      destination: "platform=tvOS Simulator,name=Apple TV 4K (4th generation)",
+      prelaunch_simulator: true
     )
   end
 

@@ -9,16 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "environmentVariableEntries" : [
-      {
-        "key" : "PIA_TEST_PASSWORD",
-        "value" : "xxxx"
-      },
-      {
-        "key" : "PIA_TEST_USER",
-        "value" : "xyz"
-      }
-    ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:PIA VPN.xcodeproj",
       "identifier" : "69B70AAF2ACBF51C0072A09D",

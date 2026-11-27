@@ -1,0 +1,107 @@
+name: "Run E2E tests for iOS"
+on:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  e2e:
+    runs-on: ${{ vars.MACOS_RUNNER || 'macos-26' }}
+    timeout-minutes: 90
+    env:
+      # The tests read PIA_TEST_USER, PIA_TEST_PASSWORD and PIA_TEST_DEDICATEDIP; xcodebuild passes TEST_RUNNER_*
+      # variables to the test runner without the prefix.
+      TEST_RUNNER_PIA_TEST_USER: ${{ secrets.PIA_ACCOUNT_USERNAME }}
+      TEST_RUNNER_PIA_TEST_PASSWORD: ${{ secrets.PIA_ACCOUNT_PASSWORD }}
+      TEST_RUNNER_PIA_TEST_DEDICATEDIP: ${{ secrets.PIA_TEST_DEDICATEDIP }}
+
+    steps:
+    - name: Setup Git credentials
+      run: |
+        git config --global url."https://${{ secrets.ORG_GITHUB_USERNAME }}:${{ secrets.ORG_GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+
+    - uses: actions/checkout@v6
+
+    - name: Select Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ vars.XCODE_VERSION }}
+
+    - name: Download iOS Platform
+      timeout-minutes: 20
+      run: |
+        # Check if iOS platform is already installed
+        if xcrun simctl list devices available | grep -qi "iphone"; then
+          echo "iOS platform already installed, skipping download"
+          exit 0
+        fi
+
+        # Retry up to 3 times if download fails
+        max_attempts=3
+        attempt=1
+
+        while [ $attempt -le $max_attempts ]; do
+          echo "Attempt $attempt of $max_attempts: Downloading iOS platform..."
+          if xcodebuild -downloadPlatform iOS; then
+            echo "iOS platform downloaded successfully"
+            exit 0
+          else
+            echo "Download failed on attempt $attempt"
+            if [ $attempt -lt $max_attempts ]; then
+              echo "Retrying in 10 seconds..."
+              sleep 10
+            fi
+          fi
+          attempt=$((attempt + 1))
+        done
+
+        echo "Failed to download iOS platform after $max_attempts attempts"
+        exit 1
+
+    # Cache the downloaded archive, not the unpacked package: the pull script
+    # re-verifies the archive's SHA-256 against the committed pin on every run,
+    # so a poisoned cache entry cannot reach the build unnoticed.
+    - name: Cache KapePlatformSDK archive
+      uses: actions/cache@v4
+      with:
+        path: .kape-sdk-archive-cache
+        key: kape-platform-sdk-archive-${{ hashFiles('scripts/kape-platform-sdk.version', 'scripts/kape-platform-sdk.checksum') }}
+
+    - name: Pull KapePlatformSDK
+      env:
+        CLOUDSMITH_TOKEN: ${{ secrets.CLOUDSMITH_TOKEN }}
+        KAPE_SDK_ARCHIVE_CACHE: .kape-sdk-archive-cache
+      run: ./scripts/pull-kape-platform-sdk.sh
+
+    - name: Cache SPM packages
+      uses: actions/cache@v4
+      with:
+        path: .build/SourcePackages
+        key: spm-${{ runner.os }}-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: spm-${{ runner.os }}-
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        bundler-cache: true
+
+    - name: Prefetch OpenSSL binary artifact
+      run: ./scripts/prefetch-openssl-artifact.sh .build/SourcePackages
+
+    - name: Run iOS E2E tests
+      env:
+        FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+        FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 3
+      run: bundle exec fastlane ios_e2e_tests
+
+    - name: Upload iOS E2E test results
+      if: failure()
+      uses: actions/upload-artifact@v6
+      with:
+        name: ios-e2e-test-results
+        path: |
+          fastlane/test_output/
+          **/*.xcresult
+        retention-days: 30
+        if-no-files-found: warn
