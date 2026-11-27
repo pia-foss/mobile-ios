@@ -32,7 +32,10 @@ public struct AutomationSettingsView: View, ViewWithTitle {
     public init(dependencies: AutomationSettings.Dependencies) {
         _store = StateObject(
             wrappedValue: AutomationSettingsStore(
-                initialState: .init(isAutomationEnabled: dependencies.isAutomationEnabled()),
+                initialState: .init(
+                    isAutomationEnabled: dependencies.isAutomationEnabled(),
+                    isKillSwitchEnabled: dependencies.isKillSwitchEnabled()
+                ),
                 dependencies: dependencies
             )
         )
@@ -53,6 +56,20 @@ public struct AutomationSettingsView: View, ViewWithTitle {
             }
         }
         .task { store.send(.onAppear) }
+        .alert(
+            L10n.Tiles.Quicksetting.Automation.title,
+            isPresented: store.binding(\.isKillSwitchRequiredAlertPresented) { _ in .killSwitchRequiredDismissed },
+            actions: {
+                Button(L10n.Global.enable) {
+                    store.send(.killSwitchRequiredConfirmed)
+                }
+                .keyboardShortcut(.defaultAction)
+                Button(L10n.Global.close, role: .cancel) {}
+            },
+            message: {
+                Text(L10n.Settings.Nmt.Killswitch.disabled)
+            }
+        )
     }
 }
 
@@ -62,6 +79,8 @@ public struct AutomationSettingsView: View, ViewWithTitle {
             isAutomationEnabled: { true },
             preferencesChanges: { AsyncStream { $0.finish() } },
             setAutomationEnabled: { _ in },
+            isKillSwitchEnabled: { true },
+            enableAutomationWithKillSwitch: {},
             showManageAutomation: {},
         )
     )

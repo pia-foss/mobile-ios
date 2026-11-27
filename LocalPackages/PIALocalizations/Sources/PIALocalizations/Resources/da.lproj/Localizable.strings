@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automatisering";
 "tiles.quicksetting.private.browser.title" = "Privat browser";
 "settings.nmt.killswitch.disabled" = "VPN kill-switch er for øjeblikket deaktiveret. For at sikre, at netværksstyringsværktøjet fungerer, og at du er i stand til at genoprette forbindelse, når du skifter netværk, skal du aktivere VPN kill-switch i dine indstillinger.";
+"settings.nmt.killswitch.disable.confirmation" = "Hvis du slår VPN-afbryderknappen fra, slås Automatisering også fra.";
 "settings.service.quality.share.title" = "Hjælp med at forbedre PIA";
 "settings.service.quality.share.description" = "Hjælp os med at blive bedre, ved at dele VPN-forbindelsesstatistikker. Disse rapporter indeholder aldrig personligt identificerbare oplysninger.";
 "settings.service.quality.share.findoutmore" = "Find ud af mere";

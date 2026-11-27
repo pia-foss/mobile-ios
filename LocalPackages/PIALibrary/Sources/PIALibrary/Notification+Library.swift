@@ -53,7 +53,10 @@ extension Notification.Name {
     public static let PIASettingsHaveChanged = Notification.Name("PIASettingsHaveChanged")
     public static let PIAQuickSettingsHaveChanged = Notification.Name("PIAQuickSettingsHaveChanged")
 
-    public static let PIAPersistentConnectionTileHaveChanged = Notification.Name("PIAPersistentConnectionTileHaveChanged")
+    /// Automation was switched on while the kill switch is off: ask to enable the kill switch first.
+    public static let PIAAutomationRequiresKillSwitch = Notification.Name("PIAAutomationRequiresKillSwitch")
+    /// The kill switch was switched off while Automation is on: confirm turning both off.
+    public static let PIAKillSwitchDisableNeedsConfirmation = Notification.Name("PIAKillSwitchDisableNeedsConfirmation")
 
     public static let PIADIPRegionExpiring = Notification.Name("PIADIPRegionExpiring")
     public static let PIADIPCheckIP = Notification.Name("PIADIPCheckIP")

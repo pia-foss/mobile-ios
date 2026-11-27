@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automation";
 "tiles.quicksetting.private.browser.title" = "Private Browser";
 "settings.nmt.killswitch.disabled" = "The VPN kill switch is currently disabled. In order to ensure that the Network Management Tool is functioning, and that you are able to reconnect when switching networks, please enable the VPN kill switch in your settings.";
+"settings.nmt.killswitch.disable.confirmation" = "Turning off the VPN kill switch also turns off Automation.";
 "settings.service.quality.share.title" = "Help Improve PIA";
 "settings.service.quality.share.description" = "Help us improve by sharing VPN connection statistics. These reports never contain personally identifiable information.";
 "settings.service.quality.share.findoutmore" = "Find out more";

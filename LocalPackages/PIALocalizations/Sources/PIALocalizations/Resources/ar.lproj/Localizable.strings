@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "أتمتة";
 "tiles.quicksetting.private.browser.title" = "المتصفح الخاص";
 "settings.nmt.killswitch.disabled" = "مفتاح قطع اتصال VPN معطّل حاليًا. للتأكد من أن أداة إدارة الشبكة تعمل، وأنك قادر على إعادة الاتصال عند التبديل بين الشبكات، يرجى تمكين مفتاح قطع اتصال VPN في الإعدادات.";
+"settings.nmt.killswitch.disable.confirmation" = "إيقاف تشغيل مفتاح إيقاف VPN يوقف الأتمتة أيضًا.";
 "settings.service.quality.share.title" = "ساعدنا في تحسين PIA";
 "settings.service.quality.share.description" = "ساعدنا في التحسين من خلال مشاركة إحصائيات اتصال VPN. لا تحتوي هذه التقارير أبدًا على معلومات محددة للهوية.";
 "settings.service.quality.share.findoutmore" = "معرفة المزيد";

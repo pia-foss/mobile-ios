@@ -26,34 +26,47 @@ public enum AutomationSettings {}
 extension AutomationSettings {
     public struct State: Equatable, Sendable {
         public var isAutomationEnabled: Bool
+        /// Automation only works with the kill switch on, so turning it on while the kill switch is off asks first.
+        public var isKillSwitchRequiredAlertPresented = false
+        public var isKillSwitchEnabled: Bool
 
-        public init(isAutomationEnabled: Bool) {
+        public init(isAutomationEnabled: Bool, isKillSwitchEnabled: Bool) {
             self.isAutomationEnabled = isAutomationEnabled
+            self.isKillSwitchEnabled = isKillSwitchEnabled
         }
     }
 
     public enum Action: Equatable, Sendable {
         case onAppear
         case automationToggled(Bool)
+        case killSwitchRequiredConfirmed
+        case killSwitchRequiredDismissed
         case manageAutomationTapped
-        case preferencesLoaded(isAutomationEnabled: Bool)
+        case preferencesLoaded(isAutomationEnabled: Bool, isKillSwitchEnabled: Bool)
     }
 
     public struct Dependencies: Sendable {
         public let isAutomationEnabled: @MainActor @Sendable () -> Bool
         public let preferencesChanges: @Sendable () -> AsyncStream<Void>
         public let setAutomationEnabled: @MainActor @Sendable (Bool) -> Void
+        public let isKillSwitchEnabled: @MainActor @Sendable () -> Bool
+        /// Turns the kill switch and Automation on together, so one is never saved without the other.
+        public let enableAutomationWithKillSwitch: @MainActor @Sendable () -> Void
         public let showManageAutomation: @MainActor @Sendable () -> Void
 
         public init(
             isAutomationEnabled: @MainActor @Sendable @escaping () -> Bool,
             preferencesChanges: @Sendable @escaping () -> AsyncStream<Void>,
             setAutomationEnabled: @MainActor @Sendable @escaping (Bool) -> Void,
+            isKillSwitchEnabled: @MainActor @Sendable @escaping () -> Bool,
+            enableAutomationWithKillSwitch: @MainActor @Sendable @escaping () -> Void,
             showManageAutomation: @MainActor @Sendable @escaping () -> Void,
         ) {
             self.isAutomationEnabled = isAutomationEnabled
             self.preferencesChanges = preferencesChanges
             self.setAutomationEnabled = setAutomationEnabled
+            self.isKillSwitchEnabled = isKillSwitchEnabled
+            self.enableAutomationWithKillSwitch = enableAutomationWithKillSwitch
             self.showManageAutomation = showManageAutomation
         }
     }

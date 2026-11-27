@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "自動化";
 "tiles.quicksetting.private.browser.title" = "私人瀏覽器";
 "settings.nmt.killswitch.disabled" = "VPN 切斷開關目前已停用。為確保網路管理工具正常運作，以及在切換網路時能夠重新連線，請在設定中啟用 VPN 切斷開關功能。";
+"settings.nmt.killswitch.disable.confirmation" = "關閉 VPN 切斷開關也會關閉自動化。";
 "settings.service.quality.share.title" = "幫助改進 PIA";
 "settings.service.quality.share.description" = "請分享 VPN 連線統計資料，協助我們改善服務。這些報告絕不會包含任何個人識別資訊。";
 "settings.service.quality.share.findoutmore" = "了解詳情";

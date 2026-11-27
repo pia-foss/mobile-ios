@@ -34,20 +34,46 @@ extension AutomationSettings {
             case .onAppear:
                 return .stream(id: EffectID.preferencesChanges) { [dependencies] send in
                     for await _ in dependencies.preferencesChanges() {
-                        send(.preferencesLoaded(isAutomationEnabled: dependencies.isAutomationEnabled()))
+                        send(
+                            .preferencesLoaded(
+                                isAutomationEnabled: dependencies.isAutomationEnabled(),
+                                isKillSwitchEnabled: dependencies.isKillSwitchEnabled()
+                            )
+                        )
                     }
                 }
 
             case .automationToggled(let isOn):
                 guard state.isAutomationEnabled != isOn else { return nil }
+                if isOn && !state.isKillSwitchEnabled {
+                    state.isKillSwitchRequiredAlertPresented = true
+                    return nil
+                }
                 state.isAutomationEnabled = isOn
-                return .fireAndForget { [dependencies] in dependencies.setAutomationEnabled(isOn) }
+                return .fireAndForget { [dependencies] in
+                    dependencies.setAutomationEnabled(isOn)
+                }
+
+            case .killSwitchRequiredConfirmed:
+                state.isKillSwitchRequiredAlertPresented = false
+                state.isKillSwitchEnabled = true
+                state.isAutomationEnabled = true
+                return .fireAndForget { [dependencies] in
+                    dependencies.enableAutomationWithKillSwitch()
+                }
+
+            case .killSwitchRequiredDismissed:
+                state.isKillSwitchRequiredAlertPresented = false
+                return nil
 
             case .manageAutomationTapped:
-                return .fireAndForget { [dependencies] in dependencies.showManageAutomation() }
+                return .fireAndForget { [dependencies] in
+                    dependencies.showManageAutomation()
+                }
 
-            case .preferencesLoaded(let isAutomationEnabled):
+            case .preferencesLoaded(let isAutomationEnabled, let isKillSwitchEnabled):
                 state.isAutomationEnabled = isAutomationEnabled
+                state.isKillSwitchEnabled = isKillSwitchEnabled
                 return nil
             }
         }

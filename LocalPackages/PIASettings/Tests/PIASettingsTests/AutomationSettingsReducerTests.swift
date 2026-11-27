@@ -30,14 +30,19 @@ struct AutomationSettingsReducerTests {
     @MainActor
     private final class Spy {
         var isAutomationEnabled = false
+        var isKillSwitchEnabled = true
         var savedValues: [Bool] = []
+        var enableAutomationWithKillSwitchCount = 0
         var showManageAutomationCount = 0
     }
 
     private let spy = Spy()
     private let changes = AsyncStream.makeStream(of: Void.self)
 
-    private func makeStore(isAutomationEnabled: Bool = false) -> TestStore<AutomationSettings.State, AutomationSettings.Action> {
+    private func makeStore(
+        isAutomationEnabled: Bool = false,
+        isKillSwitchEnabled: Bool = true
+    ) -> TestStore<AutomationSettings.State, AutomationSettings.Action> {
         let spy = spy
         let stream = changes.stream
         let reducer = AutomationSettings.Reducer(
@@ -45,10 +50,15 @@ struct AutomationSettingsReducerTests {
                 isAutomationEnabled: { spy.isAutomationEnabled },
                 preferencesChanges: { stream },
                 setAutomationEnabled: { spy.savedValues.append($0) },
+                isKillSwitchEnabled: { spy.isKillSwitchEnabled },
+                enableAutomationWithKillSwitch: { spy.enableAutomationWithKillSwitchCount += 1 },
                 showManageAutomation: { spy.showManageAutomationCount += 1 },
             )
         )
-        return TestStore(initial: .init(isAutomationEnabled: isAutomationEnabled), reduce: reducer.reduce)
+        return TestStore(
+            initial: .init(isAutomationEnabled: isAutomationEnabled, isKillSwitchEnabled: isKillSwitchEnabled),
+            reduce: reducer.reduce
+        )
     }
 
     @Test func togglingAutomationUpdatesStateAndPersists() async {
@@ -89,7 +99,7 @@ struct AutomationSettingsReducerTests {
         changes.continuation.yield()
 
         let received = await store.receive()
-        #expect(received == .preferencesLoaded(isAutomationEnabled: true))
+        #expect(received == .preferencesLoaded(isAutomationEnabled: true, isKillSwitchEnabled: true))
         #expect(store.state.isAutomationEnabled)
 
         await store.finish()
@@ -98,8 +108,60 @@ struct AutomationSettingsReducerTests {
     @Test func preferencesLoadedOverwritesState() {
         let store = makeStore(isAutomationEnabled: true)
 
-        store.send(.preferencesLoaded(isAutomationEnabled: false))
+        store.send(.preferencesLoaded(isAutomationEnabled: false, isKillSwitchEnabled: false))
 
         #expect(!store.state.isAutomationEnabled)
+        #expect(!store.state.isKillSwitchEnabled)
+    }
+
+    // MARK: - Automation requires the kill switch
+
+    @Test func turningAutomationOnWithoutKillSwitchAsksToEnableIt() async {
+        let store = makeStore(isAutomationEnabled: false, isKillSwitchEnabled: false)
+
+        store.send(.automationToggled(true))
+        await store.finish()
+
+        #expect(store.state.isKillSwitchRequiredAlertPresented)
+        #expect(!store.state.isAutomationEnabled)
+        #expect(spy.savedValues.isEmpty)
+    }
+
+    @Test func confirmingTheKillSwitchAlertEnablesBothTogether() async {
+        let store = makeStore(isAutomationEnabled: false, isKillSwitchEnabled: false)
+        store.send(.automationToggled(true))
+
+        store.send(.killSwitchRequiredConfirmed)
+        await store.finish()
+
+        #expect(!store.state.isKillSwitchRequiredAlertPresented)
+        #expect(store.state.isAutomationEnabled)
+        #expect(store.state.isKillSwitchEnabled)
+        // One combined call, never Automation on its own, so the two can't be persisted apart.
+        #expect(spy.enableAutomationWithKillSwitchCount == 1)
+        #expect(spy.savedValues.isEmpty)
+    }
+
+    @Test func dismissingTheKillSwitchAlertLeavesAutomationOff() async {
+        let store = makeStore(isAutomationEnabled: false, isKillSwitchEnabled: false)
+        store.send(.automationToggled(true))
+
+        store.send(.killSwitchRequiredDismissed)
+        await store.finish()
+
+        #expect(!store.state.isKillSwitchRequiredAlertPresented)
+        #expect(!store.state.isAutomationEnabled)
+        #expect(spy.enableAutomationWithKillSwitchCount == 0)
+        #expect(spy.savedValues.isEmpty)
+    }
+
+    @Test func turningAutomationOffNeverAsks() async {
+        let store = makeStore(isAutomationEnabled: true, isKillSwitchEnabled: false)
+
+        store.send(.automationToggled(false))
+        await store.finish()
+
+        #expect(!store.state.isKillSwitchRequiredAlertPresented)
+        #expect(spy.savedValues == [false])
     }
 }

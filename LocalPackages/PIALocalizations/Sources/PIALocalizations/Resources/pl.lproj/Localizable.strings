@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automatyzacja";
 "tiles.quicksetting.private.browser.title" = "Prywatna przeglądarka";
 "settings.nmt.killswitch.disabled" = "Wyłącznik awaryjny  VPN jest obecnie wyłączony. co zapewnia prawidłowe działanie narzędzia do zarządzania siecią oraz możliwość ponownego podłączenia się przy zmianie sieci, wktywuj wyłącznik awaryjny  VPN w ustawieniach.";
+"settings.nmt.killswitch.disable.confirmation" = "Wyłączenie wyłącznika awaryjnego VPN wyłącza również Automatyzację.";
 "settings.service.quality.share.title" = "Pomóż udoskonalić PIA";
 "settings.service.quality.share.description" = "Pomóż nam udoskonalić nasze usługi, udostępniając statystyki połączeń VPN. Raporty te nigdy nie zawierają informacji umożliwiających identyfikację osób.";
 "settings.service.quality.share.findoutmore" = "Dowiedz się więcej";

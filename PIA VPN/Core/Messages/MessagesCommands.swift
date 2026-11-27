@@ -159,6 +159,10 @@ final class ActionCommand: Command {
     private func enableKillSwitch(enable: Bool) {
         let preferences = Client.preferences.editable()
         preferences.isPersistentConnection = enable
+        // Automation only works with the kill switch on.
+        if !enable {
+            preferences.nmtRulesEnabled = false
+        }
         preferences.commit()
     }
 

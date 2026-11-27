@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automatisierung";
 "tiles.quicksetting.private.browser.title" = "Privater Browser";
 "settings.nmt.killswitch.disabled" = "Der VPN-Notausschalter ist derzeit deaktiviert. Um sicherzustellen, dass das Network Management Tool funktioniert und Sie beim Netzwerkwechsel die Verbindung wiederherstellen können, aktivieren Sie bitte den VPN-Notausschalter in Ihren Einstellungen.";
+"settings.nmt.killswitch.disable.confirmation" = "Wenn du den VPN-Killswitch deaktivierst, wird auch die Automatisierung deaktiviert.";
 "settings.service.quality.share.title" = "Helfen Sie uns, PIA zu verbessern";
 "settings.service.quality.share.description" = "Helfen Sie uns, uns zu verbessern, indem Sie VPN-Verbindungsstatistiken teilen. Diese Berichte enthalten niemals persönlich identifizierbare Informationen.";
 "settings.service.quality.share.findoutmore" = "Weitere Informationen";
