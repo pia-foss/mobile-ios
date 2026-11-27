@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automazione";
 "tiles.quicksetting.private.browser.title" = "Browser privato";
 "settings.nmt.killswitch.disabled" = "Il kill switch del VPN è attualmente disattivo. Per garantire il funzionamento dello Strumento di gestione di rete e la riconnessione durante il cambio di rete, attiva il kill switch del del VPN sulle impostazioni.";
+"settings.nmt.killswitch.disable.confirmation" = "Disattivando il killswitch VPN si disattiva anche l'Automazione.";
 "settings.service.quality.share.title" = "Aiutaci a migliorare PIA";
 "settings.service.quality.share.description" = "Aiutaci a migliorare condividendo le statistiche di connessione al VPN. Questi rapporti non contengono mai informazioni d'identificazione personale.";
 "settings.service.quality.share.findoutmore" = "Scopri di più";

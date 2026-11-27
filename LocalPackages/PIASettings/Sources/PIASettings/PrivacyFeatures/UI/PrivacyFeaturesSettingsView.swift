@@ -76,16 +76,15 @@ public struct PrivacyFeaturesSettingsView: View, ViewWithTitle {
         .task { store.send(.onAppear) }
         .alert(
             L10n.Settings.ApplicationSettings.KillSwitch.title,
-            isPresented: store.binding(\.isKillSwitchWarningPresented) { _ in .killSwitchWarningDismissed },
+            isPresented: store.binding(\.isDisableKillSwitchConfirmationPresented) { _ in .disableKillSwitchCancelled },
             actions: {
-                Button(L10n.Global.enable) {
-                    store.send(.killSwitchWarningConfirmed)
+                Button(L10n.Global.disable, role: .destructive) {
+                    store.send(.disableKillSwitchConfirmed)
                 }
-                .keyboardShortcut(.defaultAction)
-                Button(L10n.Global.close, role: .cancel) {}
+                Button(L10n.Global.cancel, role: .cancel) {}
             },
             message: {
-                Text(L10n.Settings.Nmt.Killswitch.disabled)
+                Text(L10n.Settings.Nmt.Killswitch.Disable.confirmation)
             }
         )
     }
@@ -98,6 +97,7 @@ public struct PrivacyFeaturesSettingsView: View, ViewWithTitle {
             isAutomationEnabled: { true },
             preferencesChanges: { AsyncStream { $0.finish() } },
             savePreferences: { _ in },
+            disableAutomation: {},
             isContentBlockerEnabled: { false },
             appDidBecomeActive: { AsyncStream { $0.finish() } },
             reloadContentBlocker: {},

@@ -287,7 +287,9 @@ final class DashboardViewController: AutolayoutViewController {
         nc.addObserver(self, selector: #selector(updateCurrentStatus), name: .PIAThemeDidChange, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIAQuickSettingsHaveChanged, object: nil)
         nc.addObserver(self, selector: #selector(vpnShouldReconnect), name: .PIASettingsHaveChanged, object: nil)
-        nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAPersistentConnectionTileHaveChanged, object: nil)
+        nc.addObserver(self, selector: #selector(presentKillSwitchAlert), name: .PIAAutomationRequiresKillSwitch, object: nil)
+        nc.addObserver(
+            self, selector: #selector(presentDisableKillSwitchConfirmation), name: .PIAKillSwitchDisableNeedsConfirmation, object: nil)
         nc.addObserver(self, selector: #selector(closeSession), name: .PIAAccountLapsed, object: nil)
         nc.addObserver(self, selector: #selector(reloadTheme), name: .PIAThemeShouldChange, object: nil)
         nc.addObserver(self, selector: #selector(checkAccountEmail), name: .PIAAccountDidRefresh, object: nil)
@@ -724,19 +726,35 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
+    /// Automation only works with the kill switch on: Enable turns both on, Close leaves both as they were.
     @objc private func presentKillSwitchAlert() {
         let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.disabled)
         alert.addCancelAction(L10n.Global.close)
-        alert.addActionWithTitle(L10n.Global.enable) {
-            let preferences = Client.preferences.editable()
-            preferences.isPersistentConnection = true
-            preferences.commit()
-            NotificationCenter.default.post(
-                name: .PIAQuickSettingsHaveChanged,
-                object: self,
-                userInfo: nil)
+        alert.addActionWithTitle(L10n.Global.enable) { [weak self] in
+            self?.setKillSwitchAndAutomation(enabled: true)
         }
         present(alert, animated: true, completion: nil)
+    }
+
+    /// Turning the kill switch off stops Automation too: Disable turns both off, Cancel leaves both on.
+    @objc private func presentDisableKillSwitchConfirmation() {
+        let alert = Macros.alert(nil, L10n.Settings.Nmt.Killswitch.Disable.confirmation)
+        alert.addCancelAction(L10n.Global.cancel)
+        alert.addDestructiveActionWithTitle(L10n.Global.disable) { [weak self] in
+            self?.setKillSwitchAndAutomation(enabled: false)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func setKillSwitchAndAutomation(enabled: Bool) {
+        let preferences = Client.preferences.editable()
+        preferences.isPersistentConnection = enabled
+        preferences.nmtRulesEnabled = enabled
+        preferences.commit()
+        NotificationCenter.default.post(
+            name: .PIAQuickSettingsHaveChanged,
+            object: self,
+            userInfo: nil)
     }
 
     @objc private func vpnShouldReconnect() {

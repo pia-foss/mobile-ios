@@ -58,6 +58,7 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
                 isAutomationEnabled: { Client.preferences.nmtRulesEnabled },
                 preferencesChanges: { NotificationCenter.default.signals(named: .PIASettingsHaveChanged) },
                 savePreferences: { [weak self] in self?.save($0) },
+                disableAutomation: { Self.disableAutomation() },
                 isContentBlockerEnabled: { await Self.isContentBlockerEnabled() },
                 appDidBecomeActive: { NotificationCenter.default.signals(named: UIApplication.didBecomeActiveNotification) },
                 reloadContentBlocker: { await Self.reloadContentBlocker() },
@@ -85,6 +86,14 @@ final class PrivacyFeaturesSettingsCoordinator: @MainActor FlowCoordinator {
         guard let pendingPreferences else { return }
         pendingPreferences.isPersistentConnection = preferences.killSwitch
         pendingPreferences.showReconnectNotifications = preferences.reconnectNotifications
+    }
+
+    /// Automation is committed straight away, like the Automation screen does, rather than with the other settings.
+    @MainActor
+    private static func disableAutomation() {
+        let preferences = Client.preferences.editable()
+        preferences.nmtRulesEnabled = false
+        preferences.commit()
     }
 
     @MainActor

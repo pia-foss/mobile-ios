@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Automatización";
 "tiles.quicksetting.private.browser.title" = "Navegador privado";
 "settings.nmt.killswitch.disabled" = "El interruptor de desconexión de emergencia está deshabilitado. Para garantizar que el interruptor de desconexión de emergencia funciona y que puedes reconectar al cambiar de red, habilita el interruptor de desconexión de emergencia de VPN en los ajustes.";
+"settings.nmt.killswitch.disable.confirmation" = "Al desactivar el interruptor de corte de VPN, también se desactiva la Automatización.";
 "settings.service.quality.share.title" = "Ayúdanos a mejorar PIA";
 "settings.service.quality.share.description" = "Comparte tus estadísticas de conexión de VPN para ayudarnos a mejorar. Estos informes no contienen ninguna información personal identificable.";
 "settings.service.quality.share.findoutmore" = "Más información";

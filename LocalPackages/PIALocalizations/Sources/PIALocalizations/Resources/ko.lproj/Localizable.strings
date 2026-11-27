@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "자동화";
 "tiles.quicksetting.private.browser.title" = "전용 브라우저";
 "settings.nmt.killswitch.disabled" = "VPN 킬 스위치가 현재 비활성화되었습니다. 네트워크 관리 도구가 작동하게 하고, 네트워크 전환 시 다시 연결할 수 있으려면 설정에서 VPN 킬 스위치를 활성화하세요.";
+"settings.nmt.killswitch.disable.confirmation" = "VPN 킬 스위치를 끄면 자동화도 꺼집니다.";
 "settings.service.quality.share.title" = "PIA 개선에 도움을 주세요";
 "settings.service.quality.share.description" = "VPN 연결 통계를 공유하여 저희 서비스를 개선할 수 있도록 도와 주세요. 이 보고서에는 개인 식별 정보가 절대로 포함되지 않습니다.";
 "settings.service.quality.share.findoutmore" = "자세히 보기";

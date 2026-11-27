@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "Автоматизация";
 "tiles.quicksetting.private.browser.title" = "Приватный браузер";
 "settings.nmt.killswitch.disabled" = "Функция авторазрыва соединения в настоящее время отключена. Чтобы обеспечить работу инструмента управления сетью и получить возможность повторного подключения при смене сети, активируйте авторазрыв соединения в настройках.";
+"settings.nmt.killswitch.disable.confirmation" = "При отключении авторазрыва соединения также отключается автоматизация.";
 "settings.service.quality.share.title" = "Помощь в улучшении PIA";
 "settings.service.quality.share.description" = "Помогите нам стать лучше, передавая статистику по VPN-соединению. Эти отчеты не содержат каких-либо персональных данных.";
 "settings.service.quality.share.findoutmore" = "Подробнее";

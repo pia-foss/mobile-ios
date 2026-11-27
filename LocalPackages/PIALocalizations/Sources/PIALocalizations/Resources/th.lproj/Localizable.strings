@@ -237,6 +237,7 @@
 "tiles.quicksetting.automation.title" = "ระบบอัตโนมัติ";
 "tiles.quicksetting.private.browser.title" = "เบราว์เซอร์ส่วนตัว";
 "settings.nmt.killswitch.disabled" = "ปุ่ม VPN kill ปิดใช้งานอยู่ กรุณาเปิดใช้งานปุ่ม VPN kill ในการตั้งค่า เพื่อยืนยันว่าเครื่องมือจัดการเครือข่ายยังทำงาน และคุณสามารถเชื่อมต่อเครือข่ายได้อีกครั้งเมื่อมีการเปลี่ยนเครือข่าย";
+"settings.nmt.killswitch.disable.confirmation" = "การปิดปุ่มตัดการทำงาน VPN จะปิดระบบอัตโนมัติด้วย";
 "settings.service.quality.share.title" = "ช่วยปรับปรุง PIA";
 "settings.service.quality.share.description" = "ช่วยเราปรับปรุงด้วยการแชร์สถิติการเชื่อมต่อ VPN โดยที่รายงานเหล่านี้จะไม่มีข้อมูลส่วนบุคคลที่สามารถระบุตัวตนได้";
 "settings.service.quality.share.findoutmore" = "ค้นหาข้อมูลเพิ่มเติม";
