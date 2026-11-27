@@ -117,22 +117,19 @@ public struct AccountDetailsView: View, ViewWithTitle {
         case .expired:
             return Text(L10n.Account.ExpiryDate.expired)
         case .expires(let date):
-            var message = AttributedString(L10n.Account.ExpiryDate.information(date))
-            if let range = message.range(of: date) {
-                message[range].foregroundColor = .pia.primary
-                message[range].inlinePresentationIntent = .stronglyEmphasized
-            }
-            return Text(message)
+            return Text(
+                AttributedString(L10n.Account.ExpiryDate.information(date), highlighting: date) {
+                    $0.foregroundColor = .pia.primary
+                    $0.inlinePresentationIntent = .stronglyEmphasized
+                })
         }
     }
 
     /// "You can manage your subscription from here." with "here." styled as the link.
     private var manageSubscriptionMessage: AttributedString {
-        var message = AttributedString(L10n.Account.Subscriptions.message)
-        if let range = message.range(of: L10n.Account.Subscriptions.linkMessage) {
-            message[range].foregroundColor = .pia.primary
+        AttributedString(L10n.Account.Subscriptions.message, highlighting: L10n.Account.Subscriptions.linkMessage) {
+            $0.foregroundColor = .pia.primary
         }
-        return message
     }
 
     // MARK: Restore

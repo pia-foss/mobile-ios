@@ -154,8 +154,6 @@ final class DashboardViewController: AutolayoutViewController {
 
         currentPageIndex = 0
 
-        setupMenu()
-
         addObservers()
 
         self.viewContentHeight = self.viewContentHeightConstraint.constant
@@ -337,14 +335,6 @@ final class DashboardViewController: AutolayoutViewController {
         }
     }
 
-    // MARK: Menu
-    private func setupMenu() {
-        guard let menuNav = splitViewController?.viewController(for: .primary) as? UINavigationController,
-            let menu = menuNav.topViewController as? MenuViewController
-        else { return }
-        menu.delegate = self
-    }
-
     // MARK: Calling Cards
     private func setupCallingCards() {
 
@@ -492,7 +482,7 @@ final class DashboardViewController: AutolayoutViewController {
         return RootCoordinator.shared.dashboard
     }
 
-    private func presentPurchaseForTrial() {
+    func presentPurchaseForTrial() {
         var preset = AppConfiguration.Welcome.defaultPreset()
         preset.pages = .purchase
         preset.allowsCancel = true
@@ -1118,33 +1108,6 @@ extension DashboardViewController: PIAWelcomeViewControllerDelegate {
     private func showVPNModal(target: UIViewController) {
         let coordinator = VPNPermissionCoordinator(presenter: target)
         Task { await coordinator.startAsync() }
-    }
-}
-
-extension DashboardViewController: MenuViewControllerDelegate {
-    func menu(_ menu: MenuViewController, didSelect item: MenuViewController.Item) {
-        switch item {
-        case .selectRegion:
-            selectRegion(animated: true)
-        case .settings:
-            openSettings()
-        case .dedicatedIp:
-            openDedicatedIp()
-        case .account:
-            openAccount()
-        case .about:
-            openAbout()
-        case .logout:
-            presentLogin()
-        case .version:
-            break
-        default:
-            log.error("Unhandled item '\(item)'")
-        }
-    }
-
-    func menu(didDetectTrialUpgrade: MenuViewController) {
-        presentPurchaseForTrial()
     }
 }
 

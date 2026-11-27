@@ -20,6 +20,7 @@
 //
 
 import PIADesignSystem
+import PIASwiftUI
 import SwiftUI
 
 struct SettingsLink {
@@ -145,7 +146,7 @@ struct SettingsNavigationRow: View {
             }
             .content
         }
-        .buttonStyle(SettingsRowButtonStyle())
+        .piaRowButtonStyle()
         .piaSettingsListRow()
         .accessibilityLabel(title)
         .accessibilityValue(value ?? "")
@@ -209,13 +210,6 @@ struct SettingsGap: View {
             .listRowBackground(Color.pia.background)
             .listRowSeparator(.hidden)
             .accessibilityHidden(true)
-    }
-}
-
-private struct SettingsRowButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? Color.pia.surfaceContainerSecondary : Color.clear)
     }
 }
 

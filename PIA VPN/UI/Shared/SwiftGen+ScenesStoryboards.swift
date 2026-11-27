@@ -21,8 +21,6 @@ internal enum StoryboardScene {
     internal static let dashboardNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "DashboardNavigationController")
 
     internal static let piaCardsViewController = SceneType<PIACardsViewController>(storyboard: Self.self, identifier: "PIACardsViewController")
-
-    internal static let sideMenuNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Self.self, identifier: "SideMenuNavigationController")
   }
   internal enum Signup: StoryboardType {
     internal static let storyboardName = "Signup"

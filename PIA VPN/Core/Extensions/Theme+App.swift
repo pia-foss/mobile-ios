@@ -45,41 +45,6 @@ extension Theme {
         }
     }
 
-    public func applyMenuBackground(_ view: UIView) {
-        view.backgroundColor = palette.appearance == .dark ? UIColor.piaGrey6 : UIColor.piaWhite
-    }
-
-    public func applyMenuSubtitle(_ label: UILabel) {
-        let textAlignment = label.textAlignment
-        label.style(style: TextStyle.textStyle13)
-        label.textAlignment = textAlignment
-    }
-
-    public func applyWarningMenuBackground(_ view: UIView) {
-        view.backgroundColor = UIColor.piaRed
-    }
-
-    public func applyMenuCaption(_ label: UILabel) {
-        let textAlignment = label.textAlignment
-        label.style(style: TextStyle.textStyle17)
-        label.textAlignment = textAlignment
-    }
-
-    public func applyMenuSmallCaption(_ label: UILabel) {
-        let textAlignment = label.textAlignment
-        label.style(style: TextStyle.textStyle11)
-        label.text = label.text?.capitalized
-        label.textAlignment = textAlignment
-    }
-
-    public func applyMenuListStyle(_ label: UILabel) {
-        label.style(style: palette.appearance == .dark ? TextStyle.textStyle6 : TextStyle.textStyle7)
-    }
-
-    public func applyMenuVersionListStyle(_ label: UILabel) {
-        label.style(style: palette.appearance == .dark ? TextStyle.textStyle11 : TextStyle.textStyle12)
-    }
-
     public func applyCountryNameStyleFor(_ label: UILabel) {
         label.style(style: Theme.current.palette.appearance == .dark ? TextStyle.textStyle16 : TextStyle.textStyle17)
     }

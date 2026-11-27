@@ -24,6 +24,7 @@ import Combine
 import PIAAlertBanners
 import PIAConsent
 import PIALibrary
+import PIASideMenu
 import SwiftUI
 import UIKit
 
@@ -49,6 +50,8 @@ final class RootCoordinator {
     private(set) var signupCoordinator: SignupCoordinator?
     private var signupCancellables = Set<AnyCancellable>()
     private var forceUpdateSubscription: AnyCancellable?
+    private var sideMenuCoordinator: SideMenuCoordinator?
+    private var sideMenuSubscription: AnyCancellable?
 
     var dashboard: DashboardViewController? {
         dashboardNavigationController?.viewControllers.first as? DashboardViewController
@@ -111,6 +114,8 @@ final class RootCoordinator {
             newRoot = makeConsentRoot()
         case .login:
             dashboardNavigationController = nil
+            sideMenuCoordinator = nil
+            sideMenuSubscription = nil
             newRoot = makeLoginRoot()
         case .main:
             signupCoordinator = nil
@@ -149,15 +154,32 @@ final class RootCoordinator {
         let dashboardNav = dashboardNavigationController ?? Self.instantiateDashboardNavigationController()
         self.dashboardNavigationController = dashboardNav
 
-        let menuNav = StoryboardScene.Main.sideMenuNavigationController.instantiate()
         let split = AdaptiveSplitViewController(style: .doubleColumn)
         split.preferredDisplayMode = .oneBesideSecondary
         split.preferredSplitBehavior = .tile
         split.presentsWithGesture = true
         split.displayModeButtonVisibility = .never
-        split.setViewController(menuNav, for: .primary)
+
+        let sideMenu = SideMenuCoordinator(split: split)
+        sideMenuSubscription = sideMenu.output
+            .sink { [weak self] in self?.showFromSideMenu($0) }
+        sideMenu.start()
+        sideMenuCoordinator = sideMenu
+
         split.setViewController(dashboardNav, for: .secondary)
         return SidebarRootViewController(split: split)
+    }
+
+    private func showFromSideMenu(_ output: SideMenuCoordinator.Output) {
+        guard let dashboard else { return }
+        switch output {
+        case .show(.regionSelection): dashboard.selectRegion(animated: true)
+        case .show(.account): dashboard.openAccount()
+        case .show(.dedicatedIP): dashboard.openDedicatedIp()
+        case .show(.settings): dashboard.openSettings()
+        case .show(.about): dashboard.openAbout()
+        case .upgradeTrial: dashboard.presentPurchaseForTrial()
+        }
     }
 
     private func makeConsentRoot() -> UIViewController {

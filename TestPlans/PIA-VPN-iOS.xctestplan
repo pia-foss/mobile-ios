@@ -162,6 +162,13 @@
         "identifier" : "PIASettingsTests",
         "name" : "PIASettingsTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:LocalPackages\/PIASideMenu",
+        "identifier" : "PIASideMenuTests",
+        "name" : "PIASideMenuTests"
+      }
     }
   ],
   "version" : 1
