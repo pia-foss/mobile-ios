@@ -81,6 +81,8 @@ final class IPTile: UIView, Tileable {
         triangleImageView.image = Asset.Piax.Tiles.ipTriangle.image
         viewShouldRestyle()
         self.accessibilityIdentifier = AccessibilityID.Tiles.ip
+        self.localIpValue.accessibilityIdentifier = AccessibilityID.Tiles.publicIP
+        self.vpnIpValue.accessibilityIdentifier = AccessibilityID.Tiles.vpnIP
         self.localIpTitle.text = "IP"
         self.vpnIpTitle.text = "VPN IP"
         self.localIpValue.text = Client.daemons.publicIP ?? emptyIPValue

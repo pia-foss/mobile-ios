@@ -44,6 +44,27 @@ final class Bootstrapper {
     private init() {
     }
 
+    #if DEBUG
+        /// E2E tests launch with this argument so every test starts from the same settings, whatever earlier tests left
+        /// behind. Covers the settings the tests change and rely on: kill switch, Automation and geo-located regions.
+        private func resetSettingsForUITestsIfRequested() {
+            guard ProcessInfo.processInfo.arguments.contains("-UITestsResetSettings") else { return }
+            let preferences = Client.preferences.editable()
+            preferences.isPersistentConnection = true
+            preferences.nmtRulesEnabled = false
+            preferences.commit()
+            #if os(iOS)
+                AppPreferences.shared.showGeoServers = true
+            #endif
+        }
+
+        /// E2E tests launch with this argument to skip UIKit animations, which make up much of a run's waiting.
+        private func disableAnimationsForUITestsIfRequested() {
+            guard ProcessInfo.processInfo.arguments.contains("-UITestsDisableAnimations") else { return }
+            UIView.setAnimationsEnabled(false)
+        }
+    #endif
+
     private var isSimulator: Bool {
         #if targetEnvironment(simulator)
             return true
@@ -217,6 +238,11 @@ final class Bootstrapper {
         let pref = Client.preferences.editable()
 
         pref.commit()
+
+        #if DEBUG
+            resetSettingsForUITestsIfRequested()
+            disableAnimationsForUITestsIfRequested()
+        #endif
         #if os(iOS)
             // Business objects
 

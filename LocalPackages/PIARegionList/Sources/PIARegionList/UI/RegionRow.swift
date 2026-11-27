@@ -20,6 +20,7 @@
 //
 
 #if os(iOS)
+    import PIAAccessibility
     import PIAAssetsFlags
     import PIAAssetsMobile
     import PIALocalizations
@@ -79,6 +80,7 @@
                 Image(asset: isSelected ? Asset.iconGeoSelected : Asset.iconGeo)
                     .resizable()
                     .frame(width: 18, height: 18)
+                    .accessibilityIdentifier(AccessibilityID.RegionList.geoIcon)
                 Image(asset: Asset.Piax.Global.regionSelected)
                     .resizable()
                     .frame(width: 18, height: 18)

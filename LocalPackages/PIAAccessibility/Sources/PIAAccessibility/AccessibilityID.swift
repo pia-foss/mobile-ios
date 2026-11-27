@@ -103,8 +103,9 @@ public enum AccessibilityID {
     }
 
     public enum RegionList {
-        public static let region = "uitests.regions.region_name"
-        public static let emptyBackground = "empty set background image"
+        public static let region = "id.regionList.region"
+        public static let geoIcon = "id.regionList.geoIcon"
+        public static let emptyBackground = "id.regionList.emptyBackground"
     }
 
     public enum RestoreSignup {
@@ -121,6 +122,8 @@ public enum AccessibilityID {
         public static let feedbackCell = "FeedbackTileCollectionViewCell"
         public static let ip = "IPTile"
         public static let ipCell = "IPTileCollectionViewCell"
+        public static let publicIP = "id.tiles.ip.publicIP"
+        public static let vpnIP = "id.tiles.ip.vpnIP"
         public static let promoOffer = "PromoOfferTile"
         public static let promoOfferCell = "PromoOfferTileCollectionViewCell"
         public static let quickConnectCell = "QuickConnectTileCollectionViewCell"
