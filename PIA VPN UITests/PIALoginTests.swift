@@ -36,10 +36,10 @@ class PIALoginTests: XCTestCase {
     private func openSideMenuAndTapLogout() {
         app.navigationBars.buttons[Accessibility.Id.Dashboard.menu].tap()
 
-        if app.cells[Accessibility.Id.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
-            app.cells[Accessibility.Id.Menu.logout].tap()
+        if app.buttons[Accessibility.Id.Menu.logout].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
+            app.buttons[Accessibility.Id.Menu.logout].tap()
         } else {
-            XCTAssert(false, "PIALoginTests:: A side menu is found but no logout cell is found")
+            XCTAssert(false, "PIALoginTests:: A side menu is found but no logout button is found")
         }
         if app.buttons[Accessibility.Id.Dialog.destructive].waitForExistence(timeout: PIALoginTests.timeoutUIOps) {
             app.buttons[Accessibility.Id.Dialog.destructive].tap()
